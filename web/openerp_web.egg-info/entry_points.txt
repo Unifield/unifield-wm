@@ -1,0 +1,3 @@
+[console_scripts]
+openerp-web = openerp.commands:start
+

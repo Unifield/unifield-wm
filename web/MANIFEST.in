@@ -1,0 +1,10 @@
+exclude .project .pydevproject clean.sh
+include openerp-web.py
+include lib/populate.sh
+recursive-include openerp *
+recursive-include doc *
+recursive-include config *
+recursive-include locales *
+recursive-include scripts *
+recursive-include win32 *
+global-exclude *pyc *~

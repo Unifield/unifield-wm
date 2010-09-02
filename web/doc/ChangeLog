@@ -1,0 +1,469 @@
+2010-07-09: 5.0.12
+==================
+
+Bugfixes
+--------
+
+ * Not linked to a bug report:
+   * wizards: properly pass context and 'datas' to make osv_memory easier to use as first step for reports
+   * Fixed multiple email entries possible for email widget.
+ * https://launchpad.net/bugs/586751
+   * Waiting status box will not display when priting any report.
+ * https://launchpad.net/bugs/598129
+   * Context handling corrected.
+ * https://launchpad.net/bugs/599128
+   * Fixed attrs invisible on page.
+ * https://launchpad.net/bugs/598132
+   * Fixed binary size when value available.
+ * https://launchpad.net/bugs/591102
+   * Fixed binary widget size.
+
+
+2010-06-07: 5.0.11
+==================
+
+Bugfixes
+--------
+
+ * Not linked to a bug report:
+   * We can't edit a many2one relation if the link attribute is defined on the field tag
+   * Attachment button was not 'checked' if the attachment had no filename (which is not a required field)
+ * https://launchpad.net/bugs/575784
+
+
+Improvements
+------------
+
+ * jasper-produced document types
+ * Improved view-editor for inherited view.
+ * Improved pagination limit.
+
+
+2010-04-02: 5.0.10
+==================
+
+Bugfixes
+--------
+
+ * Not linked to a bug report:
+   * Add the missing files in the generated SOURCES.txt file
+   * Add the missing setup.cfg
+   * Improve the speed of the packaging process
+   * Add the win32 directory in the tarball
+   * Fixed field size when attrs invisible.
+   * Fixed context problem for one2many(IE).
+   * Fixed pagination problem for m2m, o2m.
+ * https://launchpad.net/bugs/570679
+   * Fixed m2o for request object
+ * https://launchpad.net/bugs/566771
+   * Code improvement.
+
+2010-04-06: 5.0.9
+=================
+
+2010-04-02: 5.0.8
+=================
+
+Bugfixes
+--------
+
+ * Not linked to a bug report:
+   * missing po file
+   * cleanup.
+   * missing context
+   * Many2one non-editable view takes old behaviour.
+   * Calendar view end date problem (improper day span).
+   * Fixed context problem for one2many.
+   * Fixed missing import statement.
+   * Fixed context problem when language changed (split dict, lang:'nl_NL')
+   * Fixed attachment size problem.
+   * Fixed non editable many2one link problem (pass context).
+   * Fixed non editable many2one link problem (wrong view if not context).
+   * Fixed non editable view for many2many.
+   * Fixed Disable link on many2one field.
+   * Disable link on many2one field.
+   * Fixed attrs problem when non editable view.
+   * Fixed edit image display problem for search view.
+ * https://launchpad.net/bugs/537973
+   * Fixed one2many popup when large amount of data.
+ * https://launchpad.net/bugs/539783
+   * Fixed regression of one2many context problem.
+ * https://launchpad.net/bugs/512400
+   * Fixed navigation problem.
+ * https://launchpad.net/bugs/459027
+   * Fixed price_accuracy for float.
+   * Fixed price_accuracy for float value.
+ * https://launchpad.net/bugs/530823
+   * Fixed m2o problem (google chrome).
+ * https://launchpad.net/bugs/530419
+   * Fixed autodetect problem in import.
+ * https://launchpad.net/bugs/534309
+   * Fixed translation problem for export in excel.
+ * https://launchpad.net/bugs/531230
+   * Fixed selection widget for listview.
+ * https://launchpad.net/bugs/532635
+   * Fixed active_id problem in context for wizard.
+ * https://launchpad.net/bugs/548932
+   * Fixed round off value of widget FloatTime
+
+
+Improvements
+------------
+
+ * italian translation
+
+
+2010-03-01: 5.0.7
+=================
+
+Bugfixes
+--------
+
+ * Not linked to a bug report:
+   * Fixed edit image display problem for search view.
+   * Fixed context problem on wizard buttons.
+   * Fixed readonly attrs for button.
+   * Fixed lost context when export fields content(base_report_creator).
+   * Fixed editable listview for one2many.
+   * active notebook page
+   * Fixed readonly attrs problem for one2many.
+   * Fixed form action domain.
+   * Fixed wizard button problem, when pass context and name or id is not unique.
+   * Fixed context in nested notebook at translation popup.
+   * Fixed view problem for xpath and revert revno:2789.
+   * Fixed problem for m2m context, when view_name pass from parent context and m2m.
+   * Fixed context problem for m2m fields.
+   * Fixed notebook invisible for one2many fields.
+   * Fixed xpath problem.
+   * o2m popup (missing context)
+   * error in TempFileName cleaning
+   * python 2.6 compatibility
+   * Removed print statement from JS file.
+   * Fixed at customise view add new action from dashboad.
+   * Fixed sidebar Links display at list view.
+   * context problem at Links(oocrm).
+   * Fixed stack graph for onclick.
+   * reverting back changes made to restict edit/select records
+   * O2M popup (empty form after save).
+   * reverting back rev 2737 & 2738 (invalid fix)
+   * Fixed existing `EXPORT NAME` for id.
+   * Fixed Button Next on form view.
+   * tabber.js license included.
+   * feedparser license included.
+   * wikimarkup license included.
+   * draw2d licenses includes.
+   * OpenFlashChart License included.
+   * Fixed label problem, when passed name in action.
+   * nested notebook.
+   * included README, LGPL (JSCal 1.0 license)
+   * button with context.
+   * Fixed graph onclick event on stack.
+   * Fixed act_window with view_mode=tree will not show form view.
+   * Improve graph for selection box value.
+   * nested o2m in o2m popup.
+   * Improved link='1' for M2O.
+   * Fixed readonly problem for button widget.
+   * Buttons are not clickable when readonly='1'.
+   * sidebar wizard without wizard id
+   * actions.server can return a list of actions to execute...
+ * https://launchpad.net/bugs/508003
+   * Fixed switch calendar to list/tree view not display records.
+ * https://launchpad.net/bugs/497491
+   * Fixed editable listgrid problem when record not saved.
+ * https://launchpad.net/bugs/505079
+   * Fixed context problem (Ref. JRA)
+ * https://launchpad.net/bugs/484658
+   * Fixed id not found in sidebar when HTTP.
+ * https://launchpad.net/bugs/478504
+   * Fixed context problem in search.
+ * https://launchpad.net/bugs/496498
+   * Fixed link missing in list view.
+ * https://launchpad.net/bugs/461219
+   * Fixed excel report column, encoded data problem.
+ * https://launchpad.net/bugs/500823
+   * Fixed view_mode=tree will not show form view.
+ * https://launchpad.net/bugs/499099
+   * Fixed one2many for nested record.
+ * https://launchpad.net/bugs/442242
+   * validation problem (search popup).
+ * https://launchpad.net/bugs/434048
+   * notebook layout problem.
+ * https://launchpad.net/bugs/435299
+   * Make picking wizard, one2many field in wizard doesn't work.
+ * https://launchpad.net/bugs/523975
+   * Fixed unicode error when except english localization.
+ * https://launchpad.net/bugs/491718
+   * Typo in nowrap attribute.
+ * https://launchpad.net/bugs/499704
+   * Fixed active_id not update in context.
+ * https://launchpad.net/bugs/416861
+   * Fixed Graph widget.
+ * https://launchpad.net/bugs/499706
+   * Fixed float widget for validation.
+ * https://launchpad.net/bugs/516978
+   * Fixed default_date context for calendar.
+ * https://launchpad.net/bugs/429444
+   * Fixed onchange for text_html widget.
+ * https://launchpad.net/bugs/507369
+   * Fixed context problem at wizard.
+ * https://launchpad.net/bugs/495572
+   * Fixed when import product category.
+ * https://launchpad.net/bugs/485073
+   * Fixed graph problem for IE.
+ * https://launchpad.net/bugs/494858
+   * Fixed import problem for special character.
+ * https://launchpad.net/bugs/431238
+   * Fixed import 'ID' Problem
+ * https://launchpad.net/bugs/401847
+   * Graph view not clickable for custom report. (base_report_creator)
+ * https://launchpad.net/bugs/497967
+   * support 'uid' in attrs expression.
+ * https://launchpad.net/bugs/513824
+   * Fixed one2many context problem when not editable.
+ * https://launchpad.net/bugs/499403
+   * Fixed many2many Readonly attribute not working when used in attrs.
+ * https://launchpad.net/bugs/444397
+   * nested o2m
+   * unable to save o2m record if widget is in form mode
+   * nested O2M.
+ * https://launchpad.net/bugs/463214
+ * https://launchpad.net/bugs/527585
+   * Fixed when user have no rights to access resources.
+ * https://launchpad.net/bugs/439438
+   * validation of editable listgrid.
+ * https://launchpad.net/bugs/481655
+   * Fixed hyperlinks on fields.reference fields.
+ * https://launchpad.net/bugs/462443
+   * Button Next when create new record.
+ * https://launchpad.net/bugs/498180
+   * Fixed add print format 'odt' for print.
+ * https://launchpad.net/bugs/506400
+   * Fixed when not define page in attrs, it display always first one.
+ * https://launchpad.net/bugs/461680
+   * Fixed listgrid.
+ * https://launchpad.net/bugs/490342
+   * Fixed one2many passed (0, 0, []) in context instead of [].
+ * https://launchpad.net/bugs/489183
+   * Fixed when pass active_id in context from act_window it takes as string.
+   * Fixed active_id problem when click on Links.
+ * https://launchpad.net/bugs/509215
+   * Fixed calendar first day problem.
+ * https://launchpad.net/bugs/435325
+   * fix the problme for the linking pages from any model to wiki.pages
+ * https://launchpad.net/bugs/439596
+   * editable listgrid (mistakenly passing id of first record other then current).
+ * https://launchpad.net/bugs/501012
+   * Fixed for select options for manage views.
+ * https://launchpad.net/bugs/470269
+   * Click on wizard button on form view.
+ * https://launchpad.net/bugs/485955
+   * Fixed error page textarea tag.
+ * https://launchpad.net/bugs/482079
+   * Update links at about page.
+ * https://launchpad.net/bugs/495639
+   * Fixed  conflict with ir.actions.report.xml.
+ * https://launchpad.net/bugs/449371
+   * Passed updated context for custom report search.
+ * https://launchpad.net/bugs/498591
+   * Fixed context lost in action and report.
+ * https://launchpad.net/bugs/447819
+   * fixed set default value problem.
+ * https://launchpad.net/bugs/497080
+   * Fixed for one2many context passed [].
+ * https://launchpad.net/bugs/429470
+   * Default field values for one2many.
+ * https://launchpad.net/bugs/516084
+   * Fixed weekly view shows nonexistent meetings.
+ * https://launchpad.net/bugs/497365
+   * Fixed supplier invoice line problem if you save and after create line.
+ * https://launchpad.net/bugs/510607
+   * fixed form view visibility in graph.
+ * https://launchpad.net/bugs/478627
+   * Fixed context problem at import/export(base_report_creator).
+   * Lost context in import/export (base_report_creator).
+ * https://launchpad.net/bugs/490933
+   * Fixed filter on key press.
+ * https://launchpad.net/bugs/503012
+   * Fixed concurrency problem.
+
+
+Improvements
+------------
+
+ * optimize all png images
+ * Improved dbfilter option.
+ * handle the case of the server can't give the database list
+ * Improved process view [dblclick on transition for tip].
+ * support for context attribute for button.
+ * Improve graph for stack [manufacturing/production dashboard].
+
+
+
+5.0.6 (2009-09-22)
+
+	* Re-release as 5.0.6 due to packaging issue
+
+5.0.5 (2009-09-22)
+
+	* [FIX] Fixed sorting in treeview.
+	* [FIX] python2.4 compatibility.
+	* [FIX] database admin form validation
+	* [FIX] buttons in listgrid
+	* [FIX] don't show header/footer on button action if source form has not header/footer.
+	* [FIX] sidebar links (actions/reports) missing in tree mode.
+	* [IMP] implement the view functionality for wiki widget
+	* [FIX] improper data in M2M field while navigation.
+
+	For more complete bug fix history, please visit Launchpad.
+
+5.0.4 (2009-08-28)
+	
+	* [FIX] dynamic context is missing in non-editable view.
+	* [FIX] don't show header/footer on a view opened from button actions if current view has no header/footer.
+	* [IMP] wizard buttons now moved to bottom.
+	* [FIX] O2M popop crash after wizard action ends.
+
+	For more complete bug fix history, please visit Launchpad.
+
+5.0.3-1 (2009-08-26)
+
+	* [IMP] process view node now links to parent document directory if no record selected.
+	* [FIX] Fixed one2many popup (context problem).
+	* [FIX] Remember active notebook page.
+	* [FIX] Included lib/populate.sh in source distribution package.
+
+	For more complete bug fix history, please visit Launchpad.
+
+5.0.3 (2009-08-21)
+
+	Bug Fixed (major):
+
+	* [FIX] graph crashed, if date value is empty.
+	* [FIX] O2M popup (IE issue).
+	* [FIX] validation problem in wizards.
+	* [FIX] search widget (missing validation).
+	* [FIX] don't show sidebar if target=new.
+	* [FIX] process view popup.
+	* [IMP] datetime validation (year out of range).
+	* [FIX] Fixed graph view for unicode characters.
+	* [FIX] Fixed `Graph View` when there is no data on y-axis (For OOCRM).
+
+	For more complete bug fix history, please visit Launchpad.
+
+5.0.2 (2009-08-11)
+
+	New Features:
+	
+	* Removed TurboGears & PyXML dependencies
+	* Ported to CherryPy 3 + Mako template, almost 5-7 time faster then the previous version
+	* Re-implementation of graph with Open Flash Chart 2
+	* Implemented profiler for code profiling (for developer's only)
+	* Implemented unit test api (for developer's only)
+	* Implemented anonymous login
+	
+	Improvements:
+	
+	* Compatible with Python 2.6
+	* start-openerp-web command is renamed to openerp-web
+	* Improved cache system (efficiently handle per db cache).
+	* Added min_rows, limit configuration options for M2M/O2M fields
+	* Improved ListGrid button action (support act_url).
+	* Implemented `Concurrency Exception` handling.
+	* Database filter options from configuration
+	* Login controller with custom template for small Ajax login screen
+	* Strip the header completely for action with target=new.
+	* New Picture widget (display only)
+	* Improved wiki widget
+	* Improvements in `Import/Export` (db_id, id, import compatible).
+
+	Bug Fixed (major):
+
+	* Concurrenry problem when inserting o2m values from popup.
+	* Calendar view (improper day span).
+	* Incorrect sequence number incrementation
+	* Fixed long URI problem (relate links)
+	* Fixed notebook widget (nested notebooks are not working)
+	* Dynamic notebook page visibility with attrs.
+	* Improved Ajax validator (fixes onchange problem when there is some invalid value in the form)
+	* Prevent conflicts with `onchange` and `attrs/state change` hooks.
+	* Month calendar issue (day span 3 instead of 2 for hours=16 with day_length=8)
+	* M2M (listview reload) problem in wizards.
+	* O2M popup rendering time is too slow (IE bug)
+	* attrs (invisible) is not working properly on fields with labels
+	* attrs is not working properly on Group widgets
+	* Evaluate dynamic domain & context expression.
+	* Search popup validation problem (bug #338141)
+	* Ignore concurrency check if no check field defined.
+	* Create custom field for custom object (o2m popup problem).
+
+	For more complete bug fix history, please visit Launchpad.
+
+
+5.0.0 (2009-02-06)
+
+	New Features:
+
+	* Enterprise Intelligence (Process View)
+	* Workflow Designer
+	* Object Designer
+	* View Editor
+	* Gantt View
+	* Wiki Widget
+	* Fency Tooltip
+	* Progressbar Widget
+	* Resizable Textarea
+	* Wait dialog for wizards
+	* Support for concurrency check
+	* State & Attrs support (dynamic field attribute change)
+	* Standard Attachment window.
+	* Sortable TreeGrid
+	* Requires TurboGears 1.0.8 & MochiKit 1.4
+	* Reordering of records in ListGrid
+	* Reimplemented TreeGrid (dynamic node adding, images etc)
+	* Reimplemented init.d script (generic, now works on flavour of Linux).
+	* ListGrid record limit from Window action (ir.actions.act_window).
+	* Internationalization support for JavaScript.
+	* Implemented multiple delete records in listgrid.
+	* Implemented TIMEZONE & localised number, datetime format.
+	* Global Ajax call progress indicator massage.	
+	* Client side validation of required fields
+	* Charts/Graphs have been replace with the beautiful flash charts using Open Flash Charts.
+	* Command line options
+	* Win32 Installer
+
+	Improvements:
+	
+	* Calendar view (default mode in view, e.g. mode="week")
+	* Save export list in export dialog.
+	* Switch O2M using Ajax (no page reload)
+	* Rendering speed of very big forms has been 4 times faster now.
+	* Reimplemented `reference widget` as an extended `M2O` (using same JS).
+	* Reimplemented Database admin views.
+	* M2O can have selection widget (widget="selection")
+	* M2M having features like O2M (navigation, search, new, edit).
+	* Improved TinyMCE (widget="html_tag")
+	* Improved `ONCHANGE` implementation (validators + reduced M2O Ajax calls).
+	* Improved `M2O` field (reduced Ajax calls + auto insert for single item)
+	* Improved calendar visuals (better colors, tango style)
+	* Improved `Calendar View`, now updates event title on move (week/day mode).
+	* Improved Cache System
+	* Improved Binary widget
+	* Generate proper filename while printing reports
+	* Improved form parser (duplicate field validation).
+	* Client side validation for required fields (no page reload)
+	* Changes the way web app loads default configuration.
+
+	Bug fixed:
+	
+	* Fixed timezone change problem (CEST to CET)
+	* Fixed `sidebar links` problem (ignore links for multi records on FORM)
+	* Fixed `Month Calendar` (proper week numbers for last and first months)
+	* Fixed `import/export` controller (i18n)
+	* Fixed `import error` (accented char in column title)
+	* Fixed `datetime` widget (missing readonly functionality)
+	* Fixed Calendar (filter by color groups problem)
+	* Fixed loading of the translation catalog fails if installed as egg.
+
+	For more complete bug fix history, please visit Launchpad.
+
+For previous versions, please visit OpenERP web site.
