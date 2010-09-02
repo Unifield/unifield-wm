@@ -1,0 +1,3 @@
+#!/bin/sh
+echo "OpenERP Setup - The content of this file is generated at the install stage
+" 

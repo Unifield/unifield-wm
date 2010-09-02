@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!-- Modification de la vue des contacts -->
+        <record id="iller_inherit1_view_parner_address_form1" model="ir.ui.view">
+            <field name="name">res.partner.address.form1</field>
+            <field name="model">res.partner.address</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="base.view_partner_address_form1"/>
+            <field name="arch" type="xml">
+                <field name="function" position="after">
+                    <newline />
+                    <field name="enseigne"/>
+                    <newline />
+                </field>
+            </field>
+        </record>
+
+        <!-- Modification de la vue des partenaires -->
+        <record id="iller_inherit1_view_parner_form" model="ir.ui.view">
+            <field name="name">res.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <field name="function" position="after">
+                    <newline />
+                    <field name="enseigne"/>
+                    <newline />
+                </field>
+            </field>
+        </record>
+
+        <record id="iller_inherit2_view_parner_form" model="ir.ui.view">
+            <field name="name">res.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <page string="Notes" position="after">
+                    <page string = "Info spéc.">
+                        <field name="siret"/>
+                        <newline/>
+                        <field name="commentaire"/>
+                    </page>
+                </page>
+            </field>
+        </record>
+
+        <record id="iller_inherit3_view_payment_type_res_partner_form1" model="ir.ui.view">
+            <field name="name">res.partner.form.payment_type1</field>
+            <field name="model">res.partner</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="account_payment_extension.view_payment_type_res_partner_form1"/>
+            <field name="arch" type="xml">
+                <field name="payment_type_customer" position="after">
+                    <field name="nb_ex_fact" />
+                    <field name="releves"/>
+                    <field name="type_releve"/>
+                    <field name="type_facture"/>
+                    <field name="soumis_tva"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>
