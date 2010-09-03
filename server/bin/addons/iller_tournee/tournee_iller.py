@@ -23,6 +23,28 @@
 import time
 from osv import fields, osv
 
+class iller_preparation_poste(osv.osv):
+    _name = 'iller.preparation.poste'
+    _description = 'Poste de préparation'
+
+    _columns = {
+        'name': fields.char(size=64, string='Nom'),
+    }
+
+iller_preparation_poste()
+
+
+class iller_decoupe_poste(osv.osv):
+    _name = 'iller.decoupe.poste'
+    _description = 'Poste de découpe'
+
+    _columns = {
+            'name': fields.char(size=64, string='Nom'),
+    }
+
+iller_decoupe_poste()
+
+
 class tournee_iller(osv.osv):
     _name = 'tournee.iller'
     _description = 'Tournée pour la livraison des produits'
@@ -31,6 +53,11 @@ class tournee_iller(osv.osv):
         'name': fields.char(size=64, string='Nom', required=True),
         'code_tournee': fields.integer(string='Code tournee'),
         'heure_depart': fields.integer(string='Heure depart'),
+        'prep_id': fields.many2one('iller.preparation.poste', 
+            string='Poste de préparation'),
+        'decoupe_id': fields.many2one('iller.decoupe.poste',
+            string='Poste de découpe'),
+        'regroup_code': fields.char(size=12, string='Code de regroupement'),
     }
 
 tournee_iller()

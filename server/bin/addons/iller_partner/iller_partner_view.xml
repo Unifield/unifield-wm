@@ -26,7 +26,7 @@
                 <xpath expr="/form/notebook/page[@string='Accounting']/group" position="before">
                     <separator colspan="4" string="Informations comptables" />
                     <field name="siret" />
-                    <field name="reglement" required="1" />
+                    <field name="reglement" required="1" onchange="reglement_onchange(reglement)" />
                     <field name="nb_ex_factures" />
                     <field name="releve" />
                     <separator colspan="4" string="Informations ristourne" />
@@ -47,6 +47,30 @@
                 <xpath expr="/form/notebook/page[@string='Sales &amp; Purchases']/field[@name='user_id']" position="after">
                     <field name="appeler_ok" />
                     <field name="tele_user_id" />
+                </xpath>
+            </field>
+        </record>
+
+        <record id="inherit_res_partner_form_view4" model="ir.ui.view">
+            <field name="name">inherit.res.partner.form.view4</field>
+            <field name="model">res.partner</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="base.view_partner_form" />
+            <field name="arch" type="xml">
+                <xpath expr="/form/notebook/page[@string='General']/field[@name='address']/form/field[@name='email']" position="after">
+                    <field name="pref_contact" />
+                </xpath>
+            </field>
+        </record>
+
+        <record id="inherit_res_partner_address_form_view1" model="ir.ui.view">
+            <field name="name">inherit.res.partner.address.form.view1</field>
+            <field name="model">res.partner.address</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="base.view_partner_address_form1" />
+            <field name="arch" type="xml">
+                <xpath expr="/form/field[@name='email']" position="after">
+                    <field name="pref_contact" />
                 </xpath>
             </field>
         </record>

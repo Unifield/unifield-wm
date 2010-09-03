@@ -27,8 +27,12 @@
                 <form string="Tournée">
                     <field name="name" select="1" />
                     <field name="heure_depart" select="1" />
+                    <field name="regroup_code" />
                     <notebook colspan="4">
                         <page string="Clients">
+                            <separator string="Postes" colspan="4" />
+                            <field name="prep_id" />
+                            <field name="decoupe_id" />
                             <separator string="Clients principaux" colspan="4" />
                             <field name="partner1" colspan="4" nolabel="1" />
                             <separator string="Clients secondaires" colspan="4" />
@@ -74,6 +78,33 @@
         <menuitem id="menu_tournee_form"
                   action="action_tournee_form"
                   parent="base.menu_base_partner" />
+
+
+        <record id="action_preparation_poste_tree" model="ir.actions.act_window">
+            <field name="name">Tous les postes de préparation</field>
+            <field name="res_model">iller.preparation.poste</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="action_decoupe_poste_tree" model="ir.actions.act_window">
+            <field name="name">Tous les postes de découpe</field>
+            <field name="res_model">iller.decoupe.poste</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_postes"
+                  name="Tous les postes"
+                  parent="base.menu_base_partner" />
+
+        <menuitem id="menu_decoupe_tree"
+                  action="action_decoupe_poste_tree"
+                  parent="menu_postes" />
+
+        <menuitem id="menu_preparation_tree"
+                  action="action_preparation_poste_tree"
+                  parent="menu_postes" />
 
     </data>
 </openerp>

@@ -37,7 +37,38 @@ class iller_partner(osv.osv):
         'tele_user_id': fields.many2one('res.users', string='Télé-vendeuse'),
     }
 
+
+    def _verif_rib(self, cr, uid, ids, context={}):
+        '''
+            On vérifie qu'un RIB existe pour le partenaire
+        '''
+
+
+    def reglement_onchange(self, cr, uid, ids, reglement, context={}):
+        '''
+            Traitement lors de la modification du champ reglement
+            Si le reglèment est indiqué comme une traite, on vérifie si
+            un RIB exitse pour le partenaire
+        '''
+        if reglement == 'traite':
+            self._verif_rib(cr, uid, ids)
+
+        return
+
 iller_partner()
+
+
+class res_partner_address(osv.osv):
+    _name = 'res.partner.address'
+    _inherit = 'res.partner.address'
+
+    _columns = {
+        'pref_contact': fields.selection([('mail', 'E-mail'), ('fax', 'Fax'), 
+                                          ('courrier', 'Courrier')],
+                                          string='Préf. Envoi'),
+    }
+
+res_partner_address()
 
 
 class res_users(osv.osv):

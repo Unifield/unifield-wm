@@ -1,8 +1,9 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
+#    OpenERP, Open Source Management Solution
+#    Copyright (c) 2008 Zikzakmedia S.L. (http://zikzakmedia.com) All Rights Reserved.
+#                       Jordi Esteve <jesteve@zikzakmedia.com>
 #    $Id$
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -20,25 +21,7 @@
 #
 ##############################################################################
 
-
-{
-    'name': 'Tournées pour ILLER',
-    'version': '1.0',
-    'category': 'Generic Modules/Projects & Services',
-    'description': """
-        Ce module contient les développements spécifiques
-        concernant les tournées pour Iller
-""",
-    'author': 'TeMPO Consulting',
-    'website': 'http://www.tempo-consulting.com',
-    'depends': ['product'],
-    'init_xml': [],
-    'demo_xml': [],
-    'update_xml': [
-            'tournee_iller_view.xml',
-            'tournee_iller_data.xml',
-],
-    'installable': True,
-    'active': False,
-}
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+import payment
+import account_invoice
+import account_move_line
+import wizard
