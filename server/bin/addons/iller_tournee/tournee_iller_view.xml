@@ -14,6 +14,7 @@
                         <field name="tournee1" />
                         <field name="tournee2" />
                         <field name="tournee3" />
+                        <newline />
                     </page>
                 </xpath>
             </field>

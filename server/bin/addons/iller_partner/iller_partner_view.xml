@@ -26,14 +26,15 @@
                 <xpath expr="/form/notebook/page[@string='Accounting']/group" position="before">
                     <separator colspan="4" string="Informations comptables" />
                     <field name="siret" />
-                    <field name="reglement" required="1" onchange="reglement_onchange(reglement)" />
+                    <field name="reglement" required="1" on_change="reglement_onchange(reglement)" />
+                    <field name="facturation_bl" required="1" />
                     <field name="nb_ex_factures" />
                     <field name="releve" />
                     <separator colspan="4" string="Informations ristourne" />
                     <field name="remise_fac" />
                     <field name="type_ristourne" />
                     <field name="taux_ristourne" />
-                    <newline />
+                    <field name="total_ristourne" />
                 </xpath>
             </field>
         </record>
@@ -59,6 +60,22 @@
             <field name="arch" type="xml">
                 <xpath expr="/form/notebook/page[@string='General']/field[@name='address']/form/field[@name='email']" position="after">
                     <field name="pref_contact" />
+                </xpath>
+            </field>
+        </record>
+
+        <record id="inherit_res_partner_form_view5" model="ir.ui.view">
+            <field name="name">inherit.res.partner.form.view5</field>
+            <field name="model">res.partner</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="iller_tournee.inherit_tournee_res_partner_form" />
+            <field name="arch" type="xml">
+                <xpath expr="/form/notebook/page[@string='Tournées']/field[@name='tournee3']" position="after">
+                    <separator colspan="4" string="Autres informations" />
+                    <field name="depose_ok" />
+                    <newline />
+                    <field name="commentaire_prep" />
+                    <field name="commentaire_livraison" />
                 </xpath>
             </field>
         </record>
