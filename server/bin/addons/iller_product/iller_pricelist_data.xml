@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<openerp>
+    <data>
+
+        <record id="product_pricelist_bareme_c01" model="product.pricelist.bareme">
+            <field name="name">c01</field>
+            <field name="valeur" eval="1.666700" />
+        </record>
+        <record id="product_pricelist_bareme_c02" model="product.pricelist.bareme">
+            <field name="name">c02</field>
+            <field name="valeur" eval="1.612900" />
+        </record>
+        <record id="product_pricelist_bareme_c03" model="product.pricelist.bareme">
+            <field name="name">c03</field>
+            <field name="valeur" eval="1.562500" />
+        </record>
+        <record id="product_pricelist_bareme_c04" model="product.pricelist.bareme">
+            <field name="name">c04</field>
+            <field name="valeur" eval="1.515100" />
+        </record>
+        <record id="product_pricelist_bareme_c05" model="product.pricelist.bareme">
+            <field name="name">c05</field>
+            <field name="valeur" eval="1.470580" />
+        </record>
+        <record id="product_pricelist_bareme_c06" model="product.pricelist.bareme">
+            <field name="name">c06</field>
+            <field name="valeur" eval="1.428570" />
+        </record>
+        <record id="product_pricelist_bareme_c07" model="product.pricelist.bareme">
+            <field name="name">c07</field>
+            <field name="valeur" eval="1.388880" />
+        </record>
+        <record id="product_pricelist_bareme_c08" model="product.pricelist.bareme">
+            <field name="name">c08</field>
+            <field name="valeur" eval="1.375789" />
+        </record>
+        <record id="product_pricelist_bareme_c09" model="product.pricelist.bareme">
+            <field name="name">c09</field>
+            <field name="valeur" eval="1.351350"/>
+        </record>
+        <record id="product_pricelist_bareme_c10" model="product.pricelist.bareme">
+            <field name="name">c10</field>
+            <field name="valeur" eval="1.282051"/>
+        </record>
+        <record id="product_pricelist_bareme_c11" model="product.pricelist.bareme">
+            <field name="name">c11</field>
+            <field name="valeur" eval="1.250000" />
+        </record>
+        <record id="product_pricelist_bareme_c12" model="product.pricelist.bareme">
+            <field name="name">c12</field>
+            <field name="valeur" eval="1.219510" />
+        </record>
+        <record id="product_pricelist_bareme_c13" model="product.pricelist.bareme">
+            <field name="name">c13</field>
+            <field name="valeur" eval="1.190470" />
+        </record>
+        <record id="product_pricelist_bareme_c14" model="product.pricelist.bareme">
+            <field name="name">c14</field>
+            <field name="valeur" eval="1.162790" />
+        </record>
+        <record id="product_pricelist_bareme_c15" model="product.pricelist.bareme">
+            <field name="name">c15</field>
+            <field name="valeur" eval="1.136300" />
+        </record>
+        <record id="product_pricelist_bareme_c16" model="product.pricelist.bareme">
+            <field name="name">c16</field>
+            <field name="valeur" eval="1.111110" />
+        </record>
+        <record id="product_pricelist_bareme_c17" model="product.pricelist.bareme">
+            <field name="name">c17</field>
+            <field name="valeur" eval="1.096950" />
+        </record>
+        <record id="product_pricelist_bareme_c18" model="product.pricelist.bareme">
+            <field name="name">c18</field>
+            <field name="valeur" eval="1.063820" />
+        </record>
+        <record id="product_pricelist_bareme_c19" model="product.pricelist.bareme">
+            <field name="name">c19</field>
+            <field name="valeur" eval="1.041600" />
+        </record>
+
+    </data>
+</openerp>

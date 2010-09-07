@@ -20,4 +20,5 @@
 #
 ##############################################################################
 
-import product_iller
+import iller_product
+import iller_pricelist

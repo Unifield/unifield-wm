@@ -35,7 +35,9 @@
     'init_xml': [],
     'demo_xml': [],
     'update_xml': [
-            'product_iller_view.xml',
+            'iller_product_view.xml',
+            'iller_pricelist_view.xml',
+            'iller_pricelist_data.xml',
 ],
     'installable': True,
     'active': False,

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<openerp>
+    <data>
+
+        <record id="inherit_product_pricelist_item_form_view1" model="ir.ui.view">
+            <field name="name">inherit.product.pricelist.item.form1</field>
+            <field name="model">product.pricelist.item</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="product.product_pricelist_item_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="/form/group" position="replace">
+                        <field name="bareme_id" on_change="bareme_change(bareme_id)" />
+                        <label string="Indication de la valeur" />
+                        <field name="price_discount" nolabel="1" readonly="1" />
+                </xpath>
+            </field>
+        </record>
+
+        <record id="inherit_product_pricelist_item_tree_view1" model="ir.ui.view">
+            <field name="name">inherit.product.pricelist.tree.form1</field>
+            <field name="model">product.pricelist.item</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="product.product_pricelist_item_tree_view" />
+            <field name="arch" type="xml">
+                <xpath expr="/tree/field[@name='categ_id']" position="after">
+                    <field name="bareme_id" />
+                </xpath>
+            </field>
+        </record>
+
+        <record id="product_pricelist_bareme_form_view" model="ir.ui.view">
+            <field name="name">product.pricelist.bareme.form.view</field>
+            <field name="model">product.pricelist.bareme</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Barème">
+                    <field name="name" required="1" select="1" />
+                    <field name="valeur" required="1" select="2" />
+                </form>
+            </field>
+        </record>
+
+        <record id="product_pricelist_bareme_tree_view" model="ir.ui.view">
+            <field name="name">product.pricelist.bareme.tree.view</field>
+            <field name="model">product.pricelist.bareme</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Barèmes">
+                    <field name="name" />
+                    <field name="valeur" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_product_pricelist_bareme_tree" model="ir.actions.act_window">
+            <field name="name">Tous les barèmes</field>
+            <field name="res_model">product.pricelist.bareme</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_product_pricelist_bareme"
+                  action="action_product_pricelist_bareme_tree"
+                  parent="product.menu_product_pricelist_main" />
+
+
+    </data>
+</openerp>
+

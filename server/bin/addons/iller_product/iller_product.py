@@ -30,34 +30,70 @@ import pooler
 import time
 
 class product_product(osv.osv):
-   _inherit = 'product.product'
-   _name = 'product.product'
-   _columns = {
-        'code_emballage'  : fields.selection([(1,'BAC'),(2,'CARTON')],'Code Emballage', size=-1),
-        'type_etiq_art'   : fields.char('Type Etiquette article', size=4),
-        'type_emballage'  : fields.char('Type Emballage', size=4),
-        'type_condit'     : fields.selection([(0,'Piece'),(1,'Kilo'),(2,'Carton'),(3,'Colis/Barquette')],'Type de conditionnement'),
-        'type_pesee'      : fields.selection([(0,'0'),(1,'1'),(2,'2'),(7,'7'),(8,'8')],'Type de pesée',size=-1),
-        'nu_par_etiq_art' : fields.integer('Nu parametr. etiq. art.'),
-        'code_affection'  : fields.selection([('PREP','Preparation'),('DECP','Decoupe')], 'Code Affection'),
-        'localisation'    : fields.char('Zone localisation', size=3),
-        'prix_achat'      : fields.float('Prix Achat', digits=(16,2)),
-        'coef_depart'     : fields.float('Coef Depart',digits=(16,2)),
-        'prix_depart'     : fields.float('Prix de depart',digits=(16,2)),
-        'col_promo_p2'    : fields.float('Col.Promo.P2', digits=(16,2)),
-        'coef_collectiv'  : fields.float('Coef.Collec', digits=(16,2)),
-        'prix_depart_collectiv': fields.float('Prix de depart Collec',digits=(16,2)),
-        'coef_promo_blanc': fields.float('Coef Promo blc', digits=(16,2)), 
-        'liste_prep'      : fields.selection([(0,'Rien'),(1,'Congelé'),(2,'Salaison'),(3,'Volaille')], 'Liste Prep', size=-1),
-        'compl_lib'       : fields.char('Complement Des.', size=12),
-        'cond_vente'      : fields.selection([(0,'Pièce'),(1,'Kg'),(2,'Carton')], 'Condit.Vente', size=-1),
-   }
+    _inherit = 'product.product'
+    _name = 'product.product'
 
-   def onchange_coef_depart(self, cr, uid, ids, prix_achat, coef_depart):
-       return {'value': {'prix_depart': prix_achat * coef_depart}}
 
-   def onchange_coef_collectiv(self, cr, uid, ids, prix_achat, coef_collectiv):
-       return {'value': {'prix_depart_collectiv': prix_achat * coef_collectiv}}
+    def write(self, cr, uid, ids, vals, context={}):
+        if 'prix_achat' in vals:
+            for prd in self.browse(cr, uid, ids):
+                vals['old_purchase_price'] = prd.prix_achat
+                vals['list_price'] = vals.get('prix_achat', prd.standard_price)*vals.get('coeff_depart', prd.coeff_depart)
+
+        return super(product_product, self).write(cr, uid, ids, vals, context=context)
+
+
+    _columns = {
+        'prix_achat': fields.float(digits=(16, int(config['price_accuracy'])), string='Prix d\'achat'),
+        'old_purchase_price': fields.float(digits=(16, int(config['price_accuracy'])), string='Ancien prix d\'achat', readonly=True),
+        'coeff_depart': fields.float(digits=(16,2), string='Coeff. départ'),
+        'type_cond': fields.selection([('0000', 'PIECE'), ('0001', 'KILO'), ('0002', 'CARTON'), ('0003', 'BARQUETTE')], 
+                                                                                            string='Type conditionnement'),
+        'type_preselec': fields.selection([('0', 'Facturation pièce/carton'), ('1', 'Facturation Kilo')], string='Type préselection'),
+        'coeff_blanche': fields.float(digits=(16,2), string='Coeff. blanche'),
+        'prix_blanche': fields.float(digits=(16, int(config['price_accuracy'])), string='Prix blanche'),
+        'prix_decembre': fields.float(digits=(16, int(config['price_accuracy'])), string='Prix décembre'),
+
+        'type_pesee': fields.selection([('0', 'Poids variable'), ('1', 'Prix fixe'), ('2', 'Poids fixe'),
+                                        ('7', 'Négoce pièce'), ('8', 'Négoce poids')], string='Type de pesée'),
+        'code_affectation': fields.selection([('DECP', 'Découpe'), ('PREP', 'Préparation')], string='Code Affectation'),
+        'liste_prepa': fields.selection([('0', 'Rien'), ('1', 'Congelé'), ('2', 'Salaison'), ('3', 'Volaille')],
+                                                string='Liste préparation', required=True),
+    }
+
+    _defaults = {
+        'cost_method': lambda *a: 'average',
+        'type_cond': lambda *a: '0001',
+        'type_preselec': lambda *a: '1',
+    }
+
+
+    def coeff_price_change(self, cr, uid, ids, standard_price, coeff_depart, context={}):
+        return {'value': {'list_price': standard_price*coeff_depart}}
+
+
+    def promo_blanche_change(self, cr, uid, ids, coeff_blanche, prix_achat, context={}):
+        return {'value': {'prix_blanche': coeff_blanche*prix_achat}}
+
+
+    def preselec_onchange(self, cr, uid, ids, type_cond, type_preselec, context={}):
+        if type_preselec == '1':
+            return {'value': {'type_cond': '0001', 'type_preselec': '1'}}
+        elif type_preselec == '0' and type_cond == '0001':
+            return {'value': {}, 'warning': {'title': 'Impossible', 'message':
+                'Le type de préselection à la pièce ou au carton est incompatible avec le conditionnement KILO'}}
+
+        return {'value': {}}
+
+
+    def cond_onchange(self, cr, uid, ids, type_cond, type_preselec, context={}):
+        if type_cond == '0001':
+            return {'value': {'type_cond': '0001', 'type_preselec': '1'}}
+        elif type_preselec == '0' and type_cond == '0001':
+            return {'value': {}, 'warning': {'title': 'Impossible', 'message':
+                'Le type de conditionnement KILO est incompatible avec le type de préselection à la pièce/carton'}}
+
+        return {'value': {}}
 
 
 product_product()

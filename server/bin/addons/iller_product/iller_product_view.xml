@@ -2,58 +2,62 @@
 <openerp>
     <data>
 
-        <!-- Modification de la vue des produits -->
-        <record id="iller_inherit1_product_normal_form_view" model="ir.ui.view">
-            <field name="name">product.normal.form</field>
+        <record id="inherit_product_normal_form_view1" model="ir.ui.view">
+            <field name="name">inherit.product.normal.form.view1</field>
             <field name="model">product.product</field>
             <field name="type">form</field>
-            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="inherit_id" ref="product.product_normal_form_view" />
             <field name="arch" type="xml">
-                <page string="Descriptions" position="after">
-                    <page string = "Info spéc.">
-                        <field name="code_emballage"/>
-                        <field name="type_etiq_art"/>
-                        <field name="type_emballage"/>
-                        <field name="type_condit"/>
-                        <field name="type_pesee"/>
-                        <field name="nu_par_etiq_art"/>
-                        <field name="code_affection"/>
-                        <field name="localisation"/>
-                        <field name="col_promo_p2"/>
-                        <field name="liste_prep"/>
-                        <field name="coef_promo_blanc"/>
-                        <field name="compl_lib"/>
-                        <field name="cond_vente"/>
+                <xpath expr="/form/notebook/page[@string='Prices &amp; Suppliers']" position="replace">
+                    <page string='Prices &amp; Suppliers'>
+                        <group colspan="2" col="2">
+                            <separator string="Achat" />
+                            <field name="standard_price" />
+                            <field name="prix_achat" on_change="coeff_price_change(prix_achat, coeff_depart)" />
+                            <field name="old_purchase_price" />
+                            <field name="coeff_depart" on_change="coeff_price_change(prix_achat, coeff_depart)" />
+                            <field groups="base.group_extended" name="cost_method"/>
+                        </group>
+                        <group colspan="2" col="2">
+                            <separator string="Vente" />
+                            <field name="list_price" readonly="1"/>
+                            <field name="price_margin" select="1"/>
+                            <field name="price_extra" select="1"/>
+                            <field name="type_cond" on_change="cond_onchange(type_cond, type_preselec)" required="1"/>
+                            <field name="type_preselec" on_change="preselec_onchange(type_cond, type_preselec)" required="1"/>
+                        </group>
+                        <separator colspan="4" string="Promos" />
+                        <field name="coeff_blanche" on_change="promo_blanche_change(coeff_blanche, prix_achat)" />
+                        <field name="prix_blanche" readonly="1" />
+                        <field name="prix_decembre" />
+                        <field colspan="4" name="seller_ids" nolabel="1"/>
                     </page>
-                </page>
+                </xpath>
             </field>
         </record>
 
-        <record id="iller_inherit2_product_normal_form_view" model="ir.ui.view">
-            <field name="name">product.normal.form</field>
+        <record id="inherit_product_normal_form_view2" model="ir.ui.view">
+            <field name="name">inherit.product.normal.form.view2</field>
             <field name="model">product.product</field>
             <field name="type">form</field>
-            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="inherit_id" ref="product.product_normal_form_view" />
             <field name="arch" type="xml">
-                <field name="list_price" position="replace">
-                    <field name="prix_achat"/>
-                    <field name="coef_depart" on_change="onchange_coef_depart(prix_achat,coef_depart)"/>
-                    <field name="prix_depart"/>
-                    <field name="coef_collectiv" on_change="onchange_coef_collectiv(prix_achat,coef_collectiv)"/>
-                    <field name="prix_depart_collectiv"/>
-                </field>
+                <xpath expr="/form/notebook/page[@string='Information']/group[2]/field[@name='weight_net']" position="after">
+                    <field name="type_pesee" />
+                    <field name="code_affectation" attrs="{'required': [('type_pesee', 'in', ('7','8'))]}" />
+                </xpath>
             </field>
         </record>
 
-        <record id="iller_inherit3_product_normal_form_view" model="ir.ui.view">
-            <field name="name">product.normal.form</field>
+        <record id="inherit_product_normal_form_view3" model="ir.ui.view">
+            <field name="name">inherit.product.normal.form.view3</field>
             <field name="model">product.product</field>
             <field name="type">form</field>
-            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="inherit_id" ref="product.product_normal_form_view" />
             <field name="arch" type="xml">
-                <field name="standard_price" position="replace">
-                    <field name="standard_price" string="P.Achat.M.P."/>
-                </field>
+                <xpath expr="/form/notebook/page[@string='Information']/group/field[@name='supply_method']" position="after">
+                    <field name="liste_prepa" />
+                </xpath>
             </field>
         </record>
 
