@@ -29,6 +29,7 @@
                         <separator colspan="4" string="Promos" />
                         <field name="coeff_blanche" on_change="promo_blanche_change(coeff_blanche, prix_achat)" />
                         <field name="prix_blanche" readonly="1" />
+                        <field name="coeff_jaune" />
                         <field name="prix_decembre" />
                         <field colspan="4" name="seller_ids" nolabel="1"/>
                     </page>

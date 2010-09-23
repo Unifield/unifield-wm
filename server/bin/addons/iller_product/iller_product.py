@@ -40,6 +40,9 @@ class product_product(osv.osv):
                 vals['old_purchase_price'] = prd.prix_achat
                 vals['list_price'] = vals.get('prix_achat', prd.standard_price)*vals.get('coeff_depart', prd.coeff_depart)
 
+            if 'coeff_blanche' in vals:
+                vals['prix_blanche'] = vals.get('prix_achat', prd.standard_price)*vals.get('coeff_blanche', prd.coeff_blanche)
+
         return super(product_product, self).write(cr, uid, ids, vals, context=context)
 
 
@@ -51,6 +54,7 @@ class product_product(osv.osv):
                                                                                             string='Type conditionnement'),
         'type_preselec': fields.selection([('0', 'Facturation pièce/carton'), ('1', 'Facturation Kilo')], string='Type préselection'),
         'coeff_blanche': fields.float(digits=(16,2), string='Coeff. blanche'),
+        'coeff_jaune': fields.many2one('product.pricelist.bareme', string='Barème promo jaune'),
         'prix_blanche': fields.float(digits=(16, int(config['price_accuracy'])), string='Prix blanche'),
         'prix_decembre': fields.float(digits=(16, int(config['price_accuracy'])), string='Prix décembre'),
 
