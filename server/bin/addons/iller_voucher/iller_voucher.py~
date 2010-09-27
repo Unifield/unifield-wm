@@ -1,0 +1,39 @@
+#!/usr/bin/env python
+# -*- coding: UTF8 -*-
+
+from osv import osv
+from osv import fields
+import time
+
+
+class voucher_move_line(osv.osv):
+        _name = 'account.voucher.move.line'
+        _description = 'Lignes d\'écriture pour une ligne de souche'
+
+        _columns = {
+            'name': fields.char(size=64, string='Nom'),
+            'voucher_line_id': fields.many2one('account.voucher.line', 
+                                        string='Ligne de souche'),
+            'move_line_ids': fields.many2many('account.move.line', 
+                                              'voucher_move_line_rel',
+                                              'voucher_line_id', 'move_line_id',
+                                              string='Lignes d\'écriture'),
+        }
+
+
+voucher_move_line()
+
+
+class voucher_line(osv.osv):
+    _name = 'account.voucher.line'
+    _inherit = 'account.voucher.line'
+
+    _columns = {
+        'voucher_move_id': fields.many2one('account.voucher.move.line',
+                                                string='Lignes d\'écritures'),
+    }
+
+voucher_line()
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+
