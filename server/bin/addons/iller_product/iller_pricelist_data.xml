@@ -79,5 +79,18 @@
             <field name="valeur" eval="1.041600" />
         </record>
 
+        <!-- Calcul des prix -->
+        <record id="product_price_type_promo_blanche" model="product.price.type">
+            <field name="name">Prix promo blanche</field>
+            <field name="field">prix_blanche</field>
+            <field name="currency_id" ref="base.EUR" />
+        </record>
+
+        <record id="product_price_type_prix_noel" model="product.price.type">
+            <field name="name">Prix Noël</field>
+            <field name="field">prix_decembre</field>
+            <field name="currency_id" ref="base.EUR" />
+        </record>
+
     </data>
 </openerp>
