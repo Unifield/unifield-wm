@@ -16,8 +16,8 @@
                             <field name="account_id" required="1" />
                             <field name="name" />
                             <field name="type" />
-                            <field name="voucher_move_id" domain="[('id', '=', '0')]" context="{'partner_id': partner_id, 'account_id': account_id}" />
                             <field name="amount" />
+                            <field name="voucher_move_id" domain="[('id', '=', '0')]" context="{'partner_id': partner_id, 'account_id': account_id, 'amount': amount}" />
                             <field name="ref" />
                         </tree>
                         <form string="Lignes de Souches" >
@@ -25,8 +25,8 @@
                             <field name="account_id" required="1" />
                             <field name="name" />
                             <field name="type" />
-                            <field name="voucher_move_id" domain="[('id', '=', '0')]" context="{'partner_id': partner_id, 'account_id': account_id}" />
                             <field name="amount" />
+                            <field name="voucher_move_id" domain="[('id', '=', '0')]" context="{'partner_id': partner_id, 'account_id': account_id, 'amount': amount}" />
                             <field name="ref" />
                         </form>
                     </field>
@@ -41,8 +41,11 @@
             <field name="arch" type="xml">
                 <form string="Lignes d'écriture">
                     <field name="name" colspan="4" required="1" />
-                    <field name="voucher_line_id" colspan="4" readonly="1" />
-                    <field name="move_line_ids" nolabel="1" colspan="4" domain="[('partner_id','=',context.get('partner_id', False)), ('account_id', '=', context.get('account_id')),('reconcile_id', '=', False)]" />
+                    <field name="amount" />
+                    <field name="move_line_ids" nolabel="1" colspan="4" domain="[('partner_id','=',context.get('partner_id', False)), ('account_id', '=', context.get('account_id')),('reconcile_id', '=', False)]" on_change="onchange_move_lines(move_line_ids, total_entries)"/>
+                    <field name="total_entries" readonly="1" />
+                    <field name="balance" readonly="1" />
+                    <button name="compute_total_entries" type="object" string="Calculer" />
                 </form>
             </field>
         </record>

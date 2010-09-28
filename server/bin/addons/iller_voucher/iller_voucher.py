@@ -10,15 +10,60 @@ class voucher_move_line(osv.osv):
         _name = 'account.voucher.move.line'
         _description = 'Lignes d\'écriture pour une ligne de souche'
 
+        def _get_amount(self, cursor, user, context=None):
+            return context.get('amount', 0.0)
+
+        def compute_total_entries(self, cr, uid, ids, context={}):
+            amount = 0.00
+            for line in self.browse(cr, uid, ids):
+                for l in line.move_line_ids:
+                    amount += l.debit
+            self.write(cr, uid, ids, {'total_entries': amount})
+            return True
+
+        def _get_balance(self, cr, uid, ids, field_name, arg, context={}):
+            balance = 0.00
+            v = {}
+            for id in self.browse(cr, uid, ids):
+                v[id.id] = id.total_entries - id.amount
+
+            return v
+
+
+        def name_get(self, cr, uid, ids, context={}):
+            res = []
+            for move in self.browse(cr, uid, ids):
+                res.append((move.id, '[%.2f]' %move.total_entries))
+
+            return res
+
         _columns = {
             'name': fields.char(size=64, string='Nom'),
+            'amount': fields.float(digits=(16,2), string='Total paiement',
+                                                                readonly=True),
             'voucher_line_id': fields.many2one('account.voucher.line', 
                                         string='Ligne de souche'),
             'move_line_ids': fields.many2many('account.move.line', 
                                               'voucher_move_line_rel',
                                               'voucher_line_id', 'move_line_id',
                                               string='Lignes d\'écriture'),
+            'total_entries': fields.float(digits=(16,2), 
+                                string='Total des écritures', readonly=True),
+            'balance': fields.function(_get_balance, type='float', method=True, 
+                                string='Balance'),
         }
+
+        _defaults = {
+            'amount': _get_amount,
+        }
+
+
+        def onchange_move_lines(self, cr, uid, ids, move_lines, total_entries):
+            total_entries = 0.00
+            for line in self.pool.get('account.move.line').browse(cr, uid, move_lines[0][2]):
+                total_entries += line.debit
+
+            return {'value': {'total_entries': total_entries}}
 
 
 voucher_move_line()
