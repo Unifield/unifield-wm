@@ -38,7 +38,7 @@
             'iller_product_view.xml',
             'iller_pricelist_view.xml',
             'iller_pricelist_data.xml',
-            'iller_pricelist_wizard.xml',
+#            'iller_pricelist_wizard.xml',
 ],
     'installable': True,
     'active': False,
