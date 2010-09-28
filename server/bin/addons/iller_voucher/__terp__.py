@@ -36,6 +36,7 @@
     'demo_xml': [],
     'update_xml': [
             'iller_voucher_view.xml',
+            'account_view.xml',
 ],
     'installable': True,
     'active': False,
