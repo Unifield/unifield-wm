@@ -4,6 +4,7 @@
 from osv import osv
 from osv import fields
 import time
+from datetime import datetime
 
 
 class voucher_move_line(osv.osv):
@@ -14,21 +15,22 @@ class voucher_move_line(osv.osv):
             return context.get('amount', 0.0)
 
         def compute_total_entries(self, cr, uid, ids, context={}):
+            total_entries = 0.00
+            total_write = 0.00
             amount = 0.00
             for line in self.browse(cr, uid, ids):
                 for l in line.move_line_ids:
-                    amount += l.debit
-            self.write(cr, uid, ids, {'total_entries': amount})
+                    total_entries += l.debit
+
+                for l in line.line_new_ids:
+                    total_write += l.amount
+
+                amount = line.amount
+
+            self.write(cr, uid, ids, {'total_entries': total_entries, 
+                                      'total_writeoff': total_write, 
+                                      'balance': amount-(total_entries-total_write)})
             return True
-
-        def _get_balance(self, cr, uid, ids, field_name, arg, context={}):
-            balance = 0.00
-            v = {}
-            for id in self.browse(cr, uid, ids):
-                v[id.id] = id.total_entries - id.amount
-
-            return v
-
 
         def name_get(self, cr, uid, ids, context={}):
             res = []
@@ -47,10 +49,13 @@ class voucher_move_line(osv.osv):
                                               'voucher_move_line_rel',
                                               'voucher_line_id', 'move_line_id',
                                               string='Lignes d\'écriture'),
+            'line_new_ids': fields.one2many('voucher.move.reconcile.line', 'line_id', 
+                                                                string='Ajsutements'),
             'total_entries': fields.float(digits=(16,2), 
                                 string='Total des écritures', readonly=True),
-            'balance': fields.function(_get_balance, type='float', method=True, 
-                                string='Balance'),
+            'total_writeoff': fields.float(digits=(16,2),
+                                string='Total des ajustements', readonly=True),
+            'balance': fields.float(digits=(16,2), string='Balance', readonly=True),
         }
 
         _defaults = {
@@ -58,15 +63,36 @@ class voucher_move_line(osv.osv):
         }
 
 
-        def onchange_move_lines(self, cr, uid, ids, move_lines, total_entries):
-            total_entries = 0.00
-            for line in self.pool.get('account.move.line').browse(cr, uid, move_lines[0][2]):
-                total_entries += line.debit
+        def onchange_move_lines(self, cr, uid, ids, move_lines, line_new_ids):
+            balance = 0.00
+            if move_lines:
+                for line in self.pool.get('account.move.line').browse(cr, uid, move_lines[0][2]):
+                    balance += line.debit
+            if line_new_ids:
+                for line in self.pool.get('voucher.move.reconcile.line').browse(cr, uid, line_new_ids[0][2]):
+                    try:
+                        balance += line.amount
+                    except Exception:
+                        break
 
-            return {'value': {'total_entries': total_entries}}
+            return {'value': {'balance': balance}}
 
 
 voucher_move_line()
+
+
+class voucher_move_reconcile_line(osv.osv):
+    _name = 'voucher.move.reconcile.line'
+    _description = 'Ajustement remise de chèques'
+
+    _columns = {
+         'name': fields.char('Description', size=64, required=True),
+         'account_id': fields.many2one('account.account', 'Account', required=True),
+         'line_id': fields.many2one('account.voucher.move.line', 'Reconcile'),
+         'amount': fields.float('Amount', required=True),
+    }
+
+voucher_move_reconcile_line()
 
 
 class voucher_line(osv.osv):
@@ -88,6 +114,12 @@ class account_voucher(osv.osv):
     def action_move_line_create(self, cr, uid, ids, *args):
         rec_line = []
         for inv in self.browse(cr, uid, ids):
+
+            for line in inv.payment_ids:
+                if line.voucher_move_id.balance != 0.00:
+                    raise osv.except_osv('Erreur', 'Impossible de créer la remise de chèque car \
+le montant des lignes d\'écritures n\'est pas égal au montant des chèques')
+
             if inv.move_id:
                 continue
             company_currency = inv.company_id.currency_id.id
@@ -177,7 +209,8 @@ class account_voucher(osv.osv):
                 'period_id':inv.period_id.id,
                 'partner_id': False,
                 'ref': ref, 
-                'date': inv.date
+                'date': inv.date,
+                'date_maturity': datetime.now(),
             }
             if inv.type in ('rec_voucher', 'bank_rec_voucher', 'journal_pur_voucher', 'journal_voucher'):
                 move_line['debit'] = inv.amount
@@ -197,7 +230,8 @@ class account_voucher(osv.osv):
                      'period_id':inv.period_id.id,
                      'partner_id':line.partner_id.id or False,
                      'ref':ref, 
-                     'date':inv.date
+                     'date':inv.date,
+                     'date_maturity': datetime.now(),
                  }
                 
                 if line.type == 'dr':
@@ -206,8 +240,48 @@ class account_voucher(osv.osv):
                 elif line.type == 'cr':
                     move_line['credit'] = line.amount or False
                     amount=line.amount * (-1)
-                
+
                 ml_id=self.pool.get('account.move.line').create(cr, uid, move_line)
+
+                for write_off in line.voucher_move_id.line_new_ids:
+                    wo_data = {'name': write_off.name,
+                               'debit': False,
+                               'credit': False,
+                               'account_id': write_off.account_id.id,
+                               'journal_id': journal_id,
+                               'move_id': move_id,
+                               'period_id': inv.period_id.id,
+                               'partner_id': line.partner_id.id or False,
+                               'date': inv.date,
+                               'date_maturity': datetime.now(),
+                               'ref': ref}
+
+                    wo_data2 = {'name': write_off.name,
+                               'debit': False,
+                               'credit': False,
+                               'account_id': line.account_id.id or False,
+                               'journal_id': journal_id,
+                               'move_id': move_id,
+                               'period_id': inv.period_id.id,
+                               'partner_id': line.partner_id.id or False,
+                               'date': inv.date,
+                               'date_maturity': datetime.now(),
+                               'ref': ref}
+
+                    if line.type == 'dr':
+                        wo_data['debit'] = write_off.amount or False
+                        wo_data2['credit'] = write_off.amount or False
+                        amount=write_off.amount
+                    elif line.type == 'cr':
+                        wo_data['credit'] = write_off.amount or False
+                        wo_data2['debit'] = write_off.amount or False
+                        amount=write_off.amount * (-1)
+
+                    wo_id = self.pool.get('account.move.line').create(cr, uid, wo_data)
+                    wo_id2 = self.pool.get('account.move.line').create(cr, uid, wo_data2)
+                    rec_line.append(wo_id)
+                    rec_line.append(wo_id2)
+                                                                        
 
                 rec_line.append(ml_id)
                 for invoice_mv_line in line.voucher_move_id.move_line_ids:

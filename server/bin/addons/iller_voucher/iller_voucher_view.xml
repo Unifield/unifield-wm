@@ -42,10 +42,18 @@
                 <form string="Lignes d'écriture">
                     <field name="name" colspan="4" required="1" />
                     <field name="amount" />
-                    <field name="move_line_ids" nolabel="1" colspan="4" domain="[('partner_id','=',context.get('partner_id', False)), ('account_id', '=', context.get('account_id')),('reconcile_id', '=', False)]" on_change="onchange_move_lines(move_line_ids, total_entries)"/>
+                    <field name="move_line_ids" nolabel="1" colspan="4" domain="[('partner_id','=',context.get('partner_id', False)), ('account_id', '=', context.get('account_id')),('reconcile_id', '=', False)]" on_change="onchange_move_lines(move_line_ids, line_new_ids)"/>
+                    <field name="line_new_ids" nolabel="1" colspan="4" on_change="onchange_move_lines(move_line_ids, line_new_ids)">
+                        <tree string="Ajustements" editable="top">
+                            <field name="account_id" required="1" domain="[('type','&lt;&gt;','view'),('type','&lt;&gt;','consolidation')]" />
+                            <field name="amount" required="1" />
+                            <field name="name" required="1" />
+                        </tree>
+                    </field>
                     <field name="total_entries" readonly="1" />
                     <field name="balance" readonly="1" />
-                    <button name="compute_total_entries" type="object" string="Calculer" />
+                    <field name="total_writeoff" readonly="1" />
+                    <button name="compute_total_entries" type="object" string="Calculer" colspan="2" />
                 </form>
             </field>
         </record>
