@@ -219,7 +219,13 @@ le montant des lignes d\'écritures n\'est pas égal au montant des chèques')
             self.pool.get('account.move.line').create(cr, uid, move_line)
             
             for line in inv.payment_ids:
-                    
+
+                all_debit = 0.00
+                all_credit = 0.00
+                for pline in line.voucher_move_id.move_line_ids:
+                    all_debit += pline.debit
+                    all_credit += pline.credit
+
                 move_line = {
                     'name':line.name,
                      'debit':False,
@@ -235,10 +241,10 @@ le montant des lignes d\'écritures n\'est pas égal au montant des chèques')
                  }
                 
                 if line.type == 'dr':
-                    move_line['debit'] = line.amount or False
+                    move_line['debit'] = all_credit or False
                     amount=line.amount
                 elif line.type == 'cr':
-                    move_line['credit'] = line.amount or False
+                    move_line['credit'] = all_debit or False
                     amount=line.amount * (-1)
 
                 ml_id=self.pool.get('account.move.line').create(cr, uid, move_line)
@@ -256,31 +262,13 @@ le montant des lignes d\'écritures n\'est pas égal au montant des chèques')
                                'date_maturity': datetime.now(),
                                'ref': ref}
 
-                    wo_data2 = {'name': write_off.name,
-                               'debit': False,
-                               'credit': False,
-                               'account_id': line.account_id.id or False,
-                               'journal_id': journal_id,
-                               'move_id': move_id,
-                               'period_id': inv.period_id.id,
-                               'partner_id': line.partner_id.id or False,
-                               'date': inv.date,
-                               'date_maturity': datetime.now(),
-                               'ref': ref}
-
                     if line.type == 'dr':
-                        wo_data['debit'] = write_off.amount or False
-                        wo_data2['credit'] = write_off.amount or False
-                        amount=write_off.amount
-                    elif line.type == 'cr':
                         wo_data['credit'] = write_off.amount or False
-                        wo_data2['debit'] = write_off.amount or False
-                        amount=write_off.amount * (-1)
+                    elif line.type == 'cr':
+                        wo_data['debit'] = write_off.amount or False
 
                     wo_id = self.pool.get('account.move.line').create(cr, uid, wo_data)
-                    wo_id2 = self.pool.get('account.move.line').create(cr, uid, wo_data2)
-                    rec_line.append(wo_id)
-                    rec_line.append(wo_id2)
+#                    rec_line.append(wo_id)
                                                                         
 
                 rec_line.append(ml_id)
