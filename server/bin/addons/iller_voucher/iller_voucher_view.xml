@@ -58,5 +58,46 @@
             </field>
         </record>
 
+        <!-- CRÉATION D'UN MENU PORTEFEUILLE -->
+        <menuitem id="iller_portefeuille"
+                  name="Portefeuilles"
+                  parent="account.menu_finance" />
+
+        <record id="act_iller_portefeuille_cheque" model="ir.actions.act_window">
+            <field name="name">Portefeuille Chèques</field>
+            <field name="res_model">account.move.line</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('account_id.code', 'like', '41360000'), ('reconcile_id', '=', False)]</field>
+        </record>
+
+        <menuitem id="iller_portefeuille_cheque"
+                  action="act_iller_portefeuille_cheque"
+                  parent="iller_portefeuille" />
+
+        <record id="act_iller_portefeuille_traite" model="ir.actions.act_window">
+            <field name="name">Portefeuille Traites</field>
+            <field name="res_model">account.move.line</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('account_id.code', 'like', '41370000'), ('reconcile_id', '=', False)]</field>
+        </record>
+
+        <menuitem id="iller_portefeuille_traite"
+                  action="act_iller_portefeuille_traite"
+                  parent="iller_portefeuille" />
+
+        <record id="act_iller_portefeuille_reglement" model="ir.actions.act_window">
+            <field name="name">Portefeuille règlements</field>
+            <field name="res_model">account.move.line</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('account_id.code', 'in', ('41360000', '41370000')), ('reconcile_id', '=', False)]</field>
+        </record>
+
+        <menuitem id="iller_portefeuille_regelement"
+                  action="act_iller_portefeuille_reglement"
+                  parent="iller_portefeuille" />
+
     </data>
 </openerp>
