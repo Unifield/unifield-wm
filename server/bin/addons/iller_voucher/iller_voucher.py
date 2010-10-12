@@ -20,7 +20,7 @@ class voucher_move_line(osv.osv):
             amount = 0.00
             for line in self.browse(cr, uid, ids):
                 for l in line.move_line_ids:
-                    total_entries += l.debit
+                    total_entries += l.debit - l.credit
 
                 for l in line.line_new_ids:
                     total_write += l.amount
