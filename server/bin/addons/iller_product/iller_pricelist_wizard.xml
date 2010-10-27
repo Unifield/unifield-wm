@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<openerp>
+    <data>
+
+        <wizard id="pricelist_configure_promo"
+                name="pricelist.configure.promo"
+                string="Configurer les promos"
+                model="product.pricelist"
+                menu="True" />
+
+    </data>
+</openerp>
