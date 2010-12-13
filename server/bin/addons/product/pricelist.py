@@ -195,6 +195,7 @@ class product_pricelist(osv.osv):
                 'ORDER BY sequence LIMIT 1',
                 (tmpl_id, prod_id) + sqlargs + ( plversion['id'], qty))
             res = cr.dictfetchone()
+
             if res:
                 if res['base'] == -1:
                     if not res['base_pricelist_id']:

@@ -20,7 +20,7 @@
                         </group>
                         <group colspan="2" col="2">
                             <separator string="Vente" />
-                            <field name="list_price" readonly="1"/>
+                            <field name="list_price" />
                             <field name="price_margin" select="1"/>
                             <field name="price_extra" select="1"/>
                             <field name="type_cond" on_change="cond_onchange(type_cond, type_preselec)" required="1"/>
@@ -28,9 +28,13 @@
                         </group>
                         <separator colspan="4" string="Promos" />
                         <field name="coeff_blanche" on_change="promo_blanche_change(coeff_blanche, prix_achat)" />
-                        <field name="prix_blanche" readonly="1" />
+                        <field name="prix_blanche" />
+<!--
                         <field name="coeff_jaune" />
+-->
                         <field name="prix_decembre" />
+			<newline/>
+			<field name="prix_hilton" />
                         <field colspan="4" name="seller_ids" nolabel="1"/>
                     </page>
                 </xpath>

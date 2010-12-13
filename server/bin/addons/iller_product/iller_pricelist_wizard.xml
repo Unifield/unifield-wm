@@ -4,9 +4,25 @@
 
         <wizard id="pricelist_configure_promo"
                 name="pricelist.configure.promo"
-                string="Configurer les promos"
+                string="Configurer une promo"
                 model="product.pricelist"
-                menu="True" />
+                menu="False" />
+
+        <menuitem action="pricelist_configure_promo"
+                  id="menu_pricelist_configure_promo"
+                  type="wizard"
+                  parent="product.menu_product_pricelist_main" />
+
+        <wizard id="pricelist_configure_tarif_special_client"
+                name="pricelist.configure.tarif.special.client"
+                string="Configurer un tarif special pour un client"
+                model="product.pricelist"
+                menu="False" />
+
+        <menuitem action="pricelist_configure_tarif_special_client"
+                  id="menu_pricelist_configure_tarif_special_client"
+                  type="wizard"
+                  parent="product.menu_product_pricelist_main" />
 
     </data>
 </openerp>

@@ -35,6 +35,9 @@ class product_product(osv.osv):
 
 
     def write(self, cr, uid, ids, vals, context={}):
+        '''
+            Calcul des tarifs en fonction des prix d'achat
+        '''
         if 'prix_achat' in vals:
             for prd in self.browse(cr, uid, ids):
                 vals['old_purchase_price'] = prd.prix_achat
@@ -56,6 +59,7 @@ class product_product(osv.osv):
         'coeff_blanche': fields.float(digits=(16,2), string='Coeff. blanche'),
         'coeff_jaune': fields.many2one('product.pricelist.bareme', string='Barème promo jaune'),
         'prix_blanche': fields.float(digits=(16, int(config['price_accuracy'])), string='Prix blanche'),
+        'prix_hilton': fields.float(digits=(16, int(config['price_accuracy'])), string='Prix Hilton'),
         'prix_decembre': fields.float(digits=(16, int(config['price_accuracy'])), string='Prix décembre'),
 
         'type_pesee': fields.selection([('0', 'Poids variable'), ('1', 'Prix fixe'), ('2', 'Poids fixe'),

@@ -12,6 +12,8 @@
                         <field name="bareme_id" on_change="bareme_change(bareme_id)" />
                         <label string="Indication de la valeur" />
                         <field name="price_discount" nolabel="1" readonly="1" />
+			<separator colspan="4" string="Tarif spécial client"/>
+			<field name="price_surcharge" string="Prix Special"/>
                 </xpath>
             </field>
         </record>
@@ -61,7 +63,115 @@
 
         <menuitem id="menu_product_pricelist_bareme"
                   action="action_product_pricelist_bareme_tree"
-                  parent="product.menu_product_pricelist_main" />
+                  parent="product.menu_price" />
+
+
+        <!-- Ajout des checkbox pour indiquer qu'une liste de prix contient les promos jaunes ou blanches -->
+        <record id="inherit_promo_product_pricelist_form" model="ir.ui.view">
+            <field name="name">inherit.promo.product.pricelist.form</field>
+            <field name="model">product.pricelist</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="product.product_pricelist_view" />
+            <field name="arch" type="xml">
+                <xpath expr="/form/field[@name='currency_id']" position="after">
+                    <field name="promo_blanche" />
+                    <field name="promo_jaune" />
+                </xpath>
+            </field>
+        </record>
+
+        <record id="inherit_promo_product_pricelist_tree" model="ir.ui.view">
+            <field name="name">inherit.promo.product.pricelist.tree</field>
+            <field name="model">product.pricelist</field>
+            <field name="type">tree</field>
+            <field name="inherit_id" ref="product.product_pricelist_view_tree" />
+            <field name="arch" type="xml">
+                <xpath expr="/tree/field[@name='currency_id']" position="after">
+                    <field name="promo_blanche" />
+                    <field name="promo_jaune" />
+                </xpath>
+            </field>
+        </record>
+
+
+        <!-- Ajout d'une checkbox pour indiquer que la version de LP est une version de base -->
+        <record id="inherit_product_pricelist_version_form" model="ir.ui.view">
+            <field name="name">inherit.product.pricelist.version.form</field>
+            <field name="model">product.pricelist.version</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="product.product_pricelist_version_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="/form/field[@name='date_end']" position="after">
+                    <field name="base_ok" />
+                </xpath>
+            </field>
+        </record>
+
+        <record id="inherit_product_pricelist_version_tree" model="ir.ui.view">
+            <field name="name">inherit.product.pricelist.version.tree</field>
+            <field name="model">product.pricelist.version</field>
+            <field name="type">tree</field>
+            <field name="inherit_id" ref="product.product_pricelist_version_tree_view" />
+            <field name="arch" type="xml">
+                <xpath expr="/tree/field[@name='date_end']" position="after">
+                    <field name="base_ok" />
+                </xpath>
+            </field>
+        </record>
+
+        <record id="inherit_product_pricelist_view_form_base" model="ir.ui.view">
+            <field name="name">inherit.product.pricelist.view.form.base</field>
+            <field name="model">product.pricelist</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="product.product_pricelist_view" />
+            <field name="arch" type="xml">
+                <xpath expr="/form/field[@name='version_id']/form/field[@name='date_end']" position="after" >
+                    <field name="base_ok" />
+                </xpath>
+            </field>
+        </record>
+
+        <record id="inherit_product_pricelist_view_tree_base" model="ir.ui.view">
+            <field name="name">inherit.product.pricelist.view.tree.base</field>
+            <field name="model">product.pricelist</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="product.product_pricelist_view" />
+            <field name="arch" type="xml">
+                <xpath expr="/form/field[@name='version_id']/tree/field[@name='date_end']" position="after" >
+                    <field name="base_ok" />
+                </xpath>
+            </field>
+        </record>
+
+        <record id="product_tarif_special_client_tree_view" model="ir.ui.view">
+            <field name="name">product.tarif.special.client.tree</field>
+            <field name="model">product.tarif.special.client</field>
+            <field name="type">tree</field>
+            <field eval="7" name="priority"/>
+            <field name="arch" type="xml">
+                <tree string="Produits en tarif spécial">
+                    <field name="product_id"/>
+                    <field name="prix_vente_initial"/>
+                    <field name="prix_special"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="product_tarif_special_client_form_view" model="ir.ui.view">
+            <field name="name">product.tarif.special.client.form</field>
+            <field name="model">product.tarif.special.client</field>
+            <field name="type">form</field>
+            <field eval="7" name="priority"/>
+            <field name="arch" type="xml">
+                <form string="Produits en tarif spécial">
+                    <field name="product_id" on_change="on_change_product_id(product_id)"/>
+                    <newline/>
+                    <field name="prix_vente_initial"/>
+                    <newline/>
+                    <field name="prix_special"/>
+                </form>
+            </field>
+        </record>
 
 
     </data>
