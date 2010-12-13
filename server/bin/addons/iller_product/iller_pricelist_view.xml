@@ -9,7 +9,7 @@
             <field name="inherit_id" ref="product.product_pricelist_item_form_view" />
             <field name="arch" type="xml">
                 <xpath expr="/form/group" position="replace">
-                        <field name="bareme_id" on_change="bareme_change(bareme_id)" />
+                        <field name="bareme_id" on_change="bareme_change(bareme_id,base)" />
                         <label string="Indication de la valeur" />
                         <field name="price_discount" nolabel="1" readonly="1" />
 			<separator colspan="4" string="Tarif spécial client"/>
@@ -76,6 +76,8 @@
                 <xpath expr="/form/field[@name='currency_id']" position="after">
                     <field name="promo_blanche" />
                     <field name="promo_jaune" />
+                    <field name="tarif_special" />
+                    <field name="tarif_promo_comparatif_id" />
                 </xpath>
             </field>
         </record>
@@ -89,6 +91,8 @@
                 <xpath expr="/tree/field[@name='currency_id']" position="after">
                     <field name="promo_blanche" />
                     <field name="promo_jaune" />
+                    <field name="tarif_special" />
+                    <field name="tarif_promo_comparatif_id" />
                 </xpath>
             </field>
         </record>

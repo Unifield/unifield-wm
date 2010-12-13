@@ -207,12 +207,10 @@
         </record>
 
        <record id="product_price_type_prix_special" model="product.price.type">
-            <field name="name">Prix Spécial</field>
+            <field name="name">Prix Special</field>
             <field name="field">list_price</field>
             <field name="currency_id" ref="base.EUR" />
         </record>
-
-
 
 <!--
         <record id="product_price_type_prix_noel" model="product.price.type">

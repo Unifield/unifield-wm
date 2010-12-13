@@ -86,15 +86,18 @@ class product_pricelist_item(osv.osv):
         'bareme_id': fields.many2one('product.pricelist.bareme', string='Barème'),
     }
 
-    def bareme_change(self, cr, uid, ids, bareme_id, context={}):
+    def bareme_change(self, cr, uid, ids, bareme_id, base_id, context={}):
         if bareme_id:
             discount = self.pool.get('product.pricelist.bareme').read(cr, uid, bareme_id, ['valeur'], context)
             return {'value': {'price_discount': discount.get('valeur')-1}}
-
-        return {'value': {}}
+        else:
+            price_type = self.pool.get('product.price.type').browse(cr, uid, base_id)
+            if price_type.name == u'Prix Special':
+               return {'value': {'price_discount': -1.0}}
+            else:
+               return {'value': {'price_discount': 0.0}}
 
 product_pricelist_item()
-
 
 class product_pricelist(osv.osv):
     _name = 'product.pricelist'
@@ -103,21 +106,36 @@ class product_pricelist(osv.osv):
     _columns = {
             'promo_jaune': fields.boolean(string='Promo jaune'),
             'promo_blanche': fields.boolean(string='Promo blanche'),
+            'tarif_special' : fields.boolean(string='Tarif spécial'),
             'price_discount': fields.float('Price Discount', digits=(16,6)),
+	    'tarif_promo_comparatif_id':  fields.many2one('product.pricelist', 'Tarif promo à comparer',
+            ondelete='cascade',
+            help="Si le tarif promotionnel est moins cher que le tarif spécial, c'est lui qui sera retenu"),
     }
 
     def price_get (self, cr, uid, ids, prod_id, qty, partner=None, context=None):
+	print "partner = %s" %partner
 	# Calcul habituel du prix
 	res = super(product_pricelist,self).price_get(cr, uid, ids, prod_id, qty, partner, context)
 
 	# L'éventuel prix de Noel du produit est appliqué si la date de la commande est en décembre
 	# Remarque importante: ce prix de Noel est bien le même pour TOUS
-	mois = context['date'].split('-')[1]
-	if mois == '12':
-	   prix_decembre = self.pool.get('product.product').browse(cr,uid,prod_id).prix_decembre
-           if prix_decembre:
-	      res[ids[0]] = prix_decembre
+        if context and ('date' in context):
+	   mois = context['date'].split('-')[1]
+	   if mois == '12':
+	      prix_decembre = self.pool.get('product.product').browse(cr,uid,prod_id).prix_decembre
+              if prix_decembre:
+	         res[ids[0]] = prix_decembre
+                 return res
 
+	# Ici commence le traitement très particulier des clients ayant un tarif spécial à comparer avec un promo.
+	# Le tarif spécial vient d'être récupéré dans la variable res
+        # On commence par récupérer la liste de prix du client et on en extrait la liste de prix des promos
+        if partner:
+           client = self.pool.get('res.partner').browse(cr, uid, partner) 
+   	   pricelist_id = client.property_product_pricelist.id
+	
+        print "RES returned = %s" %res
 	return res
 		
 product_pricelist()
