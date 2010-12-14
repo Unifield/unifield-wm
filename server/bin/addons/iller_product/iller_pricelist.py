@@ -25,9 +25,10 @@ from osv import fields
 from osv import osv
 from tools import config
 from product import _common
-from datetime import date
 import pooler
-import time
+from datetime import date
+from datetime import datetime
+from datetime import timedelta
 
 class product_pricelist_bareme(osv.osv):
     _name = 'product.pricelist.bareme'
@@ -114,15 +115,54 @@ class product_pricelist(osv.osv):
     }
 
     def price_get (self, cr, uid, ids, prod_id, qty, partner=None, context=None):
-	print "partner = %s" %partner
+	print "DEBUT iller_price_get, ids = %s" %ids
 	# Calcul habituel du prix
 	res = super(product_pricelist,self).price_get(cr, uid, ids, prod_id, qty, partner, context)
 
-	# L'éventuel prix de Noel du produit est appliqué si la date de la commande est en décembre
+	# L'éventuel prix de Noel du produit est appliqué si la date de la commande est incluse dans la promo de Noel 
 	# Remarque importante: ce prix de Noel est bien le même pour TOUS
+	# Le début de la promo est le 1er décembre si ce jour tombe un lundi, sinon c'est le dernier lundi de novembre
+	# La fin de la promo est le 31 décembre si ce jour est un vendredi, sinon cest le premier vendredi de l'année suivante
         if context and ('date' in context):
-	   mois = context['date'].split('-')[1]
-	   if mois == '12':
+           date_commande = datetime.strptime(context['date'],'%Y-%m-%d')
+           an = context['date'].split('-')[0]
+           premier_decembre = datetime(int(an), 12, 1, 0, 0)
+           jour_premier_decembre = premier_decembre.strftime("%A")
+           if jour_premier_decembre == 'lundi':
+                date_start = premier_decembre
+           elif jour_premier_decembre == 'mardi':
+                date_start = premier_decembre - timedelta(days=1)
+           elif jour_premier_decembre == 'mercredi':
+                date_start = premier_decembre - timedelta(days=2)
+           elif jour_premier_decembre == 'jeudi':
+                date_start = premier_decembre - timedelta(days=3)
+           elif jour_premier_decembre == 'vendredi':
+                date_start = premier_decembre - timedelta(days=4)
+           elif jour_premier_decembre == 'samedi':
+                date_start = premier_decembre - timedelta(days=5)
+           else: 
+                date_start = premier_decembre - timedelta(days=6)
+
+           dernier_decembre = datetime(int(an), 12,31, 0, 0)
+           jour_dernier_decembre = dernier_decembre.strftime("%A")
+           if jour_dernier_decembre == 'vendredi':
+                date_end = dernier_decembre
+           elif jour_dernier_decembre == 'samedi':
+                date_end = dernier_decembre + timedelta(days=6)
+           elif jour_dernier_decembre == 'dimanche':
+                date_end = dernier_decembre + timedelta(days=5)
+           elif jour_dernier_decembre == 'lundi':
+                date_end = dernier_decembre + timedelta(days=4)
+           elif jour_dernier_decembre == 'mardi':
+                date_end = dernier_decembre + timedelta(days=3)
+           elif jour_dernier_decembre == 'mercredi':
+                date_end = dernier_decembre + timedelta(days=2)
+           else:    
+                date_end = premier_decembre - timedelta(days=1)
+
+           # Si on est en période de promo de Noel et que le produit a un tarif de Noel
+           # alors celui-ci est retourné en priorité, sinon, on continue.
+           if (date_start <= date_commande) and (date_commande <= date_end):
 	      prix_decembre = self.pool.get('product.product').browse(cr,uid,prod_id).prix_decembre
               if prix_decembre:
 	         res[ids[0]] = prix_decembre
@@ -131,9 +171,23 @@ class product_pricelist(osv.osv):
 	# Ici commence le traitement très particulier des clients ayant un tarif spécial à comparer avec un promo.
 	# Le tarif spécial vient d'être récupéré dans la variable res
         # On commence par récupérer la liste de prix du client et on en extrait la liste de prix des promos
+        print "res initial = %s" %res
         if partner:
-           client = self.pool.get('res.partner').browse(cr, uid, partner) 
-   	   pricelist_id = client.property_product_pricelist.id
+           client_obj = self.pool.get('res.partner')
+           client = client_obj.browse(cr, uid, partner) 
+   	   pricelist_initiale = client.property_product_pricelist
+           if pricelist_initiale.tarif_special:
+              print "CE CLIENT A UN TARIF SPECIAL"
+              pricelist_promo = client.property_product_pricelist.tarif_promo_comparatif_id
+              print "pricelist_promo = %s" %pricelist_promo
+              if pricelist_promo:
+                 print "CE TARIF SPECIAL A UNE LISTE DE PROMO"
+                 # On applique la liste de prix promo au client pour pouvoir calculer le tarif promo
+                 client_obj.write(cr, uid, client.id, {'property_product_pricelist': pricelist_promo.id})
+                 res_promo = super(product_pricelist,self).price_get(cr, uid, [pricelist_promo.id], prod_id, qty, partner, context)
+                 print "res_promo = %s" %res_promo
+                 # On remet en place le tarif initial
+                 client_obj.write(cr, uid, client.id, {'property_product_pricelist': pricelist_initiale.id})
 	
         print "RES returned = %s" %res
 	return res
