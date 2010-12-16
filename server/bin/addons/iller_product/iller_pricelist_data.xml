@@ -177,13 +177,9 @@
             <field name="name">c19</field>
             <field name="valeur" eval="1.041600" />
         </record>
-        <record id="product_pricelist_bareme_achat" model="product.pricelist.bareme">
-            <field name="name">Coeff sur Prix Achat</field>
-            <field name="valeur" eval="1.2" />
-        </record>
         <record id="product_pricelist_bareme_collectivite" model="product.pricelist.bareme">
             <field name="name">Coeff Collectivité</field>
-            <field name="valeur" eval="1.3" />
+            <field name="valeur" eval="1.33" />
         </record>
 
 
@@ -197,12 +193,6 @@
         <record id="product_price_type_prix_achat" model="product.price.type">
             <field name="name">Prix d'achat</field>
             <field name="field">prix_achat</field>
-            <field name="currency_id" ref="base.EUR" />
-        </record>
-
-        <record id="product_price_type_prix_hilton" model="product.price.type">
-            <field name="name">Prix Hilton</field>
-            <field name="field">prix_hilton</field>
             <field name="currency_id" ref="base.EUR" />
         </record>
 
@@ -397,27 +387,19 @@
             <field name="promo_blanche" eval="0" />
         </record>
 
+        <record id="pricelist_tarif_selon_prix_achat_plus_10c" model="product.pricelist">
+            <field name="name">Tarif selon Prix Achat + 10c</field>
+            <field name="type">sale</field>
+            <field name="currency_id" ref="base.EUR" />
+            <field name="promo_jaune" eval="0" />
+            <field name="promo_blanche" eval="0" />
+        </record>
+
         <record id="pricelist_tarif_collectivite" model="product.pricelist">
             <field name="name">Tarif Collectivité</field>
             <field name="type">sale</field>
             <field name="currency_id" ref="base.EUR" />
             <field name="promo_jaune" eval="0" />
-            <field name="promo_blanche" eval="0" />
-        </record>
-
-        <record id="pricelist_tarif_hilton" model="product.pricelist">
-            <field name="name">Tarif Hilton</field>
-            <field name="type">sale</field>
-            <field name="currency_id" ref="base.EUR" />
-            <field name="promo_jaune" eval="0" />
-            <field name="promo_blanche" eval="0" />
-        </record>
-
-        <record id="pricelist_tarif_hilton_jaune" model="product.pricelist">
-            <field name="name">Tarif Hilton (Jaune)</field>
-            <field name="type">sale</field>
-            <field name="currency_id" ref="base.EUR" />
-            <field name="promo_jaune" eval="1" />
             <field name="promo_blanche" eval="0" />
         </record>
 
@@ -607,26 +589,18 @@
             <field name="date_end">01/01/2100</field>
         </record>
 
+       <record id="pricelist_version_base_tarif_selon_prix_achat_plus_10c" model="product.pricelist.version">
+            <field name="base_ok" eval="1" />
+            <field name="name">Base</field>
+            <field name="pricelist_id" ref="pricelist_tarif_selon_prix_achat_plus_10c" />
+            <field name="date_start">01/01/1900</field>
+            <field name="date_end">01/01/2100</field>
+        </record>
+
        <record id="pricelist_version_base_tarif_collectivite" model="product.pricelist.version">
             <field name="base_ok" eval="1" />
             <field name="name">Base</field>
             <field name="pricelist_id" ref="pricelist_tarif_collectivite" />
-            <field name="date_start">01/01/1900</field>
-            <field name="date_end">01/01/2100</field>
-        </record>
-
-        <record id="pricelist_version_base_tarif_hilton" model="product.pricelist.version">
-            <field name="base_ok" eval="1" />
-            <field name="name">Base</field>
-            <field name="pricelist_id" ref="pricelist_tarif_hilton" />
-            <field name="date_start">01/01/1900</field>
-            <field name="date_end">01/01/2100</field>
-        </record>
-
-        <record id="pricelist_version_base_tarif_hilton_jaune" model="product.pricelist.version">
-            <field name="base_ok" eval="1" />
-            <field name="name">Base</field>
-            <field name="pricelist_id" ref="pricelist_tarif_hilton_jaune" />
             <field name="date_start">01/01/1900</field>
             <field name="date_end">01/01/2100</field>
         </record>
@@ -2618,7 +2592,6 @@
         </record>
 
         <record id="pricelist_item_coda4_blanche_08" model="product.pricelist.item"><field name="base" eval="1" />
-        
             <field name="name">Gibier</field>
             <field name="price_version_id" ref="pricelist_version_base_coda4_blanche" />
             <field name="categ_id" ref="categ08" />
@@ -2627,7 +2600,6 @@
         </record>
 
         <record id="pricelist_item_coda4_blanche_09" model="product.pricelist.item"><field name="base" eval="1" />
-        
             <field name="name">Produits surgelés</field>
             <field name="price_version_id" ref="pricelist_version_base_coda4_blanche" />
             <field name="categ_id" ref="categ09" />
@@ -2636,7 +2608,6 @@
         </record>
 
         <record id="pricelist_item_coda4_blanche_10" model="product.pricelist.item"><field name="base" eval="1" />
-        
             <field name="name">Épices</field>
             <field name="price_version_id" ref="pricelist_version_base_coda4_blanche" />
             <field name="categ_id" ref="categ10" />
@@ -2645,7 +2616,6 @@
         </record>
 
         <record id="pricelist_item_coda4_blanche_11" model="product.pricelist.item"><field name="base" eval="1" />
-        
             <field name="name">Marinade</field>
             <field name="price_version_id" ref="pricelist_version_base_coda4_blanche" />
             <field name="categ_id" ref="categ11" />
@@ -2654,7 +2624,6 @@
         </record>
 
         <record id="pricelist_item_coda4_blanche_12" model="product.pricelist.item"><field name="base" eval="1" />
-        
             <field name="name">Produits R G</field>
             <field name="price_version_id" ref="pricelist_version_base_coda4_blanche" />
             <field name="categ_id" ref="categ12" />
@@ -2663,7 +2632,6 @@
         </record>
 
         <record id="pricelist_item_coda4_blanche_13" model="product.pricelist.item"><field name="base" eval="1" />
-        
             <field name="name">Abats</field>
             <field name="price_version_id" ref="pricelist_version_base_coda4_blanche" />
             <field name="categ_id" ref="categ13" />
@@ -2672,7 +2640,6 @@
         </record>
 
         <record id="pricelist_item_coda4_blanche_14" model="product.pricelist.item"><field name="base" eval="1" />
-        
             <field name="name">Produits confits</field>
             <field name="price_version_id" ref="pricelist_version_base_coda4_blanche" />
             <field name="categ_id" ref="categ14" />
@@ -2681,7 +2648,6 @@
         </record>
 
         <record id="pricelist_item_coda4_blanche_15" model="product.pricelist.item"><field name="base" eval="1" />
-        
             <field name="name">Produits congelés</field>
             <field name="price_version_id" ref="pricelist_version_base_coda4_blanche" />
             <field name="categ_id" ref="categ15" />
@@ -2690,7 +2656,6 @@
         </record>
 
         <record id="pricelist_item_coda4_blanche_16" model="product.pricelist.item"><field name="base" eval="1" />
-        
             <field name="name">Boeuf charollais</field>
             <field name="price_version_id" ref="pricelist_version_base_coda4_blanche" />
             <field name="categ_id" ref="categ16" />
@@ -2699,7 +2664,6 @@
         </record>
 
         <record id="pricelist_item_coda4_blanche_17" model="product.pricelist.item"><field name="base" eval="1" />
-        
             <field name="name">Emballage congélateur</field>
             <field name="price_version_id" ref="pricelist_version_base_coda4_blanche" />
             <field name="categ_id" ref="categ17" />
@@ -2708,7 +2672,6 @@
         </record>
 
         <record id="pricelist_item_coda4_blanche_18" model="product.pricelist.item"><field name="base" eval="1" />
-        
             <field name="name">   </field>
             <field name="price_version_id" ref="pricelist_version_base_coda4_blanche" />
             <field name="categ_id" ref="categ18" />
@@ -2717,7 +2680,6 @@
         </record>
 
         <record id="pricelist_item_coda4_blanche_21" model="product.pricelist.item"><field name="base" eval="1" />
-        
             <field name="name">Produist R G</field>
             <field name="price_version_id" ref="pricelist_version_base_coda4_blanche" />
             <field name="categ_id" ref="categ21" />
@@ -2726,7 +2688,6 @@
         </record>
 
         <record id="pricelist_item_coda4_blanche_22" model="product.pricelist.item"><field name="base" eval="1" />
-        
             <field name="name">Produits magasin</field>
             <field name="price_version_id" ref="pricelist_version_base_coda4_blanche" />
             <field name="categ_id" ref="categ22" />
@@ -2735,7 +2696,6 @@
         </record>
 
         <record id="pricelist_item_coda4_blanche_23" model="product.pricelist.item"><field name="base" eval="1" />
-        
             <field name="name">Produits magasin</field>
             <field name="price_version_id" ref="pricelist_version_base_coda4_blanche" />
             <field name="categ_id" ref="categ23" />
@@ -2744,7 +2704,6 @@
         </record>
 
         <record id="pricelist_item_coda4_blanche_24" model="product.pricelist.item"><field name="base" eval="1" />
-        
             <field name="name">Vins magasin</field>
             <field name="price_version_id" ref="pricelist_version_base_coda4_blanche" />
             <field name="categ_id" ref="categ24" />
@@ -2753,7 +2712,6 @@
         </record>
 
         <record id="pricelist_item_coda4_blanche_25" model="product.pricelist.item"><field name="base" eval="1" />
-        
             <field name="name">Poisson</field>
             <field name="price_version_id" ref="pricelist_version_base_coda4_blanche" />
             <field name="categ_id" ref="categ25" />
@@ -2762,7 +2720,6 @@
         </record>
 
         <record id="pricelist_item_coda4_blanche_26" model="product.pricelist.item"><field name="base" eval="1" />
-        
             <field name="name">Légumes</field>
             <field name="price_version_id" ref="pricelist_version_base_coda4_blanche" />
             <field name="categ_id" ref="categ26" />
@@ -2771,7 +2728,6 @@
         </record>
 
         <record id="pricelist_item_coda4_jaune_01" model="product.pricelist.item"><field name="base" eval="1" />
-        
             <field name="name">Boeuf</field>
             <field name="price_version_id" ref="pricelist_version_base_coda4_jaune" />
             <field name="categ_id" ref="categ01" />
@@ -2780,7 +2736,6 @@
         </record>
 
         <record id="pricelist_item_coda4_jaune_02" model="product.pricelist.item"><field name="base" eval="1" />
-        
             <field name="name">Cheval</field>
             <field name="price_version_id" ref="pricelist_version_base_coda4_jaune" />
             <field name="categ_id" ref="categ02" />
@@ -2789,7 +2744,6 @@
         </record>
 
         <record id="pricelist_item_coda4_jaune_03" model="product.pricelist.item"><field name="base" eval="1" />
-        
             <field name="name">Veau</field>
             <field name="price_version_id" ref="pricelist_version_base_coda4_jaune" />
             <field name="categ_id" ref="categ03" />
@@ -2798,7 +2752,6 @@
         </record>
 
         <record id="pricelist_item_coda4_jaune_04" model="product.pricelist.item"><field name="base" eval="1" />
-        
             <field name="name">Agneau</field>
             <field name="price_version_id" ref="pricelist_version_base_coda4_jaune" />
             <field name="categ_id" ref="categ04" />
@@ -2807,7 +2760,6 @@
         </record>
 
         <record id="pricelist_item_coda4_jaune_05" model="product.pricelist.item"><field name="base" eval="1" />
-        
             <field name="name">Porc</field>
             <field name="price_version_id" ref="pricelist_version_base_coda4_jaune" />
             <field name="categ_id" ref="categ05" />
@@ -2816,7 +2768,6 @@
         </record>
 
         <record id="pricelist_item_coda4_jaune_06" model="product.pricelist.item"><field name="base" eval="1" />
-        
             <field name="name">Charcuterie</field>
             <field name="price_version_id" ref="pricelist_version_base_coda4_jaune" />
             <field name="categ_id" ref="categ06" />
@@ -2825,7 +2776,6 @@
         </record>
 
         <record id="pricelist_item_coda4_jaune_07" model="product.pricelist.item"><field name="base" eval="1" />
-        
             <field name="name">Volailles</field>
             <field name="price_version_id" ref="pricelist_version_base_coda4_jaune" />
             <field name="categ_id" ref="categ07" />
@@ -2834,7 +2784,6 @@
         </record>
 
         <record id="pricelist_item_coda4_jaune_08" model="product.pricelist.item"><field name="base" eval="1" />
-        
             <field name="name">Gibier</field>
             <field name="price_version_id" ref="pricelist_version_base_coda4_jaune" />
             <field name="categ_id" ref="categ08" />
@@ -2843,7 +2792,6 @@
         </record>
 
         <record id="pricelist_item_coda4_jaune_09" model="product.pricelist.item"><field name="base" eval="1" />
-        
             <field name="name">Produits surgelés</field>
             <field name="price_version_id" ref="pricelist_version_base_coda4_jaune" />
             <field name="categ_id" ref="categ09" />
@@ -2852,7 +2800,6 @@
         </record>
 
         <record id="pricelist_item_coda4_jaune_10" model="product.pricelist.item"><field name="base" eval="1" />
-        
             <field name="name">Épices</field>
             <field name="price_version_id" ref="pricelist_version_base_coda4_jaune" />
             <field name="categ_id" ref="categ10" />
@@ -2861,7 +2808,6 @@
         </record>
 
         <record id="pricelist_item_coda4_jaune_11" model="product.pricelist.item"><field name="base" eval="1" />
-        
             <field name="name">Marinade</field>
             <field name="price_version_id" ref="pricelist_version_base_coda4_jaune" />
             <field name="categ_id" ref="categ11" />
@@ -2870,7 +2816,6 @@
         </record>
 
         <record id="pricelist_item_coda4_jaune_12" model="product.pricelist.item"><field name="base" eval="1" />
-        
             <field name="name">Produits R G</field>
             <field name="price_version_id" ref="pricelist_version_base_coda4_jaune" />
             <field name="categ_id" ref="categ12" />
@@ -2879,7 +2824,6 @@
         </record>
 
         <record id="pricelist_item_coda4_jaune_13" model="product.pricelist.item"><field name="base" eval="1" />
-        
             <field name="name">Abats</field>
             <field name="price_version_id" ref="pricelist_version_base_coda4_jaune" />
             <field name="categ_id" ref="categ13" />
@@ -2888,7 +2832,6 @@
         </record>
 
         <record id="pricelist_item_coda4_jaune_14" model="product.pricelist.item"><field name="base" eval="1" />
-        
             <field name="name">Produits confits</field>
             <field name="price_version_id" ref="pricelist_version_base_coda4_jaune" />
             <field name="categ_id" ref="categ14" />
@@ -2897,7 +2840,6 @@
         </record>
 
         <record id="pricelist_item_coda4_jaune_15" model="product.pricelist.item"><field name="base" eval="1" />
-        
             <field name="name">Produits congelés</field>
             <field name="price_version_id" ref="pricelist_version_base_coda4_jaune" />
             <field name="categ_id" ref="categ15" />
@@ -2906,7 +2848,6 @@
         </record>
 
         <record id="pricelist_item_coda4_jaune_16" model="product.pricelist.item"><field name="base" eval="1" />
-        
             <field name="name">Boeuf charollais</field>
             <field name="price_version_id" ref="pricelist_version_base_coda4_jaune" />
             <field name="categ_id" ref="categ16" />
@@ -2915,7 +2856,6 @@
         </record>
 
         <record id="pricelist_item_coda4_jaune_17" model="product.pricelist.item"><field name="base" eval="1" />
-        
             <field name="name">Emballage congélateur</field>
             <field name="price_version_id" ref="pricelist_version_base_coda4_jaune" />
             <field name="categ_id" ref="categ17" />
@@ -2924,7 +2864,6 @@
         </record>
 
         <record id="pricelist_item_coda4_jaune_18" model="product.pricelist.item"><field name="base" eval="1" />
-        
             <field name="name">   </field>
             <field name="price_version_id" ref="pricelist_version_base_coda4_jaune" />
             <field name="categ_id" ref="categ18" />
@@ -2933,7 +2872,6 @@
         </record>
 
         <record id="pricelist_item_coda4_jaune_21" model="product.pricelist.item"><field name="base" eval="1" />
-        
             <field name="name">Produist R G</field>
             <field name="price_version_id" ref="pricelist_version_base_coda4_jaune" />
             <field name="categ_id" ref="categ21" />
@@ -2942,7 +2880,6 @@
         </record>
 
         <record id="pricelist_item_coda4_jaune_22" model="product.pricelist.item"><field name="base" eval="1" />
-        
             <field name="name">Produits magasin</field>
             <field name="price_version_id" ref="pricelist_version_base_coda4_jaune" />
             <field name="categ_id" ref="categ22" />
@@ -2951,7 +2888,6 @@
         </record>
 
         <record id="pricelist_item_coda4_jaune_23" model="product.pricelist.item"><field name="base" eval="1" />
-        
             <field name="name">Produits magasin</field>
             <field name="price_version_id" ref="pricelist_version_base_coda4_jaune" />
             <field name="categ_id" ref="categ23" />
@@ -2960,7 +2896,6 @@
         </record>
 
         <record id="pricelist_item_coda4_jaune_24" model="product.pricelist.item"><field name="base" eval="1" />
-        
             <field name="name">Vins magasin</field>
             <field name="price_version_id" ref="pricelist_version_base_coda4_jaune" />
             <field name="categ_id" ref="categ24" />
@@ -2969,7 +2904,6 @@
         </record>
 
         <record id="pricelist_item_coda4_jaune_25" model="product.pricelist.item"><field name="base" eval="1" />
-            
             <field name="name">Poisson</field>
             <field name="price_version_id" ref="pricelist_version_base_coda4_jaune" />
             <field name="categ_id" ref="categ25" />
@@ -2978,7 +2912,6 @@
         </record>
 
         <record id="pricelist_item_coda4_jaune_26" model="product.pricelist.item"><field name="base" eval="1" />
-            
             <field name="name">Légumes</field>
             <field name="price_version_id" ref="pricelist_version_base_coda4_jaune" />
             <field name="categ_id" ref="categ26" />
@@ -2987,7 +2920,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080404_01" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Boeuf</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080404" />
             <field name="categ_id" ref="categ01" />
@@ -2996,7 +2928,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080404_02" model="product.pricelist.item"><field name="base" eval="1" />
-    
             <field name="name">Cheval</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080404" />
             <field name="categ_id" ref="categ02" />
@@ -3005,7 +2936,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080404_03" model="product.pricelist.item"><field name="base" eval="1" />
-    
             <field name="name">Veau</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080404" />
             <field name="categ_id" ref="categ03" />
@@ -3014,7 +2944,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080404_05" model="product.pricelist.item"><field name="base" eval="1" />
-    
             <field name="name">Porc</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080404" />
             <field name="categ_id" ref="categ05" />
@@ -3023,7 +2952,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080404_06" model="product.pricelist.item"><field name="base" eval="1" />
-    
             <field name="name">Charcuterie</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080404" />
             <field name="categ_id" ref="categ06" />
@@ -3032,7 +2960,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080404_07" model="product.pricelist.item"><field name="base" eval="1" />
-    
             <field name="name">Volailles</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080404" />
             <field name="categ_id" ref="categ07" />
@@ -3041,7 +2968,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080404_08" model="product.pricelist.item"><field name="base" eval="1" />
-    
             <field name="name">Gibier</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080404" />
             <field name="categ_id" ref="categ08" />
@@ -3050,7 +2976,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080404_09" model="product.pricelist.item"><field name="base" eval="1" />
-    
             <field name="name">Produits surgelés</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080404" />
             <field name="categ_id" ref="categ09" />
@@ -3059,7 +2984,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080404_10" model="product.pricelist.item"><field name="base" eval="1" />
-    
             <field name="name">Épices</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080404" />
             <field name="categ_id" ref="categ10" />
@@ -3068,7 +2992,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080404_11" model="product.pricelist.item"><field name="base" eval="1" />
-    
             <field name="name">Marinade</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080404" />
             <field name="categ_id" ref="categ11" />
@@ -3077,7 +3000,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080404_13" model="product.pricelist.item"><field name="base" eval="1" />
-    
             <field name="name">Abats</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080404" />
             <field name="categ_id" ref="categ13" />
@@ -3086,7 +3008,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080404_14" model="product.pricelist.item"><field name="base" eval="1" />
-    
             <field name="name">Produits confits</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080404" />
             <field name="categ_id" ref="categ14" />
@@ -3095,7 +3016,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080404_15" model="product.pricelist.item"><field name="base" eval="1" />
-    
             <field name="name">Produits congelés</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080404" />
             <field name="categ_id" ref="categ15" />
@@ -3104,7 +3024,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080404_16" model="product.pricelist.item"><field name="base" eval="1" />
-    
             <field name="name">Boeuf charollais</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080404" />
             <field name="categ_id" ref="categ16" />
@@ -3113,7 +3032,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080404_21" model="product.pricelist.item"><field name="base" eval="1" />
-    
             <field name="name">Produits R G</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080404" />
             <field name="categ_id" ref="categ21" />
@@ -3122,7 +3040,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080404_blanche_01" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Boeuf</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080404_blanche" />
             <field name="categ_id" ref="categ01" />
@@ -3131,7 +3048,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080404_blanche_02" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Cheval</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080404_blanche" />
             <field name="categ_id" ref="categ02" />
@@ -3140,7 +3056,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080404_blanche_03" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Veau</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080404_blanche" />
             <field name="categ_id" ref="categ03" />
@@ -3149,7 +3064,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080404_blanche_05" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Porc</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080404_blanche" />
             <field name="categ_id" ref="categ05" />
@@ -3158,7 +3072,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080404_blanche_06" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Charcuterie</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080404_blanche" />
             <field name="categ_id" ref="categ06" />
@@ -3167,7 +3080,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080404_blanche_07" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Volailles</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080404_blanche" />
             <field name="categ_id" ref="categ07" />
@@ -3176,7 +3088,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080404_blanche_08" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Gibier</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080404_blanche" />
             <field name="categ_id" ref="categ08" />
@@ -3185,7 +3096,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080404_blanche_09" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Produits surgelés</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080404_blanche" />
             <field name="categ_id" ref="categ09" />
@@ -3194,7 +3104,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080404_blanche_10" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Épices</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080404_blanche" />
             <field name="categ_id" ref="categ10" />
@@ -3203,7 +3112,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080404_blanche_11" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Marinade</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080404_blanche" />
             <field name="categ_id" ref="categ11" />
@@ -3212,7 +3120,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080404_blanche_13" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Abats</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080404_blanche" />
             <field name="categ_id" ref="categ13" />
@@ -3221,7 +3128,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080404_blanche_14" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Produits confits</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080404_blanche" />
             <field name="categ_id" ref="categ14" />
@@ -3230,7 +3136,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080404_blanche_15" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Produits congelés</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080404_blanche" />
             <field name="categ_id" ref="categ15" />
@@ -3239,7 +3144,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080404_blanche_16" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Boeuf charollais</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080404_blanche" />
             <field name="categ_id" ref="categ16" />
@@ -3248,7 +3152,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080404_blanche_21" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Produits R G</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080404_blanche" />
             <field name="categ_id" ref="categ21" />
@@ -3257,7 +3160,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080404_jaune_01" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Boeuf</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080404_jaune" />
             <field name="categ_id" ref="categ01" />
@@ -3266,7 +3168,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080404_jaune_02" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Cheval</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080404_jaune" />
             <field name="categ_id" ref="categ02" />
@@ -3275,7 +3176,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080404_jaune_03" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Veau</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080404_jaune" />
             <field name="categ_id" ref="categ03" />
@@ -3284,7 +3184,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080404_jaune_05" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Porc</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080404_jaune" />
             <field name="categ_id" ref="categ05" />
@@ -3293,7 +3192,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080404_jaune_06" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Charcuterie</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080404_jaune" />
             <field name="categ_id" ref="categ06" />
@@ -3302,7 +3200,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080404_jaune_07" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Volailles</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080404_jaune" />
             <field name="categ_id" ref="categ07" />
@@ -3311,7 +3208,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080404_jaune_08" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Gibier</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080404_jaune" />
             <field name="categ_id" ref="categ08" />
@@ -3320,7 +3216,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080404_jaune_09" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Produits surgelés</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080404_jaune" />
             <field name="categ_id" ref="categ09" />
@@ -3329,7 +3224,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080404_jaune_10" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Épices</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080404_jaune" />
             <field name="categ_id" ref="categ10" />
@@ -3338,7 +3232,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080404_jaune_11" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Marinade</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080404_jaune" />
             <field name="categ_id" ref="categ11" />
@@ -3347,7 +3240,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080404_jaune_13" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Abats</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080404_jaune" />
             <field name="categ_id" ref="categ13" />
@@ -3356,7 +3248,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080404_jaune_14" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Produits confits</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080404_jaune" />
             <field name="categ_id" ref="categ14" />
@@ -3365,7 +3256,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080404_jaune_15" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Produits congelés</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080404_jaune" />
             <field name="categ_id" ref="categ15" />
@@ -3374,7 +3264,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080404_jaune_16" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Boeuf charollais</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080404_jaune" />
             <field name="categ_id" ref="categ16" />
@@ -3383,7 +3272,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080404_jaune_21" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Produits R G</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080404_jaune" />
             <field name="categ_id" ref="categ21" />
@@ -3392,7 +3280,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080605_01" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Boeuf</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080605" />
             <field name="categ_id" ref="categ01" />
@@ -3401,7 +3288,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080605_02" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Cheval</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080605" />
             <field name="categ_id" ref="categ02" />
@@ -3410,7 +3296,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080605_03" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Veau</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080605" />
             <field name="categ_id" ref="categ03" />
@@ -3419,7 +3304,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080605_04" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Agneau</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080605" />
             <field name="categ_id" ref="categ04" />
@@ -3428,7 +3312,6 @@
 	</record>
 
         <record id="pricelist_item_tarif_080605_05" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Porc</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080605" />
             <field name="categ_id" ref="categ05" />
@@ -3437,7 +3320,6 @@
 	</record>
 
         <record id="pricelist_item_tarif_080605_06" model="product.pricelist.item"><field name="base" eval="1" />
-    
             <field name="name">Charcuterie</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080605" />
             <field name="categ_id" ref="categ06" />
@@ -3446,7 +3328,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080605_07" model="product.pricelist.item"><field name="base" eval="1" />
-    
             <field name="name">Volailles</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080605" />
             <field name="categ_id" ref="categ07" />
@@ -3455,7 +3336,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080605_08" model="product.pricelist.item"><field name="base" eval="1" />
-    
             <field name="name">Gibier</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080605" />
             <field name="categ_id" ref="categ08" />
@@ -3464,7 +3344,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080605_09" model="product.pricelist.item"><field name="base" eval="1" />
-    
             <field name="name">Produits surgelés</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080605" />
             <field name="categ_id" ref="categ09" />
@@ -3473,7 +3352,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080605_10" model="product.pricelist.item"><field name="base" eval="1" />
-    
             <field name="name">Épices</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080605" />
             <field name="categ_id" ref="categ10" />
@@ -3482,7 +3360,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080605_11" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Marinade</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080605" />
             <field name="categ_id" ref="categ11" />
@@ -3491,7 +3368,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080605_12" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Produits R G</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080605" />
             <field name="categ_id" ref="categ12" />
@@ -3500,7 +3376,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080605_13" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Abats</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080605" />
             <field name="categ_id" ref="categ13" />
@@ -3509,7 +3384,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080605_15" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Produits congelés</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080605" />
             <field name="categ_id" ref="categ15" />
@@ -3518,7 +3392,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080605_18" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">   </field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080605" />
             <field name="categ_id" ref="categ18" />
@@ -3527,7 +3400,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080605_blanche_01" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Boeuf</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080605_blanche" />
             <field name="categ_id" ref="categ01" />
@@ -3536,7 +3408,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080605_blanche_02" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Cheval</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080605_blanche" />
             <field name="categ_id" ref="categ02" />
@@ -3545,7 +3416,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080605_blanche_03" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Veau</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080605_blanche" />
             <field name="categ_id" ref="categ03" />
@@ -3554,7 +3424,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080605_blanche_04" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Agneau</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080605_blanche" />
             <field name="categ_id" ref="categ04" />
@@ -3563,7 +3432,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080605_blanche_05" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Porc</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080605_blanche" />
             <field name="categ_id" ref="categ05" />
@@ -3572,7 +3440,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080605_blanche_06" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Charcuterie</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080605_blanche" />
             <field name="categ_id" ref="categ06" />
@@ -3581,7 +3448,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080605_blanche_07" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Volailles</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080605_blanche" />
             <field name="categ_id" ref="categ07" />
@@ -3590,7 +3456,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080605_blanche_08" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Gibier</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080605_blanche" />
             <field name="categ_id" ref="categ08" />
@@ -3599,7 +3464,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080605_blanche_09" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Produits surgelés</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080605_blanche" />
             <field name="categ_id" ref="categ09" />
@@ -3608,7 +3472,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080605_blanche_10" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Épices</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080605_blanche" />
             <field name="categ_id" ref="categ10" />
@@ -3617,7 +3480,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080605_blanche_11" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Marinade</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080605_blanche" />
             <field name="categ_id" ref="categ11" />
@@ -3626,7 +3488,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080605_blanche_12" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Produits R G</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080605_blanche" />
             <field name="categ_id" ref="categ12" />
@@ -3635,7 +3496,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080605_blanche_13" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Abats</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080605_blanche" />
             <field name="categ_id" ref="categ13" />
@@ -3644,7 +3504,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080605_blanche_15" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Produits congelés</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080605_blanche" />
             <field name="categ_id" ref="categ15" />
@@ -3653,7 +3512,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080605_blanche_18" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">   </field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080605_blanche" />
             <field name="categ_id" ref="categ18" />
@@ -3662,7 +3520,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080605_jaune_01" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Boeuf</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080605_jaune" />
             <field name="categ_id" ref="categ01" />
@@ -3671,7 +3528,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080605_jaune_02" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Cheval</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080605_jaune" />
             <field name="categ_id" ref="categ02" />
@@ -3680,7 +3536,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080605_jaune_03" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Veau</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080605_jaune" />
             <field name="categ_id" ref="categ03" />
@@ -3689,7 +3544,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080605_jaune_04" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Agneau</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080605_jaune" />
             <field name="categ_id" ref="categ04" />
@@ -3698,7 +3552,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080605_jaune_05" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Porc</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080605_jaune" />
             <field name="categ_id" ref="categ05" />
@@ -3707,7 +3560,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080605_jaune_06" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Charcuterie</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080605_jaune" />
             <field name="categ_id" ref="categ06" />
@@ -3716,7 +3568,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080605_jaune_07" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Volailles</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080605_jaune" />
             <field name="categ_id" ref="categ07" />
@@ -3725,7 +3576,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080605_jaune_08" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Gibier</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080605_jaune" />
             <field name="categ_id" ref="categ08" />
@@ -3734,7 +3584,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080605_jaune_09" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Produits surgelés</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080605_jaune" />
             <field name="categ_id" ref="categ09" />
@@ -3743,7 +3592,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080605_jaune_10" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Épices</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080605_jaune" />
             <field name="categ_id" ref="categ10" />
@@ -3752,7 +3600,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080605_jaune_11" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Marinade</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080605_jaune" />
             <field name="categ_id" ref="categ11" />
@@ -3761,7 +3608,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080605_jaune_12" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Produits R G</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080605_jaune" />
             <field name="categ_id" ref="categ12" />
@@ -3770,7 +3616,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080605_jaune_13" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Abats</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080605_jaune" />
             <field name="categ_id" ref="categ13" />
@@ -3779,7 +3624,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080605_jaune_15" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Produits congelés</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080605_jaune" />
             <field name="categ_id" ref="categ15" />
@@ -3788,7 +3632,6 @@
         </record>
 
         <record id="pricelist_item_tarif_080605_jaune_18" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">   </field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_080605_jaune" />
             <field name="categ_id" ref="categ18" />
@@ -3797,7 +3640,6 @@
         </record>
 
         <record id="pricelist_item_tarif_190183_04" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Agneau</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_190183" />
             <field name="categ_id" ref="categ04" />
@@ -3806,7 +3648,6 @@
         </record>
 
         <record id="pricelist_item_tarif_190183_blanche_04" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Agneau</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_190183_blanche" />
             <field name="categ_id" ref="categ04" />
@@ -3815,7 +3656,6 @@
         </record>
 
         <record id="pricelist_item_tarif_190183_jaune_04" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Agneau</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_190183_jaune" />
             <field name="categ_id" ref="categ04" />
@@ -3824,16 +3664,19 @@
         </record>
 
         <record id="pricelist_item_tarif_selon_prix_achat" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Toutes Catégories</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_selon_prix_achat" />
-            <field name="price_discount" eval="0.2" />
-            <field name="bareme_id" ref="product_pricelist_bareme_achat" />
             <field name="base" ref="product_price_type_prix_achat" />
         </record>
 
-        <record id="pricelist_item_tarif_collectivite" model="product.pricelist.item"><field name="base" eval="1" />
+        <record id="pricelist_item_tarif_selon_prix_achat_plus_10c" model="product.pricelist.item"><field name="base" eval="1" />
+            <field name="name">Toutes Catégories</field>
+            <field name="price_version_id" ref="pricelist_version_base_tarif_selon_prix_achat_plus_10c" />
+            <field name="base" ref="product_price_type_prix_achat" />
+            <field name="price_surcharge" eval="0.1"/> 
+        </record>
 
+        <record id="pricelist_item_tarif_collectivite" model="product.pricelist.item"><field name="base" eval="1" />
             <field name="name">Toutes Catégories</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_collectivite" />
             <field name="price_discount" eval="0.3" />
@@ -3841,25 +3684,11 @@
             <field name="base" ref="product_price_type_prix_achat" />
         </record>
 
-        <record id="pricelist_item_tarif_hilton" model="product.pricelist.item"><field name="base" eval="1" />
-
-            <field name="name">Toutes Catégories</field>
-            <field name="price_version_id" ref="pricelist_version_base_tarif_hilton" />
-            <field name="base" ref="product_price_type_prix_hilton" />
-        </record>
-
-        <record id="pricelist_item_tarif_hilton_jaune" model="product.pricelist.item"><field name="base" eval="1" />
-
-            <field name="name">Toutes Catégories</field>
-            <field name="price_version_id" ref="pricelist_version_base_tarif_hilton_jaune" />
-            <field name="base" ref="product_price_type_prix_hilton" />
-        </record>
-
         <record id="pricelist_item_tarif_hilton_blanche" model="product.pricelist.item"><field name="base" eval="1" />
-
             <field name="name">Toutes Catégories</field>
             <field name="price_version_id" ref="pricelist_version_base_tarif_hilton_blanche" />
-            <field name="base" ref="product_price_type_prix_hilton" />
+            <field name="price_discount" eval="0.096950" />
+            <field name="bareme_id" ref="product_pricelist_bareme_c17" />
         </record>
 
 

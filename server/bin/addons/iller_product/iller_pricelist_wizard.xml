@@ -24,5 +24,16 @@
                   type="wizard"
                   parent="product.menu_product_pricelist_main" />
 
+       <wizard id="nouveau_prix_achat"
+                name="nouveau.prix.achat"
+                string="Saisie des nouveaux prix d'achat"
+                model="product.product"
+                menu="False" />
+
+        <menuitem action="nouveau_prix_achat"
+                  id="menu_nouveau_prix_achat"
+                  type="wizard"
+                  parent="product.menu_product_pricelist_main" />
+
     </data>
 </openerp>

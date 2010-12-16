@@ -14,7 +14,7 @@ _configure_form = """<?xml version="1.0" encoding="utf-8" ?>
     <separator colspan="4" string="Informations Generales" />
     <field name="title" colspan="4" />
     <field name="client" required="1" />
-    <field name="tarif_promo"/>
+    <field name="tarif_initial"/>
     <newline/>
     <field name="start_date" required="1" />
     <field name="end_date" required="1" />
@@ -26,7 +26,7 @@ _configure_form = """<?xml version="1.0" encoding="utf-8" ?>
 _configure_fields = {
         'title': {'type': 'char', 'size': 64, 'string': 'Nom du tarif', 'required': True},
         'client': {'type': 'many2one', 'relation': 'res.partner', 'string': 'Client'},
-        'tarif_promo': {'type': 'many2one', 'relation': 'product.pricelist', 'help': 'Si le prix promo est inférieur au prix spécial du client, on prend le prix promo', 'string': 'Tarif Promo'},
+        'tarif_initial': {'type': 'many2one', 'relation': 'product.pricelist', 'help': 'Tarif de départ auquel se rajouteront les prix spéciaux', 'string': 'Tarif initial'},
         'start_date': {'type': 'date', 'required': True, 'string': 'Date de debut'},
         'end_date': {'type': 'date', 'required': True, 'string': 'Date de fin'},
         'products': {'type': 'one2many', 'relation': 'product.tarif.special.client', 'string': 'Produits'},
@@ -161,7 +161,7 @@ class wizard_configure_tarif_special_client(wizard.interface):
                                                 'name': p_data.get('name'), 
                                                 'product_id': product_id,
                                                 'base': base,
-                                                'base_pricelist_id': data['form']['tarif_promo'],
+                                                'base_pricelist_id': data['form']['tarif_initial'],
                                                 'price_discount' :-1.0,
                                                 'price_surcharge': product[2].get('prix_special'),
                                                 'price_version_id': version_id})
@@ -179,12 +179,11 @@ class wizard_configure_tarif_special_client(wizard.interface):
         version_obj = pool_obj.get('product.pricelist.version')
         client_obj = pool_obj.get('res.partner')
 
-        ## On récupère la liste de prix associée au client et on la duplique 
+        ## On récupère la liste de prix initiale servant de base et on la duplique 
         client = client_obj.browse(cr, uid, data['form']['client']) 
-        pricelist_id = client.property_product_pricelist.id
+        pricelist_id = data['form']['tarif_initial'] 
         new_pricelist_id = pricelist_obj.copy(cr, uid, pricelist_id, {'name': data['form']['title'],
-                                                                      'tarif_special': True,
-                                                                      'tarif_promo_comparatif_id': data['form']['tarif_promo'] })
+                                                                      'tarif_special': True })
 
         ## On cherche la version de base pour la liste de prix
         ## On cherche la version en cours pendant la promo

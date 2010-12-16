@@ -227,6 +227,7 @@ class product_pricelist(osv.osv):
                             price = res2['price']
                 else:
                     price_type = price_type_obj.browse(cr, uid, int(res['base']))
+
                     price = currency_obj.compute(cr, uid,
                             price_type.currency_id.id, res['currency_id'],
                             product_obj.price_get(cr, uid, [prod_id],
@@ -251,6 +252,7 @@ class product_pricelist(osv.osv):
                 uom = product.uos_id or product.uom_id
                 result[id] = self.pool.get('product.uom')._compute_price(cr,
                         uid, uom.id, result[id], context['uom'])
+
         return result
 
 product_pricelist()

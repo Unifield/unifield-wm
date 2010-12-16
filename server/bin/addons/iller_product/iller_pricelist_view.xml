@@ -77,7 +77,6 @@
                     <field name="promo_blanche" />
                     <field name="promo_jaune" />
                     <field name="tarif_special" />
-                    <field name="tarif_promo_comparatif_id" />
                 </xpath>
             </field>
         </record>
@@ -92,7 +91,6 @@
                     <field name="promo_blanche" />
                     <field name="promo_jaune" />
                     <field name="tarif_special" />
-                    <field name="tarif_promo_comparatif_id" />
                 </xpath>
             </field>
         </record>
@@ -177,6 +175,35 @@
             </field>
         </record>
 
+       <record id="product_nouveau_prix_achat_tree_view" model="ir.ui.view">
+            <field name="name">product.nouveau.prix.achat.tree</field>
+            <field name="model">product.nouveau.prix.achat</field>
+            <field name="type">tree</field>
+            <field eval="7" name="priority"/>
+            <field name="arch" type="xml">
+                <tree string="Produits ayant un nouveau prix d'achat">
+                    <field name="product_id"/>
+                    <field name="ancien_prix_achat"/>
+                    <field name="nouveau_prix_achat"/>
+                </tree>
+            </field>
+        </record>
+
+      <record id="product_nouveau_prix_achat_form_view" model="ir.ui.view">
+            <field name="name">product.nouveau.prix.achat.form</field>
+            <field name="model">product.nouveau.prix.achat</field>
+            <field name="type">form</field>
+            <field eval="7" name="priority"/>
+            <field name="arch" type="xml">
+                <form string="Produits ayant un nouveau prix d'achat">
+                    <field name="product_id" on_change="on_change_product_id(product_id)"/>
+                    <newline/>
+                    <field name="ancien_prix_achat" readonly="1"/>
+                    <newline/>
+                    <field name="nouveau_prix_achat"/>
+                </form>
+            </field>
+        </record>
 
     </data>
 </openerp>

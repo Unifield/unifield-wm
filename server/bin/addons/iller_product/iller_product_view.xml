@@ -14,7 +14,9 @@
                             <separator string="Achat" />
                             <field name="standard_price" />
                             <field name="prix_achat" on_change="coeff_price_change(prix_achat, coeff_depart)" />
+<!--
                             <field name="old_purchase_price" />
+-->
                             <field name="coeff_depart" on_change="coeff_price_change(prix_achat, coeff_depart)" />
                             <field groups="base.group_extended" name="cost_method"/>
                         </group>
@@ -26,6 +28,20 @@
                             <field name="type_cond" on_change="cond_onchange(type_cond, type_preselec)" required="1"/>
                             <field name="type_preselec" on_change="preselec_onchange(type_cond, type_preselec)" required="1"/>
                         </group>
+			<separator colspan="4" />
+                        <field colspan="4" mode="tree,form" name="price_history" nolabel="1" widget="one2many_list" readonly="1">
+                               <form>
+                                     <field name="name"/>
+                                     <field name="nouveau_prix_achat"/>
+                                     <field name="nouveau_prix_vente"/>
+                               </form>
+                              <tree string = "Historique des Prix">
+                                     <field name="name"/>
+                                     <field name="nouveau_prix_achat"/>
+                                     <field name="nouveau_prix_vente"/>
+                                     <field name="fin"/>
+                               </tree>
+                        </field>
                         <separator colspan="4" string="Promos" />
                         <field name="coeff_blanche" on_change="promo_blanche_change(coeff_blanche, prix_achat)" />
                         <field name="prix_blanche" />
@@ -34,7 +50,6 @@
 -->
                         <field name="prix_decembre" />
 			<newline/>
-			<field name="prix_hilton" />
                         <field colspan="4" name="seller_ids" nolabel="1"/>
                     </page>
                 </xpath>

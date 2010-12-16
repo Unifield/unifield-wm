@@ -29,6 +29,12 @@ import pooler
 from datetime import date
 from datetime import datetime
 from datetime import timedelta
+import time
+
+def rounding(f, r):
+    if not r:
+        return f
+    return round(f / r) * r
 
 class product_pricelist_bareme(osv.osv):
     _name = 'product.pricelist.bareme'
@@ -78,8 +84,11 @@ class product_pricelist_item(osv.osv):
         '''
         bareme_obj = self.pool.get('product.pricelist.bareme')
         if 'bareme_id' in vals and vals['bareme_id']:
-            bareme = bareme_obj.read(cr, uid, vals.get('bareme_id'), ['valeur'], context)
-            vals['price_discount'] = bareme.get('valeur')-1
+            if vals['bareme_id']:
+               bareme = bareme_obj.read(cr, uid, vals.get('bareme_id'), ['valeur'], context)
+               vals['price_discount'] = bareme.get('valeur')-1
+        else:
+           vals['price_discount'] = 0.0
 
         return super(product_pricelist_item, self).write(cr, uid, ids, vals, context=context)
 
@@ -94,9 +103,9 @@ class product_pricelist_item(osv.osv):
         else:
             price_type = self.pool.get('product.price.type').browse(cr, uid, base_id)
             if price_type.name == u'Prix Special':
+               print "tarif special"
                return {'value': {'price_discount': -1.0}}
-            else:
-               return {'value': {'price_discount': 0.0}}
+        return {'value': {'price_discount': 0.0}}
 
 product_pricelist_item()
 
@@ -109,15 +118,13 @@ class product_pricelist(osv.osv):
             'promo_blanche': fields.boolean(string='Promo blanche'),
             'tarif_special' : fields.boolean(string='Tarif spécial'),
             'price_discount': fields.float('Price Discount', digits=(16,6)),
-	    'tarif_promo_comparatif_id':  fields.many2one('product.pricelist', 'Tarif promo à comparer',
-            ondelete='cascade',
-            help="Si le tarif promotionnel est moins cher que le tarif spécial, c'est lui qui sera retenu"),
     }
 
     def price_get (self, cr, uid, ids, prod_id, qty, partner=None, context=None):
-	print "DEBUT iller_price_get, ids = %s" %ids
-	# Calcul habituel du prix
-	res = super(product_pricelist,self).price_get(cr, uid, ids, prod_id, qty, partner, context)
+        if context and ('date' in context):
+           context['datestandard'] = context['date']
+	# Calcul habituel du prix 
+        res = self._orig_price_get(cr, uid, ids, prod_id, qty, partner, context)
 
 	# L'éventuel prix de Noel du produit est appliqué si la date de la commande est incluse dans la promo de Noel 
 	# Remarque importante: ce prix de Noel est bien le même pour TOUS
@@ -171,26 +178,153 @@ class product_pricelist(osv.osv):
 	# Ici commence le traitement très particulier des clients ayant un tarif spécial à comparer avec un promo.
 	# Le tarif spécial vient d'être récupéré dans la variable res
         # On commence par récupérer la liste de prix du client et on en extrait la liste de prix des promos
-        print "res initial = %s" %res
         if partner:
            client_obj = self.pool.get('res.partner')
            client = client_obj.browse(cr, uid, partner) 
    	   pricelist_initiale = client.property_product_pricelist
-           if pricelist_initiale.tarif_special:
-              print "CE CLIENT A UN TARIF SPECIAL"
-              pricelist_promo = client.property_product_pricelist.tarif_promo_comparatif_id
-              print "pricelist_promo = %s" %pricelist_promo
-              if pricelist_promo:
-                 print "CE TARIF SPECIAL A UNE LISTE DE PROMO"
-                 # On applique la liste de prix promo au client pour pouvoir calculer le tarif promo
-                 client_obj.write(cr, uid, client.id, {'property_product_pricelist': pricelist_promo.id})
-                 res_promo = super(product_pricelist,self).price_get(cr, uid, [pricelist_promo.id], prod_id, qty, partner, context)
-                 print "res_promo = %s" %res_promo
-                 # On remet en place le tarif initial
-                 client_obj.write(cr, uid, client.id, {'property_product_pricelist': pricelist_initiale.id})
-	
-        print "RES returned = %s" %res
+#              if pricelist_promo:
+#                 print "CE TARIF SPECIAL A UNE LISTE DE PROMO"
+#                 # On applique la liste de prix promo au client pour pouvoir calculer le tarif promo
+#                 client_obj.write(cr, uid, client.id, {'property_product_pricelist': pricelist_promo.id})
+#                 res_promo = super(product_pricelist,self).price_get(cr, uid, [pricelist_promo.id], prod_id, qty, partner, context)
+#                 print "res_promo = %s" %res_promo
+#                 # On remet en place le tarif initial
+#                 client_obj.write(cr, uid, client.id, {'property_product_pricelist': pricelist_initiale.id})
+
 	return res
+
+    def _orig_price_get(self, cr, uid, ids, prod_id, qty, partner=None, context=None):
+        '''
+        fonction d'orgine: ajoute juste le passage du contexte à 2 endroits
+        context = {
+            'uom': Unit of Measure (int),
+            'partner': Partner ID (int),
+            'date': Date of the pricelist (%Y-%m-%d),
+            'datestandard'
+        }
+        '''
+        context = context or {}
+        currency_obj = self.pool.get('res.currency')
+        product_obj = self.pool.get('product.product')
+        supplierinfo_obj = self.pool.get('product.supplierinfo')
+        price_type_obj = self.pool.get('product.price.type')
+
+        if context and ('partner_id' in context):
+            partner = context['partner_id']
+        context['partner_id'] = partner
+        date = time.strftime('%Y-%m-%d')
+        if context and ('date' in context):
+            date = context['date']
+        result = {}
+        for id in ids:
+            cr.execute('SELECT * ' \
+                    'FROM product_pricelist_version ' \
+                    'WHERE pricelist_id = %s AND active=True ' \
+                        'AND (date_start IS NULL OR date_start <= %s) ' \
+                        'AND (date_end IS NULL OR date_end >= %s) ' \
+                    'ORDER BY id LIMIT 1', (id, date, date))
+            plversion = cr.dictfetchone()
+
+            if not plversion:
+                raise osv.except_osv(_('Warning !'),
+                        _('No active version for the selected pricelist !\n' \
+                                'Please create or activate one.'))
+
+            cr.execute('SELECT id, categ_id ' \
+                    'FROM product_template ' \
+                    'WHERE id = (SELECT product_tmpl_id ' \
+                        'FROM product_product ' \
+                        'WHERE id = %s)', (prod_id,))
+            tmpl_id, categ = cr.fetchone()
+            categ_ids = []
+            while categ:
+                categ_ids.append(str(categ))
+                cr.execute('SELECT parent_id ' \
+                        'FROM product_category ' \
+                        'WHERE id = %s', (categ,))
+                categ = cr.fetchone()[0]
+                if str(categ) in categ_ids:
+                    raise osv.except_osv(_('Warning !'),
+                            _('Could not resolve product category, ' \
+                                    'you have defined cyclic categories ' \
+                                    'of products!'))
+            if categ_ids:
+                categ_where = '(categ_id IN (' + ','.join(categ_ids) + '))'
+            else:
+                categ_where = '(categ_id IS NULL)'
+
+            cr.execute(
+                'SELECT i.*, pl.currency_id '
+                'FROM product_pricelist_item AS i, '
+                    'product_pricelist_version AS v, product_pricelist AS pl '
+                'WHERE (product_tmpl_id IS NULL OR product_tmpl_id = %s) '
+                    'AND (product_id IS NULL OR product_id = %s) '
+                    'AND (' + categ_where + ' OR (categ_id IS NULL)) '
+                    'AND price_version_id = %s '
+                    'AND (min_quantity IS NULL OR min_quantity <= %s) '
+                    'AND i.price_version_id = v.id AND v.pricelist_id = pl.id '
+                'ORDER BY sequence LIMIT 1',
+                (tmpl_id, prod_id, plversion['id'], qty))
+            res = cr.dictfetchone()
+
+            if res:
+                if res['base'] == -1:
+                    if not res['base_pricelist_id']:
+                        price = 0.0
+                    else:
+                        # passage du contexte
+                        price_tmp = self.price_get(cr, uid,
+                                [res['base_pricelist_id']], prod_id,
+                                qty,context=context)[res['base_pricelist_id']]
+                        ptype_src = self.browse(cr, uid,
+                                res['base_pricelist_id']).currency_id.id
+                        price = currency_obj.compute(cr, uid, ptype_src,
+                                res['currency_id'], price_tmp, round=False)
+                elif res['base'] == -2:
+                    where = []
+                    if partner:
+                        where = [('name', '=', partner) ]
+                    sinfo = supplierinfo_obj.search(cr, uid,
+                            [('product_id', '=', tmpl_id)] + where)
+                    price = 0.0
+                    if sinfo:
+                        cr.execute('SELECT * ' \
+                                'FROM pricelist_partnerinfo ' \
+                                'WHERE suppinfo_id IN (' + \
+                                    ','.join(map(str, sinfo)) + ') ' \
+                                    'AND min_quantity <= %s ' \
+                                'ORDER BY min_quantity DESC LIMIT 1', (qty,))
+                        res2 = cr.dictfetchone()
+                        if res2:
+                            price = res2['price']
+                else:
+                    price_type = price_type_obj.browse(cr, uid, int(res['base']))
+                    # passage du contexte
+                    price = currency_obj.compute(cr, uid,
+                            price_type.currency_id.id, res['currency_id'],
+                            product_obj.price_get(cr, uid, [prod_id],
+                                price_type.field,context=context)[prod_id], round=False)
+
+                price_limit = price
+
+                price = price * (1.0+(res['price_discount'] or 0.0))
+                price = rounding(price, res['price_round'])
+                price += (res['price_surcharge'] or 0.0)
+                if res['price_min_margin']:
+                    price = max(price, price_limit+res['price_min_margin'])
+                if res['price_max_margin']:
+                    price = min(price, price_limit+res['price_max_margin'])
+            else:
+                # False means no valid line found ! But we may not raise an
+                # exception here because it breaks the search
+                price = False
+            result[id] = price
+            if context and ('uom' in context):
+                product = product_obj.browse(cr, uid, prod_id)
+                uom = product.uos_id or product.uom_id
+                result[id] = self.pool.get('product.uom')._compute_price(cr,
+                        uid, uom.id, result[id], context['uom'])
+        return result
 		
 product_pricelist()
 
@@ -209,10 +343,29 @@ class product_tarif_special_client(osv.osv):
         if not prod_id:
            return {}
         product = self.pool.get('product.product').browse(cr, uid, prod_id)
-        return {'value': {'prix_vente_initial' : product.list_price}}
-
+        return {'value': {'prix_vente_initial' : product.list_price, 'categ_id': False}}
 
 product_tarif_special_client()
+
+class product_nouveau_prix_achat(osv.osv):
+    _name = 'product.nouveau.prix.achat'
+    _description = 'Nouveau prix d\'achat'
+
+    _columns = {
+            'product_id': fields.many2one('product.product', 'Produit'),
+            'nouveau_prix_achat': fields.float(digits=(16, int(config['price_accuracy'])), string='Nouveau Prix d\'Achat', required=True),
+            'ancien_prix_achat': fields.float(digits=(16, int(config['price_accuracy'])), string='Prix d\'Achat actuel', required=True),
+
+    }
+
+    def on_change_product_id (self, cr, uid, ids, prod_id=False):
+        if not prod_id:
+           return {}
+        product = self.pool.get('product.product').browse(cr, uid, prod_id)
+        return {'value': {'ancien_prix_achat' : product.prix_achat}}
+
+
+product_nouveau_prix_achat()
 
 class product_pricelist_promo(osv.osv):
     _name = 'product.pricelist.promo'

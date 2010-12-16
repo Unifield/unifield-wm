@@ -26,8 +26,28 @@ from osv import osv
 from tools import config
 from product import _common
 from datetime import date
+from datetime import datetime
 import pooler
 import time
+
+class product_price_history(osv.osv):
+    _name = 'product.price.history'
+    _description = 'Historique Prix Achat'
+    _order = 'name desc'
+
+    _columns = {
+        'name': fields.date('Valable à partir du',required=True,select=1),
+        'nouveau_prix_achat': fields.float('Prix d\'achat',required=True, digits=(16,4)),
+        'nouveau_prix_vente': fields.float('Prix de vente',required=True, digits=(16,4)),
+        'product_id': fields.many2one('product.product','Product',ondelete='cascade', select=1),
+        'fin' : fields.char(size=1, string=' '),
+    }
+    _defaults = {
+        'name': lambda *a: time.strftime('%Y-%m-%d'),
+    }
+
+product_price_history()
+
 
 class product_product(osv.osv):
     _inherit = 'product.product'
@@ -42,11 +62,39 @@ class product_product(osv.osv):
             for prd in self.browse(cr, uid, ids):
                 vals['old_purchase_price'] = prd.prix_achat
                 vals['list_price'] = vals.get('prix_achat', prd.standard_price)*vals.get('coeff_depart', prd.coeff_depart)
-
+ 
             if 'coeff_blanche' in vals:
                 vals['prix_blanche'] = vals.get('prix_achat', prd.standard_price)*vals.get('coeff_blanche', prd.coeff_blanche)
 
         return super(product_product, self).write(cr, uid, ids, vals, context=context)
+
+
+    def price_get(self, cr, uid, ids, ptype='list_price', context={}):
+        res = {}
+        if not context:
+            context = {}
+        product_uom_obj = self.pool.get('product.uom')
+        for product in self.browse(cr, uid, ids, context=context):
+            res[product.id] = product[ptype] or 0.0
+            if ptype == 'list_price':
+                res[product.id] = (res[product.id] * (product.price_margin or 1.0)) + \
+                        product.price_extra
+            if ptype in ('list_price') and context.get('datestandard'):
+                cr.execute('''SELECT nouveau_prix_vente FROM product_price_history WHERE product_id=%s  AND name<=%s ORDER BY name desc LIMIT 1''',(product.id,context['datestandard']))
+                ret = cr.fetchone()
+                if ret:
+                    res[product.id] = ret[0]
+            if ptype in ('prix_achat') and context.get('datestandard'):
+                cr.execute('''SELECT nouveau_prix_achat FROM product_price_history WHERE product_id=%s AND name<=%s ORDER BY name desc LIMIT 1''',(product.id,context['datestandard']))
+                ret = cr.fetchone()
+                if ret:
+                    res[product.id] = ret[0]
+
+            if 'uom' in context:
+                uom = product.uos_id or product.uom_id
+                res[product.id] = product_uom_obj._compute_price(cr, uid,
+                        uom.id, res[product.id], context['uom'])
+        return res
 
 
     _columns = {
@@ -59,7 +107,6 @@ class product_product(osv.osv):
         'coeff_blanche': fields.float(digits=(16,2), string='Coeff. blanche'),
         'coeff_jaune': fields.many2one('product.pricelist.bareme', string='Barème promo jaune'),
         'prix_blanche': fields.float(digits=(16, int(config['price_accuracy'])), string='Prix blanche'),
-        'prix_hilton': fields.float(digits=(16, int(config['price_accuracy'])), string='Prix Hilton'),
         'prix_decembre': fields.float(digits=(16, int(config['price_accuracy'])), string='Prix décembre'),
 
         'type_pesee': fields.selection([('0', 'Poids variable'), ('1', 'Prix fixe'), ('2', 'Poids fixe'),
@@ -67,6 +114,8 @@ class product_product(osv.osv):
         'code_affectation': fields.selection([('DECP', 'Découpe'), ('PREP', 'Préparation')], string='Code Affectation'),
         'liste_prepa': fields.selection([('0', 'Rien'), ('1', 'Congelé'), ('2', 'Salaison'), ('3', 'Volaille')],
                                                 string='Liste préparation', required=True),
+        'price_history': fields.one2many('product.price.history', 'product_id', 'Historique des Prix'),
+
     }
 
     _defaults = {
