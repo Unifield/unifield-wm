@@ -154,7 +154,7 @@ class wizard_configure_promo(wizard.interface):
             ## le prix promo blanche pour chaque produit
             for product in product_ids:
                 p_data = prod_obj.read(cr, uid, product, ['name'])
-                item_id = item_obj.create(cr, uid, {'sequence': 1,
+                item_id = item_obj.create(cr, uid, {'sequence': 3,
                                                     'name': p_data.get('name'), 
                                                     'product_id': product,
                                                     'base': base,
@@ -177,7 +177,7 @@ class wizard_configure_promo(wizard.interface):
             ## le barème c15 pour chaque produit
             for product in product_ids:
                 p_data = prod_obj.read(cr, uid, product, ['name'])
-                item_id = item_obj.create(cr, uid, {'sequence': 1,
+                item_id = item_obj.create(cr, uid, {'sequence': 3,
                                                     'name': p_data.get('name'), 
                                                     'product_id': product,
                                                     'base': base,

@@ -14,9 +14,6 @@
                             <separator string="Achat" />
                             <field name="standard_price" />
                             <field name="prix_achat" on_change="coeff_price_change(prix_achat, coeff_depart)" />
-<!--
-                            <field name="old_purchase_price" />
--->
                             <field name="coeff_depart" on_change="coeff_price_change(prix_achat, coeff_depart)" />
                             <field groups="base.group_extended" name="cost_method"/>
                         </group>

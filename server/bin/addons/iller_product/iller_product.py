@@ -37,8 +37,8 @@ class product_price_history(osv.osv):
 
     _columns = {
         'name': fields.date('Valable à partir du',required=True,select=1),
-        'nouveau_prix_achat': fields.float('Prix d\'achat',required=True, digits=(16,4)),
-        'nouveau_prix_vente': fields.float('Prix de vente',required=True, digits=(16,4)),
+        'nouveau_prix_achat': fields.float('Prix d\'achat',required=True, digits=(16,2)),
+        'nouveau_prix_vente': fields.float('Prix de vente',required=True, digits=(16,2)),
         'product_id': fields.many2one('product.product','Product',ondelete='cascade', select=1),
         'fin' : fields.char(size=1, string=' '),
     }
@@ -60,7 +60,6 @@ class product_product(osv.osv):
         '''
         if 'prix_achat' in vals:
             for prd in self.browse(cr, uid, ids):
-                vals['old_purchase_price'] = prd.prix_achat
                 vals['list_price'] = vals.get('prix_achat', prd.standard_price)*vals.get('coeff_depart', prd.coeff_depart)
  
             if 'coeff_blanche' in vals:
@@ -99,7 +98,6 @@ class product_product(osv.osv):
 
     _columns = {
         'prix_achat': fields.float(digits=(16, int(config['price_accuracy'])), string='Prix d\'achat'),
-        'old_purchase_price': fields.float(digits=(16, int(config['price_accuracy'])), string='Ancien prix d\'achat', readonly=True),
         'coeff_depart': fields.float(digits=(16,2), string='Coeff. départ'),
         'type_cond': fields.selection([('0000', 'PIECE'), ('0001', 'KILO'), ('0002', 'CARTON'), ('0003', 'BARQUETTE')], 
                                                                                             string='Type conditionnement'),

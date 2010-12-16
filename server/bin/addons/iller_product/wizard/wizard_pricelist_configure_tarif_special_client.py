@@ -16,8 +16,6 @@ _configure_form = """<?xml version="1.0" encoding="utf-8" ?>
     <field name="client" required="1" />
     <field name="tarif_initial"/>
     <newline/>
-    <field name="start_date" required="1" />
-    <field name="end_date" required="1" />
     <separator colspan="4" />
     <field name="products" nolabel="1" colspan="4" width="1000" height="450" />
 </form>"""
@@ -27,16 +25,8 @@ _configure_fields = {
         'title': {'type': 'char', 'size': 64, 'string': 'Nom du tarif', 'required': True},
         'client': {'type': 'many2one', 'relation': 'res.partner', 'string': 'Client'},
         'tarif_initial': {'type': 'many2one', 'relation': 'product.pricelist', 'help': 'Tarif de départ auquel se rajouteront les prix spéciaux', 'string': 'Tarif initial'},
-        'start_date': {'type': 'date', 'required': True, 'string': 'Date de debut'},
-        'end_date': {'type': 'date', 'required': True, 'string': 'Date de fin'},
         'products': {'type': 'one2many', 'relation': 'product.tarif.special.client', 'string': 'Produits'},
     }
-
-_error_date_form = """<?xml version="1.0" encoding="utf-8" ?>
-    <form string="Erreur sur les dates">
-        <label colspan="4" string="La date de debut doit etre inferieure a la date de fin" />
-    </form>
-"""
 
 _error_product_form = """<?xml version="1.0" encoding="utf-8" ?>
     <form string="Erreur sur les produits">
@@ -53,8 +43,6 @@ class wizard_configure_tarif_special_client(wizard.interface):
             Vérifie que la date de début est inférieur à la date de fin
             et qu'au moins un produit est fourni pour le tarif
         '''
-        if data['form']['start_date'] > data['form']['end_date']:
-            return 'error_date'
         if len(data['form']['products']) == 0:
             return 'error_product'
         return 'create'
@@ -70,16 +58,10 @@ class wizard_configure_tarif_special_client(wizard.interface):
         item_obj = pooler.get_pool(cr.dbname).get('product.pricelist.item')
 
         name = data['form']['title']
-        end_date = data['form']['end_date']
-        start_date = data['form']['start_date']
+        end_date = datetime(2100, 1, 1, 0, 0)
+        start_date = datetime(1900, 1, 1, 0, 0)
 
-        ## La version précédente s'arrête à j-1 du début du tarif spécial
-        n_end_date = (datetime.strptime(end_date, '%Y-%m-%d')+timedelta(days=1)).strftime('%Y-%m-%d')
-        ## La version précédente démarre à j+1 de la fin du tarif spécial
-        n_start_date = (datetime.strptime(start_date, '%Y-%m-%d')-timedelta(days=1)).strftime('%Y-%m-%d')
-
-
-        ## On cherche la version de base
+        ## On cherche la version de base pour ne garder que celle-la
         base_version = False
         base_ids = version_obj.search(cr, uid, [('pricelist_id', '=', pricelist_id), ('base_ok', '=', True)])
         if not base_ids:
@@ -88,50 +70,17 @@ class wizard_configure_tarif_special_client(wizard.interface):
                 return False
         base_version = base_ids[0]
 
-        # On cherche si le tarif englobe une ou plusieurs promos existantes
-        included_ids = version_obj.search(cr, uid, [('pricelist_id', '=', pricelist_id), \
-                                                    ('date_end', '<=', end_date), \
-                                                    ('date_start', '>=', start_date)])
-        if included_ids:
-            for included_id in included_ids:
-                version_obj.unlink(cr, uid, [included_id])
+        all_version_ids = version_obj.search(cr, uid, [('pricelist_id', '=', pricelist_id)])
+        ## On efface toutes les versions qui ne correspondent pas a la version de base
+        for version_id in all_version_ids:
+            if version_id != base_version:
+                version_obj.unlink(cr, uid, [version_id])
 
-        ## On cherche si le tarif se situe à l'intérieur d'une version existante
-        version_ids = version_obj.search(cr, uid, [('pricelist_id', '=', pricelist_id), \
-                                                   ('date_start', '<=', start_date),\
-                                                   ('date_end', '>=', end_date)])
-
-        if version_ids:
-            v_data = version_obj.read(cr, uid, version_ids[0], ['date_start', 'date_end', 'name'])
-            if v_data.get('date_start') == start_date:
-                version_obj.unlink(cr, uid, [version_ids[0]])
-            else:
-                version_obj.write(cr, uid, [version_ids[0]], {'date_end': n_start_date})
-            next_id = version_obj.copy(cr, uid, base_version, {'date_start': n_end_date, 
-                                                               'date_end': v_data.get('date_end'),
-                                                               'base_ok': False,
-                                                               'name': v_data.get('name')})
-            version_obj.write(cr, uid, [next_id], {'active': True})
-
-        ## On cherche si le tarif est à cheval sur deux versions existantes
-        else:
-            before_ids = version_obj.search(cr, uid, [('pricelist_id', '=', pricelist_id), \
-                                                      ('date_start', '<', start_date), \
-                                                      ('date_end', '>', start_date), \
-                                                      ('date_end', '<', end_date)])
-            after_ids = version_obj.search(cr, uid, [('pricelist_id', '=', pricelist_id), \
-                                                     ('date_end', '>', end_date), \
-                                                     ('date_start', '<', end_date), \
-                                                     ('date_start', '>', start_date)])
-            if before_ids:
-                version_obj.write(cr, uid, before_ids, {'date_end': n_start_date})
-            if after_ids:
-                version_obj.write(cr, uid, after_ids, {'date_start': n_end_date})
-
-        return version_obj.copy(cr, uid, base_version, {'date_start': start_date, 
-                                                        'date_end': end_date, 
-                                                        'base_ok': False,
-                                                        'name': name} )
+        version_obj.write(cr, uid, [base_version], {
+                                                   'date_start' : start_date,
+                                                   'date_end': end_date,
+                                                   })
+        return base_version 
 
 
     def _create_item(self, cr, uid, data, version_id):
@@ -212,13 +161,6 @@ class wizard_configure_tarif_special_client(wizard.interface):
             'actions': [],
             'result': {'type': 'choice',
                        'next_state': _valid_form,}
-        },
-        'error_date': {
-            'actions': [],
-            'result': {'type': 'form',
-                       'arch': _error_date_form,
-                       'fields': {},
-                       'state': [('end', 'Annuler')]},
         },
         'error_product': {
             'actions': [],

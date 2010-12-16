@@ -87,12 +87,13 @@ class product_pricelist_item(osv.osv):
             if vals['bareme_id']:
                bareme = bareme_obj.read(cr, uid, vals.get('bareme_id'), ['valeur'], context)
                vals['price_discount'] = bareme.get('valeur')-1
-        else:
-           vals['price_discount'] = 0.0
+            else:
+               vals['price_discount'] = 0.0
 
         return super(product_pricelist_item, self).write(cr, uid, ids, vals, context=context)
 
     _columns = {
+        'price_discount': fields.float('Price Discount', digits=(16,6)),
         'bareme_id': fields.many2one('product.pricelist.bareme', string='Barème'),
     }
 
@@ -103,7 +104,6 @@ class product_pricelist_item(osv.osv):
         else:
             price_type = self.pool.get('product.price.type').browse(cr, uid, base_id)
             if price_type.name == u'Prix Special':
-               print "tarif special"
                return {'value': {'price_discount': -1.0}}
         return {'value': {'price_discount': 0.0}}
 
@@ -174,22 +174,6 @@ class product_pricelist(osv.osv):
               if prix_decembre:
 	         res[ids[0]] = prix_decembre
                  return res
-
-	# Ici commence le traitement très particulier des clients ayant un tarif spécial à comparer avec un promo.
-	# Le tarif spécial vient d'être récupéré dans la variable res
-        # On commence par récupérer la liste de prix du client et on en extrait la liste de prix des promos
-        if partner:
-           client_obj = self.pool.get('res.partner')
-           client = client_obj.browse(cr, uid, partner) 
-   	   pricelist_initiale = client.property_product_pricelist
-#              if pricelist_promo:
-#                 print "CE TARIF SPECIAL A UNE LISTE DE PROMO"
-#                 # On applique la liste de prix promo au client pour pouvoir calculer le tarif promo
-#                 client_obj.write(cr, uid, client.id, {'property_product_pricelist': pricelist_promo.id})
-#                 res_promo = super(product_pricelist,self).price_get(cr, uid, [pricelist_promo.id], prod_id, qty, partner, context)
-#                 print "res_promo = %s" %res_promo
-#                 # On remet en place le tarif initial
-#                 client_obj.write(cr, uid, client.id, {'property_product_pricelist': pricelist_initiale.id})
 
 	return res
 
@@ -335,7 +319,7 @@ class product_tarif_special_client(osv.osv):
 
     _columns = {
             'product_id': fields.many2one('product.product', 'Produit'),
-            'prix_vente_initial': fields.float(digits=(16, int(config['price_accuracy'])), string='Prix de vente initial', readonly=True),
+            'prix_vente_initial': fields.float(digits=(16, int(config['price_accuracy'])), string='Prix de vente', readonly=True),
             'prix_special': fields.float(digits=(16, int(config['price_accuracy'])), string='Prix spécial', required=True),
     }
 
