@@ -35,5 +35,46 @@
                   type="wizard"
                   parent="product.menu_product_pricelist_main" />
 
+<!-- Wizard pour exportation des tarifs -->
+
+<record id="wizard_export_sage" model="ir.ui.view">
+            <field name="name">Exporter un tarif</field>
+            <field name="model">wizard.export.tarif</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Exportation d'un tarif">
+                            <group col="4" states="choose">
+                                <field invisible="1" name="state"/>
+                                <field name="from_date"/>
+                                <field name="client" />
+				<newline/>
+                                <button icon="gtk-cancel" name="act_cancel" special="cancel" states="choose" string="Annulation" type="object"/>
+                                <button icon="gtk-ok" name="act_getfile" states="choose" string="Génération du fichier" type="object"/>
+                            </group>
+                            <group col="4" states="get">
+                                <separator string="Le tarif a été exporté"/>
+                                <field height="50" colspan="4" name="advice" nolabel="1"/>
+                                <newline/>
+                                <field name="name" invisible="1"/>
+                                <field name="data" nolabel="1" readonly="1" fieldname="name"/>
+				<newline/>
+                                <button icon="gtk-close" name="act_export_ok" states="get" string="Fin" type="object"/>
+                            </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_wizard_export_tarif" model="ir.actions.act_window">
+            <field name="name">Exporter un tarif</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">wizard.export.tarif</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem action="action_wizard_export_tarif" id="menu_wizard_export_tarif" parent="product.menu_product_pricelist_main"/>
+
+
     </data>
 </openerp>

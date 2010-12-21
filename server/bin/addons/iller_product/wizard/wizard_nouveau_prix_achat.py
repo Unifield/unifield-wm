@@ -12,7 +12,7 @@ from datetime import timedelta
 _configure_form = """<?xml version="1.0" encoding="utf-8" ?>
 <form string="Saisie des nouveaux prix d'achat">
     <separator colspan="4" string="Informations Generales" />
-    <field name="start_date" required="1" />
+    <field name="start_date" colspan="2" required="1" />
     <separator colspan="4" />
     <field name="products" nolabel="1" colspan="4" width="1000" height="450" />
 </form>"""
