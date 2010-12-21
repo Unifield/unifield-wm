@@ -13,35 +13,29 @@
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+#    GNU General Public License for more detaila
 #
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
+from report import report_sxw
+from osv import osv
+import pooler
 
-{
-    'name': 'Produits pour ILLER',
-    'version': '1.0',
-    'category': 'Generic Modules/Projects & Services',
-    'description': """
-        Ce module contient les développements spécifiques
-        concernant les produits pour Iller
-""",
-    'author': 'TeMPO Consulting',
-    'website': 'http://www.tempo-consulting.com',
-    'depends': ['product'],
-    'init_xml': [],
-    'demo_xml': [],
-    'update_xml': [
-            'iller_product_view.xml',
-            'iller_pricelist_view.xml',
-            'iller_pricelist_data.xml',
-            'iller_pricelist_wizard.xml',
-            'iller_pricelist_report.xml',
-],
-    'installable': True,
-    'active': False,
-}
+class tarif_aide_commercial(report_sxw.rml_parse):
+
+        def __init__(self, cr, uid, name, context):
+            super(tarif_aide_commercial, self).__init__(cr, uid, name, context)
+            self.localcontext.update({
+                'liste': self._affi_tarif
+            })
+
+        def _affi_tarif(self):
+            tarif = self.localcontext.get('data',{}).get('form',{}).get('liste',[])
+            return tarif 
+
+report_sxw.report_sxw('report.tarif.aide.commercial','product.pricelist','addons/iller_product/report/tarif_aide_commercial.rml',parser=tarif_aide_commercial)
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

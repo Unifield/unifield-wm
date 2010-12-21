@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <report 
+                        id="report_tarif_aide_commercial" 
+                        string="Récapitulatif Tarif" 
+                        model="product.pricelist" 
+                        name="tarif.aide.commercial" 
+                        rml="iller_product/report/tarif_aide_commercial.rml" 
+                        header="False" 
+                        auto="False" 
+                        menu="False"
+                        />
+
+    </data>
+</openerp>
+

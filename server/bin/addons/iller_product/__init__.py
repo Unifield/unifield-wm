@@ -23,3 +23,4 @@
 import iller_pricelist
 import iller_product
 import wizard
+import report

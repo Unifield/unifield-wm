@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+#-*- encoding: utf-8 -*-
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution	
@@ -21,27 +21,10 @@
 ##############################################################################
 
 
-{
-    'name': 'Produits pour ILLER',
-    'version': '1.0',
-    'category': 'Generic Modules/Projects & Services',
-    'description': """
-        Ce module contient les développements spécifiques
-        concernant les produits pour Iller
-""",
-    'author': 'TeMPO Consulting',
-    'website': 'http://www.tempo-consulting.com',
-    'depends': ['product'],
-    'init_xml': [],
-    'demo_xml': [],
-    'update_xml': [
-            'iller_product_view.xml',
-            'iller_pricelist_view.xml',
-            'iller_pricelist_data.xml',
-            'iller_pricelist_wizard.xml',
-            'iller_pricelist_report.xml',
-],
-    'installable': True,
-    'active': False,
-}
+import time 
+from report import report_sxw 
+from osv import osv 
+import pooler 
+
+import tarif_aide_commercial 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

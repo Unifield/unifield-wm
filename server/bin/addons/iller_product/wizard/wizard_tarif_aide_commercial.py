@@ -20,28 +20,38 @@
 #
 ##############################################################################
 
+import wizard
+import pooler
+import time
 
-{
-    'name': 'Produits pour ILLER',
-    'version': '1.0',
-    'category': 'Generic Modules/Projects & Services',
-    'description': """
-        Ce module contient les développements spécifiques
-        concernant les produits pour Iller
-""",
-    'author': 'TeMPO Consulting',
-    'website': 'http://www.tempo-consulting.com',
-    'depends': ['product'],
-    'init_xml': [],
-    'demo_xml': [],
-    'update_xml': [
-            'iller_product_view.xml',
-            'iller_pricelist_view.xml',
-            'iller_pricelist_data.xml',
-            'iller_pricelist_wizard.xml',
-            'iller_pricelist_report.xml',
-],
-    'installable': True,
-    'active': False,
-}
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+def _get_tarif(self, cr, uid, data, context):      
+    date = data['form']['date']
+    res=[]
+    res.append([111,222])
+    data['form']['liste'] = res
+    return  data['form']
+
+class wizard_tarif_aide_commercial(wizard.interface):
+    form1 = '''<?xml version="1.0"?>
+    <form string="Grille de Tarif">
+        <field name="date"/>
+    </form>'''
+    form1_fields = {
+    	     'date': {
+	     	'string': 'Date',
+		'type': 'date',
+		'required':True
+        },
+    }
+
+    states = {
+      'init': {
+            'actions': [],
+            'result': {'type': 'form', 'arch':form1, 'fields':form1_fields, 'state': [('end', 'Annulation','gtk-cancel'),('report', 'Grille de Tarif','gtk-ok')]}
+        },
+    'report': {
+            'actions': [_get_tarif],
+            'result': {'type': 'print', 'report': 'tarif.aide.commercial', 'state': 'end'}
+        }
+    }
+wizard_tarif_aide_commercial('tarif.aide.commercial')

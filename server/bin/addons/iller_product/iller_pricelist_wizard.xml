@@ -35,6 +35,17 @@
                   type="wizard"
                   parent="product.menu_product_pricelist_main" />
 
+      <wizard id="tarif_aide_commercial"
+                name="tarif.aide.commercial"
+                string="Impression Grille de Tarif"
+                model="product.pricelist"
+                menu="False" />
+
+        <menuitem action="tarif_aide_commercial"
+                  id="menu_tarif_aide_commercial"
+                  type="wizard"
+                  parent="product.menu_product_pricelist_main" />
+
 <!-- Wizard pour exportation des tarifs -->
 
 <record id="wizard_export_sage" model="ir.ui.view">
