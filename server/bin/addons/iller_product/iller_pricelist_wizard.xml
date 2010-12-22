@@ -56,9 +56,15 @@
                 <form string="Exportation d'un tarif">
                             <group col="4" states="choose">
                                 <field invisible="1" name="state"/>
+				<field nolabel = "1" height="22" colspan = "4" name ="avertissement"/>
+				<newline/>
                                 <field name="from_date"/>
                                 <field name="client" />
 				<newline/>
+                                <field name="mensuel"/>
+				<newline/>
+                                <field name="hebdo"/>
+                                <newline/>
                                 <button icon="gtk-cancel" name="act_cancel" special="cancel" states="choose" string="Annulation" type="object"/>
                                 <button icon="gtk-ok" name="act_getfile" states="choose" string="Génération du fichier" type="object"/>
                             </group>

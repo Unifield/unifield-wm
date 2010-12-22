@@ -409,6 +409,7 @@
             <field name="currency_id" ref="base.EUR" />
             <field name="promo_jaune" eval="0" />
             <field name="promo_blanche" eval="1" />
+            <field name="tarif_special" eval="1" />
         </record>
 
 

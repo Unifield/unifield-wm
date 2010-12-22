@@ -73,7 +73,6 @@ class wizard_configure_promo(wizard.interface):
         ## La version précédente démare à j+1 de la fin de la promo
         n_start_date = (datetime.strptime(start_date, '%Y-%m-%d')-timedelta(days=1)).strftime('%Y-%m-%d')
 
-
         ## On cherche la version de base
         base_version = False
         base_ids = version_obj.search(cr, uid, [('pricelist_id', '=', list.id), ('base_ok', '=', True)])

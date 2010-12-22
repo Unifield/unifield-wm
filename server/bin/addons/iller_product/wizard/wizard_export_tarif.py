@@ -45,9 +45,10 @@ class wizard_export_tarif(osv.osv_memory):
                                                  ('date_start',   '<=', this.from_date), \
                                                  ('date_end',     '>=', this.from_date)])
         version = version_obj.browse(cr, uid, version_id[0])
+
+        # Formattage des dates pour l'affichage dans le fichier d'export
         date_debut_version_tarif = version.date_start
         date_debut = date_debut_version_tarif[8:10] + "/" + date_debut_version_tarif[5:7] + "/" + date_debut_version_tarif[0:4] 
-
         date_fin_version_tarif = version.date_end
         date_fin = date_fin_version_tarif[8:10] + "/" + date_fin_version_tarif[5:7] + "/" + date_fin_version_tarif[0:4]
 
@@ -62,6 +63,11 @@ class wizard_export_tarif(osv.osv_memory):
         item_ids = item_obj.search(cr,uid, [('price_version_id', '=', version_id)])
         for item_id in item_ids:
             item = item_obj.browse(cr, uid, item_id)
+            # Si la case "hebdo" est cochée, on ne veut que les promos de la semaine (séquence 3)
+            if this.hebdo and item.sequence != 3:
+               continue
+            # Si la case "mensuel" est cochée, on ne veut que les prix spéciaux (séquence 1)
+            if this.mensuel and item.sequence != 1:
             if item.product_id:
                # La règle s'applique sur un produit
                if not prix.get(item.product_id.id) :
@@ -107,7 +113,6 @@ class wizard_export_tarif(osv.osv_memory):
            export +=  u"N;Numéro d' Article;Nom du Produit;Marque;Nom du Fabricant;ID de Produit du Frabricant;Désc. détaillée de Produit;Provenance du produit;Date d'échéance du produit;Couleur du produit;Taille du produit;Dimensions de Caisse;Consentant pour escompter la caisse;Poids moyen par caisse;Articles par Caisse;Code de Prix UDM;Quantité minimum de Commande;Prix unitaire;Code de Devise;Qté d' escompte de niveau 2;Prix niveau 2;Multiplicateur niveau 2;Qté d' escompte de niveau 3;Prix niveau 3;Multiplicateur niveau 3;Date d' entrée en vigueur de prix;Prix à la date finale;Exempt d'impôts;Délai de Livraison;Période d' Attente minimum (Jours);UNSPSC;CUP;Noms de Fichiers d' Images;ID de Catégorie;Déscription Catégories" + "\r\n"
 
            export += "N;STRING(102);STRING(1000);STRING(256);STRING(100);STRING(256);STRING(4000);STRING(100);DATE;STRING(200);STRING(140);STRING(256);NUMERIC(1,0);NUMERIC(38,10);NUMERIC(10,0);STRING(40);NUMERIC(38,10);NUMERIC(38,10);STRING(20);NUMERIC(38,10);NUMERIC(38,10);NUMERIC(38,10);NUMERIC(38,10);NUMERIC(38,10);NUMERIC(38,10);DATE;DATE;NUMERIC(1,0);NUMERIC(4,0);NUMERIC(4,0);STRING(180);STRING(56);STRING(510);NUMERIC(10,0);STRING(1000)" + "\r\n"
-
 
            for  product_id in prix.keys():
                 product = product_obj.browse(cr, uid, product_id)
@@ -165,7 +170,6 @@ class wizard_export_tarif(osv.osv_memory):
                    else:
                        str_prix = ""
                    export += product.default_code + ";" + product.name + ";" + product.uom_id.name + ";" + str_prix + ";;faux" + "\r\n"
-
                export += ";SS TOTAL " + str(categ_id) + ";;;;faux" + "\r\n"
                export += ";;;;;" + "\r\n"
 
@@ -177,7 +181,10 @@ class wizard_export_tarif(osv.osv_memory):
     _name = "wizard.export.tarif"
     _columns = {
             'name': fields.char('Filename', 16, readonly=True),
-            'from_date': fields.date('Date', required=True),
+            'from_date': fields.date('Date de départ', required=True),
+            'mensuel': fields.boolean(string='Uniquement les prix spéciaux du mois'),
+            'hebdo': fields.boolean(string='Uniquement les prix de la promo blanche'),
+            'avertissement': fields.text('ATTENTION', readonly=True),
             'advice': fields.text('Advice', readonly=True),
             'data': fields.binary('File', readonly=True),
             'client': fields.selection( ( ('HILTON HOTEL', 'HILTON HOTEL'), 
@@ -188,6 +195,7 @@ class wizard_export_tarif(osv.osv_memory):
                                       ) ),
             }
     _defaults = { 'state': lambda *a: 'choose', 
+                  'avertissement': lambda *a: 'ATTENTION! Ce traitement peut durer plusieurs minutes...',
                 }
 
 wizard_export_tarif()
