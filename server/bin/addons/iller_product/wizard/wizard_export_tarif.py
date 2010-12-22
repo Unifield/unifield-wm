@@ -28,9 +28,10 @@ class wizard_export_tarif(osv.osv_memory):
 
         partner_obj   = pooler.get_pool(cr.dbname).get('res.partner')
         product_obj   = pooler.get_pool(cr.dbname).get('product.product')
+        categ_obj     = pooler.get_pool(cr.dbname).get('product.category')
         pricelist_obj = pooler.get_pool(cr.dbname).get('product.pricelist')
         version_obj   = pooler.get_pool(cr.dbname).get('product.pricelist.version')
-        item_obj = pooler.get_pool(cr.dbname).get('product.pricelist.item')
+        item_obj      = pooler.get_pool(cr.dbname).get('product.pricelist.item')
 
         # Recherche du partenaire dont il faut éditer le tarif
         partner_id = partner_obj.search(cr, uid, [('name', 'ilike', this.client)])
@@ -45,7 +46,10 @@ class wizard_export_tarif(osv.osv_memory):
                                                  ('date_end',     '>=', this.from_date)])
         version = version_obj.browse(cr, uid, version_id[0])
         date_debut_version_tarif = version.date_start
-        date_fin_version_tarif   = version.date_end
+        date_debut = date_debut_version_tarif[8:10] + "/" + date_debut_version_tarif[5:7] + "/" + date_debut_version_tarif[0:4] 
+
+        date_fin_version_tarif = version.date_end
+        date_fin = date_fin_version_tarif[8:10] + "/" + date_fin_version_tarif[5:7] + "/" + date_fin_version_tarif[0:4]
 
         qty = 1.0
         # La variable prix va contenir les prix de tous les produits figurant sur le tarif
@@ -105,51 +109,66 @@ class wizard_export_tarif(osv.osv_memory):
            export += "N;STRING(102);STRING(1000);STRING(256);STRING(100);STRING(256);STRING(4000);STRING(100);DATE;STRING(200);STRING(140);STRING(256);NUMERIC(1,0);NUMERIC(38,10);NUMERIC(10,0);STRING(40);NUMERIC(38,10);NUMERIC(38,10);STRING(20);NUMERIC(38,10);NUMERIC(38,10);NUMERIC(38,10);NUMERIC(38,10);NUMERIC(38,10);NUMERIC(38,10);DATE;DATE;NUMERIC(1,0);NUMERIC(4,0);NUMERIC(4,0);STRING(180);STRING(56);STRING(510);NUMERIC(10,0);STRING(1000)" + "\r\n"
 
 
-        for product_id in prix.keys():
-            product = product_obj.browse(cr, uid, product_id)
+           for  product_id in prix.keys():
+                product = product_obj.browse(cr, uid, product_id)
 
-            export += "U;"
-            export += "#" + product.default_code + " ;"
-            export += product.name + ";"
-            export += ";"       # Colonne D: Marque?
-            export += ";"       # Colonne E: Nom du fabriquant?
-            export += "#;"      # Colonne F: Id de produit du fabriquant?
-            if product.description:
-               export += product.description + ";"
-            else:
-               export += ";"
-            export += ";"       # Colonne H: Origine du produit?
-            export += ";"       # Colonne I: Date d'échéance?
-            export += ";"       # Colonne J: Couleur du produit?
-            if product.weight_net != 0:
-               export += str(product.weight_net) + ";"
-            else:
-               export += ";" 
-            export += ";"       # Colonne L: Dimension caisse?
-            export += "0;"      # Colonne M: Consentant pour escompter la caisse
-            export += ";"       # Colonne N: Poids moyen par caisse?
-            export += ";"       # Colonne O: Nb articles par caisse?
-            export += product.uom_id.name;
-            export += ";"       # Colonne Q: Quantité mini de commande?
-            export += str(prix.get(product_id)) + ";"
-            export += "EUR;"
-            export += ";;;;;;"  # Colonnes T à Y : champs de type BREAK...?
-            export += date_debut_version_tarif[8:10] + "/" + date_debut_version_tarif[5:7] + "/" + date_debut_version_tarif[0:4] + ";"
-            export += date_fin_version_tarif[8:10] + "/" + date_fin_version_tarif[5:7] + "/" + date_fin_version_tarif[0:4] + ";"
-            export += ";"       # Colonne AA: Prix à la date finale?
-            export += ";"       # Colonne AB: Exempt d'impôt?
-            export += "1;"      # Colonne AC: Délai de livraison?
-            export += "1;"      # Colonne AD: Période d'attente minimum?
-            export += ";"       # Colonne AE: UNSPC?
-            export += "#;"      # Colonne AF: CUP?
-            export += ";"       # Colonne AG: Fichier image?
-            export += str(product.categ_id.name) + ";"
-            export += ";"       # Colonne AI: Nom de la catégorie?
-            export += "\r\n"
+                export += "U;"
+                export += "#" + product.default_code + " ;"
+                export += product.name + ";"
+                export += ";"       # Colonne D: Marque?
+                export += ";"       # Colonne E: Nom du fabriquant?
+                export += "#;"      # Colonne F: Id de produit du fabriquant?
+                if product.description:
+                   export += product.description + ";"
+                else:
+                   export += ";"
+                export += ";"       # Colonne H: Origine du produit?
+                export += ";"       # Colonne I: Date d'échéance?
+                export += ";"       # Colonne J: Couleur du produit?
+                if product.weight_net != 0:
+                   export += str(product.weight_net) + ";"
+                else:
+                   export += ";" 
+                export += ";"       # Colonne L: Dimension caisse?
+                export += "0;"      # Colonne M: Consentant pour escompter la caisse
+                export += ";"       # Colonne N: Poids moyen par caisse?
+                export += ";"       # Colonne O: Nb articles par caisse?
+                export += product.uom_id.name;
+                export += ";"       # Colonne Q: Quantité mini de commande?
+                export += str(prix.get(product_id)) + ";"
+                export += "EUR;"
+                export += ";;;;;;"  # Colonnes T à Y : champs de type BREAK...?
+                export += date_debut + ";"
+                export += date_fin + ";"
+                export += ";"       # Colonne AA: Prix à la date finale?
+                export += ";"       # Colonne AB: Exempt d'impôt?
+                export += "1;"      # Colonne AC: Délai de livraison?
+                export += "1;"      # Colonne AD: Période d'attente minimum?
+                export += ";"       # Colonne AE: UNSPC?
+                export += "#;"      # Colonne AF: CUP?
+                export += ";"       # Colonne AG: Fichier image?
+                export += str(product.categ_id.name) + ";"
+                export += ";"       # Colonne AI: Nom de la catégorie?
+                export += "\r\n"
 
         if this.client == "SNCF STRASBOURG":
-           print "SNCF A FAIRE"
-        
+           export = ";;;;" + "\r\n"
+           export += u";BASE référencement  " + date_debut + ";CONDIT.;Prix H.T;;" + "\r\n" 
+           categ_ids = categ_obj.search (cr, uid, [])
+           # Pour chaque catégorie, on imprime les prix des produits de la catégorie
+           for categ_id in categ_ids:
+               export += u";FAMILLE n°" + str(categ_id) + ";;;;" + "\r\n"
+               for product_id in product_ids:
+                   product = product_obj.browse(cr, uid, product_id)
+                   if prix.get(product_id):
+                       str_prix = str(prix.get(product_id))
+                   else:
+                       str_prix = ""
+                   export += product.default_code + ";" + product.name + ";" + product.uom_id.name + ";" + str_prix + ";;faux" + "\r\n"
+
+               export += ";SS TOTAL " + str(categ_id) + ";;;;faux" + "\r\n"
+               export += ";;;;;" + "\r\n"
+
         export1=base64.encodestring(export.encode("utf-8"))
 
         return self.write(cr, uid, ids, {'state':'get', 'data': export1, 'advice': this.advice, 'name':this.name}, context=context)
