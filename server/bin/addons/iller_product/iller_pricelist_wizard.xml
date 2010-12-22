@@ -46,6 +46,12 @@
                   type="wizard"
                   parent="product.menu_product_pricelist_main" />
 
+        <wizard id="export_tarif_promo"
+                name="export.tarif.promo"
+                string="Export .csv"
+                model="product.pricelist.promo"
+                menu="True" />
+
 <!-- Wizard pour exportation des tarifs -->
 
 <record id="wizard_export_sage" model="ir.ui.view">

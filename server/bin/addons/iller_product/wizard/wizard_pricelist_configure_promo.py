@@ -52,6 +52,7 @@ class wizard_configure_promo(wizard.interface):
             return 'error_date'
         if len(data['form']['product_ids'][0][2]) < 1:
             return 'error_product'
+
         return 'create'
 
 
@@ -120,6 +121,7 @@ class wizard_configure_promo(wizard.interface):
                 version_obj.write(cr, uid, before_ids, {'date_end': n_start_date})
             if after_ids:
                 version_obj.write(cr, uid, after_ids, {'date_start': n_end_date})
+
 
         return version_obj.copy(cr, uid, base_version, {'date_start': start_date, 
                                                         'date_end': end_date, 
@@ -214,6 +216,13 @@ class wizard_configure_promo(wizard.interface):
             if new_version:
                 version_obj.write(cr, uid, [new_version], {'active': True, 'name': data['form']['title']})
                 new_items = self._create_item(cr, uid, data, new_version, 'jaune')
+
+        promo_obj = pooler.get_pool(cr.dbname).get('product.pricelist.promo')
+
+        promo_obj.create(cr, uid, {'name': data['form']['title'],
+                                   'start_date': data['form']['start_date'],
+                                   'end_date': data['form']['end_date'],
+                                   'product_ids': [(6,0,data['form']['product_ids'][0][2])]})
 
         return {}
 

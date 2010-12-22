@@ -205,6 +205,47 @@
             </field>
         </record>
 
+        <record id="product_pricelist_promo_form_view" model="ir.ui.view">
+            <field name="name">product.pricelist.promo.form.view</field>
+            <field name="model">product.pricelist.promo</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Promo">
+                    <field name="name" />
+                    <newline />
+                    <field name="start_date" />
+                    <field name="end_date" />
+                    <separator colspan="4" string="Produits" />
+                    <field name="product_ids" colspan="4" nolabel="1" />
+                </form>
+            </field>
+        </record>
+
+        <record id="product_pricelist_promo_tree_view" model="ir.ui.view">
+            <field name="name">product.pricelist.promo.tree.view</field>
+            <field name="model">product.pricelist.promo</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Promos">
+                    <field name="name" />
+                    <field name="start_date" />
+                    <field name="end_date" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="act_product_pricelist_promo" model="ir.actions.act_window">
+            <field name="name">Promos</field>
+            <field name="res_model">product.pricelist.promo</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem
+            id="menu_product_pricelist_promo"
+            action="act_product_pricelist_promo"
+            parent="product.menu_product_pricelist_main" />
+
     </data>
 </openerp>
 
