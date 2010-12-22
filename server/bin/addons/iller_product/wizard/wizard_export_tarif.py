@@ -68,6 +68,7 @@ class wizard_export_tarif(osv.osv_memory):
                continue
             # Si la case "mensuel" est cochée, on ne veut que les prix spéciaux (séquence 1)
             if this.mensuel and item.sequence != 1:
+                continue
             if item.product_id:
                # La règle s'applique sur un produit
                if not prix.get(item.product_id.id) :
