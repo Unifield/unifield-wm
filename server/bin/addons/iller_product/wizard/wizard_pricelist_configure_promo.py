@@ -110,13 +110,13 @@ class wizard_configure_promo(wizard.interface):
         ## On cherche si la promo est à cheval sur deux versions existantes
         else:
             before_ids = version_obj.search(cr, uid, [('pricelist_id', '=', list.id), \
-                                                      ('date_start', '<', start_date), \
-                                                      ('date_end', '>', start_date), \
-                                                      ('date_end', '<', end_date)])
+                                                      ('date_start', '<=', start_date), \
+                                                      ('date_end', '>=', start_date), \
+                                                      ('date_end', '<=', end_date)])
             after_ids = version_obj.search(cr, uid, [('pricelist_id', '=', list.id), \
-                                                     ('date_end', '>', end_date), \
-                                                     ('date_start', '<', end_date), \
-                                                     ('date_start', '>', start_date)])
+                                                     ('date_end', '>=', end_date), \
+                                                     ('date_start', '<=', end_date), \
+                                                     ('date_start', '>=', start_date)])
             if before_ids:
                 version_obj.write(cr, uid, before_ids, {'date_end': n_start_date})
             if after_ids:
@@ -219,6 +219,7 @@ class wizard_configure_promo(wizard.interface):
 
         promo_obj = pooler.get_pool(cr.dbname).get('product.pricelist.promo')
 
+        print "AVANT CREATE PROMO, product_ids = %s" %data['form']['product_ids'][0][2]
         promo_obj.create(cr, uid, {'name': data['form']['title'],
                                    'start_date': data['form']['start_date'],
                                    'end_date': data['form']['end_date'],

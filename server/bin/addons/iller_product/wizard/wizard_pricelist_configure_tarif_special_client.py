@@ -122,13 +122,13 @@ class wizard_configure_tarif_special_client(wizard.interface):
         ## On cherche si la nouvelle version est à cheval sur deux versions existantes
         else:
             before_ids = version_obj.search(cr, uid, [('pricelist_id', '=', pricelist_id), \
-                                                      ('date_start', '<', start_date), \
-                                                      ('date_end', '>', start_date), \
-                                                      ('date_end', '<', end_date)])
+                                                      ('date_start', '<=', start_date), \
+                                                      ('date_end', '>=', start_date), \
+                                                      ('date_end', '<=', end_date)])
             after_ids = version_obj.search(cr, uid, [('pricelist_id', '=', pricelist_id), \
-                                                     ('date_end', '>', end_date), \
-                                                     ('date_start', '<', end_date), \
-                                                     ('date_start', '>', start_date)])
+                                                     ('date_end', '>=', end_date), \
+                                                     ('date_start', '<=', end_date), \
+                                                     ('date_start', '>=', start_date)])
             if before_ids:
                 version_obj.write(cr, uid, before_ids, {'date_end': n_start_date})
             if after_ids:
@@ -268,7 +268,6 @@ class wizard_configure_tarif_special_client(wizard.interface):
         ## ou alors on part de la liste de prix déjà associée au client
         client = client_obj.browse(cr, uid, data['form']['client'])
         if data['form']['tarif_initial'] :
-           print "L1"
            pricelist_id = pricelist_obj.copy(cr, uid, data['form']['tarif_initial'], {'name': data['form']['title'],
                                                                          'tarif_special': True })
            client_obj.write(cr, uid, client.id, {'property_product_pricelist': pricelist_id})
