@@ -57,6 +57,8 @@ class wizard_configure_tarif_special_client(wizard.interface):
         pool_obj = pooler.get_pool(cr.dbname)
         pricelist_obj = pool_obj.get('product.pricelist')
         client_obj = pool_obj.get('res.partner')
+        # Si on ne donne pas de liste de prix, on part de celle déjà associée au client, mais
+        # celle-ci doit déjà être cochée en "tarif spécial"
         if data['form']['tarif_initial'] is False:
            client = client_obj.browse(cr, uid, data['form']['client'])
            pricelist_id = client.property_product_pricelist.id
@@ -65,10 +67,11 @@ class wizard_configure_tarif_special_client(wizard.interface):
 
         return 'create'
 
+
     def _redefine_existing_tarif_special_client(self, cr, uid, data, pricelist_id, context):
         '''
-        Créé la nouvelle version de liste de prix avec ces tarifs spéciaux 
-        "décale" les versions existantes
+        Créé la nouvelle version de liste de prix avec les tarifs spéciaux 
+        et "décale" les versions existantes
         '''
         version_obj = pooler.get_pool(cr.dbname).get('product.pricelist.version')
         item_obj = pooler.get_pool(cr.dbname).get('product.pricelist.item')
@@ -139,14 +142,25 @@ class wizard_configure_tarif_special_client(wizard.interface):
 
     def _define_new_tarif_special_client(self, cr, uid, data, pricelist_id, context):
         '''
-            CAS D'UN NOUVEAU TARIF: Il suffit de ne garder que la version de base, avec des dates "à l'infini" 
+            CAS D'UN NOUVEAU TARIF: 
+            Il faut crée 3 versions:
+            - 1 version de base de 1900 à la date de début des tarifs spéciaux (marquée version de base)
+            - 1 version pour les tarifs spéciaux en fonction des dates de début et de fin saisies
+            - 1 version de base allant de la date de fin des tarifs spéciaux jusqu'à 2100
         '''
         version_obj = pooler.get_pool(cr.dbname).get('product.pricelist.version')
         item_obj = pooler.get_pool(cr.dbname).get('product.pricelist.item')
 
         name = data['form']['title']
-        end_date = datetime(2100, 1, 1, 0, 0)
-        start_date = datetime(1900, 1, 1, 0, 0)
+        end_date = data['form']['end_date']
+        start_date = data['form']['start_date']
+        ## La version précédente s'arrête à j-1 du début de la nouvelle version avec les prix spéciaux 
+        n_end_date = (datetime.strptime(end_date, '%Y-%m-%d')+timedelta(days=1)).strftime('%Y-%m-%d')
+        ## La version précédente démarre à j+1 de la fin de la nouvelle version avec les prix spéciaux 
+        n_start_date = (datetime.strptime(start_date, '%Y-%m-%d')-timedelta(days=1)).strftime('%Y-%m-%d')
+
+        date_2100 = datetime(2100, 1, 1, 0, 0)
+        date_1900 = datetime(1900, 1, 1, 0, 0)
 
         ## On cherche la version de base pour ne garder que celle-la
         base_version = False
@@ -163,11 +177,29 @@ class wizard_configure_tarif_special_client(wizard.interface):
             if version_id != base_version:
                 version_obj.unlink(cr, uid, [version_id])
 
-        version_obj.write(cr, uid, [base_version], {
-                                                   'date_start' : start_date,
-                                                   'date_end': end_date,
+        # Moification des dates de la version de base allant de 1900 jusqu'à la date de début des tarifs spéciaux
+        v1900 = version_obj.write(cr, uid, [base_version], {
+                                                   'date_start' : date_1900,
+                                                   'date_end': n_start_date,
                                                    })
-        return base_version 
+
+        # Création de la version où viendront se rajoutant les prix spéciaux
+        # (cette version sera rendu active apres le retour à la routine appelante)
+        version_tarif_special = version_obj.copy(cr, uid, base_version, {
+                                                 'date_start': start_date,
+                                                 'date_end': end_date,
+                                                 'base_ok': False,
+                                                 'name': name})
+
+        # Création de la version allant de la fin des prix spéciaux à 2100
+        v2100 = version_obj.copy(cr, uid, base_version, {
+                                                'date_start': n_end_date,
+                                                'date_end': date_2100,
+                                                'base_ok': False,
+                                                })
+        version_obj.write(cr, uid, [v2100], {'active': True})
+
+        return version_tarif_special
 
 
     def _create_item(self, cr, uid, data, version_id, context):
@@ -232,9 +264,11 @@ class wizard_configure_tarif_special_client(wizard.interface):
         product_obj = pool_obj.get('product.product')
         client_obj = pool_obj.get('res.partner')
 
-        ## On récupère la liste de prix initiale servant de base et le cas échéant on la duplique 
+        ## On récupère la liste de prix initiale servant de base et on la duplique 
+        ## ou alors on part de la liste de prix déjà associée au client
         client = client_obj.browse(cr, uid, data['form']['client'])
-        if data['form']['tarif_initial'] and not client.property_product_pricelist.tarif_special:
+        if data['form']['tarif_initial'] :
+           print "L1"
            pricelist_id = pricelist_obj.copy(cr, uid, data['form']['tarif_initial'], {'name': data['form']['title'],
                                                                          'tarif_special': True })
            client_obj.write(cr, uid, client.id, {'property_product_pricelist': pricelist_id})

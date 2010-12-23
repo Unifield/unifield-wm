@@ -164,6 +164,7 @@ class wizard_export_tarif(osv.osv_memory):
            # Pour chaque catégorie, on imprime les prix des produits de la catégorie
            for categ_id in categ_ids:
                export += u";FAMILLE n°" + str(categ_id) + ";;;;" + "\r\n"
+               product_ids = product_obj.search(cr, uid, [('categ_id', '=', categ_id)])
                for product_id in product_ids:
                    product = product_obj.browse(cr, uid, product_id)
                    if prix.get(product_id):
