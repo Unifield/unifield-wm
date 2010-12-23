@@ -54,12 +54,10 @@ class wizard_configure_tarif_special_client(wizard.interface):
         if len(data['form']['products']) == 0:
             return 'error_product'
 
-        print "L1"
         pool_obj = pooler.get_pool(cr.dbname)
         pricelist_obj = pool_obj.get('product.pricelist')
         client_obj = pool_obj.get('res.partner')
         if data['form']['tarif_initial'] is False:
-           print "L2"
            client = client_obj.browse(cr, uid, data['form']['client'])
            pricelist_id = client.property_product_pricelist.id
            if pricelist_obj.browse(cr, uid, pricelist_id).tarif_special is False:
@@ -172,7 +170,7 @@ class wizard_configure_tarif_special_client(wizard.interface):
         return base_version 
 
 
-    def _create_item(self, cr, uid, data, version_id):
+    def _create_item(self, cr, uid, data, version_id, context):
         '''
             Créer les différentes lignes de prix en fonction des produits
         '''
@@ -185,24 +183,39 @@ class wizard_configure_tarif_special_client(wizard.interface):
         base = 1
         items = []
         type_ids = pool_obj.get('product.price.type').search(cr, uid, [('name', '=', 'Prix Special')])
-        if type_ids:
+        if type_ids and (not 'promo' in context or context['promo'] == False):
             base = type_ids[0]
+        else:
+            type_ids = pool_obj.get('product.price.type').search(cr, uid, [('name', '=', 'Prix promo blanche')])
+            if type_ids:
+                base = type_ids[0]
 
         for product in products:
-            product_id = product[2].get('product_id')
-            p_data = prod_obj.read(cr, uid, product_id, ['name'])
 # La règle standard est: Prix de vente = Prix de base * (1 + coeff) + surcharge
 # Pour un tarif spécial, le coeff vaut -1 est la surcharge est égale au prix spécial
 # Donc Prix de vente = Prix de base * (1-1) + prix spécial = prix spécial
 # Le prix de base importe peu car il n'intervient pas dans le calcul
-            item_id = item_obj.create(cr, uid, {'sequence': 1,
-                                                'name': p_data.get('name'), 
-                                                'product_id': product_id,
-                                                'base': base,
-                                                'base_pricelist_id': data['form']['tarif_initial'],
-                                                'price_discount' :-1.0,
-                                                'price_surcharge': product[2].get('prix_special'),
-                                                'price_version_id': version_id})
+            if 'promo' in context and context['promo'] == True:
+                product_id = product[2].get('product_id')
+                p_data = prod_obj.read(cr, uid, product_id, ['name'])
+                item_id = item_obj.create(cr, uid, {'sequence': 3,
+                                                    'name': p_data.get('name'),
+                                                    'product_id': product[2].get('product_id'),
+                                                    'base': base,
+                                                    'price_discount': -1.0,
+                                                    'price_version_id': version_id})
+
+            else: 
+                product_id = product[2].get('product_id')
+                p_data = prod_obj.read(cr, uid, product_id, ['name'])
+                item_id = item_obj.create(cr, uid, {'sequence': 1,
+                                                    'name': p_data.get('name'), 
+                                                    'product_id': product_id,
+                                                    'base': base,
+                                                    'base_pricelist_id': data['form']['tarif_initial'],
+                                                    'price_discount' :-1.0,
+                                                    'price_surcharge': product[2].get('prix_special'),
+                                                    'price_version_id': version_id})
             items.append(item_id)
 
         return items
@@ -215,11 +228,13 @@ class wizard_configure_tarif_special_client(wizard.interface):
         pool_obj = pooler.get_pool(cr.dbname)
         pricelist_obj = pool_obj.get('product.pricelist')
         version_obj = pool_obj.get('product.pricelist.version')
+        promo_obj = pool_obj.get('product.pricelist.promo')
+        product_obj = pool_obj.get('product.product')
         client_obj = pool_obj.get('res.partner')
 
         ## On récupère la liste de prix initiale servant de base et le cas échéant on la duplique 
-        client = client_obj.browse(cr, uid, data['form']['client']) 
-        if data['form']['tarif_initial']:
+        client = client_obj.browse(cr, uid, data['form']['client'])
+        if data['form']['tarif_initial'] and not client.property_product_pricelist.tarif_special:
            pricelist_id = pricelist_obj.copy(cr, uid, data['form']['tarif_initial'], {'name': data['form']['title'],
                                                                          'tarif_special': True })
            client_obj.write(cr, uid, client.id, {'property_product_pricelist': pricelist_id})
@@ -235,7 +250,48 @@ class wizard_configure_tarif_special_client(wizard.interface):
            new_version = self._redefine_existing_tarif_special_client(cr, uid, data, pricelist_id,context)
         if new_version:
            version_obj.write(cr, uid, [new_version], {'active': True, 'name': data['form']['title']})
-           new_items = self._create_item(cr, uid, data, new_version)
+           new_items = self._create_item(cr, uid, data, new_version, context=context)
+
+        if not 'promo' in context:
+            ## On cherche les promos qui pourraient s'appliquer sur le nouveau tarif
+            promo_av_ids = promo_obj.search(cr, uid, [('start_date', '<', data['form']['end_date'])])
+            promo_ap_ids = promo_obj.search(cr, uid, [('end_date', '>', data['form']['start_date'])])
+            promo_pdt_ids = promo_obj.search(cr, uid, [('end_date', '<', data['form']['end_date']), ('start_date', '>', data['form']['start_date'])])
+
+
+            if promo_av_ids:
+                context['promo'] = True
+                promo_av = promo_obj.browse(cr, uid, promo_av_ids)
+                for promo in promo_av:
+                    data['form']['start_date'] = promo.start_date
+                    products = []
+                    for product in promo.product_ids:
+                        products.append((0,0,{'prix_vente_initial': 0.00, 'product_id': product.id, 'prix_special': 0.00}))
+                    data['form']['products'] = products
+                    self._create_tarif_special_client(cr, uid, data, args, context=context)
+
+            if promo_ap_ids:
+                context['promo'] = True
+                promo_ap = promo_obj.browse(cr, uid, promo_ap_ids)
+                for promo in promo_ap:
+                    data['form']['end_date'] = promo.end_date
+                    products = []
+                    for product in promo.product_ids:
+                        products.append((0,0,{'prix_vente_initial': 0.00, 'product_id': product.id, 'prix_special': 0.00}))
+                    data['form']['products'] = products
+                    self._create_tarif_special_client(cr, uid, data, args, context=context)
+
+            if promo_pdt_ids:
+                context['promo'] = True
+                promo_pdt = promo_obj.browse(cr, uid, promo_pdt_ids)
+                for promo in promo_pdt:
+                    data['form']['start_date'] = promo.start_date
+                    data['form']['end_date'] = promo.end_date
+                    products = []
+                    for product in promo.product_ids:
+                        products.append((0,0,{'prix_vente_initial': 0.00, 'product_id': product.id, 'prix_special': 0.00}))
+                    data['form']['products'] = products
+                    self._create_tarif_special_client(cr, uid, data, args, context=context)
 
         return {}
 
