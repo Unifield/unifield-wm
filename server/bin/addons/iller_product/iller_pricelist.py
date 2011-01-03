@@ -317,23 +317,6 @@ class product_pricelist(osv.osv):
 product_pricelist()
 
 
-class product_tarif_special_client(osv.osv):
-    _name = 'product.tarif.special.client'
-    _description = 'Tarif spécial pour un client'
-
-    _columns = {
-            'product_id': fields.many2one('product.product', 'Produit'),
-            'prix_vente_initial': fields.float(digits=(16, int(config['price_accuracy'])), string='Prix de vente', readonly=True),
-            'prix_special': fields.float(digits=(16, int(config['price_accuracy'])), string='Prix spécial', required=True),
-    }
-
-    def on_change_product_id (self, cr, uid, ids, prod_id=False):
-        if not prod_id:
-           return {}
-        product = self.pool.get('product.product').browse(cr, uid, prod_id)
-        return {'value': {'prix_vente_initial' : product.list_price, 'categ_id': False}}
-
-product_tarif_special_client()
 
 class product_nouveau_prix_achat(osv.osv):
     _name = 'product.nouveau.prix.achat'
@@ -368,5 +351,55 @@ class product_pricelist_promo(osv.osv):
                                             'promo_id', 'product_id',
                                             string='Promo'),
         }
-
 product_pricelist_promo()
+
+
+class product_tarifs_speciaux(osv.osv):
+    _name = 'product.tarifs.speciaux'
+    _description = 'Tarifs Spéciaux'
+
+    _columns = {
+            'name': fields.char(size=64, string='Nom', select=1, required=True),
+            'start_date': fields.date(string='Date de début', select=1, required=True),
+            'end_date': fields.date(string='Date de fin', required=True),
+            'product_id': fields.one2many('product.tarif.special.client',
+                                          'tarif_id',
+                                           string='Tarif Spécial'),
+        }
+product_tarifs_speciaux()
+
+
+class product_tarif_special_client(osv.osv):
+    _name = 'product.tarif.special.client'
+    _description = 'Tarif spécial pour un client'
+
+    _columns = {
+            'product_id': fields.many2one('product.product', 'Produit'),
+            'tarif_id': fields.many2one('product.tarifs.speciaux', 'Tarifs Spéciaux'),
+            'prix_special': fields.float(digits=(16, int(config['price_accuracy'])), string='Prix spécial', required=True),
+
+    }
+
+product_tarif_special_client()
+
+
+class product_tarif_special_client_wizard(osv.osv):
+    _name = 'product.tarif.special.client.wizard'
+    _description = 'Tarif spécial pour un client (utilisé dans wizard)'
+
+    _columns = {
+            'product_id': fields.many2one('product.product', 'Produit'),
+            'tarif_id': fields.many2one('product.tarifs.speciaux', 'Tarifs Spéciaux'),
+            'prix_special': fields.float(digits=(16, int(config['price_accuracy'])), string='Prix spécial', required=True),
+            'prix_vente_initial': fields.float(digits=(16, int(config['price_accuracy'])), string='Prix de vente initial', readonly=True, required=True),
+
+    }
+
+    def on_change_product_id (self, cr, uid, ids, prod_id=False):
+        if not prod_id:
+           return {}
+        product = self.pool.get('product.product').browse(cr, uid, prod_id)
+        return {'value': {'prix_vente_initial' : product.list_price, 'categ_id': False}}
+
+product_tarif_special_client_wizard()
+

@@ -56,8 +56,7 @@ class wizard_configure_promo(wizard.interface):
         return 'create'
 
 
-
-    def _define_promo(self, cr, uid, data, list):
+    def _define_promo(self, cr, uid, data, list, context={}):
         '''
             Créé la nouvelle version de liste de prix correspondant à la promo pour
             la liste de prix list
@@ -98,15 +97,36 @@ class wizard_configure_promo(wizard.interface):
 
         if version_ids:
             v_data = version_obj.read(cr, uid, version_ids[0], ['date_start', 'date_end', 'name'])
+#            if v_data.get('date_start') == start_date:
+#                version_obj.unlink(cr, uid, [version_ids[0]])
+#            else:
+#                version_obj.write(cr, uid, [version_ids[0]], {'date_end': n_start_date})
+#            next_id = version_obj.copy(cr, uid, base_version, {'date_start': n_end_date, 
+#                                                               'date_end': v_data.get('date_end'),
+#                                                               'base_ok': False,
+#                                                               'name': v_data.get('name')})
+#            version_obj.write(cr, uid, [next_id], {'active': True})
+#
+            # Si les 2 dates de début coincident, il suffit de modifier la date de début de la version qui englobe
             if v_data.get('date_start') == start_date:
-                version_obj.unlink(cr, uid, [version_ids[0]])
+               version_obj.write(cr, uid, [version_ids[0]], {'date_start': n_end_date})
             else:
-                version_obj.write(cr, uid, [version_ids[0]], {'date_end': n_start_date})
-            next_id = version_obj.copy(cr, uid, base_version, {'date_start': n_end_date, 
-                                                               'date_end': v_data.get('date_end'),
-                                                               'base_ok': False,
-                                                               'name': v_data.get('name')})
-            version_obj.write(cr, uid, [next_id], {'active': True})
+                # Si les 2 dates de fin coincident, il suffit de modifier la date de fin de la version qui englobe
+                if v_data.get('date_end') == end_date:
+                    version_obj.write(cr, uid, [version_ids[0]], {'date_end': n_start_date})
+                else:
+                    # Et sinon, la version qui englobe doit être scindée en deux
+                    # 1) on garde la version actuelle en en modifiant la date de fin
+                    version_obj.write(cr, uid, [version_ids[0]], {'date_end': n_start_date})
+                    # 2) et on crée l'autre moitié
+                    next_id = version_obj.copy(cr, uid, version_ids[0], {'date_start': n_end_date,
+                                                                         'date_end': v_data.get('date_end'),
+                                                                         'base_ok': False,
+                                                                         'name': v_data.get('name')})
+                    version_obj.write(cr, uid, [next_id], {'active': True})
+
+
+
         ## On cherche si la promo est à cheval sur deux versions existantes
         else:
             before_ids = version_obj.search(cr, uid, [('pricelist_id', '=', list.id), \
@@ -129,7 +149,7 @@ class wizard_configure_promo(wizard.interface):
                                                         'name': name})
 
 
-    def _create_item(self, cr, uid, data, version_id, type='blanche'):
+    def _create_item(self, cr, uid, data, version_id, type='blanche',context={}):
         '''
             Créer les différentes lignes de prix en fonction des produits et
             du type de promo
@@ -186,6 +206,25 @@ class wizard_configure_promo(wizard.interface):
                                                     'price_discount': coeff-1,
                                                     'price_version_id': version_id})
                 items.append(item_id)
+
+        # Il reste maintenant à rajouter les produits relatifs à un éventuel tarif spécial se déroulant en même temps que la promo
+        if data['form'].get('ts_products'):
+            base_special = 1
+            items = []
+            type_ids = pool_obj.get('product.price.type').search(cr, uid, [('name', '=', 'Prix Special')])
+            if type_ids:
+               base_special = type_ids[0]
+
+            for product in data['form']['ts_products']:
+                prod = prod_obj.browse(cr, uid, product[2].get('product_id'))
+                item_id = item_obj.create(cr, uid, {'sequence': 1,
+                                                    'name': prod.name,
+                                                    'product_id': prod.id,
+                                                    'base': base_special,
+                                                    'price_discount' :-1.0,
+                                                    'price_surcharge': product[2].get('prix_special'),
+                                                    'price_version_id': version_id})
+
         return items
 
 
@@ -196,6 +235,26 @@ class wizard_configure_promo(wizard.interface):
         pool_obj = pooler.get_pool(cr.dbname)
         pricelist_obj = pool_obj.get('product.pricelist')
         version_obj = pool_obj.get('product.pricelist.version')
+        tarifs_speciaux_obj = pooler.get_pool(cr.dbname).get('product.tarifs.speciaux')
+
+        # Sauvegarde des données saisies (il faudra les restaurer lors de la création des version contenant les cumul promo + tarifs spéciaux) 
+        context['data_ori'] = data
+        data['form']['initialisation_ok'] = True
+
+        ## On cherche les promos qui pourraient se cumuler à cette version à tarifs spéciaux 
+        data['form']['ts_av_ids'] = tarifs_speciaux_obj.search(cr, uid, [('start_date', '<=', data['form']['start_date']), \
+                                                                         ('end_date', '>=', data['form']['start_date']), \
+                                                                         ('end_date', '<=', data['form']['end_date']) ])
+
+        data['form']['ts_ap_ids'] = tarifs_speciaux_obj.search(cr, uid, [('end_date', '>=', data['form']['end_date']), \
+                                                                         ('start_date', '<=', data['form']['end_date']), \
+                                                                         ('start_date', '>=',data['form']['start_date'])])
+
+        data['form']['ts_pdt_ids'] = tarifs_speciaux_obj.search(cr, uid, [('end_date', '>=', data['form']['end_date']), \
+                                                                          ('start_date', '<=', data['form']['start_date'])])
+        print "ts_av_ids = %s" %data['form']['ts_av_ids']
+        print "ts_ap_ids = %s" %data['form']['ts_ap_ids']
+        print "ts_pdt_ids = %s" %data['form']['ts_pdt_ids']
 
         ## On récupère toutes les listes de prix où les promos s'appliquent (promo jaune ou blanche cochée)
         blanche_ids = pricelist_obj.search(cr, uid, [('promo_blanche', '=', True), ('type', '=', 'sale')])
@@ -206,27 +265,110 @@ class wizard_configure_promo(wizard.interface):
         ## On lui donne une date de fin qui correspond au début-1jour de la promo
         for list in pricelist_obj.browse(cr, uid, blanche_ids):
 #        for list in pricelist_obj.browse(cr, uid, data['ids']):
-            new_version = self._define_promo(cr, uid, data, list)
+            new_version = self._define_promo(cr, uid, data, list, context=context)
             if new_version:
                 version_obj.write(cr, uid, [new_version], {'active': True, 'name': data['form']['title']})
-                new_items = self._create_item(cr, uid, data, new_version, 'blanche')
+                new_items = self._create_item(cr, uid, data, new_version, 'blanche', context=context)
 
         for list in pricelist_obj.browse(cr, uid, jaune_ids):
-            new_version = self._define_promo(cr, uid, data, list)
+            new_version = self._define_promo(cr, uid, data, list, context=context)
             if new_version:
                 version_obj.write(cr, uid, [new_version], {'active': True, 'name': data['form']['title']})
-                new_items = self._create_item(cr, uid, data, new_version, 'jaune')
+                new_items = self._create_item(cr, uid, data, new_version, 'jaune',context=context)
 
         promo_obj = pooler.get_pool(cr.dbname).get('product.pricelist.promo')
 
-        print "AVANT CREATE PROMO, product_ids = %s" %data['form']['product_ids'][0][2]
         promo_obj.create(cr, uid, {'name': data['form']['title'],
                                    'start_date': data['form']['start_date'],
                                    'end_date': data['form']['end_date'],
                                    'product_ids': [(6,0,data['form']['product_ids'][0][2])]})
 
-        return {}
+        # OK, arrivé à ce stade, la version des promos a été mise en place et a "poussé" les autres versions
+        # Il faut voir si ces promos ne sont pas à cumuler avec des tarifs spéciaux
+        # Recherche de toutes les listes de prix correspondant à un tarif spécial
+        ts_pl_ids = pricelist_obj.search (cr, uid, [('tarif_special', '=', True)])
+         
+        if data['form']['ts_av_ids']:
+             # Au départ, le tarif spécial se trouvait avant la promo tout en empiétant sur le début de celle-ci.
+             # Sa date de fin a déjà été reculée de sorte que ce tarif n'empiète maintenant plus sur la promo
+             # Il reste maintenant à créer une nouvelle version allant de la date de début de la promo à la date de la fin du tarif spécial
+             # et contenant le cumul des produits de la promo et tous les produits du tarif spécial
+             ts_av = tarifs_speciaux_obj.browse(cr, uid, data['form']['ts_av_ids'])
+             for ts in ts_av:
+                 data = context['data_ori']
+                 data['form']['title'] += " + " + ts.name
+                 data['form']['end_date'] = ts.end_date
+                 products = []
+                 # On rajoute les produits du tarif spécial
+                 for product in ts.product_id:
+                     products.append((0,0,{'sequence' : 1 , 'prix_vente_initial': 0.00, 'product_id': product.product_id.id, 'prix_special': product.prix_special}))
+                 data['form']['ts_products'] = products
+                 # Pour chaque liste de prix concernée, on crée cette nouvelle version
+                 for list in ts_pl_ids:
+                     pl =  pricelist_obj.browse(cr, uid, list)
+                     pl_version = self._define_promo(cr, uid, data, pl, context=context)
+                     type_promo = False
+                     if pl.promo_blanche is True:
+                         type_promo = 'blanche'
+                     if pl.promo_jaune is True:
+                         type_promo = 'jaune'
+                     if pl_version and type_promo:
+                        version_obj.write(cr, uid, [pl_version], {'active': True})
+                        pl_new_items = self._create_item(cr, uid, data, pl_version, type_promo, context=context)
 
+        if data['form']['ts_ap_ids']:
+            # Au départ, le tarif spécial se trouvait après la promo tout en empiétant sur la fin de celle-ci.
+            # Sa date de début a déjà été repoussée de sorte que ce tarif n'empiète maintenant plus sur la promo
+            # Il reste maintenant à créer une nouvelle version allant de la date de début du tarif spécial à la date de la fin de la promo
+            # et contenant le cumul des produits de la promo et tous les produits du tarif spécial
+            ts_ap = tarifs_speciaux_obj.browse(cr, uid, data['form']['ts_ap_ids'])
+            for ts in ts_ap:
+                data = context['data_ori']
+                data['form']['title'] += " + " + ts.name
+                data['form']['start_date'] = ts.start_date
+                products = []
+                # On rajoute les produits du tarif spécial
+                for product in ts.product_id:
+                    products.append((0,0,{'sequence' : 1 , 'prix_vente_initial': 0.00, 'product_id': product.product_id.id, 'prix_special': product.prix_special}))
+                data['form']['ts_products'] = products
+                # Pour chaque liste de prix concernée, on crée cette nouvelle version
+                for list in ts_pl_ids:
+                    pl =  pricelist_obj.browse(cr, uid, list)
+                    pl_version = self._define_promo(cr, uid, data, pl, context=context)
+                    type_promo = False
+                    if pl.promo_blanche is True:
+                        type_promo = 'blanche'
+                    if pl.promo_jaune is True:
+                        type_promo = 'jaune'
+                    if pl_version and type_promo:
+                       version_obj.write(cr, uid, [pl_version], {'active': True})
+                       pl_new_items = self._create_item(cr, uid, data, pl_version, type_promo, context=context)
+
+        if data['form']['ts_pdt_ids']:
+           # La promo a été crée alors qu'un tarif spécial existait déjà sur la période. Le tarif spécial a été "coupé en deux" pour
+           # laisser la place à la promo. Il reste à inclure dans la promo les produits du tarif spécial
+           ts_pdt = tarifs_speciaux_obj.browse(cr, uid, data['form']['ts_pdt_ids'])
+           for ts in ts_pdt:
+               data = context['data_ori']
+               data['form']['title'] += " + " + ts.name
+               products = []
+               # On rajoute les produits du tarif spécial
+               for product in ts.product_id:
+                   products.append((0,0,{'sequence' : 1 , 'prix_vente_initial': 0.00, 'product_id': product.product_id.id, 'prix_special': product.prix_special}))
+               data['form']['ts_products'] = products
+               for list in ts_pl_ids:
+                   pl =  pricelist_obj.browse(cr, uid, list)
+                   pl_version = self._define_promo(cr, uid, data, pl, context=context)
+                   type_promo = False
+                   if pl.promo_blanche is True:
+                       type_promo = 'blanche'
+                   if pl.promo_jaune is True:
+                       type_promo = 'jaune'
+                   if pl_version and type_promo:
+                      version_obj.write(cr, uid, [pl_version], {'active': True})
+                      pl_new_items = self._create_item(cr, uid, data, pl_version, type_promo, context=context)
+
+        return {}
 
     states = {
         'init': {
@@ -247,6 +389,7 @@ class wizard_configure_promo(wizard.interface):
                        'arch': _error_date_form,
                        'fields': {},
                        'state': [('end', 'Annuler')]},
+
         },
         'error_product': {
             'actions': [],
