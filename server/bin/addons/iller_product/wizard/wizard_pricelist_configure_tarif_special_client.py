@@ -4,6 +4,7 @@
 import wizard
 import pooler
 import time
+from osv import osv
 from datetime import date
 from datetime import datetime
 from datetime import timedelta
@@ -17,8 +18,8 @@ _configure_form = """<?xml version="1.0" encoding="utf-8" ?>
     <field name="client" required="1" />
     <field name="tarif_initial" help="Si un tarif est saisi, il sera pris comme base à la place du tarif existant"/>
     <newline/>
-    <field name="start_date" required="1" />
-    <field name="end_date" required="1" />
+    <field name="start_date" on_change="start_date_change(start_date,end_date)" required="1" />
+    <field name="end_date" on_change="end_date_change(start_date,end_date)" required="1" />
     <newline/>
     <separator colspan="4" />
     <field name="products" nolabel="1" colspan="4" width="1000" height="450" />
@@ -46,9 +47,26 @@ _error_pricelist_form = """<?xml version="1.0" encoding="utf-8" ?>
             </form>
             """
 
+class wizard_configure_tarif_special_client(osv.osv):
+      _name="wizard.pricelist.configure.tarif.special.client"
+
+      def start_date_change (self, cr, uid, ids, start_date, end_date):
+          if end_date is False:
+             return {}
+          if start_date > end_date:
+             raise osv.except_osv( ('Attention'), ('La date de fin est inférieure à la date de départ'))
+          return {}
+
+      def end_date_change (self, cr, uid, ids, start_date, end_date):
+          if start_date is False:
+             return {}
+          if start_date > end_date:
+             raise osv.except_osv( ('Attention'), ('La date de fin est inférieure à la date de départ'))
+          return {}
+
+wizard_configure_tarif_special_client()
 
 class wizard_configure_tarif_special_client(wizard.interface):
-
 
     def _valid_form(self, cr, uid, data, args, context={}):
         if len(data['form']['products']) == 0:
