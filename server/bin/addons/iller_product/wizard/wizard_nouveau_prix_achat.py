@@ -56,15 +56,16 @@ class wizard_nouveau_prix_achat(wizard.interface):
             # Mise à jour du tableau de l'historique des prix
             product_price_history_id = product_price_history_obj.create(cr, uid, 
                                          {
-                                         'name'         : data['form']['start_date'],
+                                         'name'               : data['form']['start_date'],
                                          'nouveau_prix_achat' : nouveau_prix_achat[0],
-                                         'nouveau_prix_vente': nouveau_prix_achat[0] * prod.coeff_depart,
+                                         'nouveau_prix_vente ': nouveau_prix_achat[0] * prod.coeff_depart,
                                          'product_id'         : product_id,
                                           }, 
                                           context=context)
             product_obj.write(cr, uid, [product_id], {
                                                      'prix_achat'    : nouveau_prix_achat[0],
                                                      'price_history' : [(4, product_price_history_id)],
+                                                     'prix_blanche'  : nouveau_prix_achat[0] * prod.coeff_blanche,
                                                      })
         return {}
 

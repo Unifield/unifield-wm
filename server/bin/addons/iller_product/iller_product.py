@@ -88,6 +88,11 @@ class product_product(osv.osv):
                 ret = cr.fetchone()
                 if ret:
                     res[product.id] = ret[0]
+            if ptype in ('prix_blanche') and context.get('datestandard'):
+                cr.execute('''SELECT nouveau_prix_achat FROM product_price_history WHERE product_id=%s AND name<=%s ORDER BY name desc LIMIT 1''',(product.id,context['datestandard']))
+                ret = cr.fetchone()
+                if ret:
+                    res[product.id] = ret[0] * product.coeff_blanche
 
             if 'uom' in context:
                 uom = product.uos_id or product.uom_id
