@@ -274,11 +274,6 @@ class wizard_configure_promo(wizard.interface):
 
         data['ts_av_pdt_ap_ids'] = tarifs_speciaux_obj.search(cr, uid, [('end_date', '>=', data['form']['end_date']), \
                                                                         ('start_date', '<=', data['form']['start_date'])])
-        print "ts_av_ids = %s" %data['ts_av_ids']
-        print "ts_ap_ids = %s" %data['ts_ap_ids']
-        print "ts_pdt_ids = %s" %data['ts_pdt_ids']
-        print "ts_av_pdt_ap_ids = %s" %data['ts_av_pdt_ap_ids']
-
         ## On récupère toutes les listes de prix où les promos s'appliquent (promo jaune ou blanche cochée)
         blanche_ids = pricelist_obj.search(cr, uid, [('promo_blanche', '=', True), ('type', '=', 'sale')])
         jaune_ids = pricelist_obj.search(cr, uid, [('promo_jaune', '=', True), ('type', '=', 'sale')])

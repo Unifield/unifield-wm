@@ -62,14 +62,12 @@ class wizard_nouveau_prix_achat(wizard.interface):
                                          'product_id'         : product_id,
                                           }, 
                                           context=context)
-            print "STEP 1"
             product_obj.write(cr, uid, [product_id], {
                                                      'prix_achat'    : nouveau_prix_achat[0],
                                                      'list_price'    : nouveau_prix_achat[0] * prod.coeff_depart,
                                                      'price_history' : [(4, product_price_history_id)],
                                                      'prix_blanche'  : nouveau_prix_achat[0] * prod.coeff_blanche,
                                                      })
-            print "STEP 2"
         return {}
 
     states = {

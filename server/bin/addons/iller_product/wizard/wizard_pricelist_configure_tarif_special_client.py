@@ -87,7 +87,6 @@ class wizard_configure_tarif_special_client(wizard.interface):
 
 
     def _redefine_existing_tarif_special_client(self, cr, uid, data, pricelist_id, context):
-        print "redefine_existing_tarif_special_client"
         '''
         Créé la nouvelle version de liste de prix avec les tarifs spéciaux 
         et "décale" les versions existantes
@@ -98,9 +97,6 @@ class wizard_configure_tarif_special_client(wizard.interface):
         name = data['form']['title']
         end_date = data['form']['end_date']
         start_date = data['form']['start_date']
-        print "name = %s" %name
-        print "end_date = %s" %end_date
-        print "start_date = %s" %start_date
 
         ## La version précédente s'arrête à j-1 du début de la nouvelle version avec les prix spéciaux 
         n_end_date = (datetime.strptime(end_date, '%Y-%m-%d')+timedelta(days=1)).strftime('%Y-%m-%d')
@@ -120,7 +116,6 @@ class wizard_configure_tarif_special_client(wizard.interface):
         included_ids = version_obj.search(cr, uid, [('pricelist_id', '=', pricelist_id), \
                                                     ('date_end', '<=', end_date), \
                                                     ('date_start', '>=', start_date)])
-        print "included_ids = %s" %included_ids
         if included_ids:
             for included_id in included_ids:
                 version_obj.unlink(cr, uid, [included_id])
@@ -129,7 +124,6 @@ class wizard_configure_tarif_special_client(wizard.interface):
         version_ids = version_obj.search(cr, uid, [('pricelist_id', '=', pricelist_id), \
                                                    ('date_start', '<=', start_date),\
                                                    ('date_end', '>=', end_date)])
-        print "version_ids = %s" %version_ids
 
         if version_ids:
              v_data = version_obj.read(cr, uid, version_ids[0], ['date_start', 'date_end', 'name'])
@@ -161,8 +155,6 @@ class wizard_configure_tarif_special_client(wizard.interface):
                                                      ('date_end', '>=', end_date), \
                                                      ('date_start', '<=', end_date), \
                                                      ('date_start', '>=', start_date)])
-            print "before_ids = %s" %before_ids
-            print "after_ids = %s" %after_ids
             if before_ids:
                 version_obj.write(cr, uid, before_ids, {'date_end': n_start_date})
             if after_ids:
@@ -184,7 +176,6 @@ class wizard_configure_tarif_special_client(wizard.interface):
             - 1 version de base allant de la date de fin des tarifs spéciaux jusqu'à 2100
             Toutes les promos sont perdues
         '''
-        print "define_new_tarif_special_client"
         version_obj = pooler.get_pool(cr.dbname).get('product.pricelist.version')
         item_obj = pooler.get_pool(cr.dbname).get('product.pricelist.item')
 
@@ -315,9 +306,6 @@ class wizard_configure_tarif_special_client(wizard.interface):
         '''
             Créer les différentes versions et lignes de prix
         '''
-        print "==============================================="
-        print "DEBUT create_tarif_special_client data = %s" %data['form']
-        print "DEBUT create_tarif_special_client contex = %s" %context
         pool_obj = pooler.get_pool(cr.dbname)
         pricelist_obj = pool_obj.get('product.pricelist')
         version_obj = pool_obj.get('product.pricelist.version')
@@ -366,11 +354,6 @@ class wizard_configure_tarif_special_client(wizard.interface):
                                                                   ('start_date', '<=', data['form']['start_date'])])
 
 
-        print "av_ids = %s" %data['promo_av_ids']
-        print "ap_ids = %s" %data['promo_ap_ids']
-        print "pdt_ids = %s" %data['promo_pdt_ids']
-        print "av_pdt_ap = %s" %data['promo_av_pdt_ap_ids'] 
-
         ## On récupère ensuite la liste de prix initiale servant de base et on la duplique 
         ## ou alors on part de la liste de prix déjà associée au client aucune liste de prix n'a été saisie
         client = client_obj.browse(cr, uid, data['form']['client'])
@@ -398,7 +381,6 @@ class wizard_configure_tarif_special_client(wizard.interface):
             # Si la liste de prix peut accueillier des promos, il faut y cumuler les éventuelles promos déjà existantes
             if pricelist.promo_jaune or pricelist.promo_blanche:
                 if data['promo_av_ids']:
-                    print "PROMO AVANT TS"
                     # On a une promo qui empiètait sur le début du tarif spécial. Sa date de fin a déjà été reculée à la date de début du tarif spécial
                     # Il reste maintenant à créer une nouvelle version allant de la date de début du tarif spécial à la date initiale de fin de promo,
                     # et contenant le cumul des produits de la promo et tous les produits du tarif spécial
@@ -420,7 +402,6 @@ class wizard_configure_tarif_special_client(wizard.interface):
                             pl_new_items = self._create_item(cr, uid, data, pl_version, context=context)
 
                 if data['promo_ap_ids']:
-                    print "PROMO APRES TS"
                     # On a une promo qui empiétait sur la fin du tarif spécial. Sa date de début a déjà été repoussée à la date de fin du tarif spécial.
                     # Il reste maintenant à créer une nouvelle version allant de la date initiale de début de promo à la date de fin du tarif spécial,
                     # et contenant le cumul des produits de la promo et tous les produits du tarif spécial
@@ -442,7 +423,6 @@ class wizard_configure_tarif_special_client(wizard.interface):
                             pl_new_items = self._create_item(cr, uid, data, pl_version, context=context)
 
                 if data['promo_pdt_ids']:
-                    print "PROMO PENDANT TS"
                     # On a une promo dont les dates sont comprises à l'intérieur du tarif spécial. Elle a été supprimée
                     # Il faut la recréer en y rajoutant les produits du tarif spécial
                     context['promo'] = True
@@ -463,7 +443,6 @@ class wizard_configure_tarif_special_client(wizard.interface):
                             pl_new_items = self._create_item(cr, uid, data, pl_version, context=context)
 
                 if data['promo_av_pdt_ap_ids']:
-                   print "PROMO APRES TS"
                    # On a une promo qui existait avant, durant et apres le tarif spécial. Elle a été scindée en 2: une promo qui s'arrête au début
                    # du tarif spécial, et une pormo qui commence à la fin du tarif spéciale
                    # Il reste maintenant à créer une nouvelle version de ce tarif spécial, sur toute la durée initiale du tarif spécial 

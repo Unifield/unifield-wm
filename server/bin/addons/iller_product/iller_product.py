@@ -58,7 +58,6 @@ class product_product(osv.osv):
         '''
             Calcul des tarifs en fonction des prix d'achat
         '''
-        print "vals = %s" %vals
         if 'prix_achat' in vals:
             for prd in self.browse(cr, uid, ids):
                 vals['list_price'] = vals.get('prix_achat', prd.standard_price)*vals.get('coeff_depart', prd.coeff_depart)
