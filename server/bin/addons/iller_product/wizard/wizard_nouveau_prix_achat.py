@@ -49,6 +49,7 @@ class wizard_nouveau_prix_achat(wizard.interface):
         product_price_history_obj =  pooler.get_pool(cr.dbname).get('product.price.history')
         products = data['form']['products']
         for product in products:
+            print "product = %s" %product
             nouveau_prix_achat = product[2].get('nouveau_prix_achat'),
             # remarque: nouveau_prix_achat est un TUPLE
             product_id = product[2].get('product_id')
@@ -58,15 +59,18 @@ class wizard_nouveau_prix_achat(wizard.interface):
                                          {
                                          'name'               : data['form']['start_date'],
                                          'nouveau_prix_achat' : nouveau_prix_achat[0],
-                                         'nouveau_prix_vente ': nouveau_prix_achat[0] * prod.coeff_depart,
+                                         'nouveau_prix_vente' : nouveau_prix_achat[0] * prod.coeff_depart,
                                          'product_id'         : product_id,
                                           }, 
                                           context=context)
+            print "STEP 1"
             product_obj.write(cr, uid, [product_id], {
                                                      'prix_achat'    : nouveau_prix_achat[0],
+                                                     'list_price'    : nouveau_prix_achat[0] * prod.coeff_depart,
                                                      'price_history' : [(4, product_price_history_id)],
                                                      'prix_blanche'  : nouveau_prix_achat[0] * prod.coeff_blanche,
                                                      })
+            print "STEP 2"
         return {}
 
     states = {

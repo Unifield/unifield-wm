@@ -38,7 +38,7 @@ class product_price_history(osv.osv):
     _columns = {
         'name': fields.date('Valable à partir du',required=True,select=1),
         'nouveau_prix_achat': fields.float('Prix d\'achat',required=True, digits=(16,2)),
-        'nouveau_prix_vente': fields.float('Prix de vente',required=True, digits=(16,2)),
+        'nouveau_prix_vente': fields.float('Prix de vente', required=True, digits=(16,2)),
         'product_id': fields.many2one('product.product','Product',ondelete='cascade', select=1),
         'fin' : fields.char(size=1, string=' '),
     }
@@ -58,6 +58,7 @@ class product_product(osv.osv):
         '''
             Calcul des tarifs en fonction des prix d'achat
         '''
+        print "vals = %s" %vals
         if 'prix_achat' in vals:
             for prd in self.browse(cr, uid, ids):
                 vals['list_price'] = vals.get('prix_achat', prd.standard_price)*vals.get('coeff_depart', prd.coeff_depart)
@@ -128,8 +129,8 @@ class product_product(osv.osv):
     }
 
 
-    def coeff_price_change(self, cr, uid, ids, standard_price, coeff_depart, context={}):
-        return {'value': {'list_price': standard_price*coeff_depart}}
+    def coeff_price_change(self, cr, uid, ids, standard_price, coeff_depart, coeff_blanche, context={}):
+        return {'value': {'list_price': standard_price*coeff_depart, 'prix_blanche': standard_price*coeff_blanche}}
 
 
     def promo_blanche_change(self, cr, uid, ids, coeff_blanche, prix_achat, context={}):
