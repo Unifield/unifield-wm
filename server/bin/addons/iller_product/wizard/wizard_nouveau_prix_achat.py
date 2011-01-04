@@ -49,7 +49,6 @@ class wizard_nouveau_prix_achat(wizard.interface):
         product_price_history_obj =  pooler.get_pool(cr.dbname).get('product.price.history')
         products = data['form']['products']
         for product in products:
-            print "product = %s" %product
             nouveau_prix_achat = product[2].get('nouveau_prix_achat'),
             # remarque: nouveau_prix_achat est un TUPLE
             product_id = product[2].get('product_id')
