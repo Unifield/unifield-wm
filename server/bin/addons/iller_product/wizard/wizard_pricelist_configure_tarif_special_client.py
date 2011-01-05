@@ -337,6 +337,7 @@ class wizard_configure_tarif_special_client(wizard.interface):
         tarif_special_client_obj = pooler.get_pool(cr.dbname).get('product.tarif.special.client')
 
         tarifs_speciaux_id = tarifs_speciaux_obj.create(cr, uid, {
+                                                                 'client': data['form']['client'],
                                                                  'name' : data['form']['title'],
                                                                  'start_date': data['form']['start_date'],
                                                                  'end_date': data['form']['end_date']

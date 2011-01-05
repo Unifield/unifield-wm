@@ -116,16 +116,6 @@ class wizard_configure_promo(wizard.interface):
 
         if version_ids:
             v_data = version_obj.read(cr, uid, version_ids[0], ['date_start', 'date_end', 'name'])
-#            if v_data.get('date_start') == start_date:
-#                version_obj.unlink(cr, uid, [version_ids[0]])
-#            else:
-#                version_obj.write(cr, uid, [version_ids[0]], {'date_end': n_start_date})
-#            next_id = version_obj.copy(cr, uid, base_version, {'date_start': n_end_date, 
-#                                                               'date_end': v_data.get('date_end'),
-#                                                               'base_ok': False,
-#                                                               'name': v_data.get('name')})
-#            version_obj.write(cr, uid, [next_id], {'active': True})
-#
             # Si les 2 dates de début coincident, il suffit de modifier la date de début de la version qui englobe
             if v_data.get('date_start') == start_date:
                version_obj.write(cr, uid, [version_ids[0]], {'date_start': n_end_date})
@@ -323,7 +313,12 @@ class wizard_configure_promo(wizard.interface):
                  data['form']['ts_products'] = products
                  # Pour chaque liste de prix concernée, on crée cette nouvelle version
                  for list in ts_pl_ids:
+                     # Est-ce que le client pour lequel ce tarif spécial a été défini est le même 
+                     # que le client correspondant au tarif spécial que l'on se propose de traiter?
+                     # Si oui, il faut cumuler tarif spécial + promo, si non, on passe au tarif spécial suivant
                      pl =  pricelist_obj.browse(cr, uid, list)
+                     if ts.client.property_product_pricelist != pl:
+                        continue
                      pl_version = self._define_promo(cr, uid, data, pl, context=context)
                      type_promo = False
                      if pl.promo_blanche is True:
@@ -351,7 +346,12 @@ class wizard_configure_promo(wizard.interface):
                 data['form']['ts_products'] = products
                 # Pour chaque liste de prix concernée, on crée cette nouvelle version
                 for list in ts_pl_ids:
+                    # Est-ce que le client pour lequel ce tarif spécial a été défini est le même 
+                    # que le client correspondant au tarif spécial que l'on se propose de traiter?
+                    # Si oui, il faut cumuler tarif spécial + promo, si non, on passe au tarif spécial suivant
                     pl =  pricelist_obj.browse(cr, uid, list)
+                    if ts.client.property_product_pricelist != pl:
+                       continue
                     pl_version = self._define_promo(cr, uid, data, pl, context=context)
                     type_promo = False
                     if pl.promo_blanche is True:
@@ -378,7 +378,12 @@ class wizard_configure_promo(wizard.interface):
                  data['form']['ts_products'] = products
                  # Pour chaque liste de prix concernée, on crée cette nouvelle version
                  for list in ts_pl_ids:
+                     # Est-ce que le client pour lequel ce tarif spécial a été défini est le même 
+                     # que le client correspondant au tarif spécial que l'on se propose de traiter?
+                     # Si oui, il faut cumuler tarif spécial + promo, si non, on passe au tarif spécial suivant
                      pl =  pricelist_obj.browse(cr, uid, list)
+                     if ts.client.property_product_pricelist != pl:
+                        continue
                      pl_version = self._define_promo(cr, uid, data, pl, context=context)
                      type_promo = False
                      if pl.promo_blanche is True:
@@ -392,7 +397,7 @@ class wizard_configure_promo(wizard.interface):
 
         if data['ts_av_pdt_ap_ids']:
            # La promo a été crée alors qu'un tarif spécial existait déjà sur la période (avant, pendant et apres). 
-           # Le tarif spécial a été "coupé en deux" pou laisser la place à la promo. Il reste à inclure dans la promo les produits du tarif spécial
+           # Le tarif spécial a été "coupé en deux" pour laisser la place à la promo. Il reste à inclure dans la promo les produits du tarif spécial
            ts_av_pdt_ap = tarifs_speciaux_obj.browse(cr, uid, data['ts_av_pdt_ap_ids'])
            for ts in ts_av_pdt_ap:
                data['form'] = data_ori.copy()
@@ -403,7 +408,12 @@ class wizard_configure_promo(wizard.interface):
                    products.append((0,0,{'sequence' : 1 , 'prix_vente_initial': 0.00, 'product_id': product.product_id.id, 'prix_special': product.prix_special}))
                data['form']['ts_products'] = products
                for list in ts_pl_ids:
+                   # Est-ce que le client pour lequel ce tarif spécial a été défini est le même 
+                   # que le client correspondant au tarif spécial que l'on se propose de traiter?
+                   # Si oui, il faut cumuler tarif spécial + promo, si non, on passe au tarif spécial suivant
                    pl =  pricelist_obj.browse(cr, uid, list)
+                   if ts.client.property_product_pricelist != pl:
+                       continue
                    pl_version = self._define_promo(cr, uid, data, pl, context=context)
                    type_promo = False
                    if pl.promo_blanche is True:
