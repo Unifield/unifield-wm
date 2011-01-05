@@ -19,7 +19,7 @@ _configure_form = """<?xml version="1.0" encoding="utf-8" ?>
     <field name="tarif_initial" help="Si un tarif est saisi, il sera pris comme base à la place du tarif existant"/>
     <newline/>
     <field name="start_date" on_change="start_date_change(start_date,end_date)" required="1" />
-    <field name="end_date" on_change="end_date_change(start_date,end_date)" required="1" />
+    <field name="end_date" on_change="end_date_change(start_date,end_date, client, tarif_initial)" required="1" />
     <newline/>
     <separator colspan="4" />
     <field name="products" nolabel="1" colspan="4" width="1000" height="450" />
@@ -57,11 +57,23 @@ class wizard_configure_tarif_special_client(osv.osv):
              raise osv.except_osv( ('Attention'), ('La date de fin est inférieure à la date de départ'))
           return {}
 
-      def end_date_change (self, cr, uid, ids, start_date, end_date):
+      def end_date_change (self, cr, uid, ids, start_date, end_date, client, tarif_initial):
           if start_date is False:
              return {}
           if start_date > end_date:
              raise osv.except_osv( ('Attention'), ('La date de fin est inférieure à la date de départ'))
+          # Arrivé ici, toutes les données ont à priori été saisies
+          # On vérifie que, si au tarif initial n'a été saisi, le tarif associé au client est bien un tarif spécial
+          pool_obj = pooler.get_pool(cr.dbname)
+          pricelist_obj = pool_obj.get('product.pricelist')
+          partner_obj = pool_obj.get('res.partner')
+
+          if tarif_initial is False:
+             partner = partner_obj.browse(cr, uid, client)
+             pricelist_id = partner.property_product_pricelist.id
+             if pricelist_obj.browse(cr, uid, pricelist_id).tarif_special is False:
+                 raise osv.except_osv( ('Attention'), ('Le tarif de ce client n\'est pas un tarif spécial'))
+
           return {}
 
 wizard_configure_tarif_special_client()

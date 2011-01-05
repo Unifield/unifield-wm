@@ -79,7 +79,7 @@ class wizard_export_tarifs_commerciaux(osv.osv_memory):
            c07 = 0.0
 
         export = "ACHAT;ARTIC.;DESIGNATION                            ; C. 01;   C19;  C17;   C15;   C13;   C11;   C09;   C07" + "\r\n"
-        export += ";;; 10,00;  1,00; 2,00;  3,00;  4,00;  5,00;  6,00;  7,00  " + "\r\n"              
+        export += ";;; 10.00;  1.00; 2.00;  3.00;  4.00;  5.00;  6.00;  7.00  " + "\r\n"              
 
         # Pour chaque catégorie, on imprime les prix des produits de la catégorie
         categ_ids = categ_obj.search (cr, uid, [])
