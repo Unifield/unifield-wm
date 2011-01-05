@@ -360,6 +360,7 @@ class product_tarifs_speciaux(osv.osv):
 
     _columns = {
             'name': fields.char(size=64, string='Nom', select=1, required=True),
+            'client': fields.many2one('res.partner', 'Client', select=1, required=True),
             'start_date': fields.date(string='Date de début', select=1, required=True),
             'end_date': fields.date(string='Date de fin', required=True),
             'product_id': fields.one2many('product.tarif.special.client',

@@ -252,6 +252,7 @@
             <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Tarifs Spéciaux">
+                    <field name="client"/>
                     <field name="name" />
                     <newline />
                     <field name="start_date" />
@@ -268,6 +269,7 @@
             <field name="type">tree</field>
             <field name="arch" type="xml">
                 <tree string="Tarifs Spéciaux">
+                    <field name="client" />
                     <field name="name" />
                     <field name="start_date" />
                     <field name="end_date" />
