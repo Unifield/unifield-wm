@@ -98,7 +98,7 @@
                 <form string="Exportation du tarif des commerciaux">
                             <group col="4" states="choose">
                                 <field invisible="1" name="state"/>
-                                <field nolabel = "1" height="22" colspan = "4" name ="avertissement"/>
+                                <field nolabel = "1" height="44" colspan = "4" name ="avertissement"/>
                                 <newline/>
                                 <field name="from_date"/>
                                 <newline/>
@@ -114,6 +114,7 @@
                                 <newline/>
                                 <button icon="gtk-close" name="act_export_ok" states="get" string="Fin" type="object"/>
                             </group>
+                            <separator colspan="4"/>
                 </form>
             </field>
         </record>
