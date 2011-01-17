@@ -11,6 +11,8 @@ import csv
 
 arch = """<?xml version="1.0"?>
 <form string="Exportation du Tarif SNCF">
+        <field name="advice"/>
+        <newline/>
         <field name="from_date" colspan="1"/>
         <newline/>
         <field name="file" />
@@ -19,21 +21,31 @@ arch = """<?xml version="1.0"?>
 """
 
 fields = {
+        'advice': {'string': 'Avertissement', 'type':'text', 'readonly':True},
         'from_date': {'string': 'Date de départ', 'type':'date', 'required':True},
         'file': {'string':'Fichier CSV de la SNCF', 'type':'binary', 'required':True},
 }
 
 arch_end = """<?xml version="1.0"?>
 <form string="Le tarif a été exporté">
+        <field name="advice"/>
+        <newline/>
         <field name="tarif_SNCF.csv" />
         <newline/>
         <field name="nb" colspan="4" />
 </form>"""
 fields_end = {
+        'advice': {'string': 'Attention', 'type':'text', 'readonly':True},        
         'tarif_SNCF.csv': {'string':'Taille du fichier tarif', 'type':'binary', 'required':True},
-        'nb': {'string':'Nombre de lignes mises à jour', 'type':'integer', 'readonly':True},
+        'nb': {'string':'Nombre de prix mis à jour', 'type':'integer', 'readonly':True},
 
 }
+def _init(self, cr, uid, data, context):
+    print "data = %s" %data
+    ret = {}
+    ret['advice'] = 'Le fichier EXCEL reçu de la SNCF doit avoir été converti au format CSV.\r\nLe séparateur de champ est \';\'.\r\nLe séparateur de texte est vide (il n\'y en a pas).'
+    return ret
+
 
 def _export(self, cr, uid, data, context):
 
@@ -82,7 +94,7 @@ def _export(self, cr, uid, data, context):
                  code = int(cols[0]) * 100 
               product_ids = product_obj.search(cr, uid, [('default_code', 'ilike', str(code))])
               if not product_ids:
-                 print "******************************************** PAS DE PRODUIT DE CODE %s" %code
+                 print "********** PAS DE PRODUIT DE CODE %s" %code
               else:
                  prod = product_obj.browse(cr, uid, product_ids[0])
                  uom = prod.uom_id
@@ -92,14 +104,16 @@ def _export(self, cr, uid, data, context):
                                         'date': data['form']['from_date'],
                                         })[pricelist_id]
                  cols[3] =  str(round(prix,2))
+                 nb += 1
                      
            for col in cols:
                export += unicode(col,'utf-8') + ";"
+
         export += "\r\n"
-        nb += 1
 
     export1=base64.encodestring(export.encode("utf-8"))
 
+    ret['advice']='Pour sauvegarder le tarif qui vient d\'être généré, cliquer sur le petit bouton à droite du bouton Ouvrir.'
     ret['nb'] = nb
     ret['tarif_SNCF.csv'] = export1
     return ret
@@ -107,7 +121,7 @@ def _export(self, cr, uid, data, context):
 class export_tarif_sncf(wizard.interface):
     states = {
             'init' : {
-                    'actions' : [],
+                    'actions' : [_init],
                     'result' : {'type' : 'form', 'arch' : arch, 'fields' : fields, 'state' : [('end', 'Cancel'),('export', 'Génération du tarif') ]}
             },
             'export' : {
