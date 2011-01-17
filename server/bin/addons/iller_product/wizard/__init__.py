@@ -4,7 +4,8 @@
 import wizard_pricelist_configure_promo
 import wizard_pricelist_configure_tarif_special_client
 import wizard_nouveau_prix_achat
-import wizard_export_tarif
+import wizard_export_tarif_hilton
+import wizard_export_tarif_sncf
 import wizard_export_promo
 import wizard_export_tarifs_commerciaux
 
