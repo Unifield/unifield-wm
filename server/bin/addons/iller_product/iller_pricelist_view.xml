@@ -211,12 +211,19 @@
             <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Promo">
-                    <field name="name" />
+                    <field name="name" attrs="{'readonly': [('state', '=', 'done')]}" colspan="4"/>
                     <newline />
-                    <field name="start_date" />
-                    <field name="end_date" />
+                    <field name="start_date" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                    <field name="end_date" attrs="{'readonly': [('state', '=', 'done')]}"/>
                     <separator colspan="4" string="Produits" />
-                    <field name="product_ids" colspan="4" nolabel="1" />
+                    <field name="product_ids" colspan="4" nolabel="1" mode="tree" attrs="{'readonly': [('state', '=', 'done')]}">
+                        <tree string="Produits" editable="top">
+                            <field name="name" />
+                            <field name="product_id" />
+                        </tree>
+                    </field>
+                    <field name="state" invisible="0" />
+                    <button name="_create_promo" string="Créer la promo" type="object" states="draft"/>
                 </form>
             </field>
         </record>
@@ -239,12 +246,24 @@
             <field name="res_model">product.pricelist.promo</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
+            <field name="domain">[('state', '=', 'done')]</field>
+        </record>
+
+        <record id="act_product_pricelist_promo_form" model="ir.actions.act_window">
+            <field name="name">Configurer une promo</field>
+            <field name="res_model">product.pricelist.promo</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
         </record>
 
         <menuitem
             id="menu_product_pricelist_promo"
             action="act_product_pricelist_promo"
             parent="product.menu_product_pricelist_main" />
+
+        <menuitem action="act_product_pricelist_promo_form"
+                  id="menu_pricelist_configure_promo"
+                  parent="product.menu_product_pricelist_main" /> 
 
         <record id="product_pricelist_tarifs_speciaux_form_view" model="ir.ui.view">
             <field name="name">product.pricelist.tarifs_speciaux.form.view</field>
