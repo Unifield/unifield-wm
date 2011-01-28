@@ -122,6 +122,7 @@ class product_product(osv.osv):
         'cost_method': lambda *a: 'average',
         'type_cond': lambda *a: '0001',
         'type_preselec': lambda *a: '1',
+        'coeff_blanche': lambda *a: 1.00,
     }
 
 

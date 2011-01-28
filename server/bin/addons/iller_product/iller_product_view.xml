@@ -13,8 +13,8 @@
                         <group colspan="2" col="2">
                             <separator string="Achat" />
                             <field name="standard_price" readonly="1"/>
-                            <field name="prix_achat" on_change="coeff_price_change(prix_achat, coeff_depart, coeff_blanche)" />
-                            <field name="coeff_depart" on_change="coeff_price_change(prix_achat, coeff_depart, coeff_blanche)" />
+                            <field name="prix_achat" on_change="coeff_price_change(prix_achat, coeff_depart, coeff_blanche)" required="1" />
+                            <field name="coeff_depart" on_change="coeff_price_change(prix_achat, coeff_depart, coeff_blanche)" required="1" />
                             <field groups="base.group_extended" name="cost_method"/>
                         </group>
                         <group colspan="2" col="2">
@@ -40,7 +40,7 @@
                                </tree>
                         </field>
                         <separator colspan="4" string="Promos" />
-                        <field name="coeff_blanche" on_change="promo_blanche_change(coeff_blanche, prix_achat)" />
+                        <field name="coeff_blanche" on_change="promo_blanche_change(coeff_blanche, prix_achat)" required="1" />
                         <field name="prix_blanche" readonly="1" />
 <!--
                         <field name="coeff_jaune" />
