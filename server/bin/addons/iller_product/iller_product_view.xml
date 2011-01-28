@@ -12,14 +12,14 @@
                     <page string='Prices &amp; Suppliers'>
                         <group colspan="2" col="2">
                             <separator string="Achat" />
-                            <field name="standard_price" />
+                            <field name="standard_price" readonly="1"/>
                             <field name="prix_achat" on_change="coeff_price_change(prix_achat, coeff_depart, coeff_blanche)" />
                             <field name="coeff_depart" on_change="coeff_price_change(prix_achat, coeff_depart, coeff_blanche)" />
                             <field groups="base.group_extended" name="cost_method"/>
                         </group>
                         <group colspan="2" col="2">
                             <separator string="Vente" />
-                            <field name="list_price" />
+                            <field name="list_price" readonly="1"/>
                             <field name="price_margin" select="1"/>
                             <field name="price_extra" select="1"/>
                             <field name="type_cond" on_change="cond_onchange(type_cond, type_preselec)" required="1"/>

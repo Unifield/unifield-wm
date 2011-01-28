@@ -58,12 +58,10 @@ class product_product(osv.osv):
         '''
             Calcul des tarifs en fonction des prix d'achat
         '''
-        if 'prix_achat' in vals:
-            for prd in self.browse(cr, uid, ids):
-                vals['list_price'] = vals.get('prix_achat', prd.standard_price)*vals.get('coeff_depart', prd.coeff_depart)
- 
-            if 'coeff_blanche' in vals:
-                vals['prix_blanche'] = vals.get('prix_achat', prd.standard_price)*vals.get('coeff_blanche', prd.coeff_blanche)
+        print vals
+        for prd in self.browse(cr, uid, ids):
+            vals['list_price'] = vals.get('prix_achat', prd.prix_achat)*vals.get('coeff_depart', prd.coeff_depart)
+            vals['prix_blanche'] = vals.get('prix_achat', prd.prix_achat)*vals.get('coeff_blanche', prd.coeff_blanche)
 
         return super(product_product, self).write(cr, uid, ids, vals, context=context)
 
@@ -128,8 +126,8 @@ class product_product(osv.osv):
     }
 
 
-    def coeff_price_change(self, cr, uid, ids, standard_price, coeff_depart, coeff_blanche, context={}):
-        return {'value': {'list_price': standard_price*coeff_depart, 'prix_blanche': standard_price*coeff_blanche}}
+    def coeff_price_change(self, cr, uid, ids, prix_achat, coeff_depart, coeff_blanche, context={}):
+        return {'value': {'list_price': prix_achat*coeff_depart, 'prix_blanche': prix_achat*coeff_blanche}}
 
 
     def promo_blanche_change(self, cr, uid, ids, coeff_blanche, prix_achat, context={}):
