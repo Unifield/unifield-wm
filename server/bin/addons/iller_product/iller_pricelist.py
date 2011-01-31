@@ -328,11 +328,24 @@ class product_nouveau_prix_achat(osv.osv):
 
     }
 
-    def on_change_product_id (self, cr, uid, ids, prod_id=False):
+    def on_change_product_id (self, cr, uid, ids, prod_id=False, context={}):
         if not prod_id:
-           return {}
+            return {}
+        warning = {}
+        title = False
+        message = False
+        promo_obj = self.pool.get('product.pricelist.promo')
+        promo_ids = promo_obj.search(cr, uid, [('start_date', '>', datetime.now())])
+        for promo in promo_obj.browse(cr, uid, promo_ids):
+            for prod in promo.product_ids:
+                if prod.product_id.id == prod_id:
+                    title = ("Produit [%s]%s dans une promo") %(prod.product_id.default_code, prod.product_id.name.replace('  ',''))
+                    message = "Attention ! Le produit [%s]%s fait partie de la promo %s qui commence le %s" %(prod.product_id.default_code, prod.product_id.name.replace('  ',''), promo.name, promo.start_date)
+                    warning = {'title': title,
+                               'message': message,}
+
         product = self.pool.get('product.product').browse(cr, uid, prod_id)
-        return {'value': {'ancien_prix_achat' : product.prix_achat}}
+        return {'value': {'ancien_prix_achat' : product.prix_achat}, 'warning': warning}
 
 
 product_nouveau_prix_achat()

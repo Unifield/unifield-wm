@@ -196,7 +196,7 @@
             <field eval="7" name="priority"/>
             <field name="arch" type="xml">
                 <form string="Produits ayant un nouveau prix d'achat">
-                    <field name="product_id" on_change="on_change_product_id(product_id)"/>
+                    <field name="product_id" on_change="on_change_product_id(product_id, context)"/>
                     <newline/>
                     <field name="ancien_prix_achat" readonly="1"/>
                     <newline/>
