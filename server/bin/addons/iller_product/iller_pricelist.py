@@ -60,6 +60,28 @@ class product_pricelist_bareme(osv.osv):
 
 product_pricelist_bareme()
 
+class pricelist_promo_configuration(osv.osv):
+    _name = 'pricelist.promo.configuration'
+    _description = 'Ecran de configuration des promos'
+
+    def create(self, cr, uid, values, context={}):
+        if len(self.search(cr, uid, [])) > 0:
+            raise osv.except_osv('Erreur', 'Impossible de créer une nouvelle configuration - Veuillez modifier les valeurs dans la configuration actuelle')
+        return super(pricelist_promo_configuration, self).create(cr, uid, values, context=context)
+
+    def unlink(self, cr, uid, ids, context={}):
+        raise osv.except_osv('Erreur', 'Impossible de supprimer cette configuration - Veuillez modifier les valeurs dans la configuration actuelle')
+
+        return False
+
+    _columns = {
+        'name': fields.char(size=64, string='Nom', required=True, readonly=True),
+        'bareme_jaune': fields.many2one('product.pricelist.bareme', string='Barème jaune', required=True),
+        'bareme_page2': fields.many2one('product.pricelist.bareme', string='Barème Page 2', required=True),
+    }
+
+pricelist_promo_configuration()
+
 
 class product_pricelist_version(osv.osv):
     _name = 'product.pricelist.version'
@@ -499,11 +521,10 @@ class product_pricelist_promo(osv.osv):
                 items.append(item_id)
 
         elif type == 'jaune':
-            ## On recherche le bareme c13
-            bareme_ids = self.pool.get('product.pricelist.bareme').search(cr, uid, [('name', '=', 'c13')])
-            if bareme_ids:
-                bareme = bareme_ids[0]
-                coeff = self.pool.get('product.pricelist.bareme').read(cr, uid, bareme, ['valeur']).get('valeur', 1.190470)
+            ## On recherche le bareme mis dans la configuration
+            b_conf_id = self.pool.get('pricelist.promo.bareme').search(cr, uid, [])
+            b_conf = self.pool.get('pricelist.promo.bareme').browse(cr, uid, b_conf_id)
+            coeff = b_conf.bareme_jaune.valeur
 
             ## On recherche le type de prix qui correspond au prix de vente classique
             type_ids = self.pool.get('product.price.type').search(cr, uid, [('name', '=', 'Public Price')])
@@ -751,11 +772,9 @@ class product_in_promo(osv.osv):
     _order = 'name'
 
     def _get_prix_jaune(self, cr, uid, ids, field_name, arg, context={}):
-        bareme_obj = self.pool.get('product.pricelist.bareme')
-        b16 = bareme_obj.search(cr, uid, [('name', '=', 'c13')])
-        b_coeff = 1.190470
-        if b16 and len(b16) > 0:
-            b_coeff = bareme_obj.read(cr, uid, b16[0], ['valeur']).get('valeur', 1.190470)
+        b_conf_id = self.pool.get('pricelist.promo.bareme').search(cr, uid, [])
+        b_conf = self.pool.get('pricelist.promo.bareme').browse(cr, uid, b_conf_id)
+        b_coeff = b_conf.bareme_jaune.valeur
         res = {}
         for promo_in in self.browse(cr, uid, ids):
             if promo_in.product_id:

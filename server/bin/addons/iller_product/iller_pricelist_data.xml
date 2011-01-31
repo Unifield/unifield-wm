@@ -3692,6 +3692,12 @@
             <field name="bareme_id" ref="product_pricelist_bareme_c17" />
         </record>
 
+        <record id="pricelist_promo_configuration_default" model="pricelist.promo.configuration">
+            <field name="name">Configuration des promos</field>
+            <field name="bareme_jaune" ref="product_pricelist_bareme_c13" />
+            <field name="bareme_page2" ref="product_pricelist_bareme_c16" />
+        </record>
+
 
     </data>
 </openerp>

@@ -65,6 +65,40 @@
                   action="action_product_pricelist_bareme_tree"
                   parent="product.menu_price" />
 
+        <record id="pricelist_promo_configuration_form_view" model="ir.ui.view">
+            <field name="name">pricelist.promo.configuration.form.view</field>
+            <field name="model">pricelist.promo.configuration</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Configuration des promos">
+                    <field name="name" colspan="4" readonly="1"/>
+                    <field name="bareme_jaune" />
+                    <field name="bareme_page2" />
+                </form>
+            </field>
+        </record>
+
+        <record id="pricelist_promo_configuration_tree_view" model="ir.ui.view">
+            <field name="name">pricelist.promo.configuration.tree.view</field>
+            <field name="model">pricelist.promo.configuration</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Configuration des promos">
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_pricelist_promo_configuration_form" model="ir.actions.act_window">
+            <field name="name">Configuration des promos</field>
+            <field name="res_model">pricelist.promo.configuration</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_pricelist_promo_configuration"
+                  action="action_pricelist_promo_configuration_form"
+                  parent="product.menu_price" />
 
         <!-- Ajout des checkbox pour indiquer qu'une liste de prix contient les promos jaunes ou blanches -->
         <record id="inherit_promo_product_pricelist_form" model="ir.ui.view">

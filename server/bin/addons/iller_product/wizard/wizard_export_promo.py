@@ -31,13 +31,12 @@ class export_tarif_promo(wizard.interface):
         promo_obj = pooler.get_pool(cr.dbname).get('product.pricelist.promo')
         product_obj = pooler.get_pool(cr.dbname).get('product.product')
         bareme_obj = pooler.get_pool(cr.dbname).get('product.pricelist.bareme')
-
-        bareme = 0.00
-
-        bareme_ids = bareme_obj.search(cr, uid, [('name', '=', 'c13')])
-        bareme_brw = bareme_obj.browse(cr, uid, bareme_ids)
-        if bareme_brw and len(bareme_brw) > 0:
-            bareme = bareme_brw[0]
+        
+        ## On récupère le barème pour les promo jaune
+        b_conf_id = self.pool.get('pricelist.promo.bareme').search(cr, uid, [])
+        b_conf = self.pool.get('pricelist.promo.bareme').browse(cr, uid, b_conf_id)
+        b_coeff = b_conf.bareme_jaune.valeur
+        
         promo = promo_obj.browse(cr, uid, data['ids'])[0]
 
         export = "PRODUIT;PRIX" + "\r\n"
@@ -46,7 +45,7 @@ class export_tarif_promo(wizard.interface):
             if data['form']['type'] == 'blanche':
                 p_price = p.prix_blanche
             else:
-                p_price = round(p.standard_price*bareme.valeur, 2)
+                p_price = round(p.standard_price*b_coeff, 2)
             export += "%s;%s" % (p.name, p_price)
             export += "\r\n"
 
