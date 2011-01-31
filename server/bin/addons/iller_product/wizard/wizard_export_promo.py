@@ -49,7 +49,7 @@ class export_tarif_promo(wizard.interface):
                 p_price = p2.prix_blanche
             else:
                 p_price = round(p2.prix_jaune,2)
-            export += "%s;%s" % (p2.name, p2_price)
+            export += "%s;%s" % (p2.name, p_price)
             export += "\r\n"
 
         export1=base64.encodestring(export.encode("utf-8"))
