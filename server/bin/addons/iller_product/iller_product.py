@@ -134,7 +134,7 @@ class product_product(osv.osv):
         for product in self.browse(cr, uid, ids):
             history_ids = history_obj.search(cr, uid, [('name', '<', datetime.now())], offset=0, limit=1, order="name desc", context=context)
             if history_ids and len(history_ids) > 0:
-                res[product.id] = history_obj.read(cr, uid, history_ids[0], ['nouveau_prix_achat']).read('nouveau_prix_achat', 0.00)
+                res[product.id] = history_obj.read(cr, uid, history_ids[0], ['nouveau_prix_achat']).get('nouveau_prix_achat', 0.00)
             else:
                 res[product.id] = 0.00
 
