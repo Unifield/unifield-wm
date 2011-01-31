@@ -783,6 +783,18 @@ class product_in_promo(osv.osv):
                 res[promo_in.id] = False
 
         return res
+
+    def onchange_product(self, cr, uid, ids, product_id, context={}):
+        v = {}
+        product_obj = self.pool.get('product.product')
+        if product_id:
+            for p in product_obj.browse(cr, uid, [product_id]):
+                v['prix_blanche'] = p.prix_blanche
+                b_conf_id = self.pool.get('pricelist.promo.configuration').search(cr, uid, [])
+                b_conf = self.pool.get('pricelist.promo.configuration').browse(cr, uid, b_conf_id)
+                b_coeff = b_conf[0].bareme_jaune.valeur
+                v['prix_jaune'] = p.list_price*b_coeff
+        return {'value': v}
             
 
     _columns = {
