@@ -114,6 +114,8 @@
                                 <newline/>
                                 <field name="from_date"/>
                                 <newline/>
+                                <field name="achat_inclus"/>
+                                <newline/>
                                 <button icon="gtk-cancel" name="act_cancel" special="cancel" states="choose" string="Annulation" type="object"/>
                                 <button icon="gtk-ok" name="act_getfile" states="choose" string="Génération du fichier" type="object"/>
                             </group>

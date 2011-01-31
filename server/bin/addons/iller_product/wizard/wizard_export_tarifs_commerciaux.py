@@ -88,22 +88,28 @@ class wizard_export_tarifs_commerciaux(osv.osv_memory):
             for product_id in product_ids:
                 product = product_obj.browse(cr, uid, product_id)
                 # Recherche du prix selon la date saisie
-                cr.execute('''SELECT nouveau_prix_vente FROM product_price_history WHERE product_id=%s  AND name<=%s ORDER BY name desc LIMIT 1''',(product.id,this.from_date))
+                cr.execute('''SELECT nouveau_prix_achat, nouveau_prix_vente FROM product_price_history WHERE product_id=%s  AND name<=%s ORDER BY name desc LIMIT 1''',(product.id,this.from_date))
                 ret = cr.fetchone()
                 if ret:
-                   prix = ret[0]
+                   prix_achat = ret[0]
+                   prix_vente = ret[1]
                 else:
-                   prix = 0.0
+                   prix_achat = 0.0
+                   prix_vente = 0.0
 
-                export += ";" + product.default_code + ";" + product.name + ";"
-                export += str(round(prix * c01,2)) + ";"
-                export += str(round(prix * c19,2)) + ";"
-                export += str(round(prix * c17,2)) + ";"
-                export += str(round(prix * c15,2)) + ";"
-                export += str(round(prix * c13,2)) + ";"
-                export += str(round(prix * c11,2)) + ";"
-                export += str(round(prix * c09,2)) + ";"
-                export += str(round(prix * c07,2)) + ";"
+                if this.achat_inclus:
+                    export += str(round(prix_achat,2)) + ";"
+                else:
+                    export += ";"
+                export += product.default_code + ";" + product.name + ";"
+                export += str(round(prix_vente * c01,2)) + ";"
+                export += str(round(prix_vente * c19,2)) + ";"
+                export += str(round(prix_vente * c17,2)) + ";"
+                export += str(round(prix_vente * c15,2)) + ";"
+                export += str(round(prix_vente * c13,2)) + ";"
+                export += str(round(prix_vente * c11,2)) + ";"
+                export += str(round(prix_vente * c09,2)) + ";"
+                export += str(round(prix_vente * c07,2)) + ";"
                 export += "\r\n"
 
         export1=base64.encodestring(export.encode("utf-8"))
@@ -116,6 +122,7 @@ class wizard_export_tarifs_commerciaux(osv.osv_memory):
             'name': fields.char('Filename', 16, readonly=True),
             'avertissement': fields.text('ATTENTION', readonly=True),
             'from_date': fields.date('Date de départ', required=True),
+            'achat_inclus': fields.boolean('Inclure le prix d\'achat', required=True),
             'advice': fields.text('Advice', readonly=True),
             'data': fields.binary('File', readonly=True),
             'state' : fields.selection( ( ('choose','choose'),   # choose client 
