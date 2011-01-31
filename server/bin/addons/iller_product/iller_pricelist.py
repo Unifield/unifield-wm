@@ -499,11 +499,11 @@ class product_pricelist_promo(osv.osv):
                 items.append(item_id)
 
         elif type == 'jaune':
-            ## On recherche le bareme c15
+            ## On recherche le bareme c13
             bareme_ids = self.pool.get('product.pricelist.bareme').search(cr, uid, [('name', '=', 'c13')])
             if bareme_ids:
                 bareme = bareme_ids[0]
-                coeff = self.pool.get('product.pricelist.bareme').read(cr, uid, bareme, ['valeur']).get('valeur', 1.136300)
+                coeff = self.pool.get('product.pricelist.bareme').read(cr, uid, bareme, ['valeur']).get('valeur', 1.190470)
 
             ## On recherche le type de prix qui correspond au prix de vente classique
             type_ids = self.pool.get('product.price.type').search(cr, uid, [('name', '=', 'Public Price')])
@@ -750,10 +750,28 @@ class product_in_promo(osv.osv):
     _description = 'Produit dans la promo'
     _order = 'name'
 
+    def _get_prix_jaune(self, cr, uid, ids, field_name, arg, context={}):
+        bareme_obj = self.pool.get('product.pricelist.bareme')
+        b16 = bareme_obj.search(cr, uid, [('name', '=', 'c13')])
+        b_coeff = 1.190470
+        if b16 and len(b16) > 0:
+            b_coeff = bareme_obj.read(cr, uid, b16[0], ['valeur']).get('valeur', 1.190470)
+        res = {}
+        for promo_in in self.browse(cr, uid, ids):
+            if promo_in.product_id:
+                res[promo_in.id] = promo_in.product_id.list_price*b_coeff
+            else:
+                res[promo_in.id] = False
+
+        return res
+            
+
     _columns = {
         'name': fields.integer(string='Séquence', readonly=True),
         'product_id': fields.many2one('product.product', string='Produit', required='1'),
         'promo_id': fields.many2one('product.pricelist.promo'),
+        'prix_blanche': fields.related('product_id', 'prix_blanche', string='Prix blanche', readonly=True),
+        'prix_jaune': fields.function(_get_prix_jaune, method=True, string='Prix jaune', readonly=True, store=False),
     }
 
 product_in_promo()

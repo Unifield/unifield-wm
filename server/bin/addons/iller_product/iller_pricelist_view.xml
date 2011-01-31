@@ -220,6 +220,8 @@
                         <tree string="Produits" editable="top">
                             <field name="name" />
                             <field name="product_id" />
+                            <field name="prix_blanche" />
+                            <field name="prix_jaune" />
                         </tree>
                     </field>
                     <field name="state" invisible="0" />
