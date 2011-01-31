@@ -572,11 +572,24 @@ class product_pricelist_promo(osv.osv):
         pricelist_obj = self.pool.get('product.pricelist')
         version_obj = self.pool.get('product.pricelist.version')
         tarifs_speciaux_obj = self.pool.get('product.tarifs.speciaux')
+        p_history_obj = self.pool.get('product.price.history')
         product_ids = []
         data = {}
         data['form'] = self.read(cr, uid, ids[0])
         for promo_in in self.pool.get('product.pricelist.promo.in').browse(cr, uid, data['form']['product_ids']):
             product_ids.append(promo_in.product_id.id)
+            p_history_obj.create(cr, uid, {'product_id': promo_in.product_id.id,
+                                          'name': data['form']['end_date'],
+                                          'nouveau_prix_achat': promo_in.product_id.prix_achat,
+                                          'nouveau_prix_vente': promo_in.product_id.prix_achat*promo_in.product_id.coeff_depart,
+                                         })
+            p_history_obj.create(cr, uid, {'product_id': promo_in.product_id.id,
+                                          'name': data['form']['start_date'],
+                                          'nouveau_prix_achat': promo_in.new_prix_achat,
+                                          'nouveau_prix_vente': promo_in.new_prix_achat*promo_in.product_id.coeff_depart,
+                                          'comment': 'Promo \'%s\'' %data['form']['name'],
+                                         })
+
 
         data = {}
         data['form'] = self.read(cr, uid, ids[0])
@@ -794,6 +807,7 @@ class product_in_promo(osv.osv):
                 b_conf = self.pool.get('pricelist.promo.configuration').browse(cr, uid, b_conf_id)
                 b_coeff = b_conf[0].bareme_jaune.valeur
                 v['prix_jaune'] = p.list_price*b_coeff
+                v['prix_achat'] = p.prix_achat
         return {'value': v}
             
 
@@ -803,6 +817,8 @@ class product_in_promo(osv.osv):
         'promo_id': fields.many2one('product.pricelist.promo'),
         'prix_blanche': fields.related('product_id', 'prix_blanche', string='Prix blanche', readonly=True),
         'prix_jaune': fields.function(_get_prix_jaune, method=True, string='Prix jaune', readonly=True, store=False),
+        'prix_achat': fields.related('product_id', 'prix_achat', string='Prix achat', readonly=True),
+        'new_prix_achat': fields.float(digits=(16,2), string='Nouveau prix d\'achat'),
     }
 
 product_in_promo()

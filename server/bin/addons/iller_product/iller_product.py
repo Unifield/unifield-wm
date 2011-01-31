@@ -123,9 +123,26 @@ class product_product(osv.osv):
                         uom.id, res[product.id], context['uom'])
         return res
 
+    def _get_prix_achat(self, cr, uid, ids, field_name, arg, context={}):
+        '''
+            Retourne le prix d'achat du produit en fonction de l'historique
+            des prix d'achat
+        '''
+        history_obj = self.pool.get('product.price.history')
+        res = {}
+
+        for product in self.browse(cr, uid, ids):
+            history_ids = history_obj.search(cr, uid, [('name', '<', datetime.now())], offset=0, limit=1, order="name desc", context=context)
+            if history_ids and len(history_ids) > 0:
+                res[product.id] = history_obj.read(cr, uid, history_id[0], ['nouveau_prix_achat']).read('nouveau_prix_achat', 0.00)
+            else:
+                res[product.id] = 0.00
+
+        return res
+
 
     _columns = {
-        'prix_achat': fields.float(digits=(16, int(config['price_accuracy'])), string='Prix d\'achat'),
+        'prix_achat': fields.function(_get_prix_achat, method=True, string='Prix d\'achat', digits=(16, int(config['price_accuracy'])), store=True),
         'coeff_depart': fields.float(digits=(16,2), string='Coeff. départ'),
         'type_cond': fields.selection([('0000', 'PIECE'), ('0001', 'KILO'), ('0002', 'CARTON'), ('0003', 'BARQUETTE')], 
                                                                                             string='Type conditionnement'),
