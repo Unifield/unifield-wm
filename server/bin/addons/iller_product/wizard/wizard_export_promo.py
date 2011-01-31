@@ -42,6 +42,16 @@ class export_tarif_promo(wizard.interface):
             export += "%s;%s" % (p.name, p_price)
             export += "\r\n"
 
+        export = "PAGE2;   " + "\r\n"
+        for p in promo.product2_ids:
+            p_price = 0.00
+            if data['form']['type'] == 'blanche':
+                p_price = p.prix_blanche
+            else:
+                p_price = round(p.prix_jaune,2)
+            export += "%s;%s" % (p.name, p_price)
+            export += "\r\n"
+
         export1=base64.encodestring(export.encode("utf-8"))
 
         data['file'] = export1
