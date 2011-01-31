@@ -524,7 +524,7 @@ class product_pricelist_promo(osv.osv):
             ## On recherche le bareme mis dans la configuration
             b_conf_id = self.pool.get('product.pricelist.bareme').search(cr, uid, [])
             b_conf = self.pool.get('product.pricelist.bareme').browse(cr, uid, b_conf_id)
-            coeff = b_conf.bareme_jaune.valeur
+            coeff = b_conf[0].bareme_jaune.valeur
 
             ## On recherche le type de prix qui correspond au prix de vente classique
             type_ids = self.pool.get('product.price.type').search(cr, uid, [('name', '=', 'Public Price')])
