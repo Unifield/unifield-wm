@@ -380,7 +380,9 @@ class product_pricelist_promo(osv.osv):
         if not context:
             context={}
         seq_max = len(vals.get('product_ids', []))
+        seq_max2 = len(vals.get('product2_ids', []))
         i = 0
+        j = 0
         if 'product_ids' in vals:
             for promo_in in vals.get('product_ids', []):
                 vals['product_ids'][i][2].update({'name': seq_max})
@@ -388,9 +390,9 @@ class product_pricelist_promo(osv.osv):
                 i += 1
         if 'product2_ids' in vals:
             for promo_in in vals.get('product2_ids', []):
-                vals['product2_ids'][i][2].update({'name': seq_max})
-                seq_max -= 1
-                i += 1
+                vals['product2_ids'][j][2].update({'name': seq_max2})
+                seq_max2 -= 1
+                j += 1
         
 
         return super(product_pricelist_promo, self).create(cr, uid, vals, context=context)
