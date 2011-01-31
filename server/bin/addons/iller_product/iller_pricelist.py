@@ -772,9 +772,9 @@ class product_in_promo(osv.osv):
     _order = 'name'
 
     def _get_prix_jaune(self, cr, uid, ids, field_name, arg, context={}):
-        b_conf_id = self.pool.get('product.pricelist.bareme').search(cr, uid, [])
-        b_conf = self.pool.get('product.pricelist.bareme').browse(cr, uid, b_conf_id)
-        b_coeff = b_conf.bareme_jaune.valeur
+        b_conf_id = self.pool.get('pricelist.promo.configuration').search(cr, uid, [])
+        b_conf = self.pool.get('pricelist.promo.configuration').browse(cr, uid, b_conf_id)
+        b_coeff = b_conf[0].bareme_jaune.valeur
         res = {}
         for promo_in in self.browse(cr, uid, ids):
             if promo_in.product_id:
