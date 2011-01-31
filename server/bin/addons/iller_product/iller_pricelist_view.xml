@@ -259,7 +259,7 @@
                         </tree>
                     </field>
                     <field name="state" invisible="0" />
-                    <button name="_create_promo" string="Créer la promo" type="object" states="draft"/>
+                    <button name="_create_promo" string="Valider la promo" type="object" states="draft"/>
                 </form>
             </field>
         </record>

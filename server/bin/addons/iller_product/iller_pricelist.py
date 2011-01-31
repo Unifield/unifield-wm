@@ -522,8 +522,8 @@ class product_pricelist_promo(osv.osv):
 
         elif type == 'jaune':
             ## On recherche le bareme mis dans la configuration
-            b_conf_id = self.pool.get('pricelist.promo.bareme').search(cr, uid, [])
-            b_conf = self.pool.get('pricelist.promo.bareme').browse(cr, uid, b_conf_id)
+            b_conf_id = self.pool.get('product.pricelist.bareme').search(cr, uid, [])
+            b_conf = self.pool.get('product.pricelist.bareme').browse(cr, uid, b_conf_id)
             coeff = b_conf.bareme_jaune.valeur
 
             ## On recherche le type de prix qui correspond au prix de vente classique
@@ -772,8 +772,8 @@ class product_in_promo(osv.osv):
     _order = 'name'
 
     def _get_prix_jaune(self, cr, uid, ids, field_name, arg, context={}):
-        b_conf_id = self.pool.get('pricelist.promo.bareme').search(cr, uid, [])
-        b_conf = self.pool.get('pricelist.promo.bareme').browse(cr, uid, b_conf_id)
+        b_conf_id = self.pool.get('product.pricelist.bareme').search(cr, uid, [])
+        b_conf = self.pool.get('product.pricelist.bareme').browse(cr, uid, b_conf_id)
         b_coeff = b_conf.bareme_jaune.valeur
         res = {}
         for promo_in in self.browse(cr, uid, ids):

@@ -33,8 +33,8 @@ class export_tarif_promo(wizard.interface):
         bareme_obj = pooler.get_pool(cr.dbname).get('product.pricelist.bareme')
         
         ## On récupère le barème pour les promo jaune
-        b_conf_id = self.pool.get('pricelist.promo.bareme').search(cr, uid, [])
-        b_conf = self.pool.get('pricelist.promo.bareme').browse(cr, uid, b_conf_id)
+        b_conf_id = self.pool.get('product.pricelist.bareme').search(cr, uid, [])
+        b_conf = self.pool.get('product.pricelist.bareme').browse(cr, uid, b_conf_id)
         b_coeff = b_conf.bareme_jaune.valeur
         
         promo = promo_obj.browse(cr, uid, data['ids'])[0]
