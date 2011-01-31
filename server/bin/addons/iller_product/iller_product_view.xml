@@ -31,12 +31,13 @@
                                      <field name="name"/>
                                      <field name="nouveau_prix_achat"/>
                                      <field name="nouveau_prix_vente"/>
+                                     <field name="comment" />
                                </form>
                               <tree string = "Historique des Prix">
                                      <field name="name"/>
                                      <field name="nouveau_prix_achat"/>
                                      <field name="nouveau_prix_vente"/>
-                                     <field name="fin"/>
+                                     <field name="comment" />
                                </tree>
                         </field>
                         <separator colspan="4" string="Promos" />

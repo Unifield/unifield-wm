@@ -41,6 +41,7 @@ class product_price_history(osv.osv):
         'nouveau_prix_vente': fields.float('Prix de vente', required=True, digits=(16,2)),
         'product_id': fields.many2one('product.product','Product',ondelete='cascade', select=1),
         'fin' : fields.char(size=1, string=' '),
+        'comment': fields.char(size=128, string='Commentaire'),
     }
     _defaults = {
         'name': lambda *a: time.strftime('%Y-%m-%d'),
@@ -58,9 +59,34 @@ class product_product(osv.osv):
         '''
             Calcul des tarifs en fonction des prix d'achat
         '''
+        history_obj = self.pool.get('product.price.history')
+        history_id = history_obj.search(cr, uid, [('name', '=', datetime.now())])
         for prd in self.browse(cr, uid, ids):
             vals['list_price'] = vals.get('prix_achat', prd.prix_achat)*vals.get('coeff_depart', prd.coeff_depart)
             vals['prix_blanche'] = vals.get('prix_achat', prd.prix_achat)*vals.get('coeff_blanche', prd.coeff_blanche)
+
+            if 'prix_achat' in vals:
+                data_history = {'name': datetime.now(),
+                                'nouveau_prix_achat': vals.get('prix_achat'),
+                                'nouveau_prix_vente': vals.get('prix_achat')*vals.get('coeff_depart', prd.coeff_depart),
+                                'product_id': prd.id,
+                                'comment': 'Prix modifié depuis la fiche du produit'}
+                if history_id and len(history_id) > 0:
+                    self.pool.get('product.price.history').write(cr, uid, history_id[0], data_history)
+                else:
+                    self.pool.get('product.price.history').create(cr, uid, data_history)
+
+            if 'coeff_depart' in vals and not 'prix_achat' in vals:
+                data_history = {'name': datetime.now(),
+                                'nouveau_prix_achat': prd.prix_achat,
+                                'nouveau_prix_vente': prd.prix_achat*vals.get('coeff_depart', prd.coeff_depart),
+                                'product_id': prd.id,
+                                'comment': 'Prix modifié depuis la fiche du produit'}
+                if history_id and len(history_id) > 0:
+                    self.pool.get('product.price.history').write(cr, uid, history_id[0], data_history)
+                else:
+                    self.pool.get('product.price.history').create(cr, uid, data_history)
+                                                                        
 
         return super(product_product, self).write(cr, uid, ids, vals, context=context)
 
