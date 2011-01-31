@@ -396,6 +396,9 @@ class product_pricelist_promo(osv.osv):
             'product_ids': fields.one2many('product.pricelist.promo.in', 
                                            'promo_id',
                                            string='Produits'),
+            'product2_ids': fields.one2many('product2.pricelist.promo.in',
+                                            'promo_id',
+                                            string='Produits 2ème page'),
             'state': fields.selection([('draft', 'Brouillon'), ('done', 'Validée')], string='État'),
         }
 
@@ -493,13 +496,28 @@ class product_pricelist_promo(osv.osv):
         '''
         item_obj = self.pool.get('product.pricelist.item')
         prod_obj = self.pool.get('product.product')
+        b_conf_id = self.pool.get('pricelist.promo.configuration').search(cr, uid, [])
+
         product_ids = []
+        product2_ids = []
         for promo_in in self.pool.get('product.pricelist.promo.in').browse(cr, uid, data['form']['product_ids']):
             product_ids.append(promo_in.product_id.id)
+
+        for promo2_in in self.pool.get('product2.pricelist.promo.in').browse(cr, uid, data['form']['product2_ids']):
+            if promo2_in.product_id.id not in product_ids:
+                product2_ids.append(promo2_in.product_id.id)
+
 
         base = 1
         bareme = 15
         coeff = 1.136300
+        bareme_2 = 16
+        coeff2 = 1.111110
+
+        if b_conf_id and len(b_conf_id) > 0:
+            bareme2 = self.pool.get('pricelist.promo.configuration').browse(cr, uid, b_conf_id[0]).bareme_page2.id
+            coeff2 = self.pool.get('pricelist.promo.configuration').browse(cr, uid, b_conf_id[0]).bareme_page2.valeur
+
         items = []
         
         if type == 'blanche':
@@ -517,6 +535,22 @@ class product_pricelist_promo(osv.osv):
                                                     'name': p_data.get('name'), 
                                                     'product_id': product,
                                                     'base': base,
+                                                    'price_version_id': version_id})
+                items.append(item_id)
+
+            ## On recherche le type de prix qui correspond au prix de vente classique
+            type_ids = self.pool.get('product.price.type').search(cr, uid, [('name', '=', 'Public Price')])
+            if type_ids:
+                base = type_ids[0]
+
+            for product2 in product2_ids:
+                p_data = prod_obj.read(cr, uid, product2, ['name'])
+                item_id = item_obj.create(cr, uid, {'sequence': 3,
+                                                    'name': p_data.get('name'),
+                                                    'product_id': product2,
+                                                    'base': base,
+                                                    'bareme_id': bareme2,
+                                                    'price_discount': coeff2-1,
                                                     'price_version_id': version_id})
                 items.append(item_id)
 
@@ -544,6 +578,17 @@ class product_pricelist_promo(osv.osv):
                                                     'price_version_id': version_id})
                 items.append(item_id)
 
+            for product2 in product2_ids:
+                p_data = prod_obj.read(cr, uid, product2, ['name'])
+                item_id = item_obj.create(cr, uid, {'sequence': 3,
+                                                    'name': p_data.get('name'),
+                                                    'product_id': product2,
+                                                    'base': base,
+                                                    'bareme_id': bareme2,
+                                                    'price_discount': coeff2-1,
+                                                    'price_version_id': version_id})
+                items.append(item_id)
+
         # Il reste maintenant à rajouter les produits relatifs à un éventuel tarif spécial se déroulant en même temps que la promo
         if data['form'].get('ts_products'):
             base_special = 1
@@ -565,6 +610,23 @@ class product_pricelist_promo(osv.osv):
         return items
 
 
+    def _create_history(self, cr, uid, promo_in, data):
+        p_history_obj = self.pool.get('product.price.history')
+        p_history_obj.create(cr, uid, {'product_id': promo_in.product_id.id,
+                                      'name': data['form']['end_date'],
+                                      'nouveau_prix_achat': promo_in.product_id.prix_achat,
+                                      'nouveau_prix_vente': promo_in.product_id.prix_achat*promo_in.product_id.coeff_depart,
+                                     })
+        p_history_obj.create(cr, uid, {'product_id': promo_in.product_id.id,
+                                      'name': data['form']['start_date'],
+                                      'nouveau_prix_achat': promo_in.new_prix_achat,
+                                      'nouveau_prix_vente': promo_in.new_prix_achat*promo_in.product_id.coeff_depart,
+                                      'comment': 'Promo \'%s\'' %data['form']['name'],
+                                     })
+
+        return True
+
+
     def _create_promo(self, cr, uid, ids, context={}):
         '''
             Créer les différentes versions et lignes de prix
@@ -572,24 +634,21 @@ class product_pricelist_promo(osv.osv):
         pricelist_obj = self.pool.get('product.pricelist')
         version_obj = self.pool.get('product.pricelist.version')
         tarifs_speciaux_obj = self.pool.get('product.tarifs.speciaux')
-        p_history_obj = self.pool.get('product.price.history')
         product_ids = []
+        product2_ids = []
         data = {}
         data['form'] = self.read(cr, uid, ids[0])
         for promo_in in self.pool.get('product.pricelist.promo.in').browse(cr, uid, data['form']['product_ids']):
             product_ids.append(promo_in.product_id.id)
-            p_history_obj.create(cr, uid, {'product_id': promo_in.product_id.id,
-                                          'name': data['form']['end_date'],
-                                          'nouveau_prix_achat': promo_in.product_id.prix_achat,
-                                          'nouveau_prix_vente': promo_in.product_id.prix_achat*promo_in.product_id.coeff_depart,
-                                         })
-            p_history_obj.create(cr, uid, {'product_id': promo_in.product_id.id,
-                                          'name': data['form']['start_date'],
-                                          'nouveau_prix_achat': promo_in.new_prix_achat,
-                                          'nouveau_prix_vente': promo_in.new_prix_achat*promo_in.product_id.coeff_depart,
-                                          'comment': 'Promo \'%s\'' %data['form']['name'],
-                                         })
-
+            if promo_in.new_prix_achat and promo_in.new_prix_achat != 0.00:
+                self._create_history(cr, uid, promo_in, data)
+        
+        ## On traite la deuxième page
+        for promo2_in in self.pool.get('product2.pricelist.promo.in').browse(cr, uid, data['form']['product2_ids']):
+            if promo2_in.product_id.id not in product_ids:
+                product2_ids.append(promo2_in.product_id.id)
+                if promo2_in.new_prix_achat and promo2_in.new_prix_achat != 0.00:
+                    self._create_history(cr, uid, promo2_in, data)
 
         data = {}
         data['form'] = self.read(cr, uid, ids[0])
@@ -822,6 +881,13 @@ class product_in_promo(osv.osv):
     }
 
 product_in_promo()
+
+
+class product2_in_promo(osv.osv):
+    _name = 'product2.pricelist.promo.in'
+    _inherit = 'product.pricelist.promo.in'
+
+product2_in_promo()
 
 
 class product_tarifs_speciaux(osv.osv):
