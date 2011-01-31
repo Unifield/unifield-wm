@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<openerp>
+	<data>
+
+        <record id="wizard_raz_prix_noel_form_view" model="ir.ui.view">
+            <field name="name">wizard.raz.prix.noel.form.view</field>
+            <field name="model">wizard.raz.prix.noel</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Remise à zéro">
+                    <label colspan="4" string="Remettre les prix de Noël à zéro" />
+                    <button colspan="4" string="Remettre à zéro" type="object" name="_raz" />
+                </form>
+            </field>
+        </record>
+
+        <record id="action_wizard_raz_prix_noel" model="ir.actions.act_window">
+            <field name="name">Remise à zéro des prix de Noël</field>
+            <field name="res_model">wizard.raz.prix.noel</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="wizard_raz_prix_noel_form_view" />
+        </record>
+
+        <record id="wizard_raz_prix_noel_form_view_close" model="ir.ui.view">
+            <field name="name">wizard.raz.prix.noel.form.view</field>
+            <field name="model">wizard.raz.prix.noel.close</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Remise à zéro">
+                    <label colspan="4" string="Les prix de Noël ont été remis à zéro" />
+                    <button colspan="4" string="Fermer" type="object" name="_close" />
+                </form>
+            </field>
+        </record>
+
+        <record id="action_wizard_raz_prix_noel_close" model="ir.actions.act_window">
+            <field name="name">Remise à zéro des prix de Noël</field>
+            <field name="res_model">wizard.raz.prix.noel.close</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="wizard_raz_prix_noel_form_view_close" />
+        </record>
+
+        <menuitem action="action_wizard_raz_prix_noel"
+                  id="menu_wizard_raz_prix_noel"
+                  parent="product.menu_product_pricelist_main" />
+
+	</data>
+</openerp>
+

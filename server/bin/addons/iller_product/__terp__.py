@@ -40,6 +40,7 @@
             'iller_pricelist_data.xml',
             'iller_pricelist_wizard.xml',
             'iller_pricelist_report.xml',
+            'wizard/wizard_raz_prix_noel_view.xml',
 ],
     'installable': True,
     'active': False,

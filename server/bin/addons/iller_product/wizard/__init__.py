@@ -8,6 +8,7 @@ import wizard_export_tarif_hilton
 import wizard_export_tarif_sncf
 import wizard_export_promo
 import wizard_export_tarifs_commerciaux
+import wizard_raz_prix_noel
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 
