@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<document filename="test.pdf">
+  <template pageSize="(595.0,842.0)" title="Test" author="Martin Simon" allowSplitting="20">
+    <pageTemplate id="first">
+      <frame id="first" x1="57.0" y1="57.0" width="481" height="728"/>
+    </pageTemplate>
+  </template>
+  <stylesheet>
+    <blockTableStyle id="Standard_Outline">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+    </blockTableStyle>
+    <blockTableStyle id="Table1">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,0" stop="0,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="0,0" stop="0,0"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="1,0" stop="1,0"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="2,0" stop="2,0"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="3,0" stop="3,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="3,0" stop="3,0"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,1" stop="0,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="0,-1" stop="0,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="1,-1" stop="1,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="2,-1" stop="2,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="3,1" stop="3,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="3,-1" stop="3,-1"/>
+      <blockBackground colorName="#e6e6e6" start="0,0" stop="-1,0"/>
+    </blockTableStyle>
+    <blockTableStyle id="Table2">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,0" stop="0,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="0,0" stop="0,0"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="1,0" stop="1,0"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="2,0" stop="2,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="2,0" stop="2,0"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,1" stop="0,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="0,-1" stop="0,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="1,-1" stop="1,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="2,1" stop="2,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="2,-1" stop="2,-1"/>
+      <blockBackground colorName="#e6e6e6" start="0,0" stop="-1,0"/>
+    </blockTableStyle>
+    <initialize>
+      <paraStyle name="all" alignment="justify"/>
+    </initialize>
+    <paraStyle name="P1" fontName="Times-Roman" alignment="CENTER"/>
+    <paraStyle name="P2" fontName="Times-Roman" fontSize="6.0" leading="8" alignment="LEFT"/>
+    <paraStyle name="P3" fontName="Helvetica" fontSize="6.0" leading="8" alignment="LEFT"/>
+    <paraStyle name="P4" fontName="Helvetica" fontSize="12.0" leading="15" alignment="LEFT"/>
+    <paraStyle name="P5" fontName="Helvetica-Bold" fontSize="12.0" leading="15" alignment="CENTER"/>
+    <paraStyle name="P6" fontName="Times-Roman" fontSize="9.0" leading="11" alignment="CENTER"/>
+    <paraStyle name="P7" fontName="Helvetica" fontSize="12.0" leading="15" alignment="LEFT"/>
+    <paraStyle name="P8" fontName="Helvetica-Bold" fontSize="12.0" leading="15" alignment="LEFT"/>
+    <paraStyle name="Standard" fontName="Times-Roman"/>
+    <paraStyle name="Heading" fontName="Helvetica" fontSize="14.0" leading="17" spaceBefore="12.0" spaceAfter="6.0"/>
+    <paraStyle name="Text body" fontName="Times-Roman" spaceBefore="0.0" spaceAfter="6.0"/>
+    <paraStyle name="List" fontName="Times-Roman" spaceBefore="0.0" spaceAfter="6.0"/>
+    <paraStyle name="Caption" fontName="Times-Roman" fontSize="12.0" leading="15" spaceBefore="6.0" spaceAfter="6.0"/>
+    <paraStyle name="Index" fontName="Times-Roman"/>
+    <paraStyle name="Table Contents" fontName="Times-Roman"/>
+    <paraStyle name="Table Heading" fontName="Times-Roman" alignment="CENTER"/>
+    <images/>
+  </stylesheet>
+  <story>
+    <para style="P3">[[ repeatIn(objects, 'o') ]]</para>
+    <para style="P3">[[ setLang('fr_FR') ]]</para>
+    <para style="P2">
+      <font color="white"> </font>
+    </para>
+    <para style="P5">Promotion [[ o.name ]]</para>
+    <para style="P5">
+      <font color="white"> </font>
+    </para>
+    <blockTable colWidths="66.0,226.0,95.0,95.0" style="Table1">
+      <tr>
+        <td>
+          <para style="P8">Code</para>
+        </td>
+        <td>
+          <para style="P8">Produit</para>
+        </td>
+        <td>
+          <para style="P8">Prix jaune</para>
+        </td>
+        <td>
+          <para style="P8">Prix blanche</para>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <para style="P7">[[ repeatIn(o.product_ids, 'p') ]]</para>
+          <para style="P7">[[ p.product_id.default_code ]]</para>
+        </td>
+        <td>
+          <para style="P7">[[ p.product_id.name ]]</para>
+        </td>
+        <td>
+          <para style="P7">[[ formatLang(getPrix(p.product_id.id, 'jaune', o.id)) ]]</para>
+        </td>
+        <td>
+          <para style="P7">[[ formatLang(p.prix_blanche) ]]</para>
+        </td>
+      </tr>
+    </blockTable>
+    <para style="P4">
+      <font color="white"> </font>
+    </para>
+    <para style="P1">
+      <font color="white"> </font>
+    </para>
+    <para style="P5">2ème page</para>
+    <para style="P6">Une '*' après un prix, signifie que le produit est déjà dans la première page. Le prix indiqué n'est donc pas à prendre en compte.</para>
+    <para style="P1">
+      <font color="white"> </font>
+    </para>
+    <blockTable colWidths="66.0,321.0,95.0" style="Table2">
+      <tr>
+        <td>
+          <para style="P8">Code</para>
+        </td>
+        <td>
+          <para style="P8">Produit</para>
+        </td>
+        <td>
+          <para style="P8">Prix</para>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <para style="P7">[[ repeatIn(o.product2_ids, 'p2') ]]</para>
+          <para style="P7">[[ p2.product_id.default_code ]]</para>
+        </td>
+        <td>
+          <para style="P7">[[ p2.product_id.name ]]</para>
+        </td>
+        <td>
+          <para style="P7">[[ formatLang(getPrix(p2.product_id.id, 'page', o.id)) ]][[ getDoublon(p2.product_id.id, o.id) ]]</para>
+        </td>
+      </tr>
+    </blockTable>
+    <para style="Standard">
+      <font color="white"> </font>
+    </para>
+  </story>
+</document>
+
