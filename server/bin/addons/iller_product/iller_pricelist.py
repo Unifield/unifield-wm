@@ -357,7 +357,7 @@ class product_nouveau_prix_achat(osv.osv):
         title = False
         message = False
         promo_obj = self.pool.get('product.pricelist.promo')
-        promo_ids = promo_obj.search(cr, uid, [('start_date', '>', datetime.now())])
+        promo_ids = promo_obj.search(cr, uid, [('start_date', '>=', datetime.now())])
         for promo in promo_obj.browse(cr, uid, promo_ids):
             for prod in promo.product_ids:
                 if prod.product_id.id == prod_id:
@@ -620,17 +620,31 @@ class product_pricelist_promo(osv.osv):
 
     def _create_history(self, cr, uid, promo_in, data):
         p_history_obj = self.pool.get('product.price.history')
-        p_history_obj.create(cr, uid, {'product_id': promo_in.product_id.id,
-                                      'name': data['form']['end_date'],
-                                      'nouveau_prix_achat': promo_in.product_id.prix_achat,
-                                      'nouveau_prix_vente': promo_in.product_id.prix_achat*promo_in.product_id.coeff_depart,
-                                     })
-        p_history_obj.create(cr, uid, {'product_id': promo_in.product_id.id,
-                                      'name': data['form']['start_date'],
-                                      'nouveau_prix_achat': promo_in.new_prix_achat,
-                                      'nouveau_prix_vente': promo_in.new_prix_achat*promo_in.product_id.coeff_depart,
-                                      'comment': 'Promo \'%s\'' %data['form']['name'],
-                                     })
+        p_obj = self.pool.get('product.product')
+
+        p_history_data1 = {'product_id': promo_in.product_id.id,
+                           'name': data['form']['end_date'],
+                           'nouveau_prix_achat': promo_in.product_id.prix_achat,
+                           'nouveau_prix_vente': promo_in.product_id.prix_achat*promo_in.product_id.coeff_depart,
+                          }
+        p_history_data2 = {'product_id': promo_in.product_id.id,
+                           'name': data['form']['start_date'],
+                           'nouveau_prix_achat': promo_in.new_prix_achat,
+                           'nouveau_prix_vente': promo_in.new_prix_achat*promo_in.product_id.coeff_depart,
+                           'comment': 'Promo \'%s\'' %data['form']['name'],
+                          }
+
+        history1_ids = p_history_obj.search(cr, uid, [('product_id', '=', promo_in.product_id.id), ('name', '=', data['form']['end_date'])])
+        if history1_ids and len(history1_ids) > 0:
+            p_history_obj.write(cr, uid, history1_ids, p_history_data1)
+        else:
+            p_history_obj.create(cr, uid, p_history_data1)
+
+        history2_ids = p_history_obj.search(cr, uid, [('product_id', '=', promo_in.product_id.id), ('name', '=', data['form']['start_date'])])
+        if history2_ids and len(history2_ids) > 0:
+            p_history_obj.write(cr, uid, history2_ids, p_history_data2)
+        else:
+            p_history_obj.create(cr, uid, p_history_data2)
 
         return True
 

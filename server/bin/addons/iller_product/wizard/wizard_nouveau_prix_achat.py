@@ -48,26 +48,31 @@ class wizard_nouveau_prix_achat(wizard.interface):
         product_obj =  pooler.get_pool(cr.dbname).get('product.product')
         product_price_history_obj =  pooler.get_pool(cr.dbname).get('product.price.history')
         products = data['form']['products']
+        context.update({'wizard': True})
         for product in products:
             nouveau_prix_achat = product[2].get('nouveau_prix_achat'),
             # remarque: nouveau_prix_achat est un TUPLE
             product_id = product[2].get('product_id')
             prod = product_obj.browse(cr, uid, product_id)
             # Mise à jour du tableau de l'historique des prix
-            product_price_history_id = product_price_history_obj.create(cr, uid, 
-                                         {
+            product_price_history_data = {
                                          'name'               : data['form']['start_date'],
                                          'nouveau_prix_achat' : nouveau_prix_achat[0],
                                          'nouveau_prix_vente' : nouveau_prix_achat[0] * prod.coeff_depart,
                                          'product_id'         : product_id,
-                                          }, 
-                                          context=context)
-            product_obj.write(cr, uid, [product_id], {
-                                                     'prix_achat'    : nouveau_prix_achat[0],
+                                          } 
+
+
+            history_ids = product_price_history_obj.search(cr, uid, [('name', '=', data['form']['start_date']), ('product_id', '=', product_id)])
+            if history_ids and len(history_ids) > 0:
+                product_price_history_obj.write(cr, uid, history_ids, product_price_history_data)
+            else:
+                product_price_history_obj.create(cr, uid, product_price_history_data)
+
+            product_obj.write(cr, uid, [product_id], {'prix_achat'    : nouveau_prix_achat[0],
                                                      'list_price'    : nouveau_prix_achat[0] * prod.coeff_depart,
-                                                     'price_history' : [(4, product_price_history_id)],
                                                      'prix_blanche'  : nouveau_prix_achat[0] * prod.coeff_blanche,
-                                                     })
+                                                     }, context=context)
         return {}
 
     states = {

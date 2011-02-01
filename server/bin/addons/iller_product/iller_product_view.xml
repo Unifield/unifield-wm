@@ -13,7 +13,7 @@
                         <group colspan="2" col="2">
                             <separator string="Achat" />
                             <field name="standard_price" readonly="1"/>
-                            <field name="prix_achat" on_change="coeff_price_change(prix_achat, coeff_depart, coeff_blanche)" required="1" />
+                            <field name="prix_achat" on_change="coeff_price_change(prix_achat, coeff_depart, coeff_blanche)" required="1" readonly="0"/>
                             <field name="coeff_depart" on_change="coeff_price_change(prix_achat, coeff_depart, coeff_blanche)" required="1" />
                             <field groups="base.group_extended" name="cost_method"/>
                         </group>

@@ -60,8 +60,8 @@ class product_product(osv.osv):
             Calcul des tarifs en fonction des prix d'achat
         '''
         history_obj = self.pool.get('product.price.history')
-        history_id = history_obj.search(cr, uid, [('name', '=', datetime.now())])
         for prd in self.browse(cr, uid, ids):
+            history_id = history_obj.search(cr, uid, [('name', '=', datetime.now()), ('product_id', '=', prd.id)])
             vals['list_price'] = vals.get('prix_achat', prd.prix_achat)*vals.get('coeff_depart', prd.coeff_depart)
             vals['prix_blanche'] = vals.get('prix_achat', prd.prix_achat)*vals.get('coeff_blanche', prd.coeff_blanche)
 
@@ -70,9 +70,11 @@ class product_product(osv.osv):
                                 'nouveau_prix_achat': vals.get('prix_achat'),
                                 'nouveau_prix_vente': vals.get('prix_achat')*vals.get('coeff_depart', prd.coeff_depart),
                                 'product_id': prd.id,
-                                'comment': 'Prix modifié depuis la fiche du produit'}
+                                'comment': ''}
+                if not 'wizard' in context:
+                    data_history.update({'comment': 'Prix modifié depuis la fiche du produit'})
                 if history_id and len(history_id) > 0:
-                    self.pool.get('product.price.history').write(cr, uid, history_id[0], data_history)
+                    self.pool.get('product.price.history').write(cr, uid, history_id, data_history)
                 else:
                     self.pool.get('product.price.history').create(cr, uid, data_history)
 
@@ -81,9 +83,11 @@ class product_product(osv.osv):
                                 'nouveau_prix_achat': prd.prix_achat,
                                 'nouveau_prix_vente': prd.prix_achat*vals.get('coeff_depart', prd.coeff_depart),
                                 'product_id': prd.id,
-                                'comment': 'Prix modifié depuis la fiche du produit'}
+                                'comment': ''}
+                if not 'wizard' in context:
+                    data_history.update({'comment': 'Prix modifié depuis la fiche du produit'})
                 if history_id and len(history_id) > 0:
-                    self.pool.get('product.price.history').write(cr, uid, history_id[0], data_history)
+                    self.pool.get('product.price.history').write(cr, uid, history_id, data_history)
                 else:
                     self.pool.get('product.price.history').create(cr, uid, data_history)
                                                                         
@@ -132,9 +136,9 @@ class product_product(osv.osv):
         res = {}
 
         for product in self.browse(cr, uid, ids):
-            history_ids = history_obj.search(cr, uid, [('name', '<', datetime.now())], offset=0, limit=1, order="name desc", context=context)
+            history_ids = history_obj.search(cr, uid, [('name', '<=', datetime.now()),('product_id', '=', product.id)], offset=0, limit=1, order="name desc", context=context)
             if history_ids and len(history_ids) > 0:
-                res[product.id] = history_obj.read(cr, uid, history_ids[0], ['nouveau_prix_achat']).get('nouveau_prix_achat', 0.00)
+                res[product.id] = history_obj.browse(cr, uid, history_ids[0]).nouveau_prix_achat
             else:
                 res[product.id] = 0.00
 
@@ -142,7 +146,7 @@ class product_product(osv.osv):
 
 
     _columns = {
-        'prix_achat': fields.function(_get_prix_achat, method=True, string='Prix d\'achat', digits=(16, int(config['price_accuracy'])), store=True),
+        'prix_achat': fields.function(_get_prix_achat, method=True, string='Prix d\'achat', digits=(16, int(config['price_accuracy'])), store=False),
         'coeff_depart': fields.float(digits=(16,2), string='Coeff. départ'),
         'type_cond': fields.selection([('0000', 'PIECE'), ('0001', 'KILO'), ('0002', 'CARTON'), ('0003', 'BARQUETTE')], 
                                                                                             string='Type conditionnement'),

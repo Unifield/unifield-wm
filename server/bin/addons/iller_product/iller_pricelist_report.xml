@@ -13,6 +13,17 @@
                         menu="False"
                         />
 
+        <report 
+                        id="report_print_promo" 
+                        string="Impression de la promotion" 
+                        model="product.pricelist.promo" 
+                        name="print.promo" 
+                        rml="iller_product/report/print_promo.rml" 
+                        header="False" 
+                        auto="False" 
+                        menu="True"
+                        />
+
     </data>
 </openerp>
 
