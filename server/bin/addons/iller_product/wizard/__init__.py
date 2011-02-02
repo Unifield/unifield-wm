@@ -9,6 +9,7 @@ import wizard_export_promo
 import wizard_export_tarifs_commerciaux
 import wizard_raz_prix_noel
 import wizard_modif_coeff
+import wizard_print_pricelist_cat
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

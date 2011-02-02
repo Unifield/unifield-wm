@@ -28,4 +28,6 @@ import pooler
 
 import tarif_aide_commercial 
 import print_promo
+import print_cat
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

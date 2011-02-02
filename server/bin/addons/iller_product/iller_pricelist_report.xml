@@ -24,6 +24,17 @@
                         menu="True"
                         />
 
+        <report
+                        id="report_category_pricelist"
+                        string="Liste de prix"
+                        model="wizard.print.pricelist.cat"
+                        name="category.pricelist"
+                        rml="iller_product/report/print_cat.rml"
+                        header="False"
+                        auto="False"
+                        menu="False"
+                        />
+
     </data>
 </openerp>
 

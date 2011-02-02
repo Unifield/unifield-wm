@@ -59,7 +59,8 @@
             <field name="model">wizard.export.tarif.hilton</field>
             <field name="type">form</field>
             <field name="arch" type="xml">
-                <form string="Exportation du tarif HILTON">
+                <form string="Exportation du tarif HILTON                                                                                    ">
+                    <separator colspan="4" string="Exportation du tarif HILTON                                                                      " />
                             <group col="4" states="choose">
                                 <field invisible="1" name="state"/>
 				<field nolabel = "1" height="22" colspan = "4" name ="avertissement"/>
@@ -106,7 +107,8 @@
             <field name="model">wizard.export.tarifs.commerciaux</field>
             <field name="type">form</field>
             <field name="arch" type="xml">
-                <form string="Exportation du tarif des commerciaux">
+                <form string="Exportation du tarif des commerciaux                                                              ">
+                    <separator colspan="4" string="Export du tarif des commerciaux                                                              " />
                     <group colspan="4" col="4">
                             <group col="4" states="choose" colspan="4">
                                 <field invisible="1" name="state"/>
@@ -180,6 +182,42 @@
             </field>
         </record>
 
+
+        <!-- Wizard d'impression des listes de prux par catégorie -->
+        <record id="wizard_print_pricelist_cat_view" model="ir.ui.view">
+            <field name="name">wizard.print.pricelist.cat.view</field>
+            <field name="model">wizard.print.pricelist.cat</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Impression des prix">
+                    <separator string="Impression des prix" colspan="4" />
+                    <group colspan="2" col="2">
+                        <separator string="Barèmes" />
+                        <field name="bareme1_id" />
+                        <field name="bareme2_id" />
+                        <field name="bareme3_id" />
+                        <field name="bareme4_id" />
+                        <field name="bareme5_id" />
+                        <field name="bareme6_id" />
+                    </group>
+                    <group colspan="2" col="2">
+                        <separator string="Catégories" colspan="2" />
+                        <field name="category_ids" nolabel="1" colspan="2" />
+                    </group>
+                    <button name="_print" string="Imprimer" colspan="4" type="object" />
+                </form>
+            </field>
+        </record>
+
+        <record id="action_print_pricelist_cat" model="ir.actions.act_window">
+            <field name="name">Impression des catégories par barème</field>
+            <field name="res_model">wizard.print.pricelist.cat</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem action="action_print_pricelist_cat" id="menu_print_cat_bareme" parent="product.menu_product_pricelist_main" />
 
     </data>
 </openerp>
