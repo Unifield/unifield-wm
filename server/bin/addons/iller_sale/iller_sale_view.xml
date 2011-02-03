@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<openerp>
+	<data>
+
+        <record id="iller_sale_order_form_view" model="ir.ui.view">
+            <field name="name">iller.sale.order.form.view</field>
+            <field name="model">sale.order</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="sale.view_order_form" />
+            <field name="arch" type="xml">
+                <xpath expr="/form/notebook/page/field[@name='partner_id']" position="replace" >
+                    <field name="partner_id" domain="[('bloque', '=', False)]" on_change="onchange_partner_id(partner_id)" required="1" select="1" />
+                </xpath>
+            </field>
+        </record>
+
+	</data>
+</openerp>
+

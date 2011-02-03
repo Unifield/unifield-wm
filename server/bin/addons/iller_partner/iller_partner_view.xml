@@ -30,6 +30,7 @@
                     <field name="facturation_bl" required="1" />
                     <field name="nb_ex_factures" />
                     <field name="releve" />
+                    <field name="bloque" />
                     <separator colspan="4" string="Informations ristourne" />
                     <field name="remise_fac" />
                     <field name="type_ristourne" />
