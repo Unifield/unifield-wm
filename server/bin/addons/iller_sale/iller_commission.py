@@ -107,7 +107,6 @@ class iller_commission_line(osv.osv):
                 ## Si le prix unitaire est égal au prix de vente du produit * le 
                 ## coeficient d'un barème, on retourne la commission associée au taux du barème
                 if round(bareme.valeur*l.get('prix_vente'),2) == l.get('unit_price'):
-                    print 'dans un bareme'
                     return bareme.taux_com*l.get('unit_price')*l.get('qty')
 
                 if l.get('unit_price') > round(bareme.valeur*l.get('prix_vente'),2) and (not bareme_below or bareme.valeur > bareme_below.valeur):
@@ -169,8 +168,10 @@ class iller_sale_commission(osv.osv):
 
     def _get_commission(self, cr, uid, ids, field_name, arg, context={}):
         res = {}
-        for id in ids:
-            res[id] = 0.00
+        for order in self.browse(cr, uid, ids):
+            res[order.id] = 0.00
+            for line in order.order_line:
+                res[order.id] += line.commission
 
         return res
 
