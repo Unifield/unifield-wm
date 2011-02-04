@@ -78,6 +78,11 @@
             <field name="taux_com" eval="0.010" />
         </record>
 
+        <!-- Création du rôle de super-vendeur pour avoir le droit de forcer le prix unitaire -->
+        <record id="res_roles_super_salesman" model="res.roles">
+            <field name="name">Vendeur (DISTRI5)</field>
+        </record>
+
 	</data>
 </openerp>
 

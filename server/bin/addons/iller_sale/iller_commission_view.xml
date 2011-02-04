@@ -71,6 +71,19 @@
             </field>
         </record>
 
+        <!-- Ajout du champ 'dépassement' dans la vue du partenaire -->
+        <record id="depassement_res_partner_form_view1" model="ir.ui.view">
+            <field name="name">depassement.res.partner.form.view1</field>
+            <field name="model">res.partner</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="iller_partner.inherit_res_partner_form_view2" />
+            <field name="arch" type="xml">
+                <xpath expr="/form/notebook/page[@string='Accounting']/field[@name='bloque']" position="after" >
+                    <field name="depassement" />
+                </xpath>
+            </field>
+        </record>
+
 	</data>
 </openerp>
 
