@@ -38,6 +38,7 @@
                 <form string="Barème">
                     <field name="name" required="1" select="1" />
                     <field name="valeur" required="1" select="2" />
+                    <field name="special" />
                 </form>
             </field>
         </record>

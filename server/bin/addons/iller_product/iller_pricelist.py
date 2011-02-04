@@ -56,6 +56,11 @@ class product_pricelist_bareme(osv.osv):
     _columns = {
         'name': fields.char(size=64, string='Nom'),
         'valeur': fields.float(digits=(16,6), string='Valeur'),
+        'special': fields.boolean(string='Special ?'),
+    }
+
+    _defaults = {
+        'special': lambda *a: False,
     }
 
 product_pricelist_bareme()

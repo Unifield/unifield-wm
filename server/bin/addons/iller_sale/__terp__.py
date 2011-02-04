@@ -36,6 +36,8 @@
     """,
     'update_xml': [
         'iller_sale_view.xml',
+        'iller_commission_view.xml',
+        'iller_commission_data.xml',
     ],
     'installable': True,
     'active': False,

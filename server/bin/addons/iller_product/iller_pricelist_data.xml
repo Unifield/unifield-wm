@@ -180,6 +180,7 @@
         <record id="product_pricelist_bareme_collectivite" model="product.pricelist.bareme">
             <field name="name">Coeff Collectivité</field>
             <field name="valeur" eval="1.33" />
+            <field name="special" eval="True" />
         </record>
 
 
