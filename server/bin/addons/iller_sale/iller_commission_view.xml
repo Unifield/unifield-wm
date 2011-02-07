@@ -62,7 +62,10 @@
             <field name="arch" type="xml">
                 <data>
                     <xpath expr="/form/notebook/page/field[@name='order_line']/form/notebook/page/field[@name='delay']" position="after">
-                        <field name="commission" />
+                        <field name="commission" readonly="1" />
+                    </xpath>
+                    <xpath expr="/form/notebook/page/field[@name='order_line']/form/notebook/page/field[@name='price_unit']" position="replace">
+                        <field name="price_unit" select="2" on_change="price_unit_change(price_unit, product_id, product_uom_qty, parent.partner_id, parent.pricelist_id)" />
                     </xpath>
                     <xpath expr="/form/notebook/page/group/field[@name='amount_total']" position="after">
                         <field name="commission" />

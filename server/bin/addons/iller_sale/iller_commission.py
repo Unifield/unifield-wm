@@ -79,7 +79,12 @@ class iller_commission_line(osv.osv):
                           'order_id': data.get('order_id', False),
                           'prix_vente': product.list_price})
 
-        return self.set_value_commission(cr, uid, lines, context=context)
+        res = self.set_value_commission(cr, uid, lines, context=context)
+
+        if not res:
+            raise osv.except_osv('Erreur', u'Vous ne pouvez pas avoir un prix unitaire inférieur au prix de vente du produit multiplié par le barème c19 -- Produit : %s' %l.get('name'))
+
+        return res[0]
 
     
     def set_value_commission(self, cr, uid, lines=[], context={}):
@@ -92,9 +97,12 @@ class iller_commission_line(osv.osv):
         role_obj = self.pool.get('res.roles')
         model_data_obj = self.pool.get('ir.model.data')
         order_obj = self.pool.get('sale.order')
+        partner_obj = self.pool.get('res.partner')
+        message = ''
+        res = False
 
         if not lines:
-            return 0.00
+            return 0.00, ''
 
         ## On récupère tous les barèmes
         bareme_ids = bareme_obj.search(cr, uid, [('special', '=', False)])
@@ -107,7 +115,7 @@ class iller_commission_line(osv.osv):
                 ## Si le prix unitaire est égal au prix de vente du produit * le 
                 ## coeficient d'un barème, on retourne la commission associée au taux du barème
                 if round(bareme.valeur*l.get('prix_vente'),2) == l.get('unit_price'):
-                    return bareme.taux_com*l.get('unit_price')*l.get('qty')
+                    return bareme.taux_com*l.get('unit_price')*l.get('qty'), message
 
                 if l.get('unit_price') > round(bareme.valeur*l.get('prix_vente'),2) and (not bareme_below or bareme.valeur > bareme_below.valeur):
                     bareme_below = bareme
@@ -118,25 +126,38 @@ class iller_commission_line(osv.osv):
             ## Si le prix inscrit est compris dans la fourchette des barèmes
             if bareme_below and bareme_above:
                 taux_comm = (bareme_below.taux_com+bareme_above.taux_com)/2
-                return taux_comm*l.get('unit_price')*l.get('qty')
+                return taux_comm*l.get('unit_price')*l.get('qty'), message
 
             ## Si le prix est supérieur au prix de vente multiplié par le plus grand coeff., le taux de commission est de 1%
             if not bareme_above:
-                return l.get('unit_price')*l.get('qty')*0.01
+                return l.get('unit_price')*l.get('qty')*0.01, message
 
             ## Si le prix est inférieur au prix de vente multiplié par le plus petit coeff.
             if not bareme_below:
-                order = order_obj.browse(cr, uid, l.get('order_id'))
-                ## On vérifie si le client ne fait pas partie de la liste des clients autorisés
-                if order.partner_id.depassement:
-                    return l.get('unit_price')*l.get('qty')*0.01
+                if 'order_id' in l:
+                    order = order_obj.browse(cr, uid, l.get('order_id'))
+                    ## On vérifie si le client ne fait pas partie de la liste des clients autorisés
+                    if order.partner_id.depassement:
+                        return l.get('unit_price')*l.get('qty')*0.01, message
+                elif 'partner_id' in l:
+                    partner = partner_obj.browse(cr, uid, l.get('partner_id'))
+                    ## On vérifie si le client ne fait pas partie de la liste des clients autorisés
+                    if partner.depassement:
+                        return l.get('unit_price')*l.get('qty')*0.01, message
+
+
 
                 ## On vérifie si le client n'est pas une collectivité
                 model_data_ids = model_data_obj.search(cr, uid, [('name', '=', 'pricelist_tarif_collectivite'), ('module', '=', 'iller_product'), ('model', '=', 'product.pricelist')])
                 model_datas = model_data_obj.read(cr, uid, model_data_ids, ['res_id'])
                 if model_datas and len(model_datas) > 0:
-                    if order.pricelist_id.id == model_datas[0].get('res_id', False):
-                        return l.get('unit_price')*l.get('qty')*0.01
+                    if 'order_id' in l:
+                        if order.pricelist_id.id == model_datas[0].get('res_id', False):
+                            return l.get('unit_price')*l.get('qty')*0.01, message
+                    elif 'pricelist_id' in l:
+                        if l.get('pricelist_id') == model_datas[0].get('res_id', False):
+                            return l.get('unit_price')*l.get('qty')*0.01, message
+
 
                 ## On vérifie les droits de l'utilisateur
                 model_data_ids = model_data_obj.search(cr, uid, [('name', '=', 'res_roles_super_salesman'), ('model', '=', 'res.roles')])
@@ -146,17 +167,53 @@ class iller_commission_line(osv.osv):
                     ## Si l'utilisateur a le rôle DISTRI5
                     for role in user.roles_id:
                         if role.id == model_datas[0].get('res_id', False):
-                            return l.get('unit_price')*l.get('qty')*0.01
+                            return l.get('unit_price')*l.get('qty')*0.01, 'Le prix indiqué est inférieur à ce qui est autorisé - Cependant, vos droits vous donne la possibilité de valider cette commande avec ce prix.'
 
                 ## Dans tous les autres cas, on retourne une erreur
-                raise osv.except_osv('Erreur', u'Vous ne pouvez pas avoir un prix unitaire inférieur au prix de vente du produit multiplié par le barème c19 -- Produit : %s' %l.get('name'))
-                return False
+                return False, message
 
-        return res
+        return res, message
+
+
+    def price_unit_change(self, cr, uid, ids, price_unit, product_id, qty, partner_id, pricelist_id, context={}):
+        '''
+            Affiche un message à l'utilisateur si il tente d'outrepasser la plage de prix
+        '''
+        product_obj = self.pool.get('product.product')
+
+        lines = []
+
+        if not price_unit or not product_id or not qty:
+            return {'value': {}}
+
+        ## On récupère les inforamtions du produit
+        product = product_obj.browse(cr, uid, product_id)
+
+        ## On enregistre la ligne
+        lines.append({'unit_price': price_unit,
+                      'qty': qty,
+                      'partner_id': partner_id,
+                      'pricelist_id': pricelist_id,
+                      'name': product.name,
+                      'prix_vente': product.list_price})
+
+        ## On lance le calcul de la commission
+        res2 = self.set_value_commission(cr, uid, lines, context=context)
+
+        ## Si le prix est inférieur et que l'on a pas les droits de surpasser, on affiche une erreur
+        if not res2[0]:
+            return {'value': {},
+                    'warning': {'title': 'Erreur !',
+                                'message': 'Vous ne pourrez pas enregistrer la commande car le prix indiqué est inférieur à ce qui est autorisé.'}}
+        elif res2[1] != '':
+            return {'value': {'commission': res2[0]},
+                    'warning': {'title': 'Attention !',
+                                'message': res2[1]}}
+        return {'value': {'commission': res2[0]}}
 
 
     _columns = {
-        'commission': fields.float(digits=(16,2), string='Commission', readonly=True),
+        'commission': fields.float(digits=(16,2), string='Commission'),
     }
 
 iller_commission_line()
