@@ -93,7 +93,7 @@ class iller_partner(osv.osv):
     _inherit = 'res.partner'
 
 
-    def name_search(self, cr, uid, name, args=[], operator='ilike', context={}, limit=80):
+    def name_search(self, cr, uid, name='', args=[], operator='ilike', context={}, limit=80):
         '''
             Recherche du partenaire grâce à son code, son nom, son numéro de 
             téléphone ou son adresse (ville, rue)
@@ -137,6 +137,8 @@ class iller_partner(osv.osv):
                     for name in name_ids:
                         if name not in res:
                             res.append(name)
+            else:
+                res = self.search(cr, uid, [] + args, limit=limit, context=context)
 
 
             return self.name_get(cr, uid, res, context)
