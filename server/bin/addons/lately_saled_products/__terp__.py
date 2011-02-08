@@ -27,7 +27,9 @@
     "category" : "Tools",
     "depends" : ["base", "iller_sale"],
     "init_xml" : [],
-    "update_xml" : [],
+    "update_xml" : [
+        'product_view.xml',
+    ],
     "demo_xml" : [],
     "test": [],
     "installable": True,
