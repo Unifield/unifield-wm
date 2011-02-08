@@ -87,5 +87,64 @@ class iller_sale_line(osv.osv):
 
 iller_sale_line()
 
+
+class iller_partner(osv.osv):
+    _name = 'res.partner'
+    _inherit = 'res.partner'
+
+
+    def name_search(self, cr, uid, name, args=[], operator='ilike', context={}, limit=80):
+        '''
+            Recherche du partenaire grâce à son code, son nom, son numéro de 
+            téléphone ou son adresse (ville, rue)
+        '''
+        if 'from' in context and context.get('from') == 'sale.order':
+            address_obj = self.pool.get('res.partner.address')
+            res = []
+
+            ## Recherche sur le code exact
+            if name:
+                res = self.search(cr, uid, [('ref', '=', name)] + args, limit=limit, context=context)
+
+                ## Recerche sur le numéro de téléphone exact
+                if not res or len(res) < 1:
+                    addr_ids = address_obj.search(cr, uid, [('phone', operator, name)], limit=limit, context=context)
+                    print addr_ids
+                    for addr in address_obj.browse(cr, uid, addr_ids):
+                        if not addr.partner_id.bloque and addr.partner_id.id not in res:
+                            res.append(addr.partner_id.id)
+
+                ## Recherche sur le nom, la ville ou le nom de la rue
+                if not res or len(res) < 1:
+                    ## Nom de la rue
+                    street_ids = address_obj.search(cr, uid, [('street', operator, name)], limit=limit, context=context)
+                    for street in address_obj.browse(cr, uid, street_ids):
+                        if street.partner_id.id not in res:
+                            res.append(street.partner_id.id)
+                    ## Nom secondaire de la rue
+                    street2_ids = address_obj.search(cr, uid, [('street2', operator, name)], limit=limit, context=context)
+                    for street2 in address_obj.browse(cr, uid, street2_ids):
+                        if street2.partner_id.id not in res:
+                            res.append(street2.partner_id.id)
+                    ## Nom de la ville
+                    city_ids = address_obj.search(cr, uid, [('city', operator, name)], limit=limit, context=context)
+                    for city in address_obj.browse(cr, uid, city_ids):
+                        if city.partner_id.id not in res:
+                            res.append(city.partner_id.id)
+
+                    ## Nom du partenaire
+                    name_ids = self.search(cr, uid, [('name', operator, name)] + args, limit=limit, context=context)
+                    for name in name_ids:
+                        if name not in res:
+                            res.append(name)
+
+
+            return self.name_get(cr, uid, res, context)
+        else:
+            return super(iller_partner, self).name_search(cr, uid, name, args, operator, context=context, limit=limit)
+
+
+iller_partner()
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 
