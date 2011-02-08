@@ -22,10 +22,11 @@
 
 from osv import osv
 from osv import fields
+from operator import itemgetter
 
 class product_product(osv.osv):
 
-    def _get_last_date_or_quantity(self, cr, uid, ids, field_name, arg, context={}):
+    def _compute_last_date_or_quantity(self, cr, uid, ids, field_name, arg, context={}):
         """
         Donne pour chaque produit soit la date de la dernière commande de chaque
          produit du fournisseur renseigné dans la variable 'context', 
@@ -39,15 +40,15 @@ class product_product(osv.osv):
         sale_order_obj = self.pool.get('sale.order')
         sale_order_line_obj = self.pool.get('sale.order.line')
         partner_id = context.get('partner_id')
-        mes_produits = self.browse(cr, uid, ids)
+        mes_produits = self.browse(cr, uid, ids, context=context)
 
         # Traitement pour chaque produit trouvé
         for product in mes_produits:
             # Recherche des commandes faites par le fournisseur
-            commande_ids = sale_order_obj.search(cr, uid, [('partner_id', '=', partner_id)])
+            commande_ids = sale_order_obj.search(cr, uid, [('partner_id', '=', partner_id)], context=context)
 
             # Recherche des lignes de commandes correspondantes
-            lignes = sale_order_line_obj.search(cr, uid, [('order_id', 'in', commande_ids), ('state', 'in', ['confirmed', 'done']), ('product_id', '=', product.product_tmpl_id.id)])
+            lignes = sale_order_line_obj.search(cr, uid, [('order_id', 'in', commande_ids), ('state', 'in', ['confirmed', 'done']), ('product_id', '=', product.product_tmpl_id.id)], context=context)
 
             # Préparation de la recherche de la date et de la commande attachée
             derniere_date = None
@@ -55,7 +56,7 @@ class product_product(osv.osv):
             # Traitement pour récupérer la date et la commande attaché (pour la 
             #+ quantité)
             for ligne in lignes:
-                commande = sale_order_line_obj.browse(cr, uid, ligne)
+                commande = sale_order_line_obj.browse(cr, uid, ligne, context=context)
                 if not derniere_date:
                     derniere_date = commande.order_id.date_order
                     commande_id = commande.id
@@ -71,17 +72,65 @@ class product_product(osv.osv):
             if field_name == "derniere_date":
                 res[product.id] = derniere_date
             elif field_name == "derniere_quantite":
-                ligne_commande = sale_order_line_obj.read(cr, uid, commande_id)
+                ligne_commande = sale_order_line_obj.read(cr, uid, commande_id, ['id', 'product_uos_qty'], context=context)
                 if ligne_commande:
                     res[product.id] = ligne_commande.get('product_uos_qty')
+#            ligne_commande = sale_order_line_obj.read(cr, uid, commande_id)
+#            res[product_id] = {
+#                'derniere_date': derniere_date,
+#                'derniere_quantite': ligne_commande.get('product_uos_qty'),
+#            }
         return res
 
     _name = "product.product"
     _inherit = "product.product"
     _columns = {
-        'derniere_date': fields.function(_get_last_date_or_quantity, method=True, type='date', string='Dernière date', store=False),
-        'derniere_quantite': fields.function(_get_last_date_or_quantity, method=True, type='char', string='Dernière quantité', store=False),
+        'derniere_date': fields.function(_compute_last_date_or_quantity, type='date', method=True, string='Dernière date', 
+            store=False),
+        'derniere_quantite': fields.function(_compute_last_date_or_quantity, type='float', method=True, string='Dernière quantité', 
+            store=False),
     }
+    
+    def search(self, cr, uid, args, offset=0, limit=None, order=None, context=None, count=False):
+        res = super(product_product, self).search(cr, uid, args, offset, limit, order, context, count)
+        # Tri des ids
+        temp_ids = []
+        for prod in self.pool.get('product.product').browse(cr, uid, res, context=context):
+            temp_ids.append((prod.id, prod.derniere_date))
+        # Création des nouveaux ids
+        nouv_ids = []
+        for el in sorted(temp_ids, key=itemgetter(1), reverse=True):
+            nouv_ids.append(el[0])
+        print "RES : %s" % res
+        print "NOUV ID : %s" % nouv_ids
+        return nouv_ids
+    
+#    def name_get(self, cr, uid, ids, context={}):
+#        if not len(ids):
+#            return []
+#        def _name_get(d):
+#            #name = self._product_partner_ref(cr, user, [d['id']], '', '', context)[d['id']]
+#            #code = self._product_code(cr, user, [d['id']], '', '', context)[d['id']]
+#            name = d.get('name','')
+#            code = d.get('default_code',False)
+#            derniere_date = d.get('derniere_date', '')
+#            if code:
+#                name = '[%s] %s' % (code,name)
+#            if d['variants']:
+#                name = name + ' - %s' % (d['variants'],)
+#            return (d['id'], name, derniere_date)
+##        # Tri des ids
+##        temp_ids = []
+##        for prod in self.pool.get('product.product').browse(cr, uid, ids, context=context):
+##            temp_ids.append((prod.id, prod.derniere_date))
+##        # Création des nouveaux ids
+##        nouv_ids = []
+##        for el in sorted(temp_ids, key=itemgetter(1), reverse=True):
+##            nouv_ids.append(el[0])
+##        print nouv_ids
+#        result = sorted(map(_name_get, self.read(cr, uid, ids, ['variants','name','default_code', 'derniere_date'], context=context)), key=itemgetter(2), reverse=True)
+#        print result
+#        return result
 
 product_product()
 
