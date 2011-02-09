@@ -29,6 +29,7 @@
     "init_xml" : [],
     "update_xml" : [
         'product_view.xml',
+        'sale_view.xml',
     ],
     "demo_xml" : [],
     "test": [],

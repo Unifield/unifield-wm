@@ -8,12 +8,10 @@
             <field name="type">tree</field>
             <field name="inherit_id" ref="product.product_product_tree_view" />
             <field name="arch" type="xml">
-                <data>
-                    <xpath expr="/tree/field[@name='name']" position='after'>
-                        <field name="derniere_date" invisible="not 'partner_id' in context" />
-                        <field name="derniere_quantite" invisible="not 'partner_id' in context"/>
-                    </xpath>
-                </data>
+                <xpath expr="/tree/field[@name='name']" position='after'>
+                    <field name="derniere_date" invisible="not 'from' in context or not 'partner_id' in context or context.get('from') != 'sale.order.line'" />
+                    <field name="derniere_quantite" invisible="not 'from' in context or not 'partner_id' in context or context.get('from') != 'sale.order.line'"/>
+                </xpath>
             </field>
         </record>
         

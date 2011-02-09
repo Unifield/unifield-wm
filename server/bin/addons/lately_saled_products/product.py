@@ -39,7 +39,7 @@ class product_product(osv.osv):
         res = {}
         sale_order_obj = self.pool.get('sale.order')
         sale_order_line_obj = self.pool.get('sale.order.line')
-        partner_id = context.get('partner_id')
+        partner_id = context.get('partner_id', False)
         mes_produits = self.browse(cr, uid, ids, context=context)
 
         # Traitement pour chaque produit trouvé
@@ -92,15 +92,12 @@ class product_product(osv.osv):
         puis par nom croissant.
         Ceci est fait si et seulement si partner_id existe dans le contexte.
         """
-        #FIXME: Prendre en compte un contexte qui renseignerait que nous sommes
-        #+ dans les ventes. Par exemple context['from'] = sale.order.line
-        
         res = super(product_product, self).search(cr, uid, args, offset, limit, order, context, count)
         
         # Création de la liste par défaut
         complete_list_ids = res
         
-        if context.get('partner_id'):
+        if context.get('partner_id', False) and context.get('from', False) == 'sale.order.line':
             # Division de la liste en deux listes : avec_date, sans_date
             with_date = []
             without_date_ids = []
