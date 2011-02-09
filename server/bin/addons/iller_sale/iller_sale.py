@@ -88,6 +88,30 @@ class iller_sale_line(osv.osv):
 iller_sale_line()
 
 
+class iller_sale(osv.osv):
+    _name = 'sale.order'
+    _inherit = 'sale.order'
+
+    _columns = {
+        'tournee_id': fields.many2one('tournee.iller', string='Tournée', required=True),
+    }
+
+
+    def onchange_partner_id(self, cr, uid, ids, partner_id, context={}):
+        '''
+            Met à jour la tournée en fonction du partenaire
+        '''
+        res = super(iller_sale, self).onchange_partner_id(cr, uid, ids, partner_id)
+        if partner_id:
+            partner = self.pool.get('res.partner').browse(cr, uid, partner_id, context=context)
+            if partner.tournee1 and partner.tournee1.id:
+                res['value'].update({'tournee_id': partner.tournee1.id})
+        return res
+
+
+iller_sale()
+
+
 class iller_partner(osv.osv):
     _name = 'res.partner'
     _inherit = 'res.partner'

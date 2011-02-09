@@ -25,14 +25,14 @@
     "description" : "This module shows you which products have been bought by a client (latest purchase date, quantity)",
     "author" : "Tempo Consulting",
     "category" : "Tools",
-    "depends" : ["base", "iller_sale"],
+    "depends" : ["base", "sale"],
     "init_xml" : [],
     "update_xml" : [
         'product_view.xml',
     ],
     "demo_xml" : [],
     "test": [],
-    "installable": True,
+    "installable": False,
     "active": True
 }
 

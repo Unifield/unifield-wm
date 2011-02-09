@@ -31,6 +31,8 @@ class iller_preparation_poste(osv.osv):
         'name': fields.char(size=64, string='Nom'),
     }
 
+    _order = 'name'
+
 iller_preparation_poste()
 
 
@@ -41,6 +43,8 @@ class iller_decoupe_poste(osv.osv):
     _columns = {
             'name': fields.char(size=64, string='Nom'),
     }
+
+    _order = 'name'
 
 iller_decoupe_poste()
 
@@ -58,7 +62,14 @@ class tournee_iller(osv.osv):
         'decoupe_id': fields.many2one('iller.decoupe.poste',
             string='Poste de découpe'),
         'regroup_code': fields.char(size=12, string='Code de regroupement'),
+
+        ## Les partenaires présents dans la tournée
+        'partner1': fields.one2many('res.partner', 'tournee1', 'Clients principaux'),
+        'partner2': fields.one2many('res.partner', 'tournee2', 'Clients secondaires'),
+        'partner3': fields.one2many('res.partner', 'tournee3', 'Clients exceptionnels'),
     }
+
+    _order = 'heure_depart, name'
 
 tournee_iller()
 
@@ -73,15 +84,3 @@ class res_partner(osv.osv):
     }
 
 res_partner()
-
-class tournee_iller(osv.osv):
-    _name = 'tournee.iller'
-    _inherit = 'tournee.iller'
-
-    _columns = {
-        'partner1': fields.one2many('res.partner', 'tournee1', 'Clients principaux'),
-        'partner2': fields.one2many('res.partner', 'tournee2', 'Clients secondaires'),
-        'partner3': fields.one2many('res.partner', 'tournee3', 'Clients exceptionnels'),
-    }
-
-tournee_iller()

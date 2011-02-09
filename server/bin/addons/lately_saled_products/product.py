@@ -90,20 +90,20 @@ class product_product(osv.osv):
         'derniere_quantite': fields.function(_compute_last_date_or_quantity, type='float', method=True, string='Dernière quantité', 
             store=False),
     }
-    
+
     def search(self, cr, uid, args, offset=0, limit=None, order=None, context=None, count=False):
         res = super(product_product, self).search(cr, uid, args, offset, limit, order, context, count)
         # Tri des ids
         temp_ids = []
         for prod in self.pool.get('product.product').browse(cr, uid, res, context=context):
-            temp_ids.append((prod.id, prod.derniere_date))
-        # Création des nouveaux ids
-        nouv_ids = []
-        for el in sorted(temp_ids, key=itemgetter(1), reverse=True):
-            nouv_ids.append(el[0])
-        print "RES : %s" % res
-        print "NOUV ID : %s" % nouv_ids
-        return nouv_ids
+            if prod.derniere_date:
+                temp_ids.append(prod.id)
+
+        for prod in self.pool.get('product.product').browse(cr, uid, res, context=context):
+            if not prod.derniere_date:
+                temp_ids.append(prod.id)
+
+        return temp_ids
     
 #    def name_get(self, cr, uid, ids, context={}):
 #        if not len(ids):
