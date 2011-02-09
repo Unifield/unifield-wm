@@ -22,6 +22,7 @@
 
 from osv import osv
 from osv import fields
+from tools.translate import _
 
 class product_product(osv.osv):
 
@@ -85,30 +86,41 @@ class product_product(osv.osv):
             store=False),
     }
 
-    def read(self, cr, uid, ids, fields=None, context=None, load='_classic_read'):
-        res = super(product_product, self).read(cr, uid, ids, fields, context=context, load=load)
-
+    def search(self, cr, uid, args, offset=0, limit=None, order=None, context=None, count=False):
+        """
+        Retourne la liste des ids des produits, triés par date décroissante, 
+        puis par nom croissant.
+        Ceci est fait si et seulement si partner_id existe dans le contexte.
+        """
+        #FIXME: Prendre en compte un contexte qui renseignerait que nous sommes
+        #+ dans les ventes. Par exemple context['from'] = sale.order.line
+        
+        res = super(product_product, self).search(cr, uid, args, offset, limit, order, context, count)
+        
         # Création de la liste par défaut
-        complete_list = res
-
+        complete_list_ids = res
+        
         if context.get('partner_id'):
-            # Division de la liste en deux listes : 
-            # - ceux ayant une dernière date
-            # - ceux n'en ayant pas (False)
-            false_list = []
-            last_date_list = []
-            for el in res:
-                if not el.get('derniere_date'):
-                    false_list.append(el)
+            # Division de la liste en deux listes : avec_date, sans_date
+            with_date = []
+            without_date_ids = []
+            products = self.pool.get('product.product').browse(cr, uid, res, context=context)
+            for prod in products:
+                if prod.derniere_date:
+                    with_date.append(prod)
                 else:
-                    last_date_list.append(el)
-
-            if last_date_list:
+                    without_date_ids.append(prod.id)
+            # Test rapide d'un résultat d'intégrité globale
+            if len(without_date_ids) + len(with_date) != len(res):
+                raise osv.except_osv(_('Error'), _('Data integrity error: Unable to split products into two lists.'))
+            
+            # On travaille sur 'with_date'
+            if with_date:
                 # Tri de la liste ayant des dates
                 # Récupération des dates
                 tmp_dates = []
-                for el in last_date_list:
-                    tmp_dates.append(el.get('derniere_date'))
+                for prod in with_date:
+                    tmp_dates.append(prod.derniere_date)
                 # Suppression des doublons
                 dates = list(set(tmp_dates))
                 # Tri des dates par ordre décroissant
@@ -116,14 +128,14 @@ class product_product(osv.osv):
                 
                 # Création du nouveau tableau contenant les éléments triés par 
                 #+ date décroissante (selon dates[])
-                tmp_last_date_list = list(last_date_list) # copie de la liste originale
+                tmp_last_date_list = list(with_date) # copie de la liste originale
                 new_date_list = [] # nouvelle liste
                 # Parcours des dates
                 for ladate in dates:
                     # création d'un tableau temporaire des éléments d'une même date
                     tmp_prod = []
                     for prod in tmp_last_date_list:
-                        if prod.get('derniere_date') == ladate:
+                        if prod.derniere_date == ladate:
                             tmp_prod.append(prod)
                     # Suppression des produits déjà récupérés de la liste 
                     #+ de parcours
@@ -133,7 +145,7 @@ class product_product(osv.osv):
                     # Récupération des noms
                     noms = []
                     for el in tmp_prod:
-                        noms.append(el.get('name'))
+                        noms.append(el.name)
                     # Tri des noms par ordre croissant
                     noms = sorted(noms)
                     
@@ -142,7 +154,7 @@ class product_product(osv.osv):
                     for nom in noms:
                         tmp_nom = []
                         for prod in tmp_prod:
-                            if prod.get('name') == nom:
+                            if prod.name == nom:
                                 tmp_nom.append(prod)
                         # Suppression des produits déjà récupérés de la liste 
                         #+ de parcours
@@ -154,12 +166,13 @@ class product_product(osv.osv):
                     new_date_list += tmp_el
                 
                 # On redonne à last_date_list les éléments triés
-                last_date_list = new_date_list
+                with_date_ids = []
+                for el in new_date_list:
+                    with_date_ids.append(el.id)
                 
                 # On concatène la liste ayant des dates avec celle sans dates
-                complete_list = last_date_list + false_list
-        # on retourne complete_list
-        return complete_list
+                complete_list_ids = with_date_ids + without_date_ids
+        return complete_list_ids
 
 product_product()
 
