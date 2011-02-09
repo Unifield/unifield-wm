@@ -22,7 +22,6 @@
 
 from osv import osv
 from osv import fields
-from operator import itemgetter
 
 class product_product(osv.osv):
 
@@ -75,11 +74,6 @@ class product_product(osv.osv):
                 ligne_commande = sale_order_line_obj.read(cr, uid, commande_id, ['id', 'product_uos_qty'], context=context)
                 if ligne_commande:
                     res[product.id] = ligne_commande.get('product_uos_qty')
-#            ligne_commande = sale_order_line_obj.read(cr, uid, commande_id)
-#            res[product_id] = {
-#                'derniere_date': derniere_date,
-#                'derniere_quantite': ligne_commande.get('product_uos_qty'),
-#            }
         return res
 
     _name = "product.product"
@@ -91,46 +85,81 @@ class product_product(osv.osv):
             store=False),
     }
 
-    def search(self, cr, uid, args, offset=0, limit=None, order=None, context=None, count=False):
-        res = super(product_product, self).search(cr, uid, args, offset, limit, order, context, count)
-        # Tri des ids
-        temp_ids = []
-        for prod in self.pool.get('product.product').browse(cr, uid, res, context=context):
-            if prod.derniere_date:
-                temp_ids.append(prod.id)
+    def read(self, cr, uid, ids, fields=None, context=None, load='_classic_read'):
+        res = super(product_product, self).read(cr, uid, ids, fields, context=context, load=load)
 
-        for prod in self.pool.get('product.product').browse(cr, uid, res, context=context):
-            if not prod.derniere_date:
-                temp_ids.append(prod.id)
+        # Création de la liste par défaut
+        complete_list = res
 
-        return temp_ids
-    
-#    def name_get(self, cr, uid, ids, context={}):
-#        if not len(ids):
-#            return []
-#        def _name_get(d):
-#            #name = self._product_partner_ref(cr, user, [d['id']], '', '', context)[d['id']]
-#            #code = self._product_code(cr, user, [d['id']], '', '', context)[d['id']]
-#            name = d.get('name','')
-#            code = d.get('default_code',False)
-#            derniere_date = d.get('derniere_date', '')
-#            if code:
-#                name = '[%s] %s' % (code,name)
-#            if d['variants']:
-#                name = name + ' - %s' % (d['variants'],)
-#            return (d['id'], name, derniere_date)
-##        # Tri des ids
-##        temp_ids = []
-##        for prod in self.pool.get('product.product').browse(cr, uid, ids, context=context):
-##            temp_ids.append((prod.id, prod.derniere_date))
-##        # Création des nouveaux ids
-##        nouv_ids = []
-##        for el in sorted(temp_ids, key=itemgetter(1), reverse=True):
-##            nouv_ids.append(el[0])
-##        print nouv_ids
-#        result = sorted(map(_name_get, self.read(cr, uid, ids, ['variants','name','default_code', 'derniere_date'], context=context)), key=itemgetter(2), reverse=True)
-#        print result
-#        return result
+        if context.get('partner_id'):
+            # Division de la liste en deux listes : 
+            # - ceux ayant une dernière date
+            # - ceux n'en ayant pas (False)
+            false_list = []
+            last_date_list = []
+            for el in res:
+                if not el.get('derniere_date'):
+                    false_list.append(el)
+                else:
+                    last_date_list.append(el)
+
+            if last_date_list:
+                # Tri de la liste ayant des dates
+                # Récupération des dates
+                tmp_dates = []
+                for el in last_date_list:
+                    tmp_dates.append(el.get('derniere_date'))
+                # Suppression des doublons
+                dates = list(set(tmp_dates))
+                # Tri des dates par ordre décroissant
+                dates = sorted(dates, reverse=True)
+                
+                # Création du nouveau tableau contenant les éléments triés par 
+                #+ date décroissante (selon dates[])
+                tmp_last_date_list = list(last_date_list) # copie de la liste originale
+                new_date_list = [] # nouvelle liste
+                # Parcours des dates
+                for ladate in dates:
+                    # création d'un tableau temporaire des éléments d'une même date
+                    tmp_prod = []
+                    for prod in tmp_last_date_list:
+                        if prod.get('derniere_date') == ladate:
+                            tmp_prod.append(prod)
+                    # Suppression des produits déjà récupérés de la liste 
+                    #+ de parcours
+                    for prod in tmp_prod:
+                        tmp_last_date_list.remove(prod)
+                    
+                    # Récupération des noms
+                    noms = []
+                    for el in tmp_prod:
+                        noms.append(el.get('name'))
+                    # Tri des noms par ordre croissant
+                    noms = sorted(noms)
+                    
+                    # Parcours des noms pour en faire une liste
+                    tmp_el = []
+                    for nom in noms:
+                        tmp_nom = []
+                        for prod in tmp_prod:
+                            if prod.get('name') == nom:
+                                tmp_nom.append(prod)
+                        # Suppression des produits déjà récupérés de la liste 
+                        #+ de parcours
+                        for prod in tmp_nom:
+                            tmp_prod.remove(prod)
+                        tmp_el += tmp_nom
+                    
+                    # ajout du résultat à la liste commune
+                    new_date_list += tmp_el
+                
+                # On redonne à last_date_list les éléments triés
+                last_date_list = new_date_list
+                
+                # On concatène la liste ayant des dates avec celle sans dates
+                complete_list = last_date_list + false_list
+        # on retourne complete_list
+        return complete_list
 
 product_product()
 
