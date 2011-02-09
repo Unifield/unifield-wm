@@ -2339,7 +2339,7 @@ class orm(orm_template):
             for r in res:
                 for f in fields_post:
                     r[f] = self._columns[f]._symbol_get(r[f])
-        ids = map(lambda x: x['id'], res)
+        res = sorted(res, cmp=lambda x,y: cmp(ids.index(x['id']), ids.index(y['id'])))
 
         # all non inherited fields for which the attribute whose name is in load is False
         fields_post = filter(lambda x: x in self._columns and not getattr(self._columns[x], load), fields_to_read)
