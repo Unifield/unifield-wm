@@ -93,16 +93,18 @@
 
         <record id="action_preparation_poste_tree" model="ir.actions.act_window">
             <field name="name">Tous les postes de préparation</field>
-            <field name="res_model">iller.preparation.poste</field>
+            <field name="res_model">iller.poste</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
+            <field name="domain">[('type', '=', 'PREP')]</field>
         </record>
 
         <record id="action_decoupe_poste_tree" model="ir.actions.act_window">
             <field name="name">Tous les postes de découpe</field>
-            <field name="res_model">iller.decoupe.poste</field>
+            <field name="res_model">iller.poste</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
+            <field name="domain">[('type', '=', 'DECP'))</field>
         </record>
 
         <act_window id="action_commandes_par_tournee"

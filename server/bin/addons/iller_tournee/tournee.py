@@ -23,30 +23,18 @@
 import time
 from osv import fields, osv
 
-class iller_preparation_poste(osv.osv):
-    _name = 'iller.preparation.poste'
-    _description = 'Poste de préparation'
+class iller_poste(osv.osv):
+    _name = 'iller.poste'
+    _desription = 'Poste de travail'
 
     _columns = {
-        'name': fields.char(size=64, string='Nom'),
+        'name': fields.char(size=64, string='Nom', required=True),
+        'type': fields.selection([('PREP', 'Préparation'), ('DECP', 'Découpe')], string='Type', required=True),
     }
 
     _order = 'name'
 
-iller_preparation_poste()
-
-
-class iller_decoupe_poste(osv.osv):
-    _name = 'iller.decoupe.poste'
-    _description = 'Poste de découpe'
-
-    _columns = {
-            'name': fields.char(size=64, string='Nom'),
-    }
-
-    _order = 'name'
-
-iller_decoupe_poste()
+iller_poste()
 
 
 class tournee_iller(osv.osv):
@@ -57,9 +45,9 @@ class tournee_iller(osv.osv):
         'name': fields.char(size=64, string='Nom', required=True),
         'code_tournee': fields.integer(string='Code tournee'),
         'heure_depart': fields.integer(string='Heure depart'),
-        'prep_id': fields.many2one('iller.preparation.poste', 
+        'prep_id': fields.many2one('iller.poste', domain="[('type', '=', 'PREP')]",
             string='Poste de préparation'),
-        'decoupe_id': fields.many2one('iller.decoupe.poste',
+        'decoupe_id': fields.many2one('iller.poste', domain="[('type', '=', 'DECP')]",
             string='Poste de découpe'),
         'regroup_code': fields.char(size=12, string='Code de regroupement'),
 
