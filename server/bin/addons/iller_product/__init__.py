@@ -20,7 +20,7 @@
 #
 ##############################################################################
 
-import iller_pricelist
-import iller_product
+import pricelist
+import product
 import wizard
 import report
