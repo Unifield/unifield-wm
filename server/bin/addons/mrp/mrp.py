@@ -621,7 +621,6 @@ class mrp_production(osv.osv):
             if not production.product_lines:
                 if not self.action_compute(cr, uid, [production.id]):
                     res = False
-        print 'test_if_product %r' %res
         return res
 
     def _get_auto_picking(self, cr, uid, production):

@@ -24,7 +24,6 @@
 from osv import fields
 from osv import osv
 from tools import config
-from product import _common
 from datetime import date
 from datetime import datetime
 from datetime import timedelta
