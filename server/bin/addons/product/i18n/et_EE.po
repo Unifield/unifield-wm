@@ -1731,3 +1731,232 @@ msgstr "Kg"
 msgid "Price Discount"
 msgstr "Allahindlus"
 
+                                                                                                                                                                 P��]���F��z�f:0
+msgid "The net weight in Kg."
+msgstr "Netokaal kilodes."
+
+#. module: product
+#: model:product.template,name:product.product_product_tow1_product_template
+msgid "ATX Mid-size Tower"
+msgstr "ATX Mid-size Tower"
+
+#. module: product
+#: field:product.supplierinfo,delay:0
+msgid "Delivery Delay"
+msgstr "Kohaletoimetamise viivitus"
+
+#. module: product
+#: model:ir.actions.act_window,name:product.product_pricelist_action
+#: model:ir.ui.menu,name:product.menu_product_pricelist_action
+#: field:product.pricelist,version_id:0
+msgid "Pricelist Versions"
+msgstr "Hinnakirja versioonid"
+
+#. module: product
+#: field:product.category,sequence:0
+#: field:product.packaging,sequence:0
+#: field:product.pricelist.item,sequence:0
+msgid "Sequence"
+msgstr "Jada"
+
+#. module: product
+#: field:product.template,list_price:0
+msgid "Sale Price"
+msgstr "Müügihind"
+
+#. module: product
+#: help:product.template,produce_delay:0
+msgid "Average time to produce this product. This is only for the production order and, if it is a multi-level bill of material, it's only for the level of this product. Different delays will be summed for all levels and purchase orders."
+msgstr "Keskmine aeg selle toote tootmiseks. See on ainult tootmiskorralduse jaoks ja kui see on mitmetasandiline kaubakooslus siis on see ainult selle toote tasemele. Erinevad viivitused summeeritakse kõigile tasemetele ja ostutellimustele."
+
+#. module: product
+#: wizard_field:product.price_list,init,qty1:0
+msgid "Quantity-1"
+msgstr "Kogus-1"
+
+#. module: product
+#: field:product.packaging,length:0
+#: model:product.uom.categ,name:product.product_uom_categ_m
+msgid "Length"
+msgstr "Pikkus"
+
+#. module: product
+#: model:product.category,name:product.cat2
+msgid "Private"
+msgstr "Privaatne"
+
+#. module: product
+#: view:product.product:0
+#: view:product.template:0
+msgid "Procurement & Locations"
+msgstr "Hanked ja asukohad"
+
+#. module: product
+#: help:product.supplierinfo,delay:0
+msgid "Delay in days between the confirmation of the purchase order and the reception of the products in your warehouse. Used by the scheduler for automatic computation of the purchase order planning."
+msgstr "Viivitus päevades ostutellimuse kinnitamise ja toodete lattu saabumise vahel. Kasutatakse planeerija poolt ostutellimuse planeerimise automaatseks arvutamiseks."
+
+#. module: product
+#: help:product.template,uom_po_id:0
+msgid "Default Unit of Measure used for purchase orders. It must in the same category than the default unit of measure."
+msgstr "Vaikimisi mõõtühik ostutellimusel. See peab olema samas kategooriast kui vaikimisi mõõtühik."
+
+#. module: product
+#: constraint:product.product:0
+msgid "Error: Invalid ean code"
+msgstr "Viga: Vigane EAN kood"
+
+#. module: product
+#: field:product.pricelist.item,min_quantity:0
+msgid "Min. Quantity"
+msgstr "Vähim kogus"
+
+#. module: product
+#: help:product.pricelist.item,categ_id:0
+msgid "Set a category of product if this rule only apply to products of a category and his childs. Keep empty for all products"
+msgstr "Määra toote kategooria, kui see reegel rakendub ainult kategooria toodetele ja nende alamatele. Hoia tühjana kõigi toodete jaoks."
+
+#. module: product
+#: model:ir.actions.report.xml,name:product.report_product_label
+msgid "Products Labels"
+msgstr "Tootete sildid"
+
+#. module: product
+#: model:ir.actions.act_window,name:product.product_normal_action
+#: model:ir.actions.act_window,name:product.product_normal_action_tree
+#: model:ir.ui.menu,name:product.menu_main_product
+#: model:ir.ui.menu,name:product.menu_products
+#: view:product.product:0
+msgid "Products"
+msgstr "Tooted"
+
+#. module: product
+#: model:product.ul,name:product.product_ul_big_box
+msgid "Box 30x40x60"
+msgstr "Kast 30x40x60"
+
+#. module: product
+#: model:product.uom,name:product.product_uom_kgm
+msgid "KGM"
+msgstr "Kg"
+
+#. module: product
+#: field:product.pricelist.item,price_discount:0
+msgid "Price Discount"
+msgstr "Allahindlus"
+
+                                                                                                                                                                 ?��x�ʝ$�xi��:0
+msgid "The net weight in Kg."
+msgstr "Netokaal kilodes."
+
+#. module: product
+#: model:product.template,name:product.product_product_tow1_product_template
+msgid "ATX Mid-size Tower"
+msgstr "ATX Mid-size Tower"
+
+#. module: product
+#: field:product.supplierinfo,delay:0
+msgid "Delivery Delay"
+msgstr "Kohaletoimetamise viivitus"
+
+#. module: product
+#: model:ir.actions.act_window,name:product.product_pricelist_action
+#: model:ir.ui.menu,name:product.menu_product_pricelist_action
+#: field:product.pricelist,version_id:0
+msgid "Pricelist Versions"
+msgstr "Hinnakirja versioonid"
+
+#. module: product
+#: field:product.category,sequence:0
+#: field:product.packaging,sequence:0
+#: field:product.pricelist.item,sequence:0
+msgid "Sequence"
+msgstr "Jada"
+
+#. module: product
+#: field:product.template,list_price:0
+msgid "Sale Price"
+msgstr "Müügihind"
+
+#. module: product
+#: help:product.template,produce_delay:0
+msgid "Average time to produce this product. This is only for the production order and, if it is a multi-level bill of material, it's only for the level of this product. Different delays will be summed for all levels and purchase orders."
+msgstr "Keskmine aeg selle toote tootmiseks. See on ainult tootmiskorralduse jaoks ja kui see on mitmetasandiline kaubakooslus siis on see ainult selle toote tasemele. Erinevad viivitused summeeritakse kõigile tasemetele ja ostutellimustele."
+
+#. module: product
+#: wizard_field:product.price_list,init,qty1:0
+msgid "Quantity-1"
+msgstr "Kogus-1"
+
+#. module: product
+#: field:product.packaging,length:0
+#: model:product.uom.categ,name:product.product_uom_categ_m
+msgid "Length"
+msgstr "Pikkus"
+
+#. module: product
+#: model:product.category,name:product.cat2
+msgid "Private"
+msgstr "Privaatne"
+
+#. module: product
+#: view:product.product:0
+#: view:product.template:0
+msgid "Procurement & Locations"
+msgstr "Hanked ja asukohad"
+
+#. module: product
+#: help:product.supplierinfo,delay:0
+msgid "Delay in days between the confirmation of the purchase order and the reception of the products in your warehouse. Used by the scheduler for automatic computation of the purchase order planning."
+msgstr "Viivitus päevades ostutellimuse kinnitamise ja toodete lattu saabumise vahel. Kasutatakse planeerija poolt ostutellimuse planeerimise automaatseks arvutamiseks."
+
+#. module: product
+#: help:product.template,uom_po_id:0
+msgid "Default Unit of Measure used for purchase orders. It must in the same category than the default unit of measure."
+msgstr "Vaikimisi mõõtühik ostutellimusel. See peab olema samas kategooriast kui vaikimisi mõõtühik."
+
+#. module: product
+#: constraint:product.product:0
+msgid "Error: Invalid ean code"
+msgstr "Viga: Vigane EAN kood"
+
+#. module: product
+#: field:product.pricelist.item,min_quantity:0
+msgid "Min. Quantity"
+msgstr "Vähim kogus"
+
+#. module: product
+#: help:product.pricelist.item,categ_id:0
+msgid "Set a category of product if this rule only apply to products of a category and his childs. Keep empty for all products"
+msgstr "Määra toote kategooria, kui see reegel rakendub ainult kategooria toodetele ja nende alamatele. Hoia tühjana kõigi toodete jaoks."
+
+#. module: product
+#: model:ir.actions.report.xml,name:product.report_product_label
+msgid "Products Labels"
+msgstr "Tootete sildid"
+
+#. module: product
+#: model:ir.actions.act_window,name:product.product_normal_action
+#: model:ir.actions.act_window,name:product.product_normal_action_tree
+#: model:ir.ui.menu,name:product.menu_main_product
+#: model:ir.ui.menu,name:product.menu_products
+#: view:product.product:0
+msgid "Products"
+msgstr "Tooted"
+
+#. module: product
+#: model:product.ul,name:product.product_ul_big_box
+msgid "Box 30x40x60"
+msgstr "Kast 30x40x60"
+
+#. module: product
+#: model:product.uom,name:product.product_uom_kgm
+msgid "KGM"
+msgstr "Kg"
+
+#. module: product
+#: field:product.pricelist.item,price_discount:0
+msgid "Price Discount"
+msgstr "Allahindlus"
+
+                                                                                                                                                                 

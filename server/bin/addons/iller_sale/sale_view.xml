@@ -6,6 +6,7 @@
             <field name="name">iller.sale.order.form.view</field>
             <field name="model">sale.order</field>
             <field name="type">form</field>
+            <field name="priority" eval="16" />
             <field name="inherit_id" ref="sale.view_order_form" />
             <field name="arch" type="xml">
                 <data>
@@ -92,22 +93,6 @@
             </field>
         </record>
 
-
-        <!-- Ajout de la tournée sur la fiche de la commande -->
-        <record id="tournee_sale_order_form_view" model="ir.ui.view">
-            <field name="name">tournee.sale.order.form.view</field>
-            <field name="model">sale.order</field>
-            <field name="type">form</field>
-            <field name="inherit_id" ref="sale.view_order_form" />
-            <field name="arch" type="xml">
-                <data>
-                    <xpath expr="/form/notebook/page/field[@name='partner_shipping_id']" position="replace">
-                        <field name="partner_shipping_id" invisible="1" />
-                        <field name="tournee_id" />
-                    </xpath>
-                </data>
-            </field>
-        </record>
 
 	</data>
 </openerp>
