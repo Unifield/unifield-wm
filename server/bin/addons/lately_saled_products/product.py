@@ -86,7 +86,7 @@ class product_product(osv.osv):
             store=False),
     }
 
-    def search(self, cr, uid, args, offset=0, limit=None, order=None, context=None, count=False):
+    def search(self, cr, uid, args, offset=0, limit=None, order=None, context={}, count=False):
         """
         Retourne la liste des ids des produits, triés par date décroissante, 
         puis par nom croissant.
