@@ -58,6 +58,25 @@
             </field>
         </record>
 
+        <record model="ir.ui.view" id="wizard_commandes_par_tournee_form">
+            <field name="name">wizard.commandes.par.tournee.form</field>
+            <field name="model">commandes.par.tournee</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Liste des commandes par tournée et par date">
+                    <separator string="Commandes par tournée et par date" />
+                    <newline />
+                    <field name="tournee_id" />
+                    <newline />
+                    <field name="date" />
+                    <newline />
+                    <button string="Ok" name='action_confirmer_liste_commandes' type="object" icon="gtk-apply" />
+                    <button string="Annuler" special='cancel' icon='gtk-cancel' />
+                </form>
+            </field>
+        </record>
+
+        <!-- Actions -->
         <record id="action_tournee_form" model="ir.actions.act_window">
             <field name="name">Nouvelle tournée</field>
             <field name="res_model">tournee.iller</field>
@@ -71,15 +90,6 @@
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
         </record>
-
-        <menuitem id="menu_tournee_tree"
-                  action="action_tournee_tree"
-                  parent="base.menu_base_partner" />
-
-        <menuitem id="menu_tournee_form"
-                  action="action_tournee_form"
-                  parent="base.menu_base_partner" />
-
 
         <record id="action_preparation_poste_tree" model="ir.actions.act_window">
             <field name="name">Tous les postes de préparation</field>
@@ -95,6 +105,23 @@
             <field name="view_mode">tree,form</field>
         </record>
 
+        <act_window id="action_commandes_par_tournee"
+            name="Liste des commandes par tournée et par date"
+            res_model="commandes.par.tournee"
+            src_model="tournee.iller"
+            view_mode='form'
+            view_type='form'
+            target='new' />
+
+        <!-- Menus -->
+        <menuitem id="menu_tournee_tree"
+                  action="action_tournee_tree"
+                  parent="base.menu_base_partner" />
+
+        <menuitem id="menu_tournee_form"
+                  action="action_tournee_form"
+                  parent="base.menu_base_partner" />
+
         <menuitem id="menu_postes"
                   name="Tous les postes"
                   parent="base.menu_base_partner" />
@@ -106,6 +133,10 @@
         <menuitem id="menu_preparation_tree"
                   action="action_preparation_poste_tree"
                   parent="menu_postes" />
+
+        <menuitem id="menu_commandes_par_tournee"
+                action="action_commandes_par_tournee"
+                parent="base.menu_base_partner" />
 
     </data>
 </openerp>
