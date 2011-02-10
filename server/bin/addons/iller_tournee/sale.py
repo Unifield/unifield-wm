@@ -68,7 +68,7 @@ class iller_sale_order_line(osv.osv):
         product_obj = self.pool.get('product.product')
         tournee_obj = self.pool.get('tournee.iller')
 
-        res = super(iller_sale_line, self).product_id_change(cr, uid, ids, pricelist, product, qty, uom, qty_uos, uos, name, partner_id,
+        res = super(iller_sale_order_line, self).product_id_change(cr, uid, ids, pricelist, product_id, qty, uom, qty_uos, uos, name, partner_id,
                                                              lang, update_tax, date_order, packaging, fiscal_position, flag)
 
         if product_id and tournee_id:
