@@ -35,7 +35,7 @@
         pour Distribution Iller.
     """,
     'update_xml': [
-        'iller_partner_view.xml',
+        'partner_view.xml',
     ],
     'installable': True,
     'active': False,
