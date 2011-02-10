@@ -13,7 +13,7 @@ class iller_sale_comment(osv.osv):
     _columns = {
         'product_id': fields.many2one('product.product', string='Produit', required=True),
         'partner_id': fields.many2one('res.partner', string='Client', required=True),
-        'comment': fields.text(string='Commentaire', required=True),
+        'comment': fields.text(string='Commentaire'),
     }
 
 iller_sale_comment()
@@ -31,7 +31,7 @@ class iller_sale_line(osv.osv):
         '''
         comment_obj = self.pool.get('iller.sale.comment')
 
-        if 'notes' in data:
+        if 'notes' in data and data.get('notes') != '':
             for line in self.browse(cr, uid, ids):
                 comment_ids = comment_obj.search(cr, uid, [('product_id', '=', line.product_id.id), ('partner_id', '=', line.order_id.partner_id.id)])
                 if comment_ids and len(comment_ids) > 0:
@@ -51,7 +51,7 @@ class iller_sale_line(osv.osv):
         order_obj = self.pool.get('sale.order')
 
 
-        if 'notes' in data and 'product_id' in data and 'order_id' in data:
+        if 'notes' in data and data.get('notes') != '' and 'product_id' in data and 'order_id' in data:
             partner_id = order_obj.browse(cr, uid, data.get('order_id')).partner_id.id
             comment_ids = comment_obj.search(cr, uid, [('product_id', '=', data.get('product_id')), ('partner_id', '=', partner_id)])
             if comment_ids and len(comment_ids) > 0:
@@ -64,16 +64,18 @@ class iller_sale_line(osv.osv):
 
     def product_id_change(self, cr, uid, ids, pricelist, product, qty=0,
           uom=False, qty_uos=0, uos=False, name='', partner_id=False,
-          lang=False, update_tax=True, date_order=False, packaging=False, fiscal_position=False, flag=False):
+          lang=False, update_tax=True, date_order=False, packaging=False, fiscal_position=False, tournee_id=False, flag=False):
         '''
             Lors du changement de produit, on regarde si un commentaire existe déjà 
             pour ce produit et ce partenaire
         '''
         comment_obj = self.pool.get('iller.sale.comment')
+        product_obj = self.pool.get('product.product')
+        tournee_obj = self.pool.get('tournee.iller')
 
         comment = ''
         res = super(iller_sale_line, self).product_id_change(cr, uid, ids, pricelist, product, qty, uom, qty_uos, uos, name, partner_id, \
-                                                             lang, update_tax, date_order, packaging, fiscal_position, flag)
+                                                             lang, update_tax, date_order, packaging, fiscal_position, tournee_id, flag)
 
         if product and partner_id:
             comment_ids = comment_obj.search(cr, uid, [('partner_id', '=', partner_id), ('product_id', '=', product)])
@@ -86,30 +88,6 @@ class iller_sale_line(osv.osv):
 
 
 iller_sale_line()
-
-
-class iller_sale(osv.osv):
-    _name = 'sale.order'
-    _inherit = 'sale.order'
-
-    _columns = {
-        'tournee_id': fields.many2one('tournee.iller', string='Tournée', required=True),
-    }
-
-
-    def onchange_partner_id(self, cr, uid, ids, partner_id, context={}):
-        '''
-            Met à jour la tournée en fonction du partenaire
-        '''
-        res = super(iller_sale, self).onchange_partner_id(cr, uid, ids, partner_id)
-        if partner_id:
-            partner = self.pool.get('res.partner').browse(cr, uid, partner_id, context=context)
-            if partner.tournee1 and partner.tournee1.id:
-                res['value'].update({'tournee_id': partner.tournee1.id})
-        return res
-
-
-iller_sale()
 
 
 class iller_partner(osv.osv):

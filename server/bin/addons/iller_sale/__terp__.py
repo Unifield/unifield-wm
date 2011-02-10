@@ -27,7 +27,7 @@
     "author" : "TeMPO Consulting",
     "website": "http://www.tempo-consulting.fr",
     "category" : "Enterprise Specific Modules/Iller",
-    "depends" : ["iller_partner", "sale", "iller_tournee"],
+    "depends" : ["iller_partner", "sale", "iller_tournee", "lately_saled_products"],
     "init_xml" : [],
     "demo_xml" : [],
     "description": """
@@ -35,9 +35,9 @@
         Distribution Iller.
     """,
     'update_xml': [
-        'iller_sale_view.xml',
-        'iller_commission_view.xml',
-        'iller_commission_data.xml',
+        'sale_view.xml',
+        'commission_view.xml',
+        'commission_data.xml',
     ],
     'installable': True,
     'active': False,
