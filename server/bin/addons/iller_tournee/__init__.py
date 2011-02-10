@@ -20,5 +20,6 @@
 #
 ##############################################################################
 
-import tournee_iller
+import tournee
+import sale
 import wizard
