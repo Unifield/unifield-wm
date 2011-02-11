@@ -167,7 +167,7 @@ class product_product(osv.osv):
         'liste_prepa': fields.selection([('0', 'Rien'), ('1', 'Congelé'), ('2', 'Salaison'), ('3', 'Volaille')],
                                                 string='Liste préparation', required=True),
         'price_history': fields.one2many('product.price.history', 'product_id', 'Historique des Prix'),
-
+        'default_code' : fields.char('Code', size=64, required=True),
     }
 
     _defaults = {
