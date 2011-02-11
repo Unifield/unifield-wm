@@ -23,3 +23,4 @@
 import tournee
 import sale
 import wizard
+import stock

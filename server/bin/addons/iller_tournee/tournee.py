@@ -50,6 +50,7 @@ class tournee_iller(osv.osv):
         'decoupe_id': fields.many2one('iller.poste', domain="[('type', '=', 'DECP')]",
             string='Poste de découpe'),
         'regroup_code': fields.char(size=12, string='Code de regroupement'),
+        'stock_picking_ids': fields.one2many('stock.picking', 'tournee_id', string='Produits à expédier'),
 
         ## Les partenaires présents dans la tournée
         'partner1': fields.one2many('res.partner', 'tournee1', 'Clients principaux'),

@@ -4,7 +4,6 @@
 from osv import osv
 from osv import fields
 
-
 class iller_picking(osv.osv):
     _name = 'stock.picking'
     _inherit = 'stock.picking'
