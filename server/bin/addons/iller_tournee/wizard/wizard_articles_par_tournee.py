@@ -31,16 +31,34 @@ class wizard_articles_par_tournee(osv.osv):
         'date': fields.date(string="Date de tournée", required=True)
     }
     
-    def action_liste_articles_par_tournee(self, cr, uid, ids, context={}):
+    def action_confirmer_liste_articles(self, cr, uid, ids, context={}):
         # Préparation des objets
         wiz_obj = self.browse(cr,uid,ids)[0]
-        domain = [('tournee_id', '=', wiz_obj.tournee_id)]
+        so_obj = self.pool.get('sale.order')
+        irmd_obj = self.pool.get('ir.model.data')
+        # Récupération des ids de commandes correspondant à la recherche fournie
+        res_ids = so_obj.search(cr, uid, [('tournee_id', '=', wiz_obj.tournee_id.id), ('date_order', '=', wiz_obj.date), ('state', '=', 'progress')])
+        # Création du domaine contenant les éléments de recherche
+        domain = [('order_id', 'in', res_ids)]
+        # Récupération de l'id de la vue à afficher
+        view_ids = irmd_obj.search(cr, uid, [('name', '=', 'wizard_sale_order_line_form_view'), ('model', '=', 'ir.ui.view')])
+        # Préparation de l'élément permettant de trouver la vue à  afficher
+        if view_ids:
+            view = irmd_obj.read(cr, uid, view_ids[0])
+            view_id = (view.get('res_id'), view.get('name'))
+        else:
+            raise osv.except_osv(_('Erreur'), _("Impossible d'afficher le résultat : vue non trouvée."))
+        # On retourne le résultat dans une vue en 'tree'
         return {'type': 'ir.actions.act_window',
-                'res_model': 'iller.tournee',
+                'res_model': 'sale.order.line',
                 'view_type': 'form',
                 'view_mode': 'tree,form',
+                'view_id': view_id,
                 'domain': domain,
                 }
+
+    def action_imprimer_rapport(self, cr, uid, ids, context={}):
+        return { 'type': 'ir.actions.act_window.close' }
 
 wizard_articles_par_tournee()
 

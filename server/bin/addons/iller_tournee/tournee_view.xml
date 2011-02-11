@@ -89,11 +89,28 @@
                     <field name="date" />
                     <newline />
                     <group col="6" colspan="4">
-                        <button string="Imprimer un rapport" name="action_imprimer_rapport" type="object" icon="gtk-print" />
-                        <button string="Ok" name='action_confirmer_liste_commandes' type="object" icon="gtk-apply" />
+                        <button string="Ok" name='action_confirmer_liste_articles' type="object" icon="gtk-apply" />
                         <button string="Annuler" special='cancel' icon='gtk-cancel' />
+                        <button string="Imprimer un rapport" name="action_imprimer_rapport" type="object" icon="gtk-print" />
                     </group>
                 </form>
+            </field>
+        </record>
+
+        <record id="wizard_sale_order_line_form_view" model="ir.ui.view">
+            <field name="name">wizard.sale.order.line.form.view</field>
+            <field name="model">sale.order.line</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <tree string="Sales order lines">
+                    <field name="order_id"/>
+                    <field name="order_partner_id"/>
+                    <field name="name"/>
+                    <field name="product_id"/>
+                    <field name="product_uom_qty" string="Qty"/>
+                    <field name="product_uom" string="UoM"/>
+                    <field name="state"/>
+                </tree>
             </field>
         </record>
 
