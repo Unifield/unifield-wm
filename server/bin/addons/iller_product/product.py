@@ -38,6 +38,7 @@ class product_price_history(osv.osv):
         'name': fields.date('Valable à partir du',required=True,select=1),
         'nouveau_prix_achat': fields.float('Prix d\'achat',required=True, digits=(16,2)),
         'nouveau_prix_vente': fields.float('Prix de vente', required=True, digits=(16,2)),
+        'nouveau_prix_blanche': fields.float('Prix blanche', required=True, digits=(16,2)),
         'product_id': fields.many2one('product.product','Product',ondelete='cascade', select=1),
         'fin' : fields.char(size=1, string=' '),
         'comment': fields.char(size=128, string='Commentaire'),
@@ -68,6 +69,7 @@ class product_product(osv.osv):
                 data_history = {'name': datetime.now(),
                                 'nouveau_prix_achat': vals.get('prix_achat'),
                                 'nouveau_prix_vente': vals.get('prix_achat')*vals.get('coeff_depart', prd.coeff_depart),
+                                'nouveau_prix_blanche': vals.get('prix_achat')*vals.get('coeff_blanche', prd.coeff_blanche),
                                 'product_id': prd.id,
                                 'comment': ''}
                 if not 'wizard' in context:
@@ -81,6 +83,7 @@ class product_product(osv.osv):
                 data_history = {'name': datetime.now(),
                                 'nouveau_prix_achat': prd.prix_achat,
                                 'nouveau_prix_vente': prd.prix_achat*vals.get('coeff_depart', prd.coeff_depart),
+                                'nouveau_prix_blacnhe': prd.prix_achat*vals.get('coeff_blanche', prd.coeff_blanche),
                                 'product_id': prd.id,
                                 'comment': ''}
                 if not 'wizard' in context:
@@ -137,22 +140,25 @@ class product_product(osv.osv):
         for product in self.browse(cr, uid, ids):
             history_ids = history_obj.search(cr, uid, [('name', '<=', datetime.now()),('product_id', '=', product.id)], offset=0, limit=1, order="name desc", context=context)
             if history_ids and len(history_ids) > 0:
-                res[product.id] = history_obj.browse(cr, uid, history_ids[0]).nouveau_prix_achat
+                res[product.id] = {'prix_achat': history_obj.browse(cr, uid, history_ids[0]).nouveau_prix_achat,
+                                   'prix_blanche': history_obj.browse(cr, uid, history_ids[0]).nouveau_prix_blanche,
+                                   'list_price': history_obj.browse(cr, uid, history_ids[0]).nouveau_prix_vente}
             else:
-                res[product.id] = 0.00
+                res[product.id] = {'prix_achat': 0.00, 'prix_blanche': 0.00, 'list_price': 0.00}
 
         return res
 
 
     _columns = {
-        'prix_achat': fields.function(_get_prix_achat, method=True, string='Prix d\'achat', digits=(16, int(config['price_accuracy'])), store=False),
+        'prix_achat': fields.function(_get_prix_achat, method=True, string='Prix d\'achat', digits=(16, int(config['price_accuracy'])), store=False, multi='prix'),
         'coeff_depart': fields.float(digits=(16,2), string='Coeff. départ'),
         'type_cond': fields.selection([('0000', 'PIECE'), ('0001', 'KILO'), ('0002', 'CARTON'), ('0003', 'BARQUETTE')], 
                                                                                             string='Type conditionnement'),
         'type_preselec': fields.selection([('0', 'Facturation pièce/carton'), ('1', 'Facturation Kilo')], string='Type préselection'),
         'coeff_blanche': fields.float(digits=(16,2), string='Coeff. blanche'),
         'coeff_jaune': fields.many2one('product.pricelist.bareme', string='Barème promo jaune'),
-        'prix_blanche': fields.float(digits=(16, int(config['price_accuracy'])), string='Prix blanche'),
+        'prix_blanche': fields.function(_get_prix_achat, method=True, string='Prix blanche', digits=(16, int(config['price_accuracy'])), store=False, multi='prix'),
+        'list_price': fields.function(_get_prix_achat, method=True, string='Prix de vente', digits=(16, int(config['price_accuracy'])), store=False, multi='prix'),
         'prix_decembre': fields.float(digits=(16, int(config['price_accuracy'])), string='Prix décembre'),
 
         'type_pesee': fields.selection([('0', 'Poids variable'), ('1', 'Prix fixe'), ('2', 'Poids fixe'),
