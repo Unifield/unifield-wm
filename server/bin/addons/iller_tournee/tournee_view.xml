@@ -102,7 +102,7 @@
         <record id="wizard_sale_order_line_form_view" model="ir.ui.view">
             <field name="name">wizard.sale.order.line.form.view</field>
             <field name="model">sale.order.line</field>
-            <field name="type">form</field>
+            <field name="type">tree</field>
             <field name="arch" type="xml">
                 <tree string="Sales order lines">
                     <field name="order_id"/>

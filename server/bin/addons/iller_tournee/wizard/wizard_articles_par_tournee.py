@@ -30,7 +30,7 @@ class wizard_articles_par_tournee(osv.osv):
         'tournee_id': fields.many2one('tournee.iller', string="Tournées", required=True),
         'date': fields.date(string="Date de tournée", required=True),
         # Champ type suit les informations trouvés dans le module iller_product, product.py#161
-        'type': fields.selection([('0', ''), ('1', 'Congelé'), ('2', 'Salaison'), ('3', 'Volaille')], string="Liste préparation", required=True)
+        'type': fields.selection([('0', 'Tout'), ('1', 'Congelé'), ('2', 'Salaison'), ('3', 'Volaille')], string="Liste préparation", required=True)
     }
     
     _defaults = {
