@@ -86,7 +86,7 @@ class product_product(osv.osv):
             store=False),
     }
 
-    def read(self, cr, uid, ids, fields=None, context=None, load='_classic_read'):
+    def read(self, cr, uid, ids, fields=None, context={}, load='_classic_read'):
         res = super(product_product, self).read(cr, uid, ids, fields, context=context, load=load)
 
         # Création de la liste par défaut

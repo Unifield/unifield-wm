@@ -32,29 +32,32 @@ class export_tarif_promo(wizard.interface):
         product_obj = pooler.get_pool(cr.dbname).get('product.product')
         promo = promo_obj.browse(cr, uid, data['ids'])[0]
 
-        export = "PRODUIT;PRIX" + "\r\n"
-        for p in promo.product_ids:
+        export = "CODE;PRODUIT;PRIX" + "\r\n"
+        for pp in promo.product_ids:
+            p = pp.product_id
             p_price = 0.00
             if data['form']['type'] == 'blanche':
                 p_price = p.prix_blanche
             else:
-                p_price = round(p.prix_jaune,2)
-            export += "%s;%s" % (p.name, p_price)
+                p_price = round(pp.prix_jaune,2)
+            export += "%s;%s;%.2f" % (p.default_code, p.name, p_price)
             export += "\r\n"
 
-        export += "PAGE2;   " + "\r\n"
-        for p2 in promo.product2_ids:
+        export += "\r\n"
+        export += "PAGE2" + "\r\n"
+        export += "CODE;PRODUIT;PRIX" + "\r\n"
+        for pp2 in promo.product2_ids:
+            p2 = pp2.product_id
             p_price = 0.00
             if data['form']['type'] == 'blanche':
                 p_price = p2.prix_blanche
             else:
-                p_price = round(p2.prix_jaune,2)
-            export += "%s;%s" % (p2.name, p_price)
+                p_price = round(pp2.prix_jaune,2)
+            export += "%s;%s;%.2f" % (p2.name, p_price)
             export += "\r\n"
 
-        export1=base64.encodestring(export.encode("utf-8"))
-
-        data['file'] = export1
+        data['file'] = base64.encodestring(export.encode("utf-8"))
+        data['name'] = 'PROMO.CSV'
 
         return data
 
