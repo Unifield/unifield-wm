@@ -28,7 +28,13 @@ class wizard_articles_par_tournee(osv.osv):
     _name = 'articles.par.tournee'
     _columns = {
         'tournee_id': fields.many2one('tournee.iller', string="Tournées", required=True),
-        'date': fields.date(string="Date de tournée", required=True)
+        'date': fields.date(string="Date de tournée", required=True),
+        # Champ type suit les informations trouvés dans le module iller_product, product.py#161
+        'type': fields.selection([('0', ''), ('1', 'Congelé'), ('2', 'Salaison'), ('3', 'Volaille')], string="Liste préparation", required=True)
+    }
+    
+    _defaults = {
+        'type': lambda *a: '0', # permet de n'avoir aucun tri sur le type d'articles de la liste résultante
     }
     
     def action_confirmer_liste_articles(self, cr, uid, ids, context={}):
@@ -39,7 +45,10 @@ class wizard_articles_par_tournee(osv.osv):
         # Récupération des ids de commandes correspondant à la recherche fournie
         res_ids = so_obj.search(cr, uid, [('tournee_id', '=', wiz_obj.tournee_id.id), ('date_order', '=', wiz_obj.date), ('state', '=', 'progress')])
         # Création du domaine contenant les éléments de recherche
+        type_article = wiz_obj.type
         domain = [('order_id', 'in', res_ids)]
+        if type_article != '0':
+            domain = [('order_id', 'in', res_ids), ('product_id.liste_prepa', '=', wiz_obj.type)]
         # Récupération de l'id de la vue à afficher
         view_ids = irmd_obj.search(cr, uid, [('name', '=', 'wizard_sale_order_line_form_view'), ('model', '=', 'ir.ui.view')])
         # Préparation de l'élément permettant de trouver la vue à  afficher
