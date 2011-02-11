@@ -29,6 +29,18 @@ from datetime import datetime
 import pooler
 import time
 
+
+class product_category(osv.osv):
+    _name = 'product.category'
+    _inherit = 'product.category'
+
+    _columns = {
+        'code': fields.char(size=12, string='Code'),
+    }
+
+product_category()
+
+
 class product_price_history(osv.osv):
     _name = 'product.price.history'
     _description = 'Historique Prix Achat'

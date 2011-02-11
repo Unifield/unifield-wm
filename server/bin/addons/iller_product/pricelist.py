@@ -882,6 +882,22 @@ class product_in_promo(osv.osv):
 
         return res
 
+
+    def _get_prix_achat(self, cr, uid, ids, field_name, arg, context={}):
+        history_obj = self.pool.get('product.price.history')
+
+        res = {}
+
+        for pinp in self.browse(cr, uid, ids, context=context):
+            history_ids = history_obj.search(cr, uid, [('product_id', '=', pinp.product_id.id), ('name', '<=', datetime.now())], 0, False, 'name desc')
+            for h in history_obj.browse(cr, uid, history_ids, context=context):
+                if not h.comment or len(h.comment) < 5 or h.comment[5:] != 'Promo':
+                    res[pinp.id] = h.nouveau_prix_achat
+                    return res
+
+        return res
+
+
     def onchange_product(self, cr, uid, ids, product_id, context={}):
         v = {}
         product_obj = self.pool.get('product.product')
@@ -902,7 +918,8 @@ class product_in_promo(osv.osv):
         'promo_id': fields.many2one('product.pricelist.promo'),
         'prix_blanche': fields.related('product_id', 'prix_blanche', string='Prix blanche', readonly=True),
         'prix_jaune': fields.function(_get_prix_jaune, method=True, string='Prix jaune', readonly=True, store=False),
-        'prix_achat': fields.related('product_id', 'prix_achat', string='Prix achat', readonly=True),
+        'prix_achat': fields.function(_get_prix_achat, method=True, string='Prix achat', readonly=True, store=False),
+#        'prix_achat': fields.related('product_id', 'prix_achat', string='Prix achat', readonly=True),
         'new_prix_achat': fields.float(digits=(16,2), string='Nouveau prix d\'achat'),
     }
 
