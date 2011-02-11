@@ -1,4 +1,5 @@
-# -*- encoding: utf-8 -*-
+#!/usr/bin/env python
+#-*- encoding:utf-8 -*-
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution    
@@ -20,7 +21,27 @@
 #
 ##############################################################################
 
-import wizard_commandes_par_tournee
-import wizard_articles_par_tournee
+from osv import osv
+from osv import fields
+
+class wizard_articles_par_tournee(osv.osv):
+    _name = 'articles.par.tournee'
+    _columns = {
+        'tournee_id': fields.many2one('tournee.iller', string="Tournées", required=True),
+        'date': fields.date(string="Date de tournée", required=True)
+    }
+    
+    def action_liste_articles_par_tournee(self, cr, uid, ids, context={}):
+        # Préparation des objets
+        wiz_obj = self.browse(cr,uid,ids)[0]
+        domain = [('tournee_id', '=', wiz_obj.tournee_id)]
+        return {'type': 'ir.actions.act_window',
+                'res_model': 'iller.tournee',
+                'view_type': 'form',
+                'view_mode': 'tree,form',
+                'domain': domain,
+                }
+
+wizard_articles_par_tournee()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
