@@ -98,18 +98,18 @@ class wizard_export_tarifs_commerciaux(osv.osv_memory):
                    prix_vente = 0.0
 
                 if this.achat_inclus:
-                    export += str(round(prix_achat,2)) + ";"
+                    export += "%.2f;" %round(prix_achat,2)
                 else:
                     export += ";"
                 export += product.default_code + ";" + product.name + ";"
-                export += str(round(prix_vente * c01,2)) + ";"
-                export += str(round(prix_vente * c19,2)) + ";"
-                export += str(round(prix_vente * c17,2)) + ";"
-                export += str(round(prix_vente * c15,2)) + ";"
-                export += str(round(prix_vente * c13,2)) + ";"
-                export += str(round(prix_vente * c11,2)) + ";"
-                export += str(round(prix_vente * c09,2)) + ";"
-                export += str(round(prix_vente * c07,2)) + ";"
+                export += "%.2f;" %round(prix_vente * c01,2)
+                export += "%.2f;" %round(prix_vente * c19,2)
+                export += "%.2f;" %round(prix_vente * c17,2)
+                export += "%.2f;" %round(prix_vente * c15,2)
+                export += "%.2f;" %round(prix_vente * c13,2)
+                export += "%.2f;" %round(prix_vente * c11,2)
+                export += "%.2f;" %round(prix_vente * c09,2)
+                export += "%.2f;" %round(prix_vente * c07,2)
                 export += "\r\n"
 
         export1=base64.encodestring(export.encode("utf-8"))
