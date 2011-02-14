@@ -155,6 +155,7 @@
             <field name="arch" type="xml">
                 <form string="Choix de la catégorie">
                     <field name="category_id" colspan="4" />
+                    <field name="type" colspan="4" />
                     <button name="_choose" string="Continuer" type="object" colspan="4" />
                 </form>
             </field>
