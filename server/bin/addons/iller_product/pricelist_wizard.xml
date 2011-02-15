@@ -200,6 +200,8 @@
                         <field name="bareme4_id" />
                         <field name="bareme5_id" />
                         <field name="bareme6_id" />
+                        <field name="bareme7_id" />
+                        <field name="bareme8_id" />
                     </group>
                     <group colspan="2" col="2">
                         <separator string="Catégories" colspan="2" />

@@ -16,11 +16,13 @@ class wizard_print_pricelist_cat(osv.osv_memory):
         'bareme4_id': fields.many2one('product.pricelist.bareme', string='Barème 4'),
         'bareme5_id': fields.many2one('product.pricelist.bareme', string='Barème 5'),
         'bareme6_id': fields.many2one('product.pricelist.bareme', string='Barème 6'),
+        'bareme7_id': fields.many2one('product.pricelist.bareme', string='Barème 7'),
+        'bareme8_id': fields.many2one('product.pricelist.bareme', string='Barème 8'),
     }
 
     def _print(self, cr, uid, ids, context={}):
         datas = {'ids': context.get('active_ids', [])}
-        res = self.read(cr, uid, ids, ['category_ids', 'bareme1_id', 'bareme2_id', 'bareme3_id', 'bareme4_id', 'bareme5_id', 'bareme6_id'], context=context)
+        res = self.read(cr, uid, ids, ['category_ids', 'bareme1_id', 'bareme2_id', 'bareme3_id', 'bareme4_id', 'bareme5_id', 'bareme6_id', 'bareme7_id', 'bareme8_id'], context=context)
         res = res and res[0] or {}
         datas['form'] = res
         return {'type': 'ir.actions.report.xml',

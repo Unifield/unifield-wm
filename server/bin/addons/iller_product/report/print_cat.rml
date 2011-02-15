@@ -2,7 +2,7 @@
 <document filename="test.pdf">
   <template pageSize="(595.0,842.0)" title="Test" author="Martin Simon" allowSplitting="20">
     <pageTemplate id="first">
-      <frame id="first" x1="14.0" y1="57.0" width="567" height="728"/>
+      <frame id="first" x1="14.0" y1="14.0" width="567" height="814"/>
     </pageTemplate>
   </template>
   <stylesheet>
@@ -54,9 +54,15 @@
       <lineStyle kind="LINEABOVE" colorName="#000000" start="7,0" stop="7,0"/>
       <lineStyle kind="LINEBELOW" colorName="#000000" start="7,-1" stop="7,-1"/>
       <lineStyle kind="LINEBEFORE" colorName="#000000" start="8,0" stop="8,-1"/>
-      <lineStyle kind="LINEAFTER" colorName="#000000" start="8,0" stop="8,-1"/>
       <lineStyle kind="LINEABOVE" colorName="#000000" start="8,0" stop="8,0"/>
       <lineStyle kind="LINEBELOW" colorName="#000000" start="8,-1" stop="8,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="9,0" stop="9,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="9,0" stop="9,0"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="9,-1" stop="9,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="10,0" stop="10,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="10,0" stop="10,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="10,0" stop="10,0"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="10,-1" stop="10,-1"/>
       <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,1" stop="0,-1"/>
       <lineStyle kind="LINEBELOW" colorName="#000000" start="0,-1" stop="0,-1"/>
       <lineStyle kind="LINEBEFORE" colorName="#000000" start="1,1" stop="1,-1"/>
@@ -74,23 +80,28 @@
       <lineStyle kind="LINEBEFORE" colorName="#000000" start="7,1" stop="7,-1"/>
       <lineStyle kind="LINEBELOW" colorName="#000000" start="7,-1" stop="7,-1"/>
       <lineStyle kind="LINEBEFORE" colorName="#000000" start="8,1" stop="8,-1"/>
-      <lineStyle kind="LINEAFTER" colorName="#000000" start="8,1" stop="8,-1"/>
       <lineStyle kind="LINEBELOW" colorName="#000000" start="8,-1" stop="8,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="9,1" stop="9,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="9,-1" stop="9,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="10,1" stop="10,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="10,1" stop="10,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="10,-1" stop="10,-1"/>
       <blockBackground colorName="#e6e6e6" start="0,0" stop="-1,0"/>
     </blockTableStyle>
     <initialize>
       <paraStyle name="all" alignment="justify"/>
     </initialize>
-    <paraStyle name="P1" fontName="Times-Roman" fontSize="5.0" leading="7"/>
-    <paraStyle name="P2" fontName="Times-Roman" fontSize="12.0" leading="15" alignment="CENTER"/>
+    <paraStyle name="P1" fontName="Times-Roman" fontSize="12.0" leading="15" alignment="CENTER"/>
+    <paraStyle name="P2" fontName="Times-Roman" fontSize="12.0" leading="15" alignment="LEFT"/>
     <paraStyle name="P3" fontName="Times-Roman" fontSize="12.0" leading="15" alignment="LEFT"/>
-    <paraStyle name="P4" fontName="Times-Roman" fontSize="12.0" leading="15" alignment="LEFT"/>
-    <paraStyle name="P5" fontName="Times-Roman" fontSize="8.0" leading="10" alignment="LEFT"/>
-    <paraStyle name="P6" fontName="Times-Roman" fontSize="8.0" leading="10" alignment="LEFT"/>
-    <paraStyle name="P7" fontName="Times-Roman" fontSize="8.0" leading="10" alignment="CENTER"/>
-    <paraStyle name="P8" fontName="Times-Roman" fontSize="8.0" leading="10" alignment="CENTER"/>
-    <paraStyle name="P9" fontName="Times-Roman" fontSize="16.0" leading="20" alignment="CENTER" backColor="#e6e6e6"/>
-    <paraStyle name="P10" fontName="Times-Roman" fontSize="10.0" leading="13" alignment="CENTER" backColor="#e6e6e6"/>
+    <paraStyle name="P4" fontName="Times-Roman" fontSize="8.0" leading="10" alignment="LEFT"/>
+    <paraStyle name="P5" fontName="Times-Roman" fontSize="11.0" leading="14"/>
+    <paraStyle name="P6" fontName="Times-Roman" fontSize="8.0" leading="10" alignment="CENTER"/>
+    <paraStyle name="P7" fontName="Times-Roman" fontSize="8.0" leading="7" alignment="LEFT"/>
+    <paraStyle name="P8" fontName="Times-Roman" fontSize="16.0" leading="20" alignment="CENTER" backColor="#e6e6e6"/>
+    <paraStyle name="P9" fontName="Times-Roman" fontSize="10.0" leading="13" alignment="CENTER" backColor="#e6e6e6"/>
+    <paraStyle name="P10" fontName="Times-Roman" fontSize="8.0" leading="10" alignment="CENTER"/>
+    <paraStyle name="P11" fontName="Times-Roman" fontSize="8.0" leading="7" alignment="CENTER"/>
     <paraStyle name="Standard" fontName="Times-Roman"/>
     <paraStyle name="Heading" fontName="Helvetica" fontSize="14.0" leading="17" spaceBefore="12.0" spaceAfter="6.0"/>
     <paraStyle name="Text body" fontName="Times-Roman" spaceBefore="0.0" spaceAfter="6.0"/>
@@ -98,107 +109,120 @@
     <paraStyle name="Caption" fontName="Times-Roman" fontSize="12.0" leading="15" spaceBefore="6.0" spaceAfter="6.0"/>
     <paraStyle name="Index" fontName="Times-Roman"/>
     <paraStyle name="Table Contents" fontName="Times-Roman"/>
+    <paraStyle name="Table Heading" fontName="Times-Roman" alignment="CENTER"/>
     <images/>
   </stylesheet>
   <story>
-    <para style="P1">[[ repeatIn(objects, 'o') ]]</para>
+    <para style="P5">[[ repeatIn(objects, 'o') ]]</para>
     <blockTable colWidths="567.0" style="Table1">
       <tr>
         <td>
-          <para style="P9">PRODUITS</para>
+          <para style="P8">PRODUITS</para>
         </td>
       </tr>
     </blockTable>
-    <para style="P2">
+    <para style="P1">
       <font color="white"> </font>
     </para>
     <section>
-      <para style="P5">[[ repeatIn(data['form']['category_ids'], 'c') ]]</para>
+      <para style="P4">[[ repeatIn(data['form']['category_ids'], 'c') ]]</para>
       <blockTable colWidths="567.0" style="Table2">
         <tr>
           <td>
-            <para style="P10">[[ getCategory(c) or '' ]]</para>
+            <para style="P9">[[ getCategory(c) or '' ]]</para>
           </td>
         </tr>
       </blockTable>
-      <para style="P5">
+      <para style="P4">
         <font color="white"> </font>
       </para>
-      <para style="P5">
+      <para style="P4">
         <font color="white"> </font>
       </para>
-      <blockTable colWidths="54.0,54.0,226.0,39.0,39.0,39.0,39.0,39.0,39.0" style="Table3">
+      <blockTable colWidths="32.0,32.0,220.0,35.0,35.0,35.0,35.0,35.0,35.0,35.0,35.0" style="Table3">
         <tr>
           <td>
-            <para style="P8">Prix Achat</para>
+            <para style="P6">Prix Achat</para>
           </td>
           <td>
-            <para style="P8">Code</para>
+            <para style="P6">Code</para>
           </td>
           <td>
-            <para style="P8">Nom</para>
+            <para style="P6">Nom</para>
           </td>
           <td>
-            <para style="P8">[[ getBareme(data['form'].get('bareme1_id', False)) ]]</para>
+            <para style="P6">[[ getBareme(data['form'].get('bareme1_id', False)) ]]</para>
           </td>
           <td>
-            <para style="P8">[[ getBareme(data['form'].get('bareme2_id', False)) ]]</para>
+            <para style="P6">[[ getBareme(data['form'].get('bareme2_id', False)) ]]</para>
           </td>
           <td>
-            <para style="P8">[[ getBareme(data['form'].get('bareme3_id', False)) ]]</para>
+            <para style="P6">[[ getBareme(data['form'].get('bareme3_id', False)) ]]</para>
           </td>
           <td>
-            <para style="P8">[[ getBareme(data['form'].get('bareme4_id', False)) ]]</para>
+            <para style="P6">[[ getBareme(data['form'].get('bareme4_id', False)) ]]</para>
           </td>
           <td>
-            <para style="P8">[[ getBareme(data['form'].get('bareme5_id', False)) ]]</para>
+            <para style="P6">[[ getBareme(data['form'].get('bareme5_id', False)) ]]</para>
           </td>
           <td>
-            <para style="P8">[[ getBareme(data['form'].get('bareme6_id', False)) ]]</para>
+            <para style="P6">[[ getBareme(data['form'].get('bareme6_id', False)) ]]</para>
+          </td>
+          <td>
+            <para style="P6">[[ getBareme(data['form'].get('bareme7_id', False)) ]]</para>
+          </td>
+          <td>
+            <para style="P6">[[ getBareme(data['form'].get('bareme8_id', False)) ]]</para>
           </td>
         </tr>
         <tr>
           <td>
-            <para style="P6">[[ repeatIn(getProducts(c), 'p') ]]</para>
-            <para style="P6">[[ p.list_price ]]</para>
+            <para style="P11">[[ repeatIn(getProducts(c), 'p') ]]</para>
+            <para style="P11">[[ p.list_price ]]</para>
           </td>
           <td>
-            <para style="P6">[[ p.default_code ]]</para>
+            <para style="P11">[[ p.default_code ]]</para>
           </td>
           <td>
-            <para style="P6">[[ p.name ]]</para>
+            <para style="P7">[[ p.name ]]</para>
           </td>
           <td>
-            <para style="P7">[[data['form'].get('bareme1_id', False) and formatLang(getPrice(p.list_price , data['form'].get('bareme1_id', False))) or '' ]]</para>
+            <para style="P11">[[data['form'].get('bareme1_id', False) and formatLang(getPrice(p.list_price , data['form'].get('bareme1_id', False))) or '' ]]</para>
           </td>
           <td>
-            <para style="P7">[[ data['form'].get('bareme2_id', False) and formatLang(getPrice(p.list_price , data['form'].get('bareme2_id', False))) or '' ]]</para>
+            <para style="P11">[[ data['form'].get('bareme2_id', False) and formatLang(getPrice(p.list_price , data['form'].get('bareme2_id', False))) or '' ]]</para>
           </td>
           <td>
-            <para style="P7">[[ data['form'].get('bareme3_id', False) and formatLang(getPrice(p.list_price , data['form'].get('bareme3_id', False))) or '' ]]</para>
+            <para style="P11">[[ data['form'].get('bareme3_id', False) and formatLang(getPrice(p.list_price , data['form'].get('bareme3_id', False))) or '' ]]</para>
           </td>
           <td>
-            <para style="P7">[[ data['form'].get('bareme4_id', False) and formatLang(getPrice(p.list_price , data['form'].get('bareme4_id', False))) or '' ]]</para>
+            <para style="P11">[[ data['form'].get('bareme4_id', False) and formatLang(getPrice(p.list_price , data['form'].get('bareme4_id', False))) or '' ]]</para>
           </td>
           <td>
-            <para style="P7">[[ data['form'].get('bareme5_id', False) and formatLang(getPrice(p.list_price , data['form'].get('bareme5_id', False))) or '' ]]</para>
+            <para style="P11">[[ data['form'].get('bareme5_id', False) and formatLang(getPrice(p.list_price , data['form'].get('bareme5_id', False))) or '' ]]</para>
           </td>
           <td>
-            <para style="P7">[[ data['form'].get('bareme6_id', False) and formatLang(getPrice(p.list_price , data['form'].get('bareme6_id', False))) or '' ]]</para>
+            <para style="P11">[[ data['form'].get('bareme6_id', False) and formatLang(getPrice(p.list_price , data['form'].get('bareme6_id', False))) or '' ]]</para>
+          </td>
+          <td>
+            <para style="P11">[[ data['form'].get('bareme7_id', False) and formatLang(getPrice(p.list_price , data['form'].get('bareme7_id', False))) or '' ]]</para>
+          </td>
+          <td>
+            <para style="P11">[[ data['form'].get('bareme8_id', False) and formatLang(getPrice(p.list_price , data['form'].get('bareme8_id', False))) or '' ]]</para>
           </td>
         </tr>
       </blockTable>
-      <para style="P5">
+      <para style="P4">
         <font color="white"> </font>
       </para>
     </section>
-    <para style="P3">
-      <font color="white"> </font>
-    </para>
-    <para style="P4">
+    <para style="P2">
       <font color="white"> </font>
     </para>
     <para style="P3">
+      <font color="white"> </font>
+    </para>
+    <para style="P2">
       <font color="white"> </font>
     </para>
   </story>
