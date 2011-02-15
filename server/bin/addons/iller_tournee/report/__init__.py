@@ -21,5 +21,6 @@
 ##############################################################################
 
 import impression_commandes_par_tournee
+import impression_articles_par_tournee
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

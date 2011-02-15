@@ -67,7 +67,15 @@ class wizard_articles_par_tournee(osv.osv):
                 }
 
     def action_imprimer_rapport(self, cr, uid, ids, context={}):
-        return { 'type': 'ir.actions.act_window.close' }
+        datas = {'ids': context.get('active_ids', [])}
+        res = self.read(cr, uid, ids, ['tournee_id', 'date', 'type'], context=context)
+        res = res and res[0] or {}
+        datas['form'] = res
+        return {
+            'type': 'ir.actions.report.xml',
+            'report_name': 'articles.par.tournee',
+            'datas': datas,
+                }
 
 wizard_articles_par_tournee()
 

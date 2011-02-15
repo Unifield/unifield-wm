@@ -13,5 +13,16 @@
             menu="True"
             />
 
+        <report 
+            id="report_articles_par_tournee" 
+            string="Liste des articles par tournée, par date et pour une catégorie donnée" 
+            model="sale.order.line" 
+            name="articles.par.tournee" 
+            rml="iller_tournee/report/report_articles_par_tournee.rml" 
+            header="False" 
+            auto="False" 
+            menu="False"
+            />
+
     </data>
 </openerp>
