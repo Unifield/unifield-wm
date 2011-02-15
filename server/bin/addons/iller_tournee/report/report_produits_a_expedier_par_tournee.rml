@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<document filename="test.pdf">
+  <template pageSize="(595.0,842.0)" title="Test" author="Martin Simon" allowSplitting="20">
+    <pageTemplate id="first">
+      <frame id="first" x1="14.0" y1="14.0" width="567" height="814"/>
+    </pageTemplate>
+  </template>
+  <stylesheet>
+    <blockTableStyle id="Standard_Outline">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+    </blockTableStyle>
+    <blockTableStyle id="Tableau1">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,0" stop="0,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="0,0" stop="0,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="0,0" stop="0,0"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="0,-1" stop="0,-1"/>
+    </blockTableStyle>
+    <blockTableStyle id="Tableau2">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,0" stop="0,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="0,0" stop="0,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="0,0" stop="0,0"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="0,-1" stop="0,-1"/>
+    </blockTableStyle>
+    <blockTableStyle id="Tableau3">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+      <lineStyle kind="GRID" colorName="#000000" start="0,0" stop="-1,0"/>
+      <lineStyle kind="OUTLINE" colorName="black" start="0,0" stop="3,-1"/>
+      <lineStyle kind="INNERGRID" colorName="gray" start="0,1" stop="3,-1" thickness="0.5"/>
+      <blockBackground colorName="#e6e6e6" start="0,0" stop="-1,0"/>
+    </blockTableStyle>
+    <initialize>
+      <paraStyle name="all" alignment="justify"/>
+    </initialize>
+    <paraStyle name="P1" rightIndent="0.0" leftIndent="35.0" fontName="Times-Roman" fontSize="10.0" leading="13"/>
+    <paraStyle name="P2" fontName="Times-Roman" alignment="CENTER"/>
+    <paraStyle name="P3" fontName="Times-Roman" alignment="RIGHT"/>
+    <paraStyle name="P4" fontName="Times-Roman" fontSize="16.0" leading="20" alignment="CENTER" backColor="#e6e6e6"/>
+    <paraStyle name="P5" fontName="Times-Roman" alignment="CENTER" backColor="#e6e6e6"/>
+    <paraStyle name="Standard" fontName="Times-Roman"/>
+    <paraStyle name="Heading" fontName="Helvetica" fontSize="14.0" leading="17" spaceBefore="12.0" spaceAfter="6.0"/>
+    <paraStyle name="Text body" fontName="Times-Roman" spaceBefore="0.0" spaceAfter="6.0"/>
+    <paraStyle name="List" fontName="Times-Roman" spaceBefore="0.0" spaceAfter="6.0"/>
+    <paraStyle name="Caption" fontName="Times-Roman" fontSize="12.0" leading="15" spaceBefore="6.0" spaceAfter="6.0"/>
+    <paraStyle name="Index" fontName="Times-Roman"/>
+    <paraStyle name="Table Contents" fontName="Times-Roman"/>
+    <images/>
+  </stylesheet>
+  <story>
+    <para style="Standard">[[ setLang('fr_FR') ]]</para>
+    <para style="Standard">[[ repeatIn(getObjects(data['form']['tournee_id'], data['form']['date']), 'o') ]]</para>
+    <blockTable colWidths="567.0" style="Tableau1">
+      <tr>
+        <td>
+          <para style="P4">Tournée : [[ data['form']['tournee_id'][1] ]]</para>
+        </td>
+      </tr>
+    </blockTable>
+    <para style="Standard">
+      <font color="white"> </font>
+    </para>
+    <blockTable colWidths="567.0" style="Tableau2">
+      <tr>
+        <td>
+          <para style="P5">Liste de colisage : [[ o.name ]]</para>
+        </td>
+      </tr>
+    </blockTable>
+    <para style="Standard">
+      <font color="white"> </font>
+    </para>
+    <para style="Standard">Client : <font face="Times-Roman">[[ o.address_id.partner_id.name ]]</font></para>
+    <para style="Standard">Adresse : </para>
+    <para style="P1">[[ o.address_id.street ]]</para>
+    <para style="P1">[[ o.address_id.zip ]] [[ o.address_id.city ]]</para>
+    <para style="Standard">
+      <font color="white"> </font>
+    </para>
+    <blockTable colWidths="411.0,38.0,45.0,73.0" style="Tableau3">
+      <tr>
+        <td>
+          <para style="Table Contents">Nom</para>
+        </td>
+        <td>
+          <para style="Table Contents">Qté</para>
+        </td>
+        <td>
+          <para style="Table Contents">UdM</para>
+        </td>
+        <td>
+          <para style="Table Contents">Emplacement</para>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <para style="Table Contents">[[ repeatIn(o.move_lines, 'line') ]]</para>
+          <para style="Table Contents">[[ line.name ]]</para>
+        </td>
+        <td>
+          <para style="P3">[[ line.product_qty ]]</para>
+        </td>
+        <td>
+          <para style="P3">[[ line.product_uom.name ]]</para>
+        </td>
+        <td>
+          <para style="Table Contents">[[ line.location_id.name ]]</para>
+        </td>
+      </tr>
+    </blockTable>
+    <para style="Standard">
+      <font color="white"> </font>
+    </para>
+  </story>
+</document>
+

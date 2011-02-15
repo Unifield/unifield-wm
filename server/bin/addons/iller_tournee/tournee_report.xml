@@ -24,5 +24,16 @@
             menu="False"
             />
 
+        <report 
+            id="report_produits_a_expedier_par_tournee" 
+            string="Liste des produits à expédier par tournée et par date" 
+            model="stock.picking" 
+            name="produits_a_expedier_par_tournee" 
+            rml="iller_tournee/report/report_produits_a_expedier_par_tournee.rml" 
+            header="False" 
+            auto="False" 
+            menu="False"
+            />
+
     </data>
 </openerp>

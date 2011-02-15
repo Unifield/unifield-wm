@@ -116,6 +116,27 @@
             </field>
         </record>
 
+        <record model="ir.ui.view" id="wizard_produits_a_expedier_par_tournee_form">
+            <field name="name">wizard.produits.a.expedier.par.tournee.form</field>
+            <field name="model">produits.a.expedier.par.tournee</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Liste des produits à expédier par tournée">
+                    <separator string="Listes des produits à expédier par tournée" />
+                    <newline />
+                    <field name="tournee_id" />
+                    <newline />
+                    <field name="date" />
+                    <newline />
+                    <group col="6" colspan="4">
+                        <button string="Ok" name='action_confirmer_tournee' type="object" icon="gtk-apply" />
+                        <button string="Annuler" special='cancel' icon='gtk-cancel' />
+                        <button string="Imprimer un rapport" name="action_imprimer_rapport" type="object" icon="gtk-print" />
+                    </group>
+                </form>
+            </field>
+        </record>
+
         <!-- Actions -->
         <record id="action_tournee_form" model="ir.actions.act_window">
             <field name="name">Nouvelle tournée</field>
@@ -163,6 +184,14 @@
             view_type='form'
             target='new' />
 
+        <act_window id="action_produits_a_expedier_par_tournee"
+            name="Liste des produits à expedier par tournée"
+            res_model="produits.a.expedier.par.tournee"
+            src_model="tournee.iller"
+            view_mode='form'
+            view_type='form'
+            target='new' />
+
         <!-- Menus -->
         <menuitem id="menu_tournee_tree"
                   action="action_tournee_tree"
@@ -191,6 +220,10 @@
         <menuitem id="menu_articles_par_tournee"
                 action="action_articles_par_tournee"
                 parent="base.menu_base_partner" />
+
+        <menuitem id="menu_produits_a_expedier_par_tournee"
+                action="action_produits_a_expedier_par_tournee"
+                parent="stock.menu_stock_root" />
 
     </data>
 </openerp>
