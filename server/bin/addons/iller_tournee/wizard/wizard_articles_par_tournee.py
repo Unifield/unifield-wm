@@ -27,7 +27,7 @@ from osv import fields
 class wizard_articles_par_tournee(osv.osv):
     _name = 'articles.par.tournee'
     _columns = {
-        'tournee_id': fields.many2one('tournee.iller', string="Tournées", required=True),
+        'tournee_id': fields.many2one('tournee.iller', string="Tournée", required=True),
         'date': fields.date(string="Date de tournée", required=True),
         # Champ type suit les informations trouvés dans le module iller_product, product.py#161
         'type': fields.selection([('0', 'Tout'), ('1', 'Congelé'), ('2', 'Salaison'), ('3', 'Volaille')], string="Liste préparation", required=True)

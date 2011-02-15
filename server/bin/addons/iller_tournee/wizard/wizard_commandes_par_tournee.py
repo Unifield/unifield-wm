@@ -32,7 +32,7 @@ class commandes_par_tournee(osv.osv):
     """
     _name = 'commandes.par.tournee'
     _columns = {
-        'tournee_id': fields.many2one('tournee.iller', string="Tournées"),
+        'tournee_id': fields.many2one('tournee.iller', string="Tournée"),
         'date': fields.date(string="Date", required=True)
     }
 
