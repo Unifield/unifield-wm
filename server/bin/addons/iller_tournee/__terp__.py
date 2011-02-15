@@ -39,6 +39,7 @@
             'tournee_data.xml',
             'stock_view.xml',
             'sale_view.xml',
+            'commandes_par_tournee_report.xml',
     ],
     'installable': True,
     'active': False,
