@@ -27,7 +27,6 @@
                                        on_change="product_id_change(parent.pricelist_id,product_id,product_uom_qty,product_uom,product_uos_qty,product_uos,name,parent.partner_id, 'lang' in context and context['lang'], False, parent.date_order, product_packaging, parent.fiscal_position)"/>
                                 <field name="price_unit" readonly="0" on_change="price_unit_change(price_unit, product_id, product_uom_qty, parent.partner_id, parent.pricelist_id)" />
                                 <field name="commission" readonly="1"/>
-                                <field name="poste_id" domain="[('type', '=', product_id.code_affectation)]" readonly="0" widget="selection"/>
                                 <field name="notes" readonly="0" />
                                 <field name="price_subtotal" readonly="1"/>
                                 <field name="name" readonly="0" invisible="1"/>
