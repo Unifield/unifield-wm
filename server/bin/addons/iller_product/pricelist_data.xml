@@ -261,7 +261,7 @@
         </record>
 
         <record id="pricelist_tarif_coda3" model="product.pricelist">
-            <field name="name">Coda3</field>
+            <field name="name">Coda 3</field>
             <field name="type">sale</field>
             <field name="currency_id" ref="base.EUR" />
             <field name="promo_jaune" eval="0" />

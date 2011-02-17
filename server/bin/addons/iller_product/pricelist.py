@@ -42,7 +42,7 @@ class product_pricelist_bareme(osv.osv):
         '''
             Losrque la valeur du barème change, on modifie le taux de
             multiplication de tous les éléments des listes de prix qui
-            contiennent se barème.
+            contiennent ce barème.
         '''
         item_obj = self.pool.get('product.pricelist.item')
         if 'valeur' in vals:

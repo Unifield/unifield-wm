@@ -9,7 +9,7 @@ class iller_picking(osv.osv):
     _inherit = 'stock.picking'
 
     _columns = {
-        'tournee_id': fields.many2one('tournee.iller', string='Tournée'),
+        'tournee_id': fields.many2one('tournee.iller', string='Tournée', required=True),
     }
 
 iller_picking()
