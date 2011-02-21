@@ -27,7 +27,7 @@
     "author" : "TeMPO Consulting",
     "website": "http://www.tempo-consulting.fr",
     "category" : "Enterprise Specific Modules/Iller",
-    "depends" : ["base", "account", "stock", "iller_tournee"],
+    "depends" : ["base", "account", "stock", "iller_tournee", "account_payment"],
     "init_xml" : [],
     "demo_xml" : [],
     "description": """

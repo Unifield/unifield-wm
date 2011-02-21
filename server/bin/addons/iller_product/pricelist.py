@@ -397,9 +397,9 @@ class product_pricelist_promo(osv.osv):
                 vals['product2_ids'][j][2].update({'name': seq_max2})
                 seq_max2 -= 1
                 j += 1
-        
 
         return super(product_pricelist_promo, self).create(cr, uid, vals, context=context)
+
 
     _columns = {
             'name': fields.char(size=64, string='Nom', required=True),
@@ -893,7 +893,6 @@ class product_in_promo(osv.osv):
             for h in history_obj.browse(cr, uid, history_ids, context=context):
                 if not h.comment or len(h.comment) < 5 or h.comment[5:] != 'Promo':
                     res[pinp.id] = h.nouveau_prix_achat
-                    return res
 
         return res
 
@@ -915,7 +914,7 @@ class product_in_promo(osv.osv):
     _columns = {
         'name': fields.integer(string='Séquence', readonly=True),
         'product_id': fields.many2one('product.product', string='Produit', required='1'),
-        'promo_id': fields.many2one('product.pricelist.promo'),
+        'promo_id': fields.many2one('product.pricelist.promo', ondelete='cascade'),
         'prix_blanche': fields.related('product_id', 'prix_blanche', string='Prix blanche', readonly=True),
         'prix_jaune': fields.function(_get_prix_jaune, method=True, string='Prix jaune', readonly=True, store=False),
         'prix_achat': fields.function(_get_prix_achat, method=True, string='Prix achat', readonly=True, store=False),

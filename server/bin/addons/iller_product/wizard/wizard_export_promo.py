@@ -30,11 +30,16 @@ class export_tarif_promo(wizard.interface):
     def _get_file(self, cr, uid, data, args, context={}):
         promo_obj = pooler.get_pool(cr.dbname).get('product.pricelist.promo')
         product_obj = pooler.get_pool(cr.dbname).get('product.product')
+        b_conf_obj = pooler.get_pool(cr.dbname).get('pricelist.promo.configuration')
+        b_conf_ids = b_conf_obj.search(cr, uid, [])
         promo = promo_obj.browse(cr, uid, data['ids'])[0]
+
+        products = []
 
         export = "CODE;PRODUIT;PRIX" + "\r\n"
         for pp in promo.product_ids:
             p = pp.product_id
+            products.append(p.id)
             p_price = 0.00
             if data['form']['type'] == 'blanche':
                 p_price = p.prix_blanche
@@ -49,11 +54,14 @@ class export_tarif_promo(wizard.interface):
         for pp2 in promo.product2_ids:
             p2 = pp2.product_id
             p_price = 0.00
-            if data['form']['type'] == 'blanche':
-                p_price = p2.prix_blanche
+            if p2.id in products:
+                if data['form']['type'] == 'blanche':
+                    p_price = p2.prix_blanche
+                else:
+                    p_price = round(pp2.prix_jaune,2)
             else:
-                p_price = round(pp2.prix_jaune,2)
-            export += "%s;%s;%.2f" % (p2.name, p_price)
+                p_price = round(p2.list_price*b_conf_obj.browse(cr, uid, b_conf_ids[0]).bareme_page2.valeur,2)
+            export += "%s;%s;%.2f" % (p2.default_code,p2.name, p_price)
             export += "\r\n"
 
         data['file'] = base64.encodestring(export.encode("utf-8"))

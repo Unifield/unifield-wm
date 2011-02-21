@@ -91,11 +91,11 @@ class product_product(osv.osv):
                 else:
                     self.pool.get('product.price.history').create(cr, uid, data_history)
 
-            if 'coeff_depart' in vals and not 'prix_achat' in vals:
+            if ('coeff_depart' in vals or 'coeff_blanche' in vals) and not 'prix_achat' in vals:
                 data_history = {'name': datetime.now(),
                                 'nouveau_prix_achat': prd.prix_achat,
                                 'nouveau_prix_vente': prd.prix_achat*vals.get('coeff_depart', prd.coeff_depart),
-                                'nouveau_prix_blacnhe': prd.prix_achat*vals.get('coeff_blanche', prd.coeff_blanche),
+                                'nouveau_prix_blanche': prd.prix_achat*vals.get('coeff_blanche', prd.coeff_blanche),
                                 'product_id': prd.id,
                                 'comment': ''}
                 if not 'wizard' in context:
