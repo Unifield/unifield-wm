@@ -72,9 +72,9 @@ class product_product(osv.osv):
             if field_name == "derniere_date":
                 res[product.id] = derniere_date
             elif field_name == "derniere_quantite":
-                ligne_commande = sale_order_line_obj.read(cr, uid, commande_id, ['id', 'product_uos_qty'], context=context)
+                ligne_commande = sale_order_line_obj.read(cr, uid, commande_id, ['id', 'product_uom_qty'], context=context)
                 if ligne_commande:
-                    res[product.id] = ligne_commande.get('product_uos_qty')
+                    res[product.id] = ligne_commande.get('product_uom_qty')
         return res
 
     _name = "product.product"
