@@ -3,6 +3,7 @@
 
 from osv import osv
 from osv import fields
+import re
 
 
 class iller_sale_comment(osv.osv):
@@ -110,10 +111,10 @@ class iller_partner(osv.osv):
 
                 ## Recerche sur le numéro de téléphone exact
                 if not res or len(res) < 1:
-                    addr_ids = address_obj.search(cr, uid, [('phone', operator, name)], limit=limit, context=context)
-                    print addr_ids
+                    tel = re.sub('\D', '', name)
+                    addr_ids = address_obj.search(cr, uid, [('phone', operator, tel)], limit=limit, context=context)
                     for addr in address_obj.browse(cr, uid, addr_ids):
-                        if not addr.partner_id.bloque and addr.partner_id.id not in res:
+                        if addr.partner_id and addr.partner_id.id and not addr.partner_id.bloque and addr.partner_id.id not in res:
                             res.append(addr.partner_id.id)
 
                 ## Recherche sur le nom, la ville ou le nom de la rue
@@ -149,6 +150,34 @@ class iller_partner(osv.osv):
 
 
 iller_partner()
+
+
+class iller_partner_address(osv.osv):
+    _name = 'res.partner.address'
+    _inherit = 'res.partner.address'
+
+    def create(self, cr, uid, values, context={}):
+        '''
+            Modifie le numéro de téléphone pour qu'il soit
+            dans le bon format pour les recherches
+        '''
+        if 'phone' in values:
+            values['phone'] = re.sub('\D', '', values.get('phone', ''))
+
+        return super(iller_partner_address, self).create(cr, uid, values, context=context)
+
+
+    def write(self, cr, uid, ids, data, context={}):
+        '''
+            Modifie le numéro de téléphone pour qu'il soit
+            dans le bon format pour les recherches
+        '''
+        if 'phone' in data:
+            data['phone'] = re.sub('\D', '', data.get('phone', ''))
+
+        return super(iller_partner_address, self).create(cr, uid, data, context=context)
+
+iller_partner_address()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 
