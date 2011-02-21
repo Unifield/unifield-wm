@@ -92,7 +92,7 @@ class product_product(osv.osv):
         # Création de la liste par défaut
         complete_list = res
 
-        if context.get('partner_id') and context.get('from', False) == 'sale.order.line':
+        if context and context.get('partner_id') and context.get('from', False) == 'sale.order.line':
             # Division de la liste en deux listes : 
             # - ceux ayant une dernière date
             # - ceux n'en ayant pas (False)
