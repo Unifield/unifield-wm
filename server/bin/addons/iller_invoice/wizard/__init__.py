@@ -21,25 +21,6 @@
 #
 ##############################################################################
 
-{
-    "name" : "Iller Facturation",
-    "version" : "0.1",
-    "description" : """
-    Prise en compte des liste de prix pour 
-    la facturation chez Distribution Iller
-    """,
-    "author" : "Tempo Consulting",
-    "category" : "Enterprise Specific Modules/Iller",
-    "depends" : [ "account" ],
-    "init_xml" : [],
-    "update_xml" : [
-        'invoice_view.xml',
-    ],
-    "demo_xml" : [],
-    "test": [],
-    "installable": True,
-    "active": False
-}
-
+import wizard_picking_to_invoice
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

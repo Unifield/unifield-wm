@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="wizard_picking_to_invoice_form">
+            <field name='name'>wizard.picking.to.invoice.form</field>
+            <field name='model'>wizard.picking.to.invoice</field>
+            <field name='type'>form</field>
+            <field name='arch' type='xml'>
+                <form string="Création des factures - Assistant">
+                    <label string="Cet assistant va lancer la recherche de clients, cela prendra quelques minutes. Merci de patienter." colspan="4"/>
+                    <newline />
+                    <field name="journal_id" />
+                    <newline />
+                    <button string='Ok' name='action_make_invoices' type='object' icon='gtk-apply' colspan="2"/>
+                    <button string='Cancel' special='cancel' icon='gtk-cancel' colspan="2"/>
+                </form>
+            </field>
+        </record>
+
+        <!-- Actions -->
+        <act_window id="action_make_invoices"
+            name="Générer les factures"
+            res_model="wizard.picking.to.invoice"
+            view_mode='form'
+            view_type='form'
+            target='new' />
+
+        <!-- Menus -->
+        <menuitem id="menu_makes_invoices"
+        action="action_make_invoices"
+        parent="account.menu_finance" />
+    </data>
+</openerp>
