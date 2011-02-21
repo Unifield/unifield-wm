@@ -11,7 +11,7 @@
             <field name="inherit_id" ref="stock.view_picking_out_tree" />
             <field name="arch" type="xml">
                 <xpath expr="/tree/field[@name='address_id']" position="replace">
-                    <field name="tournee_id" select="1" />
+                    <field name="tournee_id" select="1" required="1" />
                 </xpath>
             </field>
         </record>
@@ -19,11 +19,11 @@
         <record id="tournee_stock_picking_tree_view" model="ir.ui.view">
             <field name="name">tournee.stock.picking.tree.view</field>
             <field name="model">stock.picking</field>
-            <field name="type">form</field>
+            <field name="type">tree</field>
             <field name="inherit_id" ref="stock.view_picking_out_form" />
             <field name="arch" type="xml">
                 <xpath expr="/form/group/field[@name='address_id']" position="after">
-                    <field name="tournee_id" />
+                    <field name="tournee_id" required="1" />
                 </xpath>
             </field>
         </record>
