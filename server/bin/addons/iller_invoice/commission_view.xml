@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<openerp>
+	<data>
+
+        <!-- Ajout du taux de commission sur les vues des barèmes -->
+        <record id="iller_commission_bareme_form_view" model="ir.ui.view">
+            <field name="name">iller.commission.bareme.form.view</field>
+            <field name="model">product.pricelist.bareme</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="iller_product.product_pricelist_bareme_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="/form/field[@name='valeur']" position="after">
+                    <field name="taux_com" required="1" />
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="iller_commission_bareme_tree_view" model="ir.ui.view">
+            <field name="name">iller.commission.bareme.tree.view</field>
+            <field name="model">product.pricelist.bareme</field>
+            <field name="type">tree</field>
+            <field name="inherit_id" ref="iller_product.product_pricelist_bareme_tree_view" />
+            <field name="arch" type="xml">
+                <xpath expr="/tree/field[@name='valeur']" position="after">
+                    <field name="taux_com" required="1" />
+                </xpath>
+            </field>
+        </record>
+
+
+        <!-- Ajout du montant des commissions sur les lignes de ventes et les bons de commande -->
+        <record id="iller_commission_view_invoice_line_tree" model="ir.ui.view">
+            <field name="name">iller.commission.view.invoice.line.tree</field>
+            <field name="model">account.invoice.line</field>
+            <field name="type">tree</field>
+            <field name="inherit_id" ref="account.view_invoice_line_tree" />
+            <field name="arch" type="xml">
+                <xpath expr="/tree/field[@name='price_subtotal']" position="after">
+                    <field name="commission" />
+                </xpath>
+            </field>
+        </record>
+
+        <record id="iller_commission_view_invoice_line_form" model="ir.ui.view">
+            <field name="name">iller.commission.view.invoice.line.form</field>
+            <field name="model">account.invoice.line</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="account.view_invoice_line_form" />
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="/form/notebook/page/field[@name='price_subtotal']" position="after">
+                        <field name="commission" readonly="1" />
+                    </xpath>
+                    <xpath expr="/form/notebook/page/field[@name='quantity']" position="replace">
+                        <field name="quantity" select="1" on_change="price_unit_change(price_unit, product_id, quantity, parent.partner_id, parent.pricelist_id)" />
+                    </xpath>
+                    <xpath expr="/form/notebook/page/field[@name='price_unit']" position="replace">
+                        <field name="price_unit" select="1" on_change="price_unit_change(price_unit, product_id, quantity, parent.partner_id, parent.pricelist_id)" />
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+        <record id="iller_commission_view_invoice_form" model="ir.ui.view">
+            <field name="name">iller.commission.view.invoice.form</field>
+            <field name="model">account.invoice</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="account.invoice_form" />
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="/form/notebook/page/group/field[@name='amount_total']" position="after">
+                        <field name="commission" />
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+	</data>
+</openerp>
+

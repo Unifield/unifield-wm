@@ -34,6 +34,8 @@
     "init_xml" : [],
     "update_xml" : [
         'invoice_view.xml',
+        'commission_view.xml',
+        'commission_data.xml',
     ],
     "demo_xml" : [],
     "test": [],
