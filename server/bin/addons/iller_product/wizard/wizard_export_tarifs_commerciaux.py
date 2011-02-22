@@ -82,9 +82,9 @@ class wizard_export_tarifs_commerciaux(osv.osv_memory):
         export += ";;; 10.00;  1.00; 2.00;  3.00;  4.00;  5.00;  6.00;  7.00  " + "\r\n"              
 
         # Pour chaque catégorie, on imprime les prix des produits de la catégorie
-        categ_ids = categ_obj.search (cr, uid, [])
+        categ_ids = categ_obj.search (cr, uid, [], 0, None, 'code, name')
         for categ_id in categ_ids:
-            product_ids = product_obj.search(cr, uid, [('categ_id', '=', categ_id)], 0, None, 'code, name')
+            product_ids = product_obj.search(cr, uid, [('categ_id', '=', categ_id)])
             for product_id in product_ids:
                 product = product_obj.browse(cr, uid, product_id)
                 # Recherche du prix selon la date saisie
