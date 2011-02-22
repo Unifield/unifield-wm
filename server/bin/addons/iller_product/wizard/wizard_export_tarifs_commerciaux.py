@@ -84,7 +84,7 @@ class wizard_export_tarifs_commerciaux(osv.osv_memory):
         # Pour chaque catégorie, on imprime les prix des produits de la catégorie
         categ_ids = categ_obj.search (cr, uid, [])
         for categ_id in categ_ids:
-            product_ids = product_obj.search(cr, uid, [('categ_id', '=', categ_id)])
+            product_ids = product_obj.search(cr, uid, [('categ_id', '=', categ_id)], 0, None, 'code, name')
             for product_id in product_ids:
                 product = product_obj.browse(cr, uid, product_id)
                 # Recherche du prix selon la date saisie
