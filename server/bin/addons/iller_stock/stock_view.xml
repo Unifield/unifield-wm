@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    
+        <record id="iller_view_picking_out_form" model="ir.ui.view">
+            <field name="name">iller.stock.picking.out.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_out_form" />
+            <field name="arch" type="xml">
+                <xpath expr="/form/notebook/page/group[2]/button[@string='Packing Done']" position="replace">
+                    <button name="%(iller_partial_picking)d" states="assigned" string="Packing Done" type="action"/>
+                </xpath>
+            </field>
+        </record>
+        
+    </data>
+</openerp>

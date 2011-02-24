@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <act_window
+            id="iller_partial_picking"
+            src_model="stock.picking"
+            res_model="stock.partial.picking"
+            multi="True"
+            name="Faire le colisage"
+            view_mode="form"
+            view_type="form"
+            target="new"
+            />
+
+    </data>
+</openerp>
