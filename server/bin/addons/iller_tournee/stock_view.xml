@@ -28,6 +28,34 @@
             </field>
         </record>
 
+        <!-- Ajout d'un poste de préparation sur les lignes de mouvements des 
+             picking -->
+        <record id="tournee_stock_move_tree_view" model="ir.ui.view">
+          <field name="name">tournee.stock.move.tree.view</field>
+          <field name="model">stock.move</field>
+          <field name="type">tree</field>
+          <field name="inherit_id" ref="stock.view_move_tree" />
+          <field name="arch" type="xml">
+            <xpath expr="/tree/field[@name='product_uom']" position="after">
+                <field name="poste_id" />
+            </xpath>
+          </field>
+        </record>
+
+        <record id="tournee_view_picking_out_form" model="ir.ui.view">
+            <field name="name">tournee.view.picking.out.form.view</field>
+            <field name="model">stock.picking</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="stock.view_picking_out_form" />
+            <field name="arch" type="xml">
+              <xpath expr="/form/notebook/page/field[@name='move_lines']/form/field[@name='date_planned']" position="after">
+                    <field name="poste_id" />
+                </xpath>
+            </field>
+        </record>
+
+
+
 
 	</data>
 </openerp>

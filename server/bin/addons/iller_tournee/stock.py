@@ -14,6 +14,15 @@ class iller_picking(osv.osv):
 
 iller_picking()
 
+class iller_stock_move(osv.osv):
+    _name = 'stock.move'
+    _inherit = 'stock.move'
+
+    _columns = {
+        'poste_id': fields.many2one('iller.poste', string="Poste Prépa.", required=False),
+    }
+
+iller_stock_move()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

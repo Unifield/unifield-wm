@@ -30,6 +30,7 @@ class iller_poste(osv.osv):
     _columns = {
         'name': fields.char(size=64, string='Nom', required=True),
         'type': fields.selection([('PREP', 'Préparation'), ('DECP', 'Découpe')], string='Type', required=True),
+        'stock_move_ids': fields.one2many('stock.move', 'poste_id', required=False),
     }
 
     _order = 'name'
