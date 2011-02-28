@@ -21,8 +21,7 @@
 #
 ##############################################################################
 
-import stock_partial_move
-import stock_partial_picking
+import wizard_iller_partial_picking
 
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -36,8 +36,6 @@
     'update_xml': [
             'stock_wizard.xml',
             'stock_view.xml',
-            'wizard/stock_partial_move_view.xml',
-            'wizard/stock_partial_picking_view.xml',
 ],
     'installable': True,
     'active': False,

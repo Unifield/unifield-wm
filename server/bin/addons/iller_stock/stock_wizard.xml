@@ -2,6 +2,7 @@
 <openerp>
     <data>
 
+<!-- act_window pour un essai de fields_view_get
         <act_window
             id="iller_partial_picking"
             src_model="stock.picking"
@@ -11,6 +12,15 @@
             view_mode="form"
             view_type="form"
             target="new"
+            />
+-->
+
+        <wizard
+            id="iller_partial_picking"
+            model="stock.picking"
+            multi="True"
+            name="iller_partial_picking"
+            string="Faire le colisage"
             />
 
     </data>
