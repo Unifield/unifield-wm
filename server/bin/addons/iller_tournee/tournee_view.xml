@@ -122,7 +122,7 @@
             <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Produits à expédier par tournée">
-                    <separator string="Listes des produits à expédier par tournée" />
+                    <separator string="Produits à expédier par tournée" />
                     <newline />
                     <field name="tournee_id" />
                     <newline />
@@ -190,6 +190,16 @@
             src_model="tournee.iller"
             view_mode='form'
             view_type='form'
+            context="{'sp_state': False}"
+            target='new' />
+
+        <act_window id="action_etat_produits_a_expedier_par_tournee"
+            name="État des produits à expedier par tournée/date"
+            res_model="produits.a.expedier.par.tournee"
+            src_model="tournee.iller"
+            view_mode='form'
+            view_type='form'
+            context="{'sp_state': True}"
             target='new' />
 
         <!-- Menus -->
@@ -223,6 +233,10 @@
 
         <menuitem id="menu_produits_a_expedier_par_tournee"
                 action="action_produits_a_expedier_par_tournee"
+                parent="stock.menu_stock_root" />
+
+        <menuitem id="menu_etat_produits_a_expedier_par_tournee"
+                action="action_etat_produits_a_expedier_par_tournee"
                 parent="stock.menu_stock_root" />
 
     </data>

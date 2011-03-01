@@ -31,7 +31,7 @@ class wizard_produits_a_expedier_par_tournee(osv.osv):
         'tournee_id': fields.many2one('tournee.iller', string="Tournée", required=True),
         'date': fields.date(string="Date de tournée", required=True),
     }
-    
+
     def action_confirmer_tournee(self, cr, uid, ids, context={}):
         # Préparation des objets
         wiz_obj = self.browse(cr,uid,ids)[0]
@@ -42,6 +42,8 @@ class wizard_produits_a_expedier_par_tournee(osv.osv):
         min_date = datetime(date.year, date.month, date.day, 0, 0, 0).__str__()
         # Récupération des ids de commandes correspondant à la recherche fournie
         res_ids = sp_obj.search(cr, uid, [('tournee_id', '=', wiz_obj.tournee_id.id), ('max_date', '>=', min_date), ('max_date', '<=', max_date), ('state', '=', 'confirmed')])
+        if context and context.get('sp_state'):
+            res_ids = sp_obj.search(cr, uid, [('tournee_id', '=', wiz_obj.tournee_id.id), ('max_date', '>=', min_date), ('max_date', '<=', max_date)])
         # Création du domaine contenant les éléments de recherche
         domain = [('picking_id', 'in', res_ids)]
         # On retourne le résultat dans une vue en 'tree'
@@ -53,6 +55,8 @@ class wizard_produits_a_expedier_par_tournee(osv.osv):
                 }
 
     def action_imprimer_rapport(self, cr, uid, ids, context={}):
+        if context and context.get('sp_state', False):
+            raise osv.except_osv('Erreur', "Cette fonction n'est pas disponible pour ce formulaire.")
         datas = {'ids': context.get('active_ids', [])}
         res = self.read(cr, uid, ids, ['tournee_id', 'date'], context=context)
         res = res and res[0] or {}
@@ -62,6 +66,14 @@ class wizard_produits_a_expedier_par_tournee(osv.osv):
             'report_name': 'produits.a.expedier.par.tournee',
             'datas': datas,
                 }
+
+    def fields_view_get(self, cr, uid, view_id=None, view_type='form', context={}, toolbar=False):
+        res = super(wizard_produits_a_expedier_par_tournee, self).fields_view_get(cr, uid, view_id, view_type, context, toolbar)
+        if context and context.get('sp_state', False):
+            arch = res.get('arch', False).replace('<button string="Imprimer un rapport" name="action_imprimer_rapport" type="object" icon="gtk-print"/>', '')
+            arch = arch.replace('<separator string="Produits à expédier par tournée"/>', '<separator string="État des produits à expédier par tournée"/>')
+            res['arch'] = arch
+        return res
 
 wizard_produits_a_expedier_par_tournee()
 
