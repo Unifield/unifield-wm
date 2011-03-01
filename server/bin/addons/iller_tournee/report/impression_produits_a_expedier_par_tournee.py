@@ -24,6 +24,7 @@
 from report import report_sxw
 from osv import osv
 import time
+from datetime import datetime
 
 class impression_produits_a_expedier_par_tournee(report_sxw.rml_parse):
     def __init__(self, cr, uid, name, context):
@@ -41,9 +42,11 @@ class impression_produits_a_expedier_par_tournee(report_sxw.rml_parse):
         Retourne des listes de colisages
         """
         sp_obj= self.pool.get('stock.picking')
+        la_date = datetime.strptime(date, '%Y-%m-%d')
+        min_date = datetime(la_date.year, la_date.month, la_date.day, 0, 0 ,0).__str__()
+        max_date = datetime(la_date.year, la_date.month, la_date.day, 23, 59 ,59).__str__()
         # Récupération des ids de commandes correspondant à la recherche fournie
-        res_ids = sp_obj.search(self.cr, self.uid, [('tournee_id', '=', tournee_id[0]), ('max_date', '=', date), ('state', '=', 'confirmed')])
-        print res_ids
+        res_ids = sp_obj.search(self.cr, self.uid, [('tournee_id', '=', tournee_id[0]), ('max_date', '>=', min_date), ('max_date', '<=', max_date), ('state', '=', 'confirmed')])
         # Création du résultat
         res = []
         for sp in res_ids:

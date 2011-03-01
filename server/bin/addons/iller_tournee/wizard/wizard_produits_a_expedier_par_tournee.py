@@ -23,6 +23,7 @@
 
 from osv import osv
 from osv import fields
+from datetime import datetime
 
 class wizard_produits_a_expedier_par_tournee(osv.osv):
     _name = 'produits.a.expedier.par.tournee'
@@ -36,8 +37,11 @@ class wizard_produits_a_expedier_par_tournee(osv.osv):
         wiz_obj = self.browse(cr,uid,ids)[0]
         sp_obj = self.pool.get('stock.picking')
         sm_obj = self.pool.get('stock.move')
+        date = datetime.strptime(wiz_obj.date, '%Y-%m-%d')
+        max_date = datetime(date.year, date.month, date.day, 23, 59, 59).__str__()
+        min_date = datetime(date.year, date.month, date.day, 0, 0, 0).__str__()
         # Récupération des ids de commandes correspondant à la recherche fournie
-        res_ids = sp_obj.search(cr, uid, [('tournee_id', '=', wiz_obj.tournee_id.id), ('max_date', '=', wiz_obj.date), ('state', '=', 'confirmed')])
+        res_ids = sp_obj.search(cr, uid, [('tournee_id', '=', wiz_obj.tournee_id.id), ('max_date', '>=', min_date), ('max_date', '<=', max_date), ('state', '=', 'confirmed')])
         # Création du domaine contenant les éléments de recherche
         domain = [('picking_id', 'in', res_ids)]
         # On retourne le résultat dans une vue en 'tree'
