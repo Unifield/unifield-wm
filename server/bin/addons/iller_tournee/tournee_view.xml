@@ -63,8 +63,8 @@
             <field name="model">commandes.par.tournee</field>
             <field name="type">form</field>
             <field name="arch" type="xml">
-                <form string="Liste des commandes par tournée et par date">
-                    <separator string="Commandes par tournée et par date" />
+                <form string="Commandes en cours par tournée/date">
+                    <separator string="Commandes en cours par tournée et par date" />
                     <newline />
                     <field name="tournee_id" />
                     <newline />
@@ -81,7 +81,7 @@
             <field name="model">articles.par.tournee</field>
             <field name="type">form</field>
             <field name="arch" type="xml">
-                <form string="Liste des articles par tournée">
+                <form string="Articles par tournée/liste prépa.">
                     <separator string="Listes des articles par tournée" />
                     <newline />
                     <field name="tournee_id" />
@@ -121,7 +121,7 @@
             <field name="model">produits.a.expedier.par.tournee</field>
             <field name="type">form</field>
             <field name="arch" type="xml">
-                <form string="Liste des produits à expédier par tournée">
+                <form string="Produits à expédier par tournée">
                     <separator string="Listes des produits à expédier par tournée" />
                     <newline />
                     <field name="tournee_id" />
@@ -169,7 +169,7 @@
         </record>
 
         <act_window id="action_commandes_par_tournee"
-            name="Liste des commandes par tournée et par date"
+            name="Commandes en cours par tournée/date"
             res_model="commandes.par.tournee"
             src_model="tournee.iller"
             view_mode='form'
@@ -177,7 +177,7 @@
             target='new' />
 
         <act_window id="action_articles_par_tournee"
-            name="Liste des articles par tournée"
+            name="Articles par tournée/liste prépa."
             res_model="articles.par.tournee"
             src_model="tournee.iller"
             view_mode='form'
@@ -185,7 +185,7 @@
             target='new' />
 
         <act_window id="action_produits_a_expedier_par_tournee"
-            name="Liste des produits à expedier par tournée"
+            name="Produits à expedier par tournée"
             res_model="produits.a.expedier.par.tournee"
             src_model="tournee.iller"
             view_mode='form'
