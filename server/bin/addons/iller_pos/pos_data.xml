@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<openerp>
+	<data>
+
+
+        <record id="paiement_comptant" model="account.payment.term">
+            <field name="name">Paiement comptant</field>
+            <field name="active" eval="True" />
+            <field name="note">Paiement comptant</field>
+        </record>
+
+        <record id="sale_shop_magasin" model="sale.shop">
+            <field name="name">Magasin</field>
+            <field name="payment_default_id" ref="paiement_comptant" />
+            <field name="warehouse_id" ref="stock.warehouse0" />
+            <field name="pricelist_id" ref="iller_product.pricelist_tarif_general" />
+        </record>
+
+
+	</data>
+</openerp>
+

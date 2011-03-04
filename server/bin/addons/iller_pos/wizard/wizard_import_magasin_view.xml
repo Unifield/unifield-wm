@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<openerp>
+	<data>
+
+
+        <record id="wizard_import_magasin_view" model="ir.ui.view">
+            <field name="name">wizard.import.magasin.view</field>
+            <field name="model">wizard.import.magasin</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string='Import magasin'>
+                    <separator colspan="4" string='Import des ventes du magasin' />
+                    <field name="file" required="1" colspan="4" />
+                    <button special="cancel" string="Annuler" />
+                    <button name="_run_import" string="Importer" type="object" icon="gtk-execute" />
+                </form>
+            </field>
+        </record>
+
+        <record id="wizard_import_magasin_done" model="ir.ui.view">
+            <field name="name">wizard.import.magasin.done</field>
+            <field name="model">wizard.import.magasin</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Fin de l'import">
+                    <separator colspan="4" string="Rapport de l'importation" />
+                    <field name="error" colspan="4" nolabel="1" readonly="1" />
+                    <button special="cancel" string="Fermer" />
+                </form>
+            </field>
+        </record>
+
+
+        <record id="action_wizard_import" model="ir.actions.act_window">
+            <field name="name">Importer les données du magasin</field>
+            <field name="res_model">wizard.import.magasin</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="wizard_import_magasin_view" />
+        </record>
+
+        <menuitem action="action_wizard_import"
+                  id="menu_import_magasin"
+                  parent="point_of_sale.menu_point_root" />
+
+
+	</data>
+</openerp>
+
