@@ -129,17 +129,18 @@ class wizard_import_magasin(osv.osv_memory):
             self.write(cr, uid, ids, {'error': error})
 
 
-            ## On cherche la vue à afficher pour afficher les erreurs
-            view_id = False
-            data_ids = data_obj.search(cr, uid, [('module', '=', 'iller_pos'), ('model', '=', 'ir.ui.view'), ('name', '=', 'wizard_import_magasin_done')], context=context)
-            res_id = data_obj.read(cr, uid, data_ids, ['res_id'])
-            if res_id:
-                view_id = res_id[0].get('res_id', False)
+        ## On cherche la vue à afficher pour afficher les erreurs
+        view_id = []
+        data_ids = data_obj.search(cr, uid, [('module', '=', 'iller_pos'), ('model', '=', 'ir.ui.view'), ('name', '=', 'wizard_import_magasin_done')], context=context)
+        res2_id = data_obj.read(cr, uid, data_ids, ['res_id'])
+        print res2_id
+        for r in res2_id:
+            view_id.append(r.get('res_id', False))
 
-            if not view_id:
-                raise osv.except_osv('Erreur', 'La vue à afficher n\'est pas disponible dans le système')
-                
-            context.update({'active_id': ids[0], 'active_ids': ids})
+        if not view_id:
+            raise osv.except_osv('Erreur', 'La vue à afficher n\'est pas disponible dans le système')
+             
+        context.update({'active_id': ids[0], 'active_ids': ids})
 
         return {'type': 'ir.actions.act_window',
                 'res_model': 'wizard.import.magasin',
