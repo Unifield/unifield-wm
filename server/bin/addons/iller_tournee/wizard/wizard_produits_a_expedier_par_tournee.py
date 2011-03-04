@@ -24,12 +24,17 @@
 from osv import osv
 from osv import fields
 from datetime import datetime
+import time
 
 class wizard_produits_a_expedier_par_tournee(osv.osv):
     _name = 'produits.a.expedier.par.tournee'
     _columns = {
         'tournee_id': fields.many2one('tournee.iller', string="Tournée", required=True),
         'date': fields.date(string="Date de tournée", required=True),
+    }
+
+    _defaults = {
+        'date': lambda *a:time.strftime('%Y-%m-%d'),
     }
 
     def action_confirmer_tournee(self, cr, uid, ids, context={}):

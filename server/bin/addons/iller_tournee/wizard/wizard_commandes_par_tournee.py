@@ -24,6 +24,7 @@
 from osv import osv
 from osv import fields
 from tools.translate import _
+import time
 
 class commandes_par_tournee(osv.osv):
     """
@@ -34,6 +35,10 @@ class commandes_par_tournee(osv.osv):
     _columns = {
         'tournee_id': fields.many2one('tournee.iller', string="Tournée"),
         'date': fields.date(string="Date", required=True)
+    }
+
+    _defaults = {
+        'date': lambda *a:time.strftime('%Y-%m-%d'),
     }
 
     def action_confirmer_liste_commandes(self, cr, uid, ids, context={}):

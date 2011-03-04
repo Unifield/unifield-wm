@@ -23,6 +23,7 @@
 
 from osv import osv
 from osv import fields
+import time
 
 class wizard_articles_par_tournee(osv.osv):
     _name = 'articles.par.tournee'
@@ -35,6 +36,7 @@ class wizard_articles_par_tournee(osv.osv):
     
     _defaults = {
         'type': lambda *a: '0', # permet de n'avoir aucun tri sur le type d'articles de la liste résultante
+        'date': lambda *a:time.strftime('%Y-%m-%d'),
     }
     
     def action_confirmer_liste_articles(self, cr, uid, ids, context={}):
