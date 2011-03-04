@@ -254,7 +254,7 @@
                     <field name="product_ids" colspan="4" nolabel="1" mode="tree" attrs="{'readonly': [('state', '=', 'done')]}">
                         <tree string="Produits" editable="top">
                             <field name="name" />
-                            <field name="product_id" on_change="onchange_product(product_id)" />
+                            <field name="product_id" on_change="onchange_product(product_id)" string="Produit                                                                                                     "/>
                             <field name="prix_achat" />
                             <field name="new_prix_achat" />
                             <field name="prix_blanche" />
@@ -265,7 +265,7 @@
                     <field name="product2_ids" colspan="4" nolabel="1" mode="tree" attrs="{'readonly': [('state', '=', 'done')]}">
                         <tree string="Produits de la 2ème page" editable="top">
                             <field name="name" />
-                            <field name="product_id" on_change="onchange_product(product_id)" />
+                            <field name="product_id" on_change="onchange_product(product_id)" string="Produit                                                                                                     "/>
                             <field name="prix_achat" />
                             <field name="new_prix_achat" />
                             <field name="prix_blanche" />
