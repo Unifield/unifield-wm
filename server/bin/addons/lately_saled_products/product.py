@@ -53,10 +53,12 @@ class product_product(osv.osv):
             # Préparation de la recherche de la date et de la commande attachée
             derniere_date = None
             commande_id = None
+            totale_qty = 0.00
             # Traitement pour récupérer la date et la commande attaché (pour la 
             #+ quantité)
             for ligne in lignes:
                 commande = sale_order_line_obj.browse(cr, uid, ligne, context=context)
+                totale_qty += commande.product_uom_qty
                 if not derniere_date:
                     derniere_date = commande.order_id.date_order
                     commande_id = commande.id
@@ -71,6 +73,8 @@ class product_product(osv.osv):
             #+ soit la quantité de la dernière commande
             if field_name == "derniere_date":
                 res[product.id] = derniere_date
+            elif field_name == "total_quantite":
+                res[product.id] = totale_qty
             elif field_name == "derniere_quantite":
                 ligne_commande = sale_order_line_obj.read(cr, uid, commande_id, ['id', 'product_uom_qty'], context=context)
                 if ligne_commande:
@@ -84,6 +88,7 @@ class product_product(osv.osv):
             store=False),
         'derniere_quantite': fields.function(_compute_last_date_or_quantity, type='float', method=True, string='Dernière quantité', 
             store=False),
+        'total_quantite': fields.function(_compute_last_date_or_quantity, type='float', method=True, string='Quantité totale', store=False),
     }
 
     def read(self, cr, uid, ids, fields=None, context={}, load='_classic_read'):
