@@ -38,7 +38,17 @@ class product_category(osv.osv):
         'code': fields.char(size=12, string='Code'),
     }
 
-    ##TODO: Réécrire name_get pour afficher [CODE] Nom de l acatégorie
+    _order = 'code, name, id'
+
+    def name_get(self, cr, uid, ids, context={}):
+        '''
+        Affichage du code en plus du nom lors de 
+        l'affichage d'une catégorie
+        '''
+        res = []
+        for i in self.browse(cr, uid, ids, context=context):
+            res.append((i.id, '[%s] %s' %(i.code or '', i.name)))
+        return res
 
 product_category()
 

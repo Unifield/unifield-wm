@@ -64,8 +64,8 @@ class export_tarif_promo(wizard.interface):
             export += "%s;%s;%.2f" % (p2.default_code,p2.name, p_price)
             export += "\r\n"
 
+        data['name'] = 'promo.csv'
         data['file'] = base64.encodestring(export.encode("utf-8"))
-        data['name'] = 'PROMO.CSV'
 
         return data
 
