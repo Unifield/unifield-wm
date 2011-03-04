@@ -137,6 +137,28 @@
             </field>
         </record>
 
+        <record model="ir.ui.view" id="wizard_produits_par_poste_form">
+            <field name="name">wizard.produits.par.poste.form</field>
+            <field name="model">produits.par.poste</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Produits par poste et par tournée">
+                    <separator string="Produits par poste et par tournée" />
+                    <newline />
+                    <field name="poste_id" />
+                    <newline />
+                    <field name="date" />
+                    <newline />
+                    <field name="tournee_id" />
+                    <newline />
+                    <group col="6" colspan="4">
+                        <button string="Ok" name='action_confirmer_poste' type="object" icon="gtk-apply" />
+                        <button string="Annuler" special='cancel' icon='gtk-cancel' />
+                    </group>
+                </form>
+            </field>
+        </record>
+
         <!-- Actions -->
         <record id="action_tournee_form" model="ir.actions.act_window">
             <field name="name">Nouvelle tournée</field>
@@ -202,6 +224,14 @@
             context="{'sp_state': True}"
             target='new' />
 
+        <act_window id="action_produits_par_poste"
+            name="Produits à expedier par poste/date/tournée"
+            res_model="produits.par.poste"
+            src_model="tournee.iller"
+            view_mode='form'
+            view_type='form'
+            target='new' />
+
         <!-- Menus -->
         <menuitem id="menu_tournee_tree"
                   action="action_tournee_tree"
@@ -237,6 +267,10 @@
 
         <menuitem id="menu_etat_produits_a_expedier_par_tournee"
                 action="action_etat_produits_a_expedier_par_tournee"
+                parent="stock.menu_stock_root" />
+
+        <menuitem id="menu_produits_par_poste"
+                action="action_produits_par_poste"
                 parent="stock.menu_stock_root" />
 
     </data>
