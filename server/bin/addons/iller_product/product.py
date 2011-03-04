@@ -38,6 +38,8 @@ class product_category(osv.osv):
         'code': fields.char(size=12, string='Code'),
     }
 
+    ##TODO: Réécrire name_get pour afficher [CODE] Nom de l acatégorie
+
 product_category()
 
 

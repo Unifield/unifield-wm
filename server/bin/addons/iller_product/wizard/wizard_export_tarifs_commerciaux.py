@@ -101,7 +101,7 @@ class wizard_export_tarifs_commerciaux(osv.osv_memory):
                     export += "%.2f;" %round(prix_achat,2)
                 else:
                     export += ";"
-                export += product.default_code + ";" + product.name + ";"
+                export += "%s" %product.default_code + ";" + product.name + ";"
                 export += "%.2f;" %round(prix_vente * c01,2)
                 export += "%.2f;" %round(prix_vente * c19,2)
                 export += "%.2f;" %round(prix_vente * c17,2)

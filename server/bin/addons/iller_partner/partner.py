@@ -137,6 +137,8 @@ mode de règlement, vous devez donc enregistrer un RIB pour ce client')
     _defaults = {
         'type_ristourne': lambda *a: 'a',
         'bloque': lambda *a: False,
+        'reglement': lambda *a: 'virement',
+        'facturation_bl': lambda *a: 'm',
     }
 
 
