@@ -105,7 +105,6 @@ class export_bizerba(osv.osv_memory):
         # (2) Poste (par exemple O4) (plus nécessaire car déjà donné avec name)
         
         # On retourne le résultat sous forme d'une seule chaîne
-        print res
         return ''.join(res)
 
     def get_file(self, cr, uid, ids, context={}):
@@ -118,6 +117,7 @@ class export_bizerba(osv.osv_memory):
         attachement_obj = self.pool.get('ir.attachment')
         sale_order_obj = self.pool.get('sale.order')
         sol_obj = self.pool.get('sale.order.line')
+        total = 0
         # Parcours de chaque commande
         for sale_order in sale_order_obj.browse(cr, uid, ids):
             chaine = ''
@@ -126,29 +126,28 @@ class export_bizerba(osv.osv_memory):
             num_ligne = 1
             for sol_id in lines:
                 # Vérification si découpe, si oui, alors on génère une chaîne de caractère
-                print sol_obj.browse(cr, uid, sol_id, context=context).product_id.code_affectation
                 if sol_obj.browse(cr, uid, sol_id, context=context).product_id.code_affectation == 'DECP':
                     # Génération de la chaine de la ligne de commande
                     chaine_ligne = self.gen_bizerba_string(cr, uid, sol_id, num_ligne, context=context)
-                    print chaine_ligne
                     # Ajout au fichier de commande
                     chaine += chaine_ligne
                     chaine += "\n"
                     num_ligne += 1
+                    total += 1
             
-            print chaine
-            # Écriture de la chaine créée et association avec la commande
-            data = base64.encodestring(chaine.encode("utf-8"))
-            vals = {
-                'name': 'Fichier bizerba',
-                'datas': data,
-                'datas_fname': nom_fichier,
-                'description': 'Fichier prévu pour le PC Bizerba',
-                'res_model': 'sale.order',
-                'res_id': sale_order.id,
-            }
-            # Création de l'élément "fichier joint" dans OpenERP
-            attachement_obj.create(cr, uid, vals)
+            # Écriture de la chaine créée et association avec la commande si jamais on a plus d'une ligne
+            if total > 0:
+                data = base64.encodestring(chaine.encode("utf-8"))
+                vals = {
+                    'name': 'Fichier bizerba',
+                    'datas': data,
+                    'datas_fname': nom_fichier,
+                    'description': 'Fichier prévu pour le PC Bizerba',
+                    'res_model': 'sale.order',
+                    'res_id': sale_order.id,
+                }
+                # Création de l'élément "fichier joint" dans OpenERP
+                attachement_obj.create(cr, uid, vals)
         return True
 
 export_bizerba()
