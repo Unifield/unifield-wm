@@ -37,6 +37,8 @@
     'update_xml': [
         'sale_view.xml',
         'control_price_view.xml',
+        'control_price_data.xml',
+        'product_view.xml',
     ],
     'installable': True,
     'active': False,

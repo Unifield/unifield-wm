@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<openerp>
+    <data noupdate="1">
+
+    <!-- Rôle pour autorisation de cocher "Dépassement autorisé" sur le produit -->
+        <record model="res.groups" id="group_depassement">
+            <field name="name">Dépassement Prix</field>
+        </record>
+
+    </data>
+</openerp>

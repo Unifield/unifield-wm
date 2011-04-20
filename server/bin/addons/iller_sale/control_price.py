@@ -119,7 +119,7 @@ class iller_control_unit_price(osv.osv):
         res2 = self.control_unit_price(cr, uid, lines, context=context)
 
         ## Si le prix est inférieur et que l'on a pas les droits de surpasser, on affiche une erreur
-        if not res2[0]:
+        if not res2[0] and not product.depassement_autorise:
             return {'value': {},
                     'warning': {'title': 'Erreur !',
                                 'message': 'Vous ne pourrez pas enregistrer la commande car le prix indiqué est inférieur à ce qui est autorisé.'}}
