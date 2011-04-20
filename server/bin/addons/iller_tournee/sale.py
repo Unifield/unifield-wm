@@ -44,6 +44,14 @@ class iller_sale(osv.osv):
 
         return res
 
+    def action_wait(self, cr, uid, ids, *args):
+        """
+        Fonction utilisée lors de la validation d'une commande.
+        Permet de générer un fichier Bizerba par commande donnée et de l'attacher auxdites commandes
+        """
+        super(iller_sale, self).action_wait(cr, uid, ids, *args)
+        export_bizerba_obj = self.pool.get('export.bizerba')
+        export_bizerba_obj.get_file(cr, uid, ids)
 
     _columns = {
         'tournee_id': fields.many2one('tournee.iller', string='Tournée'),
