@@ -325,7 +325,6 @@ def _do_split(self, cr, uid, data, context):
 
     if new_picking:
         move_obj.write(cr, uid, [c.id for c in complete], {'picking_id': new_picking})
-        print "###################################"
         for move in too_many:
             move_obj.write(cr, uid, [move.id],
                     {

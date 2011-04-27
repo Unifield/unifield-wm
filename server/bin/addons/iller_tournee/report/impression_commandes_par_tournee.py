@@ -41,7 +41,6 @@ class impression_commandes_par_tournee(report_sxw.rml_parse):
         return so_obj.browse(self.cr, self.uid, sale_order_id)
 
     def get_products(self, sale_order):
-        print sale_order
         sol_obj = self.pool.get('sale.order.line')
         res = []
         
