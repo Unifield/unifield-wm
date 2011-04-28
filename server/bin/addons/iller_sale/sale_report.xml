@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+    <!-- Marges par article ou famille d'articles -->
+        <report 
+            id="report_marges_articles" 
+            string="Marge par article ou famille d'article" 
+            model="product.product" 
+            name="marges.articles" 
+            rml="iller_sale/report/report_marges_articles.rml" 
+            header="False" 
+            auto="False" 
+            menu="False"
+            />
+
+    </data>
+</openerp>
