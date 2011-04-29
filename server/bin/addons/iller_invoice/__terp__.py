@@ -30,7 +30,7 @@
     """,
     "author" : "Tempo Consulting",
     "category" : "Enterprise Specific Modules/Iller",
-    "depends" : [ "account" ],
+    "depends" : [ "account", 'account_group_lines' ],
     "init_xml" : [],
     "update_xml" : [
         'invoice_view.xml',
