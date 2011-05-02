@@ -26,7 +26,7 @@ from osv import osv
 from osv import fields
 import datetime
 
-class wizard_marges_articles(osv.osv):
+class wizard_marges_articles(osv.osv_memory):
     _name = "wizard.marges.articles"
     _columns = {
         'date_debut': fields.date(string="Date début", required=True),
