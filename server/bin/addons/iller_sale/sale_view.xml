@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <openerp>
-	<data>
+    <data>
 
         <record id="iller_sale_order_form_view" model="ir.ui.view">
             <field name="name">iller.sale.order.form.view</field>
@@ -33,7 +33,7 @@
                                 <field name="product_uos_qty" readonly="0" invisible="1"/>
                                 <field name="tax_id" readonly="0" invisible="1"/>
                             </tree>
-            	   		    <form string="Sale Order Lines">
+                            <form string="Sale Order Lines">
                                 <notebook>
                                     <page string="Order Line">
                                         <separator colspan="4" string="Automatic Declaration"/>
@@ -94,44 +94,5 @@
             </field>
         </record>
 
-    <!-- Wizard : Marge par articles ou catégories d'articles -->
-        <record model="ir.ui.view" id="wizard_marges_articles">
-            <field name="name">wizard.marges.articles.form</field>
-            <field name="model">wizard.marges.articles</field>
-            <field name="type">form</field>
-            <field name="arch" type="xml">
-                <form string="Marges par article ou famille d'articles">
-                    <separator string="Marges par article ou famille d'articles" />
-                    <newline />
-                    <field name="date_debut"/>
-                    <newline />
-                    <field name="date_fin"/>
-                    <newline />
-                    <field name="article"/>
-                    <newline />
-                    <field name="famille_article"/>
-                    <newline />
-                    <group col="6" colspan="4">
-                        <button string="Imprimer un rapport" name='action_imprimer_rapport' type="object" icon="gtk-print" />
-                        <button string="Annuler" special='cancel' icon='gtk-cancel' />
-                    </group>
-                </form>
-            </field>
-        </record>
-
-    <!-- Actions -->
-        <act_window id="action_marges_articles"
-            name="Marges par article ou famille d'articles"
-            res_model="wizard.marges.articles"
-            view_mode='form'
-            view_type='form'
-            target='new' />
-
-    <!-- Menu pour accès au wizard "marges par articles ou catégories d'articles" -->
-        <menuitem id="menu_marges_articles"
-                action="action_marges_articles"
-                parent="base.menu_base_partner" />
-
-	</data>
+    </data>
 </openerp>
-
