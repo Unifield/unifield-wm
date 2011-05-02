@@ -22,7 +22,34 @@
 #
 ##############################################################################
 
-import wizard_marges_mensuelles_articles
-import wizard_ventes_representants
+from osv import osv
+from osv import fields
+import datetime
+
+class wizard_ventes_representants(osv.osv_memory):
+    _name = "wizard.ventes.representants"
+    _columns = {
+        'date_debut': fields.date(string="Date début", required=True),
+        'date_fin': fields.date(string="Date fin", required=True),
+        'representant': fields.many2one("res.users", string="Représentant", required=False),
+    }
+
+    _defaults = {
+        'date_debut': lambda *a: (datetime.datetime.now() + datetime.timedelta(days=-1)).strftime('%Y-%m-%d'),
+        'date_fin': lambda *a: datetime.datetime.now().strftime('%Y-%m-%d'),
+    }
+
+    def action_imprimer_rapport(self, cr, uid, ids, context={}):
+        datas = {'ids': context.get('active_ids', [])}
+        res = self.read(cr, uid, ids, ['date_debut', 'date_fin', 'representant'], context=context)
+        res = res and res[0] or {}
+        datas['form'] = res
+        return {
+            'type': 'ir.actions.report.xml',
+            'report_name': 'ventes.representants',
+            'datas': datas,
+                }
+
+wizard_ventes_representants()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

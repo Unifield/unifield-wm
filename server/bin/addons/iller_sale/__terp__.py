@@ -41,6 +41,7 @@
         'product_view.xml',
         'sale_report.xml',
         'sale_wizard.xml',
+        'sale_report.xml',
     ],
     'installable': True,
     'active': False,

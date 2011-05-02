@@ -14,5 +14,17 @@
             menu="False"
             />
 
+    <!-- Ventes par représentants -->
+        <report 
+            id="report_ventes_representants" 
+            string="Ventes par représentant" 
+            model="sale.order" 
+            name="ventes.representants" 
+            rml="iller_sale/report/report_ventes_representants.rml" 
+            header="False" 
+            auto="False" 
+            menu="False"
+            />
+
     </data>
 </openerp>
