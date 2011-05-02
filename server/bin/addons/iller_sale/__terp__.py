@@ -39,6 +39,7 @@
         'control_price_view.xml',
         'control_price_data.xml',
         'product_view.xml',
+        'sale_report.xml',
     ],
     'installable': True,
     'active': False,
