@@ -50,8 +50,8 @@ class impression_marges_articles(report_sxw.rml_parse):
             return False
         else:
             if categ:
-                return categ[1].split(' ')[1]
-            art_id = art[0]
+                return self.pool.get('product.category').browse(self.cr, self.uid, categ).name
+            art_id = art
             return self.pool.get('product.product').browse(self.cr, self.uid, art_id).categ_id.name
 
     def get_elements(self, art=None, categ=None):
@@ -64,10 +64,9 @@ class impression_marges_articles(report_sxw.rml_parse):
             return False
         else:
             if categ:
-                categ_id = categ[1].split(' ')[1]
-                product_ids = prod_obj.search(self.cr, self.uid, [('categ_id', '=', categ_id)])
+                product_ids = prod_obj.search(self.cr, self.uid, [('categ_id', '=', categ)])
                 return prod_obj.browse(self.cr, self.uid, product_ids)
-            return prod_obj.browse(self.cr, self.uid, [art[0]])
+            return prod_obj.browse(self.cr, self.uid, [art])
 
     def get_factures_article(self, article_id=None, date_deb=None, date_fin=None):
         """
