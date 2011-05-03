@@ -90,6 +90,30 @@ class iller_sale_line(osv.osv):
 
 iller_sale_line()
 
+class iller_sale(osv.osv):
+    _name = 'sale.order'
+    _inherit = 'sale.order'
+
+    _columns = {
+        'user_id': fields.many2one('res.users', 'Salesman', states={'draft': [('readonly', False)]}, select=True, required=True),
+    }
+
+    _defaults = {
+        'user_id': lambda obj, cr, uid, context: uid,
+    }
+
+    def onchange_partner_id(self, cr, uid, ids, partner_id=None, context={}):
+        """
+        Complète le champ "Vendeur" par le vendeur dédié à chaque client. Sinon remplit avec l'utilisateur actuel (cas par défaut).
+        """
+        res = super(iller_sale, self).onchange_partner_id(cr, uid, ids, partner_id, context=context)
+        if partner_id:
+            partner = self.pool.get('res.partner').browse(cr, uid, partner_id, context=context)
+            if partner.user_id:
+                res.update({'user_id': partner.user_id})
+        return res
+
+iller_sale()
 
 class iller_partner(osv.osv):
     _name = 'res.partner'
