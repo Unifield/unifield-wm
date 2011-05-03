@@ -110,7 +110,7 @@ class iller_sale(osv.osv):
         if partner_id:
             partner = self.pool.get('res.partner').browse(cr, uid, partner_id, context=context)
             if partner.user_id:
-                res.update({'user_id': partner.user_id})
+                res.update({'user_id': partner.user_id.id})
         return res
 
 iller_sale()
