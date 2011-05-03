@@ -45,11 +45,12 @@ class impression_ventes_representants(report_sxw.rml_parse):
         Donne le représentant fourni par le formulaire, ou la liste complète des représentants si ce champ est vide
         """
         user_obj= self.pool.get('res.users')
-        if representant:
-            return user_obj.browse(self.cr, self.uid, representant[0])
         users = []
-        for id in user_obj.search(self.cr, self.uid, []):
-            users.append(user_obj.browse(self.cr, self.uid, id))
+        if representant:
+            users.append(user_obj.browse(self.cr, self.uid, representant))
+        else:
+            for id in user_obj.search(self.cr, self.uid, []):
+                users.append(user_obj.browse(self.cr, self.uid, id))
         return users
 
     def get_commandes(self, user_id=None, date_deb=None, date_fin=None):
