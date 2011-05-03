@@ -82,7 +82,7 @@ class impression_ventes_representants(report_sxw.rml_parse):
             return False
         total = 0
         for cmd_id in self.get_commandes(user_id, date_deb, date_fin):
-            total += self.pool.get('sale.order').browse(self.cr, self.uid, cmd_id).amount_total
+            total += self.pool.get('sale.order').browse(self.cr, self.uid, cmd_id).amount_untaxed
         return total
 
 report_sxw.report_sxw('report.ventes.representants','sale.order','addons/iller_sale/report/report_ventes_representants.rml', parser=impression_ventes_representants)
