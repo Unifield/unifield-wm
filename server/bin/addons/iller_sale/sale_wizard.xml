@@ -50,6 +50,32 @@
             </field>
         </record>
 
+    <!-- Wizard Export du journal des ventes -->
+        <record model="ir.ui.view" id="wizard_export_journal_ventes">
+            <field name="name">wizard.export.journal.ventes.form</field>
+            <field name="model">wizard.export.journal.ventes</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Export du journal des ventes">
+                    <separator string="Choisissez une plage de dates pour l'export" />
+                    <newline />
+                    <field name="date_debut" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                    <newline />
+                    <field name="date_fin" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                    <newline />
+                    <field name="fichier" attrs="{'readonly': [('state', '=', 'open')]}"/>
+                    <newline />
+                    <field name="state" invisible="1"/>
+                    <newline />
+                    <group col="6" colspan="4">
+                        <button string="Valider" name='action_valider' type="object" icon="gtk-apply" states="open"/>
+                        <button string="Retour" name='action_retour' type="object" icon="gtk-undo" states="done" />
+                        <button string="Annuler" special='cancel' icon='gtk-cancel' />
+                    </group>
+                </form>
+            </field>
+        </record>
+
     <!-- Actions -->
         <act_window id="action_marges_articles"
             name="Marges par article ou famille d'articles"
@@ -65,13 +91,26 @@
             view_type='form'
             target='new' />
 
+        <act_window id="action_export_journal_ventes"
+            name="Export du journal des ventes"
+            res_model="wizard.export.journal.ventes"
+            view_mode="form"
+            view_type="form"
+            target="new" />
+
     <!-- Menu pour accès au wizard "marges par articles ou catégories d'articles" -->
         <menuitem id="menu_marges_articles"
                 action="action_marges_articles"
                 parent="base.menu_base_partner" />
 
+    <!-- Menu pour accès au wizard "Ventes par représentant" -->
         <menuitem id="menu_ventes_representants"
                 action="action_ventes_representants"
+                parent="sale.menu_sale_root" />
+
+    <!-- Menu pour accès vers "Export du journal des ventes" -->
+        <menuitem id="menu_export_journal_ventes"
+                action="action_export_journal_ventes"
                 parent="sale.menu_sale_root" />
 
     </data>

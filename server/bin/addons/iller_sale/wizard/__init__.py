@@ -24,5 +24,6 @@
 
 import wizard_marges_mensuelles_articles
 import wizard_ventes_representants
+import wizard_export_journal_ventes
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
