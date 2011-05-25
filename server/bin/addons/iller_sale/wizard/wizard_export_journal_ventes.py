@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 #-*- encoding:utf-8 -*-
 
+import os
 import base64
 from osv import osv, fields
 import datetime
@@ -23,9 +24,9 @@ class export_journal_ventes(osv.osv_memory):
         'state': lambda *a: 'open',
     }
 
-    def gen_journal_vente_string(self, cr, uid, invoices=[], context={}):
+    def gen_journal_vente_string(self, cr, uid, move_ids=[], context={}):
         """
-        Génère une chaîne de caractère compatible avec GESCOM Compta à partir des factures données.
+        Génère et retourne une chaîne de caractère compatible avec GESCOM Compta à partir des mouvements donnés.
         NB : Ce code a été généré suivant le fichier original de GESCOM (en cobol) utilisé par Distribution Iller.
         
         """
@@ -34,34 +35,32 @@ class export_journal_ventes(osv.osv_memory):
         inv_obj = self.pool.get('account.invoice')
         move_obj = self.pool.get('account.move')
         ml_obj = self.pool.get('account.move.line')
-        if not len(invoices):
+        if not len(move_ids):
             return False
 
         # pour éviter les erreurs
-        if isinstance(invoices, (int, long)):
-            invoices = [invoices]
+        if isinstance(move_ids, (int, long)):
+            move_ids = [move_ids]
 
-        # Traitement des factures
-        for invoice in inv_obj.browse(cr, uid, invoices, context=context):
-            # Préparation de certaines données
-            # code facture
-            code = invoice.number
-            # date facture (pour afficher : date.strftime('%Y%m%d')
-            date = datetime.datetime.strptime(invoice.date_invoice, '%Y-%m-%d')
-            # id du compte comptable de la facture
-            account_id = invoice.account_id.id
-            # Type de la facture et code
-            type_fac = invoice.type
-            code_type_fac = 1
-            if type_fac == 'out_refund':
-                code_type_fac = 2
-            # Recherche des lignes d'écritures
-            ml_ids = ml_obj.search(cr, uid, [('move_id', '=', invoice.move_id.id)], context=context)
-            # Pour le numéro de la ligne
+        res = ''
+        
+        for am in move_obj.browse(cr, uid, move_ids, context=context):
             i = 1
-            # On traite chaque ligne
-            ligne = []
-            for ml in ml_obj.browse(cr, uid, ml_ids, context=context):
+            # On traite chaque ligne des mouvements
+            for ml in am.line_id:
+                # Préparation de certaines données
+                ligne = []
+                # code facture
+                code = ml.invoice.number
+                # date facture (pour afficher : date.strftime('%Y%m%d')
+                date = datetime.datetime.strptime(ml.invoice.date_invoice, '%Y-%m-%d')
+                # id du compte comptable de la facture
+                account_id = ml.invoice.account_id.id
+                # Type de la facture et code
+                type_fac = ml.invoice.type
+                code_type_fac = 1
+                if type_fac == 'out_refund':
+                    code_type_fac = 2
                 # Origine
                 ligne.append('91')
                 #Société
@@ -210,7 +209,7 @@ class export_journal_ventes(osv.osv_memory):
                 
                 # On ajoute la chaîne de caractère à ce qu'on va renvoyer
                 ligne.append("\n")
-                res = ''.join(ligne)
+                res += ''.join(ligne)
                 # On incrémente le numéro de ligne
                 i+=1
 
@@ -229,14 +228,40 @@ class export_journal_ventes(osv.osv_memory):
         if date_fin < date_deb:
             raise osv.except_osv(_('Attention'), _('La date de fin doit être supérieure à celle de début.'))
         if date_deb and date_fin:
-            invoices = self.pool.get('account.invoice').search(cr, uid, [('state', '=', 'open'), 
-                ('type', 'in', ['out_invoice', 'out_refund']), ('date_invoice', '>=', date_deb), 
-                ('date_invoice', '<=', date_fin)])
-            # TODO : attacher une pièce contenant le fichier
-            self.write(cr, uid, [wizard.id], {'state': 'done'}, context=context)
-            chaine = self.gen_journal_vente_string(cr, uid, invoices, context=context)
+            # Vérification sur l'existence d'un journal de vente
+            journal_ids = self.pool.get('account.journal').search(cr, uid, [('type', '=', 'sale')], context=context)
+            if not journal_ids:
+                raise osv.except_osv(_('Erreur'), _('Aucun journal de ventes trouvé !'))
+            # Préparation du chemin du fichier
+            nom = 'VT' + date_deb.replace('-', '') + '-' + date_fin.replace('-', '')
+            extension = '.txt'
+            nom_complet = nom + extension
+            chemin = os.path.join(os.path.expanduser('~'),'tmp', nom_complet)
+            # Vérification de l'existence du fichier
+            if os.path.exists(chemin):
+                raise osv.except_osv(_('Attention'), _('Le traitement a déjà été effectué sur la période donnée !'))
+            # TODO : recherche sur le champ "exporté" des account_move_line
+            am_ids = self.pool.get('account.move').search(cr, uid, [('state', '=', 'posted'), ('journal_id', 'in', journal_ids), 
+                ('date', '>=', date_deb), ('date', '<=', date_fin)])
+            aml_ids = self.pool.get('account.move.line').search(cr, uid, [('move_id.state', '=', 'posted'), ('journal_id', 'in', journal_ids), 
+                ('date', '>=', date_deb), ('date', '<=', date_fin)])
+            chaine = self.gen_journal_vente_string(cr, uid, am_ids, context=context)
             if chaine:
                 export = base64.encodestring(chaine.encode("utf-8"))
+                # On enregistre dans un fichier la période
+                file(chemin, 'wb+').write(chaine)
+                # On teste la présence du fichier
+                if os.path.exists(chemin):
+                    print "#######################"
+                    print "TODO: marquer les lignes comme exportées"
+                    print "#######################"
+                    # On marque les lignes comme "exportées"
+#                    aml_obj = self.pool.get('account.move.line')
+#                    for am in self.browse(cr, uid, am_ids, context=context):
+#                        for aml in am.line_id:
+#                            aml_obj.write(cr, uid, aml.id, {'exporte_vers_gescom': True}, context=context)
+                    # TODO marquer les lignes (modifier account_move_line)
+                # TODO: Faire une res_request
                 return self.write(cr, uid, ids, {'state':'done', 'fichier': export}, context=context)
             raise osv.except_osv(_('Information'), _('Aucune facture trouvée.'))
         return False
