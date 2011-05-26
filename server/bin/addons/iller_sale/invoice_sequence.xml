@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<openerp>
+    <data noupdate="1">
+
+    <!-- Redéfinition des séquences pour les factures et les avoirs -->
+        <record id="seq_out_invoice" model="ir.sequence">
+            <field name="name">Account Invoice Out</field>
+            <field name="code">account.invoice.out_invoice</field>
+            <field eval="7" name="padding"/>
+            <field name="number_increment">1</field>
+        </record>
+        <record id="seq_in_invoice" model="ir.sequence">
+            <field name="name">Account Invoice In</field>
+            <field name="code">account.invoice.in_invoice</field>
+            <field eval="7" name="padding"/>
+            <field name="number_increment">1</field>
+        </record>
+        <record id="seq_out_refund" model="ir.sequence">
+            <field name="name">Account Refund Out</field>
+            <field name="code">account.invoice.out_refund</field>
+            <field eval="7" name="padding"/>
+            <field name="number_increment">1</field>
+        </record>
+        <record id="seq_in_refund" model="ir.sequence">
+            <field name="name">Account Refund In</field>
+            <field name="code">account.invoice.in_refund</field>
+            <field eval="7" name="padding"/>
+            <field name="number_increment">1</field>
+        </record>
+
+    </data>
+</openerp>
+

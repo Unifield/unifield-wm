@@ -59,17 +59,12 @@
                 <form string="Export du journal des ventes">
                     <separator string="Choisissez une plage de dates pour l'export" />
                     <newline />
-                    <field name="date_debut" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                    <field name="date_debut"/>
                     <newline />
-                    <field name="date_fin" attrs="{'readonly': [('state', '=', 'done')]}"/>
-                    <newline />
-                    <field name="fichier" attrs="{'readonly': [('state', '=', 'open')]}"/>
-                    <newline />
-                    <field name="state" invisible="1"/>
+                    <field name="date_fin"/>
                     <newline />
                     <group col="6" colspan="4">
-                        <button string="Valider" name='action_valider' type="object" icon="gtk-apply" states="open"/>
-                        <button string="Retour" name='action_retour' type="object" icon="gtk-undo" states="done" />
+                        <button string="Valider" name='action_valider' type="object" icon="gtk-apply"/>
                         <button string="Annuler" special='cancel' icon='gtk-cancel' />
                     </group>
                 </form>
