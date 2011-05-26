@@ -111,9 +111,12 @@ class export_journal_ventes(osv.osv_memory):
             #Référence lettrage
             ligne.append(num_piece[:7].ljust(7, ' '))
             #Sens de la ligne
-            sens = 1
-            montant = ml.debit
-            if ml.balance < 0:
+            # 1 = Débit
+            # 2 = Crédit
+            if abs(ml.debit) > 0:
+                sens = 1
+                montant = ml.debit
+            else:
                 sens = 2
                 montant = ml.credit
             ligne.append(str(sens))
@@ -121,14 +124,14 @@ class export_journal_ventes(osv.osv_memory):
             montant = str(montant).split(".")
             montant_gauche = montant[0].rjust(11, '0')
             montant_droite = montant[1].ljust(4, '0')
-            montant_droite += " "
             # Si la facture est une facture de type AVOIR
             if code_type_fac == 2:
                 montant_droite += "-"
-            ligne.append(montant_gauche[:11].rjust(11, '0'))
+            else:
+                montant_droite += " "
+            ligne.append(montant_gauche[:11])
             ligne.append(",")
-            ligne.append(montant_droite[:4].ljust(4, '0'))
-            ligne.append(" ")
+            ligne.append(montant_droite[:5])
             #Montant en devise
             ligne.append("00000000000,0000 ")
             #Type devise
@@ -160,8 +163,22 @@ class export_journal_ventes(osv.osv_memory):
             #Code DAS
             ligne.append(" ".ljust(3, " "))
             #Mode de paiement
-            # FIXME TODO
-            ligne.append("1".rjust(3, "0"))
+            # 1 = espece
+            # 2 = cheque
+            # 3 = traite
+            # 4 = virement
+            mode_chiffre = "1"
+            if ml.partner_id.reglement:
+                mode = ml.partner_id.reglement
+                if mode == 'espece':
+                    mode_chiffre = 1
+                elif mode == 'cheque':
+                    mode_chiffre = 2
+                elif mode == 'traite':
+                    mode_chiffre = 3
+                elif mode == 'virement':
+                    mode_chiffre = 4
+            ligne.append(str(mode_chiffre).rjust(3, "0"))
             #Code Bon à payer
             ligne.append("1")
             #Code banque
