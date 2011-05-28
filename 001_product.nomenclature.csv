@@ -8,7 +8,7 @@ DAP;Data processing;mandatory;LOG/Administration
 004;Keyboard AZERTY;mandatory;LOG/Administration/Data processing
 005;Modem;mandatory;LOG/Administration/Data processing
 006;Printer;mandatory;LOG/Administration/Data processing
-007;Screen/Monitor;mandatory;LOG/Administration/Data processing
+007;Screen - Monitor;mandatory;LOG/Administration/Data processing
 008;Switch;mandatory;LOG/Administration/Data processing
 FOO;FOOD FOR MSF STAFF;mandatory;LOG/Administration
 009;Beef;mandatory;LOG/Administration/FOOD FOR MSF STAFF
@@ -185,7 +185,7 @@ ORA;Oral drugs;mandatory;MED/Drugs
 164;Aluminium Hydroxide;mandatory;MED/Drugs/Oral drugs
 165;Atovaquone + Proguanil, blister;mandatory;MED/Drugs/Oral drugs
 166;Ascorbic Acid;mandatory;MED/Drugs/Oral drugs
-167;Artesunate + sulfadoxine/pyrimetham;mandatory;MED/Drugs/Oral drugs
+167;Artesunate + sulfadoxine - pyrimetham;mandatory;MED/Drugs/Oral drugs
 168;Azithromycine;mandatory;MED/Drugs/Oral drugs
 169;Beclomethasone;mandatory;MED/Drugs/Oral drugs
 170;Benznidazole;mandatory;MED/Drugs/Oral drugs
@@ -369,7 +369,7 @@ COO;COOKING;mandatory;LOG/Programm Support
 324;Scoop;mandatory;LOG/Programm Support/COOKING
 325;Spoon;mandatory;LOG/Programm Support/COOKING
 ELE;Electricity;mandatory;LOG/Programm Support
-326;Battery, charger/inverter;mandatory;LOG/Programm Support/Electricity
+326;Battery, charger - inverter;mandatory;LOG/Programm Support/Electricity
 327;Battery, Charger;mandatory;LOG/Programm Support/Electricity
 328;electrical board;mandatory;LOG/Programm Support/Electricity
 329;Cable, Earth;mandatory;LOG/Programm Support/Electricity
@@ -392,7 +392,7 @@ HDW;HARDWARE;mandatory;LOG/Programm Support
 HYG;Hygiene;mandatory;LOG/Programm Support
 345;RUBBISH BAG;mandatory;LOG/Programm Support/Hygiene
 347;RUBBER BOOTS;mandatory;LOG/Programm Support/Hygiene
-348;BASIN/ BOWL;mandatory;LOG/Programm Support/Hygiene
+348;BASIN - BOWL;mandatory;LOG/Programm Support/Hygiene
 349;Oil-cloth;mandatory;LOG/Programm Support/Hygiene
 350;DRY MACHINE;mandatory;LOG/Programm Support/Hygiene
 LIG;Lighting;mandatory;LOG/Programm Support
@@ -421,7 +421,7 @@ TOO;Tools;mandatory;LOG/Programm Support
 370;Clamp;mandatory;LOG/Programm Support/Tools
 371;Compressor;mandatory;LOG/Programm Support/Tools
 372;MECHANICAL COUPLER;mandatory;LOG/Programm Support/Tools
-373;EXTRACTOR/PULLER;mandatory;LOG/Programm Support/Tools
+373;EXTRACTOR - PULLER;mandatory;LOG/Programm Support/Tools
 374;Grinder;mandatory;LOG/Programm Support/Tools
 375;HAMMER;mandatory;LOG/Programm Support/Tools
 376;Machette;mandatory;LOG/Programm Support/Tools
@@ -497,7 +497,7 @@ MSU;Small medical supplies;mandatory;MED/Medical renewable supplies
 437;Bag, Body;mandatory;MED/Medical renewable supplies/Small medical supplies
 438;Bag, Plastic;mandatory;MED/Medical renewable supplies/Small medical supplies
 439;Gloves examination nitrile;mandatory;MED/Medical renewable supplies/Small medical supplies
-440;GLOVES, GYN/UTERINE, latex, disp.,;mandatory;MED/Medical renewable supplies/Small medical supplies
+440;GLOVES, GYN - UTERINE, latex, disp.,;mandatory;MED/Medical renewable supplies/Small medical supplies
 441;Protective Gloves;mandatory;MED/Medical renewable supplies/Small medical supplies
 T;Transport;mandatory;LOG
 BOA;Boats;mandatory;LOG/Transport
