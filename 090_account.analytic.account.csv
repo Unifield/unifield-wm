@@ -1,0 +1,15 @@
+"name";"code";"parent_id.code";"type";"activation_date";"inactivation_date";"date_start";"date"
+;;;;;;;
+"Operational Centre Geneva";"OCG";;"View";;;01/01/2011;31/12/2011
+;;;;;;;
+"Philippines Mission";"2011 PH-00";"OCG";"Normal";;;01/01/2011;31/12/2011
+"Philippines Manila Coordination";"2011 PH-01";"2011 PH-00";"Normal";;;01/01/2011;31/12/2011
+"Philippines floods";"2011 PH-10";"2011 PH-00";"Normal";;;01/01/2011;31/12/2011
+"Philippines Mindanao advocacy";"2011 PH-20";"2011 PH-00";"Normal";;;01/01/2011;31/12/2011
+;;;;;;;
+"Kenya Mission";"2011 KE-00";"OCG";"Normal";;;01/01/2011;31/12/2011
+"Kenya Coordination";"2011 KE-01";"2011 KE-00";"Normal";;;01/01/2011;31/12/2011
+"Kenya Somali refugee medical support";"2011 KE-10";"2011 KE-00";"Normal";;;01/01/2011;31/12/2011
+"Kenya Rift valley fever";"2011 KE-20";"2011 KE-00";"Normal";;;01/01/2011;31/12/2011
+"Kenya Kala azar";"2011 KE-30";"2011 KE-00";"Normal";;;01/01/2011;31/12/2011
+"Kenya Riots eldoret";"2011 KE-40";"2011 KE-00";"Normal";;;01/01/2011;31/12/2011

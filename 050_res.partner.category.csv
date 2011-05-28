@@ -1,0 +1,15 @@
+"name";"parent_id.complete_name"
+"Customer";
+"Supplier";
+"Logistic";"Supplier"
+"Medical";"Supplier"
+"Food";"Supplier"
+"Service";"Supplier"
+"Logistic";"Customer"
+"Medical";"Customer"
+"Food";"Customer"
+"Service";"Customer"
+"Administrative";"Customer / Service"
+"Transport";"Customer / Service"
+"Administrative";"Supplier / Service"
+"Transport";"Supplier / Service"

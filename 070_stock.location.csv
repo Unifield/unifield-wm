@@ -1,0 +1,29 @@
+"name";"usage";"location_id.name"
+"MSF Coordination";"Internal Location";
+"Input";"Internal Location";
+"Stock";"Internal Location";
+"Quarantine";"Internal Location";"Stock"
+"Medical Stock";"Internal Location";"Stock"
+"Consumption Unit U1";"Internal Location";"Medical Stock"
+"Logistic Stock";"Internal Location";"Stock"
+"Logistic 1";"Internal Location";"Logistic Stock"
+"Output";"Internal Location";
+"Packing";"Internal Location";"Output"
+"Dispatch";"Internal Location";"Output"
+"Distribution";"Internal Location";"Output"
+"Eprep";"Internal Location";
+"Partner Locations";"View";
+"Supplier";"Supplier Location";
+"Internal Supplier";"Supplier Location";"Supplier"
+"Customer";"Customer Location";
+"Project P1";"Customer Location";"Customer"
+"Project P2";"Customer Location";"Customer"
+"Project P3";"Customer Location";"Customer"
+"Internal Customer";"Customer Location";"Customer"
+"Consumption Unit U2";"Customer Location";"Internal Customer"
+"Consumption Unit U3";"Customer Location";"Internal Customer"
+"Virtual Locations";"View";
+"Inventory";"Inventory";
+"Destruction";"Inventory";
+"Procurements";"Procurement";
+"Production";"Production";
