@@ -26,5 +26,17 @@
             menu="False"
             />
 
+    <!-- Commission par représentants -->
+        <report 
+            id="report_commission_representants" 
+            string="Commission par représentant" 
+            model="account.invoice" 
+            name="commission.representants" 
+            rml="iller_sale/report/report_commission_representants.rml" 
+            header="False" 
+            auto="False" 
+            menu="False"
+            />
+
     </data>
 </openerp>

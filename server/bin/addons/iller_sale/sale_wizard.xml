@@ -71,6 +71,27 @@
             </field>
         </record>
 
+    <!-- Wizard Commission par représentant -->
+        <record model="ir.ui.view" id="wizard_commission_representant">
+            <field name="name">wizard.commission.representant.form</field>
+            <field name="model">wizard.commission.representant</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Commission par représentant et par mois">
+                    <separator string="Choisissez le mois d'étude" />
+                    <newline />
+                    <field name="mois"/>
+                    <newline />
+                    <field name="representant"/>
+                    <newline />
+                    <group col="6" colspan="4">
+                        <button string="Valider" name='action_valider' type="object" icon="gtk-apply"/>
+                        <button string="Annuler" special='cancel' icon='gtk-cancel' />
+                    </group>
+                </form>
+            </field>
+        </record>
+
     <!-- Actions -->
         <act_window id="action_marges_articles"
             name="Marges par article ou famille d'articles"
@@ -93,6 +114,13 @@
             view_type="form"
             target="new" />
 
+        <act_window id="action_commission_representant"
+            name="Commission par représentant et par mois"
+            res_model="wizard.commission.representant"
+            view_mode="form"
+            view_type="form"
+            target="new" />
+
     <!-- Menu pour accès au wizard "marges par articles ou catégories d'articles" -->
         <menuitem id="menu_marges_articles"
                 action="action_marges_articles"
@@ -107,6 +135,11 @@
         <menuitem id="menu_export_journal_ventes"
                 action="action_export_journal_ventes"
                 parent="sale.menu_sale_root" />
+
+    <!-- Menu pour accès au wizard "Commission par représentant et par mois" -->
+        <menuitem id="menu_commission_representant"
+                action="action_commission_representant"
+                parent="hr.menu_hr_reporting" />
 
     </data>
 </openerp>

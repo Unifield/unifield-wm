@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<openerp>
+    <data>
+
+        <!-- Ajout du champ 'vendeur' dans la vue de la facture -->
+        <record id="depassement_res_partner_form_view1" model="ir.ui.view">
+            <field name="name">depassement.res.partner.form.view1</field>
+            <field name="model">account.invoice</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="account.invoice_form" />
+            <field name="arch" type="xml">
+                <xpath expr="/form/notebook/page[@string='Other Info']/field[@name='date_due']" position="before" >
+                    <field name="user_id" />
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>

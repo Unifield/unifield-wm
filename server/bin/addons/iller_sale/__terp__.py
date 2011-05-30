@@ -43,6 +43,7 @@
         'sale_wizard.xml',
         'sale_report.xml',
         'invoice_sequence.xml',
+        'invoice_view.xml',
     ],
     'installable': True,
     'active': False,

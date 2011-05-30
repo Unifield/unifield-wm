@@ -22,5 +22,6 @@
 
 import impression_marges_articles
 import impression_ventes_representants
+import impression_commission_representants
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

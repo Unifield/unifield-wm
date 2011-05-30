@@ -22,9 +22,28 @@
 #
 ##############################################################################
 
-import wizard_marges_mensuelles_articles
-import wizard_ventes_representants
-import wizard_export_journal_ventes
-import wizard_commission_representants
+from osv import osv
+from osv import fields
+
+class account_invoice(osv.osv):
+    _name = "account.invoice"
+    _inherit = "account.invoice"
+
+    _columns = {
+        'user_id': fields.many2one('res.users', string="Vendeur", required=False),
+    }
+
+    def onchange_partner_id(self, cr, uid, ids, type_partner=None, partner_id=None, date_invoice=None, payment_term=None, context={}):
+        """
+        Complète le champ "Vendeur" par le vendeur dédié à chaque client. Sinon remplit avec l'utilisateur actuel (cas par défaut).
+        """
+        res = super(account_invoice, self).onchange_partner_id(cr, uid, ids, type_partner, partner_id, date_invoice, payment_term)
+        if partner_id:
+            partner = self.pool.get('res.partner').browse(cr, uid, partner_id, context=context)
+            if partner.user_id:
+                res['value'].update({'user_id': partner.user_id.id})
+        return res
+
+account_invoice()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
