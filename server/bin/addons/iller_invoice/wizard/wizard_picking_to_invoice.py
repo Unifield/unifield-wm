@@ -25,6 +25,7 @@ from osv import osv
 from osv import fields
 from datetime import datetime, timedelta
 from tools.translate import _
+import calendar
 
 class wizard_picking_to_invoice(osv.osv_memory):
     _name = 'wizard.picking.to.invoice'
@@ -50,7 +51,19 @@ class wizard_picking_to_invoice(osv.osv_memory):
             ce_jour = datetime.today()
             # On crée la date en fonction du mode de paiement
             if mode == 'm':
-                last_date = datetime(ce_jour.year, ce_jour.month-1, ce_jour.day)
+                # Vérification du mois d'avant dans le cas où mois = 1
+                mois = ce_jour.month-1
+                annee = ce_jour.year
+                if ce_jour.month == 1:
+                    mois = 12
+                    annee = ce_jour.year-1
+                # Vérification du dernier jour du mois d'avant
+                dernier_jour = calendar.monthrange(annee, mois)[1]
+                jour = ce_jour.day
+                if jour > dernier_jour:
+                    jour = dernier_jour
+                last_date = datetime(annee, mois, jour)
+                print last_date
             elif mode == 's':
                 last_date = ce_jour - timedelta(days=7)
             elif mode =='d':
