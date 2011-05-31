@@ -97,7 +97,7 @@ class impression_commission_representants(report_sxw.rml_parse):
         if not mois:
             raise osv.except_osv(_('Erreur'), _('Un élément est manquant : "mois".'))
         if not representant:
-            raise osv.except_osv()
+            raise osv.except_osv(_('Erreur'), _('Un élément est manquant : "représentant"'))
         # Préparation des dates
         annee = self.get_annee(mois)
         dernier_jour_du_mois = calendar.monthrange(annee, mois)[1]
