@@ -110,6 +110,21 @@ class iller_stock_picking(osv.osv):
             else:
                 return stock_move.product_id.list_price
 
+    def action_invoice_create(self, cr, uid, ids, journal_id=False, group=False, type='out_invoice', context=None):
+        """
+        Donne l'ensemble des factures pour les "pickings"
+        """
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+        res = {}
+        for sp in self.browse(cr, uid, ids, context=context):
+            if sp.sale_id:
+                context.update({'from_sale_order': sp.sale_id.id})
+            res2 = super(iller_stock_picking, self).action_invoice_create(cr, uid, [sp.id], journal_id, group, type, context)
+            res.update(res2)
+        return res
+
+
 iller_stock_picking()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

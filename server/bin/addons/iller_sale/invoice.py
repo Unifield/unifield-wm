@@ -44,6 +44,18 @@ class account_invoice(osv.osv):
                 res['value'].update({'user_id': partner.user_id.id})
         return res
 
+    def create(self, cr, uid, vals, context={}):
+        """
+        Créer une facture.
+        Si jamais le contexte 'from_sale_order' apparaît, alors on remplit "vendeur" avec le champ approprié du sale_order
+        """
+        if 'from_sale_order' in context:
+            so_id = context.get('from_sale_order')
+            vendeur = self.pool.get('sale.order').read(cr, uid, so_id, ['user_id'], context=context).get('user_id', False)[0]
+            vals.update({'user_id': vendeur})
+        res_id = super(account_invoice, self).create(cr, uid, vals, context)
+        return res_id
+
 account_invoice()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
