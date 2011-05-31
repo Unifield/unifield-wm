@@ -1,5 +1,4 @@
 "code";"name";"type";"sub_level";"parent_id.complete_name"
-"5.00";"Blank";"Optional";1;"MED"
 "5.01";"200mg";"Optional";1;"MED"
 "5.02";"400mg";"Optional";1;"MED"
 "5.03";"C";"Optional";1;"MED"
@@ -25,7 +24,6 @@
 "5.25";"AAG";"Optional";1;"LOG / Programm Support / Cold chain "
 "5.26";"AAH";"Optional";1;"LOG / Programm Support / Cold chain "
 "5.27";"AAI";"Optional";1;"LOG / Programm Support / Cold chain "
-"6.00";"Blank";"Optional";2;"MED"
 "6.01";"No infusion";"Optional";2;"MED"
 "6.02";"Non sterile";"Optional";2;"MED"
 "6.03";13;"Optional";2;"MED"
