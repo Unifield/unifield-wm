@@ -348,19 +348,146 @@ def _do_split(self, cr, uid, data, context):
                         'product_uos_qty': data['form']['move%s' % move.id]
                     })
 
+    data['new_picking'] = new_picking
+    data['pick_id'] = pick.id
+    return data
+
+### POUR FACTURATION ###
+
+_invoice_arch = """<?xml version="1.0"?>
+<form string="Créer les factures invoices">
+    <separator colspan="4" string="Créer les factures" />
+    <field name="journal_id"/>
+    <newline/>
+    <field name="group"/>
+    <newline/>
+    <field name="type"/>
+</form>
+"""
+
+_invoice_fields = {
+    'journal_id': {
+        'string': 'Journal de destination',
+        'type': 'many2one',
+        'relation': 'account.journal',
+        'required': True
+    },
+    'group': {
+        'string': 'Grouper par partenaire',
+        'type': 'boolean'
+    },
+    'type': {
+        'string': 'Type',
+        'type': 'selection',
+        'selection': [
+            ('out_invoice', 'Facture Client'),
+            ('in_invoice', 'Facture Fournisseur'),
+            ('out_refund', 'Avoir Client'),
+            ('in_refund', 'Avoir Fournisseur'),
+            ],
+        'required': True
+    },
+}
+
+def _check_invoicing(self, cr, uid, data, context={}):
+    """
+    Vérifie si le client possède un mode de facturation à "NON" ('n').
+    Si oui, on renvoie l'état 'invoice', sinon on renvoie l'état 'end3' (fin)
+    """
+    if data.get('id', False):
+        id = data.get('id')
+        pooler.get_pool(cr.dbname).get('stock.move')
+        sp = pooler.get_pool(cr.dbname).get('stock.picking').browse(cr, uid, id, context=context)
+        if sp.address_id and sp.address_id.partner_id and sp.address_id.partner_id.facturation_bl:
+            type_facturation = sp.address_id.partner_id.facturation_bl
+            # Si facturation = NON, alors on va vers l'état 'invoice'
+            if type_facturation == 'n':
+                return 'invoice'
+    return 'end3'
+
+def _get_type_invoice(obj, cr, uid, data, context=None):
+    picking_obj = pooler.get_pool(cr.dbname).get('stock.picking')
+    usage = 'customer'
+    pick = picking_obj.browse(cr, uid, data['id'], context=context)
+    if pick.invoice_state == 'invoiced':
+        raise wizard.except_wizard(_('UserError'), _('Invoice is already created.'))
+    if pick.invoice_state == 'none':
+        raise wizard.except_wizard(_('UserError'), _('Invoice cannot be created from Packing.'))
+
+    if pick.move_lines:
+        usage = pick.move_lines[0].location_id.usage
+
+    if pick.type == 'out' and usage == 'supplier':
+        type = 'in_refund'
+    elif pick.type == 'out' and usage == 'customer':
+        type = 'out_invoice'
+    elif pick.type == 'in' and usage == 'supplier':
+        type = 'in_invoice'
+    elif pick.type == 'in' and usage == 'customer':
+        type = 'out_refund'
+    else:
+        type = 'out_invoice'
+    return {'type': type}
+
+
+def _create_invoice(obj, cr, uid, data, context=None):
+    if data['form'].get('new_picking', False):
+        data['id'] = data['form']['new_picking']
+        data['ids'] = [data['form']['new_picking']]
+    pool = pooler.get_pool(cr.dbname)
+    picking_obj = pooler.get_pool(cr.dbname).get('stock.picking')
+    mod_obj = pool.get('ir.model.data')
+    act_obj = pool.get('ir.actions.act_window')
+
+    type = data['form']['type']
+
+    res = picking_obj.action_invoice_create(cr, uid, data['ids'],
+            journal_id=data['form']['journal_id'], group=data['form']['group'],
+            type=type, context=context)
+
+    invoice_ids = res.values()
+    if not invoice_ids:
+        raise wizard.except_wizard(_('Error'), _('Invoice is not created'))
+
+    if type == 'out_invoice':
+        xml_id = 'action_invoice_tree5'
+    elif type == 'in_invoice':
+        xml_id = 'action_invoice_tree8'
+    elif type == 'out_refund':
+        xml_id = 'action_invoice_tree10'
+    else:
+        xml_id = 'action_invoice_tree12'
+
+    result = mod_obj._get_id(cr, uid, 'account', xml_id)
+    id = mod_obj.read(cr, uid, result, ['res_id'], context=context)
+    result = act_obj.read(cr, uid, id['res_id'], context=context)
+    result['res_id'] = invoice_ids
+    result['context'] = context
+    return result
+
+def _workflow_validation(self, cr, uid, data, context={}):
+    """
+    Valide le workflow si toutes les étapes ont été accomplies
+    """
+
+    # Préparation des différents éléments
+    new_picking = data['new_picking']
+    pick_id = data['pick_id']
+    pick_obj = pooler.get_pool(cr.dbname).get('stock.picking')
+
     # At first we confirm the new picking (if necessary)
     wf_service = netsvc.LocalService("workflow")
     if new_picking:
         wf_service.trg_validate(uid, 'stock.picking', new_picking, 'button_confirm', cr)
     # Then we finish the good picking
     if new_picking:
-        pick_obj.write(cr, uid, [pick.id], {'backorder_id': new_picking})
+        pick_obj.write(cr, uid, [pick_id], {'backorder_id': new_picking})
         pick_obj.action_move(cr, uid, [new_picking])
         wf_service.trg_validate(uid, 'stock.picking', new_picking, 'button_done', cr)
-        wf_service.trg_write(uid, 'stock.picking', pick.id, cr)
+        wf_service.trg_write(uid, 'stock.picking', pick_id, cr)
     else:
-        pick_obj.action_move(cr, uid, [pick.id])
-        wf_service.trg_validate(uid, 'stock.picking', pick.id, 'button_done', cr)
+        pick_obj.action_move(cr, uid, [pick_id])
+        wf_service.trg_validate(uid, 'stock.picking', pick_id, 'button_done', cr)
     bo_name = ''
     if new_picking:
         bo_name = pick_obj.read(cr, uid, [new_picking], ['name'])[0]['name']
@@ -393,6 +520,28 @@ class iller_partial_picking(wizard.interface):
         },
         'end2': {
             'actions': [ _do_split ],
+            'result': {'type': 'choice', 'next_state': _check_invoicing,
+            },
+        },
+        'invoice': {
+            'actions': [ _get_type_invoice ],
+            'result': {'type': 'form', 'arch': _invoice_arch, 'fields': _invoice_fields,
+                'state': (
+                    ('end', '_Annuler'),
+                    ('create_invoice', '_Continuer')
+                )
+            },
+        },
+        'create_invoice': {
+            'actions': [],
+            'result': {
+                'type': 'action',
+                'action': _create_invoice,
+                'state': 'end3'
+            }
+        },
+        'end3': {
+            'actions': [ _workflow_validation ],
             'result': {'type': 'form', 'arch': _moves_arch_end,
                 'fields': _moves_fields_end,
                 'state': (
