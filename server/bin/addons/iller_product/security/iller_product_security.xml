@@ -26,6 +26,9 @@
         <record id="product.menu_price" model="ir.ui.menu">
             <field name="groups_id" eval="[(6,0,[ref('iller_product.group_iller_tarif')])]" />
         </record>
+        <record id="product.menu_product_pricelist_main" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('iller_product.group_iller_tarif')])]" />
+        </record>
         <record id="iller_product.menu_product_pricelist_bareme" model="ir.ui.menu">
             <field name="groups_id" eval="[(6,0,[ref('iller_product.group_iller_tarif')])]" />
         </record>

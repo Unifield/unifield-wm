@@ -315,18 +315,26 @@
         </record>
 
         <menuitem
+            id="menu_promos"
+            name="Promotions"
+            parent="product.menu_main_product" />
+
+        <menuitem
             id="menu_product_pricelist_promo"
+            sequence="3"
             action="act_product_pricelist_promo"
-            parent="product.menu_product_pricelist_main" />
+            parent="menu_promos" />
 
         <menuitem
             id="menu_product_pricelist_promo_draft"
+            sequence="4"
             action="act_product_pricelist_promo_draft"
-            parent="product.menu_product_pricelist_main" />
+            parent="menu_promos" />
 
         <menuitem action="act_product_pricelist_promo_form"
+                  sequence="2"
                   id="menu_pricelist_configure_promo"
-                  parent="product.menu_product_pricelist_main" /> 
+                  parent="menu_promos" />
 
         <record id="product_pricelist_tarifs_speciaux_form_view" model="ir.ui.view">
             <field name="name">product.pricelist.tarifs_speciaux.form.view</field>

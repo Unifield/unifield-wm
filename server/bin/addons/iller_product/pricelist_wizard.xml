@@ -2,6 +2,11 @@
 <openerp>
     <data>
 
+        <menuitem 
+            name="Rapports"
+            id="iller_product_pricelist_rapports_menu"
+            parent="product.menu_main_product" /> 
+
         <!--        <wizard id="pricelist_configure_promo"
                 name="pricelist.configure.promo"
                 string="Configurer une promo"
@@ -44,7 +49,7 @@
         <menuitem action="export_tarif_sncf"
                   id="menu_export_tarif_sncf"
                   type="wizard"
-                  parent="product.menu_product_pricelist_main" />
+                  parent="iller_product_pricelist_rapports_menu" />
 
         <wizard id="export_tarif_promo"
                 name="export.tarif.promo"
@@ -97,7 +102,9 @@
             <field name="target">new</field>
         </record>
 
-        <menuitem action="action_wizard_export_tarif_hilton" id="menu_wizard_export_tarif_hilton" parent="product.menu_product_pricelist_main"/>
+        <menuitem action="action_wizard_export_tarif_hilton" 
+                  id="menu_wizard_export_tarif_hilton"
+                  parent="iller_product_pricelist_rapports_menu" />
 
 
 <!-- Wizard pour exportation des tarifs commerciaux -->
@@ -145,7 +152,9 @@
             <field name="target">new</field>
         </record>
 
-        <menuitem action="action_wizard_export_tarifs_commerciaux" id="menu_wizard_export_tarifs_commerciaux" parent="product.menu_product_pricelist_main"/>
+        <menuitem action="action_wizard_export_tarifs_commerciaux" 
+                  id="menu_wizard_export_tarifs_commerciaux"
+                  parent="iller_product_pricelist_rapports_menu" />
 
         <!-- Wizard de modification des coefficients par catégorie -->
         <record id="wizard_choose_category_view" model="ir.ui.view">
@@ -169,7 +178,9 @@
             <field name="target">new</field>
         </record>
 
-        <menuitem action="action_choose_category" id="menu_choose_category" parent="product.menu_product_pricelist_main" />
+        <menuitem action="action_choose_category" 
+                  id="menu_choose_category"
+                  parent="product.menu_product_pricelist_main" />
 
         <record id="wizard_modif_coeff_view" model="ir.ui.view">
             <field name="name">wizard.modif.coeff.view</field>
@@ -220,7 +231,9 @@
             <field name="target">new</field>
         </record>
 
-        <menuitem action="action_print_pricelist_cat" id="menu_print_cat_bareme" parent="product.menu_product_pricelist_main" />
+        <menuitem action="action_print_pricelist_cat" 
+                  id="menu_print_cat_bareme"
+                  parent="iller_product_pricelist_rapports_menu" />
 
     </data>
 </openerp>

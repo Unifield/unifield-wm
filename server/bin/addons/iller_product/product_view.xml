@@ -2,6 +2,18 @@
 <openerp>
     <data>
 
+        <!-- Suppression des wizards -->
+        <delete model="ir.actions.wizard" search="[('wiz_name', '=', 'product_price'), ('name', '=', 'Product Cost Structure')]" />
+        <delete model="ir.actions.wizard" search="[('wiz_name', '=', 'product.product.procurement'), ('name', '=', 'Procurement Request')]" />
+        <!--        <delete model="ir.actions.wizard" search="[('wiz_name', '=', ''), ('name', '=', '')]" />-->
+
+        <delete model="ir.actions.act_window" search="[('name', '=', 'Bill of Materials'), ('res_model', '=', 'mrp.bom'), ('src_model', '=', 'product.product')]" />
+        <delete model="ir.actions.act_window" search="[('name', '=', 'Minimum Stock Rules'), ('res_model', '=', 'stock.warehouse.orderpoint'), ('src_model', '=', 'product.product')]" />
+
+        <!-- Suppression des reports -->
+        <delete model="ir.actions.report.xml" search="[('name', '=', 'Future Stock Forecast'), ('model', '=', 'product.product'), ('report_name', '=', 'stock.product.history')]" />
+        <delete model="ir.actions.report.xml" search="[('name', '=', 'Products Labels'), ('model', '=', 'product.product'), ('report_name', '=', 'product.product.label')]" />
+
         <record id="inherit_product_category_form_view" model="ir.ui.view">
             <field name="name">inherit.product.category.form.view</field>
             <field name="model">product.category</field>
