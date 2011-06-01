@@ -1,0 +1,5 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_iller_partner_partner","iller.partner.partner","base.model_res_partner","group_iller_partner",1,1,1,1
+"access_iller_partner_address","iller.partner.address","base.model_res_partner_address","group_iller_partner",1,1,1,1
+"access_iller_partner_invoice","iller.partner.invoice","account.model_account_invoice","group_iller_partner",1,0,0,0
+"access_iller_partner_fiscalyear","iller.partner.fiscalyear","account.model_account_fiscalyear","group_iller_partner",1,0,0,0

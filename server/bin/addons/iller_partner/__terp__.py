@@ -36,6 +36,8 @@
     """,
     'update_xml': [
         'partner_view.xml',
+        'security/iller_partner_security.xml',
+        'security/ir.model.access.csv',
     ],
     'installable': True,
     'active': False,

@@ -2,14 +2,28 @@
 <openerp>
     <data>
 
+        <!-- Suppression de menus -->
+        <delete model="ir.ui.menu" search="[('name', '=', 'Partner Addresses')]" />
+        <delete model="ir.ui.menu" search="[('name', '=', 'Partners by Categories')]" />
+        <delete model="ir.ui.menu" search="[('name', '=', 'Others Partners')]" />
+
+        <!-- Suppression de wizard -->
+        <delete model="ir.actions.wizard" search="[('wiz_name', '=', 'res.partner.sms_send'), ('name', '=', 'Send SMS')]" />
+        <delete model="ir.actions.wizard" search="[('wiz_name', '=', 'res.partner.spam_send'), ('name', '=', 'Mass Mailing')]" />
+        <delete model="ir.values" search="[('model', '=', 'res.partner'), ('name', '=', 'Company Architecture')]" />
+
+        <!-- Suppression de rapports -->
+        <delete model="ir.actions.report.xml" search="[('name', '=', 'Labels'), ('model', '=', 'res.partner'), ('report_name', '=', 'res.partner.address')]" />
+        <delete model="ir.actions.report.xml" search="[('name', '=', 'Overdue Payments'), ('model', '=', 'res.partner'), ('report_name', '=', 'account.overdue')]" />
+
         <record id="inherit_res_partner_form_view1" model="ir.ui.view">
             <field name="name">inherit.res.partner.form.view1</field>
             <field name="model">res.partner</field>
             <field name="type">form</field>
-            <field name="inherit_id" ref="stock.view_partner_property_form" />
+            <field name="inherit_id" ref="base.view_partner_form" />
             <field name="arch" type="xml">
                 <page string="Sales &amp; Purchases" position="inside">
-                    <group colspan="2" col="2">
+                    <group colspan="4" col="2">
                         <separator colspan="2" string="Commentaire Saisib" />
                         <field name="saisib" colspan="2" nolabel="1" />
                     </group>
@@ -23,21 +37,28 @@
             <field name="type">form</field>
             <field name="inherit_id" ref="account.view_partner_property_form" />
             <field name="arch" type="xml">
-                <xpath expr="/form/notebook/page[@string='Accounting']/group" position="before">
-                    <separator colspan="4" string="Informations comptables" />
-                    <field name="siret" />
-                    <field name="reglement" required="1" on_change="reglement_onchange(reglement)" />
-                    <field name="facturation_bl" required="1" />
-                    <field name="nb_ex_factures" />
-                    <field name="releve" />
-                    <field name="bloque" select="2" />
-                    <separator colspan="4" string="Informations ristourne" />
-                    <field name="remise_fac" />
-                    <field name="type_ristourne" />
-                    <field name="taux_ristourne" />
-                    <field name="total_ristourne" />
-                </xpath>
+                <data>
+                    <xpath expr="/form/notebook/page[@string='Accounting']/group" position="before">
+                        <separator colspan="4" string="Informations comptables" />
+                        <field name="siret" />
+                        <field name="reglement" required="1" on_change="reglement_onchange(reglement)" />
+                        <field name="facturation_bl" required="1" />
+                        <field name="nb_ex_factures" />
+                        <field name="releve" />
+                        <field name="bloque" select="2" />
+                        <separator colspan="4" string="Informations ristourne" />
+                        <field name="remise_fac" />
+                        <field name="type_ristourne" />
+                        <field name="taux_ristourne" />
+                        <field name="total_ristourne" />
+                    </xpath>
+                </data>
             </field>
+        </record>
+
+        <!-- Suppression du groupe stock dans la fiche partenaire -->
+        <record id="stock.view_partner_property_form" model="ir.ui.view">
+            <field name="inherit_id" eval="False" />
         </record>
 
         <record id="inherit_res_partner_form_view3" model="ir.ui.view">
@@ -46,10 +67,20 @@
             <field name="type">form</field>
             <field name="inherit_id" ref="base.view_partner_form" />
             <field name="arch" type="xml">
-                <xpath expr="/form/notebook/page[@string='Sales &amp; Purchases']/field[@name='user_id']" position="after">
-                    <field name="appeler_ok" />
-                    <field name="tele_user_id" />
-                </xpath>
+                <data>
+                    <xpath expr="/form/notebook/page[@string='Sales &amp; Purchases']/field[@name='user_id']" position="after">
+                        <field name="appeler_ok" />
+                        <field name="tele_user_id" />
+                    </xpath>
+                    <xpath expr="/form/group" position="replace">
+                        <group colspan="4" col="4">
+                            <field name="name" select="1"/>
+                            <field name="ref" select="1"/>
+                            <field name="customer" select="1"/>
+                            <field name="supplier" select="2"/>
+                        </group>
+                    </xpath>
+                </data>
             </field>
         </record>
 
