@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<openerp>
+	<data>
+
+        <record id="group_iller_product" model="res.groups">
+            <field name="name">Iller - Produits</field>
+        </record>
+        <record id="group_iller_tarif" model="res.groups">
+            <field name="name">Iller - Tarifs</field>
+        </record>
+
+        <!-- Ajout d'accès aux menus pour ces utilisateurs -->
+        <record id="product.menu_main_product" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('iller_product.group_iller_product')])]" />
+        </record>
+        <record id="product.menu_products" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('iller_product.group_iller_product')])]" />
+        </record>
+        <record id="product.menu_product_category_action" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('iller_product.group_iller_product')])]" />
+        </record>
+        
+        <record id="product.menu_config_product" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('iller_product.group_iller_tarif')])]" />
+        </record>
+        <record id="product.menu_price" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('iller_product.group_iller_tarif')])]" />
+        </record>
+        <record id="iller_product.menu_product_pricelist_bareme" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('iller_product.group_iller_tarif')])]" />
+        </record>
+        <record id="iller_product.menu_pricelist_promo_configuration" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('iller_product.group_iller_tarif')])]" />
+        </record>
+        <record id="iller_product.menu_product_pricelist_promo" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('iller_product.group_iller_tarif')])]" />
+        </record>
+        <record id="iller_product.menu_product_pricelist_promo_draft" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('iller_product.group_iller_tarif')])]" />
+        </record>
+        <record id="iller_product.menu_pricelist_configure_promo" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('iller_product.group_iller_tarif')])]" />
+        </record>
+        <record id="iller_product.menu_product_pricelist_tarifs_speciaux" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('iller_product.group_iller_tarif')])]" />
+        </record>
+
+	</data>
+</openerp>
+
