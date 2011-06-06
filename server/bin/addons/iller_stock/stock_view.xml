@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-    
+
         <record id="iller_view_picking_out_form" model="ir.ui.view">
             <field name="name">iller.stock.picking.out.form</field>
             <field name="model">stock.picking</field>
@@ -12,6 +12,23 @@
                 </xpath>
             </field>
         </record>
-        
+
+        <record id="gibier_entree_sortie_tree" model="ir.ui.view">
+            <field name="name">gibier.entree.sortie.tree</field>
+            <field name="model">gibier.entree.sortie</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="État des entrées et des sorties de gibier">
+                    <field name="type"/>
+                    <field name="date"/>
+                    <field name="origine"/>
+                    <field name="nom"/>
+                    <field name="article"/>
+                    <field name="designation"/>
+                    <field name="qte"/>
+                </tree>
+            </field>
+        </record>
+
     </data>
 </openerp>

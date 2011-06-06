@@ -2,19 +2,6 @@
 <openerp>
     <data>
 
-<!-- act_window pour un essai de fields_view_get
-        <act_window
-            id="iller_partial_picking"
-            src_model="stock.picking"
-            res_model="stock.partial.picking"
-            multi="True"
-            name="Faire le colisage"
-            view_mode="form"
-            view_type="form"
-            target="new"
-            />
--->
-
         <wizard
             id="iller_partial_picking"
             model="stock.picking"
@@ -22,6 +9,38 @@
             name="iller_partial_picking"
             string="Faire le colisage"
             />
+
+    <!-- Wizard pour le gibier -->
+        <record id="wizard_gibier_view" model="ir.ui.view">
+            <field name="name">wizard.gibier.view</field>
+            <field name="model">wizard.gibier</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="État des entrées et sorties de gibier">
+                    <field name="date_debut" />
+                    <newline />
+                    <field name="date_fin" />
+                    <newline />
+                    <field name="type" />
+                    <newline />
+                    <button string="Ok" name='action_confirmer' type="object" icon="gtk-apply" />
+                    <button string="Annuler" special='cancel' icon='gtk-cancel' />
+                </form>
+            </field>
+        </record>
+
+    <!-- Actions -->
+        <act_window id="action_wizard_gibier"
+            name="État des entrées et sorties de gibier"
+            res_model="wizard.gibier"
+            view_mode='form'
+            view_type='form'
+            target='new' />
+
+    <!-- Menus -->
+        <menuitem id="menu_wizard_gibier"
+                action="action_wizard_gibier"
+                parent="stock.menu_stock_root" />
 
     </data>
 </openerp>
