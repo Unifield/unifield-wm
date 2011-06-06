@@ -207,7 +207,7 @@
             target='new' />
 
         <act_window id="action_produits_a_expedier_par_tournee"
-            name="Produits à expedier par tournée"
+            name="Produits à expédier par tournée"
             res_model="produits.a.expedier.par.tournee"
             src_model="tournee.iller"
             view_mode='form'
@@ -216,7 +216,7 @@
             target='new' />
 
         <act_window id="action_etat_produits_a_expedier_par_tournee"
-            name="État des produits à expedier par tournée/date"
+            name="État des produits à expédier par tournée/date"
             res_model="produits.a.expedier.par.tournee"
             src_model="tournee.iller"
             view_mode='form'
@@ -225,7 +225,7 @@
             target='new' />
 
         <act_window id="action_produits_par_poste"
-            name="Produits à expedier par poste/date/tournée"
+            name="Produits à expédier par poste/date/tournée"
             res_model="produits.par.poste"
             src_model="tournee.iller"
             view_mode='form'
