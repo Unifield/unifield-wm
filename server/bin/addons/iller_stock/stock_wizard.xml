@@ -2,6 +2,7 @@
 <openerp>
     <data>
 
+    <!-- Ancien wizard (wizard.interface) pour le colisage des produits à expédier -->
         <wizard
             id="iller_partial_picking"
             model="stock.picking"
