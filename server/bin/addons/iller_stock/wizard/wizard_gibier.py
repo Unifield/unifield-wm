@@ -44,7 +44,8 @@ class wizard_gibier(osv.osv_memory):
 
     def action_confirmer(self, cr, uid, ids, context={}):
         """
-        Vérifie les dates saisies ; récupère les données du wizard, puis renvoie
+        Vérifie les dates saisies ; récupère les données du wizard, puis renvoie la liste des articles gibiers entrés ou sorties pour la 
+        plage de dates données.
         """
         # Préparation de variables
         wizard = self.browse(cr, uid, ids[0], context=context)
@@ -108,6 +109,7 @@ wizard_gibier()
 
 class gibier_entree_sortie(osv.osv_memory):
     _name = 'gibier.entree.sortie'
+    _description = 'État des entrées et sorties de gibier'
     _order = 'date'
 
     _columns = {
