@@ -62,7 +62,7 @@ class stats_entree_article(osv.osv_memory):
         invoice_obj = self.pool.get('account.invoice')
         invoice_ids = invoice_obj.search(cr, uid, [('date_invoice', '>=', obj.date_depart), ('date_invoice', '<=', obj.date_fin)])
 
-        datas = {'ids': ids[0],
+        datas = {'ids': ids,
                  'model': 'stats.entree.article',
                  'form': {'invoices': invoice_ids}}
 

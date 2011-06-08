@@ -10,9 +10,67 @@
       <blockAlignment value="LEFT"/>
       <blockValign value="TOP"/>
     </blockTableStyle>
+    <blockTableStyle id="Table1">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+    </blockTableStyle>
+    <blockTableStyle id="Table2">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+    </blockTableStyle>
+    <blockTableStyle id="Table5">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,0" stop="0,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="0,0" stop="0,0"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="0,-1" stop="0,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="1,0" stop="1,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="1,0" stop="1,0"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="1,-1" stop="1,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="2,0" stop="2,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="2,0" stop="2,0"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="2,-1" stop="2,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="3,0" stop="3,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="3,0" stop="3,0"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="3,-1" stop="3,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="4,0" stop="4,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="4,0" stop="4,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="4,0" stop="4,0"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="4,-1" stop="4,-1"/>
+    </blockTableStyle>
+    <blockTableStyle id="Table3">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,0" stop="0,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="0,0" stop="0,0"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="0,-1" stop="0,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="1,0" stop="1,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="1,0" stop="1,0"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="1,-1" stop="1,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="2,0" stop="2,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="2,0" stop="2,0"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="2,-1" stop="2,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="3,0" stop="3,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="3,0" stop="3,0"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="3,-1" stop="3,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="4,0" stop="4,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="4,0" stop="4,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="4,0" stop="4,0"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="4,-1" stop="4,-1"/>
+    </blockTableStyle>
+    <blockTableStyle id="Table4">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+    </blockTableStyle>
+    <blockTableStyle id="Table6">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+    </blockTableStyle>
     <initialize>
       <paraStyle name="all" alignment="justify"/>
     </initialize>
+    <paraStyle name="P1" fontName="Times-Roman" fontSize="8.0" leading="10"/>
+    <paraStyle name="P2" fontName="Times-Roman" fontSize="9.0" leading="11"/>
     <paraStyle name="Standard" fontName="Times-Roman"/>
     <paraStyle name="Heading" fontName="Helvetica" fontSize="14.0" leading="17" spaceBefore="12.0" spaceAfter="6.0"/>
     <paraStyle name="Text body" fontName="Times-Roman" spaceBefore="0.0" spaceAfter="6.0"/>
@@ -20,10 +78,162 @@
     <paraStyle name="Caption" fontName="Times-Roman" fontSize="12.0" leading="15" spaceBefore="6.0" spaceAfter="6.0"/>
     <paraStyle name="Index" fontName="Times-Roman"/>
     <paraStyle name="Table Contents" fontName="Times-Roman"/>
+    <paraStyle name="Table Heading" fontName="Times-Roman" alignment="CENTER"/>
     <images/>
   </stylesheet>
   <story>
-    <para style="Standard">Nombre d'enregistrements lus : [[ len(data['form']) ]]</para>
+    <para style="Standard">[[ repeatIn(objects, 'o') ]] [[ setLang('fr_FR') ]] </para>
+    <para style="Standard">Nombre d'enregistrements lus : [[ len(data['form']['invoices']) ]]</para>
+    <section>
+      <para style="Standard">[[ repeatIn(getInvoices(data['form']['invoices']), 'i') ]]</para>
+      <para style="Standard">-------------------------------------------------------------------------------------------------------------------------------------------</para>
+      <para style="Standard">
+        <font color="white"> </font>
+      </para>
+      <blockTable colWidths="59.0,65.0,48.0,216.0,56.0,38.0" style="Table1">
+        <tr>
+          <td>
+            <para style="P1">NR. PIECE :</para>
+          </td>
+          <td>
+            <para style="P1">
+              <font color="white"> </font>
+            </para>
+          </td>
+          <td>
+            <para style="P1">N. FOUR : </para>
+          </td>
+          <td>
+            <para style="P1">[[ '[%s] %s' % (i.partner_id.ref, i.partner_id.name) ]]</para>
+          </td>
+          <td>
+            <para style="P1">FA / AV :</para>
+          </td>
+          <td>
+            <para style="P1">[[ getType(i.type) ]]</para>
+          </td>
+        </tr>
+      </blockTable>
+      <blockTable colWidths="59.0,65.0,48.0,98.0,59.0,154.0" style="Table2">
+        <tr>
+          <td>
+            <para style="P1">DATE FAC. : </para>
+          </td>
+          <td>
+            <para style="P1">[[ formatLang(i.date_invoice, date=True) ]]</para>
+          </td>
+          <td>
+            <para style="P1">DATE LIV. : </para>
+          </td>
+          <td>
+            <para style="P1">
+              <font color="white"> </font>
+            </para>
+          </td>
+          <td>
+            <para style="P1">NR. FAC : </para>
+          </td>
+          <td>
+            <para style="P1">[[ i.number ]]</para>
+          </td>
+        </tr>
+      </blockTable>
+      <para style="Standard">
+        <font color="white"> </font>
+      </para>
+      <blockTable colWidths="46.0,258.0,59.0,59.0,59.0" style="Table5">
+        <tr>
+          <td>
+            <para style="P1">Référence</para>
+          </td>
+          <td>
+            <para style="P1">Nom du produit</para>
+          </td>
+          <td>
+            <para style="P1">Qté</para>
+          </td>
+          <td>
+            <para style="P1">Prix Uni.</para>
+          </td>
+          <td>
+            <para style="P1">Sous-Total</para>
+          </td>
+        </tr>
+      </blockTable>
+      <blockTable colWidths="46.0,258.0,59.0,59.0,59.0" style="Table3">
+        <tr>
+          <td>
+            <para style="P1">[[ repeatIn(i.invoice_line, 'line') ]]</para>
+            <para style="P1">[[ line.product_id.default_code ]]</para>
+          </td>
+          <td>
+            <para style="P1">[[ line.product_id.name ]]</para>
+          </td>
+          <td>
+            <para style="P1">[[ formatLang(line.quantity) ]]</para>
+          </td>
+          <td>
+            <para style="P1">[[ formatLang(line.price_unit) ]]</para>
+          </td>
+          <td>
+            <para style="P1">[[ formatLang(line.price_subtotal) ]]</para>
+          </td>
+        </tr>
+      </blockTable>
+      <blockTable colWidths="46.0,258.0,59.0,59.0,59.0" style="Table4">
+        <tr>
+          <td>
+            <para style="Table Contents">
+              <font color="white"> </font>
+            </para>
+          </td>
+          <td>
+            <para style="P2">*** TOTAL PIECE ***</para>
+          </td>
+          <td>
+            <para style="P2">[[ formatLang(getTotalQty(i)) ]]</para>
+          </td>
+          <td>
+            <para style="P2">
+              <font color="white"> </font>
+            </para>
+          </td>
+          <td>
+            <para style="P2">[[ formatLang(i.amount_untaxed) ]]</para>
+          </td>
+        </tr>
+      </blockTable>
+      <para style="Standard">
+        <font color="white"> </font>
+      </para>
+    </section>
+    <para style="Standard">-------------------------------------------------------------------------------------------------------------------------------------------</para>
+    <blockTable colWidths="46.0,258.0,59.0,59.0,59.0" style="Table6">
+      <tr>
+        <td>
+          <para style="Table Contents">
+            <font color="white"> </font>
+          </para>
+        </td>
+        <td>
+          <para style="P2">*** TOTAL GENERAL ***</para>
+        </td>
+        <td>
+          <para style="P2">[[ formatLang(getTotalGen(data['form']['invoices'])[0]) ]]</para>
+        </td>
+        <td>
+          <para style="P2">
+            <font color="white"> </font>
+          </para>
+        </td>
+        <td>
+          <para style="P2">[[ formatLang(getTotalGen(data['form']['invoices'])[1]) ]]</para>
+        </td>
+      </tr>
+    </blockTable>
+    <para style="Standard">
+      <font color="white"> </font>
+    </para>
     <para style="Standard">
       <font color="white"> </font>
     </para>
