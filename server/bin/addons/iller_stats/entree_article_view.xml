@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<openerp>
+	<data>
+
+        <menuitem id="main_statistiques"
+                  name="Statistiques"
+                  string="Statistiques" />
+
+
+        <record id="entree_article_init_view" model="ir.ui.view">
+            <field name="name">entree.article.init.view</field>
+            <field name="model">stats.entree.article</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Entrée des articles">
+                    <separator colspan="4" string="Configuration                                                     " />
+                    <field name="date_depart" colspan="4" />
+                    <field name="date_fin" colspan="4" />
+                    <button special="cancel" string="Annuler" colspan="2" icon="gtk-cancel" />
+                    <button name="print_report" string="Imprimer le rapport" type="object" colspan="2" icon="gtk-print" />
+                </form>
+            </field>
+        </record>
+
+        <record id="entree_article_init_act" model="ir.actions.act_window">
+            <field name="name">Liste des entrées articles</field>
+            <field name="res_model">stats.entree.article</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="entree_article_init_view" />
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="entree_article_menu"
+                  action="entree_article_init_act"
+                  parent="main_statistiques" />
+                  
+
+	</data>
+</openerp>
+
