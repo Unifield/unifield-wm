@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<openerp>
+	<data>
+
+        <report id="report_entree_article"
+                name="report.entree.article"
+                string="Entrées des articles"
+                model="stats.entree.article"
+                rml="iller_stats/report/entree_article.rml"
+                header="False"
+                menu="False"
+                auto="True" />
+
+	</data>
+</openerp>
+
