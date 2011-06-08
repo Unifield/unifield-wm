@@ -152,6 +152,6 @@ class impression_marges_articles(report_sxw.rml_parse):
             total += ligne[3]
         return total
 
-report_sxw.report_sxw('report.marges.articles','product.product','addons/iller_sale/report/report_marges_articles.rml', parser=impression_marges_articles)
+#report_sxw.report_sxw('report.marges.articles','product.product','addons/iller_sale/report/report_marges_articles.rml', parser=impression_marges_articles)
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

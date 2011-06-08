@@ -35,7 +35,7 @@
     ],
     "update_xml": [
         'entree_article_view.xml',
-        'iller_stats_report.xml',
+        #'iller_stats_report.xml',
     ],
     "demo_xml": [
     ],
