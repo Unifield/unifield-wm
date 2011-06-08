@@ -30,5 +30,21 @@
             </field>
         </record>
 
+        <record id="articles_par_client_tree" model="ir.ui.view">
+            <field name="name">articles.par.client.tree</field>
+            <field name="model">articles.par.client</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Édition des articles par client" colors="orange:est_total==True">
+                    <field name="nom"/>
+                    <field name="quantite"/>
+                    <field name="ca_net"/>
+                    <field name="prix_moyen"/>
+                    <field name="remise"/>
+                    <field name="est_total" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
     </data>
 </openerp>

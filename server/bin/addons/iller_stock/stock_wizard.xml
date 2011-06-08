@@ -30,10 +30,52 @@
             </field>
         </record>
 
+    <!-- Wizard pour l'édition des articles par client -->
+        <record id="wizard_articles_par_client_view" model="ir.ui.view">
+            <field name="name">wizard.articles.par.client.view</field>
+            <field name="model">wizard.articles.par.client</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Édition des articles par client">
+                    <field name="partner_ids" nolabel="1" colspan="4" domain="[('customer', '=', True)]"/>
+                    <newline/>
+                    <group colspan="4">
+                        <label string="Du "/>
+                        <field name="date_debut" nolabel="1"/>
+                        <label string="au "/>
+                        <field name="date_fin" nolabel="1"/>
+                    </group>
+                    <separator string="Options"/>
+                    <newline />
+                    <field name="est_decoupe"/>
+                    <newline/>
+                    <field name="famille_uniquement"/>
+                    <newline/>
+                    <field name="exclusion_magasin"/>
+                    <newline/>
+                    <separator string="   " />
+                    <newline/>
+                    <group colspan="4">
+                        <button string="Ok" name='action_confirmer' type="object" icon="gtk-apply" />
+                        <button string="Annuler" special='cancel' icon='gtk-cancel' />
+                    </group>
+                </form>
+            </field>
+        </record>
+
     <!-- Actions -->
+        <!-- Wizard pour obtenir l'état des entrées et sorties de gibier -->
         <act_window id="action_wizard_gibier"
             name="État des entrées et sorties de gibier"
             res_model="wizard.gibier"
+            view_mode='form'
+            view_type='form'
+            target='new' />
+
+        <!-- Wizard pour éditer les articles par client -->
+        <act_window id="action_wizard_articles_par_client"
+            name="Édition des articles par client"
+            res_model="wizard.articles.par.client"
             view_mode='form'
             view_type='form'
             target='new' />
@@ -43,5 +85,9 @@
                 action="action_wizard_gibier"
                 parent="stock.menu_stock_root" />
 
+        <!-- Accès au wizard "Édition des articles par client" -->
+        <menuitem id="menu_wizard_articles_par_client"
+                action="action_wizard_articles_par_client"
+                parent="base.menu_base_partner" />
     </data>
 </openerp>
