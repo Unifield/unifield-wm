@@ -61,12 +61,17 @@
             <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="C.A / Poids par représentant et par an">
-                    <field name="representant_ids" nolabel="1" colspan="4"/>
+                    <field name="representant_deb_ref" colspan="4"/>
+                    <newline />
+                    <field name="representant_fin_ref" colspan="4"/>
                     <newline />
                     <group colspan="4">
                         <label string="De : "/><field name="annee_debut" nolabel="1"/>
                         <label string="à : "/><field name="annee_fin" nolabel="1"/>
                     </group>
+                    <separator string="Options"/>
+                    <newline/>
+                    <field name="tous_representants"/>
                     <newline />
                     <button string="Ok" name='action_confirmer' type="object" icon="gtk-apply" />
                     <button string="Annuler" special='cancel' icon='gtk-cancel' />

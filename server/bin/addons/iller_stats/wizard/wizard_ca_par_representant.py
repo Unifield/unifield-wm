@@ -33,15 +33,21 @@ class wizard_ca_par_representant(osv.osv_memory):
     _description = "Wizard pour le C.A et le poids vendu par représentant"
 
     _columns = {
-        'representant_ids': fields.many2many('res.users', 'wiz_ca_par_repr', 'wizard_id', 'user_id', string="Représentant début", 
-            help="Permet de sélectionner les représentants sur lesquels étudier le C.A.", required=True),
-        'annee_debut': fields.integer(string='Année de début', size=4, help="Date à partir de laquelle nous effectuons le suivi.", required=True),
-        'annee_fin': fields.integer(string='Année de fin', size=4, help="Date jusqu'à laquelle nous effectuons le suivi.", required=True),
+        'representant_deb_ref': fields.integer(string="Représentant début", required=True, 
+            help="Permet de sélectionner le représentant de début sur lesquel étudier le C.A."),
+        'representant_fin_ref': fields.integer(string="Représentant fin", required=True, 
+            help="Permet de sélectionner le représentant de début sur lesquel étudier le C.A."),
+        'annee_debut': fields.integer(string='Année de début', size=4, required=True, 
+            help="Date à partir de laquelle nous effectuons le suivi."),
+        'annee_fin': fields.integer(string='Année de fin', size=4, required=True, 
+            help="Date jusqu'à laquelle nous effectuons le suivi."),
+        'tous_representants': fields.boolean(string="Tous les représentants ?"),
     }
 
     _defaults = {
         'annee_debut': lambda *a: int(time.strftime('%Y')),
         'annee_fin': lambda *a: int(time.strftime('%Y')),
+        'tous_representants': lambda *a: False,
     }
 
     def creation_lignes_annee(self, cr, uid, ids, date_deb=None, date_fin=None, total=False, context={}):
@@ -52,6 +58,8 @@ class wizard_ca_par_representant(osv.osv_memory):
          - total : définit si la ligne est une ligne de total final ou pas
         """
         # Vérification des valeurs fournies
+        if not ids:
+            raise osv.except_osv(_('Erreur'), _('Paramètre manquant.'))
         if isinstance(ids, (int, long)):
             ids = [ids]
         if not date_deb and not date_fin:
@@ -117,8 +125,16 @@ class wizard_ca_par_representant(osv.osv_memory):
         Valide les données saisies et renvoie le C.A par mois pour chaque année donnée dans la plage citée.
         """
         # Récupération des données
+        user_obj = self.pool.get('res.users')
         wizard = self.browse(cr, uid, ids[0], context=context)
-        representants = wizard.representant_ids
+        representant_deb = wizard.representant_deb_ref
+        representant_fin = wizard.representant_fin_ref
+        tous_representants = wizard.tous_representants
+        representant_ids = user_obj.search(cr, uid, [('code_saler', '>=', representant_deb), ('code_saler', '<=', representant_fin)])
+        if tous_representants:
+            representant_ids = user_obj.search(cr, uid, [], context=context)
+        if not representant_ids:
+            raise osv.except_osv(_('Erreur'), _('Aucun représentant trouvé.'))
         date_deb = wizard.annee_debut
         date_fin = wizard.annee_fin
         # Vérification de la validité des données
@@ -126,22 +142,20 @@ class wizard_ca_par_representant(osv.osv_memory):
             raise osv.except_osv(_('Attention'), _('La date de fin saisie doit être supérieure à celle de début !'))
         # Préparation de certaines données
         ecpr_obj = self.pool.get('edition.ca.par.representant')
+        representants = user_obj.browse(cr, uid, representant_ids, context=context)
+        # TODO: AJOUTER ICI TOUS LES REPRESENTANTS SI LA CASE A ÉTÉ COCHÉE
         # on vide la table osv_memory entière
         ecpr_ids = ecpr_obj.search(cr, uid, [], context=context)
         ecpr_obj.unlink(cr, uid, ecpr_ids, context=context)
         # On boucle sur chaque représentant
-        for i, representant in enumerate(representants):
+        for representant in representants:
             # Initialisation de quelques valeurs
             total_repr = 0          # total C.A du représentant pour la période donnée
             total_repr_qte = 0      # total du poids des ventes effectuées par le représentant
             total_repr_clt = 0      # total du nombre de clients différents que ce vendeur a réussi à obtenir/vendre
             # On veut obtenir la ligne suivante (répartie sur la premier colonne, puis les suivantes en laissant la colonne 2 libres) : 
             # REPRÉSENTANT : 1  GREINER  JEAN  PIERRE  N
-            repr_vals = {'designation': 'REPRÉSENTANT ' + str(i+1) + ' : ' + str(representant.name[:100])}
-            # Espacement du nom du représentant sur plusieurs lignes
-            #for idx, morceau in enumerate(representant.name.split(' ')):
-            #    le_mois = 'mois' + str(idx + 2)
-            #    repr_vals.update({le_mois: morceau})
+            repr_vals = {'designation': 'REPRÉSENTANT ' + str(representant.code_saler or None) + ' : ' + str(representant.name[:100])}
             ecpr_obj.create(cr, uid, repr_vals, context=context)
             # On ajoute les lignes pour le représentant
             self.creation_lignes_annee(cr, uid, [representant.id], date_deb, date_fin, total=False, context=context)
