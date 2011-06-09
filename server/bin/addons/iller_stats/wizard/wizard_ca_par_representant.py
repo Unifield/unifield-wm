@@ -44,6 +44,74 @@ class wizard_ca_par_representant(osv.osv_memory):
         'annee_fin': lambda *a: int(time.strftime('%Y')),
     }
 
+    def creation_lignes_annee(self, cr, uid, ids, date_deb=None, date_fin=None, total=False, context={}):
+        """
+        Crée des lignes de 'edition_ca_par_representant'.
+        NB: 
+         - ids : liste d'identifiant des représentants
+         - total : définit si la ligne est une ligne de total final ou pas
+        """
+        # Vérification des valeurs fournies
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+        if not date_deb and not date_fin:
+            raise osv.except_osv(_('Erreur'), _('Il manque une ou plusieurs dates.'))
+        # Préparation de certains objets
+        ecpr_obj = self.pool.get('edition.ca.par.representant')
+        sql = """SELECT SUM(ai.amount_total) AS ca, SUM(ail.quantity) AS qte, COUNT(ai.partner_id) AS CLI
+            FROM account_invoice AS ai, account_invoice_line AS ail
+            WHERE ai.state in ('open', 'paid')
+            AND ai.user_id in %s
+            AND ail.invoice_id = ai.id
+            AND ai.date_invoice >= %s
+            AND ai.date_invoice <= %s;
+        """
+        # On boucle sur chaque année
+        for annee in range(date_deb, date_fin+1, 1):
+            # initialisation de quelques valeurs
+            total_repr_annee = 0
+            total_repr_qte_annee = 0
+            total_repr_clt_annee = 0
+            repr_annee_vals = {}        # données pour le total de l'année pour le C.A
+            repr_annee_qte_vals = {}    # données pour le total de l'année pour le poids/quantité
+            repr_annee_clt_vals = {}    # données pour le total de l'année pour le nombre de clients
+            # puis on boucle sur chaque mois pour un représentant donné
+            for mois in range (1, 13, 1):
+                # création des dates de début et de fin
+                periode_deb = str(annee) + '-' + str(mois) + '-' + '01'
+                periode_fin = str(annee) + '-' + str(mois) + '-' + str(calendar.monthrange(annee, mois)[1])
+                # execution SQL
+                cr.execute(sql, (tuple(ids), str(periode_deb), str(periode_fin)))
+                res = cr.fetchall()
+                # récupération des données
+                chiffre_affaire = (res[0][0] and res[0][0]) or 0.0
+                quantite = (res[0][1] and res[0][1]) or 0.0
+                clt = (res[0][2] and res[0][2]) or 0.0
+                champ = 'mois' + str(mois)
+                # mise à jour des lignes
+                repr_annee_vals.update({champ: str(chiffre_affaire)})
+                repr_annee_qte_vals.update({champ: str(quantite)})
+                repr_annee_clt_vals.update({champ: str(clt)})
+                # mise à jour des totaux
+                total_repr_annee += chiffre_affaire
+                total_repr_qte_annee += quantite
+                total_repr_clt_annee += clt
+            # On complète les données avant de les ajouter
+            designation_deb = '- ' + str(annee) + ' '
+            if total:
+                designation_deb = '* - ' + str(annee) + ' '
+            designation_ca = designation_deb + 'C.A.'
+            designation_qte = designation_deb + 'QTÉ'
+            designation_clt = designation_deb + 'N.CLI'
+            repr_annee_vals.update({'designation': designation_ca, 'total': str(total_repr_annee)})
+            repr_annee_qte_vals.update({'designation': designation_qte, 'total': str(total_repr_qte_annee)})
+            repr_annee_clt_vals.update({'designation': designation_clt, 'total': str(total_repr_clt_annee)})
+            # Ajout des lignes
+            ecpr_obj.create(cr, uid, repr_annee_vals, context=context)
+            ecpr_obj.create(cr, uid, repr_annee_qte_vals, context=context)
+            ecpr_obj.create(cr, uid, repr_annee_clt_vals, context=context)
+        return True
+
     def action_confirmer(self, cr, uid, ids, context={}):
         """
         Valide les données saisies et renvoie le C.A par mois pour chaque année donnée dans la plage citée.
@@ -57,16 +125,7 @@ class wizard_ca_par_representant(osv.osv_memory):
         if date_fin < date_deb:
             raise osv.except_osv(_('Attention'), _('La date de fin saisie doit être supérieure à celle de début !'))
         # Préparation de certaines données
-        repr_obj = self.pool.get('res.users')
         ecpr_obj = self.pool.get('edition.ca.par.representant')
-        sql = """SELECT SUM(ai.amount_total) AS ca, SUM(ail.quantity) AS qte, COUNT(ai.partner_id) AS CLI
-            FROM account_invoice AS ai, account_invoice_line AS ail
-            WHERE ai.state in ('open', 'paid')
-            AND ai.user_id = %s
-            AND ail.invoice_id = ai.id
-            AND ai.date_invoice >= %s
-            AND ai.date_invoice <= %s;
-        """
         # on vide la table osv_memory entière
         ecpr_ids = ecpr_obj.search(cr, uid, [], context=context)
         ecpr_obj.unlink(cr, uid, ecpr_ids, context=context)
@@ -84,94 +143,13 @@ class wizard_ca_par_representant(osv.osv_memory):
             #    le_mois = 'mois' + str(idx + 2)
             #    repr_vals.update({le_mois: morceau})
             ecpr_obj.create(cr, uid, repr_vals, context=context)
-            # puis on boucle sur chaque année pour un représentant donné
-            for annee in range(date_deb, date_fin+1, 1):
-                # initialisation de quelques valeurs
-                total_repr_annee = 0
-                total_repr_qte_annee = 0
-                total_repr_clt_annee = 0
-                repr_annee_vals = {}        # données pour le total de l'année pour le C.A
-                repr_annee_qte_vals = {}    # données pour le total de l'année pour le poids/quantité
-                repr_annee_clt_vals = {}    # données pour le total de l'année pour le nombre de clients
-                # puis on boucle sur chaque mois pour un représentant donné
-                for mois in range (1, 13, 1):
-                    # création des dates de début et de fin
-                    periode_deb = str(annee) + '-' + str(mois) + '-' + '01'
-                    periode_fin = str(annee) + '-' + str(mois) + '-' + str(calendar.monthrange(annee, mois)[1])
-                    # execution SQL
-                    cr.execute(sql, (representant.id, str(periode_deb), str(periode_fin)))
-                    res = cr.fetchall()
-                    # récupération des données
-                    chiffre_affaire = (res[0][0] and res[0][0]) or 0.0
-                    quantite = (res[0][1] and res[0][1]) or 0.0
-                    clt = (res[0][2] and res[0][2]) or 0.0
-                    champ = 'mois' + str(mois)
-                    # mise à jour des lignes
-                    repr_annee_vals.update({champ: str(chiffre_affaire)})
-                    repr_annee_qte_vals.update({champ: str(quantite)})
-                    repr_annee_clt_vals.update({champ: str(clt)})
-                    # mise à jour des totaux
-                    total_repr_annee += chiffre_affaire
-                    total_repr_qte_annee += quantite
-                    total_repr_clt_annee += clt
-                # On complète les données avant de les ajouter
-                repr_annee_vals.update({'designation': '- ' + str(annee) + ' C.A.', 'total': str(total_repr_annee)})
-                repr_annee_qte_vals.update({'designation': '- ' + str(annee) + ' QTE', 'total': str(total_repr_qte_annee)})
-                repr_annee_clt_vals.update({'designation': '- ' + str(annee) + ' N.CLI', 'total': str(total_repr_clt_annee)})
-                # Ajout des lignes
-                ecpr_obj.create(cr, uid, repr_annee_vals, context=context)
-                ecpr_obj.create(cr, uid, repr_annee_qte_vals, context=context)
-                ecpr_obj.create(cr, uid, repr_annee_clt_vals, context=context)
-
+            # On ajoute les lignes pour le représentant
+            self.creation_lignes_annee(cr, uid, [representant.id], date_deb, date_fin, total=False, context=context)
 
         # On s'occupe de la ligne de total de la fin de l'édition
         ecpr_obj.create(cr, uid, {'designation': '* TOTAL : '}, context=context)
-        total_sql = """SELECT SUM(ai.amount_total) AS ca, SUM(ail.quantity) AS qte, COUNT(ai.partner_id) AS CLI
-            FROM account_invoice AS ai, account_invoice_line AS ail
-            WHERE ai.state in ('open', 'paid')
-            AND ai.user_id in %s
-            AND ail.invoice_id = ai.id
-            AND ai.date_invoice >= %s
-            AND ai.date_invoice <= %s;
-        """
-        for annee in range(date_deb, date_fin+1, 1):
-            # initialisation de quelques valeurs
-            total_repr_annee = 0
-            total_repr_qte_annee = 0
-            total_repr_clt_annee = 0
-            repr_annee_vals = {}        # données pour le total de l'année pour le C.A
-            repr_annee_qte_vals = {}    # données pour le total de l'année pour le poids/quantité
-            repr_annee_clt_vals = {}    # données pour le total de l'année pour le nombre de clients
-            # puis on boucle sur chaque mois pour un représentant donné
-            for mois in range (1, 13, 1):
-                # création des dates de début et de fin
-                periode_deb = str(annee) + '-' + str(mois) + '-' + '01'
-                periode_fin = str(annee) + '-' + str(mois) + '-' + str(calendar.monthrange(annee, mois)[1])
-                # execution SQL
-                cr.execute(total_sql, (tuple([x.id for x in representants]), str(periode_deb), str(periode_fin)))
-                res = cr.fetchall()
-                # récupération des données
-                chiffre_affaire = (res[0][0] and res[0][0]) or 0.0
-                quantite = (res[0][1] and res[0][1]) or 0.0
-                clt = (res[0][2] and res[0][2]) or 0.0
-                champ = 'mois' + str(mois)
-                # mise à jour des lignes
-                repr_annee_vals.update({champ: chiffre_affaire})
-                repr_annee_qte_vals.update({champ: quantite})
-                repr_annee_clt_vals.update({champ: clt})
-                # mise à jour des totaux
-                total_repr_annee += chiffre_affaire
-                total_repr_qte_annee += quantite
-                total_repr_clt_annee += clt
-            # On complète les données avant de les ajouter
-            repr_annee_vals.update({'designation': '* - ' + str(annee) + ' C.A.', 'total': str(total_repr_annee)})
-            repr_annee_qte_vals.update({'designation': '* - ' + str(annee) + ' QTE', 'total': str(total_repr_qte_annee)})
-            repr_annee_clt_vals.update({'designation': '* - ' + str(annee) + ' N.CLI', 'total': str(total_repr_clt_annee)})
-            # Ajout des lignes
-            ecpr_obj.create(cr, uid, repr_annee_vals, context=context)
-            ecpr_obj.create(cr, uid, repr_annee_qte_vals, context=context)
-            ecpr_obj.create(cr, uid, repr_annee_clt_vals, context=context)
-        
+        self.creation_lignes_annee(cr, uid, [x.id for x in representants], date_deb, date_fin, total=True, context=context)
+
         # Récupération de l'id de la vue à afficher
         irmd_obj = self.pool.get('ir.model.data')
         view_ids = irmd_obj.search(cr, uid, [('name', '=', 'edition_ca_par_representant_tree'), ('model', '=', 'ir.ui.view')])
