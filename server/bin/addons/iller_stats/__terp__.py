@@ -35,9 +35,10 @@
     ],
     "update_xml": [
         'entree_article_view.xml',
+        'ca_client_view.xml',
+        'iller_stats_report.xml',
         'stats_view.xml',
         'stats_wizard.xml',
-        #'iller_stats_report.xml',
     ],
     "demo_xml": [
     ],

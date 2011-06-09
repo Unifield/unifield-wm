@@ -21,6 +21,7 @@
 ##############################################################################
 
 import entree_article
+import ca_client
 import report
 import wizard
 

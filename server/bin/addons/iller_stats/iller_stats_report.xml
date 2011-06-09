@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<openerp>
+	<data>
+
+        <report id="report_entree_article"
+                name="report.entree.article"
+                string="Entrées des articles"
+                model="stats.entree.article"
+                rml="iller_stats/report/entree_article.rml"
+                header="False"
+                menu="False"
+                auto="False" />
+
+        <report id="report_ca_client_periode"
+                name="ca.client.periode"
+                string="CA par client - 3 périodes"
+                model="stats.ca.client.trois.periodes"
+                rml="iller_stats/report/ca_client_periode.rml"
+                header="False"
+                menu="False"
+                auto="False" />
+
+	</data>
+</openerp>
+
