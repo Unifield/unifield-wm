@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="gibier_entree_sortie_tree" model="ir.ui.view">
+            <field name="name">gibier.entree.sortie.tree</field>
+            <field name="model">gibier.entree.sortie</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="État des entrées et des sorties de gibier">
+                    <field name="type"/>
+                    <field name="date"/>
+                    <field name="origine"/>
+                    <field name="nom"/>
+                    <field name="article"/>
+                    <field name="designation"/>
+                    <field name="qte"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="articles_par_client_tree" model="ir.ui.view">
+            <field name="name">articles.par.client.tree</field>
+            <field name="model">articles.par.client</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Édition des articles par client" colors="orange:est_total==True">
+                    <field name="nom"/>
+                    <field name="quantite"/>
+                    <field name="ca_net"/>
+                    <field name="prix_moyen"/>
+                    <field name="remise"/>
+                    <field name="est_total" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+    </data>
+</openerp>

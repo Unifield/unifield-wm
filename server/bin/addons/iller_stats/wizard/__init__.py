@@ -21,6 +21,8 @@
 #
 ##############################################################################
 
-import wizard_iller_partial_picking
+import wizard_gibier
+import wizard_articles_par_client
+
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
