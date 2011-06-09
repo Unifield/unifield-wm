@@ -54,6 +54,26 @@
             </field>
         </record>
 
+    <!-- Wizard pour le C.A par représentant et par an -->
+        <record id="wizard_ca_par_representant_view" model="ir.ui.view">
+            <field name="name">wizard.ca.par.representant.view</field>
+            <field name="model">wizard.ca.par.representant</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="C.A / Poids par représentant et par an">
+                    <field name="representant_ids" nolabel="1" colspan="4"/>
+                    <newline />
+                    <group colspan="4">
+                        <label string="De : "/><field name="annee_debut" nolabel="1"/>
+                        <label string="à : "/><field name="annee_fin" nolabel="1"/>
+                    </group>
+                    <newline />
+                    <button string="Ok" name='action_confirmer' type="object" icon="gtk-apply" />
+                    <button string="Annuler" special='cancel' icon='gtk-cancel' />
+                </form>
+            </field>
+        </record>
+
     <!-- Actions -->
         <!-- Wizard pour obtenir l'état des entrées et sorties de gibier -->
         <act_window id="action_wizard_gibier"
@@ -71,6 +91,14 @@
             view_type='form'
             target='new' />
 
+        <!-- Wizard pour éditer le C.A par représentant et par an -->
+        <act_window id="action_wizard_ca_par_representant"
+            name="Édition du C.A/POIDS par représentant et par an"
+            res_model="wizard.ca.par.representant"
+            view_mode='form'
+            view_type='form'
+            target='new' />
+
     <!-- Menus -->
         <menuitem id="menu_wizard_gibier"
                 action="action_wizard_gibier"
@@ -81,5 +109,9 @@
                 action="action_wizard_articles_par_client"
                 parent="base.menu_base_partner" />
 
+        <!-- Accès au wizard "Édition des articles par client" -->
+        <menuitem id="menu_wizard_ca_par_representant"
+                action="action_wizard_ca_par_representant"
+                parent="sale.menu_sale_root" />
     </data>
 </openerp>

@@ -35,5 +35,29 @@
             </field>
         </record>
 
+        <record id="edition_ca_par_representant_tree" model="ir.ui.view">
+            <field name="name">edition.ca.par.representant.tree</field>
+            <field name="model">edition.ca.par.representant</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Édition du C.A/POIDS par représentant et par an" colors="orange:designation[0]=='*'">
+                    <field name="designation"/>
+                    <field name="mois1"/>
+                    <field name="mois2"/>
+                    <field name="mois3"/>
+                    <field name="mois4"/>
+                    <field name="mois5"/>
+                    <field name="mois6"/>
+                    <field name="mois7"/>
+                    <field name="mois8"/>
+                    <field name="mois9"/>
+                    <field name="mois10"/>
+                    <field name="mois11"/>
+                    <field name="mois12"/>
+                    <field name="total"/>
+                </tree>
+            </field>
+        </record>
+
     </data>
 </openerp>
