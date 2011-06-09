@@ -4,7 +4,7 @@
 from osv import osv
 from osv import fields
 from datetime import date
-
+from tools.translate import _
 
 class iller_partner(osv.osv):
     _name = 'res.partner'
@@ -190,6 +190,10 @@ class res_users(osv.osv):
     _columns = {
         'code_saler': fields.integer(string='Code Vendeur'),
     }
+
+    _sql_constraints = [
+        ('code_saler_key', 'UNIQUE (code_saler)', _('Ce code vendeur a déjà été attribué !'))
+    ]
 
 res_users()
 
