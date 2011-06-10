@@ -59,5 +59,21 @@
             </field>
         </record>
 
+        <record id="edition_qte_clt_cinq_periodes_tree" model="ir.ui.view">
+            <field name="name">edition.qte.clt.cinq.periodes.tree</field>
+            <field name="model">edition.qte.clt.cinq.periodes</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree colors="orange:est_client==True" string="Édition des quantités commandées par client et par article sur 5 périodes">
+                    <field name="designation"/>
+                    <field name="periode1"/>
+                    <field name="periode2"/>
+                    <field name="periode3"/>
+                    <field name="periode4"/>
+                    <field name="periode5"/>
+                </tree>
+            </field>
+        </record>
+
     </data>
 </openerp>

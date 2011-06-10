@@ -81,6 +81,58 @@
             </field>
         </record>
 
+    <!-- Wizard pour la quantité commandée par client et par article sur 5 périodes données -->
+        <record id="wizard_qte_clt_cinq_periodes_view" model="ir.ui.view">
+            <field name="name">wizard.qte.clt.cinq.periodes.view</field>
+            <field name="model">wizard.qte.clt.cinq.periodes</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Quantité commandée par client et par article sur 5 périodes">
+                    <field name="partner_deb_id" colspan="4"/>
+                    <newline />
+                    <field name="partner_fin_id" colspan="4"/>
+                    <newline />
+                    <separator string="Période 1"/>
+                    <newline />
+                    <group colspan="4">
+                        <label string="De : "/><field name="date_debut1" nolabel="1"/>
+                        <label string="à : "/><field name="date_fin1" nolabel="1"/>
+                    </group>
+                    <newline />
+                    <separator string="Période 2"/>
+                    <newline />
+                    <group colspan="4">
+                        <label string="De : "/><field name="date_debut2" nolabel="1"/>
+                        <label string="à : "/><field name="date_fin2" nolabel="1"/>
+                    </group>
+                    <newline />
+                    <separator string="Période 3"/>
+                    <newline />
+                    <group colspan="4">
+                        <label string="De : "/><field name="date_debut3" nolabel="1"/>
+                        <label string="à : "/><field name="date_fin3" nolabel="1"/>
+                    </group>
+                    <newline />
+                    <separator string="Période 4"/>
+                    <newline />
+                    <group colspan="4">
+                        <label string="De : "/><field name="date_debut4" nolabel="1"/>
+                        <label string="à : "/><field name="date_fin4" nolabel="1"/>
+                    </group>
+                    <newline />
+                    <separator string="Période 5"/>
+                    <newline />
+                    <group colspan="4">
+                        <label string="De : "/><field name="date_debut5" nolabel="1"/>
+                        <label string="à : "/><field name="date_fin5" nolabel="1"/>
+                    </group>
+                    <newline />
+                    <button string="Ok" name='action_confirmer' type="object" icon="gtk-apply" />
+                    <button string="Annuler" special='cancel' icon='gtk-cancel' />
+                </form>
+            </field>
+        </record>
+
     <!-- Actions -->
         <!-- Wizard pour obtenir l'état des entrées et sorties de gibier -->
         <act_window id="action_wizard_gibier"
@@ -106,6 +158,14 @@
             view_type='form'
             target='new' />
 
+        <!-- Wizard pour éditer la quantité commandée par client et par article sur 5 périodes -->
+        <act_window id="action_wizard_qte_clt_cinq_periodes"
+            name="Quantité commandée par client et par article sur 5 périodes"
+            res_model="wizard.qte.clt.cinq.periodes"
+            view_mode='form'
+            view_type='form'
+            target='new' />
+
     <!-- Menus -->
         <menuitem id="menu_wizard_gibier"
                 action="action_wizard_gibier"
@@ -119,6 +179,11 @@
         <!-- Accès au wizard "Édition des articles par client" -->
         <menuitem id="menu_wizard_ca_par_representant"
                 action="action_wizard_ca_par_representant"
+                parent="sale.menu_sale_root" />
+
+        <!-- Accès au wizard "Édition des quantités commandées par client et par article sur 5 périodes" -->
+        <menuitem id="menu_wizard_qte_clt_cinq_periodes"
+                action="action_wizard_qte_clt_cinq_periodes"
                 parent="sale.menu_sale_root" />
     </data>
 </openerp>
