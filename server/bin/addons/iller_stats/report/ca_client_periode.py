@@ -78,7 +78,6 @@ class ca_client_periode(report_sxw.rml_parse):
 
 
         if isinstance(partner_id, type([])):
-            print partner_id
             invoice_domain.extend([('partner_id', 'in', partner_id)])
         else:
             invoice_domain.extend([('partner_id', '=', partner_id)])

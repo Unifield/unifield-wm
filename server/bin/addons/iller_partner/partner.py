@@ -10,6 +10,8 @@ class iller_partner(osv.osv):
     _name = 'res.partner'
     _inherit = 'res.partner'
 
+    _order = 'ref, name, id'
+
     def name_search(self, cr, uid, name, args=None, operator='ilike', context=None, limit=80):
         if not args:
             args=[]
