@@ -33,9 +33,9 @@ class wizard_ca_par_representant(osv.osv_memory):
     _description = "Wizard pour le C.A et le poids vendu par représentant"
 
     _columns = {
-        'representant_deb_ref': fields.integer(string="Représentant début", required=True, 
+        'representant_deb_ref': fields.many2one('res.users', string="Représentant début", required=True, 
             help="Permet de sélectionner le représentant de début sur lesquel étudier le C.A."),
-        'representant_fin_ref': fields.integer(string="Représentant fin", required=True, 
+        'representant_fin_ref': fields.many2one('res.users', string="Représentant fin", required=True, 
             help="Permet de sélectionner le représentant de début sur lesquel étudier le C.A."),
         'annee_debut': fields.integer(string='Année de début', size=4, required=True, 
             help="Date à partir de laquelle nous effectuons le suivi."),
@@ -127,8 +127,15 @@ class wizard_ca_par_representant(osv.osv_memory):
         # Récupération des données
         user_obj = self.pool.get('res.users')
         wizard = self.browse(cr, uid, ids[0], context=context)
-        representant_deb = wizard.representant_deb_ref
-        representant_fin = wizard.representant_fin_ref
+        representant_deb = None
+        representant_fin = None
+        if wizard.representant_deb_ref and wizard.representant_deb_ref.code_saler:
+            representant_deb = wizard.representant_deb_ref.code_saler
+        if wizard.representant_fin_ref and wizard.representant_fin_ref.code_saler:
+            representant_fin = wizard.representant_fin_ref.code_saler
+        if not representant_deb or not representant_fin:
+            raise osv.except_osv(_('Erreur'), _("Le champ 'Code Vendeur' est manquant pour l'un des représentant sélectionné."))
+        representant_fin = wizard.representant_fin_ref.code_saler
         tous_representants = wizard.tous_representants
         representant_ids = user_obj.search(cr, uid, [('code_saler', '>=', representant_deb), ('code_saler', '<=', representant_fin)])
         if tous_representants:
