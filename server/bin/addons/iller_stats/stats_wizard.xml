@@ -28,7 +28,9 @@
             <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Édition des articles par client">
-                    <field name="partner_ids" nolabel="1" colspan="4" domain="[('customer', '=', True)]"/>
+                    <field name="partner_deb_id" domain="[('customer', '=', True)]"/>
+                    <newline/>
+                    <field name="partner_fin_id" domain="[('customer', '=', True)]"/>
                     <newline/>
                     <group colspan="4">
                         <label string="Du "/>

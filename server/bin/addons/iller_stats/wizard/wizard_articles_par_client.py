@@ -34,6 +34,10 @@ class wizard_articles_par_client(osv.osv_memory):
         'partner_ids': fields.many2many('res.partner', 'wiz_art_clt_rel', 'wizard_id', 'partner_id', string="Client(s)", help="Choisir les clients dont vous \
             désirez éditer les articles. Maintenez la touche CTRL de votre clavier pour en sélectionner plusieurs. Utilisez la touche majuscule pour \
             sélectionner une plage de clients.", required=True),
+        'partner_deb_id': fields.many2one('res.partner', string="Client de début", required=True, 
+            help="Code client à partir duquel nous commençons le traitement"),
+        'partner_fin_id': fields.many2one('res.partner', string="Client de fin", required=True,
+            help="Code client jusqu'auquel aller pour l'édition des articles"),
         'date_debut': fields.date(string="Date de début", help="Date de début de la période sur laquelle chercher les articles  pour un ou plusieurs clients \
             donnés.", required=True),
         'date_fin': fields.date(string="Date de fin", help="Date de fin de la période sur laquelle chercher les articles pour un ou plusieurs clients \
@@ -59,7 +63,9 @@ class wizard_articles_par_client(osv.osv_memory):
         if isinstance(ids, (int, long)):
             ids = [ids]
         wizard = self.browse(cr, uid, ids[0], context=context)
-        partner_ids = [x.id for x in wizard.partner_ids] or []
+        partner_deb_ref = wizard.partner_deb_id.ref
+        partner_fin_ref = wizard.partner_fin_id.ref
+        partner_ids = self.pool.get("res.partner").search(cr, uid, [('ref', '>=', partner_deb_ref), ('ref', '<=', 'partner_fin_ref')], context=context)
         date_deb = wizard.date_debut
         date_fin = wizard.date_fin
         decoupe_seulement = wizard.est_decoupe or False
