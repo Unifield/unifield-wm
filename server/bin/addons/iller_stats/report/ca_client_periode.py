@@ -41,7 +41,7 @@ class ca_client_periode(report_sxw.rml_parse):
         })
 
     def get_partners(self, partner_ids):
-        return self.pool.get('res.partner').browse(self.cr, self.uid, partner_ids[:10])
+        return self.pool.get('res.partner').browse(self.cr, self.uid, partner_ids)
 
     def get_info(self, partner_id, date_debut, date_fin, month):
         partner_obj = self.pool.get('res.partner')

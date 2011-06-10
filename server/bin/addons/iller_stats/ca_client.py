@@ -111,5 +111,83 @@ class stats_ca_client_trois_periodes(osv.osv_memory):
 
 stats_ca_client_trois_periodes()
 
+class stats_ca_client_par_an(osv.osv_memory):
+    _name = 'stats.ca.client.par.an'
+
+    _columns = {
+        'depart_partner_id': fields.many2one('res.partner', 'Client Début'),
+        'fin_partner_id': fields.many2one('res.partner', 'Client Fin'),
+        'annee_depart': fields.integer(string='Année de début'),
+        'annee_fin': fields.integer(string='Année de fin'),
+    }
+
+    def default_get(self, cr, uid, fields, context={}):
+        '''
+        Mettre date de début au début du mois courant et date fin au dernier jour
+        '''
+        res = super(stats_ca_client_par_an, self).default_get(cr, uid, fields, context=context)
+ 
+        today = date.today()
+        res['annee_depart'] = today.year
+        res['annee_fin'] = today.year
+ 
+        return res
+
+    def print_report(self, cr, uid, ids, context={}):
+        stat = self.browse(cr, uid, ids)[0]
+
+        # Rechercher des référence des partenaires de début et de fin
+        partner_obj = self.pool.get('res.partner')
+        ref_partner_debut = partner_obj.browse(cr, uid, [stat.depart_partner_id.id])[0].ref
+        ref_partner_fin = partner_obj.browse(cr, uid, [stat.fin_partner_id.id])[0].ref
+
+        # Recherche des partenaires corrspondants
+        partner_ids = partner_obj.search(cr, uid, [('ref', '>=', ref_partner_debut), ('ref', '<=', ref_partner_fin)])
+
+        if (stat.annee_depart < 1970 and stat.annee_depart > 2100) or (stat.annee_fin < 1970 and stat.annee_fin > 2100):
+            raise osv.except_osv('Erreur', 'Les années doivent être comprises entre 1970 et 2100')
+        if stat.annee_depart > stat.annee_fin:
+            raise osv.except_osv('Erreur', 'L\'année de départ doit être inférieur ou égale à l\'année de fin')
+
+        partners = []
+        partners_by_repr = {}
+        invoice_ids = []
+        annees = []
+
+        date_depart = date(stat.annee_depart, 1, 1)
+        date_fin = date(stat.annee_fin, 12, 31)
+
+        i = 0
+        current_year = stat.annee_depart
+        while i <= stat.annee_fin-current_year:
+           annees.append(current_year)
+           i += 1
+           current_year += 1
+
+        invoice_ids.extend(self.pool.get('account.invoice').search(cr, uid, [('date_invoice', '>=', date_depart),
+                                                                             ('date_invoice', '<=', date_fin),
+                                                                             ('partner_id', 'in', partner_ids),
+                                                                             ('type', '=', 'out_invoice')]))
+
+
+        for res in self.pool.get('account.invoice').read(cr, uid, invoice_ids, ['partner_id', 'user_id']):
+            if res['partner_id'][0] not in partners:
+                partners.append(res['partner_id'][0])
+
+                if not partners_by_repr.get(res['user_id'][0], False):
+                    partners_by_repr.update({res['user_id'][0]: []})
+
+                partners_by_repr.get(res['user_id'][0]).append(res['partner_id'][0])
+
+        datas = {'ids': ids,
+                 'model': 'stats.ca.client.par.an',
+                 'form': {'partners': partners_by_repr, 'annees': annees}}
+
+        return {'type': 'ir.actions.report.xml',
+                'report_name': 'ca.client.par.an',
+                'datas': datas}
+
+stats_ca_client_par_an()
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

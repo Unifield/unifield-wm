@@ -1,0 +1,608 @@
+<?xml version="1.0"?>
+<document filename="test.pdf">
+  <template pageSize="(595.0,842.0)" title="Test" author="Martin Simon" allowSplitting="20">
+    <pageTemplate id="first">
+      <frame id="first" x1="57.0" y1="57.0" width="481" height="770"/>
+    </pageTemplate>
+  </template>
+  <stylesheet>
+    <blockTableStyle id="Standard_Outline">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+  </blockTableStyle>
+  <blockTableStyle id="Entete">
+      <blockAlignment value="CENTER" />
+      <blockValign value="MIDDLE" />
+      <lineStyle kind="OUTLINE" colorName="#000000" />
+  </blockTableStyle>
+  <blockTableStyle id="Infos">
+      <blockAlignment value="LEFT" />
+      <blockValign value="MIDDLE" />
+      <lineStyle kind="OUTLINE" colorName="#000000" />
+  </blockTableStyle>
+  <blockTableStyle id="Representant">
+      <blockAlignment value="LEFT" />
+      <blockValign value="MIDDLE" />
+      <lineStyle kind="OUTLINE" colorName="#000000" />
+  </blockTableStyle>
+  <blockTableStyle id="Partenaire">
+      <blockAlignment value="LEFT" />
+      <blockValign value="MIDDLE" />
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,0" stop="0,-1" />
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="-1,0" stop="-1,-1" />
+  </blockTableStyle>
+  <blockTableStyle id="Information">
+      <blockAlignment value="LEFT" />
+      <blockValign value="MIDDLE" />
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,0" stop="0,-1" />
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="-1,0" stop="-1,-1" />
+      <lineStyle kind="LINEBELOW" colorName="#BBBBBB" start="0,-1" stop="-1,-1" />
+  </blockTableStyle>
+  <blockTableStyle id="Tot_Representant">
+      <blockAlignment value="LEFT" />
+      <blockValign value="MIDDLE" />
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,0" stop="0,-1" />
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="-1,0" stop="-1,-1" />
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="0,0" stop="-1,-1" thickness="2" />
+  </blockTableStyle>
+  <blockTableStyle id="Tot_Information">
+      <blockAlignment value="LEFT" />
+      <blockValign value="MIDDLE" />
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,0" stop="0,-1" />
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="-1,0" stop="-1,-1" />
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="0,-1" stop="-1,-1" thickness="2" />
+  </blockTableStyle>
+    <initialize>
+      <paraStyle name="all" alignment="justify"/>
+  </initialize>
+    <paraStyle name="Standard" fontName="Helvetica" fontSize="6.0" leading="7" alignment="LEFT" />
+    <paraStyle name="Entete1" fontName="Helvetica" fontSize="10.0" leading="12" alignment="CENTER" />
+    <paraStyle name="Infos1" fontName="Helvetica" fontSize="6.0" leading="7" alignment="LEFT" />
+    <paraStyle name="Infos_Gen" fontName="Helvetica-Bold" fontSize="8.0" leading="12" alignment="LEFT" />
+    <paraStyle name="Infos" fontName="Helvetica" fontSize="6.0" leading="7" alignment="RIGHT" />
+    <paraStyle name="Infos1_Right" fontName="Helvetica" fontSize="6.0" leading="7" alignment="RIGHT" />
+    <images/>
+  </stylesheet>
+  <story>
+    <para style="Standard">[[ setLang('fr_FR') ]][[ repeatIn(objects, 'o') ]]</para>
+
+    <blockTable colWidths="540.0" style="Entete">
+        <tr>
+            <td>
+                <para style="Entete1">EDITION DU C.A ET QUANTITE /REPR/CLIENT/ANNEE</para>
+            </td>
+        </tr>
+    </blockTable>
+
+    <para style="Standard">
+        <font color="white"> </font>
+    </para>
+
+    <blockTable colWidths="75.0,205.0,50.0,50.0,80.0,80.0" style="Infos">
+        <tr>
+            <td>
+                <para style="Infos1_Right">DU CLIENT : </para>
+            </td>
+            <td>
+                <para style="Infos1">[[ '[%s] %s' % (o.depart_partner_id.ref, o.depart_partner_id.name) ]] </para>
+            </td>
+            <td>
+                <para style="Infos1_Right">DE : </para>
+            </td>
+            <td>
+                <para style="Infos1">[[ o.annee_depart ]]</para>
+            </td>
+            <td>
+                <para style="Infos1_Right">DATE :</para>
+            </td>
+            <td>
+                <para style="Infos1">[[ formatLang(time.strftime('%Y-%m-%d'), date=True) ]]</para>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <para style="Infos1_Right">AU CLIENT : </para>
+            </td>
+            <td>
+                <para style="Infos1">[[ '[%s] %s' % (o.fin_partner_id.ref, o.fin_partner_id.name) ]] </para>
+            </td>
+            <td>
+                <para style="Infos1_Right">A : </para>
+            </td>
+            <td>
+                <para style="Infos1">[[ o.annee_fin ]]</para>
+            </td>
+            <td>
+                <para style="Infos1_Right">HEURE :</para>
+            </td>
+            <td>
+                <para style="Infos1">[[ time.strftime('%H:%M:%S') ]]</para>
+            </td>
+        </tr>
+    </blockTable>
+
+    <para style="Standard">
+        <font color="white"> </font>
+    </para>
+
+    <section>
+        [[ repeatIn(getRepr(data['form']['partners'].keys()), 'r') ]]
+        
+        <para style="Standard">
+            <font color="white"> </font>
+        </para>
+
+        <blockTable colWidths="50.0,490.0" style="Representant">
+            <tr>
+                <td>
+                    <para style="Infos1"><font color="white"> </font></para>
+                </td>
+                <td>
+                    <para style="Infos1">[[ r.name ]]</para>
+                </td>
+            </tr>
+        </blockTable>
+
+        <blockTable colWidths="36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0" style="Information">
+            <tr>
+                <td>
+                    <para style="Infos"><font color="white"> </font></para>
+                </td>
+                <td>
+                    <para style="Infos"><font color="white"> </font></para>
+                </td>
+                <td>
+                    <para style="Infos">JAN</para>
+                </td>
+                <td>
+                    <para style="Infos">FEV</para>
+                </td>
+                <td>
+                    <para style="Infos">MAR</para>
+                </td>
+                <td>
+                    <para style="Infos">AVR</para>
+                </td>
+                <td>
+                    <para style="Infos">MAI</para>
+                </td>
+                <td>
+                    <para style="Infos">JUI</para>
+                </td>
+                <td>
+                    <para style="Infos">JUI</para>
+                </td>
+                <td>
+                    <para style="Infos">AOU</para>
+                </td>
+                <td>
+                    <para style="Infos">SEP</para>
+                </td>
+                <td>
+                    <para style="Infos">OCT</para>
+                </td>
+                <td>
+                    <para style="Infos">NOV</para>
+                </td>
+                <td>
+                    <para style="Infos">DEC</para>
+                </td>
+                <td>
+                    <para style="Infos">TOT</para>
+                </td>
+            </tr>
+        </blockTable>
+
+        <section>
+
+            [[ repeatIn(getPartners(data['form']['partners'][r.id]), 'p') ]]
+            <blockTable colWidths="50.0,120.0,120.0,50.0,200.0" style="Partenaire">
+                <tr>
+                    <td>
+                        <para style="Infos1">[[ p.ref ]]</para>
+                    </td>
+                    <td>
+                        <para style="Infos1">[[ p.name ]]</para>
+                    </td>
+                    <td>
+                        <para style="Infos1">[[ p.name ]]</para>
+                    </td>
+                    <td>
+                        <para style="Infos1">[[ p.address[0].zip ]]</para>
+                    </td>
+                    <td>
+                        <para style="Infos1">[[ p.address[0].city ]]</para>
+                    </td>
+                </tr>
+            </blockTable>
+
+            <section>
+                [[ repeatIn(data['form']['annees'], 'year') ]]
+
+                <blockTable colWidths="36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0" style="Information">
+                    <tr>
+                        <td>
+                            <para style="Infos">[[ year ]]</para>
+                        </td>
+                        <td>
+                            <para style="Infos">C.A.</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 1).get('caa', '')).split(',')[0] ]]</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 2).get('caa', '')).split(',')[0] ]]</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 3).get('caa', '')).split(',')[0] ]]</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 4).get('caa', '')).split(',')[0] ]]</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 5).get('caa', '')).split(',')[0] ]]</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 6).get('caa', '')).split(',')[0] ]]</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 7).get('caa', '')).split(',')[0] ]]</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 8).get('caa', '')).split(',')[0] ]]</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 9).get('caa', '')).split(',')[0] ]]</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 10).get('caa', '')).split(',')[0] ]]</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 11).get('caa', '')).split(',')[0] ]]</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 12).get('caa', '')).split(',')[0] ]]</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 0).get('caa', '')).split(',')[0] ]]</para>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>
+                            <para style="Infos"><font color="white"> </font></para>
+                        </td>
+                        <td>
+                            <para style="Infos">QTE</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 1).get('qty', '')).split(',')[0] ]]</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 2).get('qty', '')).split(',')[0] ]]</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 3).get('qty', '')).split(',')[0] ]]</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 4).get('qty', '')).split(',')[0] ]]</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 5).get('qty', '')).split(',')[0] ]]</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 6).get('qty', '')).split(',')[0] ]]</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 7).get('qty', '')).split(',')[0] ]]</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 8).get('qty', '')).split(',')[0] ]]</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 9).get('qty', '')).split(',')[0] ]]</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 10).get('qty', '')).split(',')[0] ]]</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 11).get('qty', '')).split(',')[0] ]]</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 12).get('qty', '')).split(',')[0] ]]</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 0).get('qty', '')).split(',')[0] ]]</para>
+                        </td>
+                    </tr>
+                </blockTable>
+
+            </section>
+
+            <blockTable colWidths="50.0,490.0" style="Tot_Representant">
+                <tr>
+                    <td>
+                        <para style="Infos1"><font color="white"> </font></para>
+                    </td>
+                    <td>
+                        <para style="Infos1">TOTAL REPRESENTANT</para>
+                    </td>
+                </tr>
+            </blockTable>
+
+            <section>
+                [[ repeatIn(data['form']['annees'], 'year') ]]
+
+                <blockTable colWidths="36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0" style="Tot_Information">
+                    <tr>
+                        <td>
+                            <para style="Infos">[[ year ]]</para>
+                        </td>
+                        <td>
+                            <para style="Infos">C.A.</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 1, r.id).get('caa', '')).split(',')[0] ]]</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 2, r.id).get('caa', '')).split(',')[0] ]]</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 3, r.id).get('caa', '')).split(',')[0] ]]</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 4, r.id).get('caa', '')).split(',')[0] ]]</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 5, r.id).get('caa', '')).split(',')[0] ]]</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 6, r.id).get('caa', '')).split(',')[0] ]]</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 7, r.id).get('caa', '')).split(',')[0] ]]</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 8, r.id).get('caa', '')).split(',')[0] ]]</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 9, r.id).get('caa', '')).split(',')[0] ]]</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 10, r.id).get('caa', '')).split(',')[0] ]]</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 11, r.id).get('caa', '')).split(',')[0] ]]</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 12, r.id).get('caa', '')).split(',')[0] ]]</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 0, r.id).get('caa', '')).split(',')[0] ]]</para>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>
+                            <para style="Infos"><font color="white"> </font></para>
+                        </td>
+                        <td>
+                            <para style="Infos">QTE</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 1, r.id).get('qty', '')).split(',')[0] ]]</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 2, r.id).get('qty', '')).split(',')[0] ]]</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 3, r.id).get('qty', '')).split(',')[0] ]]</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 4, r.id).get('qty', '')).split(',')[0] ]]</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 5, r.id).get('qty', '')).split(',')[0] ]]</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 6, r.id).get('qty', '')).split(',')[0] ]]</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 7, r.id).get('qty', '')).split(',')[0] ]]</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 8, r.id).get('qty', '')).split(',')[0] ]]</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 9, r.id).get('qty', '')).split(',')[0] ]]</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 10, r.id).get('qty', '')).split(',')[0] ]]</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 11, r.id).get('qty', '')).split(',')[0] ]]</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 12, r.id).get('qty', '')).split(',')[0] ]]</para>
+                        </td>
+                        <td>
+                            <para style="Infos">[[ formatLang(getInfos(year, p.id, 0, r.id).get('qty', '')).split(',')[0] ]]</para>
+                        </td>
+                    </tr>
+                </blockTable>
+
+            </section>
+        </section>
+    </section>
+    
+    <para style="Standard">
+        <font color="white"> </font>
+    </para>
+    <para style="Standard">
+        <font color="white"> </font>
+    </para>
+
+    <blockTable colWidths="50.0,490.0" style="Tot_Representant">
+        <tr>
+            <td>
+                <para style="Infos1"><font color="white"> </font></para>
+            </td>
+            <td>
+                <para style="Infos_Gen">TOTAL GENERAL</para>
+            </td>
+        </tr>
+    </blockTable>
+
+    <section>
+        [[ repeatIn(data['form']['annees'], 'year') ]]
+
+        <blockTable colWidths="36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0" style="Tot_Information">
+            <tr>
+                <td>
+                    <para style="Infos"><font color="white"> </font></para>
+                </td>
+                <td>
+                    <para style="Infos"><font color="white"> </font></para>
+                </td>
+                <td>
+                    <para style="Infos">JAN</para>
+                </td>
+                <td>
+                    <para style="Infos">FEV</para>
+                </td>
+                <td>
+                    <para style="Infos">MAR</para>
+                </td>
+                <td>
+                    <para style="Infos">AVR</para>
+                </td>
+                <td>
+                    <para style="Infos">MAI</para>
+                </td>
+                <td>
+                    <para style="Infos">JUI</para>
+                </td>
+                <td>
+                    <para style="Infos">JUI</para>
+                </td>
+                <td>
+                    <para style="Infos">AOU</para>
+                </td>
+                <td>
+                    <para style="Infos">SEP</para>
+                </td>
+                <td>
+                    <para style="Infos">OCT</para>
+                </td>
+                <td>
+                    <para style="Infos">NOV</para>
+                </td>
+                <td>
+                    <para style="Infos">DEC</para>
+                </td>
+                <td>
+                    <para style="Infos">TOT</para>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <para style="Infos">[[ year ]]</para>
+                </td>
+                <td>
+                    <para style="Infos">C.A.</para>
+                </td>
+                <td>
+                    <para style="Infos">[[ formatLang(getInfos(year, p.id, 1, False, True).get('caa', '')).split(',')[0] ]]</para>
+                </td>
+                <td>
+                    <para style="Infos">[[ formatLang(getInfos(year, p.id, 2, False, True).get('caa', '')).split(',')[0] ]]</para>
+                </td>
+                <td>
+                    <para style="Infos">[[ formatLang(getInfos(year, p.id, 3, False, True).get('caa', '')).split(',')[0] ]]</para>
+                </td>
+                <td>
+                    <para style="Infos">[[ formatLang(getInfos(year, p.id, 4, False, True).get('caa', '')).split(',')[0] ]]</para>
+                </td>
+                <td>
+                    <para style="Infos">[[ formatLang(getInfos(year, p.id, 5, False, True).get('caa', '')).split(',')[0] ]]</para>
+                </td>
+                <td>
+                    <para style="Infos">[[ formatLang(getInfos(year, p.id, 6, False, True).get('caa', '')).split(',')[0] ]]</para>
+                </td>
+                <td>
+                    <para style="Infos">[[ formatLang(getInfos(year, p.id, 7, False, True).get('caa', '')).split(',')[0] ]]</para>
+                </td>
+                <td>
+                    <para style="Infos">[[ formatLang(getInfos(year, p.id, 8, False, True).get('caa', '')).split(',')[0] ]]</para>
+                </td>
+                <td>
+                    <para style="Infos">[[ formatLang(getInfos(year, p.id, 9, False, True).get('caa', '')).split(',')[0] ]]</para>
+                </td>
+                <td>
+                    <para style="Infos">[[ formatLang(getInfos(year, p.id, 10, False, True).get('caa', '')).split(',')[0] ]]</para>
+                </td>
+                <td>
+                    <para style="Infos">[[ formatLang(getInfos(year, p.id, 11, False, True).get('caa', '')).split(',')[0] ]]</para>
+                </td>
+                <td>
+                    <para style="Infos">[[ formatLang(getInfos(year, p.id, 12, False, True).get('caa', '')).split(',')[0] ]]</para>
+                </td>
+                <td>
+                    <para style="Infos">[[ formatLang(getInfos(year, p.id, 0, False, True).get('caa', '')).split(',')[0] ]]</para>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+                    <para style="Infos"><font color="white"> </font></para>
+                </td>
+                <td>
+                    <para style="Infos">QTE</para>
+                </td>
+                <td>
+                    <para style="Infos">[[ formatLang(getInfos(year, p.id, 1, False, True).get('qty', '')).split(',')[0] ]]</para>
+                </td>
+                <td>
+                    <para style="Infos">[[ formatLang(getInfos(year, p.id, 2, False, True).get('qty', '')).split(',')[0] ]]</para>
+                </td>
+                <td>
+                    <para style="Infos">[[ formatLang(getInfos(year, p.id, 3, False, True).get('qty', '')).split(',')[0] ]]</para>
+                </td>
+                <td>
+                    <para style="Infos">[[ formatLang(getInfos(year, p.id, 4, False, True).get('qty', '')).split(',')[0] ]]</para>
+                </td>
+                <td>
+                    <para style="Infos">[[ formatLang(getInfos(year, p.id, 5, False, True).get('qty', '')).split(',')[0] ]]</para>
+                </td>
+                <td>
+                    <para style="Infos">[[ formatLang(getInfos(year, p.id, 6, False, True).get('qty', '')).split(',')[0] ]]</para>
+                </td>
+                <td>
+                    <para style="Infos">[[ formatLang(getInfos(year, p.id, 7, False, True).get('qty', '')).split(',')[0] ]]</para>
+                </td>
+                <td>
+                    <para style="Infos">[[ formatLang(getInfos(year, p.id, 8, False, True).get('qty', '')).split(',')[0] ]]</para>
+                </td>
+                <td>
+                    <para style="Infos">[[ formatLang(getInfos(year, p.id, 9, False, True).get('qty', '')).split(',')[0] ]]</para>
+                </td>
+                <td>
+                    <para style="Infos">[[ formatLang(getInfos(year, p.id, 10, False, True).get('qty', '')).split(',')[0] ]]</para>
+                </td>
+                <td>
+                    <para style="Infos">[[ formatLang(getInfos(year, p.id, 11, False, True).get('qty', '')).split(',')[0] ]]</para>
+                </td>
+                <td>
+                    <para style="Infos">[[ formatLang(getInfos(year, p.id, 12, False, True).get('qty', '')).split(',')[0] ]]</para>
+                </td>
+                <td>
+                    <para style="Infos">[[ formatLang(getInfos(year, p.id, 0, False, True).get('qty', '')).split(',')[0] ]]</para>
+                </td>
+            </tr>
+        </blockTable>
+
+    </section>
+
+  </story>
+</document>
+

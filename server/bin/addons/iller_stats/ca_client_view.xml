@@ -20,8 +20,8 @@
                     <separator colspan="4" string="Période 3" />
                     <field name="date_depart_per3" />
                     <field name="date_fin_per3" />
-                    <button colspan="2" string="Cancel" special="cancel" icon="gtk-cancel" />
-                    <button colspan="2" string="Print report" name="print_report" icon="gtk-print" type="object" />
+                    <button colspan="2" string="Annuler" special="cancel" icon="gtk-cancel" />
+                    <button colspan="2" string="Imprimer le rapport" name="print_report" icon="gtk-print" type="object" />
                 </form>
             </field>
         </record>
@@ -37,6 +37,38 @@
 
         <menuitem id="menu_stats_ca_client_trois_periodes"
                   action="act_stats_ca_client_trois_periodes"
+                  parent="main_statistiques" />
+
+        <record id="stats_ca_client_par_an_init" model="ir.ui.view">
+            <field name="name">stats.ca.client.par.an.init</field>
+            <field name="model">stats.ca.client.par.an</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="C.A par client par an">
+                    <separator colspan="4" string="Clients" />
+                    <field name="depart_partner_id" required="1" />
+                    <field name="fin_partner_id" required="1" />
+                    <separator colspan="4" string="Période                                                                        " />
+                    <field name="annee_depart" />
+                    <field name="annee_fin" />
+                    <separator colspan="4" string="Actions" />
+                    <button colspan="2" string="Annuler" special="cancel" icon="gtk-cancel" />
+                    <button colspan="2" string="Imprimer le rapport" name="print_report" icon="gtk-print" type="object" />
+                </form>
+            </field>
+        </record>
+
+        <record id="act_stats_ca_client_par_an" model="ir.actions.act_window">
+            <field name="name">C.A par client par an</field>
+            <field name="res_model">stats.ca.client.par.an</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="stats_ca_client_par_an_init" />
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_stats_ca_client_par_an"
+                  action="act_stats_ca_client_par_an"
                   parent="main_statistiques" />
 
 	</data>

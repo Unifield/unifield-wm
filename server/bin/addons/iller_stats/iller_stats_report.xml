@@ -20,6 +20,15 @@
                 menu="False"
                 auto="False" />
 
+        <report id="report_ca_client_par_an"
+                name="ca.client.par.an"
+                string="CA par client par an"
+                model="stats.ca.client.par.an"
+                rml="iller_stats/report/ca_client_par_an.rml"
+                header="False"
+                menu="False"
+                auto="False" />
+
 	</data>
 </openerp>
 
