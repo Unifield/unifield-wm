@@ -29,6 +29,8 @@ class stats_ca_client_trois_periodes(osv.osv_memory):
     _name = 'stats.ca.client.trois.periodes'
 
     _columns = {
+        'depart_partner_id': fields.many2one('res.partner', 'Client Début'),
+        'fin_partner_id': fields.many2one('res.partner', 'Client Fin'),
         'date_depart_per1': fields.date(string='Date de départ', required=True),
         'date_fin_per1': fields.date(string='Date de fin', required=True),
         'date_depart_per2': fields.date(string='Date de départ'),
@@ -51,6 +53,14 @@ class stats_ca_client_trois_periodes(osv.osv_memory):
 
     def print_report(self, cr, uid, ids, context={}):
         stat = self.browse(cr, uid, ids)[0]
+
+        # Rechercher des référence des partenaires de début et de fin
+        partner_obj = self.pool.get('res.partner')
+        ref_partner_debut = partner_obj.browse(cr, uid, [stat.depart_partner_id.id])[0].ref
+        ref_partner_fin = partner_obj.browse(cr, uid, [stat.fin_partner_id.id])[0].ref
+
+        # Recherche des partenaires corrspondants
+        partner_ids = partner_obj.search(cr, uid, [('ref', '>=', ref_partner_debut), ('ref', '<=', ref_partner_fin)])
 
         date_depart_per1 = datetime.strptime(stat.date_depart_per1, '%Y-%m-%d')
         date_fin_per1 = datetime.strptime(stat.date_fin_per1, '%Y-%m-%d')
@@ -76,12 +86,15 @@ class stats_ca_client_trois_periodes(osv.osv_memory):
 
         invoice_ids.extend(self.pool.get('account.invoice').search(cr, uid, [('date_invoice', '>=', stat.date_depart_per1),
                                                                              ('date_invoice', '<=', stat.date_fin_per1),
+                                                                             ('partner_id', 'in', partner_ids),
                                                                              ('type', '=', 'out_invoice')]))
         invoice_ids.extend(self.pool.get('account.invoice').search(cr, uid, [('date_invoice', '>=', stat.date_depart_per2),
                                                                              ('date_invoice', '<=', stat.date_fin_per2),
+                                                                             ('partner_id', 'in', partner_ids),
                                                                              ('type', '=', 'out_invoice')]))
         invoice_ids.extend(self.pool.get('account.invoice').search(cr, uid, [('date_invoice', '>=', stat.date_depart_per3),
                                                                              ('date_invoice', '<=', stat.date_fin_per3),
+                                                                             ('partner_id', 'in', partner_ids),
                                                                              ('type', '=', 'iout_invoice')]))
 
         for res in self.pool.get('account.invoice').read(cr, uid, invoice_ids, ['partner_id']):

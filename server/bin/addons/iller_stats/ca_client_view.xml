@@ -8,6 +8,9 @@
             <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="C.A par client sur 3 périodes">
+                    <separator colspan="4" string="Clients" />
+                    <field name="depart_partner_id" required="1" />
+                    <field name="fin_partner_id" required="1" />
                     <separator colspan="4" string="Période 1                                                                        " />
                     <field name="date_depart_per1" />
                     <field name="date_fin_per1" />

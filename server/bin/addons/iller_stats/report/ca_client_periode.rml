@@ -14,126 +14,59 @@
       <blockAlignment value="LEFT"/>
       <blockValign value="TOP"/>
       <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,0" stop="0,-1"/>
-      <lineStyle kind="LINEABOVE" colorName="#000000" start="0,0" stop="0,0"/>
-      <lineStyle kind="LINEBELOW" colorName="#000000" start="0,-1" stop="0,-1"/>
-      <lineStyle kind="LINEBEFORE" colorName="#000000" start="1,0" stop="1,-1"/>
-      <lineStyle kind="LINEABOVE" colorName="#000000" start="1,0" stop="1,0"/>
-      <lineStyle kind="LINEBELOW" colorName="#000000" start="1,-1" stop="1,-1"/>
-      <lineStyle kind="LINEBEFORE" colorName="#000000" start="2,0" stop="2,-1"/>
-      <lineStyle kind="LINEABOVE" colorName="#000000" start="2,0" stop="2,0"/>
-      <lineStyle kind="LINEBELOW" colorName="#000000" start="2,-1" stop="2,-1"/>
-      <lineStyle kind="LINEBEFORE" colorName="#000000" start="3,0" stop="3,-1"/>
-      <lineStyle kind="LINEABOVE" colorName="#000000" start="3,0" stop="3,0"/>
-      <lineStyle kind="LINEBELOW" colorName="#000000" start="3,-1" stop="3,-1"/>
-      <lineStyle kind="LINEBEFORE" colorName="#000000" start="4,0" stop="4,-1"/>
-      <lineStyle kind="LINEABOVE" colorName="#000000" start="4,0" stop="4,0"/>
-      <lineStyle kind="LINEBELOW" colorName="#000000" start="4,-1" stop="4,-1"/>
-      <lineStyle kind="LINEBEFORE" colorName="#000000" start="5,0" stop="5,-1"/>
-      <lineStyle kind="LINEAFTER" colorName="#000000" start="5,0" stop="5,-1"/>
-      <lineStyle kind="LINEABOVE" colorName="#000000" start="5,0" stop="5,0"/>
-      <lineStyle kind="LINEBELOW" colorName="#000000" start="5,-1" stop="5,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="0,0" stop="-1,0"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="0,0" stop="-1,0"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="-1,-1" />
     </blockTableStyle>
     <blockTableStyle id="Table2">
       <blockAlignment value="LEFT"/>
       <blockValign value="TOP"/>
       <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,0" stop="0,-1"/>
-      <lineStyle kind="LINEABOVE" colorName="#000000" start="0,0" stop="0,0"/>
-      <lineStyle kind="LINEBELOW" colorName="#000000" start="0,-1" stop="0,-1"/>
-      <lineStyle kind="LINEABOVE" colorName="#000000" start="1,0" stop="1,0"/>
-      <lineStyle kind="LINEBELOW" colorName="#000000" start="1,-1" stop="1,-1"/>
-      <lineStyle kind="LINEABOVE" colorName="#000000" start="2,0" stop="2,0"/>
-      <lineStyle kind="LINEBELOW" colorName="#000000" start="2,-1" stop="2,-1"/>
-      <lineStyle kind="LINEABOVE" colorName="#000000" start="3,0" stop="3,0"/>
-      <lineStyle kind="LINEBELOW" colorName="#000000" start="3,-1" stop="3,-1"/>
-      <lineStyle kind="LINEABOVE" colorName="#000000" start="4,0" stop="4,0"/>
-      <lineStyle kind="LINEBELOW" colorName="#000000" start="4,-1" stop="4,-1"/>
-      <lineStyle kind="LINEABOVE" colorName="#000000" start="5,0" stop="5,0"/>
-      <lineStyle kind="LINEBELOW" colorName="#000000" start="5,-1" stop="5,-1"/>
-      <lineStyle kind="LINEABOVE" colorName="#000000" start="6,0" stop="6,0"/>
-      <lineStyle kind="LINEBELOW" colorName="#000000" start="6,-1" stop="6,-1"/>
-      <lineStyle kind="LINEABOVE" colorName="#000000" start="7,0" stop="7,0"/>
-      <lineStyle kind="LINEBELOW" colorName="#000000" start="7,-1" stop="7,-1"/>
-      <lineStyle kind="LINEABOVE" colorName="#000000" start="8,0" stop="8,0"/>
-      <lineStyle kind="LINEBELOW" colorName="#000000" start="8,-1" stop="8,-1"/>
-      <lineStyle kind="LINEABOVE" colorName="#000000" start="9,0" stop="9,0"/>
-      <lineStyle kind="LINEBELOW" colorName="#000000" start="9,-1" stop="9,-1"/>
-      <lineStyle kind="LINEABOVE" colorName="#000000" start="10,0" stop="10,0"/>
-      <lineStyle kind="LINEBELOW" colorName="#000000" start="10,-1" stop="10,-1"/>
-      <lineStyle kind="LINEABOVE" colorName="#000000" start="11,0" stop="11,0"/>
-      <lineStyle kind="LINEBELOW" colorName="#000000" start="11,-1" stop="11,-1"/>
-      <lineStyle kind="LINEABOVE" colorName="#000000" start="12,0" stop="12,0"/>
-      <lineStyle kind="LINEBELOW" colorName="#000000" start="12,-1" stop="12,-1"/>
-      <lineStyle kind="LINEAFTER" colorName="#000000" start="13,0" stop="13,-1"/>
-      <lineStyle kind="LINEABOVE" colorName="#000000" start="13,0" stop="13,0"/>
-      <lineStyle kind="LINEBELOW" colorName="#000000" start="13,-1" stop="13,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="0,0" stop="-1,0"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="0,0" stop="-1,0"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="-1,-1" />
     </blockTableStyle>
     <blockTableStyle id="Table4">
       <blockAlignment value="LEFT"/>
       <blockValign value="TOP"/>
-      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,0" stop="0,0"/>
-      <lineStyle kind="LINEAFTER" colorName="#000000" start="-1,0" stop="13,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,0" stop="0,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="-1,-1" />
+      <lineStyle kind="LINEABOVE" colorName="#bbbbbb" start="0,0" stop="-1,0" />
     </blockTableStyle>
     <blockTableStyle id="Table3">
       <blockAlignment value="LEFT"/>
       <blockValign value="TOP"/>
       <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,0" stop="0,-1"/>
-      <lineStyle kind="LINEAFTER" colorName="#000000" start="-1,0" stop="13,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="-1,0" />
+    </blockTableStyle>
+    <blockTableStyle id="Table6">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,0" stop="0,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="-1,0" />
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="0,0" stop="-1,0"/>
     </blockTableStyle>
     <blockTableStyle id="Table5">
       <blockAlignment value="LEFT"/>
       <blockValign value="TOP"/>
       <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,0" stop="0,-1"/>
-      <lineStyle kind="LINEABOVE" colorName="#000000" start="0,0" stop="0,0"/>
-      <lineStyle kind="LINEABOVE" colorName="#000000" start="1,0" stop="1,0"/>
-      <lineStyle kind="LINEABOVE" colorName="#000000" start="2,0" stop="2,0"/>
-      <lineStyle kind="LINEABOVE" colorName="#000000" start="3,0" stop="3,0"/>
-      <lineStyle kind="LINEABOVE" colorName="#000000" start="4,0" stop="4,0"/>
-      <lineStyle kind="LINEABOVE" colorName="#000000" start="5,0" stop="5,0"/>
-      <lineStyle kind="LINEABOVE" colorName="#000000" start="6,0" stop="6,0"/>
-      <lineStyle kind="LINEABOVE" colorName="#000000" start="7,0" stop="7,0"/>
-      <lineStyle kind="LINEABOVE" colorName="#000000" start="8,0" stop="8,0"/>
-      <lineStyle kind="LINEABOVE" colorName="#000000" start="9,0" stop="9,0"/>
-      <lineStyle kind="LINEABOVE" colorName="#000000" start="10,0" stop="10,0"/>
-      <lineStyle kind="LINEABOVE" colorName="#000000" start="11,0" stop="11,0"/>
-      <lineStyle kind="LINEABOVE" colorName="#000000" start="12,0" stop="12,0"/>
-      <lineStyle kind="LINEAFTER" colorName="#000000" start="13,0" stop="13,-1"/>
-      <lineStyle kind="LINEABOVE" colorName="#000000" start="13,0" stop="13,0"/>
-      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,1" stop="0,-1"/>
-      <lineStyle kind="LINEAFTER" colorName="#000000" start="13,1" stop="13,-1"/>
-      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,2" stop="0,-1"/>
-      <lineStyle kind="LINEAFTER" colorName="#000000" start="13,2" stop="13,-1"/>
-      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,3" stop="0,-1"/>
-      <lineStyle kind="LINEAFTER" colorName="#000000" start="13,3" stop="13,-1"/>
-      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,4" stop="0,-1"/>
-      <lineStyle kind="LINEAFTER" colorName="#000000" start="13,4" stop="13,-1"/>
-      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,5" stop="0,-1"/>
-      <lineStyle kind="LINEBELOW" colorName="#000000" start="0,-1" stop="0,-1"/>
-      <lineStyle kind="LINEBELOW" colorName="#000000" start="1,-1" stop="1,-1"/>
-      <lineStyle kind="LINEBELOW" colorName="#000000" start="2,-1" stop="2,-1"/>
-      <lineStyle kind="LINEBELOW" colorName="#000000" start="3,-1" stop="3,-1"/>
-      <lineStyle kind="LINEBELOW" colorName="#000000" start="4,-1" stop="4,-1"/>
-      <lineStyle kind="LINEBELOW" colorName="#000000" start="5,-1" stop="5,-1"/>
-      <lineStyle kind="LINEBELOW" colorName="#000000" start="6,-1" stop="6,-1"/>
-      <lineStyle kind="LINEBELOW" colorName="#000000" start="7,-1" stop="7,-1"/>
-      <lineStyle kind="LINEBELOW" colorName="#000000" start="8,-1" stop="8,-1"/>
-      <lineStyle kind="LINEBELOW" colorName="#000000" start="9,-1" stop="9,-1"/>
-      <lineStyle kind="LINEBELOW" colorName="#000000" start="10,-1" stop="10,-1"/>
-      <lineStyle kind="LINEBELOW" colorName="#000000" start="11,-1" stop="11,-1"/>
-      <lineStyle kind="LINEBELOW" colorName="#000000" start="12,-1" stop="12,-1"/>
-      <lineStyle kind="LINEAFTER" colorName="#000000" start="13,5" stop="13,-1"/>
-      <lineStyle kind="LINEBELOW" colorName="#000000" start="13,-1" stop="13,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="-1,0" />
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="0,-1" stop="-1,-1"/>
     </blockTableStyle>
     <initialize>
       <paraStyle name="all" alignment="justify"/>
     </initialize>
     <paraStyle name="P1" fontName="Times-Roman" alignment="CENTER"/>
     <paraStyle name="P2" fontName="Times-Roman" alignment="LEFT"/>
-    <paraStyle name="P3" fontName="Times-Roman" fontSize="8.0" leading="10" alignment="CENTER"/>
-    <paraStyle name="P4" fontName="Times-Roman" alignment="LEFT"/>
-    <paraStyle name="P5" fontName="Times-Roman"/>
-    <paraStyle name="P6" fontName="Times-Roman" fontSize="8.0" leading="10" alignment="LEFT"/>
-    <paraStyle name="P7" fontName="Times-Roman" fontSize="8.0" leading="10" alignment="CENTER"/>
-    <paraStyle name="P8" fontName="Times-Roman" fontSize="8.0" leading="10" alignment="RIGHT"/>
+    <paraStyle name="P3" fontName="Times-Roman"/>
+    <paraStyle name="P4" fontName="Times-Roman" fontSize="8.0" leading="10" alignment="CENTER"/>
+    <paraStyle name="P5" fontName="Times-Roman" fontSize="8.0" leading="10" alignment="LEFT"/>
+    <paraStyle name="P6" fontName="Times-Roman" fontSize="8.0" leading="10" alignment="CENTER"/>
+    <paraStyle name="P7" fontName="Times-Roman" fontSize="8.0" leading="10" alignment="RIGHT"/>
+    <paraStyle name="P8" fontName="Times-Roman" alignment="LEFT"/>
+    <paraStyle name="P9" fontName="Times-Roman"/>
+    <paraStyle name="P10" fontName="Times-Roman" fontSize="8.0" leading="10"/>
+    <paraStyle name="P11" fontName="Times-Roman" fontSize="8.0" leading="10" alignment="RIGHT"/>
     <paraStyle name="Standard" fontName="Times-Roman"/>
     <paraStyle name="Heading" fontName="Helvetica" fontSize="14.0" leading="17" spaceBefore="12.0" spaceAfter="6.0"/>
     <paraStyle name="Text body" fontName="Times-Roman" spaceBefore="0.0" spaceAfter="6.0"/>
@@ -150,28 +83,28 @@
     <para style="P1">
       <font color="white"> </font>
     </para>
-    <blockTable colWidths="80.0,80.0,80.0,80.0,80.0,80.0" style="Table1">
+    <blockTable colWidths="60.0,100.0,60.0,100.0,60.0,100.0" style="Table1">
       <tr>
         <td>
-          <para style="P4">Période 1 :</para>
+          <para style="P8">Période 1 :</para>
         </td>
         <td>
-          <para style="P4">du [[ formatLang(o.date_depart_per1,date=True) ]] </para>
-          <para style="P4">au [[ formatLang(o.date_fin_per1,date=True) ]]</para>
+          <para style="P8">du [[ formatLang(o.date_depart_per1,date=True) ]] </para>
+          <para style="P8">au [[ formatLang(o.date_fin_per1,date=True) ]]</para>
         </td>
         <td>
-          <para style="P4">Période 2 : </para>
+          <para style="P8">Période 2 : </para>
         </td>
         <td>
-          <para style="P4">du [[ formatLang(o.date_depart_per2,date=True) ]] </para>
-          <para style="P4">au [[ formatLang(o.date_fin_per2,date=True) ]]</para>
+          <para style="P8">du [[ formatLang(o.date_depart_per2,date=True) ]] </para>
+          <para style="P8">au [[ formatLang(o.date_fin_per2,date=True) ]]</para>
         </td>
         <td>
-          <para style="P4">Période 3 : </para>
+          <para style="P8">Période 3 : </para>
         </td>
         <td>
-          <para style="P4">du [[ formatLang(o.date_depart_per3,date=True) ]] </para>
-          <para style="P4">au [[ formatLang(o.date_fin_per3,date=True) ]]</para>
+          <para style="P8">du [[ formatLang(o.date_depart_per3,date=True) ]] </para>
+          <para style="P8">au [[ formatLang(o.date_fin_per3,date=True) ]]</para>
         </td>
       </tr>
     </blockTable>
@@ -185,84 +118,84 @@
     <blockTable colWidths="61.0,32.0,32.0,32.0,32.0,32.0,32.0,32.0,32.0,32.0,32.0,32.0,32.0,34.0" style="Table2">
       <tr>
         <td>
-          <para style="P3">
+          <para style="P4">
             <font color="white"> </font>
           </para>
         </td>
         <td>
-          <para style="P3">JANV</para>
+          <para style="P4">JANV</para>
         </td>
         <td>
-          <para style="P3">FEVR</para>
+          <para style="P4">FEVR</para>
         </td>
         <td>
-          <para style="P3">MARS</para>
+          <para style="P4">MARS</para>
         </td>
         <td>
-          <para style="P3">AVRIL</para>
+          <para style="P4">AVRIL</para>
         </td>
         <td>
-          <para style="P3">MAI</para>
+          <para style="P4">MAI</para>
         </td>
         <td>
-          <para style="P3">JUIN</para>
+          <para style="P4">JUIN</para>
         </td>
         <td>
-          <para style="P3">JUIL</para>
+          <para style="P4">JUIL</para>
         </td>
         <td>
-          <para style="P3">AOÛT</para>
+          <para style="P4">AOÛT</para>
         </td>
         <td>
-          <para style="P3">SEPT</para>
+          <para style="P4">SEPT</para>
         </td>
         <td>
-          <para style="P3">OCT</para>
+          <para style="P4">OCT</para>
         </td>
         <td>
-          <para style="P3">NOV</para>
+          <para style="P4">NOV</para>
         </td>
         <td>
-          <para style="P3">DEC</para>
+          <para style="P4">DEV</para>
         </td>
         <td>
-          <para style="P3">TOTAL</para>
+          <para style="P4">TOTAL</para>
         </td>
       </tr>
     </blockTable>
     <section>
-      <para style="P6">[[repeatIn(getPartners(data['form']['partners']), 'p') ]]</para>
+      <para style="P5">[[repeatIn(getPartners(data['form']['partners']), 'p') ]]</para>
       <blockTable colWidths="59.0,230.0,28.0,32.0,32.0,32.0,32.0,34.0" style="Table4">
         <tr>
           <td>
-            <para style="P7">[[ p.ref ]]</para>
+            <para style="P6">[[ p.ref ]]</para>
           </td>
           <td>
-            <para style="P6">[[ p.name ]]</para>
+            <para style="P5">[[ p.name ]]</para>
           </td>
           <td>
-            <para style="P7">
+            <para style="P6">
               <font color="white"> </font>
             </para>
           </td>
           <td>
-            <para style="P7">[[ len(p.address) &gt; 0 and p.address[0].zip or '' ]]</para>
+            <para style="P6">[[ len(p.address) &gt; 0 and p.address[0].zip or '' ]]</para>
           </td>
           <td>
-            <para style="P7">
+            <para style="P6">
               <font color="white"> </font>
             </para>
           </td>
           <td>
-            <para style="P7">[[ len(p.address) &gt; 0 and p.address[0].city or '' ]]</para>
+            <para style="P6">[[ len(p.address) &gt; 0 and p.address[0].city or '' ]]</para>
           </td>
           <td>
-            <para style="P7">
+            <para style="P6">
               <font color="white"> </font>
             </para>
           </td>
           <td>
-            <para style="P7">
+            <para style="P6">
               <font color="white"> </font>
             </para>
           </td>
@@ -271,544 +204,568 @@
       <blockTable colWidths="59.0,32.0,32.0,33.0,32.0,32.0,32.0,32.0,33.0,32.0,32.0,32.0,32.0,34.0" style="Table3">
         <tr>
           <td>
-            <para style="P8">Pér. 1 C.A.A :</para>
+            <para style="P7">Pér. 1 C.A.A :</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos(p.id, o, 1).get('caa', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos(p.id, o, 1).get('caa', '')) ]]</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos(p.id, o, 2).get('caa', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos(p.id, o, 2).get('caa', '')) ]]</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos(p.id, o, 3).get('caa', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos(p.id, o, 3).get('caa', '')) ]]</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos(p.id, o, 4).get('caa', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos(p.id, o, 4).get('caa', '')) ]]</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos(p.id, o, 5).get('caa', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos(p.id, o, 5).get('caa', '')) ]]</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos(p.id, o, 6).get('caa', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos(p.id, o, 6).get('caa', '')) ]]</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos(p.id, o, 7).get('caa', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos(p.id, o, 7).get('caa', '')) ]]</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos(p.id, o, 8).get('caa', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos(p.id, o, 8).get('caa', '')) ]]</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos(p.id, o, 9).get('caa', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos(p.id, o, 9).get('caa', '')) ]]</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos(p.id, o, 10).get('caa', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos(p.id, o, 10).get('caa', '')) ]]</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos(p.id, o, 11).get('caa', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos(p.id, o, 11).get('caa', '')) ]]</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos(p.id, o, 12).get('caa', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos(p.id, o, 12).get('caa', '')) ]]</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos(p.id, o, 0).get('caa', '')) ]]</para>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <para style="P8">QTE :</para>
-          </td>
-          <td>
-            <para style="P7">[[ formatLang(getInfos(p.id, o, 1).get('qte', '')) ]]</para>
-          </td>
-          <td>
-            <para style="P7">[[ formatLang(getInfos(p.id, o, 2).get('qte', '')) ]]</para>
-          </td>
-          <td>
-            <para style="P7">[[ formatLang(getInfos(p.id, o, 3).get('qte', '')) ]]</para>
-          </td>
-          <td>
-            <para style="P7">[[ formatLang(getInfos(p.id, o, 4).get('qte', '')) ]]</para>
-          </td>
-          <td>
-            <para style="P7">[[ formatLang(getInfos(p.id, o, 5).get('qte', '')) ]]</para>
-          </td>
-          <td>
-            <para style="P7">[[ formatLang(getInfos(p.id, o, 6).get('qte', '')) ]]</para>
-          </td>
-          <td>
-            <para style="P7">[[ formatLang(getInfos(p.id, o, 7).get('qte', '')) ]]</para>
-          </td>
-          <td>
-            <para style="P7">[[ formatLang(getInfos(p.id, o, 8).get('qte', '')) ]]</para>
-          </td>
-          <td>
-            <para style="P7">[[ formatLang(getInfos(p.id, o, 9).get('qte', '')) ]]</para>
-          </td>
-          <td>
-            <para style="P7">[[ formatLang(getInfos(p.id, o, 10).get('qte', '')) ]]</para>
-          </td>
-          <td>
-            <para style="P7">[[ formatLang(getInfos(p.id, o, 11).get('qte', '')) ]]</para>
-          </td>
-          <td>
-            <para style="P7">[[ formatLang(getInfos(p.id, o, 12).get('qte', '')) ]]</para>
-          </td>
-          <td>
-            <para style="P7">[[ formatLang(getInfos(p.id, o, 0).get('qte', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos(p.id, o, 0).get('caa', '')) ]]</para>
           </td>
         </tr>
         <tr>
           <td>
-            <para style="P8">Pér. 2 C.A.A : [[ (o.date_depart_per2 and o.date_fin_per2) and '' or removeParentNode('tr') ]]</para>
+            <para style="P7">QTE :</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos2(p.id, o, 1).get('caa', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos(p.id, o, 1).get('qte', '')) ]]</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos2(p.id, o, 2).get('caa', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos(p.id, o, 2).get('qte', '')) ]]</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos2(p.id, o, 3).get('caa', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos(p.id, o, 3).get('qte', '')) ]]</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos2(p.id, o, 4).get('caa', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos(p.id, o, 4).get('qte', '')) ]]</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos2(p.id, o, 5).get('caa', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos(p.id, o, 5).get('qte', '')) ]]</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos2(p.id, o, 6).get('caa', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos(p.id, o, 6).get('qte', '')) ]]</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos2(p.id, o, 7).get('caa', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos(p.id, o, 7).get('qte', '')) ]]</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos2(p.id, o, 8).get('caa', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos(p.id, o, 8).get('qte', '')) ]]</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos2(p.id, o, 9).get('caa', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos(p.id, o, 9).get('qte', '')) ]]</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos2(p.id, o, 10).get('caa', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos(p.id, o, 10).get('qte', '')) ]]</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos2(p.id, o, 11).get('caa', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos(p.id, o, 11).get('qte', '')) ]]</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos2(p.id, o, 12).get('caa', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos(p.id, o, 12).get('qte', '')) ]]</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos2(p.id, o, 0).get('caa', '')) ]]</para>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <para style="P8">QTE :[[ (o.date_depart_per2 and o.date_fin_per2) and '' or removeParentNode('tr') ]]</para>
-          </td>
-          <td>
-            <para style="P7">[[ formatLang(getInfos2(p.id, o, 1).get('qte', '')) ]]</para>
-          </td>
-          <td>
-            <para style="P7">[[ formatLang(getInfos2(p.id, o, 2).get('qte', '')) ]]</para>
-          </td>
-          <td>
-            <para style="P7">[[ formatLang(getInfos2(p.id, o, 3).get('qte', '')) ]]</para>
-          </td>
-          <td>
-            <para style="P7">[[ formatLang(getInfos2(p.id, o, 4).get('qte', '')) ]]</para>
-          </td>
-          <td>
-            <para style="P7">[[ formatLang(getInfos2(p.id, o, 5).get('qte', '')) ]]</para>
-          </td>
-          <td>
-            <para style="P7">[[ formatLang(getInfos2(p.id, o, 6).get('qte', '')) ]]</para>
-          </td>
-          <td>
-            <para style="P7">[[ formatLang(getInfos2(p.id, o, 7).get('qte', '')) ]]</para>
-          </td>
-          <td>
-            <para style="P7">[[ formatLang(getInfos2(p.id, o, 8).get('qte', '')) ]]</para>
-          </td>
-          <td>
-            <para style="P7">[[ formatLang(getInfos2(p.id, o, 9).get('qte', '')) ]]</para>
-          </td>
-          <td>
-            <para style="P7">[[ formatLang(getInfos2(p.id, o, 10).get('qte', '')) ]]</para>
-          </td>
-          <td>
-            <para style="P7">[[ formatLang(getInfos2(p.id, o, 11).get('qte', '')) ]]</para>
-          </td>
-          <td>
-            <para style="P7">[[ formatLang(getInfos2(p.id, o, 12).get('qte', '')) ]]</para>
-          </td>
-          <td>
-            <para style="P7">[[ formatLang(getInfos2(p.id, o, 0).get('qte', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos(p.id, o, 0).get('qte', '')) ]]</para>
           </td>
         </tr>
         <tr>
           <td>
-            <para style="P8">Pér. 3 C.A.A :[[ (o.date_depart_per3 and o.date_fin_per3) and '' or removeParentNode('tr') ]]</para>
+            <para style="P7">Pér. 2 C.A.A : [[ (o.date_depart_per2 and o.date_fin_per2) and '' or removeParentNode('tr') ]]</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos3(p.id, o, 1).get('caa', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos2(p.id, o, 1).get('caa', '')) ]]</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos3(p.id, o, 2).get('caa', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos2(p.id, o, 2).get('caa', '')) ]]</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos3(p.id, o, 3).get('caa', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos2(p.id, o, 3).get('caa', '')) ]]</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos3(p.id, o, 4).get('caa', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos2(p.id, o, 4).get('caa', '')) ]]</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos3(p.id, o, 5).get('caa', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos2(p.id, o, 5).get('caa', '')) ]]</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos3(p.id, o, 6).get('caa', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos2(p.id, o, 6).get('caa', '')) ]]</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos3(p.id, o, 7).get('caa', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos2(p.id, o, 7).get('caa', '')) ]]</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos3(p.id, o, 8).get('caa', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos2(p.id, o, 8).get('caa', '')) ]]</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos3(p.id, o, 9).get('caa', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos2(p.id, o, 9).get('caa', '')) ]]</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos3(p.id, o, 10).get('caa', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos2(p.id, o, 10).get('caa', '')) ]]</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos3(p.id, o, 11).get('caa', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos2(p.id, o, 11).get('caa', '')) ]]</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos3(p.id, o, 12).get('caa', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos2(p.id, o, 12).get('caa', '')) ]]</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos3(p.id, o, 0).get('caa', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos2(p.id, o, 0).get('caa', '')) ]]</para>
           </td>
         </tr>
         <tr>
           <td>
-            <para style="P8">QTE :[[ (o.date_depart_per3 and o.date_fin_per3) and '' or removeParentNode('tr') ]]</para>
+            <para style="P7">QTE :[[ (o.date_depart_per2 and o.date_fin_per2) and '' or removeParentNode('tr') ]]</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos3(p.id, o, 1).get('qte', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos2(p.id, o, 1).get('qte', '')) ]]</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos3(p.id, o, 2).get('qte', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos2(p.id, o, 2).get('qte', '')) ]]</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos3(p.id, o, 3).get('qte', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos2(p.id, o, 3).get('qte', '')) ]]</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos3(p.id, o, 4).get('qte', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos2(p.id, o, 4).get('qte', '')) ]]</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos3(p.id, o, 5).get('qte', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos2(p.id, o, 5).get('qte', '')) ]]</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos3(p.id, o, 6).get('qte', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos2(p.id, o, 6).get('qte', '')) ]]</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos3(p.id, o, 7).get('qte', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos2(p.id, o, 7).get('qte', '')) ]]</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos3(p.id, o, 8).get('qte', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos2(p.id, o, 8).get('qte', '')) ]]</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos3(p.id, o, 9).get('qte', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos2(p.id, o, 9).get('qte', '')) ]]</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos3(p.id, o, 10).get('qte', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos2(p.id, o, 10).get('qte', '')) ]]</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos3(p.id, o, 11).get('qte', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos2(p.id, o, 11).get('qte', '')) ]]</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos3(p.id, o, 12).get('qte', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos2(p.id, o, 12).get('qte', '')) ]]</para>
           </td>
           <td>
-            <para style="P7">[[ formatLang(getInfos3(p.id, o, 0).get('qte', '')) ]]</para>
+            <para style="P6">[[ formatLang(getInfos2(p.id, o, 0).get('qte', '')) ]]</para>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <para style="P7">Pér. 3 C.A.A :[[ (o.date_depart_per3 and o.date_fin_per3) and '' or removeParentNode('tr') ]]</para>
+          </td>
+          <td>
+            <para style="P6">[[ formatLang(getInfos3(p.id, o, 1).get('caa', '')) ]]</para>
+          </td>
+          <td>
+            <para style="P6">[[ formatLang(getInfos3(p.id, o, 2).get('caa', '')) ]]</para>
+          </td>
+          <td>
+            <para style="P6">[[ formatLang(getInfos3(p.id, o, 3).get('caa', '')) ]]</para>
+          </td>
+          <td>
+            <para style="P6">[[ formatLang(getInfos3(p.id, o, 4).get('caa', '')) ]]</para>
+          </td>
+          <td>
+            <para style="P6">[[ formatLang(getInfos3(p.id, o, 5).get('caa', '')) ]]</para>
+          </td>
+          <td>
+            <para style="P6">[[ formatLang(getInfos3(p.id, o, 6).get('caa', '')) ]]</para>
+          </td>
+          <td>
+            <para style="P6">[[ formatLang(getInfos3(p.id, o, 7).get('caa', '')) ]]</para>
+          </td>
+          <td>
+            <para style="P6">[[ formatLang(getInfos3(p.id, o, 8).get('caa', '')) ]]</para>
+          </td>
+          <td>
+            <para style="P6">[[ formatLang(getInfos3(p.id, o, 9).get('caa', '')) ]]</para>
+          </td>
+          <td>
+            <para style="P6">[[ formatLang(getInfos3(p.id, o, 10).get('caa', '')) ]]</para>
+          </td>
+          <td>
+            <para style="P6">[[ formatLang(getInfos3(p.id, o, 11).get('caa', '')) ]]</para>
+          </td>
+          <td>
+            <para style="P6">[[ formatLang(getInfos3(p.id, o, 12).get('caa', '')) ]]</para>
+          </td>
+          <td>
+            <para style="P6">[[ formatLang(getInfos3(p.id, o, 0).get('caa', '')) ]]</para>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <para style="P7">QTE :[[ (o.date_depart_per3 and o.date_fin_per3) and '' or removeParentNode('tr') ]]</para>
+          </td>
+          <td>
+            <para style="P6">[[ formatLang(getInfos3(p.id, o, 1).get('qte', '')) ]]</para>
+          </td>
+          <td>
+            <para style="P6">[[ formatLang(getInfos3(p.id, o, 2).get('qte', '')) ]]</para>
+          </td>
+          <td>
+            <para style="P6">[[ formatLang(getInfos3(p.id, o, 3).get('qte', '')) ]]</para>
+          </td>
+          <td>
+            <para style="P6">[[ formatLang(getInfos3(p.id, o, 4).get('qte', '')) ]]</para>
+          </td>
+          <td>
+            <para style="P6">[[ formatLang(getInfos3(p.id, o, 5).get('qte', '')) ]]</para>
+          </td>
+          <td>
+            <para style="P6">[[ formatLang(getInfos3(p.id, o, 6).get('qte', '')) ]]</para>
+          </td>
+          <td>
+            <para style="P6">[[ formatLang(getInfos3(p.id, o, 7).get('qte', '')) ]]</para>
+          </td>
+          <td>
+            <para style="P6">[[ formatLang(getInfos3(p.id, o, 8).get('qte', '')) ]]</para>
+          </td>
+          <td>
+            <para style="P6">[[ formatLang(getInfos3(p.id, o, 9).get('qte', '')) ]]</para>
+          </td>
+          <td>
+            <para style="P6">[[ formatLang(getInfos3(p.id, o, 10).get('qte', '')) ]]</para>
+          </td>
+          <td>
+            <para style="P6">[[ formatLang(getInfos3(p.id, o, 11).get('qte', '')) ]]</para>
+          </td>
+          <td>
+            <para style="P6">[[ formatLang(getInfos3(p.id, o, 12).get('qte', '')) ]]</para>
+          </td>
+          <td>
+            <para style="P6">[[ formatLang(getInfos3(p.id, o, 0).get('qte', '')) ]]</para>
           </td>
         </tr>
       </blockTable>
-      <para style="P5"/>
     </section>
+      <para style="P3"/>
+      <blockTable colWidths="23.0,456.0" style="Table6">
+        <tr>
+          <td>
+            <para style="P7">
+              <font color="white"> </font>
+            </para>
+          </td>
+          <td>
+            <para style="P10">
+              <font color="white"> </font>
+            </para>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <para style="P7">
+              <font color="white"> </font>
+            </para>
+          </td>
+          <td>
+            <para style="P10">*** TOTAL GENERAL (DU CLIENT [[ '[%s] %s' % (o.depart_partner_id.ref, o.depart_partner_id.name) ]] AU CLIENT [[ '[%s] %s' % (o.fin_partner_id.ref, o.fin_partner_id.name) ]]) ***</para>
+          </td>
+        </tr>
+      </blockTable>
     <blockTable colWidths="59.0,32.0,32.0,33.0,32.0,32.0,32.0,32.0,33.0,32.0,32.0,32.0,32.0,34.0" style="Table5">
       <tr>
         <td>
-          <para style="P8">Pér. 1 C.A.A :</para>
+          <para style="P7">Pér. 1 C.A.A :</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos('all', o, 1).get('caa', '')) ]]</para>
+          <para style="P10">[[ formatLang(getInfos(data['form']['partners'], o, 1).get('caa', '')) ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos('all', o, 2).get('caa', '')) ]]</para>
+          <para style="P10">[[ formatLang(getInfos(data['form']['partners'], o, 2).get('caa', '')) ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos('all', o, 3).get('caa', '')) ]]</para>
+          <para style="P10">[[ formatLang(getInfos(data['form']['partners'], o, 3).get('caa', '')) ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos('all', o, 4).get('caa', '')) ]]</para>
+          <para style="P6">[[ formatLang(getInfos(data['form']['partners'], o, 4).get('caa', '')) ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos('all', o, 5).get('caa', '')) ]]</para>
+          <para style="P6">[[ formatLang(getInfos(data['form']['partners'], o, 5).get('caa', '')) ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos('all', o, 6).get('caa', '')) ]]</para>
+          <para style="P6">[[ formatLang(getInfos(data['form']['partners'], o, 6).get('caa', '')) ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos('all', o, 7).get('caa', '')) ]]</para>
+          <para style="P6">[[ formatLang(getInfos(data['form']['partners'], o, 7).get('caa', '')) ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos('all', o, 8).get('caa', '')) ]]</para>
+          <para style="P6">[[ formatLang(getInfos(data['form']['partners'], o, 8).get('caa', '')) ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos('all', o, 9).get('caa', '')) ]]</para>
+          <para style="P6">[[ formatLang(getInfos(data['form']['partners'], o, 9).get('caa', '')) ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos('all', o, 10).get('caa', '')) ]]</para>
+          <para style="P6">[[ formatLang(getInfos(data['form']['partners'], o, 10).get('caa', '')) ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos('all', o, 11).get('caa', '')) ]]</para>
+          <para style="P6">[[ formatLang(getInfos(data['form']['partners'], o, 11).get('caa', '')) ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos('all', o, 12).get('caa', '')) ]]</para>
+          <para style="P6">[[ formatLang(getInfos(data['form']['partners'], o, 12).get('caa', '')) ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos('all', o, 0).get('caa', '')) ]]</para>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <para style="P8">QTE :</para>
-        </td>
-        <td>
-          <para style="P7">[[ formatLang(getInfos('all', o, 1).get('qte', '')) ]]</para>
-        </td>
-        <td>
-          <para style="P7">[[ formatLang(getInfos('all', o, 2).get('qte', '')) ]]</para>
-        </td>
-        <td>
-          <para style="P7">[[ formatLang(getInfos('all', o, 3).get('qte', '')) ]]</para>
-        </td>
-        <td>
-          <para style="P7">[[ formatLang(getInfos('all', o, 4).get('qte', '')) ]]</para>
-        </td>
-        <td>
-          <para style="P7">[[ formatLang(getInfos('all', o, 5).get('qte', '')) ]]</para>
-        </td>
-        <td>
-          <para style="P7">[[ formatLang(getInfos('all', o, 6).get('qte', '')) ]]</para>
-        </td>
-        <td>
-          <para style="P7">[[ formatLang(getInfos('all', o, 7).get('qte', '')) ]]</para>
-        </td>
-        <td>
-          <para style="P7">[[ formatLang(getInfos('all', o, 8).get('qte', '')) ]]</para>
-        </td>
-        <td>
-          <para style="P7">[[ formatLang(getInfos('all', o, 9).get('qte', '')) ]]</para>
-        </td>
-        <td>
-          <para style="P7">[[ formatLang(getInfos('all', o, 10).get('qte', '')) ]]</para>
-        </td>
-        <td>
-          <para style="P7">[[ formatLang(getInfos('all', o, 11).get('qte', '')) ]]</para>
-        </td>
-        <td>
-          <para style="P7">[[ formatLang(getInfos('all', o, 12).get('qte', '')) ]]</para>
-        </td>
-        <td>
-          <para style="P7">[[ formatLang(getInfos('all', o, 0).get('qte', '')) ]]</para>
+          <para style="P6">[[ formatLang(getInfos(data['form']['partners'], o, 0).get('caa', '')) ]]</para>
         </td>
       </tr>
       <tr>
         <td>
-          <para style="P8">Pér. 2 C.A.A : [[ (o.date_depart_per2 and o.date_fin_per2) and '' or removeParentNode('tr') ]]</para>
+          <para style="P7">QTE :</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos2('all', o, 1).get('caa', '')) ]]</para>
+          <para style="P6">[[ formatLang(getInfos(data['form']['partners'], o, 1).get('qte', '')) ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos2('all', o, 2).get('caa', '')) ]]</para>
+          <para style="P6">[[ formatLang(getInfos(data['form']['partners'], o, 2).get('qte', '')) ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos2('all', o, 3).get('caa', '')) ]]</para>
+          <para style="P6">[[ formatLang(getInfos(data['form']['partners'], o, 3).get('qte', '')) ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos2('all', o, 4).get('caa', '')) ]]</para>
+          <para style="P6">[[ formatLang(getInfos(data['form']['partners'], o, 4).get('qte', '')) ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos2('all', o, 5).get('caa', '')) ]]</para>
+          <para style="P6">[[ formatLang(getInfos(data['form']['partners'], o, 5).get('qte', '')) ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos2('all', o, 6).get('caa', '')) ]]</para>
+          <para style="P6">[[ formatLang(getInfos(data['form']['partners'], o, 6).get('qte', '')) ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos2('all', o, 7).get('caa', '')) ]]</para>
+          <para style="P6">[[ formatLang(getInfos(data['form']['partners'], o, 7).get('qte', '')) ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos2('all', o, 8).get('caa', '')) ]]</para>
+          <para style="P6">[[ formatLang(getInfos(data['form']['partners'], o, 8).get('qte', '')) ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos2('all', o, 9).get('caa', '')) ]]</para>
+          <para style="P6">[[ formatLang(getInfos(data['form']['partners'], o, 9).get('qte', '')) ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos2('all', o, 10).get('caa', '')) ]]</para>
+          <para style="P6">[[ formatLang(getInfos(data['form']['partners'], o, 10).get('qte', '')) ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos2('all', o, 11).get('caa', '')) ]]</para>
+          <para style="P6">[[ formatLang(getInfos(data['form']['partners'], o, 11).get('qte', '')) ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos2('all', o, 12).get('caa', '')) ]]</para>
+          <para style="P6">[[ formatLang(getInfos(data['form']['partners'], o, 12).get('qte', '')) ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos2('all', o, 0).get('caa', '')) ]]</para>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <para style="P8">QTE :[[ (o.date_depart_per2 and o.date_fin_per2) and '' or removeParentNode('tr') ]]</para>
-        </td>
-        <td>
-          <para style="P7">[[ formatLang(getInfos2('all', o, 1).get('qte', '')) ]]</para>
-        </td>
-        <td>
-          <para style="P7">[[ formatLang(getInfos2('all', o, 2).get('qte', '')) ]]</para>
-        </td>
-        <td>
-          <para style="P7">[[ formatLang(getInfos2('all', o, 3).get('qte', '')) ]]</para>
-        </td>
-        <td>
-          <para style="P7">[[ formatLang(getInfos2('all', o, 4).get('qte', '')) ]]</para>
-        </td>
-        <td>
-          <para style="P7">[[ formatLang(getInfos2('all', o, 5).get('qte', '')) ]]</para>
-        </td>
-        <td>
-          <para style="P7">[[ formatLang(getInfos2('all', o, 6).get('qte', '')) ]]</para>
-        </td>
-        <td>
-          <para style="P7">[[ formatLang(getInfos2('all', o, 7).get('qte', '')) ]]</para>
-        </td>
-        <td>
-          <para style="P7">[[ formatLang(getInfos2('all', o, 8).get('qte', '')) ]]</para>
-        </td>
-        <td>
-          <para style="P7">[[ formatLang(getInfos2('all', o, 9).get('qte', '')) ]]</para>
-        </td>
-        <td>
-          <para style="P7">[[ formatLang(getInfos2('all', o, 10).get('qte', '')) ]]</para>
-        </td>
-        <td>
-          <para style="P7">[[ formatLang(getInfos2('all', o, 11).get('qte', '')) ]]</para>
-        </td>
-        <td>
-          <para style="P7">[[ formatLang(getInfos2('all', o, 12).get('qte', '')) ]]</para>
-        </td>
-        <td>
-          <para style="P7">[[ formatLang(getInfos2('all', o, 0).get('qte', '')) ]]</para>
+          <para style="P6">[[ formatLang(getInfos(data['form']['partners'], o, 0).get('qte', '')) ]]</para>
         </td>
       </tr>
       <tr>
         <td>
-          <para style="P8">Pér. 3 C.A.A :[[ (o.date_depart_per3 and o.date_fin_per3) and '' or removeParentNode('tr') ]]</para>
+          <para style="P7">Pér. 2 C.A.A : [[ (o.date_depart_per2 and o.date_fin_per2) and '' or removeParentNode('tr') ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos3('all', o, 1).get('caa', '')) ]]</para>
+          <para style="P6">[[ formatLang(getInfos2(data['form']['partners'], o, 1).get('caa', '')) ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos3('all', o, 2).get('caa', '')) ]]</para>
+          <para style="P6">[[ formatLang(getInfos2(data['form']['partners'], o, 2).get('caa', '')) ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos3('all', o, 3).get('caa', '')) ]]</para>
+          <para style="P6">[[ formatLang(getInfos2(data['form']['partners'], o, 3).get('caa', '')) ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos3('all', o, 4).get('caa', '')) ]]</para>
+          <para style="P6">[[ formatLang(getInfos2(data['form']['partners'], o, 4).get('caa', '')) ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos3('all', o, 5).get('caa', '')) ]]</para>
+          <para style="P6">[[ formatLang(getInfos2(data['form']['partners'], o, 5).get('caa', '')) ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos3('all', o, 6).get('caa', '')) ]]</para>
+          <para style="P6">[[ formatLang(getInfos2(data['form']['partners'], o, 6).get('caa', '')) ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos3('all', o, 7).get('caa', '')) ]]</para>
+          <para style="P6">[[ formatLang(getInfos2(data['form']['partners'], o, 7).get('caa', '')) ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos3('all', o, 8).get('caa', '')) ]]</para>
+          <para style="P6">[[ formatLang(getInfos2(data['form']['partners'], o, 8).get('caa', '')) ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos3('all', o, 9).get('caa', '')) ]]</para>
+          <para style="P6">[[ formatLang(getInfos2(data['form']['partners'], o, 9).get('caa', '')) ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos3('all', o, 10).get('caa', '')) ]]</para>
+          <para style="P6">[[ formatLang(getInfos2(data['form']['partners'], o, 10).get('caa', '')) ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos3('all', o, 11).get('caa', '')) ]]</para>
+          <para style="P6">[[ formatLang(getInfos2(data['form']['partners'], o, 11).get('caa', '')) ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos3('all', o, 12).get('caa', '')) ]]</para>
+          <para style="P6">[[ formatLang(getInfos2(data['form']['partners'], o, 12).get('caa', '')) ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos3('all', o, 0).get('caa', '')) ]]</para>
+          <para style="P6">[[ formatLang(getInfos2(data['form']['partners'], o, 0).get('caa', '')) ]]</para>
         </td>
       </tr>
       <tr>
         <td>
-          <para style="P8">QTE :[[ (o.date_depart_per3 and o.date_fin_per3) and '' or removeParentNode('tr') ]]</para>
+          <para style="P7">QTE :[[ (o.date_depart_per2 and o.date_fin_per2) and '' or removeParentNode('tr') ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos3('all', o, 1).get('qte', '')) ]]</para>
+          <para style="P6">[[ formatLang(getInfos2(data['form']['partners'], o, 1).get('qte', '')) ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos3('all', o, 2).get('qte', '')) ]]</para>
+          <para style="P6">[[ formatLang(getInfos2(data['form']['partners'], o, 2).get('qte', '')) ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos3('all', o, 3).get('qte', '')) ]]</para>
+          <para style="P6">[[ formatLang(getInfos2(data['form']['partners'], o, 3).get('qte', '')) ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos3('all', o, 4).get('qte', '')) ]]</para>
+          <para style="P6">[[ formatLang(getInfos2(data['form']['partners'], o, 4).get('qte', '')) ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos3('all', o, 5).get('qte', '')) ]]</para>
+          <para style="P6">[[ formatLang(getInfos2(data['form']['partners'], o, 5).get('qte', '')) ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos3('all', o, 6).get('qte', '')) ]]</para>
+          <para style="P6">[[ formatLang(getInfos2(data['form']['partners'], o, 6).get('qte', '')) ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos3('all', o, 7).get('qte', '')) ]]</para>
+          <para style="P6">[[ formatLang(getInfos2(data['form']['partners'], o, 7).get('qte', '')) ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos3('all', o, 8).get('qte', '')) ]]</para>
+          <para style="P6">[[ formatLang(getInfos2(data['form']['partners'], o, 8).get('qte', '')) ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos3('all', o, 9).get('qte', '')) ]]</para>
+          <para style="P6">[[ formatLang(getInfos2(data['form']['partners'], o, 9).get('qte', '')) ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos3('all', o, 10).get('qte', '')) ]]</para>
+          <para style="P6">[[ formatLang(getInfos2(data['form']['partners'], o, 10).get('qte', '')) ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos3('all', o, 11).get('qte', '')) ]]</para>
+          <para style="P6">[[ formatLang(getInfos2(data['form']['partners'], o, 11).get('qte', '')) ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos3('all', o, 12).get('qte', '')) ]]</para>
+          <para style="P6">[[ formatLang(getInfos2(data['form']['partners'], o, 12).get('qte', '')) ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getInfos3('all', o, 0).get('qte', '')) ]]</para>
+          <para style="P6">[[ formatLang(getInfos2(data['form']['partners'], o, 0).get('qte', '')) ]]</para>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <para style="P7">Pér. 3 C.A.A :[[ (o.date_depart_per3 and o.date_fin_per3) and '' or removeParentNode('tr') ]]</para>
+        </td>
+        <td>
+          <para style="P6">[[ formatLang(getInfos3(data['form']['partners'], o, 1).get('caa', '')) ]]</para>
+        </td>
+        <td>
+          <para style="P6">[[ formatLang(getInfos3(data['form']['partners'], o, 2).get('caa', '')) ]]</para>
+        </td>
+        <td>
+          <para style="P6">[[ formatLang(getInfos3(data['form']['partners'], o, 3).get('caa', '')) ]]</para>
+        </td>
+        <td>
+          <para style="P6">[[ formatLang(getInfos3(data['form']['partners'], o, 4).get('caa', '')) ]]</para>
+        </td>
+        <td>
+          <para style="P6">[[ formatLang(getInfos3(data['form']['partners'], o, 5).get('caa', '')) ]]</para>
+        </td>
+        <td>
+          <para style="P6">[[ formatLang(getInfos3(data['form']['partners'], o, 6).get('caa', '')) ]]</para>
+        </td>
+        <td>
+          <para style="P6">[[ formatLang(getInfos3(data['form']['partners'], o, 7).get('caa', '')) ]]</para>
+        </td>
+        <td>
+          <para style="P6">[[ formatLang(getInfos3(data['form']['partners'], o, 8).get('caa', '')) ]]</para>
+        </td>
+        <td>
+          <para style="P6">[[ formatLang(getInfos3(data['form']['partners'], o, 9).get('caa', '')) ]]</para>
+        </td>
+        <td>
+          <para style="P6">[[ formatLang(getInfos3(data['form']['partners'], o, 10).get('caa', '')) ]]</para>
+        </td>
+        <td>
+          <para style="P6">[[ formatLang(getInfos3(data['form']['partners'], o, 11).get('caa', '')) ]]</para>
+        </td>
+        <td>
+          <para style="P6">[[ formatLang(getInfos3(data['form']['partners'], o, 12).get('caa', '')) ]]</para>
+        </td>
+        <td>
+          <para style="P6">[[ formatLang(getInfos3(data['form']['partners'], o, 0).get('caa', '')) ]]</para>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <para style="P7">QTE :[[ (o.date_depart_per3 and o.date_fin_per3) and '' or removeParentNode('tr') ]]</para>
+        </td>
+        <td>
+          <para style="P6">[[ formatLang(getInfos3(data['form']['partners'], o, 1).get('qte', '')) ]]</para>
+        </td>
+        <td>
+          <para style="P6">[[ formatLang(getInfos3(data['form']['partners'], o, 2).get('qte', '')) ]]</para>
+        </td>
+        <td>
+          <para style="P6">[[ formatLang(getInfos3(data['form']['partners'], o, 3).get('qte', '')) ]]</para>
+        </td>
+        <td>
+          <para style="P6">[[ formatLang(getInfos3(data['form']['partners'], o, 4).get('qte', '')) ]]</para>
+        </td>
+        <td>
+          <para style="P6">[[ formatLang(getInfos3(data['form']['partners'], o, 5).get('qte', '')) ]]</para>
+        </td>
+        <td>
+          <para style="P6">[[ formatLang(getInfos3(data['form']['partners'], o, 6).get('qte', '')) ]]</para>
+        </td>
+        <td>
+          <para style="P6">[[ formatLang(getInfos3(data['form']['partners'], o, 7).get('qte', '')) ]]</para>
+        </td>
+        <td>
+          <para style="P6">[[ formatLang(getInfos3(data['form']['partners'], o, 8).get('qte', '')) ]]</para>
+        </td>
+        <td>
+          <para style="P6">[[ formatLang(getInfos3(data['form']['partners'], o, 9).get('qte', '')) ]]</para>
+        </td>
+        <td>
+          <para style="P6">[[ formatLang(getInfos3(data['form']['partners'], o, 10).get('qte', '')) ]]</para>
+        </td>
+        <td>
+          <para style="P6">[[ formatLang(getInfos3(data['form']['partners'], o, 11).get('qte', '')) ]]</para>
+        </td>
+        <td>
+          <para style="P6">[[ formatLang(getInfos3(data['form']['partners'], o, 12).get('qte', '')) ]]</para>
+        </td>
+        <td>
+          <para style="P6">[[ formatLang(getInfos3(data['form']['partners'], o, 0).get('qte', '')) ]]</para>
         </td>
       </tr>
     </blockTable>
-    <para style="P5">
+    <para style="P3">
       <font color="white"> </font>
     </para>
-    <para style="P5">
+    <para style="P3">
       <font color="white"> </font>
     </para>
-    <para style="P5">
+    <para style="P3">
       <font color="white"> </font>
     </para>
   </story>

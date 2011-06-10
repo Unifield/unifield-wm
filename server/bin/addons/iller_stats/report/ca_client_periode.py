@@ -77,7 +77,10 @@ class ca_client_periode(report_sxw.rml_parse):
                               ('date_invoice', '<=', end_date.strftime('%Y-%m-%d'))]
 
 
-        if partner_id != 'all':
+        if isinstance(partner_id, type([])):
+            print partner_id
+            invoice_domain.extend([('partner_id', 'in', partner_id)])
+        else:
             invoice_domain.extend([('partner_id', '=', partner_id)])
 
         invoice_ids = invoice_obj.search(self.cr, self.uid, invoice_domain)
