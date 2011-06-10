@@ -31,9 +31,6 @@ class wizard_articles_par_client(osv.osv_memory):
     _name = "wizard.articles.par.client"
 
     _columns = {
-        'partner_ids': fields.many2many('res.partner', 'wiz_art_clt_rel', 'wizard_id', 'partner_id', string="Client(s)", help="Choisir les clients dont vous \
-            désirez éditer les articles. Maintenez la touche CTRL de votre clavier pour en sélectionner plusieurs. Utilisez la touche majuscule pour \
-            sélectionner une plage de clients.", required=True),
         'partner_deb_id': fields.many2one('res.partner', string="Client de début", required=True, 
             help="Code client à partir duquel nous commençons le traitement"),
         'partner_fin_id': fields.many2one('res.partner', string="Client de fin", required=True,
