@@ -134,6 +134,7 @@ mode de règlement, vous devez donc enregistrer un RIB pour ce client')
         ## Client bloqué
         'bloque': fields.boolean(string='Bloqué ?', help='Si la case est cochée, le partenaire \
                                 n\'apparaitra plus dans les recherches sur les bon de commande'),
+        'ref': fields.char('Code', size=64, required=True),
     }
 
     _defaults = {
