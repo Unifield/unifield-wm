@@ -133,6 +133,28 @@
             </field>
         </record>
 
+    <!-- Wizard pour l'édition PAMP par client et par article sur une période donnée -->
+        <record id="wizard_pamp_par_client_view" model="ir.ui.view">
+            <field name="name">wizard.pamp.par.client.view</field>
+            <field name="model">wizard.pamp.par.client</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Édition P.A.M.P par client et par article sur une période.">
+                    <field name="partner_deb_id" colspan="4"/>
+                    <newline />
+                    <field name="partner_fin_id" colspan="4"/>
+                    <newline />
+                    <group colspan="4">
+                        <label string="De : "/><field name="date_debut" nolabel="1"/>
+                        <label string="à : "/><field name="date_fin" nolabel="1"/>
+                    </group>
+                    <newline />
+                    <button string="Ok" name='action_confirmer' type="object" icon="gtk-apply" />
+                    <button string="Annuler" special='cancel' icon='gtk-cancel' />
+                </form>
+            </field>
+        </record>
+
     <!-- Actions -->
         <!-- Wizard pour obtenir l'état des entrées et sorties de gibier -->
         <act_window id="action_wizard_gibier"
@@ -166,6 +188,14 @@
             view_type='form'
             target='new' />
 
+        <!-- Wizard pour l'édition PAMP par client et par article sur 1 période donnée -->
+        <act_window id="action_wizard_pamp_par_client"
+            name="P.A.M.P par client et par article sur une période donnée"
+            res_model="wizard.pamp.par.client"
+            view_mode='form'
+            view_type='form'
+            target='new' />
+
     <!-- Menus -->
         <menuitem id="menu_wizard_gibier"
                 action="action_wizard_gibier"
@@ -184,6 +214,11 @@
         <!-- Accès au wizard "Édition des quantités commandées par client et par article sur 5 périodes" -->
         <menuitem id="menu_wizard_qte_clt_cinq_periodes"
                 action="action_wizard_qte_clt_cinq_periodes"
+                parent="sale.menu_sale_root" />
+
+        <!-- Accès au wizard "Édition PAMP par client et par article pour une période donné" -->
+        <menuitem id="menu_wizard_pamp_par_client"
+                action="action_wizard_pamp_par_client"
                 parent="sale.menu_sale_root" />
     </data>
 </openerp>

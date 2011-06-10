@@ -25,6 +25,7 @@ import wizard_gibier
 import wizard_articles_par_client
 import wizard_ca_par_representant
 import wizard_qte_clt_cinq_periodes
+import wizard_pamp_par_client
 
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

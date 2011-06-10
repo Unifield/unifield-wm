@@ -75,5 +75,21 @@
             </field>
         </record>
 
+        <record id="edition_pamp_par_client_tree" model="ir.ui.view">
+            <field name="name">edition.pamp.par.client.tree</field>
+            <field name="model">edition.pamp.par.client</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree colors="orange:est_client==True" string="Édition P.A.M.P. par client et par article sur une période donnée.">
+                    <field name="designation"/>
+                    <field name="quantite"/>
+                    <field name="val_cons"/>
+                    <field name="ca_ht"/>
+                    <field name="marge"/>
+                    <field name="marge_sur_ca"/>
+                </tree>
+            </field>
+        </record>
+
     </data>
 </openerp>
