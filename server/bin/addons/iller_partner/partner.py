@@ -195,6 +195,17 @@ class res_users(osv.osv):
         ('code_saler_key', 'UNIQUE (code_saler)', _('Ce code vendeur a déjà été attribué !'))
     ]
 
+    _order = 'code_saler'
+
+    def name_get(self, cr, uid, ids, context={}):
+        """
+        Ajoute le code vendeur devant le nom du représentant
+        """
+        res = []
+        for r in self.read(cr, uid, ids, ['name', 'code_saler']):
+            res.append((r['id'], '%s - %s' % (r['code_saler'], r['name'])))
+        return res
+
 res_users()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
