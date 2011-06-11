@@ -1,6 +1,15 @@
 <?xml version="1.0"?>
 <document filename="test.pdf">
-  <template pageSize="(595.0,842.0)" title="Test" author="Martin Simon" allowSplitting="20">
+    <template pageSize="(595.0,842.0)" title="Test" author="Martin Simon" allowSplitting="20">
+        <pageTemplate id="footer">
+            <pageGraphics>
+                <setFont name="Helvetica" size="6"/>
+                <fill color="black"/>
+                <stroke color="black"/>
+                <drawCentredString x="10.5cm" y="0.8cm">Page: <pageNumber/></drawCentredString>
+            </pageGraphics>
+            <frame x1="1.3cm" y1="2.5cm" height="750" width="480"/>
+        </pageTemplate>
     <pageTemplate id="first">
       <frame id="first" x1="57.0" y1="57.0" width="481" height="770"/>
     </pageTemplate>
@@ -66,7 +75,7 @@
   <story>
     <para style="Standard">[[ setLang('fr_FR') ]][[ repeatIn(objects, 'o') ]]</para>
 
-    <blockTable colWidths="540.0" style="Entete">
+    <blockTable colWidths="540.0" style="Entete" keepWithNext="1">
         <tr>
             <td>
                 <para style="Entete1">EDITION DU C.A ET QUANTITE /REPR/CLIENT/ANNEE</para>
@@ -78,7 +87,7 @@
         <font color="white"> </font>
     </para>
 
-    <blockTable colWidths="75.0,205.0,50.0,50.0,80.0,80.0" style="Infos">
+    <blockTable colWidths="75.0,205.0,50.0,50.0,80.0,80.0" style="Infos" keepWithNext="1">
         <tr>
             <td>
                 <para style="Infos1_Right">DU CLIENT : </para>
@@ -196,7 +205,7 @@
         <section>
 
             [[ repeatIn(getPartners(data['form']['partners'][r.id]), 'p') ]]
-            <blockTable colWidths="50.0,120.0,120.0,50.0,200.0" style="Partenaire">
+            <blockTable colWidths="50.0,120.0,120.0,50.0,200.0" style="Partenaire" keepWithNext="1">
                 <tr>
                     <td>
                         <para style="Infos1">[[ p.ref ]]</para>
@@ -219,7 +228,7 @@
             <section>
                 [[ repeatIn(data['form']['annees'], 'year') ]]
 
-                <blockTable colWidths="36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0" style="Information">
+                <blockTable colWidths="36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0" style="Information" keepWithNext="1">
                     <tr>
                         <td>
                             <para style="Infos">[[ year ]]</para>
@@ -319,7 +328,7 @@
 
             </section>
 
-            <blockTable colWidths="50.0,490.0" style="Tot_Representant">
+            <blockTable colWidths="50.0,490.0" style="Tot_Representant" keepWithNext="1">
                 <tr>
                     <td>
                         <para style="Infos1"><font color="white"> </font></para>
@@ -333,7 +342,7 @@
             <section>
                 [[ repeatIn(data['form']['annees'], 'year') ]]
 
-                <blockTable colWidths="36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0" style="Tot_Information">
+                <blockTable colWidths="36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0" style="Tot_Information" keepWithNext="1">
                     <tr>
                         <td>
                             <para style="Infos">[[ year ]]</para>
@@ -442,7 +451,7 @@
         <font color="white"> </font>
     </para>
 
-    <blockTable colWidths="50.0,490.0" style="Tot_Representant">
+    <blockTable colWidths="50.0,490.0" style="Tot_Representant" keepWithNext="1">
         <tr>
             <td>
                 <para style="Infos1"><font color="white"> </font></para>
@@ -456,7 +465,7 @@
     <section>
         [[ repeatIn(data['form']['annees'], 'year') ]]
 
-        <blockTable colWidths="36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0" style="Tot_Information">
+        <blockTable colWidths="36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0,36.0" style="Tot_Information" keepWithNext="1">
             <tr>
                 <td>
                     <para style="Infos"><font color="white"> </font></para>

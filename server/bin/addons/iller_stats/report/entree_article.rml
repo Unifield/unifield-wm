@@ -1,6 +1,15 @@
 <?xml version="1.0"?>
 <document filename="test.pdf">
-  <template pageSize="(595.0,842.0)" title="Test" author="Martin Simon" allowSplitting="20">
+    <template pageSize="(595.0,842.0)" title="Test" author="Martin Simon" allowSplitting="20">
+        <pageTemplate id="footer">
+            <pageGraphics>
+                <setFont name="Helvetica" size="6" />
+                <fill color="black" />
+                <stroke color="black" />
+                <drawCentredString x="10.5cm" y="0.8cm">Page: <pageNumber /></drawCentredString>
+            </pageGraphics>
+            <frame x1="1.3cm" y1="2.5cm" height="750" width="480" />
+        </pageTemplate>
     <pageTemplate id="first">
       <frame id="first" x1="57.0" y1="57.0" width="481" height="728"/>
     </pageTemplate>
