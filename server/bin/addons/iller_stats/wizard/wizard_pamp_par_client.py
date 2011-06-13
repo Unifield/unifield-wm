@@ -144,11 +144,11 @@ class edition_pamp_par_client(osv.osv_memory):
 
     _columns = {
         'designation': fields.char(string="Désignation", size=100, required=True),
-        'quantite': fields.integer(string="Quantité", required=True),
-        'val_cons': fields.integer(string="Val. cons.", required=True),
-        'ca_ht': fields.integer(string="CA. HT", required=True),
-        'marge': fields.integer(string="Marge", required=True),
-        'marge_sur_ca': fields.integer(string="% Marge / CA HT", required=True),
+        'quantite': fields.char(string="Quantité", size=15),
+        'val_cons': fields.char(string="Val. cons.", size=15),
+        'ca_ht': fields.char(string="CA. HT", size=15),
+        'marge': fields.char(string="Marge", size=15),
+        'marge_sur_ca': fields.char(string="% Marge / CA HT", size=15),
         'est_client': fields.boolean(string="Est un client ?"),
     }
 
