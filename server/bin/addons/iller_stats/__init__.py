@@ -24,6 +24,7 @@ import entree_article
 import ca_client
 import report
 import wizard
+import nbre_cmde_par_tournee
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

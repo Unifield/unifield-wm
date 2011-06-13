@@ -2,6 +2,7 @@
 <openerp>
     <data>
 
+    <!-- Vues -->
         <record id="gibier_entree_sortie_tree" model="ir.ui.view">
             <field name="name">gibier.entree.sortie.tree</field>
             <field name="model">gibier.entree.sortie</field>
@@ -91,5 +92,33 @@
             </field>
         </record>
 
+    <!-- Vue pour le nombre de commandes par code regroupement (tournee) -->
+        <record id="nbre_cmde_par_tournee_tree" model="ir.ui.view">
+            <field name="name">nbre.cmde.par.tournee.tree</field>
+            <field name="model">nbre.cmde.par.tournee</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Nombre de commandes par code regroupement (tournées)">
+                    <field name="name" />
+                    <field name="heure_depart" />
+                    <field name="tot_non_validees" />
+                    <field name="tot_facturees" />
+                </tree>
+            </field>
+        </record>
+
+    <!-- Actions -->
+        <record id="action_nbre_cmde_par_tournee" model="ir.actions.act_window">
+            <field name="name">Nombre de commandes par tournées</field>
+            <field name="res_model">nbre.cmde.par.tournee</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="nbre_cmde_par_tournee_tree" />
+        </record>
+
+    <!-- Menus -->
+        <menuitem action="action_nbre_cmde_par_tournee" 
+            id="menu_action_nbre_cmde_par_tournee" 
+            parent="sale.menu_sale_root"/>
     </data>
 </openerp>
