@@ -71,9 +71,36 @@ class iller_sale(osv.osv):
                 res[so.id] = 'd'
         return res
 
+    def _contient_ligne_decoupe_search(self, cr, uid, obj, name, args, context={}):
+        """
+        Renvoie la liste des commandes de ventes suivant les cas suivants :
+        - commandes ayant une ligne de commande contenant un produit allant à la découpe (product_id.code_affectation == 'DECP')
+        - commandes inverses
+        """
+        if not len(args):
+            return []
+        res = []
+        sql_decoupe = """
+            SELECT so.id 
+            FROM sale_order so, sale_order_line sol, product_product p
+            WHERE sol.order_id = so.id
+            AND sol.product_id = p.id
+            AND p.code_affectation = 'DECP' 
+            GROUP BY so.id ORDER BY so.id
+        """
+        for arg in args:
+            if arg[1] not in ('='):
+                raise osv.except_osv(_('Attention'), _("La recherche ne prend pas en charge d'autre opérateur que '='"))
+            if arg[2] == 'd':
+                sql = sql_decoupe
+            cr.execute(sql)
+            res = cr.fetchall()
+        return [('id', 'in', [x[0] for x in res])]
+
     _columns = {
         'tournee_id': fields.many2one('tournee.iller', string='Tournée'),
-        'contient_decoupe': fields.function(_contient_ligne_decoupe, type='selection', selection= [('d', 'D')], method=True, string="Découpe", store=False, required=False, readonly=True),
+        'contient_decoupe': fields.function(_contient_ligne_decoupe, fnct_search=_contient_ligne_decoupe_search, type='selection', 
+            selection= [('d', 'D')], method=True, string="Découpe", store=False, required=False, readonly=True),
     }
 
 iller_sale()
@@ -94,8 +121,8 @@ class iller_sale_order_line(osv.osv):
         product_obj = self.pool.get('product.product')
         tournee_obj = self.pool.get('tournee.iller')
 
-        res = super(iller_sale_order_line, self).product_id_change(cr, uid, ids, pricelist, product_id, qty, uom, qty_uos, uos, name, partner_id,
-                                                             lang, update_tax, date_order, packaging, fiscal_position, flag)
+        res = super(iller_sale_order_line, self).product_id_change(cr, uid, ids, pricelist, product_id, qty, uom, qty_uos, uos, name, 
+            partner_id, lang, update_tax, date_order, packaging, fiscal_position, flag)
 
         if product_id and tournee_id:
             product = product_obj.browse(cr, uid, product_id)

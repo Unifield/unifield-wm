@@ -30,7 +30,7 @@
                         <field name="tournee_id" />
                     </xpath>
                     <xpath expr="/tree/field[@name='tournee_id']" position="before">
-                        <field name="contient_decoupe"/>
+                        <field name="contient_decoupe" select="1"/>
                     </xpath>
                 </data>
             </field>
