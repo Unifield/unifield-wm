@@ -53,10 +53,28 @@ class iller_sale(osv.osv):
         export_bizerba_obj = self.pool.get('export.bizerba')
         export_bizerba_obj.get_file(cr, uid, ids)
 
+    def _contient_ligne_decoupe(self, cr, uid, ids, field_name, arg, context={}):
+        """
+        Retourne 'D' si une ligne de découpe figure dans la commande de vente, sinon retourne une chaîne vide.
+        NB: Une ligne de découpe est visible par sale.order.line, product_id puis code_affectation dont la valeur est 'DECP'.
+        """
+        res = {}
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+        for so in self.browse(cr, uid, ids, context=context):
+            total = 0
+            res[so.id] = ''
+            for sol in so.order_line:
+                if sol.product_id and sol.product_id.code_affectation == 'DECP':
+                    total += 1
+            if total > 0:
+                res[so.id] = 'd'
+        return res
+
     _columns = {
         'tournee_id': fields.many2one('tournee.iller', string='Tournée'),
+        'contient_decoupe': fields.function(_contient_ligne_decoupe, type='selection', selection= [('d', 'D')], method=True, string="Découpe", store=False, required=False, readonly=True),
     }
-
 
 iller_sale()
 
