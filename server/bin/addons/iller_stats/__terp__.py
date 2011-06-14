@@ -39,6 +39,7 @@
         'iller_stats_report.xml',
         'stats_view.xml',
         'stats_wizard.xml',
+        'sale_view.xml',
     ],
     "demo_xml": [
     ],
