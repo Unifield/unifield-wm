@@ -28,6 +28,7 @@ from datetime import date
 from datetime import datetime
 from datetime import timedelta
 import time
+from tools.translate import _
 
 def rounding(f, r):
     if not r:
