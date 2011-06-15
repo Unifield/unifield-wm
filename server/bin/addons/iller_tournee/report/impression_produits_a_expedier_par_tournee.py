@@ -46,7 +46,7 @@ class impression_produits_a_expedier_par_tournee(report_sxw.rml_parse):
         min_date = datetime(la_date.year, la_date.month, la_date.day, 0, 0 ,0).__str__()
         max_date = datetime(la_date.year, la_date.month, la_date.day, 23, 59 ,59).__str__()
         # Récupération des ids de commandes correspondant à la recherche fournie
-        res_ids = sp_obj.search(self.cr, self.uid, [('tournee_id', '=', tournee_id[0]), ('max_date', '>=', min_date), ('max_date', '<=', max_date), ('state', '=', 'confirmed')])
+        res_ids = sp_obj.search(self.cr, self.uid, [('tournee_id', '=', tournee_id), ('max_date', '>=', min_date), ('max_date', '<=', max_date), ('state', '=', 'confirmed')])
         # Création du résultat
         res = []
         for sp in res_ids:

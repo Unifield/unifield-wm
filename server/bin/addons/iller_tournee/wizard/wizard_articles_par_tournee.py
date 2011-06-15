@@ -72,6 +72,8 @@ class wizard_articles_par_tournee(osv.osv_memory):
         datas = {'ids': context.get('active_ids', [])}
         res = self.read(cr, uid, ids, ['tournee_id', 'date', 'type'], context=context)
         res = res and res[0] or {}
+        tournee = self.pool.get('tournee.iller').read(cr, uid, res['tournee_id'], ['name'])
+        res.update({'tournee_id': tournee})
         datas['form'] = res
         return {
             'type': 'ir.actions.report.xml',

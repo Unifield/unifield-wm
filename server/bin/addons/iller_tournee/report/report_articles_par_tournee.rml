@@ -56,7 +56,7 @@
     <blockTable colWidths="567.0" style="Tableau1">
       <tr>
         <td>
-          <para style="P2">Tournée : <font face="Times-Roman">[[ data['form']['tournee_id'][1] ]]</font></para>
+          <para style="P2">Tournée : <font face="Times-Roman">[[ data['form']['tournee_id']['name'] ]]</font></para>
         </td>
       </tr>
     </blockTable>
@@ -64,7 +64,7 @@
       <font color="white"> </font>
     </para>
     <section>
-      <para style="Standard">[[ repeatIn(getSaleOrderLineByType(data['form']['tournee_id'][0], data['form']['date'], data['form']['type']), 'solbt') ]]</para>
+      <para style="Standard">[[ repeatIn(getSaleOrderLineByType(data['form']['tournee_id']['id'], data['form']['date'], data['form']['type']), 'solbt') ]]</para>
       <blockTable colWidths="567.0" style="Tableau2">
         <tr>
           <td>

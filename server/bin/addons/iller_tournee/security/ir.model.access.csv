@@ -1,0 +1,15 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_iller_poste_user","iller.poste.user","model_iller_poste","base.group_user",1,0,0,0
+"access_iller_tournee_user","iller.tournee.user","model_tournee_iller","base.group_user",1,0,0,0
+"access_iller_poste_mgmt","iller.poste.mgmt","model_iller_poste","iller_tournee.group_tournee_mgmt",1,1,1,1
+"access_iller_tournee_mgmt","iller.tournee.mgmt","model_tournee_iller","iller_tournee.group_tournee_mgmt",1,1,1,1
+"access_commande_par_tournee","commande.par.tournee","model_commandes_par_tournee","sale.group_sale_user",1,0,0,0
+"access_commande_par_tournee_mgmt","commande.par.tournee.mgmt","model_commandes_par_tournee","sale.group_sale_manager",1,0,0,0
+"access_article_par_tournee","article.par.tournee","model_articles_par_tournee","sale.group_sale_user",1,0,0,0
+"access_article_par_tournee_mgmt","article.par.tournee.mgmt","model_articles_par_tournee","sale.group_sale_manager",1,0,0,0
+"access_produits_a_expedier_tournee","produits.a.expedier.tournee","model_produits_a_expedier_par_tournee","stock.group_stock_user",1,0,0,0
+"access_produits_a_expedier_tournee_mgmt","produits.a.expedier.tournee.mgmt","model_produits_a_expedier_par_tournee","stock.group_stock_manager",1,0,0,0
+"access_produits_par_poste","produits.par.poste","model_produits_par_poste","stock.group_stock_user",1,0,0,0
+"access_produits_par_poste_mgmt","produits.par.poste.mgmt","model_produits_par_poste","stock.group_stock_manager",1,0,0,0
+"access_export_bizerba","export.bizerba","model_export_bizerba","stock.group_stock_user",1,0,0,0
+"access_export_bizerba_mgmt","export.bizerba.mgmt","model_export_bizerba","stock.group_stock_manager",1,0,0,0

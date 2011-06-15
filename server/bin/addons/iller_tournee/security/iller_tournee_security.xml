@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<openerp>
+	<data>
+
+        <!-- Groups -->
+        <record id="group_tournee_mgmt" model="res.groups">
+            <field name="name">Gestion des tournées</field>
+        </record>
+
+        <!-- Menus accesses -->
+        <record id="menu_tournee_tree" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_user'), ref('iller_tournee.group_tournee_mgmt')])]" />
+        </record>
+
+        <record id="menu_tournee_form" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('iller_tournee.group_tournee_mgmt')])]" />
+        </record>
+        <record id="menu_postes" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('iller_tournee.group_tournee_mgmt')])]" />
+        </record>
+        <record id="menu_decoupe_tree" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('iller_tournee.group_tournee_mgmt')])]" />
+        </record>
+        <record id="menu_preparation_tree" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('iller_tournee.group_tournee_mgmt')])]" />
+        </record>
+
+        <record id="menu_commandes_par_tournee" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('sale.group_sale_user'), ref('sale.group_sale_manager')])]" />
+        </record>
+        <record id="menu_articles_par_tournee" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('sale.group_sale_user'), ref('sale.group_sale_manager')])]" />
+        </record>
+
+        <record id="menu_produits_a_expedier_par_tournee" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('stock.group_stock_user'), ref('stock.group_stock_manager')])]" />
+        </record>
+        <record id="menu_etat_produits_a_expedier_par_tournee" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('stock.group_stock_user'), ref('stock.group_stock_manager')])]" />
+        </record>
+        <record id="menu_produits_par_poste" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('stock.group_stock_user'), ref('stock.group_stock_manager')])]" />
+        </record>
+
+
+	</data>
+</openerp>
+
