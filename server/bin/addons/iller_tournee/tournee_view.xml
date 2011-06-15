@@ -11,7 +11,7 @@
                 <xpath expr="/form/notebook/page[@string='Sales &amp; Purchases']" position="after">
                     <page string="Tournées">
                         <separator string="Tournées" colspan="4"/>
-                        <field name="tournee1" />
+                        <field name="tournee1" attrs="{'required':[('customer','=',True)]}"/>
                         <field name="tournee2" />
                         <field name="tournee3" />
                         <newline />
