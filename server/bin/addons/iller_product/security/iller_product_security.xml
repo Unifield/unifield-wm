@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<openerp>
+	<data>
+
+        <!-- Groups -->
+        <record id="group_iller_tarif" model="res.groups">
+            <field name="name">Gestion des tarifs/promo</field>
+        </record>
+
+        <!-- Menus -->
+        <record id="menu_product_pricelist_bareme" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('iller_product.group_iller_tarif')])]" />
+        </record>
+        <record id="menu_pricelist_promo_configuration" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('iller_product.group_iller_tarif')])]" />
+        </record>
+        <record id="menu_pricelist_configure_promo" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('iller_product.group_iller_tarif')])]" />
+        </record>
+
+	</data>
+</openerp>
+
