@@ -45,7 +45,7 @@ class export_bizerba(osv.osv_memory):
         res.append(str(tournee.name or " ")[:30].rjust(30, " "))
         # (8) Date de livraison AAAAMMJJ
         # date de commande + delay (sur sale_order_line)
-        date_livraison = datetime.datetime(date.year, date.month, date.day + sol.delay)
+        date_livraison = datetime.datetime(date.year, date.month, date.day) + datetime.timedelta(days=sol.delay)
         res.append(str(date_livraison.strftime('%Y%m%d') or "00000000"))
         # (4) Heure de départ HHMM (compléter avec un 0 si besoin)
         res.append(str(tournee.heure_depart or "0").rjust(4, "0"))
