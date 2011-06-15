@@ -13,7 +13,6 @@ class iller_commission(osv.osv):
         'taux_com': fields.float(digits=(16,3), string='Taux commission'),
     }
 
-
 iller_commission()
 
 

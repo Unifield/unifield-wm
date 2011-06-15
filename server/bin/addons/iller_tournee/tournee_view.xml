@@ -239,6 +239,7 @@
 
         <menuitem id="menu_tournee_form"
                   action="action_tournee_form"
+                  groups="iller_partner.group_iller_partner"
                   parent="base.menu_base_partner" />
 
         <menuitem id="menu_postes"

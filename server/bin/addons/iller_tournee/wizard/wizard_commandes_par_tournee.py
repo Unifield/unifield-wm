@@ -26,7 +26,7 @@ from osv import fields
 from tools.translate import _
 import time
 
-class commandes_par_tournee(osv.osv):
+class commandes_par_tournee(osv.osv_memory):
     """
     Affiche un wizard pour obtenir la liste des commandes validées 
     par tournée et par date (selon ce que l'utilisateur complète)

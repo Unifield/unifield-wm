@@ -25,7 +25,7 @@ from osv import osv, fields
 import time
 from datetime import datetime
 
-class wizard_produits_par_poste(osv.osv):
+class wizard_produits_par_poste(osv.osv_memory):
     _name = "produits.par.poste"
 
     _columns = {

@@ -26,7 +26,7 @@ from osv import fields
 from datetime import datetime
 import time
 
-class wizard_produits_a_expedier_par_tournee(osv.osv):
+class wizard_produits_a_expedier_par_tournee(osv.osv_memory):
     _name = 'produits.a.expedier.par.tournee'
     _columns = {
         'tournee_id': fields.many2one('tournee.iller', string="Tournée", required=True),
