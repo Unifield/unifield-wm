@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<document filename="test.pdf">
+    <template pageSize="(595.0,842.0)" title="Test" author="Martin Simon" allowSplitting="20">
+        <pageTemplate id="footer">
+            <pageGraphics>
+                <setFont name="Helvetica" size="6"/>
+                <fill color="black"/>
+                <stroke color="black"/>
+
+                <!-- Array header -->
+                <place x="1.3cm" y="22.9cm" height="6cm" width="480">
+                    <blockTable colWidths="130.0,50.0,50.0,50.0,50.0,50.0,50.0,50.0" style="EditArt">
+                        <tr>
+                            <td><para style="Standard">DESIGNATION</para></td>
+                            <td><para style="Standard">QT. ENTR.</para></td>
+                            <td><para style="Standard">QT. SORT.</para></td>
+                            <td><para style="Standard">QT. STOC.</para></td>
+                            <td><para style="Standard">VAL. ACHAT</para></td>
+                            <td><para style="Standard">VAL. SORTIE</para></td>
+                            <td><para style="Standard">VAL. S. DEP</para></td>
+                            <td><para style="Standard">INV-(SIS)</para></td>
+                        </tr>
+                        <tr>
+                            <td><para style="Standard">CPTA        RUNGIEST</para></td>
+                            <td><para style="Standard">QT. ST. INIT.</para></td>
+                            <td><para style="Standard">QT. INVENT</para></td>
+                            <td><para style="Standard">QT. ST. DEB.</para></td>
+                            <td><para style="Standard">VAL. S. INIT</para></td>
+                            <td><para style="Standard">VAL. CONSO</para></td>
+                            <td><para style="Standard">VAL. MARGE</para></td>
+                            <td><para style="Standard">TX MARGE</para></td>
+                        </tr>
+                    </blockTable>
+                </place>
+
+                <!-- footer -->
+                <drawCentredString x="10.5cm" y="0.8cm">Page: <pageNumber/></drawCentredString>
+            </pageGraphics>
+            <frame x1="1.3cm" y1="1.5cm" height="750" width="480"/>
+        </pageTemplate>
+</template>
+<stylesheet>
+    <blockTableStyle id="Standard_Outline">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+  </blockTableStyle>
+    <blockTableStyle id="EditArt">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+      <lineStyle kind="OUTLINE" colorName="#000000" />
+      <lineStyle kind="LINEBEFORE" colorName="#000000" />
+      <lineStyle kind="LINEAFTER" colorName="#000000" />
+  </blockTableStyle>
+    <initialize>
+      <paraStyle name="all" alignment="justify"/>
+  </initialize>
+    <paraStyle name="Standard" fontName="Helvetica" fontSize="6.0" leading="7" alignment="LEFT" />
+    <images/>
+  </stylesheet>
+  <story>
+      <para style="Standard">[[ setLang('fr_FR') ]]</para>
+
+      <section>
+          [[ repeatIn(getLines(), 'o') ]]
+          <blockTable colWidths="130.0,50.0,50.0,50.0,50.0,50.0,50.0,50.0" style="EditArt" >
+              <tr>
+                  <td>
+                    <para style="Standard">[[ o['categ_id'][1][:38] ]]</para>
+                  </td>
+                  <td>
+                    <para style="Standard">[[ formatLang(o['qty_entrees']) ]]</para>
+                  </td>
+                  <td>
+                    <para style="Standard">[[ formatLang(o['qty_sorties']) ]]</para>
+                  </td>
+                  <td>
+                      <para style="Standard">[[ formatLang(o['qty_stock']) ]]</para>
+                  </td>
+                  <td>
+                    <para style="Standard">[[ formatLang(o['val_achat']) ]]</para>
+                  </td>
+                  <td>
+                    <para style="Standard">[[ formatLang(o['val_sorties']) ]]</para>
+                  </td>
+                  <td>
+                    <para style="Standard">[[ formatLang(o['val_stock_debut']) ]]</para>
+                  </td>
+                  <td>
+                    <para style="Standard">[[ formatLang(o['val_inv_sis']) ]]</para>
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                    <para style="Standard"> </para>
+                  </td>
+                  <td>
+                    <para style="Standard">[[ formatLang(o['qty_stock_init']) ]]</para>
+                  </td>
+                  <td>
+                    <para style="Standard">[[ formatLang(o['qty_inv']) ]]</para>
+                  </td>
+                  <td>
+                    <para style="Standard">[[ formatLang(o['qty_stock_debut']) ]]</para>
+                  </td>
+                  <td>
+                    <para style="Standard">[[ formatLang(o['val_st_init']) ]]</para>
+                  </td>
+                  <td>
+                    <para style="Standard">[[ formatLang(o['val_consom']) ]]</para>
+                  </td>
+                  <td>
+                    <para style="Standard">[[ formatLang(o['val_marge']) ]]</para>
+                  </td>
+                  <td>
+                    <para style="Standard">[[ formatLang(o['taux_marge']) ]]</para>
+                  </td>
+              </tr>
+          </blockTable>
+
+     </section>
+
+  </story>
+</document>
+

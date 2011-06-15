@@ -36,6 +36,8 @@
     "update_xml": [
         'entree_article_view.xml',
         'ca_client_view.xml',
+        'edition_article_view.xml',
+        'edition_famille_view.xml',
         'iller_stats_report.xml',
         'stats_view.xml',
         'stats_wizard.xml',

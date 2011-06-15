@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<openerp>
+	<data>
+
+        <record id="edition_famille_tree_view" model="ir.ui.view">
+            <field name="name">edition.famille.tree.view</field>
+            <field name="model">stats.edition.famille</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Edition des familles">
+                    <field name="categ_id" />
+                    <field name="qty_entrees" />
+                    <field name="qty_stock_init" />
+                    <field name="qty_sorties" />
+                    <field name="qty_inv" />
+                    <field name="qty_stock" />
+                    <field name="qty_stock_debut" />
+                    <field name="val_achat" />
+                    <field name="val_st_init" />
+                    <field name="val_sorties" />
+                    <field name="val_consom" />
+                    <field name="val_stock_debut" />
+                    <field name="val_marge" />
+                    <field name="val_inv_sis" />
+                    <field name="taux_marge" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="edition_famille_init_form_view" model="ir.ui.view">
+            <field name="name">edition.famille.init.form.view</field>
+            <field name="model">stats.edition.famille.init</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Edition Familles">
+                    <separator colspan="4" string="Edition Familles                 " />
+                    <field name="date_depart" colspan="4" />
+                    <field name="date_fin" colspan="4" />
+                    <separator colspan="4" string="Actions" />
+                    <button special="cancel" string="Annuler" colspan="2" icon="gtk-cancel" />
+                    <button name="display_report" string="Print report" icon="gtk-execute" type="object" colspan="2" />
+                </form>
+            </field>
+        </record>
+
+        <record id="edition_famille_init_action" model="ir.actions.act_window">
+            <field name="name">Edition Familles</field>
+            <field name="res_model">stats.edition.famille.init</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="edition_famille_init_form_view" />
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="edition_famille_init_menu"
+                  action="edition_famille_init_action"
+                  parent="main_statistiques" />
+
+	</data>
+</openerp>
+

@@ -23,6 +23,8 @@
 import entree_article
 import ca_client_periode
 import ca_client_par_an
+import edition_article
+import edition_famille
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

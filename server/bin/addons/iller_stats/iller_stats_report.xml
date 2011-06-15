@@ -29,6 +29,24 @@
                 menu="False"
                 auto="False" />
 
+        <report id="report_edition_article"
+                name="edition.article"
+                string="Edition Article"
+                model="stats.edition.article"
+                rml="iller_stats/report/edition_article.rml"
+                header="False"
+                menu="True"
+                auto="False" />
+
+        <report id="report_edition_famille"
+                name="edition.famille"
+                string="Edition Famille"
+                model="stats.edition.famille"
+                rml="iller_stats/report/edition_famille.rml"
+                header="False"
+                menu="True"
+                auto="False" />
+
 	</data>
 </openerp>
 

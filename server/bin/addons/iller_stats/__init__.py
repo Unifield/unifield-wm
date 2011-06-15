@@ -22,6 +22,8 @@
 
 import entree_article
 import ca_client
+import edition_article
+import edition_famille
 import report
 import wizard
 import nbre_cmde_par_tournee
