@@ -31,7 +31,7 @@
 """,
     'author': 'TeMPO Consulting',
     'website': 'http://www.tempo-consulting.com',
-    'depends': ['product'],
+    'depends': ['product', 'stock'],
     'init_xml': [],
     'demo_xml': [],
     'update_xml': [

@@ -133,14 +133,14 @@
             <field name="type">form</field>
             <field name="inherit_id" ref="inherit_product_normal_form_view3" />
             <field name="arch" type="xml">
-                <data>
+               <data>
                     <xpath expr="/form/group/group[3]" position="replace" />
                     <xpath expr="/form/notebook/page[@string='Information']//field[@name='state']" position="replace" />
                     <xpath expr="/form/notebook//field[@name='active']" position="replace" />
+                    <xpath expr="/form/notebook/page[@string='Procurement &amp; Locations']" position="replace" />
                     <xpath expr="/form/notebook/page[@string='Information']//field[@name='liste_prepa']" position="after">
                         <field name="active" />
                     </xpath>
-                    <xpath expr="/form/notebook/page[@string='Procurement &amp; Locations']" position="replace" />
                 </data>
             </field>
         </record>

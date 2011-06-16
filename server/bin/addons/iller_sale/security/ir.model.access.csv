@@ -1,0 +1,11 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_iller_sale_comment","iller.sale.comment","model_iller_sale_comment","sale.group_sale_user",1,1,1,1
+"access_iller_sale_comment_mgmt","iller.sale.comment.mgmt","model_iller_sale_comment","sale.group_sale_manager",1,1,1,1
+"access_wizard_marges_articles","iller.wizard.marges.articles","model_wizard_marges_articles","sale.group_sale_user",1,0,0,0
+"access_wizard_marges_articles_mgmt","iller.wizard.marges.articles.mgmt","model_wizard_marges_articles","sale.group_sale_manager",1,1,1,1
+"access_wizard_ventes_representants","wizard.ventes.representants","model_wizard_ventes_representants","sale.group_sale_user",1,0,0,0
+"access_wizard_ventes_representants_mgmt","wizard.ventes.representants.mgmt","model_wizard_ventes_representants","sale.group_sale_manager",1,1,1,1
+"access_wizard_export_journal_ventes","wizard.export.journal.ventes","model_wizard_export_journal_ventes","sale.group_sale_user",1,0,0,0
+"access_wizard_export_journal_ventes_mgmt","wizard.export.journal.ventes.mgmt","model_wizard_export_journal_ventes","sale.group_sale_manager",1,1,1,1
+"access_wizard_commission_representant","wizard.commission.representant","model_wizard_commission_representant","sale.group_sale_user",1,0,0,0
+"access_wizard_commission_representant_mgmt","wizard.commission.representant.mgmt","model_wizard_commission_representant","sale.group_sale_manager",1,1,1,1

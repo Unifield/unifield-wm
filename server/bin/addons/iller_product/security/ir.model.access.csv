@@ -25,3 +25,9 @@
 "access_wizard_choose_category","iller.wizard.choose.category","model_wizard_choose_category","base.group_user",1,0,0,0
 "access_wizard_modif_coeff","iller.wizard.modif.coeff","model_wizard_modif_coeff","base.group_user",1,0,0,0
 "access_wizard_print_pricelist_cat","iller.wizard.print.pricelist.cat","model_wizard_print_pricelist_cat","base.group_user",1,0,0,0
+"access_tarif_sale_order","iller.tarif.sale.order","sale.model_sale_order","group_iller_tarif",1,0,0,0
+"access_tarif_sale_order_line","iller.tarif.sale.order.line","sale.model_sale_order_line","group_iller_tarif",1,0,0,0
+"access_tarif_pricelist_promo_config","iller.tarif.pricelist.promo.config","model_pricelist_promo_configuration","group_iller_tarif",1,0,0,0
+"access_tarif_product_pricelist_bareme","iller.tarif.product.pricelist.bareme","model_product_pricelist_bareme","group_iller_tarif",1,0,0,0
+"access_tarif_product_pricelist_version","iller.tarif.product.pricelist.version","product.model_product_pricelist_version","group_iller_tarif",1,1,1,1
+"access_tarif_product_pricelist_item","iller.tarif.product.pricelist.item","product.model_product_pricelist_item","group_iller_tarif",1,1,1,1

@@ -63,15 +63,12 @@ class wizard_picking_to_invoice(osv.osv_memory):
                 if jour > dernier_jour:
                     jour = dernier_jour
                 last_date = datetime(annee, mois, jour)
-                print last_date
             elif mode == 's':
                 last_date = ce_jour - timedelta(days=7)
             elif mode =='d':
                 last_date = ce_jour - timedelta(days=10)
             elif mode == 'r':
                 last_date = ce_jour
-            else:
-                print "Mode de paiement inconnu"
         return last_date
 
     def action_make_invoices(self, cr, uid, ids, context={}):
