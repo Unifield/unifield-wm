@@ -4,6 +4,7 @@
 
         <menuitem 
             name="Rapports"
+            sequence="100"
             id="iller_product_pricelist_rapports_menu"
             parent="product.menu_main_product" /> 
 
@@ -165,7 +166,7 @@
                 <form string="Choix de la catégorie">
                     <field name="category_id" colspan="4" />
                     <field name="type" colspan="4" />
-                    <button name="_choose" string="Continuer" type="object" colspan="4" />
+                    <button icon="gtk-ok" name="_choose" string="Continuer" type="object" colspan="4" />
                 </form>
             </field>
         </record>
@@ -218,7 +219,7 @@
                         <separator string="Catégories" colspan="2" />
                         <field name="category_ids" nolabel="1" colspan="2" />
                     </group>
-                    <button name="_print" string="Imprimer" colspan="4" type="object" />
+                    <button icon="gtk-print" name="_print" string="Imprimer" colspan="4" type="object" />
                 </form>
             </field>
         </record>

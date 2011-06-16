@@ -500,7 +500,8 @@ class module(osv.osv):
                 logger.notifyChannel("init", netsvc.LOG_WARNING, 'module %s: description is empty !' % (mod.name,))
 
             if not mod.certificate or not mod.certificate.isdigit():
-                logger.notifyChannel('init', netsvc.LOG_WARNING, 'module %s: no quality certificate' % (mod.name,))
+                pass
+#                logger.notifyChannel('init', netsvc.LOG_WARNING, 'module %s: no quality certificate' % (mod.name,))
             else:
                 val = long(mod.certificate[2:]) % 97 == 29
                 if not val:

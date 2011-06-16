@@ -36,6 +36,7 @@
     'update_xml': [
             'stock_wizard.xml',
             'stock_view.xml',
+            'security/ir.model.access.csv',
 ],
     'installable': True,
     'active': False,

@@ -121,11 +121,11 @@ class export_tarif_sncf(wizard.interface):
     states = {
             'init' : {
                     'actions' : [_init],
-                    'result' : {'type' : 'form', 'arch' : arch, 'fields' : fields, 'state' : [('end', 'Cancel'),('export', 'Génération du tarif') ]}
+                    'result' : {'type' : 'form', 'arch' : arch, 'fields' : fields, 'state' : [('end', 'Cancel', 'gtk-cancel'),('export', 'Génération du tarif', 'gtk-ok') ]}
             },
             'export' : {
                     'actions' : [_export],
-                    'result' : {'type':'form', 'arch' : arch_end, 'fields' : fields_end, 'state' : [('end', 'Fin')]}
+                    'result' : {'type':'form', 'arch' : arch_end, 'fields' : fields_end, 'state' : [('end', 'Fin', 'gtk-cancel')]}
             },
     }
 export_tarif_sncf('export.tarif.sncf')

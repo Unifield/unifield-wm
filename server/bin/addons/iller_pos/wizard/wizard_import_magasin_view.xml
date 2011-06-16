@@ -51,7 +51,6 @@
         <menuitem id="point_of_sale.menu_action_pos_order_tree3" parent="iller_magasin" />
         <menuitem id="point_of_sale.menu_action_pos_order_line" parent="iller_magasin" />
         <menuitem id="point_of_sale.menu_trans_pos_tree_month" parent="iller_magasin" />
-        <menuitem id="point_of_sale.menu_action_pos_order_line_day" parent="point_of_sale.menu_point_root" />
 
 
 	</data>

@@ -44,6 +44,7 @@
         'sale_report.xml',
         'invoice_sequence.xml',
         'invoice_view.xml',
+        'security/ir.model.access.csv',
     ],
     'installable': True,
     'active': False,

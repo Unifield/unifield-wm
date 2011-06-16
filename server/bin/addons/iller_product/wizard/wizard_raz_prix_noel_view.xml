@@ -9,7 +9,7 @@
             <field name="arch" type="xml">
                 <form string="Remise à zéro">
                     <label colspan="4" string="Remettre les prix de Noël à zéro" />
-                    <button colspan="4" string="Remettre à zéro" type="object" name="_raz" />
+                    <button icon="gtk-ok" colspan="4" string="Remettre à zéro" type="object" name="_raz" />
                 </form>
             </field>
         </record>
@@ -30,7 +30,7 @@
             <field name="arch" type="xml">
                 <form string="Remise à zéro">
                     <label colspan="4" string="Les prix de Noël ont été remis à zéro" />
-                    <button colspan="4" string="Fermer" type="object" name="_close" />
+                    <button icon="gtk-cancel" colspan="4" string="Fermer" type="object" name="_close" />
                 </form>
             </field>
         </record>
