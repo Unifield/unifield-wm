@@ -1,0 +1,11 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_wizard_import_magasin","iller.wizard.import.magasin","model_wizard_import_magasin","sale.group_sale_user",1,0,0,0
+"access_wizard_import_magasin_mgmt","iller.wizard.import.magasin.mgmt","model_wizard_import_magasin","sale.group_sale_manager",1,0,0,0
+"access_pos_line","iller.pos.line","point_of_sale.model_pos_order_line","sale.group_sale_user",1,1,1,1
+"access_pos_line_mgmt","iller.pos.line.mgmt","point_of_sale.model_pos_order_line","sale.group_sale_manager",1,1,1,1
+"access_pos","iller.pos","point_of_sale.model_pos_order","sale.group_sale_user",1,1,1,1
+"access_pos_mgmt","iller.pos.mgmt","point_of_sale.model_pos_order","sale.group_sale_manager",1,1,1,1
+"access_pos_account_journal","iller.pos.account.journal","account.model_account_journal","sale.group_sale_user",1,0,0,0
+"access_pos_account_journal_mgmt","iller.pos.account.journal.mgmt","account.model_account_journal","sale.group_sale_manager",1,0,0,0
+"access_iller_report_transaction_pos","iller.report.transaction.pos","point_of_sale.model_report_transaction_pos","sale.group_sale_user",1,1,1,1
+"access_iller_report_transaction_pos_mgmt","iller.report.transaction.pos.mgmt","point_of_sale.model_report_transaction_pos","sale.group_sale_manager",1,1,1,1

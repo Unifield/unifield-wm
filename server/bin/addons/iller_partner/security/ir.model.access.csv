@@ -1,0 +1,3 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_acount_invoice_partner","iller.account.invoice.partner","account.model_account_invoice","base.group_user",1,0,0,0
+"access_account_fiscalyear_partner","iller.account.fiscalyear.partner","account.model_account_fiscalyear","base.group_user",1,0,0,0

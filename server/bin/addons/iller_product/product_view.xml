@@ -34,22 +34,22 @@
             <field name="arch" type="xml">
                 <xpath expr="/form/notebook/page[@string='Prices &amp; Suppliers']" position="replace">
                     <page string='Prices &amp; Suppliers'>
-                        <group colspan="2" col="2">
-                            <separator string="Achat" />
+                            <separator string="Achat" colspan="2" />
+                            <separator string="Vente" colspan="2" />
                             <field name="standard_price" readonly="1"/>
-                            <field name="prix_achat" on_change="coeff_price_change(prix_achat, coeff_depart, coeff_blanche)" required="1" readonly="0" />
-                            <field name="coeff_depart" on_change="coeff_price_change(prix_achat, coeff_depart, coeff_blanche)" required="1" />
-                            <field groups="base.group_extended" name="cost_method"/>
-                        </group>
-                        <group colspan="2" col="2">
-                            <separator string="Vente" />
                             <field name="list_price" readonly="1"/>
+                            <field name="prix_achat" on_change="coeff_price_change(prix_achat, coeff_depart, coeff_blanche)" required="1" readonly="0" />
                             <field name="price_margin" select="1"/>
+                            <field name="coeff_depart" on_change="coeff_price_change(prix_achat, coeff_depart, coeff_blanche)" required="1" />
                             <field name="price_extra" select="1"/>
-                            <field name="type_cond" on_change="cond_onchange(type_cond, type_preselec)" required="1"/>
-                            <field name="type_preselec" on_change="preselec_onchange(type_cond, type_preselec)" required="1"/>
-                        </group>
-			<separator colspan="4" />
+                            <field groups="base.group_extended" name="cost_method"/>
+                        <separator colspan="4" string="Promos" />
+                        <field name="coeff_blanche" on_change="promo_blanche_change(coeff_blanche, prix_achat)" required="1" />
+                        <field name="prix_blanche" readonly="1" />
+<!--
+                        <field name="coeff_jaune" />
+-->
+                        <field name="prix_decembre" />
                         <field colspan="4" mode="tree,form" name="price_history" nolabel="1" widget="one2many_list" readonly="1">
                                <form>
                                      <field name="name"/>
@@ -64,14 +64,6 @@
                                      <field name="comment" />
                                </tree>
                         </field>
-                        <separator colspan="4" string="Promos" />
-                        <field name="coeff_blanche" on_change="promo_blanche_change(coeff_blanche, prix_achat)" required="1" />
-                        <field name="prix_blanche" readonly="1" />
-<!--
-                        <field name="coeff_jaune" />
--->
-                        <field name="prix_decembre" />
-			<newline/>
                         <field colspan="4" name="seller_ids" nolabel="1"/>
                     </page>
                 </xpath>
@@ -109,9 +101,47 @@
             <field name="type">form</field>
             <field name="inherit_id" ref="product.product_normal_form_view" />
             <field name="arch" type="xml">
-                <xpath expr="/form/notebook/page[@string='Information']/group/field[@name='supply_method']" position="after">
-                    <field name="liste_prepa" />
-                </xpath>
+                <data>
+                    <xpath expr="/form/notebook/page[@string='Information']//field[@name='categ_id']" position="after">
+                        <field name="liste_prepa" />
+                        <field name="type_preselec" on_change="preselec_onchange(type_cond, type_preselec)" required="1"/>
+                    </xpath>
+                    <xpath expr="/form/notebook/page[@string='Information']//field[@name='supply_method']" position="after">
+                        <field name="type_cond" on_change="cond_onchange(type_cond, type_preselec)" required="1"/>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+        <!-- Delete 'Variant' on tree view -->
+        <record id="inherit_del_variant_product_product_tree_view" model="ir.ui.view">
+            <field name="name">inherit.del.variant.product.product.tree.view</field>
+            <field name="model">product.product</field>
+            <field name="type">tree</field>
+            <field name="inherit_id" ref="product.product_product_tree_view" />
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="/tree/field[@name='variants']" position="replace" />
+                </data>
+            </field>
+        </record>
+
+        <!-- Remodelage de la vue form des produits -->
+        <record id="remodelage_product_normal_form_view" model="ir.ui.view">
+            <field name="name">remodelage.product.normal.form.vie</field>
+            <field name="model">product.product</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="inherit_product_normal_form_view3" />
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="/form/group/group[3]" position="replace" />
+                    <xpath expr="/form/notebook/page[@string='Information']//field[@name='state']" position="replace" />
+                    <xpath expr="/form/notebook//field[@name='active']" position="replace" />
+                    <xpath expr="/form/notebook/page[@string='Information']//field[@name='liste_prepa']" position="after">
+                        <field name="active" />
+                    </xpath>
+                    <xpath expr="/form/notebook/page[@string='Procurement &amp; Locations']" position="replace" />
+                </data>
             </field>
         </record>
 

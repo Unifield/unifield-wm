@@ -92,7 +92,7 @@ class wizard_import_magasin(osv.osv_memory):
                     ## On recherche le produit
                     product_ids = self.pool.get('product.product').search(cr, uid, [('default_code', '=', line[14])], context=context)
                     if not product_ids:
-                        error += 'Erreur ligne %d :; PAs de produit trouvé [default_code : %s]' %(nb_line, line[14])
+                        error += 'Erreur ligne %d :: Pas de produit trouvé [Code : %s]' %(nb_line, line[14])
                         error += '\n'
                         continue
 #                        raise osv.except_osv('Erreur', 'Pas de produit trouvé pour la ligne %d [default_code : %s]' %(nb_line, line[14]))
@@ -126,14 +126,13 @@ class wizard_import_magasin(osv.osv_memory):
                     po = False
                     amount_total = 0.00
 
-            self.write(cr, uid, ids, {'error': error})
-
+        self.write(cr, uid, ids, {'error': error})
 
         ## On cherche la vue à afficher pour afficher les erreurs
         view_id = []
         data_ids = data_obj.search(cr, uid, [('module', '=', 'iller_pos'), ('model', '=', 'ir.ui.view'), ('name', '=', 'wizard_import_magasin_done')], context=context)
         res2_id = data_obj.read(cr, uid, data_ids, ['res_id'])
-        print res2_id
+
         for r in res2_id:
             view_id.append(r.get('res_id', False))
 
@@ -146,6 +145,8 @@ class wizard_import_magasin(osv.osv_memory):
                 'res_model': 'wizard.import.magasin',
                 'view_mode': 'form',
                 'view_type': 'form',
+                'target': 'new',
+                'res_id': ids[0],
                 'view_id': view_id,
                 'context': context}
 

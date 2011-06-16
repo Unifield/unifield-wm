@@ -23,7 +23,7 @@
             <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Fin de l'import">
-                    <separator colspan="4" string="Rapport de l'importation" />
+                    <separator colspan="4" string="Rapport de l'importation                                                                      " />
                     <field name="error" colspan="4" nolabel="1" readonly="1" />
                     <button special="cancel" string="Fermer" />
                 </form>
@@ -36,12 +36,22 @@
             <field name="res_model">wizard.import.magasin</field>
             <field name="view_type">form</field>
             <field name="view_mode">form</field>
+            <field name="target">new</field>
             <field name="view_id" ref="wizard_import_magasin_view" />
         </record>
 
+        <menuitem name="Magasin"
+                  id="iller_magasin"
+                  parent="sale.menu_sale_root" />
+
         <menuitem action="action_wizard_import"
                   id="menu_import_magasin"
-                  parent="point_of_sale.menu_point_root" />
+                  parent="iller_magasin" />
+
+        <menuitem id="point_of_sale.menu_action_pos_order_tree3" parent="iller_magasin" />
+        <menuitem id="point_of_sale.menu_action_pos_order_line" parent="iller_magasin" />
+        <menuitem id="point_of_sale.menu_trans_pos_tree_month" parent="iller_magasin" />
+        <menuitem id="point_of_sale.menu_action_pos_order_line_day" parent="point_of_sale.menu_point_root" />
 
 
 	</data>

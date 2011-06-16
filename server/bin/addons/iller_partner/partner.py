@@ -142,6 +142,7 @@ mode de règlement, vous devez donc enregistrer un RIB pour ce client')
         'bloque': lambda *a: False,
         'reglement': lambda *a: 'virement',
         'facturation_bl': lambda *a: 'm',
+        'lang': lambda *a: 'fr_FR',
     }
 
 

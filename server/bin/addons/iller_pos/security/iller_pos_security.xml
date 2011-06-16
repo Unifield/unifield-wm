@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<openerp>
+	<data>
+    
+        <!-- Groups -->
+
+        <!-- Menus -->
+        <record id="iller_pos.menu_import_magasin" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('sale.group_sale_user'), ref('sale.group_sale_manager')])]" />
+        </record>
+        <record id="point_of_sale.menu_action_pos_order_tree3" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('sale.group_sale_user'), ref('sale.group_sale_manager')])]" />
+        </record>
+        <record id="point_of_sale.menu_action_pos_order_line" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('sale.group_sale_user'), ref('sale.group_sale_manager')])]" />
+        </record>
+        <record id="point_of_sale.menu_trans_pos_tree_month" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('sale.group_sale_user'), ref('sale.group_sale_manager')])]" />
+        </record>
+
+	</data>
+</openerp>
+
