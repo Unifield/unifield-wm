@@ -76,6 +76,8 @@ class wizard_picking_to_invoice(osv.osv_memory):
         Génération des factures pour chaque client en fonction de leur délai de
         paiement.
         """
+        if isinstance(ids, (int, long)):
+            ids = [ids]
         # TODO: Faire la boucle en prenant tout les partenaires de la table 
         #+ stock_picking ayant des bons de livraisons en état terminé et à 
         #+ facturer.
@@ -130,7 +132,8 @@ class wizard_picking_to_invoice(osv.osv_memory):
         bon_reussis = []
         if bon_a_facturer:
             # Préparation de certains éléments
-            journal_id = self.browse(cr, uid, ids)[0].journal_id.id
+            wizard = self.browse(cr, uid, ids)[0]
+            journal_id = wizard.journal_id.id
             for bon in bon_a_facturer:
                 factures_reussies = sp_obj.action_invoice_create(cr, uid, bon_a_facturer[bon], journal_id, group=True, type='out_invoice', context=context)
                 # On ajoute les valeurs de la liste de factures réussies
