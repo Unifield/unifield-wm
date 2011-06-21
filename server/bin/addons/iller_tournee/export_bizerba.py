@@ -5,6 +5,7 @@ import base64
 import csv
 from osv import osv, fields
 import datetime
+from tools import ustr
 
 class export_bizerba(osv.osv_memory):
     _name = "export.bizerba"
@@ -25,45 +26,45 @@ class export_bizerba(osv.osv_memory):
         # LCOM
         res.append('LCOM')
         # (9) Num commande sur 9 chiffres (complété par des 0)
-        res.append(str(commande.name or 0).rjust(9, "0"))
+        res.append(ustr(commande.name or 0).rjust(9, "0"))
         # (9) Numéro de ligne de commande (complété par des 0)
-        res.append(str(num_ligne or 0).rjust(9, "0"))
+        res.append(ustr(num_ligne or 0).rjust(9, "0"))
         # (20) Nom du client (complété par des espaces)
-        res.append(str(sol.order_partner_id.name or " ")[:20].ljust(20, " "))
+        res.append(ustr(sol.order_partner_id.name or " ")[:20].ljust(20, " "))
         # Une espace
         res.append(" ")
         # (6) JJMMAA de commande
         date = datetime.datetime.strptime(commande.date_order, '%Y-%m-%d')
-        res.append(str(date.strftime('%d%m%y') or "000000"))
+        res.append(ustr(date.strftime('%d%m%y') or "000000"))
         # Une espace
         res.append(" ")
         # (10) Ville sur 10
-        res.append(str(commande.partner_shipping_id.city or " ")[:10].rjust(10, " "))
+        res.append(ustr(commande.partner_shipping_id.city or " ")[:10].rjust(10, " "))
         # (3) Numéro tournée sur 3 (complété par 0)
-        res.append(str(tournee.id or "0").rjust(3, "0"))
+        res.append(ustr(tournee.id or "0").rjust(3, "0"))
         # (30) Nom tournée sur 30
-        res.append(str(tournee.name or " ")[:30].rjust(30, " "))
+        res.append(ustr(tournee.name or " ")[:30].rjust(30, " "))
         # (8) Date de livraison AAAAMMJJ
         # date de commande + delay (sur sale_order_line)
         date_livraison = datetime.datetime(date.year, date.month, date.day) + datetime.timedelta(days=sol.delay)
-        res.append(str(date_livraison.strftime('%Y%m%d') or "00000000"))
+        res.append(ustr(date_livraison.strftime('%Y%m%d') or "00000000"))
         # (4) Heure de départ HHMM (compléter avec un 0 si besoin)
-        res.append(str(tournee.heure_depart or "0").rjust(4, "0"))
+        res.append(ustr(tournee.heure_depart or "0").rjust(4, "0"))
         # (2) "00"
         res.append("00")
         # (30) commentaire de commande(compléter avec des espaces)
-        res.append(str(commande.note or " ")[:30].ljust(30, " "))
+        res.append(ustr(commande.note or " ")[:30].ljust(30, " "))
         # (30) commentaire ligne (compléter avec des espaces)
-        res.append(str(sol.notes or " ")[:30].ljust(30, " "))
+        res.append(ustr(sol.notes or " ")[:30].ljust(30, " "))
         # (8) "00000000"
         res.append("0".ljust(8, "0"))
         # (6) Code article (compléter avec des 0)
         produit = sol.product_id
-        res.append(str(produit.default_code or "0")[:6].rjust(6, "0"))
+        res.append(ustr(produit.default_code or "0")[:6].rjust(6, "0"))
         # (4) Code emballage (compléter avec des 0) (semble être toujours à 1)
         res.append("1".rjust(4, "0"))
         # (4) Type de conditionnement (compléter avec des 0)
-        res.append(str(produit.type_cond or "0").rjust(4, "0"))
+        res.append(ustr(produit.type_cond or "0").rjust(4, "0"))
         # (15) espaces
         res.append(" ".ljust(15, " "))
         # (4) Type étiquette article (toujours à 1)
@@ -74,15 +75,15 @@ class export_bizerba(osv.osv_memory):
         res.append("9".ljust(6, "9"))
         # (1) Article type préselection
         type_preselec = produit.type_preselec or 0
-        res.append(str(type_preselec)[:1])
+        res.append(ustr(type_preselec)[:1])
         # (1) Article type pesée (0, 7 ou 8)
         type_pesee = produit.type_pesee or 0
-        res.append(str(type_pesee)[:1])
+        res.append(ustr(type_pesee)[:1])
         # (7) "0000000"
         res.append("0".rjust(7, "0"))
         # (7) Article poids fixe si article type pesée = 2, sinon "0000000"
         if type_pesee == 2:
-            res.append(str(produit.weight_net or "0").rjust(7, "0"))
+            res.append(ustr(produit.weight_net or "0").rjust(7, "0"))
         else:
             res.append("0".rjust(7, "0"))
         # (3) "000"
@@ -93,7 +94,7 @@ class export_bizerba(osv.osv_memory):
         qte = sol.product_uom_qty or 0
         if type_preselec == 1:
             qte *= 1000
-        res.append(str(qte).rjust(7, "0"))
+        res.append(ustr(qte).rjust(7, "0"))
         # (4) Article type emballage (toujours à 0)
         res.append("0".rjust(4, "0"))
         # (50) Espaces
@@ -101,7 +102,7 @@ class export_bizerba(osv.osv_memory):
         # (50) Espaces
         res.append(" ".rjust(50, " "))
         # (2) Poste (par exemple SE)
-        res.append(str(sol.poste_id.name or tournee.decoupe_id.name or "XX00")[:4])
+        res.append(ustr(sol.poste_id.name or tournee.decoupe_id.name or "XX00")[:4])
         # (2) Poste (par exemple O4) (plus nécessaire car déjà donné avec name)
         
         # On retourne le résultat sous forme d'une seule chaîne
