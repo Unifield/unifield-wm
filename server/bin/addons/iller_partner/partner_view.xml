@@ -131,7 +131,7 @@
             <field name="type">form</field>
             <field name="inherit_id" ref="base.view_users_form" />
             <field name="arch" type="xml">
-                <xpath expr="/form/field[@name='password']" position="after">
+                <xpath expr="/form/field[@name='login']" position="after">
                     <newline />
                     <field name="code_saler" />
                 </xpath>
