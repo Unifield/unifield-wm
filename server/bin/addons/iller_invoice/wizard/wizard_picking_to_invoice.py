@@ -26,6 +26,12 @@ from osv import fields
 from datetime import datetime, timedelta
 from tools.translate import _
 import calendar
+import threading
+import pooler
+import base64
+import time
+from tools import ustr
+
 
 class wizard_picking_to_invoice(osv.osv_memory):
     _name = 'wizard.picking.to.invoice'
@@ -71,10 +77,185 @@ class wizard_picking_to_invoice(osv.osv_memory):
                 last_date = ce_jour
         return last_date
 
+    def _generation_factures(self, cr, uid, ids, clients=[], context={}):
+        """
+        Renvoie une chaîne décrivant de manière assez détaillée le 
+        résultat - positif ou négatif - de la création des factures 
+        pour chaque client en fonction de leur délai de paiement.
+        """
+        # Vérifications diverses
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+        if not len(clients):
+            return False
+
+        # Préparation des éléments
+        res = ''
+        res_partner_obj = self.pool.get('res.partner')
+
+        # Début de traitement
+        # liste des clients sans mode de paiement
+        client_sans_mode = []
+        # liste des bons de livraisons terminées et à facturer par client
+        bon_a_facturer = {}
+        print """###
+            Processus de génération des factures à partir des bons d'expéditions 
+            suivant le délai de paiement des clients : débuté."""
+        for client in res_partner_obj.browse(cr, uid, clients, context=context):
+            client_id = client.id or False
+            client_mode = client.facturation_bl or False
+            # Si le mode de facturation est renseigné on commence la 
+            #+ vérification
+            if client_mode:
+                # Recherche de toutes les préparations de ce client non 
+                #+ facturées
+                last_date = self._get_last_date_from(cr, uid, client_mode, context=context)
+                # Si pas de date retournée, on ajoute le client dans la 
+                #+ liste de ceux n'ayant aucun mode de paiement puis on 
+                #+ passe au client suivant (#INTERRUPTION de la boucle)
+                if not last_date:
+                    client_sans_mode.append(client_id)
+                    continue
+                # Récupération des livraisons à facturer
+                sp_obj = self.pool.get('stock.picking')
+                sp_ids = sp_obj.search(cr, uid, [('invoice_state', '=', '2binvoiced'), 
+                    ('address_id.partner_id', '=', client_id), ('state', '=', 'done')]) or None
+                # Tri des éléments à facturer
+                if sp_ids:
+                    bon_du_client = []
+                    for sp_id in sp_ids:
+                        # Recherche des dates du bon de livraison
+                        sp_date = datetime.strptime(sp_obj.read(cr, uid, sp_id, ['date_done']).get('date_done'), 
+                            '%Y-%m-%d %H:%M:%S')
+                        # Si la date de la facture est inférieure à 
+                        #+ last_date, alors on récupère l'identifiant de la
+                        #+ livraison
+                        if sp_date < last_date:
+                            # Ajout du bon de livraison dans les éléments à 
+                            #+ facturer du client
+                            bon_du_client.append(sp_id)
+                    # Si le client possède des éléments à facturer, on 
+                    #+ l'ajoute dans la liste des 'bon_a_facturer'
+                    if bon_du_client:
+                        bon_a_facturer[client_id] = bon_du_client
+            else:
+                client_sans_mode.append(client_id)
+
+        # Début de la facturation si une liste a été fournie (bon_a_facturer)
+        bon_reussis = []
+        bon_non_reussis = []
+        if bon_a_facturer:
+            # Préparation de certains éléments
+            wizard = self.browse(cr, uid, ids)[0]
+            journal_id = wizard.journal_id.id
+            for bon in sorted(bon_a_facturer):
+                factures_reussies = []
+                try:
+                    factures_reussies = sp_obj.action_invoice_create(cr, uid, bon_a_facturer[bon], journal_id, group=True, type='out_invoice', context=context)
+                except Exception, e:
+                    bon_non_reussis += bon_a_facturer[bon]
+                    continue
+                finally:
+                    # On ajoute les valeurs de la liste de factures réussies
+                    bon_reussis += factures_reussies
+
+            # On fait le point sur les bons réussis et non réussis
+            res += "Des bons de livraison sont à facturer : \n"
+            res += '----------\n'
+            clients = sorted(bon_a_facturer)
+            for clt in clients:
+                data = res_partner_obj.read(cr, uid, clt, ['id', 'name'], context=context)
+                nom = str(data.get('name', False))
+                id = str(data.get('id', False))
+                bon_ids = str(bon_a_facturer[clt])
+                res += "CLIENT %s : %s (%s)" % (id, nom, bon_ids)
+                res += "\n"
+#            for bon in bon_a_facturer.sort():
+#                res += str(bon_a_facturer[bon]) + '\n'
+            res += '----------\n'
+            # les réussis
+            res += '\n'
+            res += "Bons dont la génération est arrivée à terme : \n"
+            res += '----------\n'
+            if bon_reussis:
+                for bon_reussi in bon_reussis:
+                    res += str(bon_reussi) + '\n'
+            else:
+                res += 'AUCUN' + '\n'
+            res += '----------\n'
+            # les non réussis
+            res += '\n'
+            res += "Bons qui ont échoués : \n"
+            res += '----------\n'
+            if bon_non_reussis:
+                for bon_non_reussi in bon_non_reussis:
+                    res += str(bon_non_reussi) + '\n'
+            else:
+                res += 'AUCUN' + '\n'
+            res += '----------\n'
+        else:
+            # Nous sommes dans le cas où aucun bon n'est à facturer
+            res += "Aucun bon de livraison n'est à facturer."
+        # On renvoie le résultat
+        return res
+
+    def _traitement_factures(self, db_name, uid, ids, clients=[], context={}):
+        """
+        Lance le traitement pour générer les factures puis renvoie 
+        le résultat dans un fichier attaché à une requête utilisateur.
+        """
+        # Vérifications diverses
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+        if not clients:
+            raise osv.except_osv(_('Erreur'), _("Aucun client fourni pour effectuer le traitement."))
+        # Récupération d'éléments
+        db, pool = pooler.get_db_and_pool(db_name)
+        cr = db.cursor()
+        if isinstance(clients, (int, long)):
+            clients = [clients]
+        ce_jour = time.strftime('%Y-%m-%d %H:%M:%S')
+        chaine = ustr(self._generation_factures(cr, uid, ids, clients, context=context))
+        if chaine:
+            # Création d'un binaire
+            export = base64.encodestring(chaine.encode("utf-8"))
+            # Création d'une requête utilisateur
+            requete = pool.get('res.request')
+            nom = 'GÉNÉRATION factures au ' + ce_jour
+            req_id = requete.create(cr, uid, {'name': nom, 'act_from': uid, 'act_to': uid, 'body': ''}, context=context)
+            if req_id:
+                # Préparation des éléments du fichier
+                nom = 'FAC_autogen' + '_' + time.strftime('%Y-%m-%d_%H%M%S')
+                extension = '.txt'
+                nom_complet = nom + extension
+                piece_jointe = pool.get('ir.attachment')
+                vals = {
+                    'name': 'Fichier GÉNÉRATION factures',
+                    'datas': export,
+                    'datas_fname': nom_complet,
+                    'description': """
+                        Description du résultat de la génération des factures pour chaque client à partir des bons de 
+                        préparation et en fonction du délai de paiement
+                    """,
+                    'res_model': 'res.request',
+                    'res_id': req_id,
+                }
+                piece_id = piece_jointe.create(cr, uid, vals, context=context)
+                if piece_id:
+                    ce_jour_fin = time.strftime('%Y-%m-%d %H:%M:%S')
+                    note = "Date début traitement : %s.\nDate fin traitement : %s." % (ce_jour, ce_jour_fin)
+                    requete.write(cr, uid, req_id, {'body': note}, context=context)
+        print """###
+            Processus de génération des factures à partir des bons d'expéditions suivant le 
+            délai de paiement des clients : terminé."""
+        cr.commit()
+        cr.close()
+        return True
+
     def action_make_invoices(self, cr, uid, ids, context={}):
         """
-        Génération des factures pour chaque client en fonction de leur délai de
-        paiement.
+        Vérification des données et lancement d'un 'thread' pour la 
+        génération des factures.
         """
         if isinstance(ids, (int, long)):
             ids = [ids]
@@ -85,69 +266,16 @@ class wizard_picking_to_invoice(osv.osv_memory):
         res_partner_obj = self.pool.get('res.partner')
         # On récupère tout les clients (id + mode de facturation) trié par id
         res = res_partner_obj.search(cr, uid, [('customer', '=', 't')], order='id ASC', context=context)
-        # Début de traitement que dans le cas où la requête renvoie un résultat
         if res:
-            # liste des clients sans mode de paiement
-            client_sans_mode = []
-            # liste des bons de livraisons terminées et à facturer par client
-            bon_a_facturer = {}
-            for client in res_partner_obj.browse(cr, uid, res, context=context):
-                client_id = client.id or False
-                client_mode = client.facturation_bl or False
-                # Si le mode de facturation est renseigné on commence la 
-                #+ vérification
-                if client_mode:
-                    # Recherche de toutes les préparations de ce client non 
-                    #+ facturées
-                    last_date = self._get_last_date_from(cr, uid, client_mode, context=context)
-                    # Si pas de date retournée, on ajoute le client dans la 
-                    #+ liste de ceux n'ayant aucun mode de paiement puis on 
-                    #+ passe au client suivant (#INTERRUPTION de la boucle)
-                    if not last_date:
-                        client_sans_mode.append(client_id)
-                        continue
-                    # Récupération des livraisons à facturer
-                    sp_obj = self.pool.get('stock.picking')
-                    sp_ids = sp_obj.search(cr, uid, [('invoice_state', '=', '2binvoiced'), ('address_id.partner_id', '=', client_id), ('state', '=', 'done')]) or None
-                    # Tri des éléments à facturer
-                    if sp_ids:
-                        bon_du_client = []
-                        for sp_id in sp_ids:
-                            # Recherche des dates du bon de livraison
-                            sp_date = datetime.strptime(sp_obj.read(cr, uid, sp_id, ['date_done']).get('date_done'), '%Y-%m-%d %H:%M:%S')
-                            # Si la date de la facture est inférieure à 
-                            #+ last_date, alors on récupère l'identifiant de la
-                            #+ livraison
-                            if sp_date < last_date:
-                                # Ajout du bon de livraison dans les éléments à 
-                                #+ facturer du client
-                                bon_du_client.append(sp_id)
-                        # Si le client possède des éléments à facturer, on 
-                        #+ l'ajoute dans la liste des 'bon_a_facturer'
-                        if bon_du_client:
-                            bon_a_facturer[client_id] = bon_du_client
-                else:
-                    client_sans_mode.append(client_id)
-        # Début de la facturation si une liste a été fournie (bon_a_facturer)
-        bon_reussis = []
-        if bon_a_facturer:
-            # Préparation de certains éléments
-            wizard = self.browse(cr, uid, ids)[0]
-            journal_id = wizard.journal_id.id
-            for bon in bon_a_facturer:
-                factures_reussies = sp_obj.action_invoice_create(cr, uid, bon_a_facturer[bon], journal_id, group=True, type='out_invoice', context=context)
-                # On ajoute les valeurs de la liste de factures réussies
-                bon_reussis += factures_reussies.values()
-        if bon_reussis:
-            domain = [('id', 'in', bon_reussis)]
-            return { 'type': 'ir.actions.act_window',
-                    'res_model': 'account.invoice',
-                    'view_type': 'form',
-                    'view_mode': 'tree,form',
-                    'domain': domain,
-            }
-        else:
-            raise osv.except_osv(_('Information'), _("Aucun bon de livraison n'a été facturé !"))
+            # Création d'un thread
+            traitement_sous_thread = threading.Thread(target=self._traitement_factures, 
+                args=(cr.dbname, uid, ids, res, context))
+            # Lancement du thread
+            traitement_sous_thread.start()
+            # Fermeture de la fenêtre
+            return {'type': 'ir.actions.act_window_close'}
+        raise osv.except_osv(_('Erreur'), _('Aucun client trouvé.'))
+        return False
 
 wizard_picking_to_invoice()
 
