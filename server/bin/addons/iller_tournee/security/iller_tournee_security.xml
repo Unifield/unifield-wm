@@ -44,6 +44,9 @@
         <record id="menu_produits_par_poste" model="ir.ui.menu">
             <field name="groups_id" eval="[(6, 0, [ref('stock.group_stock_user'), ref('stock.group_stock_manager')])]" />
         </record>
+        <record id="menu_iller_stock_report" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('stock.group_stock_user'), ref('stock.group_stock_manager')])]" />
+        </record>
 
 
 	</data>

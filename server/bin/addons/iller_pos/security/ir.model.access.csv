@@ -5,6 +5,8 @@
 "access_pos_line_mgmt","iller.pos.line.mgmt","point_of_sale.model_pos_order_line","sale.group_sale_manager",1,1,1,1
 "access_pos","iller.pos","point_of_sale.model_pos_order","sale.group_sale_user",1,1,1,1
 "access_pos_mgmt","iller.pos.mgmt","point_of_sale.model_pos_order","sale.group_sale_manager",1,1,1,1
+"access_pos_payment","iller.pos.payment","point_of_sale.model_pos_payment","sale.group_sale_user",1,1,1,1
+"access_pos_payment_mgmt","iller.pos.payment.mgmt","point_of_sale.model_pos_payment","sale.group_sale_manager",1,1,1,1
 "access_pos_account_journal","iller.pos.account.journal","account.model_account_journal","sale.group_sale_user",1,0,0,0
 "access_pos_account_journal_mgmt","iller.pos.account.journal.mgmt","account.model_account_journal","sale.group_sale_manager",1,0,0,0
 "access_iller_report_transaction_pos","iller.report.transaction.pos","point_of_sale.model_report_transaction_pos","sale.group_sale_user",1,1,1,1

@@ -45,6 +45,7 @@
         'invoice_sequence.xml',
         'invoice_view.xml',
         'security/ir.model.access.csv',
+        'security/iller_sale_security.xml',
     ],
     'installable': True,
     'active': False,

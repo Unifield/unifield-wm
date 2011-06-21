@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<openerp>
+	<data>
+
+        <record id="menu_iller_sale_report" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('sale.group_sale_manager')])]" />
+        </record>
+
+	</data>
+</openerp>
+

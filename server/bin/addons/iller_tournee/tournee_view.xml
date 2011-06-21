@@ -253,25 +253,29 @@
                   action="action_preparation_poste_tree"
                   parent="menu_postes" />
 
+        <menuitem id="menu_iller_stock_report"
+                  name="Rapports"
+                  parent="stock.menu_stock_root" />
+
         <menuitem id="menu_commandes_par_tournee"
                 action="action_commandes_par_tournee"
-                parent="base.menu_base_partner" />
+                parent="menu_iller_stock_report" />
 
         <menuitem id="menu_articles_par_tournee"
                 action="action_articles_par_tournee"
-                parent="base.menu_base_partner" />
+                parent="menu_iller_stock_report" />
 
         <menuitem id="menu_produits_a_expedier_par_tournee"
                 action="action_produits_a_expedier_par_tournee"
-                parent="stock.menu_stock_root" />
+                parent="menu_iller_stock_report" />
 
         <menuitem id="menu_etat_produits_a_expedier_par_tournee"
                 action="action_etat_produits_a_expedier_par_tournee"
-                parent="stock.menu_stock_root" />
+                parent="menu_iller_stock_report" />
 
         <menuitem id="menu_produits_par_poste"
                 action="action_produits_par_poste"
-                parent="stock.menu_stock_root" />
+                parent="menu_iller_stock_report" />
 
     </data>
 </openerp>
