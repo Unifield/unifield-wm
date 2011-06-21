@@ -151,7 +151,7 @@ class iller_commission_line(osv.osv):
                 model_datas = model_data_obj.read(cr, uid, model_data_ids, ['res_id'])
                 if model_datas and len(model_datas) > 0:
                     if 'invoice_id' in l:
-                        if order.pricelist_id.id == model_datas[0].get('res_id', False):
+                        if order.partner_id.pricelist_id and order.partner_id.pricelist_id.id == model_datas[0].get('res_id', False):
                             return l.get('unit_price')*l.get('qty')*0.01, message
                     elif 'pricelist_id' in l:
                         if l.get('pricelist_id') == model_datas[0].get('res_id', False):
