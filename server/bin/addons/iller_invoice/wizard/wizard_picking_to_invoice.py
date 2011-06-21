@@ -92,6 +92,8 @@ class wizard_picking_to_invoice(osv.osv_memory):
         # Préparation des éléments
         res = ''
         res_partner_obj = self.pool.get('res.partner')
+        so_obj = self.pool.get('stock.picking')
+        partner_address_obj = self.pool.get('res.partner.address')
 
         # Début de traitement
         # liste des clients sans mode de paiement
@@ -168,18 +170,28 @@ class wizard_picking_to_invoice(osv.osv_memory):
                 nom = str(data.get('name', False))
                 id = str(data.get('id', False))
                 bon_ids = str(bon_a_facturer[clt])
-                res += "CLIENT %s : %s (%s)" % (id, nom, bon_ids)
+                res += "CLIENT %s \t:\t %s \t\t\t(ID BONS : %s)" % (id, nom, bon_ids)
                 res += "\n"
-#            for bon in bon_a_facturer.sort():
-#                res += str(bon_a_facturer[bon]) + '\n'
             res += '----------\n'
             # les réussis
             res += '\n'
             res += "Bons dont la génération est arrivée à terme : \n"
             res += '----------\n'
             if bon_reussis:
-                for bon_reussi in bon_reussis:
-                    res += str(bon_reussi) + '\n'
+                res += 'ID\t\tRéf\t\tOrigine\t\tClient\n'
+                for bon_reussi in sorted(bon_reussis):
+                    data = so_obj.read(cr, uid, int(bon_reussi), ['id', 'name', 'origin', 'address_id'], context=context)
+                    id = str(data.get('id', False))
+                    nom = str(data.get('name', False))
+                    origine = str(data.get('origin', False))
+                    address_id = str(data.get('address_id', False) and data.get('address_id')[0])
+                    partner_id = 'Non trouvé'
+                    if address_id:
+                        partner_data = partner_address_obj.read(cr, uid, int(address_id), ['name'], context=context)
+                        if partner_data:
+                            partner = str(partner_data.get('name', None))
+                    res += "%s\t\t%s\t\t%s\t\t%s" % (id, nom, origine, partner)
+                    res += '\n'
             else:
                 res += 'AUCUN' + '\n'
             res += '----------\n'
@@ -188,8 +200,20 @@ class wizard_picking_to_invoice(osv.osv_memory):
             res += "Bons qui ont échoués : \n"
             res += '----------\n'
             if bon_non_reussis:
-                for bon_non_reussi in bon_non_reussis:
-                    res += str(bon_non_reussi) + '\n'
+                res += 'ID\t\tRéf\t\tOrigine\t\tClient'
+                for bon_non_reussi in sorted(bon_non_reussis):
+                    data = so_obj.read(cr, uid, bon_non_reussi, ['id', 'name', 'origin', 'address_id'], context=context)
+                    id = str(data.get('id', False))
+                    nom = str(data.get('name', False))
+                    origine = str(data.get('origin', False))
+                    address_id = str(data.get('address_id', False) and data.get('address_id')[0])
+                    partner_id = 'Non trouvé'
+                    if address_id:
+                        partner_data = partner_address_obj.read(cr, uid, int(address_id), ['name'], context=context)
+                        if partner_data:
+                            partner = str(partner_data.get('name', None))
+                    res += "%s\t\t%s\t\t%s\t\t%s" % (id, nom, origine, partner_id)
+                    res += '\n'
             else:
                 res += 'AUCUN' + '\n'
             res += '----------\n'
