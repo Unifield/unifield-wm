@@ -1,6 +1,6 @@
 "name";"code";"parent_id.code";"type";"activation_date";"inactivation_date";"date_start";"date"
 ;;;;;;;
-"Operational Centre Geneva";"OCG";;"View";;;01/01/2011;31/12/2011
+"Operational Centre Geneva";"OCG";"OC";"View";;;01/01/2011;31/12/2011
 ;;;;;;;
 "Philippines Mission";"2011 PH-00";"OCG";"Normal";;;01/01/2011;31/12/2011
 "Philippines Manila Coordination";"2011 PH-01";"2011 PH-00";"Normal";;;01/01/2011;31/12/2011
