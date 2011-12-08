@@ -558,6 +558,8 @@ ADM;Administrative;mandatory;SERVICE/Services
 485;#;mandatory;SERVICE/Services/Administrative
 TAX;Taxe;mandatory;SERVICE/Services
 486;#;mandatory;SERVICE/Services/Taxe
+TRA;Transport;mandatory;SERVICE/Services
+489;Other;mandatory;SERVICE/Services/Transport
 03;MIX;mandatory;
 K;KIT;mandatory;MIX
 EME;Emergency Kits;mandatory;MIX/KIT
