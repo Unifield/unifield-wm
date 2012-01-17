@@ -45,7 +45,8 @@ class tournee_iller(osv.osv):
     _columns = {
         'name': fields.char(size=64, string='Nom', required=True),
         'code_tournee': fields.integer(string='Code tournee'),
-        'heure_depart': fields.integer(string='Heure depart'),
+        #'heure_depart': fields.integer(string='Heure depart'),
+        'heure_depart': fields.char(size=5, string='Heure depart'),
         'prep_id': fields.many2one('iller.poste', domain="[('type', '=', 'PREP')]",
             string='Poste de préparation'),
         'decoupe_id': fields.many2one('iller.poste', domain="[('type', '=', 'DECP')]",
