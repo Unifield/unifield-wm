@@ -61,7 +61,6 @@ class wizard_articles_par_client(osv.osv_memory):
             ids = [ids]
         wizard = self.browse(cr, uid, ids[0], context=context)
         partner_deb_ref = wizard.partner_deb_id.ref
-        partner_fin_ref = wizard.partner_fin_id.ref
         partner_ids = self.pool.get("res.partner").search(cr, uid, [('ref', '>=', partner_deb_ref), ('ref', '<=', 'partner_fin_ref')], context=context)
         date_deb = wizard.date_debut
         date_fin = wizard.date_fin
@@ -124,8 +123,6 @@ class wizard_articles_par_client(osv.osv_memory):
             # On s'occupe des produits de la catégorie
             for el in res:
                 # récupération des valeurs
-                cat_id = el[0]
-                p_id = el[1]
                 p_code = el[2]
                 p_name = el[3]
                 qte = el[4]

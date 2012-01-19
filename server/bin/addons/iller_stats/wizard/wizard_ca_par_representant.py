@@ -157,9 +157,6 @@ class wizard_ca_par_representant(osv.osv_memory):
         # On boucle sur chaque représentant
         for representant in representants:
             # Initialisation de quelques valeurs
-            total_repr = 0          # total C.A du représentant pour la période donnée
-            total_repr_qte = 0      # total du poids des ventes effectuées par le représentant
-            total_repr_clt = 0      # total du nombre de clients différents que ce vendeur a réussi à obtenir/vendre
             # On veut obtenir la ligne suivante (répartie sur la premier colonne, puis les suivantes en laissant la colonne 2 libres) : 
             # REPRÉSENTANT : 1  GREINER  JEAN  PIERRE  N
             repr_vals = {'designation': 'REPRÉSENTANT ' + str(representant.code_saler or None) + ' : ' + str(representant.name[:100])}

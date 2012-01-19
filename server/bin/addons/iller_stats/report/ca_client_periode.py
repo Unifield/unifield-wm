@@ -22,7 +22,6 @@
 ##############################################################################
 
 from report import report_sxw
-from osv import osv
 import time
 import locale
 
@@ -44,10 +43,8 @@ class ca_client_periode(report_sxw.rml_parse):
         return self.pool.get('res.partner').browse(self.cr, self.uid, partner_ids)
 
     def get_info(self, partner_id, date_debut, date_fin, month):
-        partner_obj = self.pool.get('res.partner')
         invoice_obj = self.pool.get('account.invoice')
 
-        invoice_ids = []
         start_date = date_debut.strftime('%Y-%m-%d')
         end_date = date_fin.strftime('%y-%m-%d')
 

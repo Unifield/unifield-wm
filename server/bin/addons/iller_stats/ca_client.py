@@ -98,7 +98,7 @@ class stats_ca_client_trois_periodes(osv.osv_memory):
                                                                              ('type', '=', 'iout_invoice')]))
 
         for res in self.pool.get('account.invoice').read(cr, uid, invoice_ids, ['partner_id']):
-           if res['partner_id'][0] not in partners:
+            if res['partner_id'][0] not in partners:
                 partners.append(res['partner_id'][0])
 
         datas = {'ids': ids,
@@ -160,9 +160,9 @@ class stats_ca_client_par_an(osv.osv_memory):
         i = 0
         current_year = stat.annee_depart
         while i <= stat.annee_fin-current_year:
-           annees.append(current_year)
-           i += 1
-           current_year += 1
+            annees.append(current_year)
+            i += 1
+            current_year += 1
 
         invoice_ids.extend(self.pool.get('account.invoice').search(cr, uid, [('date_invoice', '>=', date_depart),
                                                                              ('date_invoice', '<=', date_fin),

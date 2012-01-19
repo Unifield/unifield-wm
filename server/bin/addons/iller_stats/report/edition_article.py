@@ -22,11 +22,8 @@
 ##############################################################################
 
 from report import report_sxw
-from osv import osv
 import time
 import locale
-
-from datetime import date, datetime, timedelta
 
 class edition_article(report_sxw.rml_parse):
     def __init__(self, cr, uid, name, context):

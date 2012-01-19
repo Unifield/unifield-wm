@@ -224,7 +224,6 @@ class edition_qte_clt_cinq_periodes(osv.osv_memory):
             for i in range(1, 6, 1):
                 periode = 'periode' + str(i)
                 if periode in fields and context.get(periode, False):
-                    periode_arch = fields.get(periode)
                     res.get('fields').get(periode).update({'string': context.get(periode)})
         return res
 

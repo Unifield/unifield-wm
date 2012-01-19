@@ -21,9 +21,8 @@
 ##############################################################################
 
 from osv import osv, fields
-import tools
 
-from datetime import date, datetime, timedelta
+from datetime import date
 
 class stats_edition_famille_init(osv.osv_memory):
     _name = 'stats.edition.famille.init'

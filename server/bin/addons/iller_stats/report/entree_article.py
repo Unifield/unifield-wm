@@ -22,7 +22,6 @@
 ##############################################################################
 
 from report import report_sxw
-from osv import osv
 import time
 import locale
 

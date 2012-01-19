@@ -51,7 +51,7 @@ class wizard_gibier(osv.osv_memory):
         wizard = self.browse(cr, uid, ids[0], context=context)
         date_deb = wizard.date_debut
         date_fin = wizard.date_fin
-        type = wizard.type
+        wiz_type = wizard.type
         irmd_obj = self.pool.get('ir.model.data')
         if date_fin < date_deb:
             raise osv.except_osv(_('Attention'), _('La date de fin doit être supérieure à celle de début.'))
@@ -66,11 +66,11 @@ class wizard_gibier(osv.osv_memory):
         # Préparation des éléments
         sm_obj = self.pool.get('stock.move')
         # Recherche des stock.move qui correspondent
-        if type == 't':
+        if wiz_type == 't':
             sm_ids = sm_obj.search(cr, uid, [('picking_id.type', 'in', ['in', 'out']), ('date', '>=', date_deb), ('date', '<=', date_fin)])
-        elif type == 'e':
+        elif wiz_type == 'e':
             sm_ids = sm_obj.search(cr, uid, [('picking_id.type', '=', 'in'), ('date', '>=', date_deb), ('date', '<=', date_fin)])
-        elif type == 's':
+        elif wiz_type == 's':
             sm_ids = sm_obj.search(cr, uid, [('picking_id.type', '=', 'out'), ('date', '>=', date_deb), ('date', '<=', date_fin)])
         else:
             raise osv.except_osv(_('Erreur'), _('Type entréee/sortie inconnu.'))

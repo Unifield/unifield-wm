@@ -22,11 +22,10 @@
 ##############################################################################
 
 from report import report_sxw
-from osv import osv
 import time
 import locale
 
-from datetime import date, datetime, timedelta
+from datetime import date, timedelta
 
 class ca_client_par_an(report_sxw.rml_parse):
     def __init__(self, cr, uid, name, context):
