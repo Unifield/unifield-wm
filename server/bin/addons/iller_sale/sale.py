@@ -30,9 +30,21 @@ class iller_sale_line(osv.osv):
         '''
             Enregistre ou remplace le commentaire enregistré dans 
             la BDD
+        Check the validity of prices on sale order lines
         '''
         comment_obj = self.pool.get('iller.sale.comment')
-
+        
+        for line in self.browse(cr, uid, ids):
+            line_data = {'unit_price': data.get('price_unit', line.price_unit),
+                         'qty': data.get('product_uom_qty', line.product_uom_qty),
+                         'partner_id': line.order_id.partner_id.id,
+                         'pricelist_id': line.order_id.pricelist_id.id,
+                         'name': line.product_id.name,
+                         'prix_vente': line.product_id.list_price}
+            control = self.pool.get('sale.order.line').control_unit_price(cr, uid, [line_data], context=context)
+            if not control[0] and not line.product_id.depassement_autorise:
+                raise osv.except_osv('Erreur', 'Impossible d\'enregistrer la commande car le prix unitaire sur la ligne %s n\'est pas correct !' % line_data['name'])
+        
         if 'notes' in data and data.get('notes') != '':
             for line in self.browse(cr, uid, ids):
                 comment_ids = comment_obj.search(cr, uid, [('product_id', '=', line.product_id.id), ('partner_id', '=', line.order_id.partner_id.id)])
@@ -92,18 +104,6 @@ iller_sale_line()
 class iller_sale(osv.osv):
     _name = 'sale.order'
     _inherit = 'sale.order'
-    
-    def write(self, cr, uid, ids, vals, context={}):
-        '''
-        Check the validity of prices on sale order lines
-        '''
-        order_id = self.browse(cr, uid, ids, context=context)
-        for line in order_id.order_lines:
-            control = self.pool.get('sale.order.line').control_unit_price(cr, uid, [line.id], context=context)
-            if not control[0]:
-                raise osv.except_osv('Erreur', control[1])
-        
-        return super(iller_sale, self).write(cr, uid, ids, vals, context=context)
 
     _columns = {
         'user_id': fields.many2one('res.users', 'Salesman', states={'draft': [('readonly', False)]}, select=True, required=True),
