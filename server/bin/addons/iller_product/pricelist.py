@@ -24,7 +24,6 @@
 from osv import fields
 from osv import osv
 from tools import config
-from datetime import date
 from datetime import datetime
 from datetime import timedelta
 import time
@@ -47,8 +46,8 @@ class product_pricelist_bareme(osv.osv):
         '''
         item_obj = self.pool.get('product.pricelist.item')
         if 'valeur' in vals:
-            for id in ids:
-                item_ids = item_obj.search(cr, uid, [('bareme_id', '=', id)], context=context)
+            for bareme_id in ids:
+                item_ids = item_obj.search(cr, uid, [('bareme_id', '=', bareme_id)], context=context)
                 item_obj.write(cr, uid, item_ids, {'price_discount': float(vals.get('valeur'))-1})
 
         return super(product_pricelist_bareme, self).write(cr, uid, ids, vals, context={})
@@ -111,10 +110,10 @@ class product_pricelist_item(osv.osv):
         bareme_obj = self.pool.get('product.pricelist.bareme')
         if 'bareme_id' in vals and vals['bareme_id']:
             if vals['bareme_id']:
-               bareme = bareme_obj.read(cr, uid, vals.get('bareme_id'), ['valeur'], context)
-               vals['price_discount'] = bareme.get('valeur')-1
+                bareme = bareme_obj.read(cr, uid, vals.get('bareme_id'), ['valeur'], context)
+                vals['price_discount'] = bareme.get('valeur')-1
             else:
-               vals['price_discount'] = 0.0
+                vals['price_discount'] = 0.0
 
         return super(product_pricelist_item, self).write(cr, uid, ids, vals, context=context)
 
@@ -127,14 +126,14 @@ class product_pricelist_item(osv.osv):
         price_type = self.pool.get('product.price.type').browse(cr, uid, base_id)
         if bareme_id:
             if price_type.name == u'Prix Special':
-               return {'value': {'bareme_id' : False, 'price_discount': -1.0}}
+                return {'value': {'bareme_id' : False, 'price_discount': -1.0}}
             else:
-               discount = self.pool.get('product.pricelist.bareme').read(cr, uid, bareme_id, ['valeur'], context)
-               return {'value': {'price_discount': discount.get('valeur')-1}}
+                discount = self.pool.get('product.pricelist.bareme').read(cr, uid, bareme_id, ['valeur'], context)
+                return {'value': {'price_discount': discount.get('valeur')-1}}
         else:
             if base_id != -1 :
-               if price_type.name == u'Prix Special':
-                  return {'value': {'price_discount': -1.0}}
+                if price_type.name == u'Prix Special':
+                    return {'value': {'price_discount': -1.0}}
         return {'value': {'price_discount': 0.0}}
 
 product_pricelist_item()
@@ -631,11 +630,13 @@ class product_pricelist_promo(osv.osv):
                            'name': data['form']['end_date'],
                            'nouveau_prix_achat': promo_in.product_id.prix_achat,
                            'nouveau_prix_vente': promo_in.product_id.prix_achat*promo_in.product_id.coeff_depart,
+                           'nouveau_prix_blanche': promo_in.product_id.prix_achat*promo_in.product_id.coeff_blanche,
                           }
         p_history_data2 = {'product_id': promo_in.product_id.id,
                            'name': data['form']['start_date'],
                            'nouveau_prix_achat': promo_in.new_prix_achat,
                            'nouveau_prix_vente': promo_in.new_prix_achat*promo_in.product_id.coeff_depart,
+                           'nouveau_prix_blanche': promo_in.product_id.prix_achat*promo_in.product_id.coeff_blanche,
                            'comment': 'Promo \'%s\'' %data['form']['name'],
                           }
 

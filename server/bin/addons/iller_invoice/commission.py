@@ -25,8 +25,9 @@ class iller_commission_line(osv.osv):
         '''
             On calcule le montant de la commission lors de la création
         '''
-        if 'price_unit' in data:
-            data['commission'] = self._compute_commission(cr, uid, [], data, context)
+        if 'price_unit' in data and 'invoice_id' in data:
+            if self.pool.get('account.invoice').browse(cr, uid, data.get('invoice_id'), context=context).type == 'out_invoice':
+                data['commission'] = self._compute_commission(cr, uid, [], data, context)
 
         return super(iller_commission_line, self).create(cr, uid, data, context=context)
 
@@ -35,8 +36,10 @@ class iller_commission_line(osv.osv):
         '''
             Si le prix unitaire a changé, on recalcule le montant de la commission
         '''
-        if 'price_unit' in data:
-            data['commission'] = self._compute_commission(cr, uid, ids, data, context)
+        for line in self.browse(cr, uid, ids, context=context):
+            if 'price_unit' in data:
+                if self.pool.get('account.invoice').browse(cr, uid, data.get('invoice_id', line.invoice_id.id), context=context).type == 'out_invoice':
+                    data['commission'] = self._compute_commission(cr, uid, ids, data, context)
 
         return super(iller_commission_line, self).write(cr, uid, ids, data, context=context)
 
@@ -52,11 +55,12 @@ class iller_commission_line(osv.osv):
 
         if ids:
             for line in self.browse(cr, uid, ids, context=context):
-                lines.append({'unit_price': line.price_unit,
-                              'qty': line.quantity,
-                              'invoice_id': line.invoice_id.id,
-                              'name': line.product_id.name,
-                              'prix_vente': line.product_id.list_price})
+                if line.invoice_id.type == 'out_invoice':
+                    lines.append({'unit_price': line.price_unit,
+                                  'qty': line.quantity,
+                                  'invoice_id': line.invoice_id.id,
+                                  'name': line.product_id.name,
+                                  'prix_vente': line.product_id.list_price})
         
         ## On rentre les nouvelles valeurs
         for l in lines:
@@ -69,19 +73,21 @@ class iller_commission_line(osv.osv):
             if 'invoice_id' in data:
                 l['invoice_id'] = data.get('invoice_id')
 
-
-        if len(lines) < 1:
-            product = product_obj.browse(cr, uid, data.get('product_id'))
-            lines.append({'unit_price': data.get('price_unit'),
-                          'qty': data.get('quantity'),
-                          'name': product.name,
-                          'invoice_id': data.get('invoice_id', False),
-                          'prix_vente': product.list_price})
+        if 'invoice_id' in data:
+            invoice = self.pool.get('account.invoice').browse(cr, uid, data.get('invoice_id'))
+            if len(lines) < 1:
+                if invoice.type == 'out_invoice':
+                    product = product_obj.browse(cr, uid, data.get('product_id'))
+                    lines.append({'unit_price': data.get('price_unit'),
+                                  'qty': data.get('quantity'),
+                                  'name': product.name,
+                                  'invoice_id': data.get('invoice_id', False),
+                                  'prix_vente': product.list_price})
 
         res = self.set_value_commission(cr, uid, lines, context=context)
 
-        if not res[0]:
-            raise osv.except_osv('Erreur', u'Vous ne pouvez pas avoir un prix unitaire inférieur au prix de vente du produit multiplié par le barème c1 - L\'une des lignes de cette commande déroge à cette règle.')
+        if lines and not res[0]:
+            raise osv.except_osv('Erreur', 'Vous ne pouvez pas avoir un prix unitaire inférieur au prix de vente du produit multiplié par le barème c1 - L\'une des lignes de cette commande déroge à cette règle.')
 
         return res[0]
 

@@ -3,6 +3,7 @@
 
 from osv import osv
 from osv import fields
+import time
 import re
 
 
@@ -93,6 +94,18 @@ iller_sale_line()
 class iller_sale(osv.osv):
     _name = 'sale.order'
     _inherit = 'sale.order'
+    
+    def write(self, cr, uid, ids, vals, context={}):
+        '''
+        Check the validity of prices on sale order lines
+        '''
+        order_id = self.browse(cr, uid, ids, context=context)
+        for line in order_id.order_lines:
+            control = self.pool.get('sale.order.line').control_unit_price(cr, uid, [line.id], context=context)
+            if not control[0]:
+                raise osv.except_osv('Erreur', control[1])
+        
+        return super(iller_sale, self).write(cr, uid, ids, vals, context=context)
 
     _columns = {
         'user_id': fields.many2one('res.users', 'Salesman', states={'draft': [('readonly', False)]}, select=True, required=True),

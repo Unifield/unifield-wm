@@ -44,13 +44,25 @@ class wizard_export_tarif_hilton(osv.osv_memory):
         version_id = version_obj.search(cr, uid,[('pricelist_id', '=', pricelist_id), \
                                                  ('date_start',   '<=', this.from_date), \
                                                  ('date_end',     '>=', this.from_date)])
-        version = version_obj.browse(cr, uid, version_id[0])
+        if not version_id:
+            version_id = version_obj.search(cr, uid, [('pricelist_id', '=', pricelist_id), \
+                                                      ('date_start', '=', False)])
+        if version_id:
+            version = version_obj.browse(cr, uid, version_id[0])
+        else:
+            raise osv.except_osv(('Erreur'), ('Aucune liste de prix trouvée pour le client HILTON.'))
 
-        # Formattage des dates pour l'affichage dans le fichier d'export
+        # Formatage des dates pour l'affichage dans le fichier d'export
         date_debut_version_tarif = version.date_start
-        date_debut = date_debut_version_tarif[8:10] + "/" + date_debut_version_tarif[5:7] + "/" + date_debut_version_tarif[0:4] 
+        if not date_debut_version_tarif:
+            date_debut = ''
+        else:
+            date_debut = date_debut_version_tarif[8:10] + "/" + date_debut_version_tarif[5:7] + "/" + date_debut_version_tarif[0:4] 
         date_fin_version_tarif = version.date_end
-        date_fin = date_fin_version_tarif[8:10] + "/" + date_fin_version_tarif[5:7] + "/" + date_fin_version_tarif[0:4]
+        if not date_fin_version_tarif:
+            date_fin = ''
+        else:
+            date_fin = date_fin_version_tarif[8:10] + "/" + date_fin_version_tarif[5:7] + "/" + date_fin_version_tarif[0:4]
 
         qty = 1.0
         # La variable prix va contenir les prix de tous les produits figurant sur le tarif

@@ -4,98 +4,122 @@
 
         <!-- Catégories de produits -->
         <record id="categ01" model="product.category">
+            <field name="code">01</field>
             <field name="name">01</field>
         </record>
 
         <record id="categ02" model="product.category">
+            <field name="code">02</field>
             <field name="name">02</field>
         </record>
 
         <record id="categ03" model="product.category">
+            <field name="code">03</field>
             <field name="name">03</field>
         </record>
 
         <record id="categ04" model="product.category">
+            <field name="code">04</field>
             <field name="name">04</field>
         </record>
 
         <record id="categ05" model="product.category">
+            <field name="code">05</field>
             <field name="name">05</field>
         </record>
 
         <record id="categ06" model="product.category">
+            <field name="code">06</field>
             <field name="name">06</field>
         </record>
 
         <record id="categ07" model="product.category">
+            <field name="code">07</field>
             <field name="name">07</field>
         </record>
 
         <record id="categ08" model="product.category">
+            <field name="code">08</field>
             <field name="name">08</field>
         </record>
 
         <record id="categ09" model="product.category">
+            <field name="code">09</field>
             <field name="name">09</field>
         </record>
 
         <record id="categ10" model="product.category">
+            <field name="code">10</field>
             <field name="name">10</field>
         </record>
 
         <record id="categ11" model="product.category">
+            <field name="code">11</field>
             <field name="name">11</field>
         </record>
 
         <record id="categ12" model="product.category">
+            <field name="code">12</field>
             <field name="name">12</field>
         </record>
 
         <record id="categ13" model="product.category">
+            <field name="code">13</field>
             <field name="name">13</field>
         </record>
 
         <record id="categ14" model="product.category">
+            <field name="code">14</field>
             <field name="name">14</field>
         </record>
 
         <record id="categ15" model="product.category">
+            <field name="code">15</field>
             <field name="name">15</field>
         </record>
 
         <record id="categ16" model="product.category">
+            <field name="code">16</field>
             <field name="name">16</field>
         </record>
 
         <record id="categ17" model="product.category">
+            <field name="code">17</field>
             <field name="name">17</field>
         </record>
 
         <record id="categ18" model="product.category">
+            <field name="code">18</field>
             <field name="name">18</field>
         </record>
 
         <record id="categ21" model="product.category">
+            <field name="code">21</field>
             <field name="name">21</field>
         </record>
 
         <record id="categ22" model="product.category">
+            <field name="code">22</field>
             <field name="name">22</field>
         </record>
 
         <record id="categ23" model="product.category">
+            <field name="code">23</field>
             <field name="name">23</field>
         </record>
 
         <record id="categ24" model="product.category">
+            <field name="code">24</field>
             <field name="name">24</field>
         </record>
 
         <record id="categ25" model="product.category">
+            <field name="code">25</field>
             <field name="name">25</field>
         </record>
 
         <record id="categ26" model="product.category">
+            <field name="code">26</field>
             <field name="name">26</field>
         </record>
 
