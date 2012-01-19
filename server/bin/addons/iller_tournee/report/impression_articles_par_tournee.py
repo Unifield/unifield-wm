@@ -22,9 +22,7 @@
 ##############################################################################
 
 from report import report_sxw
-from osv import osv
 import time
-from tools.translate import _
 
 class impression_articles_par_tournee(report_sxw.rml_parse):
     def __init__(self, cr, uid, name, context):

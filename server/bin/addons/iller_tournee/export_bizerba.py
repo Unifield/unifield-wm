@@ -2,8 +2,7 @@
 #-*- encoding:utf-8 -*-
 
 import base64
-import csv
-from osv import osv, fields
+from osv import osv
 import datetime
 from tools import ustr
 

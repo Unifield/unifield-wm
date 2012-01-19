@@ -23,7 +23,6 @@
 
 from osv import osv
 from osv import fields
-from tools.translate import _
 import time
 
 class commandes_par_tournee(osv.osv_memory):

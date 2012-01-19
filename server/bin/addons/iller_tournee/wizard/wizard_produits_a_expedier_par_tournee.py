@@ -41,7 +41,6 @@ class wizard_produits_a_expedier_par_tournee(osv.osv_memory):
         # Préparation des objets
         wiz_obj = self.browse(cr,uid,ids)[0]
         sp_obj = self.pool.get('stock.picking')
-        sm_obj = self.pool.get('stock.move')
         date = datetime.strptime(wiz_obj.date, '%Y-%m-%d')
         max_date = datetime(date.year, date.month, date.day, 23, 59, 59).__str__()
         min_date = datetime(date.year, date.month, date.day, 0, 0, 0).__str__()

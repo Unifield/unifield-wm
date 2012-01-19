@@ -20,7 +20,6 @@
 #
 ##############################################################################
 
-import time
 from osv import fields, osv
 
 class iller_poste(osv.osv):
