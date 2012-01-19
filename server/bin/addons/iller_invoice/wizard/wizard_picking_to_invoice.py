@@ -154,7 +154,7 @@ class wizard_picking_to_invoice(osv.osv_memory):
                 factures_reussies = []
                 try:
                     factures_reussies = sp_obj.action_invoice_create(cr, uid, bon_a_facturer[bon], journal_id, group=True, type='out_invoice', context=context)
-                except Exception, e:
+                except Exception:
                     bon_non_reussis += bon_a_facturer[bon]
                     continue
                 finally:
@@ -168,9 +168,9 @@ class wizard_picking_to_invoice(osv.osv_memory):
             for clt in clients:
                 data = res_partner_obj.read(cr, uid, clt, ['id', 'name'], context=context)
                 nom = str(data.get('name', False))
-                id = str(data.get('id', False))
+                data_id = str(data.get('id', False))
                 bon_ids = str(bon_a_facturer[clt])
-                res += "CLIENT %s \t:\t %s \t\t\t(ID BONS : %s)" % (id, nom, bon_ids)
+                res += "CLIENT %s \t:\t %s \t\t\t(ID BONS : %s)" % (data_id, nom, bon_ids)
                 res += "\n"
             res += '----------\n'
             # les réussis
@@ -181,7 +181,7 @@ class wizard_picking_to_invoice(osv.osv_memory):
                 res += 'ID\t\tRéf\t\tOrigine\t\tClient\n'
                 for bon_reussi in sorted(bon_reussis):
                     data = so_obj.read(cr, uid, int(bon_reussi), ['id', 'name', 'origin', 'address_id'], context=context)
-                    id = str(data.get('id', False))
+                    data_id = str(data.get('id', False))
                     nom = str(data.get('name', False))
                     origine = str(data.get('origin', False))
                     address_id = str(data.get('address_id', False) and data.get('address_id')[0])
@@ -203,7 +203,7 @@ class wizard_picking_to_invoice(osv.osv_memory):
                 res += 'ID\t\tRéf\t\tOrigine\t\tClient'
                 for bon_non_reussi in sorted(bon_non_reussis):
                     data = so_obj.read(cr, uid, bon_non_reussi, ['id', 'name', 'origin', 'address_id'], context=context)
-                    id = str(data.get('id', False))
+                    data_id = str(data.get('id', False))
                     nom = str(data.get('name', False))
                     origine = str(data.get('origin', False))
                     address_id = str(data.get('address_id', False) and data.get('address_id')[0])
@@ -283,13 +283,12 @@ class wizard_picking_to_invoice(osv.osv_memory):
         """
         if isinstance(ids, (int, long)):
             ids = [ids]
-        # TODO: Faire la boucle en prenant tout les partenaires de la table 
         #+ stock_picking ayant des bons de livraisons en état terminé et à 
         #+ facturer.
         # Préparation d'éléments
         res_partner_obj = self.pool.get('res.partner')
         # On récupère tout les clients (id + mode de facturation) trié par id
-        res = res_partner_obj.search(cr, uid, [('customer', '=', 't')], order='id ASC', context=context)
+        res = res_partner_obj.search(cr, uid, [], order='id ASC', context=context)
         if res:
             # Création d'un thread
             traitement_sous_thread = threading.Thread(target=self._traitement_factures, 

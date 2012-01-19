@@ -99,7 +99,6 @@ class iller_commission_line(osv.osv):
         '''
         bareme_obj = self.pool.get('product.pricelist.bareme')
         user_obj = self.pool.get('res.users')
-        role_obj = self.pool.get('res.roles')
         model_data_obj = self.pool.get('ir.model.data')
         invoice_obj = self.pool.get('account.invoice')
         partner_obj = self.pool.get('res.partner')
@@ -221,11 +220,11 @@ class iller_commission_line(osv.osv):
         return {'value': {'commission': res2[0]}}
 
 
-    def product_id_change(self, cr, uid, ids, product, uom, qty=0, name='', type='out_invoice', partner_id=False, fposition_id=False, price_unit=False, address_invoice_id=False, context=None):
+    def product_id_change(self, cr, uid, ids, product, uom, qty=0, name='', inv_type='out_invoice', partner_id=False, fposition_id=False, price_unit=False, address_invoice_id=False, context=None):
         '''
             Modifie la valeur de la commission lors du changement de produit
         '''
-        res = super(iller_commission_line, self).product_id_change(cr, uid, ids, product, uom, qty, name, type, partner_id, fposition_id, price_unit, address_invoice_id, context=context)
+        res = super(iller_commission_line, self).product_id_change(cr, uid, ids, product, uom, qty, name, inv_type, partner_id, fposition_id, price_unit, address_invoice_id, context=context)
 
         if not product:
             res.get('value').update({'commission': 0.00})
