@@ -32,51 +32,51 @@ class wizard_export_tarifs_commerciaux(osv.osv_memory):
         # Recherche de tous les barèmes à calculer:
         c01_id = bareme_obj.search(cr, uid, [('name', '=', 'c01')])
         if c01_id:
-           c01 = bareme_obj.browse(cr, uid, c01_id[0]).valeur
+            c01 = bareme_obj.browse(cr, uid, c01_id[0]).valeur
         else:
-           c01 = 0.0
+            c01 = 0.0
 
         c19_id = bareme_obj.search(cr, uid, [('name', '=', 'c19')])
         if c19_id:
-           c19 = bareme_obj.browse(cr, uid, c19_id[0]).valeur
+            c19 = bareme_obj.browse(cr, uid, c19_id[0]).valeur
         else:
-           c19 = 0.0
+            c19 = 0.0
 
         c17_id = bareme_obj.search(cr, uid, [('name', '=', 'c17')])
         if c17_id:
-           c17 = bareme_obj.browse(cr, uid, c17_id[0]).valeur
+            c17 = bareme_obj.browse(cr, uid, c17_id[0]).valeur
         else:
-           c17 = 0.0
+            c17 = 0.0
 
         c15_id = bareme_obj.search(cr, uid, [('name', '=', 'c15')])
         if c15_id:
-           c15 = bareme_obj.browse(cr, uid, c15_id[0]).valeur
+            c15 = bareme_obj.browse(cr, uid, c15_id[0]).valeur
         else:
-           c15 = 0.0
+            c15 = 0.0
 
         c13_id = bareme_obj.search(cr, uid, [('name', '=', 'c13')])
         if c13_id:
-           c13 = bareme_obj.browse(cr, uid, c13_id[0]).valeur
+            c13 = bareme_obj.browse(cr, uid, c13_id[0]).valeur
         else:
-           c13 = 0.0
+            c13 = 0.0
 
         c11_id = bareme_obj.search(cr, uid, [('name', '=', 'c11')])
         if c11_id:
-           c11 = bareme_obj.browse(cr, uid, c11_id[0]).valeur
+            c11 = bareme_obj.browse(cr, uid, c11_id[0]).valeur
         else:
-           c11 = 0.0
+            c11 = 0.0
 
         c09_id = bareme_obj.search(cr, uid, [('name', '=', 'c09')])
         if c09_id:
-           c09 = bareme_obj.browse(cr, uid, c09_id[0]).valeur
+            c09 = bareme_obj.browse(cr, uid, c09_id[0]).valeur
         else:
-           c09 = 0.0
+            c09 = 0.0
 
         c07_id = bareme_obj.search(cr, uid, [('name', '=', 'c07')])
         if c07_id:
-           c07 = bareme_obj.browse(cr, uid, c07_id[0]).valeur
+            c07 = bareme_obj.browse(cr, uid, c07_id[0]).valeur
         else:
-           c07 = 0.0
+            c07 = 0.0
 
         export = "ACHAT;ARTIC.;DESIGNATION                            ; C. 01;   C19;  C17;   C15;   C13;   C11;   C09;   C07" + "\r\n"
         export += ";;; 10.00;  1.00; 2.00;  3.00;  4.00;  5.00;  6.00;  7.00  " + "\r\n"              
@@ -91,11 +91,11 @@ class wizard_export_tarifs_commerciaux(osv.osv_memory):
                 cr.execute('''SELECT nouveau_prix_achat, nouveau_prix_vente FROM product_price_history WHERE product_id=%s  AND name<=%s ORDER BY name desc LIMIT 1''',(product.id,this.from_date))
                 ret = cr.fetchone()
                 if ret:
-                   prix_achat = ret[0]
-                   prix_vente = ret[1]
+                    prix_achat = ret[0]
+                    prix_vente = ret[1]
                 else:
-                   prix_achat = 0.0
-                   prix_vente = 0.0
+                    prix_achat = 0.0
+                    prix_vente = 0.0
 
                 if this.achat_inclus:
                     export += "%.2f;" %round(prix_achat,2)

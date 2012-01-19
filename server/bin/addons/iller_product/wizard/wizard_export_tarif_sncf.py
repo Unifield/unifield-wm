@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
-import time
+from osv import osv
 
 import wizard
-import netsvc
 import pooler
-import osv
 import base64
 import csv
 
@@ -84,29 +82,29 @@ def _export(self, cr, uid, data, context):
     export = ''
     for row in reader:
         if row:
-           cols = row[0].split(';')
-           # cols[0] contient le code du produit (à quelques 0 près)
-           # on cherche le produit correspond et son prix qui sera mis dans cols[3]
-           if cols[0]:
-              long = len(cols[0])
-              if (long == 3) or (long == 4):
-                 code = int(cols[0]) * 100 
-              product_ids = product_obj.search(cr, uid, [('default_code', 'ilike', str(code))])
-              if not product_ids:
-                 print "********** PAS DE PRODUIT DE CODE %s" %code
-              else:
-                 prod = product_obj.browse(cr, uid, product_ids[0])
-                 uom = prod.uom_id
-                 prix = pricelist_obj.price_get(cr, uid, [pricelist_id],
+            cols = row[0].split(';')
+            # cols[0] contient le code du produit (à quelques 0 près)
+            # on cherche le produit correspond et son prix qui sera mis dans cols[3]
+            if cols[0]:
+                length = len(cols[0])
+                if (length == 3) or (length == 4):
+                    code = int(cols[0]) * 100 
+                product_ids = product_obj.search(cr, uid, [('default_code', 'ilike', str(code))])
+                if not product_ids:
+                    print "********** PAS DE PRODUIT DE CODE %s" %code
+                else:
+                    prod = product_obj.browse(cr, uid, product_ids[0])
+                    uom = prod.uom_id
+                    prix = pricelist_obj.price_get(cr, uid, [pricelist_id],
                                         product_ids[0], qty , partner_id[0], {
                                         'uom': uom.id,
                                         'date': data['form']['from_date'],
                                         })[pricelist_id]
-                 cols[3] =  str(round(prix,2))
-                 nb += 1
+                    cols[3] =  str(round(prix,2))
+                    nb += 1
                      
-           for col in cols:
-               export += unicode(col,'utf-8') + ";"
+            for col in cols:
+                export += unicode(col,'utf-8') + ";"
 
         export += "\r\n"
 

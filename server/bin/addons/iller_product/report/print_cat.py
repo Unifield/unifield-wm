@@ -21,9 +21,6 @@
 ##############################################################################
 
 from report import report_sxw
-from osv import osv
-import pooler
-import time
 
 class print_cat(report_sxw.rml_parse):
 

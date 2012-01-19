@@ -21,8 +21,6 @@
 ##############################################################################
 
 from report import report_sxw
-from osv import osv
-import pooler
 
 class tarif_aide_commercial(report_sxw.rml_parse):
 

@@ -2,7 +2,6 @@
 # -*- encoding: utf-8 -*-
 
 from osv import osv
-from osv import fields
 
 class wizard_raz_prix_noel(osv.osv_memory):
     _name = 'wizard.raz.prix.noel'

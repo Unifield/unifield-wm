@@ -24,9 +24,7 @@
 from osv import fields
 from osv import osv
 from tools import config
-from datetime import date
 from datetime import datetime
-import pooler
 import time
 
 

@@ -29,7 +29,6 @@ class export_tarif_promo(wizard.interface):
 
     def _get_file(self, cr, uid, data, args, context={}):
         promo_obj = pooler.get_pool(cr.dbname).get('product.pricelist.promo')
-        product_obj = pooler.get_pool(cr.dbname).get('product.product')
         b_conf_obj = pooler.get_pool(cr.dbname).get('pricelist.promo.configuration')
         b_conf_ids = b_conf_obj.search(cr, uid, [])
         promo = promo_obj.browse(cr, uid, data['ids'])[0]

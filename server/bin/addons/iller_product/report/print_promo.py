@@ -35,19 +35,16 @@ class print_promo(report_sxw.rml_parse):
                 'time': time,
             })
 
-        def _getPrix(self, product_id, type, promo_id):
+        def _getPrix(self, product_id, price_type, promo_id):
             cr = self.cr
             uid = self.uid
             b_conf_obj = self.pool.get('pricelist.promo.configuration')
             p_obj = self.pool.get('product.product')
-            promo_obj = self.pool.get('product.pricelist.promo')
             b_conf_ids = b_conf_obj.search(cr, uid, [])
-
-            promo = promo_obj.browse(cr, uid, promo_id)
             
             b_coeff = 1.00
             if b_conf_ids:
-                if type == 'jaune':
+                if price_type == 'jaune':
                     b_coeff = b_conf_obj.browse(cr, uid, b_conf_ids[0]).bareme_jaune.valeur
                 else:
                     b_coeff = b_conf_obj.browse(cr, uid, b_conf_ids[0]).bareme_page2.valeur

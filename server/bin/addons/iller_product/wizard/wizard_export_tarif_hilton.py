@@ -1,12 +1,6 @@
 # -*- encoding: utf-8 -*-
 
-import wizard
-import re
-import tools
-import time
 import base64
-import cStringIO
-import csv
 import pooler
 from osv import fields,osv
 from tools.translate import _
@@ -28,8 +22,6 @@ class wizard_export_tarif_hilton(osv.osv_memory):
 
         partner_obj   = pooler.get_pool(cr.dbname).get('res.partner')
         product_obj   = pooler.get_pool(cr.dbname).get('product.product')
-        categ_obj     = pooler.get_pool(cr.dbname).get('product.category')
-        pricelist_obj = pooler.get_pool(cr.dbname).get('product.pricelist')
         version_obj   = pooler.get_pool(cr.dbname).get('product.pricelist.version')
         item_obj      = pooler.get_pool(cr.dbname).get('product.pricelist.item')
 
@@ -77,45 +69,45 @@ class wizard_export_tarif_hilton(osv.osv_memory):
             item = item_obj.browse(cr, uid, item_id)
             # Si la case "hebdo" est cochée, on ne veut que les promos de la semaine (séquence 3)
             if this.hebdo and item.sequence != 3:
-               continue
+                continue
             # Si la case "mensuel" est cochée, on ne veut que les prix spéciaux (séquence 1)
             if this.mensuel and item.sequence != 1:
                 continue
             if item.product_id:
-               # La règle s'applique sur un produit
-               if not prix.get(item.product_id.id) :
-                  # Ce produit ne figure pas encore sur la liste, on calcule son prix
-                  price = self.pool.get('product.pricelist').price_get(cr, uid, [pricelist_id],
+                # La règle s'applique sur un produit
+                if not prix.get(item.product_id.id) :
+                    # Ce produit ne figure pas encore sur la liste, on calcule son prix
+                    price = self.pool.get('product.pricelist').price_get(cr, uid, [pricelist_id],
                                         item.product_id.id, qty , partner_id[0], {
                                         'uom': item.product_id.uom_id.id,
                                         'date': this.from_date,
                                         })[pricelist_id]
-                  prix[item.product_id.id] = price 
+                    prix[item.product_id.id] = price 
             else:
                 if item.categ_id:
-                   # La règle s'applique sur une catégorie de produits. Recherche de tous les produits concernés:
-                   product_ids = product_obj.search(cr, uid, [('categ_id', '=', item.categ_id.id)])
-                   for product_id in product_ids:
-                       if not prix.get(product_id):
-                          price = self.pool.get('product.pricelist').price_get(cr, uid, [pricelist_id],
+                    # La règle s'applique sur une catégorie de produits. Recherche de tous les produits concernés:
+                    product_ids = product_obj.search(cr, uid, [('categ_id', '=', item.categ_id.id)])
+                    for product_id in product_ids:
+                        if not prix.get(product_id):
+                            price = self.pool.get('product.pricelist').price_get(cr, uid, [pricelist_id],
                                    product_id, qty , partner_id[0], {
                                    'uom': product_obj.browse(cr, uid, product_id).uom_id.id,
                                    'date': this.from_date,
                                    })[pricelist_id]
-                          prix[product_id] = price
+                            prix[product_id] = price
                 else:
-                   # La règle concerne tous les produits
-                   product_ids = product_obj.search(cr, uid, [])
-                   for product_id in product_ids: 
-                       if not prix.get(product_id):
-                          prod =  product_obj.browse(cr, uid, product_id)
-                          uom = prod.uom_id
-                          price = self.pool.get('product.pricelist').price_get(cr, uid, [pricelist_id],
+                    # La règle concerne tous les produits
+                    product_ids = product_obj.search(cr, uid, [])
+                    for product_id in product_ids: 
+                        if not prix.get(product_id):
+                            prod =  product_obj.browse(cr, uid, product_id)
+                            uom = prod.uom_id
+                            price = self.pool.get('product.pricelist').price_get(cr, uid, [pricelist_id],
                                             product_id, qty , partner_id[0], {
                                             'uom': uom.id,
                                             'date': this.from_date,
                                             })[pricelist_id]
-                          prix[product_id] = price
+                            prix[product_id] = price
 
         # A ce stade, on a récupéré la liste de tous les prix des produits figurant sur la liste.
         # Il faut encore les mettre en forme 
@@ -127,46 +119,46 @@ class wizard_export_tarif_hilton(osv.osv_memory):
         export += "N;STRING(102);STRING(1000);STRING(256);STRING(100);STRING(256);STRING(4000);STRING(100);DATE;STRING(200);STRING(140);STRING(256);NUMERIC(1,0);NUMERIC(38,10);NUMERIC(10,0);STRING(40);NUMERIC(38,10);NUMERIC(38,10);STRING(20);NUMERIC(38,10);NUMERIC(38,10);NUMERIC(38,10);NUMERIC(38,10);NUMERIC(38,10);NUMERIC(38,10);DATE;DATE;NUMERIC(1,0);NUMERIC(4,0);NUMERIC(4,0);STRING(180);STRING(56);STRING(510);NUMERIC(10,0);STRING(1000)" + "\r\n"
 
         for  product_id in prix.keys():
-             product = product_obj.browse(cr, uid, product_id)
-
-             export += "U;"
-             export += "#" + product.default_code + " ;"
-             export += product.name + ";"
-             export += ";"       # Colonne D: Marque?
-             export += ";"       # Colonne E: Nom du fabriquant?
-             export += "#;"      # Colonne F: Id de produit du fabriquant?
-             if product.description:
+            product = product_obj.browse(cr, uid, product_id)
+            
+            export += "U;"
+            export += "#" + product.default_code + " ;"
+            export += product.name + ";"
+            export += ";"       # Colonne D: Marque?
+            export += ";"       # Colonne E: Nom du fabriquant?
+            export += "#;"      # Colonne F: Id de produit du fabriquant?
+            if product.description:
                 export += product.description + ";"
-             else:
-                 export += ";"
-             export += ";"       # Colonne H: Origine du produit?
-             export += ";"       # Colonne I: Date d'échéance?
-             export += ";"       # Colonne J: Couleur du produit?
-             if product.weight_net != 0:
+            else:
+                export += ";"
+            export += ";"       # Colonne H: Origine du produit?
+            export += ";"       # Colonne I: Date d'échéance?
+            export += ";"       # Colonne J: Couleur du produit?
+            if product.weight_net != 0:
                 export += str(product.weight_net) + ";"
-             else:
+            else:
                 export += ";" 
-             export += ";"       # Colonne L: Dimension caisse?
-             export += "0;"      # Colonne M: Consentant pour escompter la caisse
-             export += ";"       # Colonne N: Poids moyen par caisse?
-             export += ";"       # Colonne O: Nb articles par caisse?
-             export += product.uom_id.name;
-             export += ";"       # Colonne Q: Quantité mini de commande?
-             export += str(prix.get(product_id)) + ";"
-             export += "EUR;"
-             export += ";;;;;;"  # Colonnes T à Y : champs de type BREAK...?
-             export += date_debut + ";"
-             export += date_fin + ";"
-             export += ";"       # Colonne AA: Prix à la date finale?
-             export += ";"       # Colonne AB: Exempt d'impôt?
-             export += "1;"      # Colonne AC: Délai de livraison?
-             export += "1;"      # Colonne AD: Période d'attente minimum?
-             export += ";"       # Colonne AE: UNSPC?
-             export += "#;"      # Colonne AF: CUP?
-             export += ";"       # Colonne AG: Fichier image?
-             export += str(product.categ_id.name) + ";"
-             export += ";"       # Colonne AI: Nom de la catégorie?
-             export += "\r\n"
+            export += ";"       # Colonne L: Dimension caisse?
+            export += "0;"      # Colonne M: Consentant pour escompter la caisse
+            export += ";"       # Colonne N: Poids moyen par caisse?
+            export += ";"       # Colonne O: Nb articles par caisse?
+            export += product.uom_id.name;
+            export += ";"       # Colonne Q: Quantité mini de commande?
+            export += str(prix.get(product_id)) + ";"
+            export += "EUR;"
+            export += ";;;;;;"  # Colonnes T à Y : champs de type BREAK...?
+            export += date_debut + ";"
+            export += date_fin + ";"
+            export += ";"       # Colonne AA: Prix à la date finale?
+            export += ";"       # Colonne AB: Exempt d'impôt?
+            export += "1;"      # Colonne AC: Délai de livraison?
+            export += "1;"      # Colonne AD: Période d'attente minimum?
+            export += ";"       # Colonne AE: UNSPC?
+            export += "#;"      # Colonne AF: CUP?
+            export += ";"       # Colonne AG: Fichier image?
+            export += str(product.categ_id.name) + ";"
+            export += ";"       # Colonne AI: Nom de la catégorie?
+            export += "\r\n"
 
         export1=base64.encodestring(export.encode("utf-8"))
 

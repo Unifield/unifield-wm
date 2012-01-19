@@ -3,10 +3,6 @@
 
 import wizard
 import pooler
-import time
-from datetime import date
-from datetime import datetime
-from datetime import timedelta
 
 
 _configure_form = """<?xml version="1.0" encoding="utf-8" ?>
