@@ -20,14 +20,12 @@
 #
 ##############################################################################
 
-import time
 import netsvc
 from tools.misc import UpdateableStr, UpdateableDict
 import pooler
 
 import wizard
 from osv import osv
-import tools
 from tools.translate import _
 
 _moves_arch = UpdateableStr()
@@ -124,7 +122,6 @@ def _get_moves(self, cr, uid, data, context):
             quantity = 0
 
         _moves_arch_lst.append('<field name="move%s" />' % (m.id,))
-        field_name = 'move%s' % m.id
         _moves_fields['move%s' % m.id] = {
                 'string': _to_xml(m.name),
                 'type' : 'float', 'required' : True, 'default' : make_default(quantity)}
@@ -250,7 +247,6 @@ def _do_split(self, cr, uid, data, context):
     pick_obj = pooler.get_pool(cr.dbname).get('stock.picking')
     pick = pick_obj.browse(cr, uid, [data['id']])[0]
     new_picking = None
-    new_moves = []
 
     complete, too_many, too_few = [], [], []
     pool = pooler.get_pool(cr.dbname)
@@ -308,7 +304,7 @@ def _do_split(self, cr, uid, data, context):
                         'state':'draft',
                     })
         if data['form']['move%s' % move.id] <> 0:
-            new_obj = move_obj.copy(cr, uid, move.id,
+            move_obj.copy(cr, uid, move.id,
                 {
                     'product_qty' : data['form']['move%s' % move.id],
                     'product_uos_qty':data['form']['move%s' % move.id],
@@ -395,9 +391,9 @@ def _check_invoicing(self, cr, uid, data, context={}):
     Si oui, on renvoie l'état 'invoice', sinon on renvoie l'état 'end3' (fin)
     """
     if data.get('id', False):
-        id = data.get('id')
+        data_id = data.get('id')
         pooler.get_pool(cr.dbname).get('stock.move')
-        sp = pooler.get_pool(cr.dbname).get('stock.picking').browse(cr, uid, id, context=context)
+        sp = pooler.get_pool(cr.dbname).get('stock.picking').browse(cr, uid, data_id, context=context)
         if sp.address_id and sp.address_id.partner_id and sp.address_id.partner_id.facturation_bl:
             type_facturation = sp.address_id.partner_id.facturation_bl
             # Si facturation = NON, alors on va vers l'état 'invoice'
@@ -418,16 +414,16 @@ def _get_type_invoice(obj, cr, uid, data, context=None):
         usage = pick.move_lines[0].location_id.usage
 
     if pick.type == 'out' and usage == 'supplier':
-        type = 'in_refund'
+        inv_type = 'in_refund'
     elif pick.type == 'out' and usage == 'customer':
-        type = 'out_invoice'
+        inv_type = 'out_invoice'
     elif pick.type == 'in' and usage == 'supplier':
-        type = 'in_invoice'
+        inv_type = 'in_invoice'
     elif pick.type == 'in' and usage == 'customer':
-        type = 'out_refund'
+        inv_type = 'out_refund'
     else:
-        type = 'out_invoice'
-    return {'type': type}
+        inv_type = 'out_invoice'
+    return {'type': inv_type}
 
 
 def _create_invoice(obj, cr, uid, data, context=None):
@@ -439,28 +435,28 @@ def _create_invoice(obj, cr, uid, data, context=None):
     mod_obj = pool.get('ir.model.data')
     act_obj = pool.get('ir.actions.act_window')
 
-    type = data['form']['type']
+    inv_type = data['form']['type']
 
     res = picking_obj.action_invoice_create(cr, uid, data['ids'],
             journal_id=data['form']['journal_id'], group=data['form']['group'],
-            type=type, context=context)
+            type=inv_type, context=context)
 
     invoice_ids = res.values()
     if not invoice_ids:
         raise wizard.except_wizard(_('Error'), _('Invoice is not created'))
 
-    if type == 'out_invoice':
+    if inv_type == 'out_invoice':
         xml_id = 'action_invoice_tree5'
-    elif type == 'in_invoice':
+    elif inv_type == 'in_invoice':
         xml_id = 'action_invoice_tree8'
-    elif type == 'out_refund':
+    elif inv_type == 'out_refund':
         xml_id = 'action_invoice_tree10'
     else:
         xml_id = 'action_invoice_tree12'
 
     result = mod_obj._get_id(cr, uid, 'account', xml_id)
-    id = mod_obj.read(cr, uid, result, ['res_id'], context=context)
-    result = act_obj.read(cr, uid, id['res_id'], context=context)
+    mod_id = mod_obj.read(cr, uid, result, ['res_id'], context=context)
+    result = act_obj.read(cr, uid, mod_id['res_id'], context=context)
     result['res_id'] = invoice_ids
     result['context'] = context
     return result
