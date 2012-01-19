@@ -17,7 +17,6 @@ class iller_control_unit_price(osv.osv):
         '''
         bareme_obj = self.pool.get('product.pricelist.bareme')
         user_obj = self.pool.get('res.users')
-        role_obj = self.pool.get('res.roles')
         model_data_obj = self.pool.get('ir.model.data')
         order_obj = self.pool.get('sale.order')
         partner_obj = self.pool.get('res.partner')

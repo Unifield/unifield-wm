@@ -49,8 +49,8 @@ class impression_ventes_representants(report_sxw.rml_parse):
         if representant:
             users.append(user_obj.browse(self.cr, self.uid, representant))
         else:
-            for id in user_obj.search(self.cr, self.uid, []):
-                users.append(user_obj.browse(self.cr, self.uid, id))
+            for user_id in user_obj.search(self.cr, self.uid, []):
+                users.append(user_obj.browse(self.cr, self.uid, user_id))
         return users
 
     def get_commandes(self, user_id=None, date_deb=None, date_fin=None):

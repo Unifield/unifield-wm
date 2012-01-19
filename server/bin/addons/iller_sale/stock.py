@@ -78,7 +78,7 @@ class iller_stock_picking(osv.osv):
         'address_id': fields.many2one('res.partner.address', string='Partner', required=True),
     }
 
-    def _get_price_unit_invoice(self, cr, uid, stock_move, type):
+    def _get_price_unit_invoice(self, cr, uid, stock_move, inv_type):
         """
         Retourne le prix unitaire d'une ligne d'expédition (stock_move) pour 
         une ligne d'écriture comptable (account_move)
@@ -105,12 +105,12 @@ class iller_stock_picking(osv.osv):
         # Si aucune ligne de commande, ni de liste de prix, alors on utilise le 
         #+ prix du produit
         else:
-            if type in ('in_invoice', 'in_refund'):
+            if inv_type in ('in_invoice', 'in_refund'):
                 return stock_move.product_id.standard_price
             else:
                 return stock_move.product_id.list_price
 
-    def action_invoice_create(self, cr, uid, ids, journal_id=False, group=False, type='out_invoice', context=None):
+    def action_invoice_create(self, cr, uid, ids, journal_id=False, group=False, inv_type='out_invoice', context=None):
         """
         Donne l'ensemble des factures pour les "pickings"
         """
@@ -120,7 +120,7 @@ class iller_stock_picking(osv.osv):
         for sp in self.browse(cr, uid, ids, context=context):
             if sp.sale_id:
                 context.update({'from_sale_order': sp.sale_id.id})
-            res2 = super(iller_stock_picking, self).action_invoice_create(cr, uid, [sp.id], journal_id, group, type, context)
+            res2 = super(iller_stock_picking, self).action_invoice_create(cr, uid, [sp.id], journal_id, group, inv_type, context)
             res.update(res2)
         return res
 

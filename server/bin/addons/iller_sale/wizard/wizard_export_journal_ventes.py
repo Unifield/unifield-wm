@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 #-*- encoding:utf-8 -*-
 
-import os
 import base64
 from osv import osv, fields
 import datetime

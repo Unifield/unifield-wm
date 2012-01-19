@@ -72,8 +72,6 @@ class iller_sale_line(osv.osv):
             pour ce produit et ce partenaire
         '''
         comment_obj = self.pool.get('iller.sale.comment')
-        product_obj = self.pool.get('product.product')
-        tournee_obj = self.pool.get('tournee.iller')
 
         comment = ''
         res = super(iller_sale_line, self).product_id_change(cr, uid, ids, pricelist, product, qty, uom, qty_uos, uos, name, partner_id, \
