@@ -2,7 +2,6 @@
 # -*- encoding: utf-8 -*-
 
 from osv import osv, fields
-import tools
 import base64
 import csv
 import netsvc
@@ -32,9 +31,9 @@ class wizard_import_magasin(osv.osv_memory):
 
         imp = self.browse(cr, uid, ids[0])
 
-        file = imp.file
+        imp_file = imp.file
         fileobj = TemporaryFile('w+')
-        fileobj.write(base64.decodestring(file))
+        fileobj.write(base64.decodestring(imp_file))
         fileobj.seek(0)
         
         reader = csv.reader(fileobj, quotechar='\'', delimiter=';')
@@ -112,7 +111,7 @@ class wizard_import_magasin(osv.osv_memory):
 
                     amount_total += (qty*price_unit)-((qty*price_unit*discount)/100)
 
-                    posol_id = posol.create(cr, uid, posol_data, context=context)
+                    posol.create(cr, uid, posol_data, context=context)
                 elif line[13] == '00146' or line[13] == '146':
                     payment_data = {'name': 'Paiement magasin',
                                     'order_id': po,
