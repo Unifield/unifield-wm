@@ -1,5 +1,4 @@
 name;type;parent_id.complete_name
-LOG;mandatory;
 Administration;mandatory;LOG
 Data processing;mandatory;LOG/Administration
 Cable, dataprocessing;mandatory;LOG/Administration/Data processing
@@ -129,7 +128,6 @@ Test, Water;mandatory;LOG/Camp/Water and sanitation
 Valve;mandatory;LOG/Camp/Water and sanitation
 Lime quick;mandatory;LOG/Camp/Water and sanitation
 Permethrine;mandatory;LOG/Camp/Water and sanitation
-MED;mandatory;
 Drugs;mandatory;MED
 Diagnostic tests;mandatory;MED/Drugs
 Blood Group Test;mandatory;MED/Drugs/Diagnostic tests
