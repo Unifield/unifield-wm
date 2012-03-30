@@ -1,69 +1,161 @@
 "name";"property_account_income_categ.code";"property_account_expense_categ.code"
-"Administration Kits";;60503
-"Administrative";;
-"Anaesthesia";;6005
-"Boats";;60602
-"Building";;606000
-"Camps kits";;60404
-"Catheters, tubes and drains";;6005
-"Cold chain";;6020
-"Communication";;606016
-"Communication kits";;606016
-"COOKING";;604021
-"Data processing";;606015
-"Dental surgical instruments";;6025
-"Diagnostic tests";;6010
-"Dressings";;6005
-"Drugs external use";;6000
-"Electricity";;605000
-"FOOD FOR MSF STAFF";;60351
-"Furnitures";;60603
-"HARDWARE";;606015
-"Hospital equipment";;606010
-"Hygiene";;604022
-"Infusions";;6000
-"Injectable drugs";;6000
-"Injection supplies";;6005
-"INTERNAL MEDICINE";;6005
-"Laboratory equipment";;606011
-"Laboratory reagents";;6010
-"LAND ROVER";;60602
-"Lighting";;606018
-"Linen and protective clothing";;606010
-"Medical equipment";;606010
-"Medical kits";;6005
-"Medical stationery";;6005
-"MEDICINE GENERAL INFORMATION";;6000
-"Office equipment";;606014
-"Ophtalmic drugs for external use";;6000
-"Ophtalmic surgical instruments";;6025
-"Oral drugs";;6000
-"Packing and handling";;60503
-"PEUGEOT";;60602
-"Programme support kits";;60404
-"Safety and protective equipment";;60404
-"SEMIPERMANENT Shelter";;604024
-"Shelters";;604024
-"Small medical supplies";;6005
-"SPARE PARTS LISTER";;60401
-"SPARE PARTS LOMBARDINI";;60401
-"SPARE PARTS ROBIN";;60401
-"SPARE PARTS TOYOTA";;60401
-"Spare parts Yamaha";;60401
-"Specialized food";;60350
-"STATIONERY";;605010
-"Sterilization";;6005
-"Surgical instruments";;6005
-"Surgical instruments for external fixator";;6005
-"Taxe";;
-"Team life";;60503
-"Tools";;60404
-"Toyota vehicles";;60602
-"Transport kits";;60404
-"Vaccines";;60150
-"Vehicles accessories";;60401
-"Vehicles consumables";;60401
-"VEHICLES MODIFICATIONS";;60401
-"VIRAL INFECTIOUS DISEASES";;6005
-"Water and sanitation";;604032
-"Water and sanitation kits";;604032
+"Data processing";6303;6303
+"Office equipment";6303;6303
+"FOOD FOR MSF STAFF";6101;6101
+"Logistic stationery";6301;6301
+"Furnitures";6303;6303
+"Team life";6101;6101
+"STATIONERY";6301;6301
+"Shelters";6551;6551
+"SEMIPERMANENT Shelter";6551;6551
+"SPARE PARTS HUDSON";6720;6720
+"Building";6510;6510
+"Water and sanitation";6520;6520
+"Infusions";6400;6400
+"Oral drugs";6400;6400
+"Vaccines";6420;6420
+"Injectable drugs";6400;6400
+"Drugs external use";6400;6400
+"Ophtalmic drugs for external use";6400;6400
+"Disinfectants";6400;6400
+"Diagnostic tests";6400;6400
+"Chemicals & Pesticides";6400;6400
+"Surgical instruments for external fixator";6460;6460
+"Training mannequins";6460;6460
+"Training posters";6460;6460
+"Ophtalmic surgical instruments";6460;6460
+"Surgical instruments";6460;6460
+"Dental surgical instruments";6460;6460
+"Medical equipment";6461;6461
+"Laboratory equipment";6471;6471
+"Hospital equipment";6461;6461
+"Anaesthesia";6460;6460
+"Anthropometric equipment";6461;6461
+"Linen and protective clothing";6460;6460
+"X-RAY EQUIPMENT";6461;6461
+"Sterilization";6461;6461
+"Programme support kits";6500;6500
+"Administration Kits";6303;6303
+"Medical kits";6401;6401
+"Dental instrument box";6401;6401
+"Water and sanitation kits";6521;6521
+"Ophtalmic instrument box";6401;6401
+"Surgical instruments sets";6401;6401
+"Communication kits";6302;6302
+"Camps kits";6550;6550
+"Transport kits";6500;6500
+"LANGUAGES";;
+"NUTRITION";;
+"HUMANITARIAN ASSISTANCE";;
+"IMMUNIZATION - COLD CHAIN";;
+"CONTEXTS - GEOPOLITICS";;
+"HUMANITARIAN ASSISTANCE - LAW";;
+"PHARMACOLOGY";;
+"HUMANITARIAN ASSISTANCE - INTERVENTIONS";;
+"NTERNATIONAL ORGANISATIONS";;
+"NGO's";;
+"LABORATORY";;
+"MEDICINE GENERAL INFORMATION";;
+"OPHTHALMOLOGY - DERMATOLOGY";;
+"STATES: HUM. ASSISTANCE";;
+"PARASITIC INFECTIOUS DISEASES";;
+"MSF (articles written by MSF)";;
+"REPRODUCTIVE HEALTH";;
+"INTERNAL MEDICINE";;
+"PAEDIATRICS";;
+"VIRAL INFECTIOUS DISEASES";;
+"GYNAECOLOGY - OBSTETRICS";;
+"BACTERIAL INFECTIOUS DISEASES";;
+"SURGERY-ANAESTHESIA-DENTISTRY-PHYSIOTHERAPY-TRANSF";;
+"MYCOLOGICAL INFECTIOUS DISEASES";;
+"STD - AIDS";;
+"RADIOLOGY - MEDICAL IMAGING";;
+"COMMUNITY HEALTH";;
+"HEALTH OF EXPATRIATES";;
+"INFECTION CONTROL";;
+"MENTAL HEALTH";;
+"SOCIAL ISSUES";;
+"LOGISTICS";;
+"DRUGS MANAGEMENT";;
+"MECHANICS /TRANSPORT";;
+"TELECOMMUNICATION";;
+"BUILDING - SHELTERS";;
+"HEALTH SERVICES MANAGEMENT";;
+"EPIDEMIOLOGY - STATISTICS";;
+"MSF - PUBLICATIONS";;
+"ANTHROPOLOGY";;
+"MSF - INTERNAL DOCUMENTS";;
+"ADMINISTRATION - FINANCES";;
+"WATER & SANITATION";;
+"NURSING - INFECTION CONTROL";;
+"MSF - GENERAL FACTS";;
+"SECURITY";;
+"HUMAN RESOURCES MANAGEMENT";;
+"EMERGENCIES - DISASTERS - CONFLICTS";;
+"TRAINING - EDUCATION";;
+"ENERGY";;
+"SUPPLY";;
+"FOOD AID";;
+"CATALOGUES & ORDER LISTS";;
+"DATA PROCESSING";;
+"REFUGEES - DISPLACED";;
+"Communication";6302;6302
+"IDENTIFICATION";6331;6331
+"Cold chain";6412;6412
+"SPARE PARTS HONDA";6720;6720
+"Lighting";6530;6530
+"Spare parts - undefined";6720;6720
+"SPARE PARTS PERKINS";6720;6720
+"Packing and handling";6540;6540
+"PAINT";6541;6541
+"Tools";6542;6542
+"HARDWARE";6303;6303
+"SPARE PARTS ROBIN";6720;6720
+"COOKING";6550;6550
+"spare parts DAVEY";6720;6720
+"Electricity";6311;6311
+"SPARE PARTS LISTER";6720;6720
+"SPARE PARTS LOMBARDINI";6720;6720
+"SPARE PARTS CATERPILLAR";6720;6720
+"SPARE PARTS YANMAR";6720;6720
+"Safety and protective equipment";6540;6540
+"Hygiene";6540;6540
+"Small medical supplies";6460;6460
+"Medical stationery";6460;6460
+"Laboratory reagents";6470;6470
+"Sutures";6460;6460
+"X-RAY SUPPLIES";6450;6450
+"Injection supplies";6460;6460
+"Specialized food";6431;6431
+"Dressings";6460;6460
+"Catheters, tubes and drains";6460;6460
+"Spare parts Land Rover";6720;6720
+"SPARE PARTS VEHICLES HONDA";6720;6720
+"Spare parts DAF";6720;6720
+"SPARE PARTS VEHICLES IVECO";6720;6720
+"Spare parts MAN";6720;6720
+"Spare parts Mercedes";6720;6720
+"Spare parts Renault";6720;6720
+"Spare parts Taro";6720;6720
+"SPARE PARTS TOYOTA";6720;6720
+"Spare parts Umm";6720;6720
+"Spare parts Volvo";6720;6720
+"Spare parts Volkswagen";6720;6720
+"Spare parts Yamaha";6720;6720
+"Spare parts Peugeot";6720;6720
+"PEUGEOT";6700;6700
+"CYCLES & MOTORCYCLES";6700;6700
+"DAF";6700;6700
+"Boats";6700;6700
+"Yamaha";6700;6700
+"IVECO";6700;6700
+"LAND ROVER";6700;6700
+"MERCEDES";6700;6700
+"Volkswagen";6700;6700
+"RENAULT";6700;6700
+"TARO";6700;6700
+"Toyota vehicles";6700;6700
+"HONDA";6700;6700
+"Vehicles accessories";6730;6730
+"Vehicles consumables";6730;6730
+"VEHICLES MODIFICATIONS";6730;6730
