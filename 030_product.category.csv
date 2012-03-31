@@ -1,163 +1,163 @@
-"name";"property_account_income_categ.code";"property_account_expense_categ.code"
-"Data processing";6303;6303
-"Office equipment";6303;6303
-"FOOD FOR MSF STAFF";6101;6101
-"Logistic stationery";6301;6301
-"Furnitures";6303;6303
-"Team life";6101;6101
-"STATIONERY";6301;6301
-"Shelters";6551;6551
-"SEMIPERMANENT Shelter";6551;6551
-"SPARE PARTS HUDSON";6720;6720
-"Building";6510;6510
-"Water and sanitation";6520;6520
-"Infusions";6400;6400
-"Oral drugs";6400;6400
-"Vaccines";6420;6420
-"Injectable drugs";6400;6400
-"Drugs external use";6400;6400
-"Ophtalmic drugs for external use";6400;6400
-"Disinfectants";6400;6400
-"Diagnostic tests";6400;6400
-"Chemicals & Pesticides";6400;6400
-"Surgical instruments for external fixator";6460;6460
-"Training mannequins";6460;6460
-"Training posters";6460;6460
-"Ophtalmic surgical instruments";6460;6460
-"Surgical instruments";6460;6460
-"Dental surgical instruments";6460;6460
-"Medical equipment";6461;6461
-"Laboratory equipment";6471;6471
-"Hospital equipment";6461;6461
-"Anaesthesia";6460;6460
-"Anthropometric equipment";6461;6461
-"Linen and protective clothing";6460;6460
-"X-RAY EQUIPMENT";6461;6461
-"Sterilization";6461;6461
-"Programme support kits";6500;6500
-"Administration Kits";6303;6303
-"Medical kits";6401;6401
-"Dental instrument box";6401;6401
-"Water and sanitation kits";6521;6521
-"Ophtalmic instrument box";6401;6401
-"Surgical instruments sets";6401;6401
-"Communication kits";6302;6302
-"Camps kits";6550;6550
-"Transport kits";6500;6500
-"LANGUAGES";6640;6640
-"NUTRITION";6640;6640
-"HUMANITARIAN ASSISTANCE";6640;6640
-"IMMUNIZATION - COLD CHAIN";6640;6640
-"CONTEXTS - GEOPOLITICS";6640;6640
-"HUMANITARIAN ASSISTANCE - LAW";6640;6640
-"PHARMACOLOGY";6640;6640
-"HUMANITARIAN ASSISTANCE - INTERVENTIONS";6640;6640
-"NTERNATIONAL ORGANISATIONS";6640;6640
-"NGO's";6640;6640
-"LABORATORY";6640;6640
-"MEDICINE GENERAL INFORMATION";6640;6640
-"OPHTHALMOLOGY - DERMATOLOGY";6640;6640
-"STATES: HUM. ASSISTANCE";6640;6640
-"PARASITIC INFECTIOUS DISEASES";6640;6640
-"MSF (articles written by MSF)";6640;6640
-"REPRODUCTIVE HEALTH";6640;6640
-"INTERNAL MEDICINE";6640;6640
-"PAEDIATRICS";6640;6640
-"VIRAL INFECTIOUS DISEASES";6640;6640
-"GYNAECOLOGY - OBSTETRICS";6640;6640
-"BACTERIAL INFECTIOUS DISEASES";6640;6640
-"SURGERY-ANAESTHESIA-DENTISTRY-PHYSIOTHERAPY-TRANSF";6640;6640
-"MYCOLOGICAL INFECTIOUS DISEASES";6640;6640
-"STD - AIDS";6640;6640
-"RADIOLOGY - MEDICAL IMAGING";6640;6640
-"COMMUNITY HEALTH";6640;6640
-"HEALTH OF EXPATRIATES";6640;6640
-"INFECTION CONTROL";6640;6640
-"MENTAL HEALTH";6640;6640
-"SOCIAL ISSUES";6640;6640
-"LOGISTICS";6640;6640
-"DRUGS MANAGEMENT";6640;6640
-"MECHANICS /TRANSPORT";6640;6640
-"TELECOMMUNICATION";6640;6640
-"BUILDING - SHELTERS";6640;6640
-"HEALTH SERVICES MANAGEMENT";6640;6640
-"EPIDEMIOLOGY - STATISTICS";6640;6640
-"MSF - PUBLICATIONS";6640;6640
-"ANTHROPOLOGY";6640;6640
-"MSF - INTERNAL DOCUMENTS";6640;6640
-"ADMINISTRATION - FINANCES";6640;6640
-"WATER & SANITATION";6640;6640
-"NURSING - INFECTION CONTROL";6640;6640
-"MSF - GENERAL FACTS";6640;6640
-"SECURITY";6640;6640
-"HUMAN RESOURCES MANAGEMENT";6640;6640
-"EMERGENCIES - DISASTERS - CONFLICTS";6640;6640
-"TRAINING - EDUCATION";6640;6640
-"ENERGY";6640;6640
-"SUPPLY";6640;6640
-"FOOD AID";6640;6640
-"CATALOGUES & ORDER LISTS";6640;6640
-"DATA PROCESSING";6640;6640
-"REFUGEES - DISPLACED";6640;6640
-"Communication";6302;6302
-"IDENTIFICATION";6331;6331
-"Cold chain";6412;6412
-"SPARE PARTS HONDA";6720;6720
-"Lighting";6530;6530
-"Spare parts - undefined";6720;6720
-"SPARE PARTS PERKINS";6720;6720
-"Packing and handling";6540;6540
-"PAINT";6540;6540
-"Tools";6540;6540
-"HARDWARE";6303;6303
-"SPARE PARTS ROBIN";6720;6720
-"COOKING";6550;6550
-"spare parts DAVEY";6720;6720
-"Electricity";6311;6311
-"SPARE PARTS LISTER";6720;6720
-"SPARE PARTS LOMBARDINI";6720;6720
-"SPARE PARTS CATERPILLAR";6720;6720
-"SPARE PARTS YANMAR";6720;6720
-"Safety and protective equipment";6540;6540
-"Hygiene";6540;6540
-"Small medical supplies";6460;6460
-"Medical stationery";6460;6460
-"Laboratory reagents";6470;6470
-"Sutures";6460;6460
-"X-RAY SUPPLIES";6450;6450
-"Injection supplies";6460;6460
-"Specialized food";6431;6431
-"Dressings";6460;6460
-"Catheters, tubes and drains";6460;6460
-"Spare parts Land Rover";6720;6720
-"SPARE PARTS VEHICLES HONDA";6720;6720
-"Spare parts DAF";6720;6720
-"SPARE PARTS VEHICLES IVECO";6720;6720
-"Spare parts MAN";6720;6720
-"Spare parts Mercedes";6720;6720
-"Spare parts Renault";6720;6720
-"Spare parts Taro";6720;6720
-"SPARE PARTS TOYOTA";6720;6720
-"Spare parts Umm";6720;6720
-"Spare parts Volvo";6720;6720
-"Spare parts Volkswagen";6720;6720
-"Spare parts Yamaha";6720;6720
-"Spare parts Peugeot";6720;6720
-"PEUGEOT";6700;6700
-"CYCLES & MOTORCYCLES";6700;6700
-"DAF";6700;6700
-"Boats";6700;6700
-"Yamaha";6700;6700
-"IVECO";6700;6700
-"LAND ROVER";6700;6700
-"MERCEDES";6700;6700
-"Volkswagen";6700;6700
-"RENAULT";6700;6700
-"TARO";6700;6700
-"Toyota vehicles";6700;6700
-"HONDA";6700;6700
-"Vehicles accessories";6730;6730
-"Vehicles consumables";6730;6730
-"VEHICLES MODIFICATIONS";6730;6730
-"Taxe";;
-"Administrative";;
+"name";"property_account_income_categ.code";"property_account_expense_categ.code";"parent_id.name"
+"Data processing";6303;6303;"All products"
+"Office equipment";6303;6303;"All products"
+"FOOD FOR MSF STAFF";6101;6101;"All products"
+"Logistic stationery";6301;6301;"All products"
+"Furnitures";6303;6303;"All products"
+"Team life";6101;6101;"All products"
+"STATIONERY";6301;6301;"All products"
+"Shelters";6551;6551;"All products"
+"SEMIPERMANENT Shelter";6551;6551;"All products"
+"SPARE PARTS HUDSON";6720;6720;"All products"
+"Building";6510;6510;"All products"
+"Water and sanitation";6520;6520;"All products"
+"Infusions";6400;6400;"All products"
+"Oral drugs";6400;6400;"All products"
+"Vaccines";6420;6420;"All products"
+"Injectable drugs";6400;6400;"All products"
+"Drugs external use";6400;6400;"All products"
+"Ophtalmic drugs for external use";6400;6400;"All products"
+"Disinfectants";6400;6400;"All products"
+"Diagnostic tests";6400;6400;"All products"
+"Chemicals & Pesticides";6400;6400;"All products"
+"Surgical instruments for external fixator";6460;6460;"All products"
+"Training mannequins";6460;6460;"All products"
+"Training posters";6460;6460;"All products"
+"Ophtalmic surgical instruments";6460;6460;"All products"
+"Surgical instruments";6460;6460;"All products"
+"Dental surgical instruments";6460;6460;"All products"
+"Medical equipment";6461;6461;"All products"
+"Laboratory equipment";6471;6471;"All products"
+"Hospital equipment";6461;6461;"All products"
+"Anaesthesia";6460;6460;"All products"
+"Anthropometric equipment";6461;6461;"All products"
+"Linen and protective clothing";6460;6460;"All products"
+"X-RAY EQUIPMENT";6461;6461;"All products"
+"Sterilization";6461;6461;"All products"
+"Programme support kits";6500;6500;"All products"
+"Administration Kits";6303;6303;"All products"
+"Medical kits";6401;6401;"All products"
+"Dental instrument box";6401;6401;"All products"
+"Water and sanitation kits";6521;6521;"All products"
+"Ophtalmic instrument box";6401;6401;"All products"
+"Surgical instruments sets";6401;6401;"All products"
+"Communication kits";6302;6302;"All products"
+"Camps kits";6550;6550;"All products"
+"Transport kits";6500;6500;"All products"
+"LANGUAGES";6640;6640;"All products"
+"NUTRITION";6640;6640;"All products"
+"HUMANITARIAN ASSISTANCE";6640;6640;"All products"
+"IMMUNIZATION - COLD CHAIN";6640;6640;"All products"
+"CONTEXTS - GEOPOLITICS";6640;6640;"All products"
+"HUMANITARIAN ASSISTANCE - LAW";6640;6640;"All products"
+"PHARMACOLOGY";6640;6640;"All products"
+"HUMANITARIAN ASSISTANCE - INTERVENTIONS";6640;6640;"All products"
+"NTERNATIONAL ORGANISATIONS";6640;6640;"All products"
+"NGO's";6640;6640;"All products"
+"LABORATORY";6640;6640;"All products"
+"MEDICINE GENERAL INFORMATION";6640;6640;"All products"
+"OPHTHALMOLOGY - DERMATOLOGY";6640;6640;"All products"
+"STATES: HUM. ASSISTANCE";6640;6640;"All products"
+"PARASITIC INFECTIOUS DISEASES";6640;6640;"All products"
+"MSF (articles written by MSF)";6640;6640;"All products"
+"REPRODUCTIVE HEALTH";6640;6640;"All products"
+"INTERNAL MEDICINE";6640;6640;"All products"
+"PAEDIATRICS";6640;6640;"All products"
+"VIRAL INFECTIOUS DISEASES";6640;6640;"All products"
+"GYNAECOLOGY - OBSTETRICS";6640;6640;"All products"
+"BACTERIAL INFECTIOUS DISEASES";6640;6640;"All products"
+"SURGERY-ANAESTHESIA-DENTISTRY-PHYSIOTHERAPY-TRANSF";6640;6640;"All products"
+"MYCOLOGICAL INFECTIOUS DISEASES";6640;6640;"All products"
+"STD - AIDS";6640;6640;"All products"
+"RADIOLOGY - MEDICAL IMAGING";6640;6640;"All products"
+"COMMUNITY HEALTH";6640;6640;"All products"
+"HEALTH OF EXPATRIATES";6640;6640;"All products"
+"INFECTION CONTROL";6640;6640;"All products"
+"MENTAL HEALTH";6640;6640;"All products"
+"SOCIAL ISSUES";6640;6640;"All products"
+"LOGISTICS";6640;6640;"All products"
+"DRUGS MANAGEMENT";6640;6640;"All products"
+"MECHANICS /TRANSPORT";6640;6640;"All products"
+"TELECOMMUNICATION";6640;6640;"All products"
+"BUILDING - SHELTERS";6640;6640;"All products"
+"HEALTH SERVICES MANAGEMENT";6640;6640;"All products"
+"EPIDEMIOLOGY - STATISTICS";6640;6640;"All products"
+"MSF - PUBLICATIONS";6640;6640;"All products"
+"ANTHROPOLOGY";6640;6640;"All products"
+"MSF - INTERNAL DOCUMENTS";6640;6640;"All products"
+"ADMINISTRATION - FINANCES";6640;6640;"All products"
+"WATER & SANITATION";6640;6640;"All products"
+"NURSING - INFECTION CONTROL";6640;6640;"All products"
+"MSF - GENERAL FACTS";6640;6640;"All products"
+"SECURITY";6640;6640;"All products"
+"HUMAN RESOURCES MANAGEMENT";6640;6640;"All products"
+"EMERGENCIES - DISASTERS - CONFLICTS";6640;6640;"All products"
+"TRAINING - EDUCATION";6640;6640;"All products"
+"ENERGY";6640;6640;"All products"
+"SUPPLY";6640;6640;"All products"
+"FOOD AID";6640;6640;"All products"
+"CATALOGUES & ORDER LISTS";6640;6640;"All products"
+"DATA PROCESSING";6640;6640;"All products"
+"REFUGEES - DISPLACED";6640;6640;"All products"
+"Communication";6302;6302;"All products"
+"IDENTIFICATION";6331;6331;"All products"
+"Cold chain";6412;6412;"All products"
+"SPARE PARTS HONDA";6720;6720;"All products"
+"Lighting";6530;6530;"All products"
+"Spare parts - undefined";6720;6720;"All products"
+"SPARE PARTS PERKINS";6720;6720;"All products"
+"Packing and handling";6540;6540;"All products"
+"PAINT";6540;6540;"All products"
+"Tools";6540;6540;"All products"
+"HARDWARE";6303;6303;"All products"
+"SPARE PARTS ROBIN";6720;6720;"All products"
+"COOKING";6550;6550;"All products"
+"spare parts DAVEY";6720;6720;"All products"
+"Electricity";6311;6311;"All products"
+"SPARE PARTS LISTER";6720;6720;"All products"
+"SPARE PARTS LOMBARDINI";6720;6720;"All products"
+"SPARE PARTS CATERPILLAR";6720;6720;"All products"
+"SPARE PARTS YANMAR";6720;6720;"All products"
+"Safety and protective equipment";6540;6540;"All products"
+"Hygiene";6540;6540;"All products"
+"Small medical supplies";6460;6460;"All products"
+"Medical stationery";6460;6460;"All products"
+"Laboratory reagents";6470;6470;"All products"
+"Sutures";6460;6460;"All products"
+"X-RAY SUPPLIES";6450;6450;"All products"
+"Injection supplies";6460;6460;"All products"
+"Specialized food";6431;6431;"All products"
+"Dressings";6460;6460;"All products"
+"Catheters, tubes and drains";6460;6460;"All products"
+"Spare parts Land Rover";6720;6720;"All products"
+"SPARE PARTS VEHICLES HONDA";6720;6720;"All products"
+"Spare parts DAF";6720;6720;"All products"
+"SPARE PARTS VEHICLES IVECO";6720;6720;"All products"
+"Spare parts MAN";6720;6720;"All products"
+"Spare parts Mercedes";6720;6720;"All products"
+"Spare parts Renault";6720;6720;"All products"
+"Spare parts Taro";6720;6720;"All products"
+"SPARE PARTS TOYOTA";6720;6720;"All products"
+"Spare parts Umm";6720;6720;"All products"
+"Spare parts Volvo";6720;6720;"All products"
+"Spare parts Volkswagen";6720;6720;"All products"
+"Spare parts Yamaha";6720;6720;"All products"
+"Spare parts Peugeot";6720;6720;"All products"
+"PEUGEOT";6700;6700;"All products"
+"CYCLES & MOTORCYCLES";6700;6700;"All products"
+"DAF";6700;6700;"All products"
+"Boats";6700;6700;"All products"
+"Yamaha";6700;6700;"All products"
+"IVECO";6700;6700;"All products"
+"LAND ROVER";6700;6700;"All products"
+"MERCEDES";6700;6700;"All products"
+"Volkswagen";6700;6700;"All products"
+"RENAULT";6700;6700;"All products"
+"TARO";6700;6700;"All products"
+"Toyota vehicles";6700;6700;"All products"
+"HONDA";6700;6700;"All products"
+"Vehicles accessories";6730;6730;"All products"
+"Vehicles consumables";6730;6730;"All products"
+"VEHICLES MODIFICATIONS";6730;6730;"All products"
+"Taxe";;;"All products"
+"Administrative";;;"All products"
