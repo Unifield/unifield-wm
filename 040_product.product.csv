@@ -2164,5 +2164,5 @@
 "XINSAAAA---";"INSURANCE service";"SERVICE";"Services";"Administrative";"#";"Service";;;"Make to Order";"Buy";"Standard Price";;;"Administrative";"Approved (ITC)";"Normal";"Y";;;;;;;;;;;;;;;;;" ";;;;;;;;;;;;;;;;;;;
 "XRENAAAA---";"RENTAL (service)";"SERVICE";"Services";"Administrative";"#";"Service with reception";;;"Make to Order";"Buy";"Standard Price";;;"Administrative";"Approved (ITC)";"Normal";"Y";;;;;;;;;;;;;;;;;" ";;;;;;;;;;;;;;;;;;;
 "XTAXAAAA---";"TAXES (service)";"SERVICE";"Services";"Taxe";"#";"Service with reception";;;"Make to Order";"Buy";"Standard Price";;;"Taxe";"Approved (ITC)";"Normal";"Y";;;;;;;;;;;;;;;;;" ";;;;;;;;;;;;;;;;;;;
-"XREPAAAA---";"REPAIR (service)";"SERVICE";"Services";"Administrative";"#";"Service with reception";;;"Make to Order";"Buy";"Standard Price";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-"XBUILAAAA---";"BUILDING (service)";"SERVICE";"Services";"Administrative";"#";"Service with reception";;;"Make to Order";"Buy";"Standard Price";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+"XREPAAAA---";"REPAIR (service)";"SERVICE";"Services";"Administrative";"#";"Service with reception";;;"Make to Order";"Buy";"Standard Price";;;"Administrative";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+"XBUILAAAA---";"BUILDING (service)";"SERVICE";"Services";"Administrative";"#";"Service with reception";;;"Make to Order";"Buy";"Standard Price";;;"Administrative";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
