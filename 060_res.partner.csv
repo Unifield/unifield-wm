@@ -28,3 +28,7 @@
 "Coordination OCA1";"CA1";"Inter-Section";"National";"All requirements";7;2;7;"Road";5;;;"X";"X";0;"English";;;"Default";;;;"NAIROBI";"Kenya";"Customer";"Supplier";;;
 "Coordination OCBA1";"CBA1";"Inter-Section";"National";"All requirements";7;2;7;"Road";5;;;"X";"X";0;"English";;;"Default";;;;"NAIROBI";"Kenya";"Customer";"Supplier";;;
 "Coordination OCP1";"CP1";"Inter-Section";"National";"All requirements";7;2;7;"Road";5;;;"X";"X";0;"English";;;"Default";;;;"NAIROBI";"Kenya";"Customer";"Supplier";;;
+"Income Tax Office";"TOFFI";"External";"National";"All requirements";0;0;0;"Road";0;;;;"X";0;"English";"Elridge Toppy";"Madam";"Default";"P.O. BOX 999999";"United Rd";578;"Kampala";"Uganda";"Supplier/Service";"Supplier";;;
+"Social Security";"SSEC";"External";"National";"All requirements";0;0;0;"Road";0;;;;"X";0;"English";"John Do";"Sir";"Default";;"Franklin Av.";43;"Kampala";"Uganda";"Supplier/Service";"Supplier";;;
+"Tax Office ";"TOF";"External";"National";"All requirements";0;0;0;"Road";0;;;;"X";0;"English";"Gianni Magpi";"Sir";"Default";"P.O. BOX 8888";"Delaney RD";96;"Kampala";"Uganda";"Supplier/Service";"Supplier";;;
+"Pension Fund Secure Inc.";"PENO";"External";"National";"All requirements";0;0;0;"Road";0;;;;"X";0;"English";"Carmen RooJ";"Madam";"Default";"P.O. BOX 66666";"Gemdry RD";90876;"Kampala";"Uganda";"Supplier/Service";"Supplier";;;
