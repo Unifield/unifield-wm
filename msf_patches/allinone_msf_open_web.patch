@@ -1,0 +1,38 @@
+=== modified file 'setup.nsi'
+--- setup.nsi	2012-06-05 10:56:52 +0000
++++ setup.nsi	2012-06-05 11:00:45 +0000
+@@ -167,6 +167,10 @@
+ !insertmacro MUI_PAGE_INSTFILES
+ 
+ !define MUI_FINISHPAGE_NOAUTOCLOSE
++!define MUI_FINISHPAGE_RUN
++!define MUI_FINISHPAGE_RUN_CHECKED
++!define MUI_FINISHPAGE_RUN_TEXT "$(DESC_FinishPageText)"
++!define MUI_FINISHPAGE_RUN_FUNCTION "LaunchLink"
+ !define MUI_FINISHPAGE_LINK $(DESC_FinishPage_Link) 
+ !define MUI_FINISHPAGE_LINK_LOCATION "http://www.openerp.com/contact"
+ !insertmacro MUI_PAGE_FINISH
+@@ -205,6 +209,7 @@
+ LangString TITLE_OpenERP_GTK_Client ${LANG_ENGLISH} "OpenERP GTK Desktop Client"
+ LangString TITLE_OpenERP_Web_Client ${LANG_ENGLISH} "OpenERP Web Client"
+ LangString TITLE_PostgreSQL ${LANG_ENGLISH} "PostgreSQL Database"
++LangString DESC_FinishPageText ${LANG_ENGLISH} "Connect to OpenERP Web"
+ 
+ ; French
+ LangString DESC_OpenERP_Server ${LANG_FRENCH} "Installation du Serveur OpenERP avec tous les modules OpenERP standards."
+@@ -231,6 +236,7 @@
+ LangString TITLE_OpenERP_GTK_Client ${LANG_FRENCH} "OpenERP Client GTK"
+ LangString TITLE_OpenERP_Web_Client ${LANG_FRENCH} "OpenERP Client Web"
+ LangString TITLE_PostgreSQL ${LANG_FRENCH} "Installation du serveur de base de donn?es PostgreSQL"
++LangString DESC_FinishPageText ${LANG_FRENCH} "Se connecter à OpenERP Web"
+ 
+ InstType $(Profile_AllInOne)
+ InstType $(Profile_Server)
+@@ -502,3 +508,6 @@
+     Done:
+ FunctionEnd
+ 
++Function LaunchLink
++    ExecShell "open" "http://localhost:8080/"
++FunctionEnd
+

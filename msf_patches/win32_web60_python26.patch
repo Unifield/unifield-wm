@@ -1,0 +1,26 @@
+=== modified file 'setup.py'
+--- setup.py	2011-03-11 09:54:40 +0000
++++ setup.py	2012-06-14 14:11:25 +0000
+@@ -1,6 +1,7 @@
+ import os
+ import re
+ import sys
++import glob
+ 
+ from setuptools import setup
+ 
+@@ -34,6 +35,13 @@
+ 
+     return out
+ 
++if os.name == 'nt':
++    sys.path.append("C:\Microsoft.VC90.CRT")
++    opts.setdefault('data_files',[]).extend([
++        ("Microsoft.VC90.CRT", glob.glob('C:\Microsoft.VC90.CRT\*.*')),
++        (os.path.join('service', "Microsoft.VC90.CRT"), glob.glob('C:\Microsoft.VC90.CRT\*.*')),
++    ])
++
+ setup(
+     name=name,
+     version=version,
+
