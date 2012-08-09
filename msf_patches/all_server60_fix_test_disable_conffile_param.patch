@@ -1,12 +1,21 @@
 === modified file 'bin/tools/config.py'
---- bin/tools/config.py	2011-05-17 05:54:43 +0000
-+++ bin/tools/config.py	2012-06-18 12:08:56 +0000
-@@ -168,7 +168,7 @@
+--- bin/tools/config.py	2012-07-16 09:52:42 +0000
++++ bin/tools/config.py	2012-08-09 08:54:57 +0000
+@@ -87,7 +87,7 @@
+             'timezone' : False, # to override the default TZ
+             'test_file' : False,
+             'test_report_directory' : False,
+-            'test_disable' : False,
++            'test_disable' : True,
+             'test_commit' : False,
+             'static_http_enable': False,
+             'static_http_document_root': None,
+@@ -172,7 +172,7 @@
          group.add_option("--test-file", dest="test_file", help="Launch a YML test file.")
          group.add_option("--test-report-directory", dest="test_report_directory", help="If set, will save sample of all reports in this directory.")
          group.add_option("--test-disable", action="store_true", dest="test_disable",
 -                         default=False, help="Disable loading test files.")
-+                         help="Disable loading test files.")
++                         default=True, help="Disable loading test files.")
          group.add_option("--test-commit", action="store_true", dest="test_commit",
                           default=False, help="Commit database changes performed by tests.")
          parser.add_option_group(group)
