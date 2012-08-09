@@ -330,6 +330,7 @@ def options():
         'win32_server60_python26.patch',
         'win32_server60_lxml_external_entities.patch',
         'all_server60_fix_test_disable_conffile_param.patch'
+        'win32_server60_fix_dbrestore.patch',
     ])
     o.client_patches = patches_list([
         'win32_gtk60_python26.patch'
