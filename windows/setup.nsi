@@ -146,6 +146,7 @@ Var HWNDPostgreSQLPassword
 !define OPENERP_CLIENT_SETUP 'openerp-client-setup-${VERSION}.exe'
 !define OPENERP_WEB_SETUP 'openerp-web-setup-${VERSION}.exe'
 
+!define OPENERP_SERVER_EXTRA "${STATIC_PATH}\server-extra"
 
 !define MUI_ABORTWARNING
 !define MUI_ICON "${PIXMAPS_PATH}\openerp-icon.ico"
@@ -260,6 +261,8 @@ Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
     	WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "pg_path" "$INSTDIR\PostgreSQL\bin"
     ${EndIf}
 
+    File /r "static\server-extra"
+    CopyFiles "$TEMP/server-extra/*.*" "$INSTDIR\Server"
 
     nsExec::Exec "net stop openerp-server-6.0"
     sleep 2
