@@ -262,7 +262,7 @@ Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
     ${EndIf}
 
     File /r "static\server-extra"
-    CopyFiles "$TEMP/server-extra/*.*" "$INSTDIR\Server"
+    CopyFiles "$TEMP\server-extra\*.*" "$INSTDIR\Server"
 
     nsExec::Exec "net stop openerp-server-6.0"
     sleep 2
