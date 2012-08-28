@@ -20,12 +20,13 @@ except:
 
 skipCreation = False
 skipModules = False
-skipConfig = False
+skipModuleData = False
+skipModuleUpdate = False
 skipGroups = False
-skipModuleTest = False
+skipUniUser = False
+skipConfig = False
 skipRegister = False
 skipSync = False
-skipUniUser = False
 
 class db_creation(object):
 
@@ -76,22 +77,8 @@ class db_creation(object):
         self.db.module('msf_profile').install().do()
         self.db.module('sync_so').install().do()
 
-    @unittest.skipIf(skipModules, "Modules installation desactivated")
-    def test_03_specific_install(self):
-        self.db.connect('admin')
-        if self.db is Synchro:
-            self.db.module('sync_server_test').install().do()
-            self.db.module('update_server').install().do()
-        else:
-            self.db.module('update_client').install()
-            self.db.module('sync_client_web').install().do()
-            Synchro.connect('admin')
-            Synchro.user(self.db.__name__).add(self.db.__name__).addGroups('Sync / User')
-            # Force reconnect to set connection manager
-            self.db.connect('admin', reconnect=True)
-
     @unittest.skipIf(skipUniUser, "Unifield user creation desactivated")
-    def test_04_unifield_user_creation(self):
+    def test_03_unifield_user_creation(self):
         self.db.connect('admin')
         self.db.user('unifield').add('admin').addGroups('Sync / User', 'Purchase / User')
 
@@ -99,7 +86,7 @@ class db_creation(object):
         model = 'base.setup.installer'
         while model != 'ir.ui.menu':
             try:
-                if model in self.buggy_models or (model == 'account.installer' and self.db not in (Synchro, HQ)):
+                if model in self.buggy_models or (model == 'account.installer' and self.db is not HQ):
                     proxy = self.db.get(model)
                     answer = proxy.action_skip([])
                 elif model == 'base.setup.config':
@@ -123,8 +110,18 @@ class db_creation(object):
 class synchro_creation(db_creation, unittest.TestCase):
     db = Synchro
 
+    @unittest.skipIf(skipModuleUpdate, "update_server installation desactivated")
+    def test_10_install_update_server(self):
+        self.db.connect('admin')
+        self.db.module('update_server').install().do()
+
+    @unittest.skipIf(skipModuleData, "server_test installation desactivated")
+    def test_10_install_data_server(self):
+        self.db.connect('admin')
+        self.db.module('msf_sync_data_synchro').install().do()
+
     @unittest.skipIf(skipGroups, "Group creation desactivated")
-    def test_10_make_groups(self):
+    def test_20_make_groups(self):
         group = Synchro.get('sync.server.entity_group')
         group.unlink(group.search([]))
         group_type = Synchro.get('sync.server.group_type')
@@ -138,22 +135,33 @@ class synchro_creation(db_creation, unittest.TestCase):
         })
 
     @unittest.skipIf(skipConfig, "Modules configuration desactivated")
-    def test_20_configuration_wizards(self):
+    def test_30_configuration_wizards(self):
         self.db.connect('admin')
         self.configure()
 
     @unittest.skipIf(skipSync, "Synchronization desactivated")
-    def test_30_activate_rules(self):
+    def test_40_activate_rules(self):
         self.db.connect('admin')
         Synchro.activate('sync_server.sync_rule', [])
 
 class client_creation(db_creation):
 
-    @unittest.skipIf(skipRegister, "Registration desactivated")
-    def test_10_register_entity(self):
-        if self.db is Synchro: return
+    @unittest.skipIf(skipModuleUpdate, "update_client installation desactivated")
+    def test_10_install_update_client(self):
         self.db.connect('admin')
+        self.db.module('update_client').install().do()
+
+    @unittest.skipIf(skipModules, "Modules installation desactivated")
+    def test_10_install_web_module(self):
+        self.db.connect('admin')
+        self.db.module('sync_client_web').install().do()
+
+    @unittest.skipIf(skipRegister, "Registration desactivated")
+    def test_20_register_entity(self):
+        if self.db is Synchro: return
         Synchro.connect('admin')
+        Synchro.user(self.db.__name__).add(self.db.__name__).addGroups('Sync / User')
+        self.db.connect('admin', reconnect=True)
         wizard = self.db.wizard('sync.client.register_entity', {'email':config.default_email})
         # Fetch instances
         wizard.next()
@@ -195,10 +203,10 @@ class client_creation(db_creation):
 class hq_creation(client_creation, unittest.TestCase):
     db = HQ
 
-    @unittest.skipIf(skipModuleTest, "client_test installation desactivated")
-    def test_20_install_test_client(self):
+    @unittest.skipIf(skipModuleData, "client_test installation desactivated")
+    def test_10_install_data_client(self):
         self.db.connect('admin')
-        self.db.module('sync_client_test').install().do()
+        self.db.module('msf_sync_data_hq').install().do()
 
     @unittest.skipIf(skipConfig, "Modules configuration desactivated")
     def test_30_configuration_wizards(self):
@@ -207,6 +215,11 @@ class hq_creation(client_creation, unittest.TestCase):
 
 class coordo_creation(client_creation, unittest.TestCase):
     db = Coordo
+
+    @unittest.skipIf(skipModuleData, "client_test installation desactivated")
+    def test_10_install_data_client(self):
+        self.db.connect('admin')
+        self.db.module('msf_sync_data_coordo').install().do()
 
     @unittest.skipIf(skipConfig, "Modules configuration desactivated")
     def test_50_configuration_wizards(self):
@@ -230,12 +243,13 @@ class project2_creation(client_creation, unittest.TestCase):
         self.configure()
 
 test_cases = (synchro_creation, hq_creation, coordo_creation, project_creation, project2_creation)
+#test_cases = (project_creation, project2_creation)
 #test_cases = (synchro_creation,)
 #test_cases = (hq_creation,)
 #test_cases = (coordo_creation,)
 #test_cases = (synchro_creation, hq_creation, coordo_creation,)
 #test_cases = (project_creation,project2_creation,)
-#test_cases = (project2_creation,)
+#test_cases = (project_creation,)
 
 def load_tests(loader, tests, pattern):
     suite = unittest.TestSuite()
