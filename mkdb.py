@@ -23,25 +23,27 @@ skipModules = False
 skipModuleData = False
 skipModuleUpdate = False
 skipGroups = False
-skipUniUser = False
+skipCostCenter = False
+skipPropInstance = False
 skipConfig = False
 skipRegister = False
 skipSync = False
+skipUniUser = False
 
 class db_creation(object):
 
     buggy_models = ('sale.price.setup',)
 
     base_wizards = {
+        'base.setup.config' : {
+            'button' : 'config',
+        },
         'res.config.view' : {
             'name' : "auto_init",
             'view' : 'extended',
         },
         'sale.price.setup' : {
             'sale_price' : 0.10,
-        },
-        'msf_instance.setup' : {
-            'button' : 'action_skip',
         },
         'account.installer' : {
             'charts' : 'msf_chart_of_account',
@@ -70,12 +72,16 @@ class db_creation(object):
         self.db.connect('admin')
         self.db.create_db(config.admin_password)
         self.db.wait()
+        self.db.user('admin').addGroups('Useability / Extended View')
 
     @unittest.skipIf(skipModules, "Modules installation desactivated")
     def test_02_base_install(self):
         self.db.connect('admin')
         self.db.module('msf_profile').install().do()
         self.db.module('sync_so').install().do()
+        self.db.get('res.partner').create({
+            'name' : self.db.db_name,
+        })
 
     @unittest.skipIf(skipUniUser, "Unifield user creation desactivated")
     def test_03_unifield_user_creation(self):
@@ -83,21 +89,28 @@ class db_creation(object):
         self.db.user('unifield').add('admin').addGroups('Sync / User', 'Purchase / User')
 
     def configure(self):
-        model = 'base.setup.installer'
+        # We did rather start on msf_instance.setup...
+        # Reason: For an unknown reason, this wizard is set as 'done' automatically after run any first wizard
+        #model = 'base.setup.installer'
+        model = 'msf_instance.setup'
         while model != 'ir.ui.menu':
             try:
-                if model in self.buggy_models or (model == 'account.installer' and self.db is not HQ):
+                if model in self.buggy_models or \
+                   (model == 'account.installer' and self.db is not HQ) or \
+                   (model == 'msf_instance.setup' and self.db in (Synchro, HQ,)):
                     proxy = self.db.get(model)
                     answer = proxy.action_skip([])
-                elif model == 'base.setup.config':
-                    answer = self.db.wizard(model, data).config()
+                elif model == 'msf_instance.setup':
+                    answer = self.db.wizard(model, {
+                        'instance_id' : self.db.search_data('msf.instance', [('instance','=',self.db.db_name)])[0],
+                    }).action_next()
                 else:
-                    data = self.base_wizards.get(model, {})
+                    data = dict(self.base_wizards.get(model, {}))
                     button = data.pop('button', 'action_next')
                     answer = getattr(self.db.wizard(model, data), button)()
                 model = answer.get('res_model', None)
             except:
-                print "DEBUG: db=%s, model=%s" % (self.db.__name__, model)
+                print "DEBUG: db=%s, model=%s" % (self.db.db_name, model)
                 raise
 
     def sync(self, db=None):
@@ -146,6 +159,8 @@ class synchro_creation(db_creation, unittest.TestCase):
 
 class client_creation(db_creation):
 
+    entity_ids = None
+
     @unittest.skipIf(skipModuleUpdate, "update_client installation desactivated")
     def test_10_install_update_client(self):
         self.db.connect('admin')
@@ -158,10 +173,9 @@ class client_creation(db_creation):
 
     @unittest.skipIf(skipRegister, "Registration desactivated")
     def test_20_register_entity(self):
-        if self.db is Synchro: return
         Synchro.connect('admin')
-        Synchro.user(self.db.__name__).add(self.db.__name__).addGroups('Sync / User')
-        self.db.connect('admin', reconnect=True)
+        Synchro.user(self.db.db_name).add(self.db.db_name).addGroups('Sync / User')
+        self.db.connect('admin')
         wizard = self.db.wizard('sync.client.register_entity', {'email':config.default_email})
         # Fetch instances
         wizard.next()
@@ -171,32 +185,50 @@ class client_creation(db_creation):
         wizard.validate()
         # Search entity record, server side
         entities = Synchro.get('sync.server.entity')
-        ids = entities.search([('name','=',self.db.__name__)])
-        if not len(ids) == 1: raise Exception, "Cannot find validation request for entity %s!" % self.db.__name__
+        self.entity_ids = entities.search([('name','=',self.db.db_name)])
+        if not len(self.entity_ids) == 1:
+            raise Exception, "Cannot find validation request for entity %s!" % self.db.db_name
         # Set parent
         if self.db is not HQ:
             if self.db is Coordo:
-                parents = entities.search([('name','=','HQ')])
-            elif self.db in (Project, Project2):
-                parents = entities.search([('name','=','Coordo')])
+                parents = entities.search([('name','=',HQ.name)])
             else:
-                raise NotImplementedError('Cannot identify database %s' % self.db.__name__)
+                parents = entities.search([('name','=',Coordo.name)])
             if not parents:
-                raise Exception('Cannot find parent entity for %s!' % self.db.__name__)
-            entities.write(ids, {'parent_id':parents[0]})
+                raise Exception('Cannot find parent entity for %s!' % self.db.db_name)
+            entities.write(self.entity_ids, {'parent_id':parents[0]})
         # Server accept validation
-        entities.validate_action(ids)
+        entities.validate_action(self.entity_ids)
+
+    @unittest.skipIf(skipGroups, "Group creation desactivated")
+    def test_21_make_groups(self):
+        self.db.connect('admin')
+        if self.entity_ids is None:
+            self.entity_ids = Synchro.get('sync.server.entity').search([('name','=',self.db.db_name)])
+        group = Synchro.get('sync.server.entity_group')
         # Add entity to groups
         group = Synchro.get('sync.server.entity_group')
         group.write(group.search([('name','=','Section')]), {
-            'entity_ids' : [(4,ids[0])],
+            'entity_ids' : [(4,self.entity_ids[0])],
         })
         group.write(group.search([('name','=','Mission')]), {
-            'entity_ids' : [(4,ids[0])],
+            'entity_ids' : [(4,self.entity_ids[0])],
         })
 
+    @unittest.skipIf(skipCostCenter, "Cost Center creation desactivated")
+    def test_30_make_costcenter(self):
+        if self.db is HQ: return
+        HQ.connect('admin')
+        if not HQ.test('account.analytic.account', [('code','=',self.db.shortname)]):
+            HQ.get('account.analytic.account').create({
+                'name' : self.db.shortname,
+                'code' : self.db.shortname,
+                'category' : 'OC',
+                'parent_id' : HQ.search_data('account.analytic.account', {'Code':'OC'})[0],
+            })
+
     @unittest.skipIf(skipSync, "Synchronization desactivated")
-    def test_40_synchronize(self):
+    def test_50_synchronize(self):
         self.db.connect('admin')
         self.sync()
 
@@ -208,8 +240,24 @@ class hq_creation(client_creation, unittest.TestCase):
         self.db.connect('admin')
         self.db.module('msf_sync_data_hq').install().do()
 
+    @unittest.skipIf(skipPropInstance, "Proprietary Instance creation desactivated")
+    def test_40_prop_instance(self):
+        HQ.connect('admin')
+        data = {
+            'code' : self.db.shortname,
+            'name' : self.db.shortname,
+            'instance' : self.db.db_name,
+            'level' : 'section',
+            'mission' : '%s_MISSION' % config.prefix,
+            'cost_center_id' : HQ.search_data('account.analytic.account', {'code':'OC'})[0],
+            'state' : 'active',
+        }
+        if not HQ.test('msf.instance', data):
+            HQ.get('msf.instance').create(data)
+            self.sync(HQ)
+
     @unittest.skipIf(skipConfig, "Modules configuration desactivated")
-    def test_30_configuration_wizards(self):
+    def test_41_configuration_wizards(self):
         self.db.connect('admin')
         self.configure()
 
@@ -221,26 +269,61 @@ class coordo_creation(client_creation, unittest.TestCase):
         self.db.connect('admin')
         self.db.module('msf_sync_data_coordo').install().do()
 
+    @unittest.skipIf(skipPropInstance, "Proprietary Instance creation desactivated")
+    def test_40_prop_instance(self):
+        HQ.connect('admin')
+        data = {
+            'code' : self.db.shortname,
+            'name' : self.db.shortname,
+            'instance' : self.db.db_name,
+            'level' : 'coordo',
+            'mission' : '%s_MISSION' % config.prefix,
+            'parent_id' : HQ.search_data('msf.instance', [('instance','=',HQ.name)])[0],
+            'cost_center_id' : HQ.search_data('account.analytic.account', {'code':self.db.shortname})[0],
+            'state' : 'active',
+        }
+        if not HQ.test('msf.instance', data):
+            HQ.get('msf.instance').create(data)
+            self.sync(HQ)
+
     @unittest.skipIf(skipConfig, "Modules configuration desactivated")
-    def test_50_configuration_wizards(self):
+    def test_60_configuration_wizards(self):
         self.db.connect('admin')
         self.configure()
 
-class project_creation(client_creation, unittest.TestCase):
+class project_base_creation(client_creation):
+    @unittest.skipIf(skipModuleData, "client_test installation desactivated")
+    def test_10_install_data_client(self):
+        self.db.connect('admin')
+        self.db.module('msf_sync_data_common').install().do()
+
+    @unittest.skipIf(skipPropInstance, "Proprietary Instance creation desactivated")
+    def test_40_prop_instance(self):
+        HQ.connect('admin')
+        data = {
+            'code' : self.db.shortname,
+            'name' : self.db.shortname,
+            'instance' : self.db.db_name,
+            'level' : 'project',
+            'mission' : '%s_MISSION' % config.prefix,
+            'parent_id' : HQ.search_data('msf.instance', [('instance','=',Coordo.name)])[0],
+            'cost_center_id' : HQ.search_data('account.analytic.account', {'code':self.db.shortname})[0],
+            'state' : 'active',
+        }
+        if not HQ.test('msf.instance', data):
+            HQ.get('msf.instance').create(data)
+            self.sync(HQ)
+
+    @unittest.skipIf(skipConfig, "Modules configuration desactivated")
+    def test_60_configuration_wizards(self):
+        self.db.connect('admin')
+        self.configure()
+
+class project_creation(project_base_creation, unittest.TestCase):
     db = Project
 
-    @unittest.skipIf(skipConfig, "Modules configuration desactivated")
-    def test_50_configuration_wizards(self):
-        self.db.connect('admin')
-        self.configure()
-
-class project2_creation(client_creation, unittest.TestCase):
+class project2_creation(project_base_creation, unittest.TestCase):
     db = Project2
-
-    @unittest.skipIf(skipConfig, "Modules configuration desactivated")
-    def test_50_configuration_wizards(self):
-        self.db.connect('admin')
-        self.configure()
 
 test_cases = (synchro_creation, hq_creation, coordo_creation, project_creation, project2_creation)
 #test_cases = (project_creation, project2_creation)
@@ -250,6 +333,7 @@ test_cases = (synchro_creation, hq_creation, coordo_creation, project_creation, 
 #test_cases = (synchro_creation, hq_creation, coordo_creation,)
 #test_cases = (project_creation,project2_creation,)
 #test_cases = (project_creation,)
+#test_cases = (project2_creation,)
 
 def load_tests(loader, tests, pattern):
     suite = unittest.TestSuite()

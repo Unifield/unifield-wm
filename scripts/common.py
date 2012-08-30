@@ -40,27 +40,24 @@ def sync(test, db):
 class db_instance(type):
     instance = None
 
-    def connect(cls, login=None, password=None, reconnect=False):
-        if not cls.instance or reconnect:
-            #stderr.write("\n!! Initialization required "+cls.__name__+" !!\n")
-            u = login if login else config.user_login
-            p = password if password else (config.admin_password if login == 'admin' else config.user_password)
-            cls.instance = db(cls.server, cls.__name__, user=u, password=p)
-            try:
-                if hasattr(cls, 'synchro') and cls.synchro:
-                    synchro_serv = cls.instance.get('sync.client.sync_server_connection')
-                    ## Remove all previous connection
-                    ids = synchro_serv.search([])
-                    ## Create our owns
-                    if ids: synchro_serv.write(ids, cls.synchro)
-                    else: ids = [synchro_serv.create(cls.synchro)]
-                    synchro_serv.connect(ids)
-            except:
-                pass
+    def connect(cls, login=None, password=None):
+        #stderr.write("\n!! Initialization required "+cls.name+" !!\n")
+        u = login if login else config.user_login
+        p = password if password else (config.admin_password if login == 'admin' else config.user_password)
+        cls.instance = db(cls.server, cls.name, user=u, password=p)
+        try:
+            if hasattr(cls, 'synchro') and cls.synchro:
+                synchro_serv = cls.instance.get('sync.client.sync_server_connection')
+                ids = synchro_serv.search([])
+                if ids: synchro_serv.write(ids, cls.synchro)
+                else: ids = [synchro_serv.create(cls.synchro)]
+                synchro_serv.connect(ids)
+        except:
+            pass
         return cls
 
     def __getattr__(cls, attr):
-        if not cls.instance: raise AttributeError("Class %s is not connected!" % (cls.__name__,))
+        if not cls.instance: raise AttributeError("Class %s is not connected!" % (cls.name,))
         real_attr = getattr(cls.instance, attr)
         return real_attr
 
@@ -68,6 +65,8 @@ class Synchro:
     __metaclass__ = db_instance
 
     server = server
+    name = "%s_%s_SYNCHRO" % (config.version, config.prefix)
+    shortname = "%s_SYNCHRO" % (config.prefix)
 
     def __init__(self):
         raise Exception, 'This class must not be instanced'
@@ -76,14 +75,16 @@ class HQ:
     __metaclass__ = db_instance
 
     server = client
+    name = "%s_%s_HQ" % (config.version, config.prefix)
+    shortname = "%s_HQ" % (config.prefix)
     synchro = {
         'protocol' : 'netrpc',
         'host' : config.server_host,
         #'port' : config.server_port, ## XMLRPC port
         'port' : 8070,
-        'database' : 'Synchro',
-        'login' : 'HQ',
-        'password' : 'HQ',
+        'database' : Synchro.name,
+        'login' : name,
+        'password' : name,
     }
 
     def __init__(self):
@@ -93,14 +94,16 @@ class Coordo:
     __metaclass__ = db_instance
 
     server = client
+    name = "%s_%s_COORDO" % (config.version, config.prefix)
+    shortname = "%s_COORDO" % (config.prefix)
     synchro = {
         'protocol' : 'netrpc',
         'host' : config.server_host,
         #'port' : config.server_port, ## XMLRPC port
         'port' : 8070,
-        'database' : 'Synchro',
-        'login' : 'Coordo',
-        'password' : 'Coordo',
+        'database' : Synchro.name,
+        'login' : name,
+        'password' : name,
     }
 
     server = client
@@ -111,14 +114,16 @@ class Project:
     __metaclass__ = db_instance
 
     server = client
+    name = "%s_%s_PROJECT" % (config.version, config.prefix)
+    shortname = "%s_PROJECT" % (config.prefix)
     synchro = {
         'protocol' : 'netrpc',
         'host' : config.server_host,
         #'port' : config.server_port, ## XMLRPC port
         'port' : 8070,
-        'database' : 'Synchro',
-        'login' : 'Project',
-        'password' : 'Project',
+        'database' : Synchro.name,
+        'login' : name,
+        'password' : name,
     }
 
     server = client
@@ -129,14 +134,16 @@ class Project2:
     __metaclass__ = db_instance
 
     server = client
+    name = "%s_%s_PROJECT2" % (config.version, config.prefix)
+    shortname = "%s_PROJECT2" % (config.prefix)
     synchro = {
         'protocol' : 'netrpc',
         'host' : config.server_host,
         #'port' : config.server_port, ## XMLRPC port
         'port' : 8070,
-        'database' : 'Synchro',
-        'login' : 'Project2',
-        'password' : 'Project2',
+        'database' : Synchro.name,
+        'login' : name,
+        'password' : name,
     }
 
     server = client

@@ -59,12 +59,9 @@ class db(object):
         if not self.server_password: raise Exception, "The server password is needed for this operation"
         ## TODO does'n handle database current access prevent dropping
         #self.service.drop(self.server_password, self.db_name)
-        try:
+        if self.db_name in self.service.list():
             self.service.drop(self.server_password, self.db_name)
-        except Fault, e:
-            if not re.search(r"database ([\"']).+\1 does not exist", e.faultCode): raise e
-        finally:
-            return self
+        return self
 
     def get(self, model):
         return self.server.get_model(model)
@@ -74,8 +71,6 @@ class db(object):
 
     def ref(self, xml_id, index=0):
         return ref(xml_id).get(self)
-    #def ref(self, model, xml_id, index=0):
-    #    return ref(model, xml_id).get(self)
 
     def module(self, name, index=0):
         return module(self, name, index)
@@ -226,10 +221,6 @@ class module(object):
         self.module_proxy = db.get('ir.module.module')
         if name == 'all':
             name = 'base'
-            #self.ids = self.module_proxy.search([('state','=','installed')])
-            #if not self.ids:
-            #    raise Exception, "No module installed!"
-        #else:
         self.ids = self.module_proxy.search([('name','=',name)])
         if not self.ids:
             raise Exception, "Unable to find module %s!" % (name,)

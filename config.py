@@ -16,6 +16,10 @@ client_port = 8069
 server_host = 'localhost' #'10.42.43.1'
 server_port = 8069
 
+## Database format
+prefix = "TEST"
+version = "SP5"
+
 ## Other stuffs
 default_email = 'cto@openerp.com'
 company_name = 'Médecins Sans Frontières'
