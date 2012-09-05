@@ -1,17 +1,23 @@
 #!/usr/bin/env python2
 
+import sys
+
 #Load config file
 import config
 
 #Load OpenERP Client Library
 import openerplib
 
-#Load tests procedures
-import unittest
 #from tests import *
 from tests.openerplib import db
 
 from scripts.common import Synchro, HQ, Coordo, Project, Project2
+
+#Load tests procedures
+if sys.version_info >= (2, 7):
+    import unittest
+else:
+    import unittest27 as unittest
 
 try:
     import ipdb as pdb
