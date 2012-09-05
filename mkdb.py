@@ -51,9 +51,6 @@ class db_creation(object):
         'sale.price.setup' : {
             'sale_price' : 0.10,
         },
-        'account.installer' : {
-            'charts' : 'msf_chart_of_account',
-        },
         'stock.location.configuration.wizard' : {
             'location_type' : 'internal',
             'location_usage' : 'stock',
@@ -117,6 +114,7 @@ class db_creation(object):
                 model = answer.get('res_model', None)
             except:
                 print "DEBUG: db=%s, model=%s" % (self.db.db_name, model)
+                pdb.set_trace()
                 raise
 
     def sync(self, db=None):
@@ -134,7 +132,7 @@ class synchro_creation(db_creation, unittest.TestCase):
         self.db.connect('admin')
         self.db.module('update_server').install().do()
 
-    @unittest.skipIf(skipModuleData, "server_test installation desactivated")
+    @unittest.skipIf(skipModuleData, "Data module installation desactivated")
     def test_10_install_data_server(self):
         self.db.connect('admin')
         self.db.module('msf_sync_data_synchro').install().do()
@@ -145,12 +143,16 @@ class synchro_creation(db_creation, unittest.TestCase):
         group.unlink(group.search([]))
         group_type = Synchro.get('sync.server.group_type')
         group.create({
-            'name' : 'Section',
-            'type_id' : group_type.search([('name','=','Section')])[0],
+            'name' : 'OC',
+            'type_id' : group_type.search([('name','=','OC')])[0],
         })
         group.create({
             'name' : 'Mission',
-            'type_id' : group_type.search([('name','=','Coordination')])[0],
+            'type_id' : group_type.search([('name','=','MISSION')])[0],
+        })
+        group.create({
+            'name' : 'Coordo',
+            'type_id' : group_type.search([('name','=','COORDINATIONS')])[0],
         })
 
     @unittest.skipIf(skipConfig, "Modules configuration desactivated")
@@ -191,8 +193,8 @@ class client_creation(db_creation):
         wizard.validate()
         # Search entity record, server side
         entities = Synchro.get('sync.server.entity')
-        self.entity_ids = entities.search([('name','=',self.db.db_name)])
-        if not len(self.entity_ids) == 1:
+        entity_ids = entities.search([('name','=',self.db.db_name)])
+        if not len(entity_ids) == 1:
             raise Exception, "Cannot find validation request for entity %s!" % self.db.db_name
         # Set parent
         if self.db is not HQ:
@@ -202,23 +204,18 @@ class client_creation(db_creation):
                 parents = entities.search([('name','=',Coordo.name)])
             if not parents:
                 raise Exception('Cannot find parent entity for %s!' % self.db.db_name)
-            entities.write(self.entity_ids, {'parent_id':parents[0]})
+            entities.write(entity_ids, {'parent_id':parents[0]})
         # Server accept validation
-        entities.validate_action(self.entity_ids)
+        entities.validate_action(entity_ids)
 
     @unittest.skipIf(skipGroups, "Group creation desactivated")
-    def test_21_make_groups(self):
-        self.db.connect('admin')
-        if self.entity_ids is None:
-            self.entity_ids = Synchro.get('sync.server.entity').search([('name','=',self.db.db_name)])
-        group = Synchro.get('sync.server.entity_group')
+    def test_30_make_groups_mission(self):
+        Synchro.connect('admin')
+        entity_ids = Synchro.get('sync.server.entity').search([('name','=',self.db.db_name)])
         # Add entity to groups
         group = Synchro.get('sync.server.entity_group')
-        group.write(group.search([('name','=','Section')]), {
-            'entity_ids' : [(4,self.entity_ids[0])],
-        })
-        group.write(group.search([('name','=','Mission')]), {
-            'entity_ids' : [(4,self.entity_ids[0])],
+        group.write(group.search([('name','in',('Mission','OC'))]), {
+            'entity_ids' : [(4,entity_ids[0])],
         })
 
     @unittest.skipIf(skipCostCenter, "Cost Center creation desactivated")
@@ -238,10 +235,15 @@ class client_creation(db_creation):
         self.db.connect('admin')
         self.sync()
 
+    @unittest.skipIf(skipModuleData, "Data module installation desactivated")
+    def test_90_install_post_data(self):
+        self.db.connect('admin')
+        self.db.module('msf_sync_data_post_synchro').install().do()
+
 class hq_creation(client_creation, unittest.TestCase):
     db = HQ
 
-    @unittest.skipIf(skipModuleData, "client_test installation desactivated")
+    @unittest.skipIf(skipModuleData, "Data module installation desactivated")
     def test_10_install_data_client(self):
         self.db.connect('admin')
         self.db.module('msf_sync_data_hq').install().do()
@@ -270,10 +272,15 @@ class hq_creation(client_creation, unittest.TestCase):
 class coordo_creation(client_creation, unittest.TestCase):
     db = Coordo
 
-    @unittest.skipIf(skipModuleData, "client_test installation desactivated")
-    def test_10_install_data_client(self):
-        self.db.connect('admin')
-        self.db.module('msf_sync_data_coordo').install().do()
+    @unittest.skipIf(skipGroups, "Group creation desactivated")
+    def test_31_make_groups_coordo(self):
+        Synchro.connect('admin')
+        entity_ids = Synchro.get('sync.server.entity').search([('name','=',self.db.db_name)])
+        # Add entity to groups
+        group = Synchro.get('sync.server.entity_group')
+        group.write(group.search([('name','=','Coordo')]), {
+            'entity_ids' : [(4,entity_ids[0])],
+        })
 
     @unittest.skipIf(skipPropInstance, "Proprietary Instance creation desactivated")
     def test_40_prop_instance(self):
@@ -297,12 +304,12 @@ class coordo_creation(client_creation, unittest.TestCase):
         self.db.connect('admin')
         self.configure()
 
-class project_base_creation(client_creation):
-    @unittest.skipIf(skipModuleData, "client_test installation desactivated")
-    def test_10_install_data_client(self):
+    @unittest.skipIf(skipModuleData, "Data module installation desactivated")
+    def test_61_install_data_client(self):
         self.db.connect('admin')
-        self.db.module('msf_sync_data_common').install().do()
+        self.db.module('msf_sync_data_coordo').install().do()
 
+class project_base_creation(client_creation):
     @unittest.skipIf(skipPropInstance, "Proprietary Instance creation desactivated")
     def test_40_prop_instance(self):
         HQ.connect('admin')
@@ -335,7 +342,7 @@ test_cases = (synchro_creation, hq_creation, coordo_creation, project_creation, 
 #test_cases = (project_creation, project2_creation)
 #test_cases = (synchro_creation,)
 #test_cases = (hq_creation,)
-#test_cases = (coordo_creation,)
+#test_cases = (coordo_creation,project_creation, project2_creation)
 #test_cases = (synchro_creation, hq_creation, coordo_creation,)
 #test_cases = (project_creation,project2_creation,)
 #test_cases = (project_creation,)
