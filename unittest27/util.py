@@ -1,4 +1,4 @@
-"""Shortened version of util.py from unittest for Python 2.7"""
+"""Various utility functions."""
 from collections import namedtuple
 
 
@@ -18,6 +18,45 @@ def safe_repr(obj, short=False):
 def strclass(cls):
     return "%s.%s" % (cls.__module__, cls.__name__)
 
+def sorted_list_difference(expected, actual):
+    """Finds elements in only one or the other of two, sorted input lists.
+
+    Returns a two-element tuple of lists.    The first list contains those
+    elements in the "expected" list but not in the "actual" list, and the
+    second contains those elements in the "actual" list but not in the
+    "expected" list.    Duplicate elements in either input list are ignored.
+    """
+    i = j = 0
+    missing = []
+    unexpected = []
+    while True:
+        try:
+            e = expected[i]
+            a = actual[j]
+            if e < a:
+                missing.append(e)
+                i += 1
+                while expected[i] == e:
+                    i += 1
+            elif e > a:
+                unexpected.append(a)
+                j += 1
+                while actual[j] == a:
+                    j += 1
+            else:
+                i += 1
+                try:
+                    while expected[i] == e:
+                        i += 1
+                finally:
+                    j += 1
+                    while actual[j] == a:
+                        j += 1
+        except IndexError:
+            missing.extend(expected[i:])
+            unexpected.extend(actual[j:])
+            break
+    return missing, unexpected
 
 
 def unorderable_list_difference(expected, actual, ignore_duplicate=False):
@@ -93,18 +132,32 @@ def _count_diff_all_purpose(actual, expected):
         result.append(diff)
     return result
 
+def _ordered_count(iterable):
+    'Return dict of element counts, in the order they were first seen'
+    order = []
+    counts = {}
+    for elem in iterable:
+        try:
+            counts[elem] += 1
+        except KeyError:
+            counts[elem] = 1
+            order.append(elem)
+    c = zip(order, [counts[elem] for elem in order])
+    return c
+
 def _count_diff_hashable(actual, expected):
     'Returns list of (cnt_act, cnt_exp, elem) triples where the counts differ'
     # elements must be hashable
     s, t = _ordered_count(actual), _ordered_count(expected)
     result = []
-    for elem, cnt_s in s.items():
+    for elem, cnt_s in s:
         cnt_t = t.get(elem, 0)
         if cnt_s != cnt_t:
             diff = _Mismatch(cnt_s, cnt_t, elem)
             result.append(diff)
-    for elem, cnt_t in t.items():
-        if elem not in s:
+    s_keys = [x[0] for x in s]
+    for elem, cnt_t in t:
+        if elem not in s_keys:
             diff = _Mismatch(0, cnt_t, elem)
             result.append(diff)
     return result
