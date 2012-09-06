@@ -35,6 +35,7 @@ skipConfig = False
 skipRegister = False
 skipSync = False
 skipUniUser = False
+skipPartner = False
 
 class db_creation(object):
 
@@ -82,9 +83,6 @@ class db_creation(object):
         self.db.connect('admin')
         self.db.module('msf_profile').install().do()
         self.db.module('sync_so').install().do()
-        self.db.get('res.partner').create({
-            'name' : self.db.db_name,
-        })
 
     @unittest.skipIf(skipUniUser, "Unifield user creation desactivated")
     def test_03_unifield_user_creation(self):
@@ -239,6 +237,18 @@ class client_creation(db_creation):
     def test_90_install_post_data(self):
         self.db.connect('admin')
         self.db.module('msf_sync_data_post_synchro').install().do()
+
+    @unittest.skipIf(skipPartner, "Partner creation desactivated")
+    def test_91_instance_partner(self):
+        self.db.connect('admin')
+        account = self.db.get('account.account')
+        self.db.get('res.partner').create({
+            'name' : self.db.db_name,
+            'customer' : 1,
+            'supplier' : 1,
+            'property_account_payable' : account.search([('code','=','1201')])[0],
+            'property_account_receivable' : account.search([('code','=','3000')])[0],
+        })
 
 class hq_creation(client_creation, unittest.TestCase):
     db = HQ
