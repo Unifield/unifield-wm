@@ -24,7 +24,7 @@ try:
 except:
     import pdb
 
-skipCreation = True
+skipCreation = False
 skipModules = False
 skipModuleData = False
 skipModuleUpdate = False
@@ -357,6 +357,4 @@ def load_tests(loader, tests, pattern):
 
 if __name__ == '__main__':
     unittest.main(failfast=True, verbosity=2)
-    #loader = unittest.TestLoader()
-    #unittest.TextTestRunner(verbosity=2).run(load_tests(loader, test_cases, None))
 
