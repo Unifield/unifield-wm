@@ -6,7 +6,6 @@ import sys
 import traceback
 import types
 
-from functools import cmp_to_key as _CmpToKey
 from fnmatch import fnmatch
 
 from . import case, suite
@@ -17,6 +16,16 @@ __unittest = True
 # we would need to avoid loading the same tests multiple times
 # from '.py', '.pyc' *and* '.pyo'
 VALID_MODULE_NAME = re.compile(r'[_a-z]\w*\.py$', re.IGNORECASE)
+
+# imported from unittest 2.6
+def _CmpToKey(mycmp):
+    'Convert a cmp= function into a key= function'
+    class K(object):
+        def __init__(self, obj):
+            self.obj = obj
+        def __lt__(self, other):
+            return mycmp(self.obj, other.obj) == -1
+    return K
 
 
 def _make_failed_import_test(name, suiteClass):
