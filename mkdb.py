@@ -278,12 +278,6 @@ class hq_creation(client_creation, unittest.TestCase):
         self.db.connect('admin')
         self.db.module('msf_sync_data_hq').install().do()
 
-    @unittest.skipIf(skipConfig, "Modules configuration desactivated")
-    def test_43_sync(self):
-        self.db.connect('admin')
-        self.sync(HQ)
-
-
 class coordo_creation(client_creation, unittest.TestCase):
     db = Coordo
 
