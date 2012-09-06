@@ -253,11 +253,6 @@ class client_creation(db_creation):
 class hq_creation(client_creation, unittest.TestCase):
     db = HQ
 
-    @unittest.skipIf(skipModuleData, "Data module installation desactivated")
-    def test_10_install_data_client(self):
-        self.db.connect('admin')
-        self.db.module('msf_sync_data_hq').install().do()
-
     @unittest.skipIf(skipPropInstance, "Proprietary Instance creation desactivated")
     def test_40_prop_instance(self):
         HQ.connect('admin')
@@ -272,12 +267,22 @@ class hq_creation(client_creation, unittest.TestCase):
         }
         if not HQ.test('msf.instance', data):
             HQ.get('msf.instance').create(data)
-            self.sync(HQ)
 
     @unittest.skipIf(skipConfig, "Modules configuration desactivated")
     def test_41_configuration_wizards(self):
         self.db.connect('admin')
         self.configure()
+
+    @unittest.skipIf(skipModuleData, "Data module installation desactivated")
+    def test_42_install_data_client(self):
+        self.db.connect('admin')
+        self.db.module('msf_sync_data_hq').install().do()
+
+    @unittest.skipIf(skipConfig, "Modules configuration desactivated")
+    def test_43_sync(self):
+        self.db.connect('admin')
+        self.sync(HQ)
+
 
 class coordo_creation(client_creation, unittest.TestCase):
     db = Coordo
