@@ -98,7 +98,7 @@ class db_creation(object):
             try:
                 if model in self.buggy_models or \
                    (model == 'account.installer' and self.db is not HQ) or \
-                   (model == 'msf_instance.setup' and self.db in (Synchro, HQ,)):
+                   (model == 'msf_instance.setup' and self.db in (Synchro,)):
                     proxy = self.db.get(model)
                     answer = proxy.action_skip([])
                 elif model == 'msf_instance.setup':
@@ -246,8 +246,9 @@ class client_creation(db_creation):
             'name' : self.db.db_name,
             'customer' : 1,
             'supplier' : 1,
-            'property_account_payable' : account.search([('code','=','1201')])[0],
-            'property_account_receivable' : account.search([('code','=','3000')])[0],
+            'partner_type' : 'internal',
+            'property_account_payable' : account.search([('code','=','3000')])[0],
+            'property_account_receivable' : account.search([('code','=','1201')])[0],
         })
 
 class hq_creation(client_creation, unittest.TestCase):
