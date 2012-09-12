@@ -66,7 +66,7 @@ class sync_project(client_creation, unittest.TestCase):
 class sync_project2(client_creation, unittest.TestCase):
     db = Project2
 
-test_cases = (sync_hq, sync_coordo, sync_project, sync_project2)
+test_cases = (sync_hq, sync_coordo, sync_project)
 #test_cases = (sync_coordo,)
 
 def load_tests(loader, tests, pattern):

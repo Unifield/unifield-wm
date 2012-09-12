@@ -18,7 +18,7 @@ server_port = 8069
 netrpc_port = 8070
 
 ## Database format
-prefix = "B"
+prefix = "DD"
 version = "B"
 
 ## Other stuffs

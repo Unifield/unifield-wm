@@ -65,8 +65,8 @@ class Synchro:
     __metaclass__ = db_instance
 
     server = server
-    name = "%s_%s_SYNCHRO" % (config.version, config.prefix)
-    shortname = "%s_SYNCHRO" % (config.prefix)
+    name = "%s_%s_SYNC_SERVER" % (config.version, config.prefix)
+    shortname = "%s_SYNC_SERVER" % (config.prefix)
 
     def __init__(self):
         raise Exception, 'This class must not be instanced'
