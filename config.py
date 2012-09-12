@@ -15,10 +15,11 @@ client_port = 8069
 ## Infos to connect to server (sync server side)
 server_host = 'localhost' #'10.42.43.1'
 server_port = 8069
+netrpc_port = 8070
 
 ## Database format
-prefix = "TEST"
-version = "SP5"
+prefix = "B"
+version = "B"
 
 ## Other stuffs
 default_email = 'cto@openerp.com'

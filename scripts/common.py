@@ -80,8 +80,7 @@ class HQ:
     synchro = {
         'protocol' : 'netrpc',
         'host' : config.server_host,
-        #'port' : config.server_port, ## XMLRPC port
-        'port' : 8070,
+        'port' : config.netrpc_port,
         'database' : Synchro.name,
         'login' : name,
         'password' : name,
@@ -99,8 +98,7 @@ class Coordo:
     synchro = {
         'protocol' : 'netrpc',
         'host' : config.server_host,
-        #'port' : config.server_port, ## XMLRPC port
-        'port' : 8070,
+        'port' : config.netrpc_port,
         'database' : Synchro.name,
         'login' : name,
         'password' : name,
@@ -119,8 +117,7 @@ class Project:
     synchro = {
         'protocol' : 'netrpc',
         'host' : config.server_host,
-        #'port' : config.server_port, ## XMLRPC port
-        'port' : 8070,
+        'port' : config.netrpc_port,
         'database' : Synchro.name,
         'login' : name,
         'password' : name,
@@ -140,7 +137,7 @@ class Project2:
         'protocol' : 'netrpc',
         'host' : config.server_host,
         #'port' : config.server_port, ## XMLRPC port
-        'port' : 8070,
+        'port' : config.netrpc_port,
         'database' : Synchro.name,
         'login' : name,
         'password' : name,

@@ -37,6 +37,21 @@ skipSync = False
 skipUniUser = False
 skipPartner = False
 
+#skipCreation = True
+#skipModules = True
+#skipModuleData = False
+#skipModuleUpdate = True
+#skipGroups = True
+#skipCostCenter = True
+#skipPropInstance = True
+#skipConfig = True
+#skipRegister = True
+#skipSync = True
+#skipUniUser = True
+#skipPartner = True
+
+
+
 class db_creation(object):
 
     buggy_models = ('sale.price.setup',)
@@ -348,10 +363,15 @@ class project_creation(project_base_creation, unittest.TestCase):
 class project2_creation(project_base_creation, unittest.TestCase):
     db = Project2
 
-test_cases = (synchro_creation, hq_creation, coordo_creation, project_creation, project2_creation)
+test_cases = (synchro_creation, hq_creation, coordo_creation, project_creation)
+
+#test_cases = (coordo_creation, project_creation)
+
 #test_cases = (project_creation, project2_creation)
 #test_cases = (synchro_creation,)
+
 #test_cases = (hq_creation,)
+
 #test_cases = (coordo_creation,project_creation, project2_creation)
 #test_cases = (synchro_creation, hq_creation, coordo_creation,)
 #test_cases = (project_creation,project2_creation,)
