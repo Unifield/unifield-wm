@@ -22,6 +22,9 @@
           same command. Plus they are retroactive ('hq_creation creation_only'
           will make only creation of HQ).
 
+    Default behavior:
+      python2 -m unittest -v -f mkdb.hq_creation mkdb.coordo_creation mkdb.project_creation mkdb.project2_creation
+
 """
 
 import sys
