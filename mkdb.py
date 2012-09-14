@@ -1,4 +1,28 @@
 #!/usr/bin/env python2
+"""
+
+  HOWTO
+  =====
+
+    -v is unittest's verbose flag
+    -f is unittest's failsafe flag (stop execution at first error)
+
+    * make specific databases, you can run the script by using
+      one of these commands:
+       python2 -m unittest -v -f mkdb.hq_creation
+       python2 -m unittest -v -f mkdb.project_creation mkdb.project2_creation
+    
+    * make creation step only:
+       python2 -m unittest -v -f mkdb.creation_only mkdb.server_creation
+    
+    * make configuration step only:
+       python2 -m unittest -v -f mkdb.configuration_only mkdb.server_creation
+
+    Note: you can't use the creation_only and configuration_only flag in the
+          same command. Plus they are retroactive ('hq_creation creation_only'
+          will make only creation of HQ).
+
+"""
 
 import sys
 
@@ -24,32 +48,29 @@ try:
 except:
     import pdb
 
-skipCreation = False
-skipModules = False
-skipModuleData = False
-skipModuleUpdate = False
-skipGroups = False
-skipCostCenter = False
-skipPropInstance = False
-skipConfig = False
-skipRegister = False
-skipSync = False
-skipUniUser = False
-skipPartner = False
 
-#skipCreation = True
-#skipModules = True
-#skipModuleData = False
-#skipModuleUpdate = True
-#skipGroups = True
-#skipCostCenter = True
-#skipPropInstance = True
-#skipConfig = True
-#skipRegister = True
-#skipSync = True
-#skipUniUser = True
-#skipPartner = True
+creation_only = bool(__name__+'.creation_only' in sys.argv)
+configuration_only = bool(__name__+'.configuration_only' in sys.argv)
 
+skipCreation = not creation_only or configuration_only
+skipModules = not creation_only or configuration_only
+skipModuleData = not creation_only or configuration_only
+skipModuleUpdate = not creation_only or configuration_only
+skipUniUser = not creation_only or configuration_only
+skipPartner = not creation_only or configuration_only
+
+skipGroups = not configuration_only or creation_only
+skipCostCenter = not configuration_only or creation_only
+skipPropInstance = not configuration_only or creation_only
+skipConfig = not configuration_only or creation_only
+skipRegister = not configuration_only or creation_only
+skipSync = not configuration_only or creation_only
+
+class creation_only(unittest.TestCase):
+    pass
+
+class configuration_only(unittest.TestCase):
+    pass
 
 
 class db_creation(object):
@@ -127,7 +148,6 @@ class db_creation(object):
                 model = answer.get('res_model', None)
             except:
                 print "DEBUG: db=%s, model=%s" % (self.db.db_name, model)
-                pdb.set_trace()
                 raise
 
     def sync(self, db=None):
@@ -137,6 +157,7 @@ class db_creation(object):
             ids = monitor.search([], 0, 1, '"end" desc')
             self.fail('Synchronization process of database "%s" failed!\n%s' % (db.db_name,monitor.read(ids, ['error'])[0]['error']))
  
+
 class server_creation(db_creation, unittest.TestCase):
     db = Synchro
 
@@ -177,6 +198,7 @@ class server_creation(db_creation, unittest.TestCase):
     def test_40_activate_rules(self):
         self.db.connect('admin')
         Synchro.activate('sync_server.sync_rule', [])
+
 
 class client_creation(db_creation):
 
@@ -266,6 +288,7 @@ class client_creation(db_creation):
             'property_account_receivable' : account.search([('code','=','1201')])[0],
         })
 
+
 class hq_creation(client_creation, unittest.TestCase):
     db = HQ
 
@@ -293,6 +316,7 @@ class hq_creation(client_creation, unittest.TestCase):
     def test_42_install_data_client(self):
         self.db.connect('admin')
         self.db.module('msf_sync_data_hq').install().do()
+
 
 class coordo_creation(client_creation, unittest.TestCase):
     db = Coordo
@@ -334,6 +358,7 @@ class coordo_creation(client_creation, unittest.TestCase):
         self.db.connect('admin')
         self.db.module('msf_sync_data_coordo').install().do()
 
+
 class project_base_creation(client_creation):
     @unittest.skipIf(skipPropInstance, "Proprietary Instance creation desactivated")
     def test_40_prop_instance(self):
@@ -357,26 +382,17 @@ class project_base_creation(client_creation):
         self.db.connect('admin')
         self.configure()
 
+
 class project_creation(project_base_creation, unittest.TestCase):
     db = Project
+
 
 class project2_creation(project_base_creation, unittest.TestCase):
     db = Project2
 
-#test_cases = (server_creation, hq_creation, coordo_creation, project_creation)
 
-test_cases = (server_creation, hq_creation, coordo_creation,)
-
-#test_cases = (project_creation, project2_creation)
-#test_cases = (server_creation,)
-
-#test_cases = (hq_creation,)
-
-#test_cases = (coordo_creation,project_creation, project2_creation)
-#test_cases = (server_creation, hq_creation, coordo_creation,)
-#test_cases = (project_creation,project2_creation,)
-#test_cases = (project_creation,)
-#test_cases = (project2_creation,)
+# Base Install
+test_cases = (server_creation, hq_creation, coordo_creation, project_creation, project2_creation)
 
 def load_tests(loader, tests, pattern):
     suite = unittest.TestSuite()
