@@ -52,19 +52,19 @@ except:
 creation_only = bool(__name__+'.creation_only' in sys.argv)
 configuration_only = bool(__name__+'.configuration_only' in sys.argv)
 
-skipCreation = not creation_only or configuration_only
-skipModules = not creation_only or configuration_only
-skipModuleData = not creation_only or configuration_only
-skipModuleUpdate = not creation_only or configuration_only
-skipUniUser = not creation_only or configuration_only
-skipPartner = not creation_only or configuration_only
+skipCreation = configuration_only
+skipModules = configuration_only
+skipModuleData = configuration_only
+skipModuleUpdate = configuration_only
+skipUniUser = configuration_only
+skipPartner = configuration_only
 
-skipGroups = not configuration_only or creation_only
-skipCostCenter = not configuration_only or creation_only
-skipPropInstance = not configuration_only or creation_only
-skipConfig = not configuration_only or creation_only
-skipRegister = not configuration_only or creation_only
-skipSync = not configuration_only or creation_only
+skipGroups = creation_only
+skipCostCenter = creation_only
+skipPropInstance = creation_only
+skipConfig = creation_only
+skipRegister = creation_only
+skipSync = creation_only
 
 class creation_only(unittest.TestCase):
     pass
@@ -173,9 +173,10 @@ class server_creation(db_creation, unittest.TestCase):
 
     @unittest.skipIf(skipGroups, "Group creation desactivated")
     def test_20_make_groups(self):
-        group = Synchro.get('sync.server.entity_group')
+        self.db.connect('admin')
+        group = self.db.get('sync.server.entity_group')
         group.unlink(group.search([]))
-        group_type = Synchro.get('sync.server.group_type')
+        group_type = self.db.get('sync.server.group_type')
         group.create({
             'name' : 'OC',
             'type_id' : group_type.search([('name','=','OC')])[0],
@@ -295,6 +296,7 @@ class hq_creation(client_creation, unittest.TestCase):
     @unittest.skipIf(skipPropInstance, "Proprietary Instance creation desactivated")
     def test_40_prop_instance(self):
         HQ.connect('admin')
+        if HQ.search_data('msf.instance', [('instance','=',self.db.db_name)]): return
         data = {
             'code' : self.db.shortname,
             'name' : self.db.shortname,
@@ -336,6 +338,7 @@ class coordo_creation(client_creation, unittest.TestCase):
     @unittest.skipIf(skipPropInstance, "Proprietary Instance creation desactivated")
     def test_40_prop_instance(self):
         HQ.connect('admin')
+        if HQ.search_data('msf.instance', [('instance','=',self.db.db_name)]): return
         data = {
             'code' : self.db.shortname,
             'name' : self.db.shortname,
@@ -376,6 +379,7 @@ class project_creation(project_base_creation, unittest.TestCase):
     @unittest.skipIf(skipPropInstance, "Proprietary Instance creation desactivated")
     def test_40_prop_instance(self):
         HQ.connect('admin')
+        if HQ.search_data('msf.instance', [('instance','=',self.db.db_name)]): return
         data = {
             'code' : self.db.shortname,
             'name' : self.db.shortname,
@@ -399,6 +403,7 @@ class project2_creation(project_base_creation, unittest.TestCase):
     @unittest.skipIf(skipPropInstance, "Proprietary Instance creation desactivated")
     def test_40_prop_instance(self):
         HQ.connect('admin')
+        if HQ.search_data('msf.instance', [('instance','=',self.db.db_name)]): return
         data = {
             'code' : self.db.shortname,
             'name' : self.db.shortname,
