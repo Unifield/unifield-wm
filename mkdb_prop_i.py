@@ -24,32 +24,36 @@ try:
 except:
     import pdb
 
-skipCreation = False
-skipModules = False
-skipModuleData = False
-skipModuleUpdate = False
-skipGroups = False
-skipCostCenter = False
-skipPropInstance = False
-skipConfig = False
-skipRegister = False
-skipSync = False
-skipUniUser = False
-skipPartner = False
 
-#skipCreation = True
-#skipModules = True
-#skipModuleData = False
-#skipModuleUpdate = True
-#skipGroups = True
-#skipCostCenter = True
-#skipPropInstance = True
-#skipConfig = True
-#skipRegister = True
-#skipSync = True
-#skipUniUser = True
-#skipPartner = True
+skipFlag = False
 
+skipCreation = skipFlag
+skipModules = skipFlag
+skipModuleData = skipFlag
+skipModuleUpdate = skipFlag
+skipGroups = skipFlag
+skipCostCenter = skipFlag
+skipPropInstance = skipFlag
+skipConfig = skipFlag
+skipRegister = skipFlag
+skipSync = skipFlag
+skipUniUser = skipFlag
+skipPartner = skipFlag
+
+#skipFlag = True
+#
+#skipCreation = skipFlag
+#skipModules = skipFlag
+#skipModuleData = skipFlag
+#skipModuleUpdate = skipFlag
+#skipGroups = skipFlag
+#skipCostCenter = skipFlag
+#skipPropInstance = skipFlag
+#skipConfig = skipFlag
+#skipRegister = skipFlag
+#skipSync = skipFlag
+#skipUniUser = skipFlag
+#skipPartner = skipFlag
 
 
 class db_creation(object):
@@ -277,6 +281,8 @@ class hq_creation(client_creation, unittest.TestCase):
             'name' : self.db.shortname,
             'instance' : self.db.db_name,
             'level' : 'section',
+            'reconcile_prefix': 'HQ',
+            'move_prefix': 'HQ',
             'mission' : '%s_MISSION' % config.prefix,
             'cost_center_id' : HQ.search_data('account.analytic.account', {'code':'OC'})[0],
             'state' : 'active',
@@ -310,15 +316,18 @@ class coordo_creation(client_creation, unittest.TestCase):
     @unittest.skipIf(skipPropInstance, "Proprietary Instance creation desactivated")
     def test_40_prop_instance(self):
         HQ.connect('admin')
+        self.db.connect('admin')
         data = {
             'code' : self.db.shortname,
             'name' : self.db.shortname,
             'instance' : self.db.db_name,
             'level' : 'coordo',
+            'reconcile_prefix': 'C1',
+            'move_prefix': 'C1',
             'mission' : '%s_MISSION' % config.prefix,
             'parent_id' : HQ.search_data('msf.instance', [('instance','=',HQ.name)])[0],
             'cost_center_id' : HQ.search_data('account.analytic.account', {'code':self.db.shortname})[0],
-            'state' : 'active',
+            'state' : 'inactive',
         }
         if not HQ.test('msf.instance', data):
             HQ.get('msf.instance').create(data)
@@ -338,11 +347,14 @@ class project_base_creation(client_creation):
     @unittest.skipIf(skipPropInstance, "Proprietary Instance creation desactivated")
     def test_40_prop_instance(self):
         HQ.connect('admin')
+        self.db.connect('admin')
         data = {
             'code' : self.db.shortname,
             'name' : self.db.shortname,
             'instance' : self.db.db_name,
-            'level' : 'project',
+            'level' : 'project', 
+            'reconcile_prefix': 'P1',
+            'move_prefix': 'P1',
             'mission' : '%s_MISSION' % config.prefix,
             'parent_id' : HQ.search_data('msf.instance', [('instance','=',Coordo.name)])[0],
             'cost_center_id' : HQ.search_data('account.analytic.account', {'code':self.db.shortname})[0],
@@ -350,6 +362,8 @@ class project_base_creation(client_creation):
         }
         if not HQ.test('msf.instance', data):
             HQ.get('msf.instance').create(data)
+#            data = {'state' : 'active',}
+#            HQ.get('msf.instance').write(data)
             self.sync(HQ)
 
     @unittest.skipIf(skipConfig, "Modules configuration desactivated")
@@ -363,14 +377,15 @@ class project_creation(project_base_creation, unittest.TestCase):
 class project2_creation(project_base_creation, unittest.TestCase):
     db = Project2
 
-#test_cases = (server_creation, hq_creation, coordo_creation, project_creation)
+#test_cases = (project_creation,)
 
-test_cases = (server_creation, hq_creation, coordo_creation,)
+#test_cases = (server_creation, hq_creation, coordo_creation, project_creation, )
+test_cases = (hq_creation, coordo_creation, project_creation, )
 
 #test_cases = (project_creation, project2_creation)
 #test_cases = (server_creation,)
 
-#test_cases = (hq_creation,)
+#test_cases = (coordo_creation,project_creation,)
 
 #test_cases = (coordo_creation,project_creation, project2_creation)
 #test_cases = (server_creation, hq_creation, coordo_creation,)
