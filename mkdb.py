@@ -300,6 +300,8 @@ class hq_creation(client_creation, unittest.TestCase):
             'name' : self.db.shortname,
             'instance' : self.db.db_name,
             'level' : 'section',
+            'reconcile_prefix' : 'HQ',
+            'move_prefix' : 'HQ',
             'mission' : '%s_MISSION' % config.prefix,
             'cost_center_id' : HQ.search_data('account.analytic.account', {'code':'OC'})[0],
             'state' : 'active',
@@ -339,6 +341,8 @@ class coordo_creation(client_creation, unittest.TestCase):
             'name' : self.db.shortname,
             'instance' : self.db.db_name,
             'level' : 'coordo',
+            'reconcile_prefix' : 'C1',
+            'move_prefix' : 'C1',
             'mission' : '%s_MISSION' % config.prefix,
             'parent_id' : HQ.search_data('msf.instance', [('instance','=',HQ.name)])[0],
             'cost_center_id' : HQ.search_data('account.analytic.account', {'code':self.db.shortname})[0],
@@ -360,23 +364,6 @@ class coordo_creation(client_creation, unittest.TestCase):
 
 
 class project_base_creation(client_creation):
-    @unittest.skipIf(skipPropInstance, "Proprietary Instance creation desactivated")
-    def test_40_prop_instance(self):
-        HQ.connect('admin')
-        data = {
-            'code' : self.db.shortname,
-            'name' : self.db.shortname,
-            'instance' : self.db.db_name,
-            'level' : 'project',
-            'mission' : '%s_MISSION' % config.prefix,
-            'parent_id' : HQ.search_data('msf.instance', [('instance','=',Coordo.name)])[0],
-            'cost_center_id' : HQ.search_data('account.analytic.account', {'code':self.db.shortname})[0],
-            'state' : 'active',
-        }
-        if not HQ.test('msf.instance', data):
-            HQ.get('msf.instance').create(data)
-            self.sync(HQ)
-
     @unittest.skipIf(skipConfig, "Modules configuration desactivated")
     def test_60_configuration_wizards(self):
         self.db.connect('admin')
@@ -386,9 +373,47 @@ class project_base_creation(client_creation):
 class project_creation(project_base_creation, unittest.TestCase):
     db = Project
 
+    @unittest.skipIf(skipPropInstance, "Proprietary Instance creation desactivated")
+    def test_40_prop_instance(self):
+        HQ.connect('admin')
+        data = {
+            'code' : self.db.shortname,
+            'name' : self.db.shortname,
+            'instance' : self.db.db_name,
+            'level' : 'project',
+            'reconcile_prefix' : 'P1',
+            'move_prefix' : 'P1',
+            'mission' : '%s_MISSION' % config.prefix,
+            'parent_id' : HQ.search_data('msf.instance', [('instance','=',Coordo.name)])[0],
+            'cost_center_id' : HQ.search_data('account.analytic.account', {'code':self.db.shortname})[0],
+            'state' : 'active',
+        }
+        if not HQ.test('msf.instance', data):
+            HQ.get('msf.instance').create(data)
+            self.sync(HQ)
+
 
 class project2_creation(project_base_creation, unittest.TestCase):
     db = Project2
+
+    @unittest.skipIf(skipPropInstance, "Proprietary Instance creation desactivated")
+    def test_40_prop_instance(self):
+        HQ.connect('admin')
+        data = {
+            'code' : self.db.shortname,
+            'name' : self.db.shortname,
+            'instance' : self.db.db_name,
+            'level' : 'project',
+            'reconcile_prefix' : 'P2',
+            'move_prefix' : 'P2',
+            'mission' : '%s_MISSION' % config.prefix,
+            'parent_id' : HQ.search_data('msf.instance', [('instance','=',Coordo.name)])[0],
+            'cost_center_id' : HQ.search_data('account.analytic.account', {'code':self.db.shortname})[0],
+            'state' : 'active',
+        }
+        if not HQ.test('msf.instance', data):
+            HQ.get('msf.instance').create(data)
+            self.sync(HQ)
 
 
 # Base Install
