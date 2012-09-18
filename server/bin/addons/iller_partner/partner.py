@@ -131,15 +131,15 @@ mode de règlement, vous devez donc enregistrer un RIB pour ce client')
         'commentaire_livraison': fields.text(string='Commentaire Livraison'),
         'depose_ok': fields.boolean(string='Dépose possible ?'),
 
-        ## Client bloqué
-        'bloque': fields.boolean(string='Bloqué ?', help='Si la case est cochée, le partenaire \
-                                n\'apparaitra plus dans les recherches sur les bon de commande'),
+        ## Client bloqué -- non nécessaire. Le champ active suffit
+        #'bloque': fields.boolean(string='Bloqué ?', help='Si la case est cochée, le partenaire \
+        #                        n\'apparaitra plus dans les recherches sur les bon de commande'),
         'ref': fields.char('Code', size=64, required=True),
     }
 
     _defaults = {
         'type_ristourne': lambda *a: 'a',
-        'bloque': lambda *a: False,
+#        'bloque': lambda *a: False,
         'reglement': lambda *a: 'virement',
         'facturation_bl': lambda *a: 'm',
         'lang': lambda *a: 'fr_FR',

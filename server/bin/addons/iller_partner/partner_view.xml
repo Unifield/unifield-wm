@@ -38,6 +38,21 @@
             <field name="inherit_id" ref="account.view_partner_property_form" />
             <field name="arch" type="xml">
                 <data>
+                    <xpath expr="//field[@name='title']" position="replace">
+                        <label string="" colspan="2"/>
+                    </xpath>
+
+                    <xpath expr="//field[@name='supplier']" position="after">
+                        <newline/>
+                        <field name="active" select="2" />
+                        <label string="" colspan="2"/>
+                        <label string="" colspan="2"/>
+                    </xpath>
+
+                    <xpath expr="/form/notebook/page[@string='Sales &amp; Purchases']/field[@name='active']" position="replace">
+                        <label string="" colspan="2"/>
+                    </xpath>
+
                     <xpath expr="/form/notebook/page[@string='Accounting']/group" position="before">
                         <separator colspan="4" string="Informations comptables" />
                         <field name="siret" />
@@ -45,7 +60,6 @@
                         <field name="facturation_bl" required="1" />
                         <field name="nb_ex_factures" />
                         <field name="releve" />
-                        <field name="bloque" select="2" />
                         <separator colspan="4" string="Informations ristourne" />
                         <field name="remise_fac" />
                         <field name="type_ristourne" />

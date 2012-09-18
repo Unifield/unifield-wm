@@ -181,7 +181,7 @@ class iller_partner(osv.osv):
                     tel = re.sub('\D', '', name)
                     addr_ids = address_obj.search(cr, uid, [('phone', operator, tel)], limit=limit, context=context)
                     for addr in address_obj.browse(cr, uid, addr_ids):
-                        if addr.partner_id and addr.partner_id.id and not addr.partner_id.bloque and addr.partner_id.id not in res:
+                        if addr.partner_id and addr.partner_id.id and addr.partner_id.active and addr.partner_id.id not in res:
                             res.append(addr.partner_id.id)
 
                 ## Recherche sur le nom, la ville ou le nom de la rue
