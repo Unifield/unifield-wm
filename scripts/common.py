@@ -65,8 +65,7 @@ class Synchro:
     __metaclass__ = db_instance
 
     server = server
-    name = "%s_%s_SYNC_SERVER" % (config.version, config.prefix)
-    shortname = "%s_SYNC_SERVER" % (config.prefix)
+    name = "%s_SYNC_SERVER" % (config.prefix)
 
     def __init__(self):
         raise Exception, 'This class must not be instanced'
@@ -75,8 +74,7 @@ class HQ:
     __metaclass__ = db_instance
 
     server = client
-    name = "%s_%s_HQ" % (config.version, config.prefix)
-    shortname = "%s_HQ" % (config.prefix)
+    name = "%s_HQ" % (config.prefix)
     synchro = {
         'protocol' : 'netrpc',
         'host' : config.server_host,
@@ -93,8 +91,7 @@ class Coordo:
     __metaclass__ = db_instance
 
     server = client
-    name = "%s_%s_COORDO" % (config.version, config.prefix)
-    shortname = "%s_COORDO" % (config.prefix)
+    name = "%s_COORDO" % (config.prefix)
     synchro = {
         'protocol' : 'netrpc',
         'host' : config.server_host,
@@ -112,8 +109,7 @@ class Project:
     __metaclass__ = db_instance
 
     server = client
-    name = "%s_%s_PROJECT" % (config.version, config.prefix)
-    shortname = "%s_PROJECT" % (config.prefix)
+    name = "%s_PROJECT" % (config.prefix)
     synchro = {
         'protocol' : 'netrpc',
         'host' : config.server_host,
@@ -131,8 +127,7 @@ class Project2:
     __metaclass__ = db_instance
 
     server = client
-    name = "%s_%s_PROJECT2" % (config.version, config.prefix)
-    shortname = "%s_PROJECT2" % (config.prefix)
+    name = "%s_PROJECT2" % (config.prefix)
     synchro = {
         'protocol' : 'netrpc',
         'host' : config.server_host,

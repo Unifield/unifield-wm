@@ -57,17 +57,16 @@ configuration_only = bool(__name__+'.configuration_only' in sys.argv)
 
 skipCreation = configuration_only
 skipModules = configuration_only
-skipModuleData = configuration_only
 skipModuleUpdate = configuration_only
 skipUniUser = configuration_only
-skipPartner = configuration_only
 
 skipGroups = creation_only
-skipCostCenter = creation_only
 skipPropInstance = creation_only
 skipConfig = creation_only
 skipRegister = creation_only
 skipSync = creation_only
+skipModuleData = creation_only
+skipPartner = creation_only
 
 class creation_only(unittest.TestCase):
     pass
@@ -142,7 +141,7 @@ class db_creation(object):
                     answer = proxy.action_skip([])
                 elif model == 'msf_instance.setup':
                     answer = self.db.wizard(model, {
-                        'instance_id' : self.db.search_data('msf.instance', [('instance','=',self.db.db_name)])[0],
+                        'instance_id' : self.db.search_data('msf.instance', [('instance','=',self.db.name)])[0],
                     }).action_next()
                 else:
                     data = dict(self.base_wizards.get(model, {}))
@@ -150,7 +149,7 @@ class db_creation(object):
                     answer = getattr(self.db.wizard(model, data), button)()
                 model = answer.get('res_model', None)
             except:
-                print "DEBUG: db=%s, model=%s" % (self.db.db_name, model)
+                print "DEBUG: db=%s, model=%s" % (self.db.name, model)
                 raise
 
     def sync(self, db=None):
@@ -160,6 +159,32 @@ class db_creation(object):
             ids = monitor.search([], 0, 1, '"end" desc')
             self.fail('Synchronization process of database "%s" failed!\n%s' % (db.db_name,monitor.read(ids, ['error'])[0]['error']))
  
+    # Create Cost Center and Proprietary Instance for Test Cases
+    def make_prop_instance(self, prop_instance=None):
+        if not HQ.test('account.analytic.account', [('code','=',self.db.name)]):
+            data = {
+                'name' : self.db.name,
+                'code' : self.db.name,
+                'category' : 'OC',
+            }
+            if self.db is not HQ:
+                data['parent_id'] = HQ.search_data('account.analytic.account', {'Code':'OC'})[0]
+            cost_center_id = HQ.get('account.analytic.account').create(data)
+        data = {
+            'code' : self.db.name,
+            'name' : self.db.name,
+            'instance' : self.db.name,
+            'mission' : '%s_MISSION' % config.prefix,
+            'cost_center_id' : cost_center_id,
+            'state' : 'active',
+        }
+        if prop_instance is not None:
+            data.update(prop_instance)
+        if not HQ.test('msf.instance', data):
+            HQ.get('msf.instance').create(data)
+            if self.db is not HQ:
+                self.sync(HQ)
+
 
 class server_creation(db_creation, unittest.TestCase):
     db = Synchro
@@ -172,26 +197,7 @@ class server_creation(db_creation, unittest.TestCase):
     @unittest.skipIf(skipModuleData, "Data module installation desactivated")
     def test_10_install_data_server(self):
         self.db.connect('admin')
-        self.db.module('msf_sync_data_synchro').install().do()
-
-    @unittest.skipIf(skipGroups, "Group creation desactivated")
-    def test_20_make_groups(self):
-        self.db.connect('admin')
-        group = self.db.get('sync.server.entity_group')
-        group.unlink(group.search([]))
-        group_type = self.db.get('sync.server.group_type')
-        group.create({
-            'name' : 'OC',
-            'type_id' : group_type.search([('name','=','OC')])[0],
-        })
-        group.create({
-            'name' : 'Mission',
-            'type_id' : group_type.search([('name','=','MISSION')])[0],
-        })
-        group.create({
-            'name' : 'Coordo',
-            'type_id' : group_type.search([('name','=','COORDINATIONS')])[0],
-        })
+        self.db.module('msf_sync_data_server').install().do()
 
     @unittest.skipIf(skipConfig, "Modules configuration desactivated")
     def test_30_configuration_wizards(self):
@@ -221,7 +227,7 @@ class client_creation(db_creation):
     @unittest.skipIf(skipRegister, "Registration desactivated")
     def test_20_register_entity(self):
         Synchro.connect('admin')
-        Synchro.user(self.db.db_name).add(self.db.db_name).addGroups('Sync / User')
+        Synchro.user(self.db.name).add(self.db.name).addGroups('Sync / User')
         self.db.connect('admin')
         wizard = self.db.wizard('sync.client.register_entity', {'email':config.default_email})
         # Fetch instances
@@ -232,9 +238,9 @@ class client_creation(db_creation):
         wizard.validate()
         # Search entity record, server side
         entities = Synchro.get('sync.server.entity')
-        entity_ids = entities.search([('name','=',self.db.db_name)])
+        entity_ids = entities.search([('name','=',self.db.name)])
         if not len(entity_ids) == 1:
-            raise Exception, "Cannot find validation request for entity %s!" % self.db.db_name
+            raise Exception, "Cannot find validation request for entity %s!" % self.db.name
         # Set parent
         if self.db is not HQ:
             if self.db is Coordo:
@@ -242,7 +248,7 @@ class client_creation(db_creation):
             else:
                 parents = entities.search([('name','=',Coordo.name)])
             if not parents:
-                raise Exception('Cannot find parent entity for %s!' % self.db.db_name)
+                raise Exception('Cannot find parent entity for %s!' % self.db.name)
             entities.write(entity_ids, {'parent_id':parents[0]})
         # Server accept validation
         entities.validate_action(entity_ids)
@@ -250,24 +256,12 @@ class client_creation(db_creation):
     @unittest.skipIf(skipGroups, "Group creation desactivated")
     def test_30_make_groups_mission(self):
         Synchro.connect('admin')
-        entity_ids = Synchro.get('sync.server.entity').search([('name','=',self.db.db_name)])
+        entity_ids = Synchro.get('sync.server.entity').search([('name','=',self.db.name)])
         # Add entity to groups
         group = Synchro.get('sync.server.entity_group')
-        group.write(group.search([('name','in',('Mission','OC'))]), {
+        group.write(group.search([('name','=','OC')]), {
             'entity_ids' : [(4,entity_ids[0])],
         })
-
-    @unittest.skipIf(skipCostCenter, "Cost Center creation desactivated")
-    def test_30_make_costcenter(self):
-        if self.db is HQ: return
-        HQ.connect('admin')
-        if not HQ.test('account.analytic.account', [('code','=',self.db.shortname)]):
-            HQ.get('account.analytic.account').create({
-                'name' : self.db.shortname,
-                'code' : self.db.shortname,
-                'category' : 'OC',
-                'parent_id' : HQ.search_data('account.analytic.account', {'Code':'OC'})[0],
-            })
 
     @unittest.skipIf(skipSync, "Synchronization desactivated")
     def test_50_synchronize(self):
@@ -284,7 +278,7 @@ class client_creation(db_creation):
         self.db.connect('admin')
         account = self.db.get('account.account')
         self.db.get('res.partner').create({
-            'name' : self.db.db_name,
+            'name' : self.db.name,
             'customer' : 1,
             'supplier' : 1,
             'partner_type' : 'internal',
@@ -299,20 +293,14 @@ class hq_creation(client_creation, unittest.TestCase):
     @unittest.skipIf(skipPropInstance, "Proprietary Instance creation desactivated")
     def test_40_prop_instance(self):
         HQ.connect('admin')
-        if HQ.search_data('msf.instance', [('instance','=',self.db.db_name)]): return
-        data = {
-            'code' : self.db.shortname,
-            'name' : self.db.shortname,
-            'instance' : self.db.db_name,
-            'level' : 'section',
-            'reconcile_prefix' : 'HQ',
-            'move_prefix' : 'HQ',
-            'mission' : '%s_MISSION' % config.prefix,
-            'cost_center_id' : HQ.search_data('account.analytic.account', {'code':'OC'})[0],
-            'state' : 'active',
-        }
-        if not HQ.test('msf.instance', data):
-            HQ.get('msf.instance').create(data)
+        if not HQ.search_data('msf.instance', [('instance','=',self.db.name)]):
+            self.make_prop_instance({
+                'level' : 'section',
+                'reconcile_prefix' : '#1',
+                'move_prefix' : '#1',
+                #'reconcile_prefix' : 'HQ',
+                #'move_prefix' : 'HQ',
+            })
 
     @unittest.skipIf(skipConfig, "Modules configuration desactivated")
     def test_41_configuration_wizards(self):
@@ -331,32 +319,25 @@ class coordo_creation(client_creation, unittest.TestCase):
     @unittest.skipIf(skipGroups, "Group creation desactivated")
     def test_31_make_groups_coordo(self):
         Synchro.connect('admin')
-        entity_ids = Synchro.get('sync.server.entity').search([('name','=',self.db.db_name)])
+        entity_ids = Synchro.get('sync.server.entity').search([('name','=',self.db.name)])
         # Add entity to groups
         group = Synchro.get('sync.server.entity_group')
-        group.write(group.search([('name','=','Coordo')]), {
+        group.write(group.search([('name','in',('Coordinations','Mission1'))]), {
             'entity_ids' : [(4,entity_ids[0])],
         })
 
     @unittest.skipIf(skipPropInstance, "Proprietary Instance creation desactivated")
     def test_40_prop_instance(self):
         HQ.connect('admin')
-        if HQ.search_data('msf.instance', [('instance','=',self.db.db_name)]): return
-        data = {
-            'code' : self.db.shortname,
-            'name' : self.db.shortname,
-            'instance' : self.db.db_name,
-            'level' : 'coordo',
-            'reconcile_prefix' : 'C1',
-            'move_prefix' : 'C1',
-            'mission' : '%s_MISSION' % config.prefix,
-            'parent_id' : HQ.search_data('msf.instance', [('instance','=',HQ.name)])[0],
-            'cost_center_id' : HQ.search_data('account.analytic.account', {'code':self.db.shortname})[0],
-            'state' : 'active',
-        }
-        if not HQ.test('msf.instance', data):
-            HQ.get('msf.instance').create(data)
-            self.sync(HQ)
+        if not HQ.search_data('msf.instance', [('instance','=',self.db.name)]):
+            self.make_prop_instance({
+                'level' : 'coordo',
+                'reconcile_prefix' : '#2',
+                'move_prefix' : '#2',
+                #'reconcile_prefix' : 'C1',
+                #'move_prefix' : 'C1',
+                'parent_id' : HQ.search_data('msf.instance', [('instance','=',HQ.name)])[0],
+            })
 
     @unittest.skipIf(skipConfig, "Modules configuration desactivated")
     def test_60_configuration_wizards(self):
@@ -370,6 +351,16 @@ class coordo_creation(client_creation, unittest.TestCase):
 
 
 class project_base_creation(client_creation):
+    @unittest.skipIf(skipGroups, "Group creation desactivated")
+    def test_31_make_groups_project(self):
+        Synchro.connect('admin')
+        entity_ids = Synchro.get('sync.server.entity').search([('name','=',self.db.name)])
+        # Add entity to groups
+        group = Synchro.get('sync.server.entity_group')
+        group.write(group.search([('name','=','Mission1')]), {
+            'entity_ids' : [(4,entity_ids[0])],
+        })
+
     @unittest.skipIf(skipConfig, "Modules configuration desactivated")
     def test_60_configuration_wizards(self):
         self.db.connect('admin')
@@ -382,22 +373,15 @@ class project_creation(project_base_creation, unittest.TestCase):
     @unittest.skipIf(skipPropInstance, "Proprietary Instance creation desactivated")
     def test_40_prop_instance(self):
         HQ.connect('admin')
-        if HQ.search_data('msf.instance', [('instance','=',self.db.db_name)]): return
-        data = {
-            'code' : self.db.shortname,
-            'name' : self.db.shortname,
-            'instance' : self.db.db_name,
-            'level' : 'project',
-            'reconcile_prefix' : 'P1',
-            'move_prefix' : 'P1',
-            'mission' : '%s_MISSION' % config.prefix,
-            'parent_id' : HQ.search_data('msf.instance', [('instance','=',Coordo.name)])[0],
-            'cost_center_id' : HQ.search_data('account.analytic.account', {'code':self.db.shortname})[0],
-            'state' : 'active',
-        }
-        if not HQ.test('msf.instance', data):
-            HQ.get('msf.instance').create(data)
-            self.sync(HQ)
+        if not HQ.search_data('msf.instance', [('instance','=',self.db.name)]):
+            self.make_prop_instance({
+                'level' : 'project',
+                'reconcile_prefix' : '#3',
+                'move_prefix' : '#3',
+                #'reconcile_prefix' : 'P1',
+                #'move_prefix' : 'P1',
+                'parent_id' : HQ.search_data('msf.instance', [('instance','=',Coordo.name)])[0],
+            })
 
 
 class project2_creation(project_base_creation, unittest.TestCase):
@@ -406,22 +390,15 @@ class project2_creation(project_base_creation, unittest.TestCase):
     @unittest.skipIf(skipPropInstance, "Proprietary Instance creation desactivated")
     def test_40_prop_instance(self):
         HQ.connect('admin')
-        if HQ.search_data('msf.instance', [('instance','=',self.db.db_name)]): return
-        data = {
-            'code' : self.db.shortname,
-            'name' : self.db.shortname,
-            'instance' : self.db.db_name,
-            'level' : 'project',
-            'reconcile_prefix' : 'P2',
-            'move_prefix' : 'P2',
-            'mission' : '%s_MISSION' % config.prefix,
-            'parent_id' : HQ.search_data('msf.instance', [('instance','=',Coordo.name)])[0],
-            'cost_center_id' : HQ.search_data('account.analytic.account', {'code':self.db.shortname})[0],
-            'state' : 'active',
-        }
-        if not HQ.test('msf.instance', data):
-            HQ.get('msf.instance').create(data)
-            self.sync(HQ)
+        if not HQ.search_data('msf.instance', [('instance','=',self.db.name)]):
+            self.make_prop_instance({
+                'level' : 'project',
+                'reconcile_prefix' : '#4',
+                'move_prefix' : '#4',
+                #'reconcile_prefix' : 'P2',
+                #'move_prefix' : 'P2',
+                'parent_id' : HQ.search_data('msf.instance', [('instance','=',Coordo.name)])[0],
+            })
 
 
 # Base Install
