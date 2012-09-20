@@ -9,9 +9,6 @@ try:
 except:
     import pdb
 
-import config
-from config import coordo_count, project_count
-
 def sync(db):
     db.connect('admin')
     print "Syncing %s..." % db.db_name
@@ -21,14 +18,7 @@ def sync(db):
         print 'Synchronization process of database "%s" failed!\n%s' % (db.db_name,monitor.read(ids, ['error'])[0]['error'])
 
 def sync_all():
-    test_cases = ["HQ", ]
-    for i in range(1, coordo_count+1):
-        test_cases.append("COORDO%02d" % i)
-        
-    for i in range(1, project_count+1):
-        test_cases.append("PROJECT%02d" % i)
-    
-    for db in test_cases:
+    for db in (HQ, Coordo, Project, Project2):
         sync(db)
 
 if __name__ == '__main__':
@@ -38,4 +28,3 @@ if __name__ == '__main__':
             sync(db)
     else:
         sync_all()
-
