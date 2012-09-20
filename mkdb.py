@@ -1,5 +1,6 @@
 #!/usr/bin/env python2
 """
+  (C) 2012 OpenERP - All rights reserved
 
   HOWTO
   =====
@@ -10,20 +11,59 @@
     * make specific databases, you can run the script by using
       one of these commands:
        python2 -m unittest -v -f mkdb.hq_creation
-       python2 -m unittest -v -f mkdb.project_creation mkdb.project2_creation
+       python2 -m unittest -v -f mkdb.project01_creation mkdb.project02_creation
     
     * make creation step only:
        python2 -m unittest -v -f mkdb.creation_only mkdb.server_creation
     
     * make configuration step only:
-       python2 -m unittest -v -f mkdb.configuration_only mkdb.server_creation
+       python2 -m unittest -v -f mkdb.configuration_only mkdb.coordo02_creation
 
     Note: you can't use the creation_only and configuration_only flag in the
           same command. Plus they are retroactive ('hq_creation creation_only'
           will make only creation of HQ).
 
     Default behavior:
-      python2 -m unittest -v -f mkdb.hq_creation mkdb.coordo_creation mkdb.project_creation mkdb.project2_creation
+      python2 -m unittest -v -f mkdb.hq_creation mkdb.coordo01_creation mkdb.project01_creation mkdb.project02_creation
+
+
+  EXAMPLE OF config.py
+  ====================
+
+    # -*- coding: utf-8 -*-
+
+    # postgres admin password
+    db_password = 'admin'
+
+    # default admin password
+    admin_password = 'admin'
+
+    # default user login & password (when connecting to db)
+    user_login = 'unifield'
+    user_password = 'unifield'
+
+    # infos to connect to instances (client side)
+    client_host = 'localhost'
+    client_port = 8069
+
+    # infos to connect to sync server
+    server_host = 'localhost'
+    server_port = 8069
+
+    # infos for instance connection to sync server
+    netrpc_port = 8070
+
+    # database format name
+    prefix = "TEST"
+
+    # other stuffs
+    default_email = 'nobody@nogroup.net'
+    company_name = 'Médecins Sans Frontières'
+    currency = 'base.EUR'
+
+    # number instance of type coordo and project to create
+    coordo_count = 1
+    project_count = 2
 
 """
 
@@ -31,6 +71,7 @@ import sys
 
 #Load config file
 import config
+from config import coordo_count, project_count
 
 #Load OpenERP Client Library
 import openerplib
@@ -38,12 +79,13 @@ import openerplib
 #from tests import *
 from tests.openerplib import db
 
-from scripts.common import Synchro, HQ, Coordo, Project, Project2
+from scripts.common import *
 
 #Load tests procedures
 if sys.version_info >= (2, 7):
     import unittest
 else:
+    # Needed for setUpClass and skipIf methods
     import unittest27 as unittest
 
 try:
@@ -51,23 +93,20 @@ try:
 except:
     import pdb
 
+skipCreation = False
+skipModules = False
+skipModuleUpdate = False
+skipUniUser = False
+skipGroups = False
+skipPropInstance = False
+skipConfig = False
+skipRegister = False
+skipSync = False
+skipModuleData = False
+skipPartner = False
 
-creation_only = bool(__name__+'.creation_only' in sys.argv)
-configuration_only = bool(__name__+'.configuration_only' in sys.argv)
 
-skipCreation = configuration_only
-skipModules = configuration_only
-skipModuleUpdate = configuration_only
-skipUniUser = configuration_only
-
-skipGroups = creation_only
-skipPropInstance = creation_only
-skipConfig = creation_only
-skipRegister = creation_only
-skipSync = creation_only
-skipModuleData = creation_only
-skipPartner = creation_only
-
+# Fake TestCase to enable/disable quickly some tests
 class creation_only(unittest.TestCase):
     pass
 
@@ -75,9 +114,30 @@ class configuration_only(unittest.TestCase):
     pass
 
 
+# Determin skip flags if needed
+if not __name__ == '__main__':
+    bool_creation_only = bool(__name__+'.creation_only' in sys.argv)
+    bool_configuration_only = bool(__name__+'.configuration_only' in sys.argv)
+
+    skipCreation = bool_configuration_only
+    skipModules = bool_configuration_only
+    skipModuleUpdate = bool_configuration_only
+    skipUniUser = bool_configuration_only
+
+    skipGroups = bool_creation_only
+    skipPropInstance = bool_creation_only
+    skipConfig = bool_creation_only
+    skipRegister = bool_creation_only
+    skipSync = bool_creation_only
+    skipModuleData = bool_creation_only
+    skipPartner = bool_creation_only
+
+
+# Base of database creation
 class db_creation(object):
 
-    buggy_models = ('sale.price.setup',)
+    #buggy_models = ['sale.price.setup'] # Fixed in unifield-wm > SP5
+    buggy_models = []
 
     base_wizards = {
         'base.setup.config' : {
@@ -99,10 +159,11 @@ class db_creation(object):
     }
 
     db = None
+    parent_name = None
 
     def setUp(self):
         if self.db is None:
-            raise Exception("Bad use of class")
+            self.fail("Bad use of class")
 
     @unittest.skipIf(skipCreation, "Creation desactivated")
     def test_00_drop(self):
@@ -134,9 +195,10 @@ class db_creation(object):
         model = 'msf_instance.setup'
         while model != 'ir.ui.menu':
             try:
+                # skip account.installer if no parent_name providen (typically: HQ instance)
                 if model in self.buggy_models or \
-                   (model == 'account.installer' and self.db is not HQ) or \
-                   (model == 'msf_instance.setup' and self.db in (Synchro,)):
+                   (model == 'account.installer' and self.parent_name is not None) or \
+                   (model == 'msf_instance.setup' and self.db is Synchro):
                     proxy = self.db.get(model)
                     answer = proxy.action_skip([])
                 elif model == 'msf_instance.setup':
@@ -161,7 +223,9 @@ class db_creation(object):
  
     # Create Cost Center and Proprietary Instance for Test Cases
     def make_prop_instance(self, prop_instance=None):
-        if not HQ.test('account.analytic.account', [('code','=',self.db.name)]):
+        try:
+            cost_center_id = HQ.search_data('account.analytic.account', [('code','=',self.db.name)])[0]
+        except IndexError:
             data = {
                 'name' : self.db.name,
                 'code' : self.db.name,
@@ -186,6 +250,7 @@ class db_creation(object):
                 self.sync(HQ)
 
 
+# Specific Sync Server creation
 class server_creation(db_creation, unittest.TestCase):
     db = Synchro
 
@@ -210,10 +275,8 @@ class server_creation(db_creation, unittest.TestCase):
         Synchro.activate('sync_server.sync_rule', [])
 
 
+# Base for instances creation ('is not Synchro')
 class client_creation(db_creation):
-
-    entity_ids = None
-
     @unittest.skipIf(skipModuleUpdate, "update_client installation desactivated")
     def test_10_install_update_client(self):
         self.db.connect('admin')
@@ -240,15 +303,12 @@ class client_creation(db_creation):
         entities = Synchro.get('sync.server.entity')
         entity_ids = entities.search([('name','=',self.db.name)])
         if not len(entity_ids) == 1:
-            raise Exception, "Cannot find validation request for entity %s!" % self.db.name
+            self.fail("Cannot find validation request for entity %s!" % self.db.name)
         # Set parent
-        if self.db is not HQ:
-            if self.db is Coordo:
-                parents = entities.search([('name','=',HQ.name)])
-            else:
-                parents = entities.search([('name','=',Coordo.name)])
+        if self.parent_name is not None:
+            parents = entities.search([('name','=',self.parent_name)])
             if not parents:
-                raise Exception('Cannot find parent entity for %s!' % self.db.name)
+                self.fail('Cannot find parent entity for %s!' % self.db.name)
             entities.write(entity_ids, {'parent_id':parents[0]})
         # Server accept validation
         entities.validate_action(entity_ids)
@@ -287,20 +347,20 @@ class client_creation(db_creation):
         })
 
 
+# Specific HQ creation
 class hq_creation(client_creation, unittest.TestCase):
     db = HQ
 
     @unittest.skipIf(skipPropInstance, "Proprietary Instance creation desactivated")
     def test_40_prop_instance(self):
         HQ.connect('admin')
-        if not HQ.search_data('msf.instance', [('instance','=',self.db.name)]):
-            self.make_prop_instance({
-                'level' : 'section',
-                'reconcile_prefix' : '#1',
-                'move_prefix' : '#1',
-                #'reconcile_prefix' : 'HQ',
-                #'move_prefix' : 'HQ',
-            })
+        if HQ.search_data('msf.instance', [('instance','=',self.db.name)]):
+            self.skipTest("Proprietary Instance already exists")
+        self.make_prop_instance({
+            'level' : 'section',
+            'reconcile_prefix' : '#1',
+            'move_prefix' : '#1',
+        })
 
     @unittest.skipIf(skipConfig, "Modules configuration desactivated")
     def test_41_configuration_wizards(self):
@@ -313,8 +373,27 @@ class hq_creation(client_creation, unittest.TestCase):
         self.db.module('msf_sync_data_hq').install().do()
 
 
-class coordo_creation(client_creation, unittest.TestCase):
-    db = Coordo
+# Replicable class to create coordo n
+class coordon_creation(client_creation):
+    index = None
+    prefix = None
+    db = None
+
+    @classmethod
+    def setUpClass(cls):
+        name = "%s_COORDO_%02d" % (config.prefix, cls.index)
+        cls.db = db_instance(
+            server=client,
+            name=name,
+            synchro={
+                'protocol' : 'netrpc',
+                'host' : config.server_host,
+                'port' : config.netrpc_port,
+                'database' : Synchro.name,
+                'login' : name,
+                'password' : name,
+            },
+        )
 
     @unittest.skipIf(skipGroups, "Group creation desactivated")
     def test_31_make_groups_coordo(self):
@@ -329,15 +408,14 @@ class coordo_creation(client_creation, unittest.TestCase):
     @unittest.skipIf(skipPropInstance, "Proprietary Instance creation desactivated")
     def test_40_prop_instance(self):
         HQ.connect('admin')
-        if not HQ.search_data('msf.instance', [('instance','=',self.db.name)]):
-            self.make_prop_instance({
-                'level' : 'coordo',
-                'reconcile_prefix' : '#2',
-                'move_prefix' : '#2',
-                #'reconcile_prefix' : 'C1',
-                #'move_prefix' : 'C1',
-                'parent_id' : HQ.search_data('msf.instance', [('instance','=',HQ.name)])[0],
-            })
+        if HQ.search_data('msf.instance', [('instance','=',self.db.name)]):
+            self.skipTest("Proprietary Instance already exists")
+        self.make_prop_instance({
+            'level' : 'coordo',
+            'reconcile_prefix' : self.prefix,
+            'move_prefix' : self.prefix,
+            'parent_id' : HQ.search_data('msf.instance', [('instance','=',HQ.name)])[0],
+        })
 
     @unittest.skipIf(skipConfig, "Modules configuration desactivated")
     def test_60_configuration_wizards(self):
@@ -350,7 +428,28 @@ class coordo_creation(client_creation, unittest.TestCase):
         self.db.module('msf_sync_data_coordo').install().do()
 
 
-class project_base_creation(client_creation):
+# Replicable class to create project n
+class projectn_creation(client_creation):
+    index = None
+    prefix = None
+    db = None
+
+    @classmethod
+    def setUpClass(cls):
+        name = "%s_PROJECT_%02d" % (config.prefix, cls.index)
+        cls.db = db_instance(
+            server=client,
+            name=name,
+            synchro={
+                'protocol' : 'netrpc',
+                'host' : config.server_host,
+                'port' : config.netrpc_port,
+                'database' : Synchro.name,
+                'login' : name,
+                'password' : name,
+            },
+        )
+
     @unittest.skipIf(skipGroups, "Group creation desactivated")
     def test_31_make_groups_project(self):
         Synchro.connect('admin')
@@ -361,48 +460,49 @@ class project_base_creation(client_creation):
             'entity_ids' : [(4,entity_ids[0])],
         })
 
+    @unittest.skipIf(skipPropInstance, "Proprietary Instance creation desactivated")
+    def test_40_prop_instance(self):
+        HQ.connect('admin')
+        if HQ.search_data('msf.instance', [('instance','=',self.db.name)]):
+            self.skipTest("Proprietary Instance already exists")
+        self.make_prop_instance({
+            'level' : 'project',
+            'reconcile_prefix' : self.prefix,
+            'move_prefix' : self.prefix,
+            'parent_id' : HQ.search_data('msf.instance', [('instance','=',self.parent_name)])[0],
+        })
+
     @unittest.skipIf(skipConfig, "Modules configuration desactivated")
     def test_60_configuration_wizards(self):
         self.db.connect('admin')
         self.configure()
 
 
-class project_creation(project_base_creation, unittest.TestCase):
-    db = Project
-
-    @unittest.skipIf(skipPropInstance, "Proprietary Instance creation desactivated")
-    def test_40_prop_instance(self):
-        HQ.connect('admin')
-        if not HQ.search_data('msf.instance', [('instance','=',self.db.name)]):
-            self.make_prop_instance({
-                'level' : 'project',
-                'reconcile_prefix' : '#3',
-                'move_prefix' : '#3',
-                #'reconcile_prefix' : 'P1',
-                #'move_prefix' : 'P1',
-                'parent_id' : HQ.search_data('msf.instance', [('instance','=',Coordo.name)])[0],
-            })
-
-
-class project2_creation(project_base_creation, unittest.TestCase):
-    db = Project2
-
-    @unittest.skipIf(skipPropInstance, "Proprietary Instance creation desactivated")
-    def test_40_prop_instance(self):
-        HQ.connect('admin')
-        if not HQ.search_data('msf.instance', [('instance','=',self.db.name)]):
-            self.make_prop_instance({
-                'level' : 'project',
-                'reconcile_prefix' : '#4',
-                'move_prefix' : '#4',
-                #'reconcile_prefix' : 'P2',
-                #'move_prefix' : 'P2',
-                'parent_id' : HQ.search_data('msf.instance', [('instance','=',Coordo.name)])[0],
-            })
-
-
 # Base Install
-test_cases = (server_creation, hq_creation, coordo_creation, project_creation, project2_creation)
+test_cases = [server_creation, hq_creation]
+
+
+# Create Coordo classes
+for i in range(1, coordo_count+1):
+    test_cases.append( type("coordo%02d_creation" % i, (coordon_creation,unittest.TestCase), {
+        'prefix' : hex(i+1)[2:].rjust(2,'#'),
+        'index' : i,
+        'parent_name' : HQ.name,
+    }) )
+    # Make testcase visible for importation
+    globals()[test_cases[-1].__name__] = test_cases[-1]
+
+
+# Create Project classes
+for i in range(1, project_count+1):
+    test_cases.append( type("project%02d_creation" % i, (projectn_creation,unittest.TestCase), {
+        'prefix' : hex(i+1+coordo_count)[2:].rjust(2,'#'),
+        'index' : i,
+        'parent_name' : "%s_COORDO_%02d" % (config.prefix, \
+                        (((i-1) / (project_count/coordo_count)) % coordo_count + 1)),
+    }) )
+    globals()[test_cases[-1].__name__] = test_cases[-1]
+
 
 def load_tests(loader, tests, pattern):
     suite = unittest.TestSuite()
@@ -410,6 +510,7 @@ def load_tests(loader, tests, pattern):
         tests = loader.loadTestsFromTestCase(test_class)
         suite.addTests(tests)
     return suite
+
 
 if __name__ == '__main__':
     unittest.main(failfast=True, verbosity=2)

@@ -7,6 +7,8 @@ from tests.openerplib import db
 
 import config
 
+__all__ = ['server', 'client', 'db_instance', 'Synchro', 'HQ', 'Coordo', 'Project', 'Project2']
+
 server, client = None, None
 
 stdout.write("Establishing connections to the server... ")
@@ -37,8 +39,11 @@ def sync(test, db):
     else:
         return True
 
-class db_instance(type):
+class db_instance(object):
     instance = None
+
+    def __init__(self, server, name, synchro):
+        self.server, self.name, self.synchro = server, name, synchro
 
     def connect(cls, login=None, password=None):
         #stderr.write("\n!! Initialization required "+cls.name+" !!\n")
@@ -61,84 +66,65 @@ class db_instance(type):
         real_attr = getattr(cls.instance, attr)
         return real_attr
 
-class Synchro:
-    __metaclass__ = db_instance
+Synchro = db_instance(
+    server=server,
+    name="%s_SYNC_SERVER" % (config.prefix),
+    synchro=None,
+)
 
-    server = server
-    name = "%s_SYNC_SERVER" % (config.prefix)
-
-    def __init__(self):
-        raise Exception, 'This class must not be instanced'
-
-class HQ:
-    __metaclass__ = db_instance
-
-    server = client
-    name = "%s_HQ" % (config.prefix)
-    synchro = {
+hq_name = "%s_HQ" % (config.prefix)
+HQ = db_instance(
+    server=client,
+    name=hq_name,
+    synchro={
         'protocol' : 'netrpc',
         'host' : config.server_host,
         'port' : config.netrpc_port,
         'database' : Synchro.name,
-        'login' : name,
-        'password' : name,
+        'login' : hq_name,
+        'password' : hq_name,
     }
+)
 
-    def __init__(self):
-        raise Exception, 'This class must not be instanced'
-
-class Coordo:
-    __metaclass__ = db_instance
-
-    server = client
-    name = "%s_COORDO" % (config.prefix)
-    synchro = {
+coordo_name = "%s_COORDO_01" % (config.prefix)
+Coordo = db_instance(
+    server=client,
+    name=coordo_name,
+    synchro={
         'protocol' : 'netrpc',
         'host' : config.server_host,
         'port' : config.netrpc_port,
         'database' : Synchro.name,
-        'login' : name,
-        'password' : name,
+        'login' : coordo_name,
+        'password' : coordo_name,
     }
+)
 
-    server = client
-    def __init__(self):
-        raise Exception, 'This class must not be instanced'
-
-class Project:
-    __metaclass__ = db_instance
-
-    server = client
-    name = "%s_PROJECT" % (config.prefix)
-    synchro = {
+project_name = "%s_PROJECT_01" % (config.prefix)
+Project = db_instance(
+    server=client,
+    name=project_name,
+    synchro={
         'protocol' : 'netrpc',
         'host' : config.server_host,
         'port' : config.netrpc_port,
         'database' : Synchro.name,
-        'login' : name,
-        'password' : name,
+        'login' : project_name,
+        'password' : project_name,
     }
+)
 
-    server = client
-    def __init__(self):
-        raise Exception, 'This class must not be instanced'
-
-class Project2:
-    __metaclass__ = db_instance
-
-    server = client
-    name = "%s_PROJECT2" % (config.prefix)
-    synchro = {
+project2_name = "%s_PROJECT_02" % (config.prefix)
+Project2 = db_instance(
+    server=client,
+    name=project2_name,
+    synchro={
         'protocol' : 'netrpc',
         'host' : config.server_host,
-        #'port' : config.server_port, ## XMLRPC port
         'port' : config.netrpc_port,
         'database' : Synchro.name,
-        'login' : name,
-        'password' : name,
+        'login' : project2_name,
+        'password' : project2_name,
     }
-
-    server = client
-    def __init__(self):
-        raise Exception, 'This class must not be instanced'
+)
 
