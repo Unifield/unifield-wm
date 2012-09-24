@@ -242,7 +242,7 @@ class iller_partner_address(osv.osv):
         if 'phone' in data:
             data['phone'] = re.sub('\D', '', data.get('phone', ''))
 
-        return super(iller_partner_address, self).write(cr, uid, data, context=context)
+        return super(iller_partner_address, self).write(cr, uid, ids, data, context=context)
 
 iller_partner_address()
 
