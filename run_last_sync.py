@@ -19,38 +19,42 @@ def sync(db):
         ids = monitor.search([], 0, 1, '"end" desc')
         print 'Synchronization process of database "%s" failed!\n%s' % (db.db_name,monitor.read(ids, ['error'])[0]['error'])
 
-def sync_all():
-    sync(HQ)
-    for i in range(1, coordo_count+1):
+
+def sync_coordo():
+    for i in range(1, coordo_count + 1):
         name = "%s_COORDO_%02d" % (config.prefix, i)
-        db = db_instance(
-            server=client,
-            name=name,
+        db = db_instance(server=client, 
+            name=name, 
             synchro={
-                'protocol' : 'netrpc',
-                'host' : config.server_host,
-                'port' : config.netrpc_port,
-                'database' : Synchro.name,
-                'login' : name,
-                'password' : name,
-            },
-        )
+                'protocol':'netrpc', 
+                'host':config.server_host, 
+                'port':config.netrpc_port, 
+                'database':Synchro.name, 
+                'login':name, 
+                'password':name})
         sync(db)
-    for i in range(1, project_count+1):
+    return True
+
+
+def sync_projects():
+    for i in range(1, project_count + 1):
         name = "%s_PROJECT_%02d" % (config.prefix, i)
-        db = db_instance(
-            server=client,
-            name=name,
+        db = db_instance(server=client, 
+            name=name, 
             synchro={
-                'protocol' : 'netrpc',
-                'host' : config.server_host,
-                'port' : config.netrpc_port,
-                'database' : Synchro.name,
-                'login' : name,
-                'password' : name,
-            },
-        )
+                'protocol':'netrpc', 
+                'host':config.server_host, 
+                'port':config.netrpc_port, 
+                'database':Synchro.name, 
+                'login':name, 
+                'password':name})
         sync(db)
+    return True
+
+def sync_all():
+#    sync(HQ)
+    sync_coordo()
+    sync_projects()
 
 if __name__ == '__main__':
     if len(sys.argv) > 1:
@@ -59,3 +63,5 @@ if __name__ == '__main__':
             sync(db)
     else:
         sync_all()
+        
+    print '\nSynchronization process terminated'
