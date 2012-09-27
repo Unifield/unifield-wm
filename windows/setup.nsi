@@ -88,7 +88,6 @@
 
 !define UNINSTALL_REGISTRY_KEY_SERVER "${UNINSTALL_BASE_REGISTRY_KEY}\OpenERP Server ${MAJOR_VERSION}.${MINOR_VERSION}"
 !define UNINSTALL_REGISTRY_KEY_WEB_CLIENT "${UNINSTALL_BASE_REGISTRY_KEY}\OpenERP Web Client ${MAJOR_VERSION}.${MINOR_VERSION}"
-!define UNINSTALL_REGISTRY_KEY_GTK_CLIENT "${UNINSTALL_BASE_REGISTRY_KEY}\OpenERP GTK Client ${MAJOR_VERSION}.${MINOR_VERSION}"
 
 !define REGISTRY_KEY "Software\${DISPLAY_NAME}"
 
@@ -143,7 +142,6 @@ Var HWNDPostgreSQLPassword
 !define POSTGRESQL_EXE "${STATIC_PATH}\postgresql-8.4.13-1-windows.exe"
 
 !define OPENERP_SERVER_SETUP 'openerp-server-setup-${VERSION}.exe'
-!define OPENERP_CLIENT_SETUP 'openerp-client-setup-${VERSION}.exe'
 !define OPENERP_WEB_SETUP 'openerp-web-setup-${VERSION}.exe'
 
 !define OPENERP_SERVER_EXTRA "${STATIC_PATH}\server-extra"
@@ -187,7 +185,6 @@ Page Custom ShowPostgreSQL LeavePostgreSQL
 
 ; English
 LangString DESC_OpenERP_Server ${LANG_ENGLISH} "Install the OpenERP Server with all the OpenERP standard modules."
-LangString DESC_OpenERP_GTK_Client ${LANG_ENGLISH} "Install the OpenERP GTK Desktop Client if you want to access the OpenERP Server with a desktop application."
 LangString DESC_OpenERP_Web_Client ${LANG_ENGLISH} "Install the OpenERP Web Client if you want to access the OpenERP Server with your internet browser."
 LangString DESC_PostgreSQL ${LANG_ENGLISH} "Install the PostgreSQL RDBMS used by OpenERP."
 LangString DESC_FinishPage_Link ${LANG_ENGLISH} "Contact OpenERP for Partnership and/or Support"
@@ -204,17 +201,14 @@ LangString DESC_PostgreSQL_Username ${LANG_ENGLISH} "Username"
 LangString DESC_PostgreSQL_Password ${LANG_ENGLISH} "Password"
 LangString Profile_AllInOne ${LANG_ENGLISH} "All In One"
 LangString Profile_Server ${LANG_ENGLISH} "Server only"
-LangString Profile_GTK_Client ${LANG_ENGLISH} "Desktop environment"
 LangString Profile_Web_Client ${LANG_ENGLISH} "Web environment"
 LangString TITLE_OpenERP_Server ${LANG_ENGLISH} "OpenERP Server"
-LangString TITLE_OpenERP_GTK_Client ${LANG_ENGLISH} "OpenERP GTK Desktop Client"
 LangString TITLE_OpenERP_Web_Client ${LANG_ENGLISH} "OpenERP Web Client"
 LangString TITLE_PostgreSQL ${LANG_ENGLISH} "PostgreSQL Database"
 LangString DESC_FinishPageText ${LANG_ENGLISH} "Connect to OpenERP Web"
 
 ; French
 LangString DESC_OpenERP_Server ${LANG_FRENCH} "Installation du Serveur OpenERP avec tous les modules OpenERP standards."
-LangString DESC_OpenERP_GTK_Client ${LANG_FRENCH} "Installation du Client OpenERP GTK Desktop si vous d?sirez acc?der ? OpenERP avec une application bureau."
 LangString DESC_OpenERP_Web_Client ${LANG_FRENCH} "Installation du Client OpenERP Web si vous d?siez acc?der ? OpenERP avec votre navigateur web"
 LangString DESC_PostgreSQL ${LANG_FRENCH} "Installation de la base de donn?es PostgreSQL utilis?e par OpenERP."
 LangString DESC_FinishPage_Link ${LANG_FRENCH} "Contactez OpenERP pour un Partenariat et/ou du Support"
@@ -231,17 +225,14 @@ LangString DESC_PostgreSQL_Username ${LANG_FRENCH} "Utilisateur"
 LangString DESC_PostgreSQL_Password ${LANG_FRENCH} "Mot de passe"
 LangString Profile_AllInOne ${LANG_FRENCH} "All In One"
 LangString Profile_Server ${LANG_FRENCH} "Seulement le serveur"
-LangString Profile_GTK_Client ${LANG_FRENCH} "Environement Bureau"
 LangString Profile_Web_Client ${LANG_FRENCH} "Environement Web"
 LangString TITLE_OpenERP_Server ${LANG_FRENCH} "Serveur OpenERP"
-LangString TITLE_OpenERP_GTK_Client ${LANG_FRENCH} "OpenERP Client GTK"
 LangString TITLE_OpenERP_Web_Client ${LANG_FRENCH} "OpenERP Client Web"
 LangString TITLE_PostgreSQL ${LANG_FRENCH} "Installation du serveur de base de donn?es PostgreSQL"
 LangString DESC_FinishPageText ${LANG_FRENCH} "Se connecter à OpenERP Web"
 
 InstType $(Profile_AllInOne)
 InstType $(Profile_Server)
-InstType $(Profile_GTK_Client)
 InstType $(Profile_Web_Client)
 
 Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
@@ -272,13 +263,6 @@ Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
 
 SectionEnd
     
-Section $(TITLE_OpenERP_GTK_Client) SectionOpenERP_GTK_Client
-    SectionIn 1 3
-    SetOutPath "$TEMP"
-    File "files\${OPENERP_CLIENT_SETUP}"
-    ExecWait '"$TEMP\${OPENERP_CLIENT_SETUP}" /S /D=$INSTDIR\Client'
-SectionEnd
-
 Section $(TITLE_OpenERP_Web_Client) SectionOpenERP_Web_Client
     SectionIn 1 4
     SetOutPath "$TEMP"
@@ -337,7 +321,6 @@ SectionEnd
 
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
     !insertmacro MUI_DESCRIPTION_TEXT ${SectionOpenERP_Server} $(DESC_OpenERP_Server)
-    !insertmacro MUI_DESCRIPTION_TEXT ${SectionOpenERP_GTK_Client} $(DESC_OpenERP_GTK_Client)
     !insertmacro MUI_DESCRIPTION_TEXT ${SectionOpenERP_Web_Client} $(DESC_OpenERP_Web_Client)
     !insertmacro MUI_DESCRIPTION_TEXT ${SectionPostgreSQL} $(DESC_PostgreSQL)
 !insertmacro MUI_FUNCTION_DESCRIPTION_END
@@ -354,11 +337,6 @@ Section "Uninstall"
     Pop $R0
 
     ReadRegStr $0 HKLM "${UNINSTALL_REGISTRY_KEY_WEB_CLIENT}" "UninstallString"
-    ExecWait '"$0" /S'
-
-    !insertmacro IfKeyExists "HKLM" "${UNINSTALL_REGISTRY_KEY_GTK_CLIENT}" "UninstallString"
-    Pop $R0
-    ReadRegStr $0 HKLM "${UNINSTALL_REGISTRY_KEY_GTK_CLIENT}" "UninstallString"
     ExecWait '"$0" /S'
 
     #Rmdir /r "$INSTDIR"
@@ -498,10 +476,6 @@ Function ComponentLeave
     SectionGetFlags ${SectionPostgreSQL} $0
     IntOp $0 $0 & ${SF_SELECTED}
     IntCmp $0 ${SF_SELECTED} DontInstallPostgreSQL
-
-    SectionGetFlags ${SectionOpenERP_GTK_Client} $0
-    IntOp $0 $0 & ${SF_SELECTED}
-    IntCmp $0 ${SF_SELECTED} Done
 
     SectionGetFlags ${SectionOpenERP_Web_Client} $0
     IntOp $0 $0 & ${SF_SELECTED}

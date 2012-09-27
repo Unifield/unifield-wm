@@ -69,8 +69,6 @@ def update(o):
     if o.client_web_branch:
         branch_or_update(o.client_web_branch, o.client_web_dir)
         branch_revert_and_apply_patches(o.client_web_dir, o.client_web_patches)
-    branch_or_update(o.client_branch,o.client_dir)
-    branch_revert_and_apply_patches(o.client_dir, o.client_patches)
 
 def rsync(o):
     exclude_rsync = [ '--exclude', '.bzr',
@@ -86,11 +84,9 @@ def rsync(o):
     #    system(["rsync","-a","--exclude",".bzr", "%s/addons/"%o.web_dir, o.work_addons])
     if o.client_web_branch:
         system(["rsync","-a","--exclude",".bzr", "%s/" % o.client_web_dir, o.work_client_web])
-    system(["rsync","-a","--exclude",".bzr", "%s/"%o.client_dir, o.work_client])
 
 def version(o):
     open(join(o.work,'bin','release.py'),'a').write('version = "%s-%s"'%(o.version,o.timestamp))
-    open(join(o.work_client,'bin','release.py'),'a').write('version = "%s-%s"'%(o.version,o.timestamp))
     open(join(o.work_client_web,'openobject','release.py'), 'a').write('version = "%s-%s"'%(o.version,o.timestamp))
 
 def sdist(o):
@@ -205,7 +201,6 @@ class KVMWinBuildAllInOneExe(KVM):
         self.login = 'Naresh'
         self.ssh("mkdir -p build")
         self.rsync('%s/ Naresh@%s:build/server/'% (self.o.work, self.remoteip))
-        self.rsync('%s/ Naresh@%s:build/client/'% (self.o.work_client, self.remoteip))
         self.rsync('%s/ Naresh@%s:build/web/' % (self.o.work_client_web, self.remoteip))
         f = open('windows/Makefile.version','w')
         f.write('MAJOR_VERSION=%s\n' % (self.o.major,))
@@ -301,6 +296,8 @@ def options():
     op.add_option("", "--vm-debian-ssh-key", default='/home/odoo/vm/debian6/debian6_id_rsa', help="%default")
     op.add_option("", "--vm-winxp-image", default='/home/odoo/vm/winxp26/winxp26.vdi', help="%default")
     op.add_option("", "--vm-winxp-ssh-key", default='/home/odoo/vm/winxp26/id_rsa', help="%default")
+    op.add_option("", "--vm-winxp-port", default=10022, help="%default"),
+    op.add_option("", "--vm-winxp-host", default='127.0.0.1', help="%default"),
     op.add_option("", "--build-only-gtk", default=False, action='store_true', help="%default")
     op.add_option("", "--build-only-allinone", default=False, action='store_true', help="%default")
     (o, args) = op.parse_args()
@@ -349,7 +346,7 @@ def main():
     rsync(o)
     version(o)
     if os.path.isfile(o.vm_winxp_image):
-        KVMWinBuildAllInOneExe(o, o.vm_winxp_image, o.vm_winxp_ssh_key, ip='127.0.0.1', port='10022').start()
+        KVMWinBuildAllInOneExe(o, o.vm_winxp_image, o.vm_winxp_ssh_key, ip=o.vm_winxp_host, port=o.vm_winxp_port).start()
     return
 #    to_build = ['winexe', 'wintest', 'wingtk', 'source', 'debtest', 'rpm', 'deb']
 #    if o.build_only_gtk:
