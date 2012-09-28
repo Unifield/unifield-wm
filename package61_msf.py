@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import glob
+import re
 import os
 import optparse
 import signal
@@ -36,6 +37,29 @@ def system(l,chdir=None):
         os.chdir(cwd)
     return rc
 
+class chdir_context(object):
+    def __init__(self, new_directory=None):
+        self.new_directory = new_directory
+        self.old_directory = None
+
+    def __enter__(self):
+        if self.new_directory:
+            self.old_directory = os.getcwd()
+            os.chdir(self.new_directory)
+
+    def __exit__(self, *exc_info):
+        if self.old_directory:
+            os.chdir(self.old_directory)
+
+def system_w_output(l, chdir=None):
+    with chdir_context(chdir):
+        process = subprocess.Popen(l, stdout=subprocess.PIPE)
+        output, unused_err = process.communicate()
+        retcode = process.poll()
+        if retcode:
+            raise subprocess.CalledProcessError(retcode, l[0], output=output)
+        return output
+
 #----------------------------------------------------------
 # Stages
 #----------------------------------------------------------
@@ -58,17 +82,36 @@ def branch_revert_and_apply_patches(d, patches):
     for p in patches:
         system('patch -p0 < %s' % (p,), d)
 
+def branch_get_summary(prefix, d):
+    branch_info = system_w_output(['bzr', 'info', '-q'], d)
+    branch_location = re.findall('parent branch: (.*)$', branch_info, re.M)[0]
+    branch_revno = system_w_output(['bzr', 'revno'], d)
+    summary = "%s:\n    URL: %s\n    REV: %s" % (prefix, branch_location, branch_revno)
+    return summary
+
 def update(o):
     for addon_branch, addon_dir in zip(o.addons_branches, o.addons_dirs):
         branch_or_update(addon_branch,addon_dir)
     branch_or_update(o.server_branch,o.server_dir)
     branch_revert_and_apply_patches(o.server_dir, o.server_patches)
-    if o.web_branch:
-        branch_or_update(o.web_branch,o.web_dir)
-        branch_revert_and_apply_patches(o.web_dir, o.web_patches)
     if o.client_web_branch:
         branch_or_update(o.client_web_branch, o.client_web_dir)
         branch_revert_and_apply_patches(o.client_web_dir, o.client_web_patches)
+
+def update_branch_summary(o):
+    s = ['PACKAGING:']
+    s.append(branch_get_summary('packging branch', '.'))
+    s.append('ADDONS:')
+    for i, (addon_branch, addon_dir) in enumerate(zip(o.addons_branches, o.addons_dirs)):
+        s.append(branch_get_summary(addon_branch,addon_dir))
+    s.append('SERVER:')
+    s.append(branch_get_summary(o.server_branch,o.server_dir))
+    #branch_revert_and_apply_patches(o.server_dir, o.server_patches)
+    if o.client_web_branch:
+        s.append('WEB CLIENT:')
+        s.append(branch_get_summary(o.client_web_branch, o.client_web_dir))
+        #branch_revert_and_apply_patches(o.client_web_dir, o.client_web_patches)
+    open(os.path.join('windows', 'static', 'server-extra', 'PKGINFO'), 'w').write('\n'.join(s))
 
 def rsync(o):
     exclude_rsync = [ '--exclude', '.bzr',
@@ -343,6 +386,7 @@ def main():
     o = options()
     init(o)
     update(o)  # update disabled since not bzr+ssh:// access
+    update_branch_summary(o)
     rsync(o)
     version(o)
     if os.path.isfile(o.vm_winxp_image):
