@@ -575,10 +575,10 @@ Function func_PostgreSQL_TestConn_Click
         ExecWait $R6 $R8
         ; check return code and display status (success / fail)
         StrCmp $R8 0 testok
-        MessageBox MB_OK "$(MSG_ConnectionFAILED) $R8"
+        MessageBox MB_OK "$(MSG_ConnectionFAILED)"
         Goto testdone
         testok:
-            MessageBox MB_OK "$(MSG_ConnectionOK) $R8"
+            MessageBox MB_OK "$(MSG_ConnectionOK)"
         testdone:
         ; clear connection password
         StrCpy $R5 ""
