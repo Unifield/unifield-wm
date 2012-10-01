@@ -51,4 +51,5 @@ standalone:	server web
 allinone:	standalone
 	$(LAUNCH_MAKENSIS)
 	cp ./openerp-*.exe $(FILES_DIRECTORY)/openerp-allinone-setup-$(MAJOR_VERSION).$(MINOR_VERSION)-$(BUILD_VERSION)-r$(REVISION_VERSION).exe
+	cp ./static/server-extra/PKGINFO $(FILES_DIRECTORY)/openerp-allinone-setup-$(MAJOR_VERSION).$(MINOR_VERSION)-$(BUILD_VERSION)-r$(REVISION_VERSION).txt
 
