@@ -157,8 +157,8 @@ class KVM(object):
             ip = '127.0.0.1'
         if port is None:
             port = '10022'
-        self.remoteip = ip
-        self.remoteport = port
+        self.remoteip = str(ip)
+        self.remoteport = str(port)
         self.o = o
         self.image = image
         self.ssh_key = ssh_key
