@@ -91,7 +91,7 @@
 
 !define REGISTRY_KEY "Software\${DISPLAY_NAME}"
 
-!define DEFAULT_POSTGRESQL_INSTPATH ''
+!define DEFAULT_POSTGRESQL_INSTPATH 'D:\MSF data\Unifield\PostgreSQL'
 !define DEFAULT_POSTGRESQL_HOSTNAME 'localhost'
 !define DEFAULT_POSTGRESQL_PORT 5432
 !define DEFAULT_POSTGRESQL_USERNAME 'openpg'
@@ -370,6 +370,8 @@ Function .onInit
 
     Pop $R0
 
+    StrCpy $INSTDIR "$PROGRAMFILES\msf\Unifield"
+
     StrCpy $Option_AllInOne 0
     StrCpy $HasPostgreSQL 0
 
@@ -378,7 +380,7 @@ Function .onInit
     StrCpy $TextPostgreSQLUsername ${DEFAULT_POSTGRESQL_USERNAME}
     StrCpy $TextPostgreSQLPassword ${DEFAULT_POSTGRESQL_PASSWORD}
     StrCpy $TextPostgreSQLInstPath "${DEFAULT_POSTGRESQL_INSTPATH}"
-    StrCpy $CmdLPostgreSQLInstPath ""
+    StrCpy $CmdLPostgreSQLInstPath "${DEFAULT_POSTGRESQL_INSTPATH}"
 
     Push $R0
     ${GetOptions} $cmdLineParams '/allinone' $R0
