@@ -23,3 +23,4 @@ CLIWEB_BRANCH=lp:~unifield-team/unifield-web/aio-dsp5rc3
         --client-web-branch=$CLIWEB_BRANCH \
         $@
 
+chmod 0644 ./msf/pkg/openerp-allinone-setup-6.0-*.txt
