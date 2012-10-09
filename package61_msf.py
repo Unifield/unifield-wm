@@ -257,6 +257,8 @@ class KVMWinBuildAllInOneExe(KVM):
         self.ssh("cd build/windows; ~/run make allinone;")
         # For an unknown fucking reason it seems that files timestamp matters
         self.rsync('Naresh@%s:build/windows/files/ %s/'% (self.remoteip, self.o.pkg,) ,'')
+        os.chmod(join(self.o.pkg, 'openerp-allinone-setup-%(major)s.%(minor)s-%(timestamp)s-r1.txt' % \
+                                  dict([(x, getattr(self.o, x)) for x in ['major','minor','timestamp']])), 0644)
         print "KVMWinBuildExe.run(): done"
 
 class KVMWinTestExe(KVM):
