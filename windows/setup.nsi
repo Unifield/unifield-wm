@@ -656,5 +656,5 @@ Function ComponentLeave
 FunctionEnd
 
 Function LaunchLink
-    ExecShell "open" "http://localhost:8080/"
+    ExecShell "open" "http://localhost:8061/"
 FunctionEnd
