@@ -106,7 +106,7 @@ ShowInstDetails show
 
 XPStyle on
 
-InstallDir "$PROGRAMFILES\OpenERP ${MAJOR_VERSION}.${MINOR_VERSION}"
+InstallDir "$PROGRAMFILES\msf\Unifield"
 InstallDirRegKey HKCU "${REGISTRY_KEY}" ""
 
 BrandingText '${PRODUCT_NAME} ${VERSION}'
@@ -369,8 +369,6 @@ Function .onInit
     ClearErrors
 
     Pop $R0
-
-    StrCpy $INSTDIR "$PROGRAMFILES\msf\Unifield"
 
     StrCpy $Option_AllInOne 0
     StrCpy $HasPostgreSQL 0
