@@ -25,21 +25,21 @@ class iller_partner(osv.osv):
             ids = self.search(cr, uid, args, limit=limit, context=context)
         return self.name_get(cr, uid, ids, context)
 
-    def create(self, cr, uid, vals, context={}):
-        if 'reglement' in vals and vals['reglement'] == 'traite':
-            raise osv.except_osv('Erreur', 'La traite a été choisi comme \
-mode de règlement, vous devez donc enregistrer un RIB pour ce client')
+#    def create(self, cr, uid, vals, context={}):
+#        if 'reglement' in vals and vals['reglement'] == 'traite':
+#            raise osv.except_osv('Erreur', 'La traite a été choisi comme \
+#mode de règlement, vous devez donc enregistrer un RIB pour ce client')
+#
+#        return super(iller_partner, self).create(cr, uid, vals, context=context)
 
-        return super(iller_partner, self).create(cr, uid, vals, context=context)
 
-
-    def write(self, cr, uid, ids, vals, context={}):
-        if 'reglement' in vals and vals['reglement'] == 'traite':
-            if not self._verif_rib(cr, uid, ids):
-                raise osv.except_osv('Erreur', 'La traite a été choisi comme \
-mode de règlement, vous devez donc enregistrer un RIB pour ce client')
-
-        return super(iller_partner, self).write(cr, uid, ids, vals, context=context)
+#    def write(self, cr, uid, ids, vals, context={}):
+#        if 'reglement' in vals and vals['reglement'] == 'traite':
+#            if not self._verif_rib(cr, uid, ids):
+#                raise osv.except_osv('Erreur', 'La traite a été choisi comme \
+#mode de règlement, vous devez donc enregistrer un RIB pour ce client')
+#
+#        return super(iller_partner, self).write(cr, uid, ids, vals, context=context)
 
 
     def _get_total_ristourne(self, cr, uid, ids, field_name, args, context={}):
