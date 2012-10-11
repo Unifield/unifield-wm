@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import glob
+import re
 import os
 import optparse
 import signal
@@ -36,6 +37,29 @@ def system(l,chdir=None):
         os.chdir(cwd)
     return rc
 
+class chdir_context(object):
+    def __init__(self, new_directory=None):
+        self.new_directory = new_directory
+        self.old_directory = None
+
+    def __enter__(self):
+        if self.new_directory:
+            self.old_directory = os.getcwd()
+            os.chdir(self.new_directory)
+
+    def __exit__(self, *exc_info):
+        if self.old_directory:
+            os.chdir(self.old_directory)
+
+def system_w_output(l, chdir=None):
+    with chdir_context(chdir):
+        process = subprocess.Popen(l, stdout=subprocess.PIPE)
+        output, unused_err = process.communicate()
+        retcode = process.poll()
+        if retcode:
+            raise subprocess.CalledProcessError(retcode, l[0], output=output)
+        return output
+
 #----------------------------------------------------------
 # Stages
 #----------------------------------------------------------
@@ -58,19 +82,36 @@ def branch_revert_and_apply_patches(d, patches):
     for p in patches:
         system('patch -p0 < %s' % (p,), d)
 
+def branch_get_summary(prefix, d):
+    branch_info = system_w_output(['bzr', 'info', '-q'], d)
+    branch_location = re.findall('parent branch: (.*)$', branch_info, re.M)[0]
+    branch_revno = system_w_output(['bzr', 'revno'], d)
+    summary = "%s:\n    URL: %s\n    REV: %s" % (prefix, branch_location, branch_revno)
+    return summary
+
 def update(o):
     for addon_branch, addon_dir in zip(o.addons_branches, o.addons_dirs):
         branch_or_update(addon_branch,addon_dir)
     branch_or_update(o.server_branch,o.server_dir)
     branch_revert_and_apply_patches(o.server_dir, o.server_patches)
-    if o.web_branch:
-        branch_or_update(o.web_branch,o.web_dir)
-        branch_revert_and_apply_patches(o.web_dir, o.web_patches)
     if o.client_web_branch:
         branch_or_update(o.client_web_branch, o.client_web_dir)
         branch_revert_and_apply_patches(o.client_web_dir, o.client_web_patches)
-    branch_or_update(o.client_branch,o.client_dir)
-    branch_revert_and_apply_patches(o.client_dir, o.client_patches)
+
+def update_branch_summary(o):
+    s = ['PACKAGING:']
+    s.append(branch_get_summary('packging branch', '.'))
+    s.append('ADDONS:')
+    for i, (addon_branch, addon_dir) in enumerate(zip(o.addons_branches, o.addons_dirs)):
+        s.append(branch_get_summary(addon_branch,addon_dir))
+    s.append('SERVER:')
+    s.append(branch_get_summary(o.server_branch,o.server_dir))
+    #branch_revert_and_apply_patches(o.server_dir, o.server_patches)
+    if o.client_web_branch:
+        s.append('WEB CLIENT:')
+        s.append(branch_get_summary(o.client_web_branch, o.client_web_dir))
+        #branch_revert_and_apply_patches(o.client_web_dir, o.client_web_patches)
+    open(os.path.join('windows', 'static', 'server-extra', 'PKGINFO'), 'w').write('\n'.join(s))
 
 def rsync(o):
     exclude_rsync = [ '--exclude', '.bzr',
@@ -86,11 +127,9 @@ def rsync(o):
     #    system(["rsync","-a","--exclude",".bzr", "%s/addons/"%o.web_dir, o.work_addons])
     if o.client_web_branch:
         system(["rsync","-a","--exclude",".bzr", "%s/" % o.client_web_dir, o.work_client_web])
-    system(["rsync","-a","--exclude",".bzr", "%s/"%o.client_dir, o.work_client])
 
 def version(o):
     open(join(o.work,'bin','release.py'),'a').write('version = "%s-%s"'%(o.version,o.timestamp))
-    open(join(o.work_client,'bin','release.py'),'a').write('version = "%s-%s"'%(o.version,o.timestamp))
     open(join(o.work_client_web,'openobject','release.py'), 'a').write('version = "%s-%s"'%(o.version,o.timestamp))
 
 def sdist(o):
@@ -118,8 +157,8 @@ class KVM(object):
             ip = '127.0.0.1'
         if port is None:
             port = '10022'
-        self.remoteip = ip
-        self.remoteport = port
+        self.remoteip = str(ip)
+        self.remoteport = str(port)
         self.o = o
         self.image = image
         self.ssh_key = ssh_key
@@ -205,7 +244,6 @@ class KVMWinBuildAllInOneExe(KVM):
         self.login = 'Naresh'
         self.ssh("mkdir -p build")
         self.rsync('%s/ Naresh@%s:build/server/'% (self.o.work, self.remoteip))
-        self.rsync('%s/ Naresh@%s:build/client/'% (self.o.work_client, self.remoteip))
         self.rsync('%s/ Naresh@%s:build/web/' % (self.o.work_client_web, self.remoteip))
         f = open('windows/Makefile.version','w')
         f.write('MAJOR_VERSION=%s\n' % (self.o.major,))
@@ -219,6 +257,8 @@ class KVMWinBuildAllInOneExe(KVM):
         self.ssh("cd build/windows; ~/run make allinone;")
         # For an unknown fucking reason it seems that files timestamp matters
         self.rsync('Naresh@%s:build/windows/files/ %s/'% (self.remoteip, self.o.pkg,) ,'')
+        os.chmod(join(self.o.pkg, 'openerp-allinone-setup-%(major)s.%(minor)s-%(timestamp)s-r1.txt' % \
+                                  dict([(x, getattr(self.o, x)) for x in ['major','minor','timestamp']])), 0644)
         print "KVMWinBuildExe.run(): done"
 
 class KVMWinTestExe(KVM):
@@ -301,6 +341,8 @@ def options():
     op.add_option("", "--vm-debian-ssh-key", default='/home/odoo/vm/debian6/debian6_id_rsa', help="%default")
     op.add_option("", "--vm-winxp-image", default='/home/odoo/vm/winxp26/winxp26.vdi', help="%default")
     op.add_option("", "--vm-winxp-ssh-key", default='/home/odoo/vm/winxp26/id_rsa', help="%default")
+    op.add_option("", "--vm-winxp-port", default=10022, help="%default"),
+    op.add_option("", "--vm-winxp-host", default='127.0.0.1', help="%default"),
     op.add_option("", "--build-only-gtk", default=False, action='store_true', help="%default")
     op.add_option("", "--build-only-allinone", default=False, action='store_true', help="%default")
     (o, args) = op.parse_args()
@@ -346,10 +388,11 @@ def main():
     o = options()
     init(o)
     update(o)  # update disabled since not bzr+ssh:// access
+    update_branch_summary(o)
     rsync(o)
     version(o)
     if os.path.isfile(o.vm_winxp_image):
-        KVMWinBuildAllInOneExe(o, o.vm_winxp_image, o.vm_winxp_ssh_key, ip='127.0.0.1', port='10022').start()
+        KVMWinBuildAllInOneExe(o, o.vm_winxp_image, o.vm_winxp_ssh_key, ip=o.vm_winxp_host, port=o.vm_winxp_port).start()
     return
 #    to_build = ['winexe', 'wintest', 'wingtk', 'source', 'debtest', 'rpm', 'deb']
 #    if o.build_only_gtk:
