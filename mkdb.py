@@ -105,6 +105,7 @@ skipRegister = False
 skipSync = False
 skipModuleData = False
 skipPartner = False
+skipManualConfig = False
 
 
 # Fake TestCase to enable/disable quickly some tests
@@ -157,6 +158,9 @@ class db_creation(object):
             'location_name' : 'Test Location',
             'button' : 'action_stop',
         },
+        'currency.setup' : {
+            'functional_id' : 'chf',
+        } 
     }
 
     db = None
@@ -324,6 +328,7 @@ class client_creation(db_creation):
             'entity_ids' : [(4,entity_ids[0])],
         })
 
+       
     @unittest.skipIf(skipSync, "Synchronization desactivated")
     def test_50_synchronize(self):
         self.db.connect('admin')
@@ -372,6 +377,14 @@ class hq_creation(client_creation, unittest.TestCase):
     def test_42_install_data_client(self):
         self.db.connect('admin')
         self.db.module('msf_sync_data_hq').install().do()
+        
+    @unittest.skipIf(skipManualConfig, "Manuel Link Analytic Account Destination")
+    def test_45_synchronize(self):
+        HQ.connect('admin')
+        account_ids = HQ.search_data('account.account', [])
+        analytic_account_ids = HQ.search_data('account.analytic.account', [('name', 'in', ['Expatriates','National Staff','Operations','Support'])])
+        HQ.write('account.analytic.account',  analytic_account_ids, {'destination_ids': [(6, 0, account_ids)]})
+        
 
 
 # Replicable class to create coordo n

@@ -52,7 +52,7 @@ def sync_projects():
     return True
 
 def sync_all():
-#    sync(HQ)
+    sync(HQ)
     sync_coordo()
     sync_projects()
 
