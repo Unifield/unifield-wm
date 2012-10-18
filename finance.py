@@ -9,16 +9,23 @@ import config
 
 #Load OpenERP Client Library
 import openerplib
-
-#Load tests procedures
-import unittest
 from tests.openerplib import *
 
 #Other stuffs
 from datetime import datetime
 from random import choice
 
-import ipdb
+#Load tests procedures
+if sys.version_info >= (2, 7):
+    import unittest
+else:
+    # Needed for setUpClass and skipIf methods
+    import unittest27 as unittest
+
+try:
+    import ipdb as pdb
+except:
+    import pdb
 
 class finance(unittest.TestCase):
 
