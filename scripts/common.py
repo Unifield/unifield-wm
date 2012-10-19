@@ -72,7 +72,7 @@ Synchro = db_instance(
     synchro=None,
 )
 
-hq_name = "%s_HQ" % (config.prefix)
+hq_name = "%s_HQ_01" % (config.prefix)
 HQ = db_instance(
     server=client,
     name=hq_name,
