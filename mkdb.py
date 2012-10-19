@@ -181,14 +181,12 @@ class db_creation(object):
 
     @property
     def parent_name(self):
-        return self.parent.name if self.parent else None
+        return self.parent.db.name if self.parent else None
 
     @classmethod
     def setUpClass(cls):
-        if cls.parent is not None and not issubclass(cls, db_instance):
-            cls.parent.setUpClass()
-            cls.parent = cls.parent.db
         if cls.db is None and hasattr(cls, 'index'):
+            if cls.parent is not None: cls.parent.setUpClass()
             name = cls.name_format % (config.prefix, cls.index)
             cls.db = db_instance(
                 server=client,
@@ -265,6 +263,7 @@ class db_creation(object):
  
     # Create Cost Center and Proprietary Instance for Test Cases
     def make_prop_instance(self, hq, prop_instance=None):
+        hq.connect('admin')
         try:
             cost_center_id = hq.search_data('account.analytic.account', [('code','=',self.db.name)])[0]
         except IndexError:
@@ -444,14 +443,14 @@ class coordon_creation(client_creation):
 
     @unittest.skipIf(skipPropInstance, "Proprietary Instance creation desactivated")
     def test_40_prop_instance(self):
-        self.parent.connect('admin')
-        if self.parent.search_data('msf.instance', [('instance','=',self.db.name)]):
+        self.parent.db.connect('admin')
+        if self.parent.db.search_data('msf.instance', [('instance','=',self.db.name)]):
             self.skipTest("Proprietary Instance already exists")
-        self.make_prop_instance(self.parent, {
+        self.make_prop_instance(self.parent.db, {
             'level' : 'coordo',
             'reconcile_prefix' : self.prefix,
             'move_prefix' : self.prefix,
-            'parent_id' : self.parent.search_data('msf.instance', [('instance','=',self.parent.name)])[0],
+            'parent_id' : self.parent.db.search_data('msf.instance', [('instance','=',self.parent.db.name)])[0],
         })
 
     @unittest.skipIf(skipConfig, "Modules configuration desactivated")
@@ -485,14 +484,14 @@ class projectn_creation(client_creation):
 
     @unittest.skipIf(skipPropInstance, "Proprietary Instance creation desactivated")
     def test_40_prop_instance(self):
-        self.parent.connect('admin')
-        if self.parent.search_data('msf.instance', [('instance','=',self.db.name)]):
+        self.parent.parent.db.connect('admin')
+        if self.parent.parent.db.search_data('msf.instance', [('instance','=',self.db.name)]):
             self.skipTest("Proprietary Instance already exists")
-        self.make_prop_instance(self.parent.parent, {
+        self.make_prop_instance(self.parent.parent.db, {
             'level' : 'project',
             'reconcile_prefix' : self.prefix,
             'move_prefix' : self.prefix,
-            'parent_id' : self.parent.search_data('msf.instance', [('instance','=',self.parent_name)])[0],
+            'parent_id' : self.parent.parent.db.search_data('msf.instance', [('instance','=',self.parent_name)])[0],
         })
 
     @unittest.skipIf(skipConfig, "Modules configuration desactivated")
