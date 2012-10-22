@@ -148,7 +148,7 @@ Var HWNDPostgreSQLPassword
 
 !define STATIC_PATH "static"
 !define PIXMAPS_PATH "${STATIC_PATH}\pixmaps"
-!define POSTGRESQL_EXE "${STATIC_PATH}\postgresql-8.4.13-1-windows.exe"
+!define POSTGRESQL_EXE "${STATIC_PATH}\postgresql-8.4.14-1-windows.exe"
 
 !define OPENERP_SERVER_SETUP 'openerp-server-setup-${VERSION}.exe'
 !define OPENERP_WEB_SETUP 'openerp-web-setup-${VERSION}.exe'
@@ -299,7 +299,7 @@ Section $(TITLE_PostgreSQL) SectionPostgreSQL
     SetOutPath '$TEMP'
     nsExec::Exec 'net user openpgsvc /delete'
 
-    File "postgresql-8.4.13-1-windows.exe"
+    File "postgresql-8.4.14-1-windows.exe"
 
     ReadRegStr $0 HKLM "System\CurrentControlSet\Control\ComputerName\ActiveComputerName" "ComputerName"
     StrCmp $0 "" win9x
@@ -308,7 +308,7 @@ Section $(TITLE_PostgreSQL) SectionPostgreSQL
         ReadRegStr $0 HKLM "System\CurrentControlSet\Control\ComputerName\ComputerName" "ComputerName"
     done:
 	Rmdir /r "$TextPostgreSQLInstPath"
-	ExecWait '"$TEMP\postgresql-8.4.13-1-windows.exe" \
+	ExecWait '"$TEMP\postgresql-8.4.14-1-windows.exe" \
 		--mode unattended \
 		--prefix "$TextPostgreSQLInstPath" \
 		--datadir "$TextPostgreSQLInstPath\data" \
