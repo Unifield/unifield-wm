@@ -32,6 +32,7 @@
 !include 'LogicLib.nsh'
 !include 'Sections.nsh'
 !include 'LogicLib.nsh'
+!include 'contrib.nsh'
 
 !macro IfKeyExists ROOT MAIN_KEY KEY
     # This macro comes from http://nsis.sourceforge.net/Check_for_a_Registry_Key
@@ -147,7 +148,7 @@ Var HWNDPostgreSQLPassword
 
 !define STATIC_PATH "static"
 !define PIXMAPS_PATH "${STATIC_PATH}\pixmaps"
-!define POSTGRESQL_EXE "${STATIC_PATH}\postgresql-8.4.13-1-windows.exe"
+!define POSTGRESQL_EXE "${STATIC_PATH}\postgresql-8.4.14-1-windows.exe"
 
 !define OPENERP_SERVER_SETUP 'openerp-server-setup-${VERSION}.exe'
 !define OPENERP_WEB_SETUP 'openerp-web-setup-${VERSION}.exe'
@@ -259,11 +260,16 @@ Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
     File "files\${OPENERP_SERVER_SETUP}"
     ExecWait '"$TEMP\${OPENERP_SERVER_SETUP}" /S /D=$INSTDIR\Server'
 
+    Push $R0
+    ${Base64_Encode} "$TextPostgreSQLPassword"
+    Pop $R0
 # If there is a previous install of the OpenERP Server, keep the login/password from the config file
     WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "db_host" $TextPostgreSQLHostname
     WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "db_user" $TextPostgreSQLUsername
-    WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "db_password" $TextPostgreSQLPassword
+    WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "db_password" $R0
     WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "db_port" $TextPostgreSQLPort
+
+    Pop $R0
 	# if we've going to install postgresql force it's path,
 	# otherwise we consider it's always done and/or correctly tune by users
     ${If} $HasPostgreSQL == 0
@@ -293,7 +299,7 @@ Section $(TITLE_PostgreSQL) SectionPostgreSQL
     SetOutPath '$TEMP'
     nsExec::Exec 'net user openpgsvc /delete'
 
-    File "postgresql-8.4.13-1-windows.exe"
+    File "postgresql-8.4.14-1-windows.exe"
 
     ReadRegStr $0 HKLM "System\CurrentControlSet\Control\ComputerName\ActiveComputerName" "ComputerName"
     StrCmp $0 "" win9x
@@ -302,7 +308,7 @@ Section $(TITLE_PostgreSQL) SectionPostgreSQL
         ReadRegStr $0 HKLM "System\CurrentControlSet\Control\ComputerName\ComputerName" "ComputerName"
     done:
 	Rmdir /r "$TextPostgreSQLInstPath"
-	ExecWait '"$TEMP\postgresql-8.4.13-1-windows.exe" \
+	ExecWait '"$TEMP\postgresql-8.4.14-1-windows.exe" \
 		--mode unattended \
 		--prefix "$TextPostgreSQLInstPath" \
 		--datadir "$TextPostgreSQLInstPath\data" \
