@@ -381,7 +381,7 @@ class hq_creation(client_creation, unittest.TestCase):
     @unittest.skipIf(skipManualConfig, "Manuel Link Analytic Account Destination")
     def test_45_synchronize(self):
         HQ.connect('admin')
-        account_ids = HQ.search_data('account.account', [])
+        account_ids = HQ.search_data('account.account', [('type', '!=', 'view'),('user_type.code', '=', 'expense')])
         analytic_account_ids = HQ.search_data('account.analytic.account', [('name', 'in', ['Expatriates','National Staff','Operations','Support'])])
         HQ.write('account.analytic.account',  analytic_account_ids, {'destination_ids': [(6, 0, account_ids)]})
         
