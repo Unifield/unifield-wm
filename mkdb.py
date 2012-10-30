@@ -11,7 +11,7 @@
 
     * make specific databases, you can run the script by using
       one of these commands:
-       python2 -m unittest -v -f mkdb.hq_creation
+       python2 -m unittest -v -f mkdb.hq01_creation
        python2 -m unittest -v -f mkdb.project01_creation mkdb.project02_creation
     
     * make creation step only:
@@ -21,11 +21,11 @@
        python2 -m unittest -v -f mkdb.configuration_only mkdb.coordo02_creation
 
     Note: you can't use the creation_only and configuration_only flag in the
-          same command. Plus they are retroactive ('hq_creation creation_only'
+          same command. Plus they are retroactive ('hq01_creation creation_only'
           will make only creation of HQ).
 
-    Default behavior:
-      python2 -m unittest -v -f mkdb.hq_creation mkdb.coordo01_creation mkdb.project01_creation mkdb.project02_creation
+    Default behavior (<=> #hqs = 1, #coordos = 1, #projects = 2):
+      python2 -m unittest -v -f mkdb.hq01_creation mkdb.coordo01_creation mkdb.project01_creation mkdb.project02_creation
 
 
   EXAMPLE OF config.py
@@ -200,6 +200,7 @@ class db_creation(object):
                     'password' : name,
                 },
             )
+            last_sync.test_cases.append(cls)
 
     def setUp(self):
         if self.db is None:
@@ -254,22 +255,24 @@ class db_creation(object):
                 print "DEBUG: db=%s, model=%s" % (self.db.name, model)
                 raise
 
-    def sync(self, db=None):
-        if db is None: db = self.db
+    @classmethod
+    def sync(cls, db=None):
+        if db is None: db = cls.db
+        db.connect('admin')
         if not db.get('sync.client.entity').sync():
             monitor = db.get('sync.monitor')
             ids = monitor.search([], 0, 1, '"end" desc')
-            self.fail('Synchronization process of database "%s" failed!\n%s' % (db.db_name,monitor.read(ids, ['error'])[0]['error']))
+            raise Exception('Synchronization process of database "%s" failed!\n%s' % (db.db_name,monitor.read(ids, ['error'])[0]['error']))
  
     # Create Cost Center and Proprietary Instance for Test Cases
-    def make_prop_instance(self, hq, prop_instance=None):
+    def make_prop_instance(self, hq, prop_instance=None, mission=None):
         hq.connect('admin')
         try:
             cost_center_id = hq.search_data('account.analytic.account', [('code','=',self.db.name)])[0]
         except IndexError:
             data = {
-                'name' : self.db.name,
-                'code' : self.db.name,
+                'name' : "C%s_%s" % (("OC" if mission is None else mission.prefix), self.db.name),
+                'code' : "C%s_%s" % (("OC" if mission is None else mission.prefix), self.db.name),
                 'category' : 'OC',
             }
             if self.db is not hq:
@@ -279,7 +282,7 @@ class db_creation(object):
             'code' : self.db.name,
             'name' : self.db.name,
             'instance' : self.db.name,
-            'mission' : '%s_MISSION' % config.prefix,
+            'mission' : '%s_MISSION_%s' % (config.prefix, ("OC" if mission is None else "%02d" % mission.index)),
             'cost_center_id' : cost_center_id,
             'state' : 'active',
         }
@@ -290,6 +293,39 @@ class db_creation(object):
             if self.db is not hq:
                 self.sync(hq)
 
+    def add_to_group(self, group_name, group_type):
+        Synchro.connect('admin')
+        entity_ids = Synchro.get('sync.server.entity').search([('name','=',self.db.name)])
+        assert len(entity_ids) == 1, "The entity must exists!"
+        # Make groups
+        group = Synchro.get('sync.server.entity_group')
+        # Make or update OC group
+        group_ids = group.search([('name','=',group_name)])
+        if group_ids:
+            group.write(group_ids, {'entity_ids' : [(4,entity_ids[0])]})
+        else:
+            Type = Synchro.get('sync.server.group_type')
+            type_ids = Type.search([('name', '=', group_type)])
+            if not type_ids:
+                type_ids = [Type.create({'name':group_type})]
+            group.create({
+                'name' : group_name,
+                'type_id' : type_ids[0],
+                'entity_ids' : [(6,0,entity_ids)],
+            })
+
+
+# Run a last sync after all synchronization
+class last_sync(unittest.TestCase):
+    test_cases = []
+
+    def test_50_last_synchronization(self):
+        if not self.test_cases:
+            self.skipTest("No database to update")
+        for tc in self.test_cases:
+            assert issubclass(tc, db_creation), "The object %s is not of type db_creation!"
+            tc.sync()
+ 
 
 # Specific Sync Server creation
 class server_creation(db_creation, unittest.TestCase):
@@ -354,16 +390,6 @@ class client_creation(db_creation):
         # Server accept validation
         entities.validate_action(entity_ids)
 
-    @unittest.skipIf(skipGroups, "Group creation desactivated")
-    def test_30_make_groups_mission(self):
-        Synchro.connect('admin')
-        entity_ids = Synchro.get('sync.server.entity').search([('name','=',self.db.name)])
-        # Add entity to groups
-        group = Synchro.get('sync.server.entity_group')
-        group.write(group.search([('name','=','OC')]), {
-            'entity_ids' : [(4,entity_ids[0])],
-        })
-       
     @unittest.skipIf(skipSync, "Synchronization desactivated")
     def test_50_synchronize(self):
         self.db.connect('admin')
@@ -390,10 +416,11 @@ class client_creation(db_creation):
 
 # Replicable class to create hq n
 class hqn_creation(client_creation, unittest.TestCase):
-    index = None
-    prefix = None
-    db = None
     name_format = "%s_HQ_%02d"
+
+    @unittest.skipIf(skipGroups, "Group creation desactivated")
+    def test_30_make_groups_coordo(self):
+        self.add_to_group('OC_%02d' % self.index, 'OC')
 
     @unittest.skipIf(skipPropInstance, "Proprietary Instance creation desactivated")
     def test_40_prop_instance(self):
@@ -426,32 +453,25 @@ class hqn_creation(client_creation, unittest.TestCase):
 
 # Replicable class to create coordo n
 class coordon_creation(client_creation):
-    index = None
-    prefix = None
-    db = None
     name_format = "%s_COORDO_%02d"
 
     @unittest.skipIf(skipGroups, "Group creation desactivated")
-    def test_31_make_groups_coordo(self):
-        Synchro.connect('admin')
-        entity_ids = Synchro.get('sync.server.entity').search([('name','=',self.db.name)])
-        # Add entity to groups
-        group = Synchro.get('sync.server.entity_group')
-        group.write(group.search([('name','in',('Coordinations','Mission1'))]), {
-            'entity_ids' : [(4,entity_ids[0])],
-        })
+    def test_30_make_groups_coordo(self):
+        self.add_to_group('OC_%02d' % self.hq.index, 'OC')
+        self.add_to_group('Coordinations of %s' % self.hq.db.name, 'Coordination')
+        self.add_to_group('Mission %s' % self.index, 'Mission')
 
     @unittest.skipIf(skipPropInstance, "Proprietary Instance creation desactivated")
     def test_40_prop_instance(self):
-        self.parent.db.connect('admin')
-        if self.parent.db.search_data('msf.instance', [('instance','=',self.db.name)]):
+        self.hq.db.connect('admin')
+        if self.hq.db.search_data('msf.instance', [('instance','=',self.db.name)]):
             self.skipTest("Proprietary Instance already exists")
-        self.make_prop_instance(self.parent.db, {
+        self.make_prop_instance(self.hq.db, {
             'level' : 'coordo',
             'reconcile_prefix' : self.prefix,
             'move_prefix' : self.prefix,
-            'parent_id' : self.parent.db.search_data('msf.instance', [('instance','=',self.parent.db.name)])[0],
-        })
+            'parent_id' : self.hq.db.search_data('msf.instance', [('instance','=',self.hq.db.name)])[0],
+        }, self.hq)
 
     @unittest.skipIf(skipConfig, "Modules configuration desactivated")
     def test_60_configuration_wizards(self):
@@ -466,11 +486,12 @@ class coordon_creation(client_creation):
 
 # Replicable class to create project n
 class projectn_creation(client_creation):
-    index = None
-    prefix = None
-    db = None
-    hq = None
     name_format = "%s_PROJECT_%02d"
+
+    @unittest.skipIf(skipGroups, "Group creation desactivated")
+    def test_30_make_groups_coordo(self):
+        self.add_to_group('OC_%02d' % self.hq.index, 'OC')
+        self.add_to_group('Mission %s' % self.parent.index, 'Mission')
 
     @unittest.skipIf(skipGroups, "Group creation desactivated")
     def test_31_make_groups_project(self):
@@ -484,15 +505,15 @@ class projectn_creation(client_creation):
 
     @unittest.skipIf(skipPropInstance, "Proprietary Instance creation desactivated")
     def test_40_prop_instance(self):
-        self.parent.parent.db.connect('admin')
-        if self.parent.parent.db.search_data('msf.instance', [('instance','=',self.db.name)]):
+        self.hq.db.connect('admin')
+        if self.hq.db.search_data('msf.instance', [('instance','=',self.db.name)]):
             self.skipTest("Proprietary Instance already exists")
-        self.make_prop_instance(self.parent.parent.db, {
+        self.make_prop_instance(self.hq.db, {
             'level' : 'project',
             'reconcile_prefix' : self.prefix,
             'move_prefix' : self.prefix,
-            'parent_id' : self.parent.parent.db.search_data('msf.instance', [('instance','=',self.parent_name)])[0],
-        })
+            'parent_id' : self.hq.db.search_data('msf.instance', [('instance','=',self.parent_name)])[0],
+        }, self.parent)
 
     @unittest.skipIf(skipConfig, "Modules configuration desactivated")
     def test_60_configuration_wizards(self):
@@ -521,13 +542,13 @@ class verbose(unittest.TestCase):
 
 
 # Base Install
-test_cases = [server_creation]
+test_cases = [verbose, server_creation]
 
 
 # Create HQ classes
 for i in range(1, hq_count+1):
     test_cases.append( type("hq%02d_creation" % i, (hqn_creation,unittest.TestCase), {
-        'prefix' : hex(i)[2:].rjust(2,'#'),
+        'prefix' : hex(i)[2:].rjust(2,'X'),
         'index' : i,
     }) )
     # Make testcase visible for importation
@@ -537,11 +558,12 @@ for i in range(1, hq_count+1):
 # Create Coordo classes
 for i in range(1, coordo_count+1):
     test_cases.append( type("coordo%02d_creation" % i, (coordon_creation,unittest.TestCase), {
-        'prefix' : hex(i+hq_count)[2:].rjust(2,'#'),
+        'prefix' : hex(i+hq_count)[2:].rjust(2,'X'),
         'index' : i,
         'parent' : globals()["hq%02d_creation" % (\
                         (((i-1) / (coordo_count/hq_count)) % hq_count + 1))],
     }) )
+    test_cases[-1].hq = test_cases[-1].parent
     # Make testcase visible for importation
     globals()[test_cases[-1].__name__] = test_cases[-1]
 
@@ -549,12 +571,18 @@ for i in range(1, coordo_count+1):
 # Create Project classes
 for i in range(1, project_count+1):
     test_cases.append( type("project%02d_creation" % i, (projectn_creation,unittest.TestCase), {
-        'prefix' : hex(i+coordo_count+hq_count)[2:].rjust(2,'#'),
+        'prefix' : hex(i+coordo_count+hq_count)[2:].rjust(2,'X'),
         'index' : i,
         'parent' : globals()["coordo%02d_creation" % (\
                         (((i-1) / (project_count/coordo_count)) % coordo_count + 1))],
     }) )
+    test_cases[-1].hq = test_cases[-1].parent.parent
+    # Make testcase visible for importation
     globals()[test_cases[-1].__name__] = test_cases[-1]
+
+
+# Push last_sync test at last
+test_cases.append( last_sync )
 
 
 def load_tests(loader, tests, pattern):
