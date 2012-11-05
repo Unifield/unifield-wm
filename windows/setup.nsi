@@ -317,6 +317,21 @@ Section $(TITLE_PostgreSQL) SectionPostgreSQL
 		--serviceaccount "openpgsvc" --servicepassword "0p3npgsvcPWD" \
 		--superaccount "$TextPostgreSQLUsername" --superpassword "$TextPostgreSQLPassword" \
 		--serverport $TextPostgreSQLPort'
+
+	Push $R0
+	FileOpen $R0 "$TextPostgreSQLInstPath\data\postgresql.conf" a
+	FileSeek $R0 0 "END"
+	# Start of custom PostgreSQL options
+	FileWrite $R0 "listen_addresses = 'localhost'"
+	# add \r\n
+	FileWriteByte $R0 "13"
+	FileWriteByte $R0 "10"
+	FileClose $R0
+	FileClose $R0
+	Pop $R0
+
+	nsExec::Exec 'net stop PostgreSQL_For_OpenERP'
+	nsExec::Exec 'net start PostgreSQL_For_OpenERP'
 #    ExecWait 'msiexec /i \
 #        "$TEMP\postgresql-8.4.9-1-windows.exe" /qn INTERNALLAUNCH=1 \
 #        ADDLOCAL=server,pgadmin \
