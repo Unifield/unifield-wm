@@ -268,6 +268,7 @@ Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
     WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "db_user" $TextPostgreSQLUsername
     WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "db_password" $R0
     WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "db_port" $TextPostgreSQLPort
+    WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "db_maxconn" 95
 
     Pop $R0
 	# if we've going to install postgresql force it's path,
@@ -316,6 +317,21 @@ Section $(TITLE_PostgreSQL) SectionPostgreSQL
 		--serviceaccount "openpgsvc" --servicepassword "0p3npgsvcPWD" \
 		--superaccount "$TextPostgreSQLUsername" --superpassword "$TextPostgreSQLPassword" \
 		--serverport $TextPostgreSQLPort'
+
+	Push $R0
+	FileOpen $R0 "$TextPostgreSQLInstPath\data\postgresql.conf" a
+	FileSeek $R0 0 "END"
+	# Start of custom PostgreSQL options
+	FileWrite $R0 "listen_addresses = 'localhost'"
+	# add \r\n
+	FileWriteByte $R0 "13"
+	FileWriteByte $R0 "10"
+	FileClose $R0
+	FileClose $R0
+	Pop $R0
+
+	nsExec::Exec 'net stop PostgreSQL_For_OpenERP'
+	nsExec::Exec 'net start PostgreSQL_For_OpenERP'
 #    ExecWait 'msiexec /i \
 #        "$TEMP\postgresql-8.4.9-1-windows.exe" /qn INTERNALLAUNCH=1 \
 #        ADDLOCAL=server,pgadmin \
