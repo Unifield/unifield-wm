@@ -268,6 +268,7 @@ Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
     WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "db_user" $TextPostgreSQLUsername
     WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "db_password" $R0
     WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "db_port" $TextPostgreSQLPort
+    WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "db_maxconn" 95
 
     Pop $R0
 	# if we've going to install postgresql force it's path,
