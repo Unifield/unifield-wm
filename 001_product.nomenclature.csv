@@ -84,6 +84,7 @@ Wood, Timber;mandatory;LOG/Camp/Building
 SEMIPERMANENT Shelter;mandatory;LOG/Camp
 Container;mandatory;LOG/Camp/SEMIPERMANENT Shelter
 Shelters;mandatory;LOG/Camp
+Rope;mandatory;LOG/Camp/Shelters
 Blanket;mandatory;LOG/Camp/Shelters
 Heater, Fuel;mandatory;LOG/Camp/Shelters
 Heater, space;mandatory;LOG/Camp/Shelters
@@ -164,6 +165,7 @@ Amphotericin B;mandatory;MED/Drugs/Injectable drugs
 Cefazolin;mandatory;MED/Drugs/Injectable drugs
 Chlorpromazine;mandatory;MED/Drugs/Injectable drugs
 Chloramphenicol;mandatory;MED/Drugs/Injectable drugs
+Chlorpheniramine;mandatory;MED/Drugs/Injectable drugs
 Eflornithine;mandatory;MED/Drugs/Injectable drugs
 Ephedrine;mandatory;MED/Drugs/Injectable drugs
 Erythromycin;mandatory;MED/Drugs/Injectable drugs
@@ -231,6 +233,7 @@ Electro Surgical Unit;mandatory;MED/Medical Equipment/Hospital equipment
 Operating Lamp;mandatory;MED/Medical Equipment/Hospital equipment
 Nebulizer + compressor;mandatory;MED/Medical Equipment/Hospital equipment
 Succion Pump;mandatory;MED/Medical Equipment/Hospital equipment
+Table Operating;mandatory;MED/Medical Equipment/Hospital equipment
 Saw, oscillating;mandatory;MED/Medical Equipment/Hospital equipment
 Vaccuum Extractor;mandatory;MED/Medical Equipment/Hospital equipment
 Laboratory equipment;mandatory;MED/Medical Equipment
@@ -449,6 +452,7 @@ Breathing circuit filter;mandatory;MED/Medical renewable supplies/Catheters, tub
 Cannula, nasal;mandatory;MED/Medical renewable supplies/Catheters, tubes and drains
 CATHETER URINARY, Nelaton type;mandatory;MED/Medical renewable supplies/Catheters, tubes and drains
 Manual vacuum asp cannula;mandatory;MED/Medical renewable supplies/Catheters, tubes and drains
+Manual vacuum asp syringe;mandatory;MED/Medical renewable supplies/Catheters, tubes and drains
 Peritofix;mandatory;MED/Medical renewable supplies/Catheters, tubes and drains
 Alene Needle For Redon Set;mandatory;MED/Medical renewable supplies/Catheters, tubes and drains
 Connectors for drain;mandatory;MED/Medical renewable supplies/Catheters, tubes and drains
