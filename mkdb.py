@@ -446,7 +446,7 @@ class hqn_creation(client_creation, unittest.TestCase):
     @unittest.skipIf(skipManualConfig, "Manual link on analytic account destination desactivated")
     def test_43_manual_link_on_analytic_account_destination(self):
         self.db.connect('admin')
-        account_ids = self.db.search_data('account.account', [])
+        account_ids = self.db.search_data('account.account', [('type', '!=', 'view'),('user_type.code', '=', 'expense')])
         analytic_account_ids = self.db.search_data('account.analytic.account', [('name', 'in', ['Expatriates','National Staff','Operations','Support'])])
         self.db.write('account.analytic.account',  analytic_account_ids, {'destination_ids': [(6, 0, account_ids)]})
 
