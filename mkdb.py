@@ -75,8 +75,11 @@ import sys
 import config
 from config import coordo_count, project_count, hq_count
 
-assert hq_count <= coordo_count, "Wrong number of HQ!"
-assert coordo_count <= project_count, "Wrong number of Coordinations!"
+assert hq_count > 0, "You must have at least one HQ!"
+assert hq_count <= coordo_count or coordo_count == 0, \
+    "Wrong number of HQ's and Coordinations!"
+assert coordo_count > 0 if project_count > 0 else coordo_count >= 0, \
+    "Wrong number of Coordinations and Projects!"
 
 #Load OpenERP Client Library
 import openerplib
@@ -574,7 +577,7 @@ for i in range(1, project_count+1):
         'prefix' : hex(i+coordo_count+hq_count)[2:].rjust(2,'X'),
         'index' : i,
         'parent' : globals()["coordo%02d_creation" % (\
-                        (((i-1) / (project_count/coordo_count)) % coordo_count + 1))],
+                        (int((i-1) / (float(project_count)/coordo_count)) % coordo_count + 1))],
     }) )
     test_cases[-1].hq = test_cases[-1].parent.parent
     # Make testcase visible for importation
