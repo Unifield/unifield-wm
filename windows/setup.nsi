@@ -202,6 +202,8 @@ LangString DESC_PostgreSQL ${LANG_ENGLISH} "Install the PostgreSQL RDBMS used by
 LangString DESC_FinishPage_Link ${LANG_ENGLISH} "Contact OpenERP for Partnership and/or Support"
 LangString DESC_AtLeastOneComponent ${LANG_ENGLISH} "You have to choose at least one component"
 LangString DESC_CanNotInstallPostgreSQL ${LANG_ENGLISH} "You can not install the PostgreSQL database without the OpenERP Server"
+LangString WARNING_InstallUnderServerDirectory ${LANG_ENGLISH} "You can not install PostgreSQL under same directory as OpenERP server"
+LangString WARNING_InstallPathEmpty ${LANG_ENGLISH} "The installation path for PostgreSQL Server is empty"
 LangString WARNING_HostNameIsEmpty ${LANG_ENGLISH} "The hostname for the connection to the PostgreSQL Server is empty"
 LangString WARNING_UserNameIsEmpty ${LANG_ENGLISH} "The username for the connection to the PostgreSQL Server is empty"
 LangString WARNING_PasswordIsEmpty ${LANG_ENGLISH} "The password for the connection to the PostgreSQL Server is empty"
@@ -230,7 +232,9 @@ LangString DESC_OpenERP_Web_Client ${LANG_FRENCH} "Installation du Client OpenER
 LangString DESC_PostgreSQL ${LANG_FRENCH} "Installation de la base de donn?es PostgreSQL utilis?e par OpenERP."
 LangString DESC_FinishPage_Link ${LANG_FRENCH} "Contactez OpenERP pour un Partenariat et/ou du Support"
 LangString DESC_AtLeastOneComponent ${LANG_FRENCH} "Vous devez choisir au moins un composant"
-LangString DESC_CanNotInstallPostgreSQL ${LANG_FRENCH} "Vous ne pouvez pas installer la base de donn?es PostgreSQL sans le serveur OpenERP"
+LangString DESC_CanNotInstallPostgreSQL ${LANG_FRENCH} "Vous ne pouvez pas installer la base de données PostgreSQL sans le serveur OpenERP"
+LangString WARNING_InstallUnderServerDirectory ${LANG_FRENCH} "Vous ne pouvez pas installer la base de données PostgreSQL sous le même répertoire que le serveur OpenERP"
+LangString WARNING_InstallPathEmpty ${LANG_FRENCH} "Le chemin d'installation du serveur PostgreSQL est vide"
 LangString WARNING_HostNameIsEmpty ${LANG_FRENCH} "L'adresse pour la connection au serveur PostgreSQL est vide"
 LangString WARNING_UserNameIsEmpty ${LANG_FRENCH} "Le nom d'utilisateur pour la connection au serveur PostgreSQL est vide"
 LangString WARNING_PasswordIsEmpty ${LANG_FRENCH} "Le mot de passe pour la connection au serveur PostgreSQL est vide"
@@ -554,6 +558,23 @@ Function LeavePostgreSQL
     ${NSD_GetText} $HWNDPostgreSQLPort $TextPostgreSQLPort
     ${NSD_GetText} $HWNDPostgreSQLUsername $TextPostgreSQLUsername
     ${NSD_GetText} $HWNDPostgreSQLPassword $TextPostgreSQLPassword
+
+    Push $1
+    Push $2
+    Strlen $1 $TextPostgreSQLInstPath
+    ${If} $1 == 0
+	MessageBox MB_ICONEXCLAMATION|MB_OK $(WARNING_InstallPathEmpty)
+	Abort
+    ${EndIf}
+    StrCpy $2 "$INSTDIR" $1 # cut INSTDIR as choosen PG install path
+    StrCmp $2 "$TextPostgreSQLInstPath" pginstpatherror
+    StrCpy $2 "$INSTDIR\Server\" $1 # cust INSTDIR\Server as choosen PG install path
+    StrCmp $2 "$TextPostgreSQLInstPath" pginstpatherror pginstpathok
+    pginstpatherror:
+	MessageBox MB_ICONEXCLAMATION|MB_OK $(WARNING_InstallUnderServerDirectory)
+	Abort
+    pginstpathok:
+
     StrLen $1 $TextPostgreSQLHostname
     ${If} $1 == 0
         MessageBox MB_ICONEXCLAMATION|MB_OK $(WARNING_HostNameIsEmpty)
@@ -616,7 +637,7 @@ Function func_PostgreSQL_InstPath_Choose_Click
         nsDialogs::SelectFolderDialog "$R0" ""
         Pop $R0
         ${If} "$R0" != "error"
-            ${NSD_SetText} $HWNDPostgreSQLInstPath "$R0"
+            ${NSD_SetText} $HWNDPostgreSQLInstPath "$R0\PostgreSQL"
         ${EndIf}
     ${EndIf}
 FunctionEnd
