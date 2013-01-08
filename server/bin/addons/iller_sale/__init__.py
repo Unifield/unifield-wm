@@ -28,6 +28,7 @@ import wizard
 import report
 import account_move_line
 import invoice
+import commission
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

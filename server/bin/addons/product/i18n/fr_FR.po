@@ -323,7 +323,7 @@ msgstr "Nombre de couche"
 #. module: product
 #: constraint:product.category:0
 msgid "Error ! You can not create recursive categories."
-msgstr "Erreur ! Vous ne pouvez pas créer de catégories récursives"
+msgstr "Erreur ! Vous ne pouvez pas créer de familles récursives"
 
 #. module: product
 #: field:product.template,uom_id:0
@@ -433,7 +433,7 @@ msgstr "En production"
 #. module: product
 #: field:product.category,child_id:0
 msgid "Child Categories"
-msgstr "Catégories FillesCommandes de Travail"
+msgstr "Familles filles"
 
 #. module: product
 #: model:product.category,name:product.product_category_accessories
@@ -623,7 +623,7 @@ msgstr "Erreur : l'Unité Secondaire doit appartenir à une autre catégorie que
 #. module: product
 #: field:product.category,parent_id:0
 msgid "Parent Category"
-msgstr "Catégorie parent"
+msgstr "Famille parente"
 
 #. module: product
 #: selection:product.template,state:0
@@ -661,7 +661,7 @@ msgstr "Approvisionnement"
 #: model:ir.actions.act_window,name:product.product_category_action
 #: model:ir.ui.menu,name:product.menu_product_category_action
 msgid "Products by Category"
-msgstr "Produits par catégorie"
+msgstr "Produits par famille"
 
 #. module: product
 #: model:product.template,name:product.product_product_hdd1_product_template
@@ -825,7 +825,7 @@ msgstr "Ligne"
 #. module: product
 #: field:product.template,categ_id:0
 msgid "Category"
-msgstr "Catégorie"
+msgstr "Famille"
 
 #. module: product
 #: help:product.pricelist.item,min_quantity:0
@@ -851,7 +851,7 @@ msgstr "Quantité disponible"
 #. module: product
 #: view:product.category:0
 msgid "Product Categories"
-msgstr "Catégories de produits"
+msgstr "Familles de produits"
 
 #. module: product
 #: help:product.uom,category_id:0
@@ -1119,7 +1119,7 @@ msgstr ""
 #: model:ir.model,name:product.model_product_category
 #: field:product.pricelist.item,categ_id:0
 msgid "Product Category"
-msgstr "Catégorie de produit"
+msgstr "Famille de produit"
 
 #. module: product
 #: code:addons/product/pricelist.py:0
@@ -1511,7 +1511,7 @@ msgstr "Date de fin"
 #: model:ir.actions.act_window,name:product.product_category_action_form
 #: model:ir.ui.menu,name:product.menu_product_category_action_form
 msgid "Products Categories"
-msgstr "Catégories de produits"
+msgstr "Familles de produits"
 
 #. module: product
 #: field:product.product,packaging:0
@@ -1701,7 +1701,7 @@ msgstr "Quantité min."
 #. module: product
 #: help:product.pricelist.item,categ_id:0
 msgid "Set a category of product if this rule only apply to products of a category and his childs. Keep empty for all products"
-msgstr "Indiquer une catégorie de produit si la règle n'est appliquée que sur une catégorie de produits et ses fils. Laisser vide si elle s'applique à tous les produits"
+msgstr "Indiquer une famille de produit si la règle n'est appliquée que sur une famille de produits et ses fils. Laisser vide si elle s'applique à tous les produits"
 
 #. module: product
 #: model:ir.actions.report.xml,name:product.report_product_label

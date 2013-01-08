@@ -171,7 +171,7 @@
             <field name="model">product.category</field>
             <field name="type">form</field>
             <field name="arch" type="xml">
-                <form string="Product Categories">
+                <form string="Familles de produits">
                     <field name="name" select="1"/>
                     <field name="parent_id"/>
                     <field name="sequence"/>
@@ -185,7 +185,7 @@
             <field name="type">tree</field>
             <field name="priority">1</field>
             <field name="arch" type="xml">
-                <tree string="Product Categories">
+                <tree string="Famille de produits">
                     <field name="complete_name"/>
                 </tree>
             </field>
@@ -196,7 +196,7 @@
             <field name="type">tree</field>
             <field name="field_parent">child_id</field>
             <field name="arch" type="xml">
-                <tree string="Product Categories">
+                <tree string="Familles de produits">
                     <field name="name"/>
                 </tree>
             </field>
