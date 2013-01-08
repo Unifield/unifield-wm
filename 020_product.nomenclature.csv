@@ -15,15 +15,15 @@ leather prot;Optional;1;LOG
 2;Optional;1;LOG
 4;Optional;1;LOG
 AG;Optional;1;LOG
-Electrolux;Optional;1;LOG / Programm Support / Cold chain 
-AAB;Optional;1;LOG / Programm Support / Cold chain 
-AAC;Optional;1;LOG / Programm Support / Cold chain 
-AAD;Optional;1;LOG / Programm Support / Cold chain 
-AAE;Optional;1;LOG / Programm Support / Cold chain 
-AAF;Optional;1;LOG / Programm Support / Cold chain 
-AAG;Optional;1;LOG / Programm Support / Cold chain 
-AAH;Optional;1;LOG / Programm Support / Cold chain 
-AAI;Optional;1;LOG / Programm Support / Cold chain 
+Electrolux;Optional;1;LOG | Programm Support | Cold chain 
+AAB;Optional;1;LOG | Programm Support | Cold chain 
+AAC;Optional;1;LOG | Programm Support | Cold chain 
+AAD;Optional;1;LOG | Programm Support | Cold chain 
+AAE;Optional;1;LOG | Programm Support | Cold chain 
+AAF;Optional;1;LOG | Programm Support | Cold chain 
+AAG;Optional;1;LOG | Programm Support | Cold chain 
+AAH;Optional;1;LOG | Programm Support | Cold chain 
+AAI;Optional;1;LOG | Programm Support | Cold chain 
 No infusion;Optional;2;MED
 Non sterile;Optional;2;MED
 13;Optional;2;MED
@@ -43,9 +43,9 @@ Non sterile;Optional;2;MED
 27;Optional;2;LOG
 28;Optional;2;LOG
 29;Optional;2;LOG
-30;Optional;2;LOG / Programm Support / Cold chain 
-31;Optional;2;LOG / Programm Support / Cold chain 
-32;Optional;2;LOG / Programm Support / Cold chain 
-33;Optional;2;LOG / Programm Support / Cold chain 
-34;Optional;2;LOG / Programm Support / Cold chain 
-35;Optional;2;LOG / Programm Support / Cold chain 
+30;Optional;2;LOG | Programm Support | Cold chain 
+31;Optional;2;LOG | Programm Support | Cold chain 
+32;Optional;2;LOG | Programm Support | Cold chain 
+33;Optional;2;LOG | Programm Support | Cold chain 
+34;Optional;2;LOG | Programm Support | Cold chain 
+35;Optional;2;LOG | Programm Support | Cold chain 

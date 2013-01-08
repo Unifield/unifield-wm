@@ -1,570 +1,570 @@
 name;type;parent_id.complete_name
 Administration;mandatory;LOG
-Data processing;mandatory;LOG/Administration
-Cable, dataprocessing;mandatory;LOG/Administration/Data processing
-Cartridge;mandatory;LOG/Administration/Data processing
-Computer, Laptop;mandatory;LOG/Administration/Data processing
-Keyboard AZERTY;mandatory;LOG/Administration/Data processing
-Modem;mandatory;LOG/Administration/Data processing
-Printer;mandatory;LOG/Administration/Data processing
-Screen - Monitor;mandatory;LOG/Administration/Data processing
-Switch;mandatory;LOG/Administration/Data processing
-FOOD FOR MSF STAFF;mandatory;LOG/Administration
-Beef;mandatory;LOG/Administration/FOOD FOR MSF STAFF
-Cassoulet;mandatory;LOG/Administration/FOOD FOR MSF STAFF
-Coffe;mandatory;LOG/Administration/FOOD FOR MSF STAFF
-dehydrated meal;mandatory;LOG/Administration/FOOD FOR MSF STAFF
-Duck;mandatory;LOG/Administration/FOOD FOR MSF STAFF
-Fruit;mandatory;LOG/Administration/FOOD FOR MSF STAFF
-Spinatch;mandatory;LOG/Administration/FOOD FOR MSF STAFF
-Sugar;mandatory;LOG/Administration/FOOD FOR MSF STAFF
-Taboule;mandatory;LOG/Administration/FOOD FOR MSF STAFF
-Tea;mandatory;LOG/Administration/FOOD FOR MSF STAFF
-Furnitures;mandatory;LOG/Administration
-Bed, Rigid;mandatory;LOG/Administration/Furnitures
-Chair;mandatory;LOG/Administration/Furnitures
-Cupboard;mandatory;LOG/Administration/Furnitures
-Shelve;mandatory;LOG/Administration/Furnitures
-Team life;mandatory;LOG/Administration
-back-pack;mandatory;LOG/Administration/Team life
-Bin, Rubbish;mandatory;LOG/Administration/Team life
-Leather boots;mandatory;LOG/Administration/Team life
-RUBBER BOOTS;mandatory;LOG/Administration/Team life
-Boots;mandatory;LOG/Administration/Team life
-Boots, white colour;mandatory;LOG/Administration/Team life
-GOURD, aluminium;mandatory;LOG/Administration/Team life
-Bucket;mandatory;LOG/Administration/Team life
-colar;mandatory;LOG/Administration/Team life
-COOKER;mandatory;LOG/Administration/Team life
-Cream;mandatory;LOG/Administration/Team life
-Hat, Lined;mandatory;LOG/Administration/Team life
-Lighter;mandatory;LOG/Administration/Team life
-LOGISTICIAN, FEMALE;mandatory;LOG/Administration/Team life
-Logistician, Male;mandatory;LOG/Administration/Team life
-Mattress;mandatory;LOG/Administration/Team life
-Methanol;mandatory;LOG/Administration/Team life
-Sheet;mandatory;LOG/Administration/Team life
-Soap;mandatory;LOG/Administration/Team life
-STOVE;mandatory;LOG/Administration/Team life
-SUN GLASS;mandatory;LOG/Administration/Team life
-Tee Shirt;mandatory;LOG/Administration/Team life
-Towel;mandatory;LOG/Administration/Team life
-Vest;mandatory;LOG/Administration/Team life
-Office equipment;mandatory;LOG/Administration
-Calculator;mandatory;LOG/Administration/Office equipment
-Camera;mandatory;LOG/Administration/Office equipment
-duplicator;mandatory;LOG/Administration/Office equipment
-Photocopy Machine;mandatory;LOG/Administration/Office equipment
-Projector;mandatory;LOG/Administration/Office equipment
-Ribbon;mandatory;LOG/Administration/Office equipment
-Stencil;mandatory;LOG/Administration/Office equipment
-TELEFAX;mandatory;LOG/Administration/Office equipment
-STATIONERY;mandatory;LOG/Administration
-Book, Accounting;mandatory;LOG/Administration/STATIONERY
-Book, Exercice;mandatory;LOG/Administration/STATIONERY
-Card, visit;mandatory;LOG/Administration/STATIONERY
-Folder;mandatory;LOG/Administration/STATIONERY
-Label;mandatory;LOG/Administration/STATIONERY
-MAGNIFYING GLASS;mandatory;LOG/Administration/STATIONERY
-Paper;mandatory;LOG/Administration/STATIONERY
-Pen Felt;mandatory;LOG/Administration/STATIONERY
-Pen Marker;mandatory;LOG/Administration/STATIONERY
-Stamp;mandatory;LOG/Administration/STATIONERY
+Data processing;mandatory;LOG|Administration
+Cable, dataprocessing;mandatory;LOG|Administration|Data processing
+Cartridge;mandatory;LOG|Administration|Data processing
+Computer, Laptop;mandatory;LOG|Administration|Data processing
+Keyboard AZERTY;mandatory;LOG|Administration|Data processing
+Modem;mandatory;LOG|Administration|Data processing
+Printer;mandatory;LOG|Administration|Data processing
+Screen - Monitor;mandatory;LOG|Administration|Data processing
+Switch;mandatory;LOG|Administration|Data processing
+FOOD FOR MSF STAFF;mandatory;LOG|Administration
+Beef;mandatory;LOG|Administration|FOOD FOR MSF STAFF
+Cassoulet;mandatory;LOG|Administration|FOOD FOR MSF STAFF
+Coffe;mandatory;LOG|Administration|FOOD FOR MSF STAFF
+dehydrated meal;mandatory;LOG|Administration|FOOD FOR MSF STAFF
+Duck;mandatory;LOG|Administration|FOOD FOR MSF STAFF
+Fruit;mandatory;LOG|Administration|FOOD FOR MSF STAFF
+Spinatch;mandatory;LOG|Administration|FOOD FOR MSF STAFF
+Sugar;mandatory;LOG|Administration|FOOD FOR MSF STAFF
+Taboule;mandatory;LOG|Administration|FOOD FOR MSF STAFF
+Tea;mandatory;LOG|Administration|FOOD FOR MSF STAFF
+Furnitures;mandatory;LOG|Administration
+Bed, Rigid;mandatory;LOG|Administration|Furnitures
+Chair;mandatory;LOG|Administration|Furnitures
+Cupboard;mandatory;LOG|Administration|Furnitures
+Shelve;mandatory;LOG|Administration|Furnitures
+Team life;mandatory;LOG|Administration
+back-pack;mandatory;LOG|Administration|Team life
+Bin, Rubbish;mandatory;LOG|Administration|Team life
+Leather boots;mandatory;LOG|Administration|Team life
+RUBBER BOOTS;mandatory;LOG|Administration|Team life
+Boots;mandatory;LOG|Administration|Team life
+Boots, white colour;mandatory;LOG|Administration|Team life
+GOURD, aluminium;mandatory;LOG|Administration|Team life
+Bucket;mandatory;LOG|Administration|Team life
+colar;mandatory;LOG|Administration|Team life
+COOKER;mandatory;LOG|Administration|Team life
+Cream;mandatory;LOG|Administration|Team life
+Hat, Lined;mandatory;LOG|Administration|Team life
+Lighter;mandatory;LOG|Administration|Team life
+LOGISTICIAN, FEMALE;mandatory;LOG|Administration|Team life
+Logistician, Male;mandatory;LOG|Administration|Team life
+Mattress;mandatory;LOG|Administration|Team life
+Methanol;mandatory;LOG|Administration|Team life
+Sheet;mandatory;LOG|Administration|Team life
+Soap;mandatory;LOG|Administration|Team life
+STOVE;mandatory;LOG|Administration|Team life
+SUN GLASS;mandatory;LOG|Administration|Team life
+Tee Shirt;mandatory;LOG|Administration|Team life
+Towel;mandatory;LOG|Administration|Team life
+Vest;mandatory;LOG|Administration|Team life
+Office equipment;mandatory;LOG|Administration
+Calculator;mandatory;LOG|Administration|Office equipment
+Camera;mandatory;LOG|Administration|Office equipment
+duplicator;mandatory;LOG|Administration|Office equipment
+Photocopy Machine;mandatory;LOG|Administration|Office equipment
+Projector;mandatory;LOG|Administration|Office equipment
+Ribbon;mandatory;LOG|Administration|Office equipment
+Stencil;mandatory;LOG|Administration|Office equipment
+TELEFAX;mandatory;LOG|Administration|Office equipment
+STATIONERY;mandatory;LOG|Administration
+Book, Accounting;mandatory;LOG|Administration|STATIONERY
+Book, Exercice;mandatory;LOG|Administration|STATIONERY
+Card, visit;mandatory;LOG|Administration|STATIONERY
+Folder;mandatory;LOG|Administration|STATIONERY
+Label;mandatory;LOG|Administration|STATIONERY
+MAGNIFYING GLASS;mandatory;LOG|Administration|STATIONERY
+Paper;mandatory;LOG|Administration|STATIONERY
+Pen Felt;mandatory;LOG|Administration|STATIONERY
+Pen Marker;mandatory;LOG|Administration|STATIONERY
+Stamp;mandatory;LOG|Administration|STATIONERY
 Camp;mandatory;LOG
-Building;mandatory;LOG/Camp
-Block;mandatory;LOG/Camp/Building
-Gravel;mandatory;LOG/Camp/Building
-Iron, Pipe, Profile...;mandatory;LOG/Camp/Building
-Iron, Rod;mandatory;LOG/Camp/Building
-Sheet, Aluminium;mandatory;LOG/Camp/Building
-VERMICULITH;mandatory;LOG/Camp/Building
-Wood, Plank;mandatory;LOG/Camp/Building
-Wood, Stud;mandatory;LOG/Camp/Building
-Wood, Timber;mandatory;LOG/Camp/Building
-SEMIPERMANENT Shelter;mandatory;LOG/Camp
-Container;mandatory;LOG/Camp/SEMIPERMANENT Shelter
-Shelters;mandatory;LOG/Camp
-Rope;mandatory;LOG/Camp/Shelters
-Blanket;mandatory;LOG/Camp/Shelters
-Heater, Fuel;mandatory;LOG/Camp/Shelters
-Heater, space;mandatory;LOG/Camp/Shelters
-Peg, Mud type;mandatory;LOG/Camp/Shelters
-Peg Sand;mandatory;LOG/Camp/Shelters
-Pegs, Wind;mandatory;LOG/Camp/Shelters
-Plastic Sheeting;mandatory;LOG/Camp/Shelters
-Pole;mandatory;LOG/Camp/Shelters
-Tape;mandatory;LOG/Camp/Shelters
-Tent Dispensary;mandatory;LOG/Camp/Shelters
-Tent Family;mandatory;LOG/Camp/Shelters
-Hospital Tent;mandatory;LOG/Camp/Shelters
-Tent, Multipurpose;mandatory;LOG/Camp/Shelters
-Tent, Team;mandatory;LOG/Camp/Shelters
-Warehouse;mandatory;LOG/Camp/Shelters
-Water and sanitation;mandatory;LOG/Camp
-Altimeter;mandatory;LOG/Camp/Water and sanitation
-beaker, 1 l, graduated, plastic;mandatory;LOG/Camp/Water and sanitation
-Coupling, Collar, Clip;mandatory;LOG/Camp/Water and sanitation
-Coupling, Half;mandatory;LOG/Camp/Water and sanitation
-Coupling, Nipple;mandatory;LOG/Camp/Water and sanitation
-Coupling;mandatory;LOG/Camp/Water and sanitation
-Coupling, Reducer;mandatory;LOG/Camp/Water and sanitation
-Coupling, T;mandatory;LOG/Camp/Water and sanitation
-Coupling, Y;mandatory;LOG/Camp/Water and sanitation
-dosing pump;mandatory;LOG/Camp/Water and sanitation
-Filter, water;mandatory;LOG/Camp/Water and sanitation
-Hose;mandatory;LOG/Camp/Water and sanitation
-Insecticide against cockroaches;mandatory;LOG/Camp/Water and sanitation
-Insecticide fr insecticidal dusting;mandatory;LOG/Camp/Water and sanitation
-Insecticide for IRS;mandatory;LOG/Camp/Water and sanitation
-Motor Pump Diesel;mandatory;LOG/Camp/Water and sanitation
-Motor Pump Electrical;mandatory;LOG/Camp/Water and sanitation
-Motor Pump, Petrol;mandatory;LOG/Camp/Water and sanitation
-Sprayer;mandatory;LOG/Camp/Water and sanitation
-Squatting slab;mandatory;LOG/Camp/Water and sanitation
-Stainer;mandatory;LOG/Camp/Water and sanitation
-Tank;mandatory;LOG/Camp/Water and sanitation
-Tank, Onion;mandatory;LOG/Camp/Water and sanitation
-Test, tube;mandatory;LOG/Camp/Water and sanitation
-Test, Water;mandatory;LOG/Camp/Water and sanitation
-Valve;mandatory;LOG/Camp/Water and sanitation
-Lime quick;mandatory;LOG/Camp/Water and sanitation
-Permethrine;mandatory;LOG/Camp/Water and sanitation
+Building;mandatory;LOG|Camp
+Block;mandatory;LOG|Camp|Building
+Gravel;mandatory;LOG|Camp|Building
+Iron, Pipe, Profile...;mandatory;LOG|Camp|Building
+Iron, Rod;mandatory;LOG|Camp|Building
+Sheet, Aluminium;mandatory;LOG|Camp|Building
+VERMICULITH;mandatory;LOG|Camp|Building
+Wood, Plank;mandatory;LOG|Camp|Building
+Wood, Stud;mandatory;LOG|Camp|Building
+Wood, Timber;mandatory;LOG|Camp|Building
+SEMIPERMANENT Shelter;mandatory;LOG|Camp
+Container;mandatory;LOG|Camp|SEMIPERMANENT Shelter
+Shelters;mandatory;LOG|Camp
+Rope;mandatory;LOG|Camp|Shelters
+Blanket;mandatory;LOG|Camp|Shelters
+Heater, Fuel;mandatory;LOG|Camp|Shelters
+Heater, space;mandatory;LOG|Camp|Shelters
+Peg, Mud type;mandatory;LOG|Camp|Shelters
+Peg Sand;mandatory;LOG|Camp|Shelters
+Pegs, Wind;mandatory;LOG|Camp|Shelters
+Plastic Sheeting;mandatory;LOG|Camp|Shelters
+Pole;mandatory;LOG|Camp|Shelters
+Tape;mandatory;LOG|Camp|Shelters
+Tent Dispensary;mandatory;LOG|Camp|Shelters
+Tent Family;mandatory;LOG|Camp|Shelters
+Hospital Tent;mandatory;LOG|Camp|Shelters
+Tent, Multipurpose;mandatory;LOG|Camp|Shelters
+Tent, Team;mandatory;LOG|Camp|Shelters
+Warehouse;mandatory;LOG|Camp|Shelters
+Water and sanitation;mandatory;LOG|Camp
+Altimeter;mandatory;LOG|Camp|Water and sanitation
+beaker, 1 l, graduated, plastic;mandatory;LOG|Camp|Water and sanitation
+Coupling, Collar, Clip;mandatory;LOG|Camp|Water and sanitation
+Coupling, Half;mandatory;LOG|Camp|Water and sanitation
+Coupling, Nipple;mandatory;LOG|Camp|Water and sanitation
+Coupling;mandatory;LOG|Camp|Water and sanitation
+Coupling, Reducer;mandatory;LOG|Camp|Water and sanitation
+Coupling, T;mandatory;LOG|Camp|Water and sanitation
+Coupling, Y;mandatory;LOG|Camp|Water and sanitation
+dosing pump;mandatory;LOG|Camp|Water and sanitation
+Filter, water;mandatory;LOG|Camp|Water and sanitation
+Hose;mandatory;LOG|Camp|Water and sanitation
+Insecticide against cockroaches;mandatory;LOG|Camp|Water and sanitation
+Insecticide fr insecticidal dusting;mandatory;LOG|Camp|Water and sanitation
+Insecticide for IRS;mandatory;LOG|Camp|Water and sanitation
+Motor Pump Diesel;mandatory;LOG|Camp|Water and sanitation
+Motor Pump Electrical;mandatory;LOG|Camp|Water and sanitation
+Motor Pump, Petrol;mandatory;LOG|Camp|Water and sanitation
+Sprayer;mandatory;LOG|Camp|Water and sanitation
+Squatting slab;mandatory;LOG|Camp|Water and sanitation
+Stainer;mandatory;LOG|Camp|Water and sanitation
+Tank;mandatory;LOG|Camp|Water and sanitation
+Tank, Onion;mandatory;LOG|Camp|Water and sanitation
+Test, tube;mandatory;LOG|Camp|Water and sanitation
+Test, Water;mandatory;LOG|Camp|Water and sanitation
+Valve;mandatory;LOG|Camp|Water and sanitation
+Lime quick;mandatory;LOG|Camp|Water and sanitation
+Permethrine;mandatory;LOG|Camp|Water and sanitation
 Drugs;mandatory;MED
-Diagnostic tests;mandatory;MED/Drugs
-Blood Group Test;mandatory;MED/Drugs/Diagnostic tests
-Brucellosis test;mandatory;MED/Drugs/Diagnostic tests
-Direct agglutination test;mandatory;MED/Drugs/Diagnostic tests
-HIV test, Genie II;mandatory;MED/Drugs/Diagnostic tests
-Hiv Test;mandatory;MED/Drugs/Diagnostic tests
-Meningitis Test;mandatory;MED/Drugs/Diagnostic tests
-Dosage kit for spectrophotometer;mandatory;MED/Drugs/Diagnostic tests
-Trypanosomiasis, Chagas;mandatory;MED/Drugs/Diagnostic tests
-Trypano Test;mandatory;MED/Drugs/Diagnostic tests
-Ophtalmic drugs for external use;mandatory;MED/Drugs
-Chloramphenicol;mandatory;MED/Drugs/Ophtalmic drugs for external use
-Dexamethasone + neomycine;mandatory;MED/Drugs/Ophtalmic drugs for external use
-Fluoresceine;mandatory;MED/Drugs/Ophtalmic drugs for external use
-Oxybuprocaine;mandatory;MED/Drugs/Ophtalmic drugs for external use
-Pilocarpine;mandatory;MED/Drugs/Ophtalmic drugs for external use
-Trocapinamide Mydriaticum;mandatory;MED/Drugs/Ophtalmic drugs for external use
-Drugs external use;mandatory;MED/Drugs
-Chlorhexidine;mandatory;MED/Drugs/Drugs external use
-Dinoprostone;mandatory;MED/Drugs/Drugs external use
-Iodine Povidone;mandatory;MED/Drugs/Drugs external use
-Malathion;mandatory;MED/Drugs/Drugs external use
-Permethrin;mandatory;MED/Drugs/Drugs external use
-Sodium Bicarbonate;mandatory;MED/Drugs/Drugs external use
-Talc;mandatory;MED/Drugs/Drugs external use
-Infusions;mandatory;MED/Drugs
-Dextrose;mandatory;MED/Drugs/Infusions
-Ringer Lactate;mandatory;MED/Drugs/Infusions
-Sodium Chloride;mandatory;MED/Drugs/Infusions
-Injectable drugs;mandatory;MED/Drugs
-Amikacin;mandatory;MED/Drugs/Injectable drugs
-Amphotericin B;mandatory;MED/Drugs/Injectable drugs
-Cefazolin;mandatory;MED/Drugs/Injectable drugs
-Chlorpromazine;mandatory;MED/Drugs/Injectable drugs
-Chloramphenicol;mandatory;MED/Drugs/Injectable drugs
-Chlorpheniramine;mandatory;MED/Drugs/Injectable drugs
-Eflornithine;mandatory;MED/Drugs/Injectable drugs
-Ephedrine;mandatory;MED/Drugs/Injectable drugs
-Erythromycin;mandatory;MED/Drugs/Injectable drugs
-Ganciclovir;mandatory;MED/Drugs/Injectable drugs
-Haloperidol;mandatory;MED/Drugs/Injectable drugs
-Medroxyprogesteron ac + estradiol;mandatory;MED/Drugs/Injectable drugs
-Meglumine Antimoniate;mandatory;MED/Drugs/Injectable drugs
-Melarsoprol;mandatory;MED/Drugs/Injectable drugs
-Nadroparine;mandatory;MED/Drugs/Injectable drugs
-Penicilline Benzathine;mandatory;MED/Drugs/Injectable drugs
-Pentamidine;mandatory;MED/Drugs/Injectable drugs
-Phenobarbital;mandatory;MED/Drugs/Injectable drugs
-Phytomenadione;mandatory;MED/Drugs/Injectable drugs
-Protamine;mandatory;MED/Drugs/Injectable drugs
-Oral drugs;mandatory;MED/Drugs
-Artemeter + Lumefantrine Blister FD;mandatory;MED/Drugs/Oral drugs
-Aluminium Hydroxide;mandatory;MED/Drugs/Oral drugs
-Atovaquone + Proguanil, blister;mandatory;MED/Drugs/Oral drugs
-Ascorbic Acid;mandatory;MED/Drugs/Oral drugs
-Artesunate + sulfadoxine - pyrimetham;mandatory;MED/Drugs/Oral drugs
-Azithromycine;mandatory;MED/Drugs/Oral drugs
-Beclomethasone;mandatory;MED/Drugs/Oral drugs
-Benznidazole;mandatory;MED/Drugs/Oral drugs
-Biperiden;mandatory;MED/Drugs/Oral drugs
-Cefixime;mandatory;MED/Drugs/Oral drugs
-Clofazimine;mandatory;MED/Drugs/Oral drugs
-Clomipramide;mandatory;MED/Drugs/Oral drugs
-Cloxacilline;mandatory;MED/Drugs/Oral drugs
-Didanosine;mandatory;MED/Drugs/Oral drugs
-Diethylcarbamazine;mandatory;MED/Drugs/Oral drugs
-Digoxine;mandatory;MED/Drugs/Oral drugs
-Efavirenz;mandatory;MED/Drugs/Oral drugs
-Fluconazole;mandatory;MED/Drugs/Oral drugs
-Isoniazid;mandatory;MED/Drugs/Oral drugs
-Ivermectine;mandatory;MED/Drugs/Oral drugs
-Levothyroxine;mandatory;MED/Drugs/Oral drugs
-Lamivudine + Stavudine + Nevirapine;mandatory;MED/Drugs/Oral drugs
-Lamivudine (3TC) + Stavudine (d4T);mandatory;MED/Drugs/Oral drugs
-Morphine;mandatory;MED/Drugs/Oral drugs
-Ondasetron;mandatory;MED/Drugs/Oral drugs
-Vaccines;mandatory;MED/Drugs
-Immunoglobulins human antirabies;mandatory;MED/Drugs/Vaccines
-Vaccine Bcg;mandatory;MED/Drugs/Vaccines
-Vaccine, DPT+hepatitis B+Hib;mandatory;MED/Drugs/Vaccines
-Dipthery, tetanus, pertussis, hep B;mandatory;MED/Drugs/Vaccines
-Vaccine Haemophilus influenzae;mandatory;MED/Drugs/Vaccines
-Vaccine Measles;mandatory;MED/Drugs/Vaccines
-Vaccine Meningitis A+C;mandatory;MED/Drugs/Vaccines
-Vaccine Tetanus;mandatory;MED/Drugs/Vaccines
+Diagnostic tests;mandatory;MED|Drugs
+Blood Group Test;mandatory;MED|Drugs|Diagnostic tests
+Brucellosis test;mandatory;MED|Drugs|Diagnostic tests
+Direct agglutination test;mandatory;MED|Drugs|Diagnostic tests
+HIV test, Genie II;mandatory;MED|Drugs|Diagnostic tests
+Hiv Test;mandatory;MED|Drugs|Diagnostic tests
+Meningitis Test;mandatory;MED|Drugs|Diagnostic tests
+Dosage kit for spectrophotometer;mandatory;MED|Drugs|Diagnostic tests
+Trypanosomiasis, Chagas;mandatory;MED|Drugs|Diagnostic tests
+Trypano Test;mandatory;MED|Drugs|Diagnostic tests
+Ophtalmic drugs for external use;mandatory;MED|Drugs
+Chloramphenicol;mandatory;MED|Drugs|Ophtalmic drugs for external use
+Dexamethasone + neomycine;mandatory;MED|Drugs|Ophtalmic drugs for external use
+Fluoresceine;mandatory;MED|Drugs|Ophtalmic drugs for external use
+Oxybuprocaine;mandatory;MED|Drugs|Ophtalmic drugs for external use
+Pilocarpine;mandatory;MED|Drugs|Ophtalmic drugs for external use
+Trocapinamide Mydriaticum;mandatory;MED|Drugs|Ophtalmic drugs for external use
+Drugs external use;mandatory;MED|Drugs
+Chlorhexidine;mandatory;MED|Drugs|Drugs external use
+Dinoprostone;mandatory;MED|Drugs|Drugs external use
+Iodine Povidone;mandatory;MED|Drugs|Drugs external use
+Malathion;mandatory;MED|Drugs|Drugs external use
+Permethrin;mandatory;MED|Drugs|Drugs external use
+Sodium Bicarbonate;mandatory;MED|Drugs|Drugs external use
+Talc;mandatory;MED|Drugs|Drugs external use
+Infusions;mandatory;MED|Drugs
+Dextrose;mandatory;MED|Drugs|Infusions
+Ringer Lactate;mandatory;MED|Drugs|Infusions
+Sodium Chloride;mandatory;MED|Drugs|Infusions
+Injectable drugs;mandatory;MED|Drugs
+Amikacin;mandatory;MED|Drugs|Injectable drugs
+Amphotericin B;mandatory;MED|Drugs|Injectable drugs
+Cefazolin;mandatory;MED|Drugs|Injectable drugs
+Chlorpromazine;mandatory;MED|Drugs|Injectable drugs
+Chloramphenicol;mandatory;MED|Drugs|Injectable drugs
+Chlorpheniramine;mandatory;MED|Drugs|Injectable drugs
+Eflornithine;mandatory;MED|Drugs|Injectable drugs
+Ephedrine;mandatory;MED|Drugs|Injectable drugs
+Erythromycin;mandatory;MED|Drugs|Injectable drugs
+Ganciclovir;mandatory;MED|Drugs|Injectable drugs
+Haloperidol;mandatory;MED|Drugs|Injectable drugs
+Medroxyprogesteron ac + estradiol;mandatory;MED|Drugs|Injectable drugs
+Meglumine Antimoniate;mandatory;MED|Drugs|Injectable drugs
+Melarsoprol;mandatory;MED|Drugs|Injectable drugs
+Nadroparine;mandatory;MED|Drugs|Injectable drugs
+Penicilline Benzathine;mandatory;MED|Drugs|Injectable drugs
+Pentamidine;mandatory;MED|Drugs|Injectable drugs
+Phenobarbital;mandatory;MED|Drugs|Injectable drugs
+Phytomenadione;mandatory;MED|Drugs|Injectable drugs
+Protamine;mandatory;MED|Drugs|Injectable drugs
+Oral drugs;mandatory;MED|Drugs
+Artemeter + Lumefantrine Blister FD;mandatory;MED|Drugs|Oral drugs
+Aluminium Hydroxide;mandatory;MED|Drugs|Oral drugs
+Atovaquone + Proguanil, blister;mandatory;MED|Drugs|Oral drugs
+Ascorbic Acid;mandatory;MED|Drugs|Oral drugs
+Artesunate + sulfadoxine - pyrimetham;mandatory;MED|Drugs|Oral drugs
+Azithromycine;mandatory;MED|Drugs|Oral drugs
+Beclomethasone;mandatory;MED|Drugs|Oral drugs
+Benznidazole;mandatory;MED|Drugs|Oral drugs
+Biperiden;mandatory;MED|Drugs|Oral drugs
+Cefixime;mandatory;MED|Drugs|Oral drugs
+Clofazimine;mandatory;MED|Drugs|Oral drugs
+Clomipramide;mandatory;MED|Drugs|Oral drugs
+Cloxacilline;mandatory;MED|Drugs|Oral drugs
+Didanosine;mandatory;MED|Drugs|Oral drugs
+Diethylcarbamazine;mandatory;MED|Drugs|Oral drugs
+Digoxine;mandatory;MED|Drugs|Oral drugs
+Efavirenz;mandatory;MED|Drugs|Oral drugs
+Fluconazole;mandatory;MED|Drugs|Oral drugs
+Isoniazid;mandatory;MED|Drugs|Oral drugs
+Ivermectine;mandatory;MED|Drugs|Oral drugs
+Levothyroxine;mandatory;MED|Drugs|Oral drugs
+Lamivudine + Stavudine + Nevirapine;mandatory;MED|Drugs|Oral drugs
+Lamivudine (3TC) + Stavudine (d4T);mandatory;MED|Drugs|Oral drugs
+Morphine;mandatory;MED|Drugs|Oral drugs
+Ondasetron;mandatory;MED|Drugs|Oral drugs
+Vaccines;mandatory;MED|Drugs
+Immunoglobulins human antirabies;mandatory;MED|Drugs|Vaccines
+Vaccine Bcg;mandatory;MED|Drugs|Vaccines
+Vaccine, DPT+hepatitis B+Hib;mandatory;MED|Drugs|Vaccines
+Dipthery, tetanus, pertussis, hep B;mandatory;MED|Drugs|Vaccines
+Vaccine Haemophilus influenzae;mandatory;MED|Drugs|Vaccines
+Vaccine Measles;mandatory;MED|Drugs|Vaccines
+Vaccine Meningitis A+C;mandatory;MED|Drugs|Vaccines
+Vaccine Tetanus;mandatory;MED|Drugs|Vaccines
 Medical Equipment;mandatory;MED
-Anaesthesia;mandatory;MED/Medical Equipment
-anaesthesia machine;mandatory;MED/Medical Equipment/Anaesthesia
-Balloon, Anaesthesia;mandatory;MED/Medical Equipment/Anaesthesia
-Laryngoscope, Blade;mandatory;MED/Medical Equipment/Anaesthesia
-Mask, laryngeal;mandatory;MED/Medical Equipment/Anaesthesia
-Anaesthesia Mask;mandatory;MED/Medical Equipment/Anaesthesia
-Oxymeter;mandatory;MED/Medical Equipment/Anaesthesia
-Tourniquet;mandatory;MED/Medical Equipment/Anaesthesia
-Tube;mandatory;MED/Medical Equipment/Anaesthesia
-Hospital equipment;mandatory;MED/Medical Equipment
-Concentrator;mandatory;MED/Medical Equipment/Hospital equipment
-Defibrillator;mandatory;MED/Medical Equipment/Hospital equipment
-Dermatome, electric;mandatory;MED/Medical Equipment/Hospital equipment
-Electro Surgical Unit;mandatory;MED/Medical Equipment/Hospital equipment
-Operating Lamp;mandatory;MED/Medical Equipment/Hospital equipment
-Nebulizer + compressor;mandatory;MED/Medical Equipment/Hospital equipment
-Succion Pump;mandatory;MED/Medical Equipment/Hospital equipment
-Table Operating;mandatory;MED/Medical Equipment/Hospital equipment
-Saw, oscillating;mandatory;MED/Medical Equipment/Hospital equipment
-Vaccuum Extractor;mandatory;MED/Medical Equipment/Hospital equipment
-Laboratory equipment;mandatory;MED/Medical Equipment
-BLOOD SAMPLING DEVICE, VACUUM;mandatory;MED/Medical Equipment/Laboratory equipment
-Centrifuge;mandatory;MED/Medical Equipment/Laboratory equipment
-Container protection;mandatory;MED/Medical Equipment/Laboratory equipment
-Container;mandatory;MED/Medical Equipment/Laboratory equipment
-Cyflow counter;mandatory;MED/Medical Equipment/Laboratory equipment
-Measuring Cylinder;mandatory;MED/Medical Equipment/Laboratory equipment
-Fluoreslens;mandatory;MED/Medical Equipment/Laboratory equipment
-Microscope;mandatory;MED/Medical Equipment/Laboratory equipment
-Pipette, automatic, adjustable;mandatory;MED/Medical Equipment/Laboratory equipment
-Rotator;mandatory;MED/Medical Equipment/Laboratory equipment
-Linen and protective clothing;mandatory;MED/Medical Equipment
-Cap, Hood;mandatory;MED/Medical Equipment/Linen and protective clothing
-CAP, DRESSING, SURGICAL, woven;mandatory;MED/Medical Equipment/Linen and protective clothing
-White Coat;mandatory;MED/Medical Equipment/Linen and protective clothing
-Surgical drape single use;mandatory;MED/Medical Equipment/Linen and protective clothing
-Mask, protection, resp.;mandatory;MED/Medical Equipment/Linen and protective clothing
-Medical equipment;mandatory;MED/Medical Equipment
-Collar, cervical;mandatory;MED/Medical Equipment/Medical equipment
-Glasses;mandatory;MED/Medical Equipment/Medical equipment
-Breast pump;mandatory;MED/Medical Equipment/Medical equipment
-Spacer;mandatory;MED/Medical Equipment/Medical equipment
-Sterilization;mandatory;MED/Medical Equipment
-Autoclave;mandatory;MED/Medical Equipment/Sterilization
-Sterilization paper;mandatory;MED/Medical Equipment/Sterilization
-Dental surgical instruments;mandatory;MED/Medical Equipment
-Curette of Gracey;mandatory;MED/Medical Equipment/Dental surgical instruments
-Curette of Hemingway;mandatory;MED/Medical Equipment/Dental surgical instruments
-Elevator;mandatory;MED/Medical Equipment/Dental surgical instruments
-Forceps Dental;mandatory;MED/Medical Equipment/Dental surgical instruments
-Surgical instruments for external fixator;mandatory;MED/Medical Equipment
-PIN;mandatory;MED/Medical Equipment/Surgical instruments for external fixator
-TUBE, carbon;mandatory;MED/Medical Equipment/Surgical instruments for external fixator
-Ophtalmic surgical instruments;mandatory;MED/Medical Equipment
-Forceps Of Halstead;mandatory;MED/Medical Equipment/Ophtalmic surgical instruments
-Iris Forceps Of Hess;mandatory;MED/Medical Equipment/Ophtalmic surgical instruments
-Tenotomy Scissors;mandatory;MED/Medical Equipment/Ophtalmic surgical instruments
-Surgical instruments;mandatory;MED/Medical Equipment
-Bow of Boehler;mandatory;MED/Medical Equipment/Surgical instruments
-Bow Of Kirschner;mandatory;MED/Medical Equipment/Surgical instruments
-Basket, instruments f sterilization;mandatory;MED/Medical Equipment/Surgical instruments
-Clamp, Cardiovascular, DeBakey;mandatory;MED/Medical Equipment/Surgical instruments
-Filter for sterilizing container;mandatory;MED/Medical Equipment/Surgical instruments
-Gasket for sterilizing container;mandatory;MED/Medical Equipment/Surgical instruments
-Curette, Volkman;mandatory;MED/Medical Equipment/Surgical instruments
-Dilator, Uterine, Hegar;mandatory;MED/Medical Equipment/Surgical instruments
-Ventouse;mandatory;MED/Medical Equipment/Surgical instruments
+Anaesthesia;mandatory;MED|Medical Equipment
+anaesthesia machine;mandatory;MED|Medical Equipment|Anaesthesia
+Balloon, Anaesthesia;mandatory;MED|Medical Equipment|Anaesthesia
+Laryngoscope, Blade;mandatory;MED|Medical Equipment|Anaesthesia
+Mask, laryngeal;mandatory;MED|Medical Equipment|Anaesthesia
+Anaesthesia Mask;mandatory;MED|Medical Equipment|Anaesthesia
+Oxymeter;mandatory;MED|Medical Equipment|Anaesthesia
+Tourniquet;mandatory;MED|Medical Equipment|Anaesthesia
+Tube;mandatory;MED|Medical Equipment|Anaesthesia
+Hospital equipment;mandatory;MED|Medical Equipment
+Concentrator;mandatory;MED|Medical Equipment|Hospital equipment
+Defibrillator;mandatory;MED|Medical Equipment|Hospital equipment
+Dermatome, electric;mandatory;MED|Medical Equipment|Hospital equipment
+Electro Surgical Unit;mandatory;MED|Medical Equipment|Hospital equipment
+Operating Lamp;mandatory;MED|Medical Equipment|Hospital equipment
+Nebulizer + compressor;mandatory;MED|Medical Equipment|Hospital equipment
+Succion Pump;mandatory;MED|Medical Equipment|Hospital equipment
+Table Operating;mandatory;MED|Medical Equipment|Hospital equipment
+Saw, oscillating;mandatory;MED|Medical Equipment|Hospital equipment
+Vaccuum Extractor;mandatory;MED|Medical Equipment|Hospital equipment
+Laboratory equipment;mandatory;MED|Medical Equipment
+BLOOD SAMPLING DEVICE, VACUUM;mandatory;MED|Medical Equipment|Laboratory equipment
+Centrifuge;mandatory;MED|Medical Equipment|Laboratory equipment
+Container protection;mandatory;MED|Medical Equipment|Laboratory equipment
+Container;mandatory;MED|Medical Equipment|Laboratory equipment
+Cyflow counter;mandatory;MED|Medical Equipment|Laboratory equipment
+Measuring Cylinder;mandatory;MED|Medical Equipment|Laboratory equipment
+Fluoreslens;mandatory;MED|Medical Equipment|Laboratory equipment
+Microscope;mandatory;MED|Medical Equipment|Laboratory equipment
+Pipette, automatic, adjustable;mandatory;MED|Medical Equipment|Laboratory equipment
+Rotator;mandatory;MED|Medical Equipment|Laboratory equipment
+Linen and protective clothing;mandatory;MED|Medical Equipment
+Cap, Hood;mandatory;MED|Medical Equipment|Linen and protective clothing
+CAP, DRESSING, SURGICAL, woven;mandatory;MED|Medical Equipment|Linen and protective clothing
+White Coat;mandatory;MED|Medical Equipment|Linen and protective clothing
+Surgical drape single use;mandatory;MED|Medical Equipment|Linen and protective clothing
+Mask, protection, resp.;mandatory;MED|Medical Equipment|Linen and protective clothing
+Medical equipment;mandatory;MED|Medical Equipment
+Collar, cervical;mandatory;MED|Medical Equipment|Medical equipment
+Glasses;mandatory;MED|Medical Equipment|Medical equipment
+Breast pump;mandatory;MED|Medical Equipment|Medical equipment
+Spacer;mandatory;MED|Medical Equipment|Medical equipment
+Sterilization;mandatory;MED|Medical Equipment
+Autoclave;mandatory;MED|Medical Equipment|Sterilization
+Sterilization paper;mandatory;MED|Medical Equipment|Sterilization
+Dental surgical instruments;mandatory;MED|Medical Equipment
+Curette of Gracey;mandatory;MED|Medical Equipment|Dental surgical instruments
+Curette of Hemingway;mandatory;MED|Medical Equipment|Dental surgical instruments
+Elevator;mandatory;MED|Medical Equipment|Dental surgical instruments
+Forceps Dental;mandatory;MED|Medical Equipment|Dental surgical instruments
+Surgical instruments for external fixator;mandatory;MED|Medical Equipment
+PIN;mandatory;MED|Medical Equipment|Surgical instruments for external fixator
+TUBE, carbon;mandatory;MED|Medical Equipment|Surgical instruments for external fixator
+Ophtalmic surgical instruments;mandatory;MED|Medical Equipment
+Forceps Of Halstead;mandatory;MED|Medical Equipment|Ophtalmic surgical instruments
+Iris Forceps Of Hess;mandatory;MED|Medical Equipment|Ophtalmic surgical instruments
+Tenotomy Scissors;mandatory;MED|Medical Equipment|Ophtalmic surgical instruments
+Surgical instruments;mandatory;MED|Medical Equipment
+Bow of Boehler;mandatory;MED|Medical Equipment|Surgical instruments
+Bow Of Kirschner;mandatory;MED|Medical Equipment|Surgical instruments
+Basket, instruments f sterilization;mandatory;MED|Medical Equipment|Surgical instruments
+Clamp, Cardiovascular, DeBakey;mandatory;MED|Medical Equipment|Surgical instruments
+Filter for sterilizing container;mandatory;MED|Medical Equipment|Surgical instruments
+Gasket for sterilizing container;mandatory;MED|Medical Equipment|Surgical instruments
+Curette, Volkman;mandatory;MED|Medical Equipment|Surgical instruments
+Dilator, Uterine, Hegar;mandatory;MED|Medical Equipment|Surgical instruments
+Ventouse;mandatory;MED|Medical Equipment|Surgical instruments
 Kit;mandatory;LOG
-Administration Kits;mandatory;LOG/Kit
-Kit Library;mandatory;LOG/Kit/Administration Kits
-Kit Life;mandatory;LOG/Kit/Administration Kits
-Module Administrative;mandatory;LOG/Kit/Administration Kits
-Module Life;mandatory;LOG/Kit/Administration Kits
-Module Photocopy;mandatory;LOG/Kit/Administration Kits
-Module Stationnery;mandatory;LOG/Kit/Administration Kits
-Camps kits;mandatory;LOG/Kit
-List, Building;mandatory;LOG/Kit/Camps kits
-Module Cooking;mandatory;LOG/Kit/Camps kits
-Module Installation;mandatory;LOG/Kit/Camps kits
-Module Shelter;mandatory;LOG/Kit/Camps kits
-Communication kits;mandatory;LOG/Kit
-Kit Hf Base;mandatory;LOG/Kit/Communication kits
-Kit Hf Mobile;mandatory;LOG/Kit/Communication kits
-Kit Vhf;mandatory;LOG/Kit/Communication kits
-Module Hf Base;mandatory;LOG/Kit/Communication kits
-Module UHF;mandatory;LOG/Kit/Communication kits
-Module Vhf;mandatory;LOG/Kit/Communication kits
+Administration Kits;mandatory;LOG|Kit
+Kit Library;mandatory;LOG|Kit|Administration Kits
+Kit Life;mandatory;LOG|Kit|Administration Kits
+Module Administrative;mandatory;LOG|Kit|Administration Kits
+Module Life;mandatory;LOG|Kit|Administration Kits
+Module Photocopy;mandatory;LOG|Kit|Administration Kits
+Module Stationnery;mandatory;LOG|Kit|Administration Kits
+Camps kits;mandatory;LOG|Kit
+List, Building;mandatory;LOG|Kit|Camps kits
+Module Cooking;mandatory;LOG|Kit|Camps kits
+Module Installation;mandatory;LOG|Kit|Camps kits
+Module Shelter;mandatory;LOG|Kit|Camps kits
+Communication kits;mandatory;LOG|Kit
+Kit Hf Base;mandatory;LOG|Kit|Communication kits
+Kit Hf Mobile;mandatory;LOG|Kit|Communication kits
+Kit Vhf;mandatory;LOG|Kit|Communication kits
+Module Hf Base;mandatory;LOG|Kit|Communication kits
+Module UHF;mandatory;LOG|Kit|Communication kits
+Module Vhf;mandatory;LOG|Kit|Communication kits
 Kit;mandatory;MED
-Medical kits;mandatory;MED/Kit
-Cholera Kit;mandatory;MED/Kit/Medical kits
-Anaesthesia Module;mandatory;MED/Kit/Medical kits
-Module, autoclave;mandatory;MED/Kit/Medical kits
-Basic Module;mandatory;MED/Kit/Medical kits
-Cholera Module;mandatory;MED/Kit/Medical kits
-Module Complementary;mandatory;MED/Kit/Medical kits
-Disaster Module;mandatory;MED/Kit/Medical kits
-Ebola module;mandatory;MED/Kit/Medical kits
-First Aid Drugs Module;mandatory;MED/Kit/Medical kits
-Module Immunization;mandatory;MED/Kit/Medical kits
-Laboratory Module;mandatory;MED/Kit/Medical kits
-Medical-Surgical Module;mandatory;MED/Kit/Medical kits
-Nutrition Module;mandatory;MED/Kit/Medical kits
-Surgical Module;mandatory;MED/Kit/Medical kits
-Programme support kits;mandatory;LOG/Kit
-Kit Generator;mandatory;LOG/Kit/Programme support kits
-Kit Tools;mandatory;LOG/Kit/Programme support kits
-Transport kits;mandatory;LOG/Kit
-Kit Modification;mandatory;LOG/Kit/Transport kits
-Module Maintenance;mandatory;LOG/Kit/Transport kits
-Water and sanitation kits;mandatory;LOG/Kit
-Kit Motor Pump, Diesel;mandatory;LOG/Kit/Water and sanitation kits
-kit electric pump;mandatory;LOG/Kit/Water and sanitation kits
-Kit Tank;mandatory;LOG/Kit/Water and sanitation kits
+Medical kits;mandatory;MED|Kit
+Cholera Kit;mandatory;MED|Kit|Medical kits
+Anaesthesia Module;mandatory;MED|Kit|Medical kits
+Module, autoclave;mandatory;MED|Kit|Medical kits
+Basic Module;mandatory;MED|Kit|Medical kits
+Cholera Module;mandatory;MED|Kit|Medical kits
+Module Complementary;mandatory;MED|Kit|Medical kits
+Disaster Module;mandatory;MED|Kit|Medical kits
+Ebola module;mandatory;MED|Kit|Medical kits
+First Aid Drugs Module;mandatory;MED|Kit|Medical kits
+Module Immunization;mandatory;MED|Kit|Medical kits
+Laboratory Module;mandatory;MED|Kit|Medical kits
+Medical-Surgical Module;mandatory;MED|Kit|Medical kits
+Nutrition Module;mandatory;MED|Kit|Medical kits
+Surgical Module;mandatory;MED|Kit|Medical kits
+Programme support kits;mandatory;LOG|Kit
+Kit Generator;mandatory;LOG|Kit|Programme support kits
+Kit Tools;mandatory;LOG|Kit|Programme support kits
+Transport kits;mandatory;LOG|Kit
+Kit Modification;mandatory;LOG|Kit|Transport kits
+Module Maintenance;mandatory;LOG|Kit|Transport kits
+Water and sanitation kits;mandatory;LOG|Kit
+Kit Motor Pump, Diesel;mandatory;LOG|Kit|Water and sanitation kits
+kit electric pump;mandatory;LOG|Kit|Water and sanitation kits
+Kit Tank;mandatory;LOG|Kit|Water and sanitation kits
 Library;mandatory;LOG
-MEDICINE GENERAL INFORMATION;mandatory;LOG/Library
-Dictionnary, Medical terms, Book;mandatory;LOG/Library/MEDICINE GENERAL INFORMATION
-INTERNAL MEDICINE;mandatory;LOG/Library
-Medical, Book;mandatory;LOG/Library/INTERNAL MEDICINE
-VIRAL INFECTIOUS DISEASES;mandatory;LOG/Library
-Dengue, Book;mandatory;LOG/Library/VIRAL INFECTIOUS DISEASES
-Measle, Guide;mandatory;LOG/Library/VIRAL INFECTIOUS DISEASES
+MEDICINE GENERAL INFORMATION;mandatory;LOG|Library
+Dictionnary, Medical terms, Book;mandatory;LOG|Library|MEDICINE GENERAL INFORMATION
+INTERNAL MEDICINE;mandatory;LOG|Library
+Medical, Book;mandatory;LOG|Library|INTERNAL MEDICINE
+VIRAL INFECTIOUS DISEASES;mandatory;LOG|Library
+Dengue, Book;mandatory;LOG|Library|VIRAL INFECTIOUS DISEASES
+Measle, Guide;mandatory;LOG|Library|VIRAL INFECTIOUS DISEASES
 Programm Support;mandatory;LOG
-Cold chain;mandatory;LOG/Programm Support
-Box, Cold Box, Ice Box;mandatory;LOG/Programm Support/Cold chain
-Burner;mandatory;LOG/Programm Support/Cold chain
-Control;mandatory;LOG/Programm Support/Cold chain
-Freezer;mandatory;LOG/Programm Support/Cold chain
-Refrigerator;mandatory;LOG/Programm Support/Cold chain
-Refrigerator Freezer;mandatory;LOG/Programm Support/Cold chain
-SOLAR REFRIGERATOR;mandatory;LOG/Programm Support/Cold chain
-Pack;mandatory;LOG/Programm Support/Cold chain
-Thermometer;mandatory;LOG/Programm Support/Cold chain
-Communication;mandatory;LOG/Programm Support
-Adaptor Coaxial;mandatory;LOG/Programm Support/Communication
-Antenna Hf;mandatory;LOG/Programm Support/Communication
-Antenna Accessories;mandatory;LOG/Programm Support/Communication
-Antenna UHF;mandatory;LOG/Programm Support/Communication
-Antenna Vhf;mandatory;LOG/Programm Support/Communication
-Cable, telecom;mandatory;LOG/Programm Support/Communication
-Connector Coaxial;mandatory;LOG/Programm Support/Communication
-Power Supply;mandatory;LOG/Programm Support/Communication
-Radio Telex;mandatory;LOG/Programm Support/Communication
-Telephone, Fax;mandatory;LOG/Programm Support/Communication
-Transceiver Hf;mandatory;LOG/Programm Support/Communication
-Transceiver Satellite;mandatory;LOG/Programm Support/Communication
-Transceiver UHF;mandatory;LOG/Programm Support/Communication
-Transceiver Vhf;mandatory;LOG/Programm Support/Communication
-COOKING;mandatory;LOG/Programm Support
-bottle;mandatory;LOG/Programm Support/COOKING
-Bowl;mandatory;LOG/Programm Support/COOKING
-Box, Cold Box, Ice Box;mandatory;LOG/Programm Support/COOKING
-Scoop;mandatory;LOG/Programm Support/COOKING
-Spoon;mandatory;LOG/Programm Support/COOKING
-Electricity;mandatory;LOG/Programm Support
-Battery, charger - inverter;mandatory;LOG/Programm Support/Electricity
-Battery, Charger;mandatory;LOG/Programm Support/Electricity
-electrical board;mandatory;LOG/Programm Support/Electricity
-Cable, Earth;mandatory;LOG/Programm Support/Electricity
-Clamp, electric;mandatory;LOG/Programm Support/Electricity
-Conduit;mandatory;LOG/Programm Support/Electricity
-Fuse, Ceramic type;mandatory;LOG/Programm Support/Electricity
-Generator Diesel;mandatory;LOG/Programm Support/Electricity
-Plug;mandatory;LOG/Programm Support/Electricity
-Regulator;mandatory;LOG/Programm Support/Electricity
-Ties;mandatory;LOG/Programm Support/Electricity
-Transformer;mandatory;LOG/Programm Support/Electricity
-HARDWARE;mandatory;LOG/Programm Support
-Bolt, Black;mandatory;LOG/Programm Support/HARDWARE
-Bolt, Carpentery;mandatory;LOG/Programm Support/HARDWARE
-Bolt, Threaded;mandatory;LOG/Programm Support/HARDWARE
-Nail;mandatory;LOG/Programm Support/HARDWARE
-Nuts, Galvanised;mandatory;LOG/Programm Support/HARDWARE
-Screw, Wood;mandatory;LOG/Programm Support/HARDWARE
-Washer;mandatory;LOG/Programm Support/HARDWARE
-Hygiene;mandatory;LOG/Programm Support
-RUBBISH BAG;mandatory;LOG/Programm Support/Hygiene
-RUBBER BOOTS;mandatory;LOG/Programm Support/Hygiene
-BASIN - BOWL;mandatory;LOG/Programm Support/Hygiene
-Oil-cloth;mandatory;LOG/Programm Support/Hygiene
-DRY MACHINE;mandatory;LOG/Programm Support/Hygiene
-Lighting;mandatory;LOG/Programm Support
-BULB, COMPACT FLUORESCENTE, white;mandatory;LOG/Programm Support/Lighting
-FLUO TUBE MINI (NEON);mandatory;LOG/Programm Support/Lighting
-Holder;mandatory;LOG/Programm Support/Lighting
-Lamp, Fluorescent;mandatory;LOG/Programm Support/Lighting
-Lamp;mandatory;LOG/Programm Support/Lighting
-Packing and handling;mandatory;LOG/Programm Support
-Box, Isothermal;mandatory;LOG/Programm Support/Packing and handling
-Box, Wooden;mandatory;LOG/Programm Support/Packing and handling
-Card;mandatory;LOG/Programm Support/Packing and handling
-Seal;mandatory;LOG/Programm Support/Packing and handling
-UN Packing for class 6.2;mandatory;LOG/Programm Support/Packing and handling
-Safety and protective equipment;mandatory;LOG/Programm Support
-FALL ARRESTER;mandatory;LOG/Programm Support/Safety and protective equipment
-FALL STOP;mandatory;LOG/Programm Support/Safety and protective equipment
-FIRE BLANKET;mandatory;LOG/Programm Support/Safety and protective equipment
-GLOVES;mandatory;LOG/Programm Support/Safety and protective equipment
-GOGGLES, PROTECTIVE,;mandatory;LOG/Programm Support/Safety and protective equipment
-HARD HAT;mandatory;LOG/Programm Support/Safety and protective equipment
-HI VISIBILITY JACKET;mandatory;LOG/Programm Support/Safety and protective equipment
-Mask, respiratory protection;mandatory;LOG/Programm Support/Safety and protective equipment
-OVERALL;mandatory;LOG/Programm Support/Safety and protective equipment
-Tools;mandatory;LOG/Programm Support
-Clamp;mandatory;LOG/Programm Support/Tools
-Compressor;mandatory;LOG/Programm Support/Tools
-MECHANICAL COUPLER;mandatory;LOG/Programm Support/Tools
-EXTRACTOR - PULLER;mandatory;LOG/Programm Support/Tools
-Grinder;mandatory;LOG/Programm Support/Tools
-HAMMER;mandatory;LOG/Programm Support/Tools
-Machette;mandatory;LOG/Programm Support/Tools
-Mallet;mandatory;LOG/Programm Support/Tools
-MEASURING RULE;mandatory;LOG/Programm Support/Tools
-METROLOGY TOOLS;mandatory;LOG/Programm Support/Tools
-PLIERS;mandatory;LOG/Programm Support/Tools
-Pump;mandatory;LOG/Programm Support/Tools
-Scraper;mandatory;LOG/Programm Support/Tools
-SCREWDRIVERS;mandatory;LOG/Programm Support/Tools
-SOCKET;mandatory;LOG/Programm Support/Tools
-Soldering;mandatory;LOG/Programm Support/Tools
-SPANNER;mandatory;LOG/Programm Support/Tools
-OIL FILTER SPANNER;mandatory;LOG/Programm Support/Tools
-TOOL BOX OR BAG;mandatory;LOG/Programm Support/Tools
-WRENCH;mandatory;LOG/Programm Support/Tools
-SPARE PARTS LISTER;mandatory;LOG/Programm Support
-Filter;mandatory;LOG/Programm Support/SPARE PARTS LISTER
-SPARE PARTS LOMBARDINI;mandatory;LOG/Programm Support
-Filter;mandatory;LOG/Programm Support/SPARE PARTS LOMBARDINI
-Gasket;mandatory;LOG/Programm Support/SPARE PARTS LOMBARDINI
-SPARE PARTS ROBIN;mandatory;LOG/Programm Support
-Filter;mandatory;LOG/Programm Support/SPARE PARTS ROBIN
+Cold chain;mandatory;LOG|Programm Support
+Box, Cold Box, Ice Box;mandatory;LOG|Programm Support|Cold chain
+Burner;mandatory;LOG|Programm Support|Cold chain
+Control;mandatory;LOG|Programm Support|Cold chain
+Freezer;mandatory;LOG|Programm Support|Cold chain
+Refrigerator;mandatory;LOG|Programm Support|Cold chain
+Refrigerator Freezer;mandatory;LOG|Programm Support|Cold chain
+SOLAR REFRIGERATOR;mandatory;LOG|Programm Support|Cold chain
+Pack;mandatory;LOG|Programm Support|Cold chain
+Thermometer;mandatory;LOG|Programm Support|Cold chain
+Communication;mandatory;LOG|Programm Support
+Adaptor Coaxial;mandatory;LOG|Programm Support|Communication
+Antenna Hf;mandatory;LOG|Programm Support|Communication
+Antenna Accessories;mandatory;LOG|Programm Support|Communication
+Antenna UHF;mandatory;LOG|Programm Support|Communication
+Antenna Vhf;mandatory;LOG|Programm Support|Communication
+Cable, telecom;mandatory;LOG|Programm Support|Communication
+Connector Coaxial;mandatory;LOG|Programm Support|Communication
+Power Supply;mandatory;LOG|Programm Support|Communication
+Radio Telex;mandatory;LOG|Programm Support|Communication
+Telephone, Fax;mandatory;LOG|Programm Support|Communication
+Transceiver Hf;mandatory;LOG|Programm Support|Communication
+Transceiver Satellite;mandatory;LOG|Programm Support|Communication
+Transceiver UHF;mandatory;LOG|Programm Support|Communication
+Transceiver Vhf;mandatory;LOG|Programm Support|Communication
+COOKING;mandatory;LOG|Programm Support
+bottle;mandatory;LOG|Programm Support|COOKING
+Bowl;mandatory;LOG|Programm Support|COOKING
+Box, Cold Box, Ice Box;mandatory;LOG|Programm Support|COOKING
+Scoop;mandatory;LOG|Programm Support|COOKING
+Spoon;mandatory;LOG|Programm Support|COOKING
+Electricity;mandatory;LOG|Programm Support
+Battery, charger - inverter;mandatory;LOG|Programm Support|Electricity
+Battery, Charger;mandatory;LOG|Programm Support|Electricity
+electrical board;mandatory;LOG|Programm Support|Electricity
+Cable, Earth;mandatory;LOG|Programm Support|Electricity
+Clamp, electric;mandatory;LOG|Programm Support|Electricity
+Conduit;mandatory;LOG|Programm Support|Electricity
+Fuse, Ceramic type;mandatory;LOG|Programm Support|Electricity
+Generator Diesel;mandatory;LOG|Programm Support|Electricity
+Plug;mandatory;LOG|Programm Support|Electricity
+Regulator;mandatory;LOG|Programm Support|Electricity
+Ties;mandatory;LOG|Programm Support|Electricity
+Transformer;mandatory;LOG|Programm Support|Electricity
+HARDWARE;mandatory;LOG|Programm Support
+Bolt, Black;mandatory;LOG|Programm Support|HARDWARE
+Bolt, Carpentery;mandatory;LOG|Programm Support|HARDWARE
+Bolt, Threaded;mandatory;LOG|Programm Support|HARDWARE
+Nail;mandatory;LOG|Programm Support|HARDWARE
+Nuts, Galvanised;mandatory;LOG|Programm Support|HARDWARE
+Screw, Wood;mandatory;LOG|Programm Support|HARDWARE
+Washer;mandatory;LOG|Programm Support|HARDWARE
+Hygiene;mandatory;LOG|Programm Support
+RUBBISH BAG;mandatory;LOG|Programm Support|Hygiene
+RUBBER BOOTS;mandatory;LOG|Programm Support|Hygiene
+BASIN - BOWL;mandatory;LOG|Programm Support|Hygiene
+Oil-cloth;mandatory;LOG|Programm Support|Hygiene
+DRY MACHINE;mandatory;LOG|Programm Support|Hygiene
+Lighting;mandatory;LOG|Programm Support
+BULB, COMPACT FLUORESCENTE, white;mandatory;LOG|Programm Support|Lighting
+FLUO TUBE MINI (NEON);mandatory;LOG|Programm Support|Lighting
+Holder;mandatory;LOG|Programm Support|Lighting
+Lamp, Fluorescent;mandatory;LOG|Programm Support|Lighting
+Lamp;mandatory;LOG|Programm Support|Lighting
+Packing and handling;mandatory;LOG|Programm Support
+Box, Isothermal;mandatory;LOG|Programm Support|Packing and handling
+Box, Wooden;mandatory;LOG|Programm Support|Packing and handling
+Card;mandatory;LOG|Programm Support|Packing and handling
+Seal;mandatory;LOG|Programm Support|Packing and handling
+UN Packing for class 6.2;mandatory;LOG|Programm Support|Packing and handling
+Safety and protective equipment;mandatory;LOG|Programm Support
+FALL ARRESTER;mandatory;LOG|Programm Support|Safety and protective equipment
+FALL STOP;mandatory;LOG|Programm Support|Safety and protective equipment
+FIRE BLANKET;mandatory;LOG|Programm Support|Safety and protective equipment
+GLOVES;mandatory;LOG|Programm Support|Safety and protective equipment
+GOGGLES, PROTECTIVE,;mandatory;LOG|Programm Support|Safety and protective equipment
+HARD HAT;mandatory;LOG|Programm Support|Safety and protective equipment
+HI VISIBILITY JACKET;mandatory;LOG|Programm Support|Safety and protective equipment
+Mask, respiratory protection;mandatory;LOG|Programm Support|Safety and protective equipment
+OVERALL;mandatory;LOG|Programm Support|Safety and protective equipment
+Tools;mandatory;LOG|Programm Support
+Clamp;mandatory;LOG|Programm Support|Tools
+Compressor;mandatory;LOG|Programm Support|Tools
+MECHANICAL COUPLER;mandatory;LOG|Programm Support|Tools
+EXTRACTOR - PULLER;mandatory;LOG|Programm Support|Tools
+Grinder;mandatory;LOG|Programm Support|Tools
+HAMMER;mandatory;LOG|Programm Support|Tools
+Machette;mandatory;LOG|Programm Support|Tools
+Mallet;mandatory;LOG|Programm Support|Tools
+MEASURING RULE;mandatory;LOG|Programm Support|Tools
+METROLOGY TOOLS;mandatory;LOG|Programm Support|Tools
+PLIERS;mandatory;LOG|Programm Support|Tools
+Pump;mandatory;LOG|Programm Support|Tools
+Scraper;mandatory;LOG|Programm Support|Tools
+SCREWDRIVERS;mandatory;LOG|Programm Support|Tools
+SOCKET;mandatory;LOG|Programm Support|Tools
+Soldering;mandatory;LOG|Programm Support|Tools
+SPANNER;mandatory;LOG|Programm Support|Tools
+OIL FILTER SPANNER;mandatory;LOG|Programm Support|Tools
+TOOL BOX OR BAG;mandatory;LOG|Programm Support|Tools
+WRENCH;mandatory;LOG|Programm Support|Tools
+SPARE PARTS LISTER;mandatory;LOG|Programm Support
+Filter;mandatory;LOG|Programm Support|SPARE PARTS LISTER
+SPARE PARTS LOMBARDINI;mandatory;LOG|Programm Support
+Filter;mandatory;LOG|Programm Support|SPARE PARTS LOMBARDINI
+Gasket;mandatory;LOG|Programm Support|SPARE PARTS LOMBARDINI
+SPARE PARTS ROBIN;mandatory;LOG|Programm Support
+Filter;mandatory;LOG|Programm Support|SPARE PARTS ROBIN
 Medical renewable supplies;mandatory;MED
-Catheters, tubes and drains;mandatory;MED/Medical renewable supplies
-Breathing circuit filter;mandatory;MED/Medical renewable supplies/Catheters, tubes and drains
-Cannula, nasal;mandatory;MED/Medical renewable supplies/Catheters, tubes and drains
-CATHETER URINARY, Nelaton type;mandatory;MED/Medical renewable supplies/Catheters, tubes and drains
-Manual vacuum asp cannula;mandatory;MED/Medical renewable supplies/Catheters, tubes and drains
-Manual vacuum asp syringe;mandatory;MED/Medical renewable supplies/Catheters, tubes and drains
-Peritofix;mandatory;MED/Medical renewable supplies/Catheters, tubes and drains
-Alene Needle For Redon Set;mandatory;MED/Medical renewable supplies/Catheters, tubes and drains
-Connectors for drain;mandatory;MED/Medical renewable supplies/Catheters, tubes and drains
-Drain For Redon;mandatory;MED/Medical renewable supplies/Catheters, tubes and drains
-Redon System;mandatory;MED/Medical renewable supplies/Catheters, tubes and drains
-Redon system plastic;mandatory;MED/Medical renewable supplies/Catheters, tubes and drains
-Tube, silicone;mandatory;MED/Medical renewable supplies/Catheters, tubes and drains
-Tube Tracheotomy;mandatory;MED/Medical renewable supplies/Catheters, tubes and drains
-Brush fr endotracheal tubes;mandatory;MED/Medical renewable supplies/Catheters, tubes and drains
-Endotracheal Tube, Disp.;mandatory;MED/Medical renewable supplies/Catheters, tubes and drains
-Tube, Gastric;mandatory;MED/Medical renewable supplies/Catheters, tubes and drains
-Gastric tube, Salem type;mandatory;MED/Medical renewable supplies/Catheters, tubes and drains
-Dressings;mandatory;MED/Medical renewable supplies
-Casting tape, synthetic;mandatory;MED/Medical renewable supplies/Dressings
-Bandage, Elastic;mandatory;MED/Medical renewable supplies/Dressings
-Specialized food;mandatory;MED/Medical renewable supplies
-Biscuits;mandatory;MED/Medical renewable supplies/Specialized food
-Corned Beef;mandatory;MED/Medical renewable supplies/Specialized food
-Milk, infant;mandatory;MED/Medical renewable supplies/Specialized food
-Ready to use supplementary food;mandatory;MED/Medical renewable supplies/Specialized food
-Ready to use therapeutic food;mandatory;MED/Medical renewable supplies/Specialized food
-Injection supplies;mandatory;MED/Medical renewable supplies
-Blood Taking Bag;mandatory;MED/Medical renewable supplies/Injection supplies
-Container;mandatory;MED/Medical renewable supplies/Injection supplies
-Catheter with injection port;mandatory;MED/Medical renewable supplies/Injection supplies
-I.V. Placement Unit;mandatory;MED/Medical renewable supplies/Injection supplies
-Intra-osseaous needle;mandatory;MED/Medical renewable supplies/Injection supplies
-Laboratory reagents;mandatory;MED/Medical renewable supplies
-Buffer Ph=7;mandatory;MED/Medical renewable supplies/Laboratory reagents
-Dynabeads;mandatory;MED/Medical renewable supplies/Laboratory reagents
-Giemsa;mandatory;MED/Medical renewable supplies/Laboratory reagents
-Ral Fixator;mandatory;MED/Medical renewable supplies/Laboratory reagents
-Ral 555, Eosine;mandatory;MED/Medical renewable supplies/Laboratory reagents
-Ral 555, Kit;mandatory;MED/Medical renewable supplies/Laboratory reagents
-Ral 555, Methylene Blue;mandatory;MED/Medical renewable supplies/Laboratory reagents
-Turck solution;mandatory;MED/Medical renewable supplies/Laboratory reagents
-Medical stationery;mandatory;MED/Medical renewable supplies
-Card;mandatory;MED/Medical renewable supplies/Medical stationery
-Card, nutrition;mandatory;MED/Medical renewable supplies/Medical stationery
-Card, obstetrics;mandatory;MED/Medical renewable supplies/Medical stationery
-Medical certificate;mandatory;MED/Medical renewable supplies/Medical stationery
-Guide;mandatory;MED/Medical renewable supplies/Medical stationery
-Small medical supplies;mandatory;MED/Medical renewable supplies
-Bag, Body;mandatory;MED/Medical renewable supplies/Small medical supplies
-Bag, Plastic;mandatory;MED/Medical renewable supplies/Small medical supplies
-Gloves examination nitrile;mandatory;MED/Medical renewable supplies/Small medical supplies
-GLOVES, GYN - UTERINE, latex, disp.,;mandatory;MED/Medical renewable supplies/Small medical supplies
-Protective Gloves;mandatory;MED/Medical renewable supplies/Small medical supplies
+Catheters, tubes and drains;mandatory;MED|Medical renewable supplies
+Breathing circuit filter;mandatory;MED|Medical renewable supplies|Catheters, tubes and drains
+Cannula, nasal;mandatory;MED|Medical renewable supplies|Catheters, tubes and drains
+CATHETER URINARY, Nelaton type;mandatory;MED|Medical renewable supplies|Catheters, tubes and drains
+Manual vacuum asp cannula;mandatory;MED|Medical renewable supplies|Catheters, tubes and drains
+Manual vacuum asp syringe;mandatory;MED|Medical renewable supplies|Catheters, tubes and drains
+Peritofix;mandatory;MED|Medical renewable supplies|Catheters, tubes and drains
+Alene Needle For Redon Set;mandatory;MED|Medical renewable supplies|Catheters, tubes and drains
+Connectors for drain;mandatory;MED|Medical renewable supplies|Catheters, tubes and drains
+Drain For Redon;mandatory;MED|Medical renewable supplies|Catheters, tubes and drains
+Redon System;mandatory;MED|Medical renewable supplies|Catheters, tubes and drains
+Redon system plastic;mandatory;MED|Medical renewable supplies|Catheters, tubes and drains
+Tube, silicone;mandatory;MED|Medical renewable supplies|Catheters, tubes and drains
+Tube Tracheotomy;mandatory;MED|Medical renewable supplies|Catheters, tubes and drains
+Brush fr endotracheal tubes;mandatory;MED|Medical renewable supplies|Catheters, tubes and drains
+Endotracheal Tube, Disp.;mandatory;MED|Medical renewable supplies|Catheters, tubes and drains
+Tube, Gastric;mandatory;MED|Medical renewable supplies|Catheters, tubes and drains
+Gastric tube, Salem type;mandatory;MED|Medical renewable supplies|Catheters, tubes and drains
+Dressings;mandatory;MED|Medical renewable supplies
+Casting tape, synthetic;mandatory;MED|Medical renewable supplies|Dressings
+Bandage, Elastic;mandatory;MED|Medical renewable supplies|Dressings
+Specialized food;mandatory;MED|Medical renewable supplies
+Biscuits;mandatory;MED|Medical renewable supplies|Specialized food
+Corned Beef;mandatory;MED|Medical renewable supplies|Specialized food
+Milk, infant;mandatory;MED|Medical renewable supplies|Specialized food
+Ready to use supplementary food;mandatory;MED|Medical renewable supplies|Specialized food
+Ready to use therapeutic food;mandatory;MED|Medical renewable supplies|Specialized food
+Injection supplies;mandatory;MED|Medical renewable supplies
+Blood Taking Bag;mandatory;MED|Medical renewable supplies|Injection supplies
+Container;mandatory;MED|Medical renewable supplies|Injection supplies
+Catheter with injection port;mandatory;MED|Medical renewable supplies|Injection supplies
+I.V. Placement Unit;mandatory;MED|Medical renewable supplies|Injection supplies
+Intra-osseaous needle;mandatory;MED|Medical renewable supplies|Injection supplies
+Laboratory reagents;mandatory;MED|Medical renewable supplies
+Buffer Ph=7;mandatory;MED|Medical renewable supplies|Laboratory reagents
+Dynabeads;mandatory;MED|Medical renewable supplies|Laboratory reagents
+Giemsa;mandatory;MED|Medical renewable supplies|Laboratory reagents
+Ral Fixator;mandatory;MED|Medical renewable supplies|Laboratory reagents
+Ral 555, Eosine;mandatory;MED|Medical renewable supplies|Laboratory reagents
+Ral 555, Kit;mandatory;MED|Medical renewable supplies|Laboratory reagents
+Ral 555, Methylene Blue;mandatory;MED|Medical renewable supplies|Laboratory reagents
+Turck solution;mandatory;MED|Medical renewable supplies|Laboratory reagents
+Medical stationery;mandatory;MED|Medical renewable supplies
+Card;mandatory;MED|Medical renewable supplies|Medical stationery
+Card, nutrition;mandatory;MED|Medical renewable supplies|Medical stationery
+Card, obstetrics;mandatory;MED|Medical renewable supplies|Medical stationery
+Medical certificate;mandatory;MED|Medical renewable supplies|Medical stationery
+Guide;mandatory;MED|Medical renewable supplies|Medical stationery
+Small medical supplies;mandatory;MED|Medical renewable supplies
+Bag, Body;mandatory;MED|Medical renewable supplies|Small medical supplies
+Bag, Plastic;mandatory;MED|Medical renewable supplies|Small medical supplies
+Gloves examination nitrile;mandatory;MED|Medical renewable supplies|Small medical supplies
+GLOVES, GYN - UTERINE, latex, disp.,;mandatory;MED|Medical renewable supplies|Small medical supplies
+Protective Gloves;mandatory;MED|Medical renewable supplies|Small medical supplies
 Transport;mandatory;LOG
-Boats;mandatory;LOG/Transport
-ALUMINIUM boat;mandatory;LOG/Transport/Boats
-DIESEL ENGINE, boat;mandatory;LOG/Transport/Boats
-Engine;mandatory;LOG/Transport/Boats
-Zodiac;mandatory;LOG/Transport/Boats
-LAND ROVER;mandatory;LOG/Transport
-110 Diesel;mandatory;LOG/Transport/LAND ROVER
-PEUGEOT;mandatory;LOG/Transport
-405 Diesel;mandatory;LOG/Transport/PEUGEOT
-504 Diesel;mandatory;LOG/Transport/PEUGEOT
-Partner M59 Diesel;mandatory;LOG/Transport/PEUGEOT
-Toyota vehicles;mandatory;LOG/Transport
-Corolla Petrol;mandatory;LOG/Transport/Toyota vehicles
-Dyna, Diesel;mandatory;LOG/Transport/Toyota vehicles
-Hzj75 Diesel;mandatory;LOG/Transport/Toyota vehicles
-HZJ78 Diesel;mandatory;LOG/Transport/Toyota vehicles
-Hilux Diesel;mandatory;LOG/Transport/Toyota vehicles
-Pzj75 Diesel;mandatory;LOG/Transport/Toyota vehicles
-Vehicles accessories;mandatory;LOG/Transport
-SOFT TOOL BAG;mandatory;LOG/Transport/Vehicles accessories
-Belt;mandatory;LOG/Transport/Vehicles accessories
-Cable, battery;mandatory;LOG/Transport/Vehicles accessories
-Chain;mandatory;LOG/Transport/Vehicles accessories
-Clamp;mandatory;LOG/Transport/Vehicles accessories
-Funnel;mandatory;LOG/Transport/Vehicles accessories
-Gasket;mandatory;LOG/Transport/Vehicles accessories
-Pump, air;mandatory;LOG/Transport/Vehicles accessories
-Vehicles consumables;mandatory;LOG/Transport
-Additive;mandatory;LOG/Transport/Vehicles consumables
-Fork fuses for toyota;mandatory;LOG/Transport/Vehicles consumables
-Grease;mandatory;LOG/Transport/Vehicles consumables
-Oil, Engine;mandatory;LOG/Transport/Vehicles consumables
-tyraeall terrain;mandatory;LOG/Transport/Vehicles consumables
-Tyre;mandatory;LOG/Transport/Vehicles consumables
-Tyre, heavy duty profile;mandatory;LOG/Transport/Vehicles consumables
-Tyre, mud profile;mandatory;LOG/Transport/Vehicles consumables
-Tyre, sand profile;mandatory;LOG/Transport/Vehicles consumables
-VEHICLES MODIFICATIONS;mandatory;LOG/Transport
-Fixation set;mandatory;LOG/Transport/VEHICLES MODIFICATIONS
-Hardware;mandatory;LOG/Transport/VEHICLES MODIFICATIONS
-Reinforcement;mandatory;LOG/Transport/VEHICLES MODIFICATIONS
-Support;mandatory;LOG/Transport/VEHICLES MODIFICATIONS
-SPARE PARTS TOYOTA;mandatory;LOG/Transport
-Absorber, Shock;mandatory;LOG/Transport/SPARE PARTS TOYOTA
-Leaf spring;mandatory;LOG/Transport/SPARE PARTS TOYOTA
-Injection Pump;mandatory;LOG/Transport/SPARE PARTS TOYOTA
-Spare parts Yamaha;mandatory;LOG/Transport
-PROPELLER;mandatory;LOG/Transport/Spare parts Yamaha
-PETROL PUMP;mandatory;LOG/Transport/Spare parts Yamaha
-WATER PUMP TURBINE;mandatory;LOG/Transport/Spare parts Yamaha
-SPRING;mandatory;LOG/Transport/Spare parts Yamaha
-STARTER;mandatory;LOG/Transport/Spare parts Yamaha
+Boats;mandatory;LOG|Transport
+ALUMINIUM boat;mandatory;LOG|Transport|Boats
+DIESEL ENGINE, boat;mandatory;LOG|Transport|Boats
+Engine;mandatory;LOG|Transport|Boats
+Zodiac;mandatory;LOG|Transport|Boats
+LAND ROVER;mandatory;LOG|Transport
+110 Diesel;mandatory;LOG|Transport|LAND ROVER
+PEUGEOT;mandatory;LOG|Transport
+405 Diesel;mandatory;LOG|Transport|PEUGEOT
+504 Diesel;mandatory;LOG|Transport|PEUGEOT
+Partner M59 Diesel;mandatory;LOG|Transport|PEUGEOT
+Toyota vehicles;mandatory;LOG|Transport
+Corolla Petrol;mandatory;LOG|Transport|Toyota vehicles
+Dyna, Diesel;mandatory;LOG|Transport|Toyota vehicles
+Hzj75 Diesel;mandatory;LOG|Transport|Toyota vehicles
+HZJ78 Diesel;mandatory;LOG|Transport|Toyota vehicles
+Hilux Diesel;mandatory;LOG|Transport|Toyota vehicles
+Pzj75 Diesel;mandatory;LOG|Transport|Toyota vehicles
+Vehicles accessories;mandatory;LOG|Transport
+SOFT TOOL BAG;mandatory;LOG|Transport|Vehicles accessories
+Belt;mandatory;LOG|Transport|Vehicles accessories
+Cable, battery;mandatory;LOG|Transport|Vehicles accessories
+Chain;mandatory;LOG|Transport|Vehicles accessories
+Clamp;mandatory;LOG|Transport|Vehicles accessories
+Funnel;mandatory;LOG|Transport|Vehicles accessories
+Gasket;mandatory;LOG|Transport|Vehicles accessories
+Pump, air;mandatory;LOG|Transport|Vehicles accessories
+Vehicles consumables;mandatory;LOG|Transport
+Additive;mandatory;LOG|Transport|Vehicles consumables
+Fork fuses for toyota;mandatory;LOG|Transport|Vehicles consumables
+Grease;mandatory;LOG|Transport|Vehicles consumables
+Oil, Engine;mandatory;LOG|Transport|Vehicles consumables
+tyraeall terrain;mandatory;LOG|Transport|Vehicles consumables
+Tyre;mandatory;LOG|Transport|Vehicles consumables
+Tyre, heavy duty profile;mandatory;LOG|Transport|Vehicles consumables
+Tyre, mud profile;mandatory;LOG|Transport|Vehicles consumables
+Tyre, sand profile;mandatory;LOG|Transport|Vehicles consumables
+VEHICLES MODIFICATIONS;mandatory;LOG|Transport
+Fixation set;mandatory;LOG|Transport|VEHICLES MODIFICATIONS
+Hardware;mandatory;LOG|Transport|VEHICLES MODIFICATIONS
+Reinforcement;mandatory;LOG|Transport|VEHICLES MODIFICATIONS
+Support;mandatory;LOG|Transport|VEHICLES MODIFICATIONS
+SPARE PARTS TOYOTA;mandatory;LOG|Transport
+Absorber, Shock;mandatory;LOG|Transport|SPARE PARTS TOYOTA
+Leaf spring;mandatory;LOG|Transport|SPARE PARTS TOYOTA
+Injection Pump;mandatory;LOG|Transport|SPARE PARTS TOYOTA
+Spare parts Yamaha;mandatory;LOG|Transport
+PROPELLER;mandatory;LOG|Transport|Spare parts Yamaha
+PETROL PUMP;mandatory;LOG|Transport|Spare parts Yamaha
+WATER PUMP TURBINE;mandatory;LOG|Transport|Spare parts Yamaha
+SPRING;mandatory;LOG|Transport|Spare parts Yamaha
+STARTER;mandatory;LOG|Transport|Spare parts Yamaha
 SERVICE;mandatory;
 Services;mandatory;SERVICE
-Administrative;mandatory;SERVICE/Services
-#;mandatory;SERVICE/Services/Administrative
-Taxe;mandatory;SERVICE/Services
-#;mandatory;SERVICE/Services/Taxe
-Transport;mandatory;SERVICE/Services
-Other;mandatory;SERVICE/Services/Transport
+Administrative;mandatory;SERVICE|Services
+#;mandatory;SERVICE|Services|Administrative
+Taxe;mandatory;SERVICE|Services
+#;mandatory;SERVICE|Services|Taxe
+Transport;mandatory;SERVICE|Services
+Other;mandatory;SERVICE|Services|Transport
 MIX;mandatory;
 KIT;mandatory;MIX
-Emergency Kits;mandatory;MIX/KIT
-#;mandatory;MIX/KIT/Emergency Kits
-Exploration Kits;mandatory;MIX/KIT
-#;mandatory;MIX/KIT/Exploration Kits
+Emergency Kits;mandatory;MIX|KIT
+#;mandatory;MIX|KIT|Emergency Kits
+Exploration Kits;mandatory;MIX|KIT
+#;mandatory;MIX|KIT|Exploration Kits
