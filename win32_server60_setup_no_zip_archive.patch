@@ -1,0 +1,13 @@
+=== modified file 'setup.py'
+--- setup.py	2012-11-12 16:11:25 +0000
++++ setup.py	2013-01-29 10:05:22 +0000
+@@ -48,7 +48,7 @@
+         }]
+     py2exe_keywords['options'] = {
+         "py2exe": {
+-            "compressed": 1,
++            "skip_archive": 1,
+             "optimize": 2,
+             "dist_dir": 'dist',
+             "packages": [
+

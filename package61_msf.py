@@ -373,6 +373,8 @@ def options():
         'win32_server60_lxml_external_entities.patch',
         'all_server60_fix_test_disable_conffile_param.patch',
         'win32_server60_fix_dbrestore.patch',
+        'win32_server60_setup_no_zip_archive.patch',
+        #'win32_server60_service_autorestart.patch',
     ])
     o.client_patches = patches_list([
         'win32_gtk60_python26.patch'
@@ -380,7 +382,8 @@ def options():
     o.client_web_patches = patches_list([
         'win32_web60_conffile.patch',
         'win32_web60_logout.patch',
-        'win32_web60_python26.patch'
+        'win32_web60_python26.patch',
+        'win32_web60_setup_no_zip_archive.patch'
     ])
     return o
 

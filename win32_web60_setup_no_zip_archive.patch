@@ -1,0 +1,14 @@
+=== modified file 'setup.py'
+--- setup.py	2013-01-29 13:09:18 +0000
++++ setup.py	2013-01-29 13:09:42 +0000
+@@ -22,6 +22,9 @@
+         'win32service',
+         'win32serviceutil',
+     ])
++    opts['options']['py2exe']['skip_archive'] = 1
++    opts['options']['py2exe']['compressed'] = 0
++    opts['options']['py2exe']['bundle_files'] = 3
+ 
+     version_dash_incompatible = True
+ except ImportError:
+
