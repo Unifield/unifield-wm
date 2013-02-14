@@ -2,6 +2,7 @@
 import glob
 import re
 import os
+import sys
 import optparse
 import signal
 import shutil
@@ -23,7 +24,7 @@ def mkdir(d):
 def url2dir(n):
     return n.replace('/','_').replace(':','').replace('~','')
 
-def system(l,chdir=None):
+def system(l,chdir=None, exit_on_failure=False):
     print l
     if chdir:
         cwd = os.getcwd()
@@ -35,6 +36,9 @@ def system(l,chdir=None):
         rc=os.spawnvp(os.P_WAIT, tmp[0], tmp)
     if chdir:
         os.chdir(cwd)
+    if exit_on_failure and rc != 0:
+        print("Failed to execute command '%s'" % (l,))
+        sys.exit(2)
     return rc
 
 class chdir_context(object):
@@ -78,9 +82,9 @@ def branch_or_update(b,d):
         system(['bzr','branch',b,d])
 
 def branch_revert_and_apply_patches(d, patches):
-    system(['bzr', 'revert', '--no-backup'], d)
+    system(['bzr', 'revert', '--no-backup'], d, exit_on_failure=True)
     for p in patches:
-        system('patch -p0 < %s' % (p,), d)
+        system('patch -p0 < %s' % (p,), d, exit_on_failure=True)
 
 def branch_get_summary(prefix, d):
     branch_info = system_w_output(['bzr', 'info', '-q'], d)
