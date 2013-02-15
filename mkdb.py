@@ -286,7 +286,6 @@ class db_creation(object):
             'name' : self.db.name,
             'instance' : self.db.name,
             'mission' : '%s_MISSION_%s' % (config.prefix, ("OC" if mission is None else "%02d" % mission.index)),
-            'cost_center_id' : cost_center_id,
             'state' : 'active',
         }
         if prop_instance is not None:
