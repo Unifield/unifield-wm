@@ -154,8 +154,8 @@ if not __name__ == '__main__':
 # Base of database creation
 class db_creation(object):
 
-    #buggy_models = ['sale.price.setup'] # Fixed in unifield-wm > SP5
-    buggy_models = []
+    #ignore_wizard = ['sale.price.setup'] # Fixed in unifield-wm > SP5
+    ignore_wizard = ['msf_button_access_rights.view_config_wizard_install']
 
     base_wizards = {
         'base.setup.config' : {
@@ -240,7 +240,7 @@ class db_creation(object):
         while model != 'ir.ui.menu':
             try:
                 # skip account.installer if no parent_name providen (typically: HQ instance)
-                if model in self.buggy_models or \
+                if model in self.ignore_wizard or \
                    (model == 'account.installer' and self.parent_name is not None) or \
                    (model == 'msf_instance.setup' and self.db is Synchro):
                     proxy = self.db.get(model)
