@@ -275,13 +275,8 @@ Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
     WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "db_password" $R0
     WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "db_port" $TextPostgreSQLPort
     WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "db_maxconn" 95
-
-    Pop $R0
-	# if we've going to install postgresql force it's path,
-	# otherwise we consider it's always done and/or correctly tune by users
-    ${If} $HasPostgreSQL == 0
-    	WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "pg_path" "$TextPostgreSQLInstPath\bin"
-    ${EndIf}
+    # Always override pg_path by the correct instance choosen by the user (newly installed or not...)
+    WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "pg_path" "$TextPostgreSQLInstPath\bin"
 
     File /r "static\server-extra"
     CopyFiles "$TEMP\server-extra\*.*" "$INSTDIR\Server"
