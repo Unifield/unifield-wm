@@ -372,19 +372,10 @@ def options():
         return [ os.path.join(patches_dir, p) for p in patch_list ]
     o.web_patches = []
     o.server_patches = patches_list([
-        'win32_server60_logout.patch',
-        'win32_server60_python26.patch',
-        'win32_server60_lxml_external_entities.patch',
-        'all_server60_fix_test_disable_conffile_param.patch',
-        'win32_server60_fix_dbrestore.patch',
     ])
     o.client_patches = patches_list([
-        'win32_gtk60_python26.patch'
     ])
     o.client_web_patches = patches_list([
-        'win32_web60_conffile.patch',
-        'win32_web60_logout.patch',
-        'win32_web60_python26.patch'
     ])
     return o
 

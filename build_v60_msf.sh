@@ -4,15 +4,14 @@ HDIR=/home/odoo/vm/winxp26_for_60/
 #SSH_AUTH_SOCK=
 #SSH_AGENT_PID=
 
-ADDONS_BRANCH=lp:~unifield-team/unifield-addons/sprint5,lp:~unifield-team/unifield-wm/sprint5,lp:~unifield-team/unifield-wm/sync_module_prod
-SERVER_BRANCH=lp:unifield-server/sprint5
-#SERVER_BRANCH=lp:~unifield-team/unifield-server/restart-and-update-cto
-CLIWEB_BRANCH=lp:~unifield-team/unifield-web/sprint5
+# For pilot
+SERVER_BRANCH=lp:unifield-server/pilot
+ADDONS_BRANCH=lp:unifield-addons,lp:unifield-wm/pilot,lp:unifield-wm/pilot
+CLIWEB_BRANCH=lp:unifield-web/pilot
 
-# For sprint5 RC3
-ADDONS_BRANCH=lp:~unifield-team/unifield-addons/aio-dsp5rc3,lp:~unifield-team/unifield-wm/aio-dsp5rc3,lp:~unifield-team/unifield-wm/sync_module_prod
-SERVER_BRANCH=lp:~unifield-team/unifield-server/aio-dsp5rc3
-CLIWEB_BRANCH=lp:~unifield-team/unifield-web/aio-dsp5rc3
+# For pilot + integrated patch + AIO-45
+SERVER_BRANCH=lp:~unifield-team/unifield-server/server_aio_45
+CLIWEB_BRANCH=lp:~unifield-team/unifield-web/web_aio_45
 
 ./package61_msf.py --vm-winxp-image=${HDIR}/winxp26.qcow2 \
         --vm-winxp-ssh-key=${HDIR}/id_rsa \
