@@ -154,8 +154,8 @@ if not __name__ == '__main__':
 # Base of database creation
 class db_creation(object):
 
-    #buggy_models = ['sale.price.setup'] # Fixed in unifield-wm > SP5
-    buggy_models = []
+    #ignore_wizard = ['sale.price.setup'] # Fixed in unifield-wm > SP5
+    ignore_wizard = ['msf_button_access_rights.view_config_wizard_install']
 
     base_wizards = {
         'base.setup.config' : {
@@ -240,7 +240,7 @@ class db_creation(object):
         while model != 'ir.ui.menu':
             try:
                 # skip account.installer if no parent_name providen (typically: HQ instance)
-                if model in self.buggy_models or \
+                if model in self.ignore_wizard or \
                    (model == 'account.installer' and self.parent_name is not None) or \
                    (model == 'msf_instance.setup' and self.db is Synchro):
                     proxy = self.db.get(model)
@@ -270,29 +270,76 @@ class db_creation(object):
     # Create Cost Center and Proprietary Instance for Test Cases
     def make_prop_instance(self, hq, prop_instance=None, mission=None):
         hq.connect('admin')
-        try:
-            cost_center_id = hq.search_data('account.analytic.account', [('code','=',self.db.name)])[0]
-        except IndexError:
-            data = {
-                'name' : "C%s_%s" % (("OC" if mission is None else mission.prefix), self.db.name),
-                'code' : "C%s_%s" % (("OC" if mission is None else mission.prefix), self.db.name),
+        # Get 2 cost centers: the top one and the normal one
+        cost_center_id = False
+        top_cost_center_id = False
+        if self.db is hq:
+            top_cost_center_id = hq.search_data('account.analytic.account', {'Code':'OC'})[0]
+        elif mission.db is hq:
+            top_data = {
+                'name' : "HT%d" % (self.index),
+                'code' : "HT%d" % (self.index),
                 'category' : 'OC',
+                'type' : 'view',
+                'parent_id' : hq.search_data('account.analytic.account', {'Code':'OC'})[0],
             }
-            if self.db is not hq:
-                data['parent_id'] = hq.search_data('account.analytic.account', {'Code':'OC'})[0]
+            top_cost_center_id = hq.get('account.analytic.account').create(top_data)
+            data = {
+                'name' : "HT%d01" % (self.index),
+                'code' : "HT%d01" % (self.index),
+                'category' : 'OC',
+                'type' : 'normal',
+                'parent_id' : top_cost_center_id,
+            }
             cost_center_id = hq.get('account.analytic.account').create(data)
+        else:
+            parent_cost_center_id = hq.search_data('account.analytic.account', {'Code':"HT%d" % (mission.index)})[0]
+            data = {
+                'name' : "HT%d%d1" % (mission.index, self.index),
+                'code' : "HT%d%d1" % (mission.index, self.index),
+                'category' : 'OC',
+                'type' : 'normal',
+                'parent_id' : parent_cost_center_id,
+            }
+            top_cost_center_id = hq.get('account.analytic.account').create(data)
         data = {
             'code' : self.db.name,
             'name' : self.db.name,
             'instance' : self.db.name,
             'mission' : '%s_MISSION_%s' % (config.prefix, ("OC" if mission is None else "%02d" % mission.index)),
             'state' : 'active',
+            'top_cost_center_id' : top_cost_center_id,
         }
         if prop_instance is not None:
             data.update(prop_instance)
         if not hq.test('msf.instance', data):
-            hq.get('msf.instance').create(data)
+            instance_id = hq.get('msf.instance').create(data)
             if self.db is not hq:
+                # Create/update cost center lines as needed by level
+                if mission.db is hq:
+                    # Coordo: add cost center lines to the instance, tick both
+                    top_line_data = {
+                        'instance_id' : instance_id,
+                        'cost_center_id' : top_cost_center_id,
+                        'is_target' : True,
+                    }
+                    hq.get('account.target.costcenter').create(top_line_data)
+                    line_data = {
+                        'instance_id' : instance_id,
+                        'cost_center_id' : cost_center_id,
+                        'is_target' : True,
+                    }
+                    hq.get('account.target.costcenter').create(line_data)
+                else:
+                    # Project: add cost center lines to parent coordo instance, tick them in instance
+                    top_line_data = {
+                        'instance_id' : data['parent_id'],
+                        'cost_center_id' : top_cost_center_id,
+                        'is_target' : False,
+                    }
+                    hq.get('account.target.costcenter').create(top_line_data)
+                    project_target_ids = hq.search_data('account.target.costcenter', {'instance_id' : instance_id, 'cost_center_id' : top_cost_center_id})
+                    hq.write('account.target.costcenter', project_target_ids, {'is_target': True})
                 self.sync(hq)
 
     def add_to_group(self, group_name, group_type):
