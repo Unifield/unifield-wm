@@ -262,6 +262,7 @@ class db_creation(object):
     def sync(cls, db=None):
         if db is None: db = cls.db
         db.connect('admin')
+        db.get('sync.client.sync_server_connection').connect()
         if not db.get('sync.client.entity').sync():
             monitor = db.get('sync.monitor')
             ids = monitor.search([], 0, 1, '"end" desc')
