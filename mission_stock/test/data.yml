@@ -78,7 +78,7 @@
   Activate the local instance
 -
   !python {model: msf.instance}: |
-    user = self.pool.get('res.users').browse(cr, uid, uid)
+    user = self.pool.get('res.users').browse(cr, uid, [uid])[0]
     if user.company_id.instance_id:
         comp_instance = user.company_id.instance_id.id
     else:
