@@ -49,7 +49,7 @@
 					<field name="line_number" />
 					<field name="sale_order_state" />
 					<field name="state" invisible="True" />
-					<field name="product_id" />
+					<field name="product_desc" readonly="True" />
 					<field name="qty" string="Qty" />
 					<field name="uom_id" /> 
                                         <button name="open_split_wizard" type="object" string="Split line" icon="terp-stock_effects-object-colorize" 

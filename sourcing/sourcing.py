@@ -250,6 +250,20 @@ class sourcing_line(osv.osv):
 
         return res
 
+    def _get_product_desc(self, cr, uid, ids, field_name, args, context=None):
+        '''
+        Returns the product code/name if exists or the description on the line
+        '''
+        res = {}
+        
+        for line in self.browse(cr, uid, ids, context=context):
+            if line.product_id:
+                res[line.id] = self.pool.get('product.product').name_get(cr, uid, [line.product_id.id], context=context)[0][1]
+            elif line.sale_order_line_id:
+                res[line.id] = line.sale_order_line_id.comment
+
+        return res
+
     _columns = {
         # sequence number
         'name': fields.char('Name', size=128),
@@ -271,6 +285,7 @@ class sourcing_line(osv.osv):
         'sale_order_state_search': fields.function(_get_fake, string="Order State", type='selection', method=True, selection=[x for x in SALE_ORDER_STATE_SELECTION if x[0] != 'manual'], fnct_search=_search_sale_order_state),
         'line_number': fields.integer(string='Line', readonly=True),
         'product_id': fields.many2one('product.product', string='Product', readonly=True),
+        'product_desc': fields.function(_get_product_desc, method=True, string='Product', type='char', store=False, readonly=True),
         'qty': fields.related('sale_order_line_id', 'product_uom_qty', type='float', string='Quantity', readonly=True),
         'uom_id': fields.related('sale_order_line_id', 'product_uom', relation='product.uom', type='many2one', string='UoM', readonly=True),
         #'rts': fields.related('sale_order_id', 'ready_to_ship_date', type='date', string='RTS', readonly=True),
