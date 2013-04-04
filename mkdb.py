@@ -321,6 +321,7 @@ class db_creation(object):
                         'cost_center_id' : top_cost_center_id,
                         'is_target' : True,
                         'is_top_cost_center' : True,
+                        'is_po_fo_cost_center' : False,
                     }
                     hq.get('account.target.costcenter').create(top_line_data)
                     line_data = {
@@ -328,6 +329,7 @@ class db_creation(object):
                         'cost_center_id' : cost_center_id,
                         'is_target' : True,
                         'is_top_cost_center' : False,
+                        'is_po_fo_cost_center' : True,
                     }
                     hq.get('account.target.costcenter').create(line_data)
                 else:
@@ -337,10 +339,11 @@ class db_creation(object):
                         'cost_center_id' : top_cost_center_id,
                         'is_target' : False,
                         'is_top_cost_center' : False,
+                        'is_po_fo_cost_center' : False,
                     }
                     hq.get('account.target.costcenter').create(top_line_data)
                     project_target_ids = hq.search_data('account.target.costcenter', {'instance_id' : instance_id, 'cost_center_id' : top_cost_center_id})
-                    hq.write('account.target.costcenter', project_target_ids, {'is_target': True, 'is_top_cost_center': True})
+                    hq.write('account.target.costcenter', project_target_ids, {'is_target': True, 'is_top_cost_center': True, 'is_po_fo_cost_center' : True})
                 self.sync(hq)
 
     def add_to_group(self, group_name, group_type):
