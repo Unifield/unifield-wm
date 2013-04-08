@@ -274,9 +274,7 @@ class db_creation(object):
         # Get 2 cost centers: the top one and the normal one
         cost_center_id = False
         top_cost_center_id = False
-        if self.db is hq:
-            top_cost_center_id = hq.search_data('account.analytic.account', {'Code':'OC'})[0]
-        elif mission.db is hq:
+        if mission and mission.db is hq:
             top_data = {
                 'name' : "HT%d" % (self.index),
                 'code' : "HT%d" % (self.index),
@@ -293,7 +291,7 @@ class db_creation(object):
                 'parent_id' : top_cost_center_id,
             }
             cost_center_id = hq.get('account.analytic.account').create(data)
-        else:
+        elif self.db is not hq:
             parent_cost_center_id = hq.search_data('account.analytic.account', {'Code':"HT%d" % (mission.index)})[0]
             data = {
                 'name' : "HT%d%d1" % (mission.index, self.index),
@@ -309,7 +307,6 @@ class db_creation(object):
             'instance' : self.db.name,
             'mission' : '%s_MISSION_%s' % (config.prefix, ("OC" if mission is None else "%02d" % mission.index)),
             'state' : 'active',
-            'top_cost_center_id' : top_cost_center_id,
         }
         if prop_instance is not None:
             data.update(prop_instance)
@@ -323,12 +320,16 @@ class db_creation(object):
                         'instance_id' : instance_id,
                         'cost_center_id' : top_cost_center_id,
                         'is_target' : True,
+                        'is_top_cost_center' : True,
+                        'is_po_fo_cost_center' : False,
                     }
                     hq.get('account.target.costcenter').create(top_line_data)
                     line_data = {
                         'instance_id' : instance_id,
                         'cost_center_id' : cost_center_id,
                         'is_target' : True,
+                        'is_top_cost_center' : False,
+                        'is_po_fo_cost_center' : True,
                     }
                     hq.get('account.target.costcenter').create(line_data)
                 else:
@@ -337,10 +338,12 @@ class db_creation(object):
                         'instance_id' : data['parent_id'],
                         'cost_center_id' : top_cost_center_id,
                         'is_target' : False,
+                        'is_top_cost_center' : False,
+                        'is_po_fo_cost_center' : False,
                     }
                     hq.get('account.target.costcenter').create(top_line_data)
                     project_target_ids = hq.search_data('account.target.costcenter', {'instance_id' : instance_id, 'cost_center_id' : top_cost_center_id})
-                    hq.write('account.target.costcenter', project_target_ids, {'is_target': True})
+                    hq.write('account.target.costcenter', project_target_ids, {'is_target': True, 'is_top_cost_center': True, 'is_po_fo_cost_center' : True})
                 self.sync(hq)
 
     def add_to_group(self, group_name, group_type):
