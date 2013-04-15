@@ -614,7 +614,7 @@ for i in range(1, coordo_count+1):
         'prefix' : hex(i+hq_count)[2:].rjust(2,'X'),
         'index' : i,
         'parent' : globals()["hq%02d_creation" % (\
-                        (((i-1) / (coordo_count/hq_count)) % hq_count + 1))],
+                        ((i-1) % hq_count + 1))],
     }) )
     test_cases[-1].hq = test_cases[-1].parent
     # Make testcase visible for importation
@@ -627,7 +627,7 @@ for i in range(1, project_count+1):
         'prefix' : hex(i+coordo_count+hq_count)[2:].rjust(2,'X'),
         'index' : i,
         'parent' : globals()["coordo%02d_creation" % (\
-                        (int((i-1) / (float(project_count)/coordo_count)) % coordo_count + 1))],
+                        ((i-1) % coordo_count + 1))],
     }) )
     test_cases[-1].hq = test_cases[-1].parent.parent
     # Make testcase visible for importation
