@@ -244,7 +244,7 @@ msgstr "Le nombre de couche sur une palette ou dans une boite"
 #: model:product.pricelist.type,name:product.pricelist_type_sale
 #: field:res.partner,property_product_pricelist:0
 msgid "Sale Pricelist"
-msgstr "Liste de prix de vente"
+msgstr "Numéro de tarif / promo"
 
 #. module: product
 #: field:product.pricelist.item,base_pricelist_id:0

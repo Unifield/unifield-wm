@@ -150,6 +150,12 @@ class iller_partner(osv.osv):
         '''
             On vérifie qu'un RIB existe pour le partenaire
         '''
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+
+        if not ids:
+            return True
+
         for partner in self.browse(cr, uid, ids):
             for bank in partner.bank_ids:
                 if bank.state == 'rib':

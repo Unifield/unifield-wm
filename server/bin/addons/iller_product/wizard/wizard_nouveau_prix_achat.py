@@ -55,6 +55,7 @@ class wizard_nouveau_prix_achat(wizard.interface):
                                          'name'               : data['form']['start_date'],
                                          'nouveau_prix_achat' : nouveau_prix_achat[0],
                                          'nouveau_prix_vente' : nouveau_prix_achat[0] * prod.coeff_depart,
+                                         'nouveau_prix_blanche': nouveau_prix_achat[0] * prod.coeff_blanche,
                                          'product_id'         : product_id,
                                           } 
 

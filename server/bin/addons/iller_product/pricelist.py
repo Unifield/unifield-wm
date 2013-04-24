@@ -123,6 +123,8 @@ class product_pricelist_item(osv.osv):
     }
 
     def bareme_change(self, cr, uid, ids, bareme_id, base_id, context={}):
+        if not base_id:
+          return {'value': {'price_discount': 0.0}}
         price_type = self.pool.get('product.price.type').browse(cr, uid, base_id)
         if bareme_id:
             if price_type.name == u'Prix Special':

@@ -2071,7 +2071,7 @@ msgstr "Enregistrer la règle"
 #. module: base
 #: field:res.partner,vat:0
 msgid "VAT"
-msgstr "TVA"
+msgstr "TVA intracomm."
 
 #. module: base
 #: view:res.lang:0

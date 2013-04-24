@@ -7,6 +7,36 @@ import time
 import re
 
 
+class sale_order(osv.osv):
+    _name = 'sale.order'
+    _inherit = 'sale.order'
+
+    def onchange_partner_id(self, cr, uid, ids, part, context=None):
+        
+        res = super(sale_order, self).onchange_partner_id(cr, uid, ids, part, context=context)
+        partner = self.pool.get('res.partner').browse(cr, uid, part, context=context)
+
+        val = {
+            'code': partner.ref
+        }
+        res['value'].update(val)
+        return res
+
+    def _get_code_client(self, cr, uid, ids, field_name, arg, context=None):
+
+        res = {}
+        for sale_order_record in self.browse(cr, uid, ids, context=context):
+            partner = sale_order_record.partner_id
+            res[sale_order_record.id] = partner.ref
+            
+        return res
+    
+    _columns = {
+        'code': fields.function(_get_code_client, type='char', method=True, string='Code', readonly=True)
+    }
+
+sale_order()
+
 class iller_sale_comment(osv.osv):
     _name = 'iller.sale.comment'
     _description = 'Commentaire par produit/client'
@@ -98,7 +128,6 @@ class iller_sale_line(osv.osv):
 
         return res
 
-
 iller_sale_line()
 
 class iller_sale(osv.osv):
@@ -162,19 +191,29 @@ class iller_partner(osv.osv):
     _name = 'res.partner'
     _inherit = 'res.partner'
 
-
     def name_search(self, cr, uid, name='', args=[], operator='ilike', context={}, limit=80):
         '''
             Recherche du partenaire grâce à son code, son nom, son numéro de 
             téléphone ou son adresse (ville, rue)
         '''
+
         if 'from' in context and context.get('from') == 'sale.order':
             address_obj = self.pool.get('res.partner.address')
             res = []
 
-            ## Recherche sur le code exact
             if name:
-                res = self.search(cr, uid, [('ref', '=', name)] + args, limit=limit, context=context)
+                ## Recherche sur nom du partenaire
+                name_ids = self.search(cr, uid, [('name', operator, name)] + args, limit=limit, context=context)
+                for name_id in name_ids:
+                    if name_id not in res:
+                        res.append(name_id)
+                
+                ## Recherche sur nom de la rue
+                street_ids = address_obj.search(cr, uid, [('street', operator, name)], limit=limit, context=context)
+                for street in address_obj.browse(cr, uid, street_ids):
+                    # Rajout d'une vérification sur le type de l'id, car parfois stockait "False' ==> erreur dans la requête
+                    if street.partner_id.id not in res and not isinstance(street.partner_id.id, bool):
+                        res.append(street.partner_id.id)
 
                 ## Recerche sur le numéro de téléphone exact
                 if not res or len(res) < 1:
@@ -184,38 +223,36 @@ class iller_partner(osv.osv):
                         if addr.partner_id and addr.partner_id.id and addr.partner_id.active and addr.partner_id.id not in res:
                             res.append(addr.partner_id.id)
 
-                ## Recherche sur le nom, la ville ou le nom de la rue
+                ## Recherche sur nom de la ville
+                city_name = '%'+str(name)+'%'
+                city_ids = address_obj.search(cr, uid, [('city', operator, city_name)], limit=limit, context=context)
+                for city in address_obj.browse(cr, uid, city_ids):
+                    if city.partner_id.id not in res and not isinstance(city.partner_id.id, bool):
+                        res.append(city.partner_id.id)
+
+                ## Recherche sur le code exact
+                if not res or len(res) <1 :
+                    res = self.search(cr, uid, [('ref', '=', name)] + args, limit=limit, context=context)
+
+                ## Recherche sur le numéro de téléphone
                 if not res or len(res) < 1:
-                    ## Nom de la rue
-                    street_ids = address_obj.search(cr, uid, [('street', operator, name)], limit=limit, context=context)
-                    for street in address_obj.browse(cr, uid, street_ids):
-                        if street.partner_id.id not in res:
-                            res.append(street.partner_id.id)
-                    ## Nom secondaire de la rue
-                    street2_ids = address_obj.search(cr, uid, [('street2', operator, name)], limit=limit, context=context)
-                    for street2 in address_obj.browse(cr, uid, street2_ids):
-                        if street2.partner_id.id not in res:
-                            res.append(street2.partner_id.id)
-                    ## Nom de la ville
-                    city_ids = address_obj.search(cr, uid, [('city', operator, name)], limit=limit, context=context)
-                    for city in address_obj.browse(cr, uid, city_ids):
-                        if city.partner_id.id not in res:
-                            res.append(city.partner_id.id)
 
-                    ## Nom du partenaire
-                    name_ids = self.search(cr, uid, [('name', operator, name)] + args, limit=limit, context=context)
-                    for name in name_ids:
-                        if name not in res:
-                            res.append(name)
+                    tel = re.sub('\D', '', str(name))
+                    if tel:
+                        addr_ids = address_obj.search(cr, uid, [('phone', operator, tel)], limit=limit, context=context)
+                        for addr in address_obj.browse(cr, uid, addr_ids):
+                            if addr.partner_id and addr.partner_id.id and addr.partner_id.active and addr.partner_id.id not in res:
+                                res.append(addr.partner_id.id)
+            
             else:
+
                 res = self.search(cr, uid, [] + args, limit=limit, context=context)
-
-
+            
             return self.name_get(cr, uid, res, context)
         else:
+                        
             return super(iller_partner, self).name_search(cr, uid, name, args, operator, context=context, limit=limit)
-
-
+    
 iller_partner()
 
 
@@ -229,10 +266,9 @@ class iller_partner_address(osv.osv):
             dans le bon format pour les recherches
         '''
         if 'phone' in values:
-            values['phone'] = re.sub('\D', '', values.get('phone', ''))
+            values['phone'] = re.sub('\D', '', str(values.get('phone', '')))
 
         return super(iller_partner_address, self).create(cr, uid, values, context=context)
-
 
     def write(self, cr, uid, ids, data, context={}):
         '''
@@ -240,7 +276,7 @@ class iller_partner_address(osv.osv):
             dans le bon format pour les recherches
         '''
         if 'phone' in data:
-            data['phone'] = re.sub('\D', '', data.get('phone', ''))
+            data['phone'] = re.sub('\D', '', str(data.get('phone', '')))
 
         return super(iller_partner_address, self).write(cr, uid, ids, data, context=context)
 

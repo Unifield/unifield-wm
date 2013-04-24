@@ -28,7 +28,7 @@ msgstr "XML non valide pour l'architecture de la vue"
 #. module: base_vat
 #: field:res.partner,vat_subjected:0
 msgid "VAT Legal Statement"
-msgstr "Déclaration de TVA"
+msgstr "Assujettissemt TVA"
 
 #. module: base_vat
 #: model:ir.module.module,shortdesc:base_vat.module_meta_information

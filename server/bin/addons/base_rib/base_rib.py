@@ -52,7 +52,7 @@ class res_partner_bank(osv.osv):
             
             # compute the key
             key = 97 - (100 * int(rib)) % 97
-            
+
             if int(bank_acc.key) != key:
                 return False
         return True
@@ -66,7 +66,7 @@ class res_partner_bank(osv.osv):
             #get the other arguments of the search
             args1 = filter(lambda x:x[0] != 'acc_number' , args)
             #add the new criterion
-            args1 += [('rib', 'ilike', rib_value)]
+            args1 += [('acc_number', 'ilike', rib_value)]
             #append the results to the older search
             res += super(res_partner_bank, self).search(cr, uid, args1, offset, limit,
                 order, context=context, count=count)

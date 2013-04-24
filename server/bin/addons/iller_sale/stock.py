@@ -75,7 +75,7 @@ class iller_stock_picking(osv.osv):
     _inherit = 'stock.picking'
 
     _columns = {
-        'address_id': fields.many2one('res.partner.address', string='Partner', required=True),
+        'address_id': fields.many2one('res.partner.address', string='Partner', required=True),      
     }
 
     def _get_price_unit_invoice(self, cr, uid, stock_move, inv_type):

@@ -114,7 +114,8 @@ class iller_commission_line(osv.osv):
             for bareme in bareme_obj.browse(cr, uid, bareme_ids):
                 ## Si le prix unitaire est égal au prix de vente du produit * le 
                 ## coeficient d'un barème, on retourne la commission associée au taux du barème
-                if round(bareme.valeur*l.get('prix_vente'),2) == l.get('unit_price'):
+                if round(bareme.valeur*l.get('prix_vente'),2) == round(l.get('unit_price'), 2):
+
                     return bareme.taux_com*l.get('unit_price')*l.get('qty'), message
 
                 if l.get('unit_price') > round(bareme.valeur*l.get('prix_vente'),2) and (not bareme_below or bareme.valeur > bareme_below.valeur):
