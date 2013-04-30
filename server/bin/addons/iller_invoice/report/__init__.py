@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
@@ -20,9 +21,6 @@
 #
 ##############################################################################
 
-import impression_commandes_par_tournee
-import impression_articles_par_tournee
-import impression_produits_a_expedier_par_tournee
-import picking_iller
+import iller_invoice
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

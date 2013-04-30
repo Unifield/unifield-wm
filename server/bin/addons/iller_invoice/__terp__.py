@@ -38,6 +38,7 @@
         'commission_data.xml',
         'security/iller_invoice_security.xml',
         'security/ir.model.access.csv',
+        'report/iller_invoice_report.xml',
     ],
     "demo_xml" : [],
     "test": [],

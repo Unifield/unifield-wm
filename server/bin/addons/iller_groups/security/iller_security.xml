@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="0">
+        
+<!-- Groupes -->
+
+        <!-- Groupe comptabilité -->
+        
+        <record model="res.groups" id="account.group_account_manager">
+            <field name="name">Comptabilité</field>
+        </record>
+
+        <!-- Groupe distribution -->
+        <record model="res.groups" id="group_distri">
+            <field name="name">Distribution</field>
+        </record>
+
+        <!-- Groupe représentant -->
+        
+        <record model="res.groups" id="sale.group_sale_manager">
+            <field name="name">Représentant</field>
+        </record>
+        
+        <!-- Groupe achat / production -->
+        
+        <record model="res.groups" id="purchase.group_purchase_manager">
+            <field name="name">Achat/Production</field>
+        </record>
+
+        <!-- Groupe RH -->
+        <record model="res.groups" id="hr.group_hr_manager">
+            <field name="name">RH</field>
+        </record>        
+
+<!-- Menus -->
+
+        <!-- Partner -->
+        <record model='ir.ui.menu' id='base.menu_base_partner'>
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_manager'), ref('group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]"/>
+        </record>
+
+        <!-- Product -->
+        <record model='ir.ui.menu' id='product.menu_main_product'>
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_manager'), ref('group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]"/>
+        </record>
+
+        <!-- RH -->
+        <record model='ir.ui.menu' id='hr.menu_hr_root'>
+            <field name="groups_id" eval="[(6,0,[ref('hr.group_hr_manager'), ref('hr.group_hr_manager')])]"/>
+        </record>
+
+        <!-- Stock -->
+        <record model='ir.ui.menu' id='stock.menu_stock_root'>
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_manager'), ref('group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]"/>
+        </record>
+        
+        <!-- Achat/Prod -->
+        <record model='ir.ui.menu' id='purchase.menu_purchase_root'>
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_manager'), ref('group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]"/>
+        </record>
+        
+        <!-- MRP -->
+        <record model='ir.ui.menu' id='mrp.menu_mrp_root'>
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_manager'), ref('group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]"/>
+        </record>
+        
+        <record model='ir.ui.menu' id='mrp.menu_mrp_configuration'>
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_manager'), ref('hr.group_hr_manager')])]"/>
+        </record>
+        
+        <record model='ir.ui.menu' id='mrp.mrp_Sched_all'>
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_manager'), ref('hr.group_hr_manager')])]"/>
+        </record>
+        <record model='ir.ui.menu' id='mrp.menu_mrp_procurement_action'>
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_manager'), ref('hr.group_hr_manager')])]"/>
+        </record>
+        <record model='ir.ui.menu' id='mrp.menu_mrp_property_group_action_prop'>
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_manager'), ref('hr.group_hr_manager')])]"/>
+        </record>
+        
+        <!-- Sale -->
+        <record model='ir.ui.menu' id='sale.menu_sale_root'>
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_manager'), ref('group_distri'), ref('sale.group_sale_manager'), ref('hr.group_hr_manager')])]"/>
+        </record>
+        
+<!--
+        <record model='ir.ui.menu' id='menu_utilitaire'>
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_manager'), ref('group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]"/>
+        </record>
+-->
+
+        <!-- CRM -->
+        <record model='ir.ui.menu' id='crm.menu_crm'>
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_manager'), ref('group_distri'), ref('hr.group_hr_manager')])]"/>
+        </record>
+        <record model='ir.ui.menu' id='crm.menu_crm_configuration'>
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_manager'), ref('group_distri'), ref('hr.group_hr_manager')])]"/>
+        </record>
+        <record model='ir.ui.menu' id='crm.next_id_51'>
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_manager'), ref('group_distri'), ref('hr.group_hr_manager')])]"/>
+        </record>
+        <record model='ir.ui.menu' id='crm.next_id_52'>
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_manager'), ref('group_distri'), ref('hr.group_hr_manager')])]"/>
+        </record>
+        <record model='ir.ui.menu' id='crm.next_id_53'>
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_manager'), ref('group_distri'), ref('hr.group_hr_manager')])]"/>
+        </record>
+        <record model='ir.ui.menu' id='crm.menu_wizard_case_section_menu'>
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_manager'), ref('group_distri'), ref('hr.group_hr_manager')])]"/>
+        </record>
+        
+        <!-- Documents -->
+        <record model='ir.ui.menu' id='document.menu_document'>
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_manager'), ref('group_distri'), ref('hr.group_hr_manager')])]"/>
+        </record>
+        <record model='ir.ui.menu' id='document.menu_document_configuration'>
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_manager'), ref('group_distri'), ref('hr.group_hr_manager')])]"/>
+        </record>
+        
+        <!-- Account -->
+        <record model='ir.ui.menu' id='account.menu_finance'>
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_manager'), ref('hr.group_hr_manager')])]"/>
+        </record>
+        
+    </data>
+</openerp>

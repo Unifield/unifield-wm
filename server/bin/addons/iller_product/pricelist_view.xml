@@ -12,8 +12,8 @@
                         <field name="bareme_id" on_change="bareme_change(bareme_id,base)" />
                         <label string="Indication de la valeur" />
                         <field name="price_discount" nolabel="1" readonly="1" />
-			<separator colspan="4" string="Tarif spécial client"/>
-			<field name="price_surcharge" string="Prix Special"/>
+            <separator colspan="4" string="Tarif spécial client"/>
+            <field name="price_surcharge" string="Prix Special"/>
                 </xpath>
             </field>
         </record>

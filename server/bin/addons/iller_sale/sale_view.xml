@@ -6,16 +6,17 @@
             <field name="name">iller.sale.order.form.view</field>
             <field name="model">sale.order</field>
             <field name="type">form</field>
-            <field name="priority" eval="16" />
+            <field name="priority" eval="100" />
             <field name="inherit_id" ref="sale.view_order_form" />
             <field name="arch" type="xml">
                 <data>
                     
+                    <xpath expr="//field[@name='invoiced']" position="after" >
+                        <field name="code" string="Code client"/>
+                    </xpath>
+
                     <xpath expr="/form/notebook/page/field[@name='partner_id']" position="replace" >
                         <field name="partner_id" on_change="onchange_partner_id(partner_id)" required="1" select="1" context="{'from': 'sale.order'}"/>
-                    </xpath>
-                    <xpath expr="/form/notebook/page/field[@name='partner_id']" position="after" >
-                        <field name="code"/>
                     </xpath>
                     <xpath expr="/form/notebook/page/field[@name='order_line']" position="replace">
                         <field colspan="4" mode="tree,form" name="order_line" nolabel="1">
@@ -24,11 +25,17 @@
                                     context="{'partner_id':parent.partner_id,'quantity':product_uom_qty,'pricelist':parent.pricelist_id,'shop':parent    .shop_id,'uom':product_uom,'from':'sale.order.line'}"
                                     on_change="product_id_change(parent.pricelist_id,product_id,product_uom_qty,product_uom,product_uos_qty,product_uos,name,parent.partner_id, 'lang' in context and context['lang'], True, parent.date_order, product_packaging, parent.fiscal_position, tournee_id=parent.tournee_id)"
                                     select="1" />
-                                <field name="product_uom_qty" string="Qté" readonly="0"
-                                       context="partner_id=parent.partner_id,quantity=product_uom_qty,pricelist=parent.pricelist_id,shop=parent.shop_id,uom=product_uom"
-                                       on_change="product_id_change(parent.pricelist_id,product_id,product_uom_qty,product_uom,product_uos_qty,product_uos,name,parent.partner_id, 'lang' in context and context['lang'], False, parent.date_order, product_packaging, parent.fiscal_position)"/>
+                                <field name="product_uom_qty" string="Qté" readonly="0" digits='(16, 3)'
+                                    context="partner_id=parent.partner_id,quantity=product_uom_qty,pricelist=parent.pricelist_id,shop=parent.shop_id,uom=product_uom"
+                                    on_change="product_id_change(parent.pricelist_id,product_id,product_uom_qty,product_uom,product_uos_qty,product_uos,name,parent.partner_id, 'lang' in context and context['lang'], False, parent.date_order, product_packaging, parent.fiscal_position)"/>
                                 <field name="product_uom" string="UdM" readonly="0"
                                        on_change="product_id_change(parent.pricelist_id,product_id,product_uom_qty,product_uom,product_uos_qty,product_uos,name,parent.partner_id, 'lang' in context and context['lang'], False, parent.date_order, product_packaging, parent.fiscal_position)"/>
+                                
+                                <field name="type_cond" readonly="0"/>
+                            
+                                <field name="type_prep" readonly="0"/>
+                                <field name="commission" readonly="0"/>
+                                
                                 <field name="price_unit" readonly="0" on_change="price_unit_change(price_unit, product_id, product_uom_qty, parent.partner_id, parent.pricelist_id)" />
                                 <field name="notes" readonly="0" />
                                 <field name="price_subtotal" readonly="1"/>
@@ -63,6 +70,10 @@
                                                on_change="product_id_change(parent.pricelist_id,product_id,product_uom_qty,product_uom,product_uos_qty,product_uos,name,parent.partner_id, 'lang' in context and context['lang'], False, parent.date_order, product_packaging, parent.fiscal_position)"
                                                domain="[('product_id','=',product_id)]"
                                                groups="base.group_extended"/>
+                                        
+                                        <field name="commission"/>
+                                        <field name="num_lot"/>
+                                        
                                         <separator colspan="4" string="Manual Description"/>
                                         <field colspan="4" name="name" select="2"/>
                                         <field name="price_unit" select="2"/>
@@ -96,10 +107,9 @@
                                 </notebook>
                             </form>
                         </field>
-                    </xpath>
+                    </xpath>                    
                 </data>
             </field>
         </record>
-
     </data>
 </openerp>

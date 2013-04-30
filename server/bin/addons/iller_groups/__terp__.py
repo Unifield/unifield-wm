@@ -1,9 +1,8 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution    
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
-#    Tempo Consulting (<http://www.tempo-consulting.fr/>).
+#    OpenERP, Open Source Management Solution
+#    Copyright (C) 2013 Tempo Consulting.
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -20,9 +19,35 @@
 #
 ##############################################################################
 
-import impression_commandes_par_tournee
-import impression_articles_par_tournee
-import impression_produits_a_expedier_par_tournee
-import picking_iller
-
+{
+    'name': 'Gestion des droits pour ILLER',
+    'version': '1.0',
+    'category': 'Generic Modules/Projects & Services',
+    'description': """
+        Ce module contient les développements spécifiques
+        concernant la gestion des droits pour Iller
+""",
+    'author': 'TeMPO Consulting',
+    'website': 'http://www.tempo-consulting.com',
+    'depends': [
+        'base', 
+        'product', 
+        'hr', 
+        'mrp', 
+        'crm', 
+        'stock',
+        'purchase',
+        'sale',
+        'account',
+        'document',
+    ],
+    'init_xml': [],
+    'demo_xml': [],
+    'update_xml': [
+            'security/iller_security.xml',
+            'security/ir.model.access.csv',
+    ],
+    'installable': True,
+    'active': False,
+}
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

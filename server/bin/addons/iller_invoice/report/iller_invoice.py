@@ -20,26 +20,19 @@
 #
 ##############################################################################
 
+import time
+from report import report_sxw
 
-{
-    "name" : "Iller Partner",
-    "version" : "1.0",
-    "author" : "TeMPO Consulting",
-    "website": "http://www.tempo-consulting.fr",
-    "category" : "Enterprise Specific Modules/Iller",
-    "depends" : ["base", "account", "stock", "iller_tournee", "account_payment", "base_rib"],
-    "init_xml" : [],
-    "demo_xml" : [],
-    "description": """
-        Ajoute des informations sur la fiche partenaire 
-        pour Distribution Iller.
-    """,
-    'update_xml': [
-        'partner_view.xml',
-        'security/iller_partner_security.xml',
-        'security/ir.model.access.csv',
-    ],
-    'installable': True,
-    'active': False,
-}
+class account_invoice_iller(report_sxw.rml_parse):
+    def __init__(self, cr, uid, name, context):
+        super(account_invoice_iller, self).__init__(cr, uid, name, context=context)
+        self.localcontext.update({
+            'time': time,
+        })
+report_sxw.report_sxw(
+    'report.account.invoice.iller',
+    'account.invoice',
+    'addons/iller_invoice/report/iller_invoice.rml',
+    parser=account_invoice_iller
+)
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -153,7 +153,7 @@ class wizard_picking_to_invoice(osv.osv_memory):
             for bon in sorted(bon_a_facturer):
                 factures_reussies = []
                 try:
-                    factures_reussies = sp_obj.action_invoice_create(cr, uid, bon_a_facturer[bon], journal_id, group=True, type='out_invoice', context=context)
+                    factures_reussies = sp_obj.action_invoice_create(cr, uid, bon_a_facturer[bon], journal_id, True, 'out_invoice', context=context)
                 except Exception:
                     bon_non_reussis += bon_a_facturer[bon]
                     continue

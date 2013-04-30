@@ -6,37 +6,6 @@ from osv import fields
 import time
 import re
 
-
-class sale_order(osv.osv):
-    _name = 'sale.order'
-    _inherit = 'sale.order'
-
-    def onchange_partner_id(self, cr, uid, ids, part, context=None):
-        
-        res = super(sale_order, self).onchange_partner_id(cr, uid, ids, part, context=context)
-        partner = self.pool.get('res.partner').browse(cr, uid, part, context=context)
-
-        val = {
-            'code': partner.ref
-        }
-        res['value'].update(val)
-        return res
-
-    def _get_code_client(self, cr, uid, ids, field_name, arg, context=None):
-
-        res = {}
-        for sale_order_record in self.browse(cr, uid, ids, context=context):
-            partner = sale_order_record.partner_id
-            res[sale_order_record.id] = partner.ref
-            
-        return res
-    
-    _columns = {
-        'code': fields.function(_get_code_client, type='char', method=True, string='Code', readonly=True)
-    }
-
-sale_order()
-
 class iller_sale_comment(osv.osv):
     _name = 'iller.sale.comment'
     _description = 'Commentaire par produit/client'
@@ -105,6 +74,18 @@ class iller_sale_line(osv.osv):
 
         return super(iller_sale_line, self).create(cr, uid, data, context={})
 
+    def get_type_cond(self, type_cond):
+        
+        #TODO Trouver un moyen de récupérer la valeur "string" d'une fields.selection
+        if type_cond == '0000':
+            return 'PIECE'
+        elif type_cond == '0001':
+            return 'KILO'
+        elif type_cond == '0002':
+            return 'CARTON'
+        elif type_cond == '0003':
+            return 'BARQUETTE'
+        return False
 
     def product_id_change(self, cr, uid, ids, pricelist, product, qty=0,
           uom=False, qty_uos=0, uos=False, name='', partner_id=False,
@@ -123,19 +104,73 @@ class iller_sale_line(osv.osv):
             comment_ids = comment_obj.search(cr, uid, [('partner_id', '=', partner_id), ('product_id', '=', product)])
             if comment_ids and len(comment_ids) > 0:
                 comment = comment_obj.browse(cr, uid, comment_ids[0]).comment
-
-        res['value'].update({'notes': comment})
+        
+        type_cond = code_affect = ''
+        if product:
+            product_id = self.pool.get('product.product').browse(cr, uid, product)
+            type_cond = self.get_type_cond(product_id.type_cond)
+            code_affect = product_id.code_affectation
+            
+        res['value'].update({
+            'notes': comment, 
+            'type_prep': code_affect,
+            'type_cond': type_cond,
+        })
 
         return res
 
+    def _get_info_order_line(self, cr, uid, ids, name, args, context=None):
+
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+                    
+        res = {}
+                    
+        # Parcours des lignes de vente
+        for line in self.browse(cr, uid, ids, context=context):
+
+            res[line.id] = {
+                    'type_prep': line.product_id.code_affectation,
+                    'type_cond': self.get_type_cond(line.product_id.type_cond),
+                }
+
+        return res
+
+    _columns = {
+        'type_cond': fields.function(_get_info_order_line, type='char', method=True, string=u'Type conditionnement', readonly=True, multi='infos_order_line'),
+        'type_prep': fields.function(_get_info_order_line, type='char', method=True, string='Type prép.', readonly=True, multi='infos_order_line'),
+        'num_lot': fields.char(u'N° Lot', size=64),
+
+    }
 iller_sale_line()
 
 class iller_sale(osv.osv):
     _name = 'sale.order'
     _inherit = 'sale.order'
+    
+    def onchange_partner_id(self, cr, uid, ids, part, context=None):
+        
+        res = super(iller_sale, self).onchange_partner_id(cr, uid, ids, part, context=context)
+        partner = self.pool.get('res.partner').browse(cr, uid, part, context=context)
+
+        val = {
+            'code': partner.ref
+        }
+        res['value'].update(val)
+        return res
+
+    def _get_code_client(self, cr, uid, ids, field_name, arg, context=None):
+
+        res = {}
+        for sale_order_record in self.browse(cr, uid, ids, context=context):
+            partner = sale_order_record.partner_id
+            res[sale_order_record.id] = partner.ref
+            
+        return res
 
     _columns = {
         'user_id': fields.many2one('res.users', 'Salesman', states={'draft': [('readonly', False)]}, select=True, required=True),
+        'code': fields.function(_get_code_client, type='char', method=True, string='Code', readonly=True),
     }
 
     _defaults = {
@@ -215,13 +250,11 @@ class iller_partner(osv.osv):
                     if street.partner_id.id not in res and not isinstance(street.partner_id.id, bool):
                         res.append(street.partner_id.id)
 
-                ## Recerche sur le numéro de téléphone exact
-                if not res or len(res) < 1:
-                    tel = re.sub('\D', '', name)
-                    addr_ids = address_obj.search(cr, uid, [('phone', operator, tel)], limit=limit, context=context)
-                    for addr in address_obj.browse(cr, uid, addr_ids):
-                        if addr.partner_id and addr.partner_id.id and addr.partner_id.active and addr.partner_id.id not in res:
-                            res.append(addr.partner_id.id)
+                ## Recherche sur nom secondaire de la rue
+                street2_ids = address_obj.search(cr, uid, [('street2', operator, name)], limit=limit, context=context)
+                for street2 in address_obj.browse(cr, uid, street2_ids):
+                    if street2.partner_id.id not in res and not isinstance(street2.partner_id.id, bool):
+                        res.append(street2.partner_id.id)
 
                 ## Recherche sur nom de la ville
                 city_name = '%'+str(name)+'%'

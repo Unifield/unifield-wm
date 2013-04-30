@@ -22,6 +22,7 @@
 ##############################################################################
 
 from osv import osv
+from osv import fields
 
 class iller_account_invoice_line(osv.osv):
     _name = 'account.invoice.line'
@@ -63,5 +64,44 @@ class iller_account_invoice_line(osv.osv):
         return res
 
 iller_account_invoice_line()
+
+
+
+
+class account_invoice(osv.osv):
+    _name = "account.invoice"
+    _inherit = "account.invoice"
+    
+    # Récupération du code client à afficher dans le formulaire
+    def _get_code_client(self, cr, uid, ids, field_name, arg, context=None):
+        
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+        
+        res = {}
+        for acc_invoice_record in self.browse(cr, uid, ids, context=context):
+            partner = acc_invoice_record.partner_id
+            res[acc_invoice_record.id] = partner.ref
+            
+        return res
+        
+    _columns = {
+        'code': fields.function(_get_code_client, type='char', method=True, string='Code', readonly=True),
+        
+    }
+
+    def onchange_partner_id(self, cr, uid, ids, type_partner=None, partner_id=None, date_invoice=None, payment_term=None, context={}):
+
+        res = super(account_invoice, self).onchange_partner_id(cr, uid, ids, type_partner, partner_id, date_invoice, payment_term)
+        if partner_id:
+            partner = self.pool.get('res.partner').browse(cr, uid, partner_id, context=context)
+            if partner.ref:
+                res['value'].update({'code': partner.ref})
+
+        return res
+        
+account_invoice()
+
+
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

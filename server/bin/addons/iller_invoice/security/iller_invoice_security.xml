@@ -1,11 +1,197 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <openerp>
-	<data>
+    <data>
 
         <record id="menu_makes_invoices" model="ir.ui.menu">
-            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice')])]" />
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        
+        <record id="account.menu_finance_invoice" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        
+        <record id="account.menu_action_invoice_tree1" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        
+        <record id="account.menu_action_move_line_form" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        
+        <record id="account.next_id_29" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        
+        <record id="account.menu_encode_entries_by_move" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        
+        <record id="account.menu_action_move_line_search" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        
+        <record id="account.menu_action_account_tree2" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        
+        <record id="account.next_id_30" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        
+        <record id="account.menu_action_account_bank_reconcile_tree" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        
+        <record id="account.menu_action_account_bank_reconcile_check_tree" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        
+        <record id="account.menu_action_account_journal_period_tree" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        
+        <record id="account.menu_action_model_form" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        
+        <record id="account.menu_action_payment_term_form" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        <record id="account.menu_action_subscription_form" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        <record id="account.menu_action_subscription_form_running" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        <record id="account.menu_action_subscription_form_new" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        <record id="account.account_template_folder" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        <record id="account.action_account_template_form" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        <record id="account.action_account_chart_template_form" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        <record id="account.action_account_tax_template_form" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        <record id="account.action_account_tax_code_template_form" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        <record id="account.menu_action_account_fiscal_position_form_template" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        <record id="account.next_id_23" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        <record id="account.menu_action_account_period_form" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        <record id="account.account_account_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        <record id="account.menu_action_account_form" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        <record id="account.menu_action_account_tree" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        <record id="account.menu_action_account_journal_form" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        <record id="account.menu_bank_statement_draft_tree" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        <record id="account.menu_bank_statement_tree2" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        <record id="account.menu_action_account_type_form" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
         </record>
 
-	</data>
+
+        <record id="account.next_id_27" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        <record id="account.menu_action_tax_code_list" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        <record id="account.menu_action_tax_form" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        <record id="account.menu_action_move_journal_line_form" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        <record id="account.menu_action_invoice_tree1_new" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        <record id="account.menu_action_invoice_tree2" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        <record id="account.menu_action_invoice_tree2_new" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        <record id="account.menu_action_invoice_tree3" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        <record id="account.menu_action_invoice_tree3_new" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        <record id="account.menu_action_invoice_tree4" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        <record id="account.menu_action_invoice_tree4_new" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        <record id="account.menu_invoice_draft" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        <record id="account.menu_action_invoice_tree6" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        <record id="account.menu_action_invoice_tree7" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        <record id="account.menu_action_invoice_tree8" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        <record id="account.menu_action_invoice_tree9" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        <record id="account.menu_action_invoice_tree10" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        <record id="account.menu_action_invoice_tree11" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        <record id="account.menu_action_invoice_tree12" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        <record id="account.menu_action_invoice_tree13" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        <record id="account.menu_finance_entries" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        <record id="account.menu_finance_periodical_processing" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        <record id="account.next_id_41" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        <record id="account.menu_finance_recurrent_entries" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        <record id="account.next_id_20" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        <record id="account.menu_account_end_year_treatments" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_invoice'), ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+
+    </data>
 </openerp>
 

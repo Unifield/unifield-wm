@@ -20,26 +20,36 @@
 #
 ##############################################################################
 
+import time
+from report import report_sxw
+from osv import osv
 
-{
-    "name" : "Iller Partner",
-    "version" : "1.0",
-    "author" : "TeMPO Consulting",
-    "website": "http://www.tempo-consulting.fr",
-    "category" : "Enterprise Specific Modules/Iller",
-    "depends" : ["base", "account", "stock", "iller_tournee", "account_payment", "base_rib"],
-    "init_xml" : [],
-    "demo_xml" : [],
-    "description": """
-        Ajoute des informations sur la fiche partenaire 
-        pour Distribution Iller.
-    """,
-    'update_xml': [
-        'partner_view.xml',
-        'security/iller_partner_security.xml',
-        'security/ir.model.access.csv',
-    ],
-    'installable': True,
-    'active': False,
-}
+class picking_iller(report_sxw.rml_parse):
+    def __init__(self, cr, uid, name, context):
+        super(picking_iller, self).__init__(cr, uid, name, context=context)
+        self.localcontext.update({
+            'time': time,
+            'get_weight':self.get_weight,
+        })
+        
+    def get_weight(self, move_lines):
+        
+        res = {}
+        str_res = ''
+
+        for move_line in move_lines:
+            
+            if move_line.product_uom.name not in res:
+                res[move_line.product_uom.name] = 0
+                
+            res[move_line.product_uom.name] += move_line.product_qty
+            
+        for i in res:
+            str_res += '%s %s \n\r' %(res[i], i)
+            
+        return str_res
+        
+report_sxw.report_sxw('report.stock.picking.iller','stock.picking','addons/iller_tournee/report/picking_iller.rml',parser=picking_iller)
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+

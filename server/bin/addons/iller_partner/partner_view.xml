@@ -70,11 +70,6 @@
             </field>
         </record>
 
-        <!-- Suppression du groupe stock dans la fiche partenaire -->
-        <record id="stock.view_partner_property_form" model="ir.ui.view">
-            <field name="inherit_id" eval="False" />
-        </record>
-
         <record id="inherit_res_partner_form_view3" model="ir.ui.view">
             <field name="name">inherit.res.partner.form.view3</field>
             <field name="model">res.partner</field>
@@ -93,7 +88,7 @@
                             <field name="customer" select="1"/>
                             <field name="supplier" select="2"/>
                         </group>
-                    </xpath>
+                    </xpath>                    
                 </data>
             </field>
         </record>
@@ -137,7 +132,6 @@
                 </xpath>
             </field>
         </record>
-
     <!-- Ajout du champ "code_saler" à la vue des utilisateurs -->
         <record id="inherit_res_users_form" model="ir.ui.view">
             <field name="name">inherit.res.partner.address.form.view1</field>
@@ -165,7 +159,7 @@
                 </data>
             </field>
         </record>
-
+        
         <!-- Remodelage de la vue form des partenaires -->
         <record id="inherit_remod_view_partner_form" model="ir.ui.view">
             <field name="name">inherit.remod.view.partner.form</field>
@@ -184,6 +178,6 @@
                 </data>
             </field>
         </record>
-
+                
     </data>
 </openerp>

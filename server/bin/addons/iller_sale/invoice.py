@@ -30,7 +30,7 @@ class account_invoice(osv.osv):
     _inherit = "account.invoice"
 
     _columns = {
-        'user_id': fields.many2one('res.users', string="Vendeur", required=False),
+        'user_id': fields.many2one('res.users', string="Vendeur", required=False),        
     }
 
     def onchange_partner_id(self, cr, uid, ids, type_partner=None, partner_id=None, date_invoice=None, payment_term=None, context={}):
@@ -42,6 +42,7 @@ class account_invoice(osv.osv):
             partner = self.pool.get('res.partner').browse(cr, uid, partner_id, context=context)
             if partner.user_id:
                 res['value'].update({'user_id': partner.user_id.id})
+
         return res
 
     def create(self, cr, uid, vals, context={}):

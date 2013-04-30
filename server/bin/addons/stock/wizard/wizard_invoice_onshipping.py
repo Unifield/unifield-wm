@@ -94,21 +94,21 @@ def _create_invoice(obj, cr, uid, data, context=None):
     mod_obj = pool.get('ir.model.data')
     act_obj = pool.get('ir.actions.act_window')
 
-    type = data['form']['type']
+    type_data = data['form']['type']
 
     res = picking_obj.action_invoice_create(cr, uid, data['ids'],
-            journal_id=data['form']['journal_id'], group=data['form']['group'],
-            type=type, context=context)
+            data['form']['journal_id'], data['form']['group'],
+            type_data, context=context)
 
     invoice_ids = res.values()
     if not invoice_ids:
         raise wizard.except_wizard(_('Error'), _('Invoice is not created'))
 
-    if type == 'out_invoice':
+    if type_data == 'out_invoice':
         xml_id = 'action_invoice_tree5'
-    elif type == 'in_invoice':
+    elif type_data == 'in_invoice':
         xml_id = 'action_invoice_tree8'
-    elif type == 'out_refund':
+    elif type_data == 'out_refund':
         xml_id = 'action_invoice_tree10'
     else:
         xml_id = 'action_invoice_tree12'

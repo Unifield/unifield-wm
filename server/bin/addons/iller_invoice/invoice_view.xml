@@ -17,7 +17,22 @@
                 </form>
             </field>
         </record>
-
+        
+        <record id="iller_invoice_view_form" model="ir.ui.view">
+            <field name="name">iller.invoice.view.form</field>
+            <field name="model">account.invoice</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="account.invoice_form" />
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//group/group" position="after" >
+                        <field name="code" string="Code client" />
+                    </xpath>
+                </data>
+                
+            </field>
+        </record>
+        
         <!-- Actions -->
         <act_window id="action_make_invoices"
             name="Générer les factures"

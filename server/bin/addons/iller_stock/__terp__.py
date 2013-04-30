@@ -37,6 +37,7 @@
             'stock_wizard.xml',
             'stock_view.xml',
             'security/ir.model.access.csv',
+            'security/iller_stock_security.xml',
 ],
     'installable': True,
     'active': False,

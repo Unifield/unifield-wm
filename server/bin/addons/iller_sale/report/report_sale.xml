@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <report 
+            auto="False" 
+            id="sale.report_sale_order" 
+            model="sale.order" 
+            name="sale.order.iller"
+            rml="addons/iller_sale/report/order_iller.rml" 
+            string="Devis / Commande"/>
+    </data>
+</openerp>

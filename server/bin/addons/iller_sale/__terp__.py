@@ -42,7 +42,6 @@
         'control_price_view.xml',
         'control_price_data.xml',
         'product_view.xml',
-        'sale_report.xml',
         'sale_wizard.xml',
         'sale_report.xml',
         'invoice_sequence.xml',
@@ -51,6 +50,10 @@
         'security/iller_sale_security.xml',
         'security/ir.model.access.csv',
         'report/report_sale.xml',
+        'commission_data.xml', 
+        'commission_view.xml',
+        
+        
     ],
     'installable': True,
     'active': False,
