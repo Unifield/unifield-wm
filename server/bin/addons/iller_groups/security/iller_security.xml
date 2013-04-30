@@ -32,6 +32,24 @@
             <field name="name">RH</field>
         </record>        
 
+<!-- Roles -->
+
+        <!-- Role Compta -->
+        <record model="res.roles" id="account.res_roles_invoice0">
+            <field name="name">Compta Iller</field>
+        </record>  
+        
+        <!-- Role Achat / Prod -->
+        <record model="res.roles" id="purchase.res_roles_purchase0">
+            <field name="name">Achat/Prod Iller</field>
+        </record>  
+        
+        <!-- Role Vente-->
+        <record model="res.roles" id="sale.res_roles_salesman0">
+            <field name="name">Vente Iller</field>
+        </record>  
+
+
 <!-- Menus -->
 
         <!-- Partner -->
