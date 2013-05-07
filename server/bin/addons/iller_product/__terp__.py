@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
+#    OpenERP, Open Source Management Solution   
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    $Id$
 #
@@ -31,7 +31,7 @@
 """,
     'author': 'TeMPO Consulting',
     'website': 'http://www.tempo-consulting.com',
-    'depends': ['product', 'stock'],
+    'depends': ['product', 'stock', 'iller_groups'],
     'init_xml': [],
     'demo_xml': [],
     'update_xml': [

@@ -5,7 +5,7 @@ import wizard
 import pooler
 from datetime import datetime
 from datetime import timedelta
-
+from osv import fields,osv
 
 _configure_form = """<?xml version="1.0" encoding="utf-8" ?>
 <form string="Configurer un tarif spécial pour un client">
@@ -43,36 +43,36 @@ _error_pricelist_form = """<?xml version="1.0" encoding="utf-8" ?>
             </form>
             """
 
-#class wizard_configure_tarif_special_client(osv.osv):
-#    _name="wizard.pricelist.configure.tarif.special.client"
-#
-#    def start_date_change (self, cr, uid, ids, start_date, end_date):
-#        if end_date is False:
-#            return {}
-#        if start_date > end_date:
-#            raise osv.except_osv( ('Attention'), ('La date de fin est inférieure à la date de départ'))
-#        return {}
-#
-#    def end_date_change (self, cr, uid, ids, start_date, end_date, client, tarif_initial):
-#        if start_date is False:
-#            return {}
-#        if start_date > end_date:
-#            raise osv.except_osv( ('Attention'), ('La date de fin est inférieure à la date de départ'))
-#        # Arrivé ici, toutes les données ont à priori été saisies
-#        # On vérifie que, si au tarif initial n'a été saisi, le tarif associé au client est bien un tarif spécial
-#        pool_obj = pooler.get_pool(cr.dbname)
-#        pricelist_obj = pool_obj.get('product.pricelist')
-#        partner_obj = pool_obj.get('res.partner')
-#
-#        if tarif_initial is False:
-#            partner = partner_obj.browse(cr, uid, client)
-#            pricelist_id = partner.property_product_pricelist.id
-#            if pricelist_obj.browse(cr, uid, pricelist_id).tarif_special is False:
-#                raise osv.except_osv( ('Attention'), ('Le tarif de ce client n\'est pas un tarif spécial'))
-#
-#            return {}
-#
-#wizard_configure_tarif_special_client()
+class wizard_configure_tarif_special_client(osv.osv):
+    _name="wizard.pricelist.configure.tarif.special.client"
+
+    def start_date_change (self, cr, uid, ids, start_date, end_date):
+        if end_date is False:
+            return {}
+        if start_date > end_date:
+            raise osv.except_osv( ('Attention'), ('La date de fin est inférieure à la date de départ'))
+        return {}
+
+    def end_date_change (self, cr, uid, ids, start_date, end_date, client, tarif_initial):
+        if start_date is False:
+            return {}
+        if start_date > end_date:
+            raise osv.except_osv( ('Attention'), ('La date de fin est inférieure à la date de départ'))
+        # Arrivé ici, toutes les données ont à priori été saisies
+        # On vérifie que, si au tarif initial n'a été saisi, le tarif associé au client est bien un tarif spécial
+        pool_obj = pooler.get_pool(cr.dbname)
+        pricelist_obj = pool_obj.get('product.pricelist')
+        partner_obj = pool_obj.get('res.partner')
+
+        if tarif_initial is False:
+            partner = partner_obj.browse(cr, uid, client)
+            pricelist_id = partner.property_product_pricelist.id
+            if pricelist_obj.browse(cr, uid, pricelist_id).tarif_special is False:
+                raise osv.except_osv( ('Attention'), ('Le tarif de ce client n\'est pas un tarif spécial'))
+
+            return {}
+
+wizard_configure_tarif_special_client()
 
 class wizard_configure_tarif_special_client(wizard.interface):
 
@@ -255,6 +255,8 @@ class wizard_configure_tarif_special_client(wizard.interface):
             base_special = type_ids[0]
         if type_ids and (not 'promo' in context or context['promo'] == False):
             base = type_ids[0]
+        elif type_ids and (not 'mea' in context or context['mea'] == False):
+            base = type_ids[0]
         else:
             type_ids = pool_obj.get('product.price.type').search(cr, uid, [('name', '=', 'Prix promo blanche')])
             if type_ids:
@@ -265,8 +267,8 @@ class wizard_configure_tarif_special_client(wizard.interface):
 # Pour un tarif spécial, le coeff vaut -1 est la surcharge est égale au prix spécial
 # Donc Prix de vente = Prix de base * (1-1) + prix spécial = prix spécial
 # Le prix de base importe peu car il n'intervient pas dans le calcul
-            if 'promo' in context and context['promo'] == True:
-                # Création des items pour un cumul promo + tarif spécial
+            if 'mea' in context and context['mea'] == True:
+                # Création des items pour un cumul mea + tarif spécial
                 product_id = product[2].get('product_id')
                 p_data = prod_obj.read(cr, uid, product_id, ['name'])
                 sequence = 1
@@ -281,7 +283,35 @@ class wizard_configure_tarif_special_client(wizard.interface):
                                                         'price_discount' :-1.0,
                                                         'price_surcharge': product[2].get('prix_special'),
                                                         'price_version_id': version_id})
+
+
                 else:
+                    # création d'un item pour une mea
+                    p_data = prod_obj.read(cr, uid, product_id, ['name'])
+                    item_id = item_obj.create(cr, uid, {'sequence': sequence,
+                                                        'name': p_data.get('name'),
+                                                        'product_id': product[2].get('product_id'),
+                                                        'base': base,
+                                                        'price_version_id': version_id})
+            elif 'promo' in context and context['promo'] == True:
+                # Création des items pour un cumul promo + tarif spécial
+                product_id = product[2].get('product_id')
+                p_data = prod_obj.read(cr, uid, product_id, ['name'])
+                sequence = 1
+                if product[2].get('sequence'):
+                    sequence = product[2].get('sequence')
+                if sequence == 1:
+                    
+                    # création d'un item pour un tarif special
+                    item_id = item_obj.create(cr, uid, {'sequence': sequence,
+                                                        'name': p_data.get('name'),
+                                                        'product_id': product_id,
+                                                        'base': base_special,
+                                                        'price_discount' :-1.0,
+                                                        'price_surcharge': product[2].get('prix_special'),
+                                                        'price_version_id': version_id})
+                else:
+                    
                     # création d'un item pour une promo
                     p_data = prod_obj.read(cr, uid, product_id, ['name'])
                     item_id = item_obj.create(cr, uid, {'sequence': sequence,
@@ -289,7 +319,6 @@ class wizard_configure_tarif_special_client(wizard.interface):
                                                         'product_id': product[2].get('product_id'),
                                                         'base': base,
                                                         'price_version_id': version_id})
-
             else: 
                 # Création des items pour un tarif spécial uniquement
                 product_id = product[2].get('product_id')
@@ -304,8 +333,6 @@ class wizard_configure_tarif_special_client(wizard.interface):
                                                     'price_discount' :-1.0,
                                                     'price_surcharge': product[2].get('prix_special'),
                                                     'price_version_id': version_id})
-
-            
             items.append(item_id)
 
         return items
@@ -323,12 +350,15 @@ class wizard_configure_tarif_special_client(wizard.interface):
         promo_obj = pool_obj.get('product.pricelist.promo')
         product_obj = pool_obj.get('product.product')
         client_obj = pool_obj.get('res.partner')
+        mea_obj = pool_obj.get('product.pricelist.mea')
 
         # A priori, lorsqu'un wizard est appelé plusieurs fois, on récupère au deuxième appel le contexte
         # tel qu'on l'avait laissé au premier appel. Il faut donc le réinitialiser.
         if 'promo' in context:
             context['promo'] = False
-
+        if 'mea' in context:
+            context['mea'] = False
+        
         # Sauvegarde des données saisies (il faudra les restaurer lors de la création des version contenant les cumul promo + tarifs spéciaux) 
         data_ori = data['form'].copy()
         # Création de la table des tarifs spéciaux que l'on remplit avec les données saisies
@@ -344,6 +374,7 @@ class wizard_configure_tarif_special_client(wizard.interface):
                                                                      'start_date': data['form']['start_date'],
                                                                      'end_date': data['form']['end_date']
                                                                      })
+
         products = data['form']['products']
         
         if not 'tarif_speciaux_id' in context:
@@ -353,7 +384,7 @@ class wizard_configure_tarif_special_client(wizard.interface):
                                                                                 'tarif_id' : tarifs_speciaux_id,
                                                                                 'prix_special' : product[2].get('prix_special'),
                                                                                  })
-      
+
         ## On cherche les promos qui pourraient se cumuler à ce tarif spécial 
         data['promo_av_ids'] = promo_obj.search(cr, uid, [('start_date', '<=', data['form']['start_date']), \
                                                           ('end_date', '>=', data['form']['start_date']), \
@@ -369,6 +400,21 @@ class wizard_configure_tarif_special_client(wizard.interface):
         data['promo_av_pdt_ap_ids'] = promo_obj.search(cr, uid,  [('end_date', '>=', data['form']['end_date']), \
                                                                   ('start_date', '<=', data['form']['start_date'])])
 
+        ## On cherche les mea qui pourraient se cumuler à ce tarif spécial 
+        data['mea_av_ids'] = mea_obj.search(cr, uid, [('start_date', '<=', data['form']['start_date']), \
+                                                          ('end_date', '>=', data['form']['start_date']), \
+                                                          ('end_date', '<=', data['form']['end_date']) ])
+
+        data['mea_ap_ids'] = mea_obj.search(cr, uid, [('end_date', '>=', data['form']['end_date']), \
+                                                          ('start_date', '<=', data['form']['end_date']), \
+                                                          ('start_date', '>=',data['form']['start_date'])])
+
+        data['mea_pdt_ids'] = mea_obj.search(cr, uid, [('end_date', '<=', data['form']['end_date']), \
+                                                           ('start_date', '>=', data['form']['start_date'])])
+
+        data['mea_av_pdt_ap_ids'] = mea_obj.search(cr, uid,  [('end_date', '>=', data['form']['end_date']), \
+                                                                  ('start_date', '<=', data['form']['start_date'])])
+
         # Liste de stockage des items ids à insérer dans le m2o de pricelist item
         item_list = []
         if not 'tarif_speciaux_id' in context:
@@ -376,13 +422,13 @@ class wizard_configure_tarif_special_client(wizard.interface):
             ## ou alors on part de la liste de prix déjà associée au client aucune liste de prix n'a été saisie
             client = client_obj.browse(cr, uid, data['form']['client'])
             if data['form']['tarif_initial'] :
-               pricelist_id = pricelist_obj.copy(cr, uid, data['form']['tarif_initial'], {'name': 'CSP %s %s' % (client.ref, client.name),
+                pricelist_id = pricelist_obj.copy(cr, uid, data['form']['tarif_initial'], {'name': 'CSP %s %s' % (client.ref, client.name),
                                                                                           'tarif_special': True })
-               client_obj.write(cr, uid, client.id, {'property_product_pricelist': pricelist_id})
-               new_pricelist = True
+                client_obj.write(cr, uid, client.id, {'property_product_pricelist': pricelist_id})
+                new_pricelist = True
             else:
-               pricelist_id = client.property_product_pricelist.id
-               new_pricelist = False
+                pricelist_id = client.property_product_pricelist.id
+                new_pricelist = False
         else:
             # Si on appelle la méthode hors wizard, la liste de prix a déjà été écrite sur l'objet client, on la récupère
             client = client_obj.browse(cr, uid, data['form']['client'])
@@ -399,7 +445,7 @@ class wizard_configure_tarif_special_client(wizard.interface):
                 version_obj.write(cr, uid, [new_version], {'active': True, 'name': data['form']['title'], 'tarifs_specs_id':tarifs_speciaux_id})
                 new_items = self._create_item(cr, uid, data, new_version, context=context)
                 item_list += new_items
-
+                
         else:
             #On récupère l'id de la version du tarifs spéciaux en cours
             new_version = version_obj.search(cr, uid, [('tarifs_specs_id','=',tarifs_speciaux_id)], context=context)
@@ -415,7 +461,14 @@ class wizard_configure_tarif_special_client(wizard.interface):
         pricelist = pricelist_obj.browse(cr, uid, pricelist_id)
         if not 'promo' in context or context['promo'] is False:
             # Si la liste de prix peut accueillier des promos, il faut y cumuler les éventuelles promos déjà existantes
-            if pricelist.promo_jaune or pricelist.promo_blanche:
+            
+            #~ if pricelist.promo_jaune or pricelist.promo_blanche:
+            # Si la liste de prix possède une tarification jaune ou blanche (en théorie toujours), et
+            # si la liste de prix est une promo mais n'est pas une mea (promo_choice = 'oui' ET mea_choice = 'non')
+            if (pricelist.tarif_choice == 'jaune' or pricelist.tarif_choice == 'blanche') and \
+                pricelist.promo_choice == 'oui' and \
+                pricelist.mea_choice == 'non' :
+            
                 if data['promo_av_ids']:
                     # On a une promo qui empiètait sur le début du tarif spécial. Sa date de fin a déjà été reculée à la date de début du tarif spécial
                     # Il reste maintenant à créer une nouvelle version allant de la date de début du tarif spécial à la date initiale de fin de promo,
@@ -483,7 +536,6 @@ class wizard_configure_tarif_special_client(wizard.interface):
                                     pl_new_items += self._create_item(cr, uid, data, new_vers, context=context)
                                 item_list += pl_new_items                         
 
-
                 if data['promo_pdt_ids']:
                     # On a une promo dont les dates sont comprises à l'intérieur du tarif spécial. Elle a été supprimée
                     # Il faut la recréer en y rajoutant les produits du tarif spécial
@@ -538,7 +590,7 @@ class wizard_configure_tarif_special_client(wizard.interface):
                             if pl_version:
                                 version_obj.write(cr, uid, [pl_version], {'active': True, 'tarifs_specs_id':tarifs_speciaux_id})
                                 pl_new_items = self._create_item(cr, uid, data, pl_version, context=context)
-                                item_list += pl_new_items                                
+                                item_list += pl_new_items
                         else:
                             #Récupération de la version pour le tarifs spéciaux en cours
                             pl_version = version_obj.search(cr, uid, [('tarifs_specs_id','=',tarifs_speciaux_id)], context=context)
@@ -549,7 +601,147 @@ class wizard_configure_tarif_special_client(wizard.interface):
                                     pl_new_items += self._create_item(cr, uid, data, new_vers, context=context)
                                 item_list += pl_new_items   
 
+#### Meme traitement pour la MEA
         
+        # Si la liste de prix peut accueillier des mea, il faut y cumuler les éventuelles mea déjà existantes
+        if not 'mea' in context or context['mea'] is False:
+            # Si la liste de prix possède une tarification jaune ou blanche (en théorie toujours), et 
+            # si la liste de prix est une liste mea (mea_choice = 'oui' et mea_choice = 'oui'/'non')
+            if (pricelist.tarif_choice == 'jaune' or pricelist.tarif_choice == 'blanche') and \
+                pricelist.mea_choice == 'oui':
+                
+                if data['mea_av_ids']:
+                    # On a une mea qui empiètait sur le début du tarif spécial. Sa date de fin a déjà été reculée à la date de début du tarif spécial
+                    # Il reste maintenant à créer une nouvelle version allant de la date de début du tarif spécial à la date initiale de fin de mea,
+                    # et contenant le cumul des produits de la mea et tous les produits du tarif spécial
+                    context['mea'] = True
+                    data['form'] = data_ori.copy()
+                    data['form']['tarif_initial'] = False
+                    nom = data['form']['title']
+                    mea_av = mea_obj.browse(cr, uid, data['mea_av_ids'])
+                    for mea in mea_av:
+                        data['form']['title'] = nom + " + " + mea.name
+                        data['form']['end_date'] = mea.end_date
+                        products = data['form']['products'] 
+                        for product in mea.product_ids:
+                            products.append((0,0,{'sequence' : 3, 'prix_vente_initial': 0.00, 'product_id': product.id, 'prix_special': 0.00}))
+                        data['form']['products'] = products
+                        
+                        if not 'tarif_speciaux_id' in context:
+                            pl_version = self._redefine_existing_tarif_special_client(cr, uid, data, pricelist_id, context=context)
+                            if pl_version:
+                                version_obj.write(cr, uid, [pl_version], {'active': True, 'tarifs_specs_id':tarifs_speciaux_id})
+                                pl_new_items = self._create_item(cr, uid, data, pl_version, context=context)
+                                item_list = pl_new_items
+                        else:
+                            #Si une version existe déjà pour ce tarifs spéciaux, on récupère l'id de la version existante
+                            pl_version = version_obj.search(cr, uid, [('tarifs_specs_id','=',tarifs_speciaux_id)], context=context)
+                        
+                            if pl_version:
+
+                                pl_new_items = []
+                                for new_vers in pl_version:
+                                    pl_new_items += self._create_item(cr, uid, data, new_vers, context=context)
+                                item_list += pl_new_items
+
+                if data['mea_ap_ids']:
+                    # On a une mea qui empiétait sur la fin du tarif spécial. Sa date de début a déjà été repoussée à la date de fin du tarif spécial.
+                    # Il reste maintenant à créer une nouvelle version allant de la date initiale de début de mea à la date de fin du tarif spécial,
+                    # et contenant le cumul des produits de la mea et tous les produits du tarif spécial
+                    context['mea'] = True
+                    data['form'] = data_ori.copy()
+                    data['form']['tarif_initial'] = False
+                    nom = data['form']['title']
+                    mea_ap = mea_obj.browse(cr, uid, data['mea_ap_ids'])
+                    for mea in mea_ap:
+                        data['form']['title'] = nom + " + " + mea.name
+                        data['form']['start_date'] = mea.start_date
+                        products = data['form']['products']
+                        for product in mea.product_ids:
+                            products.append((0,0,{'sequence' : 3, 'prix_vente_initial': 0.00, 'product_id': product.id, 'prix_special': 0.00}))
+                        data['form']['products'] = products
+                        
+                        if not 'tarif_speciaux_id' in context:
+                            pl_version = self._redefine_existing_tarif_special_client(cr, uid, data, pricelist_id, context=context)
+                            if pl_version:
+                                version_obj.write(cr, uid, [pl_version], {'active': True, 'tarifs_specs_id':tarifs_speciaux_id})
+                                pl_new_items = self._create_item(cr, uid, data, pl_version, context=context)
+                                item_list += pl_new_items
+                        else:
+                            # Récupération de la version existante pour tarifs spéciaux existant
+                            pl_version = version_obj.search(cr, uid, [('tarifs_specs_id','=',tarifs_speciaux_id)], context=context)
+                            if pl_version:
+
+                                pl_new_items = []
+                                for new_vers in pl_version:
+                                    pl_new_items += self._create_item(cr, uid, data, new_vers, context=context)
+                                item_list += pl_new_items                         
+
+                if data['mea_pdt_ids']:
+                    # On a une mea dont les dates sont comprises à l'intérieur du tarif spécial. Elle a été supprimée
+                    # Il faut la recréer en y rajoutant les produits du tarif spécial
+                    context['mea'] = True
+                    data['form'] = data_ori.copy()
+                    nom = data['form']['title']
+                    mea_pdt = mea_obj.browse(cr, uid, data['mea_pdt_ids'])
+                    for mea in mea_pdt:
+                        data['form']['title'] = nom + " + " + mea.name
+                        data['form']['start_date'] = mea.start_date
+                        data['form']['end_date'] = mea.end_date
+                        products = data['form']['products']
+                        for product in mea.product_ids:
+                            products.append((0,0,{'sequence' : 3 , 'prix_vente_initial': 0.00, 'product_id': product.id, 'prix_special': 0.00}))
+                        data['form']['products'] = products
+                        
+                        if not 'tarif_speciaux_id' in context:
+                            pl_version = self._redefine_existing_tarif_special_client(cr, uid, data, pricelist_id, context=context)
+                            if pl_version:
+                                version_obj.write(cr, uid, [pl_version], {'active': True, 'tarifs_specs_id':tarifs_speciaux_id})                            
+                                pl_new_items = self._create_item(cr, uid, data, pl_version, context=context)
+                                item_list += pl_new_items
+                        else :
+                            #Récupération de la version existante pour tarifs spéciaux en cours
+                            pl_version = version_obj.search(cr, uid, [('tarifs_specs_id','=',tarifs_speciaux_id)], context=context)
+                            if pl_version:
+
+                                pl_new_items = []
+                                for new_vers in pl_version:
+                                    pl_new_items += self._create_item(cr, uid, data, new_vers, context=context)
+                                item_list += pl_new_items   
+
+                if data['mea_av_pdt_ap_ids']:
+                    # On a une mea qui existait avant, durant et apres le tarif spécial. Elle a été scindée en 2: une mea qui s'arrête au début
+                    # du tarif spécial, et une pormo qui commence à la fin du tarif spéciale
+                    # Il reste maintenant à créer une nouvelle version de ce tarif spécial, sur toute la durée initiale du tarif spécial 
+                    # et contenant le cumul des produits de la mea et tous les produits du tarif spécial
+                    context['mea'] = True
+                    data['form'] = data_ori.copy()
+                    data['form']['tarif_initial'] = False
+                    nom = data['form']['title']
+                    mea_av_pdt_ap = mea_obj.browse(cr, uid, data['mea_av_pdt_ap_ids'])
+                    for mea in mea_av_pdt_ap:
+                        data['form']['title'] = nom + " + " + mea.name
+                        products = data['form']['products']
+                        for product in mea.product_ids:
+                            products.append((0,0,{'sequence' : 3, 'prix_vente_initial': 0.00, 'product_id': product.id, 'prix_special': 0.00}))
+                        data['form']['products'] = products
+                        
+                        if not 'tarif_speciaux_id' in context:
+                            pl_version = self._redefine_existing_tarif_special_client(cr, uid, data, pricelist_id, context=context)
+                            if pl_version:
+                                version_obj.write(cr, uid, [pl_version], {'active': True, 'tarifs_specs_id':tarifs_speciaux_id})
+                                pl_new_items = self._create_item(cr, uid, data, pl_version, context=context)
+                                item_list += pl_new_items
+                        else:
+                            #Récupération de la version pour le tarifs spéciaux en cours
+                            pl_version = version_obj.search(cr, uid, [('tarifs_specs_id','=',tarifs_speciaux_id)], context=context)
+                            if pl_version:
+
+                                pl_new_items = []
+                                for new_vers in pl_version:
+                                    pl_new_items += self._create_item(cr, uid, data, new_vers, context=context)
+                                item_list += pl_new_items   
+                                
         # Boucle sur les produits pour pouvoir écrire le m2o de pricelist_item 
         # avec le tarif spécial client correspondant
         for product in products:

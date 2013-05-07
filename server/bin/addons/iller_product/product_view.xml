@@ -53,7 +53,7 @@
                                 <field name="type_cond" on_change="cond_onchange(type_cond, type_preselec)" required="1"/>
                                 <field name="type_preselec" on_change="preselec_onchange(type_cond, type_preselec)" required="1"/>
                             </group>
-    			<separator colspan="4" />
+                            <separator colspan="4" />
                             <field colspan="4" mode="tree,form" name="price_history" nolabel="1" widget="one2many_list" readonly="1">
                                    <form>
                                          <field name="name"/>
@@ -75,7 +75,7 @@
                             <field name="coeff_jaune" />
 --> 
                             <field name="prix_decembre" />
-			    <newline/>
+                <newline/>
                           <field colspan="4" name="seller_ids" nolabel="1"/>
                         </page>
                     </xpath>

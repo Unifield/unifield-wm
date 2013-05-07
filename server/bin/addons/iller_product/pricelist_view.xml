@@ -65,7 +65,8 @@
         <menuitem id="menu_product_pricelist_bareme"
                   action="action_product_pricelist_bareme_tree"
                   parent="product.menu_price" />
-
+        
+        <!-- Configuration promo -->
         <record id="pricelist_promo_configuration_form_view" model="ir.ui.view">
             <field name="name">pricelist.promo.configuration.form.view</field>
             <field name="model">pricelist.promo.configuration</field>
@@ -101,6 +102,43 @@
                   action="action_pricelist_promo_configuration_form"
                   parent="product.menu_price" />
 
+        <!--Configuration mea-->
+        <record id="pricelist_mea_configuration_form_view" model="ir.ui.view">
+            <field name="name">pricelist.mea.configuration.form.view</field>
+            <field name="model">pricelist.mea.configuration</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Configuration des mises en avant">
+                    <field name="name" colspan="4" readonly="1"/>
+                    <field name="bareme_jaune" />
+                    <field name="bareme_page2" />
+                </form>
+            </field>
+        </record>
+
+        <record id="pricelist_mea_configuration_tree_view" model="ir.ui.view">
+            <field name="name">pricelist.mea.configuration.tree.view</field>
+            <field name="model">pricelist.mea.configuration</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Configuration des mises en avant">
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_pricelist_mea_configuration_form" model="ir.actions.act_window">
+            <field name="name">Configuration des mises en avant</field>
+            <field name="res_model">pricelist.mea.configuration</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_pricelist_mea_configuration"
+                  action="action_pricelist_mea_configuration_form"
+                  parent="product.menu_price" />
+
+
         <!-- Ajout des checkbox pour indiquer qu'une liste de prix contient les promos jaunes ou blanches -->
         <record id="inherit_promo_product_pricelist_form" model="ir.ui.view">
             <field name="name">inherit.promo.product.pricelist.form</field>
@@ -112,6 +150,9 @@
                     <field name="promo_blanche" />
                     <field name="promo_jaune" />
                     <field name="tarif_special" />
+                    <field name="mea_choice" />
+                    <field name="promo_choice" />
+                    <field name="tarif_choice" />
                 </xpath>
             </field>
         </record>
@@ -126,6 +167,9 @@
                     <field name="promo_blanche" />
                     <field name="promo_jaune" />
                     <field name="tarif_special" />
+                    <field name="mea_choice" />
+                    <field name="promo_choice" />
+                    <field name="tarif_choice" />
                 </xpath>
             </field>
         </record>
@@ -240,6 +284,7 @@
             </field>
         </record>
 
+        <!-- Création de promo -->
         <record id="product_pricelist_promo_form_view" model="ir.ui.view">
             <field name="name">product.pricelist.promo.form.view</field>
             <field name="model">product.pricelist.promo</field>
@@ -337,6 +382,105 @@
                   id="menu_pricelist_configure_promo"
                   parent="menu_promos" />
 
+        <!--Création de MEA-->
+        <record id="product_pricelist_mea_form_view" model="ir.ui.view">
+            <field name="name">product.pricelist.mea.form.view</field>
+            <field name="model">product.pricelist.mea</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Mea">
+                    <field name="name" attrs="{'readonly': [('state', '=', 'done')]}" colspan="4"/>
+                    <newline />
+                    <field name="start_date" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                    <field name="end_date" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                    <separator colspan="4" string="Produits" />
+                    <field name="product_ids" colspan="4" nolabel="1" mode="tree" attrs="{'readonly': [('state', '=', 'done')]}">
+                        <tree string="Produits" editable="top">
+                            <field name="name" />
+                            <field name="product_id" on_change="onchange_product(product_id)" string="Produit                                                                                                     "/>
+                            <field name="prix_achat" />
+                            <field name="new_prix_achat" />
+                            <field name="prix_blanche" />
+                            <field name="prix_jaune" />
+                        </tree>
+                    </field>
+                    <separator colspan="4" string="2ème Page" />
+                    <field name="product2_ids" colspan="4" nolabel="1" mode="tree" attrs="{'readonly': [('state', '=', 'done')]}">
+                        <tree string="Produits de la 2ème page" editable="top">
+                            <field name="name" />
+                            <field name="product_id" on_change="onchange_product(product_id)" string="Produit                                                                                                     "/>
+                            <field name="prix_achat" />
+                            <field name="new_prix_achat" />
+                            <field name="prix_blanche" />
+                            <field name="prix_jaune" />
+                        </tree>
+                    </field>
+                    <field name="state" invisible="0" readonly="1"/>
+                    <button icon="gtk-ok" name="_create_mea" string="Valider la mise en avant" type="object" states="draft"/>
+                </form>
+            </field>
+        </record>
+
+        <record id="product_pricelist_mea_tree_view" model="ir.ui.view">
+            <field name="name">product.pricelist.mea.tree.view</field>
+            <field name="model">product.pricelist.mea</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Mises en avant">
+                    <field name="name" />
+                    <field name="start_date" />
+                    <field name="end_date" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="act_product_pricelist_mea" model="ir.actions.act_window">
+            <field name="name">MEA validées</field>
+            <field name="res_model">product.pricelist.mea</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('state', '=', 'done')]</field>
+        </record>
+
+        <record id="act_product_pricelist_mea_draft" model="ir.actions.act_window">
+            <field name="name">MEA en brouillon</field>
+            <field name="res_model">product.pricelist.mea</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('state', '=', 'draft')]</field>
+        </record>
+
+        <record id="act_product_pricelist_mea_form" model="ir.actions.act_window">
+            <field name="name">Configurer une MEA</field>
+            <field name="res_model">product.pricelist.mea</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+        </record>
+
+        <menuitem
+            id="menu_mea"
+            name="Mises en avant"
+            sequence="90"
+            parent="product.menu_main_product" />
+
+        <menuitem
+            id="menu_product_pricelist_mea"
+            sequence="3"
+            action="act_product_pricelist_mea"
+            parent="menu_mea" />
+
+        <menuitem
+            id="menu_product_pricelist_mea_draft"
+            sequence="4"
+            action="act_product_pricelist_mea_draft"
+            parent="menu_mea" />
+
+        <menuitem action="act_product_pricelist_mea_form"
+                  sequence="2"
+                  id="menu_pricelist_configure_mea"
+                  parent="menu_mea" />
+                  
+        
         <record id="product_pricelist_tarifs_speciaux_form_view" model="ir.ui.view">
             <field name="name">product.pricelist.tarifs_speciaux.form.view</field>
             <field name="model">product.tarifs.speciaux</field>

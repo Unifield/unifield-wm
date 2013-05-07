@@ -30,7 +30,7 @@
 """,
     'author': 'TeMPO Consulting',
     'website': 'http://www.tempo-consulting.com',
-    'depends': ['stock', 'account_group_lines'],
+    'depends': ['stock'],
     'init_xml': [],
     'demo_xml': [],
     'update_xml': [

@@ -32,6 +32,13 @@
             <field name="name">RH</field>
         </record>        
 
+        <!-- Groupe iller tournee -->
+
+        <record id="group_tournee_mgmt" model="res.groups">
+            <field name="name">Gestion des tournées</field>
+        </record>
+
+
 <!-- Roles -->
 
         <!-- Role Compta -->

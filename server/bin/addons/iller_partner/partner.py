@@ -12,6 +12,75 @@ class iller_partner(osv.osv):
 
     _order = 'ref, name, id'
 
+    def create(self, cr, uid, vals, context=None):
+        '''
+            Ecriture de la liste de prix correspondante
+        '''
+
+        if 'tarif_choice' in vals:
+            tarif_choice = vals['tarif_choice']
+        else:
+            tarif_choice = 'blanche'
+            
+        if 'promo_choice' in vals:
+            promo_choice = vals['promo_choice']
+        else:
+            promo_choice = 'oui'
+            
+        if 'mea_choice' in vals:
+            mea_choice = vals['mea_choice']
+        else:
+            mea_choice = 'oui'
+
+        pricelist_ids = self.pool.get('product.pricelist').search(
+                cr, uid, [
+                            ('tarif_choice', '=', tarif_choice or 'blanche'),
+                            ('promo_choice', '=', promo_choice or 'non'),
+                            ('mea_choice', '=', mea_choice or 'non'),
+                            ('name', 'like', 'NU01')
+                        ], context=context)
+        pricelist_record = self.pool.get('product.pricelist').browse(cr, uid, pricelist_ids[0],context=context)
+        vals.update({'property_product_pricelist':pricelist_record.id})
+
+        return super(iller_partner, self).create(cr, uid, vals, context=context)
+        
+    def write(self, cr, uid, ids, vals, context=None):
+        '''
+            Ecriture de la liste de prix correspondante
+        '''
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+        if 'property_product_pricelist' in vals:
+            return super(iller_partner, self).write(cr, uid, ids, vals, context=context)
+            
+        for partner_record in self.browse(cr, uid, ids, context=context):
+            
+            if 'tarif_choice' in vals:
+                tarif_choice = vals['tarif_choice']
+            else:
+                tarif_choice = partner_record.tarif_choice
+                
+            if 'promo_choice' in vals:
+                promo_choice = vals['promo_choice']
+            else:
+                promo_choice = partner_record.promo_choice
+                
+            if 'mea_choice' in vals:
+                mea_choice = vals['mea_choice']
+            else:
+                mea_choice = partner_record.mea_choice
+
+            pricelist_ids = self.pool.get('product.pricelist').search(
+                    cr, uid, [
+                                ('tarif_choice', '=', tarif_choice or 'blanche'),
+                                ('promo_choice', '=', promo_choice or 'non'),
+                                ('mea_choice', '=', mea_choice or 'non'),
+                                ('name', 'like', partner_record.property_product_pricelist.name[:4] or 'NU01')
+                            ], context=context)
+            pricelist_record = self.pool.get('product.pricelist').browse(cr, uid, pricelist_ids[0],context=context)
+            vals.update({'property_product_pricelist':pricelist_record.id})
+        return super(iller_partner, self).write(cr, uid, ids, vals, context=context)
+        
     def name_search(self, cr, uid, name, args=None, operator='ilike', context=None, limit=80):
         if not args:
             args=[]
@@ -90,7 +159,6 @@ class iller_partner(osv.osv):
 
         return res
 
-
     _columns = {
         ## Informations comptables
         'siret': fields.char(size=64, string='N° de siret'),
@@ -135,6 +203,12 @@ class iller_partner(osv.osv):
         #'bloque': fields.boolean(string='Bloqué ?', help='Si la case est cochée, le partenaire \
         #                        n\'apparaitra plus dans les recherches sur les bon de commande'),
         'ref': fields.char('Code', size=64, required=True),
+        
+        'prix_noel_choice': fields.selection([('oui', 'Oui'), ('non', 'Non')], string=u'Prix noël'),
+        'tarif_special_choice': fields.selection([('oui', 'Oui'), ('non', 'Non')], string='Tarif spécial'),
+        'mea_choice': fields.selection([('oui', 'Oui'), ('non', 'Non')], string='Mise en avant'),
+        'promo_choice': fields.selection([('oui', 'Oui'), ('non', 'Non')], string='Promo'),
+        'tarif_choice': fields.selection([('blanche', 'Blanche'), ('jaune', 'Jaune')], string='Tarification'),
     }
 
     _defaults = {
@@ -143,6 +217,11 @@ class iller_partner(osv.osv):
         'reglement': lambda *a: 'virement',
         'facturation_bl': lambda *a: 'm',
         'lang': lambda *a: 'fr_FR',
+        'prix_noel_choice': lambda *a: 'oui',
+        'tarif_special_choice': lambda *a: 'non',
+        'mea_choice': lambda *a: 'oui',
+        'promo_choice': lambda *a: 'oui',
+        'tarif_choice': lambda *a: 'blanche',
     }
 
 

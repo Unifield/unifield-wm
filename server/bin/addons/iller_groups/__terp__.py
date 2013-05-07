@@ -19,6 +19,9 @@
 #
 ##############################################################################
 
+##### Ce module génère beaucoup de dépendances, en cas de nouvelle base, commenter toutes les dépendances
+##### sauf base, account, et sale ainsi que le fichier ir.model.access.csv, puis décommenter ir.model.access.csv
+##### et mettre à jour le module (il est possible de devoir installer certains modules connexes à la main)
 {
     'name': 'Gestion des droits pour ILLER',
     'version': '1.0',
@@ -31,15 +34,30 @@
     'website': 'http://www.tempo-consulting.com',
     'depends': [
         'base', 
-        'product', 
-        'hr', 
-        'mrp', 
-        'crm', 
-        'stock',
-        'purchase',
-        'sale',
         'account',
-        'document',
+        'sale',
+        #~ 'hr_timesheet_invoice', 
+        #~ 'process', 
+        #~ 'product', 
+        #~ 'hr', 
+        #~ 'stock', 
+        #~ 'purchase', 
+        #~ 'mrp', 
+        #~ 'account_report', 
+        #~ 'l10n_fr', 
+        #~ 'crm', 
+        #~ 'report_crm', 
+        #~ 'crm_configuration', 
+        #~ 'document', 
+        #~ 'document_ics', 
+        #~ 'board', 
+        #~ 'hr_attendance', 
+        #~ 'report_account', 
+        #~ 'hr_timesheet', 
+        #~ 'report_analytic_line', 
+        #~ 'report_analytic', 
+        #~ 'subscription', 
+
     ],
     'init_xml': [],
     'demo_xml': [],

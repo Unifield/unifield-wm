@@ -1,8 +1,8 @@
 "id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
 "access_iller_poste_user","iller.poste.user","model_iller_poste","base.group_user",1,0,0,0
 "access_iller_tournee_user","iller.tournee.user","model_tournee_iller","base.group_user",1,0,0,0
-"access_iller_poste_mgmt","iller.poste.mgmt","model_iller_poste","iller_tournee.group_tournee_mgmt",1,1,1,1
-"access_iller_tournee_mgmt","iller.tournee.mgmt","model_tournee_iller","iller_tournee.group_tournee_mgmt",1,1,1,1
+"access_iller_poste_mgmt","iller.poste.mgmt","model_iller_poste","iller_groups.group_tournee_mgmt",1,1,1,1
+"access_iller_tournee_mgmt","iller.tournee.mgmt","model_tournee_iller","iller_groups.group_tournee_mgmt",1,1,1,1
 "access_commande_par_tournee","commande.par.tournee","model_commandes_par_tournee","sale.group_sale_user",1,0,0,0
 "access_commande_par_tournee_mgmt","commande.par.tournee.mgmt","model_commandes_par_tournee","sale.group_sale_manager",1,0,0,0
 "access_article_par_tournee","article.par.tournee","model_articles_par_tournee","sale.group_sale_user",1,0,0,0

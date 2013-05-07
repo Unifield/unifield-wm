@@ -22,12 +22,28 @@
             <field name="type">form</field>
             <field name="inherit_id" ref="base.view_partner_form" />
             <field name="arch" type="xml">
+                <data>
                 <page string="Sales &amp; Purchases" position="inside">
                     <group colspan="4" col="2">
                         <separator colspan="2" string="Commentaire Saisib" />
                         <field name="saisib" colspan="2" nolabel="1" />
+
                     </group>
                 </page>
+                <xpath expr="//group[@name='sale_list']" position="replace">
+                    <group col="2" colspan="2" name="sale_list">
+                        <separator string="Sales Properties" colspan="2"/>
+                        <field name="prix_noel_choice" />
+                        <field name="tarif_special_choice" />
+                        <field name="mea_choice" />
+                        <field name="promo_choice" />
+                        <field name="tarif_choice"/>
+                    </group>
+
+                </xpath>
+
+                </data>
+
             </field>
         </record>
 
