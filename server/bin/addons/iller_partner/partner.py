@@ -50,6 +50,10 @@ class iller_partner(osv.osv):
         '''
         if isinstance(ids, (int, long)):
             ids = [ids]
+        
+        version_obj = self.pool.get('product.pricelist.version')
+        # Si une écriture est effectuée sur 'property_product_pricelist', alors on effectue le comportement par défaut
+        # car on est dans le cas où le tarif spécial écrit une nouvelle liste de prix
         if 'property_product_pricelist' in vals:
             return super(iller_partner, self).write(cr, uid, ids, vals, context=context)
             
@@ -70,15 +74,25 @@ class iller_partner(osv.osv):
             else:
                 mea_choice = partner_record.mea_choice
 
+            #On cherche la version de base de la pricelist du partner
+            base_ids = version_obj.search(cr, uid, [('pricelist_id', '=', partner_record.property_product_pricelist.id), ('base_ok', '=', True)])
+            if not base_ids:
+                base_ids = version_obj.search(cr, uid, [('pricelist_id', '=', partner_record.property_product_pricelist.id)])
+                if not base_ids:
+                    return False
+            base_version = base_ids[0]
+            base = version_obj.browse(cr, uid, base_version, context=context)
+            # On récupère la liste de prix correspondant aux paramètres du partenaire
             pricelist_ids = self.pool.get('product.pricelist').search(
                     cr, uid, [
                                 ('tarif_choice', '=', tarif_choice or 'blanche'),
                                 ('promo_choice', '=', promo_choice or 'non'),
                                 ('mea_choice', '=', mea_choice or 'non'),
-                                ('name', 'like', partner_record.property_product_pricelist.name[:4] or 'NU01')
+                                ('name', 'ilike', base.name[-4:] or 'NU01')
                             ], context=context)
             pricelist_record = self.pool.get('product.pricelist').browse(cr, uid, pricelist_ids[0],context=context)
             vals.update({'property_product_pricelist':pricelist_record.id})
+            
         return super(iller_partner, self).write(cr, uid, ids, vals, context=context)
         
     def name_search(self, cr, uid, name, args=None, operator='ilike', context=None, limit=80):

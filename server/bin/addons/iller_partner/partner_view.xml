@@ -31,7 +31,7 @@
                     </group>
                 </page>
                 <xpath expr="//group[@name='sale_list']" position="replace">
-                    <group col="2" colspan="2" name="sale_list">
+                    <group col="2" colspan="2" name="sale_list_iller">
                         <separator string="Sales Properties" colspan="2"/>
                         <field name="prix_noel_choice" />
                         <field name="tarif_special_choice" />
