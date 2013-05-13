@@ -46,7 +46,7 @@
                     <field name="mea_choice" />
                     <field name="promo_choice" />
                     <field name="tarif_choice"/>
-                    <field name="property_product_pricelist" readonly=1/>
+                    <field name="property_product_pricelist" readonly="1"/>
                 </xpath>
 
                 </data>

@@ -500,11 +500,8 @@
             <field name="name">Tarif Hilton (Blanche)</field>
             <field name="type">sale</field>
             <field name="currency_id" ref="base.EUR" />
-            <field name="promo_jaune" eval="0" />
-            <field name="promo_blanche" eval="1" />
-            <field name="tarif_choice" eval="blanche" />
-            <field name="tarif_special" eval="1" />
-            <field name="tarif_special_choice" eval="oui" />
+            <field name="tarif_choice" >blanche</field>              
+            <field name="tarif_special_choice" >oui</field>              
         </record>
 
         <!-- Version de liste de prix  NU01-->
