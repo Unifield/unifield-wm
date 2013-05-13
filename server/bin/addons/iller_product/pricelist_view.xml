@@ -147,9 +147,6 @@
             <field name="inherit_id" ref="product.product_pricelist_view" />
             <field name="arch" type="xml">
                 <xpath expr="/form/field[@name='currency_id']" position="after">
-                    <field name="promo_blanche" />
-                    <field name="promo_jaune" />
-                    <field name="tarif_special" />
                     <field name="mea_choice" />
                     <field name="promo_choice" />
                     <field name="tarif_choice" />
@@ -164,9 +161,6 @@
             <field name="inherit_id" ref="product.product_pricelist_view_tree" />
             <field name="arch" type="xml">
                 <xpath expr="/tree/field[@name='currency_id']" position="after">
-                    <field name="promo_blanche" />
-                    <field name="promo_jaune" />
-                    <field name="tarif_special" />
                     <field name="mea_choice" />
                     <field name="promo_choice" />
                     <field name="tarif_choice" />

@@ -149,9 +149,9 @@ class product_pricelist(osv.osv):
     _inherit = 'product.pricelist'
 
     _columns = {
-            'promo_jaune': fields.boolean(string='Promo jaune'),
-            'promo_blanche': fields.boolean(string='Promo blanche'),
-            'tarif_special' : fields.boolean(string='Tarif spécial'),
+            #~ 'promo_jaune': fields.boolean(string='Promo jaune'),
+            #~ 'promo_blanche': fields.boolean(string='Promo blanche'),
+            #~ 'tarif_special' : fields.boolean(string='Tarif spécial'),
             'price_discount': fields.float('Price Discount', digits=(16,6)),
             
             'tarif_special_choice': fields.selection([('oui', 'Oui'), ('non', 'Non')], string=u'Tarif spécial'),
@@ -402,6 +402,7 @@ class product_pricelist_promo(osv.osv):
         j = 0
         if 'product_ids' in vals:
             for promo_in in vals.get('product_ids', []):
+                
                 vals['product_ids'][i][2].update({'name': seq_max})
                 seq_max -= 1
                 i += 1
@@ -614,26 +615,7 @@ class product_pricelist_promo(osv.osv):
                                                     'price_discount': coeff2-1,
                                                     'price_version_id': version_id})
                 items.append(item_id)
-        
-        #~ # Il reste maintenant à rajouter les produits relatifs à un éventuel tarif spécial se déroulant en même temps que la promo
-        #~ if data['form'].get('ts_products'):
-            #~ base_special = 1
-            #~ items = []
-            #~ type_ids = self.pool.get('product.price.type').search(cr, uid, [('name', '=', 'Prix Special')])
-            #~ if type_ids:
-               #~ base_special = type_ids[0]
-#~ 
-            #~ for product in data['form']['ts_products']:
-                #~ prod = prod_obj.browse(cr, uid, product[2].get('product_id'))
-                #~ item_id = item_obj.create(cr, uid, {'sequence': 1,
-                                                    #~ 'name': prod.name,
-                                                    #~ 'product_id': prod.id,
-                                                    #~ 'base': base_special,
-                                                    #~ 'price_discount' :-1.0,
-                                                    #~ 'price_surcharge': product[2].get('prix_special'),
-                                                    #~ 'price_version_id': version_id})
-
-        
+                
         return items
 
 
@@ -699,25 +681,6 @@ class product_pricelist_promo(osv.osv):
         # Sauvegarde des données saisies (il faudra les restaurer lors de la création des version contenant les cumul promo + tarifs spéciaux) 
         data_ori = data['form'].copy()
 
-        ## On cherche les tarifs spéciaux qui pourraient se cumuler à cette promo  
-        #~ data['ts_av_ids'] = tarifs_speciaux_obj.search(cr, uid, [('start_date', '<=', data['form']['start_date']), \
-                                                                 #~ ('end_date', '>=', data['form']['start_date']), \
-                                                                 #~ ('end_date', '<=', data['form']['end_date']) ])
-#~ 
-        #~ data['ts_ap_ids'] = tarifs_speciaux_obj.search(cr, uid, [('end_date', '>=', data['form']['end_date']), \
-                                                                 #~ ('start_date', '<=', data['form']['end_date']), \
-                                                                 #~ ('start_date', '>=',data['form']['start_date'])])
-#~ 
-        #~ data['ts_pdt_ids'] = tarifs_speciaux_obj.search(cr, uid, [('end_date', '<=', data['form']['end_date']), \
-                                                                  #~ ('start_date', '>=', data['form']['start_date'])])
-#~ 
-#~ 
-        #~ data['ts_av_pdt_ap_ids'] = tarifs_speciaux_obj.search(cr, uid, [('end_date', '>=', data['form']['end_date']), \
-                                                                        #~ ('start_date', '<=', data['form']['start_date'])])
-        ## On récupère toutes les listes de prix où les promos s'appliquent (promo jaune ou blanche cochée)
-        #~ blanche_ids = pricelist_obj.search(cr, uid, [('promo_blanche', '=', True), ('type', '=', 'sale')])
-        #~ jaune_ids = pricelist_obj.search(cr, uid, [('promo_jaune', '=', True), ('type', '=', 'sale')])
-
         blanche_ids = pricelist_obj.search(cr, uid, [('tarif_choice', '=', 'blanche'), ('type', '=', 'sale'), ('promo_choice', '=', 'oui'), ('mea_choice', '=', 'non')])
         jaune_ids = pricelist_obj.search(cr, uid, [('tarif_choice', '=', 'jaune'), ('type', '=', 'sale'), ('promo_choice', '=', 'oui'), ('mea_choice', '=', 'non')])
         
@@ -725,7 +688,6 @@ class product_pricelist_promo(osv.osv):
         ## On cherche la version en cours pendant la promo
         ## On lui donne une date de fin qui correspond au début-1jour de la promo
         for list in pricelist_obj.browse(cr, uid, blanche_ids):
-#        for list in pricelist_obj.browse(cr, uid, data['ids']):
             new_version = self._define_promo(cr, uid, data, list, context=context)
             if new_version:
                 version_obj.write(cr, uid, [new_version], {'active': True, 'name': data['form']['name']})
@@ -737,130 +699,7 @@ class product_pricelist_promo(osv.osv):
                 version_obj.write(cr, uid, [new_version], {'active': True, 'name': data['form']['name']})
                 new_items = self._create_item(cr, uid, data, new_version, 'jaune',context=context)
 
-    #        promo_obj = self.pool.get('product.pricelist.promo')
             self.write(cr, uid, ids, {'state': 'done'})
-
-    #        promo_obj.create(cr, uid, {'name': data['form']['name'],
-    #                                   'start_date': data['form']['start_date'],
-    #                                   'end_date': data['form']['end_date'],
-    #                                   'product_ids': [(6,0,product_ids)]})
-
-        # OK, arrivé à ce stade, la version des promos a été mise en place et a "poussé" les autres versions
-        # Il faut voir si ces promos ne sont pas à cumuler avec des tarifs spéciaux
-        # Recherche de toutes les listes de prix correspondant à un tarif spécial et autorisant les promos uniquement
-        #~ ts_pl_ids = pricelist_obj.search (cr, uid, [('tarif_special', '=', True), ('promo_choice', '=', 'oui'), ('mea_choice', '=', 'non')])
-        #~ if data['ts_av_ids']:
-             #~ # Au départ, le tarif spécial se trouvait avant la promo tout en empiétant sur le début de celle-ci.
-             #~ # Sa date de fin a déjà été reculée de sorte que ce tarif n'empiète maintenant plus sur la promo
-             #~ # Il reste maintenant à créer une nouvelle version allant de la date de début de la promo à la date de la fin du tarif spécial
-             #~ # et contenant le cumul des produits de la promo et tous les produits du tarif spécial
-             #~ ts_av = tarifs_speciaux_obj.browse(cr, uid, data['ts_av_ids'])
-             #~ for ts in ts_av:
-                 #~ data['form'] = data_ori.copy()
-                 #~ data['form']['name'] += " + " + ts.name
-                 #~ data['form']['end_date'] = ts.end_date
-                 #~ products = []
-                 #~ # On rajoute les produits du tarif spécial
-                 #~ for product in ts.product_id:
-                     #~ products.append((0,0,{'sequence' : 1 , 'prix_vente_initial': 0.00, 'product_id': product.product_id.id, 'prix_special': product.prix_special}))
-                 #~ data['form']['ts_products'] = products
-                 #~ # Pour chaque liste de prix concernée, on crée cette nouvelle version
-                 #~ for list in ts_pl_ids:
-                     #~ # Est-ce que le client pour lequel ce tarif spécial a été défini est le même 
-                     #~ # que le client correspondant au tarif spécial que l'on se propose de traiter?
-                     #~ # Si oui, il faut cumuler tarif spécial + promo, si non, on passe au tarif spécial suivant
-                     #~ pl =  pricelist_obj.browse(cr, uid, list)
-                     #~ if ts.client.property_product_pricelist != pl:
-                        #~ continue
-                     #~ pl_version = self._define_promo(cr, uid, data, pl, context=context)
-                     #~ type_promo = pl.tarif_choice
-                     #~ if pl_version and type_promo:
-                        #~ version_obj.write(cr, uid, [pl_version], {'active': True})
-                        #~ pl_new_items = self._create_item(cr, uid, data, pl_version, type_promo, context=context)
-#~ 
-        #~ if data['ts_ap_ids']:
-            #~ # Au départ, le tarif spécial se trouvait après la promo tout en empiétant sur la fin de celle-ci.
-            #~ # Sa date de début a déjà été repoussée de sorte que ce tarif n'empiète maintenant plus sur la promo
-            #~ # Il reste maintenant à créer une nouvelle version allant de la date de début du tarif spécial à la date de la fin de la promo
-            #~ # et contenant le cumul des produits de la promo et tous les produits du tarif spécial
-            #~ ts_ap = tarifs_speciaux_obj.browse(cr, uid, data['ts_ap_ids'])
-            #~ for ts in ts_ap:
-                #~ data['form'] = data_ori.copy()
-                #~ data['form']['name'] += " + " + ts.name
-                #~ data['form']['start_date'] = ts.start_date
-                #~ products = []
-                #~ # On rajoute les produits du tarif spécial
-                #~ for product in ts.product_id:
-                    #~ products.append((0,0,{'sequence' : 1 , 'prix_vente_initial': 0.00, 'product_id': product.product_id.id, 'prix_special': product.prix_special}))
-                #~ data['form']['ts_products'] = products
-                #~ # Pour chaque liste de prix concernée, on crée cette nouvelle version
-                #~ for list in ts_pl_ids:
-                    #~ # Est-ce que le client pour lequel ce tarif spécial a été défini est le même 
-                    #~ # que le client correspondant au tarif spécial que l'on se propose de traiter?
-                    #~ # Si oui, il faut cumuler tarif spécial + promo, si non, on passe au tarif spécial suivant
-                    #~ pl =  pricelist_obj.browse(cr, uid, list)
-                    #~ if ts.client.property_product_pricelist != pl:
-                       #~ continue
-                    #~ pl_version = self._define_promo(cr, uid, data, pl, context=context)
-                    #~ type_promo = pl.tarif_choice
-                    #~ 
-                    #~ if pl_version and type_promo:
-                       #~ version_obj.write(cr, uid, [pl_version], {'active': True})
-                       #~ pl_new_items = self._create_item(cr, uid, data, pl_version, type_promo, context=context)
-#~ 
-        #~ if data['ts_pdt_ids']:
-             #~ # On a un tarif spécial  dont les dates sont comprises à l'intérieur d'une promo. Il a été supprimé.
-             #~ # Il faut le recréer en y rajoutant les produits de la promo
-             #~ ts_pdt = tarifs_speciaux_obj.browse(cr, uid, data['ts_pdt_ids'])
-             #~ for ts in ts_pdt:
-                 #~ data['form'] = data_ori.copy()
-                 #~ data['form']['name'] += " + " + ts.name
-                 #~ data['form']['start_date'] = ts.start_date
-                 #~ data['form']['end_date'] = ts.end_date
-                 #~ products = []
-                 #~ # On rajoute les produits du tarif spécial
-                 #~ for product in ts.product_id:
-                     #~ products.append((0,0,{'sequence' : 1 , 'prix_vente_initial': 0.00, 'product_id': product.product_id.id, 'prix_special': product.prix_special}))
-                 #~ data['form']['ts_products'] = products
-                 #~ # Pour chaque liste de prix concernée, on crée cette nouvelle version
-                 #~ for list in ts_pl_ids:
-                     #~ # Est-ce que le client pour lequel ce tarif spécial a été défini est le même 
-                     #~ # que le client correspondant au tarif spécial que l'on se propose de traiter?
-                     #~ # Si oui, il faut cumuler tarif spécial + promo, si non, on passe au tarif spécial suivant
-                     #~ pl =  pricelist_obj.browse(cr, uid, list)
-                     #~ if ts.client.property_product_pricelist != pl:
-                        #~ continue
-                     #~ pl_version = self._define_promo(cr, uid, data, pl, context=context)
-                     #~ type_promo = pl.tarif_choice
-                     #~ if pl_version and type_promo:
-                        #~ version_obj.write(cr, uid, [pl_version], {'active': True})
-                        #~ pl_new_items = self._create_item(cr, uid, data, pl_version, type_promo, context=context)
-#~ 
-#~ 
-        #~ if data['ts_av_pdt_ap_ids']:
-           #~ # La promo a été crée alors qu'un tarif spécial existait déjà sur la période (avant, pendant et apres). 
-           #~ # Le tarif spécial a été "coupé en deux" pour laisser la place à la promo. Il reste à inclure dans la promo les produits du tarif spécial
-           #~ ts_av_pdt_ap = tarifs_speciaux_obj.browse(cr, uid, data['ts_av_pdt_ap_ids'])
-           #~ for ts in ts_av_pdt_ap:
-               #~ data['form'] = data_ori.copy()
-               #~ data['form']['name'] += " + " + ts.name
-               #~ products = []
-               #~ # On rajoute les produits du tarif spécial
-               #~ for product in ts.product_id:
-                   #~ products.append((0,0,{'sequence' : 1 , 'prix_vente_initial': 0.00, 'product_id': product.product_id.id, 'prix_special': product.prix_special}))
-               #~ data['form']['ts_products'] = products
-               #~ for list in ts_pl_ids:
-                   #~ # Est-ce que le client pour lequel ce tarif spécial a été défini est le même 
-                   #~ # que le client correspondant au tarif spécial que l'on se propose de traiter?
-                   #~ # Si oui, il faut cumuler tarif spécial + promo, si non, on passe au tarif spécial suivant
-                   #~ pl =  pricelist_obj.browse(cr, uid, list)
-                   #~ if ts.client.property_product_pricelist != pl:
-                       #~ continue
-                   #~ pl_version = self._define_promo(cr, uid, data, pl, context=context)
-                   #~ type_promo = pl.tarif_choice
-                   #~ if pl_version and type_promo:
-                      #~ version_obj.write(cr, uid, [pl_version], {'active': True})
-                      #~ pl_new_items = self._create_item(cr, uid, data, pl_version, type_promo, context=context)
 
         return True
 
@@ -1204,24 +1043,6 @@ class product_pricelist_mea(osv.osv):
                                                     'price_version_id': version_id})
                 items.append(item_id)
 
-        # Il reste maintenant à rajouter les produits relatifs à un éventuel tarif spécial se déroulant en même temps que la mea
-        #~ if data['form'].get('ts_products'):
-            #~ base_special = 1
-            #~ items = []
-            #~ type_ids = self.pool.get('product.price.type').search(cr, uid, [('name', '=', 'Prix Special')])
-            #~ if type_ids:
-                #~ base_special = type_ids[0]
-#~ 
-            #~ for product in data['form']['ts_products']:
-                #~ prod = prod_obj.browse(cr, uid, product[2].get('product_id'))
-                #~ item_id = item_obj.create(cr, uid, {'sequence': 1,
-                                                    #~ 'name': prod.name,
-                                                    #~ 'product_id': prod.id,
-                                                    #~ 'base': base_special,
-                                                    #~ 'price_discount' :-1.0,
-                                                    #~ 'price_surcharge': product[2].get('prix_special'),
-                                                    #~ 'price_version_id': version_id})
-
         return items
 
     def _create_mea(self, cr, uid, ids, context={}):
@@ -1254,23 +1075,7 @@ class product_pricelist_mea(osv.osv):
         # Sauvegarde des données saisies (il faudra les restaurer lors de la création des version contenant les cumul mea + tarifs spéciaux) 
         data_ori = data['form'].copy()
 
-        ## On cherche les tarifs spéciaux qui pourraient se cumuler à cette mea  
-        #~ data['ts_av_ids'] = tarifs_speciaux_obj.search(cr, uid, [('start_date', '<=', data['form']['start_date']), \
-                                                                 #~ ('end_date', '>=', data['form']['start_date']), \
-                                                                 #~ ('end_date', '<=', data['form']['end_date']) ])
-#~ 
-        #~ data['ts_ap_ids'] = tarifs_speciaux_obj.search(cr, uid, [('end_date', '>=', data['form']['end_date']), \
-                                                                 #~ ('start_date', '<=', data['form']['end_date']), \
-                                                                 #~ ('start_date', '>=',data['form']['start_date'])])
-#~ 
-        #~ data['ts_pdt_ids'] = tarifs_speciaux_obj.search(cr, uid, [('end_date', '<=', data['form']['end_date']), \
-                                                                  #~ ('start_date', '>=', data['form']['start_date'])])
-#~ 
-#~ 
-        #~ data['ts_av_pdt_ap_ids'] = tarifs_speciaux_obj.search(cr, uid, [('end_date', '>=', data['form']['end_date']), \
-                                                                        #~ ('start_date', '<=', data['form']['start_date'])])
         ## On récupère toutes les listes de prix où les mea s'appliquent (mea jaune ou blanche à oui)
-
         blanche_ids = pricelist_obj.search(cr, uid, [('tarif_choice', '=', 'blanche'), ('type', '=', 'sale'), ('mea_choice', '=', 'oui')])
         jaune_ids = pricelist_obj.search(cr, uid, [('tarif_choice', '=', 'jaune'), ('type', '=', 'sale'), ('mea_choice', '=', 'oui')])
         
@@ -1290,122 +1095,6 @@ class product_pricelist_mea(osv.osv):
                 new_items = self._create_item(cr, uid, data, new_version, 'jaune',context=context)
 
             self.write(cr, uid, ids, {'state': 'done'})
-
-        # OK, arrivé à ce stade, la version des promos a été mise en place et a "poussé" les autres versions
-        # Il faut voir si ces promos ne sont pas à cumuler avec des tarifs spéciaux
-        # Recherche de toutes les listes de prix correspondant à un tarif spécial et correspondant aux mea
-        #~ ts_pl_ids = pricelist_obj.search (cr, uid, [('tarif_special', '=', True), ('mea_choice', '=', 'oui')])
-         #~ 
-        #~ if data['ts_av_ids']:
-            #~ # Au départ, le tarif spécial se trouvait avant la mea tout en empiétant sur le début de celle-ci.
-            #~ # Sa date de fin a déjà été reculée de sorte que ce tarif n'empiète maintenant plus sur la promo
-            #~ # Il reste maintenant à créer une nouvelle version allant de la date de début de la promo à la date de la fin du tarif spécial
-            #~ # et contenant le cumul des produits de la promo et tous les produits du tarif spécial
-            #~ ts_av = tarifs_speciaux_obj.browse(cr, uid, data['ts_av_ids'])
-            #~ for ts in ts_av:
-                #~ data['form'] = data_ori.copy()
-                #~ data['form']['name'] += " + " + ts.name
-                #~ data['form']['end_date'] = ts.end_date
-                #~ products = []
-                #~ # On rajoute les produits du tarif spécial
-                #~ for product in ts.product_id:
-                    #~ products.append((0,0,{'sequence' : 1 , 'prix_vente_initial': 0.00, 'product_id': product.product_id.id, 'prix_special': product.prix_special}))
-                #~ data['form']['ts_products'] = products
-                #~ # Pour chaque liste de prix concernée, on crée cette nouvelle version
-                #~ for list in ts_pl_ids:
-                    #~ # Est-ce que le client pour lequel ce tarif spécial a été défini est le même 
-                    #~ # que le client correspondant au tarif spécial que l'on se propose de traiter?
-                    #~ # Si oui, il faut cumuler tarif spécial + mea, si non, on passe au tarif spécial suivant
-                    #~ pl =  pricelist_obj.browse(cr, uid, list)
-                    #~ if ts.client.property_product_pricelist != pl:
-                        #~ continue
-                    #~ pl_version = promo_obj._define_promo(cr, uid, data, pl, context=context)
-                    #~ type_mea = pl.tarif_choice
-                    #~ if pl_version and type_mea:
-                        #~ version_obj.write(cr, uid, [pl_version], {'active': True})
-                        #~ pl_new_items = self._create_item(cr, uid, data, pl_version, type_mea, context=context)
-#~ 
-        #~ if data['ts_ap_ids']:
-            #~ # Au départ, le tarif spécial se trouvait après la mea tout en empiétant sur la fin de celle-ci.
-            #~ # Sa date de début a déjà été repoussée de sorte que ce tarif n'empiète maintenant plus sur la mea
-            #~ # Il reste maintenant à créer une nouvelle version allant de la date de début du tarif spécial à la date de la fin de la mea
-            #~ # et contenant le cumul des produits de la mea et tous les produits du tarif spécial
-            #~ ts_ap = tarifs_speciaux_obj.browse(cr, uid, data['ts_ap_ids'])
-            #~ for ts in ts_ap:
-                #~ data['form'] = data_ori.copy()
-                #~ data['form']['name'] += " + " + ts.name
-                #~ data['form']['start_date'] = ts.start_date
-                #~ products = []
-                #~ # On rajoute les produits du tarif spécial
-                #~ for product in ts.product_id:
-                    #~ products.append((0,0,{'sequence' : 1 , 'prix_vente_initial': 0.00, 'product_id': product.product_id.id, 'prix_special': product.prix_special}))
-                #~ data['form']['ts_products'] = products
-                #~ # Pour chaque liste de prix concernée, on crée cette nouvelle version
-                #~ for list in ts_pl_ids:
-                    #~ # Est-ce que le client pour lequel ce tarif spécial a été défini est le même 
-                    #~ # que le client correspondant au tarif spécial que l'on se propose de traiter?
-                    #~ # Si oui, il faut cumuler tarif spécial + mea, si non, on passe au tarif spécial suivant
-                    #~ pl =  pricelist_obj.browse(cr, uid, list)
-                    #~ if ts.client.property_product_pricelist != pl:
-                        #~ continue
-                    #~ pl_version = promo_obj._define_promo(cr, uid, data, pl, context=context)
-                    #~ type_mea = pl.tarif_choice
-                    #~ if pl_version and type_mea:
-                        #~ version_obj.write(cr, uid, [pl_version], {'active': True})
-                        #~ pl_new_items = self._create_item(cr, uid, data, pl_version, type_mea, context=context)
-#~ 
-        #~ if data['ts_pdt_ids']:
-            #~ # On a un tarif spécial  dont les dates sont comprises à l'intérieur d'une mea. Il a été supprimé.
-            #~ # Il faut le recréer en y rajoutant les produits de la mea
-            #~ ts_pdt = tarifs_speciaux_obj.browse(cr, uid, data['ts_pdt_ids'])
-            #~ for ts in ts_pdt:
-                #~ data['form'] = data_ori.copy()
-                #~ data['form']['name'] += " + " + ts.name
-                #~ data['form']['start_date'] = ts.start_date
-                #~ data['form']['end_date'] = ts.end_date
-                #~ products = []
-                #~ # On rajoute les produits du tarif spécial
-                #~ for product in ts.product_id:
-                    #~ products.append((0,0,{'sequence' : 1 , 'prix_vente_initial': 0.00, 'product_id': product.product_id.id, 'prix_special': product.prix_special}))
-                #~ data['form']['ts_products'] = products
-                #~ # Pour chaque liste de prix concernée, on crée cette nouvelle version
-                #~ for list in ts_pl_ids:
-                    #~ # Est-ce que le client pour lequel ce tarif spécial a été défini est le même 
-                    #~ # que le client correspondant au tarif spécial que l'on se propose de traiter?
-                    #~ # Si oui, il faut cumuler tarif spécial + mea, si non, on passe au tarif spécial suivant
-                    #~ pl =  pricelist_obj.browse(cr, uid, list)
-                    #~ if ts.client.property_product_pricelist != pl:
-                        #~ continue
-                    #~ pl_version = promo_obj._define_promo(cr, uid, data, pl, context=context)
-                    #~ type_mea = pl.tarif_choice
-                    #~ if pl_version and type_mea:
-                        #~ version_obj.write(cr, uid, [pl_version], {'active': True})
-                        #~ pl_new_items = self._create_item(cr, uid, data, pl_version, type_mea, context=context)
-#~ 
-        #~ if data['ts_av_pdt_ap_ids']:
-            #~ # La mea a été crée alors qu'un tarif spécial existait déjà sur la période (avant, pendant et apres). 
-            #~ # Le tarif spécial a été "coupé en deux" pour laisser la place à la mea. Il reste à inclure dans la mea les produits du tarif spécial
-            #~ ts_av_pdt_ap = tarifs_speciaux_obj.browse(cr, uid, data['ts_av_pdt_ap_ids'])
-            #~ for ts in ts_av_pdt_ap:
-                #~ data['form'] = data_ori.copy()
-                #~ data['form']['name'] += " + " + ts.name
-                #~ products = []
-                #~ # On rajoute les produits du tarif spécial
-                #~ for product in ts.product_id:
-                    #~ products.append((0,0,{'sequence' : 1 , 'prix_vente_initial': 0.00, 'product_id': product.product_id.id, 'prix_special': product.prix_special}))
-                #~ data['form']['ts_products'] = products
-                #~ for list in ts_pl_ids:
-                    #~ # Est-ce que le client pour lequel ce tarif spécial a été défini est le même 
-                    #~ # que le client correspondant au tarif spécial que l'on se propose de traiter?
-                    #~ # Si oui, il faut cumuler tarif spécial + mea, si non, on passe au tarif spécial suivant
-                    #~ pl =  pricelist_obj.browse(cr, uid, list)
-                    #~ if ts.client.property_product_pricelist != pl:
-                        #~ continue
-                    #~ pl_version = promo_obj._define_promo(cr, uid, data, pl, context=context)
-                    #~ type_mea = pl.tarif_choice
-                    #~ if pl_version and type_mea:
-                        #~ version_obj.write(cr, uid, [pl_version], {'active': True})
-                        #~ pl_new_items = self._create_item(cr, uid, data, pl_version, type_mea, context=context)
 
         return True
 

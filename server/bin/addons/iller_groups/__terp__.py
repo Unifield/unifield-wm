@@ -56,7 +56,7 @@
         #~ 'hr_timesheet', 
         #~ 'report_analytic_line', 
         #~ 'report_analytic', 
-        #~ 'subscription', 
+        'subscription', 
 
     ],
     'init_xml': [],
