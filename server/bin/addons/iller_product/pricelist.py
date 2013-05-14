@@ -149,9 +149,6 @@ class product_pricelist(osv.osv):
     _inherit = 'product.pricelist'
 
     _columns = {
-            #~ 'promo_jaune': fields.boolean(string='Promo jaune'),
-            #~ 'promo_blanche': fields.boolean(string='Promo blanche'),
-            #~ 'tarif_special' : fields.boolean(string='Tarif spécial'),
             'price_discount': fields.float('Price Discount', digits=(16,6)),
             
             'tarif_special_choice': fields.selection([('oui', 'Oui'), ('non', 'Non')], string=u'Tarif spécial'),
@@ -163,8 +160,10 @@ class product_pricelist(osv.osv):
     def price_get (self, cr, uid, ids, prod_id, qty, partner=None, context=None):
         if context and ('date' in context):
             context['datestandard'] = context['date']
+            
     # Calcul habituel du prix 
         res = self._orig_price_get(cr, uid, ids, prod_id, qty, partner, context)
+
 
     # L'éventuel prix de Noel du produit est appliqué si la date de la commande est incluse dans la promo de Noel 
     # Remarque importante: ce prix de Noel est bien le même pour TOUS
@@ -230,6 +229,8 @@ class product_pricelist(osv.osv):
             'datestandard'
         }
         '''
+        print self, cr, uid, ids, prod_id, qty, partner, context
+        
         context = context or {}
         currency_obj = self.pool.get('res.currency')
         product_obj = self.pool.get('product.product')
@@ -332,14 +333,31 @@ class product_pricelist(osv.osv):
                                 price_type.field,context=context)[prod_id], round=False)
 
                 price_limit = price
-
+                
                 price = price * (1.0+(res['price_discount'] or 0.0))
+
+                #Traitement spécial pour le cas RUNGIEST
+                if partner:
+                    partner_record = self.pool.get('res.partner').browse(cr, uid, partner, context=context)
+                    #Si le partenaire est RUNGIEST
+                    if  partner_record.ref == '160053' and res['price_discount'] != -1:
+                        prod = product_obj.browse(cr, uid, [prod_id], context=context)
+                        if prod:
+                            #On récupère le produit concerné et on regarde son type d'affectation
+                            price = prod[0].prix_achat
+                            #Si DECP alors prix d'achat * 1.1, sinon prix d'achat * 1.05
+                            if prod[0].code_affectation == 'DECP':
+                                price = price * 1.1
+                            else:
+                                price = price * 1.05
+
                 price = rounding(price, res['price_round'])
                 price += (res['price_surcharge'] or 0.0)
                 if res['price_min_margin']:
                     price = max(price, price_limit+res['price_min_margin'])
                 if res['price_max_margin']:
                     price = min(price, price_limit+res['price_max_margin'])
+
             else:
                 # False means no valid line found ! But we may not raise an
                 # exception here because it breaks the search

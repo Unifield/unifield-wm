@@ -81,6 +81,7 @@ class iller_commission_line(osv.osv):
 
         res = self.set_value_commission(cr, uid, lines, context=context)
 
+        print res
         if not res[0]:
             raise osv.except_osv('Erreur', u'Vous ne pouvez pas avoir un prix unitaire inférieur au prix de vente du produit multiplié par le barème c1 - L\'une des lignes de cette commande déroge à cette règle.')
 
@@ -111,6 +112,7 @@ class iller_commission_line(osv.osv):
         bareme_above = False
 
         for l in lines:
+
             for bareme in bareme_obj.browse(cr, uid, bareme_ids):
                 ## Si le prix unitaire est égal au prix de vente du produit * le 
                 ## coeficient d'un barème, on retourne la commission associée au taux du barème
@@ -138,12 +140,13 @@ class iller_commission_line(osv.osv):
                 if 'order_id' in l:
                     order = order_obj.browse(cr, uid, l.get('order_id'))
                     ## On vérifie si le client ne fait pas partie de la liste des clients autorisés
-                    if order.partner_id.depassement:
+                    if order.partner_id.depassement or order.partner_id.ref == '160053':
                         return l.get('unit_price')*l.get('qty')*0.01, message
+                        
                 elif 'partner_id' in l:
                     partner = partner_obj.browse(cr, uid, l.get('partner_id'))
                     ## On vérifie si le client ne fait pas partie de la liste des clients autorisés
-                    if partner.depassement:
+                    if partner.depassement or order.partner_id.ref == '160053':
                         return l.get('unit_price')*l.get('qty')*0.01, message
 
 
@@ -172,6 +175,7 @@ class iller_commission_line(osv.osv):
 
                 ## Dans tous les autres cas, on retourne une erreur
                 return False, message
+
 
         return res, message
 
