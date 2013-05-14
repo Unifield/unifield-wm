@@ -474,6 +474,8 @@ class hqn_creation(client_creation, unittest.TestCase):
     @unittest.skipIf(skipGroups, "Group creation desactivated")
     def test_30_make_groups_coordo(self):
         self.add_to_group('OC_%02d' % self.index, 'OC')
+        for i in range(1, coordo_count+1):
+            self.add_to_group('HQ + Mission %s' % i, 'HQ + MISSION')
 
     @unittest.skipIf(skipPropInstance, "Proprietary Instance creation desactivated")
     def test_40_prop_instance(self):
@@ -513,6 +515,7 @@ class coordon_creation(client_creation):
         self.add_to_group('OC_%02d' % self.hq.index, 'OC')
         self.add_to_group('Coordinations of %s' % self.hq.db.name, 'COORDINATIONS')
         self.add_to_group('Mission %s' % self.index, 'MISSION')
+        self.add_to_group('HQ + Mission %s' % self.index, 'HQ + MISSION')
 
     @unittest.skipIf(skipPropInstance, "Proprietary Instance creation desactivated")
     def test_40_prop_instance(self):
@@ -545,6 +548,7 @@ class projectn_creation(client_creation):
     def test_30_make_groups_coordo(self):
         self.add_to_group('OC_%02d' % self.hq.index, 'OC')
         self.add_to_group('Mission %s' % self.parent.index, 'MISSION')
+        self.add_to_group('HQ + Mission %s' % self.parent.index, 'HQ + MISSION')
 
     @unittest.skipIf(skipGroups, "Group creation desactivated")
     def test_31_make_groups_project(self):
