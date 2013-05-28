@@ -229,7 +229,6 @@ class product_pricelist(osv.osv):
             'datestandard'
         }
         '''
-        print self, cr, uid, ids, prod_id, qty, partner, context
         
         context = context or {}
         currency_obj = self.pool.get('res.currency')
