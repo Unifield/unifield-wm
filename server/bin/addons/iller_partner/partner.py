@@ -18,6 +18,7 @@ class iller_partner(osv.osv):
         '''
         if 'tarif_choice' in vals:
             tarif_choice = vals['tarif_choice']
+                
         else:
             tarif_choice = 'blanche'
             
@@ -85,16 +86,31 @@ class iller_partner(osv.osv):
                     return False
             base_version = base_ids[0]
             base = version_obj.browse(cr, uid, base_version, context=context)
-            # On récupère la liste de prix correspondant aux paramètres du partenaire
-            pricelist_ids = self.pool.get('product.pricelist').search(
-                    cr, uid, [
-                                ('tarif_choice', '=', tarif_choice or 'blanche'),
-                                ('promo_choice', '=', promo_choice or 'non'),
-                                ('mea_choice', '=', mea_choice or 'non'),
-                                ('name', 'ilike', base.name[-4:] or 'NU01')
-                            ], context=context)
+            pricelist_ids = []
+            # Si le tarif spécial est à oui, on regarde s'il existe un liste de prix associée à cette base
+            if 'tarif_special_choice' in vals and vals['tarif_special_choice'] == 'oui':
+                pricelist_ids = self.pool.get('product.pricelist').search(
+                        cr, uid, [
+                                    ('tarif_special_choice', '=', vals['tarif_special_choice'] or 'non'),
+                                    ('tarif_choice', '=', tarif_choice or 'blanche'),
+                                    ('promo_choice', '=', promo_choice or 'non'),
+                                    ('mea_choice', '=', mea_choice or 'non'),
+                                    ('name', 'ilike', ('CSP %s %s' % (partner_record.ref, partner_record.name)) or base.name[-4:] or 'NU01')
+                                ], context=context)
+            # On récupère la liste de prix correspondant aux paramètres du partenaire si aucune liste de prix spéciale n'existe
+            if not pricelist_ids:
+                    pricelist_ids = self.pool.get('product.pricelist').search(
+                            cr, uid, [
+                                        ('tarif_choice', '=', tarif_choice or 'blanche'),
+                                        ('promo_choice', '=', promo_choice or 'non'),
+                                        ('mea_choice', '=', mea_choice or 'non'),
+                                        ('name', 'ilike', base.name[-4:] or 'NU01')
+                                    ], context=context)
+            
+            # Si on a toujours pas de liste de prix, on applique par défaut NU01
             if not pricelist_ids:
                 pricelist_ids = self.pool.get('product.pricelist').search(cr, uid, [('name', 'ilike', 'NU01')], context=context)
+            
             pricelist_record = self.pool.get('product.pricelist').browse(cr, uid, pricelist_ids[0],context=context)
             
             # Rajout d'un context qui permet de différencier d'où provient l'écriture
