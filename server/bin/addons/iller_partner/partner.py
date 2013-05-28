@@ -16,7 +16,6 @@ class iller_partner(osv.osv):
         '''
             Ecriture de la liste de prix correspondante
         '''
-        print vals
         if 'tarif_choice' in vals:
             tarif_choice = vals['tarif_choice']
         else:
@@ -54,7 +53,6 @@ class iller_partner(osv.osv):
         if isinstance(ids, (int, long)):
             ids = [ids]
         
-        print vals
         version_obj = self.pool.get('product.pricelist.version')
         # Si une écriture est effectuée sur 'property_product_pricelist', alors on effectue le comportement par défaut
         # car on est dans le cas où le tarif spécial écrit une nouvelle liste de prix
@@ -87,7 +85,6 @@ class iller_partner(osv.osv):
                     return False
             base_version = base_ids[0]
             base = version_obj.browse(cr, uid, base_version, context=context)
-            print base, base_version
             # On récupère la liste de prix correspondant aux paramètres du partenaire
             pricelist_ids = self.pool.get('product.pricelist').search(
                     cr, uid, [

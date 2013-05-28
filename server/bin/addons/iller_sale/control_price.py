@@ -50,7 +50,6 @@ class iller_control_unit_price(osv.osv):
                 return l.get('unit_price'), message
 
             ## Si le prix est inférieur au prix de vente multiplié par le plus petit coeff.
-            print bareme_above.valeur, l.get('prix_vente'), l.get('unit_price')
             if not bareme_below:
                 if 'order_id' in l:
                     order = order_obj.browse(cr, uid, l.get('order_id'))
