@@ -78,12 +78,18 @@ class iller_partner(osv.osv):
             else:
                 mea_choice = partner_record.mea_choice
 
-            #On cherche la version de base de la pricelist du partner
+            # On cherche la version de base de la pricelist du partner
             base_ids = version_obj.search(cr, uid, [('pricelist_id', '=', partner_record.property_product_pricelist.id), ('base_ok', '=', True)])
             if not base_ids:
                 base_ids = version_obj.search(cr, uid, [('pricelist_id', '=', partner_record.property_product_pricelist.id)])
                 if not base_ids:
-                    return False
+                    # Si on a pas de base, il y a une erreur dans la pricelist (cas où 
+                    # des partner existants pointent sur une ancienne liste de prix)
+                    # FIXME Permet d'éviter de prendre NU01 erroné
+                    pl_id = self.pool.get('product.pricelist').search(cr, uid, [('name', '=', 'NU01'), ('id', '<>', 1)], context=context)
+                    base_ids = version_obj.search(cr, uid, [('pricelist_id', '=', pl_id)], context=context)
+                    if not base_ids:
+                        return False
             base_version = base_ids[0]
             base = version_obj.browse(cr, uid, base_version, context=context)
             pricelist_ids = []
