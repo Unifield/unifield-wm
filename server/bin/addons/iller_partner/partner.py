@@ -69,7 +69,8 @@ class iller_partner(osv.osv):
         '''
         if isinstance(ids, (int, long)):
             ids = [ids]
-        
+        if not context:
+            context = {}
         version_obj = self.pool.get('product.pricelist.version')
         pricelist_obj = self.pool.get('product.pricelist')
         # Si une écriture est effectuée sur 'property_product_pricelist', alors on effectue le comportement par défaut
