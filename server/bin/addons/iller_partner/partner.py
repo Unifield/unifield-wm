@@ -71,6 +71,7 @@ class iller_partner(osv.osv):
             ids = [ids]
         
         version_obj = self.pool.get('product.pricelist.version')
+        pricelist_obj = self.pool.get('product.pricelist')
         # Si une écriture est effectuée sur 'property_product_pricelist', alors on effectue le comportement par défaut
         # car on est dans le cas où le tarif spécial écrit une nouvelle liste de prix
         # Si is_tarif_speciaux == True alors on fait le write par défaut car on est dans le cas d'un tarif spécial
@@ -96,18 +97,26 @@ class iller_partner(osv.osv):
                 tarif_general_choice = vals['tarif_general_choice']
             else:
                 tarif_general_choice = partner_record.tarif_general_choice
+            if 'tarif_special_choice' in vals:
+                tarif_special_choice = vals['tarif_special_choice']
+            else:
+                tarif_special_choice = partner_record.tarif_special_choice
             
             base_ids = []
             pricelist_ids = []
+            not_same_pricelist = False
 
             # Récupération de la valeur associée à la clé du field.selection et récupération de la liste correspondante
             # FIXME : Corriger cette condition en dur 'id' <> 1 en trouvant un moyen de supprimer le doublon de NU01
             tarif_general_choice = self.getSelectionValue(cr, uid, 'res.partner', 'tarif_general_choice', tarif_general_choice)
-            pl_id = self.pool.get('product.pricelist').search(cr, uid, [('name', '=', tarif_general_choice), ('id', '<>', 1)], context=context)
+            # On cherche la pricelist de base correspondant à la sélection (NU01, NU02....)
+            pl_id = pricelist_obj.search(cr, uid, [('name', '=', tarif_general_choice), ('id', '<>', 1)], context=context)
             if pl_id:
                 # On cherche la version de base de la pricelist du partner
                 base_ids = version_obj.search(cr, uid, [('pricelist_id', '=', pl_id), ('base_ok', '=', True)])
-            
+
+## Cas d'erreur :Aucune version de base n'est trouvée à ce moment là : problème de pricelist
+
             # Si aucune version de base n'est trouvée, on récupère celle que le partenaire a déjà par défaut
             if not base_ids:
                 base_ids = version_obj.search(cr, uid, [('pricelist_id', '=', partner_record.property_product_pricelist.id)])
@@ -116,45 +125,73 @@ class iller_partner(osv.osv):
                     # Si on a pas de base, il y a une erreur dans la pricelist (cas où 
                     # des partner existants pointent sur une ancienne liste de prix)
                     # FIXME Permet d'éviter de prendre NU01 erroné
-                    pl_id = self.pool.get('product.pricelist').search(cr, uid, [('name', '=', 'NU01'), ('id', '<>', 1)], context=context)
+                    pl_id = pricelist_obj.search(cr, uid, [('name', '=', 'NU01'), ('id', '<>', 1)], context=context)
                     base_ids = version_obj.search(cr, uid, [('pricelist_id', '=', pl_id)], context=context)
                     if not base_ids:
-                        return False
-                        
+                        # Indique à l'utilisateur que la liste de prix pointée n'a pas de version de base
+                        raise osv.except_osv(_('La liste de prix %s ne possède pas de version de base !\nVérifiez que vous utilisez des listes de prix correctes') % (partner.property_product_pricelist.id))
             base_version = base_ids[0]
             base = version_obj.browse(cr, uid, base_version, context=context)
+
+## Cas où on a un tarif spécial sur le client
+
             # Si le tarif spécial est à oui, on regarde s'il existe une liste de prix associée à ce partenaire
-            if 'tarif_special_choice' in vals and vals['tarif_special_choice'] == 'oui':
-                pricelist_ids = self.pool.get('product.pricelist').search(
+            #    -> Cas où l'utilisateur modifie le tarif spécial de 'non' à 'oui' quand le partenaire est déjà
+            #    lié à un tarif
+            # OU BIEN si le tarif general de base est modifié, ET que le tarif spécial est à 'oui' 
+            #    -> Cas où l'utilisateur change le tarif général de base (ex : NU01 à NU03), sans changer
+            #    le tarif spécial et que celui-ci est à 'oui'
+            if ('tarif_special_choice' in vals and vals['tarif_special_choice'] == 'oui') or \
+                ('tarif_general_choice' in vals and partner_record.tarif_special_choice == 'oui' ):
+                # On récupère la liste de prix CSP si elle existe pour ce partenaire et ces paramètres
+                pricelist_ids = pricelist_obj.search(
                         cr, uid, [
-                                    ('tarif_special_choice', '=', vals['tarif_special_choice'] or 'non'),
+                                    ('tarif_special_choice', '=', tarif_special_choice or 'non'),
                                     ('tarif_choice', '=', tarif_choice or 'blanche'),
                                     ('promo_choice', '=', promo_choice or 'non'),
                                     ('mea_choice', '=', mea_choice or 'non'),
                                     ('name', 'ilike', ('CSP %s %s' % (partner_record.ref, partner_record.name)) or base.name[-4:] or 'NU01')
                                 ], context=context)
-                # Si pricelist_ids est toujours vide, on prend la liste spécial de la liste de base
+
+                # Si aucune pricelist spéciale n'existe, on prend la liste spéciale du partenaire
+                # Cas où on crée une liste spéciale à partir du tarif général de base (NU01...NU04)
                 if not pricelist_ids:
-                    pricelist_ids = self.pool.get('product.pricelist').search(
+                    pricelist_ids = pricelist_obj.search(
                             cr, uid, [
                                         ('tarif_special_choice', '=', vals['tarif_special_choice'] or 'non'),
                                         ('name', 'ilike', ('CSP %s %s' % (partner_record.ref, partner_record.name)) or base.name[-4:] or 'NU01')
                                     ], context=context)
-            # On récupère la liste de prix correspondant aux paramètres du partenaire si aucune liste de prix spéciale n'existe
-            if not pricelist_ids:
-                    pricelist_ids = self.pool.get('product.pricelist').search(
+                                    
+                # On récupère la version de base de la liste de prix spéciale
+                base_special_ids = version_obj.search(cr, uid, [('pricelist_id', '=', pricelist_ids), ('base_ok', '=', True)])
+                if base_special_ids:
+                    base_special = version_obj.browse(cr, uid, base_special_ids[0], context=context)
+                    # Si cette base n'a pas le même nom que la sélection du formulaire, on indique qu'il faudra rechercher
+                    # de nouveau une liste de prix puisque celle trouvée pour les tarifs spéciaux ne pointe pas 
+                    # sur la bonne liste de prix : il faut donc recréer un tarif spécial sur cette liste
+                    if base_special.name[-4:] != tarif_general_choice:
+                        not_same_pricelist = True
+
+## Cas standard (modification des paramètres du partenaire)
+
+            # On récupère la liste de prix correspondant aux paramètres du partenaire 
+            # si aucune liste de prix spéciale n'existe OU si la liste spéciale trouvée 
+            # ne correspond plus à la liste choisie dans le formulaire
+            if not pricelist_ids or not_same_pricelist:
+                    pricelist_ids = pricelist_obj.search(
                             cr, uid, [
                                         ('tarif_choice', '=', tarif_choice or 'blanche'),
                                         ('promo_choice', '=', promo_choice or 'non'),
                                         ('mea_choice', '=', mea_choice or 'non'),
-                                        ('name', 'ilike', base.name[-4:] or tarif_general_choice or'NU01')
+                                        ('name', 'ilike', base.name[-4:] or tarif_general_choice or 'NU01')
                                     ], context=context)
-            
+## Cas par défaut
+
             # Si on a toujours pas de liste de prix, on applique par défaut celle du tarif de base choisi
             if not pricelist_ids:
-                pricelist_ids = self.pool.get('product.pricelist').search(cr, uid, [('name', 'ilike', tarif_general_choice)], context=context)
+                pricelist_ids = pricelist_obj.search(cr, uid, [('name', 'ilike', tarif_general_choice)], context=context)
             
-            pricelist_record = self.pool.get('product.pricelist').browse(cr, uid, pricelist_ids[0],context=context)
+            pricelist_record = pricelist_obj.browse(cr, uid, pricelist_ids[0],context=context)
             
             # Rajout d'un context qui permet de différencier d'où provient l'écriture
             # Si is_tarif_speciaux == True alors c'est lors de la création d'un tarif spécial
