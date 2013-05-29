@@ -125,7 +125,7 @@ class iller_sale_line(osv.osv):
 
             res[line.id] = {
                     'type_prep': line.product_id.code_affectation,
-                    'type_cond': self.getSelectionValue(cr, uid, 'product.product', 'type_cond', product_id.type_cond),
+                    'type_cond': self.getSelectionValue(cr, uid, 'product.product', 'type_cond', line.product_id.type_cond),
                 }
 
         return res

@@ -12,41 +12,57 @@ class iller_partner(osv.osv):
 
     _order = 'ref, name, id'
 
+    # Fonction générique permettant de récupérer le champ name d'un field.selection
+    # en lui passant le nom de l'objet contenant le field.selection, le nom du champ en question
+    # et la valeur étant la clé du field.selection pour laquelle on veut récupérer le nom
+    # Ex : getSelectionValue(cr, uid, 'product.product', 'type_cond', product_browse.type_cond)
+    def getSelectionValue(self, cr, uid, model,fieldName,field_val):
+        return dict(self.pool.get(model).fields_get(cr, uid)[fieldName]['selection'])[field_val]
+
+
     def create(self, cr, uid, vals, context=None):
         '''
             Ecriture de la liste de prix correspondante
         '''
+        # Récupération des valeurs dans vals, et attribution par défaut sinon
         if 'tarif_choice' in vals:
             tarif_choice = vals['tarif_choice']
-                
         else:
             tarif_choice = 'blanche'
-            
         if 'promo_choice' in vals:
             promo_choice = vals['promo_choice']
         else:
             promo_choice = 'oui'
-            
         if 'mea_choice' in vals:
             mea_choice = vals['mea_choice']
         else:
             mea_choice = 'oui'
+        if 'tarif_general_choice' in vals:
+            tarif_general_choice = vals['tarif_general_choice']
+        else:
+            tarif_general_choice = 'nu01'
 
+        tarif_general_choice = self.getSelectionValue(cr, uid, 'res.partner', 'tarif_general_choice', tarif_general_choice)
+
+        # On récupère l'id de la liste de prix correspondant aux paramètres entrés dans le formulaire partner
         pricelist_ids = self.pool.get('product.pricelist').search(
                 cr, uid, [
                             ('tarif_choice', '=', tarif_choice or 'blanche'),
                             ('promo_choice', '=', promo_choice or 'non'),
                             ('mea_choice', '=', mea_choice or 'non'),
-                            ('name', 'like', 'NU01')
+                            ('name', 'ilike', tarif_general_choice)
                         ], context=context)
+        
+        # Si aucune liste de prix, on prend la liste de base par défaut
         if not pricelist_ids:
-            pricelist_ids = self.pool.get('product.pricelist').search(cr, uid, [('name', 'ilike', 'NU01')], context=context)
+            pricelist_ids = self.pool.get('product.pricelist').search(cr, uid, [('name', 'ilike', tarif_general_choice)], context=context)
         pricelist_record = self.pool.get('product.pricelist').browse(cr, uid, pricelist_ids[0],context=context)
         
         vals.update({'property_product_pricelist':pricelist_record.id})
 
         return super(iller_partner, self).create(cr, uid, vals, context=context)
-        
+
+
     def write(self, cr, uid, ids, vals, context=None):
         '''
             Ecriture de la liste de prix correspondante
@@ -62,26 +78,40 @@ class iller_partner(osv.osv):
             return super(iller_partner, self).write(cr, uid, ids, vals, context=context)
             
         for partner_record in self.browse(cr, uid, ids, context=context):
-            
+        
+            # Récupération des valeurs dans vals si existantes, sinon on prend celles du partner
             if 'tarif_choice' in vals:
                 tarif_choice = vals['tarif_choice']
             else:
                 tarif_choice = partner_record.tarif_choice
-                
             if 'promo_choice' in vals:
                 promo_choice = vals['promo_choice']
             else:
                 promo_choice = partner_record.promo_choice
-                
             if 'mea_choice' in vals:
                 mea_choice = vals['mea_choice']
             else:
                 mea_choice = partner_record.mea_choice
+            if 'tarif_general_choice' in vals:
+                tarif_general_choice = vals['tarif_general_choice']
+            else:
+                tarif_general_choice = partner_record.tarif_general_choice
+            
+            base_ids = []
+            pricelist_ids = []
 
-            # On cherche la version de base de la pricelist du partner
-            base_ids = version_obj.search(cr, uid, [('pricelist_id', '=', partner_record.property_product_pricelist.id), ('base_ok', '=', True)])
+            # Récupération de la valeur associée à la clé du field.selection et récupération de la liste correspondante
+            # FIXME : Corriger cette condition en dur 'id' <> 1 en trouvant un moyen de supprimer le doublon de NU01
+            tarif_general_choice = self.getSelectionValue(cr, uid, 'res.partner', 'tarif_general_choice', tarif_general_choice)
+            pl_id = self.pool.get('product.pricelist').search(cr, uid, [('name', '=', tarif_general_choice), ('id', '<>', 1)], context=context)
+            if pl_id:
+                # On cherche la version de base de la pricelist du partner
+                base_ids = version_obj.search(cr, uid, [('pricelist_id', '=', pl_id), ('base_ok', '=', True)])
+            
+            # Si aucune version de base n'est trouvée, on récupère celle que le partenaire a déjà par défaut
             if not base_ids:
                 base_ids = version_obj.search(cr, uid, [('pricelist_id', '=', partner_record.property_product_pricelist.id)])
+                # Si toujours aucune version de base n'est trouvée, on prend la base de NU01
                 if not base_ids:
                     # Si on a pas de base, il y a une erreur dans la pricelist (cas où 
                     # des partner existants pointent sur une ancienne liste de prix)
@@ -90,10 +120,10 @@ class iller_partner(osv.osv):
                     base_ids = version_obj.search(cr, uid, [('pricelist_id', '=', pl_id)], context=context)
                     if not base_ids:
                         return False
+                        
             base_version = base_ids[0]
             base = version_obj.browse(cr, uid, base_version, context=context)
-            pricelist_ids = []
-            # Si le tarif spécial est à oui, on regarde s'il existe un liste de prix associée à cette base
+            # Si le tarif spécial est à oui, on regarde s'il existe une liste de prix associée à ce partenaire
             if 'tarif_special_choice' in vals and vals['tarif_special_choice'] == 'oui':
                 pricelist_ids = self.pool.get('product.pricelist').search(
                         cr, uid, [
@@ -103,6 +133,13 @@ class iller_partner(osv.osv):
                                     ('mea_choice', '=', mea_choice or 'non'),
                                     ('name', 'ilike', ('CSP %s %s' % (partner_record.ref, partner_record.name)) or base.name[-4:] or 'NU01')
                                 ], context=context)
+                # Si pricelist_ids est toujours vide, on prend la liste spécial de la liste de base
+                if not pricelist_ids:
+                    pricelist_ids = self.pool.get('product.pricelist').search(
+                            cr, uid, [
+                                        ('tarif_special_choice', '=', vals['tarif_special_choice'] or 'non'),
+                                        ('name', 'ilike', ('CSP %s %s' % (partner_record.ref, partner_record.name)) or base.name[-4:] or 'NU01')
+                                    ], context=context)
             # On récupère la liste de prix correspondant aux paramètres du partenaire si aucune liste de prix spéciale n'existe
             if not pricelist_ids:
                     pricelist_ids = self.pool.get('product.pricelist').search(
@@ -110,12 +147,12 @@ class iller_partner(osv.osv):
                                         ('tarif_choice', '=', tarif_choice or 'blanche'),
                                         ('promo_choice', '=', promo_choice or 'non'),
                                         ('mea_choice', '=', mea_choice or 'non'),
-                                        ('name', 'ilike', base.name[-4:] or 'NU01')
+                                        ('name', 'ilike', base.name[-4:] or tarif_general_choice or'NU01')
                                     ], context=context)
             
-            # Si on a toujours pas de liste de prix, on applique par défaut NU01
+            # Si on a toujours pas de liste de prix, on applique par défaut celle du tarif de base choisi
             if not pricelist_ids:
-                pricelist_ids = self.pool.get('product.pricelist').search(cr, uid, [('name', 'ilike', 'NU01')], context=context)
+                pricelist_ids = self.pool.get('product.pricelist').search(cr, uid, [('name', 'ilike', tarif_general_choice)], context=context)
             
             pricelist_record = self.pool.get('product.pricelist').browse(cr, uid, pricelist_ids[0],context=context)
             
@@ -126,7 +163,8 @@ class iller_partner(osv.osv):
             vals.update({'property_product_pricelist':pricelist_record.id})
             
         return super(iller_partner, self).write(cr, uid, ids, vals, context=context)
-        
+
+
     def name_search(self, cr, uid, name, args=None, operator='ilike', context=None, limit=80):
         if not args:
             args=[]
@@ -250,6 +288,7 @@ class iller_partner(osv.osv):
         #                        n\'apparaitra plus dans les recherches sur les bon de commande'),
         'ref': fields.char('Code', size=64, required=True),
         
+        'tarif_general_choice': fields.selection([('nu01', 'NU01'), ('nu02', 'NU02'), ('nu03', 'NU03'), ('nu04', 'NU04')], string=u'Tarif de base'),
         'prix_noel_choice': fields.selection([('oui', 'Oui'), ('non', 'Non')], string=u'Prix noël'),
         'tarif_special_choice': fields.selection([('oui', 'Oui'), ('non', 'Non')], string='Tarif spécial'),
         'mea_choice': fields.selection([('oui', 'Oui'), ('non', 'Non')], string='Mise en avant'),
@@ -263,6 +302,7 @@ class iller_partner(osv.osv):
         'reglement': lambda *a: 'virement',
         'facturation_bl': lambda *a: 'm',
         'lang': lambda *a: 'fr_FR',
+        'tarif_general_choice': lambda *a: 'nu01',
         'prix_noel_choice': lambda *a: 'oui',
         'tarif_special_choice': lambda *a: 'non',
         'mea_choice': lambda *a: 'oui',

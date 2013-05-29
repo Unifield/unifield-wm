@@ -41,6 +41,7 @@
             <field name="arch" type="xml">
                 <data>
                 <xpath expr="//group[@name='sale_list']/field[@name='property_product_pricelist']" position="replace">
+                    <field name="tarif_general_choice" />
                     <field name="prix_noel_choice" />
                     <field name="tarif_special_choice" />
                     <field name="mea_choice" />
