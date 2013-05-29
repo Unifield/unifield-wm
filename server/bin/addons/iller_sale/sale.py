@@ -73,19 +73,13 @@ class iller_sale_line(osv.osv):
                 comment_obj.create(cr, uid, {'comment': data.get('notes'), 'partner_id': partner_id, 'product_id': data.get('product_id')})
 
         return super(iller_sale_line, self).create(cr, uid, data, context={})
-
-    def get_type_cond(self, type_cond):
-        
-        #TODO Trouver un moyen de récupérer la valeur "string" d'une fields.selection
-        if type_cond == '0000':
-            return 'PIECE'
-        elif type_cond == '0001':
-            return 'KILO'
-        elif type_cond == '0002':
-            return 'CARTON'
-        elif type_cond == '0003':
-            return 'BARQUETTE'
-        return False
+    
+    # Fonction générique permettant de récupérer le champ name d'un field.selection
+    # en lui passant le nom de l'objet contenant le field.selection, le nom du champ en question
+    # et la valeur étant la clé du field.selection pour laquelle on veut récupérer le nom
+    # Ex : getSelectionValue(cr, uid, 'product.product', 'type_cond', product_browse.type_cond)
+    def getSelectionValue(self, cr, uid, model,fieldName,field_val):
+        return dict(self.pool.get(model).fields_get(cr, uid)[fieldName]['selection'])[field_val]
 
     def product_id_change(self, cr, uid, ids, pricelist, product, qty=0,
           uom=False, qty_uos=0, uos=False, name='', partner_id=False,
@@ -108,7 +102,7 @@ class iller_sale_line(osv.osv):
         type_cond = code_affect = ''
         if product:
             product_id = self.pool.get('product.product').browse(cr, uid, product)
-            type_cond = self.get_type_cond(product_id.type_cond)
+            type_cond = self.getSelectionValue(cr, uid, 'product.product', 'type_cond', product_id.type_cond)
             code_affect = product_id.code_affectation
             
         res['value'].update({
@@ -123,15 +117,15 @@ class iller_sale_line(osv.osv):
 
         if isinstance(ids, (int, long)):
             ids = [ids]
-                    
+
         res = {}
-                    
+
         # Parcours des lignes de vente
         for line in self.browse(cr, uid, ids, context=context):
 
             res[line.id] = {
                     'type_prep': line.product_id.code_affectation,
-                    'type_cond': self.get_type_cond(line.product_id.type_cond),
+                    'type_cond': self.getSelectionValue(cr, uid, 'product.product', 'type_cond', product_id.type_cond),
                 }
 
         return res
@@ -151,12 +145,16 @@ class iller_sale(osv.osv):
     def onchange_partner_id(self, cr, uid, ids, part, context=None):
         
         res = super(iller_sale, self).onchange_partner_id(cr, uid, ids, part, context=context)
-        partner = self.pool.get('res.partner').browse(cr, uid, part, context=context)
+        
+        # Vérification que ce qui est entré dans partenaire est correct
+        if not isinstance(part, bool):
+            partner = self.pool.get('res.partner').browse(cr, uid, part, context=context)
 
-        val = {
-            'code': partner.ref
-        }
-        res['value'].update(val)
+            val = {
+                'code': partner.ref
+            }
+            res['value'].update(val)
+        
         return res
 
     def _get_code_client(self, cr, uid, ids, field_name, arg, context=None):
