@@ -33,7 +33,6 @@
 
             </field>
         </record>
-        </record>
 
         <record id="inherit_res_partner_form_view2" model="ir.ui.view">
             <field name="name">inherit.res.partner.form.view2</field>
