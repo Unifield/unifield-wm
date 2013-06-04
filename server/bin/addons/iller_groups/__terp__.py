@@ -19,9 +19,11 @@
 #
 ##############################################################################
 
-##### Ce module génère beaucoup de dépendances, en cas de nouvelle base, commenter toutes les dépendances
-##### sauf base, account, et sale ainsi que le fichier ir.model.access.csv, puis décommenter ir.model.access.csv
-##### et mettre à jour le module (il est possible de devoir installer certains modules connexes à la main)
+##### Ce module génère beaucoup de dépendances, en cas de nouvelle base, commenter toutes les dépendances 
+##### ainsi que le fichier ir.model.access.csv, sauf base, subscription, account, et sale, et lancer l'install ou -u base
+##### Il faut ensuite décommenter ir.model.access.csv (les dépendances seront installées)
+##### et mettre à jour le module. Si des problèmes persistent avec iller_tournee, commenter dans
+##### iller_tournee tout ce qui attrait à la sécurité, lancer une mise à jour et décommenter
 {
     'name': 'Gestion des droits pour ILLER',
     'version': '1.0',
@@ -35,6 +37,8 @@
     'depends': [
         'base', 
         'account',
+        'crm',
+        'document',
         'sale',
         'subscription', 
 
