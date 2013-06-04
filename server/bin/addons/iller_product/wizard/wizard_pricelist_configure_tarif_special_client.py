@@ -431,7 +431,7 @@ class wizard_configure_tarif_special_client(wizard.interface):
                         data['form']['end_date'] = promo.end_date
                         products = data['form']['products'] 
                         for product in promo.product_ids:
-                            products.append((0,0,{'sequence' : 3, 'prix_vente_initial': 0.00, 'product_id': product.id, 'prix_special': 0.00}))
+                            products.append((0,0,{'sequence' : 3, 'prix_vente_initial': 0.00, 'product_id': product.product_id.id, 'prix_special': 0.00}))
                         data['form']['products'] = products
                         
                         if not 'tarif_speciaux_id' in context:
@@ -465,7 +465,7 @@ class wizard_configure_tarif_special_client(wizard.interface):
                         data['form']['start_date'] = promo.start_date
                         products = data['form']['products']
                         for product in promo.product_ids:
-                            products.append((0,0,{'sequence' : 3, 'prix_vente_initial': 0.00, 'product_id': product.id, 'prix_special': 0.00}))
+                            products.append((0,0,{'sequence' : 3, 'prix_vente_initial': 0.00, 'product_id': product.product_id.id, 'prix_special': 0.00}))
                         data['form']['products'] = products
                         
                         if not 'tarif_speciaux_id' in context:
@@ -498,7 +498,7 @@ class wizard_configure_tarif_special_client(wizard.interface):
                         data['form']['end_date'] = promo.end_date
                         products = data['form']['products']
                         for product in promo.product_ids:
-                            products.append((0,0,{'sequence' : 3 , 'prix_vente_initial': 0.00, 'product_id': product.id, 'prix_special': 0.00}))
+                            products.append((0,0,{'sequence' : 3 , 'prix_vente_initial': 0.00, 'product_id': product.product_id.id, 'prix_special': 0.00}))
                         data['form']['products'] = products
                         
                         if not 'tarif_speciaux_id' in context:
@@ -531,7 +531,7 @@ class wizard_configure_tarif_special_client(wizard.interface):
                         data['form']['title'] = nom + " + " + promo.name
                         products = data['form']['products']
                         for product in promo.product_ids:
-                            products.append((0,0,{'sequence' : 3, 'prix_vente_initial': 0.00, 'product_id': product.id, 'prix_special': 0.00}))
+                            products.append((0,0,{'sequence' : 3, 'prix_vente_initial': 0.00, 'product_id': product.product_id.id, 'prix_special': 0.00}))
                         data['form']['products'] = products
                         
                         if not 'tarif_speciaux_id' in context:
