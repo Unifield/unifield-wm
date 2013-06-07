@@ -28,7 +28,7 @@
     "website": "http://www.tempo-consulting.fr",
     "category" : "Enterprise Specific Modules/Iller",
     "depends" : ["iller_partner", "sale", "iller_tournee", 
-                 "lately_saled_products", 'account_group_lines',
+                 "lately_saled_products",
                  "iller_product",
                 ],
     "init_xml" : [],
