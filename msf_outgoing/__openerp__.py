@@ -61,8 +61,8 @@
     ],
     "demo_xml": ['data/msf_outgoing_data.xml',
                  ],
-    'test': ['test/data.yml',
-             'test/msf_outgoing.yml'
+    'test': [
+        'test/check_stock_move.yml'
     ],
     'installable': True,
 }
