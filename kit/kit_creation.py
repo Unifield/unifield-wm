@@ -1216,7 +1216,7 @@ class stock_move(osv.osv):
                 'hidden_asset_check': fields.function(_vals_get_kit_creation, method=True, type='boolean', string='Hidden Asset Check', multi='get_vals_kit_creation', store=False, readonly=True),
                 'hidden_creation_state': fields.function(_vals_get_kit_creation, method=True, type='selection', selection=KIT_CREATION_STATE, string='Hidden Creation State', multi='get_vals_kit_creation', store=False, readonly=True),
                 'assigned_qty_stock_move': fields.function(_vals_get_kit_creation, method=True, type='float', string='Assigned Qty', multi='get_vals_kit_creation', store=False, readonly=True),
-                'hidden_creation_qty_stock_move': fields.function(_vals_get_kit_creation, method=True, type='integer', string='Hidden Creation Qty', multi='get_vals_kit_creation', store=False, readonly=True),
+                'hidden_creation_qty_stock_move': fields.function(_vals_get_kit_creation, method=True, type='float', string='Hidden Creation Qty', multi='get_vals_kit_creation', store=False, readonly=True),
                 }
     
     _defaults = {'to_consume_id_stock_move': False,
