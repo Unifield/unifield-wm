@@ -431,7 +431,8 @@ class wizard_configure_tarif_special_client(wizard.interface):
                         data['form']['end_date'] = promo.end_date
                         products = data['form']['products'] 
                         for product in promo.product_ids:
-                            products.append((0,0,{'sequence' : 3, 'prix_vente_initial': 0.00, 'product_id': product.product_id.id, 'prix_special': 0.00}))
+                            
+                            products.append((0,0,{'sequence' : 3, 'prix_vente_initial': 0.00, 'product_id': product.product_id.id, 'prix_special': 0.00, 'base_pricelist_id': base_version}))
                         data['form']['products'] = products
                         
                         if not 'tarif_speciaux_id' in context:
@@ -473,7 +474,7 @@ class wizard_configure_tarif_special_client(wizard.interface):
                             if pl_version:
                                 version_obj.write(cr, uid, [pl_version], {'active': True, 'tarifs_specs_id':tarifs_speciaux_id})
                                 pl_new_items = self._create_item(cr, uid, data, pl_version, context=context)
-                                item_list += pl_new_items                                
+                                item_list += pl_new_items
                         else:
                             # Récupération de la version existante pour tarifs spéciaux existant
                             pl_version = version_obj.search(cr, uid, [('tarifs_specs_id','=',tarifs_speciaux_id)], context=context)

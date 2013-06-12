@@ -18,6 +18,25 @@
             </field>
         </record>
         
+    <!-- Wizard pour la génération du fichier excel comprenant les account move -->
+        <record model="ir.ui.view" id="wizard_account_move_excel_form">
+            <field name='name'>wizard.account.move.excel.form</field>
+            <field name='model'>wizard.account.move.excel</field>
+            <field name='type'>form</field>
+            <field name='arch' type='xml'>
+                <form string="Générer fichier pour écritures comptables">
+                    <label string="Cet assistant va lancer le processus de génération du fichier excel pour les écritures comptables en arrière plan. Cela prendra de quelques minutes à quelques heures suivant la quantité de factures et de lignes à traiter" colspan="4"/>
+<!--
+                    <newline />
+                    <field name="file_excel" />
+-->
+                    <newline />
+                    <button string='Ok' name='action_make_file_excel' type='object' icon='gtk-apply' colspan="2"/>
+                    <button string='Cancel' special='cancel' icon='gtk-cancel' colspan="2"/>
+                </form>
+            </field>
+        </record>
+        
         <record id="iller_invoice_view_form" model="ir.ui.view">
             <field name="name">iller.invoice.view.form</field>
             <field name="model">account.invoice</field>
@@ -40,10 +59,20 @@
             view_mode='form'
             view_type='form'
             target='new' />
+            
+        <act_window id="action_make_account_move_excel"
+            name="Générer fichier pour écritures comptables"
+            res_model="wizard.account.move.excel"
+            view_mode='form'
+            view_type='form'
+            target='new' />
 
         <!-- Menus -->
         <menuitem id="menu_makes_invoices"
         action="action_make_invoices"
+        parent="account.menu_finance" />
+        <menuitem id="menu_makes_account_move_excel"
+        action="action_make_account_move_excel"
         parent="account.menu_finance" />
     </data>
 </openerp>
