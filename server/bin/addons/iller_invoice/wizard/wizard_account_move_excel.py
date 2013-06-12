@@ -110,15 +110,26 @@ class wizard_account_move_excel(wizard.interface):
                 #if check_ligne(ligne, fichier):
                 fichier += ''.join(type_compte_ligne[key]) + '\r\n'
             
+            # On notifie que les écritures comptable ont bien été écrites pour cette facture
             obj_invoice.write(cr, uid, invoice.id, {'exported':True}, context=context)
             fichier += '\r\n'
-            print fichier, 'fichier'
 
 #TODO On écrit le fichier et on l'envoie au client suivant son choix rajout des boutons adéquat
-#TODO Pointer sur le fichier créé via le open ?
-        # On met à jour les variables du fichier
-        data['name'] = nom_fichier
-        data['file'] = base64.encodestring(fichier.encode("utf-8"))
+        
+        try:
+            # On écrit le fichier avec le contenu généré (en mode ajout)
+            export_file.write(fichier.encode("utf-8"))
+            # On met à jour les variables du fichier
+            data['name'] = nom_fichier
+            # Replace le pointeur au début du fichier, car le write semble le positionner à la fin, 
+            # du coup, lorsqu'on lit à nouveau le fichier, il ne lit rien
+            export_file.seek(0)
+            data['file'] = base64.encodestring(export_file.read())
+        except IOError as e:
+            print "I/O error({0}): {1}".format(e.errno, e.strerror)
+        finally:
+            export_file.close()
+
         # On crée un fichier attaché au niveau du serveur récupérable depuis la gestion des documents
         attach_id = obj_attachment.search(cr, uid, [('datas_fname', '=', nom_fichier)], context=context)
         # Si le fichier attaché existe déjà on écrit les modifications
@@ -129,7 +140,6 @@ class wizard_account_move_excel(wizard.interface):
             obj_attachment.write(cr, uid, attach_id, vals, context=context)
         # Sinon on le crée
         else:
-            print data
             vals = {
                 'name': 'Export comptable',
                 'datas': data['file'],
@@ -137,13 +147,8 @@ class wizard_account_move_excel(wizard.interface):
                 'description': u'Fichier csv avec les écritures comptables des factures',
             }
             obj_attachment.create(cr, uid, vals)
-        # On écrit le fichier avec le contenu généré (en mode ajout)
-        export_file.write(fichier.encode("utf-8"))
-        export_file.close()
-#TODO Rajout try catch + controle de taille à l'écriture ?
-#TODO refactoriser 
-#TODO Voir s'il y a moyen d'ajouter des lignes via ir_attachment sinon utiliser le contenu de export_file
 
+#TODO refactoriser 
         return data
 
     states = {
