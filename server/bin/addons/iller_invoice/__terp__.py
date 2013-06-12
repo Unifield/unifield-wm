@@ -34,6 +34,7 @@
     "init_xml" : [],
     "update_xml" : [
         'invoice_view.xml',
+        'invoice_wizard.xml',
         'commission_view.xml',
         'commission_data.xml',
         'security/iller_invoice_security.xml',

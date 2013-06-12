@@ -21,114 +21,82 @@
 #
 ##############################################################################
 
-from osv import osv
-from osv import fields
-from datetime import datetime, timedelta
+from osv import osv, fields
+from datetime import datetime
 from tools.translate import _
-import calendar
-import threading
 import pooler
 import base64
 import time
-from tools import ustr
+import wizard
+import os
+
+_form_type = """<?xml version="1.0" encoding="utf-8" ?>
+<form string="Choix du fichier">
+    <field name="date" required="1" />
+</form>"""
+
+_field_type = {
+    'date': {'string': u'Heure de l\'export quotidien', 'type': 'time', 'required': True},
+}
+
+_get_form = """<?xml version="1.0" encoding="utf-8" ?>
+<form string="">
+    <field name="file" />
+</form>"""
+
+_field_get = {
+    'file': {'string': 'Fichier', 'type': 'binary'},
+    'name': {'string': 'Nom', 'type': 'char'},
+}
 
 
-class wizard_account_move_excel(osv.osv_memory):
-    _name = 'wizard.account.move.excel'
+class wizard_account_move_excel(wizard.interface):
 
-    #~ _columns = {
-        #~ 'data': fields.binary('File', readonly=True),
-        #~ 'name': fields.char('Filename', 16, readonly=True),
-        #~ 'state': fields.selection( ( ('choose','choose'),   # choose date
-             #~ ('get','get'),         # get the file
-           #~ ) ),
-    #~ }
+    def _action_make_file_excel(self, cr, uid, data, context=None):
 
-    #~ def attachment_tree_view(self, cr, uid, ids, context):
-        #~ domain = [
-            #~ ('res_model', '=', 'project.task'), ('res_id', 'in', ids)
-        #~ ]
-        #~ res_id = ids and ids[0] or False
-        #~ return {
-            #~ 'name': _('Attachments'),
-            #~ 'domain': domain,
-            #~ 'res_model': 'ir.attachment',
-            #~ 'type': 'ir.actions.act_window',
-            #~ 'view_id': False,
-            #~ 'view_mode': 'tree,form',
-            #~ 'view_type': 'form',
-            #~ 'limit': 80,
-            #~ 'context': "{'default_res_model': '%s','default_res_id': %d}" % (self._name, res_id)
-        #~ }
-    def get_file(self, cr, uid, ids, context={}):
-        """
-        Génère un binaire 'hote.txt' contenant des informations sur les découpes à faire pour une commande donnée.
-        Ceci afin de l'exporter vers Bizerba qui affiche lesdites informations.
-        """
-        # Préparation de variables
-        nom_fichier = 'hote.txt'
-        attachement_obj = self.pool.get('ir.attachment')
-        sale_order_obj = self.pool.get('sale.order')
-        sol_obj = self.pool.get('sale.order.line')
-        total = 0
-        # Parcours de chaque commande
-        for sale_order in sale_order_obj.browse(cr, uid, ids):
-            chaine = ''
-            lines = sale_order_obj.read(cr, uid, sale_order.id, ['order_line']).get('order_line', False)
-            # Parcours de chaque ligne
-            num_ligne = 1
-            for sol_id in lines:
-                # Vérification si découpe, si oui, alors on génère une chaîne de caractère
-                if sol_obj.browse(cr, uid, sol_id, context=context).product_id.code_affectation == 'DECP':
-                    # Génération de la chaine de la ligne de commande
-                    chaine_ligne = self.gen_bizerba_string(cr, uid, sol_id, num_ligne, context=context)
-                    # Ajout au fichier de commande
-                    chaine += chaine_ligne
-                    chaine += "\n"
-                    num_ligne += 1
-                    total += 1
-            
-            # Écriture de la chaine créée et association avec la commande si jamais on a plus d'une ligne
-            if total > 0:
-                data = base64.encodestring(chaine.encode("utf-8"))
-                vals = {
-                    'name': 'Fichier bizerba',
-                    'datas': data,
-                    'datas_fname': nom_fichier,
-                    'description': 'Fichier prévu pour le PC Bizerba',
-                    'res_model': 'sale.order',
-                    'res_id': sale_order.id,
-                }
-                # Création de l'élément "fichier joint" dans OpenERP
-                attachement_obj.create(cr, uid, vals)
-        return True
+        # Définition des objets
+        pool = pooler.get_pool(cr.dbname)
+        obj_attachment = pool.get('ir.attachment')
+        obj_invoice = pool.get('account.invoice')
+        nom_fichier = 'export_comptable.csv'
+        path_fichier = './'
+        path = "%s%s" % (path_fichier, nom_fichier)
+
+#TODO Rajouter un filtre sur la date pour récupérer que les factures depuis la dernière écriture -> OK sur export_file
+        # On récupère toutes les factures validées et non exportées
+        invoices_ids = obj_invoice.search(cr, uid, [('state', '=', 'open'), ('exported', '=', False)], context=context)
+
+#TODO Sécuriser un peu, vérifier si aucune facture correspond : on quitte (rajout message erreur/warning ?)
+        #~ if not invoices_ids:
+            #~ return {'type': 'ir.action_act_window.close'} 
+        invoices_records = obj_invoice.browse(cr, uid, invoices_ids, context=context)
+
+        # On ouvre le fichier en mode ajout
+        export_file = open(path, "a+")
+        statinfo = os.stat(path) # In bytes
         
-    def action_make_file_excel(self, cr, uid, ids, context=None):
-        # Pour le fichier : utiliser le wizard 
-        
-        # On récupère toutes les factures validées
-        invoices_ids = self.pool.get('account.invoice').search(cr, uid, [('state', '=', 'open')], context=context)
-        invoices_records = self.pool.get('account.invoice').browse(cr, uid, invoices_ids, context=context)
-
-        # Création ou lecture du fichier
-        fichier = u'Date;Référence partenaire;Code compte financier;Débit;Crédit\n'
+        if(statinfo.st_size > 1):
+            # La taille est supérieure à 1 donc on n'initialise pas avec l'entête
+            fichier = ''
+        else:
+            # Initialisation de l'entête du tableau
+            fichier = u'Date;Facture;Référence partenaire;Code compte financier;Débit;Crédit\n'
 
         # Pour chaque facture on va chercher les écritures comptables
         for invoice in invoices_records:
+            # Dictionnaire permettant d'associer une ligne à un type de compte
             type_compte_ligne = {}
             #Construction de la ligne du fichier
             for line_id in invoice.move_id.line_id:
-
                 # Génération de la ligne
                 ligne = ''
-                ligne += ''.join(line_id.date) + ';'
-                ligne += ''.join(line_id.invoice) + ';'
-                ligne += ''.join(line_id.partner_id.ref) + ';'
-                ligne += ''.join(str(line_id.account_id.code)) + ';'
-                ligne += ''.join(str(line_id.debit)) + ';'
-                ligne += ''.join(str(line_id.credit)) + ';'
-                print ligne, 'ligne', line_id.account_id.type
-                
+                ligne += "%s;" %(line_id.date,)
+                ligne += "%s;" %(line_id.invoice.number,)
+                ligne += "%s;" %(line_id.partner_id.ref,)
+                ligne += "%s;" %(line_id.account_id.code,)
+                ligne += "%s;" %(line_id.debit,)
+                ligne += "%s;" %(line_id.credit,)
+
                 # On vérifie le type de compte de la ligne
                 if line_id.account_id.type == 'other':
                     type_compte_ligne['999other%s' % (str(line_id.id),)] = ligne
@@ -137,15 +105,68 @@ class wizard_account_move_excel(osv.osv_memory):
 
             # Tri des lignes par rapport au type de compte
             for key in sorted(type_compte_ligne.iterkeys()):
+#TODO Créer une fonction qui check si la ligne à écrire est déjà présente
                 # On vérifie si l'écriture est déjà saisie 
-                #~ if check_ligne(ligne, fichier):
+                #if check_ligne(ligne, fichier):
                 fichier += ''.join(type_compte_ligne[key]) + '\r\n'
-
+            
+            obj_invoice.write(cr, uid, invoice.id, {'exported':True}, context=context)
             fichier += '\r\n'
             print fichier, 'fichier'
-            # On génère le fichier csv séparé par des point virgules
-        return False
 
-wizard_account_move_excel()
+#TODO On écrit le fichier et on l'envoie au client suivant son choix rajout des boutons adéquat
+#TODO Pointer sur le fichier créé via le open ?
+        # On met à jour les variables du fichier
+        data['name'] = nom_fichier
+        data['file'] = base64.encodestring(fichier.encode("utf-8"))
+        # On crée un fichier attaché au niveau du serveur récupérable depuis la gestion des documents
+        attach_id = obj_attachment.search(cr, uid, [('datas_fname', '=', nom_fichier)], context=context)
+        # Si le fichier attaché existe déjà on écrit les modifications
+        if attach_id:
+            vals = {
+                'datas': data['file'],
+            }
+            obj_attachment.write(cr, uid, attach_id, vals, context=context)
+        # Sinon on le crée
+        else:
+            print data
+            vals = {
+                'name': 'Export comptable',
+                'datas': data['file'],
+                'datas_fname': nom_fichier,
+                'description': u'Fichier csv avec les écritures comptables des factures',
+            }
+            obj_attachment.create(cr, uid, vals)
+        # On écrit le fichier avec le contenu généré (en mode ajout)
+        export_file.write(fichier.encode("utf-8"))
+        export_file.close()
+#TODO Rajout try catch + controle de taille à l'écriture ?
+#TODO refactoriser 
+#TODO Voir s'il y a moyen d'ajouter des lignes via ir_attachment sinon utiliser le contenu de export_file
+
+        return data
+
+    states = {
+        'init': {
+            'actions': [],
+            'result': {
+                'type': 'form',
+                'arch': _form_type,
+                'fields': _field_type,
+                'state': [('end', 'Annuler'), ('get', 'Générer le fichier')],
+            },
+        },
+        'get': {
+            'actions': [_action_make_file_excel],
+            'result': {
+                'type': 'form',
+                'arch': _get_form,
+                'fields': _field_get,
+                'state': [('end', 'Sortir')],
+            },
+        },
+    }
+
+wizard_account_move_excel('wizard.account.move.excel')
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

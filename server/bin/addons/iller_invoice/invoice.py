@@ -87,7 +87,12 @@ class account_invoice(osv.osv):
         
     _columns = {
         'code': fields.function(_get_code_client, type='char', method=True, string='Code', readonly=True),
+        'exported': fields.boolean(string=u'Exporté', readonly=True),
         
+    }
+    
+    _default = {
+        'exported': lambda *a: False,
     }
 
     def onchange_partner_id(self, cr, uid, ids, type_partner=None, partner_id=None, date_invoice=None, payment_term=None, context={}):
@@ -105,3 +110,4 @@ account_invoice()
 
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+    
