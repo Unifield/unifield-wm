@@ -98,7 +98,7 @@
 !define DEFAULT_POSTGRESQL_USERNAME 'openpg'
 !define DEFAULT_POSTGRESQL_PASSWORD 'openpgpwd'
 
-!define PGVERSION '8.4.16-1'
+!define PGVERSION '8.4.17-1'
 
 Name '${DISPLAY_NAME}'
 Caption "${PRODUCT_NAME} ${VERSION} Setup"
