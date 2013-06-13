@@ -66,8 +66,6 @@ class iller_account_invoice_line(osv.osv):
 iller_account_invoice_line()
 
 
-
-
 class account_invoice(osv.osv):
     _name = "account.invoice"
     _inherit = "account.invoice"

@@ -22,6 +22,6 @@
 ##############################################################################
 
 import wizard_picking_to_invoice
-import wizard_account_move_excel
+import wizard_account_move_export
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
