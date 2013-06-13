@@ -229,6 +229,9 @@ class message_received(osv.osv):
         execution_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         self.write(cr, uid, ids, {'execution_date' : execution_date}, context=context)
         for message in self.browse(cr, uid, ids, context=context):
+            if message.run:
+                continue
+            
             cr.execute("SAVEPOINT exec_message")
             model, method = self.get_model_and_method(message.remote_call)
             arg = self.get_arg(message.arguments)
