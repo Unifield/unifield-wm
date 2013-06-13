@@ -49,87 +49,56 @@ _field_get = {
     'name': {'string': 'Nom', 'type': 'char'},
 }
 
+_no_lines_form = """<?xml version="1.0" encoding="utf-8" ?>
+    <form string="Rien à exporter">
+    <label colspan="4" string="Aucune facture n'a de lignes à exporter !" />
+    </form>
+"""
+
+_no_file_form = """<?xml version="1.0" encoding="utf-8" ?>
+    <form string="Aucun fichier">
+    <label colspan="4" string="Le fichier csv n'a jamais été créé ou a été déplacé !" />
+    </form>
+"""
+
+nom_fichier = 'export_comptable.csv'
+path_fichier = './'
 
 class wizard_account_move_excel(wizard.interface):
 
-    def _action_make_file_excel(self, cr, uid, data, context=None):
+    """
+        Permet de vérifier qu'il y a bien des factures à exporter
+    """
+    def _valid_form(self, cr, uid, data, context=None):
 
-        # Définition des objets
+        pool_obj = pooler.get_pool(cr.dbname)
+        obj_invoice = pool_obj.get('account.invoice')
+        # On regarde s'il y a des factures à exporter
+        invoices_ids = obj_invoice.search(cr, uid, [('state', '=', 'open'), ('exported', '=', False)], context=context)
+        # S'il n'y en a pas, on retourne un message
+        if not invoices_ids:
+            return 'no_lines'
+        # S'il y en a, on sauvegarde les ids des factures dans data pour éviter de refaire une requête après
+        data['invoices_ids'] = invoices_ids
+        return 'set'
+
+    """
+        Permet de vérifier qu'il y a bien un fichier à télécharger
+    """
+    def _verif_file(self, cr, uid, data, context=None):
+
+        path = "%s%s" % (path_fichier, nom_fichier)
+        if not os.path.isfile(path):
+            return 'no_file'
+        return 'get'
+
+    """
+        Permet de générer la pièce jointe du fichier export csv
+    """
+    def _generate_attachment(self, cr, uid, data, nom_fichier, context=None):
+
         pool = pooler.get_pool(cr.dbname)
         obj_attachment = pool.get('ir.attachment')
-        obj_invoice = pool.get('account.invoice')
-        nom_fichier = 'export_comptable.csv'
-        path_fichier = './'
-        path = "%s%s" % (path_fichier, nom_fichier)
-
-#TODO Rajouter un filtre sur la date pour récupérer que les factures depuis la dernière écriture -> OK sur export_file
-        # On récupère toutes les factures validées et non exportées
-        invoices_ids = obj_invoice.search(cr, uid, [('state', '=', 'open'), ('exported', '=', False)], context=context)
-
-#TODO Sécuriser un peu, vérifier si aucune facture correspond : on quitte (rajout message erreur/warning ?)
-        #~ if not invoices_ids:
-            #~ return {'type': 'ir.action_act_window.close'} 
-        invoices_records = obj_invoice.browse(cr, uid, invoices_ids, context=context)
-
-        # On ouvre le fichier en mode ajout
-        export_file = open(path, "a+")
-        statinfo = os.stat(path) # In bytes
-        
-        if(statinfo.st_size > 1):
-            # La taille est supérieure à 1 donc on n'initialise pas avec l'entête
-            fichier = ''
-        else:
-            # Initialisation de l'entête du tableau
-            fichier = u'Date;Facture;Référence partenaire;Code compte financier;Débit;Crédit\n'
-
-        # Pour chaque facture on va chercher les écritures comptables
-        for invoice in invoices_records:
-            # Dictionnaire permettant d'associer une ligne à un type de compte
-            type_compte_ligne = {}
-            #Construction de la ligne du fichier
-            for line_id in invoice.move_id.line_id:
-                # Génération de la ligne
-                ligne = ''
-                ligne += "%s;" %(line_id.date,)
-                ligne += "%s;" %(line_id.invoice.number,)
-                ligne += "%s;" %(line_id.partner_id.ref,)
-                ligne += "%s;" %(line_id.account_id.code,)
-                ligne += "%s;" %(line_id.debit,)
-                ligne += "%s;" %(line_id.credit,)
-
-                # On vérifie le type de compte de la ligne
-                if line_id.account_id.type == 'other':
-                    type_compte_ligne['999other%s' % (str(line_id.id),)] = ligne
-                else:
-                    type_compte_ligne['000%s%s' % (line_id.account_id.type, str(line_id.id))] = ligne
-
-            # Tri des lignes par rapport au type de compte
-            for key in sorted(type_compte_ligne.iterkeys()):
-#TODO Créer une fonction qui check si la ligne à écrire est déjà présente
-                # On vérifie si l'écriture est déjà saisie 
-                #if check_ligne(ligne, fichier):
-                fichier += ''.join(type_compte_ligne[key]) + '\r\n'
-            
-            # On notifie que les écritures comptable ont bien été écrites pour cette facture
-            obj_invoice.write(cr, uid, invoice.id, {'exported':True}, context=context)
-            fichier += '\r\n'
-
-#TODO On écrit le fichier et on l'envoie au client suivant son choix rajout des boutons adéquat
-        
-        try:
-            # On écrit le fichier avec le contenu généré (en mode ajout)
-            export_file.write(fichier.encode("utf-8"))
-            # On met à jour les variables du fichier
-            data['name'] = nom_fichier
-            # Replace le pointeur au début du fichier, car le write semble le positionner à la fin, 
-            # du coup, lorsqu'on lit à nouveau le fichier, il ne lit rien
-            export_file.seek(0)
-            data['file'] = base64.encodestring(export_file.read())
-        except IOError as e:
-            print "I/O error({0}): {1}".format(e.errno, e.strerror)
-        finally:
-            export_file.close()
-
         # On crée un fichier attaché au niveau du serveur récupérable depuis la gestion des documents
         attach_id = obj_attachment.search(cr, uid, [('datas_fname', '=', nom_fichier)], context=context)
         # Si le fichier attaché existe déjà on écrit les modifications
@@ -146,11 +115,131 @@ class wizard_account_move_excel(wizard.interface):
                 'datas_fname': nom_fichier,
                 'description': u'Fichier csv avec les écritures comptables des factures',
             }
-            obj_attachment.create(cr, uid, vals)
+            obj_attachment.create(cr, uid, vals, context=context)
 
-#TODO refactoriser 
+    """
+        Permet d'écrire le contenu du fichier
+    """
+    def _write_file(self, cr, uid, data, export_file, nom_fichier, fichier, context=None):
+
+        try:
+            # On écrit le fichier avec le contenu généré (en mode ajout)
+            export_file.write(fichier.encode("utf-8"))
+            # On met à jour les variables du fichier
+            data['name'] = nom_fichier
+            # Replace le pointeur au début du fichier, car le write semble le positionner à la fin, 
+            # du coup, lorsqu'on lit à nouveau le fichier, il ne lit rien
+            export_file.seek(0)
+            data['file'] = base64.encodestring(export_file.read())
+        except IOError as e:
+            print "I/O error({0}): {1}".format(e.errno, e.strerror)
+        finally:
+            export_file.close()
+
+    """
+        Permet de générer une ligne en fonction d'un browse record d'account move line
+    """
+    def _generate_line(self, cr, uid, data, line_id, context=None):
+        # Génération de la ligne
+        ligne = ''
+        ligne += "%s;" %(line_id.date,)
+        ligne += "%s;" %(line_id.invoice.number,)
+        ligne += "%s;" %(line_id.partner_id.ref,)
+        ligne += "%s;" %(line_id.account_id.code,)
+        ligne += "%s;" %(line_id.debit,)
+        ligne += "%s;" %(line_id.credit,)
+
+        return ligne
+
+    """
+        Permet de récupérer les factures à exporter
+    """
+    def _get_invoices_records(self, cr, uid, data, context=None):
+
+        pool = pooler.get_pool(cr.dbname)
+        obj_invoice = pool.get('account.invoice')
+        if 'invoices_ids' in data and data['invoices_ids']:
+            invoices_ids = data['invoices_ids']
+            # On met à False une fois utilisé par sécurité
+            data['invoices_ids'] = False
+        else:
+            # On récupère toutes les factures validées et non exportées
+            invoices_ids = obj_invoice.search(cr, uid, [('state', '=', 'open'), ('exported', '=', False)], context=context)
+
+        return obj_invoice.browse(cr, uid, invoices_ids, context=context)
+
+    """
+        Permet générale permettant de générer et télécharger le fichier
+    """
+    def _action_make_file_excel(self, cr, uid, data, context=None):
+
+        # Définition des objets
+        pool = pooler.get_pool(cr.dbname)
+        obj_invoice = pool.get('account.invoice')
+
+        path = "%s%s" % (path_fichier, nom_fichier)
+
+        invoices_records = self._get_invoices_records(cr, uid, data, context=context)
+
+        # On ouvre le fichier en mode ajout
+        export_file = open(path, "a+")
+        statinfo = os.stat(path) # In bytes
+
+        if(statinfo.st_size > 1):
+            # La taille est supérieure à 1 donc on n'initialise pas avec l'entête
+            fichier = ''
+        else:
+            # Initialisation de l'entête du tableau
+            fichier = u'Date;Facture;Référence partenaire;Code compte financier;Débit;Crédit\n'
+
+        # Pour chaque facture on va chercher les écritures comptables
+        for invoice in invoices_records:
+            # Dictionnaire permettant d'associer une ligne à un type de compte
+            type_compte_ligne = {}
+            #Construction de la ligne du fichier
+            for line_id in invoice.move_id.line_id:
+
+                ligne = self._generate_line(cr, uid, data, line_id, context=context)
+
+                # On vérifie le type de compte de la ligne
+                if line_id.account_id.type == 'other':
+                    type_compte_ligne['999other%s' % (str(line_id.id),)] = ligne
+                else:
+                    type_compte_ligne['000%s%s' % (line_id.account_id.type, str(line_id.id))] = ligne
+
+            # Tri des lignes par rapport au type de compte
+            for key in sorted(type_compte_ligne.iterkeys()):
+                fichier += ''.join(type_compte_ligne[key]) + '\r\n'
+            
+            # On notifie que les écritures comptable ont bien été écrites pour cette facture
+            obj_invoice.write(cr, uid, invoice.id, {'exported':True}, context=context)
+            fichier += '\r\n'
+
+        self._write_file(cr, uid, data, export_file, nom_fichier, fichier,  context=context)
+
+        self._generate_attachment(cr, uid, data, nom_fichier, context=context)
+
         return data
 
+    def _action_schedule(self, cr, uid, data, context=None):
+        #Gestion du cron
+        return {}
+
+    def _action_get_file_excel(self, cr, uid, data, context=None):
+        
+        path = "%s%s" % (path_fichier, nom_fichier)
+        # On ouvre le fichier en mode ajout
+        export_file = open(path, "r")
+        try:
+            data['file'] = base64.encodestring(export_file.read())
+            data['name'] = nom_fichier
+        except IOError as e:
+            print "I/O error({0}): {1}".format(e.errno, e.strerror)
+        finally:
+            export_file.close()
+
+        return data
+        
     states = {
         'init': {
             'actions': [],
@@ -158,11 +247,53 @@ class wizard_account_move_excel(wizard.interface):
                 'type': 'form',
                 'arch': _form_type,
                 'fields': _field_type,
-                'state': [('end', 'Annuler'), ('get', 'Générer le fichier')],
+                'state': [('end', 'Annuler'), ('schedule', 'Programmer'), ('choice', u'Générer maintenant'), ('ifexists', u'Télécharger')],
             },
         },
+        'choice': {
+            'actions': [],
+            'result': {'type': 'choice',
+                       'next_state': _valid_form,}
+        },
+        'ifexists': {
+            'actions': [],
+            'result': {'type': 'choice',
+                       'next_state': _verif_file,}
+        },
+        'no_lines': {
+            'actions': [],
+            'result': {'type': 'form',
+                       'arch': _no_lines_form,
+                       'fields': {},
+                       'state': [('end', 'Annuler')]},
+        },
+        'no_file': {
+            'actions': [],
+            'result': {'type': 'form',
+                       'arch': _no_file_form,
+                       'fields': {},
+                       'state': [('end', 'Annuler')]},
+        },
         'get': {
+            'actions': [_action_get_file_excel],
+            'result': {
+                'type': 'form',
+                'arch': _get_form,
+                'fields': _field_get,
+                'state': [('end', 'Sortir')],
+            },
+        },
+        'set': {
             'actions': [_action_make_file_excel],
+            'result': {
+                'type': 'form',
+                'arch': _get_form,
+                'fields': _field_get,
+                'state': [('end', 'Sortir')],
+            },
+        },
+        'schedule': {
+            'actions': [_action_schedule],
             'result': {
                 'type': 'form',
                 'arch': _get_form,
