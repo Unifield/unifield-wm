@@ -128,10 +128,6 @@ class hr_payroll_import(osv.osv_memory):
         is_payroll_rounding = False
         if third and third[0] and ustr(third[0]) == 'SAGA_BALANCE':
             is_payroll_rounding = True
-        # Check if it's a counterpart line (In HOMERE import, it seems to be lines that have a filled in column "third")
-        is_counterpart = False
-        if third and third[0] and third[0] != '':
-            is_counterpart = True
         # If expense type, fetch employee ID
         if account.user_type.code == 'expense':
             # Add default destination from account
@@ -139,7 +135,7 @@ class hr_payroll_import(osv.osv_memory):
                 raise osv.except_osv(_('Warning'), _('No default Destination defined for expense account: %s') % (account.code or '',))
             destination_id = account.default_destination_id and account.default_destination_id.id or False
             if second_description and second_description[0] and not is_payroll_rounding:
-                if not is_counterpart:
+                if not is_payroll_rounding:
                     # fetch employee ID
                     employee_identification_id = ustr(second_description[0]).split(' ')[-1]
                     employee_ids = self.pool.get('hr.employee').search(cr, uid, [('identification_id', '=', employee_identification_id)])
