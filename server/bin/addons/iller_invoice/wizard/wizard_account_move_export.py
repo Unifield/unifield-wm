@@ -40,18 +40,18 @@ _form_type = """<?xml version="1.0" encoding="utf-8" ?>
     <field name="nextcall" />
     <field name="interval_number" required="1" />
     <field name="interval_type" required="1" />
-    <field name="function" required="1" />
+    <field name="doall" required="1" />
 </form>"""
 
 _field_type = {
-    'nextcall': {'string': u'Heure de l\'export', 'type': 'time'},
+    'nextcall': {'string': u'Date de l\'export', 'type': 'datetime', 'default':time.strftime('%Y-%m-%d %H:%M:%S')},
     'interval_number': {'string': u'Intervalle entre les appels', 'type': 'integer', 'required': True, 'default':1},
     'interval_type': {'string': u'Type de répétition', 'type': 'selection',
         'selection': [('work_days', 'Jours de travail'), ('days', 'Jours'), ('weeks', 'Semaines'),
                     ('months', 'Mois'), ('hours', 'Heures'), ('minutes', 'Minutes')],
         'required': True, 'default':'work_days'},
-    'function': {'string': u'Fonction à exécuter', 'type': 'selection',
-        'selection': [('schedule', 'Programmer export'),], 'required': True, 'default':'schedule'},
+    'doall': {'string': u'Recommencer les manqués', 'type': 'boolean',
+        'required': True, 'default':True},
 }
 
 _get_form = """<?xml version="1.0" encoding="utf-8" ?>
@@ -99,7 +99,7 @@ class iller_export_cron(osv.osv):
         Permet de récupérer les factures à exporter
     """
     def _get_invoices_records(self, cr, uid, ids, data, context=None):
-        #~ pool = pooler.get_pool(cr.dbname)
+
         obj_invoice = self.pool.get('account.invoice')
         if 'invoices_ids' in data and data['invoices_ids']:
             invoices_ids = data['invoices_ids']
@@ -115,7 +115,7 @@ class iller_export_cron(osv.osv):
         Permet de générer la pièce jointe du fichier export csv
     """
     def _generate_attachment(self, cr, uid, ids, data, nom_fichier, context=None):
-        #~ pool = pooler.get_pool(cr.dbname)
+
         obj_attachment = self.pool.get('ir.attachment')
         # On crée un fichier attaché au niveau du serveur récupérable depuis la gestion des documents
         attach_id = obj_attachment.search(cr, uid, [('datas_fname', '=', nom_fichier)], context=context)
@@ -158,6 +158,7 @@ class iller_export_cron(osv.osv):
         Permet de générer une ligne en fonction d'un browse record d'account move line
     """
     def _generate_line(self, cr, uid, ids, data, line_id, context=None):
+
         # Génération de la ligne
         ligne = ''
         ligne += "%s;" %(line_id.date,)
@@ -175,7 +176,6 @@ class iller_export_cron(osv.osv):
     def schedule(self, cr, uid, data, context=None):
 
         # Définition des objets
-        #~ pool = pooler.get_pool(cr.dbname)
         obj_invoice = self.pool.get('account.invoice')
         
         ids = []
@@ -199,7 +199,7 @@ class iller_export_cron(osv.osv):
         for invoice in invoices_records:
             # Dictionnaire permettant d'associer une ligne à un type de compte
             type_compte_ligne = {}
-            #Construction de la ligne du fichier
+            # Construction de la ligne du fichier
             for line_id in invoice.move_id.line_id:
 
                 ligne = self._generate_line(cr, uid, ids, data, line_id, context=context)
@@ -216,7 +216,9 @@ class iller_export_cron(osv.osv):
             
             # On notifie que les écritures comptable ont bien été écrites pour cette facture
             obj_invoice.write(cr, uid, invoice.id, {'exported':True}, context=context)
-            fichier += '\r\n'
+
+            # Décommenter pour avoir une séparation entre les factures
+            #~ fichier += '\r\n'
 
         self._write_file(cr, uid, ids, data, export_file, nom_fichier, fichier,  context=context)
 
@@ -227,19 +229,20 @@ class iller_export_cron(osv.osv):
 iller_export_cron()
 
 class wizard_account_move_export(wizard.interface):
+    
     """
         Permet de vérifier que les données sont correctement saisies
     """
     def _valid_input(self, cr, uid, data, context=None):
 
-#TODO vérifier que le fait que la date soit dépassée, le schedule s'exécute quand même
-        #~ if 'nexcall' in data['form'] and data['form']['nextcall']:
-        data['form']['nextcall'] = '%s %s' % (time.strftime('%Y-%m-%d'), data['form']['nextcall'])
+        # Si la date n'a pas été saisie on met la date du jour
+        if 'nextcall' not in data['form'] or not data['form']['nextcall']:
+            data['form']['nextcall'] = time.strftime('%Y-%m-%d %H:%M:%S')
 
         # Vérification que les champs ne sont pas vides
         if ('interval_number' not in data['form'] and not data['form']['interval_number']) \
             or ('interval_type' not in data['form'] and not data['form']['interval_type']) \
-            or ('function' not in data['form'] and not data['form']['function']):
+            or ('doall' not in data['form'] and not data['form']['doall']):
             return 'missing_input'
         # Vérification de la saisie de l'intervalle
         if data['form']['interval_number'] < 1:
@@ -282,56 +285,12 @@ class wizard_account_move_export(wizard.interface):
         pool = pooler.get_pool(cr.dbname)
         obj_iller_invoice_cron = pool.get('iller.export.cron')
         data = obj_iller_invoice_cron.schedule(cr, uid, data, context=context)
-        #~ # Définition des objets
-        #~ pool = pooler.get_pool(cr.dbname)
-        #~ obj_invoice = pool.get('account.invoice')
-#~ 
-        #~ path = "%s%s" % (path_fichier, nom_fichier)
-#~ 
-        #~ invoices_records = self._get_invoices_records(cr, uid, data, context=context)
-#~ 
-        #~ # On ouvre le fichier en mode ajout
-        #~ export_file = open(path, "a+")
-        #~ statinfo = os.stat(path) # In bytes
-#~ 
-        #~ if(statinfo.st_size > 1):
-            #~ # La taille est supérieure à 1 donc on n'initialise pas avec l'entête
-            #~ fichier = ''
-        #~ else:
-            #~ # Initialisation de l'entête du tableau
-            #~ fichier = u'Date;Facture;Référence partenaire;Code compte financier;Débit;Crédit\n'
-#~ 
-        #~ # Pour chaque facture on va chercher les écritures comptables
-        #~ for invoice in invoices_records:
-            #~ # Dictionnaire permettant d'associer une ligne à un type de compte
-            #~ type_compte_ligne = {}
-            #~ #Construction de la ligne du fichier
-            #~ for line_id in invoice.move_id.line_id:
-#~ 
-                #~ ligne = self._generate_line(cr, uid, data, line_id, context=context)
-#~ 
-                #~ # On vérifie le type de compte de la ligne
-                #~ if line_id.account_id.type == 'other':
-                    #~ type_compte_ligne['999other%s' % (str(line_id.id),)] = ligne
-                #~ else:
-                    #~ type_compte_ligne['000%s%s' % (line_id.account_id.type, str(line_id.id))] = ligne
-#~ 
-            #~ # Tri des lignes par rapport au type de compte
-            #~ for key in sorted(type_compte_ligne.iterkeys()):
-                #~ fichier += ''.join(type_compte_ligne[key]) + '\r\n'
-            #~ 
-            #~ # On notifie que les écritures comptable ont bien été écrites pour cette facture
-            #~ obj_invoice.write(cr, uid, invoice.id, {'exported':True}, context=context)
-            #~ fichier += '\r\n'
-#~ 
-        #~ self._write_file(cr, uid, data, export_file, nom_fichier, fichier,  context=context)
-#~ 
-        #~ self._generate_attachment(cr, uid, data, nom_fichier, context=context)
-
         return data
 
+    """
+        Fonction permettant de programmer le cron pour exécuter la routine
+    """
     def _action_schedule(self, cr, uid, data, context=None):
-        # Gestion du cron
         # Définition des objets
         pool = pooler.get_pool(cr.dbname)
         obj_cron = pool.get('ir.cron')
@@ -345,6 +304,7 @@ class wizard_account_move_export(wizard.interface):
             'interval_number': data['form']['interval_number'] or 1,
             'interval_type': data['form']['interval_type'] or 'work_days',
             'function': 'schedule',
+            'doall': data['form']['doall'] or False,
             'numbercall': -1,
             'active': True,
             'model': 'iller.export.cron',
@@ -359,7 +319,10 @@ class wizard_account_move_export(wizard.interface):
             obj_cron.create(cr, uid, vals, context=context)
 
         return {}
-
+        
+    """
+        Fonction permettant de récupérer le fichier écrit sur le serveur
+    """
     def _action_get_file_export(self, cr, uid, data, context=None):
         
         path = "%s%s" % (path_fichier, nom_fichier)
@@ -374,7 +337,8 @@ class wizard_account_move_export(wizard.interface):
             export_file.close()
 
         return data
-        
+
+
     states = {
         # Initialisation
         'init': {
@@ -461,7 +425,7 @@ class wizard_account_move_export(wizard.interface):
             },
         },
         'schedule_factory': {
-            'actions': [_action_schedule],
+            'actions': [_action_schedule, _action_get_file_export],
             'result': {
                 'type': 'form',
                 'arch': _get_form,

@@ -69,7 +69,7 @@ iller_account_invoice_line()
 class account_invoice(osv.osv):
     _name = "account.invoice"
     _inherit = "account.invoice"
-    
+
     # Récupération du code client à afficher dans le formulaire
     def _get_code_client(self, cr, uid, ids, field_name, arg, context=None):
         
