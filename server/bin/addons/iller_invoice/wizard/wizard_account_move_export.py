@@ -99,7 +99,7 @@ class iller_export_cron(osv.osv):
         Permet de récupérer les factures à exporter
     """
     def _get_invoices_records(self, cr, uid, ids, data, context=None):
-
+        #~ pool = pooler.get_pool(cr.dbname)
         obj_invoice = self.pool.get('account.invoice')
         if 'invoices_ids' in data and data['invoices_ids']:
             invoices_ids = data['invoices_ids']
@@ -115,7 +115,7 @@ class iller_export_cron(osv.osv):
         Permet de générer la pièce jointe du fichier export csv
     """
     def _generate_attachment(self, cr, uid, ids, data, nom_fichier, context=None):
-
+        #~ pool = pooler.get_pool(cr.dbname)
         obj_attachment = self.pool.get('ir.attachment')
         # On crée un fichier attaché au niveau du serveur récupérable depuis la gestion des documents
         attach_id = obj_attachment.search(cr, uid, [('datas_fname', '=', nom_fichier)], context=context)
@@ -175,12 +175,14 @@ class iller_export_cron(osv.osv):
     def schedule(self, cr, uid, data, context=None):
 
         # Définition des objets
-        pool = pooler.get_pool(cr.dbname)
-        obj_invoice = pool.get('account.invoice')
-
+        #~ pool = pooler.get_pool(cr.dbname)
+        obj_invoice = self.pool.get('account.invoice')
+        
+        ids = []
         path = "%s%s" % (path_fichier, nom_fichier)
 
-        invoices_records = self._get_invoices_records(cr, uid, data, context=context)
+        #~ invoices_records = self._get_invoices_records(cr, uid, data, context=context)
+        invoices_records = self._get_invoices_records(cr, uid, ids, data, context )
 
         # On ouvre le fichier en mode ajout
         export_file = open(path, "a+")
@@ -200,7 +202,7 @@ class iller_export_cron(osv.osv):
             #Construction de la ligne du fichier
             for line_id in invoice.move_id.line_id:
 
-                ligne = self._generate_line(cr, uid, data, line_id, context=context)
+                ligne = self._generate_line(cr, uid, ids, data, line_id, context=context)
 
                 # On vérifie le type de compte de la ligne
                 if line_id.account_id.type == 'other':
@@ -216,9 +218,9 @@ class iller_export_cron(osv.osv):
             obj_invoice.write(cr, uid, invoice.id, {'exported':True}, context=context)
             fichier += '\r\n'
 
-        self._write_file(cr, uid, data, export_file, nom_fichier, fichier,  context=context)
+        self._write_file(cr, uid, ids, data, export_file, nom_fichier, fichier,  context=context)
 
-        self._generate_attachment(cr, uid, data, nom_fichier, context=context)
+        self._generate_attachment(cr, uid, ids, data, nom_fichier, context=context)
 
         return data
 
@@ -346,7 +348,7 @@ class wizard_account_move_export(wizard.interface):
             'numbercall': -1,
             'active': True,
             'model': 'iller.export.cron',
-            'args': (data, ),
+            'args': (data, context),
         }
         # Si le cron existe déjà on écrit 
         if cron_ids:
