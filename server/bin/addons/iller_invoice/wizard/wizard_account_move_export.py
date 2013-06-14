@@ -167,6 +167,7 @@ class iller_export_cron(osv.osv):
         ligne += "%s;" %(line_id.account_id.code,)
         ligne += "%s;" %(line_id.debit,)
         ligne += "%s;" %(line_id.credit,)
+        ligne += "\r\n"
 
         return ligne
 
@@ -181,7 +182,6 @@ class iller_export_cron(osv.osv):
         ids = []
         path = "%s%s" % (path_fichier, nom_fichier)
 
-        #~ invoices_records = self._get_invoices_records(cr, uid, data, context=context)
         invoices_records = self._get_invoices_records(cr, uid, ids, data, context )
 
         # On ouvre le fichier en mode ajout
@@ -197,28 +197,26 @@ class iller_export_cron(osv.osv):
 
         # Pour chaque facture on va chercher les écritures comptables
         for invoice in invoices_records:
-            # Dictionnaire permettant d'associer une ligne à un type de compte
-            type_compte_ligne = {}
-            # Construction de la ligne du fichier
+            # Initialisation d'une variable stockant les lignes dont le compte est de type 'other'
+            lignes_other  = ''
+            # Pour chaque account move line correspondant à la facture en cours
             for line_id in invoice.move_id.line_id:
-
-                ligne = self._generate_line(cr, uid, ids, data, line_id, context=context)
-
-                # On vérifie le type de compte de la ligne
+                # Si le compte est de type other, alors on stocke dans une variable temporaire pour
+                # permettre de les écrire plus tard
                 if line_id.account_id.type == 'other':
-                    type_compte_ligne['999other%s' % (str(line_id.id),)] = ligne
+                    lignes_other += self._generate_line(cr, uid, ids, data, line_id, context=context)
+                # Sinon on ajoute directement au fichier la ligne reçue
                 else:
-                    type_compte_ligne['000%s%s' % (line_id.account_id.type, str(line_id.id))] = ligne
+                    fichier += self._generate_line(cr, uid, ids, data, line_id, context=context)
 
-            # Tri des lignes par rapport au type de compte
-            for key in sorted(type_compte_ligne.iterkeys()):
-                fichier += ''.join(type_compte_ligne[key]) + '\r\n'
-            
+            # Après la boucle on ajoute les lignes dont le type est 'other'
+            fichier += lignes_other
+
             # On notifie que les écritures comptable ont bien été écrites pour cette facture
             obj_invoice.write(cr, uid, invoice.id, {'exported':True}, context=context)
 
             # Décommenter pour avoir une séparation entre les factures
-            #~ fichier += '\r\n'
+            fichier += '\r\n'
 
         self._write_file(cr, uid, ids, data, export_file, nom_fichier, fichier,  context=context)
 

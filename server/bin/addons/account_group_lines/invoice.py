@@ -35,16 +35,20 @@ class account_invoice(osv.osv):
             amount_currency = 0.00
             name = invoice_browse.name or self.pool.get('account.account').read(cr, uid, k[0], ['name']).get('name')
             analytic_lines = []
+            taxes = []
             for line in account_ids[k]:
                 debit += line.get('debit',0.00)
                 credit += line.get('credit',0.00) 
                 amount_currency += line.get('amount_currency', 0.00)
                 tax_amount += line.get('tax_amount', 0.00)
+                taxes.append(line.get('tax_code_id'))
                 if line.get('analytic_lines'):
                     for ana_line in line['analytic_lines']:
                         ana_line[2]['journal_id'] = analytic_journal.id
                     analytic_lines += line['analytic_lines']
             if debit or credit:
+                if len(taxes) > 1:
+                    taxes[0] = False
                 move_line = {
                     'debit': debit,
                     'credit': credit,
@@ -53,7 +57,7 @@ class account_invoice(osv.osv):
                     'analytic_lines': analytic_lines,
                     'name': name,
                     'account_id': k[0],
-                    #~ 'tax_code_id':k[1], 
+                    'tax_code_id':taxes[0], 
                     'currency_id':k[1], 
                     'analytic_account_id': False, 
                     'date': k[2], 
