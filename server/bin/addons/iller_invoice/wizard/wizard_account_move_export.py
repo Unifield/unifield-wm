@@ -202,13 +202,19 @@ class iller_export_cron(osv.osv):
             lignes_other  = ''
             # Pour chaque account move line correspondant à la facture en cours
             for line_id in invoice.move_id.line_id:
-                # Si le compte est de type other, alors on stocke dans une variable temporaire pour
-                # permettre de les écrire plus tard
-                if line_id.account_id.type == 'other':
-                    lignes_other += self._generate_line(cr, uid, ids, data, line_id, context=context)
-                # Sinon on ajoute directement au fichier la ligne reçue
-                else:
-                    fichier += self._generate_line(cr, uid, ids, data, line_id, context=context)
+                # Si la ligne n'a pas encore été exportée
+                if not line_id.exported_csv:
+                    # Si le compte est de type other, alors on stocke dans une variable temporaire pour
+                    # permettre de les écrire plus tard
+                    if line_id.account_id.type == 'other':
+                        lignes_other += self._generate_line(cr, uid, ids, data, line_id, context=context)
+                    # Sinon on ajoute directement au fichier la ligne reçue
+                    else:
+                        fichier += self._generate_line(cr, uid, ids, data, line_id, context=context)
+
+                    # Pour chaque ligne on indique que la ligne a été exportée : servira éventuellement
+                    # si on veut pouvoir 'check' si la ligne est déjà présente ou non
+                    obj_move_line.write(cr, uid, [line_id.id], {'exported_csv':True}, context=context)
 
             # Après la boucle on ajoute les lignes dont le type est 'other'
             fichier += lignes_other
@@ -326,7 +332,7 @@ class wizard_account_move_export(wizard.interface):
         
         path = "%s%s" % (path_fichier, nom_fichier)
         # On ouvre le fichier en mode ajout
-        export_file = open(path, "r")
+        export_file = open(path, "r+")
         try:
             data['file'] = base64.encodestring(export_file.read())
             data['name'] = nom_fichier

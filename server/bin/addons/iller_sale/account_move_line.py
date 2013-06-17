@@ -30,12 +30,12 @@ class account_move_line(osv.osv):
 
     _columns = {
         'exporte_vers_gescom': fields.boolean(string="Exporté vers GESCOM ?", required=False),
-        #~ 'exported_csv': fields.boolean(string="Exporté en csv", required=False),
+        'exported_csv': fields.boolean(string="Exporté en csv", required=False),
     }
 
     _defaults = {
         'exporte_vers_gescom': lambda *a: False,
-        #~ 'exported_csv': lambda *a: False,
+        'exported_csv': lambda *a: False,
     }
 
 account_move_line()
