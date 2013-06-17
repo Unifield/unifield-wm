@@ -83,27 +83,26 @@ class account_invoice(osv.osv):
             
         return res
         
-    def _get_move_lines_exported(self, cr, uid, ids, field_name, arg, context=None):
-        
-        if isinstance(ids, (int, long)):
-            ids = [ids]
-
-        res = {}
-        # Pour chaque facture
-        for id in ids:
-            # Pour chaque ligne correspondant à la facture
-            for move_line_record in self.browse(cr, uid, ids, context=context).move_id.line_id:
-                # Si la ligne na pas été exportée, on notifie que la facture est à exporter 
-                if not move_line_record.exported_csv:
-                    res[id] = False
-                    return res
-                res[id] = True
-
-        return res
+    #~ def _get_move_lines_exported(self, cr, uid, ids, field_name, arg, context=None):
+        #~ 
+        #~ if isinstance(ids, (int, long)):
+            #~ ids = [ids]
+#~ 
+        #~ res = {}
+        #~ # Pour chaque facture
+        #~ for id in ids:
+            #~ # Pour chaque ligne correspondant à la facture
+            #~ for move_line_record in self.browse(cr, uid, ids, context=context).move_id.line_id:
+                #~ # Si la ligne na pas été exportée, on notifie que la facture est à exporter 
+                #~ if not move_line_record.exported_csv:
+                    #~ res[id] = False
+                    #~ return res
+                #~ res[id] = True
+#~ 
+        #~ return res
         
     _columns = {
         'code': fields.function(_get_code_client, type='char', method=True, string='Code', readonly=True),
-        #~ 'exported': fields.function(_get_move_lines_exported, type='boolean', method=True, string='Exportée', readonly=True),
         'exported': fields.boolean(string=u'Exportée', readonly=True),
 
     }

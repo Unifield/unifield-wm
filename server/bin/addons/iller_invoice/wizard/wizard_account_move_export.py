@@ -202,7 +202,6 @@ class iller_export_cron(osv.osv):
             lignes_other  = ''
             # Pour chaque account move line correspondant à la facture en cours
             for line_id in invoice.move_id.line_id:
-#~ if not line_id.exported_csv:
                 # Si le compte est de type other, alors on stocke dans une variable temporaire pour
                 # permettre de les écrire plus tard
                 if line_id.account_id.type == 'other':
@@ -210,8 +209,6 @@ class iller_export_cron(osv.osv):
                 # Sinon on ajoute directement au fichier la ligne reçue
                 else:
                     fichier += self._generate_line(cr, uid, ids, data, line_id, context=context)
-#~ obj_move_line.write(cr, uid, line_id.id, {'exported_csv':True}, context=context)
-
 
             # Après la boucle on ajoute les lignes dont le type est 'other'
             fichier += lignes_other
