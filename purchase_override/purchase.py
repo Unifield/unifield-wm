@@ -2006,23 +2006,43 @@ class purchase_order_line(osv.osv):
             context = {}
         if isinstance(ids, (int, long)):
             ids = [ids]
+        
+        wf_service = netsvc.LocalService("workflow")
 
         sol_obj = self.pool.get('sale.order.line')
+        so_obj = self.pool.get('sale.order')
+        po_obj = self.pool.get('purchase.order')
             
         # if the line is linked to a sale order line through procurement process,
         # update the FO
         sol_ids = self.get_sol_ids_from_pol_ids(cr, uid, ids, context=context)
         sol_obj.write(cr, uid, sol_ids, {'state': 'cancel'}, context=context)
+        so_ids = []
         for sol in sol_obj.browse(cr, uid, sol_ids, context=context):
+            if sol.order_id.id not in so_ids:
+                so_ids.append(sol.order_id.id)
             #raise osv.except_osv(_('Error'), _('You cannot delete a line which is linked to a Fo line.'))
             proc_id = sol.procurement_id.id
             # Remove the associated field order lines
             sol_obj.unlink(cr, uid, [sol.id])
             # Remove the attached procurement orders
-            wf_service = netsvc.LocalService("workflow")
             wf_service.trg_delete(uid, 'procurement.order', proc_id, cr)
             self.pool.get('procurement.order').write(cr, uid, [proc_id], {'state': 'cancel'})
             #wf_service.trg_validate(uid, 'procurement.order', proc_id, 'subflow.cancel', cr)
+
+        # from so, list corresponding po first level
+        all_po_ids = so_obj.get_po_ids_from_so_ids(cr, uid, so_ids, context=context)
+        # from listed po, list corresponding so
+        all_so_ids = po_obj.get_so_ids_from_po_ids(cr, uid, all_po_ids, context=context)
+        # from all so, list all corresponding po second level
+        all_po_for_all_so_ids = so_obj.get_po_ids_from_so_ids(cr, uid, all_so_ids, context=context)
+        # we trigger all the corresponding sale order -> test_lines is called on these so
+        for so_id in all_so_ids:
+            wf_service.trg_write(uid, 'sale.order', so_id, cr)
+
+        # we trigger pos of all sale orders -> all_po_confirm is called on these po
+        for po_id in all_po_for_all_so_ids:
+            wf_service.trg_write(uid, 'purchase.order', po_id, cr)
 
         for line_id in ids:
             # we want to skip resequencing because unlink is performed on merged purchase order lines
