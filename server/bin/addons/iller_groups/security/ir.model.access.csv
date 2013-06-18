@@ -220,17 +220,9 @@ access_crm_case_log,crm.case.log,crm.model_crm_case_log,,1,1,1,1
 access_crm_case_history,crm.case.history,crm.model_crm_case_history,,1,1,1,1
 access_crm_segmentation,crm.segmentation,crm.model_crm_segmentation,,1,1,1,1
 access_crm_segmentation_line,crm.segmentation.line,crm.model_crm_segmentation_line,,1,1,1,1
-access_report_crm_case_user,report.crm.case.user,report_crm.model_report_crm_case_user,,1,1,1,1
-access_report_crm_case_categ,report.crm.case.categ,report_crm.model_report_crm_case_categ,,1,1,1,1
-access_report_crm_case_section,report.crm.case.section,report_crm.model_report_crm_case_section,,1,1,1,1
-access_report_crm_case_service_dashboard,report.crm.case.service.dashboard,report_crm.model_report_crm_case_service_dashboard,,1,1,1,1
 access_crm_case_category2,crm.case.category2,crm_configuration.model_crm_case_category2,,1,1,1,1
 access_crm_case_stage,crm.case.stage,crm_configuration.model_crm_case_stage,,1,1,1,1
 access_crm_menu_config_wizard,crm.menu.config_wizard,crm_configuration.model_crm_menu_config_wizard,,1,1,1,1
-access_report_crm_case_section_categ2,report.crm.case.section.categ2,crm_configuration.model_report_crm_case_section_categ2,,1,1,1,1
-access_report_crm_case_section_stage,report.crm.case.section.stage,crm_configuration.model_report_crm_case_section_stage,,1,1,1,1
-access_report_crm_case_section_categ_stage,report.crm.case.section.categ.stage,crm_configuration.model_report_crm_case_section_categ_stage,,1,1,1,1
-access_report_crm_case_section_categ_categ2,report.crm.case.section.categ.categ2,crm_configuration.model_report_crm_case_section_categ_categ2,,1,1,1,1
 access_document_directory,document.directory,document.model_document_directory,,1,1,1,1
 access_document_directory_content_type,document.directory.content.type,document.model_document_directory_content_type,,1,1,1,1
 access_document_directory_content,document.directory.content,document.model_document_directory_content,,1,1,1,1

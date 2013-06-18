@@ -29,6 +29,7 @@ import base64
 import time
 import wizard
 import os
+import mx
 
 _form_init = """<?xml version="1.0" encoding="utf-8" ?>
 <form string="Choix de l'action">
@@ -145,8 +146,7 @@ class iller_export_cron(osv.osv):
             export_file.write(fichier.encode("utf-8"))
             # On met à jour les variables du fichier
             data['name'] = nom_fichier
-            # Replace le pointeur au début du fichier, car le write semble le positionner à la fin, 
-            # du coup, lorsqu'on lit à nouveau le fichier, il ne lit rien
+            # Replace le pointeur au début du fichier, car le write le positionne à la fin
             export_file.seek(0)
             data['file'] = base64.encodestring(export_file.read())
         except IOError as e:
@@ -159,15 +159,17 @@ class iller_export_cron(osv.osv):
     """
     def _generate_line(self, cr, uid, ids, data, line_id, context=None):
 
+        date_object = mx.DateTime.Parser.DateTimeFromString(line_id.date)
         # Génération de la ligne
-        ligne = ''
-        ligne += "%s;" %(line_id.date,)
+        ligne = '' 
+        ligne += "%s/%s/%s;" %(date_object.day, date_object.month, date_object.year)
         ligne += "%s;" %(line_id.invoice.number,)
         ligne += "%s;" %(line_id.partner_id.ref,)
         ligne += "%s;" %(line_id.account_id.code,)
         ligne += "%s;" %(line_id.debit,)
         ligne += "%s;" %(line_id.credit,)
         ligne += "\r\n"
+        ligne = ligne.replace(".", ",")
 
         return ligne
 

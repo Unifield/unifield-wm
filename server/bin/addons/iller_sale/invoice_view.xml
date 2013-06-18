@@ -18,5 +18,21 @@
             </field>
         </record>
 
+        <record id="iller_view_move_form" model="ir.ui.view">
+            <field name="name">iller.view.move.form</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form" />
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//form/field/form/field[@name='state']" position="after" >
+                        <field name="exported_csv" string="Ligne exportée ?" />
+                    </xpath>
+                    <xpath expr="//form/field/tree/field[@name='state']" position="after" >
+                        <field name="exported_csv" string="Ligne exportée ?" />
+                    </xpath>
+                </data>
+            </field>
+        </record>
     </data>
 </openerp>

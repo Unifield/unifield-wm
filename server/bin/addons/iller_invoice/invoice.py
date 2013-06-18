@@ -70,6 +70,17 @@ class account_invoice(osv.osv):
     _name = "account.invoice"
     _inherit = "account.invoice"
 
+    """
+    Surcharge de copy pour mettre par défaut exported à False
+    Les account move line sont automatiquement mises à false
+    puisqu'elles sont recréées
+    """
+    def copy(self, cr, uid, id, default=None, context=None):
+        if not default:
+            default = {}
+        default['exported'] = False
+        return super(account_invoice, self).copy(cr, uid, id, default=default, context=context) 
+
     # Récupération du code client à afficher dans le formulaire
     def _get_code_client(self, cr, uid, ids, field_name, arg, context=None):
         
@@ -82,25 +93,8 @@ class account_invoice(osv.osv):
             res[acc_invoice_record.id] = partner.ref
             
         return res
-        
-    #~ def _get_move_lines_exported(self, cr, uid, ids, field_name, arg, context=None):
-        #~ 
-        #~ if isinstance(ids, (int, long)):
-            #~ ids = [ids]
-#~ 
-        #~ res = {}
-        #~ # Pour chaque facture
-        #~ for id in ids:
-            #~ # Pour chaque ligne correspondant à la facture
-            #~ for move_line_record in self.browse(cr, uid, ids, context=context).move_id.line_id:
-                #~ # Si la ligne na pas été exportée, on notifie que la facture est à exporter 
-                #~ if not move_line_record.exported_csv:
-                    #~ res[id] = False
-                    #~ return res
-                #~ res[id] = True
-#~ 
-        #~ return res
-        
+
+
     _columns = {
         'code': fields.function(_get_code_client, type='char', method=True, string='Code', readonly=True),
         'exported': fields.boolean(string=u'Exportée', readonly=True),
@@ -122,7 +116,6 @@ class account_invoice(osv.osv):
         return res
         
 account_invoice()
-
 
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
