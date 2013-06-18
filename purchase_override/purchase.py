@@ -2006,11 +2006,23 @@ class purchase_order_line(osv.osv):
             context = {}
         if isinstance(ids, (int, long)):
             ids = [ids]
+
+        sol_obj = self.pool.get('sale.order.line')
             
         # if the line is linked to a sale order line through procurement process,
-        # the deletion is impossible
-        if self.get_sol_ids_from_pol_ids(cr, uid, ids, context=context):
-            raise osv.except_osv(_('Error'), _('You cannot delete a line which is linked to a Fo line.'))
+        # update the FO
+        sol_ids = self.get_sol_ids_from_pol_ids(cr, uid, ids, context=context)
+        sol_obj.write(cr, uid, sol_ids, {'state': 'cancel'}, context=context)
+        for sol in sol_obj.browse(cr, uid, sol_ids, context=context):
+            #raise osv.except_osv(_('Error'), _('You cannot delete a line which is linked to a Fo line.'))
+            proc_id = sol.procurement_id.id
+            # Remove the associated field order lines
+            sol_obj.unlink(cr, uid, [sol.id])
+            # Remove the attached procurement orders
+            wf_service = netsvc.LocalService("workflow")
+            wf_service.trg_delete(uid, 'procurement.order', proc_id, cr)
+            self.pool.get('procurement.order').write(cr, uid, [proc_id], {'state': 'cancel'})
+            #wf_service.trg_validate(uid, 'procurement.order', proc_id, 'subflow.cancel', cr)
 
         for line_id in ids:
             # we want to skip resequencing because unlink is performed on merged purchase order lines
