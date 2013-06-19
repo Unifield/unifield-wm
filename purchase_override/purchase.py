@@ -2034,7 +2034,7 @@ class purchase_order_line(osv.osv):
             #wf_service.trg_validate(uid, 'procurement.order', proc_id, 'subflow.cancel', cr)
         
         for so in so_obj.browse(cr, uid, so_ids, context=context):
-            if so.procurement_request:
+            if so.procurement_request and not so.order_line:
                 wf_service.trg_validate(uid, 'sale.order', so.id, 'procurement_cancel', cr)
             else:
                 wf_service.trg_write(uid, 'sale.order', so.id, cr)
