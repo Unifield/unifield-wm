@@ -2033,8 +2033,11 @@ class purchase_order_line(osv.osv):
             self.pool.get('procurement.order').write(cr, uid, [proc_id], {'state': 'cancel'})
             #wf_service.trg_validate(uid, 'procurement.order', proc_id, 'subflow.cancel', cr)
         
-        for so_id in so_ids:
-            wf_service.trg_write(uid, 'sale.order', so_id, cr)
+        for so in so_obj.browse(cr, uid, so_ids, context=context):
+            if so.procurement_request:
+                wf_service.trg_validate(uid, 'sale.order', so.id, 'procurement_cancel', cr)
+            else:
+                wf_service.trg_write(uid, 'sale.order', so.id, cr)
 
         # from so, list corresponding po first level
         all_po_ids = so_obj.get_po_ids_from_so_ids(cr, uid, so_ids, context=context)
