@@ -1088,6 +1088,16 @@ class sale_order(osv.osv):
                                                  'ready_to_ship_date': rts}, context=context)
             
         return True
+
+    def test_no_lines(self, cr, uid, ids, context=None):
+        '''
+        return True if there is no line in FO
+        '''
+        for order in self.browse(cr, uid, ids, context=context):
+            if not order.order_line:
+                return True
+
+        return False
     
     def test_lines(self, cr, uid, ids, context=None):
         '''
@@ -1100,6 +1110,10 @@ class sale_order(osv.osv):
             # backward compatibility for yml tests, if test we do not wait
             if order.from_yml_test:
                 continue
+
+            if not order.order_line:
+                return False
+
             for line in order.order_line:
                 # the product needs to have a product selected, otherwise not procurement, and no po to trigger back the so
                 if line.product_id and line.type == 'make_to_order' and line.state != 'confirmed' and (not line.procurement_id or line.procurement_id.state != 'cancel'):

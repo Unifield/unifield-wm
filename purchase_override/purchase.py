@@ -735,6 +735,9 @@ class purchase_order(osv.osv):
         move_obj = self.pool.get('stock.move')
             
         for order in self.browse(cr, uid, ids, context=context):
+            if not order.order_line:
+                raise osv.except_osv(_('Error'), _('You cannot confirm a Purchase Order with no line !'))
+
             if order.categ in ['transport', 'service']:
                 ch_res = self.onchange_categ(cr, uid, [order.id], order.categ, order.warehouse_id.id, order.cross_docking_ok, order.location_id.id, context=context)
                 if ch_res.get('warning', {}).get('message', False):
@@ -2029,6 +2032,9 @@ class purchase_order_line(osv.osv):
             wf_service.trg_delete(uid, 'procurement.order', proc_id, cr)
             self.pool.get('procurement.order').write(cr, uid, [proc_id], {'state': 'cancel'})
             #wf_service.trg_validate(uid, 'procurement.order', proc_id, 'subflow.cancel', cr)
+        
+        for so_id in so_ids:
+            wf_service.trg_write(uid, 'sale.order', so_id, cr)
 
         # from so, list corresponding po first level
         all_po_ids = so_obj.get_po_ids_from_so_ids(cr, uid, so_ids, context=context)
