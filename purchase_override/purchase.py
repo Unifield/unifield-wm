@@ -2028,16 +2028,17 @@ class purchase_order_line(osv.osv):
             proc_id = sol.procurement_id.id
             # Remove the associated field order lines
             sol_obj.unlink(cr, uid, [sol.id])
+            
+            if sol.order_id.procurement_request and not sol.order_id.order_line:
+                wf_service.trg_validate(uid, 'sale.order', sol.order_id.id, 'procurement_cancel', cr)
+            else:
+                wf_service.trg_write(uid, 'sale.order', sol.order_id.id, cr)
+
             # Remove the attached procurement orders
             wf_service.trg_delete(uid, 'procurement.order', proc_id, cr)
             self.pool.get('procurement.order').write(cr, uid, [proc_id], {'state': 'cancel'})
             #wf_service.trg_validate(uid, 'procurement.order', proc_id, 'subflow.cancel', cr)
         
-        for so in so_obj.browse(cr, uid, so_ids, context=context):
-            if so.procurement_request and not so.order_line:
-                wf_service.trg_validate(uid, 'sale.order', so.id, 'procurement_cancel', cr)
-            else:
-                wf_service.trg_write(uid, 'sale.order', so.id, cr)
 
         # from so, list corresponding po first level
         all_po_ids = so_obj.get_po_ids_from_so_ids(cr, uid, so_ids, context=context)
