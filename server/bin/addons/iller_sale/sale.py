@@ -141,7 +141,7 @@ iller_sale_line()
 class iller_sale(osv.osv):
     _name = 'sale.order'
     _inherit = 'sale.order'
-    
+
     def onchange_partner_id(self, cr, uid, ids, part, context=None):
         
         res = super(iller_sale, self).onchange_partner_id(cr, uid, ids, part, context=context)

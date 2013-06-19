@@ -394,8 +394,10 @@ def _check_invoicing(self, cr, uid, data, context={}):
         data_id = data.get('id')
         pooler.get_pool(cr.dbname).get('stock.move')
         sp = pooler.get_pool(cr.dbname).get('stock.picking').browse(cr, uid, data_id, context=context)
+        print sp.min_date, sp.max_date
         if sp.address_id and sp.address_id.partner_id and sp.address_id.partner_id.facturation_bl:
             type_facturation = sp.address_id.partner_id.facturation_bl
+            print type_facturation
             # Si facturation = NON, alors on va vers l'état 'invoice'
             if type_facturation == 'n':
                 return 'invoice'
@@ -434,17 +436,23 @@ def _create_invoice(obj, cr, uid, data, context=None):
     picking_obj = pooler.get_pool(cr.dbname).get('stock.picking')
     mod_obj = pool.get('ir.model.data')
     act_obj = pool.get('ir.actions.act_window')
+    inv_obj = pool.get('account.invoice')
 
     inv_type = data['form']['type']
 
     res = picking_obj.action_invoice_create(cr, uid, data['ids'],
-            journal_id=data['form']['journal_id'], group=data['form']['group'],
-            type=inv_type, context=context)
+            data['form']['journal_id'], data['form']['group'],
+            inv_type, context=context)
 
     invoice_ids = res.values()
+
+    inv_obj.action_date_assign(cr, uid, invoice_ids)
+    inv_obj.action_move_create(cr, uid, invoice_ids)
+    inv_obj.action_number(cr, uid, invoice_ids)
+    inv_obj.write(cr, uid, invoice_ids, {'state':'open'}, context=context)
+
     if not invoice_ids:
         raise wizard.except_wizard(_('Error'), _('Invoice is not created'))
-
     if inv_type == 'out_invoice':
         xml_id = 'action_invoice_tree5'
     elif inv_type == 'in_invoice':
@@ -471,6 +479,7 @@ def _workflow_validation(self, cr, uid, data, context={}):
     pick_id = data['pick_id']
     pick_obj = pooler.get_pool(cr.dbname).get('stock.picking')
 
+    print new_picking, 'new_picking'
     # At first we confirm the new picking (if necessary)
     wf_service = netsvc.LocalService("workflow")
     if new_picking:
@@ -487,6 +496,7 @@ def _workflow_validation(self, cr, uid, data, context={}):
     bo_name = ''
     if new_picking:
         bo_name = pick_obj.read(cr, uid, [new_picking], ['name'])[0]['name']
+    print new_picking, bo_name
     return {'new_picking':new_picking or False, 'back_order':bo_name}
 
 class iller_partial_picking(wizard.interface):

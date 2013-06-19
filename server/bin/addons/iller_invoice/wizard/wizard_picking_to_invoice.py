@@ -94,6 +94,7 @@ class wizard_picking_to_invoice(osv.osv_memory):
         res_partner_obj = self.pool.get('res.partner')
         so_obj = self.pool.get('stock.picking')
         partner_address_obj = self.pool.get('res.partner.address')
+        inv_obj = self.pool.get('account.invoice')
 
         # Début de traitement
         # liste des clients sans mode de paiement
@@ -122,6 +123,7 @@ class wizard_picking_to_invoice(osv.osv_memory):
                 sp_obj = self.pool.get('stock.picking')
                 sp_ids = sp_obj.search(cr, uid, [('invoice_state', '=', '2binvoiced'), 
                     ('address_id.partner_id', '=', client_id), ('state', '=', 'done')]) or None
+
                 # Tri des éléments à facturer
                 if sp_ids:
                     bon_du_client = []
@@ -132,6 +134,7 @@ class wizard_picking_to_invoice(osv.osv_memory):
                         # Si la date de la facture est inférieure à 
                         #+ last_date, alors on récupère l'identifiant de la
                         #+ livraison
+                        print client.name, client_mode,  sp_id, sp_date, '<', last_date
                         if sp_date < last_date:
                             # Ajout du bon de livraison dans les éléments à 
                             #+ facturer du client
@@ -154,6 +157,7 @@ class wizard_picking_to_invoice(osv.osv_memory):
                 factures_reussies = []
                 try:
                     factures_reussies = sp_obj.action_invoice_create(cr, uid, bon_a_facturer[bon], journal_id, True, 'out_invoice', context=context)
+                    inv_obj.write(cr, uid, factures_reussies[bon_a_facturer[bon][0]], {'state':'open'}, context=context)
                 except Exception:
                     bon_non_reussis += bon_a_facturer[bon]
                     continue
@@ -288,7 +292,7 @@ class wizard_picking_to_invoice(osv.osv_memory):
         # Préparation d'éléments
         res_partner_obj = self.pool.get('res.partner')
         # On récupère tout les clients (id + mode de facturation) trié par id
-        res = res_partner_obj.search(cr, uid, [], order='id ASC', context=context)
+        res = res_partner_obj.search(cr, uid, [('facturation_bl', '!=', 'n')], order='id ASC', context=context)
         if res:
             # Création d'un thread
             traitement_sous_thread = threading.Thread(target=self._traitement_factures, 
