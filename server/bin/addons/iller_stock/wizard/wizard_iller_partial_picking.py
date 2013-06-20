@@ -394,10 +394,8 @@ def _check_invoicing(self, cr, uid, data, context={}):
         data_id = data.get('id')
         pooler.get_pool(cr.dbname).get('stock.move')
         sp = pooler.get_pool(cr.dbname).get('stock.picking').browse(cr, uid, data_id, context=context)
-        print sp.min_date, sp.max_date
         if sp.address_id and sp.address_id.partner_id and sp.address_id.partner_id.facturation_bl:
             type_facturation = sp.address_id.partner_id.facturation_bl
-            print type_facturation
             # Si facturation = NON, alors on va vers l'état 'invoice'
             if type_facturation == 'n':
                 return 'invoice'
@@ -455,16 +453,21 @@ def _create_invoice(obj, cr, uid, data, context=None):
         raise wizard.except_wizard(_('Error'), _('Invoice is not created'))
     if inv_type == 'out_invoice':
         xml_id = 'action_invoice_tree5'
+        name_xml_id = 'Facture client'
     elif inv_type == 'in_invoice':
         xml_id = 'action_invoice_tree8'
+        name_xml_id = 'Facture fournisseur'
     elif inv_type == 'out_refund':
         xml_id = 'action_invoice_tree10'
+        name_xml_id = 'Avoir client'
     else:
         xml_id = 'action_invoice_tree12'
+        name_xml_id = 'Avoir fournisseur'
 
     result = mod_obj._get_id(cr, uid, 'account', xml_id)
     mod_id = mod_obj.read(cr, uid, result, ['res_id'], context=context)
     result = act_obj.read(cr, uid, mod_id['res_id'], context=context)
+    result['name'] = name_xml_id
     result['res_id'] = invoice_ids
     result['context'] = context
     return result
@@ -479,7 +482,6 @@ def _workflow_validation(self, cr, uid, data, context={}):
     pick_id = data['pick_id']
     pick_obj = pooler.get_pool(cr.dbname).get('stock.picking')
 
-    print new_picking, 'new_picking'
     # At first we confirm the new picking (if necessary)
     wf_service = netsvc.LocalService("workflow")
     if new_picking:
@@ -496,7 +498,6 @@ def _workflow_validation(self, cr, uid, data, context={}):
     bo_name = ''
     if new_picking:
         bo_name = pick_obj.read(cr, uid, [new_picking], ['name'])[0]['name']
-    print new_picking, bo_name
     return {'new_picking':new_picking or False, 'back_order':bo_name}
 
 class iller_partial_picking(wizard.interface):

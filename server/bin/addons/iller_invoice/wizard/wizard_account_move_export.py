@@ -30,6 +30,7 @@ import time
 import wizard
 import os
 import mx
+import csv
 
 _form_init = """<?xml version="1.0" encoding="utf-8" ?>
 <form string="Choix de l'action">
@@ -139,14 +140,16 @@ class iller_export_cron(osv.osv):
     """
         Permet d'écrire le contenu du fichier
     """
-    def _write_file(self, cr, uid, ids, data, export_file, nom_fichier, fichier, context=None):
+    def _write_file(self, cr, uid, ids, data, writer_csv, export_file, lignes, context=None):
 
         try:
-            # On écrit le fichier avec le contenu généré (en mode ajout)
-            export_file.write(fichier.encode("utf-8"))
+
+            # On écrit le fichier avec la liste de lignes à écrire, selon
+            # le formattage définit dans le constructeur
+            writer_csv.writerows(lignes)
             # On met à jour les variables du fichier
             data['name'] = nom_fichier
-            # Replace le pointeur au début du fichier, car le write le positionne à la fin
+            # Replace le curseur au début du fichier, car le write le positionne à la fin
             export_file.seek(0)
             data['file'] = base64.encodestring(export_file.read())
         except IOError as e:
@@ -159,17 +162,17 @@ class iller_export_cron(osv.osv):
     """
     def _generate_line(self, cr, uid, ids, data, line_id, context=None):
 
+        ligne = []
         date_object = mx.DateTime.Parser.DateTimeFromString(line_id.date)
         # Génération de la ligne
-        ligne = '' 
-        ligne += "%s/%s/%s;" %(date_object.day, date_object.month, date_object.year)
-        ligne += "%s;" %(line_id.invoice.number,)
-        ligne += "%s;" %(line_id.partner_id.ref,)
-        ligne += "%s;" %(line_id.account_id.code,)
-        ligne += "%s;" %(line_id.debit,)
-        ligne += "%s;" %(line_id.credit,)
-        ligne += "\r\n"
-        ligne = ligne.replace(".", ",")
+        ligne.append('%s/%s/%s' %(date_object.day, date_object.month, date_object.year))
+        ligne.append('%s' %(line_id.invoice.number,))
+        ligne.append('%s' %(line_id.partner_id.ref,))
+        ligne.append('%s' %(line_id.account_id.code,))
+        str_debit = '%s' %(line_id.debit,)
+        str_credit ='%s' %(line_id.credit,)
+        ligne.append(str_debit.replace('.', ','))
+        ligne.append(str_credit.replace('.', ','))
 
         return ligne
 
@@ -191,43 +194,47 @@ class iller_export_cron(osv.osv):
         export_file = open(path, "a+")
         statinfo = os.stat(path) # In bytes
 
+        writer_csv = csv.writer(export_file, delimiter=';')
         if(statinfo.st_size > 1):
             # La taille est supérieure à 1 donc on n'initialise pas avec l'entête
-            fichier = ''
+            lignes = []
         else:
             # Initialisation de l'entête du tableau
-            fichier = u'Date;Facture;Référence partenaire;Code compte financier;Débit;Crédit\n'
-
+            lignes = [['Date', 'Facture', 'Référence partenaire', 'Code compte financier', 'Débit', 'Crédit']]
+        
         # Pour chaque facture on va chercher les écritures comptables
         for invoice in invoices_records:
             # Initialisation d'une variable stockant les lignes dont le compte est de type 'other'
-            lignes_other  = ''
-            # Pour chaque account move line correspondant à la facture en cours
-            for line_id in invoice.move_id.line_id:
-                # Si la ligne n'a pas encore été exportée
-                if not line_id.exported_csv:
-                    # Si le compte est de type other, alors on stocke dans une variable temporaire pour
-                    # permettre de les écrire plus tard
-                    if line_id.account_id.type == 'other':
-                        lignes_other += self._generate_line(cr, uid, ids, data, line_id, context=context)
-                    # Sinon on ajoute directement au fichier la ligne reçue
-                    else:
-                        fichier += self._generate_line(cr, uid, ids, data, line_id, context=context)
+            lignes_other = []
+            if invoice.move_id.line_id:
+                # Pour chaque account move line correspondant à la facture en cours
+                for line_id in invoice.move_id.line_id:
+                    # Si la ligne n'a pas encore été exportée
+                    if not line_id.exported_csv:
+                        # Si le compte est de type other, alors on stocke dans une variable temporaire pour
+                        # permettre de les écrire plus tard
+                        if line_id.account_id.type == 'other':
+                            #~ lignes_other += self._generate_line(cr, uid, ids, data, line_id, context=context)
+                            lignes_other.append(self._generate_line(cr, uid, ids, data, line_id, context=context))
+                        # Sinon on ajoute directement au fichier la ligne reçue
+                        else:
+                            #~ fichier += self._generate_line(cr, uid, ids, data, line_id, context=context)
+                            lignes.append(self._generate_line(cr, uid, ids, data, line_id, context=context))
 
-                    # Pour chaque ligne on indique que la ligne a été exportée : servira éventuellement
-                    # si on veut pouvoir 'check' si la ligne est déjà présente ou non
-                    obj_move_line.write(cr, uid, [line_id.id], {'exported_csv':True}, context=context)
+                        # Pour chaque ligne on indique que la ligne a été exportée 
+                        obj_move_line.write(cr, uid, [line_id.id], {'exported_csv':True}, context=context)
 
             # Après la boucle on ajoute les lignes dont le type est 'other'
-            fichier += lignes_other
-
+            lignes += lignes_other
             # On notifie que les écritures comptable ont bien été écrites pour cette facture
+            # Permet lors de l'appel suivant de récupérer uniquement les factures dont les
+            # lignes n'ont pas été exportées
             obj_invoice.write(cr, uid, invoice.id, {'exported':True}, context=context)
 
             # Décommenter pour avoir une séparation entre les factures
-            fichier += '\r\n'
+            # lignes += ['\r\n']
 
-        self._write_file(cr, uid, ids, data, export_file, nom_fichier, fichier,  context=context)
+        self._write_file(cr, uid, ids, data, writer_csv, export_file,  lignes, context=context)
 
         self._generate_attachment(cr, uid, ids, data, nom_fichier, context=context)
 

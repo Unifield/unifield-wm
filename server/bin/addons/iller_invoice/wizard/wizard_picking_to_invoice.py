@@ -120,8 +120,7 @@ class wizard_picking_to_invoice(osv.osv_memory):
                     client_sans_mode.append(client_id)
                     continue
                 # Récupération des livraisons à facturer
-                sp_obj = self.pool.get('stock.picking')
-                sp_ids = sp_obj.search(cr, uid, [('invoice_state', '=', '2binvoiced'), 
+                sp_ids = so_obj.search(cr, uid, [('invoice_state', '=', '2binvoiced'), 
                     ('address_id.partner_id', '=', client_id), ('state', '=', 'done')]) or None
 
                 # Tri des éléments à facturer
@@ -129,7 +128,7 @@ class wizard_picking_to_invoice(osv.osv_memory):
                     bon_du_client = []
                     for sp_id in sp_ids:
                         # Recherche des dates du bon de livraison
-                        sp_date = datetime.strptime(sp_obj.read(cr, uid, sp_id, ['date_done']).get('date_done'), 
+                        sp_date = datetime.strptime(so_obj.read(cr, uid, sp_id, ['date_done']).get('date_done'), 
                             '%Y-%m-%d %H:%M:%S')
                         # Si la date de la facture est inférieure à 
                         #+ last_date, alors on récupère l'identifiant de la
@@ -156,8 +155,14 @@ class wizard_picking_to_invoice(osv.osv_memory):
             for bon in sorted(bon_a_facturer):
                 factures_reussies = []
                 try:
-                    factures_reussies = sp_obj.action_invoice_create(cr, uid, bon_a_facturer[bon], journal_id, True, 'out_invoice', context=context)
-                    inv_obj.write(cr, uid, factures_reussies[bon_a_facturer[bon][0]], {'state':'open'}, context=context)
+                    factures_reussies = so_obj.action_invoice_create(cr, uid, bon_a_facturer[bon], journal_id, True, 'out_invoice', context=context)
+                    invoice_ids = factures_reussies.values()
+                    # On appelle toutes les méthodes nécessaires pour la génération de la facture
+                    # avec les dates/move lines/number
+                    inv_obj.action_date_assign(cr, uid, invoice_ids)
+                    inv_obj.action_move_create(cr, uid, invoice_ids)
+                    inv_obj.action_number(cr, uid, invoice_ids)
+                    inv_obj.write(cr, uid, invoice_ids, {'state':'open'}, context=context)
                 except Exception:
                     bon_non_reussis += bon_a_facturer[bon]
                     continue
@@ -291,7 +296,8 @@ class wizard_picking_to_invoice(osv.osv_memory):
         #+ facturer.
         # Préparation d'éléments
         res_partner_obj = self.pool.get('res.partner')
-        # On récupère tout les clients (id + mode de facturation) trié par id
+        # On récupère tout les clients (id + mode de facturation) trié
+        # par id dont le mode de facturation bl est différent de 'n'
         res = res_partner_obj.search(cr, uid, [('facturation_bl', '!=', 'n')], order='id ASC', context=context)
         if res:
             # Création d'un thread

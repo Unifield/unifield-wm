@@ -89,6 +89,99 @@ class pricelist_promo_configuration(osv.osv):
 pricelist_promo_configuration()
 
 
+class product_tarifs_speciaux(osv.osv):
+    _name = 'product.tarifs.speciaux'
+    _description = 'Tarifs Spéciaux'
+
+    def write(self, cr, uid, ids, vals, context=None):
+
+        if 'product_id' in vals:
+            obj_item = self.pool.get('product.pricelist.item')
+            
+            if not vals['product_id'][0][2]:
+ 
+                #Recherche des items correspondant à l'id de la ligne de tarif à supprimer
+                item_ids = obj_item.search(cr, uid, [('tarif_special_id', '=', vals['product_id'][0][1])], context=context)
+                
+                obj_item.unlink(cr, uid, item_ids, context=context)
+                res = super(product_tarifs_speciaux, self).write(cr, uid, ids, vals, context=context)
+            else:
+                res = super(product_tarifs_speciaux, self).write(cr, uid, ids, vals, context=context)
+                data = {}
+                # Parcours des tarifs spéciaux
+                for tarifs_spec in self.browse(cr, uid, ids, context=context):
+                
+                    # Parcours des lignes de tarifs
+                    for product_tarif in tarifs_spec.product_id:
+                        # Si la ligne de tarif n'est pas reliée à un pricelist item alors on crée la ligne de tarif spécial
+                        if not product_tarif.item_id:
+
+                            # Création des lignes de tarifs pour chaque nouveau produit
+                            # Ajout dans le contexte de l'id de l'objet tarifs spéciaux pour indiquer au wizard
+                            # les actions à faire pour ce cas spécifique
+                            context['tarif_speciaux_id'] = tarifs_spec.id
+                            
+                            # Construction de la variable data contenant le produit à créer
+                            data['form']= {
+                                'end_date': tarifs_spec.end_date,
+                                'title': tarifs_spec.name,
+                                'client': tarifs_spec.client.id, 
+                                'products': [
+                                            (0, 0, {
+                                                'prix_vente_initial': 0.0, 
+                                                'product_id': product_tarif.product_id.id, 
+                                                'prix_special': product_tarif.prix_special
+                                            })
+                                ], 
+                                'start_date': tarifs_spec.start_date
+                            }
+                            
+                            data['ids']= ids
+                            data['report_type']= 'pdf'
+                            data['model']= 'ir.ui.menu'
+                            data['id']= tarifs_spec.id
+                            
+                            args = {}
+                            #random pour générer le nom
+                            import random
+                            #~ random.seed(tarifs_spec.id)
+                            rand_res = random.random()
+                            name_random = tarifs_spec.name + str(rand_res)
+                            wiz_obj = wiz_tarif(name_random)
+                            wiz_tarif._create_tarif_special_client(wiz_obj, cr, uid, data, args, context=context)
+                            #Suppression de la clé du dictionnaire contenant le nom du wizard
+                            del netsvc.SERVICES['wizard.%s' % name_random]
+                            del wiz_obj
+                        else:
+                            
+                            #Parcours des différentes listes de prix reliées 
+                            for it_id in product_tarif.item_id:
+                                # On récupère le record du pricelist item relié à la ligne de tarif
+                                item_record = obj_item.browse(cr, uid, it_id.id, context=context)
+                                # S'il y a des différences entre la ligne de tarif et la liste de prix
+                                if item_record.price_surcharge != product_tarif.prix_special or item_record.product_id.id != product_tarif.product_id.id:
+                                    # On met à jour la liste de prix correspondante 
+                                    obj_item.write(cr, uid, item_record.id, {  
+                                                                            'product_id':product_tarif.product_id.id,
+                                                                            'price_surcharge':product_tarif.prix_special,
+                                                                        }, context=context)
+
+        return res
+
+    _columns = {
+            'name': fields.char(size=64, string='Nom', select=1, required=True),
+            'client': fields.many2one('res.partner', 'Client', select=1, required=True),
+            'start_date': fields.date(string='Date de début', select=1, required=True),
+            'end_date': fields.date(string='Date de fin', required=True),
+            'product_id': fields.one2many('product.tarif.special.client',
+                'tarif_id',
+                string='Tarif Spécial'),
+        }
+product_tarifs_speciaux()
+
+
+
+
 class product_pricelist_version(osv.osv):
     _name = 'product.pricelist.version'
     _inherit = 'product.pricelist.version'
@@ -99,6 +192,21 @@ class product_pricelist_version(osv.osv):
     }
 
 product_pricelist_version()
+
+
+class product_tarif_special_client(osv.osv):
+    _name = 'product.tarif.special.client'
+    _description = 'Tarif spécial pour un client'
+
+    _columns = {
+            'product_id': fields.many2one('product.product', 'Produit'),
+            'tarif_id': fields.many2one('product.tarifs.speciaux', 'Tarifs Spéciaux'),
+            'item_id': fields.one2many('product.pricelist.item', 'tarif_special_id',string='Liste de vente', invisible=True),
+            'prix_special': fields.float(digits=(16, int(config['price_accuracy'])), string='Prix spécial', required=True),
+
+    }
+
+product_tarif_special_client()
 
 
 class product_pricelist_item(osv.osv):
@@ -143,6 +251,7 @@ class product_pricelist_item(osv.osv):
         return {'value': {'price_discount': 0.0}}
 
 product_pricelist_item()
+
 
 class product_pricelist(osv.osv):
     _name = 'product.pricelist'
@@ -954,112 +1063,6 @@ class product2_in_promo(osv.osv):
     _inherit = 'product.pricelist.promo.in'
 
 product2_in_promo()
-
-
-class product_tarifs_speciaux(osv.osv):
-    _name = 'product.tarifs.speciaux'
-    _description = 'Tarifs Spéciaux'
-
-    def write(self, cr, uid, ids, vals, context=None):
-
-        if 'product_id' in vals:
-            obj_item = self.pool.get('product.pricelist.item')
-            
-            if not vals['product_id'][0][2]:
- 
-                #Recherche des items correspondant à l'id de la ligne de tarif à supprimer
-                item_ids = obj_item.search(cr, uid, [('tarif_special_id', '=', vals['product_id'][0][1])], context=context)
-                
-                obj_item.unlink(cr, uid, item_ids, context=context)
-                res = super(product_tarifs_speciaux, self).write(cr, uid, ids, vals, context=context)
-            else:
-                res = super(product_tarifs_speciaux, self).write(cr, uid, ids, vals, context=context)
-                data = {}
-                # Parcours des tarifs spéciaux
-                for tarifs_spec in self.browse(cr, uid, ids, context=context):
-                
-                    # Parcours des lignes de tarifs
-                    for product_tarif in tarifs_spec.product_id:
-                        # Si la ligne de tarif n'est pas reliée à un pricelist item alors on crée la ligne de tarif spécial
-                        if not product_tarif.item_id:
-
-                            # Création des lignes de tarifs pour chaque nouveau produit
-                            # Ajout dans le contexte de l'id de l'objet tarifs spéciaux pour indiquer au wizard
-                            # les actions à faire pour ce cas spécifique
-                            context['tarif_speciaux_id'] = tarifs_spec.id
-                            
-                            # Construction de la variable data contenant le produit à créer
-                            data['form']= {
-                                'end_date': tarifs_spec.end_date,
-                                'title': tarifs_spec.name,
-                                'client': tarifs_spec.client.id, 
-                                'products': [
-                                            (0, 0, {
-                                                'prix_vente_initial': 0.0, 
-                                                'product_id': product_tarif.product_id.id, 
-                                                'prix_special': product_tarif.prix_special
-                                            })
-                                ], 
-                                'start_date': tarifs_spec.start_date
-                            }
-                            
-                            data['ids']= ids
-                            data['report_type']= 'pdf'
-                            data['model']= 'ir.ui.menu'
-                            data['id']= tarifs_spec.id
-                            
-                            args = {}
-                            #random pour générer le nom
-                            import random
-                            #~ random.seed(tarifs_spec.id)
-                            rand_res = random.random()
-                            name_random = tarifs_spec.name + str(rand_res)
-                            wiz_obj = wiz_tarif(name_random)
-                            wiz_tarif._create_tarif_special_client(wiz_obj, cr, uid, data, args, context=context)
-                            #Suppression de la clé du dictionnaire contenant le nom du wizard
-                            del netsvc.SERVICES['wizard.%s' % name_random]
-                            del wiz_obj
-                        else:
-                            
-                            #Parcours des différentes listes de prix reliées 
-                            for it_id in product_tarif.item_id:
-                                # On récupère le record du pricelist item relié à la ligne de tarif
-                                item_record = obj_item.browse(cr, uid, it_id.id, context=context)
-                                # S'il y a des différences entre la ligne de tarif et la liste de prix
-                                if item_record.price_surcharge != product_tarif.prix_special or item_record.product_id.id != product_tarif.product_id.id:
-                                    # On met à jour la liste de prix correspondante 
-                                    obj_item.write(cr, uid, item_record.id, {  
-                                                                            'product_id':product_tarif.product_id.id,
-                                                                            'price_surcharge':product_tarif.prix_special,
-                                                                        }, context=context)
-
-        return res
-
-    _columns = {
-            'name': fields.char(size=64, string='Nom', select=1, required=True),
-            'client': fields.many2one('res.partner', 'Client', select=1, required=True),
-            'start_date': fields.date(string='Date de début', select=1, required=True),
-            'end_date': fields.date(string='Date de fin', required=True),
-            'product_id': fields.one2many('product.tarif.special.client',
-                'tarif_id',
-                string='Tarif Spécial'),
-        }
-product_tarifs_speciaux()
-
-
-class product_tarif_special_client(osv.osv):
-    _name = 'product.tarif.special.client'
-    _description = 'Tarif spécial pour un client'
-
-    _columns = {
-            'product_id': fields.many2one('product.product', 'Produit'),
-            'tarif_id': fields.many2one('product.tarifs.speciaux', 'Tarifs Spéciaux'),
-            'item_id': fields.one2many('product.pricelist.item', 'tarif_special_id',string='Liste de vente', invisible=True),
-            'prix_special': fields.float(digits=(16, int(config['price_accuracy'])), string='Prix spécial', required=True),
-
-    }
-
-product_tarif_special_client()
 
 
 class product_tarif_special_client_wizard(osv.osv):
