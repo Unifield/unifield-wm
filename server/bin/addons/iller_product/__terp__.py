@@ -30,7 +30,7 @@
         concernant les produits pour Iller
 """,
     'author': 'TeMPO Consulting',
-    'website': 'http://www.tempo-consulting.com',
+    'website': 'http://www.tempo-consulting.fr',
     'depends': ['product', 'stock'],
     'init_xml': [],
     'demo_xml': [],
@@ -40,9 +40,10 @@
             'pricelist_wizard.xml',
             'pricelist_report.xml',
             'wizard/wizard_raz_prix_noel_view.xml',
+            'pricelist_data.xml',
             'security/iller_product_security.xml',
             'security/ir.model.access.csv',
-            'pricelist_data.xml',
+
 ],
     'installable': True,
     'active': False,

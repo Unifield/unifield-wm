@@ -119,8 +119,9 @@ class iller_export_cron(osv.osv):
     def _generate_attachment(self, cr, uid, ids, data, nom_fichier, context=None):
 
         obj_attachment = self.pool.get('ir.attachment')
+        nom_fichier_joint = cr.dbname + '_' + nom_fichier
         # On crée un fichier attaché au niveau du serveur récupérable depuis la gestion des documents
-        attach_id = obj_attachment.search(cr, uid, [('datas_fname', '=', nom_fichier)], context=context)
+        attach_id = obj_attachment.search(cr, uid, [('datas_fname', '=', nom_fichier_joint)], context=context)
         # Si le fichier attaché existe déjà on écrit les modifications
         if attach_id:
             vals = {
@@ -132,7 +133,7 @@ class iller_export_cron(osv.osv):
             vals = {
                 'name': 'Export comptable',
                 'datas': data['file'],
-                'datas_fname': nom_fichier,
+                'datas_fname': nom_fichier_joint,
                 'description': u'Fichier csv avec les écritures comptables des factures',
             }
             obj_attachment.create(cr, uid, vals, context=context)
@@ -186,7 +187,7 @@ class iller_export_cron(osv.osv):
         obj_move_line = self.pool.get('account.move.line')
         
         ids = []
-        path = "%s%s" % (path_fichier, nom_fichier)
+        path = "%s%s_%s" % (path_fichier, cr.dbname, nom_fichier)
 
         invoices_records = self._get_invoices_records(cr, uid, ids, data, context )
 
@@ -286,7 +287,7 @@ class wizard_account_move_export(wizard.interface):
     """
     def _verif_file(self, cr, uid, data, context=None):
 
-        path = "%s%s" % (path_fichier, nom_fichier)
+        path = "%s%s_%s" % (path_fichier, cr.dbname, nom_fichier)
         if not os.path.isfile(path):
             return 'no_file'
         return 'get'
@@ -339,7 +340,7 @@ class wizard_account_move_export(wizard.interface):
     """
     def _action_get_file_export(self, cr, uid, data, context=None):
         
-        path = "%s%s" % (path_fichier, nom_fichier)
+        path = "%s%s_%s" % (path_fichier, cr.dbname, nom_fichier)
         # On ouvre le fichier en mode ajout
         export_file = open(path, "r+")
         try:
