@@ -19,11 +19,13 @@
 #
 ##############################################################################
 
-##### Ce module génère beaucoup de dépendances, en cas de nouvelle base, commenter toutes les dépendances 
-##### ainsi que le fichier ir.model.access.csv, sauf base, subscription, account, et sale, et lancer l'install ou -u base
-##### Il faut ensuite décommenter ir.model.access.csv (les dépendances seront installées)
-##### et mettre à jour le module. Si des problèmes persistent avec iller_tournee, commenter dans
-##### iller_tournee tout ce qui attrait à la sécurité, lancer une mise à jour et décommenter
+##### Ce module génère beaucoup de dépendances, en cas de nouvelle base,
+##### des problèmes de références sur les objets peuvent survenir.
+##### Pour plus de sécurité, commenter la ligne 'security/ir.model.access.csv',
+##### peut permettre d'installer sans problème les autres modules dabord
+##### puis, de décommenter pour réinstaller iller_groups. Si des soucis
+##### surviennent encore, il faut installer les modules concernés à la main
+
 {
     'name': 'Gestion des droits pour ILLER',
     'version': '1.0',
@@ -33,7 +35,7 @@
         concernant la gestion des droits pour Iller
 """,
     'author': 'TeMPO Consulting',
-    'website': 'http://www.tempo-consulting.com',
+    'website': 'http://www.tempo-consulting.fr',
     'depends': [
         'base', 
         'account',

@@ -1,4 +1,10 @@
 "id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+access_iller_poste,iller.poste,iller_tournee.model_iller_poste,,1,1,1,1
+access_commandes_par_tournee,commandes.par.tournee,iller_tournee.model_commandes_par_tournee,,1,1,1,1
+access_articles_par_tournee,articles.par.tournee,iller_tournee.model_articles_par_tournee,,1,1,1,1
+access_produits_a_expedier_par_tournee,produits.a.expedier.par.tournee,iller_tournee.model_produits_a_expedier_par_tournee,,1,1,1,1
+access_produits_par_poste,produits.par.poste,iller_tournee.model_produits_par_poste,,1,1,1,1
+access_export_bizerba,export.bizerba,iller_tournee.model_export_bizerba,,1,1,1,1
 "access_iller_poste_user","iller.poste.user","model_iller_poste","base.group_user",1,0,0,0
 "access_iller_tournee_user","iller.tournee.user","model_tournee_iller","base.group_user",1,0,0,0
 "access_iller_poste_mgmt","iller.poste.mgmt","model_iller_poste","iller_groups.group_tournee_mgmt",1,1,1,1
