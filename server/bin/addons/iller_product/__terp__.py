@@ -36,11 +36,11 @@
     'demo_xml': [],
     'update_xml': [
             'product_view.xml',
-            'pricelist_view.xml',
             'pricelist_wizard.xml',
             'pricelist_report.xml',
             'wizard/wizard_raz_prix_noel_view.xml',
             'pricelist_data.xml',
+            'pricelist_view.xml',
             'security/iller_product_security.xml',
             'security/ir.model.access.csv',
 

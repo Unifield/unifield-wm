@@ -249,219 +249,672 @@
             <field name="currency_id" ref="base.EUR" />
         </record>
 -->
-
-        <!-- Listes de prix -->
+        <!-- Listes de prix NU01-->
         <record id="product.list0" model="product.pricelist">
             <field name="name">NU01</field>
             <field name="type">sale</field>
             <field name="currency_id" ref="base.EUR" />
-            <field name="promo_jaune" eval="0" />
-            <field name="promo_blanche" eval="0" />
+            <field name="mea_choice">non</field>
+            <field name="promo_choice">non</field>
         </record>
-
-        <record id="pricelist_tarif_general_jaune" model="product.pricelist">
-            <field name="name">NU01 (Jaune)</field>
+        
+        <record id="product.list0_pb" model="product.pricelist">
+            <field name="name">NU01 Promo Blanche</field>
             <field name="type">sale</field>
             <field name="currency_id" ref="base.EUR" />
-            <field name="promo_jaune" eval="1" />
-            <field name="promo_blanche" eval="0" />
+            <field name="mea_choice">non</field>
+            <field name="promo_choice">oui</field>
+            <field name="tarif_choice" >blanche</field>
         </record>
 
-        <record id="pricelist_tarif_general_blanche" model="product.pricelist">
-            <field name="name">NU01 (Blanche)</field>
+        <record id="product.list0_pj" model="product.pricelist">
+            <field name="name">NU01 Promo Jaune</field>
             <field name="type">sale</field>
             <field name="currency_id" ref="base.EUR" />
-            <field name="promo_jaune" eval="0" />
-            <field name="promo_blanche" eval="1" />
+            <field name="mea_choice">non</field>
+            <field name="promo_choice">oui</field>
+            <field name="tarif_choice" >jaune</field>            
         </record>
-
+        
+        <record id="product.list0_mb" model="product.pricelist">
+            <field name="name">NU01 MEA Blanche</field>
+            <field name="type">sale</field>
+            <field name="currency_id" ref="base.EUR" />
+            <field name="mea_choice">oui</field>
+            <field name="promo_choice">non</field>
+            <field name="tarif_choice" >blanche</field>
+        </record>
+        
+        <record id="product.list0_mj" model="product.pricelist">
+            <field name="name">NU01 MEA Jaune</field>
+            <field name="type">sale</field>
+            <field name="currency_id" ref="base.EUR" />
+            <field name="mea_choice">oui</field>
+            <field name="promo_choice">non</field>
+            <field name="tarif_choice" >jaune</field>            
+        </record>
+        <record id="product.list0_pbmb" model="product.pricelist">
+            <field name="name">NU01 Promo MEA Blanche</field>
+            <field name="type">sale</field>
+            <field name="currency_id" ref="base.EUR" />
+            <field name="mea_choice">oui</field>
+            <field name="promo_choice">oui</field>
+            <field name="tarif_choice" >blanche</field>            
+        </record>
+        <record id="product.list0_pjmj" model="product.pricelist">
+            <field name="name">NU01 Promo MEA Jaune</field>
+            <field name="type">sale</field>
+            <field name="currency_id" ref="base.EUR" />
+            <field name="mea_choice">oui</field>
+            <field name="promo_choice">oui</field>
+            <field name="tarif_choice" >jaune</field>            
+        </record>
+        <!-- Listes de prix NU02-->
         <record id="pricelist_tarif_coda2" model="product.pricelist">
             <field name="name">NU02</field>
             <field name="type">sale</field>
             <field name="currency_id" ref="base.EUR" />
-            <field name="promo_jaune" eval="0" />
-            <field name="promo_blanche" eval="0" />
+            <field name="mea_choice">non</field>
+            <field name="promo_choice">non</field>
         </record>
 
-        <record id="pricelist_tarif_coda2_jaune" model="product.pricelist">
-            <field name="name">NU02 (Jaune)</field>
+        <record id="pricelist_tarif_coda2_pb" model="product.pricelist">
+            <field name="name">NU02 Promo Blanche</field>
             <field name="type">sale</field>
             <field name="currency_id" ref="base.EUR" />
-            <field name="promo_jaune" eval="1" />
-            <field name="promo_blanche" eval="0" />
+            <field name="mea_choice">non</field>
+            <field name="promo_choice">oui</field>
+            <field name="tarif_choice" >blanche</field>            
         </record>
 
-        <record id="pricelist_tarif_coda2_blanche" model="product.pricelist">
-            <field name="name">NU02 (Blanche)</field>
+        <record id="pricelist_tarif_coda2_pj" model="product.pricelist">
+            <field name="name">NU02 Promo Jaune</field>
             <field name="type">sale</field>
             <field name="currency_id" ref="base.EUR" />
-            <field name="promo_jaune" eval="0" />
-            <field name="promo_blanche" eval="1" />
+            <field name="mea_choice">non</field>
+            <field name="promo_choice">oui</field>
+            <field name="tarif_choice" >jaune</field>            
         </record>
-
+        
+        <record id="pricelist_tarif_coda2_mb" model="product.pricelist">
+            <field name="name">NU02 MEA Blanche</field>
+            <field name="type">sale</field>
+            <field name="currency_id" ref="base.EUR" />
+            <field name="mea_choice">oui</field>
+            <field name="promo_choice">non</field>
+            <field name="tarif_choice" >blanche</field>            
+        </record>
+        
+        <record id="pricelist_tarif_coda2_mj" model="product.pricelist">
+            <field name="name">NU02 MEA Jaune</field>
+            <field name="type">sale</field>
+            <field name="currency_id" ref="base.EUR" />
+            <field name="mea_choice">oui</field>
+            <field name="promo_choice">non</field>
+            <field name="tarif_choice" >jaune</field>            
+        </record>
+        <record id="pricelist_tarif_coda2_pbmb" model="product.pricelist">
+            <field name="name">NU02 Promo MEA Blanche</field>
+            <field name="type">sale</field>
+            <field name="currency_id" ref="base.EUR" />
+            <field name="mea_choice">oui</field>
+            <field name="promo_choice">oui</field>
+            <field name="tarif_choice" >blanche</field>
+        </record>
+        <record id="pricelist_tarif_coda2_pjmj" model="product.pricelist">
+            <field name="name">NU02 Promo MEA Jaune</field>
+            <field name="type">sale</field>
+            <field name="currency_id" ref="base.EUR" />
+            <field name="mea_choice">oui</field>
+            <field name="promo_choice">oui</field>
+            <field name="tarif_choice" >jaune</field>
+        </record>
+        <!-- Listes de prix NU03-->
         <record id="pricelist_tarif_coda3" model="product.pricelist">
             <field name="name">NU03</field>
             <field name="type">sale</field>
             <field name="currency_id" ref="base.EUR" />
-            <field name="promo_jaune" eval="0" />
-            <field name="promo_blanche" eval="0" />
+            <field name="mea_choice">non</field>
+            <field name="promo_choice">oui</field>
         </record>
 
-        <record id="pricelist_tarif_coda3_jaune" model="product.pricelist">
-            <field name="name">NU03 (Jaune)</field>
+        <record id="pricelist_tarif_coda3_pb" model="product.pricelist">
+            <field name="name">NU03 Promo Blanche</field>
             <field name="type">sale</field>
             <field name="currency_id" ref="base.EUR" />
-            <field name="promo_jaune" eval="1" />
-            <field name="promo_blanche" eval="0" />
+            <field name="mea_choice">non</field>
+            <field name="promo_choice">oui</field>
+            <field name="tarif_choice" >blanche</field>            
         </record>
 
-        <record id="pricelist_tarif_coda3_blanche" model="product.pricelist">
-            <field name="name">NU03 (Blanche)</field>
+        <record id="pricelist_tarif_coda3_pj" model="product.pricelist">
+            <field name="name">NU03 Promo Jaune</field>
             <field name="type">sale</field>
             <field name="currency_id" ref="base.EUR" />
-            <field name="promo_jaune" eval="0" />
-            <field name="promo_blanche" eval="1" />
+            <field name="mea_choice">non</field>
+            <field name="promo_choice">oui</field>
+            <field name="tarif_choice" >jaune</field>            
         </record>
-
+        
+        <record id="pricelist_tarif_coda3_mb" model="product.pricelist">
+            <field name="name">NU03 MEA Blanche</field>
+            <field name="type">sale</field>
+            <field name="currency_id" ref="base.EUR" />
+            <field name="mea_choice">oui</field>
+            <field name="promo_choice">non</field>
+            <field name="tarif_choice" >blanche</field>            
+        </record>
+        
+        <record id="pricelist_tarif_coda3_mj" model="product.pricelist">
+            <field name="name">NU03 MEA Jaune</field>
+            <field name="type">sale</field>
+            <field name="currency_id" ref="base.EUR" />
+            <field name="mea_choice">oui</field>
+            <field name="promo_choice">non</field>
+            <field name="tarif_choice" >jaune</field>             
+        </record>
+        <record id="pricelist_tarif_coda3_pbmb" model="product.pricelist">
+            <field name="name">NU03 Promo MEA Blanche</field>
+            <field name="type">sale</field>
+            <field name="currency_id" ref="base.EUR" />
+            <field name="mea_choice">oui</field>
+            <field name="promo_choice">oui</field>
+            <field name="tarif_choice" >blanche</field>
+        </record>
+        <record id="pricelist_tarif_coda3_pjmj" model="product.pricelist">
+            <field name="name">NU03 Promo MEA Jaune</field>
+            <field name="type">sale</field>
+            <field name="currency_id" ref="base.EUR" />
+            <field name="mea_choice">oui</field>
+            <field name="promo_choice">oui</field>
+            <field name="tarif_choice" >jaune</field>             
+        </record>
+        
+        <!-- Listes de prix NU04-->
         <record id="pricelist_tarif_coda4" model="product.pricelist">
             <field name="name">NU04</field>
             <field name="type">sale</field>
             <field name="currency_id" ref="base.EUR" />
-            <field name="promo_jaune" eval="0" />
-            <field name="promo_blanche" eval="0" />
+            <field name="mea_choice">non</field>
+            <field name="promo_choice">non</field>
         </record>
 
-        <record id="pricelist_tarif_coda4_jaune" model="product.pricelist">
-            <field name="name">NU04 (Jaune)</field>
+        <record id="pricelist_tarif_coda4_pb" model="product.pricelist">
+            <field name="name">NU04 Promo Blanche</field>
             <field name="type">sale</field>
             <field name="currency_id" ref="base.EUR" />
-            <field name="promo_jaune" eval="1" />
-            <field name="promo_blanche" eval="0" />
+            <field name="mea_choice">non</field>
+            <field name="promo_choice">oui</field>
+            <field name="tarif_choice" >blanche</field>             
         </record>
 
-        <record id="pricelist_tarif_coda4_blanche" model="product.pricelist">
-            <field name="name">NU04 (Blanche)</field>
+        <record id="pricelist_tarif_coda4_pj" model="product.pricelist">
+            <field name="name">NU04 Promo Jaune</field>
             <field name="type">sale</field>
             <field name="currency_id" ref="base.EUR" />
-            <field name="promo_jaune" eval="0" />
-            <field name="promo_blanche" eval="1" />
+            <field name="mea_choice">non</field>
+            <field name="promo_choice">oui</field>
+            <field name="tarif_choice" >jaune</field>               
         </record>
-
+        
+        <record id="pricelist_tarif_coda4_mb" model="product.pricelist">
+            <field name="name">NU04 MEA Blanche</field>
+            <field name="type">sale</field>
+            <field name="currency_id" ref="base.EUR" />
+            <field name="mea_choice">oui</field>
+            <field name="promo_choice">non</field>
+            <field name="tarif_choice" >blanche</field>               
+        </record>
+        
+        <record id="pricelist_tarif_coda4_mj" model="product.pricelist">
+            <field name="name">NU04 MEA Jaune</field>
+            <field name="type">sale</field>
+            <field name="currency_id" ref="base.EUR" />
+            <field name="mea_choice">oui</field>
+            <field name="promo_choice">non</field>
+            <field name="tarif_choice" >jaune</field>              
+        </record>
+        <record id="pricelist_tarif_coda4_pbmb" model="product.pricelist">
+            <field name="name">NU04 Promo MEA Blanche</field>
+            <field name="type">sale</field>
+            <field name="currency_id" ref="base.EUR" />
+            <field name="mea_choice">oui</field>
+            <field name="promo_choice">oui</field>
+            <field name="tarif_choice" >blanche</field>              
+        </record>
+        <record id="pricelist_tarif_coda4_pjmj" model="product.pricelist">
+            <field name="name">NU04 Promo MEA Jaune</field>
+            <field name="type">sale</field>
+            <field name="currency_id" ref="base.EUR" />
+            <field name="mea_choice">oui</field>
+            <field name="promo_choice">oui</field>
+            <field name="tarif_choice" >jaune</field>
+        </record>
         <record id="pricelist_tarif_collectivite" model="product.pricelist">
             <field name="name">NU99</field>
             <field name="type">sale</field>
             <field name="currency_id" ref="base.EUR" />
-            <field name="promo_jaune" eval="0" />
-            <field name="promo_blanche" eval="0" />
         </record>
 
         <record id="pricelist_tarif_hilton_blanche" model="product.pricelist">
             <field name="name">Tarif Hilton (Blanche)</field>
             <field name="type">sale</field>
             <field name="currency_id" ref="base.EUR" />
-            <field name="promo_jaune" eval="0" />
-            <field name="promo_blanche" eval="1" />
-            <field name="tarif_special" eval="1" />
+            <field name="tarif_choice" >blanche</field>              
+            <field name="tarif_special_choice" >oui</field>              
         </record>
 
-
-        <!-- Version de liste de prix -->
+        <!-- Version de liste de prix  NU01-->
         <record id="product.ver0" model="product.pricelist.version">
             <field name="base_ok" eval="1" />
-            <field name="name">Base</field>
+            <field name="active" eval="1" />
+            <field name="name">Base NU01</field>
             <field name="pricelist_id" ref="product.list0" />
             <field name="date_start">01/01/1900</field>
             <field name="date_end">01/01/2100</field>
         </record>
-
-        <record id="pricelist_version_base_general_jaune" model="product.pricelist.version">
+        <record id="product_promo_blanche1" model="product.pricelist.version">
             <field name="base_ok" eval="1" />
-            <field name="name">Base</field>
-            <field name="pricelist_id" ref="pricelist_tarif_general_jaune" />
+            <field name="active" eval="1" />
+            <field name="name">Base promo blanche NU01</field>
+            <field name="pricelist_id" ref="product.list0_pb" />
             <field name="date_start">01/01/1900</field>
             <field name="date_end">01/01/2100</field>
         </record>
-
-        <record id="pricelist_version_base_general_blanche" model="product.pricelist.version">
+        <record id="product_promo_jaune1" model="product.pricelist.version">
             <field name="base_ok" eval="1" />
-            <field name="name">Base</field>
-            <field name="pricelist_id" ref="pricelist_tarif_general_blanche" />
+            <field name="active" eval="1" />
+            <field name="name">Base promo jaune NU01</field>
+            <field name="pricelist_id" ref="product.list0_pj" />
             <field name="date_start">01/01/1900</field>
             <field name="date_end">01/01/2100</field>
         </record>
-
-        <record id="pricelist_version_base_coda2" model="product.pricelist.version">
+        <record id="product_mea_blanche1" model="product.pricelist.version">
             <field name="base_ok" eval="1" />
-            <field name="name">Base</field>
+            <field name="active" eval="1" />
+            <field name="name">Base mea blanche NU01</field>
+            <field name="pricelist_id" ref="product.list0_mb" />
+            <field name="date_start">01/01/1900</field>
+            <field name="date_end">01/01/2100</field>
+        </record>
+        <record id="product_mea_jaune1" model="product.pricelist.version">
+            <field name="base_ok" eval="1" />
+            <field name="active" eval="1" />
+            <field name="name">Base mea jaune NU01</field>
+            <field name="pricelist_id" ref="product.list0_mj" />
+            <field name="date_start">01/01/1900</field>
+            <field name="date_end">01/01/2100</field>
+        </record>
+        
+        <record id="product_promo_mea_blanche1" model="product.pricelist.version">
+            <field name="base_ok" eval="1" />
+            <field name="active" eval="1" />
+            <field name="name">Base promo mea blanche NU01</field>
+            <field name="pricelist_id" ref="product.list0_pbmb" />
+            <field name="date_start">01/01/1900</field>
+            <field name="date_end">01/01/2100</field>
+        </record>
+        <record id="product_promo_mea_jaune1" model="product.pricelist.version">
+            <field name="base_ok" eval="1" />
+            <field name="active" eval="1" />
+            <field name="name">Base promo mea jaune NU01</field>
+            <field name="pricelist_id" ref="product.list0_pjmj" />
+            <field name="date_start">01/01/1900</field>
+            <field name="date_end">01/01/2100</field>
+        </record>
+        <!-- Version de liste de prix  NU02-->
+        <record id="product_base2" model="product.pricelist.version">
+            <field name="base_ok" eval="1" />
+            <field name="active" eval="1" />
+            <field name="name">Base NU02</field>
             <field name="pricelist_id" ref="pricelist_tarif_coda2" />
             <field name="date_start">01/01/1900</field>
             <field name="date_end">01/01/2100</field>
         </record>
-
-        <record id="pricelist_version_base_coda2_jaune" model="product.pricelist.version">
-            <field name="name">Base</field>
+        
+        <record id="product_promo_blanche2" model="product.pricelist.version">
             <field name="base_ok" eval="1" />
-            <field name="pricelist_id" ref="pricelist_tarif_coda2_jaune" />
+            <field name="active" eval="1" />
+            <field name="name">Base promo blanche NU02</field>
+            <field name="pricelist_id" ref="pricelist_tarif_coda2_pb" />
             <field name="date_start">01/01/1900</field>
             <field name="date_end">01/01/2100</field>
         </record>
-
-        <record id="pricelist_version_base_coda2_blanche" model="product.pricelist.version">
-            <field name="name">Base</field>
+        <record id="product_promo_jaune2" model="product.pricelist.version">
             <field name="base_ok" eval="1" />
-            <field name="pricelist_id" ref="pricelist_tarif_coda2_blanche" />
+            <field name="active" eval="1" />
+            <field name="name">Base promo jaune NU02</field>
+            <field name="pricelist_id" ref="pricelist_tarif_coda2_pj" />
             <field name="date_start">01/01/1900</field>
             <field name="date_end">01/01/2100</field>
         </record>
-
-        <record id="pricelist_version_base_coda3" model="product.pricelist.version">
+        <record id="product_mea_blanche2" model="product.pricelist.version">
             <field name="base_ok" eval="1" />
-            <field name="name">Base</field>
+            <field name="active" eval="1" />
+            <field name="name">Base mea blanche NU02</field>
+            <field name="pricelist_id" ref="pricelist_tarif_coda2_mb" />
+            <field name="date_start">01/01/1900</field>
+            <field name="date_end">01/01/2100</field>
+        </record>
+        <record id="product_mea_jaune2" model="product.pricelist.version">
+            <field name="base_ok" eval="1" />
+            <field name="active" eval="1" />
+            <field name="name">Base mea jaune NU02</field>
+            <field name="pricelist_id" ref="pricelist_tarif_coda2_mj" />
+            <field name="date_start">01/01/1900</field>
+            <field name="date_end">01/01/2100</field>
+        </record>
+        <record id="product_promo_mea_blanche2" model="product.pricelist.version">
+            <field name="base_ok" eval="1" />
+            <field name="active" eval="1" />
+            <field name="name">Base promo mea blanche NU02</field>
+            <field name="pricelist_id" ref="pricelist_tarif_coda2_pbmb" />
+            <field name="date_start">01/01/1900</field>
+            <field name="date_end">01/01/2100</field>
+        </record>
+        <record id="product_promo_mea_jaune2" model="product.pricelist.version">
+            <field name="base_ok" eval="1" />
+            <field name="active" eval="1" />
+            <field name="name">Base promo mea jaune NU02</field>
+            <field name="pricelist_id" ref="pricelist_tarif_coda2_pjmj" />
+            <field name="date_start">01/01/1900</field>
+            <field name="date_end">01/01/2100</field>
+        </record>
+        <!-- Version de liste de prix  NU03-->
+
+        <record id="product_base3" model="product.pricelist.version">
+            <field name="base_ok" eval="1" />
+            <field name="active" eval="1" />
+            <field name="name">Base NU03</field>
             <field name="pricelist_id" ref="pricelist_tarif_coda3" />
             <field name="date_start">01/01/1900</field>
             <field name="date_end">01/01/2100</field>
         </record>
-
-        <record id="pricelist_version_base_coda3_jaune" model="product.pricelist.version">
+        <record id="product_promo_blanche3" model="product.pricelist.version">
             <field name="base_ok" eval="1" />
-            <field name="name">Base</field>
-            <field name="pricelist_id" ref="pricelist_tarif_coda3_jaune" />
+            <field name="active" eval="1" />
+            <field name="name">Base promo blanche NU03</field>
+            <field name="pricelist_id" ref="pricelist_tarif_coda3_pb" />
             <field name="date_start">01/01/1900</field>
             <field name="date_end">01/01/2100</field>
         </record>
-
-        <record id="pricelist_version_base_coda3_blanche" model="product.pricelist.version">
+        <record id="product_promo_jaune3" model="product.pricelist.version">
             <field name="base_ok" eval="1" />
-            <field name="name">Base</field>
-            <field name="pricelist_id" ref="pricelist_tarif_coda3_blanche" />
+            <field name="active" eval="1" />
+            <field name="name">Base promo jaune NU03</field>
+            <field name="pricelist_id" ref="pricelist_tarif_coda3_pj" />
             <field name="date_start">01/01/1900</field>
             <field name="date_end">01/01/2100</field>
         </record>
-
-        <record id="pricelist_version_base_coda4" model="product.pricelist.version">
+        <record id="product_mea_blanche3" model="product.pricelist.version">
             <field name="base_ok" eval="1" />
-            <field name="name">Base</field>
+            <field name="active" eval="1" />
+            <field name="name">Base mea blanche NU03</field>
+            <field name="pricelist_id" ref="pricelist_tarif_coda3_mb" />
+            <field name="date_start">01/01/1900</field>
+            <field name="date_end">01/01/2100</field>
+        </record>
+        <record id="product_mea_jaune3" model="product.pricelist.version">
+            <field name="base_ok" eval="1" />
+            <field name="active" eval="1" />
+            <field name="name">Base mea jaune NU03</field>
+            <field name="pricelist_id" ref="pricelist_tarif_coda3_mj" />
+            <field name="date_start">01/01/1900</field>
+            <field name="date_end">01/01/2100</field>
+        </record>
+        <record id="product_promo_mea_blanche3" model="product.pricelist.version">
+            <field name="base_ok" eval="1" />
+            <field name="active" eval="1" />
+            <field name="name">Base promo mea blanche NU03</field>
+            <field name="pricelist_id" ref="pricelist_tarif_coda3_pbmb" />
+            <field name="date_start">01/01/1900</field>
+            <field name="date_end">01/01/2100</field>
+        </record>
+        <record id="product_promo_mea_jaune3" model="product.pricelist.version">
+            <field name="base_ok" eval="1" />
+            <field name="active" eval="1" />
+            <field name="name">Base promo mea jaune NU03</field>
+            <field name="pricelist_id" ref="pricelist_tarif_coda3_pjmj" />
+            <field name="date_start">01/01/1900</field>
+            <field name="date_end">01/01/2100</field>
+        </record>        
+        <!-- Version de liste de prix  NU04-->
+
+        <record id="product_base4" model="product.pricelist.version">
+            <field name="base_ok" eval="1" />
+            <field name="active" eval="1" />
+            <field name="name">Base NU04</field>
             <field name="pricelist_id" ref="pricelist_tarif_coda4" />
             <field name="date_start">01/01/1900</field>
             <field name="date_end">01/01/2100</field>
         </record>
-
-        <record id="pricelist_version_base_coda4_jaune" model="product.pricelist.version">
+        <record id="product_promo_blanche4" model="product.pricelist.version">
             <field name="base_ok" eval="1" />
-            <field name="name">Base</field>
-            <field name="pricelist_id" ref="pricelist_tarif_coda4_jaune" />
+            <field name="active" eval="1" />
+            <field name="name">Base promo blanche NU04</field>
+            <field name="pricelist_id" ref="pricelist_tarif_coda4_pb" />
             <field name="date_start">01/01/1900</field>
             <field name="date_end">01/01/2100</field>
         </record>
-
-        <record id="pricelist_version_base_coda4_blanche" model="product.pricelist.version">
+        <record id="product_promo_jaune4" model="product.pricelist.version">
             <field name="base_ok" eval="1" />
-            <field name="name">Base</field>
-            <field name="pricelist_id" ref="pricelist_tarif_coda4_blanche" />
+            <field name="active" eval="1" />
+            <field name="name">Base promo jaune NU04</field>
+            <field name="pricelist_id" ref="pricelist_tarif_coda4_pj" />
             <field name="date_start">01/01/1900</field>
             <field name="date_end">01/01/2100</field>
         </record>
+        <record id="product_mea_blanche4" model="product.pricelist.version">
+            <field name="base_ok" eval="1" />
+            <field name="active" eval="1" />
+            <field name="name">Base mea blanche NU04</field>
+            <field name="pricelist_id" ref="pricelist_tarif_coda4_mb" />
+            <field name="date_start">01/01/1900</field>
+            <field name="date_end">01/01/2100</field>
+        </record>
+        <record id="product_mea_jaune4" model="product.pricelist.version">
+            <field name="base_ok" eval="1" />
+            <field name="active" eval="1" />
+            <field name="name">Base mea jaune NU04</field>
+            <field name="pricelist_id" ref="pricelist_tarif_coda4_mj" />
+            <field name="date_start">01/01/1900</field>
+            <field name="date_end">01/01/2100</field>
+        </record>
+        <record id="product_promo_mea_blanche4" model="product.pricelist.version">
+            <field name="base_ok" eval="1" />
+            <field name="active" eval="1" />
+            <field name="name">Base promo mea blanche NU04</field>
+            <field name="pricelist_id" ref="pricelist_tarif_coda4_pbmb" />
+            <field name="date_start">01/01/1900</field>
+            <field name="date_end">01/01/2100</field>
+        </record>
+        <record id="product_promo_mea_jaune4" model="product.pricelist.version">
+            <field name="base_ok" eval="1" />
+            <field name="active" eval="1" />
+            <field name="name">Base promo mea jaune NU04</field>
+            <field name="pricelist_id" ref="pricelist_tarif_coda4_pjmj" />
+            <field name="date_start">01/01/1900</field>
+            <field name="date_end">01/01/2100</field>
+        </record>
+        
+        <!-- Lignes de liste de prix -->
 
+        <!-- Lignes NU01 -->
+
+        <record id="pricelist_item_coda1_pb" model="product.pricelist.item">
+            <field name="base" eval="-1" />
+            <field name="base_pricelist_id" ref="product.list0" />
+            <field name="name">Tous les produits</field>
+            <field name="price_version_id" ref="product_promo_blanche1" />
+        </record>
+
+        <record id="pricelist_item_coda1_pj" model="product.pricelist.item">
+            <field name="base" eval="-1" />
+            <field name="base_pricelist_id" ref="product.list0" />
+            <field name="name">Tous les produits</field>
+            <field name="price_version_id" ref="product_promo_jaune1" />
+        </record>
+
+        <record id="pricelist_item_coda1_mb" model="product.pricelist.item">
+            <field name="base" eval="-1" />
+            <field name="base_pricelist_id" ref="product.list0" />
+            <field name="name">Tous les produits</field>
+            <field name="price_version_id" ref="product_mea_blanche1" />
+        </record>
+        
+        <record id="pricelist_item_coda1_mj" model="product.pricelist.item">
+            <field name="base" eval="-1" />
+            <field name="base_pricelist_id" ref="product.list0" />
+            <field name="name">Tous les produits</field>
+            <field name="price_version_id" ref="product_mea_jaune1" />
+        </record>
+        
+        <record id="pricelist_item_coda1_pbmb" model="product.pricelist.item">
+            <field name="base" eval="-1" />
+            <field name="base_pricelist_id" ref="product.list0_pb" />
+            <field name="name">Tous les produits</field>
+            <field name="price_version_id" ref="product_promo_mea_blanche1" />
+        </record>
+        
+        <record id="pricelist_item_coda1_pjmj" model="product.pricelist.item">
+            <field name="base" eval="-1" />
+            <field name="base_pricelist_id" ref="product.list0_pj" />
+            <field name="name">Tous les produits</field>
+            <field name="price_version_id" ref="product_promo_mea_jaune1" />
+        </record>
+
+        <!-- Lignes NU02 -->
+
+        <record id="pricelist_item_coda2_pb" model="product.pricelist.item">
+            <field name="base" eval="-1" />
+            <field name="base_pricelist_id" ref="pricelist_tarif_coda2" />
+            <field name="name">Tous les produits</field>
+            <field name="price_version_id" ref="product_promo_blanche2" />
+        </record>
+
+        <record id="pricelist_item_coda2_pj" model="product.pricelist.item">
+            <field name="base" eval="-1" />
+            <field name="base_pricelist_id" ref="pricelist_tarif_coda2" />
+            <field name="name">Tous les produits</field>
+            <field name="price_version_id" ref="product_promo_jaune2" />
+        </record>
+
+        <record id="pricelist_item_coda2_mb" model="product.pricelist.item">
+            <field name="base" eval="-1" />
+            <field name="base_pricelist_id" ref="pricelist_tarif_coda2" />
+            <field name="name">Tous les produits</field>
+            <field name="price_version_id" ref="product_mea_blanche2" />
+        </record>
+        
+        <record id="pricelist_item_coda2_mj" model="product.pricelist.item">
+            <field name="base" eval="-1" />
+            <field name="base_pricelist_id" ref="pricelist_tarif_coda2" />
+            <field name="name">Tous les produits</field>
+            <field name="price_version_id" ref="product_mea_jaune2" />
+        </record>
+        
+        <record id="pricelist_item_coda2_pbmb" model="product.pricelist.item">
+            <field name="base" eval="-1" />
+            <field name="base_pricelist_id" ref="pricelist_tarif_coda2_pb" />
+            <field name="name">Tous les produits</field>
+            <field name="price_version_id" ref="product_promo_mea_blanche2" />
+        </record>
+        
+        <record id="pricelist_item_coda2_pjmj" model="product.pricelist.item">
+            <field name="base" eval="-1" />
+            <field name="base_pricelist_id" ref="pricelist_tarif_coda2_pj" />
+            <field name="name">Tous les produits</field>
+            <field name="price_version_id" ref="product_promo_mea_jaune2" />
+        </record>
+
+        <!-- Lignes NU03 -->
+
+        <record id="pricelist_item_coda3_pb" model="product.pricelist.item">
+            <field name="base" eval="-1" />
+            <field name="base_pricelist_id" ref="pricelist_tarif_coda3" />
+            <field name="name">Tous les produits</field>
+            <field name="price_version_id" ref="product_promo_blanche3" />
+        </record>
+
+        <record id="pricelist_item_coda3_pj" model="product.pricelist.item">
+            <field name="base" eval="-1" />
+            <field name="base_pricelist_id" ref="pricelist_tarif_coda3" />
+            <field name="name">Tous les produits</field>
+            <field name="price_version_id" ref="product_promo_jaune3" />
+        </record>
+
+        <record id="pricelist_item_coda3_mb" model="product.pricelist.item">
+            <field name="base" eval="-1" />
+            <field name="base_pricelist_id" ref="pricelist_tarif_coda3" />
+            <field name="name">Tous les produits</field>
+            <field name="price_version_id" ref="product_mea_blanche3" />
+        </record>
+        
+        <record id="pricelist_item_coda3_mj" model="product.pricelist.item">
+            <field name="base" eval="-1" />
+            <field name="base_pricelist_id" ref="pricelist_tarif_coda3" />
+            <field name="name">Tous les produits</field>
+            <field name="price_version_id" ref="product_mea_jaune3" />
+        </record>
+        
+        <record id="pricelist_item_coda3_pbmb" model="product.pricelist.item">
+            <field name="base" eval="-1" />
+            <field name="base_pricelist_id" ref="pricelist_tarif_coda3_pb" />
+            <field name="name">Tous les produits</field>
+            <field name="price_version_id" ref="product_promo_mea_blanche3" />
+        </record>
+        
+        <record id="pricelist_item_coda3_pjmj" model="product.pricelist.item">
+            <field name="base" eval="-1" />
+            <field name="base_pricelist_id" ref="pricelist_tarif_coda3_pj" />
+            <field name="name">Tous les produits</field>
+            <field name="price_version_id" ref="product_promo_mea_jaune3" />
+        </record>
+        
+        <!-- Lignes NU04 -->
+
+        <record id="pricelist_item_coda4_pb" model="product.pricelist.item">
+            <field name="base" eval="-1" />
+            <field name="base_pricelist_id" ref="pricelist_tarif_coda4" />
+            <field name="name">Tous les produits</field>
+            <field name="price_version_id" ref="product_promo_blanche4" />
+        </record>
+
+        <record id="pricelist_item_coda4_pj" model="product.pricelist.item">
+            <field name="base" eval="-1" />
+            <field name="base_pricelist_id" ref="pricelist_tarif_coda4" />
+            <field name="name">Tous les produits</field>
+            <field name="price_version_id" ref="product_promo_jaune4" />
+        </record>
+
+        <record id="pricelist_item_coda4_mb" model="product.pricelist.item">
+            <field name="base" eval="-1" />
+            <field name="base_pricelist_id" ref="pricelist_tarif_coda4" />
+            <field name="name">Tous les produits</field>
+            <field name="price_version_id" ref="product_mea_blanche4" />
+        </record>
+        
+        <record id="pricelist_item_coda4_mj" model="product.pricelist.item">
+            <field name="base" eval="-1" />
+            <field name="base_pricelist_id" ref="pricelist_tarif_coda4" />
+            <field name="name">Tous les produits</field>
+            <field name="price_version_id" ref="product_mea_jaune4" />
+        </record>
+        
+        <record id="pricelist_item_coda4_pbmb" model="product.pricelist.item">
+            <field name="base" eval="-1" />
+            <field name="base_pricelist_id" ref="pricelist_tarif_coda4_pb" />
+            <field name="name">Tous les produits</field>
+            <field name="price_version_id" ref="product_promo_mea_blanche4" />
+        </record>
+        
+        <record id="pricelist_item_coda4_pjmj" model="product.pricelist.item">
+            <field name="base" eval="-1" />
+            <field name="base_pricelist_id" ref="pricelist_tarif_coda4_pj" />
+            <field name="name">Tous les produits</field>
+            <field name="price_version_id" ref="product_promo_mea_jaune4" />
+        </record>
+        
        <record id="pricelist_version_base_tarif_collectivite" model="product.pricelist.version">
             <field name="base_ok" eval="1" />
             <field name="name">Base</field>
@@ -476,10 +929,11 @@
             <field name="pricelist_id" ref="pricelist_tarif_hilton_blanche" />
             <field name="date_start">01/01/1900</field>
             <field name="date_end">01/01/2100</field>
-    </record>
+        </record>
 
 
         <!-- Lignes de liste de prix -->
+
         <record id="product.item0" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Boeuf</field>
@@ -723,24 +1177,11 @@
             <field name="bareme_id" ref="product_pricelist_bareme_c15" />
         </record>
 
-        <record id="pricelist_item_general_blanche" model="product.pricelist.item">
-        <field name="base" eval="-1" />
-            <field name="base_pricelist_id" ref="product.list0" />
-            <field name="name">Tous les produits</field>
-            <field name="price_version_id" ref="pricelist_version_base_general_blanche" />
-        </record>
-
-        <record id="pricelist_item_general_jaune" model="product.pricelist.item">
-        <field name="base" eval="-1" />
-            <field name="base_pricelist_id" ref="product.list0" />
-            <field name="name">Tous les produits</field>
-            <field name="price_version_id" ref="pricelist_version_base_general_jaune" />
-        </record>
 
         <record id="pricelist_item_coda2_01" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Boeuf</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda2" />
+            <field name="price_version_id" ref="product_base2" />
             <field name="categ_id" ref="categ01" />
             <field name="price_discount" eval="0.162790" />
             <field name="bareme_id" ref="product_pricelist_bareme_c14" />
@@ -749,7 +1190,7 @@
         <record id="pricelist_item_coda2_02" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Cheval</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda2" />
+            <field name="price_version_id" ref="product_base2" />
             <field name="categ_id" ref="categ02" />
             <field name="price_discount" eval="0.162790" />
             <field name="bareme_id" ref="product_pricelist_bareme_c14" />
@@ -758,7 +1199,7 @@
         <record id="pricelist_item_coda2_03" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Veau</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda2" />
+            <field name="price_version_id" ref="product_base2" />
             <field name="categ_id" ref="categ03" />
         <field name="price_discount" eval="0.162790" />
             <field name="bareme_id" ref="product_pricelist_bareme_c14" />
@@ -767,7 +1208,7 @@
         <record id="pricelist_item_coda2_04" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Agneau</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda2" />
+            <field name="price_version_id" ref="product_base2" />
             <field name="categ_id" ref="categ04" />
         <field name="price_discount" eval="0.162790" />
             <field name="bareme_id" ref="product_pricelist_bareme_c14" />
@@ -776,7 +1217,7 @@
         <record id="pricelist_item_coda2_05" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Porc</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda2" />
+            <field name="price_version_id" ref="product_base2" />
             <field name="categ_id" ref="categ05" />
         <field name="price_discount" eval="0.162790" />
             <field name="bareme_id" ref="product_pricelist_bareme_c14" />
@@ -785,7 +1226,7 @@
         <record id="pricelist_item_coda2_06" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Charcuterie</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda2" />
+            <field name="price_version_id" ref="product_base2" />
             <field name="categ_id" ref="categ06" />
         <field name="price_discount" eval="0.162790" />
             <field name="bareme_id" ref="product_pricelist_bareme_c14" />
@@ -794,7 +1235,7 @@
         <record id="pricelist_item_coda2_07" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Volailles</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda2" />
+            <field name="price_version_id" ref="product_base2" />
             <field name="categ_id" ref="categ07" />
         <field name="price_discount" eval="0.162790" />
             <field name="bareme_id" ref="product_pricelist_bareme_c14" />
@@ -803,7 +1244,7 @@
         <record id="pricelist_item_coda2_08" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Gibier</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda2" />
+            <field name="price_version_id" ref="product_base2" />
             <field name="categ_id" ref="categ08" />
         <field name="price_discount" eval="0.162790" />
             <field name="bareme_id" ref="product_pricelist_bareme_c14" />
@@ -812,7 +1253,7 @@
         <record id="pricelist_item_coda2_09" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Produits surgelés</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda2" />
+            <field name="price_version_id" ref="product_base2" />
             <field name="categ_id" ref="categ09" />
         <field name="price_discount" eval="0.162790" />
             <field name="bareme_id" ref="product_pricelist_bareme_c14" />
@@ -821,7 +1262,7 @@
         <record id="pricelist_item_coda2_10" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Épices</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda2" />
+            <field name="price_version_id" ref="product_base2" />
             <field name="categ_id" ref="categ10" />
         <field name="price_discount" eval="0.190470" />
             <field name="bareme_id" ref="product_pricelist_bareme_c13" />
@@ -830,7 +1271,7 @@
         <record id="pricelist_item_coda2_11" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Marinade</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda2" />
+            <field name="price_version_id" ref="product_base2" />
             <field name="categ_id" ref="categ11" />
         <field name="price_discount" eval="0.162790" />
             <field name="bareme_id" ref="product_pricelist_bareme_c14" />
@@ -839,7 +1280,7 @@
         <record id="pricelist_item_coda2_12" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Produits R G</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda2" />
+            <field name="price_version_id" ref="product_base2" />
             <field name="categ_id" ref="categ12" />
         <field name="price_discount" eval="0.162790" />
             <field name="bareme_id" ref="product_pricelist_bareme_c14" />
@@ -848,7 +1289,7 @@
         <record id="pricelist_item_coda2_13" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Abats</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda2" />
+            <field name="price_version_id" ref="product_base2" />
             <field name="categ_id" ref="categ13" />
         <field name="price_discount" eval="0.162790" />
             <field name="bareme_id" ref="product_pricelist_bareme_c14" />
@@ -857,7 +1298,7 @@
         <record id="pricelist_item_coda2_14" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Produits confits</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda2" />
+            <field name="price_version_id" ref="product_base2" />
             <field name="categ_id" ref="categ14" />
         <field name="price_discount" eval="0.162790" />
             <field name="bareme_id" ref="product_pricelist_bareme_c14" />
@@ -866,7 +1307,7 @@
         <record id="pricelist_item_coda2_15" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Produits congelés</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda2" />
+            <field name="price_version_id" ref="product_base2" />
             <field name="categ_id" ref="categ15" />
         <field name="price_discount" eval="0.162790" />
             <field name="bareme_id" ref="product_pricelist_bareme_c14" />
@@ -875,7 +1316,7 @@
         <record id="pricelist_item_coda2_16" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Boeuf charollais</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda2" />
+            <field name="price_version_id" ref="product_base2" />
             <field name="categ_id" ref="categ16" />
         <field name="price_discount" eval="0.162790" />
             <field name="bareme_id" ref="product_pricelist_bareme_c14" />
@@ -884,7 +1325,7 @@
         <record id="pricelist_item_coda2_17" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Emballage congélateur</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda2" />
+            <field name="price_version_id" ref="product_base2" />
             <field name="categ_id" ref="categ17" />
         <field name="price_discount" eval="0.162790" />
             <field name="bareme_id" ref="product_pricelist_bareme_c14" />
@@ -893,7 +1334,7 @@
         <record id="pricelist_item_coda2_18" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">   </field>
-            <field name="price_version_id" ref="pricelist_version_base_coda2" />
+            <field name="price_version_id" ref="product_base2" />
             <field name="categ_id" ref="categ18" />
         <field name="price_discount" eval="0.162790" />
             <field name="bareme_id" ref="product_pricelist_bareme_c14" />
@@ -902,7 +1343,7 @@
         <record id="pricelist_item_coda2_21" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Produist R G</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda2" />
+            <field name="price_version_id" ref="product_base2" />
             <field name="categ_id" ref="categ21" />
         <field name="price_discount" eval="0.162790" />
             <field name="bareme_id" ref="product_pricelist_bareme_c14" />
@@ -911,7 +1352,7 @@
         <record id="pricelist_item_coda2_22" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Produits magasin</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda2" />
+            <field name="price_version_id" ref="product_base2" />
             <field name="categ_id" ref="categ22" />
         <field name="price_discount" eval="0.162790" />
             <field name="bareme_id" ref="product_pricelist_bareme_c14" />
@@ -920,7 +1361,7 @@
         <record id="pricelist_item_coda2_23" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Produits magasin</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda2" />
+            <field name="price_version_id" ref="product_base2" />
             <field name="categ_id" ref="categ23" />
         <field name="price_discount" eval="0.162790" />
             <field name="bareme_id" ref="product_pricelist_bareme_c14" />
@@ -929,7 +1370,7 @@
         <record id="pricelist_item_coda2_24" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Vins magasin</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda2" />
+            <field name="price_version_id" ref="product_base2" />
             <field name="categ_id" ref="categ24" />
         <field name="price_discount" eval="0.162790" />
             <field name="bareme_id" ref="product_pricelist_bareme_c14" />
@@ -938,7 +1379,7 @@
         <record id="pricelist_item_coda2_25" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Poisson</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda2" />
+            <field name="price_version_id" ref="product_base2" />
             <field name="categ_id" ref="categ25" />
         <field name="price_discount" eval="0.162790" />
             <field name="bareme_id" ref="product_pricelist_bareme_c14" />
@@ -947,7 +1388,7 @@
         <record id="pricelist_item_coda2_26" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Légumes</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda2" />
+            <field name="price_version_id" ref="product_base2" />
             <field name="categ_id" ref="categ26" />
         <field name="price_discount" eval="0.162790" />
             <field name="bareme_id" ref="product_pricelist_bareme_c14" />
@@ -956,7 +1397,7 @@
         <record id="pricelist_item_coda2_27" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Purée de fruits et coulis</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda2" />
+            <field name="price_version_id" ref="product_base2" />
             <field name="categ_id" ref="categ27" />
             <field name="price_discount" eval="0.190470" />
             <field name="bareme_id" ref="product_pricelist_bareme_c13" />
@@ -965,7 +1406,7 @@
         <record id="pricelist_item_coda2_28" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Fromage</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda2" />
+            <field name="price_version_id" ref="product_base2" />
             <field name="categ_id" ref="categ28" />
             <field name="price_discount" eval="0.190470" />
             <field name="bareme_id" ref="product_pricelist_bareme_c13" />
@@ -974,30 +1415,16 @@
         <record id="pricelist_item_coda2_99" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Transport</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda2" />
+            <field name="price_version_id" ref="product_base2" />
             <field name="categ_id" ref="categ99" />
             <field name="price_discount" eval="0.041600" />
             <field name="bareme_id" ref="product_pricelist_bareme_c19" />
         </record>
 
-        <record id="pricelist_item_coda2_blanche" model="product.pricelist.item">
-        <field name="base" eval="-1" />
-            <field name="base_pricelist_id" ref="pricelist_tarif_coda2" />
-            <field name="name">Tous les produits</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda2_blanche" />
-        </record>
-
-        <record id="pricelist_item_coda2_jaune" model="product.pricelist.item">
-        <field name="base" eval="-1" />
-            <field name="base_pricelist_id" ref="pricelist_tarif_coda2" />
-            <field name="name">Tous les produits</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda2_jaune" />
-        </record>
-
         <record id="pricelist_item_coda3_01" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Boeuf</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda3" />
+            <field name="price_version_id" ref="product_base3" />
             <field name="categ_id" ref="categ01" />
             <field name="price_discount" eval="0.136300" />
             <field name="bareme_id" ref="product_pricelist_bareme_c15" />
@@ -1006,7 +1433,7 @@
         <record id="pricelist_item_coda3_02" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Cheval</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda3" />
+            <field name="price_version_id" ref="product_base3" />
             <field name="categ_id" ref="categ02" />
             <field name="price_discount" eval="0.136300" />
             <field name="bareme_id" ref="product_pricelist_bareme_c15" />
@@ -1015,7 +1442,7 @@
         <record id="pricelist_item_coda3_03" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Veau</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda3" />
+            <field name="price_version_id" ref="product_base3" />
             <field name="categ_id" ref="categ03" />
             <field name="price_discount" eval="0.136300" />
             <field name="bareme_id" ref="product_pricelist_bareme_c15" />
@@ -1024,7 +1451,7 @@
         <record id="pricelist_item_coda3_04" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Agneau</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda3" />
+            <field name="price_version_id" ref="product_base3" />
             <field name="categ_id" ref="categ04" />
             <field name="price_discount" eval="0.136300" />
             <field name="bareme_id" ref="product_pricelist_bareme_c15" />
@@ -1033,7 +1460,7 @@
         <record id="pricelist_item_coda3_05" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Porc</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda3" />
+            <field name="price_version_id" ref="product_base3" />
             <field name="categ_id" ref="categ05" />
             <field name="price_discount" eval="0.136300" />
             <field name="bareme_id" ref="product_pricelist_bareme_c15" />
@@ -1042,7 +1469,7 @@
         <record id="pricelist_item_coda3_06" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Charcuterie</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda3" />
+            <field name="price_version_id" ref="product_base3" />
             <field name="categ_id" ref="categ06" />
             <field name="price_discount" eval="0.162790" />
             <field name="bareme_id" ref="product_pricelist_bareme_c14" />
@@ -1051,7 +1478,7 @@
         <record id="pricelist_item_coda3_07" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Volailles</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda3" />
+            <field name="price_version_id" ref="product_base3" />
             <field name="categ_id" ref="categ07" />
             <field name="price_discount" eval="0.136300" />
             <field name="bareme_id" ref="product_pricelist_bareme_c15" />
@@ -1060,7 +1487,7 @@
         <record id="pricelist_item_coda3_08" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Gibier</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda3" />
+            <field name="price_version_id" ref="product_base3" />
             <field name="categ_id" ref="categ08" />
             <field name="price_discount" eval="0.136300" />
             <field name="bareme_id" ref="product_pricelist_bareme_c15" />
@@ -1069,7 +1496,7 @@
         <record id="pricelist_item_coda3_09" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Produits surgelés</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda3" />
+            <field name="price_version_id" ref="product_base3" />
             <field name="categ_id" ref="categ09" />
             <field name="price_discount" eval="0.162790" />
             <field name="bareme_id" ref="product_pricelist_bareme_c14" />
@@ -1078,7 +1505,7 @@
         <record id="pricelist_item_coda3_10" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Épices</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda3" />
+            <field name="price_version_id" ref="product_base3" />
             <field name="categ_id" ref="categ10" />
             <field name="price_discount" eval="0.190470" />
             <field name="bareme_id" ref="product_pricelist_bareme_c13" />
@@ -1087,7 +1514,7 @@
         <record id="pricelist_item_coda3_11" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Marinade</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda3" />
+            <field name="price_version_id" ref="product_base3" />
             <field name="categ_id" ref="categ11" />
             <field name="price_discount" eval="0.136300" />
             <field name="bareme_id" ref="product_pricelist_bareme_c15" />
@@ -1096,7 +1523,7 @@
         <record id="pricelist_item_coda3_12" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Produits R G</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda3" />
+            <field name="price_version_id" ref="product_base3" />
             <field name="categ_id" ref="categ12" />
             <field name="price_discount" eval="0.136300" />
             <field name="bareme_id" ref="product_pricelist_bareme_c15" />
@@ -1105,7 +1532,7 @@
         <record id="pricelist_item_coda3_13" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Abats</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda3" />
+            <field name="price_version_id" ref="product_base3" />
             <field name="categ_id" ref="categ13" />
             <field name="price_discount" eval="0.136300" />
             <field name="bareme_id" ref="product_pricelist_bareme_c15" />
@@ -1114,7 +1541,7 @@
         <record id="pricelist_item_coda3_14" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Produits confits</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda3" />
+            <field name="price_version_id" ref="product_base3" />
             <field name="categ_id" ref="categ14" />
             <field name="price_discount" eval="0.136300" />
             <field name="bareme_id" ref="product_pricelist_bareme_c15" />
@@ -1123,7 +1550,7 @@
         <record id="pricelist_item_coda3_15" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Produits congelés</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda3" />
+            <field name="price_version_id" ref="product_base3" />
             <field name="categ_id" ref="categ15" />
             <field name="price_discount" eval="0.136300" />
             <field name="bareme_id" ref="product_pricelist_bareme_c15" />
@@ -1132,7 +1559,7 @@
         <record id="pricelist_item_coda3_16" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Boeuf charollais</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda3" />
+            <field name="price_version_id" ref="product_base3" />
             <field name="categ_id" ref="categ16" />
             <field name="price_discount" eval="0.136300" />
             <field name="bareme_id" ref="product_pricelist_bareme_c15" />
@@ -1141,7 +1568,7 @@
         <record id="pricelist_item_coda3_17" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Emballage congélateur</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda3" />
+            <field name="price_version_id" ref="product_base3" />
             <field name="categ_id" ref="categ17" />
             <field name="price_discount" eval="0.162790" />
             <field name="bareme_id" ref="product_pricelist_bareme_c14" />
@@ -1150,7 +1577,7 @@
         <record id="pricelist_item_coda3_18" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">   </field>
-            <field name="price_version_id" ref="pricelist_version_base_coda3" />
+            <field name="price_version_id" ref="product_base3" />
             <field name="categ_id" ref="categ18" />
             <field name="price_discount" eval="0.388880" />
             <field name="bareme_id" ref="product_pricelist_bareme_c07" />
@@ -1159,7 +1586,7 @@
         <record id="pricelist_item_coda3_21" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Produist R G</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda3" />
+            <field name="price_version_id" ref="product_base3" />
             <field name="categ_id" ref="categ21" />
             <field name="price_discount" eval="0.136300" />
             <field name="bareme_id" ref="product_pricelist_bareme_c15" />
@@ -1168,7 +1595,7 @@
         <record id="pricelist_item_coda3_22" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Produits magasin</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda3" />
+            <field name="price_version_id" ref="product_base3" />
             <field name="categ_id" ref="categ22" />
             <field name="price_discount" eval="0.136300" />
             <field name="bareme_id" ref="product_pricelist_bareme_c15" />
@@ -1177,7 +1604,7 @@
         <record id="pricelist_item_coda3_23" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Produits magasin</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda3" />
+            <field name="price_version_id" ref="product_base3" />
             <field name="categ_id" ref="categ23" />
             <field name="price_discount" eval="0.136300" />
             <field name="bareme_id" ref="product_pricelist_bareme_c15" />
@@ -1186,7 +1613,7 @@
         <record id="pricelist_item_coda3_24" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Vins magasin</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda3" />
+            <field name="price_version_id" ref="product_base3" />
             <field name="categ_id" ref="categ24" />
             <field name="price_discount" eval="0.136300" />
             <field name="bareme_id" ref="product_pricelist_bareme_c15" />
@@ -1195,7 +1622,7 @@
         <record id="pricelist_item_coda3_25" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Poisson</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda3" />
+            <field name="price_version_id" ref="product_base3" />
             <field name="categ_id" ref="categ25" />
             <field name="price_discount" eval="0.162790" />
             <field name="bareme_id" ref="product_pricelist_bareme_c14" />
@@ -1204,7 +1631,7 @@
         <record id="pricelist_item_coda3_26" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Légumes</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda3" />
+            <field name="price_version_id" ref="product_base3" />
             <field name="categ_id" ref="categ26" />
             <field name="price_discount" eval="0.162790" />
             <field name="bareme_id" ref="product_pricelist_bareme_c14" />
@@ -1213,7 +1640,7 @@
         <record id="pricelist_item_coda3_27" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Purée de fruits et coulis</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda3" />
+            <field name="price_version_id" ref="product_base3" />
             <field name="categ_id" ref="categ27" />
             <field name="price_discount" eval="0.250000" />
             <field name="bareme_id" ref="product_pricelist_bareme_c11" />
@@ -1222,7 +1649,7 @@
         <record id="pricelist_item_coda3_28" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Fromage</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda3" />
+            <field name="price_version_id" ref="product_base3" />
             <field name="categ_id" ref="categ28" />
             <field name="price_discount" eval="0.250000" />
             <field name="bareme_id" ref="product_pricelist_bareme_c11" />
@@ -1231,30 +1658,16 @@
         <record id="pricelist_item_coda3_99" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Transport</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda3" />
+            <field name="price_version_id" ref="product_base3" />
             <field name="categ_id" ref="categ99" />
             <field name="price_discount" eval="0.086950" />
             <field name="bareme_id" ref="product_pricelist_bareme_c17" />
         </record>
 
-        <record id="pricelist_item_coda3_blanche" model="product.pricelist.item">
-        <field name="base" eval="-1" />
-            <field name="base_pricelist_id" ref="pricelist_tarif_coda3" />
-            <field name="name">Tous les produits</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda3_blanche" />
-        </record>
-
-        <record id="pricelist_item_coda3_jaune" model="product.pricelist.item">
-        <field name="base" eval="-1" />
-            <field name="base_pricelist_id" ref="pricelist_tarif_coda3" />
-            <field name="name">Tous les produits</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda3_jaune" />
-        </record>
-
         <record id="pricelist_item_coda4_01" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Boeuf</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda4" />
+            <field name="price_version_id" ref="product_base4" />
             <field name="categ_id" ref="categ01" />
             <field name="price_discount" eval="0.190470" />
             <field name="bareme_id" ref="product_pricelist_bareme_c13" />
@@ -1263,7 +1676,7 @@
         <record id="pricelist_item_coda4_02" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Cheval</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda4" />
+            <field name="price_version_id" ref="product_base4" />
             <field name="categ_id" ref="categ02" />
             <field name="price_discount" eval="0.190470" />
             <field name="bareme_id" ref="product_pricelist_bareme_c13" />
@@ -1272,7 +1685,7 @@
         <record id="pricelist_item_coda4_03" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Veau</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda4" />
+            <field name="price_version_id" ref="product_base4" />
             <field name="categ_id" ref="categ03" />
             <field name="price_discount" eval="0.190470" />
             <field name="bareme_id" ref="product_pricelist_bareme_c13" />
@@ -1281,7 +1694,7 @@
         <record id="pricelist_item_coda4_04" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Agneau</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda4" />
+            <field name="price_version_id" ref="product_base4" />
             <field name="categ_id" ref="categ04" />
             <field name="price_discount" eval="0.190470" />
             <field name="bareme_id" ref="product_pricelist_bareme_c13" />
@@ -1290,7 +1703,7 @@
         <record id="pricelist_item_coda4_05" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Porc</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda4" />
+            <field name="price_version_id" ref="product_base4" />
             <field name="categ_id" ref="categ05" />
             <field name="price_discount" eval="0.190470" />
             <field name="bareme_id" ref="product_pricelist_bareme_c13" />
@@ -1299,7 +1712,7 @@
         <record id="pricelist_item_coda4_06" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Charcuterie</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda4" />
+            <field name="price_version_id" ref="product_base4" />
             <field name="categ_id" ref="categ06" />
             <field name="price_discount" eval="0.190470" />
             <field name="bareme_id" ref="product_pricelist_bareme_c13" />
@@ -1308,7 +1721,7 @@
         <record id="pricelist_item_coda4_07" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Volailles</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda4" />
+            <field name="price_version_id" ref="product_base4" />
             <field name="categ_id" ref="categ07" />
             <field name="price_discount" eval="0.190470" />
             <field name="bareme_id" ref="product_pricelist_bareme_c13" />
@@ -1317,7 +1730,7 @@
         <record id="pricelist_item_coda4_08" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Gibier</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda4" />
+            <field name="price_version_id" ref="product_base4" />
             <field name="categ_id" ref="categ08" />
             <field name="price_discount" eval="0.190470" />
             <field name="bareme_id" ref="product_pricelist_bareme_c13" />
@@ -1326,7 +1739,7 @@
         <record id="pricelist_item_coda4_09" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Produits surgelés</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda4" />
+            <field name="price_version_id" ref="product_base4" />
             <field name="categ_id" ref="categ09" />
             <field name="price_discount" eval="0.190470" />
             <field name="bareme_id" ref="product_pricelist_bareme_c13" />
@@ -1335,7 +1748,7 @@
         <record id="pricelist_item_coda4_10" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Épices</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda4" />
+            <field name="price_version_id" ref="product_base4" />
             <field name="categ_id" ref="categ10" />
             <field name="price_discount" eval="0.190470" />
             <field name="bareme_id" ref="product_pricelist_bareme_c13" />
@@ -1344,7 +1757,7 @@
         <record id="pricelist_item_coda4_11" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Marinade</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda4" />
+            <field name="price_version_id" ref="product_base4" />
             <field name="categ_id" ref="categ11" />
             <field name="price_discount" eval="0.190470" />
             <field name="bareme_id" ref="product_pricelist_bareme_c13" />
@@ -1353,7 +1766,7 @@
         <record id="pricelist_item_coda4_12" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Produits R G</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda4" />
+            <field name="price_version_id" ref="product_base4" />
             <field name="categ_id" ref="categ12" />
             <field name="price_discount" eval="0.190470" />
             <field name="bareme_id" ref="product_pricelist_bareme_c13" />
@@ -1362,7 +1775,7 @@
         <record id="pricelist_item_coda4_13" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Abats</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda4" />
+            <field name="price_version_id" ref="product_base4" />
             <field name="categ_id" ref="categ13" />
             <field name="price_discount" eval="0.190470" />
             <field name="bareme_id" ref="product_pricelist_bareme_c13" />
@@ -1371,7 +1784,7 @@
         <record id="pricelist_item_coda4_14" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Produits confits</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda4" />
+            <field name="price_version_id" ref="product_base4" />
             <field name="categ_id" ref="categ14" />
             <field name="price_discount" eval="0.190470" />
             <field name="bareme_id" ref="product_pricelist_bareme_c13" />
@@ -1380,7 +1793,7 @@
         <record id="pricelist_item_coda4_15" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Produits congelés</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda4" />
+            <field name="price_version_id" ref="product_base4" />
             <field name="categ_id" ref="categ15" />
             <field name="price_discount" eval="0.190470" />
             <field name="bareme_id" ref="product_pricelist_bareme_c13" />
@@ -1389,7 +1802,7 @@
         <record id="pricelist_item_coda4_16" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Boeuf charollais</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda4" />
+            <field name="price_version_id" ref="product_base4" />
             <field name="categ_id" ref="categ16" />
             <field name="price_discount" eval="0.190470" />
             <field name="bareme_id" ref="product_pricelist_bareme_c13" />
@@ -1398,7 +1811,7 @@
         <record id="pricelist_item_coda4_17" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Emballage congélateur</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda4" />
+            <field name="price_version_id" ref="product_base4" />
             <field name="categ_id" ref="categ17" />
             <field name="price_discount" eval="0.190470" />
             <field name="bareme_id" ref="product_pricelist_bareme_c13" />
@@ -1407,7 +1820,7 @@
         <record id="pricelist_item_coda4_18" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">   </field>
-            <field name="price_version_id" ref="pricelist_version_base_coda4" />
+            <field name="price_version_id" ref="product_base4" />
             <field name="categ_id" ref="categ18" />
             <field name="price_discount" eval="0.136300" />
             <field name="bareme_id" ref="product_pricelist_bareme_c15" />
@@ -1416,7 +1829,7 @@
         <record id="pricelist_item_coda4_21" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Produist R G</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda4" />
+            <field name="price_version_id" ref="product_base4" />
             <field name="categ_id" ref="categ21" />
             <field name="price_discount" eval="0.190470" />
             <field name="bareme_id" ref="product_pricelist_bareme_c13" />
@@ -1425,7 +1838,7 @@
         <record id="pricelist_item_coda4_22" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Produits magasin</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda4" />
+            <field name="price_version_id" ref="product_base4" />
             <field name="categ_id" ref="categ22" />
             <field name="price_discount" eval="0.190470" />
             <field name="bareme_id" ref="product_pricelist_bareme_c13" />
@@ -1434,7 +1847,7 @@
         <record id="pricelist_item_coda4_23" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Produits magasin</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda4" />
+            <field name="price_version_id" ref="product_base4" />
             <field name="categ_id" ref="categ23" />
             <field name="price_discount" eval="0.190470" />
             <field name="bareme_id" ref="product_pricelist_bareme_c13" />
@@ -1443,7 +1856,7 @@
         <record id="pricelist_item_coda4_24" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Vins magasin</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda4" />
+            <field name="price_version_id" ref="product_base4" />
             <field name="categ_id" ref="categ24" />
             <field name="price_discount" eval="0.190470" />
             <field name="bareme_id" ref="product_pricelist_bareme_c13" />
@@ -1452,7 +1865,7 @@
         <record id="pricelist_item_coda4_25" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Poisson</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda4" />
+            <field name="price_version_id" ref="product_base4" />
             <field name="categ_id" ref="categ25" />
             <field name="price_discount" eval="0.190470" />
             <field name="bareme_id" ref="product_pricelist_bareme_c13" />
@@ -1461,7 +1874,7 @@
         <record id="pricelist_item_coda4_26" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Légumes</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda4" />
+            <field name="price_version_id" ref="product_base4" />
             <field name="categ_id" ref="categ26" />
             <field name="price_discount" eval="0.190470" />
             <field name="bareme_id" ref="product_pricelist_bareme_c13" />
@@ -1470,7 +1883,7 @@
         <record id="pricelist_item_coda4_27" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Purée de fruits et coulis</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda4" />
+            <field name="price_version_id" ref="product_base4" />
             <field name="categ_id" ref="categ27" />
             <field name="price_discount" eval="0.250000" />
             <field name="bareme_id" ref="product_pricelist_bareme_c11" />
@@ -1479,7 +1892,7 @@
         <record id="pricelist_item_coda4_28" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Fromage</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda4" />
+            <field name="price_version_id" ref="product_base4" />
             <field name="categ_id" ref="categ28" />
             <field name="price_discount" eval="0.250000" />
             <field name="bareme_id" ref="product_pricelist_bareme_c11" />
@@ -1488,25 +1901,12 @@
         <record id="pricelist_item_coda4_99" model="product.pricelist.item">
             <field name="base" eval="1" />
             <field name="name">Transport</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda4" />
+            <field name="price_version_id" ref="product_base4" />
             <field name="categ_id" ref="categ99" />
             <field name="price_discount" eval="0.136300" />
             <field name="bareme_id" ref="product_pricelist_bareme_c15" />
         </record>
 
-        <record id="pricelist_item_coda4_blanche" model="product.pricelist.item">
-        <field name="base" eval="-1" />
-            <field name="base_pricelist_id" ref="pricelist_tarif_coda4" />
-            <field name="name">Tous les produits</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda4_blanche" />
-        </record>
-
-        <record id="pricelist_item_coda4_jaune" model="product.pricelist.item">
-        <field name="base" eval="-1" />
-            <field name="base_pricelist_id" ref="pricelist_tarif_coda4" />
-            <field name="name">Tous les produits</field>
-            <field name="price_version_id" ref="pricelist_version_base_coda4_jaune" />
-        </record>
 
         <record id="pricelist_item_tarif_collectivite" model="product.pricelist.item">
             <field name="base" eval="1" />
@@ -1531,6 +1931,11 @@
             <field name="bareme_page2" ref="product_pricelist_bareme_c16" />
         </record>
 
+        <record id="pricelist_mea_configuration_default" model="pricelist.mea.configuration">
+            <field name="name">Configuration des mises en avant</field>
+            <field name="bareme_jaune" ref="product_pricelist_bareme_c13" />
+            <field name="bareme_page2" ref="product_pricelist_bareme_c16" />
+        </record>
 
     </data>
 </openerp>
