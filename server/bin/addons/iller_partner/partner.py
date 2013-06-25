@@ -75,7 +75,8 @@ class iller_partner(osv.osv):
         # Si une écriture est effectuée sur 'property_product_pricelist', alors on effectue le comportement par défaut
         # car on est dans le cas où le tarif spécial écrit une nouvelle liste de prix
         # Si is_tarif_speciaux == True alors on fait le write par défaut car on est dans le cas d'un tarif spécial
-        if 'property_product_pricelist' in vals and ('is_tarif_speciaux' in context and context['is_tarif_speciaux'] == True):
+
+        if 'property_product_pricelist' in vals and context and ('is_tarif_speciaux' in context and context['is_tarif_speciaux'] == True):
             return super(iller_partner, self).write(cr, uid, ids, vals, context=context)
             
         for partner_record in self.browse(cr, uid, ids, context=context):
@@ -197,7 +198,8 @@ class iller_partner(osv.osv):
             # Rajout d'un context qui permet de différencier d'où provient l'écriture
             # Si is_tarif_speciaux == True alors c'est lors de la création d'un tarif spécial
             # qu'on écrit une liste de prix
-            context['is_tarif_speciaux'] = False
+            if context:
+                context['is_tarif_speciaux'] = False
             vals.update({'property_product_pricelist':pricelist_record.id})
             
         return super(iller_partner, self).write(cr, uid, ids, vals, context=context)
