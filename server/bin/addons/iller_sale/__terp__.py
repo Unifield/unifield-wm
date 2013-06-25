@@ -30,6 +30,7 @@
     "depends" : ["iller_partner", "sale", "iller_tournee", 
                  "lately_saled_products",
                  "iller_product",
+                 'account_group_lines'
                 ],
     "init_xml" : [],
     "demo_xml" : [],

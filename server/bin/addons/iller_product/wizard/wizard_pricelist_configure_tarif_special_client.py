@@ -98,7 +98,9 @@ class wizard_configure_tarif_special_client(wizard.interface):
         Créé la nouvelle version de liste de prix avec les tarifs spéciaux 
         et "décale" les versions existantes
         '''
-        version_obj = pooler.get_pool(cr.dbname).get('product.pricelist.version')
+        pool_obj = pooler.get_pool(cr.dbname)
+        version_obj = pool_obj.get('product.pricelist.version')
+        pricelist_item_obj = pool_obj.get('product.pricelist.item')
 
         name = data['form']['title']
         end_date = data['form']['end_date']
@@ -164,7 +166,6 @@ class wizard_configure_tarif_special_client(wizard.interface):
                 version_obj.write(cr, uid, before_ids, {'date_end': n_start_date})
             if after_ids:
                 version_obj.write(cr, uid, after_ids, {'date_start': n_end_date})
-
 
         return version_obj.copy(cr, uid, base_version, {'date_start': start_date,
                                                         'date_end': end_date,
@@ -343,9 +344,29 @@ class wizard_configure_tarif_special_client(wizard.interface):
                 client_obj.write(cr, uid, client.id, {'property_product_pricelist': pricelist_id}, context=context)
                 new_pricelist = True
             else:
-                pricelist_id = client.property_product_pricelist.id
-                previous_pricelist = client.property_product_pricelist.id
-                new_pricelist = False
+                # On récupère la liste de prix du client correspondant à ses paramètres
+                pricelist_ids = pricelist_obj.search(
+                        cr, uid, [
+                                    ('tarif_choice', '=', client.tarif_choice or 'blanche'),
+                                    ('promo_choice', '=', client.promo_choice or 'non'),
+                                    ('mea_choice', '=', client.mea_choice or 'non'),
+                                    ('name', 'ilike',  client.tarif_general_choice or 'NU01')
+                                ], context=context)
+
+                # Si les paramètres du client sont bien paramétrés on copie la liste de prix associée
+                if pricelist_ids:
+                    previous_pricelist = pricelist_ids[0]
+                    # On copie la liste de prix pour en créer une par rapport au tarif spécial
+                    pricelist_id = pricelist_obj.copy(cr, uid, pricelist_ids[0],
+                                                        {
+                                                            'name': 'CSP %s %s' % (client.ref, client.name),
+                                                            'tarif_special_choice': 'oui'
+                                                        })
+                    client_obj.write(cr, uid, client.id, {'property_product_pricelist': pricelist_id}, context=context)
+                    new_pricelist = True
+                else:
+                    pricelist_id = previous_pricelist = client.property_product_pricelist.id
+                    new_pricelist = False
         else:
             # Si on appelle la méthode hors wizard, la liste de prix a déjà été écrite sur l'objet client, on la récupère
             client = client_obj.browse(cr, uid, data['form']['client'])
@@ -356,7 +377,7 @@ class wizard_configure_tarif_special_client(wizard.interface):
             if new_pricelist is True:
                 new_version = self._define_new_tarif_special_client(cr, uid, data, pricelist_id,context=context)
             else:
-                new_version = self._redefine_existing_tarif_special_client(cr, uid, data, pricelist_id,context=context)
+                new_version = self._redefine_existing_tarif_special_client(cr, uid, data, pricelist_id, context=context)
             if new_version:
 
                 version_obj.write(cr, uid, [new_version], {'active': True, 'name': data['form']['title'], 'tarifs_specs_id':tarifs_speciaux_id})
