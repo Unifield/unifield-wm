@@ -424,3 +424,13 @@ class product_product(osv.osv):
         return res
 
 product_product()
+
+class product_nomenclature(osv.osv):
+    _inherit = 'product.nomenclature'
+    
+    def get_unique_xml_name(self, cr, uid, uuid, table_name, res_id):
+        nomen = self.browse(cr, uid, res_id)
+        return get_valid_xml_name('product_nomenclature', nomen.complete_name) if nomen.complete_name else \
+               super(product_nomenclature, self).get_unique_xml_name(cr, uid, uuid, table_name, res_id)
+    
+product_nomenclature()
