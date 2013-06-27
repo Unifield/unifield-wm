@@ -1,0 +1,2 @@
+id,active,sequence_number,name,remote_call,type_id,status,model_id,arguments,direction_usb,domain,destination_name
+sd._rw_msg_stock_picking_close,True,1000,IN stock.picking->close,stock.picking.msg_close,USB,valid,stock.picking,['name'],rw_to_cp,"[('state','=','done')]",name
