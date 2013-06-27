@@ -428,9 +428,12 @@ product_product()
 class product_nomenclature(osv.osv):
     _inherit = 'product.nomenclature'
     
+    def _get_xml_name(self, browse_nomen):
+        return self._get_xml_name(browse_nomen.parent_id) + "_" + browse_nomen.name if browse_nomen.parent_id else \
+               browse_nomen.name
+    
     def get_unique_xml_name(self, cr, uid, uuid, table_name, res_id):
         nomen = self.browse(cr, uid, res_id)
-        return get_valid_xml_name('product_nomenclature', nomen.complete_name) if nomen.complete_name else \
-               super(product_nomenclature, self).get_unique_xml_name(cr, uid, uuid, table_name, res_id)
+        return get_valid_xml_name('product_nomenclature', self._get_xml_name(nomen))
     
 product_nomenclature()
