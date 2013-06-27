@@ -133,7 +133,6 @@ class wizard_picking_to_invoice(osv.osv_memory):
                         # Si la date de la facture est inférieure à 
                         #+ last_date, alors on récupère l'identifiant de la
                         #+ livraison
-                        print client.name, client_mode,  sp_id, sp_date, '<', last_date
                         if sp_date < last_date:
                             # Ajout du bon de livraison dans les éléments à 
                             #+ facturer du client
@@ -159,10 +158,10 @@ class wizard_picking_to_invoice(osv.osv_memory):
                     invoice_ids = factures_reussies.values()
                     # On appelle toutes les méthodes nécessaires pour la génération de la facture
                     # avec les dates/move lines/number
-                    inv_obj.action_date_assign(cr, uid, invoice_ids)
-                    inv_obj.action_move_create(cr, uid, invoice_ids)
-                    inv_obj.action_number(cr, uid, invoice_ids)
-                    inv_obj.write(cr, uid, invoice_ids, {'state':'open'}, context=context)
+                    for invoice_id in invoice_ids:
+                        wf_service = netsvc.LocalService("workflow")
+                        wf_service.trg_validate(uid, 'account.invoice', invoice_id, 'invoice_open', cr)
+
                 except Exception:
                     bon_non_reussis += bon_a_facturer[bon]
                     continue

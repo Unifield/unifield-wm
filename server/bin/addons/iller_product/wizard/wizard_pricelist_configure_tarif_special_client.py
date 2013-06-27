@@ -48,14 +48,14 @@ class wizard_configure_tarif_special_client(osv.osv):
     _name="wizard.pricelist.configure.tarif.special.client"
 
     def start_date_change (self, cr, uid, ids, start_date, end_date):
-        if end_date is False:
+        if end_date is False or start_date is False:
             return {}
         if start_date > end_date:
             raise osv.except_osv( ('Attention'), ('La date de fin est inférieure à la date de départ'))
         return {}
 
     def end_date_change (self, cr, uid, ids, start_date, end_date, client, tarif_initial):
-        if start_date is False:
+        if start_date is False or end_date is False:
             return {}
         if start_date > end_date:
             raise osv.except_osv( ('Attention'), ('La date de fin est inférieure à la date de départ'))

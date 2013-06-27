@@ -41,12 +41,18 @@ class account_invoice(osv.osv):
                 credit += line.get('credit',0.00) 
                 amount_currency += line.get('amount_currency', 0.00)
                 tax_amount += line.get('tax_amount', 0.00)
+                # On parcourt toutes les lignes d'écriture comptable qui
+                # vont être groupées par compte 
                 taxes.append(line.get('tax_code_id'))
                 if line.get('analytic_lines'):
                     for ana_line in line['analytic_lines']:
                         ana_line[2]['journal_id'] = analytic_journal.id
                     analytic_lines += line['analytic_lines']
             if debit or credit:
+                # Si pour un regroupement de lignes on a plusieurs taxes
+                # on ne les affiche pas puisque la ligne qu'on veut générer
+                # regroupe plusieurs autres lignes : le cumul des débit/crédit
+                # est effectué sans prendre en compte les taxes
                 if len(taxes) > 1:
                     taxes[0] = False
                 move_line = {

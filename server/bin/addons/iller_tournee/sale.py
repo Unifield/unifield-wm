@@ -16,6 +16,8 @@ class iller_sale(osv.osv):
             la confirmation de la commande de vente
         '''
         pick_obj = self.pool.get('stock.picking')
+        sm_obj = self.pool.get('stock.move')
+        poste_obj = self.pool.get('iller.poste')
 
         res = super(iller_sale, self).action_ship_create(cr, uid, ids, *args)
 
@@ -23,7 +25,16 @@ class iller_sale(osv.osv):
             if so.tournee_id and so.tournee_id.id:
                 for pick in so.picking_ids:
                     pick_obj.write(cr, uid, [pick.id], {'tournee_id': so.tournee_id.id})
-
+                    for line in pick.move_lines:
+                        #Récupération du poste correspondant
+                        if line.product_id.code_affectation == 'DECP':
+                            poste = poste_obj.search(cr, uid, [('type', '=', line.product_id.code_affectation),
+                                                                ('name', '=', so.tournee_id.decoupe_id.name)], *args)
+                        else:
+                            poste = poste_obj.search(cr, uid, [('type', '=', line.product_id.code_affectation),
+                                                                ('name', '=', so.tournee_id.prep_id.name)], *args)
+                        if poste:
+                            sm_obj.write(cr, uid, [line.id], {'poste_id':poste[0]}, *args)
         return res
 
 

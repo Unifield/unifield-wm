@@ -32,14 +32,16 @@
                     <notebook colspan="4">
                         <page string="Clients">
                             <separator string="Postes" colspan="4" />
-                            <field name="prep_id" />
-                            <field name="decoupe_id" />
+                            <group>
+                                <field name="prep_id" />
+                                <field name="decoupe_id" />
+                            </group>
                             <separator string="Clients principaux" colspan="4" />
-                            <field name="partner1" colspan="4" nolabel="1" />
+                            <field name="partner1" nolabel="1" widget="one2many_list" height="200"/>
                             <separator string="Clients secondaires" colspan="4" />
-                            <field name="partner2" colspan="4" nolabel="1" />
+                            <field name="partner2" nolabel="1" widget="one2many_list" height="200"/>
                             <separator string="Clients exceptionnels" colspan="4" />
-                            <field name="partner3" colspan="4" nolabel="1" />
+                            <field name="partner3" nolabel="1" widget="one2many_list" height="200"/>
                         </page>
                     </notebook>
                 </form>
@@ -187,7 +189,7 @@
             <field name="res_model">iller.poste</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
-            <field name="domain">[('type', '=', 'DECP'))</field>
+            <field name="domain">[('type', '=', 'DECP')]</field>
         </record>
 
         <act_window id="action_commandes_par_tournee"
@@ -276,6 +278,7 @@
         <menuitem id="menu_produits_par_poste"
                 action="action_produits_par_poste"
                 parent="menu_iller_stock_report" />
+
 
     </data>
 </openerp>

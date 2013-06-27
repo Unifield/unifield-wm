@@ -233,7 +233,7 @@ class iller_partner(osv.osv):
         if 'from' in context and context.get('from') == 'sale.order':
             address_obj = self.pool.get('res.partner.address')
             res = []
-
+            args += [('customer', '=', True),]
             if name:
                 ## Recherche sur nom du partenaire
                 name_ids = self.search(cr, uid, [('name', operator, name)] + args, limit=limit, context=context)

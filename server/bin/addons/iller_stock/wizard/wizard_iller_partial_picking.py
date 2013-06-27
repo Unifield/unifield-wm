@@ -443,11 +443,9 @@ def _create_invoice(obj, cr, uid, data, context=None):
             inv_type, context=context)
 
     invoice_ids = res.values()
-
-    inv_obj.action_date_assign(cr, uid, invoice_ids)
-    inv_obj.action_move_create(cr, uid, invoice_ids)
-    inv_obj.action_number(cr, uid, invoice_ids)
-    inv_obj.write(cr, uid, invoice_ids, {'state':'open'}, context=context)
+    for invoice_id in invoice_ids:
+        wf_service = netsvc.LocalService("workflow")
+        wf_service.trg_validate(uid, 'account.invoice', invoice_id, 'invoice_open', cr)
 
     if not invoice_ids:
         raise wizard.except_wizard(_('Error'), _('Invoice is not created'))

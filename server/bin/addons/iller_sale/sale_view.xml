@@ -10,13 +10,12 @@
             <field name="inherit_id" ref="sale.view_order_form" />
             <field name="arch" type="xml">
                 <data>
-                    
                     <xpath expr="//field[@name='invoiced']" position="after" >
                         <field name="code" string="Code client"/>
                     </xpath>
 
                     <xpath expr="/form/notebook/page/field[@name='partner_id']" position="replace" >
-                        <field name="partner_id" on_change="onchange_partner_id(partner_id)" required="1" select="1" context="{'from': 'sale.order'}"/>
+                        <field name="partner_id" on_change="onchange_partner_id(partner_id)" required="1" select="1" context="{'from': 'sale.order'}" domain="[('customer', '=', True)]"/>
                     </xpath>
                     <xpath expr="/form/notebook/page/field[@name='order_line']" position="replace">
                         <field colspan="4" mode="tree,form" name="order_line" nolabel="1">
