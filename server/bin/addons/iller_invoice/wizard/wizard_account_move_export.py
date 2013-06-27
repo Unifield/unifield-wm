@@ -153,8 +153,8 @@ class iller_export_cron(osv.osv):
             # Replace le curseur au début du fichier, car le write le positionne à la fin
             export_file.seek(0)
             data['file'] = base64.encodestring(export_file.read())
-        except IOError as e:
-            print "I/O error({0}): {1}".format(e.errno, e.strerror)
+        except IOError:
+            print "Erreur de lecture/écriture de fichier"
         finally:
             export_file.close()
 
@@ -215,11 +215,9 @@ class iller_export_cron(osv.osv):
                         # Si le compte est de type other, alors on stocke dans une variable temporaire pour
                         # permettre de les écrire plus tard
                         if line_id.account_id.type == 'other':
-                            #~ lignes_other += self._generate_line(cr, uid, ids, data, line_id, context=context)
                             lignes_other.append(self._generate_line(cr, uid, ids, data, line_id, context=context))
                         # Sinon on ajoute directement au fichier la ligne reçue
                         else:
-                            #~ fichier += self._generate_line(cr, uid, ids, data, line_id, context=context)
                             lignes.append(self._generate_line(cr, uid, ids, data, line_id, context=context))
 
                         # Pour chaque ligne on indique que la ligne a été exportée 
@@ -346,8 +344,8 @@ class wizard_account_move_export(wizard.interface):
         try:
             data['file'] = base64.encodestring(export_file.read())
             data['name'] = nom_fichier
-        except IOError as e:
-            print "I/O error({0}): {1}".format(e.errno, e.strerror)
+        except IOError:
+            print "Erreur de lecture/écriture de fichier"
         finally:
             export_file.close()
 
