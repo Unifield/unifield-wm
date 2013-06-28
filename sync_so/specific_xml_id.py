@@ -429,8 +429,9 @@ class product_nomenclature(osv.osv):
     _inherit = 'product.nomenclature'
     
     def _get_xml_name(self, browse_nomen):
-        return self._get_xml_name(browse_nomen.parent_id) + "_" + browse_nomen.name if browse_nomen.parent_id else \
-               browse_nomen.name
+        formatted_name = browse_nomen.name.lower().replace(',','').replace(' ','_')
+        return self._get_xml_name(browse_nomen.parent_id) + "_" + formatted_name if browse_nomen.parent_id else \
+               formatted_name
     
     def get_unique_xml_name(self, cr, uid, uuid, table_name, res_id):
         nomen = self.browse(cr, uid, res_id)
