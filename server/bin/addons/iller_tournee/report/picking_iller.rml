@@ -151,7 +151,7 @@
           </para>
         </td>
         <td>
-          <para style="terp_tblheader_Details">[[ picking.sale_id and picking.sale_id.partner_shipping_id and 'Shipping Address :' or removeParentNode('para') ]] </para>
+          <para style="terp_tblheader_Details">[[ picking.sale_id and picking.sale_id.partner_shipping_id and 'Adresse de livraison:' or removeParentNode('para') ]] </para>
           <para style="terp_default_9">[[ (picking.sale_id and picking.sale_id.partner_shipping_id and picking.sale_id.partner_shipping_id.title) or '' ]] [[ (picking.sale_id and picking.sale_id.partner_shipping_id and picking.sale_id.partner_shipping_id.name) or '' ]] </para>
           <para style="terp_default_9">[[ (picking.sale_id and picking.sale_id.partner_shipping_id and picking.sale_id.partner_shipping_id.street) or '' ]] </para>
           <para style="terp_default_9">[[ (picking.sale_id and picking.sale_id.partner_shipping_id and picking.sale_id.partner_shipping_id.zip) or '' ]] [[ (picking.sale_id and picking.sale_id.partner_shipping_id and picking.sale_id.partner_shipping_id.city) or '' ]] [[ (picking.address_id and picking.address_id.state_id and picking.address_id.state_id.name) or '' ]] </para>
@@ -171,7 +171,7 @@
     <blockTable colWidths="538.0" style="Table_Title_String">
       <tr>
         <td>
-          <para style="terp_header">Packing List: [[ picking.name ]]</para>
+          <para style="terp_header">Liste de colisage : [[ picking.name ]]</para>
         </td>
       </tr>
     </blockTable>
@@ -184,16 +184,16 @@
     <blockTable colWidths="123.0,134.0,133.0,134.0" style="Header_Order_Reference_Tbl">
       <tr>
         <td>
-          <para style="terp_tblheader_General_Centre">Order(Origin)</para>
+          <para style="terp_tblheader_General_Centre">Commande(Origine)</para>
         </td>
         <td>
-          <para style="terp_tblheader_General_Centre">Recipient</para>
+          <para style="terp_tblheader_General_Centre">Destinataire</para>
         </td>
         <td>
-          <para style="terp_tblheader_General_Centre">Expected Shipping Date </para>
+          <para style="terp_tblheader_General_Centre">Date d'envoi prévue </para>
         </td>
         <td>
-          <para style="terp_tblheader_General_Centre">Total Quantity</para>
+          <para style="terp_tblheader_General_Centre">Quantité totale</para>
         </td>
       </tr>
     </blockTable>
@@ -225,13 +225,13 @@
           <para style="terp_tblheader_Details_Centre">Lot</para>
         </td>
         <td>
-          <para style="terp_tblheader_Details">State</para>
+          <para style="terp_tblheader_Details">Etat</para>
         </td>
         <td>
-          <para style="terp_tblheader_Details_Centre">Quantity</para>
+          <para style="terp_tblheader_Details_Centre">Quantité</para>
         </td>
         <td>
-          <para style="terp_tblheader_Details">Location</para>
+          <para style="terp_tblheader_Details">Emplacement</para>
         </td>
       </tr>
     </blockTable>
@@ -270,7 +270,7 @@
       </para>
     </section>
     <para style="terp_default_5cm_Above_Space">[[ (line.state == 'done' or line.state == 'confirmed') and removeParentNode('para') ]]</para>
-    <para style="terp_default_Bold_9">Non Assigned Products: [[ ( line.state == 'assigned' or line.state == 'done' or line.state == 'confirmed' ) and removeParentNode('para') ]]</para>
+    <para style="terp_default_Bold_9">Produits non assignés : [[ ( line.state == 'assigned' or line.state == 'done' or line.state == 'confirmed' ) and removeParentNode('para') ]]</para>
     <para style="terp_default_1cm_above_space">[[ (line.state == 'done' or line.state == 'confirmed') and removeParentNode('para') ]]</para>
     <section>
       <para style="terp_default_8">[[ repeatIn([line for line in picking.move_lines if (line.state != 'assigned' )],'move_lines') ]]</para>

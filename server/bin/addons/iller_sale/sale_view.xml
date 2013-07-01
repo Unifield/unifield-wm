@@ -18,7 +18,7 @@
                         <field name="partner_id" on_change="onchange_partner_id(partner_id)" required="1" select="1" context="{'from': 'sale.order'}" domain="[('customer', '=', True)]"/>
                     </xpath>
                     <xpath expr="/form/notebook/page/field[@name='order_line']" position="replace">
-                        <field colspan="4" mode="tree,form" name="order_line" nolabel="1">
+                        <field colspan="4" mode="tree,form" name="order_line" nolabel="1" height="300">
                             <tree string="Lignes de commande" editable="top">
                                 <field name="product_id" readonly="0" colspan="4" 
                                     context="{'partner_id':parent.partner_id,'quantity':product_uom_qty,'pricelist':parent.pricelist_id,'shop':parent    .shop_id,'uom':product_uom,'from':'sale.order.line'}"

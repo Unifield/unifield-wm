@@ -28,8 +28,10 @@
                     <xpath expr="//group/group" position="after" >
                         <field name="code" string="Code client" />
                     </xpath>
+                    <xpath expr="/form/notebook/page/field[@name='invoice_line']" position="replace" >
+                        <field colspan="4" name="invoice_line" nolabel="1" widget="one2many_list" height="300"/>
+                    </xpath>
                 </data>
-                
             </field>
         </record>
         

@@ -406,9 +406,9 @@ def _get_type_invoice(obj, cr, uid, data, context=None):
     usage = 'customer'
     pick = picking_obj.browse(cr, uid, data['id'], context=context)
     if pick.invoice_state == 'invoiced':
-        raise wizard.except_wizard(_('UserError'), _('Invoice is already created.'))
+        raise wizard.except_wizard(_('Erreur utilisateur'), _('La facture a déjà été créée.'))
     if pick.invoice_state == 'none':
-        raise wizard.except_wizard(_('UserError'), _('Invoice cannot be created from Packing.'))
+        raise wizard.except_wizard(_('Erreur utilisateur'), _('La facture ne peut être créée depuis le colisage.'))
 
     if pick.move_lines:
         usage = pick.move_lines[0].location_id.usage
@@ -448,7 +448,7 @@ def _create_invoice(obj, cr, uid, data, context=None):
         wf_service.trg_validate(uid, 'account.invoice', invoice_id, 'invoice_open', cr)
 
     if not invoice_ids:
-        raise wizard.except_wizard(_('Error'), _('Invoice is not created'))
+        raise wizard.except_wizard(_('Erreur'), _('La facture n\'a pas été créée.'))
     if inv_type == 'out_invoice':
         xml_id = 'action_invoice_tree5'
         name_xml_id = 'Facture client'

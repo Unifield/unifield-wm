@@ -359,9 +359,9 @@ class product_pricelist(osv.osv):
                     'ORDER BY id LIMIT 1', (id, date, date))
             plversion = cr.dictfetchone()
             if not plversion:
-                raise osv.except_osv(_('Warning !'),
-                        _('No active version for the selected pricelist !\n' \
-                                'Please create or activate one.'))
+                raise osv.except_osv(_('Attention !'),
+                        _('Pas de version active pour cette liste de prix !\n' \
+                                'Veuillez en créer ou en activer une.'))
 
             cr.execute('SELECT id, categ_id ' \
                     'FROM product_template ' \
@@ -377,10 +377,9 @@ class product_pricelist(osv.osv):
                         'WHERE id = %s', (categ,))
                 categ = cr.fetchone()[0]
                 if str(categ) in categ_ids:
-                    raise osv.except_osv(_('Warning !'),
-                            _('Could not resolve product category, ' \
-                                    'you have defined cyclic categories ' \
-                                    'of products!'))
+                    raise osv.except_osv(_('Attention !'),
+                            _('Ne peut pas déterminer la catégorie de produits, ' \
+                                    'vous avez défini des catégories de produits cycliques !'))
             if categ_ids:
                 categ_where = '(categ_id IN (' + ','.join(categ_ids) + '))'
             else:

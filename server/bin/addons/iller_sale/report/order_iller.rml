@@ -133,7 +133,7 @@
     <blockTable colWidths="265.0,51.0,225.0" style="Table1">
       <tr>
         <td>
-          <para style="terp_default_Bold_9">Shipping address :</para>
+          <para style="terp_default_Bold_9">Adresse de livraison : :</para>
           <para style="terp_default_9">[[ o.partner_id.title or '' ]] [[ o.partner_id.name ]]</para>
           <para style="terp_default_9">[[ o.partner_shipping_id.title or '' ]] [[ o.partner_shipping_id.name ]]</para>
           <para style="terp_default_9">[[ o.partner_shipping_id.street ]]</para>
@@ -143,7 +143,7 @@
           <para style="terp_default_9">
             <font color="white"> </font>
           </para>
-          <para style="terp_default_Bold_9">Invoice address :</para>
+          <para style="terp_default_Bold_9">Adresse de facturation :</para>
           <para style="terp_default_9">[[ o.partner_invoice_id.title or '' ]] [[ o.partner_invoice_id.name or '' ]]</para>
           <para style="terp_default_9">[[ o.partner_invoice_id.street ]] [[ o.partner_invoice_id.street2 and (', %s' % o.partner_invoice_id.street2 or '') ]]</para>
           <para style="terp_default_9">[[ o.partner_invoice_id.zip or '' ]] [[ o.partner_invoice_id.city or '' ]]</para>
@@ -177,25 +177,25 @@
     <para style="terp_default_8">
       <font color="white"> </font>
     </para>
-    <para style="terp_header">[[ o.state&lt;&gt;'draft' and removeParentNode('para') ]] Quotation N° [[ o.name ]]</para>
-    <para style="terp_header">[[ o.state=='draft' and removeParentNode('para') ]] Order N° [[ o.name ]]</para>
+    <para style="terp_header">[[ o.state&lt;&gt;'draft' and removeParentNode('para') ]] Devis N° [[ o.name ]]</para>
+    <para style="terp_header">[[ o.state=='draft' and removeParentNode('para') ]] Commande N° [[ o.name ]]</para>
     <para style="terp_default_8">
       <font color="white"> </font>
     </para>
     <blockTable colWidths="132.0,134.0,135.0,135.0" style="Table2">
       <tr>
         <td>
-          <para style="terp_tblheader_General_Centre">Your Reference </para>
+          <para style="terp_tblheader_General_Centre">Votre Référence </para>
         </td>
         <td>
-          <para style="terp_tblheader_General_Centre">[[ o.state=='draft' and removeParentNode('para') ]] Date Ordered</para>
-          <para style="terp_tblheader_General_Centre">[[ o.state &lt;&gt; 'draft' and removeParentNode('para') ]] Quotation Date</para>
+          <para style="terp_tblheader_General_Centre">[[ o.state=='draft' and removeParentNode('para') ]] Date de la Commande</para>
+          <para style="terp_tblheader_General_Centre">[[ o.state &lt;&gt; 'draft' and removeParentNode('para') ]] Date du devis</para>
         </td>
         <td>
-          <para style="terp_tblheader_General_Centre">Our Salesman </para>
+          <para style="terp_tblheader_General_Centre">Notre Vendeur </para>
         </td>
         <td>
-          <para style="terp_tblheader_General_Centre">Payment Terms</para>
+          <para style="terp_tblheader_General_Centre">Conditions de règlement</para>
         </td>
       </tr>
     </blockTable>
@@ -224,19 +224,19 @@
           <para style="terp_tblheader_Details">Description</para>
         </td>
         <td>
-          <para style="terp_tblheader_Details_Centre">VAT</para>
+          <para style="terp_tblheader_Details_Centre">TVA</para>
         </td>
         <td>
-          <para style="terp_tblheader_Details_Centre">Quantity</para>
+          <para style="terp_tblheader_Details_Centre">Quantité</para>
         </td>
         <td>
-          <para style="terp_tblheader_Details_Right">Unit Price</para>
+          <para style="terp_tblheader_Details_Right">Prix Unitaire</para>
         </td>
         <td>
-          <para style="terp_tblheader_Details_Right">Disc.(%)</para>
+          <para style="terp_tblheader_Details_Right">Rem.(%)</para>
         </td>
         <td>
-          <para style="terp_tblheader_Details_Right">Price</para>
+          <para style="terp_tblheader_Details_Right">Prix</para>
         </td>
       </tr>
     </blockTable>
@@ -311,7 +311,7 @@
           </para>
         </td>
         <td>
-          <para style="terp_default_9">Net Total :</para>
+          <para style="terp_default_9">Total Net :</para>
         </td>
         <td>
           <para style="terp_default_Right_9">[[ formatLang(o.amount_untaxed ) ]]</para>

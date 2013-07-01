@@ -88,7 +88,7 @@ class iller_picking(osv.osv):
 
         invoice_ids = res.values()
         if not invoice_ids:
-            raise wizard.except_wizard(_('Error'), _('Invoice is not created'))
+            raise wizard.except_wizard(_('Erreur'), _('La facture n\'est pas créée'))
 
         if inv_type == 'out_invoice':
             xml_id = 'action_invoice_tree5'
