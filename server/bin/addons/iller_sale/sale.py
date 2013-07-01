@@ -237,7 +237,7 @@ class iller_partner(osv.osv):
         if 'from' in context and context.get('from') == 'sale.order':
             address_obj = self.pool.get('res.partner.address')
             res = []
-            args += [('customer', '=', True),]
+            args += [('customer', '=', True), ('Active', '=', True)]
             if name:
                 ## Recherche sur nom du partenaire
                 name_ids = self.search(cr, uid, [('name', operator, name)] + args, limit=limit, context=context)
@@ -249,20 +249,20 @@ class iller_partner(osv.osv):
                 street_ids = address_obj.search(cr, uid, [('street', operator, name)], limit=limit, context=context)
                 for street in address_obj.browse(cr, uid, street_ids):
                     # Rajout d'une vérification sur le type de l'id, car parfois stockait "False' ==> erreur dans la requête
-                    if street.partner_id.id not in res and not isinstance(street.partner_id.id, bool):
+                    if street.partner_id.id not in res and not isinstance(street.partner_id.id, bool) and street.partner_id.active:
                         res.append(street.partner_id.id)
 
                 ## Recherche sur nom secondaire de la rue
                 street2_ids = address_obj.search(cr, uid, [('street2', operator, name)], limit=limit, context=context)
                 for street2 in address_obj.browse(cr, uid, street2_ids):
-                    if street2.partner_id.id not in res and not isinstance(street2.partner_id.id, bool):
+                    if street2.partner_id.id not in res and not isinstance(street2.partner_id.id, bool) and street.partner_id.active:
                         res.append(street2.partner_id.id)
 
                 ## Recherche sur nom de la ville
                 city_name = '%'+str(name)+'%'
                 city_ids = address_obj.search(cr, uid, [('city', operator, city_name)], limit=limit, context=context)
                 for city in address_obj.browse(cr, uid, city_ids):
-                    if city.partner_id.id not in res and not isinstance(city.partner_id.id, bool):
+                    if city.partner_id.id not in res and not isinstance(city.partner_id.id, bool) and street.partner_id.active:
                         res.append(city.partner_id.id)
 
                 ## Recherche sur le code exact

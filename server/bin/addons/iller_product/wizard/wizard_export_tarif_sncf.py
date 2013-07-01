@@ -61,9 +61,9 @@ def _export(self, cr, uid, data, context):
     item_obj      = pooler.get_pool(cr.dbname).get('product.pricelist.item')
 
     # Recherche du client SNCF
-    partner_id = partner_obj.search(cr, uid, [('name', 'ilike', 'SNCF STRASBOURG')])
+    partner_id = partner_obj.search(cr, uid, [('ref', '=', '130038')])
     if len( partner_id) == 0:
-        raise osv.except_osv( ('Attention'), ('Ce partenaire n\'a pas été trouvé'))
+        raise osv.except_osv( ('Attention'), ('Le partenaire 130038 REST. D\'ENTREPRISE SNCF, n\'a pas été trouvé'))
     partner = partner_obj.browse(cr,uid, partner_id[0])
     pricelist_id = partner.property_product_pricelist.id
 

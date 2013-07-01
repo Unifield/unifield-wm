@@ -3,6 +3,7 @@
 
 from osv import osv
 from osv import fields
+import netsvc
 
 
 class iller_sale(osv.osv):
@@ -20,11 +21,10 @@ class iller_sale(osv.osv):
         poste_obj = self.pool.get('iller.poste')
 
         res = super(iller_sale, self).action_ship_create(cr, uid, ids, *args)
-
         for so in self.browse(cr, uid, ids):
             if so.tournee_id and so.tournee_id.id:
                 for pick in so.picking_ids:
-                    pick_obj.write(cr, uid, [pick.id], {'tournee_id': so.tournee_id.id})
+                    pick_obj.write(cr, uid, [pick.id], {'tournee_id': so.tournee_id.id, 'state':'assigned'})
                     for line in pick.move_lines:
                         #Récupération du poste correspondant
                         if line.product_id.code_affectation == 'DECP':
@@ -34,7 +34,8 @@ class iller_sale(osv.osv):
                             poste = poste_obj.search(cr, uid, [('type', '=', line.product_id.code_affectation),
                                                                 ('name', '=', so.tournee_id.prep_id.name)], *args)
                         if poste:
-                            sm_obj.write(cr, uid, [line.id], {'poste_id':poste[0]}, *args)
+                            sm_obj.write(cr, uid, [line.id], {'poste_id':poste[0], 'state':'assigned'}, *args)
+
         return res
 
 
