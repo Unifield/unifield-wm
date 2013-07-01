@@ -5,6 +5,7 @@ from osv import osv
 from osv import fields
 import time
 import re
+from tools.translate import _
 
 class iller_sale_comment(osv.osv):
     _name = 'iller.sale.comment'
@@ -88,6 +89,9 @@ class iller_sale_line(osv.osv):
             Lors du changement de produit, on regarde si un commentaire existe déjà 
             pour ce produit et ce partenaire
         '''
+        if not  partner_id:
+            raise osv.except_osv(_('Aucun partenaire défini !'), _('Veuillez sélectionner un partenaire dans le formulaire de vente avant de choisir un produit !'))
+
         comment_obj = self.pool.get('iller.sale.comment')
 
         comment = ''
