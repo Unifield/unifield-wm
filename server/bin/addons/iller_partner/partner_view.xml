@@ -41,16 +41,18 @@
             <field name="inherit_id" ref="product.view_partner_property_form" />
             <field name="arch" type="xml">
                 <data>
-                <xpath expr="//group[@name='sale_list']/field[@name='property_product_pricelist']" position="replace">
-                    <field name="tarif_general_choice" />
-                    <field name="prix_noel_choice" />
-                    <field name="tarif_special_choice" />
-                    <field name="mea_choice" />
-                    <field name="promo_choice" />
-                    <field name="tarif_choice"/>
-                    <field name="property_product_pricelist" readonly="1"/>
-                </xpath>
-
+                    <xpath expr="///field[@name='supplier']" position="after">
+                        <field name="active" />
+                    </xpath>
+                    <xpath expr="//group[@name='sale_list']/field[@name='property_product_pricelist']" position="replace">
+                        <field name="tarif_general_choice" />
+                        <field name="prix_noel_choice" />
+                        <field name="tarif_special_choice" />
+                        <field name="mea_choice" />
+                        <field name="promo_choice" />
+                        <field name="tarif_choice"/>
+                        <field name="property_product_pricelist" readonly="1"/>
+                    </xpath>
                 </data>
 
             </field>

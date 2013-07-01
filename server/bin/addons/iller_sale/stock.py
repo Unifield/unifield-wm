@@ -50,7 +50,7 @@ class iller_stock_move(osv.osv):
                 # Liste de prix du client
                 partner_pricelist_id = sm.sale_line_id.order_id.partner_id.property_product_pricelist.id or None
             else:
-                default_pricelist = self.pool.get('product.pricelist').search(cr, uid, [('name', '=', 'Tarif Général')], limit=1)[0]
+                default_pricelist = self.pool.get('product.pricelist').search(cr, uid, [('name', 'ilike', 'NU01')], limit=1)[0]
             # Affectation de la liste de prix adéquate
             #+ - celle de la commande par défaut
             #+ - sinon celle du client par défaut
