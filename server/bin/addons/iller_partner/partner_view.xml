@@ -140,8 +140,9 @@
                     <separator colspan="4" string="Autres informations" />
                     <field name="depose_ok" />
                     <newline />
-                    <field name="commentaire_prep" />
-                    <field name="commentaire_livraison" />
+                    <field name="commentaire_prep" colspan="4"/>
+                    <newline />
+                    <field name="commentaire_livraison" colspan="4"/>
                 </xpath>
             </field>
         </record>

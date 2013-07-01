@@ -40,24 +40,12 @@
             view_mode='form'
             view_type='form'
             target='new' />
-            
-<!--
-        <act_window id="action_make_account_move_excel"
-            name="Générer fichier pour écritures comptables"
-            res_model="wizard.account.move.excel"
-            view_mode='form'
-            view_type='form'
-            target='new' />
--->
+
 
         <!-- Menus -->
         <menuitem id="menu_makes_invoices"
         action="action_make_invoices"
         parent="account.menu_finance" />
-<!--
-        <menuitem id="menu_makes_account_move_excel"
-        action="action_make_account_move_excel"
-        parent="account.menu_finance" />
--->
+
     </data>
 </openerp>
