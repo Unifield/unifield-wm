@@ -26,9 +26,9 @@ class wizard_export_tarif_hilton(osv.osv_memory):
         item_obj      = pooler.get_pool(cr.dbname).get('product.pricelist.item')
 
         # Recherche du partenaire dont il faut éditer le tarif
-        partner_id = partner_obj.search(cr, uid, [('name', 'ilike', 'HILTON HOTEL')])
+        partner_id = partner_obj.search(cr, uid, [('name', 'ilike', 'HILTON')])
         if len( partner_id) == 0:
-            raise osv.except_osv( ('Attention'), ('Ce partenaire n\'a pas été trouvé'))
+            raise osv.except_osv( ('Attention'), ('Le partenaire HILTON n\'a pas été trouvé'))
         partner = partner_obj.browse(cr,uid, partner_id[0])
         pricelist_id = partner.property_product_pricelist.id
 
@@ -67,6 +67,8 @@ class wizard_export_tarif_hilton(osv.osv_memory):
         item_ids = item_obj.search(cr,uid, [('price_version_id', '=', version_id)])
         for item_id in item_ids:
             item = item_obj.browse(cr, uid, item_id)
+            if (this.hebdo and this.mensuel) and (item.sequence == 3 or item.sequence == 1):
+                continue
             # Si la case "hebdo" est cochée, on ne veut que les promos de la semaine (séquence 3)
             if this.hebdo and item.sequence != 3:
                 continue

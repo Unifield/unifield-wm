@@ -255,14 +255,14 @@ class iller_partner(osv.osv):
                 ## Recherche sur nom secondaire de la rue
                 street2_ids = address_obj.search(cr, uid, [('street2', operator, name)], limit=limit, context=context)
                 for street2 in address_obj.browse(cr, uid, street2_ids):
-                    if street2.partner_id.id not in res and not isinstance(street2.partner_id.id, bool) and street.partner_id.active:
+                    if street2.partner_id.id not in res and not isinstance(street2.partner_id.id, bool) and street2.partner_id.active:
                         res.append(street2.partner_id.id)
 
                 ## Recherche sur nom de la ville
                 city_name = '%'+str(name)+'%'
                 city_ids = address_obj.search(cr, uid, [('city', operator, city_name)], limit=limit, context=context)
                 for city in address_obj.browse(cr, uid, city_ids):
-                    if city.partner_id.id not in res and not isinstance(city.partner_id.id, bool) and street.partner_id.active:
+                    if city.partner_id.id not in res and not isinstance(city.partner_id.id, bool) and city.partner_id.active:
                         res.append(city.partner_id.id)
 
                 ## Recherche sur le code exact

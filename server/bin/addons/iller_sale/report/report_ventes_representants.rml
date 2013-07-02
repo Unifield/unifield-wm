@@ -60,10 +60,7 @@
     <para style="Standard">
       <font color="white"> </font>
     </para>
-    <para style="Standard">[[ repeatIn(getRepresentants(data['form']['representant']), 'repr') ]]</para>
-    <section>
-      <para style="Standard">[[ repr.name ]]</para>
-    </section>
+
     <para style="Standard">
       <font color="white"> </font>
     </para>

@@ -102,7 +102,7 @@ def _export(self, cr, uid, data, context):
                                         })[pricelist_id]
                     cols[3] =  str(round(prix,2))
                     nb += 1
-                     
+
             for col in cols:
                 export += unicode(col,'utf-8') + ";"
 
