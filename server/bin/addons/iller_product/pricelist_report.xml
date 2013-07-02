@@ -24,6 +24,17 @@
                         menu="True"
                         />
 
+        <report 
+                        id="report_print_mea" 
+                        string="Impression de la mise en avant" 
+                        model="product.pricelist.mea" 
+                        name="print.mea" 
+                        rml="iller_product/report/print_mea.rml" 
+                        header="False" 
+                        auto="False" 
+                        menu="True"
+                        />
+
         <report
                         id="report_category_pricelist"
                         string="Liste de prix"

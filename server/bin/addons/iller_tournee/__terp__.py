@@ -30,7 +30,7 @@
         concernant les tournées pour Iller
 """,
     'author': 'TeMPO Consulting',
-    'website': 'http://www.tempo-consulting.com',
+    'website': 'http://www.tempo-consulting.fr',
     'depends': ['product', 'stock', 'sale'],
     'init_xml': [],
     'demo_xml': [],

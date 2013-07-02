@@ -58,6 +58,12 @@
                 model="product.pricelist.promo"
                 menu="True" />
 
+        <wizard id="export_tarif_mea"
+                name="export.tarif.mea"
+                string="Export .csv"
+                model="product.pricelist.mea"
+                menu="True" />
+
         <!-- Wizard pour exportation du tarif HILTON -->
 
         <record id="wizard_export_tarif_hilton" model="ir.ui.view">

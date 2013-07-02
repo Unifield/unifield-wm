@@ -100,14 +100,14 @@ def _export(self, cr, uid, data, context):
                                         'uom': uom.id,
                                         'date': data['form']['from_date'],
                                         })[pricelist_id]
-                    cols[3] =  str(round(prix,2))
+                    print cols[3]
+                    #~ cols[3] =  str(round(prix,2))
                     nb += 1
 
             for col in cols:
                 export += unicode(col,'utf-8') + ";"
 
         export += "\r\n"
-
     export1=base64.encodestring(export.encode("utf-8"))
 
     ret['advice']='Pour sauvegarder le tarif qui vient d\'être généré, cliquer sur le petit bouton à droite du bouton Ouvrir.'

@@ -29,7 +29,7 @@
         Ce module ajoute la gestion des reliquats pour les livraisons de Iller.
 """,
     'author': 'TeMPO Consulting',
-    'website': 'http://www.tempo-consulting.com',
+    'website': 'http://www.tempo-consulting.fr',
     'depends': ['stock'],
     'init_xml': [],
     'demo_xml': [],

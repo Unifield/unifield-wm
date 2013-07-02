@@ -6,6 +6,7 @@ import wizard_nouveau_prix_achat
 import wizard_export_tarif_hilton
 import wizard_export_tarif_sncf
 import wizard_export_promo
+import wizard_export_mea
 import wizard_export_tarifs_commerciaux
 import wizard_raz_prix_noel
 import wizard_modif_coeff
