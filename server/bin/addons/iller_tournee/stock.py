@@ -112,33 +112,50 @@ class iller_stock_move(osv.osv):
     _name = 'stock.move'
     _inherit = 'stock.move'
 
+    def create(self, cr, uid, data, context=None):
+
+        res = super(iller_stock_move, self).create(cr, uid, data, context=context)
+
+        sp_obj = self.pool.get('stock.picking')
+        sm_record = self.browse(cr, uid, res, context=context)
+
+        # Si on a bien un stock move et qu'une tournée existe
+        if sm_record and sm_record.picking_id.tournee_id:
+            # On regarde si le produit en cours est de type prep ou decp
+            if sm_record.product_id.code_affectation == 'DECP':
+                self.write(cr, uid, [sm_record.id], {'poste_id':sm_record.picking_id.tournee_id.decoupe_id.id}, context=context)
+            else:
+                self.write(cr, uid, [sm_record.id], {'poste_id':sm_record.picking_id.tournee_id.prep_id.id}, context=context)
+
+        return res
+
     _columns = {
         'poste_id': fields.many2one('iller.poste', string="Poste Prépa.", required=False),
+        'state': fields.selection([('draft', 'Draft'), ('waiting', 'Waiting'), ('confirmed', 'Confirmed'), ('assigned', 'Available'), ('done', 'Done'), ('cancel', 'Cancelled')], 'Status', readonly=True, select=True),
     }
-    def onchange_product_id(self, cr, uid, ids, prod_id=False, loc_id=False, loc_dest_id=False, address_id=False):
-        if not prod_id:
-            return {}
-        lang = False
-        if address_id:
-            addr_rec = self.pool.get('res.partner.address').browse(cr, uid, address_id)
-            if addr_rec:
-                lang = addr_rec.partner_id and addr_rec.partner_id.lang or False
-        ctx = {'lang': lang}
 
-        product = self.pool.get('product.product').browse(cr, uid, [prod_id], context=ctx)[0]
-        uos_id  = product.uos_id and product.uos_id.id or False
-        result = {
-            'name': product.partner_ref,
-            'product_uom': product.uom_id.id,
-            'product_uos_qty' : self.pool.get('stock.move').onchange_quantity(cr, uid, ids, prod_id, 1.00, product.uom_id.id, uos_id)['value']['product_uos_qty']
-        }
-        if uos_id:
-            result['product_uos'] = uos_id
-        if loc_id:
-            result['location_id'] = loc_id
-        if loc_dest_id:
-            result['location_dest_id'] = loc_dest_id
-        return {'value': result}
+    _defaults = {
+        'state': lambda *a:'assigned',
+    }
+
+    def onchange_product_id(self, cr, uid, ids, prod_id=False, loc_id=False, loc_dest_id=False, address_id=False):
+
+        res = super(iller_stock_move, self).onchange_product_id(cr, uid, ids,
+                prod_id=prod_id, loc_id=loc_id, loc_dest_id=loc_dest_id, address_id=address_id)
+
+        # Si la quantité est modifiée
+        if 'value' in res and res['value'] and 'product_qty' in res['value'] \
+            and 'product_uos_qty' in res['value']:
+
+            # On supprime les valeurs de quantité pou garder celles saisies
+            del res['value']['product_qty']
+            del res['value']['product_uos_qty']
+            # Par défaut on utilise la même unité de mesure, on applique la règle ici
+            if prod_id:
+                product = self.pool.get('product.product').browse(cr, uid, [prod_id], context={})[0]
+                res['value']['product_uos']  = product.uom_id and product.uom_id.id or False
+
+        return res
 
 iller_stock_move()
 

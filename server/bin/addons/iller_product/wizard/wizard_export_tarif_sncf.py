@@ -92,6 +92,7 @@ def _export(self, cr, uid, data, context):
                 product_ids = product_obj.search(cr, uid, [('default_code', 'ilike', str(code))])
                 if not product_ids:
                     print "********** PAS DE PRODUIT DE CODE %s" %code
+                    cols[3] = ''
                 else:
                     prod = product_obj.browse(cr, uid, product_ids[0])
                     uom = prod.uom_id
@@ -100,8 +101,8 @@ def _export(self, cr, uid, data, context):
                                         'uom': uom.id,
                                         'date': data['form']['from_date'],
                                         })[pricelist_id]
-                    print cols[3]
-                    #~ cols[3] =  str(round(prix,2))
+
+                    cols[3] =  str(round(prix,2))
                     nb += 1
 
             for col in cols:
