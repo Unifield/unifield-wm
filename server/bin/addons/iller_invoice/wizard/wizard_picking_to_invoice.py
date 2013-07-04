@@ -30,6 +30,7 @@ import threading
 import pooler
 import base64
 import time
+import netsvc
 from tools import ustr
 
 
@@ -162,7 +163,8 @@ class wizard_picking_to_invoice(osv.osv_memory):
                         wf_service = netsvc.LocalService("workflow")
                         wf_service.trg_validate(uid, 'account.invoice', invoice_id, 'invoice_open', cr)
 
-                except Exception:
+                except Exception,e:
+                    print str(e)
                     bon_non_reussis += bon_a_facturer[bon]
                     continue
                 finally:

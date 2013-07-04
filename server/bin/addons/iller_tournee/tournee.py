@@ -28,7 +28,7 @@ class iller_poste(osv.osv):
 
     _columns = {
         'name': fields.char(size=64, string='Nom', required=True),
-        'type': fields.selection([('PREP', 'Préparation'), ('DECP', 'Découpe')], string='Type', required=True),
+        'type': fields.selection([('PREP', u'Préparation'), ('DECP', u'Découpe')], string='Type', required=True),
         'stock_move_ids': fields.one2many('stock.move', 'poste_id', required=False),
     }
 
@@ -39,24 +39,24 @@ iller_poste()
 
 class tournee_iller(osv.osv):
     _name = 'tournee.iller'
-    _description = 'Tournée pour la livraison des produits'
+    _description = u'Tournée pour la livraison des produits'
 
     _columns = {
-        'name': fields.char(size=64, string='Nom', required=True),
-        'code_tournee': fields.integer(string='Code tournee'),
+        'name': fields.char(size=64, string=u'Nom', required=True),
+        'code_tournee': fields.integer(string=u'Code tournée'),
         #'heure_depart': fields.integer(string='Heure depart'),
-        'heure_depart': fields.char(size=5, string='Heure depart'),
+        'heure_depart': fields.char(size=5, string=u'Heure depart'),
         'prep_id': fields.many2one('iller.poste', domain="[('type', '=', 'PREP')]",
-            string='Poste de préparation'),
+            string=u'Poste de préparation'),
         'decoupe_id': fields.many2one('iller.poste', domain="[('type', '=', 'DECP')]",
-            string='Poste de découpe'),
-        'regroup_code': fields.char(size=12, string='Code de regroupement'),
-        'stock_picking_ids': fields.one2many('stock.picking', 'tournee_id', string='Produits à expédier'),
+            string=u'Poste de découpe'),
+        'regroup_code': fields.char(size=12, string=u'Code de regroupement'),
+        'stock_picking_ids': fields.one2many('stock.picking', 'tournee_id', string=u'Produits à expédier'),
 
         ## Les partenaires présents dans la tournée
-        'partner1': fields.one2many('res.partner', 'tournee1', 'Clients principaux'),
-        'partner2': fields.one2many('res.partner', 'tournee2', 'Clients secondaires'),
-        'partner3': fields.one2many('res.partner', 'tournee3', 'Clients exceptionnels'),
+        'partner1': fields.one2many('res.partner', 'tournee1', u'Clients principaux'),
+        'partner2': fields.one2many('res.partner', 'tournee2', u'Clients secondaires'),
+        'partner3': fields.one2many('res.partner', 'tournee3', u'Clients exceptionnels'),
     }
 
     _order = 'heure_depart, name'
@@ -68,9 +68,9 @@ class res_partner(osv.osv):
     _inherit = 'res.partner'
 
     _columns = {
-        'tournee1': fields.many2one('tournee.iller', string='Tournee n°1'),
-        'tournee2': fields.many2one('tournee.iller', string='Tournee n°2'),
-        'tournee3': fields.many2one('tournee.iller', string='Tournee n°3'),
+        'tournee1': fields.many2one('tournee.iller', string=u'Tournée n°1'),
+        'tournee2': fields.many2one('tournee.iller', string=u'Tournée n°2'),
+        'tournee3': fields.many2one('tournee.iller', string=u'Tournée n°3'),
     }
 
 res_partner()

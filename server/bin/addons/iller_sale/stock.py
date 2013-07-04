@@ -42,7 +42,9 @@ class iller_stock_move(osv.osv):
         for sm in self.browse(cr, uid, ids):
             # Préparation des valeurs possibles
             pricelist_id = None
-            partner_pricelist_id = sm.picking_id.address_id.partner_id.property_product_pricelist.id or None
+            partner_pricelist_id = None
+            if sm.picking_id and sm.picking_id.address_id and sm.picking_id.address_id.partner_id:
+                partner_pricelist_id = sm.picking_id.address_id.partner_id.property_product_pricelist.id or None
             default_pricelist = None
             if sm.sale_line_id:
                 # Liste de prix du bon de commande
