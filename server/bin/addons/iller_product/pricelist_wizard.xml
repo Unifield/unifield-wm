@@ -8,17 +8,6 @@
             id="iller_product_pricelist_rapports_menu"
             parent="product.menu_main_product" /> 
 
-        <!--        <wizard id="pricelist_configure_promo"
-                name="pricelist.configure.promo"
-                string="Configurer une promo"
-                model="product.pricelist"
-                menu="False" />
-
-        <menuitem action="pricelist_configure_promo"
-                  id="menu_pricelist_configure_promo"
-                  type="wizard"
-                  parent="product.menu_product_pricelist_main" />-->
-
         <wizard id="pricelist_configure_tarif_special_client"
                 name="pricelist.configure.tarif.special.client"
                 string="Configurer un tarif special pour un client"
@@ -52,6 +41,17 @@
                   type="wizard"
                   parent="iller_product_pricelist_rapports_menu" />
 
+       <wizard id="wizard_export_tarif_hilton"
+                name="wizard.export.tarif.hilton"
+                string="Exporter le Tarif Hilton"
+                model="product.product"
+                menu="False" />
+
+        <menuitem action="wizard_export_tarif_hilton"
+                  id="menu_export_tarif_hilton"
+                  type="wizard"
+                  parent="iller_product_pricelist_rapports_menu" />
+
         <wizard id="export_tarif_promo"
                 name="export.tarif.promo"
                 string="Export .csv"
@@ -63,56 +63,6 @@
                 string="Export .csv"
                 model="product.pricelist.mea"
                 menu="True" />
-
-        <!-- Wizard pour exportation du tarif HILTON -->
-
-        <record id="wizard_export_tarif_hilton" model="ir.ui.view">
-            <field name="name">Exporter le tarif HILTON</field>
-            <field name="model">wizard.export.tarif.hilton</field>
-            <field name="type">form</field>
-            <field name="arch" type="xml">
-                <form string="Exportation du tarif HILTON">
-                    <separator colspan="4" string="Exportation du tarif HILTON" />
-                    <group col="4" states="choose">
-                        <field invisible="1" name="state"/>
-                        <field nolabel = "1" height="22" colspan = "4" name ="avertissement"/>
-                        <newline/>
-                        <field name="from_date"/>
-                        <newline/>
-                        <field name="mensuel"/>
-                        <newline/>
-                        <field name="hebdo"/>
-                        <newline/>
-                        <button icon="gtk-cancel" name="act_cancel" special="cancel" states="choose" string="Annulation" type="object"/>
-                        <button icon="gtk-ok" name="act_getfile" states="choose" string="Génération du fichier" type="object"/>
-                    </group>
-                    <group col="4" states="get">
-                        <separator string="Le tarif a été exporté"/>
-                        <field height="50" colspan="4" name="advice" nolabel="1"/>
-                        <newline/>
-                        <field name="name" invisible="1"/>
-                        <field name="data" nolabel="1" readonly="1" fieldname="name"/>
-                        <newline/>
-                        <button icon="gtk-close" name="act_export_ok" states="get" string="Fin" type="object"/>
-                    </group>
-                    <separator colspan="4"/>
-                </form>
-            </field>
-        </record>
-
-        <record id="action_wizard_export_tarif_hilton" model="ir.actions.act_window">
-            <field name="name">Exporter le tarif HILTON</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">wizard.export.tarif.hilton</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">form</field>
-            <field name="target">new</field>
-        </record>
-
-        <menuitem action="action_wizard_export_tarif_hilton" 
-                  id="menu_wizard_export_tarif_hilton"
-                  parent="iller_product_pricelist_rapports_menu" />
-
 
         <!-- Wizard pour exportation des tarifs commerciaux -->
 

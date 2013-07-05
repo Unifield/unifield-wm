@@ -85,8 +85,8 @@ class wizard_export_tarifs_commerciaux(osv.osv_memory):
         categ_ids = categ_obj.search (cr, uid, [], 0, None, 'code, name')
         for categ_id in categ_ids:
             product_ids = product_obj.search(cr, uid, [('categ_id', '=', categ_id)])
-            for product_id in product_ids:
-                product = product_obj.browse(cr, uid, product_id)
+            products = product_obj.browse(cr, uid, product_ids)
+            for product in products:
                 # Recherche du prix selon la date saisie
                 cr.execute('''SELECT nouveau_prix_achat, nouveau_prix_vente FROM product_price_history WHERE product_id=%s  AND name<=%s ORDER BY name desc LIMIT 1''',(product.id,this.from_date))
                 ret = cr.fetchone()

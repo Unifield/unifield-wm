@@ -42,7 +42,6 @@
         'crm',
         'document',
         'sale',
-        'subscription',
     ],
     'init_xml': [],
     'demo_xml': [],
