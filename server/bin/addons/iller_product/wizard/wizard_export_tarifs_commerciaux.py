@@ -50,6 +50,14 @@ def _init(self, cr, uid, data, context=None):
     ret['avertissement'] = 'ATTENTION ! Ce traitement peut durer plusieurs minutes...'
     return ret
 
+def _get_coef(cr, uid, name_bareme, bareme_obj, context=None):
+    c_id = bareme_obj.search(cr, uid, [('name', '=', name_bareme)], context=context)
+    if c_id:
+        c = bareme_obj.browse(cr, uid, c_id[0], context=context).valeur
+    else:
+        c = 0.0
+    return c
+
 def act_getfile(self, cr, uid, data, context=None):
     pool = pooler.get_pool(cr.dbname)
     product_obj   = pool.get('product.product')
@@ -57,59 +65,20 @@ def act_getfile(self, cr, uid, data, context=None):
     bareme_obj    = pool.get('product.pricelist.bareme')
     rst = {}
     # Recherche de tous les barèmes à calculer:
-    c01_id = bareme_obj.search(cr, uid, [('name', '=', 'c01')])
-    if c01_id:
-        c01 = bareme_obj.browse(cr, uid, c01_id[0]).valeur
-    else:
-        c01 = 0.0
+    c01 = _get_coef(cr, uid, 'c01', bareme_obj, context=context)
+    c19 = _get_coef(cr, uid, 'c19', bareme_obj, context=context)
+    c17 = _get_coef(cr, uid, 'c17', bareme_obj, context=context)
+    c15 = _get_coef(cr, uid, 'c15', bareme_obj, context=context)
+    c13 = _get_coef(cr, uid, 'c13', bareme_obj, context=context)
+    c11 = _get_coef(cr, uid, 'c11', bareme_obj, context=context)
+    c09 = _get_coef(cr, uid, 'c09', bareme_obj, context=context)
+    c07 = _get_coef(cr, uid, 'c07', bareme_obj, context=context)
 
-    c19_id = bareme_obj.search(cr, uid, [('name', '=', 'c19')])
-    if c19_id:
-        c19 = bareme_obj.browse(cr, uid, c19_id[0]).valeur
-    else:
-        c19 = 0.0
-
-    c17_id = bareme_obj.search(cr, uid, [('name', '=', 'c17')])
-    if c17_id:
-        c17 = bareme_obj.browse(cr, uid, c17_id[0]).valeur
-    else:
-        c17 = 0.0
-
-    c15_id = bareme_obj.search(cr, uid, [('name', '=', 'c15')])
-    if c15_id:
-        c15 = bareme_obj.browse(cr, uid, c15_id[0]).valeur
-    else:
-        c15 = 0.0
-
-    c13_id = bareme_obj.search(cr, uid, [('name', '=', 'c13')])
-    if c13_id:
-        c13 = bareme_obj.browse(cr, uid, c13_id[0]).valeur
-    else:
-        c13 = 0.0
-
-    c11_id = bareme_obj.search(cr, uid, [('name', '=', 'c11')])
-    if c11_id:
-        c11 = bareme_obj.browse(cr, uid, c11_id[0]).valeur
-    else:
-        c11 = 0.0
-
-    c09_id = bareme_obj.search(cr, uid, [('name', '=', 'c09')])
-    if c09_id:
-        c09 = bareme_obj.browse(cr, uid, c09_id[0]).valeur
-    else:
-        c09 = 0.0
-
-    c07_id = bareme_obj.search(cr, uid, [('name', '=', 'c07')])
-    if c07_id:
-        c07 = bareme_obj.browse(cr, uid, c07_id[0]).valeur
-    else:
-        c07 = 0.0
-
-    export = "ACHAT;ARTIC.;DESIGNATION                            ; C. 01;   C19;  C17;   C15;   C13;   C11;   C09;   C07" + "\r\n"
-    export += ";;; 10.00;  1.00; 2.00;  3.00;  4.00;  5.00;  6.00;  7.00  " + "\r\n"              
+    export = "ACHAT;ARTIC.;DESIGNATION                            ;   C01;   C19;   C17;   C15;   C13;   C11;   C09;   C07" + "\r\n"
+    export += ";;; 10.00;  1.00; 2.00;  3.00;  4.00;  5.00;  6.00;  7.00  " + "\r\n"
 
     # Pour chaque catégorie, on imprime les prix des produits de la catégorie
-    categ_ids = categ_obj.search (cr, uid, [], 0, None, 'code, name')
+    categ_ids = categ_obj.search(cr, uid, [], 0, None, 'code, name')
     for categ_id in categ_ids:
         product_ids = product_obj.search(cr, uid, [('categ_id', '=', categ_id)])
         products = product_obj.browse(cr, uid, product_ids)
