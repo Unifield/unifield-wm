@@ -89,7 +89,7 @@ def build_product_line(cr, uid, product, date_debut, date_fin, prix):
 
     return export
 
-def _init(self, cr, uid, data, context):
+def _init(self, cr, uid, data, context=None):
     ret = {}
     ret['avertissement'] = 'Attention ! La génération du fichier peut prendre plusieurs minutes ...'
     return ret

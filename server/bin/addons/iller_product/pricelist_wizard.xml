@@ -52,6 +52,17 @@
                   type="wizard"
                   parent="iller_product_pricelist_rapports_menu" />
 
+       <wizard id="wizard_export_tarifs_commerciaux"
+                name="wizard.export.tarifs.commerciaux"
+                string="Exporter le tarif des commerciaux"
+                model="product.product"
+                menu="False" />
+
+        <menuitem action="wizard_export_tarifs_commerciaux"
+                  id="menu_export_tarifs_commerciaux"
+                  type="wizard"
+                  parent="iller_product_pricelist_rapports_menu" />
+
         <wizard id="export_tarif_promo"
                 name="export.tarif.promo"
                 string="Export .csv"
@@ -66,6 +77,7 @@
 
         <!-- Wizard pour exportation des tarifs commerciaux -->
 
+<!--
         <record id="wizard_export_tarifs_commerciaux" model="ir.ui.view">
             <field name="name">Exporter le tarif des commerciaux</field>
             <field name="model">wizard.export.tarifs.commerciaux</field>
@@ -112,6 +124,7 @@
         <menuitem action="action_wizard_export_tarifs_commerciaux" 
                   id="menu_wizard_export_tarifs_commerciaux"
                   parent="iller_product_pricelist_rapports_menu" />
+-->
 
         <!-- Wizard de modification des coefficients par catégorie -->
         <record id="wizard_choose_category_view" model="ir.ui.view">

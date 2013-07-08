@@ -38,7 +38,7 @@ fields_end = {
         'nb': {'string':'Nombre de prix mis à jour', 'type':'integer', 'readonly':True},
 
 }
-def _init(self, cr, uid, data, context):
+def _init(self, cr, uid, data, context=None):
     ret = {}
     ret['advice'] = 'Le fichier EXCEL reçu de la SNCF doit avoir été converti au format CSV.\r\nLe séparateur de champ est \';\'.\r\nLe séparateur de texte est vide (il n\'y en a pas).'
     return ret
