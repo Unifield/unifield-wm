@@ -94,10 +94,9 @@ class product_tarifs_speciaux(osv.osv):
     _description = 'Tarifs Spéciaux'
 
     def write(self, cr, uid, ids, vals, context=None):
-
-        if 'product_id' in vals:
+        res = False
+        if 'product_id' in vals and vals['product_id']:
             obj_item = self.pool.get('product.pricelist.item')
-            
             if not vals['product_id'][0][2]:
  
                 #Recherche des items correspondant à l'id de la ligne de tarif à supprimer
@@ -165,6 +164,8 @@ class product_tarifs_speciaux(osv.osv):
                                                                             'product_id':product_tarif.product_id.id,
                                                                             'price_surcharge':product_tarif.prix_special,
                                                                         }, context=context)
+        if not res:
+            res = super(product_tarifs_speciaux, self).write(cr, uid, ids, vals, context=context)
 
         return res
 

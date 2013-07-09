@@ -278,7 +278,6 @@ def _do_split(self, cr, uid, data, context):
             currency = data['form']['currency%s' % move.id]
 
             qty = uom_obj._compute_qty(cr, uid, uom, qty, product.uom_id.id)
-
             if (qty > 0):
                 new_price = currency_obj.compute(cr, uid, currency,
                         user.company_id.currency_id.id, price)
@@ -427,9 +426,9 @@ def _get_type_invoice(obj, cr, uid, data, context=None):
 
 
 def _create_invoice(obj, cr, uid, data, context=None):
-    if data['form'].get('new_picking', False):
-        data['id'] = data['form']['new_picking']
-        data['ids'] = [data['form']['new_picking']]
+    if 'new_picking' in data and data['new_picking']:
+        data['id'] = data['new_picking']
+        data['ids'] = [data['new_picking']]
     pool = pooler.get_pool(cr.dbname)
     picking_obj = pooler.get_pool(cr.dbname).get('stock.picking')
     mod_obj = pool.get('ir.model.data')
@@ -437,7 +436,6 @@ def _create_invoice(obj, cr, uid, data, context=None):
     inv_obj = pool.get('account.invoice')
 
     inv_type = data['form']['type']
-
     res = picking_obj.action_invoice_create(cr, uid, data['ids'],
             data['form']['journal_id'], data['form']['group'],
             inv_type, context=context)
