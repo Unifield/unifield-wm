@@ -20,6 +20,7 @@
 <!--
         Action pour créer un menu qui filtre sur les stock picking disponibles
 -->
+<!--
         <record id="action_picking_iller_dispo_tree1" model="ir.actions.act_window">
             <field name="name">Commandes à préparer</field>
             <field name="res_model">stock.picking</field>
@@ -41,10 +42,12 @@
             <field name="view_id" ref="stock.view_picking_out_tree"/>
             <field name="act_window_id" ref="action_picking_iller_dispo_tree1"/>
         </record>
+-->
 
 <!--
         Action pour créer un menu qui filtre sur les stock picking terminées
 -->
+<!--
         <record id="action_picking_iller_envoyees_tree1" model="ir.actions.act_window">
             <field name="name">Commandes envoyées</field>
             <field name="res_model">stock.picking</field>
@@ -66,10 +69,13 @@
             <field name="view_id" ref="stock.view_picking_out_tree"/>
             <field name="act_window_id" ref="action_picking_iller_envoyees_tree1"/>
         </record>
+-->
 <!--
         Menus pour les deux nouvelles actions (menu_stock_root ou menu_action_picking_tree ?)
 -->
+<!--
         <menuitem action="action_picking_iller_dispo_tree1" id="menu_picking_iller_dispo" parent="stock.menu_stock_root"/>
         <menuitem action="action_picking_iller_envoyees_tree1" id="menu_picking_iller_envoyees" parent="stock.menu_stock_root"/>
+-->
     </data>
 </openerp>
