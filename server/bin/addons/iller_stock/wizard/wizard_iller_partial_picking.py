@@ -422,7 +422,8 @@ def _get_type_invoice(obj, cr, uid, data, context=None):
         inv_type = 'out_refund'
     else:
         inv_type = 'out_invoice'
-    return {'type': inv_type}
+    data['type'] = inv_type
+    return data
 
 
 def _create_invoice(obj, cr, uid, data, context=None):
@@ -430,14 +431,17 @@ def _create_invoice(obj, cr, uid, data, context=None):
         data['id'] = data['new_picking']
         data['ids'] = [data['new_picking']]
     pool = pooler.get_pool(cr.dbname)
-    picking_obj = pooler.get_pool(cr.dbname).get('stock.picking')
-    mod_obj = pool.get('ir.model.data')
-    act_obj = pool.get('ir.actions.act_window')
+    picking_obj = pool.get('stock.picking')
     inv_obj = pool.get('account.invoice')
+    jour_obj = pool.get('account.journal')
 
-    inv_type = data['form']['type']
+    inv_type = data['type']
+    journal_id = jour_obj.search(cr, uid, [('name', 'ilike', 'VENTES ILLER'), ('type', '=', 'sale')], context=context)
+    if not journal_id:
+        raise wizard.except_wizard(_('Erreur journal des ventes'), _('Le journal des ventes \'VENTES ILLER\' n\'a pas été trouvé.'))
+
     res = picking_obj.action_invoice_create(cr, uid, data['ids'],
-            data['form']['journal_id'], data['form']['group'],
+            journal_id[0], False,
             inv_type, context=context)
 
     invoice_ids = res.values()
@@ -447,26 +451,8 @@ def _create_invoice(obj, cr, uid, data, context=None):
 
     if not invoice_ids:
         raise wizard.except_wizard(_('Erreur'), _('La facture n\'a pas été créée.'))
-    if inv_type == 'out_invoice':
-        xml_id = 'action_invoice_tree5'
-        name_xml_id = 'Facture client'
-    elif inv_type == 'in_invoice':
-        xml_id = 'action_invoice_tree8'
-        name_xml_id = 'Facture fournisseur'
-    elif inv_type == 'out_refund':
-        xml_id = 'action_invoice_tree10'
-        name_xml_id = 'Avoir client'
-    else:
-        xml_id = 'action_invoice_tree12'
-        name_xml_id = 'Avoir fournisseur'
 
-    result = mod_obj._get_id(cr, uid, 'account', xml_id)
-    mod_id = mod_obj.read(cr, uid, result, ['res_id'], context=context)
-    result = act_obj.read(cr, uid, mod_id['res_id'], context=context)
-    result['name'] = name_xml_id
-    result['res_id'] = invoice_ids
-    result['context'] = context
-    return result
+    return 'end3'
 
 def _workflow_validation(self, cr, uid, data, context={}):
     """
@@ -527,29 +513,28 @@ class iller_partial_picking(wizard.interface):
             },
         },
         'invoice': {
-            'actions': [ _get_type_invoice ],
-            'result': {'type': 'form', 'arch': _invoice_arch, 'fields': _invoice_fields,
-                'state': (
-                    ('end', '_Annuler'),
-                    ('create_invoice', '_Continuer')
-                )
+            'actions': [ _get_type_invoice],
+            'result': {'type': 'choice', 'next_state': _create_invoice,
+            #~ 'result': {'type': 'form', 'arch': _invoice_arch, 'fields': _invoice_fields,
+                #~ 'state': (
+                    #~ ('end', '_Annuler'),
+                    #~ ('create_invoice', '_Continuer')
+                #~ )
             },
         },
-        'create_invoice': {
-            'actions': [],
-            'result': {
-                'type': 'action',
-                'action': _create_invoice,
-                'state': 'end3'
-            }
-        },
+        #~ 'create_invoice': {
+            #~ 'actions': [],
+            #~ 'result': {
+                #~ 'type': 'action',
+                #~ 'action': _create_invoice,
+                #~ 'state': 'end3'
+            #~ }
+        #~ },
         'end3': {
-            'actions': [ _workflow_validation ],
-            'result': {'type': 'form', 'arch': _moves_arch_end,
-                'fields': _moves_fields_end,
-                'state': (
-                    ('end', '_Fermer'),
-                )
+            'actions': [],
+            'result': {'type': 'action',
+                'action': _workflow_validation,
+                'state': 'end'
             },
         },
     }
