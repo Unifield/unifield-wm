@@ -30,7 +30,18 @@
             <field name="context">{'contact_display': 'partner'}</field>
             <field name="view_id" ref="stock.view_picking_out_tree"/>
         </record>
-
+        <record id="action_picking_tree_out_iller_dispo" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="stock.view_picking_out_tree"/>
+            <field name="act_window_id" ref="action_picking_iller_dispo_tree1"/>
+        </record>
+        <record id="action_picking_form_out_iller_dispo" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="stock.view_picking_out_form"/>
+            <field name="act_window_id" ref="action_picking_iller_dispo_tree1"/>
+        </record>
 <!--
         Action pour créer un menu qui filtre sur les stock picking terminées
 -->
@@ -44,7 +55,18 @@
             <field name="context">{'contact_display': 'partner'}</field>
             <field name="view_id" ref="stock.view_picking_out_tree"/>
         </record>
-
+        <record id="action_picking_tree_out_iller_envoyees" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="stock.view_picking_out_tree"/>
+            <field name="act_window_id" ref="action_picking_iller_envoyees_tree1"/>
+        </record>
+        <record id="action_picking_form_out_iller_envoyees" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="stock.view_picking_out_form"/>
+            <field name="act_window_id" ref="action_picking_iller_envoyees_tree1"/>
+        </record>
 <!--
         Menus pour les deux nouvelles actions (menu_stock_root ou menu_action_picking_tree ?)
 -->
