@@ -331,9 +331,19 @@ SELECT res_id, touched
             synchronized_ids.extend(data_ids)
 
         def filter_o2m(field_list):
-            return [(f, self._columns[f])
-                        for f in field_list 
-                        if f in self._columns and isinstance(self._columns[f], fields.one2many)]
+            res = []
+            for f in field_list:
+                if f not in self._columns and \
+                   f in self._inherit_fields and \
+                   isinstance(self._inherit_fields[f][2], fields.one2many):
+                    res.append((f, self._inherit_fields[f][2]))
+                elif f in self._columns and isinstance(self._columns[f], fields.one2many):
+                    res.append((f, self._columns[f]))
+
+            return res
+#            return [(f, self._columns[f])
+#                        for f in field_list 
+#                        if f in self._columns and isinstance(self._columns[f], fields.one2many)]
 
         if previous_values is None:
             whole_fields = self._columns.keys()
