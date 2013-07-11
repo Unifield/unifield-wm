@@ -332,8 +332,8 @@ SELECT res_id, touched
 
         def filter_o2m(field_list):
             return [(f, self._columns[f])
-                    for f in field_list
-                    if isinstance(self._columns[f], fields.one2many)]
+                        for f in field_list 
+                        if f in self._columns and isinstance(self._columns[f], fields.one2many)]
 
         if previous_values is None:
             whole_fields = self._columns.keys()
