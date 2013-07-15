@@ -10,8 +10,6 @@ access_product_tarif_special_client,product.tarif.special.client,iller_product.m
 access_product_tarif_special_client_wizard,product.tarif.special.client.wizard,iller_product.model_product_tarif_special_client_wizard,,1,1,1,1
 access_product_price_history,product.price.history,iller_product.model_product_price_history,,1,1,1,1
 access_wizard_pricelist_configure_tarif_special_client,wizard.pricelist.configure.tarif.special.client,iller_product.model_wizard_pricelist_configure_tarif_special_client,,1,1,1,1
-access_wizard_export_tarif_hilton,wizard.export.tarif.hilton,iller_product.model_wizard_export_tarif_hilton,,1,1,1,1
-access_wizard_export_tarifs_commerciaux,wizard.export.tarifs.commerciaux,iller_product.model_wizard_export_tarifs_commerciaux,,1,1,1,1
 access_wizard_raz_prix_noel,wizard.raz.prix.noel,iller_product.model_wizard_raz_prix_noel,,1,1,1,1
 access_wizard_raz_prix_noel_close,wizard.raz.prix.noel.close,iller_product.model_wizard_raz_prix_noel_close,,1,1,1,1
 access_wizard_choose_category,wizard.choose.category,iller_product.model_wizard_choose_category,,1,1,1,1
@@ -36,8 +34,6 @@ access_wizard_print_pricelist_cat,wizard.print.pricelist.cat,iller_product.model
 "access_product_price_history","iller.product.price.history","model_product_price_history","base.group_user",1,0,0,0
 "access_product_price_history_mgmt","iller.product.price.history.mgmt","model_product_price_history","iller_product.group_iller_tarif",1,1,1,1
 "access_wizard_pricelist_configure_tarif_special_client","iller.wizard.pricelist.configure.tarif.special.client","model_wizard_pricelist_configure_tarif_special_client","base.group_user",1,0,0,0
-"access_wizard_export_tarif_hilton","iller.wizard.export.tarif.hilton","model_wizard_export_tarif_hilton","base.group_user",1,0,0,0
-"access_wizard_export_tarif_commerciaux","iller.wizard.export.tarif.commerciaux","model_wizard_export_tarifs_commerciaux","base.group_user",1,0,0,0
 "access_wizard_raz_prix_noel","iller.wizard.raz.prix.noel","model_wizard_raz_prix_noel","base.group_user",1,0,0,0
 "access_wizard_raz_prix_noel_close","iller.wizard.raz.prix.noel.close","model_wizard_raz_prix_noel_close","base.group_user",1,0,0,0
 "access_wizard_choose_category","iller.wizard.choose.category","model_wizard_choose_category","base.group_user",1,0,0,0
@@ -60,8 +56,6 @@ access_wizard_print_pricelist_cat,wizard.print.pricelist.cat,iller_product.model
 "access_product_tarif_special_client_wizard_compta","iller.product.tarif.special.client.wizard.mgmt","model_product_tarif_special_client_wizard","account.group_account_manager",1,1,1,1
 "access_product_price_history_compta","iller.product.price.history.mgmt","model_product_price_history","account.group_account_manager",1,1,1,1
 "access_wizard_pricelist_configure_tarif_special_client_compta","iller.wizard.pricelist.configure.tarif.special.client","model_wizard_pricelist_configure_tarif_special_client","account.group_account_manager",1,1,1,1
-"access_wizard_export_tarif_hilton_compta","iller.wizard.export.tarif.hilton","model_wizard_export_tarif_hilton","account.group_account_manager",1,1,1,1
-"access_wizard_export_tarif_commerciaux_compta","iller.wizard.export.tarif.commerciaux","model_wizard_export_tarifs_commerciaux","account.group_account_manager",1,1,1,1
 "access_wizard_raz_prix_noel_compta","iller.wizard.raz.prix.noel","model_wizard_raz_prix_noel","account.group_account_manager",1,1,1,1
 "access_wizard_raz_prix_noel_close_compta","iller.wizard.raz.prix.noel.close","model_wizard_raz_prix_noel_close","account.group_account_manager",1,1,1,1
 "access_wizard_choose_category_compta","iller.wizard.choose.category","model_wizard_choose_category","account.group_account_manager",1,1,1,1
@@ -84,8 +78,6 @@ access_wizard_print_pricelist_cat,wizard.print.pricelist.cat,iller_product.model
 "access_product_tarif_special_client_wizard_distri","iller.product.tarif.special.client.wizard.mgmt","model_product_tarif_special_client_wizard","iller_groups.group_distri",1,1,1,1
 "access_product_price_history_distri","iller.product.price.history.mgmt","model_product_price_history","iller_groups.group_distri",1,1,1,1
 "access_wizard_pricelist_configure_tarif_special_client_distri","iller.wizard.pricelist.configure.tarif.special.client","model_wizard_pricelist_configure_tarif_special_client","iller_groups.group_distri",1,1,1,1
-"access_wizard_export_tarif_hilton_distri","iller.wizard.export.tarif.hilton","model_wizard_export_tarif_hilton","iller_groups.group_distri",1,1,1,1
-"access_wizard_export_tarif_commerciaux_distri","iller.wizard.export.tarif.commerciaux","model_wizard_export_tarifs_commerciaux","iller_groups.group_distri",1,1,1,1
 "access_wizard_raz_prix_noel_distri","iller.wizard.raz.prix.noel","model_wizard_raz_prix_noel","iller_groups.group_distri",1,1,1,1
 "access_wizard_raz_prix_noel_close_distri","iller.wizard.raz.prix.noel.close","model_wizard_raz_prix_noel_close","iller_groups.group_distri",1,1,1,1
 "access_wizard_choose_category_distri","iller.wizard.choose.category","model_wizard_choose_category","iller_groups.group_distri",1,1,1,1
@@ -108,8 +100,6 @@ access_wizard_print_pricelist_cat,wizard.print.pricelist.cat,iller_product.model
 "access_product_tarif_special_client_wizard_achpro","iller.product.tarif.special.client.wizard.mgmt","model_product_tarif_special_client_wizard","purchase.group_purchase_manager",1,1,1,1
 "access_product_price_history_achpro","iller.product.price.history.mgmt","model_product_price_history","purchase.group_purchase_manager",1,1,1,1
 "access_wizard_pricelist_configure_tarif_special_client_achpro","iller.wizard.pricelist.configure.tarif.special.client","model_wizard_pricelist_configure_tarif_special_client","purchase.group_purchase_manager",1,1,1,1
-"access_wizard_export_tarif_hilton_achpro","iller.wizard.export.tarif.hilton","model_wizard_export_tarif_hilton","purchase.group_purchase_manager",1,1,1,1
-"access_wizard_export_tarif_commerciaux_achpro","iller.wizard.export.tarif.commerciaux","model_wizard_export_tarifs_commerciaux","purchase.group_purchase_manager",1,1,1,1
 "access_wizard_raz_prix_noel_achpro","iller.wizard.raz.prix.noel","model_wizard_raz_prix_noel","purchase.group_purchase_manager",1,1,1,1
 "access_wizard_raz_prix_noel_close_achpro","iller.wizard.raz.prix.noel.close","model_wizard_raz_prix_noel_close","purchase.group_purchase_manager",1,1,1,1
 "access_wizard_choose_category_achpro","iller.wizard.choose.category","model_wizard_choose_category","purchase.group_purchase_manager",1,1,1,1
@@ -132,8 +122,6 @@ access_wizard_print_pricelist_cat,wizard.print.pricelist.cat,iller_product.model
 "access_product_tarif_special_client_wizard_rh","iller.product.tarif.special.client.wizard.mgmt","model_product_tarif_special_client_wizard","hr.group_hr_manager",1,1,1,1
 "access_product_price_history_rh","iller.product.price.history.mgmt","model_product_price_history","hr.group_hr_manager",1,1,1,1
 "access_wizard_pricelist_configure_tarif_special_client_rh","iller.wizard.pricelist.configure.tarif.special.client","model_wizard_pricelist_configure_tarif_special_client","hr.group_hr_manager",1,1,1,1
-"access_wizard_export_tarif_hilton_rh","iller.wizard.export.tarif.hilton","model_wizard_export_tarif_hilton","hr.group_hr_manager",1,1,1,1
-"access_wizard_export_tarif_commerciaux_rh","iller.wizard.export.tarif.commerciaux","model_wizard_export_tarifs_commerciaux","hr.group_hr_manager",1,1,1,1
 "access_wizard_raz_prix_noel_rh","iller.wizard.raz.prix.noel","model_wizard_raz_prix_noel","hr.group_hr_manager",1,1,1,1
 "access_wizard_raz_prix_noel_close_rh","iller.wizard.raz.prix.noel.close","model_wizard_raz_prix_noel_close","hr.group_hr_manager",1,1,1,1
 "access_wizard_choose_category_rh","iller.wizard.choose.category","model_wizard_choose_category","hr.group_hr_manager",1,1,1,1

@@ -114,7 +114,8 @@ class product_tarifs_speciaux(osv.osv):
                     for product_tarif in tarifs_spec.product_id:
                         # Si la ligne de tarif n'est pas reliée à un pricelist item alors on crée la ligne de tarif spécial
                         if not product_tarif.item_id:
-
+                            if not context:
+                                context= {}
                             # Création des lignes de tarifs pour chaque nouveau produit
                             # Ajout dans le contexte de l'id de l'objet tarifs spéciaux pour indiquer au wizard
                             # les actions à faire pour ce cas spécifique
