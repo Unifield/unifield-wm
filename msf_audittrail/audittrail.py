@@ -636,7 +636,9 @@ def _check_domain(self, cr, uid, vals=[], domain=[], model=False, res_id=False):
             obj = self.pool.get(model.model).read(cr, uid, res_id, [d[0]])
             vals[d[0]] = obj[d[0]]
         
-        if d[1] == '=' and vals[d[0]] != d[2]:
+        if not (model and res_id):
+            res = False
+        elif d[1] == '=' and vals[d[0]] != d[2]:
             res = False
         elif d[1] == '!=' and vals[d[0]] == d[2]:
             res = False
