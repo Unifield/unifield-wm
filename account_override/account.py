@@ -201,6 +201,13 @@ class account_move(osv.osv):
         instance = self.pool.get('res.users').browse(cr, uid, uid, context).company_id.instance_id
         journal = self.pool.get('account.journal').browse(cr, uid, vals['journal_id'])
         sequence_number = self.pool.get('ir.sequence').get_id(cr, uid, journal.sequence_id.id)
+        
+        # UF-2014: add checks for sync creation on moves, move lines and analytic lines
+        if vals.get('period_id', False):
+            period  = self.pool.get('account.period').browse(cr, uid, vals['period_id'], context=context)
+            if period and period.state != 'draft':
+                raise osv.except_osv(_('Error'), _('Period \'%s\' is not open!') % period.name)
+        
         if instance and journal and sequence_number and ('name' not in vals or vals['name'] == '/'):
             if not instance.move_prefix:
                 raise osv.except_osv(_('Warning'), _('No move prefix found for this instance! Please configure it on Company view.'))
@@ -232,6 +239,13 @@ class account_move(osv.osv):
         """
         if not context:
             context = {}
+        
+        # UF-2014: add checks for sync creation on moves, move lines and analytic lines
+        if vals.get('period_id', False):
+            period  = self.pool.get('account.period').browse(cr, uid, vals['period_id'], context=context)
+            if period and period.state != 'draft':
+                raise osv.except_osv(_('Error'), _('Period \'%s\' is not open!') % period.name)
+            
         if context.get('from_web_menu', False) or context.get('sync_update_execution', False):
             # by default, from synchro, we just need to update period_id and journal_id
             fields = ['journal_id', 'period_id']
