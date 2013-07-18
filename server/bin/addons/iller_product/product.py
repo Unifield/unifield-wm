@@ -171,6 +171,43 @@ class product_product(osv.osv):
         return res
 
 
+
+    #~ def name_get(self, cr, uid, ids, context=None):
+        #~ print 'in name_get'
+        #~ return super(product_product, self).name_get(cr, uid, ids, context=context)
+
+    def name_search(self, cr, uid, name, args=None, operator='ilike', context=None, limit=80):
+        if not args:
+            args=[]
+        if not context:
+            context={}
+        print 'in name search', name, args
+        if name:
+            #Vérification si ce qu'on cherche est le code
+            try:
+                code = int(name)
+            except TypeError, e:
+                pass
+                return super(product_product, self).name_search(cr, uid, name, args=args, operator=operator, context=context, limit=limit)
+            #Si un code a été entré, on regarde la taille
+            if len(name.strip()) == 3:
+                #Si taille = 3 alors 1 zéro à gauche et 2 à droite
+                name = name.ljust(5, '0')
+                name = name.rjust(6, '0')
+            elif len(name.strip()) == 4:
+                #Sinon si taille = 4 alors 2 zéros à droite
+                # Si la saisie se termine par 0, on s'assure de n'afficher que
+                # ceux devant se terminer par deux zéros (ex : 1500 => 150000 et non 015000)
+                if name[3] == '0':
+                    name = name.ljust(6, '0')
+                else:
+                    # Il existe des cas où 4 chiffres sont encadrés par un 0 à droite et un 0 à gauche
+                    # Exemple : Si on tape 1142, faut-il renvoyer systèmatiquement 114200 ? Sachant que
+                    # 011420 existe et pas 114200, il faut donc faire une recherche sur les deux possibilités
+                    args += ['|', ('default_code', 'ilike', name.ljust(6, '0')), ('default_code', 'ilike', name.ljust(5,'0').rjust(6,'0'))]
+
+        return super(product_product, self).name_search(cr, uid, name, args, operator=operator, context=context, limit=limit)
+
     _columns = {
         'prix_achat': fields.function(_get_prix_achat, method=True, string='Prix d\'achat', digits=(16, int(config['price_accuracy'])), store=False, multi='prix'),
         'coeff_depart': fields.float(digits=(16,2), string='Coeff. départ'),
