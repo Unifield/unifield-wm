@@ -93,7 +93,6 @@ class iller_sale_line(osv.osv):
             raise osv.except_osv(_('Aucun partenaire défini !'), _('Veuillez sélectionner un partenaire dans le formulaire de vente avant de choisir un produit !'))
 
         comment_obj = self.pool.get('iller.sale.comment')
-
         comment = ''
         res = super(iller_sale_line, self).product_id_change(cr, uid, ids, pricelist, product, qty, uom, qty_uos, uos, name, partner_id, \
                                                              lang, update_tax, date_order, packaging, fiscal_position, tournee_id, flag)
@@ -102,13 +101,19 @@ class iller_sale_line(osv.osv):
             comment_ids = comment_obj.search(cr, uid, [('partner_id', '=', partner_id), ('product_id', '=', product)])
             if comment_ids and len(comment_ids) > 0:
                 comment = comment_obj.browse(cr, uid, comment_ids[0]).comment
-        
+
         type_cond = code_affect = ''
+        if uom:
+            uom_record = self.pool.get('product.uom').browse(cr, uid, [uom])
+            type_cond = self.getSelectionValue(cr, uid, 'product.product', 'type_cond', '00%s' % (uom_record[0].code_uom,))
         if product:
             product_id = self.pool.get('product.product').browse(cr, uid, product)
-            type_cond = self.getSelectionValue(cr, uid, 'product.product', 'type_cond', product_id.type_cond)
+            if type_cond == '':
+                type_cond = self.getSelectionValue(cr, uid, 'product.product', 'type_cond', product_id.type_cond)
             code_affect = product_id.code_affectation
-            
+
+
+
         res['value'].update({
             'notes': comment, 
             'type_prep': code_affect,

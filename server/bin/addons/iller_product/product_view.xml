@@ -2,6 +2,30 @@
 <openerp>
     <data>
 
+        <record id="iller_product_uom_tree_view" model="ir.ui.view">
+            <field name="name">iller.product.uom.tree.view</field>
+            <field name="model">product.uom</field>
+            <field name="type">tree</field>
+            <field name="inherit_id" ref="product.product_uom_tree_view" />
+            <field name="arch" type="xml">
+                <xpath expr="/tree/field[@name='name']" position="after">
+                    <field name="code_uom" />
+                </xpath>
+            </field>
+        </record>
+
+        <record id="iller_product_uom_form_view" model="ir.ui.view">
+            <field name="name">iller.product.uom.form.view</field>
+            <field name="model">product.uom</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="product.product_uom_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="/form/field[@name='name']" position="after">
+                    <field name="code_uom" />
+                </xpath>
+            </field>
+        </record>
+
         <record id="inherit_product_category_form_view" model="ir.ui.view">
             <field name="name">inherit.product.category.form.view</field>
             <field name="model">product.category</field>

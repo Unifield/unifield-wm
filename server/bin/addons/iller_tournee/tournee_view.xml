@@ -28,6 +28,7 @@
                 <form string="Tournée">
                     <field name="name" select="1" />
                     <field name="heure_depart" select="1" />
+                    <field name="code_tournee" select="1" />
                     <field name="regroup_code" />
                     <notebook colspan="4">
                         <page string="Clients">
@@ -56,6 +57,7 @@
                 <tree string="Tournées">
                     <field name="name" />
                     <field name="heure_depart" />
+                    <field name="code_tournee" />
                 </tree>
             </field>
         </record>

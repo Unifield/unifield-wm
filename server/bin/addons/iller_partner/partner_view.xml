@@ -42,7 +42,7 @@
             <field name="arch" type="xml">
                 <data>
                     <xpath expr="///field[@name='supplier']" position="after">
-                        <field name="active" />
+                        <field name="active" select="2"/>
                     </xpath>
                     <xpath expr="//group[@name='sale_list']/field[@name='property_product_pricelist']" position="replace">
                         <field name="tarif_general_choice" />

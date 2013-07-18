@@ -40,6 +40,7 @@
             'pricelist_report.xml',
             'wizard/wizard_raz_prix_noel_view.xml',
             'pricelist_data.xml',
+            'product_data.xml',
             'pricelist_view.xml',
             'security/iller_product_security.xml',
             'security/ir.model.access.csv',

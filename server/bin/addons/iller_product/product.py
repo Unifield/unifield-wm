@@ -72,6 +72,31 @@ class product_price_history(osv.osv):
 product_price_history()
 
 
+class product_uom(osv.osv):
+    _inherit = 'product.uom'
+    _name = 'product.uom'
+
+    _columns = {
+        'code_uom' : fields.char(size=2, string='Code'),
+    }
+
+    def name_search(self, cr, uid, name, args=None, operator='ilike', context=None, limit=80):
+        if not args:
+            args=[]
+        if not context:
+            context={}
+        if name:
+            #Vérification si ce qu'on cherche est le code
+            try:
+                code = int(name)
+            except ValueError, e:
+                pass
+                return super(product_uom, self).name_search(cr, uid, name, args=args, operator=operator, context=context, limit=limit)
+            res = self.search(cr, uid, [('code_uom','ilike',name)], limit=limit, context=context)
+        return self.name_get(cr, uid, res, context)
+
+product_uom()
+
 class product_product(osv.osv):
     _inherit = 'product.product'
     _name = 'product.product'
@@ -171,22 +196,16 @@ class product_product(osv.osv):
         return res
 
 
-
-    #~ def name_get(self, cr, uid, ids, context=None):
-        #~ print 'in name_get'
-        #~ return super(product_product, self).name_get(cr, uid, ids, context=context)
-
     def name_search(self, cr, uid, name, args=None, operator='ilike', context=None, limit=80):
         if not args:
             args=[]
         if not context:
             context={}
-        print 'in name search', name, args
         if name:
             #Vérification si ce qu'on cherche est le code
             try:
                 code = int(name)
-            except TypeError, e:
+            except ValueError, e:
                 pass
                 return super(product_product, self).name_search(cr, uid, name, args=args, operator=operator, context=context, limit=limit)
             #Si un code a été entré, on regarde la taille
