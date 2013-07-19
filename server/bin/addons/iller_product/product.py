@@ -80,6 +80,7 @@ class product_uom(osv.osv):
         'code_uom' : fields.char(size=2, string='Code'),
     }
 
+
     def name_search(self, cr, uid, name, args=None, operator='ilike', context=None, limit=80):
         if not args:
             args=[]
@@ -91,7 +92,8 @@ class product_uom(osv.osv):
                 code = int(name)
             except ValueError, e:
                 pass
-                return super(product_uom, self).name_search(cr, uid, name, args=args, operator=operator, context=context, limit=limit)
+                res = self.search(cr, uid, [('name','ilike',name)], limit=limit, context=context)
+                return self.name_get(cr, uid, res, context)
             res = self.search(cr, uid, [('code_uom','ilike',name)], limit=limit, context=context)
         return self.name_get(cr, uid, res, context)
 

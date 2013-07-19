@@ -5,6 +5,7 @@ from osv import osv
 from osv import fields
 import time
 import re
+from tools import config
 from tools.translate import _
 
 class iller_sale_comment(osv.osv):
@@ -101,7 +102,6 @@ class iller_sale_line(osv.osv):
             comment_ids = comment_obj.search(cr, uid, [('partner_id', '=', partner_id), ('product_id', '=', product)])
             if comment_ids and len(comment_ids) > 0:
                 comment = comment_obj.browse(cr, uid, comment_ids[0]).comment
-
         type_cond = code_affect = ''
         if uom:
             uom_record = self.pool.get('product.uom').browse(cr, uid, [uom])
@@ -112,14 +112,12 @@ class iller_sale_line(osv.osv):
                 type_cond = self.getSelectionValue(cr, uid, 'product.product', 'type_cond', product_id.type_cond)
             code_affect = product_id.code_affectation
 
-
-
         res['value'].update({
             'notes': comment, 
             'type_prep': code_affect,
             'type_cond': type_cond,
+            'product_uom': uom or 2,
         })
-
         return res
 
     def _get_info_order_line(self, cr, uid, ids, name, args, context=None):
@@ -175,9 +173,53 @@ class iller_sale(osv.osv):
             
         return res
 
+
+
+    def _amount_all(self, cr, uid, ids, field_name, arg, context):
+        res = super(iller_sale, self)._amount_all(cr, uid, ids, field_name, arg, context=context)
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+        cur_obj = self.pool.get('res.currency')
+        for order in self.browse(cr, uid, ids):
+            if res[order.id]['amount_untaxed'] + res[order.id]['amount_tax'] < 50.00:
+                res[order.id]['frais_de_port'] = 3.00
+                res[order.id]['amount_total'] = res[order.id]['amount_untaxed'] + res[order.id]['amount_tax'] + res[order.id]['frais_de_port']
+            else:
+                res[order.id]['frais_de_port'] = 0.00
+                res[order.id]['amount_total'] = res[order.id]['amount_untaxed'] + res[order.id]['amount_tax']
+        return res
+
+    def _get_order(self, cr, uid, ids, context={}):
+        result = {}
+        for line in self.pool.get('sale.order.line').browse(cr, uid, ids, context=context):
+            result[line.order_id.id] = True
+        return result.keys()
+
     _columns = {
         'user_id': fields.many2one('res.users', 'Salesman', states={'draft': [('readonly', False)]}, select=True, required=True),
         'code': fields.function(_get_code_client, type='char', method=True, string='Code', readonly=True),
+        'frais_de_port': fields.function(_amount_all, type='float', method=True,
+            string='Frais de port', digits=(3, int(config['price_accuracy'])), readonly=True,
+            help='Ajout automatique de 3 euros si le montant de la commande est inférieur à 50 euros.', multi='sums'),
+        ##Ajout des champs des montants de la commande pour pouvoir ajouter les frais de port
+        'amount_untaxed': fields.function(_amount_all, method=True, digits=(16, int(config['price_accuracy'])), string='Untaxed Amount',
+            store = {
+                'sale.order': (lambda self, cr, uid, ids, c={}: ids, ['order_line'], 10),
+                'sale.order.line': (_get_order, ['price_unit', 'tax_id', 'discount', 'product_uom_qty'], 10),
+            },
+            multi='sums'),
+        'amount_tax': fields.function(_amount_all, method=True, digits=(16, int(config['price_accuracy'])), string='Taxes',
+            store = {
+                'sale.order': (lambda self, cr, uid, ids, c={}: ids, ['order_line'], 10),
+                'sale.order.line': (_get_order, ['price_unit', 'tax_id', 'discount', 'product_uom_qty'], 10),
+            },
+            multi='sums'),
+        'amount_total': fields.function(_amount_all, method=True, digits=(16, int(config['price_accuracy'])), string='Total',
+            store = {
+                'sale.order': (lambda self, cr, uid, ids, c={}: ids, ['order_line'], 10),
+                'sale.order.line': (_get_order, ['price_unit', 'tax_id', 'discount', 'product_uom_qty'], 10),
+            },
+            multi='sums'),
     }
 
     _defaults = {

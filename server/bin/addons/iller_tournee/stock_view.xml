@@ -29,6 +29,9 @@
                     <xpath expr="//field[@name='type']" position="after">
                         <field name="code"/>
                     </xpath>
+                    <xpath expr="//field[@name='origin']" position="after">
+                        <field name="include_port"/>
+                    </xpath>
                 </data>
             </field>
         </record>

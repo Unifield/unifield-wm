@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <openerp>
-	<data>
+    <data>
 
         <!-- Ajout du taux de commission sur les vues des barèmes -->
         <record id="iller_commission_bareme_form_view" model="ir.ui.view">
@@ -36,9 +36,11 @@
             <field name="type">tree</field>
             <field name="inherit_id" ref="account.view_invoice_line_tree" />
             <field name="arch" type="xml">
-                <xpath expr="/tree/field[@name='price_subtotal']" position="after">
-                    <field name="commission" />
-                </xpath>
+                <data>
+                    <xpath expr="/tree/field[@name='price_subtotal']" position="after">
+                        <field name="commission" />
+                    </xpath>
+                </data>
             </field>
         </record>
 
@@ -72,10 +74,13 @@
                     <xpath expr="/form/notebook/page/group/field[@name='amount_total']" position="after">
                         <field name="commission" />
                     </xpath>
+                    <xpath expr="/form/notebook/page/group/field[@name='amount_tax']" position="after">
+                        <field name="frais_de_port" />
+                    </xpath>
                 </data>
             </field>
         </record>
 
-	</data>
+    </data>
 </openerp>
 

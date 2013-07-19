@@ -41,6 +41,23 @@ class tournee_iller(osv.osv):
     _name = 'tournee.iller'
     _description = u'Tournée pour la livraison des produits'
 
+
+    def name_search(self, cr, uid, name, args=None, operator='ilike', context=None, limit=80):
+        if not args:
+            args=[]
+        if not context:
+            context={}
+        if name:
+            #Vérification si ce qu'on cherche est le code
+            try:
+                code = int(name)
+            except ValueError, e:
+                pass
+                return super(tournee_iller, self).name_search(cr, uid, name, args=args, operator=operator, context=context, limit=limit)
+            res = self.search(cr, uid, [('code_tournee','=',name)], limit=limit, context=context)
+        return self.name_get(cr, uid, res, context)
+
+
     _columns = {
         'name': fields.char(size=64, string=u'Nom', required=True),
         'code_tournee': fields.integer(string=u'Code tournée'),

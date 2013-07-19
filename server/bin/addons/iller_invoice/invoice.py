@@ -23,6 +23,7 @@
 
 from osv import osv
 from osv import fields
+from tools import config
 
 class iller_account_invoice_line(osv.osv):
     _name = 'account.invoice.line'
@@ -70,6 +71,8 @@ class account_invoice(osv.osv):
     _name = "account.invoice"
     _inherit = "account.invoice"
 
+
+
     """
     Surcharge de copy pour mettre par défaut exported à False
     Les account move line sont automatiquement mises à false
@@ -95,9 +98,68 @@ class account_invoice(osv.osv):
         return res
 
 
+    def _amount_all(self, cr, uid, ids, field_name, arg, context):
+        res = {}
+        for invoice in self.browse(cr,uid,ids, context=context):
+            res[invoice.id] = {
+                'amount_untaxed': 0.0,
+                'amount_tax': 0.0,
+                'amount_total': 0.0,
+                'frais_de_port': 0.0
+            }
+            for line in invoice.invoice_line:
+                res[invoice.id]['amount_untaxed'] += line.price_subtotal
+            for line in invoice.tax_line:
+                res[invoice.id]['amount_tax'] += line.amount
+            if res[invoice.id]['amount_untaxed'] + res[invoice.id]['amount_tax'] < 50.00:
+                res[invoice.id]['frais_de_port'] = 3.00
+                res[invoice.id]['amount_total'] = res[invoice.id]['amount_untaxed'] + res[invoice.id]['amount_tax'] + res[invoice.id]['frais_de_port']
+            else:
+                res[invoice.id]['frais_de_port'] = 0.00
+                res[invoice.id]['amount_total'] = res[invoice.id]['amount_untaxed'] + res[invoice.id]['amount_tax']
+        return res
+
+
+    def _get_invoice_line(self, cr, uid, ids, context=None):
+        result = {}
+        for line in self.pool.get('account.invoice.line').browse(cr, uid, ids, context=context):
+            result[line.invoice_id.id] = True
+        return result.keys()
+
+    def _get_invoice_tax(self, cr, uid, ids, context=None):
+        result = {}
+        for tax in self.pool.get('account.invoice.tax').browse(cr, uid, ids, context=context):
+            result[tax.invoice_id.id] = True
+        return result.keys()
+
+
     _columns = {
         'code': fields.function(_get_code_client, type='char', method=True, string='Code', readonly=True),
         'exported': fields.boolean(string=u'Exportée', readonly=True),
+        'frais_de_port': fields.function(_amount_all, type='float', method=True,
+            string='Frais de port', digits=(3,2), readonly=True,
+            help='Ajout automatique de 3 euros si le montant de la commande est inférieur à 50 euros.', multi='all'),
+        'amount_untaxed': fields.function(_amount_all, method=True, digits=(16, int(config['price_accuracy'])),string='Untaxed',
+            store={
+                'account.invoice': (lambda self, cr, uid, ids, c={}: ids, ['invoice_line'], 20),
+                'account.invoice.tax': (_get_invoice_tax, None, 20),
+                'account.invoice.line': (_get_invoice_line, ['price_unit','invoice_line_tax_id','quantity','discount'], 20),
+            },
+            multi='all'),
+        'amount_tax': fields.function(_amount_all, method=True, digits=(16, int(config['price_accuracy'])), string='Tax',
+            store={
+                'account.invoice': (lambda self, cr, uid, ids, c={}: ids, ['invoice_line'], 20),
+                'account.invoice.tax': (_get_invoice_tax, None, 20),
+                'account.invoice.line': (_get_invoice_line, ['price_unit','invoice_line_tax_id','quantity','discount'], 20),
+            },
+            multi='all'),
+        'amount_total': fields.function(_amount_all, method=True, digits=(16, int(config['price_accuracy'])), string='Total',
+            store={
+                'account.invoice': (lambda self, cr, uid, ids, c={}: ids, ['invoice_line'], 20),
+                'account.invoice.tax': (_get_invoice_tax, None, 20),
+                'account.invoice.line': (_get_invoice_line, ['price_unit','invoice_line_tax_id','quantity','discount'], 20),
+            },
+            multi='all'),
 
     }
     

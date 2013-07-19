@@ -33,7 +33,6 @@
                                 <field name="type_cond" readonly="0"/>
                             
                                 <field name="type_prep" readonly="0"/>
-                                <field name="commission" readonly="0"/>
                                 
                                 <field name="price_unit" readonly="0" on_change="price_unit_change(price_unit, product_id, product_uom_qty, parent.partner_id, parent.pricelist_id)" />
                                 <field name="notes" readonly="0" />
@@ -105,6 +104,9 @@
                             </form>
                         </field>
                     </xpath>                    
+                    <xpath expr="/form/notebook/page/group/field[@name='amount_total']" position="before">
+                        <field name="frais_de_port" />
+                    </xpath>
                 </data>
             </field>
         </record>

@@ -439,7 +439,8 @@ def _create_invoice(obj, cr, uid, data, context=None):
     journal_id = jour_obj.search(cr, uid, [('name', 'ilike', 'VENTES ILLER'), ('type', '=', 'sale')], context=context)
     if not journal_id:
         raise wizard.except_wizard(_('Erreur journal des ventes'), _('Le journal des ventes \'VENTES ILLER\' n\'a pas été trouvé.'))
-
+    include_port = picking_obj.read(cr, uid, data['ids'], ['include_port'], context=context)
+    
     res = picking_obj.action_invoice_create(cr, uid, data['ids'],
             journal_id[0], False,
             inv_type, context=context)
