@@ -105,7 +105,8 @@ class iller_sale_line(osv.osv):
         type_cond = code_affect = ''
         if uom:
             uom_record = self.pool.get('product.uom').browse(cr, uid, [uom])
-            type_cond = self.getSelectionValue(cr, uid, 'product.product', 'type_cond', '00%s' % (uom_record[0].code_uom,))
+            if uom_record[0].code_uom:
+                type_cond = self.getSelectionValue(cr, uid, 'product.product', 'type_cond', '00%s' % (uom_record[0].code_uom,))
         if product:
             product_id = self.pool.get('product.product').browse(cr, uid, product)
             if type_cond == '':
