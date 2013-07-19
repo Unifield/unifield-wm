@@ -225,7 +225,7 @@ class product_product(osv.osv):
 
             elif len(name.strip()) == 5:
                 #Sinon si taille = 5 alors 1 zéro à gauche
-                #Exemple : 69221 => 069221
+                #Exemple : 69220 => 069220
                 name = name.rjust(6, '0')
 
         return super(product_product, self).name_search(cr, uid, name, args, operator=operator, context=context, limit=limit)

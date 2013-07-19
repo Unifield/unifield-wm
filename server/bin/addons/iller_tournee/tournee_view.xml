@@ -54,9 +54,9 @@
             <field name="model">tournee.iller</field>
             <field name="type">tree</field>
             <field name="arch" type="xml">
-                <tree string="Tournées">
-                    <field name="code_tournee" />
-                    <field name="name" />
+                <tree string="Tournées" >
+                    <field name="code_tournee"/>
+                    <field name="name"/>
                     <field name="heure_depart" />
                 </tree>
             </field>

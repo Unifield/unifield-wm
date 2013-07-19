@@ -112,12 +112,10 @@ class account_invoice(osv.osv):
             for line in invoice.tax_line:
                 res[invoice.id]['amount_tax'] += line.amount
             if res[invoice.id]['amount_untaxed'] + res[invoice.id]['amount_tax'] < 50.00:
-                print context
                 if context and 'include_port' in context and context['include_port']:
                     res[invoice.id]['frais_de_port'] = 3.00
                 else:
                     res[invoice.id]['frais_de_port'] = 0.00
-                print res[invoice.id]['frais_de_port']
                 res[invoice.id]['amount_total'] = res[invoice.id]['amount_untaxed'] + res[invoice.id]['amount_tax'] + res[invoice.id]['frais_de_port']
             else:
                 res[invoice.id]['frais_de_port'] = 0.00
@@ -143,6 +141,12 @@ class account_invoice(osv.osv):
         'exported': fields.boolean(string=u'Exportée', readonly=True),
         'frais_de_port': fields.function(_amount_all, type='float', method=True,
             string='Frais de port', digits=(3,2), readonly=True,
+            store={
+                'account.invoice': (lambda self, cr, uid, ids, c={}: ids, ['invoice_line'], 20),
+                'account.invoice.tax': (_get_invoice_tax, None, 20),
+                'account.invoice.line': (_get_invoice_line, ['price_unit','invoice_line_tax_id','quantity','discount'], 20),
+            },
+
             help='Ajout automatique de 3 euros si le montant de la commande est inférieur à 50 euros.', multi='all'),
         'amount_untaxed': fields.function(_amount_all, method=True, digits=(16, int(config['price_accuracy'])),string='Untaxed',
             store={
