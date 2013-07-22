@@ -178,6 +178,42 @@ class product_product(osv.osv):
                         uom.id, res[product.id], context['uom'])
         return res
 
+
+    def _set_prix_jaune(self, cr, uid, ids, name, value, arg, context):
+        if not value:
+            return False
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+
+        for product in self.browse(cr, uid, ids, context):
+            sql_str = """update product_product set
+                    prix_jaune=%s
+                where
+                    id=%s """
+            sqlargs = (value, product.id)
+            cr.execute(sql_str, sqlargs)
+            
+
+        print name, value, arg
+        return True
+
+
+    def _get_prix_jaune(self, cr, uid, ids, field_name, arg, context=None):
+        b_conf_id = self.pool.get('pricelist.promo.configuration').search(cr, uid, [])
+        b_conf = self.pool.get('pricelist.promo.configuration').browse(cr, uid, b_conf_id)
+        b_coeff = b_conf[0].bareme_jaune.valeur
+        res = {}
+        print 'test', ids
+        for product in self.browse(cr, uid, ids, context=context):
+            print 'prix jaune', product
+            if product:
+                res[product.id] = product.list_price*b_coeff
+            else:
+                res[product.id] = 0.00
+        print 'prix jaune', res
+        return res
+
+
     def _get_prix_achat(self, cr, uid, ids, field_name, arg, context={}):
         '''
             Retourne le prix d'achat du produit en fonction de l'historique
@@ -236,10 +272,11 @@ class product_product(osv.osv):
         'type_cond': fields.selection([('0000', 'PIECE'), ('0001', 'KILO'), ('0002', 'CARTON'), ('0003', 'BARQUETTE')], 
                                                                                             string='Type conditionnement'),
         'type_preselec': fields.selection([('0', 'Facturation pièce/carton'), ('1', 'Facturation Kilo')], string='Type préselection'),
-        'coeff_blanche': fields.float(digits=(16,2), string='Coeff. blanche'),
+        'coeff_blanche': fields.float(digits=(16,6), string='Coeff. blanche'),
         'coeff_jaune': fields.many2one('product.pricelist.bareme', string='Barème promo jaune'),
-        'prix_blanche': fields.function(_get_prix_achat, method=True, string='Prix blanche', digits=(16, int(config['price_accuracy'])), store=False, multi='prix'),
-        'list_price': fields.function(_get_prix_achat, method=True, string='Prix de vente', digits=(16, int(config['price_accuracy'])), store=False, multi='prix'),
+        'prix_blanche': fields.function(_get_prix_achat, method=True, string='Prix blanche', digits=(16, int(config['price_accuracy'])), store=True, multi='prix'),
+        'prix_jaune': fields.function(_get_prix_jaune, method=True, string='Prix jaune', digits=(16, int(config['price_accuracy'])), store=True),
+        'list_price': fields.function(_get_prix_achat, method=True, fnct_inv=_set_prix_jaune, string='Prix de vente', digits=(16, int(config['price_accuracy'])), store=False, multi='prix'),
         'prix_decembre': fields.float(digits=(16, int(config['price_accuracy'])), string='Prix décembre'),
 
         'type_pesee': fields.selection([('0', 'Poids variable'), ('1', 'Prix fixe'), ('2', 'Poids fixe'),

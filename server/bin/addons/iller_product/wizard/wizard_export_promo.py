@@ -13,6 +13,7 @@ _form_type = """<?xml version="1.0" encoding="utf-8" ?>
 
 _field_type = {
     'type': {'string': 'Type', 'type': 'selection', 'selection': [('blanche', 'Promo blanche'), ('jaune', 'Promo jaune')], 'required': True},
+    'name': {'string': 'Nom', 'type': 'char'},
 }
 
 _get_form = """<?xml version="1.0" encoding="utf-8" ?>
@@ -22,6 +23,7 @@ _get_form = """<?xml version="1.0" encoding="utf-8" ?>
 
 _field_get = {
     'file': {'string': 'Fichier', 'type': 'binary'},
+    'name': {'string': 'Nom', 'type': 'char'},
 }
 
 class export_tarif_promo(wizard.interface):

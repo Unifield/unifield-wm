@@ -9,11 +9,11 @@
             <field name="inherit_id" ref="product.product_pricelist_item_form_view" />
             <field name="arch" type="xml">
                 <xpath expr="/form/group" position="replace">
-                        <field name="bareme_id" on_change="bareme_change(bareme_id,base)" />
-                        <label string="Indication de la valeur" />
-                        <field name="price_discount" nolabel="1" readonly="1" />
-            <separator colspan="4" string="Tarif spécial client"/>
-            <field name="price_surcharge" string="Prix Special"/>
+                    <field name="bareme_id" on_change="bareme_change(bareme_id,base)" />
+                    <label string="Indication de la valeur" />
+                    <field name="price_discount" nolabel="1" readonly="1" />
+                    <separator colspan="4" string="Tarif spécial client"/>
+                    <field name="price_surcharge" string="Prix Special"/>
                 </xpath>
             </field>
         </record>
@@ -295,7 +295,7 @@
                             <field name="product_id" on_change="onchange_product(product_id)" string="Produit                                                                                                     "/>
                             <field name="prix_achat" />
                             <field name="new_prix_achat" />
-                            <field name="prix_blanche" />
+                            <field name="prix_blanche" on_change="onchange_prix_blanche(product_id, prix_blanche)"/>
                             <field name="prix_jaune" />
                         </tree>
                     </field>
@@ -306,12 +306,13 @@
                             <field name="product_id" on_change="onchange_product(product_id)" string="Produit                                                                                                     "/>
                             <field name="prix_achat" />
                             <field name="new_prix_achat" />
-                            <field name="prix_blanche" />
+                            <field name="prix_blanche" on_change="onchange_prix_blanche(product_id, prix_blanche)"/>
                             <field name="prix_jaune" />
                         </tree>
                     </field>
                     <field name="state" invisible="0" readonly="1"/>
                     <button icon="gtk-ok" name="_create_promo" string="Valider la promo" type="object" states="draft"/>
+                    <button icon="gtk-cancel" name="_draft_promo" string="Mettre en brouillon" type="object" states="done"/>
                 </form>
             </field>
         </record>
@@ -393,7 +394,7 @@
                             <field name="product_id" on_change="onchange_product(product_id)" string="Produit                                                                                                     "/>
                             <field name="prix_achat" />
                             <field name="new_prix_achat" />
-                            <field name="prix_blanche" />
+                            <field name="prix_blanche" on_change="onchange_prix_blanche(product_id, prix_blanche)"/>
                             <field name="prix_jaune" />
                         </tree>
                     </field>
@@ -404,12 +405,13 @@
                             <field name="product_id" on_change="onchange_product(product_id)" string="Produit                                                                                                     "/>
                             <field name="prix_achat" />
                             <field name="new_prix_achat" />
-                            <field name="prix_blanche" />
+                            <field name="prix_blanche" on_change="onchange_prix_blanche(product_id, prix_blanche)"/>
                             <field name="prix_jaune" />
                         </tree>
                     </field>
                     <field name="state" invisible="0" readonly="1"/>
                     <button icon="gtk-ok" name="_create_mea" string="Valider la mise en avant" type="object" states="draft"/>
+                    <button icon="gtk-cancel" name="_draft_mea" string="Mettre en brouillon" type="object" states="done"/>
                 </form>
             </field>
         </record>

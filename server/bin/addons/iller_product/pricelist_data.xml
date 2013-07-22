@@ -229,6 +229,12 @@
             <field name="field">prix_blanche</field>
             <field name="currency_id" ref="base.EUR" />
         </record>
+        
+        <record id="product_price_type_promo_jaune" model="product.price.type">
+            <field name="name">Prix promo jaune</field>
+            <field name="field">list_price</field>
+            <field name="currency_id" ref="base.EUR" />
+        </record>
 
         <record id="product_price_type_prix_achat" model="product.price.type">
             <field name="name">Prix d'achat</field>
