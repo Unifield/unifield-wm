@@ -19,7 +19,7 @@
     <record id="lang_msf_fr" model="res.lang">
         <field name="code">fr_MF</field>
         <field name="name">MSF French</field>
-        <field name="translatable" eval="False" />
+        <field name="translatable" eval="True" />
         <field name="date_format">%d/%m/%Y</field>
         <field name="time_format">%H:%M</field>
         <field name="thousands_sep"> </field> <!-- this is a non breackable space -->
@@ -29,7 +29,7 @@
     <record id="lang_msf_es" model="res.lang">
         <field name="code">es_MF</field>
         <field name="name">MSF Spanish</field>
-        <field name="translatable" eval="False" />
+        <field name="translatable" eval="True" />
         <field name="date_format">%d/%m/%Y</field>
         <field name="time_format">%H:%M</field>
         <field name="thousands_sep">,</field>

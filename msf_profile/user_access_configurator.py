@@ -891,8 +891,23 @@ class res_groups(osv.osv):
 res_groups()
 
 
+def _list_lang(self, cr, uid, context=None):
+    lang_obj = self.pool.get('res.lang')
+    lang_ids = lang_obj.search(cr, uid, [('code', 'like', '_MF'), ('translatable', '=', True)])
+    res = []
+    for lg in lang_obj.read(cr, uid, lang_ids, ['code', 'name']):
+        res.append((lg['code'], lg['name']))
+    return res
+
+
 class res_users(osv.osv):
     _inherit = 'res.users'
+
+    _columns = {
+        'context_lang': fields.selection(_list_lang, 'Language', required=True,
+            help="Sets the language for the user's user interface, when UI "
+            "translations are available"),
+    }
 
     _defaults = {
         'groups_id': lambda *a: [],
