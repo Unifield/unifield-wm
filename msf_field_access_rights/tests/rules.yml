@@ -47,6 +47,8 @@
     context['sync_update_execution'] = True
     
     context['applyToAdmin'] = True
+
+    context['test_in_progress'] = True
     
     user_id = users_pool.create(cr, uid, user_values, context=context)
     

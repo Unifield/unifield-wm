@@ -894,6 +894,8 @@ res_groups()
 def _list_lang(self, cr, uid, context=None):
     lang_obj = self.pool.get('res.lang')
     lang_ids = lang_obj.search(cr, uid, [('code', 'like', '_MF'), ('translatable', '=', True)])
+    if context.get('test_in_progress'):
+        lang_ids = lang_obj.search(cr, uid, [('code', 'like', 'en_US')])
     res = []
     for lg in lang_obj.read(cr, uid, lang_ids, ['code', 'name']):
         res.append((lg['code'], lg['name']))
