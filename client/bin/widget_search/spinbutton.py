@@ -37,7 +37,7 @@ class spinbutton(wid_int.wid_int):
         self.spin1 = gtk.SpinButton(adj1, 1.0, digits=int(attrs.get('digits', (14, 2))[1]))
         self.spin1.set_numeric(True)
         self.spin1.set_activates_default(True)
-        self.handler_id = self.widget.connect('insert_text', self.change_digits)
+        self.handler_id = self.spin1.connect('insert_text', self.change_digits)
         self.widget.pack_start(self.spin1, expand=False, fill=True)
 
         self.widget.pack_start(gtk.Label('-'), expand=False, fill=False)
