@@ -33,7 +33,7 @@ fields = {
 arch_end = """<?xml version="1.0"?>
 <form string="Le tarif a été exporté">
     <separator string="Le tarif a été exporté"/>
-    <field height="50" colspan="4" name="advice" nolabel="1"/>
+    <field height="75" colspan="4" name="advice" nolabel="1"/>
     <newline/>
     <field name="name" invisible="1"/>
     <field name="data" nolabel="1" readonly="1" fieldname="name"/>
@@ -178,8 +178,10 @@ def act_getfile(self, cr, uid, data, context=None):
     export = "ACTION;SUPPLIER_SKU;ITEM_DESCRIPTION;BRAND_NAME;MFG_NAME;MFG_PART_NUMBER;LONG_DESCRIPTION;PRODUCT_ORIGIN;EXPIRATION_DATE;PRODUCT_COLOR;WEIGHT;DIMENSIONS;WILLING_CASE_BREAK;CASE_WEIGHT;ITEMS_PER_CASE;PRICE_UOM_CODE;MINIMUM_ORDER_QTY;UNIT_PRICE;CURRENCY_CODE;BREAK_QTY;BREAK_AMT;PERCENT_BREAK_MULTIPLIER;BREAK_QTY3;BREAK_AMT3;PERCENT_BREAK_MULTIPLIER3;PRICE_EFFECTIVE_DATE;PRICE_EXPIRATION_DATE;TAX_EXEMPT;LEAD_TIME;LEAD_TIME_MIN;UNSPSC;UPC;IMAGE_NAME;CATEGORY_ID;CATEGORY_DESC" + "\r\n"
 
     export +=  u"N;Numéro d'article;Nom du produit;Marque;Nom du fabricant;ID du produit du fabricant;Desc. détaillée du produit;Provenance du produit;Date d'échéance du produit;Couleur du produit;Taille du produit;Dimensions de caisse;Consentant pour escompter la caisse;Poids moyen par caisse;Articles par caisse;Code de prix UDM;Quantité minimum de commande;Prix unitaire;Code de devise;Qté d'escompte de niveau 2;Prix niveau 2;Multiplicateur niveau 2;Qté d'escompte de niveau 3;Prix niveau 3;Multiplicateur niveau 3;Date d'entrée en vigueur de prix;Prix à la date finale;Exempt d'impôts;Délai de livraison;Période d'attente minimum (Jours);UNSPSC;CUP;Noms de fichiers d'images;ID de catégorie;Description catégories" + "\r\n"
+    #~ export +=  u"N;Num\xe9ro d'article;Nom du produit;Marque;Nom du fabricant;ID du produit du fabricant;Desc. d\xe9taill\xe9e du produit;Provenance du produit;Date d'\xe9ch\xe9ance du produit;Couleur du produit;Taille du produit;Dimensions de caisse;Consentant pour escompter la caisse;Poids moyen par caisse;Articles par caisse;Code de prix UDM;Quantit\xe9 minimum de commande;Prix unitaire;Code de devise;Qt\xe9 d'escompte de niveau 2;Prix niveau 2;Multiplicateur niveau 2;Qt\xe9 d'escompte de niveau 3;Prix niveau 3;Multiplicateur niveau 3;Date d'entr\xe9e en vigueur de prix;Prix \xe0 la date finale;Exempt d'imp\xf4ts;D\xe9lai de livraison;P\xe9riode d'attente minimum (Jours);UNSPSC;CUP;Noms de fichiers d'images;ID de cat\xe9gorie;Description cat\xe9gories\r\n"
 
     export += "N;STRING(102);STRING(1000);STRING(256);STRING(100);STRING(256);STRING(4000);STRING(100);DATE;STRING(200);STRING(140);STRING(256);NUMERIC(1,0);NUMERIC(38,10);NUMERIC(10,0);STRING(40);NUMERIC(38,10);NUMERIC(38,10);STRING(20);NUMERIC(38,10);NUMERIC(38,10);NUMERIC(38,10);NUMERIC(38,10);NUMERIC(38,10);NUMERIC(38,10);DATE;DATE;NUMERIC(1,0);NUMERIC(4,0);NUMERIC(4,0);STRING(180);STRING(56);STRING(510);NUMERIC(10,0);STRING(1000)" + "\r\n"
+
     fichier_tmp = ''
     # On balaie les différents éléments de cette version
     # Si c'est un produit, on en recherche le prix
@@ -243,9 +245,11 @@ def act_getfile(self, cr, uid, data, context=None):
                     fichier_tmp += prix[product.id]
 
     export += fichier_tmp
+
     export1=base64.encodestring(export.encode("utf-8"))
     print 'fin', time.strftime('%H:%M:%S')
-    ret['advice']='Pour sauvegarder le tarif qui vient d\'être généré, cliquer sur le petit bouton à droite du bouton Ouvrir.'
+    ret['advice']='Pour sauvegarder le tarif qui vient d\'être généré, cliquer sur le petit bouton à droite du bouton Ouvrir.\r\n'
+    ret['advice']+='Pour ouvrir le fichier sous excel, créer un nouveau fichier, aller dans le menu \"Data/Importer des données externes/Importer\" et sélectionner le jeu de caractères \"Unicode - UTF-8\"'
     ret['data'] = export1
     ret['name'] = 'Tarif_HILTON.csv'
     return ret

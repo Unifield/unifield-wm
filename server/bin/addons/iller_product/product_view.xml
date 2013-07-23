@@ -99,7 +99,7 @@
                             <field name="coeff_jaune" />
 --> 
                             <field name="prix_decembre" />
-                <newline/>
+                            <newline/>
                           <field colspan="4" name="seller_ids" nolabel="1"/>
                         </page>
                     </xpath>
