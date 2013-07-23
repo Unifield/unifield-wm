@@ -42,6 +42,7 @@
       'name':'msf_field_access_rights_test',
       'login':'msf_field_access_rights_test',
       'user_email':'test@test.com',
+      'context_lang':'en_US',
     }
     
     context['sync_update_execution'] = True
