@@ -652,11 +652,11 @@ class product_pricelist_promo(osv.osv):
         product_ids = []
         product2_ids = []
         for promo_in in self.pool.get('product.pricelist.promo.in').browse(cr, uid, data['form']['product_ids']):
-            product_ids.append(promo_in.product_id.id)
+            product_ids.append((promo_in.product_id.id,promo_in.new_prix_jaune))
 
         for promo2_in in self.pool.get('product2.pricelist.promo.in').browse(cr, uid, data['form']['product2_ids']):
             if promo2_in.product_id.id not in product_ids:
-                product2_ids.append(promo2_in.product_id.id)
+                product2_ids.append((promo2_in.product_id.id, promo2_in.new_prix_jaune))
 
 
         base = 1
@@ -681,10 +681,10 @@ class product_pricelist_promo(osv.osv):
             ## Si la promo est de type blanche, on applique
             ## le prix promo blanche pour chaque produit
             for product in product_ids:
-                p_data = prod_obj.read(cr, uid, product, ['name'])
+                p_data = prod_obj.read(cr, uid, product[0], ['name'])
                 item_id = item_obj.create(cr, uid, {'sequence': 3,
                                                     'name': p_data.get('name'), 
-                                                    'product_id': product,
+                                                    'product_id': product[0],
                                                     'base': base,
                                                     'price_version_id': version_id})
                 items.append(item_id)
@@ -695,10 +695,10 @@ class product_pricelist_promo(osv.osv):
                 base = type_ids[0]
 
             for product2 in product2_ids:
-                p_data = prod_obj.read(cr, uid, product2, ['name'])
+                p_data = prod_obj.read(cr, uid, product2[0], ['name'])
                 item_id = item_obj.create(cr, uid, {'sequence': 3,
                                                     'name': p_data.get('name'),
-                                                    'product_id': product2,
+                                                    'product_id': product2[0],
                                                     'base': base,
                                                     'bareme_id': bareme2,
                                                     'price_discount': coeff2-1,
@@ -719,26 +719,44 @@ class product_pricelist_promo(osv.osv):
             ## Si la promo est de type jaune, on applique
             ## le barème c15 pour chaque produit
             for product in product_ids:
-                p_data = prod_obj.read(cr, uid, product, ['name', 'prix_jaune'])
-                item_id = item_obj.create(cr, uid, {'sequence': 3,
+                p_data = prod_obj.read(cr, uid, product[0], ['name'])
+                if product[1]:
+                    item_id = item_obj.create(cr, uid, {'sequence': 3,
                                                     'name': p_data.get('name'), 
-                                                    'product_id': product,
+                                                    'product_id': product[0],
                                                     'base': base,
                                                     'bareme_id': bareme,
                                                     'price_discount': -1,
-                                                    'price_surcharge': p_data.get('prix_jaune'),
+                                                    'price_surcharge': product[1],
+                                                    'price_version_id': version_id})
+                else:
+                    item_id = item_obj.create(cr, uid, {'sequence': 3,
+                                                    'name': p_data.get('name'), 
+                                                    'product_id': product[0],
+                                                    'base': base,
+                                                    'bareme_id': bareme,
+                                                    'price_discount': coeff-1,
                                                     'price_version_id': version_id})
                 items.append(item_id)
 
             for product2 in product2_ids:
-                p_data = prod_obj.read(cr, uid, product, ['name', 'prix_jaune'])
-                item_id = item_obj.create(cr, uid, {'sequence': 3,
+                p_data = prod_obj.read(cr, uid, product2[0], ['name'])
+                if product[1]:
+                    item_id = item_obj.create(cr, uid, {'sequence': 3,
                                                     'name': p_data.get('name'), 
-                                                    'product_id': product,
+                                                    'product_id': product2[0],
                                                     'base': base,
-                                                    'bareme_id': bareme,
+                                                    'bareme_id': bareme2,
                                                     'price_discount': -1,
-                                                    'price_surcharge': p_data.get('prix_jaune'),
+                                                    'price_surcharge': product2[1],
+                                                    'price_version_id': version_id})
+                else:
+                    item_id = item_obj.create(cr, uid, {'sequence': 3,
+                                                    'name': p_data.get('name'), 
+                                                    'product_id': product2[0],
+                                                    'base': base,
+                                                    'bareme_id': bareme2,
+                                                    'price_discount': coeff2-1,
                                                     'price_version_id': version_id})
                 items.append(item_id)
                 
@@ -866,6 +884,7 @@ class product_in_promo(osv.osv):
     _description = 'Produit dans la promo'
     _order = 'name'
 
+
     def onchange_prix_blanche(self, cr, uid, ids, product_id, prix_blanche, context=None):
         v = {}
         product_obj = self.pool.get('product.product')
@@ -877,6 +896,7 @@ class product_in_promo(osv.osv):
                 v['prix_blanche'] = prix_blanche
         return {'value': v}
 
+
     def _set_prix_jaune(self, cr, uid, ids, name, value, arg, context):
         if not value:
             return False
@@ -884,13 +904,12 @@ class product_in_promo(osv.osv):
             ids = [ids]
 
         for product_promo in self.browse(cr, uid, ids, context):
-            sql_str = """update product_product set
-                    prix_jaune=%s
+            sql_str = """update product_pricelist_promo_in set
+                    new_prix_jaune=%s
                 where
                     id=%s """
-            sqlargs = (value, product_promo.product_id.id)
+            sqlargs = (value, product_promo.id)
             cr.execute(sql_str, sqlargs)
-            
 
         return True
 
@@ -900,8 +919,8 @@ class product_in_promo(osv.osv):
         b_coeff = b_conf[0].bareme_jaune.valeur
         res = {}
         for promo_in in self.browse(cr, uid, ids, context=context):
-            if promo_in.product_id.prix_jaune:
-                res[promo_in.id] = promo_in.product_id.prix_jaune
+            if promo_in.new_prix_jaune != 0:
+                res[promo_in.id] = promo_in.new_prix_jaune
             elif promo_in.product_id:
                 res[promo_in.id] = promo_in.product_id.list_price*b_coeff
             else:
@@ -933,7 +952,7 @@ class product_in_promo(osv.osv):
                 b_conf_id = self.pool.get('pricelist.promo.configuration').search(cr, uid, [])
                 b_conf = self.pool.get('pricelist.promo.configuration').browse(cr, uid, b_conf_id)
                 b_coeff = b_conf[0].bareme_jaune.valeur
-                v['prix_jaune'] = p.prix_jaune
+                v['prix_jaune'] = p.list_price*b_coeff
                 v['prix_achat'] = p.prix_achat
         return {'value': v}
             
@@ -947,6 +966,8 @@ class product_in_promo(osv.osv):
         'prix_achat': fields.function(_get_prix_achat, method=True, string='Prix achat', readonly=True, store=False),
 #        'prix_achat': fields.related('product_id', 'prix_achat', string='Prix achat', readonly=True),
         'new_prix_achat': fields.float(digits=(16,2), string='Nouveau prix d\'achat'),
+        'new_prix_jaune': fields.float(digits=(16,2), string='Nouveau prix jaune'),
+        
     }
 
 product_in_promo()
@@ -1037,11 +1058,11 @@ class product_pricelist_mea(osv.osv):
         product_ids = []
         product2_ids = []
         for promo_in in self.pool.get('product.pricelist.mea.in').browse(cr, uid, data['form']['product_ids']):
-            product_ids.append(promo_in.product_id.id)
+            product_ids.append((promo_in.product_id.id, promo_in.new_prix_jaune))
 
         for promo2_in in self.pool.get('product2.pricelist.mea.in').browse(cr, uid, data['form']['product2_ids']):
             if promo2_in.product_id.id not in product_ids:
-                product2_ids.append(promo2_in.product_id.id)
+                product2_ids.append((promo2_in.product_id.id, promo2_in.new_prix_jaune))
 
 
         base = 1
@@ -1080,10 +1101,10 @@ class product_pricelist_mea(osv.osv):
                 base = type_ids[0]
 
             for product2 in product2_ids:
-                p_data = prod_obj.read(cr, uid, product2, ['name'])
+                p_data = prod_obj.read(cr, uid, product2[0], ['name'])
                 item_id = item_obj.create(cr, uid, {'sequence': 3,
                                                     'name': p_data.get('name'),
-                                                    'product_id': product2,
+                                                    'product_id': product2[0],
                                                     'base': base,
                                                     'bareme_id': bareme2,
                                                     'price_discount': coeff2-1,
@@ -1104,26 +1125,44 @@ class product_pricelist_mea(osv.osv):
             ## Si la mea est de type jaune, on applique
             ## le barème c15 pour chaque produit
             for product in product_ids:
-                p_data = prod_obj.read(cr, uid, product, ['name', 'prix_jaune'])
-                item_id = item_obj.create(cr, uid, {'sequence': 3,
+                p_data = prod_obj.read(cr, uid, product[0], ['name'])
+                if product[1]:
+                    item_id = item_obj.create(cr, uid, {'sequence': 3,
                                                     'name': p_data.get('name'), 
-                                                    'product_id': product,
+                                                    'product_id': product[0],
                                                     'base': base,
                                                     'bareme_id': bareme,
                                                     'price_discount': -1,
-                                                    'price_surcharge': p_data.get('prix_jaune'),
+                                                    'price_surcharge': product[1],
+                                                    'price_version_id': version_id})
+                else:
+                    item_id = item_obj.create(cr, uid, {'sequence': 3,
+                                                    'name': p_data.get('name'), 
+                                                    'product_id': product[0],
+                                                    'base': base,
+                                                    'bareme_id': bareme,
+                                                    'price_discount': coeff-1,
                                                     'price_version_id': version_id})
                 items.append(item_id)
 
             for product2 in product2_ids:
-                p_data = prod_obj.read(cr, uid, product, ['name', 'prix_jaune'])
-                item_id = item_obj.create(cr, uid, {'sequence': 3,
+                p_data = prod_obj.read(cr, uid, product2[0], ['name'])
+                if product[1]:
+                    item_id = item_obj.create(cr, uid, {'sequence': 3,
                                                     'name': p_data.get('name'), 
-                                                    'product_id': product,
+                                                    'product_id': product2[0],
                                                     'base': base,
-                                                    'bareme_id': bareme,
+                                                    'bareme_id': bareme2,
                                                     'price_discount': -1,
-                                                    'price_surcharge': p_data.get('prix_jaune'),
+                                                    'price_surcharge': product2[1],
+                                                    'price_version_id': version_id})
+                else:
+                    item_id = item_obj.create(cr, uid, {'sequence': 3,
+                                                    'name': p_data.get('name'), 
+                                                    'product_id': product2[0],
+                                                    'base': base,
+                                                    'bareme_id': bareme2,
+                                                    'price_discount': coeff2-1,
                                                     'price_version_id': version_id})
                 items.append(item_id)
 
@@ -1209,12 +1248,13 @@ class product_in_mea(osv.osv):
             return False
         if isinstance(ids, (int, long)):
             ids = [ids]
+
         for product_mea in self.browse(cr, uid, ids, context):
-            sql_str = """update product_product set
-                    prix_jaune=%s
+            sql_str = """update product_pricelist_mea_in set
+                    new_prix_jaune=%s
                 where
                     id=%s """
-            sqlargs = (value, product_mea.product_id.id)
+            sqlargs = (value, product_mea.id)
             cr.execute(sql_str, sqlargs)
 
         return True
@@ -1226,8 +1266,8 @@ class product_in_mea(osv.osv):
         b_coeff = b_conf[0].bareme_jaune.valeur
         res = {}
         for mea_in in self.browse(cr, uid, ids):
-            if mea_in.product_id.prix_jaune:
-                res[mea_in.id] = mea_in.product_id.prix_jaune
+            if mea_in.new_prix_jaune:
+                res[mea_in.id] = mea_in.new_prix_jaune
             elif mea_in.product_id:
                 res[mea_in.id] = mea_in.product_id.list_price*b_coeff
             else:
@@ -1272,6 +1312,7 @@ class product_in_mea(osv.osv):
         'prix_jaune': fields.function(_get_prix_jaune, method=True, fnct_inv=_set_prix_jaune, string='Prix jaune', readonly=False, store=False,),
         'prix_achat': fields.function(_get_prix_achat, method=True, string='Prix achat', readonly=True, store=False),
         'new_prix_achat': fields.float(digits=(16,2), string='Nouveau prix d\'achat'),
+        'new_prix_jaune': fields.float(digits=(16,2), string='Nouveau prix jaune'),
     }
 
 product_in_mea()
