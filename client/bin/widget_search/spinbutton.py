@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
+#    OpenERP, Open Source Management Solution   
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    $Id$
 #
@@ -24,6 +24,8 @@ import gtk
 import common
 import wid_int
 import sys
+import gobject
+import locale
 
 class spinbutton(wid_int.wid_int):
     def __init__(self, name, parent, attrs={}):
@@ -35,6 +37,7 @@ class spinbutton(wid_int.wid_int):
         self.spin1 = gtk.SpinButton(adj1, 1.0, digits=int(attrs.get('digits', (14, 2))[1]))
         self.spin1.set_numeric(True)
         self.spin1.set_activates_default(True)
+        self.handler_id = self.widget.connect('insert_text', self.change_digits)
         self.widget.pack_start(self.spin1, expand=False, fill=True)
 
         self.widget.pack_start(gtk.Label('-'), expand=False, fill=False)
@@ -44,6 +47,17 @@ class spinbutton(wid_int.wid_int):
         self.spin2.set_numeric(True)
         self.spin2.set_activates_default(True)
         self.widget.pack_start(self.spin2, expand=False, fill=True)
+
+    def change_digits(self, entry, text, text_length, user_data=None):
+        decimal = locale.localeconv().get('decimal_point')
+        pos = entry.get_position()
+        entry.handler_block(self.handler_id)
+        if decimal == ',' and '.' in text:
+            text = text.replace('.', decimal)
+        newpos = entry.insert_text(text, pos)
+        gobject.idle_add(entry.set_position, newpos)
+        entry.handler_unblock(self.handler_id)
+        entry.emit_stop_by_name("insert_text")
 
     def _value_get(self):
         res = []

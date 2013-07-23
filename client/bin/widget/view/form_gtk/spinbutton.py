@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution	
+#    OpenERP, Open Source Management Solution   
 #    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    $Id$
 #
@@ -23,7 +23,8 @@
 import gtk
 import sys
 import interface
-
+import gobject
+import locale
 
 class spinbutton(interface.widget_interface):
     def __init__(self, window, parent, model, attrs={}):
@@ -34,11 +35,23 @@ class spinbutton(interface.widget_interface):
         self.widget.set_numeric(True)
         self.widget.set_activates_default(True)
         self.widget.connect('button_press_event', self._menu_open)
+        self.handler_id = self.widget.connect('insert_text', self.change_digits)
         if self.attrs['readonly']:
             self._readonly_set(True)
         self.widget.connect('focus-in-event', lambda x,y: self._focus_in())
         self.widget.connect('focus-out-event', lambda x,y: self._focus_out())
         self.widget.connect('activate', self.sig_activate)
+
+    def change_digits(self, entry, text, text_length, user_data=None):
+        decimal = locale.localeconv().get('decimal_point')
+        pos = entry.get_position()
+        entry.handler_block(self.handler_id)
+        if decimal == ',' and '.' in text:
+            text = text.replace('.', decimal)
+        newpos = entry.insert_text(text, pos)
+        gobject.idle_add(entry.set_position, newpos)
+        entry.handler_unblock(self.handler_id)
+        entry.emit_stop_by_name("insert_text")
 
     def set_value(self, model, model_field):
         self.widget.update()
