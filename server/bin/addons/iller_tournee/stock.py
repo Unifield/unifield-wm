@@ -40,6 +40,9 @@ class iller_picking(osv.osv):
     _columns = {
         'tournee_id': fields.many2one('tournee.iller', string='Tournée', required=False),
         'code': fields.function(_get_code_client, type='char', method=True, string='Code', readonly=True),
+        'bac_qty': fields.integer(u'Quantité bacs'),
+        'num_preparateur': fields.char(size=64, string=u'Numéro du préparateur'),
+        'nb_elts': fields.integer(u'Nombre d\'éléments'),
     }
 
     def _postes_valides(self, cr, uid, ids, context={}):

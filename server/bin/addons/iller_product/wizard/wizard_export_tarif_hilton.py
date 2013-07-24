@@ -254,6 +254,7 @@ def act_getfile(self, cr, uid, data, context=None):
     ret['name'] = 'Tarif_HILTON.csv'
     return ret
 
+
 class wizard_export_tarif_hilton(wizard.interface):
     states = {
             'init' : {

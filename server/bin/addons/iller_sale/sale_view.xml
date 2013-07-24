@@ -103,7 +103,7 @@
                                 </notebook>
                             </form>
                         </field>
-                    </xpath>                    
+                    </xpath>
                     <xpath expr="/form/notebook/page/group/field[@name='amount_total']" position="before">
                         <field name="frais_de_port" />
                     </xpath>
