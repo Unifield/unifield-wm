@@ -71,8 +71,6 @@ class account_invoice(osv.osv):
     _name = "account.invoice"
     _inherit = "account.invoice"
 
-
-
     """
     Surcharge de copy pour mettre par défaut exported à False
     Les account move line sont automatiquement mises à false
@@ -100,6 +98,8 @@ class account_invoice(osv.osv):
 
     def _amount_all(self, cr, uid, ids, field_name, arg, context):
         res = {}
+        so_obj = self.pool.get('sale.order')
+        sp_obj = self.pool.get('stock.picking')
         for invoice in self.browse(cr,uid,ids, context=context):
             res[invoice.id] = {
                 'amount_untaxed': 0.0,
@@ -108,18 +108,35 @@ class account_invoice(osv.osv):
                 'frais_de_port': 0.0
             }
             for line in invoice.invoice_line:
-                res[invoice.id]['amount_untaxed'] += line.price_subtotal
+                if not line.name == 'Frais de port':
+                    res[invoice.id]['amount_untaxed'] += line.price_subtotal
             for line in invoice.tax_line:
                 res[invoice.id]['amount_tax'] += line.amount
-            if res[invoice.id]['amount_untaxed'] + res[invoice.id]['amount_tax'] < 50.00:
-                if context and 'include_port' in context and context['include_port']:
+            # On recherche les sale_order sur le nom par rapport à l'origine de la facture
+            sale_ids = so_obj.search(cr, uid, [('name','=', invoice.origin[-5:])], context=context)
+            # Si des commandes existent bien
+            if sale_ids:
+                so_records = so_obj.browse(cr, uid, sale_ids, context=context)
+                pick_ids = sp_obj.search(cr, uid, [('name', '=', invoice.name)], context=context)
+                pick_records = sp_obj.read(cr, uid, pick_ids, ['include_port'], context=context)
+                # On se base sur la commande pour voir le total commandé et si le colisage inclut les frais de port
+                for so_record in so_records:
+                    for pick_record in pick_records:
+                        if (so_record.amount_untaxed + so_record.amount_tax < 50) and pick_record['include_port']:
+                            # Si le montant de la commande est < 50 ET que le colisage inclut les frais, alors 3 euros
+                            res[invoice.id]['frais_de_port'] = so_record.frais_de_port
+                        else:
+                            res[invoice.id]['frais_de_port'] = 0.00
+
+            # Si on a pas de sale order, il y a un problème mais on regarde 
+            # le montant de la facture pour en déduire les frais de port 
+            else:
+                if res[invoice.id]['amount_untaxed'] + res[invoice.id]['amount_tax'] < 50.00:
                     res[invoice.id]['frais_de_port'] = 3.00
                 else:
                     res[invoice.id]['frais_de_port'] = 0.00
-                res[invoice.id]['amount_total'] = res[invoice.id]['amount_untaxed'] + res[invoice.id]['amount_tax'] + res[invoice.id]['frais_de_port']
-            else:
-                res[invoice.id]['frais_de_port'] = 0.00
-                res[invoice.id]['amount_total'] = res[invoice.id]['amount_untaxed'] + res[invoice.id]['amount_tax']
+            # On fait le calcul du montant final
+            res[invoice.id]['amount_total'] = res[invoice.id]['amount_untaxed'] + res[invoice.id]['amount_tax'] + res[invoice.id]['frais_de_port']
         return res
 
 

@@ -76,10 +76,20 @@ class iller_stock_picking(osv.osv):
     _name = 'stock.picking'
     _inherit = 'stock.picking'
 
+    def _is_reliquat(self, cr, uid, ids, name, args, context=None):
+        res = {}
+        # On regarde si le stock picking en cours est un reliquat
+        for this in self.browse(cr, uid, ids, context=context):
+            if not this.backorder_id:
+                res[this.id] = True
+            else:
+                res[this.id] = False
+        return res
 
     _columns = {
         'address_id': fields.many2one('res.partner.address', string='Partner', required=True),
-        'include_port': fields.boolean('Inclure frais de port ?'),
+        'include_port': fields.function(_is_reliquat, method=True, type='boolean', store=False, string='Inclure frais de port ?'),
+        #~ 'include_port': fields.boolean('Inclure frais de port ?'),
     }
     _defaults = {
         'include_port': lambda *a: True,
@@ -125,10 +135,26 @@ class iller_stock_picking(osv.osv):
         if isinstance(ids, (int, long)):
             ids = [ids]
         res = {}
+        
         for sp in self.browse(cr, uid, ids, context=context):
             if sp.sale_id:
                 context.update({'from_sale_order': sp.sale_id.id})
             res2 = super(iller_stock_picking, self).action_invoice_create(cr, uid, [sp.id], journal_id, group, inv_type, context)
+            inv_ids = res2.values()
+
+            if inv_ids and (sp.sale_id.amount_untaxed + sp.sale_id.amount_tax < 50) and sp.include_port:
+                
+                # Si le montant de la commande est > 50 et que le colis comprend les frais de port
+                # alors on crée une nouvelle ligne de facture pour le frais de port
+                inv_line_id = self.pool.get('account.invoice.line').create(cr, uid, {
+                    'name': "Frais de port",
+                    'origin': sp.name + ':' + sp.sale_id.name,
+                    'account_id': self.pool.get('account.account').search(cr, uid, [('code', 'ilike', '706%')], context=context)[0], #854
+                    'price_unit': sp.sale_id.frais_de_port,
+                    'quantity': 1.0,
+                    'invoice_id': inv_ids[0],
+                    'product_id': self.pool.get('product.product').search(cr, uid, [('default_code', '=', '999999')], context=context)[0], #2675
+                })
             res.update(res2)
         return res
 
