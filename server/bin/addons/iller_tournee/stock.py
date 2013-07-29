@@ -134,6 +134,7 @@ class iller_stock_move(osv.osv):
 
     _columns = {
         'poste_id': fields.many2one('iller.poste', string="Poste Prépa.", required=False),
+        'num_lot': fields.char("Lot de production", size=64, required=False),
         'state': fields.selection([('draft', 'Draft'), ('waiting', 'Waiting'), ('confirmed', 'Confirmed'), ('assigned', 'Available'), ('done', 'Done'), ('cancel', 'Cancelled')], 'Status', readonly=True, select=True),
     }
 

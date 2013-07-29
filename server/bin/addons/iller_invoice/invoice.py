@@ -107,9 +107,13 @@ class account_invoice(osv.osv):
                 'amount_total': 0.0,
                 'frais_de_port': 0.0
             }
+            frais_de_port = 0.0
             for line in invoice.invoice_line:
                 if not line.name == 'Frais de port':
                     res[invoice.id]['amount_untaxed'] += line.price_subtotal
+                else:
+                    frais_de_port = line.price_subtotal
+
             for line in invoice.tax_line:
                 res[invoice.id]['amount_tax'] += line.amount
             # On recherche les sale_order sur le nom par rapport à l'origine de la facture
@@ -124,7 +128,7 @@ class account_invoice(osv.osv):
                     for pick_record in pick_records:
                         if (so_record.amount_untaxed < 50) and pick_record['include_port']:
                             # Si le montant de la commande est < 50 ET que le colisage inclut les frais, alors 3 euros
-                            res[invoice.id]['frais_de_port'] = so_record.frais_de_port
+                            res[invoice.id]['frais_de_port'] = frais_de_port
                         else:
                             res[invoice.id]['frais_de_port'] = 0.00
 

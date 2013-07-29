@@ -25,6 +25,7 @@ from osv import osv
 from osv import fields
 from time import strptime, strftime
 from tools.translate import _
+import time
 
 class iller_stock_move(osv.osv):
     _name = 'stock.move'
@@ -128,6 +129,25 @@ class iller_stock_picking(osv.osv):
             else:
                 return stock_move.product_id.list_price
 
+
+    def  check_created_invoice(self, cr, uid, inv_ids, context=None):
+        inv_obj = self.pool.get('account.invoice')
+        sp_obj = self.pool.get('stock.picking')
+        inv = inv_obj.read(cr, uid, inv_ids, ['amount_total', 'partner_id'], context=context)
+        date_courante = time.strftime('%Y-%m-%d')
+        inv_ids_partner = inv_obj.search(cr, uid, [
+            ('partner_id', '=', inv['partner_id'][0]),
+            ('date_invoice', '=', date_courante)
+        ], context=context)
+        inv_records = inv_obj.browse(cr, uid, inv_ids_partner, context=context)
+        montant_total = inv['amount_total']
+        for inv_record in inv_records:
+            montant_total += inv_record.amount_total
+            if montant_total > 50:
+                return True
+        return False
+
+
     def action_invoice_create(self, cr, uid, ids, journal_id=False, group=False, inv_type='out_invoice', context=None):
         """
         Donne l'ensemble des factures pour les "pickings"
@@ -143,7 +163,7 @@ class iller_stock_picking(osv.osv):
             res2 = super(iller_stock_picking, self).action_invoice_create(cr, uid, [sp.id], journal_id, group, inv_type, context)
             inv_ids = res2.values()
 
-            if inv_ids and (sp.sale_id.amount_untaxed < 50) and sp.include_port:
+            if inv_ids and (sp.sale_id.amount_untaxed < 50) and sp.include_port and not self.check_created_invoice(cr, uid, inv_ids[0], context=context):
                 ait_obj = self.pool.get('account.invoice.tax')
                 tax = self.pool.get('account.tax').search(cr, uid, [('base_code_id', '=', 3)], context=context)
                 # Si le montant de la commande est < 50 et que le colis comprend les frais de port
@@ -158,9 +178,12 @@ class iller_stock_picking(osv.osv):
                     'invoice_line_tax_id': [(6, 0, tax)],
                     'product_id': self.pool.get('product.product').search(cr, uid, [('default_code', '=', '999999')], context=context)[0], #2675
                 }, context=context)
+                # On recalcule les taxes
                 compute_taxes = ait_obj.compute(cr, uid, inv_ids[0], context=context)
                 compute_values = compute_taxes.values()
                 tab_keys = []
+
+                # On parcourt les lignes de taxe pour les créer si elles ne sont pas présentes dans l'invoice
                 for inv in self.pool.get('account.invoice').browse(cr, uid, [inv_ids[0]], context=context):
                     for tax in inv.tax_line:
                         if tax.manual:

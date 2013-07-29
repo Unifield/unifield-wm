@@ -12,7 +12,7 @@
                         <button name="%(iller_partial_picking)d" states="assigned" string="Packing Done" type="action"/>
                     </xpath>
                     <xpath expr="/form/group/field[@name='min_date']" position="replace">
-                        <field name="min_date" string="Date exp."/>
+                        <field name="min_date" string="Date exp." widget="date" />
                     </xpath>
                 </data>
             </field>
