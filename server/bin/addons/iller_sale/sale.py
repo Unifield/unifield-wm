@@ -142,8 +142,8 @@ class iller_sale_line(osv.osv):
         'type_cond': fields.function(_get_info_order_line, type='char', method=True, string=u'Type conditionnement', readonly=True, multi='infos_order_line'),
         'type_prep': fields.function(_get_info_order_line, type='char', method=True, string=u'Type prép.', readonly=True, multi='infos_order_line'),
         'num_lot': fields.char(u'N° Lot', size=64),
-
     }
+
 iller_sale_line()
 
 class iller_sale(osv.osv):
@@ -177,13 +177,29 @@ class iller_sale(osv.osv):
 
 
     def _amount_all(self, cr, uid, ids, field_name, arg, context):
-        res = super(iller_sale, self)._amount_all(cr, uid, ids, field_name, arg, context=context)
         if isinstance(ids, (int, long)):
             ids = [ids]
+        res = {}
         cur_obj = self.pool.get('res.currency')
         for order in self.browse(cr, uid, ids):
-            if res[order.id]['amount_untaxed'] + res[order.id]['amount_tax'] < 50.00:
+            res[order.id] = {
+                'amount_untaxed': 0.0,
+                'amount_tax': 0.0,
+                'amount_total': 0.0,
+                'frais_de_port': 0.0,
+            }
+            val = val1 = 0.0
+            cur = order.pricelist_id.currency_id
+            for line in order.order_line:
+                val1 += line.price_subtotal
+                val += self._amount_line_tax(cr, uid, line, context)
+
+            res[order.id]['amount_tax'] = cur_obj.round(cr, uid, cur, val)
+            res[order.id]['amount_untaxed'] = cur_obj.round(cr, uid, cur, val1)
+            
+            if res[order.id]['amount_untaxed'] < 50.00:
                 res[order.id]['frais_de_port'] = 3.00
+                res[order.id]['amount_tax'] += res[order.id]['frais_de_port'] * 0.1960
                 res[order.id]['amount_total'] = res[order.id]['amount_untaxed'] + res[order.id]['amount_tax'] + res[order.id]['frais_de_port']
             else:
                 res[order.id]['frais_de_port'] = 0.00

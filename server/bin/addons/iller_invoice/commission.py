@@ -55,7 +55,8 @@ class iller_commission_line(osv.osv):
 
         if ids:
             for line in self.browse(cr, uid, ids, context=context):
-                if line.invoice_id.type == 'out_invoice':
+                print line.name
+                if line.name != 'Frais de port' and line.invoice_id.type == 'out_invoice':
                     lines.append({'unit_price': line.price_unit,
                                   'qty': line.quantity,
                                   'invoice_id': line.invoice_id.id,
@@ -78,11 +79,12 @@ class iller_commission_line(osv.osv):
             if len(lines) < 1:
                 if invoice.type == 'out_invoice':
                     product = product_obj.browse(cr, uid, data.get('product_id'))
-                    lines.append({'unit_price': data.get('price_unit'),
-                                  'qty': data.get('quantity'),
-                                  'name': product.name,
-                                  'invoice_id': data.get('invoice_id', False),
-                                  'prix_vente': product.list_price})
+                    if product.name.strip() != 'PORT FACTURE FRAIS':
+                        lines.append({'unit_price': data.get('price_unit'),
+                                      'qty': data.get('quantity'),
+                                      'name': product.name,
+                                      'invoice_id': data.get('invoice_id', False),
+                                      'prix_vente': product.list_price})
 
         res = self.set_value_commission(cr, uid, lines, context=context)
 
@@ -115,6 +117,7 @@ class iller_commission_line(osv.osv):
         bareme_above = False
 
         for l in lines:
+
             for bareme in bareme_obj.browse(cr, uid, bareme_ids):
                 ## Si le prix unitaire est égal au prix de vente du produit * le 
                 ## coeficient d'un barème, on retourne la commission associée au taux du barème
@@ -197,13 +200,14 @@ class iller_commission_line(osv.osv):
         ## On récupère les inforamtions du produit
         product = product_obj.browse(cr, uid, product_id)
 
-        ## On enregistre la ligne
-        lines.append({'unit_price': price_unit,
-                      'qty': qty,
-                      'partner_id': partner_id,
-                      'pricelist_id': pricelist_id,
-                      'name': product.name,
-                      'prix_vente': product.list_price})
+        if product.name.strip() != 'PORT FACTURE FRAIS':
+            ## On enregistre la ligne
+            lines.append({'unit_price': price_unit,
+                          'qty': qty,
+                          'partner_id': partner_id,
+                          'pricelist_id': pricelist_id,
+                          'name': product.name,
+                          'prix_vente': product.list_price})
 
         ## On lance le calcul de la commission
         res2 = self.set_value_commission(cr, uid, lines, context=context)

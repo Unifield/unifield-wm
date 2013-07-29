@@ -443,7 +443,6 @@ def _create_invoice(obj, cr, uid, data, context=None):
     res = picking_obj.action_invoice_create(cr, uid, data['ids'],
             journal_id[0], False,
             inv_type, context=context)
-    print res
     invoice_ids = res.values()
     for invoice_id in invoice_ids:
         wf_service = netsvc.LocalService("workflow")

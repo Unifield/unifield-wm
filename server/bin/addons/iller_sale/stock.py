@@ -139,22 +139,38 @@ class iller_stock_picking(osv.osv):
         for sp in self.browse(cr, uid, ids, context=context):
             if sp.sale_id:
                 context.update({'from_sale_order': sp.sale_id.id})
+
             res2 = super(iller_stock_picking, self).action_invoice_create(cr, uid, [sp.id], journal_id, group, inv_type, context)
             inv_ids = res2.values()
 
-            if inv_ids and (sp.sale_id.amount_untaxed + sp.sale_id.amount_tax < 50) and sp.include_port:
-                
-                # Si le montant de la commande est > 50 et que le colis comprend les frais de port
+            if inv_ids and (sp.sale_id.amount_untaxed < 50) and sp.include_port:
+                ait_obj = self.pool.get('account.invoice.tax')
+                tax = self.pool.get('account.tax').search(cr, uid, [('base_code_id', '=', 3)], context=context)
+                # Si le montant de la commande est < 50 et que le colis comprend les frais de port
                 # alors on crée une nouvelle ligne de facture pour le frais de port
                 inv_line_id = self.pool.get('account.invoice.line').create(cr, uid, {
                     'name': "Frais de port",
                     'origin': sp.name + ':' + sp.sale_id.name,
-                    'account_id': self.pool.get('account.account').search(cr, uid, [('code', 'ilike', '706%')], context=context)[0], #854
+                    'account_id': self.pool.get('account.account').search(cr, uid, [('code', '=', '70811000')], context=context)[0], #854
                     'price_unit': sp.sale_id.frais_de_port,
                     'quantity': 1.0,
                     'invoice_id': inv_ids[0],
+                    'invoice_line_tax_id': [(6, 0, tax)],
                     'product_id': self.pool.get('product.product').search(cr, uid, [('default_code', '=', '999999')], context=context)[0], #2675
-                })
+                }, context=context)
+                compute_taxes = ait_obj.compute(cr, uid, inv_ids[0], context=context)
+                compute_values = compute_taxes.values()
+                tab_keys = []
+                for inv in self.pool.get('account.invoice').browse(cr, uid, [inv_ids[0]], context=context):
+                    for tax in inv.tax_line:
+                        if tax.manual:
+                            continue
+                        key = (tax.tax_code_id.id, tax.base_code_id.id, tax.account_id.id)
+                        tab_keys.append(key)
+                for comp_tax in compute_taxes.keys():
+                    if comp_tax not in tab_keys:
+                        ait_obj.create(cr, uid, compute_taxes[comp_tax], context=context)
+
             res.update(res2)
         return res
 
