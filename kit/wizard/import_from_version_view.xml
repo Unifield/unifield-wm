@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="kit_import_from_version_form_view" model="ir.ui.view">
+            <field name="name">kit.import.from.version.form.view</field>
+            <field name="model">kit.import.from.version</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Import products from version">
+                    <separator colspan="4" string="Kit" />
+                    <field name="kit_id" readonly="1" string="Current kit" />
+                    <field name="product_id" invisible="1" />
+                    <separator colspan="4" string="Version to import" />
+                    <field name="import_version_id" required="1" string="Version to import" 
+                           domain="[('id', '!=', kit_id), ('composition_product_id', '=', product_id)]" />
+                    <separator colspan="4" string="Actions" />
+                    <label colspan="2" />
+                    <button special="cancel" icon="gtk-cancel" string="Close window" />
+                    <button name="import_from_version" type="object" icon="gtk-execute" string="Import products" />
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>

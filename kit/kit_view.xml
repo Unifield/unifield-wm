@@ -30,8 +30,11 @@
 	                        	domain="[('product_id', '=', composition_product_id)]" attrs="{'required': [('composition_type', '=', 'real'), ('composition_expiry_check', '=', True)], 'invisible': ['|', ('composition_expiry_check', '=', False), ('composition_type', '!=', 'real')], 'readonly': [('state', '!=', 'draft')]}" />
 	                        <field name="composition_exp" colspan="2" attrs="{'invisible': [('composition_type', '!=', 'real')]}" />
 	                        <field name="active" attrs="{'invisible': [('composition_type', '!=', 'theoretical')]}" colspan="1" />
-	                        <button colspan="2" name="reset_to_version" type="object" string="Load items from Version" icon="gtk-sort-descending" attrs="{'invisible': ['|', ('composition_type', '!=', 'real'), ('state', '!=', 'draft')]}" />
-	                        <button colspan="2" name="modify_expiry_date" string="Modify Expiry Date" type="object" icon="terp-go-today" attrs="{'invisible': [('composition_type', '!=', 'real')]}" />
+                            <button colspan="2" name="reset_to_version" type="object" string="Load items from Version" icon="gtk-sort-descending" attrs="{'invisible': ['|', ('composition_type', '!=', 'real'), ('state', '!=', 'draft')]}" />
+                            <group colspan="2" col="2">
+                                <button colspan="2" name="modify_expiry_date" string="Modify Expiry Date" type="object" icon="terp-go-today" attrs="{'invisible': [('composition_type', '!=', 'real')]}" />
+                                <button colspan="2" name="import_from_version" string="Load products from another version" type="object" icon="gtk-sort-descending" attrs="{'invisible': [('composition_type', '!=', 'theoretical')]}" />
+                            </group>
                         </group>
                     </group>
                     <notebook colspan="4">

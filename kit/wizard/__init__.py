@@ -29,3 +29,4 @@ import modify_expiry_date
 import process_to_consume
 import assign_to_kit
 import split_move
+import import_from_version

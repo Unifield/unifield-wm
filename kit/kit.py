@@ -841,6 +841,28 @@ class composition_kit(osv.osv):
                 return False
 
         return True
+
+    def import_from_version(self, cr, uid, ids, context=None):
+        '''
+        Display the wizard to choose a version to import
+        '''
+        wizard_obj = self.pool.get('kit.import.from.version')
+
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+
+        if self.browse(cr, uid, ids[0], context=context).composition_type != 'theoretical':
+            raise osv.except_osv(_('Error'), _('You can only import lines from a version on Theoretical Kit Composition !'))
+
+        wizard_id = wizard_obj.create(cr, uid, {'kit_id': ids[0]}, context=context)
+
+        return {'type': 'ir.actions.act_window',
+                'res_model': 'kit.import.from.version',
+                'res_id': wizard_id,
+                'view_type': 'form',
+                'view_mode': 'form',
+                'target': 'new',
+                'context': context}
     
     _constraints = [(_composition_kit_constraint, 'Constraint error on Composition Kit.', []),
                     (_check_active_product, 'You cannot confirm this kit because it contains a line with an inactive product', ['state', 'composition_item_ids']),
