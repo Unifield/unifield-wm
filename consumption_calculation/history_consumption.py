@@ -246,11 +246,11 @@ class product_product(osv.osv):
         if context.get('history_cons', False):
             months = context.get('months', [])
             
-            if context.get('amc', False) and 'average' in fields_to_export:
+            if 'average' in fields_to_export:
                 history_fields.append('average')
 
             for month in months:
-                field_name = DateFrom(month.get('date_from')).strftime('%m-%Y')
+                field_name = DateFrom(month.get('date_from')).strftime('%m_%Y')
                 if field_name in fields_to_export:
                     history_fields.append(field_name)
 
@@ -302,7 +302,7 @@ class product_product(osv.osv):
             tmp_months.sort()
 
             for month in tmp_months:
-                line_view += """<field name="%s" />""" % DateFrom(month).strftime('%m-%Y')
+                line_view += """<field name="%s" />""" % DateFrom(month).strftime('%m_%Y')
 
             line_view += "</tree>"
 
@@ -329,17 +329,17 @@ class product_product(osv.osv):
             months = context.get('months', [])
 
             for month in months:
-                res.update({DateFrom(month.get('date_from')).strftime('%m-%Y'): {'digits': (16,2),
+                res.update({DateFrom(month.get('date_from')).strftime('%m_%Y'): {'digits': (16,2),
                                                                                  'selectable': True,
                                                                                  'type': 'float',
-                                                                                 'sortable': False,
+                                                                                 #'sortable': False,
                                                                                  'string': '%s' % DateFrom(month.get('date_from')).strftime('%m/%Y')}})
 
             if context.get('amc', False):
                 res.update({'average': {'digits': (16,2),
                                         'selectable': True,
                                         'type': 'float',
-                                        'sortable': False,
+                                        #'sortable': False,
                                         'string': 'Av. %s' %context.get('amc')}})
 
         return res
@@ -353,7 +353,10 @@ class product_product(osv.osv):
         if context is None:
             context = {}
         if context.get('history_cons', False):
-            res = super(product_product, self).read(cr, uid, ids, vals, context=context, load=load)
+            print len(ids)
+            #product_ids = self.search(cr, uid, [], context=context)
+            product_ids = ids
+            res = super(product_product, self).read(cr, uid, product_ids, vals, context=context, load=load)
 
             if 'average' not in vals:
                 return res
@@ -372,7 +375,7 @@ class product_product(osv.osv):
             for r in res:
                 total_consumption = 0.00
                 for month in context.get('months'):
-                    field_name = DateFrom(month.get('date_from')).strftime('%m-%Y')
+                    field_name = DateFrom(month.get('date_from')).strftime('%m_%Y')
                     cons_context = {'from_date': month.get('date_from'), 'to_date': month.get('date_to'), 'location_id': context.get('location_id')}
                     consumption = 0.00
                     cons_prod_domain = [('name', '=', field_name),
@@ -385,11 +388,11 @@ class product_product(osv.osv):
                             consumption = cons_prod_obj.browse(cr, uid, cons_id[0], context=context).value
                         else:
                             consumption = self.pool.get('product.product').compute_amc(cr, uid, r['id'], context=cons_context)
-                            #cons_prod_obj.create(cr, uid, {'name': field_name,
-                            #                               'product_id': r['id'],
-                            #                               'consumption_id': obj_id,
-                            #                               'cons_type': 'amc',
-                            #                               'value': consumption}, context=context)
+                            cons_prod_obj.create(cr, uid, {'name': field_name,
+                                                           'product_id': r['id'],
+                                                           'consumption_id': obj_id,
+                                                           'cons_type': 'amc',
+                                                           'value': consumption}, context=context)
                     else:
                         cons_prod_domain.append(('cons_type', '=', 'fmc'))
                         cons_id = cons_prod_obj.search(cr, uid, cons_prod_domain, context=context)
@@ -408,8 +411,45 @@ class product_product(osv.osv):
 
                 # Update the average field
                 r.update({'average': round(total_consumption/float(len(context.get('months'))),2)})
+                cons_prod_obj.create(cr, uid, {'name': 'average',
+                                               'product_id': r['id'],
+                                               'consumption_id': obj_id,
+                                               'cons_type': context.get('amc') == 'AMC' and 'amc' or 'fmc',
+                                               'value': round(total_consumption/float(len(context.get('months'))),2)}, context=context)
         else:
             res = super(product_product, self).read(cr, uid, ids, vals, context=context, load=load)
+
+        return res
+
+    def search(self, cr, uid, args, offset=0, limit=None, order=None, context=None, count=False):
+        '''
+        Override the search methode to sort the products with the fictive fields
+        '''
+        cons_prod_obj = self.pool.get('product.history.consumption.product')
+
+        if not context:
+            context = {}
+
+        normal_search = True
+
+        if context.get('history_cons') and context.get('obj_id') and order:
+            res = []
+            for order_part in order.split(','):
+                order_split = order_part.strip().split(' ')
+                order_field = order_split[0].strip()
+                order_direction = order_split[1].strip() if len(order_split) == 2 else ''
+                tmp_order = 'value %s' % order_direction
+                if order_field not in ('default_code', 'name'):
+                    normal_search = False
+                    tmp_res = cons_prod_obj.search(cr, uid, [('consumption_id', '=', context.get('obj_id')),
+                                                             ('name', '=', order_field),
+                                                             ('cons_type', '=', context.get('amc', False) == 'AMC' and 'amc' or 'fmc')],
+                                                             offset=offset, order=tmp_order, limit=limit, context=context)
+                    for r in cons_prod_obj.browse(cr, uid, tmp_res, context=context):
+                        res.append(r.product_id.id)
+
+        if normal_search:
+            res = super(product_product, self).search(cr, uid, args, offset, limit, order, context=context, count=count)
 
         return res
 
