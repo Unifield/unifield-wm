@@ -1546,36 +1546,87 @@ class product_product(osv.osv):
         # Search all real consumption line included in the period
         # If no period found, take all stock moves
         if from_date and to_date:
-            rcr_domain = ['&', ('product_id', 'in', ids),
-                          # All lines with a report started out the period and finished in the period 
-                          '|', '&', ('rac_id.period_to', '>=', from_date), ('rac_id.period_to', '<=', to_date),
-                          # All lines with a report started in the period and finished out the period 
-                          '|', '&', ('rac_id.period_from', '<=', to_date), ('rac_id.period_from', '>=', from_date),
-                          # All lines with a report started before the period  and finished after the period
-                          '&', ('rac_id.period_from', '<=', from_date), ('rac_id.period_to', '>=', to_date)]
-        
-            rcr_line_ids = self.pool.get('real.average.consumption.line').search(cr, uid, rcr_domain, context=context)
-            report_move_ids = []
+            # Filter on all lines with a report started out the period and finished in the period 
+            # or all lines with a report started in the period and finished out the period 
+            # or all lines with a report started before the period  and finished after the period
+            cr.execute('''SELECT racl.id as id, racl.move_id as move_id
+                          FROM real_average_consumption_line racl
+                            LEFT JOIN real_average_consumption rac ON racl.rac_id = rac.id
+                          WHERE product_id in %s
+                            AND (
+                                 (rac.period_to >= %s AND rac.period_to <= %s)
+                                 OR 
+                                 (rac.period_from <= %s AND rac.period_from >= %s)
+                                 OR 
+                                 (rac.period_from <= %s AND rac.period_to >= %s))''', (tuple(ids), from_date, to_date, to_date, from_date, from_date, to_date))
+            rcr_res = cr.dictfetchall()
+            report_move_ids = list(x.get('move_id') for x in rcr_res)
+            rcr_line_ids = list(x.get('id') for x in rcr_res)
+
             for line in self.pool.get('real.average.consumption.line').browse(cr, uid, rcr_line_ids, context=context):
-                report_move_ids.append(line.move_id.id)
                 res += self._get_period_consumption(cr, uid, line, from_date, to_date, context=context)
             
-            if report_move_ids:
-                domain.append(('id', 'not in', report_move_ids))
+        where_clause = '''m.state = 'done' 
+                            AND m.reason_type_id not in %(reason_type_id)s 
+                            AND m.product_id in %(product_ids)s 
+                            AND l.usage in %(loc_usage)s 
+                            AND dl.usage in %(loc_usage)s'''
+        where_params = {'reason_type_id': tuple([loan_id, donation_id, donation_exp_id, loss_id, discrepancy_id]),
+                        'product_ids': tuple(ids),
+                        'loc_usage': tuple(['internal', 'customer']),
+                        'in_reason_type': tuple([return_id, return_good_id, replacement_id]),
+                        'lusage': 'customer',
+                        'dlusage': 'customer'}
+        if to_date:
+            where_clause += " AND m.date <= %(to_date)s"
+            where_params.update(to_date=to_date)
+        if from_date:
+            where_clause += " AND m.date >= %(from_date)s"
+            where_params.update(from_date=from_date)
+
+        if report_move_ids:
+            where_clause += " AND m.id not in %(report_move_ids)s"
+            where_params.update(report_move_ids=tuple(report_move_ids))
+
+        res2 = res
+        req = '''SELECT CASE
+                            WHEN m.reason_type_id in %(in_reason_type)s AND l.usage = %(lusage)s
+                                 THEN -sum(m.product_qty/mu.factor*pu.factor)
+                            WHEN dl.usage = %(dlusage)s
+                                 THEN sum(m.product_qty/mu.factor*pu.factor)
+                            ELSE 0.00
+                            END AS sum,
+                        min(date) as min_date,
+                        max(date) as max_date
+                 FROM stock_move m
+                      LEFT JOIN product_uom mu ON m.product_uom = mu.id
+                      LEFT JOIN product_product pp ON m.product_id = pp.id
+                      LEFT JOIN product_template pt ON pp.product_tmpl_id = pt.id
+                      LEFT JOIN product_uom pu ON pt.uom_id = pu.id
+                      LEFT JOIN stock_location l ON m.location_id = l.id
+                      LEFT JOIN stock_location dl ON m.location_dest_id = dl.id
+                 WHERE ''' + where_clause + ''' GROUP BY m.reason_type_id, l.usage, dl.usage'''
+
+        cr.execute(req, where_params)
+        for r in cr.dictfetchall():
+            res2 += r['sum']
+            if not context.get('from_date') and (not from_date or r['min_date'] < from_date):
+                from_date = r['min_date']
+            if not context.get('to_date') and (not to_date or r['max_date'] > to_date):
+                to_date = r['max_date']
         
-        out_move_ids = move_obj.search(cr, uid, domain, context=context)
-        
-        for move in move_obj.browse(cr, uid, out_move_ids, context=context):
-            if move.reason_type_id.id in (return_id, return_good_id, replacement_id) and move.location_id.usage == 'customer':
-                res -= uom_obj._compute_qty(cr, uid, move.product_uom.id, move.product_qty, move.product_id.uom_id.id)
-            elif move.location_dest_id.usage == 'customer':
-                res += uom_obj._compute_qty(cr, uid, move.product_uom.id, move.product_qty, move.product_id.uom_id.id)
-            
-            # Update the limit in time
-            if not context.get('from_date') and (not from_date or move.date < from_date):
-                from_date = move.date
-            if not context.get('to_date') and (not to_date or move.date > to_date):
-                to_date = move.date
+#        out_move_ids = move_obj.search(cr, uid, domain, context=context)
+#        for move in move_obj.browse(cr, uid, out_move_ids, context=context):
+#            if move.reason_type_id.id in (return_id, return_good_id, replacement_id) and move.location_id.usage == 'customer':
+#                res -= uom_obj._compute_qty(cr, uid, move.product_uom.id, move.product_qty, move.product_id.uom_id.id)
+#            elif move.location_dest_id.usage == 'customer':
+#                res += uom_obj._compute_qty(cr, uid, move.product_uom.id, move.product_qty, move.product_id.uom_id.id)
+#            
+#            # Update the limit in time
+#            if not context.get('from_date') and (not from_date or move.date < from_date):
+#                from_date = move.date
+#            if not context.get('to_date') and (not to_date or move.date > to_date):
+#                to_date = move.date
                 
         if not to_date or not from_date:
             return 0.00
