@@ -1389,7 +1389,7 @@ class stock_location(osv.osv):
 
 
     _columns = {
-        'chained_location_type': fields.selection([('none', 'None'), ('customer', 'Customer'), ('fixed', 'Fixed Location'), ('nomenclature', 'Nomenclature')],
+        'chained_location_type': fields.selection([('none', 'None'), ('customer', 'Customer'), ('fixed', 'Fixed Location'), ('nomenclature', 'Nomenclature'), ('washing', 'Remove Traceability')],
                                 'Chained Location Type', required=True,
                                 help="Determines whether this location is chained to another location, i.e. any incoming product in this location \n" \
                                      "should next go to the chained location. The chained location is determined according to the type :"\
@@ -1397,6 +1397,7 @@ class stock_location(osv.osv):
                                      "\n* Customer: The chained location will be taken from the Customer Location field on the Partner form of the Partner that is specified in the Picking list of the incoming products." \
                                      "\n* Fixed Location: The chained location is taken from the next field: Chained Location if Fixed." \
                                      "\n* Nomenclature: The chained location is taken from the options field: Chained Location is according to the nomenclature level of product."\
+                                     "\n* Remove Traceability: The chained location is the same as the soure location of the incoming stock move but remove the batch number and expiry date."\
                                     ),
         'chained_options_ids': fields.one2many('stock.location.chained.options', 'location_id', string='Chained options'),
         'optional_loc': fields.boolean(string='Is an optional location ?'),
