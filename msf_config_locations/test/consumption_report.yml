@@ -1,0 +1,31 @@
+-
+  Test of consumption report on from a Consumption Unit with 'Remove Traceability'
+  option set.
+-
+  Create the consumption report
+-
+  !python {model: real.average.consumption}: |
+    line_obj = self.pool.get('real.average.consumption.line')
+    cu1_id = self.pool.get('stock.location').search(cr, uid, [('active', 'in', ['t', 'f']), ('name', '=', 'internal CU 1')])[0]
+    activity_id = self.pool.get('stock.location').search(cr, uid, [('usage', '=', 'customer')])[0]
+    report_id = self.create(cr, uid, {'period_from': '2013-07-21',
+                                      'period_to': '2013-07-31',
+                                      'activity_id': activity_id,
+                                      'cons_location_id': cu1_id})
+
+    # Try to create lines
+    try:
+        line_obj.create(cr, uid, {'product_id': ref('productA'),
+                                  'product_uom': ref('product.product_uom_unit'),
+                                  'rac_id': report_id,
+                                  'consumed_qty': 5.00})
+        line_obj.create(cr, uid, {'product_id': ref('productBN'),
+                                  'product_uom': ref('product.product_uom_unit'),
+                                  'rac_id': report_id,
+                                  'consumed_qty': 5.00})
+        line_obj.create(cr, uid, {'product_id': ref('productED'),
+                                  'product_uom': ref('product.product_uom_unit'),
+                                  'rac_id': report_id,
+                                  'consumed_qty': 5.00})
+    except osv.except_osv, e:
+        assert False, "An error is raised when trying to create lines in real consumption report from a Consumption Unit with 'Remove Traceability' option set"

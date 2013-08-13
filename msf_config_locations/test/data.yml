@@ -1,0 +1,126 @@
+-
+  Create data in order to test the management of batch numbers and expiry
+  dates products with the 'Remove traceability' feature.
+-
+  Create the first product
+-
+  !record {model:product.product, id: productA}:
+    name: ProductA
+-
+  Create the second product, perishable
+-
+  !record {model:product.product, id: productBN}:
+    name: ProductBN
+    perishable: True
+    batch_management: True
+-
+  Create the third product, expiry date mandatory
+-
+  !record {model:product.product, id: productED}:
+    name: productED
+    perishable: False
+    batch_management: True
+-
+  Create an initial inventory for these products
+-
+  !record {model:initial.stock.inventory, id: init1}:
+    name: First inventory
+    inventory_line_id:
+      - location_id: stock_override.stock_location_logistic
+        product_id: productA
+        product_uom: product.product_uom_unit
+        product_qty: 100
+      - location_id: stock_location_medical
+        product_id: productBN
+        product_uom: product.product_uom_unit
+        prodlot_name: LotA
+        expiry_date: '2020-12-31'
+        product_qty: 50
+      - location_id: stock_location_medical
+        product_id: productBN
+        product_uom: product.product_uom_unit
+        prodlot_name: LotB
+        expiry_date: '2021-12-31'
+        product_qty: 25
+      - location_id: stock_location_medical
+        product_id: productED
+        product_uom: product.product_uom_unit
+        expiry_date: '2020-11-30'
+        product_qty: 20
+      - location_id: stock_location_medical
+        product_id: productED
+        product_uom: product.product_uom_unit
+        expiry_date: '2019-12-12'
+        product_qty: 120
+-
+  Validate and confirm this initial inventory
+-
+  !python {model: initial.stock.inventory}: |
+    self.action_confirm(cr, uid, ref('init1'))
+    self.action_done(cr, uid, ref('init1'))
+-
+  Create a new internal consumption unit with remove traceability option set
+-
+  !record {model: stock.location.configuration.wizard, id: create_cu1}:
+    location_name: internal CU 1
+    location_usage: consumption_unit
+    location_type: internal
+    traceability_ok: True
+-
+  Confirm the creation of this internal consumption unit
+-
+  !python {model: stock.location.configuration.wizard}:
+    self.confirm_creation(cr, uid, ref('create_cu1'))
+-
+  Check if the stock location is well created
+-
+  !python {model: stock.location}: |
+    create_cu1_id = self.search(cr, uid, [('active', 'in', ['t', 'f']), ('name', '=', 'internal CU 1')])
+    for loc in create_cu1_id:
+        assert loc.traceability_ok, "The 'Remove Traceability' option was not set on the internal CU 1 (expected True :: result %s)" % loc.traceability_ok
+        assert loc.chained_auto_packing == 'auto', "The Chaining Type was not correctly set on internal CU 1 location (expected 'auto' :: result : %s" % loc.chained_auto_packing
+        assert loc.chained_location_type == 'fixed', "The Chained Location Type was not correctly set on internal CU 1 location (expected 'fixed' :: result %s)" % loc.chained_location_type
+        assert loc.chained_location_id.id == ref('stock_washing_location'), "The Chained Location was not correclty set on internal CU 1 location (expected %s :: %s)" % (ref('stock_washing_location'), loc.chained_location_id.id)
+-
+  Create a second internal consumption unit with no remove traceability option
+-
+  !record {model: stock.location.configuration.wizard, id: create_cu2}:
+    location_name: internal CU 2
+    location_usage: consumption_unit
+    location_type: internal
+    traceability_ok: False
+-
+  Confirm the creation of this second internal consumption unit
+-
+  !python {model: stock.location.configuration.wizard}:
+    self.confirm_creation(cr, uid, ref('create_cu2'))
+-
+  Check if the stock location is well created
+-
+  !python {model: stock.location}: |
+    create_cu2_id = self.search(cr, uid, [('active', 'in', ['t', 'f']), ('name', '=', 'internal CU 2')])
+    for loc in create_cu2_id:
+        assert not loc.traceability_ok, "The 'Remove Traceability' option was not set on the internal CU 2 (expected False :: result %s)" % loc.traceability_ok
+        assert loc.chained_auto_packing == 'auto', "The Chaining Type was not correctly set on internal CU 2 location (expected 'auto' :: result : %s" % loc.chained_auto_packing
+        assert loc.chained_location_type == 'fixed', "The Chained Location Type was not correctly set on internal CU 2 location (expected 'fixed' :: result %s)" % loc.chained_location_type
+        assert loc.chained_location_id.id == ref('stock_washing_location'), "The Chained Location was not correclty set on internal CU 1 location (expected %s :: %s)" % (ref('stock_washing_location'), loc.chained_location_id.id)
+-
+  Create an external consumption unit with remove traceability option set
+-
+  !record {model: stock.location.configuration.wizard, id: create_cu3}:
+    location_name: external CU3
+    location_usage: consumption_unit
+    location_type: external
+    traceability_ok: True
+-
+  Confirm the creation of this external consumption unit
+-
+  !python {model: stock.location.configuration.wizard}:
+    self.confirm_creation(cr, uid, ref('create_cu3'))
+-
+  Check if the stock location is well created
+-
+  !python {model: stock.location}: |
+    create_cu3_id = self.search(cr, uid, [('active', 'in', ['t', 'f']), ('name', '=', 'external CU3')])
+    for loc in create_cu3_id:
+        assert not loc.traceability_ok, "The 'Remove Traceability' checkbox shouldn't be ticked for external CU (expected False :: result %s)" % loc.traceability_ok

@@ -46,6 +46,9 @@
     "demo_xml" : [
     ],
     'test': [
+        'test/data.yml',
+        'test/internal_move.yml',
+        'test/consumption_report.yml',
     ],
     'installable': True,
     'active': False,
