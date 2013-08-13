@@ -10,7 +10,7 @@
     move_obj = self.pool.get('stock.move')
     partial_pick_obj = self.pool.get('stock.partial.picking')
 
-    cu1_id = self.search(cr, uid, [('active', 'in', ['t', 'f']), ('name', '=', 'internal CU 1')])[0]
+    cu1_id = self.search(cr, uid, [('name', '=', 'internal CU 1')])[0]
     lotA = prodlot_obj.search(cr, uid, [('name', '=', 'LotA')])
     lotC = prodlot_obj.search(cr,u id, [('life_date', '=', '2020-11-30')])
 
@@ -67,7 +67,7 @@
 -
   !python {model: stock.location}: |
     prodlot_obj = self.pool.get('stock.production.lot')
-    cu1_id = self.search(cr, uid, [('active', 'in', ['t', 'f']), ('name', '=', 'internal CU 1')])[0]
+    cu1_id = self.search(cr, uid, [('name', '=', 'internal CU 1')])[0]
     pa_value = self.browse(cr, uid, cu1_id[0], context=dict(product_id=ref('productA'))).stock_real_value
     pbn_value = self.browse(cr, uid, cu1_id[0], context=dict(product_id=ref('productBN'))).stock_real_value
     ped_value = self.browse(cr, uid, cu1_id[0], context=dict(product_id=ref('productED'))).stock_real_value
@@ -92,7 +92,7 @@
     partial_pick_obj = self.pool.get('stock.partial.picking')
     partial_move_obj = self.pool.get('stock.partial.move')
 
-    cu2_id = self.search(cr, uid, [('active', 'in', ['t', 'f']), ('name', '=', 'internal CU 2')])[0]
+    cu2_id = self.search(cr, uid, [('name', '=', 'internal CU 2')])[0]
     lotB = prodlot_obj.search(cr, uid, [('name', '=', 'LotB')])
     lotD = prodlot_obj.search(cr,u id, [('life_date', '=', '2019-12-12')])
 
@@ -149,7 +149,7 @@
 -
   !python {model: stock.location}: |
     prodlot_obj = self.pool.get('stock.production.lot')
-    cu2_id = self.search(cr, uid, [('active', 'in', ['t', 'f']), ('name', '=', 'internal CU 2')])[0]
+    cu2_id = self.search(cr, uid, [('name', '=', 'internal CU 2')])[0]
     pa_value = self.browse(cr, uid, cu2_id[0], context=dict(product_id=ref('productA'))).stock_real_value
     pbn_value = self.browse(cr, uid, cu2_id[0], context=dict(product_id=ref('productBN'))).stock_real_value
     ped_value = self.browse(cr, uid, cu2_id[0], context=dict(product_id=ref('productED'))).stock_real_value

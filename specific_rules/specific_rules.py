@@ -642,10 +642,11 @@ class stock_move(osv.osv):
         """
         for move in self.browse(cr, uid, ids, context=context):
             if move.state == 'done' and move.location_id.id != move.location_dest_id.id:
-                if move.product_id.batch_management:
+                remove_trace = move.location_id.remove_trace_ok or (move.location_id.chained_location_id and move.location_id.chained_location_id.remove_trace_ok)
+                if move.product_id.batch_management and not remove_trace:
                     if not move.prodlot_id and move.product_qty:
                         raise osv.except_osv(_('Error!'),  _('You must assign a Batch Number for this product (Batch Number Mandatory).'))
-                if move.product_id.perishable:
+                if move.product_id.perishable and not remove_trace:
                     if not move.prodlot_id and move.product_qty:
                         raise osv.except_osv(_('Error!'),  _('You must assign an Expiry Date for this product (Expiry Date Mandatory).'))
             if move.prodlot_id:

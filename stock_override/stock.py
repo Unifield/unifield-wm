@@ -1019,6 +1019,18 @@ class stock_move(osv.osv):
         if not move.already_confirmed:
             self.action_confirm(cr, uid, [move.id])
         return True
+
+    def _hook_washing_ok(self, cr, uid, dest, move, context=None):
+        '''
+        Set the location_id as location_dest_id if the 
+        '''
+        res = super(stock_move, self)._hook_washing_ok(cr, uid, dest, move, context=context)
+
+        if move.location_dest_id and move.location_dest_id.chained_location_type == 'washing' and move.state != 'done':
+            location = move.location_dest_id
+            return move.location_id, location.chained_auto_packing, location.chained_delay, location.chained_journal_id and location.chained_journal_id.id or False, location.chained_company_id and location.chained_company_id.id or False, location.chained_picking_type
+
+        return res
     
     def _hook_move_cancel_state(self, cr, uid, *args, **kwargs):
         '''

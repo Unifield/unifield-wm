@@ -262,6 +262,7 @@ class stock_location(osv.osv):
     _columns = {
         'central_location_ok': fields.boolean(string='If check, all products in this location are unallocated.'),
         'non_stockable_ok': fields.boolean(string='Non-stockable', help="If checked, the location will be used to store non-stockable products"),
+        'remove_trace_ok': fields.boolean(string="Remove traceability location", readonly=True, help="If checked, this location can be used to remove the traceability by using a washing chaining type"),
         'output_ok': fields.function(_get_input_output, method=True, string='Output Location', type='boolean',
                                      store={'stock.location': (lambda self, cr, uid, ids, c={}: ids, ['location_id'], 20),
                                             'stock.warehouse': (_get_warehouse_output, ['lot_input_id'], 10)},
@@ -298,6 +299,8 @@ class stock_location_configuration_wizard(osv.osv_memory):
                                           string='Location usage'),
         'location_type': fields.selection([('internal', 'Internal'), ('customer', 'External')], string='Location type'),
         'location_id': fields.many2one('stock.location', string='Inactive location to re-activate'),
+        'traceability_ok': fields.boolean(string='Traceability deactivated', readonly=False, required=False,
+                                          help="If checked, the batch numbers and expiry dates will be deactivated on this location"),
         'reactivate': fields.boolean(string='Reactivate location ?'),
     }
     
@@ -449,6 +452,16 @@ class stock_location_configuration_wizard(osv.osv_memory):
                     
                     if not location_obj.browse(cr, uid, parent_location_id, context=context).active:
                         location_obj.write(cr, uid, [parent_location_id], {'active': True}, context=context)
+
+                    # Manage 'Remove Traceability' option
+                    if wizard.traceability_ok:
+                        washing_loc_id = data_obj.get_object_reference(cr, uid, 'stock', 'stock_location_remove_traceability')
+                        if not washing_loc_id:
+                            raise osv.except_osv(_('Error'), _('Location \'Washing Loctaino\' not found in the instance or is not activated !'))
+                        chained_location_type = 'fixed'
+                        chained_auto_packing = 'auto'
+                        chained_picking_type = 'internal'
+                        chained_location_id = washing_loc_id[1]
                 else:
                     raise osv.except_osv(_('Error'), _('The type of the new location is not correct ! Please check the parameters and retry.'))
             elif wizard.location_type == 'customer' and wizard.location_usage == 'consumption_unit':

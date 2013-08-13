@@ -6,7 +6,7 @@
 -
   !python {model: real.average.consumption}: |
     line_obj = self.pool.get('real.average.consumption.line')
-    cu1_id = self.pool.get('stock.location').search(cr, uid, [('active', 'in', ['t', 'f']), ('name', '=', 'internal CU 1')])[0]
+    cu1_id = self.pool.get('stock.location').search(cr, uid, [('name', '=', 'internal CU 1')])[0]
     activity_id = self.pool.get('stock.location').search(cr, uid, [('usage', '=', 'customer')])[0]
     report_id = self.create(cr, uid, {'period_from': '2013-07-21',
                                       'period_to': '2013-07-31',

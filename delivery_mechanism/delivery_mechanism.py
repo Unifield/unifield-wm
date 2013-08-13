@@ -123,6 +123,29 @@ class stock_move(osv.osv):
         
         resequencing_ids = [x.id for x in self.browse(cr, uid, ids, context=context) if x.picking_id and pick_obj.allow_resequencing(cr, uid, x.picking_id, context=context)]
         return resequencing_ids
+
+    def _create_chained_picking(self, cr, uid, pick_name, picking, ptype, move, context=None):
+        '''
+        Don't create picking if all moves are washing moves
+        '''
+        if all(move.location_dest_id.remove_trace_ok or (move.location_dest_id.chained_location_id and move.location_dest_id.chained_location_id.chained_location_type == 'washing') for move in picking.move_lines):
+            return False
+        
+        return super(stock_move, self)._create_chained_picking(cr, uid, pick_name, picking, ptype, move, context=context)
+
+    def create_chained_picking(self, cr, uid, moves, context=None):
+        '''
+        If the moves is from/to washing location, process them
+        '''
+        res = super(stock_move, self).create_chained_picking(cr, uid, moves, context=context)
+
+        todo = []
+        for m in res:
+            if m.location_id.remove_trace_ok or m.location_dest_id.remove_trace_ok:
+                self.force_assign(cr, uid, [m.id])
+                self.action_done(cr, uid, [m.id])
+
+        return res
     
     def _create_chained_picking_move_values_hook(self, cr, uid, context=None, *args, **kwargs):
         '''
@@ -136,6 +159,14 @@ class stock_move(osv.osv):
         move_data = super(stock_move, self)._create_chained_picking_move_values_hook(cr, uid, context=context, *args, **kwargs)
         # get move reference
         move = kwargs['move']
+        # If the source location of the new move remove the traceability, 
+        # remove the batch number and the expiry date and avoid the chaining
+        # after the new stock move
+        if move.location_dest_id and move.location_dest_id.remove_trace_ok:
+            move_data.update({'prodlot_id': False, 
+                              'expired_date': False,
+                              'picking_id': False,
+                              'not_chained': True})
         # set the line number from original stock move
         move_data.update({'line_number': move.line_number})
         return move_data

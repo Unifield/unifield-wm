@@ -75,7 +75,7 @@
   Check if the stock location is well created
 -
   !python {model: stock.location}: |
-    create_cu1_id = self.search(cr, uid, [('active', 'in', ['t', 'f']), ('name', '=', 'internal CU 1')])
+    create_cu1_id = self.search(cr, uid, [('name', '=', 'internal CU 1')])
     for loc in create_cu1_id:
         assert loc.traceability_ok, "The 'Remove Traceability' option was not set on the internal CU 1 (expected True :: result %s)" % loc.traceability_ok
         assert loc.chained_auto_packing == 'auto', "The Chaining Type was not correctly set on internal CU 1 location (expected 'auto' :: result : %s" % loc.chained_auto_packing
@@ -98,7 +98,7 @@
   Check if the stock location is well created
 -
   !python {model: stock.location}: |
-    create_cu2_id = self.search(cr, uid, [('active', 'in', ['t', 'f']), ('name', '=', 'internal CU 2')])
+    create_cu2_id = self.search(cr, uid, [('name', '=', 'internal CU 2')])
     for loc in create_cu2_id:
         assert not loc.traceability_ok, "The 'Remove Traceability' option was not set on the internal CU 2 (expected False :: result %s)" % loc.traceability_ok
         assert loc.chained_auto_packing == 'auto', "The Chaining Type was not correctly set on internal CU 2 location (expected 'auto' :: result : %s" % loc.chained_auto_packing
@@ -121,6 +121,6 @@
   Check if the stock location is well created
 -
   !python {model: stock.location}: |
-    create_cu3_id = self.search(cr, uid, [('active', 'in', ['t', 'f']), ('name', '=', 'external CU3')])
+    create_cu3_id = self.search(cr, uid, [('name', '=', 'external CU3')])
     for loc in create_cu3_id:
         assert not loc.traceability_ok, "The 'Remove Traceability' checkbox shouldn't be ticked for external CU (expected False :: result %s)" % loc.traceability_ok

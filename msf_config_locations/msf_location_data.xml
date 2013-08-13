@@ -412,6 +412,17 @@
         <field name="posz">1</field>
     </record>
 
+    <record id="stock.stock_location_remove_traceability" model="stock.location">
+        <field name="name">Washing Location</field>
+        <field name="location_category">other</field>
+        <field name="usage">inventory</field>
+        <field name="chained_auto_packing">auto</field>
+        <field name="chained_location_type">washing</field>
+        <field name="virtual_location">True</field>
+        <field name="washing_ok">True</field>
+        <field name="active">False</field>
+    </record>
+
     <record id="stock.warehouse0" model="stock.warehouse">
         <field name="name">MSF</field>
         <field name="lot_input_id" ref="msf_cross_docking.stock_location_input"/>
