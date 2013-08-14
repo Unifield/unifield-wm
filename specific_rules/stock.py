@@ -86,12 +86,12 @@ class initial_stock_inventory(osv.osv):
                     raise osv.except_osv(_('Error'), _('You cannot have two lines for the product %s with different average cost.') % product_obj.name_get(cr, uid, [inventory_line.product_id.id], context=context)[0][1])
                 
                 # Returns error if the line is batch mandatory or perishable without prodlot
-                if inventory_line.product_id.batch_management and not inventory_line.prodlot_name:
+                if inventory_line.product_id.batch_management and not inventory_line.prodlot_name and not inventory_line.location_id.no_traceability:
                     raise osv.except_osv(_('Error'), _('You must assign a Batch Number on the product %s.') % product_obj.name_get(cr, uid, [inventory_line.product_id.id])[0][1])
-                elif inventory_line.product_id.perishable and not inventory_line.expiry_date:
+                elif inventory_line.product_id.perishable and not inventory_line.expiry_date and not inventory_line.location_id.no_traceability:
                     raise osv.except_osv(_('Error'), _('You must assign an Expiry Date on the product %s.') % product_obj.name_get(cr, uid, [inventory_line.product_id.id])[0][1])
                         
-                if inventory_line.product_id.batch_management:
+                if inventory_line.product_id.batch_management and not inventory_line.location_id.no_traceability:
                     # if no production lot, we create a new one
                     prodlot_ids = prodlot_obj.search(cr, uid, [('name', '=', inventory_line.prodlot_name),
                                                                ('type', '=', 'standard'),
@@ -237,9 +237,9 @@ class initial_stock_inventory_line(osv.osv):
             res[line.id] = ''
             if not line.location_id:
                 res[line.id] = 'You must define a stock location'
-            if line.hidden_batch_management_mandatory and not line.prodlot_name:
+            elif line.hidden_batch_management_mandatory and not line.prodlot_name and not line.location_id.no_traceability:
                 res[line.id] = 'You must define a batch number'
-            elif line.hidden_perishable_mandatory and not line.expiry_date:
+            elif line.hidden_perishable_mandatory and not line.expiry_date and not line.location_id.no_traceability:
                 res[line.id] = 'You must define an expiry date'
         
         return res
@@ -264,7 +264,7 @@ class initial_stock_inventory_line(osv.osv):
         check for batch management
         '''
         for obj in self.browse(cr, uid, ids, context=context):
-            if obj.product_id.batch_management and obj.inventory_id.state not in ('draft', 'cancel'):
+            if obj.product_id.batch_management and obj.inventory_id.state not in ('draft', 'cancel') and not obj.location_id.no_traceability:
                 if not obj.prod_lot_id or obj.prod_lot_id.type != 'standard':
                     return False
         return True
@@ -274,7 +274,7 @@ class initial_stock_inventory_line(osv.osv):
         check for perishable ONLY
         """
         for obj in self.browse(cr, uid, ids, context=context):
-            if obj.product_id.perishable and not obj.product_id.batch_management and obj.inventory_id.state not in ('draft', 'cancel'):
+            if obj.product_id.perishable and not obj.product_id.batch_management and obj.inventory_id.state not in ('draft', 'cancel') and not obj.location_id.no_traceability:
                 if (not obj.prod_lot_id and not obj.expiry_date) or (obj.prod_lot_id and obj.prod_lot_id.type != 'internal'):
                     return False
         return True
@@ -284,7 +284,7 @@ class initial_stock_inventory_line(osv.osv):
         If the inv line has a prodlot but does not need one, return False.
         """
         for obj in self.browse(cr, uid, ids, context=context):
-            if obj.prod_lot_id and obj.inventory_id.state not in ('draft', 'cancel'):
+            if obj.prod_lot_id and obj.inventory_id.state not in ('draft', 'cancel') and not obj.location_id.no_traceability:
                 if not obj.product_id.perishable and not obj.product_id.batch_management:
                     return False
         return True
@@ -325,10 +325,12 @@ class initial_stock_inventory_line(osv.osv):
                  'hidden_perishable_mandatory': False,
                  'hidden_batch_management_mandatory': False,}
         
+        if location_id:
+            context = {'location': location_id, 'compute_child': False}
+            location = self.pool.get('stock.location').browse(cr, uid, location_id, context=context)
+
         if product_id:
             context = {}
-            if location_id:
-                context = {'location': location_id, 'compute_child': False}
             if prodlot_id:
                 context.update({'prodlot_id': prodlot_id})
             product = self.pool.get('product.product').browse(cr, uid, product_id, context=context)
@@ -337,6 +339,12 @@ class initial_stock_inventory_line(osv.osv):
                           'hidden_batch_management_mandatory': product.batch_management})
             if change_price:
                 value.update({'average_cost': product.standard_price,})
+
+        if location_id and location and location.no_traceability:
+            value.update({'hidden_perishable_mandatory': False,
+                          'hidden_batch_management_mandatory': False,
+                          'prodlot_name': False,
+                          'expiry_date': False})
 
             # Don't recompute the product qty according to batch because no selection of batch
 #            if location_id:

@@ -452,14 +452,17 @@ class initial_stock_inventory_line(osv.osv):
         location_id = vals.get('location_id')
         batch = vals.get('prodlot_name')
         expiry = vals.get('expiry_date')
+        no_traceability = False
 
 
         if not location_id:
             comment += _('Location is missing.\n')
+        else:
+            no_traceability = self.pool.get('stock.location').browse(cr, uid, location_id, context=context).no_traceability
 
-        if hidden_batch_management_mandatory and not batch:
+        if hidden_batch_management_mandatory and not batch and not no_traceability:
             comment += _('Batch is missing.\n')
-        if hidden_perishable_mandatory and not expiry:
+        if hidden_perishable_mandatory and not expiry and not no_traceability:
             comment += _('Expiry date is missing.\n')
 
         if not comment:
@@ -480,18 +483,19 @@ class initial_stock_inventory_line(osv.osv):
         else:
             product = line.product_id
 
-        location_id = vals.get('location_id') or line.location_id
+        location_id = vals.get('location_id') or line.location_id.id
         batch = vals.get('prodlot_name') or line.prodlot_name
         expiry = vals.get('expiry_date') or line.expiry_date
 
         hidden_batch_management_mandatory = product.batch_management
         hidden_perishable_mandatory = product.perishable
+        no_traceability = self.pool.get('stock.location').browse(cr, uid, location_id, context=context).no_traceability
 
         if not location_id:
             comment += _('Location is missing.\n')
-        if hidden_batch_management_mandatory and not batch:
+        if hidden_batch_management_mandatory and not batch and not no_traceability:
             comment += _('Batch is missing.\n')
-        if hidden_perishable_mandatory and not expiry:
+        if hidden_perishable_mandatory and not expiry and not no_traceability:
             comment += _('Expiry date is missing.\n')
 
         if not comment:
