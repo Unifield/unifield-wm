@@ -470,6 +470,7 @@ class create_picking(osv.osv_memory):
         uom_obj = self.pool.get('product.uom')
         memory_move_obj = self.pool.get('stock.move.memory.picking')
         lot_obj = self.pool.get('stock.production.lot')
+        loc_obj = self.pool.get('stock.location')
         # flag to detect missing prodlot
         missing_lot = False
         # has prodlot but should not
@@ -484,22 +485,23 @@ class create_picking(osv.osv_memory):
                     # product id must exist
                     prod_id = list_data['product_id']
                     prod = prod_obj.browse(cr, uid, prod_id, context=context)
+                    loc = loc_obj.browse(cr, uid, list_data['location_id'], context=context)
                     # a production lot is defined, corresponding checks
                     if list_data['prodlot_id']:
                         if list_data['location_id']:
                             context.update({'location_id': list_data['location_id']})
                         lot = lot_obj.browse(cr, uid, list_data['prodlot_id'], context=context)
                         # a prod lot is defined, the product must be either perishable or batch_management
-                        if not (prod.perishable or prod.batch_management):
+                        if not (prod.perishable or prod.batch_management) or loc.no_traceability:
                             # rule #3: should not have production lot
                             lot_not_needed = True
                             memory_move_obj.write(cr, uid, [list_data['memory_move_id']], {'integrity_status': 'no_lot_needed',}, context=context)
                         # rule #5: perishable -> the prod lot must be of type 'internal'
-                        if prod.perishable and not prod.batch_management and lot.type != 'internal':
+                        if not loc.no_traceability and prod.perishable and not prod.batch_management and lot.type != 'internal':
                             wrong_lot_type = True
                             memory_move_obj.write(cr, uid, [list_data['memory_move_id']], {'integrity_status': 'wrong_lot_type_need_internal',}, context=context)
                         # rule #4: batch_management -> the prod lot must be of type 'standard'
-                        if prod.batch_management and lot.type != 'standard':
+                        if not loc.no_traceability and prod.batch_management and lot.type != 'standard':
                             wrong_lot_type = True
                             memory_move_obj.write(cr, uid, [list_data['memory_move_id']], {'integrity_status': 'wrong_lot_type_need_standard',}, context=context)
 
@@ -521,7 +523,7 @@ class create_picking(osv.osv_memory):
                                  lot.name, lot.stock_available))
                                  
                     # only mandatory at validation stage
-                    elif validate:
+                    elif validate and not loc.no_traceability:
                         # no production lot defined, corresponding checks
                         # rule #1 a batch management product needs a standard production lot
                         if prod.batch_management:
