@@ -514,8 +514,8 @@ class real_average_consumption_line(osv.osv):
             
         for out in self.browse(cr, uid, ids, context=context):
             if out.product_id:
-                result[out.id]['batch_number_check'] = out.product_id.batch_management
-                result[out.id]['expiry_date_check'] = out.product_id.perishable
+                result[out.id]['batch_number_check'] = out.product_id.batch_management and not out.rac_id.cons_location_id.no_traceability
+                result[out.id]['expiry_date_check'] = out.product_id.perishable and not out.rac_id.cons_location_id.no_traceability
             # the lines with to_correct_ok=True will be red
             if out.text_error:
                 result[out.id]['to_correct_ok'] = True
@@ -551,12 +551,12 @@ class real_average_consumption_line(osv.osv):
                     error_message.append(_('The consumed qty. must be positive or 0.00'))
                     context.update({'error_message': error_message})
 
-            location = obj.rac_id.cons_location_id.id
+            location = obj.rac_id.cons_location_id
             prodlot_id = None
             expiry_date = None
 
-            batch_mandatory = obj.product_id.batch_management
-            date_mandatory = obj.product_id.perishable
+            batch_mandatory = obj.product_id.batch_management and not location.no_traceability
+            date_mandatory = obj.product_id.perishable and not location.no_traceability
         
             if batch_mandatory and obj.consumed_qty != 0.00:
                 if not obj.prodlot_id:
@@ -586,7 +586,7 @@ class real_average_consumption_line(osv.osv):
                 else:
                     prodlot_id = prod_ids[0]
 
-            product_qty = self._get_qty(cr, uid, obj.product_id.id, prodlot_id, location, obj.uom_id and obj.uom_id.id)
+            product_qty = self._get_qty(cr, uid, obj.product_id.id, prodlot_id, location.id, obj.uom_id and obj.uom_id.id)
 
             if prodlot_id and obj.consumed_qty > product_qty:
                 if not noraise:
@@ -821,16 +821,18 @@ class real_average_consumption_line(osv.osv):
         v = {'batch_mandatory': False, 'date_mandatory': False}
         d = {'uom_id': []} 
         if product_id:
+            location = False
             if location_id:
                 context.update({'location': location_id, 'uom': uom})
+                location = self.pool.get('stock.location').browse(cr, uid, location_id)
 
             context.update({'compute_child': False})
             product = self.pool.get('product.product').browse(cr, uid, product_id, context=context)
             qty_available = product.qty_available
                 
-            if product.batch_management:
+            if product.batch_management and not (location or location.no_traceability):
                 v.update({'batch_mandatory': True, 'remark': 'You must assign a batch'})
-            if product.perishable:
+            if product.perishable and not (location or location.no_traceability):
                 v.update({'date_mandatory': True, 'remark': 'You must assign an expiry date'})
 
             uom = product.uom_id.id
