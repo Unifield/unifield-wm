@@ -16,15 +16,15 @@
     # Try to create lines
     try:
         line_obj.create(cr, uid, {'product_id': ref('productA'),
-                                  'product_uom': ref('product.product_uom_unit'),
+                                  'uom_id': ref('product.product_uom_unit'),
                                   'rac_id': report_id,
                                   'consumed_qty': 5.00})
         line_obj.create(cr, uid, {'product_id': ref('productBN'),
-                                  'product_uom': ref('product.product_uom_unit'),
+                                  'uom_id': ref('product.product_uom_unit'),
                                   'rac_id': report_id,
                                   'consumed_qty': 5.00})
         line_obj.create(cr, uid, {'product_id': ref('productED'),
-                                  'product_uom': ref('product.product_uom_unit'),
+                                  'uom_id': ref('product.product_uom_unit'),
                                   'rac_id': report_id,
                                   'consumed_qty': 5.00})
     except osv.except_osv, e:

@@ -419,7 +419,7 @@
         <field name="chained_auto_packing">auto</field>
         <field name="chained_location_type">washing</field>
         <field name="virtual_location">True</field>
-        <field name="washing_ok">True</field>
+        <field name="remove_trace_ok">True</field>
         <field name="active">False</field>
     </record>
 

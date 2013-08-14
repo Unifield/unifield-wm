@@ -1,18 +1,20 @@
 -
   Test the case of an Internal move from stock to consumption units, one with
-  'Remove Traceability' option set and another one without
+  'No Traceability' option set and another one without
 -
-  Create the first picking to consumption unit with 'Remove Traceability' 
+  Create the first picking to consumption unit with 'No Traceability' 
   option set
 -
   !python {model: stock.picking}: |
     from osv import osv
     move_obj = self.pool.get('stock.move')
     partial_pick_obj = self.pool.get('stock.partial.picking')
+    partial_move_obj = self.pool.get('stock.move.memory.out')
+    prodlot_obj = self.pool.get('stock.production.lot')
 
-    cu1_id = self.search(cr, uid, [('name', '=', 'internal CU 1')])[0]
+    cu1_id = self.pool.get('stock.location').search(cr, uid, [('name', '=', 'internal CU 1')])[0]
     lotA = prodlot_obj.search(cr, uid, [('name', '=', 'LotA')])
-    lotC = prodlot_obj.search(cr,u id, [('life_date', '=', '2020-11-30')])
+    lotC = prodlot_obj.search(cr, uid, [('life_date', '=', '2020-11-30')])
 
     # Create the stock.picking
     pick_id = self.create(cr, uid, {'invoice_state': 'none',
@@ -24,35 +26,35 @@
                               'product_uom': ref('product.product_uom_unit'),
                               'product_qty': 5.00,
                               'name': 'productA',
+                              'picking_id': pick_id,
                               'reason_type_id': ref('reason_types_moves.reason_type_internal_move'),
                               'location_id': ref('stock_override.stock_location_logistic'),
                               'location_dest_id': cu1_id})
     move_obj.create(cr, uid, {'product_id': ref('productBN'),
                               'product_uom': ref('product.product_uom_unit'),
                               'product_qty': 5.00,
-                              'name': 'productA',
+                              'name': 'productBN',
+                              'picking_id': pick_id,
                               'reason_type_id': ref('reason_types_moves.reason_type_internal_move'),
                               'location_id': ref('stock_location_medical'),
                               'location_dest_id': cu1_id})
     move_obj.create(cr, uid, {'product_id': ref('productED'),
                               'product_uom': ref('product.product_uom_unit'),
                               'product_qty': 5.00,
-                              'name': 'productA',
+                              'name': 'productED',
+                              'picking_id': pick_id,
                               'reason_type_id': ref('reason_types_moves.reason_type_internal_move'),
                               'location_id': ref('stock_location_medical'),
                               'location_dest_id': cu1_id})
 
     # Process the picking
+    self.draft_force_assign(cr, uid, [pick_id])
+    self.action_assign(cr, uid, [pick_id])
     res = self.action_process(cr, uid, [pick_id])
     partial_pick_obj.copy_all(cr, uid, [res['res_id']], context=res['context'])
-    try:
-      partial_pick_obj.do_partial(cr, uid, [res['res_id']], context=res['context'])
-      assert False, "No error raised when process the internal move to a Consumption Unit without 'Remove Traceability' option set."
-    except osv.except_osv, e:
-      assert True, "No error"
-
+    
     # Update the prodlot on lines
-    for move in partial_pick_obj.browse(cr, uid, res['res_id'], context=res['context']):
+    for move in partial_pick_obj.browse(cr, uid, res['res_id'], context=res['context']).product_moves_out:
         if move.product_id.id == ref('productBN'):
             partial_move_obj.write(cr, uid, [move.id], {'prodlot_id': lotA[0]})
         elif move.product_id.id == ref('productED'):
@@ -67,34 +69,35 @@
 -
   !python {model: stock.location}: |
     prodlot_obj = self.pool.get('stock.production.lot')
-    cu1_id = self.search(cr, uid, [('name', '=', 'internal CU 1')])[0]
-    pa_value = self.browse(cr, uid, cu1_id[0], context=dict(product_id=ref('productA'))).stock_real_value
-    pbn_value = self.browse(cr, uid, cu1_id[0], context=dict(product_id=ref('productBN'))).stock_real_value
-    ped_value = self.browse(cr, uid, cu1_id[0], context=dict(product_id=ref('productED'))).stock_real_value
+    cu1_id = self.search(cr, uid, [('name', '=', 'internal CU 1')])
+    pa_value = self.browse(cr, uid, cu1_id[0], context=dict(product_id=ref('productA'))).stock_real
+    pbn_value = self.browse(cr, uid, cu1_id[0], context=dict(product_id=ref('productBN'))).stock_real
+    ped_value = self.browse(cr, uid, cu1_id[0], context=dict(product_id=ref('productED'))).stock_real
 
     lotA = prodlot_obj.search(cr, uid, [('name', '=', 'LotA')])
     lotA_value = prodlot_obj.browse(cr, uid, lotA[0], context=dict(location_id=cu1_id)).stock_available
-    lotC = prodlot_obj.search(cr,u id, [('life_date', '=', '2020-11-30')])
+    lotC = prodlot_obj.search(cr, uid, [('life_date', '=', '2020-11-30')])
     lotC_value = prodlot_obj.browse(cr, uid, lotC[0], context=dict(location_id=cu1_id)).stock_available
 
-    assert pa_value = 5.00, "Stock for productA in CU1 is not correct (expected 5.00 :: result %s)" % pa_value
-    assert pbn_value = 5.00, "Stock for productBN in CU1 is not correct (expected 5.00 :: result %s)" % pbn_value
-    assert ped_value = 5.00, "Stock for productED in CU1 is not correct (expected 5.00 :: result %s)" % ped_value
-    assert lotA_value = 0.00, "Stock for LotA is not empty in CU 1 (expected 0.00 :: result %s)" % lotA_value
-    assert lotC_value = 0.00, "Stock for LotC is not empty in CU 1 (expected 0.00 :: result %s)" % lotC_value
+    assert pa_value == 5.00, "Stock for productA in CU1 is not correct (expected 5.00 :: result %s)" % pa_value
+    assert pbn_value == 5.00, "Stock for productBN in CU1 is not correct (expected 5.00 :: result %s)" % pbn_value
+    assert ped_value == 5.00, "Stock for productED in CU1 is not correct (expected 5.00 :: result %s)" % ped_value
+    assert lotA_value == 0.00, "Stock for LotA is not empty in CU 1 (expected 0.00 :: result %s)" % lotA_value
+    assert lotC_value == 0.00, "Stock for LotC is not empty in CU 1 (expected 0.00 :: result %s)" % lotC_value
 -
-  Create the first picking to consumption unit without 'Remove Traceability'
+  Create the first picking to consumption unit without 'No Traceability'
   option set
 -
   !python {model: stock.picking}: |
     from osv import osv
     move_obj = self.pool.get('stock.move')
     partial_pick_obj = self.pool.get('stock.partial.picking')
-    partial_move_obj = self.pool.get('stock.partial.move')
+    partial_move_obj = self.pool.get('stock.move.memory.out')
+    prodlot_obj = self.pool.get('stock.production.lot')
 
-    cu2_id = self.search(cr, uid, [('name', '=', 'internal CU 2')])[0]
+    cu2_id = self.pool.get('stock.location').search(cr, uid, [('name', '=', 'internal CU 2')])[0]
     lotB = prodlot_obj.search(cr, uid, [('name', '=', 'LotB')])
-    lotD = prodlot_obj.search(cr,u id, [('life_date', '=', '2019-12-12')])
+    lotD = prodlot_obj.search(cr, uid, [('life_date', '=', '2019-12-12')])
 
     # Create the stock.picking
     pick_id = self.create(cr, uid, {'invoice_state': 'none',
@@ -106,61 +109,65 @@
                               'product_uom': ref('product.product_uom_unit'),
                               'product_qty': 10.00,
                               'name': 'productA',
+                              'picking_id': pick_id,
                               'reason_type_id': ref('reason_types_moves.reason_type_internal_move'),
                               'location_id': ref('stock_override.stock_location_logistic'),
                               'location_dest_id': cu2_id})
     move_obj.create(cr, uid, {'product_id': ref('productBN'),
                               'product_uom': ref('product.product_uom_unit'),
                               'product_qty': 10.00,
-                              'name': 'productA',
+                              'name': 'productBN',
+                              'picking_id': pick_id,
                               'reason_type_id': ref('reason_types_moves.reason_type_internal_move'),
                               'location_id': ref('stock_location_medical'),
                               'location_dest_id': cu2_id})
     move_obj.create(cr, uid, {'product_id': ref('productED'),
                               'product_uom': ref('product.product_uom_unit'),
                               'product_qty': 10.00,
-                              'name': 'productA',
+                              'name': 'productED',
+                              'picking_id': pick_id,
                               'reason_type_id': ref('reason_types_moves.reason_type_internal_move'),
                               'location_id': ref('stock_location_medical'),
                               'location_dest_id': cu2_id})
 
     # Process the picking
+    self.draft_force_assign(cr, uid, [pick_id])
+    self.action_assign(cr, uid, [pick_id])
     res = self.action_process(cr, uid, [pick_id])
     partial_pick_obj.copy_all(cr, uid, [res['res_id']], context=res['context'])
-    try:
-      partial_pick_obj.do_partial(cr, uid, [res['res_id']], context=res['context'])
-      assert False, "No error raised when process the internal move to a Consumption Unit without 'Remove Traceability' option set."
-    except osv.except_osv, e:
-      assert True, "No error"
+    for m in partial_pick_obj.browse(cr, uid, res['res_id'], context=res['context']).product_moves_out:
+      if m.product_id.id in (ref('productBN'), ref('productED')):
+        partial_move_obj.write(cr, uid, [m.id], {'prodlot_id': False})
+
+    partial_pick_obj.do_partial(cr, uid, [res['res_id']], context=res['context'])
+    assert self.browse(cr, uid, pick_id).state == 'assigned', "No error raised when process the internal move to a Consumption Unit without 'No Traceability' option set."
 
     # Update the prodlot on lines
-    for move in partial_pick_obj.browse(cr, uid, res['res_id'], context=res['context']):
+    for move in partial_pick_obj.browse(cr, uid, res['res_id'], context=res['context']).product_moves_out:
         if move.product_id.id == ref('productBN'):
             partial_move_obj.write(cr, uid, [move.id], {'prodlot_id': lotB[0]})
         elif move.product_id.id == ref('productED'):
             partial_move_obj.write(cr, uid, [move.id], {'prodlot_id': lotD[0]})
 
-    try:
-        partial_pick_obj.do_partial(cr, uid, [res['res_id']], context=res['context'])
-    except osv.except_osv, e:
-        assert False, "Error raised even if prodlot_id are set on moves"
+    partial_pick_obj.do_partial(cr, uid, [res['res_id']], context=res['context'])
+    assert self.browse(cr, uid, pick_id).state == 'done', "Error raised even if prodlot_id are set on moves"
 -
   Check the stock for each product in the CU2
 -
   !python {model: stock.location}: |
     prodlot_obj = self.pool.get('stock.production.lot')
-    cu2_id = self.search(cr, uid, [('name', '=', 'internal CU 2')])[0]
-    pa_value = self.browse(cr, uid, cu2_id[0], context=dict(product_id=ref('productA'))).stock_real_value
-    pbn_value = self.browse(cr, uid, cu2_id[0], context=dict(product_id=ref('productBN'))).stock_real_value
-    ped_value = self.browse(cr, uid, cu2_id[0], context=dict(product_id=ref('productED'))).stock_real_value
+    cu2_id = self.search(cr, uid, [('name', '=', 'internal CU 2')])
+    pa_value = self.browse(cr, uid, cu2_id[0], context=dict(product_id=ref('productA'))).stock_real
+    pbn_value = self.browse(cr, uid, cu2_id[0], context=dict(product_id=ref('productBN'))).stock_real
+    ped_value = self.browse(cr, uid, cu2_id[0], context=dict(product_id=ref('productED'))).stock_real
 
     lotB = prodlot_obj.search(cr, uid, [('name', '=', 'LotB')])
     lotB_value = prodlot_obj.browse(cr, uid, lotB[0], context=dict(location_id=cu2_id)).stock_available
-    lotD = prodlot_obj.search(cr,u id, [('life_date', '=', '2019-12-12')])
+    lotD = prodlot_obj.search(cr, uid, [('life_date', '=', '2019-12-12')])
     lotD_value = prodlot_obj.browse(cr, uid, lotD[0], context=dict(location_id=cu2_id)).stock_available
 
-    assert pa_value = 10.00, "Stock for productA in CU2 is not correct (expected 10.00 :: result %s)" % pa_value
-    assert pbn_value = 10.00, "Stock for productBN in CU2 is not correct (expected 10.00 :: result %s)" % pbn_value
-    assert ped_value = 10.00, "Stock for productED in CU2 is not correct (expected 10.00 :: result %s)" % ped_value
-    assert lotB_value = 10.00, "Stock for LotB is not good in CU 2 (expected 10.00 :: result %s)" % lotA_value
-    assert lotD_value = 10.00, "Stock for LotD is not good in CU 2 (expected 10.00 :: result %s)" % lotC_value
+    assert pa_value == 10.00, "Stock for productA in CU2 is not correct (expected 10.00 :: result %s)" % pa_value
+    assert pbn_value == 10.00, "Stock for productBN in CU2 is not correct (expected 10.00 :: result %s)" % pbn_value
+    assert ped_value == 10.00, "Stock for productED in CU2 is not correct (expected 10.00 :: result %s)" % ped_value
+    assert lotB_value == 10.00, "Stock for LotB is not good in CU 2 (expected 10.00 :: result %s)" % lotB_value
+    assert lotD_value == 10.00, "Stock for LotD is not good in CU 2 (expected 10.00 :: result %s)" % lotD_value

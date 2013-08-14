@@ -44,7 +44,8 @@ class stock_partial_picking(osv.osv_memory):
         
         picking_ids = context['active_ids']
         for obj in pick_obj.browse(cr, uid, picking_ids, context=context):
-            if obj.chained_from_in_stock_picking:
+            if obj.chained_from_in_stock_picking and obj.corresponding_in_picking_stock_picking \
+                    and obj.corresponding_in_picking_stock_picking.partner_id2:
                 return obj.corresponding_in_picking_stock_picking.partner_id2.id
             
     def _get_has_supplier(self, cr, uid, context=None):

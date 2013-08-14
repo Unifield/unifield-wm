@@ -4,26 +4,26 @@
 -
   Create the first product
 -
-  !record {model:product.product, id: productA}:
+  !record {model: product.product, id: productA}:
     name: ProductA
 -
   Create the second product, perishable
 -
-  !record {model:product.product, id: productBN}:
+  !record {model: product.product, id: productBN}:
     name: ProductBN
     perishable: True
     batch_management: True
 -
   Create the third product, expiry date mandatory
 -
-  !record {model:product.product, id: productED}:
+  !record {model: product.product, id: productED}:
     name: productED
-    perishable: False
-    batch_management: True
+    perishable: True
+    batch_management: False
 -
   Create an initial inventory for these products
 -
-  !record {model:initial.stock.inventory, id: init1}:
+  !record {model: initial.stock.inventory, id: init1}:
     name: First inventory
     inventory_line_id:
       - location_id: stock_override.stock_location_logistic
@@ -33,23 +33,25 @@
       - location_id: stock_location_medical
         product_id: productBN
         product_uom: product.product_uom_unit
-        prodlot_name: LotA
+        prodlot_name: 'LotA'
         expiry_date: '2020-12-31'
         product_qty: 50
       - location_id: stock_location_medical
         product_id: productBN
         product_uom: product.product_uom_unit
-        prodlot_name: LotB
+        prodlot_name: 'LotB'
         expiry_date: '2021-12-31'
         product_qty: 25
       - location_id: stock_location_medical
         product_id: productED
         product_uom: product.product_uom_unit
+#        prodlot_name: 'LotC'
         expiry_date: '2020-11-30'
         product_qty: 20
       - location_id: stock_location_medical
         product_id: productED
         product_uom: product.product_uom_unit
+#        prodlot_name': 'LotD'
         expiry_date: '2019-12-12'
         product_qty: 120
 -
@@ -76,11 +78,11 @@
 -
   !python {model: stock.location}: |
     create_cu1_id = self.search(cr, uid, [('name', '=', 'internal CU 1')])
-    for loc in create_cu1_id:
-        assert loc.traceability_ok, "The 'Remove Traceability' option was not set on the internal CU 1 (expected True :: result %s)" % loc.traceability_ok
-        assert loc.chained_auto_packing == 'auto', "The Chaining Type was not correctly set on internal CU 1 location (expected 'auto' :: result : %s" % loc.chained_auto_packing
+    for loc in self.browse(cr, uid, create_cu1_id):
+        assert loc.no_traceability, "The 'No Traceability' option was not set on the internal CU 1 (expected True :: result %s)" % loc.no_traceability
+        assert loc.chained_auto_packing == 'auto', "The Chaining Type was not correctly set on internal CU 1 location (expected 'auto' :: result : %s)" % loc.chained_auto_packing
         assert loc.chained_location_type == 'fixed', "The Chained Location Type was not correctly set on internal CU 1 location (expected 'fixed' :: result %s)" % loc.chained_location_type
-        assert loc.chained_location_id.id == ref('stock_washing_location'), "The Chained Location was not correclty set on internal CU 1 location (expected %s :: %s)" % (ref('stock_washing_location'), loc.chained_location_id.id)
+        assert loc.chained_location_id.id == ref('stock.stock_location_remove_traceability'), "The Chained Location was not correclty set on internal CU 1 location (expected %s :: %s)" % (ref('stock.stock_location_remove_traceability'), loc.chained_location_id.id)
 -
   Create a second internal consumption unit with no remove traceability option
 -
@@ -99,18 +101,18 @@
 -
   !python {model: stock.location}: |
     create_cu2_id = self.search(cr, uid, [('name', '=', 'internal CU 2')])
-    for loc in create_cu2_id:
-        assert not loc.traceability_ok, "The 'Remove Traceability' option was not set on the internal CU 2 (expected False :: result %s)" % loc.traceability_ok
-        assert loc.chained_auto_packing == 'auto', "The Chaining Type was not correctly set on internal CU 2 location (expected 'auto' :: result : %s" % loc.chained_auto_packing
-        assert loc.chained_location_type == 'fixed', "The Chained Location Type was not correctly set on internal CU 2 location (expected 'fixed' :: result %s)" % loc.chained_location_type
-        assert loc.chained_location_id.id == ref('stock_washing_location'), "The Chained Location was not correclty set on internal CU 1 location (expected %s :: %s)" % (ref('stock_washing_location'), loc.chained_location_id.id)
+    for loc in self.browse(cr, uid, create_cu2_id):
+        assert not loc.no_traceability, "The 'No Traceability' option was not set on the internal CU 2 (expected False :: result %s)" % loc.no_traceability
+        assert loc.chained_auto_packing == 'manual', "The Chaining Type was not correctly set on internal CU 2 location (expected 'auto' :: result : %s)" % loc.chained_auto_packing
+        assert loc.chained_location_type == 'none', "The Chained Location Type was not correctly set on internal CU 2 location (expected 'fixed' :: result %s)" % loc.chained_location_type
+        assert not loc.chained_location_id, "The Chained Location was not correclty set on internal CU 1 location (expected False :: %s)" % loc.chained_location_id.id
 -
   Create an external consumption unit with remove traceability option set
 -
   !record {model: stock.location.configuration.wizard, id: create_cu3}:
     location_name: external CU3
     location_usage: consumption_unit
-    location_type: external
+    location_type: customer
     traceability_ok: True
 -
   Confirm the creation of this external consumption unit
@@ -122,5 +124,5 @@
 -
   !python {model: stock.location}: |
     create_cu3_id = self.search(cr, uid, [('name', '=', 'external CU3')])
-    for loc in create_cu3_id:
-        assert not loc.traceability_ok, "The 'Remove Traceability' checkbox shouldn't be ticked for external CU (expected False :: result %s)" % loc.traceability_ok
+    for loc in self.browse(cr, uid, create_cu3_id):
+        assert not loc.no_traceability, "The 'No Traceability' checkbox shouldn't be ticked for external CU (expected False :: result %s)" % loc.no_traceability
