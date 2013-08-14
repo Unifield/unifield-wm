@@ -70,8 +70,8 @@ class stock_partial_move_memory_out(osv.osv_memory):
             
         for obj in self.browse(cr, uid, ids, context=context):
             if obj.product_id:
-                result[obj.id]['batch_number_check'] = obj.product_id.batch_management
-                result[obj.id]['expiry_date_check'] = obj.product_id.perishable
+                result[obj.id]['batch_number_check'] = obj.product_id.batch_management and not obj.move_id.location_id.no_traceability
+                result[obj.id]['expiry_date_check'] = obj.product_id.perishable and not obj.move_id.location_id.no_traceability
             # keep cool
             if obj.product_id.heat_sensitive_item:
                 result[obj.id]['kc_check'] = True

@@ -657,7 +657,7 @@ class stock_move(osv.osv):
                 if move.prodlot_id.type == 'standard' and not move.product_id.batch_management and move.product_id.perishable:
                     raise osv.except_osv(_('Error!'),  _('The selected product is Expiry Date Mandatory while the selected Batch number corresponds to Batch Number Mandatory.'))
             if not move.prodlot_id and move.product_qty and \
-               (move.state == 'done' and \
+               (not move.location_id.no_traceability and move.state == 'done' and \
                ( \
                    (move.product_id.track_production and move.location_id.usage == 'production') or \
                    (move.product_id.track_production and move.location_dest_id.usage == 'production') or \

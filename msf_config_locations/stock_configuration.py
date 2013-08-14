@@ -263,6 +263,7 @@ class stock_location(osv.osv):
         'central_location_ok': fields.boolean(string='If check, all products in this location are unallocated.'),
         'non_stockable_ok': fields.boolean(string='Non-stockable', help="If checked, the location will be used to store non-stockable products"),
         'remove_trace_ok': fields.boolean(string="Remove traceability location", readonly=True, help="If checked, this location can be used to remove the traceability by using a washing chaining type"),
+        'no_traceability': fields.boolean(string="No traceability", readonly=True, help="If checked, all stock moves from this location don't need traceability"),
         'output_ok': fields.function(_get_input_output, method=True, string='Output Location', type='boolean',
                                      store={'stock.location': (lambda self, cr, uid, ids, c={}: ids, ['location_id'], 20),
                                             'stock.warehouse': (_get_warehouse_output, ['lot_input_id'], 10)},
@@ -386,6 +387,7 @@ class stock_location_configuration_wizard(osv.osv_memory):
         chained_auto_packing = 'manual'
         chained_picking_type = 'internal'
         chained_location_id = False
+        no_traceability = False
         location = False
         
         for wizard in self.browse(cr, uid, ids, context=context):
@@ -462,6 +464,7 @@ class stock_location_configuration_wizard(osv.osv_memory):
                         chained_auto_packing = 'auto'
                         chained_picking_type = 'internal'
                         chained_location_id = washing_loc_id[1]
+                        no_traceability = True
                 else:
                     raise osv.except_osv(_('Error'), _('The type of the new location is not correct ! Please check the parameters and retry.'))
             elif wizard.location_type == 'customer' and wizard.location_usage == 'consumption_unit':
@@ -493,6 +496,7 @@ class stock_location_configuration_wizard(osv.osv_memory):
                                           'chained_auto_packing': chained_auto_packing,
                                           'chained_picking_type': chained_picking_type,
                                           'chained_location_id': chained_location_id,
+                                          'no_traceability': no_traceability,
                                           'optional_loc': True,
                                           }, context=context)
         else:

@@ -122,8 +122,12 @@
             <field name="name">view.location.form</field>
             <field name="model">stock.location</field>
             <field name="type">form</field>
-            <field name="inherit_id" ref="stock.view_location_form" />
+            <field name="inherit_id" ref="specific_locations.view_location_form" />
             <field name="arch" type="xml">
+                <xpath expr="//field[@name='location_category']" position="after">
+                    <field name="no_traceability" attrs="{'invisible': [('location_category', '!=', 'consumption_unit')]}" />
+                </xpath>
+
                 <xpath expr="//field[@name='active']" position="after">
                     <field name="remove_trace_ok" />
                 </xpath>

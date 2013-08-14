@@ -46,6 +46,7 @@ class stock_partial_move_memory_out(osv.osv_memory):
         uom_obj = self.pool.get('product.uom')
         # browse the object
         item = self.browse(cr, uid, id, context=context)
+        loc = item.move_id.location_id
         # picking type
         picking_real_type = item.move_id.picking_id.type
         # by default we return empty result
@@ -54,8 +55,8 @@ class stock_partial_move_memory_out(osv.osv_memory):
         if item.quantity != 0:
             # product management type - cannot use hidden checks, because validate is called within get_vals function, would result in infinite loop
             data = prod_obj.read(cr, uid, [item.product_id.id], ['batch_management', 'perishable', 'type', 'subtype'], context=context)[0]
-            management = data['batch_management']
-            perishable = data['perishable']
+            management = data['batch_management'] and not loc.no_traceability
+            perishable = data['perishable'] and not loc.no_traceability
             type = data['type']
             subtype = data['subtype']
             if management:
