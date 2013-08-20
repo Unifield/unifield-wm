@@ -766,18 +766,18 @@ class sale_order(osv.osv):
 
         return result
 
-    def _hook_procurement_create_line_condition(self, cr, uid, ids, context=None, *args, **kwargs):
-        '''
-        Please copy this to your module's method also.
-        This hook belongs to the action_ship_create method from sale>sale.py
-             
-        - allow to customize the execution condition
-        '''
-        line = kwargs['line']
-        result = super(sale_order, self)._hook_procurement_create_line_condition(cr, uid, ids, context=context, *args, **kwargs)
-        
-        # if make_to_stock and procurement_request, no procurement is created
-        return result and not(line.type == 'make_to_stock' and line.order_id.procurement_request)
+#    def _hook_procurement_create_line_condition(self, cr, uid, ids, context=None, *args, **kwargs):
+#        '''
+#        Please copy this to your module's method also.
+#        This hook belongs to the action_ship_create method from sale>sale.py
+#             
+#        - allow to customize the execution condition
+#        '''
+#        line = kwargs['line']
+#        result = super(sale_order, self)._hook_procurement_create_line_condition(cr, uid, ids, context=context, *args, **kwargs)
+#        
+#        # if make_to_stock and procurement_request, no procurement is created
+#        return result and not(line.type == 'make_to_stock' and line.order_id.procurement_request)
     
     def do_order_confirm_method(self, cr, uid, ids, context=None):
         '''

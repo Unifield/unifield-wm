@@ -3233,7 +3233,7 @@ class sale_order(osv.osv):
             proc = self.pool.get('procurement.order').browse(cr, uid, [proc_id], context=context)
             pick_id = proc and proc[0] and proc[0].move_id and proc[0].move_id.picking_id and proc[0].move_id.picking_id.id or False
             if pick_id:
-                wf_service.trg_validate(uid, 'stock.picking', [pick_id], 'button_confirm', cr)
+                wf_service.trg_validate(uid, 'stock.picking', pick_id, 'button_confirm', cr)
 
                 # We also do a first 'check availability': cancel then check
                 pick_obj.cancel_assign(cr, uid, [pick_id], context)
