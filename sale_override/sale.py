@@ -1017,8 +1017,10 @@ class sale_order(osv.osv):
                     if line.state == 'draft':
                         line_obj.write(cr, uid, [line.id], {'state': 'sourced'}, context=context)
                     
-            for proc_id in proc_ids:
-                wf_service.trg_validate(uid, 'procurement.order', proc_id, 'button_confirm', cr)
+            for proc in self.pool.get('procurement.order').browse(cr, uid, proc_ids, context=context):
+                wf_service.trg_validate(uid, 'procurement.order', proc.id, 'button_confirm', cr)
+                if proc.procure_method == 'make_to_stock':
+                    wf_service.trg_validate(uid, 'procurement.order', proc.id, 'button_check', cr)
                 
             # the Fo is sourced we set the state
             self.write(cr, uid, [order.id], {'state': 'sourced'}, context=context)
