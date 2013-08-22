@@ -4,6 +4,9 @@ Created on 15 mai 2012
 @author: openerp
 '''
 
+import os
+import struct
+
 from osv import osv
 from osv import fields
 
@@ -18,7 +21,21 @@ from osv import fields
 #    and finally remove all dots (unexpected dots appears when the system
 #    language is not english)
 def get_valid_xml_name(*args):
-    return u"_".join(map(lambda x: unicode(x), filter(None, args))).replace('.', '')
+    return u"_".join(map(unicode, filter(None, args))).replace('.', '')
+
+def cool_unique_id(length):
+    n = length / 2 + length % 2
+    return ("%02x" * n % struct.unpack('B' * n, os.urandom(n)))[:length]
+
+class sale_order(osv.osv):
+    
+    _inherit = 'sale.order'
+    
+    def get_unique_xml_name(self, cr, uid, uuid, table_name, res_id):
+        so = self.browse(cr, uid, res_id)
+        return get_valid_xml_name(uuid, 'fo', so.name, cool_unique_id(4))
+    
+sale_order()
 
 class fiscal_year(osv.osv):
     
