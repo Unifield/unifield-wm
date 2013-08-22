@@ -33,6 +33,7 @@ class message(osv.osv):
     _columns = {
         'identifier': fields.char('Identifier', size=128, select=True),
         'sent': fields.boolean('Sent to destination ?', select=True),
+        'to_be_recovered': fields.boolean('Has to be sent to the emitter?', select=True),
         'remote_call': fields.text('Method to call', required = True),
         'arguments': fields.text('Arguments of the method', required = True), 
         'destination': fields.many2one('sync.server.entity', string="Destination Instance", select=True),
@@ -101,7 +102,7 @@ class message(osv.osv):
             return ids[0]
         else:
             return False
-        
+
     def get_message_packet(self, cr, uid, entity, size, context=None):
         """
             get_message_packet() is called by the XML RPC method get_message() when the client instance try to pull its
@@ -116,24 +117,22 @@ class message(osv.osv):
             @return : list : list of messages
         """
         self.pool.get('sync.server.entity').set_activity(cr, uid, entity, _('Pulling messages...'))
-
-        ids = self.search(cr, uid, [('destination', '=', entity.id), ('sent', '=', False)], limit=size, context=context)
-        if not ids:
-            return False
-
-        packet = []
-        for data in self.browse(cr, uid, ids, context=context):
-            message = {
+        return [
+            {
                 'id': data.identifier,
                 'call': data.remote_call,
                 'args': data.arguments, 
                 'source': data.source.name,
                 'sequence' : data.sequence,
             }
-            packet.append(message)
-             
-        return packet
-    
+            for data in self.browse(cr, uid,
+                self.search(cr, uid, ['|',
+                        '&',('destination','=',entity.id),('sent','=',False),
+                        '&',('source','=',entity.id),('to_be_recovered','=',True),
+                    ], limit=size, context=context),
+                context=context)
+        ]
+
     def set_message_as_received(self, cr, uid, entity, message_uuids, context=None):
         """
             Called by XML RPC method message_received when the client instance pull messages and it succeeds.
@@ -146,14 +145,19 @@ class message(osv.osv):
 
             @return : True or raise an error
         """
-        self.pool.get('sync.server.entity').set_activity(cr, uid, entity, _('Confirm messages...'))
+        self.pool.get('sync.server.entity').set_activity(cr, uid, entity, _('Confirming messages...'))
 
-        ids = self.search(cr, uid, [('identifier', 'in', message_uuids), ('destination', '=', entity.id)], context=context)
-        if ids:
-            self.write(cr, uid, ids, {'sent' : True}, context=context)
+        self.write(cr, uid,
+            self.search(cr, uid, [('identifier','in',message_uuids),('destination','=',entity.id)], context=context),
+            {'sent':True}, context=context)
+
+        self.write(cr, uid,
+            self.search(cr, uid, [('identifier','in',message_uuids),('source','=',entity.id)], context=context),
+            {'to_be_recovered':False}, context=context)
 
         return True
-        
+
+
     def recovery(self, cr, uid, entity, start_seq, context=None):
         """
             Mark all messages owned by the entity itself as not sent.
@@ -167,14 +171,14 @@ class message(osv.osv):
 
             @return : True or raise an error
         """
-        ids = self.search(cr, uid, [('sequence', '>', start_seq), ('destination', '=', entity.id)], context=context)
-        if ids:
-            self._logger.debug("recovery %s" % ids)
-            self.write(cr, uid, ids, {'sent' : False}, context=context)
-            self._logger.debug("These ids will be recovered: %s" % str(ids))
-        else:
-            self._logger.debug("No ids to be recover! domain=%s" % str([('sequence', '>=', start_seq), ('destination', '=', entity.id)]))
+        ids = self.search(cr, uid, [('sequence','>',start_seq),('source','=',entity.id)], context=context)
+        self.write(cr, uid, ids, {'to_be_recovered':True}, context=context)
+        self._logger.debug("These messages will be sent back to the emitter: %s" % ids)
+
+        ids = self.search(cr, uid, [('sequence','>',start_seq),('destination','=',entity.id)], context=context)
+        self.write(cr, uid, ids, {'sent':False}, context=context)
+        self._logger.debug("These messages will be re-sent to the destination: %s" % ids)
+
         return True
-        
+
 message()
-    

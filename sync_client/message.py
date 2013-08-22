@@ -194,22 +194,30 @@ class message_received(osv.osv):
 
     _logger = logging.getLogger('sync.client')
 
+    _sql_constraints = [
+        ('identifier_unique','UNIQUE(identifier)','You can\'t create messages that already exists in the database!'),
+    ]
+
     def unfold_package(self, cr, uid, package, context=None):
+        entity_obj = self.pool.get( "sync.client.entity")
+        entity = entity_obj.get_entity(cr, uid, context=context)
+
         for data in package:
-            ids = self.search(cr, uid, [('identifier', '=', data['id'])], context=context)
-            if ids:
-                sync_log(self, 'Message %s already in the database' % data['id'])
+            entity_obj.write(cr, uid, entity.id,
+                {'message_last':max(data['sequence'], entity.message_last)},
+                context=context)
+
+            if self.search(cr, uid, [('identifier','=',data['id'])], context=context):
+                self._logger.debug('Message %s already in the database' % data['id'])
                 continue
+
             self.create(cr, uid, {
                 'identifier' : data['id'],
+                'run' : (data['source'] == entity.name),
                 'remote_call' : data['call'],
                 'arguments' : data['args'],
                 'sequence' : data['sequence'],
                 'source' : data['source'] }, context=context)
-            
-            entity_obj = self.pool.get( "sync.client.entity")
-            entity = entity_obj.get_entity(cr, uid, context=context)
-            entity_obj.write(cr, uid, entity.id, {'message_last' :data['sequence']}, context=context)
 
     def get_model_and_method(self, remote_call):
         remote_call = remote_call.strip()
@@ -226,14 +234,16 @@ class message_received(osv.osv):
         return res
 
     def execute(self, cr, uid, ids=False, context=None):
+        entity = self.pool.get('sync.client.entity').get_entity(cr, uid, context=context)
         if not ids:
-            ids = self.search(cr, uid, [('run', '=', False)], context=context)
+            ids = self.search(cr, uid, [('run','=',False),('source','!=',entity.name)], order='sequence asc', context=context)
         if not ids: return 0
         execution_date = fields.datetime.now()
         self.write(cr, uid, ids, {'execution_date' : execution_date}, context=context)
         sync_context = dict(context or {}, sync_message_execution=True)
         for message in self.browse(cr, uid, ids, context=context):
-            if message.run: #UTP-682: double check to make sure if the message has been executed, then skip it
+            #UTP-682: double check to make sure if the message has been executed, then skip it
+            if not (not message.run and message.source != entity.name):
                 continue
 
             cr.execute("SAVEPOINT exec_message")

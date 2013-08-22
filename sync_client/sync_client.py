@@ -683,7 +683,8 @@ class Entity(osv.osv):
         logger = context.get('logger')
         messages = self.pool.get(context.get('message_received_model', 'sync.client.message_received'))
 
-        message_ids = messages.search(cr, uid, [('run', '=', False)], context=context)
+        entity = self.pool.get('sync.client.entity').get_entity(cr, uid, context=context)
+        message_ids = messages.search(cr, uid, [('run','=',False),('source','!=',entity.name)], order='sequence asc', context=context)
         messages_count = len(message_ids)
         if messages_count == 0: return 0
 
