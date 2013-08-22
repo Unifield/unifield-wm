@@ -34,6 +34,8 @@ from tempfile import TemporaryFile
 from product._common import rounding
 from spreadsheet_xml.spreadsheet_xml_write import SpreadsheetCreator
 
+from operator import itemgetter
+from itertools import groupby
 
 class real_average_consumption(osv.osv):
     _name = 'real.average.consumption'
@@ -377,6 +379,71 @@ class real_average_consumption(osv.osv):
                 'target': 'new',
                 }
 
+    def copy_all(self, cr, uid, ids, context=None):
+        '''
+        Fill all lines according to defined location with pre-filled lines
+        '''
+        if context is None:
+            context = {}
+
+        self.write(cr, uid, ids, {'created_ok': True})    
+        for report in self.browse(cr, uid, ids, context=context):
+
+            #~ cr.execute('select distinct product_id, prodlot_id, expired_date from stock_move where location_id = %s', (report.cons_location_id.id, ))
+            cr.execute('''select distinct sm.product_id, sm.prodlot_id, sm.expired_date, 
+                                pp.batch_management, pp.perishable, pp.product_tmpl_id, 
+                                pt.uom_id 
+                            from stock_move sm, product_product pp, product_template pt 
+                            where sm.location_id = %s and pp.id = sm.product_id and pt.id = pp.product_tmpl_id;''', (report.cons_location_id.id, ))
+
+            dict1 = cr.dictfetchall()
+            #~ cr.execute('select distinct product_id, prodlot_id, expired_date from stock_move where location_dest_id = %s', (report.cons_location_id.id, ))
+            cr.execute('''select distinct sm.product_id, sm.prodlot_id, sm.expired_date, 
+                                pp.batch_management, pp.perishable, pp.product_tmpl_id, 
+                                pt.uom_id 
+                            from stock_move sm, product_product pp, product_template pt 
+                            where sm.location_dest_id = %s and pp.id = sm.product_id and pt.id = pp.product_tmpl_id;''', (report.cons_location_id.id, )) 
+            dict2 = cr.dictfetchall()
+            products_by_location = dict1 + dict2
+
+            if report.line_ids:
+                for line in report.line_ids:
+                    self.pool.get('real.average.consumption.line').unlink(cr, uid, line.id, context=context)
+            context['location_id'] = report.cons_location_id.id
+            for product in products_by_location:
+                batch_mandatory = product['batch_management']
+                date_mandatory = product['perishable']
+                values = {'product_id': product['product_id'],
+                            'uom_id': product['uom_id'],
+                            'consumed_qty': 0.00,
+                            'batch_mandatory': batch_mandatory,
+                            'date_mandatory': date_mandatory,
+                            'expiry_date': product['expired_date'],
+                            'prodlot_id': product['prodlot_id'],
+                            'rac_id': report.id,}
+
+                v = self.pool.get('real.average.consumption.line').product_onchange(cr, uid, [], product['product_id'], report.cons_location_id.id,
+                                                                        product['uom_id'], False, context=context)['value']
+                values.update(v)
+                if batch_mandatory:
+                    values.update({'remark': 'You must assign a batch number'})
+                if date_mandatory:
+                    values.update({'remark': 'You must assign an expiry date'})
+                if product['prodlot_id']:
+                    product_qty = self.pool.get('stock.production.lot')._get_stock(cr, uid, product['prodlot_id'], [], None, context=context)
+                    print 'product_qty', product_qty
+                    values.update({'product_qty':product_qty[product['prodlot_id']]})
+                self.pool.get('real.average.consumption.line').create(cr, uid, values, context=context)
+        
+        self.write(cr, uid, ids, {'created_ok': False})    
+        return {'type': 'ir.actions.act_window',
+                'res_model': 'real.average.consumption',
+                'view_type': 'form',
+                'view_mode': 'form',
+                'res_id': ids[0],
+                'target': 'dummy',
+                'context': context}
+
     def fill_lines(self, cr, uid, ids, context=None):
         '''
         Fill all lines according to defined nomenclature level and sublist
@@ -587,7 +654,6 @@ class real_average_consumption_line(osv.osv):
                     prodlot_id = prod_ids[0]
 
             product_qty = self._get_qty(cr, uid, obj.product_id.id, prodlot_id, location, obj.uom_id and obj.uom_id.id)
-
             if prodlot_id and obj.consumed_qty > product_qty:
                 if not noraise:
                     raise osv.except_osv(_('Error'), 
@@ -598,6 +664,11 @@ class real_average_consumption_line(osv.osv):
                     # uf-1344 "quantity NOT in stock with this ED => line should be in red, no batch picked up"
                     prodlot_id = None
             #recursion: can't use write
+            if not prodlot_id and obj.prodlot_id:
+                prodlot_id = obj.prodlot_id.id
+                product_qty = obj.product_qty
+            if not expiry_date and obj.expiry_date:
+                expiry_date = obj.expiry_date
             cr.execute('UPDATE '+self._table+' SET product_qty=%s, batch_mandatory=%s, date_mandatory=%s, prodlot_id=%s, expiry_date=%s  where id=%s', (product_qty, batch_mandatory, date_mandatory, prodlot_id, expiry_date, obj.id))
 
         return True
