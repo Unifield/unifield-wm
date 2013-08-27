@@ -473,6 +473,7 @@ class hqn_creation(client_creation, unittest.TestCase):
 
     @unittest.skipIf(skipGroups, "Group creation desactivated")
     def test_30_make_groups_coordo(self):
+        self.add_to_group('Coordinations of %s' % self.db.name, 'COORDINATIONS')
         self.add_to_group('OC_%02d' % self.index, 'OC')
         for i in range(1, coordo_count+1):
             self.add_to_group('HQ + Mission %s' % i, 'HQ + MISSION')
