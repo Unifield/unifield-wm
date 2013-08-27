@@ -666,6 +666,8 @@ class product_pricelist_promo(osv.osv):
         coeff2 = 1.111110
 
         if b_conf_id and len(b_conf_id) > 0:
+            bareme = self.pool.get('pricelist.promo.configuration').browse(cr, uid, b_conf_id[0]).bareme_jaune.id
+            coeff = self.pool.get('pricelist.promo.configuration').browse(cr, uid, b_conf_id[0]).bareme_jaune.valeur
             bareme2 = self.pool.get('pricelist.promo.configuration').browse(cr, uid, b_conf_id[0]).bareme_page2.id
             coeff2 = self.pool.get('pricelist.promo.configuration').browse(cr, uid, b_conf_id[0]).bareme_page2.valeur
 
@@ -922,7 +924,7 @@ class product_in_promo(osv.osv):
             if promo_in.new_prix_jaune != 0:
                 res[promo_in.id] = promo_in.new_prix_jaune
             elif promo_in.product_id:
-                res[promo_in.id] = promo_in.product_id.list_price*b_coeff
+                res[promo_in.id] = promo_in.product_id.prix_blanche*b_coeff
             else:
                 res[promo_in.id] = False
 
@@ -952,7 +954,7 @@ class product_in_promo(osv.osv):
                 b_conf_id = self.pool.get('pricelist.promo.configuration').search(cr, uid, [])
                 b_conf = self.pool.get('pricelist.promo.configuration').browse(cr, uid, b_conf_id)
                 b_coeff = b_conf[0].bareme_jaune.valeur
-                v['prix_jaune'] = p.list_price*b_coeff
+                v['prix_jaune'] = p.prix_blanche*b_coeff
                 v['prix_achat'] = p.prix_achat
         return {'value': v}
             
@@ -1269,7 +1271,7 @@ class product_in_mea(osv.osv):
             if mea_in.new_prix_jaune:
                 res[mea_in.id] = mea_in.new_prix_jaune
             elif mea_in.product_id:
-                res[mea_in.id] = mea_in.product_id.list_price*b_coeff
+                res[mea_in.id] = mea_in.product_id.prix_blanche*b_coeff
             else:
                 res[mea_in.id] = False
 
@@ -1299,7 +1301,7 @@ class product_in_mea(osv.osv):
                 b_conf_id = self.pool.get('pricelist.mea.configuration').search(cr, uid, [])
                 b_conf = self.pool.get('pricelist.mea.configuration').browse(cr, uid, b_conf_id)
                 b_coeff = b_conf[0].bareme_jaune.valeur
-                v['prix_jaune'] = p.list_price*b_coeff
+                v['prix_jaune'] = p.prix_blanche*b_coeff
                 v['prix_achat'] = p.prix_achat
         return {'value': v}
             
