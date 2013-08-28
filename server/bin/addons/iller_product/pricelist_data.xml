@@ -221,7 +221,10 @@
             <field name="valeur" eval="1.33" />
             <field name="special" eval="True" />
         </record>
-
+        <record id="product_pricelist_prix_jaune" model="product.pricelist.bareme">
+            <field name="name">Coeff jaune</field>
+            <field name="valeur" eval="1.03" />
+        </record>
 
         <!-- Calcul des prix -->
         <record id="product_price_type_promo_blanche" model="product.price.type">
@@ -232,7 +235,7 @@
         
         <record id="product_price_type_promo_jaune" model="product.price.type">
             <field name="name">Prix promo jaune</field>
-            <field name="field">list_price</field>
+            <field name="field">prix_blanche</field>
             <field name="currency_id" ref="base.EUR" />
         </record>
 
