@@ -4,7 +4,6 @@ access_pricelist_promo_configuration,pricelist.promo.configuration,iller_product
 access_product_nouveau_prix_achat,product.nouveau.prix.achat,iller_product.model_product_nouveau_prix_achat,,1,1,1,1
 access_product_pricelist_promo,product.pricelist.promo,iller_product.model_product_pricelist_promo,,1,1,1,1
 access_product_pricelist_promo_in,product.pricelist.promo.in,iller_product.model_product_pricelist_promo_in,,1,1,1,1
-access_product2_pricelist_promo_in,product2.pricelist.promo.in,iller_product.model_product2_pricelist_promo_in,,1,1,1,1
 access_product_tarifs_speciaux,product.tarifs.speciaux,iller_product.model_product_tarifs_speciaux,,1,1,1,1
 access_product_tarif_special_client,product.tarif.special.client,iller_product.model_product_tarif_special_client,,1,1,1,1
 access_product_tarif_special_client_wizard,product.tarif.special.client.wizard,iller_product.model_product_tarif_special_client_wizard,,1,1,1,1
@@ -23,8 +22,6 @@ access_wizard_print_pricelist_cat,wizard.print.pricelist.cat,iller_product.model
 "access_product_pricelist_promo_mgmt","iller.product.pricelist.promo.mgmt","model_product_pricelist_promo","iller_product.group_iller_tarif",1,1,1,1
 "access_product_pricelist_promo_in","iller.product.pricelist.promo.in","model_product_pricelist_promo_in","base.group_user",1,0,0,0
 "access_product_pricelist_promo_in_mgmt","iller.product.pricelist.promo.in.mgmt","model_product_pricelist_promo_in","iller_product.group_iller_tarif",1,1,1,1
-"access_product2_pricelist_promo_in","iller.product2.pricelist.promo.in","model_product2_pricelist_promo_in","base.group_user",1,0,0,0
-"access_product2_pricelist_promo_in_mgmt","iller.product2.pricelist.promo.in.mgmt","model_product2_pricelist_promo_in","iller_product.group_iller_tarif",1,1,1,1
 "access_product_tarifs_speciaux","iller.product.tarifs.speciaux","model_product_tarifs_speciaux","base.group_user",1,0,0,0
 "access_product_tarifs_speciaux_mgmt","iller.product.tarifs.speciaux.mgmt","model_product_tarifs_speciaux","iller_product.group_iller_tarif",1,1,1,1
 "access_product_tarif_special_client","iller.product.tarif.special.client","model_product_tarif_special_client","base.group_user",1,0,0,0
@@ -50,7 +47,6 @@ access_wizard_print_pricelist_cat,wizard.print.pricelist.cat,iller_product.model
 "access_product_nouveau_prix_achat_compta","iller.product.nouveau.prix.achat.mgmt","model_product_nouveau_prix_achat","account.group_account_manager",1,1,1,1
 "access_product_pricelist_promo_compta","iller.product.pricelist.promo.mgmt","model_product_pricelist_promo","account.group_account_manager",1,1,1,1
 "access_product_pricelist_promo_in_compta","iller.product.pricelist.promo.in.mgmt","model_product_pricelist_promo_in","account.group_account_manager",1,1,1,1
-"access_product2_pricelist_promo_in_compta","iller.product2.pricelist.promo.in.mgmt","model_product2_pricelist_promo_in","account.group_account_manager",1,1,1,1
 "access_product_tarifs_speciaux_compta","iller.product.tarifs.speciaux.mgmt","model_product_tarifs_speciaux","account.group_account_manager",1,1,1,1
 "access_product_tarif_special_client_compta","iller.product.tarif.special.client.mgmt","model_product_tarif_special_client","account.group_account_manager",1,1,1,1
 "access_product_tarif_special_client_wizard_compta","iller.product.tarif.special.client.wizard.mgmt","model_product_tarif_special_client_wizard","account.group_account_manager",1,1,1,1
@@ -72,7 +68,6 @@ access_wizard_print_pricelist_cat,wizard.print.pricelist.cat,iller_product.model
 "access_product_nouveau_prix_achat_distri","iller.product.nouveau.prix.achat.mgmt","model_product_nouveau_prix_achat","iller_groups.group_distri",1,1,1,1
 "access_product_pricelist_promo_distri","iller.product.pricelist.promo.mgmt","model_product_pricelist_promo","iller_groups.group_distri",1,1,1,1
 "access_product_pricelist_promo_in_distri","iller.product.pricelist.promo.in.mgmt","model_product_pricelist_promo_in","iller_groups.group_distri",1,1,1,1
-"access_product2_pricelist_promo_in_distri","iller.product2.pricelist.promo.in.mgmt","model_product2_pricelist_promo_in","iller_groups.group_distri",1,1,1,1
 "access_product_tarifs_speciaux_distri","iller.product.tarifs.speciaux.mgmt","model_product_tarifs_speciaux","iller_groups.group_distri",1,1,1,1
 "access_product_tarif_special_client_distri","iller.product.tarif.special.client.mgmt","model_product_tarif_special_client","iller_groups.group_distri",1,1,1,1
 "access_product_tarif_special_client_wizard_distri","iller.product.tarif.special.client.wizard.mgmt","model_product_tarif_special_client_wizard","iller_groups.group_distri",1,1,1,1
@@ -94,7 +89,6 @@ access_wizard_print_pricelist_cat,wizard.print.pricelist.cat,iller_product.model
 "access_product_nouveau_prix_achat_achpro","iller.product.nouveau.prix.achat.mgmt","model_product_nouveau_prix_achat","purchase.group_purchase_manager",1,1,1,1
 "access_product_pricelist_promo_achpro","iller.product.pricelist.promo.mgmt","model_product_pricelist_promo","purchase.group_purchase_manager",1,1,1,1
 "access_product_pricelist_promo_in_achpro","iller.product.pricelist.promo.in.mgmt","model_product_pricelist_promo_in","purchase.group_purchase_manager",1,1,1,1
-"access_product2_pricelist_promo_in_achpro","iller.product2.pricelist.promo.in.mgmt","model_product2_pricelist_promo_in","purchase.group_purchase_manager",1,1,1,1
 "access_product_tarifs_speciaux_achpro","iller.product.tarifs.speciaux.mgmt","model_product_tarifs_speciaux","purchase.group_purchase_manager",1,1,1,1
 "access_product_tarif_special_client_achpro","iller.product.tarif.special.client.mgmt","model_product_tarif_special_client","purchase.group_purchase_manager",1,1,1,1
 "access_product_tarif_special_client_wizard_achpro","iller.product.tarif.special.client.wizard.mgmt","model_product_tarif_special_client_wizard","purchase.group_purchase_manager",1,1,1,1
@@ -116,7 +110,6 @@ access_wizard_print_pricelist_cat,wizard.print.pricelist.cat,iller_product.model
 "access_product_nouveau_prix_achat_rh","iller.product.nouveau.prix.achat.mgmt","model_product_nouveau_prix_achat","hr.group_hr_manager",1,1,1,1
 "access_product_pricelist_promo_rh","iller.product.pricelist.promo.mgmt","model_product_pricelist_promo","hr.group_hr_manager",1,1,1,1
 "access_product_pricelist_promo_in_rh","iller.product.pricelist.promo.in.mgmt","model_product_pricelist_promo_in","hr.group_hr_manager",1,1,1,1
-"access_product2_pricelist_promo_in_rh","iller.product2.pricelist.promo.in.mgmt","model_product2_pricelist_promo_in","hr.group_hr_manager",1,1,1,1
 "access_product_tarifs_speciaux_rh","iller.product.tarifs.speciaux.mgmt","model_product_tarifs_speciaux","hr.group_hr_manager",1,1,1,1
 "access_product_tarif_special_client_rh","iller.product.tarif.special.client.mgmt","model_product_tarif_special_client","hr.group_hr_manager",1,1,1,1
 "access_product_tarif_special_client_wizard_rh","iller.product.tarif.special.client.wizard.mgmt","model_product_tarif_special_client_wizard","hr.group_hr_manager",1,1,1,1
@@ -136,16 +129,12 @@ access_wizard_print_pricelist_cat,wizard.print.pricelist.cat,iller_product.model
 "access_pricelist_configuration_mea_compta","iller.pricelist.configuration","model_pricelist_mea_configuration","account.group_account_manager",1,1,1,1
 "access_product_pricelist_promo_mea_compta","iller.product.pricelist.promo.mgmt","model_product_pricelist_mea","account.group_account_manager",1,1,1,1
 "access_product_pricelist_promo_in_mea_compta","iller.product.pricelist.promo.in.mgmt","model_product_pricelist_mea_in","account.group_account_manager",1,1,1,1
-"access_product2_pricelist_promo_in_mea_compta","iller.product2.pricelist.promo.in.mgmt","model_product2_pricelist_mea_in","account.group_account_manager",1,1,1,1
 "access_pricelist_configuration_mea_distri","iller.pricelist.configuration","model_pricelist_mea_configuration","iller_groups.group_distri",1,1,1,1
 "access_product_pricelist_promo_mea_distri","iller.product.pricelist.promo.mgmt","model_product_pricelist_mea","iller_groups.group_distri",1,1,1,1
 "access_product_pricelist_promo_in_mea_distri","iller.product.pricelist.promo.in.mgmt","model_product_pricelist_mea_in","iller_groups.group_distri",1,1,1,1
-"access_product2_pricelist_promo_in_mea_distri","iller.product2.pricelist.promo.in.mgmt","model_product2_pricelist_mea_in","iller_groups.group_distri",1,1,1,1
 "access_pricelist_configuration_mea_achpro","iller.pricelist.configuration","model_pricelist_mea_configuration","purchase.group_purchase_manager",1,1,1,1
 "access_product_pricelist_promo_mea_achpro","iller.product.pricelist.promo.mgmt","model_product_pricelist_mea","purchase.group_purchase_manager",1,1,1,1
 "access_product_pricelist_promo_in_mea_achpro","iller.product.pricelist.promo.in.mgmt","model_product_pricelist_mea_in","purchase.group_purchase_manager",1,1,1,1
-"access_product2_pricelist_promo_in_mea_achpro","iller.product2.pricelist.promo.in.mgmt","model_product2_pricelist_mea_in","purchase.group_purchase_manager",1,1,1,1
 "access_pricelist_configuration_mea_rh","iller.pricelist.configuration","model_pricelist_mea_configuration","hr.group_hr_manager",1,1,1,1
 "access_product_pricelist_promo_mea_rh","iller.product.pricelist.promo.mgmt","model_product_pricelist_mea","hr.group_hr_manager",1,1,1,1
 "access_product_pricelist_promo_in_mea_rh","iller.product.pricelist.promo.in.mgmt","model_product_pricelist_mea_in","hr.group_hr_manager",1,1,1,1
-"access_product2_pricelist_promo_in_mea_rh","iller.product2.pricelist.promo.in.mgmt","model_product2_pricelist_mea_in","hr.group_hr_manager",1,1,1,1

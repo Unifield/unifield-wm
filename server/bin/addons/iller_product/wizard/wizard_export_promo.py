@@ -50,20 +50,6 @@ class export_tarif_promo(wizard.interface):
             export += "\r\n"
 
         export += "\r\n"
-        export += "PAGE2" + "\r\n"
-        export += "CODE;PRODUIT;PRIX" + "\r\n"
-        for pp2 in promo.product2_ids:
-            p2 = pp2.product_id
-            p_price = 0.00
-            if p2.id in products:
-                if data['form']['type'] == 'blanche':
-                    p_price = p2.prix_blanche
-                else:
-                    p_price = round(pp2.prix_jaune,2)
-            else:
-                p_price = round(p2.list_price*b_conf_obj.browse(cr, uid, b_conf_ids[0]).bareme_page2.valeur,2)
-            export += "%s;%s;%.2f" % (p2.default_code,p2.name, p_price)
-            export += "\r\n"
 
         data['name'] = 'promo.csv'
         data['file'] = base64.encodestring(export.encode("utf-8"))
