@@ -46,8 +46,6 @@ class print_mea(report_sxw.rml_parse):
             if b_conf_ids:
                 if price_type == 'jaune':
                     b_coeff = b_conf_obj.browse(cr, uid, b_conf_ids[0]).bareme_jaune.valeur
-                else:
-                    b_coeff = b_conf_obj.browse(cr, uid, b_conf_ids[0]).bareme_page2.valeur
 
             prix_vente = p_obj.read(cr, uid, product_id, ['list_price']).get('list_price')
 

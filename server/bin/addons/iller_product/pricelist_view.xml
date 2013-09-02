@@ -75,7 +75,6 @@
                 <form string="Configuration des promos">
                     <field name="name" colspan="4" readonly="1"/>
                     <field name="bareme_jaune" />
-                    <field name="bareme_page2" />
                 </form>
             </field>
         </record>
@@ -111,7 +110,6 @@
                 <form string="Configuration des mises en avant">
                     <field name="name" colspan="4" readonly="1"/>
                     <field name="bareme_jaune" />
-                    <field name="bareme_page2" />
                 </form>
             </field>
         </record>
