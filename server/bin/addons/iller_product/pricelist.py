@@ -83,7 +83,6 @@ class pricelist_promo_configuration(osv.osv):
     _columns = {
         'name': fields.char(size=64, string='Nom', required=True, readonly=True),
         'bareme_jaune': fields.many2one('product.pricelist.bareme', string='Barème jaune', required=True),
-        'bareme_page2': fields.many2one('product.pricelist.bareme', string='Barème Page 2', required=True),
     }
 
 pricelist_promo_configuration()
@@ -645,14 +644,11 @@ class product_pricelist_promo(osv.osv):
         base = 1
         bareme = 15
         coeff = 1.136300
-        bareme_2 = 16
-        coeff2 = 1.111110
 
         if b_conf_id and len(b_conf_id) > 0:
             bareme = self.pool.get('pricelist.promo.configuration').browse(cr, uid, b_conf_id[0]).bareme_jaune.id
             coeff = self.pool.get('pricelist.promo.configuration').browse(cr, uid, b_conf_id[0]).bareme_jaune.valeur
-            bareme2 = self.pool.get('pricelist.promo.configuration').browse(cr, uid, b_conf_id[0]).bareme_page2.id
-            coeff2 = self.pool.get('pricelist.promo.configuration').browse(cr, uid, b_conf_id[0]).bareme_page2.valeur
+
 
         items = []
         
@@ -813,7 +809,6 @@ class pricelist_mea_configuration(osv.osv):
     _columns = {
         'name': fields.char(size=64, string='Nom', required=True, readonly=True),
         'bareme_jaune': fields.many2one('product.pricelist.bareme', string='Barème jaune', required=True),
-        'bareme_page2': fields.many2one('product.pricelist.bareme', string='Barème Page 2', required=True),
     }
 
 pricelist_mea_configuration()
@@ -1068,12 +1063,6 @@ class product_pricelist_mea(osv.osv):
         base = 1
         bareme = 15
         coeff = 1.136300
-        bareme_2 = 16
-        coeff2 = 1.111110
-
-        if b_conf_id and len(b_conf_id) > 0:
-            bareme2 = self.pool.get('pricelist.mea.configuration').browse(cr, uid, b_conf_id[0]).bareme_page2.id
-            coeff2 = self.pool.get('pricelist.mea.configuration').browse(cr, uid, b_conf_id[0]).bareme_page2.valeur
 
         items = []
         

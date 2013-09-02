@@ -1937,13 +1937,11 @@
         <record id="pricelist_promo_configuration_default" model="pricelist.promo.configuration">
             <field name="name">Configuration des promos</field>
             <field name="bareme_jaune" ref="product_pricelist_bareme_c13" />
-            <field name="bareme_page2" ref="product_pricelist_bareme_c16" />
         </record>
 
         <record id="pricelist_mea_configuration_default" model="pricelist.mea.configuration">
             <field name="name">Configuration des mises en avant</field>
             <field name="bareme_jaune" ref="product_pricelist_bareme_c13" />
-            <field name="bareme_page2" ref="product_pricelist_bareme_c16" />
         </record>
 
     </data>
