@@ -75,7 +75,6 @@
                 <form string="Configuration des promos">
                     <field name="name" colspan="4" readonly="1"/>
                     <field name="bareme_jaune" />
-                    <field name="bareme_page2" />
                 </form>
             </field>
         </record>
@@ -111,7 +110,6 @@
                 <form string="Configuration des mises en avant">
                     <field name="name" colspan="4" readonly="1"/>
                     <field name="bareme_jaune" />
-                    <field name="bareme_page2" />
                 </form>
             </field>
         </record>
@@ -297,20 +295,6 @@
                             <field name="new_prix_achat" />
                             <field name="prix_blanche" on_change="onchange_prix_blanche(product_id, prix_blanche)"/>
                             <field name="prix_jaune" />
-                            <field name="new_prix_jaune" invisible="1"/>
-                        </tree>
-                    </field>
-                    <separator colspan="4" string="2ème Page" />
-                    <field name="product2_ids" colspan="4" nolabel="1" mode="tree" attrs="{'readonly': [('state', '=', 'done')]}">
-                        <tree string="Produits de la 2ème page" editable="top">
-                            <field name="name" />
-                            <field name="product_id" on_change="onchange_product(product_id)" string="Produit                                                                                                     "/>
-                            <field name="prix_achat" />
-                            <field name="new_prix_achat" />
-                            <field name="prix_blanche" on_change="onchange_prix_blanche(product_id, prix_blanche)"/>
-                            <field name="prix_jaune" />
-                            <field name="new_prix_jaune" invisible="1"/>
-
                         </tree>
                     </field>
                     <field name="state" invisible="0" readonly="1"/>
@@ -393,17 +377,6 @@
                     <separator colspan="4" string="Produits" />
                     <field name="product_ids" colspan="4" nolabel="1" mode="tree" attrs="{'readonly': [('state', '=', 'done')]}">
                         <tree string="Produits" editable="top">
-                            <field name="name" />
-                            <field name="product_id" on_change="onchange_product(product_id)" string="Produit                                                                                                     "/>
-                            <field name="prix_achat" />
-                            <field name="new_prix_achat" />
-                            <field name="prix_blanche" on_change="onchange_prix_blanche(product_id, prix_blanche)"/>
-                            <field name="prix_jaune" />
-                        </tree>
-                    </field>
-                    <separator colspan="4" string="2ème Page" />
-                    <field name="product2_ids" colspan="4" nolabel="1" mode="tree" attrs="{'readonly': [('state', '=', 'done')]}">
-                        <tree string="Produits de la 2ème page" editable="top">
                             <field name="name" />
                             <field name="product_id" on_change="onchange_product(product_id)" string="Produit                                                                                                     "/>
                             <field name="prix_achat" />

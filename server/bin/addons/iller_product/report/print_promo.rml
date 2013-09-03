@@ -110,36 +110,6 @@
     <para style="P1">
       <font color="white"> </font>
     </para>
-    <para style="P5">2ème page</para>
-    <para style="P6">Une '*' après un prix, signifie que le produit est déjà dans la première page. Le prix indiqué n'est donc pas à prendre en compte.</para>
-    <para style="P1">
-      <font color="white"> </font>
-    </para>
-    <blockTable colWidths="66.0,321.0,95.0" style="Table2">
-      <tr>
-        <td>
-          <para style="P8">Code</para>
-        </td>
-        <td>
-          <para style="P8">Produit</para>
-        </td>
-        <td>
-          <para style="P8">Prix</para>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <para style="P7">[[ repeatIn(o.product2_ids, 'p2') ]]</para>
-          <para style="P7">[[ p2.product_id.default_code ]]</para>
-        </td>
-        <td>
-          <para style="P7">[[ p2.product_id.name ]]</para>
-        </td>
-        <td>
-          <para style="P7">[[ formatLang(getPrix(p2.product_id.id, 'page', o.id)) ]][[ getDoublon(p2.product_id.id, o.id) ]]</para>
-        </td>
-      </tr>
-    </blockTable>
     <para style="Standard">
       <font color="white"> </font>
     </para>
