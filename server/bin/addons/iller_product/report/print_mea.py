@@ -30,26 +30,9 @@ class print_mea(report_sxw.rml_parse):
         def __init__(self, cr, uid, name, context):
             super(print_mea, self).__init__(cr, uid, name, context)
             self.localcontext.update({
-                'getPrix': self._getPrix,
                 'getDoublon': self._getDoublon,
                 'time': time,
             })
-
-        def _getPrix(self, product_id, price_type, promo_id):
-            cr = self.cr
-            uid = self.uid
-            b_conf_obj = self.pool.get('pricelist.mea.configuration')
-            p_obj = self.pool.get('product.product')
-            b_conf_ids = b_conf_obj.search(cr, uid, [])
-            
-            b_coeff = 1.00
-            if b_conf_ids:
-                if price_type == 'jaune':
-                    b_coeff = b_conf_obj.browse(cr, uid, b_conf_ids[0]).bareme_jaune.valeur
-
-            prix_vente = p_obj.read(cr, uid, product_id, ['list_price']).get('list_price')
-
-            return prix_vente*b_coeff
 
         def _getDoublon(self, product_id, promo_id):
             mea_obj = self.pool.get('product.pricelist.mea')

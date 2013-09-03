@@ -197,6 +197,7 @@ product_pricelist_version()
 class product_tarif_special_client(osv.osv):
     _name = 'product.tarif.special.client'
     _description = 'Tarif spécial pour un client'
+    _rec_name = 'product_id'
     _columns = {
             'product_id': fields.many2one('product.product', 'Produit'),
             'tarif_id': fields.many2one('product.tarifs.speciaux', 'Tarifs Spéciaux'),
@@ -1218,6 +1219,11 @@ class product_in_mea(osv.osv):
         'prix_achat': fields.function(_get_prix_achat, method=True, string='Prix achat', readonly=True, store=False),
         'new_prix_achat': fields.float(digits=(16,2), string='Nouveau prix d\'achat'),
     }
+
+    _sql_constraints = [
+        ('new_prix_blanche', 'CHECK (new_prix_blanche>0.0)', 'Le prix blanche doit être supérieur à 0.0 !'),
+        ('new_prix_jaune', 'CHECK (new_prix_jaune>0.0)', 'Le prix jaune doit être supérieur à 0.0 !'),
+    ]
 
 product_in_mea()
 
