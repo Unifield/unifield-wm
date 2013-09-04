@@ -295,7 +295,6 @@
                             <field name="new_prix_achat" />
                             <field name="prix_blanche" on_change="onchange_prix_blanche(product_id, prix_blanche)"/>
                             <field name="prix_jaune" />
-                            <field name="new_prix_jaune" invisible="1"/>
                         </tree>
                     </field>
                     <field name="state" invisible="0" readonly="1"/>
