@@ -35,7 +35,25 @@ def rounding(f, r):
     if not r:
         return f
     return round(f / r) * r
-    
+
+class product_bareme_matrice(osv.osv):
+    _name = 'product.bareme.matrice'
+    _description = 'Matrice des prix pour les baremes'
+
+    _columns = {
+        'bareme_id':fields.many2one('product.pricelist.bareme', string=u'Numéro de barème', required=True),
+        'valeur': fields.float(digits=(16,2), string='Nouvelle valeur'),
+        'prix_produit': fields.float(digits=(16,2), string=u'Prix de départ du produit'),
+    }
+
+    _defaults = {
+        'valeur': lambda *a: 0.0,
+        'prix_produit': lambda *a: 0.0,
+    }
+
+product_bareme_matrice()
+
+
 class product_pricelist_bareme(osv.osv):
     _name = 'product.pricelist.bareme'
     _description = 'Product Pricelist Bareme'
@@ -58,6 +76,7 @@ class product_pricelist_bareme(osv.osv):
         'name': fields.char(size=64, string='Nom'),
         'valeur': fields.float(digits=(16,6), string='Valeur'),
         'special': fields.boolean(string='Special ?'),
+        'bareme_matrice_ids': fields.one2many('product.bareme.matrice', 'bareme_id', string='Matrice des prix'),
     }
 
     _defaults = {
@@ -262,7 +281,7 @@ class product_pricelist(osv.osv):
             'tarif_special_choice': fields.selection([('oui', 'Oui'), ('non', 'Non')], string=u'Tarif spécial'),
             'mea_choice': fields.selection([('oui', 'Oui'), ('non', 'Non')], string='Mise en avant'),
             'promo_choice': fields.selection([('oui', 'Oui'), ('non', 'Non')], string='Promo'),
-            'tarif_choice': fields.selection([('blanche', 'Blanche'), ('jaune', 'Jaune')], string='Tarification'),            
+            'tarif_choice': fields.selection([('blanche', 'Blanche'), ('jaune', 'Jaune')], string='Tarification'),
     }
 
     def price_get (self, cr, uid, ids, prod_id, qty, partner=None, context=None):
@@ -344,6 +363,7 @@ class product_pricelist(osv.osv):
         product_obj = self.pool.get('product.product')
         supplierinfo_obj = self.pool.get('product.supplierinfo')
         price_type_obj = self.pool.get('product.price.type')
+        matrice_obj = self.pool.get('product.bareme.matrice')
 
         if context and ('partner_id' in context):
             partner = context['partner_id']
@@ -439,7 +459,18 @@ class product_pricelist(osv.osv):
                                 price_type.field,context=context)[prod_id], round=False)
 
                 price_limit = price
-                price = price * (1.0+(res['price_discount'] or 0.0))
+                # Si notre list item a un bareme
+                if 'bareme_id' in res and res['bareme_id']:
+                    # On recherche dans la matrice s'il y a une correspondance prix départ/bareme
+                    matrice_ids = matrice_obj.search(cr, uid, [('bareme_id', '=', res['bareme_id']), ('prix_produit', '=', price)], context=context)
+                    # S'il y a une correspondance on applique le prix, sinon on fait le traitement par défaut
+                    if matrice_ids:
+                        matrice = matrice_obj.read(cr, uid, matrice_ids[0], ['valeur'], context=context)
+                        price = matrice['valeur']
+                    else:
+                        price = price * (1.0+(res['price_discount'] or 0.0))
+                else:
+                    price = price * (1.0+(res['price_discount'] or 0.0))
 
                 #Traitement spécial pour le cas RUNGIEST
                 if partner:
@@ -983,10 +1014,10 @@ class product_pricelist_mea(osv.osv):
             ## Si la mea est de type blanche, on applique
             ## le prix mea blanche pour chaque produit
             for product in product_ids:
-                p_data = prod_obj.read(cr, uid, product, ['name'])
+                p_data = prod_obj.read(cr, uid, product[0], ['name'])
                 item_id = item_obj.create(cr, uid, {'sequence': 3,
                                                     'name': p_data.get('name'), 
-                                                    'product_id': product,
+                                                    'product_id': product[0],
                                                     'base': base,
                                                     'price_version_id': version_id})
                 items.append(item_id)

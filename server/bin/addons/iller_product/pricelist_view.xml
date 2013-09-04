@@ -39,6 +39,12 @@
                     <field name="name" required="1" select="1" />
                     <field name="valeur" required="1" select="2" />
                     <field name="special" />
+                    <field name="bareme_matrice_ids" colspan="4" mode="tree,form" nolabel="1" widget="one2many_list" default_get="{'bareme_id': name}">
+                        <tree string="Lignes de matrice" editable="top">
+                            <field name="prix_produit" />
+                            <field name="valeur" />
+                        </tree>
+                    </field>
                 </form>
             </field>
         </record>
@@ -65,7 +71,46 @@
         <menuitem id="menu_product_pricelist_bareme"
                   action="action_product_pricelist_bareme_tree"
                   parent="product.menu_price" />
-        
+
+        <!-- Configuration matrice des prix -->
+        <record id="matrice_configuration_form_view" model="ir.ui.view">
+            <field name="name">matrice.configuration.form.view</field>
+            <field name="model">product.bareme.matrice</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Configuration de la matrice des prix">
+                    <field name="bareme_id"/>
+                    <field name="prix_produit" />
+                    <field name="valeur" />
+                </form>
+            </field>
+        </record>
+
+        <record id="matrice_configuration_tree_view" model="ir.ui.view">
+            <field name="name">matrice.configuration.tree.view</field>
+            <field name="model">product.bareme.matrice</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Configuration de la matrice des prix">
+                    <field name="bareme_id"/>
+                    <field name="prix_produit" />
+                    <field name="valeur" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_matrice_configuration_form" model="ir.actions.act_window">
+            <field name="name">Configuration de la matrice des prix</field>
+            <field name="res_model">product.bareme.matrice</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_matrice_configuration"
+                  action="action_matrice_configuration_form"
+                  parent="product.menu_price" />
+
+
         <!-- Configuration promo -->
         <record id="pricelist_promo_configuration_form_view" model="ir.ui.view">
             <field name="name">pricelist.promo.configuration.form.view</field>
