@@ -151,6 +151,8 @@ class stock_picking(osv.osv):
         pack_data = self.package_data_update_in(cr, uid, source, pick_dict, context=context)
         # Look for the PO name, which has the reference to the FO on Coordo as source.out_info.origin
         so_ref = source + "." + pick_dict['origin']
+        import pdb
+        pdb.set_trace()
         po_id = so_po_common.get_po_id_by_so_ref(cr, uid, so_ref, context)
         po_name = po_obj.browse(cr, uid, po_id, context=context)['name']
         # Then from this PO, get the IN with the reference to that PO, and update the data received from the OUT of FO to this IN
@@ -240,6 +242,69 @@ class stock_picking(osv.osv):
                 
         return res_id
 
+    def return_of_in_creates_in(self, cr, uid, source, out_info, context=None):
+        '''
+        ' This sync method is used for create IN on Coordo side when the OUT at Project side
+        ' became done. The OUT at Project side is created by the claim return.
+        '''
+        if context is None:
+            context = {}
+        self._logger.info("+++ Call to create IN from customer %s to receive the returned product at %s"%(source, cr.dbname))
+
+        pick_dict = out_info.to_dict()
+
+        so_po_common = self.pool.get('so.po.common')
+        so_obj = self.pool.get('sale.order')
+        move_obj = self.pool.get('stock.move')
+        pick_obj = self.pool.get('stock.picking')
+        pick_tools = self.pool.get('picking.tools')
+        data_obj = self.pool.get('ir.model.data')
+
+        msf_supplier_loc_id = data_obj.get_object_reference(cr, uid, 'stock', 'stock_location_internal_suppliers')[1]
+        input_loc_id = data_obj.get_object_reference(cr, uid, 'msf_cross_docking', 'stock_location_input')[1]
+
+        new_pick_ids = []
+        new_move_ids = []
+
+        # package data
+        pack_data = self.package_data_update_in(cr, uid, source, pick_dict, context=context)
+        po_ref = source + "." + pick_dict['origin']
+        so_ids = so_obj.search(cr, uid, [('client_order_ref', '=', po_ref)], context=context)
+        if so_ids:
+            so_name = so_obj.browse(cr, uid, so_ids[0], context=context).name
+            pick_ids = pick_obj.search(cr, uid, [('origin', '=', so_name), ('type', '=', 'out'), ('subtype', 'in', ['standard', 'picking'])], context=context)
+            for key, value in pack_data.items():
+                for m in value['data']:
+                    move_ids = move_obj.search(cr, uid, [('picking_id', 'in', pick_ids), ('line_number', '=', m['line_number']), ('product_qty', '!=', 0.00)], context=context)
+                    picking_id = move_obj.browse(cr, uid, move_ids[0], context=context).picking_id
+                    picking_name = '%s-return' % picking_id.name
+                    ret_pick_ids = pick_obj.search(cr, uid, [('name', '=', picking_name)], context=context)
+                    if not ret_pick_ids:
+                        new_pick_id = pick_obj.create(cr, uid, {'partner_id2': picking_id.partner_id2 and picking_id.partner_id2.id,
+                                                                'date': picking_id.date,
+                                                                'min_date': picking_id.min_date,
+                                                                'order_category': picking_id.order_category,
+                                                                'warehouse_id': picking_id.warehouse_id.id,
+                                                                'type': 'in',
+                                                                'origin': picking_id.origin,
+                                                                'name': picking_name,
+                                                                'reason_type_id': data_obj.get_object_reference(cr, uid, 'reason_types_moves', 'reason_type_goods_return')[1]}, context=context)
+                        new_pick_ids.append(new_pick_id)
+                    else:
+                        new_pick_id = ret_pick_ids[0]
+
+                    move_data = dict(m, 
+                                    picking_id=new_pick_id, 
+                                    reason_type_id=data_obj.get_object_reference(cr, uid, 'reason_types_moves', 'reason_type_goods_return')[1],
+                                    location_id=msf_supplier_loc_id,
+                                    location_dest_id=input_loc_id)
+                    new_move_ids.append(move_obj.create(cr, uid, move_data, context=context))
+
+        pick_obj.draft_force_assign(cr, uid, [x.id for x in pick_obj.browse(cr, uid, new_pick_ids) if x.state == 'draft'])
+
+        return True
+
+
     def partial_shipped_fo_updates_in_po(self, cr, uid, source, out_info, context=None):
         '''
         ' This sync method is used for updating the IN of Project side when the OUT/PICK at Coordo side became done.
@@ -252,6 +317,9 @@ class stock_picking(osv.osv):
         self._logger.info("+++ Call to update partial shipment/OUT from supplier %s to INcoming Shipment of PO at %s"%(source, cr.dbname))
         
         pick_dict = out_info.to_dict()
+
+        if pick_dict.get('name') and pick_dict['name'][-7:] == '-return':
+            return self.return_of_in_creates_in(cr, uid, source, out_info, context=None)
         
         # objects
         so_po_common = self.pool.get('so.po.common')
