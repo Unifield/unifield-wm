@@ -1194,7 +1194,7 @@ class product_in_mea(osv.osv):
     _name = 'product.pricelist.mea.in'
     _description = 'Produit dans la mea'
     _order = 'name'
-
+        
     def _get_prix_achat(self, cr, uid, ids, field_name, arg, context=None):
         history_obj = self.pool.get('product.price.history')
 
@@ -1219,7 +1219,20 @@ class product_in_mea(osv.osv):
                 v['prix_jaune'] = 0.0
                 v['prix_achat'] = p.prix_achat
         return {'value': v}
-            
+
+    def _check_prix_blanche(self, cr, uid, ids, context=None):
+        for this in self.browse(cr, uid, ids, context=context):
+            if not this.new_prix_blanche or this.new_prix_blanche <= 0:
+                raise osv.except_osv(_('Attention %s - %s !') % (this.product_id.name.strip(), this.new_prix_blanche), u'Le prix blanche doit être supérieur à 0 : (produit : %s, prix blanc : %s)' % (this.product_id.name.strip(), this.new_prix_blanche))
+                return False
+        return True
+
+    def _check_prix_jaune(self, cr, uid, ids, context=None):
+        for this in self.browse(cr, uid, ids, context=context):
+            if not this.new_prix_jaune or this.new_prix_jaune <= 0:
+                raise osv.except_osv(_('Attention %s - %s !') % (this.product_id.name.strip(), this.new_prix_jaune), u'Le prix jaune doit être supérieur à 0 : (produit : %s, prix blanc : %s)' % (this.product_id.name.strip(), this.new_prix_jaune))
+                return False
+        return True
 
     _columns = {
         'name': fields.integer(string='Séquence', readonly=True),
@@ -1231,10 +1244,14 @@ class product_in_mea(osv.osv):
         'new_prix_achat': fields.float(digits=(16,2), string='Nouveau prix d\'achat'),
     }
 
-    _sql_constraints = [
-        ('new_prix_blanche', 'CHECK (new_prix_blanche>0.0)', 'Le prix blanche doit être supérieur à 0.0 !'),
-        ('new_prix_jaune', 'CHECK (new_prix_jaune>0.0)', 'Le prix jaune doit être supérieur à 0.0 !'),
-    ]
+    _constraints = [
+        (_check_prix_blanche,
+            'Le prix blanche doit avoir un prix supérieur à 0.00',
+            ['new_prix_blanche', 'product_id']),
+        (_check_prix_jaune,
+            'Le prix jaune doit avoir un prix supérieur à 0.00',
+            ['new_prix_jaune', 'product_id'])]
+
 
 product_in_mea()
 
