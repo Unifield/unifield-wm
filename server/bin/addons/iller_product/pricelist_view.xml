@@ -426,8 +426,8 @@
                             <field name="product_id" on_change="onchange_product(product_id)" string="Produit                                                                                                     "/>
                             <field name="prix_achat" />
                             <field name="new_prix_achat" />
-                            <field name="prix_blanche" on_change="onchange_prix_blanche(product_id, prix_blanche)"/>
-                            <field name="prix_jaune" />
+                            <field name="new_prix_blanche"/>
+                            <field name="new_prix_jaune" />
                         </tree>
                     </field>
                     <field name="state" invisible="0" readonly="1"/>

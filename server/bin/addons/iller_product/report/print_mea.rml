@@ -97,10 +97,10 @@
           <para style="P7">[[ p.product_id.name ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(getPrix(p.product_id.id, 'jaune', o.id)) ]]</para>
+          <para style="P7">[[ formatLang(p.new_prix_jaune) ]]</para>
         </td>
         <td>
-          <para style="P7">[[ formatLang(p.prix_blanche) ]]</para>
+          <para style="P7">[[ formatLang(p.new_prix_blanche) ]]</para>
         </td>
       </tr>
     </blockTable>

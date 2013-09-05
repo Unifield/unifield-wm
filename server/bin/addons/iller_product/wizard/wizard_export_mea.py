@@ -43,9 +43,9 @@ class export_tarif_mea(wizard.interface):
             products.append(p.id)
             p_price = 0.00
             if data['form']['type'] == 'blanche':
-                p_price = p.prix_blanche
+                p_price = pp.new_prix_blanche
             else:
-                p_price = round(pp.prix_jaune,2)
+                p_price = round(pp.new_prix_jaune,2)
             export += "%s;%s;%.2f" % (p.default_code, p.name, p_price)
             export += "\r\n"
 

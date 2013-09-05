@@ -47,9 +47,9 @@ class print_promo(report_sxw.rml_parse):
                 if price_type == 'jaune':
                     b_coeff = b_conf_obj.browse(cr, uid, b_conf_ids[0]).bareme_jaune.valeur
 
-            prix_vente = p_obj.read(cr, uid, product_id, ['list_price']).get('list_price')
+            prix_blanche = p_obj.read(cr, uid, product_id, ['prix_blanche']).get('prix_blanche')
 
-            return prix_vente*b_coeff
+            return prix_blanche*b_coeff
 
         def _getDoublon(self, product_id, promo_id):
             promo_obj = self.pool.get('product.pricelist.promo')
