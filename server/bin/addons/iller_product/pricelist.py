@@ -798,8 +798,8 @@ class product_pricelist_promo(osv.osv):
         # Sauvegarde des données saisies (il faudra les restaurer lors de la création des version contenant les cumul promo + tarifs spéciaux) 
         data_ori = data['form'].copy()
 
-        blanche_ids = pricelist_obj.search(cr, uid, [('tarif_choice', '=', 'blanche'), ('type', '=', 'sale'), ('promo_choice', '=', 'oui'), ('mea_choice', '=', 'non')])
-        jaune_ids = pricelist_obj.search(cr, uid, [('tarif_choice', '=', 'jaune'), ('type', '=', 'sale'), ('promo_choice', '=', 'oui'), ('mea_choice', '=', 'non')])
+        blanche_ids = pricelist_obj.search(cr, uid, [('tarif_choice', '=', 'blanche'), ('type', '=', 'sale'), ('promo_choice', '=', 'oui'), ('mea_choice', '=', 'non'), ('tarif_special_choice', '=', 'non')])
+        jaune_ids = pricelist_obj.search(cr, uid, [('tarif_choice', '=', 'jaune'), ('type', '=', 'sale'), ('promo_choice', '=', 'oui'), ('mea_choice', '=', 'non'), ('tarif_special_choice', '=', 'non')])
         
         ## On cherche la version de base pour la liste de prix
         ## On cherche la version en cours pendant la promo
@@ -1164,8 +1164,8 @@ class product_pricelist_mea(osv.osv):
         data_ori = data['form'].copy()
 
         ## On récupère toutes les listes de prix où les mea s'appliquent (mea jaune ou blanche à oui)
-        blanche_ids = pricelist_obj.search(cr, uid, [('tarif_choice', '=', 'blanche'), ('type', '=', 'sale'), ('mea_choice', '=', 'oui')])
-        jaune_ids = pricelist_obj.search(cr, uid, [('tarif_choice', '=', 'jaune'), ('type', '=', 'sale'), ('mea_choice', '=', 'oui')])
+        blanche_ids = pricelist_obj.search(cr, uid, [('tarif_choice', '=', 'blanche'), ('type', '=', 'sale'), ('mea_choice', '=', 'oui'), ('tarif_special_choice', '=', 'non')])
+        jaune_ids = pricelist_obj.search(cr, uid, [('tarif_choice', '=', 'jaune'), ('type', '=', 'sale'), ('mea_choice', '=', 'oui'), ('tarif_special_choice', '=', 'non')])
         
         ## On cherche la version de base pour la liste de prix
         ## On cherche la version en cours pendant la mea
