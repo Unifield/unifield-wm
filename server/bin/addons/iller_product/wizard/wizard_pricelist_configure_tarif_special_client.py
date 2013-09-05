@@ -340,7 +340,10 @@ class wizard_configure_tarif_special_client(wizard.interface):
             if data['form']['tarif_initial'] :
                 previous_pricelist = data['form']['tarif_initial']
                 pricelist_id = pricelist_obj.copy(cr, uid, data['form']['tarif_initial'], {'name': 'CSP %s %s' % (client.ref, client.name),
-                                                                                          'tarif_special_choice': 'oui' })
+                                                                                            'tarif_special_choice': 'oui',
+                                                                                            'promo_choice': 'non',
+                                                                                            'mea_choice': 'non',
+                                                                                          })
                 client_obj.write(cr, uid, client.id, {'property_product_pricelist': pricelist_id}, context=context)
                 new_pricelist = True
             else:
@@ -360,7 +363,9 @@ class wizard_configure_tarif_special_client(wizard.interface):
                     pricelist_id = pricelist_obj.copy(cr, uid, pricelist_ids[0],
                                                         {
                                                             'name': 'CSP %s %s' % (client.ref, client.name),
-                                                            'tarif_special_choice': 'oui'
+                                                            'tarif_special_choice': 'oui',
+                                                            'promo_choice': 'non',
+                                                            'mea_choice': 'non',
                                                         })
                     client_obj.write(cr, uid, client.id, {'property_product_pricelist': pricelist_id}, context=context)
                     new_pricelist = True
