@@ -384,7 +384,7 @@
             <field name="type">sale</field>
             <field name="currency_id" ref="base.EUR" />
             <field name="mea_choice">non</field>
-            <field name="promo_choice">oui</field>
+            <field name="promo_choice">non</field>
         </record>
 
         <record id="pricelist_tarif_coda3_pb" model="product.pricelist">
