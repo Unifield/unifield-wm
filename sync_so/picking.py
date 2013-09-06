@@ -151,8 +151,6 @@ class stock_picking(osv.osv):
         pack_data = self.package_data_update_in(cr, uid, source, pick_dict, context=context)
         # Look for the PO name, which has the reference to the FO on Coordo as source.out_info.origin
         so_ref = source + "." + pick_dict['origin']
-        import pdb
-        pdb.set_trace()
         po_id = so_po_common.get_po_id_by_so_ref(cr, uid, so_ref, context)
         po_name = po_obj.browse(cr, uid, po_id, context=context)['name']
         # Then from this PO, get the IN with the reference to that PO, and update the data received from the OUT of FO to this IN
@@ -270,6 +268,7 @@ class stock_picking(osv.osv):
         pack_data = self.package_data_update_in(cr, uid, source, pick_dict, context=context)
         po_ref = source + "." + pick_dict['origin']
         so_ids = so_obj.search(cr, uid, [('client_order_ref', '=', po_ref)], context=context)
+        partial_data = {}
         if so_ids:
             so_name = so_obj.browse(cr, uid, so_ids[0], context=context).name
             pick_ids = pick_obj.search(cr, uid, [('origin', '=', so_name), ('type', '=', 'out'), ('subtype', 'in', ['standard', 'picking'])], context=context)
@@ -288,8 +287,10 @@ class stock_picking(osv.osv):
                                                                 'type': 'in',
                                                                 'origin': picking_id.origin,
                                                                 'name': picking_name,
+                                                                'invoice_state': 'none',
                                                                 'reason_type_id': data_obj.get_object_reference(cr, uid, 'reason_types_moves', 'reason_type_goods_return')[1]}, context=context)
                         new_pick_ids.append(new_pick_id)
+                        partial_data[new_pick_id] = {}
                     else:
                         new_pick_id = ret_pick_ids[0]
 
@@ -298,9 +299,13 @@ class stock_picking(osv.osv):
                                     reason_type_id=data_obj.get_object_reference(cr, uid, 'reason_types_moves', 'reason_type_goods_return')[1],
                                     location_id=msf_supplier_loc_id,
                                     location_dest_id=input_loc_id)
-                    new_move_ids.append(move_obj.create(cr, uid, move_data, context=context))
+                    move_id = move_obj.create(cr, uid, move_data, context=context)
+                    partial_data[new_pick_id].setdefault(move_id, []).append(move_data)
+                    new_move_ids.append(move_id)
 
         pick_obj.draft_force_assign(cr, uid, [x.id for x in pick_obj.browse(cr, uid, new_pick_ids) if x.state == 'draft'])
+        for n_pick_id in new_pick_ids:
+            self.do_incoming_shipment_sync(cr, uid, n_pick_id, partial_data, context=dict(context, sync_message_execution=True))
 
         return True
 
