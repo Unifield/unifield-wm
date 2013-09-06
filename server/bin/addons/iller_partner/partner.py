@@ -82,27 +82,12 @@ class iller_partner(osv.osv):
         for partner_record in self.browse(cr, uid, ids, context=context):
         
             # Récupération des valeurs dans vals si existantes, sinon on prend celles du partner
-            if 'tarif_choice' in vals:
-                tarif_choice = vals['tarif_choice']
-            else:
-                tarif_choice = partner_record.tarif_choice
-            if 'promo_choice' in vals:
-                promo_choice = vals['promo_choice']
-            else:
-                promo_choice = partner_record.promo_choice
-            if 'mea_choice' in vals:
-                mea_choice = vals['mea_choice']
-            else:
-                mea_choice = partner_record.mea_choice
-            if 'tarif_general_choice' in vals:
-                tarif_general_choice = vals['tarif_general_choice']
-            else:
-                tarif_general_choice = partner_record.tarif_general_choice
-            if 'tarif_special_choice' in vals:
-                tarif_special_choice = vals['tarif_special_choice']
-            else:
-                tarif_special_choice = partner_record.tarif_special_choice
-            
+            tarif_choice = vals.get('tarif_choice', partner_record.tarif_choice)
+            promo_choice = vals.get('promo_choice', partner_record.promo_choice)
+            mea_choice = vals.get('mea_choice', partner_record.mea_choice)
+            tarif_general_choice = vals.get('tarif_general_choice', partner_record.tarif_general_choice)
+            tarif_special_choice = vals.get('tarif_special_choice', partner_record.tarif_special_choice)
+
             base_ids = []
             pricelist_ids = []
             not_same_pricelist = False
