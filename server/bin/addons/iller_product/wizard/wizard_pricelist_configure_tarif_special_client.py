@@ -301,7 +301,6 @@ class wizard_configure_tarif_special_client(wizard.interface):
             context['promo'] = False
         if 'mea' in context:
             context['mea'] = False
-
         # On met dans le contexte une variable indiquant qu'on est dans un tarif spécial pour indiquer à 
         # l'écriture de la liste de prix qu'on doit faire le fonctionnement par défaut (dans iller_partner/partner.py : surcharge du write)
         context['is_tarif_speciaux'] = True
@@ -322,7 +321,7 @@ class wizard_configure_tarif_special_client(wizard.interface):
                                                                      'end_date': data['form']['end_date']
                                                                      })
         products = data['form']['products']
-        
+
         if not 'tarif_speciaux_id' in context:
             for product in products:
                 tarif_special_client = tarif_special_client_obj.create(cr, uid, {
@@ -348,14 +347,21 @@ class wizard_configure_tarif_special_client(wizard.interface):
                 new_pricelist = True
             else:
                 # On récupère la liste de prix du client correspondant à ses paramètres
-                pricelist_ids = pricelist_obj.search(
-                        cr, uid, [
-                                    ('tarif_choice', '=', client.tarif_choice or 'blanche'),
-                                    ('promo_choice', '=', client.promo_choice or 'non'),
-                                    ('mea_choice', '=', client.mea_choice or 'non'),
-                                    ('name', 'ilike',  client.tarif_general_choice or 'NU01')
-                                ], context=context)
-
+                if client.promo_choice == 'non' and client.mea_choice == 'non':
+                    pricelist_ids = pricelist_obj.search(
+                            cr, uid, [
+                                        ('promo_choice', '=', client.promo_choice or 'non'),
+                                        ('mea_choice', '=', client.mea_choice or 'non'),
+                                        ('name', 'ilike',  client.tarif_general_choice or 'NU01')
+                                    ], context=context)
+                else:
+                    pricelist_ids = pricelist_obj.search(
+                            cr, uid, [
+                                        ('tarif_choice', '=', client.tarif_choice or 'blanche'),
+                                        ('promo_choice', '=', client.promo_choice or 'non'),
+                                        ('mea_choice', '=', client.mea_choice or 'non'),
+                                        ('name', 'ilike',  client.tarif_general_choice or 'NU01')
+                                    ], context=context)
                 # Si les paramètres du client sont bien paramétrés on copie la liste de prix associée
                 if pricelist_ids:
                     previous_pricelist = pricelist_ids[0]
@@ -366,7 +372,7 @@ class wizard_configure_tarif_special_client(wizard.interface):
                                                             'tarif_special_choice': 'oui',
                                                             'promo_choice': 'non',
                                                             'mea_choice': 'non',
-                                                        })
+                                                        }, context=context)
                     client_obj.write(cr, uid, client.id, {'property_product_pricelist': pricelist_id}, context=context)
                     new_pricelist = True
                 else:
@@ -408,7 +414,6 @@ class wizard_configure_tarif_special_client(wizard.interface):
                 
         ## OK, arrivé à ce stade, la version des prix à tarifs spéciaux a été mise en place et a "poussé" les autres versions
         pricelist = pricelist_obj.browse(cr, uid, pricelist_id)
-
         # Boucle sur les produits pour pouvoir écrire le m2o de pricelist_item 
         # avec le tarif spécial client correspondant
         for product in products:

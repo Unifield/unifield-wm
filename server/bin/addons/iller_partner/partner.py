@@ -113,7 +113,7 @@ class iller_partner(osv.osv):
             pl_id = pricelist_obj.search(cr, uid, [('name', '=', tarif_general_choice)], context=context)
             if pl_id:
                 # On cherche la version de base de la pricelist du partner
-                base_ids = version_obj.search(cr, uid, [('pricelist_id', '=', pl_id), ('base_ok', '=', True)])
+                base_ids = version_obj.search(cr, uid, [('pricelist_id', '=', pl_id[0]), ('base_ok', '=', True)])
 
 ## Cas d'erreur :Aucune version de base n'est trouvée à ce moment là : problème de pricelist
 
@@ -154,18 +154,17 @@ class iller_partner(osv.osv):
                                     ('mea_choice', '=', mea_choice or 'non'),
                                     ('name', 'ilike', ('CSP %s %s' % (partner_record.ref, partner_record.name)) or base.name[-4:] or 'NU01')
                                 ], context=context)
-
                 # Si aucune pricelist spéciale n'existe, on prend la liste spéciale du partenaire
                 # Cas où on crée une liste spéciale à partir du tarif général de base (NU01...NU04)
                 if not pricelist_ids:
                     pricelist_ids = pricelist_obj.search(
                             cr, uid, [
-                                        ('tarif_special_choice', '=', vals['tarif_special_choice'] or 'non'),
+                                        ('tarif_special_choice', '=', tarif_special_choice or 'non'),
                                         ('name', 'ilike', ('CSP %s %s' % (partner_record.ref, partner_record.name)) or base.name[-4:] or 'NU01')
                                     ], context=context)
                                     
                 # On récupère la version de base de la liste de prix spéciale
-                base_special_ids = version_obj.search(cr, uid, [('pricelist_id', '=', pricelist_ids), ('base_ok', '=', True)])
+                base_special_ids = version_obj.search(cr, uid, [('pricelist_id', 'in', pricelist_ids), ('base_ok', '=', True)])
                 if base_special_ids:
                     base_special = version_obj.browse(cr, uid, base_special_ids[0], context=context)
                     # Si cette base n'a pas le même nom que la sélection du formulaire, on indique qu'il faudra rechercher
@@ -180,13 +179,13 @@ class iller_partner(osv.osv):
             # si aucune liste de prix spéciale n'existe OU si la liste spéciale trouvée 
             # ne correspond plus à la liste choisie dans le formulaire
             if not pricelist_ids or not_same_pricelist:
-                    pricelist_ids = pricelist_obj.search(
-                            cr, uid, [
-                                        ('tarif_choice', '=', tarif_choice or 'blanche'),
-                                        ('promo_choice', '=', promo_choice or 'non'),
-                                        ('mea_choice', '=', mea_choice or 'non'),
-                                        ('name', 'ilike', base.name[-4:] or tarif_general_choice or 'NU01')
-                                    ], context=context)
+                pricelist_ids = pricelist_obj.search(
+                        cr, uid, [
+                                    ('tarif_choice', '=', tarif_choice or 'blanche'),
+                                    ('promo_choice', '=', promo_choice or 'non'),
+                                    ('mea_choice', '=', mea_choice or 'non'),
+                                    ('name', 'ilike', base.name[-4:] or tarif_general_choice or 'NU01')
+                                ], context=context)
 ## Cas par défaut
 
             # Si on a toujours pas de liste de prix, on applique par défaut celle du tarif de base choisi

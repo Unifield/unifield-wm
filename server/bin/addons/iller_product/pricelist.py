@@ -217,6 +217,7 @@ class product_tarif_special_client(osv.osv):
     _name = 'product.tarif.special.client'
     _description = 'Tarif spécial pour un client'
     _rec_name = 'product_id'
+
     _columns = {
             'product_id': fields.many2one('product.product', 'Produit'),
             'tarif_id': fields.many2one('product.tarifs.speciaux', 'Tarifs Spéciaux'),
@@ -459,6 +460,7 @@ class product_pricelist(osv.osv):
                                 price_type.field,context=context)[prod_id], round=False)
 
                 price_limit = price
+
                 # Si notre list item a un bareme
                 if 'bareme_id' in res and res['bareme_id']:
                     # On recherche dans la matrice s'il y a une correspondance prix départ/bareme
