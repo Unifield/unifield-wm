@@ -145,6 +145,15 @@ class iller_partner(osv.osv):
                     pricelist_ids = pricelist_obj.search(
                             cr, uid, [
                                         ('tarif_special_choice', '=', tarif_special_choice or 'non'),
+                                        ('promo_choice', '=', promo_choice or 'non'),
+                                        ('mea_choice', '=', mea_choice or 'non'),
+                                        ('name', 'ilike', ('CSP %s %s' % (partner_record.ref, partner_record.name)) or base.name[-4:] or 'NU01')
+                                    ], context=context)
+                if not pricelist_ids:
+                    pricelist_ids = pricelist_obj.search(
+                            cr, uid, [
+                                        ('tarif_special_choice', '=', tarif_special_choice or 'non'),
+
                                         ('name', 'ilike', ('CSP %s %s' % (partner_record.ref, partner_record.name)) or base.name[-4:] or 'NU01')
                                     ], context=context)
                                     
