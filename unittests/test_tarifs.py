@@ -40,13 +40,13 @@ partner_test = ['029005']
 # Produits dans la promo : Prix blanc = prix depart * coeff blanc et Prix jaune = prix blanc * 1.03, prix depart = prix achat * coeff depart
 product_promo_test = [
     # A : Promo
-    {'default_code':'010800', 'prix_achat':12.10, 'prix_blanche':18.39, 'prix_jaune':18.9417, 'prix_depart':15.97, 'coeff_depart':1.32, 'coeff_blanc':1.52,},
+    {'default_code':'010800', 'prix_achat':12.10, 'prix_blanche':18.39, 'prix_jaune':18.94, 'prix_depart':15.97, 'coeff_depart':1.32, 'coeff_blanc':1.52,},
     # E : Promo / Mea
-    {'default_code':'020101', 'prix_achat':8.30, 'prix_blanche':13.36, 'prix_jaune':13.7608, 'prix_depart':11.62, 'coeff_depart':1.40, 'coeff_blanc':1.61,},
+    {'default_code':'020101', 'prix_achat':8.30, 'prix_blanche':13.36, 'prix_jaune':13.76, 'prix_depart':11.62, 'coeff_depart':1.40, 'coeff_blanc':1.61,},
     # F : Promo / Mea / Ts
-    {'default_code':'030000', 'prix_achat':7.40, 'prix_blanche':12.06, 'prix_jaune':12.4218, 'prix_depart':10.51, 'coeff_depart':1.42, 'coeff_blanc':1.63,},
+    {'default_code':'030000', 'prix_achat':7.40, 'prix_blanche':12.06, 'prix_jaune':12.42, 'prix_depart':10.51, 'coeff_depart':1.42, 'coeff_blanc':1.63,},
     # G : Promo / Ts
-    {'default_code':'265000', 'prix_achat':1.17, 'prix_blanche':1.80, 'prix_jaune':1.854, 'prix_depart':1.59, 'coeff_depart':1.36, 'coeff_blanc':1.538462,},
+    {'default_code':'265000', 'prix_achat':1.17, 'prix_blanche':1.80, 'prix_jaune':1.85, 'prix_depart':1.59, 'coeff_depart':1.36, 'coeff_blanc':1.538462,},
 ]
 # Produits dans la mea : Prix blanc / jaune libres
 product_mea_test = [
@@ -344,8 +344,8 @@ class DataTest:
                                          self.pricetype))
                                 else:
                                     #Erreur
-                                    error = 'PROMO TYPE - Erreur lors de la vérification des prix de produits %s - Cas : ts : %s; mea : %s; promo : %s; base :%s; type : %s;' \
-                                         % (product_order[1], self.tarif_special, self.mea, self.promo, self.pricelist_base, \
+                                    error = 'PROMO TYPE - Erreur lors de la vérification des prix de produits %s prix devis : %s prix blanc attendu : %s prix jaune attendu %s - Cas : ts : %s; mea : %s; promo : %s; base :%s; type : %s;' \
+                                         % (product_order[1], price_order, product_promo['prix_blanche'], product_promo['prix_jaune'], self.tarif_special, self.mea, self.promo, self.pricelist_base, \
                                          self.pricetype)
                                     print error
                                     self.errors.append(error)
@@ -507,7 +507,6 @@ class DataTest:
         print '########################################################\n\n'
         return True
 
-
     """
     ########### Méthodes de création ############### 
     ################################################
@@ -629,6 +628,11 @@ class DataTest:
              self.pricetype))
         return True
 
+    """
+        Fonction permettant de créer un tarif special sur la semaine en cours
+        Comprend l'ajout des produits définis en variable globale
+    """
+
     def create_tarspe(self):
 
         for partner in self.partners:
@@ -639,7 +643,6 @@ class DataTest:
                 friday = self.friday
 
                 nom_tarif = 'Tarif client %s Periode %s -- %s' % (partner['name'], monday, friday)
-                code_cli = partner['name'],
 
                 tarif_id = self.proxy.search('product.tarifs.speciaux', [
                                                     ('client', '=', partner['id']),
@@ -690,6 +693,11 @@ class DataTest:
                  self.pricetype, partner['name']))
 
         return True
+
+    """
+        Fonction permettant de créer un devis a la date du jour
+        Comprend l'ajout des produits définis en variable globale
+    """
 
     def create_devis(self):
         for partner in self.partners:
@@ -925,8 +933,7 @@ def main():
                 dataTest._state('CHECK PRICELIST DEVIS')
                 # On check les prix des produits
                 dataTest._check_price_product_order()
-                dataTest._state('CHECK PRICE PRODUCT')
-
+                dataTest._state('LISTE DES TRAITEMENTS EFFECTUES')
 
 # Jeu de données :
     # Un partenaire P
