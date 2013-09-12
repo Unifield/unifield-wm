@@ -177,6 +177,7 @@ class DataTest:
         self.proxy = proxy
 
         self.partners = partners
+        self.log_file = open('./log/log_file_%s_%s_%s_%s_%s.txt' % (self.tarif_special, self.promo, self.mea, self.pricelist_base, self.pricetype), 'wb')
 
     """
     ########### Méthodes de vérification ########### 
@@ -243,6 +244,10 @@ class DataTest:
                  self.pricetype, partner['name']))
         return True
 
+    """
+        Fonction permettant de vérifier si la pricelist du devis correspond
+        à celle du partenaire.
+    """
 
     def _check_parameters_order(self):
         for devis in self.list_devis:
@@ -279,6 +284,12 @@ class DataTest:
                  self.pricetype))
 
         return True
+
+    """
+        Fonction permettant de vérifier le prix du produit en cours conformément
+        à l'ordre des tarifs.
+        Tarif spécial > mea (blanche/jaune) > promo (blanche/jaune) > Tarif général (nu01, nu02, nu03, nu04)
+    """
 
     def _check_tarif_priority(self, product_order, price_order):
         try:
@@ -404,6 +415,11 @@ class DataTest:
 
         return True
 
+    """
+        Fonction permettant de vérifier les produits présent dans le devis.
+        Appelle la fonction de vérification des prix, et vérifie la présence
+        des produits dans le devis.
+    """
 
     def _check_price_product_order(self):
         for devis in self.list_devis:
@@ -428,6 +444,7 @@ class DataTest:
                         return False
 
                 list_id_product = [x['product_id'] for x in list_product_order]
+                # Vérification que tous les produits de promo sont présents
                 for product_promo in product_promo_test:
                     if product_promo['id'] not in list_id_product:
                         error = 'Le produit %s de promo n\'est pas present dans le devis %s - Cas : ts : %s; mea : %s; promo : %s; base :%s; type : %s;' \
@@ -435,7 +452,7 @@ class DataTest:
                              self.pricetype)
                         print error
                         self.errors.append(error)
-
+                # Vérification que tous les produits de mea sont présents
                 for product_mea in product_mea_test:
                     if product_mea['id'] not in list_id_product:
                         error = 'Le produit %s de mea n\'est pas present dans le devis %s - Cas : ts : %s; mea : %s; promo : %s; base :%s; type : %s;' \
@@ -443,7 +460,7 @@ class DataTest:
                              self.pricetype)
                         print error
                         self.errors.append(error)
-
+                # Vérification que tous les produits ts sont présents
                 for product_ts in product_ts_test:
                     if product_ts[2]['product_id'] not in list_id_product:
                         error = 'Le produit %s de tarif special n\'est pas present dans le devis %s - Cas : ts : %s; mea : %s; promo : %s; base :%s; type : %s;' \
@@ -451,7 +468,7 @@ class DataTest:
                              self.pricetype)
                         print error
                         self.errors.append(error)
-
+                # Vérification que tous les produits tg sont présents
                 for product_tg in product_tg_test:
                     if product_tg['id'] not in list_id_product:
                         error = 'Le produit %s de tarif general n\'est pas present dans le devis %s - Cas : ts : %s; mea : %s; promo : %s; base :%s; type : %s;' \
@@ -505,6 +522,24 @@ class DataTest:
             print '\x1b[%sm%s\x1b[0m' % (';'.join(attr_err), err_val)
 
         print '########################################################\n\n'
+        return True
+
+    """
+        Fonction permettant de d'écrire les erreurs et les succès stockés
+        dans les dictionnaires de cas de figure en cours
+    """
+
+    def _write_log_file(self):
+
+        self.log_file.write('##### ok #####\r\n')
+        for ok_val in self.ok:
+            self.log_file.write(ok_val + '\r\n')
+
+
+        self.log_file.write('##### Erreurs #####\r\n')
+        for err_val in self.errors:
+            self.log_file.write(err_val + '\r\n')
+
         return True
 
     """
@@ -817,18 +852,22 @@ def main():
 
     ### Initialisation des données ###
 
+    # On récupère les ids des partenaires
     partner_ids = proxy.search('res.partner', [('ref', 'in', partner_test)]) 
     if not partner_ids:
         print 'Aucun partenaire ne correspond %s' % ([str(x) + ',' for x in partner_test], )
 
+    # Pour chaque produit de promo on récupère les ids et on met à jour le dictionnaire
     product_promo_ids = []
     for code in product_promo_test:
         product_promo_id = proxy.search('product.product', [('default_code', '=', code['default_code'])])
         product_promo_ids.append(product_promo_id)
         code.update({'id':product_promo_id[0]})
+
     if not product_promo_ids:
         print 'Aucun produit promo ne correspond %s' % ([str(x) + ',' for x in product_promo_test], )
 
+    # Pour chaque produit de mea on récupère les ids et on met à jour le dictionnaire
     product_mea_ids = []
     for code in product_mea_test:
         product_mea_id = proxy.search('product.product', [('default_code', '=', code['default_code'])])
@@ -838,27 +877,35 @@ def main():
     if not product_mea_ids:
         print 'Aucun produit mea ne correspond %s' % ([str(x) + ',' for x in product_mea_test], )
 
+    # Pour chaque produit de ts on récupère les ids et on met à jour le dictionnaire
+    # On supprime default_code également pour permettre l'utilisation directe du dictionnaire
+    # dans la création du tarif spécial
     product_ts_ids = []
     for code in product_ts_test:
         product_ts_id = proxy.search('product.product', [('default_code', '=', code[2]['default_code'])])
         product_ts_ids.append(product_ts_id)
         code[2].update({'product_id':product_ts_id[0]})
         del code[2]['default_code']
+
     if not product_ts_ids:
         print 'Aucun produit ts ne correspond %s' % ([str(x) + ',' for x in product_ts_test], )
 
+    # Pour chaque produit de tg on récupère les ids et on met à jour le dictionnaire
     product_tg_ids = []
     for code in product_tg_test:
         product_tg_id = proxy.search('product.product', [('default_code', '=', code['default_code'])])
         product_tg_ids.append(product_tg_id)
         code.update({'id':product_tg_id[0]})
+
     if not product_tg_ids:
         print 'Aucun produit tg ne correspond %s' % ([str(x) + ',' for x in product_tg_test], )
 
+    # On récupère la liste des ids de tous les produits de la liste des tarifs généraux
     for code in product_tg_list:
         product_tg_list_id = proxy.search('product.product', [('default_code', '=', code['default_code'])])
         code.update({'id':product_tg_list_id[0]})
 
+    # On récupère la liste des ids de tous les produits de la liste du devis
     for code in product_devis_test:
         product_devis_id = proxy.search('product.product', [('default_code', '=', code['default_code'])])
         product_devis = proxy.read('product.product', product_devis_id[0], ['name'])
@@ -934,7 +981,8 @@ def main():
                 # On check les prix des produits
                 dataTest._check_price_product_order()
                 dataTest._state('LISTE DES TRAITEMENTS EFFECTUES')
-
+                dataTest._write_log_file()
+                dataTest.log_file.close()
 # Jeu de données :
     # Un partenaire P
     # Des produits Promo
