@@ -1,0 +1,6 @@
+## Local path
+wm="/home/olivier/projets/Unifield/unifield-wm"
+server="/home/olivier/projets/Unifield/unifield-server"
+addons="/home/olivier/projets/Unifield/unifield-addons"
+web="/home/olivier/projets/Unifield/unifield-web"
+sync="/home/olivier/projets/Unifield/sync_module_prod"

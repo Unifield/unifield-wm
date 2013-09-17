@@ -1,0 +1,13 @@
+## Prefix database name that would be used to generate a synchro instance
+dbname="automatic_sync"
+
+## Local path
+wm="../unifield-wm"
+server="../unifield-server"
+addons="../unifield-addons"
+web="../unifield-web"
+sync="../sync_module_prod"
+
+hq_count=1
+coordo_count=1
+project_count=1
