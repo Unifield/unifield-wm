@@ -63,17 +63,16 @@ stop_server_and_exit() {
 
 pre_process_db() {
   ## Open all periods
-  echo -n "Open all periods as today($today): "
+  echo "$1: preprocessing..."
+  echo -e -n "\tOpen all periods as today($today): "
   psql "$1" -t -c "UPDATE account_period SET state = 'draft' WHERE id IN (SELECT id FROM account_period WHERE date_start <= '$today' ORDER BY number);"
-  echo "DONE."
   ## Update all general accounts
-  echo -n "Set all general accounts to $fdoy: "
+  echo -e -n "\tSet all general accounts to $fdoy: "
   psql "$1" -t -c "UPDATE account_account SET activation_date = '$fdoy';"
-  echo "DONE."
   ## Update all analytic accounts
-  echo -n "Set all analytic accounts to $fdoy: "
+  echo -e -n "\tSet all analytic accounts to $fdoy: "
   psql "$1" -t -c "UPDATE account_analytic_account SET date_start = '$fdoy';"
-  echo "DONE."
+  echo "$1: preprocessing done."
 }
 
 #####
