@@ -11,7 +11,7 @@
 
 PROGRAM=`basename $0`
 VERSION="0.0.0"
-config="`basename ${PROGRAM} .sh`rc"
+config="`dirname $0`/`basename ${PROGRAM} .sh`rc"
 current="$PWD"
 
 #####
