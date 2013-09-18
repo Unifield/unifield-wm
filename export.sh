@@ -32,6 +32,10 @@ hq_count=1
 coordo_count=2
 project_count=3
 
+# some dates
+today=`date +'%Y-%m-%d'`
+fdoy="`date +'%Y'`-01-01" # first day of year
+
 #####
 ## FUNCTIONS
 ###
@@ -55,6 +59,21 @@ stop_server() {
 
 stop_server_and_exit() {
   stop_server "$1" && exit 1
+}
+
+pre_process_db() {
+  ## Open all periods
+  echo -n "Open all periods as today($today): "
+  psql "$1" -t -c "UPDATE account_period SET state = 'draft' WHERE id IN (SELECT id FROM account_period WHERE date_start <= '$today' ORDER BY number);"
+  echo "DONE."
+  ## Update all general accounts
+  echo -n "Set all general accounts to $fdoy: "
+  psql "$1" -t -c "UPDATE account_account SET activation_date = '$fdoy';"
+  echo "DONE."
+  ## Update all analytic accounts
+  echo -n "Set all analytic accounts to $fdoy: "
+  psql "$1" -t -c "UPDATE account_analytic_account SET date_start = '$fdoy';"
+  echo "DONE."
 }
 
 #####
@@ -201,8 +220,10 @@ if ! [ -a "$list" ] ; then
 else
   echo "" > $list
 fi
-# save each DB in a dump file, add it to a list to save and drop DB
+# update each DB, save it in a dump file, add it to a list to save and drop DB
 for db in `psql template1 -t -c "SELECT datname from pg_database where datname ilike '${dbname}_%';"`; do
+  pre_process_db "$db"
+  # save DB
   dumpfile="${db}.dump"
   if [ -a "$dumpfile" ] ; then
     error_and_exit "$dumpfile already exists! Aborted."
@@ -232,8 +253,6 @@ rm -f *.dump
 #####
 
 ## TODO: Update CSV files in sync_module_prod for data to be correct
-## TODO: update all accounts on all databases
-## TODO: open all periods from january to today
 
 ##############
 
