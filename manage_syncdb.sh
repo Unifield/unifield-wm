@@ -21,7 +21,7 @@ current="$PWD"
 # display this program's usage
 usage() {
   cat << EOF
-usage: $PROGRAM [command] [dbname]
+usage: $PROGRAM [dbname] [command] [branch]
 
 This script helps to manage synchro databases.
 
@@ -34,6 +34,7 @@ stop        stop a openerp server
 <dbname>    prefix of database to use
 extract     do a drop, restore and start for the given dbname (after an \
 archive extraction, for an example)
+<branch>    path to the WM branch to use (only useful for start command)
 EOF
 }
 
@@ -108,7 +109,7 @@ start_serv() {
   # check if configuration is here and right completed
   check_config
   source "$config"
-  for var in wm server addons web sync ; do
+  for var in server addons web sync ; do
     if [ -z ${!var} ] ; then
       error_and_exit "Variable not found in configuration file ($config): ${var}."
     fi
@@ -117,6 +118,10 @@ start_serv() {
       error_and_exit "Directory not found (${var} variable in $config file): ${!var}"
     fi
   done
+  # check branch existence
+  if ! [ -d "$2" ] ; then
+    error_and_exit "Directory not found: $2"
+  fi
   # search free ports
   echo -n "Searching free ports to launch server: "
   read XMLRPCPORT NETRPCPORT WEBPORT <<<`netstat -anltp 2> /dev/null | perl -e '%port = ();
@@ -164,7 +169,7 @@ stop_serv() {
   pidfile="${current}/tmp/$1.pid"
   logfile="${current}/tmp/$1.log"
   if ! [ -a "$pidfile" ] ; then
-    error_and_exit "PID file $pidfile not found!"
+    error_and_exit "PID file $pidfile not found!\nThis probably means that no server is working."
   fi
   echo "Stopping server for $1"
   start-stop-daemon --stop --quiet --pidfile $pidfile --oknodo
@@ -185,6 +190,17 @@ fi
 
 prefix=$1
 command=$2
+branch=$3
+
+if [ -z "$branch" ] ; then
+  check_config
+  source "$config"
+  if [ -z ${wm} ] ; then
+    error_and_exit "Variable not found in configuration file ($config): wm."
+  fi
+
+  branch="${wm}"
+fi
 
 #####
 ## MAIN
@@ -202,13 +218,13 @@ case $command in
   drop "$prefix"
   ;;
   start)
-  start_serv "$prefix"
+  start_serv "$prefix" "$branch"
   ;;
   stop)
   stop_serv "$prefix"
   ;;
   extract)
-  drop "$prefix" && restore "$prefix" && start_serv "$prefix"
+  drop "$prefix" && restore "$prefix" && start_serv "$prefix" "$branch"
   ;;
   help)
   usage
