@@ -11,7 +11,8 @@
 
 PROGRAM=`basename $0`
 VERSION="0.0.0"
-config="`dirname $0`/`basename ${PROGRAM} .sh`rc"
+configdir=`dirname $0`
+config="${configdir}/`basename ${PROGRAM} .sh`rc"
 current="$PWD"
 
 #####
@@ -139,15 +140,15 @@ start_serv() {
   }'`
   echo "DONE."
   # Prepare files and directories
-  pidfile="${current}/tmp/$1.pid"
-  logfile="${current}/tmp/$1.log"
-  if [ -a "${current}/tmp" ] ; then
-    if ! [ -d "${current}/tmp" ] ; then
-      error_and_exit "Directory ${current}/tmp not found! Is that a file?"
+  pidfile="${configdir}/tmp/$1.pid"
+  logfile="${configdir}/tmp/$1.log"
+  if [ -a "${configdir}/tmp" ] ; then
+    if ! [ -d "${configdir}/tmp" ] ; then
+      error_and_exit "Directory ${configdir}/tmp not found! Is that a file?"
     fi
   else
-    echo -n "Creating ${current}/tmp directory: "
-    mkdir ${current}/tmp
+    echo -n "Creating ${configdir}/tmp directory: "
+    mkdir ${configdir}/tmp
     echo "DONE."
   fi
   touch ${logfile}
@@ -166,8 +167,8 @@ start_serv() {
 }
 
 stop_serv() {
-  pidfile="${current}/tmp/$1.pid"
-  logfile="${current}/tmp/$1.log"
+  pidfile="${configdir}/tmp/$1.pid"
+  logfile="${configdir}/tmp/$1.log"
   if ! [ -a "$pidfile" ] ; then
     error_and_exit "PID file $pidfile not found!\nThis probably means that no server is working."
   fi
