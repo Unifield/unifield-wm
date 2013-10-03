@@ -89,7 +89,8 @@ class iller_commission_line(osv.osv):
         res = self.set_value_commission(cr, uid, lines, context=context)
 
         if lines and not res[0]:
-            raise osv.except_osv('Erreur', 'Vous ne pouvez pas avoir un prix unitaire inférieur au prix de vente du produit multiplié par le barème c1 - L\'une des lignes de cette commande déroge à cette règle.')
+            return False
+#            raise osv.except_osv('Erreur', 'Vous ne pouvez pas avoir un prix unitaire inférieur au prix de vente du produit multiplié par le barème c1 - L\'une des lignes de cette commande déroge à cette règle.')
 
         return res[0]
 

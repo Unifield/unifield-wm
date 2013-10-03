@@ -82,7 +82,8 @@ class iller_commission_line(osv.osv):
         res = self.set_value_commission(cr, uid, lines, context=context)
 
         if not res[0]:
-            raise osv.except_osv('Erreur', u'Vous ne pouvez pas avoir un prix unitaire inférieur au prix de vente du produit multiplié par le barème c1 - L\'une des lignes de cette commande déroge à cette règle.')
+            return False
+            #raise osv.except_osv('Erreur', u'Vous ne pouvez pas avoir un prix unitaire inférieur au prix de vente du produit multiplié par le barème c1 - L\'une des lignes de cette commande déroge à cette règle.')
 
         return res[0]
 
@@ -145,7 +146,7 @@ class iller_commission_line(osv.osv):
                 elif 'partner_id' in l:
                     partner = partner_obj.browse(cr, uid, l.get('partner_id'))
                     ## On vérifie si le client ne fait pas partie de la liste des clients autorisés
-                    if partner.depassement or order.partner_id.ref == '160053':
+                    if partner.depassement:
                         return l.get('unit_price')*l.get('qty')*0.01, message
 
 
@@ -205,11 +206,11 @@ class iller_commission_line(osv.osv):
         res2 = self.set_value_commission(cr, uid, lines, context=context)
 
         ## Si le prix est inférieur et que l'on a pas les droits de surpasser, on affiche une erreur
-        if not res2[0]:
-            return {'value': {},
-                    'warning': {'title': 'Erreur !',
-                                'message': 'Vous ne pourrez pas enregistrer la commande car le prix indiqué est inférieur à ce qui est autorisé.'}}
-        elif res2[1] != '':
+#        if not res2[0]:
+#            return {'value': {},
+#                    'warning': {'title': 'Erreur !',
+#                                'message': 'Vous ne pourrez pas enregistrer la commande car le prix indiqué est inférieur à ce qui est autorisé.'}}
+        if res2 and res2[1] != '':
             return {'value': {'commission': res2[0]},
                     'warning': {'title': 'Attention !',
                                 'message': res2[1]}}
