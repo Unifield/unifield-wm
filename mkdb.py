@@ -113,6 +113,7 @@ skipSync = False
 skipModuleData = False
 skipPartner = False
 skipManualConfig = False
+skipOpenPeriod = False
 
 
 # Fake TestCase to enable/disable quickly some tests
@@ -149,7 +150,7 @@ if not __name__ == '__main__':
     skipModuleData = bool_creation_only
     skipPartner = bool_creation_only
     skipManualConfig = bool_creation_only
-
+    skipOpenPeriod = bool_creation_only
 
 # Base of database creation
 class db_creation(object):
@@ -505,6 +506,20 @@ class hqn_creation(client_creation, unittest.TestCase):
         account_ids = self.db.search_data('account.account', [('type','!=','view'),('user_type.code','=','expense')])
         analytic_account_ids = self.db.search_data('account.analytic.account', [('name', 'in', ['Expatriates','National Staff','Operations','Support'])])
         self.db.write('account.analytic.account',  analytic_account_ids, {'destination_ids': [(6, 0, account_ids)]})
+
+    @unittest.skipIf(skipOpenPeriod, "Open Period desactivated")
+    def test_44_open_period(self):
+        self.db.connect('admin')
+        import time
+        today = time.strftime('%Y-%m-%d')
+        month = time.strftime('%m')
+        # search current fiscalyear
+        fy_ids = self.db.search_data('account.fiscalyear', [('date_start', '<=', today), ('date_stop', '>=', today)])
+        assert len(fy_ids) > 0, "No fiscalyear found!"
+        period_ids = self.db.search_data('account.period', [('fiscalyear_id', 'in', fy_ids), ('number', '<=', month), ('state', '=', 'created')])
+        # change all period by draft state (should use action_set_state but openerplib doesn't give way to do this)
+        # as it's to open period from created to draft state, it's not very important
+        self.db.write('account.period', period_ids, {'state': 'draft'}
 
 
 # Replicable class to create coordo n
