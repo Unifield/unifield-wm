@@ -628,7 +628,6 @@ class verbose(unittest.TestCase):
 
 # Base Install
 test_cases = [verbose, server_creation]
-test_cases = [verbose]
 
 # Create HQ classes
 for i in range(1, hq_count+1):
