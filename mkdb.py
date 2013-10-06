@@ -83,6 +83,7 @@ assert coordo_count > 0 if project_count > 0 else coordo_count >= 0, \
 
 #Load OpenERP Client Library
 import openerplib
+import logging
 
 #from tests import *
 from tests.openerplib import db
@@ -113,7 +114,24 @@ skipSync = False
 skipModuleData = False
 skipPartner = False
 skipManualConfig = False
+skipOpenPeriod = False
 
+skipCreation = True
+skipModules = True
+skipModuleUpdate = True
+skipUniUser = True
+skipGroups = True
+skipPropInstance = True
+skipConfig = True
+skipRegister = True
+skipSync = False
+skipModuleData = True
+skipPartner = True
+skipManualConfig = True
+skipOpenPeriod = False
+
+
+_logger = logging.getLogger('mkdb')
 
 # Fake TestCase to enable/disable quickly some tests
 class creation_only(unittest.TestCase):
@@ -149,6 +167,7 @@ if not __name__ == '__main__':
     skipModuleData = bool_creation_only
     skipPartner = bool_creation_only
     skipManualConfig = bool_creation_only
+    skipOpenPeriod = bool_creation_only
 
 
 # Base of database creation
@@ -255,7 +274,7 @@ class db_creation(object):
                     answer = getattr(self.db.wizard(model, data), button)()
                 model = answer.get('res_model', None)
             except:
-                print "DEBUG: db=%s, model=%s" % (self.db.name, model)
+                _logger.info( "DEBUG: db=%s, model=%s" % (self.db.name, model))
                 raise
 
     @classmethod
@@ -443,6 +462,20 @@ class client_creation(db_creation):
         # Server accept validation
         entities.validate_action(entity_ids)
 
+    @unittest.skipIf(skipOpenPeriod, "Open Period desactivated")
+    def test_44_open_period(self):
+        self.db.connect('admin')
+        import time
+        today = time.strftime('%Y-%m-%d')
+        month = time.strftime('%m')
+        # search current fiscalyear
+        fy_ids = self.db.search_data('account.fiscalyear', [('date_start', '<=', today), ('date_stop', '>=', today)])
+        assert len(fy_ids) > 0, "No fiscalyear found!"
+        period_ids = self.db.search_data('account.period', [('fiscalyear_id', 'in', fy_ids), ('number', '<=', month), ('state', '=', 'created')])
+        # change all period by draft state (should use action_set_state but openerplib doesn't give way to do this)
+        # as it's to open period from created to draft state, it's not very important
+        self.db.write('account.period', period_ids, {'state': 'draft'})
+
     @unittest.skipIf(skipSync, "Synchronization desactivated")
     def test_50_synchronize(self):
         self.db.connect('admin')
@@ -457,15 +490,24 @@ class client_creation(db_creation):
     def test_91_instance_partner(self):
         self.db.connect('admin')
         account = self.db.get('account.account')
-        self.db.get('res.partner').create({
-            'name' : self.db.name,
-            'customer' : 1,
-            'supplier' : 1,
-            'partner_type' : 'internal',
-            'property_account_payable' : account.search([('code','=','3000')])[0],
-            'property_account_receivable' : account.search([('code','=','1201')])[0],
-        })
+        
+        res = self.db.get('res.partner')
+        temp_partner = res.search([('name','=','Local Market')])
+        if temp_partner:
+            # set account values for local market
+            self.db.write('res.partner', temp_partner,{
+                'property_account_payable' : account.search([('code','=','3000')])[0],
+                'property_account_receivable' : account.search([('code','=','1201')])[0],
+                'city': 'Geneva',
+                })
 
+        temp_partner = res.search([('name','=',self.db.name)])
+        if temp_partner:
+            # set account values for the default user
+            self.db.write('res.partner', temp_partner,{
+                'property_account_payable' : account.search([('code','=','3000')])[0],
+                'property_account_receivable' : account.search([('code','=','1205')])[0],
+                })
 
 # Replicable class to create hq n
 class hqn_creation(client_creation, unittest.TestCase):
@@ -581,27 +623,27 @@ class projectn_creation(client_creation):
 
 class verbose(unittest.TestCase):
     def test_10_show_hqs(self):
-        print
+        _logger.info("---------------------")
         for tc_hq in filter(lambda tc:issubclass(tc, hqn_creation), test_cases):
-            print " * %s" % hqn_creation.name_format % (config.prefix, tc_hq.index)
+            _logger.info( " * %s" % hqn_creation.name_format % (config.prefix, tc_hq.index))
             for tc in filter(lambda tc:issubclass(tc, coordon_creation) \
                                        and tc.parent is tc_hq, test_cases):
-                print "    - %s" % coordon_creation.name_format % (config.prefix, tc.index)
-            print
+                _logger.info( "    - %s" % coordon_creation.name_format % (config.prefix, tc.index))
+            _logger.info("---------------------")
 
     def test_20_show_coordos(self):
         print
         for tc_coordo in filter(lambda tc:issubclass(tc, coordon_creation), test_cases):
-            print " * %s" % coordon_creation.name_format % (config.prefix, tc_coordo.index)
+            _logger.info( " * %s" % coordon_creation.name_format % (config.prefix, tc_coordo.index))
             for tc in filter(lambda tc:issubclass(tc, projectn_creation) \
                                        and tc.parent is tc_coordo, test_cases):
-                print "    - %s" % projectn_creation.name_format % (config.prefix, tc.index)
-            print
+                _logger.debug( "    - %s" % projectn_creation.name_format % (config.prefix, tc.index))
+            _logger.info("---------------------")
 
 
 # Base Install
 test_cases = [verbose, server_creation]
-
+test_cases = [verbose]
 
 # Create HQ classes
 for i in range(1, hq_count+1):
