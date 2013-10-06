@@ -447,20 +447,6 @@ class client_creation(db_creation):
         # Server accept validation
         entities.validate_action(entity_ids)
 
-    @unittest.skipIf(skipOpenPeriod, "Open Period desactivated")
-    def test_44_open_period(self):
-        self.db.connect('admin')
-        import time
-        today = time.strftime('%Y-%m-%d')
-        month = time.strftime('%m')
-        # search current fiscalyear
-        fy_ids = self.db.search_data('account.fiscalyear', [('date_start', '<=', today), ('date_stop', '>=', today)])
-        assert len(fy_ids) > 0, "No fiscalyear found!"
-        period_ids = self.db.search_data('account.period', [('fiscalyear_id', 'in', fy_ids), ('number', '<=', month), ('state', '=', 'created')])
-        # change all period by draft state (should use action_set_state but openerplib doesn't give way to do this)
-        # as it's to open period from created to draft state, it's not very important
-        self.db.write('account.period', period_ids, {'state': 'draft'})
-
     @unittest.skipIf(skipSync, "Synchronization desactivated")
     def test_50_synchronize(self):
         self.db.connect('admin')
@@ -493,6 +479,22 @@ class client_creation(db_creation):
                 'property_account_payable' : account.search([('code','=','3000')])[0],
                 'property_account_receivable' : account.search([('code','=','1205')])[0],
                 })
+
+
+    @unittest.skipIf(skipOpenPeriod, "Open Period desactivated")
+    def test_92_open_period(self):
+        self.db.connect('admin')
+        import time
+        today = time.strftime('%Y-%m-%d')
+        month = time.strftime('%m')
+        # search current fiscalyear
+        fy_ids = self.db.search_data('account.fiscalyear', [('date_start', '<=', today), ('date_stop', '>=', today)])
+        assert len(fy_ids) > 0, "No fiscalyear found!"
+        period_ids = self.db.search_data('account.period', [('fiscalyear_id', 'in', fy_ids), ('number', '<=', month), ('state', '=', 'created')])
+        # change all period by draft state (should use action_set_state but openerplib doesn't give way to do this)
+        # as it's to open period from created to draft state, it's not very important
+        self.db.write('account.period', period_ids, {'state': 'draft'})
+            
 
 # Replicable class to create hq n
 class hqn_creation(client_creation, unittest.TestCase):
