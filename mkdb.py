@@ -116,21 +116,6 @@ skipPartner = False
 skipManualConfig = False
 skipOpenPeriod = False
 
-skipCreation = True
-skipModules = True
-skipModuleUpdate = True
-skipUniUser = True
-skipGroups = True
-skipPropInstance = True
-skipConfig = True
-skipRegister = True
-skipSync = False
-skipModuleData = True
-skipPartner = True
-skipManualConfig = True
-skipOpenPeriod = False
-
-
 _logger = logging.getLogger('mkdb')
 
 # Fake TestCase to enable/disable quickly some tests
