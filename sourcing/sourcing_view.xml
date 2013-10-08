@@ -48,7 +48,8 @@
 					<field name="categ" />
 					<field name="line_number" />
 					<field name="sale_order_state" />
-					<field name="state" invisible="True" />
+                    <field name="state" invisible="True" />
+                    <field name="product_id" invisible="True" />
 					<field name="product_desc" readonly="True" />
 					<field name="qty" string="Qty" />
 					<field name="uom_id" /> 
