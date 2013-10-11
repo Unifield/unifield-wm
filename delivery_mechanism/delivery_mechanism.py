@@ -425,6 +425,8 @@ class stock_picking(osv.osv):
         sequence_obj = self.pool.get('ir.sequence')
         # stock move object
         move_obj = self.pool.get('stock.move')
+        proc_obj = self.pool.get('procurement.order')
+        sol_obj = self.pool.get('sale.order.line')
         product_obj = self.pool.get('product.product')
         currency_obj = self.pool.get('res.currency')
         uom_obj = self.pool.get('product.uom')
@@ -490,6 +492,15 @@ class stock_picking(osv.osv):
                     # Average price computation
                     # selected product from wizard must be tested
                     product = product_obj.browse(cr, uid, partial['product_id'], context=ctx_avg)
+
+                    # Search to know if the IN move is linked to an IR
+                    from_ir = False
+                    requestor_loc_id = False
+                    for proc in move.procurement_ids:
+                        if proc.from_ir:
+                            from_ir = True
+                            requestor_loc_id = proc.requestor_loc_id.id
+
                     values = {'name': partial['name'],
                               'product_id': partial['product_id'],
                               'product_qty': partial['product_qty'],
@@ -499,7 +510,12 @@ class stock_picking(osv.osv):
                               'product_uos': partial['product_uom'],
                               'asset_id': partial['asset_id'],
                               'change_reason': partial['change_reason'],
+                              'from_ir': from_ir,
+                              'requestor_loc_id': requestor_loc_id,
                               }
+
+                    move_location_dest_id = move.location_dest_id.id
+
                     if 'product_price' in partial:
                         values.update({'price_unit': partial['product_price']})
                     elif 'product_uom' in partial and partial['product_uom'] != move.product_uom.id:
@@ -507,9 +523,10 @@ class stock_picking(osv.osv):
                         values.update({'price_unit': new_price})
                     values = self._do_incoming_shipment_first_hook(cr, uid, ids, context, values=values)
                     compute_average = pick.type == 'in' and product.cost_method == 'average' and not move.location_dest_id.cross_docking_location_ok
-                    if values.get('location_dest_id'):
-                        val_loc = self.pool.get('stock.location').browse(cr, uid, values.get('location_dest_id'), context=context)
-                        compute_average = pick.type == 'in' and product.cost_method == 'average' and not val_loc.cross_docking_location_ok
+#                   Duplicate of the above line                    
+#                    if values.get('location_dest_id'):
+#                        val_loc = self.pool.get('stock.location').browse(cr, uid, values.get('location_dest_id'), context=context)
+#                        compute_average = pick.type == 'in' and product.cost_method == 'average' and not val_loc.cross_docking_location_ok
                     
                     # why do not used get_picking_type: original do_partial do not use it
                     # when an incoming shipment has a avg product to Service, the average price computation is of no use
@@ -580,6 +597,10 @@ class stock_picking(osv.osv):
                         values = self._do_incoming_shipment_first_hook(cr, uid, ids, context, values=values)
                         # mark the done IN stock as processed
                         move_obj.write(cr, uid, [move.id], dict(values, processed_stock_move=True), context=context)
+                        if partial.get('to_recheck'):
+                            move_obj.write(cr, uid, [move.id], {'state': 'draft'}, context=context)
+                            move_obj.action_confirm(cr, uid, [move.id], context=context)
+                            move_obj.action_assign(cr, uid, [move.id])
                         done_moves.append(move.id)
                                 
                     else:
@@ -591,6 +612,10 @@ class stock_picking(osv.osv):
                         values.update(average_values)
                         # mark the done IN stock as processed
                         new_move = move_obj.copy(cr, uid, move.id, dict(values, processed_stock_move=True), context=dict(context, keepLineNumber=True))
+                        if partial.get('to_recheck'):
+                            move_obj.write(cr, uid, [new_move], {'state': 'draft'}, context=context)
+                            move_obj.action_confirm(cr, uid, [new_move], context=context)
+                            move_obj.action_assign(cr, uid, [new_move])
                         done_moves.append(new_move)
                         
                     
@@ -664,6 +689,7 @@ class stock_picking(osv.osv):
                                 'move_dest_id': False,
                                 'price_unit': move.price_unit,
                                 'change_reason': False,
+                                'location_dest_id': move_location_dest_id,
                                 'processed_stock_move': (move.processed_stock_move or count != 0) and True or False, # count == 0 means not processed. will not be updated by the synchro anymore if already completely or partially processed
                                 }
                     # average computation - empty if not average

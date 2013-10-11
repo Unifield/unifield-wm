@@ -80,9 +80,13 @@ class stock_partial_picking(osv.osv_memory):
         # partial data from wizard
         partial = self.browse(cr, uid, ids[0], context=context)
         
+        data_obj = self.pool.get('ir.model.data')
         pick_obj = self.pool.get('stock.picking')
         move_obj = self.pool.get('stock.move')
         prodlot_obj = self.pool.get('stock.production.lot')
+
+        input_loc = data_obj.get_object_reference(cr, uid, 'msf_cross_docking', 'stock_location_input')[1]
+        stock_loc = data_obj.get_object_reference(cr, uid, 'stock', 'stock_location_stock')[1]
 
         # partial datas
         partial_datas = {}
@@ -97,6 +101,7 @@ class stock_partial_picking(osv.osv_memory):
             memory_moves_list = getattr(partial, 'product_moves_%s'%picking_type)
             # organize data according to move id
             for move in memory_moves_list:
+                to_recheck = False
                 total_qty += move.quantity
                 # if no quantity, don't process the move
                 if not move.quantity:
@@ -138,6 +143,10 @@ class stock_partial_picking(osv.osv_memory):
                           'force_complete': move.force_complete,
                           'change_reason': move.change_reason,
                           }
+                if picking_type == 'in' and partial.direct_incoming and move.move_id.location_dest_id.id == input_loc:
+                    to_recheck = True
+                    values.update({'location_dest_id': stock_loc, 'to_recheck': True})
+
                 # average computation from original openerp
                 if (picking_type == 'in') and (move.product_id.cost_method == 'average'):
                     values.update({'product_price' : move.cost,

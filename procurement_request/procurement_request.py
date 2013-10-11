@@ -590,4 +590,42 @@ class purchase_order(osv.osv):
     
 purchase_order()
 
+
+class procurement_order(osv.osv):
+    _inherit = 'procurement.order'
+
+    def _get_from_ir(self, cr, uid, ids, field_name, args, context=None):
+        '''
+        Return True if at least one attached FO lines is an IR line
+        '''
+        res = {}
+
+        for proc in self.browse(cr, uid, ids, context=context):
+            res[proc.id] = {'from_ir': False, 'requestor_loc_id': False}
+            for sol in proc.sale_order_line_ids:
+                if sol.order_id and sol.order_id.procurement_request:
+                    res[proc.id]['from_ir'] = True
+                    res[proc.id]['requestor_loc_id'] = sol.order_id.location_requestor_id.d
+                    break
+
+        return res
+
+    _columns = {
+        'from_ir': fields.function(_get_from_ir, method=True, string='From IR', type='boolean', multi='from_ir'),
+        'requestor_loc_id': fields.function(_get_from_ir, method=True, string='Requestor location',
+                                            type='many2one', relation='stock.location', multi='from_ir'),
+    }
+
+procurement_order()
+
+
+class stock_move(osv.osv):
+    _inherit = 'stock.move'
+
+    _columns = {
+        'procurement_ids': fields.one2many('procurement.order', 'move_id', string='Procurements', readonly=True),
+    }
+
+stock_move()
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

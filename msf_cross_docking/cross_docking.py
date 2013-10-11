@@ -416,6 +416,7 @@ locations when the Allocated stocks configuration is set to \'Unallocated\'.""")
         if setup.allocation_setup != 'unallocated':
             cross_docking_location = self.pool.get('stock.location').get_cross_docking_location(cr, uid)
         stock_location_input = obj_data.get_object_reference(cr, uid, 'msf_cross_docking', 'stock_location_input')[1]
+        stock_location_stock = obj_data.get_object_reference(cr, uid, 'stock', 'stock_location_stock')[1]
         stock_location_service = self.pool.get('stock.location').get_service_location(cr, uid)
         stock_location_non_stockable = self.pool.get('stock.location').search(cr, uid, [('non_stockable_ok', '=', True)])
         if stock_location_non_stockable:
@@ -447,10 +448,26 @@ locations when the Allocated stocks configuration is set to \'Unallocated\'.""")
                     values.update({'location_dest_id': stock_location_non_stockable})
                 elif product_type == 'service_recep' and stock_location_service:
                     values.update({'location_dest_id': stock_location_service})
+                elif var.direct_incoming and stock_location_stock:
+                    if not values.get('from_ir'):
+                        values.update({'location_dest_id': stock_location_stock})
+                    elif values.get('requestor_loc_id'):
+                        values.update({'location_dest_id': values.get('requestor_loc_id')})
                 else:
                     # treat moves towards STOCK if NOT SERVICE
                     values.update({'location_dest_id': stock_location_input})
                 values.update({'cd_from_bo': False})
+            elif var.dest_type == 'default' and var.direct_incoming:
+                var.source_type = None
+                # below, "source_type" is only used for the outgoing shipment. We set it to "None" because
+                #by default it is "default"and we do not want that info on INCOMING shipment
+                product_id = values['product_id']
+                product_type = self.pool.get('product.product').read(cr, uid, product_id, ['type'], context=context)['type']
+                if product_type not in ('consu', 'service_recep') and stock_location_stock:
+                    if not values.get('from_ir'):
+                        values.update({'location_dest_id': stock_location_stock})
+                    elif values.get('requestor_loc_id'):
+                        values.update({'location_dest_id': values.get('requestor_loc_id')})
         return values
 
     def _do_partial_hook(self, cr, uid, ids, context, *args, **kwargs):
