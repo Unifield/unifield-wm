@@ -435,6 +435,7 @@ class stock_picking(osv.osv):
         # workflow
         wf_service = netsvc.LocalService("workflow")
         internal_loc_ids = self.pool.get('stock.location').search(cr, uid, [('usage','=','internal'), ('cross_docking_location_ok', '=', False)])
+        cross_loc_ids = self.pool.get('stock.location').search(cr, uid, [('cross_docking_location_ok', '=', True)])
         ctx_avg = context.copy()
         ctx_avg['location'] = internal_loc_ids
         for pick in self.browse(cr, uid, ids, context=context):
@@ -484,6 +485,8 @@ class stock_picking(osv.osv):
                 update_out = count_partial > 1
                 # average price computation, new values - should be the same for every partial
                 average_values = {}
+                # Keep cross-docking values
+                cross_docking_ok = pick.cross_docking_ok
 
                 
                 # partial list
@@ -512,6 +515,7 @@ class stock_picking(osv.osv):
                               'change_reason': partial['change_reason'],
                               'from_ir': from_ir,
                               'requestor_loc_id': requestor_loc_id,
+                              'cross_doc_loc': move.location_dest_id.id in cross_loc_ids
                               }
 
                     move_location_dest_id = move.location_dest_id.id
@@ -673,6 +677,7 @@ class stock_picking(osv.osv):
                     if not backorder_id:
                         # create the backorder - with no lines
                         backorder_id = self.copy(cr, uid, pick.id, {'name': sequence_obj.get(cr, uid, 'stock.picking.%s'%(pick.type)),
+                                                                    'cross_docking_ok': cross_docking_ok,
                                                                     'move_lines' : [],
                                                                     'state':'draft',
                                                                     })

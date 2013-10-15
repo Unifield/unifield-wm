@@ -86,6 +86,7 @@ class stock_partial_picking(osv.osv_memory):
         prodlot_obj = self.pool.get('stock.production.lot')
 
         input_loc = data_obj.get_object_reference(cr, uid, 'msf_cross_docking', 'stock_location_input')[1]
+        cross_loc = data_obj.get_object_reference(cr, uid, 'msf_cross_docking', 'stock_location_cross_docking')[1]
         stock_loc = data_obj.get_object_reference(cr, uid, 'stock', 'stock_location_stock')[1]
 
         # partial datas
@@ -135,7 +136,7 @@ class stock_partial_picking(osv.osv_memory):
                                 raise osv.except_osv(_('Error !'), _('No Batch Number with Expiry Date for Expiry Date Mandatory and not Incoming Shipment should not happen. Please hold...'))
                 # fill partial data
                 values = {'name': move.product_id.partner_ref,
-			  'product_id': move.product_id.id,
+            			  'product_id': move.product_id.id,
                           'product_qty': move.quantity,
                           'product_uom': move.product_uom.id,
                           'prodlot_id': prodlot_id,
@@ -143,7 +144,13 @@ class stock_partial_picking(osv.osv_memory):
                           'force_complete': move.force_complete,
                           'change_reason': move.change_reason,
                           }
-                if picking_type == 'in' and partial.direct_incoming and move.move_id.location_dest_id.id == input_loc:
+
+                dest_loc = move.move_id.location_dest_id.id
+                def_cond = partial.dest_type == 'default' and dest_loc != cross_loc
+                st_cond = partial.dest_type == 'to_stock'
+                gen_cond = picking_type == 'in' and partial.direct_incoming and dest_loc in (input_loc, cross_loc)
+
+                if gen_cond and (st_cond or def_cond):
                     to_recheck = True
                     values.update({'location_dest_id': stock_loc, 'to_recheck': True})
 

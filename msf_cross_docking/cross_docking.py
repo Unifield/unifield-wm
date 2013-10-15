@@ -463,7 +463,7 @@ locations when the Allocated stocks configuration is set to \'Unallocated\'.""")
                 #by default it is "default"and we do not want that info on INCOMING shipment
                 product_id = values['product_id']
                 product_type = self.pool.get('product.product').read(cr, uid, product_id, ['type'], context=context)['type']
-                if product_type not in ('consu', 'service_recep') and stock_location_stock:
+                if product_type not in ('consu', 'service_recep') and stock_location_stock and not values.get('cross_doc_loc'):
                     if not values.get('from_ir'):
                         values.update({'location_dest_id': stock_location_stock})
                     elif values.get('requestor_loc_id'):
