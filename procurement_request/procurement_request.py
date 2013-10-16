@@ -605,7 +605,7 @@ class procurement_order(osv.osv):
             for sol in proc.sale_order_line_ids:
                 if sol.order_id and sol.order_id.procurement_request:
                     res[proc.id]['from_ir'] = True
-                    res[proc.id]['requestor_loc_id'] = sol.order_id.location_requestor_id.d
+                    res[proc.id]['requestor_loc_id'] = sol.order_id.location_requestor_id.id
                     break
 
         return res
