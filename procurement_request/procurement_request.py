@@ -622,6 +622,12 @@ procurement_order()
 class stock_move(osv.osv):
     _inherit = 'stock.move'
 
+    def copy_data(self, cr, uid, id, default, context=None):
+        default = default or {}
+        default.update({'procurement_ids': []})
+
+        return super(stock_move, self).copy_data(cr, uid, id, default, context=context)
+
     _columns = {
         'procurement_ids': fields.one2many('procurement.order', 'move_id', string='Procurements', readonly=True),
     }
