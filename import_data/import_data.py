@@ -265,6 +265,8 @@ class import_data(osv.osv_memory):
 
                     if impobj._name == 'product.product':
                         ids_to_update = impobj.search(cr, uid, [('default_code', '=', data['default_code'])])
+                        if not ids_to_update:
+                            ids_to_update = impobj.search(cr, uid, [('xmlid_code', '=', data['xmlid_code'])])
                     
                     if ids_to_update:
                         impobj.write(cr, uid, ids_to_update, data)
