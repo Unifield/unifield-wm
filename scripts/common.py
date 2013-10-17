@@ -1,7 +1,7 @@
 from sys import stdout, stderr, exit
 
 from xmlrpclib import Fault
-import openerplib
+import openerplib103 as openerplib
 
 from tests.openerplib import db
 

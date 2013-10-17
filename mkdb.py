@@ -70,6 +70,8 @@
 """
 
 import sys
+import time
+import pdb
 
 #Load config file
 import config
@@ -81,26 +83,19 @@ assert hq_count <= coordo_count or coordo_count == 0, \
 assert coordo_count > 0 if project_count > 0 else coordo_count >= 0, \
     "Wrong number of Coordinations and Projects!"
 
-#Load OpenERP Client Library
-import openerplib
-import logging
-
 #from tests import *
 from tests.openerplib import db
 
 from scripts.common import *
 
 #Load tests procedures
+#TODO: use unittest2 instead of unittest to make the command-line arguments
+#      work with python < 2.7
 if sys.version_info >= (2, 7):
     import unittest
 else:
     # Needed for setUpClass and skipIf methods
     import unittest27 as unittest
-
-try:
-    import ipdb as pdb
-except:
-    import pdb
 
 skipCreation = False
 skipModules = False
@@ -116,7 +111,8 @@ skipPartner = False
 skipManualConfig = False
 skipOpenPeriod = False
 
-_logger = logging.getLogger('mkdb')
+def warn(*messages):
+    sys.stderr.write(" ".join(messages)+"\n")
 
 # Fake TestCase to enable/disable quickly some tests
 class creation_only(unittest.TestCase):
@@ -259,7 +255,7 @@ class db_creation(object):
                     answer = getattr(self.db.wizard(model, data), button)()
                 model = answer.get('res_model', None)
             except:
-                _logger.info( "DEBUG: db=%s, model=%s" % (self.db.name, model))
+                warn("DEBUG: db=%s, model=%s" % (self.db.name, model))
                 raise
 
     @classmethod
@@ -480,11 +476,9 @@ class client_creation(db_creation):
                 'property_account_receivable' : account.search([('code','=','1205')])[0],
                 })
 
-
     @unittest.skipIf(skipOpenPeriod, "Open Period desactivated")
     def test_92_open_period(self):
         self.db.connect('admin')
-        import time
         today = time.strftime('%Y-%m-%d')
         month = time.strftime('%m')
         # search current fiscalyear
@@ -610,22 +604,22 @@ class projectn_creation(client_creation):
 
 class verbose(unittest.TestCase):
     def test_10_show_hqs(self):
-        _logger.info("---------------------")
+        warn("\n"+"-" * 40)
         for tc_hq in filter(lambda tc:issubclass(tc, hqn_creation), test_cases):
-            _logger.info( " * %s" % hqn_creation.name_format % (config.prefix, tc_hq.index))
+            warn( " * %s" % hqn_creation.name_format % (config.prefix, tc_hq.index))
             for tc in filter(lambda tc:issubclass(tc, coordon_creation) \
                                        and tc.parent is tc_hq, test_cases):
-                _logger.info( "    - %s" % coordon_creation.name_format % (config.prefix, tc.index))
-            _logger.info("---------------------")
+                warn( "    - %s" % coordon_creation.name_format % (config.prefix, tc.index))
+            warn("-" * 40)
 
     def test_20_show_coordos(self):
-        print
+        warn("\n"+"-" * 40)
         for tc_coordo in filter(lambda tc:issubclass(tc, coordon_creation), test_cases):
-            _logger.info( " * %s" % coordon_creation.name_format % (config.prefix, tc_coordo.index))
+            warn( " * %s" % coordon_creation.name_format % (config.prefix, tc_coordo.index))
             for tc in filter(lambda tc:issubclass(tc, projectn_creation) \
                                        and tc.parent is tc_coordo, test_cases):
-                _logger.debug( "    - %s" % projectn_creation.name_format % (config.prefix, tc.index))
-            _logger.info("---------------------")
+                warn( "    - %s" % projectn_creation.name_format % (config.prefix, tc.index))
+            warn("-" * 40)
 
 
 # Base Install
@@ -681,4 +675,3 @@ def load_tests(loader, tests, pattern):
 
 if __name__ == '__main__':
     unittest.main(failfast=True, verbosity=2)
-

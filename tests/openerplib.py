@@ -5,14 +5,11 @@ import re
 import csv
 
 from xmlrpclib import Fault
-openerplib = __import__('openerplib')
+import openerplib103 as openerplib
 
 import config
 
-try:
-    import ipdb as pdb
-except:
-    import pdb
+import pdb
 
 class db(object):
     def __init__(self, server, db_name, user=None, password=None, server_password=None):
@@ -175,7 +172,7 @@ class db(object):
                 data[i] = str(data[i])
                 #if v == None: data[i] = False
                 #elif type(v) == bool: data[i] = 1 if v else 0
-        if 'reconcile note' in fields: ipdb.set_trace()
+        if 'reconcile note' in fields: pdb.set_trace()
         result, rows, warning_msg, dummy = self.get(model).import_data(fields, datas, mode)
         if result == -1:
             raise Exception, "Unable to import data: "+str(warning_msg)
@@ -253,8 +250,10 @@ class user(object):
         self.db = db
         self.users = db.get('res.users')
         self.login = login
-        try: self.id = self.users.search([('login','=',login)])[0]
-        except: self.id = None
+        try:
+            self.id = self.users.search([('login','=',login)])[0]
+        except IndexError:
+            self.id = None
 
     def delGroups(self, *groups):
         if not self.id: raise Exception, 'Cannot remove groups to unknown user: '+self.login
