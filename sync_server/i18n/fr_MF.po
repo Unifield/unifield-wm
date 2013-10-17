@@ -1,0 +1,3656 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* sync_server
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 07:42+0000\n"
+"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "initial.stock.inventory"
+msgstr "initial.stock.inventory"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.move.line"
+msgstr "account.move.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "product.manufacturer.attribute"
+msgstr "product.manufacturer.attribute"
+
+#. module: sync_server
+#: view:sync_server.sync_rule:0
+msgid "Compute Forced Values"
+msgstr "Compute Forced Values"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.ir.model.menu.create.line"
+msgstr "wizard.ir.model.menu.create.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.analytic.chart"
+msgstr "account.analytic.chart"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "hr.payroll.employee.import"
+msgstr "hr.payroll.employee.import"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "kit.selection"
+msgstr "kit.selection"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "product.list.line"
+msgstr "product.list.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.picking"
+msgstr "stock.picking"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "product.likely.expire.report.line"
+msgstr "product.likely.expire.report.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "product.deactivation.error"
+msgstr "product.deactivation.error"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "product.list"
+msgstr "product.list"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "product.supplierinfo"
+msgstr "product.supplierinfo"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "report.stock.lines.date"
+msgstr "report.stock.lines.date"
+
+#. module: sync_server
+#: field:sync.server.entity_group,type_id:0
+#: field:sync_server.message_rule,type_id:0
+#: field:sync_server.sync_rule,type_id:0
+msgid "Group Type"
+msgstr "Group Type"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.ups.final"
+msgstr "stock.ups.final"
+
+#. module: sync_server
+#: model:ir.ui.menu,name:sync_server.conf_menu
+#: view:sync.server.entity:0
+msgid "Configuration"
+msgstr "Configuration"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.journal.select"
+msgstr "account.journal.select"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "res.groups"
+msgstr "res.groups"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.subscription.line"
+msgstr "account.subscription.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.mission.report.line"
+msgstr "stock.mission.report.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "unifield.setup.configuration"
+msgstr "unifield.setup.configuration"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.confirm.closing.period"
+msgstr "wizard.confirm.closing.period"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.subscription"
+msgstr "account.subscription"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.move"
+msgstr "stock.move"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "financing.contract.donor.reporting.line"
+msgstr "financing.contract.donor.reporting.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "hq.entries.validation"
+msgstr "hq.entries.validation"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "hq.reallocation"
+msgstr "hq.reallocation"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "user.access.results.menus.line"
+msgstr "user.access.results.menus.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.actual.export"
+msgstr "wizard.actual.export"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.unreconcile.reconcile"
+msgstr "account.unreconcile.reconcile"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.invoice.onshipping"
+msgstr "stock.invoice.onshipping"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.budget.import.finish"
+msgstr "wizard.budget.import.finish"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.move.memory.returnproducts"
+msgstr "stock.move.memory.returnproducts"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "report.account_type.sales"
+msgstr "report.account_type.sales"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "mrp.property"
+msgstr "mrp.property"
+
+#. module: sync_server
+#: view:sync_server.message_rule:0
+msgid "Arguments of the call"
+msgstr "Arguments of the call"
+
+#. module: sync_server
+#: field:sync.server.entity,parent_id:0
+msgid "Parent Instance"
+msgstr "Parent Instance"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "sale.order.change.currency"
+msgstr "sale.order.change.currency"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.journal.column"
+msgstr "account.journal.column"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "cashbox.write.off"
+msgstr "cashbox.write.off"
+
+#. module: sync_server
+#: field:sync.server.message,sent:0
+msgid "Sent to destination ?"
+msgstr "Sent to destination ?"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "report.batch.recall"
+msgstr "report.batch.recall"
+
+#. module: sync_server
+#: view:sync_server.message_rule:0
+#: view:sync_server.sync_rule:0
+msgid "Sync Rule Form"
+msgstr "Sync Rule Form"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "old.product.list.line"
+msgstr "old.product.list.line"
+
+#. module: sync_server
+#: selection:sync.server.entity,state:0
+msgid "Pending"
+msgstr "Pending"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "report.account.receivable"
+msgstr "report.account.receivable"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.move.memory.shipment.create"
+msgstr "stock.move.memory.shipment.create"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "import.cell.data"
+msgstr "import.cell.data"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "project.account.analytic.line"
+msgstr "project.account.analytic.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.partner.reconcile.process"
+msgstr "account.partner.reconcile.process"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.change.product.qty"
+msgstr "stock.change.product.qty"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "claim.product.line"
+msgstr "claim.product.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "resource.calendar"
+msgstr "resource.calendar"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "procurement.order.compute"
+msgstr "procurement.order.compute"
+
+#. module: sync_server
+#: sql_constraint:sync.server.entity:0
+msgid "Can't have multiple instances with the same identifier!"
+msgstr "Can't have multiple instances with the same identifier!"
+
+#. module: sync_server
+#: view:sync_server.message_rule:0
+msgid "Remote Call"
+msgstr "Remote Call"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.move.scrap"
+msgstr "stock.move.scrap"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule,direction:0
+msgid "Down"
+msgstr "Down"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.tracking"
+msgstr "stock.tracking"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "multiple.sourcing.wizard"
+msgstr "multiple.sourcing.wizard"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "res.partner.event"
+msgstr "res.partner.event"
+
+#. module: sync_server
+#: view:sync.server.entity:0
+msgid "Children"
+msgstr "Children"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.temp.posting"
+msgstr "wizard.temp.posting"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "temp.range"
+msgstr "temp.range"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.choose.supplier"
+msgstr "wizard.choose.supplier"
+
+#. module: sync_server
+#: view:sync.server.update:0
+#: field:sync.server.update,puller_ids:0
+msgid "Pulled by"
+msgstr "Pulled by"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "res.partner.bank.type"
+msgstr "res.partner.bank.type"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "analytic.entries.report"
+msgstr "analytic.entries.report"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "import_data"
+msgstr "import_data"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "msf_button_access_rights.view_config_wizard_install"
+msgstr "msf_button_access_rights.view_config_wizard_install"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "partner.clear.ids"
+msgstr "partner.clear.ids"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.period"
+msgstr "account.period"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "sale.config.picking_policy"
+msgstr "sale.config.picking_policy"
+
+#. module: sync_server
+#: view:sync.server.entity:0
+msgid "Instance Tree"
+msgstr "Instance Tree"
+
+#. module: sync_server
+#: help:sync_server.message_rule,applies_to_type:0
+#: help:sync_server.sync_rule,applies_to_type:0
+msgid "Applies to a group type instead of a specific group"
+msgstr "Applies to a group type instead of a specific group"
+
+#. module: sync_server
+#: selection:sync.server.entity,state:0
+msgid "Validated"
+msgstr "Validated"
+
+#. module: sync_server
+#: model:ir.model,name:sync_server.model_sync_server_message_rule
+msgid "Message Rule"
+msgstr "Message Rule"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "procurement.order.compute.all"
+msgstr "procurement.order.compute.all"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "product.heat_sensitive"
+msgstr "product.heat_sensitive"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "kit.creation"
+msgstr "kit.creation"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.location.configuration.wizard"
+msgstr "stock.location.configuration.wizard"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "from.supplier.choose.catalogue"
+msgstr "from.supplier.choose.catalogue"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "product.asset.type"
+msgstr "product.asset.type"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "min.max.rules.report"
+msgstr "min.max.rules.report"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "product.section.code"
+msgstr "product.section.code"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "funding.pool.distribution.line"
+msgstr "funding.pool.distribution.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.bank.accounts.wizard"
+msgstr "account.bank.accounts.wizard"
+
+#. module: sync_server
+#: view:sync_server.sync_rule:0
+msgid "Values to be forced"
+msgstr "Values to be forced"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "msf_chart_of_account.installer"
+msgstr "msf_chart_of_account.installer"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "process.transition.action"
+msgstr "process.transition.action"
+
+#. module: sync_server
+#: view:sync_server.message_rule:0
+#: field:sync_server.message_rule,active:0
+#: view:sync_server.sync_rule:0
+#: field:sync_server.sync_rule,active:0
+msgid "Active"
+msgstr "Active"
+
+#. module: sync_server
+#: model:ir.ui.menu,name:sync_server.update_menu_id
+msgid "Data Monitor"
+msgstr "Data Monitor"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "sale.order.line.make.invoice"
+msgstr "sale.order.line.make.invoice"
+
+#. module: sync_server
+#: field:sync.server.update,force_recreation:0
+msgid "Force record recreation"
+msgstr "Force record recreation"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "product.likely.expire.report"
+msgstr "product.likely.expire.report"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.warehouse.order.cycle"
+msgstr "stock.warehouse.order.cycle"
+
+#. module: sync_server
+#: field:sync_server.sync_rule,included_fields:0
+msgid "Fields to include"
+msgstr "Fields to include"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "kit.creation.to.consume"
+msgstr "kit.creation.to.consume"
+
+#. module: sync_server
+#: model:ir.module.module,description:sync_server.module_meta_information
+msgid "\n"
+"        \n"
+"    "
+msgstr "\n"
+"        \n"
+"    "
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "financing.contract.funding.pool.line"
+msgstr "financing.contract.funding.pool.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.line.csv.export"
+msgstr "account.line.csv.export"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "res.bank"
+msgstr "res.bank"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.bank.statement.line"
+msgstr "account.bank.statement.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.sequence.fiscalyear"
+msgstr "account.sequence.fiscalyear"
+
+#. module: sync_server
+#: field:sync_server.sync_rule,forced_values:0
+msgid "Values to force"
+msgstr "Values to force"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.multi.charts.accounts"
+msgstr "wizard.multi.charts.accounts"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "add.event"
+msgstr "add.event"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "msf.doc.import.accounting.lines"
+msgstr "msf.doc.import.accounting.lines"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.tax"
+msgstr "account.tax"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "cost.center.distribution.line"
+msgstr "cost.center.distribution.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.print.journal"
+msgstr "account.print.journal"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "resource.resource"
+msgstr "resource.resource"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.tax.code.template"
+msgstr "account.tax.code.template"
+
+#. module: sync_server
+#: field:sync_server.sync_rule,direction:0
+msgid "Directionality"
+msgstr "Directionality"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "msf_button_access_rights.button_access_rule"
+msgstr "msf_button_access_rights.button_access_rule"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "kit.selection.sale"
+msgstr "kit.selection.sale"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "sale.shop"
+msgstr "sale.shop"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "documents.done.problem"
+msgstr "documents.done.problem"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "process.to.consume.line"
+msgstr "process.to.consume.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "product.international.status"
+msgstr "product.international.status"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "purchase.order.confirm.wizard"
+msgstr "purchase.order.confirm.wizard"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "tender"
+msgstr "tender"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "sale.order.line.followup"
+msgstr "sale.order.line.followup"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.common.partner.report"
+msgstr "account.common.partner.report"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.export.rac"
+msgstr "wizard.export.rac"
+
+#. module: sync_server
+#: field:sync.server.message,arguments:0
+#: field:sync_server.message_rule,arguments:0
+msgid "Arguments of the method"
+msgstr "Arguments of the method"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "report.stock.inventory"
+msgstr "report.stock.inventory"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.account"
+msgstr "account.account"
+
+#. module: sync_server
+#: field:sync_server.sync_rule,fallback_values_sel:0
+msgid "Select Fallback Values"
+msgstr "Select Fallback Values"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "payment.order"
+msgstr "payment.order"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "real.average.consumption"
+msgstr "real.average.consumption"
+
+#. module: sync_server
+#: view:sync_server.rule.validation.message:0
+msgid "The rule is"
+msgstr "The rule is"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.common.report"
+msgstr "account.common.report"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.ups"
+msgstr "stock.ups"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.general.journal"
+msgstr "account.general.journal"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.state.open"
+msgstr "account.state.open"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "product.to.list"
+msgstr "product.to.list"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.move.line.reconcile.writeoff"
+msgstr "account.move.line.reconcile.writeoff"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "import_product"
+msgstr "import_product"
+
+#. module: sync_server
+#: field:sync.server.update,version:0
+msgid "Record Version"
+msgstr "Record Version"
+
+#. module: sync_server
+#: field:sync.server.entity,email:0
+msgid "Contact Email"
+msgstr "Contact Email"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.journal.items.corrections.lines"
+msgstr "wizard.journal.items.corrections.lines"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "audittrail.log.sequence"
+msgstr "audittrail.log.sequence"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.replacement.result"
+msgstr "stock.replacement.result"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "enter.reason"
+msgstr "enter.reason"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule,direction:0
+msgid "Up"
+msgstr "Up"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "split.move"
+msgstr "split.move"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "analytic.distribution"
+msgstr "analytic.distribution"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "confirm.import.currencies"
+msgstr "confirm.import.currencies"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "report.webkit.actions"
+msgstr "report.webkit.actions"
+
+#. module: sync_server
+#: field:sync.server.entity,update_token:0
+msgid "Update security token"
+msgstr "Update security token"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "monthly.review.consumption.line"
+msgstr "monthly.review.consumption.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.installer.modules"
+msgstr "account.installer.modules"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.statement.from.invoice"
+msgstr "account.statement.from.invoice"
+
+#. module: sync_server
+#: model:ir.module.module,shortdesc:sync_server.module_meta_information
+msgid "Synchronization Utility Server"
+msgstr "Synchronization Utility Server"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "sale.order.followup.from.menu"
+msgstr "sale.order.followup.from.menu"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "payment.mode"
+msgstr "payment.mode"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule,direction:0
+msgid "Bidirectional-Private"
+msgstr "Bidirectional-Private"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.commitment.line"
+msgstr "account.commitment.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.chart.template"
+msgstr "account.chart.template"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.installer"
+msgstr "account.installer"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "product.nomenclature"
+msgstr "product.nomenclature"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "product.status"
+msgstr "product.status"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.forecast"
+msgstr "stock.forecast"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "res.log.report"
+msgstr "res.log.report"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.chart"
+msgstr "account.chart"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "process.process"
+msgstr "process.process"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "resource.calendar.leaves"
+msgstr "resource.calendar.leaves"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "hr.expat.employee.import"
+msgstr "hr.expat.employee.import"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "incoming.import.xml.line"
+msgstr "incoming.import.xml.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.move.line.reconcile.select"
+msgstr "account.move.line.reconcile.select"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "hr.job"
+msgstr "hr.job"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.payment.make.payment"
+msgstr "account.payment.make.payment"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.interactive.report"
+msgstr "wizard.interactive.report"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.import.int.line"
+msgstr "wizard.import.int.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "financing.contract.format"
+msgstr "financing.contract.format"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "hr.payroll.import"
+msgstr "hr.payroll.import"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "financing.contract.format.line"
+msgstr "financing.contract.format.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.mission.report"
+msgstr "stock.mission.report"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.split.into"
+msgstr "stock.split.into"
+
+#. module: sync_server
+#: code:addons/sync_server/rules.py:646
+#, python-format
+msgid "* Destination Name... "
+msgstr "* Destination Name... "
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "procurement.order"
+msgstr "procurement.order"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "msf.budget.line"
+msgstr "msf.budget.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.voucher.line"
+msgstr "account.voucher.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "res.payterm"
+msgstr "res.payterm"
+
+#. module: sync_server
+#: field:sync.server.entity,activity:0
+msgid "Activity"
+msgstr "Activity"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.certificate.valuation"
+msgstr "stock.certificate.valuation"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.invoice.date"
+msgstr "wizard.invoice.date"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "expiry.quantity.report"
+msgstr "expiry.quantity.report"
+
+#. module: sync_server
+#: model:ir.model,name:sync_server.model_sync_server_sync_rule
+msgid "Synchronization Rule"
+msgstr "Synchronization Rule"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.invoice"
+msgstr "account.invoice"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.tax.chart"
+msgstr "account.tax.chart"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "procurement.supply.compute.all"
+msgstr "procurement.supply.compute.all"
+
+#. module: sync_server
+#: model:ir.ui.menu,name:sync_server.mon_menu
+msgid "Monitoring"
+msgstr "Monitoring"
+
+#. module: sync_server
+#: field:sync.server.message,destination:0
+msgid "Destination Instance"
+msgstr "Destination Instance"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "purchase.order.change.currency"
+msgstr "purchase.order.change.currency"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.move.consume"
+msgstr "stock.move.consume"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.report.general.ledger"
+msgstr "account.report.general.ledger"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "debit.note.import.invoice"
+msgstr "debit.note.import.invoice"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.move.split"
+msgstr "stock.move.split"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "mass.reallocation.wizard"
+msgstr "mass.reallocation.wizard"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "res.config.view"
+msgstr "res.config.view"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "product.asset"
+msgstr "product.asset"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "so.po.common"
+msgstr "so.po.common"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.location"
+msgstr "stock.location"
+
+#. module: sync_server
+#: field:sync.server.entity,last_activity:0
+msgid "Date of last activity"
+msgstr "Date of last activity"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "res.partner"
+msgstr "res.partner"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "kit.selection.sale.line"
+msgstr "kit.selection.sale.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.analytic.journal"
+msgstr "account.analytic.journal"
+
+#. module: sync_server
+#: code:addons/sync_server/sync_server.py:115
+#, python-format
+msgid "%s (stalling)"
+msgstr "%s (stalling)"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "product.pricelist.type"
+msgstr "product.pricelist.type"
+
+#. module: sync_server
+#: field:sync.server.update,model:0
+#: field:sync_server.message_rule,model_id:0
+#: field:sync_server.message_rule,model_ref:0
+#: field:sync_server.sync_rule,model_id:0
+#: field:sync_server.sync_rule,model_ref:0
+msgid "Model"
+msgstr "Model"
+
+#. module: sync_server
+#: view:sync_server.rule.validation.message:0
+msgid "Validation Message"
+msgstr "Validation Message"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.card.wizard"
+msgstr "stock.card.wizard"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "fixed.asset.setup"
+msgstr "fixed.asset.setup"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "res.currency"
+msgstr "res.currency"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.invoice.confirm"
+msgstr "account.invoice.confirm"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "purchase.double.validation.installer"
+msgstr "purchase.double.validation.installer"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "sale.order.followup.test"
+msgstr "sale.order.followup.test"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.import.po.line"
+msgstr "wizard.import.po.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.destination.summary"
+msgstr "account.destination.summary"
+
+#. module: sync_server
+#: model:ir.model,name:sync_server.model_sync_server_group_type
+#: view:sync.server.group_type:0
+msgid "Synchronization Instance Group Type"
+msgstr "Synchronization Instance Group Type"
+
+#. module: sync_server
+#: model:ir.actions.act_window,name:sync_server.entity_action
+#: field:sync.server.entity_group,entity_ids:0
+msgid "Instances"
+msgstr "Instances"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.move"
+msgstr "account.move"
+
+#. module: sync_server
+#: field:sync_server.message_rule,name:0
+#: field:sync_server.sync_rule,name:0
+msgid "Rule Name"
+msgstr "Rule Name"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "hr.payroll.employee.import.errors"
+msgstr "hr.payroll.employee.import.errors"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "restrictive.country.setup"
+msgstr "restrictive.country.setup"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "audittrail.view.log"
+msgstr "audittrail.view.log"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "order.cycle.rules.report"
+msgstr "order.cycle.rules.report"
+
+#. module: sync_server
+#: field:sync.server.entity,name:0
+msgid "Instance Name"
+msgstr "Instance Name"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.report.rates.table"
+msgstr "wizard.report.rates.table"
+
+#. module: sync_server
+#: field:sync.server.update,sdref:0
+msgid "SD ref"
+msgstr "SD ref"
+
+#. module: sync_server
+#: code:addons/sync_server/sync_server.py:119
+#: code:addons/sync_server/sync_server.py:347
+#: view:sync_server.message_rule:0
+#: view:sync_server.sync_rule:0
+#, python-format
+msgid "Inactive"
+msgstr "Inactive"
+
+#. module: sync_server
+#: field:sync.server.entity,children_ids:0
+msgid "Children Instances"
+msgstr "Children Instances"
+
+#. module: sync_server
+#: field:sync.server.update,is_deleted:0
+msgid "Is deleted?"
+msgstr "Is deleted?"
+
+#. module: sync_server
+#: model:ir.model,name:sync_server.model_sync_server_entity
+msgid "sync.server.entity"
+msgstr "sync.server.entity"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.entries.report"
+msgstr "account.entries.report"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "res.config.users"
+msgstr "res.config.users"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.move.bank.reconcile"
+msgstr "account.move.bank.reconcile"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.move.memory.shipment.additionalitems"
+msgstr "stock.move.memory.shipment.additionalitems"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "msf.language.import"
+msgstr "msf.language.import"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.hq.report"
+msgstr "wizard.hq.report"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.partial.move"
+msgstr "stock.partial.move"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "uom.tools"
+msgstr "uom.tools"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.local.expenses"
+msgstr "wizard.local.expenses"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "distribution.line"
+msgstr "distribution.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "purchase.report"
+msgstr "purchase.report"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "substitute.item"
+msgstr "substitute.item"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.change.currency"
+msgstr "account.change.currency"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.confirm.bank"
+msgstr "wizard.confirm.bank"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "split.memory.move"
+msgstr "split.memory.move"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.voucher"
+msgstr "account.voucher"
+
+#. module: sync_server
+#: view:sync_server.sync_rule:0
+msgid "Settings"
+msgstr "Settings"
+
+#. module: sync_server
+#: model:ir.model,name:sync_server.model_sync_server_update
+msgid "sync.server.update"
+msgstr "sync.server.update"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "memory.additionalitems"
+msgstr "memory.additionalitems"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.invoice.line"
+msgstr "account.invoice.line"
+
+#. module: sync_server
+#: field:sync_server.rule.validation.message,message_rule:0
+msgid "Mesage Rule"
+msgstr "Mesage Rule"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "local.transport.cost.report"
+msgstr "local.transport.cost.report"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.journal.view"
+msgstr "account.journal.view"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "res.log"
+msgstr "res.log"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.unreconcile"
+msgstr "account.unreconcile"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.move.journal"
+msgstr "account.move.journal"
+
+#. module: sync_server
+#: code:addons/sync_server/update.py:201
+#, python-format
+msgid "Pushing updates..."
+msgstr "Pushing updates..."
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.tax.code"
+msgstr "account.tax.code"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.replacement"
+msgstr "stock.replacement"
+
+#. module: sync_server
+#: view:sync.server.entity:0
+msgid "Invalidate"
+msgstr "Invalidate"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "procurement.cycle.compute.all"
+msgstr "procurement.cycle.compute.all"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.partial.picking"
+msgstr "stock.partial.picking"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "res.country.state"
+msgstr "res.country.state"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "purchase.order.group"
+msgstr "purchase.order.group"
+
+#. module: sync_server
+#: model:ir.model,name:sync_server.model_sync_server_puller_logs
+msgid "sync.server.puller_logs"
+msgstr "sync.server.puller_logs"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.tax.template"
+msgstr "account.tax.template"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "lang.setup"
+msgstr "lang.setup"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.export.fmc"
+msgstr "wizard.export.fmc"
+
+#. module: sync_server
+#: view:sync.server.entity:0
+msgid "Instance Form"
+msgstr "Instance Form"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "import.table.currencies"
+msgstr "import.table.currencies"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule,direction:0
+msgid "Bidirectional"
+msgstr "Bidirectional"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "project.leadtime.setup"
+msgstr "project.leadtime.setup"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.report.prodlots"
+msgstr "stock.report.prodlots"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "sale.receipt.report"
+msgstr "sale.receipt.report"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "process.node"
+msgstr "process.node"
+
+#. module: sync_server
+#: code:addons/sync_server/rules.py:284
+#: code:addons/sync_server/rules.py:304
+#, python-format
+msgid "Warning"
+msgstr "Warning"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.analyze.view"
+msgstr "stock.analyze.view"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "analytic.distribution.wizard.f1.lines"
+msgstr "analytic.distribution.wizard.f1.lines"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.move.memory.ppl"
+msgstr "stock.move.memory.ppl"
+
+#. module: sync_server
+#: model:ir.ui.menu,name:sync_server.message_menu_id
+#: view:sync.server.message:0
+msgid "Message Monitor"
+msgstr "Message Monitor"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "procurement.batch.cron"
+msgstr "procurement.batch.cron"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.common.journal.report"
+msgstr "account.common.journal.report"
+
+#. module: sync_server
+#: field:sync_server.sync_rule.fallback_values,value:0
+#: field:sync_server.sync_rule.forced_values,value:0
+msgid "Value"
+msgstr "Value"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "shipment.additionalitems"
+msgstr "shipment.additionalitems"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "msf.doc.import.accounting.errors"
+msgstr "msf.doc.import.accounting.errors"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "multi_company.default"
+msgstr "multi_company.default"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.journal"
+msgstr "stock.journal"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "audittrail.rule"
+msgstr "audittrail.rule"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "substitute.item.mirror"
+msgstr "substitute.item.mirror"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "sale.price.setup"
+msgstr "sale.price.setup"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "mrp.property.group"
+msgstr "mrp.property.group"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "res.partner.category"
+msgstr "res.partner.category"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "mass.reallocation.verification.wizard"
+msgstr "mass.reallocation.verification.wizard"
+
+#. module: sync_server
+#: field:sync_server.sync_rule,owner_field:0
+msgid "Owner Field"
+msgstr "Owner Field"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "partner.sms.send"
+msgstr "partner.sms.send"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "sale.advance.payment.inv"
+msgstr "sale.advance.payment.inv"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "msf.accrual.line"
+msgstr "msf.accrual.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "procurement.orderpoint.compute"
+msgstr "procurement.orderpoint.compute"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "pack.type"
+msgstr "pack.type"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "field.orders.setup"
+msgstr "field.orders.setup"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.move.memory.shipment.returnpacksfromshipment"
+msgstr "stock.move.memory.shipment.returnpacksfromshipment"
+
+#. module: sync_server
+#: field:sync_server.rule.validation.message,sync_rule:0
+#: field:sync_server.sync_rule.fallback_values,sync_rule_id:0
+#: field:sync_server.sync_rule.forced_values,sync_rule_id:0
+msgid "Sync Rule"
+msgstr "Sync Rule"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "composition.kit"
+msgstr "composition.kit"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "partner.wizard.spam"
+msgstr "partner.wizard.spam"
+
+#. module: sync_server
+#: view:sync.server.message:0
+msgid "Arguments"
+msgstr "Arguments"
+
+#. module: sync_server
+#: model:ir.ui.menu,name:sync_server.rules_menu
+msgid "Rules"
+msgstr "Rules"
+
+#. module: sync_server
+#: selection:sync.server.entity,state:0
+msgid "Updated"
+msgstr "Updated"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "res.config.installer"
+msgstr "res.config.installer"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "currency.setup"
+msgstr "currency.setup"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.fiscal.position.account.template"
+msgstr "account.fiscal.position.account.template"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.invoice.cancel"
+msgstr "account.invoice.cancel"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.report.prodlots.virtual"
+msgstr "stock.report.prodlots.virtual"
+
+#. module: sync_server
+#: model:ir.actions.act_window,name:sync_server.group_type_action
+#: model:ir.ui.menu,name:sync_server.group_type_menu
+#: view:sync.server.group_type:0
+msgid "Type of Group"
+msgstr "Type of Group"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.production.lot.revision"
+msgstr "stock.production.lot.revision"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.fiscal.position"
+msgstr "account.fiscal.position"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.hard.posting"
+msgstr "wizard.hard.posting"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "hr.installer"
+msgstr "hr.installer"
+
+#. module: sync_server
+#: field:sync.server.entity,user_id:0
+msgid "User"
+msgstr "User"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "import.currencies"
+msgstr "import.currencies"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "res.country"
+msgstr "res.country"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "update.lines"
+msgstr "update.lines"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "tender.line"
+msgstr "tender.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "shipment.wizard"
+msgstr "shipment.wizard"
+
+#. module: sync_server
+#: code:addons/sync_server/message.py:130
+#, python-format
+msgid "Pulling messages..."
+msgstr "Pulling messages..."
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "auto.supply.rules.report"
+msgstr "auto.supply.rules.report"
+
+#. module: sync_server
+#: model:ir.ui.menu,name:sync_server.sync_rule_menu
+msgid "Data Synchronization Rules"
+msgstr "Data Synchronization Rules"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "documents.done.problem.line"
+msgstr "documents.done.problem.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "return.claim"
+msgstr "return.claim"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "maintenance.contract"
+msgstr "maintenance.contract"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.aged.trial.balance"
+msgstr "account.aged.trial.balance"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.production.lot"
+msgstr "stock.production.lot"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.destination.link"
+msgstr "account.destination.link"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.move.line.unreconcile.select"
+msgstr "account.move.line.unreconcile.select"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.addtmpl.wizard"
+msgstr "account.addtmpl.wizard"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "msf.budget"
+msgstr "msf.budget"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.journal"
+msgstr "account.journal"
+
+#. module: sync_server
+#: model:ir.model,name:sync_server.model_sync_server_rule_validation_message
+msgid "sync_server.rule.validation.message"
+msgstr "sync_server.rule.validation.message"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "sync.monitor"
+msgstr "sync.monitor"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "user.access.results.users.line"
+msgstr "user.access.results.users.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.compare.rfq"
+msgstr "wizard.compare.rfq"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "object.query.object"
+msgstr "object.query.object"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.register.creation.lines"
+msgstr "wizard.register.creation.lines"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.frequence"
+msgstr "stock.frequence"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.report.currency.table"
+msgstr "wizard.report.currency.table"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "process.condition"
+msgstr "process.condition"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.account.invoice"
+msgstr "wizard.account.invoice"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "user.access.configurator"
+msgstr "user.access.configurator"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "product.category"
+msgstr "product.category"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "split.purchase.order.line.wizard"
+msgstr "split.purchase.order.line.wizard"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.fiscalyear.close.state"
+msgstr "account.fiscalyear.close.state"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "msf.instance"
+msgstr "msf.instance"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.cashbox.line"
+msgstr "account.cashbox.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.partner.ledger"
+msgstr "account.partner.ledger"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "object.query.selection_data"
+msgstr "object.query.selection_data"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "analytic.distribution.wizard.lines"
+msgstr "analytic.distribution.wizard.lines"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "purchase.order.line_invoice"
+msgstr "purchase.order.line_invoice"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.add.cost.centers"
+msgstr "wizard.add.cost.centers"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.cost.reevaluation"
+msgstr "stock.cost.reevaluation"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.model"
+msgstr "account.model"
+
+#. module: sync_server
+#: view:sync.server.entity:0
+#: view:sync_server.message_rule:0
+#: view:sync_server.sync_rule:0
+msgid "Validate"
+msgstr "Validate"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "sale.report"
+msgstr "sale.report"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "sale.order.followup"
+msgstr "sale.order.followup"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.cost.reevaluation.line"
+msgstr "stock.cost.reevaluation.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "product.justification.code"
+msgstr "product.justification.code"
+
+#. module: sync_server
+#: model:ir.model,name:sync_server.model_sync_server_sync_rule_fallback_values
+msgid "sync_server.sync_rule.fallback_values"
+msgstr "sync_server.sync_rule.fallback_values"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "msf_instance.setup"
+msgstr "msf_instance.setup"
+
+#. module: sync_server
+#: field:sync_server.sync_rule,model_ids:0
+msgid "Parents Model"
+msgstr "Parents Model"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.analytic.Journal.report"
+msgstr "account.analytic.Journal.report"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.move.memory.picking"
+msgstr "stock.move.memory.picking"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "product.pricelist"
+msgstr "product.pricelist"
+
+#. module: sync_server
+#: view:sync_server.message_rule:0
+#: view:sync_server.sync_rule:0
+msgid "Sync Rules Tree"
+msgstr "Sync Rules Tree"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.move.memory.out"
+msgstr "stock.move.memory.out"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.import.po"
+msgstr "wizard.import.po"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.fill.inventory"
+msgstr "stock.fill.inventory"
+
+#. module: sync_server
+#: field:sync.server.update,create_date:0
+msgid "Synchro Date/Time"
+msgstr "Synchro Date/Time"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.import.fmc"
+msgstr "wizard.import.fmc"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "report.account.sales"
+msgstr "report.account.sales"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "decimal.precision"
+msgstr "decimal.precision"
+
+#. module: sync_server
+#: view:sync_server.sync_rule:0
+msgid "Compute Fallback Values"
+msgstr "Compute Fallback Values"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.import.cheque.lines"
+msgstr "wizard.import.cheque.lines"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.fiscalyear.close"
+msgstr "account.fiscalyear.close"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "hr.analytic.reallocation"
+msgstr "hr.analytic.reallocation"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.journal.items.corrections"
+msgstr "wizard.journal.items.corrections"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "sale.order.line"
+msgstr "sale.order.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.fiscal.position.template"
+msgstr "account.fiscal.position.template"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "confirm"
+msgstr "confirm"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "report.aged.receivable"
+msgstr "report.aged.receivable"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "product.asset.event"
+msgstr "product.asset.event"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "sale.installer"
+msgstr "sale.installer"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.advance.line"
+msgstr "wizard.advance.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "monthly.review.consumption"
+msgstr "monthly.review.consumption"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "purchase.order"
+msgstr "purchase.order"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.split.invoice.lines"
+msgstr "wizard.split.invoice.lines"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.invoice.line"
+msgstr "wizard.invoice.line"
+
+#. module: sync_server
+#: model:ir.model,name:sync_server.model_sync_server_sync_manager
+msgid "sync.server.sync_manager"
+msgstr "sync.server.sync_manager"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "purchase.installer"
+msgstr "purchase.installer"
+
+#. module: sync_server
+#: code:addons/sync_server/message.py:161
+#, python-format
+msgid "Confirm messages..."
+msgstr "Confirm messages..."
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.model.line"
+msgstr "account.model.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "sale.make.invoice"
+msgstr "sale.make.invoice"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.period.close"
+msgstr "account.period.close"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.move.line.reconcile"
+msgstr "account.move.line.reconcile"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "msf_field_access_rights.field_access_rule_line"
+msgstr "msf_field_access_rights.field_access_rule_line"
+
+#. module: sync_server
+#: field:sync_server.sync_rule,can_delete:0
+msgid "Can delete record?"
+msgstr "Can delete record?"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.transfer.with.change"
+msgstr "wizard.transfer.with.change"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.forecast.line"
+msgstr "stock.forecast.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.account.template"
+msgstr "account.account.template"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "procurement.rules.report"
+msgstr "procurement.rules.report"
+
+#. module: sync_server
+#: view:sync.server.update:0
+msgid "Record"
+msgstr "Record"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "publisher_warranty.contract.wizard"
+msgstr "publisher_warranty.contract.wizard"
+
+#. module: sync_server
+#: view:sync.server.update:0
+msgid "Not Validated"
+msgstr "Not Validated"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "claim.event"
+msgstr "claim.event"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "res.partner.bank.type.field"
+msgstr "res.partner.bank.type.field"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "modify.expiry.date"
+msgstr "modify.expiry.date"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.budget.criteria.export"
+msgstr "wizard.budget.criteria.export"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.print.certificate"
+msgstr "stock.print.certificate"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.inventory.line.split"
+msgstr "stock.inventory.line.split"
+
+#. module: sync_server
+#: field:sync.server.group_type,name:0
+msgid "Type Name"
+msgstr "Type Name"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.location.product"
+msgstr "stock.location.product"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "procurement.min.max.compute.all"
+msgstr "procurement.min.max.compute.all"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.account.invoice.line"
+msgstr "wizard.account.invoice.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wiz.common.import"
+msgstr "wiz.common.import"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.period.create"
+msgstr "account.period.create"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "product.history.consumption"
+msgstr "product.history.consumption"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "hr.payroll.import.confirmation"
+msgstr "hr.payroll.import.confirmation"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "purchase.order.followup.line"
+msgstr "purchase.order.followup.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.invoice.report"
+msgstr "account.invoice.report"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "msf.budget.tools"
+msgstr "msf.budget.tools"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "hr.department"
+msgstr "hr.department"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "documents.done.wizard"
+msgstr "documents.done.wizard"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "substitute"
+msgstr "substitute"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "msf.budget.decision.moment"
+msgstr "msf.budget.decision.moment"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.picking.not.available"
+msgstr "stock.picking.not.available"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.split.invoice"
+msgstr "wizard.split.invoice"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "split.sale.order.line.wizard"
+msgstr "split.sale.order.line.wizard"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "analytic.distribution.wizard.f2.lines"
+msgstr "analytic.distribution.wizard.f2.lines"
+
+#. module: sync_server
+#: field:sync.server.update,session_id:0
+msgid "Session Id"
+msgstr "Session Id"
+
+#. module: sync_server
+#: field:sync.server.message,sequence:0
+#: field:sync.server.update,fancy_sequence:0
+#: field:sync.server.update,sequence:0
+#: field:sync_server.message_rule,sequence_number:0
+#: field:sync_server.sync_rule,sequence_number:0
+msgid "Sequence"
+msgstr "Sequence"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.inventory"
+msgstr "stock.inventory"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "res.country.restriction"
+msgstr "res.country.restriction"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "shipment"
+msgstr "shipment"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "res.request.link"
+msgstr "res.request.link"
+
+#. module: sync_server
+#: field:sync.server.entity,identifier:0
+#: field:sync.server.message,identifier:0
+msgid "Identifier"
+msgstr "Identifier"
+
+#. module: sync_server
+#: model:ir.model,name:sync_server.model_sync_server_entity_group
+msgid "sync.server.entity_group"
+msgstr "sync.server.entity_group"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.common.account.report"
+msgstr "account.common.account.report"
+
+#. module: sync_server
+#: field:sync.server.update,rule_id:0
+msgid "Generating Rule"
+msgstr "Generating Rule"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "mission.stock.wizard"
+msgstr "mission.stock.wizard"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.open.empty.cashbox"
+msgstr "wizard.open.empty.cashbox"
+
+#. module: sync_server
+#: code:addons/sync_server/rules.py:666
+#, python-format
+msgid "* Remote call exists... "
+msgstr "* Remote call exists... "
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.automatic.reconcile"
+msgstr "account.automatic.reconcile"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "product.template"
+msgstr "product.template"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.warehouse.orderpoint"
+msgstr "stock.warehouse.orderpoint"
+
+#. module: sync_server
+#: model:ir.ui.menu,name:sync_server.entity_menu
+#: field:sync.server.puller_logs,entity_id:0
+msgid "Instance"
+msgstr "Instance"
+
+#. module: sync_server
+#: selection:sync.server.entity,state:0
+msgid "Invalidated"
+msgstr "Invalidated"
+
+#. module: sync_server
+#: field:sync_server.sync_rule,forced_values_sel:0
+msgid "Select Forced Values"
+msgstr "Select Forced Values"
+
+#. module: sync_server
+#: model:ir.ui.menu,name:sync_server.sync_menu
+#: view:sync.server.update:0
+msgid "Synchronization"
+msgstr "Synchronization"
+
+#. module: sync_server
+#: view:sync.server.entity_group:0
+msgid "Instance Groups"
+msgstr "Instance Groups"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.move.split.lines"
+msgstr "stock.move.split.lines"
+
+#. module: sync_server
+#: sql_constraint:sync.server.group_type:0
+msgid "Group type name must be unique"
+msgstr "Group type name must be unique"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "product.cold_chain"
+msgstr "product.cold_chain"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.financing.currency.export"
+msgstr "wizard.financing.currency.export"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "pack.family.memory"
+msgstr "pack.family.memory"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "report.stock.move"
+msgstr "report.stock.move"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.mcdb"
+msgstr "account.mcdb"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "res.users"
+msgstr "res.users"
+
+#. module: sync_server
+#: model:ir.actions.act_window,name:sync_server.group_action
+#: model:ir.ui.menu,name:sync_server.group_menu
+#: view:sync.server.entity:0
+#: field:sync.server.entity,group_ids:0
+msgid "Groups"
+msgstr "Groups"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "free.2.distribution.line"
+msgstr "free.2.distribution.line"
+
+#. module: sync_server
+#: view:sync_server.rule.validation.message:0
+msgid "Ok"
+msgstr "Ok"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.compare.rfq.line"
+msgstr "wizard.compare.rfq.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.budget.import.confirm"
+msgstr "wizard.budget.import.confirm"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "procurement.request.import"
+msgstr "procurement.request.import"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "threshold.value"
+msgstr "threshold.value"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "hr.employee.category"
+msgstr "hr.employee.category"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.choose.supplier.line"
+msgstr "wizard.choose.supplier.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "validate.account.move.lines"
+msgstr "validate.account.move.lines"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "sale.open.invoice"
+msgstr "sale.open.invoice"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.fiscal.position.tax"
+msgstr "account.fiscal.position.tax"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "audittrail.log.line"
+msgstr "audittrail.log.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "msf.budget.summary"
+msgstr "msf.budget.summary"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "msf.doc.import.accounting"
+msgstr "msf.doc.import.accounting"
+
+#. module: sync_server
+#: model:ir.model,name:sync_server.model_sync_server_sync_rule_forced_values
+msgid "sync_server.sync_rule.forced_values"
+msgstr "sync_server.sync_rule.forced_values"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "res.currency.rate"
+msgstr "res.currency.rate"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "msf_button_access_rights.view_config_wizard_install_results"
+msgstr "msf_button_access_rights.view_config_wizard_install_results"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "object.query"
+msgstr "object.query"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "assign.to.kit.line"
+msgstr "assign.to.kit.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "real.consumption.change.location"
+msgstr "real.consumption.change.location"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "change.product.memory.move"
+msgstr "change.product.memory.move"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.import.invoice.lines"
+msgstr "wizard.import.invoice.lines"
+
+#. module: sync_server
+#: model:ir.actions.act_window,name:sync_server.sync_rule_action
+msgid "Synchronization Rules"
+msgstr "Synchronization Rules"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.journal.period"
+msgstr "account.journal.period"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.ups.upload"
+msgstr "stock.ups.upload"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.budget.import"
+msgstr "wizard.budget.import"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.closing.cashbox"
+msgstr "wizard.closing.cashbox"
+
+#. module: sync_server
+#: view:sync.server.entity:0
+#: field:sync.server.entity,state:0
+msgid "State"
+msgstr "State"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "product.history.consumption.month"
+msgstr "product.history.consumption.month"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.warehouse.automatic.supply.line"
+msgstr "stock.warehouse.automatic.supply.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.inventory.line"
+msgstr "stock.inventory.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.report.tracklots"
+msgstr "stock.report.tracklots"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "purchase.order.line.allocation.report"
+msgstr "purchase.order.line.allocation.report"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "data.tools"
+msgstr "data.tools"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "publisher_warranty.contract"
+msgstr "publisher_warranty.contract"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.export.mapping"
+msgstr "account.export.mapping"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "res.config"
+msgstr "res.config"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.payment.term.line"
+msgstr "account.payment.term.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.analytic.account"
+msgstr "account.analytic.account"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "report.invoice.created"
+msgstr "report.invoice.created"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "composition.item"
+msgstr "composition.item"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.target.costcenter"
+msgstr "account.target.costcenter"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "financing.contract.donor"
+msgstr "financing.contract.donor"
+
+#. module: sync_server
+#: field:sync.server.update,owner:0
+msgid "Owner Instance"
+msgstr "Owner Instance"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.import.fo.line"
+msgstr "wizard.import.fo.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.import.cheque"
+msgstr "wizard.import.cheque"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "pricelist.partnerinfo"
+msgstr "pricelist.partnerinfo"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "hr.payroll.validation"
+msgstr "hr.payroll.validation"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "hr.payroll.import.period"
+msgstr "hr.payroll.import.period"
+
+#. module: sync_server
+#: field:sync.server.message,remote_call:0
+#: field:sync_server.message_rule,remote_call:0
+msgid "Method to call"
+msgstr "Method to call"
+
+#. module: sync_server
+#: view:sync.server.update:0
+#: field:sync.server.update,values:0
+msgid "Values"
+msgstr "Values"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.import.mapping"
+msgstr "wizard.import.mapping"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "ppl.customize.label"
+msgstr "ppl.customize.label"
+
+#. module: sync_server
+#: selection:sync_server.message_rule,status:0
+#: selection:sync_server.rule.validation.message,state:0
+#: selection:sync_server.sync_rule,status:0
+msgid "Invalid"
+msgstr "Invalid"
+
+#. module: sync_server
+#: model:ir.model,name:sync_server.model_sync_server_message
+msgid "sync.server.message"
+msgstr "sync.server.message"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "expiry.quantity.report.line"
+msgstr "expiry.quantity.report.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.vat.declaration"
+msgstr "account.vat.declaration"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "purchase.order.merged.line"
+msgstr "purchase.order.merged.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "free.1.distribution.line"
+msgstr "free.1.distribution.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "purchase.order.followup"
+msgstr "purchase.order.followup"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.incoterms"
+msgstr "stock.incoterms"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.fiscalyear"
+msgstr "account.fiscalyear"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "supplier.catalogue.line"
+msgstr "supplier.catalogue.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "allocation.stock.setup"
+msgstr "allocation.stock.setup"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.payment.term"
+msgstr "account.payment.term"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "product.ul"
+msgstr "product.ul"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "financing.contract.contract"
+msgstr "financing.contract.contract"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "osv_memory.autovacuum"
+msgstr "osv_memory.autovacuum"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "res.country.restriction.memory"
+msgstr "res.country.restriction.memory"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "threshold.value.compute.all"
+msgstr "threshold.value.compute.all"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "hq.entries"
+msgstr "hq.entries"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "process.to.consume"
+msgstr "process.to.consume"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.register.creation"
+msgstr "wizard.register.creation"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "hr.nat.staff.import"
+msgstr "hr.nat.staff.import"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "hq.analytic.reallocation"
+msgstr "hq.analytic.reallocation"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "hr.contract.msf"
+msgstr "hr.contract.msf"
+
+#. module: sync_server
+#: code:addons/sync_server/message.py:66
+#, python-format
+msgid "Pushing messages..."
+msgstr "Pushing messages..."
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "analytic.distribution.wizard.fp.lines"
+msgstr "analytic.distribution.wizard.fp.lines"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "res.request"
+msgstr "res.request"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "sourcing.line"
+msgstr "sourcing.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "product.likely.expire.report.item.line"
+msgstr "product.likely.expire.report.item.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "sequence.tools"
+msgstr "sequence.tools"
+
+#. module: sync_server
+#: code:addons/sync_server/update.py:255
+#, python-format
+msgid "Confirm updates..."
+msgstr "Confirm updates..."
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "create.picking"
+msgstr "create.picking"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.warehouse.automatic.supply"
+msgstr "stock.warehouse.automatic.supply"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.commitment"
+msgstr "account.commitment"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "product.list.add.products"
+msgstr "product.list.add.products"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "res.partner.canal"
+msgstr "res.partner.canal"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.change.standard.price"
+msgstr "stock.change.standard.price"
+
+#. module: sync_server
+#: sql_constraint:sync.server.entity_group:0
+msgid "Group name must be unique"
+msgstr "Group name must be unique"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "warning.import.currencies.lines"
+msgstr "warning.import.currencies.lines"
+
+#. module: sync_server
+#: field:sync.server.update,fancy_version:0
+msgid "Version"
+msgstr "Version"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.accrual.validation"
+msgstr "wizard.accrual.validation"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "product.uom.categ"
+msgstr "product.uom.categ"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.expense.report"
+msgstr "wizard.expense.report"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.use.model"
+msgstr "account.use.model"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "purchase.order.followup.from.menu"
+msgstr "purchase.order.followup.from.menu"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "payment.order.create"
+msgstr "payment.order.create"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "hr.payroll.msf"
+msgstr "hr.payroll.msf"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "product.uom"
+msgstr "product.uom"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.payment.populate.statement"
+msgstr "account.payment.populate.statement"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "product.likely.expire.report.item"
+msgstr "product.likely.expire.report.item"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "analytic.distribution.wizard"
+msgstr "analytic.distribution.wizard"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "fields.tools"
+msgstr "fields.tools"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "hq.entries.validation.wizard"
+msgstr "hq.entries.validation.wizard"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "user.access.results"
+msgstr "user.access.results"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.move.split.lines.exist"
+msgstr "stock.move.split.lines.exist"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "international.transport.cost.report"
+msgstr "international.transport.cost.report"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "change.dest.location"
+msgstr "change.dest.location"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "product.deactivation.error.line"
+msgstr "product.deactivation.error.line"
+
+#. module: sync_server
+#: field:sync.server.entity_group,name:0
+msgid "Group Name"
+msgstr "Group Name"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "payroll.setup"
+msgstr "payroll.setup"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.voucher.unreconcile"
+msgstr "account.voucher.unreconcile"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.central.journal"
+msgstr "account.central.journal"
+
+#. module: sync_server
+#: view:sync_server.message_rule:0
+#: view:sync_server.sync_rule:0
+msgid "All"
+msgstr "All"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "sale.order"
+msgstr "sale.order"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "purchase.line.import.xml.line"
+msgstr "purchase.line.import.xml.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "activate.currencies"
+msgstr "activate.currencies"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.partner.balance"
+msgstr "account.partner.balance"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "picking.tools"
+msgstr "picking.tools"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.move.track"
+msgstr "stock.move.track"
+
+#. module: sync_server
+#: help:sync_server.sync_rule,can_delete:0
+msgid "Propagate the delete of old unused records"
+msgstr "Propagate the delete of old unused records"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "hq.entries.import"
+msgstr "hq.entries.import"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.balance.report"
+msgstr "account.balance.report"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "user.access.results.groups.line"
+msgstr "user.access.results.groups.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "product.price.type"
+msgstr "product.price.type"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "update_product"
+msgstr "update_product"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "process.transition"
+msgstr "process.transition"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.analytic.cost.ledger"
+msgstr "account.analytic.cost.ledger"
+
+#. module: sync_server
+#: view:sync.server.update:0
+msgid "Warning: This record has not been validated by its proprietary instance."
+msgstr "Warning: This record has not been validated by its proprietary instance."
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "threshold.value.rules.report"
+msgstr "threshold.value.rules.report"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.analytic.inverted.balance"
+msgstr "account.analytic.inverted.balance"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "product.product"
+msgstr "product.product"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.remove.location.wizard"
+msgstr "stock.remove.location.wizard"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "product.pricelist.version"
+msgstr "product.pricelist.version"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "res.company"
+msgstr "res.company"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.batch.recall"
+msgstr "stock.batch.recall"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.invoice.tax"
+msgstr "account.invoice.tax"
+
+#. module: sync_server
+#: field:sync.server.puller_logs,create_date:0
+msgid "Pull Date"
+msgstr "Pull Date"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.inventory.merge"
+msgstr "stock.inventory.merge"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "msf_field_access_rights.field_access_rule"
+msgstr "msf_field_access_rights.field_access_rule"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.card.wizard.line"
+msgstr "stock.card.wizard.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.cash.return"
+msgstr "wizard.cash.return"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.export.po"
+msgstr "wizard.export.po"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.csv.report"
+msgstr "wizard.csv.report"
+
+#. module: sync_server
+#: view:sync_server.sync_rule:0
+msgid "Included fields (required)"
+msgstr "Included fields (required)"
+
+#. module: sync_server
+#: field:sync_server.message_rule,applies_to_type:0
+#: field:sync_server.sync_rule,applies_to_type:0
+msgid "Applies to type"
+msgstr "Applies to type"
+
+#. module: sync_server
+#: field:sync.server.message,source:0
+#: field:sync.server.update,source:0
+msgid "Source Instance"
+msgstr "Source Instance"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "purchase.order.line"
+msgstr "purchase.order.line"
+
+#. module: sync_server
+#: field:sync.server.puller_logs,update_id:0
+msgid "Update"
+msgstr "Update"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "res.partner.address"
+msgstr "res.partner.address"
+
+#. module: sync_server
+#: view:sync.server.entity_group:0
+msgid "Instance Group"
+msgstr "Instance Group"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "validate.account.move"
+msgstr "validate.account.move"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "real.average.consumption.line"
+msgstr "real.average.consumption.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "object.query.wizard.values"
+msgstr "object.query.wizard.values"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "res.lang"
+msgstr "res.lang"
+
+#. module: sync_server
+#: sql_constraint:sync.server.update:0
+msgid "This update is duplicated and has been ignored!"
+msgstr "This update is duplicated and has been ignored!"
+
+#. module: sync_server
+#: field:sync_server.sync_rule,included_fields_sel:0
+msgid "Select Fields"
+msgstr "Select Fields"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.analytic.cost.ledger.journal.report"
+msgstr "account.analytic.cost.ledger.journal.report"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "threshold.value.line"
+msgstr "threshold.value.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "supplier.catalogue"
+msgstr "supplier.catalogue"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.subscription.generate"
+msgstr "account.subscription.generate"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.move.memory.families"
+msgstr "stock.move.memory.families"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.down.payment"
+msgstr "wizard.down.payment"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "warning.import.currencies"
+msgstr "warning.import.currencies"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.analytic.journal.fake"
+msgstr "account.analytic.journal.fake"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "product.packaging"
+msgstr "product.packaging"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "mass.reallocation.search"
+msgstr "mass.reallocation.search"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "output.currency.for.export"
+msgstr "output.currency.for.export"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.move.memory.in"
+msgstr "stock.move.memory.in"
+
+#. module: sync_server
+#: constraint:sync.server.entity:0
+msgid "Error! You cannot create cycle in entities structure."
+msgstr "Error! You cannot create cycle in entities structure."
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.warehouse"
+msgstr "stock.warehouse"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.bank.statement"
+msgstr "account.bank.statement"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.return.picking"
+msgstr "stock.return.picking"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.import.tender.line"
+msgstr "wizard.import.tender.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "product.supply.source"
+msgstr "product.supply.source"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.fiscal.position.account"
+msgstr "account.fiscal.position.account"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "resource.calendar.attendance"
+msgstr "resource.calendar.attendance"
+
+#. module: sync_server
+#: view:sync_server.sync_rule:0
+msgid "Rule"
+msgstr "Rule"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "kit.selection.line"
+msgstr "kit.selection.line"
+
+#. module: sync_server
+#: model:ir.actions.act_window,name:sync_server.message_rule_action
+#: model:ir.ui.menu,name:sync_server.message_rule_menu
+msgid "Messages Rules"
+msgstr "Messages Rules"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "hr.employee.marital.status"
+msgstr "hr.employee.marital.status"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.open.closed.fiscalyear"
+msgstr "account.open.closed.fiscalyear"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "partner.wizard.ean.check"
+msgstr "partner.wizard.ean.check"
+
+#. module: sync_server
+#: field:sync_server.sync_rule.fallback_values,name:0
+#: field:sync_server.sync_rule.forced_values,name:0
+msgid "Field Name"
+msgstr "Field Name"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "product.price_list"
+msgstr "product.price_list"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "initial.stock.inventory.line"
+msgstr "initial.stock.inventory.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "purchase.import.xml.line"
+msgstr "purchase.import.xml.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.account.type"
+msgstr "account.account.type"
+
+#. module: sync_server
+#: model:ir.model,name:sync_server.model_ir_model_fields
+#: view:sync.server.update:0
+#: field:sync.server.update,fields:0
+msgid "Fields"
+msgstr "Fields"
+
+#. module: sync_server
+#: code:addons/sync_server/update.py:364
+#, python-format
+msgid "Pulling updates..."
+msgstr "Pulling updates..."
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.move.reconcile"
+msgstr "account.move.reconcile"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.forecast.export"
+msgstr "stock.forecast.export"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.analytic.line"
+msgstr "account.analytic.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.pl.report"
+msgstr "account.pl.report"
+
+#. module: sync_server
+#: model:ir.actions.act_window,name:sync_server.update_action
+#: view:sync.server.message:0
+#: view:sync.server.update:0
+msgid "Synchronization Monitor"
+msgstr "Synchronization Monitor"
+
+#. module: sync_server
+#: field:sync_server.message_rule,group_id:0
+#: view:sync_server.sync_rule:0
+#: field:sync_server.sync_rule,group_id:0
+msgid "Group"
+msgstr "Group"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "action.traceability"
+msgstr "action.traceability"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "hr.employee"
+msgstr "hr.employee"
+
+#. module: sync_server
+#: model:ir.actions.act_window,name:sync_server.message_action
+#: field:sync_server.rule.validation.message,message:0
+msgid "Message"
+msgstr "Message"
+
+#. module: sync_server
+#: field:sync_server.message_rule,destination_name:0
+msgid "Field to extract destination"
+msgstr "Field to extract destination"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "object.query.result.fields"
+msgstr "object.query.result.fields"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.invoice.refund"
+msgstr "account.invoice.refund"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.import.invoice"
+msgstr "wizard.import.invoice"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "res.partner.bank"
+msgstr "res.partner.bank"
+
+#. module: sync_server
+#: view:sync_server.sync_rule:0
+msgid "Included fields"
+msgstr "Included fields"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.valid.line"
+msgstr "wizard.valid.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "payment.line"
+msgstr "payment.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "supplier.historical.catalogue"
+msgstr "supplier.historical.catalogue"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "product.pricelist.item"
+msgstr "product.pricelist.item"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.certificate.picking"
+msgstr "stock.certificate.picking"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.move.tracking"
+msgstr "stock.move.tracking"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.bs.report"
+msgstr "account.bs.report"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.warehouse.order.cycle.line"
+msgstr "stock.warehouse.order.cycle.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.import.rac"
+msgstr "wizard.import.rac"
+
+#. module: sync_server
+#: selection:sync_server.message_rule,status:0
+#: selection:sync_server.rule.validation.message,state:0
+#: selection:sync_server.sync_rule,status:0
+msgid "Valid"
+msgstr "Valid"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "delivery.process.setup"
+msgstr "delivery.process.setup"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "make.procurement"
+msgstr "make.procurement"
+
+#. module: sync_server
+#: view:sync_server.message_rule:0
+#: field:sync_server.message_rule,domain:0
+#: view:sync_server.sync_rule:0
+#: field:sync_server.sync_rule,domain:0
+msgid "Domain"
+msgstr "Domain"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "res.request.history"
+msgstr "res.request.history"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.location.chained.options"
+msgstr "stock.location.chained.options"
+
+#. module: sync_server
+#: field:sync_server.sync_rule,fallback_values:0
+msgid "Fallback values"
+msgstr "Fallback values"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "res.currency.table"
+msgstr "res.currency.table"
+
+#. module: sync_server
+#: field:sync_server.message_rule,status:0
+#: field:sync_server.rule.validation.message,state:0
+#: field:sync_server.sync_rule,status:0
+msgid "Status"
+msgstr "Status"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.ir.model.menu.create"
+msgstr "wizard.ir.model.menu.create"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard"
+msgstr "wizard"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.reason.type"
+msgstr "stock.reason.type"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "res.partner.title"
+msgstr "res.partner.title"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "assign.to.kit"
+msgstr "assign.to.kit"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "wizard.import.ir.line"
+msgstr "wizard.import.ir.line"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.statement.from.invoice.lines"
+msgstr "account.statement.from.invoice.lines"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "procurement.purchase.compute.all"
+msgstr "procurement.purchase.compute.all"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "date.tools"
+msgstr "date.tools"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.journal.fake"
+msgstr "account.journal.fake"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.move.memory.shipment.returnpacks"
+msgstr "stock.move.memory.shipment.returnpacks"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "hr.payroll.deletion"
+msgstr "hr.payroll.deletion"
+
+#. module: sync_server
+#: view:sync_server.sync_rule:0
+msgid "Fallback Values"
+msgstr "Fallback Values"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.analytic.balance"
+msgstr "account.analytic.balance"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.fiscal.position.tax.template"
+msgstr "account.fiscal.position.tax.template"
+
