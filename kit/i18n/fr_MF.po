@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.0.3\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2013-10-17 07:42+0000\n"
-"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,22 +16,100 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: kit
-#: code:addons/kit/wizard/substitute.py:205
+#: field:confirm,display_back_confirm:0
+msgid "Display Back Button"
+msgstr "Afficher Bouton Retour"
+
+#. module: kit
+#: selection:composition.item,state:0
+#: view:composition.kit:0
+#: selection:composition.kit,state:0
+#: view:kit.creation:0
+#: selection:kit.creation,state:0
+#: selection:kit.creation.to.consume,fake_state:0
+#: selection:kit.creation.to.consume,state:0
+#: selection:stock.move,hidden_creation_state:0
+#: selection:stock.move,hidden_state:0
+msgid "Closed"
+msgstr "Clôturé"
+
+#. module: kit
+#: view:composition.item:0
+#: view:substitute.item.mirror:0
+msgid "Kit Item"
+msgstr "Kit - Article"
+
+#. module: kit
+#: field:kit.creation.to.consume,qty_consumed_to_consume:0
+msgid "Consumed Qty"
+msgstr "Qté Consommée"
+
+#. module: kit
+#: code:addons/kit/kit_creation.py:723
+#: view:process.to.consume:0
 #, python-format
-msgid "Batch Number/Expiry Date is missing for %s."
-msgstr "Batch Number/Expiry Date is missing for %s."
+msgid "Process Components to Consume"
+msgstr "Traiter les composants à consommer"
 
 #. module: kit
-#: model:ir.ui.menu,name:kit.kit_real
-#: field:modify.expiry.date,kit_id:0
-msgid "Composition List"
-msgstr "Composition List"
+#: code:addons/kit/kit_creation.py:83
+#, python-format
+msgid "Copy is deactivated for Kitting Order."
+msgstr "Copie désactivée lors de Commande d'Assemblage de Kit."
 
 #. module: kit
-#: field:composition.kit,composition_batch_check:0
-#: field:kit.creation,batch_check_kit_creation:0
-msgid "Batch Number Mandatory"
-msgstr "Batch Number Mandatory"
+#: constraint:composition.kit:0
+msgid "Constraint error on Composition Kit."
+msgstr "Erreur de contrainte lors de la Composition Kit."
+
+#. module: kit
+#: constraint:stock.picking:0
+msgid "You cannot validate this document because it contains a line with an inactive product"
+msgstr "Vous ne pouvez pas valider ce document car il contient des lignes avec un produit inactif"
+
+#. module: kit
+#: view:composition.item:0
+#: view:composition.kit:0
+msgid "Composition Item"
+msgstr "Composition - Article"
+
+#. module: kit
+#: view:composition.kit:0
+#: view:substitute:0
+msgid "Substitute Items"
+msgstr "Articles de Substitution"
+
+#. module: kit
+#: field:composition.kit,composition_reference:0
+#: field:kit.creation,name:0
+msgid "Reference"
+msgstr "Référence"
+
+#. module: kit
+#: code:addons/kit/wizard/substitute.py:163
+#, python-format
+msgid "Batch Number is missing for %s."
+msgstr "Numéro de lot manquant pour %s."
+
+#. module: kit
+#: view:kit.creation:0
+msgid "Components"
+msgstr "Composants"
+
+#. module: kit
+#: field:stock.move,hidden_asset_check:0
+msgid "Hidden Asset Check"
+msgstr "Vérification des avoirs cachés"
+
+#. module: kit
+#: field:substitute,replacement_item_ids:0
+msgid "Replacement items"
+msgstr "Articles de remplacement"
+
+#. module: kit
+#: constraint:kit.creation.to.consume:0
+msgid "Constraint error on Kit Creation to Consume."
+msgstr "Erreur de contrainte sur la Création du Kit à Consommer"
 
 #. module: kit
 #: selection:assign.to.kit.line,integrity_status:0
@@ -40,27 +118,54 @@ msgstr "Batch Number Mandatory"
 #: selection:substitute.item,integrity_status_func_substitute_item:0
 #: selection:substitute.item.mirror,integrity_status_func_substitute_item:0
 msgid "The sequence overlaps previous one"
-msgstr "The sequence overlaps previous one"
+msgstr "La séquence chevauche la précédente"
 
 #. module: kit
-#: model:ir.model,name:kit.model_kit_selection
-msgid "kit.selection"
-msgstr "kit.selection"
+#: view:modify.expiry.date:0
+msgid "Compute Date from Kit Components"
+msgstr "Calculer les Dates des Composants du Kit"
 
 #. module: kit
-#: field:kit.creation,consider_child_locations_kit_creation:0
-msgid "Consider Child Locations"
-msgstr "Consider Child Locations"
+#: view:confirm:0
+#: view:kit.selection:0
+#: view:kit.selection.sale:0
+#: view:modify.expiry.date:0
+msgid "_Close"
+msgstr "_Fermer"
+
+#. module: kit
+#: code:addons/kit/wizard/kit_selection.py:103
+#: code:addons/kit/wizard/kit_selection_sale.py:62
+#, python-format
+msgid "A theoretical version should be selected."
+msgstr "Une version théorique devrait être sélectionnée."
+
+#. module: kit
+#: model:ir.model,name:kit.model_kit_selection_sale_line
+msgid "kit.selection.sale.line"
+msgstr "kit.selection.sale.line"
+
+#. module: kit
+#: field:composition.kit,nomen_manda_1:0
+#: field:composition.kit,nomen_manda_1_s:0
+msgid "Group"
+msgstr "Groupe"
+
+#. module: kit
+#: model:ir.model,name:kit.model_stock_move_memory_out
+msgid "stock.move.memory.out"
+msgstr "stock.move.memory.out"
+
+#. module: kit
+#: model:ir.actions.act_window,name:kit.kit_composition_theoretical_action
+#: model:ir.ui.menu,name:kit.kit_composition_theoretical_menu
+msgid "Theoretical Kit Composition"
+msgstr "Kit Théorique - Composition"
 
 #. module: kit
 #: view:kit.creation:0
-msgid "Validate"
-msgstr "Validate"
-
-#. module: kit
-#: field:substitute,composition_item_ids:0
-msgid "Items to replace"
-msgstr "Items to replace"
+msgid "Force Availability"
+msgstr "Disponibilité des Effectifs"
 
 #. module: kit
 #: selection:assign.to.kit.line,integrity_status:0
@@ -68,30 +173,26 @@ msgstr "Items to replace"
 #: selection:kit.selection.sale.line,integrity_status:0
 #: selection:substitute.item,integrity_status_func_substitute_item:0
 #: selection:substitute.item.mirror,integrity_status_func_substitute_item:0
-msgid "Negative Value"
-msgstr "Negative Value"
+msgid "Src Location is missing"
+msgstr "Zone Source est manquante"
 
 #. module: kit
-#: field:kit.creation,consumed_ids_kit_creation:0
-#: field:kit.creation,kit_ids_kit_creation:0
-msgid "Stock Moves"
-msgstr "Stock Moves"
+#: selection:assign.to.kit.line,integrity_status:0
+#: selection:kit.selection.line,integrity_status:0
+#: selection:kit.selection.sale.line,integrity_status:0
+#: selection:substitute.item,integrity_status_func_substitute_item:0
+#: selection:substitute.item.mirror,integrity_status_func_substitute_item:0
+msgid "Expiry Date is Missing"
+msgstr "Date d'Expiration Manquante"
 
 #. module: kit
-#: constraint:composition.item:0
-msgid "Constraint error on Composition Item."
-msgstr "Constraint error on Composition Item."
-
-#. module: kit
-#: code:addons/kit/kit_creation.py:1167
-#, python-format
-msgid "Quantity to consume must be greater than 0.0."
-msgstr "Quantity to consume must be greater than 0.0."
-
-#. module: kit
-#: view:composition.kit:0
-msgid "Search Theoretical Kit Composition"
-msgstr "Search Theoretical Kit Composition"
+#: selection:assign.to.kit.line,integrity_status:0
+#: selection:kit.selection.line,integrity_status:0
+#: selection:kit.selection.sale.line,integrity_status:0
+#: selection:substitute.item,integrity_status_func_substitute_item:0
+#: selection:substitute.item.mirror,integrity_status_func_substitute_item:0
+msgid "Does not exist in selected IN/OUT"
+msgstr "N'existe pas sous la sélection IN/OUT"
 
 #. module: kit
 #: selection:assign.to.kit.line,integrity_status:0
@@ -100,83 +201,128 @@ msgstr "Search Theoretical Kit Composition"
 #: selection:substitute.item,integrity_status_func_substitute_item:0
 #: selection:substitute.item.mirror,integrity_status_func_substitute_item:0
 msgid "Weight is Missing"
-msgstr "Weight is Missing"
+msgstr "Le poids est Manquant"
 
 #. module: kit
-#: model:ir.model,name:kit.model_kit_creation
-msgid "kit.creation"
-msgstr "kit.creation"
-
-#. module: kit
-#: field:assign.to.kit.line,assigned_qty_assign_to_kit_line:0
-msgid "Assign Qty"
-msgstr "Assign Qty"
-
-#. module: kit
-#: selection:composition.item,state:0
-#: view:composition.kit:0
-#: selection:composition.kit,state:0
-msgid "Completed"
-msgstr "Completed"
-
-#. module: kit
-#: field:composition.kit,nomen_manda_3:0
-#: field:composition.kit,nomen_manda_3_s:0
-msgid "Root"
-msgstr "Root"
-
-#. module: kit
-#: view:composition.kit:0
-msgid "Mark as Completed"
-msgstr "Mark as Completed"
-
-#. module: kit
-#: field:kit.selection.sale,order_line_id_kit_selection_sale:0
-#: field:kit.selection.sale.line,order_line_id_kit_selection_sale_line:0
-msgid "Sale Order Line"
-msgstr "Sale Order Line"
-
-#. module: kit
-#: field:kit.creation.to.consume,consumed_to_consume:0
-msgid "Consumed"
-msgstr "Consumed"
-
-#. module: kit
-#: help:composition.item,item_stock_move_id:0
-msgid "This field represents the stock move corresponding to this item for Kit production."
-msgstr "This field represents the stock move corresponding to this item for Kit production."
-
-#. module: kit
-#: code:addons/kit/wizard/split_move.py:61
+#: code:addons/kit/kit_creation.py:418
+#: code:addons/kit/kit_creation.py:431
+#: code:addons/kit/kit_creation.py:448
+#: code:addons/kit/kit_creation.py:471
+#: code:addons/kit/kit_creation.py:730
+#: code:addons/kit/kit_creation.py:755
+#: code:addons/kit/kit_creation.py:958
+#: code:addons/kit/kit_creation.py:978
 #, python-format
-msgid "Error !"
-msgstr "Error !"
+msgid "Kitting Order must be In Production."
+msgstr "Commande d'Assemblage de Kit doit être en Production"
 
 #. module: kit
-#: model:ir.model,name:kit.model_stock_location
-msgid "Location"
-msgstr "Location"
+#: field:substitute,step_substitute:0
+msgid "Step"
+msgstr "Étape"
 
 #. module: kit
-#: field:stock.move,assigned_qty_stock_move:0
-msgid "Assigned Qty"
-msgstr "Assigned Qty"
-
-#. module: kit
-#: field:stock.move,hidden_state:0
-msgid "Hidden State"
-msgstr "Hidden State"
-
-#. module: kit
-#: code:addons/kit/wizard/substitute.py:316
+#: code:addons/kit/wizard/substitute.py:201
 #, python-format
-msgid "Replacement Item quantity must be greater than 0."
-msgstr "Replacement Item quantity must be greater than 0."
+msgid "Batch Number %s for %s with Expiry Date %s has been created."
+msgstr "Le numéro de lot %s pour %s avec date d'expiration %s a été créé."
 
 #. module: kit
-#: field:substitute,wizard_id:0
-msgid "Wizard Id"
-msgstr "Wizard Id"
+#: model:ir.model,name:kit.model_confirm
+msgid "confirm"
+msgstr "confirmer"
+
+#. module: kit
+#: code:addons/kit/kit.py:62
+#, python-format
+msgid "You can only cancel draft theoretical kit composition and kit composition list."
+msgstr "Vous pouvez annuler une composition de kit théorique et une liste de composition de kit uniquement en mode brouillon."
+
+#. module: kit
+#: code:addons/kit/wizard/modify_expiry_date.py:67
+#: view:modify.expiry.date:0
+#, python-format
+msgid "You need to specify a new date."
+msgstr "Veuillez spécifier une nouvelle date."
+
+#. module: kit
+#: field:assign.to.kit,qty_assign_to_kit:0
+msgid "Qty Available"
+msgstr "Qté Disponible"
+
+#. module: kit
+#: model:ir.model,name:kit.model_substitute_item_mirror
+msgid "substitute.item.mirror"
+msgstr "substitute.item.mirror"
+
+#. module: kit
+#: code:addons/kit/kit_creation.py:138
+#: code:addons/kit/kit_creation.py:167
+#, python-format
+msgid "Kitting Order must be Draft."
+msgstr "Commande d'Assemblage de Kit doit être sous statut Brouillon."
+
+#. module: kit
+#: field:stock.move,hidden_creation_state:0
+msgid "Hidden Creation State"
+msgstr "Hidden Creation State"
+
+#. module: kit
+#: view:substitute:0
+msgid "Process De-Kitting"
+msgstr "Traiter le désassemblage de kits"
+
+#. module: kit
+#: field:process.to.consume.line,wizard_id_process_to_consume:0
+#: field:substitute.item,wizard_id:0
+#: field:substitute.item.mirror,wizard_id:0
+msgid "Substitute wizard"
+msgstr "Assistant de Substitution"
+
+#. module: kit
+#: constraint:stock.move:0
+msgid "You must assign an asset for this product."
+msgstr "Vous devez mentionner un bien pour ce produit."
+
+#. module: kit
+#: view:substitute:0
+msgid "Products from the stock to the Kit"
+msgstr "Produits du stock au Kit"
+
+#. module: kit
+#: sql_constraint:composition.kit:0
+msgid "Kit Composition List Reference must be unique for a given product."
+msgstr "Référence de la Liste de Composition de kit doit être unique pour un produit donné."
+
+#. module: kit
+#: code:addons/kit/kit.py:1554
+#, python-format
+msgid "Purchase order line kit replacement with components function is only available for Validated state."
+msgstr "La Fonction Ligne de Bon de Commande pour remplacement de kit par des composants n'est disponible que sous statut \"Validé\"."
+
+#. module: kit
+#: field:kit.selection,partner_id_kit_selection:0
+#: field:kit.selection.sale,partner_id_kit_selection_sale:0
+msgid "Partner"
+msgstr "Partenaire"
+
+#. module: kit
+#: field:kit.creation.to.consume,availability_to_consume:0
+#: field:substitute.item,availability_status_func_substitute_item:0
+#: field:substitute.item.mirror,availability_status_func_substitute_item:0
+msgid "Availability"
+msgstr "Disponibilité"
+
+#. module: kit
+#: view:process.to.consume:0
+msgid "Items from Kit to Stock"
+msgstr "Articles Kit vers Stock"
+
+#. module: kit
+#: code:addons/kit/kit.py:808
+#, python-format
+msgid "Batch Number must be unique for Kit Composition List not canceled or closed."
+msgstr "Le numéro de lot doit être unique pour une liste de composition de Kit non annulée ou clôturée."
 
 #. module: kit
 #: selection:assign.to.kit.line,integrity_status:0
@@ -184,23 +330,912 @@ msgstr "Wizard Id"
 #: selection:kit.selection.sale.line,integrity_status:0
 #: selection:substitute.item,integrity_status_func_substitute_item:0
 #: selection:substitute.item.mirror,integrity_status_func_substitute_item:0
-msgid "No Asset Needed"
-msgstr "No Asset Needed"
+msgid "Wrong Batch Number Type"
+msgstr "Mauvais type de numéro de lot"
 
 #. module: kit
-#: view:substitute:0
-msgid "Process De-Kitting"
-msgstr "Process De-Kitting"
+#: field:composition.item,hidden_batch_management_mandatory:0
+#: field:kit.creation.to.consume,batch_check_kit_creation_to_consume:0
+#: field:substitute.item,hidden_batch_management_mandatory:0
+#: field:substitute.item.mirror,hidden_batch_management_mandatory:0
+msgid "B.Num"
+msgstr "Numéro de Lot"
+
+#. module: kit
+#: field:substitute,wizard_id:0
+msgid "Wizard Id"
+msgstr "Id.Assistant "
+
+#. module: kit
+#: field:composition.item,item_kit_version:0
+msgid "Kit Version"
+msgstr "Kit  - Version"
+
+#. module: kit
+#: constraint:product.product:0
+msgid "If you select \"Non-stockable\" as product type then you have to select \"Make to order\" as procurement method"
+msgstr "Si vous sélectionnez \"Non stockable\" comme type de produit, vous devez sélectionner \"Faire sur commande\" comme méthode d'acquisition"
+
+#. module: kit
+#: field:kit.creation.to.consume,qty_to_consume:0
+#: field:process.to.consume.line,qty_process_to_consume:0
+msgid "Qty per Kit"
+msgstr "Qté par Kit"
+
+#. module: kit
+#: view:split.move:0
+msgid "Quantity for the new move"
+msgstr "Quantité pour le nouveau mouvement"
+
+#. module: kit
+#: code:addons/kit/kit.py:834
+#, python-format
+msgid "this inactive product"
+msgstr "ce produit inactif"
+
+#. module: kit
+#: model:ir.model,name:kit.model_purchase_order_line
+#: field:kit.selection,order_line_id_kit_selection:0
+#: field:kit.selection.line,order_line_id_kit_selection_line:0
+msgid "Purchase Order Line"
+msgstr "Ligne Bon de Commande"
+
+#. module: kit
+#: code:addons/kit/kit.py:788
+#, python-format
+msgid "Composition Version Object is not available for Theoretical Kit."
+msgstr "La Composition Version Objet n'est pas disponible pour le kit théorique."
+
+#. module: kit
+#: view:composition.item:0
+#: field:composition.item,item_lot:0
+#: view:composition.kit:0
+#: field:composition.kit,composition_lot_id:0
+#: field:substitute,lot_id_substitute:0
+#: field:substitute.item,lot_id_substitute_item:0
+#: field:substitute.item.mirror,lot_id_substitute_item:0
+#: field:substitute.item.mirror,lot_mirror:0
+msgid "Batch Nb"
+msgstr "Numéro de Lot"
+
+#. module: kit
+#: code:addons/kit/wizard/substitute.py:184
+#, python-format
+msgid "Batch Number %s for %s with Expiry Date %s does not match the Expiry Date from the composition list %s."
+msgstr "Le numéro de lot %s pour %s avec date d'expiration %s ne correspond pas à la date d'expiration de la liste de composition %s."
+
+#. module: kit
+#: view:composition.kit:0
+msgid "Mark as Completed"
+msgstr "Marquer comme Complété"
+
+#. module: kit
+#: model:ir.ui.menu,name:kit.kit_management
+msgid "Kit Management"
+msgstr "Kit - Gestion"
+
+#. module: kit
+#: code:addons/kit/wizard/substitute.py:313
+#, python-format
+msgid "Selected Batch Number does not correspond to selected Product"
+msgstr "Le Numéro de Lot Sélectionné ne correspond pas au Produit sélectionné "
+
+#. module: kit
+#: view:kit.creation:0
+msgid "Search Kitting Order"
+msgstr "Rechercher Commande d'Assemblage de Kit"
+
+#. module: kit
+#: field:kit.creation,to_consume_ids_kit_creation:0
+msgid "To Consume"
+msgstr "A Consommer"
+
+#. module: kit
+#: selection:assign.to.kit.line,integrity_status:0
+#: selection:kit.selection.line,integrity_status:0
+#: selection:kit.selection.sale.line,integrity_status:0
+#: selection:substitute.item,integrity_status_func_substitute_item:0
+#: selection:substitute.item.mirror,integrity_status_func_substitute_item:0
+msgid "Empty Picking Ticket"
+msgstr "Vider le Bon de Piquage"
+
+#. module: kit
+#: code:addons/kit/wizard/substitute.py:190
+#, python-format
+msgid "Expiry Date is missing for %s."
+msgstr "Date d'expiration manquante pour %s."
+
+#. module: kit
+#: field:kit.creation.to.consume,location_src_id_to_consume:0
+#: field:process.to.consume.line,location_src_id_process_to_consume:0
+#: field:substitute.item,location_id_substitute_item:0
+#: field:substitute.item.mirror,location_id_substitute_item:0
+msgid "Source Location"
+msgstr "Zone Source"
+
+#. module: kit
+#: field:kit.creation.to.consume,qty_available_to_consume:0
+#: field:process.to.consume.line,qty_available_process_to_consume:0
+msgid "Available Qty"
+msgstr "Qté disponible"
+
+#. module: kit
+#: selection:assign.to.kit.line,integrity_status:0
+#: selection:kit.selection.line,integrity_status:0
+#: selection:kit.selection.sale.line,integrity_status:0
+#: selection:substitute.item,integrity_status_func_substitute_item:0
+#: selection:substitute.item.mirror,integrity_status_func_substitute_item:0
+msgid "Assigned qty must be smaller or equal to available qty"
+msgstr "Qté affectée doit être plus petite ou égale à la quantité disponible"
+
+#. module: kit
+#: selection:assign.to.kit.line,integrity_status:0
+#: selection:kit.selection.line,integrity_status:0
+#: selection:kit.selection.sale.line,integrity_status:0
+#: selection:substitute.item,integrity_status_func_substitute_item:0
+#: selection:substitute.item.mirror,integrity_status_func_substitute_item:0
+msgid "No Batch Number/Expiry Date Needed"
+msgstr "Pas besoin de mentionner un numéro de lot/une date d'expiration"
+
+#. module: kit
+#: code:addons/kit/kit.py:242
+#: field:assign.to.kit.line,kit_id_assign_to_kit_line:0
+#: model:ir.actions.act_window,name:kit.kit_composition_real_action
+#: model:ir.actions.act_window,name:kit.kit_composition_real_action2
+#: model:ir.ui.menu,name:kit.kit_composition_real_menu
+#, python-format
+msgid "Kit Composition List"
+msgstr "Liste de composition du Kit"
+
+#. module: kit
+#: code:addons/kit/kit.py:441
+#, python-format
+msgid "Cannot delete Kits not in 'draft' state."
+msgstr "Ne peut supprimer de kits s'il n'est pas sous statut  'brouillon'."
+
+#. module: kit
+#: code:addons/kit/kit.py:311
+#, python-format
+msgid "Substitute Kit Items"
+msgstr "Composants de remplacement pour le Kit"
+
+#. module: kit
+#: code:addons/kit/kit.py:476
+#: code:addons/kit/kit.py:501
+#: code:addons/kit/kit.py:518
+#: code:addons/kit/kit.py:1002
+#: code:addons/kit/wizard/substitute.py:511
+#: code:addons/kit/wizard/substitute.py:533
+#, python-format
+msgid "Element %s not found."
+msgstr "Le système n'a pas trouvé l'élément %s."
+
+#. module: kit
+#: view:composition.kit:0
+msgid "Load items from Version"
+msgstr "Charger écritures de Version"
+
+#. module: kit
+#: field:assign.to.kit,product_id_assign_to_kit:0
+#: view:composition.item:0
+#: field:composition.item,item_product_id:0
+#: view:composition.kit:0
+#: field:composition.kit,composition_product_id:0
+#: model:ir.model,name:kit.model_product_product
+#: view:kit.creation:0
+#: field:kit.creation,product_id_kit_creation:0
+#: field:kit.creation.to.consume,product_id_to_consume:0
+#: field:kit.selection.line,product_id_kit_selection_line:0
+#: field:kit.selection.sale.line,product_id_kit_selection_sale_line:0
+#: field:process.to.consume.line,product_id_process_to_consume:0
+#: field:substitute,product_id_substitute:0
+#: field:substitute.item,product_id_substitute_item:0
+#: field:substitute.item.mirror,product_id_substitute_item:0
+msgid "Product"
+msgstr "Produit"
+
+#. module: kit
+#: code:addons/kit/kit.py:671
+#, python-format
+msgid "Expiry Date of Batch Number %s for product %s has been updated to %s."
+msgstr "La date d'expiration du numéro de lot %s du produit %s a été actualisée à %s."
+
+#. module: kit
+#: selection:composition.kit,composition_type:0
+msgid "Real"
+msgstr "Réel"
+
+#. module: kit
+#: field:kit.selection.line,wizard_id_kit_selection_line:0
+#: field:kit.selection.sale.line,wizard_id_kit_selection_sale_line:0
+msgid "Kit Selection wizard"
+msgstr "Kit - Assistant de Sélection"
+
+#. module: kit
+#: field:substitute.item.mirror,item_id_mirror:0
+msgid "Id of original Item"
+msgstr "Identifiant de l'article d'origine"
+
+#. module: kit
+#: code:addons/kit/wizard/split_move.py:55
+#, python-format
+msgid "Selected quantity must be greater than 0.0."
+msgstr "Quantité Sélectionnée doit être supérieure à 0.0."
+
+#. module: kit
+#: view:composition.kit:0
+msgid "Mark as Active"
+msgstr "Marquer comme Actif(ve)"
+
+#. module: kit
+#: selection:assign.to.kit.line,integrity_status:0
+#: selection:kit.selection.line,integrity_status:0
+#: selection:kit.selection.sale.line,integrity_status:0
+#: selection:substitute.item,integrity_status_func_substitute_item:0
+#: selection:substitute.item.mirror,integrity_status_func_substitute_item:0
+msgid "The first sequence must start with 1"
+msgstr "La première séquence doit commencer par un 1"
+
+#. module: kit
+#: field:confirm,display_close_confirm:0
+msgid "Display Close Button"
+msgstr "Afficher bouton Fermer"
+
+#. module: kit
+#: view:composition.kit:0
+msgid "Kit Composition"
+msgstr "Kit - Composition"
+
+#. module: kit
+#: view:kit.selection.line:0
+#: view:kit.selection.sale.line:0
+msgid "Replacement Items"
+msgstr "Articles de Remplacement"
+
+#. module: kit
+#: field:modify.expiry.date,new_date:0
+msgid "New Date"
+msgstr "Nouvelle Date"
+
+#. module: kit
+#: field:kit.creation,consumed_ids_kit_creation:0
+#: field:kit.creation,kit_ids_kit_creation:0
+msgid "Stock Moves"
+msgstr "Mouvements de Stock"
+
+#. module: kit
+#: model:ir.model,name:kit.model_process_to_consume_line
+msgid "process.to.consume.line"
+msgstr "process.to.consume.line"
+
+#. module: kit
+#: constraint:product.product:0
+msgid "Error: Invalid ean code"
+msgstr "Erreur: code EAN invalide"
+
+#. module: kit
+#: code:addons/kit/wizard/substitute.py:682
+#: code:addons/kit/wizard/substitute.py:1019
+#, python-format
+msgid "The selected Expiry Date does not exist in the system. It will be created during validation process."
+msgstr "La Date d'Expiration sélectionnée n'existe pas dans le système. Elle sera créée au cours du processus de validation."
+
+#. module: kit
+#: code:addons/kit/kit.py:785
+#, python-format
+msgid "Composition Reference / Batch Number / Expiry date is not available for Theoretical Kit."
+msgstr "Référence de Composition  / Numéro de Lot / Date d'expiration non disponible pour un kit théorique."
+
+#. module: kit
+#: field:composition.item,item_stock_move_id:0
+msgid "Kitting Order Stock Move"
+msgstr "Commande d'Assemblage de Kit - Mouvement de Stock"
+
+#. module: kit
+#: model:ir.actions.act_window,name:kit.kit_creation_action2
+msgid "Kitting Orders"
+msgstr "Commandes d'Assemblage de Kit"
+
+#. module: kit
+#: field:assign.to.kit,move_id_assign_to_kit:0
+msgid "Corresponding Stock Move"
+msgstr "Mouvement de stock correspondant"
+
+#. module: kit
+#: view:kit.creation:0
+msgid "Process Line"
+msgstr "Traiter Ligne"
+
+#. module: kit
+#: field:composition.item,state:0
+#: view:composition.kit:0
+#: field:composition.kit,state:0
+#: view:kit.creation:0
+#: field:kit.creation,state:0
+#: field:kit.creation.to.consume,state:0
+msgid "State"
+msgstr "Statut"
+
+#. module: kit
+#: code:addons/kit/kit_creation.py:141
+#: code:addons/kit/kit_creation.py:170
+#, python-format
+msgid "The Kitting order is not linked to any version."
+msgstr "La Commande d'Assemblage de Kit n'est liée à aucune version."
+
+#. module: kit
+#: view:confirm:0
+msgid "Confirmation"
+msgstr "Confirmation"
+
+#. module: kit
+#: field:composition.kit,nomen_manda_0:0
+#: field:composition.kit,nomen_manda_0_s:0
+msgid "Main Type"
+msgstr "Type Principal"
+
+#. module: kit
+#: selection:assign.to.kit.line,integrity_status:0
+#: selection:kit.creation.to.consume,availability_to_consume:0
+#: selection:kit.selection.line,integrity_status:0
+#: selection:kit.selection.sale.line,integrity_status:0
+#: selection:stock.move,hidden_state:0
+#: selection:substitute.item,availability_status_hidden_func_substitute_item:0
+#: selection:substitute.item,integrity_status_func_substitute_item:0
+#: selection:substitute.item.mirror,availability_status_hidden_func_substitute_item:0
+#: selection:substitute.item.mirror,integrity_status_func_substitute_item:0
+msgid "Not Available"
+msgstr "Pas Disponible"
+
+#. module: kit
+#: code:addons/kit/kit.py:819
+#, python-format
+msgid "Selected Version is for a different product."
+msgstr "Version Sélectionnée est pour un produit différent."
+
+#. module: kit
+#: code:addons/kit/kit.py:193
+#, python-format
+msgid "Reset Items to Version Reference. Are you sure?"
+msgstr "Réinitialiser les Articles selon la Version de Référence. Etes-vous sûr?"
+
+#. module: kit
+#: view:composition.item:0
+#: field:composition.item,item_kit_id:0
+#: model:ir.module.module,shortdesc:kit.module_meta_information
+#: field:stock.move,composition_list_id:0
+#: field:stock.move.memory.in,composition_list_id:0
+#: field:stock.move.memory.out,composition_list_id:0
+#: field:substitute.item.mirror,kit_id_mirror:0
+msgid "Kit"
+msgstr "Kit"
+
+#. module: kit
+#: code:addons/kit/kit_creation.py:1408
+#, python-format
+msgid "Original Stock Move cannot be deleted."
+msgstr "Le mouvement de stock d'origine ne peut être supprimé."
+
+#. module: kit
+#: code:addons/kit/kit.py:340
+#: view:composition.kit:0
+#: view:purchase.order.line:0
+#, python-format
+msgid "De-Kitting"
+msgstr "Désassemblage de kits"
+
+#. module: kit
+#: view:confirm:0
+msgid "_Back"
+msgstr "_Back"
+
+#. module: kit
+#: code:addons/kit/kit.py:105
+#: view:composition.kit:0
+#: view:modify.expiry.date:0
+#, python-format
+msgid "Modify Expiry Date"
+msgstr "Modifier date d'expiration"
+
+#. module: kit
+#: view:kit.creation:0
+msgid "Consumed Components"
+msgstr "Composants Consommés"
+
+#. module: kit
+#: code:addons/kit/kit.py:87
+#, python-format
+msgid "Computation of expiry date is only available for Composition List."
+msgstr "Le calcul de dates d'expiration n'est disponible que pour les Listes de Composition. "
+
+#. module: kit
+#: model:ir.ui.menu,name:kit.kit_real
+#: field:modify.expiry.date,kit_id:0
+msgid "Composition List"
+msgstr "Composition - Liste"
+
+#. module: kit
+#: code:addons/kit/kit_creation.py:796
+#: field:assign.to.kit,kit_creation_id_assign_to_kit:0
+#: field:assign.to.kit.line,kit_creation_id_assign_to_kit_line:0
+#: field:composition.kit,composition_kit_creation_id:0
+#: model:ir.actions.act_window,name:kit.kit_creation_action
+#: model:ir.ui.menu,name:kit.kit_creation_menu
+#: view:kit.creation:0
+#: field:kit.creation.to.consume,kit_creation_id_to_consume:0
+#: field:process.to.consume.line,kit_creation_id_process_to_consume:0
+#, python-format
+msgid "Kitting Order"
+msgstr "Ordre d'assemblage de kits"
+
+#. module: kit
+#: field:composition.kit,composition_description:0
+msgid "Composition Description"
+msgstr "Composition - Description"
+
+#. module: kit
+#: field:kit.creation,default_location_src_id_kit_creation:0
+msgid "Default Source Location"
+msgstr "Zone Source par Défaut"
+
+#. module: kit
+#: code:addons/kit/kit.py:795
+#, python-format
+msgid "Composition List with Batch Management Product does not allow Reference."
+msgstr "Liste de Composition avec des Produits Gérés par Lot ne permet pas de Référence."
+
+#. module: kit
+#: help:modify.expiry.date,new_date:0
+msgid "When using automatic computation, if no date are found in the kit components, the default value is 01/Jan/9999."
+msgstr "Lors de l'utilisation du calcul automatique la date par défaut utilisée sera 01/Jan/9999, si aucune date n'est trouvée pour les composants du kit."
+
+#. module: kit
+#: field:substitute.item,type_check:0
+#: field:substitute.item.mirror,type_check:0
+msgid "Type Check"
+msgstr "Type Vérification"
+
+#. module: kit
+#: field:assign.to.kit.line,assigned_qty_assign_to_kit_line:0
+msgid "Assign Qty"
+msgstr "Attribuer Qté"
 
 #. module: kit
 #: constraint:stock.move:0
-msgid "You try to assign a lot which is not from the same product"
-msgstr "You try to assign a lot which is not from the same product"
+msgid "You must assign a batch number for this product."
+msgstr "Vous devez mentionner un numéro de lot pour ce produit."
 
 #. module: kit
-#: field:composition.kit,composition_type:0
-msgid "Composition Type"
-msgstr "Composition Type"
+#: code:addons/kit/kit.py:205
+#, python-format
+msgid "Only composition lists can be reset to a version."
+msgstr "Seules les listes de composition peuvent être réinitialisées selon une version."
+
+#. module: kit
+#: selection:assign.to.kit.line,integrity_status:0
+#: selection:kit.selection.line,integrity_status:0
+#: selection:kit.selection.sale.line,integrity_status:0
+#: selection:substitute.item,integrity_status_func_substitute_item:0
+#: selection:substitute.item.mirror,integrity_status_func_substitute_item:0
+msgid "Batch Number is Missing"
+msgstr "Numéro de lot manquant"
+
+#. module: kit
+#: model:ir.model,name:kit.model_kit_selection_line
+msgid "kit.selection.line"
+msgstr "kit.selection.line"
+
+#. module: kit
+#: field:composition.kit,nomen_manda_3:0
+#: field:composition.kit,nomen_manda_3_s:0
+msgid "Root"
+msgstr "Origine"
+
+#. module: kit
+#: code:addons/kit/kit_creation.py:1167
+#, python-format
+msgid "Quantity to consume must be greater than 0.0."
+msgstr "Quantité à consommer doit être plus grande que 0.0."
+
+#. module: kit
+#: selection:kit.creation,state:0
+#: selection:kit.creation.to.consume,fake_state:0
+#: selection:kit.creation.to.consume,state:0
+#: selection:stock.move,hidden_creation_state:0
+#: selection:stock.move,hidden_state:0
+msgid "Cancelled"
+msgstr "Annulé"
+
+#. module: kit
+#: constraint:product.product:0
+msgid "Constraint error on Kit Product."
+msgstr "Erreur de Contrainte sur le produit Kit"
+
+#. module: kit
+#: field:assign.to.kit,kit_ids_assign_to_kit:0
+#: view:kit.creation:0
+#: field:process.to.consume,components_to_consume_ids:0
+msgid "Components to Consume"
+msgstr "Composants à Consommer"
+
+#. module: kit
+#: field:composition.kit,composition_combined_ref_lot:0
+msgid "Ref/Batch Nb"
+msgstr "Réf/Numéro de Lot"
+
+#. module: kit
+#: model:ir.model,name:kit.model_stock_move_memory_in
+msgid "stock.move.memory.in"
+msgstr "stock.move.memory.in"
+
+#. module: kit
+#: field:confirm,question:0
+msgid "Question"
+msgstr "Question"
+
+#. module: kit
+#: field:kit.selection,product_id:0
+#: field:kit.selection.sale,product_id_kit_selection_sale:0
+msgid "Kit Product"
+msgstr "Kit - Produit"
+
+#. module: kit
+#: field:stock.move,hidden_prodlot_id:0
+msgid "Hidden Prodlot"
+msgstr "Prodlot Caché"
+
+#. module: kit
+#: field:kit.selection,impact_so_kit_selection:0
+msgid "Impact Field Order"
+msgstr "Incidence Commande de Terrain"
+
+#. module: kit
+#: view:kit.creation:0
+msgid "Kits"
+msgstr "Kits"
+
+#. module: kit
+#: view:substitute:0
+msgid "Products to remove from the Kit"
+msgstr "Produits à retirer du Kit"
+
+#. module: kit
+#: code:addons/kit/wizard/kit_selection.py:189
+#: code:addons/kit/wizard/kit_selection_sale.py:148
+#, python-format
+msgid "Quantity must be greater than 0.0."
+msgstr "Quantité doit être supérieure à 0.0."
+
+#. module: kit
+#: field:composition.item,item_qty:0
+#: view:kit.creation:0
+#: field:kit.creation,qty_kit_creation:0
+#: field:kit.creation.to.consume,total_qty_to_consume:0
+#: field:kit.selection.line,qty_kit_selection_line:0
+#: field:kit.selection.sale.line,qty_kit_selection_sale_line:0
+#: field:substitute.item,qty_substitute_item:0
+#: field:substitute.item.mirror,qty_substitute_item:0
+msgid "Qty"
+msgstr "Qté"
+
+#. module: kit
+#: view:composition.item:0
+msgid "Search Theoretical Kit Composition Item"
+msgstr "Rechercher l'Article de la Composition Théorique du Kit"
+
+#. module: kit
+#: field:composition.kit,composition_expiry_check:0
+#: field:kit.creation,expiry_check_kit_creation:0
+msgid "Expiry Date Mandatory"
+msgstr "Date d'Expiration Obligatoire"
+
+#. module: kit
+#: selection:composition.item,state:0
+#: view:composition.kit:0
+#: selection:composition.kit,state:0
+#: view:kit.creation:0
+#: selection:kit.creation,state:0
+#: selection:kit.creation.to.consume,fake_state:0
+#: selection:kit.creation.to.consume,state:0
+#: selection:stock.move,hidden_creation_state:0
+#: selection:stock.move,hidden_state:0
+msgid "Draft"
+msgstr "Brouillon"
+
+#. module: kit
+#: code:addons/kit/kit_creation.py:1431
+#, python-format
+msgid "Split move"
+msgstr "Diviser le mouvement"
+
+#. module: kit
+#: view:kit.selection:0
+#: view:kit.selection.sale:0
+msgid "Import Items from Theoretical Kit"
+msgstr "Importer des articles du Kit Théorique"
+
+#. module: kit
+#: code:addons/kit/kit_creation.py:732
+#, python-format
+msgid "Components to Consume list is empty."
+msgstr "Composants à Consommer, liste vide."
+
+#. module: kit
+#: selection:kit.creation.to.consume,availability_to_consume:0
+msgid "Partially Available"
+msgstr "Partiellement Disponible"
+
+#. module: kit
+#: field:stock.move,hidden_state:0
+msgid "Hidden State"
+msgstr "Statut Caché"
+
+#. module: kit
+#: field:process.to.consume.line,selected_qty_process_to_consume:0
+msgid "Selected Qty per Kit"
+msgstr "Qté Sélectionnée par Kit"
+
+#. module: kit
+#: constraint:composition.kit:0
+msgid "You cannot confirm this kit because it contains a line with an inactive product"
+msgstr "Vous ne pouvez pas confirmer ce kit car il contient des lignes avec un produit inactif"
+
+#. module: kit
+#: model:ir.model,name:kit.model_process_to_consume
+msgid "process.to.consume"
+msgstr "process.to.consume"
+
+#. module: kit
+#: model:ir.model,name:kit.model_composition_kit
+msgid "composition.kit"
+msgstr "composition.kit"
+
+#. module: kit
+#: model:ir.model,name:kit.model_assign_to_kit_line
+msgid "assign.to.kit.line"
+msgstr "assign.to.kit.line"
+
+#. module: kit
+#: help:composition.item,item_stock_move_id:0
+msgid "This field represents the stock move corresponding to this item for Kit production."
+msgstr "Ce champ représente le mouvement de stock correspondant à cet article pour la production de Kit."
+
+#. module: kit
+#: field:assign.to.kit,module_assign_to_kit:0
+#: view:composition.item:0
+#: field:composition.item,item_module:0
+#: field:kit.creation.to.consume,module_to_consume:0
+#: field:substitute.item,module_substitute_item:0
+#: field:substitute.item.mirror,module_substitute_item:0
+msgid "Module"
+msgstr "Module"
+
+#. module: kit
+#: field:purchase.order.line,kit_pol_check:0
+#: field:sale.order.line,kit_pol_check_sale_order_line:0
+#: field:stock.move.memory.in,kit_mem_check:0
+#: field:stock.move.memory.out,kit_mem_check:0
+msgid "Kit Mem Check"
+msgstr "Kit - Mem Vérification"
+
+#. module: kit
+#: view:assign.to.kit:0
+msgid "Total Assign"
+msgstr "Affectation totale"
+
+#. module: kit
+#: field:composition.kit,nomen_sub_1:0
+#: field:composition.kit,nomen_sub_1_s:0
+msgid "Sub Class 2"
+msgstr "Sous-Classe 2"
+
+#. module: kit
+#: code:addons/kit/kit.py:782
+#, python-format
+msgid "The dataset (Product - Version - Creation Date) must be unique."
+msgstr "L'ensemble des données (Produit - Version - Date de création) doit être unique."
+
+#. module: kit
+#: code:addons/kit/kit_creation.py:898
+#, python-format
+msgid "Number of Kit to produce must be greater than 0."
+msgstr "Nombre de Kit à produire doit être supérieur à 0."
+
+#. module: kit
+#: view:composition.kit:0
+msgid "Mark as Inactive"
+msgstr "Marquer comme Inactif(ve)"
+
+#. module: kit
+#: selection:assign.to.kit.line,integrity_status:0
+#: selection:kit.selection.line,integrity_status:0
+#: selection:kit.selection.sale.line,integrity_status:0
+#: selection:substitute.item,integrity_status_func_substitute_item:0
+#: selection:substitute.item.mirror,integrity_status_func_substitute_item:0
+msgid "To value must be greater or equal to From value"
+msgstr " 'A Valeur' doit être supérieure ou égale à  'De Valeur'"
+
+#. module: kit
+#: field:assign.to.kit,expiry_date_assign_to_kit:0
+#: view:composition.item:0
+#: field:composition.item,item_exp:0
+#: view:composition.kit:0
+#: field:composition.kit,composition_exp:0
+#: field:substitute.item,exp_substitute_item:0
+#: field:substitute.item.mirror,exp_substitute_item:0
+msgid "Expiry Date"
+msgstr "Date d'Expiration"
+
+#. module: kit
+#: selection:assign.to.kit.line,integrity_status:0
+#: selection:kit.selection.line,integrity_status:0
+#: selection:kit.selection.sale.line,integrity_status:0
+#: selection:substitute.item,integrity_status_func_substitute_item:0
+#: selection:substitute.item.mirror,integrity_status_func_substitute_item:0
+msgid "Selected Sequence is out of range"
+msgstr "Séquence Sélectionnée est hors limites"
+
+#. module: kit
+#: field:substitute,source_location_id:0
+msgid "Source Location of Kit"
+msgstr "Zone Source d'un Kit"
+
+#. module: kit
+#: model:ir.ui.menu,name:kit.kit_theoretical
+#: field:kit.selection,kit_id:0
+#: field:kit.selection.sale,kit_id_kit_selection_sale:0
+msgid "Theoretical Kit"
+msgstr "Kit Théorique"
+
+#. module: kit
+#: view:assign.to.kit:0
+msgid "Kit Distribution"
+msgstr "Kit - Distribution"
+
+#. module: kit
+#: field:composition.item,name:0
+#: field:composition.kit,name:0
+msgid "Name"
+msgstr "Nom"
+
+#. module: kit
+#: model:ir.model,name:kit.model_product_nomenclature
+msgid "Product Nomenclature"
+msgstr "Nomenclature du Produit"
+
+#. module: kit
+#: code:addons/kit/kit.py:811
+#, python-format
+msgid "Composition List without Batch Management Product needs Reference."
+msgstr "Liste de Composition - sans Gestion des produits par lots- a besoin d'une Référence"
+
+#. module: kit
+#: field:composition.kit,composition_ref_exp:0
+msgid "Expiry Date for Kit with reference"
+msgstr "Date d'Expiration pour Kit avec référence"
+
+#. module: kit
+#: view:assign.to.kit:0
+#: view:composition.kit:0
+#: view:kit.creation:0
+#: view:process.to.consume:0
+#: view:split.move:0
+#: view:substitute:0
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: kit
+#: code:addons/kit/kit.py:131
+#, python-format
+msgid "Kit Composition cannot be empty."
+msgstr "Composition du Kit ne peut être vide"
+
+#. module: kit
+#: field:assign.to.kit.line,required_qty_assign_to_kit_line:0
+msgid "Qty required per kit"
+msgstr "Qté requise par kit"
+
+#. module: kit
+#: view:substitute:0
+msgid "Process Substitute"
+msgstr "Traiter les substitutions"
+
+#. module: kit
+#: constraint:product.product:0
+msgid "Warning! GMDN code must be digits!"
+msgstr "Avertissement! Le code  GMDN doit être en chiffres!"
+
+#. module: kit
+#: field:composition.kit,nomen_sub_3:0
+#: field:composition.kit,nomen_sub_3_s:0
+msgid "Sub Class 4"
+msgstr "Sous-Classe 4"
+
+#. module: kit
+#: model:ir.model,name:kit.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Ligne Commande Terrain"
+
+#. module: kit
+#: field:process.to.consume.line,consider_child_locations_process_to_consume:0
+msgid "Consider Child Location"
+msgstr "Considérer la Localisation Enfant"
+
+#. module: kit
+#: view:composition.kit:0
+msgid "Composition Items"
+msgstr "Composition - Articles"
+
+#. module: kit
+#: field:kit.selection,warehouse_id_kit_selection:0
+#: field:kit.selection.sale,warehouse_id_kit_selection_sale:0
+msgid "Warehouse"
+msgstr "Entrepôt"
+
+#. module: kit
+#: code:addons/kit/wizard/split_move.py:55
+#: code:addons/kit/wizard/split_move.py:58
+#, python-format
+msgid "Error!"
+msgstr "Erreur!"
+
+#. module: kit
+#: model:ir.model,name:kit.model_stock_location
+msgid "Location"
+msgstr "Zone"
+
+#. module: kit
+#: view:kit.creation:0
+msgid "Reset 'Not Available' Lines"
+msgstr "Réinitialiser les lignes 'Non disponibles'"
+
+#. module: kit
+#: code:addons/kit/kit.py:832
+#, python-format
+msgid "Some products have"
+msgstr "Certains produits ont"
+
+#. module: kit
+#: field:stock.move,kit_creation_id_stock_move:0
+msgid "Kit Creation"
+msgstr "Création d'un Kit "
+
+#. module: kit
+#: view:kit.creation:0
+msgid "Validate all 'Available' Lines"
+msgstr "Valider toutes les lignes \"disponibles\""
+
+#. module: kit
+#: code:addons/kit/kit.py:1547
+#: view:kit.selection:0
+#: view:kit.selection.sale:0
+#, python-format
+msgid "Replacement Items Selection"
+msgstr "Sélection des Articles des Remplacement"
+
+#. module: kit
+#: constraint:composition.item:0
+#: constraint:kit.creation:0
+#: constraint:stock.move:0
+msgid "Constraint error on Uom"
+msgstr "Constraint error on Uom"
+
+#. module: kit
+#: constraint:stock.move:0
+#: constraint:stock.picking:0
+msgid "Wrong reason type for an OUT created from scratch."
+msgstr "Mauvais type de motif pour une livraison OUT créée à partir de rien."
+
+#. module: kit
+#: code:addons/kit/kit.py:1089
+#, python-format
+msgid "The product in line is inactive !"
+msgstr "Le produit sur la ligne est incatif !"
+
+#. module: kit
+#: constraint:kit.creation:0
+msgid "Constraint error on Kit Creation."
+msgstr "Erreur de contrainte sur la Création du Kit."
 
 #. module: kit
 #: field:composition.item,hidden_perishable_mandatory:0
@@ -212,25 +1247,168 @@ msgid "Exp"
 msgstr "Exp"
 
 #. module: kit
-#: view:confirm:0
-#: view:kit.selection:0
-#: view:kit.selection.sale:0
-#: view:modify.expiry.date:0
-msgid "_Close"
-msgstr "_Close"
+#: code:addons/kit/kit.py:425
+#, python-format
+msgid "Kit Composition List with Batch Number cannot be copied!"
+msgstr "Liste de Composition de Kit avec Numéro de Lot qui ne peut être copiée!"
 
 #. module: kit
-#: field:assign.to.kit,move_id_assign_to_kit:0
-msgid "Corresponding Stock Move"
-msgstr "Corresponding Stock Move"
+#: code:addons/kit/kit_creation.py:1269
+#: view:assign.to.kit:0
+#, python-format
+msgid "Assign to Kit"
+msgstr "Attribuer à Kit"
 
 #. module: kit
-#: field:kit.creation.to.consume,location_src_id_to_consume:0
-#: field:process.to.consume.line,location_src_id_process_to_consume:0
-#: field:substitute.item,location_id_substitute_item:0
-#: field:substitute.item.mirror,location_id_substitute_item:0
-msgid "Source Location"
-msgstr "Source Location"
+#: help:kit.creation,consider_child_locations_kit_creation:0
+msgid "Consider or not child locations for availability check. The Kitting Order needs to be saved in order this option to be taken into account."
+msgstr "Considérer ou pas les Localisations enfant pour vérifier les disponibilités. La commande d'Assemblage de Kit doit être sauvée de façon à ce que cette option soit prise en compte."
+
+#. module: kit
+#: selection:composition.kit,composition_type:0
+msgid "Theoretical"
+msgstr "Théorique"
+
+#. module: kit
+#: field:split.move,quantity:0
+msgid "Quantity"
+msgstr "Quantité"
+
+#. module: kit
+#: code:addons/kit/kit_creation.py:402
+#, python-format
+msgid "The Kitting Order %s has been confirmed."
+msgstr "La Commande d'Assemblage de Kit  %s a été confirmée"
+
+#. module: kit
+#: field:kit.selection,product_ids_kit_selection:0
+#: field:kit.selection.sale,product_ids_kit_selection_sale:0
+msgid "Replacement Products"
+msgstr "Produits de Remplacement "
+
+#. module: kit
+#: view:kit.creation:0
+msgid "Validate"
+msgstr "Valider"
+
+#. module: kit
+#: code:addons/kit/kit.py:208
+#, python-format
+msgid "The composition list is not linked to any version."
+msgstr "La liste de composition n'est liée à aucune version."
+
+#. module: kit
+#: field:kit.selection,corresponding_so_id_kit_selection:0
+msgid "Corresponding Fo"
+msgstr "Commande de terrain correspondante"
+
+#. module: kit
+#: selection:assign.to.kit.line,integrity_status:0
+#: selection:kit.selection.line,integrity_status:0
+#: selection:kit.selection.sale.line,integrity_status:0
+#: selection:substitute.item,integrity_status_func_substitute_item:0
+#: selection:substitute.item.mirror,integrity_status_func_substitute_item:0
+msgid "Too much quantity selected"
+msgstr "Trop de quantité sélectionnée "
+
+#. module: kit
+#: field:product.product,has_active_completed_theo_kit_kit:0
+msgid "Kit and completed theoretical list"
+msgstr "Kit et liste théorique complète"
+
+#. module: kit
+#: code:addons/kit/kit_creation.py:240
+#, python-format
+msgid "The new internal Picking %s has been created."
+msgstr "Le nouveau Prélèvement interne  %s a été créé."
+
+#. module: kit
+#: field:substitute,composition_item_ids:0
+msgid "Items to replace"
+msgstr "Articles à remplacer"
+
+#. module: kit
+#: code:addons/kit/kit.py:802
+#, python-format
+msgid "Composition List with Batch Management Product does not allow Reference based Expiry Date."
+msgstr "Liste de Composition avec des Produits Gérés par Lot ne permet pas de Référence basée sur Date d'Expiration."
+
+#. module: kit
+#: code:addons/kit/kit.py:773
+#, python-format
+msgid "Only Kit products can be used for kits."
+msgstr "Seuls les Produits de Kit peuvent être utilisés pour les Kits."
+
+#. module: kit
+#: code:addons/kit/kit.py:797
+#, python-format
+msgid "Composition List with Batch Management Product needs Batch Number."
+msgstr "Liste de Composition avec des Produits Gérés par Lot nécessite un Numéro de Lot"
+
+#. module: kit
+#: view:composition.kit:0
+msgid "Close"
+msgstr "Fermer"
+
+#. module: kit
+#: code:addons/kit/kit.py:834
+#, python-format
+msgid "those inactive products"
+msgstr "ces produits inactifs"
+
+#. module: kit
+#: model:ir.model,name:kit.model_stock_partial_move
+msgid "Partial Move"
+msgstr "Mouvement partiel"
+
+#. module: kit
+#: view:kit.creation:0
+msgid "Start Production"
+msgstr "Commencer la Production"
+
+#. module: kit
+#: model:ir.model,name:kit.model_composition_item
+msgid "composition.item"
+msgstr "composition.item"
+
+#. module: kit
+#: code:addons/kit/kit_creation.py:262
+#, python-format
+msgid "Batch Number %s has been created."
+msgstr "Numéro de Lot %s a été créé"
+
+#. module: kit
+#: view:kit.creation:0
+msgid "Cancel Availability"
+msgstr "Annuler Disponibilité"
+
+#. module: kit
+#: model:ir.model,name:kit.model_stock_move
+msgid "Stock Move"
+msgstr "Mouvement de Stock"
+
+#. module: kit
+#: code:addons/kit/kit.py:832
+#, python-format
+msgid "A product has"
+msgstr "Un produit a"
+
+#. module: kit
+#: view:composition.item:0
+#: view:composition.kit:0
+#: view:kit.creation:0
+#: field:kit.creation,notes_kit_creation:0
+msgid "Notes"
+msgstr "Notes"
+
+#. module: kit
+#: field:assign.to.kit.line,integrity_status:0
+#: field:kit.selection.line,integrity_status:0
+#: field:kit.selection.sale.line,integrity_status:0
+#: field:substitute.item,integrity_status_func_substitute_item:0
+#: field:substitute.item.mirror,integrity_status_func_substitute_item:0
+msgid " "
+msgstr " "
 
 #. module: kit
 #: selection:composition.item,state:0
@@ -242,35 +1420,17 @@ msgstr "Source Location"
 #: selection:kit.creation.to.consume,state:0
 #: selection:stock.move,hidden_creation_state:0
 msgid "In Production"
-msgstr "In Production"
+msgstr "En Production"
 
 #. module: kit
-#: view:assign.to.kit:0
-#: view:process.to.consume:0
-msgid "Process"
-msgstr "Process"
+#: view:composition.kit:0
+msgid "Search Theoretical Kit Composition"
+msgstr "Rechercher la Composition Théorique du Kit"
 
 #. module: kit
-#: view:substitute:0
-msgid "Products to remove from the Kit"
-msgstr "Products to remove from the Kit"
-
-#. module: kit
-#: code:addons/kit/kit.py:476
-#: code:addons/kit/kit.py:501
-#: code:addons/kit/kit.py:518
-#: code:addons/kit/kit.py:1002
-#: code:addons/kit/wizard/substitute.py:511
-#: code:addons/kit/wizard/substitute.py:533
-#, python-format
-msgid "Element %s not found."
-msgstr "Element %s not found."
-
-#. module: kit
-#: code:addons/kit/kit.py:819
-#, python-format
-msgid "Selected Version is for a different product."
-msgstr "Selected Version is for a different product."
+#: field:composition.kit,composition_item_ids:0
+msgid "Items"
+msgstr "Articles"
 
 #. module: kit
 #: selection:assign.to.kit.line,integrity_status:0
@@ -278,129 +1438,115 @@ msgstr "Selected Version is for a different product."
 #: selection:kit.selection.sale.line,integrity_status:0
 #: selection:substitute.item,integrity_status_func_substitute_item:0
 #: selection:substitute.item.mirror,integrity_status_func_substitute_item:0
-msgid "Asset is Missing"
-msgstr "Asset is Missing"
+msgid "Negative Value"
+msgstr "Valeur Négative"
 
 #. module: kit
-#: model:ir.model,name:kit.model_substitute_item_mirror
-msgid "substitute.item.mirror"
-msgstr "substitute.item.mirror"
+#: field:kit.selection.sale,order_line_id_kit_selection_sale:0
+#: field:kit.selection.sale.line,order_line_id_kit_selection_sale_line:0
+msgid "Sale Order Line"
+msgstr "Ligne Commande Terrain"
+
+#. module: kit
+#: selection:assign.to.kit.line,integrity_status:0
+#: view:confirm:0
+#: view:kit.selection:0
+#: selection:kit.selection.line,integrity_status:0
+#: view:kit.selection.sale:0
+#: selection:kit.selection.sale.line,integrity_status:0
+#: view:modify.expiry.date:0
+#: view:split.move:0
+#: selection:substitute.item,integrity_status_func_substitute_item:0
+#: selection:substitute.item.mirror,integrity_status_func_substitute_item:0
+msgid "Ok"
+msgstr "Ok"
+
+#. module: kit
+#: field:kit.creation,internal_picking_id_kit_creation:0
+msgid "Internal Picking"
+msgstr "Piquage Interne"
+
+#. module: kit
+#: field:assign.to.kit,uom_id_assign_to_kit:0
+#: field:composition.item,item_uom_id:0
+#: view:kit.creation:0
+#: field:kit.creation,uom_id_kit_creation:0
+#: field:kit.creation.to.consume,uom_id_to_consume:0
+#: field:kit.selection.line,uom_id_kit_selection_line:0
+#: field:kit.selection.sale.line,uom_id_kit_selection_sale_line:0
+#: field:process.to.consume.line,uom_id_process_to_consume:0
+#: field:substitute.item,uom_id_substitute_item:0
+#: field:substitute.item.mirror,uom_id_substitute_item:0
+msgid "UoM"
+msgstr "UdM"
+
+#. module: kit
+#: field:composition.kit,nomen_sub_5:0
+#: field:composition.kit,nomen_sub_5_s:0
+msgid "Sub Class 6"
+msgstr "Sous-Classe 6"
+
+#. module: kit
+#: constraint:product.nomenclature:0
+msgid "Error ! You can not create recursive nomenclature."
+msgstr "Erreur ! Vous ne pouvez pas créer de nomenclature récursive."
+
+#. module: kit
+#: code:addons/kit/wizard/substitute.py:681
+#: code:addons/kit/wizard/substitute.py:1018
+#, python-format
+msgid "Info"
+msgstr "Info"
+
+#. module: kit
+#: field:substitute.item,availability_value_func_substitute_item:0
+#: field:substitute.item.mirror,availability_value_func_substitute_item:0
+msgid "Availability Value"
+msgstr "Valeur de disponibilité"
+
+#. module: kit
+#: view:composition.kit:0
+msgid "Show Inactive"
+msgstr "Montrer les Inactifs"
+
+#. module: kit
+#: selection:assign.to.kit.line,integrity_status:0
+#: selection:kit.selection.line,integrity_status:0
+#: selection:kit.selection.sale.line,integrity_status:0
+#: selection:substitute.item,integrity_status_func_substitute_item:0
+#: selection:substitute.item.mirror,integrity_status_func_substitute_item:0
+msgid "Quantity must be greater than 0.0"
+msgstr "Quantité doit être supérieure à 0.0"
+
+#. module: kit
+#: field:composition.kit,nomen_sub_0:0
+#: field:composition.kit,nomen_sub_0_s:0
+msgid "Sub Class 1"
+msgstr "Sous-Classe 1"
+
+#. module: kit
+#: constraint:product.nomenclature:0
+msgid "Error ! You can not have a category linked to two different family"
+msgstr "Erreur ! Vous ne pouvez pas lier une catégorie à deux familles différentes"
+
+#. module: kit
+#: field:composition.kit,nomen_sub_2:0
+#: field:composition.kit,nomen_sub_2_s:0
+msgid "Sub Class 3"
+msgstr "Sous-Classe 3"
+
+#. module: kit
+#: field:composition.kit,composition_batch_check:0
+#: field:kit.creation,batch_check_kit_creation:0
+msgid "Batch Number Mandatory"
+msgstr "Numéro de Lot Obligatoire"
 
 #. module: kit
 #: view:composition.item:0
 #: view:composition.kit:0
 #: view:kit.creation:0
 msgid "Group By..."
-msgstr "Group By..."
-
-#. module: kit
-#: code:addons/kit/kit.py:131
-#, python-format
-msgid "Kit Composition cannot be empty."
-msgstr "Kit Composition cannot be empty."
-
-#. module: kit
-#: field:kit.creation.to.consume,line_number_to_consume:0
-#: field:process.to.consume.line,line_number_process_to_consume:0
-msgid "Line"
-msgstr "Line"
-
-#. module: kit
-#: code:addons/kit/kit.py:208
-#, python-format
-msgid "The composition list is not linked to any version."
-msgstr "The composition list is not linked to any version."
-
-#. module: kit
-#: field:composition.kit,nomen_sub_1:0
-#: field:composition.kit,nomen_sub_1_s:0
-msgid "Sub Class 2"
-msgstr "Sub Class 2"
-
-#. module: kit
-#: field:composition.kit,active:0
-msgid "Active"
-msgstr "Active"
-
-#. module: kit
-#: view:composition.kit:0
-#: model:ir.actions.act_window,name:kit.kit_composition_theoretical_item_action
-#: model:ir.ui.menu,name:kit.kit_composition_theoretical_item_menu
-msgid "Theoretical Kit Item"
-msgstr "Theoretical Kit Item"
-
-#. module: kit
-#: help:kit.selection,impact_so_kit_selection:0
-msgid "Impact corresponding Field Order by creating a corresponding Field Order line."
-msgstr "Impact corresponding Field Order by creating a corresponding Field Order line."
-
-#. module: kit
-#: constraint:kit.creation:0
-msgid "Constraint error on Kit Creation."
-msgstr "Constraint error on Kit Creation."
-
-#. module: kit
-#: view:kit.selection:0
-#: view:kit.selection.sale:0
-msgid "Import Items from Theoretical Kit"
-msgstr "Import Items from Theoretical Kit"
-
-#. module: kit
-#: model:ir.model,name:kit.model_kit_creation_to_consume
-msgid "kit.creation.to.consume"
-msgstr "kit.creation.to.consume"
-
-#. module: kit
-#: field:composition.kit,composition_description:0
-msgid "Composition Description"
-msgstr "Composition Description"
-
-#. module: kit
-#: code:addons/kit/kit.py:1148
-#, python-format
-msgid "Only Batch Number Mandatory or Expiry Date Mandatory can specify Expiry Date."
-msgstr "Only Batch Number Mandatory or Expiry Date Mandatory can specify Expiry Date."
-
-#. module: kit
-#: code:addons/kit/wizard/substitute.py:156
-#, python-format
-msgid "Duplicated lines in Items from Kit to Stock."
-msgstr "Duplicated lines in Items from Kit to Stock."
-
-#. module: kit
-#: field:kit.creation.to.consume,qty_to_consume:0
-#: field:process.to.consume.line,qty_process_to_consume:0
-msgid "Qty per Kit"
-msgstr "Qty per Kit"
-
-#. module: kit
-#: view:composition.item:0
-#: view:substitute.item.mirror:0
-msgid "Search Real Kit Composition Item"
-msgstr "Search Real Kit Composition Item"
-
-#. module: kit
-#: view:composition.item:0
-#: view:substitute.item.mirror:0
-msgid "Kit Item"
-msgstr "Kit Item"
-
-#. module: kit
-#: code:addons/kit/kit.py:136
-#, python-format
-msgid "Kit Items must have a quantity greater than 0.0."
-msgstr "Kit Items must have a quantity greater than 0.0."
-
-#. module: kit
-#: code:addons/kit/kit_creation.py:262
-#, python-format
-msgid "Batch Number %s has been created."
-msgstr "Batch Number %s has been created."
-
-#. module: kit
-#: model:ir.model,name:kit.model_process_to_consume_line
-msgid "process.to.consume.line"
-msgstr "process.to.consume.line"
+msgstr "Grouper Par..."
 
 #. module: kit
 #: selection:assign.to.kit.line,integrity_status:0
@@ -408,23 +1554,138 @@ msgstr "process.to.consume.line"
 #: selection:kit.selection.sale.line,integrity_status:0
 #: selection:substitute.item,integrity_status_func_substitute_item:0
 #: selection:substitute.item.mirror,integrity_status_func_substitute_item:0
-msgid "Too many packs selected"
-msgstr "Too many packs selected"
+msgid "Need Expiry Date (Internal) not Batch Number (Standard)"
+msgstr "Mention nécessaire d'une date d'expiration (Interne) mais pas d'un numéro de lot (Standard)"
 
 #. module: kit
-#: field:product.product,has_active_completed_theo_kit_kit:0
-msgid "Kit and completed theoretical list"
-msgstr "Kit and completed theoretical list"
+#: model:ir.model,name:kit.model_kit_selection_sale
+msgid "kit.selection.sale"
+msgstr "kit.selection.sale"
 
 #. module: kit
-#: selection:composition.kit,composition_type:0
-msgid "Theoretical"
-msgstr "Theoretical"
+#: model:ir.model,name:kit.model_kit_creation
+msgid "kit.creation"
+msgstr "kit.creation"
+
+#. module: kit
+#: view:kit.creation:0
+msgid "Cancel All Lines"
+msgstr "Annuler Toutes les Lignes"
+
+#. module: kit
+#: model:ir.model,name:kit.model_substitute_item
+msgid "substitute.item"
+msgstr "substitute.item"
+
+#. module: kit
+#: code:addons/kit/kit.py:1606
+#, python-format
+msgid "Replacement Items Selection from Field Order"
+msgstr "Sélection d'articles de remplacement à partir de la commande de terrain"
+
+#. module: kit
+#: code:addons/kit/wizard/kit_selection.py:105
+#: code:addons/kit/wizard/kit_selection_sale.py:64
+#, python-format
+msgid "The theoretical version must be completed."
+msgstr "La version théorique doit être complétée"
+
+#. module: kit
+#: view:kit.creation:0
+msgid "Assign to Kits"
+msgstr "Affecter à un kit"
+
+#. module: kit
+#: view:composition.kit:0
+msgid "Nomenclature Filters..."
+msgstr "Filtres de Nomenclature ..."
+
+#. module: kit
+#: code:addons/kit/kit.py:800
+#, python-format
+msgid "Selected Batch Number's product does not correspond to kit composition list' product."
+msgstr "Le produit du numéro de lot sélectionné ne correspond pas au produit de la liste de composition du kit."
+
+#. module: kit
+#: field:composition.kit,composition_type:0
+msgid "Composition Type"
+msgstr "Composition - Type"
+
+#. module: kit
+#: sql_constraint:product.product:0
+msgid "The \"Product Code\" must be unique"
+msgstr "Le \"Code produit\" doit être unique"
+
+#. module: kit
+#: code:addons/kit/wizard/substitute.py:688
+#: code:addons/kit/wizard/substitute.py:1025
+#, python-format
+msgid "The selected Expiry Date does not exist in the system."
+msgstr "La date d'expiration sélectionnée n'existe pas dans le système."
 
 #. module: kit
 #: view:assign.to.kit:0
-msgid "Kit Distribution"
-msgstr "Kit Distribution"
+#: view:process.to.consume:0
+msgid "Process"
+msgstr "Traiter"
+
+#. module: kit
+#: view:kit.selection:0
+#: view:kit.selection.sale:0
+msgid "You can import replacement items from theoretical kits."
+msgstr "Vous pouvez importer des articles de remaplcement à partir de kits théoriques."
+
+#. module: kit
+#: field:kit.selection.line,price_unit_kit_selection_line:0
+#: field:kit.selection.sale.line,price_unit_kit_selection_sale_line:0
+msgid "Unit Price"
+msgstr "Prix unitaire"
+
+#. module: kit
+#: field:composition.item,inactive_product:0
+msgid "Product is inactive"
+msgstr "Le produit est inactif"
+
+#. module: kit
+#: field:composition.kit,active:0
+msgid "Active"
+msgstr "Actif"
+
+#. module: kit
+#: view:kit.creation:0
+msgid "Update Available Qty"
+msgstr "Mise à jour des Qtés Disponibles"
+
+#. module: kit
+#: code:addons/kit/kit_creation.py:126
+#, python-format
+msgid "Reset Components to Consume to Version Reference. Are you sure?"
+msgstr "Réinitialiser les Composants à Consommer selon la Version de Référence. Etes-vous sûr?"
+
+#. module: kit
+#: view:substitute:0
+msgid "Check Integrity"
+msgstr "Vérifier Intégrité (totalité)"
+
+#. module: kit
+#: code:addons/kit/kit.py:136
+#, python-format
+msgid "Kit Items must have a quantity greater than 0.0."
+msgstr "Kit - Articles qui doivent avoir une quantité supérieure à 0.0."
+
+#. module: kit
+#: model:ir.module.module,description:kit.module_meta_information
+msgid "\n"
+"        Add Kit management capabilities. Composition List, theorical composition, kitting, de-kitting.\n"
+"        "
+msgstr "\n"
+"       Ajouter des capacités au gestion de Kits. Liste de la composition, composition théorique, assemblage kit, désassemblage le kit.\n"
+"        "
+
+#. module: kit
+#: field:stock.move,original_from_process_stock_move:0
+msgid "Original"
+msgstr "D´origine"
 
 #. module: kit
 #: code:addons/kit/kit.py:62
@@ -502,236 +1763,41 @@ msgstr "Kit Distribution"
 #: code:addons/kit/wizard/substitute.py:533
 #, python-format
 msgid "Warning !"
-msgstr "Warning !"
+msgstr "Avertissement !"
 
 #. module: kit
-#: constraint:stock.move:0
-#: constraint:stock.picking:0
-msgid "Wrong reason type for an OUT created from scratch."
-msgstr "Wrong reason type for an OUT created from scratch."
-
-#. module: kit
-#: selection:assign.to.kit.line,integrity_status:0
-#: selection:kit.selection.line,integrity_status:0
-#: selection:kit.selection.sale.line,integrity_status:0
-#: selection:substitute.item,integrity_status_func_substitute_item:0
-#: selection:substitute.item.mirror,integrity_status_func_substitute_item:0
-msgid "Selected Sequence is out of range"
-msgstr "Selected Sequence is out of range"
-
-#. module: kit
-#: view:composition.kit:0
-#: field:composition.kit,composition_creation_date:0
-#: view:kit.creation:0
-#: field:kit.creation,creation_date_kit_creation:0
-msgid "Creation Date"
-msgstr "Creation Date"
-
-#. module: kit
-#: selection:stock.move,hidden_state:0
-msgid "Waiting"
-msgstr "Waiting"
-
-#. module: kit
-#: code:addons/kit/kit.py:671
+#: code:addons/kit/wizard/substitute.py:316
 #, python-format
-msgid "Expiry Date of Batch Number %s for product %s has been updated to %s."
-msgstr "Expiry Date of Batch Number %s for product %s has been updated to %s."
+msgid "Replacement Item quantity must be greater than 0."
+msgstr "Qté Article de Remplacement doit être supérieure à 0."
 
 #. module: kit
-#: field:composition.kit,composition_expiry_check:0
-#: field:kit.creation,expiry_check_kit_creation:0
-msgid "Expiry Date Mandatory"
-msgstr "Expiry Date Mandatory"
+#: model:ir.model,name:kit.model_modify_expiry_date
+msgid "modify.expiry.date"
+msgstr "modify.expiry.date"
 
 #. module: kit
-#: field:kit.creation,completed_kit_creation:0
-msgid "Kitting Order completed"
-msgstr "Kitting Order completed"
-
-#. module: kit
-#: code:addons/kit/wizard/substitute.py:682
-#: code:addons/kit/wizard/substitute.py:1019
+#: code:addons/kit/kit.py:1145
 #, python-format
-msgid "The selected Expiry Date does not exist in the system. It will be created during validation process."
-msgstr "The selected Expiry Date does not exist in the system. It will be created during validation process."
+msgid "Only Batch Number Mandatory Product can specify Batch Number."
+msgstr "Seul le Produit avec Numéro de Lot Obligatoire peut spécifier le Numéro de Lot."
+
+#. module: kit
+#: code:addons/kit/kit_creation.py:276
+#, python-format
+msgid "The new empty Kit Composition List %s has been created."
+msgstr "La nouvelle Liste de Composition de Kit vide %s a été créée."
 
 #. module: kit
 #: model:ir.model,name:kit.model_stock_partial_picking
 msgid "Partial Picking"
-msgstr "Partial Picking"
+msgstr "Piquage Partiel"
 
 #. module: kit
-#: field:kit.creation,to_consume_sequence_id:0
-msgid "To Consume Sequence"
-msgstr "To Consume Sequence"
-
-#. module: kit
-#: code:addons/kit/kit.py:833
-#, python-format
-msgid "lines"
-msgstr "lines"
-
-#. module: kit
-#: field:substitute,kit_id:0
-msgid "Substitute Items from Composition List"
-msgstr "Substitute Items from Composition List"
-
-#. module: kit
-#: code:addons/kit/kit.py:834
-#, python-format
-msgid "this inactive product"
-msgstr "this inactive product"
-
-#. module: kit
-#: view:composition.kit:0
-msgid "Kit Composition"
-msgstr "Kit Composition"
-
-#. module: kit
-#: code:addons/kit/wizard/split_move.py:58
-#, python-format
-msgid "Selected quantity (%0.1f %s) exceeds the available quantity (%0.1f %s)"
-msgstr "Selected quantity (%0.1f %s) exceeds the available quantity (%0.1f %s)"
-
-#. module: kit
-#: view:kit.creation:0
-msgid "Search Kitting Order"
-msgstr "Search Kitting Order"
-
-#. module: kit
-#: code:addons/kit/wizard/kit_selection.py:189
-#: code:addons/kit/wizard/kit_selection_sale.py:148
-#, python-format
-msgid "Quantity must be greater than 0.0."
-msgstr "Quantity must be greater than 0.0."
-
-#. module: kit
-#: selection:assign.to.kit.line,integrity_status:0
-#: selection:kit.selection.line,integrity_status:0
-#: selection:kit.selection.sale.line,integrity_status:0
-#: selection:substitute.item,integrity_status_func_substitute_item:0
-#: selection:substitute.item.mirror,integrity_status_func_substitute_item:0
-msgid "No Batch Number/Expiry Date Needed"
-msgstr "No Batch Number/Expiry Date Needed"
-
-#. module: kit
-#: field:assign.to.kit,prodlot_id_assign_to_kit:0
-msgid "Batch Number"
-msgstr "Batch Number"
-
-#. module: kit
-#: selection:composition.item,state:0
-#: view:composition.kit:0
-#: selection:composition.kit,state:0
-#: view:kit.creation:0
-#: selection:kit.creation,state:0
-#: selection:kit.creation.to.consume,fake_state:0
-#: selection:kit.creation.to.consume,state:0
-#: selection:stock.move,hidden_creation_state:0
-#: selection:stock.move,hidden_state:0
-msgid "Draft"
-msgstr "Draft"
-
-#. module: kit
-#: code:addons/kit/wizard/substitute.py:190
-#, python-format
-msgid "Expiry Date is missing for %s."
-msgstr "Expiry Date is missing for %s."
-
-#. module: kit
-#: field:substitute,source_location_id:0
-msgid "Source Location of Kit"
-msgstr "Source Location of Kit"
-
-#. module: kit
-#: code:addons/kit/kit.py:1089
-#, python-format
-msgid "The product in line is inactive !"
-msgstr "The product in line is inactive !"
-
-#. module: kit
-#: field:kit.selection,warehouse_id_kit_selection:0
-#: field:kit.selection.sale,warehouse_id_kit_selection_sale:0
-msgid "Warehouse"
-msgstr "Warehouse"
-
-#. module: kit
-#: view:composition.kit:0
-msgid "Mark as Active"
-msgstr "Mark as Active"
-
-#. module: kit
-#: field:composition.kit,composition_reference:0
-#: field:kit.creation,name:0
-msgid "Reference"
-msgstr "Reference"
-
-#. module: kit
-#: field:process.to.consume.line,to_consume_id_process_to_consume:0
-#: field:stock.move,to_consume_id_stock_move:0
-msgid "To Consume Line"
-msgstr "To Consume Line"
-
-#. module: kit
-#: view:process.to.consume:0
-msgid "Items from Kit to Stock"
-msgstr "Items from Kit to Stock"
-
-#. module: kit
-#: field:kit.creation,location_dest_id_kit_creation:0
-msgid "Destination Location"
-msgstr "Destination Location"
-
-#. module: kit
-#: field:assign.to.kit,kit_ids_assign_to_kit:0
-#: view:kit.creation:0
-#: field:process.to.consume,components_to_consume_ids:0
-msgid "Components to Consume"
-msgstr "Components to Consume"
-
-#. module: kit
-#: code:addons/kit/kit_creation.py:240
-#, python-format
-msgid "The new internal Picking %s has been created."
-msgstr "The new internal Picking %s has been created."
-
-#. module: kit
-#: view:kit.creation:0
-msgid "Process Line"
-msgstr "Process Line"
-
-#. module: kit
-#: view:kit.creation:0
-msgid "Cancel All Lines"
-msgstr "Cancel All Lines"
-
-#. module: kit
-#: field:split.move,quantity:0
-msgid "Quantity"
-msgstr "Quantity"
-
-#. module: kit
-#: field:composition.kit,nomen_manda_1:0
-#: field:composition.kit,nomen_manda_1_s:0
-msgid "Group"
-msgstr "Group"
-
-#. module: kit
-#: field:stock.move,kit_creation_id_stock_move:0
-msgid "Kit Creation"
-msgstr "Kit Creation"
-
-#. module: kit
-#: view:kit.creation:0
-msgid "Consumed Components"
-msgstr "Consumed Components"
-
-#. module: kit
-#: code:addons/kit/kit.py:193
-#, python-format
-msgid "Reset Items to Version Reference. Are you sure?"
-msgstr "Reset Items to Version Reference. Are you sure?"
+#: view:purchase.order:0
+#: view:sale.order:0
+msgid "Replace with kit components..."
+msgstr "Remplacer avec des composants de kit ..."
 
 #. module: kit
 #: view:composition.kit:0
@@ -744,686 +1810,9 @@ msgid "Version"
 msgstr "Version"
 
 #. module: kit
-#: code:addons/kit/kit_creation.py:276
-#, python-format
-msgid "The new empty Kit Composition List %s has been created."
-msgstr "The new empty Kit Composition List %s has been created."
-
-#. module: kit
-#: model:ir.model,name:kit.model_kit_selection_sale
-msgid "kit.selection.sale"
-msgstr "kit.selection.sale"
-
-#. module: kit
-#: model:ir.model,name:kit.model_product_nomenclature
-msgid "Product Nomenclature"
-msgstr "Product Nomenclature"
-
-#. module: kit
-#: code:addons/kit/kit.py:340
-#: view:composition.kit:0
-#: view:purchase.order.line:0
-#, python-format
-msgid "De-Kitting"
-msgstr "De-Kitting"
-
-#. module: kit
-#: selection:assign.to.kit.line,integrity_status:0
-#: selection:kit.selection.line,integrity_status:0
-#: selection:kit.selection.sale.line,integrity_status:0
-#: selection:substitute.item,integrity_status_func_substitute_item:0
-#: selection:substitute.item.mirror,integrity_status_func_substitute_item:0
-msgid "Src Location is missing"
-msgstr "Src Location is missing"
-
-#. module: kit
-#: view:kit.creation:0
-msgid "Process All Lines"
-msgstr "Process All Lines"
-
-#. module: kit
-#: view:assign.to.kit:0
-msgid "Auto Assignment"
-msgstr "Auto Assignment"
-
-#. module: kit
-#: field:process.to.consume.line,consider_child_locations_process_to_consume:0
-msgid "Consider Child Location"
-msgstr "Consider Child Location"
-
-#. module: kit
-#: field:assign.to.kit,qty_assign_to_kit:0
-msgid "Qty Available"
-msgstr "Qty Available"
-
-#. module: kit
-#: selection:assign.to.kit.line,integrity_status:0
-#: selection:kit.creation.to.consume,availability_to_consume:0
-#: selection:kit.selection.line,integrity_status:0
-#: selection:kit.selection.sale.line,integrity_status:0
-#: selection:stock.move,hidden_state:0
-#: selection:substitute.item,availability_status_hidden_func_substitute_item:0
-#: selection:substitute.item,integrity_status_func_substitute_item:0
-#: selection:substitute.item.mirror,availability_status_hidden_func_substitute_item:0
-#: selection:substitute.item.mirror,integrity_status_func_substitute_item:0
-msgid "Not Available"
-msgstr "Not Available"
-
-#. module: kit
-#: view:confirm:0
-msgid "Confirmation"
-msgstr "Confirmation"
-
-#. module: kit
-#: selection:assign.to.kit.line,integrity_status:0
-#: selection:kit.selection.line,integrity_status:0
-#: selection:kit.selection.sale.line,integrity_status:0
-#: selection:substitute.item,integrity_status_func_substitute_item:0
-#: selection:substitute.item.mirror,integrity_status_func_substitute_item:0
-msgid "To value must be greater or equal to From value"
-msgstr "To value must be greater or equal to From value"
-
-#. module: kit
-#: code:addons/kit/wizard/kit_selection.py:103
-#: code:addons/kit/wizard/kit_selection_sale.py:62
-#, python-format
-msgid "A theoretical version should be selected."
-msgstr "A theoretical version should be selected."
-
-#. module: kit
-#: field:composition.kit,nomen_sub_5:0
-#: field:composition.kit,nomen_sub_5_s:0
-msgid "Sub Class 6"
-msgstr "Sub Class 6"
-
-#. module: kit
-#: view:kit.creation:0
-msgid "Components"
-msgstr "Components"
-
-#. module: kit
-#: field:modify.expiry.date,new_date:0
-msgid "New Date"
-msgstr "New Date"
-
-#. module: kit
-#: constraint:product.nomenclature:0
-msgid "Error ! You can not have a category linked to two different family"
-msgstr "Error ! You can not have a category linked to two different family"
-
-#. module: kit
-#: help:kit.creation,consider_child_locations_kit_creation:0
-msgid "Consider or not child locations for availability check. The Kitting Order needs to be saved in order this option to be taken into account."
-msgstr "Consider or not child locations for availability check. The Kitting Order needs to be saved in order this option to be taken into account."
-
-#. module: kit
-#: view:confirm:0
-msgid "_Back"
-msgstr "_Back"
-
-#. module: kit
-#: view:composition.kit:0
-msgid "Close"
-msgstr "Close"
-
-#. module: kit
-#: field:confirm,display_close_confirm:0
-msgid "Display Close Button"
-msgstr "Display Close Button"
-
-#. module: kit
-#: field:composition.kit,nomen_manda_0:0
-#: field:composition.kit,nomen_manda_0_s:0
-msgid "Main Type"
-msgstr "Main Type"
-
-#. module: kit
-#: view:assign.to.kit:0
-#: view:composition.kit:0
-#: view:kit.creation:0
-#: view:process.to.consume:0
-#: view:split.move:0
-#: view:substitute:0
-msgid "Cancel"
-msgstr "Cancel"
-
-#. module: kit
-#: model:ir.model,name:kit.model_assign_to_kit
-msgid "assign.to.kit"
-msgstr "assign.to.kit"
-
-#. module: kit
-#: model:ir.model,name:kit.model_kit_selection_line
-msgid "kit.selection.line"
-msgstr "kit.selection.line"
-
-#. module: kit
-#: model:ir.model,name:kit.model_kit_selection_sale_line
-msgid "kit.selection.sale.line"
-msgstr "kit.selection.sale.line"
-
-#. module: kit
-#: view:kit.creation.consumed:0
-msgid "Components Consumed"
-msgstr "Components Consumed"
-
-#. module: kit
-#: view:split.move:0
-msgid "Quantity for the new move"
-msgstr "Quantity for the new move"
-
-#. module: kit
-#: field:stock.move,hidden_exp_check:0
-msgid "Hidden Expiry Check"
-msgstr "Hidden Expiry Check"
-
-#. module: kit
-#: model:ir.model,name:kit.model_stock_picking
-msgid "Picking List"
-msgstr "Picking List"
-
-#. module: kit
-#: view:kit.creation:0
-msgid "Reset 'Not Available' Lines"
-msgstr "Reset 'Not Available' Lines"
-
-#. module: kit
-#: constraint:stock.move:0
-msgid "You cannot select Service Location as Source Location."
-msgstr "You cannot select Service Location as Source Location."
-
-#. module: kit
-#: constraint:product.product:0
-#: constraint:sale.order.line:0
-msgid "You must select on order procurement method for Service with Reception products."
-msgstr "You must select on order procurement method for Service with Reception products."
-
-#. module: kit
-#: view:kit.creation:0
-msgid "Validate all 'Available' Lines"
-msgstr "Validate all 'Available' Lines"
-
-#. module: kit
-#: code:addons/kit/wizard/modify_expiry_date.py:67
-#: view:modify.expiry.date:0
-#, python-format
-msgid "You need to specify a new date."
-msgstr "You need to specify a new date."
-
-#. module: kit
-#: code:addons/kit/kit.py:832
-#, python-format
-msgid "A product has"
-msgstr "A product has"
-
-#. module: kit
-#: code:addons/kit/kit_creation.py:898
-#, python-format
-msgid "Number of Kit to produce must be greater than 0."
-msgstr "Number of Kit to produce must be greater than 0."
-
-#. module: kit
-#: field:substitute,replacement_item_ids:0
-msgid "Replacement items"
-msgstr "Replacement items"
-
-#. module: kit
-#: constraint:composition.kit:0
-msgid "Constraint error on Composition Kit."
-msgstr "Constraint error on Composition Kit."
-
-#. module: kit
-#: code:addons/kit/kit.py:833
-#, python-format
-msgid "line"
-msgstr "line"
-
-#. module: kit
-#: constraint:product.product:0
-msgid "Error: Invalid ean code"
-msgstr "Error: Invalid ean code"
-
-#. module: kit
-#: view:kit.creation:0
-msgid "Cancel Availability"
-msgstr "Cancel Availability"
-
-#. module: kit
-#: view:composition.item:0
-msgid "Search Theoretical Kit Composition Item"
-msgstr "Search Theoretical Kit Composition Item"
-
-#. module: kit
-#: constraint:stock.location:0
-msgid "You cannot define a quarantine location as chained location."
-msgstr "You cannot define a quarantine location as chained location."
-
-#. module: kit
-#: field:stock.move,hidden_prodlot_id:0
-msgid "Hidden Prodlot"
-msgstr "Hidden Prodlot"
-
-#. module: kit
-#: field:assign.to.kit,uom_id_assign_to_kit:0
-#: field:composition.item,item_uom_id:0
-#: view:kit.creation:0
-#: field:kit.creation,uom_id_kit_creation:0
-#: field:kit.creation.to.consume,uom_id_to_consume:0
-#: field:kit.selection.line,uom_id_kit_selection_line:0
-#: field:kit.selection.sale.line,uom_id_kit_selection_sale_line:0
-#: field:process.to.consume.line,uom_id_process_to_consume:0
-#: field:substitute.item,uom_id_substitute_item:0
-#: field:substitute.item.mirror,uom_id_substitute_item:0
-msgid "UoM"
-msgstr "UoM"
-
-#. module: kit
-#: field:kit.selection,partner_id_kit_selection:0
-#: field:kit.selection.sale,partner_id_kit_selection_sale:0
-msgid "Partner"
-msgstr "Partner"
-
-#. module: kit
-#: code:addons/kit/wizard/kit_selection.py:183
-#: code:addons/kit/wizard/kit_selection_sale.py:142
-#, python-format
-msgid "Unit Price must be specified for each line."
-msgstr "Unit Price must be specified for each line."
-
-#. module: kit
-#: field:substitute.item,availability_status_hidden_func_substitute_item:0
-#: field:substitute.item.mirror,availability_status_hidden_func_substitute_item:0
-msgid "Hidden availability"
-msgstr "Hidden availability"
-
-#. module: kit
-#: field:confirm,question:0
-msgid "Question"
-msgstr "Question"
-
-#. module: kit
-#: field:assign.to.kit.line,qty_assign_to_kit_by_product_uom:0
-msgid "Qty already assigned"
-msgstr "Qty already assigned"
-
-#. module: kit
-#: field:composition.item,hidden_batch_management_mandatory:0
-#: field:kit.creation.to.consume,batch_check_kit_creation_to_consume:0
-#: field:substitute.item,hidden_batch_management_mandatory:0
-#: field:substitute.item.mirror,hidden_batch_management_mandatory:0
-msgid "B.Num"
-msgstr "B.Num"
-
-#. module: kit
-#: view:composition.kit:0
-msgid "Composition Items"
-msgstr "Composition Items"
-
-#. module: kit
-#: code:addons/kit/kit.py:795
-#, python-format
-msgid "Composition List with Batch Management Product does not allow Reference."
-msgstr "Composition List with Batch Management Product does not allow Reference."
-
-#. module: kit
-#: field:stock.move,hidden_asset_check:0
-msgid "Hidden Asset Check"
-msgstr "Hidden Asset Check"
-
-#. module: kit
-#: code:addons/kit/kit.py:782
-#, python-format
-msgid "The dataset (Product - Version - Creation Date) must be unique."
-msgstr "The dataset (Product - Version - Creation Date) must be unique."
-
-#. module: kit
-#: code:addons/kit/wizard/substitute.py:688
-#: code:addons/kit/wizard/substitute.py:1025
-#, python-format
-msgid "The selected Expiry Date does not exist in the system."
-msgstr "The selected Expiry Date does not exist in the system."
-
-#. module: kit
-#: selection:assign.to.kit.line,integrity_status:0
-#: selection:kit.selection.line,integrity_status:0
-#: selection:kit.selection.sale.line,integrity_status:0
-#: selection:substitute.item,integrity_status_func_substitute_item:0
-#: selection:substitute.item.mirror,integrity_status_func_substitute_item:0
-msgid "Expiry Date is Missing"
-msgstr "Expiry Date is Missing"
-
-#. module: kit
-#: view:purchase.order:0
-#: view:sale.order:0
-msgid "Replace with kit components..."
-msgstr "Replace with kit components..."
-
-#. module: kit
-#: view:substitute:0
-msgid "Process Substitute"
-msgstr "Process Substitute"
-
-#. module: kit
-#: field:substitute.item,availability_value_func_substitute_item:0
-#: field:substitute.item.mirror,availability_value_func_substitute_item:0
-msgid "Availability Value"
-msgstr "Availability Value"
-
-#. module: kit
-#: view:composition.kit:0
-msgid "Nomenclature Filters..."
-msgstr "Nomenclature Filters..."
-
-#. module: kit
-#: constraint:stock.picking:0
-msgid "You cannot validate this document because it contains a line with an inactive product"
-msgstr "You cannot validate this document because it contains a line with an inactive product"
-
-#. module: kit
-#: code:addons/kit/kit.py:311
-#, python-format
-msgid "Substitute Kit Items"
-msgstr "Substitute Kit Items"
-
-#. module: kit
-#: field:composition.kit,nomen_sub_0:0
-#: field:composition.kit,nomen_sub_0_s:0
-msgid "Sub Class 1"
-msgstr "Sub Class 1"
-
-#. module: kit
-#: view:composition.kit:0
-msgid "Search Real Kit Composition"
-msgstr "Search Real Kit Composition"
-
-#. module: kit
-#: code:addons/kit/kit_creation.py:1408
-#, python-format
-msgid "Original Stock Move cannot be deleted."
-msgstr "Original Stock Move cannot be deleted."
-
-#. module: kit
-#: field:kit.selection.line,wizard_id_kit_selection_line:0
-#: field:kit.selection.sale.line,wizard_id_kit_selection_sale_line:0
-msgid "Kit Selection wizard"
-msgstr "Kit Selection wizard"
-
-#. module: kit
-#: code:addons/kit/wizard/substitute.py:313
-#, python-format
-msgid "Selected Batch Number does not correspond to selected Product"
-msgstr "Selected Batch Number does not correspond to selected Product"
-
-#. module: kit
-#: field:kit.creation,default_location_src_id_kit_creation:0
-msgid "Default Source Location"
-msgstr "Default Source Location"
-
-#. module: kit
-#: constraint:product.product:0
-msgid "Warning! GMDN code must be digits!"
-msgstr "Warning! GMDN code must be digits!"
-
-#. module: kit
-#: code:addons/kit/kit_creation.py:138
-#: code:addons/kit/kit_creation.py:167
-#, python-format
-msgid "Kitting Order must be Draft."
-msgstr "Kitting Order must be Draft."
-
-#. module: kit
-#: view:modify.expiry.date:0
-msgid "Compute Date from Kit Components"
-msgstr "Compute Date from Kit Components"
-
-#. module: kit
-#: field:process.to.consume.line,wizard_id_process_to_consume:0
-#: field:substitute.item,wizard_id:0
-#: field:substitute.item.mirror,wizard_id:0
-msgid "Substitute wizard"
-msgstr "Substitute wizard"
-
-#. module: kit
-#: field:confirm,display_back_confirm:0
-msgid "Display Back Button"
-msgstr "Display Back Button"
-
-#. module: kit
-#: view:substitute:0
-msgid "Products from the stock to the Kit"
-msgstr "Products from the stock to the Kit"
-
-#. module: kit
-#: constraint:stock.move:0
-msgid "You must assign an asset for this product."
-msgstr "You must assign an asset for this product."
-
-#. module: kit
-#: field:assign.to.kit,module_assign_to_kit:0
-#: view:composition.item:0
-#: field:composition.item,item_module:0
-#: field:kit.creation.to.consume,module_to_consume:0
-#: field:substitute.item,module_substitute_item:0
-#: field:substitute.item.mirror,module_substitute_item:0
-msgid "Module"
-msgstr "Module"
-
-#. module: kit
-#: code:addons/kit/kit.py:153
-#: code:addons/kit/kit.py:170
-#, python-format
-msgid "Only theoretical kit can manipulate \"active\" field."
-msgstr "Only theoretical kit can manipulate \"active\" field."
-
-#. module: kit
-#: field:kit.selection,corresponding_so_id_kit_selection:0
-msgid "Corresponding Fo"
-msgstr "Corresponding Fo"
-
-#. module: kit
-#: code:addons/kit/kit_creation.py:732
-#, python-format
-msgid "Components to Consume list is empty."
-msgstr "Components to Consume list is empty."
-
-#. module: kit
-#: code:addons/kit/kit_creation.py:1431
-#, python-format
-msgid "Split move"
-msgstr "Split move"
-
-#. module: kit
-#: constraint:product.product:0
-msgid "Constraint error on Kit Product."
-msgstr "Constraint error on Kit Product."
-
-#. module: kit
-#: field:substitute,step_substitute:0
-msgid "Step"
-msgstr "Step"
-
-#. module: kit
-#: model:ir.module.module,description:kit.module_meta_information
-msgid "\n"
-"        Add Kit management capabilities. Composition List, theorical composition, kitting, de-kitting.\n"
-"        "
-msgstr "\n"
-"        Add Kit management capabilities. Composition List, theorical composition, kitting, de-kitting.\n"
-"        "
-
-#. module: kit
-#: help:modify.expiry.date,new_date:0
-msgid "When using automatic computation, if no date are found in the kit components, the default value is 01/Jan/9999."
-msgstr "When using automatic computation, if no date are found in the kit components, the default value is 01/Jan/9999."
-
-#. module: kit
-#: field:composition.kit,nomen_sub_4:0
-#: field:composition.kit,nomen_sub_4_s:0
-msgid "Sub Class 5"
-msgstr "Sub Class 5"
-
-#. module: kit
-#: code:addons/kit/kit.py:62
-#, python-format
-msgid "You can only cancel draft theoretical kit composition and kit composition list."
-msgstr "You can only cancel draft theoretical kit composition and kit composition list."
-
-#. module: kit
-#: model:ir.model,name:kit.model_sale_order_line
-msgid "Sales Order Line"
-msgstr "Sales Order Line"
-
-#. module: kit
-#: model:ir.model,name:kit.model_confirm
-msgid "confirm"
-msgstr "confirm"
-
-#. module: kit
-#: selection:assign.to.kit.line,integrity_status:0
-#: selection:kit.selection.line,integrity_status:0
-#: selection:kit.selection.sale.line,integrity_status:0
-#: selection:substitute.item,integrity_status_func_substitute_item:0
-#: selection:substitute.item.mirror,integrity_status_func_substitute_item:0
-msgid "Wrong Batch Number Type"
-msgstr "Wrong Batch Number Type"
-
-#. module: kit
-#: view:kit.creation:0
-msgid "Assign Automatically to Kits"
-msgstr "Assign Automatically to Kits"
-
-#. module: kit
-#: view:kit.creation:0
-msgid "Update Available Qty"
-msgstr "Update Available Qty"
-
-#. module: kit
-#: selection:assign.to.kit.line,integrity_status:0
-#: selection:kit.selection.line,integrity_status:0
-#: selection:kit.selection.sale.line,integrity_status:0
-#: selection:substitute.item,integrity_status_func_substitute_item:0
-#: selection:substitute.item.mirror,integrity_status_func_substitute_item:0
-msgid "Quantity must be greater than 0.0"
-msgstr "Quantity must be greater than 0.0"
-
-#. module: kit
-#: field:kit.creation.to.consume,qty_consumed_to_consume:0
-msgid "Consumed Qty"
-msgstr "Consumed Qty"
-
-#. module: kit
-#: view:composition.item:0
-#: view:composition.kit:0
-msgid "Composition Item"
-msgstr "Composition Item"
-
-#. module: kit
-#: view:assign.to.kit:0
-msgid "Total Assign"
-msgstr "Total Assign"
-
-#. module: kit
-#: field:composition.item,item_kit_type:0
-msgid "Kit Type"
-msgstr "Kit Type"
-
-#. module: kit
-#: view:kit.creation:0
-msgid "Kits"
-msgstr "Kits"
-
-#. module: kit
-#: model:ir.model,name:kit.model_modify_expiry_date
-msgid "modify.expiry.date"
-msgstr "modify.expiry.date"
-
-#. module: kit
-#: field:composition.item,inactive_product:0
-msgid "Product is inactive"
-msgstr "Product is inactive"
-
-#. module: kit
-#: model:ir.model,name:kit.model_composition_kit
-msgid "composition.kit"
-msgstr "composition.kit"
-
-#. module: kit
-#: selection:assign.to.kit.line,integrity_status:0
-#: selection:kit.selection.line,integrity_status:0
-#: selection:kit.selection.sale.line,integrity_status:0
-#: selection:substitute.item,integrity_status_func_substitute_item:0
-#: selection:substitute.item.mirror,integrity_status_func_substitute_item:0
-msgid "Empty Picking Ticket"
-msgstr "Empty Picking Ticket"
-
-#. module: kit
-#: field:composition.kit,nomen_sub_3:0
-#: field:composition.kit,nomen_sub_3_s:0
-msgid "Sub Class 4"
-msgstr "Sub Class 4"
-
-#. module: kit
-#: field:kit.creation.to.consume,availability_to_consume:0
-#: field:substitute.item,availability_status_func_substitute_item:0
-#: field:substitute.item.mirror,availability_status_func_substitute_item:0
-msgid "Availability"
-msgstr "Availability"
-
-#. module: kit
-#: model:ir.model,name:kit.model_stock_move_memory_in
-msgid "stock.move.memory.in"
-msgstr "stock.move.memory.in"
-
-#. module: kit
-#: code:addons/kit/kit.py:813
-#, python-format
-msgid "Composition List without Batch Management Product does not allow Batch Number."
-msgstr "Composition List without Batch Management Product does not allow Batch Number."
-
-#. module: kit
-#: view:composition.kit:0
-#: view:substitute:0
-msgid "Substitute Items"
-msgstr "Substitute Items"
-
-#. module: kit
-#: field:purchase.order.line,kit_pol_check:0
-#: field:sale.order.line,kit_pol_check_sale_order_line:0
-#: field:stock.move.memory.in,kit_mem_check:0
-#: field:stock.move.memory.out,kit_mem_check:0
-msgid "Kit Mem Check"
-msgstr "Kit Mem Check"
-
-#. module: kit
-#: model:ir.model,name:kit.model_purchase_order_line
-#: field:kit.selection,order_line_id_kit_selection:0
-#: field:kit.selection.line,order_line_id_kit_selection_line:0
-msgid "Purchase Order Line"
-msgstr "Purchase Order Line"
-
-#. module: kit
-#: model:ir.model,name:kit.model_substitute
-msgid "substitute"
-msgstr "substitute"
-
-#. module: kit
-#: code:addons/kit/kit.py:441
-#, python-format
-msgid "Cannot delete Kits not in 'draft' state."
-msgstr "Cannot delete Kits not in 'draft' state."
-
-#. module: kit
-#: field:process.to.consume.line,selected_qty_process_to_consume:0
-msgid "Selected Qty per Kit"
-msgstr "Selected Qty per Kit"
-
-#. module: kit
-#: code:addons/kit/kit.py:105
-#: view:composition.kit:0
-#: view:modify.expiry.date:0
-#, python-format
-msgid "Modify Expiry Date"
-msgstr "Modify Expiry Date"
+#: field:substitute,kit_id:0
+msgid "Substitute Items from Composition List"
+msgstr "Articles de Substitution d'une Liste de Composition"
 
 #. module: kit
 #: code:addons/kit/kit.py:1155
@@ -1433,423 +1822,69 @@ msgid "You have to select a product UOM in the same category than the purchase U
 msgstr "You have to select a product UOM in the same category than the purchase UOM of the product !"
 
 #. module: kit
-#: field:composition.item,item_stock_move_id:0
-msgid "Kitting Order Stock Move"
-msgstr "Kitting Order Stock Move"
-
-#. module: kit
-#: field:composition.kit,composition_combined_ref_lot:0
-msgid "Ref/Batch Nb"
-msgstr "Ref/Batch Nb"
-
-#. module: kit
-#: model:ir.model,name:kit.model_composition_item
-msgid "composition.item"
-msgstr "composition.item"
-
-#. module: kit
-#: field:kit.creation.to.consume,qty_available_to_consume:0
-#: field:process.to.consume.line,qty_available_process_to_consume:0
-msgid "Available Qty"
-msgstr "Available Qty"
-
-#. module: kit
-#: view:composition.item:0
-#: view:composition.kit:0
-#: view:kit.creation:0
-#: field:kit.creation,notes_kit_creation:0
-msgid "Notes"
-msgstr "Notes"
-
-#. module: kit
-#: model:ir.actions.act_window,name:kit.kit_composition_theoretical_action
-#: model:ir.ui.menu,name:kit.kit_composition_theoretical_menu
-msgid "Theoretical Kit Composition"
-msgstr "Theoretical Kit Composition"
-
-#. module: kit
-#: field:kit.selection.line,price_unit_kit_selection_line:0
-#: field:kit.selection.sale.line,price_unit_kit_selection_sale_line:0
-msgid "Unit Price"
-msgstr "Unit Price"
-
-#. module: kit
-#: code:addons/kit/kit_creation.py:796
-#: field:assign.to.kit,kit_creation_id_assign_to_kit:0
-#: field:assign.to.kit.line,kit_creation_id_assign_to_kit_line:0
-#: field:composition.kit,composition_kit_creation_id:0
-#: model:ir.actions.act_window,name:kit.kit_creation_action
-#: model:ir.ui.menu,name:kit.kit_creation_menu
-#: view:kit.creation:0
-#: field:kit.creation.to.consume,kit_creation_id_to_consume:0
-#: field:process.to.consume.line,kit_creation_id_process_to_consume:0
-#, python-format
-msgid "Kitting Order"
-msgstr "Kitting Order"
-
-#. module: kit
-#: code:addons/kit/wizard/split_move.py:61
-#, python-format
-msgid "Selected quantity is equal to available quantity (%0.1f %s)."
-msgstr "Selected quantity is equal to available quantity (%0.1f %s)."
-
-#. module: kit
-#: code:addons/kit/kit.py:816
-#, python-format
-msgid "Composition List cannot be inactive."
-msgstr "Composition List cannot be inactive."
-
-#. module: kit
-#: model:ir.ui.menu,name:kit.kit_management
-msgid "Kit Management"
-msgstr "Kit Management"
-
-#. module: kit
-#: code:addons/kit/kit.py:87
-#, python-format
-msgid "Computation of expiry date is only available for Composition List."
-msgstr "Computation of expiry date is only available for Composition List."
-
-#. module: kit
-#: selection:assign.to.kit.line,integrity_status:0
-#: view:confirm:0
-#: view:kit.selection:0
-#: selection:kit.selection.line,integrity_status:0
-#: view:kit.selection.sale:0
-#: selection:kit.selection.sale.line,integrity_status:0
-#: view:modify.expiry.date:0
-#: view:split.move:0
-#: selection:substitute.item,integrity_status_func_substitute_item:0
-#: selection:substitute.item.mirror,integrity_status_func_substitute_item:0
-msgid "Ok"
-msgstr "Ok"
-
-#. module: kit
-#: field:assign.to.kit.line,required_qty_assign_to_kit_line:0
-msgid "Qty required per kit"
-msgstr "Qty required per kit"
-
-#. module: kit
-#: constraint:kit.creation.to.consume:0
-msgid "Constraint error on Kit Creation to Consume."
-msgstr "Constraint error on Kit Creation to Consume."
-
-#. module: kit
-#: field:composition.kit,nomen_manda_2:0
-#: field:composition.kit,nomen_manda_2_s:0
-msgid "Family"
-msgstr "Family"
-
-#. module: kit
-#: selection:kit.creation,state:0
-#: selection:kit.creation.to.consume,fake_state:0
-#: selection:kit.creation.to.consume,state:0
-#: selection:stock.move,hidden_creation_state:0
-#: selection:stock.move,hidden_state:0
-msgid "Cancelled"
-msgstr "Cancelled"
-
-#. module: kit
-#: constraint:composition.kit:0
-msgid "You cannot confirm this kit because it contains a line with an inactive product"
-msgstr "You cannot confirm this kit because it contains a line with an inactive product"
-
-#. module: kit
-#: model:ir.model,name:kit.model_assign_to_kit_line
-msgid "assign.to.kit.line"
-msgstr "assign.to.kit.line"
-
-#. module: kit
-#: code:addons/kit/wizard/kit_selection.py:105
-#: code:addons/kit/wizard/kit_selection_sale.py:64
-#, python-format
-msgid "The theoretical version must be completed."
-msgstr "The theoretical version must be completed."
-
-#. module: kit
-#: selection:kit.creation.to.consume,availability_to_consume:0
-msgid "Partially Available"
-msgstr "Partially Available"
-
-#. module: kit
-#: selection:composition.kit,composition_type:0
-msgid "Real"
-msgstr "Real"
-
-#. module: kit
-#: code:addons/kit/kit.py:840
-#, python-format
-msgid "The product of the kit composition is inactive. Please change the product."
-msgstr "The product of the kit composition is inactive. Please change the product."
-
-#. module: kit
-#: model:ir.model,name:kit.model_split_move
-#: view:kit.creation:0
-#: view:split.move:0
-msgid "Split Move"
-msgstr "Split Move"
-
-#. module: kit
 #: field:kit.creation.to.consume,fake_state:0
 msgid "Fake State"
-msgstr "Fake State"
+msgstr "Faux Statut"
 
 #. module: kit
-#: field:composition.item,state:0
-#: view:composition.kit:0
-#: field:composition.kit,state:0
-#: view:kit.creation:0
-#: field:kit.creation,state:0
-#: field:kit.creation.to.consume,state:0
-msgid "State"
-msgstr "State"
+#: constraint:product.product:0
+#: constraint:sale.order.line:0
+msgid "You must select on order procurement method for Service with Reception products."
+msgstr "Vous devez sélectionner sur la commande le mode d'approvisionnement pour le Service  avec Réception de produits."
 
 #. module: kit
-#: code:addons/kit/kit.py:1554
-#, python-format
-msgid "Purchase order line kit replacement with components function is only available for Validated state."
-msgstr "Purchase order line kit replacement with components function is only available for Validated state."
+#: field:substitute,destination_location_id:0
+msgid "Destination Location of Items"
+msgstr "Zone destinataire des Articles"
 
 #. module: kit
-#: code:addons/kit/wizard/substitute.py:306
-#, python-format
-msgid "Replacement Items cannot be empty."
-msgstr "Replacement Items cannot be empty."
-
-#. module: kit
-#: field:process.to.consume.line,total_selected_qty_process_to_consume:0
-msgid "Total Selected Qty"
-msgstr "Total Selected Qty"
-
-#. module: kit
-#: model:ir.model,name:kit.model_stock_partial_move
-msgid "Partial Move"
-msgstr "Partial Move"
-
-#. module: kit
-#: code:addons/kit/kit.py:785
-#, python-format
-msgid "Composition Reference / Batch Number / Expiry date is not available for Theoretical Kit."
-msgstr "Composition Reference / Batch Number / Expiry date is not available for Theoretical Kit."
+#: field:composition.item,item_kit_type:0
+msgid "Kit Type"
+msgstr "Kit  - Type"
 
 #. module: kit
 #: code:addons/kit/wizard/substitute.py:297
 #: code:addons/kit/wizard/substitute.py:444
 #, python-format
 msgid "Items to replace cannot be empty."
-msgstr "Items to replace cannot be empty."
+msgstr "Articles à remplacer ne peuvent être vides"
 
 #. module: kit
-#: selection:assign.to.kit.line,integrity_status:0
-#: selection:kit.selection.line,integrity_status:0
-#: selection:kit.selection.sale.line,integrity_status:0
-#: selection:substitute.item,integrity_status_func_substitute_item:0
-#: selection:substitute.item.mirror,integrity_status_func_substitute_item:0
-msgid "Too much quantity selected"
-msgstr "Too much quantity selected"
-
-#. module: kit
-#: selection:assign.to.kit.line,integrity_status:0
-#: selection:kit.selection.line,integrity_status:0
-#: selection:kit.selection.sale.line,integrity_status:0
-#: selection:substitute.item,integrity_status_func_substitute_item:0
-#: selection:substitute.item.mirror,integrity_status_func_substitute_item:0
-msgid "Assigned qty must be smaller or equal to required qty"
-msgstr "Assigned qty must be smaller or equal to required qty"
-
-#. module: kit
-#: model:ir.model,name:kit.model_substitute_item
-msgid "substitute.item"
-msgstr "substitute.item"
-
-#. module: kit
-#: code:addons/kit/kit_creation.py:418
-#: code:addons/kit/kit_creation.py:431
-#: code:addons/kit/kit_creation.py:448
-#: code:addons/kit/kit_creation.py:471
-#: code:addons/kit/kit_creation.py:730
-#: code:addons/kit/kit_creation.py:755
-#: code:addons/kit/kit_creation.py:958
-#: code:addons/kit/kit_creation.py:978
+#: code:addons/kit/wizard/kit_selection.py:183
+#: code:addons/kit/wizard/kit_selection_sale.py:142
 #, python-format
-msgid "Kitting Order must be In Production."
-msgstr "Kitting Order must be In Production."
+msgid "Unit Price must be specified for each line."
+msgstr "Prix Unitaire doit être spécifié pour chaque ligne."
 
 #. module: kit
-#: field:kit.creation,to_consume_ids_kit_creation:0
-msgid "To Consume"
-msgstr "To Consume"
+#: field:substitute.item,availability_status_hidden_func_substitute_item:0
+#: field:substitute.item.mirror,availability_status_hidden_func_substitute_item:0
+msgid "Hidden availability"
+msgstr "Disponibilité cachée"
 
 #. module: kit
-#: code:addons/kit/wizard/split_move.py:55
+#: field:kit.creation.to.consume,line_number_to_consume:0
+#: field:process.to.consume.line,line_number_process_to_consume:0
+msgid "Line"
+msgstr "Ligne"
+
+#. module: kit
+#: code:addons/kit/kit.py:833
 #, python-format
-msgid "Selected quantity must be greater than 0.0."
-msgstr "Selected quantity must be greater than 0.0."
+msgid "lines"
+msgstr "lignes"
 
 #. module: kit
-#: selection:assign.to.kit.line,integrity_status:0
-#: selection:kit.selection.line,integrity_status:0
-#: selection:kit.selection.sale.line,integrity_status:0
-#: selection:substitute.item,integrity_status_func_substitute_item:0
-#: selection:substitute.item.mirror,integrity_status_func_substitute_item:0
-msgid "Need Batch Number (Standard) not Expiry Date (Internal)"
-msgstr "Need Batch Number (Standard) not Expiry Date (Internal)"
-
-#. module: kit
-#: code:addons/kit/kit.py:133
+#: code:addons/kit/kit.py:835
 #, python-format
-msgid "Cannot complete inactive kit."
-msgstr "Cannot complete inactive kit."
+msgid "%s been inactivated. If you want to validate this document you have to remove/correct the %s containing %s (see red %s of the document)"
+msgstr "%s a été désactivé. Si vous voulez valider ce document vous devez supprimer/corriger les %s contenant %s (voir les %s en rouge)"
 
 #. module: kit
-#: code:addons/kit/kit_creation.py:83
+#: code:addons/kit/wizard/split_move.py:61
 #, python-format
-msgid "Copy is deactivated for Kitting Order."
-msgstr "Copy is deactivated for Kitting Order."
-
-#. module: kit
-#: field:kit.selection,pricelist_id_kit_selection:0
-#: field:kit.selection.sale,pricelist_id_kit_selection_sale:0
-msgid "Currency"
-msgstr "Currency"
-
-#. module: kit
-#: field:modify.expiry.date,date:0
-msgid "Date"
-msgstr "Date"
-
-#. module: kit
-#: model:ir.actions.act_window,name:kit.kit_creation_action2
-msgid "Kitting Orders"
-msgstr "Kitting Orders"
-
-#. module: kit
-#: constraint:stock.move:0
-msgid "You must assign a batch number for this product."
-msgstr "You must assign a batch number for this product."
-
-#. module: kit
-#: selection:assign.to.kit.line,integrity_status:0
-#: selection:kit.selection.line,integrity_status:0
-#: selection:kit.selection.sale.line,integrity_status:0
-#: selection:substitute.item,integrity_status_func_substitute_item:0
-#: selection:substitute.item.mirror,integrity_status_func_substitute_item:0
-msgid "Does not exist in selected IN/OUT"
-msgstr "Does not exist in selected IN/OUT"
-
-#. module: kit
-#: field:assign.to.kit,product_id_assign_to_kit:0
-#: view:composition.item:0
-#: field:composition.item,item_product_id:0
-#: view:composition.kit:0
-#: field:composition.kit,composition_product_id:0
-#: model:ir.model,name:kit.model_product_product
-#: view:kit.creation:0
-#: field:kit.creation,product_id_kit_creation:0
-#: field:kit.creation.to.consume,product_id_to_consume:0
-#: field:kit.selection.line,product_id_kit_selection_line:0
-#: field:kit.selection.sale.line,product_id_kit_selection_sale_line:0
-#: field:process.to.consume.line,product_id_process_to_consume:0
-#: field:substitute,product_id_substitute:0
-#: field:substitute.item,product_id_substitute_item:0
-#: field:substitute.item.mirror,product_id_substitute_item:0
-msgid "Product"
-msgstr "Product"
-
-#. module: kit
-#: field:kit.selection,product_id:0
-#: field:kit.selection.sale,product_id_kit_selection_sale:0
-msgid "Kit Product"
-msgstr "Kit Product"
-
-#. module: kit
-#: model:ir.actions.act_window,name:kit.kit_composition_real_item_action
-#: model:ir.ui.menu,name:kit.kit_composition_real_item_menu
-msgid "Kit Composition Item"
-msgstr "Kit Composition Item"
-
-#. module: kit
-#: field:assign.to.kit.line,integrity_status:0
-#: field:kit.selection.line,integrity_status:0
-#: field:kit.selection.sale.line,integrity_status:0
-#: field:substitute.item,integrity_status_func_substitute_item:0
-#: field:substitute.item.mirror,integrity_status_func_substitute_item:0
-msgid " "
-msgstr " "
-
-#. module: kit
-#: view:composition.item:0
-#: field:composition.item,item_lot:0
-#: view:composition.kit:0
-#: field:composition.kit,composition_lot_id:0
-#: field:substitute,lot_id_substitute:0
-#: field:substitute.item,lot_id_substitute_item:0
-#: field:substitute.item.mirror,lot_id_substitute_item:0
-#: field:substitute.item.mirror,lot_mirror:0
-msgid "Batch Nb"
-msgstr "Batch Nb"
-
-#. module: kit
-#: field:composition.item,item_qty:0
-#: view:kit.creation:0
-#: field:kit.creation,qty_kit_creation:0
-#: field:kit.creation.to.consume,total_qty_to_consume:0
-#: field:kit.selection.line,qty_kit_selection_line:0
-#: field:kit.selection.sale.line,qty_kit_selection_sale_line:0
-#: field:substitute.item,qty_substitute_item:0
-#: field:substitute.item.mirror,qty_substitute_item:0
-msgid "Qty"
-msgstr "Qty"
-
-#. module: kit
-#: selection:assign.to.kit.line,integrity_status:0
-#: selection:kit.selection.line,integrity_status:0
-#: selection:kit.selection.sale.line,integrity_status:0
-#: selection:substitute.item,integrity_status_func_substitute_item:0
-#: selection:substitute.item.mirror,integrity_status_func_substitute_item:0
-msgid "Need Expiry Date (Internal) not Batch Number (Standard)"
-msgstr "Need Expiry Date (Internal) not Batch Number (Standard)"
-
-#. module: kit
-#: field:substitute.item.mirror,item_id_mirror:0
-msgid "Id of original Item"
-msgstr "Id of original Item"
-
-#. module: kit
-#: field:kit.selection,product_ids_kit_selection:0
-#: field:kit.selection.sale,product_ids_kit_selection_sale:0
-msgid "Replacement Products"
-msgstr "Replacement Products"
-
-#. module: kit
-#: model:ir.ui.menu,name:kit.kit_theoretical
-#: field:kit.selection,kit_id:0
-#: field:kit.selection.sale,kit_id_kit_selection_sale:0
-msgid "Theoretical Kit"
-msgstr "Theoretical Kit"
-
-#. module: kit
-#: code:addons/kit/kit.py:773
-#, python-format
-msgid "Only Kit products can be used for kits."
-msgstr "Only Kit products can be used for kits."
-
-#. module: kit
-#: field:composition.item,item_kit_version:0
-msgid "Kit Version"
-msgstr "Kit Version"
-
-#. module: kit
-#: code:addons/kit/wizard/substitute.py:184
-#, python-format
-msgid "Batch Number %s for %s with Expiry Date %s does not match the Expiry Date from the composition list %s."
-msgstr "Batch Number %s for %s with Expiry Date %s does not match the Expiry Date from the composition list %s."
-
-#. module: kit
-#: code:addons/kit/wizard/substitute.py:201
-#, python-format
-msgid "Batch Number %s for %s with Expiry Date %s has been created."
-msgstr "Batch Number %s for %s with Expiry Date %s has been created."
+msgid "Selected quantity is equal to available quantity (%0.1f %s)."
+msgstr "Quantité Sélectionnée est égale à la quantité disponible (%0.1f %s)"
 
 #. module: kit
 #: selection:assign.to.kit.line,integrity_status:0
@@ -1858,57 +1893,278 @@ msgstr "Batch Number %s for %s with Expiry Date %s has been created."
 #: selection:substitute.item,integrity_status_func_substitute_item:0
 #: selection:substitute.item.mirror,integrity_status_func_substitute_item:0
 msgid "A gap exist in the sequence"
-msgstr "A gap exist in the sequence"
+msgstr "Un écart existe dans la séquence"
 
 #. module: kit
-#: code:addons/kit/kit_creation.py:141
-#: code:addons/kit/kit_creation.py:170
-#, python-format
-msgid "The Kitting order is not linked to any version."
-msgstr "The Kitting order is not linked to any version."
+#: selection:assign.to.kit.line,integrity_status:0
+#: selection:kit.selection.line,integrity_status:0
+#: selection:kit.selection.sale.line,integrity_status:0
+#: selection:substitute.item,integrity_status_func_substitute_item:0
+#: selection:substitute.item.mirror,integrity_status_func_substitute_item:0
+msgid "Asset is Missing"
+msgstr "Bien manquant"
 
 #. module: kit
-#: code:addons/kit/kit.py:808
-#, python-format
-msgid "Batch Number must be unique for Kit Composition List not canceled or closed."
-msgstr "Batch Number must be unique for Kit Composition List not canceled or closed."
-
-#. module: kit
-#: field:stock.move,original_from_process_stock_move:0
-msgid "Original"
-msgstr "Original"
+#: field:kit.creation,consider_child_locations_kit_creation:0
+msgid "Consider Child Locations"
+msgstr "Considérer les Localisations Enfant"
 
 #. module: kit
 #: view:kit.creation:0
-msgid "Force Availability"
-msgstr "Force Availability"
+msgid "Process All Lines"
+msgstr "Traiter Toutes les Lignes"
 
 #. module: kit
-#: code:addons/kit/kit.py:1547
-#: view:kit.selection:0
-#: view:kit.selection.sale:0
-#, python-format
-msgid "Replacement Items Selection"
-msgstr "Replacement Items Selection"
+#: field:modify.expiry.date,date:0
+msgid "Date"
+msgstr "Date"
 
 #. module: kit
-#: code:addons/kit/kit.py:425
+#: code:addons/kit/kit.py:833
 #, python-format
-msgid "Kit Composition List with Batch Number cannot be copied!"
-msgstr "Kit Composition List with Batch Number cannot be copied!"
+msgid "line"
+msgstr "ligne"
 
 #. module: kit
-#: code:addons/kit/wizard/split_move.py:55
-#: code:addons/kit/wizard/split_move.py:58
+#: code:addons/kit/wizard/substitute.py:156
 #, python-format
-msgid "Error!"
-msgstr "Error!"
+msgid "Duplicated lines in Items from Kit to Stock."
+msgstr "Lignes dupliquées dans les écritures de Kit à Stock."
 
 #. module: kit
-#: code:addons/kit/kit.py:205
+#: code:addons/kit/kit.py:1184
 #, python-format
-msgid "Only composition lists can be reset to a version."
-msgstr "Only composition lists can be reset to a version."
+msgid "The Kit product cannot be Expiry Date Mandatory only."
+msgstr "Le Produit Kit ne peut pas être exclusivement \"Date D'Expiration Obligatoire\"."
+
+#. module: kit
+#: constraint:composition.item:0
+msgid "Constraint error on Composition Item."
+msgstr "Erreur de contrainte lors de la Composition Article."
+
+#. module: kit
+#: constraint:product.nomenclature:0
+msgid "Error! The nomenclature complete name must be unique."
+msgstr "Error! The nomenclature complete name must be unique."
+
+#. module: kit
+#: field:kit.creation,to_consume_sequence_id:0
+msgid "To Consume Sequence"
+msgstr "A Consommer - Séquence"
+
+#. module: kit
+#: field:process.to.consume.line,total_selected_qty_process_to_consume:0
+msgid "Total Selected Qty"
+msgstr "Qté Totale Sélectionnée"
+
+#. module: kit
+#: field:process.to.consume.line,to_consume_id_process_to_consume:0
+#: field:stock.move,to_consume_id_stock_move:0
+msgid "To Consume Line"
+msgstr "A Consommer - Ligne"
+
+#. module: kit
+#: view:composition.kit:0
+#: model:ir.actions.act_window,name:kit.kit_composition_theoretical_item_action
+#: model:ir.ui.menu,name:kit.kit_composition_theoretical_item_menu
+msgid "Theoretical Kit Item"
+msgstr "Kit Théorique - Article"
+
+#. module: kit
+#: constraint:stock.move:0
+msgid "You cannot select Service Location as Source Location."
+msgstr "Vous ne pouvez pas sélectionner la Zone Service comme Zone Source"
+
+#. module: kit
+#: model:ir.actions.act_window,name:kit.kit_composition_real_item_action
+#: model:ir.ui.menu,name:kit.kit_composition_real_item_menu
+msgid "Kit Composition Item"
+msgstr "Kit - Article de la Composition "
+
+#. module: kit
+#: code:addons/kit/kit.py:816
+#, python-format
+msgid "Composition List cannot be inactive."
+msgstr "Liste de Composition ne peut être inactive"
+
+#. module: kit
+#: code:addons/kit/wizard/substitute.py:306
+#, python-format
+msgid "Replacement Items cannot be empty."
+msgstr "Les Articles des Remplacement ne peuvent être vides"
+
+#. module: kit
+#: code:addons/kit/wizard/split_move.py:61
+#, python-format
+msgid "Error !"
+msgstr "Erreur !"
+
+#. module: kit
+#: code:addons/kit/wizard/kit_selection.py:176
+#: code:addons/kit/wizard/kit_selection_sale.py:135
+#, python-format
+msgid "Replacement Items must be selected."
+msgstr "Les Articles des Remplacement doivent être sélectionnés"
+
+#. module: kit
+#: view:kit.creation:0
+msgid "Confirm Kitting"
+msgstr "Confirmer l'Assemblage de Kit"
+
+#. module: kit
+#: view:composition.kit:0
+#: field:composition.kit,composition_creation_date:0
+#: view:kit.creation:0
+#: field:kit.creation,creation_date_kit_creation:0
+msgid "Creation Date"
+msgstr "Date de création"
+
+#. module: kit
+#: field:composition.item,item_description:0
+msgid "Item Description"
+msgstr "Description de l'Article"
+
+#. module: kit
+#: selection:stock.move,hidden_state:0
+msgid "Waiting"
+msgstr "En attente"
+
+#. module: kit
+#: code:addons/kit/wizard/substitute.py:687
+#: code:addons/kit/wizard/substitute.py:1024
+#, python-format
+msgid "Error"
+msgstr "Erreur"
+
+#. module: kit
+#: field:kit.creation,location_dest_id_kit_creation:0
+msgid "Destination Location"
+msgstr "Destination - Zone"
+
+#. module: kit
+#: field:kit.selection,corresponding_so_line_id_kit_selection:0
+msgid "Corresponding Fo Line"
+msgstr "Ligne Commande de Terrain Correspondante"
+
+#. module: kit
+#: field:stock.move,hidden_exp_check:0
+msgid "Hidden Expiry Check"
+msgstr "Vérification Cachée des Expirés "
+
+#. module: kit
+#: model:ir.model,name:kit.model_stock_picking
+msgid "Picking List"
+msgstr "Liste de Piquage"
+
+#. module: kit
+#: sql_constraint:purchase.order.line:0
+#: sql_constraint:sale.order.line:0
+msgid "Product Quantity must be greater than zero."
+msgstr "La quantité de produits doit être supérieure à zéro."
+
+#. module: kit
+#: model:ir.model,name:kit.model_kit_creation_to_consume
+msgid "kit.creation.to.consume"
+msgstr "kit.creation.to.consume"
+
+#. module: kit
+#: constraint:stock.move:0
+msgid "You try to assign a lot which is not from the same product"
+msgstr "Vous essayez d'attribuer un lot qui ne correspond pas au même produit"
+
+#. module: kit
+#: code:addons/kit/kit.py:835
+#: code:addons/kit/kit.py:840
+#: code:addons/kit/kit.py:1155
+#: code:addons/kit/kit_creation.py:905
+#, python-format
+msgid "Error"
+msgstr "Error"
+
+#. module: kit
+#: model:ir.model,name:kit.model_split_move
+#: view:kit.creation:0
+#: view:split.move:0
+msgid "Split Move"
+msgstr "Diviser le mouvement"
+
+#. module: kit
+#: field:assign.to.kit.line,wizard_id_assign_to_kit_line:0
+msgid "Assign wizard"
+msgstr "Affecter un assistant"
+
+#. module: kit
+#: view:kit.creation:0
+#: view:substitute:0
+msgid "Check Availability"
+msgstr "Vérifier Disponibilité"
+
+#. module: kit
+#: constraint:stock.location:0
+msgid "You cannot define a quarantine location as chained location."
+msgstr "Vous ne pouvez pas définir une Zone \"Quarantaine\" en tant que Zone enchaînée."
+
+#. module: kit
+#: selection:assign.to.kit.line,integrity_status:0
+#: selection:kit.selection.line,integrity_status:0
+#: selection:kit.selection.sale.line,integrity_status:0
+#: selection:substitute.item,integrity_status_func_substitute_item:0
+#: selection:substitute.item.mirror,integrity_status_func_substitute_item:0
+msgid "No Asset Needed"
+msgstr "Pas besoin de mentionner un Bien"
+
+#. module: kit
+#: field:composition.item,inactive_error:0
+msgid "Comment"
+msgstr "Comment"
+
+#. module: kit
+#: view:assign.to.kit:0
+msgid "Auto Assignment"
+msgstr "Auto Attribution"
+
+#. module: kit
+#: model:ir.model,name:kit.model_kit_selection
+msgid "kit.selection"
+msgstr "kit.selection"
+
+#. module: kit
+#: help:kit.creation,default_location_src_id_kit_creation:0
+#: help:kit.creation,location_dest_id_kit_creation:0
+msgid "The Kitting Order needs to be saved in order this option to be taken into account."
+msgstr "La Commande d'Assemblage de Kit a besoin d'être sauvée de façon à ce que cette option soit prise en compte."
+
+#. module: kit
+#: selection:assign.to.kit.line,integrity_status:0
+#: selection:kit.selection.line,integrity_status:0
+#: selection:kit.selection.sale.line,integrity_status:0
+#: selection:substitute.item,integrity_status_func_substitute_item:0
+#: selection:substitute.item.mirror,integrity_status_func_substitute_item:0
+msgid "Assigned qty must be smaller or equal to required qty"
+msgstr "Qté affectée doit être plus petite ou égale à la quantité demandée"
+
+#. module: kit
+#: selection:composition.item,state:0
+#: view:composition.kit:0
+#: selection:composition.kit,state:0
+msgid "Completed"
+msgstr "Terminé"
+
+#. module: kit
+#: code:addons/kit/kit.py:133
+#, python-format
+msgid "Cannot complete inactive kit."
+msgstr "Ne peut compléter un kit inactif."
+
+#. module: kit
+#: view:kit.creation:0
+msgid "Display Items from Version"
+msgstr "Afficher des Articles par Version"
+
+#. module: kit
+#: constraint:stock.location:0
+msgid "Quarantine Location can only have Quarantine Location or Views as parent location."
+msgstr "Zone \"Quarantaine\", on ne peut avoir de Zone \"Quarantaine ''  ou Vues qu'en tant que Zone \"Parent\"."
 
 #. module: kit
 #: field:composition.item,hidden_asset_mandatory:0
@@ -1918,262 +2174,50 @@ msgstr "Only composition lists can be reset to a version."
 #: field:substitute.item.mirror,asset_id_substitute_item:0
 #: field:substitute.item.mirror,hidden_asset_mandatory:0
 msgid "Asset"
-msgstr "Asset"
-
-#. module: kit
-#: view:kit.creation:0
-msgid "Confirm Kitting"
-msgstr "Confirm Kitting"
-
-#. module: kit
-#: code:addons/kit/kit_creation.py:723
-#: view:process.to.consume:0
-#, python-format
-msgid "Process Components to Consume"
-msgstr "Process Components to Consume"
-
-#. module: kit
-#: constraint:stock.location:0
-msgid "Quarantine Location can only have Quarantine Location or Views as parent location."
-msgstr "Quarantine Location can only have Quarantine Location or Views as parent location."
-
-#. module: kit
-#: field:composition.item,inactive_error:0
-msgid "Comment"
-msgstr "Comment"
-
-#. module: kit
-#: code:addons/kit/wizard/substitute.py:163
-#, python-format
-msgid "Batch Number is missing for %s."
-msgstr "Batch Number is missing for %s."
-
-#. module: kit
-#: view:substitute:0
-msgid "Check Integrity"
-msgstr "Check Integrity"
-
-#. module: kit
-#: field:assign.to.kit.line,wizard_id_assign_to_kit_line:0
-msgid "Assign wizard"
-msgstr "Assign wizard"
+msgstr "Biens"
 
 #. module: kit
 #: field:stock.move,hidden_creation_qty_stock_move:0
 msgid "Hidden Creation Qty"
-msgstr "Hidden Creation Qty"
+msgstr "Création cachée Qté"
 
 #. module: kit
-#: sql_constraint:product.product:0
-msgid "The \"Product Code\" must be unique"
-msgstr "The \"Product Code\" must be unique"
+#: field:stock.move,assigned_qty_stock_move:0
+msgid "Assigned Qty"
+msgstr "Qté affectée"
 
 #. module: kit
-#: code:addons/kit/kit.py:1184
-#, python-format
-msgid "The Kit product cannot be Expiry Date Mandatory only."
-msgstr "The Kit product cannot be Expiry Date Mandatory only."
-
-#. module: kit
-#: field:stock.move,hidden_creation_state:0
-msgid "Hidden Creation State"
-msgstr "Hidden Creation State"
-
-#. module: kit
-#: field:composition.kit,composition_ref_exp:0
-msgid "Expiry Date for Kit with reference"
-msgstr "Expiry Date for Kit with reference"
-
-#. module: kit
-#: code:addons/kit/kit.py:800
-#, python-format
-msgid "Selected Batch Number's product does not correspond to kit composition list' product."
-msgstr "Selected Batch Number's product does not correspond to kit composition list' product."
-
-#. module: kit
-#: code:addons/kit/kit.py:835
-#: code:addons/kit/kit.py:840
-#: code:addons/kit/kit.py:1155
-#: code:addons/kit/kit_creation.py:905
-#: code:addons/kit/wizard/substitute.py:687
-#: code:addons/kit/wizard/substitute.py:1024
-#, python-format
-msgid "Error"
-msgstr "Error"
-
-#. module: kit
-#: view:composition.item:0
-#: field:composition.item,item_kit_id:0
-#: model:ir.module.module,shortdesc:kit.module_meta_information
-#: field:stock.move,composition_list_id:0
-#: field:stock.move.memory.in,composition_list_id:0
-#: field:stock.move.memory.out,composition_list_id:0
-#: field:substitute.item.mirror,kit_id_mirror:0
-msgid "Kit"
-msgstr "Kit"
-
-#. module: kit
-#: constraint:composition.item:0
-#: constraint:kit.creation:0
-#: constraint:stock.move:0
-msgid "Constraint error on Uom"
-msgstr "Constraint error on Uom"
-
-#. module: kit
-#: selection:assign.to.kit.line,integrity_status:0
-#: selection:kit.selection.line,integrity_status:0
-#: selection:kit.selection.sale.line,integrity_status:0
-#: selection:substitute.item,integrity_status_func_substitute_item:0
-#: selection:substitute.item.mirror,integrity_status_func_substitute_item:0
-msgid "Assigned qty must be smaller or equal to available qty"
-msgstr "Assigned qty must be smaller or equal to available qty"
-
-#. module: kit
-#: view:kit.creation:0
-#: view:substitute:0
-msgid "Check Availability"
-msgstr "Check Availability"
-
-#. module: kit
-#: code:addons/kit/kit.py:811
-#, python-format
-msgid "Composition List without Batch Management Product needs Reference."
-msgstr "Composition List without Batch Management Product needs Reference."
-
-#. module: kit
-#: code:addons/kit/kit_creation.py:126
-#, python-format
-msgid "Reset Components to Consume to Version Reference. Are you sure?"
-msgstr "Reset Components to Consume to Version Reference. Are you sure?"
+#: field:kit.creation.to.consume,consumed_to_consume:0
+msgid "Consumed"
+msgstr "Consommé"
 
 #. module: kit
 #: view:composition.kit:0
-msgid "Mark as Inactive"
-msgstr "Mark as Inactive"
+msgid "Search Real Kit Composition"
+msgstr "Rechercher la Composition Réelle du Kit"
 
 #. module: kit
-#: sql_constraint:purchase.order.line:0
-#: sql_constraint:sale.order.line:0
-msgid "Product Quantity must be greater than zero."
-msgstr "Product Quantity must be greater than zero."
-
-#. module: kit
-#: constraint:product.nomenclature:0
-msgid "Error! The nomenclature complete name must be unique."
-msgstr "Error! The nomenclature complete name must be unique."
-
-#. module: kit
-#: model:ir.model,name:kit.model_stock_move_memory_out
-msgid "stock.move.memory.out"
-msgstr "stock.move.memory.out"
-
-#. module: kit
-#: field:composition.item,name:0
-#: field:composition.kit,name:0
-msgid "Name"
-msgstr "Name"
-
-#. module: kit
-#: code:addons/kit/kit.py:832
+#: code:addons/kit/wizard/substitute.py:205
 #, python-format
-msgid "Some products have"
-msgstr "Some products have"
+msgid "Batch Number/Expiry Date is missing for %s."
+msgstr "Numéro de lot/Date d'expiration manquants pour %s."
 
 #. module: kit
-#: code:addons/kit/kit.py:1606
+#: field:assign.to.kit,prodlot_id_assign_to_kit:0
+msgid "Batch Number"
+msgstr "Numéro de Lot"
+
+#. module: kit
+#: code:addons/kit/wizard/split_move.py:58
 #, python-format
-msgid "Replacement Items Selection from Field Order"
-msgstr "Replacement Items Selection from Field Order"
+msgid "Selected quantity (%0.1f %s) exceeds the available quantity (%0.1f %s)"
+msgstr "Quantité Sélectionnée (%0.1f %s) est supérieure à la quantité disponible (%0.1f %s)"
 
 #. module: kit
-#: view:composition.kit:0
-msgid "Show Inactive"
-msgstr "Show Inactive"
-
-#. module: kit
-#: selection:assign.to.kit.line,integrity_status:0
-#: selection:kit.selection.line,integrity_status:0
-#: selection:kit.selection.sale.line,integrity_status:0
-#: selection:substitute.item,integrity_status_func_substitute_item:0
-#: selection:substitute.item.mirror,integrity_status_func_substitute_item:0
-msgid "The first sequence must start with 1"
-msgstr "The first sequence must start with 1"
-
-#. module: kit
-#: view:kit.creation:0
-msgid "Display Items from Version"
-msgstr "Display Items from Version"
-
-#. module: kit
-#: sql_constraint:composition.kit:0
-msgid "Kit Composition List Reference must be unique for a given product."
-msgstr "Kit Composition List Reference must be unique for a given product."
-
-#. module: kit
-#: field:kit.creation,internal_picking_id_kit_creation:0
-msgid "Internal Picking"
-msgstr "Internal Picking"
-
-#. module: kit
-#: field:substitute,destination_location_id:0
-msgid "Destination Location of Items"
-msgstr "Destination Location of Items"
-
-#. module: kit
-#: view:kit.creation:0
-msgid "Start Production"
-msgstr "Start Production"
-
-#. module: kit
-#: code:addons/kit/kit.py:242
-#: field:assign.to.kit.line,kit_id_assign_to_kit_line:0
-#: model:ir.actions.act_window,name:kit.kit_composition_real_action
-#: model:ir.actions.act_window,name:kit.kit_composition_real_action2
-#: model:ir.ui.menu,name:kit.kit_composition_real_menu
-#, python-format
-msgid "Kit Composition List"
-msgstr "Kit Composition List"
-
-#. module: kit
-#: code:addons/kit/wizard/kit_selection.py:176
-#: code:addons/kit/wizard/kit_selection_sale.py:135
-#, python-format
-msgid "Replacement Items must be selected."
-msgstr "Replacement Items must be selected."
-
-#. module: kit
-#: field:kit.selection,corresponding_so_line_id_kit_selection:0
-msgid "Corresponding Fo Line"
-msgstr "Corresponding Fo Line"
-
-#. module: kit
-#: code:addons/kit/kit.py:1145
-#, python-format
-msgid "Only Batch Number Mandatory Product can specify Batch Number."
-msgstr "Only Batch Number Mandatory Product can specify Batch Number."
-
-#. module: kit
-#: constraint:product.product:0
-msgid "If you select \"Non-stockable\" as product type then you have to select \"Make to order\" as procurement method"
-msgstr "If you select \"Non-stockable\" as product type then you have to select \"Make to order\" as procurement method"
-
-#. module: kit
-#: field:kit.selection,impact_so_kit_selection:0
-msgid "Impact Field Order"
-msgstr "Impact Field Order"
-
-#. module: kit
-#: code:addons/kit/kit_creation.py:402
-#, python-format
-msgid "The Kitting Order %s has been confirmed."
-msgstr "The Kitting Order %s has been confirmed."
-
-#. module: kit
-#: code:addons/kit/kit_creation.py:1269
-#: view:assign.to.kit:0
-#, python-format
-msgid "Assign to Kit"
-msgstr "Assign to Kit"
+#: field:kit.selection,pricelist_id_kit_selection:0
+#: field:kit.selection.sale,pricelist_id_kit_selection_sale:0
+msgid "Currency"
+msgstr "Devises"
 
 #. module: kit
 #: selection:kit.creation.to.consume,availability_to_consume:0
@@ -2181,7 +2225,70 @@ msgstr "Assign to Kit"
 #: selection:substitute.item,availability_status_hidden_func_substitute_item:0
 #: selection:substitute.item.mirror,availability_status_hidden_func_substitute_item:0
 msgid "Available"
-msgstr "Available"
+msgstr "Disponible"
+
+#. module: kit
+#: code:addons/kit/kit.py:813
+#, python-format
+msgid "Composition List without Batch Management Product does not allow Batch Number."
+msgstr "Liste de Composition - sans Gestion des produits par lots- ne permet pas de Numéro de lot"
+
+#. module: kit
+#: field:composition.kit,nomen_sub_4:0
+#: field:composition.kit,nomen_sub_4_s:0
+msgid "Sub Class 5"
+msgstr "Sous-Classe 5"
+
+#. module: kit
+#: model:ir.model,name:kit.model_substitute
+msgid "substitute"
+msgstr "substitut"
+
+#. module: kit
+#: code:addons/kit/kit.py:840
+#, python-format
+msgid "The product of the kit composition is inactive. Please change the product."
+msgstr "Le produit de la composition de kit est inactif. Veuillez changer le produit."
+
+#. module: kit
+#: code:addons/kit/kit.py:1613
+#: code:addons/kit/wizard/kit_selection_sale.py:124
+#, python-format
+msgid "Sale order line kit replacement with components function is only available for Draft and Validated states."
+msgstr "Remplacement de composantes du kit de la ligne de la commande  de terrain. Fonction uniquement disponible dans les modes brouillon et validé."
+
+#. module: kit
+#: selection:assign.to.kit.line,integrity_status:0
+#: selection:kit.selection.line,integrity_status:0
+#: selection:kit.selection.sale.line,integrity_status:0
+#: selection:substitute.item,integrity_status_func_substitute_item:0
+#: selection:substitute.item.mirror,integrity_status_func_substitute_item:0
+msgid "Too many packs selected"
+msgstr "Trop de paquets sélectionnés "
+
+#. module: kit
+#: selection:composition.item,state:0
+#: view:composition.kit:0
+#: selection:composition.kit,state:0
+#: view:kit.creation:0
+msgid "Canceled"
+msgstr "Annulé"
+
+#. module: kit
+#: help:kit.selection,impact_so_kit_selection:0
+msgid "Impact corresponding Field Order by creating a corresponding Field Order line."
+msgstr "Incidence de la Commande de Terrain correspondante, en créant une ligne de Commande de Terrain correspondate."
+
+#. module: kit
+#: view:kit.creation.consumed:0
+msgid "Components Consumed"
+msgstr "Composants Consommés"
+
+#. module: kit
+#: code:addons/kit/wizard/substitute.py:393
+#, python-format
+msgid "The Kit '%s' is not available from selected source location '%s'. Are you sure you want to process the Dekitting?"
+msgstr "Le Kit '%s' n'est pas disponible à partir du lieu source sélectionné '%s'. Êtes-vous sûr de vouloir procéder au désassemblage de kit ?"
 
 #. module: kit
 #: selection:assign.to.kit.line,integrity_status:0
@@ -2190,65 +2297,19 @@ msgstr "Available"
 #: selection:substitute.item,integrity_status_func_substitute_item:0
 #: selection:substitute.item.mirror,integrity_status_func_substitute_item:0
 msgid "Unit Price must be greater than 0.0"
-msgstr "Unit Price must be greater than 0.0"
+msgstr "Prix Unitaire doit être supérieur à 0.0"
 
 #. module: kit
-#: code:addons/kit/kit.py:788
+#: code:addons/kit/kit.py:153
+#: code:addons/kit/kit.py:170
 #, python-format
-msgid "Composition Version Object is not available for Theoretical Kit."
-msgstr "Composition Version Object is not available for Theoretical Kit."
-
-#. module: kit
-#: view:kit.selection:0
-#: view:kit.selection.sale:0
-msgid "You can import replacement items from theoretical kits."
-msgstr "You can import replacement items from theoretical kits."
-
-#. module: kit
-#: code:addons/kit/wizard/substitute.py:681
-#: code:addons/kit/wizard/substitute.py:1018
-#, python-format
-msgid "Info"
-msgstr "Info"
-
-#. module: kit
-#: field:composition.kit,composition_item_ids:0
-msgid "Items"
-msgstr "Items"
-
-#. module: kit
-#: field:assign.to.kit,expiry_date_assign_to_kit:0
-#: view:composition.item:0
-#: field:composition.item,item_exp:0
-#: view:composition.kit:0
-#: field:composition.kit,composition_exp:0
-#: field:substitute.item,exp_substitute_item:0
-#: field:substitute.item.mirror,exp_substitute_item:0
-msgid "Expiry Date"
-msgstr "Expiry Date"
-
-#. module: kit
-#: code:addons/kit/kit.py:797
-#, python-format
-msgid "Composition List with Batch Management Product needs Batch Number."
-msgstr "Composition List with Batch Management Product needs Batch Number."
-
-#. module: kit
-#: field:substitute.item,type_check:0
-#: field:substitute.item.mirror,type_check:0
-msgid "Type Check"
-msgstr "Type Check"
+msgid "Only theoretical kit can manipulate \"active\" field."
+msgstr "Seul un kit théorique peut manipuler le champ \"actif\"."
 
 #. module: kit
 #: view:kit.creation:0
-msgid "Assign to Kits"
-msgstr "Assign to Kits"
-
-#. module: kit
-#: code:addons/kit/kit.py:802
-#, python-format
-msgid "Composition List with Batch Management Product does not allow Reference based Expiry Date."
-msgstr "Composition List with Batch Management Product does not allow Reference based Expiry Date."
+msgid "Assign Automatically to Kits"
+msgstr "Affecter automatiquement aux kits"
 
 #. module: kit
 #: selection:assign.to.kit.line,integrity_status:0
@@ -2256,68 +2317,35 @@ msgstr "Composition List with Batch Management Product does not allow Reference 
 #: selection:kit.selection.sale.line,integrity_status:0
 #: selection:substitute.item,integrity_status_func_substitute_item:0
 #: selection:substitute.item.mirror,integrity_status_func_substitute_item:0
-msgid "Batch Number is Missing"
-msgstr "Batch Number is Missing"
+msgid "Need Batch Number (Standard) not Expiry Date (Internal)"
+msgstr "Mention nécessaire d'un numéro de lot (Standard) mais pas d'une date d'expiration (Interne)"
 
 #. module: kit
-#: view:kit.selection.line:0
-#: view:kit.selection.sale.line:0
-msgid "Replacement Items"
-msgstr "Replacement Items"
+#: field:kit.creation,completed_kit_creation:0
+msgid "Kitting Order completed"
+msgstr "Ordre d'assemblage de kits exécuté"
 
 #. module: kit
-#: code:addons/kit/kit.py:834
-#, python-format
-msgid "those inactive products"
-msgstr "those inactive products"
+#: model:ir.model,name:kit.model_assign_to_kit
+msgid "assign.to.kit"
+msgstr "assign.to.kit"
 
 #. module: kit
-#: model:ir.model,name:kit.model_process_to_consume
-msgid "process.to.consume"
-msgstr "process.to.consume"
+#: field:assign.to.kit.line,qty_assign_to_kit_by_product_uom:0
+msgid "Qty already assigned"
+msgstr "Qté déjà allouée"
 
 #. module: kit
-#: model:ir.model,name:kit.model_stock_move
-msgid "Stock Move"
-msgstr "Stock Move"
+#: view:composition.item:0
+#: view:substitute.item.mirror:0
+msgid "Search Real Kit Composition Item"
+msgstr "Rechercher l'Article de la Composition Réelle du Kit"
 
 #. module: kit
-#: field:composition.item,item_description:0
-msgid "Item Description"
-msgstr "Item Description"
-
-#. module: kit
-#: selection:composition.item,state:0
-#: view:composition.kit:0
-#: selection:composition.kit,state:0
-#: view:kit.creation:0
-#: selection:kit.creation,state:0
-#: selection:kit.creation.to.consume,fake_state:0
-#: selection:kit.creation.to.consume,state:0
-#: selection:stock.move,hidden_creation_state:0
-#: selection:stock.move,hidden_state:0
-msgid "Closed"
-msgstr "Closed"
-
-#. module: kit
-#: selection:composition.item,state:0
-#: view:composition.kit:0
-#: selection:composition.kit,state:0
-#: view:kit.creation:0
-msgid "Canceled"
-msgstr "Canceled"
-
-#. module: kit
-#: code:addons/kit/kit.py:1613
-#: code:addons/kit/wizard/kit_selection_sale.py:124
-#, python-format
-msgid "Sale order line kit replacement with components function is only available for Draft and Validated states."
-msgstr "Sale order line kit replacement with components function is only available for Draft and Validated states."
-
-#. module: kit
-#: view:composition.kit:0
-msgid "Load items from Version"
-msgstr "Load items from Version"
+#: field:composition.kit,nomen_manda_2:0
+#: field:composition.kit,nomen_manda_2_s:0
+msgid "Family"
+msgstr "Famille"
 
 #. module: kit
 #: view:substitute:0
@@ -2325,31 +2353,8 @@ msgid "Lot"
 msgstr "Lot"
 
 #. module: kit
-#: code:addons/kit/wizard/substitute.py:393
+#: code:addons/kit/kit.py:1148
 #, python-format
-msgid "The Kit '%s' is not available from selected source location '%s'. Are you sure you want to process the Dekitting?"
-msgstr "The Kit '%s' is not available from selected source location '%s'. Are you sure you want to process the Dekitting?"
-
-#. module: kit
-#: field:composition.kit,nomen_sub_2:0
-#: field:composition.kit,nomen_sub_2_s:0
-msgid "Sub Class 3"
-msgstr "Sub Class 3"
-
-#. module: kit
-#: help:kit.creation,default_location_src_id_kit_creation:0
-#: help:kit.creation,location_dest_id_kit_creation:0
-msgid "The Kitting Order needs to be saved in order this option to be taken into account."
-msgstr "The Kitting Order needs to be saved in order this option to be taken into account."
-
-#. module: kit
-#: code:addons/kit/kit.py:835
-#, python-format
-msgid "%s been inactivated. If you want to validate this document you have to remove/correct the %s containing %s (see red %s of the document)"
-msgstr "%s been inactivated. If you want to validate this document you have to remove/correct the %s containing %s (see red %s of the document)"
-
-#. module: kit
-#: constraint:product.nomenclature:0
-msgid "Error ! You can not create recursive nomenclature."
-msgstr "Error ! You can not create recursive nomenclature."
+msgid "Only Batch Number Mandatory or Expiry Date Mandatory can specify Expiry Date."
+msgstr "Seul le Produit avec Numéro de Lot Obligatoire ou la Date d'Expiration Obligatoire peut spécifier une Date d'Expiration."
 

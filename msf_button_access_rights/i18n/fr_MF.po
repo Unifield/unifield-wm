@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.0.3\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2013-10-17 07:42+0000\n"
-"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -41,11 +41,6 @@ msgid "Group Names"
 msgstr "Group Names"
 
 #. module: msf_button_access_rights
-#: help:msf_button_access_rights.button_access_rule,active:0
-msgid "If checked, this rule will be applied."
-msgstr "If checked, this rule will be applied."
-
-#. module: msf_button_access_rights
 #: field:msf_button_access_rights.button_access_rule,type:0
 msgid "Button Type"
 msgstr "Button Type"
@@ -65,9 +60,14 @@ msgid "The view to which this rule applies"
 msgstr "The view to which this rule applies"
 
 #. module: msf_button_access_rights
-#: field:msf_button_access_rights.button_access_rule,active:0
-msgid "Active"
-msgstr "Active"
+#: help:msf_button_access_rights.button_access_rule,active:0
+msgid "If checked, this rule will be applied."
+msgstr "If checked, this rule will be applied."
+
+#. module: msf_button_access_rights
+#: field:msf_button_access_rights.button_access_rule,name:0
+msgid "Name"
+msgstr "Name"
 
 #. module: msf_button_access_rights
 #: field:msf_button_access_rights.view_config_wizard_install,config_logo:0
@@ -115,11 +115,6 @@ msgid "Button Access Rules"
 msgstr "Button Access Rules"
 
 #. module: msf_button_access_rights
-#: view:msf_button_access_rights.button_access_rule:0
-msgid "Inactive"
-msgstr "Inactive"
-
-#. module: msf_button_access_rights
 #: field:msf_button_access_rights.view_config_wizard_install_results,successes:0
 msgid "Successes"
 msgstr "Successes"
@@ -130,9 +125,9 @@ msgid "Note: You only need to do this once! Each time a view is created or editt
 msgstr "Note: You only need to do this once! Each time a view is created or editted, Button Access Rules will automatically be created or updated."
 
 #. module: msf_button_access_rights
-#: model:ir.actions.act_window,name:msf_button_access_rights.msf_button_access_rights_view_config_wizard_act_window
-msgid "Generate Button Access Rules"
-msgstr "Generate Button Access Rules"
+#: field:msf_button_access_rights.button_access_rule,group_ids:0
+msgid "Groups"
+msgstr "Groupes"
 
 #. module: msf_button_access_rights
 #: model:ir.model,name:msf_button_access_rights.model_msf_button_access_rights_button_access_rule
@@ -150,15 +145,15 @@ msgid "title"
 msgstr "title"
 
 #. module: msf_button_access_rights
-#: constraint:ir.ui.view:0
-msgid "Invalid XML for View Architecture!"
-msgstr "Invalid XML for View Architecture!"
-
-#. module: msf_button_access_rights
 #: view:msf_button_access_rights.button_access_rule:0
 #: field:msf_button_access_rights.button_access_rule,model_id:0
 msgid "Model"
 msgstr "Model"
+
+#. module: msf_button_access_rights
+#: constraint:ir.ui.view:0
+msgid "Invalid XML for View Architecture!"
+msgstr "XML non valide pour la Vue Architecture!"
 
 #. module: msf_button_access_rights
 #: help:msf_button_access_rights.button_access_rule,model_id:0
@@ -166,9 +161,9 @@ msgid "The type of data to which this rule applies"
 msgstr "The type of data to which this rule applies"
 
 #. module: msf_button_access_rights
-#: view:msf_button_access_rights.view_config_wizard_install_results:0
-msgid "Generate Button Access Rules Result"
-msgstr "Generate Button Access Rules Result"
+#: model:ir.actions.act_window,name:msf_button_access_rights.msf_button_access_rights_view_config_wizard_act_window
+msgid "Generate Button Access Rules"
+msgstr "Generate Button Access Rules"
 
 #. module: msf_button_access_rights
 #: selection:msf_button_access_rights.button_access_rule,type:0
@@ -179,6 +174,11 @@ msgstr "Workflow"
 #: view:msf_button_access_rights.button_access_rule:0
 msgid "Search Button Access Rules"
 msgstr "Search Button Access Rules"
+
+#. module: msf_button_access_rights
+#: view:msf_button_access_rights.button_access_rule:0
+msgid "Inactive"
+msgstr "Inactif"
 
 #. module: msf_button_access_rights
 #: selection:msf_button_access_rights.button_access_rule,type:0
@@ -206,9 +206,10 @@ msgid "Total"
 msgstr "Total"
 
 #. module: msf_button_access_rights
-#: field:msf_button_access_rights.button_access_rule,name:0
-msgid "Name"
-msgstr "Name"
+#: field:msf_button_access_rights.view_config_wizard_install,progress:0
+#: field:msf_button_access_rights.view_config_wizard_install_results,progress:0
+msgid "Configuration Progress"
+msgstr "Configuration Progress"
 
 #. module: msf_button_access_rights
 #: view:msf_button_access_rights.view_config_wizard_install_results:0
@@ -216,20 +217,19 @@ msgid "Next"
 msgstr "Next"
 
 #. module: msf_button_access_rights
-#: field:msf_button_access_rights.view_config_wizard_install,progress:0
-#: field:msf_button_access_rights.view_config_wizard_install_results,progress:0
-msgid "Configuration Progress"
-msgstr "Configuration Progress"
+#: view:msf_button_access_rights.view_config_wizard_install_results:0
+msgid "Generate Button Access Rules Result"
+msgstr "Generate Button Access Rules Result"
+
+#. module: msf_button_access_rights
+#: field:msf_button_access_rights.button_access_rule,active:0
+msgid "Active"
+msgstr "Actif"
 
 #. module: msf_button_access_rights
 #: help:msf_button_access_rights.button_access_rule,group_names:0
 msgid "A list of all group names given button access by this rule"
 msgstr "A list of all group names given button access by this rule"
-
-#. module: msf_button_access_rights
-#: field:msf_button_access_rights.button_access_rule,group_ids:0
-msgid "Groups"
-msgstr "Groups"
 
 #. module: msf_button_access_rights
 #: view:msf_button_access_rights.view_config_wizard_install:0

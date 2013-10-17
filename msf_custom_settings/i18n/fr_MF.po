@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.0.3\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2013-10-17 07:42+0000\n"
-"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,9 +16,9 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: msf_custom_settings
-#: view:sale.order:0
-msgid "Manually corrected"
-msgstr "Manually corrected"
+#: view:purchase.order:0
+msgid "Approve Purchase"
+msgstr "Approuver Achat"
 
 #. module: msf_custom_settings
 #: model:ir.model,name:msf_custom_settings.model_publisher_warranty_contract
@@ -26,84 +26,9 @@ msgid "publisher_warranty.contract"
 msgstr "publisher_warranty.contract"
 
 #. module: msf_custom_settings
-#: view:sale.order:0
-msgid "Confirm Order"
-msgstr "Confirm Order"
-
-#. module: msf_custom_settings
-#: view:purchase.order:0
-msgid "Validate"
-msgstr "Validate"
-
-#. module: msf_custom_settings
-#: view:purchase.order:0
-msgid "Send RfQ"
-msgstr "Send RfQ"
-
-#. module: msf_custom_settings
-#: view:purchase.order:0
-msgid "Manually Corrected"
-msgstr "Manually Corrected"
-
-#. module: msf_custom_settings
-#: model:ir.module.module,shortdesc:msf_custom_settings.module_meta_information
-msgid "MSF Custom Settings"
-msgstr "MSF Custom Settings"
-
-#. module: msf_custom_settings
-#: view:sale.order:0
-msgid "Create Final Invoice"
-msgstr "Create Final Invoice"
-
-#. module: msf_custom_settings
-#: view:purchase.order:0
-msgid "Cancel"
-msgstr "Cancel"
-
-#. module: msf_custom_settings
-#: view:sale.order:0
-msgid "Validate Order"
-msgstr "Validate Order"
-
-#. module: msf_custom_settings
-#: view:purchase.order:0
-msgid "Total amount"
-msgstr "Total amount"
-
-#. module: msf_custom_settings
-#: constraint:stock.picking:0
-msgid "Wrong reason type for an OUT created from scratch."
-msgstr "Wrong reason type for an OUT created from scratch."
-
-#. module: msf_custom_settings
 #: constraint:stock.picking:0
 msgid "You cannot validate this document because it contains a line with an inactive product"
-msgstr "You cannot validate this document because it contains a line with an inactive product"
-
-#. module: msf_custom_settings
-#: view:sale.order:0
-msgid "You are about to confirm the Field Order without going through the sourcing tool. Are you sure?"
-msgstr "You are about to confirm the Field Order without going through the sourcing tool. Are you sure?"
-
-#. module: msf_custom_settings
-#: model:ir.model,name:msf_custom_settings.model_sale_order
-msgid "Sales Order"
-msgstr "Sales Order"
-
-#. module: msf_custom_settings
-#: view:purchase.order:0
-msgid "Approve Purchase"
-msgstr "Approve Purchase"
-
-#. module: msf_custom_settings
-#: sql_constraint:real.average.consumption.line:0
-msgid "The couple product, batch number has to be unique"
-msgstr "The couple product, batch number has to be unique"
-
-#. module: msf_custom_settings
-#: constraint:sale.order:0
-msgid "You cannot validate this sale order because it contains a line with an inactive product"
-msgstr "You cannot validate this sale order because it contains a line with an inactive product"
+msgstr "Vous ne pouvez pas valider ce document car il contient des lignes avec un produit inactif"
 
 #. module: msf_custom_settings
 #: view:purchase.order:0
@@ -112,9 +37,95 @@ msgstr "Zone"
 
 #. module: msf_custom_settings
 #: view:purchase.order:0
+msgid "Send RfQ"
+msgstr "Envoyer Demande de Devis"
+
+#. module: msf_custom_settings
+#: model:ir.model,name:msf_custom_settings.model_sale_order
+msgid "Sales Order"
+msgstr "Commande de Terrain"
+
+#. module: msf_custom_settings
+#: view:pack.type:0
+msgid "Pack Types"
+msgstr "Types de Colis"
+
+#. module: msf_custom_settings
+#: model:ir.module.module,description:msf_custom_settings.module_meta_information
+msgid "\n"
+"    "
+msgstr "\n"
+"    "
+
+#. module: msf_custom_settings
+#: view:sale.order:0
+msgid "Cancel Order"
+msgstr "Annuler la Commande"
+
+#. module: msf_custom_settings
+#: view:purchase.order:0
+msgid "Confirm"
+msgstr "Confirmer"
+
+#. module: msf_custom_settings
+#: sql_constraint:sale.order:0
+msgid "Order Reference must be unique !"
+msgstr "La Référence de la Commande doit être unique !"
+
+#. module: msf_custom_settings
+#: code:addons/msf_custom_settings/stock_picking.py:46
+#, python-format
+msgid "You cannot cancel picking because it comes from a Field Order !"
+msgstr "Vous ne pouvez pas annuler le prélèvement car il provient d'une Commande de Terrain!"
+
+#. module: msf_custom_settings
+#: view:purchase.order:0
+msgid "Manually Corrected"
+msgstr "Corrigé Manuellement"
+
+#. module: msf_custom_settings
+#: view:purchase.order:0
+msgid "Validate the reception"
+msgstr "Valider la réception"
+
+#. module: msf_custom_settings
+#: view:purchase.order:0
 #: view:sale.order:0
 msgid "Change currency"
-msgstr "Change currency"
+msgstr "Changer de devise"
+
+#. module: msf_custom_settings
+#: sql_constraint:publisher_warranty.contract:0
+msgid "That contract is already registered in the system."
+msgstr "Ce contrat est déjà enregistré dans le système."
+
+#. module: msf_custom_settings
+#: view:purchase.order:0
+msgid "Validate"
+msgstr "Valider"
+
+#. module: msf_custom_settings
+#: view:sale.order:0
+msgid "Manually corrected"
+msgstr "Manually corrected"
+
+#. module: msf_custom_settings
+#: view:sale.order:0
+msgid "Ignore Exception"
+msgstr "Ignorer l'Exception"
+
+#. module: msf_custom_settings
+#: code:addons/msf_custom_settings/sale.py:44
+#: code:addons/msf_custom_settings/sale.py:50
+#: code:addons/msf_custom_settings/stock_picking.py:46
+#, python-format
+msgid "Error"
+msgstr "Erreur"
+
+#. module: msf_custom_settings
+#: constraint:stock.picking:0
+msgid "Wrong reason type for an OUT created from scratch."
+msgstr "Mauvais type de motif pour une livraison OUT créée à partir de rien."
 
 #. module: msf_custom_settings
 #: constraint:real.average.consumption:0
@@ -122,93 +133,72 @@ msgid "You cannot confirm this real consumption report because it contains a lin
 msgstr "You cannot confirm this real consumption report because it contains a line with an inactive product"
 
 #. module: msf_custom_settings
-#: view:purchase.order:0
-msgid "Validate the reception"
-msgstr "Validate the reception"
-
-#. module: msf_custom_settings
-#: view:purchase.order:0
 #: view:sale.order:0
-msgid "Currency"
-msgstr "Currency"
-
-#. module: msf_custom_settings
-#: model:ir.model,name:msf_custom_settings.model_real_average_consumption
-msgid "Real Average Consumption"
-msgstr "Real Average Consumption"
+msgid "Recreate Invoice"
+msgstr "Recréer la Facture"
 
 #. module: msf_custom_settings
 #: constraint:sale.order:0
 msgid "Partner type and order type are incompatible! Please change either order type or partner."
-msgstr "Partner type and order type are incompatible! Please change either order type or partner."
+msgstr "Le type de partnenaire et le type de commande sont incompatibles. Veuillez changer l'un ou l'autre."
 
 #. module: msf_custom_settings
-#: model:ir.model,name:msf_custom_settings.model_real_average_consumption_line
-msgid "Real average consumption line"
-msgstr "Real average consumption line"
-
-#. module: msf_custom_settings
-#: sql_constraint:real.average.consumption:0
-msgid "\"Period from\" must be less than or equal to \"Period to\""
-msgstr "\"Period from\" must be less than or equal to \"Period to\""
-
-#. module: msf_custom_settings
-#: view:purchase.order:0
-msgid "Confirm"
-msgstr "Confirm"
-
-#. module: msf_custom_settings
-#: field:stock.picking,from_so_ok:0
-msgid "Comes from a Field Order"
-msgstr "Comes from a Field Order"
-
-#. module: msf_custom_settings
-#: code:addons/msf_custom_settings/stock_picking.py:46
-#, python-format
-msgid "You cannot cancel picking because it comes from a Field Order !"
-msgstr "You cannot cancel picking because it comes from a Field Order !"
-
-#. module: msf_custom_settings
-#: view:purchase.order:0
 #: view:sale.order:0
-msgid "Set to Draft"
-msgstr "Set to Draft"
+msgid "Confirm Order"
+msgstr "Confirmer la Commande"
+
+#. module: msf_custom_settings
+#: view:purchase.order:0
+msgid "Cancel"
+msgstr "Annuler"
 
 #. module: msf_custom_settings
 #: view:purchase.order:0
 #: view:sale.order:0
 msgid "Compute"
-msgstr "Compute"
-
-#. module: msf_custom_settings
-#: view:purchase.order:0
-msgid "RfQ Closed"
-msgstr "RfQ Closed"
-
-#. module: msf_custom_settings
-#: view:sale.order:0
-msgid "Ignore Exception"
-msgstr "Ignore Exception"
+msgstr "Calculer"
 
 #. module: msf_custom_settings
 #: model:ir.model,name:msf_custom_settings.model_stock_picking
 msgid "Picking List"
-msgstr "Picking List"
+msgstr "Liste de Piquage"
+
+#. module: msf_custom_settings
+#: view:purchase.order:0
+msgid "Total amount"
+msgstr "Montant total"
+
+#. module: msf_custom_settings
+#: view:purchase.order:0
+#: view:sale.order:0
+msgid "Set to Draft"
+msgstr "Passer sous statut Brouillon"
+
+#. module: msf_custom_settings
+#: view:purchase.order:0
+#: view:sale.order:0
+msgid "Untaxed amount"
+msgstr "Montant hors-taxe"
+
+#. module: msf_custom_settings
+#: view:sale.order:0
+msgid "Validate Order"
+msgstr "Valider la Commande"
+
+#. module: msf_custom_settings
+#: constraint:sale.order:0
+msgid "You cannot validate this sale order because it contains a line with an inactive product"
+msgstr "Vous ne pouvez pas valider cette commande client car elle contient des lignes avec un produit inactif"
+
+#. module: msf_custom_settings
+#: model:ir.model,name:msf_custom_settings.model_real_average_consumption_line
+msgid "Real average consumption line"
+msgstr "Ligne de Consommation Moyenne Réelle "
 
 #. module: msf_custom_settings
 #: view:purchase.order:0
 msgid "Generate Po"
 msgstr "Generate Po"
-
-#. module: msf_custom_settings
-#: sql_constraint:sale.order:0
-msgid "Order Reference must be unique !"
-msgstr "Order Reference must be unique !"
-
-#. module: msf_custom_settings
-#: view:sale.order:0
-msgid "Recreate Invoice"
-msgstr "Recreate Invoice"
 
 #. module: msf_custom_settings
 #: code:addons/msf_custom_settings/sale.py:38
@@ -217,43 +207,53 @@ msgid "Partner type is not compatible with given Order Type!"
 msgstr "Partner type is not compatible with given Order Type!"
 
 #. module: msf_custom_settings
-#: code:addons/msf_custom_settings/sale.py:44
-#: code:addons/msf_custom_settings/sale.py:50
-#: code:addons/msf_custom_settings/stock_picking.py:46
-#, python-format
-msgid "Error"
-msgstr "Error"
+#: view:purchase.order:0
+#: view:sale.order:0
+msgid "Currency"
+msgstr "Devises"
+
+#. module: msf_custom_settings
+#: model:ir.model,name:msf_custom_settings.model_real_average_consumption
+msgid "Real Average Consumption"
+msgstr "Consommations Moyennes Réelles"
+
+#. module: msf_custom_settings
+#: view:sale.order:0
+msgid "Create Final Invoice"
+msgstr "Créer la Facture Finale"
+
+#. module: msf_custom_settings
+#: model:ir.module.module,shortdesc:msf_custom_settings.module_meta_information
+msgid "MSF Custom Settings"
+msgstr "Paramètres MSF Personnalisés"
 
 #. module: msf_custom_settings
 #: view:purchase.order:0
-#: view:sale.order:0
-msgid "Untaxed amount"
-msgstr "Untaxed amount"
+msgid "RfQ Closed"
+msgstr "Demande de Devis Fermée"
+
+#. module: msf_custom_settings
+#: field:stock.picking,from_so_ok:0
+msgid "Comes from a Field Order"
+msgstr "Provient d'une Commande de Terrain"
+
+#. module: msf_custom_settings
+#: sql_constraint:real.average.consumption.line:0
+msgid "The couple product, batch number has to be unique"
+msgstr "Le couple produit, numéro de lot doit être unique"
 
 #. module: msf_custom_settings
 #: view:purchase.order:0
 msgid "RfQ Updated"
-msgstr "RfQ Updated"
+msgstr "Demande de Devis Mise à jour"
 
 #. module: msf_custom_settings
 #: view:sale.order:0
-msgid "Cancel Order"
-msgstr "Cancel Order"
+msgid "You are about to confirm the Field Order without going through the sourcing tool. Are you sure?"
+msgstr "Vous êtes sur le point de confirmer la commande de terrain sans passer par l'outil de sourçage. Êtes-vous sûr de vouloir continuer ?"
 
 #. module: msf_custom_settings
-#: view:pack.type:0
-msgid "Pack Types"
-msgstr "Pack Types"
-
-#. module: msf_custom_settings
-#: sql_constraint:publisher_warranty.contract:0
-msgid "That contract is already registered in the system."
-msgstr "That contract is already registered in the system."
-
-#. module: msf_custom_settings
-#: model:ir.module.module,description:msf_custom_settings.module_meta_information
-msgid "\n"
-"    "
-msgstr "\n"
-"    "
+#: sql_constraint:real.average.consumption:0
+msgid "\"Period from\" must be less than or equal to \"Period to\""
+msgstr "\"Période du\" doit être antérieure ou égale à \"Période à'\""
 

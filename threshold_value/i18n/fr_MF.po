@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.0.3\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2013-10-17 07:42+0000\n"
-"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,38 +16,24 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: threshold_value
-#: view:threshold.value:0
-msgid "Please choose a method of computation.                If you choose 'Fixed values', you should enter manually a threshold value and a order quantity for each product.               If you choose 'Computed values', you should enter some parameters to automatically compute the threshold value for each product and the quantity to order."
-msgstr "Please choose a method of computation.                If you choose 'Fixed values', you should enter manually a threshold value and a order quantity for each product.               If you choose 'Computed values', you should enter some parameters to automatically compute the threshold value for each product and the quantity to order."
+#: view:threshold.value.compute.all:0
+msgid "Compute POs Creation"
+msgstr "Calculer la Création du BC"
 
 #. module: threshold_value
-#: view:threshold.value:0
-msgid "Fill lines"
-msgstr "Fill lines"
+#: field:threshold.value,frequency:0
+msgid "Order frequency"
+msgstr "Fréquence de Commande"
 
 #. module: threshold_value
-#: view:threshold.value:0
-#: field:threshold.value,location_id:0
-msgid "Location"
-msgstr "Location"
+#: field:threshold.value,nomen_manda_0:0
+msgid "Main Type"
+msgstr "Type Principal"
 
 #. module: threshold_value
-#: view:threshold.value:0
-#: field:threshold.value,fixed_line_ids:0
-#: field:threshold.value,line_ids:0
-#: field:threshold.value,product_ids:0
-msgid "Products"
-msgstr "Products"
-
-#. module: threshold_value
-#: selection:threshold.value,compute_method:0
-msgid "Computed values"
-msgstr "Computed values"
-
-#. module: threshold_value
-#: help:threshold.value,frequency:0
-msgid "The time between two replenishments. Will be used to compute the quantity to order."
-msgstr "The time between two replenishments. Will be used to compute the quantity to order."
+#: model:ir.model,name:threshold_value.model_threshold_value_compute_all
+msgid "Compute all schedulers"
+msgstr "Calculer tous les planificateurs"
 
 #. module: threshold_value
 #: view:threshold.value:0
@@ -56,174 +42,115 @@ msgid "-"
 msgstr "-"
 
 #. module: threshold_value
-#: field:threshold.value.line,threshold_value_id:0
-#: field:threshold.value.line,threshold_value_id2:0
-msgid "Threshold"
-msgstr "Threshold"
+#: field:threshold.value,warehouse_id:0
+msgid "Warehouse"
+msgstr "Entrepôt"
 
 #. module: threshold_value
-#: help:threshold.value,safety_month:0
-msgid "In months. Period during the stock is not empty but need to be replenish.                                      Used to compute the quantity to order."
-msgstr "In months. Period during the stock is not empty but need to be replenish.                                      Used to compute the quantity to order."
+#: selection:threshold.value,consumption_method:0
+msgid "Average Monthly Consumption"
+msgstr "Consommation Moyenne Mensuelle"
 
 #. module: threshold_value
-#: field:threshold.value,nomen_manda_0:0
-msgid "Main Type"
-msgstr "Main Type"
-
-#. module: threshold_value
-#: help:threshold.value,supplier_lt:0
-msgid "If checked, use the lead time set in the supplier form."
-msgstr "If checked, use the lead time set in the supplier form."
-
-#. module: threshold_value
-#: field:threshold.value,safety_month:0
-msgid "Safety Stock in months"
-msgstr "Safety Stock in months"
+#: selection:threshold.value,consumption_method:0
+msgid "Forecasted Monthly Consumption"
+msgstr "Prévisions de Consommation Mensuelle (PCM)"
 
 #. module: threshold_value
 #: view:threshold.value:0
-msgid "Threshold values"
-msgstr "Threshold values"
-
-#. module: threshold_value
-#: help:threshold.value,compute_method:0
-msgid "If 'Fixed values', the scheduler will compare stock of product with the threshold value of the line. \n"
-"\n"
-"                                           If 'Computed values', the threshold value and the ordered quantity will be calculated according to defined parameters"
-msgstr "If 'Fixed values', the scheduler will compare stock of product with the threshold value of the line. \n"
-"\n"
-"                                           If 'Computed values', the threshold value and the ordered quantity will be calculated according to defined parameters"
-
-#. module: threshold_value
-#: help:threshold.value,location_id:0
-msgid "Location where the computation is made"
-msgstr "Location where the computation is made"
+msgid "Filters..."
+msgstr "Filtres…"
 
 #. module: threshold_value
 #: model:ir.actions.act_window,name:threshold_value.action_compute_schedulers_threshold
 #: model:ir.ui.menu,name:threshold_value.menu_stock_proc_schedulers_threshold
 msgid "POs Creation (Threshold)"
-msgstr "POs Creation (Threshold)"
-
-#. module: threshold_value
-#: help:threshold.value,lead_time:0
-msgid "In months. Time to be delivered after processing the purchase order."
-msgstr "In months. Time to be delivered after processing the purchase order."
-
-#. module: threshold_value
-#: field:threshold.value,frequency:0
-msgid "Order frequency"
-msgstr "Order frequency"
-
-#. module: threshold_value
-#: help:threshold.value,consumption_method:0
-msgid "Method used to compute the consumption of products."
-msgstr "Method used to compute the consumption of products."
+msgstr "Création de BC (Seuil)"
 
 #. module: threshold_value
 #: view:threshold.value:0
-#: field:threshold.value,nomen_manda_1:0
-msgid "Group"
-msgstr "Group"
+msgid "Main type"
+msgstr "Type principal"
 
 #. module: threshold_value
-#: view:threshold.value.compute.all:0
-msgid "POs Creation Threshold Parameters"
-msgstr "POs Creation Threshold Parameters"
+#: selection:threshold.value,compute_method:0
+msgid "Computed values"
+msgstr "Valeurs Calculées"
 
 #. module: threshold_value
-#: field:threshold.value,consumption_period_from:0
-msgid "Period of calculation"
-msgstr "Period of calculation"
+#: field:threshold.value,supplier_lt:0
+msgid "Product's supplier LT"
+msgstr "Délai Produit Fournisseur"
 
 #. module: threshold_value
-#: field:threshold.value,consumption_method:0
-msgid "Consumption Method"
-msgstr "Consumption Method"
-
-#. module: threshold_value
-#: model:ir.model,name:threshold_value.model_threshold_value_line
-msgid "Threshold Value Line"
-msgstr "Threshold Value Line"
-
-#. module: threshold_value
-#: selection:threshold.value,consumption_method:0
-msgid "Forecasted Monthly Consumption"
-msgstr "Forecasted Monthly Consumption"
+#: model:ir.module.module,description:threshold_value.module_meta_information
+msgid "\n"
+"        This module aims to add a threshold value replenishment\n"
+"        object.\n"
+"    "
+msgstr "\n"
+"        Ce module vise à ajouter une valeur seuil pour le réapprovisionnement de l'objet."
 
 #. module: threshold_value
 #: view:threshold.value:0
-msgid "Sublist"
-msgstr "Sublist"
+msgid "Threshold values"
+msgstr "Valeurs Seuil"
 
 #. module: threshold_value
 #: view:threshold.value:0
 msgid "General Information"
-msgstr "General Information"
+msgstr "Informations Générales"
 
 #. module: threshold_value
-#: selection:threshold.value,consumption_method:0
-msgid "Average Monthly Consumption"
-msgstr "Average Monthly Consumption"
+#: help:threshold.value,frequency:0
+msgid "The time between two replenishments. Will be used to compute the quantity to order."
+msgstr "Le temps entre 2 réapprovisionnements. Sera utilisé pour calculer la quantité à commander."
+
+#. module: threshold_value
+#: model:ir.model,name:threshold_value.model_threshold_value_line
+msgid "Threshold Value Line"
+msgstr "Ligne de Valeur Seuil"
+
+#. module: threshold_value
+#: help:threshold.value,consumption_method:0
+msgid "Method used to compute the consumption of products."
+msgstr "Méthode utilisée pour calculer la consommation des produits."
 
 #. module: threshold_value
 #: view:threshold.value:0
-msgid "Product filters"
-msgstr "Product filters"
-
-#. module: threshold_value
-#: view:threshold.value:0
-#: field:threshold.value,nomen_manda_2:0
-msgid "Family"
-msgstr "Family"
-
-#. module: threshold_value
-#: model:ir.model,name:threshold_value.model_threshold_value_compute_all
-msgid "Compute all schedulers"
-msgstr "Compute all schedulers"
+#: field:threshold.value,nomen_manda_3:0
+msgid "Root"
+msgstr "Origine"
 
 #. module: threshold_value
 #: field:threshold.value.line,product_uom_id:0
 msgid "Product UoM"
-msgstr "Product UoM"
+msgstr "UdM du Produit"
 
 #. module: threshold_value
-#: view:threshold.value:0
-msgid "Calculation parameters"
-msgstr "Calculation parameters"
+#: field:threshold.value,name:0
+msgid "Reference"
+msgstr "Référence"
+
+#. module: threshold_value
+#: help:threshold.value,location_id:0
+msgid "Location where the computation is made"
+msgstr "Zone où le calcul est fait."
+
+#. module: threshold_value
+#: help:threshold.value,lead_time:0
+msgid "In months. Time to be delivered after processing the purchase order."
+msgstr "En Mois.  Temps nécessaire pour être livré après traitement du Bon de Commande."
 
 #. module: threshold_value
 #: field:threshold.value,sublist_id:0
 msgid "List/Sublist"
-msgstr "List/Sublist"
+msgstr "Liste/Liste secondaire"
 
 #. module: threshold_value
-#: field:threshold.value,warehouse_id:0
-msgid "Warehouse"
-msgstr "Warehouse"
-
-#. module: threshold_value
-#: view:threshold.value.compute.all:0
-msgid "Cancel"
-msgstr "Cancel"
-
-#. module: threshold_value
-#: code:addons/threshold_value/scheduler.py:64
-#, python-format
-msgid "Threshold value: %s"
-msgstr "Threshold value: %s"
-
-#. module: threshold_value
-#: model:ir.model,name:threshold_value.model_procurement_order
-msgid "Procurement"
-msgstr "Procurement"
-
-#. module: threshold_value
-#: field:threshold.value.line,fixed_product_qty:0
-#: field:threshold.value.line,product_qty:0
-msgid "Quantity to order"
-msgstr "Quantity to order"
+#: constraint:threshold.value.line:0
+msgid "You cannot have two times the same product on the same threshold value rule"
+msgstr "Vous ne pouvez pas avoir deux fois le même produit sur ​​la même règle de valeur de seuil"
 
 #. module: threshold_value
 #: model:ir.actions.act_window,name:threshold_value.action_threshold_value
@@ -235,92 +162,163 @@ msgstr "Quantity to order"
 #: field:threshold.value.line,fixed_threshold_value:0
 #: field:threshold.value.line,threshold_value:0
 msgid "Threshold value"
-msgstr "Threshold value"
-
-#. module: threshold_value
-#: model:ir.module.module,description:threshold_value.module_meta_information
-msgid "\n"
-"        This module aims to add a threshold value replenishment\n"
-"        object.\n"
-"    "
-msgstr "\n"
-"        This module aims to add a threshold value replenishment\n"
-"        object.\n"
-"    "
-
-#. module: threshold_value
-#: field:threshold.value,name:0
-msgid "Reference"
-msgstr "Reference"
+msgstr "Valeur Seuil"
 
 #. module: threshold_value
 #: view:threshold.value:0
 msgid "Refresh values"
-msgstr "Refresh values"
-
-#. module: threshold_value
-#: field:threshold.value,compute_method:0
-msgid "Method of computation"
-msgstr "Method of computation"
-
-#. module: threshold_value
-#: field:threshold.value,supplier_lt:0
-msgid "Product's supplier LT"
-msgstr "Product's supplier LT"
+msgstr "Actualiser les valeurs"
 
 #. module: threshold_value
 #: view:threshold.value:0
-#: field:threshold.value,nomen_manda_3:0
-msgid "Root"
-msgstr "Root"
-
-#. module: threshold_value
-#: view:threshold.value:0
-msgid "Main type"
-msgstr "Main type"
-
-#. module: threshold_value
-#: help:threshold.value,consumption_period_from:0
-msgid "This period is a number of past months the system has to consider for AMC calculation.By default this value is equal to the frequency in the Threshold."
-msgstr "This period is a number of past months the system has to consider for AMC calculation.By default this value is equal to the frequency in the Threshold."
-
-#. module: threshold_value
-#: view:threshold.value:0
-msgid "Filters..."
-msgstr "Filters..."
-
-#. module: threshold_value
-#: constraint:threshold.value.line:0
-msgid "You cannot have two times the same product on the same threshold value rule"
-msgstr "You cannot have two times the same product on the same threshold value rule"
-
-#. module: threshold_value
-#: field:threshold.value,active:0
-msgid "Active"
-msgstr "Active"
-
-#. module: threshold_value
-#: selection:threshold.value,compute_method:0
-msgid "Fixed values"
-msgstr "Fixed values"
-
-#. module: threshold_value
-#: view:threshold.value.compute.all:0
-msgid "Compute POs Creation"
-msgstr "Compute POs Creation"
-
-#. module: threshold_value
-#: field:threshold.value.line,product_id:0
-msgid "Product"
-msgstr "Product"
+msgid "Calculation parameters"
+msgstr "Calcul de Paramètres"
 
 #. module: threshold_value
 #: field:threshold.value,lead_time:0
 msgid "Fixed Lead Time in months"
-msgstr "Fixed Lead Time in months"
+msgstr "Délai Déterminé en Mois"
+
+#. module: threshold_value
+#: field:threshold.value,safety_month:0
+msgid "Safety Stock in months"
+msgstr "Stock de Sécurité en mois"
+
+#. module: threshold_value
+#: help:threshold.value,supplier_lt:0
+msgid "If checked, use the lead time set in the supplier form."
+msgstr "Si coché, utiliser le délai réglé sur le formulaire fournisseur."
+
+#. module: threshold_value
+#: help:threshold.value,compute_method:0
+msgid "If 'Fixed values', the scheduler will compare stock of product with the threshold value of the line. \n"
+"\n"
+"                                           If 'Computed values', the threshold value and the ordered quantity will be calculated according to defined parameters"
+msgstr "Si  «valeurs Déterminées», le planificateur compare le stock de produits à la valeur seuil de la ligne.\n"
+"\n"
+"                                            Si «valeurs Calculées», la valeur de seuil et la quantité commandée seront calculées en fonction des paramètres définis"
+
+#. module: threshold_value
+#: field:threshold.value,compute_method:0
+msgid "Method of computation"
+msgstr "Méthode de calcul"
+
+#. module: threshold_value
+#: help:threshold.value,safety_month:0
+msgid "In months. Period during the stock is not empty but need to be replenish.                                      Used to compute the quantity to order."
+msgstr "En mois. Période durant laquelle le stock n´est pas vide mais nécessite un réapprovisionnement. Utilisé pour calculer la quantité à commander. "
+
+#. module: threshold_value
+#: view:threshold.value.compute.all:0
+msgid "POs Creation Threshold Parameters"
+msgstr "Création des Paramètres de Seuil pour le BC"
+
+#. module: threshold_value
+#: view:threshold.value.compute.all:0
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: threshold_value
+#: view:threshold.value:0
+#: field:threshold.value,location_id:0
+msgid "Location"
+msgstr "Zone"
+
+#. module: threshold_value
+#: field:threshold.value.line,product_id:0
+msgid "Product"
+msgstr "Produit"
+
+#. module: threshold_value
+#: view:threshold.value:0
+msgid "Please choose a method of computation.                If you choose 'Fixed values', you should enter manually a threshold value and a order quantity for each product.               If you choose 'Computed values', you should enter some parameters to automatically compute the threshold value for each product and the quantity to order."
+msgstr "Veuillez choisir une méthode de calcul. Si vous choisissez 'Valeurs Déterminées', vous devez saisir manuellement la valeur seuil et la quantité à commander pour chaque produit.   Si vous choisissez 'Valeurs Calculées', vous devez saisir quelques paramètres pour automatiquement calculer la valeur seuil pour chaque produit et la quantité à commander."
+
+#. module: threshold_value
+#: help:threshold.value,consumption_period_from:0
+msgid "This period is a number of past months the system has to consider for AMC calculation.By default this value is equal to the frequency in the Threshold."
+msgstr "Cette période est un nombre correspondant aux derniers mois que le système doit prendre en compte pour le calcul de la CMM. Cette valeur est égale par défaut à la fréquence définie sous Seuil."
+
+#. module: threshold_value
+#: field:threshold.value.line,fixed_product_qty:0
+#: field:threshold.value.line,product_qty:0
+msgid "Quantity to order"
+msgstr "Quantité à commander"
+
+#. module: threshold_value
+#: view:threshold.value:0
+msgid "Product filters"
+msgstr "Produit - Filtres"
+
+#. module: threshold_value
+#: view:threshold.value:0
+#: field:threshold.value,nomen_manda_2:0
+msgid "Family"
+msgstr "Famille"
+
+#. module: threshold_value
+#: field:threshold.value,active:0
+msgid "Active"
+msgstr "Actif"
+
+#. module: threshold_value
+#: view:threshold.value:0
+msgid "Sublist"
+msgstr "Liste secondaire"
+
+#. module: threshold_value
+#: field:threshold.value.line,threshold_value_id:0
+#: field:threshold.value.line,threshold_value_id2:0
+msgid "Threshold"
+msgstr "Seuil"
+
+#. module: threshold_value
+#: selection:threshold.value,compute_method:0
+msgid "Fixed values"
+msgstr "Valeurs Fixées"
+
+#. module: threshold_value
+#: model:ir.model,name:threshold_value.model_procurement_order
+msgid "Procurement"
+msgstr "Approvisionnement"
+
+#. module: threshold_value
+#: field:threshold.value,consumption_method:0
+msgid "Consumption Method"
+msgstr "Méthode de Consommation"
+
+#. module: threshold_value
+#: view:threshold.value:0
+msgid "Fill lines"
+msgstr "Lignes à remplir"
+
+#. module: threshold_value
+#: code:addons/threshold_value/scheduler.py:64
+#, python-format
+msgid "Threshold value: %s"
+msgstr "Valeur seuil : %s"
+
+#. module: threshold_value
+#: field:threshold.value,consumption_period_from:0
+msgid "Period of calculation"
+msgstr "Période du calcul"
 
 #. module: threshold_value
 #: view:threshold.value:0
 msgid "Group By..."
-msgstr "Group By..."
+msgstr "Grouper Par..."
+
+#. module: threshold_value
+#: view:threshold.value:0
+#: field:threshold.value,fixed_line_ids:0
+#: field:threshold.value,line_ids:0
+#: field:threshold.value,product_ids:0
+msgid "Products"
+msgstr "Produits"
+
+#. module: threshold_value
+#: view:threshold.value:0
+#: field:threshold.value,nomen_manda_1:0
+msgid "Group"
+msgstr "Groupe"
 

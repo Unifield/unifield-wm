@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.0.3\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2013-10-17 07:42+0000\n"
-"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,69 +16,79 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: partner_modification
+#: field:res.partner,supplier_lt:0
+msgid "Supplier Lead Time"
+msgstr "Délai Fournisseur"
+
+#. module: partner_modification
+#: field:res.partner,zone:0
+msgid "Zone"
+msgstr "Zone"
+
+#. module: partner_modification
+#: field:product.template,delay_for_supplier:0
+msgid "Default delay for a supplier"
+msgstr "Délai par Défaut d'un fournisseur"
+
+#. module: partner_modification
 #: selection:res.partner,po_by_project:0
 msgid "Requirements by Category and Project"
 msgstr "Requirements by Category and Project"
 
 #. module: partner_modification
-#: field:res.partner,procurement_lt:0
-msgid "Internal Lead Time"
-msgstr "Internal Lead Time"
+#: field:res.partner,transport_2:0
+msgid "3nd Mode of Transport"
+msgstr "3e Mode de Transport"
 
 #. module: partner_modification
-#: field:res.partner,transport_0_lt:0
-msgid "1st Transport Lead Time"
-msgstr "1st Transport Lead Time"
+#: model:ir.module.module,shortdesc:partner_modification.module_meta_information
+msgid "Partner Modification"
+msgstr "Modification du Partenaire"
 
 #. module: partner_modification
-#: field:res.partner,transport_0:0
-msgid "1st (favorite) Mode of Transport"
-msgstr "1st (favorite) Mode of Transport"
+#: model:ir.model,name:partner_modification.model_product_supplierinfo
+msgid "Information about a product supplier"
+msgstr "Information sur le fournisseur du produit"
 
 #. module: partner_modification
-#: field:res.partner,default_delay:0
-msgid "Supplier Lead Time (computed)"
-msgstr "Supplier Lead Time (computed)"
+#: field:res.partner,po_by_project:0
+msgid "Order creation mode"
+msgstr "Mode de création de la commande"
 
 #. module: partner_modification
-#: constraint:product.template:0
-msgid "Error: The default UOM and the purchase UOM must be in the same category."
-msgstr "Error: The default UOM and the purchase UOM must be in the same category."
+#: view:res.partner:0
+msgid "General Information"
+msgstr "Informations Générales"
 
 #. module: partner_modification
 #: model:ir.model,name:partner_modification.model_res_partner
 msgid "Partner"
-msgstr "Partner"
+msgstr "Partenaire"
+
+#. module: partner_modification
+#: model:ir.model,name:partner_modification.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Ligne Bon de Commande"
+
+#. module: partner_modification
+#: model:ir.model,name:partner_modification.model_product_template
+msgid "Product Template"
+msgstr "Modèle de Produit"
 
 #. module: partner_modification
 #: selection:res.partner,po_by_project:0
-msgid "Requirements by Category"
-msgstr "Requirements by Category"
+msgid "All requirements"
+msgstr "Tous les besoins"
 
 #. module: partner_modification
-#: field:res.partner,transport_2_lt:0
-msgid "3rd Transport Lead Time"
-msgstr "3rd Transport Lead Time"
-
-#. module: partner_modification
-#: sql_constraint:purchase.order.line:0
-msgid "Product Quantity must be greater than zero."
-msgstr "Product Quantity must be greater than zero."
+#: field:res.partner,transport_1:0
+msgid "2nd Mode of Transport"
+msgstr "2nd Mode de Transport"
 
 #. module: partner_modification
 #: selection:res.partner,po_by_project:0
-msgid "Requirements by Project"
-msgstr "Requirements by Project"
-
-#. module: partner_modification
-#: field:res.partner,customer_lt:0
-msgid "Customer Lead Time"
-msgstr "Customer Lead Time"
-
-#. module: partner_modification
-#: view:res.partner:0
-msgid "Default Lead Times (days)"
-msgstr "Default Lead Times (days)"
+msgid "Requirements by Order"
+msgstr "Requirements by Order"
 
 #. module: partner_modification
 #: selection:res.partner,transport_0:0
@@ -88,43 +98,36 @@ msgid "Air"
 msgstr "Air"
 
 #. module: partner_modification
-#: field:res.partner,transport_1:0
-msgid "2nd Mode of Transport"
-msgstr "2nd Mode of Transport"
-
-#. module: partner_modification
-#: selection:res.partner,po_by_project:0
-msgid "Requirements by Order"
-msgstr "Requirements by Order"
-
-#. module: partner_modification
-#: view:res.partner:0
-msgid "General Information"
-msgstr "General Information"
-
-#. module: partner_modification
-#: model:ir.module.module,description:partner_modification.module_meta_information
-msgid "\n"
-"    Modification of patner with new lead times\n"
-"    "
-msgstr "\n"
-"    Modification of patner with new lead times\n"
-"    "
+#: field:res.partner,transport_2_lt:0
+msgid "3rd Transport Lead Time"
+msgstr "3e Délai de Transport "
 
 #. module: partner_modification
 #: constraint:product.supplierinfo:0
 msgid "Error: The default UOM and the Supplier Product UOM must be in the same category."
-msgstr "Error: The default UOM and the Supplier Product UOM must be in the same category."
+msgstr "Erreur : l'UdM par défaut et l'UdM du Fournisseur de Produit doivent appartenir à la même catégorie."
 
 #. module: partner_modification
-#: model:ir.module.module,shortdesc:partner_modification.module_meta_information
-msgid "Partner Modification"
-msgstr "Partner Modification"
+#: field:res.partner,default_delay:0
+msgid "Supplier Lead Time (computed)"
+msgstr "Délai Fournisseur (calculé)"
 
 #. module: partner_modification
-#: field:res.partner,po_by_project:0
-msgid "Order creation mode"
-msgstr "Order creation mode"
+#: selection:res.partner,transport_0:0
+#: selection:res.partner,transport_1:0
+#: selection:res.partner,transport_2:0
+msgid "Sea"
+msgstr "Mer"
+
+#. module: partner_modification
+#: field:res.partner,customer_lt:0
+msgid "Customer Lead Time"
+msgstr "Délai Client"
+
+#. module: partner_modification
+#: field:res.partner,transport_0_lt:0
+msgid "1st Transport Lead Time"
+msgstr "1er Délai de Transport"
 
 #. module: partner_modification
 #: selection:res.partner,zone:0
@@ -132,39 +135,64 @@ msgid "International"
 msgstr "International"
 
 #. module: partner_modification
-#: field:res.partner,zone:0
-msgid "Zone"
-msgstr "Zone"
+#: view:res.partner:0
+msgid "Default Lead Times (days)"
+msgstr "Délais par défaut (jours)"
 
 #. module: partner_modification
-#: field:res.partner,supplier_lt:0
-msgid "Supplier Lead Time"
-msgstr "Supplier Lead Time"
+#: selection:res.partner,transport_0:0
+#: selection:res.partner,transport_1:0
+#: selection:res.partner,transport_2:0
+msgid "Road"
+msgstr "Route"
 
 #. module: partner_modification
-#: model:ir.model,name:partner_modification.model_purchase_order_line
-msgid "Purchase Order Line"
-msgstr "Purchase Order Line"
+#: sql_constraint:purchase.order.line:0
+msgid "Product Quantity must be greater than zero."
+msgstr "La quantité de produits doit être supérieure à zéro."
 
 #. module: partner_modification
-#: model:ir.model,name:partner_modification.model_product_template
-msgid "Product Template"
-msgstr "Product Template"
+#: field:res.partner,procurement_lt:0
+msgid "Internal Lead Time"
+msgstr "Délai interne"
 
 #. module: partner_modification
-#: field:res.partner,transport_1_lt:0
-msgid "2nd Transport Lead Time"
-msgstr "2nd Transport Lead Time"
+#: constraint:product.template:0
+msgid "Error: The default UOM and the purchase UOM must be in the same category."
+msgstr "Erreur : l'UdM par défaut et l'UdM d'achat doivent appartenir à la même catégorie."
 
 #. module: partner_modification
-#: field:product.template,delay_for_supplier:0
-msgid "Default delay for a supplier"
-msgstr "Default delay for a supplier"
+#: model:ir.module.module,description:partner_modification.module_meta_information
+msgid "\n"
+"    Modification of patner with new lead times\n"
+"    "
+msgstr "\n"
+"    Modification du patneraire avec de nouveaux délais  "
+
+#. module: partner_modification
+#: selection:res.partner,po_by_project:0
+msgid "Requirements by Project"
+msgstr "Besoins par Projet"
 
 #. module: partner_modification
 #: selection:res.partner,zone:0
 msgid "National"
 msgstr "National"
+
+#. module: partner_modification
+#: field:res.partner,transport_1_lt:0
+msgid "2nd Transport Lead Time"
+msgstr "2nd Délai de Transport"
+
+#. module: partner_modification
+#: selection:res.partner,po_by_project:0
+msgid "Requirements by Category"
+msgstr "Requirements by Category"
+
+#. module: partner_modification
+#: field:res.partner,transport_0:0
+msgid "1st (favorite) Mode of Transport"
+msgstr "1er (préféré) Mode de Transport"
 
 #. module: partner_modification
 #: help:res.partner,po_by_project:0
@@ -194,33 +222,4 @@ msgstr "When option “All requirements” is set for \n"
 "                                            and one category.\n"
 "                                            If option \"Requirements by Order\" is set, the system will create a PO\n"
 "                                            that merge lines coming from the same FO/IR."
-
-#. module: partner_modification
-#: model:ir.model,name:partner_modification.model_product_supplierinfo
-msgid "Information about a product supplier"
-msgstr "Information about a product supplier"
-
-#. module: partner_modification
-#: field:res.partner,transport_2:0
-msgid "3nd Mode of Transport"
-msgstr "3nd Mode of Transport"
-
-#. module: partner_modification
-#: selection:res.partner,transport_0:0
-#: selection:res.partner,transport_1:0
-#: selection:res.partner,transport_2:0
-msgid "Road"
-msgstr "Road"
-
-#. module: partner_modification
-#: selection:res.partner,po_by_project:0
-msgid "All requirements"
-msgstr "All requirements"
-
-#. module: partner_modification
-#: selection:res.partner,transport_0:0
-#: selection:res.partner,transport_1:0
-#: selection:res.partner,transport_2:0
-msgid "Sea"
-msgstr "Sea"
 

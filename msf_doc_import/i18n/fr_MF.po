@@ -6,14 +6,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.0.3\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2013-10-17 07:42+0000\n"
-"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/account.py:179
+#: code:addons/msf_doc_import/account.py:229
+#, python-format
+msgid "Checking file…"
+msgstr "Vérification du fichier…"
 
 #. module: msf_doc_import
 #: code:addons/msf_doc_import/wizard/wizard_import_po.py:249
@@ -30,280 +37,6 @@ msgid "You should have exactly 6 columns in this order:\n"
 msgstr "You should have exactly 6 columns in this order:\n"
 "#Product Code, Product Description, Quantity, UoM, Currency, Comment.\n"
 "#That means Not price, Neither Delivery requested date. "
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/account.py:382
-#, python-format
-msgid "Check complete. Reading potential errors or write needed changes."
-msgstr "Check complete. Reading potential errors or write needed changes."
-
-#. module: msf_doc_import
-#: constraint:composition.item:0
-msgid "Constraint error on Composition Item."
-msgstr "Constraint error on Composition Item."
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/stock_cost_reevaluation.py:67
-#, python-format
-msgid "You should have exactly 3 columns in this order:\n"
-"Product Code*, Product Description*, Product Cost*"
-msgstr "You should have exactly 3 columns in this order:\n"
-"Product Code*, Product Description*, Product Cost*"
-
-#. module: msf_doc_import
-#: field:purchase.import.xml.line,dest_partner_id:0
-msgid "Destination partner"
-msgstr "Destination partner"
-
-#. module: msf_doc_import
-#: field:purchase.import.xml.line,line_ignored_ok:0
-#: field:purchase.line.import.xml.line,line_ignored_ok:0
-msgid "Ignored?"
-msgstr "Ignored?"
-
-#. module: msf_doc_import
-#: field:msf.doc.import.accounting,date:0
-msgid "Migration date"
-msgstr "Migration date"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:321
-#, python-format
-msgid "Line %s of the Excel file was added to the file of the lines with errors : No matching line found with in the Incoming shipment for the line number %s."
-msgstr "Line %s of the Excel file was added to the file of the lines with errors : No matching line found with in the Incoming shipment for the line number %s."
-
-#. module: msf_doc_import
-#: field:stock.partial.picking,message:0
-msgid "Report of lines' import"
-msgstr "Report of lines' import"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/initial_stock_inventory.py:63
-#: code:addons/msf_doc_import/initial_stock_inventory.py:475
-#: code:addons/msf_doc_import/purchase_order.py:105
-#: code:addons/msf_doc_import/sale_order.py:112
-#: code:addons/msf_doc_import/tender.py:71
-#, python-format
-msgid "lines"
-msgstr "lines"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/initial_stock_inventory.py:63
-#: code:addons/msf_doc_import/initial_stock_inventory.py:475
-#: code:addons/msf_doc_import/purchase_order.py:105
-#: code:addons/msf_doc_import/sale_order.py:112
-#: code:addons/msf_doc_import/tender.py:71
-#, python-format
-msgid "line"
-msgstr "line"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/purchase_order.py:416
-#: code:addons/msf_doc_import/sale_order.py:581
-#, python-format
-msgid "You have to define a valid Group (in tab \"Nomenclature Selection\"), i.e. not \"To be defined\"."
-msgstr "You have to define a valid Group (in tab \"Nomenclature Selection\"), i.e. not \"To be defined\"."
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/check_line.py:93
-#: code:addons/msf_doc_import/check_line.py:96
-#: code:addons/msf_doc_import/initial_stock_inventory.py:298
-#: code:addons/msf_doc_import/initial_stock_inventory.py:717
-#, python-format
-msgid "The import of lines had errors, please correct the red lines below"
-msgstr "The import of lines had errors, please correct the red lines below"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/wizard_import_po.py:668
-#: code:addons/msf_doc_import/wizard/wizard_import_po.py:761
-#, python-format
-msgid "Line %s of the Excel file updated the line %s with the product %s in common."
-msgstr "Line %s of the Excel file updated the line %s with the product %s in common."
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/composition_kit.py:111
-#, python-format
-msgid "You should have exactly 5 columns in this order:\n"
-"Module, Product Code*, Product Description, Quantity and Product UOM"
-msgstr "You should have exactly 5 columns in this order:\n"
-"Module, Product Code*, Product Description, Quantity and Product UOM"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:481
-#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:581
-#, python-format
-msgid "Line %s of the Excel file produced a split for the line %s."
-msgstr "Line %s of the Excel file produced a split for the line %s."
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/check_line.py:375
-#: code:addons/msf_doc_import/check_line.py:389
-#, python-format
-msgid "The Price Unit was not set, we have taken the default \"%s\" of the product."
-msgstr "The Price Unit was not set, we have taken the default \"%s\" of the product."
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/check_line.py:266
-#: code:addons/msf_doc_import/check_line.py:270
-#, python-format
-msgid " Product Code to be defined"
-msgstr " Product Code to be defined"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/account.py:183
-#, python-format
-msgid "No period found!"
-msgstr "No period found!"
-
-#. module: msf_doc_import
-#: constraint:initial.stock.inventory.line:0
-#: constraint:stock.inventory.line:0
-msgid "You must assign a Batch Number which corresponds to Batch Number Mandatory Products."
-msgstr "You must assign a Batch Number which corresponds to Batch Number Mandatory Products."
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/__init__.py:26
-#, python-format
-msgid "\n"
-"        IMPORTANT : The first line will be ignored by the system.\n"
-"        The file should be in XML 2003 format.\n"
-"\n"
-"The columns should be in this values: "
-msgstr "\n"
-"        IMPORTANT : The first line will be ignored by the system.\n"
-"        The file should be in XML 2003 format.\n"
-"\n"
-"The columns should be in this values: "
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/wizard_import_po.py:326
-#, python-format
-msgid "\"Arrival Date in the country\" %s has a wrong format. Please format the cell in Excel as date."
-msgstr "\"Arrival Date in the country\" %s has a wrong format. Please format the cell in Excel as date."
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/__init__.py:55
-#, python-format
-msgid "Expiry Date"
-msgstr "Expiry Date"
-
-#. module: msf_doc_import
-#: model:ir.model,name:msf_doc_import.model_initial_stock_inventory
-#: model:ir.model,name:msf_doc_import.model_stock_inventory
-msgid "Inventory"
-msgstr "Inventory"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/internal_move.py:88
-#: code:addons/msf_doc_import/purchase_order.py:261
-#: code:addons/msf_doc_import/sale_order.py:459
-#, python-format
-msgid "You need to correct the following line%s: %s"
-msgstr "You need to correct the following line%s: %s"
-
-#. module: msf_doc_import
-#: field:purchase.order,import_in_progress:0
-#: field:sale.order,import_in_progress:0
-msgid "Importing"
-msgstr "Importing"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/check_line.py:508
-#, python-format
-msgid "The Currency Name was not valid, it has to be a string."
-msgstr "The Currency Name was not valid, it has to be a string."
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/wizard_import_po.py:298
-#, python-format
-msgid "The Destination Partner %s does not exist in the Database."
-msgstr "The Destination Partner %s does not exist in the Database."
-
-#. module: msf_doc_import
-#: field:msf.doc.import.accounting.errors,name:0
-#: field:msf.doc.import.accounting.lines,description:0
-msgid "Description"
-msgstr "Description"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/check_line.py:530
-#: code:addons/msf_doc_import/check_line.py:537
-#, python-format
-msgid "No comment was defined"
-msgstr "No comment was defined"
-
-#. module: msf_doc_import
-#: view:wizard.import.fo.line:0
-#: view:wizard.import.int.line:0
-#: view:wizard.import.ir.line:0
-#: view:wizard.import.po.line:0
-#: view:wizard.import.tender.line:0
-msgid "Import of lines"
-msgstr "Import of lines"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/initial_stock_inventory.py:255
-#: code:addons/msf_doc_import/initial_stock_inventory.py:393
-#: code:addons/msf_doc_import/initial_stock_inventory.py:427
-#: code:addons/msf_doc_import/initial_stock_inventory.py:682
-#: code:addons/msf_doc_import/initial_stock_inventory.py:814
-#: code:addons/msf_doc_import/initial_stock_inventory.py:846
-#, python-format
-msgid "Batch is missing.\n"
-""
-msgstr "Batch is missing.\n"
-""
-
-#. module: msf_doc_import
-#: field:incoming.import.xml.line,line_values:0
-msgid "Line values"
-msgstr "Line values"
-
-#. module: msf_doc_import
-#: model:ir.model,name:msf_doc_import.model_purchase_order
-#: field:purchase.line.import.xml.line,order_id:0
-#: field:wizard.import.po,po_id:0
-#: field:wizard.import.po.line,po_id:0
-msgid "Purchase Order"
-msgstr "Purchase Order"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/wizard_import_fo_line.py:304
-#: code:addons/msf_doc_import/wizard/wizard_import_int_line.py:326
-#: code:addons/msf_doc_import/wizard/wizard_import_ir_line.py:296
-#: code:addons/msf_doc_import/wizard/wizard_import_po_line.py:310
-#: code:addons/msf_doc_import/wizard/wizard_import_tender_line.py:264
-#, python-format
-msgid "Import in progress, please leave this window open and press the button 'Update' when you think that the import is done.\n"
-"Otherwise, you can continue to use Unifield."
-msgstr "Import in progress, please leave this window open and press the button 'Update' when you think that the import is done.\n"
-"Otherwise, you can continue to use Unifield."
-
-#. module: msf_doc_import
-#: field:stock.partial.picking,filename_template:0
-msgid "Template"
-msgstr "Template"
-
-#. module: msf_doc_import
-#: view:wizard.export.po:0
-msgid "PO lines exported"
-msgstr "PO lines exported"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/wizard_import_po.py:646
-#, python-format
-msgid "Line %s of the Excel file updated the PO line %s with the product %s."
-msgstr "Line %s of the Excel file updated the PO line %s with the product %s."
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/__init__.py:45
-#: code:addons/msf_doc_import/wizard/__init__.py:50
-#: code:addons/msf_doc_import/wizard/__init__.py:60
-#: code:addons/msf_doc_import/wizard/wizard_import_po_line.py:178
-#: field:msf.doc.import.accounting.lines,currency_id:0
-#, python-format
-msgid "Currency"
-msgstr "Currency"
 
 #. module: msf_doc_import
 #: code:addons/msf_doc_import/wizard/wizard_import_po.py:171
@@ -328,448 +61,15 @@ msgstr "\n"
 ""
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/wizard_import_po.py:438
+#: code:addons/msf_doc_import/account.py:305
 #, python-format
-msgid "The UOM %s was not found in the DataBase."
-msgstr "The UOM %s was not found in the DataBase."
+msgid "Line %s. No G/L account specified!"
+msgstr "Ligne %s. Aucun compte de Grand Livre précisé !"
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/account.py:262
-#, python-format
-msgid "Line %s. Currency not found: %s"
-msgstr "Line %s. Currency not found: %s"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/check_line.py:339
-#, python-format
-msgid "The UOM Name was not valid."
-msgstr "The UOM Name was not valid."
-
-#. module: msf_doc_import
-#: model:product.uom,name:msf_doc_import.uom_tbd
-msgid "Uom to be defined"
-msgstr "Uom to be defined"
-
-#. module: msf_doc_import
-#: field:msf.doc.import.accounting.lines,period_id:0
-msgid "Period"
-msgstr "Period"
-
-#. module: msf_doc_import
-#: field:incoming.import.xml.line,file_line_number:0
-#: field:purchase.import.xml.line,file_line_number:0
-#: field:purchase.line.import.xml.line,file_line_number:0
-msgid "File line numbers"
-msgstr "File line numbers"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/sale_order.py:164
-#: code:addons/msf_doc_import/sale_order.py:281
-#: code:addons/msf_doc_import/tender.py:119
-#, python-format
-msgid "You can't have more than %s lines in your file."
-msgstr "You can't have more than %s lines in your file."
-
-#. module: msf_doc_import
-#: field:msf.doc.import.accounting,file:0
-msgid "File"
-msgstr "File"
-
-#. module: msf_doc_import
-#: field:msf.doc.import.accounting.lines,document_date:0
-msgid "Document date"
-msgstr "Document date"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/composition_kit.py:62
-#: code:addons/msf_doc_import/composition_kit.py:336
-#: code:addons/msf_doc_import/initial_stock_inventory.py:318
-#: code:addons/msf_doc_import/initial_stock_inventory.py:737
-#: code:addons/msf_doc_import/internal_move.py:88
-#: code:addons/msf_doc_import/purchase_order.py:249
-#: code:addons/msf_doc_import/purchase_order.py:261
-#: code:addons/msf_doc_import/purchase_order.py:269
-#: code:addons/msf_doc_import/purchase_order.py:422
-#: code:addons/msf_doc_import/sale_order.py:164
-#: code:addons/msf_doc_import/sale_order.py:281
-#: code:addons/msf_doc_import/sale_order.py:459
-#: code:addons/msf_doc_import/sale_order.py:594
-#: code:addons/msf_doc_import/sale_order.py:615
-#: code:addons/msf_doc_import/tender.py:119
-#: code:addons/msf_doc_import/tender.py:217
-#: code:addons/msf_doc_import/tender.py:331
-#: code:addons/msf_doc_import/tender.py:349
-#, python-format
-msgid "Warning !"
-msgstr "Warning !"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/check_line.py:219
-#, python-format
-msgid "The Location \"%s\" does not exist on this instance."
-msgstr "The Location \"%s\" does not exist on this instance."
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/wizard_import_fo_line.py:246
-#: code:addons/msf_doc_import/wizard/wizard_import_int_line.py:265
-#: code:addons/msf_doc_import/wizard/wizard_import_ir_line.py:239
-#: code:addons/msf_doc_import/wizard/wizard_import_po_line.py:248
-#: code:addons/msf_doc_import/wizard/wizard_import_tender_line.py:203
-#, python-format
-msgid "Reported errors for ignored lines : \n"
-""
-msgstr "Reported errors for ignored lines : \n"
-""
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:493
-#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:593
-#: code:addons/msf_doc_import/wizard/wizard_import_po.py:736
-#, python-format
-msgid "Line %s of the Excel file was added to the file of the lines with errors : %s"
-msgstr "Line %s of the Excel file was added to the file of the lines with errors : %s"
-
-#. module: msf_doc_import
-#: model:ir.model,name:msf_doc_import.model_wizard_import_po
-msgid "Import PO from Excel sheet"
-msgstr "Import PO from Excel sheet"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/product_list.py:92
-#, python-format
-msgid "Line %s - You have to fill at least the product code or the product name !"
-msgstr "Line %s - You have to fill at least the product code or the product name !"
-
-#. module: msf_doc_import
-#: view:msf.doc.import.accounting:0
-msgid "Validate"
-msgstr "Validate"
-
-#. module: msf_doc_import
-#: model:ir.model,name:msf_doc_import.model_msf_doc_import_accounting_lines
-msgid "msf.doc.import.accounting.lines"
-msgstr "msf.doc.import.accounting.lines"
-
-#. module: msf_doc_import
-#: field:purchase.line.import.xml.line,text_error:0
-msgid "Text Error"
-msgstr "Text Error"
-
-#. module: msf_doc_import
-#: view:wizard.export.po:0
-#: view:wizard.import.fo.line:0
-#: view:wizard.import.int.line:0
-#: view:wizard.import.ir.line:0
-#: view:wizard.import.po:0
-#: view:wizard.import.po.line:0
-#: view:wizard.import.tender.line:0
-msgid "Close window"
-msgstr "Close window"
-
-#. module: msf_doc_import
-#: field:msf.doc.import.accounting.lines,ref:0
-msgid "Reference"
-msgstr "Reference"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/__init__.py:59
-#, python-format
-msgid "Cost Price"
-msgstr "Cost Price"
-
-#. module: msf_doc_import
-#: model:ir.model,name:msf_doc_import.model_stock_partial_picking
-msgid "Partial Picking"
-msgstr "Partial Picking"
-
-#. module: msf_doc_import
-#: field:msf.doc.import.accounting.lines,debit:0
-msgid "Debit"
-msgstr "Debit"
-
-#. module: msf_doc_import
-#: model:product.nomenclature,name:msf_doc_import.nomen_tbd2
-msgid "To Be Defined2"
-msgstr "To Be Defined2"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/wizard_import_fo_line.py:130
-#: code:addons/msf_doc_import/wizard/wizard_import_int_line.py:129
-#: code:addons/msf_doc_import/wizard/wizard_import_ir_line.py:129
-#: code:addons/msf_doc_import/wizard/wizard_import_tender_line.py:114
-#, python-format
-msgid "Line %s in the Excel file: You should have exactly %s columns in this order: %s \n"
-""
-msgstr "Line %s in the Excel file: You should have exactly %s columns in this order: %s \n"
-""
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/purchase_order.py:186
-#, python-format
-msgid "The number of columns in the header should be equal to the number of columns you want to export, please check\n"
-"            that what you have in the NEW_COLUMNS_HEADER (global variable defined in the __init__.py of the wizard) is the same as what you have in the lines of the list list_of_lines."
-msgstr "The number of columns in the header should be equal to the number of columns you want to export, please check\n"
-"            that what you have in the NEW_COLUMNS_HEADER (global variable defined in the __init__.py of the wizard) is the same as what you have in the lines of the list list_of_lines."
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/wizard_import_po.py:745
-#, python-format
-msgid "Lines %s of the Excel file produced a split for the line %s."
-msgstr "Lines %s of the Excel file produced a split for the line %s."
-
-#. module: msf_doc_import
-#: field:wizard.import.fo.line,fo_id:0
-#: field:wizard.import.ir.line,fo_id:0
-msgid "Field Order"
-msgstr "Field Order"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/account.py:204
-#, python-format
-msgid "Reading headers…"
-msgstr "Reading headers…"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/account.py:292
-#, python-format
-msgid "Line %s. Document date '%s' should be inferior or equal to Posting date '%s'."
-msgstr "Line %s. Document date '%s' should be inferior or equal to Posting date '%s'."
-
-#. module: msf_doc_import
-#: field:wizard.import.fo.line,filename_template:0
-#: field:wizard.import.int.line,filename_template:0
-#: field:wizard.import.ir.line,filename_template:0
-#: field:wizard.import.po,filename_template:0
-#: field:wizard.import.po.line,filename_template:0
-#: field:wizard.import.tender.line,filename_template:0
-msgid "Templates"
-msgstr "Templates"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/sale_order.py:457
-#, python-format
-msgid " Please define the nomenclature levels."
-msgstr " Please define the nomenclature levels."
-
-#. module: msf_doc_import
-#: view:product.list:0
-msgid "Import Lines"
-msgstr "Import Lines"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/__init__.py:45
-#: code:addons/msf_doc_import/wizard/__init__.py:50
-#: code:addons/msf_doc_import/wizard/__init__.py:60
-#: code:addons/msf_doc_import/wizard/wizard_import_po_line.py:184
-#: field:initial.stock.inventory.line,inactive_error:0
-#: field:purchase.line.import.xml.line,comment:0
-#: field:purchase.order.line,inactive_error:0
-#: field:sale.order.line,inactive_error:0
-#: field:stock.inventory.line,inactive_error:0
-#, python-format
-msgid "Comment"
-msgstr "Comment"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/wizard_import_po.py:594
-#, python-format
-msgid "Line %s in the Excel file was added to the file of the lines with errors: the line number %s does not exist for %s \n"
-""
-msgstr "Line %s in the Excel file was added to the file of the lines with errors: the line number %s does not exist for %s \n"
-""
-
-#. module: msf_doc_import
-#: model:ir.model,name:msf_doc_import.model_tender_line
-msgid "Tender Line"
-msgstr "Tender Line"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/purchase_order.py:363
-#, python-format
-msgid "\n"
-" It wasn't possible to update the UoM with the product's one because the former wasn't either defined."
-msgstr "\n"
-" It wasn't possible to update the UoM with the product's one because the former wasn't either defined."
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/wizard_import_po.py:847
-#, python-format
-msgid "\n"
-"Important, please do not update the Purchase Order %s\n"
-"Import in progress, please leave this window open and press the button 'Update' when you think that the import is done.\n"
-"Otherwise, you can continue to use Unifield."
-msgstr "\n"
-"Important, please do not update the Purchase Order %s\n"
-"Import in progress, please leave this window open and press the button 'Update' when you think that the import is done.\n"
-"Otherwise, you can continue to use Unifield."
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/internal_move.py:114
-#, python-format
-msgid "You have to define a valid product, i.e. not \"To be defined\"."
-msgstr "You have to define a valid product, i.e. not \"To be defined\"."
-
-#. module: msf_doc_import
-#: sql_constraint:purchase.order:0
-#: sql_constraint:sale.order:0
-msgid "Order Reference must be unique !"
-msgstr "Order Reference must be unique !"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/initial_stock_inventory.py:64
-#: code:addons/msf_doc_import/initial_stock_inventory.py:476
-#, python-format
-msgid "this inactive product"
-msgstr "this inactive product"
-
-#. module: msf_doc_import
-#: model:ir.model,name:msf_doc_import.model_wizard_import_int_line
-msgid "Import INT Lines from Excel sheet"
-msgstr "Import INT Lines from Excel sheet"
-
-#. module: msf_doc_import
-#: field:purchase.import.xml.line,dest_address_id:0
-msgid "Destination Address"
-msgstr "Destination Address"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/check_line.py:256
-#, python-format
-msgid " Code: %s"
-msgstr " Code: %s"
-
-#. module: msf_doc_import
-#: field:purchase.import.xml.line,delivery_confirmed_date:0
-#: field:purchase.line.import.xml.line,confirmed_delivery_date:0
-msgid "Confirmed Delivery Date"
-msgstr "Confirmed Delivery Date"
-
-#. module: msf_doc_import
-#: field:incoming.import.xml.line,line_number:0
-#: field:purchase.line.import.xml.line,line_number:0
-msgid "Line number"
-msgstr "Line number"
-
-#. module: msf_doc_import
-#: field:incoming.import.xml.line,prodlot_id:0
-msgid "Batch"
-msgstr "Batch"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/__init__.py:55
-#, python-format
-msgid "Batch Number"
-msgstr "Batch Number"
-
-#. module: msf_doc_import
-#: selection:wizard.import.fo.line,state:0
-#: selection:wizard.import.int.line,state:0
-#: selection:wizard.import.ir.line,state:0
-#: selection:wizard.import.po,state:0
-#: selection:wizard.import.po.line,state:0
-#: selection:wizard.import.tender.line,state:0
-msgid "Draft"
-msgstr "Draft"
-
-#. module: msf_doc_import
-#: model:ir.model,name:msf_doc_import.model_incoming_import_xml_line
-msgid "incoming.import.xml.line"
-msgstr "incoming.import.xml.line"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/initial_stock_inventory.py:357
-#: code:addons/msf_doc_import/initial_stock_inventory.py:778
-#: code:addons/msf_doc_import/purchase_order.py:296
-#: code:addons/msf_doc_import/sale_order.py:484
-#: code:addons/msf_doc_import/tender.py:242
-#, python-format
-msgid "The product in line is inactive !"
-msgstr "The product in line is inactive !"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/account.py:89
-#, python-format
-msgid "Writing a move for each currency…"
-msgstr "Writing a move for each currency…"
-
-#. module: msf_doc_import
-#: field:purchase.import.xml.line,to_correct_ok:0
-#: field:purchase.line.import.xml.line,to_correct_ok:0
-msgid "To correct?"
-msgstr "To correct?"
-
-#. module: msf_doc_import
-#: field:purchase.import.xml.line,invoice_address_id:0
-msgid "Invoicing address"
-msgstr "Invoicing address"
-
-#. module: msf_doc_import
-#: constraint:purchase.order:0
-msgid "You cannot validate this purchase order because it contains a line with an inactive product"
-msgstr "You cannot validate this purchase order because it contains a line with an inactive product"
-
-#. module: msf_doc_import
-#: constraint:purchase.order:0
-msgid "You must specify a Valid Till date."
-msgstr "You must specify a Valid Till date."
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/purchase_order.py:348
-#, python-format
-msgid "\n"
-" We use the price mechanism to compute the Price Unit."
-msgstr "\n"
-" We use the price mechanism to compute the Price Unit."
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/initial_stock_inventory.py:658
-#, python-format
-msgid "The date was not specified or so we took the one from the parent."
-msgstr "The date was not specified or so we took the one from the parent."
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/sale_order.py:313
-#, python-format
-msgid "You should have exactly 8 columns in this order:\n"
-"#Product Code*, Product Description*, Quantity*, Product UoM*, Unit Price*, Delivery Requested Date*, Currency*, Comment. "
-msgstr "You should have exactly 8 columns in this order:\n"
-"#Product Code*, Product Description*, Quantity*, Product UoM*, Unit Price*, Delivery Requested Date*, Currency*, Comment. "
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/__init__.py:44
-#: code:addons/msf_doc_import/wizard/__init__.py:49
-#: code:addons/msf_doc_import/wizard/__init__.py:54
-#: code:addons/msf_doc_import/wizard/__init__.py:59
-#: code:addons/msf_doc_import/wizard/__init__.py:64
-#: code:addons/msf_doc_import/wizard/wizard_import_po_line.py:147
-#: field:incoming.import.xml.line,quantity:0
-#: field:purchase.line.import.xml.line,product_qty:0
-#, python-format
-msgid "Quantity"
-msgstr "Quantity"
-
-#. module: msf_doc_import
-#: field:stock.partial.picking,import_error_ok:0
-msgid "error"
-msgstr "error"
-
-#. module: msf_doc_import
-#: constraint:stock.move:0
-#: constraint:stock.picking:0
-msgid "Wrong reason type for an OUT created from scratch."
-msgstr "Wrong reason type for an OUT created from scratch."
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/wiz_common_import.py:84
-#, python-format
-msgid "The column \"%s\" is not taken into account. Please remove it. The list of columns accepted is: %s"
-msgstr "The column \"%s\" is not taken into account. Please remove it. The list of columns accepted is: %s"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/check_line.py:349
-#, python-format
-msgid "The UOM Name was empty. (Details: %s)"
-msgstr "The UOM Name was empty. (Details: %s)"
+#: model:ir.model,name:msf_doc_import.model_purchase_import_xml_line
+msgid "purchase.import.xml.line"
+msgstr "purchase.import.xml.line"
 
 #. module: msf_doc_import
 #: field:incoming.import.xml.line,wizard_id:0
@@ -779,57 +79,123 @@ msgid "Wizard"
 msgstr "Wizard"
 
 #. module: msf_doc_import
-#: model:ir.model,name:msf_doc_import.model_sale_order
-msgid "Sales Order"
-msgstr "Sales Order"
+#: code:addons/msf_doc_import/wizard/__init__.py:45
+#: code:addons/msf_doc_import/wizard/__init__.py:50
+#: code:addons/msf_doc_import/wizard/__init__.py:60
+#: code:addons/msf_doc_import/wizard/wizard_import_po_line.py:184
+#, python-format
+msgid "Comment"
+msgstr "Commentaire"
 
 #. module: msf_doc_import
-#: model:ir.model,name:msf_doc_import.model_import_cell_data
-msgid "import.cell.data"
-msgstr "import.cell.data"
-
-#. module: msf_doc_import
-#: view:msf.doc.import.accounting.errors:0
+#: field:composition.kit,file_to_import:0
+#: field:composition.kit,real_file_to_import:0
+#: field:initial.stock.inventory,file_to_import:0
+#: field:product.list,file_to_import:0
+#: field:stock.cost.reevaluation,file_to_import:0
 #: view:wizard.import.fo.line:0
-#: view:wizard.import.int.line:0
+#: field:wizard.import.fo.line,file:0
 #: view:wizard.import.ir.line:0
-#: view:wizard.import.po:0
+#: field:wizard.import.ir.line,file:0
 #: view:wizard.import.po.line:0
+#: field:wizard.import.po.line,file:0
 #: view:wizard.import.tender.line:0
-msgid "Information"
-msgstr "Information"
+#: field:wizard.import.tender.line,file:0
+msgid "File to import"
+msgstr "Fichier à importer"
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/initial_stock_inventory.py:607
-#: code:addons/msf_doc_import/initial_stock_inventory.py:616
-#, python-format
-msgid "The Average Cost was not set, we set it to 1.00."
-msgstr "The Average Cost was not set, we set it to 1.00."
+#: constraint:composition.kit:0
+msgid "Constraint error on Composition Kit."
+msgstr "Erreur de contrainte lors de la Composition Kit."
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/composition_kit.py:155
-#: code:addons/msf_doc_import/composition_kit.py:268
+#: code:addons/msf_doc_import/initial_stock_inventory.py:88
+#: code:addons/msf_doc_import/initial_stock_inventory.py:516
+#: code:addons/msf_doc_import/product_list.py:49
+#: code:addons/msf_doc_import/stock_cost_reevaluation.py:47
 #, python-format
-msgid "# lines imported: %s. %s"
-msgstr "# lines imported: %s. %s"
+msgid "All lines successfully imported"
+msgstr "Toutes les lignes ont été importées avec succès"
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/initial_stock_inventory.py:190
-#: code:addons/msf_doc_import/initial_stock_inventory.py:638
+#: field:purchase.import.xml.line,line_ignored_ok:0
+#: field:purchase.line.import.xml.line,line_ignored_ok:0
+msgid "Ignored?"
+msgstr "Ignored?"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/account.py:389
 #, python-format
-msgid "The Location has to be a string."
-msgstr "The Location has to be a string."
+msgid "Import FAILED."
+msgstr "L'import a ÉCHOUÉ."
 
 #. module: msf_doc_import
 #: constraint:purchase.order:0
-msgid "You cannot choose an internal supplier for this purchase order"
-msgstr "You cannot choose an internal supplier for this purchase order"
+msgid "You cannot validate this purchase order because it contains a line with an inactive product"
+msgstr "Vous ne pouvez pas valider ce bon de commande, car il contient une ligne avec des produits inactifs."
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/wizard_import_fo_line.py:249
+#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:321
+#, python-format
+msgid "Line %s of the Excel file was added to the file of the lines with errors : No matching line found with in the Incoming shipment for the line number %s."
+msgstr "Line %s of the Excel file was added to the file of the lines with errors : No matching line found with in the Incoming shipment for the line number %s."
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/wizard/wizard_import_fo_line.py:222
+#: code:addons/msf_doc_import/wizard/wizard_import_ir_line.py:216
+#: code:addons/msf_doc_import/wizard/wizard_import_po_line.py:211
+#: code:addons/msf_doc_import/wizard/wizard_import_tender_line.py:180
+#, python-format
+msgid "Line %s in the Excel file was added to the file of the lines with errors, it got elements outside the defined %s columns. Details: %s"
+msgstr "La ligne %s du fichier a été ajoutée au fichier des erreurs, il y a des données en dehors des %s colonnes définies. Détails: %s"
+
+#. module: msf_doc_import
+#: field:stock.partial.picking,message:0
+msgid "Report of lines' import"
+msgstr "Report of lines' import"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/purchase_order.py:416
+#: code:addons/msf_doc_import/sale_order.py:581
+#, python-format
+msgid "You have to define a valid Group (in tab \"Nomenclature Selection\"), i.e. not \"To be defined\"."
+msgstr "You have to define a valid Group (in tab \"Nomenclature Selection\"), i.e. not \"To be defined\"."
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/composition_kit.py:265
+#, python-format
+msgid "Line %s in your Excel file: %s: %s\n"
+""
+msgstr "Line %s in your Excel file: %s: %s\n"
+""
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/wizard/wizard_import_po.py:668
+#: code:addons/msf_doc_import/wizard/wizard_import_po.py:761
+#, python-format
+msgid "Line %s of the Excel file updated the line %s with the product %s in common."
+msgstr "Line %s of the Excel file updated the line %s with the product %s in common."
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/account.py:333
+#, python-format
+msgid "Line %s. Destination %s not found!"
+msgstr "Ligne %s. Destination %s non trouvée !"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/sale_order.py:457
+#, python-format
+msgid " Please define the nomenclature levels."
+msgstr " Veuillez définir les niveaux de nomenclature."
+
+#. module: msf_doc_import
+#: constraint:sale.order:0
+msgid "You cannot validate this sale order because it contains a line with an inactive product"
+msgstr "Vous ne pouvez pas valider cette commande client car elle contient des lignes avec un produit inactif"
+
+#. module: msf_doc_import
 #: code:addons/msf_doc_import/wizard/wizard_import_int_line.py:268
-#: code:addons/msf_doc_import/wizard/wizard_import_ir_line.py:242
-#: code:addons/msf_doc_import/wizard/wizard_import_tender_line.py:206
 #, python-format
 msgid " \n"
 "Importation completed in %s!\n"
@@ -851,74 +217,19 @@ msgstr " \n"
 ""
 
 #. module: msf_doc_import
-#: field:purchase.order.line,text_error:0
-#: field:sale.order.line,text_error:0
-msgid "Errors when trying to import file"
-msgstr "Errors when trying to import file"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/purchase_order.py:393
-#: code:addons/msf_doc_import/sale_order.py:527
-#: code:addons/msf_doc_import/tender.py:288
+#: code:addons/msf_doc_import/check_line.py:375
+#: code:addons/msf_doc_import/check_line.py:389
 #, python-format
-msgid "\n"
-" The UoM was not defined so we set the price unit to 0.0."
-msgstr "\n"
-" The UoM was not defined so we set the price unit to 0.0."
+msgid "The Price Unit was not set, we have taken the default \"%s\" of the product."
+msgstr "The Price Unit was not set, we have taken the default \"%s\" of the product."
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:386
-#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:509
-#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:529
-#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:559
-#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:609
-#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:692
+#: code:addons/msf_doc_import/wizard/wizard_import_int_line.py:129
 #, python-format
-msgid "Line %s of the Excel file: The product UOM did not match with the existing product UoM of the line, so we change the UoM from %s to %s."
-msgstr "Line %s of the Excel file: The product UOM did not match with the existing product UoM of the line, so we change the UoM from %s to %s."
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/account.py:400
-#, python-format
-msgid "Writing changes…"
-msgstr "Writing changes…"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/account.py:403
-#, python-format
-msgid "Import successful."
-msgstr "Import successful."
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:753
-#, python-format
-msgid "Import in progress, please leave this window open and press the button 'Update' when you think that the import is done.\n"
-"        Otherwise, you can continue to use Unifield."
-msgstr "Import in progress, please leave this window open and press the button 'Update' when you think that the import is done.\n"
-"        Otherwise, you can continue to use Unifield."
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/__init__.py:54
-#, python-format
-msgid "Kit"
-msgstr "Kit"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/wizard_import_po.py:449
-#, python-format
-msgid "The Price %s has a wrong format. Details: %s."
-msgstr "The Price %s has a wrong format. Details: %s."
-
-#. module: msf_doc_import
-#: view:composition.kit:0
-msgid "Remove lines"
-msgstr "Remove lines"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/account.py:380
-#, python-format
-msgid "Currency %s is not balanced: %s"
-msgstr "Currency %s is not balanced: %s"
+msgid "Line %s in the Excel file: You should have exactly %s columns in this order: %s \n"
+""
+msgstr "Line %s in the Excel file: You should have exactly %s columns in this order: %s \n"
+""
 
 #. module: msf_doc_import
 #: code:addons/msf_doc_import/wizard/wizard_import_po.py:221
@@ -929,15 +240,864 @@ msgstr "The column \"%s\" is not taken into account. Please remove it. The list 
 " %s"
 
 #. module: msf_doc_import
+#: code:addons/msf_doc_import/initial_stock_inventory.py:168
+#: code:addons/msf_doc_import/initial_stock_inventory.py:596
+#: code:addons/msf_doc_import/stock_cost_reevaluation.py:107
+#, python-format
+msgid "You have to fill at least the product code or the product name on each line"
+msgstr "Vous devez compléter au moins le code produit ou le nom du produit sur chaque ligne"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/__init__.py:26
+#, python-format
+msgid "\n"
+"        IMPORTANT : The first line will be ignored by the system.\n"
+"        The file should be in XML 2003 format.\n"
+"\n"
+"The columns should be in this values: "
+msgstr "\n"
+"        IMPORTANT : The first line will be ignored by the system.\n"
+"        The file should be in XML 2003 format.\n"
+"\n"
+"The columns should be in this values: "
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/account.py:322
+#, python-format
+msgid "Line %s. %s not found: %s"
+msgstr "Ligne %s. %s non trouvé : %s"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/wizard/wizard_import_po.py:326
+#, python-format
+msgid "\"Arrival Date in the country\" %s has a wrong format. Please format the cell in Excel as date."
+msgstr "\"Arrival Date in the country\" %s has a wrong format. Please format the cell in Excel as date."
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/internal_move.py:88
+#, python-format
+msgid "Warning !"
+msgstr "Warning !"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/wizard/wizard_import_fo_line.py:246
+#: code:addons/msf_doc_import/wizard/wizard_import_int_line.py:265
+#: code:addons/msf_doc_import/wizard/wizard_import_ir_line.py:239
+#: code:addons/msf_doc_import/wizard/wizard_import_po_line.py:248
+#: code:addons/msf_doc_import/wizard/wizard_import_tender_line.py:203
+#, python-format
+msgid "Reported errors for ignored lines : \n"
+""
+msgstr "Reported errors for ignored lines : \n"
+""
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/internal_move.py:88
+#, python-format
+msgid "You need to correct the following line%s: %s"
+msgstr "You need to correct the following line%s: %s"
+
+#. module: msf_doc_import
+#: field:purchase.order,import_in_progress:0
+#: field:sale.order,import_in_progress:0
+msgid "Importing"
+msgstr "Importing"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/check_line.py:508
+#, python-format
+msgid "The Currency Name was not valid, it has to be a string."
+msgstr "The Currency Name was not valid, it has to be a string."
+
+#. module: msf_doc_import
+#: view:composition.kit:0
+#: view:initial.stock.inventory:0
+#: view:product.list:0
+#: view:stock.cost.reevaluation:0
+msgid "Are you sure that you want to remove all lines?"
+msgstr "Êtes-vous sûr de vouloir supprimer toutes les lignes ?"
+
+#. module: msf_doc_import
+#: view:wizard.export.po:0
+msgid "PO lines exported"
+msgstr "PO lines exported"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/wizard/wizard_import_po.py:298
+#, python-format
+msgid "The Destination Partner %s does not exist in the Database."
+msgstr "The Destination Partner %s does not exist in the Database."
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/wizard/__init__.py:59
+#, python-format
+msgid "Cost Price"
+msgstr "Prix Coûtant"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/check_line.py:530
+#: code:addons/msf_doc_import/check_line.py:537
+#, python-format
+msgid "No comment was defined"
+msgstr "No comment was defined"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/initial_stock_inventory.py:604
+#: code:addons/msf_doc_import/initial_stock_inventory.py:613
+#, python-format
+msgid "The Average Cost was not set, we set it to the standard price of the product."
+msgstr "The Average Cost was not set, we set it to the standard price of the product."
+
+#. module: msf_doc_import
+#: field:incoming.import.xml.line,line_values:0
+msgid "Line values"
+msgstr "Line values"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/wizard/wizard_import_po_line.py:196
+#: code:addons/msf_doc_import/wizard/wizard_import_tender_line.py:166
+#, python-format
+msgid "Product Qty should be greater than 0.00"
+msgstr "La qté du produit doit être supérieure à 0.00"
+
+#. module: msf_doc_import
+#: selection:purchase.import.xml.line,transport_type:0
+msgid "Air"
+msgstr "Air"
+
+#. module: msf_doc_import
+#: help:composition.kit,real_file_to_import:0
+msgid "You can use the template of the export for the format that you need to use. \n"
+" \n"
+"                                             The file should be in XML Spreadsheet 2003 format. \n"
+" The columns should be in this order : \n"
+"                                             Module*, Product Code*, Product Description*, Quantity*, Product UoM*, Asset, Batch Number and Expiry Date"
+msgstr "You can use the template of the export for the format that you need to use. \n"
+" \n"
+"                                             The file should be in XML Spreadsheet 2003 format. \n"
+" The columns should be in this order : \n"
+"                                             Module*, Product Code*, Product Description*, Quantity*, Product UoM*, Asset, Batch Number and Expiry Date"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/wizard/wizard_import_int_line.py:326
+#, python-format
+msgid "Import in progress, please leave this window open and press the button 'Update' when you think that the import is done.\n"
+"Otherwise, you can continue to use Unifield."
+msgstr "Import in progress, please leave this window open and press the button 'Update' when you think that the import is done.\n"
+"Otherwise, you can continue to use Unifield."
+
+#. module: msf_doc_import
+#: field:wizard.import.int.line,state:0
+msgid "State"
+msgstr "State"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/wizard/wizard_import_po.py:646
+#, python-format
+msgid "Line %s of the Excel file updated the PO line %s with the product %s."
+msgstr "Line %s of the Excel file updated the PO line %s with the product %s."
+
+#. module: msf_doc_import
+#: field:msf.doc.import.accounting,state:0
+#: field:wizard.import.po,state:0
+msgid "State"
+msgstr "État"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/composition_kit.py:155
+#: code:addons/msf_doc_import/composition_kit.py:268
+#, python-format
+msgid "# lines imported: %s. %s"
+msgstr "# lignes importées: %s. %s"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/wizard/wizard_import_po.py:388
+#, python-format
+msgid "The Line %s has a wrong value. Details: %s."
+msgstr "The Line %s has a wrong value. Details: %s."
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/wizard/wizard_import_po.py:438
+#, python-format
+msgid "The UOM %s was not found in the DataBase."
+msgstr "The UOM %s was not found in the DataBase."
+
+#. module: msf_doc_import
+#: model:ir.model,name:msf_doc_import.model_wizard_import_po_line
+msgid "Import PO Lines from Excel sheet"
+msgstr "Import PO Lines from Excel sheet"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/check_line.py:335
+#, python-format
+msgid "The UOM imported was not in the same category than the UOM of the product so we took the UOM of the product instead."
+msgstr "The UOM imported was not in the same category than the UOM of the product so we took the UOM of the product instead."
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/wizard/wizard_import_po.py:527
+#, python-format
+msgid "Line %s in the Excel file was added to the file of the lines with errors because it got elements that do not fit the template. Then, none of the lines are updated. \n"
+" Please make sure that all the lines are within the template. \n"
+""
+msgstr "Line %s in the Excel file was added to the file of the lines with errors because it got elements that do not fit the template. Then, none of the lines are updated. \n"
+" Please make sure that all the lines are within the template. \n"
+""
+
+#. module: msf_doc_import
+#: model:ir.model,name:msf_doc_import.model_initial_stock_inventory
+#: model:ir.model,name:msf_doc_import.model_stock_inventory
+msgid "Inventory"
+msgstr "Inventaire"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/check_line.py:224
+#, python-format
+msgid "The location was not valid."
+msgstr "The location was not valid."
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/account.py:192
+#, python-format
+msgid "Copying file…"
+msgstr "Copie du fichier…"
+
+#. module: msf_doc_import
+#: selection:wizard.import.fo.line,state:0
+#: selection:wizard.import.ir.line,state:0
+#: selection:wizard.import.po.line,state:0
+#: selection:wizard.import.tender.line,state:0
+msgid "In Progress"
+msgstr "En Cours"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/account.py:262
+#, python-format
+msgid "Line %s. Currency not found: %s"
+msgstr "Ligne %s. Monnaie non trouvée : %s"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/sale_order.py:548
+#: code:addons/msf_doc_import/tender.py:304
+#, python-format
+msgid "Wrong Product UOM !"
+msgstr "UdM Produit incorrecte !"
+
+#. module: msf_doc_import
+#: field:msf.doc.import.accounting.lines,document_date:0
+msgid "Document date"
+msgstr "Document date"
+
+#. module: msf_doc_import
+#: constraint:purchase.order:0
+msgid "You must specify a Valid Till date."
+msgstr "Spécifiez une date de validité 'Valide Jusque'."
+
+#. module: msf_doc_import
+#: field:msf.doc.import.accounting.errors,name:0
+#: field:msf.doc.import.accounting.lines,description:0
+msgid "Description"
+msgstr "Description"
+
+#. module: msf_doc_import
+#: sql_constraint:composition.kit:0
+msgid "Kit Composition List Reference must be unique for a given product."
+msgstr "Référence de la Liste de Composition de kit doit être unique pour un produit donné."
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/check_line.py:300
+#, python-format
+msgid "The Product Quantity was not a number and it is required to be greater than 0, it is set to 1 by default."
+msgstr "La quantité n'était pas un nombre et doit être supérieure à 0, par défaut elle est mise à 1."
+
+#. module: msf_doc_import
+#: field:incoming.import.xml.line,file_line_number:0
+#: field:purchase.import.xml.line,file_line_number:0
+#: field:purchase.line.import.xml.line,file_line_number:0
+msgid "File line numbers"
+msgstr "File line numbers"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/check_line.py:266
+#: code:addons/msf_doc_import/check_line.py:270
+#, python-format
+msgid " Product Code to be defined"
+msgstr " Product Code to be defined"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:493
+#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:593
+#: code:addons/msf_doc_import/wizard/wizard_import_po.py:736
+#, python-format
+msgid "Line %s of the Excel file was added to the file of the lines with errors : %s"
+msgstr "Line %s of the Excel file was added to the file of the lines with errors : %s"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/wizard/__init__.py:44
+#: code:addons/msf_doc_import/wizard/__init__.py:49
+#: code:addons/msf_doc_import/wizard/__init__.py:54
+#: code:addons/msf_doc_import/wizard/__init__.py:59
+#: code:addons/msf_doc_import/wizard/__init__.py:64
+#, python-format
+msgid "Product Description"
+msgstr "Description Produit"
+
+#. module: msf_doc_import
+#: model:ir.model,name:msf_doc_import.model_wizard_import_po
+msgid "Import PO from Excel sheet"
+msgstr "Import PO from Excel sheet"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/initial_stock_inventory.py:150
+#: code:addons/msf_doc_import/initial_stock_inventory.py:578
+#, python-format
+msgid "No Product Description"
+msgstr "Aucune description du produit"
+
+#. module: msf_doc_import
+#: model:ir.model,name:msf_doc_import.model_msf_doc_import_accounting_lines
+msgid "msf.doc.import.accounting.lines"
+msgstr "msf.doc.import.accounting.lines"
+
+#. module: msf_doc_import
+#: field:purchase.line.import.xml.line,text_error:0
+msgid "Text Error"
+msgstr "Text Error"
+
+#. module: msf_doc_import
 #: view:msf.doc.import.accounting:0
+#: view:wizard.import.po:0
+msgid "Update"
+msgstr "Mise à jour"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/account.py:219
+#, python-format
+msgid "'%s' column not found in file."
+msgstr "La colonne '%s' n'a pas été trouvée dans le fichier."
+
+#. module: msf_doc_import
+#: field:msf.doc.import.accounting.lines,ref:0
+msgid "Reference"
+msgstr "Reference"
+
+#. module: msf_doc_import
+#: view:wizard.import.po:0
+msgid "Go to the PO"
+msgstr "Go to the PO"
+
+#. module: msf_doc_import
+#: field:wizard.import.fo.line,filename_template:0
+#: field:wizard.import.ir.line,filename_template:0
+#: field:wizard.import.po.line,filename_template:0
+#: field:wizard.import.tender.line,filename_template:0
+msgid "Templates"
+msgstr "Modèles"
+
+#. module: msf_doc_import
+#: model:product.nomenclature,name:msf_doc_import.nomen_tbd2
+msgid "To Be Defined2"
+msgstr "To Be Defined2"
+
+#. module: msf_doc_import
+#: field:purchase.line.import.xml.line,origin:0
+msgid "Origin"
+msgstr "Origin"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/wizard/__init__.py:44
+#: code:addons/msf_doc_import/wizard/__init__.py:49
+#: code:addons/msf_doc_import/wizard/__init__.py:54
+#: code:addons/msf_doc_import/wizard/__init__.py:59
+#: code:addons/msf_doc_import/wizard/__init__.py:64
+#: code:addons/msf_doc_import/wizard/wizard_import_po_line.py:141
+#, python-format
+msgid "Product Code"
+msgstr "Code Produit"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/account.py:292
+#, python-format
+msgid "Line %s. Document date '%s' should be inferior or equal to Posting date '%s'."
+msgstr "Ligne %s. La date de document '%s' devrait être inférieure ou égale à la date de compatibilisation '%s'."
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/initial_stock_inventory.py:158
+#: code:addons/msf_doc_import/initial_stock_inventory.py:586
+#, python-format
+msgid "The Product was not found in the list of the products."
+msgstr "The Product was not found in the list of the products."
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/wizard/__init__.py:55
+#, python-format
+msgid "Expiry Date"
+msgstr "Expiry Date"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/check_line.py:409
+#: code:addons/msf_doc_import/check_line.py:412
+#, python-format
+msgid "The date format was not correct. The date from the header has been taken."
+msgstr "The date format was not correct. The date from the header has been taken."
+
+#. module: msf_doc_import
+#: model:ir.model,name:msf_doc_import.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Ligne Bon de Commande"
+
+#. module: msf_doc_import
+#: view:wizard.import.fo.line:0
+#: view:wizard.import.int.line:0
+#: view:wizard.import.ir.line:0
+#: view:wizard.import.po.line:0
+#: view:wizard.import.tender.line:0
+msgid "Import of lines"
+msgstr "Import of lines"
+
+#. module: msf_doc_import
+#: selection:purchase.import.xml.line,transport_type:0
+msgid "Road"
+msgstr "Road"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/account.py:413
+#, python-format
+msgid "An error occured. %s: %s"
+msgstr "Une erreur est survenue. %s: %s"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/check_line.py:391
+#, python-format
+msgid "Neither Price nor Product found."
+msgstr "Neither Price nor Product found."
+
+#. module: msf_doc_import
+#: view:wizard.import.po:0
+msgid "Import po"
+msgstr "Import po"
+
+#. module: msf_doc_import
+#: model:ir.model,name:msf_doc_import.model_wizard_import_int_line
+msgid "Import INT Lines from Excel sheet"
+msgstr "Import INT Lines from Excel sheet"
+
+#. module: msf_doc_import
+#: field:composition.kit,hide_column_error_ok:0
+#: field:tender,hide_column_error_ok:0
+msgid "Show column errors"
+msgstr "Afficher la colonne des erreurs"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/wizard/wizard_import_po.py:594
+#, python-format
+msgid "Line %s in the Excel file was added to the file of the lines with errors: the line number %s does not exist for %s \n"
+""
+msgstr "Line %s in the Excel file was added to the file of the lines with errors: the line number %s does not exist for %s \n"
+""
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/wizard/wizard_import_int_line.py:252
+#: code:addons/msf_doc_import/wizard/wizard_import_ir_line.py:226
+#: code:addons/msf_doc_import/wizard/wizard_import_tender_line.py:190
+#, python-format
+msgid "Line %s in the Excel file: %s: %s\n"
+""
+msgstr "Line %s in the Excel file: %s: %s\n"
+""
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/account.py:77
+#: code:addons/msf_doc_import/account.py:190
+#: code:addons/msf_doc_import/account.py:219
+#: code:addons/msf_doc_import/account.py:380
+#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:216
+#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:220
+#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:747
+#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:750
+#: code:addons/msf_doc_import/wizard/wizard_import_int_line.py:156
+#: code:addons/msf_doc_import/wizard/wizard_import_int_line.py:165
+#: code:addons/msf_doc_import/wizard/wizard_import_int_line.py:174
+#: selection:msf.doc.import.accounting,state:0
+#: field:purchase.import.xml.line,error_list:0
+#: field:purchase.line.import.xml.line,error_list:0
+#: view:sale.order:0
+#: field:tender.line,inactive_error:0
+#, python-format
+msgid "Error"
+msgstr "Error"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/wizard/wizard_import_po.py:847
+#, python-format
+msgid "\n"
+"Important, please do not update the Purchase Order %s\n"
+"Import in progress, please leave this window open and press the button 'Update' when you think that the import is done.\n"
+"Otherwise, you can continue to use Unifield."
+msgstr "\n"
+"Important, please do not update the Purchase Order %s\n"
+"Import in progress, please leave this window open and press the button 'Update' when you think that the import is done.\n"
+"Otherwise, you can continue to use Unifield."
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/internal_move.py:114
+#, python-format
+msgid "You have to define a valid product, i.e. not \"To be defined\"."
+msgstr "You have to define a valid product, i.e. not \"To be defined\"."
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/account.py:186
+#, python-format
+msgid "Period for migration is not open!"
+msgstr "La période de la date de migration n'est pas ouverte !"
+
+#. module: msf_doc_import
+#: help:composition.kit,file_to_import:0
+msgid "You can use the template of the export for the format that you need to use. \n"
+" \n"
+"                                        The file should be in XML Spreadsheet 2003 format. \n"
+" The columns should be in this order : \n"
+"                                        Module*, Product Code*, Product Description*, Quantity* and Product UoM*"
+msgstr "You can use the template of the export for the format that you need to use. \n"
+" \n"
+"                                        The file should be in XML Spreadsheet 2003 format. \n"
+" The columns should be in this order : \n"
+"                                        Module*, Product Code*, Product Description*, Quantity* and Product UoM*"
+
+#. module: msf_doc_import
+#: model:product.uom,name:msf_doc_import.uom_tbd
+msgid "Uom to be defined"
+msgstr "UdM à définir"
+
+#. module: msf_doc_import
+#: field:purchase.import.xml.line,dest_address_id:0
+msgid "Destination Address"
+msgstr "Destination Address"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/account.py:309
+#, python-format
+msgid "Line %s. G/L account %s not found!"
+msgstr "Ligne %s. Compte de Grand Livre %s non trouvé !"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/composition_kit.py:152
+#: code:addons/msf_doc_import/wizard/wizard_import_fo_line.py:232
+#: code:addons/msf_doc_import/wizard/wizard_import_po_line.py:220
+#, python-format
+msgid "Line %s in the Excel file: %s: %s\n"
+""
+msgstr "Ligne %s du fichier Excel: %s: %s\n"
+""
+
+#. module: msf_doc_import
+#: field:incoming.import.xml.line,line_number:0
+#: field:purchase.line.import.xml.line,line_number:0
+msgid "Line number"
+msgstr "Line number"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/wizard/__init__.py:55
+#, python-format
+msgid "Batch Number"
+msgstr "Batch Number"
+
+#. module: msf_doc_import
+#: model:ir.model,name:msf_doc_import.model_incoming_import_xml_line
+msgid "incoming.import.xml.line"
+msgstr "incoming.import.xml.line"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/wizard/wiz_common_import.py:84
+#, python-format
+msgid "The column \"%s\" is not taken into account. Please remove it. The list of columns accepted is: %s"
+msgstr "The column \"%s\" is not taken into account. Please remove it. The list of columns accepted is: %s"
+
+#. module: msf_doc_import
+#: field:incoming.import.xml.line,product_id:0
+#: field:purchase.line.import.xml.line,product_id:0
+msgid "Product"
+msgstr "Produit"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/check_line.py:342
+#, python-format
+msgid "The UOM Name was empty."
+msgstr "Le nom de l'UdM était vide."
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/check_line.py:295
+#: code:addons/msf_doc_import/check_line.py:303
+#, python-format
+msgid "The Product Quantity was not set. It is set to 1 by default."
+msgstr "The Product Quantity was not set. It is set to 1 by default."
+
+#. module: msf_doc_import
+#: field:purchase.import.xml.line,to_correct_ok:0
+#: field:purchase.line.import.xml.line,to_correct_ok:0
+msgid "To correct?"
+msgstr "To correct?"
+
+#. module: msf_doc_import
+#: field:purchase.import.xml.line,invoice_address_id:0
+msgid "Invoicing address"
+msgstr "Invoicing address"
+
+#. module: msf_doc_import
+#: constraint:tender:0
+msgid "You cannot validate this tender because it contains a line with an inactive product"
+msgstr "Vous ne pouvez pas valider cet appel d'offre car il contient une ligne avec un produit inactif"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/purchase_order.py:348
+#, python-format
+msgid "\n"
+" We use the price mechanism to compute the Price Unit."
+msgstr "\n"
+" We use the price mechanism to compute the Price Unit."
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/initial_stock_inventory.py:658
+#, python-format
+msgid "The date was not specified or so we took the one from the parent."
+msgstr "The date was not specified or so we took the one from the parent."
+
+#. module: msf_doc_import
+#: field:incoming.import.xml.line,quantity:0
+#: field:purchase.line.import.xml.line,product_qty:0
+msgid "Quantity"
+msgstr "Quantity"
+
+#. module: msf_doc_import
+#: selection:wizard.import.fo.line,state:0
+#: selection:wizard.import.ir.line,state:0
+#: selection:wizard.import.po.line,state:0
+#: selection:wizard.import.tender.line,state:0
+msgid "Done"
+msgstr "Terminé"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/account.py:342
+#, python-format
+msgid "Line %s. Cost Center %s not found!"
+msgstr "Ligne %s. Centre de coût %s non trouvé !"
+
+#. module: msf_doc_import
+#: model:ir.model,name:msf_doc_import.model_wizard_import_ir_line
+msgid "Import IR Lines from Excel sheet"
+msgstr "Importer des lignes de DI depuis Excel"
+
+#. module: msf_doc_import
+#: field:msf.doc.import.accounting.lines,destination_id:0
+msgid "Destination"
+msgstr "Destination"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/purchase_order.py:249
+#, python-format
+msgid "\n"
+" You can't have a supplier or an address 'To Be Defined', please select a consistent supplier."
+msgstr "\n"
+" Un fournisseur ou une adresse ne peut être 'À définir', veuillez sélectionner un fournisseur pertinent."
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/composition_kit.py:111
+#, python-format
+msgid "You should have exactly 5 columns in this order:\n"
+"Module, Product Code*, Product Description, Quantity and Product UOM"
+msgstr "Vous devriez avoir exactement 5 colonnes dans cet ordre:\n"
+"Module, Code Produit*, Description du Produit*, Quantité et UdM du produit"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/tender.py:72
+#, python-format
+msgid "%s been inactivated. If you want to generate RfQ from this document you have to remove/correct the line containing those inactive products (see red %s of the document)"
+msgstr "%s a été désactivé. Si vous voulez générer une demande de devis vous devez supprimer/corriger les lignes contenant ces produits inactifs (lignes en rouge %s)"
+
+#. module: msf_doc_import
+#: field:msf.doc.import.accounting,file:0
+msgid "File"
+msgstr "Dossier"
+
+#. module: msf_doc_import
+#: field:wizard.import.fo.line,fo_id:0
+#: field:wizard.import.ir.line,fo_id:0
+msgid "Field Order"
+msgstr "Commande de Terrain"
+
+#. module: msf_doc_import
+#: constraint:purchase.order:0
+msgid "If you tick the box \"cross docking\", you cannot have an other location than \"Cross docking\""
+msgstr "Si vous cochez la case \"transbordement\", vous ne pouvez pas avoir d'autre lieu que \"Transbordement\""
+
+#. module: msf_doc_import
+#: field:stock.inventory,import_error_ok:0
+msgid "Error in Import"
+msgstr "Error in Import"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/initial_stock_inventory.py:64
+#: code:addons/msf_doc_import/initial_stock_inventory.py:476
+#, python-format
+msgid "those inactive products"
+msgstr "ces produits inactifs"
+
+#. module: msf_doc_import
+#: model:ir.model,name:msf_doc_import.model_purchase_order
+#: field:purchase.line.import.xml.line,order_id:0
+#: field:wizard.import.po,po_id:0
+#: field:wizard.import.po.line,po_id:0
+msgid "Purchase Order"
+msgstr "Bon de Commande"
+
+#. module: msf_doc_import
+#: field:composition.item,to_correct_ok:0
+#: field:initial.stock.inventory.line,to_correct_ok:0
+#: field:purchase.order.line,to_correct_ok:0
+#: field:sale.order.line,to_correct_ok:0
+#: field:tender.line,to_correct_ok:0
+msgid "To correct"
+msgstr "A corriger"
+
+#. module: msf_doc_import
+#: model:ir.model,name:msf_doc_import.model_import_cell_data
+msgid "import.cell.data"
+msgstr "import.cell.data"
+
+#. module: msf_doc_import
+#: model:ir.model,name:msf_doc_import.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Ligne Commande Terrain"
+
+#. module: msf_doc_import
+#: view:msf.doc.import.accounting.errors:0
 #: view:wizard.import.fo.line:0
 #: view:wizard.import.int.line:0
 #: view:wizard.import.ir.line:0
 #: view:wizard.import.po:0
 #: view:wizard.import.po.line:0
 #: view:wizard.import.tender.line:0
+msgid "Information"
+msgstr "Information"
+
+#. module: msf_doc_import
+#: selection:msf.doc.import.accounting,state:0
+#: selection:wizard.import.int.line,state:0
+#: selection:wizard.import.po,state:0
+msgid "Done"
+msgstr "Done"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:615
+#, python-format
+msgid "Line %s of the Excel file was added to the file of the lines with errors : A line was found in the Incoming shipment but the quantity of the Excel line (%s %s) exceeds the quantity of the incoming shipment line that the system is able to split."
+msgstr "Line %s of the Excel file was added to the file of the lines with errors : A line was found in the Incoming shipment but the quantity of the Excel line (%s %s) exceeds the quantity of the incoming shipment line that the system is able to split."
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/initial_stock_inventory.py:186
+#: code:addons/msf_doc_import/initial_stock_inventory.py:634
+#, python-format
+msgid "The location was not found in the of the locations."
+msgstr "The location was not found in the of the locations."
+
+#. module: msf_doc_import
+#: view:initial.stock.inventory:0
+#: view:product.list:0
+#: view:purchase.order:0
+#: view:sale.order:0
+#: view:stock.cost.reevaluation:0
+msgid "Delete Lines"
+msgstr "Effacer Lignes"
+
+#. module: msf_doc_import
+#: field:wizard.import.fo.line,state:0
+#: field:wizard.import.ir.line,state:0
+#: field:wizard.import.po.line,state:0
+#: field:wizard.import.tender.line,state:0
+msgid "State"
+msgstr "Statut"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:481
+#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:581
+#, python-format
+msgid "Line %s of the Excel file produced a split for the line %s."
+msgstr "Line %s of the Excel file produced a split for the line %s."
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/check_line.py:452
+#, python-format
+msgid "The expiry date %s not corresponding to the expiry date of the Batch Number %s − The expiry date of the batch has been set instead."
+msgstr "The expiry date %s not corresponding to the expiry date of the Batch Number %s − The expiry date of the batch has been set instead."
+
+#. module: msf_doc_import
+#: field:purchase.import.xml.line,notes:0
+#: field:purchase.line.import.xml.line,notes:0
+msgid "Notes"
+msgstr "Notes"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:753
+#, python-format
+msgid "Import in progress, please leave this window open and press the button 'Update' when you think that the import is done.\n"
+"        Otherwise, you can continue to use Unifield."
+msgstr "Import in progress, please leave this window open and press the button 'Update' when you think that the import is done.\n"
+"        Otherwise, you can continue to use Unifield."
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/wizard/wizard_import_po.py:337
+#, python-format
+msgid "The Incoterm %s does not exist in the Database."
+msgstr "The Incoterm %s does not exist in the Database."
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/wizard/wizard_import_po.py:449
+#, python-format
+msgid "The Price %s has a wrong format. Details: %s."
+msgstr "The Price %s has a wrong format. Details: %s."
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/tender.py:277
+#, python-format
+msgid "The product UOM must be in the same category than the UOM of the product.\n"
+"The category of the UoM of the product is '%s' whereas the category of the UoM you have chosen is '%s'.\n"
+"                "
+msgstr "The product UOM must be in the same category than the UOM of the product.\n"
+"The category of the UoM of the product is '%s' whereas the category of the UoM you have chosen is '%s'.\n"
+"                "
+
+#. module: msf_doc_import
+#: field:purchase.import.xml.line,partner_ref:0
+msgid "Supplier Reference"
+msgstr "Supplier Reference"
+
+#. module: msf_doc_import
+#: field:composition.item,text_error:0
+#: field:tender.line,text_error:0
+msgid "Errors"
+msgstr "Erreurs"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/account.py:380
+#, python-format
+msgid "Currency %s is not balanced: %s"
+msgstr "Currency %s is not balanced: %s"
+
+#. module: msf_doc_import
+#: field:stock.partial.picking,import_in_progress:0
+msgid "import in progress"
+msgstr "import in progress"
+
+#. module: msf_doc_import
+#: view:wizard.import.int.line:0
+#: view:wizard.import.po:0
 msgid "Cancel"
 msgstr "Cancel"
+
+#. module: msf_doc_import
+#: sql_constraint:purchase.order:0
+#: sql_constraint:sale.order:0
+msgid "Order Reference must be unique !"
+msgstr "La Référence de la Commande doit être unique !"
 
 #. module: msf_doc_import
 #: code:addons/msf_doc_import/check_line.py:337
@@ -946,62 +1106,53 @@ msgid "The UOM Name has to be a string."
 msgstr "The UOM Name has to be a string."
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/initial_stock_inventory.py:259
+#: constraint:stock.move:0
+msgid "You must assign a batch number for this product."
+msgstr "Vous devez mentionner un numéro de lot pour ce produit."
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/check_line.py:93
+#: code:addons/msf_doc_import/check_line.py:96
+#: code:addons/msf_doc_import/initial_stock_inventory.py:298
+#: code:addons/msf_doc_import/initial_stock_inventory.py:717
 #, python-format
-msgid "This product is not Batch Number managed."
-msgstr "This product is not Batch Number managed."
+msgid "The import of lines had errors, please correct the red lines below"
+msgstr "L'importation de lignes comporte des erreurs, veuillez corriger les lignes rouges ci-dessous"
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/composition_kit.py:265
+#: code:addons/msf_doc_import/account.py:400
 #, python-format
-msgid "Line %s in your Excel file: %s: %s\n"
-""
-msgstr "Line %s in your Excel file: %s: %s\n"
-""
+msgid "Writing changes…"
+msgstr "Écriture des modifications…"
 
 #. module: msf_doc_import
-#: view:sale.order:0
-msgid "Are you sure that you want to remove all the lines of this Field order?"
-msgstr "Are you sure that you want to remove all the lines of this Field order?"
+#: field:stock.inventory,file_to_import:0
+#: field:stock.partial.picking,file_to_import:0
+#: view:wizard.import.int.line:0
+#: field:wizard.import.int.line,file:0
+#: view:wizard.import.po:0
+#: field:wizard.import.po,file:0
+msgid "File to import"
+msgstr "File to import"
 
 #. module: msf_doc_import
-#: model:ir.model,name:msf_doc_import.model_msf_doc_import_accounting_errors
-msgid "msf.doc.import.accounting.errors"
-msgstr "msf.doc.import.accounting.errors"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/wizard_import_fo_line.py:248
-#: code:addons/msf_doc_import/wizard/wizard_import_int_line.py:267
-#: code:addons/msf_doc_import/wizard/wizard_import_ir_line.py:241
-#: code:addons/msf_doc_import/wizard/wizard_import_po_line.py:251
-#: code:addons/msf_doc_import/wizard/wizard_import_tender_line.py:205
+#: code:addons/msf_doc_import/initial_stock_inventory.py:318
+#: code:addons/msf_doc_import/initial_stock_inventory.py:737
 #, python-format
-msgid " second(s)"
-msgstr " second(s)"
+msgid "You need to correct the following line%s : %s"
+msgstr "Veuillez corriger les lignes suivantes%s : %s"
 
 #. module: msf_doc_import
-#: field:initial.stock.inventory,import_error_ok:0
-#: field:stock.inventory,import_error_ok:0
-msgid "Error in Import"
-msgstr "Error in Import"
-
-#. module: msf_doc_import
-#: field:stock.partial.picking,percent_completed:0
-#: field:wizard.import.fo.line,percent_completed:0
-#: field:wizard.import.int.line,percent_completed:0
-#: field:wizard.import.ir.line,percent_completed:0
-#: field:wizard.import.po,percent_completed:0
-#: field:wizard.import.po.line,percent_completed:0
-#: field:wizard.import.tender.line,percent_completed:0
-msgid "% completed"
-msgstr "% completed"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/wizard_import_po_line.py:196
-#: code:addons/msf_doc_import/wizard/wizard_import_tender_line.py:166
+#: code:addons/msf_doc_import/account.py:286
 #, python-format
-msgid "Product Qty should be greater than 0.00"
-msgstr "Product Qty should be greater than 0.00"
+msgid "Line %s. No document date specified!"
+msgstr "Ligne %s. Aucune date de document précisée !"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/wizard/__init__.py:65
+#, python-format
+msgid "Delivery Requested Date"
+msgstr "Date de Livraison Souhaitée"
 
 #. module: msf_doc_import
 #: code:addons/msf_doc_import/internal_move.py:112
@@ -1010,98 +1161,43 @@ msgid "You have to define a valid UoM, i.e. not \"To be defined\"."
 msgstr "You have to define a valid UoM, i.e. not \"To be defined\"."
 
 #. module: msf_doc_import
-#: model:ir.model,name:msf_doc_import.model_stock_picking
-msgid "Picking List"
-msgstr "Picking List"
-
-#. module: msf_doc_import
-#: field:msf.doc.import.accounting.lines,credit:0
-msgid "Credit"
-msgstr "Credit"
-
-#. module: msf_doc_import
-#: constraint:stock.move:0
-msgid "You cannot select Service Location as Source Location."
-msgstr "You cannot select Service Location as Source Location."
-
-#. module: msf_doc_import
-#: constraint:initial.stock.inventory:0
-#: constraint:stock.inventory:0
-msgid "You must define a stock location for each line"
-msgstr "You must define a stock location for each line"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/initial_stock_inventory.py:224
-#, python-format
-msgid "No batch found for the expiry date %s.' % expiry))\n"
-"                    else:\n"
-"                        batch = batch_ids[0]\n"
-"                elif expiry and batch:\n"
-"                    b_expiry = batch_obj.browse(cr, uid, batch, context=context).life_date\n"
-"                    if expiry != b_expiry:\n"
-"                        err_exp_message = _('Expiry date inconsistent with %s"
-msgstr "No batch found for the expiry date %s.' % expiry))\n"
-"                    else:\n"
-"                        batch = batch_ids[0]\n"
-"                elif expiry and batch:\n"
-"                    b_expiry = batch_obj.browse(cr, uid, batch, context=context).life_date\n"
-"                    if expiry != b_expiry:\n"
-"                        err_exp_message = _('Expiry date inconsistent with %s"
-
-#. module: msf_doc_import
-#: constraint:sale.order.line:0
-msgid "You must select on order procurement method for Service with Reception products."
-msgstr "You must select on order procurement method for Service with Reception products."
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/initial_stock_inventory.py:62
-#: code:addons/msf_doc_import/initial_stock_inventory.py:474
-#: code:addons/msf_doc_import/purchase_order.py:104
-#: code:addons/msf_doc_import/sale_order.py:111
-#: code:addons/msf_doc_import/tender.py:70
-#, python-format
-msgid "Some products have"
-msgstr "Some products have"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/initial_stock_inventory.py:62
-#: code:addons/msf_doc_import/initial_stock_inventory.py:474
-#: code:addons/msf_doc_import/purchase_order.py:104
-#: code:addons/msf_doc_import/sale_order.py:111
-#: code:addons/msf_doc_import/tender.py:70
-#, python-format
-msgid "A product has"
-msgstr "A product has"
-
-#. module: msf_doc_import
-#: selection:msf.doc.import.accounting,state:0
-#: selection:wizard.import.fo.line,state:0
-#: selection:wizard.import.int.line,state:0
-#: selection:wizard.import.ir.line,state:0
-#: selection:wizard.import.po,state:0
-#: selection:wizard.import.po.line,state:0
-#: selection:wizard.import.tender.line,state:0
-msgid "Done"
-msgstr "Done"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/initial_stock_inventory.py:257
-#: code:addons/msf_doc_import/initial_stock_inventory.py:395
-#: code:addons/msf_doc_import/initial_stock_inventory.py:429
-#: code:addons/msf_doc_import/initial_stock_inventory.py:684
-#: code:addons/msf_doc_import/initial_stock_inventory.py:816
-#: code:addons/msf_doc_import/initial_stock_inventory.py:848
-#, python-format
-msgid "Expiry date is missing.\n"
-""
-msgstr "Expiry date is missing.\n"
-""
-
-#. module: msf_doc_import
 #: code:addons/msf_doc_import/check_line.py:99
 #, python-format
 msgid "The file doesn't contain valid line."
 msgstr "The file doesn't contain valid line."
+
+#. module: msf_doc_import
+#: field:purchase.import.xml.line,delivery_confirmed_date:0
+#: field:purchase.line.import.xml.line,confirmed_delivery_date:0
+msgid "Confirmed Delivery Date"
+msgstr "Confirmed Delivery Date"
+
+#. module: msf_doc_import
+#: constraint:stock.picking:0
+msgid "You cannot validate this document because it contains a line with an inactive product"
+msgstr "Vous ne pouvez pas valider ce document car il contient des lignes avec un produit inactif"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/initial_stock_inventory.py:239
+#: code:addons/msf_doc_import/initial_stock_inventory.py:245
+#: code:addons/msf_doc_import/initial_stock_inventory.py:666
+#: code:addons/msf_doc_import/initial_stock_inventory.py:672
+#, python-format
+msgid "The Product Quantity was not set, we set it to 0.00."
+msgstr "La quantité du produit n'est pas renseigné, nous l'avons initialisée à 0.00."
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/account.py:198
+#, python-format
+msgid "No content"
+msgstr "No content"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/initial_stock_inventory.py:607
+#: code:addons/msf_doc_import/initial_stock_inventory.py:616
+#, python-format
+msgid "The Average Cost was not set, we set it to 1.00."
+msgstr "The Average Cost was not set, we set it to 1.00."
 
 #. module: msf_doc_import
 #: field:purchase.import.xml.line,est_transport_lead_time:0
@@ -1109,18 +1205,23 @@ msgid "Est. Transport Lead Time"
 msgstr "Est. Transport Lead Time"
 
 #. module: msf_doc_import
-#: constraint:stock.move:0
-msgid "You must assign a batch number for this product."
-msgstr "You must assign a batch number for this product."
+#: code:addons/msf_doc_import/wizard/__init__.py:44
+#: code:addons/msf_doc_import/wizard/__init__.py:49
+#: code:addons/msf_doc_import/wizard/__init__.py:54
+#: code:addons/msf_doc_import/wizard/__init__.py:59
+#: code:addons/msf_doc_import/wizard/__init__.py:64
+#: code:addons/msf_doc_import/wizard/wizard_import_po_line.py:147
+#, python-format
+msgid "Quantity"
+msgstr "Quantité"
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/account.py:65
-#: code:addons/msf_doc_import/account.py:183
-#: code:addons/msf_doc_import/account.py:186
-#: code:addons/msf_doc_import/account.py:198
-#, python-format
-msgid "Warning"
-msgstr "Warning"
+#: field:wizard.import.fo.line,import_error_ok:0
+#: field:wizard.import.ir.line,import_error_ok:0
+#: field:wizard.import.po.line,import_error_ok:0
+#: field:wizard.import.tender.line,import_error_ok:0
+msgid "Error at import"
+msgstr "Erreur lors de l'import"
 
 #. module: msf_doc_import
 #: code:addons/msf_doc_import/wizard/stock_partial_picking.py:220
@@ -1137,15 +1238,16 @@ msgid "You have to define a valid UOM, i.e. not \"To be define\"."
 msgstr "You have to define a valid UOM, i.e. not \"To be define\"."
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/account.py:333
-#, python-format
-msgid "Line %s. Destination %s not found!"
-msgstr "Line %s. Destination %s not found!"
-
-#. module: msf_doc_import
 #: model:product.nomenclature,name:msf_doc_import.nomen_tbd3
 msgid "To Be Defined3"
 msgstr "To Be Defined3"
+
+#. module: msf_doc_import
+#: view:wizard.export.po:0
+#: view:wizard.import.int.line:0
+#: view:wizard.import.po:0
+msgid "Close window"
+msgstr "Close window"
 
 #. module: msf_doc_import
 #: code:addons/msf_doc_import/purchase_order.py:269
@@ -1162,34 +1264,12 @@ msgid "You have to select a product UOM in the same category than the UOM of the
 msgstr "You have to select a product UOM in the same category than the UOM of the product"
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/account.py:329
-#, python-format
-msgid "Line %s. No destination specified!"
-msgstr "Line %s. No destination specified!"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/tender.py:217
-#, python-format
-msgid "You still have lines to correct: check the red lines"
-msgstr "You still have lines to correct: check the red lines"
-
-#. module: msf_doc_import
-#: constraint:sale.order:0
-msgid "You cannot validate this sale order because it contains a line with an inactive product"
-msgstr "You cannot validate this sale order because it contains a line with an inactive product"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/account.py:305
-#, python-format
-msgid "Line %s. No G/L account specified!"
-msgstr "Line %s. No G/L account specified!"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/account.py:314
-#: field:msf.doc.import.accounting.lines,partner_id:0
-#, python-format
-msgid "Partner"
-msgstr "Partner"
+#: selection:wizard.import.fo.line,state:0
+#: selection:wizard.import.ir.line,state:0
+#: selection:wizard.import.po.line,state:0
+#: selection:wizard.import.tender.line,state:0
+msgid "Draft"
+msgstr "Brouillon"
 
 #. module: msf_doc_import
 #: code:addons/msf_doc_import/wizard/wizard_import_fo_line.py:279
@@ -1203,39 +1283,53 @@ msgid "Nothing to import"
 msgstr "Nothing to import"
 
 #. module: msf_doc_import
-#: model:ir.model,name:msf_doc_import.model_wizard_import_tender_line
-msgid "Import Tender Lines from Excel sheet"
-msgstr "Import Tender Lines from Excel sheet"
-
-#. module: msf_doc_import
-#: model:ir.model,name:msf_doc_import.model_initial_stock_inventory_line
-#: model:ir.model,name:msf_doc_import.model_stock_inventory_line
-msgid "Inventory Line"
-msgstr "Inventory Line"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/initial_stock_inventory.py:215
-#: code:addons/msf_doc_import/initial_stock_inventory.py:654
+#: code:addons/msf_doc_import/account.py:89
 #, python-format
-msgid "The date format was not good so we took the date from the parent."
-msgstr "The date format was not good so we took the date from the parent."
+msgid "Writing a move for each currency…"
+msgstr "Enregistrement d'une écriture comptable pour chaque monnaie…"
 
 #. module: msf_doc_import
-#: constraint:stock.move:0
-msgid "You must assign an asset for this product."
-msgstr "You must assign an asset for this product."
+#: view:purchase.order:0
+msgid "Are you sure that you want to remove all the lines of this Purchase order?"
+msgstr "Êtes-vous sûr de vouloir supprimer toutes les lignes de ce bon de commandes ?"
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/account.py:81
+#: code:addons/msf_doc_import/wizard/wizard_import_po.py:790
 #, python-format
-msgid "Grouping by currencies…"
-msgstr "Grouping by currencies…"
+msgid " ---------------------------------\n"
+" Errors report : \n"
+""
+msgstr " ---------------------------------\n"
+" Errors report : \n"
+""
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/account.py:200
-#, python-format
-msgid "Processing line…"
-msgstr "Processing line…"
+#: view:sale.order:0
+msgid "Are you sure that you want to remove all the lines of this Field order?"
+msgstr "Êtes-vous sûr de vouloir supprimer toutes les lignes de cette commande de terrain ?"
+
+#. module: msf_doc_import
+#: field:wizard.import.fo.line,percent_completed:0
+#: field:wizard.import.ir.line,percent_completed:0
+#: field:wizard.import.po.line,percent_completed:0
+#: field:wizard.import.tender.line,percent_completed:0
+msgid "% completed"
+msgstr "% terminé"
+
+#. module: msf_doc_import
+#: constraint:composition.kit:0
+msgid "You cannot confirm this kit because it contains a line with an inactive product"
+msgstr "Vous ne pouvez pas confirmer ce kit car il contient des lignes avec un produit inactif"
+
+#. module: msf_doc_import
+#: field:stock.partial.picking,filename_template:0
+msgid "Template"
+msgstr "Template"
+
+#. module: msf_doc_import
+#: model:product.category,name:msf_doc_import.cat_tbd
+msgid "Product Categ to be defined"
+msgstr "Catégorie du Produit à définir"
 
 #. module: msf_doc_import
 #: model:ir.model,name:msf_doc_import.model_composition_kit
@@ -1243,10 +1337,9 @@ msgid "composition.kit"
 msgstr "composition.kit"
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/composition_kit.py:62
-#, python-format
-msgid "Please fix the line with errors (red lines)"
-msgstr "Please fix the line with errors (red lines)"
+#: model:ir.model,name:msf_doc_import.model_msf_doc_import_accounting_errors
+msgid "msf.doc.import.accounting.errors"
+msgstr "msf.doc.import.accounting.errors"
 
 #. module: msf_doc_import
 #: code:addons/msf_doc_import/initial_stock_inventory.py:204
@@ -1271,6 +1364,30 @@ msgstr " Tenders should have exactly 6 columns in this order:\n"
 "#Product Code*, Product Description*, Quantity*, Product UoM*, Unit Price*, Delivery Requested Date*"
 
 #. module: msf_doc_import
+#: code:addons/msf_doc_import/wizard/wizard_import_fo_line.py:249
+#: code:addons/msf_doc_import/wizard/wizard_import_ir_line.py:242
+#: code:addons/msf_doc_import/wizard/wizard_import_tender_line.py:206
+#, python-format
+msgid " \n"
+"Importation completed in %s!\n"
+"# of imported lines : %s on %s lines\n"
+"# of ignored lines: %s\n"
+"# of lines to correct: %s\n"
+"%s\n"
+"\n"
+"%s\n"
+""
+msgstr " \n"
+"Importation terminée en  %s!\n"
+"# de lignes importées: %s sur %s lignes\n"
+"# de lignes ignorées: %s\n"
+"# de lignes à corriger: %s\n"
+"%s\n"
+"\n"
+"%s\n"
+""
+
+#. module: msf_doc_import
 #: help:initial.stock.inventory,file_to_import:0
 #: help:stock.inventory,file_to_import:0
 msgid "You can use the template of the export for the format that you need to use. \n"
@@ -1283,32 +1400,15 @@ msgstr "You can use the template of the export for the format that you need to u
 " The columns should be in this order : Product Code*, Product Description*, Initial Average Cost, Location*, Batch, Expiry Date, Quantity"
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/wizard_import_fo_line.py:222
-#: code:addons/msf_doc_import/wizard/wizard_import_int_line.py:242
-#: code:addons/msf_doc_import/wizard/wizard_import_ir_line.py:216
-#: code:addons/msf_doc_import/wizard/wizard_import_po_line.py:211
-#: code:addons/msf_doc_import/wizard/wizard_import_tender_line.py:180
+#: code:addons/msf_doc_import/tender.py:217
 #, python-format
-msgid "Line %s in the Excel file was added to the file of the lines with errors, it got elements outside the defined %s columns. Details: %s"
-msgstr "Line %s in the Excel file was added to the file of the lines with errors, it got elements outside the defined %s columns. Details: %s"
+msgid "You still have lines to correct: check the red lines"
+msgstr "Vous avez encore des lignes à corriger: vérifier les lignes rouges"
 
 #. module: msf_doc_import
-#: sql_constraint:product.list:0
-msgid "A list or sublist with the same name already exists in the system!"
-msgstr "A list or sublist with the same name already exists in the system!"
-
-#. module: msf_doc_import
-#: view:purchase.order:0
-#: view:sale.order:0
-#: view:stock.picking:0
-#: view:tender:0
-msgid "Check Lines"
-msgstr "Check Lines"
-
-#. module: msf_doc_import
-#: model:product.uom.categ,name:msf_doc_import.product_uom_tbd
-msgid "Categ uom to be defined"
-msgstr "Categ uom to be defined"
+#: constraint:stock.move:0
+msgid "You must assign an asset for this product."
+msgstr "Vous devez mentionner un bien pour ce produit."
 
 #. module: msf_doc_import
 #: field:purchase.line.import.xml.line,price_unit_defined:0
@@ -1324,101 +1424,56 @@ msgstr "Line %s: You should have exactly %s columns in this order: %s \n"
 ""
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/composition_kit.py:206
+#: code:addons/msf_doc_import/initial_stock_inventory.py:190
+#: code:addons/msf_doc_import/initial_stock_inventory.py:638
 #, python-format
-msgid "You should have exactly 8 columns in this order:\n"
-"Module*, Product Code*, Product Description*, Quantity*, Product UOM*, Asset, Batch Number, Expiry Date"
-msgstr "You should have exactly 8 columns in this order:\n"
-"Module*, Product Code*, Product Description*, Quantity*, Product UOM*, Asset, Batch Number, Expiry Date"
+msgid "The Location has to be a string."
+msgstr "La zone doit être une chaîne de caractères."
 
 #. module: msf_doc_import
-#: field:wizard.export.po,filename:0
-msgid "Filename"
-msgstr "Filename"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/check_line.py:512
-#: code:addons/msf_doc_import/check_line.py:515
-#, python-format
-msgid "The Currency Name was not found."
-msgstr "The Currency Name was not found."
-
-#. module: msf_doc_import
-#: constraint:stock.picking:0
-msgid "You cannot validate this document because it contains a line with an inactive product"
-msgstr "You cannot validate this document because it contains a line with an inactive product"
-
-#. module: msf_doc_import
-#: field:composition.item,text_error:0
 #: field:msf.doc.import.accounting,error_ids:0
-#: field:tender.line,text_error:0
 msgid "Errors"
 msgstr "Errors"
 
 #. module: msf_doc_import
-#: sql_constraint:composition.kit:0
-msgid "Kit Composition List Reference must be unique for a given product."
-msgstr "Kit Composition List Reference must be unique for a given product."
-
-#. module: msf_doc_import
-#: model:ir.model,name:msf_doc_import.model_tender
-#: field:wizard.import.tender.line,tender_id:0
-msgid "Tender"
-msgstr "Tender"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/wizard_import_po.py:527
+#: code:addons/msf_doc_import/account.py:204
 #, python-format
-msgid "Line %s in the Excel file was added to the file of the lines with errors because it got elements that do not fit the template. Then, none of the lines are updated. \n"
-" Please make sure that all the lines are within the template. \n"
-""
-msgstr "Line %s in the Excel file was added to the file of the lines with errors because it got elements that do not fit the template. Then, none of the lines are updated. \n"
-" Please make sure that all the lines are within the template. \n"
-""
+msgid "Reading headers…"
+msgstr "Lecture des entêtes…"
+
+#. module: msf_doc_import
+#: help:stock.cost.reevaluation,file_to_import:0
+msgid "You can use the template of the export for the format that you need to use. \n"
+" The file should be in XML Spreadsheet 2003 format. \n"
+" The columns should be in this order : Product Code*, Product Description*, Initial Average Cost, Location*, Batch, Expiry Date, Quantity"
+msgstr "Vous pouvez utiliser le modèle de l'exportation pour le format que vous devez utiliser. \n"
+" Le fichier devrait être au format Tableur XML 2003. \n"
+" Les colonnes devraient être dans l'ordre suivant : Code Produit*, Description du Produit*, Coût moyen initial, Lieu*, Lot, Date d'expiration, Quantité"
 
 #. module: msf_doc_import
 #: code:addons/msf_doc_import/wizard/__init__.py:44
 #: code:addons/msf_doc_import/wizard/__init__.py:49
-#: code:addons/msf_doc_import/wizard/__init__.py:54
-#: code:addons/msf_doc_import/wizard/__init__.py:59
-#: code:addons/msf_doc_import/wizard/__init__.py:64
-#: code:addons/msf_doc_import/wizard/wizard_import_po_line.py:141
+#: code:addons/msf_doc_import/wizard/__init__.py:65
+#: code:addons/msf_doc_import/wizard/wizard_import_po_line.py:167
 #, python-format
-msgid "Product Code"
-msgstr "Product Code"
+msgid "Price"
+msgstr "Prix"
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/account.py:389
+#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:383
+#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:506
+#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:526
+#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:556
+#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:606
+#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:689
 #, python-format
-msgid "Import FAILED."
-msgstr "Import FAILED."
+msgid "Line %s of the Excel file: The product did not match with the existing product of the line, so we change the [%s] %s to [%s] %s."
+msgstr "Line %s of the Excel file: The product did not match with the existing product of the line, so we change the [%s] %s to [%s] %s."
 
 #. module: msf_doc_import
 #: field:purchase.import.xml.line,transport_type:0
 msgid "Transport Mode"
 msgstr "Transport Mode"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/product_list.py:93
-#, python-format
-msgid "Line %s - The Product [%s] %s was not found in the list of products"
-msgstr "Line %s - The Product [%s] %s was not found in the list of products"
-
-#. module: msf_doc_import
-#: model:ir.model,name:msf_doc_import.model_stock_cost_reevaluation
-msgid "Cost reevaluation"
-msgstr "Cost reevaluation"
-
-#. module: msf_doc_import
-#: view:wizard.import.po:0
-msgid "Import po"
-msgstr "Import po"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:615
-#, python-format
-msgid "Line %s of the Excel file was added to the file of the lines with errors : A line was found in the Incoming shipment but the quantity of the Excel line (%s %s) exceeds the quantity of the incoming shipment line that the system is able to split."
-msgstr "Line %s of the Excel file was added to the file of the lines with errors : A line was found in the Incoming shipment but the quantity of the Excel line (%s %s) exceeds the quantity of the incoming shipment line that the system is able to split."
 
 #. module: msf_doc_import
 #: code:addons/msf_doc_import/wizard/wizard_import_po.py:268
@@ -1427,23 +1482,29 @@ msgid "The Est. Transport Lead Time %s has a wrong value. Details: %s."
 msgstr "The Est. Transport Lead Time %s has a wrong value. Details: %s."
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/account.py:171
-#, python-format
-msgid "Cleaning up old imports…"
-msgstr "Cleaning up old imports…"
+#: field:wizard.export.po,file:0
+msgid "File to export"
+msgstr "Fichier à exporter"
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/account.py:318
-#: field:msf.doc.import.accounting.lines,employee_id:0
-#, python-format
-msgid "Employee"
-msgstr "Employee"
+#: field:purchase.line.import.xml.line,show_msg_ok:0
+msgid "To show?"
+msgstr "To show?"
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/check_line.py:257
+#: code:addons/msf_doc_import/initial_stock_inventory.py:647
 #, python-format
-msgid "Product code doesn't exist in the DB."
-msgstr "Product code doesn't exist in the DB."
+msgid "The Batch has to be a string."
+msgstr "The Batch has to be a string."
+
+#. module: msf_doc_import
+#: field:initial.stock.inventory.line,inactive_error:0
+#: field:purchase.line.import.xml.line,comment:0
+#: field:purchase.order.line,inactive_error:0
+#: field:sale.order.line,inactive_error:0
+#: field:stock.inventory.line,inactive_error:0
+msgid "Comment"
+msgstr "Comment"
 
 #. module: msf_doc_import
 #: help:stock.partial.picking,file_to_import:0
@@ -1466,20 +1527,14 @@ msgid "Line %s in the Excel file was ignored. Details: %s"
 msgstr "Line %s in the Excel file was ignored. Details: %s"
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/wizard_import_po.py:465
-#, python-format
-msgid "\"The Delivery Confirmed Date\" %s has a wrong format. Please format the cell in Excel as date."
-msgstr "\"The Delivery Confirmed Date\" %s has a wrong format. Please format the cell in Excel as date."
+#: view:stock.inventory:0
+msgid "Delete Lines"
+msgstr "Delete Lines"
 
 #. module: msf_doc_import
-#: field:wizard.import.fo.line,import_error_ok:0
-#: field:wizard.import.int.line,import_error_ok:0
-#: field:wizard.import.ir.line,import_error_ok:0
-#: field:wizard.import.po,import_error_ok:0
-#: field:wizard.import.po.line,import_error_ok:0
-#: field:wizard.import.tender.line,import_error_ok:0
-msgid "Error at import"
-msgstr "Error at import"
+#: field:purchase.import.xml.line,dest_partner_id:0
+msgid "Destination partner"
+msgstr "Destination partner"
 
 #. module: msf_doc_import
 #: field:msf.doc.import.accounting,filename:0
@@ -1487,55 +1542,54 @@ msgid "Imported filename"
 msgstr "Imported filename"
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/initial_stock_inventory.py:150
-#: code:addons/msf_doc_import/initial_stock_inventory.py:578
+#: model:ir.model,name:msf_doc_import.model_sale_order
+msgid "Sales Order"
+msgstr "Commande de Terrain"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/check_line.py:377
 #, python-format
-msgid "No Product Description"
-msgstr "No Product Description"
+msgid "The Price and Product were not found."
+msgstr "Le prix et le produit n'ont pas été trouvé."
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/wizard_import_po_line.py:252
+#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:386
+#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:509
+#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:529
+#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:559
+#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:609
+#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:692
 #, python-format
-msgid " \n"
-"%s\n"
-"Importation completed in %s!\n"
-"# of imported lines : %s on %s lines\n"
-"# of ignored lines: %s\n"
-"# of lines to correct: %s\n"
-"%s\n"
-"\n"
-"%s\n"
-""
-msgstr " \n"
-"%s\n"
-"Importation completed in %s!\n"
-"# of imported lines : %s on %s lines\n"
-"# of ignored lines: %s\n"
-"# of lines to correct: %s\n"
-"%s\n"
-"\n"
-"%s\n"
-""
+msgid "Line %s of the Excel file: The product UOM did not match with the existing product UoM of the line, so we change the UoM from %s to %s."
+msgstr "Line %s of the Excel file: The product UOM did not match with the existing product UoM of the line, so we change the UoM from %s to %s."
 
 #. module: msf_doc_import
-#: field:msf.doc.import.accounting.lines,destination_id:0
-msgid "Destination"
-msgstr "Destination"
+#: code:addons/msf_doc_import/initial_stock_inventory.py:62
+#: code:addons/msf_doc_import/initial_stock_inventory.py:474
+#: code:addons/msf_doc_import/purchase_order.py:104
+#: code:addons/msf_doc_import/sale_order.py:111
+#: code:addons/msf_doc_import/tender.py:70
+#, python-format
+msgid "Some products have"
+msgstr "Certains produits ont"
 
 #. module: msf_doc_import
-#: view:composition.kit:0
-#: view:initial.stock.inventory:0
-#: view:product.list:0
-#: view:stock.cost.reevaluation:0
 #: view:stock.inventory:0
 msgid "Are you sure that you want to remove all lines?"
 msgstr "Are you sure that you want to remove all lines?"
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/account.py:219
+#: code:addons/msf_doc_import/purchase_order.py:261
+#: code:addons/msf_doc_import/sale_order.py:459
 #, python-format
-msgid "'%s' column not found in file."
-msgstr "'%s' column not found in file."
+msgid "You need to correct the following line%s: %s"
+msgstr "Vous devez corriger les lignes suivantes%s: %s"
+
+#. module: msf_doc_import
+#: constraint:stock.move:0
+#: constraint:stock.picking:0
+msgid "Wrong reason type for an OUT created from scratch."
+msgstr "Mauvais type de motif pour une livraison OUT créée à partir de rien."
 
 #. module: msf_doc_import
 #: code:addons/msf_doc_import/wizard/wizard_import_po.py:462
@@ -1544,52 +1598,42 @@ msgid "\"The Delivery Confirmed Date\" has a wrong format and was reset to \"30-
 msgstr "\"The Delivery Confirmed Date\" has a wrong format and was reset to \"30-12-1899\" which is the default Excel date."
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/account.py:198
+#: field:incoming.import.xml.line,prodlot_id:0
+msgid "Batch"
+msgstr "Lot"
+
+#. module: msf_doc_import
+#: selection:wizard.import.int.line,state:0
+#: selection:wizard.import.po,state:0
+msgid "Draft"
+msgstr "Draft"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/initial_stock_inventory.py:357
+#: code:addons/msf_doc_import/initial_stock_inventory.py:778
+#: code:addons/msf_doc_import/purchase_order.py:296
+#: code:addons/msf_doc_import/sale_order.py:484
+#: code:addons/msf_doc_import/tender.py:242
 #, python-format
-msgid "No content"
-msgstr "No content"
+msgid "The product in line is inactive !"
+msgstr "Le produit sur la ligne est incatif !"
 
 #. module: msf_doc_import
-#: view:wizard.import.fo.line:0
-#: view:wizard.import.int.line:0
-#: view:wizard.import.ir.line:0
-#: view:wizard.import.po:0
-#: view:wizard.import.po.line:0
-#: view:wizard.import.tender.line:0
-msgid "Import file"
-msgstr "Import file"
-
-#. module: msf_doc_import
-#: constraint:tender:0
-msgid "You cannot validate this tender because it contains a line with an inactive product"
-msgstr "You cannot validate this tender because it contains a line with an inactive product"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/initial_stock_inventory.py:604
-#: code:addons/msf_doc_import/initial_stock_inventory.py:613
+#: code:addons/msf_doc_import/wizard/wizard_import_fo_line.py:200
+#: code:addons/msf_doc_import/wizard/wizard_import_int_line.py:223
+#: code:addons/msf_doc_import/wizard/wizard_import_ir_line.py:195
 #, python-format
-msgid "The Average Cost was not set, we set it to the standard price of the product."
-msgstr "The Average Cost was not set, we set it to the standard price of the product."
+msgid "Product Quantity must be greater than zero."
+msgstr "Product Quantity must be greater than zero."
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/initial_stock_inventory.py:239
-#: code:addons/msf_doc_import/initial_stock_inventory.py:245
-#: code:addons/msf_doc_import/initial_stock_inventory.py:666
-#: code:addons/msf_doc_import/initial_stock_inventory.py:672
+#: code:addons/msf_doc_import/check_line.py:339
 #, python-format
-msgid "The Product Quantity was not set, we set it to 0.00."
-msgstr "The Product Quantity was not set, we set it to 0.00."
+msgid "The UOM Name was not valid."
+msgstr "Le nom de l'UdM était invalide."
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/account.py:373
-#, python-format
-msgid "Line %s. A problem occured for line registration. Please contact an Administrator."
-msgstr "Line %s. A problem occured for line registration. Please contact an Administrator."
-
-#. module: msf_doc_import
-#: field:composition.kit,hide_column_error_ok:0
 #: field:sale.order,hide_column_error_ok:0
-#: field:tender,hide_column_error_ok:0
 msgid "Show column errors"
 msgstr "Show column errors"
 
@@ -1604,87 +1648,67 @@ msgid "Import PO confirmation"
 msgstr "Import PO confirmation"
 
 #. module: msf_doc_import
-#: selection:purchase.import.xml.line,transport_type:0
-msgid "Air"
-msgstr "Air"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/sale_order.py:549
-#: code:addons/msf_doc_import/tender.py:305
+#: code:addons/msf_doc_import/wizard/wizard_import_po.py:370
 #, python-format
-msgid "You have to select a product UOM in the same category than the purchase UOM of the product"
-msgstr "You have to select a product UOM in the same category than the purchase UOM of the product"
+msgid "The Purchase Order %s was not found in the DataBase."
+msgstr "The Purchase Order %s was not found in the DataBase."
 
 #. module: msf_doc_import
-#: field:composition.kit,file_to_import:0
-#: field:composition.kit,real_file_to_import:0
-#: field:initial.stock.inventory,file_to_import:0
-#: field:product.list,file_to_import:0
-#: field:stock.cost.reevaluation,file_to_import:0
-#: field:stock.inventory,file_to_import:0
-#: field:stock.partial.picking,file_to_import:0
-#: view:wizard.import.fo.line:0
-#: field:wizard.import.fo.line,file:0
-#: view:wizard.import.int.line:0
-#: field:wizard.import.int.line,file:0
-#: view:wizard.import.ir.line:0
-#: field:wizard.import.ir.line,file:0
-#: view:wizard.import.po:0
-#: field:wizard.import.po,file:0
-#: view:wizard.import.po.line:0
-#: field:wizard.import.po.line,file:0
-#: view:wizard.import.tender.line:0
-#: field:wizard.import.tender.line,file:0
-msgid "File to import"
-msgstr "File to import"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:383
-#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:506
-#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:526
-#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:556
-#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:606
-#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:689
+#: code:addons/msf_doc_import/wizard/wizard_import_int_line.py:267
 #, python-format
-msgid "Line %s of the Excel file: The product did not match with the existing product of the line, so we change the [%s] %s to [%s] %s."
-msgstr "Line %s of the Excel file: The product did not match with the existing product of the line, so we change the [%s] %s to [%s] %s."
+msgid " second(s)"
+msgstr " second(s)"
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/account.py:338
+#: field:wizard.import.int.line,import_error_ok:0
+#: field:wizard.import.po,import_error_ok:0
+msgid "Error at import"
+msgstr "Error at import"
+
+#. module: msf_doc_import
+#: field:msf.doc.import.accounting.lines,credit:0
+msgid "Credit"
+msgstr "Credit"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/check_line.py:256
 #, python-format
-msgid "Line %s. No cost center specified!"
-msgstr "Line %s. No cost center specified!"
+msgid " Code: %s"
+msgstr " Code: %s"
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/account.py:289
+#: code:addons/msf_doc_import/account.py:65
 #, python-format
-msgid "Line %s. No posting date specified!"
-msgstr "Line %s. No posting date specified!"
+msgid "No migration journal found!"
+msgstr "Aucun journal de migration trouvé !"
 
 #. module: msf_doc_import
-#: field:initial.stock.inventory.line,inactive_product:0
-#: field:purchase.order.line,inactive_product:0
-#: field:sale.order.line,inactive_product:0
-#: field:stock.inventory.line,inactive_product:0
-#: field:tender.line,inactive_product:0
-msgid "Product is inactive"
-msgstr "Product is inactive"
+#: field:purchase.order.line,text_error:0
+#: field:sale.order.line,text_error:0
+msgid "Errors when trying to import file"
+msgstr "Erreur lors de la tentative d'importation"
 
 #. module: msf_doc_import
-#: field:composition.item,to_correct_ok:0
-#: field:initial.stock.inventory.line,to_correct_ok:0
-#: field:purchase.order.line,to_correct_ok:0
-#: field:sale.order.line,to_correct_ok:0
 #: field:stock.inventory.line,to_correct_ok:0
-#: field:tender.line,to_correct_ok:0
 msgid "To correct"
 msgstr "To correct"
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/account.py:342
+#: code:addons/msf_doc_import/wizard/wizard_import_fo_line.py:248
+#: code:addons/msf_doc_import/wizard/wizard_import_ir_line.py:241
+#: code:addons/msf_doc_import/wizard/wizard_import_po_line.py:251
+#: code:addons/msf_doc_import/wizard/wizard_import_tender_line.py:205
 #, python-format
-msgid "Line %s. Cost Center %s not found!"
-msgstr "Line %s. Cost Center %s not found!"
+msgid " second(s)"
+msgstr " seconde(s)"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/composition_kit.py:206
+#, python-format
+msgid "You should have exactly 8 columns in this order:\n"
+"Module*, Product Code*, Product Description*, Quantity*, Product UOM*, Asset, Batch Number, Expiry Date"
+msgstr "Vous devriez avoir exactement 8 colonnes dans cet ordre:\n"
+"Module, Code Produit*, Description du Produit*, Quantité et UdM du produit, Bien, Numéro de lot, Date d'expiration"
 
 #. module: msf_doc_import
 #: code:addons/msf_doc_import/purchase_order.py:419
@@ -1694,38 +1718,21 @@ msgid "You have to define a valid Family (in tab \"Nomenclature Selection\"), i.
 msgstr "You have to define a valid Family (in tab \"Nomenclature Selection\"), i.e. not \"To be defined\"."
 
 #. module: msf_doc_import
-#: model:ir.model,name:msf_doc_import.model_purchase_order_line
-msgid "Purchase Order Line"
-msgstr "Purchase Order Line"
-
-#. module: msf_doc_import
-#: model:ir.model,name:msf_doc_import.model_wiz_common_import
-msgid "wiz.common.import"
-msgstr "wiz.common.import"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/purchase_order.py:384
-#: code:addons/msf_doc_import/sale_order.py:518
+#: code:addons/msf_doc_import/account.py:338
 #, python-format
-msgid "\n"
-" You have to select a product UOM in the same category than the UOM of the product."
-msgstr "\n"
-" You have to select a product UOM in the same category than the UOM of the product."
+msgid "Line %s. No cost center specified!"
+msgstr "Ligne %s. Aucun centre de coût précisé !"
 
 #. module: msf_doc_import
-#: model:ir.module.module,shortdesc:msf_doc_import.module_meta_information
-msgid "Import Files in Excel Format"
-msgstr "Import Files in Excel Format"
+#: view:msf.doc.import.accounting:0
+msgid "Validate"
+msgstr "Valider"
 
 #. module: msf_doc_import
-#: view:initial.stock.inventory:0
-#: view:product.list:0
-#: view:purchase.order:0
-#: view:sale.order:0
-#: view:stock.cost.reevaluation:0
-#: view:stock.inventory:0
-msgid "Delete Lines"
-msgstr "Delete Lines"
+#: code:addons/msf_doc_import/wizard/wizard_import_po.py:465
+#, python-format
+msgid "\"The Delivery Confirmed Date\" %s has a wrong format. Please format the cell in Excel as date."
+msgstr "\"The Delivery Confirmed Date\" %s has a wrong format. Please format the cell in Excel as date."
 
 #. module: msf_doc_import
 #: code:addons/msf_doc_import/check_line.py:497
@@ -1735,310 +1742,11 @@ msgid "The imported currency '%s' was not consistent and has been replaced by th
 msgstr "The imported currency '%s' was not consistent and has been replaced by the                                 currency '%s' of the order, please check the price."
 
 #. module: msf_doc_import
-#: model:ir.model,name:msf_doc_import.model_sale_order_line
-msgid "Sales Order Line"
-msgstr "Sales Order Line"
-
-#. module: msf_doc_import
-#: field:msf.doc.import.accounting.lines,date:0
-msgid "Posting date"
-msgstr "Posting date"
-
-#. module: msf_doc_import
-#: model:ir.model,name:msf_doc_import.model_wizard_import_fo_line
-msgid "Import FO Lines from Excel sheet"
-msgstr "Import FO Lines from Excel sheet"
-
-#. module: msf_doc_import
-#: field:purchase.line.import.xml.line,show_msg_ok:0
-msgid "To show?"
-msgstr "To show?"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/wizard_import_po.py:310
+#: code:addons/msf_doc_import/account.py:318
+#: field:msf.doc.import.accounting.lines,employee_id:0
 #, python-format
-msgid "The Invoicing Address %s does not exist in the Database."
-msgstr "The Invoicing Address %s does not exist in the Database."
-
-#. module: msf_doc_import
-#: selection:purchase.import.xml.line,transport_type:0
-msgid "Road"
-msgstr "Road"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/purchase_order.py:106
-#: code:addons/msf_doc_import/sale_order.py:113
-#, python-format
-msgid "%s been inactivated. If you want to validate this document you have to remove/correct the line containing those inactive products (see red %s of the document)"
-msgstr "%s been inactivated. If you want to validate this document you have to remove/correct the line containing those inactive products (see red %s of the document)"
-
-#. module: msf_doc_import
-#: constraint:initial.stock.inventory.line:0
-#: constraint:stock.inventory.line:0
-msgid "The selected product is neither Batch Number Mandatory nor Expiry Date Mandatory"
-msgstr "The selected product is neither Batch Number Mandatory nor Expiry Date Mandatory"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/wizard_import_fo_line.py:166
-#: code:addons/msf_doc_import/wizard/wizard_import_ir_line.py:171
-#: code:addons/msf_doc_import/wizard/wizard_import_po_line.py:163
-#: code:addons/msf_doc_import/wizard/wizard_import_tender_line.py:149
-#, python-format
-msgid "Line %s in the Excel file: %s\n"
-""
-msgstr "Line %s in the Excel file: %s\n"
-""
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/initial_stock_inventory.py:158
-#: code:addons/msf_doc_import/initial_stock_inventory.py:586
-#, python-format
-msgid "The Product was not found in the list of the products."
-msgstr "The Product was not found in the list of the products."
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/wizard_import_po.py:413
-#, python-format
-msgid "The Quantity %s has a wrong format. Details: %s."
-msgstr "The Quantity %s has a wrong format. Details: %s."
-
-#. module: msf_doc_import
-#: help:composition.kit,real_file_to_import:0
-msgid "You can use the template of the export for the format that you need to use. \n"
-" \n"
-"                                             The file should be in XML Spreadsheet 2003 format. \n"
-" The columns should be in this order : \n"
-"                                             Module*, Product Code*, Product Description*, Quantity*, Product UoM*, Asset, Batch Number and Expiry Date"
-msgstr "You can use the template of the export for the format that you need to use. \n"
-" \n"
-"                                             The file should be in XML Spreadsheet 2003 format. \n"
-" The columns should be in this order : \n"
-"                                             Module*, Product Code*, Product Description*, Quantity*, Product UoM*, Asset, Batch Number and Expiry Date"
-
-#. module: msf_doc_import
-#: model:ir.model,name:msf_doc_import.model_composition_item
-msgid "composition.item"
-msgstr "composition.item"
-
-#. module: msf_doc_import
-#: field:purchase.import.xml.line,notes:0
-#: field:purchase.line.import.xml.line,notes:0
-msgid "Notes"
-msgstr "Notes"
-
-#. module: msf_doc_import
-#: help:stock.cost.reevaluation,file_to_import:0
-msgid "You can use the template of the export for the format that you need to use. \n"
-" The file should be in XML Spreadsheet 2003 format. \n"
-" The columns should be in this order : Product Code*, Product Description*, Initial Average Cost, Location*, Batch, Expiry Date, Quantity"
-msgstr "You can use the template of the export for the format that you need to use. \n"
-" The file should be in XML Spreadsheet 2003 format. \n"
-" The columns should be in this order : Product Code*, Product Description*, Initial Average Cost, Location*, Batch, Expiry Date, Quantity"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/account.py:190
-#: code:addons/msf_doc_import/composition_kit.py:86
-#: code:addons/msf_doc_import/composition_kit.py:181
-#: code:addons/msf_doc_import/initial_stock_inventory.py:92
-#: code:addons/msf_doc_import/initial_stock_inventory.py:520
-#: code:addons/msf_doc_import/product_list.py:53
-#: code:addons/msf_doc_import/sale_order.py:159
-#: code:addons/msf_doc_import/sale_order.py:276
-#: code:addons/msf_doc_import/stock_cost_reevaluation.py:51
-#: code:addons/msf_doc_import/tender.py:115
-#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:216
-#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:747
-#, python-format
-msgid "Nothing to import."
-msgstr "Nothing to import."
-
-#. module: msf_doc_import
-#: model:ir.module.module,description:msf_doc_import.module_meta_information
-msgid "This module enables to import file in xls format"
-msgstr "This module enables to import file in xls format"
-
-#. module: msf_doc_import
-#: field:purchase.order.line,show_msg_ok:0
-#: field:sale.order.line,show_msg_ok:0
-msgid "Info on importation of lines"
-msgstr "Info on importation of lines"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/account.py:266
-#, python-format
-msgid "Line %s. Currency is not active: %s"
-msgstr "Line %s. Currency is not active: %s"
-
-#. module: msf_doc_import
-#: constraint:composition.item:0
-#: constraint:initial.stock.inventory.line:0
-#: constraint:stock.inventory.line:0
-#: constraint:stock.move:0
-msgid "Constraint error on Uom"
-msgstr "Constraint error on Uom"
-
-#. module: msf_doc_import
-#: constraint:stock.move:0
-msgid "You try to assign a lot which is not from the same product"
-msgstr "You try to assign a lot which is not from the same product"
-
-#. module: msf_doc_import
-#: field:wizard.import.int.line,int_id:0
-msgid "Internal Picking"
-msgstr "Internal Picking"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/initial_stock_inventory.py:108
-#, python-format
-msgid "You should have exactly 7 columns in this order:\n"
-"Product Code*, Product Description*, Location*, Batch*, Expiry Date*, Quantity*"
-msgstr "You should have exactly 7 columns in this order:\n"
-"Product Code*, Product Description*, Location*, Batch*, Expiry Date*, Quantity*"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/wizard_import_po.py:323
-#, python-format
-msgid "\"Arrival Date in the country\" has a wrong format and was reset to \"30-12-1899\" which is the default Excel date."
-msgstr "\"Arrival Date in the country\" has a wrong format and was reset to \"30-12-1899\" which is the default Excel date."
-
-#. module: msf_doc_import
-#: constraint:purchase.order:0
-#: constraint:sale.order:0
-msgid "Partner type and order type are incompatible! Please change either order type or partner."
-msgstr "Partner type and order type are incompatible! Please change either order type or partner."
-
-#. module: msf_doc_import
-#: model:ir.model,name:msf_doc_import.model_msf_doc_import_accounting
-msgid "msf.doc.import.accounting"
-msgstr "msf.doc.import.accounting"
-
-#. module: msf_doc_import
-#: constraint:composition.kit:0
-msgid "You cannot confirm this kit because it contains a line with an inactive product"
-msgstr "You cannot confirm this kit because it contains a line with an inactive product"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/account.py:223
-#, python-format
-msgid "Reading lines…"
-msgstr "Reading lines…"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/tender.py:72
-#, python-format
-msgid "%s been inactivated. If you want to generate RfQ from this document you have to remove/correct the line containing those inactive products (see red %s of the document)"
-msgstr "%s been inactivated. If you want to generate RfQ from this document you have to remove/correct the line containing those inactive products (see red %s of the document)"
-
-#. module: msf_doc_import
-#: selection:purchase.import.xml.line,transport_type:0
-msgid "Sea"
-msgstr "Sea"
-
-#. module: msf_doc_import
-#: selection:msf.doc.import.accounting,state:0
-#: selection:wizard.import.fo.line,state:0
-#: selection:wizard.import.int.line,state:0
-#: selection:wizard.import.ir.line,state:0
-#: selection:wizard.import.po,state:0
-#: selection:wizard.import.po.line,state:0
-#: selection:wizard.import.tender.line,state:0
-msgid "In Progress"
-msgstr "In Progress"
-
-#. module: msf_doc_import
-#: help:product.list,file_to_import:0
-msgid "You can use the template of the export for the format that you need to use. \n"
-"\n"
-"                                        The file should be in XML Spreadsheet 2003 format. \n"
-" The columns should be in this order : Product Code*, Product Description*, Comment"
-msgstr "You can use the template of the export for the format that you need to use. \n"
-"\n"
-"                                        The file should be in XML Spreadsheet 2003 format. \n"
-" The columns should be in this order : Product Code*, Product Description*, Comment"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/wizard_import_po.py:370
-#, python-format
-msgid "The Purchase Order %s was not found in the DataBase."
-msgstr "The Purchase Order %s was not found in the DataBase."
-
-#. module: msf_doc_import
-#: field:msf.doc.import.accounting,state:0
-#: field:wizard.import.fo.line,state:0
-#: field:wizard.import.int.line,state:0
-#: field:wizard.import.ir.line,state:0
-#: field:wizard.import.po,state:0
-#: field:wizard.import.po.line,state:0
-#: field:wizard.import.tender.line,state:0
-msgid "State"
-msgstr "State"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:260
-#, python-format
-msgid "Line %s of the Excel file was added to the file of the lines with errors. You should have exactly 7 columns in this order:\n"
-"Line Number*, Product Code*, Product Description*, Quantity, Product UOM, Batch, Expiry Date."
-msgstr "Line %s of the Excel file was added to the file of the lines with errors. You should have exactly 7 columns in this order:\n"
-"Line Number*, Product Code*, Product Description*, Quantity, Product UOM, Batch, Expiry Date."
-
-#. module: msf_doc_import
-#: field:purchase.line.import.xml.line,origin:0
-msgid "Origin"
-msgstr "Origin"
-
-#. module: msf_doc_import
-#: view:wizard.export.po:0
-msgid "File to download"
-msgstr "File to download"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/tender.py:277
-#, python-format
-msgid "The product UOM must be in the same category than the UOM of the product.\n"
-"The category of the UoM of the product is '%s' whereas the category of the UoM you have chosen is '%s'.\n"
-"                "
-msgstr "The product UOM must be in the same category than the UOM of the product.\n"
-"The category of the UoM of the product is '%s' whereas the category of the UoM you have chosen is '%s'.\n"
-"                "
-
-#. module: msf_doc_import
-#: help:composition.kit,file_to_import:0
-msgid "You can use the template of the export for the format that you need to use. \n"
-" \n"
-"                                        The file should be in XML Spreadsheet 2003 format. \n"
-" The columns should be in this order : \n"
-"                                        Module*, Product Code*, Product Description*, Quantity* and Product UoM*"
-msgstr "You can use the template of the export for the format that you need to use. \n"
-" \n"
-"                                        The file should be in XML Spreadsheet 2003 format. \n"
-" The columns should be in this order : \n"
-"                                        Module*, Product Code*, Product Description*, Quantity* and Product UoM*"
-
-#. module: msf_doc_import
-#: view:wizard.import.po:0
-msgid "Go to the PO"
-msgstr "Go to the PO"
-
-#. module: msf_doc_import
-#: model:ir.model,name:msf_doc_import.model_wizard_import_po_line
-msgid "Import PO Lines from Excel sheet"
-msgstr "Import PO Lines from Excel sheet"
-
-#. module: msf_doc_import
-#: model:product.template,name:msf_doc_import.product_tbd_product_template
-msgid "To be defined"
-msgstr "To be defined"
-
-#. module: msf_doc_import
-#: model:ir.model,name:msf_doc_import.model_product_list
-msgid "Products list"
-msgstr "Products list"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/__init__.py:55
-#, python-format
-msgid "Destination Location"
-msgstr "Destination Location"
+msgid "Employee"
+msgstr "Employé"
 
 #. module: msf_doc_import
 #: code:addons/msf_doc_import/wizard/wizard_import_po.py:555
@@ -2165,6 +1873,366 @@ msgstr "Line %s of the Excel file updated the PO %s.\" % (file_line_number+1, po
 ""
 
 #. module: msf_doc_import
+#: constraint:initial.stock.inventory.line:0
+msgid "You cannot have two lines with the same product and different average cost."
+msgstr "Vous ne pouvez pas avoir deux lignes pour le produit avec un coût moyen différent."
+
+#. module: msf_doc_import
+#: constraint:tender:0
+msgid "You cannot choose an internal supplier for this tender"
+msgstr "You cannot choose an internal supplier for this tender"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/wizard/wizard_import_po.py:310
+#, python-format
+msgid "The Invoicing Address %s does not exist in the Database."
+msgstr "The Invoicing Address %s does not exist in the Database."
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/composition_kit.py:86
+#: code:addons/msf_doc_import/composition_kit.py:181
+#: code:addons/msf_doc_import/initial_stock_inventory.py:92
+#: code:addons/msf_doc_import/initial_stock_inventory.py:520
+#: code:addons/msf_doc_import/product_list.py:53
+#: code:addons/msf_doc_import/sale_order.py:159
+#: code:addons/msf_doc_import/sale_order.py:276
+#: code:addons/msf_doc_import/stock_cost_reevaluation.py:51
+#: code:addons/msf_doc_import/tender.py:115
+#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:216
+#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:747
+#, python-format
+msgid "Nothing to import."
+msgstr "Nothing to import."
+
+#. module: msf_doc_import
+#: view:composition.kit:0
+#: view:initial.stock.inventory:0
+#: view:product.list:0
+#: view:purchase.order:0
+#: view:sale.order:0
+#: view:stock.cost.reevaluation:0
+#: view:tender:0
+msgid "Import lines"
+msgstr "Importer des lignes"
+
+#. module: msf_doc_import
+#: model:ir.actions.act_window,name:msf_doc_import.action_migration_accounting_import_wizard
+#: model:ir.ui.menu,name:msf_doc_import.menu_finance_migration_accounting
+#: view:msf.doc.import.accounting:0
+msgid "Import Migration Entries"
+msgstr "Import d'entrées de migration"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/wizard/wizard_import_fo_line.py:166
+#: code:addons/msf_doc_import/wizard/wizard_import_ir_line.py:171
+#: code:addons/msf_doc_import/wizard/wizard_import_po_line.py:163
+#: code:addons/msf_doc_import/wizard/wizard_import_tender_line.py:149
+#, python-format
+msgid "Line %s in the Excel file: %s\n"
+""
+msgstr "Line %s in the Excel file: %s\n"
+""
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/wizard/wizard_import_po.py:413
+#, python-format
+msgid "The Quantity %s has a wrong format. Details: %s."
+msgstr "The Quantity %s has a wrong format. Details: %s."
+
+#. module: msf_doc_import
+#: selection:purchase.import.xml.line,transport_type:0
+msgid "Sea"
+msgstr "Sea"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/account.py:289
+#, python-format
+msgid "Line %s. No posting date specified!"
+msgstr "Ligne %s. Aucune date de comptabilisation précisée !"
+
+#. module: msf_doc_import
+#: model:ir.model,name:msf_doc_import.model_composition_item
+msgid "composition.item"
+msgstr "composition.item"
+
+#. module: msf_doc_import
+#: model:ir.model,name:msf_doc_import.model_stock_move
+msgid "Stock Move"
+msgstr "Mouvement de Stock"
+
+#. module: msf_doc_import
+#: view:wizard.import.fo.line:0
+#: view:wizard.import.ir.line:0
+#: view:wizard.import.po.line:0
+#: view:wizard.import.tender.line:0
+msgid "Import file"
+msgstr "Import fichier"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/initial_stock_inventory.py:62
+#: code:addons/msf_doc_import/initial_stock_inventory.py:474
+#: code:addons/msf_doc_import/purchase_order.py:104
+#: code:addons/msf_doc_import/sale_order.py:111
+#: code:addons/msf_doc_import/tender.py:70
+#, python-format
+msgid "A product has"
+msgstr "Un produit a"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/account.py:403
+#, python-format
+msgid "Import successful."
+msgstr "Import réussi."
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/wizard/wizard_import_po.py:423
+#, python-format
+msgid "The Product's Code %s is not found in the database."
+msgstr "Le code du produit %s n'a pas été trouvé dans la base de données."
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/account.py:183
+#, python-format
+msgid "No period found!"
+msgstr "Aucune période comptable trouvé !"
+
+#. module: msf_doc_import
+#: constraint:purchase.order:0
+#: constraint:sale.order:0
+msgid "Partner type and order type are incompatible! Please change either order type or partner."
+msgstr "Le type de partnenaire et le type de commande sont incompatibles. Veuillez changer l'un ou l'autre."
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/account.py:171
+#, python-format
+msgid "Cleaning up old imports…"
+msgstr "Nettoyage des anciens imports…"
+
+#. module: msf_doc_import
+#: constraint:composition.item:0
+#: constraint:initial.stock.inventory.line:0
+#: constraint:stock.inventory.line:0
+#: constraint:stock.move:0
+msgid "Constraint error on Uom"
+msgstr "Constraint error on Uom"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/wizard/__init__.py:44
+#: code:addons/msf_doc_import/wizard/__init__.py:49
+#: code:addons/msf_doc_import/wizard/__init__.py:54
+#: code:addons/msf_doc_import/wizard/__init__.py:59
+#: code:addons/msf_doc_import/wizard/__init__.py:64
+#, python-format
+msgid "UoM"
+msgstr "UdM"
+
+#. module: msf_doc_import
+#: field:wizard.import.int.line,int_id:0
+msgid "Internal Picking"
+msgstr "Internal Picking"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/initial_stock_inventory.py:108
+#, python-format
+msgid "You should have exactly 7 columns in this order:\n"
+"Product Code*, Product Description*, Location*, Batch*, Expiry Date*, Quantity*"
+msgstr "You should have exactly 7 columns in this order:\n"
+"Product Code*, Product Description*, Location*, Batch*, Expiry Date*, Quantity*"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/wizard/wizard_import_po.py:323
+#, python-format
+msgid "\"Arrival Date in the country\" has a wrong format and was reset to \"30-12-1899\" which is the default Excel date."
+msgstr "\"Arrival Date in the country\" has a wrong format and was reset to \"30-12-1899\" which is the default Excel date."
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/account.py:52
+#, python-format
+msgid "Initialization…"
+msgstr "Initialisation…"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/account.py:382
+#, python-format
+msgid "Check complete. Reading potential errors or write needed changes."
+msgstr "Vérification terminée. Lecture des erreurs potentielles ou écriture des modifications nécessaires."
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/wizard/wizard_import_fo_line.py:304
+#: code:addons/msf_doc_import/wizard/wizard_import_ir_line.py:296
+#: code:addons/msf_doc_import/wizard/wizard_import_po_line.py:310
+#: code:addons/msf_doc_import/wizard/wizard_import_tender_line.py:264
+#, python-format
+msgid "Import in progress, please leave this window open and press the button 'Update' when you think that the import is done.\n"
+"Otherwise, you can continue to use Unifield."
+msgstr "Import en cours, veuillez garder la fenêtre ouverte et appuyer sur le bouton 'Mise à jour' pour vérifier l'état d'achèvement de l'import.\n"
+"Sinon, vous pouvez utiliser UniField."
+
+#. module: msf_doc_import
+#: model:ir.model,name:msf_doc_import.model_msf_doc_import_accounting
+msgid "msf.doc.import.accounting"
+msgstr "msf.doc.import.accounting"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/account.py:329
+#, python-format
+msgid "Line %s. No destination specified!"
+msgstr "Ligne %s. Aucune destination précisée !"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/wizard/wizard_import_po_line.py:252
+#, python-format
+msgid " \n"
+"%s\n"
+"Importation completed in %s!\n"
+"# of imported lines : %s on %s lines\n"
+"# of ignored lines: %s\n"
+"# of lines to correct: %s\n"
+"%s\n"
+"\n"
+"%s\n"
+""
+msgstr " \n"
+"%s\n"
+"Importation completed in %s!\n"
+"# of imported lines : %s on %s lines\n"
+"# of ignored lines: %s\n"
+"# of lines to correct: %s\n"
+"%s\n"
+"\n"
+"%s\n"
+""
+
+#. module: msf_doc_import
+#: field:wizard.import.int.line,filename_template:0
+#: field:wizard.import.po,filename_template:0
+msgid "Templates"
+msgstr "Templates"
+
+#. module: msf_doc_import
+#: selection:msf.doc.import.accounting,state:0
+#: selection:wizard.import.int.line,state:0
+#: selection:wizard.import.po,state:0
+msgid "In Progress"
+msgstr "In Progress"
+
+#. module: msf_doc_import
+#: help:product.list,file_to_import:0
+msgid "You can use the template of the export for the format that you need to use. \n"
+"\n"
+"                                        The file should be in XML Spreadsheet 2003 format. \n"
+" The columns should be in this order : Product Code*, Product Description*, Comment"
+msgstr "You can use the template of the export for the format that you need to use. \n"
+"\n"
+"                                        The file should be in XML Spreadsheet 2003 format. \n"
+" The columns should be in this order : Product Code*, Product Description*, Comment"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/account.py:77
+#, python-format
+msgid "No lines…"
+msgstr "Pas de lignes…"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/wizard/wizard_import_fo_line.py:130
+#: code:addons/msf_doc_import/wizard/wizard_import_ir_line.py:129
+#: code:addons/msf_doc_import/wizard/wizard_import_tender_line.py:114
+#, python-format
+msgid "Line %s in the Excel file: You should have exactly %s columns in this order: %s \n"
+""
+msgstr "Ligne %s du fichier: vous devriez avoir exactement %s colonnes dans cet ordre: %s \n"
+""
+
+#. module: msf_doc_import
+#: model:product.nomenclature,name:msf_doc_import.nomen_tbd1
+msgid "To Be Defined1"
+msgstr "To Be Defined1"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/wizard/wizard_import_po.py:573
+#, python-format
+msgid "Import blocked by the Line %s in the Excel file that was added to the file of the lines with errors because it needs to have at least the \"Line number\" and the \"Product\" as identifier. \n"
+" Please make sure that all the lines got at least a \"Product\" and a \"Line Number\".\n"
+""
+msgstr "Import blocked by the Line %s in the Excel file that was added to the file of the lines with errors because it needs to have at least the \"Line number\" and the \"Product\" as identifier. \n"
+" Please make sure that all the lines got at least a \"Product\" and a \"Line Number\".\n"
+""
+
+#. module: msf_doc_import
+#: view:purchase.order:0
+#: view:sale.order:0
+#: view:tender:0
+msgid "Check Lines"
+msgstr "Vérifier Lignes"
+
+#. module: msf_doc_import
+#: field:msf.doc.import.accounting.lines,debit:0
+msgid "Debit"
+msgstr "Debit"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/check_line.py:219
+#, python-format
+msgid "The Location \"%s\" does not exist on this instance."
+msgstr "The Location \"%s\" does not exist on this instance."
+
+#. module: msf_doc_import
+#: view:stock.picking:0
+msgid "Check Lines"
+msgstr "Check Lines"
+
+#. module: msf_doc_import
+#: field:initial.stock.inventory,import_error_ok:0
+msgid "Error in Import"
+msgstr "Erreur lors de l'importation"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:260
+#, python-format
+msgid "Line %s of the Excel file was added to the file of the lines with errors. You should have exactly 7 columns in this order:\n"
+"Line Number*, Product Code*, Product Description*, Quantity, Product UOM, Batch, Expiry Date."
+msgstr "Line %s of the Excel file was added to the file of the lines with errors. You should have exactly 7 columns in this order:\n"
+"Line Number*, Product Code*, Product Description*, Quantity, Product UOM, Batch, Expiry Date."
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/wizard/wizard_import_po_line.py:196
+#: code:addons/msf_doc_import/wizard/wizard_import_tender_line.py:166
+#, python-format
+msgid "Line %s in the Excel file: Details: %s\n"
+""
+msgstr "Ligne %s du fichier Excel : %s\n"
+""
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/initial_stock_inventory.py:64
+#: code:addons/msf_doc_import/initial_stock_inventory.py:476
+#, python-format
+msgid "this inactive product"
+msgstr "ce produit inactif"
+
+#. module: msf_doc_import
+#: model:product.template,name:msf_doc_import.product_tbd_product_template
+msgid "To be defined"
+msgstr "To be defined"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/wizard/__init__.py:55
+#, python-format
+msgid "Destination Location"
+msgstr "Destination Location"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/wizard/__init__.py:54
+#, python-format
+msgid "Kit"
+msgstr "Kit"
+
+#. module: msf_doc_import
+#: field:msf.doc.import.accounting.lines,period_id:0
+msgid "Period"
+msgstr "Period"
+
+#. module: msf_doc_import
 #: code:addons/msf_doc_import/check_line.py:264
 #: code:addons/msf_doc_import/initial_stock_inventory.py:141
 #: code:addons/msf_doc_import/initial_stock_inventory.py:569
@@ -2173,10 +2241,10 @@ msgid "The Product Code has to be a string."
 msgstr "The Product Code has to be a string."
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/check_line.py:342
+#: code:addons/msf_doc_import/check_line.py:349
 #, python-format
-msgid "The UOM Name was empty."
-msgstr "The UOM Name was empty."
+msgid "The UOM Name was empty. (Details: %s)"
+msgstr "Le nom de l'UdM était vide. (Détails: %s)"
 
 #. module: msf_doc_import
 #: code:addons/msf_doc_import/wizard/wizard_import_po.py:227
@@ -2187,10 +2255,10 @@ msgstr "The following columns are required for the import (case sensitive): %s.\
 " Please add the missing one."
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/check_line.py:335
-#, python-format
-msgid "The UOM imported was not in the same category than the UOM of the product so we took the UOM of the product instead."
-msgstr "The UOM imported was not in the same category than the UOM of the product so we took the UOM of the product instead."
+#: view:wizard.import.int.line:0
+#: view:wizard.import.po:0
+msgid "Import file"
+msgstr "Import file"
 
 #. module: msf_doc_import
 #: code:addons/msf_doc_import/initial_stock_inventory.py:262
@@ -2199,15 +2267,9 @@ msgid "This product is not Expiry Date managed."
 msgstr "This product is not Expiry Date managed."
 
 #. module: msf_doc_import
-#: model:product.category,name:msf_doc_import.cat_tbd
-msgid "Product Categ to be defined"
-msgstr "Product Categ to be defined"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/check_line.py:217
-#, python-format
-msgid "The Location \"%s\" is not compatible with the product of the stock move."
-msgstr "The Location \"%s\" is not compatible with the product of the stock move."
+#: field:wizard.export.po,filename:0
+msgid "Filename"
+msgstr "Filename"
 
 #. module: msf_doc_import
 #: code:addons/msf_doc_import/check_line.py:222
@@ -2216,17 +2278,9 @@ msgid "The Location Name has to be string."
 msgstr "The Location Name has to be string."
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/initial_stock_inventory.py:186
-#: code:addons/msf_doc_import/initial_stock_inventory.py:634
-#, python-format
-msgid "The location was not found in the of the locations."
-msgstr "The location was not found in the of the locations."
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/check_line.py:377
-#, python-format
-msgid "The Price and Product were not found."
-msgstr "The Price and Product were not found."
+#: constraint:purchase.order:0
+msgid "You cannot choose an internal supplier for this purchase order"
+msgstr "You cannot choose an internal supplier for this purchase order"
 
 #. module: msf_doc_import
 #: code:addons/msf_doc_import/purchase_order.py:410
@@ -2236,24 +2290,24 @@ msgid "You have to define a valid UOM, i.e. not \"To be defined\"."
 msgstr "You have to define a valid UOM, i.e. not \"To be defined\"."
 
 #. module: msf_doc_import
-#: field:incoming.import.xml.line,expiry_date:0
-msgid "Expiry date"
-msgstr "Expiry date"
-
-#. module: msf_doc_import
-#: field:incoming.import.xml.line,product_id:0
-#: field:purchase.line.import.xml.line,product_id:0
-msgid "Product"
-msgstr "Product"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/initial_stock_inventory.py:88
-#: code:addons/msf_doc_import/initial_stock_inventory.py:516
-#: code:addons/msf_doc_import/product_list.py:49
-#: code:addons/msf_doc_import/stock_cost_reevaluation.py:47
+#: code:addons/msf_doc_import/composition_kit.py:62
 #, python-format
-msgid "All lines successfully imported"
-msgstr "All lines successfully imported"
+msgid "Please fix the line with errors (red lines)"
+msgstr "Veuillez corriger les lignes avec des erreurs (lignes en rouge)"
+
+#. module: msf_doc_import
+#: model:ir.module.module,description:msf_doc_import.module_meta_information
+msgid "This module enables to import file in xls format"
+msgstr "Ce module vous permet d'importer un fichier sous format xls"
+
+#. module: msf_doc_import
+#: field:initial.stock.inventory.line,inactive_product:0
+#: field:purchase.order.line,inactive_product:0
+#: field:sale.order.line,inactive_product:0
+#: field:stock.inventory.line,inactive_product:0
+#: field:tender.line,inactive_product:0
+msgid "Product is inactive"
+msgstr "Le produit est inactif"
 
 #. module: msf_doc_import
 #: code:addons/msf_doc_import/check_line.py:463
@@ -2277,53 +2331,57 @@ msgid "The Purchase Order %s does not correspond to the current one (%s)."
 msgstr "The Purchase Order %s does not correspond to the current one (%s)."
 
 #. module: msf_doc_import
-#: field:wizard.export.po,file:0
-msgid "File to export"
-msgstr "File to export"
-
-#. module: msf_doc_import
-#: constraint:composition.kit:0
-msgid "Constraint error on Composition Kit."
-msgstr "Constraint error on Composition Kit."
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/__init__.py:45
-#: code:addons/msf_doc_import/wizard/__init__.py:50
-#: code:addons/msf_doc_import/wizard/wizard_import_po_line.py:173
+#: code:addons/msf_doc_import/account.py:223
 #, python-format
-msgid "Delivery requested date"
-msgstr "Delivery requested date"
+msgid "Reading lines…"
+msgstr "Lecture des lignes…"
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/wizard_import_po.py:388
+#: code:addons/msf_doc_import/initial_stock_inventory.py:257
+#: code:addons/msf_doc_import/initial_stock_inventory.py:395
+#: code:addons/msf_doc_import/initial_stock_inventory.py:429
+#: code:addons/msf_doc_import/initial_stock_inventory.py:684
+#: code:addons/msf_doc_import/initial_stock_inventory.py:816
+#: code:addons/msf_doc_import/initial_stock_inventory.py:848
 #, python-format
-msgid "The Line %s has a wrong value. Details: %s."
-msgstr "The Line %s has a wrong value. Details: %s."
+msgid "Expiry date is missing.\n"
+""
+msgstr "Expiry date is missing.\n"
+""
 
 #. module: msf_doc_import
-#: view:composition.kit:0
-#: view:initial.stock.inventory:0
-#: view:purchase.order:0
-#: view:sale.order:0
-#: view:stock.cost.reevaluation:0
+#: view:wizard.export.po:0
+msgid "File to download"
+msgstr "File to download"
+
+#. module: msf_doc_import
 #: view:stock.inventory:0
 #: view:stock.picking:0
-#: view:tender:0
 msgid " Import Lines "
 msgstr " Import Lines "
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/check_line.py:295
-#: code:addons/msf_doc_import/check_line.py:303
-#, python-format
-msgid "The Product Quantity was not set. It is set to 1 by default."
-msgstr "The Product Quantity was not set. It is set to 1 by default."
+#: model:ir.model,name:msf_doc_import.model_stock_partial_picking
+msgid "Partial Picking"
+msgstr "Piquage Partiel"
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/__init__.py:65
+#: code:addons/msf_doc_import/wizard/wizard_import_po.py:678
+#: code:addons/msf_doc_import/wizard/wizard_import_po.py:771
 #, python-format
-msgid "Delivery Requested Date"
-msgstr "Delivery Requested Date"
+msgid "Line %s in the Excel file was added to the file of the lines with errors: for the %s several POs with the line number %s, we can't find any to update with the product %s\n"
+""
+msgstr "Line %s in the Excel file was added to the file of the lines with errors: for the %s several POs with the line number %s, we can't find any to update with the product %s\n"
+""
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/purchase_order.py:384
+#: code:addons/msf_doc_import/sale_order.py:518
+#, python-format
+msgid "\n"
+" You have to select a product UOM in the same category than the UOM of the product."
+msgstr "\n"
+" You have to select a product UOM in the same category than the UOM of the product."
 
 #. module: msf_doc_import
 #: code:addons/msf_doc_import/check_line.py:182
@@ -2336,38 +2394,94 @@ msgstr "The Kit \"%s\" does not exist for this product.' % kit_name))\n"
 "            msg = _('The Kit Name has to be a string"
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/initial_stock_inventory.py:536
+#: code:addons/msf_doc_import/sale_order.py:164
+#: code:addons/msf_doc_import/sale_order.py:281
+#: code:addons/msf_doc_import/tender.py:119
 #, python-format
-msgid "You should have exactly 7 columns in this order:\n"
-"Product Code*, Product Description*, Initial Average Cost*, Location*, Batch*, Expiry Date*, Quantity*"
-msgstr "You should have exactly 7 columns in this order:\n"
-"Product Code*, Product Description*, Initial Average Cost*, Location*, Batch*, Expiry Date*, Quantity*"
+msgid "You can't have more than %s lines in your file."
+msgstr "Vous ne pouvez avoir plus de %s lignes dans votre fichier."
+
+#. module: msf_doc_import
+#: constraint:sale.order.line:0
+msgid "You must select on order procurement method for Service with Reception products."
+msgstr "Vous devez sélectionner sur la commande le mode d'approvisionnement pour le Service  avec Réception de produits."
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/check_line.py:385
+#, python-format
+msgid "The Price Unit was not defined properly."
+msgstr "Le prix unitaire n'a pas été défini correctement."
+
+#. module: msf_doc_import
+#: constraint:initial.stock.inventory.line:0
+#: constraint:stock.inventory.line:0
+msgid "You must assign a Batch Numbre which corresponds to Expiry Date Mandatory Products."
+msgstr "Vous devez attribuer un Numéro de Lot qui corresponde à la Date d'Expiration Obligatoire des Produits."
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/stock_cost_reevaluation.py:67
+#, python-format
+msgid "You should have exactly 3 columns in this order:\n"
+"Product Code*, Product Description*, Product Cost*"
+msgstr "Vous devriez avoir exactement 3 colonnes dans cet ordre :\n"
+"Code Produit*, Description du produit*, Coût du produit*"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/account.py:266
+#, python-format
+msgid "Line %s. Currency is not active: %s"
+msgstr "Ligne %s. La monnaie n'est pas active : %s"
 
 #. module: msf_doc_import
 #: code:addons/msf_doc_import/composition_kit.py:309
-#: code:addons/msf_doc_import/sale_order.py:548
-#: code:addons/msf_doc_import/tender.py:304
 #, python-format
 msgid "Wrong Product UOM !"
 msgstr "Wrong Product UOM !"
 
 #. module: msf_doc_import
-#: view:composition.kit:0
-#: view:initial.stock.inventory:0
-#: view:product.list:0
-#: view:purchase.order:0
-#: view:sale.order:0
-#: view:stock.cost.reevaluation:0
+#: field:stock.partial.picking,data:0
+#: field:stock.partial.picking,filename:0
+#: field:wizard.import.fo.line,data:0
+#: field:wizard.import.fo.line,filename:0
+#: field:wizard.import.ir.line,data:0
+#: field:wizard.import.ir.line,filename:0
+#: field:wizard.import.po,data:0
+#: field:wizard.import.po,filename:0
+#: field:wizard.import.po.line,data:0
+#: field:wizard.import.po.line,filename:0
+#: field:wizard.import.tender.line,data:0
+#: field:wizard.import.tender.line,filename:0
+msgid "Lines with errors"
+msgstr "Lignes avec des erreurs"
+
+#. module: msf_doc_import
 #: view:stock.inventory:0
 #: view:stock.picking:0
-#: view:tender:0
 msgid "Import lines"
 msgstr "Import lines"
 
 #. module: msf_doc_import
-#: model:ir.model,name:msf_doc_import.model_wizard_import_ir_line
-msgid "Import IR Lines from Excel sheet"
-msgstr "Import IR Lines from Excel sheet"
+#: code:addons/msf_doc_import/account.py:200
+#, python-format
+msgid "Processing line…"
+msgstr "Traitement de la ligne…"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/initial_stock_inventory.py:63
+#: code:addons/msf_doc_import/initial_stock_inventory.py:475
+#: code:addons/msf_doc_import/purchase_order.py:105
+#: code:addons/msf_doc_import/sale_order.py:112
+#: code:addons/msf_doc_import/tender.py:71
+#, python-format
+msgid "lines"
+msgstr "lignes"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/initial_stock_inventory.py:65
+#: code:addons/msf_doc_import/initial_stock_inventory.py:477
+#, python-format
+msgid "%s been inactivated. If you want to validate this document you have to remove/correct the %s containing %s (see red %s of the document)"
+msgstr "%s a été désactivé. Si vous voulez valider ce document vous devez supprimer/corriger les %s contenant %s (voir les %s en rouge)"
 
 #. module: msf_doc_import
 #: view:purchase.order:0
@@ -2375,63 +2489,44 @@ msgid "Export PO Validated"
 msgstr "Export PO Validated"
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/check_line.py:452
-#, python-format
-msgid "The expiry date %s not corresponding to the expiry date of the Batch Number %s − The expiry date of the batch has been set instead."
-msgstr "The expiry date %s not corresponding to the expiry date of the Batch Number %s − The expiry date of the batch has been set instead."
-
-#. module: msf_doc_import
 #: code:addons/msf_doc_import/wizard/stock_partial_picking.py:397
 #: code:addons/msf_doc_import/wizard/stock_partial_picking.py:703
 #, python-format
 msgid "Line %s of the Excel file was added to the file of the lines with errors : A line was found in the Incoming shipment but the UoM of the Excel line (%s) is not compatible with UoM (%s) of the incoming shipment line."
-msgstr "Line %s of the Excel file was added to the file of the lines with errors : A line was found in the Incoming shipment but the UoM of the Excel line (%s) is not compatible with UoM (%s) of the incoming shipment line."
+msgstr "La ligne %s du fichier Excel a été ajoutée aux fichiers des erreurs : Une ligne correspondante a été trouvée dans la livraison entrante mais l'UdM de la ligne (%s) du fichier n'est pas compatible avec l'UdM (%s) de la ligne de la livrasion entrante."
 
 #. module: msf_doc_import
-#: model:ir.model,name:msf_doc_import.model_wizard_export_po
-msgid "Export PO for integration"
-msgstr "Export PO for integration"
-
-#. module: msf_doc_import
-#: view:purchase.order:0
-msgid "Are you sure that you want to remove all the lines of this Purchase order?"
-msgstr "Are you sure that you want to remove all the lines of this Purchase order?"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/wizard_import_po.py:790
+#: code:addons/msf_doc_import/composition_kit.py:62
+#: code:addons/msf_doc_import/composition_kit.py:336
+#: code:addons/msf_doc_import/initial_stock_inventory.py:318
+#: code:addons/msf_doc_import/initial_stock_inventory.py:737
+#: code:addons/msf_doc_import/purchase_order.py:249
+#: code:addons/msf_doc_import/purchase_order.py:261
+#: code:addons/msf_doc_import/purchase_order.py:269
+#: code:addons/msf_doc_import/purchase_order.py:422
+#: code:addons/msf_doc_import/sale_order.py:164
+#: code:addons/msf_doc_import/sale_order.py:281
+#: code:addons/msf_doc_import/sale_order.py:459
+#: code:addons/msf_doc_import/sale_order.py:594
+#: code:addons/msf_doc_import/sale_order.py:615
+#: code:addons/msf_doc_import/tender.py:119
+#: code:addons/msf_doc_import/tender.py:217
+#: code:addons/msf_doc_import/tender.py:331
+#: code:addons/msf_doc_import/tender.py:349
 #, python-format
-msgid " ---------------------------------\n"
-" Errors report : \n"
-""
-msgstr " ---------------------------------\n"
-" Errors report : \n"
-""
+msgid "Warning !"
+msgstr "Avertissement !"
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/wizard_import_po.py:423
+#: code:addons/msf_doc_import/initial_stock_inventory.py:259
 #, python-format
-msgid "The Product's Code %s is not found in the database."
-msgstr "The Product's Code %s is not found in the database."
+msgid "This product is not Batch Number managed."
+msgstr "This product is not Batch Number managed."
 
 #. module: msf_doc_import
-#: model:ir.model,name:msf_doc_import.model_purchase_line_import_xml_line
-msgid "purchase.line.import.xml.line"
-msgstr "purchase.line.import.xml.line"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/wizard_import_po.py:678
-#: code:addons/msf_doc_import/wizard/wizard_import_po.py:771
-#, python-format
-msgid "Line %s in the Excel file was added to the file of the lines with errors: for the %s several POs with the line number %s, we can't find any to update with the product %s\n"
-""
-msgstr "Line %s in the Excel file was added to the file of the lines with errors: for the %s several POs with the line number %s, we can't find any to update with the product %s\n"
-""
-
-#. module: msf_doc_import
-#: constraint:initial.stock.inventory:0
-#: constraint:stock.inventory:0
-msgid "You cannot confirm this stock inventory because it contains a line with an inactive product"
-msgstr "You cannot confirm this stock inventory because it contains a line with an inactive product"
+#: view:msf.doc.import.accounting:0
+msgid "This will import Migration Entries from a XML file."
+msgstr "Ceci va importer les entrées de migration depuis un fichier XML."
 
 #. module: msf_doc_import
 #: code:addons/msf_doc_import/purchase_order.py:413
@@ -2441,31 +2536,104 @@ msgid "You have to define a valid Main Type (in tab \"Nomenclature Selection\"),
 msgstr "You have to define a valid Main Type (in tab \"Nomenclature Selection\"), i.e. not \"To be defined\"."
 
 #. module: msf_doc_import
+#: model:ir.model,name:msf_doc_import.model_wizard_export_po
+msgid "Export PO for integration"
+msgstr "Export PO for integration"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/initial_stock_inventory.py:224
+#, python-format
+msgid "No batch found for the expiry date %s.' % expiry))\n"
+"                    else:\n"
+"                        batch = batch_ids[0]\n"
+"                elif expiry and batch:\n"
+"                    b_expiry = batch_obj.browse(cr, uid, batch, context=context).life_date\n"
+"                    if expiry != b_expiry:\n"
+"                        err_exp_message = _('Expiry date inconsistent with %s"
+msgstr "No batch found for the expiry date %s.' % expiry))\n"
+"                    else:\n"
+"                        batch = batch_ids[0]\n"
+"                elif expiry and batch:\n"
+"                    b_expiry = batch_obj.browse(cr, uid, batch, context=context).life_date\n"
+"                    if expiry != b_expiry:\n"
+"                        err_exp_message = _('Expiry date inconsistent with %s"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/initial_stock_inventory.py:215
+#: code:addons/msf_doc_import/initial_stock_inventory.py:654
+#, python-format
+msgid "The date format was not good so we took the date from the parent."
+msgstr "The date format was not good so we took the date from the parent."
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/initial_stock_inventory.py:63
+#: code:addons/msf_doc_import/initial_stock_inventory.py:475
+#: code:addons/msf_doc_import/purchase_order.py:105
+#: code:addons/msf_doc_import/sale_order.py:112
+#: code:addons/msf_doc_import/tender.py:71
+#, python-format
+msgid "line"
+msgstr "ligne"
+
+#. module: msf_doc_import
+#: model:ir.model,name:msf_doc_import.model_purchase_line_import_xml_line
+msgid "purchase.line.import.xml.line"
+msgstr "purchase.line.import.xml.line"
+
+#. module: msf_doc_import
+#: model:ir.model,name:msf_doc_import.model_wiz_common_import
+msgid "wiz.common.import"
+msgstr "wiz.common.import"
+
+#. module: msf_doc_import
+#: constraint:composition.item:0
+msgid "Constraint error on Composition Item."
+msgstr "Erreur de contrainte lors de la Composition Article."
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/initial_stock_inventory.py:536
+#, python-format
+msgid "You should have exactly 7 columns in this order:\n"
+"Product Code*, Product Description*, Initial Average Cost*, Location*, Batch*, Expiry Date*, Quantity*"
+msgstr "Vous devriez avoir exactement 7 colonnes dans cet ordre :\n"
+"Code Produit*, Description du produit*, Coût moyen initial*, Lieu*, Lot*, Date d'expiration*, Quantité*"
+
+#. module: msf_doc_import
 #: code:addons/msf_doc_import/wizard/__init__.py:55
 #, python-format
 msgid "Asset"
 msgstr "Asset"
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/account.py:309
+#: code:addons/msf_doc_import/initial_stock_inventory.py:169
+#: code:addons/msf_doc_import/initial_stock_inventory.py:597
+#: code:addons/msf_doc_import/stock_cost_reevaluation.py:108
 #, python-format
-msgid "Line %s. G/L account %s not found!"
-msgstr "Line %s. G/L account %s not found!"
+msgid "The Product [%s] %s was not found in the list of the products"
+msgstr "Le produit [%s] %s n'a pas été trouvé dans la liste de produits"
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/account.py:286
+#: code:addons/msf_doc_import/initial_stock_inventory.py:162
+#: code:addons/msf_doc_import/initial_stock_inventory.py:590
 #, python-format
-msgid "Line %s. No document date specified!"
-msgstr "Line %s. No document date specified!"
+msgid "The Product Description has to be a string."
+msgstr "The Product Description has to be a string."
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/wizard_import_po_line.py:196
-#: code:addons/msf_doc_import/wizard/wizard_import_tender_line.py:166
+#: constraint:stock.move:0
+msgid "You cannot select Service Location as Source Location."
+msgstr "Vous ne pouvez pas sélectionner la Zone Service comme Zone Source"
+
+#. module: msf_doc_import
+#: field:stock.partial.picking,import_error_ok:0
+msgid "error"
+msgstr "error"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/account.py:81
 #, python-format
-msgid "Line %s in the Excel file: Details: %s\n"
-""
-msgstr "Line %s in the Excel file: Details: %s\n"
-""
+msgid "Grouping by currencies…"
+msgstr "Regroupement par monnaies…"
 
 #. module: msf_doc_import
 #: field:purchase.import.xml.line,arrival_date:0
@@ -2473,100 +2641,26 @@ msgid "Arrival date in the country"
 msgstr "Arrival date in the country"
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/initial_stock_inventory.py:168
-#: code:addons/msf_doc_import/initial_stock_inventory.py:596
-#: code:addons/msf_doc_import/stock_cost_reevaluation.py:107
-#, python-format
-msgid "You have to fill at least the product code or the product name on each line"
-msgstr "You have to fill at least the product code or the product name on each line"
-
-#. module: msf_doc_import
 #: field:wizard.export.po,po_id:0
 msgid "PO"
 msgstr "PO"
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/account.py:179
-#: code:addons/msf_doc_import/account.py:229
-#, python-format
-msgid "Checking file…"
-msgstr "Checking file…"
+#: view:product.list:0
+msgid "Import Lines"
+msgstr "Importer lignes"
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/check_line.py:186
-#, python-format
-msgid "The kit was not valid."
-msgstr "The kit was not valid."
+#: view:composition.kit:0
+#: view:initial.stock.inventory:0
+#: view:purchase.order:0
+#: view:sale.order:0
+#: view:stock.cost.reevaluation:0
+#: view:tender:0
+msgid " Import Lines "
+msgstr "Importer des Lignes"
 
 #. module: msf_doc_import
-#: constraint:purchase.order:0
-msgid "If you tick the box \"cross docking\", you cannot have an other location than \"Cross docking\""
-msgstr "If you tick the box \"cross docking\", you cannot have an other location than \"Cross docking\""
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/composition_kit.py:328
-#: code:addons/msf_doc_import/tender.py:323
-#, python-format
-msgid "You have to define a valid product, i.e. not \"To be define\"."
-msgstr "You have to define a valid product, i.e. not \"To be define\"."
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/purchase_order.py:249
-#, python-format
-msgid "\n"
-" You can't have a supplier or an address 'To Be Defined', please select a consistent supplier."
-msgstr "\n"
-" You can't have a supplier or an address 'To Be Defined', please select a consistent supplier."
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/account.py:77
-#, python-format
-msgid "No lines…"
-msgstr "No lines…"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/wizard_import_po.py:573
-#, python-format
-msgid "Import blocked by the Line %s in the Excel file that was added to the file of the lines with errors because it needs to have at least the \"Line number\" and the \"Product\" as identifier. \n"
-" Please make sure that all the lines got at least a \"Product\" and a \"Line Number\".\n"
-""
-msgstr "Import blocked by the Line %s in the Excel file that was added to the file of the lines with errors because it needs to have at least the \"Line number\" and the \"Product\" as identifier. \n"
-" Please make sure that all the lines got at least a \"Product\" and a \"Line Number\".\n"
-""
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/check_line.py:224
-#, python-format
-msgid "The location was not valid."
-msgstr "The location was not valid."
-
-#. module: msf_doc_import
-#: model:ir.model,name:msf_doc_import.model_purchase_import_xml_line
-msgid "purchase.import.xml.line"
-msgstr "purchase.import.xml.line"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/account.py:258
-#, python-format
-msgid "Line %s. No currency specified!"
-msgstr "Line %s. No currency specified!"
-
-#. module: msf_doc_import
-#: view:msf.doc.import.accounting:0
-#: view:wizard.import.fo.line:0
-#: view:wizard.import.int.line:0
-#: view:wizard.import.ir.line:0
-#: view:wizard.import.po:0
-#: view:wizard.import.po.line:0
-#: view:wizard.import.tender.line:0
-msgid "Update"
-msgstr "Update"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/account.py:77
-#: code:addons/msf_doc_import/account.py:190
-#: code:addons/msf_doc_import/account.py:219
-#: code:addons/msf_doc_import/account.py:380
 #: code:addons/msf_doc_import/composition_kit.py:86
 #: code:addons/msf_doc_import/composition_kit.py:111
 #: code:addons/msf_doc_import/composition_kit.py:181
@@ -2599,38 +2693,137 @@ msgstr "Update"
 #: code:addons/msf_doc_import/tender.py:72
 #: code:addons/msf_doc_import/tender.py:115
 #: code:addons/msf_doc_import/tender.py:140
-#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:216
-#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:220
-#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:747
-#: code:addons/msf_doc_import/wizard/stock_partial_picking.py:750
-#: code:addons/msf_doc_import/wizard/wizard_import_int_line.py:156
-#: code:addons/msf_doc_import/wizard/wizard_import_int_line.py:165
-#: code:addons/msf_doc_import/wizard/wizard_import_int_line.py:174
-#: selection:msf.doc.import.accounting,state:0
-#: field:purchase.import.xml.line,error_list:0
-#: field:purchase.line.import.xml.line,error_list:0
-#: view:sale.order:0
-#: field:tender.line,inactive_error:0
 #, python-format
 msgid "Error"
-msgstr "Error"
+msgstr "Erreur"
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/wizard_import_po.py:337
+#: code:addons/msf_doc_import/check_line.py:186
 #, python-format
-msgid "The Incoterm %s does not exist in the Database."
-msgstr "The Incoterm %s does not exist in the Database."
+msgid "The kit was not valid."
+msgstr "The kit was not valid."
 
 #. module: msf_doc_import
-#: field:purchase.import.xml.line,partner_ref:0
-msgid "Supplier Reference"
-msgstr "Supplier Reference"
+#: model:ir.model,name:msf_doc_import.model_stock_cost_reevaluation
+msgid "Cost reevaluation"
+msgstr "Réévaluation des coûts"
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/account.py:413
+#: code:addons/msf_doc_import/initial_stock_inventory.py:248
+#: code:addons/msf_doc_import/initial_stock_inventory.py:390
+#: code:addons/msf_doc_import/initial_stock_inventory.py:425
+#: code:addons/msf_doc_import/initial_stock_inventory.py:675
+#: code:addons/msf_doc_import/initial_stock_inventory.py:811
+#: code:addons/msf_doc_import/initial_stock_inventory.py:844
 #, python-format
-msgid "An error occured. %s: %s"
-msgstr "An error occured. %s: %s"
+msgid "Location is missing.\n"
+""
+msgstr "La Zone est manquante.\n"
+""
+
+#. module: msf_doc_import
+#: model:ir.model,name:msf_doc_import.model_product_list
+msgid "Products list"
+msgstr "Listes Produits"
+
+#. module: msf_doc_import
+#: model:ir.model,name:msf_doc_import.model_stock_picking
+msgid "Picking List"
+msgstr "Liste de Piquage"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/product_list.py:92
+#, python-format
+msgid "Line %s - You have to fill at least the product code or the product name !"
+msgstr "Ligne %s - Vous devez compléter au moins le code produit ou le nom du produit !"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/composition_kit.py:328
+#: code:addons/msf_doc_import/tender.py:323
+#, python-format
+msgid "You have to define a valid product, i.e. not \"To be define\"."
+msgstr "You have to define a valid product, i.e. not \"To be define\"."
+
+#. module: msf_doc_import
+#: sql_constraint:purchase.order.line:0
+#: sql_constraint:sale.order.line:0
+#: sql_constraint:tender.line:0
+msgid "Product Quantity must be greater than zero."
+msgstr "La quantité de produits doit être supérieure à zéro."
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/account.py:314
+#: field:msf.doc.import.accounting.lines,partner_id:0
+#, python-format
+msgid "Partner"
+msgstr "Partenaire"
+
+#. module: msf_doc_import
+#: model:ir.model,name:msf_doc_import.model_wizard_import_fo_line
+msgid "Import FO Lines from Excel sheet"
+msgstr "Importer des lignes de CdT à partir de feuilles Excel"
+
+#. module: msf_doc_import
+#: view:wizard.import.fo.line:0
+#: view:wizard.import.ir.line:0
+#: view:wizard.import.po.line:0
+#: view:wizard.import.tender.line:0
+msgid "Close window"
+msgstr "Ferme la fenêtre"
+
+#. module: msf_doc_import
+#: model:ir.model,name:msf_doc_import.model_wizard_import_tender_line
+msgid "Import Tender Lines from Excel sheet"
+msgstr "Importer des lignes d'AO"
+
+#. module: msf_doc_import
+#: field:msf.doc.import.accounting,date:0
+msgid "Migration date"
+msgstr "Date de migration"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/purchase_order.py:186
+#, python-format
+msgid "The number of columns in the header should be equal to the number of columns you want to export, please check\n"
+"            that what you have in the NEW_COLUMNS_HEADER (global variable defined in the __init__.py of the wizard) is the same as what you have in the lines of the list list_of_lines."
+msgstr "The number of columns in the header should be equal to the number of columns you want to export, please check\n"
+"            that what you have in the NEW_COLUMNS_HEADER (global variable defined in the __init__.py of the wizard) is the same as what you have in the lines of the list list_of_lines."
+
+#. module: msf_doc_import
+#: constraint:stock.move:0
+msgid "You try to assign a lot which is not from the same product"
+msgstr "Vous essayez d'attribuer un lot qui ne correspond pas au même produit"
+
+#. module: msf_doc_import
+#: view:wizard.import.int.line:0
+msgid "Update"
+msgstr "Update"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/purchase_order.py:363
+#, python-format
+msgid "\n"
+" It wasn't possible to update the UoM with the product's one because the former wasn't either defined."
+msgstr "\n"
+" It wasn't possible to update the UoM with the product's one because the former wasn't either defined."
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/wizard/wizard_import_int_line.py:242
+#, python-format
+msgid "Line %s in the Excel file was added to the file of the lines with errors, it got elements outside the defined %s columns. Details: %s"
+msgstr "Line %s in the Excel file was added to the file of the lines with errors, it got elements outside the defined %s columns. Details: %s"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/wizard/wizard_import_po_line.py:226
+#: code:addons/msf_doc_import/wizard/wizard_import_po_line.py:232
+#, python-format
+msgid "Line %s in the Excel file, uncaught error: %s"
+msgstr "Ligne %s du fichier, erreur: %s"
+
+#. module: msf_doc_import
+#: field:incoming.import.xml.line,expiry_date:0
+msgid "Expiry date"
+msgstr "Expiry date"
 
 #. module: msf_doc_import
 #: model:ir.ui.menu,name:msf_doc_import.menu_finance_migration
@@ -2643,46 +2836,36 @@ msgid "Progression"
 msgstr "Progression"
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/account.py:192
+#: code:addons/msf_doc_import/account.py:300
 #, python-format
-msgid "Copying file…"
-msgstr "Copying file…"
+msgid "Line %s. No period found for given date: %s"
+msgstr "Ligne %s. Aucune période trouvée pour la date suivante : %s"
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/initial_stock_inventory.py:248
-#: code:addons/msf_doc_import/initial_stock_inventory.py:390
-#: code:addons/msf_doc_import/initial_stock_inventory.py:425
-#: code:addons/msf_doc_import/initial_stock_inventory.py:675
-#: code:addons/msf_doc_import/initial_stock_inventory.py:811
-#: code:addons/msf_doc_import/initial_stock_inventory.py:844
+#: code:addons/msf_doc_import/account.py:373
 #, python-format
-msgid "Location is missing.\n"
-""
-msgstr "Location is missing.\n"
-""
+msgid "Line %s. A problem occured for line registration. Please contact an Administrator."
+msgstr "Ligne %s. Un problème est survenu lors de l'enregistrement de la ligne. Veuillez contacter un administrateur."
 
 #. module: msf_doc_import
-#: field:stock.partial.picking,import_in_progress:0
-msgid "import in progress"
-msgstr "import in progress"
+#: constraint:initial.stock.inventory:0
+#: constraint:stock.inventory:0
+msgid "You cannot confirm this stock inventory because it contains a line with an inactive product"
+msgstr "Vous ne pouvez pas confirmer cet inventaire car il contient des lignes avec un produit inactif"
 
 #. module: msf_doc_import
-#: model:product.nomenclature,name:msf_doc_import.nomen_tbd1
-msgid "To Be Defined1"
-msgstr "To Be Defined1"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/composition_kit.py:152
-#: code:addons/msf_doc_import/wizard/wizard_import_fo_line.py:232
-#: code:addons/msf_doc_import/wizard/wizard_import_int_line.py:252
-#: code:addons/msf_doc_import/wizard/wizard_import_ir_line.py:226
-#: code:addons/msf_doc_import/wizard/wizard_import_po_line.py:220
-#: code:addons/msf_doc_import/wizard/wizard_import_tender_line.py:190
+#: code:addons/msf_doc_import/check_line.py:257
 #, python-format
-msgid "Line %s in the Excel file: %s: %s\n"
-""
-msgstr "Line %s in the Excel file: %s: %s\n"
-""
+msgid "Product code doesn't exist in the DB."
+msgstr "Product code doesn't exist in the DB."
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/wizard/__init__.py:45
+#: code:addons/msf_doc_import/wizard/__init__.py:50
+#: code:addons/msf_doc_import/wizard/wizard_import_po_line.py:173
+#, python-format
+msgid "Delivery requested date"
+msgstr "Date de livraison demandée"
 
 #. module: msf_doc_import
 #: code:addons/msf_doc_import/wizard/wizard_import_po.py:792
@@ -2701,40 +2884,45 @@ msgid "Line %s of the Excel file was added to the file of the lines with errors 
 msgstr "Line %s of the Excel file was added to the file of the lines with errors : The system cannot found a line matching with the line number %s, the product [%s] %s and the UoM %s."
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/wizard_import_fo_line.py:200
-#: code:addons/msf_doc_import/wizard/wizard_import_int_line.py:223
-#: code:addons/msf_doc_import/wizard/wizard_import_ir_line.py:195
-#: sql_constraint:purchase.order.line:0
-#: sql_constraint:sale.order.line:0
-#: sql_constraint:tender.line:0
-#, python-format
-msgid "Product Quantity must be greater than zero."
-msgstr "Product Quantity must be greater than zero."
-
-#. module: msf_doc_import
 #: field:msf.doc.import.accounting.lines,cost_center_id:0
 msgid "Cost Center"
 msgstr "Cost Center"
 
 #. module: msf_doc_import
-#: model:ir.actions.act_window,name:msf_doc_import.action_migration_accounting_import_wizard
-#: model:ir.ui.menu,name:msf_doc_import.menu_finance_migration_accounting
-#: view:msf.doc.import.accounting:0
-msgid "Import Migration Entries"
-msgstr "Import Migration Entries"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/check_line.py:385
+#: code:addons/msf_doc_import/account.py:258
 #, python-format
-msgid "The Price Unit was not defined properly."
-msgstr "The Price Unit was not defined properly."
+msgid "Line %s. No currency specified!"
+msgstr "Ligne %s. Aucune monnaie précisée !"
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/__init__.py:44
-#: code:addons/msf_doc_import/wizard/__init__.py:49
-#: code:addons/msf_doc_import/wizard/__init__.py:54
-#: code:addons/msf_doc_import/wizard/__init__.py:59
-#: code:addons/msf_doc_import/wizard/__init__.py:64
+#: field:stock.partial.picking,percent_completed:0
+#: field:wizard.import.int.line,percent_completed:0
+#: field:wizard.import.po,percent_completed:0
+msgid "% completed"
+msgstr "% completed"
+
+#. module: msf_doc_import
+#: sql_constraint:stock.cost.reevaluation:0
+msgid "The Reference of the Product Cost Revaluation must be unique"
+msgstr "La référence de la revaluation du coût des produits doit être unique"
+
+#. module: msf_doc_import
+#: view:composition.kit:0
+msgid "Remove lines"
+msgstr "Remove lines"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/wizard/wizard_import_po.py:745
+#, python-format
+msgid "Lines %s of the Excel file produced a split for the line %s."
+msgstr "Lignes %s du fichier Excel of the Excel ont produits un fractionnement de la ligne %s."
+
+#. module: msf_doc_import
+#: model:ir.module.module,shortdesc:msf_doc_import.module_meta_information
+msgid "Import Files in Excel Format"
+msgstr "Importer les Fichiers sous Format Excel"
+
+#. module: msf_doc_import
 #: code:addons/msf_doc_import/wizard/wizard_import_po_line.py:153
 #: field:incoming.import.xml.line,uom_id:0
 #: field:purchase.line.import.xml.line,product_uom:0
@@ -2743,30 +2931,68 @@ msgid "UoM"
 msgstr "UoM"
 
 #. module: msf_doc_import
+#: code:addons/msf_doc_import/sale_order.py:313
+#, python-format
+msgid "You should have exactly 8 columns in this order:\n"
+"#Product Code*, Product Description*, Quantity*, Product UoM*, Unit Price*, Delivery Requested Date*, Currency*, Comment. "
+msgstr "Vous devriez avoir exactement 8 colonnes dans cet ordre:\n"
+"#Produit*, Description Produit*, Quantité*, UdM du produit UoM*, Prix unitaire*, Date de livraison demandée*, Devises*, Commentaire. "
+
+#. module: msf_doc_import
+#: constraint:initial.stock.inventory.line:0
+#: constraint:stock.inventory.line:0
+msgid "The selected product is neither Batch Number Mandatory nor Expiry Date Mandatory"
+msgstr "Le produit sélectionné n'a ni de Numéro de Lot obligatoire ni de Date d'Expiration obligatoire"
+
+#. module: msf_doc_import
+#: code:addons/msf_doc_import/initial_stock_inventory.py:255
+#: code:addons/msf_doc_import/initial_stock_inventory.py:393
+#: code:addons/msf_doc_import/initial_stock_inventory.py:427
+#: code:addons/msf_doc_import/initial_stock_inventory.py:682
+#: code:addons/msf_doc_import/initial_stock_inventory.py:814
+#: code:addons/msf_doc_import/initial_stock_inventory.py:846
+#, python-format
+msgid "Batch is missing.\n"
+""
+msgstr "Numéro de lot manquant.\n"
+""
+
+#. module: msf_doc_import
 #: view:msf.doc.import.accounting:0
-msgid "This will import Migration Entries from a XML file."
-msgstr "This will import Migration Entries from a XML file."
+#: view:wizard.import.fo.line:0
+#: view:wizard.import.ir.line:0
+#: view:wizard.import.po.line:0
+#: view:wizard.import.tender.line:0
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: msf_doc_import
+#: constraint:initial.stock.inventory.line:0
+#: constraint:stock.inventory.line:0
+msgid "You must assign a Batch Number which corresponds to Batch Number Mandatory Products."
+msgstr "Vous devez attribuer un Numéro de Lot qui corresponde au Numéro de Lot Obligatoire des Produits."
+
+#. module: msf_doc_import
+#: model:ir.model,name:msf_doc_import.model_tender
+#: field:wizard.import.tender.line,tender_id:0
+msgid "Tender"
+msgstr "Appel d'offres"
 
 #. module: msf_doc_import
 #: code:addons/msf_doc_import/account.py:65
+#: code:addons/msf_doc_import/account.py:183
+#: code:addons/msf_doc_import/account.py:186
+#: code:addons/msf_doc_import/account.py:198
 #, python-format
-msgid "No migration journal found!"
-msgstr "No migration journal found!"
+msgid "Warning"
+msgstr "Attention"
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/initial_stock_inventory.py:162
-#: code:addons/msf_doc_import/initial_stock_inventory.py:590
+#: code:addons/msf_doc_import/check_line.py:512
+#: code:addons/msf_doc_import/check_line.py:515
 #, python-format
-msgid "The Product Description has to be a string."
-msgstr "The Product Description has to be a string."
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/initial_stock_inventory.py:169
-#: code:addons/msf_doc_import/initial_stock_inventory.py:597
-#: code:addons/msf_doc_import/stock_cost_reevaluation.py:108
-#, python-format
-msgid "The Product [%s] %s was not found in the list of the products"
-msgstr "The Product [%s] %s was not found in the list of the products"
+msgid "The Currency Name was not found."
+msgstr "The Currency Name was not found."
 
 #. module: msf_doc_import
 #: code:addons/msf_doc_import/account.py:417
@@ -2775,14 +3001,20 @@ msgid "An error occured: %s"
 msgstr "An error occured: %s"
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/__init__.py:44
-#: code:addons/msf_doc_import/wizard/__init__.py:49
-#: code:addons/msf_doc_import/wizard/__init__.py:65
-#: code:addons/msf_doc_import/wizard/wizard_import_po_line.py:167
+#: model:ir.model,name:msf_doc_import.model_tender_line
+msgid "Tender Line"
+msgstr "Ligne Appel d'Offres"
+
+#. module: msf_doc_import
 #: field:purchase.line.import.xml.line,price_unit:0
-#, python-format
 msgid "Price"
 msgstr "Price"
+
+#. module: msf_doc_import
+#: field:purchase.order.line,show_msg_ok:0
+#: field:sale.order.line,show_msg_ok:0
+msgid "Info on importation of lines"
+msgstr "Infos sur l'importation de lignes"
 
 #. module: msf_doc_import
 #: code:addons/msf_doc_import/wizard/wizard_import_po.py:252
@@ -2791,31 +3023,39 @@ msgid "\"Delivery Confirmed Date (PO)\" %s has a wrong format. Please format the
 msgstr "\"Delivery Confirmed Date (PO)\" %s has a wrong format. Please format the cell in Excel as date."
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/account.py:52
+#: code:addons/msf_doc_import/wizard/__init__.py:45
+#: code:addons/msf_doc_import/wizard/__init__.py:50
+#: code:addons/msf_doc_import/wizard/__init__.py:60
+#: code:addons/msf_doc_import/wizard/wizard_import_po_line.py:178
+#: field:msf.doc.import.accounting.lines,currency_id:0
 #, python-format
-msgid "Initialization…"
-msgstr "Initialization…"
+msgid "Currency"
+msgstr "Devises"
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/check_line.py:300
+#: code:addons/msf_doc_import/check_line.py:217
 #, python-format
-msgid "The Product Quantity was not a number and it is required to be greater than 0, it is set to 1 by default."
-msgstr "The Product Quantity was not a number and it is required to be greater than 0, it is set to 1 by default."
+msgid "The Location \"%s\" is not compatible with the product of the stock move."
+msgstr "The Location \"%s\" is not compatible with the product of the stock move."
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/__init__.py:44
-#: code:addons/msf_doc_import/wizard/__init__.py:49
-#: code:addons/msf_doc_import/wizard/__init__.py:54
-#: code:addons/msf_doc_import/wizard/__init__.py:59
-#: code:addons/msf_doc_import/wizard/__init__.py:64
-#, python-format
-msgid "Product Description"
-msgstr "Product Description"
+#: view:wizard.import.fo.line:0
+#: view:wizard.import.ir.line:0
+#: view:wizard.import.po.line:0
+#: view:wizard.import.tender.line:0
+msgid "Update"
+msgstr "Mettre à jour"
 
 #. module: msf_doc_import
-#: constraint:tender:0
-msgid "You cannot choose an internal supplier for this tender"
-msgstr "You cannot choose an internal supplier for this tender"
+#: code:addons/msf_doc_import/account.py:190
+#, python-format
+msgid "Nothing to import."
+msgstr "Rien à importer."
+
+#. module: msf_doc_import
+#: field:msf.doc.import.accounting.lines,date:0
+msgid "Posting date"
+msgstr "Posting date"
 
 #. module: msf_doc_import
 #: code:addons/msf_doc_import/wizard/wizard_import_fo_line.py:319
@@ -2851,50 +3091,29 @@ msgid "The Product's Code has to be defined"
 msgstr "The Product's Code has to be defined"
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/account.py:322
-#, python-format
-msgid "Line %s. %s not found: %s"
-msgstr "Line %s. %s not found: %s"
-
-#. module: msf_doc_import
 #: code:addons/msf_doc_import/wizard/__init__.py:55
 #, python-format
 msgid "Source Location"
 msgstr "Source Location"
 
 #. module: msf_doc_import
-#: constraint:initial.stock.inventory.line:0
-#: constraint:stock.inventory.line:0
-msgid "You must assign a Batch Numbre which corresponds to Expiry Date Mandatory Products."
-msgstr "You must assign a Batch Numbre which corresponds to Expiry Date Mandatory Products."
+#: constraint:initial.stock.inventory:0
+#: constraint:stock.inventory:0
+msgid "You must define a stock location for each line"
+msgstr "Vous devez définir un lieu de stock pour chaque ligne"
 
 #. module: msf_doc_import
-#: constraint:initial.stock.inventory.line:0
-msgid "You cannot have two lines with the same product and different average cost."
-msgstr "You cannot have two lines with the same product and different average cost."
-
-#. module: msf_doc_import
-#: field:stock.partial.picking,data:0
-#: field:stock.partial.picking,filename:0
-#: field:wizard.import.fo.line,data:0
-#: field:wizard.import.fo.line,filename:0
 #: field:wizard.import.int.line,data:0
 #: field:wizard.import.int.line,filename:0
-#: field:wizard.import.ir.line,data:0
-#: field:wizard.import.ir.line,filename:0
-#: field:wizard.import.po,data:0
-#: field:wizard.import.po,filename:0
-#: field:wizard.import.po.line,data:0
-#: field:wizard.import.po.line,filename:0
-#: field:wizard.import.tender.line,data:0
-#: field:wizard.import.tender.line,filename:0
 msgid "Lines with errors"
 msgstr "Lines with errors"
 
 #. module: msf_doc_import
-#: sql_constraint:stock.cost.reevaluation:0
-msgid "The Reference of the Product Cost Revaluation must be unique"
-msgstr "The Reference of the Product Cost Revaluation must be unique"
+#: code:addons/msf_doc_import/purchase_order.py:106
+#: code:addons/msf_doc_import/sale_order.py:113
+#, python-format
+msgid "%s been inactivated. If you want to validate this document you have to remove/correct the line containing those inactive products (see red %s of the document)"
+msgstr "%s a été désactivé. Si vous valider le document vous devez supprimer/corriger la ligne contenant les produits inactifs (ligne en rouge %s)"
 
 #. module: msf_doc_import
 #: selection:msf.doc.import.accounting,state:0
@@ -2902,34 +3121,27 @@ msgid "Created"
 msgstr "Created"
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/initial_stock_inventory.py:64
-#: code:addons/msf_doc_import/initial_stock_inventory.py:476
-#, python-format
-msgid "those inactive products"
-msgstr "those inactive products"
+#: model:ir.model,name:msf_doc_import.model_initial_stock_inventory_line
+#: model:ir.model,name:msf_doc_import.model_stock_inventory_line
+msgid "Inventory Line"
+msgstr "Ligne d'Inventaire"
 
 #. module: msf_doc_import
-#: model:ir.model,name:msf_doc_import.model_stock_move
-msgid "Stock Move"
-msgstr "Stock Move"
+#: code:addons/msf_doc_import/purchase_order.py:393
+#: code:addons/msf_doc_import/sale_order.py:527
+#: code:addons/msf_doc_import/tender.py:288
+#, python-format
+msgid "\n"
+" The UoM was not defined so we set the price unit to 0.0."
+msgstr "\n"
+"L'UdM n'a pas été renseigné, nous avons initialisé le prix unitaire à 0.0."
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/account.py:300
+#: code:addons/msf_doc_import/sale_order.py:549
+#: code:addons/msf_doc_import/tender.py:305
 #, python-format
-msgid "Line %s. No period found for given date: %s"
-msgstr "Line %s. No period found for given date: %s"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/initial_stock_inventory.py:647
-#, python-format
-msgid "The Batch has to be a string."
-msgstr "The Batch has to be a string."
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/account.py:186
-#, python-format
-msgid "Period for migration is not open!"
-msgstr "Period for migration is not open!"
+msgid "You have to select a product UOM in the same category than the purchase UOM of the product"
+msgstr "You have to select a product UOM in the same category than the purchase UOM of the product"
 
 #. module: msf_doc_import
 #: model:product.nomenclature,name:msf_doc_import.nomen_tbd0
@@ -2949,36 +3161,18 @@ msgid "The Transport Mode Value should be in %s."
 msgstr "The Transport Mode Value should be in %s."
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/check_line.py:391
-#, python-format
-msgid "Neither Price nor Product found."
-msgstr "Neither Price nor Product found."
+#: sql_constraint:product.list:0
+msgid "A list or sublist with the same name already exists in the system!"
+msgstr "Une liste ou une sous-liste ayant le même nom existe déjà dans le système!"
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/wizard/wizard_import_po_line.py:226
-#: code:addons/msf_doc_import/wizard/wizard_import_po_line.py:232
-#, python-format
-msgid "Line %s in the Excel file, uncaught error: %s"
-msgstr "Line %s in the Excel file, uncaught error: %s"
+#: model:product.uom.categ,name:msf_doc_import.product_uom_tbd
+msgid "Categ uom to be defined"
+msgstr "Catégorie UdM à définir"
 
 #. module: msf_doc_import
-#: code:addons/msf_doc_import/initial_stock_inventory.py:318
-#: code:addons/msf_doc_import/initial_stock_inventory.py:737
+#: code:addons/msf_doc_import/product_list.py:93
 #, python-format
-msgid "You need to correct the following line%s : %s"
-msgstr "You need to correct the following line%s : %s"
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/check_line.py:409
-#: code:addons/msf_doc_import/check_line.py:412
-#, python-format
-msgid "The date format was not correct. The date from the header has been taken."
-msgstr "The date format was not correct. The date from the header has been taken."
-
-#. module: msf_doc_import
-#: code:addons/msf_doc_import/initial_stock_inventory.py:65
-#: code:addons/msf_doc_import/initial_stock_inventory.py:477
-#, python-format
-msgid "%s been inactivated. If you want to validate this document you have to remove/correct the %s containing %s (see red %s of the document)"
-msgstr "%s been inactivated. If you want to validate this document you have to remove/correct the %s containing %s (see red %s of the document)"
+msgid "Line %s - The Product [%s] %s was not found in the list of products"
+msgstr "Ligne %s - Le produit [%s] %s n'a pas été trouvé dans la liste de produits"
 

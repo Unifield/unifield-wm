@@ -6,14 +6,288 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.0.3\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2013-10-17 07:42+0000\n"
-"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: supplier_catalogue
+#: help:res.currency,partner_currency:0
+msgid "Only technically to filter currencies according to partner type"
+msgstr "Seulement techniquement pour filtrer les devises d'après le type de partenaire"
+
+#. module: supplier_catalogue
+#: code:addons/supplier_catalogue/supplier_catalogue.py:923
+#: code:addons/supplier_catalogue/supplier_catalogue.py:928
+#, python-format
+msgid "No catalogue found !"
+msgstr "Catalogue pas trouvé !"
+
+#. module: supplier_catalogue
+#: code:addons/supplier_catalogue/supplier_catalogue.py:474
+#, python-format
+msgid "Please, format the line number %s, column \"Min Order Qty\"."
+msgstr "Please, format the line number %s, column \"Min Order Qty\"."
+
+#. module: supplier_catalogue
+#: view:catalogue.import.lines:0
+msgid "Import lines to a catalogue"
+msgstr "Importer des Lignes dans un catalogue"
+
+#. module: supplier_catalogue
+#: code:addons/supplier_catalogue/product.py:538
+#, python-format
+msgid "You cannot uncheck the Section checkbox because this currency is used on these 'Inter-section' partners :                                       %s"
+msgstr "Vous ne pouvez pas décocher la case Section parce que cette devise est utilisée avec ces partenaires 'Inter-sections' :                                       %s"
+
+#. module: supplier_catalogue
+#: model:ir.module.module,shortdesc:supplier_catalogue.module_meta_information
+msgid "Supplier Catalogue"
+msgstr "Catalogue Fournisseur"
+
+#. module: supplier_catalogue
+#: code:addons/supplier_catalogue/supplier_catalogue.py:395
+#, python-format
+msgid "The product was not defined properly."
+msgstr "The product was not defined properly."
+
+#. module: supplier_catalogue
+#: field:from.supplier.choose.catalogue,partner_id:0
+#: field:supplier.historical.catalogue,partner_id:0
+msgid "Supplier"
+msgstr "Fournisseur"
+
+#. module: supplier_catalogue
+#: field:supplier.catalogue.line,unit_price:0
+msgid "Unit Price"
+msgstr "Prix unitaire"
+
+#. module: supplier_catalogue
+#: view:supplier.catalogue:0
+#: field:supplier.catalogue,comment:0
+#: field:supplier.catalogue.line,comment:0
+msgid "Comment"
+msgstr "Commentaire"
+
+#. module: supplier_catalogue
+#: field:supplier.catalogue,file_to_import:0
+msgid "File to import"
+msgstr "Fichier à importer"
+
+#. module: supplier_catalogue
+#: model:ir.model,name:supplier_catalogue.model_product_supplierinfo
+msgid "Information about a product supplier"
+msgstr "Information sur le fournisseur du produit"
+
+#. module: supplier_catalogue
+#: code:addons/supplier_catalogue/supplier_catalogue.py:358
+#, python-format
+msgid "All lines successfully imported"
+msgstr "Toutes les lignes ont été importées avec succès"
+
+#. module: supplier_catalogue
+#: field:pricelist.partnerinfo,valid_from:0
+msgid "Valid from"
+msgstr "Valide à partir "
+
+#. module: supplier_catalogue
+#: constraint:product.product:0
+msgid "Error: Invalid ean code"
+msgstr "Erreur: code EAN invalide"
+
+#. module: supplier_catalogue
+#: field:pricelist.partnerinfo,min_order_qty:0
+#: field:supplier.catalogue.line,min_order_qty:0
+msgid "Min. Order Qty"
+msgstr "Quantité Minimale de Commande"
+
+#. module: supplier_catalogue
+#: code:addons/supplier_catalogue/supplier_catalogue.py:436
+#, python-format
+msgid "The UoM \"%s\" was not consistent with the UoM's category (\"%s\") of the product \"%s\"."
+msgstr "The UoM \"%s\" was not consistent with the UoM's category (\"%s\") of the product \"%s\"."
+
+#. module: supplier_catalogue
+#: constraint:product.product:0
+msgid "You must select on order procurement method for Service with Reception products."
+msgstr "Vous devez sélectionner sur la commande le mode d'approvisionnement pour le Service  avec Réception de produits."
+
+#. module: supplier_catalogue
+#: code:addons/supplier_catalogue/product.py:49
+#, python-format
+msgid "You cannot remove a supplier information which is linked to a supplier catalogue line ! Please remove the corresponding supplier catalogue line to remove this supplier information."
+msgstr "Vous ne pouvez pas supprimer une information fournisseur qui est liée à un catalogue fournisseur en ligne ! Veuillez supprimer la ligne correspondante du catalogue fournisseur pour supprimer cette information du fournisseur."
+
+#. module: supplier_catalogue
+#: code:addons/supplier_catalogue/product.py:190
+#, python-format
+msgid "You cannot remove a supplier pricelist line which is linked to a supplier catalogue line ! Please remove the corresponding supplier catalogue line to remove this supplier information."
+msgstr "Vous ne pouvez pas supprimer une liste de prix fournisseur qui est liée à un catalogue fournisseur en ligne ! Veuillez supprimer la ligne correspondante du catalogue fournisseur pour supprimer cette liste de prix du fournisseur."
+
+#. module: supplier_catalogue
+#: field:supplier.catalogue,period_to:0
+#: field:supplier.historical.catalogue,to_date:0
+msgid "To"
+msgstr "Au"
+
+#. module: supplier_catalogue
+#: code:addons/supplier_catalogue/supplier_catalogue.py:98
+#, python-format
+msgid "This catalogue has the same 'From' date than the following catalogue : %s ('From' : %s - 'To' : %s) - Please change the 'From' date of this new catalogue or delete the other catalogue."
+msgstr "Ce catalogue a la même date 'De\"que le catalogue suivant : %s ('From' : %s - 'To' : %s) - Veuillez changer la date \"De\" de ce nouveau catalogue ou effacer l'autre catalogue."
+
+#. module: supplier_catalogue
+#: help:supplier.catalogue.line,min_qty:0
+msgid "Minimal order quantity to get this unit price."
+msgstr "Quantité Minimale de Commande pour obtenir ce prix unitaire"
+
+#. module: supplier_catalogue
+#: code:addons/supplier_catalogue/purchase.py:77
+#: code:addons/supplier_catalogue/purchase.py:82
+#, python-format
+msgid "Warning"
+msgstr "Avertissement"
+
+#. module: supplier_catalogue
+#: field:res.currency,is_section_currency:0
+msgid "Functional currency"
+msgstr "Devise fonctionnelle"
+
+#. module: supplier_catalogue
+#: field:supplier.catalogue,import_error_ok:0
+msgid "Display file with error"
+msgstr "Display file with error"
+
+#. module: supplier_catalogue
+#: view:supplier.catalogue.line:0
+msgid "Single Item"
+msgstr "Article unique"
+
+#. module: supplier_catalogue
+#: code:addons/supplier_catalogue/purchase.py:82
+#: code:addons/supplier_catalogue/purchase.py:86
+#, python-format
+msgid "A rounding value of %s UoM has been set for this product, you should than modify the quantity ordered to match the supplier criteria."
+msgstr "A rounding value of %s UoM has been set for this product, you should than modify the quantity ordered to match the supplier criteria."
+
+#. module: supplier_catalogue
+#: code:addons/supplier_catalogue/supplier_catalogue.py:538
+#, python-format
+msgid "Warning !"
+msgstr "Avertissement !"
+
+#. module: supplier_catalogue
+#: view:product.pricelist:0
+#: field:product.pricelist,currency_name:0
+msgid "Currency name"
+msgstr "Nom de la devise"
+
+#. module: supplier_catalogue
+#: sql_constraint:product.product:0
+msgid "The \"Product Code\" must be unique"
+msgstr "Le \"Code produit\" doit être unique"
+
+#. module: supplier_catalogue
+#: help:res.currency,is_section_currency:0
+msgid "If this box is checked, this currency is used as a functional currency for at least one section in MSF."
+msgstr "Si la case est cochée, cette devise est utilisée comme devise fonctionnelle pour au moins une section MSF."
+
+#. module: supplier_catalogue
+#: field:res.currency,is_esc_currency:0
+msgid "ESC currency"
+msgstr "Devise ESC"
+
+#. module: supplier_catalogue
+#: field:pricelist.partnerinfo,sequence:0
+msgid "Sequence"
+msgstr "Séquence"
+
+#. module: supplier_catalogue
+#: field:res.currency,is_po_functional:0
+msgid "transport PO currencies"
+msgstr "Devises de transport de BC "
+
+#. module: supplier_catalogue
+#: code:addons/supplier_catalogue/supplier_catalogue.py:465
+#, python-format
+msgid "Please, format the line number %s, column \"Rounding\"."
+msgstr "Please, format the line number %s, column \"Rounding\"."
+
+#. module: supplier_catalogue
+#: view:from.supplier.choose.catalogue:0
+#: view:res.partner:0
+msgid "Open catalogue"
+msgstr "Ouvrir le Catalogue"
+
+#. module: supplier_catalogue
+#: code:addons/supplier_catalogue/supplier_catalogue.py:483
+#, python-format
+msgid "Line %s of the file was exported in the file of the lines not imported:"
+msgstr "Line %s of the file was exported in the file of the lines not imported:"
+
+#. module: supplier_catalogue
+#: view:supplier.catalogue.line:0
+msgid "Service with Reception"
+msgstr "Service avec Réception"
+
+#. module: supplier_catalogue
+#: view:res.partner:0
+msgid "Edit catalogue"
+msgstr "Editer Catalogue"
+
+#. module: supplier_catalogue
+#: view:product.pricelist:0
+msgid "Currencies"
+msgstr "Devises"
+
+#. module: supplier_catalogue
+#: model:ir.module.module,description:supplier_catalogue.module_meta_information
+msgid "\n"
+"    Add management of supplier catalogue\n"
+"    "
+msgstr "\n"
+"Ajouter la gestion du catalogue fournisseur     "
+
+#. module: supplier_catalogue
+#: model:ir.actions.act_window,name:supplier_catalogue.action_new_catalogue_supplier
+msgid "New catalogue"
+msgstr "Nouveau catalogue"
+
+#. module: supplier_catalogue
+#: code:addons/supplier_catalogue/product.py:350
+#: code:addons/supplier_catalogue/product.py:466
+#: code:addons/supplier_catalogue/product.py:490
+#: code:addons/supplier_catalogue/product.py:537
+#: code:addons/supplier_catalogue/product.py:556
+#, python-format
+msgid "Error !"
+msgstr "Erreur !"
+
+#. module: supplier_catalogue
+#: code:addons/supplier_catalogue/supplier_catalogue.py:106
+#, python-format
+msgid "The 'To' date of this catalogue is older than the 'From' date of another catalogue - Please change the 'To' date of this catalogue or the 'From' date of the following catalogue : %s ('From' : %s - 'To' : %s)"
+msgstr "La date de fin de validité de ce catalogue est postérieure à la date de début de validité d'un autre catalogue - Veuillez modifier la date de fin de validité de ce catalogue ou la date de début de validité du catalogue suivant : %s ('De' : %s - 'À' : %s)"
+
+#. module: supplier_catalogue
+#: code:addons/supplier_catalogue/supplier_catalogue.py:382
+#, python-format
+msgid "You should have exactly 8 columns in this order: Product code*, Product description, Product UoM*, Min Quantity*, Unit Price*, Rounding, Min Order Qty, Comment."
+msgstr "Vous devriez avoir exactement 8 colonnes dans l'ordre suivant : Code Produit*, Description du produit, UdeM du produit*, Quantité min*, Prix unitaire*, Arrondi, Qté commandée min, Commentaire."
+
+#. module: supplier_catalogue
+#: field:product.supplierinfo,catalogue_id:0
+msgid "Associated catalogue"
+msgstr "Catalogue Connexe"
+
+#. module: supplier_catalogue
+#: view:supplier.catalogue:0
+msgid " Import Lines "
+msgstr "Importer des Lignes"
 
 #. module: supplier_catalogue
 #: code:addons/supplier_catalogue/product.py:49
@@ -30,181 +304,39 @@ msgstr ""
 #: code:addons/supplier_catalogue/wizard/catalogue_import_lines.py:45
 #, python-format
 msgid "Error"
-msgstr "Error"
+msgstr "Erreur"
 
 #. module: supplier_catalogue
-#: model:ir.actions.act_window,name:supplier_catalogue.action_historical_catalogue
-msgid "Historical prices"
-msgstr "Historical prices"
-
-#. module: supplier_catalogue
-#: view:supplier.catalogue:0
-msgid " Import Lines "
-msgstr " Import Lines "
-
-#. module: supplier_catalogue
-#: code:addons/supplier_catalogue/supplier_catalogue.py:395
+#: code:addons/supplier_catalogue/supplier_catalogue.py:47
 #, python-format
-msgid "The product was not defined properly."
-msgstr "The product was not defined properly."
+msgid "You cannot duplicate a catalogue because you musn't have overlapped catalogue !"
+msgstr "Vous ne pouvez pas reproduire un catalogue car vous ne pouvez pas avoir des catalogues qui se chevauchent !"
 
 #. module: supplier_catalogue
 #: code:addons/supplier_catalogue/supplier_catalogue.py:519
 #, python-format
 msgid "The import of lines had errors, please correct the red lines below"
-msgstr "The import of lines had errors, please correct the red lines below"
+msgstr "L'importation de lignes comporte des erreurs, veuillez corriger les lignes rouges ci-dessous"
 
 #. module: supplier_catalogue
-#: help:supplier.catalogue,period_to:0
-msgid "End date of the catalogue"
-msgstr "End date of the catalogue"
+#: help:supplier.catalogue.line,line_uom_id:0
+msgid "UoM of the product used to get this unit price."
+msgstr "UdM du produit utilisé pour obtenir ce prix unitaire."
 
 #. module: supplier_catalogue
-#: view:supplier.catalogue.line:0
-msgid "Single Item"
-msgstr "Single Item"
+#: help:supplier.catalogue,period_from:0
+msgid "Starting date of the catalogue."
+msgstr "Date de début du Catalogue."
 
 #. module: supplier_catalogue
-#: field:pricelist.partnerinfo,valid_from:0
-msgid "Valid from"
-msgstr "Valid from"
+#: field:supplier.catalogue,filename_template:0
+msgid "Template"
+msgstr "Template"
 
 #. module: supplier_catalogue
-#: field:supplier.catalogue.line,line_uom_id:0
-msgid "Product UoM"
-msgstr "Product UoM"
-
-#. module: supplier_catalogue
-#: view:supplier.catalogue.line:0
-msgid "Service"
-msgstr "Service"
-
-#. module: supplier_catalogue
-#: code:addons/supplier_catalogue/supplier_catalogue.py:436
-#, python-format
-msgid "The UoM \"%s\" was not consistent with the UoM's category (\"%s\") of the product \"%s\"."
-msgstr "The UoM \"%s\" was not consistent with the UoM's category (\"%s\") of the product \"%s\"."
-
-#. module: supplier_catalogue
-#: model:ir.model,name:supplier_catalogue.model_product_pricelist
-msgid "Pricelist"
-msgstr "Pricelist"
-
-#. module: supplier_catalogue
-#: help:res.currency,partner_currency:0
-msgid "Only technically to filter currencies according to partner type"
-msgstr "Only technically to filter currencies according to partner type"
-
-#. module: supplier_catalogue
-#: view:supplier.catalogue.line:0
-msgid "Stockable"
-msgstr "Stockable"
-
-#. module: supplier_catalogue
-#: field:supplier.catalogue,line_ids:0
-msgid "Lines"
-msgstr "Lines"
-
-#. module: supplier_catalogue
-#: field:supplier.catalogue,import_error_ok:0
-msgid "Display file with error"
-msgstr "Display file with error"
-
-#. module: supplier_catalogue
-#: code:addons/supplier_catalogue/purchase.py:77
-#: code:addons/supplier_catalogue/purchase.py:82
-#, python-format
-msgid "Warning"
-msgstr "Warning"
-
-#. module: supplier_catalogue
-#: model:ir.model,name:supplier_catalogue.model_supplier_catalogue_line
-#: view:supplier.catalogue.line:0
-msgid "Supplier catalogue line"
-msgstr "Supplier catalogue line"
-
-#. module: supplier_catalogue
-#: view:catalogue.import.lines:0
-#: view:supplier.catalogue:0
-msgid "Import lines"
-msgstr "Import lines"
-
-#. module: supplier_catalogue
-#: model:ir.model,name:supplier_catalogue.model_purchase_order_line
-msgid "Purchase Order Line"
-msgstr "Purchase Order Line"
-
-#. module: supplier_catalogue
-#: code:addons/supplier_catalogue/purchase.py:82
-#: code:addons/supplier_catalogue/purchase.py:86
-#, python-format
-msgid "A rounding value of %s UoM has been set for this product, you should than modify the quantity ordered to match the supplier criteria."
-msgstr "A rounding value of %s UoM has been set for this product, you should than modify the quantity ordered to match the supplier criteria."
-
-#. module: supplier_catalogue
-#: field:from.supplier.choose.catalogue,partner_id:0
-#: field:supplier.historical.catalogue,partner_id:0
-msgid "Supplier"
-msgstr "Supplier"
-
-#. module: supplier_catalogue
-#: view:supplier.catalogue.line:0
-msgid "Optional Nomenclature Filters..."
-msgstr "Optional Nomenclature Filters..."
-
-#. module: supplier_catalogue
-#: model:ir.model,name:supplier_catalogue.model_from_supplier_choose_catalogue
-msgid "from.supplier.choose.catalogue"
-msgstr "from.supplier.choose.catalogue"
-
-#. module: supplier_catalogue
-#: view:product.pricelist:0
-msgid "Currencies"
-msgstr "Currencies"
-
-#. module: supplier_catalogue
-#: help:supplier.catalogue.line,min_qty:0
-msgid "Minimal order quantity to get this unit price."
-msgstr "Minimal order quantity to get this unit price."
-
-#. module: supplier_catalogue
-#: view:supplier.historical.catalogue:0
-msgid "Open historical prices"
-msgstr "Open historical prices"
-
-#. module: supplier_catalogue
-#: model:ir.model,name:supplier_catalogue.model_res_currency
-#: view:product.pricelist:0
-#: field:supplier.catalogue,currency_id:0
-#: field:supplier.historical.catalogue,currency_id:0
-msgid "Currency"
-msgstr "Currency"
-
-#. module: supplier_catalogue
-#: constraint:supplier.catalogue:0
-msgid "The 'To' date mustn't be younger than the 'From' date !"
-msgstr "The 'To' date mustn't be younger than the 'From' date !"
-
-#. module: supplier_catalogue
-#: field:supplier.catalogue,file_to_import:0
-msgid "File to import"
-msgstr "File to import"
-
-#. module: supplier_catalogue
-#: model:ir.model,name:supplier_catalogue.model_supplier_catalogue
-#: view:supplier.catalogue:0
-msgid "Supplier catalogue"
-msgstr "Supplier catalogue"
-
-#. module: supplier_catalogue
-#: sql_constraint:res.currency:0
-msgid "The currency name exists already in the system!"
-msgstr "The currency name exists already in the system!"
-
-#. module: supplier_catalogue
-#: view:supplier.catalogue.line:0
-msgid "Service with Reception"
-msgstr "Service with Reception"
+#: help:supplier.catalogue,currency_id:0
+msgid "Currency used in this catalogue."
+msgstr "Devise utilisée pour ce catalogue."
 
 #. module: supplier_catalogue
 #: code:addons/supplier_catalogue/product.py:350
@@ -212,143 +344,14 @@ msgstr "Service with Reception"
 #: code:addons/supplier_catalogue/product.py:490
 #, python-format
 msgid "Bad operator !"
-msgstr "Bad operator !"
+msgstr "Mauvais opérateur !"
 
 #. module: supplier_catalogue
-#: model:ir.actions.act_window,name:supplier_catalogue.action_supplier_catalogue_list
-#: model:ir.ui.menu,name:supplier_catalogue.menu_supplier_catalogue
-#: view:supplier.catalogue:0
-msgid "Supplier catalogues"
-msgstr "Supplier catalogues"
-
-#. module: supplier_catalogue
-#: code:addons/supplier_catalogue/supplier_catalogue.py:456
-#, python-format
-msgid "Please, format the line number %s, column \"Unit Price\"."
-msgstr "Please, format the line number %s, column \"Unit Price\"."
-
-#. module: supplier_catalogue
-#: field:supplier.catalogue.line,supplier_info_id:0
-msgid "Linked Supplier Info"
-msgstr "Linked Supplier Info"
-
-#. module: supplier_catalogue
-#: view:supplier.catalogue:0
-#: field:supplier.catalogue,comment:0
-#: field:supplier.catalogue.line,comment:0
-msgid "Comment"
-msgstr "Comment"
-
-#. module: supplier_catalogue
-#: view:supplier.catalogue.line:0
-msgid "Nomenclature Filters..."
-msgstr "Nomenclature Filters..."
-
-#. module: supplier_catalogue
-#: model:ir.model,name:supplier_catalogue.model_res_partner
-#: field:pricelist.partnerinfo,partner_id:0
-#: field:supplier.catalogue,partner_id:0
-msgid "Partner"
-msgstr "Partner"
-
-#. module: supplier_catalogue
-#: model:ir.model,name:supplier_catalogue.model_product_supplierinfo
-msgid "Information about a product supplier"
-msgstr "Information about a product supplier"
-
-#. module: supplier_catalogue
-#: model:ir.module.module,shortdesc:supplier_catalogue.module_meta_information
-msgid "Supplier Catalogue"
-msgstr "Supplier Catalogue"
-
-#. module: supplier_catalogue
-#: view:catalogue.export.lines:0
-#: view:catalogue.import.lines:0
-#: view:from.supplier.choose.catalogue:0
-#: view:supplier.historical.catalogue:0
-msgid "Cancel"
-msgstr "Cancel"
-
-#. module: supplier_catalogue
-#: help:supplier.catalogue,file_to_import:0
-msgid "The file should be in XML Spreadsheet 2003 format. The columns should be in this order :\n"
-"                                        Product Code*, Product Description, Product UoM*, Min Quantity*, Unit Price*, Rounding, Min Order Qty, Comment."
-msgstr "The file should be in XML Spreadsheet 2003 format. The columns should be in this order :\n"
-"                                        Product Code*, Product Description, Product UoM*, Min Quantity*, Unit Price*, Rounding, Min Order Qty, Comment."
-
-#. module: supplier_catalogue
-#: constraint:pricelist.partnerinfo:0
-#: constraint:supplier.catalogue.line:0
-msgid "You cannot have a line with a negative or zero quantity!"
-msgstr "You cannot have a line with a negative or zero quantity!"
-
-#. module: supplier_catalogue
-#: field:supplier.catalogue,period_to:0
-#: field:supplier.historical.catalogue,to_date:0
-msgid "To"
-msgstr "To"
-
-#. module: supplier_catalogue
-#: view:from.supplier.choose.catalogue:0
-#: view:res.partner:0
-msgid "Open catalogue"
-msgstr "Open catalogue"
-
-#. module: supplier_catalogue
-#: field:supplier.catalogue,period_from:0
-#: field:supplier.historical.catalogue,from_date:0
-msgid "From"
-msgstr "From"
-
-#. module: supplier_catalogue
-#: view:supplier.catalogue:0
-msgid "Inactive"
-msgstr "Inactive"
-
-#. module: supplier_catalogue
-#: field:res.currency,is_po_functional:0
-msgid "transport PO currencies"
-msgstr "transport PO currencies"
-
-#. module: supplier_catalogue
-#: code:addons/supplier_catalogue/product.py:49
-#, python-format
-msgid "You cannot remove a supplier information which is linked to a supplier catalogue line ! Please remove the corresponding supplier catalogue line to remove this supplier information."
-msgstr "You cannot remove a supplier information which is linked to a supplier catalogue line ! Please remove the corresponding supplier catalogue line to remove this supplier information."
-
-#. module: supplier_catalogue
-#: sql_constraint:purchase.order.line:0
-msgid "Product Quantity must be greater than zero."
-msgstr "Product Quantity must be greater than zero."
-
-#. module: supplier_catalogue
-#: code:addons/supplier_catalogue/product.py:217
-#, python-format
-msgid "The line of product %s has a negative or zero min. quantity !"
-msgstr "The line of product %s has a negative or zero min. quantity !"
-
-#. module: supplier_catalogue
-#: constraint:product.product:0
-msgid "Warning! GMDN code must be digits!"
-msgstr "Warning! GMDN code must be digits!"
-
-#. module: supplier_catalogue
-#: field:supplier.catalogue.line,to_correct_ok:0
-msgid "To correct"
-msgstr "To correct"
-
-#. module: supplier_catalogue
-#: code:addons/supplier_catalogue/supplier_catalogue.py:538
-#, python-format
-msgid "Warning !"
-msgstr "Warning !"
-
-#. module: supplier_catalogue
-#: view:catalogue.export.lines:0
-#: view:catalogue.import.lines:0
-#: view:supplier.historical.catalogue:0
-msgid "Actions"
-msgstr "Actions"
+#: field:from.supplier.choose.catalogue,catalogue_id:0
+#: field:res.partner,catalogue_bool:0
+#: field:supplier.catalogue.line,catalogue_id:0
+msgid "Catalogue"
+msgstr "Catalogue"
 
 #. module: supplier_catalogue
 #: code:addons/supplier_catalogue/supplier_catalogue.py:368
@@ -358,36 +361,42 @@ msgid "Nothing to import."
 msgstr "Nothing to import."
 
 #. module: supplier_catalogue
-#: field:pricelist.partnerinfo,sequence:0
-msgid "Sequence"
-msgstr "Sequence"
+#: view:catalogue.import.lines:0
+#: view:supplier.catalogue:0
+msgid "Import lines"
+msgstr "Importer des lignes"
 
 #. module: supplier_catalogue
-#: code:addons/supplier_catalogue/supplier_catalogue.py:382
+#: code:addons/supplier_catalogue/supplier_catalogue.py:538
 #, python-format
-msgid "You should have exactly 8 columns in this order: Product code*, Product description, Product UoM*, Min Quantity*, Unit Price*, Rounding, Min Order Qty, Comment."
-msgstr "You should have exactly 8 columns in this order: Product code*, Product description, Product UoM*, Min Quantity*, Unit Price*, Rounding, Min Order Qty, Comment."
+msgid "You need to correct the following line%s : %s"
+msgstr "Veuillez corriger les lignes suivantes%s : %s"
 
 #. module: supplier_catalogue
-#: constraint:res.currency:0
-msgid "No rate is set. Please set one before activating the currency. "
-msgstr "No rate is set. Please set one before activating the currency. "
+#: sql_constraint:purchase.order.line:0
+msgid "Product Quantity must be greater than zero."
+msgstr "La quantité de produits doit être supérieure à zéro."
 
 #. module: supplier_catalogue
-#: view:catalogue.export.lines:0
-msgid "Export lines from a catalogue"
-msgstr "Export lines from a catalogue"
+#: help:pricelist.partnerinfo,rounding:0
+#: help:supplier.catalogue.line,rounding:0
+msgid "The ordered quantity must be a multiple of this rounding value."
+msgstr "La qté commandée doit être un multiple de cette valeur arrondie."
 
 #. module: supplier_catalogue
-#: code:addons/supplier_catalogue/supplier_catalogue.py:98
-#, python-format
-msgid "This catalogue has the same 'From' date than the following catalogue : %s ('From' : %s - 'To' : %s) - Please change the 'From' date of this new catalogue or delete the other catalogue."
-msgstr "This catalogue has the same 'From' date than the following catalogue : %s ('From' : %s - 'To' : %s) - Please change the 'From' date of this new catalogue or delete the other catalogue."
+#: view:supplier.historical.catalogue:0
+msgid "Parameters"
+msgstr "Paramètres"
 
 #. module: supplier_catalogue
-#: sql_constraint:product.product:0
-msgid "The \"Product Code\" must be unique"
-msgstr "The \"Product Code\" must be unique"
+#: constraint:product.product:0
+msgid "Constraint error on Kit Product."
+msgstr "Erreur de Contrainte sur le produit Kit"
+
+#. module: supplier_catalogue
+#: view:supplier.catalogue:0
+msgid "Check Lines"
+msgstr "Vérifier Lignes"
 
 #. module: supplier_catalogue
 #: code:addons/supplier_catalogue/supplier_catalogue.py:445
@@ -396,15 +405,15 @@ msgid "Please, format the line number %s, column \"Min Qty\"."
 msgstr "Please, format the line number %s, column \"Min Qty\"."
 
 #. module: supplier_catalogue
-#: help:pricelist.partnerinfo,rounding:0
-#: help:supplier.catalogue.line,rounding:0
-msgid "The ordered quantity must be a multiple of this rounding value."
-msgstr "The ordered quantity must be a multiple of this rounding value."
+#: model:ir.model,name:supplier_catalogue.model_supplier_catalogue
+#: view:supplier.catalogue:0
+msgid "Supplier catalogue"
+msgstr "Catalogue du fournisseur"
 
 #. module: supplier_catalogue
-#: field:pricelist.partnerinfo,uom_id:0
-msgid "UoM"
-msgstr "UoM"
+#: model:ir.model,name:supplier_catalogue.model_pricelist_partnerinfo
+msgid "pricelist.partnerinfo"
+msgstr "Informations sur le partenaire"
 
 #. module: supplier_catalogue
 #: field:supplier.catalogue,filename:0
@@ -412,63 +421,46 @@ msgid "Lines not imported"
 msgstr "Lines not imported"
 
 #. module: supplier_catalogue
-#: help:supplier.catalogue,currency_id:0
-msgid "Currency used in this catalogue."
-msgstr "Currency used in this catalogue."
-
-#. module: supplier_catalogue
 #: field:supplier.catalogue,data:0
 msgid "File with errors"
 msgstr "File with errors"
 
 #. module: supplier_catalogue
-#: view:product.pricelist:0
-#: field:product.pricelist,currency_name:0
-msgid "Currency name"
-msgstr "Currency name"
+#: view:supplier.catalogue:0
+msgid "Inactive"
+msgstr "Inactif"
 
 #. module: supplier_catalogue
-#: model:ir.actions.act_window,name:supplier_catalogue.action_new_catalogue_supplier
-msgid "New catalogue"
-msgstr "New catalogue"
-
-#. module: supplier_catalogue
-#: field:supplier.catalogue.line,unit_price:0
-msgid "Unit Price"
-msgstr "Unit Price"
-
-#. module: supplier_catalogue
-#: view:from.supplier.choose.catalogue:0
-msgid "Choose a catalogue"
-msgstr "Choose a catalogue"
-
-#. module: supplier_catalogue
-#: field:supplier.catalogue.line,line_number:0
-msgid "Line"
-msgstr "Line"
-
-#. module: supplier_catalogue
-#: code:addons/supplier_catalogue/supplier_catalogue.py:106
-#, python-format
-msgid "The 'To' date of this catalogue is older than the 'From' date of another catalogue - Please change the 'To' date of this catalogue or the 'From' date of the following catalogue : %s ('From' : %s - 'To' : %s)"
-msgstr "The 'To' date of this catalogue is older than the 'From' date of another catalogue - Please change the 'To' date of this catalogue or the 'From' date of the following catalogue : %s ('From' : %s - 'To' : %s)"
+#: help:supplier.catalogue,file_to_import:0
+msgid "The file should be in XML Spreadsheet 2003 format. The columns should be in this order :\n"
+"                                        Product Code*, Product Description, Product UoM*, Min Quantity*, Unit Price*, Rounding, Min Order Qty, Comment."
+msgstr "The file should be in XML Spreadsheet 2003 format. The columns should be in this order :\n"
+"                                        Product Code*, Product Description, Product UoM*, Min Quantity*, Unit Price*, Rounding, Min Order Qty, Comment."
 
 #. module: supplier_catalogue
 #: help:supplier.catalogue,current:0
 msgid "Indicate if the catalogue is currently active."
-msgstr "Indicate if the catalogue is currently active."
+msgstr "Indiquer si le catalogue est actuellement actif."
 
 #. module: supplier_catalogue
-#: field:supplier.catalogue,active:0
-#: field:supplier.catalogue,current:0
-msgid "Active"
-msgstr "Active"
+#: field:supplier.catalogue,line_ids:0
+msgid "Lines"
+msgstr "Lignes"
 
 #. module: supplier_catalogue
-#: code:addons/supplier_catalogue/supplier_catalogue.py:465
-#, python-format
-msgid "Please, format the line number %s, column \"Rounding\"."
-msgstr "Please, format the line number %s, column \"Rounding\"."
+#: model:ir.model,name:supplier_catalogue.model_product_pricelist
+msgid "Pricelist"
+msgstr "Liste de Prix"
+
+#. module: supplier_catalogue
+#: field:supplier.catalogue.line,to_correct_ok:0
+msgid "To correct"
+msgstr "A corriger"
+
+#. module: supplier_catalogue
+#: field:supplier.catalogue.line,partner_info_id:0
+msgid "Linked Supplier Info line"
+msgstr "Ligne d'Info sur Fournisseur Connexe"
 
 #. module: supplier_catalogue
 #: constraint:res.currency:0
@@ -476,36 +468,54 @@ msgid "Another currency have the same name."
 msgstr "Another currency have the same name."
 
 #. module: supplier_catalogue
+#: model:ir.actions.act_window,name:supplier_catalogue.action_historical_catalogue
+msgid "Historical prices"
+msgstr "Prix Historiques"
+
+#. module: supplier_catalogue
+#: field:pricelist.partnerinfo,rounding:0
+#: field:supplier.catalogue.line,rounding:0
+msgid "Rounding"
+msgstr "Arrondir"
+
+#. module: supplier_catalogue
+#: model:ir.actions.act_window,name:supplier_catalogue.action_supplier_catalogue_list
+#: model:ir.ui.menu,name:supplier_catalogue.menu_supplier_catalogue
+#: view:supplier.catalogue:0
+msgid "Supplier catalogues"
+msgstr "Catalogues Fournisseur"
+
+#. module: supplier_catalogue
+#: model:ir.model,name:supplier_catalogue.model_res_partner
+#: field:pricelist.partnerinfo,partner_id:0
+#: field:supplier.catalogue,partner_id:0
+msgid "Partner"
+msgstr "Partenaire"
+
+#. module: supplier_catalogue
 #: view:supplier.catalogue.line:0
-msgid "Asset"
-msgstr "Asset"
+msgid "Service"
+msgstr "Service"
 
 #. module: supplier_catalogue
-#: field:supplier.catalogue,name:0
-msgid "Name"
-msgstr "Name"
+#: field:supplier.catalogue.line,line_uom_id:0
+msgid "Product UoM"
+msgstr "UdM du Produit"
 
 #. module: supplier_catalogue
-#: view:catalogue.export.lines:0
-#: view:catalogue.import.lines:0
-msgid "Data"
-msgstr "Data"
+#: constraint:res.currency:0
+msgid "No rate is set. Please set one before activating the currency. "
+msgstr "Pas de taux fixé. Choisissez en un svp avant d'activer la monnaie."
 
 #. module: supplier_catalogue
-#: field:res.currency,is_esc_currency:0
-msgid "ESC currency"
-msgstr "ESC currency"
+#: sql_constraint:res.currency:0
+msgid "The currency name exists already in the system!"
+msgstr "Le nom de cette devise existe déjà dans le système!"
 
 #. module: supplier_catalogue
-#: field:product.pricelist,in_search:0
-msgid "In search"
-msgstr "In search"
-
-#. module: supplier_catalogue
-#: code:addons/supplier_catalogue/product.py:538
-#, python-format
-msgid "You cannot uncheck the Section checkbox because this currency is used on these 'Inter-section' partners :                                       %s"
-msgstr "You cannot uncheck the Section checkbox because this currency is used on these 'Inter-section' partners :                                       %s"
+#: field:pricelist.partnerinfo,uom_id:0
+msgid "UoM"
+msgstr "UdM"
 
 #. module: supplier_catalogue
 #: field:supplier.catalogue,text_error:0
@@ -513,40 +523,50 @@ msgid "Text Error"
 msgstr "Text Error"
 
 #. module: supplier_catalogue
+#: field:supplier.catalogue,period_from:0
+#: field:supplier.historical.catalogue,from_date:0
+msgid "From"
+msgstr "De"
+
+#. module: supplier_catalogue
+#: constraint:pricelist.partnerinfo:0
+#: constraint:supplier.catalogue.line:0
+msgid "You cannot have a line with a negative or zero quantity!"
+msgstr "Vous ne pouvez pas avoir une ligne avec une quantité négative ou égale à 0."
+
+#. module: supplier_catalogue
 #: constraint:product.supplierinfo:0
 msgid "Error: The default UOM and the Supplier Product UOM must be in the same category."
-msgstr "Error: The default UOM and the Supplier Product UOM must be in the same category."
+msgstr "Erreur : l'UdM par défaut et l'UdM du Fournisseur de Produit doivent appartenir à la même catégorie."
 
 #. module: supplier_catalogue
-#: model:ir.module.module,description:supplier_catalogue.module_meta_information
-msgid "\n"
-"    Add management of supplier catalogue\n"
-"    "
-msgstr "\n"
-"    Add management of supplier catalogue\n"
-"    "
+#: view:supplier.catalogue.line:0
+msgid "Asset"
+msgstr "Biens"
 
 #. module: supplier_catalogue
-#: field:supplier.catalogue.line,partner_info_id:0
-msgid "Linked Supplier Info line"
-msgstr "Linked Supplier Info line"
+#: model:ir.model,name:supplier_catalogue.model_supplier_catalogue_line
+#: view:supplier.catalogue.line:0
+msgid "Supplier catalogue line"
+msgstr "Ligne Catalogue Fournisseur"
 
 #. module: supplier_catalogue
-#: code:addons/supplier_catalogue/supplier_catalogue.py:474
-#, python-format
-msgid "Please, format the line number %s, column \"Min Order Qty\"."
-msgstr "Please, format the line number %s, column \"Min Order Qty\"."
+#: view:catalogue.export.lines:0
+#: view:catalogue.import.lines:0
+#: view:from.supplier.choose.catalogue:0
+#: view:supplier.historical.catalogue:0
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: supplier_catalogue
+#: view:supplier.historical.catalogue:0
+msgid "Historical prices parameters"
+msgstr "Paramètres de Prix Historiques"
 
 #. module: supplier_catalogue
 #: constraint:product.product:0
-msgid "Constraint error on Kit Product."
-msgstr "Constraint error on Kit Product."
-
-#. module: supplier_catalogue
-#: code:addons/supplier_catalogue/supplier_catalogue.py:47
-#, python-format
-msgid "You cannot duplicate a catalogue because you musn't have overlapped catalogue !"
-msgstr "You cannot duplicate a catalogue because you musn't have overlapped catalogue !"
+msgid "If you select \"Non-stockable\" as product type then you have to select \"Make to order\" as procurement method"
+msgstr "Si vous sélectionnez \"Non stockable\" comme type de produit, vous devez sélectionner \"Faire sur commande\" comme méthode d'acquisition"
 
 #. module: supplier_catalogue
 #: code:addons/supplier_catalogue/supplier_catalogue.py:505
@@ -560,41 +580,31 @@ msgstr "Lines ignored: %s \n"
 
 #. module: supplier_catalogue
 #: view:supplier.historical.catalogue:0
-msgid "Parameters"
-msgstr "Parameters"
+msgid "Open historical prices"
+msgstr "Ouvrir Prix Historiques"
 
 #. module: supplier_catalogue
-#: field:from.supplier.choose.catalogue,catalogue_id:0
-#: field:res.partner,catalogue_bool:0
-#: field:supplier.catalogue.line,catalogue_id:0
-msgid "Catalogue"
-msgstr "Catalogue"
+#: help:res.currency,is_esc_currency:0
+msgid "If this box is checked, this currency is used as a currency for at least one ESC."
+msgstr "Si la case est cochée, cette devise est utilisée comme devise pour au moins un ESC."
 
 #. module: supplier_catalogue
-#: help:supplier.catalogue,period_from:0
-msgid "Starting date of the catalogue."
-msgstr "Starting date of the catalogue."
+#: view:from.supplier.choose.catalogue:0
+msgid "Choose a catalogue"
+msgstr "Choisir un catalogue"
 
 #. module: supplier_catalogue
-#: code:addons/supplier_catalogue/product.py:350
-#: code:addons/supplier_catalogue/product.py:466
-#: code:addons/supplier_catalogue/product.py:490
-#: code:addons/supplier_catalogue/product.py:537
-#: code:addons/supplier_catalogue/product.py:556
-#, python-format
-msgid "Error !"
-msgstr "Error !"
+#: model:ir.model,name:supplier_catalogue.model_res_currency
+#: view:product.pricelist:0
+#: field:supplier.catalogue,currency_id:0
+#: field:supplier.historical.catalogue,currency_id:0
+msgid "Currency"
+msgstr "Devises"
 
 #. module: supplier_catalogue
-#: constraint:product.product:0
-msgid "If you select \"Non-stockable\" as product type then you have to select \"Make to order\" as procurement method"
-msgstr "If you select \"Non-stockable\" as product type then you have to select \"Make to order\" as procurement method"
-
-#. module: supplier_catalogue
-#: model:ir.actions.act_window,name:supplier_catalogue.action_supplier_catalogue_line_list
-#: view:supplier.catalogue.line:0
-msgid "Supplier catalogue lines"
-msgstr "Supplier catalogue lines"
+#: model:ir.model,name:supplier_catalogue.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Ligne Bon de Commande"
 
 #. module: supplier_catalogue
 #: code:addons/supplier_catalogue/supplier_catalogue.py:403
@@ -604,26 +614,27 @@ msgid "The product was not found."
 msgstr "The product was not found."
 
 #. module: supplier_catalogue
-#: help:res.currency,is_esc_currency:0
-msgid "If this box is checked, this currency is used as a currency for at least one ESC."
-msgstr "If this box is checked, this currency is used as a currency for at least one ESC."
-
-#. module: supplier_catalogue
-#: view:supplier.catalogue:0
-msgid "Products"
-msgstr "Products"
-
-#. module: supplier_catalogue
-#: model:ir.model,name:supplier_catalogue.model_product_product
-#: field:pricelist.partnerinfo,product_id:0
-#: field:supplier.catalogue.line,product_id:0
-msgid "Product"
-msgstr "Product"
-
-#. module: supplier_catalogue
+#: view:catalogue.export.lines:0
 #: view:catalogue.import.lines:0
-msgid "Import lines to a catalogue"
-msgstr "Import lines to a catalogue"
+#: view:supplier.historical.catalogue:0
+msgid "Actions"
+msgstr "Actions"
+
+#. module: supplier_catalogue
+#: field:supplier.catalogue,supplierinfo_ids:0
+msgid "Supplier Info."
+msgstr "Information Fournisseur"
+
+#. module: supplier_catalogue
+#: field:res.currency,partner_currency:0
+msgid "Partner currency"
+msgstr "Devise Partenaire"
+
+#. module: supplier_catalogue
+#: code:addons/supplier_catalogue/product.py:217
+#, python-format
+msgid "The line of product %s has a negative or zero min. quantity !"
+msgstr "La ligne de produit %s a une qté minimale négative ou égale à 0 !"
 
 #. module: supplier_catalogue
 #: constraint:res.currency:0
@@ -631,27 +642,96 @@ msgid "Same currency exists"
 msgstr "Same currency exists"
 
 #. module: supplier_catalogue
-#: view:supplier.catalogue:0
-msgid "Check Lines"
-msgstr "Check Lines"
+#: view:supplier.catalogue.line:0
+msgid "Optional Nomenclature Filters..."
+msgstr "Filtres de Nomenclature Optionnelles..."
 
 #. module: supplier_catalogue
-#: field:pricelist.partnerinfo,min_order_qty:0
-#: field:supplier.catalogue.line,min_order_qty:0
-msgid "Min. Order Qty"
-msgstr "Min. Order Qty"
+#: help:supplier.catalogue,period_to:0
+msgid "End date of the catalogue"
+msgstr "Date de fin d'un catalogue"
 
 #. module: supplier_catalogue
-#: view:res.partner:0
-msgid "Edit catalogue"
-msgstr "Edit catalogue"
+#: constraint:supplier.catalogue:0
+msgid "The 'To' date mustn't be younger than the 'From' date !"
+msgstr "La date 'A' doit être postérieure à la date 'De' !"
 
 #. module: supplier_catalogue
-#: code:addons/supplier_catalogue/supplier_catalogue.py:923
-#: code:addons/supplier_catalogue/supplier_catalogue.py:928
+#: field:product.pricelist,in_search:0
+msgid "In search"
+msgstr "En recherche"
+
+#. module: supplier_catalogue
+#: view:catalogue.export.lines:0
+#: view:catalogue.import.lines:0
+msgid "Data"
+msgstr "Données"
+
+#. module: supplier_catalogue
+#: view:supplier.catalogue.line:0
+msgid "Nomenclature Filters..."
+msgstr "Filtres de Nomenclature ..."
+
+#. module: supplier_catalogue
+#: model:ir.actions.act_window,name:supplier_catalogue.action_supplier_catalogue_line_list
+#: view:supplier.catalogue.line:0
+msgid "Supplier catalogue lines"
+msgstr "Lignes Catalogue Fournisseur"
+
+#. module: supplier_catalogue
+#: code:addons/supplier_catalogue/purchase.py:77
 #, python-format
-msgid "No catalogue found !"
-msgstr "No catalogue found !"
+msgid "The product unit price has been set for a minimal quantity of %s (the min quantity of the price list), it might change at the supplier confirmation."
+msgstr "Le prix unitaire du produit a été réglé sur une quantité minimale de %s (quantité minimale de la liste de prix). Il se peut que cela change à la confirmation du fournisseur."
+
+#. module: supplier_catalogue
+#: model:ir.model,name:supplier_catalogue.model_from_supplier_choose_catalogue
+msgid "from.supplier.choose.catalogue"
+msgstr "from.supplier.choose.catalogue"
+
+#. module: supplier_catalogue
+#: field:supplier.catalogue.line,line_number:0
+msgid "Line"
+msgstr "Ligne"
+
+#. module: supplier_catalogue
+#: field:supplier.catalogue,name:0
+msgid "Name"
+msgstr "Nom"
+
+#. module: supplier_catalogue
+#: view:supplier.catalogue.line:0
+msgid "Stockable"
+msgstr "Stockable"
+
+#. module: supplier_catalogue
+#: field:supplier.catalogue.line,min_qty:0
+msgid "Min. Qty"
+msgstr "Qté. Min. "
+
+#. module: supplier_catalogue
+#: field:product.supplierinfo,editable:0
+msgid "Editable"
+msgstr "Modifiable"
+
+#. module: supplier_catalogue
+#: code:addons/supplier_catalogue/supplier_catalogue.py:456
+#, python-format
+msgid "Please, format the line number %s, column \"Unit Price\"."
+msgstr "Please, format the line number %s, column \"Unit Price\"."
+
+#. module: supplier_catalogue
+#: model:ir.model,name:supplier_catalogue.model_product_product
+#: field:pricelist.partnerinfo,product_id:0
+#: field:supplier.catalogue.line,product_id:0
+msgid "Product"
+msgstr "Produit"
+
+#. module: supplier_catalogue
+#: code:addons/supplier_catalogue/supplier_catalogue.py:689
+#, python-format
+msgid "The line of product [%s] %s has a negative or zero min. qty !"
+msgstr "La ligne de produit [%s] %s a une qté minimale négative ou égale à 0 !"
 
 #. module: supplier_catalogue
 #: model:ir.model,name:supplier_catalogue.model_supplier_historical_catalogue
@@ -659,37 +739,36 @@ msgid "supplier.historical.catalogue"
 msgstr "supplier.historical.catalogue"
 
 #. module: supplier_catalogue
-#: code:addons/supplier_catalogue/supplier_catalogue.py:538
+#: code:addons/supplier_catalogue/supplier_catalogue.py:873
 #, python-format
-msgid "You need to correct the following line%s : %s"
-msgstr "You need to correct the following line%s : %s"
+msgid "No catalogues found for this supplier and this currency in the period !"
+msgstr "Pas de catalogue trouvé pour ce fournisseur et cette devise durant cette periode !"
 
 #. module: supplier_catalogue
-#: model:ir.model,name:supplier_catalogue.model_pricelist_partnerinfo
-msgid "pricelist.partnerinfo"
-msgstr "pricelist.partnerinfo"
+#: view:catalogue.export.lines:0
+msgid "Export lines from a catalogue"
+msgstr "Exporter Lignes d'un catalogue"
 
 #. module: supplier_catalogue
-#: code:addons/supplier_catalogue/supplier_catalogue.py:483
-#, python-format
-msgid "Line %s of the file was exported in the file of the lines not imported:"
-msgstr "Line %s of the file was exported in the file of the lines not imported:"
+#: field:supplier.catalogue.line,supplier_info_id:0
+msgid "Linked Supplier Info"
+msgstr "Info sur Fournisseur Connexe"
 
 #. module: supplier_catalogue
-#: field:supplier.catalogue.line,min_qty:0
-msgid "Min. Qty"
-msgstr "Min. Qty"
+#: field:supplier.catalogue,active:0
+#: field:supplier.catalogue,current:0
+msgid "Active"
+msgstr "Actif"
 
 #. module: supplier_catalogue
-#: code:addons/supplier_catalogue/purchase.py:77
-#, python-format
-msgid "The product unit price has been set for a minimal quantity of %s (the min quantity of the price list), it might change at the supplier confirmation."
-msgstr "The product unit price has been set for a minimal quantity of %s (the min quantity of the price list), it might change at the supplier confirmation."
+#: constraint:product.product:0
+msgid "Warning! GMDN code must be digits!"
+msgstr "Avertissement! Le code  GMDN doit être en chiffres!"
 
 #. module: supplier_catalogue
-#: help:res.currency,is_section_currency:0
-msgid "If this box is checked, this currency is used as a functional currency for at least one section in MSF."
-msgstr "If this box is checked, this currency is used as a functional currency for at least one section in MSF."
+#: view:supplier.catalogue.line:0
+msgid "Kit/Module"
+msgstr "Kit/Module"
 
 #. module: supplier_catalogue
 #: view:res.partner:0
@@ -698,92 +777,12 @@ msgid "Catalogues"
 msgstr "Catalogues"
 
 #. module: supplier_catalogue
-#: help:supplier.catalogue.line,line_uom_id:0
-msgid "UoM of the product used to get this unit price."
-msgstr "UoM of the product used to get this unit price."
-
-#. module: supplier_catalogue
-#: field:supplier.catalogue,supplierinfo_ids:0
-msgid "Supplier Info."
-msgstr "Supplier Info."
-
-#. module: supplier_catalogue
-#: code:addons/supplier_catalogue/supplier_catalogue.py:689
-#, python-format
-msgid "The line of product [%s] %s has a negative or zero min. qty !"
-msgstr "The line of product [%s] %s has a negative or zero min. qty !"
-
-#. module: supplier_catalogue
-#: field:res.currency,is_section_currency:0
-msgid "Functional currency"
-msgstr "Functional currency"
-
-#. module: supplier_catalogue
-#: constraint:product.product:0
-msgid "Error: Invalid ean code"
-msgstr "Error: Invalid ean code"
-
-#. module: supplier_catalogue
-#: field:res.currency,partner_currency:0
-msgid "Partner currency"
-msgstr "Partner currency"
-
-#. module: supplier_catalogue
-#: code:addons/supplier_catalogue/product.py:190
-#, python-format
-msgid "You cannot remove a supplier pricelist line which is linked to a supplier catalogue line ! Please remove the corresponding supplier catalogue line to remove this supplier information."
-msgstr "You cannot remove a supplier pricelist line which is linked to a supplier catalogue line ! Please remove the corresponding supplier catalogue line to remove this supplier information."
-
-#. module: supplier_catalogue
-#: field:product.supplierinfo,editable:0
-msgid "Editable"
-msgstr "Editable"
-
-#. module: supplier_catalogue
-#: code:addons/supplier_catalogue/supplier_catalogue.py:873
-#, python-format
-msgid "No catalogues found for this supplier and this currency in the period !"
-msgstr "No catalogues found for this supplier and this currency in the period !"
-
-#. module: supplier_catalogue
-#: view:supplier.historical.catalogue:0
-msgid "Historical prices parameters"
-msgstr "Historical prices parameters"
-
-#. module: supplier_catalogue
-#: code:addons/supplier_catalogue/supplier_catalogue.py:358
-#, python-format
-msgid "All lines successfully imported"
-msgstr "All lines successfully imported"
-
-#. module: supplier_catalogue
-#: field:supplier.catalogue,filename_template:0
-msgid "Template"
-msgstr "Template"
-
-#. module: supplier_catalogue
-#: view:supplier.catalogue.line:0
-msgid "Kit/Module"
-msgstr "Kit/Module"
-
-#. module: supplier_catalogue
-#: field:product.supplierinfo,catalogue_id:0
-msgid "Associated catalogue"
-msgstr "Associated catalogue"
-
-#. module: supplier_catalogue
-#: field:pricelist.partnerinfo,rounding:0
-#: field:supplier.catalogue.line,rounding:0
-msgid "Rounding"
-msgstr "Rounding"
-
-#. module: supplier_catalogue
-#: constraint:product.product:0
-msgid "You must select on order procurement method for Service with Reception products."
-msgstr "You must select on order procurement method for Service with Reception products."
-
-#. module: supplier_catalogue
 #: view:supplier.catalogue.line:0
 msgid "Non-Stockable"
-msgstr "Non-Stockable"
+msgstr "Non Stockable"
+
+#. module: supplier_catalogue
+#: view:supplier.catalogue:0
+msgid "Products"
+msgstr "Produits"
 

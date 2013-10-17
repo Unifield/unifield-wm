@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.0.3\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2013-10-17 07:42+0000\n"
-"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,39 +16,101 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: procurement_report
-#: view:procurement.purchase.compute.all:0
-msgid "POs Creation Parameters"
-msgstr "POs Creation Parameters"
+#: field:procurement.batch.cron,numbercall:0
+msgid "Number of Calls"
+msgstr "Nombre d'Appels"
 
 #. module: procurement_report
-#: view:procurement.batch.cron:0
-msgid "POs creation batches configuration"
-msgstr "POs creation batches configuration"
+#: model:ir.module.module,shortdesc:procurement_report.module_meta_information
+msgid "Procurement Report"
+msgstr "Rapport Approvisionnement"
 
 #. module: procurement_report
 #: selection:threshold.value.rules.report,consumption_method:0
-msgid "Average Monthly Consumption"
-msgstr "Average Monthly Consumption"
+msgid "Forecasted Monthly Consumption"
+msgstr "Prévisions de Consommation Mensuelle (PCM)"
 
 #. module: procurement_report
-#: model:ir.actions.act_window,name:procurement_report.action_procurement_batch_form
-#: model:ir.ui.menu,name:procurement_report.menu_procurement_batch
-msgid "POs Creation (Batch configuration)"
-msgstr "POs Creation (Batch configuration)"
+#: model:ir.actions.act_window,name:procurement_report.action_threshold_value_rules_report
+#: view:threshold.value.rules.report:0
+msgid "Threshold value rules"
+msgstr "Valeur Seuil - Règles"
 
 #. module: procurement_report
-#: model:ir.model,name:procurement_report.model_procurement_min_max_compute_all
-#: model:ir.model,name:procurement_report.model_procurement_purchase_compute_all
-msgid "Compute all schedulers"
-msgstr "Compute all schedulers"
+#: field:auto.supply.rules.report,location_id:0
+#: field:min.max.rules.report,location_id:0
+#: field:order.cycle.rules.report,location_id:0
+#: view:procurement.rules.report:0
+#: field:procurement.rules.report,location_id:0
+#: field:threshold.value.rules.report,location_id:0
+msgid "Location"
+msgstr "Zone"
 
 #. module: procurement_report
-#: field:auto.supply.rules.report,rule_id:0
-#: field:min.max.rules.report,rule_id:0
-#: field:order.cycle.rules.report,rule_id:0
-#: field:threshold.value.rules.report,rule_id:0
-msgid "Rules reference"
-msgstr "Rules reference"
+#: field:procurement.batch.cron,interval_type:0
+msgid "Interval Unit"
+msgstr "Unité Intervalle"
+
+#. module: procurement_report
+#: field:auto.supply.rules.report,amc:0
+#: field:min.max.rules.report,amc:0
+#: field:order.cycle.rules.report,amc:0
+#: field:threshold.value.rules.report,amc:0
+msgid "AMC"
+msgstr "CMM"
+
+#. module: procurement_report
+#: selection:procurement.batch.cron,interval_type:0
+msgid "Months"
+msgstr "Mois"
+
+#. module: procurement_report
+#: selection:procurement.batch.cron,interval_type:0
+msgid "Weeks"
+msgstr "Semaines"
+
+#. module: procurement_report
+#: help:procurement.batch.cron,interval_number:0
+msgid "Repeat every x."
+msgstr "Répéter tous les x."
+
+#. module: procurement_report
+#: help:procurement.batch.cron,function:0
+msgid "Name of the method to be called on the object when this scheduler is executed."
+msgstr "Nom de la méthode à appliquer à l'objet  lorsque ce planificateur de tâches est exécuté."
+
+#. module: procurement_report
+#: field:procurement.batch.cron,model:0
+msgid "Object"
+msgstr "Objet"
+
+#. module: procurement_report
+#: help:procurement.batch.cron,args:0
+msgid "Arguments to be passed to the method. e.g. (uid,)"
+msgstr "Arguments à passer à la méthode. ex. : (uid,)"
+
+#. module: procurement_report
+#: help:procurement.batch.cron,model:0
+msgid "Name of object whose function will be called when this scheduler will run. e.g. 'res.partener'"
+msgstr "Nom de l'objet dont la fonction sera appelée lorsque cet ordonnanceur sera activé. Par ex. 'res.partener'"
+
+#. module: procurement_report
+#: field:ir.cron,batch_id:0
+#: field:res.request,batch_id:0
+msgid "Batch"
+msgstr "Lot"
+
+#. module: procurement_report
+#: field:auto.supply.rules.report,frequency_id:0
+#: field:order.cycle.rules.report,frequency_id:0
+#: field:threshold.value.rules.report,frequency_id:0
+msgid "Frequency"
+msgstr "Fréquence"
+
+#. module: procurement_report
+#: field:procurement.rules.report,min_max_ok:0
+msgid "Min/Max"
+msgstr "Min/Max"
 
 #. module: procurement_report
 #: field:auto.supply.rules.report,nomen_manda_0:0
@@ -62,548 +124,32 @@ msgstr "Rules reference"
 #: field:threshold.value.rules.report,nomen_manda_0:0
 #: field:threshold.value.rules.report,nomen_manda_0_s:0
 msgid "Main Type"
-msgstr "Main Type"
+msgstr "Type Principal"
 
 #. module: procurement_report
-#: selection:procurement.batch.cron,interval_type:0
-msgid "Months"
-msgstr "Months"
+#: selection:threshold.value.rules.report,compute_method:0
+msgid "Fixed values"
+msgstr "Valeurs Fixées"
 
 #. module: procurement_report
-#: view:procurement.batch.cron:0
-msgid "Requests"
-msgstr "Requests"
+#: field:min.max.rules.report,max_qty:0
+msgid "Max. Qty"
+msgstr "Qté. Max."
 
 #. module: procurement_report
-#: field:threshold.value.rules.report,consumption_method:0
-msgid "Consumption Method"
-msgstr "Consumption Method"
+#: field:min.max.rules.report,multiple_qty:0
+msgid "Multiple Qty"
+msgstr "Qté Multiple"
 
 #. module: procurement_report
-#: field:procurement.batch.cron,nextcall:0
-msgid "Next Execution Date"
-msgstr "Next Execution Date"
-
-#. module: procurement_report
-#: selection:procurement.batch.cron,interval_type:0
-msgid "Work Days"
-msgstr "Work Days"
-
-#. module: procurement_report
-#: field:procurement.batch.cron,doall:0
-msgid "Repeat Missed"
-msgstr "Repeat Missed"
-
-#. module: procurement_report
-#: selection:procurement.batch.cron,interval_type:0
-msgid "Weeks"
-msgstr "Weeks"
-
-#. module: procurement_report
-#: help:procurement.batch.cron,model:0
-msgid "Name of object whose function will be called when this scheduler will run. e.g. 'res.partener'"
-msgstr "Name of object whose function will be called when this scheduler will run. e.g. 'res.partener'"
-
-#. module: procurement_report
-#: field:auto.supply.rules.report,consumption_stock:0
-#: field:min.max.rules.report,consumption_stock:0
-#: field:order.cycle.rules.report,consumption_stock:0
-#: field:threshold.value.rules.report,consumption_stock:0
-msgid "CUi stocks"
-msgstr "CUi stocks"
-
-#. module: procurement_report
-#: field:auto.supply.rules.report,order_qty:0
-msgid "Order Qty"
-msgstr "Order Qty"
-
-#. module: procurement_report
-#: model:ir.actions.act_window,name:procurement_report.action_compute_schedulers_min_max
-#: model:ir.ui.menu,name:procurement_report.menu_stock_proc_schedulers_min_max
-msgid "POs Creation (Min / Max)"
-msgstr "POs Creation (Min / Max)"
-
-#. module: procurement_report
-#: field:procurement.batch.cron,interval_type:0
-msgid "Interval Unit"
-msgstr "Interval Unit"
-
-#. module: procurement_report
-#: field:procurement.batch.cron,last_run_on:0
-msgid "Last run on"
-msgstr "Last run on"
-
-#. module: procurement_report
-#: selection:procurement.batch.cron,interval_type:0
-msgid "Hours"
-msgstr "Hours"
-
-#. module: procurement_report
-#: field:auto.supply.rules.report,nomen_manda_3:0
-#: field:auto.supply.rules.report,nomen_manda_3_s:0
-#: field:min.max.rules.report,nomen_manda_3:0
-#: field:min.max.rules.report,nomen_manda_3_s:0
-#: field:order.cycle.rules.report,nomen_manda_3:0
-#: field:order.cycle.rules.report,nomen_manda_3_s:0
-#: field:procurement.rules.report,nomen_manda_3:0
-#: field:procurement.rules.report,nomen_manda_3_s:0
-#: field:threshold.value.rules.report,nomen_manda_3:0
-#: field:threshold.value.rules.report,nomen_manda_3_s:0
-msgid "Root"
-msgstr "Root"
-
-#. module: procurement_report
-#: field:procurement.batch.cron,function:0
-msgid "Function"
-msgstr "Function"
-
-#. module: procurement_report
-#: field:auto.supply.rules.report,nomen_name:0
-#: field:min.max.rules.report,nomen_name:0
-#: field:order.cycle.rules.report,nomen_name:0
-#: field:threshold.value.rules.report,nomen_name:0
-msgid "Nomenclature level"
-msgstr "Nomenclature level"
-
-#. module: procurement_report
-#: field:order.cycle.rules.report,order_coverage:0
-msgid "Order coverage"
-msgstr "Order coverage"
-
-#. module: procurement_report
-#: field:procurement.batch.cron,request_ids:0
-msgid "Associated Requests"
-msgstr "Associated Requests"
-
-#. module: procurement_report
-#: help:procurement.batch.cron,function:0
-msgid "Name of the method to be called on the object when this scheduler is executed."
-msgstr "Name of the method to be called on the object when this scheduler is executed."
-
-#. module: procurement_report
-#: model:ir.model,name:procurement_report.model_procurement_rules_report
-msgid "procurement.rules.report"
-msgstr "procurement.rules.report"
-
-#. module: procurement_report
-#: view:procurement.batch.cron:0
-msgid "Request"
-msgstr "Request"
-
-#. module: procurement_report
-#: field:procurement.batch.cron,interval_number:0
-msgid "Interval Number"
-msgstr "Interval Number"
+#: field:threshold.value.rules.report,product_lt:0
+msgid "Product LT"
+msgstr "Délai Produit"
 
 #. module: procurement_report
 #: model:ir.model,name:procurement_report.model_order_cycle_rules_report
 msgid "order.cycle.rules.report"
 msgstr "order.cycle.rules.report"
-
-#. module: procurement_report
-#: field:auto.supply.rules.report,nomen_manda_2:0
-#: field:auto.supply.rules.report,nomen_manda_2_s:0
-#: field:min.max.rules.report,nomen_manda_2:0
-#: field:min.max.rules.report,nomen_manda_2_s:0
-#: field:order.cycle.rules.report,nomen_manda_2:0
-#: field:order.cycle.rules.report,nomen_manda_2_s:0
-#: field:procurement.rules.report,nomen_manda_2:0
-#: field:procurement.rules.report,nomen_manda_2_s:0
-#: field:threshold.value.rules.report,nomen_manda_2:0
-#: field:threshold.value.rules.report,nomen_manda_2_s:0
-msgid "Family"
-msgstr "Family"
-
-#. module: procurement_report
-#: selection:threshold.value.rules.report,compute_method:0
-msgid "Fixed values"
-msgstr "Fixed values"
-
-#. module: procurement_report
-#: view:auto.supply.rules.report:0
-#: view:min.max.rules.report:0
-#: view:order.cycle.rules.report:0
-#: view:procurement.rules.report:0
-#: view:threshold.value.rules.report:0
-msgid "Nomenclature Filters..."
-msgstr "Nomenclature Filters..."
-
-#. module: procurement_report
-#: field:procurement.rules.report,threshold_ok:0
-#: field:threshold.value.rules.report,threshold_value:0
-msgid "Threshold value"
-msgstr "Threshold value"
-
-#. module: procurement_report
-#: help:procurement.batch.cron,nextcall:0
-msgid "Next planned execution date for this scheduler"
-msgstr "Next planned execution date for this scheduler"
-
-#. module: procurement_report
-#: view:procurement.batch.cron:0
-msgid "Batch view"
-msgstr "Batch view"
-
-#. module: procurement_report
-#: view:procurement.min.max.compute.all:0
-#: view:procurement.purchase.compute.all:0
-msgid "Cancel"
-msgstr "Cancel"
-
-#. module: procurement_report
-#: field:auto.supply.rules.report,location_id:0
-#: field:min.max.rules.report,location_id:0
-#: field:order.cycle.rules.report,location_id:0
-#: view:procurement.rules.report:0
-#: field:procurement.rules.report,location_id:0
-#: field:threshold.value.rules.report,location_id:0
-msgid "Location"
-msgstr "Location"
-
-#. module: procurement_report
-#: field:threshold.value.rules.report,product_lt:0
-msgid "Product LT"
-msgstr "Product LT"
-
-#. module: procurement_report
-#: view:procurement.purchase.compute.all:0
-msgid "Compute POs Creation"
-msgstr "Compute POs Creation"
-
-#. module: procurement_report
-#: field:auto.supply.rules.report,frequency_id:0
-#: field:order.cycle.rules.report,frequency_id:0
-#: field:threshold.value.rules.report,frequency_id:0
-msgid "Frequency"
-msgstr "Frequency"
-
-#. module: procurement_report
-#: model:ir.actions.act_window,name:procurement_report.action_procurement_rules_report
-#: model:ir.ui.menu,name:procurement_report.menu_procurement_rules_report
-#: view:procurement.rules.report:0
-msgid "Replenishment Rules Analysis"
-msgstr "Replenishment Rules Analysis"
-
-#. module: procurement_report
-#: model:ir.model,name:procurement_report.model_min_max_rules_report
-msgid "min.max.rules.report"
-msgstr "min.max.rules.report"
-
-#. module: procurement_report
-#: field:threshold.value.rules.report,compute_method:0
-msgid "Method of computation"
-msgstr "Method of computation"
-
-#. module: procurement_report
-#: selection:procurement.rules.report,auto_supply_ok:0
-#: selection:procurement.rules.report,min_max_ok:0
-#: selection:procurement.rules.report,order_cycle_ok:0
-#: selection:procurement.rules.report,threshold_ok:0
-msgid "Yes"
-msgstr "Yes"
-
-#. module: procurement_report
-#: model:ir.model,name:procurement_report.model_threshold_value_rules_report
-msgid "threshold.value.rules.report"
-msgstr "threshold.value.rules.report"
-
-#. module: procurement_report
-#: field:auto.supply.rules.report,stock:0
-#: field:min.max.rules.report,stock:0
-#: field:order.cycle.rules.report,stock:0
-#: field:threshold.value.rules.report,stock:0
-msgid "Stock (stock & children)"
-msgstr "Stock (stock & children)"
-
-#. module: procurement_report
-#: model:ir.module.module,shortdesc:procurement_report.module_meta_information
-msgid "Procurement Report"
-msgstr "Procurement Report"
-
-#. module: procurement_report
-#: view:auto.supply.rules.report:0
-#: model:ir.actions.act_window,name:procurement_report.action_auto_supply_rules_report
-msgid "Automatic supply rules"
-msgstr "Automatic supply rules"
-
-#. module: procurement_report
-#: field:auto.supply.rules.report,total_stock:0
-#: field:min.max.rules.report,total_stock:0
-#: field:order.cycle.rules.report,total_stock:0
-#: field:threshold.value.rules.report,total_stock:0
-msgid "Total stock"
-msgstr "Total stock"
-
-#. module: procurement_report
-#: field:procurement.batch.cron,cron_ids:0
-msgid "Associated Cron tasks"
-msgstr "Associated Cron tasks"
-
-#. module: procurement_report
-#: help:procurement.batch.cron,args:0
-msgid "Arguments to be passed to the method. e.g. (uid,)"
-msgstr "Arguments to be passed to the method. e.g. (uid,)"
-
-#. module: procurement_report
-#: model:ir.model,name:procurement_report.model_procurement_order
-msgid "Procurement"
-msgstr "Procurement"
-
-#. module: procurement_report
-#: view:procurement.rules.report:0
-msgid "Group By..."
-msgstr "Group By..."
-
-#. module: procurement_report
-#: field:min.max.rules.report,multiple_qty:0
-msgid "Multiple Qty"
-msgstr "Multiple Qty"
-
-#. module: procurement_report
-#: selection:procurement.batch.cron,type:0
-msgid "POs creation Batch (replenishment rules)"
-msgstr "POs creation Batch (replenishment rules)"
-
-#. module: procurement_report
-#: selection:threshold.value.rules.report,compute_method:0
-msgid "Computed values"
-msgstr "Computed values"
-
-#. module: procurement_report
-#: field:procurement.batch.cron,active:0
-msgid "Active"
-msgstr "Active"
-
-#. module: procurement_report
-#: field:procurement.batch.cron,numbercall:0
-msgid "Number of Calls"
-msgstr "Number of Calls"
-
-#. module: procurement_report
-#: model:ir.model,name:procurement_report.model_auto_supply_rules_report
-msgid "auto.supply.rules.report"
-msgstr "auto.supply.rules.report"
-
-#. module: procurement_report
-#: field:procurement.batch.cron,args:0
-msgid "Arguments"
-msgstr "Arguments"
-
-#. module: procurement_report
-#: field:auto.supply.rules.report,product_name:0
-#: field:min.max.rules.report,product_name:0
-#: field:order.cycle.rules.report,product_name:0
-#: field:procurement.batch.cron,name:0
-#: field:procurement.rules.report,product_name:0
-#: field:threshold.value.rules.report,product_name:0
-msgid "Name"
-msgstr "Name"
-
-#. module: procurement_report
-#: field:threshold.value.rules.report,fixed_lt:0
-msgid "Fixed LT"
-msgstr "Fixed LT"
-
-#. module: procurement_report
-#: model:ir.model,name:procurement_report.model_procurement_batch_cron
-msgid "procurement.batch.cron"
-msgstr "procurement.batch.cron"
-
-#. module: procurement_report
-#: field:order.cycle.rules.report,safety_stock:0
-#: field:threshold.value.rules.report,safety_stock:0
-msgid "Safety stock"
-msgstr "Safety stock"
-
-#. module: procurement_report
-#: model:ir.module.module,description:procurement_report.module_meta_information
-msgid "\n"
-"    This modoule adds a report to give a qucik and easy overview of the user on the split\n"
-"    of the replenishment rules within categories and products, to identify easily the item\n"
-"    without any replenishment rules...\n"
-"    "
-msgstr "\n"
-"    This modoule adds a report to give a qucik and easy overview of the user on the split\n"
-"    of the replenishment rules within categories and products, to identify easily the item\n"
-"    without any replenishment rules...\n"
-"    "
-
-#. module: procurement_report
-#: view:procurement.batch.cron:0
-msgid "View requests"
-msgstr "View requests"
-
-#. module: procurement_report
-#: help:procurement.batch.cron,numbercall:0
-msgid "Number of time the function is called,\n"
-"a negative number indicates no limit"
-msgstr "Number of time the function is called,\n"
-"a negative number indicates no limit"
-
-#. module: procurement_report
-#: field:auto.supply.rules.report,fmc:0
-#: field:min.max.rules.report,fmc:0
-#: field:order.cycle.rules.report,fmc:0
-#: field:threshold.value.rules.report,fmc:0
-msgid "FMC"
-msgstr "FMC"
-
-#. module: procurement_report
-#: field:threshold.value.rules.report,manual_qty:0
-msgid "Manual Qty"
-msgstr "Manual Qty"
-
-#. module: procurement_report
-#: field:auto.supply.rules.report,product_reference:0
-#: field:min.max.rules.report,product_reference:0
-#: field:order.cycle.rules.report,product_reference:0
-#: field:procurement.rules.report,product_reference:0
-#: view:stock.warehouse.orderpoint:0
-#: field:threshold.value.rules.report,product_reference:0
-msgid "Reference"
-msgstr "Reference"
-
-#. module: procurement_report
-#: field:auto.supply.rules.report,product_uom_id:0
-#: field:min.max.rules.report,product_uom_id:0
-#: field:order.cycle.rules.report,product_uom_id:0
-#: field:threshold.value.rules.report,product_uom_id:0
-msgid "UoM"
-msgstr "UoM"
-
-#. module: procurement_report
-#: field:procurement.rules.report,order_cycle_ok:0
-msgid "Order Cycle"
-msgstr "Order Cycle"
-
-#. module: procurement_report
-#: field:order.cycle.rules.report,safety_time:0
-msgid "Safety stock (in months)"
-msgstr "Safety stock (in months)"
-
-#. module: procurement_report
-#: model:ir.actions.act_window,name:procurement_report.action_min_max_rules_report
-#: view:min.max.rules.report:0
-msgid "Minimum stock rules"
-msgstr "Minimum stock rules"
-
-#. module: procurement_report
-#: view:procurement.batch.cron:0
-msgid "Parameters"
-msgstr "Parameters"
-
-#. module: procurement_report
-#: field:procurement.batch.cron,type:0
-msgid "Type"
-msgstr "Type"
-
-#. module: procurement_report
-#: help:procurement.batch.cron,priority:0
-msgid "0=Very Urgent\n"
-"10=Not urgent"
-msgstr "0=Very Urgent\n"
-"10=Not urgent"
-
-#. module: procurement_report
-#: model:ir.actions.act_window,name:procurement_report.action_order_cycle_rules_report
-#: view:order.cycle.rules.report:0
-msgid "Order cycle rules"
-msgstr "Order cycle rules"
-
-#. module: procurement_report
-#: field:auto.supply.rules.report,amc:0
-#: field:min.max.rules.report,amc:0
-#: field:order.cycle.rules.report,amc:0
-#: field:threshold.value.rules.report,amc:0
-msgid "AMC"
-msgstr "AMC"
-
-#. module: procurement_report
-#: view:procurement.min.max.compute.all:0
-msgid "Compute POs Creation"
-msgstr "Compute POs Creation"
-
-#. module: procurement_report
-#: selection:procurement.batch.cron,interval_type:0
-msgid "Minutes"
-msgstr "Minutes"
-
-#. module: procurement_report
-#: model:ir.actions.act_window,name:procurement_report.action_compute_schedulers_purchase
-msgid "POs Creation"
-msgstr "POs Creation"
-
-#. module: procurement_report
-#: field:auto.supply.rules.report,intermediate_stock:0
-#: field:min.max.rules.report,intermediate_stock:0
-#: field:order.cycle.rules.report,intermediate_stock:0
-#: field:threshold.value.rules.report,intermediate_stock:0
-msgid "ISi stocks"
-msgstr "ISi stocks"
-
-#. module: procurement_report
-#: field:auto.supply.rules.report,product_id:0
-#: field:min.max.rules.report,product_id:0
-#: field:order.cycle.rules.report,product_id:0
-#: field:procurement.rules.report,product_id:0
-#: view:stock.warehouse.orderpoint:0
-#: field:threshold.value.rules.report,product_id:0
-msgid "Product"
-msgstr "Product"
-
-#. module: procurement_report
-#: field:procurement.batch.cron,priority:0
-msgid "Priority"
-msgstr "Priority"
-
-#. module: procurement_report
-#: selection:procurement.batch.cron,interval_type:0
-msgid "Days"
-msgstr "Days"
-
-#. module: procurement_report
-#: field:order.cycle.rules.report,consumption:0
-msgid "Consumption"
-msgstr "Consumption"
-
-#. module: procurement_report
-#: view:procurement.min.max.compute.all:0
-msgid "POs Creation Min/Max Parameters"
-msgstr "POs Creation Min/Max Parameters"
-
-#. module: procurement_report
-#: field:procurement.batch.cron,user_id:0
-msgid "User"
-msgstr "User"
-
-#. module: procurement_report
-#: selection:procurement.rules.report,auto_supply_ok:0
-#: selection:procurement.rules.report,min_max_ok:0
-#: selection:procurement.rules.report,order_cycle_ok:0
-#: selection:procurement.rules.report,threshold_ok:0
-msgid "No"
-msgstr "No"
-
-#. module: procurement_report
-#: help:procurement.batch.cron,doall:0
-msgid "Enable this if you want to execute missed occurences as soon as the server restarts."
-msgstr "Enable this if you want to execute missed occurences as soon as the server restarts."
-
-#. module: procurement_report
-#: constraint:ir.cron:0
-#: constraint:procurement.batch.cron:0
-msgid "Invalid arguments"
-msgstr "Invalid arguments"
-
-#. module: procurement_report
-#: model:ir.model,name:procurement_report.model_ir_cron
-msgid "ir.cron"
-msgstr "ir.cron"
-
-#. module: procurement_report
-#: field:min.max.rules.report,min_qty:0
-msgid "Min. Qty"
-msgstr "Min. Qty"
 
 #. module: procurement_report
 #: field:auto.supply.rules.report,nomen_manda_1:0
@@ -617,74 +163,94 @@ msgstr "Min. Qty"
 #: field:threshold.value.rules.report,nomen_manda_1:0
 #: field:threshold.value.rules.report,nomen_manda_1_s:0
 msgid "Group"
-msgstr "Group"
+msgstr "Groupe"
 
 #. module: procurement_report
-#: field:min.max.rules.report,max_qty:0
-msgid "Max. Qty"
-msgstr "Max. Qty"
+#: view:procurement.purchase.compute.all:0
+msgid "Compute POs Creation"
+msgstr "Calculer la Création du BC"
 
 #. module: procurement_report
-#: field:ir.cron,batch_id:0
-#: field:res.request,batch_id:0
-msgid "Batch"
-msgstr "Batch"
+#: field:procurement.batch.cron,type:0
+msgid "Type"
+msgstr "Type"
 
 #. module: procurement_report
-#: selection:threshold.value.rules.report,consumption_method:0
-msgid "Forecasted Monthly Consumption"
-msgstr "Forecasted Monthly Consumption"
-
-#. module: procurement_report
-#: model:ir.model,name:procurement_report.model_res_request
-msgid "res.request"
-msgstr "res.request"
-
-#. module: procurement_report
-#: field:procurement.batch.cron,model:0
-msgid "Object"
-msgstr "Object"
+#: field:procurement.batch.cron,args:0
+msgid "Arguments"
+msgstr "Arguments"
 
 #. module: procurement_report
 #: field:order.cycle.rules.report,delivery_lt:0
 msgid "Delivery LT"
-msgstr "Delivery LT"
+msgstr "Délai de Livraison"
 
 #. module: procurement_report
-#: model:ir.actions.act_window,name:procurement_report.action_threshold_value_rules_report
-#: view:threshold.value.rules.report:0
-msgid "Threshold value rules"
-msgstr "Threshold value rules"
+#: field:auto.supply.rules.report,rule_id:0
+#: field:min.max.rules.report,rule_id:0
+#: field:order.cycle.rules.report,rule_id:0
+#: field:threshold.value.rules.report,rule_id:0
+msgid "Rules reference"
+msgstr "Références des Règles"
 
 #. module: procurement_report
-#: selection:procurement.batch.cron,type:0
-msgid "POs creation Batch (from orders)"
-msgstr "POs creation Batch (from orders)"
+#: selection:threshold.value.rules.report,compute_method:0
+msgid "Computed values"
+msgstr "Valeurs Calculées"
+
+#. module: procurement_report
+#: help:procurement.batch.cron,doall:0
+msgid "Enable this if you want to execute missed occurences as soon as the server restarts."
+msgstr "Activer ceci si vous souhaitez exécuter les occurrences manquantes dès le redémarrage du serveur."
+
+#. module: procurement_report
+#: selection:procurement.batch.cron,interval_type:0
+msgid "Days"
+msgstr "Jours"
 
 #. module: procurement_report
 #: view:procurement.batch.cron:0
-msgid "Description"
-msgstr "Description"
+msgid "POs creation batches configuration"
+msgstr "Création Bons de Commande - Configuration Lots"
 
 #. module: procurement_report
-#: help:procurement.batch.cron,interval_number:0
-msgid "Repeat every x."
-msgstr "Repeat every x."
+#: field:procurement.batch.cron,interval_number:0
+msgid "Interval Number"
+msgstr "Numéro Intervalle"
 
 #. module: procurement_report
 #: view:procurement.batch.cron:0
-msgid "POs creation batch configuration"
-msgstr "POs creation batch configuration"
+msgid "View requests"
+msgstr "Vue des Demandes"
+
+#. module: procurement_report
+#: field:procurement.batch.cron,priority:0
+msgid "Priority"
+msgstr "Priorité"
+
+#. module: procurement_report
+#: field:auto.supply.rules.report,nomen_manda_3:0
+#: field:auto.supply.rules.report,nomen_manda_3_s:0
+#: field:min.max.rules.report,nomen_manda_3:0
+#: field:min.max.rules.report,nomen_manda_3_s:0
+#: field:order.cycle.rules.report,nomen_manda_3:0
+#: field:order.cycle.rules.report,nomen_manda_3_s:0
+#: field:procurement.rules.report,nomen_manda_3:0
+#: field:procurement.rules.report,nomen_manda_3_s:0
+#: field:threshold.value.rules.report,nomen_manda_3:0
+#: field:threshold.value.rules.report,nomen_manda_3_s:0
+msgid "Root"
+msgstr "Origine"
 
 #. module: procurement_report
 #: field:procurement.rules.report,auto_supply_ok:0
 msgid "Auto Supply"
-msgstr "Auto Supply"
+msgstr "Approvisionnement Automatique"
 
 #. module: procurement_report
-#: field:procurement.rules.report,min_max_ok:0
-msgid "Min/Max"
-msgstr "Min/Max"
+#: model:ir.model,name:procurement_report.model_procurement_order
+msgid "Procurement"
+msgstr "Approvisionnement"
 
 #. module: procurement_report
 #: field:auto.supply.rules.report,moh:0
@@ -692,10 +258,443 @@ msgstr "Min/Max"
 #: field:order.cycle.rules.report,moh:0
 #: field:threshold.value.rules.report,moh:0
 msgid "MoH"
-msgstr "MoH"
+msgstr "Ministère de la Santé"
+
+#. module: procurement_report
+#: view:procurement.batch.cron:0
+msgid "Parameters"
+msgstr "Paramètres"
+
+#. module: procurement_report
+#: view:procurement.batch.cron:0
+msgid "Batch view"
+msgstr "Lot - Vue"
+
+#. module: procurement_report
+#: field:threshold.value.rules.report,fixed_lt:0
+msgid "Fixed LT"
+msgstr "Délai Fixé"
+
+#. module: procurement_report
+#: selection:procurement.batch.cron,type:0
+msgid "POs creation Batch (from orders)"
+msgstr "Création Bons de Commande - Lot  (à partir des commandes)"
+
+#. module: procurement_report
+#: view:procurement.purchase.compute.all:0
+msgid "POs Creation Parameters"
+msgstr "Création BCs Parametres"
+
+#. module: procurement_report
+#: model:ir.model,name:procurement_report.model_procurement_rules_report
+msgid "procurement.rules.report"
+msgstr "procurement.rules.report"
+
+#. module: procurement_report
+#: selection:procurement.batch.cron,type:0
+msgid "POs creation Batch (replenishment rules)"
+msgstr "Création Bons de Commande - Lot  (règles de réapprovisionnement)"
+
+#. module: procurement_report
+#: model:ir.model,name:procurement_report.model_min_max_rules_report
+msgid "min.max.rules.report"
+msgstr "min.max.rules.report"
+
+#. module: procurement_report
+#: model:ir.model,name:procurement_report.model_auto_supply_rules_report
+msgid "auto.supply.rules.report"
+msgstr "auto.supply.rules.report"
+
+#. module: procurement_report
+#: field:auto.supply.rules.report,product_reference:0
+#: field:min.max.rules.report,product_reference:0
+#: field:order.cycle.rules.report,product_reference:0
+#: field:procurement.rules.report,product_reference:0
+#: view:stock.warehouse.orderpoint:0
+#: field:threshold.value.rules.report,product_reference:0
+msgid "Reference"
+msgstr "Référence"
+
+#. module: procurement_report
+#: field:procurement.rules.report,order_cycle_ok:0
+msgid "Order Cycle"
+msgstr "Cycle de Commande"
+
+#. module: procurement_report
+#: help:procurement.batch.cron,nextcall:0
+msgid "Next planned execution date for this scheduler"
+msgstr "Prochaine date d'exécution prévue pour ce planificateur"
+
+#. module: procurement_report
+#: view:procurement.batch.cron:0
+msgid "Requests"
+msgstr "Demandes"
+
+#. module: procurement_report
+#: field:threshold.value.rules.report,manual_qty:0
+msgid "Manual Qty"
+msgstr "Qté saisie manuellement"
+
+#. module: procurement_report
+#: field:order.cycle.rules.report,consumption:0
+msgid "Consumption"
+msgstr "Consommation"
+
+#. module: procurement_report
+#: constraint:ir.cron:0
+#: constraint:procurement.batch.cron:0
+msgid "Invalid arguments"
+msgstr "Arguments non valides"
+
+#. module: procurement_report
+#: field:order.cycle.rules.report,safety_stock:0
+#: field:threshold.value.rules.report,safety_stock:0
+msgid "Safety stock"
+msgstr "Stock Sécurité"
+
+#. module: procurement_report
+#: field:auto.supply.rules.report,order_qty:0
+msgid "Order Qty"
+msgstr "Qté de la Commande"
+
+#. module: procurement_report
+#: field:auto.supply.rules.report,product_uom_id:0
+#: field:min.max.rules.report,product_uom_id:0
+#: field:order.cycle.rules.report,product_uom_id:0
+#: field:threshold.value.rules.report,product_uom_id:0
+msgid "UoM"
+msgstr "UdM"
+
+#. module: procurement_report
+#: model:ir.actions.act_window,name:procurement_report.action_procurement_batch_form
+#: model:ir.ui.menu,name:procurement_report.menu_procurement_batch
+msgid "POs Creation (Batch configuration)"
+msgstr "Création Bons de Commande (Configuration Lot)"
+
+#. module: procurement_report
+#: view:procurement.min.max.compute.all:0
+msgid "POs Creation Min/Max Parameters"
+msgstr "Paramètres Min/Max de création de BC"
+
+#. module: procurement_report
+#: model:ir.actions.act_window,name:procurement_report.action_min_max_rules_report
+#: view:min.max.rules.report:0
+msgid "Minimum stock rules"
+msgstr "Règles de Stock Minimum"
+
+#. module: procurement_report
+#: field:procurement.rules.report,threshold_ok:0
+#: field:threshold.value.rules.report,threshold_value:0
+msgid "Threshold value"
+msgstr "Valeur Seuil"
 
 #. module: procurement_report
 #: view:procurement.batch.cron:0
 msgid "General information"
-msgstr "General information"
+msgstr "Informations Générales"
+
+#. module: procurement_report
+#: model:ir.model,name:procurement_report.model_procurement_batch_cron
+msgid "procurement.batch.cron"
+msgstr "procurement.batch.cron"
+
+#. module: procurement_report
+#: field:procurement.batch.cron,cron_ids:0
+msgid "Associated Cron tasks"
+msgstr "Tâches Cron connexes"
+
+#. module: procurement_report
+#: view:procurement.min.max.compute.all:0
+#: view:procurement.purchase.compute.all:0
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: procurement_report
+#: selection:procurement.batch.cron,interval_type:0
+msgid "Work Days"
+msgstr "Jours Ouvrés"
+
+#. module: procurement_report
+#: selection:procurement.rules.report,auto_supply_ok:0
+#: selection:procurement.rules.report,min_max_ok:0
+#: selection:procurement.rules.report,order_cycle_ok:0
+#: selection:procurement.rules.report,threshold_ok:0
+msgid "Yes"
+msgstr "Oui"
+
+#. module: procurement_report
+#: field:auto.supply.rules.report,fmc:0
+#: field:min.max.rules.report,fmc:0
+#: field:order.cycle.rules.report,fmc:0
+#: field:threshold.value.rules.report,fmc:0
+msgid "FMC"
+msgstr "PCM"
+
+#. module: procurement_report
+#: model:ir.module.module,description:procurement_report.module_meta_information
+msgid "\n"
+"    This modoule adds a report to give a qucik and easy overview of the user on the split\n"
+"    of the replenishment rules within categories and products, to identify easily the item\n"
+"    without any replenishment rules...\n"
+"    "
+msgstr "\n"
+"    Ce module ajoute un rapport afin de donner un aperçu rapide et facile à l'utilisateur quand à  la répartition\n"
+"     des règles de réapprovisionnement au sein des catégories et des produits, et ce afin d'identifier facilement l'article sans règles de réapprovisionnement ...\n"
+"    "
+
+#. module: procurement_report
+#: field:procurement.batch.cron,function:0
+msgid "Function"
+msgstr "Fonction"
+
+#. module: procurement_report
+#: model:ir.model,name:procurement_report.model_threshold_value_rules_report
+msgid "threshold.value.rules.report"
+msgstr "threshold.value.rules.report"
+
+#. module: procurement_report
+#: help:procurement.batch.cron,numbercall:0
+msgid "Number of time the function is called,\n"
+"a negative number indicates no limit"
+msgstr "Nombre de fois où la fonction est appelée,\n"
+"un nombre négatif indique qu'il n'y a pas de limite"
+
+#. module: procurement_report
+#: field:auto.supply.rules.report,total_stock:0
+#: field:min.max.rules.report,total_stock:0
+#: field:order.cycle.rules.report,total_stock:0
+#: field:threshold.value.rules.report,total_stock:0
+msgid "Total stock"
+msgstr "Stock Total"
+
+#. module: procurement_report
+#: selection:procurement.batch.cron,interval_type:0
+msgid "Minutes"
+msgstr "Minutes"
+
+#. module: procurement_report
+#: field:threshold.value.rules.report,consumption_method:0
+msgid "Consumption Method"
+msgstr "Méthode de Consommation"
+
+#. module: procurement_report
+#: model:ir.model,name:procurement_report.model_ir_cron
+msgid "ir.cron"
+msgstr "ir.cron"
+
+#. module: procurement_report
+#: view:procurement.rules.report:0
+msgid "Group By..."
+msgstr "Grouper Par..."
+
+#. module: procurement_report
+#: field:procurement.batch.cron,request_ids:0
+msgid "Associated Requests"
+msgstr "Demandes Connexes"
+
+#. module: procurement_report
+#: field:procurement.batch.cron,doall:0
+msgid "Repeat Missed"
+msgstr "Recommencer les manqués"
+
+#. module: procurement_report
+#: view:procurement.min.max.compute.all:0
+msgid "Compute POs Creation"
+msgstr "Calcul la création du Bon de Commande"
+
+#. module: procurement_report
+#: model:ir.model,name:procurement_report.model_procurement_min_max_compute_all
+#: model:ir.model,name:procurement_report.model_procurement_purchase_compute_all
+msgid "Compute all schedulers"
+msgstr "Calculer tous les planificateurs"
+
+#. module: procurement_report
+#: field:auto.supply.rules.report,consumption_stock:0
+#: field:min.max.rules.report,consumption_stock:0
+#: field:order.cycle.rules.report,consumption_stock:0
+#: field:threshold.value.rules.report,consumption_stock:0
+msgid "CUi stocks"
+msgstr "CUi stocks"
+
+#. module: procurement_report
+#: field:auto.supply.rules.report,intermediate_stock:0
+#: field:min.max.rules.report,intermediate_stock:0
+#: field:order.cycle.rules.report,intermediate_stock:0
+#: field:threshold.value.rules.report,intermediate_stock:0
+msgid "ISi stocks"
+msgstr "ISi Stock Intermédiaire - SI Stocks"
+
+#. module: procurement_report
+#: selection:threshold.value.rules.report,consumption_method:0
+msgid "Average Monthly Consumption"
+msgstr "Consommation Moyenne Mensuelle"
+
+#. module: procurement_report
+#: view:procurement.batch.cron:0
+msgid "Request"
+msgstr "Demande"
+
+#. module: procurement_report
+#: field:auto.supply.rules.report,nomen_name:0
+#: field:min.max.rules.report,nomen_name:0
+#: field:order.cycle.rules.report,nomen_name:0
+#: field:threshold.value.rules.report,nomen_name:0
+msgid "Nomenclature level"
+msgstr "Niveau de la Nomenclature"
+
+#. module: procurement_report
+#: field:procurement.batch.cron,nextcall:0
+msgid "Next Execution Date"
+msgstr "Prochaine date d'exécution"
+
+#. module: procurement_report
+#: model:ir.actions.act_window,name:procurement_report.action_compute_schedulers_min_max
+#: model:ir.ui.menu,name:procurement_report.menu_stock_proc_schedulers_min_max
+msgid "POs Creation (Min / Max)"
+msgstr "Création BCs (Min / Max)"
+
+#. module: procurement_report
+#: view:auto.supply.rules.report:0
+#: view:min.max.rules.report:0
+#: view:order.cycle.rules.report:0
+#: view:procurement.rules.report:0
+#: view:threshold.value.rules.report:0
+msgid "Nomenclature Filters..."
+msgstr "Filtres de Nomenclature ..."
+
+#. module: procurement_report
+#: field:procurement.batch.cron,user_id:0
+msgid "User"
+msgstr "Utilisateur"
+
+#. module: procurement_report
+#: model:ir.actions.act_window,name:procurement_report.action_compute_schedulers_purchase
+msgid "POs Creation"
+msgstr "Création BCs"
+
+#. module: procurement_report
+#: field:procurement.batch.cron,last_run_on:0
+msgid "Last run on"
+msgstr "Dernière exécution sur"
+
+#. module: procurement_report
+#: field:auto.supply.rules.report,product_name:0
+#: field:min.max.rules.report,product_name:0
+#: field:order.cycle.rules.report,product_name:0
+#: field:procurement.batch.cron,name:0
+#: field:procurement.rules.report,product_name:0
+#: field:threshold.value.rules.report,product_name:0
+msgid "Name"
+msgstr "Nom"
+
+#. module: procurement_report
+#: field:order.cycle.rules.report,order_coverage:0
+msgid "Order coverage"
+msgstr "Couverture de la Commande"
+
+#. module: procurement_report
+#: model:ir.actions.act_window,name:procurement_report.action_procurement_rules_report
+#: model:ir.ui.menu,name:procurement_report.menu_procurement_rules_report
+#: view:procurement.rules.report:0
+msgid "Replenishment Rules Analysis"
+msgstr "Analyse des Règles de Réapprovisionnement"
+
+#. module: procurement_report
+#: model:ir.model,name:procurement_report.model_res_request
+msgid "res.request"
+msgstr "res.request"
+
+#. module: procurement_report
+#: field:auto.supply.rules.report,stock:0
+#: field:min.max.rules.report,stock:0
+#: field:order.cycle.rules.report,stock:0
+#: field:threshold.value.rules.report,stock:0
+msgid "Stock (stock & children)"
+msgstr "Stock (stock et enfants)"
+
+#. module: procurement_report
+#: field:threshold.value.rules.report,compute_method:0
+msgid "Method of computation"
+msgstr "Méthode de calcul"
+
+#. module: procurement_report
+#: field:min.max.rules.report,min_qty:0
+msgid "Min. Qty"
+msgstr "Qté. Min. "
+
+#. module: procurement_report
+#: field:auto.supply.rules.report,product_id:0
+#: field:min.max.rules.report,product_id:0
+#: field:order.cycle.rules.report,product_id:0
+#: field:procurement.rules.report,product_id:0
+#: view:stock.warehouse.orderpoint:0
+#: field:threshold.value.rules.report,product_id:0
+msgid "Product"
+msgstr "Produit"
+
+#. module: procurement_report
+#: view:procurement.batch.cron:0
+msgid "POs creation batch configuration"
+msgstr "Création Bons de Commande - Configuration Lot"
+
+#. module: procurement_report
+#: field:order.cycle.rules.report,safety_time:0
+msgid "Safety stock (in months)"
+msgstr "Stock Sécurité (en mois)"
+
+#. module: procurement_report
+#: view:procurement.batch.cron:0
+msgid "Description"
+msgstr "Description"
+
+#. module: procurement_report
+#: field:auto.supply.rules.report,nomen_manda_2:0
+#: field:auto.supply.rules.report,nomen_manda_2_s:0
+#: field:min.max.rules.report,nomen_manda_2:0
+#: field:min.max.rules.report,nomen_manda_2_s:0
+#: field:order.cycle.rules.report,nomen_manda_2:0
+#: field:order.cycle.rules.report,nomen_manda_2_s:0
+#: field:procurement.rules.report,nomen_manda_2:0
+#: field:procurement.rules.report,nomen_manda_2_s:0
+#: field:threshold.value.rules.report,nomen_manda_2:0
+#: field:threshold.value.rules.report,nomen_manda_2_s:0
+msgid "Family"
+msgstr "Famille"
+
+#. module: procurement_report
+#: field:procurement.batch.cron,active:0
+msgid "Active"
+msgstr "Actif"
+
+#. module: procurement_report
+#: selection:procurement.batch.cron,interval_type:0
+msgid "Hours"
+msgstr "Heures"
+
+#. module: procurement_report
+#: view:auto.supply.rules.report:0
+#: model:ir.actions.act_window,name:procurement_report.action_auto_supply_rules_report
+msgid "Automatic supply rules"
+msgstr "Règles d'approvisionnement automatiques"
+
+#. module: procurement_report
+#: model:ir.actions.act_window,name:procurement_report.action_order_cycle_rules_report
+#: view:order.cycle.rules.report:0
+msgid "Order cycle rules"
+msgstr "Règles du cycle de commande"
+
+#. module: procurement_report
+#: help:procurement.batch.cron,priority:0
+msgid "0=Very Urgent\n"
+"10=Not urgent"
+msgstr "0=Très Urgent\n"
+"10=Pas Urgent"
+
+#. module: procurement_report
+#: selection:procurement.rules.report,auto_supply_ok:0
+#: selection:procurement.rules.report,min_max_ok:0
+#: selection:procurement.rules.report,order_cycle_ok:0
+#: selection:procurement.rules.report,threshold_ok:0
+msgid "No"
+msgstr "Non"
 

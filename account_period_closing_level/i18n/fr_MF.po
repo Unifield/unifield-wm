@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.0.3\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2013-10-17 07:42+0000\n"
-"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,65 +16,26 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: account_period_closing_level
-#: code:addons/account_period_closing_level/account_journal_period.py:36
+#: view:account.period:0
+msgid "Are you sure you want to re-open this period?"
+msgstr "Etes-vous certain de vouloir ré-ouvrir cette période?"
+
+#. module: account_period_closing_level
 #: code:addons/account_period_closing_level/account_period.py:136
 #, python-format
-msgid "Error !"
-msgstr "Error !"
+msgid "You cannot close a period containing unbalanced move lines!"
+msgstr "Vous ne pouvez pas clôturer une période dont des lignes d'écriture ne sont pas balancées! "
 
 #. module: account_period_closing_level
 #: view:account.period:0
-msgid "To Close"
-msgstr "To Close"
+msgid "Are you sure you want to open this period?"
+msgstr "Etes-vous certain de vouloir ouvrir cette période?"
 
 #. module: account_period_closing_level
-#: view:account.period:0
-msgid "Are you sure you want to close this period?"
-msgstr "Are you sure you want to close this period?"
-
-#. module: account_period_closing_level
-#: view:account.period.create:0
-#: model:ir.actions.act_window,name:account_period_closing_level.action_account_create_period
-#: model:ir.ui.menu,name:account_period_closing_level.menu_action_account_create_period
-msgid "Create Period"
-msgstr "Create Period"
-
-#. module: account_period_closing_level
-#: constraint:account.period:0
-msgid "Invalid period ! Some periods overlap or the date period is not in the scope of the fiscal year. "
-msgstr "Invalid period ! Some periods overlap or the date period is not in the scope of the fiscal year. "
-
-#. module: account_period_closing_level
-#: view:wizard.confirm.closing.period:0
-msgid "No"
-msgstr "No"
-
-#. module: account_period_closing_level
-#: code:addons/account_period_closing_level/wizard/wizard_confirm_closing_period.py:41
-#: code:addons/account_period_closing_level/wizard/wizard_confirm_closing_period.py:50
+#: code:addons/account_period_closing_level/account_period.py:111
 #, python-format
-msgid "Error"
-msgstr "Error"
-
-#. module: account_period_closing_level
-#: view:account.period.create:0
-msgid "Cancel"
-msgstr "Cancel"
-
-#. module: account_period_closing_level
-#: view:wizard.confirm.closing.period:0
-msgid "Have you really do all verifications given at screen?"
-msgstr "Have you really do all verifications given at screen?"
-
-#. module: account_period_closing_level
-#: view:account.period:0
-msgid "Close period (Mission)"
-msgstr "Close period (Mission)"
-
-#. module: account_period_closing_level
-#: constraint:account.period:0
-msgid "Error ! The duration of the Period(s) is/are invalid. "
-msgstr "Error ! The duration of the Period(s) is/are invalid. "
+msgid "Some invoices are not paid and have an overdue date. Please verify this with #\"Open overdue invoice\" button and fix the problem."
+msgstr "Certaines factures sont impayées et ont une date de retard. Veuillez vérifier avec #  bouton \"Ouvrir facture en retard\" et résoudre le problème."
 
 #. module: account_period_closing_level
 #: model:ir.model,name:account_period_closing_level.model_account_period_create
@@ -82,44 +43,95 @@ msgid "account.period.create"
 msgstr "account.period.create"
 
 #. module: account_period_closing_level
-#: view:account.period:0
-msgid "Period"
-msgstr "Period"
-
-#. module: account_period_closing_level
-#: model:ir.module.module,shortdesc:account_period_closing_level.module_meta_information
-msgid "Account Period for MSF"
-msgstr "Account Period for MSF"
-
-#. module: account_period_closing_level
-#: model:ir.actions.act_window,name:account_period_closing_level.action_account_period_closing_level_tree
-msgid "Close a Period"
-msgstr "Close a Period"
-
-#. module: account_period_closing_level
-#: view:account.period:0
-msgid "Close period (HQ)"
-msgstr "Close period (HQ)"
-
-#. module: account_period_closing_level
-#: view:account.period:0
-msgid "Re-open period (Mission)"
-msgstr "Re-open period (Mission)"
+#: code:addons/account_period_closing_level/wizard/wizard_confirm_closing_period.py:41
+#, python-format
+msgid "No period selected. Please do a closing period confirmation from a period!"
+msgstr "Pas de période sélectionnée. Veuillez effectuer une confirmation de clôture de période d'une période!"
 
 #. module: account_period_closing_level
 #: view:account.period:0
 msgid "Open period"
-msgstr "Open period"
+msgstr "Ouvrir Période"
 
 #. module: account_period_closing_level
-#: view:account.period:0
-msgid "Are you sure you want to open this period?"
-msgstr "Are you sure you want to open this period?"
+#: code:addons/account_period_closing_level/wizard/wizard_confirm_closing_period.py:50
+#, python-format
+msgid "An unknown error has occured on Period closing confirmation wizard. Please contact an administrator to solve this problem."
+msgstr "Une erreur inconnue s'est produite lors de la confirmation par assistant de la clôture de la Période. Veuillez contacter votre administrateur pour résoudre ce problème."
+
+#. module: account_period_closing_level
+#: model:ir.model,name:account_period_closing_level.model_account_journal_period
+msgid "Journal Period"
+msgstr "Période du Journal"
+
+#. module: account_period_closing_level
+#: view:wizard.confirm.closing.period:0
+msgid "Closing Period"
+msgstr "Clôture de la Période"
+
+#. module: account_period_closing_level
+#: model:ir.actions.act_window,name:account_period_closing_level.action_account_period_closing_level_tree
+msgid "Close a Period"
+msgstr "Clôturer une Période"
+
+#. module: account_period_closing_level
+#: code:addons/account_period_closing_level/account_journal_period.py:36
+#: code:addons/account_period_closing_level/account_period.py:136
+#, python-format
+msgid "Error !"
+msgstr "Erreur !"
+
+#. module: account_period_closing_level
+#: constraint:account.period:0
+msgid "Error ! The duration of the Period(s) is/are invalid. "
+msgstr "Erreur ! La durée de la(des) période(s) est/sont invalides. "
 
 #. module: account_period_closing_level
 #: constraint:account.fiscalyear:0
 msgid "Error! The duration of the Fiscal Year is invalid. "
-msgstr "Error! The duration of the Fiscal Year is invalid. "
+msgstr "Erreur ! La durée de l'Exercice comptable est incorrecte. "
+
+#. module: account_period_closing_level
+#: field:account.period.create,fiscalyear:0
+msgid "Fiscal year"
+msgstr "Exercice Comptable"
+
+#. module: account_period_closing_level
+#: model:ir.module.module,shortdesc:account_period_closing_level.module_meta_information
+msgid "Account Period for MSF"
+msgstr "Compte - Période MSF"
+
+#. module: account_period_closing_level
+#: view:account.period:0
+msgid "Close period (Field)"
+msgstr "Clôturer la Période (Terrain)"
+
+#. module: account_period_closing_level
+#: view:account.period:0
+msgid "Close period (HQ)"
+msgstr "Clôturer la Période (HQ)"
+
+#. module: account_period_closing_level
+#: view:account.period:0
+msgid "Close period (Mission)"
+msgstr "Clôturer la Période (Mission)"
+
+#. module: account_period_closing_level
+#: model:ir.actions.act_window,help:account_period_closing_level.action_account_period_closing_level_tree
+msgid "A period is a fiscal period of time during which accounting entries should be recorded for accounting related activities. Monthly period is the norm but depending on your countries or company needs, you could also have quarterly periods. Closing a period will make it impossible to record new accounting entries, all new entries should then be made on the following open period. Close a period when you do not want to record new entries and want to lock this period for tax related calculation."
+msgstr "Une période est une période comptable dans laquelle sont enregistrées les écritures comptables relatives à cette période. La périodicité mensuelle est la norme, mais en fonction de vos pays ou besoins de l'entreprise, il est aussi possible de configurer des périodes trimestrielles. Une période clôturée ne peut plus recevoir d'entrées. Toute nouvelle saisie doit alors s'effectuer dans une période suivante ouverte. Clôturez seulement votre période si vous ne souhaitez plus enregistrer de nouvelles écritures et produire vos états financiers"
+
+#. module: account_period_closing_level
+#: code:addons/account_period_closing_level/wizard/wizard_confirm_closing_period.py:41
+#: code:addons/account_period_closing_level/wizard/wizard_confirm_closing_period.py:50
+#, python-format
+msgid "Error"
+msgstr "Erreur"
+
+#. module: account_period_closing_level
+#: view:account.period:0
+msgid "Are you sure you want to close this period?"
+msgstr "Etes-vous certain de vouloir clôturer cette période? "
 
 #. module: account_period_closing_level
 #: code:addons/account_period_closing_level/account_period.py:71
@@ -129,87 +141,124 @@ msgstr "Error! The duration of the Fiscal Year is invalid. "
 #: code:addons/account_period_closing_level/account_period.py:111
 #, python-format
 msgid "Warning"
-msgstr "Warning"
+msgstr "Avertissement"
 
 #. module: account_period_closing_level
-#: field:account.period.create,fiscalyear:0
-msgid "Fiscal year"
-msgstr "Fiscal year"
+#: constraint:account.fiscalyear:0
+msgid "Error! You cannot define overlapping fiscal years"
+msgstr "Erreur ! Les Exercices Comptables ne doivent pas se chevaucher."
+
+#. module: account_period_closing_level
+#: model:ir.model,name:account_period_closing_level.model_account_fiscalyear
+msgid "Fiscal Year"
+msgstr "Exercice Comptable"
 
 #. module: account_period_closing_level
 #: code:addons/account_period_closing_level/account_journal_period.py:36
 #, python-format
 msgid "Period '%s' is not open!"
-msgstr "Period '%s' is not open!"
+msgstr "Période '%s' n'est pas ouverte!"
 
 #. module: account_period_closing_level
-#: help:account.period,number:0
-msgid "This number informs period's order. Should be between 1 and 15. If 16: have not been defined yet."
-msgstr "This number informs period's order. Should be between 1 and 15. If 16: have not been defined yet."
-
-#. module: account_period_closing_level
-#: code:addons/account_period_closing_level/account_period.py:82
-#, python-format
-msgid "Recurring entries were not created for period '%s'. Please create them before closing period"
-msgstr "Recurring entries were not created for period '%s'. Please create them before closing period"
-
-#. module: account_period_closing_level
-#: constraint:account.fiscalyear:0
-msgid "Error! You cannot define overlapping fiscal years"
-msgstr "Error! You cannot define overlapping fiscal years"
-
-#. module: account_period_closing_level
-#: view:account.period:0
-msgid "Close period (Field)"
-msgstr "Close period (Field)"
+#: view:account.period.create:0
+msgid "Cancel"
+msgstr "Annuler"
 
 #. module: account_period_closing_level
 #: code:addons/account_period_closing_level/account_period.py:78
 #, python-format
 msgid "The register '%s' is not closed. Please close it before closing period"
-msgstr "The register '%s' is not closed. Please close it before closing period"
-
-#. module: account_period_closing_level
-#: model:ir.model,name:account_period_closing_level.model_wizard_confirm_closing_period
-msgid "Closing period confirmation wizard"
-msgstr "Closing period confirmation wizard"
+msgstr "Le registre '%s' n'est pas clôturé. Veuillez d'abord le clôturer avant de clôturer la période"
 
 #. module: account_period_closing_level
 #: view:account.period:0
-msgid "Re-open period (Field)"
-msgstr "Re-open period (Field)"
+msgid "To Close"
+msgstr "A fermer"
+
+#. module: account_period_closing_level
+#: view:wizard.confirm.closing.period:0
+msgid "Yes"
+msgstr "Oui"
+
+#. module: account_period_closing_level
+#: view:wizard.confirm.closing.period:0
+msgid "Have you really do all verifications given at screen?"
+msgstr "Avez-vous vraiment fait toutes vérifications demandées sur l'écran?"
+
+#. module: account_period_closing_level
+#: view:account.period:0
+msgid "Re-open period (Mission)"
+msgstr "Ré-ouvrir période (Mission)"
+
+#. module: account_period_closing_level
+#: code:addons/account_period_closing_level/account_period.py:71
+#, python-format
+msgid "Cannot open this period. All previous periods must be opened before opening this one."
+msgstr "Ne peut ouvrir cette période. Toutes les périodes antérieures doivent être ouvertes avant de pouvoir ouvrir celle-ci. "
+
+#. module: account_period_closing_level
+#: view:account.period.create:0
+#: model:ir.actions.act_window,name:account_period_closing_level.action_account_create_period
+#: model:ir.ui.menu,name:account_period_closing_level.menu_action_account_create_period
+msgid "Create Period"
+msgstr "Créer une Période"
+
+#. module: account_period_closing_level
+#: view:account.period:0
+msgid "Period"
+msgstr "Période"
+
+#. module: account_period_closing_level
+#: code:addons/account_period_closing_level/account_period.py:82
+#, python-format
+msgid "Recurring entries were not created for period '%s'. Please create them before closing period"
+msgstr "Les Ecritures périodiques n'ont pas été créées pour la période '%s'. Veuillez les créer avant de clôturer cette période. "
 
 #. module: account_period_closing_level
 #: code:addons/account_period_closing_level/account_period.py:101
 #, python-format
 msgid "No FX rate found for currency '%s'"
-msgstr "No FX rate found for currency '%s'"
+msgstr "Pas de taux de change trouvé pour la devise '%s'"
 
 #. module: account_period_closing_level
-#: model:ir.model,name:account_period_closing_level.model_account_journal_period
-msgid "Journal Period"
-msgstr "Journal Period"
+#: field:account.period,number:0
+msgid "Number for register creation"
+msgstr "Numéro pour la création d'un registre"
 
 #. module: account_period_closing_level
-#: code:addons/account_period_closing_level/account_period.py:136
-#, python-format
-msgid "You cannot close a period containing unbalanced move lines!"
-msgstr "You cannot close a period containing unbalanced move lines!"
+#: model:ir.model,name:account_period_closing_level.model_wizard_confirm_closing_period
+msgid "Closing period confirmation wizard"
+msgstr "Clôture de la Période Confirmation Assistant"
+
+#. module: account_period_closing_level
+#: help:account.period,number:0
+msgid "This number informs period's order. Should be between 1 and 15. If 16: have not been defined yet."
+msgstr "Ce nombre vous indique la période de la commande. Devrait être entre le 1 et 15. Si 16: n'a pas encore été définie."
+
+#. module: account_period_closing_level
+#: selection:account.period.create,fiscalyear:0
+msgid "Current FY"
+msgstr "Exercice Comptable actuel"
+
+#. module: account_period_closing_level
+#: constraint:account.period:0
+msgid "Invalid period ! Some periods overlap or the date period is not in the scope of the fiscal year. "
+msgstr "Période incorrecte ! Certaines périodes se chevauchent ou la date de la période n'est pas incluse dans l'exercice comptable. "
+
+#. module: account_period_closing_level
+#: view:account.period:0
+msgid "Re-open period (Field)"
+msgstr "Ré-ouvrir période (Terrain)"
+
+#. module: account_period_closing_level
+#: model:ir.model,name:account_period_closing_level.model_account_period
+msgid "Account period"
+msgstr "Compte - Période"
 
 #. module: account_period_closing_level
 #: view:account.period.create:0
 msgid "Create Periods"
-msgstr "Create Periods"
-
-#. module: account_period_closing_level
-#: view:wizard.confirm.closing.period:0
-msgid "Yes"
-msgstr "Yes"
-
-#. module: account_period_closing_level
-#: model:ir.actions.act_window,help:account_period_closing_level.action_account_period_closing_level_tree
-msgid "A period is a fiscal period of time during which accounting entries should be recorded for accounting related activities. Monthly period is the norm but depending on your countries or company needs, you could also have quarterly periods. Closing a period will make it impossible to record new accounting entries, all new entries should then be made on the following open period. Close a period when you do not want to record new entries and want to lock this period for tax related calculation."
-msgstr "A period is a fiscal period of time during which accounting entries should be recorded for accounting related activities. Monthly period is the norm but depending on your countries or company needs, you could also have quarterly periods. Closing a period will make it impossible to record new accounting entries, all new entries should then be made on the following open period. Close a period when you do not want to record new entries and want to lock this period for tax related calculation."
+msgstr "Créer des Périodes"
 
 #. module: account_period_closing_level
 #: model:ir.module.module,description:account_period_closing_level.module_meta_information
@@ -219,67 +268,18 @@ msgid "\n"
 "    \n"
 "    "
 msgstr "\n"
-"    This module adds states to the fiscal years and accounting periods,\n"
-"    with a new wizard to create tem automatically.\n"
+"   Ce module ajoute des statuts aux exercices et périodes comptables, à l'aide d'un nouvel assistant qui les crée automatiquement.\n"
+"\n"
 "    \n"
 "    "
 
 #. module: account_period_closing_level
-#: view:account.period:0
-msgid "Are you sure you want to re-open this period?"
-msgstr "Are you sure you want to re-open this period?"
-
-#. module: account_period_closing_level
-#: code:addons/account_period_closing_level/wizard/wizard_confirm_closing_period.py:50
-#, python-format
-msgid "An unknown error has occured on Period closing confirmation wizard. Please contact an administrator to solve this problem."
-msgstr "An unknown error has occured on Period closing confirmation wizard. Please contact an administrator to solve this problem."
-
-#. module: account_period_closing_level
-#: code:addons/account_period_closing_level/wizard/wizard_confirm_closing_period.py:41
-#, python-format
-msgid "No period selected. Please do a closing period confirmation from a period!"
-msgstr "No period selected. Please do a closing period confirmation from a period!"
-
-#. module: account_period_closing_level
-#: model:ir.model,name:account_period_closing_level.model_account_period
-msgid "Account period"
-msgstr "Account period"
-
-#. module: account_period_closing_level
-#: code:addons/account_period_closing_level/account_period.py:71
-#, python-format
-msgid "Cannot open this period. All previous periods must be opened before opening this one."
-msgstr "Cannot open this period. All previous periods must be opened before opening this one."
-
-#. module: account_period_closing_level
 #: selection:account.period.create,fiscalyear:0
-msgid "Current FY"
-msgstr "Current FY"
-
-#. module: account_period_closing_level
-#: model:ir.model,name:account_period_closing_level.model_account_fiscalyear
-msgid "Fiscal Year"
-msgstr "Fiscal Year"
+msgid "Next FY"
+msgstr "Prochain Exercice comptable"
 
 #. module: account_period_closing_level
 #: view:wizard.confirm.closing.period:0
-msgid "Closing Period"
-msgstr "Closing Period"
-
-#. module: account_period_closing_level
-#: code:addons/account_period_closing_level/account_period.py:111
-#, python-format
-msgid "Some invoices are not paid and have an overdue date. Please verify this with #\"Open overdue invoice\" button and fix the problem."
-msgstr "Some invoices are not paid and have an overdue date. Please verify this with #\"Open overdue invoice\" button and fix the problem."
-
-#. module: account_period_closing_level
-#: field:account.period,number:0
-msgid "Number for register creation"
-msgstr "Number for register creation"
-
-#. module: account_period_closing_level
-#: selection:account.period.create,fiscalyear:0
-msgid "Next FY"
-msgstr "Next FY"
+msgid "No"
+msgstr "Non"
 

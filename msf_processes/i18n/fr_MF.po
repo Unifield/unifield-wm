@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.0.3\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2013-10-17 07:42+0000\n"
-"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,128 +16,94 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: msf_processes
-#: model:process.node,name:msf_processes.process_node_supplierdraftcommitment0
-msgid "Draft Commitment Vouchers"
-msgstr "Draft Commitment Vouchers"
-
-#. module: msf_processes
-#: model:process.node,note:msf_processes.process_node_supplierpaidinvoice0
-msgid "Invoice's state is Done."
-msgstr "Invoice's state is Done."
-
-#. module: msf_processes
-#: model:process.node,name:msf_processes.process_node_supplierinvoiceinvoice0
-msgid "Create Invoice"
-msgstr "Create Invoice"
-
-#. module: msf_processes
-#: model:process.node,note:msf_processes.process_node_supplierdraftinvoices0
-msgid "Draft state of an invoice"
-msgstr "Draft state of an invoice"
-
-#. module: msf_processes
-#: model:process.node,name:msf_processes.process_node_suppliervalidcommitment0
-msgid "Valid Commitment Vouchers"
-msgstr "Valid Commitment Vouchers"
-
-#. module: msf_processes
-#: model:process.node,note:msf_processes.process_node_supplierinvoicemovelines0
-msgid "Accounting entries."
-msgstr "Accounting entries."
-
-#. module: msf_processes
-#: model:process.node,name:msf_processes.process_node_supplierinvoicemovelines0
-msgid "Accounting"
-msgstr "Accounting"
-
-#. module: msf_processes
-#: model:process.transition,note:msf_processes.process_transition_suppliervalidcommitment0
-msgid "Commitment vouchers are validated. "
-msgstr "Commitment vouchers are validated. "
-
-#. module: msf_processes
-#: model:ir.module.module,shortdesc:msf_processes.module_meta_information
-msgid "MSF Processes"
-msgstr "MSF Processes"
-
-#. module: msf_processes
-#: model:process.process,name:msf_processes.process_process_supplierinvoiceprocess0
-msgid "Supplier Invoice"
-msgstr "Supplier Invoice"
-
-#. module: msf_processes
-#: model:process.transition,note:msf_processes.process_transition_supplierreconcilepaid0
-msgid "As soon as the reconciliation is done, the invoice's state turns to “done” (i.e. paid) in the system."
-msgstr "As soon as the reconciliation is done, the invoice's state turns to “done” (i.e. paid) in the system."
+#: model:process.node,note:msf_processes.process_node_supplierreconciliation0
+msgid "Comparison between accounting and payment entries"
+msgstr "Comparaison entre les écritures comptables et de paiement"
 
 #. module: msf_processes
 #: model:process.node,note:msf_processes.process_node_supplierdraftcommitment0
 msgid "Draft state of an commitment voucher"
-msgstr "Draft state of an commitment voucher"
-
-#. module: msf_processes
-#: model:process.node,note:msf_processes.process_node_supplierreconciliation0
-msgid "Comparison between accounting and payment entries"
-msgstr "Comparison between accounting and payment entries"
+msgstr "Statut 'brouillon' d'un Bon d'Engagement "
 
 #. module: msf_processes
 #: model:process.node,name:msf_processes.process_node_supplierreconciliation0
 msgid "Reconciliation"
-msgstr "Reconciliation"
-
-#. module: msf_processes
-#: model:process.transition,note:msf_processes.process_transition_suppliercustomerinvoice0
-msgid "Draft invoices are validated. "
-msgstr "Draft invoices are validated. "
-
-#. module: msf_processes
-#: model:process.node,name:msf_processes.process_node_supplierdonecommitment0
-msgid "Done Commitment Vouchers"
-msgstr "Done Commitment Vouchers"
-
-#. module: msf_processes
-#: model:process.node,name:msf_processes.process_node_supplierdraftinvoices0
-msgid "Draft Invoices"
-msgstr "Draft Invoices"
-
-#. module: msf_processes
-#: model:ir.module.module,description:msf_processes.module_meta_information
-msgid "\n"
-"        Process\n"
-"    "
-msgstr "\n"
-"        Process\n"
-"    "
-
-#. module: msf_processes
-#: model:process.node,note:msf_processes.process_node_supplierdonecommitment0
-msgid "Done state of an commitment voucher"
-msgstr "Done state of an commitment voucher"
+msgstr "Lettrage"
 
 #. module: msf_processes
 #: model:process.node,note:msf_processes.process_node_suppliervalidcommitment0
 msgid "Valid state of an commitment voucher"
-msgstr "Valid state of an commitment voucher"
+msgstr "Statut 'valide' d'un Bon d'Engagement "
 
 #. module: msf_processes
-#: model:process.transition,note:msf_processes.process_transition_supplierentriesreconcile0
-msgid "Accounting entries are an input of the reconciliation."
-msgstr "Accounting entries are an input of the reconciliation."
+#: model:ir.module.module,shortdesc:msf_processes.module_meta_information
+msgid "MSF Processes"
+msgstr "MSF - Processus"
+
+#. module: msf_processes
+#: model:process.node,name:msf_processes.process_node_supplierpaidinvoice0
+msgid "Paid invoice"
+msgstr "Facture payée"
 
 #. module: msf_processes
 #: model:process.transition,name:msf_processes.process_transition_supplierentriesreconcile0
 msgid "Accounting entries"
-msgstr "Accounting entries"
-
-#. module: msf_processes
-#: model:process.node,note:msf_processes.process_node_supplierinvoiceinvoice0
-msgid "Invoice's state is Open"
-msgstr "Invoice's state is Open"
+msgstr "Ecritures comptables"
 
 #. module: msf_processes
 #: model:process.transition,name:msf_processes.process_transition_supplierreconcilepaid0
 msgid "System payment"
-msgstr "System payment"
+msgstr "Système de Paiement"
+
+#. module: msf_processes
+#: model:process.node,name:msf_processes.process_node_supplierdraftcommitment0
+msgid "Draft Commitment Vouchers"
+msgstr "Brouillon de Bons d'Engagement "
+
+#. module: msf_processes
+#: model:process.transition,note:msf_processes.process_transition_suppliervalidcommitment0
+msgid "Commitment vouchers are validated. "
+msgstr "Bons d'Engagement - Validés. "
+
+#. module: msf_processes
+#: model:process.transition,note:msf_processes.process_transition_suppliercustomerinvoice0
+msgid "Draft invoices are validated. "
+msgstr "Les brouillons de factures ont été validés. "
+
+#. module: msf_processes
+#: model:process.node,name:msf_processes.process_node_supplierinvoiceinvoice0
+msgid "Create Invoice"
+msgstr "Créer une Facture"
+
+#. module: msf_processes
+#: model:process.node,name:msf_processes.process_node_supplierdonecommitment0
+msgid "Done Commitment Vouchers"
+msgstr "Bons d'Engagement - Terminés"
+
+#. module: msf_processes
+#: model:process.process,name:msf_processes.process_process_supplierinvoiceprocess0
+msgid "Supplier Invoice"
+msgstr "Facture Fournisseur"
+
+#. module: msf_processes
+#: model:process.transition,note:msf_processes.process_transition_supplierentriesreconcile0
+msgid "Accounting entries are an input of the reconciliation."
+msgstr "Les écritures comptables sont des informations d'un lettrage."
+
+#. module: msf_processes
+#: model:process.node,note:msf_processes.process_node_supplierpaidinvoice0
+msgid "Invoice's state is Done."
+msgstr "Facture sous statut \"Terminé\""
+
+#. module: msf_processes
+#: model:process.node,note:msf_processes.process_node_supplierinvoiceinvoice0
+msgid "Invoice's state is Open"
+msgstr "Facture sous statut \"Ouvert\""
+
+#. module: msf_processes
+#: model:process.node,name:msf_processes.process_node_supplierinvoicemovelines0
+msgid "Accounting"
+msgstr "Comptabilité"
 
 #. module: msf_processes
 #: model:process.transition,name:msf_processes.process_transition_suppliercustomerinvoice0
@@ -149,18 +115,52 @@ msgid "Validation"
 msgstr "Validation"
 
 #. module: msf_processes
-#: model:process.node,name:msf_processes.process_node_supplierpaidinvoice0
-msgid "Paid invoice"
-msgstr "Paid invoice"
+#: model:process.transition,note:msf_processes.process_transition_supplierentries0
+msgid "Accountant validates the accounting entries coming from the invoice. "
+msgstr "Le comptable valide les écritures comptables provenant de la facture."
+
+#. module: msf_processes
+#: model:process.node,name:msf_processes.process_node_supplierdraftinvoices0
+msgid "Draft Invoices"
+msgstr "Brouillons de Factures"
+
+#. module: msf_processes
+#: model:ir.module.module,description:msf_processes.module_meta_information
+msgid "\n"
+"        Process\n"
+"    "
+msgstr "\n"
+"    Traitement\n"
+"    "
+
+#. module: msf_processes
+#: model:process.node,name:msf_processes.process_node_suppliervalidcommitment0
+msgid "Valid Commitment Vouchers"
+msgstr "Valider les Bons d'Engagement "
+
+#. module: msf_processes
+#: model:process.node,note:msf_processes.process_node_supplierdraftinvoices0
+msgid "Draft state of an invoice"
+msgstr "Facture sous statut brouillon"
+
+#. module: msf_processes
+#: model:process.node,note:msf_processes.process_node_supplierdonecommitment0
+msgid "Done state of an commitment voucher"
+msgstr "Statut 'terminé' d'un Bon d'Engagement "
+
+#. module: msf_processes
+#: model:process.node,note:msf_processes.process_node_supplierinvoicemovelines0
+msgid "Accounting entries."
+msgstr "Ecritures Comptables"
+
+#. module: msf_processes
+#: model:process.transition,note:msf_processes.process_transition_supplierreconcilepaid0
+msgid "As soon as the reconciliation is done, the invoice's state turns to “done” (i.e. paid) in the system."
+msgstr "Dès que le lettrage est réalisé, la facture passe sous statut \"Terminé\" (c'est à dire payée) dans le système."
 
 #. module: msf_processes
 #: model:process.transition,note:msf_processes.process_transition_supplierdonecommitment0
 #: model:process.transition,note:msf_processes.process_transition_supplierinvoicecommitment0
 msgid "Commitment vouchers are done. "
-msgstr "Commitment vouchers are done. "
-
-#. module: msf_processes
-#: model:process.transition,note:msf_processes.process_transition_supplierentries0
-msgid "Accountant validates the accounting entries coming from the invoice. "
-msgstr "Accountant validates the accounting entries coming from the invoice. "
+msgstr "Bons d'Engagement - Créés. "
 

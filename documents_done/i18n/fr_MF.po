@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.0.3\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2013-10-17 07:42+0000\n"
-"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,19 +16,28 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: documents_done
+#: selection:documents.done.wizard,model:0
+msgid "Request for Quotation"
+msgstr "Demande de Devis"
+
+#. module: documents_done
+#: model:ir.module.module,description:documents_done.module_meta_information
+msgid "\n"
+"        This module aims at set documents to 'Done' state.\n"
+"    "
+msgstr "\n"
+"        Ce module vise à passer des documents sous statut 'Terminé'\n"
+"    "
+
+#. module: documents_done
+#: selection:documents.done.wizard,model:0
+msgid "Purchase Order"
+msgstr "Bon de Commande"
+
+#. module: documents_done
 #: selection:documents.done.wizard,display_state:0
 msgid "Split"
 msgstr "Split"
-
-#. module: documents_done
-#: selection:documents.done.wizard,display_state:0
-msgid "Waiting Schedule"
-msgstr "Waiting Schedule"
-
-#. module: documents_done
-#: model:ir.model,name:documents_done.model_documents_done_wizard
-msgid "Documents not 'Done'"
-msgstr "Documents not 'Done'"
 
 #. module: documents_done
 #: selection:documents.done.wizard,display_state:0
@@ -41,30 +50,108 @@ msgid "Draft"
 msgstr "Draft"
 
 #. module: documents_done
+#: field:documents.done.wizard,expected_date:0
+msgid "Expected date"
+msgstr "Date prévue"
+
+#. module: documents_done
+#: field:documents.done.problem,wizard_id:0
+msgid "Wizard"
+msgstr "Assistant"
+
+#. module: documents_done
+#: field:documents.done.problem,pb_lines:0
+msgid "Lines"
+msgstr "Lignes"
+
+#. module: documents_done
 #: view:documents.done.wizard:0
-msgid "Close"
-msgstr "Close"
+#: model:ir.actions.act_window,name:documents_done.action_documents_done_view
+#: model:ir.ui.menu,name:documents_done.menu_documents_done
+msgid "Documents 'In Progress'"
+msgstr "Documents 'En cours'"
+
+#. module: documents_done
+#: selection:documents.done.wizard,display_state:0
+msgid "Validated"
+msgstr "Validaté"
+
+#. module: documents_done
+#: field:documents.done.problem.line,doc_id:0
+msgid "Doc. Id"
+msgstr "Identifiant Document"
+
+#. module: documents_done
+#: view:documents.done.problem:0
+msgid "Associated documents"
+msgstr "Documents associés"
+
+#. module: documents_done
+#: view:documents.done.problem:0
+msgid "Go to document"
+msgstr "Aller au document"
+
+#. module: documents_done
+#: model:ir.model,name:documents_done.model_documents_done_wizard
+msgid "Documents not 'Done'"
+msgstr "Documents pas  'Terminé'"
+
+#. module: documents_done
+#: field:documents.done.problem.line,doc_state:0
+msgid "DB state"
+msgstr "Statut Base de Données"
+
+#. module: documents_done
+#: view:documents.done.problem:0
+msgid "Documents"
+msgstr "Documents"
+
+#. module: documents_done
+#: field:documents.done.problem,errors:0
+msgid "Errors"
+msgstr "Erreurs"
+
+#. module: documents_done
+#: field:documents.done.problem.line,doc_name:0
+msgid "Reference"
+msgstr "Référence"
+
+#. module: documents_done
+#: field:documents.done.wizard,real_model:0
+msgid "Real model"
+msgstr "Model réel"
+
+#. module: documents_done
+#: code:addons/documents_done/documents_done.py:534
+#, python-format
+msgid "You cannot set the SO to 'Closed' because the following invoices are not Cancelled or Paid : %s"
+msgstr "Vous ne pouvez pas sélectionner 'Clôturé' pour le CT parce que les factures suivantes ne sont pas annulées ou payées : %s"
+
+#. module: documents_done
+#: model:ir.model,name:documents_done.model_documents_done_problem_line
+msgid "documents.done.problem.line"
+msgstr "documents.done.problem.line"
 
 #. module: documents_done
 #: code:addons/documents_done/documents_done.py:534
 #, python-format
 msgid "Error"
-msgstr "Error"
+msgstr "Erreur"
 
 #. module: documents_done
-#: view:documents.done.problem:0
-msgid "Cancel"
-msgstr "Cancel"
-
-#. module: documents_done
-#: field:documents.done.problem,wizard_id:0
-msgid "Wizard"
-msgstr "Wizard"
+#: selection:documents.done.wizard,display_state:0
+msgid "Confirmed"
+msgstr "Confirmed"
 
 #. module: documents_done
 #: field:documents.done.wizard,name:0
 msgid "Name"
-msgstr "Name"
+msgstr "Nom"
+
+#. module: documents_done
+#: selection:documents.done.wizard,model:0
+msgid "Sale Order"
+msgstr "Commande de Terrain"
 
 #. module: documents_done
 #: field:documents.done.wizard,res_id:0
@@ -73,64 +160,8 @@ msgstr "Res. Id"
 
 #. module: documents_done
 #: selection:documents.done.wizard,display_state:0
-msgid "Invoice Exception"
-msgstr "Invoice Exception"
-
-#. module: documents_done
-#: view:documents.done.problem:0
-msgid "Cancel associated documents and close the document"
-msgstr "Cancel associated documents and close the document"
-
-#. module: documents_done
-#: code:addons/documents_done/documents_done.py:534
-#, python-format
-msgid "You cannot set the SO to 'Closed' because the following invoices are not Cancelled or Paid : %s"
-msgstr "You cannot set the SO to 'Closed' because the following invoices are not Cancelled or Paid : %s"
-
-#. module: documents_done
-#: field:documents.done.wizard,real_model:0
-msgid "Real model"
-msgstr "Real model"
-
-#. module: documents_done
-#: field:documents.done.problem.line,doc_name:0
-msgid "Reference"
-msgstr "Reference"
-
-#. module: documents_done
-#: selection:documents.done.wizard,model:0
-msgid "Tender"
-msgstr "Tender"
-
-#. module: documents_done
-#: field:documents.done.wizard,expected_date:0
-msgid "Expected date"
-msgstr "Expected date"
-
-#. module: documents_done
-#: selection:documents.done.wizard,display_state:0
-msgid "Updated"
-msgstr "Updated"
-
-#. module: documents_done
-#: selection:documents.done.wizard,model:0
-msgid "Purchase Order"
-msgstr "Purchase Order"
-
-#. module: documents_done
-#: model:ir.model,name:documents_done.model_documents_done_problem_line
-msgid "documents.done.problem.line"
-msgstr "documents.done.problem.line"
-
-#. module: documents_done
-#: field:documents.done.problem.line,doc_id:0
-msgid "Doc. Id"
-msgstr "Doc. Id"
-
-#. module: documents_done
-#: selection:documents.done.wizard,display_state:0
-msgid "Confirmed"
-msgstr "Confirmed"
+msgid "Comparison"
+msgstr "Comparison"
 
 #. module: documents_done
 #: selection:documents.done.wizard,display_state:0
@@ -138,50 +169,15 @@ msgid "Sent"
 msgstr "Sent"
 
 #. module: documents_done
-#: field:documents.done.problem,pb_lines:0
-msgid "Lines"
-msgstr "Lines"
-
-#. module: documents_done
 #: selection:documents.done.wizard,display_state:0
-msgid "Comparison"
-msgstr "Comparison"
+msgid "Waiting"
+msgstr "Waiting"
 
 #. module: documents_done
-#: selection:documents.done.wizard,display_state:0
-msgid "Validated"
-msgstr "Validated"
-
-#. module: documents_done
-#: view:documents.done.problem:0
-msgid "Associated documents"
-msgstr "Associated documents"
-
-#. module: documents_done
-#: view:documents.done.wizard:0
-msgid "Associated Doc."
-msgstr "Associated Doc."
-
-#. module: documents_done
-#: field:documents.done.problem.line,problem_id:0
-#: field:documents.done.wizard,problem:0
-msgid "Problem"
-msgstr "Problem"
-
-#. module: documents_done
-#: view:documents.done.problem:0
-msgid "Actions"
-msgstr "Actions"
-
-#. module: documents_done
-#: field:documents.done.wizard,requestor:0
-msgid "Creator"
-msgstr "Creator"
-
-#. module: documents_done
-#: field:documents.done.problem.line,doc_state:0
-msgid "DB state"
-msgstr "DB state"
+#: code:addons/documents_done/documents_done.py:383
+#, python-format
+msgid "The %s '%s' has been closed."
+msgstr "Le  %s '%s' a été fermé"
 
 #. module: documents_done
 #: selection:documents.done.wizard,display_state:0
@@ -189,36 +185,68 @@ msgid "Sourced"
 msgstr "Sourced"
 
 #. module: documents_done
-#: selection:documents.done.wizard,model:0
-msgid "Request for Quotation"
-msgstr "Request for Quotation"
-
-#. module: documents_done
-#: field:documents.done.problem.line,doc_model:0
-msgid "Doc. Model"
-msgstr "Doc. Model"
+#: selection:documents.done.wizard,display_state:0
+msgid "Receipt Exception"
+msgstr "Reception Exception"
 
 #. module: documents_done
 #: view:documents.done.problem:0
-msgid "Documents"
-msgstr "Documents"
+msgid "Cancel"
+msgstr "Annuler"
 
 #. module: documents_done
-#: selection:documents.done.wizard,display_state:0
-msgid "Receipt Exception"
-msgstr "Receipt Exception"
+#: field:documents.done.problem.line,problem_id:0
+#: field:documents.done.wizard,problem:0
+msgid "Problem"
+msgstr "Problème"
+
+#. module: documents_done
+#: selection:documents.done.wizard,model:0
+msgid "Tender"
+msgstr "Appel d'offres"
 
 #. module: documents_done
 #: field:documents.done.problem.line,doc_state_str:0
 #: field:documents.done.wizard,display_state:0
 #: field:documents.done.wizard,state:0
 msgid "State"
-msgstr "State"
+msgstr "Statut"
 
 #. module: documents_done
-#: selection:documents.done.wizard,model:0
-msgid "Sale Order"
-msgstr "Sale Order"
+#: view:documents.done.problem:0
+msgid "Cancel associated documents and close the document"
+msgstr "Annuler les documents associés et fermer le document"
+
+#. module: documents_done
+#: field:documents.done.problem.line,doc_type:0
+#: field:documents.done.wizard,model:0
+msgid "Doc. Type"
+msgstr "Type de Document"
+
+#. module: documents_done
+#: view:documents.done.wizard:0
+msgid "Close"
+msgstr "Fermer"
+
+#. module: documents_done
+#: selection:documents.done.wizard,display_state:0
+msgid "Shipping Exception"
+msgstr "Expédition Exception"
+
+#. module: documents_done
+#: field:documents.done.wizard,partner_id:0
+msgid "Partner"
+msgstr "Partenaire"
+
+#. module: documents_done
+#: field:documents.done.wizard,creation_date:0
+msgid "Creation date"
+msgstr "Date de Création"
+
+#. module: documents_done
+#: field:documents.done.wizard,requestor:0
+msgid "Creator"
+msgstr "Créateur"
 
 #. module: documents_done
 #: field:documents.done.problem,doc_name:0
@@ -226,50 +254,39 @@ msgid "Document"
 msgstr "Document"
 
 #. module: documents_done
-#: view:documents.done.problem:0
-msgid "Go to document"
-msgstr "Go to document"
-
-#. module: documents_done
-#: selection:documents.done.wizard,model:0
-msgid "Internal Request"
-msgstr "Internal Request"
-
-#. module: documents_done
-#: model:ir.module.module,description:documents_done.module_meta_information
-msgid "\n"
-"        This module aims at set documents to 'Done' state.\n"
-"    "
-msgstr "\n"
-"        This module aims at set documents to 'Done' state.\n"
-"    "
-
-#. module: documents_done
 #: view:documents.done.wizard:0
-#: model:ir.actions.act_window,name:documents_done.action_documents_done_view
-#: model:ir.ui.menu,name:documents_done.menu_documents_done
-msgid "Documents 'In Progress'"
-msgstr "Documents 'In Progress'"
-
-#. module: documents_done
-#: field:documents.done.wizard,partner_id:0
-msgid "Partner"
-msgstr "Partner"
+msgid "Associated Doc."
+msgstr "Documents Associés"
 
 #. module: documents_done
 #: selection:documents.done.wizard,display_state:0
-msgid "Waiting"
-msgstr "Waiting"
+msgid "Waiting Schedule"
+msgstr "Waiting Schedule"
 
 #. module: documents_done
-#: field:documents.done.wizard,creation_date:0
-msgid "Creation date"
-msgstr "Creation date"
+#: selection:documents.done.wizard,display_state:0
+msgid "Updated"
+msgstr "Mise à jour"
+
+#. module: documents_done
+#: field:documents.done.problem.line,doc_model:0
+msgid "Doc. Model"
+msgstr "Model de Document"
 
 #. module: documents_done
 #: model:ir.module.module,shortdesc:documents_done.module_meta_information
 msgid "Documents to Done"
-msgstr "Documents to Done"
+msgstr "Documents à finaliser"
+
+#. module: documents_done
+#: selection:documents.done.wizard,model:0
+msgid "Internal Request"
+msgstr "Demande Interne"
+
+#. module: documents_done
+#: view:documents.done.problem:0
+msgid "Actions"
+msgstr "Actions"
 
 #. module: documents_done
 #: model:ir.model,name:documents_done.model_documents_done_problem
@@ -277,24 +294,7 @@ msgid "documents.done.problem"
 msgstr "documents.done.problem"
 
 #. module: documents_done
-#: field:documents.done.problem,errors:0
-msgid "Errors"
-msgstr "Errors"
-
-#. module: documents_done
 #: selection:documents.done.wizard,display_state:0
-msgid "Shipping Exception"
-msgstr "Shipping Exception"
-
-#. module: documents_done
-#: field:documents.done.problem.line,doc_type:0
-#: field:documents.done.wizard,model:0
-msgid "Doc. Type"
-msgstr "Doc. Type"
-
-#. module: documents_done
-#: code:addons/documents_done/documents_done.py:383
-#, python-format
-msgid "The %s '%s' has been closed."
-msgstr "The %s '%s' has been closed."
+msgid "Invoice Exception"
+msgstr "Invoice Exception"
 

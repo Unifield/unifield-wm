@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.0.3\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2013-10-17 07:42+0000\n"
-"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,83 +16,390 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: msf_homere_interface
-#: model:ir.ui.menu,name:msf_homere_interface.import_expat_employees
-msgid "Import expats"
-msgstr "Import expats"
-
-#. module: msf_homere_interface
-#: field:hr.contract.msf,current:0
-msgid "Current contract"
-msgstr "Current contract"
-
-#. module: msf_homere_interface
-#: field:hr.expat.employee.import,filename:0
-#: field:hr.nat.staff.import,filename:0
-#: field:hr.payroll.employee.import,filename:0
-#: field:hr.payroll.import,filename:0
-msgid "Imported filename"
-msgstr "Imported filename"
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_payroll_validation.py:244
+#: code:addons/msf_homere_interface/wizard/hr_payroll_employee_import.py:175
 #, python-format
-msgid "No partner filled in for this line: %s"
-msgstr "No partner filled in for this line: %s"
+msgid "Unknown error for employee %s"
+msgstr "Erreur inconnue pour %s travailleurs"
 
 #. module: msf_homere_interface
-#: selection:hr.payroll.msf,state:0
-msgid "Draft"
-msgstr "Draft"
+#: field:hr.analytic.reallocation,destination_id:0
+#: field:hr.employee,destination_id:0
+#: field:hr.payroll.msf,destination_id:0
+msgid "Destination"
+msgstr "Destination"
 
 #. module: msf_homere_interface
-#: selection:hr.employee,employee_type:0
-msgid "Local Staff"
-msgstr "Local Staff"
+#: code:addons/msf_homere_interface/hr_payroll.py:261
+#, python-format
+msgid "You are not able to create payroll entries."
+msgstr "Vous n'êtes pas en mesure de créer des écritures de paie"
+
+#. module: msf_homere_interface
+#: selection:hr.payroll.import,date_format:0
+msgid "dd-mm-yyyy"
+msgstr "dd-mm-yyyy"
 
 #. module: msf_homere_interface
 #: code:addons/msf_homere_interface/wizard/hr_payroll_employee_import.py:445
 #: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:267
 #, python-format
 msgid "Given file is not a zip file!"
-msgstr "Given file is not a zip file!"
+msgstr "Le fichier donné n'est pas un fichier ZIP!"
 
 #. module: msf_homere_interface
-#: field:hr.employee,name_resource:0
-msgid "Name"
-msgstr "Name"
+#: view:hr.payroll.import:0
+#: model:ir.actions.act_window,name:msf_homere_interface.action_payroll_import_wizard
+#: model:ir.ui.menu,name:msf_homere_interface.menu_finance_payroll_import
+msgid "Import Payroll"
+msgstr "Importer Paie"
 
 #. module: msf_homere_interface
-#: view:hr.expat.employee.import:0
-msgid "This wizard will import an Expat employees file in XML Spreadsheet 2003 format. To generate this file, create a Speadsheet with 2 columns: 'Name' and 'Code'."
-msgstr "This wizard will import an Expat employees file in XML Spreadsheet 2003 format. To generate this file, create a Speadsheet with 2 columns: 'Name' and 'Code'."
+#: field:hr.payroll.msf,partner_type:0
+msgid "Third Parties"
+msgstr "Tiers"
 
 #. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:295
+#: field:hr.expat.employee.import,file:0
+#: field:hr.nat.staff.import,file:0
+#: field:hr.payroll.employee.import,file:0
+#: field:hr.payroll.import,file:0
+msgid "File"
+msgstr "Dossier"
+
+#. module: msf_homere_interface
+#: field:hr.contract.msf,date_start:0
+msgid "Contract ' starting date"
+msgstr "Date - Début de Contrat"
+
+#. module: msf_homere_interface
+#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:240
 #, python-format
-msgid "Problem to read given file."
-msgstr "Problem to read given file."
+msgid "You cannot import payroll entries. Please validate first draft payroll entries!"
+msgstr "Vous ne pouvez pas importer d'écritures de paie.Veuillez d'abord valider les écritures de paie sous statut brouillon!"
 
 #. module: msf_homere_interface
-#: model:ir.module.module,description:msf_homere_interface.module_meta_information
-msgid "Homere interface with OpenERP"
-msgstr "Homere interface with OpenERP"
+#: help:hr.payroll.import,date_format:0
+msgid "This is the date format used in the Homère file in order to recognize them."
+msgstr "This is the date format used in the Homère file in order to recognize them."
+
+#. module: msf_homere_interface
+#: field:hr.analytic.reallocation,cost_center_id:0
+#: field:hr.employee,cost_center_id:0
+#: field:hr.payroll.msf,cost_center_id:0
+msgid "Cost Center"
+msgstr "Centre de Coût"
+
+#. module: msf_homere_interface
+#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:285
+#, python-format
+msgid "Could not read envoi.ini file in given ZIP file."
+msgstr "Ne peut lire envoi.ini file sous le fichier ZIP donné."
+
+#. module: msf_homere_interface
+#: view:hr.payroll.msf:0
+msgid "Search Journal Items"
+msgstr "Rechercher des Lignes d'Ecritures Comptables"
+
+#. module: msf_homere_interface
+#: code:addons/msf_homere_interface/wizard/hr_payroll_employee_import.py:213
+#, python-format
+msgid "No data found for this line: %s."
+msgstr "Le système n'a pas trouvé de données pour cette ligne : %s"
+
+#. module: msf_homere_interface
+#: model:ir.actions.act_window,name:msf_homere_interface.action_employee_allocation_tree
+#: model:ir.ui.menu,name:msf_homere_interface.menu_finance_payroll_employees
+msgid "Local Staff Allocation"
+msgstr "Allocation du personnel local"
+
+#. module: msf_homere_interface
+#: field:hr.analytic.reallocation,free2_id:0
+#: field:hr.employee,free2_id:0
+#: field:hr.payroll.msf,free2_id:0
+msgid "Free 2"
+msgstr "Option 2"
+
+#. module: msf_homere_interface
+#: field:hr.payroll.import.period,field:0
+#: field:hr.payroll.msf,field:0
+msgid "Field"
+msgstr "Champ"
+
+#. module: msf_homere_interface
+#: model:ir.actions.act_window,name:msf_homere_interface.action_payroll_analytic_reallocation
+msgid "Payroll Analytic reallocation"
+msgstr "Paie - Réallocation Analytique"
+
+#. module: msf_homere_interface
+#: view:hr.payroll.employee.import:0
+#: model:ir.model,name:msf_homere_interface.model_hr_payroll_employee_import
+msgid "Employee Import"
+msgstr "Employé(e) - Importer"
+
+#. module: msf_homere_interface
+#: code:addons/msf_homere_interface/hr.py:134
+#: code:addons/msf_homere_interface/hr.py:211
+#: code:addons/msf_homere_interface/wizard/hr_expat_import.py:59
+#: code:addons/msf_homere_interface/wizard/hr_nat_staff_import.py:71
+#: code:addons/msf_homere_interface/wizard/hr_nat_staff_import.py:77
+#: code:addons/msf_homere_interface/wizard/hr_nat_staff_import.py:118
+#: code:addons/msf_homere_interface/wizard/hr_payroll_deletion.py:41
+#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:90
+#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:97
+#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:99
+#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:109
+#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:112
+#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:114
+#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:127
+#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:140
+#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:174
+#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:276
+#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:287
+#: code:addons/msf_homere_interface/wizard/hr_payroll_validation.py:98
+#: code:addons/msf_homere_interface/wizard/hr_payroll_validation.py:153
+#: code:addons/msf_homere_interface/wizard/hr_payroll_validation.py:157
+#: code:addons/msf_homere_interface/wizard/hr_payroll_validation.py:244
+#, python-format
+msgid "Warning"
+msgstr "Avertissement"
+
+#. module: msf_homere_interface
+#: code:addons/msf_homere_interface/wizard/hr_payroll_employee_import.py:288
+#, python-format
+msgid "An error occured on nationality. Please verify all nationalities."
+msgstr "Une erreur est survenue sous nationalité. Veuillez vérifier toutes les nationalités."
+
+#. module: msf_homere_interface
+#: code:addons/msf_homere_interface/wizard/hr_nat_staff_import.py:64
+#, python-format
+msgid "Name is a mandatory field!"
+msgstr "Nom est un champ obligatoire !"
+
+#. module: msf_homere_interface
+#: field:hr.contract.msf,date_end:0
+msgid "Contract's ending date"
+msgstr "Date - Fin de Contrat"
+
+#. module: msf_homere_interface
+#: field:hr.employee,private_phone:0
+msgid "Private Phone"
+msgstr "Téléphone Privé"
+
+#. module: msf_homere_interface
+#: code:addons/msf_homere_interface/wizard/hr_payroll_validation.py:244
+#, python-format
+msgid "No partner filled in for this line: %s"
+msgstr "Aucun partenaire mentionné pour cette ligne : %s"
+
+#. module: msf_homere_interface
+#: field:hr.contract.msf,homere_id_staff:0
+#: field:hr.employee,homere_id_staff:0
+msgid "Homere field: id_staff"
+msgstr "Champ Homère : id_staff"
+
+#. module: msf_homere_interface
+#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:151
+#, python-format
+msgid "More than one employee have the same identification ID: %s"
+msgstr "Plus d'un employé ont la même identification ID: %s"
+
+#. module: msf_homere_interface
+#: constraint:hr.employee:0
+msgid "Error ! You cannot select a department for which the employee is the manager."
+msgstr "Erreur ! Vous ne pouvez pas sélectionner un département dont l'employé est le responsable."
+
+#. module: msf_homere_interface
+#: view:hr.payroll.validation:0
+msgid "Payroll Validation"
+msgstr "Paie - Validation"
+
+#. module: msf_homere_interface
+#: field:hr.employee,allow_edition:0
+msgid "Allow local employee edition?"
+msgstr "Autoriser une édition sur un employé local?"
+
+#. module: msf_homere_interface
+#: code:addons/msf_homere_interface/wizard/hr_payroll_deletion.py:41
+#: code:addons/msf_homere_interface/wizard/hr_payroll_validation.py:153
+#, python-format
+msgid "No draft line found!"
+msgstr "Le système n'a pas trouvé de ligne en mode brouillon !"
+
+#. module: msf_homere_interface
+#: model:ir.model,name:msf_homere_interface.model_hr_payroll_employee_import_errors
+msgid "Employee Import Errors"
+msgstr "Erreurs importation des travailleurs"
+
+#. module: msf_homere_interface
+#: field:hr.payroll.import.confirmation,state:0
+#: field:hr.payroll.msf,state:0
+msgid "State"
+msgstr "Statut"
+
+#. module: msf_homere_interface
+#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:149
+#, python-format
+msgid "No employee found for this code: %s (%s).\n"
+"DEBIT: %s.\n"
+"CREDIT: %s."
+msgstr "Aucun employé ne correspond au code: %s (%s).\n"
+"DEBIT: %s.\n"
+"CREDIT: %s."
+
+#. module: msf_homere_interface
+#: field:hr.contract.msf,homere_id_unique:0
+#: field:hr.employee,homere_id_unique:0
+msgid "Homere field: id_unique"
+msgstr "Champ Homere : id_unique"
+
+#. module: msf_homere_interface
+#: code:addons/msf_homere_interface/wizard/hr_analytic_reallocation.py:100
+#, python-format
+msgid "Unknown error"
+msgstr "Erreur inconnue"
+
+#. module: msf_homere_interface
+#: field:hr.payroll.import.period,period_id:0
+#: field:hr.payroll.msf,period_id:0
+msgid "Period"
+msgstr "Période"
 
 #. module: msf_homere_interface
 #: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:140
 #, python-format
 msgid "No default Destination defined for expense account: %s"
-msgstr "No default Destination defined for expense account: %s"
+msgstr "Pas de Destination par défaut définie pour le compte de charge: %s"
+
+#. module: msf_homere_interface
+#: code:addons/msf_homere_interface/wizard/hr_payroll_employee_import.py:181
+#, python-format
+msgid "No \"id_staff\" found for employee %s!"
+msgstr "Le système n'a pas trouvé d'\"id_staff\" pour le travailleur %s !"
+
+#. module: msf_homere_interface
+#: model:ir.module.module,description:msf_homere_interface.module_meta_information
+msgid "Homere interface with OpenERP"
+msgstr "Interface Homère avec OpenERP"
+
+#. module: msf_homere_interface
+#: view:hr.nat.staff.import:0
+msgid "This wizard will import National staff employees file in XML Spreadsheet 2003 format. To generate this file, create a Speadsheet with some columns: 'Name', 'Code'."
+msgstr "Cet assistant importera le fichier du personnel national au format Tableur XML 2003. Pour générer ce fichier, créer un Tableur avec quelques colonnes : 'Nom', 'Code'."
 
 #. module: msf_homere_interface
 #: view:res.company:0
 #: field:res.company,salaries_default_account:0
 msgid "Salaries default account for Payroll entries"
-msgstr "Salaries default account for Payroll entries"
+msgstr "Compte des salaires par défaut pour les écritures de Paie"
 
 #. module: msf_homere_interface
 #: view:hr.employee:0
-msgid "Social IDs"
-msgstr "Social IDs"
+msgid "Local"
+msgstr "Local"
+
+#. module: msf_homere_interface
+#: model:ir.actions.act_window,name:msf_homere_interface.action_employee_import_wizard
+#: model:ir.ui.menu,name:msf_homere_interface.menu_finance_employees_import
+msgid "Employee Update"
+msgstr "Employé(e) - Mettre à jour"
+
+#. module: msf_homere_interface
+#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:112
+#, python-format
+msgid "The accounting code '%s' doesn't exist!"
+msgstr "Le code comptabe '%s' n'existe pas!"
+
+#. module: msf_homere_interface
+#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:311
+#, python-format
+msgid "An error occured on balance and no payroll rounding line found."
+msgstr "Une erreur est survenue lors du calcul de la balance et aucune ligne de paie arrondie n'a été trouvée."
+
+#. module: msf_homere_interface
+#: help:hr.payroll.msf,field:0
+msgid "Field this line come from in Homère."
+msgstr "Champ de cette ligne provient d'Homère."
+
+#. module: msf_homere_interface
+#: code:addons/msf_homere_interface/hr.py:134
+#, python-format
+msgid "You have to complete Cost Center field before employee creation!"
+msgstr "Vous devez d'abord compléter le champ du Centre de Coût avant de pouvoir créer un employé!"
+
+#. module: msf_homere_interface
+#: model:ir.model,name:msf_homere_interface.model_hr_payroll_import_period
+msgid "Payroll Import Periods"
+msgstr "Paie - Importation Périodes"
+
+#. module: msf_homere_interface
+#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:224
+#, python-format
+msgid "File '%s' is empty !"
+msgstr "Le fichier '%s' est vide !"
+
+#. module: msf_homere_interface
+#: view:hr.employee:0
+msgid "Personal Information"
+msgstr "Informations Personnelles"
+
+#. module: msf_homere_interface
+#: field:hr.payroll.import.confirmation,errors:0
+#: field:hr.payroll.import.confirmation,nberrors:0
+msgid "Errors"
+msgstr "Erreurs"
+
+#. module: msf_homere_interface
+#: code:addons/msf_homere_interface/wizard/hr_payroll_validation.py:98
+#, python-format
+msgid "Some lines have analytic distribution problems!"
+msgstr "Certaines lignes ont des problèmes d'allocation analytique!"
+
+#. module: msf_homere_interface
+#: view:hr.payroll.deletion:0
+msgid "This will delete all payroll entries. Are you sure?"
+msgstr "Ceci va supprimer toutes les écritures de Paie. Etes-vous certain?"
+
+#. module: msf_homere_interface
+#: selection:hr.payroll.msf,state:0
+msgid "Validated"
+msgstr "Validé"
+
+#. module: msf_homere_interface
+#: selection:hr.payroll.msf,analytic_state:0
+msgid "Invalid"
+msgstr "Non valide"
+
+#. module: msf_homere_interface
+#: sql_constraint:hr.payroll.import.period:0
+msgid "This period have already been validated!"
+msgstr "Cette période a déjà été validée!"
+
+#. module: msf_homere_interface
+#: code:addons/msf_homere_interface/hr.py:176
+#, python-format
+msgid "You are not allowed to change a local staff to expatriate!"
+msgstr "Vous n'êtes pas en mesure de changer un personnel local en expatrié"
+
+#. module: msf_homere_interface
+#: model:ir.model,name:msf_homere_interface.model_hr_nat_staff_import
+msgid "Nat. staff employee import"
+msgstr "Importation du personnel national employé"
+
+#. module: msf_homere_interface
+#: field:hr.contract.msf,current:0
+msgid "Current contract"
+msgstr "Contrat en vigueur"
+
+#. module: msf_homere_interface
+#: model:ir.model,name:msf_homere_interface.model_hr_contract_msf
+msgid "MSF Employee contract from Homère"
+msgstr "Contrat Employé MSF à partir de Homère"
+
+#. module: msf_homere_interface
+#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:321
+#, python-format
+msgid "Right CSV is not present in this zip file. Please use \"File > File sending > Monthly\" in Homère."
+msgstr "Le CSV correct n´est pas présent dans ce fichier. Veuillez utiliser \"Fichier > Envoyer Fichier > Mensuellement\" dans Homère."
 
 #. module: msf_homere_interface
 #: view:hr.analytic.reallocation:0
@@ -103,417 +410,36 @@ msgstr "Social IDs"
 #: view:hr.payroll.import:0
 #: view:hr.payroll.validation:0
 msgid "Validate"
-msgstr "Validate"
-
-#. module: msf_homere_interface
-#: field:hr.payroll.import.confirmation,updated:0
-msgid "Updated"
-msgstr "Updated"
-
-#. module: msf_homere_interface
-#: field:hr.contract.msf,homere_id_staff:0
-#: field:hr.employee,homere_id_staff:0
-msgid "Homere field: id_staff"
-msgstr "Homere field: id_staff"
-
-#. module: msf_homere_interface
-#: selection:hr.payroll.import.confirmation,state:0
-msgid "From Payroll"
-msgstr "From Payroll"
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:311
-#, python-format
-msgid "An error occured on balance and no payroll rounding line found."
-msgstr "An error occured on balance and no payroll rounding line found."
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_payroll_employee_import.py:181
-#, python-format
-msgid "No \"id_staff\" found for employee %s!"
-msgstr "No \"id_staff\" found for employee %s!"
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_payroll_validation.py:157
-#, python-format
-msgid "No HR journal found!"
-msgstr "No HR journal found!"
-
-#. module: msf_homere_interface
-#: selection:hr.payroll.import.confirmation,state:0
-msgid "From HQ Entries"
-msgstr "From HQ Entries"
-
-#. module: msf_homere_interface
-#: selection:hr.payroll.import,date_format:0
-msgid "dd/mm/yyyy"
-msgstr "dd/mm/yyyy"
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_payroll_validation.py:98
-#, python-format
-msgid "Some lines have analytic distribution problems!"
-msgstr "Some lines have analytic distribution problems!"
-
-#. module: msf_homere_interface
-#: view:hr.payroll.employee.import:0
-msgid "This will import employee from given ZIP file."
-msgstr "This will import employee from given ZIP file."
-
-#. module: msf_homere_interface
-#: view:hr.payroll.import:0
-#: model:ir.actions.act_window,name:msf_homere_interface.action_payroll_import_wizard
-#: model:ir.ui.menu,name:msf_homere_interface.menu_finance_payroll_import
-msgid "Import Payroll"
-msgstr "Import Payroll"
+msgstr "Valider"
 
 #. module: msf_homere_interface
 #: code:addons/msf_homere_interface/wizard/hr_payroll_employee_import.py:183
 #, python-format
 msgid "No \"id_unique\" found for employee %s!"
-msgstr "No \"id_unique\" found for employee %s!"
+msgstr "Le système n'a pas trouvé d'\"id_unique\" pour le travailleur %s !"
 
 #. module: msf_homere_interface
-#: view:hr.employee:0
-msgid "Expat'"
-msgstr "Expat'"
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_payroll_deletion.py:41
-#: code:addons/msf_homere_interface/wizard/hr_payroll_validation.py:153
+#: code:addons/msf_homere_interface/wizard/hr_payroll_validation.py:157
 #, python-format
-msgid "No draft line found!"
-msgstr "No draft line found!"
+msgid "No HR journal found!"
+msgstr "Le système n'a pas trouvé de Journal des RH !"
 
 #. module: msf_homere_interface
-#: field:hr.job,code:0
-msgid "Job code"
-msgstr "Job code"
-
-#. module: msf_homere_interface
-#: selection:hr.payroll.import,date_format:0
-msgid "mm-dd-yyyy"
-msgstr "mm-dd-yyyy"
-
-#. module: msf_homere_interface
-#: model:ir.model,name:msf_homere_interface.model_hr_analytic_reallocation
-msgid "Analytic reallocation wizard"
-msgstr "Analytic reallocation wizard"
-
-#. module: msf_homere_interface
-#: model:ir.actions.act_window,name:msf_homere_interface.action_employee_allocation_tree
-#: model:ir.ui.menu,name:msf_homere_interface.menu_finance_payroll_employees
-msgid "Local Staff Allocation"
-msgstr "Local Staff Allocation"
-
-#. module: msf_homere_interface
-#: view:hr.employee:0
-msgid "Position"
-msgstr "Position"
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_payroll_employee_import.py:177
+#: code:addons/msf_homere_interface/wizard/hr_payroll_validation.py:164
 #, python-format
-msgid "No \"code_staff\" found for employee %s!"
-msgstr "No \"code_staff\" found for employee %s!"
-
-#. module: msf_homere_interface
-#: field:hr.payroll.import.confirmation,state:0
-#: field:hr.payroll.msf,state:0
-msgid "State"
-msgstr "State"
-
-#. module: msf_homere_interface
-#: selection:hr.payroll.msf,analytic_state:0
-msgid "Invalid"
-msgstr "Invalid"
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:177
-#, python-format
-msgid "No '%s' currency or non-active currency."
-msgstr "No '%s' currency or non-active currency."
-
-#. module: msf_homere_interface
-#: model:ir.actions.act_window,name:msf_homere_interface.action_payroll_deletion
-msgid "Delete draft entries"
-msgstr "Delete draft entries"
-
-#. module: msf_homere_interface
-#: field:hr.analytic.reallocation,destination_id:0
-#: field:hr.employee,destination_id:0
-#: field:hr.payroll.msf,destination_id:0
-msgid "Destination"
-msgstr "Destination"
-
-#. module: msf_homere_interface
-#: field:hr.contract.msf,homere_codeterrain:0
-#: field:hr.employee,homere_codeterrain:0
-msgid "Homere field: codeterrain"
-msgstr "Homere field: codeterrain"
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/hr.py:174
-#, python-format
-msgid "You are not allowed to change an expatriate to local staff!"
-msgstr "You are not allowed to change an expatriate to local staff!"
-
-#. module: msf_homere_interface
-#: field:hr.analytic.reallocation,funding_pool_id:0
-#: field:hr.employee,funding_pool_id:0
-#: field:hr.payroll.msf,funding_pool_id:0
-msgid "Funding Pool"
-msgstr "Funding Pool"
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/hr.py:134
-#, python-format
-msgid "You have to complete Cost Center field before employee creation!"
-msgstr "You have to complete Cost Center field before employee creation!"
-
-#. module: msf_homere_interface
-#: field:hr.payroll.msf,date:0
-msgid "Date"
-msgstr "Date"
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:179
-#, python-format
-msgid "More than one currency '%s' found."
-msgstr "More than one currency '%s' found."
-
-#. module: msf_homere_interface
-#: field:hr.payroll.msf,amount:0
-msgid "Amount"
-msgstr "Amount"
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:224
-#, python-format
-msgid "File '%s' is empty !"
-msgstr "File '%s' is empty !"
-
-#. module: msf_homere_interface
-#: field:hr.payroll.employee.import.errors,wizard_id:0
-msgid "Payroll employee import wizard"
-msgstr "Payroll employee import wizard"
-
-#. module: msf_homere_interface
-#: constraint:hr.employee:0
-msgid "Another employee has the same unique code."
-msgstr "Another employee has the same unique code."
-
-#. module: msf_homere_interface
-#: field:hr.contract.msf,date_end:0
-msgid "Contract's ending date"
-msgstr "Contract's ending date"
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:276
-#, python-format
-msgid "No envoi.ini file found in given ZIP file!"
-msgstr "No envoi.ini file found in given ZIP file!"
-
-#. module: msf_homere_interface
-#: view:hr.employee:0
-msgid "Local"
-msgstr "Local"
-
-#. module: msf_homere_interface
-#: view:hr.payroll.validation:0
-msgid "This will validate all Payroll entries and create accounting entries. This will take a while."
-msgstr "This will validate all Payroll entries and create accounting entries. This will take a while."
-
-#. module: msf_homere_interface
-#: view:hr.payroll.import.confirmation:0
-msgid "Import Errors"
-msgstr "Import Errors"
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_payroll_validation.py:166
-#, python-format
-msgid "No field found!"
-msgstr "No field found!"
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/hr.py:131
-#, python-format
-msgid "You are not allowed to create a local staff! Please use Import to create local staff."
-msgstr "You are not allowed to create a local staff! Please use Import to create local staff."
-
-#. module: msf_homere_interface
-#: view:hr.analytic.reallocation:0
-#: view:hr.expat.employee.import:0
-#: view:hr.nat.staff.import:0
-#: view:hr.payroll.deletion:0
-#: view:hr.payroll.employee.import:0
-#: view:hr.payroll.import:0
-#: view:hr.payroll.import.confirmation:0
-#: view:hr.payroll.validation:0
-msgid "Cancel"
-msgstr "Cancel"
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_analytic_reallocation.py:103
-#, python-format
-msgid "Unknown error. Please contact an administrator to resolve this problem. This is probably due to Web server error."
-msgstr "Unknown error. Please contact an administrator to resolve this problem. This is probably due to Web server error."
-
-#. module: msf_homere_interface
-#: view:hr.payroll.import:0
-msgid "This will import Payroll entries from Homere zipfile."
-msgstr "This will import Payroll entries from Homere zipfile."
-
-#. module: msf_homere_interface
-#: selection:hr.payroll.import,date_format:0
-msgid "dd-mm-yy"
-msgstr "dd-mm-yy"
-
-#. module: msf_homere_interface
-#: field:hr.employee,employee_type:0
-msgid "Type"
-msgstr "Type"
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:94
-#, python-format
-msgid "Wrong format for date: %s"
-msgstr "Wrong format for date: %s"
-
-#. module: msf_homere_interface
-#: view:hr.employee:0
-msgid "Notes"
-msgstr "Notes"
-
-#. module: msf_homere_interface
-#: model:ir.module.module,shortdesc:msf_homere_interface.module_meta_information
-msgid "Homere Interface"
-msgstr "Homere Interface"
-
-#. module: msf_homere_interface
-#: sql_constraint:hr.payroll.import.period:0
-msgid "This period have already been validated!"
-msgstr "This period have already been validated!"
+msgid "Unknown period!"
+msgstr "Période inconnue!"
 
 #. module: msf_homere_interface
 #: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:78
 #, python-format
 msgid "No field given for payroll import!"
-msgstr "No field given for payroll import!"
+msgstr "Pas de champ donné pour l'importation de la paie!"
 
 #. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:97
-#, python-format
-msgid "No open period found for given date: %s"
-msgstr "No open period found for given date: %s"
-
-#. module: msf_homere_interface
-#: view:hr.payroll.msf:0
-msgid "General Information"
-msgstr "General Information"
-
-#. module: msf_homere_interface
-#: field:hr.payroll.import.confirmation,total:0
-msgid "Processed"
-msgstr "Processed"
-
-#. module: msf_homere_interface
-#: selection:hr.payroll.import.confirmation,state:0
-#: selection:hr.payroll.msf,analytic_state:0
-msgid "None"
-msgstr "None"
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:240
-#, python-format
-msgid "You cannot import payroll entries. Please validate first draft payroll entries!"
-msgstr "You cannot import payroll entries. Please validate first draft payroll entries!"
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_payroll_employee_import.py:345
-#, python-format
-msgid "Line %s. One of this column is missing: code_terrain, id_unique or id_staff. This often happens when the line is empty."
-msgstr "Line %s. One of this column is missing: code_terrain, id_unique or id_staff. This often happens when the line is empty."
-
-#. module: msf_homere_interface
-#: field:hr.analytic.reallocation,free2_id:0
-#: field:hr.employee,free2_id:0
-#: field:hr.payroll.msf,free2_id:0
-msgid "Free 2"
-msgstr "Free 2"
-
-#. module: msf_homere_interface
-#: constraint:hr.employee:0
-msgid "Error ! You cannot select a department for which the employee is the manager."
-msgstr "Error ! You cannot select a department for which the employee is the manager."
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_payroll_employee_import.py:435
-#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:256
-#, python-format
-msgid "Nothing to import."
-msgstr "Nothing to import."
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_expat_import.py:56
-#: code:addons/msf_homere_interface/wizard/hr_nat_staff_import.py:115
-#, python-format
-msgid "No file given"
-msgstr "No file given"
-
-#. module: msf_homere_interface
-#: field:hr.payroll.msf,currency_id:0
-msgid "Currency"
-msgstr "Currency"
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_payroll_employee_import.py:174
-#, python-format
-msgid "Nonamed Employee"
-msgstr "Nonamed Employee"
-
-#. module: msf_homere_interface
-#: model:ir.model,name:msf_homere_interface.model_hr_payroll_validation
-msgid "Payroll entries validation wizard"
-msgstr "Payroll entries validation wizard"
-
-#. module: msf_homere_interface
-#: view:hr.nat.staff.import:0
-#: model:ir.actions.act_window,name:msf_homere_interface.action_nat_staff_import_wizard
-#: model:ir.ui.menu,name:msf_homere_interface.import_nat_staff
-msgid "Import nat. staff"
-msgstr "Import nat. staff"
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:325
-#, python-format
-msgid "Payroll import successful"
-msgstr "Payroll import successful"
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/hr.py:176
-#, python-format
-msgid "You are not allowed to change a local staff to expatriate!"
-msgstr "You are not allowed to change a local staff to expatriate!"
-
-#. module: msf_homere_interface
-#: field:hr.payroll.import,date_format:0
-msgid "Date format"
-msgstr "Date format"
-
-#. module: msf_homere_interface
-#: field:hr.expat.employee.import,file:0
-#: field:hr.nat.staff.import,file:0
-#: field:hr.payroll.employee.import,file:0
-#: field:hr.payroll.import,file:0
-msgid "File"
-msgstr "File"
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:285
-#, python-format
-msgid "Could not read envoi.ini file in given ZIP file."
-msgstr "Could not read envoi.ini file in given ZIP file."
+#: field:hr.payroll.msf,analytic_state:0
+msgid "Distribution State"
+msgstr "Statut d'Allocation "
 
 #. module: msf_homere_interface
 #: code:addons/msf_homere_interface/hr.py:131
@@ -554,19 +480,440 @@ msgstr "Could not read envoi.ini file in given ZIP file."
 #: code:addons/msf_homere_interface/wizard/hr_payroll_validation.py:201
 #, python-format
 msgid "Error"
-msgstr "Error"
+msgstr "Erreur"
 
 #. module: msf_homere_interface
-#: field:hr.analytic.reallocation,cost_center_id:0
-#: field:hr.employee,cost_center_id:0
-#: field:hr.payroll.msf,cost_center_id:0
-msgid "Cost Center"
-msgstr "Cost Center"
+#: view:hr.employee:0
+#: field:hr.payroll.msf,employee_id:0
+#: selection:hr.payroll.msf,partner_type:0
+#: model:ir.model,name:msf_homere_interface.model_hr_employee
+msgid "Employee"
+msgstr "Employé"
 
 #. module: msf_homere_interface
-#: field:hr.employee,allow_edition:0
-msgid "Allow local employee edition?"
-msgstr "Allow local employee edition?"
+#: selection:hr.payroll.import,date_format:0
+msgid "mm-dd-yyyy"
+msgstr "mm-dd-yyyy"
+
+#. module: msf_homere_interface
+#: code:addons/msf_homere_interface/wizard/hr_payroll_employee_import.py:239
+#, python-format
+msgid "The given file is probably corrupted!\n"
+"%s"
+msgstr "Le fichier mentionné est probablement corrompu !\n"
+"%s"
+
+#. module: msf_homere_interface
+#: view:hr.employee:0
+msgid "Social IDs"
+msgstr "Identité Sociale"
+
+#. module: msf_homere_interface
+#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:245
+#, python-format
+msgid "Payroll import failed."
+msgstr "Échec de l'importation de la liste du personnel"
+
+#. module: msf_homere_interface
+#: field:hr.payroll.msf,account_id:0
+msgid "Account"
+msgstr "Compte"
+
+#. module: msf_homere_interface
+#: view:hr.payroll.validation:0
+msgid "This will validate all Payroll entries and create accounting entries. This will take a while."
+msgstr "Cela permettra de valider toutes les écritures de Paie et de créer des écritures comptables. Cela va prendre un certain temps."
+
+#. module: msf_homere_interface
+#: code:addons/msf_homere_interface/wizard/hr_nat_staff_import.py:66
+#, python-format
+msgid "Code is a mandatory field!"
+msgstr "Le code est un champ obligatoire !"
+
+#. module: msf_homere_interface
+#: view:hr.payroll.msf:0
+msgid "General Information"
+msgstr "Informations Générales"
+
+#. module: msf_homere_interface
+#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:325
+#, python-format
+msgid "Payroll import successful"
+msgstr "Importation de la liste du personnel effectuée avec succès"
+
+#. module: msf_homere_interface
+#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:295
+#, python-format
+msgid "Problem to read given file."
+msgstr "Problème de lecture du fichier donné."
+
+#. module: msf_homere_interface
+#: field:hr.job,code:0
+msgid "Job code"
+msgstr "Code de la tâche"
+
+#. module: msf_homere_interface
+#: code:addons/msf_homere_interface/wizard/hr_payroll_employee_import.py:435
+#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:256
+#, python-format
+msgid "Nothing to import."
+msgstr "Nothing to import."
+
+#. module: msf_homere_interface
+#: code:addons/msf_homere_interface/hr.py:174
+#, python-format
+msgid "You are not allowed to change an expatriate to local staff!"
+msgstr "Vous n'êtes pas en mesure de changer un expatrié en personnal local"
+
+#. module: msf_homere_interface
+#: field:hr.payroll.employee.import.errors,wizard_id:0
+msgid "Payroll employee import wizard"
+msgstr "Assistant d'importation de la liste du personnel"
+
+#. module: msf_homere_interface
+#: selection:hr.payroll.import.confirmation,state:0
+msgid "From Employee"
+msgstr "De l'Employé"
+
+#. module: msf_homere_interface
+#: view:hr.nat.staff.import:0
+#: model:ir.actions.act_window,name:msf_homere_interface.action_nat_staff_import_wizard
+#: model:ir.ui.menu,name:msf_homere_interface.import_nat_staff
+msgid "Import nat. staff"
+msgstr "Importer personnel national"
+
+#. module: msf_homere_interface
+#: view:hr.payroll.deletion:0
+msgid "Payroll Deletion"
+msgstr "Paie - Suppression"
+
+#. module: msf_homere_interface
+#: view:hr.expat.employee.import:0
+msgid "This wizard will import an Expat employees file in XML Spreadsheet 2003 format. To generate this file, create a Speadsheet with 2 columns: 'Name' and 'Code'."
+msgstr "Cet assistant importera le fichier du personnel expatrié au format de Tableur XML 2003. Pour générer ce fichier, créez un Tableur avec 2 colonnes : 'Nom' et 'Code'."
+
+#. module: msf_homere_interface
+#: field:hr.payroll.msf,partner_id:0
+#: selection:hr.payroll.msf,partner_type:0
+msgid "Partner"
+msgstr "Partenaire"
+
+#. module: msf_homere_interface
+#: view:hr.employee:0
+msgid "Status"
+msgstr "Statut(s)"
+
+#. module: msf_homere_interface
+#: view:hr.payroll.msf:0
+#: model:ir.model,name:msf_homere_interface.model_hr_payroll_msf
+#: model:ir.ui.menu,name:msf_homere_interface.menu_finance_payroll
+msgid "Payroll"
+msgstr "Paie"
+
+#. module: msf_homere_interface
+#: view:hr.payroll.msf:0
+msgid "Accounting"
+msgstr "Comptabilité"
+
+#. module: msf_homere_interface
+#: selection:hr.payroll.import.confirmation,state:0
+msgid "From Payroll"
+msgstr "De la Paie"
+
+#. module: msf_homere_interface
+#: selection:hr.payroll.import,date_format:0
+msgid "dd-mm-yy"
+msgstr "dd-mm-yy"
+
+#. module: msf_homere_interface
+#: code:addons/msf_homere_interface/hr.py:131
+#, python-format
+msgid "You are not allowed to create a local staff! Please use Import to create local staff."
+msgstr "Vous n'êtes pas en mesure de créer un personnal local! Veuillez utiliser la fonction Importer pour créer un personnel local"
+
+#. module: msf_homere_interface
+#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:179
+#, python-format
+msgid "More than one currency '%s' found."
+msgstr "Plusieurs devises '%s' trouvés."
+
+#. module: msf_homere_interface
+#: model:ir.actions.act_window,name:msf_homere_interface.action_payroll_tree
+#: model:ir.ui.menu,name:msf_homere_interface.menu_finance_payroll_entries
+msgid "Payroll entries"
+msgstr "Paie - Ecritures"
+
+#. module: msf_homere_interface
+#: field:hr.payroll.import.confirmation,updated:0
+msgid "Updated"
+msgstr "Mise à jour"
+
+#. module: msf_homere_interface
+#: field:hr.contract.msf,job_id:0
+#: view:hr.employee:0
+msgid "Job"
+msgstr "Poste"
+
+#. module: msf_homere_interface
+#: field:hr.payroll.msf,amount:0
+msgid "Amount"
+msgstr "Montant"
+
+#. module: msf_homere_interface
+#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:97
+#, python-format
+msgid "No open period found for given date: %s"
+msgstr "Pas de période ouverte trouvée pour la date donnée: %s"
+
+#. module: msf_homere_interface
+#: view:hr.payroll.import.confirmation:0
+msgid "Ok"
+msgstr "Ok"
+
+#. module: msf_homere_interface
+#: view:hr.employee:0
+msgid "Notes"
+msgstr "Notes"
+
+#. module: msf_homere_interface
+#: model:ir.model,name:msf_homere_interface.model_hr_payroll_validation
+msgid "Payroll entries validation wizard"
+msgstr "Paie - Assistant de validation d'écritures"
+
+#. module: msf_homere_interface
+#: model:ir.model,name:msf_homere_interface.model_hr_payroll_import
+msgid "Payroll Import"
+msgstr "Paie - Importation"
+
+#. module: msf_homere_interface
+#: view:hr.payroll.import.confirmation:0
+#: model:ir.model,name:msf_homere_interface.model_hr_payroll_import_confirmation
+msgid "Import Confirmation"
+msgstr "Confirmation de l'Importation"
+
+#. module: msf_homere_interface
+#: model:ir.model,name:msf_homere_interface.model_hr_analytic_reallocation
+msgid "Analytic reallocation wizard"
+msgstr "Assistant de Réallocation Analytique"
+
+#. module: msf_homere_interface
+#: field:hr.payroll.import.confirmation,created:0
+msgid "Created"
+msgstr "Créé"
+
+#. module: msf_homere_interface
+#: code:addons/msf_homere_interface/wizard/hr_payroll_employee_import.py:458
+#: code:addons/msf_homere_interface/wizard/hr_payroll_employee_import.py:464
+#, python-format
+msgid "%s not found in given zip file!"
+msgstr "%s pas trouvé dans le fichier zip donné!"
+
+#. module: msf_homere_interface
+#: code:addons/msf_homere_interface/wizard/hr_payroll_employee_import.py:478
+#, python-format
+msgid "Employee import successful."
+msgstr "Employé(e) - Importation réussie"
+
+#. module: msf_homere_interface
+#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:276
+#, python-format
+msgid "No envoi.ini file found in given ZIP file!"
+msgstr "Pas de fichier envoi.ini trouvé dans le fichier ZP donné!"
+
+#. module: msf_homere_interface
+#: constraint:hr.employee:0
+msgid "Error ! You cannot create recursive Hierarchy of Employees."
+msgstr "Erreur ! Vous ne pouvez pas créer de Hiérarchie d'Employés récursive."
+
+#. module: msf_homere_interface
+#: field:hr.payroll.msf,date:0
+msgid "Date"
+msgstr "Date"
+
+#. module: msf_homere_interface
+#: code:addons/msf_homere_interface/wizard/hr_expat_import.py:59
+#: code:addons/msf_homere_interface/wizard/hr_nat_staff_import.py:118
+#, python-format
+msgid "This wizard only accept XML files."
+msgstr "Cet assistant n'accepte que les fichiers XML."
+
+#. module: msf_homere_interface
+#: model:ir.module.module,shortdesc:msf_homere_interface.module_meta_information
+msgid "Homere Interface"
+msgstr "Interface Homère "
+
+#. module: msf_homere_interface
+#: selection:hr.payroll.msf,analytic_state:0
+msgid "Valid"
+msgstr "Valide"
+
+#. module: msf_homere_interface
+#: field:hr.payroll.msf,document_date:0
+msgid "Document Date"
+msgstr "Date du Document "
+
+#. module: msf_homere_interface
+#: selection:hr.payroll.import,date_format:0
+msgid "dd/mm/yyyy"
+msgstr "dd/mm/yyyy"
+
+#. module: msf_homere_interface
+#: model:ir.model,name:msf_homere_interface.model_res_company
+msgid "Companies"
+msgstr "Sociétés"
+
+#. module: msf_homere_interface
+#: view:hr.payroll.msf:0
+msgid "Total amount"
+msgstr "Montant total"
+
+#. module: msf_homere_interface
+#: view:res.company:0
+msgid "Configuration"
+msgstr "Configuration"
+
+#. module: msf_homere_interface
+#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:127
+#, python-format
+msgid "This account is a view type account: %s"
+msgstr "Ce compte est un compte de type 'vue': %s"
+
+#. module: msf_homere_interface
+#: code:addons/msf_homere_interface/wizard/hr_nat_staff_import.py:77
+#, python-format
+msgid "Employee code already used by: %s %s"
+msgstr "Code de travailleur déjà utilisé par : %s %s"
+
+#. module: msf_homere_interface
+#: model:ir.model,name:msf_homere_interface.model_hr_job
+msgid "Job Description"
+msgstr "Description de poste"
+
+#. module: msf_homere_interface
+#: code:addons/msf_homere_interface/wizard/hr_payroll_employee_import.py:189
+#, python-format
+msgid "Database have more than one employee with the unique code of this employee: %s"
+msgstr "La base de données compte plus d'un travailleur ayant le code unique de ce travailleur : %s"
+
+#. module: msf_homere_interface
+#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:99
+#, python-format
+msgid "More than one period found for given date: %s"
+msgstr "Plus d'une période trouvée pour la date donnée: %s"
+
+#. module: msf_homere_interface
+#: field:hr.contract.msf,homere_codeterrain:0
+#: field:hr.employee,homere_codeterrain:0
+msgid "Homere field: codeterrain"
+msgstr "Champ Homère: codeterrain"
+
+#. module: msf_homere_interface
+#: model:ir.model,name:msf_homere_interface.model_hr_expat_employee_import
+msgid "Expat employee import"
+msgstr "Importation des travailleurs expatriés"
+
+#. module: msf_homere_interface
+#: code:addons/msf_homere_interface/wizard/hr_payroll_employee_import.py:345
+#, python-format
+msgid "Line %s. One of this column is missing: code_terrain, id_unique or id_staff. This often happens when the line is empty."
+msgstr "Ligne %s. Une de ces colonnes est manquante : code_terrain, id_unique ou id_staff. Cela arrive souvent lorsque la ligne est vide."
+
+#. module: msf_homere_interface
+#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:114
+#, python-format
+msgid "There is more than one account that have '%s' code!"
+msgstr "Il y a plus d'un compte ayant le code '%s'!"
+
+#. module: msf_homere_interface
+#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:105
+#: code:addons/msf_homere_interface/wizard/hr_payroll_validation.py:171
+#, python-format
+msgid "Payroll entries have already been validated for: %s in this period: \"%s\"!"
+msgstr "Ecritures de Paie ont déjà été validées pour %s dans cette période: \"%s\"!"
+
+#. module: msf_homere_interface
+#: selection:hr.payroll.msf,state:0
+msgid "Draft"
+msgstr "Brouillon"
+
+#. module: msf_homere_interface
+#: view:hr.analytic.reallocation:0
+#: view:hr.expat.employee.import:0
+#: view:hr.nat.staff.import:0
+#: view:hr.payroll.deletion:0
+#: view:hr.payroll.employee.import:0
+#: view:hr.payroll.import:0
+#: view:hr.payroll.import.confirmation:0
+#: view:hr.payroll.validation:0
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: msf_homere_interface
+#: model:ir.ui.menu,name:msf_homere_interface.import_expat_employees
+msgid "Import expats"
+msgstr "Importer expatriés"
+
+#. module: msf_homere_interface
+#: help:res.company,salaries_default_account:0
+msgid "Default account for Payroll entries. This permits reconciliation of entries."
+msgstr "Compte par défaut pour les écritures de Paie. Ceci permet de lettrer les écritures."
+
+#. module: msf_homere_interface
+#: model:ir.actions.act_window,name:msf_homere_interface.action_payroll_deletion
+msgid "Delete draft entries"
+msgstr "Effacer les écritures sous statut brouillon"
+
+#. module: msf_homere_interface
+#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:90
+#, python-format
+msgid "A date is missing!"
+msgstr "Une date est manquante!"
+
+#. module: msf_homere_interface
+#: code:addons/msf_homere_interface/wizard/hr_expat_import.py:56
+#: code:addons/msf_homere_interface/wizard/hr_nat_staff_import.py:115
+#, python-format
+msgid "No file given"
+msgstr "Aucun fichier mentionné"
+
+#. module: msf_homere_interface
+#: code:addons/msf_homere_interface/wizard/hr_payroll_validation.py:201
+#, python-format
+msgid "No account found!"
+msgstr "Le système n'a pas trouvé de compte !"
+
+#. module: msf_homere_interface
+#: view:hr.employee:0
+msgid "Categories"
+msgstr "Catégories"
+
+#. module: msf_homere_interface
+#: field:hr.analytic.reallocation,funding_pool_id:0
+#: field:hr.employee,funding_pool_id:0
+#: field:hr.payroll.msf,funding_pool_id:0
+msgid "Funding Pool"
+msgstr "Funding pool"
+
+#. module: msf_homere_interface
+#: view:hr.payroll.import:0
+msgid "This will import Payroll entries from Homere zipfile."
+msgstr "Ceci importera les écritures de Paie à partir d'un fichier Zip Homere."
+
+#. module: msf_homere_interface
+#: constraint:hr.employee:0
+msgid "Another employee has the same unique code."
+msgstr "Ce code est utilisé pour un autre employé."
+
+#. module: msf_homere_interface
+#: code:addons/msf_homere_interface/wizard/hr_payroll_validation.py:166
+#, python-format
+msgid "No field found!"
+msgstr "          ; these options on"
+
+#. module: msf_homere_interface
+#: view:hr.payroll.employee.import:0
+msgid "This will import employee from given ZIP file."
+msgstr "Ceci importera l'employé d'un fichier ZIP donné."
 
 #. module: msf_homere_interface
 #: field:hr.payroll.msf,journal_id:0
@@ -575,323 +922,83 @@ msgid "Journal"
 msgstr "Journal"
 
 #. module: msf_homere_interface
-#: model:ir.actions.act_window,name:msf_homere_interface.action_employee_analytic_reallocation
-msgid "Employee Analytic reallocation"
-msgstr "Employee Analytic reallocation"
+#: field:hr.expat.employee.import,filename:0
+#: field:hr.nat.staff.import,filename:0
+#: field:hr.payroll.employee.import,filename:0
+#: field:hr.payroll.import,filename:0
+msgid "Imported filename"
+msgstr "Nom du fichier importé"
 
 #. module: msf_homere_interface
-#: code:addons/msf_homere_interface/hr.py:211
+#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:109
 #, python-format
-msgid "You are not allowed to delete local staff manually!"
-msgstr "You are not allowed to delete local staff manually!"
+msgid "One accounting code is missing!"
+msgstr "Un code comptable est manquant!"
+
+#. module: msf_homere_interface
+#: field:hr.employee,employee_type:0
+msgid "Type"
+msgstr "Type"
+
+#. module: msf_homere_interface
+#: field:hr.payroll.msf,currency_id:0
+msgid "Currency"
+msgstr "Devises"
+
+#. module: msf_homere_interface
+#: view:hr.payroll.import.confirmation:0
+msgid "Error List"
+msgstr "Liste d'erreurs"
+
+#. module: msf_homere_interface
+#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:219
+#, python-format
+msgid "File '%s' doesn't exist!"
+msgstr "Fichier '%s' n'existe pas!"
+
+#. module: msf_homere_interface
+#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:94
+#, python-format
+msgid "Wrong format for date: %s"
+msgstr "Mauvais format pour la date: %s"
+
+#. module: msf_homere_interface
+#: selection:hr.employee,employee_type:0
+msgid "Expatriate employee"
+msgstr "Employé Expatrié "
 
 #. module: msf_homere_interface
 #: view:hr.employee:0
-msgid "Employees"
-msgstr "Employees"
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:287
-#, python-format
-msgid "Field not found in envoi.ini file."
-msgstr "Field not found in envoi.ini file."
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_analytic_reallocation.py:100
-#, python-format
-msgid "Unknown error"
-msgstr "Unknown error"
-
-#. module: msf_homere_interface
-#: model:ir.actions.act_window,name:msf_homere_interface.action_payroll_analytic_reallocation
-msgid "Payroll Analytic reallocation"
-msgstr "Payroll Analytic reallocation"
-
-#. module: msf_homere_interface
-#: view:hr.expat.employee.import:0
-#: model:ir.actions.act_window,name:msf_homere_interface.action_expat_employee_import_wizard
-msgid "Import Expats"
-msgstr "Import Expats"
-
-#. module: msf_homere_interface
-#: field:hr.payroll.msf,partner_type:0
-msgid "Third Parties"
-msgstr "Third Parties"
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:149
-#, python-format
-msgid "No employee found for this code: %s (%s).\n"
-"DEBIT: %s.\n"
-"CREDIT: %s."
-msgstr "No employee found for this code: %s (%s).\n"
-"DEBIT: %s.\n"
-"CREDIT: %s."
-
-#. module: msf_homere_interface
-#: selection:hr.payroll.msf,analytic_state:0
-msgid "Valid"
-msgstr "Valid"
+msgid "Group By..."
+msgstr "Grouper Par..."
 
 #. module: msf_homere_interface
 #: constraint:res.company:0
 msgid "Error! You can not create recursive companies."
-msgstr "Error! You can not create recursive companies."
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:114
-#, python-format
-msgid "There is more than one account that have '%s' code!"
-msgstr "There is more than one account that have '%s' code!"
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_payroll_employee_import.py:175
-#, python-format
-msgid "Unknown error for employee %s"
-msgstr "Unknown error for employee %s"
-
-#. module: msf_homere_interface
-#: view:hr.employee:0
-msgid "Active"
-msgstr "Active"
-
-#. module: msf_homere_interface
-#: model:ir.model,name:msf_homere_interface.model_hr_payroll_deletion
-msgid "Payroll entries deletion wizard"
-msgstr "Payroll entries deletion wizard"
-
-#. module: msf_homere_interface
-#: view:hr.payroll.msf:0
-msgid "Total amount"
-msgstr "Total amount"
-
-#. module: msf_homere_interface
-#: model:ir.model,name:msf_homere_interface.model_hr_payroll_import_period
-msgid "Payroll Import Periods"
-msgstr "Payroll Import Periods"
-
-#. module: msf_homere_interface
-#: field:hr.payroll.msf,name:0
-msgid "Description"
-msgstr "Description"
-
-#. module: msf_homere_interface
-#: view:hr.payroll.msf:0
-msgid "Analytic Accounting"
-msgstr "Analytic Accounting"
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_nat_staff_import.py:64
-#, python-format
-msgid "Name is a mandatory field!"
-msgstr "Name is a mandatory field!"
-
-#. module: msf_homere_interface
-#: view:res.company:0
-msgid "Configuration"
-msgstr "Configuration"
+msgstr "Erreur! Vous ne pouvez pas créer des sociétés récursives"
 
 #. module: msf_homere_interface
 #: view:hr.payroll.import.confirmation:0
-msgid "Ok"
-msgstr "Ok"
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:112
-#, python-format
-msgid "The accounting code '%s' doesn't exist!"
-msgstr "The accounting code '%s' doesn't exist!"
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_nat_staff_import.py:66
-#, python-format
-msgid "Code is a mandatory field!"
-msgstr "Code is a mandatory field!"
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_payroll_validation.py:164
-#, python-format
-msgid "Unknown period!"
-msgstr "Unknown period!"
+msgid "Import Errors"
+msgstr "Importer Erreurs"
 
 #. module: msf_homere_interface
 #: code:addons/msf_homere_interface/wizard/hr_nat_staff_import.py:71
 #, python-format
 msgid "Employee code already used by: %s"
-msgstr "Employee code already used by: %s"
-
-#. module: msf_homere_interface
-#: selection:hr.payroll.import,date_format:0
-msgid "dd-mm-yyyy"
-msgstr "dd-mm-yyyy"
-
-#. module: msf_homere_interface
-#: model:ir.model,name:msf_homere_interface.model_hr_payroll_import
-msgid "Payroll Import"
-msgstr "Payroll Import"
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_payroll_employee_import.py:239
-#, python-format
-msgid "The given file is probably corrupted!\n"
-"%s"
-msgstr "The given file is probably corrupted!\n"
-"%s"
-
-#. module: msf_homere_interface
-#: view:hr.employee:0
-msgid "Contact Information"
-msgstr "Contact Information"
-
-#. module: msf_homere_interface
-#: help:hr.payroll.msf,field:0
-msgid "Field this line come from in Homère."
-msgstr "Field this line come from in Homère."
-
-#. module: msf_homere_interface
-#: selection:hr.employee,employee_type:0
-msgid "Expatriate employee"
-msgstr "Expatriate employee"
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/hr_payroll.py:261
-#, python-format
-msgid "You are not able to create payroll entries."
-msgstr "You are not able to create payroll entries."
-
-#. module: msf_homere_interface
-#: field:hr.payroll.msf,account_id:0
-msgid "Account"
-msgstr "Account"
-
-#. module: msf_homere_interface
-#: field:hr.payroll.import.confirmation,created:0
-msgid "Created"
-msgstr "Created"
-
-#. module: msf_homere_interface
-#: view:hr.employee:0
-#: field:hr.payroll.msf,employee_id:0
-#: selection:hr.payroll.msf,partner_type:0
-#: model:ir.model,name:msf_homere_interface.model_hr_employee
-msgid "Employee"
-msgstr "Employee"
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_payroll_validation.py:278
-#, python-format
-msgid "Payroll entries validation is successful for this period: %s and for that field: %s"
-msgstr "Payroll entries validation is successful for this period: %s and for that field: %s"
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:151
-#, python-format
-msgid "More than one employee have the same identification ID: %s"
-msgstr "More than one employee have the same identification ID: %s"
-
-#. module: msf_homere_interface
-#: view:hr.employee:0
-msgid "Categories"
-msgstr "Categories"
-
-#. module: msf_homere_interface
-#: view:hr.payroll.import.confirmation:0
-msgid "Error List"
-msgstr "Error List"
-
-#. module: msf_homere_interface
-#: view:hr.payroll.import.confirmation:0
-#: model:ir.model,name:msf_homere_interface.model_hr_payroll_import_confirmation
-msgid "Import Confirmation"
-msgstr "Import Confirmation"
-
-#. module: msf_homere_interface
-#: help:res.company,salaries_default_account:0
-msgid "Default account for Payroll entries. This permits reconciliation of entries."
-msgstr "Default account for Payroll entries. This permits reconciliation of entries."
-
-#. module: msf_homere_interface
-#: model:ir.model,name:msf_homere_interface.model_hr_expat_employee_import
-msgid "Expat employee import"
-msgstr "Expat employee import"
+msgstr "Code de travailleur déjà utilisé par : %s"
 
 #. module: msf_homere_interface
 #: field:hr.analytic.reallocation,free1_id:0
 #: field:hr.employee,free1_id:0
 #: field:hr.payroll.msf,free1_id:0
 msgid "Free 1"
-msgstr "Free 1"
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_expat_import.py:59
-#: code:addons/msf_homere_interface/wizard/hr_nat_staff_import.py:118
-#, python-format
-msgid "This wizard only accept XML files."
-msgstr "This wizard only accept XML files."
-
-#. module: msf_homere_interface
-#: view:hr.payroll.deletion:0
-msgid "Please pay ATTENTION. This will delete all Payroll entries!"
-msgstr "Please pay ATTENTION. This will delete all Payroll entries!"
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_payroll_employee_import.py:478
-#, python-format
-msgid "Employee import successful."
-msgstr "Employee import successful."
+msgstr "Option 1"
 
 #. module: msf_homere_interface
 #: view:hr.employee:0
-msgid "Personal Information"
-msgstr "Personal Information"
-
-#. module: msf_homere_interface
-#: model:ir.model,name:msf_homere_interface.model_hr_payroll_employee_import_errors
-msgid "Employee Import Errors"
-msgstr "Employee Import Errors"
-
-#. module: msf_homere_interface
-#: model:ir.actions.act_window,name:msf_homere_interface.action_employee_import_wizard
-#: model:ir.ui.menu,name:msf_homere_interface.menu_finance_employees_import
-msgid "Employee Update"
-msgstr "Employee Update"
-
-#. module: msf_homere_interface
-#: constraint:hr.employee:0
-msgid "Error ! You cannot create recursive Hierarchy of Employees."
-msgstr "Error ! You cannot create recursive Hierarchy of Employees."
-
-#. module: msf_homere_interface
-#: help:hr.payroll.import,date_format:0
-msgid "This is the date format used in the Homère file in order to recognize them."
-msgstr "This is the date format used in the Homère file in order to recognize them."
-
-#. module: msf_homere_interface
-#: selection:hr.payroll.msf,state:0
-msgid "Validated"
-msgstr "Validated"
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:99
-#, python-format
-msgid "More than one period found for given date: %s"
-msgstr "More than one period found for given date: %s"
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:219
-#, python-format
-msgid "File '%s' doesn't exist!"
-msgstr "File '%s' doesn't exist!"
-
-#. module: msf_homere_interface
-#: view:hr.analytic.reallocation:0
-msgid "Analytic Reallocation"
-msgstr "Analytic Reallocation"
-
-#. module: msf_homere_interface
-#: view:hr.payroll.deletion:0
-msgid "This will delete all payroll entries. Are you sure?"
-msgstr "This will delete all payroll entries. Are you sure?"
+msgid "Contact Information"
+msgstr "Informations Contact"
 
 #. module: msf_homere_interface
 #: field:hr.payroll.employee.import.errors,msg:0
@@ -899,296 +1006,189 @@ msgid "Message"
 msgstr "Message"
 
 #. module: msf_homere_interface
-#: field:hr.employee,private_phone:0
-msgid "Private Phone"
-msgstr "Private Phone"
+#: selection:hr.employee,employee_type:0
+msgid "Local Staff"
+msgstr "Personnal Local"
 
 #. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_payroll_validation.py:201
+#: code:addons/msf_homere_interface/wizard/hr_payroll_employee_import.py:174
 #, python-format
-msgid "No account found!"
-msgstr "No account found!"
-
-#. module: msf_homere_interface
-#: model:ir.model,name:msf_homere_interface.model_res_company
-msgid "Companies"
-msgstr "Companies"
-
-#. module: msf_homere_interface
-#: view:hr.payroll.msf:0
-msgid "Accounting"
-msgstr "Accounting"
-
-#. module: msf_homere_interface
-#: field:hr.contract.msf,date_start:0
-msgid "Contract ' starting date"
-msgstr "Contract ' starting date"
-
-#. module: msf_homere_interface
-#: view:hr.payroll.employee.import:0
-#: model:ir.model,name:msf_homere_interface.model_hr_payroll_employee_import
-msgid "Employee Import"
-msgstr "Employee Import"
-
-#. module: msf_homere_interface
-#: view:hr.payroll.deletion:0
-msgid "Payroll Deletion"
-msgstr "Payroll Deletion"
-
-#. module: msf_homere_interface
-#: model:ir.model,name:msf_homere_interface.model_hr_nat_staff_import
-msgid "Nat. staff employee import"
-msgstr "Nat. staff employee import"
-
-#. module: msf_homere_interface
-#: model:ir.model,name:msf_homere_interface.model_hr_job
-msgid "Job Description"
-msgstr "Job Description"
-
-#. module: msf_homere_interface
-#: field:hr.payroll.import.period,period_id:0
-#: field:hr.payroll.msf,period_id:0
-msgid "Period"
-msgstr "Period"
-
-#. module: msf_homere_interface
-#: selection:hr.payroll.import.confirmation,state:0
-msgid "From Employee"
-msgstr "From Employee"
-
-#. module: msf_homere_interface
-#: field:hr.payroll.msf,employee_id_number:0
-msgid "Employee ID"
-msgstr "Employee ID"
-
-#. module: msf_homere_interface
-#: view:hr.payroll.validation:0
-msgid "Payroll Validation"
-msgstr "Payroll Validation"
-
-#. module: msf_homere_interface
-#: view:hr.payroll.msf:0
-msgid "Payroll List"
-msgstr "Payroll List"
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:90
-#, python-format
-msgid "A date is missing!"
-msgstr "A date is missing!"
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/hr.py:134
-#: code:addons/msf_homere_interface/hr.py:211
-#: code:addons/msf_homere_interface/wizard/hr_expat_import.py:59
-#: code:addons/msf_homere_interface/wizard/hr_nat_staff_import.py:71
-#: code:addons/msf_homere_interface/wizard/hr_nat_staff_import.py:77
-#: code:addons/msf_homere_interface/wizard/hr_nat_staff_import.py:118
-#: code:addons/msf_homere_interface/wizard/hr_payroll_deletion.py:41
-#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:90
-#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:97
-#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:99
-#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:109
-#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:112
-#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:114
-#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:127
-#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:140
-#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:174
-#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:276
-#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:287
-#: code:addons/msf_homere_interface/wizard/hr_payroll_validation.py:98
-#: code:addons/msf_homere_interface/wizard/hr_payroll_validation.py:153
-#: code:addons/msf_homere_interface/wizard/hr_payroll_validation.py:157
-#: code:addons/msf_homere_interface/wizard/hr_payroll_validation.py:244
-#, python-format
-msgid "Warning"
-msgstr "Warning"
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_payroll_employee_import.py:458
-#: code:addons/msf_homere_interface/wizard/hr_payroll_employee_import.py:464
-#, python-format
-msgid "%s not found in given zip file!"
-msgstr "%s not found in given zip file!"
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:109
-#, python-format
-msgid "One accounting code is missing!"
-msgstr "One accounting code is missing!"
-
-#. module: msf_homere_interface
-#: view:hr.payroll.msf:0
-#: model:ir.model,name:msf_homere_interface.model_hr_payroll_msf
-#: model:ir.ui.menu,name:msf_homere_interface.menu_finance_payroll
-msgid "Payroll"
-msgstr "Payroll"
-
-#. module: msf_homere_interface
-#: field:hr.payroll.import.confirmation,filename:0
-msgid "Filename"
-msgstr "Filename"
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:105
-#: code:addons/msf_homere_interface/wizard/hr_payroll_validation.py:171
-#, python-format
-msgid "Payroll entries have already been validated for: %s in this period: \"%s\"!"
-msgstr "Payroll entries have already been validated for: %s in this period: \"%s\"!"
+msgid "Nonamed Employee"
+msgstr "Pas de travailleur désigné par son nom"
 
 #. module: msf_homere_interface
 #: field:hr.payroll.import.confirmation,error_line_ids:0
 msgid "Error list"
-msgstr "Error list"
+msgstr "Liste d'erreurs"
 
 #. module: msf_homere_interface
-#: field:hr.payroll.msf,analytic_state:0
-msgid "Distribution State"
-msgstr "Distribution State"
+#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:177
+#, python-format
+msgid "No '%s' currency or non-active currency."
+msgstr "Aucune devise '%s'."
 
 #. module: msf_homere_interface
-#: field:hr.contract.msf,homere_id_unique:0
-#: field:hr.employee,homere_id_unique:0
-msgid "Homere field: id_unique"
-msgstr "Homere field: id_unique"
+#: view:hr.payroll.msf:0
+msgid "Analytic Accounting"
+msgstr "Comptabilité Analytique"
+
+#. module: msf_homere_interface
+#: help:hr.payroll.msf,analytic_state:0
+msgid "Give analytic distribution state"
+msgstr "Fournir le statut de l'allocation analytique "
 
 #. module: msf_homere_interface
 #: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:174
 #, python-format
 msgid "One currency is missing!"
-msgstr "One currency is missing!"
-
-#. module: msf_homere_interface
-#: model:ir.actions.act_window,name:msf_homere_interface.action_payroll_tree
-#: model:ir.ui.menu,name:msf_homere_interface.menu_finance_payroll_entries
-msgid "Payroll entries"
-msgstr "Payroll entries"
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_payroll_employee_import.py:189
-#, python-format
-msgid "Database have more than one employee with the unique code of this employee: %s"
-msgstr "Database have more than one employee with the unique code of this employee: %s"
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:245
-#, python-format
-msgid "Payroll import failed."
-msgstr "Payroll import failed."
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_payroll_employee_import.py:213
-#, python-format
-msgid "No data found for this line: %s."
-msgstr "No data found for this line: %s."
+msgstr "Une devise est manquante!"
 
 #. module: msf_homere_interface
 #: view:hr.employee:0
-msgid "Status"
-msgstr "Status"
+msgid "Employees"
+msgstr "Employé(e)s"
 
 #. module: msf_homere_interface
-#: view:hr.payroll.msf:0
-msgid "Search Journal Items"
-msgstr "Search Journal Items"
+#: selection:hr.payroll.import.confirmation,state:0
+#: selection:hr.payroll.msf,analytic_state:0
+msgid "None"
+msgstr "Aucun"
 
 #. module: msf_homere_interface
-#: field:hr.payroll.import.confirmation,errors:0
-#: field:hr.payroll.import.confirmation,nberrors:0
-msgid "Errors"
-msgstr "Errors"
-
-#. module: msf_homere_interface
-#: field:hr.contract.msf,job_id:0
-#: view:hr.employee:0
-msgid "Job"
-msgstr "Job"
-
-#. module: msf_homere_interface
-#: field:hr.payroll.msf,ref:0
-msgid "Reference"
-msgstr "Reference"
-
-#. module: msf_homere_interface
-#: view:hr.nat.staff.import:0
-msgid "This wizard will import National staff employees file in XML Spreadsheet 2003 format. To generate this file, create a Speadsheet with some columns: 'Name', 'Code'."
-msgstr "This wizard will import National staff employees file in XML Spreadsheet 2003 format. To generate this file, create a Speadsheet with some columns: 'Name', 'Code'."
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_nat_staff_import.py:77
+#: code:addons/msf_homere_interface/wizard/hr_payroll_validation.py:278
 #, python-format
-msgid "Employee code already used by: %s %s"
-msgstr "Employee code already used by: %s %s"
+msgid "Payroll entries validation is successful for this period: %s and for that field: %s"
+msgstr "Validation des écritures de Paie réussie pour cette période: %s et pour ce champ: %s"
+
+#. module: msf_homere_interface
+#: field:hr.payroll.import.confirmation,total:0
+msgid "Processed"
+msgstr "Traité"
+
+#. module: msf_homere_interface
+#: field:hr.payroll.import,date_format:0
+msgid "Date format"
+msgstr "Date format"
+
+#. module: msf_homere_interface
+#: field:hr.employee,name_resource:0
+msgid "Name"
+msgstr "Nom"
+
+#. module: msf_homere_interface
+#: model:ir.actions.act_window,name:msf_homere_interface.action_payroll_validation
+msgid "Validate draft entries"
+msgstr "Valider les écritures sous statut brouillon"
+
+#. module: msf_homere_interface
+#: code:addons/msf_homere_interface/wizard/hr_payroll_employee_import.py:177
+#, python-format
+msgid "No \"code_staff\" found for employee %s!"
+msgstr "Le système n'a pas trouvé de \"code_staff\" pour le travailleur %s !"
+
+#. module: msf_homere_interface
+#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:287
+#, python-format
+msgid "Field not found in envoi.ini file."
+msgstr "Champ pas trouvé sous fichier envoi.ini file."
 
 #. module: msf_homere_interface
 #: code:addons/msf_homere_interface/wizard/hr_payroll_employee_import.py:424
 #, python-format
 msgid "Employee import FAILED."
-msgstr "Employee import FAILED."
+msgstr "Employé(e) - Importation ECHOUEE"
 
 #. module: msf_homere_interface
 #: code:addons/msf_homere_interface/wizard/hr_payroll_employee_import.py:179
 #, python-format
 msgid "No \"code_terrain\" found for employee %s!"
-msgstr "No \"code_terrain\" found for employee %s!"
+msgstr "Le système n'a pas trouvé de \"code_terrain\" pour le travailleur %s !"
 
 #. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:321
-#, python-format
-msgid "Right CSV is not present in this zip file. Please use \"File > File sending > Monthly\" in Homère."
-msgstr "Right CSV is not present in this zip file. Please use \"File > File sending > Monthly\" in Homère."
+#: model:ir.model,name:msf_homere_interface.model_hr_payroll_deletion
+msgid "Payroll entries deletion wizard"
+msgstr "Paie - Assistant de suppression d'écritures"
 
 #. module: msf_homere_interface
-#: help:hr.payroll.msf,analytic_state:0
-msgid "Give analytic distribution state"
-msgstr "Give analytic distribution state"
+#: field:hr.payroll.msf,ref:0
+msgid "Reference"
+msgstr "Référence"
+
+#. module: msf_homere_interface
+#: field:hr.payroll.msf,employee_id_number:0
+msgid "Employee ID"
+msgstr "Employé(e) - Identité"
 
 #. module: msf_homere_interface
 #: view:hr.employee:0
-msgid "Group By..."
-msgstr "Group By..."
+msgid "Position"
+msgstr "Position"
 
 #. module: msf_homere_interface
-#: field:hr.payroll.msf,partner_id:0
-#: selection:hr.payroll.msf,partner_type:0
-msgid "Partner"
-msgstr "Partner"
+#: view:hr.employee:0
+msgid "Expat'"
+msgstr "Expatrié"
 
 #. module: msf_homere_interface
-#: field:hr.payroll.msf,document_date:0
-msgid "Document Date"
-msgstr "Document Date"
+#: model:ir.actions.act_window,name:msf_homere_interface.action_employee_analytic_reallocation
+msgid "Employee Analytic reallocation"
+msgstr "Employé(e) - Réallocation Analytique"
 
 #. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_payroll_import.py:127
+#: code:addons/msf_homere_interface/wizard/hr_analytic_reallocation.py:103
 #, python-format
-msgid "This account is a view type account: %s"
-msgstr "This account is a view type account: %s"
+msgid "Unknown error. Please contact an administrator to resolve this problem. This is probably due to Web server error."
+msgstr "Erreur inconnue, Veuillez contacter un administrateur pour résoudre ce problème. Ceci est probablement dû à une erreur de serveur."
 
 #. module: msf_homere_interface
-#: model:ir.model,name:msf_homere_interface.model_hr_contract_msf
-msgid "MSF Employee contract from Homère"
-msgstr "MSF Employee contract from Homère"
+#: view:hr.payroll.deletion:0
+msgid "Please pay ATTENTION. This will delete all Payroll entries!"
+msgstr "ATTENTION. Ceci va effacer toutes les écritures de Paie!"
 
 #. module: msf_homere_interface
-#: model:ir.actions.act_window,name:msf_homere_interface.action_payroll_validation
-msgid "Validate draft entries"
-msgstr "Validate draft entries"
+#: view:hr.analytic.reallocation:0
+msgid "Analytic Reallocation"
+msgstr "Réallocation Analytique"
+
+#. module: msf_homere_interface
+#: field:hr.payroll.msf,name:0
+msgid "Description"
+msgstr "Description"
+
+#. module: msf_homere_interface
+#: view:hr.employee:0
+msgid "Active"
+msgstr "Actif"
+
+#. module: msf_homere_interface
+#: field:hr.payroll.import.confirmation,filename:0
+msgid "Filename"
+msgstr "Nom du fichier"
+
+#. module: msf_homere_interface
+#: code:addons/msf_homere_interface/hr.py:211
+#, python-format
+msgid "You are not allowed to delete local staff manually!"
+msgstr "Vous n'êtes pas en mesure d'effacer du personnel manuellement"
+
+#. module: msf_homere_interface
+#: view:hr.payroll.msf:0
+msgid "Payroll List"
+msgstr "Paie - Liste"
+
+#. module: msf_homere_interface
+#: view:hr.expat.employee.import:0
+#: model:ir.actions.act_window,name:msf_homere_interface.action_expat_employee_import_wizard
+msgid "Import Expats"
+msgstr "Importer expatriés"
+
+#. module: msf_homere_interface
+#: selection:hr.payroll.import.confirmation,state:0
+msgid "From HQ Entries"
+msgstr "Des Ecritures du Siège"
 
 #. module: msf_homere_interface
 #: selection:hr.payroll.import,date_format:0
 msgid "dd/mm/yy"
 msgstr "dd/mm/yy"
-
-#. module: msf_homere_interface
-#: field:hr.payroll.import.period,field:0
-#: field:hr.payroll.msf,field:0
-msgid "Field"
-msgstr "Field"
-
-#. module: msf_homere_interface
-#: code:addons/msf_homere_interface/wizard/hr_payroll_employee_import.py:288
-#, python-format
-msgid "An error occured on nationality. Please verify all nationalities."
-msgstr "An error occured on nationality. Please verify all nationalities."
 

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.0.3\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2013-10-17 07:42+0000\n"
-"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,9 +16,22 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: analytic_distribution_invoice
+#: code:addons/analytic_distribution_invoice/invoice.py:145
+#, python-format
+msgid "Posting date for the refund is before the invoice's posting date!"
+msgstr "La date de comptabilisation du remboursement est antérieure à la date de comptabilisation de la facture !"
+
+#. module: analytic_distribution_invoice
 #: field:account.invoice.line,inactive_error:0
 msgid "Comment"
 msgstr "Comment"
+
+#. module: analytic_distribution_invoice
+#: code:addons/analytic_distribution_invoice/account_invoice_refund.py:105
+#: code:addons/analytic_distribution_invoice/account_invoice_refund.py:116
+#, python-format
+msgid "Posting date should be later than Document Date."
+msgstr "Date de comptabilisation devrait être postérieure à celle du document."
 
 #. module: analytic_distribution_invoice
 #: code:addons/analytic_distribution_invoice/invoice.py:41
@@ -27,54 +40,52 @@ msgid "A product has"
 msgstr "A product has"
 
 #. module: analytic_distribution_invoice
-#: code:addons/analytic_distribution_invoice/invoice.py:263
-#, python-format
-msgid " (from header)"
-msgstr " (from header)"
-
-#. module: analytic_distribution_invoice
 #: code:addons/analytic_distribution_invoice/invoice.py:41
 #, python-format
 msgid "Some products have"
 msgstr "Some products have"
 
 #. module: analytic_distribution_invoice
-#: code:addons/analytic_distribution_invoice/invoice.py:42
-#, python-format
-msgid "lines"
-msgstr "lines"
-
-#. module: analytic_distribution_invoice
+#: view:account.invoice:0
 #: view:account.invoice.line:0
-msgid "Change analytic distribution"
-msgstr "Change analytic distribution"
+msgid "Analytical Distribution"
+msgstr "Allocation analytique"
 
 #. module: analytic_distribution_invoice
-#: help:account.invoice.line,analytic_distribution_state:0
-msgid "Informs from distribution state among 'none', 'valid', 'invalid."
-msgstr "Informs from distribution state among 'none', 'valid', 'invalid."
+#: field:account.invoice.line,inactive_product:0
+msgid "Product is inactive"
+msgstr "Product is inactive"
 
 #. module: analytic_distribution_invoice
 #: model:ir.module.module,description:analytic_distribution_invoice.module_meta_information
 msgid "This permits to have analytic distribution wizard on Invoices"
-msgstr "This permits to have analytic distribution wizard on Invoices"
-
-#. module: analytic_distribution_invoice
-#: field:account.invoice.line,newline:0
-msgid "New line"
-msgstr "New line"
-
-#. module: analytic_distribution_invoice
-#: code:addons/analytic_distribution_invoice/invoice.py:42
-#, python-format
-msgid "line"
-msgstr "line"
+msgstr "Cela vous permet d'utiliser l'assistant d'allocation analytique sur factures"
 
 #. module: analytic_distribution_invoice
 #: view:account.invoice.line:0
-#: model:ir.model,name:analytic_distribution_invoice.model_account_invoice_line
-msgid "Invoice Line"
-msgstr "Invoice Line"
+msgid "Change analytic distribution"
+msgstr "Changer l'allocation analytique"
+
+#. module: analytic_distribution_invoice
+#: model:ir.model,name:analytic_distribution_invoice.model_account_invoice_refund
+msgid "Invoice Refund"
+msgstr "Facture d'Avoir"
+
+#. module: analytic_distribution_invoice
+#: code:addons/analytic_distribution_invoice/invoice.py:263
+#, python-format
+msgid " (from header)"
+msgstr " (de l'entête)"
+
+#. module: analytic_distribution_invoice
+#: selection:account.invoice.line,analytic_distribution_state:0
+msgid "Valid"
+msgstr "Valide"
+
+#. module: analytic_distribution_invoice
+#: field:account.invoice.refund,document_date:0
+msgid "Document Date"
+msgstr "Date du Document "
 
 #. module: analytic_distribution_invoice
 #: code:addons/analytic_distribution_invoice/invoice.py:43
@@ -84,8 +95,13 @@ msgstr "this inactive product"
 
 #. module: analytic_distribution_invoice
 #: selection:account.invoice.line,analytic_distribution_state:0
-msgid "Valid"
-msgstr "Valid"
+msgid "None"
+msgstr "Aucun"
+
+#. module: analytic_distribution_invoice
+#: help:account.invoice.line,analytic_distribution_state_recap:0
+msgid "Informs you about analaytic distribution state among 'none', 'valid', 'invalid', from header or not, or no analytic distribution"
+msgstr "Vous informe du statut de l'allocation analytique parmi 'aucun', 'valide', 'non valide', de l'en-tête ou pas, ou pas d'allocation analytique"
 
 #. module: analytic_distribution_invoice
 #: constraint:account.invoice.line:0
@@ -93,36 +109,36 @@ msgid "Constraint error on Uom"
 msgstr "Constraint error on Uom"
 
 #. module: analytic_distribution_invoice
-#: field:account.invoice.line,is_allocatable:0
-msgid "Is allocatable?"
-msgstr "Is allocatable?"
+#: code:addons/analytic_distribution_invoice/invoice.py:278
+#, python-format
+msgid "The product in line is inactive !"
+msgstr "Le produit sur la ligne est inactif !"
 
 #. module: analytic_distribution_invoice
-#: field:account.invoice.line,have_analytic_distribution_from_header:0
-msgid "Header Distrib.?"
-msgstr "Header Distrib.?"
-
-#. module: analytic_distribution_invoice
-#: view:account.invoice:0
-#: view:account.invoice.line:0
-msgid "Analytical Distribution"
-msgstr "Analytical Distribution"
-
-#. module: analytic_distribution_invoice
-#: selection:account.invoice.line,analytic_distribution_state:0
-msgid "Invalid"
-msgstr "Invalid"
-
-#. module: analytic_distribution_invoice
-#: constraint:account.invoice:0
-msgid "You cannot validate this invoice because it contains a line with an inactive product"
-msgstr "You cannot validate this invoice because it contains a line with an inactive product"
+#: field:account.invoice.line,newline:0
+msgid "New line"
+msgstr "Nouvelle ligne"
 
 #. module: analytic_distribution_invoice
 #: code:addons/analytic_distribution_invoice/invoice.py:147
 #, python-format
 msgid "Document date for the refund is before the invoice's document date!"
-msgstr "Document date for the refund is before the invoice's document date!"
+msgstr "La date du document de remboursement est antérieure à la date du document de facturation !"
+
+#. module: analytic_distribution_invoice
+#: view:account.invoice.line:0
+msgid "UoM"
+msgstr "UdM"
+
+#. module: analytic_distribution_invoice
+#: field:account.invoice.line,analytic_distribution_state_recap:0
+msgid "Distribution"
+msgstr "Allocation"
+
+#. module: analytic_distribution_invoice
+#: constraint:account.invoice:0
+msgid "You cannot validate this invoice because it contains a line with an inactive product"
+msgstr "Vous ne pouvez pas valider cette facture car elle contient des lignes avec un produit inactif"
 
 #. module: analytic_distribution_invoice
 #: code:addons/analytic_distribution_invoice/invoice.py:43
@@ -131,59 +147,64 @@ msgid "those inactive products"
 msgstr "those inactive products"
 
 #. module: analytic_distribution_invoice
-#: selection:account.invoice.line,analytic_distribution_state:0
-msgid "None"
-msgstr "None"
+#: model:ir.module.module,shortdesc:analytic_distribution_invoice.module_meta_information
+msgid "Analytic Distribution on Invoices"
+msgstr "Allocation Analytique sur Factures"
 
 #. module: analytic_distribution_invoice
-#: field:account.invoice.line,analytic_distribution_state_recap:0
-msgid "Distribution"
-msgstr "Distribution"
+#: code:addons/analytic_distribution_invoice/invoice.py:42
+#, python-format
+msgid "line"
+msgstr "line"
+
+#. module: analytic_distribution_invoice
+#: field:account.invoice.line,have_analytic_distribution_from_header:0
+msgid "Header Distrib.?"
+msgstr "En-tête Allocation?"
+
+#. module: analytic_distribution_invoice
+#: code:addons/analytic_distribution_invoice/invoice.py:42
+#, python-format
+msgid "lines"
+msgstr "lignes"
+
+#. module: analytic_distribution_invoice
+#: field:account.invoice.line,analytic_distribution_state:0
+msgid "Distribution state"
+msgstr "Statut d'Allocation "
+
+#. module: analytic_distribution_invoice
+#: model:ir.model,name:analytic_distribution_invoice.model_account_invoice
+msgid "Invoice"
+msgstr "Facture"
+
+#. module: analytic_distribution_invoice
+#: field:account.invoice.line,is_allocatable:0
+msgid "Is allocatable?"
+msgstr "est-il possible d'allouer?"
+
+#. module: analytic_distribution_invoice
+#: view:account.invoice.line:0
+#: model:ir.model,name:analytic_distribution_invoice.model_account_invoice_line
+msgid "Invoice Line"
+msgstr "Ligne de Facture"
 
 #. module: analytic_distribution_invoice
 #: code:addons/analytic_distribution_invoice/invoice.py:65
 #, python-format
 msgid "Analytic distribution is not valid for \"%s\""
-msgstr "Analytic distribution is not valid for \"%s\""
+msgstr "Allocation Analytique non valide pour \"%s\""
 
 #. module: analytic_distribution_invoice
-#: code:addons/analytic_distribution_invoice/invoice.py:145
+#: code:addons/analytic_distribution_invoice/invoice.py:44
 #, python-format
-msgid "Posting date for the refund is before the invoice's posting date!"
-msgstr "Posting date for the refund is before the invoice's posting date!"
+msgid "%s been inactivated. If you want to validate this document you have to remove/correct the %s containing %s (see red %s of the document)"
+msgstr "%s been inactivated. If you want to validate this document you have to remove/correct the %s containing %s (see red %s of the document)"
 
 #. module: analytic_distribution_invoice
-#: model:ir.model,name:analytic_distribution_invoice.model_account_invoice_refund
-msgid "Invoice Refund"
-msgstr "Invoice Refund"
-
-#. module: analytic_distribution_invoice
-#: field:account.invoice.refund,document_date:0
-msgid "Document Date"
-msgstr "Document Date"
-
-#. module: analytic_distribution_invoice
-#: code:addons/analytic_distribution_invoice/invoice.py:278
-#, python-format
-msgid "The product in line is inactive !"
-msgstr "The product in line is inactive !"
-
-#. module: analytic_distribution_invoice
-#: field:account.invoice.line,analytic_distribution_state:0
-msgid "Distribution state"
-msgstr "Distribution state"
-
-#. module: analytic_distribution_invoice
-#: model:ir.model,name:analytic_distribution_invoice.model_account_invoice
-msgid "Invoice"
-msgstr "Invoice"
-
-#. module: analytic_distribution_invoice
-#: code:addons/analytic_distribution_invoice/account_invoice_refund.py:105
-#: code:addons/analytic_distribution_invoice/account_invoice_refund.py:116
-#, python-format
-msgid "Posting date should be later than Document Date."
-msgstr "Posting date should be later than Document Date."
+#: selection:account.invoice.line,analytic_distribution_state:0
+msgid "Invalid"
+msgstr "Non valide"
 
 #. module: analytic_distribution_invoice
 #: code:addons/analytic_distribution_invoice/account_invoice_refund.py:105
@@ -194,31 +215,10 @@ msgstr "Posting date should be later than Document Date."
 #: code:addons/analytic_distribution_invoice/invoice.py:147
 #, python-format
 msgid "Error"
-msgstr "Error"
+msgstr "Erreur"
 
 #. module: analytic_distribution_invoice
-#: model:ir.module.module,shortdesc:analytic_distribution_invoice.module_meta_information
-msgid "Analytic Distribution on Invoices"
-msgstr "Analytic Distribution on Invoices"
-
-#. module: analytic_distribution_invoice
-#: field:account.invoice.line,inactive_product:0
-msgid "Product is inactive"
-msgstr "Product is inactive"
-
-#. module: analytic_distribution_invoice
-#: view:account.invoice.line:0
-msgid "UoM"
-msgstr "UoM"
-
-#. module: analytic_distribution_invoice
-#: help:account.invoice.line,analytic_distribution_state_recap:0
-msgid "Informs you about analaytic distribution state among 'none', 'valid', 'invalid', from header or not, or no analytic distribution"
-msgstr "Informs you about analaytic distribution state among 'none', 'valid', 'invalid', from header or not, or no analytic distribution"
-
-#. module: analytic_distribution_invoice
-#: code:addons/analytic_distribution_invoice/invoice.py:44
-#, python-format
-msgid "%s been inactivated. If you want to validate this document you have to remove/correct the %s containing %s (see red %s of the document)"
-msgstr "%s been inactivated. If you want to validate this document you have to remove/correct the %s containing %s (see red %s of the document)"
+#: help:account.invoice.line,analytic_distribution_state:0
+msgid "Informs from distribution state among 'none', 'valid', 'invalid."
+msgstr "Informe le statut de distribution parmi  'aucun', 'valide', 'non valide'."
 

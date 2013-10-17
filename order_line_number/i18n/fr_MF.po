@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.0.3\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2013-10-17 07:42+0000\n"
-"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,101 +16,14 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: order_line_number
-#: constraint:sale.order.line:0
-msgid "You must select on order procurement method for Service with Reception products."
-msgstr "You must select on order procurement method for Service with Reception products."
-
-#. module: order_line_number
-#: model:ir.module.module,description:order_line_number.module_meta_information
-msgid "\n"
-"    Add numbering to order lines\n"
-"    "
-msgstr "\n"
-"    Add numbering to order lines\n"
-"    "
-
-#. module: order_line_number
-#: field:purchase.order.line,line_number:0
-#: field:sale.order.line,line_number:0
-msgid "Line"
-msgstr "Line"
-
-#. module: order_line_number
-#: model:ir.model,name:order_line_number.model_supplier_catalogue_line
-msgid "Supplier catalogue line"
-msgstr "Supplier catalogue line"
-
-#. module: order_line_number
-#: model:ir.model,name:order_line_number.model_supplier_catalogue
-msgid "Supplier catalogue"
-msgstr "Supplier catalogue"
-
-#. module: order_line_number
-#: constraint:supplier.catalogue:0
-msgid "The 'To' date mustn't be younger than the 'From' date !"
-msgstr "The 'To' date mustn't be younger than the 'From' date !"
-
-#. module: order_line_number
-#: model:ir.model,name:order_line_number.model_purchase_order_line
-msgid "Purchase Order Line"
-msgstr "Purchase Order Line"
+#: model:ir.model,name:order_line_number.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Ligne Commande Terrain"
 
 #. module: order_line_number
 #: model:ir.model,name:order_line_number.model_sale_order
 msgid "Sales Order"
-msgstr "Sales Order"
-
-#. module: order_line_number
-#: constraint:supplier.catalogue.line:0
-msgid "You cannot have a line with a negative or zero quantity!"
-msgstr "You cannot have a line with a negative or zero quantity!"
-
-#. module: order_line_number
-#: constraint:sale.order:0
-msgid "You cannot validate this sale order because it contains a line with an inactive product"
-msgstr "You cannot validate this sale order because it contains a line with an inactive product"
-
-#. module: order_line_number
-#: view:ir.sequence:0
-msgid "Instance code: %(instance)s"
-msgstr "Instance code: %(instance)s"
-
-#. module: order_line_number
-#: model:ir.model,name:order_line_number.model_sale_order_line
-msgid "Sales Order Line"
-msgstr "Sales Order Line"
-
-#. module: order_line_number
-#: model:ir.model,name:order_line_number.model_purchase_order
-msgid "Purchase Order"
-msgstr "Purchase Order"
-
-#. module: order_line_number
-#: model:ir.module.module,shortdesc:order_line_number.module_meta_information
-msgid "Order Line Number"
-msgstr "Order Line Number"
-
-#. module: order_line_number
-#: constraint:purchase.order:0
-#: constraint:sale.order:0
-msgid "Partner type and order type are incompatible! Please change either order type or partner."
-msgstr "Partner type and order type are incompatible! Please change either order type or partner."
-
-#. module: order_line_number
-#: sql_constraint:purchase.order.line:0
-#: sql_constraint:sale.order.line:0
-msgid "Product Quantity must be greater than zero."
-msgstr "Product Quantity must be greater than zero."
-
-#. module: order_line_number
-#: constraint:purchase.order:0
-msgid "If you tick the box \"cross docking\", you cannot have an other location than \"Cross docking\""
-msgstr "If you tick the box \"cross docking\", you cannot have an other location than \"Cross docking\""
-
-#. module: order_line_number
-#: constraint:purchase.order:0
-msgid "You cannot choose an internal supplier for this purchase order"
-msgstr "You cannot choose an internal supplier for this purchase order"
+msgstr "Commande de Terrain"
 
 #. module: order_line_number
 #: model:ir.model,name:order_line_number.model_ir_sequence
@@ -118,42 +31,128 @@ msgid "ir.sequence"
 msgstr "ir.sequence"
 
 #. module: order_line_number
-#: sql_constraint:purchase.order:0
-#: sql_constraint:sale.order:0
-msgid "Order Reference must be unique !"
-msgstr "Order Reference must be unique !"
-
-#. module: order_line_number
-#: field:purchase.order,sequence_id:0
-#: field:sale.order,sequence_id:0
-#: field:supplier.catalogue,sequence_id:0
-msgid "Lines Sequence"
-msgstr "Lines Sequence"
+#: model:ir.model,name:order_line_number.model_procurement_order
+msgid "Procurement"
+msgstr "Approvisionnement"
 
 #. module: order_line_number
 #: constraint:purchase.order:0
 msgid "You must specify a Valid Till date."
-msgstr "You must specify a Valid Till date."
+msgstr "Spécifiez une date de validité 'Valide Jusque'."
 
 #. module: order_line_number
-#: model:ir.model,name:order_line_number.model_procurement_order
-msgid "Procurement"
-msgstr "Procurement"
+#: constraint:supplier.catalogue:0
+msgid "The 'To' date mustn't be younger than the 'From' date !"
+msgstr "La date 'A' doit être postérieure à la date 'De' !"
+
+#. module: order_line_number
+#: constraint:purchase.order:0
+msgid "If you tick the box \"cross docking\", you cannot have an other location than \"Cross docking\""
+msgstr "Si vous cochez la case \"transbordement\", vous ne pouvez pas avoir d'autre lieu que \"Transbordement\""
+
+#. module: order_line_number
+#: constraint:purchase.order:0
+#: constraint:sale.order:0
+msgid "Partner type and order type are incompatible! Please change either order type or partner."
+msgstr "Le type de partnenaire et le type de commande sont incompatibles. Veuillez changer l'un ou l'autre."
+
+#. module: order_line_number
+#: sql_constraint:purchase.order:0
+#: sql_constraint:sale.order:0
+msgid "Order Reference must be unique !"
+msgstr "La Référence de la Commande doit être unique !"
+
+#. module: order_line_number
+#: constraint:sale.order.line:0
+msgid "You must select on order procurement method for Service with Reception products."
+msgstr "Vous devez sélectionner sur la commande le mode d'approvisionnement pour le Service  avec Réception de produits."
+
+#. module: order_line_number
+#: model:ir.module.module,description:order_line_number.module_meta_information
+msgid "\n"
+"    Add numbering to order lines\n"
+"    "
+msgstr "\n"
+"    Ajouter une numérotation aux lignes de commande"
+
+#. module: order_line_number
+#: model:ir.model,name:order_line_number.model_purchase_order
+msgid "Purchase Order"
+msgstr "Bon de Commande"
+
+#. module: order_line_number
+#: model:ir.module.module,shortdesc:order_line_number.module_meta_information
+msgid "Order Line Number"
+msgstr "Numéro de Ligne de Commande"
+
+#. module: order_line_number
+#: field:purchase.order.line,line_number:0
+#: field:sale.order.line,line_number:0
+msgid "Line"
+msgstr "Ligne"
+
+#. module: order_line_number
+#: constraint:purchase.order:0
+msgid "You cannot validate this purchase order because it contains a line with an inactive product"
+msgstr "Vous ne pouvez pas valider ce bon de commande, car il contient une ligne avec des produits inactifs."
+
+#. module: order_line_number
+#: model:ir.model,name:order_line_number.model_supplier_catalogue_line
+msgid "Supplier catalogue line"
+msgstr "Ligne Catalogue Fournisseur"
+
+#. module: order_line_number
+#: constraint:sale.order:0
+msgid "You cannot validate this sale order because it contains a line with an inactive product"
+msgstr "Vous ne pouvez pas valider cette commande client car elle contient des lignes avec un produit inactif"
+
+#. module: order_line_number
+#: constraint:purchase.order:0
+msgid "You cannot choose an internal supplier for this purchase order"
+msgstr "You cannot choose an internal supplier for this purchase order"
+
+#. module: order_line_number
+#: sql_constraint:purchase.order.line:0
+#: sql_constraint:sale.order.line:0
+msgid "Product Quantity must be greater than zero."
+msgstr "La quantité de produits doit être supérieure à zéro."
+
+#. module: order_line_number
+#: view:ir.sequence:0
+msgid "Instance code: %(instance)s"
+msgstr "Code d'instance : %(instance)s"
+
+#. module: order_line_number
+#: constraint:supplier.catalogue.line:0
+msgid "You cannot have a line with a negative or zero quantity!"
+msgstr "Vous ne pouvez pas avoir une ligne avec une quantité négative ou égale à 0."
+
+#. module: order_line_number
+#: view:ir.sequence:0
+msgid "Parent HQ code: %(hqcode)s"
+msgstr "Code HQ parent : %(hqcode)s"
 
 #. module: order_line_number
 #: help:purchase.order,sequence_id:0
 #: help:sale.order,sequence_id:0
 #: help:supplier.catalogue,sequence_id:0
 msgid "This field contains the information related to the numbering of the lines of this order."
-msgstr "This field contains the information related to the numbering of the lines of this order."
+msgstr "Ce champ contient l'information relative à la numérotation des lignes de cette commande."
 
 #. module: order_line_number
-#: constraint:purchase.order:0
-msgid "You cannot validate this purchase order because it contains a line with an inactive product"
-msgstr "You cannot validate this purchase order because it contains a line with an inactive product"
+#: model:ir.model,name:order_line_number.model_supplier_catalogue
+msgid "Supplier catalogue"
+msgstr "Catalogue du fournisseur"
 
 #. module: order_line_number
-#: view:ir.sequence:0
-msgid "Parent HQ code: %(hqcode)s"
-msgstr "Parent HQ code: %(hqcode)s"
+#: model:ir.model,name:order_line_number.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Ligne Bon de Commande"
+
+#. module: order_line_number
+#: field:purchase.order,sequence_id:0
+#: field:sale.order,sequence_id:0
+#: field:supplier.catalogue,sequence_id:0
+msgid "Lines Sequence"
+msgstr "Séquence Lignes"
 

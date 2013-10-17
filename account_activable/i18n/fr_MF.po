@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.0.3\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2013-10-17 07:42+0000\n"
-"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,44 +16,9 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: account_activable
-#: constraint:account.account:0
-msgid "Configuration Error! \n"
-"You cannot define children to an account with internal type different of \"View\"! "
-msgstr "Configuration Error! \n"
-"You cannot define children to an account with internal type different of \"View\"! "
-
-#. module: account_activable
-#: code:addons/account_activable/account_move_line_activable.py:36
-#, python-format
-msgid "The selected account is not active: %s."
-msgstr "The selected account is not active: %s."
-
-#. module: account_activable
-#: code:addons/account_activable/account_activable.py:54
-#, python-format
-msgid "Activation date must be lower than inactivation date!"
-msgstr "Activation date must be lower than inactivation date!"
-
-#. module: account_activable
-#: model:ir.actions.act_window,name:account_activable.action_account_activable_form
-msgid "Accounts"
-msgstr "Accounts"
-
-#. module: account_activable
-#: model:ir.model,name:account_activable.model_account_move_line
-msgid "Journal Items"
-msgstr "Journal Items"
-
-#. module: account_activable
-#: code:addons/account_activable/account_move_line_activable.py:36
-#, python-format
-msgid "Error !"
-msgstr "Error !"
-
-#. module: account_activable
-#: view:account.chart:0
-msgid "Inactive accounts"
-msgstr "Inactive accounts"
+#: field:account.chart,show_inactive:0
+msgid "Show inactive accounts"
+msgstr "Montrer les comptes inactifs"
 
 #. module: account_activable
 #: field:account.account.type,not_correctible:0
@@ -61,20 +26,79 @@ msgid "Prevent entries to be correctible on this account type."
 msgstr "Prevent entries to be correctible on this account type."
 
 #. module: account_activable
-#: code:addons/account_activable/account_activable.py:51
-#, python-format
-msgid "You cannot set an inactivity date lower than tomorrow!"
-msgstr "You cannot set an inactivity date lower than tomorrow!"
+#: sql_constraint:account.account:0
+msgid "The code of the account must be unique per company !"
+msgstr "Le code du compte doit être unique par société."
+
+#. module: account_activable
+#: model:ir.model,name:account_activable.model_account_move_line
+msgid "Journal Items"
+msgstr "Lignes d'Ecritures Comptables"
 
 #. module: account_activable
 #: constraint:account.move.line:0
 msgid "Company must be same for its related account and period."
-msgstr "Company must be same for its related account and period."
+msgstr "La Société doit être la même pour le compte et période connexes."
+
+#. module: account_activable
+#: code:addons/account_activable/account_activable.py:54
+#, python-format
+msgid "Activation date must be lower than inactivation date!"
+msgstr "Date d'activation doit être antérieure à la date d'inactivation!"
+
+#. module: account_activable
+#: code:addons/account_activable/account_move_line_activable.py:36
+#, python-format
+msgid "The selected account is not active: %s."
+msgstr "Le compte sélectionné n'est pas actif: %s."
+
+#. module: account_activable
+#: code:addons/account_activable/account_move_line_activable.py:36
+#, python-format
+msgid "Error !"
+msgstr "Erreur !"
+
+#. module: account_activable
+#: model:ir.module.module,shortdesc:account_activable.module_meta_information
+msgid "Chart of Accounts for MSF"
+msgstr "Plan de Comptes MSF"
+
+#. module: account_activable
+#: constraint:account.account:0
+msgid "Configuration Error! \n"
+"You cannot define children to an account with internal type different of \"View\"! "
+msgstr "Erreur de configuration ! \n"
+"Vous ne pouvez pas définir un compte enfant associé à un compte autre qu'un compte \"Vue\"! "
+
+#. module: account_activable
+#: constraint:account.account:0
+msgid "Error ! You can not create recursive accounts."
+msgstr "Erreur ! Vous ne pouvez pas créer des comptes récursifs."
 
 #. module: account_activable
 #: constraint:account.move.line:0
-msgid "You can not create move line on closed account."
-msgstr "You can not create move line on closed account."
+msgid "You can not create move line on view account."
+msgstr "Vous ne pouvez pas créer des écritures sur un compte-groupe"
+
+#. module: account_activable
+#: field:account.account,activation_date:0
+msgid "Active from"
+msgstr "Actif à partir de "
+
+#. module: account_activable
+#: model:ir.model,name:account_activable.model_account_account
+msgid "Account"
+msgstr "Compte"
+
+#. module: account_activable
+#: sql_constraint:account.move.line:0
+msgid "Wrong credit or debit value in accounting entry !"
+msgstr "Valeur de crédit ou débit erronée sous l'écriture comptable !"
+
+#. module: account_activable
+#: view:account.account:0
+msgid "General Information"
+msgstr "Informations Générales"
 
 #. module: account_activable
 #: model:ir.module.module,description:account_activable.module_meta_information
@@ -83,84 +107,60 @@ msgid "\n"
 "    \n"
 "    "
 msgstr "\n"
-"    This module changes the view and adds a searchable \"Active\" attribute.\n"
+"  Ce module modifie la vue et ajoute une fonctionnalité de recherche \"Active\".\n"
 "    \n"
 "    "
 
 #. module: account_activable
-#: sql_constraint:account.move.line:0
-msgid "Wrong credit or debit value in accounting entry !"
-msgstr "Wrong credit or debit value in accounting entry !"
-
-#. module: account_activable
-#: view:account.account:0
-msgid "General Information"
-msgstr "General Information"
-
-#. module: account_activable
-#: model:ir.model,name:account_activable.model_account_chart
-msgid "Account chart"
-msgstr "Account chart"
-
-#. module: account_activable
-#: model:ir.model,name:account_activable.model_account_account
-msgid "Account"
-msgstr "Account"
-
-#. module: account_activable
-#: field:account.account,activation_date:0
-msgid "Active from"
-msgstr "Active from"
-
-#. module: account_activable
-#: sql_constraint:account.account:0
-msgid "The code of the account must be unique per company !"
-msgstr "The code of the account must be unique per company !"
-
-#. module: account_activable
-#: model:ir.model,name:account_activable.model_account_account_type
-msgid "Account Type"
-msgstr "Account Type"
-
-#. module: account_activable
-#: constraint:account.account:0
-msgid "Error ! You can not create recursive accounts."
-msgstr "Error ! You can not create recursive accounts."
-
-#. module: account_activable
-#: field:account.chart,show_inactive:0
-msgid "Show inactive accounts"
-msgstr "Show inactive accounts"
-
-#. module: account_activable
-#: view:account.account:0
-msgid "Internal Type"
-msgstr "Internal Type"
-
-#. module: account_activable
-#: constraint:account.move.line:0
-msgid "You can not create move line on view account."
-msgstr "You can not create move line on view account."
-
-#. module: account_activable
-#: model:ir.module.module,shortdesc:account_activable.module_meta_information
-msgid "Chart of Accounts for MSF"
-msgstr "Chart of Accounts for MSF"
+#: model:ir.actions.act_window,name:account_activable.action_account_activable_form
+msgid "Accounts"
+msgstr "Comptes"
 
 #. module: account_activable
 #: field:account.account,inactivation_date:0
 msgid "Inactive from"
-msgstr "Inactive from"
+msgstr "Inactif à partir de "
 
 #. module: account_activable
 #: code:addons/account_activable/account_activable.py:51
 #: code:addons/account_activable/account_activable.py:54
 #, python-format
 msgid "Warning !"
-msgstr "Warning !"
+msgstr "Avertissement !"
+
+#. module: account_activable
+#: model:ir.model,name:account_activable.model_account_chart
+msgid "Account chart"
+msgstr "Compte- Plan"
+
+#. module: account_activable
+#: view:account.account:0
+msgid "Internal Type"
+msgstr "Type Interne"
+
+#. module: account_activable
+#: code:addons/account_activable/account_activable.py:51
+#, python-format
+msgid "You cannot set an inactivity date lower than tomorrow!"
+msgstr "Vous ne pouvez pas sélectionner une date d'inactivité antérieure à demain!"
 
 #. module: account_activable
 #: view:account.account:0
 msgid "Group By..."
-msgstr "Group By..."
+msgstr "Grouper Par..."
+
+#. module: account_activable
+#: constraint:account.move.line:0
+msgid "You can not create move line on closed account."
+msgstr "Vous ne pouvez pas créer des écritures dans un journal clôturé."
+
+#. module: account_activable
+#: model:ir.model,name:account_activable.model_account_account_type
+msgid "Account Type"
+msgstr "Type de Compte"
+
+#. module: account_activable
+#: view:account.chart:0
+msgid "Inactive accounts"
+msgstr "Comptes inactifs"
 

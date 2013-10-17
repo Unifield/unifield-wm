@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.0.3\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2013-10-17 07:42+0000\n"
-"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,43 +16,28 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: msf_budget
+#: view:msf.budget:0
+msgid "Budget Line"
+msgstr "Ligne de Budget"
+
+#. module: msf_budget
 #: model:ir.module.module,description:msf_budget.module_meta_information
 msgid "\n"
 "        Budget view\n"
 "    "
 msgstr "\n"
-"        Budget view\n"
-"    "
+"        Vue Budget     "
 
 #. module: msf_budget
-#: code:addons/msf_budget/report/report_pdf_engagement.py:103
-#: code:addons/msf_budget/wizard/wizard_budget_import.py:194
-#, python-format
-msgid "Error"
-msgstr "Error"
+#: report:addons/msf_budget/report/budget_monthly_xls.mako:190
+msgid "Nov"
+msgstr "Nov"
 
 #. module: msf_budget
 #: code:addons/msf_budget/wizard/wizard_actual_export.py:39
 #, python-format
 msgid "No Cost Center"
-msgstr "No Cost Center"
-
-#. module: msf_budget
-#: field:msf.budget,decision_moment_id:0
-#: field:msf.budget.decision.moment,name:0
-msgid "Decision Moment"
-msgstr "Decision Moment"
-
-#. module: msf_budget
-#: report:addons/msf_budget/report/budget_monthly_xls.mako:190
-#: report:msf.pdf.budget.monthly:0
-msgid "Nov"
-msgstr "Nov"
-
-#. module: msf_budget
-#: selection:wizard.local.expenses,granularity:0
-msgid "By expense account"
-msgstr "By expense account"
+msgstr "Pas de centre de coût"
 
 #. module: msf_budget
 #: code:addons/msf_budget/wizard/wizard_budget_import.py:162
@@ -68,554 +53,44 @@ msgid "Total"
 msgstr "Total"
 
 #. module: msf_budget
-#: code:addons/msf_budget/wizard/wizard_budget_import.py:85
-#, python-format
-msgid "The cost center %s is not defined in the database!"
-msgstr "The cost center %s is not defined in the database!"
+#: model:ir.actions.report.xml,name:msf_budget.pdf_engagement
+msgid "Order impact vs. Budget"
+msgstr "Répercussion de la commande sur Budget"
 
 #. module: msf_budget
-#: report:msf.pdf.engagement:0
-msgid "PO impact"
-msgstr "PO impact"
-
-#. module: msf_budget
-#: report:addons/msf_budget/report/budget_criteria_xls.mako:549
-#: report:addons/msf_budget/report/budget_criteria_xls.mako:553
-msgid "Total (Budget)"
-msgstr "Total (Budget)"
-
-#. module: msf_budget
-#: model:ir.actions.report.xml,name:msf_budget.pdf_budget_monthly
-msgid "Monthly Budget (PDF)"
-msgstr "Monthly Budget (PDF)"
-
-#. module: msf_budget
-#: report:msf.pdf.engagement:0
-msgid "Actuals amount"
-msgstr "Actuals amount"
-
-#. module: msf_budget
-#: code:addons/msf_budget/wizard/wizard_budget_import.py:120
-#, python-format
-msgid "No destination was set! Please add it for line %s"
-msgstr "No destination was set! Please add it for line %s"
-
-#. module: msf_budget
-#: code:addons/msf_budget/wizard/wizard_budget_import.py:132
-#, python-format
-msgid "Account %s does not exist in database!"
-msgstr "Account %s does not exist in database!"
-
-#. module: msf_budget
-#: view:msf.budget:0
-msgid "Change display type"
-msgstr "Change display type"
-
-#. module: msf_budget
-#: field:msf.budget.line,line_type:0
-msgid "Line type"
-msgstr "Line type"
-
-#. module: msf_budget
-#: selection:wizard.budget.criteria.export,breakdown:0
-#: selection:wizard.local.expenses,breakdown:0
-msgid "Total figure"
-msgstr "Total figure"
-
-#. module: msf_budget
-#: code:addons/msf_budget/wizard/wizard_budget_import.py:75
-#, python-format
-msgid "The fiscal year %s is not defined in the database!"
-msgstr "The fiscal year %s is not defined in the database!"
-
-#. module: msf_budget
-#: field:msf.budget,display_type:0
-msgid "Display type"
-msgstr "Display type"
-
-#. module: msf_budget
-#: report:msf.pdf.engagement:0
-msgid "PO reference:"
-msgstr "PO reference:"
-
-#. module: msf_budget
-#: model:ir.model,name:msf_budget.model_wizard_budget_criteria_export
-msgid "wizard.budget.criteria.export"
-msgstr "wizard.budget.criteria.export"
-
-#. module: msf_budget
-#: selection:wizard.budget.criteria.export,granularity:0
-msgid "By expense"
-msgstr "By expense"
-
-#. module: msf_budget
-#: view:account.analytic.account:0
-#: model:ir.actions.act_window,name:msf_budget.action_account_analytic_account_budget_form
-#: model:ir.ui.menu,name:msf_budget.menu_action_account_analytic_account_budget_form
-msgid "Analytic Accounts"
-msgstr "Analytic Accounts"
-
-#. module: msf_budget
-#: code:addons/msf_budget/report/report_budget_criteria.py:180
-#: selection:msf.budget,display_type:0
-#, python-format
-msgid "Expenses and destinations"
-msgstr "Expenses and destinations"
-
-#. module: msf_budget
-#: code:addons/msf_budget/wizard/wizard_budget_import.py:142
-#, python-format
-msgid "Destination %s is not linked to account %s!"
-msgstr "Destination %s is not linked to account %s!"
-
-#. module: msf_budget
-#: report:addons/msf_budget/report/budget_criteria_xls.mako:556
-#: report:addons/msf_budget/report/budget_criteria_xls.mako:577
-msgid "Total Balance"
-msgstr "Total Balance"
-
-#. module: msf_budget
-#: model:ir.model,name:msf_budget.model_account_analytic_line
-msgid "Analytic Line"
-msgstr "Analytic Line"
-
-#. module: msf_budget
-#: field:wizard.local.expenses,start_period_id:0
-msgid "Period From"
-msgstr "Period From"
-
-#. module: msf_budget
-#: constraint:msf.budget.decision.moment:0
-msgid "Order must be unique and bigger than 1!"
-msgstr "Order must be unique and bigger than 1!"
-
-#. module: msf_budget
-#: field:msf.budget.line,budget_values:0
-msgid "Budget Values (list of float to evaluate)"
-msgstr "Budget Values (list of float to evaluate)"
-
-#. module: msf_budget
-#: field:msf.budget,code:0
-msgid "Code"
-msgstr "Code"
-
-#. module: msf_budget
-#: field:wizard.actual.export,currency_table_id:0
-#: field:wizard.budget.criteria.export,currency_table_id:0
-msgid "Currency table"
-msgstr "Currency table"
-
-#. module: msf_budget
-#: code:addons/msf_budget/wizard/wizard_budget_import.py:89
-#, python-format
-msgid "The cost center %s is not an allocable cost center! The budget for it will be created automatically."
-msgstr "The cost center %s is not an allocable cost center! The budget for it will be created automatically."
-
-#. module: msf_budget
-#: field:msf.budget,version:0
-msgid "Version"
-msgstr "Version"
-
-#. module: msf_budget
-#: report:msf.pdf.engagement:0
-msgid "PO amount"
-msgstr "PO amount"
-
-#. module: msf_budget
-#: view:msf.budget:0
-#: selection:msf.budget,instance_type:0
-msgid "HQ"
-msgstr "HQ"
-
-#. module: msf_budget
-#: model:ir.model,name:msf_budget.model_wizard_actual_export
-msgid "wizard.actual.export"
-msgstr "wizard.actual.export"
-
-#. module: msf_budget
-#: view:wizard.actual.export:0
-#: view:wizard.budget.criteria.export:0
-#: view:wizard.budget.import.confirm:0
-#: view:wizard.local.expenses:0
-msgid "No"
-msgstr "No"
-
-#. module: msf_budget
-#: code:addons/msf_budget/wizard/wizard_actual_export.py:39
-#, python-format
-msgid "No cost center was selected for the report!"
-msgstr "No cost center was selected for the report!"
-
-#. module: msf_budget
-#: field:msf.budget,instance_type:0
-msgid "Instance type"
-msgstr "Instance type"
-
-#. module: msf_budget
-#: field:msf.budget,state:0
-msgid "State"
-msgstr "State"
-
-#. module: msf_budget
-#: report:addons/msf_budget/report/budget_monthly_xls.mako:182
-#: report:msf.pdf.budget.monthly:0
-msgid "Mar"
-msgstr "Mar"
-
-#. module: msf_budget
-#: report:msf.pdf.engagement:0
-msgid "Delivery requested date:"
-msgstr "Delivery requested date:"
-
-#. module: msf_budget
-#: model:ir.actions.act_window,name:msf_budget.act_crossovered_budget_view
-#: model:ir.ui.menu,name:msf_budget.menu_act_crossovered_budget_view
-#: model:ir.ui.menu,name:msf_budget.next_id_31
-msgid "Budgets"
-msgstr "Budgets"
-
-#. module: msf_budget
-#: view:msf.budget:0
-msgid "Approve"
-msgstr "Approve"
-
-#. module: msf_budget
-#: report:addons/msf_budget/report/budget_criteria_xls.mako:545
-#: report:addons/msf_budget/report/budget_criteria_xls.mako:562
-#: field:msf.budget.line,destination_id:0
-#: selection:msf.budget.line,line_type:0
-msgid "Destination"
-msgstr "Destination"
-
-#. module: msf_budget
-#: report:msf.pdf.engagement:0
-msgid "Order impact vs. budget"
-msgstr "Order impact vs. budget"
-
-#. module: msf_budget
-#: view:account.analytic.account:0
-msgid "Hard Posting"
-msgstr "Hard Posting"
-
-#. module: msf_budget
-#: field:wizard.budget.import.confirm,budget_list:0
-msgid "Budget list"
-msgstr "Budget list"
-
-#. module: msf_budget
-#: code:addons/msf_budget/report/report_pdf_engagement.py:103
-#, python-format
-msgid "No distribution found in PO %s."
-msgstr "No distribution found in PO %s."
-
-#. module: msf_budget
-#: model:ir.actions.report.xml,name:msf_budget.pdf_budget_summary
-msgid "Budget Summary"
-msgstr "Budget Summary"
-
-#. module: msf_budget
-#: report:addons/msf_budget/report/budget_criteria_xls.mako:551
-#: report:addons/msf_budget/report/budget_criteria_xls.mako:554
-msgid "Total (Actual)"
-msgstr "Total (Actual)"
-
-#. module: msf_budget
-#: field:msf.budget.line,budget_amount:0
-#: report:msf.pdf.engagement:0
-msgid "Budget amount"
-msgstr "Budget amount"
-
-#. module: msf_budget
-#: report:addons/msf_budget/report/budget_criteria_xls.mako:474
-#: report:addons/msf_budget/report/budget_monthly_xls.mako:151
-#: report:msf.pdf.budget.monthly:0
-#: report:msf.pdf.budget.summary:0
-#: report:msf.pdf.engagement:0
-msgid "Fiscal year:"
-msgstr "Fiscal year:"
-
-#. module: msf_budget
-#: field:msf.budget,decision_moment_order:0
-msgid "Decision Moment Order"
-msgstr "Decision Moment Order"
-
-#. module: msf_budget
-#: model:ir.actions.act_window,help:msf_budget.act_crossovered_budget_view
-msgid "A budget is a forecast of your company's income and expenses expected for a period in the future. With a budget, a company is able to carefully look at how much money they are taking in during a given period, and figure out the best way to divide it among various categories. By keeping track of where your money goes, you may be less likely to overspend, and more likely to meet your financial goals. Forecast a budget by detailing the expected revenue per analytic account and monitor its evolution based on the actuals realised during that period."
-msgstr "A budget is a forecast of your company's income and expenses expected for a period in the future. With a budget, a company is able to carefully look at how much money they are taking in during a given period, and figure out the best way to divide it among various categories. By keeping track of where your money goes, you may be less likely to overspend, and more likely to meet your financial goals. Forecast a budget by detailing the expected revenue per analytic account and monitor its evolution based on the actuals realised during that period."
-
-#. module: msf_budget
-#: field:msf.budget.line,parent_id:0
-msgid "Parent Line"
-msgstr "Parent Line"
-
-#. module: msf_budget
-#: code:addons/msf_budget/analytic.py:43
-#, python-format
-msgid "This budget does not have an analytic domain!"
-msgstr "This budget does not have an analytic domain!"
-
-#. module: msf_budget
-#: view:wizard.actual.export:0
-#: view:wizard.budget.criteria.export:0
-#: view:wizard.local.expenses:0
-msgid "Create report"
-msgstr "Create report"
-
-#. module: msf_budget
-#: field:wizard.budget.criteria.export,granularity:0
-#: field:wizard.local.expenses,granularity:0
-msgid "Granularity"
-msgstr "Granularity"
-
-#. module: msf_budget
-#: code:addons/msf_budget/wizard/wizard_budget_import.py:134
-#, python-format
-msgid "Destination %s does not exist in database!"
-msgstr "Destination %s does not exist in database!"
-
-#. module: msf_budget
-#: view:wizard.budget.import:0
-msgid "Cancel"
-msgstr "Cancel"
-
-#. module: msf_budget
-#: view:wizard.budget.import:0
-msgid "Select a .CSV file to import."
-msgstr "Select a .CSV file to import."
-
-#. module: msf_budget
-#: field:msf.budget.decision.moment,order:0
-msgid "Order"
-msgstr "Order"
-
-#. module: msf_budget
-#: model:ir.model,name:msf_budget.model_wizard_local_expenses
-msgid "wizard.local.expenses"
-msgstr "wizard.local.expenses"
-
-#. module: msf_budget
-#: report:msf.pdf.engagement:0
-msgid "Delivery confirmed date:"
-msgstr "Delivery confirmed date:"
-
-#. module: msf_budget
-#: field:msf.budget.summary,child_ids:0
-msgid "Children"
-msgstr "Children"
-
-#. module: msf_budget
-#: report:msf.pdf.engagement:0
-msgid "Actuals amounts in this report include confirmed POs (commitments) but not open / validated POs"
-msgstr "Actuals amounts in this report include confirmed POs (commitments) but not open / validated POs"
-
-#. module: msf_budget
-#: field:msf.budget.line,comm_amount:0
-msgid "Commitments amount"
-msgstr "Commitments amount"
-
-#. module: msf_budget
-#: model:ir.model,name:msf_budget.model_msf_budget_tools
-msgid "msf.budget.tools"
-msgstr "msf.budget.tools"
-
-#. module: msf_budget
-#: selection:msf.budget,display_type:0
-msgid "Parent expenses only"
-msgstr "Parent expenses only"
-
-#. module: msf_budget
-#: view:msf.budget:0
-msgid "Budget Line"
-msgstr "Budget Line"
-
-#. module: msf_budget
-#: field:msf.budget,type:0
-msgid "Budget type"
-msgstr "Budget type"
-
-#. module: msf_budget
-#: model:ir.model,name:msf_budget.model_msf_budget
-msgid "MSF Budget"
-msgstr "MSF Budget"
-
-#. module: msf_budget
-#: code:addons/msf_budget/report/report_budget_criteria.py:184
-#, python-format
-msgid "Parent Expenses only"
-msgstr "Parent Expenses only"
-
-#. module: msf_budget
-#: constraint:msf.budget.decision.moment:0
-msgid "Name must be unique!"
-msgstr "Name must be unique!"
-
-#. module: msf_budget
-#: field:msf.budget.line,percentage:0
-#: report:msf.pdf.budget.summary:0
-msgid "Percentage"
-msgstr "Percentage"
-
-#. module: msf_budget
-#: field:msf.budget.summary,budget_amount:0
-#: report:msf.pdf.budget.summary:0
-msgid "Budget Amount"
-msgstr "Budget Amount"
-
-#. module: msf_budget
-#: view:wizard.budget.import.finish:0
-msgid "OK"
-msgstr "OK"
-
-#. module: msf_budget
-#: field:wizard.budget.import,import_file:0
-msgid "CSV File"
-msgstr "CSV File"
-
-#. module: msf_budget
-#: report:addons/msf_budget/report/budget_criteria_xls.mako:533
-msgid "Report Date:"
-msgstr "Report Date:"
-
-#. module: msf_budget
-#: code:addons/msf_budget/wizard/wizard_budget_import.py:194
-#, python-format
-msgid "Nothing to import."
-msgstr "Nothing to import."
-
-#. module: msf_budget
-#: view:wizard.budget.import.confirm:0
-msgid "Yes"
-msgstr "Yes"
-
-#. module: msf_budget
-#: report:addons/msf_budget/report/budget_monthly_xls.mako:186
-#: report:msf.pdf.budget.monthly:0
-msgid "Jul"
-msgstr "Jul"
-
-#. module: msf_budget
-#: model:ir.actions.act_window,name:msf_budget.action_actual_export_menu
-#: model:ir.actions.report.xml,name:msf_budget.budget_actual
-msgid "Actuals by CC"
-msgstr "Actuals by CC"
-
-#. module: msf_budget
-#: report:addons/msf_budget/report/budget_monthly_xls.mako:189
-#: report:msf.pdf.budget.monthly:0
-msgid "Oct"
-msgstr "Oct"
-
-#. module: msf_budget
-#: view:msf.budget:0
-#: field:msf.budget,budget_line_ids:0
-msgid "Budget Lines"
-msgstr "Budget Lines"
-
-#. module: msf_budget
-#: report:addons/msf_budget/report/budget_criteria_xls.mako:557
-#: report:addons/msf_budget/report/budget_criteria_xls.mako:578
-msgid "Total Percentage"
-msgstr "Total Percentage"
-
-#. module: msf_budget
-#: view:msf.budget:0
-#: selection:msf.budget,instance_type:0
-msgid "Project"
-msgstr "Project"
+#: report:addons/msf_budget/report/report_local_expenses_xls.mako:113
+msgid "Account code"
+msgstr "Code du compte  "
 
 #. module: msf_budget
 #: model:ir.actions.act_window,name:msf_budget.action_open_analytic_lines_budget_button
 msgid "Analytic Items"
-msgstr "Analytic Items"
-
-#. module: msf_budget
-#: field:msf.budget,total_budget_amount:0
-msgid "Total Budget Amount"
-msgstr "Total Budget Amount"
-
-#. module: msf_budget
-#: report:msf.pdf.engagement:0
-msgid "Dest."
-msgstr "Dest."
-
-#. module: msf_budget
-#: field:msf.budget,cost_center_id:0
-msgid "Cost Center"
-msgstr "Cost Center"
-
-#. module: msf_budget
-#: view:wizard.budget.criteria.export:0
-msgid "Budget vs. Actuals Export"
-msgstr "Budget vs. Actuals Export"
-
-#. module: msf_budget
-#: report:addons/msf_budget/report/report_local_expenses_xls.mako:113
-#: field:msf.budget.line,account_code:0
-msgid "Account code"
-msgstr "Account code"
-
-#. module: msf_budget
-#: report:msf.pdf.engagement:0
-msgid "Report date:"
-msgstr "Report date:"
+msgstr "Pièces Analytiques"
 
 #. module: msf_budget
 #: report:msf.pdf.budget.monthly:0
-#: report:msf.pdf.budget.summary:0
-msgid "/"
-msgstr "/"
-
-#. module: msf_budget
-#: code:addons/msf_budget/report/report_budget_criteria.py:182
-#, python-format
-msgid "Expenses"
-msgstr "Expenses"
-
-#. module: msf_budget
-#: field:wizard.budget.criteria.export,commitment:0
-msgid "Commitments"
-msgstr "Commitments"
-
-#. module: msf_budget
-#: view:wizard.budget.import.confirm:0
-msgid "Do you want to overwrite the following budgets:"
-msgstr "Do you want to overwrite the following budgets:"
-
-#. module: msf_budget
-#: code:addons/msf_budget/wizard/wizard_budget_import.py:94
-#, python-format
-msgid "The budget has no decision moment!"
-msgstr "The budget has no decision moment!"
-
-#. module: msf_budget
-#: report:addons/msf_budget/report/budget_criteria_xls.mako:482
-#: report:addons/msf_budget/report/budget_monthly_xls.mako:158
-msgid "Cost center:"
-msgstr "Cost center:"
-
-#. module: msf_budget
-#: model:ir.model,name:msf_budget.model_wizard_budget_import
-#: view:wizard.budget.import:0
-msgid "Budget Import"
-msgstr "Budget Import"
-
-#. module: msf_budget
-#: view:msf.budget:0
-#: selection:msf.budget,state:0
-msgid "Done"
-msgstr "Done"
-
-#. module: msf_budget
-#: report:addons/msf_budget/report/budget_criteria_xls.mako:547
-#: report:addons/msf_budget/report/budget_criteria_xls.mako:564
-msgid "Account Desc"
-msgstr "Account Desc"
+msgid "Jan"
+msgstr "Janvier"
 
 #. module: msf_budget
 #: report:addons/msf_budget/report/budget_criteria_xls.mako:451
 msgid "BUDGET VS. ACTUALS"
 msgstr "BUDGET VS. ACTUALS"
+
+#. module: msf_budget
+#: field:wizard.local.expenses,fiscalyear_id:0
+msgid "Fiscal year"
+msgstr "Exercice Comptable"
+
+#. module: msf_budget
+#: field:msf.budget,cost_center_id:0
+msgid "Cost Center"
+msgstr "Centre de Coût"
+
+#. module: msf_budget
+#: field:msf.budget,version:0
+msgid "Version"
+msgstr "Version"
 
 #. module: msf_budget
 #: code:addons/msf_budget/analytic.py:43
@@ -624,16 +99,103 @@ msgid "No Analytic Domain !"
 msgstr "No Analytic Domain !"
 
 #. module: msf_budget
-#: selection:msf.budget,type:0
-#: selection:msf.budget.line,line_type:0
-msgid "View"
-msgstr "View"
+#: view:wizard.budget.import.finish:0
+msgid "Budget Imported"
+msgstr "Budget Importé"
 
 #. module: msf_budget
-#: report:addons/msf_budget/report/budget_monthly_xls.mako:180
 #: report:msf.pdf.budget.monthly:0
-msgid "Jan"
-msgstr "Jan"
+msgid "Mar"
+msgstr "Mars"
+
+#. module: msf_budget
+#: code:addons/msf_budget/report/report_pdf_engagement.py:103
+#: code:addons/msf_budget/wizard/wizard_budget_import.py:194
+#, python-format
+msgid "Error"
+msgstr "Erreur"
+
+#. module: msf_budget
+#: code:addons/msf_budget/wizard/wizard_budget_import.py:148
+#, python-format
+msgid "Account %s is not an expense account!"
+msgstr "Le Compte %s n'est pas un compte de charge!"
+
+#. module: msf_budget
+#: report:msf.pdf.engagement:0
+msgid "PO reference:"
+msgstr "Bon de Commande - Référence: "
+
+#. module: msf_budget
+#: model:ir.actions.report.xml,name:msf_budget.pdf_budget_summary
+msgid "Budget Summary"
+msgstr "Budget - Résumé"
+
+#. module: msf_budget
+#: model:ir.actions.act_window,help:msf_budget.act_crossovered_budget_view
+msgid "A budget is a forecast of your company's income and expenses expected for a period in the future. With a budget, a company is able to carefully look at how much money they are taking in during a given period, and figure out the best way to divide it among various categories. By keeping track of where your money goes, you may be less likely to overspend, and more likely to meet your financial goals. Forecast a budget by detailing the expected revenue per analytic account and monitor its evolution based on the actuals realised during that period."
+msgstr "Un budget est une prévision de revenus de votre société et des dépenses prévues pour une période à venir. Une société dotée d'un budget est en mesure d'examiner attentivement combien d'argent est pris sur une période donnée, et de déterminer la meilleure façon de le répartir entre les différentes catégories. En faisant le suivi de vos mouvements d'argent, vous pourriez être moins enclins à dépenser, et plus susceptibles d'atteindre vos objectifs financiers. Faites les prévisions pour votre budget en détaillant les recettes attendues par compte analytique et suivant son évolution sur base des dépenses réelles réalisées au cours de cette période.."
+
+#. module: msf_budget
+#: field:msf.budget,fiscalyear_id:0
+msgid "Fiscal Year"
+msgstr "Exercice Comptable"
+
+#. module: msf_budget
+#: code:addons/msf_budget/wizard/wizard_budget_import.py:98
+#, python-format
+msgid "The decision moment %s is not defined in the database!"
+msgstr "Le moment de décision %s n'est pas défini sous la base de données!"
+
+#. module: msf_budget
+#: report:addons/msf_budget/report/budget_criteria_xls.mako:549
+#: report:addons/msf_budget/report/budget_criteria_xls.mako:553
+msgid "Total (Budget)"
+msgstr "Total (Budget)"
+
+#. module: msf_budget
+#: report:msf.pdf.engagement:0
+msgid "Report date:"
+msgstr "Rapport - date:"
+
+#. module: msf_budget
+#: model:ir.actions.act_window,name:msf_budget.action_budget_criteria_export_menu
+msgid "Budget vs. Actual"
+msgstr "Budget vs. Réel"
+
+#. module: msf_budget
+#: field:msf.budget,decision_moment_id:0
+#: field:msf.budget.decision.moment,name:0
+msgid "Decision Moment"
+msgstr "Moment de Décision"
+
+#. module: msf_budget
+#: field:wizard.local.expenses,start_period_id:0
+msgid "Period From"
+msgstr "Period From"
+
+#. module: msf_budget
+#: report:msf.pdf.engagement:0
+#: field:wizard.local.expenses,cost_center_id:0
+msgid "Cost Centre"
+msgstr "Centre de Coût:"
+
+#. module: msf_budget
+#: selection:msf.budget,type:0
+#: selection:msf.budget.line,line_type:0
+msgid "Normal"
+msgstr "Normal"
+
+#. module: msf_budget
+#: field:wizard.local.expenses,booking_currency_id:0
+msgid "Booking currency"
+msgstr "Devise d'enregistrement"
+
+#. module: msf_budget
+#: view:msf.budget:0
+#: field:msf.budget,budget_line_ids:0
+msgid "Budget Lines"
+msgstr "Budget - Lignes"
 
 #. module: msf_budget
 #: code:addons/msf_budget/wizard/wizard_budget_import.py:61
@@ -655,118 +217,64 @@ msgstr "Jan"
 #: code:addons/msf_budget/wizard/wizard_budget_import.py:162
 #, python-format
 msgid "Warning !"
-msgstr "Warning !"
-
-#. module: msf_budget
-#: selection:wizard.local.expenses,granularity:0
-msgid "By parent expense account"
-msgstr "By parent expense account"
-
-#. module: msf_budget
-#: model:ir.module.module,shortdesc:msf_budget.module_meta_information
-msgid "MSF Budget Management"
-msgstr "MSF Budget Management"
-
-#. module: msf_budget
-#: field:msf.budget,name:0
-#: field:msf.budget.line,name:0
-msgid "Name"
-msgstr "Name"
-
-#. module: msf_budget
-#: selection:wizard.budget.criteria.export,granularity:0
-msgid "By parent expense"
-msgstr "By parent expense"
-
-#. module: msf_budget
-#: model:ir.actions.server,name:msf_budget.action_wizard_budget_summary_tree
-#: view:msf.budget.summary:0
-msgid "Budget Status"
-msgstr "Budget Status"
-
-#. module: msf_budget
-#: report:addons/msf_budget/report/budget_criteria_xls.mako:522
-msgid "Granularity:"
-msgstr "Granularity:"
-
-#. module: msf_budget
-#: model:ir.model,name:msf_budget.model_wizard_budget_import_confirm
-msgid "wizard.budget.import.confirm"
-msgstr "wizard.budget.import.confirm"
-
-#. module: msf_budget
-#: field:wizard.local.expenses,booking_currency_id:0
-msgid "Booking currency"
-msgstr "Booking currency"
-
-#. module: msf_budget
-#: report:addons/msf_budget/report/budget_monthly_xls.mako:181
-#: report:msf.pdf.budget.monthly:0
-msgid "Feb"
-msgstr "Feb"
+msgstr "Avertissement !"
 
 #. module: msf_budget
 #: report:addons/msf_budget/report/budget_monthly_xls.mako:184
-#: report:msf.pdf.budget.monthly:0
 msgid "May"
 msgstr "May"
 
 #. module: msf_budget
-#: report:msf.pdf.engagement:0
-msgid "Remaining Budget"
-msgstr "Remaining Budget"
+#: selection:msf.budget,type:0
+#: selection:msf.budget.line,line_type:0
+msgid "View"
+msgstr "Vue"
 
 #. module: msf_budget
-#: field:msf.budget.summary,code:0
-msgid "Budget Code"
-msgstr "Budget Code"
-
-#. module: msf_budget
-#: report:addons/msf_budget/report/budget_monthly_xls.mako:185
-#: report:msf.pdf.budget.monthly:0
-msgid "Jun"
-msgstr "Jun"
-
-#. module: msf_budget
-#: code:addons/msf_budget/wizard/wizard_budget_import.py:61
+#: code:addons/msf_budget/wizard/wizard_budget_import.py:66
 #, python-format
-msgid "The budget has no name!"
-msgstr "The budget has no name!"
+msgid "The budget has no code!"
+msgstr "Le budget n'a pas de code!"
 
 #. module: msf_budget
-#: selection:wizard.budget.criteria.export,granularity:0
-msgid "By expense and destination"
-msgstr "By expense and destination"
-
-#. module: msf_budget
-#: model:ir.model,name:msf_budget.model_msf_budget_summary
-msgid "msf.budget.summary"
-msgstr "msf.budget.summary"
-
-#. module: msf_budget
-#: field:msf.budget.line,account_id:0
-#: report:msf.pdf.budget.monthly:0
-#: report:msf.pdf.budget.summary:0
 #: report:msf.pdf.engagement:0
-msgid "Account"
-msgstr "Account"
-
-#. module: msf_budget
-#: field:msf.budget.summary,name:0
-msgid "Budget Name"
-msgstr "Budget Name"
+msgid "Delivery requested date:"
+msgstr "Date de Livraison souhaitée: "
 
 #. module: msf_budget
 #: selection:wizard.budget.criteria.export,breakdown:0
 #: selection:wizard.local.expenses,breakdown:0
-msgid "By month"
-msgstr "By month"
+msgid "Total figure"
+msgstr "Total- chiffres"
 
 #. module: msf_budget
-#: code:addons/msf_budget/wizard/wizard_budget_import.py:80
-#, python-format
-msgid "The budget has no cost center!"
-msgstr "The budget has no cost center!"
+#: report:msf.pdf.budget.monthly:0
+#: report:msf.pdf.budget.summary:0
+#: report:msf.pdf.engagement:0
+msgid "Page"
+msgstr "Page"
+
+#. module: msf_budget
+#: field:msf.budget,instance_type:0
+msgid "Instance type"
+msgstr "Instance type"
+
+#. module: msf_budget
+#: report:addons/msf_budget/report/budget_monthly_xls.mako:182
+msgid "Mar"
+msgstr "Mar"
+
+#. module: msf_budget
+#: view:msf.budget:0
+msgid "Approve"
+msgstr "Approuver"
+
+#. module: msf_budget
+#: model:ir.actions.act_window,name:msf_budget.act_crossovered_budget_view
+#: model:ir.ui.menu,name:msf_budget.menu_act_crossovered_budget_view
+#: model:ir.ui.menu,name:msf_budget.next_id_31
+msgid "Budgets"
+msgstr "Budgets"
 
 #. module: msf_budget
 #: report:addons/msf_budget/report/budget_criteria_xls.mako:506
@@ -774,9 +282,511 @@ msgid "Commitments:"
 msgstr "Commitments:"
 
 #. module: msf_budget
+#: report:addons/msf_budget/report/budget_criteria_xls.mako:545
+#: report:addons/msf_budget/report/budget_criteria_xls.mako:562
+#: field:msf.budget.line,destination_id:0
+#: selection:msf.budget.line,line_type:0
+msgid "Destination"
+msgstr "Destination"
+
+#. module: msf_budget
+#: code:addons/msf_budget/wizard/wizard_budget_import.py:71
+#, python-format
+msgid "The budget has no fiscal year!"
+msgstr "Le budget n'a pas d'exercice comptable!"
+
+#. module: msf_budget
+#: model:ir.actions.act_window,name:msf_budget.action_wizard_local_expenses
+#: model:ir.actions.report.xml,name:msf_budget.report_local_expenses_xls
+#: model:ir.ui.menu,name:msf_budget.menu_action_wizard_local_expenses
+#: view:wizard.local.expenses:0
+msgid "Local Expenses"
+msgstr "Dépenses locales"
+
+#. module: msf_budget
+#: code:addons/msf_budget/wizard/wizard_budget_import.py:132
+#, python-format
+msgid "Account %s does not exist in database!"
+msgstr "Le Compte %s n'existe pas sous la base de données!"
+
+#. module: msf_budget
+#: code:addons/msf_budget/wizard/wizard_budget_import.py:89
+#, python-format
+msgid "The cost center %s is not an allocable cost center! The budget for it will be created automatically."
+msgstr "Le centre de coût %s n'est pas un centre de coût imputable! Le budget sera créé automatiquement pour cela."
+
+#. module: msf_budget
+#: selection:wizard.budget.criteria.export,granularity:0
+msgid "By expense"
+msgstr "Par dépense"
+
+#. module: msf_budget
+#: field:msf.budget.line,budget_values:0
+msgid "Budget Values (list of float to evaluate)"
+msgstr "Budget - Valeurs (liste de flottants à évaluer)"
+
+#. module: msf_budget
+#: report:msf.pdf.budget.monthly:0
+#: report:msf.pdf.budget.summary:0
+msgid "/"
+msgstr "/"
+
+#. module: msf_budget
+#: view:wizard.actual.export:0
+#: view:wizard.budget.criteria.export:0
+#: view:wizard.budget.import.confirm:0
+#: view:wizard.local.expenses:0
+msgid "No"
+msgstr "Non"
+
+#. module: msf_budget
+#: report:addons/msf_budget/report/budget_criteria_xls.mako:550
+msgid "Total (Comm.)"
+msgstr "Total (Comm.)"
+
+#. module: msf_budget
+#: field:msf.budget.line,percentage:0
+#: report:msf.pdf.budget.summary:0
+msgid "Percentage"
+msgstr "Pourcentage"
+
+#. module: msf_budget
 #: report:msf.pdf.engagement:0
-msgid "Functional currency:"
-msgstr "Functional currency:"
+msgid "Dest."
+msgstr "Dest."
+
+#. module: msf_budget
+#: report:msf.pdf.budget.monthly:0
+#: report:msf.pdf.budget.summary:0
+msgid "Budget code/name:"
+msgstr "Budget - Code/Nom:"
+
+#. module: msf_budget
+#: selection:wizard.budget.criteria.export,granularity:0
+msgid "By expense and destination"
+msgstr "Par dépense et destination"
+
+#. module: msf_budget
+#: field:msf.budget.summary,name:0
+msgid "Budget Name"
+msgstr "Budget - Nom"
+
+#. module: msf_budget
+#: report:addons/msf_budget/report/budget_criteria_xls.mako:551
+#: report:addons/msf_budget/report/budget_criteria_xls.mako:554
+msgid "Total (Actual)"
+msgstr "Total (Actual)"
+
+#. module: msf_budget
+#: report:addons/msf_budget/report/budget_criteria_xls.mako:556
+#: report:addons/msf_budget/report/budget_criteria_xls.mako:577
+msgid "Total Balance"
+msgstr "Total Balance"
+
+#. module: msf_budget
+#: view:wizard.budget.import.confirm:0
+msgid "Do you want to overwrite the following budgets:"
+msgstr "Désirez-vous écraser les budgets suivants:"
+
+#. module: msf_budget
+#: field:msf.budget.summary,budget_amount:0
+#: report:msf.pdf.budget.summary:0
+msgid "Budget Amount"
+msgstr "Budget - Montant"
+
+#. module: msf_budget
+#: selection:wizard.local.expenses,granularity:0
+msgid "By parent expense account"
+msgstr "Par compte de charge parent"
+
+#. module: msf_budget
+#: report:msf.pdf.budget.monthly:0
+#: report:msf.pdf.budget.summary:0
+msgid "Version:"
+msgstr "Version :"
+
+#. module: msf_budget
+#: code:addons/msf_budget/analytic.py:43
+#, python-format
+msgid "This budget does not have an analytic domain!"
+msgstr "This budget does not have an analytic domain!"
+
+#. module: msf_budget
+#: field:wizard.budget.criteria.export,commitment:0
+msgid "Commitments"
+msgstr "Engagements"
+
+#. module: msf_budget
+#: report:msf.pdf.engagement:0
+msgid "Remaining Budget"
+msgstr "Budget Restant"
+
+#. module: msf_budget
+#: report:msf.pdf.budget.monthly:0
+msgid "Jul"
+msgstr "Juillet"
+
+#. module: msf_budget
+#: report:msf.pdf.budget.monthly:0
+msgid "Sep"
+msgstr "Septembre"
+
+#. module: msf_budget
+#: report:msf.pdf.budget.monthly:0
+#: report:msf.pdf.budget.summary:0
+msgid "Decision moment:"
+msgstr "Moment de Décision:"
+
+#. module: msf_budget
+#: report:msf.pdf.engagement:0
+msgid "Actuals amounts in this report include confirmed POs (commitments) but not open / validated POs"
+msgstr "Montants réels de ce rapport comprennent les Bons de Commande confirmés (engagements) mais pas ceux ouverts/validés"
+
+#. module: msf_budget
+#: report:msf.pdf.budget.monthly:0
+#: report:msf.pdf.budget.summary:0
+msgid "Cost Center:"
+msgstr "Centre de Coût"
+
+#. module: msf_budget
+#: field:wizard.local.expenses,output_currency_id:0
+msgid "Output currency"
+msgstr "Devise sortante"
+
+#. module: msf_budget
+#: model:ir.actions.server,name:msf_budget.action_wizard_budget_summary_tree
+#: view:msf.budget.summary:0
+msgid "Budget Status"
+msgstr "Budget - Statut"
+
+#. module: msf_budget
+#: model:ir.model,name:msf_budget.model_wizard_local_expenses
+msgid "wizard.local.expenses"
+msgstr "wizard.local.expenses"
+
+#. module: msf_budget
+#: field:msf.budget.line,parent_id:0
+msgid "Parent Line"
+msgstr "Ligne parente"
+
+#. module: msf_budget
+#: field:wizard.actual.export,currency_table_id:0
+#: field:wizard.budget.criteria.export,currency_table_id:0
+msgid "Currency table"
+msgstr "Tableau des devises"
+
+#. module: msf_budget
+#: constraint:msf.budget.decision.moment:0
+msgid "Order must be unique and bigger than 1!"
+msgstr "La Commande doit être unique ou plus grande que 1!"
+
+#. module: msf_budget
+#: model:ir.model,name:msf_budget.model_account_analytic_line
+msgid "Analytic Line"
+msgstr "Ligne Analytique"
+
+#. module: msf_budget
+#: field:msf.budget.line,comm_amount:0
+msgid "Commitments amount"
+msgstr "Commitments amount"
+
+#. module: msf_budget
+#: model:ir.model,name:msf_budget.model_msf_budget_tools
+msgid "msf.budget.tools"
+msgstr "msf.budget.tools"
+
+#. module: msf_budget
+#: report:addons/msf_budget/report/report_local_expenses_xls.mako:114
+msgid "Account name"
+msgstr "Nom du compte"
+
+#. module: msf_budget
+#: report:addons/msf_budget/report/budget_monthly_xls.mako:179
+msgid "Account description"
+msgstr "Account description"
+
+#. module: msf_budget
+#: report:addons/msf_budget/report/budget_criteria_xls.mako:522
+msgid "Granularity:"
+msgstr "Granularity:"
+
+#. module: msf_budget
+#: report:msf.pdf.engagement:0
+msgid "Delivery confirmed date:"
+msgstr "Date confirmée de Livraison:"
+
+#. module: msf_budget
+#: code:addons/msf_budget/wizard/wizard_actual_export.py:39
+#, python-format
+msgid "No cost center was selected for the report!"
+msgstr "Pas de Centre de Coût sélectionné pour ce rapport!"
+
+#. module: msf_budget
+#: report:msf.pdf.budget.monthly:0
+msgid "Dec"
+msgstr "Décembre"
+
+#. module: msf_budget
+#: field:msf.budget.line,account_id:0
+#: report:msf.pdf.budget.monthly:0
+#: report:msf.pdf.budget.summary:0
+#: report:msf.pdf.engagement:0
+msgid "Account"
+msgstr "Compte"
+
+#. module: msf_budget
+#: report:msf.pdf.budget.monthly:0
+msgid "Feb"
+msgstr "Février"
+
+#. module: msf_budget
+#: field:msf.budget.summary,child_ids:0
+msgid "Children"
+msgstr "Enfants"
+
+#. module: msf_budget
+#: code:addons/msf_budget/wizard/wizard_budget_import.py:120
+#, python-format
+msgid "No destination was set! Please add it for line %s"
+msgstr "Destination non définie! Veuillez l'ajouter à la ligne %s"
+
+#. module: msf_budget
+#: view:wizard.budget.import.finish:0
+msgid "OK"
+msgstr "OK"
+
+#. module: msf_budget
+#: field:msf.budget,decision_moment_order:0
+msgid "Decision Moment Order"
+msgstr "Moment de Décision Commande"
+
+#. module: msf_budget
+#: code:addons/msf_budget/report/report_budget_criteria.py:180
+#, python-format
+msgid "Expenses and destinations"
+msgstr "Expenses and destinations"
+
+#. module: msf_budget
+#: selection:msf.budget,display_type:0
+msgid "Expenses and destinations"
+msgstr "Dépenses et destinations"
+
+#. module: msf_budget
+#: code:addons/msf_budget/wizard/wizard_budget_import.py:194
+#, python-format
+msgid "Nothing to import."
+msgstr "Nothing to import."
+
+#. module: msf_budget
+#: field:wizard.actual.export,cost_center_ids:0
+msgid "Cost Centers"
+msgstr "Centres de Coût"
+
+#. module: msf_budget
+#: report:msf.pdf.budget.monthly:0
+msgid "Aug"
+msgstr "Août"
+
+#. module: msf_budget
+#: report:addons/msf_budget/report/budget_monthly_xls.mako:186
+msgid "Jul"
+msgstr "Jul"
+
+#. module: msf_budget
+#: field:msf.budget.line,line_type:0
+msgid "Line type"
+msgstr "Type de Ligne"
+
+#. module: msf_budget
+#: field:msf.budget.summary,actual_amount:0
+#: report:msf.pdf.budget.summary:0
+msgid "Actual Amount"
+msgstr "Montant Réel"
+
+#. module: msf_budget
+#: field:msf.budget,type:0
+msgid "Budget type"
+msgstr "Budget - Type"
+
+#. module: msf_budget
+#: report:msf.pdf.engagement:0
+msgid "PO impact"
+msgstr "Bon de Commande - Répercussion"
+
+#. module: msf_budget
+#: selection:wizard.budget.criteria.export,granularity:0
+msgid "By parent expense"
+msgstr "Par dépense parent"
+
+#. module: msf_budget
+#: field:wizard.budget.import,import_file:0
+msgid "CSV File"
+msgstr "Fichier CSV"
+
+#. module: msf_budget
+#: code:addons/msf_budget/wizard/wizard_budget_import.py:85
+#, python-format
+msgid "The cost center %s is not defined in the database!"
+msgstr "Le centre de coût %s n'est pas défini sous la base de données"
+
+#. module: msf_budget
+#: report:addons/msf_budget/report/budget_criteria_xls.mako:557
+#: report:addons/msf_budget/report/budget_criteria_xls.mako:578
+msgid "Total Percentage"
+msgstr "Total Percentage"
+
+#. module: msf_budget
+#: report:addons/msf_budget/report/budget_monthly_xls.mako:178
+msgid "Account code - Destination code"
+msgstr "Account code - Destination code"
+
+#. module: msf_budget
+#: model:ir.model,name:msf_budget.model_wizard_budget_import_finish
+msgid "wizard.budget.import.finish"
+msgstr "wizard.budget.import.finish"
+
+#. module: msf_budget
+#: field:msf.budget,total_budget_amount:0
+msgid "Total Budget Amount"
+msgstr "Montant du Budget Total "
+
+#. module: msf_budget
+#: field:msf.budget.line,account_code:0
+msgid "Account code"
+msgstr "Account code"
+
+#. module: msf_budget
+#: report:msf.pdf.budget.monthly:0
+msgid "Oct"
+msgstr "Octobre"
+
+#. module: msf_budget
+#: view:msf.budget:0
+msgid "Change display type"
+msgstr "Changer le type d'affichage"
+
+#. module: msf_budget
+#: code:addons/msf_budget/report/report_budget_criteria.py:182
+#, python-format
+msgid "Expenses"
+msgstr "Expenses"
+
+#. module: msf_budget
+#: report:msf.pdf.budget.monthly:0
+#: report:msf.pdf.budget.summary:0
+#: report:msf.pdf.engagement:0
+msgid "Fiscal year:"
+msgstr "Exercice comptable:"
+
+#. module: msf_budget
+#: model:ir.model,name:msf_budget.model_wizard_budget_import
+#: view:wizard.budget.import:0
+msgid "Budget Import"
+msgstr "Budget - Importation"
+
+#. module: msf_budget
+#: view:msf.budget:0
+#: selection:msf.budget,instance_type:0
+msgid "HQ"
+msgstr "HQ"
+
+#. module: msf_budget
+#: report:addons/msf_budget/report/budget_criteria_xls.mako:547
+#: report:addons/msf_budget/report/budget_criteria_xls.mako:564
+msgid "Account Desc"
+msgstr "Desc. du compte"
+
+#. module: msf_budget
+#: report:addons/msf_budget/report/budget_criteria_xls.mako:466
+#: report:addons/msf_budget/report/budget_monthly_xls.mako:144
+msgid "Budget code:"
+msgstr "Budget code:"
+
+#. module: msf_budget
+#: report:addons/msf_budget/report/budget_criteria_xls.mako:514
+msgid "Breakdown:"
+msgstr "Breakdown:"
+
+#. module: msf_budget
+#: report:addons/msf_budget/report/budget_monthly_xls.mako:180
+msgid "Jan"
+msgstr "Jan"
+
+#. module: msf_budget
+#: field:msf.budget.line,child_ids:0
+msgid "Child Lines"
+msgstr "Lignes enfants"
+
+#. module: msf_budget
+#: view:wizard.budget.import:0
+msgid "Select a .CSV file to import."
+msgstr "Sélectionner un fichier.CSV à importer."
+
+#. module: msf_budget
+#: code:addons/msf_budget/wizard/wizard_budget_import.py:75
+#, python-format
+msgid "The fiscal year %s is not defined in the database!"
+msgstr "L'exercice comptable %s n'est pas défini sous la base de données!"
+
+#. module: msf_budget
+#: field:msf.budget.line,actual_amount:0
+msgid "Actual amount"
+msgstr "Montant réel"
+
+#. module: msf_budget
+#: report:msf.pdf.budget.monthly:0
+msgid "Apr"
+msgstr "Avril"
+
+#. module: msf_budget
+#: model:ir.model,name:msf_budget.model_wizard_actual_export
+msgid "wizard.actual.export"
+msgstr "wizard.actual.export"
+
+#. module: msf_budget
+#: view:wizard.budget.import.confirm:0
+msgid "Budget Already Existing"
+msgstr "Budget Déjà Existant"
+
+#. module: msf_budget
+#: report:addons/msf_budget/report/budget_criteria_xls.mako:482
+#: report:addons/msf_budget/report/budget_monthly_xls.mako:158
+msgid "Cost center:"
+msgstr "Cost center:"
+
+#. module: msf_budget
+#: model:ir.model,name:msf_budget.model_wizard_budget_import_confirm
+msgid "wizard.budget.import.confirm"
+msgstr "wizard.budget.import.confirm"
+
+#. module: msf_budget
+#: field:msf.budget.summary,parent_id:0
+msgid "Parent"
+msgstr "Parent"
+
+#. module: msf_budget
+#: code:addons/msf_budget/report/report_pdf_engagement.py:103
+#, python-format
+msgid "No distribution found in PO %s."
+msgstr "Pas d'allocation trouvée sous le BC %s."
+
+#. module: msf_budget
+#: model:ir.actions.act_window,name:msf_budget.action_account_analytic_account_budget_form
+msgid "Analytic Accounts"
+msgstr "Comptes analytiques"
+
+#. module: msf_budget
+#: report:addons/msf_budget/report/budget_criteria_xls.mako:474
+#: report:addons/msf_budget/report/budget_monthly_xls.mako:151
+msgid "Fiscal year:"
+msgstr "Fiscal year:"
+
+#. module: msf_budget
+#: view:wizard.actual.export:0
+#: view:wizard.budget.criteria.export:0
+#: view:wizard.local.expenses:0
+msgid "Create report"
+msgstr "Créer un rapport"
 
 #. module: msf_budget
 #: field:msf.budget.line,balance:0
@@ -785,14 +795,95 @@ msgid "Balance"
 msgstr "Balance"
 
 #. module: msf_budget
-#: report:addons/msf_budget/report/report_local_expenses_xls.mako:114
-msgid "Account name"
-msgstr "Account name"
+#: code:addons/msf_budget/wizard/wizard_budget_import.py:94
+#, python-format
+msgid "The budget has no decision moment!"
+msgstr "Le budget n'a pas de moment de décision!"
 
 #. module: msf_budget
-#: field:wizard.local.expenses,output_currency_id:0
-msgid "Output currency"
-msgstr "Output currency"
+#: report:addons/msf_budget/report/budget_criteria_xls.mako:498
+#: report:addons/msf_budget/report/budget_monthly_xls.mako:172
+msgid "Version:"
+msgstr "Version:"
+
+#. module: msf_budget
+#: report:addons/msf_budget/report/budget_monthly_xls.mako:185
+msgid "Jun"
+msgstr "Jun"
+
+#. module: msf_budget
+#: view:wizard.budget.criteria.export:0
+msgid "Budget vs. Actuals Export"
+msgstr "Budget vs. Exportations réelles"
+
+#. module: msf_budget
+#: view:wizard.budget.import:0
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: msf_budget
+#: view:wizard.budget.import.finish:0
+msgid "The budget has been correctly uploaded."
+msgstr "Le budget n'a pas été correctement téléchargé."
+
+#. module: msf_budget
+#: view:wizard.budget.import.confirm:0
+msgid "Yes"
+msgstr "Oui"
+
+#. module: msf_budget
+#: field:wizard.budget.criteria.export,period_id:0
+msgid "Year-to-date"
+msgstr "Année à ce jour"
+
+#. module: msf_budget
+#: selection:wizard.budget.criteria.export,breakdown:0
+#: selection:wizard.local.expenses,breakdown:0
+msgid "By month"
+msgstr "Par mois"
+
+#. module: msf_budget
+#: report:msf.pdf.engagement:0
+msgid "Functional currency:"
+msgstr "Functional currency:"
+
+#. module: msf_budget
+#: code:addons/msf_budget/wizard/wizard_budget_import.py:142
+#, python-format
+msgid "Destination %s is not linked to account %s!"
+msgstr "La Destination %s n'est pas connexe au compte %s!"
+
+#. module: msf_budget
+#: report:addons/msf_budget/report/budget_monthly_xls.mako:189
+msgid "Oct"
+msgstr "Oct"
+
+#. module: msf_budget
+#: field:msf.budget.summary,code:0
+msgid "Budget Code"
+msgstr "Budget - Code"
+
+#. module: msf_budget
+#: view:msf.budget:0
+#: selection:msf.budget,state:0
+msgid "Validated"
+msgstr "Validé"
+
+#. module: msf_budget
+#: field:msf.budget,code:0
+msgid "Code"
+msgstr "Code"
+
+#. module: msf_budget
+#: view:account.analytic.account:0
+#: model:ir.ui.menu,name:msf_budget.menu_action_account_analytic_account_budget_form
+msgid "Analytic Accounts"
+msgstr "Comptes Analytiques"
+
+#. module: msf_budget
+#: field:msf.budget.decision.moment,order:0
+msgid "Order"
+msgstr "Commande"
 
 #. module: msf_budget
 #: report:msf.pdf.budget.summary:0
@@ -800,16 +891,14 @@ msgid "%"
 msgstr "%"
 
 #. module: msf_budget
-#: report:msf.pdf.budget.monthly:0
-#: report:msf.pdf.budget.summary:0
-msgid "Budget code/name:"
-msgstr "Budget code/name:"
+#: field:msf.budget,currency_id:0
+msgid "Currency"
+msgstr "Devises"
 
 #. module: msf_budget
-#: code:addons/msf_budget/wizard/wizard_budget_import.py:71
-#, python-format
-msgid "The budget has no fiscal year!"
-msgstr "The budget has no fiscal year!"
+#: model:ir.model,name:msf_budget.model_msf_budget_summary
+msgid "msf.budget.summary"
+msgstr "msf.budget.summary"
 
 #. module: msf_budget
 #: view:msf.budget:0
@@ -818,40 +907,32 @@ msgid "Coordo"
 msgstr "Coordo"
 
 #. module: msf_budget
+#: model:ir.module.module,shortdesc:msf_budget.module_meta_information
+msgid "MSF Budget Management"
+msgstr "Gestion du Budget MSF"
+
+#. module: msf_budget
 #: report:addons/msf_budget/report/budget_criteria_xls.mako:458
 #: report:addons/msf_budget/report/budget_monthly_xls.mako:137
 msgid "Budget name:"
 msgstr "Budget name:"
 
 #. module: msf_budget
-#: report:addons/msf_budget/report/budget_monthly_xls.mako:179
-msgid "Account description"
-msgstr "Account description"
+#: selection:msf.budget,display_type:0
+msgid "Expenses only"
+msgstr "Dépenses seulement"
+
+#. module: msf_budget
+#: code:addons/msf_budget/wizard/wizard_budget_import.py:115
+#, python-format
+msgid "A budget line has no account!"
+msgstr "Une ligne de budget n'a pas de compte!"
 
 #. module: msf_budget
 #: view:msf.budget:0
-#: selection:msf.budget,state:0
-msgid "Validated"
-msgstr "Validated"
-
-#. module: msf_budget
-#: model:ir.actions.act_window,name:msf_budget.action_wizard_local_expenses
-#: model:ir.actions.report.xml,name:msf_budget.report_local_expenses_xls
-#: model:ir.ui.menu,name:msf_budget.menu_action_wizard_local_expenses
-#: view:wizard.local.expenses:0
-msgid "Local Expenses"
-msgstr "Local Expenses"
-
-#. module: msf_budget
-#: field:wizard.budget.criteria.export,breakdown:0
-#: field:wizard.local.expenses,breakdown:0
-msgid "Breakdown"
-msgstr "Breakdown"
-
-#. module: msf_budget
-#: field:msf.budget.line,child_ids:0
-msgid "Child Lines"
-msgstr "Child Lines"
+#: selection:msf.budget,instance_type:0
+msgid "Project"
+msgstr "Project"
 
 #. module: msf_budget
 #: view:msf.budget:0
@@ -862,48 +943,47 @@ msgstr "Budget"
 
 #. module: msf_budget
 #: report:addons/msf_budget/report/budget_monthly_xls.mako:187
-#: report:msf.pdf.budget.monthly:0
 msgid "Aug"
 msgstr "Aug"
 
 #. module: msf_budget
-#: model:ir.model,name:msf_budget.model_wizard_budget_import_finish
-msgid "wizard.budget.import.finish"
-msgstr "wizard.budget.import.finish"
+#: field:msf.budget,display_type:0
+msgid "Display type"
+msgstr "Type d'affichage"
 
 #. module: msf_budget
 #: report:addons/msf_budget/report/budget_criteria_xls.mako:490
 #: report:addons/msf_budget/report/budget_monthly_xls.mako:165
-#: report:msf.pdf.budget.monthly:0
-#: report:msf.pdf.budget.summary:0
 msgid "Decision moment:"
 msgstr "Decision moment:"
 
 #. module: msf_budget
-#: field:msf.budget.summary,actual_amount:0
-#: report:msf.pdf.budget.summary:0
-msgid "Actual Amount"
-msgstr "Actual Amount"
+#: model:ir.actions.act_window,name:msf_budget.action_actual_export_menu
+#: model:ir.actions.report.xml,name:msf_budget.budget_actual
+msgid "Actuals by CC"
+msgstr "Réels par CC"
 
 #. module: msf_budget
-#: report:addons/msf_budget/report/budget_monthly_xls.mako:178
-msgid "Account code - Destination code"
-msgstr "Account code - Destination code"
+#: field:msf.budget.line,budget_amount:0
+#: report:msf.pdf.engagement:0
+msgid "Budget amount"
+msgstr "Montant du Budget"
 
 #. module: msf_budget
-#: report:addons/msf_budget/report/budget_criteria_xls.mako:550
-msgid "Total (Comm.)"
-msgstr "Total (Comm.)"
+#: view:wizard.actual.export:0
+msgid "Actuals by CC Export"
+msgstr "Réels par export CC "
 
 #. module: msf_budget
-#: field:wizard.budget.criteria.export,period_id:0
-msgid "Year-to-date"
-msgstr "Year-to-date"
+#: report:msf.pdf.budget.monthly:0
+msgid "May"
+msgstr "Mai"
 
 #. module: msf_budget
-#: view:wizard.budget.import.finish:0
-msgid "The budget has been correctly uploaded."
-msgstr "The budget has been correctly uploaded."
+#: code:addons/msf_budget/wizard/wizard_budget_import.py:80
+#, python-format
+msgid "The budget has no cost center!"
+msgstr "Le budget n'a pas de centre de coût!"
 
 #. module: msf_budget
 #: field:wizard.local.expenses,end_period_id:0
@@ -913,90 +993,97 @@ msgstr "Period To"
 #. module: msf_budget
 #: model:ir.actions.report.xml,name:msf_budget.budget_criteria_2
 msgid "Budget vs. Actuals"
-msgstr "Budget vs. Actuals"
+msgstr "Budget vs. Réels"
 
 #. module: msf_budget
-#: code:addons/msf_budget/wizard/wizard_budget_import.py:148
+#: code:addons/msf_budget/wizard/wizard_budget_import.py:134
 #, python-format
-msgid "Account %s is not an expense account!"
-msgstr "Account %s is not an expense account!"
+msgid "Destination %s does not exist in database!"
+msgstr "La Destination %s n'existe pas sous la base de données!"
 
 #. module: msf_budget
-#: selection:msf.budget,type:0
-#: selection:msf.budget.line,line_type:0
-msgid "Normal"
-msgstr "Normal"
+#: report:addons/msf_budget/report/budget_monthly_xls.mako:181
+msgid "Feb"
+msgstr "Feb"
 
 #. module: msf_budget
-#: report:msf.pdf.budget.monthly:0
-#: report:msf.pdf.budget.summary:0
-#: report:msf.pdf.engagement:0
-msgid "Page"
-msgstr "Page"
+#: field:wizard.budget.criteria.export,breakdown:0
+#: field:wizard.local.expenses,breakdown:0
+msgid "Breakdown"
+msgstr "Ventilation"
 
 #. module: msf_budget
-#: report:addons/msf_budget/report/budget_criteria_xls.mako:514
-msgid "Breakdown:"
-msgstr "Breakdown:"
+#: selection:wizard.local.expenses,granularity:0
+msgid "By expense account"
+msgstr "Par compte de charge"
 
 #. module: msf_budget
 #: report:addons/msf_budget/report/budget_monthly_xls.mako:183
-#: report:msf.pdf.budget.monthly:0
 msgid "Apr"
 msgstr "Apr"
 
 #. module: msf_budget
-#: field:wizard.local.expenses,fiscalyear_id:0
-msgid "Fiscal year"
-msgstr "Fiscal year"
+#: model:ir.actions.report.xml,name:msf_budget.xls_budget_monthly
+msgid "Monthly Budget (XLS)"
+msgstr "Monthly Budget (XLS)"
 
 #. module: msf_budget
-#: field:msf.budget,currency_id:0
-msgid "Currency"
-msgstr "Currency"
+#: field:msf.budget,name:0
+#: field:msf.budget.line,name:0
+msgid "Name"
+msgstr "Nom"
+
+#. module: msf_budget
+#: code:addons/msf_budget/report/report_budget_criteria.py:184
+#, python-format
+msgid "Parent Expenses only"
+msgstr "Parent Expenses only"
+
+#. module: msf_budget
+#: report:msf.pdf.engagement:0
+msgid "Actuals amount"
+msgstr "Montants Réels"
 
 #. module: msf_budget
 #: view:msf.budget:0
 #: selection:msf.budget,state:0
 msgid "Draft"
-msgstr "Draft"
+msgstr "Brouillon"
 
 #. module: msf_budget
-#: view:wizard.actual.export:0
-msgid "Actuals by CC Export"
-msgstr "Actuals by CC Export"
+#: model:ir.actions.report.xml,name:msf_budget.pdf_budget_monthly
+msgid "Monthly Budget (PDF)"
+msgstr "Budget Mensuel (PDF)"
 
 #. module: msf_budget
-#: code:addons/msf_budget/wizard/wizard_budget_import.py:115
-#, python-format
-msgid "A budget line has no account!"
-msgstr "A budget line has no account!"
+#: model:ir.model,name:msf_budget.model_wizard_budget_criteria_export
+msgid "wizard.budget.criteria.export"
+msgstr "wizard.budget.criteria.export"
 
 #. module: msf_budget
-#: field:msf.budget.summary,parent_id:0
-msgid "Parent"
-msgstr "Parent"
+#: view:account.analytic.account:0
+msgid "Hard Posting"
+msgstr "Comptabiliser "
 
 #. module: msf_budget
-#: field:msf.budget,fiscalyear_id:0
-msgid "Fiscal Year"
-msgstr "Fiscal Year"
+#: model:ir.model,name:msf_budget.model_msf_budget
+msgid "MSF Budget"
+msgstr "Budget MSF"
 
 #. module: msf_budget
-#: field:wizard.actual.export,cost_center_ids:0
-msgid "Cost Centers"
-msgstr "Cost Centers"
+#: constraint:msf.budget.decision.moment:0
+msgid "Name must be unique!"
+msgstr "Le Nom doit être unique!"
 
 #. module: msf_budget
 #: report:addons/msf_budget/report/budget_monthly_xls.mako:188
-#: report:msf.pdf.budget.monthly:0
 msgid "Sep"
 msgstr "Sep"
 
 #. module: msf_budget
-#: field:msf.budget.line,actual_amount:0
-msgid "Actual amount"
-msgstr "Actual amount"
+#: report:msf.pdf.engagement:0
+msgid "Order impact vs. budget"
+msgstr "Répercussion de la commande sur Budget"
 
 #. module: msf_budget
 #: model:ir.model,name:msf_budget.model_msf_budget_decision_moment
@@ -1004,34 +1091,31 @@ msgid "msf.budget.decision.moment"
 msgstr "msf.budget.decision.moment"
 
 #. module: msf_budget
+#: report:addons/msf_budget/report/budget_criteria_xls.mako:533
+msgid "Report Date:"
+msgstr "Report Date:"
+
+#. module: msf_budget
+#: report:msf.pdf.engagement:0
+msgid "PO amount"
+msgstr "Bon de Commande - Montant"
+
+#. module: msf_budget
+#: model:ir.actions.act_window,name:msf_budget.action_wizard_budget_import
+#: model:ir.ui.menu,name:msf_budget.menu_action_wizard_budget_import
+#: view:wizard.budget.import:0
+msgid "Import Budget"
+msgstr "Importer le Budget"
+
+#. module: msf_budget
+#: field:msf.budget,state:0
+msgid "State"
+msgstr "Statut"
+
+#. module: msf_budget
 #: selection:msf.budget,display_type:0
-msgid "Expenses only"
-msgstr "Expenses only"
-
-#. module: msf_budget
-#: code:addons/msf_budget/wizard/wizard_budget_import.py:66
-#, python-format
-msgid "The budget has no code!"
-msgstr "The budget has no code!"
-
-#. module: msf_budget
-#: model:ir.actions.act_window,name:msf_budget.action_budget_criteria_export_menu
-msgid "Budget vs. Actual"
-msgstr "Budget vs. Actual"
-
-#. module: msf_budget
-#: report:addons/msf_budget/report/budget_criteria_xls.mako:498
-#: report:addons/msf_budget/report/budget_monthly_xls.mako:172
-#: report:msf.pdf.budget.monthly:0
-#: report:msf.pdf.budget.summary:0
-msgid "Version:"
-msgstr "Version:"
-
-#. module: msf_budget
-#: code:addons/msf_budget/wizard/wizard_budget_import.py:144
-#, python-format
-msgid "Account/destination %s/%s is twice in the file!"
-msgstr "Account/destination %s/%s is twice in the file!"
+msgid "Parent expenses only"
+msgstr "Dépenses Parent seulement"
 
 #. module: msf_budget
 #: model:ir.model,name:msf_budget.model_msf_budget_line
@@ -1040,43 +1124,24 @@ msgstr "msf.budget.line"
 
 #. module: msf_budget
 #: report:addons/msf_budget/report/budget_monthly_xls.mako:191
-#: report:msf.pdf.budget.monthly:0
 msgid "Dec"
 msgstr "Dec"
 
 #. module: msf_budget
-#: view:wizard.budget.import.finish:0
-msgid "Budget Imported"
-msgstr "Budget Imported"
+#: report:msf.pdf.budget.monthly:0
+msgid "Nov"
+msgstr "Novembre"
 
 #. module: msf_budget
-#: report:addons/msf_budget/report/budget_criteria_xls.mako:466
-#: report:addons/msf_budget/report/budget_monthly_xls.mako:144
-msgid "Budget code:"
-msgstr "Budget code:"
+#: field:wizard.budget.criteria.export,granularity:0
+#: field:wizard.local.expenses,granularity:0
+msgid "Granularity"
+msgstr "Granularité"
 
 #. module: msf_budget
-#: code:addons/msf_budget/wizard/wizard_budget_import.py:98
-#, python-format
-msgid "The decision moment %s is not defined in the database!"
-msgstr "The decision moment %s is not defined in the database!"
-
-#. module: msf_budget
-#: model:ir.actions.act_window,name:msf_budget.action_wizard_budget_import
-#: model:ir.ui.menu,name:msf_budget.menu_action_wizard_budget_import
-#: view:wizard.budget.import:0
-msgid "Import Budget"
-msgstr "Import Budget"
-
-#. module: msf_budget
-#: model:ir.actions.report.xml,name:msf_budget.pdf_engagement
-msgid "Order impact vs. Budget"
-msgstr "Order impact vs. Budget"
-
-#. module: msf_budget
-#: view:wizard.budget.import.confirm:0
-msgid "Budget Already Existing"
-msgstr "Budget Already Existing"
+#: report:msf.pdf.budget.monthly:0
+msgid "Jun"
+msgstr "Juin"
 
 #. module: msf_budget
 #: report:addons/msf_budget/report/budget_criteria_xls.mako:543
@@ -1085,19 +1150,25 @@ msgid "Account Code"
 msgstr "Account Code"
 
 #. module: msf_budget
-#: model:ir.actions.report.xml,name:msf_budget.xls_budget_monthly
-msgid "Monthly Budget (XLS)"
-msgstr "Monthly Budget (XLS)"
+#: view:msf.budget:0
+#: selection:msf.budget,state:0
+msgid "Done"
+msgstr "Terminé"
 
 #. module: msf_budget
-#: report:msf.pdf.budget.monthly:0
-#: report:msf.pdf.budget.summary:0
-msgid "Cost Center:"
-msgstr "Cost Center:"
+#: code:addons/msf_budget/wizard/wizard_budget_import.py:144
+#, python-format
+msgid "Account/destination %s/%s is twice in the file!"
+msgstr "Compte/destination %s/%s est repris 2 fois dans ce fichier!"
 
 #. module: msf_budget
-#: report:msf.pdf.engagement:0
-#: field:wizard.local.expenses,cost_center_id:0
-msgid "Cost Centre"
-msgstr "Cost Centre"
+#: code:addons/msf_budget/wizard/wizard_budget_import.py:61
+#, python-format
+msgid "The budget has no name!"
+msgstr "Le budget n'a pas de nom!"
+
+#. module: msf_budget
+#: field:wizard.budget.import.confirm,budget_list:0
+msgid "Budget list"
+msgstr "Budget - liste"
 

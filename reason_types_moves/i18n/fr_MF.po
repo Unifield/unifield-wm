@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.0.3\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2013-10-17 07:42+0000\n"
-"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,47 +16,189 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: reason_types_moves
-#: model:stock.reason.type,name:reason_types_moves.reason_type_return_from_unit
-msgid "Return from unit"
-msgstr "Return from unit"
+#: code:addons/reason_types_moves/procurement.py:38
+#, python-format
+msgid "Please check the Quantity in Procurement Order(s), it should not be less than 1!"
+msgstr "Veuillez vérifier la Quantité de la(les)commande(s) d'approvisionnement : ne devrait pas être inférieure à 1 !"
+
+#. module: reason_types_moves
+#: constraint:stock.location:0
+msgid "You cannot define a quarantine location as chained location."
+msgstr "Vous ne pouvez pas définir une Zone \"Quarantaine\" en tant que Zone enchaînée."
+
+#. module: reason_types_moves
+#: field:stock.location,is_replenishment:0
+msgid "Is replenishment ?"
+msgstr "Est-ce un réapprovisionnement ?"
+
+#. module: reason_types_moves
+#: model:stock.reason.type,name:reason_types_moves.reason_type_deliver_partner
+msgid "Deliver Partner"
+msgstr "Livraison partenaire"
+
+#. module: reason_types_moves
+#: field:stock.reason.type,internal_ok:0
+msgid "Available for internal picking ?"
+msgstr "Disponible pour piquage interne ?"
+
+#. module: reason_types_moves
+#: constraint:stock.move:0
+msgid "You try to assign a lot which is not from the same product"
+msgstr "Vous essayez d'attribuer un lot qui ne correspond pas au même produit"
+
+#. module: reason_types_moves
+#: code:addons/reason_types_moves/procurement.py:37
+#, python-format
+msgid "Data Insufficient !"
+msgstr "Données insuffisantes!"
+
+#. module: reason_types_moves
+#: view:stock.move:0
+msgid "In Progress"
+msgstr "En Cours"
+
+#. module: reason_types_moves
+#: help:stock.location,is_replenishment:0
+msgid "Is True, the location could be used in replenishment rules"
+msgstr "Si Vrai, la Zone pourrait être utilisée pour les règles de réapprovisionnement"
+
+#. module: reason_types_moves
+#: field:stock.reason.type,inventory_ok:0
+#: field:stock.reason.type,is_inventory:0
+msgid "Inventory type"
+msgstr "Type d'Inventaire"
+
+#. module: reason_types_moves
+#: model:stock.reason.type,name:reason_types_moves.reason_type_discrepancy
+msgid "Discrepancy"
+msgstr "Écart"
+
+#. module: reason_types_moves
+#: constraint:stock.move:0
+msgid "You must assign an asset for this product."
+msgstr "Vous devez mentionner un bien pour ce produit."
+
+#. module: reason_types_moves
+#: model:ir.model,name:reason_types_moves.model_stock_fill_inventory
+msgid "Import Inventory"
+msgstr "Importer Inventaire"
+
+#. module: reason_types_moves
+#: model:ir.module.module,shortdesc:reason_types_moves.module_meta_information
+msgid "MSF Modules"
+msgstr "MSF - Modules"
+
+#. module: reason_types_moves
+#: selection:stock.move,product_type:0
+msgid "Stockable Product"
+msgstr "Produit Stockable"
 
 #. module: reason_types_moves
 #: field:stock.inventory.line,comment:0
 #: field:stock.move,comment:0
 msgid "Comment"
-msgstr "Comment"
-
-#. module: reason_types_moves
-#: model:stock.reason.type,name:reason_types_moves.reason_type_other
-msgid "Other"
-msgstr "Other"
-
-#. module: reason_types_moves
-#: model:stock.reason.type,name:reason_types_moves.reason_type_damage
-msgid "Damage"
-msgstr "Damage"
-
-#. module: reason_types_moves
-#: model:stock.reason.type,name:reason_types_moves.reason_type_consumption
-msgid "Consumption"
-msgstr "Consumption"
-
-#. module: reason_types_moves
-#: constraint:stock.inventory:0
-msgid "You must define a stock location for each line"
-msgstr "You must define a stock location for each line"
-
-#. module: reason_types_moves
-#: field:stock.location,standard_out_ok:0
-msgid "St. Out"
-msgstr "St. Out"
+msgstr "Commentaire"
 
 #. module: reason_types_moves
 #: code:addons/reason_types_moves/reason_type.py:620
 #: code:addons/reason_types_moves/reason_type.py:638
 #, python-format
-msgid "Bad operator !"
-msgstr "Bad operator !"
+msgid "Error !"
+msgstr "Erreur !"
+
+#. module: reason_types_moves
+#: constraint:stock.inventory:0
+msgid "You must define a stock location for each line"
+msgstr "Vous devez définir un lieu de stock pour chaque ligne"
+
+#. module: reason_types_moves
+#: field:stock.location,standard_out_ok:0
+msgid "St. Out"
+msgstr "(Sortie) Standard OUT"
+
+#. module: reason_types_moves
+#: constraint:stock.move:0
+msgid "You cannot select Service Location as Source Location."
+msgstr "Vous ne pouvez pas sélectionner la Zone Service comme Zone Source"
+
+#. module: reason_types_moves
+#: view:stock.move:0
+#: view:stock.picking:0
+msgid "Closed"
+msgstr "Clôturé"
+
+#. module: reason_types_moves
+#: view:stock.picking:0
+msgid "Expected Move Date"
+msgstr "Date de Mouvement Prévu"
+
+#. module: reason_types_moves
+#: model:stock.reason.type,name:reason_types_moves.reason_type_internal_supply
+msgid "Internal Supply"
+msgstr "Approvisionnement interne"
+
+#. module: reason_types_moves
+#: constraint:stock.picking:0
+msgid "You cannot validate this document because it contains a line with an inactive product"
+msgstr "Vous ne pouvez pas valider ce document car il contient des lignes avec un produit inactif"
+
+#. module: reason_types_moves
+#: field:stock.move,product_type:0
+msgid "Product type"
+msgstr "Type de Produit"
+
+#. module: reason_types_moves
+#: selection:stock.move,product_type:0
+msgid "Service with Reception"
+msgstr "Service avec Réception"
+
+#. module: reason_types_moves
+#: constraint:stock.inventory.line:0
+#: constraint:stock.move:0
+msgid "Constraint error on Uom"
+msgstr "Constraint error on Uom"
+
+#. module: reason_types_moves
+#: model:stock.reason.type,name:reason_types_moves.reason_type_consumption
+msgid "Consumption"
+msgstr "Consommation"
+
+#. module: reason_types_moves
+#: constraint:stock.inventory:0
+msgid "You cannot confirm this stock inventory because it contains a line with an inactive product"
+msgstr "Vous ne pouvez pas confirmer cet inventaire car il contient des lignes avec un produit inactif"
+
+#. module: reason_types_moves
+#: field:stock.move,not_chained:0
+msgid "Not chained"
+msgstr "Pas d'enchaînement"
+
+#. module: reason_types_moves
+#: constraint:stock.move:0
+#: constraint:stock.picking:0
+msgid "Wrong reason type for an OUT created from scratch."
+msgstr "Mauvais type de motif pour une livraison OUT créée à partir de rien."
+
+#. module: reason_types_moves
+#: model:stock.reason.type,name:reason_types_moves.reason_type_external_supply
+msgid "External Supply"
+msgstr "Approvisionnement externe"
+
+#. module: reason_types_moves
+#: view:stock.reason.type:0
+msgid "Availability"
+msgstr "Disponibilité"
+
+#. module: reason_types_moves
+#: code:addons/reason_types_moves/reason_type.py:144
+#, python-format
+msgid "Error"
+msgstr "Erreur"
+
+#. module: reason_types_moves
+#: model:ir.model,name:reason_types_moves.model_stock_return_picking
+msgid "Return Picking"
+msgstr "Retour de Piquages"
 
 #. module: reason_types_moves
 #: model:ir.module.module,description:reason_types_moves.module_meta_information
@@ -66,58 +208,48 @@ msgid "\n"
 "stock moves.\n"
 "    "
 msgstr "\n"
-"        This module aims in adding a reason type for all stock picking documents\n"
-"meaning all stock moves in order to make a specific and precise statistics on \n"
-"stock moves.\n"
-"    "
+"        Ce module vise à ajouter un type de raison pour tous les documents de prélèvement de stock.\n"
+"Ce qui signifie tous mouvements de stock de manière à faire des statistiques spécifiques et précises sur les mouvements de stock."
 
 #. module: reason_types_moves
-#: code:addons/reason_types_moves/reason_type.py:144
-#, python-format
-msgid "Error"
-msgstr "Error"
+#: field:stock.inventory.line,reason_type_id:0
+msgid "Adjustment type"
+msgstr "Type d'Ajustement"
 
 #. module: reason_types_moves
-#: model:stock.reason.type,name:reason_types_moves.reason_type_in_kind_donation
-msgid "In-Kind Donation"
-msgstr "In-Kind Donation"
+#: model:stock.reason.type,name:reason_types_moves.reason_type_scrap
+msgid "Scrap"
+msgstr "Rebut"
 
 #. module: reason_types_moves
-#: help:stock.location,is_replenishment:0
-msgid "Is True, the location could be used in replenishment rules"
-msgstr "Is True, the location could be used in replenishment rules"
+#: model:stock.reason.type,name:reason_types_moves.reason_type_damage
+msgid "Damage"
+msgstr "Endommagé"
 
 #. module: reason_types_moves
-#: model:stock.reason.type,name:reason_types_moves.reason_type_sample
-msgid "Sample"
-msgstr "Sample"
+#: model:stock.reason.type,name:reason_types_moves.reason_type_donation
+msgid "Donation (standard)"
+msgstr "Donation (normale)"
 
 #. module: reason_types_moves
-#: field:stock.reason.type,complete_name:0
-#: field:stock.reason.type,name:0
-msgid "Name"
-msgstr "Name"
+#: model:ir.model,name:reason_types_moves.model_stock_inventory_line
+msgid "Inventory Line"
+msgstr "Ligne d'Inventaire"
+
+#. module: reason_types_moves
+#: constraint:stock.location:0
+msgid "Quarantine Location can only have Quarantine Location or Views as parent location."
+msgstr "Zone \"Quarantaine\", on ne peut avoir de Zone \"Quarantaine ''  ou Vues qu'en tant que Zone \"Parent\"."
 
 #. module: reason_types_moves
 #: model:stock.reason.type,name:reason_types_moves.reason_type_loan
 msgid "Loan"
-msgstr "Loan"
+msgstr "Prêt"
 
 #. module: reason_types_moves
-#: code:addons/reason_types_moves/procurement.py:38
-#, python-format
-msgid "Please check the Quantity in Procurement Order(s), it should not be less than 1!"
-msgstr "Please check the Quantity in Procurement Order(s), it should not be less than 1!"
-
-#. module: reason_types_moves
-#: help:stock.move,not_chained:0
-msgid "If checked, the chaining move will not be run."
-msgstr "If checked, the chaining move will not be run."
-
-#. module: reason_types_moves
-#: constraint:stock.inventory.line:0
-msgid "You must assign a Batch Numbre which corresponds to Expiry Date Mandatory Products."
-msgstr "You must assign a Batch Numbre which corresponds to Expiry Date Mandatory Products."
+#: model:stock.reason.type,name:reason_types_moves.reason_type_return_from_unit
+msgid "Return from unit"
+msgstr "Retour de UdC"
 
 #. module: reason_types_moves
 #: model:ir.actions.act_window,name:reason_types_moves.action_reason_type_move
@@ -125,221 +257,106 @@ msgstr "You must assign a Batch Numbre which corresponds to Expiry Date Mandator
 #: model:ir.ui.menu,name:reason_types_moves.menu_reason_type_move
 #: view:stock.reason.type:0
 msgid "Reason Types Moves"
-msgstr "Reason Types Moves"
+msgstr "Raison des Types de Mouvements"
 
 #. module: reason_types_moves
-#: constraint:stock.move:0
-msgid "You must assign a batch number for this product."
-msgstr "You must assign a batch number for this product."
+#: model:stock.reason.type,name:reason_types_moves.reason_type_goods_return
+msgid "Goods Return"
+msgstr "Retour de marchandises"
 
 #. module: reason_types_moves
-#: model:stock.reason.type,name:reason_types_moves.reason_type_donation
-msgid "Donation (standard)"
-msgstr "Donation (standard)"
+#: model:stock.reason.type,name:reason_types_moves.reason_type_other
+msgid "Other"
+msgstr "Autre"
 
 #. module: reason_types_moves
-#: model:ir.model,name:reason_types_moves.model_stock_inventory
-#: model:ir.ui.menu,name:reason_types_moves.menu_configuration_inventory
-msgid "Inventory"
-msgstr "Inventory"
+#: code:addons/reason_types_moves/reason_type.py:620
+#: code:addons/reason_types_moves/reason_type.py:638
+#, python-format
+msgid "Bad operator !"
+msgstr "Mauvais opérateur !"
+
+#. module: reason_types_moves
+#: model:stock.reason.type,name:reason_types_moves.reason_type_expiry
+msgid "Expiry"
+msgstr "Expiration"
 
 #. module: reason_types_moves
 #: constraint:stock.inventory.line:0
 msgid "You must assign a Batch Number which corresponds to Batch Number Mandatory Products."
-msgstr "You must assign a Batch Number which corresponds to Batch Number Mandatory Products."
+msgstr "Vous devez attribuer un Numéro de Lot qui corresponde au Numéro de Lot Obligatoire des Produits."
+
+#. module: reason_types_moves
+#: help:stock.move,not_chained:0
+msgid "If checked, the chaining move will not be run."
+msgstr "Si cochée, l'enchaînement de mouvements ne ​​sera pas exécuté."
+
+#. module: reason_types_moves
+#: constraint:stock.inventory.line:0
+msgid "You must assign a Batch Numbre which corresponds to Expiry Date Mandatory Products."
+msgstr "Vous devez attribuer un Numéro de Lot qui corresponde à la Date d'Expiration Obligatoire des Produits."
+
+#. module: reason_types_moves
+#: constraint:stock.move:0
+msgid "You must assign a batch number for this product."
+msgstr "Vous devez mentionner un numéro de lot pour ce produit."
+
+#. module: reason_types_moves
+#: model:ir.actions.act_window,name:reason_types_moves.action_reason_type_move_admin_restrict
+#: model:ir.ui.menu,name:reason_types_moves.menu_reason_type_move_admin
+msgid "Reason Types Moves (Admin access)"
+msgstr "Raison des Types de Mouvements (accès Admin)"
 
 #. module: reason_types_moves
 #: view:stock.reason.type:0
 msgid "Reason Types Move"
-msgstr "Reason Types Move"
-
-#. module: reason_types_moves
-#: constraint:stock.picking:0
-msgid "You cannot validate this document because it contains a line with an inactive product"
-msgstr "You cannot validate this document because it contains a line with an inactive product"
-
-#. module: reason_types_moves
-#: field:stock.reason.type,internal_ok:0
-msgid "Available for internal picking ?"
-msgstr "Available for internal picking ?"
-
-#. module: reason_types_moves
-#: model:ir.module.module,shortdesc:reason_types_moves.module_meta_information
-msgid "MSF Modules"
-msgstr "MSF Modules"
-
-#. module: reason_types_moves
-#: code:addons/reason_types_moves/reason_type.py:144
-#, python-format
-msgid "You cannot delete a standard reason type move"
-msgstr "You cannot delete a standard reason type move"
-
-#. module: reason_types_moves
-#: constraint:stock.inventory.line:0
-#: constraint:stock.move:0
-msgid "Constraint error on Uom"
-msgstr "Constraint error on Uom"
-
-#. module: reason_types_moves
-#: field:stock.move,product_type:0
-msgid "Product type"
-msgstr "Product type"
-
-#. module: reason_types_moves
-#: constraint:stock.move:0
-msgid "You try to assign a lot which is not from the same product"
-msgstr "You try to assign a lot which is not from the same product"
-
-#. module: reason_types_moves
-#: constraint:stock.move:0
-msgid "You cannot select Service Location as Source Location."
-msgstr "You cannot select Service Location as Source Location."
-
-#. module: reason_types_moves
-#: field:stock.move,not_chained:0
-msgid "Not chained"
-msgstr "Not chained"
-
-#. module: reason_types_moves
-#: field:stock.reason.type,inventory_ok:0
-#: field:stock.reason.type,is_inventory:0
-msgid "Inventory type"
-msgstr "Inventory type"
-
-#. module: reason_types_moves
-#: constraint:stock.inventory:0
-msgid "You cannot confirm this stock inventory because it contains a line with an inactive product"
-msgstr "You cannot confirm this stock inventory because it contains a line with an inactive product"
-
-#. module: reason_types_moves
-#: field:stock.location,is_replenishment:0
-msgid "Is replenishment ?"
-msgstr "Is replenishment ?"
-
-#. module: reason_types_moves
-#: view:stock.move:0
-msgid "In Progress"
-msgstr "In Progress"
-
-#. module: reason_types_moves
-#: model:stock.reason.type,name:reason_types_moves.reason_type_kit
-msgid "Kit"
-msgstr "Kit"
-
-#. module: reason_types_moves
-#: selection:stock.move,product_type:0
-msgid "Stockable Product"
-msgstr "Stockable Product"
-
-#. module: reason_types_moves
-#: view:stock.reason.type:0
-msgid "Availability"
-msgstr "Availability"
-
-#. module: reason_types_moves
-#: model:ir.model,name:reason_types_moves.model_stock_return_picking
-msgid "Return Picking"
-msgstr "Return Picking"
-
-#. module: reason_types_moves
-#: field:stock.inventory.line,reason_type_id:0
-msgid "Adjustment type"
-msgstr "Adjustment type"
-
-#. module: reason_types_moves
-#: model:ir.model,name:reason_types_moves.model_stock_move
-msgid "Stock Move"
-msgstr "Stock Move"
-
-#. module: reason_types_moves
-#: help:stock.reason.type,inventory_ok:0
-#: help:stock.reason.type,is_inventory:0
-msgid "If checked, this reason type will be available in inventory line"
-msgstr "If checked, this reason type will be available in inventory line"
-
-#. module: reason_types_moves
-#: model:stock.reason.type,name:reason_types_moves.reason_type_deliver_partner
-msgid "Deliver Partner"
-msgstr "Deliver Partner"
-
-#. module: reason_types_moves
-#: code:addons/reason_types_moves/procurement.py:37
-#, python-format
-msgid "Data Insufficient !"
-msgstr "Data Insufficient !"
-
-#. module: reason_types_moves
-#: model:stock.reason.type,name:reason_types_moves.reason_type_goods_replacement
-msgid "Goods Replacement"
-msgstr "Goods Replacement"
-
-#. module: reason_types_moves
-#: field:stock.reason.type,level:0
-msgid "Level"
-msgstr "Level"
-
-#. module: reason_types_moves
-#: constraint:stock.location:0
-msgid "Quarantine Location can only have Quarantine Location or Views as parent location."
-msgstr "Quarantine Location can only have Quarantine Location or Views as parent location."
-
-#. module: reason_types_moves
-#: model:stock.reason.type,name:reason_types_moves.reason_type_internal_move
-msgid "Internal Move"
-msgstr "Internal Move"
-
-#. module: reason_types_moves
-#: model:ir.model,name:reason_types_moves.model_stock_inventory_line
-msgid "Inventory Line"
-msgstr "Inventory Line"
-
-#. module: reason_types_moves
-#: model:stock.reason.type,name:reason_types_moves.reason_type_stock_initialization
-msgid "Stock initialization"
-msgstr "Stock initialization"
-
-#. module: reason_types_moves
-#: selection:stock.move,product_type:0
-msgid "Non-Stockable"
-msgstr "Non-Stockable"
-
-#. module: reason_types_moves
-#: model:ir.model,name:reason_types_moves.model_stock_location
-msgid "Location"
-msgstr "Location"
-
-#. module: reason_types_moves
-#: field:stock.fill.inventory,reason_type_id:0
-#: field:stock.move,reason_type_id:0
-#: view:stock.picking:0
-#: field:stock.picking,reason_type_id:0
-msgid "Reason type"
-msgstr "Reason type"
-
-#. module: reason_types_moves
-#: view:stock.picking:0
-msgid "Expected Move Date"
-msgstr "Expected Move Date"
+msgstr "Type de Mouvement"
 
 #. module: reason_types_moves
 #: model:ir.model,name:reason_types_moves.model_stock_picking
 msgid "Picking List"
-msgstr "Picking List"
+msgstr "Liste de Piquage"
+
+#. module: reason_types_moves
+#: constraint:stock.inventory.line:0
+msgid "The selected product is neither Batch Number Mandatory nor Expiry Date Mandatory"
+msgstr "Le produit sélectionné n'a ni de Numéro de Lot obligatoire ni de Date d'Expiration obligatoire"
+
+#. module: reason_types_moves
+#: field:stock.reason.type,complete_name:0
+#: field:stock.reason.type,name:0
+msgid "Name"
+msgstr "Nom"
+
+#. module: reason_types_moves
+#: model:ir.model,name:reason_types_moves.model_procurement_order
+msgid "Procurement"
+msgstr "Approvisionnement"
+
+#. module: reason_types_moves
+#: model:stock.reason.type,name:reason_types_moves.reason_type_donation_expiry
+msgid "Donation before expiry"
+msgstr "Donation avant expiration"
+
+#. module: reason_types_moves
+#: view:stock.move:0
+msgid "Reason Type"
+msgstr "Raison - Type"
 
 #. module: reason_types_moves
 #: model:stock.reason.type,name:reason_types_moves.reason_type_loss
 msgid "Loss"
-msgstr "Loss"
+msgstr "Perte"
 
 #. module: reason_types_moves
-#: model:stock.reason.type,name:reason_types_moves.reason_type_discrepancy
-msgid "Discrepancy"
-msgstr "Discrepancy"
+#: field:stock.reason.type,parent_id:0
+msgid "Parent reason"
+msgstr "Raison Parent"
 
 #. module: reason_types_moves
-#: model:stock.reason.type,name:reason_types_moves.reason_type_external_supply
-msgid "External Supply"
-msgstr "External Supply"
+#: model:stock.reason.type,name:reason_types_moves.reason_type_internal_move
+msgid "Internal Move"
+msgstr "Mouvement interne"
 
 #. module: reason_types_moves
 #: field:stock.reason.type,code:0
@@ -347,107 +364,88 @@ msgid "Code"
 msgstr "Code"
 
 #. module: reason_types_moves
-#: view:stock.move:0
-#: view:stock.picking:0
-msgid "Closed"
-msgstr "Closed"
-
-#. module: reason_types_moves
-#: model:ir.model,name:reason_types_moves.model_stock_fill_inventory
-msgid "Import Inventory"
-msgstr "Import Inventory"
-
-#. module: reason_types_moves
-#: code:addons/reason_types_moves/reason_type.py:620
-#: code:addons/reason_types_moves/reason_type.py:638
-#, python-format
-msgid "Error !"
-msgstr "Error !"
-
-#. module: reason_types_moves
-#: constraint:stock.move:0
-#: constraint:stock.picking:0
-msgid "Wrong reason type for an OUT created from scratch."
-msgstr "Wrong reason type for an OUT created from scratch."
-
-#. module: reason_types_moves
 #: field:stock.reason.type,outgoing_ok:0
 msgid "Available for outgoing movements ?"
-msgstr "Available for outgoing movements ?"
-
-#. module: reason_types_moves
-#: model:stock.reason.type,name:reason_types_moves.reason_type_internal_supply
-msgid "Internal Supply"
-msgstr "Internal Supply"
-
-#. module: reason_types_moves
-#: model:stock.reason.type,name:reason_types_moves.reason_type_expiry
-msgid "Expiry"
-msgstr "Expiry"
-
-#. module: reason_types_moves
-#: constraint:stock.move:0
-msgid "You must assign an asset for this product."
-msgstr "You must assign an asset for this product."
-
-#. module: reason_types_moves
-#: field:stock.reason.type,parent_id:0
-msgid "Parent reason"
-msgstr "Parent reason"
-
-#. module: reason_types_moves
-#: field:stock.reason.type,incoming_ok:0
-msgid "Available for incoming shipment ?"
-msgstr "Available for incoming shipment ?"
-
-#. module: reason_types_moves
-#: constraint:stock.location:0
-msgid "You cannot define a quarantine location as chained location."
-msgstr "You cannot define a quarantine location as chained location."
-
-#. module: reason_types_moves
-#: model:ir.model,name:reason_types_moves.model_procurement_order
-msgid "Procurement"
-msgstr "Procurement"
-
-#. module: reason_types_moves
-#: model:stock.reason.type,name:reason_types_moves.reason_type_donation_expiry
-msgid "Donation before expiry"
-msgstr "Donation before expiry"
-
-#. module: reason_types_moves
-#: model:ir.actions.act_window,name:reason_types_moves.action_reason_type_move_admin_restrict
-#: model:ir.ui.menu,name:reason_types_moves.menu_reason_type_move_admin
-msgid "Reason Types Moves (Admin access)"
-msgstr "Reason Types Moves (Admin access)"
-
-#. module: reason_types_moves
-#: constraint:stock.inventory.line:0
-msgid "The selected product is neither Batch Number Mandatory nor Expiry Date Mandatory"
-msgstr "The selected product is neither Batch Number Mandatory nor Expiry Date Mandatory"
-
-#. module: reason_types_moves
-#: model:stock.reason.type,name:reason_types_moves.reason_type_scrap
-msgid "Scrap"
-msgstr "Scrap"
-
-#. module: reason_types_moves
-#: selection:stock.move,product_type:0
-msgid "Service with Reception"
-msgstr "Service with Reception"
-
-#. module: reason_types_moves
-#: model:stock.reason.type,name:reason_types_moves.reason_type_goods_return
-msgid "Goods Return"
-msgstr "Goods Return"
+msgstr "Disponible pour mouvements sortants ?"
 
 #. module: reason_types_moves
 #: model:stock.reason.type,name:reason_types_moves.reason_type_consumption_report
 msgid "Consumption Report"
-msgstr "Consumption Report"
+msgstr "Rapport de consommation"
 
 #. module: reason_types_moves
-#: view:stock.move:0
-msgid "Reason Type"
-msgstr "Reason Type"
+#: model:stock.reason.type,name:reason_types_moves.reason_type_goods_replacement
+msgid "Goods Replacement"
+msgstr "Remplacement de marchandises"
+
+#. module: reason_types_moves
+#: field:stock.fill.inventory,reason_type_id:0
+#: field:stock.move,reason_type_id:0
+#: view:stock.picking:0
+#: field:stock.picking,reason_type_id:0
+msgid "Reason type"
+msgstr "Type de raison"
+
+#. module: reason_types_moves
+#: code:addons/reason_types_moves/reason_type.py:144
+#, python-format
+msgid "You cannot delete a standard reason type move"
+msgstr "Vous ne pouvez pas supprimer un mouvement basé sur un type de motif standard"
+
+#. module: reason_types_moves
+#: selection:stock.move,product_type:0
+msgid "Non-Stockable"
+msgstr "Non-Stockable"
+
+#. module: reason_types_moves
+#: field:stock.reason.type,incoming_ok:0
+msgid "Available for incoming shipment ?"
+msgstr "Disponible pour envoi entrant ?"
+
+#. module: reason_types_moves
+#: model:stock.reason.type,name:reason_types_moves.reason_type_sample
+msgid "Sample"
+msgstr "Échantillon"
+
+#. module: reason_types_moves
+#: model:ir.model,name:reason_types_moves.model_stock_move
+msgid "Stock Move"
+msgstr "Mouvement de Stock"
+
+#. module: reason_types_moves
+#: model:ir.model,name:reason_types_moves.model_stock_location
+msgid "Location"
+msgstr "Zone"
+
+#. module: reason_types_moves
+#: model:stock.reason.type,name:reason_types_moves.reason_type_stock_initialization
+msgid "Stock initialization"
+msgstr "Stock initialization"
+
+#. module: reason_types_moves
+#: help:stock.reason.type,inventory_ok:0
+#: help:stock.reason.type,is_inventory:0
+msgid "If checked, this reason type will be available in inventory line"
+msgstr "Si cochée, ce type de raison sera disponible sous la ligne d'inventaire"
+
+#. module: reason_types_moves
+#: model:stock.reason.type,name:reason_types_moves.reason_type_in_kind_donation
+msgid "In-Kind Donation"
+msgstr "Donation en nature"
+
+#. module: reason_types_moves
+#: field:stock.reason.type,level:0
+msgid "Level"
+msgstr "Niveau"
+
+#. module: reason_types_moves
+#: model:stock.reason.type,name:reason_types_moves.reason_type_kit
+msgid "Kit"
+msgstr "Kit"
+
+#. module: reason_types_moves
+#: model:ir.model,name:reason_types_moves.model_stock_inventory
+#: model:ir.ui.menu,name:reason_types_moves.menu_configuration_inventory
+msgid "Inventory"
+msgstr "Inventaire"
 

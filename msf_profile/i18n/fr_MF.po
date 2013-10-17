@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.0.3\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2013-10-17 07:42+0000\n"
-"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,9 +16,45 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: msf_profile
-#: constraint:res.users:0
-msgid "The chosen company is not in the allowed companies for this user"
-msgstr "The chosen company is not in the allowed companies for this user"
+#: model:ir.actions.act_window,name:msf_profile.action_open_user_access_wizard
+#: model:ir.ui.menu,name:msf_profile.menu_user_access_wizard
+msgid "Import User Access from File"
+msgstr "Accès de l'utilisateur à l'importation depuis le fichier"
+
+#. module: msf_profile
+#: view:res.users:0
+#: view:user.access.results:0
+msgid "Users"
+msgstr "Utilisateurs"
+
+#. module: msf_profile
+#: selection:user.access.results.groups.line,type_user_access_results_line:0
+#: selection:user.access.results.menus.line,type_user_access_results_line:0
+#: selection:user.access.results.users.line,type_user_access_results_line:0
+msgid "Created"
+msgstr "Créé"
+
+#. module: msf_profile
+#: model:ir.model,name:msf_profile.model_base_setup_company
+msgid "base.setup.company"
+msgstr "base.setup.company"
+
+#. module: msf_profile
+#: model:ir.model,name:msf_profile.model_ir_model_data
+msgid "ir.model.data"
+msgstr "ir.model.data"
+
+#. module: msf_profile
+#: sql_constraint:res.groups:0
+msgid "The name of the group must be unique !"
+msgstr "Le nom du groupe doit être unique !"
+
+#. module: msf_profile
+#: selection:user.access.results.groups.line,type_user_access_results_line:0
+#: selection:user.access.results.menus.line,type_user_access_results_line:0
+#: selection:user.access.results.users.line,type_user_access_results_line:0
+msgid "Deactivated"
+msgstr "Désactivé"
 
 #. module: msf_profile
 #: model:ir.model,name:msf_profile.model_res_users
@@ -26,43 +62,16 @@ msgid "res.users"
 msgstr "res.users"
 
 #. module: msf_profile
-#: model:ir.actions.act_window,name:msf_profile.action_open_user_access_wizard
-#: model:ir.ui.menu,name:msf_profile.menu_user_access_wizard
-msgid "Import User Access from File"
-msgstr "Import User Access from File"
+#: model:ir.model,name:msf_profile.model_res_groups
+msgid "Access Groups"
+msgstr "Accès Groupes"
 
 #. module: msf_profile
-#: view:res.users:0
-msgid "Show inactive"
-msgstr "Show inactive"
-
-#. module: msf_profile
-#: model:ir.ui.menu,name:msf_profile.menu_access_rights_root
-msgid "Access Rights"
-msgstr "Access Rights"
-
-#. module: msf_profile
-#: selection:user.access.results.groups.line,type_user_access_results_line:0
-#: selection:user.access.results.menus.line,type_user_access_results_line:0
-#: selection:user.access.results.users.line,type_user_access_results_line:0
-msgid "Activated"
-msgstr "Activated"
-
-#. module: msf_profile
-#: view:res.users:0
-#: view:user.access.results:0
-msgid "Users"
-msgstr "Users"
-
-#. module: msf_profile
-#: view:user.access.results:0
-msgid "Close"
-msgstr "Close"
-
-#. module: msf_profile
-#: view:res.users:0
-msgid "Address"
-msgstr "Address"
+#: selection:user.access.results.groups.line,model_user_access_results_line:0
+#: selection:user.access.results.menus.line,model_user_access_results_line:0
+#: selection:user.access.results.users.line,model_user_access_results_line:0
+msgid "Menu"
+msgstr "Menu"
 
 #. module: msf_profile
 #: model:ir.model,name:msf_profile.model_user_access_results_groups_line
@@ -70,59 +79,45 @@ msgid "user.access.results.groups.line"
 msgstr "user.access.results.groups.line"
 
 #. module: msf_profile
-#: field:user.access.results.groups.line,value_user_access_results_line:0
-#: field:user.access.results.menus.line,value_user_access_results_line:0
-#: field:user.access.results.users.line,value_user_access_results_line:0
-msgid "Value"
-msgstr "Value"
+#: code:addons/msf_profile/user_access_configurator.py:183
+#, python-format
+msgid "No File Selected."
+msgstr "Aucun fichier sélectionné."
 
 #. module: msf_profile
-#: view:res.groups:0
-msgid "Active"
-msgstr "Active"
+#: view:res.users:0
+msgid "Company"
+msgstr "Société"
 
 #. module: msf_profile
-#: field:user.access.results.groups.line,wizard_id_user_access_results_line:0
-#: field:user.access.results.menus.line,wizard_id_user_access_results_line:0
-#: field:user.access.results.users.line,wizard_id_user_access_results_line:0
-msgid "Wizard"
-msgstr "Wizard"
+#: model:ir.module.module,shortdesc:msf_profile.module_meta_information
+msgid "MSF Modules"
+msgstr "MSF - Modules"
 
 #. module: msf_profile
-#: view:user.access.configurator:0
-msgid "User Access File"
-msgstr "User Access File"
+#: view:res.users:0
+msgid "Address"
+msgstr "Adresse"
 
 #. module: msf_profile
-#: model:ir.model,name:msf_profile.model_account_installer
-msgid "account.installer"
-msgstr "account.installer"
+#: field:user.access.configurator,file_to_import_uac:0
+msgid "File to import"
+msgstr "Fichier à importer"
 
 #. module: msf_profile
-#: model:ir.module.module,description:msf_profile.module_meta_information
-msgid "\n"
-"        Modules for Unifield\n"
-"    "
-msgstr "\n"
-"        Modules for Unifield\n"
-"    "
-
-#. module: msf_profile
-#: selection:user.access.results.groups.line,model_user_access_results_line:0
-#: selection:user.access.results.menus.line,model_user_access_results_line:0
-#: selection:user.access.results.users.line,model_user_access_results_line:0
-msgid "User"
-msgstr "User"
-
-#. module: msf_profile
-#: sql_constraint:res.users:0
-msgid "You can not have two users with the same login !"
-msgstr "You can not have two users with the same login !"
+#: model:ir.model,name:msf_profile.model_res_config_view
+msgid "res.config.view"
+msgstr "res.config.view"
 
 #. module: msf_profile
 #: model:ir.model,name:msf_profile.model_ir_model_access
 msgid "ir.model.access"
 msgstr "ir.model.access"
+
+#. module: msf_profile
+#: field:user.access.configurator,number_of_non_group_columns_uac:0
+msgid "Number of columns not containing group name"
+msgstr "Nombre de colonnes ne contenant pas de nom de groupe"
 
 #. module: msf_profile
 #: code:addons/msf_profile/user_access_configurator.py:822
@@ -131,17 +126,9 @@ msgid "You cannot remove or inactive the Administration / Access Rights group"
 msgstr "You cannot remove or inactive the Administration / Access Rights group"
 
 #. module: msf_profile
-#: view:res.groups:0
-#: view:user.access.results:0
-msgid "Groups"
-msgstr "Groups"
-
-#. module: msf_profile
-#: field:user.access.results.groups.line,name:0
-#: field:user.access.results.menus.line,name:0
-#: field:user.access.results.users.line,name:0
-msgid "Name"
-msgstr "Name"
+#: model:ir.ui.menu,name:msf_profile.menu_access_rights_root
+msgid "Access Rights"
+msgstr "Droits d'Accès"
 
 #. module: msf_profile
 #: code:addons/msf_profile/user_access_configurator.py:825
@@ -155,111 +142,114 @@ msgid "user.access.results.users.line"
 msgstr "user.access.results.users.line"
 
 #. module: msf_profile
-#: selection:user.access.results.groups.line,model_user_access_results_line:0
-#: selection:user.access.results.menus.line,model_user_access_results_line:0
-#: selection:user.access.results.users.line,model_user_access_results_line:0
-msgid "Group"
-msgstr "Group"
-
-#. module: msf_profile
-#: model:ir.model,name:msf_profile.model_user_access_configurator
-msgid "user.access.configurator"
-msgstr "user.access.configurator"
-
-#. module: msf_profile
-#: model:ir.model,name:msf_profile.model_purchase_double_validation_installer
-msgid "purchase.double.validation.installer"
-msgstr "purchase.double.validation.installer"
-
-#. module: msf_profile
-#: model:ir.model,name:msf_profile.model_res_config_view
-msgid "res.config.view"
-msgstr "res.config.view"
-
-#. module: msf_profile
-#: view:user.access.configurator:0
-msgid "Process User Rights"
-msgstr "Process User Rights"
-
-#. module: msf_profile
-#: model:ir.model,name:msf_profile.model_base_setup_company
-msgid "base.setup.company"
-msgstr "base.setup.company"
-
-#. module: msf_profile
 #: view:res.groups:0
 msgid "Only inactive"
 msgstr "Only inactive"
 
 #. module: msf_profile
+#: selection:user.access.results.groups.line,model_user_access_results_line:0
+#: selection:user.access.results.menus.line,model_user_access_results_line:0
+#: selection:user.access.results.users.line,model_user_access_results_line:0
+msgid "User"
+msgstr "Utilisateur"
+
+#. module: msf_profile
+#: selection:user.access.results.groups.line,type_user_access_results_line:0
+#: selection:user.access.results.menus.line,type_user_access_results_line:0
+#: selection:user.access.results.users.line,type_user_access_results_line:0
+msgid "Activated"
+msgstr "Activé"
+
+#. module: msf_profile
+#: sql_constraint:ir.model.data:0
+msgid "You cannot have multiple records with the same id for the same module !"
+msgstr "Vous ne pouvez pas avoir plusieurs enregistrements avec le même identifiant pour le même module !"
+
+#. module: msf_profile
+#: selection:user.access.results.groups.line,type_user_access_results_line:0
+#: selection:user.access.results.menus.line,type_user_access_results_line:0
+#: selection:user.access.results.users.line,type_user_access_results_line:0
+msgid "Error"
+msgstr "Erreur"
+
+#. module: msf_profile
+#: field:user.access.results,user_ids_user_access_results:0
+msgid "Users Info"
+msgstr "Infos sur utilisateurs"
+
+#. module: msf_profile
+#: model:ir.module.module,description:msf_profile.module_meta_information
+msgid "\n"
+"        Modules for Unifield\n"
+"    "
+msgstr "\n"
+"        Modules pour Unifield\n"
+"    "
+
+#. module: msf_profile
+#: field:user.access.results.groups.line,value_user_access_results_line:0
+#: field:user.access.results.menus.line,value_user_access_results_line:0
+#: field:user.access.results.users.line,value_user_access_results_line:0
+msgid "Value"
+msgstr "Valeur"
+
+#. module: msf_profile
+#: view:res.groups:0
+#: view:user.access.results:0
+msgid "Groups"
+msgstr "Groupes"
+
+#. module: msf_profile
+#: field:user.access.results.groups.line,name:0
+#: field:user.access.results.menus.line,name:0
+#: field:user.access.results.users.line,name:0
+msgid "Name"
+msgstr "Nom"
+
+#. module: msf_profile
+#: field:res.groups,visible_res_groups:0
+msgid "Visible"
+msgstr "Visible"
+
+#. module: msf_profile
+#: view:user.access.results:0
+msgid "Import Access Rights Results"
+msgstr "Résultats de droits d'accès à importation"
+
+#. module: msf_profile
 #: field:user.access.results,menu_ids_user_access_results:0
 msgid "Menus Info"
-msgstr "Menus Info"
-
-#. module: msf_profile
-#: selection:user.access.results.groups.line,type_user_access_results_line:0
-#: selection:user.access.results.menus.line,type_user_access_results_line:0
-#: selection:user.access.results.users.line,type_user_access_results_line:0
-msgid "Created"
-msgstr "Created"
-
-#. module: msf_profile
-#: selection:user.access.results.groups.line,type_user_access_results_line:0
-#: selection:user.access.results.menus.line,type_user_access_results_line:0
-#: selection:user.access.results.users.line,type_user_access_results_line:0
-msgid "Deactivated"
-msgstr "Deactivated"
+msgstr "Info sur les menus"
 
 #. module: msf_profile
 #: field:user.access.results,group_ids_user_access_results:0
 msgid "Groups Info"
-msgstr "Groups Info"
+msgstr "Infos sur groupes"
 
 #. module: msf_profile
-#: field:user.access.configurator,number_of_non_group_columns_uac:0
-msgid "Number of columns not containing group name"
-msgstr "Number of columns not containing group name"
+#: model:ir.actions.report.xml,name:msf_profile.report_ir_model_overview_ods
+msgid "Model Overview (ODS)"
+msgstr "Vue d'ensemble du modèle (ODS)"
 
 #. module: msf_profile
-#: code:addons/msf_profile/user_access_configurator.py:183
-#: selection:user.access.results.groups.line,type_user_access_results_line:0
-#: selection:user.access.results.menus.line,type_user_access_results_line:0
-#: selection:user.access.results.users.line,type_user_access_results_line:0
-#, python-format
-msgid "Warning"
-msgstr "Warning"
+#: model:ir.model,name:msf_profile.model_account_installer
+msgid "account.installer"
+msgstr "account.installer"
 
 #. module: msf_profile
-#: model:product.uom.categ,name:msf_profile.uom_category_percentage
-msgid "Percentage"
-msgstr "Percentage"
+#: sql_constraint:res.users:0
+msgid "You can not have two users with the same login !"
+msgstr "Vous ne pouvez pas avoir deux utilisateurs avec le nom d'identification !"
+
+#. module: msf_profile
+#: view:user.access.configurator:0
+msgid "Cancel"
+msgstr "Annuler"
 
 #. module: msf_profile
 #: view:user.access.configurator:0
 msgid "Import Access Rights"
-msgstr "Import Access Rights"
-
-#. module: msf_profile
-#: help:user.access.configurator,file_to_import_uac:0
-msgid "You can use the template of the export for the format that you need to use. \n"
-" The file should be in XML Spreadsheet 2003 format. \n"
-" The columns should be in this order : Product Code*, Product Description*, Initial Average Cost, Location*, Batch, Expiry Date, Quantity"
-msgstr "You can use the template of the export for the format that you need to use. \n"
-" The file should be in XML Spreadsheet 2003 format. \n"
-" The columns should be in this order : Product Code*, Product Description*, Initial Average Cost, Location*, Batch, Expiry Date, Quantity"
-
-#. module: msf_profile
-#: field:user.access.results.groups.line,model_user_access_results_line:0
-#: field:user.access.results.menus.line,model_user_access_results_line:0
-#: field:user.access.results.users.line,model_user_access_results_line:0
-msgid "Model"
-msgstr "Model"
-
-#. module: msf_profile
-#: view:user.access.configurator:0
-#: view:user.access.results:0
-msgid "Actions"
-msgstr "Actions"
+msgstr "Droits d'accès à importation"
 
 #. module: msf_profile
 #: model:ir.model,name:msf_profile.model_user_access_results
@@ -267,9 +257,10 @@ msgid "user.access.results"
 msgstr "user.access.results"
 
 #. module: msf_profile
-#: model:ir.model,name:msf_profile.model_res_groups
-msgid "Access Groups"
-msgstr "Access Groups"
+#: code:addons/msf_profile/user_access_configurator.py:607
+#, python-format
+msgid "Results from User Rights Import"
+msgstr "Résultats de l'importation des droits de l'utilisateur"
 
 #. module: msf_profile
 #: model:ir.model,name:msf_profile.model_user_access_results_menus_line
@@ -284,45 +275,80 @@ msgid "Type"
 msgstr "Type"
 
 #. module: msf_profile
-#: field:res.groups,visible_res_groups:0
-msgid "Visible"
-msgstr "Visible"
-
-#. module: msf_profile
-#: sql_constraint:res.groups:0
-msgid "The name of the group must be unique !"
-msgstr "The name of the group must be unique !"
-
-#. module: msf_profile
-#: model:ir.actions.report.xml,name:msf_profile.report_ir_model_overview_ods
-msgid "Model Overview (ODS)"
-msgstr "Model Overview (ODS)"
-
-#. module: msf_profile
-#: sql_constraint:ir.model.data:0
-msgid "You cannot have multiple records with the same id for the same module !"
-msgstr "You cannot have multiple records with the same id for the same module !"
-
-#. module: msf_profile
-#: field:res.groups,from_file_import_res_groups:0
-msgid "From file Import"
-msgstr "From file Import"
-
-#. module: msf_profile
-#: code:addons/msf_profile/user_access_configurator.py:607
+#: code:addons/msf_profile/user_access_configurator.py:183
+#: selection:user.access.results.groups.line,type_user_access_results_line:0
+#: selection:user.access.results.menus.line,type_user_access_results_line:0
+#: selection:user.access.results.users.line,type_user_access_results_line:0
 #, python-format
-msgid "Results from User Rights Import"
-msgstr "Results from User Rights Import"
+msgid "Warning"
+msgstr "Avertissement"
+
+#. module: msf_profile
+#: model:ir.model,name:msf_profile.model_user_access_configurator
+msgid "user.access.configurator"
+msgstr "user.access.configurator"
+
+#. module: msf_profile
+#: view:user.access.results:0
+msgid "Close"
+msgstr "Fermer"
+
+#. module: msf_profile
+#: view:user.access.configurator:0
+msgid "User Access File"
+msgstr "Fichier d'accès utilisateur"
+
+#. module: msf_profile
+#: field:user.access.results.groups.line,wizard_id_user_access_results_line:0
+#: field:user.access.results.menus.line,wizard_id_user_access_results_line:0
+#: field:user.access.results.users.line,wizard_id_user_access_results_line:0
+msgid "Wizard"
+msgstr "Assistant"
+
+#. module: msf_profile
+#: model:ir.model,name:msf_profile.model_purchase_double_validation_installer
+msgid "purchase.double.validation.installer"
+msgstr "purchase.double.validation.installer"
 
 #. module: msf_profile
 #: view:res.users:0
-msgid "Company"
-msgstr "Company"
+msgid "Show inactive"
+msgstr "Montrer inactifs"
+
+#. module: msf_profile
+#: view:res.groups:0
+msgid "Active"
+msgstr "Actif"
 
 #. module: msf_profile
 #: model:product.uom,name:msf_profile.uom_percentage
 msgid "%"
 msgstr "%"
+
+#. module: msf_profile
+#: field:user.access.results.groups.line,model_user_access_results_line:0
+#: field:user.access.results.menus.line,model_user_access_results_line:0
+#: field:user.access.results.users.line,model_user_access_results_line:0
+msgid "Model"
+msgstr "Modèle"
+
+#. module: msf_profile
+#: code:addons/msf_profile/user_access_configurator.py:822
+#: code:addons/msf_profile/user_access_configurator.py:825
+#: code:addons/msf_profile/user_access_configurator.py:828
+#, python-format
+msgid "Error"
+msgstr "Error"
+
+#. module: msf_profile
+#: view:user.access.configurator:0
+msgid "Process User Rights"
+msgstr "Traiter les droits de l'utilisateur"
+
+#. module: msf_profile
+#: constraint:res.users:0
+msgid "The chosen company is not in the allowed companies for this user"
+msgstr "La société choisie ne fait pas partie des sociétés autorisées pour cet utilisateur."
 
 #. module: msf_profile
 #: code:addons/msf_profile/user_access_configurator.py:828
@@ -331,51 +357,29 @@ msgid "You cannot remove or inactive the Useability / Extended View group"
 msgstr "You cannot remove or inactive the Useability / Extended View group"
 
 #. module: msf_profile
-#: code:addons/msf_profile/user_access_configurator.py:822
-#: code:addons/msf_profile/user_access_configurator.py:825
-#: code:addons/msf_profile/user_access_configurator.py:828
-#: selection:user.access.results.groups.line,type_user_access_results_line:0
-#: selection:user.access.results.menus.line,type_user_access_results_line:0
-#: selection:user.access.results.users.line,type_user_access_results_line:0
-#, python-format
-msgid "Error"
-msgstr "Error"
+#: help:user.access.configurator,file_to_import_uac:0
+msgid "You can use the template of the export for the format that you need to use. \n"
+" The file should be in XML Spreadsheet 2003 format. \n"
+" The columns should be in this order : Product Code*, Product Description*, Initial Average Cost, Location*, Batch, Expiry Date, Quantity"
+msgstr "Vous pouvez utiliser le modèle de l'exportation pour le format que vous devez utiliser. \n"
+" Le fichier devrait être au format Tableur XML 2003. \n"
+" Les colonnes devraient être dans l'ordre suivant : Code Produit*, Description du Produit*, Coût moyen initial, Lieu*, Lot, Date d'expiration, Quantité"
 
 #. module: msf_profile
-#: model:ir.module.module,shortdesc:msf_profile.module_meta_information
-msgid "MSF Modules"
-msgstr "MSF Modules"
-
-#. module: msf_profile
-#: code:addons/msf_profile/user_access_configurator.py:183
-#, python-format
-msgid "No File Selected."
-msgstr "No File Selected."
+#: field:res.groups,from_file_import_res_groups:0
+msgid "From file Import"
+msgstr "De l'importation de fichier"
 
 #. module: msf_profile
 #: view:user.access.configurator:0
-msgid "Cancel"
-msgstr "Cancel"
-
-#. module: msf_profile
-#: model:ir.model,name:msf_profile.model_ir_model_data
-msgid "ir.model.data"
-msgstr "ir.model.data"
-
-#. module: msf_profile
-#: field:user.access.results,user_ids_user_access_results:0
-msgid "Users Info"
-msgstr "Users Info"
-
-#. module: msf_profile
-#: field:user.access.configurator,file_to_import_uac:0
-msgid "File to import"
-msgstr "File to import"
-
-#. module: msf_profile
 #: view:user.access.results:0
-msgid "Import Access Rights Results"
-msgstr "Import Access Rights Results"
+msgid "Actions"
+msgstr "Actions"
+
+#. module: msf_profile
+#: model:product.uom.categ,name:msf_profile.uom_category_percentage
+msgid "Percentage"
+msgstr "Pourcentage"
 
 #. module: msf_profile
 #: view:user.access.results:0
@@ -386,6 +390,6 @@ msgstr "Menus"
 #: selection:user.access.results.groups.line,model_user_access_results_line:0
 #: selection:user.access.results.menus.line,model_user_access_results_line:0
 #: selection:user.access.results.users.line,model_user_access_results_line:0
-msgid "Menu"
-msgstr "Menu"
+msgid "Group"
+msgstr "Groupe"
 

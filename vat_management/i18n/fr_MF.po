@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.0.3\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2013-10-17 07:42+0000\n"
-"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,12 +16,12 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: vat_management
-#: model:ir.module.module,description:vat_management.module_meta_information
-msgid "This module add somes elements to manage VAT @ MSF"
-msgstr "This module add somes elements to manage VAT @ MSF"
-
-#. module: vat_management
 #: model:ir.module.module,shortdesc:vat_management.module_meta_information
 msgid "MSF VAT Management"
-msgstr "MSF VAT Management"
+msgstr "Gestion de la TVA MSF "
+
+#. module: vat_management
+#: model:ir.module.module,description:vat_management.module_meta_information
+msgid "This module add somes elements to manage VAT @ MSF"
+msgstr "Ce Module ajoute quelques éléments pour gérer la TVA chez MSF"
 

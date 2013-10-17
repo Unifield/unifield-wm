@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.0.3\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2013-10-17 07:42+0000\n"
-"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,304 +16,246 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: stock_schedule
-#: field:stock.frequence,start_date:0
-msgid "Start date"
-msgstr "Start date"
-
-#. module: stock_schedule
-#: field:stock.frequence,monthly_day04:0
-msgid "4th"
-msgstr "4th"
+#: view:stock.frequence:0
+msgid "On the :"
+msgstr "Sur le :"
 
 #. module: stock_schedule
 #: view:stock.frequence:0
-msgid "Daily configuration"
-msgstr "Daily configuration"
+msgid "day(s)"
+msgstr "jour (s)"
 
 #. module: stock_schedule
 #: view:stock.frequence:0
-msgid "year(s)"
-msgstr "year(s)"
+msgid "Periodicity"
+msgstr "Périodicité"
 
 #. module: stock_schedule
-#: field:stock.frequence,monthly_choose_freq:0
-#: field:stock.frequence,yearly_choose_freq:0
-msgid "Choose frequence"
-msgstr "Choose frequence"
+#: field:stock.frequence,monthly_day30:0
+msgid "30th"
+msgstr "30e"
 
 #. module: stock_schedule
-#: view:stock.frequence:0
-msgid "On :"
-msgstr "On :"
+#: selection:stock.frequence,monthly_choose_day:0
+#: field:stock.frequence,weekly_wednesday_ok:0
+#: selection:stock.frequence,yearly_choose_day:0
+msgid "Wednesday"
+msgstr "Mercredi"
+
+#. module: stock_schedule
+#: code:addons/stock_schedule/schedule.py:112
+#, python-format
+msgid "You should make a choice for the Yearly configuration"
+msgstr "Veuillez faire un choix pour la Configuration Annuelle !"
+
+#. module: stock_schedule
+#: constraint:product.product:0
+msgid "Error: Invalid ean code"
+msgstr "Erreur: code EAN invalide"
+
+#. module: stock_schedule
+#: constraint:product.product:0
+msgid "You must select on order procurement method for Service with Reception products."
+msgstr "Vous devez sélectionner sur la commande le mode d'approvisionnement pour le Service  avec Réception de produits."
 
 #. module: stock_schedule
 #: code:addons/stock_schedule/schedule.py:581
 #, python-format
 msgid "You have selected February, the 29th as shedule date. For non leap years, the action will be run on March, the 1st !"
-msgstr "You have selected February, the 29th as shedule date. For non leap years, the action will be run on March, the 1st !"
-
-#. module: stock_schedule
-#: selection:stock.frequence,yearly_choose_month:0
-#: selection:stock.frequence,yearly_choose_month_freq:0
-msgid "November"
-msgstr "November"
+msgstr "Vous avez sélectionné en Février la date du 29 comme date de planning. Pour les années non bisextilles, l'action se fera le 1r Mars.  !"
 
 #. module: stock_schedule
 #: selection:stock.frequence,monthly_choose_freq:0
 #: selection:stock.frequence,yearly_choose_freq:0
 msgid "The last"
-msgstr "The last"
+msgstr "Le dernier"
 
 #. module: stock_schedule
-#: code:addons/stock_schedule/schedule.py:108
-#, python-format
-msgid "You should select at least one day of the month !"
-msgstr "You should select at least one day of the month !"
+#: view:stock.frequence:0
+msgid "On :"
+msgstr "Sur :"
 
 #. module: stock_schedule
-#: selection:stock.frequence,name:0
-msgid "Daily"
-msgstr "Daily"
+#: selection:stock.frequence,monthly_choose_freq:0
+#: selection:stock.frequence,yearly_choose_freq:0
+msgid "The fourth"
+msgstr "Le quatrième"
 
 #. module: stock_schedule
-#: selection:stock.frequence,monthly_choose_day:0
-#: field:stock.frequence,weekly_sunday_ok:0
-#: selection:stock.frequence,yearly_choose_day:0
-msgid "Sunday"
-msgstr "Sunday"
-
-#. module: stock_schedule
-#: field:stock.frequence,monthly_day08:0
-msgid "8th"
-msgstr "8th"
+#: model:ir.actions.act_window,name:stock_schedule.action_stock_frequence_new
+msgid "Stock Frequence"
+msgstr "Stock - Fréquence"
 
 #. module: stock_schedule
 #: code:addons/stock_schedule/schedule.py:580
 #, python-format
 msgid "Warning"
-msgstr "Warning"
+msgstr "Avertissement"
 
 #. module: stock_schedule
-#: field:stock.frequence,monthly_day24:0
-msgid "24th"
-msgstr "24th"
+#: code:addons/stock_schedule/schedule.py:391
+#, python-format
+msgid "Every %d day(s)"
+msgstr "Chaque %d Jour(s)"
 
 #. module: stock_schedule
-#: model:ir.model,name:stock_schedule.model_stock_frequence
-msgid "Stock scheduler"
-msgstr "Stock scheduler"
+#: view:stock.frequence:0
+msgid "week(s)"
+msgstr "Semaine(s)"
+
+#. module: stock_schedule
+#: model:ir.module.module,shortdesc:stock_schedule.module_meta_information
+msgid "Stock Replenishment Schedule"
+msgstr "Planning de Réapprovisionnement de Stock"
+
+#. module: stock_schedule
+#: code:addons/stock_schedule/schedule.py:434
+#, python-format
+msgid " - Every %s month(s)"
+msgstr " - Chaque %s mois"
+
+#. module: stock_schedule
+#: code:addons/stock_schedule/schedule.py:445
+#, python-format
+msgid "All %s, the %s%s"
+msgstr "Tous les %s %s en %s"
+
+#. module: stock_schedule
+#: field:stock.frequence,next_date:0
+msgid "Next date"
+msgstr "Prochaine date"
+
+#. module: stock_schedule
+#: field:stock.frequence,monthly_day28:0
+msgid "28th"
+msgstr "28e"
+
+#. module: stock_schedule
+#: selection:stock.frequence,name:0
+msgid "Yearly"
+msgstr "Annuellement"
+
+#. module: stock_schedule
+#: selection:stock.frequence,name:0
+msgid "Weekly"
+msgstr "Hebdomadaire"
+
+#. module: stock_schedule
+#: selection:stock.frequence,yearly_choose_month:0
+#: selection:stock.frequence,yearly_choose_month_freq:0
+msgid "July"
+msgstr "Juillet"
+
+#. module: stock_schedule
+#: selection:stock.frequence,recurrence_type:0
+msgid "Week(s)"
+msgstr "Semaine(s)"
 
 #. module: stock_schedule
 #: code:addons/stock_schedule/schedule.py:408
 #, python-format
 msgid "Every %d week(s) on %s%s%s%s%s%s%s"
-msgstr "Every %d week(s) on %s%s%s%s%s%s%s"
-
-#. module: stock_schedule
-#: selection:stock.frequence,monthly_choose_freq:0
-#: selection:stock.frequence,yearly_choose_freq:0
-msgid "The third"
-msgstr "The third"
-
-#. module: stock_schedule
-#: selection:stock.frequence,monthly_choose_day:0
-#: field:stock.frequence,weekly_friday_ok:0
-#: selection:stock.frequence,yearly_choose_day:0
-msgid "Friday"
-msgstr "Friday"
-
-#. module: stock_schedule
-#: selection:stock.frequence,monthly_choose_day:0
-#: field:stock.frequence,weekly_monday_ok:0
-#: selection:stock.frequence,yearly_choose_day:0
-msgid "Monday"
-msgstr "Monday"
-
-#. module: stock_schedule
-#: selection:stock.frequence,monthly_choose_freq:0
-#: selection:stock.frequence,yearly_choose_freq:0
-msgid "The second"
-msgstr "The second"
-
-#. module: stock_schedule
-#: view:stock.frequence:0
-msgid "week(s)"
-msgstr "week(s)"
-
-#. module: stock_schedule
-#: code:addons/stock_schedule/schedule.py:415
-#, python-format
-msgid "%s %s - Every %s month(s)"
-msgstr "%s %s - Every %s month(s)"
-
-#. module: stock_schedule
-#: field:stock.frequence,yearly_choose_month:0
-#: field:stock.frequence,yearly_choose_month_freq:0
-msgid "Choose a month"
-msgstr "Choose a month"
-
-#. module: stock_schedule
-#: field:stock.frequence,recurrence_ok:0
-msgid "Reccurence"
-msgstr "Reccurence"
-
-#. module: stock_schedule
-#: field:stock.frequence,monthly_day05:0
-msgid "5th"
-msgstr "5th"
-
-#. module: stock_schedule
-#: field:stock.frequence,monthly_repeating_ok:0
-msgid "Repeatition"
-msgstr "Repeatition"
+msgstr "Toutes les %d semaines sur %s%s%s%s%s%s%s"
 
 #. module: stock_schedule
 #: selection:stock.frequence,yearly_choose_month:0
 #: selection:stock.frequence,yearly_choose_month_freq:0
-msgid "March"
-msgstr "March"
-
-#. module: stock_schedule
-#: field:stock.frequence,yearly_choose_day:0
-msgid "Choose day"
-msgstr "Choose day"
-
-#. module: stock_schedule
-#: field:stock.frequence,monthly_day02:0
-msgid "2nd"
-msgstr "2nd"
-
-#. module: stock_schedule
-#: field:stock.frequence,yearly_date_ok:0
-msgid "Date"
-msgstr "Date"
-
-#. module: stock_schedule
-#: code:addons/stock_schedule/schedule.py:451
-#, python-format
-msgid " - Every %s year(s)"
-msgstr " - Every %s year(s)"
-
-#. module: stock_schedule
-#: field:stock.frequence,last_run:0
-msgid "Last run"
-msgstr "Last run"
-
-#. module: stock_schedule
-#: view:stock.frequence:0
-msgid "Weekly configuration"
-msgstr "Weekly configuration"
-
-#. module: stock_schedule
-#: field:stock.frequence,monthly_day17:0
-msgid "17th"
-msgstr "17th"
-
-#. module: stock_schedule
-#: field:stock.frequence,monthly_day18:0
-msgid "18th"
-msgstr "18th"
-
-#. module: stock_schedule
-#: constraint:product.product:0
-msgid "Constraint error on Kit Product."
-msgstr "Constraint error on Kit Product."
-
-#. module: stock_schedule
-#: constraint:product.product:0
-msgid "If you select \"Non-stockable\" as product type then you have to select \"Make to order\" as procurement method"
-msgstr "If you select \"Non-stockable\" as product type then you have to select \"Make to order\" as procurement method"
-
-#. module: stock_schedule
-#: view:stock.frequence:0
-msgid "Yearly configuration"
-msgstr "Yearly configuration"
-
-#. module: stock_schedule
-#: field:stock.frequence,monthly_day16:0
-msgid "16th"
-msgstr "16th"
-
-#. module: stock_schedule
-#: field:stock.frequence,monthly_day12:0
-msgid "12th"
-msgstr "12th"
-
-#. module: stock_schedule
-#: model:ir.ui.menu,name:stock_schedule.stock_automatic_procurements_menu
-msgid "Replenishment Rules"
-msgstr "Replenishment Rules"
-
-#. module: stock_schedule
-#: model:ir.module.module,shortdesc:stock_schedule.module_meta_information
-msgid "Stock Replenishment Schedule"
-msgstr "Stock Replenishment Schedule"
-
-#. module: stock_schedule
-#: field:stock.frequence,monthly_day20:0
-msgid "20th"
-msgstr "20th"
-
-#. module: stock_schedule
-#: view:stock.frequence:0
-msgid "Replenishment scheduling"
-msgstr "Replenishment scheduling"
+msgid "September"
+msgstr "Septembre"
 
 #. module: stock_schedule
 #: field:stock.frequence,monthly_choose_day:0
 msgid "Choose days"
-msgstr "Choose days"
+msgstr "Choisir des jours"
 
 #. module: stock_schedule
-#: constraint:product.product:0
-msgid "Warning! GMDN code must be digits!"
-msgstr "Warning! GMDN code must be digits!"
+#: field:stock.frequence,daily_frequency:0
+#: field:stock.frequence,monthly_frequency:0
+#: field:stock.frequence,weekly_frequency:0
+#: field:stock.frequence,yearly_frequency:0
+msgid "Every"
+msgstr "Chaque"
 
 #. module: stock_schedule
-#: field:stock.frequence,monthly_day31:0
-msgid "31st"
-msgstr "31st"
+#: field:stock.frequence,monthly_day18:0
+msgid "18th"
+msgstr "18e"
 
 #. module: stock_schedule
-#: field:stock.frequence,monthly_day21:0
-msgid "21st"
-msgstr "21st"
+#: selection:stock.frequence,recurrence_type:0
+msgid "Year(s)"
+msgstr "Année(s)"
 
 #. module: stock_schedule
-#: field:stock.frequence,recurrence_type:0
-msgid "Type of reccurence"
-msgstr "Type of reccurence"
+#: code:addons/stock_schedule/schedule.py:108
+#, python-format
+msgid "You should select at least one day of the month !"
+msgstr "Vous devriez sélectionner au minimum un jour par mois! "
 
 #. module: stock_schedule
-#: field:stock.frequence,monthly_day01:0
-msgid "1st"
-msgstr "1st"
-
-#. module: stock_schedule
-#: field:stock.frequence,next_date:0
-msgid "Next date"
-msgstr "Next date"
-
-#. module: stock_schedule
-#: field:stock.frequence,monthly_day10:0
-msgid "10th"
-msgstr "10th"
-
-#. module: stock_schedule
-#: view:stock.frequence:0
-msgid "month(s)"
-msgstr "month(s)"
+#: field:stock.frequence,monthly_day02:0
+msgid "2nd"
+msgstr "2e"
 
 #. module: stock_schedule
 #: selection:stock.frequence,yearly_choose_month:0
 #: selection:stock.frequence,yearly_choose_month_freq:0
-msgid "August"
-msgstr "August"
+msgid "January"
+msgstr "Janvier"
 
 #. module: stock_schedule
-#: field:stock.frequence,monthly_day09:0
-msgid "9th"
-msgstr "9th"
+#: view:stock.frequence:0
+msgid "Daily configuration"
+msgstr "Configuration Journalière"
+
+#. module: stock_schedule
+#: selection:stock.frequence,recurrence_type:0
+msgid "Day(s)"
+msgstr "Jour(s)"
+
+#. module: stock_schedule
+#: field:stock.frequence,monthly_day04:0
+msgid "4th"
+msgstr "4e"
+
+#. module: stock_schedule
+#: view:stock.frequence:0
+msgid "Repeat Options"
+msgstr "Répéter Options"
+
+#. module: stock_schedule
+#: selection:stock.frequence,monthly_choose_day:0
+#: field:stock.frequence,weekly_thursday_ok:0
+#: selection:stock.frequence,yearly_choose_day:0
+msgid "Thursday"
+msgstr "Jeudi"
+
+#. module: stock_schedule
+#: selection:stock.frequence,monthly_choose_freq:0
+#: selection:stock.frequence,yearly_choose_freq:0
+msgid "The fifth"
+msgstr "Le cinquième"
+
+#. module: stock_schedule
+#: field:stock.frequence,start_date:0
+msgid "Start date"
+msgstr "Date de Début"
+
+#. module: stock_schedule
+#: field:stock.frequence,yearly_day_ok:0
+msgid "Days"
+msgstr "Jours"
+
+#. module: stock_schedule
+#: field:stock.frequence,monthly_day15:0
+msgid "15th"
+msgstr "15e"
+
+#. module: stock_schedule
+#: field:stock.frequence,monthly_choose_freq:0
+#: field:stock.frequence,yearly_choose_freq:0
+msgid "Choose frequence"
+msgstr "Choisire une fréquence"
 
 #. module: stock_schedule
 #: code:addons/stock_schedule/schedule.py:90
@@ -329,232 +271,63 @@ msgstr "9th"
 #: code:addons/stock_schedule/schedule.py:586
 #, python-format
 msgid "Error"
-msgstr "Error"
+msgstr "Erreur"
 
 #. module: stock_schedule
-#: code:addons/stock_schedule/schedule.py:112
-#, python-format
-msgid "You should make a choice for the Yearly configuration"
-msgstr "You should make a choice for the Yearly configuration"
+#: field:stock.frequence,monthly_day20:0
+msgid "20th"
+msgstr "20e"
 
 #. module: stock_schedule
-#: field:stock.frequence,calculated_end_date:0
-#: field:stock.frequence,end_date_ok:0
-msgid "End date"
-msgstr "End date"
-
-#. module: stock_schedule
-#: selection:stock.frequence,yearly_choose_month:0
-#: selection:stock.frequence,yearly_choose_month_freq:0
-msgid "February"
-msgstr "February"
+#: field:stock.frequence,yearly_day:0
+msgid "Day"
+msgstr "Jour"
 
 #. module: stock_schedule
 #: view:stock.frequence:0
-msgid "Monthly configuration"
-msgstr "Monthly configuration"
+msgid "month(s)"
+msgstr "mois"
 
 #. module: stock_schedule
-#: field:stock.frequence,recurrence_nb:0
-msgid "Continuing for"
-msgstr "Continuing for"
-
-#. module: stock_schedule
-#: constraint:product.product:0
-msgid "You must select on order procurement method for Service with Reception products."
-msgstr "You must select on order procurement method for Service with Reception products."
-
-#. module: stock_schedule
-#: view:stock.frequence:0
-#: field:stock.frequence,no_end_date:0
-msgid "No end date"
-msgstr "No end date"
-
-#. module: stock_schedule
-#: selection:stock.frequence,yearly_choose_month:0
-#: selection:stock.frequence,yearly_choose_month_freq:0
-msgid "July"
-msgstr "July"
-
-#. module: stock_schedule
-#: field:stock.frequence,monthly_day26:0
-msgid "26th"
-msgstr "26th"
-
-#. module: stock_schedule
-#: selection:stock.frequence,name:0
-msgid "Weekly"
-msgstr "Weekly"
-
-#. module: stock_schedule
-#: constraint:product.product:0
-msgid "Error: Invalid ean code"
-msgstr "Error: Invalid ean code"
-
-#. module: stock_schedule
-#: field:stock.frequence,monthly_day25:0
-msgid "25th"
-msgstr "25th"
-
-#. module: stock_schedule
-#: code:addons/stock_schedule/schedule.py:117
-#, python-format
-msgid "You should make a choice for the Replenishment repeating !"
-msgstr "You should make a choice for the Replenishment repeating !"
-
-#. module: stock_schedule
-#: field:stock.frequence,monthly_day19:0
-msgid "19th"
-msgstr "19th"
-
-#. module: stock_schedule
-#: selection:stock.frequence,monthly_choose_freq:0
-#: selection:stock.frequence,yearly_choose_freq:0
-msgid "The first"
-msgstr "The first"
-
-#. module: stock_schedule
-#: selection:stock.frequence,recurrence_type:0
-msgid "Week(s)"
-msgstr "Week(s)"
-
-#. module: stock_schedule
-#: view:stock.frequence:0
-msgid "Validate the frequency"
-msgstr "Validate the frequency"
-
-#. module: stock_schedule
-#: selection:stock.frequence,yearly_choose_month:0
-#: selection:stock.frequence,yearly_choose_month_freq:0
-msgid "June"
-msgstr "June"
-
-#. module: stock_schedule
-#: field:stock.frequence,monthly_day11:0
-msgid "11th"
-msgstr "11th"
-
-#. module: stock_schedule
-#: field:stock.frequence,monthly_day15:0
-msgid "15th"
-msgstr "15th"
-
-#. module: stock_schedule
-#: field:stock.frequence,monthly_day29:0
-msgid "29th"
-msgstr "29th"
-
-#. module: stock_schedule
-#: code:addons/stock_schedule/schedule.py:450
-#, python-format
-msgid "All %s %s in %s"
-msgstr "All %s %s in %s"
-
-#. module: stock_schedule
-#: field:stock.frequence,monthly_day22:0
-msgid "22nd"
-msgstr "22nd"
+#: field:stock.frequence,monthly_day05:0
+msgid "5th"
+msgstr "5e"
 
 #. module: stock_schedule
 #: field:stock.frequence,monthly_day07:0
 msgid "7th"
-msgstr "7th"
+msgstr "7e"
 
 #. module: stock_schedule
-#: selection:stock.frequence,yearly_choose_month:0
-#: selection:stock.frequence,yearly_choose_month_freq:0
-msgid "January"
-msgstr "January"
+#: selection:stock.frequence,name:0
+msgid "Daily"
+msgstr "Journalier"
 
 #. module: stock_schedule
-#: field:stock.frequence,monthly_day03:0
-msgid "3rd"
-msgstr "3rd"
+#: field:product.product,fnct_categ_id:0
+msgid "Category"
+msgstr "Catégorie"
+
+#. module: stock_schedule
+#: field:stock.frequence,recurrence_nb:0
+msgid "Continuing for"
+msgstr "Continue pour"
 
 #. module: stock_schedule
 #: field:stock.frequence,monthly_day27:0
 msgid "27th"
-msgstr "27th"
+msgstr "27e"
 
 #. module: stock_schedule
-#: sql_constraint:product.product:0
-msgid "The \"Product Code\" must be unique"
-msgstr "The \"Product Code\" must be unique"
-
-#. module: stock_schedule
-#: code:addons/stock_schedule/schedule.py:417
-#, python-format
-msgid "On "
-msgstr "On "
-
-#. module: stock_schedule
-#: code:addons/stock_schedule/schedule.py:434
-#, python-format
-msgid " - Every %s month(s)"
-msgstr " - Every %s month(s)"
-
-#. module: stock_schedule
-#: field:stock.frequence,monthly_day23:0
-msgid "23rd"
-msgstr "23rd"
-
-#. module: stock_schedule
-#: field:stock.frequence,monthly_day30:0
-msgid "30th"
-msgstr "30th"
-
-#. module: stock_schedule
-#: field:stock.frequence,monthly_one_day:0
-msgid "One day"
-msgstr "One day"
+#: constraint:product.product:0
+msgid "Constraint error on Kit Product."
+msgstr "Erreur de Contrainte sur le produit Kit"
 
 #. module: stock_schedule
 #: selection:stock.frequence,yearly_choose_month:0
 #: selection:stock.frequence,yearly_choose_month_freq:0
-msgid "May"
-msgstr "May"
-
-#. module: stock_schedule
-#: code:addons/stock_schedule/schedule.py:445
-#, python-format
-msgid "All %s, the %s%s"
-msgstr "All %s, the %s%s"
-
-#. module: stock_schedule
-#: model:ir.model,name:stock_schedule.model_product_product
-msgid "Product"
-msgstr "Product"
-
-#. module: stock_schedule
-#: field:stock.frequence,monthly_day13:0
-msgid "13th"
-msgstr "13th"
-
-#. module: stock_schedule
-#: field:stock.frequence,yearly_day_ok:0
-msgid "Days"
-msgstr "Days"
-
-#. module: stock_schedule
-#: code:addons/stock_schedule/schedule.py:183
-#, python-format
-msgid "You should pass a integer to the _compute_next_daily_date"
-msgstr "You should pass a integer to the _compute_next_daily_date"
-
-#. module: stock_schedule
-#: selection:stock.frequence,monthly_choose_day:0
-#: field:stock.frequence,weekly_wednesday_ok:0
-#: selection:stock.frequence,yearly_choose_day:0
-msgid "Wednesday"
-msgstr "Wednesday"
-
-#. module: stock_schedule
-#: field:stock.frequence,daily_frequency:0
-#: field:stock.frequence,monthly_frequency:0
-#: field:stock.frequence,weekly_frequency:0
-#: field:stock.frequence,yearly_frequency:0
-msgid "Every"
-msgstr "Every"
+msgid "October"
+msgstr "Octobre"
 
 #. module: stock_schedule
 #: model:ir.module.module,description:stock_schedule.module_meta_information
@@ -563,52 +336,111 @@ msgid "\n"
 "        automatic dates to replenishment\n"
 "    "
 msgstr "\n"
-"        This module aims to add an object to schedule\n"
-"        automatic dates to replenishment\n"
+"        Ce module vise à ajouter un objet pour planifier des dates automatiques de réapprovisionnement\n"
 "    "
 
 #. module: stock_schedule
-#: field:stock.frequence,monthly_day06:0
-msgid "6th"
-msgstr "6th"
+#: field:stock.frequence,monthly_day10:0
+msgid "10th"
+msgstr "10e"
 
 #. module: stock_schedule
-#: selection:stock.frequence,recurrence_type:0
-msgid "Year(s)"
-msgstr "Year(s)"
+#: code:addons/stock_schedule/schedule.py:415
+#, python-format
+msgid "%s %s - Every %s month(s)"
+msgstr "%s %s - Chaque %s mois"
+
+#. module: stock_schedule
+#: selection:stock.frequence,name:0
+msgid "Monthly"
+msgstr "Mensuelle"
+
+#. module: stock_schedule
+#: field:stock.frequence,monthly_day29:0
+msgid "29th"
+msgstr "29e"
+
+#. module: stock_schedule
+#: field:stock.frequence,yearly_choose_month:0
+#: field:stock.frequence,yearly_choose_month_freq:0
+msgid "Choose a month"
+msgstr "Choisir un mois"
+
+#. module: stock_schedule
+#: field:stock.frequence,yearly_choose_day:0
+msgid "Choose day"
+msgstr "Choisir un jour"
+
+#. module: stock_schedule
+#: field:stock.frequence,monthly_repeating_ok:0
+msgid "Repeatition"
+msgstr "Répétition"
+
+#. module: stock_schedule
+#: field:stock.frequence,monthly_day11:0
+msgid "11th"
+msgstr "11e"
+
+#. module: stock_schedule
+#: field:stock.frequence,monthly_day22:0
+msgid "22nd"
+msgstr "22e"
+
+#. module: stock_schedule
+#: selection:stock.frequence,yearly_choose_month:0
+#: selection:stock.frequence,yearly_choose_month_freq:0
+msgid "February"
+msgstr "Février"
+
+#. module: stock_schedule
+#: code:addons/stock_schedule/schedule.py:90
+#: code:addons/stock_schedule/schedule.py:216
+#, python-format
+msgid "You should choose at least one day of week !"
+msgstr "Vous devriez sélectionner au minimum un jour par semaine !"
+
+#. module: stock_schedule
+#: field:stock.frequence,yearly_date_ok:0
+msgid "Date"
+msgstr "Date"
+
+#. module: stock_schedule
+#: field:stock.frequence,monthly_one_day:0
+msgid "One day"
+msgstr "Un jour"
+
+#. module: stock_schedule
+#: field:stock.frequence,recurrence_type:0
+msgid "Type of reccurence"
+msgstr "Type de réccurence"
+
+#. module: stock_schedule
+#: model:ir.model,name:stock_schedule.model_stock_frequence
+msgid "Stock scheduler"
+msgstr "Plannificateur Stock "
 
 #. module: stock_schedule
 #: view:stock.frequence:0
-msgid "In : "
-msgstr "In : "
+msgid "Monthly configuration"
+msgstr "Configuration Mensuelle"
+
+#. module: stock_schedule
+#: selection:stock.frequence,yearly_choose_month:0
+#: selection:stock.frequence,yearly_choose_month_freq:0
+msgid "December"
+msgstr "Décembre"
+
+#. module: stock_schedule
+#: view:stock.frequence:0
+msgid "Weekly configuration"
+msgstr "Configuration Hebdomadaire"
 
 #. module: stock_schedule
 #: selection:stock.frequence,monthly_choose_day:0
 #: field:stock.frequence,weekly_tuesday_ok:0
 #: selection:stock.frequence,yearly_choose_day:0
 msgid "Tuesday"
-msgstr "Tuesday"
-
-#. module: stock_schedule
-#: view:stock.frequence:0
-msgid "day(s)"
-msgstr "day(s)"
-
-#. module: stock_schedule
-#: field:stock.frequence,end_date:0
-msgid "Until"
-msgstr "Until"
-
-#. module: stock_schedule
-#: field:stock.frequence,yearly_day:0
-msgid "Day"
-msgstr "Day"
-
-#. module: stock_schedule
-#: selection:stock.frequence,yearly_choose_month:0
-#: selection:stock.frequence,yearly_choose_month_freq:0
-msgid "September"
-msgstr "September"
+msgstr "Mardi"
 
 #. module: stock_schedule
 #: code:addons/stock_schedule/schedule.py:205
@@ -616,97 +448,64 @@ msgstr "September"
 #: code:addons/stock_schedule/schedule.py:307
 #, python-format
 msgid "You should pass a integer to the _compute_next_weekly_date"
-msgstr "You should pass a integer to the _compute_next_weekly_date"
-
-#. module: stock_schedule
-#: view:stock.frequence:0
-msgid "Periodicity"
-msgstr "Periodicity"
-
-#. module: stock_schedule
-#: selection:stock.frequence,monthly_choose_day:0
-#: field:stock.frequence,weekly_thursday_ok:0
-#: selection:stock.frequence,yearly_choose_day:0
-msgid "Thursday"
-msgstr "Thursday"
-
-#. module: stock_schedule
-#: selection:stock.frequence,monthly_choose_freq:0
-#: selection:stock.frequence,yearly_choose_freq:0
-msgid "The fourth"
-msgstr "The fourth"
+msgstr "Vous devriez passer un entier to the _compute_next_weekly_date"
 
 #. module: stock_schedule
 #: field:stock.frequence,monthly_day14:0
 msgid "14th"
-msgstr "14th"
+msgstr "14e"
 
 #. module: stock_schedule
-#: selection:stock.frequence,name:0
-msgid "Monthly"
-msgstr "Monthly"
+#: field:stock.frequence,monthly_day26:0
+msgid "26th"
+msgstr "26e"
 
 #. module: stock_schedule
-#: code:addons/stock_schedule/schedule.py:94
-#, python-format
-msgid "You should make a choice for the Monthly configuration"
-msgstr "You should make a choice for the Monthly configuration"
+#: field:stock.frequence,last_run:0
+msgid "Last run"
+msgstr "Dernière exécution"
 
 #. module: stock_schedule
 #: selection:stock.frequence,recurrence_type:0
 msgid "Month(s)"
-msgstr "Month(s)"
+msgstr "Mois"
 
 #. module: stock_schedule
 #: selection:stock.frequence,monthly_choose_day:0
 #: field:stock.frequence,weekly_saturday_ok:0
 #: selection:stock.frequence,yearly_choose_day:0
 msgid "Saturday"
-msgstr "Saturday"
+msgstr "Samedi"
+
+#. module: stock_schedule
+#: constraint:product.product:0
+msgid "If you select \"Non-stockable\" as product type then you have to select \"Make to order\" as procurement method"
+msgstr "Si vous sélectionnez \"Non stockable\" comme type de produit, vous devez sélectionner \"Faire sur commande\" comme méthode d'acquisition"
 
 #. module: stock_schedule
 #: view:stock.frequence:0
-msgid "Repeat Options"
-msgstr "Repeat Options"
+#: field:stock.frequence,daily_frequency_ok:0
+#: field:stock.frequence,name:0
+msgid "Frequence"
+msgstr "Fréquence"
 
 #. module: stock_schedule
-#: selection:stock.frequence,yearly_choose_month:0
-#: selection:stock.frequence,yearly_choose_month_freq:0
-msgid "April"
-msgstr "April"
+#: field:stock.frequence,monthly_day12:0
+msgid "12th"
+msgstr "12e"
 
 #. module: stock_schedule
-#: field:product.product,fnct_categ_id:0
-msgid "Category"
-msgstr "Category"
+#: selection:stock.frequence,monthly_choose_day:0
+#: field:stock.frequence,weekly_friday_ok:0
+#: selection:stock.frequence,yearly_choose_day:0
+msgid "Friday"
+msgstr "Vendredi"
 
 #. module: stock_schedule
-#: selection:stock.frequence,name:0
-msgid "Yearly"
-msgstr "Yearly"
-
-#. module: stock_schedule
-#: model:ir.actions.act_window,name:stock_schedule.action_stock_frequence_new
-msgid "Stock Frequence"
-msgstr "Stock Frequence"
-
-#. module: stock_schedule
-#: code:addons/stock_schedule/schedule.py:391
+#: code:addons/stock_schedule/schedule.py:183
 #, python-format
-msgid "Every %d day(s)"
-msgstr "Every %d day(s)"
-
-#. module: stock_schedule
-#: selection:stock.frequence,monthly_choose_freq:0
-#: selection:stock.frequence,yearly_choose_freq:0
-msgid "The fifth"
-msgstr "The fifth"
-
-#. module: stock_schedule
-#: selection:stock.frequence,yearly_choose_month:0
-#: selection:stock.frequence,yearly_choose_month_freq:0
-msgid "October"
-msgstr "October"
+msgid "You should pass a integer to the _compute_next_daily_date"
+msgstr "Vous devriez passer un entier to the _compute_next_daily_date"
 
 #. module: stock_schedule
 #: code:addons/stock_schedule/schedule.py:587
@@ -715,37 +514,237 @@ msgid "The entered number is not a valid number of day"
 msgstr "The entered number is not a valid number of day"
 
 #. module: stock_schedule
-#: code:addons/stock_schedule/schedule.py:90
-#: code:addons/stock_schedule/schedule.py:216
-#, python-format
-msgid "You should choose at least one day of week !"
-msgstr "You should choose at least one day of week !"
+#: field:stock.frequence,monthly_day25:0
+msgid "25th"
+msgstr "25e"
 
 #. module: stock_schedule
-#: field:stock.frequence,monthly_day28:0
-msgid "28th"
-msgstr "28th"
+#: field:stock.frequence,monthly_day08:0
+msgid "8th"
+msgstr "8e"
 
 #. module: stock_schedule
-#: selection:stock.frequence,recurrence_type:0
-msgid "Day(s)"
-msgstr "Day(s)"
+#: view:stock.frequence:0
+msgid "Replenishment scheduling"
+msgstr "Planning de Réapprovisionnement"
 
 #. module: stock_schedule
 #: selection:stock.frequence,yearly_choose_month:0
 #: selection:stock.frequence,yearly_choose_month_freq:0
-msgid "December"
-msgstr "December"
+msgid "November"
+msgstr "Novembre"
+
+#. module: stock_schedule
+#: selection:stock.frequence,monthly_choose_freq:0
+#: selection:stock.frequence,yearly_choose_freq:0
+msgid "The third"
+msgstr "Le troisième"
 
 #. module: stock_schedule
 #: view:stock.frequence:0
-msgid "On the :"
-msgstr "On the :"
+msgid "year(s)"
+msgstr "année(s)"
 
 #. module: stock_schedule
 #: view:stock.frequence:0
-#: field:stock.frequence,daily_frequency_ok:0
-#: field:stock.frequence,name:0
-msgid "Frequence"
-msgstr "Frequence"
+msgid "In : "
+msgstr "Dans : "
+
+#. module: stock_schedule
+#: field:stock.frequence,calculated_end_date:0
+#: field:stock.frequence,end_date_ok:0
+msgid "End date"
+msgstr "Date de Fin"
+
+#. module: stock_schedule
+#: constraint:product.product:0
+msgid "Warning! GMDN code must be digits!"
+msgstr "Avertissement! Le code  GMDN doit être en chiffres!"
+
+#. module: stock_schedule
+#: field:stock.frequence,monthly_day21:0
+msgid "21st"
+msgstr "21e"
+
+#. module: stock_schedule
+#: field:stock.frequence,monthly_day24:0
+msgid "24th"
+msgstr "24e"
+
+#. module: stock_schedule
+#: model:ir.ui.menu,name:stock_schedule.stock_automatic_procurements_menu
+msgid "Replenishment Rules"
+msgstr "Règles de Réapprovisionnement"
+
+#. module: stock_schedule
+#: selection:stock.frequence,monthly_choose_day:0
+#: field:stock.frequence,weekly_monday_ok:0
+#: selection:stock.frequence,yearly_choose_day:0
+msgid "Monday"
+msgstr "Lundi"
+
+#. module: stock_schedule
+#: field:stock.frequence,monthly_day03:0
+msgid "3rd"
+msgstr "3e"
+
+#. module: stock_schedule
+#: code:addons/stock_schedule/schedule.py:94
+#, python-format
+msgid "You should make a choice for the Monthly configuration"
+msgstr "Veuillez faire un choix pour la Configuration Mensuelle !"
+
+#. module: stock_schedule
+#: code:addons/stock_schedule/schedule.py:117
+#, python-format
+msgid "You should make a choice for the Replenishment repeating !"
+msgstr "Veuillez faire un choix pour la Répétition du Réapprovisionnement !"
+
+#. module: stock_schedule
+#: code:addons/stock_schedule/schedule.py:417
+#, python-format
+msgid "On "
+msgstr "Allumé "
+
+#. module: stock_schedule
+#: field:stock.frequence,monthly_day06:0
+msgid "6th"
+msgstr "6e"
+
+#. module: stock_schedule
+#: selection:stock.frequence,monthly_choose_day:0
+#: field:stock.frequence,weekly_sunday_ok:0
+#: selection:stock.frequence,yearly_choose_day:0
+msgid "Sunday"
+msgstr "Dimanche"
+
+#. module: stock_schedule
+#: field:stock.frequence,monthly_day01:0
+msgid "1st"
+msgstr "1er"
+
+#. module: stock_schedule
+#: selection:stock.frequence,yearly_choose_month:0
+#: selection:stock.frequence,yearly_choose_month_freq:0
+msgid "May"
+msgstr "Mai"
+
+#. module: stock_schedule
+#: field:stock.frequence,end_date:0
+msgid "Until"
+msgstr "Jusqu'à"
+
+#. module: stock_schedule
+#: selection:stock.frequence,yearly_choose_month:0
+#: selection:stock.frequence,yearly_choose_month_freq:0
+msgid "April"
+msgstr "Avril"
+
+#. module: stock_schedule
+#: selection:stock.frequence,yearly_choose_month:0
+#: selection:stock.frequence,yearly_choose_month_freq:0
+msgid "August"
+msgstr "Août"
+
+#. module: stock_schedule
+#: sql_constraint:product.product:0
+msgid "The \"Product Code\" must be unique"
+msgstr "Le \"Code produit\" doit être unique"
+
+#. module: stock_schedule
+#: view:stock.frequence:0
+msgid "Validate the frequency"
+msgstr "Valider la fréquence"
+
+#. module: stock_schedule
+#: field:stock.frequence,monthly_day13:0
+msgid "13th"
+msgstr "13e"
+
+#. module: stock_schedule
+#: view:stock.frequence:0
+msgid "Yearly configuration"
+msgstr "Configuration Annuelle"
+
+#. module: stock_schedule
+#: field:stock.frequence,monthly_day09:0
+msgid "9th"
+msgstr "9e"
+
+#. module: stock_schedule
+#: code:addons/stock_schedule/schedule.py:450
+#, python-format
+msgid "All %s %s in %s"
+msgstr "Tous les %s %s en %s"
+
+#. module: stock_schedule
+#: field:stock.frequence,monthly_day23:0
+msgid "23rd"
+msgstr "23e"
+
+#. module: stock_schedule
+#: selection:stock.frequence,monthly_choose_freq:0
+#: selection:stock.frequence,yearly_choose_freq:0
+msgid "The first"
+msgstr "Le premier"
+
+#. module: stock_schedule
+#: model:ir.model,name:stock_schedule.model_product_product
+msgid "Product"
+msgstr "Produit"
+
+#. module: stock_schedule
+#: view:stock.frequence:0
+#: field:stock.frequence,no_end_date:0
+msgid "No end date"
+msgstr "Pas de Date de Fin"
+
+#. module: stock_schedule
+#: field:stock.frequence,recurrence_ok:0
+msgid "Reccurence"
+msgstr "Réccurence"
+
+#. module: stock_schedule
+#: field:stock.frequence,monthly_day16:0
+msgid "16th"
+msgstr "16e"
+
+#. module: stock_schedule
+#: code:addons/stock_schedule/schedule.py:451
+#, python-format
+msgid " - Every %s year(s)"
+msgstr " - Chaque %s année(s)"
+
+#. module: stock_schedule
+#: field:stock.frequence,monthly_day31:0
+msgid "31st"
+msgstr "31e"
+
+#. module: stock_schedule
+#: selection:stock.frequence,yearly_choose_month:0
+#: selection:stock.frequence,yearly_choose_month_freq:0
+msgid "March"
+msgstr "Mars"
+
+#. module: stock_schedule
+#: field:stock.frequence,monthly_day17:0
+msgid "17th"
+msgstr "17e"
+
+#. module: stock_schedule
+#: selection:stock.frequence,yearly_choose_month:0
+#: selection:stock.frequence,yearly_choose_month_freq:0
+msgid "June"
+msgstr "Juin"
+
+#. module: stock_schedule
+#: field:stock.frequence,monthly_day19:0
+msgid "19th"
+msgstr "19e"
+
+#. module: stock_schedule
+#: selection:stock.frequence,monthly_choose_freq:0
+#: selection:stock.frequence,yearly_choose_freq:0
+msgid "The second"
+msgstr "Le deuxième"
 

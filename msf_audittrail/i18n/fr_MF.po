@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.0.3\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2013-10-17 07:42+0000\n"
-"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,51 +16,97 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: msf_audittrail
-#: model:ir.model,name:msf_audittrail.model_account_invoice_line
-msgid "Invoice Line"
-msgstr "Invoice Line"
+#: field:audittrail.rule,name:0
+msgid "Rule Name"
+msgstr "Nom de la Règle"
 
 #. module: msf_audittrail
-#: model:ir.actions.report.xml,name:msf_audittrail.report_log_line
-msgid "Log lines"
-msgstr "Log lines"
+#: model:ir.model,name:msf_audittrail.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Ligne Commande Terrain"
 
 #. module: msf_audittrail
-#: model:ir.model,name:msf_audittrail.model_audittrail_rule
-msgid "Audittrail Rule"
-msgstr "Audittrail Rule"
-
-#. module: msf_audittrail
-#: constraint:stock.move:0
-msgid "You cannot select Service Location as Source Location."
-msgstr "You cannot select Service Location as Source Location."
-
-#. module: msf_audittrail
-#: constraint:account.analytic.account:0
-msgid "You can't delete an account which has this destination as default"
-msgstr "You can't delete an account which has this destination as default"
-
-#. module: msf_audittrail
-#: view:audittrail.log.line:0
+#: field:audittrail.log.line,user_id:0
 #: report:msf.log.line:0
-msgid "Old value"
-msgstr "Old value"
+msgid "User"
+msgstr "Utilisateur"
+
+#. module: msf_audittrail
+#: model:ir.model,name:msf_audittrail.model_sale_order
+msgid "Sales Order"
+msgstr "Commande de Terrain"
+
+#. module: msf_audittrail
+#: constraint:purchase.order:0
+msgid "If you tick the box \"cross docking\", you cannot have an other location than \"Cross docking\""
+msgstr "Si vous cochez la case \"transbordement\", vous ne pouvez pas avoir d'autre lieu que \"Transbordement\""
+
+#. module: msf_audittrail
+#: constraint:stock.picking:0
+msgid "You cannot validate this document because it contains a line with an inactive product"
+msgstr "Vous ne pouvez pas valider ce document car il contient des lignes avec un produit inactif"
+
+#. module: msf_audittrail
+#: view:audittrail.rule:0
+msgid "AuditTrail Rules"
+msgstr "Piste d'Audit - Règles"
+
+#. module: msf_audittrail
+#: constraint:sale.order.line:0
+msgid "You must select on order procurement method for Service with Reception products."
+msgstr "Vous devez sélectionner sur la commande le mode d'approvisionnement pour le Service  avec Réception de produits."
 
 #. module: msf_audittrail
 #: field:audittrail.log.sequence,res_id:0
 msgid "Res Id"
-msgstr "Res Id"
+msgstr "Res Identifiant"
 
 #. module: msf_audittrail
-#: help:audittrail.rule,log_write:0
-msgid "Select this if you want to keep track of modification on any record of the object of this rule"
-msgstr "Select this if you want to keep track of modification on any record of the object of this rule"
+#: model:ir.model,name:msf_audittrail.model_purchase_order
+msgid "Purchase Order"
+msgstr "Bon de Commande"
 
 #. module: msf_audittrail
-#: view:audittrail.log.line:0
+#: field:audittrail.rule,action_id:0
+msgid "Action ID"
+msgstr "Action Identité"
+
+#. module: msf_audittrail
+#: field:audittrail.log.line,object_id:0
+#: field:audittrail.rule,object_id:0
+msgid "Object"
+msgstr "Objet"
+
+#. module: msf_audittrail
+#: constraint:purchase.order:0
+msgid "You cannot validate this purchase order because it contains a line with an inactive product"
+msgstr "Vous ne pouvez pas valider ce bon de commande, car il contient une ligne avec des produits inactifs."
+
+#. module: msf_audittrail
 #: report:msf.log.line:0
-msgid "New value"
-msgstr "New value"
+msgid "Modifications"
+msgstr "Modifications"
+
+#. module: msf_audittrail
+#: help:audittrail.rule,log_workflow:0
+msgid "Select this if you want to keep track of workflow on any record of the object of this rule"
+msgstr "Sélectionner si vous voulez suivre plan de travail de tout enregistrement au sujet de cette règle"
+
+#. module: msf_audittrail
+#: constraint:stock.move:0
+#: constraint:stock.picking:0
+msgid "Wrong reason type for an OUT created from scratch."
+msgstr "Mauvais type de motif pour une livraison OUT créée à partir de rien."
+
+#. module: msf_audittrail
+#: view:audittrail.rule:0
+msgid "UnSubscribe"
+msgstr "Désinscrire"
+
+#. module: msf_audittrail
+#: model:ir.model,name:msf_audittrail.model_account_analytic_account
+msgid "Analytic Account"
+msgstr "Compte Analytique"
 
 #. module: msf_audittrail
 #: model:ir.module.module,description:msf_audittrail.module_meta_information
@@ -73,49 +119,29 @@ msgid "\n"
 "    delete on objects and can check logs.\n"
 "    "
 msgstr "\n"
-"    This module gives the administrator the rights\n"
-"    to track every user operation on all the objects\n"
-"    of the system.\n"
+"  \n"
+"     Ce module donne à l'administrateur les droits\n"
+"     de suivre toute opération d'un utilisateur sur tous les objets\n"
+"     du système.\n"
 "\n"
-"    Administrator can subscribe rules for read,write and\n"
-"    delete on objects and can check logs.\n"
-"    "
+"     L'administrateur peut souscrire des règles de lecture, d'écriture et de\n"
+"     suppression d'objets et peut vérifier les journaux.\n"
+"\n"
+"\n"
+"\n"
+"\n"
+""
 
 #. module: msf_audittrail
-#: help:audittrail.rule,log_create:0
-msgid "Select this if you want to keep track of creation on any record of the object of this rule"
-msgstr "Select this if you want to keep track of creation on any record of the object of this rule"
+#: constraint:purchase.order:0
+msgid "You cannot choose an internal supplier for this purchase order"
+msgstr "You cannot choose an internal supplier for this purchase order"
 
 #. module: msf_audittrail
 #: view:audittrail.rule:0
-#: selection:audittrail.rule,state:0
-msgid "Draft"
-msgstr "Draft"
-
-#. module: msf_audittrail
-#: help:audittrail.rule,domain_filter:0
-msgid "Python expression !"
-msgstr "Python expression !"
-
-#. module: msf_audittrail
-#: field:audittrail.log.sequence,model:0
-msgid "Model"
-msgstr "Model"
-
-#. module: msf_audittrail
-#: model:ir.model,name:msf_audittrail.model_stock_move
-msgid "Stock Move"
-msgstr "Stock Move"
-
-#. module: msf_audittrail
-#: field:audittrail.rule,log_action:0
-msgid "Log Action"
-msgstr "Log Action"
-
-#. module: msf_audittrail
-#: field:audittrail.rule,log_unlink:0
-msgid "Log Deletes"
-msgstr "Log Deletes"
+#: field:audittrail.rule,state:0
+msgid "State"
+msgstr "Statut"
 
 #. module: msf_audittrail
 #: view:audittrail.log.line:0
@@ -124,57 +150,219 @@ msgid "Modification"
 msgstr "Modification"
 
 #. module: msf_audittrail
-#: view:audittrail.rule:0
-msgid "UnSubscribe"
-msgstr "UnSubscribe"
+#: constraint:account.analytic.account:0
+msgid "You cannot have the same code or name between analytic accounts in the same category!"
+msgstr "Vous ne pouvez pas avoir le même code ou nom entre des comptes analytiques de même catégorie!"
 
 #. module: msf_audittrail
-#: model:ir.model,name:msf_audittrail.model_sale_order_line
-msgid "Sales Order Line"
-msgstr "Sales Order Line"
+#: constraint:account.analytic.account:0
+msgid "Error! You can not create recursive analytic accounts."
+msgstr "Erreur ! Vous ne pouvez pas créer de comptes analytiques récursifs."
 
 #. module: msf_audittrail
-#: sql_constraint:purchase.order:0
-#: sql_constraint:sale.order:0
-msgid "Order Reference must be unique !"
-msgstr "Order Reference must be unique !"
+#: field:audittrail.log.line,old_value_fct:0
+msgid "Old Value Fct"
+msgstr "Fct Ancienne Valeur"
 
 #. module: msf_audittrail
-#: view:audittrail.rule:0
-#: field:audittrail.rule,state:0
-msgid "State"
-msgstr "State"
+#: field:audittrail.rule,log_create:0
+msgid "Log Creates"
+msgstr "Journal de bord - Crée"
 
 #. module: msf_audittrail
-#: view:audittrail.rule:0
-#: selection:audittrail.rule,state:0
-msgid "Subscribed"
-msgstr "Subscribed"
+#: constraint:sale.order:0
+msgid "You cannot validate this sale order because it contains a line with an inactive product"
+msgstr "Vous ne pouvez pas valider cette commande client car elle contient des lignes avec un produit inactif"
 
 #. module: msf_audittrail
-#: view:audittrail.log.line:0
-msgid "Logs"
-msgstr "Logs"
+#: model:ir.model,name:msf_audittrail.model_audittrail_log_sequence
+msgid "audittrail.log.sequence"
+msgstr "audittrail.log.sequence"
 
 #. module: msf_audittrail
-#: view:audittrail.rule:0
-msgid "AuditTrail Rules"
-msgstr "AuditTrail Rules"
+#: field:audittrail.log.line,new_value_fct:0
+msgid "New Value Fct"
+msgstr "Fct Nouvelle Valeur"
+
+#. module: msf_audittrail
+#: constraint:account.period:0
+msgid "Invalid period ! Some periods overlap or the date period is not in the scope of the fiscal year. "
+msgstr "Période incorrecte ! Certaines périodes se chevauchent ou la date de la période n'est pas incluse dans l'exercice comptable. "
+
+#. module: msf_audittrail
+#: constraint:stock.move:0
+msgid "You must assign an asset for this product."
+msgstr "Vous devez mentionner un bien pour ce produit."
+
+#. module: msf_audittrail
+#: model:ir.model,name:msf_audittrail.model_account_period
+msgid "Account period"
+msgstr "Compte - Période"
+
+#. module: msf_audittrail
+#: field:audittrail.log.sequence,sequence:0
+msgid "Logs Sequence"
+msgstr "Journaux de bord - Sequence"
+
+#. module: msf_audittrail
+#: field:audittrail.log.line,field_id:0
+#: field:audittrail.rule,field_ids:0
+msgid "Fields"
+msgstr "Champs"
+
+#. module: msf_audittrail
+#: help:audittrail.rule,domain_filter:0
+msgid "Python expression !"
+msgstr "Expression Python !"
+
+#. module: msf_audittrail
+#: constraint:stock.move:0
+msgid "You cannot select Service Location as Source Location."
+msgstr "Vous ne pouvez pas sélectionner la Zone Service comme Zone Source"
+
+#. module: msf_audittrail
+#: field:audittrail.log.line,old_value:0
+#: field:audittrail.log.line,old_value_text:0
+msgid "Old Value"
+msgstr "Ancienne Valeur"
+
+#. module: msf_audittrail
+#: model:ir.model,name:msf_audittrail.model_audittrail_rule
+msgid "Audittrail Rule"
+msgstr "Règle de piste d'audit"
+
+#. module: msf_audittrail
+#: constraint:stock.move:0
+msgid "You must assign a batch number for this product."
+msgstr "Vous devez mentionner un numéro de lot pour ce produit."
+
+#. module: msf_audittrail
+#: constraint:account.invoice:0
+msgid "You cannot validate this invoice because it contains a line with an inactive product"
+msgstr "Vous ne pouvez pas valider cette facture car elle contient des lignes avec un produit inactif"
+
+#. module: msf_audittrail
+#: code:addons/msf_audittrail/audittrail.py:269
+#, python-format
+msgid "Change audittrail depends -- Setting rule as DRAFT"
+msgstr "Modifier piste d'audit dépend -- Fixer règle sur BROUILLON"
+
+#. module: msf_audittrail
+#: help:audittrail.rule,log_write:0
+msgid "Select this if you want to keep track of modification on any record of the object of this rule"
+msgstr "Sélectionner si vous voulez suivre les modifications de tout enregistrement au sujet de cette règle"
+
+#. module: msf_audittrail
+#: field:audittrail.log.line,field_description:0
+#: field:audittrail.log.line,trans_field_description:0
+msgid "Field Description"
+msgstr "Description du Champ"
+
+#. module: msf_audittrail
+#: model:ir.model,name:msf_audittrail.model_stock_picking
+msgid "Picking List"
+msgstr "Liste de Piquage"
+
+#. module: msf_audittrail
+#: view:audittrail.view.log:0
+msgid "Open Logs"
+msgstr "Ouvrir les Journaux de bord"
+
+#. module: msf_audittrail
+#: sql_constraint:purchase.order.line:0
+#: sql_constraint:sale.order.line:0
+msgid "Product Quantity must be greater than zero."
+msgstr "La quantité de produits doit être supérieure à zéro."
+
+#. module: msf_audittrail
+#: sql_constraint:account.bank.statement:0
+msgid "You cannot have a register on the same period and the same journal!"
+msgstr "Vous ne pouvez pas avoir un registre sur la même période et le même journal !"
+
+#. module: msf_audittrail
+#: field:audittrail.rule,domain_filter:0
+msgid "Domain"
+msgstr "Domaine"
+
+#. module: msf_audittrail
+#: help:audittrail.rule,log_unlink:0
+msgid "Select this if you want to keep track of deletion on any record of the object of this rule"
+msgstr "Sélectionner si vous voulez suivre l'annulation de tout enregistrement au sujet de cette règle"
+
+#. module: msf_audittrail
+#: field:audittrail.log.line,new_value:0
+#: field:audittrail.log.line,new_value_text:0
+msgid "New Value"
+msgstr "Nouvelle Valeur"
+
+#. module: msf_audittrail
+#: field:audittrail.rule,log_write:0
+msgid "Log Writes"
+msgstr "Journal de bord - Ecritures"
+
+#. module: msf_audittrail
+#: constraint:stock.move:0
+msgid "You try to assign a lot which is not from the same product"
+msgstr "Vous essayez d'attribuer un lot qui ne correspond pas au même produit"
 
 #. module: msf_audittrail
 #: field:audittrail.log.line,sub_obj_name:0
 msgid "Order line"
-msgstr "Order line"
+msgstr "Ligne d'ordre"
 
 #. module: msf_audittrail
-#: model:ir.model,name:msf_audittrail.model_sale_order
-msgid "Sales Order"
-msgstr "Sales Order"
+#: code:addons/msf_audittrail/audittrail.py:828
+#, python-format
+msgid "'%s' Model does not exist..."
+msgstr "Le Modèle '%s' n'existe pas…"
 
 #. module: msf_audittrail
-#: model:ir.model,name:msf_audittrail.model_purchase_order
-msgid "Purchase Order"
-msgstr "Purchase Order"
+#: field:audittrail.rule,log_action:0
+msgid "Log Action"
+msgstr "Journal de bord - Action"
+
+#. module: msf_audittrail
+#: constraint:account.analytic.account:0
+msgid "You can't delete an account which has this destination as default"
+msgstr "Vous ne pouvez pas supprimer un compte qui a cette destination par défaut"
+
+#. module: msf_audittrail
+#: view:audittrail.log.line:0
+#: selection:audittrail.log.line,method:0
+msgid "Creation"
+msgstr "Création"
+
+#. module: msf_audittrail
+#: view:audittrail.rule:0
+msgid "AuditTrail Rule"
+msgstr "Piste d'Audit - Règle"
+
+#. module: msf_audittrail
+#: view:audittrail.rule:0
+msgid "_Subscribe"
+msgstr "_Subscribe"
+
+#. module: msf_audittrail
+#: view:audittrail.log.line:0
+#: selection:audittrail.log.line,method:0
+msgid "Deletion"
+msgstr "Suppression"
+
+#. module: msf_audittrail
+#: model:ir.actions.act_window,name:msf_audittrail.action_audittrail_rule_tree
+#: model:ir.ui.menu,name:msf_audittrail.menu_action_audittrail_rule_tree
+msgid "Audit Rules"
+msgstr "Audit - Règles"
+
+#. module: msf_audittrail
+#: field:audittrail.rule,name_get_field_id:0
+msgid "Displayed field value"
+msgstr "Valeur du champ affichée"
+
+#. module: msf_audittrail
+#: help:audittrail.rule,object_id:0
+msgid "Select object for which you want to generate log."
+msgstr "Sélectionner l'objet pour lequel vous voulez générer un Journal de bord."
 
 #. module: msf_audittrail
 #: field:audittrail.log.line,timestamp:0
@@ -183,170 +371,21 @@ msgid "Date"
 msgstr "Date"
 
 #. module: msf_audittrail
-#: field:audittrail.view.log,from:0
-msgid "Log From"
-msgstr "Log From"
+#: constraint:purchase.order:0
+msgid "You must specify a Valid Till date."
+msgstr "Spécifiez une date de validité 'Valide Jusque'."
 
 #. module: msf_audittrail
-#: field:audittrail.view.log,to:0
-msgid "Log To"
-msgstr "Log To"
-
-#. module: msf_audittrail
-#: field:audittrail.rule,name_get_field_id:0
-msgid "Displayed field value"
-msgstr "Displayed field value"
-
-#. module: msf_audittrail
-#: view:audittrail.view.log:0
-msgid "Open Logs"
-msgstr "Open Logs"
-
-#. module: msf_audittrail
-#: view:audittrail.rule:0
-msgid "_Subscribe"
-msgstr "_Subscribe"
-
-#. module: msf_audittrail
-#: model:ir.actions.act_window,name:msf_audittrail.action_audittrail_rule_tree
-#: model:ir.ui.menu,name:msf_audittrail.menu_action_audittrail_rule_tree
-msgid "Audit Rules"
-msgstr "Audit Rules"
-
-#. module: msf_audittrail
-#: field:audittrail.rule,log_write:0
-msgid "Log Writes"
-msgstr "Log Writes"
-
-#. module: msf_audittrail
-#: code:addons/msf_audittrail/audittrail.py:268
-#, python-format
-msgid "WARNING: audittrail is not part of the pool"
-msgstr "WARNING: audittrail is not part of the pool"
-
-#. module: msf_audittrail
-#: model:ir.model,name:msf_audittrail.model_audittrail_view_log
-msgid "View Log"
-msgstr "View Log"
-
-#. module: msf_audittrail
-#: view:audittrail.view.log:0
-msgid "Cancel"
-msgstr "Cancel"
-
-#. module: msf_audittrail
-#: constraint:account.period:0
-msgid "Error ! The duration of the Period(s) is/are invalid. "
-msgstr "Error ! The duration of the Period(s) is/are invalid. "
-
-#. module: msf_audittrail
-#: model:ir.model,name:msf_audittrail.model_purchase_order_line
-msgid "Purchase Order Line"
-msgstr "Purchase Order Line"
-
-#. module: msf_audittrail
-#: field:audittrail.log.line,fct_object_id:0
-msgid "Fct. Object"
-msgstr "Fct. Object"
-
-#. module: msf_audittrail
+#: view:audittrail.log.line:0
 #: report:msf.log.line:0
-msgid "Order Line"
-msgstr "Order Line"
-
-#. module: msf_audittrail
-#: constraint:sale.order:0
-msgid "You cannot validate this sale order because it contains a line with an inactive product"
-msgstr "You cannot validate this sale order because it contains a line with an inactive product"
-
-#. module: msf_audittrail
-#: field:audittrail.log.line,fct_res_id:0
-msgid "Res. Id"
-msgstr "Res. Id"
-
-#. module: msf_audittrail
-#: sql_constraint:purchase.order.line:0
-#: sql_constraint:sale.order.line:0
-msgid "Product Quantity must be greater than zero."
-msgstr "Product Quantity must be greater than zero."
-
-#. module: msf_audittrail
-#: view:audittrail.rule:0
-msgid "Search Audittrail Rule"
-msgstr "Search Audittrail Rule"
-
-#. module: msf_audittrail
-#: help:audittrail.rule,log_action:0
-msgid "Select this if you want to keep track of actions on the object of this rule"
-msgstr "Select this if you want to keep track of actions on the object of this rule"
-
-#. module: msf_audittrail
-#: model:ir.model,name:msf_audittrail.model_account_analytic_account
-msgid "Analytic Account"
-msgstr "Analytic Account"
-
-#. module: msf_audittrail
-#: field:audittrail.rule,name:0
-msgid "Rule Name"
-msgstr "Rule Name"
+msgid "Old value"
+msgstr "Ancienne valeur"
 
 #. module: msf_audittrail
 #: constraint:purchase.order:0
-msgid "If you tick the box \"cross docking\", you cannot have an other location than \"Cross docking\""
-msgstr "If you tick the box \"cross docking\", you cannot have an other location than \"Cross docking\""
-
-#. module: msf_audittrail
-#: report:msf.log.line:0
-msgid "Field description"
-msgstr "Field description"
-
-#. module: msf_audittrail
-#: field:audittrail.log.line,method:0
-#: report:msf.log.line:0
-msgid "Method"
-msgstr "Method"
-
-#. module: msf_audittrail
-#: model:ir.model,name:msf_audittrail.model_account_invoice
-msgid "Invoice"
-msgstr "Invoice"
-
-#. module: msf_audittrail
-#: model:ir.model,name:msf_audittrail.model_stock_picking
-msgid "Picking List"
-msgstr "Picking List"
-
-#. module: msf_audittrail
-#: constraint:stock.move:0
-msgid "You must assign an asset for this product."
-msgstr "You must assign an asset for this product."
-
-#. module: msf_audittrail
-#: field:audittrail.log.line,log:0
-#: report:msf.log.line:0
-msgid "Log ID"
-msgstr "Log ID"
-
-#. module: msf_audittrail
-#: field:audittrail.log.line,old_value_fct:0
-msgid "Old Value Fct"
-msgstr "Old Value Fct"
-
-#. module: msf_audittrail
-#: code:addons/msf_audittrail/audittrail.py:828
-#, python-format
-msgid "'%s' Model does not exist..."
-msgstr "'%s' Model does not exist..."
-
-#. module: msf_audittrail
-#: field:audittrail.rule,log_create:0
-msgid "Log Creates"
-msgstr "Log Creates"
-
-#. module: msf_audittrail
-#: view:audittrail.rule:0
-msgid "Group By..."
-msgstr "Group By..."
+#: constraint:sale.order:0
+msgid "Partner type and order type are incompatible! Please change either order type or partner."
+msgstr "Le type de partnenaire et le type de commande sont incompatibles. Veuillez changer l'un ou l'autre."
 
 #. module: msf_audittrail
 #: constraint:account.invoice.line:0
@@ -355,290 +394,96 @@ msgid "Constraint error on Uom"
 msgstr "Constraint error on Uom"
 
 #. module: msf_audittrail
-#: field:audittrail.log.line,new_value_fct:0
-msgid "New Value Fct"
-msgstr "New Value Fct"
-
-#. module: msf_audittrail
-#: view:audittrail.rule:0
-msgid "Fields to trace"
-msgstr "Fields to trace"
-
-#. module: msf_audittrail
-#: constraint:account.period:0
-msgid "Invalid period ! Some periods overlap or the date period is not in the scope of the fiscal year. "
-msgstr "Invalid period ! Some periods overlap or the date period is not in the scope of the fiscal year. "
-
-#. module: msf_audittrail
-#: help:audittrail.rule,object_id:0
-msgid "Select object for which you want to generate log."
-msgstr "Select object for which you want to generate log."
-
-#. module: msf_audittrail
-#: field:audittrail.rule,action_id:0
-msgid "Action ID"
-msgstr "Action ID"
-
-#. module: msf_audittrail
-#: constraint:stock.move:0
-msgid "You must assign a batch number for this product."
-msgstr "You must assign a batch number for this product."
-
-#. module: msf_audittrail
-#: view:audittrail.log.line:0
-#: selection:audittrail.log.line,method:0
-msgid "Creation"
-msgstr "Creation"
-
-#. module: msf_audittrail
-#: code:addons/msf_audittrail/audittrail.py:269
-#, python-format
-msgid "Change audittrail depends -- Setting rule as DRAFT"
-msgstr "Change audittrail depends -- Setting rule as DRAFT"
-
-#. module: msf_audittrail
-#: field:audittrail.rule,log_read:0
-msgid "Log Reads"
-msgstr "Log Reads"
-
-#. module: msf_audittrail
-#: field:audittrail.log.line,res_id:0
-msgid "Resource Id"
-msgstr "Resource Id"
-
-#. module: msf_audittrail
-#: constraint:stock.move:0
-msgid "You try to assign a lot which is not from the same product"
-msgstr "You try to assign a lot which is not from the same product"
-
-#. module: msf_audittrail
-#: field:audittrail.log.line,rule_id:0
-msgid "Rule"
-msgstr "Rule"
-
-#. module: msf_audittrail
-#: field:audittrail.rule,log_workflow:0
-msgid "Log Workflow"
-msgstr "Log Workflow"
-
-#. module: msf_audittrail
-#: view:audittrail.rule:0
-msgid "AuditTrail Rule"
-msgstr "AuditTrail Rule"
-
-#. module: msf_audittrail
-#: constraint:purchase.order:0
-#: constraint:sale.order:0
-msgid "Partner type and order type are incompatible! Please change either order type or partner."
-msgstr "Partner type and order type are incompatible! Please change either order type or partner."
-
-#. module: msf_audittrail
-#: constraint:purchase.order:0
-msgid "You must specify a Valid Till date."
-msgstr "You must specify a Valid Till date."
+#: field:audittrail.log.line,fct_object_id:0
+msgid "Fct. Object"
+msgstr "Fonction Objet"
 
 #. module: msf_audittrail
 #: report:msf.log.line:0
-msgid "Modifications"
-msgstr "Modifications"
+msgid "Order Line"
+msgstr "Ligne de Commande"
 
 #. module: msf_audittrail
-#: constraint:sale.order.line:0
-msgid "You must select on order procurement method for Service with Reception products."
-msgstr "You must select on order procurement method for Service with Reception products."
-
-#. module: msf_audittrail
-#: constraint:account.analytic.account:0
-msgid "You can only have one account used for FX gain/loss!"
-msgstr "You can only have one account used for FX gain/loss!"
-
-#. module: msf_audittrail
-#: field:audittrail.log.line,field_description:0
-#: field:audittrail.log.line,trans_field_description:0
-msgid "Field Description"
-msgstr "Field Description"
-
-#. module: msf_audittrail
-#: constraint:account.analytic.account:0
-msgid "Error! The currency has to be the same as the currency of the selected company"
-msgstr "Error! The currency has to be the same as the currency of the selected company"
-
-#. module: msf_audittrail
-#: constraint:account.analytic.account:0
-msgid "You have to use a Normal account type and Cost Center category for FX gain/loss!"
-msgstr "You have to use a Normal account type and Cost Center category for FX gain/loss!"
-
-#. module: msf_audittrail
-#: constraint:stock.move:0
-#: constraint:stock.picking:0
-msgid "Wrong reason type for an OUT created from scratch."
-msgstr "Wrong reason type for an OUT created from scratch."
-
-#. module: msf_audittrail
-#: field:audittrail.log.line,field_id:0
-#: field:audittrail.rule,field_ids:0
-msgid "Fields"
-msgstr "Fields"
-
-#. module: msf_audittrail
-#: view:audittrail.log.line:0
-msgid "Search Log"
-msgstr "Search Log"
+#: code:addons/msf_audittrail/audittrail.py:268
+#, python-format
+msgid "WARNING: audittrail is not part of the pool"
+msgstr "Avertissement: piste d'audit ne faisant pas partie du fond"
 
 #. module: msf_audittrail
 #: field:audittrail.rule,parent_field_id:0
 msgid "Parent fields"
-msgstr "Parent fields"
-
-#. module: msf_audittrail
-#: model:ir.model,name:msf_audittrail.model_audittrail_log_sequence
-msgid "audittrail.log.sequence"
-msgstr "audittrail.log.sequence"
-
-#. module: msf_audittrail
-#: help:audittrail.rule,log_read:0
-msgid "Select this if you want to keep track of read/open on any record of the object of this rule"
-msgstr "Select this if you want to keep track of read/open on any record of the object of this rule"
-
-#. module: msf_audittrail
-#: view:audittrail.view.log:0
-#: model:ir.actions.act_window,name:msf_audittrail.action_audittrail_log_line_tree
-#: model:ir.ui.menu,name:msf_audittrail.menu_action_audittrail_log_line_tree
-msgid "Audit Logs"
-msgstr "Audit Logs"
-
-#. module: msf_audittrail
-#: field:audittrail.log.line,object_id:0
-#: field:audittrail.rule,object_id:0
-msgid "Object"
-msgstr "Object"
+msgstr "Champs Parent "
 
 #. module: msf_audittrail
 #: constraint:account.analytic.account:0
-msgid "Error! You can not create recursive analytic accounts."
-msgstr "Error! You can not create recursive analytic accounts."
-
-#. module: msf_audittrail
-#: help:audittrail.rule,log_unlink:0
-msgid "Select this if you want to keep track of deletion on any record of the object of this rule"
-msgstr "Select this if you want to keep track of deletion on any record of the object of this rule"
-
-#. module: msf_audittrail
-#: field:audittrail.log.line,user_id:0
-#: report:msf.log.line:0
-msgid "User"
-msgstr "User"
-
-#. module: msf_audittrail
-#: constraint:purchase.order:0
-msgid "You cannot validate this purchase order because it contains a line with an inactive product"
-msgstr "You cannot validate this purchase order because it contains a line with an inactive product"
-
-#. module: msf_audittrail
-#: constraint:account.analytic.account:0
-msgid "You cannot have the same code or name between analytic accounts in the same category!"
-msgstr "You cannot have the same code or name between analytic accounts in the same category!"
-
-#. module: msf_audittrail
-#: sql_constraint:account.bank.statement:0
-msgid "You cannot have a register on the same period and the same journal!"
-msgstr "You cannot have a register on the same period and the same journal!"
-
-#. module: msf_audittrail
-#: help:audittrail.rule,log_workflow:0
-msgid "Select this if you want to keep track of workflow on any record of the object of this rule"
-msgstr "Select this if you want to keep track of workflow on any record of the object of this rule"
-
-#. module: msf_audittrail
-#: constraint:stock.picking:0
-msgid "You cannot validate this document because it contains a line with an inactive product"
-msgstr "You cannot validate this document because it contains a line with an inactive product"
-
-#. module: msf_audittrail
-#: model:ir.module.module,shortdesc:msf_audittrail.module_meta_information
-msgid "MSF Audit Trail"
-msgstr "MSF Audit Trail"
-
-#. module: msf_audittrail
-#: model:ir.model,name:msf_audittrail.model_audittrail_log_line
-msgid "Log Line"
-msgstr "Log Line"
-
-#. module: msf_audittrail
-#: model:ir.model,name:msf_audittrail.model_account_period
-msgid "Account period"
-msgstr "Account period"
-
-#. module: msf_audittrail
-#: constraint:account.invoice:0
-msgid "You cannot validate this invoice because it contains a line with an inactive product"
-msgstr "You cannot validate this invoice because it contains a line with an inactive product"
-
-#. module: msf_audittrail
-#: field:audittrail.rule,domain_filter:0
-msgid "Domain"
-msgstr "Domain"
-
-#. module: msf_audittrail
-#: field:audittrail.log.sequence,sequence:0
-msgid "Logs Sequence"
-msgstr "Logs Sequence"
-
-#. module: msf_audittrail
-#: report:msf.log.line:0
-msgid ",'o')]]"
-msgstr ",'o')]]"
-
-#. module: msf_audittrail
-#: constraint:purchase.order:0
-msgid "You cannot choose an internal supplier for this purchase order"
-msgstr "You cannot choose an internal supplier for this purchase order"
-
-#. module: msf_audittrail
-#: field:audittrail.log.line,old_value:0
-#: field:audittrail.log.line,old_value_text:0
-msgid "Old Value"
-msgstr "Old Value"
-
-#. module: msf_audittrail
-#: constraint:audittrail.rule:0
-msgid "The domain shouldn't contain a right element in condition with more than 2 elements."
-msgstr "The domain shouldn't contain a right element in condition with more than 2 elements."
-
-#. module: msf_audittrail
-#: field:audittrail.log.line,name:0
-msgid "Description"
-msgstr "Description"
+msgid "You can only have one account used for FX gain/loss!"
+msgstr "Vous ne pouvez utiliser qu'un compte pour les gains/pertes de change!"
 
 #. module: msf_audittrail
 #: view:audittrail.log.line:0
-#: selection:audittrail.log.line,method:0
-msgid "Deletion"
-msgstr "Deletion"
+msgid "Search Log"
+msgstr "Rechercher Journal de bord"
 
 #. module: msf_audittrail
-#: code:addons/msf_audittrail/audittrail.py:273
-#: model:ir.actions.act_window,name:msf_audittrail.action_audittrail_view_log
-#, python-format
-msgid "Track changes"
-msgstr "Track changes"
+#: field:audittrail.rule,log_workflow:0
+msgid "Log Workflow"
+msgstr "Journal de bord - processus"
 
 #. module: msf_audittrail
-#: sql_constraint:audittrail.rule:0
-msgid "The AuditTrail rule name must be unique!"
-msgstr "The AuditTrail rule name must be unique!"
+#: view:audittrail.view.log:0
+msgid "Cancel"
+msgstr "Annuler"
 
 #. module: msf_audittrail
-#: code:addons/msf_audittrail/audittrail.py:760
-#, python-format
-msgid "'%s' Not comprehensive operator... Please use only '=', '!=', 'in' and 'not in' operators"
-msgstr "'%s' Not comprehensive operator... Please use only '=', '!=', 'in' and 'not in' operators"
+#: field:audittrail.log.line,res_id:0
+msgid "Resource Id"
+msgstr "Id ressource"
 
 #. module: msf_audittrail
-#: field:audittrail.log.line,new_value:0
-#: field:audittrail.log.line,new_value_text:0
-msgid "New Value"
-msgstr "New Value"
+#: model:ir.model,name:msf_audittrail.model_account_invoice
+msgid "Invoice"
+msgstr "Facture"
+
+#. module: msf_audittrail
+#: field:audittrail.rule,log_read:0
+msgid "Log Reads"
+msgstr "Journal de bord- Lectures"
+
+#. module: msf_audittrail
+#: constraint:account.analytic.account:0
+msgid "You have to use a Normal account type and Cost Center category for FX gain/loss!"
+msgstr "Vous devez utiliser un type de compte Normal et catégorie de centre de cout Normal pour les gains/pertes de change! "
+
+#. module: msf_audittrail
+#: model:ir.model,name:msf_audittrail.model_account_invoice_line
+msgid "Invoice Line"
+msgstr "Ligne de Facture"
+
+#. module: msf_audittrail
+#: view:audittrail.log.line:0
+#: report:msf.log.line:0
+msgid "New value"
+msgstr "Nouvelle valeur"
+
+#. module: msf_audittrail
+#: view:audittrail.log.line:0
+msgid "Logs"
+msgstr "Journaux"
+
+#. module: msf_audittrail
+#: model:ir.model,name:msf_audittrail.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Ligne Bon de Commande"
+
+#. module: msf_audittrail
+#: field:audittrail.log.line,fct_res_id:0
+msgid "Res. Id"
+msgstr "Res. Id"
+
+#. module: msf_audittrail
+#: field:audittrail.view.log,to:0
+msgid "Log To"
+msgstr "Journal de bord à"
 
 #. module: msf_audittrail
 #: model:ir.model,name:msf_audittrail.model_ir_module_module
@@ -646,7 +491,167 @@ msgid "Module"
 msgstr "Module"
 
 #. module: msf_audittrail
+#: code:addons/msf_audittrail/audittrail.py:273
+#: model:ir.actions.act_window,name:msf_audittrail.action_audittrail_view_log
+#, python-format
+msgid "Track changes"
+msgstr "Suivi des Modifications"
+
+#. module: msf_audittrail
+#: view:audittrail.rule:0
+msgid "Group By..."
+msgstr "Grouper Par..."
+
+#. module: msf_audittrail
+#: view:audittrail.rule:0
+#: selection:audittrail.rule,state:0
+msgid "Subscribed"
+msgstr "Souscrit/Abonné"
+
+#. module: msf_audittrail
+#: help:audittrail.rule,log_action:0
+msgid "Select this if you want to keep track of actions on the object of this rule"
+msgstr "Sélectionner si vous voulez suivre des actions au sujet de cette règle"
+
+#. module: msf_audittrail
+#: sql_constraint:audittrail.rule:0
+msgid "The AuditTrail rule name must be unique!"
+msgstr "Le nom de la règle de la piste d'audit doit être unique !"
+
+#. module: msf_audittrail
+#: model:ir.model,name:msf_audittrail.model_audittrail_view_log
+msgid "View Log"
+msgstr "Vue du Journal"
+
+#. module: msf_audittrail
+#: model:ir.module.module,shortdesc:msf_audittrail.module_meta_information
+msgid "MSF Audit Trail"
+msgstr "MSF Piste d'Audit "
+
+#. module: msf_audittrail
+#: view:audittrail.view.log:0
+#: model:ir.actions.act_window,name:msf_audittrail.action_audittrail_log_line_tree
+#: model:ir.ui.menu,name:msf_audittrail.menu_action_audittrail_log_line_tree
+msgid "Audit Logs"
+msgstr "Audit - Journaux"
+
+#. module: msf_audittrail
+#: constraint:account.period:0
+msgid "Error ! The duration of the Period(s) is/are invalid. "
+msgstr "Erreur ! La durée de la(des) période(s) est/sont invalides. "
+
+#. module: msf_audittrail
+#: field:audittrail.log.line,rule_id:0
+msgid "Rule"
+msgstr "Règle"
+
+#. module: msf_audittrail
+#: view:audittrail.rule:0
+msgid "Fields to trace"
+msgstr "Champs à retrouver"
+
+#. module: msf_audittrail
+#: help:audittrail.rule,log_read:0
+msgid "Select this if you want to keep track of read/open on any record of the object of this rule"
+msgstr "Sélectionner si vous voulez suivre les ouvertures/fermetures de tout enregistrement au sujet de cette règle"
+
+#. module: msf_audittrail
+#: field:audittrail.log.line,method:0
+#: report:msf.log.line:0
+msgid "Method"
+msgstr "Méthode"
+
+#. module: msf_audittrail
+#: model:ir.model,name:msf_audittrail.model_audittrail_log_line
+msgid "Log Line"
+msgstr "Journal de bord - Ligne"
+
+#. module: msf_audittrail
+#: view:audittrail.rule:0
+#: selection:audittrail.rule,state:0
+msgid "Draft"
+msgstr "Brouillon"
+
+#. module: msf_audittrail
+#: view:audittrail.rule:0
+msgid "Search Audittrail Rule"
+msgstr "Rechercher Règle Piste d'audit"
+
+#. module: msf_audittrail
+#: model:ir.model,name:msf_audittrail.model_stock_move
+msgid "Stock Move"
+msgstr "Mouvement de Stock"
+
+#. module: msf_audittrail
+#: sql_constraint:purchase.order:0
+#: sql_constraint:sale.order:0
+msgid "Order Reference must be unique !"
+msgstr "La Référence de la Commande doit être unique !"
+
+#. module: msf_audittrail
+#: report:msf.log.line:0
+msgid ",'o')]]"
+msgstr ",'o')]]"
+
+#. module: msf_audittrail
+#: report:msf.log.line:0
+msgid "Field description"
+msgstr "Description du champ"
+
+#. module: msf_audittrail
+#: constraint:account.analytic.account:0
+msgid "Error! The currency has to be the same as the currency of the selected company"
+msgstr "Erreur ! La devise doit être la même que la devise de la société sélectionnée"
+
+#. module: msf_audittrail
+#: model:ir.actions.report.xml,name:msf_audittrail.report_log_line
+msgid "Log lines"
+msgstr "Journal de bord - Lignes"
+
+#. module: msf_audittrail
 #: model:ir.model,name:msf_audittrail.model_account_bank_statement
 msgid "Bank Statement"
-msgstr "Bank Statement"
+msgstr "Relevé bancaire"
+
+#. module: msf_audittrail
+#: help:audittrail.rule,log_create:0
+msgid "Select this if you want to keep track of creation on any record of the object of this rule"
+msgstr "Sélectionner si vous voulez suivre la création de tout enregistrement au sujet de cette règle"
+
+#. module: msf_audittrail
+#: field:audittrail.log.line,log:0
+#: report:msf.log.line:0
+msgid "Log ID"
+msgstr "Journal de bord - Identité"
+
+#. module: msf_audittrail
+#: constraint:audittrail.rule:0
+msgid "The domain shouldn't contain a right element in condition with more than 2 elements."
+msgstr "Le domaine ne devrait pas contenir un élément de droite avec la condition 'avec plus de 2 éléments'."
+
+#. module: msf_audittrail
+#: field:audittrail.log.line,name:0
+msgid "Description"
+msgstr "Description"
+
+#. module: msf_audittrail
+#: field:audittrail.log.sequence,model:0
+msgid "Model"
+msgstr "Modèle"
+
+#. module: msf_audittrail
+#: code:addons/msf_audittrail/audittrail.py:760
+#, python-format
+msgid "'%s' Not comprehensive operator... Please use only '=', '!=', 'in' and 'not in' operators"
+msgstr "%s' N'est pas un opérateur global... Veuillez utiliser uniquement les opérateurs  '=', '!=', 'in' et 'not in'"
+
+#. module: msf_audittrail
+#: field:audittrail.view.log,from:0
+msgid "Log From"
+msgstr "Journal de bord De"
+
+#. module: msf_audittrail
+#: field:audittrail.rule,log_unlink:0
+msgid "Log Deletes"
+msgstr "Journal de bord - Efface"
 

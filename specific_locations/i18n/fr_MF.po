@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.0.3\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2013-10-17 07:42+0000\n"
-"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,29 +16,83 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: specific_locations
+#: model:ir.model,name:specific_locations.model_purchase_order
+msgid "Purchase Order"
+msgstr "Bon de Commande"
+
+#. module: specific_locations
 #: selection:stock.location,location_category:0
 msgid "Transition"
 msgstr "Transition"
 
 #. module: specific_locations
-#: model:ir.model,name:specific_locations.model_stock_location
-msgid "Location"
-msgstr "Location"
+#: model:ir.module.module,description:specific_locations.module_meta_information
+msgid "\n"
+"    Add locations capabilities\n"
+"    "
+msgstr "\n"
+"   Ajouter capacités aux Zones\n"
+"    "
 
 #. module: specific_locations
-#: field:stock.warehouse,lot_quarantine_id:0
-msgid "Location Quarantine"
-msgstr "Location Quarantine"
+#: model:ir.model,name:specific_locations.model_stock_warehouse
+msgid "Warehouse"
+msgstr "Entrepôt"
+
+#. module: specific_locations
+#: model:ir.module.module,shortdesc:specific_locations.module_meta_information
+msgid "Specific Locations"
+msgstr "Zones Spécifiques"
+
+#. module: specific_locations
+#: constraint:stock.location:0
+msgid "You cannot define a quarantine location as chained location."
+msgstr "Vous ne pouvez pas définir une Zone \"Quarantaine\" en tant que Zone enchaînée."
 
 #. module: specific_locations
 #: constraint:purchase.order:0
-msgid "You cannot choose an internal supplier for this purchase order"
-msgstr "You cannot choose an internal supplier for this purchase order"
+msgid "You must specify a Valid Till date."
+msgstr "Spécifiez une date de validité 'Valide Jusque'."
+
+#. module: specific_locations
+#: model:ir.model,name:specific_locations.model_stock_location
+msgid "Location"
+msgstr "Zone"
+
+#. module: specific_locations
+#: constraint:purchase.order:0
+msgid "If you tick the box \"cross docking\", you cannot have an other location than \"Cross docking\""
+msgstr "Si vous cochez la case \"transbordement\", vous ne pouvez pas avoir d'autre lieu que \"Transbordement\""
+
+#. module: specific_locations
+#: field:stock.location,location_category:0
+msgid "Location Category"
+msgstr "Catégorie Zone"
+
+#. module: specific_locations
+#: sql_constraint:purchase.order:0
+msgid "Order Reference must be unique !"
+msgstr "La Référence de la Commande doit être unique !"
 
 #. module: specific_locations
 #: selection:stock.location,location_category:0
-msgid "Other"
-msgstr "Other"
+msgid "EPrep"
+msgstr "Eprep"
+
+#. module: specific_locations
+#: field:stock.location,destruction_location:0
+msgid "Destruction Location"
+msgstr "Zone Destruction "
+
+#. module: specific_locations
+#: constraint:purchase.order:0
+msgid "Partner type and order type are incompatible! Please change either order type or partner."
+msgstr "Le type de partnenaire et le type de commande sont incompatibles. Veuillez changer l'un ou l'autre."
+
+#. module: specific_locations
+#: constraint:purchase.order:0
+msgid "You cannot validate this purchase order because it contains a line with an inactive product"
+msgstr "Vous ne pouvez pas valider ce bon de commande, car il contient une ligne avec des produits inactifs."
 
 #. module: specific_locations
 #: constraint:stock.move:0
@@ -47,122 +101,68 @@ msgstr "Constraint error on Uom"
 
 #. module: specific_locations
 #: constraint:stock.move:0
-msgid "You must assign a batch number for this product."
-msgstr "You must assign a batch number for this product."
-
-#. module: specific_locations
-#: selection:stock.location,location_category:0
-msgid "Consumption Unit"
-msgstr "Consumption Unit"
-
-#. module: specific_locations
-#: constraint:stock.move:0
-msgid "You try to assign a lot which is not from the same product"
-msgstr "You try to assign a lot which is not from the same product"
-
-#. module: specific_locations
-#: model:ir.module.module,shortdesc:specific_locations.module_meta_information
-msgid "Specific Locations"
-msgstr "Specific Locations"
-
-#. module: specific_locations
-#: model:ir.model,name:specific_locations.model_purchase_order
-msgid "Purchase Order"
-msgstr "Purchase Order"
-
-#. module: specific_locations
-#: selection:stock.location,location_category:0
-msgid "EPrep"
-msgstr "EPrep"
-
-#. module: specific_locations
-#: constraint:stock.location:0
-msgid "You cannot define a quarantine location as chained location."
-msgstr "You cannot define a quarantine location as chained location."
-
-#. module: specific_locations
-#: constraint:purchase.order:0
-msgid "Partner type and order type are incompatible! Please change either order type or partner."
-msgstr "Partner type and order type are incompatible! Please change either order type or partner."
-
-#. module: specific_locations
-#: constraint:purchase.order:0
-msgid "You must specify a Valid Till date."
-msgstr "You must specify a Valid Till date."
-
-#. module: specific_locations
-#: constraint:purchase.order:0
-msgid "You cannot validate this purchase order because it contains a line with an inactive product"
-msgstr "You cannot validate this purchase order because it contains a line with an inactive product"
-
-#. module: specific_locations
-#: constraint:purchase.order:0
-msgid "If you tick the box \"cross docking\", you cannot have an other location than \"Cross docking\""
-msgstr "If you tick the box \"cross docking\", you cannot have an other location than \"Cross docking\""
-
-#. module: specific_locations
-#: model:ir.model,name:specific_locations.model_stock_move
-msgid "Stock Move"
-msgstr "Stock Move"
-
-#. module: specific_locations
-#: model:ir.model,name:specific_locations.model_stock_warehouse
-msgid "Warehouse"
-msgstr "Warehouse"
-
-#. module: specific_locations
-#: field:stock.location,destruction_location:0
-msgid "Destruction Location"
-msgstr "Destruction Location"
-
-#. module: specific_locations
-#: sql_constraint:purchase.order:0
-msgid "Order Reference must be unique !"
-msgstr "Order Reference must be unique !"
-
-#. module: specific_locations
-#: field:stock.location,location_category:0
-msgid "Location Category"
-msgstr "Location Category"
+msgid "Wrong reason type for an OUT created from scratch."
+msgstr "Mauvais type de motif pour une livraison OUT créée à partir de rien."
 
 #. module: specific_locations
 #: constraint:stock.location:0
 msgid "Quarantine Location can only have Quarantine Location or Views as parent location."
-msgstr "Quarantine Location can only have Quarantine Location or Views as parent location."
-
-#. module: specific_locations
-#: constraint:stock.move:0
-msgid "Wrong reason type for an OUT created from scratch."
-msgstr "Wrong reason type for an OUT created from scratch."
-
-#. module: specific_locations
-#: model:ir.module.module,description:specific_locations.module_meta_information
-msgid "\n"
-"    Add locations capabilities\n"
-"    "
-msgstr "\n"
-"    Add locations capabilities\n"
-"    "
-
-#. module: specific_locations
-#: constraint:stock.move:0
-msgid "You must assign an asset for this product."
-msgstr "You must assign an asset for this product."
-
-#. module: specific_locations
-#: model:ir.model,name:specific_locations.model_procurement_order
-msgid "Procurement"
-msgstr "Procurement"
-
-#. module: specific_locations
-#: constraint:stock.move:0
-msgid "You cannot select Service Location as Source Location."
-msgstr "You cannot select Service Location as Source Location."
+msgstr "Zone \"Quarantaine\", on ne peut avoir de Zone \"Quarantaine ''  ou Vues qu'en tant que Zone \"Parent\"."
 
 #. module: specific_locations
 #: field:stock.location,quarantine_location:0
 msgid "Quarantine Location"
-msgstr "Quarantine Location"
+msgstr "Zone Quarantaine"
+
+#. module: specific_locations
+#: selection:stock.location,location_category:0
+msgid "Other"
+msgstr "Autre"
+
+#. module: specific_locations
+#: field:stock.warehouse,lot_quarantine_id:0
+msgid "Location Quarantine"
+msgstr "Zone Quarantaine"
+
+#. module: specific_locations
+#: constraint:purchase.order:0
+msgid "You cannot choose an internal supplier for this purchase order"
+msgstr "You cannot choose an internal supplier for this purchase order"
+
+#. module: specific_locations
+#: constraint:stock.move:0
+msgid "You cannot select Service Location as Source Location."
+msgstr "Vous ne pouvez pas sélectionner la Zone Service comme Zone Source"
+
+#. module: specific_locations
+#: model:ir.model,name:specific_locations.model_procurement_order
+msgid "Procurement"
+msgstr "Approvisionnement"
+
+#. module: specific_locations
+#: selection:stock.location,location_category:0
+msgid "Consumption Unit"
+msgstr "Unité de Consommation"
+
+#. module: specific_locations
+#: constraint:stock.move:0
+msgid "You must assign a batch number for this product."
+msgstr "Vous devez mentionner un numéro de lot pour ce produit."
+
+#. module: specific_locations
+#: constraint:stock.move:0
+msgid "You try to assign a lot which is not from the same product"
+msgstr "Vous essayez d'attribuer un lot qui ne correspond pas au même produit"
+
+#. module: specific_locations
+#: constraint:stock.move:0
+msgid "You must assign an asset for this product."
+msgstr "Vous devez mentionner un bien pour ce produit."
+
+#. module: specific_locations
+#: model:ir.model,name:specific_locations.model_stock_move
+msgid "Stock Move"
+msgstr "Mouvement de Stock"
 
 #. module: specific_locations
 #: selection:stock.location,location_category:0

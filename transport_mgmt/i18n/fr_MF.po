@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.0.3\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2013-10-17 07:42+0000\n"
-"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,210 +16,27 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: transport_mgmt
-#: view:international.transport.cost.report:0
-#: model:ir.actions.act_window,name:transport_mgmt.action_intl_transport_cost_action
-#: model:ir.model,name:transport_mgmt.model_international_transport_cost_report
-#: model:ir.ui.menu,name:transport_mgmt.menu_intl_transport_cost_report
-msgid "International Transport Costs"
-msgstr "International Transport Costs"
-
-#. module: transport_mgmt
-#: field:local.transport.cost.report,order_state:0
-msgid "Order state"
-msgstr "Order state"
-
-#. module: transport_mgmt
-#: constraint:product.product:0
-msgid "Error: Invalid ean code"
-msgstr "Error: Invalid ean code"
-
-#. module: transport_mgmt
-#: field:sale.order,intl_customer_ok:0
-msgid "International customer"
-msgstr "International customer"
-
-#. module: transport_mgmt
-#: sql_constraint:purchase.order:0
-#: sql_constraint:sale.order:0
-msgid "Order Reference must be unique !"
-msgstr "Order Reference must be unique !"
-
-#. module: transport_mgmt
-#: selection:international.transport.cost.report,transport_mode:0
-#: selection:purchase.order,transport_mode:0
-msgid "Air FFC"
-msgstr "Air FFC"
-
-#. module: transport_mgmt
-#: constraint:product.product:0
-msgid "Constraint error on Kit Product."
-msgstr "Constraint error on Kit Product."
-
-#. module: transport_mgmt
-#: field:purchase.order,transport_order_id:0
-msgid "Linked Purchase Order"
-msgstr "Linked Purchase Order"
-
-#. module: transport_mgmt
-#: constraint:stock.picking:0
-msgid "Wrong reason type for an OUT created from scratch."
-msgstr "Wrong reason type for an OUT created from scratch."
-
-#. module: transport_mgmt
-#: view:international.transport.cost.report:0
-#: field:international.transport.cost.report,partner_id:0
-#: view:local.transport.cost.report:0
-#: field:local.transport.cost.report,partner_id:0
-msgid "Supplier"
-msgstr "Supplier"
-
-#. module: transport_mgmt
-#: view:purchase.order:0
-msgid "Delivery documents"
-msgstr "Delivery documents"
-
-#. module: transport_mgmt
-#: field:international.transport.cost.report,transport_mode:0
-#: field:local.transport.cost.report,transport_mode:0
-#: field:purchase.order,transport_mode:0
-msgid "Transport mode"
-msgstr "Transport mode"
-
-#. module: transport_mgmt
-#: selection:international.transport.cost.report,transport_mode:0
-#: selection:purchase.order,transport_mode:0
-msgid "Sea"
-msgstr "Sea"
-
-#. module: transport_mgmt
-#: field:international.transport.cost.report,order_id:0
-#: field:local.transport.cost.report,order_id:0
-msgid "PO Reference"
-msgstr "PO Reference"
-
-#. module: transport_mgmt
 #: field:purchase.order,shipment_transport_ids:0
 msgid "Linked shipments"
-msgstr "Linked shipments"
-
-#. module: transport_mgmt
-#: field:purchase.order,total_price_include_transport:0
-msgid "Total incl. transport"
-msgstr "Total incl. transport"
-
-#. module: transport_mgmt
-#: constraint:product.product:0
-msgid "You must select on order procurement method for Service with Reception products."
-msgstr "You must select on order procurement method for Service with Reception products."
-
-#. module: transport_mgmt
-#: help:product.product,transport_ok:0
-msgid "Check this box if the current product is a transport product."
-msgstr "Check this box if the current product is a transport product."
+msgstr "Expéditions Connexes"
 
 #. module: transport_mgmt
 #: view:purchase.order:0
 msgid "Linked documents"
-msgstr "Linked documents"
-
-#. module: transport_mgmt
-#: model:ir.ui.menu,name:transport_mgmt.menu_transport_cost_reports
-msgid "Transport costs"
-msgstr "Transport costs"
+msgstr "Documents Connexes"
 
 #. module: transport_mgmt
 #: view:purchase.order:0
 msgid "Shipment documents"
-msgstr "Shipment documents"
+msgstr "Documents d'Expédition"
 
 #. module: transport_mgmt
-#: selection:international.transport.cost.report,transport_mode:0
-#: selection:purchase.order,transport_mode:0
-msgid "Air regular"
-msgstr "Air regular"
-
-#. module: transport_mgmt
-#: sql_constraint:product.product:0
-msgid "The \"Product Code\" must be unique"
-msgstr "The \"Product Code\" must be unique"
-
-#. module: transport_mgmt
-#: view:purchase.order:0
-msgid "Delivery Orders"
-msgstr "Delivery Orders"
-
-#. module: transport_mgmt
-#: constraint:stock.picking:0
-msgid "You cannot validate this document because it contains a line with an inactive product"
-msgstr "You cannot validate this document because it contains a line with an inactive product"
-
-#. module: transport_mgmt
-#: field:purchase.order,func_total_price_include_transport:0
-msgid "Functionnal total incl. transport"
-msgstr "Functionnal total incl. transport"
-
-#. module: transport_mgmt
-#: model:ir.model,name:transport_mgmt.model_purchase_order
-#: view:purchase.order:0
-msgid "Purchase Order"
-msgstr "Purchase Order"
-
-#. module: transport_mgmt
-#: constraint:purchase.order:0
-msgid "You cannot validate this purchase order because it contains a line with an inactive product"
-msgstr "You cannot validate this purchase order because it contains a line with an inactive product"
-
-#. module: transport_mgmt
-#: field:purchase.order,picking_transport_ids:0
-msgid "Linked deliveries"
-msgstr "Linked deliveries"
-
-#. module: transport_mgmt
-#: selection:international.transport.cost.report,transport_mode:0
-#: selection:purchase.order,transport_mode:0
-msgid "Air express"
-msgstr "Air express"
-
-#. module: transport_mgmt
-#: field:international.transport.cost.report,func_transport_cost:0
-#: field:local.transport.cost.report,func_transport_cost:0
-msgid "Func. Transport cost"
-msgstr "Func. Transport cost"
-
-#. module: transport_mgmt
-#: field:international.transport.cost.report,transport_currency_id:0
-#: field:local.transport.cost.report,func_currency_id:0
-#: field:local.transport.cost.report,transport_currency_id:0
-#: field:purchase.order,transport_currency_id:0
-msgid "Currency"
-msgstr "Currency"
-
-#. module: transport_mgmt
-#: field:product.product,transport_ok:0
-msgid "Transport product"
-msgstr "Transport product"
-
-#. module: transport_mgmt
-#: constraint:product.product:0
-msgid "Warning! GMDN code must be digits!"
-msgstr "Warning! GMDN code must be digits!"
-
-#. module: transport_mgmt
-#: selection:international.transport.cost.report,transport_mode:0
-#: selection:purchase.order,transport_mode:0
-msgid "Hand carry"
-msgstr "Hand carry"
-
-#. module: transport_mgmt
-#: constraint:purchase.order:0
-#: constraint:sale.order:0
-msgid "Partner type and order type are incompatible! Please change either order type or partner."
-msgstr "Partner type and order type are incompatible! Please change either order type or partner."
-
-#. module: transport_mgmt
-#: constraint:purchase.order:0
-msgid "You must specify a Valid Till date."
-msgstr "You must specify a Valid Till date."
+#: view:international.transport.cost.report:0
+#: selection:international.transport.cost.report,order_state:0
+#: view:local.transport.cost.report:0
+#: selection:local.transport.cost.report,order_state:0
+msgid "Closed"
+msgstr "Clôturé"
 
 #. module: transport_mgmt
 #: view:international.transport.cost.report:0
@@ -227,7 +44,322 @@ msgstr "You must specify a Valid Till date."
 #: view:local.transport.cost.report:0
 #: selection:local.transport.cost.report,order_state:0
 msgid "Confirmed"
-msgstr "Confirmed"
+msgstr "Confirmé"
+
+#. module: transport_mgmt
+#: view:international.transport.cost.report:0
+#: model:ir.actions.act_window,name:transport_mgmt.action_intl_transport_cost_action
+#: model:ir.model,name:transport_mgmt.model_international_transport_cost_report
+#: model:ir.ui.menu,name:transport_mgmt.menu_intl_transport_cost_report
+msgid "International Transport Costs"
+msgstr "Coûts du Transport International"
+
+#. module: transport_mgmt
+#: field:purchase.order,func_total_price_include_transport:0
+msgid "Functionnal total incl. transport"
+msgstr "Coût Fonctionnel Total transport inclus"
+
+#. module: transport_mgmt
+#: field:purchase.order,intl_supplier_ok:0
+msgid "International Supplier"
+msgstr "Fournisseur International"
+
+#. module: transport_mgmt
+#: field:international.transport.cost.report,func_transport_cost:0
+#: field:local.transport.cost.report,func_transport_cost:0
+msgid "Func. Transport cost"
+msgstr "Coût de Transport Fonc."
+
+#. module: transport_mgmt
+#: field:local.transport.cost.report,order_state:0
+msgid "Order state"
+msgstr "Statut de la commande"
+
+#. module: transport_mgmt
+#: field:international.transport.cost.report,nb_order:0
+#: field:local.transport.cost.report,nb_order:0
+msgid "# Order"
+msgstr "# Commander"
+
+#. module: transport_mgmt
+#: model:ir.actions.act_window,name:transport_mgmt.action_local_transport_cost_action
+#: model:ir.model,name:transport_mgmt.model_local_transport_cost_report
+#: model:ir.ui.menu,name:transport_mgmt.menu_local_transport_cost_report
+#: view:local.transport.cost.report:0
+msgid "Local Transport Costs"
+msgstr "Coûts du Transport Local"
+
+#. module: transport_mgmt
+#: field:purchase.order,display_intl_transport_ok:0
+msgid "Displayed intl transport"
+msgstr "Affichage du Transport International"
+
+#. module: transport_mgmt
+#: model:ir.module.module,shortdesc:transport_mgmt.module_meta_information
+msgid "Transport management"
+msgstr "Gestion de Transport "
+
+#. module: transport_mgmt
+#: constraint:purchase.order:0
+msgid "If you tick the box \"cross docking\", you cannot have an other location than \"Cross docking\""
+msgstr "Si vous cochez la case \"transbordement\", vous ne pouvez pas avoir d'autre lieu que \"Transbordement\""
+
+#. module: transport_mgmt
+#: help:product.product,transport_ok:0
+msgid "Check this box if the current product is a transport product."
+msgstr "Cocher cette case si le produit actuel est un produit transport."
+
+#. module: transport_mgmt
+#: model:ir.model,name:transport_mgmt.model_shipment
+msgid "represents a group of pack families"
+msgstr "stock.move.memory.families"
+
+#. module: transport_mgmt
+#: selection:international.transport.cost.report,transport_mode:0
+#: selection:purchase.order,transport_mode:0
+msgid "Air regular"
+msgstr "Air - régulier "
+
+#. module: transport_mgmt
+#: constraint:purchase.order:0
+#: constraint:sale.order:0
+msgid "Partner type and order type are incompatible! Please change either order type or partner."
+msgstr "Le type de partnenaire et le type de commande sont incompatibles. Veuillez changer l'un ou l'autre."
+
+#. module: transport_mgmt
+#: sql_constraint:purchase.order:0
+#: sql_constraint:sale.order:0
+msgid "Order Reference must be unique !"
+msgstr "La Référence de la Commande doit être unique !"
+
+#. module: transport_mgmt
+#: model:ir.ui.menu,name:transport_mgmt.menu_transport_cost_reports
+msgid "Transport costs"
+msgstr "Coûts de Transport "
+
+#. module: transport_mgmt
+#: constraint:product.product:0
+msgid "Error: Invalid ean code"
+msgstr "Erreur: code EAN invalide"
+
+#. module: transport_mgmt
+#: field:international.transport.cost.report,delivery_confirmed_date:0
+#: field:local.transport.cost.report,delivery_confirmed_date:0
+msgid "Delivery Confirmed Date"
+msgstr "Date de Livraison Confirmée"
+
+#. module: transport_mgmt
+#: view:international.transport.cost.report:0
+#: view:local.transport.cost.report:0
+msgid "# of Orders"
+msgstr "# de Commandes"
+
+#. module: transport_mgmt
+#: constraint:product.product:0
+msgid "You must select on order procurement method for Service with Reception products."
+msgstr "Vous devez sélectionner sur la commande le mode d'approvisionnement pour le Service  avec Réception de produits."
+
+#. module: transport_mgmt
+#: field:international.transport.cost.report,transport_mode:0
+#: field:local.transport.cost.report,transport_mode:0
+#: field:purchase.order,transport_mode:0
+msgid "Transport mode"
+msgstr "Mode de transport"
+
+#. module: transport_mgmt
+#: model:ir.model,name:transport_mgmt.model_purchase_order
+#: view:purchase.order:0
+msgid "Purchase Order"
+msgstr "Bon de Commande"
+
+#. module: transport_mgmt
+#: field:purchase.order,total_price_include_transport:0
+msgid "Total incl. transport"
+msgstr "Coût Total Transport Inclus."
+
+#. module: transport_mgmt
+#: constraint:purchase.order:0
+msgid "You cannot validate this purchase order because it contains a line with an inactive product"
+msgstr "Vous ne pouvez pas valider ce bon de commande, car il contient une ligne avec des produits inactifs."
+
+#. module: transport_mgmt
+#: field:international.transport.cost.report,order_id:0
+#: field:local.transport.cost.report,order_id:0
+msgid "PO Reference"
+msgstr "Référence BC"
+
+#. module: transport_mgmt
+#: view:international.transport.cost.report:0
+#: field:international.transport.cost.report,partner_id:0
+#: view:local.transport.cost.report:0
+#: field:local.transport.cost.report,partner_id:0
+msgid "Supplier"
+msgstr "Fournisseur"
+
+#. module: transport_mgmt
+#: sql_constraint:product.product:0
+msgid "The \"Product Code\" must be unique"
+msgstr "Le \"Code produit\" doit être unique"
+
+#. module: transport_mgmt
+#: field:shipment,transport_order_id:0
+#: field:stock.picking,transport_order_id:0
+msgid "Transport Order"
+msgstr "Commande de Transport "
+
+#. module: transport_mgmt
+#: constraint:stock.picking:0
+msgid "Wrong reason type for an OUT created from scratch."
+msgstr "Mauvais type de motif pour une livraison OUT créée à partir de rien."
+
+#. module: transport_mgmt
+#: model:ir.model,name:transport_mgmt.model_stock_incoterms
+msgid "Incoterms"
+msgstr "Incoterms"
+
+#. module: transport_mgmt
+#: constraint:stock.picking:0
+msgid "You cannot validate this document because it contains a line with an inactive product"
+msgstr "Vous ne pouvez pas valider ce document car il contient des lignes avec un produit inactif"
+
+#. module: transport_mgmt
+#: model:ir.model,name:transport_mgmt.model_sale_order
+msgid "Sales Order"
+msgstr "Commande de Terrain"
+
+#. module: transport_mgmt
+#: selection:international.transport.cost.report,transport_mode:0
+#: selection:purchase.order,transport_mode:0
+msgid "Sea"
+msgstr "Mer"
+
+#. module: transport_mgmt
+#: constraint:sale.order:0
+msgid "You cannot validate this sale order because it contains a line with an inactive product"
+msgstr "Vous ne pouvez pas valider cette commande client car elle contient des lignes avec un produit inactif"
+
+#. module: transport_mgmt
+#: constraint:purchase.order:0
+msgid "You must specify a Valid Till date."
+msgstr "Spécifiez une date de validité 'Valide Jusque'."
+
+#. module: transport_mgmt
+#: view:shipment:0
+msgid "Transport Purchase Order"
+msgstr "Bon de Commande de Transport"
+
+#. module: transport_mgmt
+#: constraint:purchase.order:0
+msgid "You cannot choose an internal supplier for this purchase order"
+msgstr "You cannot choose an internal supplier for this purchase order"
+
+#. module: transport_mgmt
+#: model:ir.model,name:transport_mgmt.model_stock_picking
+msgid "Picking List"
+msgstr "Liste de Piquage"
+
+#. module: transport_mgmt
+#: field:purchase.order,picking_transport_ids:0
+msgid "Linked deliveries"
+msgstr "Livraisons Connexes"
+
+#. module: transport_mgmt
+#: field:international.transport.cost.report,order_state:0
+msgid "State"
+msgstr "Statut"
+
+#. module: transport_mgmt
+#: model:ir.model,name:transport_mgmt.model_product_product
+msgid "Product"
+msgstr "Produit"
+
+#. module: transport_mgmt
+#: constraint:product.product:0
+msgid "If you select \"Non-stockable\" as product type then you have to select \"Make to order\" as procurement method"
+msgstr "Si vous sélectionnez \"Non stockable\" comme type de produit, vous devez sélectionner \"Faire sur commande\" comme méthode d'acquisition"
+
+#. module: transport_mgmt
+#: selection:international.transport.cost.report,transport_mode:0
+#: selection:purchase.order,transport_mode:0
+msgid "Road"
+msgstr "Route"
+
+#. module: transport_mgmt
+#: selection:international.transport.cost.report,transport_mode:0
+#: selection:purchase.order,transport_mode:0
+msgid "Air FFC"
+msgstr "Air - FFC"
+
+#. module: transport_mgmt
+#: field:international.transport.cost.report,func_currency_id:0
+msgid "Func. Currency"
+msgstr "Fonc. Devise"
+
+#. module: transport_mgmt
+#: view:purchase.order:0
+msgid "Delivery documents"
+msgstr "Documents de Livraison"
+
+#. module: transport_mgmt
+#: field:sale.order,intl_customer_ok:0
+msgid "International customer"
+msgstr "Client International"
+
+#. module: transport_mgmt
+#: field:product.product,transport_ok:0
+msgid "Transport product"
+msgstr "Produit Transport "
+
+#. module: transport_mgmt
+#: selection:international.transport.cost.report,transport_mode:0
+#: selection:purchase.order,transport_mode:0
+msgid "Hand carry"
+msgstr "Transport en bagage à main"
+
+#. module: transport_mgmt
+#: field:international.transport.cost.report,date_order:0
+#: field:local.transport.cost.report,date_order:0
+msgid "Creation date"
+msgstr "Date de Création"
+
+#. module: transport_mgmt
+#: constraint:product.product:0
+msgid "Constraint error on Kit Product."
+msgstr "Erreur de Contrainte sur le produit Kit"
+
+#. module: transport_mgmt
+#: field:purchase.order,transport_order_id:0
+msgid "Linked Purchase Order"
+msgstr "Bon de Commande Connexe"
+
+#. module: transport_mgmt
+#: view:international.transport.cost.report:0
+#: view:local.transport.cost.report:0
+msgid "Transport Mode"
+msgstr "Mode de Transport"
+
+#. module: transport_mgmt
+#: constraint:product.product:0
+msgid "Warning! GMDN code must be digits!"
+msgstr "Avertissement! Le code  GMDN doit être en chiffres!"
+
+#. module: transport_mgmt
+#: field:international.transport.cost.report,transport_currency_id:0
+#: field:local.transport.cost.report,func_currency_id:0
+#: field:local.transport.cost.report,transport_currency_id:0
+#: field:purchase.order,transport_currency_id:0
+msgid "Currency"
+msgstr "Devises"
+
+#. module: transport_mgmt
+#: field:purchase.order,incoterm_id:0
+msgid "Incoterm"
+msgstr "Incoterm"
+
+#. module: transport_mgmt
+#: view:purchase.order:0
+msgid "Delivery Orders"
+msgstr "Bons de Livraison"
 
 #. module: transport_mgmt
 #: view:international.transport.cost.report:0
@@ -236,93 +368,19 @@ msgstr "Confirmed"
 #: field:local.transport.cost.report,transport_cost:0
 #: field:purchase.order,transport_cost:0
 msgid "Transport cost"
-msgstr "Transport cost"
+msgstr "Coût du Transport "
 
 #. module: transport_mgmt
-#: constraint:purchase.order:0
-msgid "If you tick the box \"cross docking\", you cannot have an other location than \"Cross docking\""
-msgstr "If you tick the box \"cross docking\", you cannot have an other location than \"Cross docking\""
-
-#. module: transport_mgmt
-#: constraint:purchase.order:0
-msgid "You cannot choose an internal supplier for this purchase order"
-msgstr "You cannot choose an internal supplier for this purchase order"
-
-#. module: transport_mgmt
-#: field:shipment,transport_order_id:0
-#: field:stock.picking,transport_order_id:0
-msgid "Transport Order"
-msgstr "Transport Order"
-
-#. module: transport_mgmt
-#: field:international.transport.cost.report,nb_order:0
-#: field:local.transport.cost.report,nb_order:0
-msgid "# Order"
-msgstr "# Order"
+#: view:international.transport.cost.report:0
+#: view:local.transport.cost.report:0
+msgid "Group By..."
+msgstr "Grouper Par..."
 
 #. module: transport_mgmt
 #: selection:international.transport.cost.report,transport_mode:0
 #: selection:purchase.order,transport_mode:0
-msgid "Road"
-msgstr "Road"
-
-#. module: transport_mgmt
-#: view:international.transport.cost.report:0
-#: selection:international.transport.cost.report,order_state:0
-#: view:local.transport.cost.report:0
-#: selection:local.transport.cost.report,order_state:0
-msgid "Closed"
-msgstr "Closed"
-
-#. module: transport_mgmt
-#: field:purchase.order,intl_supplier_ok:0
-msgid "International Supplier"
-msgstr "International Supplier"
-
-#. module: transport_mgmt
-#: view:international.transport.cost.report:0
-#: view:local.transport.cost.report:0
-msgid "Transport Mode"
-msgstr "Transport Mode"
-
-#. module: transport_mgmt
-#: field:purchase.order,display_intl_transport_ok:0
-msgid "Displayed intl transport"
-msgstr "Displayed intl transport"
-
-#. module: transport_mgmt
-#: model:ir.model,name:transport_mgmt.model_sale_order
-msgid "Sales Order"
-msgstr "Sales Order"
-
-#. module: transport_mgmt
-#: model:ir.model,name:transport_mgmt.model_stock_picking
-msgid "Picking List"
-msgstr "Picking List"
-
-#. module: transport_mgmt
-#: field:international.transport.cost.report,order_state:0
-msgid "State"
-msgstr "State"
-
-#. module: transport_mgmt
-#: model:ir.actions.act_window,name:transport_mgmt.action_local_transport_cost_action
-#: model:ir.model,name:transport_mgmt.model_local_transport_cost_report
-#: model:ir.ui.menu,name:transport_mgmt.menu_local_transport_cost_report
-#: view:local.transport.cost.report:0
-msgid "Local Transport Costs"
-msgstr "Local Transport Costs"
-
-#. module: transport_mgmt
-#: view:international.transport.cost.report:0
-#: view:local.transport.cost.report:0
-msgid "# of Orders"
-msgstr "# of Orders"
-
-#. module: transport_mgmt
-#: model:ir.module.module,shortdesc:transport_mgmt.module_meta_information
-msgid "Transport management"
-msgstr "Transport management"
+msgid "Air express"
+msgstr "Air - express"
 
 #. module: transport_mgmt
 #: model:ir.module.module,description:transport_mgmt.module_meta_information
@@ -330,69 +388,11 @@ msgid "\n"
 "    This module aims at implementing the transport cost in Purchase and Sale orders.\n"
 "    "
 msgstr "\n"
-"    This module aims at implementing the transport cost in Purchase and Sale orders.\n"
+"    Ce module vise à mettre en oeuvre le coût du transport dans l'Achat et commandes terrain\n"
 "    "
 
 #. module: transport_mgmt
 #: view:purchase.order:0
 msgid "Shipments"
-msgstr "Shipments"
-
-#. module: transport_mgmt
-#: constraint:product.product:0
-msgid "If you select \"Non-stockable\" as product type then you have to select \"Make to order\" as procurement method"
-msgstr "If you select \"Non-stockable\" as product type then you have to select \"Make to order\" as procurement method"
-
-#. module: transport_mgmt
-#: view:shipment:0
-msgid "Transport Purchase Order"
-msgstr "Transport Purchase Order"
-
-#. module: transport_mgmt
-#: view:international.transport.cost.report:0
-#: view:local.transport.cost.report:0
-msgid "Group By..."
-msgstr "Group By..."
-
-#. module: transport_mgmt
-#: model:ir.model,name:transport_mgmt.model_shipment
-msgid "represents a group of pack families"
-msgstr "represents a group of pack families"
-
-#. module: transport_mgmt
-#: constraint:sale.order:0
-msgid "You cannot validate this sale order because it contains a line with an inactive product"
-msgstr "You cannot validate this sale order because it contains a line with an inactive product"
-
-#. module: transport_mgmt
-#: field:international.transport.cost.report,date_order:0
-#: field:local.transport.cost.report,date_order:0
-msgid "Creation date"
-msgstr "Creation date"
-
-#. module: transport_mgmt
-#: field:purchase.order,incoterm_id:0
-msgid "Incoterm"
-msgstr "Incoterm"
-
-#. module: transport_mgmt
-#: model:ir.model,name:transport_mgmt.model_stock_incoterms
-msgid "Incoterms"
-msgstr "Incoterms"
-
-#. module: transport_mgmt
-#: field:international.transport.cost.report,delivery_confirmed_date:0
-#: field:local.transport.cost.report,delivery_confirmed_date:0
-msgid "Delivery Confirmed Date"
-msgstr "Delivery Confirmed Date"
-
-#. module: transport_mgmt
-#: field:international.transport.cost.report,func_currency_id:0
-msgid "Func. Currency"
-msgstr "Func. Currency"
-
-#. module: transport_mgmt
-#: model:ir.model,name:transport_mgmt.model_product_product
-msgid "Product"
-msgstr "Product"
+msgstr "Expéditions"
 

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.0.3\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2013-10-17 07:42+0000\n"
-"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,139 +16,11 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: order_nomenclature
-#: field:purchase.order.line,comment:0
-#: field:purchase.order.merged.line,comment:0
-#: field:sale.order.line,comment:0
-msgid "Comment"
-msgstr "Comment"
-
-#. module: order_nomenclature
-#: code:addons/order_nomenclature/wizard/order_nomenclature_select_product.py:94
-#, python-format
-msgid "Currnt currency is not confirured properly !"
-msgstr "Currnt currency is not confirured properly !"
-
-#. module: order_nomenclature
-#: code:addons/order_nomenclature/wizard/order_nomenclature_select_product.py:89
-#, python-format
-msgid "New currency is not confirured properly !"
-msgstr "New currency is not confirured properly !"
-
-#. module: order_nomenclature
-#: field:purchase.order.line,nomen_manda_0:0
-#: field:purchase.order.merged.line,nomen_manda_0:0
-#: field:sale.order.line,nomen_manda_0:0
-msgid "Main Type"
-msgstr "Main Type"
-
-#. module: order_nomenclature
-#: field:purchase.order.line,nomen_sub_1:0
-#: field:purchase.order.merged.line,nomen_sub_1:0
-#: field:sale.order.line,nomen_sub_1:0
-msgid "Sub Class 2"
-msgstr "Sub Class 2"
-
-#. module: order_nomenclature
-#: code:addons/order_nomenclature/wizard/order_nomenclature_select_product.py:100
-#, python-format
-msgid "Current currency is not confirured properly !"
-msgstr "Current currency is not confirured properly !"
-
-#. module: order_nomenclature
-#: model:ir.module.module,description:order_nomenclature.module_meta_information
-msgid "\n"
-"    Add nomenclature abilities to orders (sale and purchase).\n"
-"    "
-msgstr "\n"
-"    Add nomenclature abilities to orders (sale and purchase).\n"
-"    "
-
-#. module: order_nomenclature
-#: view:purchase.order.line:0
-#: view:sale.order:0
-msgid "Order Line"
-msgstr "Order Line"
-
-#. module: order_nomenclature
-#: model:ir.module.module,shortdesc:order_nomenclature.module_meta_information
-msgid "Order Nomenclature"
-msgstr "Order Nomenclature"
-
-#. module: order_nomenclature
-#: field:purchase.order.line,nomen_sub_3:0
-#: field:purchase.order.merged.line,nomen_sub_3:0
-#: field:sale.order.line,nomen_sub_3:0
-msgid "Sub Class 4"
-msgstr "Sub Class 4"
-
-#. module: order_nomenclature
-#: model:ir.model,name:order_nomenclature.model_purchase_order_merged_line
-msgid "Purchase Order Merged Lines"
-msgstr "Purchase Order Merged Lines"
-
-#. module: order_nomenclature
-#: field:purchase.order.line,nomen_manda_1:0
-#: field:purchase.order.merged.line,nomen_manda_1:0
-#: field:sale.order.line,nomen_manda_1:0
-msgid "Group"
-msgstr "Group"
-
-#. module: order_nomenclature
-#: field:purchase.order.line,nomen_sub_0:0
-#: field:purchase.order.merged.line,nomen_sub_0:0
-#: field:sale.order.line,nomen_sub_0:0
-msgid "Sub Class 1"
-msgstr "Sub Class 1"
-
-#. module: order_nomenclature
-#: field:purchase.order.line,default_name:0
-#: field:purchase.order.merged.line,default_name:0
-#: field:sale.order.line,default_name:0
-msgid "Product Description"
-msgstr "Product Description"
-
-#. module: order_nomenclature
-#: sql_constraint:purchase.order.line:0
-#: sql_constraint:sale.order.line:0
-msgid "Product Quantity must be greater than zero."
-msgstr "Product Quantity must be greater than zero."
-
-#. module: order_nomenclature
-#: field:purchase.order.line,nomen_sub_5:0
-#: field:purchase.order.merged.line,nomen_sub_5:0
-#: field:sale.order.line,nomen_sub_5:0
-msgid "Sub Class 6"
-msgstr "Sub Class 6"
-
-#. module: order_nomenclature
-#: field:purchase.order.line,nomen_sub_4:0
-#: field:purchase.order.merged.line,nomen_sub_4:0
-#: field:sale.order.line,nomen_sub_4:0
-msgid "Sub Class 5"
-msgstr "Sub Class 5"
-
-#. module: order_nomenclature
-#: field:purchase.order.line,nomen_manda_2:0
-#: field:purchase.order.merged.line,nomen_manda_2:0
-#: field:sale.order.line,nomen_manda_2:0
-msgid "Family"
-msgstr "Family"
-
-#. module: order_nomenclature
-#: model:ir.model,name:order_nomenclature.model_purchase_order_line
-msgid "Purchase Order Line"
-msgstr "Purchase Order Line"
-
-#. module: order_nomenclature
-#: constraint:sale.order.line:0
-msgid "You must select on order procurement method for Service with Reception products."
-msgstr "You must select on order procurement method for Service with Reception products."
-
-#. module: order_nomenclature
-#: code:addons/order_nomenclature/wizard/order_nomenclature_select_product.py:67
-#, python-format
-msgid "You can only change currency for Draft Invoice !"
-msgstr "You can only change currency for Draft Invoice !"
+#: field:purchase.order.line,nomenclature_code:0
+#: field:purchase.order.merged.line,nomenclature_code:0
+#: field:sale.order.line,nomenclature_code:0
+msgid "Nomenclature code"
+msgstr "Code Nomenclature"
 
 #. module: order_nomenclature
 #: field:purchase.order.line,nomenclature_description:0
@@ -158,22 +30,55 @@ msgid "Nomenclature"
 msgstr "Nomenclature"
 
 #. module: order_nomenclature
-#: model:ir.model,name:order_nomenclature.model_sale_order_line
-msgid "Sales Order Line"
-msgstr "Sales Order Line"
+#: model:ir.module.module,description:order_nomenclature.module_meta_information
+msgid "\n"
+"    Add nomenclature abilities to orders (sale and purchase).\n"
+"    "
+msgstr "\n"
+"    Ajouter des capacités de nomenclature aux commandes (achat et vente)\n"
+"    "
+
+#. module: order_nomenclature
+#: field:purchase.order.line,comment:0
+#: field:purchase.order.merged.line,comment:0
+#: field:sale.order.line,comment:0
+msgid "Comment"
+msgstr "Commentaire"
+
+#. module: order_nomenclature
+#: code:addons/order_nomenclature/wizard/order_nomenclature_select_product.py:94
+#, python-format
+msgid "Currnt currency is not confirured properly !"
+msgstr "La Devise actuelle n'est pas configurée correctement !"
+
+#. module: order_nomenclature
+#: model:ir.model,name:order_nomenclature.model_purchase_order_merged_line
+msgid "Purchase Order Merged Lines"
+msgstr "Lignes Fusionnées d'un Bon de Commande "
+
+#. module: order_nomenclature
+#: code:addons/order_nomenclature/wizard/order_nomenclature_select_product.py:89
+#, python-format
+msgid "New currency is not confirured properly !"
+msgstr "La nouvelle devise n'est pas correctement paramétrée !"
 
 #. module: order_nomenclature
 #: view:purchase.order.line:0
 #: view:sale.order:0
 msgid "Optional Levels"
-msgstr "Optional Levels"
+msgstr "Niveaux Optionnels"
 
 #. module: order_nomenclature
-#: field:purchase.order.line,nomen_manda_3:0
-#: field:purchase.order.merged.line,nomen_manda_3:0
-#: field:sale.order.line,nomen_manda_3:0
-msgid "Root"
-msgstr "Root"
+#: constraint:sale.order.line:0
+msgid "You must select on order procurement method for Service with Reception products."
+msgstr "Vous devez sélectionner sur la commande le mode d'approvisionnement pour le Service  avec Réception de produits."
+
+#. module: order_nomenclature
+#: field:purchase.order.line,default_name:0
+#: field:purchase.order.merged.line,default_name:0
+#: field:sale.order.line,default_name:0
+msgid "Product Description"
+msgstr "Description Produit"
 
 #. module: order_nomenclature
 #: code:addons/order_nomenclature/wizard/order_nomenclature_select_product.py:67
@@ -182,38 +87,133 @@ msgstr "Root"
 #: code:addons/order_nomenclature/wizard/order_nomenclature_select_product.py:100
 #, python-format
 msgid "Error"
-msgstr "Error"
+msgstr "Erreur"
 
 #. module: order_nomenclature
-#: field:purchase.order.line,nomen_sub_2:0
-#: field:purchase.order.merged.line,nomen_sub_2:0
-#: field:sale.order.line,nomen_sub_2:0
-msgid "Sub Class 3"
-msgstr "Sub Class 3"
+#: view:purchase.order.line:0
+#: view:sale.order:0
+msgid "Order Line"
+msgstr "Ligne de Commande"
+
+#. module: order_nomenclature
+#: field:purchase.order.line,nomen_sub_5:0
+#: field:purchase.order.merged.line,nomen_sub_5:0
+#: field:sale.order.line,nomen_sub_5:0
+msgid "Sub Class 6"
+msgstr "Sous-Classe 6"
+
+#. module: order_nomenclature
+#: view:purchase.order.line:0
+#: view:sale.order:0
+msgid "Mandatory Levels"
+msgstr "Niveaux obligatoires"
+
+#. module: order_nomenclature
+#: model:ir.model,name:order_nomenclature.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Ligne Commande Terrain"
+
+#. module: order_nomenclature
+#: view:purchase.order.line:0
+#: view:sale.order:0
+msgid "Nomenclature Selection"
+msgstr "Sélection de la Nomenclature"
+
+#. module: order_nomenclature
+#: model:ir.module.module,shortdesc:order_nomenclature.module_meta_information
+msgid "Order Nomenclature"
+msgstr "Nomenclature de Commande"
+
+#. module: order_nomenclature
+#: field:purchase.order.line,nomen_manda_3:0
+#: field:purchase.order.merged.line,nomen_manda_3:0
+#: field:sale.order.line,nomen_manda_3:0
+msgid "Root"
+msgstr "Origine"
+
+#. module: order_nomenclature
+#: field:purchase.order.line,nomen_sub_3:0
+#: field:purchase.order.merged.line,nomen_sub_3:0
+#: field:sale.order.line,nomen_sub_3:0
+msgid "Sub Class 4"
+msgstr "Sous-Classe 4"
+
+#. module: order_nomenclature
+#: sql_constraint:purchase.order.line:0
+#: sql_constraint:sale.order.line:0
+msgid "Product Quantity must be greater than zero."
+msgstr "La quantité de produits doit être supérieure à zéro."
+
+#. module: order_nomenclature
+#: field:purchase.order.line,nomen_sub_0:0
+#: field:purchase.order.merged.line,nomen_sub_0:0
+#: field:sale.order.line,nomen_sub_0:0
+msgid "Sub Class 1"
+msgstr "Sous-Classe 1"
 
 #. module: order_nomenclature
 #: field:purchase.order.line,default_code:0
 #: field:purchase.order.merged.line,default_code:0
 #: field:sale.order.line,default_code:0
 msgid "Product Code"
-msgstr "Product Code"
+msgstr "Code Produit"
 
 #. module: order_nomenclature
-#: view:purchase.order.line:0
-#: view:sale.order:0
-msgid "Mandatory Levels"
-msgstr "Mandatory Levels"
+#: code:addons/order_nomenclature/wizard/order_nomenclature_select_product.py:100
+#, python-format
+msgid "Current currency is not confirured properly !"
+msgstr "La Devise actuelle n'est pas configurée correctement !"
 
 #. module: order_nomenclature
-#: view:purchase.order.line:0
-#: view:sale.order:0
-msgid "Nomenclature Selection"
-msgstr "Nomenclature Selection"
+#: field:purchase.order.line,nomen_manda_2:0
+#: field:purchase.order.merged.line,nomen_manda_2:0
+#: field:sale.order.line,nomen_manda_2:0
+msgid "Family"
+msgstr "Famille"
 
 #. module: order_nomenclature
-#: field:purchase.order.line,nomenclature_code:0
-#: field:purchase.order.merged.line,nomenclature_code:0
-#: field:sale.order.line,nomenclature_code:0
-msgid "Nomenclature code"
-msgstr "Nomenclature code"
+#: field:purchase.order.line,nomen_manda_0:0
+#: field:purchase.order.merged.line,nomen_manda_0:0
+#: field:sale.order.line,nomen_manda_0:0
+msgid "Main Type"
+msgstr "Type Principal"
+
+#. module: order_nomenclature
+#: code:addons/order_nomenclature/wizard/order_nomenclature_select_product.py:67
+#, python-format
+msgid "You can only change currency for Draft Invoice !"
+msgstr "Vous ne pouvez changer la devise que sur le Brouillon de facture !"
+
+#. module: order_nomenclature
+#: field:purchase.order.line,nomen_sub_2:0
+#: field:purchase.order.merged.line,nomen_sub_2:0
+#: field:sale.order.line,nomen_sub_2:0
+msgid "Sub Class 3"
+msgstr "Sous-Classe 3"
+
+#. module: order_nomenclature
+#: model:ir.model,name:order_nomenclature.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Ligne Bon de Commande"
+
+#. module: order_nomenclature
+#: field:purchase.order.line,nomen_sub_4:0
+#: field:purchase.order.merged.line,nomen_sub_4:0
+#: field:sale.order.line,nomen_sub_4:0
+msgid "Sub Class 5"
+msgstr "Sous-Classe 5"
+
+#. module: order_nomenclature
+#: field:purchase.order.line,nomen_sub_1:0
+#: field:purchase.order.merged.line,nomen_sub_1:0
+#: field:sale.order.line,nomen_sub_1:0
+msgid "Sub Class 2"
+msgstr "Sous-Classe 2"
+
+#. module: order_nomenclature
+#: field:purchase.order.line,nomen_manda_1:0
+#: field:purchase.order.merged.line,nomen_manda_1:0
+#: field:sale.order.line,nomen_manda_1:0
+msgid "Group"
+msgstr "Groupe"
 

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.0.3\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2013-10-17 07:42+0000\n"
-"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,129 +18,40 @@ msgstr ""
 #. module: purchase_compare_rfq
 #: field:wizard.compare.rfq,rfq_number:0
 msgid "# of Quotations"
-msgstr "# of Quotations"
+msgstr "# de Devis"
 
 #. module: purchase_compare_rfq
 #: field:wizard.choose.supplier.line,price_unit:0
 msgid "Unit Price"
-msgstr "Unit Price"
+msgstr "Prix unitaire"
 
 #. module: purchase_compare_rfq
-#: model:ir.actions.server,name:purchase_compare_rfq.action_compare_rfq
-#: view:wizard.compare.rfq:0
-msgid "Compare RfQ"
-msgstr "Compare RfQ"
+#: code:addons/purchase_compare_rfq/wizard/compare_rfq.py:67
+#, python-format
+msgid "You cannot compare confirmed Purchase Order !"
+msgstr "Vous ne pouvez pas comparer des Bons de Commandes confirmés !"
 
 #. module: purchase_compare_rfq
-#: view:wizard.choose.supplier.line:0
-msgid "Line"
-msgstr "Line"
-
-#. module: purchase_compare_rfq
-#: field:wizard.choose.supplier.line,func_price_total:0
-msgid "Func. Total Price"
-msgstr "Func. Total Price"
-
-#. module: purchase_compare_rfq
-#: field:wizard.choose.supplier.line,compare_line_id:0
-msgid "Compare Line"
-msgstr "Compare Line"
-
-#. module: purchase_compare_rfq
-#: field:wizard.compare.rfq.line,po_line_ids:0
-msgid "Quotation Line"
-msgstr "Quotation Line"
+#: view:wizard.compare.rfq.line:0
+msgid "Compared products"
+msgstr "Produits Comparés"
 
 #. module: purchase_compare_rfq
 #: view:wizard.choose.supplier:0
-#: view:wizard.compare.rfq:0
-msgid "Cancel"
-msgstr "Cancel"
-
-#. module: purchase_compare_rfq
-#: field:wizard.choose.supplier,compare_id:0
-#: field:wizard.compare.rfq.line,compare_id:0
-msgid "Wizard"
-msgstr "Wizard"
-
-#. module: purchase_compare_rfq
-#: view:wizard.choose.supplier:0
-msgid "Quotation Lines"
-msgstr "Quotation Lines"
-
-#. module: purchase_compare_rfq
-#: model:ir.module.module,shortdesc:purchase_compare_rfq.module_meta_information
-msgid "Compare Purchase RfQ"
-msgstr "Compare Purchase RfQ"
+msgid "Prices"
+msgstr "Prix"
 
 #. module: purchase_compare_rfq
 #: code:addons/purchase_compare_rfq/wizard/compare_rfq.py:60
 #, python-format
 msgid "You should select at least two quotations to compare !"
-msgstr "You should select at least two quotations to compare !"
+msgstr "Veuillez sélectionner au minimum 2 devis pour comparer !"
 
 #. module: purchase_compare_rfq
-#: view:wizard.compare.rfq.line:0
-msgid "Compare and choose"
-msgstr "Compare and choose"
-
-#. module: purchase_compare_rfq
-#: view:wizard.choose.supplier:0
-#: view:wizard.choose.supplier.line:0
-msgid "Choose this supplier"
-msgstr "Choose this supplier"
-
-#. module: purchase_compare_rfq
-#: field:wizard.compare.rfq.line,po_line_id:0
-msgid "Selected line"
-msgstr "Selected line"
-
-#. module: purchase_compare_rfq
-#: model:ir.model,name:purchase_compare_rfq.model_wizard_compare_rfq
-msgid "Compare Quotations"
-msgstr "Compare Quotations"
-
-#. module: purchase_compare_rfq
-#: field:wizard.compare.rfq,tender_id:0
-msgid "Tender"
-msgstr "Tender"
-
-#. module: purchase_compare_rfq
-#: view:wizard.choose.supplier:0
-msgid "Test"
-msgstr "Test"
-
-#. module: purchase_compare_rfq
-#: model:ir.model,name:purchase_compare_rfq.model_wizard_compare_rfq_line
-msgid "Compare Quotation Line"
-msgstr "Compare Quotation Line"
-
-#. module: purchase_compare_rfq
-#: field:wizard.choose.supplier.line,po_line_id:0
-msgid "PO Line"
-msgstr "PO Line"
-
-#. module: purchase_compare_rfq
-#: code:addons/purchase_compare_rfq/wizard/compare_rfq.py:58
-#, python-format
-msgid "No quotation found !"
-msgstr "No quotation found !"
-
-#. module: purchase_compare_rfq
-#: model:ir.model,name:purchase_compare_rfq.model_wizard_choose_supplier
-#: view:wizard.choose.supplier:0
-msgid "Choose a supplier"
-msgstr "Choose a supplier"
-
-#. module: purchase_compare_rfq
-#: field:wizard.choose.supplier.line,price_total:0
-msgid "Total Price"
-msgstr "Total Price"
-
-#. module: purchase_compare_rfq
-#: model:ir.model,name:purchase_compare_rfq.model_wizard_choose_supplier_line
-msgid "Line Choose supplier wizard"
-msgstr "Line Choose supplier wizard"
+#: field:wizard.choose.supplier,compare_id:0
+#: field:wizard.compare.rfq.line,compare_id:0
+msgid "Wizard"
+msgstr "Assistant"
 
 #. module: purchase_compare_rfq
 #: field:wizard.choose.supplier,line_ids:0
@@ -149,51 +60,22 @@ msgstr "Line Choose supplier wizard"
 #: view:wizard.compare.rfq:0
 #: field:wizard.compare.rfq,line_ids:0
 msgid "Lines"
-msgstr "Lines"
+msgstr "Lignes"
+
+#. module: purchase_compare_rfq
+#: view:wizard.compare.rfq.line:0
+msgid "Compare and choose"
+msgstr "Comparer et choisir"
+
+#. module: purchase_compare_rfq
+#: field:wizard.choose.supplier.line,func_price_total:0
+msgid "Func. Total Price"
+msgstr "Prix Total Fonc."
 
 #. module: purchase_compare_rfq
 #: view:wizard.compare.rfq:0
-msgid "Update Tender"
-msgstr "Update Tender"
-
-#. module: purchase_compare_rfq
-#: view:wizard.choose.supplier:0
-msgid "Prices"
-msgstr "Prices"
-
-#. module: purchase_compare_rfq
-#: field:wizard.choose.supplier.line,compare_id:0
-msgid "Compare"
-msgstr "Compare"
-
-#. module: purchase_compare_rfq
-#: code:addons/purchase_compare_rfq/wizard/compare_rfq.py:67
-#, python-format
-msgid "You cannot compare confirmed Purchase Order !"
-msgstr "You cannot compare confirmed Purchase Order !"
-
-#. module: purchase_compare_rfq
-#: field:wizard.choose.supplier,supplier_id:0
-#: field:wizard.choose.supplier.line,supplier_id:0
-#: field:wizard.compare.rfq.line,supplier_id:0
-msgid "Supplier"
-msgstr "Supplier"
-
-#. module: purchase_compare_rfq
-#: field:wizard.choose.supplier.line,currency_id:0
-msgid "Currency"
-msgstr "Currency"
-
-#. module: purchase_compare_rfq
-#: field:wizard.choose.supplier.line,qty:0
-msgid "Qty"
-msgstr "Qty"
-
-#. module: purchase_compare_rfq
-#: field:wizard.choose.supplier,product_id:0
-#: field:wizard.compare.rfq.line,product_id:0
-msgid "Product"
-msgstr "Product"
+msgid "Create PO"
+msgstr "Créer BC"
 
 #. module: purchase_compare_rfq
 #: model:ir.module.module,description:purchase_compare_rfq.module_meta_information
@@ -203,10 +85,135 @@ msgid "\n"
 "        Creates automatically Purchase Orders after choosing.\n"
 "    "
 msgstr "\n"
-"        This module allow you to compare Requests for Quotation\n"
-"    for many suppliers and choose the best.\n"
-"        Creates automatically Purchase Orders after choosing.\n"
+"        Ce module vous permet de comparer les Demandes de Devis\n"
+"     pour de nombreux fournisseurs et de choisir le meilleur.\n"
+"         Crée automatiquement des Bons de Commande une fois votre choix fait.\n"
 "    "
+
+#. module: purchase_compare_rfq
+#: model:ir.model,name:purchase_compare_rfq.model_wizard_compare_rfq_line
+msgid "Compare Quotation Line"
+msgstr "Comparer Lignes de Devis"
+
+#. module: purchase_compare_rfq
+#: view:wizard.compare.rfq:0
+msgid "General Information"
+msgstr "Informations Générales"
+
+#. module: purchase_compare_rfq
+#: field:wizard.compare.rfq.line,po_line_ids:0
+msgid "Quotation Line"
+msgstr "Ligne Devis"
+
+#. module: purchase_compare_rfq
+#: model:ir.model,name:purchase_compare_rfq.model_wizard_choose_supplier_line
+msgid "Line Choose supplier wizard"
+msgstr "Ligne - Choisir Assistant Approvisionnement"
+
+#. module: purchase_compare_rfq
+#: code:addons/purchase_compare_rfq/wizard/compare_rfq.py:58
+#: code:addons/purchase_compare_rfq/wizard/compare_rfq.py:60
+#: code:addons/purchase_compare_rfq/wizard/compare_rfq.py:67
+#, python-format
+msgid "Error"
+msgstr "Erreur"
+
+#. module: purchase_compare_rfq
+#: view:wizard.compare.rfq:0
+msgid "Update Tender"
+msgstr "Appel d'Offres Mis à jour"
+
+#. module: purchase_compare_rfq
+#: view:wizard.choose.supplier.line:0
+msgid "Line"
+msgstr "Ligne"
+
+#. module: purchase_compare_rfq
+#: field:wizard.choose.supplier.line,qty:0
+msgid "Qty"
+msgstr "Qté"
+
+#. module: purchase_compare_rfq
+#: field:wizard.choose.supplier.line,compare_line_id:0
+msgid "Compare Line"
+msgstr "Comparer ligne"
+
+#. module: purchase_compare_rfq
+#: model:ir.model,name:purchase_compare_rfq.model_wizard_compare_rfq
+msgid "Compare Quotations"
+msgstr "Comparer Devis"
+
+#. module: purchase_compare_rfq
+#: model:ir.model,name:purchase_compare_rfq.model_wizard_choose_supplier
+#: view:wizard.choose.supplier:0
+msgid "Choose a supplier"
+msgstr "Choisir un fournisseur"
+
+#. module: purchase_compare_rfq
+#: field:wizard.choose.supplier.line,compare_id:0
+msgid "Compare"
+msgstr "Comparer"
+
+#. module: purchase_compare_rfq
+#: view:wizard.choose.supplier:0
+#: view:wizard.compare.rfq:0
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: purchase_compare_rfq
+#: view:wizard.choose.supplier:0
+msgid "Quotation Lines"
+msgstr "Lignes Devis"
+
+#. module: purchase_compare_rfq
+#: field:wizard.compare.rfq,tender_id:0
+msgid "Tender"
+msgstr "Appel d'offres"
+
+#. module: purchase_compare_rfq
+#: field:wizard.choose.supplier,product_id:0
+#: field:wizard.compare.rfq.line,product_id:0
+msgid "Product"
+msgstr "Produit"
+
+#. module: purchase_compare_rfq
+#: view:wizard.choose.supplier:0
+msgid "Test"
+msgstr "Test"
+
+#. module: purchase_compare_rfq
+#: code:addons/purchase_compare_rfq/wizard/compare_rfq.py:58
+#, python-format
+msgid "No quotation found !"
+msgstr "Pas de devis trouvé !"
+
+#. module: purchase_compare_rfq
+#: field:wizard.choose.supplier.line,func_currency_id:0
+msgid "Func. Currency"
+msgstr "Fonc. Devise"
+
+#. module: purchase_compare_rfq
+#: field:wizard.choose.supplier,supplier_id:0
+#: field:wizard.choose.supplier.line,supplier_id:0
+#: field:wizard.compare.rfq.line,supplier_id:0
+msgid "Supplier"
+msgstr "Fournisseur"
+
+#. module: purchase_compare_rfq
+#: model:ir.actions.server,name:purchase_compare_rfq.action_compare_rfq
+#: view:wizard.compare.rfq:0
+msgid "Compare RfQ"
+msgstr "Comparer Demandes de Devis"
+
+#. module: purchase_compare_rfq
+#: field:wizard.choose.supplier.line,price_total:0
+msgid "Total Price"
+msgstr "Prix Total"
+
+#. module: purchase_compare_rfq
+#: model:ir.module.module,shortdesc:purchase_compare_rfq.module_meta_information
+msgid "Compare Purchase RfQ"
+msgstr "Comparer Achat et Demande de Devis"
 
 #. module: purchase_compare_rfq
 #: view:wizard.choose.supplier:0
@@ -215,30 +222,23 @@ msgid "Notes"
 msgstr "Notes"
 
 #. module: purchase_compare_rfq
-#: code:addons/purchase_compare_rfq/wizard/compare_rfq.py:58
-#: code:addons/purchase_compare_rfq/wizard/compare_rfq.py:60
-#: code:addons/purchase_compare_rfq/wizard/compare_rfq.py:67
-#, python-format
-msgid "Error"
-msgstr "Error"
+#: field:wizard.choose.supplier.line,po_line_id:0
+msgid "PO Line"
+msgstr "Ligne BC"
 
 #. module: purchase_compare_rfq
-#: view:wizard.compare.rfq:0
-msgid "General Information"
-msgstr "General Information"
+#: field:wizard.choose.supplier.line,currency_id:0
+msgid "Currency"
+msgstr "Devises"
 
 #. module: purchase_compare_rfq
-#: view:wizard.compare.rfq.line:0
-msgid "Compared products"
-msgstr "Compared products"
+#: field:wizard.compare.rfq.line,po_line_id:0
+msgid "Selected line"
+msgstr "Ligne sélectionnée"
 
 #. module: purchase_compare_rfq
-#: view:wizard.compare.rfq:0
-msgid "Create PO"
-msgstr "Create PO"
-
-#. module: purchase_compare_rfq
-#: field:wizard.choose.supplier.line,func_currency_id:0
-msgid "Func. Currency"
-msgstr "Func. Currency"
+#: view:wizard.choose.supplier:0
+#: view:wizard.choose.supplier.line:0
+msgid "Choose this supplier"
+msgstr "Choisir ce fournisseur"
 
