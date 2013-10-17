@@ -1,0 +1,990 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* tender_flow
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 07:42+0000\n"
+"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: tender_flow
+#: view:board.board:0
+#: model:ir.actions.act_window,name:tender_flow.action_purchase_order_monthly_categ_graph
+#: view:purchase.report:0
+msgid "Monthly Purchase by Category"
+msgstr "Monthly Purchase by Category"
+
+#. module: tender_flow
+#: code:addons/tender_flow/tender_flow.py:349
+#: code:addons/tender_flow/tender_flow.py:498
+#, python-format
+msgid "All tender lines must have been compared!"
+msgstr "All tender lines must have been compared!"
+
+#. module: tender_flow
+#: model:process.node,note:tender_flow.process_node_tender_comparison
+msgid "Comparison state of tender."
+msgstr "Comparison state of tender."
+
+#. module: tender_flow
+#: view:purchase.order:0
+msgid "Search Purchase Order"
+msgstr "Search Purchase Order"
+
+#. module: tender_flow
+#: selection:tender,internal_state:0
+msgid "Rfq Updated"
+msgstr "Rfq Updated"
+
+#. module: tender_flow
+#: field:tender,internal_state:0
+msgid "Internal State"
+msgstr "Internal State"
+
+#. module: tender_flow
+#: code:addons/tender_flow/tender_flow.py:188
+#, python-format
+msgid "The product [%s] %s is not a 'Service' product. You can have only 'Service' products on a 'Service' tender. Please remove this line."
+msgstr "The product [%s] %s is not a 'Service' product. You can have only 'Service' products on a 'Service' tender. Please remove this line."
+
+#. module: tender_flow
+#: constraint:tender:0
+msgid "You cannot choose an internal supplier for this tender"
+msgstr "You cannot choose an internal supplier for this tender"
+
+#. module: tender_flow
+#: view:purchase.order:0
+#: selection:purchase.report,categ:0
+#: view:tender:0
+#: selection:tender,categ:0
+msgid "Logistic"
+msgstr "Logistic"
+
+#. module: tender_flow
+#: model:process.node,note:tender_flow.process_node_tender_po
+msgid "Generated purchase order subflow."
+msgstr "Generated purchase order subflow."
+
+#. module: tender_flow
+#: code:addons/tender_flow/tender_flow.py:375
+#, python-format
+msgid "At least one RfQ must be in state Updated."
+msgstr "At least one RfQ must be in state Updated."
+
+#. module: tender_flow
+#: code:addons/tender_flow/tender_flow.py:177
+#: view:purchase.order:0
+#: selection:purchase.report,categ:0
+#: view:tender:0
+#: selection:tender,categ:0
+#, python-format
+msgid "Service"
+msgstr "Service"
+
+#. module: tender_flow
+#: field:tender,name:0
+msgid "Tender Reference"
+msgstr "Tender Reference"
+
+#. module: tender_flow
+#: model:ir.model,name:tender_flow.model_purchase_report
+msgid "Purchases Orders"
+msgstr "Purchases Orders"
+
+#. module: tender_flow
+#: view:purchase.order:0
+#: selection:purchase.report,priority:0
+#: view:tender:0
+#: selection:tender,priority:0
+msgid "Emergency"
+msgstr "Emergency"
+
+#. module: tender_flow
+#: code:addons/tender_flow/tender_flow.py:956
+#, python-format
+msgid "Cannot delete a document if its associated document remains open. Please delete it (associated IN) first."
+msgstr "Cannot delete a document if its associated document remains open. Please delete it (associated IN) first."
+
+#. module: tender_flow
+#: view:purchase.order:0
+msgid "Updated"
+msgstr "Updated"
+
+#. module: tender_flow
+#: view:tender:0
+msgid "Order Date"
+msgstr "Order Date"
+
+#. module: tender_flow
+#: view:tender:0
+msgid "Compare RfQs"
+msgstr "Compare RfQs"
+
+#. module: tender_flow
+#: code:addons/tender_flow/tender_flow.py:223
+#, python-format
+msgid "Warning"
+msgstr "Warning"
+
+#. module: tender_flow
+#: view:board.board:0
+#: model:ir.actions.act_window,name:tender_flow.purchase_draft
+msgid "Draft Purchase Orders"
+msgstr "Draft Purchase Orders"
+
+#. module: tender_flow
+#: model:process.node,note:tender_flow.process_node_tender_in
+msgid "Incoming products subflow."
+msgstr "Incoming products subflow."
+
+#. module: tender_flow
+#: view:purchase.order:0
+msgid "In-Kind donation"
+msgstr "In-Kind donation"
+
+#. module: tender_flow
+#: model:ir.actions.act_window,name:tender_flow.action_negotiation_by_supplier
+#: view:purchase.report:0
+msgid "Negotiation by Supplier"
+msgstr "Negotiation by Supplier"
+
+#. module: tender_flow
+#: field:sale.order.line,tender_line_ids:0
+#: view:tender:0
+msgid "Tender Lines"
+msgstr "Tender Lines"
+
+#. module: tender_flow
+#: model:process.node,name:tender_flow.process_node_tender_rfq
+msgid "RFQs"
+msgstr "RFQs"
+
+#. module: tender_flow
+#: model:process.node,note:tender_flow.process_node_tender_rfq
+msgid "Generated RFQs subflow."
+msgstr "Generated RFQs subflow."
+
+#. module: tender_flow
+#: selection:purchase.report,partner_zone:0
+msgid "National"
+msgstr "National"
+
+#. module: tender_flow
+#: model:ir.model,name:tender_flow.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Sales Order Line"
+
+#. module: tender_flow
+#: model:process.transition,name:tender_flow.process_transition_tender_draft_comparison
+#: model:process.transition,note:tender_flow.process_transition_tender_draft_comparison
+msgid "From draft to comparison."
+msgstr "From draft to comparison."
+
+#. module: tender_flow
+#: view:purchase.order:0
+#: view:tender:0
+#: field:tender,state:0
+#: field:tender.line,state:0
+msgid "State"
+msgstr "State"
+
+#. module: tender_flow
+#: sql_constraint:purchase.order:0
+msgid "Order Reference must be unique !"
+msgstr "Order Reference must be unique !"
+
+#. module: tender_flow
+#: view:board.board:0
+#: model:ir.actions.act_window,name:tender_flow.rfq_draft
+msgid "Draft Requests for Quotation"
+msgstr "Draft Requests for Quotation"
+
+#. module: tender_flow
+#: view:tender:0
+#: field:tender,notes:0
+msgid "Notes"
+msgstr "Notes"
+
+#. module: tender_flow
+#: code:addons/tender_flow/tender_flow.py:1069
+#: code:addons/tender_flow/tender_flow.py:1073
+#, python-format
+msgid "Request for Quotation"
+msgstr "Request for Quotation"
+
+#. module: tender_flow
+#: view:tender:0
+msgid "Continue Sourcing Process"
+msgstr "Continue Sourcing Process"
+
+#. module: tender_flow
+#: code:addons/tender_flow/tender_flow.py:1025
+#: constraint:purchase.order:0
+#, python-format
+msgid "You must specify a Valid Till date."
+msgstr "You must specify a Valid Till date."
+
+#. module: tender_flow
+#: field:tender.line,currency_id:0
+msgid "Cur."
+msgstr "Cur."
+
+#. module: tender_flow
+#: field:purchase.report,invoiced:0
+msgid "Paid"
+msgstr "Paid"
+
+#. module: tender_flow
+#: view:purchase.order:0
+#: field:purchase.report,priority:0
+#: selection:purchase.report,priority:0
+#: view:tender:0
+#: selection:tender,priority:0
+msgid "Priority"
+msgstr "Priority"
+
+#. module: tender_flow
+#: model:process.node,name:tender_flow.process_node_tender_in
+msgid "Incoming Products"
+msgstr "Incoming Products"
+
+#. module: tender_flow
+#: field:pricelist.partnerinfo,comment:0
+#: field:tender.line,comment:0
+msgid "Comment"
+msgstr "Comment"
+
+#. module: tender_flow
+#: field:purchase.report,cost_center_id:0
+msgid "Cost Center"
+msgstr "Cost Center"
+
+#. module: tender_flow
+#: view:tender:0
+msgid "Update Product's Suppliers"
+msgstr "Update Product's Suppliers"
+
+#. module: tender_flow
+#: model:process.node,note:tender_flow.process_node_tender_closed
+msgid "Closed state of tender."
+msgstr "Closed state of tender."
+
+#. module: tender_flow
+#: selection:purchase.report,order_type:0
+msgid "In Kind Donation"
+msgstr "In Kind Donation"
+
+#. module: tender_flow
+#: view:tender:0
+msgid "Cancel"
+msgstr "Cancel"
+
+#. module: tender_flow
+#: model:ir.module.module,shortdesc:tender_flow.module_meta_information
+msgid "Tender and Request for quotation flow"
+msgstr "Tender and Request for quotation flow"
+
+#. module: tender_flow
+#: field:purchase.order.line,rfq_ok:0
+msgid "RfQ ?"
+msgstr "RfQ ?"
+
+#. module: tender_flow
+#: constraint:pricelist.partnerinfo:0
+msgid "You cannot have a line with a negative or zero quantity!"
+msgstr "You cannot have a line with a negative or zero quantity!"
+
+#. module: tender_flow
+#: field:tender,rfq_name_list:0
+msgid "RfQs Ref"
+msgstr "RfQs Ref"
+
+#. module: tender_flow
+#: code:addons/tender_flow/tender_flow.py:1105
+#: model:ir.model,name:tender_flow.model_purchase_order_line
+#, python-format
+msgid "Purchase Order Line"
+msgstr "Purchase Order Line"
+
+#. module: tender_flow
+#: constraint:purchase.order:0
+msgid "You cannot choose an internal supplier for this purchase order"
+msgstr "You cannot choose an internal supplier for this purchase order"
+
+#. module: tender_flow
+#: field:procurement.order,is_tender_done:0
+msgid "Tender Closed"
+msgstr "Tender Closed"
+
+#. module: tender_flow
+#: field:tender,location_id:0
+msgid "Location"
+msgstr "Location"
+
+#. module: tender_flow
+#: field:tender.line,price_unit:0
+msgid "Price unit"
+msgstr "Price unit"
+
+#. module: tender_flow
+#: view:purchase.order:0
+msgid "Type"
+msgstr "Type"
+
+#. module: tender_flow
+#: code:addons/tender_flow/tender_flow.py:300
+#, python-format
+msgid "You can't have \"To Be Defined\" for the product. Please select an existing product."
+msgstr "You can't have \"To Be Defined\" for the product. Please select an existing product."
+
+#. module: tender_flow
+#: field:tender,requested_date:0
+#: field:tender.line,date_planned:0
+msgid "Requested Date"
+msgstr "Requested Date"
+
+#. module: tender_flow
+#: view:purchase.order:0
+msgid "Creation date"
+msgstr "Creation date"
+
+#. module: tender_flow
+#: field:tender.line,func_currency_id:0
+msgid "Func. Cur."
+msgstr "Func. Cur."
+
+#. module: tender_flow
+#: code:addons/tender_flow/tender_flow.py:255
+#, python-format
+msgid "You must select at least one supplier!"
+msgstr "You must select at least one supplier!"
+
+#. module: tender_flow
+#: field:tender.line,total_price:0
+msgid "Total Price"
+msgstr "Total Price"
+
+#. module: tender_flow
+#: code:addons/tender_flow/tender_flow.py:1068
+#: code:addons/tender_flow/tender_flow.py:1072
+#: model:ir.model,name:tender_flow.model_purchase_order
+#: model:process.node,name:tender_flow.process_node_tender_po
+#, python-format
+msgid "Purchase Order"
+msgstr "Purchase Order"
+
+#. module: tender_flow
+#: field:pricelist.partnerinfo,purchase_order_line_id:0
+msgid "RfQ Line Ref"
+msgstr "RfQ Line Ref"
+
+#. module: tender_flow
+#: code:addons/tender_flow/tender_flow.py:63
+#, python-format
+msgid "Cannot delete Tenders not in 'draft' state."
+msgstr "Cannot delete Tenders not in 'draft' state."
+
+#. module: tender_flow
+#: field:pricelist.partnerinfo,purchase_order_line_number:0
+#: field:tender.line,purchase_order_line_number:0
+msgid "Related Line Number"
+msgstr "Related Line Number"
+
+#. module: tender_flow
+#: constraint:purchase.order:0
+msgid "If you tick the box \"cross docking\", you cannot have an other location than \"Cross docking\""
+msgstr "If you tick the box \"cross docking\", you cannot have an other location than \"Cross docking\""
+
+#. module: tender_flow
+#: view:board.board:0
+#: model:ir.actions.act_window,name:tender_flow.purchase_waiting
+msgid "Purchase Order Waiting Approval"
+msgstr "Purchase Order Waiting Approval"
+
+#. module: tender_flow
+#: field:tender,company_id:0
+msgid "Company"
+msgstr "Company"
+
+#. module: tender_flow
+#: model:process.transition,name:tender_flow.process_transition_tender_draft_rfq
+#: model:process.transition,note:tender_flow.process_transition_tender_draft_rfq
+msgid "From draft to rfq."
+msgstr "From draft to rfq."
+
+#. module: tender_flow
+#: code:addons/tender_flow/tender_flow.py:273
+#, python-format
+msgid "You must select at least one product!"
+msgstr "You must select at least one product!"
+
+#. module: tender_flow
+#: view:tender:0
+#: field:tender,sale_order_id:0
+msgid "Sale Order"
+msgstr "Sale Order"
+
+#. module: tender_flow
+#: model:ir.module.module,description:tender_flow.module_meta_information
+msgid "\n"
+"    Add sourcing specification\n"
+"    "
+msgstr "\n"
+"    Add sourcing specification\n"
+"    "
+
+#. module: tender_flow
+#: code:addons/tender_flow/tender_flow.py:268
+#, python-format
+msgid "You can't have inactive supplier! Please remove: %s"
+msgstr "You can't have inactive supplier! Please remove: %s"
+
+#. module: tender_flow
+#: code:addons/tender_flow/tender_flow.py:185
+#: code:addons/tender_flow/tender_flow.py:188
+#: code:addons/tender_flow/tender_flow.py:1025
+#, python-format
+msgid "Error"
+msgstr "Error"
+
+#. module: tender_flow
+#: model:ir.model,name:tender_flow.model_procurement_order
+msgid "Procurement"
+msgstr "Procurement"
+
+#. module: tender_flow
+#: model:ir.actions.act_window,name:tender_flow.tender_action
+#: model:ir.ui.menu,name:tender_flow.menu_tender
+msgid "Tenders"
+msgstr "Tenders"
+
+#. module: tender_flow
+#: view:purchase.order:0
+#: selection:purchase.report,order_type:0
+msgid "Regular"
+msgstr "Regular"
+
+#. module: tender_flow
+#: selection:purchase.report,order_type:0
+msgid "Standard donation"
+msgstr "Standard donation"
+
+#. module: tender_flow
+#: view:purchase.order:0
+#: view:tender:0
+msgid "Group By..."
+msgstr "Group By..."
+
+#. module: tender_flow
+#: constraint:sale.order.line:0
+msgid "You must select on order procurement method for Service with Reception products."
+msgstr "You must select on order procurement method for Service with Reception products."
+
+#. module: tender_flow
+#: model:process.node,name:tender_flow.process_node_tender_draft
+msgid "Tender - draft"
+msgstr "Tender - draft"
+
+#. module: tender_flow
+#: view:purchase.order:0
+#: selection:purchase.report,categ:0
+#: view:tender:0
+#: selection:tender,categ:0
+msgid "Other"
+msgstr "Other"
+
+#. module: tender_flow
+#: field:tender.line,func_total_price:0
+msgid "Func. Total Price"
+msgstr "Func. Total Price"
+
+#. module: tender_flow
+#: field:purchase.report,order_name:0
+msgid "Order Reference"
+msgstr "Order Reference"
+
+#. module: tender_flow
+#: view:purchase.order:0
+msgid "Total amount"
+msgstr "Total amount"
+
+#. module: tender_flow
+#: code:addons/tender_flow/tender_flow.py:278
+#, python-format
+msgid "The supplier \"%s\" has no address defined!"
+msgstr "The supplier \"%s\" has no address defined!"
+
+#. module: tender_flow
+#: code:addons/tender_flow/tender_flow.py:63
+#: code:addons/tender_flow/tender_flow.py:255
+#: code:addons/tender_flow/tender_flow.py:268
+#: code:addons/tender_flow/tender_flow.py:273
+#: code:addons/tender_flow/tender_flow.py:278
+#: code:addons/tender_flow/tender_flow.py:300
+#: code:addons/tender_flow/tender_flow.py:345
+#: code:addons/tender_flow/tender_flow.py:371
+#: code:addons/tender_flow/tender_flow.py:376
+#: code:addons/tender_flow/tender_flow.py:385
+#: code:addons/tender_flow/tender_flow.py:461
+#, python-format
+msgid "Warning !"
+msgstr "Warning !"
+
+#. module: tender_flow
+#: sql_constraint:purchase.order.line:0
+#: sql_constraint:sale.order.line:0
+#: sql_constraint:tender.line:0
+msgid "Product Quantity must be greater than zero."
+msgstr "Product Quantity must be greater than zero."
+
+#. module: tender_flow
+#: field:tender,details:0
+msgid "Details"
+msgstr "Details"
+
+#. module: tender_flow
+#: field:tender,tender_from_fo:0
+msgid "Is tender from FO ?"
+msgstr "Is tender from FO ?"
+
+#. module: tender_flow
+#: field:tender,tender_line_ids:0
+msgid "Tender lines"
+msgstr "Tender lines"
+
+#. module: tender_flow
+#: field:tender.line,purchase_order_line_id:0
+msgid "Related RfQ line"
+msgstr "Related RfQ line"
+
+#. module: tender_flow
+#: field:tender,categ:0
+msgid "Tender Category"
+msgstr "Tender Category"
+
+#. module: tender_flow
+#: code:addons/tender_flow/tender_flow.py:344
+#: code:addons/tender_flow/tender_flow.py:370
+#, python-format
+msgid "Generated RfQs must be Updated or Cancelled."
+msgstr "Generated RfQs must be Updated or Cancelled."
+
+#. module: tender_flow
+#: view:purchase.order:0
+msgid "Sent"
+msgstr "Sent"
+
+#. module: tender_flow
+#: view:tender:0
+#: selection:tender,state:0
+#: selection:tender.line,state:0
+msgid "Comparison"
+msgstr "Comparison"
+
+#. module: tender_flow
+#: field:pricelist.partnerinfo,valid_till:0
+#: field:purchase.order,valid_till:0
+msgid "Valid Till"
+msgstr "Valid Till"
+
+#. module: tender_flow
+#: view:purchase.order:0
+#: selection:purchase.report,order_type:0
+msgid "Purchase List"
+msgstr "Purchase List"
+
+#. module: tender_flow
+#: model:process.transition,name:tender_flow.process_transition_tender_rfq_po
+#: model:process.transition,note:tender_flow.process_transition_tender_rfq_po
+msgid "From rfq to po."
+msgstr "From rfq to po."
+
+#. module: tender_flow
+#: constraint:purchase.order:0
+msgid "Partner type and order type are incompatible! Please change either order type or partner."
+msgstr "Partner type and order type are incompatible! Please change either order type or partner."
+
+#. module: tender_flow
+#: code:addons/tender_flow/tender_flow.py:966
+#, python-format
+msgid "Cannot delete Purchase Order(s) which are in %s State!"
+msgstr "Cannot delete Purchase Order(s) which are in %s State!"
+
+#. module: tender_flow
+#: model:process.transition,name:tender_flow.process_transition_tender_comparison_closed
+#: model:process.transition,note:tender_flow.process_transition_tender_comparison_closed
+msgid "From comparison to closed."
+msgstr "From comparison to closed."
+
+#. module: tender_flow
+#: code:addons/tender_flow/tender_flow.py:224
+#, python-format
+msgid "The product [%s] %s is not a '%s' product. You can have only '%s' products on a '%s' tender. Please remove this line before saving."
+msgstr "The product [%s] %s is not a '%s' product. You can have only '%s' products on a '%s' tender. Please remove this line before saving."
+
+#. module: tender_flow
+#: code:addons/tender_flow/tender_flow.py:461
+#, python-format
+msgid "No information available for update!"
+msgstr "No information available for update!"
+
+#. module: tender_flow
+#: view:purchase.order:0
+#: view:tender:0
+#: selection:tender,state:0
+msgid "Cancelled"
+msgstr "Cancelled"
+
+#. module: tender_flow
+#: model:process.node,name:tender_flow.process_node_tender_closed
+msgid "Tender - closed"
+msgstr "Tender - closed"
+
+#. module: tender_flow
+#: model:ir.actions.act_window,name:tender_flow.act_relate_tender_purchase_order
+msgid "Purchase Orders"
+msgstr "Purchase Orders"
+
+#. module: tender_flow
+#: help:purchase.report,invoiced:0
+msgid "It indicates that an invoice has been paid."
+msgstr "It indicates that an invoice has been paid."
+
+#. module: tender_flow
+#: code:addons/tender_flow/tender_flow.py:365
+#, python-format
+msgid "Some RfQ are already Closed. Integrity failure."
+msgstr "Some RfQ are already Closed. Integrity failure."
+
+#. module: tender_flow
+#: view:purchase.order:0
+#: selection:purchase.report,categ:0
+#: view:tender:0
+#: selection:tender,categ:0
+msgid "Medical"
+msgstr "Medical"
+
+#. module: tender_flow
+#: view:purchase.order:0
+#: selection:purchase.report,order_type:0
+msgid "Donation before expiry"
+msgstr "Donation before expiry"
+
+#. module: tender_flow
+#: code:addons/tender_flow/tender_flow.py:176
+#: selection:purchase.report,categ:0
+#: selection:tender,categ:0
+#, python-format
+msgid "Transport"
+msgstr "Transport"
+
+#. module: tender_flow
+#: code:addons/tender_flow/tender_flow.py:349
+#: code:addons/tender_flow/tender_flow.py:366
+#: code:addons/tender_flow/tender_flow.py:498
+#: code:addons/tender_flow/tender_flow.py:956
+#, python-format
+msgid "Error !"
+msgstr "Error !"
+
+#. module: tender_flow
+#: model:process.node,note:tender_flow.process_node_tender_draft
+msgid "Draft state of tender."
+msgstr "Draft state of tender."
+
+#. module: tender_flow
+#: model:ir.actions.act_window,name:tender_flow.open_board_purchase
+msgid "Purchase Dashboard"
+msgstr "Purchase Dashboard"
+
+#. module: tender_flow
+#: model:ir.actions.act_window,name:tender_flow.act_relate_tender_rfq
+#: view:purchase.order:0
+msgid "Requests for Quotation"
+msgstr "Requests for Quotation"
+
+#. module: tender_flow
+#: view:purchase.order:0
+#: field:tender,creation_date:0
+msgid "Creation Date"
+msgstr "Creation Date"
+
+#. module: tender_flow
+#: field:purchase.report,categ:0
+msgid "Order category"
+msgstr "Order category"
+
+#. module: tender_flow
+#: field:tender,creator:0
+msgid "Creator"
+msgstr "Creator"
+
+#. module: tender_flow
+#: code:addons/tender_flow/tender_flow.py:185
+#, python-format
+msgid "The product [%s]%s is not a 'Transport' product. You can have only 'Transport' products on a 'Transport' tender. Please remove this line."
+msgstr "The product [%s]%s is not a 'Transport' product. You can have only 'Transport' products on a 'Transport' tender. Please remove this line."
+
+#. module: tender_flow
+#: field:procurement.order,is_tender:0
+msgid "Is Tender"
+msgstr "Is Tender"
+
+#. module: tender_flow
+#: view:tender:0
+#: field:tender,rfq_ids:0
+msgid "RfQs"
+msgstr "RfQs"
+
+#. module: tender_flow
+#: view:purchase.order:0
+msgid "Origin"
+msgstr "Origin"
+
+#. module: tender_flow
+#: field:tender.line,product_uom:0
+msgid "Product UOM"
+msgstr "Product UOM"
+
+#. module: tender_flow
+#: view:purchase.order:0
+#: field:purchase.report,order_type:0
+msgid "Order Type"
+msgstr "Order Type"
+
+#. module: tender_flow
+#: view:purchase.order:0
+msgid "Standard Donation"
+msgstr "Standard Donation"
+
+#. module: tender_flow
+#: view:purchase.order:0
+msgid "Lines"
+msgstr "Lines"
+
+#. module: tender_flow
+#: model:process.transition,name:tender_flow.process_transition_tender_po_in
+#: model:process.transition,note:tender_flow.process_transition_tender_po_in
+msgid "From po to in."
+msgstr "From po to in."
+
+#. module: tender_flow
+#: model:ir.model,name:tender_flow.model_tender
+#: model:process.process,name:tender_flow.process_process_tender
+#: field:procurement.order,tender_id:0
+#: field:purchase.order,origin_tender_id:0
+#: field:purchase.order,tender_id:0
+#: field:purchase.order.line,tender_id:0
+#: view:tender:0
+#: field:tender.line,tender_id:0
+msgid "Tender"
+msgstr "Tender"
+
+#. module: tender_flow
+#: view:board.board:0
+msgid "My Board"
+msgstr "My Board"
+
+#. module: tender_flow
+#: model:ir.model,name:tender_flow.model_pricelist_partnerinfo
+msgid "pricelist.partnerinfo"
+msgstr "pricelist.partnerinfo"
+
+#. module: tender_flow
+#: view:board.board:0
+#: model:ir.actions.act_window,name:tender_flow.rfq_waiting
+msgid "Requests for Quotation Waiting Approval"
+msgstr "Requests for Quotation Waiting Approval"
+
+#. module: tender_flow
+#: field:purchase.order,rfq_ok:0
+msgid "Is RfQ ?"
+msgstr "Is RfQ ?"
+
+#. module: tender_flow
+#: view:purchase.order:0
+#: selection:purchase.report,priority:0
+#: view:tender:0
+#: selection:tender,priority:0
+msgid "Normal"
+msgstr "Normal"
+
+#. module: tender_flow
+#: constraint:purchase.order:0
+msgid "You cannot validate this purchase order because it contains a line with an inactive product"
+msgstr "You cannot validate this purchase order because it contains a line with an inactive product"
+
+#. module: tender_flow
+#: field:purchase.report,partner_zone:0
+msgid "Supplier Zone"
+msgstr "Supplier Zone"
+
+#. module: tender_flow
+#: view:tender:0
+msgid "Generate RfQs"
+msgstr "Generate RfQs"
+
+#. module: tender_flow
+#: constraint:tender:0
+msgid "You cannot validate this tender because it contains a line with an inactive product"
+msgstr "You cannot validate this tender because it contains a line with an inactive product"
+
+#. module: tender_flow
+#: field:tender.line,sale_order_line_id:0
+msgid "Sale Order Line"
+msgstr "Sale Order Line"
+
+#. module: tender_flow
+#: field:pricelist.partnerinfo,currency_id:0
+#: view:purchase.order:0
+#: field:purchase.report,currency_id:0
+msgid "Currency"
+msgstr "Currency"
+
+#. module: tender_flow
+#: view:purchase.order:0
+#: view:tender:0
+#: selection:tender,internal_state:0
+#: selection:tender,state:0
+#: selection:tender.line,state:0
+msgid "Draft"
+msgstr "Draft"
+
+#. module: tender_flow
+#: field:tender.line,qty:0
+msgid "Qty"
+msgstr "Qty"
+
+#. module: tender_flow
+#: view:purchase.order:0
+#: view:tender:0
+msgid "Category"
+msgstr "Category"
+
+#. module: tender_flow
+#: code:addons/tender_flow/tender_flow.py:966
+#, python-format
+msgid "Invalid action !"
+msgstr "Invalid action !"
+
+#. module: tender_flow
+#: view:tender:0
+msgid "Create PO"
+msgstr "Create PO"
+
+#. module: tender_flow
+#: field:procurement.order,sale_order_line_ids:0
+msgid "Sale Order Lines"
+msgstr "Sale Order Lines"
+
+#. module: tender_flow
+#: selection:purchase.report,partner_zone:0
+msgid "International"
+msgstr "International"
+
+#. module: tender_flow
+#: selection:purchase.report,order_type:0
+msgid "Direct Purchase Order"
+msgstr "Direct Purchase Order"
+
+#. module: tender_flow
+#: view:purchase.order:0
+#: view:tender:0
+#: selection:tender,state:0
+#: selection:tender.line,state:0
+msgid "Closed"
+msgstr "Closed"
+
+#. module: tender_flow
+#: model:ir.model,name:tender_flow.model_tender_line
+msgid "Tender Line"
+msgstr "Tender Line"
+
+#. module: tender_flow
+#: field:tender,warehouse_id:0
+msgid "Warehouse"
+msgstr "Warehouse"
+
+#. module: tender_flow
+#: view:tender:0
+#: field:tender,supplier_ids:0
+msgid "Suppliers"
+msgstr "Suppliers"
+
+#. module: tender_flow
+#: model:process.node,name:tender_flow.process_node_tender_comparison
+msgid "Tender - comparison"
+msgstr "Tender - comparison"
+
+#. module: tender_flow
+#: view:tender:0
+#: field:tender,product_id:0
+#: field:tender.line,product_id:0
+msgid "Product"
+msgstr "Product"
+
+#. module: tender_flow
+#: code:addons/tender_flow/tender_flow.py:385
+#, python-format
+msgid "Cannot compare rfqs of more than one tender at a time!"
+msgstr "Cannot compare rfqs of more than one tender at a time!"
+
+#. module: tender_flow
+#: view:purchase.order:0
+#: selection:purchase.report,order_type:0
+msgid "Loan"
+msgstr "Loan"
+
+#. module: tender_flow
+#: model:ir.model,name:tender_flow.model_ir_values
+msgid "ir.values"
+msgstr "ir.values"
+
+#. module: tender_flow
+#: code:addons/tender_flow/tender_flow.py:1106
+#, python-format
+msgid "Request for Quotation Line"
+msgstr "Request for Quotation Line"
+
+#. module: tender_flow
+#: field:pricelist.partnerinfo,purchase_order_id:0
+#: field:tender.line,purchase_order_id:0
+msgid "Related RfQ"
+msgstr "Related RfQ"
+
+#. module: tender_flow
+#: field:tender,priority:0
+msgid "Tender Priority"
+msgstr "Tender Priority"
+
+#. module: tender_flow
+#: view:purchase.order:0
+msgid "Direct PO"
+msgstr "Direct PO"
+
+#. module: tender_flow
+#: view:purchase.order:0
+#: view:tender:0
+#: field:tender.line,supplier_id:0
+msgid "Supplier"
+msgstr "Supplier"
+
+#. module: tender_flow
+#: field:procurement.order,price_unit:0
+msgid "Unit Price from Tender"
+msgstr "Unit Price from Tender"
+
+#. module: tender_flow
+#: view:purchase.order:0
+#: view:tender:0
+msgid "Expected Date"
+msgstr "Expected Date"
+

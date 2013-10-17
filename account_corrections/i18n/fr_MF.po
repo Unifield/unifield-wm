@@ -1,0 +1,535 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* account_corrections
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 07:42+0000\n"
+"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_corrections
+#: selection:wizard.journal.items.corrections,state:0
+msgid "Open"
+msgstr "Open"
+
+#. module: account_corrections
+#: help:wizard.journal.items.corrections,to_be_corrected_ids:0
+msgid "Line to be corrected"
+msgstr "Line to be corrected"
+
+#. module: account_corrections
+#: code:addons/account_corrections/wizard/journal_items_corrections.py:322
+#, python-format
+msgid "No account changed!"
+msgstr "No account changed!"
+
+#. module: account_corrections
+#: help:account.move.line,reversal:0
+msgid "If true, this line is a reversal of another (This was done via a correction wizard)."
+msgstr "If true, this line is a reversal of another (This was done via a correction wizard)."
+
+#. module: account_corrections
+#: field:wizard.journal.items.corrections.lines,move_id:0
+msgid "Entry sequence"
+msgstr "Entry sequence"
+
+#. module: account_corrections
+#: help:account.move.line,is_corrigible:0
+msgid "This informs system if this item is corrigible. Criteria: the entry state should be posted, account should not be payable or receivable, item have not been corrected, item have not been reversed and account is not the default one of the linked register (statement)."
+msgstr "This informs system if this item is corrigible. Criteria: the entry state should be posted, account should not be payable or receivable, item have not been corrected, item have not been reversed and account is not the default one of the linked register (statement)."
+
+#. module: account_corrections
+#: field:account.move.line,corrected_line_id:0
+msgid "Corrected Line"
+msgstr "Corrected Line"
+
+#. module: account_corrections
+#: field:wizard.journal.items.corrections.lines,account_id:0
+msgid "Account"
+msgstr "Account"
+
+#. module: account_corrections
+#: model:ir.model,name:account_corrections.model_wizard_journal_items_corrections_lines
+msgid "Journal items corrections lines"
+msgstr "Journal items corrections lines"
+
+#. module: account_corrections
+#: code:addons/account_corrections/wizard/journal_items_corrections.py:284
+#: code:addons/account_corrections/wizard/journal_items_corrections.py:305
+#, python-format
+msgid "Please insert a correction date from the entry date onwards."
+msgstr "Please insert a correction date from the entry date onwards."
+
+#. module: account_corrections
+#: selection:wizard.journal.items.corrections,state:0
+msgid "Draft"
+msgstr "Draft"
+
+#. module: account_corrections
+#: field:wizard.journal.items.corrections.lines,currency_id:0
+msgid "Book. Curr."
+msgstr "Book. Curr."
+
+#. module: account_corrections
+#: selection:wizard.journal.items.corrections.lines,analytic_distribution_state:0
+msgid "Invalid"
+msgstr "Invalid"
+
+#. module: account_corrections
+#: view:wizard.journal.items.corrections:0
+msgid "Journal items corrections Wizard"
+msgstr "Journal items corrections Wizard"
+
+#. module: account_corrections
+#: help:account.move.line,corrected:0
+msgid "If true, this line has been corrected by an accounting correction wizard"
+msgstr "If true, this line has been corrected by an accounting correction wizard"
+
+#. module: account_corrections
+#: code:addons/account_corrections/account_move_line.py:358
+#: code:addons/account_corrections/account_move_line.py:458
+#: code:addons/account_corrections/account_move_line.py:610
+#: code:addons/account_corrections/account_move_line.py:750
+#, python-format
+msgid "No OD-Extra Accounting Journal found!"
+msgstr "No OD-Extra Accounting Journal found!"
+
+#. module: account_corrections
+#: help:account.move.line,corrected_line_id:0
+msgid "Line that have been corrected by this one."
+msgstr "Line that have been corrected by this one."
+
+#. module: account_corrections
+#: model:ir.model,name:account_corrections.model_account_move
+msgid "Account Entry"
+msgstr "Account Entry"
+
+#. module: account_corrections
+#: code:addons/account_corrections/account_move_line.py:614
+#, python-format
+msgid "You come from a donation account. And new one is not a Donation account. You should give a Donation account!"
+msgstr "You come from a donation account. And new one is not a Donation account. You should give a Donation account!"
+
+#. module: account_corrections
+#: view:analytic.distribution.wizard:0
+msgid "Save"
+msgstr "Save"
+
+#. module: account_corrections
+#: field:analytic.distribution.wizard,date:0
+msgid "Date"
+msgstr "Date"
+
+#. module: account_corrections
+#: field:wizard.journal.items.corrections,from_donation:0
+msgid "From Donation account?"
+msgstr "From Donation account?"
+
+#. module: account_corrections
+#: field:wizard.journal.items.corrections,state:0
+msgid "state"
+msgstr "state"
+
+#. module: account_corrections
+#: model:ir.module.module,description:account_corrections.module_meta_information
+msgid "\n"
+"        Permits some corrections from Journal Items.\n"
+"    "
+msgstr "\n"
+"        Permits some corrections from Journal Items.\n"
+"    "
+
+#. module: account_corrections
+#: code:addons/account_corrections/account_move_line.py:549
+#, python-format
+msgid "No account_id given. update_account_on_st_line() could not works."
+msgstr "No account_id given. update_account_on_st_line() could not works."
+
+#. module: account_corrections
+#: view:account.move.line:0
+msgid "Open corrections history"
+msgstr "Open corrections history"
+
+#. module: account_corrections
+#: view:wizard.journal.items.corrections:0
+msgid "Cancel"
+msgstr "Cancel"
+
+#. module: account_corrections
+#: field:wizard.journal.items.corrections.lines,wizard_id:0
+msgid "wizard"
+msgstr "wizard"
+
+#. module: account_corrections
+#: code:addons/account_corrections/account_move_line.py:760
+#, python-format
+msgid "No account found for this partner!"
+msgstr "No account found for this partner!"
+
+#. module: account_corrections
+#: field:wizard.journal.items.corrections.lines,analytic_distribution_id:0
+msgid "Analytic Distribution"
+msgstr "Analytic Distribution"
+
+#. module: account_corrections
+#: code:addons/account_corrections/wizard/analytic_distribution_wizard.py:71
+#, python-format
+msgid "Old funding pool is on a soft/hard closed contract: %s"
+msgstr "Old funding pool is on a soft/hard closed contract: %s"
+
+#. module: account_corrections
+#: code:addons/account_corrections/wizard/analytic_distribution_wizard.py:110
+#, python-format
+msgid "All is OK."
+msgstr "All is OK."
+
+#. module: account_corrections
+#: field:account.move.line,have_an_historic:0
+msgid "Display historic?"
+msgstr "Display historic?"
+
+#. module: account_corrections
+#: code:addons/account_corrections/account_move_line.py:581
+#, python-format
+msgid "No new account_id given!"
+msgstr "No new account_id given!"
+
+#. module: account_corrections
+#: code:addons/account_corrections/account_move_line.py:623
+#, python-format
+msgid "You cannot change the G/L account since it is used in a closed financing contract."
+msgstr "You cannot change the G/L account since it is used in a closed financing contract."
+
+#. module: account_corrections
+#: field:wizard.journal.items.corrections.lines,debit_currency:0
+msgid "Book. Debit"
+msgstr "Book. Debit"
+
+#. module: account_corrections
+#: help:account.move.line,corrected_st_line_id:0
+msgid "This register line is those which have been corrected last."
+msgstr "This register line is those which have been corrected last."
+
+#. module: account_corrections
+#: constraint:account.move:0
+msgid "You cannot create more than one move per period on centralized journal"
+msgstr "You cannot create more than one move per period on centralized journal"
+
+#. module: account_corrections
+#: code:addons/account_corrections/wizard/journal_items_corrections.py:329
+#, python-format
+msgid "No partner changed! Verify that the Journal Entries attached to this line was not modify previously."
+msgstr "No partner changed! Verify that the Journal Entries attached to this line was not modify previously."
+
+#. module: account_corrections
+#: field:wizard.journal.items.corrections.lines,transfer_journal_id:0
+msgid "Journal"
+msgstr "Journal"
+
+#. module: account_corrections
+#: constraint:account.move:0
+msgid "You cannot create entries on different periods/journals in the same move"
+msgstr "You cannot create entries on different periods/journals in the same move"
+
+#. module: account_corrections
+#: code:addons/account_corrections/account_move_line.py:718
+#, python-format
+msgid "No new partner_id given!"
+msgstr "No new partner_id given!"
+
+#. module: account_corrections
+#: field:wizard.journal.items.corrections.lines,period_id:0
+msgid "Period"
+msgstr "Period"
+
+#. module: account_corrections
+#: code:addons/account_corrections/wizard/journal_items_corrections.py:335
+#, python-format
+msgid "No modifications seen!"
+msgstr "No modifications seen!"
+
+#. module: account_corrections
+#: field:account.move.line,reversal:0
+msgid "Reversal?"
+msgstr "Reversal?"
+
+#. module: account_corrections
+#: model:ir.model,name:account_corrections.model_account_move_line
+msgid "Journal Items"
+msgstr "Journal Items"
+
+#. module: account_corrections
+#: code:addons/account_corrections/account_move_line.py:623
+#: code:addons/account_corrections/wizard/journal_items_corrections.py:284
+#: code:addons/account_corrections/wizard/journal_items_corrections.py:305
+#: code:addons/account_corrections/wizard/journal_items_corrections.py:335
+#, python-format
+msgid "Warning"
+msgstr "Warning"
+
+#. module: account_corrections
+#: code:addons/account_corrections/wizard/journal_items_corrections.py:333
+#, python-format
+msgid "You're just allowed to change ONE field amoungst Account, Third Party or Analytical Distribution"
+msgstr "You're just allowed to change ONE field amoungst Account, Third Party or Analytical Distribution"
+
+#. module: account_corrections
+#: constraint:account.move.line:0
+msgid "Company must be same for its related account and period."
+msgstr "Company must be same for its related account and period."
+
+#. module: account_corrections
+#: field:wizard.journal.items.corrections,date:0
+msgid "Correction date"
+msgstr "Correction date"
+
+#. module: account_corrections
+#: selection:wizard.journal.items.corrections.lines,analytic_distribution_state:0
+msgid "None"
+msgstr "None"
+
+#. module: account_corrections
+#: sql_constraint:account.move.line:0
+msgid "Wrong credit or debit value in accounting entry !"
+msgstr "Wrong credit or debit value in accounting entry !"
+
+#. module: account_corrections
+#: help:account.move.line,reversal_line_id:0
+msgid "Line that have been reversed by this one."
+msgstr "Line that have been reversed by this one."
+
+#. module: account_corrections
+#: help:analytic.distribution.wizard,date:0
+msgid "This date is taken from analytic distribution corrections"
+msgstr "This date is taken from analytic distribution corrections"
+
+#. module: account_corrections
+#: field:account.move.line,corrected:0
+msgid "Corrected?"
+msgstr "Corrected?"
+
+#. module: account_corrections
+#: field:wizard.journal.items.corrections.lines,credit_currency:0
+msgid "Book. Credit"
+msgstr "Book. Credit"
+
+#. module: account_corrections
+#: field:wizard.journal.items.corrections.lines,partner_id:0
+msgid "Partner"
+msgstr "Partner"
+
+#. module: account_corrections
+#: field:wizard.journal.items.corrections.lines,employee_id:0
+msgid "Employee"
+msgstr "Employee"
+
+#. module: account_corrections
+#: field:wizard.journal.items.corrections.lines,move_line_id:0
+msgid "Account move line"
+msgstr "Account move line"
+
+#. module: account_corrections
+#: help:account.move.line,have_an_historic:0
+msgid "If true, this implies that this line have historical correction(s)."
+msgstr "If true, this implies that this line have historical correction(s)."
+
+#. module: account_corrections
+#: view:wizard.journal.items.corrections.lines:0
+msgid "Ana. Distri."
+msgstr "Ana. Distri."
+
+#. module: account_corrections
+#: model:ir.module.module,shortdesc:account_corrections.module_meta_information
+msgid "Accounting Corrections"
+msgstr "Accounting Corrections"
+
+#. module: account_corrections
+#: help:wizard.journal.items.corrections.lines,analytic_distribution_state:0
+msgid "Informs from distribution state among 'none', 'valid', 'invalid."
+msgstr "Informs from distribution state among 'none', 'valid', 'invalid."
+
+#. module: account_corrections
+#: code:addons/account_corrections/wizard/analytic_distribution_wizard.py:143
+#: code:addons/account_corrections/wizard/analytic_distribution_wizard.py:155
+#: code:addons/account_corrections/wizard/analytic_distribution_wizard.py:172
+#, python-format
+msgid "Funding pool is on a soft/hard closed contract: %s"
+msgstr "Funding pool is on a soft/hard closed contract: %s"
+
+#. module: account_corrections
+#: constraint:account.move.line:0
+msgid "You can not create move line on closed account."
+msgstr "You can not create move line on closed account."
+
+#. module: account_corrections
+#: model:ir.model,name:account_corrections.model_analytic_distribution_wizard
+msgid "analytic.distribution.wizard"
+msgstr "analytic.distribution.wizard"
+
+#. module: account_corrections
+#: field:wizard.journal.items.corrections.lines,date:0
+msgid "Posting date"
+msgstr "Posting date"
+
+#. module: account_corrections
+#: constraint:account.move.line:0
+msgid "You can not create move line on view account."
+msgstr "You can not create move line on view account."
+
+#. module: account_corrections
+#: code:addons/account_corrections/account_move_line.py:360
+#, python-format
+msgid "No Correction Journal found!"
+msgstr "No Correction Journal found!"
+
+#. module: account_corrections
+#: code:addons/account_corrections/account_move_line.py:358
+#: code:addons/account_corrections/account_move_line.py:360
+#: code:addons/account_corrections/account_move_line.py:458
+#: code:addons/account_corrections/account_move_line.py:460
+#: code:addons/account_corrections/account_move_line.py:549
+#: code:addons/account_corrections/account_move_line.py:581
+#: code:addons/account_corrections/account_move_line.py:610
+#: code:addons/account_corrections/account_move_line.py:614
+#: code:addons/account_corrections/account_move_line.py:616
+#: code:addons/account_corrections/account_move_line.py:718
+#: code:addons/account_corrections/account_move_line.py:750
+#: code:addons/account_corrections/account_move_line.py:752
+#: code:addons/account_corrections/account_move_line.py:760
+#: code:addons/account_corrections/wizard/analytic_distribution_wizard.py:61
+#: code:addons/account_corrections/wizard/analytic_distribution_wizard.py:91
+#: code:addons/account_corrections/wizard/analytic_distribution_wizard.py:105
+#: code:addons/account_corrections/wizard/analytic_distribution_wizard.py:143
+#: code:addons/account_corrections/wizard/analytic_distribution_wizard.py:155
+#: code:addons/account_corrections/wizard/analytic_distribution_wizard.py:172
+#: code:addons/account_corrections/wizard/analytic_distribution_wizard.py:283
+#: code:addons/account_corrections/wizard/journal_items_corrections.py:247
+#: code:addons/account_corrections/wizard/journal_items_corrections.py:322
+#: code:addons/account_corrections/wizard/journal_items_corrections.py:328
+#: code:addons/account_corrections/wizard/journal_items_corrections.py:333
+#, python-format
+msgid "Error"
+msgstr "Error"
+
+#. module: account_corrections
+#: field:wizard.journal.items.corrections.lines,journal_id:0
+msgid "Journal Code"
+msgstr "Journal Code"
+
+#. module: account_corrections
+#: field:account.move.line,is_corrigible:0
+msgid "Is corrigible?"
+msgstr "Is corrigible?"
+
+#. module: account_corrections
+#: code:addons/account_corrections/wizard/analytic_distribution_wizard.py:283
+#, python-format
+msgid "Cost center update failure."
+msgstr "Cost center update failure."
+
+#. module: account_corrections
+#: model:ir.model,name:account_corrections.model_wizard_journal_items_corrections
+msgid "Journal items corrections wizard"
+msgstr "Journal items corrections wizard"
+
+#. module: account_corrections
+#: code:addons/account_corrections/account_move_line.py:460
+#: code:addons/account_corrections/account_move_line.py:616
+#: code:addons/account_corrections/account_move_line.py:752
+#, python-format
+msgid "No correction journal found!"
+msgstr "No correction journal found!"
+
+#. module: account_corrections
+#: field:analytic.distribution.wizard,old_account_id:0
+msgid "New account given by correction wizard"
+msgstr "New account given by correction wizard"
+
+#. module: account_corrections
+#: code:addons/account_corrections/wizard/analytic_distribution_wizard.py:105
+#, python-format
+msgid "A value is missing."
+msgstr "A value is missing."
+
+#. module: account_corrections
+#: selection:wizard.journal.items.corrections.lines,analytic_distribution_state:0
+msgid "Valid"
+msgstr "Valid"
+
+#. module: account_corrections
+#: view:analytic.distribution.wizard:0
+msgid "Correct it!"
+msgstr "Correct it!"
+
+#. module: account_corrections
+#: code:addons/account_corrections/wizard/journal_items_corrections.py:144
+#, python-format
+msgid "Analytic distribution"
+msgstr "Analytic distribution"
+
+#. module: account_corrections
+#: field:wizard.journal.items.corrections.lines,ref:0
+msgid "Reference"
+msgstr "Reference"
+
+#. module: account_corrections
+#: field:wizard.journal.items.corrections,move_line_id:0
+msgid "Move Line"
+msgstr "Move Line"
+
+#. module: account_corrections
+#: field:account.move.line,corrected_st_line_id:0
+msgid "Corrected register line"
+msgstr "Corrected register line"
+
+#. module: account_corrections
+#: field:wizard.journal.items.corrections,from_register:0
+msgid "From register?"
+msgstr "From register?"
+
+#. module: account_corrections
+#: field:wizard.journal.items.corrections.lines,analytic_distribution_state:0
+msgid "Distribution state"
+msgstr "Distribution state"
+
+#. module: account_corrections
+#: view:wizard.journal.items.corrections:0
+msgid "Correct"
+msgstr "Correct"
+
+#. module: account_corrections
+#: code:addons/account_corrections/wizard/analytic_distribution_wizard.py:91
+#, python-format
+msgid "Code error: A case has not been taken."
+msgstr "Code error: A case has not been taken."
+
+#. module: account_corrections
+#: field:account.move.line,reversal_line_id:0
+msgid "Reversal Line"
+msgstr "Reversal Line"
+
+#. module: account_corrections
+#: code:addons/account_corrections/wizard/journal_items_corrections.py:247
+#, python-format
+msgid "An ID is missing!"
+msgstr "An ID is missing!"
+
+#. module: account_corrections
+#: view:account.move.line:0
+msgid "Open Accounting Correction Wizard"
+msgstr "Open Accounting Correction Wizard"
+
+#. module: account_corrections
+#: code:addons/account_corrections/wizard/analytic_distribution_wizard.py:61
+#, python-format
+msgid "No attached period to the correction wizard. Do you come from a correction wizard attached to a journal item?"
+msgstr "No attached period to the correction wizard. Do you come from a correction wizard attached to a journal item?"
+

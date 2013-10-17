@@ -1,0 +1,1894 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* consumption_calculation
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 07:42+0000\n"
+"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: consumption_calculation
+#: view:monthly.review.consumption:0
+#: field:monthly.review.consumption,nomen_manda_1:0
+#: field:product.history.consumption,nomen_manda_1:0
+#: view:real.average.consumption:0
+#: field:real.average.consumption,nomen_manda_1:0
+msgid "Group"
+msgstr "Group"
+
+#. module: consumption_calculation
+#: model:ir.model,name:consumption_calculation.model_real_average_consumption
+#: selection:product.history.consumption,consumption_type:0
+msgid "Real Average Consumption"
+msgstr "Real Average Consumption"
+
+#. module: consumption_calculation
+#: view:real.average.consumption:0
+msgid "B.Num"
+msgstr "B.Num"
+
+#. module: consumption_calculation
+#: view:wizard.valid.line:0
+msgid "Valid lines"
+msgstr "Valid lines"
+
+#. module: consumption_calculation
+#: field:monthly.review.consumption.line,last_reviewed2:0
+msgid "Last reviewed on (hidden)"
+msgstr "Last reviewed on (hidden)"
+
+#. module: consumption_calculation
+#: view:wizard.export.fmc:0
+#: view:wizard.export.rac:0
+msgid "File to download"
+msgstr "File to download"
+
+#. module: consumption_calculation
+#: model:ir.model,name:consumption_calculation.model_wizard_import_fmc
+msgid "Import FMC from Excel sheet"
+msgstr "Import FMC from Excel sheet"
+
+#. module: consumption_calculation
+#: view:real.average.consumption:0
+#: selection:real.average.consumption,state:0
+msgid "Draft"
+msgstr "Draft"
+
+#. module: consumption_calculation
+#: report:expiry.report:0
+msgid "Period of calculation :"
+msgstr "Period of calculation :"
+
+#. module: consumption_calculation
+#: report:expiry.report:0
+msgid "Report date :"
+msgstr "Report date :"
+
+#. module: consumption_calculation
+#: field:product.likely.expire.report.line,total_expired:0
+msgid "Total expired"
+msgstr "Total expired"
+
+#. module: consumption_calculation
+#: field:expiry.quantity.report.line,expiry_date:0
+msgid "Exp. date"
+msgstr "Exp. date"
+
+#. module: consumption_calculation
+#: view:expiry.quantity.report:0
+#: field:expiry.quantity.report.line,product_name:0
+msgid "Name"
+msgstr "Name"
+
+#. module: consumption_calculation
+#: view:product.history.consumption:0
+msgid "Product parameters"
+msgstr "Product parameters"
+
+#. module: consumption_calculation
+#: view:wizard.import.rac:0
+msgid "RAC Imported"
+msgstr "RAC Imported"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/consumption_calculation.py:754
+#, python-format
+msgid "The selected Expiry Date does not exist in the system."
+msgstr "The selected Expiry Date does not exist in the system."
+
+#. module: consumption_calculation
+#: view:monthly.review.consumption:0
+#: field:monthly.review.consumption,nomen_manda_3:0
+#: field:product.history.consumption,nomen_manda_3:0
+#: view:real.average.consumption:0
+#: field:real.average.consumption,nomen_manda_3:0
+msgid "Root"
+msgstr "Root"
+
+#. module: consumption_calculation
+#: view:expiry.quantity.report:0
+#: field:expiry.quantity.report.line,location_id:0
+msgid "Loc."
+msgstr "Loc."
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/consumption_calculation.py:68
+#, python-format
+msgid "A product has"
+msgstr "A product has"
+
+#. module: consumption_calculation
+#: constraint:product.product:0
+msgid "Constraint error on Kit Product."
+msgstr "Constraint error on Kit Product."
+
+#. module: consumption_calculation
+#: report:addons/consumption_calculation/report/report_monthly_consumption_xls.mako:70
+msgid "Valid Until"
+msgstr "Valid Until"
+
+#. module: consumption_calculation
+#: field:monthly.review.consumption.line,mrc_creation_date:0
+#: field:monthly.review.consumption.line,ref:0
+#: field:product.likely.expire.report.item.line,item_id:0
+#: field:real.average.consumption.line,ref:0
+msgid "unknown"
+msgstr "unknown"
+
+#. module: consumption_calculation
+#: view:monthly.review.consumption:0
+msgid "Display graph"
+msgstr "Display graph"
+
+#. module: consumption_calculation
+#: report:expiry.report:0
+msgid "Limit date :"
+msgstr "Limit date :"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/wizard/wizard_import_rac.py:175
+#, python-format
+msgid "Line %s of the imported file: Expiry Date has been changed to %s which is the system BN date (was wrong in the file)"
+msgstr "Line %s of the imported file: Expiry Date has been changed to %s which is the system BN date (was wrong in the file)"
+
+#. module: consumption_calculation
+#: view:real.average.consumption:0
+#: view:real.consumption.change.location:0
+msgid "Change location"
+msgstr "Change location"
+
+#. module: consumption_calculation
+#: model:ir.model,name:consumption_calculation.model_product_likely_expire_report_item
+msgid "product.likely.expire.report.item"
+msgstr "product.likely.expire.report.item"
+
+#. module: consumption_calculation
+#: field:product.likely.expire.report.item,available_qty:0
+#: field:product.likely.expire.report.item.line,available_qty:0
+msgid "Available Qty."
+msgstr "Available Qty."
+
+#. module: consumption_calculation
+#: view:monthly.review.consumption:0
+#: view:real.average.consumption:0
+msgid "Group By..."
+msgstr "Group By..."
+
+#. module: consumption_calculation
+#: view:monthly.review.consumption:0
+#: view:real.average.consumption:0
+msgid "Fill lines"
+msgstr "Fill lines"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/consumption_calculation.py:796
+#, python-format
+msgid "The Qty Consumed is greater than the Indicative Stock"
+msgstr "The Qty Consumed is greater than the Indicative Stock"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/consumption_calculation.py:364
+#: report:addons/consumption_calculation/report/report_real_consumption_xls.mako:75
+#: field:real.average.consumption.line,remark:0
+#, python-format
+msgid "Remark"
+msgstr "Remark"
+
+#. module: consumption_calculation
+#: model:ir.actions.act_window,name:consumption_calculation.action_monthly_review_consumption
+#: model:ir.ui.menu,name:consumption_calculation.consumption_monthly_review_menu
+#: view:monthly.review.consumption:0
+#: field:product.product,product_amc:0
+msgid "Monthly consumption"
+msgstr "Monthly consumption"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/consumption_calculation.py:364
+#, python-format
+msgid "Product UoM"
+msgstr "Product UoM"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/consumption_calculation.py:364
+#: report:addons/consumption_calculation/report/report_monthly_consumption_xls.mako:67
+#: report:addons/consumption_calculation/report/report_real_consumption_xls.mako:70
+#, python-format
+msgid "Product Description"
+msgstr "Product Description"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/consumption_calculation.py:619
+#, python-format
+msgid "Line %s of the imported file: Qty Consumed (%s) can't be greater than the Indicative Stock (%s)"
+msgstr "Line %s of the imported file: Qty Consumed (%s) can't be greater than the Indicative Stock (%s)"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/wizard/wizard_import_rac.py:41
+#, python-format
+msgid "\n"
+"        IMPORTANT : The first line will be ignored by the system.\n"
+"        \n"
+"        The file should be in XML 2003 format.\n"
+"        The columns should be in this order :\n"
+"           Product Code ; Product Description ; UoM ; Batch Number ; Expiry Date (DD/MM/YYYY) (ignored if batch number is set) ; Consumed quantity ; Remark\n"
+"        "
+msgstr "\n"
+"        IMPORTANT : The first line will be ignored by the system.\n"
+"        \n"
+"        The file should be in XML 2003 format.\n"
+"        The columns should be in this order :\n"
+"           Product Code ; Product Description ; UoM ; Batch Number ; Expiry Date (DD/MM/YYYY) (ignored if batch number is set) ; Consumed quantity ; Remark\n"
+"        "
+
+#. module: consumption_calculation
+#: selection:product.history.consumption,consumption_type:0
+msgid "Average Monthly Consumption"
+msgstr "Average Monthly Consumption"
+
+#. module: consumption_calculation
+#: view:product.history.consumption:0
+#: field:product.history.consumption,month_ids:0
+msgid "Months"
+msgstr "Months"
+
+#. module: consumption_calculation
+#: view:wizard.import.fmc:0
+#: view:wizard.import.rac:0
+msgid "Import file"
+msgstr "Import file"
+
+#. module: consumption_calculation
+#: model:ir.actions.act_window,name:consumption_calculation.action_products_to_expire
+#: model:ir.ui.menu,name:consumption_calculation.menu_products_to_expire
+msgid "Products likely to expire"
+msgstr "Products likely to expire"
+
+#. module: consumption_calculation
+#: view:expiry.quantity.report:0
+msgid "Exp. Date"
+msgstr "Exp. Date"
+
+#. module: consumption_calculation
+#: view:monthly.review.consumption:0
+#: view:real.average.consumption:0
+msgid "Import a file"
+msgstr "Import a file"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/wizard/wizard_import_rac.py:203
+#, python-format
+msgid "Line %s of the imported file: UoM [%s] not found ! Details: %s"
+msgstr "Line %s of the imported file: UoM [%s] not found ! Details: %s"
+
+#. module: consumption_calculation
+#: view:product.history.consumption:0
+msgid "View historical data"
+msgstr "View historical data"
+
+#. module: consumption_calculation
+#: model:ir.model,name:consumption_calculation.model_product_history_consumption
+msgid "product.history.consumption"
+msgstr "product.history.consumption"
+
+#. module: consumption_calculation
+#: report:expiry.report:0
+msgid "TOTAL"
+msgstr "TOTAL"
+
+#. module: consumption_calculation
+#: field:real.average.consumption.line,consumed_qty:0
+msgid "Qty consumed"
+msgstr "Qty consumed"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/history_consumption.py:314
+#, python-format
+msgid "No history consumption report found !"
+msgstr "No history consumption report found !"
+
+#. module: consumption_calculation
+#: field:product.history.consumption.month,date_to:0
+msgid "Date to"
+msgstr "Date to"
+
+#. module: consumption_calculation
+#: model:ir.actions.server,name:consumption_calculation.action_open_history_consumption_view
+msgid "History consumption"
+msgstr "History consumption"
+
+#. module: consumption_calculation
+#: report:addons/consumption_calculation/report/report_monthly_consumption_xls.mako:69
+#: field:monthly.review.consumption.line,fmc:0
+#: field:wizard.export.fmc,fmc_id:0
+#: field:wizard.export.rac,rac_id:0
+msgid "FMC"
+msgstr "FMC"
+
+#. module: consumption_calculation
+#: field:product.product,procure_delay:0
+msgid "Procurement Lead Time"
+msgstr "Procurement Lead Time"
+
+#. module: consumption_calculation
+#: field:real.average.consumption,state:0
+msgid "State"
+msgstr "State"
+
+#. module: consumption_calculation
+#: view:expiry.quantity.report:0
+msgid "Expired quantity"
+msgstr "Expired quantity"
+
+#. module: consumption_calculation
+#: field:expiry.quantity.report.line,expired_qty:0
+msgid "Batch exp."
+msgstr "Batch exp."
+
+#. module: consumption_calculation
+#: view:real.average.consumption:0
+msgid "Exp"
+msgstr "Exp"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/consumption_calculation.py:71
+#, python-format
+msgid "%s been inactivated. If you want to validate this document you have to remove/correct the %s containing %s (see red %s of the document)"
+msgstr "%s been inactivated. If you want to validate this document you have to remove/correct the %s containing %s (see red %s of the document)"
+
+#. module: consumption_calculation
+#: view:expiry.quantity.report:0
+msgid "Print report"
+msgstr "Print report"
+
+#. module: consumption_calculation
+#: field:real.average.consumption.line,batch_mandatory:0
+msgid "BM"
+msgstr "BM"
+
+#. module: consumption_calculation
+#: field:product.history.consumption,consumption_type:0
+msgid "Consumption type"
+msgstr "Consumption type"
+
+#. module: consumption_calculation
+#: field:expiry.quantity.report.line,report_id:0
+#: field:product.likely.expire.report.line,report_id:0
+#: field:real.consumption.change.location,report_id:0
+msgid "Report"
+msgstr "Report"
+
+#. module: consumption_calculation
+#: view:product.likely.expire.report.item:0
+#: field:product.likely.expire.report.item,line_ids:0
+msgid "Batchs"
+msgstr "Batchs"
+
+#. module: consumption_calculation
+#: view:wizard.export.fmc:0
+msgid "FMC lines exported"
+msgstr "FMC lines exported"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/wizard/wizard_import_rac.py:270
+#, python-format
+msgid " second(s)"
+msgstr " second(s)"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/consumption_calculation.py:448
+#: code:addons/consumption_calculation/consumption_calculation.py:882
+#, python-format
+msgid "You must assign an asset"
+msgstr "You must assign an asset"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/consumption_calculation.py:364
+#: report:addons/consumption_calculation/report/report_real_consumption_xls.mako:72
+#, python-format
+msgid "Batch Number"
+msgstr "Batch Number"
+
+#. module: consumption_calculation
+#: field:monthly.review.consumption.line,mrc_id:0
+#: field:wizard.valid.line,mrc_id:0
+msgid "MRC"
+msgstr "MRC"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/wizard/wizard_import_rac.py:210
+#, python-format
+msgid "Line %s of the imported file: %s"
+msgstr "Line %s of the imported file: %s"
+
+#. module: consumption_calculation
+#: model:ir.actions.act_window,name:consumption_calculation.action_expired_products
+#: model:ir.ui.menu,name:consumption_calculation.menu_expired_products
+msgid "Expiry quantities"
+msgstr "Expiry quantities"
+
+#. module: consumption_calculation
+#: report:expiry.report:0
+msgid "Currency :"
+msgstr "Currency :"
+
+#. module: consumption_calculation
+#: view:wizard.import.rac:0
+msgid "Import RAC"
+msgstr "Import RAC"
+
+#. module: consumption_calculation
+#: field:real.average.consumption.line,inactive_error:0
+msgid "Comment"
+msgstr "Comment"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/consumption_calculation.py:364
+#: view:real.average.consumption:0
+#: field:real.average.consumption.line,asset_id:0
+#, python-format
+msgid "Asset"
+msgstr "Asset"
+
+#. module: consumption_calculation
+#: field:expiry.quantity.report,line_ids:0
+#: view:monthly.review.consumption:0
+#: view:real.average.consumption:0
+msgid "Products"
+msgstr "Products"
+
+#. module: consumption_calculation
+#: constraint:real.average.consumption:0
+msgid "You cannot confirm this real consumption report because it contains a line with an inactive product"
+msgstr "You cannot confirm this real consumption report because it contains a line with an inactive product"
+
+#. module: consumption_calculation
+#: field:wizard.import.rac,rac_id:0
+msgid "Real average consumption"
+msgstr "Real average consumption"
+
+#. module: consumption_calculation
+#: model:ir.actions.act_window,name:consumption_calculation.action_new_monthly_review_consumption
+msgid "New real monthly consumption"
+msgstr "New real monthly consumption"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/wizard/wizard_import_rac.py:292
+#, python-format
+msgid "%s !"
+msgstr "%s !"
+
+#. module: consumption_calculation
+#: report:expiry.report:0
+msgid "DESCRIPTION"
+msgstr "DESCRIPTION"
+
+#. module: consumption_calculation
+#: field:monthly.review.consumption,nomen_manda_0:0
+#: field:product.history.consumption,nomen_manda_0:0
+#: field:real.average.consumption,nomen_manda_0:0
+msgid "Main Type"
+msgstr "Main Type"
+
+#. module: consumption_calculation
+#: field:real.average.consumption,created_ok:0
+msgid "Out moves created"
+msgstr "Out moves created"
+
+#. module: consumption_calculation
+#: view:expiry.quantity.report:0
+#: view:product.likely.expire.report:0
+#: view:real.average.consumption:0
+#: view:real.consumption.change.location:0
+#: view:wizard.import.fmc:0
+#: view:wizard.import.rac:0
+#: view:wizard.valid.line:0
+msgid "Cancel"
+msgstr "Cancel"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/consumption_calculation.py:375
+#, python-format
+msgid "The RAC lines has been exported. Please click on Save As button to download the file"
+msgstr "The RAC lines has been exported. Please click on Save As button to download the file"
+
+#. module: consumption_calculation
+#: constraint:stock.location:0
+msgid "Quarantine Location can only have Quarantine Location or Views as parent location."
+msgstr "Quarantine Location can only have Quarantine Location or Views as parent location."
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/consumption_calculation.py:878
+#, python-format
+msgid "You must assign a batch"
+msgstr "You must assign a batch"
+
+#. module: consumption_calculation
+#: model:ir.actions.act_window,name:consumption_calculation.action_real_average_consumption
+#: model:ir.ui.menu,name:consumption_calculation.consumption_reports_menu
+msgid "Real consumption"
+msgstr "Real consumption"
+
+#. module: consumption_calculation
+#: model:ir.model,name:consumption_calculation.model_expiry_quantity_report
+msgid "Products Expired"
+msgstr "Products Expired"
+
+#. module: consumption_calculation
+#: view:product.likely.expire.report.item:0
+msgid "Batch likely to expire"
+msgstr "Batch likely to expire"
+
+#. module: consumption_calculation
+#: field:product.likely.expire.report,consumption_to:0
+#: field:product.likely.expire.report,date_to:0
+msgid "To"
+msgstr "To"
+
+#. module: consumption_calculation
+#: field:real.average.consumption.line,product_qty:0
+msgid "Indicative stock"
+msgstr "Indicative stock"
+
+#. module: consumption_calculation
+#: view:expiry.quantity.report:0
+#: field:expiry.quantity.report,location_id:0
+#: report:expiry.report:0
+#: model:ir.model,name:consumption_calculation.model_stock_location
+#: field:monthly.review.consumption,cons_location_id:0
+#: field:product.history.consumption,location_id:0
+#: view:product.likely.expire.report:0
+#: field:product.likely.expire.report,location_id:0
+#: field:product.likely.expire.report,msf_instance:0
+#: field:product.likely.expire.report.item.line,location_id:0
+msgid "Location"
+msgstr "Location"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/wizard/wizard_import_rac.py:156
+#, python-format
+msgid "Line %s of the imported file: Batch Number required.\n"
+""
+msgstr "Line %s of the imported file: Batch Number required.\n"
+""
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/wizard/wizard_import_rac.py:182
+#, python-format
+msgid "Line %s of the imported file: Asset form required.\n"
+""
+msgstr "Line %s of the imported file: Asset form required.\n"
+""
+
+#. module: consumption_calculation
+#: report:expiry.report:0
+msgid "Stock"
+msgstr "Stock"
+
+#. module: consumption_calculation
+#: field:real.average.consumption.line,date_mandatory:0
+msgid "DM"
+msgstr "DM"
+
+#. module: consumption_calculation
+#: view:real.average.consumption:0
+msgid "Save & Process"
+msgstr "Save & Process"
+
+#. module: consumption_calculation
+#: field:product.likely.expire.report,consumption_from:0
+#: field:product.likely.expire.report,date_from:0
+msgid "From"
+msgstr "From"
+
+#. module: consumption_calculation
+#: field:product.product,monthly_consumption:0
+msgid "Real Consumption"
+msgstr "Real Consumption"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/consumption_calculation.py:446
+#: code:addons/consumption_calculation/consumption_calculation.py:880
+#, python-format
+msgid "You must assign an expiry date"
+msgstr "You must assign an expiry date"
+
+#. module: consumption_calculation
+#: field:real.average.consumption.line,move_id:0
+msgid "Move"
+msgstr "Move"
+
+#. module: consumption_calculation
+#: model:ir.model,name:consumption_calculation.model_monthly_review_consumption
+#: field:wizard.import.fmc,rmc_id:0
+msgid "Monthly review consumption"
+msgstr "Monthly review consumption"
+
+#. module: consumption_calculation
+#: field:monthly.review.consumption,creation_date:0
+#: field:real.average.consumption,creation_date:0
+msgid "Creation date"
+msgstr "Creation date"
+
+#. module: consumption_calculation
+#: view:expiry.quantity.report:0
+#: view:product.likely.expire.report:0
+msgid "Period of calculation"
+msgstr "Period of calculation"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/consumption_calculation.py:698
+#: code:addons/consumption_calculation/consumption_calculation.py:734
+#, python-format
+msgid "The Qty Consumed cant't be greater than the Indicative Stock"
+msgstr "The Qty Consumed cant't be greater than the Indicative Stock"
+
+#. module: consumption_calculation
+#: field:expiry.quantity.report,input_output_ok:0
+#: field:product.likely.expire.report,input_output_ok:0
+msgid "Exclude Input and Output locations"
+msgstr "Exclude Input and Output locations"
+
+#. module: consumption_calculation
+#: field:monthly.review.consumption,hide_column_error_ok:0
+#: field:real.average.consumption,hide_column_error_ok:0
+msgid "Show column errors"
+msgstr "Show column errors"
+
+#. module: consumption_calculation
+#: view:expiry.quantity.report:0
+msgid "Expiry Quantities"
+msgstr "Expiry Quantities"
+
+#. module: consumption_calculation
+#: view:monthly.review.consumption:0
+msgid "Valid all lines"
+msgstr "Valid all lines"
+
+#. module: consumption_calculation
+#: report:expiry.report:0
+msgid "Products/batches already expired"
+msgstr "Products/batches already expired"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/expiry_calculation.py:277
+#: code:addons/consumption_calculation/expiry_calculation.py:280
+#, python-format
+msgid "You cannot have 'To date' older than 'From date'"
+msgstr "You cannot have 'To date' older than 'From date'"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/wizard/wizard_import_fmc.py:163
+#, python-format
+msgid "Importation completed !\n"
+"                                                # of imported lines : %s\n"
+"                                                # of lines to correct: %s\n"
+"                                                # of ignored lines : %s\n"
+"                                                \n"
+"                                                Reported errors :\n"
+"                                                %s\n"
+"                                             "
+msgstr "Importation completed !\n"
+"                                                # of imported lines : %s\n"
+"                                                # of lines to correct: %s\n"
+"                                                # of ignored lines : %s\n"
+"                                                \n"
+"                                                Reported errors :\n"
+"                                                %s\n"
+"                                             "
+
+#. module: consumption_calculation
+#: view:real.average.consumption:0
+msgid "Product filters"
+msgstr "Product filters"
+
+#. module: consumption_calculation
+#: view:real.average.consumption:0
+msgid "Update Indicative Stock"
+msgstr "Update Indicative Stock"
+
+#. module: consumption_calculation
+#: field:monthly.review.consumption.line,to_correct_ok:0
+#: field:real.average.consumption.line,to_correct_ok:0
+msgid "To correct"
+msgstr "To correct"
+
+#. module: consumption_calculation
+#: field:real.average.consumption.line,expiry_date_check:0
+msgid "Expiry Date Check"
+msgstr "Expiry Date Check"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/wizard/wizard_import_fmc.py:85
+#: code:addons/consumption_calculation/wizard/wizard_import_rac.py:85
+#, python-format
+msgid "Nothing to import."
+msgstr "Nothing to import."
+
+#. module: consumption_calculation
+#: field:product.history.consumption,date_to:0
+msgid "To date"
+msgstr "To date"
+
+#. module: consumption_calculation
+#: field:product.likely.expire.report.item,period_start:0
+msgid "Period start"
+msgstr "Period start"
+
+#. module: consumption_calculation
+#: model:ir.model,name:consumption_calculation.model_wizard_import_rac
+msgid "Import RAC from Excel sheet"
+msgstr "Import RAC from Excel sheet"
+
+#. module: consumption_calculation
+#: field:real.average.consumption.line,rac_id:0
+msgid "RAC"
+msgstr "RAC"
+
+#. module: consumption_calculation
+#: sql_constraint:product.product:0
+msgid "The \"Product Code\" must be unique"
+msgstr "The \"Product Code\" must be unique"
+
+#. module: consumption_calculation
+#: view:expiry.quantity.report:0
+#: view:product.likely.expire.report:0
+msgid "Process"
+msgstr "Process"
+
+#. module: consumption_calculation
+#: selection:product.likely.expire.report,consumption_type:0
+msgid "FMC -- Forecasted Monthly Consumption"
+msgstr "FMC -- Forecasted Monthly Consumption"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/consumption_calculation.py:70
+#, python-format
+msgid "this inactive product"
+msgstr "this inactive product"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/wizard/wizard_import_fmc.py:110
+#, python-format
+msgid "You should have exactly 5 columns in this order:\n"
+"Product Code*, Product Description*, AMC, FMC, Valid Until"
+msgstr "You should have exactly 5 columns in this order:\n"
+"Product Code*, Product Description*, AMC, FMC, Valid Until"
+
+#. module: consumption_calculation
+#: view:wizard.import.fmc:0
+#: field:wizard.import.fmc,file:0
+#: view:wizard.import.rac:0
+#: field:wizard.import.rac,file:0
+msgid "File to import"
+msgstr "File to import"
+
+#. module: consumption_calculation
+#: view:monthly.review.consumption:0
+#: view:real.average.consumption:0
+msgid "Are you sure that you want to remove all lines?"
+msgstr "Are you sure that you want to remove all lines?"
+
+#. module: consumption_calculation
+#: help:product.product,procure_delay:0
+msgid "It's the default time to procure this product. This lead time will be used on the Order cycle procurement computation"
+msgstr "It's the default time to procure this product. This lead time will be used on the Order cycle procurement computation"
+
+#. module: consumption_calculation
+#: view:expiry.quantity.report:0
+#: field:expiry.quantity.report.line,product_code:0
+msgid "Ref."
+msgstr "Ref."
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/wizard/wizard_import_fmc.py:41
+#, python-format
+msgid "\n"
+"        IMPORTANT : The first line will be ignored by the system.\n"
+"        \n"
+"        The file should be in Excel xml 2003 format.\n"
+"        The columns should be in this order :\n"
+"          * Product Code\n"
+"          * Product Description\n"
+"          * FMC\n"
+"          * Valid until (DD-MMM-YYYY)\n"
+"        "
+msgstr "\n"
+"        IMPORTANT : The first line will be ignored by the system.\n"
+"        \n"
+"        The file should be in Excel xml 2003 format.\n"
+"        The columns should be in this order :\n"
+"          * Product Code\n"
+"          * Product Description\n"
+"          * FMC\n"
+"          * Valid until (DD-MMM-YYYY)\n"
+"        "
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/consumption_calculation.py:605
+#, python-format
+msgid "Product: %s, You must assign an Asset to process it."
+msgstr "Product: %s, You must assign an Asset to process it."
+
+#. module: consumption_calculation
+#: field:expiry.quantity.report,week_nb:0
+msgid "Period of calculation (Today till XX weeks)"
+msgstr "Period of calculation (Today till XX weeks)"
+
+#. module: consumption_calculation
+#: view:wizard.export.rac:0
+msgid "RAC lines exported"
+msgstr "RAC lines exported"
+
+#. module: consumption_calculation
+#: report:expiry.report:0
+msgid "week"
+msgstr "week"
+
+#. module: consumption_calculation
+#: view:monthly.review.consumption:0
+#: view:real.average.consumption:0
+msgid "Main type"
+msgstr "Main type"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/consumption_calculation.py:71
+#: code:addons/consumption_calculation/consumption_calculation.py:82
+#: code:addons/consumption_calculation/consumption_calculation.py:85
+#: code:addons/consumption_calculation/consumption_calculation.py:89
+#: code:addons/consumption_calculation/consumption_calculation.py:279
+#: code:addons/consumption_calculation/consumption_calculation.py:560
+#: code:addons/consumption_calculation/consumption_calculation.py:577
+#: code:addons/consumption_calculation/consumption_calculation.py:593
+#: code:addons/consumption_calculation/consumption_calculation.py:605
+#: code:addons/consumption_calculation/consumption_calculation.py:617
+#: code:addons/consumption_calculation/consumption_calculation.py:698
+#: code:addons/consumption_calculation/consumption_calculation.py:734
+#: code:addons/consumption_calculation/consumption_calculation.py:753
+#: code:addons/consumption_calculation/consumption_calculation.py:797
+#: code:addons/consumption_calculation/consumption_calculation.py:1340
+#: code:addons/consumption_calculation/consumption_calculation.py:1519
+#: code:addons/consumption_calculation/consumption_calculation.py:1633
+#: code:addons/consumption_calculation/expiry_calculation.py:277
+#: code:addons/consumption_calculation/expiry_calculation.py:280
+#: code:addons/consumption_calculation/expiry_calculation.py:527
+#: code:addons/consumption_calculation/expiry_calculation.py:532
+#: code:addons/consumption_calculation/history_consumption.py:311
+#: code:addons/consumption_calculation/history_consumption.py:314
+#: code:addons/consumption_calculation/history_consumption.py:317
+#: code:addons/consumption_calculation/wizard/wizard_import_fmc.py:85
+#: code:addons/consumption_calculation/wizard/wizard_import_fmc.py:110
+#: code:addons/consumption_calculation/wizard/wizard_import_rac.py:85
+#: code:addons/consumption_calculation/wizard/wizard_import_rac.py:98
+#, python-format
+msgid "Error"
+msgstr "Error"
+
+#. module: consumption_calculation
+#: model:ir.ui.menu,name:consumption_calculation.menu_warehouse_expiry
+msgid "Expiry"
+msgstr "Expiry"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/wizard/wizard_import_rac.py:186
+#, python-format
+msgid "Line %s of the imported file: Asset [%s] not found.\n"
+""
+msgstr "Line %s of the imported file: Asset [%s] not found.\n"
+""
+
+#. module: consumption_calculation
+#: field:expiry.quantity.report.line,uom_id:0
+#: report:expiry.report:0
+#: field:real.average.consumption.line,uom_id:0
+msgid "UoM"
+msgstr "UoM"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/history_consumption.py:317
+#, python-format
+msgid "No months found !"
+msgstr "No months found !"
+
+#. module: consumption_calculation
+#: model:ir.module.module,description:consumption_calculation.module_meta_information
+msgid "\n"
+"        This module aims at defining different kind of consumption calculation.\n"
+"    "
+msgstr "\n"
+"        This module aims at defining different kind of consumption calculation.\n"
+"    "
+
+#. module: consumption_calculation
+#: model:ir.model,name:consumption_calculation.model_product_history_consumption_month
+msgid "product.history.consumption.month"
+msgstr "product.history.consumption.month"
+
+#. module: consumption_calculation
+#: view:real.average.consumption:0
+msgid "Real consumption reporting"
+msgstr "Real consumption reporting"
+
+#. module: consumption_calculation
+#: constraint:stock.location:0
+msgid "You cannot define a quarantine location as chained location."
+msgstr "You cannot define a quarantine location as chained location."
+
+#. module: consumption_calculation
+#: model:ir.module.module,shortdesc:consumption_calculation.module_meta_information
+msgid "Consumption Calculation"
+msgstr "Consumption Calculation"
+
+#. module: consumption_calculation
+#: view:real.consumption.change.location:0
+msgid " "
+msgstr " "
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/consumption_calculation.py:721
+#: code:addons/consumption_calculation/consumption_calculation.py:1267
+#, python-format
+msgid "You have to define a valid product, i.e. not \"To be define\"."
+msgstr "You have to define a valid product, i.e. not \"To be define\"."
+
+#. module: consumption_calculation
+#: model:ir.ui.menu,name:consumption_calculation.menu_product_history_consumption
+msgid "Historical consumption"
+msgstr "Historical consumption"
+
+#. module: consumption_calculation
+#: constraint:product.product:0
+msgid "You must select on order procurement method for Service with Reception products."
+msgstr "You must select on order procurement method for Service with Reception products."
+
+#. module: consumption_calculation
+#: field:expiry.quantity.report.line,real_stock:0
+msgid "Real stock"
+msgstr "Real stock"
+
+#. module: consumption_calculation
+#: field:product.product,reviewed_consumption:0
+msgid "Forecasted Monthly Consumption"
+msgstr "Forecasted Monthly Consumption"
+
+#. module: consumption_calculation
+#: field:real.average.consumption.line,asset_check:0
+msgid "Asset Check"
+msgstr "Asset Check"
+
+#. module: consumption_calculation
+#: field:product.history.consumption.month,date_from:0
+msgid "Date from"
+msgstr "Date from"
+
+#. module: consumption_calculation
+#: report:expiry.report:0
+msgid "ALL TOTAL"
+msgstr "ALL TOTAL"
+
+#. module: consumption_calculation
+#: report:expiry.report:0
+msgid "Unit Cost"
+msgstr "Unit Cost"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/consumption_calculation.py:594
+#, python-format
+msgid "Product: %s, no internal batch found for expiry (%s)"
+msgstr "Product: %s, no internal batch found for expiry (%s)"
+
+#. module: consumption_calculation
+#: view:real.average.consumption:0
+msgid "Real consumption reports"
+msgstr "Real consumption reports"
+
+#. module: consumption_calculation
+#: model:ir.model,name:consumption_calculation.model_real_consumption_change_location
+msgid "real.consumption.change.location"
+msgstr "real.consumption.change.location"
+
+#. module: consumption_calculation
+#: report:expiry.report:0
+msgid "EXPIRY REPORT"
+msgstr "EXPIRY REPORT"
+
+#. module: consumption_calculation
+#: view:wizard.export.fmc:0
+#: field:wizard.export.fmc,message:0
+#: view:wizard.export.rac:0
+#: field:wizard.export.rac,message:0
+#: field:wizard.import.fmc,message:0
+#: field:wizard.import.rac,message:0
+msgid "Message"
+msgstr "Message"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/wizard/wizard_import_rac.py:258
+#, python-format
+msgid "Line %s in the Excel file: %s: %s\n"
+""
+msgstr "Line %s in the Excel file: %s: %s\n"
+""
+
+#. module: consumption_calculation
+#: field:product.likely.expire.report,only_non_zero:0
+msgid "Only products with total expired > 0"
+msgstr "Only products with total expired > 0"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/consumption_calculation.py:82
+#, python-format
+msgid "This report is closed. You cannot delete it !"
+msgstr "This report is closed. You cannot delete it !"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/wizard/wizard_import_fmc.py:58
+#: code:addons/consumption_calculation/wizard/wizard_import_rac.py:55
+#: code:addons/consumption_calculation/wizard/wizard_import_rac.py:292
+#, python-format
+msgid "Error !"
+msgstr "Error !"
+
+#. module: consumption_calculation
+#: field:product.likely.expire.report.line,consumption:0
+msgid "Monthly Consumption"
+msgstr "Monthly Consumption"
+
+#. module: consumption_calculation
+#: field:real.average.consumption.line,inactive_product:0
+msgid "Product is inactive"
+msgstr "Product is inactive"
+
+#. module: consumption_calculation
+#: constraint:product.product:0
+msgid "Error: Invalid ean code"
+msgstr "Error: Invalid ean code"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/wizard/wizard_import_rac.py:193
+#, python-format
+msgid "Line %s of the imported file: Product Code [%s] not found ! Details: %s \n"
+""
+msgstr "Line %s of the imported file: Product Code [%s] not found ! Details: %s \n"
+""
+
+#. module: consumption_calculation
+#: view:real.average.consumption:0
+msgid "Period of consumption"
+msgstr "Period of consumption"
+
+#. module: consumption_calculation
+#: model:ir.ui.menu,name:consumption_calculation.warehouse_consumption_menu
+msgid "Consumption reports"
+msgstr "Consumption reports"
+
+#. module: consumption_calculation
+#: field:monthly.review.consumption.line,valid_until:0
+msgid "Valid until"
+msgstr "Valid until"
+
+#. module: consumption_calculation
+#: view:wizard.valid.line:0
+msgid "Select all lines"
+msgstr "Select all lines"
+
+#. module: consumption_calculation
+#: field:product.likely.expire.report.item.line,expired_date:0
+#: field:real.average.consumption.line,expiry_date:0
+msgid "Expiry date"
+msgstr "Expiry date"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/wizard/wizard_import_rac.py:265
+#, python-format
+msgid "Reported errors for ignored lines : \n"
+""
+msgstr "Reported errors for ignored lines : \n"
+""
+
+#. module: consumption_calculation
+#: view:expiry.quantity.report:0
+#: report:expiry.report:0
+msgid "Exp. Qty"
+msgstr "Exp. Qty"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/consumption_calculation.py:718
+#, python-format
+msgid "You have to define a valid UOM, i.e. not \"To be define\"."
+msgstr "You have to define a valid UOM, i.e. not \"To be define\"."
+
+#. module: consumption_calculation
+#: view:stock.location:0
+msgid "Stock Locations"
+msgstr "Stock Locations"
+
+#. module: consumption_calculation
+#: field:product.history.consumption,date_from:0
+msgid "From date"
+msgstr "From date"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/wizard/wizard_import_rac.py:151
+#, python-format
+msgid "Line %s of the imported file: expiry date %s has a wrong format (day/month/year).'\n"
+""
+msgstr "Line %s of the imported file: expiry date %s has a wrong format (day/month/year).'\n"
+""
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/wizard/wizard_import_rac.py:140
+#, python-format
+msgid "Line %s of the imported file: expiry date required\n"
+""
+msgstr "Line %s of the imported file: expiry date required\n"
+""
+
+#. module: consumption_calculation
+#: model:ir.actions.act_window,name:consumption_calculation.action_new_real_consumption_report
+msgid "New real consumption report"
+msgstr "New real consumption report"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/wizard/wizard_import_fmc.py:170
+#, python-format
+msgid "No error !"
+msgstr "No error !"
+
+#. module: consumption_calculation
+#: view:wizard.export.fmc:0
+#: view:wizard.export.rac:0
+#: view:wizard.import.fmc:0
+#: view:wizard.import.rac:0
+msgid "Close window"
+msgstr "Close window"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/consumption_calculation.py:560
+#: code:addons/consumption_calculation/consumption_calculation.py:562
+#, python-format
+msgid "The consumed qty. must be positive or 0.00"
+msgstr "The consumed qty. must be positive or 0.00"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/consumption_calculation.py:607
+#, python-format
+msgid "You must assign an Asset to process it."
+msgstr "You must assign an Asset to process it."
+
+#. module: consumption_calculation
+#: model:ir.model,name:consumption_calculation.model_product_likely_expire_report_line
+msgid "product.likely.expire.report.line"
+msgstr "product.likely.expire.report.line"
+
+#. module: consumption_calculation
+#: report:expiry.report:0
+msgid "Batch #"
+msgstr "Batch #"
+
+#. module: consumption_calculation
+#: view:real.average.consumption:0
+msgid "Need confirmation"
+msgstr "Need confirmation"
+
+#. module: consumption_calculation
+#: view:wizard.import.fmc:0
+msgid "FMC Imported"
+msgstr "FMC Imported"
+
+#. module: consumption_calculation
+#: model:ir.model,name:consumption_calculation.model_real_average_consumption_line
+msgid "Real average consumption line"
+msgstr "Real average consumption line"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/consumption_calculation.py:506
+#: code:addons/consumption_calculation/consumption_calculation.py:1196
+#, python-format
+msgid "Some lines need to be fixed before."
+msgstr "Some lines need to be fixed before."
+
+#. module: consumption_calculation
+#: view:real.average.consumption:0
+msgid "Duplicate line"
+msgstr "Duplicate line"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/consumption_calculation.py:506
+#: code:addons/consumption_calculation/consumption_calculation.py:703
+#: code:addons/consumption_calculation/consumption_calculation.py:728
+#: code:addons/consumption_calculation/consumption_calculation.py:1196
+#: code:addons/consumption_calculation/consumption_calculation.py:1267
+#, python-format
+msgid "Warning !"
+msgstr "Warning !"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/wizard/wizard_import_fmc.py:159
+#, python-format
+msgid "Line %s in your Excel file: %s: %s\n"
+""
+msgstr "Line %s in your Excel file: %s: %s\n"
+""
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/wizard/wizard_import_rac.py:169
+#, python-format
+msgid "Line %s of the imported file: the Expiry Date does not match with any batch number of the product.\n"
+""
+msgstr "Line %s of the imported file: the Expiry Date does not match with any batch number of the product.\n"
+""
+
+#. module: consumption_calculation
+#: model:ir.model,name:consumption_calculation.model_wizard_export_fmc
+msgid "Export FMC lines"
+msgstr "Export FMC lines"
+
+#. module: consumption_calculation
+#: field:real.average.consumption,picking_id:0
+msgid "Picking"
+msgstr "Picking"
+
+#. module: consumption_calculation
+#: selection:real.average.consumption,state:0
+msgid "Cancelled"
+msgstr "Cancelled"
+
+#. module: consumption_calculation
+#: field:product.history.consumption.month,name:0
+#: view:product.likely.expire.report.item:0
+#: field:product.likely.expire.report.item,name:0
+msgid "Month"
+msgstr "Month"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/consumption_calculation.py:444
+#, python-format
+msgid "You must assign a batch number"
+msgstr "You must assign a batch number"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/wizard/wizard_import_rac.py:126
+#, python-format
+msgid "Line %s of the imported file: the Consumed Quantity should be a number and not %s \n"
+"."
+msgstr "Line %s of the imported file: the Consumed Quantity should be a number and not %s \n"
+"."
+
+#. module: consumption_calculation
+#: model:ir.actions.report.xml,name:consumption_calculation.report_real_consumption_xls
+msgid "Real Consumption Excel Export"
+msgstr "Real Consumption Excel Export"
+
+#. module: consumption_calculation
+#: model:ir.model,name:consumption_calculation.model_product_likely_expire_report
+#: view:product.likely.expire.report:0
+msgid "Products list likely to expire"
+msgstr "Products list likely to expire"
+
+#. module: consumption_calculation
+#: field:real.average.consumption.line,batch_number_check:0
+msgid "Batch Number Check"
+msgstr "Batch Number Check"
+
+#. module: consumption_calculation
+#: field:product.likely.expire.report.item,line_id:0
+msgid "Line"
+msgstr "Line"
+
+#. module: consumption_calculation
+#: field:monthly.review.consumption,nomen_id:0
+#: field:product.history.consumption,nomen_id:0
+msgid "Products' nomenclature level"
+msgstr "Products' nomenclature level"
+
+#. module: consumption_calculation
+#: field:monthly.review.consumption,period_from:0
+#: field:real.average.consumption,period_from:0
+msgid "Period from"
+msgstr "Period from"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/expiry_calculation.py:527
+#: code:addons/consumption_calculation/expiry_calculation.py:532
+#, python-format
+msgid "You haven't choose an item to open"
+msgstr "You haven't choose an item to open"
+
+#. module: consumption_calculation
+#: report:addons/consumption_calculation/report/report_monthly_consumption_xls.mako:68
+#: field:monthly.review.consumption.line,amc:0
+msgid "AMC"
+msgstr "AMC"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/consumption_calculation.py:1340
+#, python-format
+msgid "The line is already validated !"
+msgstr "The line is already validated !"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/consumption_calculation.py:580
+#, python-format
+msgid "You must assign a Batch Number to process it."
+msgstr "You must assign a Batch Number to process it."
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/consumption_calculation.py:364
+#: report:addons/consumption_calculation/report/report_real_consumption_xls.mako:73
+#: report:expiry.report:0
+#, python-format
+msgid "Expiry Date"
+msgstr "Expiry Date"
+
+#. module: consumption_calculation
+#: constraint:stock.picking:0
+msgid "Wrong reason type for an OUT created from scratch."
+msgstr "Wrong reason type for an OUT created from scratch."
+
+#. module: consumption_calculation
+#: model:ir.model,name:consumption_calculation.model_wizard_export_rac
+msgid "Export RAC lines"
+msgstr "Export RAC lines"
+
+#. module: consumption_calculation
+#: view:wizard.import.fmc:0
+#: view:wizard.import.rac:0
+msgid "Information"
+msgstr "Information"
+
+#. module: consumption_calculation
+#: report:addons/consumption_calculation/report/report_real_consumption_xls.mako:74
+msgid "Consumed Quantity"
+msgstr "Consumed Quantity"
+
+#. module: consumption_calculation
+#: field:monthly.review.consumption,period_to:0
+#: field:real.average.consumption,period_to:0
+msgid "Period to"
+msgstr "Period to"
+
+#. module: consumption_calculation
+#: view:expiry.quantity.report:0
+#: view:product.history.consumption:0
+#: view:product.likely.expire.report:0
+#: view:real.average.consumption:0
+#: view:real.consumption.change.location:0
+msgid "Actions"
+msgstr "Actions"
+
+#. module: consumption_calculation
+#: report:addons/consumption_calculation/report/report_real_consumption_xls.mako:71
+msgid "Product UOM"
+msgstr "Product UOM"
+
+#. module: consumption_calculation
+#: constraint:product.product:0
+msgid "Warning! GMDN code must be digits!"
+msgstr "Warning! GMDN code must be digits!"
+
+#. module: consumption_calculation
+#: field:product.history.consumption.month,history_id:0
+msgid "History"
+msgstr "History"
+
+#. module: consumption_calculation
+#: field:expiry.quantity.report,date_to:0
+msgid "Limit date"
+msgstr "Limit date"
+
+#. module: consumption_calculation
+#: field:monthly.review.consumption,nb_lines:0
+#: field:real.average.consumption,nb_lines:0
+msgid "# lines"
+msgstr "# lines"
+
+#. module: consumption_calculation
+#: field:expiry.quantity.report.line,product_id:0
+#: model:ir.model,name:consumption_calculation.model_product_product
+#: field:monthly.review.consumption.line,name:0
+#: field:product.likely.expire.report.line,product_id:0
+#: field:real.average.consumption.line,product_id:0
+msgid "Product"
+msgstr "Product"
+
+#. module: consumption_calculation
+#: view:real.consumption.change.location:0
+msgid "New location"
+msgstr "New location"
+
+#. module: consumption_calculation
+#: model:ir.model,name:consumption_calculation.model_product_likely_expire_report_item_line
+msgid "product.likely.expire.report.item.line"
+msgstr "product.likely.expire.report.item.line"
+
+#. module: consumption_calculation
+#: field:real.average.consumption,cons_location_id:0
+#: field:real.consumption.change.location,location_id:0
+msgid "Consumer location"
+msgstr "Consumer location"
+
+#. module: consumption_calculation
+#: view:wizard.import.fmc:0
+msgid "Import FMC"
+msgstr "Import FMC"
+
+#. module: consumption_calculation
+#: view:expiry.quantity.report:0
+#: field:expiry.quantity.report.line,batch_number:0
+#: view:product.likely.expire.report.item:0
+msgid "Batch"
+msgstr "Batch"
+
+#. module: consumption_calculation
+#: field:product.likely.expire.report,consumption_type:0
+msgid "Consumption"
+msgstr "Consumption"
+
+#. module: consumption_calculation
+#: report:expiry.report:0
+msgid "Location :"
+msgstr "Location :"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/consumption_calculation.py:68
+#, python-format
+msgid "Some products have"
+msgstr "Some products have"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/wizard/wizard_import_rac.py:271
+#, python-format
+msgid " Importation completed in %s second(s)!\n"
+"# of imported lines : %s\n"
+"# of lines to correct: %s\n"
+"# of ignored lines: %s\n"
+"%s\n"
+""
+msgstr " Importation completed in %s second(s)!\n"
+"# of imported lines : %s\n"
+"# of lines to correct: %s\n"
+"# of ignored lines: %s\n"
+"%s\n"
+""
+
+#. module: consumption_calculation
+#: view:expiry.quantity.report:0
+#: view:product.likely.expire.report:0
+msgid "Expired products"
+msgstr "Expired products"
+
+#. module: consumption_calculation
+#: field:product.likely.expire.report.line,in_stock:0
+msgid "In stock"
+msgstr "In stock"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/consumption_calculation.py:85
+#: code:addons/consumption_calculation/consumption_calculation.py:89
+#, python-format
+msgid "You cannot delete this report because stock moves has been generated and validated from this report !"
+msgstr "You cannot delete this report because stock moves has been generated and validated from this report !"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/consumption_calculation.py:596
+#, python-format
+msgid "Line %s of the imported file: no internal batch number found for ED %s (please correct the data)"
+msgstr "Line %s of the imported file: no internal batch number found for ED %s (please correct the data)"
+
+#. module: consumption_calculation
+#: selection:product.likely.expire.report,consumption_type:0
+msgid "AMC -- Average Monthly Consumption"
+msgstr "AMC -- Average Monthly Consumption"
+
+#. module: consumption_calculation
+#: model:ir.model,name:consumption_calculation.model_wizard_valid_line
+msgid "wizard.valid.line"
+msgstr "wizard.valid.line"
+
+#. module: consumption_calculation
+#: view:real.average.consumption:0
+msgid "Process moves"
+msgstr "Process moves"
+
+#. module: consumption_calculation
+#: field:wizard.export.fmc,filename:0
+#: field:wizard.export.rac,filename:0
+msgid "Filename"
+msgstr "Filename"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/wizard/wizard_import_rac.py:252
+#, python-format
+msgid "Line %s ignored: the system reference an object that doesn't exist in the Excel file. Details: %s\n"
+""
+msgstr "Line %s ignored: the system reference an object that doesn't exist in the Excel file. Details: %s\n"
+""
+
+#. module: consumption_calculation
+#: view:real.average.consumption:0
+msgid "Consumer"
+msgstr "Consumer"
+
+#. module: consumption_calculation
+#: field:monthly.review.consumption,line_ids:0
+#: field:product.likely.expire.report,line_ids:0
+#: field:real.average.consumption,line_ids:0
+#: view:wizard.valid.line:0
+#: field:wizard.valid.line,line_ids:0
+msgid "Lines"
+msgstr "Lines"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/consumption_calculation.py:643
+#, python-format
+msgid "The product in line is inactive !"
+msgstr "The product in line is inactive !"
+
+#. module: consumption_calculation
+#: selection:product.likely.expire.report,consumption_type:0
+msgid "RAC -- Real Average Consumption"
+msgstr "RAC -- Real Average Consumption"
+
+#. module: consumption_calculation
+#: constraint:stock.picking:0
+msgid "You cannot validate this document because it contains a line with an inactive product"
+msgstr "You cannot validate this document because it contains a line with an inactive product"
+
+#. module: consumption_calculation
+#: field:monthly.review.consumption.line,text_error:0
+#: field:real.average.consumption.line,text_error:0
+msgid "Errors"
+msgstr "Errors"
+
+#. module: consumption_calculation
+#: report:expiry.report:0
+msgid "Products/batches to expire"
+msgstr "Products/batches to expire"
+
+#. module: consumption_calculation
+#: field:real.average.consumption.line,just_info_ok:0
+msgid "Just for info"
+msgstr "Just for info"
+
+#. module: consumption_calculation
+#: view:monthly.review.consumption:0
+#: field:monthly.review.consumption,nomen_manda_2:0
+#: field:product.history.consumption,nomen_manda_2:0
+#: view:real.average.consumption:0
+#: field:real.average.consumption,nomen_manda_2:0
+msgid "Family"
+msgstr "Family"
+
+#. module: consumption_calculation
+#: model:ir.actions.report.xml,name:consumption_calculation.report_expiry_report
+msgid "Expiry Report"
+msgstr "Expiry Report"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/wizard/wizard_import_rac.py:55
+#, python-format
+msgid "No Real average consumption found !"
+msgstr "No Real average consumption found !"
+
+#. module: consumption_calculation
+#: view:product.history.consumption:0
+msgid "Product historical consumption"
+msgstr "Product historical consumption"
+
+#. module: consumption_calculation
+#: view:monthly.review.consumption:0
+#: view:real.average.consumption:0
+msgid "Export lines"
+msgstr "Export lines"
+
+#. module: consumption_calculation
+#: field:wizard.export.fmc,file:0
+#: field:wizard.export.rac,file:0
+msgid "File to export"
+msgstr "File to export"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/history_consumption.py:311
+#, python-format
+msgid "No Consumption type has been choosen !"
+msgstr "No Consumption type has been choosen !"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/wizard/wizard_import_rac.py:235
+#, python-format
+msgid "The line %s of the Excel file was ignored. The couple product (%s), batch number (%s) has to be unique."
+msgstr "The line %s of the Excel file was ignored. The couple product (%s), batch number (%s) has to be unique."
+
+#. module: consumption_calculation
+#: sql_constraint:real.average.consumption:0
+msgid "\"Period from\" must be less than or equal to \"Period to\""
+msgstr "\"Period from\" must be less than or equal to \"Period to\""
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/consumption_calculation.py:617
+#, python-format
+msgid "Product: %s, Qty Consumed (%s) can't be greater than the Indicative Stock (%s)"
+msgstr "Product: %s, Qty Consumed (%s) can't be greater than the Indicative Stock (%s)"
+
+#. module: consumption_calculation
+#: view:monthly.review.consumption:0
+#: view:real.average.consumption:0
+msgid "Sublist"
+msgstr "Sublist"
+
+#. module: consumption_calculation
+#: field:product.likely.expire.report.item,expired_qty:0
+#: field:product.likely.expire.report.item.line,expired_qty:0
+msgid "Expired Qty."
+msgstr "Expired Qty."
+
+#. module: consumption_calculation
+#: field:monthly.review.consumption.line,valid_ok:0
+msgid "Validated"
+msgstr "Validated"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/wizard/wizard_import_fmc.py:58
+#, python-format
+msgid "No Monthly review consumption found !"
+msgstr "No Monthly review consumption found !"
+
+#. module: consumption_calculation
+#: sql_constraint:real.average.consumption.line:0
+msgid "The couple product, batch number has to be unique"
+msgstr "The couple product, batch number has to be unique"
+
+#. module: consumption_calculation
+#: view:real.consumption.change.location:0
+msgid "Are you sure you want to change the consumer location ? It will change the indicative stock, so please check the report lines before validating"
+msgstr "Are you sure you want to change the consumer location ? It will change the indicative stock, so please check the report lines before validating"
+
+#. module: consumption_calculation
+#: view:expiry.quantity.report:0
+msgid "Real Stock"
+msgstr "Real Stock"
+
+#. module: consumption_calculation
+#: constraint:product.product:0
+msgid "If you select \"Non-stockable\" as product type then you have to select \"Make to order\" as procurement method"
+msgstr "If you select \"Non-stockable\" as product type then you have to select \"Make to order\" as procurement method"
+
+#. module: consumption_calculation
+#: model:ir.model,name:consumption_calculation.model_expiry_quantity_report_line
+msgid "Products expired line"
+msgstr "Products expired line"
+
+#. module: consumption_calculation
+#: view:product.history.consumption:0
+msgid "Period parameters"
+msgstr "Period parameters"
+
+#. module: consumption_calculation
+#: view:monthly.review.consumption:0
+#: view:real.average.consumption:0
+msgid "Remove lines"
+msgstr "Remove lines"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/wizard/wizard_import_rac.py:160
+#, python-format
+msgid "Line %s of the imported file: Batch Number [%s] not found.\n"
+""
+msgstr "Line %s of the imported file: Batch Number [%s] not found.\n"
+""
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/consumption_calculation.py:364
+#: report:addons/consumption_calculation/report/report_monthly_consumption_xls.mako:66
+#: report:addons/consumption_calculation/report/report_real_consumption_xls.mako:69
+#, python-format
+msgid "Product Code"
+msgstr "Product Code"
+
+#. module: consumption_calculation
+#: field:monthly.review.consumption,sublist_id:0
+#: field:product.history.consumption,sublist_id:0
+#: field:real.average.consumption,sublist_id:0
+msgid "List/Sublist"
+msgstr "List/Sublist"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/consumption_calculation.py:69
+#, python-format
+msgid "line"
+msgstr "line"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/wizard/wizard_import_fmc.py:120
+#, python-format
+msgid "Line %s in your Excel file ignored: Product Code [%s] not found ! Details: %s \n"
+""
+msgstr "Line %s in your Excel file ignored: Product Code [%s] not found ! Details: %s \n"
+""
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/consumption_calculation.py:279
+#, python-format
+msgid "\"Period to\" can't be in the future."
+msgstr "\"Period to\" can't be in the future."
+
+#. module: consumption_calculation
+#: field:monthly.review.consumption.line,last_reviewed:0
+msgid "Last reviewed on"
+msgstr "Last reviewed on"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/consumption_calculation.py:702
+#: code:addons/consumption_calculation/consumption_calculation.py:725
+#, python-format
+msgid "You have to select a product UOM in the same category than the purchase UOM of the product"
+msgstr "You have to select a product UOM in the same category than the purchase UOM of the product"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/wizard/wizard_import_fmc.py:142
+#, python-format
+msgid "Line %s in your Excel file: expiry date %s has a wrong format. Details: %s' \n"
+""
+msgstr "Line %s in your Excel file: expiry date %s has a wrong format. Details: %s' \n"
+""
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/wizard/wizard_import_fmc.py:129
+#, python-format
+msgid "Line %s in your Excel file ignored: FMC should be a number and not %s \n"
+""
+msgstr "Line %s in your Excel file ignored: FMC should be a number and not %s \n"
+""
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/consumption_calculation.py:364
+#, python-format
+msgid "Consumed Qty"
+msgstr "Consumed Qty"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/consumption_calculation.py:594
+#, python-format
+msgid "No expiry date set"
+msgstr "No expiry date set"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/consumption_calculation.py:69
+#, python-format
+msgid "lines"
+msgstr "lines"
+
+#. module: consumption_calculation
+#: report:expiry.report:0
+msgid "CODE"
+msgstr "CODE"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/wizard/wizard_import_rac.py:98
+#, python-format
+msgid "You should have exactly 8 columns in this order:\n"
+"Product Code*, Product Description*, Product UOM, Batch Number, Asset, Expiry Date, Consumed Quantity, Remark"
+msgstr "You should have exactly 8 columns in this order:\n"
+"Product Code*, Product Description*, Product UOM, Batch Number, Asset, Expiry Date, Consumed Quantity, Remark"
+
+#. module: consumption_calculation
+#: field:real.average.consumption,name:0
+msgid "Reference"
+msgstr "Reference"
+
+#. module: consumption_calculation
+#: model:ir.model,name:consumption_calculation.model_stock_picking
+msgid "Picking List"
+msgstr "Picking List"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/consumption_calculation.py:70
+#, python-format
+msgid "those inactive products"
+msgstr "those inactive products"
+
+#. module: consumption_calculation
+#: view:product.history.consumption:0
+#: view:product.likely.expire.report:0
+msgid "Consumption parameters"
+msgstr "Consumption parameters"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/consumption_calculation.py:1519
+#: code:addons/consumption_calculation/consumption_calculation.py:1633
+#, python-format
+msgid "You cannot have a 'To Date' younger than 'From Date'."
+msgstr "You cannot have a 'To Date' younger than 'From Date'."
+
+#. module: consumption_calculation
+#: view:real.average.consumption:0
+#: selection:real.average.consumption,state:0
+msgid "Closed"
+msgstr "Closed"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/consumption_calculation.py:578
+#, python-format
+msgid "Product: %s, You must assign a Batch Number to process it."
+msgstr "Product: %s, You must assign a Batch Number to process it."
+
+#. module: consumption_calculation
+#: model:ir.model,name:consumption_calculation.model_monthly_review_consumption_line
+msgid "Monthly review consumption line"
+msgstr "Monthly review consumption line"
+
+#. module: consumption_calculation
+#: view:real.average.consumption:0
+#: field:real.average.consumption,activity_id:0
+msgid "Activity"
+msgstr "Activity"
+
+#. module: consumption_calculation
+#: field:monthly.review.consumption.line,fmc2:0
+msgid "FMC (hidden)"
+msgstr "FMC (hidden)"
+
+#. module: consumption_calculation
+#: view:monthly.review.consumption:0
+#: view:product.likely.expire.report.item:0
+#: view:real.average.consumption:0
+msgid "General information"
+msgstr "General information"
+
+#. module: consumption_calculation
+#: report:expiry.report:0
+msgid "Exp. Value"
+msgstr "Exp. Value"
+
+#. module: consumption_calculation
+#: code:addons/consumption_calculation/wizard/wizard_import_rac.py:262
+#, python-format
+msgid "Line %s ignored: an error appeared in the Excel file. Details: %s\n"
+""
+msgstr "Line %s ignored: an error appeared in the Excel file. Details: %s\n"
+""
+
+#. module: consumption_calculation
+#: model:ir.actions.report.xml,name:consumption_calculation.report_monthly_consumption_xls
+msgid "Monthly Consumption Excel Export"
+msgstr "Monthly Consumption Excel Export"
+
+#. module: consumption_calculation
+#: field:real.average.consumption.line,asset_mandatory:0
+msgid "AM"
+msgstr "AM"
+
+#. module: consumption_calculation
+#: field:product.likely.expire.report.item.line,lot_id:0
+#: field:real.average.consumption.line,prodlot_id:0
+msgid "Batch number"
+msgstr "Batch number"
+

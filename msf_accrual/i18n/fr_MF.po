@@ -1,0 +1,323 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* msf_accrual
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 07:42+0000\n"
+"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: msf_accrual
+#: model:ir.actions.act_window,name:msf_accrual.action_msf_accrual_line_tree
+#: model:ir.ui.menu,name:msf_accrual.menu_action_msf_accrual_line_tree
+#: view:msf.accrual.line:0
+msgid "Accruals Management"
+msgstr "Accruals Management"
+
+#. module: msf_accrual
+#: sql_constraint:account.move.line:0
+msgid "Wrong credit or debit value in accounting entry !"
+msgstr "Wrong credit or debit value in accounting entry !"
+
+#. module: msf_accrual
+#: model:ir.module.module,shortdesc:msf_accrual.module_meta_information
+msgid "Accruals for MSF"
+msgstr "Accruals for MSF"
+
+#. module: msf_accrual
+#: view:wizard.accrual.validation:0
+msgid "Are you sure you want to validate those accrual lines?"
+msgstr "Are you sure you want to validate those accrual lines?"
+
+#. module: msf_accrual
+#: field:msf.accrual.line,state:0
+msgid "Status"
+msgstr "Status"
+
+#. module: msf_accrual
+#: view:msf.accrual.line:0
+#: selection:msf.accrual.line,state:0
+msgid "Draft"
+msgstr "Draft"
+
+#. module: msf_accrual
+#: view:wizard.accrual.validation:0
+msgid "Yes"
+msgstr "Yes"
+
+#. module: msf_accrual
+#: view:wizard.accrual.validation:0
+msgid "No"
+msgstr "No"
+
+#. module: msf_accrual
+#: field:msf.accrual.line,date:0
+msgid "Date"
+msgstr "Date"
+
+#. module: msf_accrual
+#: selection:msf.accrual.line,third_party_type:0
+msgid "Employee"
+msgstr "Employee"
+
+#. module: msf_accrual
+#: code:addons/msf_accrual/msf_accrual_line.py:101
+#: code:addons/msf_accrual/msf_accrual_line.py:122
+#: code:addons/msf_accrual/msf_accrual_line.py:136
+#: code:addons/msf_accrual/wizard/wizard_accrual_validation.py:41
+#: code:addons/msf_accrual/wizard/wizard_accrual_validation.py:43
+#: code:addons/msf_accrual/wizard/wizard_accrual_validation.py:45
+#: code:addons/msf_accrual/wizard/wizard_accrual_validation.py:52
+#: code:addons/msf_accrual/wizard/wizard_accrual_validation.py:57
+#: code:addons/msf_accrual/wizard/wizard_accrual_validation.py:59
+#, python-format
+msgid "Warning !"
+msgstr "Warning !"
+
+#. module: msf_accrual
+#: field:msf.accrual.line,partner_id:0
+msgid "Third Party Partner"
+msgstr "Third Party Partner"
+
+#. module: msf_accrual
+#: field:account.account,accrual_account:0
+#: field:msf.accrual.line,accrual_account_id:0
+msgid "Accrual Account"
+msgstr "Accrual Account"
+
+#. module: msf_accrual
+#: code:addons/msf_accrual/wizard/wizard_accrual_validation.py:45
+#, python-format
+msgid "The line '%s' has no analytic distribution!\" % accrual_line.description))\n"
+"                else:\n"
+"                    move_date = accrual_line.period_id.date_stop\n"
+"                    reversal_move_date = (datetime.datetime.strptime(move_date, '%Y-%m-%d') + relativedelta(days=1)).strftime('%Y-%m-%d')\n"
+"                    # check if periods are open\n"
+"                    reversal_period_ids = period_obj.find(cr, uid, reversal_move_date, context=context)\n"
+"                    if len(reversal_period_ids) == 0:\n"
+"                        raise osv.except_osv(_('Warning !'), _(\"No period (M+1) was found in the system!"
+msgstr "The line '%s' has no analytic distribution!\" % accrual_line.description))\n"
+"                else:\n"
+"                    move_date = accrual_line.period_id.date_stop\n"
+"                    reversal_move_date = (datetime.datetime.strptime(move_date, '%Y-%m-%d') + relativedelta(days=1)).strftime('%Y-%m-%d')\n"
+"                    # check if periods are open\n"
+"                    reversal_period_ids = period_obj.find(cr, uid, reversal_move_date, context=context)\n"
+"                    if len(reversal_period_ids) == 0:\n"
+"                        raise osv.except_osv(_('Warning !'), _(\"No period (M+1) was found in the system!"
+
+#. module: msf_accrual
+#: model:ir.model,name:msf_accrual.model_wizard_accrual_validation
+msgid "wizard.accrual.validation"
+msgstr "wizard.accrual.validation"
+
+#. module: msf_accrual
+#: field:msf.accrual.line,period_id:0
+msgid "Period"
+msgstr "Period"
+
+#. module: msf_accrual
+#: model:ir.model,name:msf_accrual.model_msf_accrual_line
+msgid "msf.accrual.line"
+msgstr "msf.accrual.line"
+
+#. module: msf_accrual
+#: constraint:account.move.line:0
+msgid "Company must be same for its related account and period."
+msgstr "Company must be same for its related account and period."
+
+#. module: msf_accrual
+#: field:msf.accrual.line,analytic_distribution_id:0
+msgid "Analytic Distribution"
+msgstr "Analytic Distribution"
+
+#. module: msf_accrual
+#: model:ir.model,name:msf_accrual.model_account_account
+msgid "Account"
+msgstr "Account"
+
+#. module: msf_accrual
+#: model:account.analytic.journal,name:msf_accrual.analytic_accrual_journal
+#: model:account.journal,name:msf_accrual.accrual_journal
+msgid "Accruals"
+msgstr "Accruals"
+
+#. module: msf_accrual
+#: code:addons/msf_accrual/msf_accrual_line.py:136
+#: code:addons/msf_accrual/wizard/wizard_accrual_validation.py:41
+#, python-format
+msgid "The line '%s' is already posted!"
+msgstr "The line '%s' is already posted!"
+
+#. module: msf_accrual
+#: model:ir.module.module,description:msf_accrual.module_meta_information
+msgid "Module for defining accrual expenses.\n"
+"    "
+msgstr "Module for defining accrual expenses.\n"
+"    "
+
+#. module: msf_accrual
+#: view:msf.accrual.line:0
+msgid "Analytical Distribution"
+msgstr "Analytical Distribution"
+
+#. module: msf_accrual
+#: constraint:account.account:0
+msgid "Error ! You can not create recursive accounts."
+msgstr "Error ! You can not create recursive accounts."
+
+#. module: msf_accrual
+#: sql_constraint:account.account:0
+msgid "The code of the account must be unique per company !"
+msgstr "The code of the account must be unique per company !"
+
+#. module: msf_accrual
+#: field:msf.accrual.line,third_party_name:0
+#: field:msf.accrual.line,third_party_type:0
+msgid "Third Party"
+msgstr "Third Party"
+
+#. module: msf_accrual
+#: selection:msf.accrual.line,state:0
+msgid "Posted"
+msgstr "Posted"
+
+#. module: msf_accrual
+#: field:msf.accrual.line,reference:0
+msgid "Reference"
+msgstr "Reference"
+
+#. module: msf_accrual
+#: model:ir.model,name:msf_accrual.model_account_move_line
+msgid "Journal Items"
+msgstr "Journal Items"
+
+#. module: msf_accrual
+#: field:msf.accrual.line,expense_account_id:0
+msgid "Expense Account"
+msgstr "Expense Account"
+
+#. module: msf_accrual
+#: selection:msf.accrual.line,third_party_type:0
+msgid "Partner"
+msgstr "Partner"
+
+#. module: msf_accrual
+#: selection:msf.accrual.line,state:0
+msgid "Cancelled"
+msgstr "Cancelled"
+
+#. module: msf_accrual
+#: view:msf.accrual.line:0
+msgid "Cancel"
+msgstr "Cancel"
+
+#. module: msf_accrual
+#: field:msf.accrual.line,employee_id:0
+msgid "Third Party Employee"
+msgstr "Third Party Employee"
+
+#. module: msf_accrual
+#: field:msf.accrual.line,document_date:0
+msgid "Document Date"
+msgstr "Document Date"
+
+#. module: msf_accrual
+#: field:msf.accrual.line,functional_amount:0
+msgid "Functional Amount"
+msgstr "Functional Amount"
+
+#. module: msf_accrual
+#: field:msf.accrual.line,description:0
+msgid "Description"
+msgstr "Description"
+
+#. module: msf_accrual
+#: model:ir.actions.act_window,name:msf_accrual.action_wizard_accrual_validation
+#: view:wizard.accrual.validation:0
+msgid "Validate Accrual Lines"
+msgstr "Validate Accrual Lines"
+
+#. module: msf_accrual
+#: field:msf.accrual.line,accrual_amount:0
+msgid "Accrual Amount"
+msgstr "Accrual Amount"
+
+#. module: msf_accrual
+#: field:account.move.line,accrual:0
+msgid "Accrual?"
+msgstr "Accrual?"
+
+#. module: msf_accrual
+#: constraint:account.account:0
+msgid "Configuration Error! \n"
+"You cannot define children to an account with internal type different of \"View\"! "
+msgstr "Configuration Error! \n"
+"You cannot define children to an account with internal type different of \"View\"! "
+
+#. module: msf_accrual
+#: help:account.move.line,accrual:0
+msgid "If true, this line was created by an accrual generation."
+msgstr "If true, this line was created by an accrual generation."
+
+#. module: msf_accrual
+#: code:addons/msf_accrual/msf_accrual_line.py:101
+#: code:addons/msf_accrual/msf_accrual_line.py:122
+#, python-format
+msgid "The currency '%s' does not have any rate set for date '%s'!"
+msgstr "The currency '%s' does not have any rate set for date '%s'!"
+
+#. module: msf_accrual
+#: field:msf.accrual.line,currency_id:0
+msgid "Currency"
+msgstr "Currency"
+
+#. module: msf_accrual
+#: constraint:account.move.line:0
+msgid "You can not create move line on closed account."
+msgstr "You can not create move line on closed account."
+
+#. module: msf_accrual
+#: field:msf.accrual.line,journal_id:0
+msgid "Journal"
+msgstr "Journal"
+
+#. module: msf_accrual
+#: code:addons/msf_accrual/msf_accrual_line.py:303
+#, python-format
+msgid "Analytic distribution"
+msgstr "Analytic distribution"
+
+#. module: msf_accrual
+#: view:msf.accrual.line:0
+msgid "Duplicate"
+msgstr "Duplicate"
+
+#. module: msf_accrual
+#: constraint:account.move.line:0
+msgid "You can not create move line on view account."
+msgstr "You can not create move line on view account."
+
+#. module: msf_accrual
+#: code:addons/msf_accrual/wizard/wizard_accrual_validation.py:43
+#, python-format
+msgid "The line '%s' has no period set!"
+msgstr "The line '%s' has no period set!"
+
+#. module: msf_accrual
+#: view:msf.accrual.line:0
+msgid "Accrual Line"
+msgstr "Accrual Line"
+
+#. module: msf_accrual
+#: field:msf.accrual.line,functional_currency_id:0
+msgid "Functional Currency"
+msgstr "Functional Currency"
+

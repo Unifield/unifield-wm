@@ -1,0 +1,475 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* analytic_distribution_supply
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 07:42+0000\n"
+"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: analytic_distribution_supply
+#: constraint:sale.order.line:0
+msgid "You must select on order procurement method for Service with Reception products."
+msgstr "You must select on order procurement method for Service with Reception products."
+
+#. module: analytic_distribution_supply
+#: constraint:purchase.order:0
+#: constraint:sale.order:0
+msgid "Partner type and order type are incompatible! Please change either order type or partner."
+msgstr "Partner type and order type are incompatible! Please change either order type or partner."
+
+#. module: analytic_distribution_supply
+#: model:ir.model,name:analytic_distribution_supply.model_account_commitment
+msgid "Account Commitment Voucher"
+msgstr "Account Commitment Voucher"
+
+#. module: analytic_distribution_supply
+#: code:addons/analytic_distribution_supply/sale.py:143
+#, python-format
+msgid "Analytic distribution is mandatory for this line: %s!"
+msgstr "Analytic distribution is mandatory for this line: %s!"
+
+#. module: analytic_distribution_supply
+#: code:addons/analytic_distribution_supply/purchase.py:365
+#: code:addons/analytic_distribution_supply/sale.py:292
+#, python-format
+msgid " (from header)"
+msgstr " (from header)"
+
+#. module: analytic_distribution_supply
+#: code:addons/analytic_distribution_supply/purchase.py:450
+#, python-format
+msgid "No donation account found for this line: %s. (product: %s)"
+msgstr "No donation account found for this line: %s. (product: %s)"
+
+#. module: analytic_distribution_supply
+#: sql_constraint:purchase.order:0
+#: sql_constraint:sale.order:0
+msgid "Order Reference must be unique !"
+msgstr "Order Reference must be unique !"
+
+#. module: analytic_distribution_supply
+#: field:purchase.order.line,commitment_line_ids:0
+msgid "Commitment Voucher Lines"
+msgstr "Commitment Voucher Lines"
+
+#. module: analytic_distribution_supply
+#: model:ir.model,name:analytic_distribution_supply.model_account_invoice_line
+msgid "Invoice Line"
+msgstr "Invoice Line"
+
+#. module: analytic_distribution_supply
+#: model:ir.model,name:analytic_distribution_supply.model_account_commitment_line
+msgid "Account Commitment Voucher Line"
+msgstr "Account Commitment Voucher Line"
+
+#. module: analytic_distribution_supply
+#: help:account.invoice.line,order_line_id:0
+msgid "Purchase Order Line from which this invoice line has been generated (when coming from a purchase order)."
+msgstr "Purchase Order Line from which this invoice line has been generated (when coming from a purchase order)."
+
+#. module: analytic_distribution_supply
+#: field:purchase.order,commitment_ids:0
+msgid "Commitment Vouchers"
+msgstr "Commitment Vouchers"
+
+#. module: analytic_distribution_supply
+#: code:addons/analytic_distribution_supply/purchase.py:106
+#: code:addons/analytic_distribution_supply/sale.py:75
+#, python-format
+msgid "Global analytic distribution"
+msgstr "Global analytic distribution"
+
+#. module: analytic_distribution_supply
+#: code:addons/analytic_distribution_supply/purchase.py:193
+#, python-format
+msgid "There is no expense account defined for this line: %s (id:%d)"
+msgstr "There is no expense account defined for this line: %s (id:%d)"
+
+#. module: analytic_distribution_supply
+#: constraint:stock.move:0
+msgid "You cannot select Service Location as Source Location."
+msgstr "You cannot select Service Location as Source Location."
+
+#. module: analytic_distribution_supply
+#: help:account.invoice,purchase_ids:0
+msgid "Purchase Order from which invoice have been generated"
+msgstr "Purchase Order from which invoice have been generated"
+
+#. module: analytic_distribution_supply
+#: code:addons/analytic_distribution_supply/invoice.py:161
+#: code:addons/analytic_distribution_supply/purchase.py:452
+#: code:addons/analytic_distribution_supply/sale.py:356
+#, python-format
+msgid "Error !"
+msgstr "Error !"
+
+#. module: analytic_distribution_supply
+#: sql_constraint:purchase.order.line:0
+#: sql_constraint:sale.order.line:0
+msgid "Product Quantity must be greater than zero."
+msgstr "Product Quantity must be greater than zero."
+
+#. module: analytic_distribution_supply
+#: constraint:purchase.order:0
+msgid "You cannot choose an internal supplier for this purchase order"
+msgstr "You cannot choose an internal supplier for this purchase order"
+
+#. module: analytic_distribution_supply
+#: field:purchase.order.line,analytic_distribution_state:0
+#: field:sale.order.line,analytic_distribution_state:0
+msgid "Distribution state"
+msgstr "Distribution state"
+
+#. module: analytic_distribution_supply
+#: code:addons/analytic_distribution_supply/invoice.py:199
+#, python-format
+msgid "No commitment line found. Please contact an administrator to resolve this problem."
+msgstr "No commitment line found. Please contact an administrator to resolve this problem."
+
+#. module: analytic_distribution_supply
+#: constraint:stock.picking:0
+msgid "You cannot validate this document because it contains a line with an inactive product"
+msgstr "You cannot validate this document because it contains a line with an inactive product"
+
+#. module: analytic_distribution_supply
+#: selection:purchase.order.line,analytic_distribution_state:0
+#: selection:sale.order.line,analytic_distribution_state:0
+msgid "Valid"
+msgstr "Valid"
+
+#. module: analytic_distribution_supply
+#: view:purchase.order:0
+#: view:sale.order:0
+msgid "Acc. for Ana. Distrib."
+msgstr "Acc. for Ana. Distrib."
+
+#. module: analytic_distribution_supply
+#: constraint:account.invoice.line:0
+#: constraint:stock.move:0
+msgid "Constraint error on Uom"
+msgstr "Constraint error on Uom"
+
+#. module: analytic_distribution_supply
+#: constraint:stock.move:0
+msgid "You must assign a batch number for this product."
+msgstr "You must assign a batch number for this product."
+
+#. module: analytic_distribution_supply
+#: field:account.commitment,purchase_id:0
+msgid "Source document"
+msgstr "Source document"
+
+#. module: analytic_distribution_supply
+#: field:account.invoice,purchase_ids:0
+#: model:ir.model,name:analytic_distribution_supply.model_purchase_order
+msgid "Purchase Order"
+msgstr "Purchase Order"
+
+#. module: analytic_distribution_supply
+#: constraint:purchase.order:0
+msgid "You cannot validate this purchase order because it contains a line with an inactive product"
+msgstr "You cannot validate this purchase order because it contains a line with an inactive product"
+
+#. module: analytic_distribution_supply
+#: field:purchase.order,analytic_distribution_id:0
+#: field:purchase.order.line,analytic_distribution_id:0
+#: field:sale.order.line,analytic_distribution_id:0
+msgid "Analytic Distribution"
+msgstr "Analytic Distribution"
+
+#. module: analytic_distribution_supply
+#: field:purchase.order.line,have_analytic_distribution_from_header:0
+#: field:sale.order.line,have_analytic_distribution_from_header:0
+msgid "Header Distrib.?"
+msgstr "Header Distrib.?"
+
+#. module: analytic_distribution_supply
+#: view:purchase.order:0
+#: view:purchase.order.line:0
+#: view:sale.order:0
+msgid "Analytical Distribution"
+msgstr "Analytical Distribution"
+
+#. module: analytic_distribution_supply
+#: code:addons/analytic_distribution_supply/invoice.py:283
+#: code:addons/analytic_distribution_supply/sale.py:143
+#: code:addons/analytic_distribution_supply/sale.py:150
+#, python-format
+msgid "Warning"
+msgstr "Warning"
+
+#. module: analytic_distribution_supply
+#: selection:purchase.order.line,analytic_distribution_state:0
+#: selection:sale.order.line,analytic_distribution_state:0
+msgid "Invalid"
+msgstr "Invalid"
+
+#. module: analytic_distribution_supply
+#: code:addons/analytic_distribution_supply/invoice.py:141
+#, python-format
+msgid "Multiple Commitment Voucher for the same invoice is not supported yet!"
+msgstr "Multiple Commitment Voucher for the same invoice is not supported yet!"
+
+#. module: analytic_distribution_supply
+#: constraint:account.invoice:0
+msgid "You cannot validate this invoice because it contains a line with an inactive product"
+msgstr "You cannot validate this invoice because it contains a line with an inactive product"
+
+#. module: analytic_distribution_supply
+#: model:ir.module.module,description:analytic_distribution_supply.module_meta_information
+msgid "This permits to have analytic distribution wizard on a Purchase Order"
+msgstr "This permits to have analytic distribution wizard on a Purchase Order"
+
+#. module: analytic_distribution_supply
+#: code:addons/analytic_distribution_supply/sale.py:150
+#, python-format
+msgid "Analytic distribution is mandatory for this line: %s"
+msgstr "Analytic distribution is mandatory for this line: %s"
+
+#. module: analytic_distribution_supply
+#: field:analytic.distribution,sale_order_ids:0
+msgid "Sales"
+msgstr "Sales"
+
+#. module: analytic_distribution_supply
+#: help:account.invoice.line,sale_order_line_id:0
+msgid "Sale Order Line from which this line have been generated (when coming from a sale order)"
+msgstr "Sale Order Line from which this line have been generated (when coming from a sale order)"
+
+#. module: analytic_distribution_supply
+#: constraint:purchase.order:0
+msgid "You must specify a Valid Till date."
+msgstr "You must specify a Valid Till date."
+
+#. module: analytic_distribution_supply
+#: code:addons/analytic_distribution_supply/purchase.py:215
+#, python-format
+msgid "Commitment Voucher %s has been created."
+msgstr "Commitment Voucher %s has been created."
+
+#. module: analytic_distribution_supply
+#: field:purchase.order.line,analytic_distribution_state_recap:0
+#: field:sale.order.line,analytic_distribution_state_recap:0
+msgid "Distribution"
+msgstr "Distribution"
+
+#. module: analytic_distribution_supply
+#: code:addons/analytic_distribution_supply/invoice.py:283
+#, python-format
+msgid "You cannot cancel or delete a supplier invoice linked to a PO."
+msgstr "You cannot cancel or delete a supplier invoice linked to a PO."
+
+#. module: analytic_distribution_supply
+#: model:ir.model,name:analytic_distribution_supply.model_analytic_distribution
+msgid "analytic.distribution"
+msgstr "analytic.distribution"
+
+#. module: analytic_distribution_supply
+#: model:ir.model,name:analytic_distribution_supply.model_stock_move
+msgid "Stock Move"
+msgstr "Stock Move"
+
+#. module: analytic_distribution_supply
+#: selection:purchase.order.line,analytic_distribution_state:0
+#: selection:sale.order.line,analytic_distribution_state:0
+msgid "None"
+msgstr "None"
+
+#. module: analytic_distribution_supply
+#: field:account.invoice.line,sale_order_lines:0
+#: field:analytic.distribution,sale_order_line_ids:0
+msgid "Sale Order Lines"
+msgstr "Sale Order Lines"
+
+#. module: analytic_distribution_supply
+#: constraint:purchase.order:0
+msgid "If you tick the box \"cross docking\", you cannot have an other location than \"Cross docking\""
+msgstr "If you tick the box \"cross docking\", you cannot have an other location than \"Cross docking\""
+
+#. module: analytic_distribution_supply
+#: code:addons/analytic_distribution_supply/invoice.py:203
+#, python-format
+msgid "No analytic distribution found."
+msgstr "No analytic distribution found."
+
+#. module: analytic_distribution_supply
+#: field:analytic.distribution,purchase_line_ids:0
+msgid "Purchase Lines"
+msgstr "Purchase Lines"
+
+#. module: analytic_distribution_supply
+#: view:purchase.order.line:0
+msgid " "
+msgstr " "
+
+#. module: analytic_distribution_supply
+#: help:purchase.order.line,analytic_distribution_state:0
+#: help:sale.order.line,analytic_distribution_state:0
+msgid "Informs from distribution state among 'none', 'valid', 'invalid."
+msgstr "Informs from distribution state among 'none', 'valid', 'invalid."
+
+#. module: analytic_distribution_supply
+#: field:account.invoice.line,order_line_id:0
+#: model:ir.model,name:analytic_distribution_supply.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Purchase Order Line"
+
+#. module: analytic_distribution_supply
+#: code:addons/analytic_distribution_supply/sale.py:356
+#, python-format
+msgid "There is no income account defined for this product: \"%s\" (id:%d)"
+msgstr "There is no income account defined for this product: \"%s\" (id:%d)"
+
+#. module: analytic_distribution_supply
+#: model:ir.model,name:analytic_distribution_supply.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Sales Order Line"
+
+#. module: analytic_distribution_supply
+#: field:purchase.order.line,account_4_distribution:0
+#: field:sale.order.line,account_4_distribution:0
+msgid "Account for analytical distribution"
+msgstr "Account for analytical distribution"
+
+#. module: analytic_distribution_supply
+#: model:ir.model,name:analytic_distribution_supply.model_sale_order
+msgid "Sales Order"
+msgstr "Sales Order"
+
+#. module: analytic_distribution_supply
+#: model:ir.model,name:analytic_distribution_supply.model_stock_picking
+msgid "Picking List"
+msgstr "Picking List"
+
+#. module: analytic_distribution_supply
+#: field:account.invoice,order_ids:0
+msgid "Sale Order"
+msgstr "Sale Order"
+
+#. module: analytic_distribution_supply
+#: code:addons/analytic_distribution_supply/purchase.py:167
+#, python-format
+msgid "No period found for given date: %s."
+msgstr "No period found for given date: %s."
+
+#. module: analytic_distribution_supply
+#: code:addons/analytic_distribution_supply/sale.py:107
+#, python-format
+msgid "No destination found for this line: %s."
+msgstr "No destination found for this line: %s."
+
+#. module: analytic_distribution_supply
+#: model:ir.module.module,shortdesc:analytic_distribution_supply.module_meta_information
+msgid "Analytic Distribution on Purchase Order"
+msgstr "Analytic Distribution on Purchase Order"
+
+#. module: analytic_distribution_supply
+#: code:addons/analytic_distribution_supply/invoice.py:161
+#: code:addons/analytic_distribution_supply/purchase.py:453
+#, python-format
+msgid "There is no expense account defined for this product: \"%s\" (id:%d)"
+msgstr "There is no expense account defined for this product: \"%s\" (id:%d)"
+
+#. module: analytic_distribution_supply
+#: code:addons/analytic_distribution_supply/sale.py:229
+#, python-format
+msgid "An error occured for analytic distribution copy for invoice line."
+msgstr "An error occured for analytic distribution copy for invoice line."
+
+#. module: analytic_distribution_supply
+#: constraint:stock.move:0
+#: constraint:stock.picking:0
+msgid "Wrong reason type for an OUT created from scratch."
+msgstr "Wrong reason type for an OUT created from scratch."
+
+#. module: analytic_distribution_supply
+#: code:addons/analytic_distribution_supply/invoice.py:81
+#: code:addons/analytic_distribution_supply/invoice.py:92
+#: code:addons/analytic_distribution_supply/invoice.py:108
+#: code:addons/analytic_distribution_supply/invoice.py:118
+#: code:addons/analytic_distribution_supply/invoice.py:141
+#: code:addons/analytic_distribution_supply/invoice.py:199
+#: code:addons/analytic_distribution_supply/invoice.py:203
+#: code:addons/analytic_distribution_supply/purchase.py:167
+#: code:addons/analytic_distribution_supply/purchase.py:193
+#: code:addons/analytic_distribution_supply/purchase.py:450
+#: code:addons/analytic_distribution_supply/sale.py:107
+#: code:addons/analytic_distribution_supply/sale.py:217
+#: code:addons/analytic_distribution_supply/sale.py:229
+#, python-format
+msgid "Error"
+msgstr "Error"
+
+#. module: analytic_distribution_supply
+#: constraint:stock.move:0
+msgid "You must assign an asset for this product."
+msgstr "You must assign an asset for this product."
+
+#. module: analytic_distribution_supply
+#: code:addons/analytic_distribution_supply/invoice.py:81
+#: code:addons/analytic_distribution_supply/invoice.py:92
+#: code:addons/analytic_distribution_supply/invoice.py:108
+#: code:addons/analytic_distribution_supply/invoice.py:118
+#: code:addons/analytic_distribution_supply/sale.py:217
+#, python-format
+msgid "An error occured for analytic distribution copy for invoice."
+msgstr "An error occured for analytic distribution copy for invoice."
+
+#. module: analytic_distribution_supply
+#: constraint:sale.order:0
+msgid "You cannot validate this sale order because it contains a line with an inactive product"
+msgstr "You cannot validate this sale order because it contains a line with an inactive product"
+
+#. module: analytic_distribution_supply
+#: field:analytic.distribution,purchase_ids:0
+msgid "Purchases"
+msgstr "Purchases"
+
+#. module: analytic_distribution_supply
+#: code:addons/analytic_distribution_supply/purchase.py:477
+#: code:addons/analytic_distribution_supply/sale.py:380
+#: field:sale.order,analytic_distribution_id:0
+#, python-format
+msgid "Analytic distribution"
+msgstr "Analytic distribution"
+
+#. module: analytic_distribution_supply
+#: constraint:stock.move:0
+msgid "You try to assign a lot which is not from the same product"
+msgstr "You try to assign a lot which is not from the same product"
+
+#. module: analytic_distribution_supply
+#: help:account.invoice,order_ids:0
+msgid "Sale Order from which invoice have been generated"
+msgstr "Sale Order from which invoice have been generated"
+
+#. module: analytic_distribution_supply
+#: field:account.invoice.line,sale_order_line_id:0
+msgid "Sale Order Line"
+msgstr "Sale Order Line"
+
+#. module: analytic_distribution_supply
+#: field:account.commitment.line,purchase_order_line_ids:0
+msgid "Purchase Order Lines"
+msgstr "Purchase Order Lines"
+
+#. module: analytic_distribution_supply
+#: view:purchase.order:0
+#: view:sale.order:0
+msgid "Analytical distribution"
+msgstr "Analytical distribution"
+
+#. module: analytic_distribution_supply
+#: model:ir.model,name:analytic_distribution_supply.model_account_invoice
+msgid "Invoice"
+msgstr "Invoice"
+

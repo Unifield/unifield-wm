@@ -1,0 +1,426 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* msf_cross_docking
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 07:42+0000\n"
+"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: msf_cross_docking
+#: constraint:purchase.order:0
+msgid "Partner type and order type are incompatible! Please change either order type or partner."
+msgstr "Partner type and order type are incompatible! Please change either order type or partner."
+
+#. module: msf_cross_docking
+#: help:stock.partial.picking,dest_type:0
+msgid "\n"
+"            The default value is the one set on each stock move line.\n"
+"            "
+msgstr "\n"
+"            The default value is the one set on each stock move line.\n"
+"            "
+
+#. module: msf_cross_docking
+#: model:ir.model,name:msf_cross_docking.model_stock_location
+msgid "Location"
+msgstr "Location"
+
+#. module: msf_cross_docking
+#: field:stock.location,cross_docking_location_ok:0
+msgid "Cross Docking Location"
+msgstr "Cross Docking Location"
+
+#. module: msf_cross_docking
+#: selection:stock.partial.picking,dest_type:0
+msgid "To Cross Docking"
+msgstr "To Cross Docking"
+
+#. module: msf_cross_docking
+#: model:ir.model,name:msf_cross_docking.model_stock_partial_picking
+msgid "Partial Picking"
+msgstr "Partial Picking"
+
+#. module: msf_cross_docking
+#: model:ir.module.module,description:msf_cross_docking.module_meta_information
+msgid "\n"
+"Cross Docking Management.\n"
+"We enable the user to change the stock location (on input and output) to \"cross docking\":\n"
+"- on the purchase order (see tab delivery and invoicing)\n"
+"- on the incoming shipment (in the wizard when you click on \"process\", you can change the destination location)\n"
+"- on the delivery orders, packing, prepacking (we add a button to change the source location)\n"
+"- if you create a sale order with the option \"make to order\", the associated purchase order that you obtain when\n"
+"you run the scheduler will have the option cross docking pre selected.\n"
+""
+msgstr "\n"
+"Cross Docking Management.\n"
+"We enable the user to change the stock location (on input and output) to \"cross docking\":\n"
+"- on the purchase order (see tab delivery and invoicing)\n"
+"- on the incoming shipment (in the wizard when you click on \"process\", you can change the destination location)\n"
+"- on the delivery orders, packing, prepacking (we add a button to change the source location)\n"
+"- if you create a sale order with the option \"make to order\", the associated purchase order that you obtain when\n"
+"you run the scheduler will have the option cross docking pre selected.\n"
+""
+
+#. module: msf_cross_docking
+#: code:addons/msf_cross_docking/cross_docking.py:99
+#, python-format
+msgid "\n"
+"            If the 'Order Category' is 'Service' or 'Transport', you cannot have an other location than 'Service'\n"
+"            "
+msgstr "\n"
+"            If the 'Order Category' is 'Service' or 'Transport', you cannot have an other location than 'Service'\n"
+"            "
+
+#. module: msf_cross_docking
+#: code:addons/msf_cross_docking/cross_docking.py:580
+#, python-format
+msgid "You cannot made moves from/to Cross-docking locations\n"
+"            when the Allocated stocks configuration is set to 'Unallocated'."
+msgstr "You cannot made moves from/to Cross-docking locations\n"
+"            when the Allocated stocks configuration is set to 'Unallocated'."
+
+#. module: msf_cross_docking
+#: selection:stock.partial.picking,source_type:0
+msgid "From stock"
+msgstr "From stock"
+
+#. module: msf_cross_docking
+#: code:addons/msf_cross_docking/cross_docking.py:177
+#, python-format
+msgid "This order category is not consistent with product(s) on this PO"
+msgstr "This order category is not consistent with product(s) on this PO"
+
+#. module: msf_cross_docking
+#: constraint:stock.location:0
+msgid "Quarantine Location can only have Quarantine Location or Views as parent location."
+msgstr "Quarantine Location can only have Quarantine Location or Views as parent location."
+
+#. module: msf_cross_docking
+#: constraint:stock.move:0
+msgid "You cannot select Service Location as Source Location."
+msgstr "You cannot select Service Location as Source Location."
+
+#. module: msf_cross_docking
+#: code:addons/msf_cross_docking/cross_docking.py:220
+#: code:addons/msf_cross_docking/cross_docking.py:359
+#: code:addons/msf_cross_docking/cross_docking.py:401
+#: code:addons/msf_cross_docking/stock_location.py:47
+#: code:addons/msf_cross_docking/wizard/stock_partial_picking.py:157
+#: code:addons/msf_cross_docking/wizard/stock_partial_picking.py:168
+#, python-format
+msgid "Warning !"
+msgstr "Warning !"
+
+#. module: msf_cross_docking
+#: selection:stock.partial.picking,source_type:0
+msgid "From Cross Docking"
+msgstr "From Cross Docking"
+
+#. module: msf_cross_docking
+#: sql_constraint:purchase.order:0
+msgid "Order Reference must be unique !"
+msgstr "Order Reference must be unique !"
+
+#. module: msf_cross_docking
+#: code:addons/msf_cross_docking/cross_docking.py:344
+#, python-format
+msgid "You cannot made moves from/to Cross-docking\n"
+"locations when the Allocated stocks configuration is set to 'Unallocated'."
+msgstr "You cannot made moves from/to Cross-docking\n"
+"locations when the Allocated stocks configuration is set to 'Unallocated'."
+
+#. module: msf_cross_docking
+#: constraint:stock.picking:0
+msgid "You cannot validate this document because it contains a line with an inactive product"
+msgstr "You cannot validate this document because it contains a line with an inactive product"
+
+#. module: msf_cross_docking
+#: field:stock.move,allocation_setup:0
+#: field:stock.picking,allocation_setup:0
+msgid "Allocated setup"
+msgstr "Allocated setup"
+
+#. module: msf_cross_docking
+#: code:addons/msf_cross_docking/cross_docking.py:401
+#, python-format
+msgid "Please, enter some stock moves before changing the source location to STOCK"
+msgstr "Please, enter some stock moves before changing the source location to STOCK"
+
+#. module: msf_cross_docking
+#: field:purchase.order,cross_docking_ok:0
+#: model:stock.location,name:msf_cross_docking.stock_location_cross_docking
+#: field:stock.move,move_cross_docking_ok:0
+#: view:stock.picking:0
+#: field:stock.picking,cross_docking_ok:0
+msgid "Cross docking"
+msgstr "Cross docking"
+
+#. module: msf_cross_docking
+#: constraint:stock.move:0
+msgid "You must assign a batch number for this product."
+msgstr "You must assign a batch number for this product."
+
+#. module: msf_cross_docking
+#: help:stock.location,cross_docking_location_ok:0
+msgid "There is only one Cross Docking Location"
+msgstr "There is only one Cross Docking Location"
+
+#. module: msf_cross_docking
+#: constraint:purchase.order:0
+msgid "You cannot choose an internal supplier for this purchase order"
+msgstr "You cannot choose an internal supplier for this purchase order"
+
+#. module: msf_cross_docking
+#: code:addons/msf_cross_docking/wizard/stock_partial_picking.py:213
+#, python-format
+msgid "You cannot made moves from/to Cross-docking locations when\n"
+"                    the Allocated stocks configuration is set to 'Unallocated'."
+msgstr "You cannot made moves from/to Cross-docking locations when\n"
+"                    the Allocated stocks configuration is set to 'Unallocated'."
+
+#. module: msf_cross_docking
+#: selection:stock.partial.picking,source_type:0
+msgid "Default"
+msgstr "Default"
+
+#. module: msf_cross_docking
+#: selection:stock.partial.picking,dest_type:0
+msgid "To Stock"
+msgstr "To Stock"
+
+#. module: msf_cross_docking
+#: selection:stock.partial.picking,dest_type:0
+msgid "Other Types"
+msgstr "Other Types"
+
+#. module: msf_cross_docking
+#: constraint:stock.move:0
+msgid "Constraint error on Uom"
+msgstr "Constraint error on Uom"
+
+#. module: msf_cross_docking
+#: code:addons/msf_cross_docking/stock_location.py:47
+#, python-format
+msgid "You cannot delete the cross docking location."
+msgstr "You cannot delete the cross docking location."
+
+#. module: msf_cross_docking
+#: code:addons/msf_cross_docking/cross_docking.py:146
+#, python-format
+msgid "MED nomenclature Main Type not found"
+msgstr "MED nomenclature Main Type not found"
+
+#. module: msf_cross_docking
+#: view:stock.picking:0
+msgid "Stock"
+msgstr "Stock"
+
+#. module: msf_cross_docking
+#: code:addons/msf_cross_docking/cross_docking.py:176
+#, python-format
+msgid "Warning"
+msgstr "Warning"
+
+#. module: msf_cross_docking
+#: constraint:stock.location:0
+msgid "You cannot define a quarantine location as chained location."
+msgstr "You cannot define a quarantine location as chained location."
+
+#. module: msf_cross_docking
+#: model:ir.module.module,shortdesc:msf_cross_docking.module_meta_information
+msgid "MSF Cross Docking Management"
+msgstr "MSF Cross Docking Management"
+
+#. module: msf_cross_docking
+#: model:ir.model,name:msf_cross_docking.model_stock_move
+msgid "Stock Move"
+msgstr "Stock Move"
+
+#. module: msf_cross_docking
+#: code:addons/msf_cross_docking/cross_docking.py:76
+#, python-format
+msgid "No Warehouse defined !"
+msgstr "No Warehouse defined !"
+
+#. module: msf_cross_docking
+#: constraint:purchase.order:0
+msgid "If you tick the box \"cross docking\", you cannot have an other location than \"Cross docking\""
+msgstr "If you tick the box \"cross docking\", you cannot have an other location than \"Cross docking\""
+
+#. module: msf_cross_docking
+#: model:stock.location,name:msf_cross_docking.stock_location_input
+msgid "Input"
+msgstr "Input"
+
+#. module: msf_cross_docking
+#: code:addons/msf_cross_docking/stock_location.py:39
+#, python-format
+msgid "You must have a \"Cross Docking Location\"."
+msgstr "You must have a \"Cross Docking Location\"."
+
+#. module: msf_cross_docking
+#: selection:stock.move,allocation_setup:0
+#: selection:stock.picking,allocation_setup:0
+msgid "Mixed"
+msgstr "Mixed"
+
+#. module: msf_cross_docking
+#: selection:stock.move,allocation_setup:0
+#: selection:stock.picking,allocation_setup:0
+msgid "Allocated"
+msgstr "Allocated"
+
+#. module: msf_cross_docking
+#: code:addons/msf_cross_docking/cross_docking.py:451
+#, python-format
+msgid "You cannot made moves from/to Cross-docking locations\n"
+"                    when the Allocated stocks configuration is set to 'Unallocated'."
+msgstr "You cannot made moves from/to Cross-docking locations\n"
+"                    when the Allocated stocks configuration is set to 'Unallocated'."
+
+#. module: msf_cross_docking
+#: field:stock.partial.picking,source_type:0
+msgid "Source Type"
+msgstr "Source Type"
+
+#. module: msf_cross_docking
+#: code:addons/msf_cross_docking/cross_docking.py:150
+#, python-format
+msgid "LOG nomenclature Main Type not found"
+msgstr "LOG nomenclature Main Type not found"
+
+#. module: msf_cross_docking
+#: model:ir.model,name:msf_cross_docking.model_stock_picking
+msgid "Picking List"
+msgstr "Picking List"
+
+#. module: msf_cross_docking
+#: code:addons/msf_cross_docking/wizard/stock_partial_picking.py:122
+#, python-format
+msgid "The Allocated stocks setup is set to Unallocated.\n"
+"                                 In this configuration, you cannot made moves from/to Cross-docking locations."
+msgstr "The Allocated stocks setup is set to Unallocated.\n"
+"                                 In this configuration, you cannot made moves from/to Cross-docking locations."
+
+#. module: msf_cross_docking
+#: code:addons/msf_cross_docking/cross_docking.py:220
+#, python-format
+msgid "If you tick the box \"cross docking\",\n"
+"you cannot have an other location than \"Cross docking\""
+msgstr "If you tick the box \"cross docking\",\n"
+"you cannot have an other location than \"Cross docking\""
+
+#. module: msf_cross_docking
+#: code:addons/msf_cross_docking/wizard/stock_partial_picking.py:157
+#: code:addons/msf_cross_docking/wizard/stock_partial_picking.py:168
+#, python-format
+msgid "Element %s not found."
+msgstr "Element %s not found."
+
+#. module: msf_cross_docking
+#: selection:stock.move,allocation_setup:0
+#: selection:stock.picking,allocation_setup:0
+msgid "Unallocated"
+msgstr "Unallocated"
+
+#. module: msf_cross_docking
+#: code:addons/msf_cross_docking/wizard/stock_partial_picking.py:115
+#, python-format
+msgid "You want to receive the IN on Cross Docking but \"Cross docking\" was not checked."
+msgstr "You want to receive the IN on Cross Docking but \"Cross docking\" was not checked."
+
+#. module: msf_cross_docking
+#: constraint:purchase.order:0
+msgid "You cannot validate this purchase order because it contains a line with an inactive product"
+msgstr "You cannot validate this purchase order because it contains a line with an inactive product"
+
+#. module: msf_cross_docking
+#: code:addons/msf_cross_docking/cross_docking.py:76
+#: code:addons/msf_cross_docking/cross_docking.py:99
+#, python-format
+msgid "Error !"
+msgstr "Error !"
+
+#. module: msf_cross_docking
+#: constraint:stock.move:0
+#: constraint:stock.picking:0
+msgid "Wrong reason type for an OUT created from scratch."
+msgstr "Wrong reason type for an OUT created from scratch."
+
+#. module: msf_cross_docking
+#: code:addons/msf_cross_docking/cross_docking.py:146
+#: code:addons/msf_cross_docking/cross_docking.py:150
+#: code:addons/msf_cross_docking/cross_docking.py:216
+#: code:addons/msf_cross_docking/cross_docking.py:344
+#: code:addons/msf_cross_docking/cross_docking.py:451
+#: code:addons/msf_cross_docking/cross_docking.py:580
+#: code:addons/msf_cross_docking/stock_location.py:39
+#: code:addons/msf_cross_docking/wizard/stock_partial_picking.py:109
+#: code:addons/msf_cross_docking/wizard/stock_partial_picking.py:114
+#: code:addons/msf_cross_docking/wizard/stock_partial_picking.py:121
+#: code:addons/msf_cross_docking/wizard/stock_partial_picking.py:213
+#, python-format
+msgid "Error"
+msgstr "Error"
+
+#. module: msf_cross_docking
+#: constraint:stock.move:0
+msgid "You must assign an asset for this product."
+msgstr "You must assign an asset for this product."
+
+#. module: msf_cross_docking
+#: model:ir.model,name:msf_cross_docking.model_purchase_order
+msgid "Purchase Order"
+msgstr "Purchase Order"
+
+#. module: msf_cross_docking
+#: constraint:purchase.order:0
+msgid "You must specify a Valid Till date."
+msgstr "You must specify a Valid Till date."
+
+#. module: msf_cross_docking
+#: field:stock.partial.picking,dest_type:0
+msgid "Destination Type"
+msgstr "Destination Type"
+
+#. module: msf_cross_docking
+#: constraint:stock.move:0
+msgid "You try to assign a lot which is not from the same product"
+msgstr "You try to assign a lot which is not from the same product"
+
+#. module: msf_cross_docking
+#: code:addons/msf_cross_docking/cross_docking.py:359
+#, python-format
+msgid "Please, enter some stock moves before changing the source location to CROSS DOCKING"
+msgstr "Please, enter some stock moves before changing the source location to CROSS DOCKING"
+
+#. module: msf_cross_docking
+#: code:addons/msf_cross_docking/cross_docking.py:216
+#, python-format
+msgid "The Allocated stocks setup is set to Unallocated.\n"
+"In this configuration, you cannot made a Cross-docking Purchase order."
+msgstr "The Allocated stocks setup is set to Unallocated.\n"
+"In this configuration, you cannot made a Cross-docking Purchase order."
+
+#. module: msf_cross_docking
+#: model:ir.model,name:msf_cross_docking.model_procurement_order
+msgid "Procurement"
+msgstr "Procurement"
+
+#. module: msf_cross_docking
+#: code:addons/msf_cross_docking/wizard/stock_partial_picking.py:110
+#, python-format
+msgid "You want to receive the IN on an other location than\n"
+"                                         Cross Docking but \"Cross docking\" was checked."
+msgstr "You want to receive the IN on an other location than\n"
+"                                         Cross Docking but \"Cross docking\" was checked."
+

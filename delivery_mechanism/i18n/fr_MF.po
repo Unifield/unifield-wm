@@ -1,0 +1,329 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* delivery_mechanism
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 07:42+0000\n"
+"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: delivery_mechanism
+#: view:stock.move.memory.in:0
+#: view:stock.move.memory.out:0
+msgid "Split"
+msgstr "Split"
+
+#. module: delivery_mechanism
+#: view:change.product.memory.move:0
+msgid "Ok"
+msgstr "Ok"
+
+#. module: delivery_mechanism
+#: code:addons/delivery_mechanism/delivery_mechanism.py:846
+#, python-format
+msgid "The Purchase Order %s is %s%% received."
+msgstr "The Purchase Order %s is %s%% received."
+
+#. module: delivery_mechanism
+#: field:stock.picking,move_sequence_id:0
+msgid "Moves Sequence"
+msgstr "Moves Sequence"
+
+#. module: delivery_mechanism
+#: field:stock.move,line_number:0
+msgid "Line"
+msgstr "Line"
+
+#. module: delivery_mechanism
+#: help:stock.picking,move_sequence_id:0
+msgid "This field contains the information related to the numbering of the moves of this picking."
+msgstr "This field contains the information related to the numbering of the moves of this picking."
+
+#. module: delivery_mechanism
+#: sql_constraint:purchase.order:0
+msgid "Order Reference must be unique !"
+msgstr "Order Reference must be unique !"
+
+#. module: delivery_mechanism
+#: field:change.product.memory.move,old_uom_id:0
+msgid "Restricted UoM"
+msgstr "Restricted UoM"
+
+#. module: delivery_mechanism
+#: model:ir.model,name:delivery_mechanism.model_stock_partial_picking
+msgid "Partial Picking"
+msgstr "Partial Picking"
+
+#. module: delivery_mechanism
+#: view:enter.reason:0
+msgid "Cancel Incoming"
+msgstr "Cancel Incoming"
+
+#. module: delivery_mechanism
+#: constraint:stock.move:0
+#: constraint:stock.picking:0
+msgid "Wrong reason type for an OUT created from scratch."
+msgstr "Wrong reason type for an OUT created from scratch."
+
+#. module: delivery_mechanism
+#: code:addons/delivery_mechanism/wizard/change_product_memory_move.py:70
+#, python-format
+msgid "You must select a new product and specify a reason."
+msgstr "You must select a new product and specify a reason."
+
+#. module: delivery_mechanism
+#: code:addons/delivery_mechanism/wizard/stock_partial_picking.py:55
+#: code:addons/delivery_mechanism/wizard/stock_partial_picking.py:198
+#, python-format
+msgid "Warning !"
+msgstr "Warning !"
+
+#. module: delivery_mechanism
+#: code:addons/delivery_mechanism/wizard/stock_partial_picking.py:149
+#, python-format
+msgid "You have to enter the quantities you want to process before processing the move"
+msgstr "You have to enter the quantities you want to process before processing the move"
+
+#. module: delivery_mechanism
+#: constraint:purchase.order:0
+msgid "You cannot choose an internal supplier for this purchase order"
+msgstr "You cannot choose an internal supplier for this purchase order"
+
+#. module: delivery_mechanism
+#: field:enter.reason,picking_id:0
+msgid "Incoming Shipment"
+msgstr "Incoming Shipment"
+
+#. module: delivery_mechanism
+#: field:change.product.memory.move,change_reason:0
+#: field:enter.reason,change_reason:0
+#: field:stock.move,change_reason:0
+#: field:stock.picking,change_reason:0
+msgid "Change Reason"
+msgstr "Change Reason"
+
+#. module: delivery_mechanism
+#: field:stock.move,in_out_updated:0
+msgid "IN update OUT"
+msgstr "IN update OUT"
+
+#. module: delivery_mechanism
+#: constraint:stock.move:0
+msgid "Constraint error on Uom"
+msgstr "Constraint error on Uom"
+
+#. module: delivery_mechanism
+#: constraint:stock.move:0
+msgid "You must assign a batch number for this product."
+msgstr "You must assign a batch number for this product."
+
+#. module: delivery_mechanism
+#: code:addons/delivery_mechanism/wizard/stock_partial_picking.py:55
+#, python-format
+msgid "Selected list to process cannot be empty."
+msgstr "Selected list to process cannot be empty."
+
+#. module: delivery_mechanism
+#: model:ir.model,name:delivery_mechanism.model_purchase_order
+msgid "Purchase Order"
+msgstr "Purchase Order"
+
+#. module: delivery_mechanism
+#: constraint:purchase.order:0
+msgid "You cannot validate this purchase order because it contains a line with an inactive product"
+msgstr "You cannot validate this purchase order because it contains a line with an inactive product"
+
+#. module: delivery_mechanism
+#: constraint:stock.move:0
+msgid "You cannot select Service Location as Source Location."
+msgstr "You cannot select Service Location as Source Location."
+
+#. module: delivery_mechanism
+#: sql_constraint:purchase.order.line:0
+msgid "Product Quantity must be greater than zero."
+msgstr "Product Quantity must be greater than zero."
+
+#. module: delivery_mechanism
+#: field:change.product.memory.move,old_product_id:0
+msgid "Present Product"
+msgstr "Present Product"
+
+#. module: delivery_mechanism
+#: code:addons/delivery_mechanism/wizard/enter_reason.py:56
+#, python-format
+msgid "You must specify a reason."
+msgstr "You must specify a reason."
+
+#. module: delivery_mechanism
+#: view:enter.reason:0
+msgid "_Close"
+msgstr "_Close"
+
+#. module: delivery_mechanism
+#: model:ir.model,name:delivery_mechanism.model_enter_reason
+msgid "enter.reason"
+msgstr "enter.reason"
+
+#. module: delivery_mechanism
+#: field:purchase.order.line,procurement_id:0
+msgid "Procurement Reference"
+msgstr "Procurement Reference"
+
+#. module: delivery_mechanism
+#: constraint:purchase.order:0
+msgid "Partner type and order type are incompatible! Please change either order type or partner."
+msgstr "Partner type and order type are incompatible! Please change either order type or partner."
+
+#. module: delivery_mechanism
+#: model:ir.model,name:delivery_mechanism.model_stock_move
+msgid "Stock Move"
+msgstr "Stock Move"
+
+#. module: delivery_mechanism
+#: model:ir.model,name:delivery_mechanism.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Purchase Order Line"
+
+#. module: delivery_mechanism
+#: constraint:purchase.order:0
+msgid "If you tick the box \"cross docking\", you cannot have an other location than \"Cross docking\""
+msgstr "If you tick the box \"cross docking\", you cannot have an other location than \"Cross docking\""
+
+#. module: delivery_mechanism
+#: model:ir.model,name:delivery_mechanism.model_procurement_order
+msgid "Procurement"
+msgstr "Procurement"
+
+#. module: delivery_mechanism
+#: field:change.product.memory.move,old_uom_category_id:0
+msgid "Restricted UoM Category"
+msgstr "Restricted UoM Category"
+
+#. module: delivery_mechanism
+#: view:enter.reason:0
+msgid "Enter Reason for Cancellation"
+msgstr "Enter Reason for Cancellation"
+
+#. module: delivery_mechanism
+#: view:change.product.memory.move:0
+msgid "Select a new Product - The UoM is restricted"
+msgstr "Select a new Product - The UoM is restricted"
+
+#. module: delivery_mechanism
+#: code:addons/delivery_mechanism/delivery_mechanism.py:399
+#, python-format
+msgid "The Stock Move %s from %s has been updated to %s %s."
+msgstr "The Stock Move %s from %s has been updated to %s %s."
+
+#. module: delivery_mechanism
+#: code:addons/delivery_mechanism/wizard/stock_partial_picking.py:130
+#, python-format
+msgid "No Batch Number with Expiry Date for Expiry Date Mandatory and not Incoming Shipment should not happen. Please hold..."
+msgstr "No Batch Number with Expiry Date for Expiry Date Mandatory and not Incoming Shipment should not happen. Please hold..."
+
+#. module: delivery_mechanism
+#: code:addons/delivery_mechanism/delivery_mechanism.py:236
+#, python-format
+msgid "The Stock Move %s from %s has already been processed and is therefore not updated."
+msgstr "The Stock Move %s from %s has already been processed and is therefore not updated."
+
+#. module: delivery_mechanism
+#: view:stock.move.memory.in:0
+#: view:stock.move.memory.out:0
+msgid "Change Product"
+msgstr "Change Product"
+
+#. module: delivery_mechanism
+#: code:addons/delivery_mechanism/wizard/stock_partial_picking.py:198
+#, python-format
+msgid "Element %s not found."
+msgstr "Element %s not found."
+
+#. module: delivery_mechanism
+#: code:addons/delivery_mechanism/wizard/change_product_memory_move.py:70
+#: code:addons/delivery_mechanism/wizard/enter_reason.py:56
+#: code:addons/delivery_mechanism/wizard/stock_partial_picking.py:130
+#, python-format
+msgid "Error !"
+msgstr "Error !"
+
+#. module: delivery_mechanism
+#: view:change.product.memory.move:0
+#: model:ir.model,name:delivery_mechanism.model_change_product_memory_move
+msgid "Change Product of Memory Move"
+msgstr "Change Product of Memory Move"
+
+#. module: delivery_mechanism
+#: model:ir.model,name:delivery_mechanism.model_stock_picking
+msgid "Picking List"
+msgstr "Picking List"
+
+#. module: delivery_mechanism
+#: constraint:stock.move:0
+msgid "You must assign an asset for this product."
+msgstr "You must assign an asset for this product."
+
+#. module: delivery_mechanism
+#: model:ir.module.module,shortdesc:delivery_mechanism.module_meta_information
+msgid "MSF Delivery Mechanism"
+msgstr "MSF Delivery Mechanism"
+
+#. module: delivery_mechanism
+#: code:addons/delivery_mechanism/delivery_mechanism.py:784
+#, python-format
+msgid "Enter a Reason for Incoming cancellation"
+msgstr "Enter a Reason for Incoming cancellation"
+
+#. module: delivery_mechanism
+#: constraint:purchase.order:0
+msgid "You must specify a Valid Till date."
+msgstr "You must specify a Valid Till date."
+
+#. module: delivery_mechanism
+#: field:change.product.memory.move,new_product_id:0
+msgid "New Product"
+msgstr "New Product"
+
+#. module: delivery_mechanism
+#: constraint:stock.move:0
+msgid "You try to assign a lot which is not from the same product"
+msgstr "You try to assign a lot which is not from the same product"
+
+#. module: delivery_mechanism
+#: code:addons/delivery_mechanism/wizard/stock_partial_picking.py:149
+#, python-format
+msgid "Processing Error"
+msgstr "Processing Error"
+
+#. module: delivery_mechanism
+#: view:change.product.memory.move:0
+msgid "_Cancel"
+msgstr "_Cancel"
+
+#. module: delivery_mechanism
+#: constraint:stock.picking:0
+msgid "You cannot validate this document because it contains a line with an inactive product"
+msgstr "You cannot validate this document because it contains a line with an inactive product"
+
+#. module: delivery_mechanism
+#: view:enter.reason:0
+msgid "Select a reason for Incoming Shipment cancellation"
+msgstr "Select a reason for Incoming Shipment cancellation"
+
+#. module: delivery_mechanism
+#: model:ir.module.module,description:delivery_mechanism.module_meta_information
+msgid "\n"
+"        Specify business for Incoming shipment.\n"
+"    "
+msgstr "\n"
+"        Specify business for Incoming shipment.\n"
+"    "
+

@@ -1,0 +1,580 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* msf_order_date
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 07:42+0000\n"
+"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: msf_order_date
+#: code:addons/msf_order_date/order_dates.py:180
+#: code:addons/msf_order_date/order_dates.py:182
+#: code:addons/msf_order_date/order_dates.py:184
+#: code:addons/msf_order_date/order_dates.py:186
+#, python-format
+msgid "Error"
+msgstr "Error"
+
+#. module: msf_order_date
+#: constraint:stock.move:0
+#: constraint:stock.picking:0
+msgid "Wrong reason type for an OUT created from scratch."
+msgstr "Wrong reason type for an OUT created from scratch."
+
+#. module: msf_order_date
+#: view:sale.order:0
+msgid "Order dates"
+msgstr "Order dates"
+
+#. module: msf_order_date
+#: code:addons/msf_order_date/order_dates.py:768
+#: code:addons/msf_order_date/order_dates.py:1149
+#, python-format
+msgid "Do you want to update the Requested Date of all order lines ?"
+msgstr "Do you want to update the Requested Date of all order lines ?"
+
+#. module: msf_order_date
+#: field:stock.picking,min_date_manually:0
+msgid "change manually"
+msgstr "change manually"
+
+#. module: msf_order_date
+#: field:purchase.order,shipment_date:0
+#: field:sale.order,shipment_date:0
+msgid "Shipment Date"
+msgstr "Shipment Date"
+
+#. module: msf_order_date
+#: help:purchase.order,est_transport_lead_time:0
+#: help:sale.order,est_transport_lead_time:0
+msgid "Estimated Transport Lead-Time in weeks"
+msgstr "Estimated Transport Lead-Time in weeks"
+
+#. module: msf_order_date
+#: code:addons/msf_order_date/order_dates.py:220
+#, python-format
+msgid "The Ready To Ship Date should be older than the Creation date !"
+msgstr "The Ready To Ship Date should be older than the Creation date !"
+
+#. module: msf_order_date
+#: field:purchase.order,receipt_date:0
+#: field:sale.order,receipt_date:0
+msgid "Receipt Date"
+msgstr "Receipt Date"
+
+#. module: msf_order_date
+#: sql_constraint:purchase.order.line:0
+#: sql_constraint:sale.order.line:0
+msgid "Product Quantity must be greater than zero."
+msgstr "Product Quantity must be greater than zero."
+
+#. module: msf_order_date
+#: constraint:purchase.order:0
+msgid "You cannot choose an internal supplier for this purchase order"
+msgstr "You cannot choose an internal supplier for this purchase order"
+
+#. module: msf_order_date
+#: constraint:product.template:0
+msgid "Error: The default UOM and the purchase UOM must be in the same category."
+msgstr "Error: The default UOM and the purchase UOM must be in the same category."
+
+#. module: msf_order_date
+#: code:addons/msf_order_date/order_dates.py:180
+#, python-format
+msgid "The creation date is not in an opened period !"
+msgstr "The creation date is not in an opened period !"
+
+#. module: msf_order_date
+#: selection:purchase.order,internal_type:0
+#: selection:sale.order,internal_type:0
+msgid "National"
+msgstr "National"
+
+#. module: msf_order_date
+#: model:ir.model,name:msf_order_date.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Sales Order Line"
+
+#. module: msf_order_date
+#: field:purchase.order,confirmed_date_by_synchro:0
+#: field:sale.order,confirmed_date_by_synchro:0
+msgid "Confirmed Date by Synchro"
+msgstr "Confirmed Date by Synchro"
+
+#. module: msf_order_date
+#: sql_constraint:purchase.order:0
+#: sql_constraint:sale.order:0
+msgid "Order Reference must be unique !"
+msgstr "Order Reference must be unique !"
+
+#. module: msf_order_date
+#: field:purchase.order,partner_type:0
+#: field:sale.order,partner_type:0
+msgid "Partner Type"
+msgstr "Partner Type"
+
+#. module: msf_order_date
+#: selection:sale.order.line,so_state_stored:0
+msgid "Waiting Schedule"
+msgstr "Waiting Schedule"
+
+#. module: msf_order_date
+#: model:ir.model,name:msf_order_date.model_sale_order
+msgid "Sales Order"
+msgstr "Sales Order"
+
+#. module: msf_order_date
+#: selection:purchase.order,transport_type:0
+#: selection:sale.order,transport_type:0
+msgid "Air"
+msgstr "Air"
+
+#. module: msf_order_date
+#: selection:purchase.order.line,po_state_stored:0
+msgid "Sent"
+msgstr "Sent"
+
+#. module: msf_order_date
+#: model:ir.module.module,description:msf_order_date.module_meta_information
+msgid "\n"
+"        This module aims at defining the dates of orders (purchase and sales orders).\n"
+"    "
+msgstr "\n"
+"        This module aims at defining the dates of orders (purchase and sales orders).\n"
+"    "
+
+#. module: msf_order_date
+#: model:ir.model,name:msf_order_date.model_product_template
+msgid "Product Template"
+msgstr "Product Template"
+
+#. module: msf_order_date
+#: field:purchase.order,internal_type:0
+#: field:sale.order,internal_type:0
+msgid "Type"
+msgstr "Type"
+
+#. module: msf_order_date
+#: code:addons/msf_order_date/order_dates.py:219
+#: code:addons/msf_order_date/order_dates.py:339
+#, python-format
+msgid "Warning"
+msgstr "Warning"
+
+#. module: msf_order_date
+#: model:ir.model,name:msf_order_date.model_res_partner
+msgid "Partner"
+msgstr "Partner"
+
+#. module: msf_order_date
+#: view:stock.picking:0
+msgid "Expected Shipped Date"
+msgstr "Expected Shipped Date"
+
+#. module: msf_order_date
+#: selection:purchase.order,internal_type:0
+#: selection:sale.order,internal_type:0
+msgid "International"
+msgstr "International"
+
+#. module: msf_order_date
+#: model:ir.model,name:msf_order_date.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Purchase Order Line"
+
+#. module: msf_order_date
+#: field:res.company,shipment_lead_time:0
+msgid "Shipment Lead Time"
+msgstr "Shipment Lead Time"
+
+#. module: msf_order_date
+#: constraint:sale.order:0
+msgid "You cannot validate this sale order because it contains a line with an inactive product"
+msgstr "You cannot validate this sale order because it contains a line with an inactive product"
+
+#. module: msf_order_date
+#: selection:purchase.order,partner_type:0
+#: selection:purchase.order.line,po_partner_type_stored:0
+#: selection:sale.order,partner_type:0
+msgid "Intermission"
+msgstr "Intermission"
+
+#. module: msf_order_date
+#: field:purchase.order,delivery_confirmed_date:0
+#: field:purchase.order.line,confirmed_delivery_date:0
+#: field:sale.order,delivery_confirmed_date:0
+#: field:sale.order.line,confirmed_delivery_date:0
+#: field:update.lines,delivery_confirmed_date:0
+msgid "Delivery Confirmed Date"
+msgstr "Delivery Confirmed Date"
+
+#. module: msf_order_date
+#: selection:purchase.order.line,po_state_stored:0
+#: selection:sale.order.line,so_state_stored:0
+msgid "Confirmed"
+msgstr "Confirmed"
+
+#. module: msf_order_date
+#: model:ir.model,name:msf_order_date.model_purchase_order
+msgid "Purchase Order"
+msgstr "Purchase Order"
+
+#. module: msf_order_date
+#: code:addons/msf_order_date/order_dates.py:182
+#, python-format
+msgid "The Delivery Requested Date should be between today and today + 24 months !"
+msgstr "The Delivery Requested Date should be between today and today + 24 months !"
+
+#. module: msf_order_date
+#: selection:purchase.order,partner_type:0
+#: selection:purchase.order.line,po_partner_type_stored:0
+#: selection:sale.order,partner_type:0
+msgid "External"
+msgstr "External"
+
+#. module: msf_order_date
+#: code:addons/msf_order_date/order_dates.py:186
+#, python-format
+msgid "The Ready to Ship Date should be older than the Creation date !"
+msgstr "The Ready to Ship Date should be older than the Creation date !"
+
+#. module: msf_order_date
+#: constraint:purchase.order:0
+msgid "If you tick the box \"cross docking\", you cannot have an other location than \"Cross docking\""
+msgstr "If you tick the box \"cross docking\", you cannot have an other location than \"Cross docking\""
+
+#. module: msf_order_date
+#: code:addons/msf_order_date/order_dates.py:1491
+#: code:addons/msf_order_date/order_dates.py:1531
+#, python-format
+msgid "Shipment Date of the Field Order '%s' has been updated to %s."
+msgstr "Shipment Date of the Field Order '%s' has been updated to %s."
+
+#. module: msf_order_date
+#: selection:purchase.order.line,po_state_stored:0
+#: selection:sale.order.line,so_state_stored:0
+msgid "Validated"
+msgstr "Validated"
+
+#. module: msf_order_date
+#: view:stock.picking:0
+msgid "Expected Move Date"
+msgstr "Expected Move Date"
+
+#. module: msf_order_date
+#: field:purchase.order,transport_type:0
+#: field:sale.order,transport_type:0
+msgid "Transport Mode"
+msgstr "Transport Mode"
+
+#. module: msf_order_date
+#: field:res.company,preparation_lead_time:0
+msgid "Preparation Lead Time"
+msgstr "Preparation Lead Time"
+
+#. module: msf_order_date
+#: constraint:stock.move:0
+msgid "You must assign an asset for this product."
+msgstr "You must assign an asset for this product."
+
+#. module: msf_order_date
+#: field:sale.order.line,so_state_stored:0
+msgid "So State"
+msgstr "So State"
+
+#. module: msf_order_date
+#: selection:purchase.order.line,po_state_stored:0
+msgid "Waiting"
+msgstr "Waiting"
+
+#. module: msf_order_date
+#: model:ir.module.module,shortdesc:msf_order_date.module_meta_information
+msgid "MSF Order dates"
+msgstr "MSF Order dates"
+
+#. module: msf_order_date
+#: selection:purchase.order,transport_type:0
+#: selection:sale.order,transport_type:0
+msgid "Sea"
+msgstr "Sea"
+
+#. module: msf_order_date
+#: field:purchase.order,delivery_requested_date:0
+#: field:sale.order,delivery_requested_date:0
+#: field:sale.order.line,date_planned:0
+#: field:update.lines,delivery_requested_date:0
+msgid "Delivery Requested Date"
+msgstr "Delivery Requested Date"
+
+#. module: msf_order_date
+#: constraint:res.company:0
+msgid "Error! You can not create recursive companies."
+msgstr "Error! You can not create recursive companies."
+
+#. module: msf_order_date
+#: field:purchase.order,est_transport_lead_time:0
+#: field:sale.order,est_transport_lead_time:0
+msgid "Est. Transport Lead Time"
+msgstr "Est. Transport Lead Time"
+
+#. module: msf_order_date
+#: constraint:stock.move:0
+msgid "You must assign a batch number for this product."
+msgstr "You must assign a batch number for this product."
+
+#. module: msf_order_date
+#: selection:purchase.order.line,po_state_stored:0
+#: selection:sale.order.line,so_state_stored:0
+msgid "Split"
+msgstr "Split"
+
+#. module: msf_order_date
+#: constraint:stock.move:0
+msgid "Constraint error on Uom"
+msgstr "Constraint error on Uom"
+
+#. module: msf_order_date
+#: constraint:stock.picking:0
+msgid "You cannot validate this document because it contains a line with an inactive product"
+msgstr "You cannot validate this document because it contains a line with an inactive product"
+
+#. module: msf_order_date
+#: constraint:stock.move:0
+msgid "You try to assign a lot which is not from the same product"
+msgstr "You try to assign a lot which is not from the same product"
+
+#. module: msf_order_date
+#: code:addons/msf_order_date/order_dates.py:776
+#: code:addons/msf_order_date/order_dates.py:1157
+#, python-format
+msgid "Do you want to update the Confirmed Delivery Date of all order lines ?"
+msgstr "Do you want to update the Confirmed Delivery Date of all order lines ?"
+
+#. module: msf_order_date
+#: field:stock.picking,manual_min_date_stock_picking:0
+msgid "Manual Date"
+msgstr "Manual Date"
+
+#. module: msf_order_date
+#: field:purchase.order.line,po_state_stored:0
+msgid "Po State"
+msgstr "Po State"
+
+#. module: msf_order_date
+#: constraint:purchase.order:0
+#: constraint:sale.order:0
+msgid "Partner type and order type are incompatible! Please change either order type or partner."
+msgstr "Partner type and order type are incompatible! Please change either order type or partner."
+
+#. module: msf_order_date
+#: constraint:purchase.order:0
+msgid "You must specify a Valid Till date."
+msgstr "You must specify a Valid Till date."
+
+#. module: msf_order_date
+#: view:purchase.order:0
+#: view:sale.order:0
+msgid "Dates"
+msgstr "Dates"
+
+#. module: msf_order_date
+#: selection:purchase.order,partner_type:0
+#: selection:purchase.order.line,po_partner_type_stored:0
+#: selection:sale.order,partner_type:0
+msgid "ESC"
+msgstr "ESC"
+
+#. module: msf_order_date
+#: constraint:sale.order.line:0
+msgid "You must select on order procurement method for Service with Reception products."
+msgstr "You must select on order procurement method for Service with Reception products."
+
+#. module: msf_order_date
+#: selection:purchase.order.line,po_state_stored:0
+#: selection:sale.order.line,so_state_stored:0
+msgid "Cancelled"
+msgstr "Cancelled"
+
+#. module: msf_order_date
+#: field:purchase.order,arrival_date:0
+#: field:sale.order,arrival_date:0
+msgid "Arrival date in the country"
+msgstr "Arrival date in the country"
+
+#. module: msf_order_date
+#: help:purchase.order.line,confirmed_delivery_date:0
+#: help:sale.order.line,confirmed_delivery_date:0
+msgid "Header level dates has to be populated by default with the possibility of manual updates."
+msgstr "Header level dates has to be populated by default with the possibility of manual updates."
+
+#. module: msf_order_date
+#: selection:purchase.order,partner_type:0
+#: selection:purchase.order.line,po_partner_type_stored:0
+#: selection:sale.order,partner_type:0
+msgid "Internal"
+msgstr "Internal"
+
+#. module: msf_order_date
+#: selection:purchase.order,partner_type:0
+#: selection:purchase.order.line,po_partner_type_stored:0
+#: selection:sale.order,partner_type:0
+msgid "Inter-section"
+msgstr "Inter-section"
+
+#. module: msf_order_date
+#: help:purchase.order,transport_type:0
+#: help:sale.order,transport_type:0
+msgid "Number of days this field has to be associated with a transport mode selection"
+msgstr "Number of days this field has to be associated with a transport mode selection"
+
+#. module: msf_order_date
+#: selection:purchase.order,transport_type:0
+#: selection:sale.order,transport_type:0
+msgid "Road"
+msgstr "Road"
+
+#. module: msf_order_date
+#: help:purchase.order,shipment_date:0
+#: help:sale.order,shipment_date:0
+msgid "Date on which picking is created at supplier"
+msgstr "Date on which picking is created at supplier"
+
+#. module: msf_order_date
+#: help:purchase.order,receipt_date:0
+#: help:sale.order,receipt_date:0
+msgid "for a PO, date of the first godd receipt."
+msgstr "for a PO, date of the first godd receipt."
+
+#. module: msf_order_date
+#: help:sale.order.line,date_planned:0
+msgid "Header level dates has to be populated by default with the possibility of manual updates"
+msgstr "Header level dates has to be populated by default with the possibility of manual updates"
+
+#. module: msf_order_date
+#: selection:purchase.order.line,po_state_stored:0
+msgid "Confirmed (waiting)"
+msgstr "Confirmed (waiting)"
+
+#. module: msf_order_date
+#: model:ir.model,name:msf_order_date.model_res_company
+msgid "Companies"
+msgstr "Companies"
+
+#. module: msf_order_date
+#: model:ir.model,name:msf_order_date.model_update_lines
+msgid "Update Lines from purchase order"
+msgstr "Update Lines from purchase order"
+
+#. module: msf_order_date
+#: model:ir.model,name:msf_order_date.model_stock_picking
+msgid "Picking List"
+msgstr "Picking List"
+
+#. module: msf_order_date
+#: selection:purchase.order.line,po_state_stored:0
+msgid "Updated"
+msgstr "Updated"
+
+#. module: msf_order_date
+#: selection:purchase.order.line,po_state_stored:0
+#: selection:sale.order.line,so_state_stored:0
+msgid "Invoice Exception"
+msgstr "Invoice Exception"
+
+#. module: msf_order_date
+#: code:addons/msf_order_date/order_dates.py:184
+#, python-format
+msgid "The Delivery Confirmed Date should be older than the Creation date !"
+msgstr "The Delivery Confirmed Date should be older than the Creation date !"
+
+#. module: msf_order_date
+#: selection:purchase.order.line,po_state_stored:0
+#: selection:sale.order.line,so_state_stored:0
+msgid "Sourced"
+msgstr "Sourced"
+
+#. module: msf_order_date
+#: constraint:purchase.order:0
+msgid "You cannot validate this purchase order because it contains a line with an inactive product"
+msgstr "You cannot validate this purchase order because it contains a line with an inactive product"
+
+#. module: msf_order_date
+#: constraint:stock.move:0
+msgid "You cannot select Service Location as Source Location."
+msgstr "You cannot select Service Location as Source Location."
+
+#. module: msf_order_date
+#: field:purchase.order.line,po_partner_type_stored:0
+msgid "Po Partner Type"
+msgstr "Po Partner Type"
+
+#. module: msf_order_date
+#: selection:purchase.order.line,po_state_stored:0
+#: selection:sale.order.line,so_state_stored:0
+msgid "Draft"
+msgstr "Draft"
+
+#. module: msf_order_date
+#: field:purchase.order,ready_to_ship_date:0
+#: field:sale.order,ready_to_ship_date:0
+msgid "Ready To Ship Date"
+msgstr "Ready To Ship Date"
+
+#. module: msf_order_date
+#: model:ir.model,name:msf_order_date.model_stock_move
+msgid "Stock Move"
+msgstr "Stock Move"
+
+#. module: msf_order_date
+#: model:ir.model,name:msf_order_date.model_procurement_order
+msgid "Procurement"
+msgstr "Procurement"
+
+#. module: msf_order_date
+#: selection:purchase.order.line,po_state_stored:0
+#: selection:sale.order.line,so_state_stored:0
+msgid "Closed"
+msgstr "Closed"
+
+#. module: msf_order_date
+#: help:purchase.order,arrival_date:0
+#: help:sale.order,arrival_date:0
+msgid "Date of the arrival of the goods at custom"
+msgstr "Date of the arrival of the goods at custom"
+
+#. module: msf_order_date
+#: selection:purchase.order.line,po_state_stored:0
+msgid "Receipt Exception"
+msgstr "Receipt Exception"
+
+#. module: msf_order_date
+#: code:addons/msf_order_date/order_dates.py:340
+#, python-format
+msgid "The number of days between Creation Date and Delivery Expected Date (%s) is less than the supplier lead-time (%s)."
+msgstr "The number of days between Creation Date and Delivery Expected Date (%s) is less than the supplier lead-time (%s)."
+
+#. module: msf_order_date
+#: view:purchase.order:0
+#: view:sale.order:0
+msgid "Update Lines"
+msgstr "Update Lines"
+
+#. module: msf_order_date
+#: selection:sale.order.line,so_state_stored:0
+msgid "Shipping Exception"
+msgstr "Shipping Exception"
+
+#. module: msf_order_date
+#: field:res.partner,leadtime:0
+msgid "Lead Time"
+msgstr "Lead Time"
+

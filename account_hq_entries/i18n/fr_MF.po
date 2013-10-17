@@ -1,0 +1,607 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* account_hq_entries
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 07:42+0000\n"
+"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_hq_entries
+#: help:hq.entries,user_validated:0
+msgid "Is this line validated by a user in a OpenERP field instance?"
+msgstr "Is this line validated by a user in a OpenERP field instance?"
+
+#. module: account_hq_entries
+#: field:hq.entries.import,filename:0
+msgid "Imported filename"
+msgstr "Imported filename"
+
+#. module: account_hq_entries
+#: view:hq.entries:0
+msgid "HQ Entries List"
+msgstr "HQ Entries List"
+
+#. module: account_hq_entries
+#: code:addons/account_hq_entries/wizard/hq_entries_import.py:242
+#, python-format
+msgid "You are trying to import a file with the wrong file format; please import a CSV file."
+msgstr "You are trying to import a file with the wrong file format; please import a CSV file."
+
+#. module: account_hq_entries
+#: model:ir.model,name:account_hq_entries.model_hq_analytic_reallocation
+msgid "Analytic HQ reallocation wizard"
+msgstr "Analytic HQ reallocation wizard"
+
+#. module: account_hq_entries
+#: code:addons/account_hq_entries/wizard/hq_entries_import.py:113
+#, python-format
+msgid "No default Destination defined for expense account: %s"
+msgstr "No default Destination defined for expense account: %s"
+
+#. module: account_hq_entries
+#: code:addons/account_hq_entries/hq_entries.py:209
+#, python-format
+msgid "Invalid analytic distribution!"
+msgstr "Invalid analytic distribution!"
+
+#. module: account_hq_entries
+#: view:hq.entries:0
+msgid "Validated"
+msgstr "Validated"
+
+#. module: account_hq_entries
+#: view:hq.analytic.reallocation:0
+#: view:hq.entries.import:0
+#: view:hq.entries.validation:0
+#: view:hq.reallocation:0
+msgid "Validate"
+msgstr "Validate"
+
+#. module: account_hq_entries
+#: view:hq.entries:0
+#: field:hq.entries,account_id:0
+#: field:hq.reallocation,account_id:0
+#: model:ir.model,name:account_hq_entries.model_account_account
+msgid "Account"
+msgstr "Account"
+
+#. module: account_hq_entries
+#: model:ir.module.module,description:account_hq_entries.module_meta_information
+msgid "HQ records integration"
+msgstr "HQ records integration"
+
+#. module: account_hq_entries
+#: code:addons/account_hq_entries/hq_entries.py:50
+#: code:addons/account_hq_entries/hq_entries.py:59
+#: code:addons/account_hq_entries/hq_entries.py:207
+#: code:addons/account_hq_entries/hq_entries.py:209
+#: code:addons/account_hq_entries/hq_entries.py:261
+#: code:addons/account_hq_entries/hq_entries.py:488
+#: code:addons/account_hq_entries/wizard/hq_entries_import.py:77
+#: code:addons/account_hq_entries/wizard/hq_entries_import.py:84
+#: code:addons/account_hq_entries/wizard/hq_entries_import.py:86
+#: code:addons/account_hq_entries/wizard/hq_entries_import.py:113
+#: code:addons/account_hq_entries/wizard/hq_entries_import.py:242
+#, python-format
+msgid "Warning"
+msgstr "Warning"
+
+#. module: account_hq_entries
+#: constraint:res.company:0
+msgid "Error! You can not create recursive companies."
+msgstr "Error! You can not create recursive companies."
+
+#. module: account_hq_entries
+#: code:addons/account_hq_entries/hq_entries.py:50
+#, python-format
+msgid "Default counterpart for HQ Entries is not set. Please configure it to Company Settings."
+msgstr "Default counterpart for HQ Entries is not set. Please configure it to Company Settings."
+
+#. module: account_hq_entries
+#: field:hq.entries,user_validated:0
+msgid "User validated?"
+msgstr "User validated?"
+
+#. module: account_hq_entries
+#: sql_constraint:account.account:0
+msgid "The code of the account must be unique per company !"
+msgstr "The code of the account must be unique per company !"
+
+#. module: account_hq_entries
+#: code:addons/account_hq_entries/wizard/hq_entries_import.py:81
+#: code:addons/account_hq_entries/wizard/hq_entries_import.py:94
+#, python-format
+msgid "Wrong format for date: %s: %s"
+msgstr "Wrong format for date: %s: %s"
+
+#. module: account_hq_entries
+#: constraint:account.account:0
+msgid "Error ! You can not create recursive accounts."
+msgstr "Error ! You can not create recursive accounts."
+
+#. module: account_hq_entries
+#: field:hq.entries,date:0
+msgid "Posting Date"
+msgstr "Posting Date"
+
+#. module: account_hq_entries
+#: code:addons/account_hq_entries/wizard/hq_entries_import.py:84
+#, python-format
+msgid "No open period found for given date: %s"
+msgstr "No open period found for given date: %s"
+
+#. module: account_hq_entries
+#: constraint:account.account:0
+msgid "Configuration Error! \n"
+"You cannot define children to an account with internal type different of \"View\"! "
+msgstr "Configuration Error! \n"
+"You cannot define children to an account with internal type different of \"View\"! "
+
+#. module: account_hq_entries
+#: code:addons/account_hq_entries/wizard/hq_entries_validation.py:42
+#, python-format
+msgid "Are you sure you want to post %d HQ entries ?"
+msgstr "Are you sure you want to post %d HQ entries ?"
+
+#. module: account_hq_entries
+#: field:hq.entries,partner_txt:0
+msgid "Third Party"
+msgstr "Third Party"
+
+#. module: account_hq_entries
+#: code:addons/account_hq_entries/hq_entries.py:44
+#, python-format
+msgid "Currency is missing!"
+msgstr "Currency is missing!"
+
+#. module: account_hq_entries
+#: field:hq.analytic.reallocation,destination_id:0
+#: field:hq.entries,destination_id:0
+msgid "Destination"
+msgstr "Destination"
+
+#. module: account_hq_entries
+#: view:hq.entries.import:0
+msgid "This will import HQ entries from a csv file."
+msgstr "This will import HQ entries from a csv file."
+
+#. module: account_hq_entries
+#: field:hq.analytic.reallocation,analytic_id:0
+#: field:hq.entries,analytic_id:0
+msgid "Funding Pool"
+msgstr "Funding Pool"
+
+#. module: account_hq_entries
+#: field:hq.analytic.reallocation,free_2_id:0
+#: field:hq.entries,free_2_id:0
+msgid "Free 2"
+msgstr "Free 2"
+
+#. module: account_hq_entries
+#: code:addons/account_hq_entries/wizard/hq_entries_import.py:212
+#, python-format
+msgid "You cannot import HQ entries because no HQ Journal exists."
+msgstr "You cannot import HQ entries because no HQ Journal exists."
+
+#. module: account_hq_entries
+#: view:hq.entries:0
+msgid "To validate"
+msgstr "To validate"
+
+#. module: account_hq_entries
+#: field:hq.analytic.reallocation,cost_center_id:0
+#: field:hq.entries,cost_center_id:0
+msgid "Cost Center"
+msgstr "Cost Center"
+
+#. module: account_hq_entries
+#: view:hq.entries:0
+msgid "Partner"
+msgstr "Partner"
+
+#. module: account_hq_entries
+#: model:ir.actions.act_window,name:account_hq_entries.action_hq_entries_tree
+#: model:ir.model,name:account_hq_entries.model_hq_entries
+#: model:ir.module.module,shortdesc:account_hq_entries.module_meta_information
+#: model:ir.ui.menu,name:account_hq_entries.menu_hq_entries
+#: view:res.company:0
+msgid "HQ Entries"
+msgstr "HQ Entries"
+
+#. module: account_hq_entries
+#: view:hq.analytic.reallocation:0
+#: view:hq.entries.import:0
+#: view:hq.entries.validation:0
+#: view:hq.reallocation:0
+msgid "Cancel"
+msgstr "Cancel"
+
+#. module: account_hq_entries
+#: code:addons/account_hq_entries/wizard/hq_entries_import.py:183
+#, python-format
+msgid "This currency was not found or is not active: %s"
+msgstr "This currency was not found or is not active: %s"
+
+#. module: account_hq_entries
+#: code:addons/account_hq_entries/wizard/hq_entries_import.py:68
+#, python-format
+msgid "Unknown format."
+msgstr "Unknown format."
+
+#. module: account_hq_entries
+#: code:addons/account_hq_entries/hq_entries.py:82
+#, python-format
+msgid "An account is missing!"
+msgstr "An account is missing!"
+
+#. module: account_hq_entries
+#: code:addons/account_hq_entries/wizard/hq_entries_import.py:263
+#, python-format
+msgid "HQ Entries import successful"
+msgstr "HQ Entries import successful"
+
+#. module: account_hq_entries
+#: field:res.company,counterpart_hq_entries_default_account:0
+msgid "Default counterpart"
+msgstr "Default counterpart"
+
+#. module: account_hq_entries
+#: model:ir.ui.menu,name:account_hq_entries.menu_hq_entries_import
+msgid "HQ Import"
+msgstr "HQ Import"
+
+#. module: account_hq_entries
+#: field:hq.entries,amount:0
+msgid "Amount"
+msgstr "Amount"
+
+#. module: account_hq_entries
+#: help:account.account,is_not_hq_correctible:0
+msgid "If checked, this attribute will prevent user from correcting the expense account on the entry imported from HQ system"
+msgstr "If checked, this attribute will prevent user from correcting the expense account on the entry imported from HQ system"
+
+#. module: account_hq_entries
+#: code:addons/account_hq_entries/wizard/hq_entries_import.py:227
+#, python-format
+msgid "Nothing to import."
+msgstr "Nothing to import."
+
+#. module: account_hq_entries
+#: field:hq.entries,account_id_first_value:0
+msgid "Account @import"
+msgstr "Account @import"
+
+#. module: account_hq_entries
+#: view:hq.reallocation:0
+msgid "Reallocation"
+msgstr "Reallocation"
+
+#. module: account_hq_entries
+#: view:hq.entries.import:0
+#: model:ir.actions.act_window,name:account_hq_entries.action_hq_entries_import_wizard
+msgid "Import HQ Entries"
+msgstr "Import HQ Entries"
+
+#. module: account_hq_entries
+#: field:hq.entries.import,file:0
+msgid "File"
+msgstr "File"
+
+#. module: account_hq_entries
+#: field:hq.entries.validation,txt:0
+msgid "Text"
+msgstr "Text"
+
+#. module: account_hq_entries
+#: code:addons/account_hq_entries/wizard/hq_entries_import.py:77
+#, python-format
+msgid "A date is missing!"
+msgstr "A date is missing!"
+
+#. module: account_hq_entries
+#: code:addons/account_hq_entries/hq_entries.py:499
+#, python-format
+msgid "You cannot delete validated HQ Entries lines!"
+msgstr "You cannot delete validated HQ Entries lines!"
+
+#. module: account_hq_entries
+#: field:hq.entries,analytic_id_first_value:0
+msgid "Funding Pool @import"
+msgstr "Funding Pool @import"
+
+#. module: account_hq_entries
+#: view:hq.entries:0
+msgid "Group By..."
+msgstr "Group By..."
+
+#. module: account_hq_entries
+#: code:addons/account_hq_entries/wizard/hq_reallocation.py:99
+#: code:addons/account_hq_entries/wizard/hq_reallocation.py:138
+#, python-format
+msgid "Unknown error"
+msgstr "Unknown error"
+
+#. module: account_hq_entries
+#: model:ir.ui.menu,name:account_hq_entries.menu_hq
+msgid "HQ"
+msgstr "HQ"
+
+#. module: account_hq_entries
+#: selection:hq.entries,analytic_state:0
+msgid "Valid"
+msgstr "Valid"
+
+#. module: account_hq_entries
+#: code:addons/account_hq_entries/hq_entries.py:42
+#, python-format
+msgid "Period is missing!"
+msgstr "Period is missing!"
+
+#. module: account_hq_entries
+#: view:hq.entries:0
+msgid "Search HQ Entries"
+msgstr "Search HQ Entries"
+
+#. module: account_hq_entries
+#: field:account.account,is_not_hq_correctible:0
+msgid "Can not be corrected on HQ entries"
+msgstr "Can not be corrected on HQ entries"
+
+#. module: account_hq_entries
+#: view:res.company:0
+msgid "Configuration"
+msgstr "Configuration"
+
+#. module: account_hq_entries
+#: code:addons/account_hq_entries/wizard/hq_entries_import.py:239
+#, python-format
+msgid "Problem to read given file."
+msgstr "Problem to read given file."
+
+#. module: account_hq_entries
+#: model:ir.model,name:account_hq_entries.model_hq_entries_validation
+msgid "HQ entries validation"
+msgstr "HQ entries validation"
+
+#. module: account_hq_entries
+#: field:hq.entries,currency_id:0
+msgid "Book. Currency"
+msgstr "Book. Currency"
+
+#. module: account_hq_entries
+#: code:addons/account_hq_entries/hq_entries.py:207
+#, python-format
+msgid "Currency %s is not active!"
+msgstr "Currency %s is not active!"
+
+#. module: account_hq_entries
+#: field:hq.entries,destination_id_first_value:0
+msgid "Destination @import"
+msgstr "Destination @import"
+
+#. module: account_hq_entries
+#: field:hq.entries,cost_center_id_first_value:0
+msgid "Cost Center @import"
+msgstr "Cost Center @import"
+
+#. module: account_hq_entries
+#: code:addons/account_hq_entries/hq_entries.py:488
+#, python-format
+msgid "Change Expat salary account is not allowed!"
+msgstr "Change Expat salary account is not allowed!"
+
+#. module: account_hq_entries
+#: selection:hq.entries,analytic_state:0
+msgid "None"
+msgstr "None"
+
+#. module: account_hq_entries
+#: field:hq.entries,document_date:0
+msgid "Document Date"
+msgstr "Document Date"
+
+#. module: account_hq_entries
+#: model:ir.actions.act_window,name:account_hq_entries.action_hq_analytic_reallocation
+msgid "Analytic reallocation"
+msgstr "Analytic reallocation"
+
+#. module: account_hq_entries
+#: help:res.company,counterpart_hq_entries_default_account:0
+msgid "Account that will be used as counterpart for HQ Validated Entries."
+msgstr "Account that will be used as counterpart for HQ Validated Entries."
+
+#. module: account_hq_entries
+#: code:addons/account_hq_entries/wizard/hq_entries_import.py:121
+#, python-format
+msgid "Destination \"%s\" doesn't exist!"
+msgstr "Destination \"%s\" doesn't exist!"
+
+#. module: account_hq_entries
+#: code:addons/account_hq_entries/wizard/hq_entries_import.py:217
+#, python-format
+msgid "HQ Entries import failed."
+msgstr "HQ Entries import failed."
+
+#. module: account_hq_entries
+#: code:addons/account_hq_entries/wizard/hq_entries_import.py:100
+#: code:addons/account_hq_entries/wizard/hq_entries_import.py:106
+#, python-format
+msgid "No account code found!"
+msgstr "No account code found!"
+
+#. module: account_hq_entries
+#: field:hq.analytic.reallocation,free_1_id:0
+#: field:hq.entries,free_1_id:0
+msgid "Free 1"
+msgstr "Free 1"
+
+#. module: account_hq_entries
+#: model:ir.model,name:account_hq_entries.model_hq_entries_import
+msgid "HQ Entries Import Wizard"
+msgstr "HQ Entries Import Wizard"
+
+#. module: account_hq_entries
+#: view:hq.entries.validation:0
+msgid "Confirmation"
+msgstr "Confirmation"
+
+#. module: account_hq_entries
+#: code:addons/account_hq_entries/hq_entries.py:59
+#, python-format
+msgid "No HQ journal found!"
+msgstr "No HQ journal found!"
+
+#. module: account_hq_entries
+#: view:hq.analytic.reallocation:0
+msgid "Analytic Reallocation"
+msgstr "Analytic Reallocation"
+
+#. module: account_hq_entries
+#: model:ir.actions.act_window,name:account_hq_entries.action_hq_reallocation
+msgid "Change Account"
+msgstr "Change Account"
+
+#. module: account_hq_entries
+#: code:addons/account_hq_entries/wizard/hq_entries_import.py:196
+#, python-format
+msgid "Analytic distribution is invalid!"
+msgstr "Analytic distribution is invalid!"
+
+#. module: account_hq_entries
+#: model:ir.model,name:account_hq_entries.model_res_company
+msgid "Companies"
+msgstr "Companies"
+
+#. module: account_hq_entries
+#: code:addons/account_hq_entries/hq_entries.py:42
+#: code:addons/account_hq_entries/hq_entries.py:44
+#: code:addons/account_hq_entries/hq_entries.py:82
+#: code:addons/account_hq_entries/hq_entries.py:499
+#: code:addons/account_hq_entries/wizard/hq_entries_import.py:68
+#: code:addons/account_hq_entries/wizard/hq_entries_import.py:81
+#: code:addons/account_hq_entries/wizard/hq_entries_import.py:94
+#: code:addons/account_hq_entries/wizard/hq_entries_import.py:100
+#: code:addons/account_hq_entries/wizard/hq_entries_import.py:103
+#: code:addons/account_hq_entries/wizard/hq_entries_import.py:106
+#: code:addons/account_hq_entries/wizard/hq_entries_import.py:121
+#: code:addons/account_hq_entries/wizard/hq_entries_import.py:127
+#: code:addons/account_hq_entries/wizard/hq_entries_import.py:133
+#: code:addons/account_hq_entries/wizard/hq_entries_import.py:183
+#: code:addons/account_hq_entries/wizard/hq_entries_import.py:196
+#: code:addons/account_hq_entries/wizard/hq_entries_import.py:212
+#: code:addons/account_hq_entries/wizard/hq_entries_import.py:227
+#: code:addons/account_hq_entries/wizard/hq_entries_import.py:239
+#: code:addons/account_hq_entries/wizard/hq_entries_import.py:250
+#: code:addons/account_hq_entries/wizard/hq_entries_validation.py:41
+#: code:addons/account_hq_entries/wizard/hq_reallocation.py:99
+#: code:addons/account_hq_entries/wizard/hq_reallocation.py:102
+#: code:addons/account_hq_entries/wizard/hq_reallocation.py:138
+#: code:addons/account_hq_entries/wizard/hq_reallocation.py:141
+#, python-format
+msgid "Error"
+msgstr "Error"
+
+#. module: account_hq_entries
+#: code:addons/account_hq_entries/wizard/hq_entries_validation.py:41
+#, python-format
+msgid "You cannot validate HQ Entries already validated !"
+msgstr "You cannot validate HQ Entries already validated !"
+
+#. module: account_hq_entries
+#: model:ir.actions.act_window,name:account_hq_entries.action_hq_validation
+msgid "Validation"
+msgstr "Validation"
+
+#. module: account_hq_entries
+#: view:hq.entries:0
+#: field:hq.entries,period_id:0
+msgid "Period"
+msgstr "Period"
+
+#. module: account_hq_entries
+#: model:ir.model,name:account_hq_entries.model_hq_reallocation
+msgid "HQ reallocation wizard"
+msgstr "HQ reallocation wizard"
+
+#. module: account_hq_entries
+#: code:addons/account_hq_entries/wizard/hq_reallocation.py:102
+#: code:addons/account_hq_entries/wizard/hq_reallocation.py:141
+#, python-format
+msgid "Unknown error. Please contact an administrator to resolve this problem. This is probably due to Web server error."
+msgstr "Unknown error. Please contact an administrator to resolve this problem. This is probably due to Web server error."
+
+#. module: account_hq_entries
+#: code:addons/account_hq_entries/wizard/hq_entries_import.py:250
+#, python-format
+msgid "File is empty!"
+msgstr "File is empty!"
+
+#. module: account_hq_entries
+#: selection:hq.entries,analytic_state:0
+msgid "Invalid"
+msgstr "Invalid"
+
+#. module: account_hq_entries
+#: code:addons/account_hq_entries/wizard/hq_entries_import.py:133
+#, python-format
+msgid "Funding Pool \"%s\" doesn't exist!"
+msgstr "Funding Pool \"%s\" doesn't exist!"
+
+#. module: account_hq_entries
+#: field:hq.entries,analytic_state:0
+msgid "Distribution State"
+msgstr "Distribution State"
+
+#. module: account_hq_entries
+#: model:ir.model,name:account_hq_entries.model_hq_entries_validation_wizard
+msgid "hq.entries.validation.wizard"
+msgstr "hq.entries.validation.wizard"
+
+#. module: account_hq_entries
+#: code:addons/account_hq_entries/wizard/hq_entries_import.py:127
+#, python-format
+msgid "Cost Center \"%s\" doesn't exist!"
+msgstr "Cost Center \"%s\" doesn't exist!"
+
+#. module: account_hq_entries
+#: field:hq.entries,ref:0
+msgid "Reference"
+msgstr "Reference"
+
+#. module: account_hq_entries
+#: field:hq.entries,name:0
+msgid "Description"
+msgstr "Description"
+
+#. module: account_hq_entries
+#: code:addons/account_hq_entries/wizard/hq_entries_import.py:103
+#, python-format
+msgid "Account code %s doesn't exist!"
+msgstr "Account code %s doesn't exist!"
+
+#. module: account_hq_entries
+#: help:hq.entries,analytic_state:0
+msgid "Give analytic distribution state"
+msgstr "Give analytic distribution state"
+
+#. module: account_hq_entries
+#: code:addons/account_hq_entries/wizard/hq_entries_import.py:86
+#, python-format
+msgid "More than one period found for given date: %s"
+msgstr "More than one period found for given date: %s"
+
+#. module: account_hq_entries
+#: code:addons/account_hq_entries/hq_entries.py:261
+#, python-format
+msgid "No analytic correction journal found!"
+msgstr "No analytic correction journal found!"
+

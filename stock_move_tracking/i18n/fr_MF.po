@@ -1,0 +1,212 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* stock_move_tracking
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 07:42+0000\n"
+"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_move_tracking
+#: view:stock.move:0
+msgid "Incoming"
+msgstr "Incoming"
+
+#. module: stock_move_tracking
+#: selection:stock.move,type:0
+msgid "Internal"
+msgstr "Internal"
+
+#. module: stock_move_tracking
+#: view:stock.move.tracking:0
+msgid "Search Items"
+msgstr "Search Items"
+
+#. module: stock_move_tracking
+#: model:ir.model,name:stock_move_tracking.model_stock_move_tracking
+msgid "Stock Move Tracking"
+msgstr "Stock Move Tracking"
+
+#. module: stock_move_tracking
+#: view:stock.move:0
+msgid "Tracking Moves Analysis"
+msgstr "Tracking Moves Analysis"
+
+#. module: stock_move_tracking
+#: view:stock.move.tracking:0
+msgid "Cancel"
+msgstr "Cancel"
+
+#. module: stock_move_tracking
+#: field:stock.move.tracking,prodlot_id:0
+msgid "Batch number"
+msgstr "Batch number"
+
+#. module: stock_move_tracking
+#: constraint:stock.move:0
+msgid "You must assign a batch number for this product."
+msgstr "You must assign a batch number for this product."
+
+#. module: stock_move_tracking
+#: selection:stock.move,type:0
+msgid "Getting Goods"
+msgstr "Getting Goods"
+
+#. module: stock_move_tracking
+#: view:stock.move:0
+msgid "Dest. Location"
+msgstr "Dest. Location"
+
+#. module: stock_move_tracking
+#: code:addons/stock_move_tracking/wizard/stock_tracking.py:89
+#, python-format
+msgid "Your search did not match with any moves"
+msgstr "Your search did not match with any moves"
+
+#. module: stock_move_tracking
+#: constraint:stock.move:0
+msgid "Constraint error on Uom"
+msgstr "Constraint error on Uom"
+
+#. module: stock_move_tracking
+#: view:stock.move:0
+msgid "Stock Moves"
+msgstr "Stock Moves"
+
+#. module: stock_move_tracking
+#: constraint:stock.move:0
+msgid "You try to assign a lot which is not from the same product"
+msgstr "You try to assign a lot which is not from the same product"
+
+#. module: stock_move_tracking
+#: constraint:stock.move:0
+msgid "You cannot select Service Location as Source Location."
+msgstr "You cannot select Service Location as Source Location."
+
+#. module: stock_move_tracking
+#: view:stock.move:0
+msgid "Expired Date"
+msgstr "Expired Date"
+
+#. module: stock_move_tracking
+#: model:ir.actions.act_window,name:stock_move_tracking.action_stock_move_tracking_wizard
+#: model:ir.ui.menu,name:stock_move_tracking.menu_stock_move_tracking
+msgid "Trace Item"
+msgstr "Trace Item"
+
+#. module: stock_move_tracking
+#: view:stock.move:0
+msgid "Batch"
+msgstr "Batch"
+
+#. module: stock_move_tracking
+#: selection:stock.move,type:0
+msgid "Sending Goods"
+msgstr "Sending Goods"
+
+#. module: stock_move_tracking
+#: model:ir.actions.act_window,name:stock_move_tracking.action_stock_move_tracking
+msgid "Trace Items"
+msgstr "Trace Items"
+
+#. module: stock_move_tracking
+#: model:ir.module.module,description:stock_move_tracking.module_meta_information
+msgid "\n"
+"    This module aims to help users to see all moves of a product, a lot or an expired dare.\n"
+"    "
+msgstr "\n"
+"    This module aims to help users to see all moves of a product, a lot or an expired dare.\n"
+"    "
+
+#. module: stock_move_tracking
+#: model:ir.model,name:stock_move_tracking.model_stock_move
+msgid "Stock Move"
+msgstr "Stock Move"
+
+#. module: stock_move_tracking
+#: view:stock.move:0
+msgid "Source Location"
+msgstr "Source Location"
+
+#. module: stock_move_tracking
+#: view:stock.move.tracking:0
+msgid "Print"
+msgstr "Print"
+
+#. module: stock_move_tracking
+#: code:addons/stock_move_tracking/wizard/stock_tracking.py:47
+#, python-format
+msgid "You should at least enter one information"
+msgstr "You should at least enter one information"
+
+#. module: stock_move_tracking
+#: field:stock.move,type:0
+msgid "Type"
+msgstr "Type"
+
+#. module: stock_move_tracking
+#: model:ir.module.module,shortdesc:stock_move_tracking.module_meta_information
+msgid "Stock Moves tracking"
+msgstr "Stock Moves tracking"
+
+#. module: stock_move_tracking
+#: view:stock.move:0
+#: field:stock.move.tracking,product_id:0
+msgid "Product"
+msgstr "Product"
+
+#. module: stock_move_tracking
+#: constraint:stock.move:0
+msgid "You must assign an asset for this product."
+msgstr "You must assign an asset for this product."
+
+#. module: stock_move_tracking
+#: field:stock.move,expired_date:0
+msgid "Expiry Date"
+msgstr "Expiry Date"
+
+#. module: stock_move_tracking
+#: constraint:stock.move:0
+msgid "Wrong reason type for an OUT created from scratch."
+msgstr "Wrong reason type for an OUT created from scratch."
+
+#. module: stock_move_tracking
+#: code:addons/stock_move_tracking/wizard/stock_tracking.py:47
+#, python-format
+msgid "Error"
+msgstr "Error"
+
+#. module: stock_move_tracking
+#: field:stock.move.tracking,expired_date:0
+msgid "Expired date"
+msgstr "Expired date"
+
+#. module: stock_move_tracking
+#: view:stock.move.tracking:0
+msgid "View"
+msgstr "View"
+
+#. module: stock_move_tracking
+#: view:stock.move:0
+msgid "Outgoing"
+msgstr "Outgoing"
+
+#. module: stock_move_tracking
+#: code:addons/stock_move_tracking/wizard/stock_tracking.py:89
+#, python-format
+msgid "Warning !"
+msgstr "Warning !"
+
+#. module: stock_move_tracking
+#: view:stock.move:0
+msgid "Group By..."
+msgstr "Group By..."
+

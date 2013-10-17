@@ -1,0 +1,501 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* res_currency_functional
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 07:42+0000\n"
+"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: res_currency_functional
+#: field:res.currency,currency_name:0
+msgid "Currency Name"
+msgstr "Currency Name"
+
+#. module: res_currency_functional
+#: view:res.currency:0
+msgid "Rates"
+msgstr "Rates"
+
+#. module: res_currency_functional
+#: field:purchase.order,functional_amount_total:0
+#: field:sale.order,functional_amount_total:0
+msgid "Functional Total"
+msgstr "Functional Total"
+
+#. module: res_currency_functional
+#: view:account.move.line:0
+msgid "Total Functional Debit"
+msgstr "Total Functional Debit"
+
+#. module: res_currency_functional
+#: model:ir.model,name:res_currency_functional.model_sale_order
+msgid "Sales Order"
+msgstr "Sales Order"
+
+#. module: res_currency_functional
+#: field:account.move.line,credit_currency:0
+msgid "Book. Credit"
+msgstr "Book. Credit"
+
+#. module: res_currency_functional
+#: constraint:account.move.line:0
+msgid "You can not create move line on view account."
+msgstr "You can not create move line on view account."
+
+#. module: res_currency_functional
+#: code:addons/res_currency_functional/account_move_line_compute_currency.py:122
+#: code:addons/res_currency_functional/account_move_line_compute_currency.py:127
+#, python-format
+msgid "Warning"
+msgstr "Warning"
+
+#. module: res_currency_functional
+#: model:ir.model,name:res_currency_functional.model_account_analytic_line
+msgid "Analytic Line"
+msgstr "Analytic Line"
+
+#. module: res_currency_functional
+#: constraint:account.bank.statement.line:0
+msgid "The amount of the voucher must be the same amount as the one on the statement line"
+msgstr "The amount of the voucher must be the same amount as the one on the statement line"
+
+#. module: res_currency_functional
+#: sql_constraint:purchase.order.line:0
+#: sql_constraint:sale.order.line:0
+msgid "Product Quantity must be greater than zero."
+msgstr "Product Quantity must be greater than zero."
+
+#. module: res_currency_functional
+#: constraint:purchase.order:0
+msgid "You cannot choose an internal supplier for this purchase order"
+msgstr "You cannot choose an internal supplier for this purchase order"
+
+#. module: res_currency_functional
+#: view:account.move.line:0
+msgid "Total Functional Credit"
+msgstr "Total Functional Credit"
+
+#. module: res_currency_functional
+#: model:ir.model,name:res_currency_functional.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Sales Order Line"
+
+#. module: res_currency_functional
+#: sql_constraint:purchase.order:0
+#: sql_constraint:sale.order:0
+msgid "Order Reference must be unique !"
+msgstr "Order Reference must be unique !"
+
+#. module: res_currency_functional
+#: field:account.move.line,reconcile_total_partial_id:0
+msgid "Reconcile"
+msgstr "Reconcile"
+
+#. module: res_currency_functional
+#: model:ir.model,name:res_currency_functional.model_account_move
+msgid "Account Entry"
+msgstr "Account Entry"
+
+#. module: res_currency_functional
+#: model:ir.model,name:res_currency_functional.model_purchase_order
+msgid "Purchase Order"
+msgstr "Purchase Order"
+
+#. module: res_currency_functional
+#: model:ir.model,name:res_currency_functional.model_account_move_line
+msgid "Journal Items"
+msgstr "Journal Items"
+
+#. module: res_currency_functional
+#: model:ir.model,name:res_currency_functional.model_account_bank_statement_line
+msgid "Bank Statement Line"
+msgstr "Bank Statement Line"
+
+#. module: res_currency_functional
+#: view:purchase.order:0
+msgid "Untaxed amount"
+msgstr "Untaxed amount"
+
+#. module: res_currency_functional
+#: field:account.move,functional_currency_id:0
+#: field:purchase.order,functional_currency_id:0
+#: field:purchase.order.line,functional_currency_id:0
+#: field:sale.order,functional_currency_id:0
+#: field:sale.order.line,functional_currency_id:0
+msgid "Functional Currency"
+msgstr "Functional Currency"
+
+#. module: res_currency_functional
+#: constraint:res.currency:0
+msgid "Another currency have the same name."
+msgstr "Another currency have the same name."
+
+#. module: res_currency_functional
+#: field:account.move,block_manual_currency_id:0
+msgid "Block manual currency field"
+msgstr "Block manual currency field"
+
+#. module: res_currency_functional
+#: constraint:sale.order.line:0
+msgid "You must select on order procurement method for Service with Reception products."
+msgstr "You must select on order procurement method for Service with Reception products."
+
+#. module: res_currency_functional
+#: code:addons/res_currency_functional/account_move_line_compute_currency.py:122
+#, python-format
+msgid "No open period found for this date: %s"
+msgstr "No open period found for this date: %s"
+
+#. module: res_currency_functional
+#: view:activate.currencies:0
+msgid "Cancel"
+msgstr "Cancel"
+
+#. module: res_currency_functional
+#: model:ir.model,name:res_currency_functional.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Purchase Order Line"
+
+#. module: res_currency_functional
+#: model:ir.model,name:res_currency_functional.model_res_currency_rate
+msgid "Currency Rate"
+msgstr "Currency Rate"
+
+#. module: res_currency_functional
+#: model:ir.actions.act_window,name:res_currency_functional.action_currency_functional_form
+#: view:res.currency:0
+msgid "Currencies"
+msgstr "Currencies"
+
+#. module: res_currency_functional
+#: constraint:sale.order:0
+msgid "You cannot validate this sale order because it contains a line with an inactive product"
+msgstr "You cannot validate this sale order because it contains a line with an inactive product"
+
+#. module: res_currency_functional
+#: help:account.move,currency_id:0
+msgid "The optional other currency if it is a multi-currency entry."
+msgstr "The optional other currency if it is a multi-currency entry."
+
+#. module: res_currency_functional
+#: view:account.move.line:0
+msgid "General Information"
+msgstr "General Information"
+
+#. module: res_currency_functional
+#: code:addons/res_currency_functional/account_move_line_compute_currency.py:75
+#: code:addons/res_currency_functional/account_move_line_compute_currency.py:222
+#, python-format
+msgid "No Currency Adjustement journal found!"
+msgstr "No Currency Adjustement journal found!"
+
+#. module: res_currency_functional
+#: view:account.move.line:0
+msgid "Amount"
+msgstr "Amount"
+
+#. module: res_currency_functional
+#: view:account.move.line:0
+msgid "Total Book. Debit"
+msgstr "Total Book. Debit"
+
+#. module: res_currency_functional
+#: help:account.move,block_manual_currency_id:0
+msgid "Block manual currency field if journal have a currency."
+msgstr "Block manual currency field if journal have a currency."
+
+#. module: res_currency_functional
+#: view:account.move.line:0
+msgid "Total Booking Credit"
+msgstr "Total Booking Credit"
+
+#. module: res_currency_functional
+#: field:account.move.line,debit_currency:0
+msgid "Book. Debit"
+msgstr "Book. Debit"
+
+#. module: res_currency_functional
+#: code:addons/res_currency_functional/account_move_line_compute_currency.py:75
+#: code:addons/res_currency_functional/account_move_line_compute_currency.py:80
+#: code:addons/res_currency_functional/account_move_line_compute_currency.py:116
+#: code:addons/res_currency_functional/account_move_line_compute_currency.py:161
+#: code:addons/res_currency_functional/account_move_line_compute_currency.py:222
+#: code:addons/res_currency_functional/account_move_line_compute_currency.py:227
+#: code:addons/res_currency_functional/wizard/activate_currencies.py:44
+#, python-format
+msgid "Error"
+msgstr "Error"
+
+#. module: res_currency_functional
+#: field:account.bank.statement.line,functional_currency_id:0
+#: field:account.move.line,functional_currency_id:0
+msgid "Func. Currency"
+msgstr "Func. Currency"
+
+#. module: res_currency_functional
+#: constraint:account.move:0
+msgid "You cannot create entries on different periods/journals in the same move"
+msgstr "You cannot create entries on different periods/journals in the same move"
+
+#. module: res_currency_functional
+#: view:account.move.line:0
+msgid "Total Func. Debit"
+msgstr "Total Func. Debit"
+
+#. module: res_currency_functional
+#: view:activate.currencies:0
+#: model:ir.actions.act_window,name:res_currency_functional.action_activate_currencies
+msgid "Activate/Deactivate Currencies"
+msgstr "Activate/Deactivate Currencies"
+
+#. module: res_currency_functional
+#: constraint:account.move.line:0
+msgid "Company must be same for its related account and period."
+msgstr "Company must be same for its related account and period."
+
+#. module: res_currency_functional
+#: field:account.bank.statement.line,functional_out:0
+msgid "Func. Out"
+msgstr "Func. Out"
+
+#. module: res_currency_functional
+#: code:addons/res_currency_functional/account_move_line_compute_currency.py:127
+#, python-format
+msgid "Please activate an analytic account with \"For FX gain/loss\" to allow reconciliation!"
+msgstr "Please activate an analytic account with \"For FX gain/loss\" to allow reconciliation!"
+
+#. module: res_currency_functional
+#: code:addons/res_currency_functional/account_move_line_compute_currency.py:116
+#, python-format
+msgid "No attached period found!"
+msgstr "No attached period found!"
+
+#. module: res_currency_functional
+#: code:addons/res_currency_functional/account_move_line_compute_currency.py:382
+#, python-format
+msgid "Warning !"
+msgstr "Warning !"
+
+#. module: res_currency_functional
+#: view:account.move.line:0
+msgid "Total Func. Credit"
+msgstr "Total Func. Credit"
+
+#. module: res_currency_functional
+#: sql_constraint:res.currency:0
+msgid "The currency name exists already in the system!"
+msgstr "The currency name exists already in the system!"
+
+#. module: res_currency_functional
+#: field:account.move,currency_id:0
+#: field:account.move,manual_currency_id:0
+msgid "Book. Currency"
+msgstr "Book. Currency"
+
+#. module: res_currency_functional
+#: sql_constraint:account.move.line:0
+msgid "Wrong credit or debit value in accounting entry !"
+msgstr "Wrong credit or debit value in accounting entry !"
+
+#. module: res_currency_functional
+#: code:addons/res_currency_functional/wizard/activate_currencies.py:44
+#, python-format
+msgid "No rate is set for currency %s !"
+msgstr "No rate is set for currency %s !"
+
+#. module: res_currency_functional
+#: constraint:purchase.order:0
+#: constraint:sale.order:0
+msgid "Partner type and order type are incompatible! Please change either order type or partner."
+msgstr "Partner type and order type are incompatible! Please change either order type or partner."
+
+#. module: res_currency_functional
+#: view:account.move.line:0
+msgid "Journal Item"
+msgstr "Journal Item"
+
+#. module: res_currency_functional
+#: code:addons/res_currency_functional/account_move_line_compute_currency.py:382
+#, python-format
+msgid "Posting date is outside of defined period: %s!"
+msgstr "Posting date is outside of defined period: %s!"
+
+#. module: res_currency_functional
+#: view:activate.currencies:0
+msgid "Approve"
+msgstr "Approve"
+
+#. module: res_currency_functional
+#: field:activate.currencies,active_status:0
+msgid "Set selected currencies as active"
+msgstr "Set selected currencies as active"
+
+#. module: res_currency_functional
+#: field:account.move.line,account_type:0
+msgid "Account Type"
+msgstr "Account Type"
+
+#. module: res_currency_functional
+#: model:ir.module.module,description:res_currency_functional.module_meta_information
+msgid "\n"
+"    This module aims to only use a subset of currencies, and have them available\n"
+"    for each accounting entry.\n"
+"    \n"
+"    "
+msgstr "\n"
+"    This module aims to only use a subset of currencies, and have them available\n"
+"    for each accounting entry.\n"
+"    \n"
+"    "
+
+#. module: res_currency_functional
+#: view:purchase.order:0
+msgid "Total amount"
+msgstr "Total amount"
+
+#. module: res_currency_functional
+#: constraint:res.currency:0
+msgid "Same currency exists"
+msgstr "Same currency exists"
+
+#. module: res_currency_functional
+#: field:purchase.order,functional_amount_tax:0
+#: field:sale.order,functional_amount_tax:0
+msgid "Functional Taxes"
+msgstr "Functional Taxes"
+
+#. module: res_currency_functional
+#: model:ir.module.module,shortdesc:res_currency_functional.module_meta_information
+msgid "Multi-Currency Management"
+msgstr "Multi-Currency Management"
+
+#. module: res_currency_functional
+#: constraint:account.move.line:0
+msgid "You can not create move line on closed account."
+msgstr "You can not create move line on closed account."
+
+#. module: res_currency_functional
+#: constraint:purchase.order:0
+msgid "You cannot validate this purchase order because it contains a line with an inactive product"
+msgstr "You cannot validate this purchase order because it contains a line with an inactive product"
+
+#. module: res_currency_functional
+#: field:account.bank.statement.line,functional_in:0
+msgid "Func. In"
+msgstr "Func. In"
+
+#. module: res_currency_functional
+#: code:addons/res_currency_functional/account_move_line_compute_currency.py:80
+#: code:addons/res_currency_functional/account_move_line_compute_currency.py:227
+#, python-format
+msgid "Default debit/credit for journal %s is not set correctly."
+msgstr "Default debit/credit for journal %s is not set correctly."
+
+#. module: res_currency_functional
+#: constraint:account.move:0
+msgid "You cannot create more than one move per period on centralized journal"
+msgstr "You cannot create more than one move per period on centralized journal"
+
+#. module: res_currency_functional
+#: constraint:res.currency:0
+msgid "No rate is set. Please set one before activating the currency. "
+msgstr "No rate is set. Please set one before activating the currency. "
+
+#. module: res_currency_functional
+#: field:purchase.order.line,functional_subtotal:0
+#: field:sale.order.line,functional_subtotal:0
+msgid "Functional Subtotal"
+msgstr "Functional Subtotal"
+
+#. module: res_currency_functional
+#: view:account.move.line:0
+msgid "Entry Sequence"
+msgstr "Entry Sequence"
+
+#. module: res_currency_functional
+#: view:account.move.line:0
+msgid "Account Entry Line"
+msgstr "Account Entry Line"
+
+#. module: res_currency_functional
+#: constraint:account.bank.statement.line:0
+msgid "Date is not correct. Verify that it's in the register's period. "
+msgstr "Date is not correct. Verify that it's in the register's period. "
+
+#. module: res_currency_functional
+#: field:account.move,book_amount:0
+msgid "Book Amount"
+msgstr "Book Amount"
+
+#. module: res_currency_functional
+#: view:account.move.line:0
+msgid "Total Book. Credit"
+msgstr "Total Book. Credit"
+
+#. module: res_currency_functional
+#: field:account.bank.statement.line,currency_id:0
+#: view:account.move.line:0
+#: model:ir.model,name:res_currency_functional.model_res_currency
+#: field:purchase.order,currency_id:0
+#: field:purchase.order.line,currency_id:0
+#: field:sale.order,currency_id:0
+#: field:sale.order.line,currency_id:0
+msgid "Currency"
+msgstr "Currency"
+
+#. module: res_currency_functional
+#: view:account.move.line:0
+msgid "States"
+msgstr "States"
+
+#. module: res_currency_functional
+#: view:res.currency:0
+msgid "Active"
+msgstr "Active"
+
+#. module: res_currency_functional
+#: view:account.move.line:0
+msgid "Total Booking Debit"
+msgstr "Total Booking Debit"
+
+#. module: res_currency_functional
+#: code:addons/res_currency_functional/account_move_line_compute_currency.py:161
+#, python-format
+msgid "No \"MSF Private Fund\" found!"
+msgstr "No \"MSF Private Fund\" found!"
+
+#. module: res_currency_functional
+#: constraint:purchase.order:0
+msgid "If you tick the box \"cross docking\", you cannot have an other location than \"Cross docking\""
+msgstr "If you tick the box \"cross docking\", you cannot have an other location than \"Cross docking\""
+
+#. module: res_currency_functional
+#: field:purchase.order,functional_amount_untaxed:0
+#: field:sale.order,functional_amount_untaxed:0
+msgid "Functional Untaxed Amount"
+msgstr "Functional Untaxed Amount"
+
+#. module: res_currency_functional
+#: sql_constraint:res.currency.rate:0
+msgid "Only one rate per date is accorded."
+msgstr "Only one rate per date is accorded."
+
+#. module: res_currency_functional
+#: constraint:purchase.order:0
+msgid "You must specify a Valid Till date."
+msgstr "You must specify a Valid Till date."
+
+#. module: res_currency_functional
+#: model:ir.model,name:res_currency_functional.model_activate_currencies
+msgid "activate.currencies"
+msgstr "activate.currencies"
+

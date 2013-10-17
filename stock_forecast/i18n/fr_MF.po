@@ -1,0 +1,577 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* stock_forecast
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 07:42+0000\n"
+"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_forecast
+#: field:stock.forecast,product_uom_id:0
+#: report:stock.forecast.report:0
+msgid "Product UoM"
+msgstr "Product UoM"
+
+#. module: stock_forecast
+#: field:stock.forecast.line,doc:0
+#: report:stock.forecast.report:0
+msgid "Doc"
+msgstr "Doc"
+
+#. module: stock_forecast
+#: selection:purchase.order.line,order_state:0
+#: selection:stock.forecast.line,state:0
+msgid "Draft"
+msgstr "Draft"
+
+#. module: stock_forecast
+#: field:stock.forecast.line,wizard_id:0
+msgid "Wizard"
+msgstr "Wizard"
+
+#. module: stock_forecast
+#: code:addons/stock_forecast/wizard/stock_forecast.py:335
+#: code:addons/stock_forecast/wizard/stock_forecast.py:353
+#: model:ir.model,name:stock_forecast.model_stock_forecast
+#: model:ir.module.module,shortdesc:stock_forecast.module_meta_information
+#, python-format
+msgid "Stock Level Forecast"
+msgstr "Stock Level Forecast"
+
+#. module: stock_forecast
+#: selection:purchase.order.line,order_state:0
+#: selection:stock.forecast.line,state:0
+msgid "Validated"
+msgstr "Validated"
+
+#. module: stock_forecast
+#: selection:stock.move,picking_subtype:0
+msgid "Picking"
+msgstr "Picking"
+
+#. module: stock_forecast
+#: selection:stock.forecast.line,order_type:0
+msgid "Standard donation"
+msgstr "Standard donation"
+
+#. module: stock_forecast
+#: model:ir.model,name:stock_forecast.model_stock_forecast_line
+msgid "stock.forecast.line"
+msgstr "stock.forecast.line"
+
+#. module: stock_forecast
+#: selection:stock.forecast.line,first:0
+msgid "first"
+msgstr "first"
+
+#. module: stock_forecast
+#: view:stock.forecast:0
+msgid "Export"
+msgstr "Export"
+
+#. module: stock_forecast
+#: view:stock.forecast.line:0
+msgid "Stock Forecast Lines"
+msgstr "Stock Forecast Lines"
+
+#. module: stock_forecast
+#: sql_constraint:purchase.order.line:0
+msgid "Product Quantity must be greater than zero."
+msgstr "Product Quantity must be greater than zero."
+
+#. module: stock_forecast
+#: field:stock.forecast,stock_forecast_lines:0
+msgid "Stock Forecasts"
+msgstr "Stock Forecasts"
+
+#. module: stock_forecast
+#: field:stock.forecast,short_shelf_life:0
+#: report:stock.forecast.report:0
+msgid "Short Shelf Life"
+msgstr "Short Shelf Life"
+
+#. module: stock_forecast
+#: selection:stock.forecast.line,state:0
+msgid "Exception"
+msgstr "Exception"
+
+#. module: stock_forecast
+#: field:purchase.order.line,order_state:0
+msgid "Purchase Order State"
+msgstr "Purchase Order State"
+
+#. module: stock_forecast
+#: field:stock.forecast.line,state:0
+#: report:stock.forecast.report:0
+msgid "State"
+msgstr "State"
+
+#. module: stock_forecast
+#: selection:stock.forecast,supply_method:0
+msgid "Buy"
+msgstr "Buy"
+
+#. module: stock_forecast
+#: selection:stock.forecast,procurement_method:0
+msgid "Make to Stock"
+msgstr "Make to Stock"
+
+#. module: stock_forecast
+#: selection:stock.forecast.line,state:0
+msgid "Waiting Schedule"
+msgstr "Waiting Schedule"
+
+#. module: stock_forecast
+#: selection:stock.forecast.line,state:0
+msgid "Available Shipped"
+msgstr "Available Shipped"
+
+#. module: stock_forecast
+#: view:stock.forecast.export:0
+msgid "Forecast List Export"
+msgstr "Forecast List Export"
+
+#. module: stock_forecast
+#: selection:purchase.order.line,order_state:0
+#: selection:stock.forecast.line,state:0
+msgid "Sent"
+msgstr "Sent"
+
+#. module: stock_forecast
+#: field:stock.forecast,procurement_method:0
+#: report:stock.forecast.report:0
+msgid "Procurement Method"
+msgstr "Procurement Method"
+
+#. module: stock_forecast
+#: field:stock.move,picking_subtype:0
+msgid "Picking Subtype"
+msgstr "Picking Subtype"
+
+#. module: stock_forecast
+#: selection:stock.forecast.line,state:0
+msgid "Split"
+msgstr "Split"
+
+#. module: stock_forecast
+#: field:stock.forecast.line,stock_situation:0
+#: report:stock.forecast.report:0
+msgid "Stock Situation"
+msgstr "Stock Situation"
+
+#. module: stock_forecast
+#: view:stock.forecast:0
+msgid "Graph"
+msgstr "Graph"
+
+#. module: stock_forecast
+#: selection:stock.forecast.line,state:0
+msgid "Ready"
+msgstr "Ready"
+
+#. module: stock_forecast
+#: code:addons/stock_forecast/wizard/stock_forecast.py:399
+#, python-format
+msgid "You must select a product"
+msgstr "You must select a product"
+
+#. module: stock_forecast
+#: report:stock.forecast.report:0
+msgid "CODE"
+msgstr "CODE"
+
+#. module: stock_forecast
+#: constraint:stock.move:0
+msgid "You try to assign a lot which is not from the same product"
+msgstr "You try to assign a lot which is not from the same product"
+
+#. module: stock_forecast
+#: model:ir.model,name:stock_forecast.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Purchase Order Line"
+
+#. module: stock_forecast
+#: code:addons/stock_forecast/wizard/stock_forecast_export.py:83
+#, python-format
+msgid "The forecast does not contain any moves."
+msgstr "The forecast does not contain any moves."
+
+#. module: stock_forecast
+#: code:addons/stock_forecast/wizard/stock_forecast.py:300
+#, python-format
+msgid "Your search did not match with any moves"
+msgstr "Your search did not match with any moves"
+
+#. module: stock_forecast
+#: selection:stock.forecast.line,order_type:0
+msgid "In Kind Donation"
+msgstr "In Kind Donation"
+
+#. module: stock_forecast
+#: model:ir.module.module,description:stock_forecast.module_meta_information
+msgid "\n"
+"    Add stock level forecast wizard\n"
+"    "
+msgstr "\n"
+"    Add stock level forecast wizard\n"
+"    "
+
+#. module: stock_forecast
+#: field:stock.forecast.line,order_type:0
+#: report:stock.forecast.report:0
+msgid "Order Type"
+msgstr "Order Type"
+
+#. module: stock_forecast
+#: field:stock.forecast,product_family_id:0
+#: field:stock.forecast,product_family_info_id:0
+#: report:stock.forecast.report:0
+msgid "Product Family"
+msgstr "Product Family"
+
+#. module: stock_forecast
+#: selection:stock.forecast.line,state:0
+msgid "Import in progress"
+msgstr "Import in progress"
+
+#. module: stock_forecast
+#: view:stock.forecast.line:0
+msgid "Forecasts"
+msgstr "Forecasts"
+
+#. module: stock_forecast
+#: field:stock.forecast,justification_code_id:0
+#: report:stock.forecast.report:0
+msgid "Justification Code"
+msgstr "Justification Code"
+
+#. module: stock_forecast
+#: selection:stock.forecast.line,state:0
+msgid "Waiting"
+msgstr "Waiting"
+
+#. module: stock_forecast
+#: constraint:stock.move:0
+msgid "You cannot select Service Location as Source Location."
+msgstr "You cannot select Service Location as Source Location."
+
+#. module: stock_forecast
+#: view:stock.forecast:0
+msgid "Procurement"
+msgstr "Procurement"
+
+#. module: stock_forecast
+#: selection:stock.forecast,supply_method:0
+msgid "Produce"
+msgstr "Produce"
+
+#. module: stock_forecast
+#: field:stock.forecast.line,first:0
+msgid "First"
+msgstr "First"
+
+#. module: stock_forecast
+#: constraint:stock.move:0
+msgid "Constraint error on Uom"
+msgstr "Constraint error on Uom"
+
+#. module: stock_forecast
+#: selection:stock.forecast.line,state:0
+msgid "Converted"
+msgstr "Converted"
+
+#. module: stock_forecast
+#: view:stock.forecast:0
+msgid "Specific Information"
+msgstr "Specific Information"
+
+#. module: stock_forecast
+#: view:stock.forecast:0
+msgid "Refresh Forecast"
+msgstr "Refresh Forecast"
+
+#. module: stock_forecast
+#: field:stock.forecast.line,date:0
+#: report:stock.forecast.report:0
+msgid "Date"
+msgstr "Date"
+
+#. module: stock_forecast
+#: code:addons/stock_forecast/wizard/stock_forecast.py:257
+#: code:addons/stock_forecast/wizard/stock_forecast.py:300
+#: code:addons/stock_forecast/wizard/stock_forecast.py:399
+#: code:addons/stock_forecast/wizard/stock_forecast_export.py:83
+#, python-format
+msgid "Warning !"
+msgstr "Warning !"
+
+#. module: stock_forecast
+#: constraint:stock.move:0
+msgid "You must assign a batch number for this product."
+msgstr "You must assign a batch number for this product."
+
+#. module: stock_forecast
+#: selection:stock.forecast.line,order_type:0
+msgid "Regular"
+msgstr "Regular"
+
+#. module: stock_forecast
+#: model:ir.actions.server,name:stock_forecast.action_stock_forecast
+msgid "Stock Level Forecast (List)"
+msgstr "Stock Level Forecast (List)"
+
+#. module: stock_forecast
+#: view:stock.forecast.export:0
+#: field:stock.forecast.export,message:0
+msgid "Message"
+msgstr "Message"
+
+#. module: stock_forecast
+#: selection:purchase.order.line,order_state:0
+#: selection:stock.forecast.line,state:0
+msgid "Receipt Exception"
+msgstr "Receipt Exception"
+
+#. module: stock_forecast
+#: selection:stock.forecast.line,first:0
+msgid "end"
+msgstr "end"
+
+#. module: stock_forecast
+#: selection:stock.forecast.line,state:0
+msgid "Comparison"
+msgstr "Comparison"
+
+#. module: stock_forecast
+#: field:stock.forecast.export,list_id:0
+msgid "List"
+msgstr "List"
+
+#. module: stock_forecast
+#: field:stock.forecast.line,reference:0
+msgid "Reference"
+msgstr "Reference"
+
+#. module: stock_forecast
+#: selection:stock.forecast.line,order_type:0
+msgid "Purchase List"
+msgstr "Purchase List"
+
+#. module: stock_forecast
+#: selection:purchase.order.line,order_state:0
+#: selection:stock.forecast.line,state:0
+msgid "Cancelled"
+msgstr "Cancelled"
+
+#. module: stock_forecast
+#: view:stock.forecast:0
+msgid "Print"
+msgstr "Print"
+
+#. module: stock_forecast
+#: model:ir.actions.server,name:stock_forecast.action_stock_forecast_export_view
+msgid "Export Forecast List"
+msgstr "Export Forecast List"
+
+#. module: stock_forecast
+#: selection:stock.move,picking_subtype:0
+msgid "Packing"
+msgstr "Packing"
+
+#. module: stock_forecast
+#: constraint:stock.move:0
+msgid "You must assign an asset for this product."
+msgstr "You must assign an asset for this product."
+
+#. module: stock_forecast
+#: selection:stock.forecast.line,order_type:0
+msgid "Donation before expiry"
+msgstr "Donation before expiry"
+
+#. module: stock_forecast
+#: selection:stock.forecast.line,order_type:0
+msgid "Loan"
+msgstr "Loan"
+
+#. module: stock_forecast
+#: constraint:stock.move:0
+msgid "Wrong reason type for an OUT created from scratch."
+msgstr "Wrong reason type for an OUT created from scratch."
+
+#. module: stock_forecast
+#: field:stock.forecast,supply_method:0
+#: report:stock.forecast.report:0
+msgid "Supply Method"
+msgstr "Supply Method"
+
+#. module: stock_forecast
+#: code:addons/stock_forecast/wizard/stock_forecast.py:257
+#, python-format
+msgid "No product selected."
+msgstr "No product selected."
+
+#. module: stock_forecast
+#: report:stock.forecast.report:0
+msgid "Product Description"
+msgstr "Product Description"
+
+#. module: stock_forecast
+#: selection:purchase.order.line,order_state:0
+#: selection:stock.forecast.line,state:0
+msgid "Updated"
+msgstr "Updated"
+
+#. module: stock_forecast
+#: selection:stock.forecast.line,state:0
+msgid "Available"
+msgstr "Available"
+
+#. module: stock_forecast
+#: view:stock.forecast.export:0
+msgid "File to download"
+msgstr "File to download"
+
+#. module: stock_forecast
+#: selection:stock.forecast.line,state:0
+msgid "Confirmed (waiting)"
+msgstr "Confirmed (waiting)"
+
+#. module: stock_forecast
+#: selection:stock.forecast,procurement_method:0
+msgid "Make to Order"
+msgstr "Make to Order"
+
+#. module: stock_forecast
+#: view:stock.forecast:0
+#: report:stock.forecast.report:0
+msgid "Stock Forecast"
+msgstr "Stock Forecast"
+
+#. module: stock_forecast
+#: selection:stock.forecast.line,state:0
+msgid "Shipping Exception"
+msgstr "Shipping Exception"
+
+#. module: stock_forecast
+#: selection:stock.forecast.line,state:0
+msgid "Tender"
+msgstr "Tender"
+
+#. module: stock_forecast
+#: selection:purchase.order.line,order_state:0
+#: selection:stock.forecast.line,state:0
+msgid "Confirmed"
+msgstr "Confirmed"
+
+#. module: stock_forecast
+#: selection:purchase.order.line,order_state:0
+#: selection:stock.forecast.line,state:0
+msgid "Invoice Exception"
+msgstr "Invoice Exception"
+
+#. module: stock_forecast
+#: view:stock.forecast:0
+msgid "Close Wizard"
+msgstr "Close Wizard"
+
+#. module: stock_forecast
+#: selection:stock.forecast.line,state:0
+msgid "Sourced"
+msgstr "Sourced"
+
+#. module: stock_forecast
+#: field:stock.forecast.export,filename:0
+msgid "Filename"
+msgstr "Filename"
+
+#. module: stock_forecast
+#: model:ir.actions.report.xml,name:stock_forecast.stock_forecast_report
+msgid "Stock Forecast Report"
+msgstr "Stock Forecast Report"
+
+#. module: stock_forecast
+#: selection:purchase.order.line,order_state:0
+msgid "Wait"
+msgstr "Wait"
+
+#. module: stock_forecast
+#: field:stock.forecast.line,origin:0
+msgid "Origin"
+msgstr "Origin"
+
+#. module: stock_forecast
+#: model:ir.model,name:stock_forecast.model_stock_move
+msgid "Stock Move"
+msgstr "Stock Move"
+
+#. module: stock_forecast
+#: selection:stock.forecast.line,order_type:0
+msgid "Direct Purchase Order"
+msgstr "Direct Purchase Order"
+
+#. module: stock_forecast
+#: selection:stock.move,picking_subtype:0
+msgid "PPL"
+msgstr "PPL"
+
+#. module: stock_forecast
+#: field:stock.forecast,warehouse_id:0
+#: report:stock.forecast.report:0
+msgid "Warehouse"
+msgstr "Warehouse"
+
+#. module: stock_forecast
+#: field:stock.forecast,keep_cool:0
+#: report:stock.forecast.report:0
+msgid "Keep Cool"
+msgstr "Keep Cool"
+
+#. module: stock_forecast
+#: field:stock.forecast,product_id:0
+#: report:stock.forecast.report:0
+msgid "Product"
+msgstr "Product"
+
+#. module: stock_forecast
+#: selection:purchase.order.line,order_state:0
+#: selection:stock.forecast.line,state:0
+msgid "Closed"
+msgstr "Closed"
+
+#. module: stock_forecast
+#: field:stock.forecast,dangerous_goods:0
+#: report:stock.forecast.report:0
+msgid "Dangerous Goods"
+msgstr "Dangerous Goods"
+
+#. module: stock_forecast
+#: field:stock.forecast.export,file:0
+msgid "File to export"
+msgstr "File to export"
+
+#. module: stock_forecast
+#: report:stock.forecast.report:0
+msgid "Product Code"
+msgstr "Product Code"
+
+#. module: stock_forecast
+#: model:ir.model,name:stock_forecast.model_stock_forecast_export
+msgid "Export of the forecast list"
+msgstr "Export of the forecast list"
+
+#. module: stock_forecast
+#: field:stock.forecast,qty:0
+#: field:stock.forecast.line,qty:0
+#: report:stock.forecast.report:0
+msgid "Quantity"
+msgstr "Quantity"
+

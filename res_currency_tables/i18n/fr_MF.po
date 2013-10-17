@@ -1,0 +1,441 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* res_currency_tables
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 07:42+0000\n"
+"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: res_currency_tables
+#: model:ir.model,name:res_currency_tables.model_wizard_report_rates_table
+msgid "wizard.report.rates.table"
+msgstr "wizard.report.rates.table"
+
+#. module: res_currency_tables
+#: code:addons/res_currency_tables/res_currency_table.py:51
+#: code:addons/res_currency_tables/wizard/import_currencies.py:60
+#: code:addons/res_currency_tables/wizard/import_currencies.py:68
+#: code:addons/res_currency_tables/wizard/import_table_currencies.py:84
+#, python-format
+msgid "Error"
+msgstr "Error"
+
+#. module: res_currency_tables
+#: constraint:res.currency.table:0
+msgid "You cannot have the same code or name between currency tables!"
+msgstr "You cannot have the same code or name between currency tables!"
+
+#. module: res_currency_tables
+#: code:addons/res_currency_tables/wizard/warning_import_currencies.py:55
+#, python-format
+msgid "Currency %s not found!"
+msgstr "Currency %s not found!"
+
+#. module: res_currency_tables
+#: view:res.currency.table:0
+msgid "Validate"
+msgstr "Validate"
+
+#. module: res_currency_tables
+#: model:ir.model,name:res_currency_tables.model_confirm_import_currencies
+msgid "confirm.import.currencies"
+msgstr "confirm.import.currencies"
+
+#. module: res_currency_tables
+#: selection:res.currency.table,state:0
+msgid "Draft"
+msgstr "Draft"
+
+#. module: res_currency_tables
+#: model:ir.model,name:res_currency_tables.model_import_currencies
+msgid "import.currencies"
+msgstr "import.currencies"
+
+#. module: res_currency_tables
+#: view:res.currency.table:0
+msgid "Close"
+msgstr "Close"
+
+#. module: res_currency_tables
+#: field:res.currency.table,name:0
+msgid "Currency table name"
+msgstr "Currency table name"
+
+#. module: res_currency_tables
+#: field:warning.import.currencies,date:0
+msgid "Date"
+msgstr "Date"
+
+#. module: res_currency_tables
+#: field:warning.import.currencies.lines,wizard_id:0
+msgid "Wizard"
+msgstr "Wizard"
+
+#. module: res_currency_tables
+#: view:import.currencies:0
+#: view:import.table.currencies:0
+#: model:ir.actions.act_window,name:res_currency_tables.action_import_main_currencies
+#: model:ir.actions.act_window,name:res_currency_tables.action_import_table_currencies
+#: model:ir.ui.menu,name:res_currency_tables.menu_action_import_main_currencies
+msgid "Import Currencies"
+msgstr "Import Currencies"
+
+#. module: res_currency_tables
+#: field:wizard.report.currency.table,currency_table_ids:0
+msgid "Currency tables"
+msgstr "Currency tables"
+
+#. module: res_currency_tables
+#: code:addons/res_currency_tables/wizard/wizard_report_currency_table.py:45
+#: code:addons/res_currency_tables/wizard/wizard_report_rates_table.py:50
+#, python-format
+msgid "You cannot select a start period starting after the end period!"
+msgstr "You cannot select a start period starting after the end period!"
+
+#. module: res_currency_tables
+#: code:addons/res_currency_tables/wizard/import_currencies.py:46
+#: code:addons/res_currency_tables/wizard/import_currencies.py:50
+#, python-format
+msgid "Error !"
+msgstr "Error !"
+
+#. module: res_currency_tables
+#: view:res.currency.table:0
+msgid "Price Accuracy"
+msgstr "Price Accuracy"
+
+#. module: res_currency_tables
+#: field:wizard.report.currency.table,start_period_id:0
+#: field:wizard.report.rates.table,start_period_id:0
+msgid "Start period"
+msgstr "Start period"
+
+#. module: res_currency_tables
+#: code:addons/res_currency_tables/wizard/import_currencies.py:60
+#: code:addons/res_currency_tables/wizard/import_currencies.py:61
+#, python-format
+msgid "Missing argument"
+msgstr "Missing argument"
+
+#. module: res_currency_tables
+#: field:res.currency,currency_table_id:0
+#: view:res.currency.table:0
+msgid "Currency Table"
+msgstr "Currency Table"
+
+#. module: res_currency_tables
+#: selection:res.currency.table,state:0
+msgid "Valid"
+msgstr "Valid"
+
+#. module: res_currency_tables
+#: model:ir.actions.act_window,name:res_currency_tables.action_report_rates_table_menu
+#: model:ir.actions.report.xml,name:res_currency_tables.rates_table_xls
+#: view:wizard.report.rates.table:0
+msgid "FX rates by currency table"
+msgstr "FX rates by currency table"
+
+#. module: res_currency_tables
+#: code:addons/res_currency_tables/res_currency.py:202
+#, python-format
+msgid "The currency you want to %s is currently used on at least one partner form."
+msgstr "The currency you want to %s is currently used on at least one partner form."
+
+#. module: res_currency_tables
+#: view:warning.import.currencies:0
+msgid "Piece of information"
+msgstr "Piece of information"
+
+#. module: res_currency_tables
+#: field:res.currency,reference_currency_id:0
+msgid "Reference Currency"
+msgstr "Reference Currency"
+
+#. module: res_currency_tables
+#: view:res.currency.table:0
+#: field:res.currency.table,currency_ids:0
+msgid "Currencies"
+msgstr "Currencies"
+
+#. module: res_currency_tables
+#: model:ir.model,name:res_currency_tables.model_warning_import_currencies
+msgid "warning.import.currencies"
+msgstr "warning.import.currencies"
+
+#. module: res_currency_tables
+#: model:ir.model,name:res_currency_tables.model_res_currency_table
+msgid "res.currency.table"
+msgstr "res.currency.table"
+
+#. module: res_currency_tables
+#: code:addons/res_currency_tables/wizard/import_currencies.py:69
+#, python-format
+msgid "Undefined"
+msgstr "Undefined"
+
+#. module: res_currency_tables
+#: code:addons/res_currency_tables/wizard/import_currencies.py:68
+#, python-format
+msgid "The currency %s is not defined!"
+msgstr "The currency %s is not defined!"
+
+#. module: res_currency_tables
+#: field:warning.import.currencies,currency_list:0
+msgid "Currency list"
+msgstr "Currency list"
+
+#. module: res_currency_tables
+#: code:addons/res_currency_tables/wizard/import_currencies.py:46
+#, python-format
+msgid "No period defined for this date: %s !\n"
+"Please create a fiscal year."
+msgstr "No period defined for this date: %s !\n"
+"Please create a fiscal year."
+
+#. module: res_currency_tables
+#: constraint:res.currency:0
+msgid "No rate is set. Please set one before activating the currency. "
+msgstr "No rate is set. Please set one before activating the currency. "
+
+#. module: res_currency_tables
+#: code:addons/res_currency_tables/wizard/import_currencies.py:50
+#, python-format
+msgid "Period %s is closed !\n"
+"No rates can be set for it."
+msgstr "Period %s is closed !\n"
+"No rates can be set for it."
+
+#. module: res_currency_tables
+#: model:ir.model,name:res_currency_tables.model_res_currency
+#: view:res.currency.table:0
+#: field:wizard.report.currency.table,currency_id:0
+msgid "Currency"
+msgstr "Currency"
+
+#. module: res_currency_tables
+#: view:res.currency.table:0
+msgid "Rates"
+msgstr "Rates"
+
+#. module: res_currency_tables
+#: view:confirm.import.currencies:0
+msgid "Currencies Imported"
+msgstr "Currencies Imported"
+
+#. module: res_currency_tables
+#: field:warning.import.currencies.lines,rate:0
+msgid "Rate"
+msgstr "Rate"
+
+#. module: res_currency_tables
+#: field:import.currencies,rate_date:0
+#: field:import.table.currencies,rate_date:0
+msgid "Date for the uploaded rates"
+msgstr "Date for the uploaded rates"
+
+#. module: res_currency_tables
+#: field:import.currencies,import_file:0
+#: field:import.table.currencies,import_file:0
+msgid "CSV File"
+msgstr "CSV File"
+
+#. module: res_currency_tables
+#: model:ir.actions.act_window,name:res_currency_tables.action_currency_table_form
+#: model:ir.ui.menu,name:res_currency_tables.menu_action_currency_table_form
+#: view:res.currency.table:0
+msgid "Currency Tables"
+msgstr "Currency Tables"
+
+#. module: res_currency_tables
+#: model:ir.model,name:res_currency_tables.model_warning_import_currencies_lines
+msgid "warning.import.currencies.lines"
+msgstr "warning.import.currencies.lines"
+
+#. module: res_currency_tables
+#: view:wizard.report.currency.table:0
+#: view:wizard.report.rates.table:0
+msgid "Create report"
+msgstr "Create report"
+
+#. module: res_currency_tables
+#: model:ir.model,name:res_currency_tables.model_wizard_report_currency_table
+msgid "wizard.report.currency.table"
+msgstr "wizard.report.currency.table"
+
+#. module: res_currency_tables
+#: code:addons/res_currency_tables/wizard/import_currencies.py:104
+#: code:addons/res_currency_tables/wizard/import_table_currencies.py:54
+#, python-format
+msgid "File is empty."
+msgstr "File is empty."
+
+#. module: res_currency_tables
+#: code:addons/res_currency_tables/res_currency.py:206
+#, python-format
+msgid "The currency you want to %s is currently used on at least one sale order or purchase order."
+msgstr "The currency you want to %s is currently used on at least one sale order or purchase order."
+
+#. module: res_currency_tables
+#: model:ir.module.module,shortdesc:res_currency_tables.module_meta_information
+msgid "Fx Tables Management"
+msgstr "Fx Tables Management"
+
+#. module: res_currency_tables
+#: view:wizard.report.currency.table:0
+#: view:wizard.report.rates.table:0
+msgid "No"
+msgstr "No"
+
+#. module: res_currency_tables
+#: view:warning.import.currencies:0
+msgid "You are trying to import FX rates already defined in the system at the date specified; do you want to proceed?"
+msgstr "You are trying to import FX rates already defined in the system at the date specified; do you want to proceed?"
+
+#. module: res_currency_tables
+#: code:addons/res_currency_tables/res_currency_table.py:51
+#, python-format
+msgid "A currency has an invalid rate! Please set a rate before validation."
+msgstr "A currency has an invalid rate! Please set a rate before validation."
+
+#. module: res_currency_tables
+#: field:res.currency.table,code:0
+msgid "Currency table code"
+msgstr "Currency table code"
+
+#. module: res_currency_tables
+#: code:addons/res_currency_tables/wizard/import_currencies.py:104
+#: code:addons/res_currency_tables/wizard/import_table_currencies.py:54
+#: code:addons/res_currency_tables/wizard/warning_import_currencies.py:55
+#: code:addons/res_currency_tables/wizard/wizard_report_currency_table.py:45
+#: code:addons/res_currency_tables/wizard/wizard_report_rates_table.py:50
+#, python-format
+msgid "Warning"
+msgstr "Warning"
+
+#. module: res_currency_tables
+#: field:res.currency.table,state:0
+msgid "State"
+msgstr "State"
+
+#. module: res_currency_tables
+#: view:confirm.import.currencies:0
+#: view:warning.import.currencies:0
+msgid "OK"
+msgstr "OK"
+
+#. module: res_currency_tables
+#: field:warning.import.currencies.lines,code:0
+msgid "Code"
+msgstr "Code"
+
+#. module: res_currency_tables
+#: field:wizard.report.currency.table,end_period_id:0
+#: field:wizard.report.rates.table,end_period_id:0
+msgid "End period"
+msgstr "End period"
+
+#. module: res_currency_tables
+#: selection:res.currency.table,state:0
+msgid "Closed"
+msgstr "Closed"
+
+#. module: res_currency_tables
+#: constraint:res.currency:0
+msgid "Same currency exists"
+msgstr "Same currency exists"
+
+#. module: res_currency_tables
+#: code:addons/res_currency_tables/wizard/import_currencies.py:79
+#, python-format
+msgid "No date at the first day of this month."
+msgstr "No date at the first day of this month."
+
+#. module: res_currency_tables
+#: constraint:res.currency:0
+msgid "Another currency have the same name."
+msgstr "Another currency have the same name."
+
+#. module: res_currency_tables
+#: code:addons/res_currency_tables/wizard/import_currencies.py:83
+#, python-format
+msgid "Already exists at this date."
+msgstr "Already exists at this date."
+
+#. module: res_currency_tables
+#: code:addons/res_currency_tables/res_currency.py:223
+#, python-format
+msgid "The currency cannot be deleted as one or more journal items are currently using it!"
+msgstr "The currency cannot be deleted as one or more journal items are currently using it!"
+
+#. module: res_currency_tables
+#: model:ir.actions.act_window,name:res_currency_tables.action_report_currency_table_menu
+#: model:ir.actions.report.xml,name:res_currency_tables.currency_table_xls
+#: model:ir.ui.menu,name:res_currency_tables.menu_action_report_currency_table_form
+#: view:wizard.report.currency.table:0
+msgid "FX rates by currency"
+msgstr "FX rates by currency"
+
+#. module: res_currency_tables
+#: model:ir.model,name:res_currency_tables.model_import_table_currencies
+msgid "import.table.currencies"
+msgstr "import.table.currencies"
+
+#. module: res_currency_tables
+#: view:import.currencies:0
+#: view:import.table.currencies:0
+msgid "Import"
+msgstr "Import"
+
+#. module: res_currency_tables
+#: view:import.currencies:0
+#: view:import.table.currencies:0
+#: view:warning.import.currencies:0
+msgid "Cancel"
+msgstr "Cancel"
+
+#. module: res_currency_tables
+#: code:addons/res_currency_tables/res_currency.py:202
+#: code:addons/res_currency_tables/res_currency.py:206
+#: code:addons/res_currency_tables/res_currency.py:223
+#, python-format
+msgid "Currency currently used !"
+msgstr "Currency currently used !"
+
+#. module: res_currency_tables
+#: sql_constraint:res.currency:0
+msgid "The currency name exists already in the system!"
+msgstr "The currency name exists already in the system!"
+
+#. module: res_currency_tables
+#: view:confirm.import.currencies:0
+msgid "The FX rates have been correctly uploaded."
+msgstr "The FX rates have been correctly uploaded."
+
+#. module: res_currency_tables
+#: model:ir.module.module,description:res_currency_tables.module_meta_information
+msgid "\n"
+"    This module aims to have other subsets of currencies, and have them available\n"
+"    for financing contracts and budgets.\n"
+"    \n"
+"    "
+msgstr "\n"
+"    This module aims to have other subsets of currencies, and have them available\n"
+"    for financing contracts and budgets.\n"
+"    \n"
+"    "
+
+#. module: res_currency_tables
+#: code:addons/res_currency_tables/wizard/import_table_currencies.py:84
+#, python-format
+msgid "The currency %s is not defined in the main set!"
+msgstr "The currency %s is not defined in the main set!"
+

@@ -1,0 +1,275 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* account_subscription
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 07:42+0000\n"
+"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_subscription
+#: code:addons/account_subscription/account_model.py:326
+#, python-format
+msgid "Global analytic distribution"
+msgstr "Global analytic distribution"
+
+#. module: account_subscription
+#: code:addons/account_subscription/account_model.py:137
+#, python-format
+msgid "No model line given. Please save your model line before."
+msgstr "No model line given. Please save your model line before."
+
+#. module: account_subscription
+#: view:account.subscription:0
+msgid "Frequency"
+msgstr "Frequency"
+
+#. module: account_subscription
+#: code:addons/account_subscription/account_model.py:94
+#, python-format
+msgid " (from header)"
+msgstr " (from header)"
+
+#. module: account_subscription
+#: sql_constraint:account.move.line:0
+msgid "Wrong credit or debit value in accounting entry !"
+msgstr "Wrong credit or debit value in accounting entry !"
+
+#. module: account_subscription
+#: code:addons/account_subscription/account_model.py:246
+#, python-format
+msgid "You have to define an analytic journal on the '%s' journal!"
+msgstr "You have to define an analytic journal on the '%s' journal!"
+
+#. module: account_subscription
+#: model:ir.model,name:account_subscription.model_account_model_line
+msgid "Account Model Entries"
+msgstr "Account Model Entries"
+
+#. module: account_subscription
+#: help:account.model.line,analytic_distribution_state:0
+msgid "Informs from distribution state among 'none', 'valid', 'invalid."
+msgstr "Informs from distribution state among 'none', 'valid', 'invalid."
+
+#. module: account_subscription
+#: model:ir.actions.act_window,name:account_subscription.act_account_subscription_to_account_move_line_open
+msgid "Recurring Entries To Validate"
+msgstr "Recurring Entries To Validate"
+
+#. module: account_subscription
+#: model:ir.model,name:account_subscription.model_account_move_line
+msgid "Journal Items"
+msgstr "Journal Items"
+
+#. module: account_subscription
+#: sql_constraint:account.model.line:0
+msgid "Wrong credit or debit value in model (Credit + Debit Must Be greater \"0\")!"
+msgstr "Wrong credit or debit value in model (Credit + Debit Must Be greater \"0\")!"
+
+#. module: account_subscription
+#: field:account.model,analytic_distribution_id:0
+#: field:account.model.line,analytic_distribution_id:0
+msgid "Analytic Distribution"
+msgstr "Analytic Distribution"
+
+#. module: account_subscription
+#: field:account.move.line,is_recurring:0
+msgid "Comes from a recurring entry"
+msgstr "Comes from a recurring entry"
+
+#. module: account_subscription
+#: field:account.model.line,have_analytic_distribution_from_header:0
+msgid "Header Distrib.?"
+msgstr "Header Distrib.?"
+
+#. module: account_subscription
+#: selection:account.model.line,analytic_distribution_state:0
+msgid "Valid"
+msgstr "Valid"
+
+#. module: account_subscription
+#: model:ir.model,name:account_subscription.model_account_model
+msgid "Account Model"
+msgstr "Account Model"
+
+#. module: account_subscription
+#: constraint:account.move.line:0
+msgid "Company must be same for its related account and period."
+msgstr "Company must be same for its related account and period."
+
+#. module: account_subscription
+#: help:account.model.line,analytic_distribution_state_recap:0
+msgid "Informs you about analaytic distribution state among 'none', 'valid', 'invalid', from header or not, or no analytic distribution"
+msgstr "Informs you about analaytic distribution state among 'none', 'valid', 'invalid', from header or not, or no analytic distribution"
+
+#. module: account_subscription
+#: selection:account.model.line,analytic_distribution_state:0
+msgid "Invalid"
+msgstr "Invalid"
+
+#. module: account_subscription
+#: view:account.model:0
+msgid "Analytical Distribution"
+msgstr "Analytical Distribution"
+
+#. module: account_subscription
+#: code:addons/account_subscription/account_use_model.py:37
+#, python-format
+msgid "Warning"
+msgstr "Warning"
+
+#. module: account_subscription
+#: selection:account.model.line,analytic_distribution_state:0
+msgid "None"
+msgstr "None"
+
+#. module: account_subscription
+#: model:ir.model,name:account_subscription.model_account_subscription
+msgid "Account Subscription"
+msgstr "Account Subscription"
+
+#. module: account_subscription
+#: code:addons/account_subscription/account_model.py:224
+#, python-format
+msgid "No period found !"
+msgstr "No period found !"
+
+#. module: account_subscription
+#: field:account.model.line,analytic_distribution_state_recap:0
+msgid "Distribution"
+msgstr "Distribution"
+
+#. module: account_subscription
+#: view:account.model:0
+msgid "Journal Entry Model"
+msgstr "Journal Entry Model"
+
+#. module: account_subscription
+#: code:addons/account_subscription/account_model.py:244
+#, python-format
+msgid "Invalid Analytic Distribution !"
+msgstr "Invalid Analytic Distribution !"
+
+#. module: account_subscription
+#: code:addons/account_subscription/account_model.py:246
+#, python-format
+msgid "No Analytic Journal !"
+msgstr "No Analytic Journal !"
+
+#. module: account_subscription
+#: sql_constraint:account.model.line:0
+msgid "Wrong credit or debit value in model (Credit Or Debit Must Be \"0\")!"
+msgstr "Wrong credit or debit value in model (Credit Or Debit Must Be \"0\")!"
+
+#. module: account_subscription
+#: code:addons/account_subscription/account_model.py:257
+#, python-format
+msgid "Maturity date of entry line generated by model line '%s' of model '%s' is based on partner payment term!\n"
+"Please define partner on it!"
+msgstr "Maturity date of entry line generated by model line '%s' of model '%s' is based on partner payment term!\n"
+"Please define partner on it!"
+
+#. module: account_subscription
+#: view:account.subscription.line:0
+msgid "Subscription lines"
+msgstr "Subscription lines"
+
+#. module: account_subscription
+#: field:account.model.line,analytic_distribution_state:0
+msgid "Distribution state"
+msgstr "Distribution state"
+
+#. module: account_subscription
+#: field:account.model.line,is_allocatable:0
+msgid "Is allocatable?"
+msgstr "Is allocatable?"
+
+#. module: account_subscription
+#: view:account.subscription:0
+msgid "Valid Up to"
+msgstr "Valid Up to"
+
+#. module: account_subscription
+#: code:addons/account_subscription/account_use_model.py:37
+#, python-format
+msgid "Date is missing!"
+msgstr "Date is missing!"
+
+#. module: account_subscription
+#: model:ir.model,name:account_subscription.model_account_use_model
+msgid "Use model"
+msgstr "Use model"
+
+#. module: account_subscription
+#: code:addons/account_subscription/account_model.py:244
+#, python-format
+msgid "You have to define a valid analytic distribution on the '%s' line or header!"
+msgstr "You have to define a valid analytic distribution on the '%s' line or header!"
+
+#. module: account_subscription
+#: code:addons/account_subscription/account_model.py:257
+#, python-format
+msgid "Error !"
+msgstr "Error !"
+
+#. module: account_subscription
+#: constraint:account.move.line:0
+msgid "You can not create move line on closed account."
+msgstr "You can not create move line on closed account."
+
+#. module: account_subscription
+#: code:addons/account_subscription/account_model.py:137
+#, python-format
+msgid "Error"
+msgstr "Error"
+
+#. module: account_subscription
+#: field:account.model,currency_id:0
+msgid "Currency"
+msgstr "Currency"
+
+#. module: account_subscription
+#: code:addons/account_subscription/account_model.py:224
+#, python-format
+msgid "Unable to find a valid period !"
+msgstr "Unable to find a valid period !"
+
+#. module: account_subscription
+#: code:addons/account_subscription/account_model.py:165
+#, python-format
+msgid "Analytic distribution"
+msgstr "Analytic distribution"
+
+#. module: account_subscription
+#: model:ir.module.module,shortdesc:account_subscription.module_meta_information
+msgid "Recurring Entries for MSF"
+msgstr "Recurring Entries for MSF"
+
+#. module: account_subscription
+#: constraint:account.move.line:0
+msgid "You can not create move line on view account."
+msgstr "You can not create move line on view account."
+
+#. module: account_subscription
+#: model:ir.module.module,description:account_subscription.module_meta_information
+msgid "\n"
+"    This module adds analytic distribution and period checks to\n"
+"    the standard behavior of recurring entries.\n"
+"    Period checks are done in account_period_closing_level module.\n"
+"    \n"
+"    "
+msgstr "\n"
+"    This module adds analytic distribution and period checks to\n"
+"    the standard behavior of recurring entries.\n"
+"    Period checks are done in account_period_closing_level module.\n"
+"    \n"
+"    "
+

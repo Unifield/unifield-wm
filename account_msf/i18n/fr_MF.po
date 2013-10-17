@@ -1,0 +1,741 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* account_msf
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 07:42+0000\n"
+"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_msf
+#: view:account.invoice:0
+#: model:ir.model,name:account_msf.model_account_invoice_line
+msgid "Invoice Line"
+msgstr "Invoice Line"
+
+#. module: account_msf
+#: view:account.invoice:0
+msgid "Validate"
+msgstr "Validate"
+
+#. module: account_msf
+#: view:account.invoice:0
+msgid "Draft"
+msgstr "Draft"
+
+#. module: account_msf
+#: constraint:account.move.line:0
+msgid "You can not create move line on closed account."
+msgstr "You can not create move line on closed account."
+
+#. module: account_msf
+#: view:account.invoice:0
+msgid "Donation certificate"
+msgstr "Donation certificate"
+
+#. module: account_msf
+#: constraint:product.product:0
+msgid "Constraint error on Kit Product."
+msgstr "Constraint error on Kit Product."
+
+#. module: account_msf
+#: model:ir.model,name:account_msf.model_product_category
+msgid "Product Category"
+msgstr "Product Category"
+
+#. module: account_msf
+#: view:account.invoice:0
+msgid "Intermission Voucher Lines"
+msgstr "Intermission Voucher Lines"
+
+#. module: account_msf
+#: view:account.invoice:0
+msgid "Address"
+msgstr "Address"
+
+#. module: account_msf
+#: view:account.invoice:0
+msgid "Due Date"
+msgstr "Due Date"
+
+#. module: account_msf
+#: model:ir.actions.act_window,name:account_msf.action_inkind_donation
+#: model:ir.ui.menu,name:account_msf.menu_action_inkind_donation
+msgid "Donation"
+msgstr "Donation"
+
+#. module: account_msf
+#: constraint:account.invoice.line:0
+msgid "Constraint error on Uom"
+msgstr "Constraint error on Uom"
+
+#. module: account_msf
+#: field:account.invoice,is_inkind_donation:0
+msgid "Is an In-kind Donation?"
+msgstr "Is an In-kind Donation?"
+
+#. module: account_msf
+#: code:addons/account_msf/wizard/import_invoice.py:49
+#, python-format
+msgid "Warning"
+msgstr "Warning"
+
+#. module: account_msf
+#: view:account.invoice:0
+msgid "Import invoice"
+msgstr "Import invoice"
+
+#. module: account_msf
+#: code:addons/account_msf/stock.py:88
+#, python-format
+msgid "Partner of this incoming shipment has no account set. Please set appropriate accounts (receivable and payable) in order to process this IN"
+msgstr "Partner of this incoming shipment has no account set. Please set appropriate accounts (receivable and payable) in order to process this IN"
+
+#. module: account_msf
+#: view:account.invoice:0
+msgid "Intermission Voucher"
+msgstr "Intermission Voucher"
+
+#. module: account_msf
+#: view:account.invoice:0
+msgid "Additional Information"
+msgstr "Additional Information"
+
+#. module: account_msf
+#: field:res.partner,donation_payable_account:0
+msgid "Donation Payable Account"
+msgstr "Donation Payable Account"
+
+#. module: account_msf
+#: view:debit.note.import.invoice:0
+msgid "Debit Note Import Invoice Wizard"
+msgstr "Debit Note Import Invoice Wizard"
+
+#. module: account_msf
+#: view:account.invoice:0
+msgid "Posting Date"
+msgstr "Posting Date"
+
+#. module: account_msf
+#: sql_constraint:purchase.order:0
+msgid "Order Reference must be unique !"
+msgstr "Order Reference must be unique !"
+
+#. module: account_msf
+#: view:ir.attachment:0
+msgid "Company"
+msgstr "Company"
+
+#. module: account_msf
+#: model:ir.module.module,shortdesc:account_msf.module_meta_information
+msgid "Accounting for MSF"
+msgstr "Accounting for MSF"
+
+#. module: account_msf
+#: model:ir.model,name:account_msf.model_debit_note_import_invoice
+msgid "Debit Note Import Invoice"
+msgstr "Debit Note Import Invoice"
+
+#. module: account_msf
+#: view:account.invoice:0
+msgid "Print Intermission Voucher"
+msgstr "Print Intermission Voucher"
+
+#. module: account_msf
+#: constraint:purchase.order:0
+msgid "You must specify a Valid Till date."
+msgstr "You must specify a Valid Till date."
+
+#. module: account_msf
+#: field:account.invoice,have_donation_certificate:0
+msgid "Have a Certificate of donation?"
+msgstr "Have a Certificate of donation?"
+
+#. module: account_msf
+#: view:account.invoice:0
+msgid "UOM"
+msgstr "UOM"
+
+#. module: account_msf
+#: code:addons/account_msf/stock.py:79
+#, python-format
+msgid "No In-kind donation journal found!"
+msgstr "No In-kind donation journal found!"
+
+#. module: account_msf
+#: view:account.invoice:0
+msgid "Re-Open"
+msgstr "Re-Open"
+
+#. module: account_msf
+#: view:account.invoice:0
+msgid "Note"
+msgstr "Note"
+
+#. module: account_msf
+#: field:account.move.line,invoice_partner_link:0
+msgid "Invoice partner link"
+msgstr "Invoice partner link"
+
+#. module: account_msf
+#: view:purchase.order:0
+msgid "Confirm"
+msgstr "Confirm"
+
+#. module: account_msf
+#: view:account.invoice:0
+msgid "No Donation certificate"
+msgstr "No Donation certificate"
+
+#. module: account_msf
+#: view:account.invoice:0
+msgid "Stock Transfer Voucher"
+msgstr "Stock Transfer Voucher"
+
+#. module: account_msf
+#: view:account.invoice:0
+#: view:debit.note.import.invoice:0
+msgid "Cancel"
+msgstr "Cancel"
+
+#. module: account_msf
+#: view:ir.attachment:0
+msgid "URL"
+msgstr "URL"
+
+#. module: account_msf
+#: field:account.invoice,is_intermission:0
+msgid "Is an Intermission Voucher?"
+msgstr "Is an Intermission Voucher?"
+
+#. module: account_msf
+#: view:account.invoice:0
+msgid "Open"
+msgstr "Open"
+
+#. module: account_msf
+#: field:account.invoice,partner_move_line:0
+msgid "Partner move line"
+msgstr "Partner move line"
+
+#. module: account_msf
+#: view:account.invoice:0
+msgid "In-kind Donation"
+msgstr "In-kind Donation"
+
+#. module: account_msf
+#: model:ir.model,name:account_msf.model_purchase_order
+#: view:purchase.order:0
+msgid "Purchase Order"
+msgstr "Purchase Order"
+
+#. module: account_msf
+#: view:ir.attachment:0
+msgid "Attachments"
+msgstr "Attachments"
+
+#. module: account_msf
+#: constraint:product.product:0
+msgid "Warning! GMDN code must be digits!"
+msgstr "Warning! GMDN code must be digits!"
+
+#. module: account_msf
+#: view:account.invoice:0
+msgid "State"
+msgstr "State"
+
+#. module: account_msf
+#: field:res.company,intermission_default_counterpart:0
+msgid "Intermission counterpart"
+msgstr "Intermission counterpart"
+
+#. module: account_msf
+#: constraint:purchase.order:0
+msgid "If you tick the box \"cross docking\", you cannot have an other location than \"Cross docking\""
+msgstr "If you tick the box \"cross docking\", you cannot have an other location than \"Cross docking\""
+
+#. module: account_msf
+#: code:addons/account_msf/invoice.py:209
+#, python-format
+msgid "Please configure a default intermission account in Company configuration."
+msgstr "Please configure a default intermission account in Company configuration."
+
+#. module: account_msf
+#: field:account.invoice,ready_for_import_in_debit_note:0
+msgid "Can be imported as invoice in a debit note?"
+msgstr "Can be imported as invoice in a debit note?"
+
+#. module: account_msf
+#: view:account.invoice:0
+msgid "Do you confirm Donation received cancellation?"
+msgstr "Do you confirm Donation received cancellation?"
+
+#. module: account_msf
+#: view:account.invoice:0
+msgid "Partner address"
+msgstr "Partner address"
+
+#. module: account_msf
+#: sql_constraint:product.product:0
+msgid "The \"Product Code\" must be unique"
+msgstr "The \"Product Code\" must be unique"
+
+#. module: account_msf
+#: view:account.invoice:0
+#: model:ir.model,name:account_msf.model_account_invoice
+msgid "Invoice"
+msgstr "Invoice"
+
+#. module: account_msf
+#: help:account.move.line,invoice_partner_link:0
+msgid "This link implies this line come from the total of an invoice, directly from partner account."
+msgstr "This link implies this line come from the total of an invoice, directly from partner account."
+
+#. module: account_msf
+#: code:addons/account_msf/invoice.py:86
+#: code:addons/account_msf/invoice.py:209
+#: code:addons/account_msf/invoice.py:251
+#: code:addons/account_msf/stock.py:52
+#: code:addons/account_msf/stock.py:79
+#: code:addons/account_msf/stock.py:82
+#: code:addons/account_msf/stock.py:88
+#, python-format
+msgid "Error"
+msgstr "Error"
+
+#. module: account_msf
+#: view:account.invoice:0
+msgid "UoM"
+msgstr "UoM"
+
+#. module: account_msf
+#: view:purchase.order:0
+msgid "Order Date"
+msgstr "Order Date"
+
+#. module: account_msf
+#: view:account.invoice:0
+msgid "Other Info"
+msgstr "Other Info"
+
+#. module: account_msf
+#: field:account.invoice.line,import_invoice_id:0
+msgid "From an import invoice"
+msgstr "From an import invoice"
+
+#. module: account_msf
+#: view:debit.note.import.invoice:0
+msgid "Ok"
+msgstr "Ok"
+
+#. module: account_msf
+#: view:ir.attachment:0
+msgid "Notes"
+msgstr "Notes"
+
+#. module: account_msf
+#: view:ir.attachment:0
+msgid "Month"
+msgstr "Month"
+
+#. module: account_msf
+#: constraint:product.product:0
+msgid "You must select on order procurement method for Service with Reception products."
+msgstr "You must select on order procurement method for Service with Reception products."
+
+#. module: account_msf
+#: view:account.invoice:0
+msgid "Print Invoice"
+msgstr "Print Invoice"
+
+#. module: account_msf
+#: view:ir.attachment:0
+msgid "Data"
+msgstr "Data"
+
+#. module: account_msf
+#: view:account.invoice:0
+msgid "Donation Lines"
+msgstr "Donation Lines"
+
+#. module: account_msf
+#: help:res.company,intermission_default_counterpart:0
+msgid "Default account used for partner in Intermission Voucher IN/OUT"
+msgstr "Default account used for partner in Intermission Voucher IN/OUT"
+
+#. module: account_msf
+#: constraint:account.move.line:0
+msgid "Company must be same for its related account and period."
+msgstr "Company must be same for its related account and period."
+
+#. module: account_msf
+#: view:res.company:0
+#: field:res.company,import_invoice_default_account:0
+msgid "Re-billing Inter-section account"
+msgstr "Re-billing Inter-section account"
+
+#. module: account_msf
+#: constraint:res.company:0
+msgid "Error! You can not create recursive companies."
+msgstr "Error! You can not create recursive companies."
+
+#. module: account_msf
+#: model:ir.model,name:account_msf.model_res_company
+msgid "Companies"
+msgstr "Companies"
+
+#. module: account_msf
+#: model:ir.model,name:account_msf.model_account_move_line
+msgid "Journal Items"
+msgstr "Journal Items"
+
+#. module: account_msf
+#: view:purchase.order:0
+msgid "Total amount"
+msgstr "Total amount"
+
+#. module: account_msf
+#: view:ir.attachment:0
+msgid "Attachment"
+msgstr "Attachment"
+
+#. module: account_msf
+#: view:res.company:0
+msgid "Configuration"
+msgstr "Configuration"
+
+#. module: account_msf
+#: view:account.invoice:0
+msgid "Print Donation"
+msgstr "Print Donation"
+
+#. module: account_msf
+#: view:board.board:0
+msgid "Account Board"
+msgstr "Account Board"
+
+#. module: account_msf
+#: view:res.company:0
+msgid "Intermission configuration"
+msgstr "Intermission configuration"
+
+#. module: account_msf
+#: field:account.invoice,imported_invoices:0
+msgid "Imported invoices"
+msgstr "Imported invoices"
+
+#. module: account_msf
+#: view:purchase.order:0
+msgid "Total Untaxed amount"
+msgstr "Total Untaxed amount"
+
+#. module: account_msf
+#: field:account.invoice.line,move_lines:0
+msgid "Journal Item"
+msgstr "Journal Item"
+
+#. module: account_msf
+#: field:account.invoice,fake_account_id:0
+msgid "Account"
+msgstr "Account"
+
+#. module: account_msf
+#: sql_constraint:account.move.line:0
+msgid "Wrong credit or debit value in accounting entry !"
+msgstr "Wrong credit or debit value in accounting entry !"
+
+#. module: account_msf
+#: view:account.invoice:0
+msgid "Analytical Distribution"
+msgstr "Analytical Distribution"
+
+#. module: account_msf
+#: model:ir.actions.act_window,name:account_msf.action_intermission_in
+#: model:ir.ui.menu,name:account_msf.menu_action_intermission_in
+msgid "Intermission Voucher IN"
+msgstr "Intermission Voucher IN"
+
+#. module: account_msf
+#: constraint:purchase.order:0
+msgid "Partner type and order type are incompatible! Please change either order type or partner."
+msgstr "Partner type and order type are incompatible! Please change either order type or partner."
+
+#. module: account_msf
+#: view:account.invoice:0
+msgid "Search Donation"
+msgstr "Search Donation"
+
+#. module: account_msf
+#: view:account.invoice:0
+msgid "Change"
+msgstr "Change"
+
+#. module: account_msf
+#: view:product.product:0
+#: view:res.partner:0
+msgid "Accounting"
+msgstr "Accounting"
+
+#. module: account_msf
+#: field:account.invoice,picking_id:0
+msgid "Picking"
+msgstr "Picking"
+
+#. module: account_msf
+#: view:product.category:0
+#: view:product.product:0
+#: view:res.partner:0
+msgid "Donation Properties"
+msgstr "Donation Properties"
+
+#. module: account_msf
+#: view:account.invoice:0
+msgid "Cancelled"
+msgstr "Cancelled"
+
+#. module: account_msf
+#: field:account.invoice,is_debit_note:0
+msgid "Is a Debit Note?"
+msgstr "Is a Debit Note?"
+
+#. module: account_msf
+#: model:ir.actions.act_window,name:account_msf.action_intermission_out
+#: model:ir.ui.menu,name:account_msf.menu_action_intermission_out
+msgid "Intermission Voucher OUT"
+msgstr "Intermission Voucher OUT"
+
+#. module: account_msf
+#: view:account.invoice:0
+#: field:account.invoice,fake_journal_id:0
+msgid "Journal"
+msgstr "Journal"
+
+#. module: account_msf
+#: view:ir.attachment:0
+msgid "Type"
+msgstr "Type"
+
+#. module: account_msf
+#: constraint:stock.picking:0
+msgid "Wrong reason type for an OUT created from scratch."
+msgstr "Wrong reason type for an OUT created from scratch."
+
+#. module: account_msf
+#: constraint:product.product:0
+msgid "If you select \"Non-stockable\" as product type then you have to select \"Make to order\" as procurement method"
+msgstr "If you select \"Non-stockable\" as product type then you have to select \"Make to order\" as procurement method"
+
+#. module: account_msf
+#: view:ir.attachment:0
+msgid "Binary"
+msgstr "Binary"
+
+#. module: account_msf
+#: constraint:product.category:0
+msgid "Error ! You can not create recursive categories."
+msgstr "Error ! You can not create recursive categories."
+
+#. module: account_msf
+#: view:ir.attachment:0
+msgid "Owner"
+msgstr "Owner"
+
+#. module: account_msf
+#: model:ir.model,name:account_msf.model_product_product
+msgid "Product"
+msgstr "Product"
+
+#. module: account_msf
+#: constraint:account.move.line:0
+msgid "You can not create move line on view account."
+msgstr "You can not create move line on view account."
+
+#. module: account_msf
+#: view:account.invoice:0
+#: model:ir.actions.act_window,name:account_msf.action_debit_note
+#: model:ir.ui.menu,name:account_msf.menu_action_debit_note
+msgid "Debit Note"
+msgstr "Debit Note"
+
+#. module: account_msf
+#: view:account.invoice:0
+msgid "Payments"
+msgstr "Payments"
+
+#. module: account_msf
+#: help:account.move.line,invoice_line_id:0
+msgid "Invoice line which have produced this line."
+msgstr "Invoice line which have produced this line."
+
+#. module: account_msf
+#: view:ir.attachment:0
+msgid "Attached To"
+msgstr "Attached To"
+
+#. module: account_msf
+#: view:ir.attachment:0
+msgid "Created"
+msgstr "Created"
+
+#. module: account_msf
+#: view:account.invoice:0
+msgid "I/MI voucher date"
+msgstr "I/MI voucher date"
+
+#. module: account_msf
+#: view:account.invoice:0
+msgid "Customer"
+msgstr "Customer"
+
+#. module: account_msf
+#: model:ir.module.module,description:account_msf.module_meta_information
+msgid "\n"
+"        This module aims to add some elements in accounting for MSF.\n"
+"    "
+msgstr "\n"
+"        This module aims to add some elements in accounting for MSF.\n"
+"    "
+
+#. module: account_msf
+#: constraint:stock.picking:0
+msgid "You cannot validate this document because it contains a line with an inactive product"
+msgstr "You cannot validate this document because it contains a line with an inactive product"
+
+#. module: account_msf
+#: view:account.invoice:0
+msgid "Period"
+msgstr "Period"
+
+#. module: account_msf
+#: view:account.invoice:0
+#: view:purchase.order:0
+msgid "Reference"
+msgstr "Reference"
+
+#. module: account_msf
+#: code:addons/account_msf/stock.py:52
+#, python-format
+msgid "No donation expense account defined for this PO Line: %s"
+msgstr "No donation expense account defined for this PO Line: %s"
+
+#. module: account_msf
+#: constraint:purchase.order:0
+msgid "You cannot validate this purchase order because it contains a line with an inactive product"
+msgstr "You cannot validate this purchase order because it contains a line with an inactive product"
+
+#. module: account_msf
+#: code:addons/account_msf/invoice.py:86
+#, python-format
+msgid "No default account for import invoice on Debit Note!"
+msgstr "No default account for import invoice on Debit Note!"
+
+#. module: account_msf
+#: model:ir.actions.act_window,name:account_msf.purchase_waiting_msf
+msgid "Purchase Order Waiting Approval"
+msgstr "Purchase Order Waiting Approval"
+
+#. module: account_msf
+#: constraint:account.invoice:0
+msgid "You cannot validate this invoice because it contains a line with an inactive product"
+msgstr "You cannot validate this invoice because it contains a line with an inactive product"
+
+#. module: account_msf
+#: view:account.invoice:0
+msgid "Refund"
+msgstr "Refund"
+
+#. module: account_msf
+#: field:account.invoice,fake_currency_id:0
+msgid "Currency"
+msgstr "Currency"
+
+#. module: account_msf
+#: constraint:product.product:0
+msgid "Error: Invalid ean code"
+msgstr "Error: Invalid ean code"
+
+#. module: account_msf
+#: view:account.invoice:0
+#: code:addons/account_msf/invoice.py:383
+#, python-format
+msgid "Donor"
+msgstr "Donor"
+
+#. module: account_msf
+#: constraint:purchase.order:0
+msgid "You cannot choose an internal supplier for this purchase order"
+msgstr "You cannot choose an internal supplier for this purchase order"
+
+#. module: account_msf
+#: field:product.category,donation_expense_account:0
+#: field:product.product,donation_expense_account:0
+msgid "Donation Account"
+msgstr "Donation Account"
+
+#. module: account_msf
+#: code:addons/account_msf/stock.py:82
+#, python-format
+msgid "No Donation Payable account for this partner: %s"
+msgstr "No Donation Payable account for this partner: %s"
+
+#. module: account_msf
+#: model:ir.model,name:account_msf.model_stock_picking
+msgid "Picking List"
+msgstr "Picking List"
+
+#. module: account_msf
+#: help:res.company,import_invoice_default_account:0
+msgid "Default account for an import invoice on a Debit note"
+msgstr "Default account for an import invoice on a Debit note"
+
+#. module: account_msf
+#: field:account.move.line,invoice_line_id:0
+msgid "Invoice line origin"
+msgstr "Invoice line origin"
+
+#. module: account_msf
+#: code:addons/account_msf/invoice.py:251
+#, python-format
+msgid "You can only do import invoice on a Debit Note!"
+msgstr "You can only do import invoice on a Debit Note!"
+
+#. module: account_msf
+#: code:addons/account_msf/wizard/import_invoice.py:49
+#, python-format
+msgid "Please add some invoices!"
+msgstr "Please add some invoices!"
+
+#. module: account_msf
+#: view:account.invoice:0
+#: view:ir.attachment:0
+msgid "Group By..."
+msgstr "Group By..."
+
+#. module: account_msf
+#: view:account.invoice:0
+#: code:addons/account_msf/invoice.py:385
+#: model:ir.model,name:account_msf.model_res_partner
+#, python-format
+msgid "Partner"
+msgstr "Partner"
+
+#. module: account_msf
+#: view:debit.note.import.invoice:0
+#: field:debit.note.import.invoice,line_ids:0
+msgid "Invoices"
+msgstr "Invoices"
+
+#. module: account_msf
+#: field:debit.note.import.invoice,currency_id:0
+#: field:debit.note.import.invoice,partner_id:0
+msgid "unknown"
+msgstr "unknown"
+

@@ -1,0 +1,169 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* account_journal
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 07:42+0000\n"
+"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_journal
+#: model:account.analytic.journal,name:account_journal.analytic_extra_accounting_journal
+#: model:account.journal,name:account_journal.extra_accounting_journal
+msgid "OD-Extra Accounting"
+msgstr "OD-Extra Accounting"
+
+#. module: account_journal
+#: model:account.analytic.journal,name:account_journal.analytic_migration_journal
+#: model:account.journal,name:account_journal.migration_journal
+msgid "Migration"
+msgstr "Migration"
+
+#. module: account_journal
+#: constraint:account.analytic.journal:0
+msgid "You cannot have more than one engagement journal per instance!"
+msgstr "You cannot have more than one engagement journal per instance!"
+
+#. module: account_journal
+#: view:account.journal:0
+msgid "Accounts"
+msgstr "Accounts"
+
+#. module: account_journal
+#: code:addons/account_journal/account_journal.py:241
+#, python-format
+msgid "Deletion is not possible. All registers are not in draft state!"
+msgstr "Deletion is not possible. All registers are not in draft state!"
+
+#. module: account_journal
+#: code:addons/account_journal/account_journal.py:213
+#: code:addons/account_journal/account_journal.py:223
+#, python-format
+msgid "Default Debit Account should be an expense account for Adjustement Journals!"
+msgstr "Default Debit Account should be an expense account for Adjustement Journals!"
+
+#. module: account_journal
+#: view:account.journal:0
+msgid "Delete this journal and all attached registers"
+msgstr "Delete this journal and all attached registers"
+
+#. module: account_journal
+#: model:account.analytic.journal,name:account_journal.analytic_inkind_journal
+msgid "Analytic In-kind Donation"
+msgstr "Analytic In-kind Donation"
+
+#. module: account_journal
+#: code:addons/account_journal/account_journal.py:193
+#, python-format
+msgid "Default Debit Account is missing."
+msgstr "Default Debit Account is missing."
+
+#. module: account_journal
+#: model:ir.module.module,shortdesc:account_journal.module_meta_information
+msgid "Accounting Journal for MSF"
+msgstr "Accounting Journal for MSF"
+
+#. module: account_journal
+#: model:account.journal,name:account_journal.intermission_journal
+msgid "Intermission"
+msgstr "Intermission"
+
+#. module: account_journal
+#: model:account.journal,name:account_journal.inkind_journal
+msgid "In-kind Donation"
+msgstr "In-kind Donation"
+
+#. module: account_journal
+#: sql_constraint:account.journal:0
+msgid "The name of the journal must be unique per company and instance !"
+msgstr "The name of the journal must be unique per company and instance !"
+
+#. module: account_journal
+#: view:account.journal:0
+msgid "Account Journal"
+msgstr "Account Journal"
+
+#. module: account_journal
+#: code:addons/account_journal/account_journal.py:193
+#: code:addons/account_journal/account_journal.py:213
+#: code:addons/account_journal/account_journal.py:223
+#: code:addons/account_journal/account_journal.py:241
+#, python-format
+msgid "Warning"
+msgstr "Warning"
+
+#. module: account_journal
+#: model:ir.module.module,description:account_journal.module_meta_information
+msgid "\n"
+"        Journals view and datas\n"
+"    "
+msgstr "\n"
+"        Journals view and datas\n"
+"    "
+
+#. module: account_journal
+#: model:account.analytic.journal,name:account_journal.engagement_journal
+msgid "Engagement Journal"
+msgstr "Engagement Journal"
+
+#. module: account_journal
+#: code:addons/account_journal/account_journal.py:253
+#, python-format
+msgid "Journal list"
+msgstr "Journal list"
+
+#. module: account_journal
+#: view:account.journal:0
+msgid "Company"
+msgstr "Company"
+
+#. module: account_journal
+#: view:account.analytic.line:0
+msgid "Engagements"
+msgstr "Engagements"
+
+#. module: account_journal
+#: model:account.analytic.journal,name:account_journal.analytic_intermission_journal
+msgid "Analytic Intermission"
+msgstr "Analytic Intermission"
+
+#. module: account_journal
+#: model:ir.model,name:account_journal.model_account_analytic_journal
+msgid "Analytic Journal"
+msgstr "Analytic Journal"
+
+#. module: account_journal
+#: code:addons/account_journal/account_journal.py:239
+#, python-format
+msgid "Error"
+msgstr "Error"
+
+#. module: account_journal
+#: code:addons/account_journal/account_journal.py:239
+#, python-format
+msgid "No register found. You can manually delete this journal."
+msgstr "No register found. You can manually delete this journal."
+
+#. module: account_journal
+#: model:ir.model,name:account_journal.model_account_journal
+msgid "Journal"
+msgstr "Journal"
+
+#. module: account_journal
+#: sql_constraint:account.journal:0
+msgid "The code of the journal must be unique per company and instance !"
+msgstr "The code of the journal must be unique per company and instance !"
+
+#. module: account_journal
+#: view:account.journal:0
+msgid "This will first DELETE all registers linked to this journal then DELETE this journal. Are you sure?"
+msgstr "This will first DELETE all registers linked to this journal then DELETE this journal. Are you sure?"
+

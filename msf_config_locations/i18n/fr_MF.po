@@ -1,0 +1,531 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* msf_config_locations
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 07:42+0000\n"
+"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: msf_config_locations
+#: view:stock.location.configuration.wizard:0
+msgid "res_config_contents"
+msgstr "res_config_contents"
+
+#. module: msf_config_locations
+#: code:addons/msf_config_locations/stock_configuration.py:448
+#, python-format
+msgid "Location 'Internal Consumption Units' not found in the instance or is not activated !"
+msgstr "Location 'Internal Consumption Units' not found in the instance or is not activated !"
+
+#. module: msf_config_locations
+#: field:stock.location,central_location_ok:0
+msgid "If check, all products in this location are unallocated."
+msgstr "If check, all products in this location are unallocated."
+
+#. module: msf_config_locations
+#: selection:stock.location.configuration.wizard,location_type:0
+#: selection:stock.remove.location.wizard,location_usage:0
+msgid "External"
+msgstr "External"
+
+#. module: msf_config_locations
+#: model:stock.location,name:msf_config_locations.stock_location_consumption_units_view
+msgid "Internal Consumption Units"
+msgstr "Internal Consumption Units"
+
+#. module: msf_config_locations
+#: view:stock.remove.location.wizard:0
+msgid "See moves"
+msgstr "See moves"
+
+#. module: msf_config_locations
+#: help:stock.location,virtual_ok:0
+msgid "If checked, the location is a virtual location."
+msgstr "If checked, the location is a virtual location."
+
+#. module: msf_config_locations
+#: view:stock.location.configuration.wizard:0
+msgid "Add Location and create new one"
+msgstr "Add Location and create new one"
+
+#. module: msf_config_locations
+#: model:ir.module.module,description:msf_config_locations.module_meta_information
+msgid "\n"
+"    Allow users with specific rights to configure\n"
+"    optionnal stock locations\n"
+"    "
+msgstr "\n"
+"    Allow users with specific rights to configure\n"
+"    optionnal stock locations\n"
+"    "
+
+#. module: msf_config_locations
+#: code:addons/msf_config_locations/stock_configuration.py:423
+#, python-format
+msgid "Location 'Stock' not found in the instance or is not activated !"
+msgstr "Location 'Stock' not found in the instance or is not activated !"
+
+#. module: msf_config_locations
+#: help:stock.location,picking_ticket_src:0
+msgid "Returns the available locations for source location of a picking ticket according to the product."
+msgstr "Returns the available locations for source location of a picking ticket according to the product."
+
+#. module: msf_config_locations
+#: view:stock.location.configuration.wizard:0
+msgid "Add Location and go to next wizard"
+msgstr "Add Location and go to next wizard"
+
+#. module: msf_config_locations
+#: view:stock.location.configuration.wizard:0
+msgid "New location creation"
+msgstr "New location creation"
+
+#. module: msf_config_locations
+#: field:stock.location.configuration.wizard,location_usage:0
+msgid "Location usage"
+msgstr "Location usage"
+
+#. module: msf_config_locations
+#: model:stock.location,name:msf_config_locations.stock_location_internal_client_view
+msgid "Configurable locations"
+msgstr "Configurable locations"
+
+#. module: msf_config_locations
+#: field:stock.location,outgoing_src:0
+msgid "Outgoing delivery Src. Loc."
+msgstr "Outgoing delivery Src. Loc."
+
+#. module: msf_config_locations
+#: constraint:stock.location:0
+msgid "Quarantine Location can only have Quarantine Location or Views as parent location."
+msgstr "Quarantine Location can only have Quarantine Location or Views as parent location."
+
+#. module: msf_config_locations
+#: view:stock.location.configuration.wizard:0
+msgid "Allows you to create optionnal locations."
+msgstr "Allows you to create optionnal locations."
+
+#. module: msf_config_locations
+#: view:stock.location.configuration.wizard:0
+msgid "Confirm"
+msgstr "Confirm"
+
+#. module: msf_config_locations
+#: help:stock.location,non_stockable_ok:0
+msgid "If checked, the location will be used to store non-stockable products"
+msgstr "If checked, the location will be used to store non-stockable products"
+
+#. module: msf_config_locations
+#: view:stock.location.configuration.wizard:0
+#: view:stock.remove.location.wizard:0
+msgid "Cancel"
+msgstr "Cancel"
+
+#. module: msf_config_locations
+#: model:ir.model,name:msf_config_locations.model_stock_location
+msgid "Location"
+msgstr "Location"
+
+#. module: msf_config_locations
+#: model:ir.actions.act_window,name:msf_config_locations.action_stock_remove_location_wizard
+#: model:ir.ui.menu,name:msf_config_locations.menu_stock_remove_location_wizard
+msgid "Remove a stock location"
+msgstr "Remove a stock location"
+
+#. module: msf_config_locations
+#: code:addons/msf_config_locations/stock_configuration.py:603
+#, python-format
+msgid "You cannot remove this location because some errors are still here !"
+msgstr "You cannot remove this location because some errors are still here !"
+
+#. module: msf_config_locations
+#: model:ir.model,name:msf_config_locations.model_stock_location_configuration_wizard
+msgid "stock.location.configuration.wizard"
+msgstr "stock.location.configuration.wizard"
+
+#. module: msf_config_locations
+#: field:stock.location.configuration.wizard,location_id:0
+msgid "Inactive location to re-activate"
+msgstr "Inactive location to re-activate"
+
+#. module: msf_config_locations
+#: field:stock.location,internal_src:0
+msgid "Internal Picking Src. Loc."
+msgstr "Internal Picking Src. Loc."
+
+#. module: msf_config_locations
+#: view:stock.remove.location.wizard:0
+msgid "Choose a location"
+msgstr "Choose a location"
+
+#. module: msf_config_locations
+#: model:ir.model,name:msf_config_locations.model_stock_remove_location_wizard
+msgid "stock.remove.location.wizard"
+msgstr "stock.remove.location.wizard"
+
+#. module: msf_config_locations
+#: field:stock.location,non_stockable_ok:0
+msgid "Non-stockable"
+msgstr "Non-stockable"
+
+#. module: msf_config_locations
+#: field:stock.location.configuration.wizard,location_type:0
+#: field:stock.remove.location.wizard,location_category:0
+#: field:stock.remove.location.wizard,location_usage:0
+msgid "Location type"
+msgstr "Location type"
+
+#. module: msf_config_locations
+#: code:addons/msf_config_locations/stock_configuration.py:355
+#, python-format
+msgid "A location with the same name and the parameters already exists and is active. You cannot have two locations with the same name and parameters. Please change the name of the new location before create it."
+msgstr "A location with the same name and the parameters already exists and is active. You cannot have two locations with the same name and parameters. Please change the name of the new location before create it."
+
+#. module: msf_config_locations
+#: help:stock.location,outgoing_src:0
+msgid "Returns the available locations for source location of an outgoing delivery according to the product."
+msgstr "Returns the available locations for source location of an outgoing delivery according to the product."
+
+#. module: msf_config_locations
+#: view:stock.remove.location.wizard:0
+msgid "Children locations"
+msgstr "Children locations"
+
+#. module: msf_config_locations
+#: code:addons/msf_config_locations/stock_configuration.py:141
+#: code:addons/msf_config_locations/stock_configuration.py:160
+#: code:addons/msf_config_locations/stock_configuration.py:182
+#: code:addons/msf_config_locations/stock_configuration.py:203
+#: code:addons/msf_config_locations/stock_configuration.py:228
+#, python-format
+msgid "Bad operand"
+msgstr "Bad operand"
+
+#. module: msf_config_locations
+#: field:stock.remove.location.wizard,has_child:0
+msgid "Location has children locations"
+msgstr "Location has children locations"
+
+#. module: msf_config_locations
+#: code:addons/msf_config_locations/stock_configuration.py:141
+#: code:addons/msf_config_locations/stock_configuration.py:160
+#: code:addons/msf_config_locations/stock_configuration.py:182
+#: code:addons/msf_config_locations/stock_configuration.py:203
+#: code:addons/msf_config_locations/stock_configuration.py:228
+#: code:addons/msf_config_locations/stock_configuration.py:401
+#: code:addons/msf_config_locations/stock_configuration.py:409
+#: code:addons/msf_config_locations/stock_configuration.py:423
+#: code:addons/msf_config_locations/stock_configuration.py:433
+#: code:addons/msf_config_locations/stock_configuration.py:448
+#: code:addons/msf_config_locations/stock_configuration.py:453
+#: code:addons/msf_config_locations/stock_configuration.py:461
+#: code:addons/msf_config_locations/stock_configuration.py:468
+#: code:addons/msf_config_locations/stock_configuration.py:471
+#: code:addons/msf_config_locations/stock_configuration.py:603
+#: field:stock.remove.location.wizard,error:0
+#, python-format
+msgid "Error"
+msgstr "Error"
+
+#. module: msf_config_locations
+#: model:product.nomenclature,name:msf_config_locations.nomen_med
+#: model:stock.location,name:msf_config_locations.stock_location_medical
+msgid "MED"
+msgstr "MED"
+
+#. module: msf_config_locations
+#: field:stock.location,incoming_dest:0
+msgid "Incoming shipment Dest. Loc."
+msgstr "Incoming shipment Dest. Loc."
+
+#. module: msf_config_locations
+#: code:addons/msf_config_locations/stock_configuration.py:409
+#, python-format
+msgid "Location 'Configurable locations' not found in the instance or is not activated !"
+msgstr "Location 'Configurable locations' not found in the instance or is not activated !"
+
+#. module: msf_config_locations
+#: field:stock.location,output_ok:0
+msgid "Output Location"
+msgstr "Output Location"
+
+#. module: msf_config_locations
+#: model:stock.location,name:msf_config_locations.stock_location_intermediate_client_view
+msgid "Intermediate Stocks"
+msgstr "Intermediate Stocks"
+
+#. module: msf_config_locations
+#: code:addons/msf_config_locations/stock_configuration.py:349
+#, python-format
+msgid "An existing but inactive location already exists with the same parameters ! Please, change the name of the new location, or re-activate the existing location by clicking on 'Re-activate' button."
+msgstr "An existing but inactive location already exists with the same parameters ! Please, change the name of the new location, or re-activate the existing location by clicking on 'Re-activate' button."
+
+#. module: msf_config_locations
+#: selection:stock.location.configuration.wizard,location_usage:0
+#: selection:stock.remove.location.wizard,location_category:0
+msgid "EPREP"
+msgstr "EPREP"
+
+#. module: msf_config_locations
+#: code:addons/msf_config_locations/stock_configuration.py:401
+#, python-format
+msgid "You should give a name for the new location !"
+msgstr "You should give a name for the new location !"
+
+#. module: msf_config_locations
+#: code:addons/msf_config_locations/stock_configuration.py:461
+#, python-format
+msgid "Location 'MSF Customer' not found in the instance or is not activated !"
+msgstr "Location 'MSF Customer' not found in the instance or is not activated !"
+
+#. module: msf_config_locations
+#: code:addons/msf_config_locations/stock_configuration.py:453
+#: code:addons/msf_config_locations/stock_configuration.py:468
+#, python-format
+msgid "The type of the new location is not correct ! Please check the parameters and retry."
+msgstr "The type of the new location is not correct ! Please check the parameters and retry."
+
+#. module: msf_config_locations
+#: code:addons/msf_config_locations/stock_configuration.py:354
+#, python-format
+msgid "Error !"
+msgstr "Error !"
+
+#. module: msf_config_locations
+#: field:stock.location,internal_dest:0
+msgid "Internal Picking Dest. Loc."
+msgstr "Internal Picking Dest. Loc."
+
+#. module: msf_config_locations
+#: field:stock.location.configuration.wizard,reactivate:0
+msgid "Reactivate location ?"
+msgstr "Reactivate location ?"
+
+#. module: msf_config_locations
+#: model:stock.location,name:msf_config_locations.stock_location_service
+msgid "Service"
+msgstr "Service"
+
+#. module: msf_config_locations
+#: selection:stock.location.configuration.wizard,location_usage:0
+#: selection:stock.remove.location.wizard,location_category:0
+msgid "Consumption Unit"
+msgstr "Consumption Unit"
+
+#. module: msf_config_locations
+#: help:stock.location,output_ok:0
+msgid "If checked, the location is the output location of a warehouse or a children."
+msgstr "If checked, the location is the output location of a warehouse or a children."
+
+#. module: msf_config_locations
+#: view:stock.remove.location.wizard:0
+msgid "Check errors"
+msgstr "Check errors"
+
+#. module: msf_config_locations
+#: view:stock.remove.location.wizard:0
+msgid "Inactivate the location"
+msgstr "Inactivate the location"
+
+#. module: msf_config_locations
+#: model:stock.location,name:msf_config_locations.stock_location_internal_customers_view
+msgid "Customer"
+msgstr "Customer"
+
+#. module: msf_config_locations
+#: help:stock.location,incoming_dest:0
+msgid "Returns the available locations for destination location of an incoming shipment according to the product."
+msgstr "Returns the available locations for destination location of an incoming shipment according to the product."
+
+#. module: msf_config_locations
+#: view:stock.remove.location.wizard:0
+msgid "Products in location"
+msgstr "Products in location"
+
+#. module: msf_config_locations
+#: field:stock.location,picking_ticket_src:0
+msgid "Picking Ticket Src. Loc."
+msgstr "Picking Ticket Src. Loc."
+
+#. module: msf_config_locations
+#: code:addons/msf_config_locations/stock_configuration.py:471
+#, python-format
+msgid "Parent stock location not found for the new location !"
+msgstr "Parent stock location not found for the new location !"
+
+#. module: msf_config_locations
+#: field:stock.remove.location.wizard,error_message:0
+msgid "Information Message"
+msgstr "Information Message"
+
+#. module: msf_config_locations
+#: view:stock.remove.location.wizard:0
+msgid "Parameters"
+msgstr "Parameters"
+
+#. module: msf_config_locations
+#: field:stock.location,virtual_ok:0
+msgid "Virtual Location"
+msgstr "Virtual Location"
+
+#. module: msf_config_locations
+#: field:stock.location.configuration.wizard,progress:0
+msgid "Configuration Progress"
+msgstr "Configuration Progress"
+
+#. module: msf_config_locations
+#: model:stock.location,name:msf_config_locations.stock_location_quarantine_view
+msgid "Quarantine"
+msgstr "Quarantine"
+
+#. module: msf_config_locations
+#: code:addons/msf_config_locations/stock_configuration.py:348
+#, python-format
+msgid "Warning !"
+msgstr "Warning !"
+
+#. module: msf_config_locations
+#: selection:stock.location.configuration.wizard,location_type:0
+#: selection:stock.remove.location.wizard,location_usage:0
+msgid "Internal"
+msgstr "Internal"
+
+#. module: msf_config_locations
+#: model:product.nomenclature,name:msf_config_locations.nomen_log
+msgid "LOG"
+msgstr "LOG"
+
+#. module: msf_config_locations
+#: help:stock.location,input_ok:0
+msgid "If checked, the location is the input location of a warehouse or a children."
+msgstr "If checked, the location is the input location of a warehouse or a children."
+
+#. module: msf_config_locations
+#: view:stock.location.configuration.wizard:0
+#: view:stock.remove.location.wizard:0
+msgid "Actions"
+msgstr "Actions"
+
+#. module: msf_config_locations
+#: field:stock.remove.location.wizard,not_empty:0
+msgid "Location not empty"
+msgstr "Location not empty"
+
+#. module: msf_config_locations
+#: view:stock.remove.location.wizard:0
+msgid "Message"
+msgstr "Message"
+
+#. module: msf_config_locations
+#: model:ir.actions.act_window,name:msf_config_locations.action_stock_location_configuration_wizard
+#: model:ir.ui.menu,name:msf_config_locations.menu_stock_location_configuration_wizard
+msgid "Create new stock location"
+msgstr "Create new stock location"
+
+#. module: msf_config_locations
+#: view:stock.remove.location.wizard:0
+msgid "Remove an optional location"
+msgstr "Remove an optional location"
+
+#. module: msf_config_locations
+#: model:stock.location,name:msf_config_locations.stock_location_unalloc_medical
+msgid "Unallocated MED"
+msgstr "Unallocated MED"
+
+#. module: msf_config_locations
+#: constraint:stock.location:0
+msgid "You cannot define a quarantine location as chained location."
+msgstr "You cannot define a quarantine location as chained location."
+
+#. module: msf_config_locations
+#: model:ir.module.module,shortdesc:msf_config_locations.module_meta_information
+msgid "MSF Locations configuration"
+msgstr "MSF Locations configuration"
+
+#. module: msf_config_locations
+#: field:stock.remove.location.wizard,location_id:0
+msgid "Location to remove"
+msgstr "Location to remove"
+
+#. module: msf_config_locations
+#: model:ir.actions.act_window,name:msf_config_locations.action_configurable_location_setup
+#: view:stock.location.configuration.wizard:0
+msgid "Configurable Locations Configuration"
+msgstr "Configurable Locations Configuration"
+
+#. module: msf_config_locations
+#: selection:stock.location.configuration.wizard,location_usage:0
+#: selection:stock.remove.location.wizard,location_category:0
+msgid "Stock"
+msgstr "Stock"
+
+#. module: msf_config_locations
+#: view:stock.location.configuration.wizard:0
+msgid "Re-activate location"
+msgstr "Re-activate location"
+
+#. module: msf_config_locations
+#: model:stock.location,name:msf_config_locations.stock_location_unalloc_logistic
+msgid "Unallocated LOG"
+msgstr "Unallocated LOG"
+
+#. module: msf_config_locations
+#: help:stock.location,internal_src:0
+msgid "Returns the available locations form source loctaion of an internal picking according to the product."
+msgstr "Returns the available locations form source loctaion of an internal picking according to the product."
+
+#. module: msf_config_locations
+#: field:stock.remove.location.wizard,move_from_to:0
+msgid "Has a move from/to the location"
+msgstr "Has a move from/to the location"
+
+#. module: msf_config_locations
+#: help:stock.location,internal_dest:0
+msgid "Returns the available locations for destination location of an internal picking according to the product."
+msgstr "Returns the available locations for destination location of an internal picking according to the product."
+
+#. module: msf_config_locations
+#: field:stock.location.configuration.wizard,config_logo:0
+msgid "Image"
+msgstr "Image"
+
+#. module: msf_config_locations
+#: field:stock.location,input_ok:0
+msgid "Input Location"
+msgstr "Input Location"
+
+#. module: msf_config_locations
+#: code:addons/msf_config_locations/stock_configuration.py:433
+#, python-format
+msgid "Location 'Intermediate Stocks' not found in the instance or is not activated !"
+msgstr "Location 'Intermediate Stocks' not found in the instance or is not activated !"
+
+#. module: msf_config_locations
+#: model:stock.location,name:msf_config_locations.stock_location_view_all_stock
+msgid "All Stocks"
+msgstr "All Stocks"
+
+#. module: msf_config_locations
+#: view:stock.location.configuration.wizard:0
+msgid "Location configuration"
+msgstr "Location configuration"
+
+#. module: msf_config_locations
+#: view:stock.location.configuration.wizard:0
+msgid "Configure Your Configurable Locations"
+msgstr "Configure Your Configurable Locations"
+
+#. module: msf_config_locations
+#: field:stock.location.configuration.wizard,location_name:0
+msgid "Location name"
+msgstr "Location name"
+

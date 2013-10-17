@@ -1,0 +1,279 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* import_data
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 07:42+0000\n"
+"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: import_data
+#: view:import_product:0
+msgid "The importation of products are in progress. At the end of the importation, a log file will be created if there are errors during importation."
+msgstr "The importation of products are in progress. At the end of the importation, a log file will be created if there are errors during importation."
+
+#. module: import_data
+#: view:import_data:0
+#: view:import_product:0
+#: model:ir.actions.act_window,name:import_data.action_import_datas
+#: model:ir.model,name:import_data.model_import_data
+#: model:ir.model,name:import_data.model_import_product
+#: model:ir.model,name:import_data.model_update_product
+#: model:ir.module.module,shortdesc:import_data.module_meta_information
+#: model:ir.ui.menu,name:import_data.menu_action_import_datas
+msgid "Import Datas"
+msgstr "Import Datas"
+
+#. module: import_data
+#: selection:import_data,object:0
+#: selection:import_product,object:0
+#: selection:update_product,object:0
+msgid "Location"
+msgstr "Location"
+
+#. module: import_data
+#: view:import_product:0
+msgid "You can access to this log file under the menu Product / Import Products / View Log"
+msgstr "You can access to this log file under the menu Product / Import Products / View Log"
+
+#. module: import_data
+#: view:import_product:0
+msgid "Close window"
+msgstr "Close window"
+
+#. module: import_data
+#: selection:import_data,object:0
+#: selection:import_product,object:0
+#: selection:update_product,object:0
+msgid "Partner"
+msgstr "Partner"
+
+#. module: import_data
+#: field:import_data,debug:0
+#: field:import_product,debug:0
+#: field:update_product,debug:0
+msgid "Debug to server log"
+msgstr "Debug to server log"
+
+#. module: import_data
+#: field:import_data,config_logo:0
+#: field:import_product,config_logo:0
+#: field:update_product,config_logo:0
+msgid "Image"
+msgstr "Image"
+
+#. module: import_data
+#: model:ir.model,name:import_data.model_res_partner_category
+msgid "Partner Categories"
+msgstr "Partner Categories"
+
+#. module: import_data
+#: code:addons/import_data/res_partner.py:22
+#, python-format
+msgid "Error !"
+msgstr "Error !"
+
+#. module: import_data
+#: view:import_data:0
+#: view:import_product:0
+#: view:update_product:0
+msgid "Supported file formats: *.csv (Comma-separated values)"
+msgstr "Supported file formats: *.csv (Comma-separated values)"
+
+#. module: import_data
+#: selection:import_data,object:0
+#: selection:import_product,object:0
+#: selection:update_product,object:0
+msgid "Budget"
+msgstr "Budget"
+
+#. module: import_data
+#: view:import_data:0
+#: view:import_product:0
+#: view:update_product:0
+msgid "Please double-check that the file encoding is set to UTF-8 (sometimes called Unicode) when the translator exports it."
+msgstr "Please double-check that the file encoding is set to UTF-8 (sometimes called Unicode) when the translator exports it."
+
+#. module: import_data
+#: code:addons/import_data/res_partner.py:22
+#, python-format
+msgid "Filter not implemented on %s"
+msgstr "Filter not implemented on %s"
+
+#. module: import_data
+#: view:import_product:0
+msgid "Import product in progress"
+msgstr "Import product in progress"
+
+#. module: import_data
+#: view:import_data:0
+#: view:import_product:0
+#: view:update_product:0
+msgid "_Import"
+msgstr "_Import"
+
+#. module: import_data
+#: selection:import_data,object:0
+#: selection:import_product,object:0
+#: selection:update_product,object:0
+msgid "Product Nomenclature"
+msgstr "Product Nomenclature"
+
+#. module: import_data
+#: code:addons/import_data/import_data.py:167
+#: code:addons/import_data/import_data.py:195
+#, python-format
+msgid "%s does not exist"
+msgstr "%s does not exist"
+
+#. module: import_data
+#: selection:import_data,object:0
+#: selection:import_product,object:0
+#: selection:update_product,object:0
+msgid "Analytic Account"
+msgstr "Analytic Account"
+
+#. module: import_data
+#: field:import_data,import_mode:0
+#: field:import_product,import_mode:0
+#: field:update_product,import_mode:0
+msgid "Update or create ?"
+msgstr "Update or create ?"
+
+#. module: import_data
+#: selection:import_data,object:0
+#: selection:import_product,object:0
+#: selection:update_product,object:0
+msgid "Product"
+msgstr "Product"
+
+#. module: import_data
+#: selection:import_data,object:0
+#: selection:import_product,object:0
+#: selection:update_product,object:0
+msgid "Supplier Info"
+msgstr "Supplier Info"
+
+#. module: import_data
+#: field:import_data,ignore:0
+#: field:import_product,ignore:0
+#: field:update_product,ignore:0
+msgid "Number of headers to ignore"
+msgstr "Number of headers to ignore"
+
+#. module: import_data
+#: field:import_data,object:0
+#: field:import_product,object:0
+#: field:update_product,object:0
+msgid "Object"
+msgstr "Object"
+
+#. module: import_data
+#: selection:import_data,object:0
+#: selection:import_product,object:0
+#: selection:update_product,object:0
+msgid "Warehouse"
+msgstr "Warehouse"
+
+#. module: import_data
+#: view:update_product:0
+msgid "Update Datas"
+msgstr "Update Datas"
+
+#. module: import_data
+#: view:import_product:0
+#: model:ir.actions.act_window,name:import_data.action_import_products
+#: model:ir.ui.menu,name:import_data.menu_action_import_products
+#: model:ir.ui.menu,name:import_data.parent_import_products
+msgid "Import Products"
+msgstr "Import Products"
+
+#. module: import_data
+#: selection:import_data,object:0
+#: selection:import_product,object:0
+#: selection:update_product,object:0
+msgid "Product Category"
+msgstr "Product Category"
+
+#. module: import_data
+#: selection:import_data,import_mode:0
+#: selection:import_product,import_mode:0
+#: selection:update_product,import_mode:0
+msgid "Create"
+msgstr "Create"
+
+#. module: import_data
+#: field:import_data,file:0
+#: field:import_product,file:0
+#: field:update_product,file:0
+msgid "File"
+msgstr "File"
+
+#. module: import_data
+#: selection:import_data,import_mode:0
+#: selection:import_product,import_mode:0
+#: selection:update_product,import_mode:0
+msgid "Update"
+msgstr "Update"
+
+#. module: import_data
+#: model:ir.actions.act_window,name:import_data.import_request_action
+#: model:ir.ui.menu,name:import_data.menu_import_request
+msgid "View Logs"
+msgstr "View Logs"
+
+#. module: import_data
+#: model:ir.actions.act_window,name:import_data.action_update_products
+#: model:ir.ui.menu,name:import_data.menu_action_update_products
+#: view:update_product:0
+msgid "Update Products"
+msgstr "Update Products"
+
+#. module: import_data
+#: view:import_data:0
+#: view:import_product:0
+#: view:update_product:0
+msgid "_Close"
+msgstr "_Close"
+
+#. module: import_data
+#: constraint:res.partner.category:0
+msgid "Error ! You can not create recursive categories."
+msgstr "Error ! You can not create recursive categories."
+
+#. module: import_data
+#: selection:import_data,object:0
+#: selection:import_product,object:0
+#: selection:update_product,object:0
+msgid "Budget Line"
+msgstr "Budget Line"
+
+#. module: import_data
+#: selection:import_data,object:0
+#: selection:import_product,object:0
+#: selection:update_product,object:0
+msgid "Partner Category"
+msgstr "Partner Category"
+
+#. module: import_data
+#: code:addons/import_data/import_data.py:167
+#: code:addons/import_data/import_data.py:195
+#, python-format
+msgid "Warning !"
+msgstr "Warning !"
+
+#. module: import_data
+#: model:ir.module.module,description:import_data.module_meta_information
+msgid "\n"
+"    "
+msgstr "\n"
+"    "
+

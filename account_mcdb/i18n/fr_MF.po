@@ -1,0 +1,1529 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* account_mcdb
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 07:42+0000\n"
+"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+msgid "Proprietary Instances"
+msgstr "Proprietary Instances"
+
+#. module: account_mcdb
+#: view:account.analytic.line:0
+msgid "G/L account"
+msgstr "G/L account"
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+msgid "Cost Centers"
+msgstr "Cost Centers"
+
+#. module: account_mcdb
+#: model:ir.model,name:account_mcdb.model_account_mcdb
+msgid "account.mcdb"
+msgstr "account.mcdb"
+
+#. module: account_mcdb
+#: view:account.move.line:0
+msgid "3rd party Partner"
+msgstr "3rd party Partner"
+
+#. module: account_mcdb
+#: view:account.line.csv.export:0
+msgid "File to download"
+msgstr "File to download"
+
+#. module: account_mcdb
+#: code:addons/account_mcdb/report/account_mcdb_export.py:63
+#, python-format
+msgid "Func. Credit"
+msgstr "Func. Credit"
+
+#. module: account_mcdb
+#: field:account.mcdb,display_journal:0
+msgid "Display journals?"
+msgstr "Display journals?"
+
+#. module: account_mcdb
+#: model:ir.module.module,shortdesc:account_mcdb.module_meta_information
+msgid "Multi-Criteria Data Browser"
+msgstr "Multi-Criteria Data Browser"
+
+#. module: account_mcdb
+#: selection:account.mcdb,reallocated:0
+msgid "NOT reallocated"
+msgstr "NOT reallocated"
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+msgid "General"
+msgstr "General"
+
+#. module: account_mcdb
+#: view:account.analytic.line:0
+#: view:account.mcdb:0
+#: field:account.mcdb,analytic_account_dest_ids:0
+#: code:addons/account_mcdb/report/account_mcdb_export.py:168
+#: report:addons/account_mcdb/report/report_account_analytic_line_xls.mako:65
+#, python-format
+msgid "Destination"
+msgstr "Destination"
+
+#. module: account_mcdb
+#: report:account.move.line:0
+#: report:account.move.line_csv:0
+#: code:addons/account_mcdb/report/account_mcdb_export.py:65
+#: report:addons/account_mcdb/report/report_account_move_line_xls.mako:58
+#, python-format
+msgid "Output Credit"
+msgstr "Output Credit"
+
+#. module: account_mcdb
+#: view:account.line.csv.export:0
+msgid "Account Entries Export"
+msgstr "Account Entries Export"
+
+#. module: account_mcdb
+#: code:addons/account_mcdb/report/account_mcdb_export.py:318
+#, python-format
+msgid "No model found."
+msgstr "No model found."
+
+#. module: account_mcdb
+#: view:output.currency.for.export:0
+msgid "Validate"
+msgstr "Validate"
+
+#. module: account_mcdb
+#: report:account.bank.statement.line:0
+#: report:account.bank.statement.line_csv:0
+#: report:addons/account_mcdb/report/report_account_bank_statement_line_xls.mako:8
+#: model:ir.actions.report.xml,name:account_mcdb.report_account_bank_statement_line
+#: model:ir.actions.report.xml,name:account_mcdb.report_account_bank_statement_line_csv
+#: model:ir.actions.report.xml,name:account_mcdb.report_account_bank_statement_line_xls
+msgid "Register Lines"
+msgstr "Register Lines"
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+msgid "Reconciliation"
+msgstr "Reconciliation"
+
+#. module: account_mcdb
+#: report:account.analytic.line:0
+#: report:account.analytic.line_csv:0
+msgid "Out. Amount"
+msgstr "Out. Amount"
+
+#. module: account_mcdb
+#: field:account.mcdb,rev_account_ids:0
+msgid "Exclude account selection"
+msgstr "Exclude account selection"
+
+#. module: account_mcdb
+#: report:account.bank.statement.line:0
+#: report:account.bank.statement.line_csv:0
+#: code:addons/account_mcdb/report/account_mcdb_export.py:252
+#: report:addons/account_mcdb/report/report_account_bank_statement_line_xls.mako:58
+#, python-format
+msgid "Output Out"
+msgstr "Output Out"
+
+#. module: account_mcdb
+#: view:account.move.line:0
+msgid "3RD Party Partner"
+msgstr "3RD Party Partner"
+
+#. module: account_mcdb
+#: view:account.move.line:0
+msgid "Group By..."
+msgstr "Group By..."
+
+#. module: account_mcdb
+#: report:account.analytic.line:0
+#: report:account.analytic.line_csv:0
+#: code:addons/account_mcdb/report/account_mcdb_export.py:173
+#: report:addons/account_mcdb/report/report_account_analytic_line_xls.mako:63
+#, python-format
+msgid "Func. Amount"
+msgstr "Func. Amount"
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+msgid "Reallocation"
+msgstr "Reallocation"
+
+#. module: account_mcdb
+#: field:account.mcdb,currency_choice:0
+msgid "Currency type"
+msgstr "Currency type"
+
+#. module: account_mcdb
+#: report:account.move.line:0
+#: report:account.move.line_csv:0
+#: code:addons/account_mcdb/report/account_mcdb_export.py:65
+#: report:addons/account_mcdb/report/report_account_move_line_xls.mako:58
+#, python-format
+msgid "Output Debit"
+msgstr "Output Debit"
+
+#. module: account_mcdb
+#: report:account.analytic.line:0
+#: report:account.analytic.line_csv:0
+#: report:account.move.line:0
+#: report:account.move.line_csv:0
+msgid "Out. Currency"
+msgstr "Out. Currency"
+
+#. module: account_mcdb
+#: code:addons/account_mcdb/mass_reallocation_search.py:43
+#, python-format
+msgid "This action only works for Funding Pool accounts!"
+msgstr "This action only works for Funding Pool accounts!"
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+msgid "Destinations"
+msgstr "Destinations"
+
+#. module: account_mcdb
+#: field:account.analytic.line,output_amount_credit:0
+#: field:account.bank.statement.line,output_amount_credit:0
+#: field:account.move.line,output_amount_credit:0
+msgid "Output credit"
+msgstr "Output credit"
+
+#. module: account_mcdb
+#: model:ir.actions.act_window,name:account_mcdb.action_account_mcdb_analytic
+#: model:ir.ui.menu,name:account_mcdb.menu_finance_mcdb_analytic_move_line_search
+msgid "Analytic Selector - Saved queries"
+msgstr "Analytic Selector - Saved queries"
+
+#. module: account_mcdb
+#: selection:account.mcdb,document_state:0
+#: view:account.move.line:0
+msgid "Unposted"
+msgstr "Unposted"
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+msgid "Ana. Name"
+msgstr "Ana. Name"
+
+#. module: account_mcdb
+#: selection:account.mcdb,currency_choice:0
+msgid "Functional"
+msgstr "Functional"
+
+#. module: account_mcdb
+#: field:account.mcdb,posting_date_to:0
+msgid "Ending posting date"
+msgstr "Ending posting date"
+
+#. module: account_mcdb
+#: code:addons/account_mcdb/report/account_mcdb_export.py:61
+#, python-format
+msgid "Book. currency"
+msgstr "Book. currency"
+
+#. module: account_mcdb
+#: selection:output.currency.for.export,export_format:0
+msgid "PDF"
+msgstr "PDF"
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+msgid "Account types"
+msgstr "Account types"
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+msgid "Name"
+msgstr "Name"
+
+#. module: account_mcdb
+#: report:account.bank.statement.line:0
+#: report:account.bank.statement.line_csv:0
+#: code:addons/account_mcdb/report/account_mcdb_export.py:252
+#: report:addons/account_mcdb/report/report_account_bank_statement_line_xls.mako:58
+#, python-format
+msgid "Amount Out"
+msgstr "Amount Out"
+
+#. module: account_mcdb
+#: view:account.move.line:0
+msgid "Total Functional Credit"
+msgstr "Total Functional Credit"
+
+#. module: account_mcdb
+#: view:account.move.line:0
+msgid "Account Type"
+msgstr "Account Type"
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+msgid "Add all Funding Pools"
+msgstr "Add all Funding Pools"
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+msgid "Remove all Destinations"
+msgstr "Remove all Destinations"
+
+#. module: account_mcdb
+#: report:account.analytic.line:0
+#: report:account.analytic.line_csv:0
+#: report:account.move.line:0
+#: report:account.move.line_csv:0
+msgid "DESCRIPTION"
+msgstr "DESCRIPTION"
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+msgid "Amount & Currency"
+msgstr "Amount & Currency"
+
+#. module: account_mcdb
+#: report:account.bank.statement.line:0
+#: report:account.bank.statement.line_csv:0
+#: report:account.move.line:0
+#: report:account.move.line_csv:0
+#: code:addons/account_mcdb/report/account_mcdb_export.py:66
+#: code:addons/account_mcdb/report/account_mcdb_export.py:253
+#: report:addons/account_mcdb/report/report_account_bank_statement_line_xls.mako:58
+#: report:addons/account_mcdb/report/report_account_move_line_xls.mako:58
+#, python-format
+msgid "State"
+msgstr "State"
+
+#. module: account_mcdb
+#: field:account.mcdb,display_destination:0
+msgid "Display destinations?"
+msgstr "Display destinations?"
+
+#. module: account_mcdb
+#: selection:account.mcdb,reconciled:0
+msgid "Reconciled"
+msgstr "Reconciled"
+
+#. module: account_mcdb
+#: report:account.analytic.line:0
+#: report:account.analytic.line_csv:0
+#: report:account.bank.statement.line:0
+#: report:account.bank.statement.line_csv:0
+#: view:account.mcdb:0
+#: report:account.move.line:0
+#: report:account.move.line_csv:0
+#: code:addons/account_mcdb/report/account_mcdb_export.py:171
+#: report:addons/account_mcdb/report/report_account_analytic_line_xls.mako:63
+#: report:addons/account_mcdb/report/report_account_bank_statement_line_xls.mako:58
+#: report:addons/account_mcdb/report/report_account_move_line_xls.mako:58
+#, python-format
+msgid "Third Party"
+msgstr "Third Party"
+
+#. module: account_mcdb
+#: field:account.analytic.line,output_currency:0
+#: field:account.bank.statement.line,output_currency:0
+#: field:account.move.line,output_currency:0
+msgid "Output curr."
+msgstr "Output curr."
+
+#. module: account_mcdb
+#: view:account.analytic.line:0
+#: model:ir.model,name:account_mcdb.model_account_analytic_line
+msgid "Analytic Line"
+msgstr "Analytic Line"
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+msgid "Remove all Journals"
+msgstr "Remove all Journals"
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+msgid "Add all Instances"
+msgstr "Add all Instances"
+
+#. module: account_mcdb
+#: field:account.mcdb,reconciled:0
+msgid "Reconciled?"
+msgstr "Reconciled?"
+
+#. module: account_mcdb
+#: view:account.move.line:0
+msgid "3rd party Journal"
+msgstr "3rd party Journal"
+
+#. module: account_mcdb
+#: model:ir.actions.act_window,name:account_mcdb.action_analytic_output_currency_for_export
+#: model:ir.actions.act_window,name:account_mcdb.action_output_currency_for_export
+#: model:ir.actions.act_window,name:account_mcdb.action_register_line_output_currency_for_export
+msgid "Export search result"
+msgstr "Export search result"
+
+#. module: account_mcdb
+#: model:ir.module.module,description:account_mcdb.module_meta_information
+msgid "Ease data searching in Analytic Journal Items and Journal Items"
+msgstr "Ease data searching in Analytic Journal Items and Journal Items"
+
+#. module: account_mcdb
+#: field:account.mcdb,display_analytic_account:0
+msgid "Display analytic accounts?"
+msgstr "Display analytic accounts?"
+
+#. module: account_mcdb
+#: report:account.move.line:0
+#: report:account.move.line_csv:0
+#: code:addons/account_mcdb/report/account_mcdb_export.py:61
+#: report:addons/account_mcdb/report/report_account_move_line_xls.mako:58
+#, python-format
+msgid "Book. Credit"
+msgstr "Book. Credit"
+
+#. module: account_mcdb
+#: report:account.analytic.line:0
+#: report:account.analytic.line_csv:0
+#: code:addons/account_mcdb/report/account_mcdb_export.py:176
+#: report:addons/account_mcdb/report/report_account_analytic_line_xls.mako:63
+#, python-format
+msgid "Entry status"
+msgstr "Entry status"
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+msgid "Amount from"
+msgstr "Amount from"
+
+#. module: account_mcdb
+#: code:addons/account_mcdb/report/account_mcdb_export.py:171
+#, python-format
+msgid "Booking Amount"
+msgstr "Booking Amount"
+
+#. module: account_mcdb
+#: field:account.mcdb,amount_book_to:0
+msgid "Ending amount in booking currency"
+msgstr "Ending amount in booking currency"
+
+#. module: account_mcdb
+#: field:account.mcdb,amount_book_from:0
+msgid "Begin amount in booking currency"
+msgstr "Begin amount in booking currency"
+
+#. module: account_mcdb
+#: sql_constraint:account.move.line:0
+msgid "Wrong credit or debit value in accounting entry !"
+msgstr "Wrong credit or debit value in accounting entry !"
+
+#. module: account_mcdb
+#: report:addons/account_mcdb/report/report_account_analytic_line_xls.mako:63
+#: report:addons/account_mcdb/report/report_account_analytic_line_xls.mako:64
+msgid "Ana. Account"
+msgstr "Ana. Account"
+
+#. module: account_mcdb
+#: selection:account.mcdb,currency_choice:0
+msgid "Booking"
+msgstr "Booking"
+
+#. module: account_mcdb
+#: model:ir.model,name:account_mcdb.model_account_line_csv_export
+msgid "Account Entries CSV Export"
+msgstr "Account Entries CSV Export"
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+msgid "Selector list"
+msgstr "Selector list"
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+msgid "Others"
+msgstr "Others"
+
+#. module: account_mcdb
+#: view:output.currency.for.export:0
+msgid "Cancel"
+msgstr "Cancel"
+
+#. module: account_mcdb
+#: field:output.currency.for.export,currency_id:0
+msgid "Output currency"
+msgstr "Output currency"
+
+#. module: account_mcdb
+#: field:account.mcdb,employee_id:0
+msgid "Employee"
+msgstr "Employee"
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+#: code:addons/account_mcdb/account_mcdb.py:404
+#: code:addons/account_mcdb/account_mcdb.py:460
+#: code:addons/account_mcdb/account_mcdb.py:511
+#, python-format
+msgid "Selector - Analytic"
+msgstr "Selector - Analytic"
+
+#. module: account_mcdb
+#: view:account.move.line:0
+msgid "Unreconciled"
+msgstr "Unreconciled"
+
+#. module: account_mcdb
+#: code:addons/account_mcdb/account_mcdb.py:454
+#: code:addons/account_mcdb/account_mcdb.py:505
+#: model:ir.ui.menu,name:account_mcdb.menu_finance_mcdb
+#, python-format
+msgid "Selector"
+msgstr "Selector"
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+msgid "Remove all Accounts"
+msgstr "Remove all Accounts"
+
+#. module: account_mcdb
+#: field:account.mcdb,document_code:0
+msgid "Sequence number"
+msgstr "Sequence number"
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+msgid "Add all Account Types"
+msgstr "Add all Account Types"
+
+#. module: account_mcdb
+#: selection:output.currency.for.export,export_format:0
+msgid "Excel"
+msgstr "Excel"
+
+#. module: account_mcdb
+#: field:account.mcdb,amount_func_to:0
+msgid "Ending amount in functional currency"
+msgstr "Ending amount in functional currency"
+
+#. module: account_mcdb
+#: view:account.move.line:0
+msgid "3rd party Employee"
+msgstr "3rd party Employee"
+
+#. module: account_mcdb
+#: selection:account.mcdb,reversed:0
+msgid "NOT reversed"
+msgstr "NOT reversed"
+
+#. module: account_mcdb
+#: view:account.move.line:0
+msgid "Unbalanced"
+msgstr "Unbalanced"
+
+#. module: account_mcdb
+#: help:output.currency.for.export,currency_id:0
+msgid "Give an output currency that would be used for export"
+msgstr "Give an output currency that would be used for export"
+
+#. module: account_mcdb
+#: report:addons/account_mcdb/report/report_account_analytic_line_xls.mako:63
+msgid "G/L Account"
+msgstr "G/L Account"
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+msgid "Remove all Cost Centers"
+msgstr "Remove all Cost Centers"
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+msgid "Analytic Journals"
+msgstr "Analytic Journals"
+
+#. module: account_mcdb
+#: code:addons/account_mcdb/report/account_mcdb_export.py:175
+#: report:addons/account_mcdb/report/report_account_analytic_line_xls.mako:63
+#, python-format
+msgid "Output Amount"
+msgstr "Output Amount"
+
+#. module: account_mcdb
+#: help:output.currency.for.export,export_selected:0
+msgid "The output is limited to 5000 records"
+msgstr "The output is limited to 5000 records"
+
+#. module: account_mcdb
+#: field:account.mcdb,display_analytic_period:0
+msgid "Display analytic periods?"
+msgstr "Display analytic periods?"
+
+#. module: account_mcdb
+#: code:addons/account_mcdb/report/account_mcdb_export.py:61
+#: code:addons/account_mcdb/report/account_mcdb_export.py:252
+#, python-format
+msgid "Third party"
+msgstr "Third party"
+
+#. module: account_mcdb
+#: code:addons/account_mcdb/report/account_mcdb_export.py:170
+#, python-format
+msgid "Analytic Account"
+msgstr "Analytic Account"
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+msgid "Amount"
+msgstr "Amount"
+
+#. module: account_mcdb
+#: model:ir.actions.server,name:account_mcdb.action_analytic_account_mass_reallocation_search
+msgid "Search for Mass Reallocation"
+msgstr "Search for Mass Reallocation"
+
+#. module: account_mcdb
+#: report:account.analytic.line:0
+#: report:account.analytic.line_csv:0
+#: selection:account.mcdb,model:0
+#: report:addons/account_mcdb/report/report_account_analytic_line_xls.mako:8
+#: model:ir.actions.report.xml,name:account_mcdb.report_account_analytic_line
+#: model:ir.actions.report.xml,name:account_mcdb.report_account_analytic_line_csv
+#: model:ir.actions.report.xml,name:account_mcdb.report_account_analytic_line_xls
+msgid "Analytic Journal Items"
+msgstr "Analytic Journal Items"
+
+#. module: account_mcdb
+#: field:account.mcdb,reallocated:0
+msgid "Reallocated?"
+msgstr "Reallocated?"
+
+#. module: account_mcdb
+#: field:account.mcdb,amount_from:0
+msgid "Begin amount in given currency type"
+msgstr "Begin amount in given currency type"
+
+#. module: account_mcdb
+#: field:account.mcdb,rev_journal_ids:0
+msgid "Exclude journal selection"
+msgstr "Exclude journal selection"
+
+#. module: account_mcdb
+#: model:ir.actions.act_window,name:account_mcdb.action_account_mcdb_form
+#: model:ir.ui.menu,name:account_mcdb.menu_finance_mcdb_move_line
+msgid "G/L Selector"
+msgstr "G/L Selector"
+
+#. module: account_mcdb
+#: report:account.bank.statement.line:0
+#: report:account.bank.statement.line_csv:0
+#: code:addons/account_mcdb/report/account_mcdb_export.py:252
+#: report:addons/account_mcdb/report/report_account_bank_statement_line_xls.mako:58
+#, python-format
+msgid "Sequence"
+msgstr "Sequence"
+
+#. module: account_mcdb
+#: selection:account.mcdb,reversed:0
+msgid "Reversed"
+msgstr "Reversed"
+
+#. module: account_mcdb
+#: field:output.currency.for.export,export_format:0
+msgid "Export format"
+msgstr "Export format"
+
+#. module: account_mcdb
+#: constraint:account.move.line:0
+msgid "You can not create move line on view account."
+msgstr "You can not create move line on view account."
+
+#. module: account_mcdb
+#: field:account.analytic.line,output_amount:0
+#: field:account.bank.statement.line,output_amount:0
+#: field:account.move.line,output_amount:0
+msgid "Output amount"
+msgstr "Output amount"
+
+#. module: account_mcdb
+#: field:account.mcdb,posting_date_from:0
+msgid "First posting date"
+msgstr "First posting date"
+
+#. module: account_mcdb
+#: view:account.move.line:0
+msgid "Extended Filters..."
+msgstr "Extended Filters..."
+
+#. module: account_mcdb
+#: field:account.mcdb,analytic_axis:0
+msgid "Display"
+msgstr "Display"
+
+#. module: account_mcdb
+#: report:account.analytic.line:0
+#: view:account.analytic.line:0
+#: report:account.analytic.line_csv:0
+#: report:account.move.line:0
+#: view:account.move.line:0
+#: report:account.move.line_csv:0
+#: code:addons/account_mcdb/report/account_mcdb_export.py:61
+#: code:addons/account_mcdb/report/account_mcdb_export.py:166
+#: report:addons/account_mcdb/report/report_account_analytic_line_xls.mako:63
+#: report:addons/account_mcdb/report/report_account_move_line_xls.mako:58
+#, python-format
+msgid "Proprietary Instance"
+msgstr "Proprietary Instance"
+
+#. module: account_mcdb
+#: report:account.move.line:0
+#: report:account.move.line_csv:0
+#: code:addons/account_mcdb/report/account_mcdb_export.py:61
+#: report:addons/account_mcdb/report/report_account_move_line_xls.mako:58
+#, python-format
+msgid "Book. Debit"
+msgstr "Book. Debit"
+
+#. module: account_mcdb
+#: code:addons/account_mcdb/account_mcdb.py:347
+#, python-format
+msgid "Display field is mandatory!"
+msgstr "Display field is mandatory!"
+
+#. module: account_mcdb
+#: code:addons/account_mcdb/report/account_mcdb_export.py:54
+#: code:addons/account_mcdb/report/account_mcdb_export.py:156
+#: code:addons/account_mcdb/report/account_mcdb_export.py:243
+#, python-format
+msgid "An error occured. Please contact an administrator to resolve this problem."
+msgstr "An error occured. Please contact an administrator to resolve this problem."
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+msgid "Journals"
+msgstr "Journals"
+
+#. module: account_mcdb
+#: model:ir.model,name:account_mcdb.model_account_bank_statement_line
+msgid "Bank Statement Line"
+msgstr "Bank Statement Line"
+
+#. module: account_mcdb
+#: field:account.mcdb,display_funding_pool:0
+msgid "Display funding pools?"
+msgstr "Display funding pools?"
+
+#. module: account_mcdb
+#: view:account.move.line:0
+msgid "3RD Party Journal"
+msgstr "3RD Party Journal"
+
+#. module: account_mcdb
+#: view:account.analytic.line:0
+#: view:account.mcdb:0
+#: field:account.mcdb,analytic_account_cc_ids:0
+#: code:addons/account_mcdb/report/account_mcdb_export.py:168
+#: report:addons/account_mcdb/report/report_account_analytic_line_xls.mako:66
+#, python-format
+msgid "Cost Center"
+msgstr "Cost Center"
+
+#. module: account_mcdb
+#: field:account.mcdb,transfer_journal_id:0
+#: view:account.move.line:0
+msgid "Journal"
+msgstr "Journal"
+
+#. module: account_mcdb
+#: report:account.analytic.line:0
+#: report:account.analytic.line_csv:0
+#: field:account.mcdb,journal_ids:0
+#: report:account.move.line:0
+#: report:account.move.line_csv:0
+#: code:addons/account_mcdb/report/account_mcdb_export.py:61
+#: code:addons/account_mcdb/report/account_mcdb_export.py:166
+#: report:addons/account_mcdb/report/report_account_analytic_line_xls.mako:63
+#: report:addons/account_mcdb/report/report_account_move_line_xls.mako:58
+#, python-format
+msgid "Journal Code"
+msgstr "Journal Code"
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+#: code:addons/account_mcdb/account_mcdb.py:400
+#: code:addons/account_mcdb/account_mcdb.py:457
+#: code:addons/account_mcdb/account_mcdb.py:508
+#, python-format
+msgid "Selector - G/L"
+msgstr "Selector - G/L"
+
+#. module: account_mcdb
+#: view:account.move.line:0
+msgid "3RD Party Employee"
+msgstr "3RD Party Employee"
+
+#. module: account_mcdb
+#: field:account.mcdb,reconcile_id:0
+msgid "Reconcile Reference"
+msgstr "Reconcile Reference"
+
+#. module: account_mcdb
+#: field:account.mcdb,rev_analytic_account_cc_ids:0
+msgid "Exclude Cost Center selection"
+msgstr "Exclude Cost Center selection"
+
+#. module: account_mcdb
+#: report:account.analytic.line:0
+#: report:account.analytic.line_csv:0
+#: report:addons/account_mcdb/report/report_account_analytic_line_xls.mako:63
+msgid "Book. Amount"
+msgstr "Book. Amount"
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+msgid "Remove all Funding Pools"
+msgstr "Remove all Funding Pools"
+
+#. module: account_mcdb
+#: field:account.mcdb,rev_analytic_account_dest_ids:0
+msgid "Exclude Destination selection"
+msgstr "Exclude Destination selection"
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+msgid "Remove all Periods"
+msgstr "Remove all Periods"
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+msgid "Add all Journals"
+msgstr "Add all Journals"
+
+#. module: account_mcdb
+#: report:account.bank.statement.line:0
+#: report:account.bank.statement.line_csv:0
+#: code:addons/account_mcdb/report/account_mcdb_export.py:65
+#: code:addons/account_mcdb/report/account_mcdb_export.py:175
+#: code:addons/account_mcdb/report/account_mcdb_export.py:252
+#: report:addons/account_mcdb/report/report_account_analytic_line_xls.mako:63
+#: report:addons/account_mcdb/report/report_account_bank_statement_line_xls.mako:58
+#: report:addons/account_mcdb/report/report_account_move_line_xls.mako:58
+#, python-format
+msgid "Output Currency"
+msgstr "Output Currency"
+
+#. module: account_mcdb
+#: field:account.mcdb,display_type:0
+msgid "Display account types?"
+msgstr "Display account types?"
+
+#. module: account_mcdb
+#: code:addons/account_mcdb/wizard/output_currency_for_export.py:64
+#, python-format
+msgid "An error has occured. Please contact an administrator."
+msgstr "An error has occured. Please contact an administrator."
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+msgid "Accounts"
+msgstr "Accounts"
+
+#. module: account_mcdb
+#: field:account.mcdb,document_date_from:0
+msgid "First document date"
+msgstr "First document date"
+
+#. module: account_mcdb
+#: report:account.analytic.line:0
+#: report:account.analytic.line_csv:0
+#: code:addons/account_mcdb/report/account_mcdb_export.py:63
+#: code:addons/account_mcdb/report/account_mcdb_export.py:173
+#: report:addons/account_mcdb/report/report_account_analytic_line_xls.mako:63
+#, python-format
+msgid "Func. Currency"
+msgstr "Func. Currency"
+
+#. module: account_mcdb
+#: field:account.mcdb,rev_period_ids:0
+msgid "Exclude period selection"
+msgstr "Exclude period selection"
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+msgid "Document date"
+msgstr "Document date"
+
+#. module: account_mcdb
+#: view:account.line.csv.export:0
+#: field:account.line.csv.export,message:0
+msgid "Message"
+msgstr "Message"
+
+#. module: account_mcdb
+#: field:account.mcdb,functional_currency_id:0
+msgid "Functional currency"
+msgstr "Functional currency"
+
+#. module: account_mcdb
+#: report:account.bank.statement.line:0
+#: report:account.bank.statement.line_csv:0
+#: field:account.mcdb,name:0
+#: code:addons/account_mcdb/report/account_mcdb_export.py:61
+#: code:addons/account_mcdb/report/account_mcdb_export.py:166
+#: code:addons/account_mcdb/report/account_mcdb_export.py:252
+#: report:addons/account_mcdb/report/report_account_analytic_line_xls.mako:63
+#: report:addons/account_mcdb/report/report_account_bank_statement_line_xls.mako:58
+#: report:addons/account_mcdb/report/report_account_move_line_xls.mako:58
+#, python-format
+msgid "Description"
+msgstr "Description"
+
+#. module: account_mcdb
+#: field:account.mcdb,reversed:0
+msgid "Reversed?"
+msgstr "Reversed?"
+
+#. module: account_mcdb
+#: model:ir.model,name:account_mcdb.model_output_currency_for_export
+#: view:output.currency.for.export:0
+msgid "Output currency choice wizard"
+msgstr "Output currency choice wizard"
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+msgid "Ana. Type"
+msgstr "Ana. Type"
+
+#. module: account_mcdb
+#: field:account.line.csv.export,file:0
+msgid "File to export"
+msgstr "File to export"
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+msgid "Add all Analytic Journals"
+msgstr "Add all Analytic Journals"
+
+#. module: account_mcdb
+#: report:account.bank.statement.line:0
+#: report:account.bank.statement.line_csv:0
+#: code:addons/account_mcdb/report/account_mcdb_export.py:252
+#: report:addons/account_mcdb/report/report_account_bank_statement_line_xls.mako:58
+#, python-format
+msgid "Output In"
+msgstr "Output In"
+
+#. module: account_mcdb
+#: field:account.mcdb,account_type_ids:0
+msgid "Account type"
+msgstr "Account type"
+
+#. module: account_mcdb
+#: field:account.mcdb,rev_analytic_account_fp_ids:0
+msgid "Exclude Funding Pool selection"
+msgstr "Exclude Funding Pool selection"
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+msgid "Posting date"
+msgstr "Posting date"
+
+#. module: account_mcdb
+#: constraint:account.move.line:0
+msgid "Company must be same for its related account and period."
+msgstr "Company must be same for its related account and period."
+
+#. module: account_mcdb
+#: view:output.currency.for.export:0
+msgid "Information"
+msgstr "Information"
+
+#. module: account_mcdb
+#: field:account.mcdb,document_state:0
+msgid "Document Status"
+msgstr "Document Status"
+
+#. module: account_mcdb
+#: field:account.mcdb,amount_func_from:0
+msgid "Begin amount in functional currency"
+msgstr "Begin amount in functional currency"
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+msgid "Remove all Account Types"
+msgstr "Remove all Account Types"
+
+#. module: account_mcdb
+#: field:account.mcdb,booking_currency_id:0
+msgid "Booking currency"
+msgstr "Booking currency"
+
+#. module: account_mcdb
+#: report:account.bank.statement.line:0
+#: report:account.bank.statement.line_csv:0
+#: report:account.move.line:0
+#: view:account.move.line:0
+#: report:account.move.line_csv:0
+#: code:addons/account_mcdb/report/account_mcdb_export.py:61
+#: code:addons/account_mcdb/report/account_mcdb_export.py:252
+#: report:addons/account_mcdb/report/report_account_bank_statement_line_xls.mako:58
+#: report:addons/account_mcdb/report/report_account_move_line_xls.mako:58
+#, python-format
+msgid "Account"
+msgstr "Account"
+
+#. module: account_mcdb
+#: field:account.mcdb,description:0
+msgid "Query name"
+msgstr "Query name"
+
+#. module: account_mcdb
+#: field:account.mcdb,amount_to:0
+msgid "Ending amount in given currency type"
+msgstr "Ending amount in given currency type"
+
+#. module: account_mcdb
+#: selection:account.mcdb,document_state:0
+#: view:account.move.line:0
+msgid "Posted"
+msgstr "Posted"
+
+#. module: account_mcdb
+#: report:account.bank.statement.line:0
+#: report:account.bank.statement.line_csv:0
+#: code:addons/account_mcdb/report/account_mcdb_export.py:252
+#: report:addons/account_mcdb/report/report_account_bank_statement_line_xls.mako:58
+#, python-format
+msgid "Amount In"
+msgstr "Amount In"
+
+#. module: account_mcdb
+#: constraint:account.bank.statement.line:0
+msgid "Date is not correct. Verify that it's in the register's period. "
+msgstr "Date is not correct. Verify that it's in the register's period. "
+
+#. module: account_mcdb
+#: report:account.move.line:0
+#: report:account.move.line_csv:0
+#: code:addons/account_mcdb/report/account_mcdb_export.py:66
+#: report:addons/account_mcdb/report/report_account_move_line_xls.mako:58
+#, python-format
+msgid "Reconcile"
+msgstr "Reconcile"
+
+#. module: account_mcdb
+#: report:account.analytic.line:0
+#: report:account.analytic.line_csv:0
+#: report:account.move.line:0
+#: report:account.move.line_csv:0
+#: code:addons/account_mcdb/report/account_mcdb_export.py:171
+#: report:addons/account_mcdb/report/report_account_analytic_line_xls.mako:63
+#: report:addons/account_mcdb/report/report_account_move_line_xls.mako:58
+#, python-format
+msgid "Book. Currency"
+msgstr "Book. Currency"
+
+#. module: account_mcdb
+#: view:output.currency.for.export:0
+msgid "Please choose an output currency before export."
+msgstr "Please choose an output currency before export."
+
+#. module: account_mcdb
+#: field:account.mcdb,period_ids:0
+msgid "Accounting Period"
+msgstr "Accounting Period"
+
+#. module: account_mcdb
+#: report:addons/account_mcdb/report/report_account_analytic_line_xls.mako:63
+#: report:addons/account_mcdb/report/report_account_move_line_xls.mako:58
+msgid "Ref."
+msgstr "Ref."
+
+#. module: account_mcdb
+#: report:account.analytic.line:0
+#: report:account.analytic.line_csv:0
+#: report:account.bank.statement.line:0
+#: report:account.bank.statement.line_csv:0
+#: report:account.move.line:0
+#: report:account.move.line_csv:0
+#: code:addons/account_mcdb/report/account_mcdb_export.py:61
+#: code:addons/account_mcdb/report/account_mcdb_export.py:166
+#: code:addons/account_mcdb/report/account_mcdb_export.py:252
+#: report:addons/account_mcdb/report/report_account_analytic_line_xls.mako:63
+#: report:addons/account_mcdb/report/report_account_bank_statement_line_xls.mako:58
+#: report:addons/account_mcdb/report/report_account_move_line_xls.mako:58
+#, python-format
+msgid "Document Date"
+msgstr "Document Date"
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+#: field:account.mcdb,model:0
+msgid "Type"
+msgstr "Type"
+
+#. module: account_mcdb
+#: selection:account.mcdb,reconciled:0
+msgid "NOT reconciled"
+msgstr "NOT reconciled"
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+msgid "Add all Periods"
+msgstr "Add all Periods"
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+msgid "Periods"
+msgstr "Periods"
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+msgid "Clear"
+msgstr "Clear"
+
+#. module: account_mcdb
+#: field:account.mcdb,display_cost_center:0
+msgid "Display cost centers?"
+msgstr "Display cost centers?"
+
+#. module: account_mcdb
+#: field:output.currency.for.export,export_selected:0
+msgid "Export only the selected items"
+msgstr "Export only the selected items"
+
+#. module: account_mcdb
+#: field:account.mcdb,analytic_account_f1_ids:0
+#: selection:account.mcdb,analytic_axis:0
+msgid "Free 1"
+msgstr "Free 1"
+
+#. module: account_mcdb
+#: field:account.mcdb,rev_analytic_account_f1_ids:0
+msgid "Exclude free 1 selection"
+msgstr "Exclude free 1 selection"
+
+#. module: account_mcdb
+#: model:ir.actions.act_window,name:account_mcdb.action_account_mcdb_analytic_form
+#: model:ir.ui.menu,name:account_mcdb.menu_finance_mcdb_analytic_move_line
+msgid "Analytic Selector"
+msgstr "Analytic Selector"
+
+#. module: account_mcdb
+#: constraint:account.move.line:0
+msgid "You can not create move line on closed account."
+msgstr "You can not create move line on closed account."
+
+#. module: account_mcdb
+#: view:account.analytic.line:0
+msgid "CC"
+msgstr "CC"
+
+#. module: account_mcdb
+#: field:account.mcdb,analytic_journal_ids:0
+msgid "Analytic journal code"
+msgstr "Analytic journal code"
+
+#. module: account_mcdb
+#: field:account.mcdb,analytic_account_f2_ids:0
+#: selection:account.mcdb,analytic_axis:0
+msgid "Free 2"
+msgstr "Free 2"
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+msgid "to"
+msgstr "to"
+
+#. module: account_mcdb
+#: field:account.mcdb,rev_instance_ids:0
+msgid "Exclude instance selection"
+msgstr "Exclude instance selection"
+
+#. module: account_mcdb
+#: view:account.move.line:0
+msgid "Total Functional Debit"
+msgstr "Total Functional Debit"
+
+#. module: account_mcdb
+#: field:account.mcdb,document_date_to:0
+msgid "Ending document date"
+msgstr "Ending document date"
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+msgid "G/L journals"
+msgstr "G/L journals"
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+msgid "Add all Cost Centers"
+msgstr "Add all Cost Centers"
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+msgid "Ana. Code"
+msgstr "Ana. Code"
+
+#. module: account_mcdb
+#: report:account.bank.statement.line:0
+#: report:account.bank.statement.line_csv:0
+msgid "-"
+msgstr "-"
+
+#. module: account_mcdb
+#: field:account.mcdb,user:0
+msgid "User"
+msgstr "User"
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+msgid "Add all Destinations"
+msgstr "Add all Destinations"
+
+#. module: account_mcdb
+#: code:addons/account_mcdb/account_mcdb.py:463
+#: code:addons/account_mcdb/account_mcdb.py:514
+#: code:addons/account_mcdb/mass_reallocation_search.py:43
+#: code:addons/account_mcdb/report/account_mcdb_export.py:54
+#: code:addons/account_mcdb/report/account_mcdb_export.py:156
+#: code:addons/account_mcdb/report/account_mcdb_export.py:243
+#: code:addons/account_mcdb/report/account_mcdb_export.py:318
+#: code:addons/account_mcdb/wizard/output_currency_for_export.py:64
+#: code:addons/account_mcdb/wizard/output_currency_for_export.py:76
+#, python-format
+msgid "Error"
+msgstr "Error"
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+msgid "Funding pools"
+msgstr "Funding pools"
+
+#. module: account_mcdb
+#: field:account.mcdb,instance_ids:0
+msgid "Proprietary instance"
+msgstr "Proprietary instance"
+
+#. module: account_mcdb
+#: report:account.analytic.line:0
+#: report:account.analytic.line_csv:0
+#: report:account.bank.statement.line:0
+#: report:account.bank.statement.line_csv:0
+#: report:account.move.line:0
+#: report:account.move.line_csv:0
+#: code:addons/account_mcdb/report/account_mcdb_export.py:61
+#: code:addons/account_mcdb/report/account_mcdb_export.py:166
+#: code:addons/account_mcdb/report/account_mcdb_export.py:252
+#: report:addons/account_mcdb/report/report_account_analytic_line_xls.mako:63
+#: report:addons/account_mcdb/report/report_account_bank_statement_line_xls.mako:58
+#: report:addons/account_mcdb/report/report_account_move_line_xls.mako:58
+#, python-format
+msgid "Posting Date"
+msgstr "Posting Date"
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+msgid "Remove all Instances"
+msgstr "Remove all Instances"
+
+#. module: account_mcdb
+#: field:account.line.csv.export,filename:0
+msgid "Filename"
+msgstr "Filename"
+
+#. module: account_mcdb
+#: report:account.analytic.line:0
+#: report:account.analytic.line_csv:0
+#: code:addons/account_mcdb/report/account_mcdb_export.py:166
+#, python-format
+msgid "General Account"
+msgstr "General Account"
+
+#. module: account_mcdb
+#: report:account.analytic.line:0
+#: report:account.analytic.line_csv:0
+#: report:account.move.line:0
+#: report:account.move.line_csv:0
+#: code:addons/account_mcdb/report/account_mcdb_export.py:61
+#: code:addons/account_mcdb/report/account_mcdb_export.py:166
+#: report:addons/account_mcdb/report/report_account_analytic_line_xls.mako:63
+#: report:addons/account_mcdb/report/report_account_move_line_xls.mako:58
+#, python-format
+msgid "Entry Sequence"
+msgstr "Entry Sequence"
+
+#. module: account_mcdb
+#: report:account.analytic.line:0
+#: report:account.analytic.line_csv:0
+#: report:account.move.line:0
+#: view:account.move.line:0
+#: report:account.move.line_csv:0
+#: code:addons/account_mcdb/report/account_mcdb_export.py:61
+#: code:addons/account_mcdb/report/account_mcdb_export.py:166
+#: report:addons/account_mcdb/report/report_account_analytic_line_xls.mako:63
+#: report:addons/account_mcdb/report/report_account_move_line_xls.mako:58
+#, python-format
+msgid "Period"
+msgstr "Period"
+
+#. module: account_mcdb
+#: code:addons/account_mcdb/account_mcdb.py:463
+#: code:addons/account_mcdb/account_mcdb.py:514
+#, python-format
+msgid "Error: System does not know from where you come from."
+msgstr "Error: System does not know from where you come from."
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+msgid "Search"
+msgstr "Search"
+
+#. module: account_mcdb
+#: field:account.mcdb,abs_id:0
+msgid "Register name"
+msgstr "Register name"
+
+#. module: account_mcdb
+#: view:account.move.line:0
+msgid "Debit/Credit"
+msgstr "Debit/Credit"
+
+#. module: account_mcdb
+#: view:account.analytic.line:0
+msgid "Have been reallocated"
+msgstr "Have been reallocated"
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+msgid "Instances"
+msgstr "Instances"
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+msgid "Remove all Analytic Journals"
+msgstr "Remove all Analytic Journals"
+
+#. module: account_mcdb
+#: field:account.mcdb,display_analytic_journal:0
+msgid "Display analytic journals?"
+msgstr "Display analytic journals?"
+
+#. module: account_mcdb
+#: selection:account.mcdb,reallocated:0
+msgid "Reallocated"
+msgstr "Reallocated"
+
+#. module: account_mcdb
+#: code:addons/account_mcdb/account_mcdb.py:347
+#, python-format
+msgid "Warning"
+msgstr "Warning"
+
+#. module: account_mcdb
+#: field:account.mcdb,rev_analytic_journal_ids:0
+msgid "Exclude analytic journal selection"
+msgstr "Exclude analytic journal selection"
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+#: field:account.mcdb,analytic_account_fp_ids:0
+#: selection:account.mcdb,analytic_axis:0
+#: code:addons/account_mcdb/report/account_mcdb_export.py:168
+#: report:addons/account_mcdb/report/report_account_analytic_line_xls.mako:67
+#, python-format
+msgid "Funding Pool"
+msgstr "Funding Pool"
+
+#. module: account_mcdb
+#: field:output.currency.for.export,domain:0
+msgid "Domain"
+msgstr "Domain"
+
+#. module: account_mcdb
+#: report:account.bank.statement.line:0
+#: report:account.bank.statement.line_csv:0
+#: field:account.mcdb,currency_id:0
+#: code:addons/account_mcdb/report/account_mcdb_export.py:252
+#: report:addons/account_mcdb/report/report_account_bank_statement_line_xls.mako:58
+#, python-format
+msgid "Currency"
+msgstr "Currency"
+
+#. module: account_mcdb
+#: code:addons/account_mcdb/wizard/output_currency_for_export.py:76
+#, python-format
+msgid "Please choose an export format!"
+msgstr "Please choose an export format!"
+
+#. module: account_mcdb
+#: field:account.mcdb,display_account:0
+msgid "Display accounts?"
+msgstr "Display accounts?"
+
+#. module: account_mcdb
+#: report:account.analytic.line:0
+#: report:account.analytic.line_csv:0
+#: code:addons/account_mcdb/report/account_mcdb_export.py:176
+#: report:addons/account_mcdb/report/report_account_analytic_line_xls.mako:63
+#, python-format
+msgid "Reversal Origin"
+msgstr "Reversal Origin"
+
+#. module: account_mcdb
+#: selection:account.mcdb,model:0
+#: report:account.move.line:0
+#: report:account.move.line_csv:0
+#: report:addons/account_mcdb/report/report_account_move_line_xls.mako:8
+#: model:ir.actions.report.xml,name:account_mcdb.report_account_move_line
+#: model:ir.actions.report.xml,name:account_mcdb.report_account_move_line_csv
+#: model:ir.actions.report.xml,name:account_mcdb.report_account_move_line_xls
+#: model:ir.model,name:account_mcdb.model_account_move_line
+msgid "Journal Items"
+msgstr "Journal Items"
+
+#. module: account_mcdb
+#: field:account.mcdb,rev_analytic_account_f2_ids:0
+msgid "Exclude free 2 selection"
+msgstr "Exclude free 2 selection"
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+msgid "Analytic journals"
+msgstr "Analytic journals"
+
+#. module: account_mcdb
+#: field:account.mcdb,display_period:0
+msgid "Display periods?"
+msgstr "Display periods?"
+
+#. module: account_mcdb
+#: field:account.mcdb,rev_account_type_ids:0
+msgid "Exclude account type selection"
+msgstr "Exclude account type selection"
+
+#. module: account_mcdb
+#: field:account.mcdb,fx_table_id:0
+#: field:output.currency.for.export,fx_table_id:0
+msgid "FX Table"
+msgstr "FX Table"
+
+#. module: account_mcdb
+#: field:account.analytic.line,output_amount_debit:0
+#: field:account.bank.statement.line,output_amount_debit:0
+#: field:account.move.line,output_amount_debit:0
+msgid "Output debit"
+msgstr "Output debit"
+
+#. module: account_mcdb
+#: code:addons/account_mcdb/report/account_mcdb_export.py:63
+#, python-format
+msgid "Func. Debit"
+msgstr "Func. Debit"
+
+#. module: account_mcdb
+#: field:account.mcdb,display_instance:0
+msgid "Display instances?"
+msgstr "Display instances?"
+
+#. module: account_mcdb
+#: view:account.move.line:0
+msgid "Search Journal Items"
+msgstr "Search Journal Items"
+
+#. module: account_mcdb
+#: report:account.analytic.line:0
+#: report:account.analytic.line_csv:0
+#: report:account.move.line:0
+#: report:account.move.line_csv:0
+msgid "CODE"
+msgstr "CODE"
+
+#. module: account_mcdb
+#: report:account.bank.statement.line:0
+#: report:account.bank.statement.line_csv:0
+#: field:account.mcdb,ref:0
+#: view:account.move.line:0
+#: code:addons/account_mcdb/report/account_mcdb_export.py:61
+#: code:addons/account_mcdb/report/account_mcdb_export.py:166
+#: code:addons/account_mcdb/report/account_mcdb_export.py:252
+#: report:addons/account_mcdb/report/report_account_bank_statement_line_xls.mako:58
+#, python-format
+msgid "Reference"
+msgstr "Reference"
+
+#. module: account_mcdb
+#: selection:output.currency.for.export,export_format:0
+msgid "CSV"
+msgstr "CSV"
+
+#. module: account_mcdb
+#: report:account.bank.statement.line:0
+#: report:account.bank.statement.line_csv:0
+#: view:account.move.line:0
+#: code:addons/account_mcdb/report/account_mcdb_export.py:253
+#: report:addons/account_mcdb/report/report_account_bank_statement_line_xls.mako:58
+#, python-format
+msgid "Register Name"
+msgstr "Register Name"
+
+#. module: account_mcdb
+#: field:account.mcdb,display_in_output_currency:0
+msgid "Display in output currency"
+msgstr "Display in output currency"
+
+#. module: account_mcdb
+#: view:account.move.line:0
+msgid "Account Entries"
+msgstr "Account Entries"
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+msgid "Add all Accounts"
+msgstr "Add all Accounts"
+
+#. module: account_mcdb
+#: model:ir.model,name:account_mcdb.model_mass_reallocation_search
+msgid "Mass Reallocation Search"
+msgstr "Mass Reallocation Search"
+
+#. module: account_mcdb
+#: view:account.mcdb:0
+msgid " "
+msgstr " "
+
+#. module: account_mcdb
+#: field:account.mcdb,partner_id:0
+msgid "Partner"
+msgstr "Partner"
+
+#. module: account_mcdb
+#: model:ir.actions.act_window,name:account_mcdb.action_account_mcdb
+#: model:ir.ui.menu,name:account_mcdb.menu_finance_mcdb_move_line_search
+msgid "G/L Selector - Saved queries"
+msgstr "G/L Selector - Saved queries"
+
+#. module: account_mcdb
+#: constraint:account.bank.statement.line:0
+msgid "The amount of the voucher must be the same amount as the one on the statement line"
+msgstr "The amount of the voucher must be the same amount as the one on the statement line"
+
+#. module: account_mcdb
+#: field:account.mcdb,account_ids:0
+msgid "Account Code"
+msgstr "Account Code"
+
+#. module: account_mcdb
+#: view:account.line.csv.export:0
+msgid "Analytic Lines Export"
+msgstr "Analytic Lines Export"
+

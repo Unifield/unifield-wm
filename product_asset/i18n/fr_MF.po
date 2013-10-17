@@ -1,0 +1,694 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* product_asset
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 07:42+0000\n"
+"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: product_asset
+#: selection:product.asset.event,event_type:0
+msgid "Start Use"
+msgstr "Start Use"
+
+#. module: product_asset
+#: view:product.asset.event:0
+#: field:product.asset.event,state:0
+msgid "Current Status"
+msgstr "Current Status"
+
+#. module: product_asset
+#: report:product.asset:0
+msgid "Asset Form N°"
+msgstr "Asset Form N°"
+
+#. module: product_asset
+#: report:product.asset:0
+#: field:product.asset,invo_value:0
+msgid "Value"
+msgstr "Value"
+
+#. module: product_asset
+#: selection:product.asset.event,event_type:0
+msgid "End Use"
+msgstr "End Use"
+
+#. module: product_asset
+#: field:product.asset,receipt_place:0
+msgid "Receipt Place"
+msgstr "Receipt Place"
+
+#. module: product_asset
+#: selection:product.asset.event,event_type:0
+msgid "Other"
+msgstr "Other"
+
+#. module: product_asset
+#: model:ir.model,name:product_asset.model_stock_move_memory_out
+msgid "stock.move.memory.out"
+msgstr "stock.move.memory.out"
+
+#. module: product_asset
+#: field:product.asset,orig_mission_code:0
+msgid "Original Mission Code"
+msgstr "Original Mission Code"
+
+#. module: product_asset
+#: report:product.asset:0
+#: field:product.asset,serial_nb:0
+#: field:product.asset.event,serial_nb:0
+msgid "Serial Number"
+msgstr "Serial Number"
+
+#. module: product_asset
+#: report:product.asset:0
+#: field:product.asset,brand:0
+#: field:product.asset.event,brand:0
+msgid "Brand"
+msgstr "Brand"
+
+#. module: product_asset
+#: constraint:product.template:0
+msgid "Error: The default UOM and the purchase UOM must be in the same category."
+msgstr "Error: The default UOM and the purchase UOM must be in the same category."
+
+#. module: product_asset
+#: report:product.asset:0
+#: field:product.asset,model:0
+#: field:product.asset.event,model:0
+msgid "Model"
+msgstr "Model"
+
+#. module: product_asset
+#: selection:product.asset.event,event_type:0
+msgid "Donation (external)"
+msgstr "Donation (external)"
+
+#. module: product_asset
+#: constraint:stock.move:0
+msgid "You try to assign a lot which is not from the same product"
+msgstr "You try to assign a lot which is not from the same product"
+
+#. module: product_asset
+#: model:ir.model,name:product_asset.model_product_asset_type
+msgid "Specify the type of asset at product level"
+msgstr "Specify the type of asset at product level"
+
+#. module: product_asset
+#: report:product.asset:0
+#: field:product.asset,invo_supplier:0
+#: field:product.asset,partner_id:0
+msgid "Supplier"
+msgstr "Supplier"
+
+#. module: product_asset
+#: field:stock.move.memory.in,asset_check:0
+#: field:stock.move.memory.out,asset_check:0
+msgid "Asset Check"
+msgstr "Asset Check"
+
+#. module: product_asset
+#: model:ir.ui.menu,name:product_asset.menu_asset_sales
+#: field:product.product,asset_ids:0
+msgid "Assets"
+msgstr "Assets"
+
+#. module: product_asset
+#: selection:product.asset.event,event_type:0
+msgid "Reception"
+msgstr "Reception"
+
+#. module: product_asset
+#: model:ir.model,name:product_asset.model_product_asset_event
+msgid "Event for asset follow up"
+msgstr "Event for asset follow up"
+
+#. module: product_asset
+#: report:product.asset:0
+#: field:product.asset,year:0
+msgid "Year"
+msgstr "Year"
+
+#. module: product_asset
+#: field:product.asset,invo_currency:0
+msgid "Currency"
+msgstr "Currency"
+
+#. module: product_asset
+#: view:product.asset:0
+msgid "MSF Codification"
+msgstr "MSF Codification"
+
+#. module: product_asset
+#: selection:product.template,subtype:0
+msgid "Single Item"
+msgstr "Single Item"
+
+#. module: product_asset
+#: model:ir.model,name:product_asset.model_product_template
+msgid "Product Template"
+msgstr "Product Template"
+
+#. module: product_asset
+#: model:ir.actions.act_window,name:product_asset.asset_type_normal_action
+#: model:ir.ui.menu,name:product_asset.menu_asset_type_sales
+#: view:product.asset.type:0
+msgid "Asset Types"
+msgstr "Asset Types"
+
+#. module: product_asset
+#: view:product.asset.event:0
+#: field:product.asset.event,proj_code:0
+msgid "Project Code"
+msgstr "Project Code"
+
+#. module: product_asset
+#: model:ir.model,name:product_asset.model_product_asset
+msgid "A specific asset of a product"
+msgstr "A specific asset of a product"
+
+#. module: product_asset
+#: selection:product.asset.event,event_type:0
+msgid "Transfer (internal)"
+msgstr "Transfer (internal)"
+
+#. module: product_asset
+#: constraint:product.product:0
+msgid "Constraint error on Kit Product."
+msgstr "Constraint error on Kit Product."
+
+#. module: product_asset
+#: model:ir.actions.act_window,name:product_asset.asset_2_events_normal_link
+#: model:ir.actions.act_window,name:product_asset.product_2_events_normal_link
+msgid "Asset Follow Up"
+msgstr "Asset Follow Up"
+
+#. module: product_asset
+#: model:ir.model,name:product_asset.model_stock_partial_picking
+msgid "Partial Picking"
+msgstr "Partial Picking"
+
+#. module: product_asset
+#: report:product.asset:0
+msgid "…......................................."
+msgstr "…......................................."
+
+#. module: product_asset
+#: report:product.asset:0
+msgid ")"
+msgstr ")"
+
+#. module: product_asset
+#: report:product.asset:0
+#: field:product.asset.event,location:0
+msgid "Location"
+msgstr "Location"
+
+#. module: product_asset
+#: field:product.asset,name:0
+#: field:product.asset.event,asset_id:0
+msgid "Asset Code"
+msgstr "Asset Code"
+
+#. module: product_asset
+#: field:product.asset,type:0
+msgid "Type"
+msgstr "Type"
+
+#. module: product_asset
+#: field:product.asset,prod_int_name:0
+msgid "Product Description"
+msgstr "Product Description"
+
+#. module: product_asset
+#: selection:product.asset.event,state:0
+msgid "In Use"
+msgstr "In Use"
+
+#. module: product_asset
+#: constraint:product.product:0
+msgid "Warning! GMDN code must be digits!"
+msgstr "Warning! GMDN code must be digits!"
+
+#. module: product_asset
+#: constraint:stock.picking:0
+msgid "You cannot validate this document because it contains a line with an inactive product"
+msgstr "You cannot validate this document because it contains a line with an inactive product"
+
+#. module: product_asset
+#: model:ir.model,name:product_asset.model_stock_move
+msgid "Stock Move"
+msgstr "Stock Move"
+
+#. module: product_asset
+#: model:ir.actions.act_window,name:product_asset.asset_normal_action
+#: model:ir.actions.act_window,name:product_asset.product_2_assets_normal_link
+#: model:ir.ui.menu,name:product_asset.menu_assets_sales
+#: view:product.asset:0
+msgid "Asset Forms"
+msgstr "Asset Forms"
+
+#. module: product_asset
+#: selection:product.asset.event,state:0
+msgid " "
+msgstr " "
+
+#. module: product_asset
+#: field:product.asset,local_ref:0
+msgid "Local Reference"
+msgstr "Local Reference"
+
+#. module: product_asset
+#: model:ir.module.module,shortdesc:product_asset.module_meta_information
+msgid "Products & Pricelists modified by MSF"
+msgstr "Products & Pricelists modified by MSF"
+
+#. module: product_asset
+#: view:product.asset.event:0
+msgid "Asset Event"
+msgstr "Asset Event"
+
+#. module: product_asset
+#: field:product.asset,nomenclature_description:0
+msgid "Product Nomenclature"
+msgstr "Product Nomenclature"
+
+#. module: product_asset
+#: view:product.asset:0
+#: field:product.asset,event_ids:0
+msgid "Events"
+msgstr "Events"
+
+#. module: product_asset
+#: model:ir.model,name:product_asset.model_stock_picking
+msgid "Picking List"
+msgstr "Picking List"
+
+#. module: product_asset
+#: constraint:stock.move:0
+msgid "You must assign an asset for this product."
+msgstr "You must assign an asset for this product."
+
+#. module: product_asset
+#: model:ir.ui.menu,name:product_asset.menu_asset_event_sales
+msgid "Asset events & follow up"
+msgstr "Asset events & follow up"
+
+#. module: product_asset
+#: code:addons/product_asset/product_asset.py:484
+#, python-format
+msgid "Error!"
+msgstr "Error!"
+
+#. module: product_asset
+#: constraint:stock.move:0
+msgid "You cannot select Service Location as Source Location."
+msgstr "You cannot select Service Location as Source Location."
+
+#. module: product_asset
+#: selection:product.asset.event,event_type:0
+msgid "Loaning"
+msgstr "Loaning"
+
+#. module: product_asset
+#: view:product.asset:0
+#: view:product.asset.event:0
+msgid "Group By..."
+msgstr "Group By..."
+
+#. module: product_asset
+#: constraint:product.product:0
+msgid "You must select on order procurement method for Service with Reception products."
+msgstr "You must select on order procurement method for Service with Reception products."
+
+#. module: product_asset
+#: report:product.asset:0
+msgid "Description:"
+msgstr "Description:"
+
+#. module: product_asset
+#: report:product.asset:0
+msgid "Date:"
+msgstr "Date:"
+
+#. module: product_asset
+#: report:product.asset:0
+msgid "To:"
+msgstr "To:"
+
+#. module: product_asset
+#: view:product.asset.type:0
+msgid "Asset Type Information"
+msgstr "Asset Type Information"
+
+#. module: product_asset
+#: field:product.asset,project_po:0
+msgid "Project PO"
+msgstr "Project PO"
+
+#. module: product_asset
+#: view:product.asset:0
+#: selection:product.template,subtype:0
+#: field:stock.move,asset_id:0
+#: field:stock.move.memory.in,asset_id:0
+#: field:stock.move.memory.out,asset_id:0
+msgid "Asset"
+msgstr "Asset"
+
+#. module: product_asset
+#: field:product.asset.type,name:0
+msgid "Name"
+msgstr "Name"
+
+#. module: product_asset
+#: view:product.asset.event:0
+msgid "Selection"
+msgstr "Selection"
+
+#. module: product_asset
+#: report:product.asset:0
+#: field:product.asset,arrival_date:0
+msgid "Arrival Date"
+msgstr "Arrival Date"
+
+#. module: product_asset
+#: constraint:stock.move:0
+msgid "Constraint error on Uom"
+msgstr "Constraint error on Uom"
+
+#. module: product_asset
+#: model:ir.model,name:product_asset.model_stock_move_memory_in
+msgid "stock.move.memory.in"
+msgstr "stock.move.memory.in"
+
+#. module: product_asset
+#: field:product.asset,invo_num:0
+msgid "Invoice Number"
+msgstr "Invoice Number"
+
+#. module: product_asset
+#: report:product.asset:0
+msgid "Purchase"
+msgstr "Purchase"
+
+#. module: product_asset
+#: selection:product.asset.event,event_type:0
+msgid "Repairing"
+msgstr "Repairing"
+
+#. module: product_asset
+#: field:product.asset,invo_donator_code:0
+msgid "Donator Code"
+msgstr "Donator Code"
+
+#. module: product_asset
+#: view:product.asset:0
+#: field:product.asset,asset_type_id:0
+#: view:product.asset.event:0
+#: field:product.asset.event,asset_type_id:0
+#: view:product.asset.type:0
+#: field:product.template,asset_type_id:0
+msgid "Asset Type"
+msgstr "Asset Type"
+
+#. module: product_asset
+#: report:product.asset:0
+msgid "Order n°"
+msgstr "Order n°"
+
+#. module: product_asset
+#: report:product.asset:0
+msgid "Comment:"
+msgstr "Comment:"
+
+#. module: product_asset
+#: field:stock.move,subtype:0
+msgid "Product Subtype"
+msgstr "Product Subtype"
+
+#. module: product_asset
+#: model:ir.actions.report.xml,name:product_asset.report_product_asset
+#: view:product.asset:0
+#: view:product.asset.event:0
+msgid "Asset Form"
+msgstr "Asset Form"
+
+#. module: product_asset
+#: sql_constraint:product.asset:0
+msgid "Asset Code must be unique per instance and per product!"
+msgstr "Asset Code must be unique per instance and per product!"
+
+#. module: product_asset
+#: field:product.asset,hq_ref:0
+msgid "HQ Reference"
+msgstr "HQ Reference"
+
+#. module: product_asset
+#: view:product.asset:0
+msgid "Invoice"
+msgstr "Invoice"
+
+#. module: product_asset
+#: constraint:stock.move:0
+#: constraint:stock.picking:0
+msgid "Wrong reason type for an OUT created from scratch."
+msgstr "Wrong reason type for an OUT created from scratch."
+
+#. module: product_asset
+#: constraint:product.product:0
+msgid "If you select \"Non-stockable\" as product type then you have to select \"Make to order\" as procurement method"
+msgstr "If you select \"Non-stockable\" as product type then you have to select \"Make to order\" as procurement method"
+
+#. module: product_asset
+#: selection:product.asset.event,state:0
+msgid "Repair"
+msgstr "Repair"
+
+#. module: product_asset
+#: field:product.asset,invo_certif_depreciation:0
+msgid "Certificate of Depreciation"
+msgstr "Certificate of Depreciation"
+
+#. module: product_asset
+#: model:ir.model,name:product_asset.model_product_product
+#: report:product.asset:0
+#: view:product.asset:0
+#: field:product.asset,product_id:0
+#: view:product.asset.event:0
+#: field:product.asset.event,product_id:0
+msgid "Product"
+msgstr "Product"
+
+#. module: product_asset
+#: report:product.asset:0
+msgid "Final Destination"
+msgstr "Final Destination"
+
+#. module: product_asset
+#: field:product.asset,international_po:0
+msgid "International PO"
+msgstr "International PO"
+
+#. module: product_asset
+#: view:product.asset:0
+msgid "Asset Reference"
+msgstr "Asset Reference"
+
+#. module: product_asset
+#: field:product.asset,invo_date:0
+msgid "Invoice Date"
+msgstr "Invoice Date"
+
+#. module: product_asset
+#: model:ir.model,name:product_asset.model_stock_partial_move
+msgid "Partial Move"
+msgstr "Partial Move"
+
+#. module: product_asset
+#: code:addons/product_asset/product_asset.py:484
+#, python-format
+msgid "You must assign an asset for the product %s."
+msgstr "You must assign an asset for the product %s."
+
+#. module: product_asset
+#: field:product.asset,xmlid_name:0
+msgid "XML Code, hidden field"
+msgstr "XML Code, hidden field"
+
+#. module: product_asset
+#: model:ir.actions.act_window,name:product_asset.asset_event_normal_action
+#: view:product.asset.event:0
+msgid "Asset Events"
+msgstr "Asset Events"
+
+#. module: product_asset
+#: selection:product.template,subtype:0
+msgid "Kit/Module"
+msgstr "Kit/Module"
+
+#. module: product_asset
+#: field:product.template,subtype:0
+msgid "Product SubType"
+msgstr "Product SubType"
+
+#. module: product_asset
+#: sql_constraint:product.product:0
+msgid "The \"Product Code\" must be unique"
+msgstr "The \"Product Code\" must be unique"
+
+#. module: product_asset
+#: report:product.asset:0
+#: view:product.asset:0
+msgid "Event History"
+msgstr "Event History"
+
+#. module: product_asset
+#: view:product.asset.event:0
+#: field:product.asset.event,event_type:0
+msgid "Event Type"
+msgstr "Event Type"
+
+#. module: product_asset
+#: model:ir.module.module,description:product_asset.module_meta_information
+msgid "\n"
+"    This is the base module for managing products and pricelists in OpenERP.\n"
+"\n"
+"    Products support variants, different pricing methods, suppliers\n"
+"    information, make to stock/order, different unit of measures,\n"
+"    packaging and properties.\n"
+"\n"
+"    Pricelists support:\n"
+"    * Multiple-level of discount (by product, category, quantities)\n"
+"    * Compute price based on different criteria:\n"
+"        * Other pricelist,\n"
+"        * Cost price,\n"
+"        * List price,\n"
+"        * Supplier price, ...\n"
+"    Pricelists preferences by product and/or partners.\n"
+"\n"
+"    Print product labels with barcode.\n"
+"    "
+msgstr "\n"
+"    This is the base module for managing products and pricelists in OpenERP.\n"
+"\n"
+"    Products support variants, different pricing methods, suppliers\n"
+"    information, make to stock/order, different unit of measures,\n"
+"    packaging and properties.\n"
+"\n"
+"    Pricelists support:\n"
+"    * Multiple-level of discount (by product, category, quantities)\n"
+"    * Compute price based on different criteria:\n"
+"        * Other pricelist,\n"
+"        * Cost price,\n"
+"        * List price,\n"
+"        * Supplier price, ...\n"
+"    Pricelists preferences by product and/or partners.\n"
+"\n"
+"    Print product labels with barcode.\n"
+"    "
+
+#. module: product_asset
+#: report:product.asset:0
+msgid ":"
+msgstr ":"
+
+#. module: product_asset
+#: report:product.asset:0
+msgid "Invoice n°"
+msgstr "Invoice n°"
+
+#. module: product_asset
+#: field:product.asset,description:0
+msgid "Asset Description"
+msgstr "Asset Description"
+
+#. module: product_asset
+#: selection:product.asset.event,state:0
+msgid "Stock"
+msgstr "Stock"
+
+#. module: product_asset
+#: constraint:product.product:0
+msgid "Error: Invalid ean code"
+msgstr "Error: Invalid ean code"
+
+#. module: product_asset
+#: report:product.asset:0
+#: field:product.asset.event,date:0
+msgid "Date"
+msgstr "Date"
+
+#. module: product_asset
+#: report:product.asset:0
+msgid "Donor"
+msgstr "Donor"
+
+#. module: product_asset
+#: constraint:stock.move:0
+msgid "You must assign a batch number for this product."
+msgstr "You must assign a batch number for this product."
+
+#. module: product_asset
+#: report:product.asset:0
+msgid "…........../…........../….........."
+msgstr "…........../…........../….........."
+
+#. module: product_asset
+#: view:product.asset.event:0
+msgid "Event Information"
+msgstr "Event Information"
+
+#. module: product_asset
+#: view:product.asset:0
+msgid "Traceability"
+msgstr "Traceability"
+
+#. module: product_asset
+#: help:product.template,subtype:0
+msgid "Will change the way procurements are processed."
+msgstr "Will change the way procurements are processed."
+
+#. module: product_asset
+#: report:product.asset:0
+msgid "("
+msgstr "("
+
+#. module: product_asset
+#: field:product.asset,instance_id:0
+msgid "Instance"
+msgstr "Instance"
+
+#. module: product_asset
+#: field:product.asset,prod_int_code:0
+msgid "Product Code"
+msgstr "Product Code"
+
+#. module: product_asset
+#: report:product.asset:0
+#: view:product.asset:0
+#: field:product.asset,comment:0
+#: view:product.asset.event:0
+#: field:product.asset.event,comment:0
+msgid "Comment"
+msgstr "Comment"
+
+#. module: product_asset
+#: selection:product.asset.event,event_type:0
+msgid "Obsolete"
+msgstr "Obsolete"
+
+#. module: product_asset
+#: field:stock.move.memory.in,location_supplier_customer_mem_out:0
+#: field:stock.move.memory.out,location_supplier_customer_mem_out:0
+msgid "Location Supplier Customer"
+msgstr "Location Supplier Customer"
+

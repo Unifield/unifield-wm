@@ -1,0 +1,226 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* account_reconciliation
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 07:42+0000\n"
+"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_reconciliation
+#: selection:account.move.line.reconcile,state:0
+msgid "Partial Reconciliation"
+msgstr "Partial Reconciliation"
+
+#. module: account_reconciliation
+#: field:account.move.line.reconcile,different_currencies:0
+msgid "Is this reconciliation in different currencies? (2 at most)"
+msgstr "Is this reconciliation in different currencies? (2 at most)"
+
+#. module: account_reconciliation
+#: code:addons/account_reconciliation/wizard/account_reconcile.py:150
+#, python-format
+msgid "This account is not reconciliable: %s"
+msgstr "This account is not reconciliable: %s"
+
+#. module: account_reconciliation
+#: selection:account.move.line.reconcile,state:0
+msgid "Partial Reconciliation with change"
+msgstr "Partial Reconciliation with change"
+
+#. module: account_reconciliation
+#: selection:account.move.line.reconcile,state:0
+msgid "Full Reconciliation"
+msgstr "Full Reconciliation"
+
+#. module: account_reconciliation
+#: model:ir.model,name:account_reconciliation.model_account_move_line
+msgid "Journal Items"
+msgstr "Journal Items"
+
+#. module: account_reconciliation
+#: code:addons/account_reconciliation/account_move_line.py:85
+#: code:addons/account_reconciliation/account_move_line.py:140
+#, python-format
+msgid "Warning !"
+msgstr "Warning !"
+
+#. module: account_reconciliation
+#: code:addons/account_reconciliation/wizard/account_reconcile.py:112
+#, python-format
+msgid "You can only do reconciliation on Posted Entries!"
+msgstr "You can only do reconciliation on Posted Entries!"
+
+#. module: account_reconciliation
+#: selection:account.move.line.reconcile,state:0
+msgid "Full Reconciliation with change"
+msgstr "Full Reconciliation with change"
+
+#. module: account_reconciliation
+#: model:ir.module.module,description:account_reconciliation.module_meta_information
+msgid "Default reconciliation wizard adaptation for MSF"
+msgstr "Default reconciliation wizard adaptation for MSF"
+
+#. module: account_reconciliation
+#: constraint:account.move.line:0
+msgid "Company must be same for its related account and period."
+msgstr "Company must be same for its related account and period."
+
+#. module: account_reconciliation
+#: constraint:account.move.line:0
+msgid "You can not create move line on closed account."
+msgstr "You can not create move line on closed account."
+
+#. module: account_reconciliation
+#: view:account.move.line.reconcile:0
+msgid "Partial Reconcile"
+msgstr "Partial Reconcile"
+
+#. module: account_reconciliation
+#: sql_constraint:account.move.line:0
+msgid "Wrong credit or debit value in accounting entry !"
+msgstr "Wrong credit or debit value in accounting entry !"
+
+#. module: account_reconciliation
+#: code:addons/account_reconciliation/wizard/account_reconcile.py:137
+#, python-format
+msgid "Cannot reconcile entries : Cross check between transfer currencies fails."
+msgstr "Cannot reconcile entries : Cross check between transfer currencies fails."
+
+#. module: account_reconciliation
+#: code:addons/account_reconciliation/account_move_line.py:64
+#: code:addons/account_reconciliation/account_move_line.py:91
+#: code:addons/account_reconciliation/wizard/account_reconcile.py:112
+#: code:addons/account_reconciliation/wizard/account_reconcile.py:137
+#: code:addons/account_reconciliation/wizard/account_reconcile.py:150
+#, python-format
+msgid "Warning"
+msgstr "Warning"
+
+#. module: account_reconciliation
+#: model:ir.module.module,shortdesc:account_reconciliation.module_meta_information
+msgid "Account reconciliation wizard"
+msgstr "Account reconciliation wizard"
+
+#. module: account_reconciliation
+#: code:addons/account_reconciliation/account_move_line.py:64
+#, python-format
+msgid "Reconciliation of lines that come from a \"Pending payment\" wizard should be done via registers. Lines: %s"
+msgstr "Reconciliation of lines that come from a \"Pending payment\" wizard should be done via registers. Lines: %s"
+
+#. module: account_reconciliation
+#: code:addons/account_reconciliation/account_move_line.py:91
+#, python-format
+msgid "Already Reconciled!"
+msgstr "Already Reconciled!"
+
+#. module: account_reconciliation
+#: code:addons/account_reconciliation/account_move_line.py:177
+#, python-format
+msgid "The account is not defined to be reconciled !"
+msgstr "The account is not defined to be reconciled !"
+
+#. module: account_reconciliation
+#: code:addons/account_reconciliation/wizard/account_reconcile.py:160
+#, python-format
+msgid "An account is different from others: %s"
+msgstr "An account is different from others: %s"
+
+#. module: account_reconciliation
+#: code:addons/account_reconciliation/wizard/account_reconcile.py:177
+#, python-format
+msgid "Third parties do not match or bad company configuration!"
+msgstr "Third parties do not match or bad company configuration!"
+
+#. module: account_reconciliation
+#: constraint:account.move.line:0
+msgid "You can not create move line on view account."
+msgstr "You can not create move line on view account."
+
+#. module: account_reconciliation
+#: code:addons/account_reconciliation/account_move_line.py:85
+#: code:addons/account_reconciliation/account_move_line.py:140
+#, python-format
+msgid "To reconcile the entries company should be the same for all entries"
+msgstr "To reconcile the entries company should be the same for all entries"
+
+#. module: account_reconciliation
+#: code:addons/account_reconciliation/account_move_line.py:174
+#, python-format
+msgid "Entry is already reconciled"
+msgstr "Entry is already reconciled"
+
+#. module: account_reconciliation
+#: view:account.move.line.reconcile:0
+msgid "Reconcile"
+msgstr "Reconcile"
+
+#. module: account_reconciliation
+#: model:ir.model,name:account_reconciliation.model_account_move_reconcile
+msgid "Account Reconciliation"
+msgstr "Account Reconciliation"
+
+#. module: account_reconciliation
+#: code:addons/account_reconciliation/account_move_line.py:63
+#, python-format
+msgid "%s (in %s)"
+msgstr "%s (in %s)"
+
+#. module: account_reconciliation
+#: code:addons/account_reconciliation/account_move_line.py:144
+#: code:addons/account_reconciliation/account_move_line.py:172
+#: code:addons/account_reconciliation/account_move_line.py:174
+#: code:addons/account_reconciliation/account_move_line.py:177
+#: code:addons/account_reconciliation/account_move_line.py:179
+#: code:addons/account_reconciliation/wizard/account_reconcile.py:160
+#: code:addons/account_reconciliation/wizard/account_reconcile.py:177
+#, python-format
+msgid "Error"
+msgstr "Error"
+
+#. module: account_reconciliation
+#: view:account.move.line.reconcile:0
+msgid "You are about to reconcile entries in different currencies; you will trigger the creation of an automated adjustment in functional currency"
+msgstr "You are about to reconcile entries in different currencies; you will trigger the creation of an automated adjustment in functional currency"
+
+#. module: account_reconciliation
+#: view:account.move.line.reconcile:0
+msgid "Cancel"
+msgstr "Cancel"
+
+#. module: account_reconciliation
+#: code:addons/account_reconciliation/account_move_line.py:145
+#, python-format
+msgid "Entry \"%s\" is not valid !"
+msgstr "Entry \"%s\" is not valid !"
+
+#. module: account_reconciliation
+#: field:account.move.line.reconcile,state:0
+msgid "State"
+msgstr "State"
+
+#. module: account_reconciliation
+#: code:addons/account_reconciliation/account_move_line.py:172
+#, python-format
+msgid "Entries are not of the same account or already reconciled ! "
+msgstr "Entries are not of the same account or already reconciled ! "
+
+#. module: account_reconciliation
+#: code:addons/account_reconciliation/account_move_line.py:179
+#, python-format
+msgid "Some entries are already reconciled !"
+msgstr "Some entries are already reconciled !"
+
+#. module: account_reconciliation
+#: model:ir.model,name:account_reconciliation.model_account_move_line_reconcile
+msgid "Account move line reconcile"
+msgstr "Account move line reconcile"
+

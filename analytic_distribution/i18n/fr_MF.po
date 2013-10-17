@@ -1,0 +1,2087 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* analytic_distribution
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 07:42+0000\n"
+"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: analytic_distribution
+#: field:account.commitment.line,analytic_lines:0
+#: field:analytic.distribution,analytic_lines:0
+#: model:ir.actions.server,name:analytic_distribution.action_analytic_lines_from_account_ml_search
+msgid "Analytic Lines"
+msgstr "Analytic Lines"
+
+#. module: analytic_distribution
+#: view:analytic.distribution.wizard:0
+msgid "Populate line analytic distribution from header*"
+msgstr "Populate line analytic distribution from header*"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/account_commitment.py:498
+#: code:addons/analytic_distribution/account_commitment.py:529
+#, python-format
+msgid "Initial Amount should be superior to Amount Left"
+msgstr "Initial Amount should be superior to Amount Left"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/account_commitment.py:190
+#, python-format
+msgid "You can only delete done commitments!"
+msgstr "You can only delete done commitments!"
+
+#. module: analytic_distribution
+#: field:account.commitment.line,initial_amount:0
+msgid "Initial amount"
+msgstr "Initial amount"
+
+#. module: analytic_distribution
+#: model:account.analytic.account,name:analytic_distribution.analytic_account_destination_expatriates
+msgid "Expatriates"
+msgstr "Expatriates"
+
+#. module: analytic_distribution
+#: view:account.commitment:0
+#: field:analytic.distribution,commitment_line_ids:0
+msgid "Commitment voucher lines"
+msgstr "Commitment voucher lines"
+
+#. module: analytic_distribution
+#: constraint:account.bank.statement.line:0
+msgid "The amount of the voucher must be the same amount as the one on the statement line"
+msgstr "The amount of the voucher must be the same amount as the one on the statement line"
+
+#. module: analytic_distribution
+#: model:ir.model,name:analytic_distribution.model_free_2_distribution_line
+msgid "free.2.distribution.line"
+msgstr "free.2.distribution.line"
+
+#. module: analytic_distribution
+#: selection:account.analytic.line,journal_type:0
+msgid "Situation"
+msgstr "Situation"
+
+#. module: analytic_distribution
+#: selection:account.analytic.line,distrib_line_id:0
+msgid "free2"
+msgstr "free2"
+
+#. module: analytic_distribution
+#: field:analytic.distribution.wizard,have_header:0
+msgid "Is this wizard come from an invoice line?"
+msgstr "Is this wizard come from an invoice line?"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/analytic_line.py:176
+#, python-format
+msgid "No account_id found in given values!"
+msgstr "No account_id found in given values!"
+
+#. module: analytic_distribution
+#: field:analytic.distribution.wizard,partner_type:0
+msgid "Partner Type"
+msgstr "Partner Type"
+
+#. module: analytic_distribution
+#: constraint:account.account:0
+msgid "Configuration Error! \n"
+"You cannot define children to an account with internal type different of \"View\"! "
+msgstr "Configuration Error! \n"
+"You cannot define children to an account with internal type different of \"View\"! "
+
+#. module: analytic_distribution
+#: selection:analytic.distribution.wizard,register_line_state:0
+msgid "Unknown"
+msgstr "Unknown"
+
+#. module: analytic_distribution
+#: view:account.commitment:0
+#: field:account.commitment.line,commit_id:0
+#: field:analytic.distribution.wizard,commitment_id:0
+#: model:ir.ui.menu,name:analytic_distribution.menu_commitment_entries
+msgid "Commitment Voucher"
+msgstr "Commitment Voucher"
+
+#. module: analytic_distribution
+#: view:account.analytic.account:0
+msgid "Pending"
+msgstr "Pending"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/account_commitment.py:139
+#, python-format
+msgid "No analytic distribution found for %s %s"
+msgstr "No analytic distribution found for %s %s"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/analytic_account.py:191
+#: code:addons/analytic_distribution/analytic_account.py:229
+#: code:addons/analytic_distribution/analytic_account.py:232
+#, python-format
+msgid "Warning !"
+msgstr "Warning !"
+
+#. module: analytic_distribution
+#: field:account.analytic.account,tuple_destination_account_ids:0
+#: view:account.destination.link:0
+msgid "Account/Destination"
+msgstr "Account/Destination"
+
+#. module: analytic_distribution
+#: report:funding.pool:0
+msgid "Accounts:"
+msgstr "Accounts:"
+
+#. module: analytic_distribution
+#: field:account.bank.statement.line,display_analytic_button:0
+#: field:account.move.line,display_analytic_button:0
+msgid "Display analytic button?"
+msgstr "Display analytic button?"
+
+#. module: analytic_distribution
+#: constraint:account.analytic.account:0
+msgid "You have to use a Normal account type and Cost Center category for FX gain/loss!"
+msgstr "You have to use a Normal account type and Cost Center category for FX gain/loss!"
+
+#. module: analytic_distribution
+#: view:account.analytic.account:0
+msgid "Account Category"
+msgstr "Account Category"
+
+#. module: analytic_distribution
+#: help:account.analytic.account,for_fx_gain_loss:0
+msgid "Is this account for default FX gain/loss?"
+msgstr "Is this account for default FX gain/loss?"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/account_move_line.py:147
+#, python-format
+msgid "No Analytic Journal! You have to define an analytic journal on the '%s' journal!"
+msgstr "No Analytic Journal! You have to define an analytic journal on the '%s' journal!"
+
+#. module: analytic_distribution
+#: field:analytic.distribution.wizard,purchase_id:0
+msgid "Purchase Order"
+msgstr "Purchase Order"
+
+#. module: analytic_distribution
+#: model:ir.model,name:analytic_distribution.model_account_analytic_account
+#: field:mass.reallocation.verification.wizard,account_id:0
+#: field:mass.reallocation.wizard,account_id:0
+msgid "Analytic Account"
+msgstr "Analytic Account"
+
+#. module: analytic_distribution
+#: view:account.commitment:0
+msgid "Except Done"
+msgstr "Except Done"
+
+#. module: analytic_distribution
+#: view:analytic.distribution.wizard:0
+msgid "Cost Center and Funding Pool allocation"
+msgstr "Cost Center and Funding Pool allocation"
+
+#. module: analytic_distribution
+#: field:account.commitment,currency_id:0
+#: field:analytic.distribution.wizard,currency_id:0
+#: field:analytic.distribution.wizard.f1.lines,currency_id:0
+#: field:analytic.distribution.wizard.f2.lines,currency_id:0
+#: field:analytic.distribution.wizard.fp.lines,currency_id:0
+#: field:analytic.distribution.wizard.lines,currency_id:0
+#: field:cost.center.distribution.line,currency_id:0
+#: field:distribution.line,currency_id:0
+#: field:free.1.distribution.line,currency_id:0
+#: field:free.2.distribution.line,currency_id:0
+#: field:funding.pool.distribution.line,currency_id:0
+msgid "Currency"
+msgstr "Currency"
+
+#. module: analytic_distribution
+#: help:analytic.distribution.wizard.f1.lines,type:0
+#: help:analytic.distribution.wizard.f2.lines,type:0
+#: help:analytic.distribution.wizard.fp.lines,type:0
+#: help:analytic.distribution.wizard.lines,type:0
+msgid "Specify the type of lines"
+msgstr "Specify the type of lines"
+
+#. module: analytic_distribution
+#: field:account.analytic.account,tuple_destination_summary:0
+msgid "Destination by accounts"
+msgstr "Destination by accounts"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/wizard/mass_reallocation_wizard.py:180
+#, python-format
+msgid "Given date is inferior to those from the maximum document date. Please change it to be superior or equal to %s"
+msgstr "Given date is inferior to those from the maximum document date. Please change it to be superior or equal to %s"
+
+#. module: analytic_distribution
+#: constraint:account.move:0
+msgid "You cannot create entries on different periods/journals in the same move"
+msgstr "You cannot create entries on different periods/journals in the same move"
+
+#. module: analytic_distribution
+#: view:account.analytic.account:0
+msgid "Group By..."
+msgstr "Group By..."
+
+#. module: analytic_distribution
+#: field:account.destination.link,used:0
+msgid "Used"
+msgstr "Used"
+
+#. module: analytic_distribution
+#: model:ir.ui.menu,name:analytic_distribution.menu_commitment
+msgid "Commitments"
+msgstr "Commitments"
+
+#. module: analytic_distribution
+#: selection:account.bank.statement.line,analytic_distribution_state:0
+#: selection:account.commitment.line,analytic_distribution_state:0
+#: selection:account.move.line,analytic_distribution_state:0
+msgid "Valid"
+msgstr "Valid"
+
+#. module: analytic_distribution
+#: model:account.analytic.account,name:analytic_distribution.analytic_account_msf_private_funds
+msgid "MSF Private Funds"
+msgstr "MSF Private Funds"
+
+#. module: analytic_distribution
+#: view:account.analytic.account:0
+msgid "Current"
+msgstr "Current"
+
+#. module: analytic_distribution
+#: selection:account.analytic.line,journal_type:0
+msgid "Migration"
+msgstr "Migration"
+
+#. module: analytic_distribution
+#: selection:analytic.distribution.wizard.f1.lines,type:0
+#: selection:analytic.distribution.wizard.f2.lines,type:0
+#: selection:analytic.distribution.wizard.fp.lines,type:0
+#: selection:analytic.distribution.wizard.lines,type:0
+msgid "Free 2 Lines"
+msgstr "Free 2 Lines"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/analytic_account.py:229
+#, python-format
+msgid "You cannot set an inactivity date lower than tomorrow!"
+msgstr "You cannot set an inactivity date lower than tomorrow!"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/account_move_line.py:94
+#, python-format
+msgid " (from header)"
+msgstr " (from header)"
+
+#. module: analytic_distribution
+#: selection:account.bank.statement.line,analytic_distribution_state:0
+#: selection:account.commitment.line,analytic_distribution_state:0
+#: selection:account.move.line,analytic_distribution_state:0
+msgid "None"
+msgstr "None"
+
+#. module: analytic_distribution
+#: view:account.commitment:0
+#: view:account.commitment.line:0
+#: view:account.move:0
+msgid "Analytical Distribution"
+msgstr "Analytical Distribution"
+
+#. module: analytic_distribution
+#: model:ir.model,name:analytic_distribution.model_cost_center_distribution_line
+msgid "cost.center.distribution.line"
+msgstr "cost.center.distribution.line"
+
+#. module: analytic_distribution
+#: view:account.commitment:0
+#: selection:account.commitment,type:0
+msgid "Manual"
+msgstr "Manual"
+
+#. module: analytic_distribution
+#: constraint:account.bank.statement.line:0
+msgid "Date is not correct. Verify that it's in the register's period. "
+msgstr "Date is not correct. Verify that it's in the register's period. "
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/account_commitment.py:493
+#: code:addons/analytic_distribution/account_commitment.py:523
+#, python-format
+msgid "Amount Left should be equal or superior to 0!"
+msgstr "Amount Left should be equal or superior to 0!"
+
+#. module: analytic_distribution
+#: view:analytic.distribution.wizard:0
+msgid "*: this action will copy the analytic distribution from the header to the line allowing then the user to make changes starting from the copied distribution."
+msgstr "*: this action will copy the analytic distribution from the header to the line allowing then the user to make changes starting from the copied distribution."
+
+#. module: analytic_distribution
+#: view:account.commitment:0
+msgid "ESC"
+msgstr "ESC"
+
+#. module: analytic_distribution
+#: field:account.analytic.account,category:0
+msgid "Category"
+msgstr "Category"
+
+#. module: analytic_distribution
+#: model:ir.model,name:analytic_distribution.model_account_commitment_line
+msgid "Account Commitment Voucher Line"
+msgstr "Account Commitment Voucher Line"
+
+#. module: analytic_distribution
+#: view:account.analytic.account:0
+msgid "Account Data"
+msgstr "Account Data"
+
+#. module: analytic_distribution
+#: constraint:account.analytic.account:0
+msgid "Error! The currency has to be the same as the currency of the selected company"
+msgstr "Error! The currency has to be the same as the currency of the selected company"
+
+#. module: analytic_distribution
+#: model:account.analytic.account,name:analytic_distribution.analytic_account_destination_support
+msgid "Support"
+msgstr "Support"
+
+#. module: analytic_distribution
+#: help:account.bank.statement.line,analytic_distribution_state:0
+#: help:account.commitment.line,analytic_distribution_state:0
+#: help:account.move.line,analytic_distribution_state:0
+msgid "Informs from distribution state among 'none', 'valid', 'invalid."
+msgstr "Informs from distribution state among 'none', 'valid', 'invalid."
+
+#. module: analytic_distribution
+#: model:ir.module.module,description:analytic_distribution.module_meta_information
+msgid "Module for defining analytic accounting object and commitment voucher.\n"
+"    "
+msgstr "Module for defining analytic accounting object and commitment voucher.\n"
+"    "
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/analytic_line.py:53
+#: code:addons/analytic_distribution/analytic_line.py:57
+#, python-format
+msgid "Some search args are missing!"
+msgstr "Some search args are missing!"
+
+#. module: analytic_distribution
+#: field:account.commitment,analytic_distribution_id:0
+#: field:account.commitment.line,analytic_distribution_id:0
+#: code:addons/analytic_distribution/account_commitment.py:604
+#: code:addons/analytic_distribution/account_move_line.py:246
+#: code:addons/analytic_distribution/invoice.py:165
+#, python-format
+msgid "Analytic distribution"
+msgstr "Analytic distribution"
+
+#. module: analytic_distribution
+#: field:cost.center.distribution.line,source_date:0
+#: field:distribution.line,source_date:0
+#: field:free.1.distribution.line,source_date:0
+#: field:free.2.distribution.line,source_date:0
+#: field:funding.pool.distribution.line,source_date:0
+msgid "Source Date"
+msgstr "Source Date"
+
+#. module: analytic_distribution
+#: constraint:account.move.line:0
+msgid "You can not create move line on view account."
+msgstr "You can not create move line on view account."
+
+#. module: analytic_distribution
+#: selection:analytic.distribution.wizard,state:0
+msgid "All other elements"
+msgstr "All other elements"
+
+#. module: analytic_distribution
+#: field:account.analytic.account,intermission_restricted:0
+msgid "Domain to restrict intermission cc"
+msgstr "Domain to restrict intermission cc"
+
+#. module: analytic_distribution
+#: field:account.commitment,line_ids:0
+#: view:account.commitment.line:0
+msgid "Commitment Voucher Lines"
+msgstr "Commitment Voucher Lines"
+
+#. module: analytic_distribution
+#: field:account.account,user_type_report_type:0
+msgid "User Type Report Type"
+msgstr "User Type Report Type"
+
+#. module: analytic_distribution
+#: field:analytic.distribution.wizard.f1.lines,type:0
+#: field:analytic.distribution.wizard.f2.lines,type:0
+#: field:analytic.distribution.wizard.fp.lines,type:0
+#: field:analytic.distribution.wizard.lines,type:0
+msgid "Line type"
+msgstr "Line type"
+
+#. module: analytic_distribution
+#: model:ir.model,name:analytic_distribution.model_analytic_distribution
+msgid "analytic.distribution"
+msgstr "analytic.distribution"
+
+#. module: analytic_distribution
+#: field:analytic.distribution.wizard,direct_invoice_id:0
+msgid "Direct Invoice"
+msgstr "Direct Invoice"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:759
+#, python-format
+msgid "No wizard found."
+msgstr "No wizard found."
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/account.py:334
+#, python-format
+msgid "Analytic distribution is not valid for this line: %s"
+msgstr "Analytic distribution is not valid for this line: %s"
+
+#. module: analytic_distribution
+#: view:account.analytic.account:0
+msgid "Expense accounts"
+msgstr "Expense accounts"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/account.py:334
+#: code:addons/analytic_distribution/account_commitment.py:101
+#: code:addons/analytic_distribution/account_commitment.py:104
+#: code:addons/analytic_distribution/account_commitment.py:108
+#: code:addons/analytic_distribution/account_commitment.py:113
+#: code:addons/analytic_distribution/account_commitment.py:143
+#: code:addons/analytic_distribution/account_commitment.py:314
+#: code:addons/analytic_distribution/account_commitment.py:319
+#: code:addons/analytic_distribution/account_commitment.py:361
+#: code:addons/analytic_distribution/account_commitment.py:490
+#: code:addons/analytic_distribution/account_commitment.py:520
+#: code:addons/analytic_distribution/account_commitment.py:572
+#: code:addons/analytic_distribution/account_move_line.py:214
+#: code:addons/analytic_distribution/analytic_account.py:78
+#: code:addons/analytic_distribution/analytic_account.py:104
+#: code:addons/analytic_distribution/analytic_account.py:106
+#: code:addons/analytic_distribution/analytic_account.py:387
+#: code:addons/analytic_distribution/analytic_line.py:176
+#: code:addons/analytic_distribution/analytic_line.py:184
+#: code:addons/analytic_distribution/analytic_line.py:189
+#: code:addons/analytic_distribution/analytic_line.py:194
+#: code:addons/analytic_distribution/invoice.py:125
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:288
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:294
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:306
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:313
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:315
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:333
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:340
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:622
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:701
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:704
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:707
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:710
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:713
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:715
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:718
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:721
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:922
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:924
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:928
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:930
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:937
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:955
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:1086
+#: code:addons/analytic_distribution/wizard/mass_reallocation_wizard.py:94
+#: code:addons/analytic_distribution/wizard/mass_reallocation_wizard.py:164
+#: code:addons/analytic_distribution/wizard/mass_reallocation_wizard.py:178
+#, python-format
+msgid "Error"
+msgstr "Error"
+
+#. module: analytic_distribution
+#: selection:account.analytic.line,journal_type:0
+#: selection:analytic.distribution.wizard,state:0
+msgid "Correction"
+msgstr "Correction"
+
+#. module: analytic_distribution
+#: field:account.analytic.line,entry_sequence:0
+msgid "Entry Sequence"
+msgstr "Entry Sequence"
+
+#. module: analytic_distribution
+#: field:account.move.line,analytic_distribution_state_recap:0
+msgid "Distribution"
+msgstr "Distribution"
+
+#. module: analytic_distribution
+#: view:account.analytic.line:0
+msgid "Have been reallocated"
+msgstr "Have been reallocated"
+
+#. module: analytic_distribution
+#: view:mass.reallocation.verification.wizard:0
+msgid "Process"
+msgstr "Process"
+
+#. module: analytic_distribution
+#: selection:account.analytic.account,category:0
+#: model:account.analytic.account,name:analytic_distribution.analytic_account_funding_pool
+#: field:account.destination.summary,funding_pool_id:0
+#: code:addons/analytic_distribution/analytic_line.py:164
+#: view:analytic.distribution.wizard.fp.lines:0
+#, python-format
+msgid "Funding Pool"
+msgstr "Funding Pool"
+
+#. module: analytic_distribution
+#: field:account.analytic.line,from_write_off:0
+msgid "From write-off account line?"
+msgstr "From write-off account line?"
+
+#. module: analytic_distribution
+#: constraint:account.account:0
+msgid "Error ! You can not create recursive accounts."
+msgstr "Error ! You can not create recursive accounts."
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:701
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:704
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:707
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:710
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:713
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:715
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:718
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:721
+#, python-format
+msgid "You cannot change the distribution."
+msgstr "You cannot change the distribution."
+
+#. module: analytic_distribution
+#: report:funding.pool:0
+msgid "Active from:"
+msgstr "Active from:"
+
+#. module: analytic_distribution
+#: field:account.commitment,from_yml_test:0
+#: field:account.commitment.line,from_yml_test:0
+msgid "Only used to pass addons unit test"
+msgstr "Only used to pass addons unit test"
+
+#. module: analytic_distribution
+#: field:analytic.distribution,invoice_line_ids:0
+msgid "Invoice Lines"
+msgstr "Invoice Lines"
+
+#. module: analytic_distribution
+#: selection:analytic.distribution.wizard.f1.lines,type:0
+#: selection:analytic.distribution.wizard.f2.lines,type:0
+#: selection:analytic.distribution.wizard.fp.lines,type:0
+#: selection:analytic.distribution.wizard.lines,type:0
+msgid "Free 1 Lines"
+msgstr "Free 1 Lines"
+
+#. module: analytic_distribution
+#: report:funding.pool:0
+msgid "SUP"
+msgstr "SUP"
+
+#. module: analytic_distribution
+#: field:cost.center.distribution.line,analytic_id:0
+#: field:distribution.line,analytic_id:0
+#: field:free.1.distribution.line,analytic_id:0
+#: field:free.2.distribution.line,analytic_id:0
+#: field:funding.pool.distribution.line,analytic_id:0
+msgid "Analytical Account"
+msgstr "Analytical Account"
+
+#. module: analytic_distribution
+#: view:analytic.distribution.wizard:0
+msgid "Analytic Wizard Distribution"
+msgstr "Analytic Wizard Distribution"
+
+#. module: analytic_distribution
+#: field:analytic.distribution.wizard,fp_line_ids:0
+msgid "Funding Pool Allocation"
+msgstr "Funding Pool Allocation"
+
+#. module: analytic_distribution
+#: help:account.commitment,from_yml_test:0
+#: help:account.commitment.line,from_yml_test:0
+msgid "Never set this field to true !"
+msgstr "Never set this field to true !"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/analytic_account.py:189
+#, python-format
+msgid "\"%s\" is the default destination for the G/L account \"%s %s\", you can't remove it."
+msgstr "\"%s\" is the default destination for the G/L account \"%s %s\", you can't remove it."
+
+#. module: analytic_distribution
+#: selection:account.analytic.account,category:0
+#: model:account.analytic.account,name:analytic_distribution.analytic_account_free_2
+#: view:analytic.distribution.wizard:0
+msgid "Free 2"
+msgstr "Free 2"
+
+#. module: analytic_distribution
+#: selection:account.analytic.line,journal_type:0
+msgid "HQ"
+msgstr "HQ"
+
+#. module: analytic_distribution
+#: view:account.analytic.account:0
+#: view:account.destination.summary:0
+#: model:ir.model,name:analytic_distribution.model_account_destination_summary
+msgid "Destinations by accounts"
+msgstr "Destinations by accounts"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:315
+#, python-format
+msgid "Negative percentage value is not allowed!"
+msgstr "Negative percentage value is not allowed!"
+
+#. module: analytic_distribution
+#: report:funding.pool:0
+msgid "Page"
+msgstr "Page"
+
+#. module: analytic_distribution
+#: model:ir.model,name:analytic_distribution.model_account_destination_link
+msgid "Destination link between G/L and Analytic accounts"
+msgstr "Destination link between G/L and Analytic accounts"
+
+#. module: analytic_distribution
+#: view:analytic.distribution.wizard.f1.lines:0
+#: view:analytic.distribution.wizard.f2.lines:0
+#: view:analytic.distribution.wizard.fp.lines:0
+#: view:analytic.distribution.wizard.lines:0
+msgid "Total Percentage"
+msgstr "Total Percentage"
+
+#. module: analytic_distribution
+#: field:account.commitment,partner_id:0
+msgid "Supplier"
+msgstr "Supplier"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:294
+#, python-format
+msgid "Choosen cost center '%s' is not from OC Category."
+msgstr "Choosen cost center '%s' is not from OC Category."
+
+#. module: analytic_distribution
+#: view:account.analytic.account:0
+msgid "Account Type"
+msgstr "Account Type"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:928
+#, python-format
+msgid "Cost center %s is not active at this date: %s"
+msgstr "Cost center %s is not active at this date: %s"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/account_commitment.py:495
+#: code:addons/analytic_distribution/account_commitment.py:525
+#, python-format
+msgid "Initial Amount should be superior to 0!"
+msgstr "Initial Amount should be superior to 0!"
+
+#. module: analytic_distribution
+#: report:funding.pool:0
+msgid "Cost center name"
+msgstr "Cost center name"
+
+#. module: analytic_distribution
+#: constraint:account.invoice:0
+msgid "You cannot validate this invoice because it contains a line with an inactive product"
+msgstr "You cannot validate this invoice because it contains a line with an inactive product"
+
+#. module: analytic_distribution
+#: selection:account.commitment,type:0
+msgid "Automatic - External supplier"
+msgstr "Automatic - External supplier"
+
+#. module: analytic_distribution
+#: field:analytic.distribution.wizard.f1.lines,wizard_id:0
+#: field:analytic.distribution.wizard.f2.lines,wizard_id:0
+#: field:analytic.distribution.wizard.fp.lines,wizard_id:0
+#: field:analytic.distribution.wizard.lines,wizard_id:0
+msgid "Analytic Distribution Wizard"
+msgstr "Analytic Distribution Wizard"
+
+#. module: analytic_distribution
+#: field:analytic.distribution.wizard,register_line_state:0
+msgid "Register line state"
+msgstr "Register line state"
+
+#. module: analytic_distribution
+#: selection:account.analytic.line,journal_type:0
+msgid "OD-Extra Accounting"
+msgstr "OD-Extra Accounting"
+
+#. module: analytic_distribution
+#: view:account.analytic.account:0
+msgid "Cost centers"
+msgstr "Cost centers"
+
+#. module: analytic_distribution
+#: model:account.analytic.account,name:analytic_distribution.analytic_account_destination_operation
+msgid "Operations"
+msgstr "Operations"
+
+#. module: analytic_distribution
+#: view:mass.reallocation.wizard:0
+msgid "Verify"
+msgstr "Verify"
+
+#. module: analytic_distribution
+#: field:mass.reallocation.verification.wizard,nb_process:0
+msgid "Allocatable lines"
+msgstr "Allocatable lines"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/account_commitment.py:319
+#, python-format
+msgid "No analytic distribution found!"
+msgstr "No analytic distribution found!"
+
+#. module: analytic_distribution
+#: model:ir.model,name:analytic_distribution.model_distribution_line
+msgid "distribution.line"
+msgstr "distribution.line"
+
+#. module: analytic_distribution
+#: selection:account.analytic.line,journal_type:0
+msgid "In-kind Donation"
+msgstr "In-kind Donation"
+
+#. module: analytic_distribution
+#: view:analytic.distribution.wizard:0
+msgid "Save"
+msgstr "Save"
+
+#. module: analytic_distribution
+#: selection:analytic.distribution.wizard,state:0
+msgid "Cost Center only"
+msgstr "Cost Center only"
+
+#. module: analytic_distribution
+#: field:analytic.distribution.wizard,document_date:0
+msgid "Document date"
+msgstr "Document date"
+
+#. module: analytic_distribution
+#: report:funding.pool:0
+msgid "/"
+msgstr "/"
+
+#. module: analytic_distribution
+#: view:account.analytic.account:0
+msgid "Account type"
+msgstr "Account type"
+
+#. module: analytic_distribution
+#: field:analytic.distribution.wizard,f2_line_ids:0
+msgid "Free 2 Allocation"
+msgstr "Free 2 Allocation"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/analytic_account.py:78
+#, python-format
+msgid "Operator not supported yet!"
+msgstr "Operator not supported yet!"
+
+#. module: analytic_distribution
+#: field:account.destination.link,destination_id:0
+msgid "Analytical Destination Account"
+msgstr "Analytical Destination Account"
+
+#. module: analytic_distribution
+#: selection:account.analytic.line,journal_type:0
+msgid "HR"
+msgstr "HR"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/wizard/mass_reallocation_wizard.py:178
+#, python-format
+msgid "Maximum document date is superior to maximum of posting date. Check selected analytic lines dates first."
+msgstr "Maximum document date is superior to maximum of posting date. Check selected analytic lines dates first."
+
+#. module: analytic_distribution
+#: field:account.commitment.line,have_analytic_distribution_from_header:0
+#: field:account.move.line,have_analytic_distribution_from_header:0
+msgid "Header Distrib.?"
+msgstr "Header Distrib.?"
+
+#. module: analytic_distribution
+#: report:funding.pool:0
+msgid "Cost centers:"
+msgstr "Cost centers:"
+
+#. module: analytic_distribution
+#: field:analytic.distribution,funding_pool_lines:0
+msgid "Funding Pool Distribution"
+msgstr "Funding Pool Distribution"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/analytic_distribution.py:104
+#, python-format
+msgid "%s: Error, CC is not compatible with given FP analytic account"
+msgstr "%s: Error, CC is not compatible with given FP analytic account"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/account_commitment.py:96
+#: code:addons/analytic_distribution/account_commitment.py:139
+#: code:addons/analytic_distribution/account_commitment.py:190
+#: code:addons/analytic_distribution/account_commitment.py:493
+#: code:addons/analytic_distribution/account_commitment.py:495
+#: code:addons/analytic_distribution/account_commitment.py:498
+#: code:addons/analytic_distribution/account_commitment.py:523
+#: code:addons/analytic_distribution/account_commitment.py:525
+#: code:addons/analytic_distribution/account_commitment.py:532
+#: code:addons/analytic_distribution/account_commitment.py:535
+#: code:addons/analytic_distribution/account_commitment.py:538
+#: code:addons/analytic_distribution/account_move_line.py:145
+#: code:addons/analytic_distribution/account_move_line.py:147
+#: code:addons/analytic_distribution/analytic_line.py:53
+#: code:addons/analytic_distribution/analytic_line.py:55
+#: code:addons/analytic_distribution/analytic_line.py:57
+#: code:addons/analytic_distribution/analytic_line.py:221
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:724
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:729
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:744
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:759
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:762
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:1028
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:1146
+#: code:addons/analytic_distribution/wizard/mass_reallocation_wizard.py:163
+#: code:addons/analytic_distribution/wizard/mass_reallocation_wizard.py:180
+#: code:addons/analytic_distribution/wizard/mass_reallocation_wizard.py:182
+#, python-format
+msgid "Warning"
+msgstr "Warning"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:937
+#, python-format
+msgid "Funding Pool %s is not active at this date: %s"
+msgstr "Funding Pool %s is not active at this date: %s"
+
+#. module: analytic_distribution
+#: view:account.commitment:0
+#: selection:account.commitment,state:0
+#: selection:analytic.distribution.wizard,state:0
+msgid "Done"
+msgstr "Done"
+
+#. module: analytic_distribution
+#: field:account.account,default_destination_id:0
+msgid "Default Destination"
+msgstr "Default Destination"
+
+#. module: analytic_distribution
+#: view:account.commitment:0
+msgid "Compute total"
+msgstr "Compute total"
+
+#. module: analytic_distribution
+#: field:analytic.distribution.wizard,move_line_id:0
+msgid "Journal Item"
+msgstr "Journal Item"
+
+#. module: analytic_distribution
+#: selection:analytic.distribution.wizard,register_line_state:0
+msgid "Temp"
+msgstr "Temp"
+
+#. module: analytic_distribution
+#: selection:account.analytic.line,journal_type:0
+msgid "Purchase"
+msgstr "Purchase"
+
+#. module: analytic_distribution
+#: view:account.commitment:0
+msgid "Search Commitment Voucher"
+msgstr "Search Commitment Voucher"
+
+#. module: analytic_distribution
+#: constraint:account.analytic.account:0
+msgid "You can only have one account used for FX gain/loss!"
+msgstr "You can only have one account used for FX gain/loss!"
+
+#. module: analytic_distribution
+#: field:analytic.distribution,commitment_ids:0
+msgid "Commitments voucher"
+msgstr "Commitments voucher"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:1146
+#, python-format
+msgid "Header distribution is not valid with this line. Please create a new one here."
+msgstr "Header distribution is not valid with this line. Please create a new one here."
+
+#. module: analytic_distribution
+#: field:account.commitment,journal_id:0
+msgid "Journal"
+msgstr "Journal"
+
+#. module: analytic_distribution
+#: field:analytic.distribution.wizard,model_line_id:0
+msgid "Account Model Line"
+msgstr "Account Model Line"
+
+#. module: analytic_distribution
+#: selection:account.analytic.line,move_state:0
+msgid "Posted"
+msgstr "Posted"
+
+#. module: analytic_distribution
+#: field:account.analytic.line,distribution_id:0
+#: field:account.bank.statement.line,analytic_distribution_id:0
+#: field:account.invoice,analytic_distribution_id:0
+#: field:account.invoice.line,analytic_distribution_id:0
+#: field:account.move,analytic_distribution_id:0
+#: field:account.move.line,analytic_distribution_id:0
+#: field:analytic.distribution.wizard,distribution_id:0
+msgid "Analytic Distribution"
+msgstr "Analytic Distribution"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:922
+#, python-format
+msgid "Cost center account %s is not active at this date: %s"
+msgstr "Cost center account %s is not active at this date: %s"
+
+#. module: analytic_distribution
+#: selection:account.analytic.line,journal_type:0
+msgid "Sale"
+msgstr "Sale"
+
+#. module: analytic_distribution
+#: model:ir.model,name:analytic_distribution.model_account_move
+msgid "Account Entry"
+msgstr "Account Entry"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/analytic_account.py:232
+#, python-format
+msgid "Activation date must be lower than inactivation date!"
+msgstr "Activation date must be lower than inactivation date!"
+
+#. module: analytic_distribution
+#: constraint:account.move:0
+msgid "You cannot create more than one move per period on centralized journal"
+msgstr "You cannot create more than one move per period on centralized journal"
+
+#. module: analytic_distribution
+#: constraint:account.analytic.account:0
+msgid "You cannot have the same code or name between analytic accounts in the same category!"
+msgstr "You cannot have the same code or name between analytic accounts in the same category!"
+
+#. module: analytic_distribution
+#: field:funding.pool.distribution.line,cost_center_id:0
+msgid "Cost Center Account"
+msgstr "Cost Center Account"
+
+#. module: analytic_distribution
+#: selection:account.analytic.line,journal_type:0
+msgid "Engagement"
+msgstr "Engagement"
+
+#. module: analytic_distribution
+#: field:mass.reallocation.verification.wizard,process_ids:0
+msgid "Allocatable"
+msgstr "Allocatable"
+
+#. module: analytic_distribution
+#: field:mass.reallocation.verification.wizard,error_ids:0
+msgid "Errors"
+msgstr "Errors"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/wizard/mass_reallocation_wizard.py:164
+#, python-format
+msgid "Some missing args in check_date method. Please contact an administrator."
+msgstr "Some missing args in check_date method. Please contact an administrator."
+
+#. module: analytic_distribution
+#: help:account.analytic.line,from_write_off:0
+msgid "Indicates that this line come from a write-off account line."
+msgstr "Indicates that this line come from a write-off account line."
+
+#. module: analytic_distribution
+#: view:account.commitment:0
+#: selection:account.commitment,state:0
+msgid "Validated"
+msgstr "Validated"
+
+#. module: analytic_distribution
+#: view:account.analytic.account:0
+msgid "Active"
+msgstr "Active"
+
+#. module: analytic_distribution
+#: field:analytic.distribution.wizard,direct_invoice_line_id:0
+msgid "Direct Invoice Line"
+msgstr "Direct Invoice Line"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/account_commitment.py:101
+#, python-format
+msgid "No instance found!"
+msgstr "No instance found!"
+
+#. module: analytic_distribution
+#: field:account.analytic.account,for_fx_gain_loss:0
+msgid "For FX gain/loss"
+msgstr "For FX gain/loss"
+
+#. module: analytic_distribution
+#: field:account.analytic.line,is_fp_compat_with:0
+msgid "Is compatible with some FP?"
+msgstr "Is compatible with some FP?"
+
+#. module: analytic_distribution
+#: help:account.analytic.line,move_state:0
+msgid "Indicates that this line come from an Unposted Journal Entry."
+msgstr "Indicates that this line come from an Unposted Journal Entry."
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:724
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:729
+#, python-format
+msgid "No Allocation done!"
+msgstr "No Allocation done!"
+
+#. module: analytic_distribution
+#: field:account.analytic.account,hide_closed_fp:0
+msgid "Linked to a soft/hard closed contract?"
+msgstr "Linked to a soft/hard closed contract?"
+
+#. module: analytic_distribution
+#: field:account.analytic.chart,show_inactive:0
+msgid "Show inactive accounts"
+msgstr "Show inactive accounts"
+
+#. module: analytic_distribution
+#: field:cost.center.distribution.line,distribution_id:0
+#: field:distribution.line,distribution_id:0
+#: field:free.1.distribution.line,distribution_id:0
+#: field:free.2.distribution.line,distribution_id:0
+#: field:funding.pool.distribution.line,distribution_id:0
+msgid "Associated Analytic Distribution"
+msgstr "Associated Analytic Distribution"
+
+#. module: analytic_distribution
+#: view:account.destination.link:0
+msgid "Search Account/Destination"
+msgstr "Search Account/Destination"
+
+#. module: analytic_distribution
+#: field:account.commitment,notes:0
+msgid "Comment"
+msgstr "Comment"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/account_commitment.py:143
+#, python-format
+msgid "The analytic account %s is not active for given date."
+msgstr "The analytic account %s is not active for given date."
+
+#. module: analytic_distribution
+#: field:mass.reallocation.verification.wizard,other_ids:0
+msgid "Non supported"
+msgstr "Non supported"
+
+#. module: analytic_distribution
+#: model:ir.model,name:analytic_distribution.model_analytic_distribution_wizard_f1_lines
+#: model:ir.model,name:analytic_distribution.model_analytic_distribution_wizard_f2_lines
+#: model:ir.model,name:analytic_distribution.model_analytic_distribution_wizard_fp_lines
+#: model:ir.model,name:analytic_distribution.model_analytic_distribution_wizard_lines
+msgid "analytic.distribution.wizard.lines"
+msgstr "analytic.distribution.wizard.lines"
+
+#. module: analytic_distribution
+#: field:analytic.distribution.wizard,move_id:0
+msgid "Journal Entry"
+msgstr "Journal Entry"
+
+#. module: analytic_distribution
+#: field:account.analytic.line,move_state:0
+msgid "Journal Entry state"
+msgstr "Journal Entry state"
+
+#. module: analytic_distribution
+#: view:account.commitment:0
+msgid "Validate"
+msgstr "Validate"
+
+#. module: analytic_distribution
+#: view:account.account:0
+msgid "Analytical Destination"
+msgstr "Analytical Destination"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/wizard/mass_reallocation_wizard.py:163
+#, python-format
+msgid "No line to be processed (So no one is compatible.)"
+msgstr "No line to be processed (So no one is compatible.)"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:1094
+#, python-format
+msgid "Amount not valid!"
+msgstr "Amount not valid!"
+
+#. module: analytic_distribution
+#: view:account.analytic.account:0
+#: model:ir.actions.act_window,name:analytic_distribution.action_account_analytic_account_form
+msgid "Analytic Accounts"
+msgstr "Analytic Accounts"
+
+#. module: analytic_distribution
+#: selection:mass.reallocation.wizard,state:0
+msgid "Blocked"
+msgstr "Blocked"
+
+#. module: analytic_distribution
+#: view:account.analytic.account:0
+msgid "Parent"
+msgstr "Parent"
+
+#. module: analytic_distribution
+#: selection:account.analytic.account,category:0
+#: model:account.analytic.account,name:analytic_distribution.analytic_account_free_1
+#: view:analytic.distribution.wizard:0
+msgid "Free 1"
+msgstr "Free 1"
+
+#. module: analytic_distribution
+#: selection:mass.reallocation.wizard,state:0
+msgid "Normal"
+msgstr "Normal"
+
+#. module: analytic_distribution
+#: view:account.analytic.account:0
+msgid "Account category"
+msgstr "Account category"
+
+#. module: analytic_distribution
+#: view:analytic.distribution.wizard.f1.lines:0
+#: view:analytic.distribution.wizard.f2.lines:0
+#: view:analytic.distribution.wizard.fp.lines:0
+#: view:analytic.distribution.wizard.lines:0
+msgid "Total Amount"
+msgstr "Total Amount"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:288
+#, python-format
+msgid "Given account '%s' doesn't match with the type '%s'."
+msgstr "Given account '%s' doesn't match with the type '%s'."
+
+#. module: analytic_distribution
+#: selection:account.analytic.account,category:0
+#: model:account.analytic.account,name:analytic_distribution.analytic_account_destination
+#: view:account.analytic.line:0
+#: field:account.analytic.line,destination_id:0
+#: field:analytic.distribution.wizard.f1.lines,destination_id:0
+#: field:analytic.distribution.wizard.f2.lines,destination_id:0
+#: field:analytic.distribution.wizard.fp.lines,destination_id:0
+#: field:analytic.distribution.wizard.lines,destination_id:0
+#: field:cost.center.distribution.line,destination_id:0
+#: field:free.1.distribution.line,destination_id:0
+#: field:free.2.distribution.line,destination_id:0
+#: field:funding.pool.distribution.line,destination_id:0
+msgid "Destination"
+msgstr "Destination"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:306
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:333
+#, python-format
+msgid "Analytic account validation error."
+msgstr "Analytic account validation error."
+
+#. module: analytic_distribution
+#: report:funding.pool:0
+msgid "Report edition date:"
+msgstr "Report edition date:"
+
+#. module: analytic_distribution
+#: report:funding.pool:0
+msgid "NST"
+msgstr "NST"
+
+#. module: analytic_distribution
+#: help:analytic.distribution.wizard,is_writable:0
+msgid "This informs wizard if it could be saved or not regarding invoice state or purchase order state"
+msgstr "This informs wizard if it could be saved or not regarding invoice state or purchase order state"
+
+#. module: analytic_distribution
+#: field:account.commitment,type:0
+msgid "Type"
+msgstr "Type"
+
+#. module: analytic_distribution
+#: selection:analytic.distribution.wizard,register_line_state:0
+msgid "Hard"
+msgstr "Hard"
+
+#. module: analytic_distribution
+#: model:ir.module.module,shortdesc:analytic_distribution.module_meta_information
+msgid "Analytic Account for MSF"
+msgstr "Analytic Account for MSF"
+
+#. module: analytic_distribution
+#: view:account.analytic.chart:0
+msgid "Inactive accounts"
+msgstr "Inactive accounts"
+
+#. module: analytic_distribution
+#: model:account.analytic.account,name:analytic_distribution.analytic_account_destination_national_staff
+msgid "National Staff"
+msgstr "National Staff"
+
+#. module: analytic_distribution
+#: model:ir.actions.server,name:analytic_distribution.action_commitment_voucher_engagement_lines_search
+msgid "Analytic Lines (FP)"
+msgstr "Analytic Lines (FP)"
+
+#. module: analytic_distribution
+#: constraint:account.move.line:0
+msgid "You can not create move line on closed account."
+msgstr "You can not create move line on closed account."
+
+#. module: analytic_distribution
+#: field:analytic.distribution.wizard,purchase_line_id:0
+msgid "Purchase Order Line"
+msgstr "Purchase Order Line"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/analytic_line.py:184
+#: code:addons/analytic_distribution/analytic_line.py:189
+#: code:addons/analytic_distribution/analytic_line.py:194
+#, python-format
+msgid "The analytic account selected '%s' is not active."
+msgstr "The analytic account selected '%s' is not active."
+
+#. module: analytic_distribution
+#: report:funding.pool:0
+msgid "OPS"
+msgstr "OPS"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/analytic_line.py:55
+#, python-format
+msgid "This filter is not implemented yet!"
+msgstr "This filter is not implemented yet!"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/invoice.py:125
+#, python-format
+msgid "No invoice line given. Please save your invoice line before."
+msgstr "No invoice line given. Please save your invoice line before."
+
+#. module: analytic_distribution
+#: field:account.commitment,name:0
+msgid "Number"
+msgstr "Number"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/account_commitment.py:314
+#, python-format
+msgid "Analytic distribution is not valid for account \"%s %s\"."
+msgstr "Analytic distribution is not valid for account \"%s %s\"."
+
+#. module: analytic_distribution
+#: field:analytic.distribution.wizard,invoice_id:0
+#: model:ir.model,name:analytic_distribution.model_account_invoice
+msgid "Invoice"
+msgstr "Invoice"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/account_move_line.py:214
+#, python-format
+msgid "No journal item given. Please save your line before."
+msgstr "No journal item given. Please save your line before."
+
+#. module: analytic_distribution
+#: selection:account.analytic.account,category:0
+#: view:account.analytic.line:0
+#: field:account.analytic.line,cost_center_id:0
+#: view:analytic.distribution.wizard:0
+#: field:analytic.distribution.wizard.fp.lines,cost_center_id:0
+#: view:analytic.distribution.wizard.lines:0
+msgid "Cost Center"
+msgstr "Cost Center"
+
+#. module: analytic_distribution
+#: field:analytic.distribution.wizard,accrual_line_id:0
+msgid "Accrual Line"
+msgstr "Accrual Line"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/analytic_account.py:106
+#, python-format
+msgid "Operand not supported on field intermission_restricted!"
+msgstr "Operand not supported on field intermission_restricted!"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:762
+#, python-format
+msgid "No allocation done."
+msgstr "No allocation done."
+
+#. module: analytic_distribution
+#: view:account.analytic.account:0
+msgid "Expenses accounts list"
+msgstr "Expenses accounts list"
+
+#. module: analytic_distribution
+#: model:account.analytic.account,name:analytic_distribution.analytic_account_project
+msgid "OC"
+msgstr "OC"
+
+#. module: analytic_distribution
+#: view:account.analytic.account:0
+#: field:analytic.distribution.wizard.f1.lines,analytic_id:0
+#: field:analytic.distribution.wizard.f2.lines,analytic_id:0
+#: field:analytic.distribution.wizard.fp.lines,analytic_id:0
+#: field:analytic.distribution.wizard.lines,analytic_id:0
+msgid "Analytic account"
+msgstr "Analytic account"
+
+#. module: analytic_distribution
+#: field:account.bank.statement.line,analytic_distribution_state:0
+#: field:account.commitment.line,analytic_distribution_state:0
+#: field:account.move.line,analytic_distribution_state:0
+msgid "Distribution state"
+msgstr "Distribution state"
+
+#. module: analytic_distribution
+#: constraint:account.invoice.line:0
+msgid "Constraint error on Uom"
+msgstr "Constraint error on Uom"
+
+#. module: analytic_distribution
+#: field:analytic.distribution.wizard,posting_date:0
+#: field:mass.reallocation.verification.wizard,date:0
+#: field:mass.reallocation.wizard,date:0
+msgid "Posting date"
+msgstr "Posting date"
+
+#. module: analytic_distribution
+#: field:mass.reallocation.verification.wizard,display_fp:0
+#: field:mass.reallocation.wizard,display_fp:0
+msgid "Display FP"
+msgstr "Display FP"
+
+#. module: analytic_distribution
+#: field:analytic.distribution,register_line_ids:0
+msgid "Register Lines"
+msgstr "Register Lines"
+
+#. module: analytic_distribution
+#: field:analytic.distribution,free_2_lines:0
+msgid "Free 2 Distribution"
+msgstr "Free 2 Distribution"
+
+#. module: analytic_distribution
+#: selection:analytic.distribution.wizard,entry_mode:0
+#: field:analytic.distribution.wizard.f1.lines,percentage:0
+#: field:analytic.distribution.wizard.f2.lines,percentage:0
+#: field:analytic.distribution.wizard.fp.lines,percentage:0
+#: field:analytic.distribution.wizard.lines,percentage:0
+#: field:cost.center.distribution.line,percentage:0
+#: field:distribution.line,percentage:0
+#: field:free.1.distribution.line,percentage:0
+#: field:free.2.distribution.line,percentage:0
+#: field:funding.pool.distribution.line,percentage:0
+msgid "Percentage"
+msgstr "Percentage"
+
+#. module: analytic_distribution
+#: model:ir.actions.report.xml,name:analytic_distribution.funding_pool
+msgid "Funding Pool export (pdf)"
+msgstr "Funding Pool export (pdf)"
+
+#. module: analytic_distribution
+#: model:account.analytic.account,name:analytic_distribution.analytic_account_project_intermission
+#: selection:account.analytic.line,journal_type:0
+msgid "Intermission"
+msgstr "Intermission"
+
+#. module: analytic_distribution
+#: field:analytic.distribution.wizard,register_line_id:0
+msgid "Register Line"
+msgstr "Register Line"
+
+#. module: analytic_distribution
+#: field:account.account,funding_pool_line_ids:0
+#: field:account.destination.link,funding_pool_ids:0
+msgid "Funding Pools"
+msgstr "Funding Pools"
+
+#. module: analytic_distribution
+#: view:account.account:0
+#: field:account.account,destination_ids:0
+#: view:account.analytic.account:0
+msgid "Destinations"
+msgstr "Destinations"
+
+#. module: analytic_distribution
+#: field:account.commitment,state:0
+#: field:analytic.distribution.wizard,state:0
+#: field:mass.reallocation.wizard,state:0
+msgid "State"
+msgstr "State"
+
+#. module: analytic_distribution
+#: selection:analytic.distribution.wizard.f1.lines,type:0
+#: selection:analytic.distribution.wizard.f2.lines,type:0
+#: selection:analytic.distribution.wizard.fp.lines,type:0
+#: selection:analytic.distribution.wizard.lines,type:0
+msgid "Funding Pool Lines"
+msgstr "Funding Pool Lines"
+
+#. module: analytic_distribution
+#: selection:account.analytic.line,journal_type:0
+msgid "Cash"
+msgstr "Cash"
+
+#. module: analytic_distribution
+#: constraint:account.analytic.account:0
+msgid "Error! You can not create recursive analytic accounts."
+msgstr "Error! You can not create recursive analytic accounts."
+
+#. module: analytic_distribution
+#: sql_constraint:account.move.line:0
+msgid "Wrong credit or debit value in accounting entry !"
+msgstr "Wrong credit or debit value in accounting entry !"
+
+#. module: analytic_distribution
+#: help:account.analytic.line,journal_type:0
+msgid "Indicates the Journal Type of the Analytic journal item"
+msgstr "Indicates the Journal Type of the Analytic journal item"
+
+#. module: analytic_distribution
+#: field:account.analytic.line,period_id:0
+#: field:account.commitment,period_id:0
+msgid "Period"
+msgstr "Period"
+
+#. module: analytic_distribution
+#: report:funding.pool:0
+msgid "Inactive from:"
+msgstr "Inactive from:"
+
+#. module: analytic_distribution
+#: view:account.analytic.account:0
+msgid "Activation period"
+msgstr "Activation period"
+
+#. module: analytic_distribution
+#: view:analytic.distribution.wizard:0
+msgid "Switch entry mode"
+msgstr "Switch entry mode"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/analytic_line.py:221
+#, python-format
+msgid "Selected Funding Pool analytic account (%s) is blocked by a soft/hard closed contract: %s"
+msgstr "Selected Funding Pool analytic account (%s) is blocked by a soft/hard closed contract: %s"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/account_commitment.py:113
+#, python-format
+msgid "Error creating commitment sequence!"
+msgstr "Error creating commitment sequence!"
+
+#. module: analytic_distribution
+#: field:analytic.distribution.wizard,entry_mode:0
+msgid "Entry Mode"
+msgstr "Entry Mode"
+
+#. module: analytic_distribution
+#: selection:account.bank.statement.line,analytic_distribution_state:0
+#: selection:account.commitment.line,analytic_distribution_state:0
+#: selection:account.move.line,analytic_distribution_state:0
+msgid "Invalid"
+msgstr "Invalid"
+
+#. module: analytic_distribution
+#: field:analytic.distribution.wizard,sale_order_line_id:0
+msgid "Sale Order Line"
+msgstr "Sale Order Line"
+
+#. module: analytic_distribution
+#: view:account.analytic.account:0
+msgid "Hard Posting"
+msgstr "Hard Posting"
+
+#. module: analytic_distribution
+#: model:ir.model,name:analytic_distribution.model_free_1_distribution_line
+msgid "free.1.distribution.line"
+msgstr "free.1.distribution.line"
+
+#. module: analytic_distribution
+#: selection:account.analytic.line,distrib_line_id:0
+msgid "FP"
+msgstr "FP"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/account_commitment.py:490
+#, python-format
+msgid "You cannot create a commitment voucher line on a 'view' account type!"
+msgstr "You cannot create a commitment voucher line on a 'view' account type!"
+
+#. module: analytic_distribution
+#: field:account.analytic.line,journal_type:0
+msgid "Journal Type"
+msgstr "Journal Type"
+
+#. module: analytic_distribution
+#: field:analytic.distribution,invoice_ids:0
+msgid "Invoices"
+msgstr "Invoices"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/account_commitment.py:104
+#: code:addons/analytic_distribution/account_commitment.py:108
+#, python-format
+msgid "No Engagement journal found!"
+msgstr "No Engagement journal found!"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/wizard/mass_reallocation_wizard.py:182
+#, python-format
+msgid "Given date is inferior to those from the maximum posting date. You cannot post lines before the youngest one. Please change it to be superior or equal to %s"
+msgstr "Given date is inferior to those from the maximum posting date. You cannot post lines before the youngest one. Please change it to be superior or equal to %s"
+
+#. module: analytic_distribution
+#: field:account.commitment.line,first:0
+msgid "Is not created?"
+msgstr "Is not created?"
+
+#. module: analytic_distribution
+#: report:funding.pool:0
+msgid "Code"
+msgstr "Code"
+
+#. module: analytic_distribution
+#: report:funding.pool:0
+msgid "EXP"
+msgstr "EXP"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/wizard/mass_reallocation_wizard.py:94
+#, python-format
+msgid "No lines to be processed."
+msgstr "No lines to be processed."
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:924
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:930
+#, python-format
+msgid "Destination %s is not active at this date: %s"
+msgstr "Destination %s is not active at this date: %s"
+
+#. module: analytic_distribution
+#: help:account.move.line,analytic_distribution_state_recap:0
+msgid "Informs you about analaytic distribution state among 'none', 'valid', 'invalid', from header or not, or no analytic distribution"
+msgstr "Informs you about analaytic distribution state among 'none', 'valid', 'invalid', from header or not, or no analytic distribution"
+
+#. module: analytic_distribution
+#: selection:account.analytic.line,journal_type:0
+msgid "General"
+msgstr "General"
+
+#. module: analytic_distribution
+#: view:account.analytic.account:0
+#: field:account.analytic.account,cost_center_ids:0
+msgid "Cost Centers"
+msgstr "Cost Centers"
+
+#. module: analytic_distribution
+#: field:account.analytic.account,destination_ids:0
+msgid "Accounts"
+msgstr "Accounts"
+
+#. module: analytic_distribution
+#: view:account.commitment:0
+#: selection:account.commitment,state:0
+#: selection:analytic.distribution.wizard,register_line_state:0
+#: selection:analytic.distribution.wizard,state:0
+msgid "Draft"
+msgstr "Draft"
+
+#. module: analytic_distribution
+#: model:ir.actions.act_window,name:analytic_distribution.action_mass_reallocation
+msgid "Mass reallocation"
+msgstr "Mass reallocation"
+
+#. module: analytic_distribution
+#: model:ir.model,name:analytic_distribution.model_funding_pool_distribution_line
+msgid "funding.pool.distribution.line"
+msgstr "funding.pool.distribution.line"
+
+#. module: analytic_distribution
+#: help:account.bank.statement.line,display_analytic_button:0
+#: help:account.move.line,display_analytic_button:0
+msgid "This informs system that we can display or not an analytic button"
+msgstr "This informs system that we can display or not an analytic button"
+
+#. module: analytic_distribution
+#: field:account.commitment,total:0
+msgid "Total"
+msgstr "Total"
+
+#. module: analytic_distribution
+#: field:account.analytic.line,commitment_line_id:0
+#: field:analytic.distribution.wizard,commitment_line_id:0
+msgid "Commitment Voucher Line"
+msgstr "Commitment Voucher Line"
+
+#. module: analytic_distribution
+#: field:analytic.distribution,cost_center_lines:0
+msgid "Cost Center Distribution"
+msgstr "Cost Center Distribution"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/account_commitment.py:520
+#, python-format
+msgid "You cannot write a commitment voucher line on a 'view' account type!"
+msgstr "You cannot write a commitment voucher line on a 'view' account type!"
+
+#. module: analytic_distribution
+#: model:ir.model,name:analytic_distribution.model_analytic_distribution_wizard
+msgid "analytic.distribution.wizard"
+msgstr "analytic.distribution.wizard"
+
+#. module: analytic_distribution
+#: field:mass.reallocation.verification.wizard,nb_other:0
+msgid "Excluded lines"
+msgstr "Excluded lines"
+
+#. module: analytic_distribution
+#: model:ir.model,name:analytic_distribution.model_account_analytic_chart
+msgid "Account Analytic Chart"
+msgstr "Account Analytic Chart"
+
+#. module: analytic_distribution
+#: sql_constraint:account.account:0
+msgid "The code of the account must be unique per company !"
+msgstr "The code of the account must be unique per company !"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:744
+#, python-format
+msgid "Allocation is not fully done for %s"
+msgstr "Allocation is not fully done for %s"
+
+#. module: analytic_distribution
+#: selection:account.analytic.line,journal_type:0
+msgid "Currency Adjustement"
+msgstr "Currency Adjustement"
+
+#. module: analytic_distribution
+#: model:ir.model,name:analytic_distribution.model_account_analytic_line
+msgid "Analytic Line"
+msgstr "Analytic Line"
+
+#. module: analytic_distribution
+#: report:funding.pool:0
+msgid "Cost center code"
+msgstr "Cost center code"
+
+#. module: analytic_distribution
+#: field:cost.center.distribution.line,date:0
+#: field:distribution.line,date:0
+#: field:free.1.distribution.line,date:0
+#: field:free.2.distribution.line,date:0
+#: field:funding.pool.distribution.line,date:0
+msgid "Date"
+msgstr "Date"
+
+#. module: analytic_distribution
+#: selection:analytic.distribution.wizard,entry_mode:0
+#: field:analytic.distribution.wizard.f1.lines,amount:0
+#: field:analytic.distribution.wizard.f2.lines,amount:0
+#: field:analytic.distribution.wizard.fp.lines,amount:0
+#: field:analytic.distribution.wizard.lines,amount:0
+#: field:cost.center.distribution.line,amount:0
+#: field:distribution.line,amount:0
+#: field:free.1.distribution.line,amount:0
+#: field:free.2.distribution.line,amount:0
+#: field:funding.pool.distribution.line,amount:0
+msgid "Amount"
+msgstr "Amount"
+
+#. module: analytic_distribution
+#: model:ir.model,name:analytic_distribution.model_account_commitment
+msgid "Account Commitment Voucher"
+msgstr "Account Commitment Voucher"
+
+#. module: analytic_distribution
+#: field:analytic.distribution.wizard,invoice_line_id:0
+#: model:ir.model,name:analytic_distribution.model_account_invoice_line
+msgid "Invoice Line"
+msgstr "Invoice Line"
+
+#. module: analytic_distribution
+#: help:analytic.distribution.wizard,have_header:0
+msgid "This informs the wizard if we are on a line and if the parent has an distrib."
+msgstr "This informs the wizard if we are on a line and if the parent has an distrib."
+
+#. module: analytic_distribution
+#: field:account.destination.link,account_id:0
+#: field:account.destination.summary,account_id:0
+#: field:analytic.distribution.wizard,account_id:0
+msgid "G/L Account"
+msgstr "G/L Account"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/account_commitment.py:572
+#, python-format
+msgid "No invoice line given. Please save your commitment voucher line before."
+msgstr "No invoice line given. Please save your commitment voucher line before."
+
+#. module: analytic_distribution
+#: selection:account.commitment,type:0
+msgid "Manual - ESC supplier"
+msgstr "Manual - ESC supplier"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/analytic_distribution.py:87
+#, python-format
+msgid "%s: Error, destination not compatible with G/L account in CC lines"
+msgstr "%s: Error, destination not compatible with G/L account in CC lines"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/account_move_line.py:145
+#, python-format
+msgid "Invalid analytic distribution."
+msgstr "Invalid analytic distribution."
+
+#. module: analytic_distribution
+#: view:account.commitment:0
+msgid "External"
+msgstr "External"
+
+#. module: analytic_distribution
+#: model:ir.model,name:analytic_distribution.model_account_bank_statement_line
+msgid "Bank Statement Line"
+msgstr "Bank Statement Line"
+
+#. module: analytic_distribution
+#: field:mass.reallocation.wizard,line_ids:0
+msgid "Analytic Journal Items"
+msgstr "Analytic Journal Items"
+
+#. module: analytic_distribution
+#: selection:analytic.distribution.wizard.f1.lines,type:0
+#: selection:analytic.distribution.wizard.f2.lines,type:0
+#: selection:analytic.distribution.wizard.fp.lines,type:0
+#: selection:analytic.distribution.wizard.lines,type:0
+msgid "Cost Center Lines"
+msgstr "Cost Center Lines"
+
+#. module: analytic_distribution
+#: field:analytic.distribution.wizard,model_id:0
+msgid "Account Model"
+msgstr "Account Model"
+
+#. module: analytic_distribution
+#: field:analytic.distribution.wizard,sale_order_id:0
+msgid "Sale Order"
+msgstr "Sale Order"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/analytic_account.py:104
+#, python-format
+msgid "Operator not supported on field intermission_restricted!"
+msgstr "Operator not supported on field intermission_restricted!"
+
+#. module: analytic_distribution
+#: field:account.analytic.account,filter_active:0
+msgid "Show only active analytic accounts"
+msgstr "Show only active analytic accounts"
+
+#. module: analytic_distribution
+#: selection:account.analytic.line,move_state:0
+msgid "Unposted"
+msgstr "Unposted"
+
+#. module: analytic_distribution
+#: report:funding.pool:0
+msgid "Funding pool code/name:"
+msgstr "Funding pool code/name:"
+
+#. module: analytic_distribution
+#: field:account.commitment.line,amount:0
+msgid "Amount left"
+msgstr "Amount left"
+
+#. module: analytic_distribution
+#: field:analytic.distribution.wizard.f1.lines,distribution_line_id:0
+#: field:analytic.distribution.wizard.f2.lines,distribution_line_id:0
+#: field:analytic.distribution.wizard.fp.lines,distribution_line_id:0
+#: field:analytic.distribution.wizard.lines,distribution_line_id:0
+msgid "Distribution Line"
+msgstr "Distribution Line"
+
+#. module: analytic_distribution
+#: field:analytic.distribution.wizard,is_writable:0
+msgid "Is this wizard writable?"
+msgstr "Is this wizard writable?"
+
+#. module: analytic_distribution
+#: constraint:account.move.line:0
+msgid "Company must be same for its related account and period."
+msgstr "Company must be same for its related account and period."
+
+#. module: analytic_distribution
+#: model:ir.model,name:analytic_distribution.model_mass_reallocation_verification_wizard
+msgid "Mass Reallocation Verification Wizard"
+msgstr "Mass Reallocation Verification Wizard"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:622
+#, python-format
+msgid "No analytic distribution"
+msgstr "No analytic distribution"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/account.py:314
+#: code:addons/analytic_distribution/account_commitment.py:231
+#: code:addons/analytic_distribution/invoice.py:88
+#, python-format
+msgid "Global analytic distribution"
+msgstr "Global analytic distribution"
+
+#. module: analytic_distribution
+#: view:account.analytic.account:0
+msgid "Inactive"
+msgstr "Inactive"
+
+#. module: analytic_distribution
+#: field:account.destination.link,name:0
+#: field:analytic.distribution,name:0
+#: field:cost.center.distribution.line,name:0
+#: field:distribution.line,name:0
+#: field:free.1.distribution.line,name:0
+#: field:free.2.distribution.line,name:0
+#: report:funding.pool:0
+#: field:funding.pool.distribution.line,name:0
+msgid "Name"
+msgstr "Name"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:313
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:340
+#: constraint:cost.center.distribution.line:0
+#: constraint:distribution.line:0
+#: constraint:free.1.distribution.line:0
+#: constraint:free.2.distribution.line:0
+#: constraint:funding.pool.distribution.line:0
+#, python-format
+msgid "0 is not allowed as percentage value!"
+msgstr "0 is not allowed as percentage value!"
+
+#. module: analytic_distribution
+#: model:ir.ui.menu,name:analytic_distribution.menu_engagement_lines
+msgid "Commitment Lines"
+msgstr "Commitment Lines"
+
+#. module: analytic_distribution
+#: view:account.analytic.chart:0
+msgid "(Keep empty to open the current situation)"
+msgstr "(Keep empty to open the current situation)"
+
+#. module: analytic_distribution
+#: field:account.account,user_type_code:0
+msgid "User Type Code"
+msgstr "User Type Code"
+
+#. module: analytic_distribution
+#: field:analytic.distribution.wizard,f1_line_ids:0
+msgid "Free 1 Allocation"
+msgstr "Free 1 Allocation"
+
+#. module: analytic_distribution
+#: field:mass.reallocation.verification.wizard,nb_error:0
+msgid "Lines in error"
+msgstr "Lines in error"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:955
+#, python-format
+msgid "Cost center update failure."
+msgstr "Cost center update failure."
+
+#. module: analytic_distribution
+#: field:analytic.distribution,move_line_ids:0
+msgid "Move Lines"
+msgstr "Move Lines"
+
+#. module: analytic_distribution
+#: field:account.commitment.line,account_id:0
+#: model:ir.model,name:analytic_distribution.model_account_account
+msgid "Account"
+msgstr "Account"
+
+#. module: analytic_distribution
+#: field:analytic.distribution.wizard,amount:0
+#: field:analytic.distribution.wizard,total_amount:0
+msgid "Total amount"
+msgstr "Total amount"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/account_commitment.py:96
+#, python-format
+msgid "Partner '%s' is not active."
+msgstr "Partner '%s' is not active."
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/analytic_distribution.py:74
+#, python-format
+msgid "%s: NONE!"
+msgstr "%s: NONE!"
+
+#. module: analytic_distribution
+#: field:analytic.distribution,free_1_lines:0
+msgid "Free 1 Distribution"
+msgstr "Free 1 Distribution"
+
+#. module: analytic_distribution
+#: help:cost.center.distribution.line,source_date:0
+#: help:distribution.line,source_date:0
+#: help:free.1.distribution.line,source_date:0
+#: help:free.2.distribution.line,source_date:0
+#: help:funding.pool.distribution.line,source_date:0
+msgid "This date is for source_date for analytic lines"
+msgstr "This date is for source_date for analytic lines"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/analytic_account.py:387
+#, python-format
+msgid "You cannot delete this Analytic Account!"
+msgstr "You cannot delete this Analytic Account!"
+
+#. module: analytic_distribution
+#: view:analytic.distribution.wizard:0
+#: view:mass.reallocation.verification.wizard:0
+#: view:mass.reallocation.wizard:0
+msgid "Cancel"
+msgstr "Cancel"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/account_move_line.py:379
+#, python-format
+msgid "Journal Entries"
+msgstr "Journal Entries"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/account_commitment.py:361
+#, python-format
+msgid "An error occured on engagement lines deletion."
+msgstr "An error occured on engagement lines deletion."
+
+#. module: analytic_distribution
+#: constraint:account.analytic.account:0
+msgid "You can't delete an account which has this destination as default"
+msgstr "You can't delete an account which has this destination as default"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/analytic_distribution.py:95
+#, python-format
+msgid "%s: Error, destination not compatible with G/L account for FP lines"
+msgstr "%s: Error, destination not compatible with G/L account for FP lines"
+
+#. module: analytic_distribution
+#: model:ir.model,name:analytic_distribution.model_mass_reallocation_wizard
+msgid "Mass Reallocation Wizard"
+msgstr "Mass Reallocation Wizard"
+
+#. module: analytic_distribution
+#: field:analytic.distribution.wizard,from_direct_inv:0
+msgid "Register Line For Direct Invoice"
+msgstr "Register Line For Direct Invoice"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:1028
+#, python-format
+msgid "Seems that no G/L account was found for this Register Analytic Distribution Wizard. Please give one."
+msgstr "Seems that no G/L account was found for this Register Analytic Distribution Wizard. Please give one."
+
+#. module: analytic_distribution
+#: field:account.analytic.line,distrib_line_id:0
+msgid "Distribution Line ID"
+msgstr "Distribution Line ID"
+
+#. module: analytic_distribution
+#: field:account.commitment,date:0
+msgid "Commitment Date"
+msgstr "Commitment Date"
+
+#. module: analytic_distribution
+#: help:account.commitment.line,first:0
+msgid "Useful for onchange method for views. Should be False after line creation."
+msgstr "Useful for onchange method for views. Should be False after line creation."
+
+#. module: analytic_distribution
+#: model:ir.model,name:analytic_distribution.model_account_move_line
+msgid "Journal Items"
+msgstr "Journal Items"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/analytic_distribution.py:101
+#, python-format
+msgid "%s: Error, account/destination tuple not compatible with given FP analytic account"
+msgstr "%s: Error, account/destination tuple not compatible with given FP analytic account"
+
+#. module: analytic_distribution
+#: code:addons/analytic_distribution/wizard/analytic_distribution_wizard.py:1086
+#, python-format
+msgid "Percentage not valid! (%s)"
+msgstr "Percentage not valid! (%s)"
+
+#. module: analytic_distribution
+#: selection:account.analytic.line,distrib_line_id:0
+msgid "free1"
+msgstr "free1"
+
+#. module: analytic_distribution
+#: report:funding.pool:0
+msgid "Comments:"
+msgstr "Comments:"
+
+#. module: analytic_distribution
+#: field:analytic.distribution.wizard,line_ids:0
+msgid "Cost Center Allocation"
+msgstr "Cost Center Allocation"
+
+#. module: analytic_distribution
+#: help:analytic.distribution.wizard,account_id:0
+msgid "This account come from an invoice line. When filled in it permits to test compatibility for each funding pool and display those that was linked with."
+msgstr "This account come from an invoice line. When filled in it permits to test compatibility for each funding pool and display those that was linked with."
+

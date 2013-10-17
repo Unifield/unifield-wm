@@ -1,0 +1,204 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* stock_batch_recall
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 07:42+0000\n"
+"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_batch_recall
+#: selection:report.batch.recall,location_type:0
+msgid "Supplier Location"
+msgstr "Supplier Location"
+
+#. module: stock_batch_recall
+#: selection:report.batch.recall,location_type:0
+msgid "Production"
+msgstr "Production"
+
+#. module: stock_batch_recall
+#: model:ir.actions.act_window,name:stock_batch_recall.action_batch_recall
+#: model:ir.actions.act_window,name:stock_batch_recall.action_report_batch_recall
+#: model:ir.model,name:stock_batch_recall.model_report_batch_recall
+#: model:ir.model,name:stock_batch_recall.model_stock_batch_recall
+#: model:ir.module.module,shortdesc:stock_batch_recall.module_meta_information
+#: model:ir.ui.menu,name:stock_batch_recall.menu_batch_recall
+#: view:report.batch.recall:0
+#: view:stock.batch.recall:0
+msgid "Batch Recall"
+msgstr "Batch Recall"
+
+#. module: stock_batch_recall
+#: model:ir.module.module,description:stock_batch_recall.module_meta_information
+msgid "\n"
+"    This module adds a wizard to see a specific product/bacth/expired date\n"
+"    in stock.\n"
+"    It also modifies the stock inventory view to add expired date.\n"
+"    "
+msgstr "\n"
+"    This module adds a wizard to see a specific product/bacth/expired date\n"
+"    in stock.\n"
+"    It also modifies the stock inventory view to add expired date.\n"
+"    "
+
+#. module: stock_batch_recall
+#: selection:report.batch.recall,location_type:0
+msgid "Customer Location"
+msgstr "Customer Location"
+
+#. module: stock_batch_recall
+#: selection:report.batch.recall,location_type:0
+msgid "Transit Location for Inter-Companies Transfers"
+msgstr "Transit Location for Inter-Companies Transfers"
+
+#. module: stock_batch_recall
+#: view:stock.batch.recall:0
+msgid "Go"
+msgstr "Go"
+
+#. module: stock_batch_recall
+#: field:stock.batch.recall,prodlot_id:0
+msgid "Batch number"
+msgstr "Batch number"
+
+#. module: stock_batch_recall
+#: sql_constraint:stock.production.lot:0
+msgid "Batch name must be unique per instance and product!"
+msgstr "Batch name must be unique per instance and product!"
+
+#. module: stock_batch_recall
+#: selection:report.batch.recall,location_type:0
+msgid "Inventory"
+msgstr "Inventory"
+
+#. module: stock_batch_recall
+#: field:report.batch.recall,location_id:0
+msgid "Location"
+msgstr "Location"
+
+#. module: stock_batch_recall
+#: constraint:stock.production.lot:0
+msgid "You can't create an internal Batch Number for a product which is batch managed or which is not perishable. If the product is batch managed, please create a standard batch number."
+msgstr "You can't create an internal Batch Number for a product which is batch managed or which is not perishable. If the product is batch managed, please create a standard batch number."
+
+#. module: stock_batch_recall
+#: field:report.batch.recall,expired_date:0
+#: field:stock.batch.recall,expired_date:0
+msgid "Expired Date"
+msgstr "Expired Date"
+
+#. module: stock_batch_recall
+#: field:report.batch.recall,location_type:0
+msgid "Location Type"
+msgstr "Location Type"
+
+#. module: stock_batch_recall
+#: field:report.batch.recall,product_qty:0
+msgid "Quantity"
+msgstr "Quantity"
+
+#. module: stock_batch_recall
+#: field:report.batch.recall,prodlot_id:0
+msgid "Batch Number"
+msgstr "Batch Number"
+
+#. module: stock_batch_recall
+#: view:report.batch.recall:0
+msgid "Customer"
+msgstr "Customer"
+
+#. module: stock_batch_recall
+#: model:ir.model,name:stock_batch_recall.model_stock_production_lot
+msgid "Production lot"
+msgstr "Production lot"
+
+#. module: stock_batch_recall
+#: sql_constraint:stock.production.lot:0
+msgid "The combination of serial number and internal reference must be unique !"
+msgstr "The combination of serial number and internal reference must be unique !"
+
+#. module: stock_batch_recall
+#: selection:report.batch.recall,location_type:0
+msgid "Procurement"
+msgstr "Procurement"
+
+#. module: stock_batch_recall
+#: view:report.batch.recall:0
+#: field:stock.production.lot,partner_id:0
+msgid "Supplier"
+msgstr "Supplier"
+
+#. module: stock_batch_recall
+#: code:addons/stock_batch_recall/stock.py:49
+#, python-format
+msgid "You should at least enter one information"
+msgstr "You should at least enter one information"
+
+#. module: stock_batch_recall
+#: code:addons/stock_batch_recall/stock.py:231
+#, python-format
+msgid "Error !"
+msgstr "Error !"
+
+#. module: stock_batch_recall
+#: view:report.batch.recall:0
+msgid "Internal"
+msgstr "Internal"
+
+#. module: stock_batch_recall
+#: code:addons/stock_batch_recall/stock.py:49
+#, python-format
+msgid "Error"
+msgstr "Error"
+
+#. module: stock_batch_recall
+#: view:report.batch.recall:0
+msgid "Filters..."
+msgstr "Filters..."
+
+#. module: stock_batch_recall
+#: selection:report.batch.recall,location_type:0
+msgid "Internal Location"
+msgstr "Internal Location"
+
+#. module: stock_batch_recall
+#: selection:report.batch.recall,location_type:0
+msgid "View"
+msgstr "View"
+
+#. module: stock_batch_recall
+#: field:report.batch.recall,product_id:0
+#: field:stock.batch.recall,product_id:0
+msgid "Product"
+msgstr "Product"
+
+#. module: stock_batch_recall
+#: constraint:stock.production.lot:0
+msgid "You can't create a standard batch number for a product which is not batch mandatory. If the product is perishable, the system will create automatically an internal batch number on reception/inventory."
+msgstr "You can't create a standard batch number for a product which is not batch mandatory. If the product is perishable, the system will create automatically an internal batch number on reception/inventory."
+
+#. module: stock_batch_recall
+#: field:stock.production.lot,xmlid_name:0
+msgid "XML Code, hidden field"
+msgstr "XML Code, hidden field"
+
+#. module: stock_batch_recall
+#: field:stock.production.lot,instance_id:0
+msgid "Instance"
+msgstr "Instance"
+
+#. module: stock_batch_recall
+#: code:addons/stock_batch_recall/stock.py:231
+#, python-format
+msgid "You cannot delete any record!"
+msgstr "You cannot delete any record!"
+

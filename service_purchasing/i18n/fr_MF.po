@@ -1,0 +1,284 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* service_purchasing
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 07:42+0000\n"
+"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: service_purchasing
+#: code:addons/service_purchasing/service_purchasing.py:277
+#: code:addons/service_purchasing/service_purchasing.py:301
+#: constraint:product.product:0
+#: constraint:sale.order.line:0
+#: constraint:sourcing.line:0
+#, python-format
+msgid "You must select on order procurement method for Service with Reception products."
+msgstr "You must select on order procurement method for Service with Reception products."
+
+#. module: service_purchasing
+#: selection:stock.picking,order_category:0
+msgid "Other"
+msgstr "Other"
+
+#. module: service_purchasing
+#: model:ir.module.module,description:service_purchasing.module_meta_information
+msgid "\n"
+"        Add the capability for a product to be a service with reception in %UOM\n"
+"        "
+msgstr "\n"
+"        Add the capability for a product to be a service with reception in %UOM\n"
+"        "
+
+#. module: service_purchasing
+#: constraint:product.template:0
+msgid "Error: The default UOM and the purchase UOM must be in the same category."
+msgstr "Error: The default UOM and the purchase UOM must be in the same category."
+
+#. module: service_purchasing
+#: constraint:product.product:0
+msgid "Constraint error on Kit Product."
+msgstr "Constraint error on Kit Product."
+
+#. module: service_purchasing
+#: code:addons/service_purchasing/service_purchasing.py:77
+#: code:addons/service_purchasing/service_purchasing.py:101
+#: code:addons/service_purchasing/service_purchasing.py:244
+#: code:addons/service_purchasing/service_purchasing.py:246
+#: code:addons/service_purchasing/service_purchasing.py:248
+#: code:addons/service_purchasing/service_purchasing.py:250
+#: code:addons/service_purchasing/service_purchasing.py:252
+#: code:addons/service_purchasing/service_purchasing.py:277
+#: code:addons/service_purchasing/service_purchasing.py:301
+#, python-format
+msgid "Error"
+msgstr "Error"
+
+#. module: service_purchasing
+#: code:addons/service_purchasing/service_purchasing.py:248
+#, python-format
+msgid "Service Products must have Service Location as Destination Location."
+msgstr "Service Products must have Service Location as Destination Location."
+
+#. module: service_purchasing
+#: code:addons/service_purchasing/service_purchasing.py:77
+#, python-format
+msgid "You must select on order procurement method for %s products."
+msgstr "You must select on order procurement method for %s products."
+
+#. module: service_purchasing
+#: model:ir.model,name:service_purchasing.model_sourcing_line
+msgid "Sourcing Line"
+msgstr "Sourcing Line"
+
+#. module: service_purchasing
+#: selection:stock.picking,order_category:0
+msgid "Logistic"
+msgstr "Logistic"
+
+#. module: service_purchasing
+#: constraint:purchase.order:0
+msgid "You cannot choose an internal supplier for this purchase order"
+msgstr "You cannot choose an internal supplier for this purchase order"
+
+#. module: service_purchasing
+#: constraint:product.product:0
+msgid "Error: Invalid ean code"
+msgstr "Error: Invalid ean code"
+
+#. module: service_purchasing
+#: model:ir.model,name:service_purchasing.model_stock_location
+msgid "Location"
+msgstr "Location"
+
+#. module: service_purchasing
+#: constraint:stock.picking:0
+msgid "You cannot validate this document because it contains a line with an inactive product"
+msgstr "You cannot validate this document because it contains a line with an inactive product"
+
+#. module: service_purchasing
+#: selection:stock.picking,order_category:0
+msgid "Service"
+msgstr "Service"
+
+#. module: service_purchasing
+#: constraint:product.product:0
+msgid "Warning! GMDN code must be digits!"
+msgstr "Warning! GMDN code must be digits!"
+
+#. module: service_purchasing
+#: constraint:stock.move:0
+msgid "Constraint error on Uom"
+msgstr "Constraint error on Uom"
+
+#. module: service_purchasing
+#: constraint:stock.move:0
+msgid "You must assign a batch number for this product."
+msgstr "You must assign a batch number for this product."
+
+#. module: service_purchasing
+#: constraint:purchase.order:0
+msgid "You cannot validate this purchase order because it contains a line with an inactive product"
+msgstr "You cannot validate this purchase order because it contains a line with an inactive product"
+
+#. module: service_purchasing
+#: constraint:stock.move:0
+msgid "You cannot select Service Location as Source Location."
+msgstr "You cannot select Service Location as Source Location."
+
+#. module: service_purchasing
+#: view:stock.picking:0
+#: field:stock.picking,order_category:0
+msgid "Order Category"
+msgstr "Order Category"
+
+#. module: service_purchasing
+#: constraint:product.product:0
+msgid "If you select \"Non-stockable\" as product type then you have to select \"Make to order\" as procurement method"
+msgstr "If you select \"Non-stockable\" as product type then you have to select \"Make to order\" as procurement method"
+
+#. module: service_purchasing
+#: model:ir.model,name:service_purchasing.model_purchase_order
+msgid "Purchase Order"
+msgstr "Purchase Order"
+
+#. module: service_purchasing
+#: selection:stock.picking,order_category:0
+msgid "Transport"
+msgstr "Transport"
+
+#. module: service_purchasing
+#: constraint:stock.location:0
+msgid "You cannot define a quarantine location as chained location."
+msgstr "You cannot define a quarantine location as chained location."
+
+#. module: service_purchasing
+#: constraint:purchase.order:0
+msgid "Partner type and order type are incompatible! Please change either order type or partner."
+msgstr "Partner type and order type are incompatible! Please change either order type or partner."
+
+#. module: service_purchasing
+#: model:ir.model,name:service_purchasing.model_stock_move
+msgid "Stock Move"
+msgstr "Stock Move"
+
+#. module: service_purchasing
+#: sql_constraint:sale.order.line:0
+msgid "Product Quantity must be greater than zero."
+msgstr "Product Quantity must be greater than zero."
+
+#. module: service_purchasing
+#: constraint:purchase.order:0
+msgid "If you tick the box \"cross docking\", you cannot have an other location than \"Cross docking\""
+msgstr "If you tick the box \"cross docking\", you cannot have an other location than \"Cross docking\""
+
+#. module: service_purchasing
+#: view:stock.picking:0
+msgid "Partner"
+msgstr "Partner"
+
+#. module: service_purchasing
+#: field:stock.location,service_location:0
+msgid "Service Location"
+msgstr "Service Location"
+
+#. module: service_purchasing
+#: code:addons/service_purchasing/service_purchasing.py:246
+#: code:addons/service_purchasing/service_purchasing.py:250
+#, python-format
+msgid "Service Products must have Cross Docking Location as Source Location."
+msgstr "Service Products must have Cross Docking Location as Source Location."
+
+#. module: service_purchasing
+#: code:addons/service_purchasing/service_purchasing.py:101
+#, python-format
+msgid "You must have a location with \"Service Location\"."
+msgstr "You must have a location with \"Service Location\"."
+
+#. module: service_purchasing
+#: model:ir.model,name:service_purchasing.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Sales Order Line"
+
+#. module: service_purchasing
+#: sql_constraint:product.product:0
+msgid "The \"Product Code\" must be unique"
+msgstr "The \"Product Code\" must be unique"
+
+#. module: service_purchasing
+#: sql_constraint:purchase.order:0
+msgid "Order Reference must be unique !"
+msgstr "Order Reference must be unique !"
+
+#. module: service_purchasing
+#: selection:stock.picking,order_category:0
+msgid "Medical"
+msgstr "Medical"
+
+#. module: service_purchasing
+#: constraint:stock.location:0
+msgid "Quarantine Location can only have Quarantine Location or Views as parent location."
+msgstr "Quarantine Location can only have Quarantine Location or Views as parent location."
+
+#. module: service_purchasing
+#: constraint:stock.move:0
+#: constraint:stock.picking:0
+msgid "Wrong reason type for an OUT created from scratch."
+msgstr "Wrong reason type for an OUT created from scratch."
+
+#. module: service_purchasing
+#: model:ir.model,name:service_purchasing.model_stock_picking
+msgid "Picking List"
+msgstr "Picking List"
+
+#. module: service_purchasing
+#: model:ir.module.module,shortdesc:service_purchasing.module_meta_information
+msgid "Service Purchasing"
+msgstr "Service Purchasing"
+
+#. module: service_purchasing
+#: code:addons/service_purchasing/service_purchasing.py:252
+#, python-format
+msgid "Service Location cannot be used for non Service Products."
+msgstr "Service Location cannot be used for non Service Products."
+
+#. module: service_purchasing
+#: constraint:stock.move:0
+msgid "You must assign an asset for this product."
+msgstr "You must assign an asset for this product."
+
+#. module: service_purchasing
+#: constraint:purchase.order:0
+msgid "You must specify a Valid Till date."
+msgstr "You must specify a Valid Till date."
+
+#. module: service_purchasing
+#: code:addons/service_purchasing/service_purchasing.py:244
+#, python-format
+msgid "Service Products must have Service or Cross Docking Location as Destination Location."
+msgstr "Service Products must have Service or Cross Docking Location as Destination Location."
+
+#. module: service_purchasing
+#: constraint:stock.move:0
+msgid "You try to assign a lot which is not from the same product"
+msgstr "You try to assign a lot which is not from the same product"
+
+#. module: service_purchasing
+#: model:ir.model,name:service_purchasing.model_product_product
+msgid "Product"
+msgstr "Product"
+
+#. module: service_purchasing
+#: model:ir.model,name:service_purchasing.model_product_template
+msgid "Product Template"
+msgstr "Product Template"
+

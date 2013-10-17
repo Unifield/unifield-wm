@@ -1,0 +1,137 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* purchase_msf
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 07:42+0000\n"
+"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: purchase_msf
+#: constraint:product.product:0
+msgid "Constraint error on Kit Product."
+msgstr "Constraint error on Kit Product."
+
+#. module: purchase_msf
+#: field:purchase.order.line,supplier_name:0
+msgid "Supplier name"
+msgstr "Supplier name"
+
+#. module: purchase_msf
+#: field:purchase.order.line,third_manufacturer_id:0
+msgid "Third Manufacturer"
+msgstr "Third Manufacturer"
+
+#. module: purchase_msf
+#: field:purchase.order.line,second_manufacturer_id:0
+msgid "Second Manufacturer"
+msgstr "Second Manufacturer"
+
+#. module: purchase_msf
+#: constraint:product.product:0
+msgid "Error: Invalid ean code"
+msgstr "Error: Invalid ean code"
+
+#. module: purchase_msf
+#: model:ir.module.module,description:purchase_msf.module_meta_information
+msgid "\n"
+"    Purchase module is for generating a purchase order for purchase of goods from a supplier.\n"
+"    A supplier invoice is created for the particular order placed\n"
+"    Dashboard for purchase management that includes:\n"
+"    * Current Purchase Orders\n"
+"    * Draft Purchase Orders\n"
+"    * Graph for quantity and amount per month    \n"
+"\n"
+"    "
+msgstr "\n"
+"    Purchase module is for generating a purchase order for purchase of goods from a supplier.\n"
+"    A supplier invoice is created for the particular order placed\n"
+"    Dashboard for purchase management that includes:\n"
+"    * Current Purchase Orders\n"
+"    * Draft Purchase Orders\n"
+"    * Graph for quantity and amount per month    \n"
+"\n"
+"    "
+
+#. module: purchase_msf
+#: field:purchase.order.line,supplier_code:0
+msgid "Supplier code"
+msgstr "Supplier code"
+
+#. module: purchase_msf
+#: sql_constraint:purchase.order.line:0
+msgid "Product Quantity must be greater than zero."
+msgstr "Product Quantity must be greater than zero."
+
+#. module: purchase_msf
+#: constraint:product.product:0
+msgid "If you select \"Non-stockable\" as product type then you have to select \"Make to order\" as procurement method"
+msgstr "If you select \"Non-stockable\" as product type then you have to select \"Make to order\" as procurement method"
+
+#. module: purchase_msf
+#: code:addons/purchase_msf/purchase_msf.py:56
+#: code:addons/purchase_msf/purchase_msf.py:87
+#, python-format
+msgid "You have to select a product UOM in the same category than the purchase UOM of the product !"
+msgstr "You have to select a product UOM in the same category than the purchase UOM of the product !"
+
+#. module: purchase_msf
+#: code:addons/purchase_msf/purchase_msf.py:55
+#: code:addons/purchase_msf/purchase_msf.py:87
+#, python-format
+msgid "Error"
+msgstr "Error"
+
+#. module: purchase_msf
+#: model:ir.module.module,shortdesc:purchase_msf.module_meta_information
+msgid "Purchase Management modified by MSF"
+msgstr "Purchase Management modified by MSF"
+
+#. module: purchase_msf
+#: constraint:product.product:0
+msgid "You must select on order procurement method for Service with Reception products."
+msgstr "You must select on order procurement method for Service with Reception products."
+
+#. module: purchase_msf
+#: sql_constraint:product.product:0
+msgid "The \"Product Code\" must be unique"
+msgstr "The \"Product Code\" must be unique"
+
+#. module: purchase_msf
+#: model:ir.model,name:purchase_msf.model_product_product
+msgid "Product"
+msgstr "Product"
+
+#. module: purchase_msf
+#: model:ir.model,name:purchase_msf.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Purchase Order Line"
+
+#. module: purchase_msf
+#: constraint:product.product:0
+msgid "Warning! GMDN code must be digits!"
+msgstr "Warning! GMDN code must be digits!"
+
+#. module: purchase_msf
+#: field:purchase.order.line,internal_name:0
+msgid "Internal name"
+msgstr "Internal name"
+
+#. module: purchase_msf
+#: field:purchase.order.line,manufacturer_id:0
+msgid "Manufacturer"
+msgstr "Manufacturer"
+
+#. module: purchase_msf
+#: field:purchase.order.line,internal_code:0
+msgid "Internal code"
+msgstr "Internal code"
+

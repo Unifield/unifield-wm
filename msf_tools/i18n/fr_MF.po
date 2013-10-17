@@ -1,0 +1,108 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* msf_tools
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 07:42+0000\n"
+"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: msf_tools
+#: model:ir.model,name:msf_tools.model_uom_tools
+msgid "uom.tools"
+msgstr "uom.tools"
+
+#. module: msf_tools
+#: model:ir.model,name:msf_tools.model_res_lang
+msgid "Languages"
+msgstr "Languages"
+
+#. module: msf_tools
+#: sql_constraint:res.lang:0
+msgid "The code of the language must be unique !"
+msgstr "The code of the language must be unique !"
+
+#. module: msf_tools
+#: constraint:res.lang:0
+msgid "Invalid date/time format directive specified. Please refer to the list of allowed directives, displayed when you edit a language."
+msgstr "Invalid date/time format directive specified. Please refer to the list of allowed directives, displayed when you edit a language."
+
+#. module: msf_tools
+#: model:ir.model,name:msf_tools.model_data_tools
+msgid "data.tools"
+msgstr "data.tools"
+
+#. module: msf_tools
+#: model:ir.module.module,description:msf_tools.module_meta_information
+msgid "\n"
+"        Interface for Msf Tools\n"
+"    "
+msgstr "\n"
+"        Interface for Msf Tools\n"
+"    "
+
+#. module: msf_tools
+#: model:ir.model,name:msf_tools.model_fields_tools
+msgid "fields.tools"
+msgstr "fields.tools"
+
+#. module: msf_tools
+#: model:ir.model,name:msf_tools.model_product_uom
+msgid "Product Unit of Measure"
+msgstr "Product Unit of Measure"
+
+#. module: msf_tools
+#: code:addons/msf_tools/msf_tools.py:561
+#, python-format
+msgid "Bad rounding"
+msgstr "Bad rounding"
+
+#. module: msf_tools
+#: model:ir.model,name:msf_tools.model_ir_translation
+msgid "ir.translation"
+msgstr "ir.translation"
+
+#. module: msf_tools
+#: model:ir.model,name:msf_tools.model_sequence_tools
+msgid "sequence.tools"
+msgstr "sequence.tools"
+
+#. module: msf_tools
+#: model:ir.model,name:msf_tools.model_picking_tools
+msgid "picking.tools"
+msgstr "picking.tools"
+
+#. module: msf_tools
+#: code:addons/msf_tools/msf_tools.py:562
+#, python-format
+msgid "The quantity entered is not valid according to the rounding value of the UoM. The product quantity has been rounded to the highest good value."
+msgstr "The quantity entered is not valid according to the rounding value of the UoM. The product quantity has been rounded to the highest good value."
+
+#. module: msf_tools
+#: model:ir.module.module,shortdesc:msf_tools.module_meta_information
+msgid "MSF Tools"
+msgstr "MSF Tools"
+
+#. module: msf_tools
+#: sql_constraint:res.lang:0
+msgid "The name of the language must be unique !"
+msgstr "The name of the language must be unique !"
+
+#. module: msf_tools
+#: model:ir.model,name:msf_tools.model_date_tools
+msgid "date.tools"
+msgstr "date.tools"
+
+#. module: msf_tools
+#: sql_constraint:product.uom:0
+msgid "The conversion ratio for a unit of measure cannot be 0!"
+msgstr "The conversion ratio for a unit of measure cannot be 0!"
+

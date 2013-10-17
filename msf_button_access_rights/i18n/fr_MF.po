@@ -1,0 +1,263 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* msf_button_access_rights
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 07:42+0000\n"
+"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: msf_button_access_rights
+#: view:msf_button_access_rights.view_config_wizard_install:0
+msgid "res_config_contents"
+msgstr "res_config_contents"
+
+#. module: msf_button_access_rights
+#: model:ir.model,name:msf_button_access_rights.model_msf_button_access_rights_view_config_wizard_install_results
+msgid "msf_button_access_rights.view_config_wizard_install_results"
+msgstr "msf_button_access_rights.view_config_wizard_install_results"
+
+#. module: msf_button_access_rights
+#: field:msf_button_access_rights.button_access_rule,comment:0
+msgid "Comment"
+msgstr "Comment"
+
+#. module: msf_button_access_rights
+#: help:msf_button_access_rights.button_access_rule,group_ids:0
+msgid "A list of groups who have access to this button. If you leave this empty, everybody will have access."
+msgstr "A list of groups who have access to this button. If you leave this empty, everybody will have access."
+
+#. module: msf_button_access_rights
+#: field:msf_button_access_rights.button_access_rule,group_names:0
+msgid "Group Names"
+msgstr "Group Names"
+
+#. module: msf_button_access_rights
+#: help:msf_button_access_rights.button_access_rule,active:0
+msgid "If checked, this rule will be applied."
+msgstr "If checked, this rule will be applied."
+
+#. module: msf_button_access_rights
+#: field:msf_button_access_rights.button_access_rule,type:0
+msgid "Button Type"
+msgstr "Button Type"
+
+#. module: msf_button_access_rights
+#: model:ir.module.module,description:msf_button_access_rights.module_meta_information
+msgid "Provides functionality to define access rights  \n"
+"    for buttons in views based and the actions and workflows they trigger\n"
+"    "
+msgstr "Provides functionality to define access rights  \n"
+"    for buttons in views based and the actions and workflows they trigger\n"
+"    "
+
+#. module: msf_button_access_rights
+#: help:msf_button_access_rights.button_access_rule,view_id:0
+msgid "The view to which this rule applies"
+msgstr "The view to which this rule applies"
+
+#. module: msf_button_access_rights
+#: field:msf_button_access_rights.button_access_rule,active:0
+msgid "Active"
+msgstr "Active"
+
+#. module: msf_button_access_rights
+#: field:msf_button_access_rights.view_config_wizard_install,config_logo:0
+#: field:msf_button_access_rights.view_config_wizard_install_results,config_logo:0
+msgid "Image"
+msgstr "Image"
+
+#. module: msf_button_access_rights
+#: view:msf_button_access_rights.view_config_wizard_install:0
+msgid "Generate Button Access Rules for Existing Views"
+msgstr "Generate Button Access Rules for Existing Views"
+
+#. module: msf_button_access_rights
+#: model:ir.model,name:msf_button_access_rights.model_ir_ui_view
+msgid "ir.ui.view"
+msgstr "ir.ui.view"
+
+#. module: msf_button_access_rights
+#: field:msf_button_access_rights.button_access_rule,label:0
+msgid "Label"
+msgstr "Label"
+
+#. module: msf_button_access_rights
+#: view:msf_button_access_rights.button_access_rule:0
+msgid "Button Access Rule"
+msgstr "Button Access Rule"
+
+#. module: msf_button_access_rights
+#: field:msf_button_access_rights.view_config_wizard_install_results,errors:0
+msgid "Errors"
+msgstr "Errors"
+
+#. module: msf_button_access_rights
+#: view:msf_button_access_rights.button_access_rule:0
+#: field:msf_button_access_rights.button_access_rule,view_id:0
+msgid "View"
+msgstr "View"
+
+#. module: msf_button_access_rights
+#: model:ir.actions.act_window,name:msf_button_access_rights.button_access_rule_list
+#: model:ir.ui.menu,name:msf_button_access_rights.msf_button_access_rules
+#: view:ir.ui.view:0
+#: field:ir.ui.view,button_access_rules_ref:0
+msgid "Button Access Rules"
+msgstr "Button Access Rules"
+
+#. module: msf_button_access_rights
+#: view:msf_button_access_rights.button_access_rule:0
+msgid "Inactive"
+msgstr "Inactive"
+
+#. module: msf_button_access_rights
+#: field:msf_button_access_rights.view_config_wizard_install_results,successes:0
+msgid "Successes"
+msgstr "Successes"
+
+#. module: msf_button_access_rights
+#: view:msf_button_access_rights.view_config_wizard_install:0
+msgid "Note: You only need to do this once! Each time a view is created or editted, Button Access Rules will automatically be created or updated."
+msgstr "Note: You only need to do this once! Each time a view is created or editted, Button Access Rules will automatically be created or updated."
+
+#. module: msf_button_access_rights
+#: model:ir.actions.act_window,name:msf_button_access_rights.msf_button_access_rights_view_config_wizard_act_window
+msgid "Generate Button Access Rules"
+msgstr "Generate Button Access Rules"
+
+#. module: msf_button_access_rights
+#: model:ir.model,name:msf_button_access_rights.model_msf_button_access_rights_button_access_rule
+msgid "msf_button_access_rights.button_access_rule"
+msgstr "msf_button_access_rights.button_access_rule"
+
+#. module: msf_button_access_rights
+#: view:msf_button_access_rights.button_access_rule:0
+msgid "Comments about this rule"
+msgstr "Comments about this rule"
+
+#. module: msf_button_access_rights
+#: view:msf_button_access_rights.view_config_wizard_install:0
+msgid "title"
+msgstr "title"
+
+#. module: msf_button_access_rights
+#: constraint:ir.ui.view:0
+msgid "Invalid XML for View Architecture!"
+msgstr "Invalid XML for View Architecture!"
+
+#. module: msf_button_access_rights
+#: view:msf_button_access_rights.button_access_rule:0
+#: field:msf_button_access_rights.button_access_rule,model_id:0
+msgid "Model"
+msgstr "Model"
+
+#. module: msf_button_access_rights
+#: help:msf_button_access_rights.button_access_rule,model_id:0
+msgid "The type of data to which this rule applies"
+msgstr "The type of data to which this rule applies"
+
+#. module: msf_button_access_rights
+#: view:msf_button_access_rights.view_config_wizard_install_results:0
+msgid "Generate Button Access Rules Result"
+msgstr "Generate Button Access Rules Result"
+
+#. module: msf_button_access_rights
+#: selection:msf_button_access_rights.button_access_rule,type:0
+msgid "Workflow"
+msgstr "Workflow"
+
+#. module: msf_button_access_rights
+#: view:msf_button_access_rights.button_access_rule:0
+msgid "Search Button Access Rules"
+msgstr "Search Button Access Rules"
+
+#. module: msf_button_access_rights
+#: selection:msf_button_access_rights.button_access_rule,type:0
+msgid "Action"
+msgstr "Action"
+
+#. module: msf_button_access_rights
+#: sql_constraint:msf_button_access_rights.button_access_rule:0
+msgid "The combination of Button Name and View ID must be unique - i.e. you cannot have two rules for the same button in the same view"
+msgstr "The combination of Button Name and View ID must be unique - i.e. you cannot have two rules for the same button in the same view"
+
+#. module: msf_button_access_rights
+#: selection:msf_button_access_rights.button_access_rule,type:0
+msgid "Object"
+msgstr "Object"
+
+#. module: msf_button_access_rights
+#: view:msf_button_access_rights.button_access_rule:0
+msgid "Type"
+msgstr "Type"
+
+#. module: msf_button_access_rights
+#: field:msf_button_access_rights.view_config_wizard_install_results,total:0
+msgid "Total"
+msgstr "Total"
+
+#. module: msf_button_access_rights
+#: field:msf_button_access_rights.button_access_rule,name:0
+msgid "Name"
+msgstr "Name"
+
+#. module: msf_button_access_rights
+#: view:msf_button_access_rights.view_config_wizard_install_results:0
+msgid "Next"
+msgstr "Next"
+
+#. module: msf_button_access_rights
+#: field:msf_button_access_rights.view_config_wizard_install,progress:0
+#: field:msf_button_access_rights.view_config_wizard_install_results,progress:0
+msgid "Configuration Progress"
+msgstr "Configuration Progress"
+
+#. module: msf_button_access_rights
+#: help:msf_button_access_rights.button_access_rule,group_names:0
+msgid "A list of all group names given button access by this rule"
+msgstr "A list of all group names given button access by this rule"
+
+#. module: msf_button_access_rights
+#: field:msf_button_access_rights.button_access_rule,group_ids:0
+msgid "Groups"
+msgstr "Groups"
+
+#. module: msf_button_access_rights
+#: view:msf_button_access_rights.view_config_wizard_install:0
+msgid "Click Next below to start generating Button Access Rules for the views that are already in your database. This process can take a long time. You can open this wizard at a more convenient time form the Configuration Wizards section of the Administration module."
+msgstr "Click Next below to start generating Button Access Rules for the views that are already in your database. This process can take a long time. You can open this wizard at a more convenient time form the Configuration Wizards section of the Administration module."
+
+#. module: msf_button_access_rights
+#: help:msf_button_access_rights.button_access_rule,comment:0
+msgid "A description of what this rule does"
+msgstr "A description of what this rule does"
+
+#. module: msf_button_access_rights
+#: model:ir.model,name:msf_button_access_rights.model_msf_button_access_rights_view_config_wizard_install
+msgid "msf_button_access_rights.view_config_wizard_install"
+msgstr "msf_button_access_rights.view_config_wizard_install"
+
+#. module: msf_button_access_rights
+#: model:ir.module.module,shortdesc:msf_button_access_rights.module_meta_information
+msgid "Button Access Rights for MSF"
+msgstr "Button Access Rights for MSF"
+
+#. module: msf_button_access_rights
+#: view:msf_button_access_rights.button_access_rule:0
+msgid "Groups who have access to this button (Everybody has access if no groups are specified)"
+msgstr "Groups who have access to this button (Everybody has access if no groups are specified)"
+
+#. module: msf_button_access_rights
+#: view:msf_button_access_rights.button_access_rule:0
+msgid "Group By..."
+msgstr "Group By..."
+
