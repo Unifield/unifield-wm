@@ -112,7 +112,8 @@ for cmd in "pip@pip" "bzr@bzr" "start-stop-daemon@dpkg" "tar@tar" "xz@xz-utils" 
 done
 
 # openerp-client-lib 1.0.1 presence
-if ! [ `pip search openerp-client-lib|grep INSTALLED|cut -d ':' -f 2` == '1.0.1' ] ; then
+openerp_clientlib=`pip search openerp-client-lib|grep INSTALLED|cut -d ':' -f 2|tr -d ' '`
+if ! [ "${openerp_clientlib}" == "1.0.1" ] ; then
   error_and_exit "openerp-client-lib 1.0.1 missing.\nInstall it: sudo pip install openerp-client-lib==1.0.1"
 fi
 echo "openerp-client-lib 1.0.1: installed."
