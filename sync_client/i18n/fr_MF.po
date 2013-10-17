@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.0.3\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2013-10-17 07:42+0000\n"
-"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,9 +16,17 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: sync_client
-#: constraint:account.move:0
-msgid "You cannot create more than one move per period on centralized journal"
-msgstr "You cannot create more than one move per period on centralized journal"
+#: view:sync.client.update_received:0
+#: field:sync.client.update_received,values:0
+#: view:sync.client.update_to_send:0
+#: field:sync.client.update_to_send,values:0
+msgid "Values"
+msgstr "Valeurs"
+
+#. module: sync_client
+#: field:sync.client.rule,owner_field:0
+msgid "Owner Field"
+msgstr "Champ Propriétaire"
 
 #. module: sync_client
 #: field:sync.client.update_to_send,create_date:0
@@ -26,10 +34,10 @@ msgid "Start date"
 msgstr "Start date"
 
 #. module: sync_client
-#: field:sync.client.child_entity,group:0
-#: field:sync.client.entity_group,name:0
-msgid "Group Name"
-msgstr "Group Name"
+#: code:addons/sync_client/special_handling.py:124
+#, python-format
+msgid "You can not do this modification on a confirmed entry ! Please note that you can just change some non important fields !"
+msgstr "You can not do this modification on a confirmed entry ! Please note that you can just change some non important fields !"
 
 #. module: sync_client
 #: view:sync.client.message_to_send:0
@@ -37,19 +45,9 @@ msgid "Destination"
 msgstr "Destination"
 
 #. module: sync_client
-#: view:sync.client.child_entity:0
-msgid "Validate"
-msgstr "Validate"
-
-#. module: sync_client
-#: field:sync.client.message_to_send,generate_message:0
-msgid "Generate By system"
-msgstr "Generate By system"
-
-#. module: sync_client
-#: field:sync.client.message_rule,destination_name:0
-msgid "Fields to extract destination"
-msgstr "Fields to extract destination"
+#: field:sync.client.sync_server_connection,protocol:0
+msgid "Protocol"
+msgstr "Protocole"
 
 #. module: sync_client
 #: field:sync.client.update_to_send,sent:0
@@ -57,665 +55,14 @@ msgid "Sent?"
 msgstr "Sent?"
 
 #. module: sync_client
-#: view:sync.client.update_received:0
-#: view:sync.client.update_to_send:0
-msgid "Record"
-msgstr "Record"
-
-#. module: sync_client
-#: field:sync.client.message_received,source:0
-msgid "Source Name"
-msgstr "Source Name"
-
-#. module: sync_client
-#: view:sync.client.sync_manager:0
-msgid "Recover After Restoring"
-msgstr "Recover After Restoring"
-
-#. module: sync_client
-#: model:ir.model,name:sync_client.model_sync_client_child_entity
-msgid "Representation of a child entity for the parent"
-msgstr "Representation of a child entity for the parent"
-
-#. module: sync_client
-#: view:sync.client.message_received:0
-#: view:sync.client.update_received:0
-msgid "Run manually"
-msgstr "Run manually"
-
-#. module: sync_client
-#: model:ir.ui.menu,name:sync_client.message_sent_menu
-msgid "Messages Sent Monitor"
-msgstr "Messages Sent Monitor"
-
-#. module: sync_client
-#: view:sync.client.sync_manager:0
-msgid "Resume All Synchronization Process"
-msgstr "Resume All Synchronization Process"
-
-#. module: sync_client
-#: view:sync.client.update_to_send:0
-msgid "Rule"
-msgstr "Rule"
-
-#. module: sync_client
-#: field:sync.client.message_to_send,sent_date:0
-msgid "Sent Date"
-msgstr "Sent Date"
-
-#. module: sync_client
-#: field:ir.model.data,version:0
-#: field:sync.client.update_received,fancy_version:0
-#: field:sync.client.update_received,version:0
-#: field:sync.client.update_to_send,fancy_version:0
-#: field:sync.client.update_to_send,version:0
-msgid "Version"
-msgstr "Version"
-
-#. module: sync_client
-#: sql_constraint:sync.client.rule:0
-msgid "Duplicate rule server id"
-msgstr "Duplicate rule server id"
-
-#. module: sync_client
-#: field:sync.client.message_received,editable:0
-#: field:sync.client.update_received,editable:0
-msgid "Set editable"
-msgstr "Set editable"
-
-#. module: sync_client
-#: field:sync.client.update_to_send,owner:0
-msgid "Owner"
-msgstr "Owner"
-
-#. module: sync_client
-#: code:addons/sync_client/sync_client.py:138
-#, python-format
-msgid "Update(s) available: %s"
-msgstr "Update(s) available: %s"
-
-#. module: sync_client
-#: view:sync.client.sync_manager:0
-msgid "Resume Pushing Message"
-msgstr "Resume Pushing Message"
-
-#. module: sync_client
-#: view:sync.client.update_received:0
-msgid "Update Received"
-msgstr "Update Received"
-
-#. module: sync_client
-#: field:sync.client.message_received,remote_call:0
-#: field:sync.client.message_rule,remote_call:0
-#: field:sync.client.message_to_send,remote_call:0
-msgid "Method to call"
-msgstr "Method to call"
-
-#. module: sync_client
-#: view:sync.client.message_received:0
-#: view:sync.client.message_to_send:0
-#: view:sync.client.update_received:0
-#: view:sync.client.update_to_send:0
-msgid "Group By..."
-msgstr "Group By..."
-
-#. module: sync_client
-#: field:sync.client.update_received,sdref:0
-#: field:sync.client.update_to_send,sdref:0
-msgid "SD ref"
-msgstr "SD ref"
-
-#. module: sync_client
-#: code:addons/sync_client/sync_client.py:415
-#, python-format
-msgid "Update(s) sent: %d import update(s) and %d delete update(s) = %d total update(s)"
-msgstr "Update(s) sent: %d import update(s) and %d delete update(s) = %d total update(s)"
-
-#. module: sync_client
-#: field:sync.client.sync_server_connection,host:0
-msgid "Host"
-msgstr "Host"
-
-#. module: sync_client
-#: selection:sync.client.child_entity,state:0
-msgid "Pending"
-msgstr "Pending"
-
-#. module: sync_client
-#: model:ir.model,name:sync_client.model_sync_client_message_received
-msgid "sync.client.message_received"
-msgstr "sync.client.message_received"
-
-#. module: sync_client
-#: view:sync.client.sync_server_connection:0
-msgid "Connection state"
-msgstr "Connection state"
-
-#. module: sync_client
-#: view:sync.client.message_to_send:0
-msgid "Not Sent"
-msgstr "Not Sent"
-
-#. module: sync_client
-#: model:ir.model,name:sync_client.model_account_analytic_line
-msgid "Analytic Line"
-msgstr "Analytic Line"
-
-#. module: sync_client
-#: field:sync.client.message_rule,model:0
-#: field:sync.client.rule,model:0
-#: view:sync.client.update_received:0
-#: field:sync.client.update_received,model:0
-#: view:sync.client.update_to_send:0
-#: field:sync.client.update_to_send,model:0
-msgid "Model"
-msgstr "Model"
-
-#. module: sync_client
-#: field:sync.client.entity_manager,entity_status:0
-msgid "Instance Status"
-msgstr "Instance Status"
-
-#. module: sync_client
-#: view:sync.client.sync_manager:0
-msgid "Start Pulling Data"
-msgstr "Start Pulling Data"
-
-#. module: sync_client
-#: code:addons/sync_client/update.py:251
-#, python-format
-msgid "Push finished: %d updates"
-msgstr "Push finished: %d updates"
-
-#. module: sync_client
-#: field:sync.client.entity,update_last:0
-msgid "Last update"
-msgstr "Last update"
-
-#. module: sync_client
-#: code:addons/sync_client/sync_client.py:162
-#, python-format
-msgid "You cannot perform this action now."
-msgstr "You cannot perform this action now."
-
-#. module: sync_client
-#: view:sync.client.message_received:0
-msgid "Message Received"
-msgstr "Message Received"
-
-#. module: sync_client
-#: help:sync.client.sync_server_connection,host:0
-msgid "Synchronization server host name"
-msgstr "Synchronization server host name"
-
-#. module: sync_client
-#: code:addons/sync_client/sync_client.py:410
-#, python-format
-msgid "Update(s) sent: %d import update(s) + %d delete update(s) on %d update(s)"
-msgstr "Update(s) sent: %d import update(s) + %d delete update(s) on %d update(s)"
-
-#. module: sync_client
-#: view:sync.client.message_received:0
-#: view:sync.client.update_received:0
-msgid "Source"
-msgstr "Source"
-
-#. module: sync_client
-#: model:ir.ui.menu,name:sync_client.sync_wiz_menu
-msgid "Manual"
-msgstr "Manual"
-
-#. module: sync_client
-#: selection:sync.client.entity_manager,state:0
-msgid "Need Data"
-msgstr "Need Data"
-
-#. module: sync_client
-#: field:sync.client.child_entity,state:0
-#: field:sync.client.entity,state:0
-#: field:sync.client.entity_manager,state:0
-#: field:sync.client.register_entity,state:0
-#: field:sync.client.sync_manager,state:0
-#: field:sync.client.sync_server_connection,state:0
-msgid "State"
-msgstr "State"
-
-#. module: sync_client
-#: selection:sync.client.sync_manager,state:0
-msgid "Corrupted"
-msgstr "Corrupted"
-
-#. module: sync_client
-#: field:sync.client.child_entity,parent:0
-#: field:sync.client.entity,parent:0
-#: field:sync.client.register_entity,parent_id:0
-msgid "Parent Instance"
-msgstr "Parent Instance"
-
-#. module: sync_client
-#: code:addons/sync_client/sync_client.py:561
-#, python-format
-msgid "Update(s) not run left: %d"
-msgstr "Update(s) not run left: %d"
-
-#. module: sync_client
-#: model:ir.ui.menu,name:sync_client.mon_menu
-msgid "Monitoring"
-msgstr "Monitoring"
-
-#. module: sync_client
-#: model:ir.model,name:sync_client.model_account_move
-msgid "Account Entry"
-msgstr "Account Entry"
-
-#. module: sync_client
-#: model:ir.model,name:sync_client.model_sync_client_instance_temp
-msgid "sync_client.instance.temp"
-msgstr "sync_client.instance.temp"
-
-#. module: sync_client
-#: help:sync.client.sync_server_connection,protocol:0
-msgid "Changing protocol may imply changing the port number"
-msgstr "Changing protocol may imply changing the port number"
-
-#. module: sync_client
-#: help:sync.client.rule,can_delete:0
-msgid "Propagate the delete of old unused records"
-msgstr "Propagate the delete of old unused records"
-
-#. module: sync_client
-#: field:sync.client.entity_group,entity_ids:0
-msgid "Instances"
-msgstr "Instances"
-
-#. module: sync_client
-#: model:ir.model,name:sync_client.model_account_move_line
-msgid "Journal Items"
-msgstr "Journal Items"
-
-#. module: sync_client
-#: view:sync.client.update_received:0
-#: field:sync.client.update_received,values:0
-#: view:sync.client.update_to_send:0
-#: field:sync.client.update_to_send,values:0
-msgid "Values"
-msgstr "Values"
-
-#. module: sync_client
-#: model:ir.model,name:sync_client.model_sync_client_rule
-msgid "sync.client.rule"
-msgstr "sync.client.rule"
-
-#. module: sync_client
-#: field:sync.client.message_rule,domain:0
-#: field:sync.client.rule,domain:0
-msgid "Domain"
-msgstr "Domain"
-
-#. module: sync_client
-#: model:ir.actions.act_window,name:sync_client.sync_wizard_action
-#: view:sync.client.sync_manager:0
-msgid "Synchronize"
-msgstr "Synchronize"
-
-#. module: sync_client
-#: code:addons/sync_client/wizard/register_entity.py:109
-#, python-format
-msgid "Current instance already validated!"
-msgstr "Current instance already validated!"
-
-#. module: sync_client
-#: code:addons/sync_client/sync_client.py:206
-#, python-format
-msgid "OpenERP can only perform one synchronization at a time - you must wait for the current synchronization to finish before you can synchronize again."
-msgstr "OpenERP can only perform one synchronization at a time - you must wait for the current synchronization to finish before you can synchronize again."
-
-#. module: sync_client
-#: field:sync.client.entity,update_to_send:0
-msgid "Nb update to send"
-msgstr "Nb update to send"
-
-#. module: sync_client
-#: view:sync.client.child_entity:0
-msgid "Invalidate"
-msgstr "Invalidate"
-
-#. module: sync_client
-#: field:sync.client.activate_entity,name:0
-#: field:sync.client.child_entity,name:0
-#: field:sync.client.entity,name:0
-#: field:sync.client.register_entity,name:0
-#: field:sync_client.instance.temp,name:0
-msgid "Instance Name"
-msgstr "Instance Name"
-
-#. module: sync_client
-#: code:addons/sync_client/orm.py:648
-#: code:addons/sync_client/special_handling.py:124
-#: code:addons/sync_client/special_handling.py:126
-#: code:addons/sync_client/wizard/manage_entity.py:58
-#: code:addons/sync_client/wizard/manage_entity.py:98
-#: code:addons/sync_client/wizard/manage_entity.py:112
-#: code:addons/sync_client/wizard/register_entity.py:109
-#: code:addons/sync_client/wizard/register_entity.py:137
-#: code:addons/sync_client/wizard/register_entity.py:172
-#: code:addons/sync_client/wizard/register_entity.py:182
-#: code:addons/sync_client/wizard/register_entity.py:202
-#: code:addons/sync_client/wizard/register_entity.py:207
-#: code:addons/sync_client/wizard/register_entity.py:218
-#, python-format
-msgid "Error !"
-msgstr "Error !"
-
-#. module: sync_client
-#: code:addons/sync_client/rpc.py:344
-#, python-format
-msgid "Unable to connect to the distant server with this user!"
-msgstr "Unable to connect to the distant server with this user!"
-
-#. module: sync_client
-#: code:addons/sync_client/sync_client.py:206
-#, python-format
-msgid "Already Syncing..."
-msgstr "Already Syncing..."
-
-#. module: sync_client
-#: code:addons/sync_client/sync_client.py:544
-#, python-format
-msgid "Update(s) processed: %d import updates + %d delete updates on %d updates"
-msgstr "Update(s) processed: %d import updates + %d delete updates on %d updates"
-
-#. module: sync_client
-#: field:sync.client.register_entity,max_size:0
-#: field:sync.client.sync_server_connection,max_size:0
-msgid "Max Packet Size"
-msgstr "Max Packet Size"
-
-#. module: sync_client
-#: field:ir.model.data,force_recreation:0
-msgid "Force record re-creation"
-msgstr "Force record re-creation"
-
-#. module: sync_client
-#: view:sync.client.update_received:0
-#: field:sync.client.update_received,fields:0
-#: view:sync.client.update_to_send:0
-#: field:sync.client.update_to_send,fields:0
-msgid "Fields"
-msgstr "Fields"
-
-#. module: sync_client
-#: code:addons/sync_client/sync_client.py:160
-#, python-format
-msgid "ok, skipped."
-msgstr "ok, skipped."
-
-#. module: sync_client
-#: view:sync.client.update_entity:0
-msgid "Update entity"
-msgstr "Update entity"
-
-#. module: sync_client
-#: view:sync.client.register_entity:0
-msgid "Cancel"
-msgstr "Cancel"
-
-#. module: sync_client
-#: model:ir.actions.act_window,name:sync_client.connection_manager_action
-#: model:ir.ui.menu,name:sync_client.connection_manager_menu
-msgid "Connection Manager"
-msgstr "Connection Manager"
-
-#. module: sync_client
-#: view:sync.monitor:0
-msgid "Msg Push Ok"
-msgstr "Msg Push Ok"
-
-#. module: sync_client
-#: model:ir.ui.menu,name:sync_client.ir_ui_menu_cron_synchro
-msgid "Automatic"
-msgstr "Automatic"
-
-#. module: sync_client
-#: model:ir.ui.menu,name:sync_client.reg_menu
-msgid "Registration"
-msgstr "Registration"
-
-#. module: sync_client
-#: field:sync.client.update_to_send,sent_date:0
-msgid "Sent date"
-msgstr "Sent date"
-
-#. module: sync_client
-#: model:ir.actions.act_window,name:sync_client.sync_monitor_action
-msgid "Synchronisation Monitor"
-msgstr "Synchronisation Monitor"
-
-#. module: sync_client
-#: field:sync.monitor,data_push:0
-msgid "Data Push"
-msgstr "Data Push"
-
-#. module: sync_client
-#: model:ir.actions.act_window,name:sync_client.register_wizard_action
-#: model:ir.ui.menu,name:sync_client.reg_wiz_menu
-#: view:sync.client.register_entity:0
-#: selection:sync.client.register_entity,state:0
-msgid "Register"
-msgstr "Register"
-
-#. module: sync_client
-#: view:sync.client.sync_server_connection:0
-msgid "Reset Connection"
-msgstr "Reset Connection"
-
-#. module: sync_client
-#: view:sync.client.sync_manager:0
-msgid "Resume Pushing Data"
-msgstr "Resume Pushing Data"
-
-#. module: sync_client
-#: model:ir.module.module,shortdesc:sync_client.module_meta_information
-msgid "Synchronization Utility"
-msgstr "Synchronization Utility"
-
-#. module: sync_client
-#: code:addons/sync_client/sync_client.py:491
-#, python-format
-msgid "Update(s) received: %d"
-msgstr "Update(s) received: %d"
-
-#. module: sync_client
 #: selection:sync.client.register_entity,state:0
 msgid "Parents"
 msgstr "Parents"
 
 #. module: sync_client
-#: selection:sync.client.sync_manager,state:0
-msgid "Sending Message"
-msgstr "Sending Message"
-
-#. module: sync_client
-#: code:addons/sync_client/sync_client.py:718
-#, python-format
-msgid "Message(s) not run left: %d"
-msgstr "Message(s) not run left: %d"
-
-#. module: sync_client
-#: model:ir.model,name:sync_client.model_sync_client_entity
-#: model:ir.model,name:sync_client.model_sync_client_register_entity
-msgid "Synchronization Instance"
-msgstr "Synchronization Instance"
-
-#. module: sync_client
-#: field:sync.client.sync_server_connection,login:0
-msgid "Login on synchro server"
-msgstr "Login on synchro server"
-
-#. module: sync_client
-#: model:ir.model,name:sync_client.model_sync_client_entity_manager
-msgid "Wizard invalidate and more"
-msgstr "Wizard invalidate and more"
-
-#. module: sync_client
-#: view:sync.client.register_entity:0
-msgid "Next"
-msgstr "Next"
-
-#. module: sync_client
-#: view:sync.client.register_entity:0
-msgid "Previous"
-msgstr "Previous"
-
-#. module: sync_client
-#: view:sync.monitor:0
-msgid "Msg Pull Ok"
-msgstr "Msg Pull Ok"
-
-#. module: sync_client
-#: code:addons/sync_client/sync_client.py:630
-#, python-format
-msgid "Message(s) sent: %d/%d"
-msgstr "Message(s) sent: %d/%d"
-
-#. module: sync_client
-#: model:ir.actions.act_window,name:sync_client.update_wizard_action
-#: model:ir.ui.menu,name:sync_client.update_wiz_menu
-msgid "Update Instance"
-msgstr "Update Instance"
-
-#. module: sync_client
-#: field:sync.client.entity,max_update:0
-msgid "Max Update Sequence"
-msgstr "Max Update Sequence"
-
-#. module: sync_client
-#: model:ir.actions.act_window,name:sync_client.manage_children_wizard_action
-#: model:ir.ui.menu,name:sync_client.manage_child_wiz_menu
-#: view:sync.client.entity_manager:0
-msgid "Registration Status"
-msgstr "Registration Status"
-
-#. module: sync_client
-#: selection:sync.client.child_entity,state:0
-msgid "Invalidated"
-msgstr "Invalidated"
-
-#. module: sync_client
-#: field:sync.client.message_received,execution_date:0
-msgid "Execution Date"
-msgstr "Execution Date"
-
-#. module: sync_client
-#: view:sync.client.sync_manager:0
-msgid "Manage Data synchronization"
-msgstr "Manage Data synchronization"
-
-#. module: sync_client
-#: field:sync.client.update_received,fallback_values:0
-msgid "Fallback values"
-msgstr "Fallback values"
-
-#. module: sync_client
-#: model:ir.ui.menu,name:sync_client.sync_monitor_menu
-msgid "Synchronisation Processes Monitor"
-msgstr "Synchronisation Processes Monitor"
-
-#. module: sync_client
-#: view:sync.client.message_received:0
-#: field:sync.client.message_received,sequence:0
-#: field:sync.client.message_rule,sequence_number:0
-#: field:sync.client.rule,sequence_number:0
-#: view:sync.client.update_received:0
-#: field:sync.client.update_received,sequence_number:0
-#: field:sync.monitor,sequence_number:0
-msgid "Sequence"
-msgstr "Sequence"
-
-#. module: sync_client
-#: model:ir.model,name:sync_client.model_sync_client_update_to_send
-msgid "sync.client.update_to_send"
-msgstr "sync.client.update_to_send"
-
-#. module: sync_client
-#: selection:sync.monitor,data_pull:0
-#: selection:sync.monitor,data_push:0
-#: selection:sync.monitor,msg_pull:0
-#: selection:sync.monitor,msg_push:0
-#: selection:sync.monitor,status:0
-msgid "Aborted"
-msgstr "Aborted"
-
-#. module: sync_client
-#: selection:sync.client.sync_manager,state:0
-msgid "Sending Data"
-msgstr "Sending Data"
-
-#. module: sync_client
-#: code:addons/sync_client/special_handling.py:126
-#, python-format
-msgid "You can not do this modification on a reconciled entry ! Please note that you can just change some non important fields !"
-msgstr "You can not do this modification on a reconciled entry ! Please note that you can just change some non important fields !"
-
-#. module: sync_client
-#: model:ir.model,name:sync_client.model_sync_client_update_entity
-msgid "sync.client.update_entity"
-msgstr "sync.client.update_entity"
-
-#. module: sync_client
-#: field:sync.client.message_rule,server_id:0
-#: field:sync.client.rule,server_id:0
-msgid "Server ID"
-msgstr "Server ID"
-
-#. module: sync_client
-#: field:sync.client.message_received,create_date:0
-msgid "Receive Date"
-msgstr "Receive Date"
-
-#. module: sync_client
-#: view:sync.client.message_received:0
-msgid "Execution log"
-msgstr "Execution log"
-
-#. module: sync_client
-#: view:sync.client.entity_manager:0
-msgid "Retrieve instance information"
-msgstr "Retrieve instance information"
-
-#. module: sync_client
-#: code:addons/sync_client/sync_client.py:556
-#, python-format
-msgid "Update(s) processed: %d import updates + %d delete updates = %d total updates"
-msgstr "Update(s) processed: %d import updates + %d delete updates = %d total updates"
-
-#. module: sync_client
-#: model:ir.ui.menu,name:sync_client.update_menu
-#: view:sync.client.update_entity:0
-msgid "Update"
-msgstr "Update"
-
-#. module: sync_client
-#: code:addons/sync_client/sync_client.py:881
-#: code:addons/sync_client/sync_client.py:885
-#, python-format
-msgid "Error"
-msgstr "Error"
-
-#. module: sync_client
-#: selection:sync.client.sync_server_connection,protocol:0
-msgid "NetRPC"
-msgstr "NetRPC"
-
-#. module: sync_client
-#: field:sync.client.entity_group,type:0
-msgid "Group Type"
-msgstr "Group Type"
-
-#. module: sync_client
-#: field:sync.client.rule,owner_field:0
-msgid "Owner Field"
-msgstr "Owner Field"
+#: help:sync.client.sync_server_connection,port:0
+msgid "Synchronization server connection port"
+msgstr "Port de Connexion au Serveur de Synchronisation"
 
 #. module: sync_client
 #: code:addons/sync_client/rpc.py:267
@@ -730,27 +77,629 @@ msgstr "Owner Field"
 #: code:addons/sync_client/sync_client.py:191
 #, python-format
 msgid "Error!"
-msgstr "Error!"
+msgstr "Erreur!"
+
+#. module: sync_client
+#: field:sync.client.sync_server_connection,uid:0
+msgid "Uid on synchro server"
+msgstr "Uid du Serveur de Synchronisation"
+
+#. module: sync_client
+#: selection:sync.monitor,data_pull:0
+#: selection:sync.monitor,data_push:0
+#: selection:sync.monitor,msg_pull:0
+#: selection:sync.monitor,msg_push:0
+#: selection:sync.monitor,status:0
+msgid "In Progress..."
+msgstr "En cours…"
+
+#. module: sync_client
+#: selection:sync.client.entity_manager,state:0
+msgid "Need Data"
+msgstr "Besoin de Données"
+
+#. module: sync_client
+#: view:sync.client.register_entity:0
+msgid "Generate a new UUID"
+msgstr "Générer un nouvel Identificateur d'utilisateur unique"
+
+#. module: sync_client
+#: field:sync.client.child_entity,identifier:0
+#: field:sync.client.entity,identifier:0
+#: field:sync.client.entity_manager,identifier:0
+#: field:sync.client.entity_manager,name:0
+#: field:sync.client.message_received,identifier:0
+#: field:sync.client.message_to_send,identifier:0
+#: field:sync.client.register_entity,identifier:0
+msgid "Identifier"
+msgstr "Identifiant"
+
+#. module: sync_client
+#: model:ir.actions.act_window,name:sync_client.message_received_action
+#: model:ir.ui.menu,name:sync_client.Message_received_menu
+msgid "Message Received Monitor"
+msgstr "Surveillance Message Reçu"
+
+#. module: sync_client
+#: code:addons/sync_client/rpc.py:344
+#, python-format
+msgid "Unable to connect to the distant server with this user!"
+msgstr "Impossible de se connecter au serveur à distance avec cet utilisateur!"
+
+#. module: sync_client
+#: view:sync.client.update_entity:0
+msgid "Update entity"
+msgstr "Mise à jour de l'entité"
+
+#. module: sync_client
+#: view:sync.client.message_received:0
+msgid "Execution log"
+msgstr "Journal de bord d'Exécution"
+
+#. module: sync_client
+#: view:sync.client.register_entity:0
+msgid "Previous"
+msgstr "Précédent"
+
+#. module: sync_client
+#: sql_constraint:sync.client.rule:0
+msgid "Duplicate rule server id"
+msgstr "Duplicate rule server id"
+
+#. module: sync_client
+#: sql_constraint:account.move.line:0
+msgid "Wrong credit or debit value in accounting entry !"
+msgstr "Valeur de crédit ou débit erronée sous l'écriture comptable !"
+
+#. module: sync_client
+#: field:sync.client.entity_group,type:0
+msgid "Group Type"
+msgstr "Type du Groupe"
+
+#. module: sync_client
+#: sql_constraint:ir.model.data:0
+msgid "You cannot have multiple records with the same id for the same module !"
+msgstr "Vous ne pouvez pas avoir plusieurs enregistrements avec le même identifiant pour le même module !"
+
+#. module: sync_client
+#: view:sync.client.sync_manager:0
+msgid "Start All Synchronization Process"
+msgstr "Commencer le processus de Synchronisation"
+
+#. module: sync_client
+#: view:sync.client.message_received:0
+msgid "Message Received"
+msgstr "Message Reçu"
+
+#. module: sync_client
+#: field:sync.client.update_received,sdref:0
+#: field:sync.client.update_to_send,sdref:0
+msgid "SD ref"
+msgstr "SD ref"
+
+#. module: sync_client
+#: code:addons/sync_client/sync_client.py:415
+#, python-format
+msgid "Update(s) sent: %d import update(s) and %d delete update(s) = %d total update(s)"
+msgstr "Update(s) sent: %d import update(s) and %d delete update(s) = %d total update(s)"
+
+#. module: sync_client
+#: code:addons/sync_client/sync_client.py:685
+#, python-format
+msgid "Message(s) received: %d"
+msgstr "Message(s) received: %d"
+
+#. module: sync_client
+#: field:sync.monitor,data_pull:0
+msgid "Data Pull"
+msgstr "Données Tirées"
+
+#. module: sync_client
+#: view:sync.client.sync_manager:0
+msgid "Recover Data and Messages"
+msgstr "Recover Data and Messages"
+
+#. module: sync_client
+#: field:sync.client.entity_manager,parent:0
+msgid "Parent"
+msgstr "Parent"
+
+#. module: sync_client
+#: selection:sync.client.entity_manager,state:0
+msgid "Ready"
+msgstr "Prêt"
+
+#. module: sync_client
+#: field:sync.client.update_to_send,session_id:0
+msgid "Session Id"
+msgstr "Identifiant de la Session"
+
+#. module: sync_client
+#: model:ir.model,name:sync_client.model_account_move
+msgid "Account Entry"
+msgstr "Ecriture Comptable"
+
+#. module: sync_client
+#: field:sync.monitor,msg_push:0
+msgid "Msg Push"
+msgstr "Msg envoyé"
+
+#. module: sync_client
+#: field:ir.model.data,touched:0
+msgid "Which records has been touched"
+msgstr "Which records has been touched"
+
+#. module: sync_client
+#: field:sync.client.child_entity,state:0
+#: field:sync.client.entity,state:0
+#: field:sync.client.entity_manager,state:0
+#: field:sync.client.register_entity,state:0
+#: field:sync.client.sync_manager,state:0
+#: field:sync.client.sync_server_connection,state:0
+msgid "State"
+msgstr "Statut"
+
+#. module: sync_client
+#: field:sync.client.entity,update_offset:0
+msgid "Update Offset"
+msgstr "Mise à jour Offset "
+
+#. module: sync_client
+#: code:addons/sync_client/update.py:251
+#, python-format
+msgid "Push finished: %d updates"
+msgstr "Push finished: %d updates"
+
+#. module: sync_client
+#: selection:sync.client.sync_manager,state:0
+msgid "Receiving Data"
+msgstr "Réception de Données "
+
+#. module: sync_client
+#: code:addons/sync_client/sync_client.py:276
+#: constraint:sync.client.entity:0
+#, python-format
+msgid "The Instance is unique, you cannot create a new one"
+msgstr "Cette Instance est unique, vous ne pouvez pas en créer une nouvelle."
+
+#. module: sync_client
+#: view:sync.monitor:0
+msgid "Data Pull Ok"
+msgstr "Extraction des Données Ok"
+
+#. module: sync_client
+#: field:sync.client.update_received,execution_date:0
+msgid "Execution date"
+msgstr "Date d'exécution"
+
+#. module: sync_client
+#: view:sync.client.message_received:0
+#: field:sync.client.message_received,sequence:0
+#: field:sync.client.message_rule,sequence_number:0
+#: field:sync.client.rule,sequence_number:0
+#: view:sync.client.update_received:0
+#: field:sync.monitor,sequence_number:0
+msgid "Sequence"
+msgstr "Séquence"
+
+#. module: sync_client
+#: model:ir.model,name:sync_client.model_sync_client_activate_entity
+msgid "sync.client.activate_entity"
+msgstr "sync.client.activate_entity"
+
+#. module: sync_client
+#: view:sync.client.sync_manager:0
+msgid "Resume Pushing Message"
+msgstr "Reprendre Message d'Envoi"
+
+#. module: sync_client
+#: model:ir.actions.act_window,name:sync_client.sync_monitor_action
+msgid "Synchronisation Monitor"
+msgstr "Moniteur de Synchronisation "
+
+#. module: sync_client
+#: view:sync.client.update_to_send:0
+msgid "Date"
+msgstr "Date"
+
+#. module: sync_client
+#: model:ir.model,name:sync_client.model_sync_client_rule
+msgid "sync.client.rule"
+msgstr "sync.client.rule"
+
+#. module: sync_client
+#: selection:sync.monitor,data_pull:0
+#: selection:sync.monitor,data_push:0
+#: selection:sync.monitor,msg_pull:0
+#: selection:sync.monitor,msg_push:0
+#: selection:sync.monitor,status:0
+msgid "/"
+msgstr "/"
+
+#. module: sync_client
+#: field:sync.client.message_rule,domain:0
+#: field:sync.client.rule,domain:0
+msgid "Domain"
+msgstr "Domaine"
+
+#. module: sync_client
+#: view:sync.client.update_received:0
+#: field:sync.client.update_received,fields:0
+#: view:sync.client.update_to_send:0
+#: field:sync.client.update_to_send,fields:0
+msgid "Fields"
+msgstr "Champs"
+
+#. module: sync_client
+#: view:sync.client.sync_server_connection:0
+#: view:sync.client.update_to_send:0
+msgid "Instance Form"
+msgstr "Instance - Formulaire "
 
 #. module: sync_client
 #: constraint:account.move:0
 msgid "You cannot create entries on different periods/journals in the same move"
-msgstr "You cannot create entries on different periods/journals in the same move"
+msgstr "Vous ne pouvez pas créer des écritures reflétant une seule transaction sur différentes périodes/journaux "
+
+#. module: sync_client
+#: selection:sync.client.sync_manager,state:0
+msgid "Sending Data"
+msgstr "Envoi de Données"
+
+#. module: sync_client
+#: selection:sync.client.sync_server_connection,protocol:0
+msgid "compressed NetRPC"
+msgstr "NetRPC comprimé"
+
+#. module: sync_client
+#: code:addons/sync_client/sync_client.py:718
+#, python-format
+msgid "Message(s) not run left: %d"
+msgstr "Message(s) not run left: %d"
+
+#. module: sync_client
+#: help:sync.client.sync_server_connection,host:0
+msgid "Synchronization server host name"
+msgstr "Nom d'Hôte du Serveur de Synchronisation"
+
+#. module: sync_client
+#: code:addons/sync_client/sync_client.py:206
+#, python-format
+msgid "Already Syncing..."
+msgstr "Already Syncing..."
+
+#. module: sync_client
+#: code:addons/sync_client/sync_client.py:544
+#, python-format
+msgid "Update(s) processed: %d import updates + %d delete updates on %d updates"
+msgstr "Update(s) processed: %d import updates + %d delete updates on %d updates"
+
+#. module: sync_client
+#: view:sync.client.child_entity:0
+#: field:sync.client.entity_manager,entity_ids:0
+msgid "Children Instances"
+msgstr "Instances Enfants"
+
+#. module: sync_client
+#: code:addons/sync_client/sync_client.py:160
+#, python-format
+msgid "ok, skipped."
+msgstr "ok, skipped."
+
+#. module: sync_client
+#: field:sync.client.message_to_send,sent_date:0
+msgid "Sent Date"
+msgstr "Date d'Envoi"
+
+#. module: sync_client
+#: field:ir.model.data,force_recreation:0
+msgid "Force record re-creation"
+msgstr "Force record re-creation"
+
+#. module: sync_client
+#: constraint:account.move.line:0
+msgid "Company must be same for its related account and period."
+msgstr "La Société doit être la même pour le compte et période connexes."
+
+#. module: sync_client
+#: field:sync.client.entity,update_to_send:0
+msgid "Nb update to send"
+msgstr "Nbre de mises à jour à envoyer"
+
+#. module: sync_client
+#: model:ir.model,name:sync_client.model_sync_client_entity_group
+msgid "Synchronization Instance Group"
+msgstr "Groupe d'Instances de Synchronisation "
+
+#. module: sync_client
+#: field:sync.client.sync_server_connection,login:0
+msgid "Login on synchro server"
+msgstr "Ouvrir une session sur le serveur de synchronisation"
+
+#. module: sync_client
+#: help:sync.client.sync_server_connection,protocol:0
+msgid "Changing protocol may imply changing the port number"
+msgstr "Un changement de protocol peut impliquer un changement de numéro de port"
+
+#. module: sync_client
+#: view:sync.client.sync_manager:0
+msgid "Start Pulling Message"
+msgstr "Commencer l'Extraction de Messages"
+
+#. module: sync_client
+#: field:sync.client.message_received,arguments:0
+#: field:sync.client.message_rule,arguments:0
+#: field:sync.client.message_to_send,arguments:0
+msgid "Arguments of the method"
+msgstr "Arguments de la méthode"
+
+#. module: sync_client
+#: code:addons/sync_client/wizard/manage_entity.py:58
+#: code:addons/sync_client/wizard/manage_entity.py:98
+#: code:addons/sync_client/wizard/manage_entity.py:112
+#: code:addons/sync_client/wizard/register_entity.py:109
+#: code:addons/sync_client/wizard/register_entity.py:137
+#: code:addons/sync_client/wizard/register_entity.py:172
+#: code:addons/sync_client/wizard/register_entity.py:182
+#: code:addons/sync_client/wizard/register_entity.py:202
+#: code:addons/sync_client/wizard/register_entity.py:207
+#: code:addons/sync_client/wizard/register_entity.py:218
+#, python-format
+msgid "Error !"
+msgstr "Erreur !"
+
+#. module: sync_client
+#: field:sync.client.message_received,execution_date:0
+msgid "Execution Date"
+msgstr "Date d'Exécution"
+
+#. module: sync_client
+#: view:sync.client.sync_manager:0
+msgid "Resume All Synchronization Process"
+msgstr "Reprendre le processus de Synchronisation"
+
+#. module: sync_client
+#: field:sync.client.update_received,owner:0
+msgid "Owner Instance"
+msgstr "Instance Propriétaire"
+
+#. module: sync_client
+#: selection:sync.monitor,data_pull:0
+#: selection:sync.monitor,data_push:0
+#: selection:sync.monitor,msg_pull:0
+#: selection:sync.monitor,msg_push:0
+#: selection:sync.monitor,status:0
+msgid "Failed"
+msgstr "Echoué"
+
+#. module: sync_client
+#: field:sync.client.update_received,source:0
+msgid "Source Instance"
+msgstr "Instance Source"
+
+#. module: sync_client
+#: model:ir.model,name:sync_client.model_account_analytic_line
+msgid "Analytic Line"
+msgstr "Ligne Analytique"
+
+#. module: sync_client
+#: field:sync.client.message_to_send,destination_name:0
+msgid "Destination Name"
+msgstr "Nom de la Destination"
+
+#. module: sync_client
+#: model:ir.actions.act_window,name:sync_client.register_wizard_action
+#: model:ir.ui.menu,name:sync_client.reg_wiz_menu
+#: view:sync.client.register_entity:0
+#: selection:sync.client.register_entity,state:0
+msgid "Register"
+msgstr "Registre"
+
+#. module: sync_client
+#: field:sync.client.entity,session_id:0
+msgid "Push Session Id"
+msgstr "Identifiant de la Session Envoyée"
+
+#. module: sync_client
+#: code:addons/sync_client/sync_client.py:491
+#, python-format
+msgid "Update(s) received: %d"
+msgstr "Update(s) received: %d"
+
+#. module: sync_client
+#: field:sync.client.message_received,source:0
+msgid "Source Name"
+msgstr "Nom de la Source "
+
+#. module: sync_client
+#: view:sync.monitor:0
+msgid "Status Ok"
+msgstr "Statut Ok"
+
+#. module: sync_client
+#: code:addons/sync_client/sync_client.py:881
+#: code:addons/sync_client/sync_client.py:885
+#, python-format
+msgid "Error"
+msgstr "Erreur"
+
+#. module: sync_client
+#: field:sync.client.entity_manager,group:0
+#: view:sync.client.register_entity:0
+#: field:sync.client.register_entity,group_ids:0
+#: selection:sync.client.register_entity,state:0
+msgid "Groups"
+msgstr "Groupes"
+
+#. module: sync_client
+#: field:sync.client.update_to_send,sent_date:0
+msgid "Sent date"
+msgstr "Date d'envoi"
+
+#. module: sync_client
+#: model:ir.actions.act_window,name:sync_client.sync_wizard_action
+#: view:sync.client.sync_manager:0
+msgid "Synchronize"
+msgstr "Synchroniser"
+
+#. module: sync_client
+#: model:ir.model,name:sync_client.model_sync_client_instance_temp
+msgid "sync_client.instance.temp"
+msgstr "sync_client.instance.temp"
+
+#. module: sync_client
+#: selection:sync.client.child_entity,state:0
+msgid "Invalidated"
+msgstr "Invalidé"
+
+#. module: sync_client
+#: constraint:account.move.line:0
+msgid "You can not create move line on closed account."
+msgstr "Vous ne pouvez pas créer des écritures dans un journal clôturé."
+
+#. module: sync_client
+#: code:addons/sync_client/sync_client.py:630
+#, python-format
+msgid "Message(s) sent: %d/%d"
+msgstr "Message(s) sent: %d/%d"
+
+#. module: sync_client
+#: view:sync.client.sync_server_connection:0
+msgid "Connection state"
+msgstr "Statut Connexion"
+
+#. module: sync_client
+#: constraint:account.move.line:0
+msgid "You can not create move line on view account."
+msgstr "Vous ne pouvez pas créer des écritures sur un compte-groupe"
+
+#. module: sync_client
+#: view:sync.client.register_entity:0
+msgid "Next"
+msgstr "Suivant"
+
+#. module: sync_client
+#: code:addons/sync_client/sync_client.py:206
+#, python-format
+msgid "OpenERP can only perform one synchronization at a time - you must wait for the current synchronization to finish before you can synchronize again."
+msgstr "OpenERP can only perform one synchronization at a time - you must wait for the current synchronization to finish before you can synchronize again."
+
+#. module: sync_client
+#: field:sync.client.message_received,editable:0
+#: field:sync.client.update_received,editable:0
+msgid "Set editable"
+msgstr "Rendre Editable"
+
+#. module: sync_client
+#: field:sync.client.update_received,sequence_number:0
+msgid "Sequence"
+msgstr "Sequence"
+
+#. module: sync_client
+#: selection:sync.client.child_entity,state:0
+msgid "Updated"
+msgstr "Mise à jour"
+
+#. module: sync_client
+#: code:addons/sync_client/sync_client.py:709
+#, python-format
+msgid "Message(s) processed: %d/%d"
+msgstr "Message(s) processed: %d/%d"
+
+#. module: sync_client
+#: view:sync.client.message_received:0
+#: view:sync.client.sync_server_connection:0
+#: view:sync.client.update_received:0
+msgid "Instance Tree"
+msgstr "Instance - Arbre"
+
+#. module: sync_client
+#: selection:sync.client.sync_manager,state:0
+msgid "Corrupted"
+msgstr "Corrompu"
+
+#. module: sync_client
+#: model:ir.model,name:sync_client.model_sync_client_message_rule
+msgid "sync.client.message_rule"
+msgstr "sync.client.message_rule"
+
+#. module: sync_client
+#: code:addons/sync_client/special_handling.py:126
+#, python-format
+msgid "You can not do this modification on a reconciled entry ! Please note that you can just change some non important fields !"
+msgstr "You can not do this modification on a reconciled entry ! Please note that you can just change some non important fields !"
+
+#. module: sync_client
+#: model:ir.model,name:sync_client.model_sync_client_update_entity
+msgid "sync.client.update_entity"
+msgstr "sync.client.update_entity"
+
+#. module: sync_client
+#: code:addons/sync_client/sync_client.py:138
+#, python-format
+msgid "Update(s) available: %s"
+msgstr "Update(s) available: %s"
+
+#. module: sync_client
+#: selection:sync.client.sync_server_connection,protocol:0
+msgid "secured XMLRPC"
+msgstr "XMLRPC sécurisé"
+
+#. module: sync_client
+#: field:sync.monitor,status:0
+msgid "Status"
+msgstr "Statut(s)"
+
+#. module: sync_client
+#: field:sync.client.activate_entity,name:0
+#: field:sync.client.child_entity,name:0
+#: field:sync.client.entity,name:0
+#: field:sync.client.register_entity,name:0
+#: field:sync_client.instance.temp,name:0
+msgid "Instance Name"
+msgstr "Nom Instance"
+
+#. module: sync_client
+#: field:sync.client.message_rule,destination_name:0
+msgid "Fields to extract destination"
+msgstr "Champs d'où extraire la Destination"
+
+#. module: sync_client
+#: code:addons/sync_client/sync_client.py:457
+#, python-format
+msgid "Warning: no update to execute, this case should never occurs."
+msgstr "Warning: no update to execute, this case should never occurs."
+
+#. module: sync_client
+#: field:sync.monitor,end:0
+msgid "End Date"
+msgstr "Date de Clôture"
+
+#. module: sync_client
+#: model:ir.model,name:sync_client.model_sync_client_message_received
+msgid "sync.client.message_received"
+msgstr "sync.client.message_received"
+
+#. module: sync_client
+#: selection:sync.client.sync_server_connection,protocol:0
+msgid "NetRPC"
+msgstr "NetRPC"
+
+#. module: sync_client
+#: view:sync.client.update_received:0
+msgid "Record"
+msgstr "Record"
+
+#. module: sync_client
+#: code:addons/sync_client/sync_client.py:556
+#, python-format
+msgid "Update(s) processed: %d import updates + %d delete updates = %d total updates"
+msgstr "Update(s) processed: %d import updates + %d delete updates = %d total updates"
 
 #. module: sync_client
 #: model:ir.model,name:sync_client.model_ir_model_data
 msgid "ir.model.data"
 msgstr "ir.model.data"
-
-#. module: sync_client
-#: view:sync.client.activate_entity:0
-msgid "Activate"
-msgstr "Activate"
-
-#. module: sync_client
-#: selection:sync.client.entity_manager,state:0
-msgid "Ready"
-msgstr "Ready"
 
 #. module: sync_client
 #: view:sync.client.register_entity:0
@@ -763,34 +712,35 @@ msgid "Ok"
 msgstr "Ok"
 
 #. module: sync_client
-#: code:addons/sync_client/sync_client.py:709
-#, python-format
-msgid "Message(s) processed: %d/%d"
-msgstr "Message(s) processed: %d/%d"
+#: view:sync.client.sync_manager:0
+msgid "Start Pushing Data"
+msgstr "Commencer l'Envoi des Données"
 
 #. module: sync_client
-#: selection:sync.monitor,data_pull:0
-#: selection:sync.monitor,data_push:0
-#: selection:sync.monitor,msg_pull:0
-#: selection:sync.monitor,msg_push:0
-#: selection:sync.monitor,status:0
-msgid "/"
-msgstr "/"
+#: field:sync.client.rule,can_delete:0
+msgid "Can delete record?"
+msgstr "Can delete record?"
 
 #. module: sync_client
-#: field:ir.model.data,sync_date:0
-msgid "Last Synchronization Date"
-msgstr "Last Synchronization Date"
+#: field:sync.client.entity_manager,entity_status:0
+msgid "Instance Status"
+msgstr "Statut Instance"
 
 #. module: sync_client
-#: model:ir.model,name:sync_client.model_sync_client_activate_entity
-msgid "sync.client.activate_entity"
-msgstr "sync.client.activate_entity"
+#: view:sync.client.sync_manager:0
+msgid "Resume Pulling Data"
+msgstr "Reprendre l'Extraction des Données"
 
 #. module: sync_client
-#: model:ir.actions.server,name:sync_client.ir_actions_server_opensynccron0
-msgid "Open Sync cron"
-msgstr "Open Sync cron"
+#: view:sync.client.child_entity:0
+msgid "Invalidate"
+msgstr "Annuler validation"
+
+#. module: sync_client
+#: view:sync.client.message_received:0
+#: view:sync.client.update_received:0
+msgid "Search update Received"
+msgstr "Rercherche de Mise à jour Recue"
 
 #. module: sync_client
 #: code:addons/sync_client/orm.py:648
@@ -799,258 +749,64 @@ msgid "%(method)s doesn't implement field of type %(type)s, please contact syste
 msgstr "%(method)s doesn't implement field of type %(type)s, please contact system administrator to upgrade."
 
 #. module: sync_client
-#: view:sync.client.sync_server_connection:0
-msgid "Connect"
-msgstr "Connect"
+#: field:ir.model.data,version:0
+#: field:sync.client.update_received,fancy_version:0
+#: field:sync.client.update_received,version:0
+#: field:sync.client.update_to_send,fancy_version:0
+#: field:sync.client.update_to_send,version:0
+msgid "Version"
+msgstr "Version"
 
 #. module: sync_client
-#: field:ir.model.data,last_modification:0
-msgid "Last Modification Date"
-msgstr "Last Modification Date"
-
-#. module: sync_client
-#: model:ir.ui.menu,name:sync_client.main_menu
-#: model:ir.ui.menu,name:sync_client.sync_menu
-#: view:sync.client.update_received:0
-#: view:sync.client.update_to_send:0
-msgid "Synchronization"
-msgstr "Synchronization"
-
-#. module: sync_client
-#: view:sync.client.message_received:0
-#: view:sync.client.message_to_send:0
-msgid "Call"
-msgstr "Call"
-
-#. module: sync_client
-#: field:sync.client.sync_server_connection,uid:0
-msgid "Uid on synchro server"
-msgstr "Uid on synchro server"
-
-#. module: sync_client
-#: field:sync.monitor,msg_pull:0
-msgid "Msg Pull"
-msgstr "Msg Pull"
-
-#. module: sync_client
-#: field:sync.client.rule,active:0
-#: field:sync.client.sync_server_connection,active:0
-msgid "Active"
-msgstr "Active"
-
-#. module: sync_client
-#: view:sync.monitor:0
-msgid "Data Push Ok"
-msgstr "Data Push Ok"
-
-#. module: sync_client
-#: field:sync.client.entity,update_offset:0
-msgid "Update Offset"
-msgstr "Update Offset"
-
-#. module: sync_client
-#: field:sync.client.message_received,run:0
-#: field:sync.client.update_received,run:0
-msgid "Run"
-msgstr "Run"
-
-#. module: sync_client
-#: field:sync.client.entity_manager,email:0
-msgid "Contact E-mail"
-msgstr "Contact E-mail"
-
-#. module: sync_client
-#: constraint:account.move.line:0
-msgid "You can not create move line on closed account."
-msgstr "You can not create move line on closed account."
-
-#. module: sync_client
-#: field:sync.client.sync_server_connection,password:0
-msgid "Password"
-msgstr "Password"
-
-#. module: sync_client
-#: view:sync.monitor:0
-msgid "Synchronization date and time"
-msgstr "Synchronization date and time"
-
-#. module: sync_client
-#: constraint:account.move.line:0
-msgid "Company must be same for its related account and period."
-msgstr "Company must be same for its related account and period."
-
-#. module: sync_client
-#: view:sync.client.sync_manager:0
-msgid "Start All Synchronization In Background"
-msgstr "Start All Synchronization In Background"
-
-#. module: sync_client
-#: selection:sync.client.sync_server_connection,protocol:0
-msgid "secured XMLRPC"
-msgstr "secured XMLRPC"
-
-#. module: sync_client
-#: field:sync.client.message_rule,name:0
-#: field:sync.client.rule,name:0
-msgid "Rule name"
-msgstr "Rule name"
-
-#. module: sync_client
-#: field:sync.monitor,msg_push:0
-msgid "Msg Push"
-msgstr "Msg Push"
-
-#. module: sync_client
-#: model:ir.model,name:sync_client.model_sync_client_orm_extended
-msgid "Flag that certify presence of extended ORM methods"
-msgstr "Flag that certify presence of extended ORM methods"
-
-#. module: sync_client
-#: code:addons/sync_client/sync_client.py:114
-#, python-format
-msgid "Update session: %s"
-msgstr "Update session: %s"
-
-#. module: sync_client
-#: sql_constraint:account.move.line:0
-msgid "Wrong credit or debit value in accounting entry !"
-msgstr "Wrong credit or debit value in accounting entry !"
-
-#. module: sync_client
-#: field:sync.monitor,end:0
-msgid "End Date"
-msgstr "End Date"
-
-#. module: sync_client
-#: model:ir.actions.act_window,name:sync_client.message_sent_action
-msgid "Message Sent Monitor"
-msgstr "Message Sent Monitor"
-
-#. module: sync_client
-#: selection:sync.client.sync_manager,state:0
-msgid "Init"
-msgstr "Init"
-
-#. module: sync_client
-#: view:sync.client.update_to_send:0
-msgid "Search update Sent"
-msgstr "Search update Sent"
-
-#. module: sync_client
-#: selection:sync.monitor,data_pull:0
-#: selection:sync.monitor,data_push:0
-#: selection:sync.monitor,msg_pull:0
-#: selection:sync.monitor,msg_push:0
-#: selection:sync.monitor,status:0
-msgid "In Progress..."
-msgstr "In Progress..."
-
-#. module: sync_client
-#: field:ir.model.data,is_deleted:0
-msgid "The record exists in database?"
-msgstr "The record exists in database?"
-
-#. module: sync_client
-#: code:addons/sync_client/sync_client.py:685
-#, python-format
-msgid "Message(s) received: %d"
-msgstr "Message(s) received: %d"
-
-#. module: sync_client
-#: view:sync.client.sync_manager:0
-msgid "Resume All Synchronization In Background"
-msgstr "Resume All Synchronization In Background"
-
-#. module: sync_client
-#: code:addons/sync_client/sync_client.py:634
-#, python-format
-msgid "Message(s) sent: %d"
-msgstr "Message(s) sent: %d"
-
-#. module: sync_client
-#: view:sync.client.sync_manager:0
-msgid "Debug"
-msgstr "Debug"
+#: model:ir.model,name:sync_client.model_sync_client_update_to_send
+msgid "sync.client.update_to_send"
+msgstr "sync.client.update_to_send"
 
 #. module: sync_client
 #: field:sync.client.rule,included_fields:0
 msgid "Included Fields"
-msgstr "Included Fields"
+msgstr "Champs Inclus"
 
 #. module: sync_client
-#: code:addons/sync_client/sync_client.py:276
-#: constraint:sync.client.entity:0
-#, python-format
-msgid "The Instance is unique, you cannot create a new one"
-msgstr "The Instance is unique, you cannot create a new one"
+#: field:sync.client.register_entity,max_size:0
+#: field:sync.client.sync_server_connection,max_size:0
+msgid "Max Packet Size"
+msgstr "Taille Max. Colis"
 
 #. module: sync_client
-#: sql_constraint:sync.client.sync_server_connection:0
-msgid "The connection parameter is unique; you cannot create a new one"
-msgstr "The connection parameter is unique; you cannot create a new one"
+#: model:ir.ui.menu,name:sync_client.message_sent_menu
+msgid "Messages Sent Monitor"
+msgstr "Surveillance Messages Envoyés"
 
 #. module: sync_client
-#: model:ir.actions.act_window,name:sync_client.activate_wizard_action
-#: model:ir.ui.menu,name:sync_client.activate_wiz_menu
-msgid "Activate Instance"
-msgstr "Activate Instance"
+#: view:sync.client.activate_entity:0
+msgid "Activate entity"
+msgstr "Activer l'entité "
 
 #. module: sync_client
-#: field:sync.client.child_entity,identifier:0
-#: field:sync.client.entity,identifier:0
-#: field:sync.client.entity_manager,identifier:0
-#: field:sync.client.entity_manager,name:0
-#: field:sync.client.message_received,identifier:0
-#: field:sync.client.message_to_send,identifier:0
-#: field:sync.client.register_entity,identifier:0
-msgid "Identifier"
-msgstr "Identifier"
-
-#. module: sync_client
-#: selection:sync.client.sync_manager,state:0
-msgid "Validating Data"
-msgstr "Validating Data"
-
-#. module: sync_client
-#: field:sync.client.message_received,arguments:0
-#: field:sync.client.message_rule,arguments:0
-#: field:sync.client.message_to_send,arguments:0
-msgid "Arguments of the method"
-msgstr "Arguments of the method"
-
-#. module: sync_client
-#: field:sync.client.entity,session_id:0
-msgid "Push Session Id"
-msgstr "Push Session Id"
-
-#. module: sync_client
-#: field:sync.client.entity_manager,group:0
-#: view:sync.client.register_entity:0
-#: field:sync.client.register_entity,group_ids:0
-#: selection:sync.client.register_entity,state:0
-msgid "Groups"
-msgstr "Groups"
-
-#. module: sync_client
-#: view:sync.client.sync_server_connection:0
-#: view:sync.client.update_to_send:0
-msgid "Instance Form"
-msgstr "Instance Form"
-
-#. module: sync_client
-#: view:sync.client.sync_server_connection:0
-msgid "Connection information"
-msgstr "Connection information"
+#: model:ir.model,name:sync_client.model_sync_client_child_entity
+msgid "Representation of a child entity for the parent"
+msgstr "Representation d'une entité enfant pour le parent"
 
 #. module: sync_client
 #: view:sync.monitor:0
-msgid "Data Pull Ok"
-msgstr "Data Pull Ok"
+msgid "Status details"
+msgstr "Détails du Statut"
 
 #. module: sync_client
-#: field:sync.client.sync_server_connection,database:0
-msgid "Database Name"
-msgstr "Database Name"
+#: model:ir.ui.menu,name:sync_client.sync_wiz_menu
+msgid "Manual"
+msgstr "Manuel"
+
+#. module: sync_client
+#: field:sync.client.entity,message_to_send:0
+msgid "Nb message to send"
+msgstr "Nbre de messages à envoyer"
+
+#. module: sync_client
+#: view:sync.client.message_to_send:0
+msgid "Not Sent"
+msgstr "Pas Envoyé"
 
 #. module: sync_client
 #: view:sync.client.message_received:0
@@ -1059,157 +815,86 @@ msgid "Arguments"
 msgstr "Arguments"
 
 #. module: sync_client
-#: field:sync.client.update_to_send,session_id:0
-msgid "Session Id"
-msgstr "Session Id"
-
-#. module: sync_client
-#: view:sync.client.register_entity:0
-msgid "Generate a new UUID"
-msgstr "Generate a new UUID"
+#: view:sync.client.activate_entity:0
+msgid "Activate"
+msgstr "Activer"
 
 #. module: sync_client
 #: view:sync.monitor:0
-msgid "Status details"
-msgstr "Status details"
+msgid "Msg Pull Ok"
+msgstr "Extraction Msg Ok"
 
 #. module: sync_client
-#: field:sync.client.rule,can_delete:0
-msgid "Can delete record?"
-msgstr "Can delete record?"
-
-#. module: sync_client
-#: view:sync.client.message_received:0
-#: view:sync.client.sync_server_connection:0
-#: view:sync.client.update_received:0
-msgid "Instance Tree"
-msgstr "Instance Tree"
-
-#. module: sync_client
-#: constraint:account.move.line:0
-msgid "You can not create move line on view account."
-msgstr "You can not create move line on view account."
-
-#. module: sync_client
-#: field:sync.client.sync_server_connection,protocol:0
-msgid "Protocol"
-msgstr "Protocol"
-
-#. module: sync_client
-#: field:sync.client.entity,message_to_send:0
-msgid "Nb message to send"
-msgstr "Nb message to send"
-
-#. module: sync_client
-#: selection:sync.client.child_entity,state:0
-msgid "Validated"
-msgstr "Validated"
-
-#. module: sync_client
-#: code:addons/sync_client/sync_client.py:457
+#: code:addons/sync_client/sync_client.py:410
 #, python-format
-msgid "Warning: no update to execute, this case should never occurs."
-msgstr "Warning: no update to execute, this case should never occurs."
-
-#. module: sync_client
-#: field:sync.client.update_received,rule_sequence:0
-msgid "Rule Sequence"
-msgstr "Rule Sequence"
-
-#. module: sync_client
-#: code:addons/sync_client/wizard/register_entity.py:202
-#, python-format
-msgid "Instance name cannot be empty"
-msgstr "Instance name cannot be empty"
+msgid "Update(s) sent: %d import update(s) + %d delete update(s) on %d update(s)"
+msgstr "Update(s) sent: %d import update(s) + %d delete update(s) on %d update(s)"
 
 #. module: sync_client
 #: view:sync.client.child_entity:0
-#: field:sync.client.entity_manager,entity_ids:0
-msgid "Children Instances"
-msgstr "Children Instances"
+msgid "Validate"
+msgstr "Valider"
 
 #. module: sync_client
-#: model:ir.ui.menu,name:sync_client.message_menu
-#: view:sync.client.register_entity:0
-#: field:sync.client.register_entity,message:0
-#: selection:sync.client.register_entity,state:0
-msgid "Message"
-msgstr "Message"
+#: code:addons/sync_client/wizard/register_entity.py:109
+#, python-format
+msgid "Current instance already validated!"
+msgstr "Current instance already validated!"
 
 #. module: sync_client
-#: field:sync.monitor,status:0
-msgid "Status"
-msgstr "Status"
+#: model:ir.model,name:sync_client.model_sync_client_sync_server_connection
+msgid "Connection to sync server information and tools"
+msgstr "Connection aux informations et outils du serveur de synchronisation"
+
+#. module: sync_client
+#: field:sync.client.message_rule,name:0
+#: field:sync.client.rule,name:0
+msgid "Rule name"
+msgstr "Rule name"
+
+#. module: sync_client
+#: field:sync.client.entity,max_update:0
+msgid "Max Update Sequence"
+msgstr "Séquence Max. de Mise à jour"
+
+#. module: sync_client
+#: model:ir.model,name:sync_client.model_sync_client_orm_extended
+msgid "Flag that certify presence of extended ORM methods"
+msgstr "Flag that certify presence of extended ORM methods"
+
+#. module: sync_client
+#: field:ir.model.data,sync_date:0
+msgid "Last Synchronization Date"
+msgstr "Date Dernière Synchronisation"
+
+#. module: sync_client
+#: code:addons/sync_client/sync_client.py:114
+#, python-format
+msgid "Update session: %s"
+msgstr "Update session: %s"
+
+#. module: sync_client
+#: code:addons/sync_client/sync_client.py:64
+#: code:addons/sync_client/sync_client.py:129
+#, python-format
+msgid "Not connected: please try to log on in the Connection Manager"
+msgstr "Non connecté: veuillez vous connecter dans le Gestionnaire de Connexion"
+
+#. module: sync_client
+#: field:sync.monitor,data_push:0
+msgid "Data Push"
+msgstr "Données Poussées"
+
+#. module: sync_client
+#: view:sync.monitor:0
+#: field:sync.monitor,error:0
+msgid "Messages"
+msgstr "Messages"
 
 #. module: sync_client
 #: selection:sync.client.sync_server_connection,protocol:0
 msgid "compressed XMLRPC"
-msgstr "compressed XMLRPC"
-
-#. module: sync_client
-#: code:addons/sync_client/sync_client.py:136
-#, python-format
-msgid "Cannot check for updates: %s"
-msgstr "Cannot check for updates: %s"
-
-#. module: sync_client
-#: view:sync.client.update_received:0
-msgid "Fallback Values"
-msgstr "Fallback Values"
-
-#. module: sync_client
-#: model:ir.actions.act_window,name:sync_client.update_received_action
-#: model:ir.ui.menu,name:sync_client.update_received_menu
-msgid "Update Received Monitor"
-msgstr "Update Received Monitor"
-
-#. module: sync_client
-#: model:ir.actions.act_window,name:sync_client.message_received_action
-#: model:ir.ui.menu,name:sync_client.Message_received_menu
-msgid "Message Received Monitor"
-msgstr "Message Received Monitor"
-
-#. module: sync_client
-#: selection:sync.client.sync_server_connection,protocol:0
-msgid "XMLRPC"
-msgstr "XMLRPC"
-
-#. module: sync_client
-#: field:ir.model.data,touched:0
-msgid "Which records has been touched"
-msgstr "Which records has been touched"
-
-#. module: sync_client
-#: model:ir.model,name:sync_client.model_sync_client_entity_group
-msgid "Synchronization Instance Group"
-msgstr "Synchronization Instance Group"
-
-#. module: sync_client
-#: sql_constraint:ir.model.data:0
-msgid "You cannot have multiple records with the same id for the same module !"
-msgstr "You cannot have multiple records with the same id for the same module !"
-
-#. module: sync_client
-#: field:sync.client.update_received,execution_date:0
-msgid "Execution date"
-msgstr "Execution date"
-
-#. module: sync_client
-#: field:sync.client.update_received,owner:0
-msgid "Owner Instance"
-msgstr "Owner Instance"
-
-#. module: sync_client
-#: field:sync.client.update_to_send,rule_id:0
-msgid "Generating Rule"
-msgstr "Generating Rule"
-
-#. module: sync_client
-#: view:sync.client.message_received:0
-#: view:sync.client.update_received:0
-#: view:sync.client.update_to_send:0
-msgid "Not Run"
-msgstr "Not Run"
+msgstr "XMLRPC comprimé"
 
 #. module: sync_client
 #: model:ir.module.module,description:sync_client.module_meta_information
@@ -1221,14 +906,329 @@ msgstr "\n"
 "    "
 
 #. module: sync_client
-#: view:sync.client.sync_manager:0
-msgid "Start Pushing Message"
-msgstr "Start Pushing Message"
+#: field:sync.client.message_to_send,generate_message:0
+msgid "Generate By system"
+msgstr "Générer par le système"
+
+#. module: sync_client
+#: view:sync.client.register_entity:0
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: sync_client
+#: field:sync.client.entity,update_last:0
+msgid "Last update"
+msgstr "Dernière Mise à jour"
+
+#. module: sync_client
+#: code:addons/sync_client/sync_client.py:634
+#, python-format
+msgid "Message(s) sent: %d"
+msgstr "Message(s) sent: %d"
+
+#. module: sync_client
+#: view:sync.client.update_to_send:0
+msgid "Record"
+msgstr "Enregistrement"
+
+#. module: sync_client
+#: field:sync.client.child_entity,parent:0
+#: field:sync.client.entity,parent:0
+#: field:sync.client.register_entity,parent_id:0
+msgid "Parent Instance"
+msgstr "Instance Parent"
+
+#. module: sync_client
+#: field:sync.client.update_to_send,rule_id:0
+msgid "Generating Rule"
+msgstr "Génère Règles"
+
+#. module: sync_client
+#: model:ir.ui.menu,name:sync_client.ir_ui_menu_cron_synchro
+msgid "Automatic"
+msgstr "Automatique"
+
+#. module: sync_client
+#: model:ir.actions.act_window,name:sync_client.update_to_send_action
+#: model:ir.ui.menu,name:sync_client.update_sent_menu
+msgid "Update Sent Monitor"
+msgstr "Mise à jour des Moniteurs Envoyés"
+
+#. module: sync_client
+#: view:sync.client.message_received:0
+#: view:sync.client.update_received:0
+#: view:sync.client.update_to_send:0
+msgid "Not Run"
+msgstr "Pas Exécuté"
+
+#. module: sync_client
+#: view:sync.client.update_received:0
+msgid "Fallback Values"
+msgstr "Valeurs de repli"
 
 #. module: sync_client
 #: selection:sync.client.child_entity,state:0
-msgid "Updated"
-msgstr "Updated"
+msgid "Validated"
+msgstr "Validé"
+
+#. module: sync_client
+#: sql_constraint:sync.client.sync_server_connection:0
+msgid "The connection parameter is unique; you cannot create a new one"
+msgstr "The connection parameter is unique; you cannot create a new one"
+
+#. module: sync_client
+#: field:sync.client.message_received,log:0
+#: view:sync.client.update_received:0
+#: field:sync.client.update_received,log:0
+msgid "Execution Messages"
+msgstr "Messages d'Exécution"
+
+#. module: sync_client
+#: view:sync.client.sync_manager:0
+msgid "Start All Synchronization In Background"
+msgstr "Commencer la Synchronisation en arrière-plan"
+
+#. module: sync_client
+#: view:sync.client.sync_manager:0
+msgid "Resume Pushing Data"
+msgstr "Reprendre l'Envoi des Données"
+
+#. module: sync_client
+#: model:ir.actions.act_window,name:sync_client.connection_manager_action
+#: model:ir.ui.menu,name:sync_client.connection_manager_menu
+msgid "Connection Manager"
+msgstr "Gestionnaire de Connexion"
+
+#. module: sync_client
+#: selection:sync.monitor,data_pull:0
+#: selection:sync.monitor,data_push:0
+#: selection:sync.monitor,msg_pull:0
+#: selection:sync.monitor,msg_push:0
+#: selection:sync.monitor,status:0
+msgid "Aborted"
+msgstr "Aborted"
+
+#. module: sync_client
+#: model:ir.ui.menu,name:sync_client.mon_menu
+msgid "Monitoring"
+msgstr "Surveillance"
+
+#. module: sync_client
+#: code:addons/sync_client/orm.py:648
+#: code:addons/sync_client/special_handling.py:124
+#: code:addons/sync_client/special_handling.py:126
+#, python-format
+msgid "Error !"
+msgstr "Error !"
+
+#. module: sync_client
+#: code:addons/sync_client/sync_client.py:561
+#, python-format
+msgid "Update(s) not run left: %d"
+msgstr "Update(s) not run left: %d"
+
+#. module: sync_client
+#: model:ir.ui.menu,name:sync_client.update_menu
+#: view:sync.client.update_entity:0
+msgid "Update"
+msgstr "Mettre à jour"
+
+#. module: sync_client
+#: model:ir.actions.act_window,name:sync_client.manage_children_wizard_action
+#: model:ir.ui.menu,name:sync_client.manage_child_wiz_menu
+#: view:sync.client.entity_manager:0
+msgid "Registration Status"
+msgstr "Statut Enregistrement"
+
+#. module: sync_client
+#: model:ir.model,name:sync_client.model_sync_client_entity_manager
+msgid "Wizard invalidate and more"
+msgstr "Assistant - invalider et plus"
+
+#. module: sync_client
+#: selection:sync.client.sync_manager,state:0
+msgid "Validating Data"
+msgstr "Validation des Données"
+
+#. module: sync_client
+#: view:sync.monitor:0
+msgid "Msg Push Ok"
+msgstr "Poussée Msg Ok"
+
+#. module: sync_client
+#: field:sync.client.update_received,create_date:0
+msgid "Synchro date/time"
+msgstr "Synchronisation date/heure"
+
+#. module: sync_client
+#: view:sync.client.message_received:0
+#: view:sync.client.message_to_send:0
+msgid "Call"
+msgstr "Appel"
+
+#. module: sync_client
+#: selection:sync.client.sync_manager,state:0
+msgid "Init"
+msgstr "Init"
+
+#. module: sync_client
+#: view:sync.client.message_received:0
+#: view:sync.client.message_to_send:0
+#: view:sync.client.update_received:0
+#: view:sync.client.update_to_send:0
+msgid "Group By..."
+msgstr "Grouper Par..."
+
+#. module: sync_client
+#: view:sync.client.sync_manager:0
+msgid "Resume All Synchronization In Background"
+msgstr "Reprendre la Synchronisation en arrière-plan "
+
+#. module: sync_client
+#: field:sync.client.entity_manager,email:0
+msgid "Contact E-mail"
+msgstr "Contact Courriel"
+
+#. module: sync_client
+#: field:sync.client.update_received,rule_sequence:0
+msgid "Rule Sequence"
+msgstr "Rule Sequence"
+
+#. module: sync_client
+#: field:sync.client.message_received,create_date:0
+msgid "Receive Date"
+msgstr "Date de Réception Réelle"
+
+#. module: sync_client
+#: view:sync.client.update_received:0
+msgid "Update Received"
+msgstr "Mise à jour Reçu"
+
+#. module: sync_client
+#: model:ir.ui.menu,name:sync_client.message_menu
+#: view:sync.client.register_entity:0
+#: field:sync.client.register_entity,message:0
+#: selection:sync.client.register_entity,state:0
+msgid "Message"
+msgstr "Message"
+
+#. module: sync_client
+#: model:ir.model,name:sync_client.model_account_move_line
+msgid "Journal Items"
+msgstr "Lignes d'Ecritures Comptables"
+
+#. module: sync_client
+#: code:addons/sync_client/sync_client.py:136
+#, python-format
+msgid "Cannot check for updates: %s"
+msgstr "Cannot check for updates: %s"
+
+#. module: sync_client
+#: model:ir.ui.menu,name:sync_client.main_menu
+#: model:ir.ui.menu,name:sync_client.sync_menu
+#: view:sync.client.update_received:0
+#: view:sync.client.update_to_send:0
+msgid "Synchronization"
+msgstr "Synchronisation"
+
+#. module: sync_client
+#: field:sync.client.child_entity,manage_id:0
+msgid "Instance Manager"
+msgstr "Gestion Instance"
+
+#. module: sync_client
+#: field:sync.client.sync_server_connection,host:0
+msgid "Host"
+msgstr "Hôte"
+
+#. module: sync_client
+#: model:ir.model,name:sync_client.model_sync_client_message_to_send
+msgid "sync.client.message_to_send"
+msgstr "sync.client.message_to_send"
+
+#. module: sync_client
+#: field:sync.client.update_received,is_deleted:0
+#: field:sync.client.update_to_send,is_deleted:0
+msgid "Is deleted?"
+msgstr "Est supprimé?"
+
+#. module: sync_client
+#: field:sync.client.message_received,run:0
+#: field:sync.client.update_received,run:0
+msgid "Run"
+msgstr "Faire fonctionner"
+
+#. module: sync_client
+#: field:ir.model.data,is_deleted:0
+msgid "The record exists in database?"
+msgstr "The record exists in database?"
+
+#. module: sync_client
+#: selection:sync.client.sync_server_connection,protocol:0
+msgid "XMLRPC"
+msgstr "XMLRPC"
+
+#. module: sync_client
+#: model:ir.ui.menu,name:sync_client.reg_menu
+msgid "Registration"
+msgstr "Enregistrement"
+
+#. module: sync_client
+#: view:sync.client.sync_manager:0
+msgid "Start Pushing Message"
+msgstr "Commencer à Envoyer les Messages"
+
+#. module: sync_client
+#: model:ir.ui.menu,name:sync_client.maint_menu
+msgid "Maintenance"
+msgstr "Maintenance"
+
+#. module: sync_client
+#: field:sync.client.sync_server_connection,database:0
+msgid "Database Name"
+msgstr "Nom de la Base de données"
+
+#. module: sync_client
+#: field:sync.client.update_to_send,owner:0
+msgid "Owner"
+msgstr "Propriétaire"
+
+#. module: sync_client
+#: code:addons/sync_client/sync_client.py:162
+#, python-format
+msgid "You cannot perform this action now."
+msgstr "You cannot perform this action now."
+
+#. module: sync_client
+#: model:ir.ui.menu,name:sync_client.sync_monitor_menu
+msgid "Synchronisation Processes Monitor"
+msgstr "Moniteur de procédés de Synchronisation "
+
+#. module: sync_client
+#: view:sync.client.update_to_send:0
+msgid "Rule"
+msgstr "Règle"
+
+#. module: sync_client
+#: model:ir.model,name:sync_client.model_sync_monitor
+msgid "sync.monitor"
+msgstr "sync.monitor"
+
+#. module: sync_client
+#: model:ir.model,name:sync_client.model_sync_client_entity
+#: model:ir.model,name:sync_client.model_sync_client_register_entity
+msgid "Synchronization Instance"
+msgstr "Instance de Synchronisation "
+
+#. module: sync_client
+#: field:sync.client.sync_server_connection,port:0
+msgid "Port"
+msgstr "Port"
+
+#. module: sync_client
+#: view:sync.client.sync_manager:0
+msgid "Recover After Restoring"
+msgstr "Recover After Restoring"
 
 #. module: sync_client
 #: model:ir.model,name:sync_client.model_sync_client_sync_manager
@@ -1236,19 +1236,26 @@ msgid "sync.client.sync_manager"
 msgstr "sync.client.sync_manager"
 
 #. module: sync_client
-#: field:sync.client.update_received,source:0
-msgid "Source Instance"
-msgstr "Source Instance"
+#: field:sync.client.sync_server_connection,password:0
+msgid "Password"
+msgstr "Mot de passe"
 
 #. module: sync_client
-#: selection:sync.client.sync_manager,state:0
-msgid "Receiving Data"
-msgstr "Receiving Data"
+#: selection:sync.client.child_entity,state:0
+msgid "Pending"
+msgstr "En suspend"
 
 #. module: sync_client
-#: selection:sync.client.sync_server_connection,protocol:0
-msgid "compressed NetRPC"
-msgstr "compressed NetRPC"
+#: field:sync.client.child_entity,group:0
+#: field:sync.client.entity_group,name:0
+msgid "Group Name"
+msgstr "Nom du Groupe"
+
+#. module: sync_client
+#: field:sync.client.message_rule,server_id:0
+#: field:sync.client.rule,server_id:0
+msgid "Server ID"
+msgstr "Identité Serveur"
 
 #. module: sync_client
 #: code:addons/sync_client/sync_client.py:716
@@ -1257,50 +1264,36 @@ msgid "Message(s) processed: %d"
 msgstr "Message(s) processed: %d"
 
 #. module: sync_client
-#: model:ir.actions.act_window,name:sync_client.update_to_send_action
-#: model:ir.ui.menu,name:sync_client.update_sent_menu
-msgid "Update Sent Monitor"
-msgstr "Update Sent Monitor"
+#: field:sync.client.entity_group,entity_ids:0
+msgid "Instances"
+msgstr "Instances"
 
 #. module: sync_client
-#: field:sync.client.message_to_send,destination_name:0
-msgid "Destination Name"
-msgstr "Destination Name"
-
-#. module: sync_client
-#: view:sync.client.sync_manager:0
-msgid "Recover Data and Messages"
-msgstr "Recover Data and Messages"
-
-#. module: sync_client
-#: field:sync.client.child_entity,manage_id:0
-msgid "Instance Manager"
-msgstr "Instance Manager"
-
-#. module: sync_client
-#: model:ir.model,name:sync_client.model_sync_monitor
-msgid "sync.monitor"
-msgstr "sync.monitor"
+#: constraint:account.move:0
+msgid "You cannot create more than one move per period on centralized journal"
+msgstr "Vous ne pouvez pas créer plus d'une écriture par période sur un journal centralisé"
 
 #. module: sync_client
 #: view:sync.client.update_to_send:0
-msgid "Date"
-msgstr "Date"
+msgid "Search update Sent"
+msgstr "Rercherche de Mise à jour Envoyée"
 
 #. module: sync_client
-#: model:ir.model,name:sync_client.model_sync_client_message_to_send
-msgid "sync.client.message_to_send"
-msgstr "sync.client.message_to_send"
+#: model:ir.actions.act_window,name:sync_client.update_received_action
+#: model:ir.ui.menu,name:sync_client.update_received_menu
+msgid "Update Received Monitor"
+msgstr "Mise à jour des Moniteurs Recus"
 
 #. module: sync_client
-#: field:sync.client.entity_manager,parent:0
-msgid "Parent"
-msgstr "Parent"
+#: view:sync.client.message_received:0
+#: view:sync.client.update_received:0
+msgid "Run manually"
+msgstr "Exécuter manuellement"
 
 #. module: sync_client
-#: model:ir.model,name:sync_client.model_sync_client_message_rule
-msgid "sync.client.message_rule"
-msgstr "sync.client.message_rule"
+#: view:sync.client.sync_server_connection:0
+msgid "Connect"
+msgstr "Connecter"
 
 #. module: sync_client
 #: field:sync.client.update_received,force_recreation:0
@@ -1309,45 +1302,53 @@ msgid "Force record recreation"
 msgstr "Force record recreation"
 
 #. module: sync_client
+#: field:sync.client.entity,message_last:0
+msgid "Last message"
+msgstr "Dernier message"
+
+#. module: sync_client
+#: model:ir.actions.act_window,name:sync_client.activate_wizard_action
+#: model:ir.ui.menu,name:sync_client.activate_wiz_menu
+msgid "Activate Instance"
+msgstr "Activer l'Instance"
+
+#. module: sync_client
+#: field:sync.client.child_entity,email:0
+#: field:sync.client.entity,email:0
+#: field:sync.client.register_entity,email:0
+msgid "Contact Email"
+msgstr "Contact Courriel"
+
+#. module: sync_client
 #: view:sync.client.sync_manager:0
-msgid "Start Pulling Message"
-msgstr "Start Pulling Message"
+msgid "Manage Data synchronization"
+msgstr "Géner la synchronisation des Données"
 
 #. module: sync_client
-#: view:sync.monitor:0
-msgid "Status Ok"
-msgstr "Status Ok"
+#: view:sync.client.sync_server_connection:0
+msgid "Reset Connection"
+msgstr "Réinitialisation de la Connexion"
 
 #. module: sync_client
-#: field:sync.monitor,start:0
-msgid "Start Date"
-msgstr "Start Date"
+#: model:ir.actions.act_window,name:sync_client.message_sent_action
+msgid "Message Sent Monitor"
+msgstr "Surveillance Message Envoyé"
 
 #. module: sync_client
-#: code:addons/sync_client/special_handling.py:124
+#: view:sync.client.entity_manager:0
+msgid "Retrieve instance information"
+msgstr "Récupérer les informations de l'instance"
+
+#. module: sync_client
+#: code:addons/sync_client/wizard/register_entity.py:202
 #, python-format
-msgid "You can not do this modification on a confirmed entry ! Please note that you can just change some non important fields !"
-msgstr "You can not do this modification on a confirmed entry ! Please note that you can just change some non important fields !"
+msgid "Instance name cannot be empty"
+msgstr "Le nom de l'instance ne peut pas être vide"
 
 #. module: sync_client
-#: view:sync.client.sync_manager:0
-msgid "Resume Pulling Data"
-msgstr "Resume Pulling Data"
-
-#. module: sync_client
-#: view:sync.client.sync_manager:0
-msgid "Start Pushing Data"
-msgstr "Start Pushing Data"
-
-#. module: sync_client
-#: field:sync.client.sync_server_connection,port:0
-msgid "Port"
-msgstr "Port"
-
-#. module: sync_client
-#: view:sync.client.update_to_send:0
-msgid "Session"
-msgstr "Session"
+#: field:sync.client.message_to_send,sent:0
+msgid "Sent ?"
+msgstr "Envoyé ?"
 
 #. module: sync_client
 #: model:ir.model,name:sync_client.model_sync_client_update_received
@@ -1355,29 +1356,30 @@ msgid "sync.client.update_received"
 msgstr "sync.client.update_received"
 
 #. module: sync_client
-#: model:ir.model,name:sync_client.model_sync_client_sync_server_connection
-msgid "Connection to sync server information and tools"
-msgstr "Connection to sync server information and tools"
+#: view:sync.client.sync_manager:0
+msgid "Start Pulling Data"
+msgstr "Commencer l'Extraction des Données"
 
 #. module: sync_client
 #: view:sync.client.sync_manager:0
-msgid "Start All Synchronization Process"
-msgstr "Start All Synchronization Process"
+msgid "Debug"
+msgstr "Déboguer"
 
 #. module: sync_client
-#: view:sync.client.activate_entity:0
-msgid "Activate entity"
-msgstr "Activate entity"
+#: model:ir.module.module,shortdesc:sync_client.module_meta_information
+msgid "Synchronization Utility"
+msgstr "Synchronization Utility"
 
 #. module: sync_client
-#: field:sync.client.update_received,create_date:0
-msgid "Synchro date/time"
-msgstr "Synchro date/time"
+#: selection:sync.client.sync_manager,state:0
+msgid "Sending Message"
+msgstr "Envoi du Message"
 
 #. module: sync_client
-#: model:ir.ui.menu,name:sync_client.maint_menu
-msgid "Maintenance"
-msgstr "Maintenance"
+#: field:sync.client.rule,active:0
+#: field:sync.client.sync_server_connection,active:0
+msgid "Active"
+msgstr "Actif"
 
 #. module: sync_client
 #: code:addons/sync_client/sync_client.py:344
@@ -1386,70 +1388,81 @@ msgid "Update's server sequence: %d"
 msgstr "Update's server sequence: %d"
 
 #. module: sync_client
-#: view:sync.monitor:0
-#: field:sync.monitor,error:0
-msgid "Messages"
-msgstr "Messages"
+#: model:ir.actions.act_window,name:sync_client.update_wizard_action
+#: model:ir.ui.menu,name:sync_client.update_wiz_menu
+msgid "Update Instance"
+msgstr "Mise à jour Instance"
 
 #. module: sync_client
-#: field:sync.client.child_entity,email:0
-#: field:sync.client.entity,email:0
-#: field:sync.client.register_entity,email:0
-msgid "Contact Email"
-msgstr "Contact Email"
+#: model:ir.actions.server,name:sync_client.ir_actions_server_opensynccron0
+msgid "Open Sync cron"
+msgstr "Synchronisation cron Ouverte"
 
 #. module: sync_client
-#: selection:sync.monitor,data_pull:0
-#: selection:sync.monitor,data_push:0
-#: selection:sync.monitor,msg_pull:0
-#: selection:sync.monitor,msg_push:0
-#: selection:sync.monitor,status:0
-msgid "Failed"
-msgstr "Failed"
-
-#. module: sync_client
-#: field:sync.client.message_to_send,sent:0
-msgid "Sent ?"
-msgstr "Sent ?"
-
-#. module: sync_client
-#: field:sync.client.message_received,log:0
+#: field:sync.client.message_rule,model:0
+#: field:sync.client.rule,model:0
 #: view:sync.client.update_received:0
-#: field:sync.client.update_received,log:0
-msgid "Execution Messages"
-msgstr "Execution Messages"
+#: field:sync.client.update_received,model:0
+#: view:sync.client.update_to_send:0
+#: field:sync.client.update_to_send,model:0
+msgid "Model"
+msgstr "Modèle"
+
+#. module: sync_client
+#: view:sync.monitor:0
+msgid "Data Push Ok"
+msgstr "Poussée des Données Ok"
+
+#. module: sync_client
+#: field:sync.client.message_received,remote_call:0
+#: field:sync.client.message_rule,remote_call:0
+#: field:sync.client.message_to_send,remote_call:0
+msgid "Method to call"
+msgstr "Méthode à utiliser"
 
 #. module: sync_client
 #: view:sync.client.message_received:0
 #: view:sync.client.update_received:0
-msgid "Search update Received"
-msgstr "Search update Received"
+msgid "Source"
+msgstr "Source"
 
 #. module: sync_client
-#: code:addons/sync_client/sync_client.py:64
-#: code:addons/sync_client/sync_client.py:129
-#, python-format
-msgid "Not connected: please try to log on in the Connection Manager"
-msgstr "Not connected: please try to log on in the Connection Manager"
+#: view:sync.client.update_to_send:0
+msgid "Session"
+msgstr "Session"
 
 #. module: sync_client
-#: field:sync.client.entity,message_last:0
-msgid "Last message"
-msgstr "Last message"
+#: view:sync.client.sync_server_connection:0
+msgid "Connection information"
+msgstr "Informations de Connexion"
 
 #. module: sync_client
-#: field:sync.monitor,data_pull:0
-msgid "Data Pull"
-msgstr "Data Pull"
+#: field:ir.model.data,last_modification:0
+msgid "Last Modification Date"
+msgstr "Date Dernière Modification"
 
 #. module: sync_client
-#: help:sync.client.sync_server_connection,port:0
-msgid "Synchronization server connection port"
-msgstr "Synchronization server connection port"
+#: view:sync.monitor:0
+msgid "Synchronization date and time"
+msgstr "Synchronisation  - date et heure"
 
 #. module: sync_client
-#: field:sync.client.update_received,is_deleted:0
-#: field:sync.client.update_to_send,is_deleted:0
-msgid "Is deleted?"
-msgstr "Is deleted?"
+#: field:sync.monitor,start:0
+msgid "Start Date"
+msgstr "Date de Début"
+
+#. module: sync_client
+#: field:sync.monitor,msg_pull:0
+msgid "Msg Pull"
+msgstr "Msg extrait"
+
+#. module: sync_client
+#: field:sync.client.update_received,fallback_values:0
+msgid "Fallback values"
+msgstr "Valeurs de repli"
+
+#. module: sync_client
+#: help:sync.client.rule,can_delete:0
+msgid "Propagate the delete of old unused records"
+msgstr "Propagate the delete of old unused records"
 

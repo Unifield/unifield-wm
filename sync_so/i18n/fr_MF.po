@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.0.3\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2013-10-17 07:42+0000\n"
-"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,145 +16,9 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: sync_so
-#: constraint:msf.instance:0
-msgid "You cannot have the same database than an active instance!"
-msgstr "You cannot have the same database than an active instance!"
-
-#. module: sync_so
-#: constraint:purchase.order:0
-#: constraint:sale.order:0
-msgid "Partner type and order type are incompatible! Please change either order type or partner."
-msgstr "Partner type and order type are incompatible! Please change either order type or partner."
-
-#. module: sync_so
-#: constraint:account.move.line:0
-msgid "Company must be same for its related account and period."
-msgstr "Company must be same for its related account and period."
-
-#. module: sync_so
-#: sql_constraint:account.move.line:0
-msgid "Wrong credit or debit value in accounting entry !"
-msgstr "Wrong credit or debit value in accounting entry !"
-
-#. module: sync_so
-#: model:ir.model,name:sync_so.model_product_asset
-msgid "A specific asset of a product"
-msgstr "A specific asset of a product"
-
-#. module: sync_so
-#: constraint:purchase.order:0
-msgid "You cannot validate this purchase order because it contains a line with an inactive product"
-msgstr "You cannot validate this purchase order because it contains a line with an inactive product"
-
-#. module: sync_so
-#: constraint:account.analytic.account:0
-msgid "Error! You can not create recursive analytic accounts."
-msgstr "Error! You can not create recursive analytic accounts."
-
-#. module: sync_so
-#: constraint:account.period:0
-msgid "Invalid period ! Some periods overlap or the date period is not in the scope of the fiscal year. "
-msgstr "Invalid period ! Some periods overlap or the date period is not in the scope of the fiscal year. "
-
-#. module: sync_so
-#: constraint:product.product:0
-msgid "Constraint error on Kit Product."
-msgstr "Constraint error on Kit Product."
-
-#. module: sync_so
-#: constraint:product.product:0
-msgid "If you select \"Non-stockable\" as product type then you have to select \"Make to order\" as procurement method"
-msgstr "If you select \"Non-stockable\" as product type then you have to select \"Make to order\" as procurement method"
-
-#. module: sync_so
-#: model:ir.model,name:sync_so.model_account_target_costcenter
-msgid "account.target.costcenter"
-msgstr "account.target.costcenter"
-
-#. module: sync_so
-#: model:ir.model,name:sync_so.model_so_po_common
-msgid "Common methods for SO - PO"
-msgstr "Common methods for SO - PO"
-
-#. module: sync_so
-#: field:sale.order.line,source_sync_line_id:0
-msgid "Sync DB id of the PO origin line"
-msgstr "Sync DB id of the PO origin line"
-
-#. module: sync_so
-#: constraint:account.analytic.account:0
-msgid "You cannot have the same code or name between analytic accounts in the same category!"
-msgstr "You cannot have the same code or name between analytic accounts in the same category!"
-
-#. module: sync_so
-#: sql_constraint:account.bank.statement:0
-msgid "You cannot have a register on the same period and the same journal!"
-msgstr "You cannot have a register on the same period and the same journal!"
-
-#. module: sync_so
-#: constraint:res.currency:0
-msgid "Another currency have the same name."
-msgstr "Another currency have the same name."
-
-#. module: sync_so
-#: constraint:account.period:0
-msgid "Error ! The duration of the Period(s) is/are invalid. "
-msgstr "Error ! The duration of the Period(s) is/are invalid. "
-
-#. module: sync_so
-#: model:ir.model,name:sync_so.model_purchase_order_line
-msgid "Purchase Order Line"
-msgstr "Purchase Order Line"
-
-#. module: sync_so
-#: field:sale.order,received:0
-msgid "Received by Client"
-msgstr "Received by Client"
-
-#. module: sync_so
-#: constraint:account.fiscalyear:0
-msgid "Error! The duration of the Fiscal Year is invalid. "
-msgstr "Error! The duration of the Fiscal Year is invalid. "
-
-#. module: sync_so
-#: model:ir.model,name:sync_so.model_product_pricelist
-msgid "Pricelist"
-msgstr "Pricelist"
-
-#. module: sync_so
-#: model:ir.model,name:sync_so.model_funding_pool_distribution_line
-msgid "funding.pool.distribution.line"
-msgstr "funding.pool.distribution.line"
-
-#. module: sync_so
-#: constraint:account.analytic.account:0
-msgid "Error! The currency has to be the same as the currency of the selected company"
-msgstr "Error! The currency has to be the same as the currency of the selected company"
-
-#. module: sync_so
-#: constraint:account.analytic.account:0
-msgid "You can only have one account used for FX gain/loss!"
-msgstr "You can only have one account used for FX gain/loss!"
-
-#. module: sync_so
-#: model:ir.model,name:sync_so.model_sale_order
-msgid "Sales Order"
-msgstr "Sales Order"
-
-#. module: sync_so
-#: constraint:purchase.order:0
-msgid "You cannot choose an internal supplier for this purchase order"
-msgstr "You cannot choose an internal supplier for this purchase order"
-
-#. module: sync_so
-#: model:ir.model,name:sync_so.model_stock_production_lot
-msgid "Production lot"
-msgstr "Production lot"
-
-#. module: sync_so
-#: constraint:msf.instance:0
-msgid "You cannot have the same code or name than an active instance!"
-msgstr "You cannot have the same code or name than an active instance!"
+#: model:ir.model,name:sync_so.model_msf_instance
+msgid "msf.instance"
+msgstr "msf.instance"
 
 #. module: sync_so
 #: constraint:cost.center.distribution.line:0
@@ -163,24 +27,162 @@ msgid "0 is not allowed as percentage value!"
 msgstr "0 is not allowed as percentage value!"
 
 #. module: sync_so
-#: model:ir.module.module,shortdesc:sync_so.module_meta_information
-msgid "Synchronization Sales order"
-msgstr "Synchronization Sales order"
+#: constraint:msf.instance:0
+msgid "You cannot have the same reconciliation prefix than an active instance!"
+msgstr "Vous ne pouvez pas avoir le même préfixe de lettrage qu'une instance active !"
 
 #. module: sync_so
-#: constraint:stock.picking:0
-msgid "You cannot validate this document because it contains a line with an inactive product"
-msgstr "You cannot validate this document because it contains a line with an inactive product"
+#: constraint:account.target.costcenter:0
+msgid "Another cost centre is already defined as the PO/FO reference in this proprietary instance."
+msgstr "Another cost centre is already defined as the PO/FO reference in this proprietary instance."
 
 #. module: sync_so
-#: model:ir.model,name:sync_so.model_msf_instance
-msgid "msf.instance"
-msgstr "msf.instance"
+#: sql_constraint:account.journal:0
+msgid "The name of the journal must be unique per company and instance !"
+msgstr "Le nom du journal doit être unique par société et instance!"
 
 #. module: sync_so
-#: model:ir.model,name:sync_so.model_purchase_order
-msgid "Purchase Order"
-msgstr "Purchase Order"
+#: model:ir.model,name:sync_so.model_account_move_line
+msgid "Journal Items"
+msgstr "Lignes d'Ecritures Comptables"
+
+#. module: sync_so
+#: model:ir.model,name:sync_so.model_sale_order
+msgid "Sales Order"
+msgstr "Commande de Terrain"
+
+#. module: sync_so
+#: constraint:product.product:0
+msgid "Warning! GMDN code must be digits!"
+msgstr "Avertissement! Le code  GMDN doit être en chiffres!"
+
+#. module: sync_so
+#: constraint:account.move.line:0
+msgid "Company must be same for its related account and period."
+msgstr "La Société doit être la même pour le compte et période connexes."
+
+#. module: sync_so
+#: model:ir.model,name:sync_so.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Ligne Bon de Commande"
+
+#. module: sync_so
+#: field:purchase.order,sended_by_supplier:0
+msgid "Sended by supplier"
+msgstr "Envoyé par le Fournisseur"
+
+#. module: sync_so
+#: sql_constraint:account.move.line:0
+msgid "Wrong credit or debit value in accounting entry !"
+msgstr "Valeur de crédit ou débit erronée sous l'écriture comptable !"
+
+#. module: sync_so
+#: model:ir.model,name:sync_so.model_product_pricelist
+msgid "Pricelist"
+msgstr "Liste de Prix"
+
+#. module: sync_so
+#: constraint:sale.order:0
+msgid "You cannot validate this sale order because it contains a line with an inactive product"
+msgstr "Vous ne pouvez pas valider cette commande client car elle contient des lignes avec un produit inactif"
+
+#. module: sync_so
+#: constraint:account.target.costcenter:0
+msgid "This cost centre is already defined as the budget consolidation in another proprietary instance."
+msgstr "This cost centre is already defined as the budget consolidation in another proprietary instance."
+
+#. module: sync_so
+#: constraint:res.currency:0
+msgid "Same currency exists"
+msgstr "Same currency exists"
+
+#. module: sync_so
+#: constraint:purchase.order:0
+msgid "If you tick the box \"cross docking\", you cannot have an other location than \"Cross docking\""
+msgstr "Si vous cochez la case \"transbordement\", vous ne pouvez pas avoir d'autre lieu que \"Transbordement\""
+
+#. module: sync_so
+#: model:ir.model,name:sync_so.model_account_installer
+msgid "account.installer"
+msgstr "account.installer"
+
+#. module: sync_so
+#: constraint:account.period:0
+msgid "Error ! The duration of the Period(s) is/are invalid. "
+msgstr "Erreur ! La durée de la(des) période(s) est/sont invalides. "
+
+#. module: sync_so
+#: constraint:msf.instance:0
+msgid "You cannot have the same code or name than an active instance!"
+msgstr "Vous ne pouvez pas avoir de même code ou nom qu'une instance active!"
+
+#. module: sync_so
+#: constraint:account.fiscalyear:0
+msgid "Error! The duration of the Fiscal Year is invalid. "
+msgstr "Erreur ! La durée de l'Exercice comptable est incorrecte. "
+
+#. module: sync_so
+#: constraint:purchase.order:0
+#: constraint:sale.order:0
+msgid "Partner type and order type are incompatible! Please change either order type or partner."
+msgstr "Le type de partnenaire et le type de commande sont incompatibles. Veuillez changer l'un ou l'autre."
+
+#. module: sync_so
+#: sql_constraint:purchase.order:0
+#: sql_constraint:sale.order:0
+msgid "Order Reference must be unique !"
+msgstr "La Référence de la Commande doit être unique !"
+
+#. module: sync_so
+#: constraint:product.product:0
+msgid "Error: Invalid ean code"
+msgstr "Erreur: code EAN invalide"
+
+#. module: sync_so
+#: model:ir.model,name:sync_so.model_funding_pool_distribution_line
+msgid "funding.pool.distribution.line"
+msgstr "funding.pool.distribution.line"
+
+#. module: sync_so
+#: model:ir.model,name:sync_so.model_so_po_common
+msgid "Common methods for SO - PO"
+msgstr "Méthodes Communes pour commande terrain- Bon de Commande"
+
+#. module: sync_so
+#: model:ir.model,name:sync_so.model_account_analytic_line
+msgid "Analytic Line"
+msgstr "Ligne Analytique"
+
+#. module: sync_so
+#: constraint:product.product:0
+#: constraint:sale.order.line:0
+msgid "You must select on order procurement method for Service with Reception products."
+msgstr "Vous devez sélectionner sur la commande le mode d'approvisionnement pour le Service  avec Réception de produits."
+
+#. module: sync_so
+#: model:ir.model,name:sync_so.model_account_analytic_account
+msgid "Analytic Account"
+msgstr "Compte Analytique"
+
+#. module: sync_so
+#: model:ir.model,name:sync_so.model_product_asset
+msgid "A specific asset of a product"
+msgstr "Atout spécifique du produit."
+
+#. module: sync_so
+#: field:purchase.order,push_fo:0
+msgid "The Push FO case"
+msgstr "Cas d'une CT poussée"
+
+#. module: sync_so
+#: constraint:res.currency:0
+msgid "No rate is set. Please set one before activating the currency. "
+msgstr "Pas de taux fixé. Choisissez en un svp avant d'activer la monnaie."
+
+#. module: sync_so
+#: sql_constraint:res.currency:0
+msgid "The currency name exists already in the system!"
+msgstr "Le nom de cette devise existe déjà dans le système!"
 
 #. module: sync_so
 #: field:purchase.order,from_sync:0
@@ -188,75 +190,74 @@ msgid "Updated by synchronization"
 msgstr "Updated by synchronization"
 
 #. module: sync_so
-#: constraint:account.move.line:0
-msgid "You can not create move line on closed account."
-msgstr "You can not create move line on closed account."
+#: model:ir.model,name:sync_so.model_hq_entries
+msgid "HQ Entries"
+msgstr "Ecritures HQ"
 
 #. module: sync_so
-#: field:purchase.order.line,original_purchase_line_id:0
-msgid "Original purchase line id"
-msgstr "Original purchase line id"
-
-#. module: sync_so
-#: constraint:account.target.costcenter:0
-msgid "This cost centre is already defined as the PO/FO reference in another proprietary instance."
-msgstr "This cost centre is already defined as the PO/FO reference in another proprietary instance."
-
-#. module: sync_so
-#: sql_constraint:purchase.order.line:0
-#: sql_constraint:sale.order.line:0
-msgid "Product Quantity must be greater than zero."
-msgstr "Product Quantity must be greater than zero."
-
-#. module: sync_so
-#: field:purchase.order,push_fo:0
-msgid "The Push FO case"
-msgstr "The Push FO case"
+#: constraint:stock.production.lot:0
+msgid "You can't create a standard batch number for a product which is not batch mandatory. If the product is perishable, the system will create automatically an internal batch number on reception/inventory."
+msgstr "Vous ne pouvez pas créer un numéro de lot standard pour un produit dont le lot n'est pas obligatoire. Si le produit est périssable, le système créera automatiquement un numéro de lot interne à la réception / inventaire."
 
 #. module: sync_so
 #: constraint:msf.instance:0
-msgid "You cannot have the same reconciliation prefix than an active instance!"
-msgstr "You cannot have the same reconciliation prefix than an active instance!"
-
-#. module: sync_so
-#: sql_constraint:account.journal:0
-msgid "The name of the journal must be unique per company and instance !"
-msgstr "The name of the journal must be unique per company and instance !"
+msgid "You cannot have the same database than an active instance!"
+msgstr "Vous ne pouvez pas avoir la même base de données qu'une instance active!"
 
 #. module: sync_so
 #: field:purchase.order,split_po:0
 msgid "Created by split PO"
-msgstr "Created by split PO"
+msgstr "Créé à partir du fractionnement du BC"
 
 #. module: sync_so
-#: constraint:product.product:0
-msgid "Error: Invalid ean code"
-msgstr "Error: Invalid ean code"
+#: sql_constraint:product.product:0
+msgid "The \"Product Code\" must be unique"
+msgstr "Le \"Code produit\" doit être unique"
 
 #. module: sync_so
-#: constraint:product.product:0
-msgid "Warning! GMDN code must be digits!"
-msgstr "Warning! GMDN code must be digits!"
+#: constraint:account.fiscalyear:0
+msgid "Error! You cannot define overlapping fiscal years"
+msgstr "Erreur ! Les Exercices Comptables ne doivent pas se chevaucher."
+
+#. module: sync_so
+#: model:ir.model,name:sync_so.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Ligne Commande Terrain"
+
+#. module: sync_so
+#: field:sale.order.line,source_sync_line_id:0
+msgid "Sync DB id of the PO origin line"
+msgstr "Sync DB id of the PO origin line"
+
+#. module: sync_so
+#: constraint:account.analytic.account:0
+msgid "You can only have one account used for FX gain/loss!"
+msgstr "Vous ne pouvez utiliser qu'un compte pour les gains/pertes de change!"
+
+#. module: sync_so
+#: constraint:purchase.order:0
+msgid "You cannot validate this purchase order because it contains a line with an inactive product"
+msgstr "Vous ne pouvez pas valider ce bon de commande, car il contient une ligne avec des produits inactifs."
+
+#. module: sync_so
+#: model:ir.model,name:sync_so.model_account_fiscalyear
+msgid "Fiscal Year"
+msgstr "Exercice Comptable"
 
 #. module: sync_so
 #: constraint:account.target.costcenter:0
-msgid "Another cost centre is already defined as the budget consolidation in this proprietary instance."
-msgstr "Another cost centre is already defined as the budget consolidation in this proprietary instance."
+msgid "This cost centre is already defined as target in another proprietary instance."
+msgstr "This cost centre is already defined as target in another proprietary instance."
 
 #. module: sync_so
-#: model:ir.model,name:sync_so.model_account_analytic_account
-msgid "Analytic Account"
-msgstr "Analytic Account"
+#: constraint:msf.instance:0
+msgid "You cannot have the same move prefix than an active instance!"
+msgstr "Vous ne pouvez pas avoir le même préfixe de mouvement qu'une instance active !"
 
 #. module: sync_so
-#: constraint:stock.production.lot:0
-msgid "You can't create an internal Batch Number for a product which is batch managed or which is not perishable. If the product is batch managed, please create a standard batch number."
-msgstr "You can't create an internal Batch Number for a product which is batch managed or which is not perishable. If the product is batch managed, please create a standard batch number."
-
-#. module: sync_so
-#: sql_constraint:account.journal:0
-msgid "The code of the journal must be unique per company and instance !"
-msgstr "The code of the journal must be unique per company and instance !"
+#: constraint:account.move.line:0
+msgid "You can not create move line on view account."
+msgstr "Vous ne pouvez pas créer des écritures sur un compte-groupe"
 
 #. module: sync_so
 #: model:ir.module.module,description:sync_so.module_meta_information
@@ -268,120 +269,50 @@ msgstr "\n"
 "    "
 
 #. module: sync_so
-#: model:ir.model,name:sync_so.model_account_move_line
-msgid "Journal Items"
-msgstr "Journal Items"
-
-#. module: sync_so
-#: constraint:purchase.order:0
-msgid "You must specify a Valid Till date."
-msgstr "You must specify a Valid Till date."
+#: field:purchase.order.line,original_purchase_line_id:0
+msgid "Original purchase line id"
+msgstr "Original purchase line id"
 
 #. module: sync_so
 #: sql_constraint:stock.production.lot:0
-msgid "Batch name must be unique per instance and product!"
-msgstr "Batch name must be unique per instance and product!"
+msgid "The combination of serial number and internal reference must be unique !"
+msgstr "La combinaison du numéro de série et de la référence interne doit être unique !"
 
 #. module: sync_so
 #: constraint:purchase.order:0
-msgid "If you tick the box \"cross docking\", you cannot have an other location than \"Cross docking\""
-msgstr "If you tick the box \"cross docking\", you cannot have an other location than \"Cross docking\""
-
-#. module: sync_so
-#: constraint:account.target.costcenter:0
-msgid "This cost centre is already defined as target in another proprietary instance."
-msgstr "This cost centre is already defined as target in another proprietary instance."
-
-#. module: sync_so
-#: constraint:res.currency:0
-msgid "No rate is set. Please set one before activating the currency. "
-msgstr "No rate is set. Please set one before activating the currency. "
-
-#. module: sync_so
-#: sql_constraint:product.product:0
-msgid "The \"Product Code\" must be unique"
-msgstr "The \"Product Code\" must be unique"
-
-#. module: sync_so
-#: constraint:account.target.costcenter:0
-msgid "This cost centre is already defined as the budget consolidation in another proprietary instance."
-msgstr "This cost centre is already defined as the budget consolidation in another proprietary instance."
-
-#. module: sync_so
-#: constraint:account.move.line:0
-msgid "You can not create move line on view account."
-msgstr "You can not create move line on view account."
-
-#. module: sync_so
-#: field:purchase.order,sended_by_supplier:0
-msgid "Sended by supplier"
-msgstr "Sended by supplier"
-
-#. module: sync_so
-#: model:ir.model,name:sync_so.model_sale_order_line
-msgid "Sales Order Line"
-msgstr "Sales Order Line"
-
-#. module: sync_so
-#: sql_constraint:purchase.order:0
-#: sql_constraint:sale.order:0
-msgid "Order Reference must be unique !"
-msgstr "Order Reference must be unique !"
-
-#. module: sync_so
-#: constraint:account.analytic.account:0
-msgid "You have to use a Normal account type and Cost Center category for FX gain/loss!"
-msgstr "You have to use a Normal account type and Cost Center category for FX gain/loss!"
+msgid "You cannot choose an internal supplier for this purchase order"
+msgstr "You cannot choose an internal supplier for this purchase order"
 
 #. module: sync_so
 #: model:ir.model,name:sync_so.model_stock_picking
 msgid "Picking List"
-msgstr "Picking List"
+msgstr "Liste de Piquage"
 
 #. module: sync_so
-#: sql_constraint:product.asset:0
-msgid "Asset Code must be unique per instance and per product!"
-msgstr "Asset Code must be unique per instance and per product!"
+#: sql_constraint:account.journal:0
+msgid "The code of the journal must be unique per company and instance !"
+msgstr "Le code du compte doit être unique par société et instance!"
 
 #. module: sync_so
-#: model:ir.model,name:sync_so.model_account_period
-msgid "Account period"
-msgstr "Account period"
-
-#. module: sync_so
-#: constraint:res.currency:0
-msgid "Same currency exists"
-msgstr "Same currency exists"
-
-#. module: sync_so
-#: model:ir.model,name:sync_so.model_account_installer
-msgid "account.installer"
-msgstr "account.installer"
+#: model:ir.model,name:sync_so.model_product_product
+msgid "Product"
+msgstr "Produit"
 
 #. module: sync_so
 #: constraint:account.analytic.account:0
-msgid "You can't delete an account which has this destination as default"
-msgstr "You can't delete an account which has this destination as default"
+msgid "Error! The currency has to be the same as the currency of the selected company"
+msgstr "Erreur ! La devise doit être la même que la devise de la société sélectionnée"
 
 #. module: sync_so
-#: model:ir.model,name:sync_so.model_account_analytic_line
-msgid "Analytic Line"
-msgstr "Analytic Line"
+#: constraint:account.analytic.account:0
+msgid "You cannot have the same code or name between analytic accounts in the same category!"
+msgstr "Vous ne pouvez pas avoir le même code ou nom entre des comptes analytiques de même catégorie!"
 
 #. module: sync_so
-#: constraint:stock.picking:0
-msgid "Wrong reason type for an OUT created from scratch."
-msgstr "Wrong reason type for an OUT created from scratch."
-
-#. module: sync_so
-#: model:ir.model,name:sync_so.model_hq_entries
-msgid "HQ Entries"
-msgstr "HQ Entries"
-
-#. module: sync_so
-#: model:ir.model,name:sync_so.model_res_currency
-msgid "Currency"
-msgstr "Currency"
+#: sql_constraint:purchase.order.line:0
+#: sql_constraint:sale.order.line:0
+msgid "Product Quantity must be greater than zero."
+msgstr "La quantité de produits doit être supérieure à zéro."
 
 #. module: sync_so
 #: model:ir.model,name:sync_so.model_cost_center_distribution_line
@@ -389,9 +320,39 @@ msgid "cost.center.distribution.line"
 msgstr "cost.center.distribution.line"
 
 #. module: sync_so
-#: constraint:sale.order:0
-msgid "You cannot validate this sale order because it contains a line with an inactive product"
-msgstr "You cannot validate this sale order because it contains a line with an inactive product"
+#: model:ir.model,name:sync_so.model_account_bank_statement
+msgid "Bank Statement"
+msgstr "Relevé bancaire"
+
+#. module: sync_so
+#: constraint:account.analytic.account:0
+msgid "Error! You can not create recursive analytic accounts."
+msgstr "Erreur ! Vous ne pouvez pas créer de comptes analytiques récursifs."
+
+#. module: sync_so
+#: constraint:account.target.costcenter:0
+msgid "This cost centre is already defined as the PO/FO reference in another proprietary instance."
+msgstr "This cost centre is already defined as the PO/FO reference in another proprietary instance."
+
+#. module: sync_so
+#: model:ir.model,name:sync_so.model_purchase_order
+msgid "Purchase Order"
+msgstr "Bon de Commande"
+
+#. module: sync_so
+#: constraint:account.analytic.account:0
+msgid "You have to use a Normal account type and Cost Center category for FX gain/loss!"
+msgstr "Vous devez utiliser un type de compte Normal et catégorie de centre de cout Normal pour les gains/pertes de change! "
+
+#. module: sync_so
+#: sql_constraint:product.asset:0
+msgid "Asset Code must be unique per instance and per product!"
+msgstr "Asset Code must be unique per instance and per product!"
+
+#. module: sync_so
+#: constraint:product.product:0
+msgid "Constraint error on Kit Product."
+msgstr "Erreur de Contrainte sur le produit Kit"
 
 #. module: sync_so
 #: model:ir.model,name:sync_so.model_account_journal
@@ -399,53 +360,92 @@ msgid "Journal"
 msgstr "Journal"
 
 #. module: sync_so
+#: model:ir.model,name:sync_so.model_stock_production_lot
+msgid "Production lot"
+msgstr "Lot de Production"
+
+#. module: sync_so
+#: constraint:stock.picking:0
+msgid "Wrong reason type for an OUT created from scratch."
+msgstr "Mauvais type de motif pour une livraison OUT créée à partir de rien."
+
+#. module: sync_so
+#: constraint:res.currency:0
+msgid "Another currency have the same name."
+msgstr "Another currency have the same name."
+
+#. module: sync_so
+#: model:ir.model,name:sync_so.model_res_currency
+msgid "Currency"
+msgstr "Devises"
+
+#. module: sync_so
 #: constraint:product.product:0
-#: constraint:sale.order.line:0
-msgid "You must select on order procurement method for Service with Reception products."
-msgstr "You must select on order procurement method for Service with Reception products."
+msgid "If you select \"Non-stockable\" as product type then you have to select \"Make to order\" as procurement method"
+msgstr "Si vous sélectionnez \"Non stockable\" comme type de produit, vous devez sélectionner \"Faire sur commande\" comme méthode d'acquisition"
 
 #. module: sync_so
-#: model:ir.model,name:sync_so.model_account_fiscalyear
-msgid "Fiscal Year"
-msgstr "Fiscal Year"
+#: sql_constraint:account.bank.statement:0
+msgid "You cannot have a register on the same period and the same journal!"
+msgstr "Vous ne pouvez pas avoir un registre sur la même période et le même journal !"
 
 #. module: sync_so
-#: constraint:account.fiscalyear:0
-msgid "Error! You cannot define overlapping fiscal years"
-msgstr "Error! You cannot define overlapping fiscal years"
+#: model:ir.module.module,shortdesc:sync_so.module_meta_information
+msgid "Synchronization Sales order"
+msgstr "Synchronization Sales order"
 
 #. module: sync_so
-#: constraint:account.target.costcenter:0
-msgid "Another cost centre is already defined as the PO/FO reference in this proprietary instance."
-msgstr "Another cost centre is already defined as the PO/FO reference in this proprietary instance."
+#: constraint:account.period:0
+msgid "Invalid period ! Some periods overlap or the date period is not in the scope of the fiscal year. "
+msgstr "Période incorrecte ! Certaines périodes se chevauchent ou la date de la période n'est pas incluse dans l'exercice comptable. "
 
 #. module: sync_so
-#: sql_constraint:res.currency:0
-msgid "The currency name exists already in the system!"
-msgstr "The currency name exists already in the system!"
+#: model:ir.model,name:sync_so.model_account_target_costcenter
+msgid "account.target.costcenter"
+msgstr "account.target.costcenter"
+
+#. module: sync_so
+#: constraint:account.analytic.account:0
+msgid "You can't delete an account which has this destination as default"
+msgstr "Vous ne pouvez pas supprimer un compte qui a cette destination par défaut"
+
+#. module: sync_so
+#: constraint:account.move.line:0
+msgid "You can not create move line on closed account."
+msgstr "Vous ne pouvez pas créer des écritures dans un journal clôturé."
+
+#. module: sync_so
+#: model:ir.model,name:sync_so.model_account_period
+msgid "Account period"
+msgstr "Compte - Période"
 
 #. module: sync_so
 #: sql_constraint:stock.production.lot:0
-msgid "The combination of serial number and internal reference must be unique !"
-msgstr "The combination of serial number and internal reference must be unique !"
+msgid "Batch name must be unique per instance and product!"
+msgstr "Batch name must be unique per instance and product!"
+
+#. module: sync_so
+#: field:sale.order,received:0
+msgid "Received by Client"
+msgstr "Reçu par le Client"
+
+#. module: sync_so
+#: constraint:stock.picking:0
+msgid "You cannot validate this document because it contains a line with an inactive product"
+msgstr "Vous ne pouvez pas valider ce document car il contient des lignes avec un produit inactif"
+
+#. module: sync_so
+#: constraint:account.target.costcenter:0
+msgid "Another cost centre is already defined as the budget consolidation in this proprietary instance."
+msgstr "Another cost centre is already defined as the budget consolidation in this proprietary instance."
 
 #. module: sync_so
 #: constraint:stock.production.lot:0
-msgid "You can't create a standard batch number for a product which is not batch mandatory. If the product is perishable, the system will create automatically an internal batch number on reception/inventory."
-msgstr "You can't create a standard batch number for a product which is not batch mandatory. If the product is perishable, the system will create automatically an internal batch number on reception/inventory."
+msgid "You can't create an internal Batch Number for a product which is batch managed or which is not perishable. If the product is batch managed, please create a standard batch number."
+msgstr "Vous ne pouvez pas créer un numéro de lot interne pour un produit qui est géré par lot ou qui n'est pas périssable. Si le produit est géré par lot, veuillez créer un numéro de lot standard.."
 
 #. module: sync_so
-#: constraint:msf.instance:0
-msgid "You cannot have the same move prefix than an active instance!"
-msgstr "You cannot have the same move prefix than an active instance!"
-
-#. module: sync_so
-#: model:ir.model,name:sync_so.model_account_bank_statement
-msgid "Bank Statement"
-msgstr "Bank Statement"
-
-#. module: sync_so
-#: model:ir.model,name:sync_so.model_product_product
-msgid "Product"
-msgstr "Product"
+#: constraint:purchase.order:0
+msgid "You must specify a Valid Till date."
+msgstr "Spécifiez une date de validité 'Valide Jusque'."
 

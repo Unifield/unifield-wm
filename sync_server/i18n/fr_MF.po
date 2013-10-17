@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.0.3\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2013-10-17 07:42+0000\n"
-"PO-Revision-Date: 2013-10-17 07:42+0000\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -145,11 +145,6 @@ msgstr "account.subscription"
 
 #. module: sync_server
 #: selection:sync_server.sync_rule.fallback_values,value:0
-msgid "stock.move"
-msgstr "stock.move"
-
-#. module: sync_server
-#: selection:sync_server.sync_rule.fallback_values,value:0
 msgid "financing.contract.donor.reporting.line"
 msgstr "financing.contract.donor.reporting.line"
 
@@ -271,6 +266,11 @@ msgstr "import.cell.data"
 
 #. module: sync_server
 #: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.move.memory.shipment.returnpacksfromshipment"
+msgstr "stock.move.memory.shipment.returnpacksfromshipment"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
 msgid "project.account.analytic.line"
 msgstr "project.account.analytic.line"
 
@@ -315,9 +315,14 @@ msgid "stock.move.scrap"
 msgstr "stock.move.scrap"
 
 #. module: sync_server
-#: selection:sync_server.sync_rule,direction:0
-msgid "Down"
-msgstr "Down"
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "memory.additionalitems"
+msgstr "memory.additionalitems"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "min.max.rules.report"
+msgstr "min.max.rules.report"
 
 #. module: sync_server
 #: selection:sync_server.sync_rule.fallback_values,value:0
@@ -448,8 +453,8 @@ msgstr "product.asset.type"
 
 #. module: sync_server
 #: selection:sync_server.sync_rule.fallback_values,value:0
-msgid "min.max.rules.report"
-msgstr "min.max.rules.report"
+msgid "hr.contract.msf"
+msgstr "hr.contract.msf"
 
 #. module: sync_server
 #: selection:sync_server.sync_rule.fallback_values,value:0
@@ -886,11 +891,6 @@ msgstr "hr.expat.employee.import"
 
 #. module: sync_server
 #: selection:sync_server.sync_rule.fallback_values,value:0
-msgid "incoming.import.xml.line"
-msgstr "incoming.import.xml.line"
-
-#. module: sync_server
-#: selection:sync_server.sync_rule.fallback_values,value:0
 msgid "account.move.line.reconcile.select"
 msgstr "account.move.line.reconcile.select"
 
@@ -976,6 +976,11 @@ msgid "stock.certificate.valuation"
 msgstr "stock.certificate.valuation"
 
 #. module: sync_server
+#: view:sync.server.entity:0
+msgid "Invalidate"
+msgstr "Invalidate"
+
+#. module: sync_server
 #: selection:sync_server.sync_rule.fallback_values,value:0
 msgid "wizard.invoice.date"
 msgstr "wizard.invoice.date"
@@ -1006,9 +1011,11 @@ msgid "procurement.supply.compute.all"
 msgstr "procurement.supply.compute.all"
 
 #. module: sync_server
-#: model:ir.ui.menu,name:sync_server.mon_menu
-msgid "Monitoring"
-msgstr "Monitoring"
+#: field:sync_server.message_rule,group_id:0
+#: view:sync_server.sync_rule:0
+#: field:sync_server.sync_rule,group_id:0
+msgid "Group"
+msgstr "Group"
 
 #. module: sync_server
 #: field:sync.server.message,destination:0
@@ -1323,9 +1330,9 @@ msgid "sync.server.update"
 msgstr "sync.server.update"
 
 #. module: sync_server
-#: selection:sync_server.sync_rule.fallback_values,value:0
-msgid "memory.additionalitems"
-msgstr "memory.additionalitems"
+#: selection:sync_server.sync_rule,direction:0
+msgid "Down"
+msgstr "Down"
 
 #. module: sync_server
 #: selection:sync_server.sync_rule.fallback_values,value:0
@@ -1379,9 +1386,9 @@ msgid "stock.replacement"
 msgstr "stock.replacement"
 
 #. module: sync_server
-#: view:sync.server.entity:0
-msgid "Invalidate"
-msgstr "Invalidate"
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "account.voucher.unreconcile"
+msgstr "account.voucher.unreconcile"
 
 #. module: sync_server
 #: selection:sync_server.sync_rule.fallback_values,value:0
@@ -1588,9 +1595,9 @@ msgid "field.orders.setup"
 msgstr "field.orders.setup"
 
 #. module: sync_server
-#: selection:sync_server.sync_rule.fallback_values,value:0
-msgid "stock.move.memory.shipment.returnpacksfromshipment"
-msgstr "stock.move.memory.shipment.returnpacksfromshipment"
+#: model:ir.ui.menu,name:sync_server.mon_menu
+msgid "Monitoring"
+msgstr "Surveillance"
 
 #. module: sync_server
 #: field:sync_server.rule.validation.message,sync_rule:0
@@ -1628,11 +1635,6 @@ msgstr "Updated"
 #: selection:sync_server.sync_rule.fallback_values,value:0
 msgid "res.config.installer"
 msgstr "res.config.installer"
-
-#. module: sync_server
-#: selection:sync_server.sync_rule.fallback_values,value:0
-msgid "currency.setup"
-msgstr "currency.setup"
 
 #. module: sync_server
 #: selection:sync_server.sync_rule.fallback_values,value:0
@@ -2132,6 +2134,11 @@ msgid "procurement.rules.report"
 msgstr "procurement.rules.report"
 
 #. module: sync_server
+#: model:ir.model,name:sync_server.model_ir_model_fields
+msgid "Fields"
+msgstr "Champs"
+
+#. module: sync_server
 #: view:sync.server.update:0
 msgid "Record"
 msgstr "Record"
@@ -2233,8 +2240,8 @@ msgstr "msf.budget.tools"
 
 #. module: sync_server
 #: selection:sync_server.sync_rule.fallback_values,value:0
-msgid "hr.department"
-msgstr "hr.department"
+msgid "incoming.import.xml.line"
+msgstr "incoming.import.xml.line"
 
 #. module: sync_server
 #: selection:sync_server.sync_rule.fallback_values,value:0
@@ -2328,13 +2335,18 @@ msgstr "Generating Rule"
 
 #. module: sync_server
 #: selection:sync_server.sync_rule.fallback_values,value:0
-msgid "mission.stock.wizard"
-msgstr "mission.stock.wizard"
+msgid "currency.setup"
+msgstr "currency.setup"
 
 #. module: sync_server
 #: selection:sync_server.sync_rule.fallback_values,value:0
 msgid "wizard.open.empty.cashbox"
 msgstr "wizard.open.empty.cashbox"
+
+#. module: sync_server
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "mission.stock.wizard"
+msgstr "mission.stock.wizard"
 
 #. module: sync_server
 #: code:addons/sync_server/rules.py:666
@@ -2374,7 +2386,6 @@ msgid "Select Forced Values"
 msgstr "Select Forced Values"
 
 #. module: sync_server
-#: model:ir.ui.menu,name:sync_server.sync_menu
 #: view:sync.server.update:0
 msgid "Synchronization"
 msgstr "Synchronization"
@@ -2425,8 +2436,6 @@ msgid "res.users"
 msgstr "res.users"
 
 #. module: sync_server
-#: model:ir.actions.act_window,name:sync_server.group_action
-#: model:ir.ui.menu,name:sync_server.group_menu
 #: view:sync.server.entity:0
 #: field:sync.server.entity,group_ids:0
 msgid "Groups"
@@ -2446,6 +2455,12 @@ msgstr "Ok"
 #: selection:sync_server.sync_rule.fallback_values,value:0
 msgid "wizard.compare.rfq.line"
 msgstr "wizard.compare.rfq.line"
+
+#. module: sync_server
+#: model:ir.actions.act_window,name:sync_server.group_action
+#: model:ir.ui.menu,name:sync_server.group_menu
+msgid "Groups"
+msgstr "Groupes"
 
 #. module: sync_server
 #: selection:sync_server.sync_rule.fallback_values,value:0
@@ -2622,6 +2637,11 @@ msgstr "res.config"
 #: selection:sync_server.sync_rule.fallback_values,value:0
 msgid "account.payment.term.line"
 msgstr "account.payment.term.line"
+
+#. module: sync_server
+#: model:ir.ui.menu,name:sync_server.sync_menu
+msgid "Synchronization"
+msgstr "Synchronisation"
 
 #. module: sync_server
 #: selection:sync_server.sync_rule.fallback_values,value:0
@@ -2814,8 +2834,8 @@ msgstr "hq.analytic.reallocation"
 
 #. module: sync_server
 #: selection:sync_server.sync_rule.fallback_values,value:0
-msgid "hr.contract.msf"
-msgstr "hr.contract.msf"
+msgid "hr.department"
+msgstr "hr.department"
 
 #. module: sync_server
 #: code:addons/sync_server/message.py:66
@@ -2998,11 +3018,6 @@ msgstr "Group Name"
 #: selection:sync_server.sync_rule.fallback_values,value:0
 msgid "payroll.setup"
 msgstr "payroll.setup"
-
-#. module: sync_server
-#: selection:sync_server.sync_rule.fallback_values,value:0
-msgid "account.voucher.unreconcile"
-msgstr "account.voucher.unreconcile"
 
 #. module: sync_server
 #: selection:sync_server.sync_rule.fallback_values,value:0
@@ -3390,7 +3405,6 @@ msgid "account.account.type"
 msgstr "account.account.type"
 
 #. module: sync_server
-#: model:ir.model,name:sync_server.model_ir_model_fields
 #: view:sync.server.update:0
 #: field:sync.server.update,fields:0
 msgid "Fields"
@@ -3430,11 +3444,9 @@ msgid "Synchronization Monitor"
 msgstr "Synchronization Monitor"
 
 #. module: sync_server
-#: field:sync_server.message_rule,group_id:0
-#: view:sync_server.sync_rule:0
-#: field:sync_server.sync_rule,group_id:0
-msgid "Group"
-msgstr "Group"
+#: selection:sync_server.sync_rule.fallback_values,value:0
+msgid "stock.move"
+msgstr "stock.move"
 
 #. module: sync_server
 #: selection:sync_server.sync_rule.fallback_values,value:0
