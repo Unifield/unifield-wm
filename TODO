@@ -1,0 +1,8 @@
+# manage_syncdb.sh
+
+  * ask user to confirm for DB restore
+  * ask user to confirm for DB drop
+
+# export.sh
+
+No task for the moment

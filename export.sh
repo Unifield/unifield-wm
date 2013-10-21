@@ -36,9 +36,25 @@ project_count=3
 today=`date +'%Y-%m-%d'`
 fdoy="`date +'%Y'`-01-01" # first day of year
 
+# Args
+ARCHIVE=1
+
 #####
 ## FUNCTIONS
 ###
+
+usage() {
+  cat << EOF
+usage: $PROGRAM [command]
+
+This script helps to create synchronization environments.
+
+COMMANDS:
+help        show this help message
+all         launch a server, the MKDB script and create an archive of the result (tar.xz extension)
+noarchive   launch a server and the MKDB script without any archive
+EOF
+}
 
 error_and_exit() {
   echo -e $1
@@ -78,6 +94,36 @@ pre_process_db() {
 #####
 ## TESTS
 ###
+
+# Check params
+if [ $# -lt 1 ]; then
+  echo "Need 1 parameter"
+  usage
+  exit 1
+fi
+
+command=$1
+
+# Check command
+case $command in 
+  all)
+  echo "Command: ALL"
+  ;;
+  noarchive)
+  ARCHIVE=0
+  echo "Command: NOARCHIVE"
+  ;;
+  help)
+  echo "Command: HELP"
+  usage
+  exit 0
+  ;;
+  *)
+  echo "Command $command not found!"
+  usage
+  exit 1
+  ;;
+esac
 
 # Configuration file exists and is readable
 if ! [ -r $configfile ] ; then
@@ -205,41 +251,43 @@ cd ${current_dir} && ./mkdb.py || stop_server_and_exit ${pidfile}
 ## Stop server
 stop_server ${pidfile}
 
-## Save databases
-# create a list file containing all files to save
-list="${tmpdir}/${dbname}.list"
-if ! [ -a "$list" ] ; then
-  touch $list
-else
-  echo "" > $list
-fi
-# update each DB, save it in a dump file, add it to a list to save and drop DB
-for db in `psql template1 -t -c "SELECT datname from pg_database where datname ilike '${dbname}_%';"`; do
-  pre_process_db "$db"
-  # save DB
-  dumpfile="${db}.dump"
-  if [ -a "$dumpfile" ] ; then
-    error_and_exit "$dumpfile already exists! Aborted."
+if [ "$ARCHIVE" == 1 ] ; then
+  ## Save databases
+  # create a list file containing all files to save
+  list="${tmpdir}/${dbname}.list"
+  if ! [ -a "$list" ] ; then
+    touch $list
+  else
+    echo "" > $list
   fi
-  echo -e -n "Saving '$db' to $dumpfile: "
-  pg_dump -Fc $db > $dumpfile
-  echo "$dumpfile" >> ${list}
-  dropdb $db
-  echo "DONE."
-done
+  # update each DB, save it in a dump file, add it to a list to save and drop DB
+  for db in `psql template1 -t -c "SELECT datname from pg_database where datname ilike '${dbname}_%';"`; do
+    pre_process_db "$db"
+    # save DB
+    dumpfile="${db}.dump"
+    if [ -a "$dumpfile" ] ; then
+      error_and_exit "$dumpfile already exists! Aborted."
+    fi
+    echo -e -n "Saving '$db' to $dumpfile: "
+    pg_dump -Fc $db > $dumpfile
+    echo "$dumpfile" >> ${list}
+    dropdb $db
+    echo "DONE."
+  done
 
-## Add some file into list file to archive
-echo "manage_syncdb.sh" >> ${list}
-echo "manage_syncdbrc" >> ${list}
+  ## Add some file into list file to archive
+  echo "manage_syncdb.sh" >> ${list}
+  echo "manage_syncdbrc" >> ${list}
 
-## Create archive
-echo -n "Creating archive: "
-archive="`date +'%Y%m%d'`_${dbname}.tar.xz"
-tar cfJ $archive `cat $list|tr -s '\n' ' '` || error_and_exit "An error occured to create archive: $archive."
-echo "$archive DONE."
+  ## Create archive
+  echo -n "Creating archive: "
+  archive="`date +'%Y%m%d'`_${dbname}.tar.xz"
+  tar cfJ $archive `cat $list|tr -s '\n' ' '` || error_and_exit "An error occured to create archive: $archive."
+  echo "$archive DONE."
 
-## Delete all DB dumps
-rm -f *.dump
+  ## Delete all DB dumps
+  rm -f *.dump
+fi
 
 ########################
 ## WORK IN PROGRESS
