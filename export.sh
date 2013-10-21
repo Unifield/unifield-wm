@@ -48,6 +48,7 @@ usage() {
 usage: $PROGRAM [command]
 
 This script helps to create synchronization environments.
+See exportrc file to see which params can be changed.
 
 COMMANDS:
 help        show this help message
