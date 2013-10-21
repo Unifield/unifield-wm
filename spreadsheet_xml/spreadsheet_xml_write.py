@@ -10,8 +10,24 @@ from report import report_sxw
 
 from mako.template import Template
 from mako import exceptions
+from mako import filters
 from tools.misc import file_open
 import pooler
+import re
+
+xml_escapes = {
+    '&' : '&amp;',
+    '>' : '&gt;',
+    '<' : '&lt;',
+    '"' : '&#34;',   # also &quot; in html-only
+    "'" : '&#39;',    # also &apos; in html-only
+    "\n": '&#10;'
+}
+
+# TODO remove |x on each mako template, field.preprocess ?
+def xml_escape(string):
+    return re.sub(r"([&<\"'>\n])", lambda m: xml_escapes[m.group()], string)
+filters.xml_escape = xml_escape
 
 class SpreadsheetReport(WebKitParser):
     _fields_process = {
@@ -68,12 +84,12 @@ class SpreadsheetReport(WebKitParser):
         return (a[0], 'xls')
 
 
-
 class SpreadsheetCreator(object):
     def __init__(self, title, headers, datas):
         self.headers = headers
         self.datas = datas
         self.title = title
+
 
     def get_xml(self, default_filters=[]):
         f, filename = file_open('addons/spreadsheet_xml/report/spreadsheet_writer_xls.mako', pathinfo=True)
