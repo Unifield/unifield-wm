@@ -140,9 +140,13 @@ class account_analytic_line(osv.osv):
         
         # UF-2014: add checks for sync creation on moves, move lines and analytic lines
         if vals.get('date', False):
-            period = self.pool.get('account.period').find(cr, uid, vals['date'], context=context)
-            if period and period.state != 'draft':
-                raise osv.except_osv(_('Error'), _('Period \'%s\' is not open!') % period.name)
+            period_ids = self.pool.get('account.period').search(cr, uid, [('date_start','<=',vals['date']),
+                                                                          ('date_stop','>=',vals['date']),
+                                                                          ('special', '=', False)], context=context)
+            if len(period_ids) > 0:
+                period = self.pool.get('account.period').browse(cr, uid, period_ids[0], context=context)
+                if period and period.state != 'draft':
+                    raise osv.except_osv(_('Error'), _('Period \'%s\' is not open!') % period.name)
             
         res = super(account_analytic_line, self).write(cr, uid, ids, vals, context=context)
         self._check_document_date(cr, uid, ids)
