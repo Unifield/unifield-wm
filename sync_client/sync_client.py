@@ -89,9 +89,10 @@ class BackgroundProcess(Thread):
         finally:
             cr.close()
 
-def sync_process(step='status', need_connection=True, defaults_logger={}):
+def sync_process(step='status', need_connection=True, defaults_logger=None):
     is_step = not (step == 'status')
-
+    if defaults_logger is None:
+        defaults_logger = {}
     def decorator(fn):
 
         @functools.wraps(fn)
@@ -120,9 +121,8 @@ def sync_process(step='status', need_connection=True, defaults_logger={}):
                 # we have to make the log
                 if make_log:
                     # get a whole new logger from sync.monitor object
-                    context['logger'] = logger = \
-                        self.pool.get('sync.monitor').get_logger(cr, uid, defaults_logger, context=context)
-
+                    logger = self.pool.get('sync.monitor').get_logger(cr, uid, defaults_logger, context=dict(context))
+                    context['logger'] = logger
                     if need_connection:
                         # Check if connection is up
                         if not self.pool.get('sync.client.sync_server_connection').is_connected:

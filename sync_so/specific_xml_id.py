@@ -175,7 +175,7 @@ class account_target_costcenter(osv.osv):
             return res
         return super(account_target_costcenter, self).get_destination_name(cr, uid, ids, dest_field, context=context)
     
-    def create(self, cr, uid, vals, context={}):
+    def create(self, cr, uid, vals, context=None):
         res_id = super(account_target_costcenter, self).create(cr, uid, vals, context=context)
         # create lines in instance's children
         if 'instance_id' in vals:

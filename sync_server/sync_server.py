@@ -119,7 +119,9 @@ class entity(osv.osv):
                 res[entity.id] = _('Inactive')
         return res
 
-    def set_activity(self, cr, uid, entity, activity, context={}):
+    def set_activity(self, cr, uid, entity, activity, context=None):
+        if context is None:
+            context = {}
         now = datetime.now()
         self._activity_pool[entity.identifier] = (activity, now)
         no_update = dict(context, update=False)

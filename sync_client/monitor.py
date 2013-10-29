@@ -25,7 +25,10 @@ import tools
 
 
 class MonitorLogger(object):
-    def __init__(self, cr, uid, defaults={}, context=None):
+    def __init__(self, cr, uid, defaults=None, context=None):
+        if defaults is None:
+            defaults = {}
+
         db, pool = pooler.get_db_and_pool(cr.dbname)
         self.monitor = pool.get('sync.monitor')
         self.cr = db.cursor()
@@ -112,7 +115,7 @@ class sync_monitor(osv.osv):
     def _get_default_sequence_number(self, cr, uid, context=None):
         return int(self.pool.get('ir.sequence').get(cr, uid, 'sync.monitor'))
 
-    def get_logger(self, cr, uid, defaults={}, context=None):
+    def get_logger(self, cr, uid, defaults=None, context=None):
         return MonitorLogger(cr, uid, defaults=defaults, context=context)
 
     _columns = {
