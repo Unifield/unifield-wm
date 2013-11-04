@@ -1184,7 +1184,7 @@ class product_pricelist_mea(osv.osv):
                 version_obj.write(cr, uid, [new_version], {'active': True, 'name': data['form']['name']})
                 new_items = self._create_item(cr, uid, data, new_version, 'jaune',context=context)
 
-            self.write(cr, uid, ids, {'state': 'done'})
+        self.write(cr, uid, ids, {'state': 'done'})
 
         return True
 

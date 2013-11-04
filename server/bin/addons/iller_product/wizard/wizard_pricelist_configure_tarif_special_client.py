@@ -137,10 +137,18 @@ class wizard_configure_tarif_special_client(wizard.interface):
             # Si les 2 dates de début coincident, il suffit de modifier la date de début de la version qui englobe
             if v_data.get('date_start') == start_date:
                 version_obj.write(cr, uid, [version_ids[0]], {'date_start': n_end_date})
+                return version_obj.copy(cr, uid, version_ids[0], {'date_end': end_date,
+                                                                  'date_start': start_date,
+                                                                  'base_ok': False,
+                                                                  'name': name})
             else:
                 # Si les 2 dates de fin coincident, il suffit de modifier la date de fin de la version qui englobe
                 if v_data.get('date_end') == end_date:
                     version_obj.write(cr, uid, [version_ids[0]], {'date_end': n_start_date})
+                    return version_obj.copy(cr, uid, version_ids[0], {'date_end': end_date,
+                                                                      'start_date': start_date,
+                                                                      'base_ok': False,
+                                                                      'name': name})
                 else:
                     # Et sinon, la version qui englobe doit être scindée en deux
                     # 1) on garde la version actuelle en en modifiant la date de fin
@@ -151,6 +159,10 @@ class wizard_configure_tarif_special_client(wizard.interface):
                                                               'base_ok': False,
                                                               'name': v_data.get('name')})
                     version_obj.write(cr, uid, [next_id], {'active': True})
+                    return version_obj.copy(cr, uid, version_ids[0], {'date_start': start_date,
+                                                                      'date_end': end_date,
+                                                                      'base_ok': False,
+                                                                      'name': name})
 
         ## On cherche si la nouvelle version est à cheval sur deux versions existantes
         else:
@@ -162,16 +174,53 @@ class wizard_configure_tarif_special_client(wizard.interface):
                                                      ('date_end', '>=', end_date), \
                                                      ('date_start', '<=', end_date), \
                                                      ('date_start', '>=', start_date)])
+            new_before = False
+            new_after = False
+            before_date_end = False
+            after_date_start = False
             if before_ids:
+                before_date_end = version_obj.browse(cr, uid, before_ids[0], context=context).date_end
                 version_obj.write(cr, uid, before_ids, {'date_end': n_start_date})
+                new_before = version_obj.copy(cr, uid, before_ids[0], {'date_start': start_date,
+                                                                       'date_end': before_date_end,
+                                                                       'name': name,
+                                                                       'base_ok': False})
             if after_ids:
+                after_date_start = version_obj.browse(cr, uid, after_ids[0], context=context).date_start
                 version_obj.write(cr, uid, after_ids, {'date_start': n_end_date})
+                new_after = version_obj.copy(cr, uid, after_ids[0], {'date_start': after_date_start,
+                                                                     'date_end': end_date,
+                                                                     'name': name,
+                                                                     'base_ok': False})
 
-        return version_obj.copy(cr, uid, base_version, {'date_start': start_date,
-                                                        'date_end': end_date,
-                                                        'base_ok': False,
-                                                        'name': name})
+            if new_before and new_after:
+                new_version = version_obj.copy(cr, uid, base_version, {
+                                    'date_start': (datetime.strptime(before_date_end, '%Y-%m-%d')+timedelta(days=1)).strftime('%Y-%m-%d'),
+                                    'date_end': (datetime.strptime(after_start_date, '%Y-%m-%d')-timedelta(days=1)).strftime('%Y-%m-%d'),
+                                    'base_ok': False,
+                                    'name': name})
+                return [new_version, new_before, new_after]
+            elif new_before and not new_after:
+                new_version = version_obj.copy(cr, uid, base_version, {
+                                    'date_start': (datetime.strptime(before_date_end, '%Y-%m-%d')+timedelta(days=1)).strftime('%Y-%m-%d'),
+                                    'date_end': end_date,
+                                    'base_ok': False,
+                                    'name': name})
+                return [new_version, new_before]
+            elif new_after and not new_before:
+                new_version = version_obj.copy(cr, uid, base_version, {
+                                    'date_start': date_start,
+                                    'date_end': (datetime.strptime(after_start_date, '%Y-%m-%d')-timedelta(days=1)).strftime('%Y-%m-%d'),
+                                    'base_ok': False,
+                                    'name': name})
+                return [new_version, new_after]
 
+        new_version =  version_obj.copy(cr, uid, base_version, {'date_start': start_date,
+                                                                'date_end': end_date,
+                                                                'base_ok': False,
+                                                                'name': name})
+
+        return new_version
 
     def _define_new_tarif_special_client(self, cr, uid, data, pricelist_id, context):
         '''
@@ -269,14 +318,24 @@ class wizard_configure_tarif_special_client(wizard.interface):
             if product[2].get('sequence'):
                 sequence = product[2].get('sequence')
             p_data = prod_obj.read(cr, uid, product_id, ['name'])
-            item_id = item_obj.create(cr, uid, {'sequence': 1,
-                                                'name': p_data.get('name'), 
-                                                'product_id': product_id,
-                                                'base': base_special,
-                                                'price_discount' :-1.0,
-                                                'price_surcharge': product[2].get('prix_special'),
-                                                'price_version_id': version_id})
-            items.append(item_id)
+            item_ids = item_obj.search(cr, uid, [('sequence', '=', 1),
+                                                 ('price_version_id', '=', version_id),
+                                                 ('product_id', '=', product_id),
+                                                 ('base', '=', base_special),])
+            item_data = {'sequence': 1,
+                         'name': p_data.get('name'), 
+                         'product_id': product_id,
+                         'base': base_special,
+                         'price_discount' :-1.0,
+                         'price_surcharge': product[2].get('prix_special'),
+                         'price_version_id': version_id}
+
+            if item_ids:
+                item_obj.write(cr, uid, item_ids, item_data)
+                items.extend(item_ids)
+            else:
+                item_id = item_obj.create(cr, uid, item_data)
+                items.append(item_id)
 
         return items
 
@@ -311,7 +370,13 @@ class wizard_configure_tarif_special_client(wizard.interface):
         tarifs_speciaux_obj = pooler.get_pool(cr.dbname).get('product.tarifs.speciaux')
         tarif_special_client_obj = pooler.get_pool(cr.dbname).get('product.tarif.special.client')
 
-        if 'tarif_speciaux_id' in context:
+        tarifs_speciaux_ids = tarifs_speciaux_obj.search(cr, uid, [('client', '=', data['form']['client']),
+                                                                   ('name', '=', data['form']['title']),
+                                                                   ('start_date', '=', data['form']['start_date']),
+                                                                   ('end_date', '=', data['form']['end_date'])])
+        if tarifs_speciaux_ids:
+            tarifs_speciaux_id = tarifs_speciaux_ids[0]
+        elif 'tarif_speciaux_id' in context:
             tarifs_speciaux_id = context['tarif_speciaux_id']
         else:
             tarifs_speciaux_id = tarifs_speciaux_obj.create(cr, uid, {
@@ -322,8 +387,10 @@ class wizard_configure_tarif_special_client(wizard.interface):
                                                                      })
         products = data['form']['products']
 
-        if not 'tarif_speciaux_id' in context:
-            for product in products:
+        for product in products:
+            tarif_product = tarif_special_client_obj.search(cr, uid, [('product_id', '=', product[2].get('product_id')),
+                                                                      ('tarif_id', '=', tarifs_speciaux_id),])
+            if not tarif_product:
                 tarif_special_client = tarif_special_client_obj.create(cr, uid, {
                                                                                 'product_id': product[2].get('product_id'),
                                                                                 'tarif_id' : tarifs_speciaux_id,
@@ -332,16 +399,20 @@ class wizard_configure_tarif_special_client(wizard.interface):
       
         # Liste de stockage des items ids à insérer dans le m2o de pricelist item
         item_list = []
-        if not 'tarif_speciaux_id' in context:
-            ## On récupère ensuite la liste de prix initiale servant de base et on la duplique 
-            ## ou alors on part de la liste de prix déjà associée au client aucune liste de prix n'a été saisie
-            client = client_obj.browse(cr, uid, data['form']['client'])
+        ## On récupère ensuite la liste de prix initiale servant de base et on la duplique 
+        ## ou alors on part de la liste de prix déjà associée au client aucune liste de prix n'a été saisie
+        client = client_obj.browse(cr, uid, data['form']['client'])
+
+        if client.tarif_special_choice == 'oui' and client.property_product_pricelist.tarif_special_choice == 'oui':
+            pricelist_id = client.property_product_pricelist.id
+            new_pricelist = False
+        else:
             if data['form']['tarif_initial'] :
                 previous_pricelist = data['form']['tarif_initial']
                 pricelist_id = pricelist_obj.copy(cr, uid, data['form']['tarif_initial'], {'name': 'CSP %s %s' % (client.ref, client.name),
                                                                                             'tarif_special_choice': 'oui',
-                                                                                            'promo_choice': 'non',
-                                                                                            'mea_choice': 'non',
+                                                                                            'promo_choice': client.promo_choice,
+                                                                                            'mea_choice': client.mea_choice,
                                                                                           })
                 client_obj.write(cr, uid, client.id, {'property_product_pricelist': pricelist_id}, context=context)
                 new_pricelist = True
@@ -378,40 +449,33 @@ class wizard_configure_tarif_special_client(wizard.interface):
                 else:
                     pricelist_id = previous_pricelist = client.property_product_pricelist.id
                     new_pricelist = False
+ 
+        new_version = version_obj.search(cr, uid, [('tarifs_specs_id', '=', tarifs_speciaux_id)], context=context)
+        if new_version:
+            new_items = []
+            for new_vers in new_version:
+                new_items += self._create_item(cr, uid, data, new_vers, context=context)
+            item_list += new_items
         else:
-            # Si on appelle la méthode hors wizard, la liste de prix a déjà été écrite sur l'objet client, on la récupère
-            client = client_obj.browse(cr, uid, data['form']['client'])
-            pricelist_id = client.property_product_pricelist
-    
-        if not 'tarif_speciaux_id' in context:
             ## Création de la nouvelle version du tarif 
             if new_pricelist is True:
-                new_version = self._define_new_tarif_special_client(cr, uid, data, pricelist_id,context=context)
+                new_versions = [self._define_new_tarif_special_client(cr, uid, data, pricelist_id,context=context)]
             else:
-                new_version = self._redefine_existing_tarif_special_client(cr, uid, data, pricelist_id, context=context)
-            if new_version:
-
-                version_obj.write(cr, uid, [new_version], {'active': True, 'name': data['form']['title'], 'tarifs_specs_id':tarifs_speciaux_id})
-                new_items = self._create_item(cr, uid, data, new_version, context=context)
-                item_list += new_items
+                new_versions = self._redefine_existing_tarif_special_client(cr, uid, data, pricelist_id, context=context)
+            if isinstance(new_versions, (int, long)):
+                new_versions = [new_versions]
+            if new_versions:
+                for new_version in new_versions:
+                    version_obj.write(cr, uid, [new_version], {'active': True, 'name': data['form']['title'], 'tarifs_specs_id':tarifs_speciaux_id})
+                    new_items = self._create_item(cr, uid, data, new_version, context=context)
+                    item_list += new_items
                 
-                all_item_id = pricelist_item_obj.search(cr, uid, [('name', '=', 'Tous les produits'), ('price_version_id', '=', [new_version])], context=context)
-                record = pricelist_item_obj.browse(cr, uid, all_item_id, context=context);
-                if record:
-                    if record[0].price_version_id.pricelist_id.id != record[0].base_pricelist_id.id and new_pricelist:
-                        pricelist_item_obj.write(cr, uid, record[0].id, {'base_pricelist_id': previous_pricelist})
+                    all_item_id = pricelist_item_obj.search(cr, uid, [('name', '=', 'Tous les produits'), ('price_version_id', '=', [new_version])], context=context)
+                    record = pricelist_item_obj.browse(cr, uid, all_item_id, context=context);
+                    if record:
+                        if record[0].price_version_id.pricelist_id.id != record[0].base_pricelist_id.id and new_pricelist:
+                            pricelist_item_obj.write(cr, uid, record[0].id, {'base_pricelist_id': previous_pricelist})
 
-        else:
-            #On récupère l'id de la version du tarifs spéciaux en cours
-            new_version = version_obj.search(cr, uid, [('tarifs_specs_id','=',tarifs_speciaux_id)], context=context)
-
-            if new_version:
-                new_items = []
-                for new_vers in new_version:
-                    new_items += self._create_item(cr, uid, data, new_vers, context=context)
-                item_list += new_items
-
-                
         ## OK, arrivé à ce stade, la version des prix à tarifs spéciaux a été mise en place et a "poussé" les autres versions
         pricelist = pricelist_obj.browse(cr, uid, pricelist_id)
         # Boucle sur les produits pour pouvoir écrire le m2o de pricelist_item 
