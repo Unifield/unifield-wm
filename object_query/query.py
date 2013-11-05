@@ -510,10 +510,11 @@ class ir_fields(osv.osv):
                     model_obj = self.pool.get(obj.model)
                     for field in obj.field_id:
                         all_fields_ids.append(field.id)
-                        col = model_obj._columns[field.name]
-                        if hasattr(col, '_properties') and col._properties and not col.store:
-                            if a[0] == 'is_function' or not isinstance(col, fields.related):
-                                field_ids.append(field.id)
+                        if name in model_obj._columns:
+                            col = model_obj._columns[field.name]
+                            if hasattr(col, '_properties') and col._properties and not col.store:
+                                if a[0] == 'is_function' or not isinstance(col, fields.related):
+                                    field_ids.append(field.id)
                 
                 if (a[1] == '=' and a[2] == False) or (a[1] == '!=' and a[2] == True):
                     return [('id', 'not in', field_ids)]
