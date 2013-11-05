@@ -146,7 +146,7 @@ class wizard_configure_tarif_special_client(wizard.interface):
                 if v_data.get('date_end') == end_date:
                     version_obj.write(cr, uid, [version_ids[0]], {'date_end': n_start_date})
                     return version_obj.copy(cr, uid, version_ids[0], {'date_end': end_date,
-                                                                      'start_date': start_date,
+                                                                      'date_start': start_date,
                                                                       'base_ok': False,
                                                                       'name': name})
                 else:
@@ -196,7 +196,7 @@ class wizard_configure_tarif_special_client(wizard.interface):
             if new_before and new_after:
                 new_version = version_obj.copy(cr, uid, base_version, {
                                     'date_start': (datetime.strptime(before_date_end, '%Y-%m-%d')+timedelta(days=1)).strftime('%Y-%m-%d'),
-                                    'date_end': (datetime.strptime(after_start_date, '%Y-%m-%d')-timedelta(days=1)).strftime('%Y-%m-%d'),
+                                    'date_end': (datetime.strptime(after_date_start, '%Y-%m-%d')-timedelta(days=1)).strftime('%Y-%m-%d'),
                                     'base_ok': False,
                                     'name': name})
                 return [new_version, new_before, new_after]
@@ -209,8 +209,8 @@ class wizard_configure_tarif_special_client(wizard.interface):
                 return [new_version, new_before]
             elif new_after and not new_before:
                 new_version = version_obj.copy(cr, uid, base_version, {
-                                    'date_start': date_start,
-                                    'date_end': (datetime.strptime(after_start_date, '%Y-%m-%d')-timedelta(days=1)).strftime('%Y-%m-%d'),
+                                    'date_start': start_date,
+                                    'date_end': (datetime.strptime(after_date_start, '%Y-%m-%d')-timedelta(days=1)).strftime('%Y-%m-%d'),
                                     'base_ok': False,
                                     'name': name})
                 return [new_version, new_after]
