@@ -105,6 +105,7 @@ class hq_entries_import_wizard(osv.osv_memory):
         else:
             raise osv.except_osv(_('Error'), _('No account code found!'))
         # Retrieve Destination
+        aa_check_ids = []
         destination_id = False
         account = acc_obj.browse(cr, uid, account_ids[0])
         if account.user_type.code == 'expense':
@@ -119,6 +120,8 @@ class hq_entries_import_wizard(osv.osv_memory):
                     destination_id = dest_id[0]
                 else:
                     raise osv.except_osv(_('Error'), _('Destination "%s" doesn\'t exist!') % (destination,))
+            if destination_id:
+                aa_check_ids.append(destination_id)
         # Retrieve Cost Center and Funding Pool
         cc_id = False
         if cost_center:
@@ -126,6 +129,8 @@ class hq_entries_import_wizard(osv.osv_memory):
             if not cc_id:
                 raise osv.except_osv(_('Error'), _('Cost Center "%s" doesn\'t exist!') % (cost_center,))
             cc_id = cc_id[0]
+            if cc_id:
+                aa_check_ids.append(cc_id)
         # Retrieve Funding Pool
         if funding_pool:
             fp_id = anacc_obj.search(cr, uid, ['|', ('code', '=', funding_pool), ('name', '=', funding_pool)])
@@ -137,7 +142,31 @@ class hq_entries_import_wizard(osv.osv_memory):
                 fp_id = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'analytic_distribution', 'analytic_account_msf_private_funds')[1]
             except ValueError:
                 fp_id = 0
+        if fp_id:
+            aa_check_ids.append(fp_id)
         vals.update({'destination_id_first_value': destination_id, 'destination_id': destination_id, 'cost_center_id': cc_id, 'analytic_id': fp_id, 'cost_center_id_first_value': cc_id, 'analytic_id_first_value': fp_id,})
+        
+        # [utp-928] do not import line with a 
+        # 'Destination' or 'Cost Center' or 'Funding Pool', 
+        # of type 'view'
+        aa_check_errors = []
+        aa_check_category_map = {
+            'OC': 'Cost Center',
+            'FUNDING': 'Funding Pool',
+            'DEST': 'Destination',
+        }
+        if aa_check_ids:
+            for aa_r in anacc_obj.read(cr, uid, aa_check_ids,
+                                       ['code', 'name', 'type', 'category']):
+                if aa_r['type'] and aa_r['type'] == 'view':
+                    category = ''
+                    if aa_r['category']:
+                        if aa_r['category'] in aa_check_category_map:
+                            category += aa_check_category_map[aa_r['category']] + ' '
+                    aa_check_errors.append('%s"%s - %s" of type "view" is not allowed for import' % (category, aa_r['code'], aa_r['name']))
+        if aa_check_errors:
+            raise osv.except_osv(_('Error'), ", ".join(aa_check_errors))
+        
         # Fetch description
         if description:
             vals.update({'name': description})
