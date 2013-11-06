@@ -604,6 +604,7 @@ receivable, item have not been corrected, item have not been reversed and accoun
             first_analytic_line_id = False
             first_ana_ids = self.pool.get('account.analytic.line').search(cr, uid, [('move_id', '=', ml.id)])
             if first_ana_ids:
+#JFB why browse all ids if we need only the 1st ?
                 first_ana = self.pool.get('account.analytic.line').browse(cr, uid, first_ana_ids)[0]
                 if first_ana.last_corrected_id:
                     first_analytic_line_id = first_ana.last_corrected_id.id
