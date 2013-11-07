@@ -86,12 +86,20 @@ class hq_entries_import_wizard(osv.osv_memory):
             raise osv.except_osv(_('Warning'), _('More than one period found for given date: %s') % (line_date,))
         period_id = period_ids[0]
         vals.update({'period_id': period_id, 'date': line_date})
+        dd = False
         if document_date:
             try:
                 dd = self.parse_date(document_date)
                 vals.update({'document_date': dd})
             except ValueError, e:
                 raise osv.except_osv(_('Error'), _('Wrong format for date: %s: %s') % (document_date, e))
+        # [utp-928] 
+        # Make it impossible to import HQ entries where Doc Date > Posting Date,
+        # it will spare trouble at HQ entry validation.
+        if dd and line_date and dd > line_date:
+            raise osv.except_osv(_('Error'),
+                                  _('Document date "%s" is greater than Posting date "%s"') % (document_date, line_date)
+            )
         # Retrieve account
         if account_description:
             account_data = account_description.split(' ')
