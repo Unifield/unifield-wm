@@ -1,0 +1,1552 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* stock_override
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_override
+#: view:stock.location:0
+msgid "Stock Location"
+msgstr "Zone Stock"
+
+#. module: stock_override
+#: selection:stock.move.memory.in,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.out,integrity_status_func_stock_memory_move:0
+msgid "The first sequence must start with 1"
+msgstr "La première séquence doit commencer par un 1"
+
+#. module: stock_override
+#: selection:stock.move.memory.in,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.out,integrity_status_func_stock_memory_move:0
+msgid "No Batch Number/Expiry Date Needed"
+msgstr "Pas besoin de mentionner un numéro de lot/une date d'expiration"
+
+#. module: stock_override
+#: view:stock.move:0
+msgid "Closed"
+msgstr "Clôturé"
+
+#. module: stock_override
+#: model:ir.actions.report.xml,name:stock_override.stock_card_report_xls
+msgid "Stock card Excel Export"
+msgstr "Stock card Excel Export"
+
+#. module: stock_override
+#: model:ir.module.module,shortdesc:stock_override.module_meta_information
+msgid "Stock override"
+msgstr "Stock de Remplacement"
+
+#. module: stock_override
+#: help:stock.picking,fake_type:0
+msgid "Shipping type specify, goods coming in or going out."
+msgstr "Shipping type specify, goods coming in or going out."
+
+#. module: stock_override
+#: field:stock.location,virtual_location:0
+msgid "Virtual location"
+msgstr "Zone Virtuelle"
+
+#. module: stock_override
+#: view:stock.card.wizard:0
+msgid "Stock card parameters"
+msgstr "Stock card parameters"
+
+#. module: stock_override
+#: field:stock.picking,fake_type:0
+msgid "Shipping Type"
+msgstr "Shipping Type"
+
+#. module: stock_override
+#: model:ir.model,name:stock_override.model_stock_partial_picking
+msgid "Partial Picking"
+msgstr "Piquage Partiel"
+
+#. module: stock_override
+#: constraint:stock.location:0
+msgid "You cannot define a quarantine location as chained location."
+msgstr "Vous ne pouvez pas définir une Zone \"Quarantaine\" en tant que Zone enchaînée."
+
+#. module: stock_override
+#: selection:stock.move.memory.in,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.out,integrity_status_func_stock_memory_move:0
+msgid "No Asset Needed"
+msgstr "Pas besoin de mentionner un Bien"
+
+#. module: stock_override
+#: selection:stock.picking,partner_type_stock_picking:0
+msgid "Inter-section"
+msgstr "Inter-sections"
+
+#. module: stock_override
+#: field:report.stock.move,comment:0
+msgid "Comment"
+msgstr "Commentaire"
+
+#. module: stock_override
+#: model:ir.model,name:stock_override.model_stock_analyze_view
+msgid "Stock analyze view"
+msgstr "Affichage de l'analyse du stock"
+
+#. module: stock_override
+#: code:addons/stock_override/stock.py:125
+#, python-format
+msgid "is closed."
+msgstr "est fermé."
+
+#. module: stock_override
+#: report:delivery.order:0
+#: report:internal.move:0
+msgid "Approved by :"
+msgstr "Approved by :"
+
+#. module: stock_override
+#: model:ir.model,name:stock_override.model_stock_picking
+msgid "Picking List"
+msgstr "Liste de Piquage"
+
+#. module: stock_override
+#: report:destruction.location:0
+msgid "NP"
+msgstr "SP (NP)"
+
+#. module: stock_override
+#: code:addons/stock_override/wizard/stock_partial_picking.py:114
+#, python-format
+msgid "You cannot add any new move while validating the picking, rather you can split the lines prior to validation!"
+msgstr "Vous ne pouvez ajouter aucun nouveau mouvement tout en validant le prélèvement. Veuillez plutôt fractionner les lignes avant Validation!"
+
+#. module: stock_override
+#: model:stock.location,name:stock_override.stock_location_logistic
+msgid "LOG"
+msgstr "LOG"
+
+#. module: stock_override
+#: selection:stock.picking,fake_type:0
+msgid "Sending Goods"
+msgstr "Sending Goods"
+
+#. module: stock_override
+#: report:delivery.order:0
+#: report:internal.move:0
+msgid "Line"
+msgstr "Line"
+
+#. module: stock_override
+#: report:delivery.order:0
+#: report:internal.move:0
+msgid "Origin :"
+msgstr "Origin :"
+
+#. module: stock_override
+#: field:stock.analyze.view,to_date:0
+msgid "To"
+msgstr "Au"
+
+#. module: stock_override
+#: report:internal.move:0
+msgid "State :"
+msgstr "State :"
+
+#. module: stock_override
+#: report:destruction.location:0
+#: field:report.stock.move,origin:0
+msgid "Origin"
+msgstr "Origine"
+
+#. module: stock_override
+#: report:destruction.location:0
+msgid "DG"
+msgstr "MD (DG)"
+
+#. module: stock_override
+#: field:report.stock.move,order_type:0
+msgid "Order Type"
+msgstr "Type de Commande"
+
+#. module: stock_override
+#: code:addons/stock_override/wizard/change_dest_location.py:54
+#, python-format
+msgid "The modification of the destination locations is only available for Internal moves."
+msgstr "The modification of the destination locations is only available for Internal moves."
+
+#. module: stock_override
+#: code:addons/stock_override/stock.py:229
+#, python-format
+msgid "those inactive products"
+msgstr "ces produits inactifs"
+
+#. module: stock_override
+#: selection:stock.move.memory.in,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.out,integrity_status_func_stock_memory_move:0
+msgid "Quantity must be greater than 0.0"
+msgstr "Quantité doit être supérieure à 0.0"
+
+#. module: stock_override
+#: constraint:stock.move:0
+#: constraint:stock.picking:0
+msgid "Wrong reason type for an OUT created from scratch."
+msgstr "Mauvais type de motif pour une livraison OUT créée à partir de rien."
+
+#. module: stock_override
+#: report:delivery.order:0
+#: report:internal.move:0
+msgid "Logistics / Supply :"
+msgstr "Logistics / Supply :"
+
+#. module: stock_override
+#: field:report.stock.move,prodlot_id:0
+msgid "Batch"
+msgstr "Lot"
+
+#. module: stock_override
+#: code:addons/stock_override/stock.py:456
+#: code:addons/stock_override/stock.py:1279
+#, python-format
+msgid "Missing partial picking data for move #%s"
+msgstr "Données manquantes sur le Prélèvement partiel du mouvement #%s"
+
+#. module: stock_override
+#: view:stock.move:0
+msgid "Picking Ref."
+msgstr "Réf. Piquage"
+
+#. module: stock_override
+#: code:addons/stock_override/stock.py:228
+#, python-format
+msgid "lines"
+msgstr "lignes"
+
+#. module: stock_override
+#: report:stock.card.report:0
+msgid "STOCK CARD"
+msgstr "STOCK CARD"
+
+#. module: stock_override
+#: code:addons/stock_override/stock.py:920
+#, python-format
+msgid "The product in line is inactive !"
+msgstr "Le produit sur la ligne est incatif !"
+
+#. module: stock_override
+#: selection:stock.move.memory.in,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.out,integrity_status_func_stock_memory_move:0
+msgid "The sequence overlaps previous one"
+msgstr "La séquence chevauche la précédente"
+
+#. module: stock_override
+#: report:delivery.order:0
+#: model:ir.actions.report.xml,name:stock_override.delivery_order
+msgid "Delivery Order"
+msgstr "Delivery Order"
+
+#. module: stock_override
+#: report:addons/stock_override/report/stock_card_report_xls.mako:153
+#: report:stock.card.report:0
+#: field:stock.card.wizard.line,qty_in:0
+msgid "Qty IN"
+msgstr "Qty IN"
+
+#. module: stock_override
+#: selection:stock.picking,fake_type:0
+msgid "Internal"
+msgstr "Internal"
+
+#. module: stock_override
+#: view:stock.move:0
+msgid "State"
+msgstr "Statut"
+
+#. module: stock_override
+#: code:addons/stock_override/stock.py:230
+#, python-format
+msgid "%s been inactivated. If you want to validate this document you have to remove/correct the %s containing %s (see red %s of the document)"
+msgstr "%s a été désactivé. Si vous voulez valider ce document vous devez supprimer/corriger les %s contenant %s (voir les %s en rouge)"
+
+#. module: stock_override
+#: field:stock.picking,shipment_ref:0
+msgid "Ship Reference"
+msgstr "Ship Reference"
+
+#. module: stock_override
+#: model:ir.actions.report.xml,name:stock_override.internal_move
+msgid "Internal Move"
+msgstr "Internal Move"
+
+#. module: stock_override
+#: selection:stock.move.memory.in,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.out,integrity_status_func_stock_memory_move:0
+msgid "A gap exist in the sequence"
+msgstr "Un écart existe dans la séquence"
+
+#. module: stock_override
+#: field:stock.move,expired_lot:0
+msgid "Lot expired"
+msgstr "Lot expired"
+
+#. module: stock_override
+#: selection:report.stock.move,order_type:0
+msgid "Donation before expiry"
+msgstr "Donation avant expiration"
+
+#. module: stock_override
+#: selection:stock.move.memory.in,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.out,integrity_status_func_stock_memory_move:0
+msgid "Weight is Missing"
+msgstr "Le poids est Manquant"
+
+#. module: stock_override
+#: view:stock.inventory.line.split:0
+#: view:stock.move.split:0
+msgid "Ues existing batches"
+msgstr "Utiliser Lots Existants"
+
+#. module: stock_override
+#: model:ir.model,name:stock_override.model_change_dest_location
+msgid "change.dest.location"
+msgstr "change.dest.location"
+
+#. module: stock_override
+#: selection:report.stock.move,order_type:0
+msgid "In Kind Donation"
+msgstr "Donation en Nature"
+
+#. module: stock_override
+#: field:change.dest.location,state:0
+msgid "State"
+msgstr "State"
+
+#. module: stock_override
+#: selection:stock.move.memory.in,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.out,integrity_status_func_stock_memory_move:0
+msgid "Asset is Missing"
+msgstr "Bien manquant"
+
+#. module: stock_override
+#: field:stock.card.wizard.line,doc_ref:0
+msgid "Doc. Ref."
+msgstr "Doc. Ref."
+
+#. module: stock_override
+#: selection:stock.move.memory.in,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.out,integrity_status_func_stock_memory_move:0
+msgid "Not Available"
+msgstr "Pas Disponible"
+
+#. module: stock_override
+#: report:internal.move:0
+msgid "Expected Move Date :"
+msgstr "Expected Move Date :"
+
+#. module: stock_override
+#: code:addons/stock_override/wizard/stock_partial_picking.py:108
+#, python-format
+msgid "Warning !"
+msgstr "Avertissement !"
+
+#. module: stock_override
+#: selection:report.stock.move,order_type:0
+msgid "Direct Purchase Order"
+msgstr "Bon de Commande Directe"
+
+#. module: stock_override
+#: model:stock.location,name:stock_override.stock_location_quarantine_analyze
+msgid "Quarantine (analyze)"
+msgstr "Quarantaine (analyse)"
+
+#. module: stock_override
+#: field:stock.picking,from_wkf:0
+msgid "From wkf"
+msgstr "Du Plan de Travail "
+
+#. module: stock_override
+#: code:addons/stock_override/stock.py:720
+#, python-format
+msgid "No %s journal found!"
+msgstr "Le système n'a pas trouvé de journal %s !"
+
+#. module: stock_override
+#: report:destruction.location:0
+msgid "/"
+msgstr "/"
+
+#. module: stock_override
+#: field:procurement.order,so_back_update_dest_pol_id_procurement_order:0
+msgid "Original purchase order line"
+msgstr "Ligne du bon de commande d'origine"
+
+#. module: stock_override
+#: field:stock.location,optional_loc:0
+msgid "Is an optional location ?"
+msgstr "Est-ce une zone optionnelle?"
+
+#. module: stock_override
+#: selection:stock.move.memory.in,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.out,integrity_status_func_stock_memory_move:0
+msgid "Too much quantity selected"
+msgstr "Trop de quantité sélectionnée "
+
+#. module: stock_override
+#: report:internal.move:0
+msgid "Back Order of :"
+msgstr "Back Order of :"
+
+#. module: stock_override
+#: report:delivery.order:0
+msgid "Delivery Address :"
+msgstr "Delivery Address :"
+
+#. module: stock_override
+#: report:delivery.order:0
+#: report:internal.move:0
+msgid "Asset"
+msgstr "Asset"
+
+#. module: stock_override
+#: report:internal.move:0
+msgid "Order Category :"
+msgstr "Order Category :"
+
+#. module: stock_override
+#: field:stock.move,processed_stock_move:0
+msgid "Processed Stock Move"
+msgstr "Mouvement de stock traité"
+
+#. module: stock_override
+#: code:addons/stock_override/wizard/change_dest_location.py:50
+#, python-format
+msgid "You must define an Internal move to launch this wizard on."
+msgstr "You must define an Internal move to launch this wizard on."
+
+#. module: stock_override
+#: code:addons/stock_override/stock.py:62
+#, python-format
+msgid "Data Insufficient !"
+msgstr "Données insuffisantes!"
+
+#. module: stock_override
+#: report:internal.move:0
+msgid "INTERNAL MOVE"
+msgstr "INTERNAL MOVE"
+
+#. module: stock_override
+#: view:change.dest.location:0
+msgid "Close"
+msgstr "Close"
+
+#. module: stock_override
+#: constraint:stock.move:0
+msgid "You cannot select Service Location as Source Location."
+msgstr "Vous ne pouvez pas sélectionner la Zone Service comme Zone Source"
+
+#. module: stock_override
+#: report:stock.card.report:0
+msgid "Stock Balance"
+msgstr "Stock Balance"
+
+#. module: stock_override
+#: report:destruction.location:0
+msgid "Note:"
+msgstr "Note :"
+
+#. module: stock_override
+#: model:ir.model,name:stock_override.model_stock_location
+#: field:stock.location.chained.options,location_id:0
+msgid "Location"
+msgstr "Zone"
+
+#. module: stock_override
+#: view:change.dest.location:0
+#: view:stock.card.wizard:0
+msgid "Cancel"
+msgstr "Cancel"
+
+#. module: stock_override
+#: code:addons/stock_override/wizard/change_dest_location.py:103
+#, python-format
+msgid "Line %s : The new destination location is the same as the source location of the move, so the destination location has not been changed for this move. \n"
+""
+msgstr "Line %s : The new destination location is the same as the source location of the move, so the destination location has not been changed for this move. \n"
+""
+
+#. module: stock_override
+#: selection:stock.move.memory.in,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.out,integrity_status_func_stock_memory_move:0
+msgid "Unit Price must be greater than 0.0"
+msgstr "Prix Unitaire doit être supérieur à 0.0"
+
+#. module: stock_override
+#: code:addons/stock_override/stock.py:771
+#, python-format
+msgid "No company currency found!"
+msgstr "Aucun devise de société trouvée!"
+
+#. module: stock_override
+#: report:stock.card.report:0
+msgid "To"
+msgstr "To"
+
+#. module: stock_override
+#: field:stock.move,from_dpo:0
+msgid "From DPO ?"
+msgstr "Du BC Directe ?"
+
+#. module: stock_override
+#: report:stock.card.report:0
+#: view:stock.card.wizard:0
+#: field:stock.card.wizard,location_id:0
+msgid "Location"
+msgstr "Location"
+
+#. module: stock_override
+#: report:destruction.location:0
+msgid "Project Name:"
+msgstr "Nom du projet :"
+
+#. module: stock_override
+#: model:ir.actions.act_window,name:stock_override.act_product_stock_card
+msgid "Stock Card"
+msgstr "Stock Card"
+
+#. module: stock_override
+#: report:internal.move:0
+msgid "Reason type :"
+msgstr "Reason type :"
+
+#. module: stock_override
+#: view:stock.inventory.line.split:0
+#: view:stock.move.split:0
+msgid "Split in batches"
+msgstr "Diviser en lots"
+
+#. module: stock_override
+#: selection:stock.move.memory.in,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.out,integrity_status_func_stock_memory_move:0
+msgid "Src Location is missing"
+msgstr "Zone Source est manquante"
+
+#. module: stock_override
+#: model:ir.model,name:stock_override.model_stock_move_memory_in
+msgid "stock.move.memory.in"
+msgstr "stock.move.memory.in"
+
+#. module: stock_override
+#: report:stock.card.report:0
+msgid "From"
+msgstr "From"
+
+#. module: stock_override
+#: field:report.stock.move,tracking_id:0
+msgid "Pack"
+msgstr "Colis"
+
+#. module: stock_override
+#: code:addons/stock_override/stock.py:971
+#, python-format
+msgid "You have to select a product UOM in the same category than the purchase UOM of the product !"
+msgstr "You have to select a product UOM in the same category than the purchase UOM of the product !"
+
+#. module: stock_override
+#: model:ir.actions.act_window,name:stock_override.action_view_stock_analyze_view
+#: view:stock.analyze.view:0
+msgid "Stock Analyze View"
+msgstr "Vue Analyse Stock"
+
+#. module: stock_override
+#: field:stock.move,dpo_id:0
+msgid "Direct PO"
+msgstr "BC directe"
+
+#. module: stock_override
+#: code:addons/stock_override/stock.py:230
+#: code:addons/stock_override/stock.py:260
+#: code:addons/stock_override/stock.py:763
+#: code:addons/stock_override/stock.py:765
+#: code:addons/stock_override/stock.py:971
+#, python-format
+msgid "Error"
+msgstr "Erreur"
+
+#. module: stock_override
+#: selection:stock.move.memory.in,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.out,integrity_status_func_stock_memory_move:0
+msgid "Batch Number is Missing"
+msgstr "Numéro de lot manquant"
+
+#. module: stock_override
+#: view:change.dest.location:0
+msgid "Change destination location"
+msgstr "Change destination location"
+
+#. module: stock_override
+#: report:destruction.location:0
+msgid "Name:"
+msgstr "Nom :"
+
+#. module: stock_override
+#: model:ir.model,name:stock_override.model_stock_invoice_onshipping
+msgid "Stock Invoice Onshipping"
+msgstr "Facture de Stock sur Expédition"
+
+#. module: stock_override
+#: field:stock.card.wizard,available_stock:0
+msgid "Available stock"
+msgstr "Available stock"
+
+#. module: stock_override
+#: report:addons/stock_override/report/stock_card_report_xls.mako:151
+#: report:stock.card.report:0
+msgid "Doc. Reference"
+msgstr "Doc. Reference"
+
+#. module: stock_override
+#: field:change.dest.location,warn_msg:0
+msgid "Warning message"
+msgstr "Warning message"
+
+#. module: stock_override
+#: selection:stock.move.memory.in,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.out,integrity_status_func_stock_memory_move:0
+msgid "Expiry Date is Missing"
+msgstr "Date d'Expiration Manquante"
+
+#. module: stock_override
+#: selection:stock.move.memory.in,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.out,integrity_status_func_stock_memory_move:0
+msgid "Does not exist in selected IN/OUT"
+msgstr "N'existe pas sous la sélection IN/OUT"
+
+#. module: stock_override
+#: code:addons/stock_override/stock.py:227
+#, python-format
+msgid "Some products have"
+msgstr "Certains produits ont"
+
+#. module: stock_override
+#: report:destruction.location:0
+msgid "----------------------------------------------------"
+msgstr "----------------------------------------------------"
+
+#. module: stock_override
+#: code:addons/stock_override/wizard/stock_partial_picking.py:108
+#, python-format
+msgid "Selected list to process cannot be empty."
+msgstr "La liste sélectionnée à traiter ne peut être vide."
+
+#. module: stock_override
+#: field:stock.location.chained.options,dest_location_id:0
+msgid "Destination Location"
+msgstr "Destination - Zone"
+
+#. module: stock_override
+#: view:stock.card.wizard:0
+msgid "Actions"
+msgstr "Actions"
+
+#. module: stock_override
+#: report:delivery.order:0
+#: report:internal.move:0
+msgid "Source Location"
+msgstr "Source Location"
+
+#. module: stock_override
+#: report:destruction.location:0
+msgid "Expired Date"
+msgstr "Date Expirée"
+
+#. module: stock_override
+#: field:stock.card.wizard,all_inout:0
+msgid "Show all IN/OUT"
+msgstr "Show all IN/OUT"
+
+#. module: stock_override
+#: model:ir.model,name:stock_override.model_stock_card_wizard_line
+msgid "Stock card line"
+msgstr "Stock card line"
+
+#. module: stock_override
+#: selection:stock.picking,partner_type_stock_picking:0
+msgid "Intermission"
+msgstr "Intermissions"
+
+#. module: stock_override
+#: field:procurement.order,from_yml_test:0
+#: field:stock.picking,from_yml_test:0
+msgid "Only used to pass addons unit test"
+msgstr "Seulement utilisé pour passer les addons unit test"
+
+#. module: stock_override
+#: model:ir.model,name:stock_override.model_procurement_order
+msgid "Procurement"
+msgstr "Approvisionnement"
+
+#. module: stock_override
+#: model:stock.location,name:stock_override.stock_location_quarantine_scrap
+msgid "Quarantine (before scrap)"
+msgstr "Quarantaine (avant scrap)"
+
+#. module: stock_override
+#: model:ir.module.module,description:stock_override.module_meta_information
+msgid "\n"
+"    Add hook to stock class and wizard\n"
+"    "
+msgstr "\n"
+"    Ajouter des hooks (crochets) à la catégorie de stock et à l'assistant "
+
+#. module: stock_override
+#: field:stock.move,from_wkf_line:0
+msgid "Internal use: from wkf"
+msgstr "Usage interne : de wkf"
+
+#. module: stock_override
+#: view:stock.card.wizard:0
+msgid "Moves"
+msgstr "Moves"
+
+#. module: stock_override
+#: code:addons/stock_override/wizard/stock_partial_picking.py:150
+#, python-format
+msgid "Can not process empty lines !"
+msgstr "Impossible de traiter des lignes vides !"
+
+#. module: stock_override
+#: model:ir.model,name:stock_override.model_stock_partial_move
+msgid "Partial Move"
+msgstr "Mouvement partiel"
+
+#. module: stock_override
+#: code:addons/stock_override/stock.py:763
+#, python-format
+msgid "No Intermission journal found!"
+msgstr "Aucun Journal intermission trouvé!"
+
+#. module: stock_override
+#: report:internal.move:0
+msgid "Actual Move Date"
+msgstr "Actual Move Date"
+
+#. module: stock_override
+#: report:delivery.order:0
+#: report:internal.move:0
+msgid "Product Name"
+msgstr "Product Name"
+
+#. module: stock_override
+#: model:ir.model,name:stock_override.model_report_stock_move
+msgid "Moves Statistics"
+msgstr "Statistiques des Mouvements"
+
+#. module: stock_override
+#: help:stock.move,dpo_id:0
+msgid "PO from where this stock move is sourced."
+msgstr "BC à partir duquel ce mouvement de stock est sourcé."
+
+#. module: stock_override
+#: constraint:stock.move:0
+msgid "You try to assign a lot which is not from the same product"
+msgstr "Vous essayez d'attribuer un lot qui ne correspond pas au même produit"
+
+#. module: stock_override
+#: field:stock.move,inventory_ids:0
+msgid "Created Moves"
+msgstr "Created Moves"
+
+#. module: stock_override
+#: code:addons/stock_override/wizard/change_dest_location.py:50
+#: code:addons/stock_override/wizard/change_dest_location.py:54
+#: field:stock.move,inactive_error:0
+#: field:stock.move,text_error:0
+#, python-format
+msgid "Error"
+msgstr "Error"
+
+#. module: stock_override
+#: report:internal.move:0
+msgid "Actual Receipt Date :"
+msgstr "Actual Receipt Date :"
+
+#. module: stock_override
+#: report:delivery.order:0
+#: report:internal.move:0
+#: field:report.stock.move,product_uom:0
+#: report:stock.card.report:0
+#: field:stock.card.wizard,uom_id:0
+msgid "UoM"
+msgstr "UoM"
+
+#. module: stock_override
+#: code:addons/stock_override/wizard/stock_partial_picking.py:132
+#, python-format
+msgid "Processing quantity %d %s for %s is larger than the available quantity in Batch Number %s (%d) !"
+msgstr "Processing quantity %d %s for %s is larger than the available quantity in Batch Number %s (%d) !"
+
+#. module: stock_override
+#: report:destruction.location:0
+msgid "Date:"
+msgstr "Date:"
+
+#. module: stock_override
+#: model:ir.model,name:stock_override.model_stock_move
+msgid "Stock Move"
+msgstr "Mouvement de Stock"
+
+#. module: stock_override
+#: code:addons/stock_override/stock.py:227
+#, python-format
+msgid "A product has"
+msgstr "Un produit a"
+
+#. module: stock_override
+#: field:stock.move,already_confirmed:0
+msgid "Already confirmed"
+msgstr "Déjà confirmé"
+
+#. module: stock_override
+#: selection:stock.move.memory.in,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.out,integrity_status_func_stock_memory_move:0
+msgid "Ok"
+msgstr "Ok"
+
+#. module: stock_override
+#: report:addons/stock_override/report/stock_card_report_xls.mako:157
+#: report:stock.card.report:0
+#: field:stock.card.wizard.line,notes:0
+msgid "Notes"
+msgstr "Notes"
+
+#. module: stock_override
+#: constraint:stock.picking:0
+msgid "You cannot validate this document because it contains a line with an inactive product"
+msgstr "Vous ne pouvez pas valider ce document car il contient des lignes avec un produit inactif"
+
+#. module: stock_override
+#: field:stock.move.memory.in,integrity_status_func_stock_memory_move:0
+#: field:stock.move.memory.out,integrity_status_func_stock_memory_move:0
+msgid " "
+msgstr " "
+
+#. module: stock_override
+#: field:stock.picking,update_version_from_in_stock_picking:0
+msgid "Update version following IN processing"
+msgstr "Mettre à jour la version à la suite du traitement ENTRANT"
+
+#. module: stock_override
+#: report:destruction.location:0
+msgid "Official Destruction Refrence:"
+msgstr "Référence destruction officielle :"
+
+#. module: stock_override
+#: view:stock.inventory.line.split:0
+#: view:stock.move.split:0
+msgid "Batch number"
+msgstr "Numéro de Lot"
+
+#. module: stock_override
+#: field:stock.card.wizard,from_date:0
+msgid "From date"
+msgstr "From date"
+
+#. module: stock_override
+#: view:change.dest.location:0
+msgid "Change location"
+msgstr "Change location"
+
+#. module: stock_override
+#: field:stock.picking,state_before_import:0
+msgid "State before import"
+msgstr "State before import"
+
+#. module: stock_override
+#: code:addons/stock_override/stock.py:260
+#, python-format
+msgid "You cannot cancel picking because stock move is in done state !"
+msgstr "You cannot cancel picking because stock move is in done state !"
+
+#. module: stock_override
+#: view:stock.move:0
+msgid "Reference"
+msgstr "Référence"
+
+#. module: stock_override
+#: code:addons/stock_override/stock.py:720
+#: code:addons/stock_override/stock.py:771
+#, python-format
+msgid "Warning"
+msgstr "Avertissement"
+
+#. module: stock_override
+#: report:addons/stock_override/report/stock_card_report_xls.mako:150
+#: report:delivery.order:0
+#: report:internal.move:0
+#: report:stock.card.report:0
+#: field:stock.card.wizard.line,date_done:0
+#: view:stock.move:0
+msgid "Date"
+msgstr "Date"
+
+#. module: stock_override
+#: help:report.stock.move,prodlot_id:0
+msgid "Batch number is used to put a serial number on the production"
+msgstr "Numéro de Lot utilisé pour mettre un numéro de série sur la production"
+
+#. module: stock_override
+#: view:change.dest.location:0
+msgid "New destination location"
+msgstr "New destination location"
+
+#. module: stock_override
+#: view:stock.analyze.view:0
+msgid "_Cancel"
+msgstr "Annuler"
+
+#. module: stock_override
+#: selection:stock.picking,partner_type_stock_picking:0
+msgid "Internal"
+msgstr "Interne"
+
+#. module: stock_override
+#: view:change.dest.location:0
+#: field:change.dest.location,picking_id:0
+msgid "Internal move"
+msgstr "Internal move"
+
+#. module: stock_override
+#: view:stock.move:0
+msgid "Extended Filters..."
+msgstr "Filtres étendus..."
+
+#. module: stock_override
+#: selection:stock.move.memory.in,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.out,integrity_status_func_stock_memory_move:0
+msgid "Negative Value"
+msgstr "Valeur Négative"
+
+#. module: stock_override
+#: code:addons/stock_override/wizard/stock_partial_picking.py:139
+#, python-format
+msgid "Processing quantity %d %s for %s is larger than the available quantity %d %s !"
+msgstr "Traitement quantité %d %s pour %s est plus grande que la quantité disponible %d %s !"
+
+#. module: stock_override
+#: report:delivery.order:0
+#: report:internal.move:0
+msgid "Name"
+msgstr "Name"
+
+#. module: stock_override
+#: constraint:stock.move:0
+msgid "Constraint error on Uom"
+msgstr "Constraint error on Uom"
+
+#. module: stock_override
+#: selection:stock.move.memory.in,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.out,integrity_status_func_stock_memory_move:0
+msgid "Assigned qty must be smaller or equal to required qty"
+msgstr "Qté affectée doit être plus petite ou égale à la quantité demandée"
+
+#. module: stock_override
+#: view:stock.location:0
+msgid "Chaining options"
+msgstr "Options de Chaînage"
+
+#. module: stock_override
+#: view:stock.move:0
+msgid "UoM"
+msgstr "UdM"
+
+#. module: stock_override
+#: selection:change.dest.location,state:0
+msgid "Finished"
+msgstr "Finished"
+
+#. module: stock_override
+#: selection:report.stock.move,order_type:0
+msgid "Standard donation"
+msgstr "Donation normale"
+
+#. module: stock_override
+#: report:addons/stock_override/report/stock_card_report_xls.mako:155
+#: report:stock.card.report:0
+#: field:stock.card.wizard.line,balance:0
+msgid "Balance"
+msgstr "Balance"
+
+#. module: stock_override
+#: report:destruction.location:0
+msgid "Qty"
+msgstr "Qté"
+
+#. module: stock_override
+#: field:stock.analyze.view,from_date:0
+msgid "From"
+msgstr "De"
+
+#. module: stock_override
+#: constraint:stock.location:0
+msgid "Quarantine Location can only have Quarantine Location or Views as parent location."
+msgstr "Zone \"Quarantaine\", on ne peut avoir de Zone \"Quarantaine ''  ou Vues qu'en tant que Zone \"Parent\"."
+
+#. module: stock_override
+#: report:addons/stock_override/report/stock_card_report_xls.mako:156
+#: report:stock.card.report:0
+#: field:stock.card.wizard.line,partner_id:0
+#: field:stock.card.wizard.line,src_dest:0
+msgid "Source/Destination"
+msgstr "Source/Destination"
+
+#. module: stock_override
+#: view:stock.card.wizard:0
+msgid "Lines"
+msgstr "Lines"
+
+#. module: stock_override
+#: selection:stock.move.memory.in,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.out,integrity_status_func_stock_memory_move:0
+msgid "Wrong Batch Number Type"
+msgstr "Mauvais type de numéro de lot"
+
+#. module: stock_override
+#: report:delivery.order:0
+#: report:destruction.location:0
+#: report:internal.move:0
+msgid "25 550 818 550"
+msgstr "25 550 818 550"
+
+#. module: stock_override
+#: field:stock.card.wizard.line,card_id:0
+msgid "Card"
+msgstr "Card"
+
+#. module: stock_override
+#: code:addons/stock_override/wizard/stock_partial_picking.py:193
+#, python-format
+msgid "No quantity to process, please fill quantity to process before processing the moves"
+msgstr "No quantity to process, please fill quantity to process before processing the moves"
+
+#. module: stock_override
+#: code:addons/stock_override/wizard/stock_partial_picking.py:188
+#, python-format
+msgid "Processing quantity %d for %s is larger than the available quantity in Batch Number %s (%d) !"
+msgstr "La quantié %d pour %s est plus grande que la quantité disponible du lot %s (%d) !"
+
+#. module: stock_override
+#: field:report.stock.move,move:0
+msgid "Move"
+msgstr "Transaction"
+
+#. module: stock_override
+#: help:procurement.order,from_yml_test:0
+#: help:stock.picking,from_yml_test:0
+msgid "Never set this field to true !"
+msgstr "Ne jamais régler ce champ sur vrai !"
+
+#. module: stock_override
+#: selection:report.stock.move,order_type:0
+msgid "Purchase List"
+msgstr "Liste d'Achats"
+
+#. module: stock_override
+#: code:addons/stock_override/wizard/change_dest_location.py:123
+#, python-format
+msgid "The destination location has been changed on all stock moves."
+msgstr "The destination location has been changed on all stock moves."
+
+#. module: stock_override
+#: field:stock.move,to_correct_ok:0
+msgid "Line to correct"
+msgstr "Line to correct"
+
+#. module: stock_override
+#: field:stock.move,inactive_product:0
+#: field:stock.picking,inactive_product:0
+msgid "Product is inactive"
+msgstr "Le produit est inactif"
+
+#. module: stock_override
+#: view:stock.inventory:0
+msgid "Batch inventory"
+msgstr "Inventaire Lot"
+
+#. module: stock_override
+#: code:addons/stock_override/wizard/change_dest_location.py:117
+#, python-format
+msgid "Line %s : The new destination location is not compatible with the product type, so the destination location has not been changed for this move. \n"
+""
+msgstr "Line %s : The new destination location is not compatible with the product type, so the destination location has not been changed for this move. \n"
+""
+
+#. module: stock_override
+#: selection:stock.picking,partner_type_stock_picking:0
+msgid "External"
+msgstr "Externe"
+
+#. module: stock_override
+#: report:stock.card.report:0
+msgid "Description"
+msgstr "Description"
+
+#. module: stock_override
+#: report:destruction.location:0
+msgid "Batch Number"
+msgstr "Numéro de Lot"
+
+#. module: stock_override
+#: model:ir.model,name:stock_override.model_stock_location_chained_options
+msgid "stock.location.chained.options"
+msgstr "stock.location.chained.options"
+
+#. module: stock_override
+#: code:addons/stock_override/stock.py:126
+#, python-format
+msgid "is shipped."
+msgstr "is shipped."
+
+#. module: stock_override
+#: view:stock.move:0
+msgid "Ready"
+msgstr "Prêt"
+
+#. module: stock_override
+#: report:delivery.order:0
+#: report:internal.move:0
+#: report:stock.card.report:0
+msgid "Expiry Date"
+msgstr "Expiry Date"
+
+#. module: stock_override
+#: field:report.stock.move,currency_id:0
+msgid "Currency"
+msgstr "Devises"
+
+#. module: stock_override
+#: field:change.dest.location,dest_location_id:0
+msgid "Destination location"
+msgstr "Destination location"
+
+#. module: stock_override
+#: field:stock.location,chained_options_ids:0
+msgid "Chained options"
+msgstr "Options en Chaîne (enchaînée)"
+
+#. module: stock_override
+#: code:addons/stock_override/stock.py:229
+#, python-format
+msgid "this inactive product"
+msgstr "ce produit inactif"
+
+#. module: stock_override
+#: view:stock.move:0
+msgid "Future"
+msgstr "Contrat à terme"
+
+#. module: stock_override
+#: code:addons/stock_override/stock.py:228
+#, python-format
+msgid "line"
+msgstr "ligne"
+
+#. module: stock_override
+#: report:delivery.order:0
+msgid "Expected Shipped Date :"
+msgstr "Expected Shipped Date :"
+
+#. module: stock_override
+#: view:stock.move:0
+msgid "Group By..."
+msgstr "Grouper Par..."
+
+#. module: stock_override
+#: code:addons/stock_override/stock.py:63
+#, python-format
+msgid "Please check the Quantity in Procurement Order(s), it should not be less than 1!"
+msgstr "Veuillez vérifier la Quantité de la(les)commande(s) d'approvisionnement : ne devrait pas être inférieure à 1 !"
+
+#. module: stock_override
+#: report:delivery.order:0
+msgid "Back Order ref :"
+msgstr "Back Order ref :"
+
+#. module: stock_override
+#: report:delivery.order:0
+#: report:internal.move:0
+msgid "Batch"
+msgstr "Batch"
+
+#. module: stock_override
+#: report:delivery.order:0
+msgid "Actual Shipped Date"
+msgstr "Actual Shipped Date"
+
+#. module: stock_override
+#: selection:stock.move.memory.in,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.out,integrity_status_func_stock_memory_move:0
+msgid "Need Expiry Date (Internal) not Batch Number (Standard)"
+msgstr "Mention nécessaire d'une date d'expiration (Interne) mais pas d'un numéro de lot (Standard)"
+
+#. module: stock_override
+#: view:stock.analyze.view:0
+msgid "(Keep empty to open the current situation. Adjust HH:MM to 00:00 to filter all resources of the day for the 'From' date and 23:59 for the 'To' date)"
+msgstr "(Veuillez garder vide pour ouvrir la situation actuelle. Ajustez HH:MM à 00:00 pour filtrer toute les ressources du jour pour la date \"A partir de\" et 23:59 pour la date \"Jusqu'à\")"
+
+#. module: stock_override
+#: field:stock.move,partner_id2:0
+#: field:stock.picking,partner_id2:0
+msgid "Partner"
+msgstr "Partenaire"
+
+#. module: stock_override
+#: selection:stock.picking,partner_type_stock_picking:0
+msgid "ESC"
+msgstr "ESC"
+
+#. module: stock_override
+#: report:delivery.order:0
+#: report:internal.move:0
+msgid "Receiver :"
+msgstr "Receiver :"
+
+#. module: stock_override
+#: help:report.stock.move,tracking_id:0
+msgid "Logistical shipping unit: pallet, box, pack ..."
+msgstr "Unité de Transport Logistique : palette, boîte, colis,..."
+
+#. module: stock_override
+#: field:stock.card.wizard,perishable:0
+msgid "Perishable"
+msgstr "Perishable"
+
+#. module: stock_override
+#: field:stock.card.wizard,to_date:0
+msgid "To date"
+msgstr "To date"
+
+#. module: stock_override
+#: selection:stock.move.memory.in,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.out,integrity_status_func_stock_memory_move:0
+msgid "Empty Picking Ticket"
+msgstr "Vider le Bon de Piquage"
+
+#. module: stock_override
+#: selection:stock.move.memory.in,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.out,integrity_status_func_stock_memory_move:0
+msgid "To value must be greater or equal to From value"
+msgstr " 'A Valeur' doit être supérieure ou égale à  'De Valeur'"
+
+#. module: stock_override
+#: view:stock.inventory.line.split:0
+#: view:stock.move.split:0
+msgid "Batch numbers"
+msgstr "Numéros de Lot"
+
+#. module: stock_override
+#: report:delivery.order:0
+#: report:internal.move:0
+msgid "Kit"
+msgstr "Kit"
+
+#. module: stock_override
+#: selection:stock.move.memory.in,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.out,integrity_status_func_stock_memory_move:0
+msgid "Selected Sequence is out of range"
+msgstr "Séquence Sélectionnée est hors limites"
+
+#. module: stock_override
+#: view:stock.move:0
+msgid "Source Location"
+msgstr "Zone Source"
+
+#. module: stock_override
+#: view:stock.card.wizard:0
+msgid "Period"
+msgstr "Period"
+
+#. module: stock_override
+#: selection:stock.picking,fake_type:0
+msgid "Getting Goods"
+msgstr "Obtenir des Marchandises"
+
+#. module: stock_override
+#: selection:stock.move.memory.in,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.out,integrity_status_func_stock_memory_move:0
+msgid "Too many packs selected"
+msgstr "Trop de paquets sélectionnés "
+
+#. module: stock_override
+#: selection:stock.move.memory.in,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.out,integrity_status_func_stock_memory_move:0
+msgid "Assigned qty must be smaller or equal to available qty"
+msgstr "Qté affectée doit être plus petite ou égale à la quantité disponible"
+
+#. module: stock_override
+#: selection:report.stock.move,order_type:0
+msgid "Regular"
+msgstr "Normal"
+
+#. module: stock_override
+#: model:ir.actions.act_window,help:stock_override.action_destruction_location_report
+#: view:stock.move:0
+msgid "Destruction Location"
+msgstr "Zone Destruction "
+
+#. module: stock_override
+#: field:report.stock.move,reason_type_id:0
+msgid "Reason type"
+msgstr "Type de raison"
+
+#. module: stock_override
+#: report:delivery.order:0
+#: report:internal.move:0
+msgid "Storekeeper :"
+msgstr "Storekeeper :"
+
+#. module: stock_override
+#: report:delivery.order:0
+#: report:internal.move:0
+msgid "Quantity"
+msgstr "Quantity"
+
+#. module: stock_override
+#: report:destruction.location:0
+#: model:ir.actions.act_window,name:stock_override.action_destruction_location_report
+#: model:ir.actions.report.xml,name:stock_override.destruction_location_report
+#: model:ir.ui.menu,name:stock_override.menu_action_destruction_location_report
+msgid "Destruction Report"
+msgstr "Rapport Destruction"
+
+#. module: stock_override
+#: report:delivery.order:0
+msgid "Actual Shipped Date :"
+msgstr "Actual Shipped Date :"
+
+#. module: stock_override
+#: report:delivery.order:0
+#: report:internal.move:0
+msgid "Signature"
+msgstr "Signature"
+
+#. module: stock_override
+#: view:stock.move:0
+msgid "Dest. Location"
+msgstr "Destination de Zone"
+
+#. module: stock_override
+#: report:stock.card.report:0
+msgid "Batch Number"
+msgstr "Batch Number"
+
+#. module: stock_override
+#: model:ir.actions.act_window,name:stock_override.action_stock_card
+#: model:ir.actions.report.xml,name:stock_override.stock_card_report
+#: model:ir.model,name:stock_override.model_stock_card_wizard
+#: model:ir.ui.menu,name:stock_override.menu_stock_card
+#: view:stock.card.wizard:0
+msgid "Stock card"
+msgstr "Stock card"
+
+#. module: stock_override
+#: model:ir.model,name:stock_override.model_stock_move_memory_out
+msgid "stock.move.memory.out"
+msgstr "stock.move.memory.out"
+
+#. module: stock_override
+#: selection:report.stock.move,order_type:0
+msgid "Loan"
+msgstr "Prêt"
+
+#. module: stock_override
+#: code:addons/stock_override/wizard/change_dest_location.py:108
+#, python-format
+msgid "Line %s : The state '%s' of the move doesn't allow a modification of the destination location. \n"
+""
+msgstr "Line %s : The state '%s' of the move doesn't allow a modification of the destination location. \n"
+""
+
+#. module: stock_override
+#: report:destruction.location:0
+msgid "Price"
+msgstr "Prix"
+
+#. module: stock_override
+#: constraint:stock.move:0
+msgid "You must assign a batch number for this product."
+msgstr "Vous devez mentionner un numéro de lot pour ce produit."
+
+#. module: stock_override
+#: code:addons/stock_override/stock.py:765
+#, python-format
+msgid "Please configure a default intermission account in Company configuration."
+msgstr "Veuillez configurer un compte intermission par défaut sous la configuration de la société."
+
+#. module: stock_override
+#: report:addons/stock_override/report/stock_card_report_xls.mako:152
+#: report:stock.card.report:0
+#: field:stock.card.wizard.line,origin:0
+msgid "Origin"
+msgstr "Origin"
+
+#. module: stock_override
+#: report:addons/stock_override/report/stock_card_report_xls.mako:154
+#: report:stock.card.report:0
+#: field:stock.card.wizard.line,qty_out:0
+msgid "Qty OUT"
+msgstr "Qty OUT"
+
+#. module: stock_override
+#: constraint:stock.move:0
+msgid "You must assign an asset for this product."
+msgstr "Vous devez mentionner un bien pour ce produit."
+
+#. module: stock_override
+#: field:stock.picking,partner_type_stock_picking:0
+msgid "Partner Type"
+msgstr "Partenaire - Type"
+
+#. module: stock_override
+#: report:destruction.location:0
+#: view:stock.move:0
+msgid "Product"
+msgstr "Produit"
+
+#. module: stock_override
+#: selection:stock.move.memory.in,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.out,integrity_status_func_stock_memory_move:0
+msgid "Need Batch Number (Standard) not Expiry Date (Internal)"
+msgstr "Mention nécessaire d'un numéro de lot (Standard) mais pas d'une date d'expiration (Interne)"
+
+#. module: stock_override
+#: view:stock.analyze.view:0
+msgid "Stock Location Analysis"
+msgstr "Analyse Zone Stock"
+
+#. module: stock_override
+#: report:delivery.order:0
+msgid "Warehouse :"
+msgstr "Warehouse :"
+
+#. module: stock_override
+#: model:stock.location,name:stock_override.stock_location_non_stockable
+msgid "Non stockable"
+msgstr "Pas stockable"
+
+#. module: stock_override
+#: code:addons/stock_override/wizard/stock_partial_picking.py:113
+#: code:addons/stock_override/wizard/stock_partial_picking.py:131
+#: code:addons/stock_override/wizard/stock_partial_picking.py:138
+#: code:addons/stock_override/wizard/stock_partial_picking.py:149
+#: code:addons/stock_override/wizard/stock_partial_picking.py:187
+#: code:addons/stock_override/wizard/stock_partial_picking.py:193
+#, python-format
+msgid "Processing Error"
+msgstr "Erreur de traitement"
+
+#. module: stock_override
+#: field:stock.move,fake_state:0
+msgid "Internal use"
+msgstr "Usage interne"
+
+#. module: stock_override
+#: view:stock.card.wizard:0
+msgid "Stock cards"
+msgstr "Stock cards"
+
+#. module: stock_override
+#: report:delivery.order:0
+msgid "Partner :"
+msgstr "Partner :"
+
+#. module: stock_override
+#: view:stock.card.wizard:0
+msgid "Show card"
+msgstr "Show card"
+
+#. module: stock_override
+#: view:stock.card.wizard:0
+#: field:stock.card.wizard,product_id:0
+msgid "Product"
+msgstr "Product"
+
+#. module: stock_override
+#: field:stock.location.chained.options,nomen_id:0
+msgid "Nomenclature Level"
+msgstr "Niveau de nomenclature"
+
+#. module: stock_override
+#: report:stock.card.report:0
+msgid "Code"
+msgstr "Code"
+
+#. module: stock_override
+#: field:stock.location,check_cd:0
+#: field:stock.location,check_prod_loc:0
+#: field:stock.location,check_usage:0
+msgid "zz"
+msgstr "zz"
+
+#. module: stock_override
+#: view:stock.analyze.view:0
+msgid "Open Product"
+msgstr "Ouvrir le Produit"
+
+#. module: stock_override
+#: report:delivery.order:0
+msgid "Reason Type :"
+msgstr "Reason Type :"
+
+#. module: stock_override
+#: report:delivery.order:0
+#: report:internal.move:0
+msgid "Destination Location"
+msgstr "Destination Location"
+
+#. module: stock_override
+#: field:stock.card.wizard,card_lines:0
+msgid "Card lines"
+msgstr "Card lines"
+
+#. module: stock_override
+#: report:delivery.order:0
+#: report:internal.move:0
+msgid "Product Code"
+msgstr "Product Code"
+
+#. module: stock_override
+#: selection:change.dest.location,state:0
+msgid "Start"
+msgstr "Start"
+
+#. module: stock_override
+#: model:ir.model,name:stock_override.model_ir_values
+msgid "ir.values"
+msgstr "ir.values"
+
+#. module: stock_override
+#: report:destruction.location:0
+msgid "Sub Total"
+msgstr "Sous-total"
+
+#. module: stock_override
+#: field:procurement.order,so_back_update_dest_po_id_procurement_order:0
+msgid "Destination of new purchase order line"
+msgstr "Destination d'une nouvelle ligne d'un bon de commande"
+
+#. module: stock_override
+#: field:stock.card.wizard,prodlot_id:0
+msgid "Batch number"
+msgstr "Batch number"
+
+#. module: stock_override
+#: report:delivery.order:0
+#: report:internal.move:0
+msgid "Reference :"
+msgstr "Reference :"
+

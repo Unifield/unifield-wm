@@ -1,0 +1,964 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* product_attributes
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: product_attributes
+#: code:addons/product_attributes/product_attributes.py:446
+#, python-format
+msgid "There are some stock moves with this product on the system. So you should keep the same UoM category than these stock moves. UoM category used in stock moves : %s"
+msgstr "There are some stock moves with this product on the system. So you should keep the same UoM category than these stock moves. UoM category used in stock moves : %s"
+
+#. module: product_attributes
+#: field:product.product,no_consumption:0
+msgid "Comsumption"
+msgstr "Comsumption"
+
+#. module: product_attributes
+#: code:addons/product_attributes/product_attributes.py:116
+#, python-format
+msgid "You cannot delete this heat sensitive because it's used at least in one product"
+msgstr "You cannot delete this heat sensitive because it's used at least in one product"
+
+#. module: product_attributes
+#: field:product.product,gmdn_code:0
+msgid "GMDN Code"
+msgstr "GMDN Code"
+
+#. module: product_attributes
+#: model:ir.model,name:product_attributes.model_product_justification_code
+msgid "product.justification.code"
+msgstr "product.justification.code"
+
+#. module: product_attributes
+#: code:addons/product_attributes/product_attributes.py:973
+#, python-format
+msgid "A product with a code \"XXX\" already exists please edit this product to change its Code."
+msgstr "Un produit portant le code \"XXX\" existe déjà, veuiller modifier ce produit pour en changer le code."
+
+#. module: product_attributes
+#: field:product.product,old_code:0
+msgid "Old code"
+msgstr "Ancien code"
+
+#. module: product_attributes
+#: model:ir.model,name:product_attributes.model_product_deactivation_error_line
+msgid "product.deactivation.error.line"
+msgstr "product.deactivation.error.line"
+
+#. module: product_attributes
+#: view:product.product:0
+msgid "AMC"
+msgstr "CMM"
+
+#. module: product_attributes
+#: field:product.product,heat_sensitive_item:0
+msgid "Temperature sensitive item"
+msgstr "Article sensible à la température"
+
+#. module: product_attributes
+#: constraint:product.product:0
+msgid "Error: Invalid ean code"
+msgstr "Erreur: code EAN invalide"
+
+#. module: product_attributes
+#: code:addons/product_attributes/product_attributes.py:539
+#, python-format
+msgid "be %s externally' % (sale_obj and _('shipped"
+msgstr "be %s externally' % (sale_obj and _('shipped"
+
+#. module: product_attributes
+#: constraint:product.product:0
+msgid "You must select on order procurement method for Service with Reception products."
+msgstr "Vous devez sélectionner sur la commande le mode d'approvisionnement pour le Service  avec Réception de produits."
+
+#. module: product_attributes
+#: field:product.deactivation.error.line,doc_id:0
+msgid "Internal Reference"
+msgstr "Internal Reference"
+
+#. module: product_attributes
+#: view:stock.move:0
+msgid "Reference"
+msgstr "Référence"
+
+#. module: product_attributes
+#: field:product.product,international_status:0
+msgid "Product Creator"
+msgstr "Créateur produit"
+
+#. module: product_attributes
+#: model:ir.model,name:product_attributes.model_product_uom
+msgid "Product Unit of Measure"
+msgstr "Produit - Unité de Mesure"
+
+#. module: product_attributes
+#: view:product.deactivation.error:0
+msgid "Product deactivation error"
+msgstr "Product deactivation error"
+
+#. module: product_attributes
+#: code:addons/product_attributes/product_attributes.py:717
+#, python-format
+msgid "The product [%s] %s is already inactive."
+msgstr "Le produit [%s] %s est déjà inactif."
+
+#. module: product_attributes
+#: model:product.justification.code,code:product_attributes.justification_code_jpa
+msgid "31 J(PA)"
+msgstr "31 J(PA)"
+
+#. module: product_attributes
+#: field:product.product,show_cold_chain:0
+msgid "Show cold chain"
+msgstr "Show cold chain"
+
+#. module: product_attributes
+#: selection:product.product,criticism:0
+msgid "2-Specific"
+msgstr "2-Spécifique"
+
+#. module: product_attributes
+#: model:product.justification.code,code:product_attributes.justification_code_jpm
+msgid "37 J(PM)"
+msgstr "37 J(PM)"
+
+#. module: product_attributes
+#: model:ir.model,name:product_attributes.model_product_deactivation_error
+msgid "product.deactivation.error"
+msgstr "product.deactivation.error"
+
+#. module: product_attributes
+#: code:addons/product_attributes/product_attributes.py:94
+#, python-format
+msgid "You cannot remove the 'ITC' international status because it's a system value"
+msgstr "You cannot remove the 'ITC' international status because it's a system value"
+
+#. module: product_attributes
+#: model:product.justification.code,code:product_attributes.justification_code_jpf
+msgid "36 J(PF)"
+msgstr "36 J(PF)"
+
+#. module: product_attributes
+#: code:addons/product_attributes/product_attributes.py:543
+#, python-format
+msgid "be %s ESC' % (sale_obj and _('shipped to"
+msgstr "be %s ESC' % (sale_obj and _('shipped to"
+
+#. module: product_attributes
+#: field:product.product,new_code:0
+msgid "New code"
+msgstr "Nouveau Code"
+
+#. module: product_attributes
+#: model:ir.model,name:product_attributes.model_product_supply_source
+msgid "product.supply.source"
+msgstr "product.supply.source"
+
+#. module: product_attributes
+#: selection:product.product,criticism:0
+msgid "3-Important"
+msgstr "3-Important"
+
+#. module: product_attributes
+#: field:product.product,abc_class:0
+msgid "ABC Class"
+msgstr "Classe ABC"
+
+#. module: product_attributes
+#: model:ir.actions.act_window,name:product_attributes.product_cold_chain_action
+#: model:ir.ui.menu,name:product_attributes.menu_cold_chain_product
+#: view:product.cold_chain:0
+msgid "Cold chain"
+msgstr "Cold chain"
+
+#. module: product_attributes
+#: model:product.justification.code,code:product_attributes.justification_code_jo
+msgid "27 J(O)"
+msgstr "27 J(O)"
+
+#. module: product_attributes
+#: field:product.deactivation.error.line,internal_type:0
+msgid "Internal document type"
+msgstr "Internal document type"
+
+#. module: product_attributes
+#: code:addons/product_attributes/product_attributes.py:535
+#, python-format
+msgid "be exchanged"
+msgstr "be exchanged"
+
+#. module: product_attributes
+#: code:addons/product_attributes/product_attributes.py:979
+#, python-format
+msgid "%s (copy)"
+msgstr "%s (copier)"
+
+#. module: product_attributes
+#: code:addons/product_attributes/product_attributes.py:547
+#, python-format
+msgid "be supplied/exchanged internally"
+msgstr "be supplied/exchanged internally"
+
+#. module: product_attributes
+#: view:product.product:0
+msgid "Purchase Taxes"
+msgstr "Taxes à l'achat"
+
+#. module: product_attributes
+#: field:product.justification.code,description:0
+msgid "Justification Description"
+msgstr "Justification - Description"
+
+#. module: product_attributes
+#: selection:product.product,library:0
+msgid "L4"
+msgstr "L4"
+
+#. module: product_attributes
+#: code:addons/product_attributes/product_attributes.py:85
+#, python-format
+msgid "You cannot delete this product creator because it's used at least in one product"
+msgstr "You cannot delete this product creator because it's used at least in one product"
+
+#. module: product_attributes
+#: model:product.justification.code,code:product_attributes.justification_code_jm
+msgid "23 J(M)"
+msgstr "23 J(M)"
+
+#. module: product_attributes
+#: model:ir.model,name:product_attributes.model_product_cold_chain
+msgid "product.cold_chain"
+msgstr "product.cold_chain"
+
+#. module: product_attributes
+#: view:product.deactivation.error:0
+msgid "Concerned product"
+msgstr "Concerned product"
+
+#. module: product_attributes
+#: field:product.international.status,no_internal:0
+#: field:product.product,no_internal:0
+#: field:product.status,no_internal:0
+msgid "Internal partners orders"
+msgstr "Internal partners orders"
+
+#. module: product_attributes
+#: field:product.product,gmdn_description:0
+msgid "GMDN Description"
+msgstr "GMDN - Description"
+
+#. module: product_attributes
+#: code:addons/product_attributes/product_attributes.py:672
+#, python-format
+msgid "The product [%s] %s is already active."
+msgstr "Le produit [%s] %s est déjà actif."
+
+#. module: product_attributes
+#: field:product.product,product_catalog_path:0
+msgid "Product Catalog Path"
+msgstr "Chemin à suivre Catalogue Produits"
+
+#. module: product_attributes
+#: selection:product.product,criticism:0
+msgid "5-Common"
+msgstr "5-Commun"
+
+#. module: product_attributes
+#: model:ir.actions.act_window,name:product_attributes.action_tender_product_tree
+msgid "Tenders"
+msgstr "Appels d'Offres"
+
+#. module: product_attributes
+#: selection:product.product,abc_class:0
+msgid "B"
+msgstr "B"
+
+#. module: product_attributes
+#: model:ir.model,name:product_attributes.model_product_template
+msgid "Product Template"
+msgstr "Modèle de Produit"
+
+#. module: product_attributes
+#: field:product.product,batch_management:0
+msgid "Batch Number Mandatory"
+msgstr "Numéro de Lot Obligatoire"
+
+#. module: product_attributes
+#: field:product.product,available_for_restriction:0
+msgid "Available for the partner"
+msgstr "Available for the partner"
+
+#. module: product_attributes
+#: field:product.deactivation.error,stock_exist:0
+msgid "Stocks exist (internal locations)"
+msgstr "Stocks exist (internal locations)"
+
+#. module: product_attributes
+#: view:product.deactivation.error:0
+msgid "Open the document"
+msgstr "Open the document"
+
+#. module: product_attributes
+#: field:res.country.restriction,name:0
+msgid "Restriction"
+msgstr "Limitation"
+
+#. module: product_attributes
+#: field:product.product,nomen_ids:0
+msgid "Nomenclatures"
+msgstr "Nomenclatures"
+
+#. module: product_attributes
+#: field:product.product,dangerous_goods:0
+msgid "Dangerous Goods"
+msgstr "Marchandises Dangereuses"
+
+#. module: product_attributes
+#: view:product.deactivation.error:0
+msgid "Actions"
+msgstr "Actions"
+
+#. module: product_attributes
+#: code:addons/product_attributes/product_attributes.py:135
+#, python-format
+msgid "You cannot delete this cold chain because it's used at least in one product"
+msgstr "You cannot delete this cold chain because it's used at least in one product"
+
+#. module: product_attributes
+#: view:product.deactivation.error:0
+msgid "Error documents"
+msgstr "Error documents"
+
+#. module: product_attributes
+#: model:ir.module.module,description:product_attributes.module_meta_information
+msgid "\n"
+"        This module displays more fields for future sprints in the Products form view.\n"
+"    "
+msgstr "\n"
+"        Ce module affiche plus de champs pour les sprints à venir sous la vue Formulaire de Produits.\n"
+"    "
+
+#. module: product_attributes
+#: field:product.product,options_ids:0
+msgid "Options"
+msgstr "Options"
+
+#. module: product_attributes
+#: code:addons/product_attributes/product_attributes.py:602
+#: code:addons/product_attributes/product_attributes.py:973
+#, python-format
+msgid "Warning"
+msgstr "Avertissement"
+
+#. module: product_attributes
+#: field:product.product,un_code:0
+msgid "UN Code"
+msgstr "Code UN "
+
+#. module: product_attributes
+#: model:ir.ui.menu,name:product_attributes.menu_product_config
+msgid "Configuration"
+msgstr "Configuration"
+
+#. module: product_attributes
+#: constraint:product.template:0
+msgid "Error: The default UOM and the purchase UOM must be in the same category."
+msgstr "Erreur : l'UdM par défaut et l'UdM d'achat doivent appartenir à la même catégorie."
+
+#. module: product_attributes
+#: model:ir.actions.act_window,name:product_attributes.product_justification_code_action
+#: model:ir.ui.menu,name:product_attributes.menu_justification_code_product
+msgid "Justification codes"
+msgstr "Justification codes"
+
+#. module: product_attributes
+#: constraint:product.product:0
+msgid "Constraint error on Kit Product."
+msgstr "Erreur de Contrainte sur le produit Kit"
+
+#. module: product_attributes
+#: field:product.section.code,section:0
+msgid "Section"
+msgstr "Section"
+
+#. module: product_attributes
+#: model:ir.module.module,shortdesc:product_attributes.module_meta_information
+msgid "MSF Product Attributes"
+msgstr "MSF - Attributs Produit "
+
+#. module: product_attributes
+#: model:ir.model,name:product_attributes.model_product_heat_sensitive
+msgid "product.heat_sensitive"
+msgstr "product.heat_sensitive"
+
+#. module: product_attributes
+#: code:addons/product_attributes/product_attributes.py:61
+#: code:addons/product_attributes/product_attributes.py:85
+#: code:addons/product_attributes/product_attributes.py:94
+#: code:addons/product_attributes/product_attributes.py:96
+#: code:addons/product_attributes/product_attributes.py:116
+#: code:addons/product_attributes/product_attributes.py:135
+#: code:addons/product_attributes/product_attributes.py:446
+#: code:addons/product_attributes/product_attributes.py:580
+#: code:addons/product_attributes/product_attributes.py:662
+#: code:addons/product_attributes/product_attributes.py:672
+#: code:addons/product_attributes/product_attributes.py:717
+#: field:product.deactivation.error.line,error_id:0
+#, python-format
+msgid "Error"
+msgstr "Error"
+
+#. module: product_attributes
+#: field:product.product,loc_indic:0
+msgid "Indicative Location"
+msgstr "Zone Indicative"
+
+#. module: product_attributes
+#: view:product.international.status:0
+msgid "Product Creators"
+msgstr "Product Creators"
+
+#. module: product_attributes
+#: view:product.justification.code:0
+msgid "Justification Codes"
+msgstr "Justification Codes"
+
+#. module: product_attributes
+#: model:product.justification.code,code:product_attributes.justification_code_jp
+msgid "30 J(P)"
+msgstr "30 J(P)"
+
+#. module: product_attributes
+#: model:ir.model,name:product_attributes.model_product_section_code
+msgid "product.section.code"
+msgstr "product.section.code"
+
+#. module: product_attributes
+#: code:addons/product_attributes/product_attributes.py:662
+#, python-format
+msgid "You cannot choose an UoM which is not in the same UoM category of default UoM"
+msgstr "You cannot choose an UoM which is not in the same UoM category of default UoM"
+
+#. module: product_attributes
+#: model:product.justification.code,code:product_attributes.justification_code_jpme
+msgid "38 J(PME)"
+msgstr "38 J(PME)"
+
+#. module: product_attributes
+#: model:product.justification.code,code:product_attributes.justification_code_ja
+msgid "18 J(A)"
+msgstr "18 J(A)"
+
+#. module: product_attributes
+#: selection:product.product,med_device_class:0
+msgid "Class III (General controls and premarket)"
+msgstr "Class III (Contrôles Généraux et premarket-precommercialisation)"
+
+#. module: product_attributes
+#: field:product.international.status,no_storage:0
+#: field:product.product,no_storage:0
+#: field:product.status,no_storage:0
+msgid "Storage"
+msgstr "Storage"
+
+#. module: product_attributes
+#: view:product.deactivation.error:0
+msgid "You cannot inactivate this product due to below reasons :"
+msgstr "Vous ne pouvez pas désactiver ce produit pour les raisons suivantes:"
+
+#. module: product_attributes
+#: view:product.supplierinfo:0
+msgid "Ranking"
+msgstr "Classement"
+
+#. module: product_attributes
+#: field:product.product,med_device_class:0
+msgid "Medical Device Class"
+msgstr "Catégorie Instrument Medical "
+
+#. module: product_attributes
+#: selection:product.product,library:0
+msgid "L3"
+msgstr "L3"
+
+#. module: product_attributes
+#: selection:product.product,closed_article:0
+#: selection:product.product,single_use:0
+#: selection:product.product,sterilized:0
+msgid "Yes"
+msgstr "Oui"
+
+#. module: product_attributes
+#: field:product.cold_chain,name:0
+#: field:product.heat_sensitive,name:0
+#: field:product.international.status,name:0
+#: field:product.status,name:0
+msgid "Name"
+msgstr "Name"
+
+#. module: product_attributes
+#: field:product.product,sterilized:0
+msgid "Sterile"
+msgstr "Stérile"
+
+#. module: product_attributes
+#: model:product.justification.code,code:product_attributes.justification_code_jpe
+msgid "35 J(PE)"
+msgstr "35 J(PE)"
+
+#. module: product_attributes
+#: selection:product.product,criticism:0
+msgid "1-Exceptional"
+msgstr "1-Exceptionnel"
+
+#. module: product_attributes
+#: view:product.product:0
+msgid "UoM"
+msgstr "UdM"
+
+#. module: product_attributes
+#: selection:product.product,abc_class:0
+msgid "C"
+msgstr "C"
+
+#. module: product_attributes
+#: selection:product.product,criticism:0
+msgid "X-Other"
+msgstr "X-Autre"
+
+#. module: product_attributes
+#: model:ir.actions.act_window,name:product_attributes.product_supply_source_action
+#: model:ir.ui.menu,name:product_attributes.product_supply_source_menu
+#: view:product.supply.source:0
+msgid "Supply sources"
+msgstr "Supply sources"
+
+#. module: product_attributes
+#: view:product.deactivation.error:0
+msgid "Close window"
+msgstr "Close window"
+
+#. module: product_attributes
+#: field:product.product,description2:0
+msgid "Description 2"
+msgstr "Description 2"
+
+#. module: product_attributes
+#: field:product.product,restricted_country:0
+msgid "Restricted in the Country"
+msgstr "Limité dans le Pays"
+
+#. module: product_attributes
+#: field:product.deactivation.error.line,type:0
+msgid "Documents type"
+msgstr "Documents type"
+
+#. module: product_attributes
+#: field:product.product,perishable:0
+msgid "Expiry Date Mandatory"
+msgstr "Date d'Expiration Obligatoire"
+
+#. module: product_attributes
+#: field:product.deactivation.error.line,doc_ref:0
+msgid "Reference"
+msgstr "Reference"
+
+#. module: product_attributes
+#: model:product.justification.code,code:product_attributes.justification_code_jf
+msgid "22 J(F)"
+msgstr "22 J(F)"
+
+#. module: product_attributes
+#: field:product.product,sublist:0
+msgid "Sublist"
+msgstr "Liste secondaire"
+
+#. module: product_attributes
+#: field:product.international.status,no_external:0
+#: field:product.product,no_external:0
+#: field:product.status,no_external:0
+msgid "External partners orders"
+msgstr "External partners orders"
+
+#. module: product_attributes
+#: constraint:product.product:0
+msgid "If you select \"Non-stockable\" as product type then you have to select \"Make to order\" as procurement method"
+msgstr "Si vous sélectionnez \"Non stockable\" comme type de produit, vous devez sélectionner \"Faire sur commande\" comme méthode d'acquisition"
+
+#. module: product_attributes
+#: view:product.product:0
+msgid "FMC"
+msgstr "PCM"
+
+#. module: product_attributes
+#: model:ir.model,name:product_attributes.model_product_status
+msgid "product.status"
+msgstr "product.status"
+
+#. module: product_attributes
+#: field:product.product,supply_source_ids:0
+#: view:product.supply.source:0
+msgid "Supply Source"
+msgstr "Source Approvisionnement"
+
+#. module: product_attributes
+#: field:product.cold_chain,code:0
+#: field:product.heat_sensitive,code:0
+#: field:product.international.status,code:0
+#: view:product.product:0
+#: field:product.section.code,code:0
+#: field:product.status,code:0
+msgid "Code"
+msgstr "Code"
+
+#. module: product_attributes
+#: field:product.product,duplicate_ok:0
+msgid "Is a duplicate"
+msgstr "C'est un duplicat"
+
+#. module: product_attributes
+#: field:product.product,product_catalog_page:0
+msgid "Product Catalog Page"
+msgstr "Page du Catalogue Produits"
+
+#. module: product_attributes
+#: code:addons/product_attributes/product_attributes.py:539
+#, python-format
+msgid "purchased"
+msgstr "purchased"
+
+#. module: product_attributes
+#: field:product.product,currency_id:0
+#: field:product.product,field_currency_id:0
+msgid "Currency"
+msgstr "Devises"
+
+#. module: product_attributes
+#: model:ir.model,name:product_attributes.model_product_international_status
+msgid "product.international.status"
+msgstr "product.international.status"
+
+#. module: product_attributes
+#: code:addons/product_attributes/product_attributes.py:61
+#, python-format
+msgid "You cannot delete this status because it's used at least in one product"
+msgstr "You cannot delete this status because it's used at least in one product"
+
+#. module: product_attributes
+#: field:product.deactivation.error,error_lines:0
+msgid "Error lines"
+msgstr "Error lines"
+
+#. module: product_attributes
+#: model:ir.actions.act_window,name:product_attributes.unactive_product_list
+msgid "Inactivated products"
+msgstr "Inactivated products"
+
+#. module: product_attributes
+#: selection:product.product,med_device_class:0
+msgid "Class II (General control with special controls)"
+msgstr "Classe II (Contrôle Général avec contrôles spécifiques)"
+
+#. module: product_attributes
+#: code:addons/product_attributes/product_attributes.py:551
+#, python-format
+msgid "be consumed internally"
+msgstr "be consumed internally"
+
+#. module: product_attributes
+#: field:product.uom,compatible_product_id:0
+msgid "Compatible UoM"
+msgstr "Compatible UoM"
+
+#. module: product_attributes
+#: field:product.international.status,no_consumption:0
+#: field:product.status,no_consumption:0
+msgid "Consumption"
+msgstr "Consumption"
+
+#. module: product_attributes
+#: selection:product.product,library:0
+msgid "L2"
+msgstr "L2"
+
+#. module: product_attributes
+#: field:product.product,cold_chain:0
+msgid "Cold Chain"
+msgstr "Chaîne du Froid"
+
+#. module: product_attributes
+#: model:product.justification.code,code:product_attributes.justification_code_jmf
+msgid "25 J(MF)"
+msgstr "25 J(MF)"
+
+#. module: product_attributes
+#: sql_constraint:product.uom:0
+msgid "The conversion ratio for a unit of measure cannot be 0!"
+msgstr "Le rapport de conversion d'une unité de mesure ne peut pas être 0 !"
+
+#. module: product_attributes
+#: selection:product.product,abc_class:0
+msgid "A"
+msgstr "A"
+
+#. module: product_attributes
+#: view:stock.move:0
+msgid "UOM"
+msgstr "UdM"
+
+#. module: product_attributes
+#: field:product.product,single_use:0
+msgid "Single Use"
+msgstr "Utilisation unique"
+
+#. module: product_attributes
+#: code:addons/product_attributes/product_attributes.py:560
+#, python-format
+msgid "status"
+msgstr "status"
+
+#. module: product_attributes
+#: model:ir.actions.act_window,name:product_attributes.product_international_status_action
+#: model:ir.ui.menu,name:product_attributes.menu_international_status_product
+msgid "Product creators"
+msgstr "Product creators"
+
+#. module: product_attributes
+#: field:product.product,criticism:0
+msgid "Criticality"
+msgstr "Criticité"
+
+#. module: product_attributes
+#: field:product.deactivation.error.line,view_id:0
+msgid "Reference of the view to open"
+msgstr "Reference of the view to open"
+
+#. module: product_attributes
+#: field:product.product,short_shelf_life:0
+msgid "Short Shelf Life"
+msgstr "Durée de Conservation Limitée "
+
+#. module: product_attributes
+#: view:stock.move:0
+msgid "Moves"
+msgstr "Mouvements"
+
+#. module: product_attributes
+#: field:product.supply.source,source:0
+msgid "Supply source"
+msgstr "Source d'approvisionnement"
+
+#. module: product_attributes
+#: model:ir.actions.act_window,name:product_attributes.product_heat_sensitive_action
+#: model:ir.ui.menu,name:product_attributes.menu_heat_sensitive_product
+#: view:product.heat_sensitive:0
+msgid "Temperature sensitive"
+msgstr "Temperature sensitive"
+
+#. module: product_attributes
+#: field:product.product,country_restriction:0
+msgid "Country Restriction"
+msgstr "Restrictions Pays"
+
+#. module: product_attributes
+#: code:addons/product_attributes/product_attributes.py:563
+#, python-format
+msgid "The product [%s] %s gets the %s '%s' and consequently can't %s"
+msgstr "The product [%s] %s gets the %s '%s' and consequently can't %s"
+
+#. module: product_attributes
+#: field:product.deactivation.error,opened_object:0
+msgid "Product is contain in opened documents"
+msgstr "Le produit est utilisé dans des documents ouverts"
+
+#. module: product_attributes
+#: model:product.justification.code,code:product_attributes.justification_code_je
+msgid "21 J(E)"
+msgstr "21 J(E)"
+
+#. module: product_attributes
+#: field:product.product,controlled_substance:0
+msgid "Controlled substance"
+msgstr "Substance contrôlée"
+
+#. module: product_attributes
+#: sql_constraint:product.product:0
+msgid "The \"Product Code\" must be unique"
+msgstr "Le \"Code produit\" doit être unique"
+
+#. module: product_attributes
+#: field:product.product,closed_article:0
+msgid "Closed Article"
+msgstr "Article Fermé"
+
+#. module: product_attributes
+#: selection:product.product,med_device_class:0
+msgid "Class I (General controls)"
+msgstr "Classe I (Contrôles Généraux)"
+
+#. module: product_attributes
+#: field:product.product,narcotic:0
+msgid "Narcotic/Psychotropic"
+msgstr "Stupéfiants/Psychotropes"
+
+#. module: product_attributes
+#: model:ir.model,name:product_attributes.model_pricelist_partnerinfo
+msgid "pricelist.partnerinfo"
+msgstr "Informations sur le partenaire"
+
+#. module: product_attributes
+#: view:product.product:0
+msgid "Price"
+msgstr "Prix"
+
+#. module: product_attributes
+#: code:addons/product_attributes/product_attributes.py:96
+#, python-format
+msgid "You cannot remove the 'Temporary' international status because it's a system value"
+msgstr "You cannot remove the 'Temporary' international status because it's a system value"
+
+#. module: product_attributes
+#: field:product.product,composed_kit:0
+msgid "Kit Composed of Kits/Modules"
+msgstr "Kit Composé de Kits/Modules"
+
+#. module: product_attributes
+#: model:product.justification.code,code:product_attributes.justification_code_jme
+msgid "24 J(ME)"
+msgstr "24 J(ME)"
+
+#. module: product_attributes
+#: field:product.product,uom_category_id:0
+msgid "Uom Category"
+msgstr "Uom Category"
+
+#. module: product_attributes
+#: model:ir.model,name:product_attributes.model_product_product
+#: field:product.deactivation.error,product_id:0
+msgid "Product"
+msgstr "Produit"
+
+#. module: product_attributes
+#: model:ir.actions.act_window,name:product_attributes.product_status_action
+#: model:ir.ui.menu,name:product_attributes.menu_status_product
+#: view:product.status:0
+msgid "Status"
+msgstr "Status"
+
+#. module: product_attributes
+#: constraint:pricelist.partnerinfo:0
+msgid "You cannot have a line with a negative or zero quantity!"
+msgstr "Vous ne pouvez pas avoir une ligne avec une quantité négative ou égale à 0."
+
+#. module: product_attributes
+#: selection:product.product,criticism:0
+msgid "4-Medium"
+msgstr "4-Médium"
+
+#. module: product_attributes
+#: view:product.deactivation.error:0
+msgid "Documents"
+msgstr "Documents"
+
+#. module: product_attributes
+#: code:addons/product_attributes/product_attributes.py:543
+#, python-format
+msgid "purchased at"
+msgstr "purchased at"
+
+#. module: product_attributes
+#: view:product.justification.code:0
+#: field:product.justification.code,code:0
+#: field:product.product,justification_code_id:0
+msgid "Justification Code"
+msgstr "Justification - Code"
+
+#. module: product_attributes
+#: code:addons/product_attributes/product_attributes.py:560
+#, python-format
+msgid "product creator"
+msgstr "product creator"
+
+#. module: product_attributes
+#: view:product.product:0
+#: field:product.section.code,description:0
+msgid "Description"
+msgstr "Description"
+
+#. module: product_attributes
+#: field:product.product,library:0
+msgid "Library"
+msgstr "Bibliothèque"
+
+#. module: product_attributes
+#: model:ir.actions.act_window,name:product_attributes.action_order_line_product_tree
+msgid "Field orders"
+msgstr "Commandes Projet"
+
+#. module: product_attributes
+#: constraint:product.product:0
+msgid "Warning! GMDN code must be digits!"
+msgstr "Avertissement! Le code  GMDN doit être en chiffres!"
+
+#. module: product_attributes
+#: selection:product.product,library:0
+msgid "L1"
+msgstr "L1"
+
+#. module: product_attributes
+#: field:product.product,section_code_ids:0
+#: view:product.section.code:0
+msgid "Section Code"
+msgstr "Code de la Section"
+
+#. module: product_attributes
+#: field:product.international.status,no_esc:0
+#: field:product.product,no_esc:0
+#: field:product.status,no_esc:0
+msgid "ESC partners orders"
+msgstr "ESC partners orders"
+
+#. module: product_attributes
+#: code:addons/product_attributes/product_attributes.py:555
+#, python-format
+msgid "be stored anymore"
+msgstr "be stored anymore"
+
+#. module: product_attributes
+#: model:ir.model,name:product_attributes.model_res_country_restriction
+msgid "res.country.restriction"
+msgstr "res.country.restriction"
+
+#. module: product_attributes
+#: model:ir.ui.menu,name:product_attributes.menu_main_product
+#: view:product.product:0
+#: field:res.country.restriction,product_ids:0
+msgid "Products"
+msgstr "Produits"
+
+#. module: product_attributes
+#: selection:product.product,closed_article:0
+#: selection:product.product,single_use:0
+#: selection:product.product,sterilized:0
+msgid "No"
+msgstr "Non"
+
+#. module: product_attributes
+#: code:addons/product_attributes/product_attributes.py:584
+#, python-format
+msgid "There are some stock moves with this product on the system. So you should keep the same UoM category than these stock moves."
+msgstr "There are some stock moves with this product on the system. So you should keep the same UoM category than these stock moves."
+

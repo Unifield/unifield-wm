@@ -1,0 +1,816 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* sale_override
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sale_override
+#: view:sale.order:0
+#: selection:sale.order,state_hidden_sale_order:0
+msgid "Closed"
+msgstr "Clôturé"
+
+#. module: sale_override
+#: model:ir.model,name:sale_override.model_sale_order
+msgid "Sales Order"
+msgstr "Commande de Terrain"
+
+#. module: sale_override
+#: code:addons/sale_override/sale.py:464
+#: code:addons/sale_override/sale.py:494
+#, python-format
+msgid "The currency used on the order is not compatible with the supplier. Please change the currency to choose a compatible currency."
+msgstr "La devise utilisée dans cette commande n'est pas compatible avec le fournisseur. Veuillez modifier la devise pour choisir une devise compatible."
+
+#. module: sale_override
+#: selection:sale.order.change.currency,partner_type:0
+msgid "Inter-section"
+msgstr "Inter-sections"
+
+#. module: sale_override
+#: code:addons/sale_override/sale.py:363
+#, python-format
+msgid "The product [%s] %s is not a 'Service' product. You can sale only 'Service' products on a 'Service' field order. Please remove this line."
+msgstr "Le produit [%s] %s n'est pas un produit 'Service'. Vous ne pouvez vendre que des produits 'Service' sur une commande de terrain 'Service'. Veuillez supprimer cette ligne."
+
+#. module: sale_override
+#: selection:sale.order,state_hidden_sale_order:0
+msgid "Split"
+msgstr "Fractionner"
+
+#. module: sale_override
+#: model:ir.model,name:sale_override.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Ligne Commande Terrain"
+
+#. module: sale_override
+#: field:sale.order,original_so_id_sale_order:0
+msgid "Original Field Order"
+msgstr "Commande de Terrain d´Origine"
+
+#. module: sale_override
+#: constraint:sale.order.line:0
+msgid "You must select on order procurement method for Service with Reception products."
+msgstr "Vous devez sélectionner sur la commande le mode d'approvisionnement pour le Service  avec Réception de produits."
+
+#. module: sale_override
+#: code:addons/sale_override/sale.py:682
+#, python-format
+msgid "Loan counterpart '%s' has been created."
+msgstr "Contrepartie du prêt  '%s' a été créée."
+
+#. module: sale_override
+#: code:addons/sale_override/sale.py:339
+#: code:addons/sale_override/sale.py:508
+#, python-format
+msgid "Warning"
+msgstr "Avertissement"
+
+#. module: sale_override
+#: model:ir.model,name:sale_override.model_split_sale_order_line_wizard
+msgid "Split sale order lines"
+msgstr "Fractionner les lignes de la commande terrain"
+
+#. module: sale_override
+#: field:res.partner,check_partner_so:0
+msgid "Check Partner Type On SO"
+msgstr "Check Partner Type On SO"
+
+#. module: sale_override
+#: model:ir.ui.menu,name:sale_override.menu_country_partner
+msgid "Countries"
+msgstr "Pays"
+
+#. module: sale_override
+#: code:addons/sale_override/sale.py:360
+#, python-format
+msgid "The product [%s] %s is not a 'Transport' product. You can sale only 'Transport' products on a 'Transport' field order. Please remove this line."
+msgstr "Le produit [%s] %s n'est pas un produit 'Transport'. Vous ne pouvez vendre que des produits 'Transport' sur une commande de terrain 'Transport'. Veuillez supprimer cette ligne."
+
+#. module: sale_override
+#: field:split.sale.order.line.wizard,original_qty:0
+msgid "Original Quantity"
+msgstr "Quantité d'Origine"
+
+#. module: sale_override
+#: code:addons/sale_override/res_partner.py:55
+#, python-format
+msgid "Filter check_partner_so different than (arg[0], =, %s) not implemented."
+msgstr "Filter check_partner_so different than (arg[0], =, %s) not implemented."
+
+#. module: sale_override
+#: code:addons/sale_override/sale.py:545
+#, python-format
+msgid "The %s split %s has been created."
+msgstr "Le %s fractionnement %s a été créé."
+
+#. module: sale_override
+#: field:sale.order,categ:0
+#: field:sale.report,categ:0
+msgid "Order category"
+msgstr "Catégorie de la commande"
+
+#. module: sale_override
+#: code:addons/sale_override/sale.py:348
+#: selection:sale.order,categ:0
+#: selection:sale.report,categ:0
+#, python-format
+msgid "Transport"
+msgstr "Transport"
+
+#. module: sale_override
+#: view:sale.order:0
+#: selection:sale.order,priority:0
+#: selection:sale.report,priority:0
+msgid "Normal"
+msgstr "Normal"
+
+#. module: sale_override
+#: field:sale.order,state_hidden_sale_order:0
+msgid "State"
+msgstr "Statut"
+
+#. module: sale_override
+#: field:sale.order,loan_duration:0
+msgid "Loan duration"
+msgstr "Durée du Prêt"
+
+#. module: sale_override
+#: help:sale.order,is_a_counterpart:0
+msgid "This field is only for indicating that the order is a counterpart"
+msgstr "This field is only for indicating that the order is a counterpart"
+
+#. module: sale_override
+#: code:addons/sale_override/sale.py:1296
+#, python-format
+msgid "Warning !"
+msgstr "Avertissement !"
+
+#. module: sale_override
+#: code:addons/sale_override/wizard/split_order_line.py:60
+#, python-format
+msgid "The new quantity must be positive !"
+msgstr "La nouvelle quantité doit être positive !"
+
+#. module: sale_override
+#: view:sale.order:0
+#: selection:sale.order,order_type:0
+#: selection:sale.report,order_type:0
+msgid "Donation before expiry"
+msgstr "Donation avant expiration"
+
+#. module: sale_override
+#: constraint:sale.order:0
+msgid "You cannot validate this sale order because it contains a line with an inactive product"
+msgstr "Vous ne pouvez pas valider cette commande client car elle contient des lignes avec un produit inactif"
+
+#. module: sale_override
+#: field:sale.order.line,manually_corrected:0
+msgid "FO line is manually corrected by user"
+msgstr "FO line is manually corrected by user"
+
+#. module: sale_override
+#: field:sale.order.line,original_line_id:0
+msgid "Original line"
+msgstr "Ligne d'origine"
+
+#. module: sale_override
+#: field:sale.order.line,partner_id:0
+msgid "Customer"
+msgstr "Client"
+
+#. module: sale_override
+#: view:sale.order:0
+msgid "History"
+msgstr "Historique"
+
+#. module: sale_override
+#: field:sale.order,split_type_sale_order:0
+msgid "unknown"
+msgstr "inconnu"
+
+#. module: sale_override
+#: field:sale.order,is_a_counterpart:0
+msgid "Counterpart?"
+msgstr "Counterpart?"
+
+#. module: sale_override
+#: field:sale.order.line,so_back_update_dest_pol_id_sale_order_line:0
+msgid "Original purchase order line"
+msgstr "Ligne du bon de commande d'origine"
+
+#. module: sale_override
+#: selection:sale.order,state_hidden_sale_order:0
+msgid "Invoice Exception"
+msgstr "Exception Facture"
+
+#. module: sale_override
+#: view:sale.order:0
+msgid "Type"
+msgstr "Type"
+
+#. module: sale_override
+#: field:sale.order.line,sync_order_line_db_id:0
+msgid "Sync order line DB Id"
+msgstr "Sync order line DB Id"
+
+#. module: sale_override
+#: view:sale.order:0
+#: field:sale.order,priority:0
+#: selection:sale.order,priority:0
+#: field:sale.report,priority:0
+#: selection:sale.report,priority:0
+msgid "Priority"
+msgstr "Priorité"
+
+#. module: sale_override
+#: view:sale.order:0
+msgid "Standard Donation"
+msgstr "Donation standard"
+
+#. module: sale_override
+#: view:sale.order:0
+#: selection:sale.order,state_hidden_sale_order:0
+msgid "Validated"
+msgstr "Validé"
+
+#. module: sale_override
+#: field:sale.order.change.currency,old_pricelist_id:0
+msgid "Old currency"
+msgstr "Ancienne devise"
+
+#. module: sale_override
+#: field:sale.order,company_id2:0
+msgid "Company"
+msgstr "Société"
+
+#. module: sale_override
+#: field:sale.report,name:0
+msgid "Order Reference"
+msgstr "Référence Commande"
+
+#. module: sale_override
+#: code:addons/sale_override/sale.py:917
+#, python-format
+msgid "The state of the following invoices cannot be updated automatically. Please cancel them manually or d    iscuss with the accounting team to solve the problem. Invoices references : %s"
+msgstr "L'état des factures suivantes ne peut être mis à jour automatiquement. Veuillez les annuler manuellement ou discuter avec l'équipe de comptabilité pour résoudre le problème. Références des factures: %s"
+
+#. module: sale_override
+#: field:sale.order,yml_module_name:0
+msgid "Name of the module which created the object in the yml tests"
+msgstr "Nom du module qui a crée l´objet lors des tests yml"
+
+#. module: sale_override
+#: field:sale.order.line,parent_line_id:0
+msgid "Parent line"
+msgstr "Ligne Parent"
+
+#. module: sale_override
+#: field:sale.order,manually_corrected:0
+msgid "Manually corrected"
+msgstr "Manually corrected"
+
+#. module: sale_override
+#: field:split.sale.order.line.wizard,old_line_qty:0
+msgid "Old line quantity"
+msgstr "Vieille ligne de quantité"
+
+#. module: sale_override
+#: field:sale.report,invoiced:0
+msgid "Paid"
+msgstr "Payé"
+
+#. module: sale_override
+#: code:addons/sale_override/res_partner.py:55
+#: code:addons/sale_override/sale.py:270
+#: code:addons/sale_override/sale.py:360
+#: code:addons/sale_override/sale.py:363
+#: code:addons/sale_override/sale.py:464
+#: code:addons/sale_override/sale.py:466
+#: code:addons/sale_override/sale.py:494
+#: code:addons/sale_override/sale.py:501
+#: code:addons/sale_override/sale.py:512
+#: code:addons/sale_override/sale.py:917
+#: code:addons/sale_override/sale.py:987
+#: code:addons/sale_override/sale.py:995
+#: code:addons/sale_override/wizard/order_change_currency.py:44
+#: code:addons/sale_override/wizard/split_order_line.py:58
+#: code:addons/sale_override/wizard/split_order_line.py:60
+#: code:addons/sale_override/wizard/split_order_line.py:62
+#: code:addons/sale_override/wizard/split_order_line.py:64
+#, python-format
+msgid "Error"
+msgstr "Erreur"
+
+#. module: sale_override
+#: field:sale.order.change.currency,currency_rate:0
+msgid "Currency rate"
+msgstr "Taux de change"
+
+#. module: sale_override
+#: selection:sale.order,state_hidden_sale_order:0
+msgid "Waiting Schedule"
+msgstr "En attente"
+
+#. module: sale_override
+#: view:sale.order.line:0
+msgid "Mandatory Levels"
+msgstr "Niveaux obligatoires"
+
+#. module: sale_override
+#: constraint:sale.order:0
+msgid "Partner type and order type are incompatible! Please change either order type or partner."
+msgstr "Le type de partnenaire et le type de commande sont incompatibles. Veuillez changer l'un ou l'autre."
+
+#. module: sale_override
+#: view:sale.order:0
+#: selection:sale.order,categ:0
+#: selection:sale.report,categ:0
+msgid "Other"
+msgstr "Autre"
+
+#. module: sale_override
+#: model:ir.module.module,shortdesc:sale_override.module_meta_information
+msgid "Sale override"
+msgstr "Vente d´Annulation"
+
+#. module: sale_override
+#: selection:sale.order.change.currency,partner_type:0
+msgid "Intermission"
+msgstr "Intermissions"
+
+#. module: sale_override
+#: view:sale.order:0
+msgid "Category"
+msgstr "Catégorie"
+
+#. module: sale_override
+#: code:addons/sale_override/sale.py:987
+#, python-format
+msgid "Delivery Confirmed Date is a mandatory field."
+msgstr "La Date de Livraison Confirmée est un champ obligatoire"
+
+#. module: sale_override
+#: view:sale.order.change.currency:0
+msgid "Close"
+msgstr "Fermer"
+
+#. module: sale_override
+#: model:ir.model,name:sale_override.model_sale_config_picking_policy
+msgid "sale.config.picking_policy"
+msgstr "sale.config.picking_policy"
+
+#. module: sale_override
+#: field:sale.order,from_yml_test:0
+msgid "Only used to pass addons unit test"
+msgstr "Seulement utilisé pour passer les addons unit test"
+
+#. module: sale_override
+#: selection:sale.order,state_hidden_sale_order:0
+msgid "Cancelled"
+msgstr "Annulé"
+
+#. module: sale_override
+#: view:sale.order:0
+#: selection:sale.order,state_hidden_sale_order:0
+msgid "Sourced"
+msgstr "Sourcé"
+
+#. module: sale_override
+#: field:sale.order.change.currency,new_pricelist_id:0
+msgid "New currency"
+msgstr "Nouvelle devise"
+
+#. module: sale_override
+#: view:sale.order:0
+#: field:sale.order,order_type:0
+#: field:sale.report,order_type:0
+msgid "Order Type"
+msgstr "Type de Commande"
+
+#. module: sale_override
+#: field:sale.order,validated_date:0
+msgid "Validated date"
+msgstr "Date Validée"
+
+#. module: sale_override
+#: view:sale.order:0
+#: selection:sale.order,priority:0
+#: selection:sale.report,priority:0
+msgid "Emergency"
+msgstr "Urgence"
+
+#. module: sale_override
+#: field:sale.order.change.currency,partner_type:0
+msgid "Partner Type"
+msgstr "Partenaire - Type"
+
+#. module: sale_override
+#: view:sale.order:0
+#: selection:sale.order,categ:0
+#: selection:sale.report,categ:0
+msgid "Logistic"
+msgstr "Logistique"
+
+#. module: sale_override
+#: view:procurement.order.compute.all:0
+msgid "This wizard allows you to run all procurement, production and/or purchase orders that should be processed based on their configuration. By default, the scheduler is launched automatically every night by OpenERP. You can use this menu to force it to be launched now. Note that it runs in the background, you may have to wait for a few minutes until it has finished computing."
+msgstr "Cet assistant vous permet d'exécuter tous les approvisionnements, ainsi que les bons de commandes et/ou de production qui doivent être gérés en fonction de leur configuration. Par défaut, l'assistant 'calcul des besoins' est automatiquement lancé chaque nuit par OpenERP. Vous pouvez utiliser ce menu pour forcer le lancement immédiatement. Veuillez noter qu'il tourne en arrière plan, il faudra peut-être attendre quelques minutes pour que le calcul soit terminé."
+
+#. module: sale_override
+#: help:sale.report,invoiced:0
+msgid "It indicates that an invoice has been paid."
+msgstr "Cela indique qu'une facture a été payée."
+
+#. module: sale_override
+#: field:sale.order,fo_created_by_po_sync:0
+msgid "FO created by PO after SYNC"
+msgstr "FO created by PO after SYNC"
+
+#. module: sale_override
+#: code:addons/sale_override/sale.py:466
+#, python-format
+msgid "You cannot validate a Field order without line !"
+msgstr "Vous ne pouvez pas valider une Commande de Terrain sans ligne !"
+
+#. module: sale_override
+#: sql_constraint:sale.order.line:0
+msgid "Product Quantity must be greater than zero."
+msgstr "La quantité de produits doit être supérieure à zéro."
+
+#. module: sale_override
+#: code:addons/sale_override/sale.py:340
+#, python-format
+msgid "The product [%s] %s is not a '%s' product. You can sale only '%s' products on a '%s' field order. Please remove this line before saving."
+msgstr "Le produit [%s] %s n'est pas un produit '%s'. Vous ne pouvez vendre que des produits '%s' sur une commande de terrain '%s'. Veuillez supprimer cette ligne avant de sauvegarder."
+
+#. module: sale_override
+#: model:ir.model,name:sale_override.model_sale_report
+msgid "Sales Orders Statistics"
+msgstr "Commande de terrain - Statistiques"
+
+#. module: sale_override
+#: selection:sale.order.change.currency,partner_type:0
+msgid "Internal"
+msgstr "Interne"
+
+#. module: sale_override
+#: selection:sale.order,order_type:0
+#: selection:sale.report,order_type:0
+msgid "Standard donation"
+msgstr "Donation normale"
+
+#. module: sale_override
+#: view:sale.order.line:0
+msgid "Optional Levels"
+msgstr "Niveaux Optionnels"
+
+#. module: sale_override
+#: model:ir.model,name:sale_override.model_res_partner
+#: field:sale.order.change.currency,partner_id:0
+msgid "Partner"
+msgstr "Partenaire"
+
+#. module: sale_override
+#: model:ir.model,name:sale_override.model_sale_order_change_currency
+msgid "sale.order.change.currency"
+msgstr "sale.order.change.currency"
+
+#. module: sale_override
+#: help:sale.order,validated_date:0
+msgid "Date on which the FO was validated."
+msgstr "Date à laquelle la Commande de Terrain a été validée."
+
+#. module: sale_override
+#: field:sale.order,noinvoice:0
+msgid "Don't create an invoice"
+msgstr "Ne créez pas de facture"
+
+#. module: sale_override
+#: view:sale.order.line:0
+msgid "Order Line"
+msgstr "Ligne de Commande"
+
+#. module: sale_override
+#: selection:sale.order,split_type_sale_order:0
+msgid "3"
+msgstr "3"
+
+#. module: sale_override
+#: code:addons/sale_override/sale.py:508
+#, python-format
+msgid "You can't confirm a Sale Order that contains\n"
+"                        lines with procurement method 'On Order' and without product. Please check the line %s\n"
+"                        "
+msgstr "Vous ne pouvez pas confirmer un ordre de vente qui contient\n"
+"                        des lignes avec 'Sur commande' comme méthode d'acquisition, sans mention de produit. Veuillez vérifier la ligne %s\n"
+"                        "
+
+#. module: sale_override
+#: view:split.sale.order.line.wizard:0
+msgid "Quantities"
+msgstr "Quantités"
+
+#. module: sale_override
+#: model:ir.ui.menu,name:sale_override.menu_country_state_partner
+msgid "Fed. States"
+msgstr "Etats Fédéraux"
+
+#. module: sale_override
+#: view:sale.order.line:0
+msgid "Nomenclature Selection"
+msgstr "Sélection de la Nomenclature"
+
+#. module: sale_override
+#: selection:sale.order,split_type_sale_order:0
+msgid "1"
+msgstr "1"
+
+#. module: sale_override
+#: field:sale.order,no_line:0
+msgid "No line"
+msgstr "Pas de ligne"
+
+#. module: sale_override
+#: field:split.sale.order.line.wizard,new_line_qty:0
+msgid "New line quantity"
+msgstr "Nouvelle ligne de quantité"
+
+#. module: sale_override
+#: view:sale.order:0
+#: selection:sale.order,state_hidden_sale_order:0
+msgid "Draft"
+msgstr "Brouillon"
+
+#. module: sale_override
+#: view:procurement.order.compute.all:0
+#: view:split.sale.order.line.wizard:0
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: sale_override
+#: help:sale.order,from_yml_test:0
+msgid "Never set this field to true !"
+msgstr "Ne jamais régler ce champ sur vrai !"
+
+#. module: sale_override
+#: code:addons/sale_override/sale.py:501
+#, python-format
+msgid "You cannot split a Fo which has already been split."
+msgstr "Vous ne pouvez pas fractionner une Commande de Terrain qui a déjà été fractionnée"
+
+#. module: sale_override
+#: code:addons/sale_override/wizard/split_order_line.py:58
+#, python-format
+msgid "You cannot have a new quantity greater than the original quantity !"
+msgstr "Vous ne pouvez pas avoir de quantité supérieure à la quantité d'origine!"
+
+#. module: sale_override
+#: selection:sale.order.change.currency,partner_type:0
+msgid "External"
+msgstr "Externe"
+
+#. module: sale_override
+#: view:sale.order.change.currency:0
+msgid "Change currency of the order"
+msgstr "Modifier la devise de la commande"
+
+#. module: sale_override
+#: field:sale.order.change.currency,order_id:0
+#: field:sale.report,order_id:0
+msgid "Order"
+msgstr "Commande"
+
+#. module: sale_override
+#: code:addons/sale_override/wizard/split_order_line.py:62
+#, python-format
+msgid "The new quantity must be different than the original quantity !"
+msgstr "La nouvelle quantité doit être différente de la quantité d'origine !"
+
+#. module: sale_override
+#: field:sale.report,currency_id:0
+msgid "Currency"
+msgstr "Devises"
+
+#. module: sale_override
+#: help:sale.order.line,original_line_id:0
+msgid "ID of the original line before the split"
+msgstr "ID de la ligne d'origine avant la scission"
+
+#. module: sale_override
+#: view:split.sale.order.line.wizard:0
+msgid "Actions"
+msgstr "Actions"
+
+#. module: sale_override
+#: help:sale.order,loan_duration:0
+msgid "Loan duration in months"
+msgstr "Durée du Prêt en mois"
+
+#. module: sale_override
+#: code:addons/sale_override/sale.py:1062
+#, python-format
+msgid "The split '%s' is sourced."
+msgstr "Le fractionnement '%s' a été sourcé."
+
+#. module: sale_override
+#: view:procurement.order.compute.all:0
+msgid "Compute POs Creation"
+msgstr "Calcul la création du Bon de Commande"
+
+#. module: sale_override
+#: selection:sale.order,split_type_sale_order:0
+msgid "2"
+msgstr "2"
+
+#. module: sale_override
+#: view:sale.order:0
+#: selection:sale.order,state_hidden_sale_order:0
+msgid "Confirmed"
+msgstr "Confirmé"
+
+#. module: sale_override
+#: code:addons/sale_override/sale.py:349
+#: view:sale.order:0
+#: selection:sale.order,categ:0
+#: selection:sale.report,categ:0
+#, python-format
+msgid "Service"
+msgstr "Service"
+
+#. module: sale_override
+#: code:addons/sale_override/wizard/order_change_currency.py:44
+#, python-format
+msgid "Please give two pricelists"
+msgstr "Veuillez mentionner deux listes de prix"
+
+#. module: sale_override
+#: selection:sale.order.change.currency,partner_type:0
+msgid "ESC"
+msgstr "ESC"
+
+#. module: sale_override
+#: code:addons/sale_override/sale.py:270
+#, python-format
+msgid "You cannot made a Field order to your own company !"
+msgstr "Vous ne pouvez paser une Commande de Terrain à votre propre société !"
+
+#. module: sale_override
+#: field:sale.order,loan_id:0
+msgid "Linked loan"
+msgstr "Prêt Lié"
+
+#. module: sale_override
+#: model:ir.ui.menu,name:sale_override.menu_localisation
+msgid "Localisation"
+msgstr "Zone"
+
+#. module: sale_override
+#: code:addons/sale_override/wizard/split_order_line.py:64
+#, python-format
+msgid "The new quantity must be a multiple of %s !"
+msgstr "La nouvelle quantité doit être un multiple de %s !"
+
+#. module: sale_override
+#: view:sale.order:0
+msgid "Show Split"
+msgstr "Montrer le Fractionnement"
+
+#. module: sale_override
+#: view:sale.order:0
+#: selection:sale.order,order_type:0
+#: selection:sale.report,order_type:0
+msgid "Regular"
+msgstr "Normal"
+
+#. module: sale_override
+#: view:sale.order:0
+msgid "Invoices"
+msgstr "Factures"
+
+#. module: sale_override
+#: view:sale.order:0
+msgid "Invoiced"
+msgstr "Facturé"
+
+#. module: sale_override
+#: model:ir.module.module,description:sale_override.module_meta_information
+msgid "\n"
+"        Add hooks to sale class\n"
+"    "
+msgstr "\n"
+"        Ajouter des crochets à la catégorie de vente"
+
+#. module: sale_override
+#: field:res.partner,partner_not_int:0
+msgid "Is PO/Tender from FO ?"
+msgstr "Le BC/AO provient-il d'une CdT ?"
+
+#. module: sale_override
+#: view:sale.order:0
+#: selection:sale.order,order_type:0
+#: selection:sale.report,order_type:0
+msgid "Loan"
+msgstr "Prêt"
+
+#. module: sale_override
+#: field:sale.order,details:0
+msgid "Details"
+msgstr "Détails"
+
+#. module: sale_override
+#: sql_constraint:sale.order:0
+msgid "Order Reference must be unique !"
+msgstr "La Référence de la Commande doit être unique !"
+
+#. module: sale_override
+#: code:addons/sale_override/sale.py:995
+#, python-format
+msgid "You cannot confirm a Field order without line !"
+msgstr "Vous ne pouvez pas confirmer une Commande de Terrain sans ligne !"
+
+#. module: sale_override
+#: code:addons/sale_override/sale.py:632
+#, python-format
+msgid "The Field order '%s' has been confirmed."
+msgstr "La Commande de Terrain '%s' a été confirmée."
+
+#. module: sale_override
+#: field:sale.order,product_id:0
+msgid "Product"
+msgstr "Produit"
+
+#. module: sale_override
+#: view:sale.order:0
+#: view:split.sale.order.line.wizard:0
+msgid "Split line"
+msgstr "Fractionner la ligne"
+
+#. module: sale_override
+#: view:sale.order:0
+#: selection:sale.order,categ:0
+#: selection:sale.report,categ:0
+msgid "Medical"
+msgstr "Médical"
+
+#. module: sale_override
+#: view:sale.order.line:0
+msgid "Save and Close"
+msgstr "Sauver et Fermer"
+
+#. module: sale_override
+#: field:split.sale.order.line.wizard,sale_line_id:0
+msgid "Line Id"
+msgstr "Ligne Identifiant"
+
+#. module: sale_override
+#: selection:sale.order,state_hidden_sale_order:0
+msgid "Shipping Exception"
+msgstr "Expédition Exception"
+
+#. module: sale_override
+#: field:sale.order,active:0
+msgid "Active"
+msgstr "Actif"
+
+#. module: sale_override
+#: view:sale.order:0
+msgid "Create Final Invoice"
+msgstr "Créer la Facture Finale"
+
+#. module: sale_override
+#: selection:sale.order,split_type_sale_order:0
+msgid "Original"
+msgstr "D´origine"
+
+#. module: sale_override
+#: field:sale.order.line,so_back_update_dest_po_id_sale_order_line:0
+msgid "Destination of new purchase order line"
+msgstr "Destination d'une nouvelle ligne d'un bon de commande"
+
+#. module: sale_override
+#: code:addons/sale_override/sale.py:512
+#, python-format
+msgid "Supplier is not defined for all Field Order lines. \n"
+"                        Please check the line %s\n"
+"                        "
+msgstr "Le fournisseur n'est pas défini pour toutes les lignes de la commande de terrain. \n"
+"                       Veuillez vérifier la ligne %s\n"
+"                        "
+
+#. module: sale_override
+#: view:sale.order.change.currency:0
+msgid "Apply to lines"
+msgstr "Appliquer aux lignes"
+

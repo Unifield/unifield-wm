@@ -1,0 +1,1044 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* financing_contract
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: financing_contract
+#: view:financing.contract.contract:0
+#: field:financing.contract.donor.reporting.line,allocated_real:0
+#: field:financing.contract.format.line,allocated_real:0
+msgid "Funded - Actuals"
+msgstr "Financé - Réels"
+
+#. module: financing_contract
+#: report:financing.contract:0
+msgid "Cost centers:"
+msgstr "Centres de Coût:"
+
+#. module: financing_contract
+#: report:addons/financing_contract/report/project_expenses_xls.mako:461
+msgid "Destination"
+msgstr "Destination"
+
+#. module: financing_contract
+#: report:financing.contract.list:0
+msgid "Start eligibility date"
+msgstr "Début date éligibilité"
+
+#. module: financing_contract
+#: selection:financing.contract.contract,state:0
+msgid "Hard-closed"
+msgstr "Clôturé définitivement"
+
+#. module: financing_contract
+#: view:financing.contract.contract:0
+msgid "Draft"
+msgstr "Draft"
+
+#. module: financing_contract
+#: field:financing.contract.format.line,account_destination_ids:0
+msgid "Accounts/Destinations"
+msgstr "Comptes/Destinations"
+
+#. module: financing_contract
+#: field:financing.contract.format.line,project_real_value:0
+msgid "Real project amount (value)"
+msgstr "Montant réel projet (valeur)"
+
+#. module: financing_contract
+#: model:ir.actions.act_window,name:financing_contract.action_open_analytic_lines_button
+msgid "Analytic Items"
+msgstr "Pièces Analytiques"
+
+#. module: financing_contract
+#: view:financing.contract.contract:0
+#: selection:financing.contract.contract,state:0
+msgid "Open"
+msgstr "Ouvert"
+
+#. module: financing_contract
+#: report:financing.contract:0
+msgid "Grant amount:"
+msgstr "Montant des Subventions: "
+
+#. module: financing_contract
+#: field:financing.contract.donor.reporting.line,project_balance:0
+msgid "Total project - Balance"
+msgstr "Total project - Balance"
+
+#. module: financing_contract
+#: report:addons/financing_contract/report/project_expenses_xls.mako:573
+#: report:financing.contract:0
+msgid "Total"
+msgstr "Total"
+
+#. module: financing_contract
+#: model:ir.module.module,description:financing_contract.module_meta_information
+msgid "Module for defining financing contract and donor objects.\n"
+"    "
+msgstr "Module pour définir les objets contrats de financement et bailleurs"
+
+#. module: financing_contract
+#: field:financing.contract.format.line,project_budget_value:0
+msgid "Budget project amount (value)"
+msgstr "Montant du Budget de Projet (valeur)"
+
+#. module: financing_contract
+#: report:financing.contract:0
+#: view:financing.contract.contract:0
+#: field:financing.contract.donor.reporting.line,project_budget:0
+#: field:financing.contract.format.line,project_budget:0
+msgid "Total project - Budget"
+msgstr "Total du Projet - Budget"
+
+#. module: financing_contract
+#: report:financing.contract:0
+msgid "Reporting currency:"
+msgstr "Devise de présentation:"
+
+#. module: financing_contract
+#: report:financing.contract:0
+msgid "Eligibility period:"
+msgstr "Période d'Eligibilité:"
+
+#. module: financing_contract
+#: code:addons/financing_contract/analytic.py:57
+#, python-format
+msgid "Warning"
+msgstr "Avertissement"
+
+#. module: financing_contract
+#: field:financing.contract.contract,donor_id:0
+#: view:financing.contract.donor:0
+msgid "Donor"
+msgstr "Bailleur"
+
+#. module: financing_contract
+#: report:addons/financing_contract/report/financing_interactive_xls.mako:339
+#: report:addons/financing_contract/report/project_expenses_xls.mako:342
+msgid "FINANCIAL REPORT for financing contract"
+msgstr "FINANCIAL REPORT for financing contract"
+
+#. module: financing_contract
+#: field:financing.contract.contract,reporting_currency:0
+#: report:financing.contract.list:0
+msgid "Reporting currency"
+msgstr "Devise de présentation:"
+
+#. module: financing_contract
+#: report:addons/financing_contract/report/project_expenses_xls.mako:452
+msgid "Financing contract line code"
+msgstr "Financing contract line code"
+
+#. module: financing_contract
+#: report:addons/financing_contract/report/financing_interactive_xls.mako:466
+msgid "Total Project - Actuals"
+msgstr "Total Project - Actuals"
+
+#. module: financing_contract
+#: report:financing.contract:0
+#: view:financing.contract.contract:0
+#: field:financing.contract.donor.reporting.line,allocated_budget:0
+#: field:financing.contract.format.line,allocated_budget:0
+msgid "Funded - Budget"
+msgstr "Funded - Budget"
+
+#. module: financing_contract
+#: model:ir.actions.report.xml,name:financing_contract.contract_list
+msgid "Financing Contract List"
+msgstr "Contrat de Financement - Liste"
+
+#. module: financing_contract
+#: field:financing.contract.contract,state:0
+msgid "State"
+msgstr "Statut"
+
+#. module: financing_contract
+#: code:addons/financing_contract/wizard/wizard_expense_report.py:40
+#, python-format
+msgid "Warning !"
+msgstr "Avertissement !"
+
+#. module: financing_contract
+#: report:financing.contract:0
+#: field:financing.contract.donor.reporting.line,name:0
+#: field:financing.contract.format,format_name:0
+#: field:financing.contract.format.line,name:0
+msgid "Name"
+msgstr "Nom"
+
+#. module: financing_contract
+#: selection:financing.contract.donor.reporting.line,line_type:0
+#: selection:financing.contract.format.line,line_type:0
+msgid "View"
+msgstr "Vue"
+
+#. module: financing_contract
+#: field:financing.contract.format,eligibility_from_date:0
+msgid "Eligibility date from"
+msgstr "Date d'Eligibilité - Du"
+
+#. module: financing_contract
+#: selection:financing.contract.format,overhead_type:0
+#: selection:financing.contract.format.line,overhead_type:0
+msgid "Percentage of direct costs"
+msgstr "Pourcentage des coûts directs"
+
+#. module: financing_contract
+#: model:ir.model,name:financing_contract.model_financing_contract_funding_pool_line
+msgid "Funding pool line"
+msgstr "Funding pool - Ligne"
+
+#. module: financing_contract
+#: view:wizard.financing.currency.export:0
+msgid "Select output currency"
+msgstr "Sélectionner la devise d'édition"
+
+#. module: financing_contract
+#: report:financing.contract:0
+#: report:financing.contract.list:0
+msgid "Page"
+msgstr "Page"
+
+#. module: financing_contract
+#: field:financing.contract.contract,notes:0
+msgid "Notes"
+msgstr "Notes"
+
+#. module: financing_contract
+#: report:financing.contract:0
+msgid "Reporting lines:"
+msgstr "Lignes de dépenses:"
+
+#. module: financing_contract
+#: report:financing.contract:0
+msgid "to"
+msgstr "à"
+
+#. module: financing_contract
+#: report:addons/financing_contract/report/financing_interactive_xls.mako:382
+#: report:addons/financing_contract/report/project_expenses_xls.mako:381
+msgid "Grant amount:"
+msgstr "Grant amount:"
+
+#. module: financing_contract
+#: field:financing.contract.donor.reporting.line,allocated_balance:0
+msgid "Funded - Balance"
+msgstr "Funded - Balance"
+
+#. module: financing_contract
+#: model:ir.actions.act_window,name:financing_contract.action_account_analytic_account_form
+msgid "Analytic Accounts"
+msgstr "Comptes analytiques"
+
+#. module: financing_contract
+#: report:financing.contract:0
+msgid "Comments:"
+msgstr "Commentaires:"
+
+#. module: financing_contract
+#: field:account.analytic.line,contract_open:0
+msgid "Exclude closed contract"
+msgstr "Exclure contrat clôturé"
+
+#. module: financing_contract
+#: view:financing.contract.donor.reporting.line:0
+#: model:ir.actions.act_window,name:financing_contract.action_financing_currency_export_menu
+#: model:ir.actions.server,name:financing_contract.act_financing_contract_donor_reporting_tree
+msgid "Interactive Report"
+msgstr "Rapport Intéractif"
+
+#. module: financing_contract
+#: report:addons/financing_contract/report/project_expenses_xls.mako:470
+msgid "Booking Amount"
+msgstr "Booking Amount"
+
+#. module: financing_contract
+#: report:addons/financing_contract/report/project_expenses_xls.mako:479
+msgid "Reporting Currency"
+msgstr "Reporting Currency"
+
+#. module: financing_contract
+#: report:financing.contract:0
+msgid "Cost center code"
+msgstr "Code Centre de Coût"
+
+#. module: financing_contract
+#: code:addons/financing_contract/contract.py:95
+#, python-format
+msgid "This contract can not be soft-closed because it is not linked to any funding pool."
+msgstr "This contract can not be soft-closed because it is not linked to any funding pool."
+
+#. module: financing_contract
+#: model:ir.ui.menu,name:financing_contract.donor_reporting_menu
+msgid "Grant Management"
+msgstr "Gestion des Subventions"
+
+#. module: financing_contract
+#: report:addons/financing_contract/report/project_expenses_xls.mako:464
+msgid "Cost Center"
+msgstr "Cost Center"
+
+#. module: financing_contract
+#: field:financing.contract.funding.pool.line,total_project:0
+msgid "Total project"
+msgstr "Total du Projet "
+
+#. module: financing_contract
+#: code:addons/financing_contract/contract.py:263
+#, python-format
+msgid "The 'Eligibility Date From' should be sooner than the 'Eligibility Date To'."
+msgstr "La \"Date de début d'éligibilité\" devrait être antérieure à la \"Date de fin d'éligibilité\"."
+
+#. module: financing_contract
+#: model:ir.module.module,shortdesc:financing_contract.module_meta_information
+msgid "Financing Contracts for MSF"
+msgstr "Contrats de Financement MSF"
+
+#. module: financing_contract
+#: view:financing.contract.contract:0
+msgid "Re-Open"
+msgstr "Ré-Ouvrir"
+
+#. module: financing_contract
+#: report:addons/financing_contract/report/financing_interactive_xls.mako:606
+#: report:addons/financing_contract/report/project_expenses_xls.mako:631
+msgid "State:"
+msgstr "State:"
+
+#. module: financing_contract
+#: report:addons/financing_contract/report/financing_interactive_xls.mako:416
+#: report:addons/financing_contract/report/project_expenses_xls.mako:416
+msgid "Reporting type:"
+msgstr "Reporting type:"
+
+#. module: financing_contract
+#: view:financing.contract.contract:0
+#: view:financing.contract.donor:0
+msgid "Search Fiscalyear"
+msgstr "Rechercher un Exercice Comptable"
+
+#. module: financing_contract
+#: report:financing.contract:0
+msgid "Funding pools:"
+msgstr "Funding pools:"
+
+#. module: financing_contract
+#: field:financing.contract.format,reporting_type:0
+#: report:financing.contract.list:0
+msgid "Reporting type"
+msgstr "Type de Rapport "
+
+#. module: financing_contract
+#: report:addons/financing_contract/report/financing_interactive_xls.mako:567
+#: report:addons/financing_contract/report/project_expenses_xls.mako:592
+msgid "Open date:"
+msgstr "Date d'ouverture:"
+
+#. module: financing_contract
+#: report:addons/financing_contract/report/financing_interactive_xls.mako:582
+#: report:addons/financing_contract/report/project_expenses_xls.mako:607
+msgid "Soft-closed date:"
+msgstr "Soft-closed date:"
+
+#. module: financing_contract
+#: report:addons/financing_contract/report/project_expenses_xls.mako:443
+msgid "Sequence number"
+msgstr "Sequence number"
+
+#. module: financing_contract
+#: report:financing.contract:0
+msgid "Funding pool code"
+msgstr "Funding pool - Code"
+
+#. module: financing_contract
+#: model:ir.model,name:financing_contract.model_account_analytic_line
+msgid "Analytic Line"
+msgstr "Ligne Analytique"
+
+#. module: financing_contract
+#: view:financing.contract.contract:0
+#: view:financing.contract.donor:0
+msgid "Reporting lines"
+msgstr "Lignes de compte rendu"
+
+#. module: financing_contract
+#: field:financing.contract.donor.reporting.line,parent_id:0
+#: field:financing.contract.format.line,parent_id:0
+msgid "Parent line"
+msgstr "Ligne Parent"
+
+#. module: financing_contract
+#: constraint:financing.contract.donor:0
+msgid "You cannot have the same code or name between donors!"
+msgstr "Vous ne pouvez pas avoir les mêmes codes ou noms entre bailleurs!"
+
+#. module: financing_contract
+#: report:financing.contract:0
+msgid "Contract information:"
+msgstr "Contrat - Information:"
+
+#. module: financing_contract
+#: code:addons/financing_contract/contract.py:95
+#: code:addons/financing_contract/contract.py:103
+#: code:addons/financing_contract/contract.py:262
+#, python-format
+msgid "Error"
+msgstr "Erreur"
+
+#. module: financing_contract
+#: field:financing.contract.donor,code:0
+msgid "Donor code"
+msgstr "Code du Bailleur"
+
+#. module: financing_contract
+#: report:addons/financing_contract/report/project_expenses_xls.mako:455
+msgid "Financing contract line description"
+msgstr "Financing contract line description"
+
+#. module: financing_contract
+#: report:financing.contract:0
+msgid "Donor:"
+msgstr "Bailleur:"
+
+#. module: financing_contract
+#: model:ir.model,name:financing_contract.model_wizard_financing_currency_export
+msgid "wizard.financing.currency.export"
+msgstr "wizard.financing.currency.export"
+
+#. module: financing_contract
+#: report:addons/financing_contract/report/project_expenses_xls.mako:473
+msgid "Booking Currency"
+msgstr "Booking Currency"
+
+#. module: financing_contract
+#: selection:financing.contract.format,reporting_type:0
+msgid "Earmarked and total project"
+msgstr "Réservé et Total Projet"
+
+#. module: financing_contract
+#: report:addons/financing_contract/report/financing_interactive_xls.mako:452
+msgid "Earmarked - Actuals"
+msgstr "Earmarked - Actuals"
+
+#. module: financing_contract
+#: report:financing.contract:0
+msgid "Cost center name"
+msgstr "Nom Centre de Coût"
+
+#. module: financing_contract
+#: constraint:financing.contract.contract:0
+msgid "You cannot have the same code or name between contracts!"
+msgstr "Vous ne pouvez pas avoir les mêmes code ou nom entre contrats!"
+
+#. module: financing_contract
+#: field:financing.contract.format,cost_center_ids:0
+msgid "Cost Centers"
+msgstr "Centres de Coût"
+
+#. module: financing_contract
+#: report:financing.contract:0
+#: field:financing.contract.funding.pool.line,funding_pool_id:0
+msgid "Funding pool name"
+msgstr "Funding pool - Nom"
+
+#. module: financing_contract
+#: code:addons/financing_contract/analytic.py:43
+#, python-format
+msgid "No Analytic Domain !"
+msgstr "Aucun domaine analytique !"
+
+#. module: financing_contract
+#: field:financing.contract.donor.reporting.line,line_type:0
+#: field:financing.contract.format.line,line_type:0
+msgid "Line type"
+msgstr "Type de Ligne"
+
+#. module: financing_contract
+#: report:addons/financing_contract/report/financing_interactive_xls.mako:525
+msgid "TOTAL"
+msgstr "TOTAL"
+
+#. module: financing_contract
+#: view:financing.contract.contract:0
+#: model:ir.actions.act_window,name:financing_contract.action_financing_contract_contract_form
+#: model:ir.ui.menu,name:financing_contract.menu_action_financing_contract_contract_form
+msgid "Financing Contracts"
+msgstr "Contrats de Financement"
+
+#. module: financing_contract
+#: view:financing.contract.contract:0
+msgid "Funding pools"
+msgstr "Funding pools"
+
+#. module: financing_contract
+#: view:financing.contract.contract:0
+msgid "Contract information"
+msgstr "Contrat - Information"
+
+#. module: financing_contract
+#: report:financing.contract:0
+msgid "/"
+msgstr "/"
+
+#. module: financing_contract
+#: field:financing.contract.format,overhead_type:0
+#: field:financing.contract.format.line,overhead_type:0
+msgid "Overhead calculation mode"
+msgstr "Mode de calcul des frais généraux"
+
+#. module: financing_contract
+#: code:addons/financing_contract/analytic.py:57
+#, python-format
+msgid "Filter contract_open is not implemented with those arguments."
+msgstr "Le Filtre contrat_open n'est pas mis en oeuvre avec ces arguments"
+
+#. module: financing_contract
+#: report:addons/financing_contract/report/financing_interactive_xls.mako:345
+#: report:addons/financing_contract/report/project_expenses_xls.mako:348
+msgid "Report date:"
+msgstr "Report date:"
+
+#. module: financing_contract
+#: report:financing.contract.list:0
+msgid "End eligibility date"
+msgstr "Date d'Eligibilité - Fin"
+
+#. module: financing_contract
+#: field:financing.contract.funding.pool.line,funded:0
+msgid "Earmarked"
+msgstr "Réservé"
+
+#. module: financing_contract
+#: field:financing.contract.format.line,allocated_budget_value:0
+msgid "Budget allocated amount (value)"
+msgstr "Budget allocated amount (value)"
+
+#. module: financing_contract
+#: field:financing.contract.contract,hard_closed_date:0
+msgid "Hard-closed date"
+msgstr "Date de clôture définitive"
+
+#. module: financing_contract
+#: field:financing.contract.funding.pool.line,contract_id:0
+msgid "Contract"
+msgstr "Contrat"
+
+#. module: financing_contract
+#: model:ir.model,name:financing_contract.model_wizard_expense_report
+msgid "wizard.expense.report"
+msgstr "wizard.expense.report"
+
+#. module: financing_contract
+#: selection:financing.contract.format,reporting_type:0
+msgid "Earmarked only"
+msgstr "Seulement Réservé"
+
+#. module: financing_contract
+#: view:financing.contract.contract:0
+msgid "Soft closed"
+msgstr "Soft closed"
+
+#. module: financing_contract
+#: field:account.destination.link,used_in_contract:0
+msgid "Used"
+msgstr "Utilisé"
+
+#. module: financing_contract
+#: report:addons/financing_contract/report/financing_interactive_xls.mako:424
+#: report:addons/financing_contract/report/project_expenses_xls.mako:425
+msgid "Cost centers:"
+msgstr "Cost centers:"
+
+#. module: financing_contract
+#: field:financing.contract.contract,open_date:0
+msgid "Open date"
+msgstr "Date d'ouverture "
+
+#. module: financing_contract
+#: report:addons/financing_contract/report/project_expenses_xls.mako:437
+msgid "Date"
+msgstr "Date"
+
+#. module: financing_contract
+#: view:financing.contract.contract:0
+msgid "Hard-close"
+msgstr "Clôturer définitivement"
+
+#. module: financing_contract
+#: code:addons/financing_contract/contract.py:103
+#, python-format
+msgid "There are still expenses linked to contract's funding pools not hard-posted in registers: %s"
+msgstr "There are still expenses linked to contract's funding pools not hard-posted in registers: %s"
+
+#. module: financing_contract
+#: field:financing.contract.contract,currency_table_id:0
+msgid "Currency Table"
+msgstr "Table des devises"
+
+#. module: financing_contract
+#: report:addons/financing_contract/report/project_expenses_xls.mako:547
+msgid "Sub-total"
+msgstr "Sub-total"
+
+#. module: financing_contract
+#: report:financing.contract:0
+msgid "Line Type"
+msgstr "Type de ligne"
+
+#. module: financing_contract
+#: report:addons/financing_contract/report/financing_interactive_xls.mako:444
+msgid "Name"
+msgstr "Name"
+
+#. module: financing_contract
+#: report:addons/financing_contract/report/financing_interactive_xls.mako:365
+#: report:addons/financing_contract/report/project_expenses_xls.mako:365
+msgid "Financing contract name:"
+msgstr "Financing contract name:"
+
+#. module: financing_contract
+#: report:addons/financing_contract/report/financing_interactive_xls.mako:449
+msgid "Earmarked - Budget"
+msgstr "Earmarked - Budget"
+
+#. module: financing_contract
+#: selection:financing.contract.donor.reporting.line,line_type:0
+#: selection:financing.contract.format.line,line_type:0
+msgid "Consumption"
+msgstr "Consommation"
+
+#. module: financing_contract
+#: view:account.destination.link:0
+#: view:financing.contract.contract:0
+#: view:financing.contract.donor:0
+msgid "Account/Destination"
+msgstr "Compte/Destination"
+
+#. module: financing_contract
+#: field:financing.contract.format,eligibility_to_date:0
+msgid "Eligibility date to"
+msgstr "Date d'Eligibilité - Au"
+
+#. module: financing_contract
+#: field:financing.contract.format.line,allocated_real_value:0
+msgid "Real allocated amount (value)"
+msgstr "Montant réel alloué (valeur) "
+
+#. module: financing_contract
+#: field:financing.contract.donor.reporting.line,child_ids:0
+#: field:financing.contract.format.line,child_ids:0
+msgid "Child lines"
+msgstr "Lignes Enfant"
+
+#. module: financing_contract
+#: model:ir.model,name:financing_contract.model_financing_contract_format_line
+msgid "financing.contract.format.line"
+msgstr "financing.contract.format.line"
+
+#. module: financing_contract
+#: view:financing.contract.contract:0
+#: view:financing.contract.donor:0
+msgid "Dates"
+msgstr "Dates"
+
+#. module: financing_contract
+#: model:ir.model,name:financing_contract.model_account_destination_link
+msgid "Destination link between G/L and Analytic accounts"
+msgstr "Destination lien entre comptes G/L et Comptes Analytiques"
+
+#. module: financing_contract
+#: view:wizard.financing.currency.export:0
+msgid "Create report"
+msgstr "Créer un rapport"
+
+#. module: financing_contract
+#: model:ir.model,name:financing_contract.model_wizard_interactive_report
+msgid "wizard.interactive.report"
+msgstr "wizard.interactive.report"
+
+#. module: financing_contract
+#: report:addons/financing_contract/report/financing_interactive_xls.mako:400
+#: report:addons/financing_contract/report/project_expenses_xls.mako:399
+msgid "Eligible from:"
+msgstr "Eligible from:"
+
+#. module: financing_contract
+#: report:financing.contract:0
+msgid "Reporting type:"
+msgstr "Type de Rapport: "
+
+#. module: financing_contract
+#: selection:financing.contract.donor.reporting.line,line_type:0
+#: selection:financing.contract.format.line,line_type:0
+msgid "Overhead"
+msgstr "Frais généraux"
+
+#. module: financing_contract
+#: report:addons/financing_contract/report/project_expenses_xls.mako:476
+msgid "Reporting Amount"
+msgstr "Reporting Amount"
+
+#. module: financing_contract
+#: report:addons/financing_contract/report/project_expenses_xls.mako:449
+msgid "Reference"
+msgstr "Reference"
+
+#. module: financing_contract
+#: selection:financing.contract.contract,state:0
+msgid "Draft"
+msgstr "Brouillon"
+
+#. module: financing_contract
+#: view:wizard.financing.currency.export:0
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: financing_contract
+#: selection:financing.contract.donor.reporting.line,line_type:0
+#: selection:financing.contract.format.line,line_type:0
+msgid "Actual"
+msgstr "Réel"
+
+#. module: financing_contract
+#: view:wizard.financing.currency.export:0
+msgid "Select currency"
+msgstr "Sélectionner la devise"
+
+#. module: financing_contract
+#: model:ir.actions.report.xml,name:financing_contract.project_expenses_2
+msgid "Project Expenses"
+msgstr "Dépenses Projet "
+
+#. module: financing_contract
+#: field:financing.contract.donor,name:0
+msgid "Donor name"
+msgstr "Nom du Bailleur"
+
+#. module: financing_contract
+#: field:financing.contract.contract,code:0
+#: report:financing.contract.list:0
+msgid "Financing contract code"
+msgstr "Code du Contrat de Financement"
+
+#. module: financing_contract
+#: report:addons/financing_contract/report/financing_interactive_xls.mako:441
+#: report:financing.contract:0
+#: field:financing.contract.donor.reporting.line,code:0
+#: field:financing.contract.format.line,code:0
+msgid "Code"
+msgstr "Code"
+
+#. module: financing_contract
+#: field:financing.contract.donor.reporting.line,analytic_domain:0
+msgid "Analytic domain"
+msgstr "Domaine Analytique"
+
+#. module: financing_contract
+#: model:ir.actions.report.xml,name:financing_contract.allocated_expenses_2
+msgid "Allocated Expenses"
+msgstr "Dépenses allouées"
+
+#. module: financing_contract
+#: report:financing.contract:0
+msgid "Contract code/name:"
+msgstr "Contrat - Code/Nom:"
+
+#. module: financing_contract
+#: report:addons/financing_contract/report/financing_interactive_xls.mako:455
+msgid "Earmarked - Balanc"
+msgstr "Earmarked - Balanc"
+
+#. module: financing_contract
+#: field:financing.contract.contract,name:0
+#: report:financing.contract.list:0
+msgid "Financing contract name"
+msgstr "Nom du Contrat de Financement"
+
+#. module: financing_contract
+#: report:addons/financing_contract/report/financing_interactive_xls.mako:373
+#: report:addons/financing_contract/report/project_expenses_xls.mako:373
+msgid "Financing contract code:"
+msgstr "Financing contract code:"
+
+#. module: financing_contract
+#: field:wizard.financing.currency.export,out_currency:0
+msgid "Currency"
+msgstr "Devises"
+
+#. module: financing_contract
+#: field:financing.contract.format,funding_pool_ids:0
+msgid "Funding Pools"
+msgstr "Funding Pools"
+
+#. module: financing_contract
+#: report:addons/financing_contract/report/financing_interactive_xls.mako:472
+msgid "Total Project - %used"
+msgstr "Total Project - %used"
+
+#. module: financing_contract
+#: view:financing.contract.format.line:0
+msgid "Reporting Lines"
+msgstr "Lignes de dépenses"
+
+#. module: financing_contract
+#: report:addons/financing_contract/report/financing_interactive_xls.mako:392
+#: report:addons/financing_contract/report/project_expenses_xls.mako:390
+msgid "Reporting currency:"
+msgstr "Reporting currency:"
+
+#. module: financing_contract
+#: help:account.analytic.line,contract_open:0
+msgid "Field used only to search lines."
+msgstr "Champ utilisé que pour la recherche de lignes."
+
+#. module: financing_contract
+#: model:ir.actions.report.xml,name:financing_contract.financing_interactive_2
+msgid "Financing interactive"
+msgstr "Financing interactive"
+
+#. module: financing_contract
+#: selection:financing.contract.format,overhead_type:0
+#: selection:financing.contract.format.line,overhead_type:0
+msgid "Percentage of grant"
+msgstr "Pourcentage des subventions"
+
+#. module: financing_contract
+#: field:financing.contract.contract,overhead_amount:0
+msgid "Overhead amount"
+msgstr "Montant des frais généraux"
+
+#. module: financing_contract
+#: report:addons/financing_contract/report/financing_interactive_xls.mako:408
+#: report:addons/financing_contract/report/project_expenses_xls.mako:405
+msgid "to:"
+msgstr "to:"
+
+#. module: financing_contract
+#: report:addons/financing_contract/report/financing_interactive_xls.mako:469
+msgid "Total Project - Balance"
+msgstr "Total Project - Balance"
+
+#. module: financing_contract
+#: report:addons/financing_contract/report/financing_interactive_xls.mako:458
+msgid "Earmarked - %used"
+msgstr "Earmarked - %used"
+
+#. module: financing_contract
+#: model:ir.model,name:financing_contract.model_wizard_csv_report
+msgid "wizard.csv.report"
+msgstr "wizard.csv.report"
+
+#. module: financing_contract
+#: code:addons/financing_contract/wizard/wizard_expense_report.py:40
+#, python-format
+msgid "This report does not apply to the reporting type selected."
+msgstr "Ce rapport ne s'applique pas au type de rapport sélectionné."
+
+#. module: financing_contract
+#: view:financing.contract.contract:0
+msgid "Cost centers"
+msgstr "Centres de coûts"
+
+#. module: financing_contract
+#: model:ir.model,name:financing_contract.model_financing_contract_donor_reporting_line
+msgid "financing.contract.donor.reporting.line"
+msgstr "financing.contract.donor.reporting.line"
+
+#. module: financing_contract
+#: view:account.analytic.account:0
+#: model:ir.ui.menu,name:financing_contract.menu_action_account_analytic_account_form
+msgid "Analytic Accounts"
+msgstr "Comptes Analytiques"
+
+#. module: financing_contract
+#: field:financing.contract.contract,hq_grant_reference:0
+#: report:financing.contract.list:0
+msgid "HQ grant reference"
+msgstr "Référence Subvention HQ"
+
+#. module: financing_contract
+#: report:addons/financing_contract/report/financing_interactive_xls.mako:594
+#: report:addons/financing_contract/report/project_expenses_xls.mako:619
+msgid "Hard-closed date:"
+msgstr "Date de clôture définitive:"
+
+#. module: financing_contract
+#: report:addons/financing_contract/report/project_expenses_xls.mako:458
+msgid "General Account"
+msgstr "General Account"
+
+#. module: financing_contract
+#: view:financing.contract.contract:0
+msgid "Financing Contract"
+msgstr "Contrat de Financement"
+
+#. module: financing_contract
+#: report:financing.contract.list:0
+msgid "List of Funding pools associated for total project costs"
+msgstr "Liste des Funding pools associés au coût total du projet"
+
+#. module: financing_contract
+#: report:addons/financing_contract/report/financing_interactive_xls.mako:463
+msgid "Total Project - Budget"
+msgstr "Total Project - Budget"
+
+#. module: financing_contract
+#: report:financing.contract.list:0
+msgid "List of Funding pools associated for earmarked costs"
+msgstr "Liste des Funding pools associés aux coûts réservés"
+
+#. module: financing_contract
+#: report:addons/financing_contract/report/project_expenses_xls.mako:440
+msgid "Analytic Journal"
+msgstr "Journal Analytique"
+
+#. module: financing_contract
+#: field:financing.contract.contract,donor_grant_reference:0
+#: report:financing.contract.list:0
+msgid "Donor grant reference"
+msgstr "Référence Subvention Bailleur"
+
+#. module: financing_contract
+#: view:financing.contract.contract:0
+msgid "Hard closed"
+msgstr "Hard closed"
+
+#. module: financing_contract
+#: report:addons/financing_contract/report/project_expenses_xls.mako:467
+msgid "Funding Pool"
+msgstr "Funding Pool"
+
+#. module: financing_contract
+#: view:financing.contract.contract:0
+msgid "Comments"
+msgstr "Commentaires"
+
+#. module: financing_contract
+#: field:financing.contract.contract,grant_amount:0
+#: report:financing.contract.list:0
+msgid "Grant amount"
+msgstr "Montant des Subventions "
+
+#. module: financing_contract
+#: view:account.analytic.account:0
+msgid "Hard Posting"
+msgstr "Comptabiliser "
+
+#. module: financing_contract
+#: view:financing.contract.contract:0
+msgid "Soft-close"
+msgstr "Clôturer temporairement"
+
+#. module: financing_contract
+#: field:financing.contract.contract,format_id:0
+#: field:financing.contract.donor,format_id:0
+#: field:financing.contract.format.line,format_id:0
+msgid "Format"
+msgstr "Format"
+
+#. module: financing_contract
+#: view:financing.contract.contract:0
+#: field:financing.contract.donor.reporting.line,project_real:0
+#: field:financing.contract.format.line,project_real:0
+msgid "Total project - Actuals"
+msgstr "Total du Projet - Réels"
+
+#. module: financing_contract
+#: field:financing.contract.format,overhead_percentage:0
+#: field:financing.contract.format.line,overhead_percentage:0
+msgid "Overhead percentage"
+msgstr "Pourcentage des frais généraux"
+
+#. module: financing_contract
+#: model:ir.model,name:financing_contract.model_financing_contract_contract
+msgid "financing.contract.contract"
+msgstr "financing.contract.contract"
+
+#. module: financing_contract
+#: selection:financing.contract.contract,state:0
+msgid "Soft-closed"
+msgstr "Clôturé temporairement"
+
+#. module: financing_contract
+#: model:ir.model,name:financing_contract.model_financing_contract_donor
+msgid "financing.contract.donor"
+msgstr "financing.contract.donor"
+
+#. module: financing_contract
+#: field:financing.contract.contract,soft_closed_date:0
+msgid "Soft-closed date"
+msgstr "Date de clôture temporaire"
+
+#. module: financing_contract
+#: sql_constraint:financing.contract.format:0
+msgid "The \"Eligibility Date From\" should be sooner than the \"Eligibility Date To\"."
+msgstr "La \"Date de début d'éligibilité\" devrait être antérieure à la \"Date de fin d'éligibilité\"."
+
+#. module: financing_contract
+#: report:financing.contract.list:0
+msgid "Cost centers associated"
+msgstr "Centres de Coûts associés"
+
+#. module: financing_contract
+#: report:addons/financing_contract/report/project_expenses_xls.mako:446
+msgid "Description"
+msgstr "Description"
+
+#. module: financing_contract
+#: view:financing.contract.donor:0
+#: field:financing.contract.donor,active:0
+msgid "Active"
+msgstr "Actif"
+
+#. module: financing_contract
+#: field:financing.contract.format,actual_line_ids:0
+msgid "Actual lines"
+msgstr "Lignes réelles"
+
+#. module: financing_contract
+#: model:ir.actions.report.xml,name:financing_contract.contract
+msgid "Export Contract info - pdf"
+msgstr "Exporter les infos du Contrat - PDF"
+
+#. module: financing_contract
+#: model:ir.model,name:financing_contract.model_financing_contract_format
+msgid "financing.contract.format"
+msgstr "financing.contract.format"
+
+#. module: financing_contract
+#: view:financing.contract.donor:0
+#: model:ir.actions.act_window,name:financing_contract.action_financing_contract_donor_form
+#: model:ir.ui.menu,name:financing_contract.menu_action_financing_contract_donor_form
+msgid "Donors"
+msgstr "Bailleurs"
+
+#. module: financing_contract
+#: report:addons/financing_contract/report/financing_interactive_xls.mako:357
+#: report:addons/financing_contract/report/project_expenses_xls.mako:356
+msgid "Donor:"
+msgstr "Donor:"
+
+#. module: financing_contract
+#: selection:financing.contract.format,reporting_type:0
+msgid "Total project only"
+msgstr "Total Projet uniquement"
+
+#. module: financing_contract
+#: code:addons/financing_contract/analytic.py:43
+#, python-format
+msgid "This line does not have an analytic domain!"
+msgstr "Cette ligne n'a pas de domaine analytique!"
+

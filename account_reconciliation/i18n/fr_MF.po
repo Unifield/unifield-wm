@@ -1,0 +1,226 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* account_reconciliation
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_reconciliation
+#: model:ir.module.module,shortdesc:account_reconciliation.module_meta_information
+msgid "Account reconciliation wizard"
+msgstr "Assistant de lettrage de compte"
+
+#. module: account_reconciliation
+#: code:addons/account_reconciliation/account_move_line.py:177
+#, python-format
+msgid "The account is not defined to be reconciled !"
+msgstr "Ce compte n'est pas défini comme 'à lettrer '!"
+
+#. module: account_reconciliation
+#: field:account.move.line.reconcile,different_currencies:0
+msgid "Is this reconciliation in different currencies? (2 at most)"
+msgstr "Is this reconciliation in different currencies? (2 at most)"
+
+#. module: account_reconciliation
+#: model:ir.model,name:account_reconciliation.model_account_move_line
+msgid "Journal Items"
+msgstr "Lignes d'Ecritures Comptables"
+
+#. module: account_reconciliation
+#: code:addons/account_reconciliation/account_move_line.py:91
+#, python-format
+msgid "Already Reconciled!"
+msgstr "Déjà lettrées!"
+
+#. module: account_reconciliation
+#: constraint:account.move.line:0
+msgid "Company must be same for its related account and period."
+msgstr "La Société doit être la même pour le compte et période connexes."
+
+#. module: account_reconciliation
+#: model:ir.model,name:account_reconciliation.model_account_move_reconcile
+msgid "Account Reconciliation"
+msgstr "Lettrage de Compte"
+
+#. module: account_reconciliation
+#: code:addons/account_reconciliation/wizard/account_reconcile.py:160
+#, python-format
+msgid "An account is different from others: %s"
+msgstr "Un compte est différent des autres : %s"
+
+#. module: account_reconciliation
+#: sql_constraint:account.move.line:0
+msgid "Wrong credit or debit value in accounting entry !"
+msgstr "Valeur de crédit ou débit erronée sous l'écriture comptable !"
+
+#. module: account_reconciliation
+#: code:addons/account_reconciliation/account_move_line.py:145
+#, python-format
+msgid "Entry \"%s\" is not valid !"
+msgstr "L'écriture \"%s\" n'est pas valide !"
+
+#. module: account_reconciliation
+#: view:account.move.line.reconcile:0
+msgid "Partial Reconcile"
+msgstr "Lettrage Partiel"
+
+#. module: account_reconciliation
+#: code:addons/account_reconciliation/account_move_line.py:174
+#, python-format
+msgid "Entry is already reconciled"
+msgstr "L'écriture est déjà lettrée"
+
+#. module: account_reconciliation
+#: code:addons/account_reconciliation/wizard/account_reconcile.py:177
+#, python-format
+msgid "Third parties do not match or bad company configuration!"
+msgstr "Pas de correspondance entre les tiers ou mauvaise configuration de la société !"
+
+#. module: account_reconciliation
+#: model:ir.module.module,description:account_reconciliation.module_meta_information
+msgid "Default reconciliation wizard adaptation for MSF"
+msgstr "Adaptation de l'assistant de lettrage par défaut pour MSF"
+
+#. module: account_reconciliation
+#: code:addons/account_reconciliation/wizard/account_reconcile.py:150
+#, python-format
+msgid "This account is not reconciliable: %s"
+msgstr "Ce compte ne peut être lettré: %s"
+
+#. module: account_reconciliation
+#: code:addons/account_reconciliation/account_move_line.py:179
+#, python-format
+msgid "Some entries are already reconciled !"
+msgstr "Certaines écritures sont déjà lettrées !"
+
+#. module: account_reconciliation
+#: code:addons/account_reconciliation/account_move_line.py:85
+#: code:addons/account_reconciliation/account_move_line.py:140
+#, python-format
+msgid "To reconcile the entries company should be the same for all entries"
+msgstr "Pour lettrer les écritures, la société doit être la même pour toutes les écritures."
+
+#. module: account_reconciliation
+#: code:addons/account_reconciliation/account_move_line.py:144
+#: code:addons/account_reconciliation/account_move_line.py:172
+#: code:addons/account_reconciliation/account_move_line.py:174
+#: code:addons/account_reconciliation/account_move_line.py:177
+#: code:addons/account_reconciliation/account_move_line.py:179
+#: code:addons/account_reconciliation/wizard/account_reconcile.py:160
+#: code:addons/account_reconciliation/wizard/account_reconcile.py:177
+#, python-format
+msgid "Error"
+msgstr "Erreur"
+
+#. module: account_reconciliation
+#: code:addons/account_reconciliation/account_move_line.py:172
+#, python-format
+msgid "Entries are not of the same account or already reconciled ! "
+msgstr "Les Ecritures ne sont pas du même compte  ou sont déjà lettrées. "
+
+#. module: account_reconciliation
+#: code:addons/account_reconciliation/account_move_line.py:64
+#: code:addons/account_reconciliation/account_move_line.py:91
+#: code:addons/account_reconciliation/wizard/account_reconcile.py:112
+#: code:addons/account_reconciliation/wizard/account_reconcile.py:137
+#: code:addons/account_reconciliation/wizard/account_reconcile.py:150
+#, python-format
+msgid "Warning"
+msgstr "Avertissement"
+
+#. module: account_reconciliation
+#: view:account.move.line.reconcile:0
+msgid "You are about to reconcile entries in different currencies; you will trigger the creation of an automated adjustment in functional currency"
+msgstr "You are about to reconcile entries in different currencies; you will trigger the creation of an automated adjustment in functional currency"
+
+#. module: account_reconciliation
+#: code:addons/account_reconciliation/wizard/account_reconcile.py:112
+#, python-format
+msgid "You can only do reconciliation on Posted Entries!"
+msgstr "Vous ne pouvez lettrer que des Ecritures Comptabilisées!"
+
+#. module: account_reconciliation
+#: view:account.move.line.reconcile:0
+msgid "Reconcile"
+msgstr "Lettrer"
+
+#. module: account_reconciliation
+#: code:addons/account_reconciliation/account_move_line.py:64
+#, python-format
+msgid "Reconciliation of lines that come from a \"Pending payment\" wizard should be done via registers. Lines: %s"
+msgstr "Reconciliation of lines that come from a \"Pending payment\" wizard should be done via registers. Lines: %s"
+
+#. module: account_reconciliation
+#: constraint:account.move.line:0
+msgid "You can not create move line on view account."
+msgstr "Vous ne pouvez pas créer des écritures sur un compte-groupe"
+
+#. module: account_reconciliation
+#: code:addons/account_reconciliation/wizard/account_reconcile.py:137
+#, python-format
+msgid "Cannot reconcile entries : Cross check between transfer currencies fails."
+msgstr "Ne peut lettrer les écritures: la vérification entre les devises de transfert a échoué."
+
+#. module: account_reconciliation
+#: selection:account.move.line.reconcile,state:0
+msgid "Partial Reconciliation"
+msgstr "Lettrage Partiel"
+
+#. module: account_reconciliation
+#: view:account.move.line.reconcile:0
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: account_reconciliation
+#: model:ir.model,name:account_reconciliation.model_account_move_line_reconcile
+msgid "Account move line reconcile"
+msgstr "Lettrage Ligne d'Ecriture Comptable "
+
+#. module: account_reconciliation
+#: selection:account.move.line.reconcile,state:0
+msgid "Full Reconciliation with change"
+msgstr "Lettrage Complet avec changement"
+
+#. module: account_reconciliation
+#: selection:account.move.line.reconcile,state:0
+msgid "Partial Reconciliation with change"
+msgstr "Lettrage Partiel avec changement"
+
+#. module: account_reconciliation
+#: field:account.move.line.reconcile,state:0
+msgid "State"
+msgstr "Statut"
+
+#. module: account_reconciliation
+#: code:addons/account_reconciliation/account_move_line.py:63
+#, python-format
+msgid "%s (in %s)"
+msgstr "%s (in %s)"
+
+#. module: account_reconciliation
+#: selection:account.move.line.reconcile,state:0
+msgid "Full Reconciliation"
+msgstr "Lettrage Complet "
+
+#. module: account_reconciliation
+#: constraint:account.move.line:0
+msgid "You can not create move line on closed account."
+msgstr "Vous ne pouvez pas créer des écritures dans un journal clôturé."
+
+#. module: account_reconciliation
+#: code:addons/account_reconciliation/account_move_line.py:85
+#: code:addons/account_reconciliation/account_move_line.py:140
+#, python-format
+msgid "Warning !"
+msgstr "Avertissement !"
+

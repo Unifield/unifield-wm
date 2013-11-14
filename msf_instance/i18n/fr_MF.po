@@ -1,0 +1,845 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* msf_instance
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: msf_instance
+#: field:account.journal.fake,view_id:0
+msgid "Display Mode"
+msgstr "Mode d'Affichage"
+
+#. module: msf_instance
+#: field:account.journal.fake,refund_journal:0
+msgid "Refund Journal"
+msgstr "Journal d'Avoirs"
+
+#. module: msf_instance
+#: constraint:msf.instance:0
+msgid "You cannot have the same reconciliation prefix than an active instance!"
+msgstr "Vous ne pouvez pas avoir le même préfixe de lettrage qu'une instance active !"
+
+#. module: msf_instance
+#: field:msf.instance,mission:0
+msgid "Mission"
+msgstr "Mission"
+
+#. module: msf_instance
+#: view:msf.instance:0
+msgid "Add Cost Centres"
+msgstr "Ajouter des Centres de Coûts"
+
+#. module: msf_instance
+#: field:account.journal.fake,group_invoice_lines:0
+msgid "Group Invoice Lines"
+msgstr "Grouper les Lignes de Facture"
+
+#. module: msf_instance
+#: field:account.journal.fake,sequence_id:0
+msgid "Entry Sequence"
+msgstr "Séquence des entrées"
+
+#. module: msf_instance
+#: constraint:account.target.costcenter:0
+msgid "This cost centre is already defined as the budget consolidation in another proprietary instance."
+msgstr "This cost centre is already defined as the budget consolidation in another proprietary instance."
+
+#. module: msf_instance
+#: view:msf.instance:0
+msgid "Cost Centres"
+msgstr "Cost Centres"
+
+#. module: msf_instance
+#: help:account.analytic.journal.fake,is_current_instance:0
+msgid "Is this journal from my instance?"
+msgstr "Is this journal from my instance?"
+
+#. module: msf_instance
+#: field:msf_instance.setup,progress:0
+msgid "Configuration Progress"
+msgstr "Progression de la Configuration"
+
+#. module: msf_instance
+#: help:account.journal.fake,refund_journal:0
+msgid "Fill this if the journal is to be used for refunds of invoices."
+msgstr "À remplir si des remboursements de factures doivent être comptabilisés dans ce journal."
+
+#. module: msf_instance
+#: code:addons/msf_instance/res_company.py:117
+#, python-format
+msgid "Error"
+msgstr "Erreur"
+
+#. module: msf_instance
+#: selection:account.journal.fake,type:0
+msgid "Bank"
+msgstr "Bank"
+
+#. module: msf_instance
+#: constraint:msf.instance:0
+msgid "You cannot have the same database than an active instance!"
+msgstr "Vous ne pouvez pas avoir la même base de données qu'une instance active!"
+
+#. module: msf_instance
+#: code:addons/msf_instance/account.py:46
+#, python-format
+msgid "Warning"
+msgstr "Warning"
+
+#. module: msf_instance
+#: sql_constraint:account.move.line:0
+msgid "Wrong credit or debit value in accounting entry !"
+msgstr "Valeur de crédit ou débit erronée sous l'écriture comptable !"
+
+#. module: msf_instance
+#: field:account.target.costcenter,parent_id:0
+#: field:msf.instance,parent_id:0
+msgid "Parent"
+msgstr "Parent"
+
+#. module: msf_instance
+#: selection:account.analytic.journal.fake,type:0
+#: selection:account.journal.fake,type:0
+msgid "In-kind Donation"
+msgstr "In-kind Donation"
+
+#. module: msf_instance
+#: model:ir.module.module,description:msf_instance.module_meta_information
+msgid "Module for defining proprietary instances, their informations\n"
+"    "
+msgstr "Module pour définir les instances propriéatires, leur informations   "
+
+#. module: msf_instance
+#: constraint:account.target.costcenter:0
+msgid "This cost centre is already defined as target in another proprietary instance."
+msgstr "This cost centre is already defined as target in another proprietary instance."
+
+#. module: msf_instance
+#: model:ir.model,name:msf_instance.model_account_bank_statement_line
+msgid "Bank Statement Line"
+msgstr "Ligne de Relevé Bancaire"
+
+#. module: msf_instance
+#: field:msf.instance,state:0
+msgid "State"
+msgstr "Statut"
+
+#. module: msf_instance
+#: view:msf_instance.setup:0
+msgid "Configure instance"
+msgstr "Configurer l'instance"
+
+#. module: msf_instance
+#: selection:account.analytic.journal.fake,type:0
+#: selection:account.journal.fake,type:0
+msgid "HQ"
+msgstr "HQ"
+
+#. module: msf_instance
+#: field:msf.instance,move_prefix:0
+msgid "Account move prefix"
+msgstr "Préfixe de mouvement de compte"
+
+#. module: msf_instance
+#: help:account.analytic.journal.fake,active:0
+msgid "If the active field is set to False, it will allow you to hide the analytic journal without removing it."
+msgstr "Si le champ actif est sur Faux, cela vous permet de cacher le journal analytique sans le supprimer."
+
+#. module: msf_instance
+#: constraint:account.analytic.journal:0
+#: constraint:account.analytic.journal.fake:0
+msgid "You cannot have more than one engagement journal per instance!"
+msgstr "Vous ne pouvez pas avoir plus d'un journal d'engagement par instance"
+
+#. module: msf_instance
+#: view:msf_instance.setup:0
+msgid "Instance Configuration"
+msgstr "Configuration de l'instance"
+
+#. module: msf_instance
+#: field:account.target.costcenter,is_po_fo_cost_center:0
+#: field:msf.instance,po_fo_cost_center_id:0
+msgid "Cost centre picked for PO/FO reference"
+msgstr "Cost centre picked for PO/FO reference"
+
+#. module: msf_instance
+#: selection:account.journal.fake,type:0
+msgid "Sale Refund"
+msgstr "Sale Refund"
+
+#. module: msf_instance
+#: selection:account.analytic.journal.fake,type:0
+#: selection:account.journal.fake,type:0
+msgid "Currency Adjustement"
+msgstr "Currency Adjustement"
+
+#. module: msf_instance
+#: help:account.journal.fake,currency:0
+msgid "The currency used to enter statement"
+msgstr "Devise utilisée pour entrer les relevés"
+
+#. module: msf_instance
+#: view:msf.instance:0
+msgid "Proprietary Instances List"
+msgstr "Proprietary Instances List"
+
+#. module: msf_instance
+#: view:msf_instance.setup:0
+msgid "res_config_contents"
+msgstr "res_config_contents"
+
+#. module: msf_instance
+#: constraint:account.period:0
+msgid "Invalid period ! Some periods overlap or the date period is not in the scope of the fiscal year. "
+msgstr "Période incorrecte ! Certaines périodes se chevauchent ou la date de la période n'est pas incluse dans l'exercice comptable. "
+
+#. module: msf_instance
+#: model:ir.model,name:msf_instance.model_account_period
+msgid "Account period"
+msgstr "Compte - Période"
+
+#. module: msf_instance
+#: field:account.target.costcenter,is_target:0
+msgid "Is target"
+msgstr "Is target"
+
+#. module: msf_instance
+#: field:msf.instance,level:0
+msgid "Level"
+msgstr "Niveau"
+
+#. module: msf_instance
+#: constraint:account.target.costcenter:0
+msgid "Another cost centre is already defined as the budget consolidation in this proprietary instance."
+msgstr "Another cost centre is already defined as the budget consolidation in this proprietary instance."
+
+#. module: msf_instance
+#: constraint:account.move:0
+msgid "You cannot create entries on different periods/journals in the same move"
+msgstr "Vous ne pouvez pas créer des écritures reflétant une seule transaction sur différentes périodes/journaux "
+
+#. module: msf_instance
+#: field:account.analytic.journal.fake,name:0
+#: field:account.journal.fake,name:0
+msgid "Journal Name"
+msgstr "Nom du Journal"
+
+#. module: msf_instance
+#: field:msf.instance,note:0
+msgid "Note"
+msgstr "Note"
+
+#. module: msf_instance
+#: view:msf.instance:0
+msgid "Inactive"
+msgstr "Inactive"
+
+#. module: msf_instance
+#: sql_constraint:account.journal:0
+#: sql_constraint:account.journal.fake:0
+msgid "The name of the journal must be unique per company and instance !"
+msgstr "Le nom du journal doit être unique par société et instance!"
+
+#. module: msf_instance
+#: model:ir.model,name:msf_instance.model_account_cashbox_line
+msgid "CashBox Line"
+msgstr "Ligne de Caisse"
+
+#. module: msf_instance
+#: field:account.journal.fake,allow_date:0
+msgid "Check Date not in the Period"
+msgstr "Date du Chèque est hors période"
+
+#. module: msf_instance
+#: constraint:account.move.line:0
+msgid "Company must be same for its related account and period."
+msgstr "La Société doit être la même pour le compte et période connexes."
+
+#. module: msf_instance
+#: view:msf.instance:0
+msgid "You are about to deactivate this proprietary instance. This action can not be undone, do you want to proceed?"
+msgstr "You are about to deactivate this proprietary instance. This action can not be undone, do you want to proceed?"
+
+#. module: msf_instance
+#: view:wizard.add.cost.centers:0
+msgid "Cancel"
+msgstr "Cancel"
+
+#. module: msf_instance
+#: field:account.analytic.journal.fake,company_id:0
+#: view:account.journal:0
+#: field:account.journal.fake,company_id:0
+msgid "Company"
+msgstr "Société"
+
+#. module: msf_instance
+#: field:account.journal.fake,type_control_ids:0
+msgid "Type Controls"
+msgstr "Types de contrôles"
+
+#. module: msf_instance
+#: field:account.analytic.journal.fake,code:0
+msgid "Journal Code"
+msgstr "Code Journal"
+
+#. module: msf_instance
+#: field:account.journal.fake,default_debit_account_id:0
+msgid "Default Debit Account"
+msgstr "Compte de Débit par défaut"
+
+#. module: msf_instance
+#: help:account.journal.fake,update_posted:0
+msgid "Check this box if you want to allow the cancellation the entries related to this journal or of the invoice related to this journal"
+msgstr "Cochez cette case si vous voulez autoriser l'annulation des écritures ou des factures associées à ce journal."
+
+#. module: msf_instance
+#: model:ir.model,name:msf_instance.model_account_analytic_line
+msgid "Analytic Line"
+msgstr "Ligne Analytique"
+
+#. module: msf_instance
+#: field:account.analytic.journal.fake,type:0
+#: field:account.journal.fake,type:0
+msgid "Type"
+msgstr "Type"
+
+#. module: msf_instance
+#: field:account.journal.fake,filter_for_third_party:0
+msgid "Internal Field"
+msgstr "Champ Interne"
+
+#. module: msf_instance
+#: code:addons/msf_instance/res_company.py:117
+#, python-format
+msgid "Only one company per instance!"
+msgstr "Une seule société par instance!"
+
+#. module: msf_instance
+#: selection:account.analytic.journal.fake,type:0
+#: selection:account.journal.fake,type:0
+msgid "Intermission"
+msgstr "Intermission"
+
+#. module: msf_instance
+#: field:account.journal.fake,groups_id:0
+msgid "Groups"
+msgstr "Groupes"
+
+#. module: msf_instance
+#: constraint:account.bank.statement.line:0
+msgid "The amount of the voucher must be the same amount as the one on the statement line"
+msgstr "Le montant du justificatif doit être identique à celui de la ligne concernée"
+
+#. module: msf_instance
+#: view:msf.instance:0
+msgid "General Information"
+msgstr "General Information"
+
+#. module: msf_instance
+#: field:account.journal.fake,account_control_ids:0
+msgid "Account"
+msgstr "Compte"
+
+#. module: msf_instance
+#: field:account.target.costcenter,child_ids:0
+#: field:msf.instance,child_ids:0
+msgid "Children"
+msgstr "Enfants"
+
+#. module: msf_instance
+#: field:res.company,second_time:0
+msgid "Config. Wizard launched for the second time"
+msgstr "Assistant de configuration lancé pour la deuxième fois"
+
+#. module: msf_instance
+#: selection:account.analytic.journal.fake,type:0
+#: selection:account.journal.fake,type:0
+msgid "Sale"
+msgstr "Sale"
+
+#. module: msf_instance
+#: field:res.company,company_second_time:0
+msgid "Company Config. Wizard launched for the second time"
+msgstr "Assistant de configuration société lancé pour la deuxième fois"
+
+#. module: msf_instance
+#: help:account.journal.fake,code:0
+msgid "The code will be used to generate the numbers of the journal entries of this journal."
+msgstr "Le code sera utilisé pour générer les numéros d'écritures de ce journal."
+
+#. module: msf_instance
+#: sql_constraint:account.journal:0
+#: sql_constraint:account.journal.fake:0
+msgid "The code of the journal must be unique per company and instance !"
+msgstr "Le code du compte doit être unique par société et instance!"
+
+#. module: msf_instance
+#: help:account.analytic.journal.fake,type:0
+msgid "Gives the type of the analytic journal. When it needs for a document (eg: an invoice) to create analytic entries, OpenERP will look for a matching journal of the same type."
+msgstr "Indique le type du journal analytique. Quand des écritures analytiques doivent être créées pour un document (une facture par exemple), OpenERP va rechercher un journal correspondant du même type."
+
+#. module: msf_instance
+#: field:account.journal.fake,centralisation:0
+msgid "Centralised counterpart"
+msgstr "Contrepartie Centralisée"
+
+#. module: msf_instance
+#: field:account.target.costcenter,cost_center_name:0
+msgid "Name"
+msgstr "Name"
+
+#. module: msf_instance
+#: field:account.analytic.journal,is_current_instance:0
+#: field:account.journal,is_current_instance:0
+#: field:account.journal.fake,is_current_instance:0
+msgid "Current Instance"
+msgstr "Instance actuelle"
+
+#. module: msf_instance
+#: constraint:account.target.costcenter:0
+msgid "This cost centre is already defined as the PO/FO reference in another proprietary instance."
+msgstr "This cost centre is already defined as the PO/FO reference in another proprietary instance."
+
+#. module: msf_instance
+#: selection:msf.instance,level:0
+msgid "Section"
+msgstr "Section"
+
+#. module: msf_instance
+#: selection:account.journal.fake,type:0
+msgid "Stock"
+msgstr "Stock"
+
+#. module: msf_instance
+#: selection:account.analytic.journal.fake,type:0
+#: selection:account.journal.fake,type:0
+msgid "HR"
+msgstr "HR"
+
+#. module: msf_instance
+#: help:account.journal.fake,user_id:0
+msgid "The user responsible for this journal"
+msgstr "L'utilisateur responsable pour ce journal"
+
+#. module: msf_instance
+#: field:account.target.costcenter,instance_id:0
+#: model:ir.actions.act_window,name:msf_instance.action_msf_instance_setup
+#: field:msf.instance,instance:0
+msgid "Instance"
+msgstr "Instance"
+
+#. module: msf_instance
+#: help:account.journal.fake,view_id:0
+msgid "Gives the view used when writing or browsing entries in this journal. The view tells OpenERP which fields should be visible, required or readonly and in which order. You can create your own view for a faster encoding in each journal."
+msgstr "Donne la vue utilisée lors de la saisie des écritures ou de la navigation dans le journal. La vue définit OpenERP quels champs doivent être visibles, requis ou en lecture seule et dans quel ordre. Vous pouvez créer votre propre vue pour une saisie plus rapide dans chaque journal."
+
+#. module: msf_instance
+#: help:account.journal.fake,sequence_id:0
+msgid "This field contains the informatin related to the numbering of the journal entries of this journal."
+msgstr "Ce champ contient les informations relatives à la numérotation des écritures comptables de ce journal."
+
+#. module: msf_instance
+#: selection:account.analytic.journal.fake,type:0
+msgid "Engagement"
+msgstr "Engagement"
+
+#. module: msf_instance
+#: selection:msf.instance,state:0
+msgid "Inactive"
+msgstr "Inactif"
+
+#. module: msf_instance
+#: field:account.analytic.journal.fake,line_ids:0
+msgid "Lines"
+msgstr "Lignes"
+
+#. module: msf_instance
+#: view:msf.instance:0
+msgid "Deactivate"
+msgstr "Désactiver"
+
+#. module: msf_instance
+#: view:msf.instance:0
+msgid "Active"
+msgstr "Active"
+
+#. module: msf_instance
+#: selection:account.analytic.journal.fake,type:0
+#: selection:account.journal.fake,type:0
+msgid "Migration"
+msgstr "Migration"
+
+#. module: msf_instance
+#: field:account.journal.fake,entry_posted:0
+msgid "Skip 'Draft' State for Manual Entries"
+msgstr "Sauter statut \"Brouillon\" pour les Saisies manuelles"
+
+#. module: msf_instance
+#: selection:account.analytic.journal.fake,type:0
+#: selection:account.journal.fake,type:0
+msgid "Cash"
+msgstr "Cash"
+
+#. module: msf_instance
+#: model:ir.model,name:msf_instance.model_res_company
+#: view:res.company:0
+msgid "Companies"
+msgstr "Sociétés"
+
+#. module: msf_instance
+#: view:res.company:0
+msgid "Configuration"
+msgstr "Configuration"
+
+#. module: msf_instance
+#: field:account.analytic.journal.fake,is_current_instance:0
+msgid "Current Instance"
+msgstr "Current Instance"
+
+#. module: msf_instance
+#: help:account.journal.fake,allow_date:0
+msgid "If set to True then do not accept the entry if the entry date is not into the period dates"
+msgstr "Si placé sur Vrai, alors n'acceptez pas l'écriture si  la date de saisie ne correspond pas aux dates de la période"
+
+#. module: msf_instance
+#: selection:account.journal.fake,type:0
+msgid "Purchase Refund"
+msgstr "Purchase Refund"
+
+#. module: msf_instance
+#: help:account.journal.fake,default_credit_account_id:0
+msgid "It acts as a default account for credit amount"
+msgstr "Agira comme compte par défaut pour le montant du crédit"
+
+#. module: msf_instance
+#: sql_constraint:account.bank.statement:0
+msgid "You cannot have a register on the same period and the same journal!"
+msgstr "Vous ne pouvez pas avoir un registre sur la même période et le même journal !"
+
+#. module: msf_instance
+#: selection:account.analytic.journal.fake,type:0
+#: selection:account.journal.fake,type:0
+msgid "Purchase"
+msgstr "Purchase"
+
+#. module: msf_instance
+#: help:account.journal.fake,analytic_journal_id:0
+msgid "Journal for analytic entries"
+msgstr "Journal d'écritures analytiques"
+
+#. module: msf_instance
+#: selection:msf.instance,state:0
+msgid "Draft"
+msgstr "Brouillon"
+
+#. module: msf_instance
+#: help:account.journal.fake,entry_posted:0
+msgid "Check this box if you don't want new journal entries to pass through the 'draft' state and instead goes directly to the 'posted state' without any manual validation. \n"
+"Note that journal entries that are automatically created by the system are always skipping that state."
+msgstr "Cochez cette case si vous voulez que les nouvelles écritures saisies dans le journal ne passent pas par le statut \"brouillon\" et qu'elles soient directement enregistrées sous statut 'comptabilisé'. \n"
+"Notez que les écritures de journal générées automatiquement par le système sautent toujours ce statut."
+
+#. module: msf_instance
+#: help:account.journal.fake,centralisation:0
+msgid "Check this box to determine that each entry of this journal won't create a new counterpart but will share the same counterpart. This is used in fiscal year closing."
+msgstr "Cochez cette case pour indiquer que chaque écriture de ce journal ne créera pas une nouvelle contrepartie, mais partagera la même contrepartie. Cela est utilisé lors de la clôture de l'exercice comptable."
+
+#. module: msf_instance
+#: field:msf.instance,current_instance_level:0
+msgid "Current Instance Level"
+msgstr "Current Instance Level"
+
+#. module: msf_instance
+#: model:ir.model,name:msf_instance.model_account_target_costcenter
+msgid "account.target.costcenter"
+msgstr "account.target.costcenter"
+
+#. module: msf_instance
+#: field:account.analytic.line,journal_id_fake:0
+#: field:account.move,journal_id_fake:0
+#: field:account.move.line,journal_id_fake:0
+#: model:ir.model,name:msf_instance.model_account_journal
+#: model:ir.model,name:msf_instance.model_account_journal_fake
+msgid "Journal"
+msgstr "Journal"
+
+#. module: msf_instance
+#: help:res.company,instance_id:0
+msgid "Representation of the current instance"
+msgstr "Représentation de l'instance actuelle"
+
+#. module: msf_instance
+#: field:account.analytic.journal.fake,active:0
+#: selection:msf.instance,state:0
+msgid "Active"
+msgstr "Actif"
+
+#. module: msf_instance
+#: field:account.journal.fake,currency:0
+msgid "Currency"
+msgstr "Devises"
+
+#. module: msf_instance
+#: selection:account.journal.fake,type:0
+msgid "Cheque"
+msgstr "Cheque"
+
+#. module: msf_instance
+#: selection:account.analytic.journal.fake,type:0
+#: selection:account.journal.fake,type:0
+msgid "OD-Extra Accounting"
+msgstr "OD-Extra Accounting"
+
+#. module: msf_instance
+#: selection:msf.instance,level:0
+msgid "Coordo"
+msgstr "Coordo"
+
+#. module: msf_instance
+#: constraint:account.move.line:0
+msgid "You can not create move line on closed account."
+msgstr "Vous ne pouvez pas créer des écritures dans un journal clôturé."
+
+#. module: msf_instance
+#: constraint:res.company:0
+msgid "Error! You can not create recursive companies."
+msgstr "Erreur! Vous ne pouvez pas créer des sociétés récursives"
+
+#. module: msf_instance
+#: field:msf_instance.setup,instance_id:0
+msgid "Proprietary instance"
+msgstr "Instance propriétaire"
+
+#. module: msf_instance
+#: model:ir.model,name:msf_instance.model_account_move
+msgid "Account Entry"
+msgstr "Ecriture Comptable"
+
+#. module: msf_instance
+#: constraint:msf.instance:0
+msgid "You cannot have the same code or name than an active instance!"
+msgstr "Vous ne pouvez pas avoir de même code ou nom qu'une instance active!"
+
+#. module: msf_instance
+#: constraint:account.target.costcenter:0
+msgid "Another cost centre is already defined as the PO/FO reference in this proprietary instance."
+msgstr "Another cost centre is already defined as the PO/FO reference in this proprietary instance."
+
+#. module: msf_instance
+#: constraint:msf.instance:0
+msgid "You cannot have the same move prefix than an active instance!"
+msgstr "Vous ne pouvez pas avoir le même préfixe de mouvement qu'une instance active !"
+
+#. module: msf_instance
+#: selection:account.journal.fake,type:0
+msgid "Opening/Closing Situation"
+msgstr "Opening/Closing Situation"
+
+#. module: msf_instance
+#: model:ir.model,name:msf_instance.model_account_move_line
+msgid "Journal Items"
+msgstr "Lignes d'Ecritures Comptables"
+
+#. module: msf_instance
+#: selection:account.journal.fake,type:0
+msgid "Accrual"
+msgstr "Accrual"
+
+#. module: msf_instance
+#: field:wizard.add.cost.centers,cost_center_ids:0
+msgid "Cost Centers To Synchronize"
+msgstr "Cost Centers To Synchronize"
+
+#. module: msf_instance
+#: field:account.target.costcenter,is_top_cost_center:0
+#: field:msf.instance,top_cost_center_id:0
+msgid "Top cost centre for budget consolidation"
+msgstr "Top cost centre for budget consolidation"
+
+#. module: msf_instance
+#: selection:account.analytic.journal.fake,type:0
+#: selection:account.journal.fake,type:0
+msgid "Correction"
+msgstr "Correction"
+
+#. module: msf_instance
+#: help:account.journal.fake,default_debit_account_id:0
+msgid "It acts as a default account for debit amount"
+msgstr "Agira comme compte par défaut pour le montant du débit"
+
+#. module: msf_instance
+#: constraint:account.period:0
+msgid "Error ! The duration of the Period(s) is/are invalid. "
+msgstr "Erreur ! La durée de la(des) période(s) est/sont invalides. "
+
+#. module: msf_instance
+#: field:account.analytic.journal,instance_id:0
+#: field:account.analytic.journal.fake,instance_id:0
+#: field:account.analytic.line,instance_id:0
+#: field:account.bank.statement,instance_id:0
+#: field:account.bank.statement.line,instance_id:0
+#: field:account.cashbox.line,instance_id:0
+#: field:account.journal,instance_id:0
+#: field:account.journal.fake,instance_id:0
+#: view:account.move:0
+#: field:account.move,instance_id:0
+#: view:account.move.line:0
+#: field:account.move.line,instance_id:0
+#: view:msf.instance:0
+#: view:res.company:0
+#: field:res.company,instance_id:0
+msgid "Proprietary Instance"
+msgstr "Instance propriétaire"
+
+#. module: msf_instance
+#: selection:msf.instance,level:0
+msgid "Project"
+msgstr "Projet"
+
+#. module: msf_instance
+#: field:account.journal.fake,analytic_journal_id:0
+#: model:ir.model,name:msf_instance.model_account_analytic_journal
+#: model:ir.model,name:msf_instance.model_account_analytic_journal_fake
+msgid "Analytic Journal"
+msgstr "Journal Analytique"
+
+#. module: msf_instance
+#: field:account.journal.fake,user_id:0
+msgid "User"
+msgstr "Utilisateur"
+
+#. module: msf_instance
+#: field:msf.instance,name:0
+msgid "Name"
+msgstr "Nom"
+
+#. module: msf_instance
+#: help:account.journal.fake,group_invoice_lines:0
+msgid "If this box is checked, the system will try to group the accounting lines when generating them from invoices."
+msgstr "Si cette case est cochée, le système essaiera de grouper les lignes comptables lorsqu'il les créera à partir des factures."
+
+#. module: msf_instance
+#: constraint:account.move:0
+msgid "You cannot create more than one move per period on centralized journal"
+msgstr "Vous ne pouvez pas créer plus d'une écriture par période sur un journal centralisé"
+
+#. module: msf_instance
+#: field:account.journal.fake,default_credit_account_id:0
+msgid "Default Credit Account"
+msgstr "Compte de Crédit par défaut"
+
+#. module: msf_instance
+#: constraint:account.bank.statement.line:0
+msgid "Date is not correct. Verify that it's in the register's period. "
+msgstr "Date incorrecte. Vérifier que ce soit bien dans la période du registre. "
+
+#. module: msf_instance
+#: constraint:account.move.line:0
+msgid "You can not create move line on view account."
+msgstr "Vous ne pouvez pas créer des écritures sur un compte-groupe"
+
+#. module: msf_instance
+#: selection:account.analytic.journal.fake,type:0
+msgid "Situation"
+msgstr "Situation"
+
+#. module: msf_instance
+#: model:ir.module.module,shortdesc:msf_instance.module_meta_information
+msgid "MSF Proprietary Instance"
+msgstr "Instance propriétaire MSF"
+
+#. module: msf_instance
+#: model:ir.model,name:msf_instance.model_wizard_add_cost_centers
+#: view:wizard.add.cost.centers:0
+msgid "Add Cost Centers"
+msgstr "Ajouter des Centres de Coûts"
+
+#. module: msf_instance
+#: model:ir.model,name:msf_instance.model_account_bank_statement
+msgid "Bank Statement"
+msgstr "Relevé bancaire"
+
+#. module: msf_instance
+#: code:addons/msf_instance/account.py:46
+#, python-format
+msgid "Some HQ entries are not validated in this period. Please validate them before field-closing this period."
+msgstr "Some HQ entries are not validated in this period. Please validate them before field-closing this period."
+
+#. module: msf_instance
+#: field:msf.instance,target_cost_center_ids:0
+msgid "Target Cost Centers"
+msgstr "Target Cost Centers"
+
+#. module: msf_instance
+#: field:account.journal.fake,code:0
+#: field:account.target.costcenter,cost_center_id:0
+#: field:msf.instance,code:0
+msgid "Code"
+msgstr "Code"
+
+#. module: msf_instance
+#: field:msf_instance.setup,config_logo:0
+msgid "Image"
+msgstr "Image"
+
+#. module: msf_instance
+#: help:account.analytic.journal,is_current_instance:0
+#: help:account.journal,is_current_instance:0
+#: help:account.journal.fake,is_current_instance:0
+msgid "Is this journal from my instance?"
+msgstr "Ce journal est-il de mon instance ?"
+
+#. module: msf_instance
+#: model:ir.actions.act_window,name:msf_instance.action_msf_instance_tree
+#: model:ir.ui.menu,name:msf_instance.menu_action_msf_instance_tree
+#: view:msf.instance:0
+msgid "Proprietary Instances"
+msgstr "Instances propriétaire"
+
+#. module: msf_instance
+#: model:ir.model,name:msf_instance.model_msf_instance
+msgid "msf.instance"
+msgstr "msf.instance"
+
+#. module: msf_instance
+#: selection:account.journal.fake,type:0
+msgid "Depreciation"
+msgstr "Depreciation"
+
+#. module: msf_instance
+#: model:ir.model,name:msf_instance.model_msf_instance_setup
+msgid "msf_instance.setup"
+msgstr "msf_instance.setup"
+
+#. module: msf_instance
+#: help:account.journal.fake,company_id:0
+msgid "Company related to this journal"
+msgstr "Société connexe à ce journal"
+
+#. module: msf_instance
+#: field:msf.instance,reconcile_prefix:0
+msgid "Reconcilation prefix"
+msgstr "Préfixe de lettrage"
+
+#. module: msf_instance
+#: selection:account.analytic.journal.fake,type:0
+#: selection:account.journal.fake,type:0
+msgid "General"
+msgstr "General"
+
+#. module: msf_instance
+#: field:account.journal.fake,update_posted:0
+msgid "Allow Cancelling Entries"
+msgstr "Autoriser l'Annulation d'Ecritures"
+

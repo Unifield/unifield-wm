@@ -1,0 +1,435 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* order_types
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: order_types
+#: view:stock.move:0
+msgid "Order Traceability"
+msgstr "Tracabilité de la Commande"
+
+#. module: order_types
+#: report:order.type.donation.certificate:0
+#: report:order.type.gift.certificate:0
+#: field:stock.certificate.valuation,prodlot_id:0
+msgid "Batch number"
+msgstr "Numéro de Lot"
+
+#. module: order_types
+#: field:stock.picking,cd_from_bo:0
+msgid "CD from BO"
+msgstr "CD from BO"
+
+#. module: order_types
+#: selection:stock.print.certificate,type:0
+msgid "Donation certificate"
+msgstr "Certificat  de Donation"
+
+#. module: order_types
+#: field:stock.move,order_priority:0
+#: selection:stock.move,order_priority:0
+msgid "Priority"
+msgstr "Priorité"
+
+#. module: order_types
+#: constraint:stock.move:0
+msgid "You must assign an asset for this product."
+msgstr "Vous devez mentionner un bien pour ce produit."
+
+#. module: order_types
+#: code:addons/order_types/wizard/stock_print_certificate.py:86
+#, python-format
+msgid "You cannot remove this line !"
+msgstr "Vous ne pouvez pas supprimer cette ligne !"
+
+#. module: order_types
+#: view:stock.move:0
+msgid "In Progress"
+msgstr "En Cours"
+
+#. module: order_types
+#: view:stock.certificate.valuation:0
+#: view:stock.print.certificate:0
+#: field:stock.print.certificate,valuation_ids:0
+msgid "Product valuation"
+msgstr "Valorisation du Produit"
+
+#. module: order_types
+#: field:stock.certificate.valuation,move_id:0
+msgid "Move"
+msgstr "Transaction"
+
+#. module: order_types
+#: model:ir.model,name:order_types.model_stock_certificate_picking
+msgid "Attach a certificate to an Incoming donation"
+msgstr "Attacher un certificat à la donation entrante"
+
+#. module: order_types
+#: code:addons/order_types/wizard/stock_print_certificate.py:86
+#, python-format
+msgid "Errror"
+msgstr "Erreur"
+
+#. module: order_types
+#: field:stock.print.certificate,type:0
+msgid "Type of certificate"
+msgstr "Type de certificat"
+
+#. module: order_types
+#: report:order.type.donation.certificate:0
+#: report:order.type.gift.certificate:0
+msgid "From :"
+msgstr "De :"
+
+#. module: order_types
+#: selection:stock.move,order_type:0
+msgid "Loan"
+msgstr "Prêt"
+
+#. module: order_types
+#: report:order.type.donation.certificate:0
+#: report:order.type.gift.certificate:0
+msgid "To :"
+msgstr "Vers :"
+
+#. module: order_types
+#: model:ir.model,name:order_types.model_stock_picking_not_available
+msgid "stock.picking.not.available"
+msgstr "stock.picking.not.available"
+
+#. module: order_types
+#: model:ir.actions.report.xml,name:order_types.donation_certificate
+#: report:order.type.donation.certificate:0
+msgid "Donation Certificate"
+msgstr "Certificat de donation"
+
+#. module: order_types
+#: model:ir.model,name:order_types.model_stock_print_certificate
+msgid "Print a certificate from an Outgoing donation"
+msgstr "Imprimer un certificat pour une Donation Sortante"
+
+#. module: order_types
+#: report:order.type.donation.certificate:0
+#: report:order.type.gift.certificate:0
+msgid "Expiry date"
+msgstr "Date d'expiration"
+
+#. module: order_types
+#: field:stock.certificate.picking,donation_ok:0
+msgid "Have you a certificate of donation to attach to this picking ?"
+msgstr "Avez-vous un certificat de donation à attacher à ce Piquage?"
+
+#. module: order_types
+#: constraint:stock.move:0
+msgid "You cannot select Service Location as Source Location."
+msgstr "Vous ne pouvez pas sélectionner la Zone Service comme Zone Source"
+
+#. module: order_types
+#: selection:stock.move,order_type:0
+msgid "Standard donation"
+msgstr "Donation normale"
+
+#. module: order_types
+#: constraint:stock.picking:0
+msgid "You cannot validate this document because it contains a line with an inactive product"
+msgstr "Vous ne pouvez pas valider ce document car il contient des lignes avec un produit inactif"
+
+#. module: order_types
+#: code:addons/order_types/stock.py:228
+#: view:stock.certificate.picking:0
+#, python-format
+msgid "Attach a certificate of donation"
+msgstr "Joindre un certificat de donation"
+
+#. module: order_types
+#: model:ir.module.module,shortdesc:order_types.module_meta_information
+msgid "Order Types"
+msgstr "Types de Commande"
+
+#. module: order_types
+#: view:stock.print.certificate:0
+msgid "Print a certificate"
+msgstr "Imprimer un certificat"
+
+#. module: order_types
+#: selection:stock.move,order_type:0
+msgid "Regular"
+msgstr "Normal"
+
+#. module: order_types
+#: field:stock.picking,certificate_donation:0
+msgid "Certif ?"
+msgstr "Certificat ?"
+
+#. module: order_types
+#: constraint:stock.move:0
+msgid "Constraint error on Uom"
+msgstr "Constraint error on Uom"
+
+#. module: order_types
+#: model:ir.model,name:order_types.model_stock_move
+msgid "Stock Move"
+msgstr "Mouvement de Stock"
+
+#. module: order_types
+#: field:stock.move,purchase_ref_id:0
+msgid "Purchase"
+msgstr "Achat"
+
+#. module: order_types
+#: view:stock.print.certificate:0
+msgid "Choose type"
+msgstr "Choisir le type"
+
+#. module: order_types
+#: field:stock.picking.not.available,move_id:0
+msgid "Move id"
+msgstr "Déplacer id."
+
+#. module: order_types
+#: view:stock.certificate.picking:0
+msgid "Certificat"
+msgstr "Certificat"
+
+#. module: order_types
+#: model:ir.model,name:order_types.model_stock_certificate_valuation
+msgid "Valuation of product in Outgoing donation"
+msgstr "Valorisation d'un produit de la Donation Sortante"
+
+#. module: order_types
+#: constraint:stock.move:0
+#: constraint:stock.picking:0
+msgid "Wrong reason type for an OUT created from scratch."
+msgstr "Mauvais type de motif pour une livraison OUT créée à partir de rien."
+
+#. module: order_types
+#: selection:stock.move,order_type:0
+msgid "Direct Purchase Order"
+msgstr "Bon de Commande Directe"
+
+#. module: order_types
+#: view:stock.picking.not.available:0
+msgid "Non available quantities will not be moved and will remain in the backorder document (unless you “force availability” if you are sure goods are available)"
+msgstr "Les quantités non disponibles ne seront pas déplacées et resteront sur le document Reliquat de Commande (sauf si vous \"forcez la disponibilité\" au cas où vous êtes certains que les marchandises sont disponibles)"
+
+#. module: order_types
+#: selection:stock.print.certificate,type:0
+msgid "Gift certificate"
+msgstr "Certificat de don"
+
+#. module: order_types
+#: report:order.type.donation.certificate:0
+#: report:order.type.gift.certificate:0
+msgid "Valuation"
+msgstr "Valorisation"
+
+#. module: order_types
+#: selection:stock.move,order_type:0
+msgid "In Kind Donation"
+msgstr "Donation en Nature"
+
+#. module: order_types
+#: report:order.type.donation.certificate:0
+#: report:order.type.gift.certificate:0
+msgid "Date :"
+msgstr "Date :"
+
+#. module: order_types
+#: report:order.type.donation.certificate:0
+#: report:order.type.gift.certificate:0
+#: field:stock.certificate.valuation,qty:0
+msgid "Qty"
+msgstr "Qté"
+
+#. module: order_types
+#: selection:stock.move,order_category:0
+msgid "Other"
+msgstr "Autre"
+
+#. module: order_types
+#: field:stock.certificate.picking,attachment:0
+msgid "Certificate of donation"
+msgstr "Certificat de donation"
+
+#. module: order_types
+#: selection:stock.move,order_priority:0
+msgid "Normal"
+msgstr "Normal"
+
+#. module: order_types
+#: model:ir.model,name:order_types.model_stock_picking
+msgid "Picking List"
+msgstr "Liste de Piquage"
+
+#. module: order_types
+#: report:order.type.donation.certificate:0
+#: report:order.type.gift.certificate:0
+msgid "Products :"
+msgstr "Produits :"
+
+#. module: order_types
+#: constraint:stock.move:0
+msgid "You must assign a batch number for this product."
+msgstr "Vous devez mentionner un numéro de lot pour ce produit."
+
+#. module: order_types
+#: report:order.type.donation.certificate:0
+#: report:order.type.gift.certificate:0
+#: field:stock.certificate.valuation,product_id:0
+msgid "Product"
+msgstr "Produit"
+
+#. module: order_types
+#: selection:stock.move,order_category:0
+msgid "Medical"
+msgstr "Médical"
+
+#. module: order_types
+#: field:stock.move,order_category:0
+msgid "Category"
+msgstr "Catégorie"
+
+#. module: order_types
+#: field:stock.certificate.valuation,picking_id:0
+msgid "Picking"
+msgstr "Piquage"
+
+#. module: order_types
+#: selection:stock.move,order_type:0
+msgid "Donation before expiry"
+msgstr "Donation avant expiration"
+
+#. module: order_types
+#: view:stock.picking.not.available:0
+msgid "Yes"
+msgstr "Oui"
+
+#. module: order_types
+#: selection:stock.move,order_category:0
+msgid "Transport"
+msgstr "Transport"
+
+#. module: order_types
+#: field:stock.picking,attach_cert:0
+msgid "Certificate attached ?"
+msgstr "Certificate attaché ?"
+
+#. module: order_types
+#: model:ir.module.module,description:order_types.module_meta_information
+msgid "\n"
+"    This module aims at differentiating orders. The goal is to split orders into several types that\n"
+"    will be used for the mapping of different workflows.\n"
+"    "
+msgstr "Ce module vise à différencier les commandes. L'objectif est de fractionner les commandes en plusieurs types qui\n"
+"     seront utilisés pour la correspondance des différents flux de travail.\n"
+"    "
+
+#. module: order_types
+#: field:stock.certificate.valuation,unit_price:0
+msgid "Unit Price"
+msgstr "Prix unitaire"
+
+#. module: order_types
+#: view:stock.certificate.picking:0
+msgid "Validate the attachment"
+msgstr "Valider la pièce jointe"
+
+#. module: order_types
+#: field:stock.certificate.valuation,print_id:0
+msgid "Print"
+msgstr "Imprimer"
+
+#. module: order_types
+#: constraint:stock.move:0
+msgid "You try to assign a lot which is not from the same product"
+msgstr "Vous essayez d'attribuer un lot qui ne correspond pas au même produit"
+
+#. module: order_types
+#: field:stock.move,order_type:0
+msgid "Order Type"
+msgstr "Type de Commande"
+
+#. module: order_types
+#: field:stock.certificate.picking,att_fname:0
+msgid "Filename"
+msgstr "Nom du fichier"
+
+#. module: order_types
+#: selection:stock.move,order_type:0
+msgid "Purchase List"
+msgstr "Liste d'Achats"
+
+#. module: order_types
+#: view:stock.print.certificate:0
+msgid "Print certificate"
+msgstr "Imprimer certificat"
+
+#. module: order_types
+#: field:stock.certificate.picking,picking_id:0
+#: field:stock.picking.not.available,picking_id:0
+#: field:stock.print.certificate,picking_id:0
+msgid "Picking id"
+msgstr "Piquage id."
+
+#. module: order_types
+#: selection:stock.move,order_priority:0
+msgid "Emergency"
+msgstr "Urgence"
+
+#. module: order_types
+#: model:ir.actions.report.xml,name:order_types.gift_certificate
+#: report:order.type.gift.certificate:0
+msgid "Gift Certificate"
+msgstr "Certificat de Don"
+
+#. module: order_types
+#: field:stock.move,sale_ref_id:0
+msgid "Sale"
+msgstr "Commande  "
+
+#. module: order_types
+#: view:stock.certificate.picking:0
+msgid "Actions"
+msgstr "Actions"
+
+#. module: order_types
+#: selection:stock.move,order_category:0
+msgid "Logistic"
+msgstr "Logistique"
+
+#. module: order_types
+#: selection:stock.move,order_category:0
+msgid "Service"
+msgstr "Service"
+
+#. module: order_types
+#: code:addons/order_types/stock.py:184
+#: code:addons/order_types/stock.py:210
+#: view:stock.picking.not.available:0
+#, python-format
+msgid "Warning"
+msgstr "Avertissement"
+
+#. module: order_types
+#: view:stock.picking.not.available:0
+msgid "No"
+msgstr "Non"
+
+#. module: order_types
+#: code:addons/order_types/stock.py:184
+#, python-format
+msgid "This picking doesn't require a donation certificate"
+msgstr "Ce prélèvement ne nécessite pas de certificat de donation"
+

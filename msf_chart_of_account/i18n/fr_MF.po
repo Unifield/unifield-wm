@@ -1,0 +1,1465 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* msf_chart_of_account
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.1301
+msgid "Security enveloppes"
+msgstr "Security enveloppes"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6100
+msgid "Per diem"
+msgstr "Per diem"
+
+#. module: msf_chart_of_account
+#: view:msf_chart_of_account.installer:0
+msgid "res_config_contents"
+msgstr "res_config_contents"
+
+#. module: msf_chart_of_account
+#: field:msf_chart_of_account.installer,counterpart_hq_entries_default_account:0
+msgid "Default counterpart"
+msgstr "Default counterpart"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.312
+#: model:account.account,name:msf_chart_of_account.3120
+msgid "Accrued social security"
+msgstr "Accrued social security"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6109
+msgid "Perdiem paid at HQ non taxable"
+msgstr "Perdiem paid at HQ non taxable"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.8
+msgid "Off balance sheet suspense accounts"
+msgstr "Off balance sheet suspense accounts"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6451
+msgid "Health facilities : non-medical equipment/furniture"
+msgstr "Health facilities : non-medical equipment/furniture"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.91
+msgid "In-Kind donations"
+msgstr "In-Kind donations"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.302
+#: model:account.account,name:msf_chart_of_account.3020
+msgid "Social security"
+msgstr "Social security"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6301
+msgid "Office: stationery & small supplies"
+msgstr "Office: stationery & small supplies"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.3104
+msgid "Other accrued employee costs"
+msgstr "Other accrued employee costs"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.4202
+msgid "Advance to the staff"
+msgstr "Advance to the staff"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6295
+msgid "National staff : housing costs"
+msgstr "National staff : housing costs"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.3030
+msgid "VAT payable"
+msgstr "VAT payable"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.9100
+msgid "In-kind Donations of medical items"
+msgstr "In-kind Donations of medical items"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6111
+msgid "Expat housing : rent & running costs"
+msgstr "Expat housing : rent & running costs"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.203
+#: model:account.account,name:msf_chart_of_account.2030
+msgid "Non medical equipment"
+msgstr "Non medical equipment"
+
+#. module: msf_chart_of_account
+#: model:account.analytic.journal,name:msf_chart_of_account.purchase_refund_analytic_journal
+#: model:account.journal,name:msf_chart_of_account.purchase_refund_journal
+msgid "Purchase Refund"
+msgstr "Purchase Refund"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.20
+msgid "Property, plant and equipement"
+msgstr "Property, plant and equipement"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.101
+#: model:account.account,name:msf_chart_of_account.1010
+msgid "Cash on hand"
+msgstr "Cash on hand"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.9202
+msgid "In-kind Donations of logistics material"
+msgstr "In-kind Donations of logistics material"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.301
+msgid "Personel related accounts"
+msgstr "Personel related accounts"
+
+#. module: msf_chart_of_account
+#: model:account.tax,name:msf_chart_of_account.normal_vat
+msgid "Normal VAT 4,2%"
+msgstr "Normal VAT 4,2%"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.1203
+msgid "Taxes receivables"
+msgstr "Taxes receivables"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.24
+msgid "Long term investments"
+msgstr "Long term investments"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.7100
+msgid "Interest income"
+msgstr "Interest income"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.73
+msgid "Gain on inventory"
+msgstr "Gain on inventory"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.131
+msgid "Advances done to third parties"
+msgstr "Advances done to third parties"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.30
+msgid "Accounts payable"
+msgstr "Accounts payable"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.68
+msgid "Consultant & field support"
+msgstr "Consultant & field support"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6340
+msgid "Internal & external representation costs"
+msgstr "Internal & external representation costs"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6240
+msgid "Logistics and sanitation staff salaries / charges"
+msgstr "Logistics and sanitation staff salaries / charges"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.31
+msgid "Accrued liabilities"
+msgstr "Accrued liabilities"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.3103
+msgid "Accrued severance pay - employees benefits"
+msgstr "Accrued severance pay - employees benefits"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.2110
+msgid "Medical equipment- accumulated depreciation"
+msgstr "Medical equipment- accumulated depreciation"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.1209
+msgid "To be reinvoiced to other sections"
+msgstr "To be reinvoiced to other sections"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.320
+#: model:account.account,name:msf_chart_of_account.3200
+msgid "Provisions"
+msgstr "Provisions"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.81
+msgid "Contribution in kind  (Assets)"
+msgstr "Contribution in kind  (Assets)"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.3301
+msgid "Expenses paid at HQ"
+msgstr "Expenses paid at HQ"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6120
+msgid "MSF Field expatriate salaries (HQ ONLY)"
+msgstr "MSF Field expatriate salaries (HQ ONLY)"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6910
+msgid "Filming costs"
+msgstr "Filming costs"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.25
+#: model:account.account,name:msf_chart_of_account.250
+#: model:account.account,name:msf_chart_of_account.2500
+msgid "Other non-current Assets"
+msgstr "Other non-current Assets"
+
+#. module: msf_chart_of_account
+#: model:ir.actions.act_window,name:msf_chart_of_account.action_config_msf_coa_amount
+#: view:msf_chart_of_account.installer:0
+#: field:msf_chart_of_account.installer,create:0
+msgid "Create Journals"
+msgstr "Create Journals"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.3102
+msgid "Accrued holiday pay - leave days payement"
+msgstr "Accrued holiday pay - leave days payement"
+
+#. module: msf_chart_of_account
+#: model:account.analytic.journal,name:msf_chart_of_account.hq_analytic_journal
+#: model:account.journal,name:msf_chart_of_account.hq_journal
+msgid "HQ"
+msgstr "HQ"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.1201
+msgid "Receivable from other sections"
+msgstr "Receivable from other sections"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6260
+msgid "Non MSF staff salaries & incentives"
+msgstr "Non MSF staff salaries & incentives"
+
+#. module: msf_chart_of_account
+#: model:account.analytic.journal,name:msf_chart_of_account.analytic_miscellaneous_transactions
+msgid "Miscellaneous Transactions Journal"
+msgstr "Miscellaneous Transactions Journal"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.63
+msgid "Office costs"
+msgstr "Office costs"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6700
+msgid "Vehicle purchase"
+msgstr "Vehicle purchase"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.2
+msgid "Non current Assets  > 12 months"
+msgstr "Non current Assets  > 12 months"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.230
+msgid "Softwares - trademarks and licence  - accumulated depreciation"
+msgstr "Softwares - trademarks and licence  - accumulated depreciation"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.300
+msgid "Payables"
+msgstr "Payables"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.61
+msgid "Expatriate staff"
+msgstr "Expatriate staff"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.159
+msgid "Depreciation on inventory"
+msgstr "Depreciation on inventory"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.212
+#: model:account.account,name:msf_chart_of_account.2120
+msgid "Non medical equipment - accumulated depreciation"
+msgstr "Non medical equipment - accumulated depreciation"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.70
+#: model:account.account,name:msf_chart_of_account.7000
+msgid "Donations received in the field"
+msgstr "Donations received in the field"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.8010
+msgid "Variation on non medical stock inventory"
+msgstr "Variation on non medical stock inventory"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.1401
+msgid "Advances or expenses paid for/by other missions"
+msgstr "Advances or expenses paid for/by other missions"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.4
+msgid "Non-current Liabilities > 12 months"
+msgstr "Non-current Liabilities > 12 months"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.1531
+msgid "Stock transfers between sections"
+msgstr "Stock transfers between sections"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6560
+msgid "Fuel (excluding vehicles)"
+msgstr "Fuel (excluding vehicles)"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6133
+msgid "MSF expatriates' insurance (HQ ONLY)"
+msgstr "MSF expatriates' insurance (HQ ONLY)"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.4203
+msgid "Advance with supplier and various"
+msgstr "Advance with supplier and various"
+
+#. module: msf_chart_of_account
+#: model:account.journal,name:msf_chart_of_account.miscellaneous_transactions
+msgid "Miscellaneous Transactions"
+msgstr "Miscellaneous Transactions"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.13
+msgid "Advances and Prepayment"
+msgstr "Advances and Prepayment"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6731
+msgid "International freight - by SEA/ROAD"
+msgstr "International freight - by SEA/ROAD"
+
+#. module: msf_chart_of_account
+#: model:account.journal,name:msf_chart_of_account.bank_euro_journal
+msgid "Bank EUR"
+msgstr "Bank EUR"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.1300
+msgid "Operating advances"
+msgstr "Operating advances"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.7
+msgid "Income"
+msgstr "Income"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.1410
+msgid "Bank transfer with HQ"
+msgstr "Bank transfer with HQ"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.211
+msgid "Medical equipment-accumulated depreciation"
+msgstr "Medical equipment-accumulated depreciation"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.500
+#: model:account.account,name:msf_chart_of_account.5000
+msgid "Surplus carried forward"
+msgstr "Surplus carried forward"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.1330
+msgid "Prepaid Expenses rentals"
+msgstr "Prepaid Expenses rentals"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.129
+#: model:account.account,name:msf_chart_of_account.1299
+msgid "Depreciation on receivables"
+msgstr "Depreciation on receivables"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.7103
+msgid "Financial interest"
+msgstr "Financial interest"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6820
+msgid "HQstaff salary charged to the field HQ ONLY"
+msgstr "HQstaff salary charged to the field HQ ONLY"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6931
+msgid "Lost/bad Debts"
+msgstr "Lost/bad Debts"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.133
+msgid "Prepaid Expenses"
+msgstr "Prepaid Expenses"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.MSF
+msgid "MSF Chart of Accounts"
+msgstr "MSF Chart of Accounts"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6330
+msgid "Printing and documentation"
+msgstr "Printing and documentation"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.130
+msgid "Internal advances"
+msgstr "Internal advances"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6
+msgid "Expenses"
+msgstr "Expenses"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.210
+#: model:account.account,name:msf_chart_of_account.2100
+msgid "Buildings - accumulated depreciation"
+msgstr "Buildings - accumulated depreciation"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.220
+#: model:account.account,name:msf_chart_of_account.2200
+msgid "Softwares - trademarks and licences"
+msgstr "Softwares - trademarks and licences"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6401
+msgid "Medical kits"
+msgstr "Medical kits"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6471
+msgid "Lab equipment"
+msgstr "Lab equipment"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6630
+msgid "Gifts and subsidies from MSF"
+msgstr "Gifts and subsidies from MSF"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6620
+msgid "Training sessions (non MSF staff)"
+msgstr "Training sessions (non MSF staff)"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.50
+msgid "Surplus / Deficit carried forward"
+msgstr "Surplus / Deficit carried forward"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.1416
+msgid "Others"
+msgstr "Others"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.15
+msgid "Inventory"
+msgstr "Inventory"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.8000
+msgid "Variation of medical stock inventory"
+msgstr "Variation of medical stock inventory"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.1415
+msgid "Transfer to/from another financial mission: Other section"
+msgstr "Transfer to/from another financial mission: Other section"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6920
+msgid "Cash difference"
+msgstr "Cash difference"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6935
+msgid "Litigation"
+msgstr "Litigation"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6800
+msgid "Medical survey, consultant & specialist costs"
+msgstr "Medical survey, consultant & specialist costs"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.3002
+msgid "Trade Payables"
+msgstr "Trade Payables"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6315
+msgid "Office : construction & rehabilitation"
+msgstr "Office : construction & rehabilitation"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6530
+msgid "Energy equipment"
+msgstr "Energy equipment"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.1414
+msgid "Transfer to/from another financial mission: Same section"
+msgstr "Transfer to/from another financial mission: Same section"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.3000
+msgid "Payable to other missions"
+msgstr "Payable to other missions"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.3010
+msgid "Remuneration (net salary) payable"
+msgstr "Remuneration (net salary) payable"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6150
+msgid "Salaries and indemnities reinvoiced by others sections"
+msgstr "Salaries and indemnities reinvoiced by others sections"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6710
+msgid "Car and small vehicle rental"
+msgstr "Car and small vehicle rental"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.1403
+msgid "Advances and expenses paid for/by other NGO"
+msgstr "Advances and expenses paid for/by other NGO"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.1200
+msgid "Receivable from other missions"
+msgstr "Receivable from other missions"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6270
+msgid "Daily workers"
+msgstr "Daily workers"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6285
+msgid "National staff : training costs"
+msgstr "National staff : training costs"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.151
+#: model:account.account,name:msf_chart_of_account.1510
+#: model:account.account,name:msf_chart_of_account.901
+#: model:account.account,name:msf_chart_of_account.9010
+msgid "Non medical inventory"
+msgstr "Non medical inventory"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.5
+#: model:account.account,name:msf_chart_of_account.52
+#: model:account.account,name:msf_chart_of_account.520
+msgid "Reserves"
+msgstr "Reserves"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.134
+msgid "Prepayment - goods not yet allocated to a project"
+msgstr "Prepayment - goods not yet allocated to a project"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6720
+msgid "Vehicles repair, maintenance, spare parts"
+msgstr "Vehicles repair, maintenance, spare parts"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.5202
+msgid "HQ AR and HQ AP accounts counterpart"
+msgstr "HQ AR and HQ AP accounts counterpart"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6821
+msgid "Transport and Expenses for headquarters staff"
+msgstr "Transport and Expenses for headquarters staff"
+
+#. module: msf_chart_of_account
+#: model:account.analytic.journal,name:msf_chart_of_account.purchase_analytic_journal
+#: model:account.journal,name:msf_chart_of_account.purchase_journal
+msgid "Purchase"
+msgstr "Purchase"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6400
+msgid "Medicines"
+msgstr "Medicines"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.1412
+msgid "Internal transfer same currency"
+msgstr "Internal transfer same currency"
+
+#. module: msf_chart_of_account
+#: model:account.journal,name:msf_chart_of_account.cheque_chf_journal
+msgid "Cheque CHF"
+msgstr "Cheque CHF"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6412
+msgid "Cold chain material & equipment"
+msgstr "Cold chain material & equipment"
+
+#. module: msf_chart_of_account
+#: model:ir.module.module,description:msf_chart_of_account.module_meta_information
+msgid "This permits to have a chart of account for Unifield Project at MSF"
+msgstr "This permits to have a chart of account for Unifield Project at MSF"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.21
+msgid "Accumulated depreciation"
+msgstr "Accumulated depreciation"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.8110
+msgid "Non medical goods received in kind"
+msgstr "Non medical goods received in kind"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.102
+#: model:account.account,name:msf_chart_of_account.1020
+msgid "Cash at Bank"
+msgstr "Cash at Bank"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.40
+#: model:account.account,name:msf_chart_of_account.400
+#: model:account.account,name:msf_chart_of_account.4000
+msgid "Non current amounts payable"
+msgstr "Non current amounts payable"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6801
+msgid "Non-medical survey, consultant & specialist costs"
+msgstr "Non-medical survey, consultant & specialist costs"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6713
+msgid "Other transport rentals"
+msgstr "Other transport rentals"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.3101
+msgid "Accrued 13th month payable"
+msgstr "Accrued 13th month payable"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.1404
+msgid "Locally received donations (OCA only)"
+msgstr "Locally received donations (OCA only)"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.1530
+msgid "Stock transfers between missions"
+msgstr "Stock transfers between missions"
+
+#. module: msf_chart_of_account
+#: model:account.journal,name:msf_chart_of_account.cheque_euro_journal
+msgid "Cheque EUR"
+msgstr "Cheque EUR"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.1591
+msgid "Depreciation on medical inventory"
+msgstr "Depreciation on medical inventory"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6751
+msgid "Warehouse rent & maintenance"
+msgstr "Warehouse rent & maintenance"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.7101
+msgid "Exceptional income"
+msgstr "Exceptional income"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6640
+msgid "Advocacy and external communication"
+msgstr "Advocacy and external communication"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.1340
+msgid "Goods not yet allocated to a project"
+msgstr "Goods not yet allocated to a project"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.72
+msgid "Sales of equipments and goods"
+msgstr "Sales of equipments and goods"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.310
+msgid "Employee costs"
+msgstr "Employee costs"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6521
+msgid "Water/sanitation equipment"
+msgstr "Water/sanitation equipment"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6450
+msgid "Health facilities : rent & running costs"
+msgstr "Health facilities : rent & running costs"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.311
+#: model:account.account,name:msf_chart_of_account.3110
+msgid "Accrued Payroll taxes"
+msgstr "Accrued Payroll taxes"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.1
+msgid "Current Assets  < 12 months"
+msgstr "Current Assets  < 12 months"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6440
+msgid "Misc. costs for patients (food, hotel, transport)"
+msgstr "Misc. costs for patients (food, hotel, transport)"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6930
+msgid "Theft"
+msgstr "Theft"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.202
+#: model:account.account,name:msf_chart_of_account.2020
+#: model:account.account,name:msf_chart_of_account.6461
+msgid "Medical equipment"
+msgstr "Medical equipment"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.12
+msgid "Accounts receivable"
+msgstr "Accounts receivable"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6810
+msgid "Expertise fee (non-medical)"
+msgstr "Expertise fee (non-medical)"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.313
+#: model:account.account,name:msf_chart_of_account.3130
+msgid "Other accrued liabilities"
+msgstr "Other accrued liabilities"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.1413
+msgid "Internal transfer with currency exchange"
+msgstr "Internal transfer with currency exchange"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.41
+#: model:account.account,name:msf_chart_of_account.410
+#: model:account.account,name:msf_chart_of_account.4100
+msgid "Long term provisions"
+msgstr "Long term provisions"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6732
+msgid "Local customs & clearance costs"
+msgstr "Local customs & clearance costs"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6312
+msgid "Taxes"
+msgstr "Taxes"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.11
+msgid "Financial Assets"
+msgstr "Financial Assets"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6431
+msgid "Food : specialized (therapeutic)"
+msgstr "Food : specialized (therapeutic)"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.200
+#: model:account.account,name:msf_chart_of_account.2000
+msgid "Land"
+msgstr "Land"
+
+#. module: msf_chart_of_account
+#: field:msf_chart_of_account.installer,config_logo:0
+msgid "Image"
+msgstr "Image"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6730
+msgid "International freight - by AIR"
+msgstr "International freight - by AIR"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.920
+msgid "In-kind Donations of non Medical items"
+msgstr "In-kind Donations of non Medical items"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.7200
+msgid "Sales of equipments"
+msgstr "Sales of equipments"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.62
+msgid "National staff"
+msgstr "National staff"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.141
+msgid "Monetary Transfers"
+msgstr "Monetary Transfers"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6103
+msgid "Expat training costs, school fees, etc.."
+msgstr "Expat training costs, school fees, etc.."
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.32
+msgid "Short term provisions"
+msgstr "Short term provisions"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.65
+msgid "Construction, Water, Sanitation"
+msgstr "Construction, Water, Sanitation"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.152
+msgid "Other inventories"
+msgstr "Other inventories"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6124
+msgid "Daily tariff (IRP) HQ ONLY"
+msgstr "Daily tariff (IRP) HQ ONLY"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.1331
+msgid "Prepaid Expenses insurances"
+msgstr "Prepaid Expenses insurances"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.69
+msgid "Miscellaneous"
+msgstr "Miscellaneous"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6141
+msgid "Expat posting tariff (HQ ONLY)"
+msgstr "Expat posting tariff (HQ ONLY)"
+
+#. module: msf_chart_of_account
+#: model:account.analytic.journal,name:msf_chart_of_account.sale_analytic_journal
+#: model:account.journal,name:msf_chart_of_account.sale_journal
+msgid "Sale"
+msgstr "Sale"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.3001
+msgid "Payable to other sections"
+msgstr "Payable to other sections"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.110
+#: model:account.account,name:msf_chart_of_account.1100
+msgid "Guarantee and  Deposits"
+msgstr "Guarantee and  Deposits"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.80
+msgid "Inventories variation"
+msgstr "Inventories variation"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.7210
+msgid "Other sales"
+msgstr "Other sales"
+
+#. module: msf_chart_of_account
+#: model:account.journal,name:msf_chart_of_account.cash_euro_journal
+msgid "Cash EUR"
+msgstr "Cash EUR"
+
+#. module: msf_chart_of_account
+#: view:msf_chart_of_account.installer:0
+msgid "title"
+msgstr "title"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6740
+msgid "Local transport cost MSF staff"
+msgstr "Local transport cost MSF staff"
+
+#. module: msf_chart_of_account
+#: model:account.journal,name:msf_chart_of_account.cash_chf_journal
+msgid "Cash CHF"
+msgstr "Cash CHF"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.9200
+msgid "In-kind Donations of non therapeutic food"
+msgstr "In-kind Donations of non therapeutic food"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.71
+msgid "Financial income"
+msgstr "Financial income"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.3031
+msgid "Payroll taxes / PAYE payable"
+msgstr "Payroll taxes / PAYE payable"
+
+#. module: msf_chart_of_account
+#: model:account.analytic.journal,name:msf_chart_of_account.bank_analytic_journal
+msgid "Bank"
+msgstr "Bank"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.150
+#: model:account.account,name:msf_chart_of_account.1500
+#: model:account.account,name:msf_chart_of_account.900
+#: model:account.account,name:msf_chart_of_account.9000
+msgid "Medical inventory"
+msgstr "Medical inventory"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6551
+msgid "Temporary structures"
+msgstr "Temporary structures"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6303
+msgid "Office : furniture, IT, energy equipment"
+msgstr "Office : furniture, IT, energy equipment"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6950
+msgid "Fund-raising (HQ ONLY)"
+msgstr "Fund-raising (HQ ONLY)"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.240
+#: model:account.account,name:msf_chart_of_account.2400
+msgid "Guarantees & deposits: Greater than 1 year"
+msgstr "Guarantees & deposits: Greater than 1 year"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6115
+msgid "Expat housing : construction & rehabilitation"
+msgstr "Expat housing : construction & rehabilitation"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6320
+msgid "Telephone & communication costs"
+msgstr "Telephone & communication costs"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6500
+msgid "Logistic kits"
+msgstr "Logistic kits"
+
+#. module: msf_chart_of_account
+#: help:msf_chart_of_account.installer,counterpart_hq_entries_default_account:0
+msgid "Account that will be used as counterpart for HQ Validated Entries."
+msgstr "Account that will be used as counterpart for HQ Validated Entries."
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.1205
+msgid "Other receivables"
+msgstr "Other receivables"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6701
+msgid "Insurance & taxes vehicles"
+msgstr "Insurance & taxes vehicles"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.1593
+msgid "Depreciation on other inventory"
+msgstr "Depreciation on other inventory"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.1400
+msgid "Advances to/from HQ departments"
+msgstr "Advances to/from HQ departments"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6540
+msgid "Logistics material"
+msgstr "Logistics material"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.902
+msgid "Stock transfers"
+msgstr "Stock transfers"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.8100
+msgid "Medical goods received in kind"
+msgstr "Medical goods received in kind"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.64
+msgid "Medical"
+msgstr "Medical"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.1402
+msgid "Advances and expenses paid for/by other MSF section"
+msgstr "Advances and expenses paid for/by other MSF section"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6940
+msgid "Currency exchange difference HQ ONLY"
+msgstr "Currency exchange difference HQ ONLY"
+
+#. module: msf_chart_of_account
+#: model:account.analytic.journal,name:msf_chart_of_account.cheque_analytic_journal
+msgid "Cheque"
+msgstr "Cheque"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6220
+msgid "Administrative staff salaries / charges"
+msgstr "Administrative staff salaries / charges"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6430
+msgid "Food : non-specialized"
+msgstr "Food : non-specialized"
+
+#. module: msf_chart_of_account
+#: field:msf_chart_of_account.installer,progress:0
+msgid "Configuration Progress"
+msgstr "Configuration Progress"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.51
+#: model:account.account,name:msf_chart_of_account.510
+#: model:account.account,name:msf_chart_of_account.5100
+msgid "Deficit carried forward"
+msgstr "Deficit carried forward"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.1202
+msgid "VAT recoverable"
+msgstr "VAT recoverable"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.201
+#: model:account.account,name:msf_chart_of_account.2010
+msgid "Buildings"
+msgstr "Buildings"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.9201
+msgid "In-kind Donations of relief material"
+msgstr "In-kind Donations of relief material"
+
+#. module: msf_chart_of_account
+#: model:account.journal,name:msf_chart_of_account.bank_chf_journal
+msgid "Bank CHF"
+msgstr "Bank CHF"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6331
+msgid "Identification materials"
+msgstr "Identification materials"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6311
+msgid "Office : rent & running costs"
+msgstr "Office : rent & running costs"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6711
+msgid "Truck rental"
+msgstr "Truck rental"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.140
+msgid "Non monetary"
+msgstr "Non monetary"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.120
+msgid "Receivables"
+msgstr "Receivables"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.7300
+msgid "Differences of inventory (gain)"
+msgstr "Differences of inventory (gain)"
+
+#. module: msf_chart_of_account
+#: model:account.analytic.journal,name:msf_chart_of_account.cash_analytic_journal
+msgid "Cash"
+msgstr "Cash"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6811
+msgid "Audits"
+msgstr "Audits"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6250
+msgid "Drivers and mechanics staff salaries / charges"
+msgstr "Drivers and mechanics staff salaries / charges"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.132
+msgid "Advances to personal"
+msgstr "Advances to personal"
+
+#. module: msf_chart_of_account
+#: field:msf_chart_of_account.installer,import_invoice_default_account:0
+msgid "Re-billing Inter-section account"
+msgstr "Re-billing Inter-section account"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.1592
+msgid "Depreciation on non medical inventory"
+msgstr "Depreciation on non medical inventory"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6304
+msgid "Maintenance office equipment & hardware"
+msgstr "Maintenance office equipment & hardware"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6510
+msgid "Construction & rehabilitation material"
+msgstr "Construction & rehabilitation material"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6470
+msgid "Lab small material & reagents"
+msgstr "Lab small material & reagents"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.3
+msgid "Current Liabilities < 12 months"
+msgstr "Current Liabilities < 12 months"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.1320
+msgid "Advances on salaries of expatriates"
+msgstr "Advances on salaries of expatriates"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.910
+msgid "In-kind Donations of Medical items"
+msgstr "In-kind Donations of Medical items"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.7110
+msgid "Realized gain on currency exchange"
+msgstr "Realized gain on currency exchange"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6441
+msgid "External specialist consultations, tests & references"
+msgstr "External specialist consultations, tests & references"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.1021
+msgid "Outstanding cheques"
+msgstr "Outstanding cheques"
+
+#. module: msf_chart_of_account
+#: model:ir.model,name:msf_chart_of_account.model_msf_chart_of_account_installer
+msgid "msf_chart_of_account.installer"
+msgstr "msf_chart_of_account.installer"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6570
+msgid "Subcontracted building work"
+msgstr "Subcontracted building work"
+
+#. module: msf_chart_of_account
+#: model:account.analytic.journal,name:msf_chart_of_account.sale_refund_analytic_journal
+#: model:account.journal,name:msf_chart_of_account.sale_refund_journal
+msgid "Sale Refund"
+msgstr "Sale Refund"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.3100
+msgid "Accrued salaries payable"
+msgstr "Accrued salaries payable"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.67
+msgid "Transport Freight, Storage"
+msgstr "Transport Freight, Storage"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.3032
+msgid "Other Taxes"
+msgstr "Other Taxes"
+
+#. module: msf_chart_of_account
+#: model:ir.module.module,shortdesc:msf_chart_of_account.module_meta_information
+msgid "MSF Chart Of Account"
+msgstr "MSF Chart Of Account"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6112
+msgid "Expat housing : equipment & furniture"
+msgstr "Expat housing : equipment & furniture"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.33
+#: model:account.account,name:msf_chart_of_account.330
+#: model:account.account,name:msf_chart_of_account.3300
+msgid "Other current liabilities"
+msgstr "Other current liabilities"
+
+#. module: msf_chart_of_account
+#: model:account.analytic.journal,name:msf_chart_of_account.hr_analytic_journal
+#: model:account.journal,name:msf_chart_of_account.hr_journal
+msgid "HR"
+msgstr "HR"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.2300
+msgid "Softwares - trademarks and licence - accumulated depreciation"
+msgstr "Softwares - trademarks and licence - accumulated depreciation"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6140
+msgid "Expat transport & visa costs (HQ / mission)"
+msgstr "Expat transport & visa costs (HQ / mission)"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6480
+msgid "Medical & nutrition - cost of destruction"
+msgstr "Medical & nutrition - cost of destruction"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.153
+msgid "Stock Transfers"
+msgstr "Stock Transfers"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.23
+msgid "Accumulated depreciation on intangibles Assets"
+msgstr "Accumulated depreciation on intangibles Assets"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.1520
+msgid "Other Inventory"
+msgstr "Other Inventory"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.1532
+#: model:account.account,name:msf_chart_of_account.9020
+msgid "Stock in transit"
+msgstr "Stock in transit"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6420
+msgid "Vaccines & vaccination material"
+msgstr "Vaccines & vaccination material"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6102
+msgid "Medical Expenses / repatriation costs"
+msgstr "Medical Expenses / repatriation costs"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.90
+msgid "Inventories"
+msgstr "Inventories"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6280
+msgid "National staff : medical Expenses"
+msgstr "National staff : medical Expenses"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.1310
+msgid "Advances to third parties"
+msgstr "Advances to third parties"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.14
+msgid "Suspense accounts:"
+msgstr "Suspense accounts:"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6550
+msgid "Non-food relief items for distributions"
+msgstr "Non-food relief items for distributions"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6520
+msgid "Water/sanitation material and product"
+msgstr "Water/sanitation material and product"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.9
+msgid "Off balance sheet items"
+msgstr "Off balance sheet items"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6722
+msgid "Fuel for vehicles and transport facilities"
+msgstr "Fuel for vehicles and transport facilities"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.1332
+msgid "Other prepaid"
+msgstr "Other prepaid"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.7102
+msgid "Re-invoicing income"
+msgstr "Re-invoicing income"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.303
+msgid "State and other public authority related accounts"
+msgstr "State and other public authority related accounts"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.22
+msgid "Intangibles Assets"
+msgstr "Intangibles Assets"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6460
+msgid "Medical small material"
+msgstr "Medical small material"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6101
+msgid "Team living Expenses"
+msgstr "Team living Expenses"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.1411
+msgid "Cash transfer with HQ"
+msgstr "Cash transfer with HQ"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.66
+msgid "External training & local support costs"
+msgstr "External training & local support costs"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6230
+msgid "Medical staff salaries / charges"
+msgstr "Medical staff salaries / charges"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6750
+msgid "Garage rent & maintenance"
+msgstr "Garage rent & maintenance"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.3011
+msgid "Expatriates Payables - (OCA only)"
+msgstr "Expatriates Payables - (OCA only)"
+
+#. module: msf_chart_of_account
+#: model:account.analytic.journal,name:msf_chart_of_account.od_analytic_journal
+#: model:account.journal,name:msf_chart_of_account.correction_journal
+msgid "Correction"
+msgstr "Correction"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.5201
+msgid "Transfert of cash counter part"
+msgstr "Transfert of cash counter part"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6302
+msgid "Communication equipment"
+msgstr "Communication equipment"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.1321
+msgid "Advances on salaries of national staff"
+msgstr "Advances on salaries of national staff"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6210
+msgid "Domestic staff salaries / charges"
+msgstr "Domestic staff salaries / charges"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.1204
+msgid "Social security receivable"
+msgstr "Social security receivable"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6321
+msgid "Bank fees"
+msgstr "Bank fees"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6712
+msgid "Plane rental"
+msgstr "Plane rental"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.10
+msgid "Cash and cash equivalents"
+msgstr "Cash and cash equivalents"
+
+#. module: msf_chart_of_account
+#: model:account.account,name:msf_chart_of_account.6511
+msgid "Construction equipment & tools"
+msgstr "Construction equipment & tools"
+

@@ -1,0 +1,33 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* msf_printed_documents
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: msf_printed_documents
+#: model:ir.module.module,description:msf_printed_documents.module_meta_information
+msgid "\n"
+"    This module lists all printed documents which was modified\n"
+"    for MSF\n"
+"    "
+msgstr "\n"
+"  Ce module répertorie tous les documents imprimés qui ont été modifiés\n"
+"     pour MSF\n"
+"    "
+
+#. module: msf_printed_documents
+#: model:ir.module.module,shortdesc:msf_printed_documents.module_meta_information
+msgid "MSF Printed Documents"
+msgstr "MSF - Documents Imprimés"
+

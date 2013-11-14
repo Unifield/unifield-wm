@@ -1,0 +1,315 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* msf_supply_doc_export
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: msf_supply_doc_export
+#: report:addons/msf_supply_doc_export/report/report_composition_kit_xls.mako:57
+#: report:addons/msf_supply_doc_export/report/report_internal_request_xls.mako:60
+#: report:addons/msf_supply_doc_export/report/report_purchase_order_xls.mako:72
+#: report:addons/msf_supply_doc_export/report/report_request_for_quotation_xls.mako:71
+#: report:addons/msf_supply_doc_export/report/report_sale_order_xls.mako:72
+#: report:addons/msf_supply_doc_export/report/report_tender_xls.mako:71
+#: report:addons/msf_supply_doc_export/report/stock_initial_inventory_xls.mako:65
+msgid "Quantity"
+msgstr "Quantité"
+
+#. module: msf_supply_doc_export
+#: report:addons/msf_supply_doc_export/report/report_internal_move_xls.mako:73
+#: report:addons/msf_supply_doc_export/report/report_real_composition_kit_xls.mako:69
+msgid "Asset"
+msgstr "Asset"
+
+#. module: msf_supply_doc_export
+#: report:addons/msf_supply_doc_export/report/stock_initial_inventory_xls.mako:61
+msgid "Initial Average Cost"
+msgstr "Coût moyen initial"
+
+#. module: msf_supply_doc_export
+#: model:ir.actions.report.xml,name:msf_supply_doc_export.report_internal_move_xls
+msgid "Internal Move Excel Export"
+msgstr "Internal Move Excel Export"
+
+#. module: msf_supply_doc_export
+#: report:addons/msf_supply_doc_export/report/stock_initial_inventory_xls.mako:62
+msgid "Location"
+msgstr "Zone"
+
+#. module: msf_supply_doc_export
+#: report:addons/msf_supply_doc_export/report/report_composition_kit_xls.mako:58
+msgid "UOM"
+msgstr "UdM"
+
+#. module: msf_supply_doc_export
+#: report:addons/msf_supply_doc_export/report/report_purchase_order_xls.mako:75
+#: report:addons/msf_supply_doc_export/report/report_request_for_quotation_xls.mako:74
+#: report:addons/msf_supply_doc_export/report/report_sale_order_xls.mako:75
+msgid "Delivery requested date"
+msgstr "Date de livraison demandée"
+
+#. module: msf_supply_doc_export
+#: report:addons/msf_supply_doc_export/report/product_list_xls.mako:52
+#: report:addons/msf_supply_doc_export/report/report_internal_request_xls.mako:64
+#: report:addons/msf_supply_doc_export/report/report_purchase_order_xls.mako:77
+#: report:addons/msf_supply_doc_export/report/report_request_for_quotation_xls.mako:76
+#: report:addons/msf_supply_doc_export/report/report_sale_order_xls.mako:77
+msgid "Comment"
+msgstr "Commentaire"
+
+#. module: msf_supply_doc_export
+#: model:ir.actions.report.xml,name:msf_supply_doc_export.report_real_composition_kit_xls
+msgid "Real Composition Kit Excel Export"
+msgstr "Real Composition Kit Excel Export"
+
+#. module: msf_supply_doc_export
+#: report:addons/msf_supply_doc_export/report/stock_initial_inventory_xls.mako:64
+msgid "Expiry Date"
+msgstr "Date d'Expiration"
+
+#. module: msf_supply_doc_export
+#: report:addons/msf_supply_doc_export/report/report_purchase_order_xls.mako:79
+#: report:addons/msf_supply_doc_export/report/report_sale_order_xls.mako:79
+msgid "Justification Coordination"
+msgstr "Justification Coordination"
+
+#. module: msf_supply_doc_export
+#: report:addons/msf_supply_doc_export/report/stock_inventory_xls.mako:61
+msgid "Location"
+msgstr "Location"
+
+#. module: msf_supply_doc_export
+#: report:addons/msf_supply_doc_export/report/report_internal_request_xls.mako:61
+msgid "Cost Price"
+msgstr "Prix Coûtant"
+
+#. module: msf_supply_doc_export
+#: report:addons/msf_supply_doc_export/report/product_list_xls.mako:51
+#: report:addons/msf_supply_doc_export/report/report_composition_kit_xls.mako:56
+#: report:addons/msf_supply_doc_export/report/report_internal_request_xls.mako:59
+#: report:addons/msf_supply_doc_export/report/report_purchase_order_xls.mako:71
+#: report:addons/msf_supply_doc_export/report/report_real_composition_kit_xls.mako:66
+#: report:addons/msf_supply_doc_export/report/report_request_for_quotation_xls.mako:70
+#: report:addons/msf_supply_doc_export/report/report_sale_order_xls.mako:71
+#: report:addons/msf_supply_doc_export/report/report_tender_xls.mako:70
+#: report:addons/msf_supply_doc_export/report/stock_cost_reevaluation_xls.mako:51
+#: report:addons/msf_supply_doc_export/report/stock_initial_inventory_xls.mako:60
+msgid "Product Description"
+msgstr "Description Produit"
+
+#. module: msf_supply_doc_export
+#: report:addons/msf_supply_doc_export/report/report_purchase_order_xls.mako:80
+#: report:addons/msf_supply_doc_export/report/report_sale_order_xls.mako:80
+msgid "HQ Remarks"
+msgstr "HQ Remarks"
+
+#. module: msf_supply_doc_export
+#: model:ir.actions.report.xml,name:msf_supply_doc_export.report_stock_initial_inventory_xls
+msgid "Stock Initial Excel Export"
+msgstr "Exportation initiale des stocks en Excel"
+
+#. module: msf_supply_doc_export
+#: report:addons/msf_supply_doc_export/report/report_internal_move_xls.mako:69
+#: report:addons/msf_supply_doc_export/report/stock_inventory_xls.mako:60
+msgid "Product Description"
+msgstr "Product Description"
+
+#. module: msf_supply_doc_export
+#: report:addons/msf_supply_doc_export/report/report_internal_request_xls.mako:62
+#: report:addons/msf_supply_doc_export/report/report_purchase_order_xls.mako:73
+#: report:addons/msf_supply_doc_export/report/report_request_for_quotation_xls.mako:72
+#: report:addons/msf_supply_doc_export/report/report_sale_order_xls.mako:73
+#: report:addons/msf_supply_doc_export/report/report_tender_xls.mako:72
+msgid "UoM"
+msgstr "UdM"
+
+#. module: msf_supply_doc_export
+#: model:ir.model,name:msf_supply_doc_export.model_ir_values
+msgid "ir.values"
+msgstr "ir.values"
+
+#. module: msf_supply_doc_export
+#: report:addons/msf_supply_doc_export/report/report_internal_move_xls.mako:71
+msgid "UoM"
+msgstr "UoM"
+
+#. module: msf_supply_doc_export
+#: report:addons/msf_supply_doc_export/report/stock_inventory_xls.mako:62
+msgid "Batch"
+msgstr "Batch"
+
+#. module: msf_supply_doc_export
+#: report:addons/msf_supply_doc_export/report/stock_cost_reevaluation_xls.mako:52
+msgid "Product Cost"
+msgstr "Coût du produit"
+
+#. module: msf_supply_doc_export
+#: model:ir.actions.report.xml,name:msf_supply_doc_export.report_request_for_quotation_xls
+msgid "Request For Quotation Excel Export"
+msgstr "Exporation Excel - Demande de Devis"
+
+#. module: msf_supply_doc_export
+#: report:addons/msf_supply_doc_export/report/report_internal_move_xls.mako:70
+#: report:addons/msf_supply_doc_export/report/report_real_composition_kit_xls.mako:67
+#: report:addons/msf_supply_doc_export/report/stock_inventory_xls.mako:64
+msgid "Quantity"
+msgstr "Quantity"
+
+#. module: msf_supply_doc_export
+#: report:addons/msf_supply_doc_export/report/report_internal_move_xls.mako:74
+#: report:addons/msf_supply_doc_export/report/report_real_composition_kit_xls.mako:70
+msgid "Batch Number"
+msgstr "Batch Number"
+
+#. module: msf_supply_doc_export
+#: model:ir.actions.report.xml,name:msf_supply_doc_export.report_composition_kit_xls
+msgid "Composition Kit Excel Export"
+msgstr "Export Excel de la Composition Kit"
+
+#. module: msf_supply_doc_export
+#: report:addons/msf_supply_doc_export/report/stock_initial_inventory_xls.mako:63
+msgid "Batch"
+msgstr "Lot"
+
+#. module: msf_supply_doc_export
+#: model:ir.actions.report.xml,name:msf_supply_doc_export.report_product_list_xls
+msgid "Product List Excel Export"
+msgstr "Exportation en Excel de la liste de produits"
+
+#. module: msf_supply_doc_export
+#: report:addons/msf_supply_doc_export/report/report_purchase_order_xls.mako:74
+#: report:addons/msf_supply_doc_export/report/report_request_for_quotation_xls.mako:73
+#: report:addons/msf_supply_doc_export/report/report_sale_order_xls.mako:74
+#: report:addons/msf_supply_doc_export/report/report_tender_xls.mako:73
+msgid "Price"
+msgstr "Prix"
+
+#. module: msf_supply_doc_export
+#: model:ir.actions.report.xml,name:msf_supply_doc_export.report_stock_cost_reevaluation_xls
+msgid "Cost Reevaluation Excel Export"
+msgstr "Exportation en Excel de la réévaluation des coûts"
+
+#. module: msf_supply_doc_export
+#: report:addons/msf_supply_doc_export/report/report_real_composition_kit_xls.mako:68
+msgid "UOM"
+msgstr "UOM"
+
+#. module: msf_supply_doc_export
+#: report:addons/msf_supply_doc_export/report/report_internal_move_xls.mako:76
+msgid "Source Location"
+msgstr "Source Location"
+
+#. module: msf_supply_doc_export
+#: model:ir.actions.report.xml,name:msf_supply_doc_export.report_internal_request_xls
+msgid "Internal Request Excel Export"
+msgstr "Exporation Excel - Demande Interne "
+
+#. module: msf_supply_doc_export
+#: model:ir.actions.report.xml,name:msf_supply_doc_export.report_tender_xls
+msgid "Tender Excel Export"
+msgstr "Exporation Excel - Appel d'Offres"
+
+#. module: msf_supply_doc_export
+#: model:ir.actions.report.xml,name:msf_supply_doc_export.report_sale_order_xls
+msgid "Field Order Excel Export"
+msgstr "Exportation en Excel des commandes de terrain"
+
+#. module: msf_supply_doc_export
+#: report:addons/msf_supply_doc_export/report/product_list_xls.mako:50
+#: report:addons/msf_supply_doc_export/report/report_composition_kit_xls.mako:55
+#: report:addons/msf_supply_doc_export/report/report_internal_request_xls.mako:58
+#: report:addons/msf_supply_doc_export/report/report_purchase_order_xls.mako:70
+#: report:addons/msf_supply_doc_export/report/report_request_for_quotation_xls.mako:69
+#: report:addons/msf_supply_doc_export/report/report_sale_order_xls.mako:70
+#: report:addons/msf_supply_doc_export/report/report_tender_xls.mako:69
+#: report:addons/msf_supply_doc_export/report/stock_cost_reevaluation_xls.mako:50
+#: report:addons/msf_supply_doc_export/report/stock_initial_inventory_xls.mako:59
+msgid "Product Code"
+msgstr "Code Produit"
+
+#. module: msf_supply_doc_export
+#: model:ir.actions.report.xml,name:msf_supply_doc_export.report_stock_inventory_xls
+msgid "Stock Inventory Excel Export"
+msgstr "Stock Inventory Excel Export"
+
+#. module: msf_supply_doc_export
+#: report:addons/msf_supply_doc_export/report/report_tender_xls.mako:74
+msgid "Delivery Requested Date"
+msgstr "Date de Livraison Souhaitée"
+
+#. module: msf_supply_doc_export
+#: model:ir.module.module,shortdesc:msf_supply_doc_export.module_meta_information
+msgid "Export Files in Excel Format"
+msgstr "Exporter Fichier sour Format Excel"
+
+#. module: msf_supply_doc_export
+#: report:addons/msf_supply_doc_export/report/report_internal_move_xls.mako:75
+#: report:addons/msf_supply_doc_export/report/report_real_composition_kit_xls.mako:71
+#: report:addons/msf_supply_doc_export/report/stock_inventory_xls.mako:63
+msgid "Expiry Date"
+msgstr "Expiry Date"
+
+#. module: msf_supply_doc_export
+#: report:addons/msf_supply_doc_export/report/report_internal_request_xls.mako:63
+#: report:addons/msf_supply_doc_export/report/report_purchase_order_xls.mako:76
+#: report:addons/msf_supply_doc_export/report/report_request_for_quotation_xls.mako:75
+#: report:addons/msf_supply_doc_export/report/report_sale_order_xls.mako:76
+msgid "Currency"
+msgstr "Devises"
+
+#. module: msf_supply_doc_export
+#: report:addons/msf_supply_doc_export/report/report_internal_move_xls.mako:77
+msgid "Destination Location"
+msgstr "Destination Location"
+
+#. module: msf_supply_doc_export
+#: report:addons/msf_supply_doc_export/report/report_internal_move_xls.mako:72
+msgid "Kit"
+msgstr "Kit"
+
+#. module: msf_supply_doc_export
+#: report:addons/msf_supply_doc_export/report/report_purchase_order_xls.mako:78
+#: report:addons/msf_supply_doc_export/report/report_sale_order_xls.mako:78
+msgid "Justification Code"
+msgstr "Justification Code"
+
+#. module: msf_supply_doc_export
+#: model:ir.actions.report.xml,name:msf_supply_doc_export.report_purchase_order_xls
+msgid "Purchase Order Excel Export"
+msgstr "Exporation Excel - Bon de Commande"
+
+#. module: msf_supply_doc_export
+#: report:addons/msf_supply_doc_export/report/report_internal_move_xls.mako:68
+#: report:addons/msf_supply_doc_export/report/report_real_composition_kit_xls.mako:65
+#: report:addons/msf_supply_doc_export/report/stock_inventory_xls.mako:59
+msgid "Product Code"
+msgstr "Product Code"
+
+#. module: msf_supply_doc_export
+#: report:addons/msf_supply_doc_export/report/report_composition_kit_xls.mako:54
+#: report:addons/msf_supply_doc_export/report/report_real_composition_kit_xls.mako:64
+msgid "Module"
+msgstr "Module"
+
+#. module: msf_supply_doc_export
+#: model:ir.module.module,description:msf_supply_doc_export.module_meta_information
+msgid "This module enables to export file in xls format"
+msgstr "Ce module permet d'exporter des fichiers sous format xls"
+
+#. module: msf_supply_doc_export
+#: report:addons/msf_supply_doc_export/report/report_purchase_order_xls.mako:81
+#: report:addons/msf_supply_doc_export/report/report_sale_order_xls.mako:81
+msgid "Justification Y/N"
+msgstr "Justification Y/N"
+

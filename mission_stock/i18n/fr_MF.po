@@ -1,0 +1,488 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* mission_stock
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mission_stock
+#: view:stock.mission.report.line:0
+msgid "Stock mission report"
+msgstr "Stock - Rapport mission"
+
+#. module: mission_stock
+#: field:stock.mission.report.line,product_amc:0
+msgid "AMC"
+msgstr "CMM"
+
+#. module: mission_stock
+#: field:stock.mission.report.line,in_pipe_qty:0
+msgid "In Pipe Qty."
+msgstr "Qté en cours"
+
+#. module: mission_stock
+#: field:stock.mission.report.line,central_qty:0
+msgid "Unallocated Stock Qty."
+msgstr "Qté de stock non allouée."
+
+#. module: mission_stock
+#: view:stock.mission.report.line:0
+msgid "Single Item"
+msgstr "Article unique"
+
+#. module: mission_stock
+#: field:stock.mission.report.line,stock_val:0
+msgid "Stock Val."
+msgstr "Stock - Valeur"
+
+#. module: mission_stock
+#: field:stock.mission.report,report_line:0
+msgid "Lines"
+msgstr "Lignes"
+
+#. module: mission_stock
+#: field:stock.mission.report.line,secondary_val:0
+msgid "Secondary Stock Val."
+msgstr "Valeur Stock Secondaire"
+
+#. module: mission_stock
+#: field:stock.mission.report.line,in_pipe_val:0
+msgid "In Pipe Val."
+msgstr "Valeur en cours"
+
+#. module: mission_stock
+#: field:stock.mission.report.line,nomen_manda_0:0
+#: field:stock.mission.report.line,nomen_manda_0_s:0
+msgid "Main Type"
+msgstr "Type Principal"
+
+#. module: mission_stock
+#: field:stock.mission.report.line,internal_qty:0
+msgid "Instance Stock"
+msgstr "Stock d'Instance"
+
+#. module: mission_stock
+#: selection:stock.mission.report.line,subtype:0
+msgid "Single Item"
+msgstr "Single Item"
+
+#. module: mission_stock
+#: field:stock.mission.report.line,nomen_manda_1:0
+#: field:stock.mission.report.line,nomen_manda_1_s:0
+msgid "Group"
+msgstr "Groupe"
+
+#. module: mission_stock
+#: field:stock.mission.report.line,mission_report_id:0
+msgid "Mission Report"
+msgstr "Mission - Rapport"
+
+#. module: mission_stock
+#: selection:stock.mission.report.line,subtype:0
+msgid "Asset"
+msgstr "Asset"
+
+#. module: mission_stock
+#: view:stock.mission.report.line:0
+msgid "Service with Reception"
+msgstr "Service avec Réception"
+
+#. module: mission_stock
+#: field:stock.mission.report.line,subtype:0
+msgid "Subtype"
+msgstr "Sous-type"
+
+#. module: mission_stock
+#: view:mission.stock.wizard:0
+msgid "Actions"
+msgstr "Actions"
+
+#. module: mission_stock
+#: code:addons/mission_stock/mission_stock.py:71
+#: code:addons/mission_stock/wizard/mission_stock_wizard.py:54
+#: code:addons/mission_stock/wizard/mission_stock_wizard.py:88
+#: code:addons/mission_stock/wizard/mission_stock_wizard.py:92
+#: code:addons/mission_stock/wizard/mission_stock_wizard.py:94
+#, python-format
+msgid "Error"
+msgstr "Erreur"
+
+#. module: mission_stock
+#: field:stock.mission.report,full_view:0
+msgid "Is a full view report ?"
+msgstr "Est-ce un rapport avec vue complète ?"
+
+#. module: mission_stock
+#: view:mission.stock.wizard:0
+msgid "Update (in background)"
+msgstr "Mise à jour (en arrière plan)"
+
+#. module: mission_stock
+#: field:stock.mission.report.line,nomen_manda_3:0
+#: field:stock.mission.report.line,nomen_manda_3_s:0
+msgid "Root"
+msgstr "Origine"
+
+#. module: mission_stock
+#: selection:stock.mission.report.line,type:0
+msgid "Service with Reception"
+msgstr "Service with Reception"
+
+#. module: mission_stock
+#: view:stock.mission.report.line:0
+#: field:stock.mission.report.line,categ_id:0
+msgid "Category"
+msgstr "Catégorie"
+
+#. module: mission_stock
+#: code:addons/mission_stock/wizard/mission_stock_wizard.py:88
+#: code:addons/mission_stock/wizard/mission_stock_wizard.py:92
+#, python-format
+msgid "You should choose a report to display."
+msgstr "Vous devriez choisir un rapport à afficher."
+
+#. module: mission_stock
+#: view:mission.stock.wizard:0
+msgid "Close window"
+msgstr "Ferme la fenêtre"
+
+#. module: mission_stock
+#: field:mission.stock.wizard,split_stock:0
+msgid "Split the Warehouse stock qty. to Stock and Unallocated Stock."
+msgstr "Scinder la qté de stock en entrepôt en stock et stock non affecté."
+
+#. module: mission_stock
+#: view:stock.mission.report.line:0
+msgid "Mission stock lines"
+msgstr "Mission - Lignes Stock"
+
+#. module: mission_stock
+#: view:stock.mission.report.line:0
+msgid "Group by..."
+msgstr "Grouper par…"
+
+#. module: mission_stock
+#: field:stock.mission.report.line,updated:0
+msgid "Updated"
+msgstr "Mise à jour"
+
+#. module: mission_stock
+#: field:stock.mission.report,local_report:0
+msgid "Is a local report ?"
+msgstr "Est-ce un rapport local ?"
+
+#. module: mission_stock
+#: field:stock.mission.report.line,cu_qty:0
+msgid "Internal Cons. Unit Qty."
+msgstr "Consommation Interne - Qté Unitaire"
+
+#. module: mission_stock
+#: field:stock.mission.report.line,cross_qty:0
+msgid "Cross-docking Qty."
+msgstr "Transbordement - Qté."
+
+#. module: mission_stock
+#: field:stock.mission.report,instance_id:0
+msgid "Instance"
+msgstr "Instance"
+
+#. module: mission_stock
+#: field:stock.mission.report.line,in_pipe_coor_qty:0
+#: field:stock.mission.report.line,in_pipe_coor_val:0
+msgid "In Pipe from Coord."
+msgstr "En Cours à partir de la Coordination"
+
+#. module: mission_stock
+#: field:stock.mission.report.line,full_view:0
+msgid "Full view"
+msgstr "Vue Complète"
+
+#. module: mission_stock
+#: view:mission.stock.wizard:0
+msgid "Split Stock"
+msgstr "Scinder le stock"
+
+#. module: mission_stock
+#: view:stock.mission.report.line:0
+msgid "Default UOM"
+msgstr "UdM par Défaut"
+
+#. module: mission_stock
+#: field:stock.mission.report.line,wh_qty:0
+msgid "Warehouse stock"
+msgstr "Stock en entrepôt"
+
+#. module: mission_stock
+#: model:ir.module.module,shortdesc:mission_stock.module_meta_information
+msgid "Mission Stock"
+msgstr "Mission - Stock"
+
+#. module: mission_stock
+#: field:stock.mission.report.line,internal_val:0
+msgid "Instance Stock Val."
+msgstr "Val. Stock d'Instance"
+
+#. module: mission_stock
+#: field:stock.mission.report.line,uom_id:0
+msgid "UoM"
+msgstr "UdM"
+
+#. module: mission_stock
+#: field:stock.mission.report.line,nomen_sub_5:0
+#: field:stock.mission.report.line,nomen_sub_5_s:0
+msgid "Sub Class 6"
+msgstr "Sous-Classe 6"
+
+#. module: mission_stock
+#: field:stock.mission.report.line,secondary_qty:0
+msgid "Secondary Stock Qty."
+msgstr "Qté Stock Secondaire"
+
+#. module: mission_stock
+#: model:ir.actions.act_window,name:mission_stock.mission_stock_wizard_action
+#: model:ir.model,name:mission_stock.model_stock_mission_report
+#: view:mission.stock.wizard:0
+msgid "Mission stock report"
+msgstr "Mission - Rapport de Stock "
+
+#. module: mission_stock
+#: view:stock.mission.report.line:0
+msgid "Optional Nomenclature Filters..."
+msgstr "Filtres de Nomenclature Optionnelles..."
+
+#. module: mission_stock
+#: view:stock.mission.report.line:0
+msgid "Asset"
+msgstr "Biens"
+
+#. module: mission_stock
+#: view:mission.stock.wizard:0
+msgid "Stock valuation"
+msgstr "Stock - Valorisation"
+
+#. module: mission_stock
+#: model:ir.module.module,description:mission_stock.module_meta_information
+msgid "\n"
+"        Stock mission report.\n"
+"        "
+msgstr "Rapport Stock Mission\n"
+"        "
+
+#. module: mission_stock
+#: field:mission.stock.wizard,last_update:0
+#: field:stock.mission.report,last_update:0
+msgid "Last update"
+msgstr "Dernière Mise à jour"
+
+#. module: mission_stock
+#: selection:mission.stock.wizard,split_stock:0
+#: selection:mission.stock.wizard,with_valuation:0
+msgid "Yes"
+msgstr "Oui"
+
+#. module: mission_stock
+#: field:stock.mission.report.line,reviewed_consumption:0
+msgid "FMC"
+msgstr "PCM"
+
+#. module: mission_stock
+#: code:addons/mission_stock/mission_stock.py:71
+#, python-format
+msgid "Bad operator"
+msgstr "Mauvais Opérateur"
+
+#. module: mission_stock
+#: field:stock.mission.report.line,currency_id:0
+msgid "Func. cur."
+msgstr "Fonc. Dev."
+
+#. module: mission_stock
+#: field:stock.mission.report.line,nomen_sub_0:0
+#: field:stock.mission.report.line,nomen_sub_0_s:0
+msgid "Sub Class 1"
+msgstr "Sous-Classe 1"
+
+#. module: mission_stock
+#: view:stock.mission.report.line:0
+#: field:stock.mission.report.line,type:0
+msgid "Type"
+msgstr "Type"
+
+#. module: mission_stock
+#: field:stock.mission.report.line,nomen_sub_2:0
+#: field:stock.mission.report.line,nomen_sub_2_s:0
+msgid "Sub Class 3"
+msgstr "Sous-Classe 3"
+
+#. module: mission_stock
+#: field:stock.mission.report.line,cost_price:0
+msgid "Cost price"
+msgstr "Prix de revient"
+
+#. module: mission_stock
+#: selection:stock.mission.report.line,type:0
+msgid "Stockable Product"
+msgstr "Stockable Product"
+
+#. module: mission_stock
+#: field:stock.mission.report.line,nomen_sub_4:0
+#: field:stock.mission.report.line,nomen_sub_4_s:0
+msgid "Sub Class 5"
+msgstr "Sous-Classe 5"
+
+#. module: mission_stock
+#: field:stock.mission.report.line,cu_val:0
+msgid "Internal Cons. Unit Val."
+msgstr "Consommation Intere - Valeur Unitaire"
+
+#. module: mission_stock
+#: field:stock.mission.report.line,nomen_sub_1:0
+#: field:stock.mission.report.line,nomen_sub_1_s:0
+msgid "Sub Class 2"
+msgstr "Sous-Classe 2"
+
+#. module: mission_stock
+#: view:stock.mission.report.line:0
+msgid "Service"
+msgstr "Service"
+
+#. module: mission_stock
+#: model:ir.model,name:mission_stock.model_mission_stock_wizard
+msgid "mission.stock.wizard"
+msgstr "mission.stock.wizard"
+
+#. module: mission_stock
+#: field:stock.mission.report.line,central_val:0
+msgid "Unallocated Stock Val."
+msgstr "Val. de stock non allouée."
+
+#. module: mission_stock
+#: model:ir.ui.menu,name:mission_stock.mission_stock_wizard_menu
+#: view:mission.stock.wizard:0
+msgid "Mission stock"
+msgstr "Stock Mission"
+
+#. module: mission_stock
+#: view:stock.mission.report.line:0
+msgid "Nomenclature Filters..."
+msgstr "Filtres de Nomenclature ..."
+
+#. module: mission_stock
+#: field:stock.mission.report,name:0
+#: field:stock.mission.report.line,name:0
+#: field:stock.mission.report.line,product_id:0
+msgid "Name"
+msgstr "Nom"
+
+#. module: mission_stock
+#: field:mission.stock.wizard,with_valuation:0
+msgid "Display stock valuation ?"
+msgstr "Affichage Valorisation Stock ?"
+
+#. module: mission_stock
+#: view:stock.mission.report.line:0
+msgid "Stockable"
+msgstr "Stockable"
+
+#. module: mission_stock
+#: code:addons/mission_stock/wizard/mission_stock_wizard.py:94
+#, python-format
+msgid "The generation of this report is in progress. You could open this report when the last update field will be filled. Thank you for you comprehension."
+msgstr "La génération du rapport est en cours. Vous pourrez ouvrir ce rapport lorsque le champ Dernière Mise à jour sera rempli. Merci de votre compréhension."
+
+#. module: mission_stock
+#: help:stock.mission.report,local_report:0
+msgid "If the report is a local report, it will be updated periodically"
+msgstr "Si le rapport est un rapport local, il sera mis à jour périodiquement"
+
+#. module: mission_stock
+#: field:stock.mission.report.line,old_code:0
+msgid "Old Code"
+msgstr "Vieux Code"
+
+#. module: mission_stock
+#: field:stock.mission.report.line,default_code:0
+msgid "Reference"
+msgstr "Référence"
+
+#. module: mission_stock
+#: view:mission.stock.wizard:0
+msgid "Open report"
+msgstr "Ouvrir Rapport"
+
+#. module: mission_stock
+#: code:addons/mission_stock/wizard/mission_stock_wizard.py:54
+#, python-format
+msgid "Mission stock report cannot be available if no instance was set on the company !"
+msgstr "Mission - Rapport de Stock non disponible si aucune instance n'a été installée pour la société !"
+
+#. module: mission_stock
+#: field:stock.mission.report.line,cross_val:0
+msgid "Cross-docking Val."
+msgstr "Transbordement - Valeur."
+
+#. module: mission_stock
+#: field:stock.mission.report.line,nomen_manda_2:0
+#: field:stock.mission.report.line,nomen_manda_2_s:0
+msgid "Family"
+msgstr "Famille"
+
+#. module: mission_stock
+#: field:stock.mission.report,move_ids:0
+#: field:stock.mission.report.line,move_ids:0
+msgid "Noves"
+msgstr "Noves"
+
+#. module: mission_stock
+#: model:ir.model,name:mission_stock.model_stock_mission_report_line
+msgid "Mission stock report line"
+msgstr "Mission - Ligne de Rapport de Stock"
+
+#. module: mission_stock
+#: view:stock.mission.report.line:0
+#: selection:stock.mission.report.line,subtype:0
+msgid "Kit/Module"
+msgstr "Kit/Module"
+
+#. module: mission_stock
+#: field:mission.stock.wizard,report_id:0
+msgid "Report"
+msgstr "Rapport"
+
+#. module: mission_stock
+#: view:stock.mission.report.line:0
+msgid "Non-Stockable"
+msgstr "Non Stockable"
+
+#. module: mission_stock
+#: field:stock.mission.report.line,stock_qty:0
+msgid "Stock Qty."
+msgstr "Stock - Qté"
+
+#. module: mission_stock
+#: selection:stock.mission.report.line,type:0
+msgid "Non-Stockable"
+msgstr "Non-Stockable"
+
+#. module: mission_stock
+#: selection:mission.stock.wizard,split_stock:0
+#: selection:mission.stock.wizard,with_valuation:0
+msgid "No"
+msgstr "Non"
+
+#. module: mission_stock
+#: field:stock.mission.report.line,nomen_sub_3:0
+#: field:stock.mission.report.line,nomen_sub_3_s:0
+msgid "Sub Class 4"
+msgstr "Sous-Classe 4"
+

@@ -1,0 +1,348 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* msf_field_access_rights
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: msf_field_access_rights
+#: help:msf_field_access_rights.field_access_rule_line,value_not_synchronized_on_write:0
+msgid "If checked, the value for this field given by a synchronisation or import is ignored when this record is editted."
+msgstr "If checked, the value for this field given by a synchronisation or import is ignored when this record is editted."
+
+#. module: msf_field_access_rights
+#: field:msf_field_access_rights.field_access_rule,comment:0
+msgid "Comment"
+msgstr "Comment"
+
+#. module: msf_field_access_rights
+#: help:msf_field_access_rights.field_access_rule,model_id:0
+msgid "The type of data to which this rule applies"
+msgstr "The type of data to which this rule applies"
+
+#. module: msf_field_access_rights
+#: model:ir.model,name:msf_field_access_rights.model_msf_field_access_rights_field_access_rule
+#: view:msf_field_access_rights.field_access_rule:0
+#: field:msf_field_access_rights.field_access_rule_line,field_access_rule:0
+msgid "Field Access Rule"
+msgstr "Field Access Rule"
+
+#. module: msf_field_access_rights
+#: view:msf_field_access_rights.field_access_rule:0
+msgid "Generate Rules"
+msgstr "Generate Rules"
+
+#. module: msf_field_access_rights
+#: field:msf_field_access_rights.field_access_rule,status:0
+msgid "Status"
+msgstr "Status"
+
+#. module: msf_field_access_rights
+#: field:msf_field_access_rights.field_access_rule,model_name:0
+msgid "Model Name"
+msgstr "Model Name"
+
+#. module: msf_field_access_rights
+#: selection:msf_field_access_rights.field_access_rule,status:0
+msgid "Filter Validated"
+msgstr "Filter Validated"
+
+#. module: msf_field_access_rights
+#: view:msf_field_access_rights.field_access_rule:0
+msgid "Create New Filter"
+msgstr "Create New Filter"
+
+#. module: msf_field_access_rights
+#: sql_constraint:msf_field_access_rights.field_access_rule:0
+msgid "Due to technical constraints, you cannot use the operator \"ilike\" in a domain"
+msgstr "Due to technical constraints, you cannot use the operator \"ilike\" in a domain"
+
+#. module: msf_field_access_rights
+#: field:msf_field_access_rights.field_access_rule_line,field_access_rule_model_id:0
+msgid "Field Model"
+msgstr "Field Model"
+
+#. module: msf_field_access_rights
+#: field:msf_field_access_rights.field_access_rule,name:0
+msgid "Name"
+msgstr "Name"
+
+#. module: msf_field_access_rights
+#: sql_constraint:msf_field_access_rights.field_access_rule_line:0
+msgid "You cannot have two Field Access Rule Lines for the same Field in the same Rule"
+msgstr "You cannot have two Field Access Rule Lines for the same Field in the same Rule"
+
+#. module: msf_field_access_rights
+#: field:msf_field_access_rights.field_access_rule,domain_id:0
+msgid "Filter"
+msgstr "Filter"
+
+#. module: msf_field_access_rights
+#: view:msf_field_access_rights.field_access_rule_line:0
+msgid "Rule"
+msgstr "Règle"
+
+#. module: msf_field_access_rights
+#: model:ir.actions.act_window,name:msf_field_access_rights.field_access_rules_list
+#: model:ir.ui.menu,name:msf_field_access_rights.msf_field_access_rules
+msgid "Field Access Rules"
+msgstr "Field Access Rules"
+
+#. module: msf_field_access_rights
+#: field:msf_field_access_rights.field_access_rule,instance_level:0
+msgid "Instance Level"
+msgstr "Instance Level"
+
+#. module: msf_field_access_rights
+#: help:msf_field_access_rights.field_access_rule,model_name:0
+msgid "The technical name for the model. This is used to make searching for Field Access Rules easier."
+msgstr "The technical name for the model. This is used to make searching for Field Access Rules easier."
+
+#. module: msf_field_access_rights
+#: view:msf_field_access_rights.field_access_rule:0
+msgid "Validate Filter"
+msgstr "Validate Filter"
+
+#. module: msf_field_access_rights
+#: help:msf_field_access_rights.field_access_rule,status:0
+msgid "The validation status of the rule. The Filter must be valid for this rule to be validated."
+msgstr "The validation status of the rule. The Filter must be valid for this rule to be validated."
+
+#. module: msf_field_access_rights
+#: view:msf_field_access_rights.field_access_rule:0
+msgid "Inactive"
+msgstr "Inactif"
+
+#. module: msf_field_access_rights
+#: view:msf_field_access_rights.field_access_rule_line:0
+msgid "Group By..."
+msgstr "Group By..."
+
+#. module: msf_field_access_rights
+#: selection:msf_field_access_rights.field_access_rule,status:0
+msgid "Not Validated"
+msgstr "Non Validé"
+
+#. module: msf_field_access_rights
+#: model:ir.actions.act_window,name:msf_field_access_rights.field_access_rule_line_list
+#: model:ir.ui.menu,name:msf_field_access_rights.field_access_rule_line_list_menu
+#: view:msf_field_access_rights.field_access_rule:0
+#: field:msf_field_access_rights.field_access_rule,field_access_rule_line_ids:0
+msgid "Field Access Rule Lines"
+msgstr "Field Access Rule Lines"
+
+#. module: msf_field_access_rights
+#: help:msf_field_access_rights.field_access_rule,instance_level:0
+msgid "The Instance Level that this rule applies to"
+msgstr "The Instance Level that this rule applies to"
+
+#. module: msf_field_access_rights
+#: help:msf_field_access_rights.field_access_rule,comment:0
+msgid "A description of what this rule does"
+msgstr "A description of what this rule does"
+
+#. module: msf_field_access_rights
+#: field:msf_field_access_rights.field_access_rule_line,field_name:0
+msgid "Field Name"
+msgstr "Field Name"
+
+#. module: msf_field_access_rights
+#: sql_constraint:msf_field_access_rights.field_access_rule:0
+msgid "Due to technical constraints, you cannot use the operator \"like\" in a domain"
+msgstr "Due to technical constraints, you cannot use the operator \"like\" in a domain"
+
+#. module: msf_field_access_rights
+#: view:msf_field_access_rights.field_access_rule:0
+msgid "Manage Rule Lines"
+msgstr "Manage Rule Lines"
+
+#. module: msf_field_access_rights
+#: view:msf_field_access_rights.field_access_rule_line:0
+msgid "No Sync on Write"
+msgstr "No Sync on Write"
+
+#. module: msf_field_access_rights
+#: model:ir.module.module,description:msf_field_access_rights.module_meta_information
+msgid "Provides functionality to define access rights and \n"
+"    synchronization propagation settings concerning the MSF synchronization \n"
+"    server hierarchy for models and specific fields of models.\n"
+"    "
+msgstr "Provides functionality to define access rights and \n"
+"    synchronization propagation settings concerning the MSF synchronization \n"
+"    server hierarchy for models and specific fields of models.\n"
+"    "
+
+#. module: msf_field_access_rights
+#: selection:msf_field_access_rights.field_access_rule,status:0
+msgid "Model Validated"
+msgstr "Model Validated"
+
+#. module: msf_field_access_rights
+#: field:msf_field_access_rights.field_access_rule,model_id:0
+msgid "Model"
+msgstr "Model"
+
+#. module: msf_field_access_rights
+#: view:msf_field_access_rights.field_access_rule:0
+msgid "Comments"
+msgstr "Commentaires"
+
+#. module: msf_field_access_rights
+#: view:msf_field_access_rights.field_access_rule:0
+#: field:msf_field_access_rights.field_access_rule,group_ids:0
+msgid "Groups"
+msgstr "Groupes"
+
+#. module: msf_field_access_rights
+#: help:msf_field_access_rights.field_access_rule_line,value_not_synchronized_on_create:0
+msgid "If checked, the value for this field given by a synchronisation or import is ignored when this record is created."
+msgstr "If checked, the value for this field given by a synchronisation or import is ignored when this record is created."
+
+#. module: msf_field_access_rights
+#: field:msf_field_access_rights.field_access_rule,family_model_ids:0
+msgid "Family Model IDs"
+msgstr "Family Model IDs"
+
+#. module: msf_field_access_rights
+#: view:msf_field_access_rights.field_access_rule:0
+msgid "Rule Status"
+msgstr "Rule Status"
+
+#. module: msf_field_access_rights
+#: model:ir.module.module,shortdesc:msf_field_access_rights.module_meta_information
+msgid "Field Access Rights for MSF"
+msgstr "Field Access Rights for MSF"
+
+#. module: msf_field_access_rights
+#: help:msf_field_access_rights.field_access_rule_line,write_access:0
+msgid "If checked, the user has access to write on this field."
+msgstr "If checked, the user has access to write on this field."
+
+#. module: msf_field_access_rights
+#: model:ir.model,name:msf_field_access_rights.model_msf_field_access_rights_field_access_rule_line
+#: view:msf_field_access_rights.field_access_rule_line:0
+msgid "Field Access Rule Line"
+msgstr "Field Access Rule Line"
+
+#. module: msf_field_access_rights
+#: selection:msf_field_access_rights.field_access_rule,instance_level:0
+msgid "HQ"
+msgstr "HQ"
+
+#. module: msf_field_access_rights
+#: help:msf_field_access_rights.field_access_rule,active:0
+msgid "If checked, this rule will be applied. This rule must be validated first."
+msgstr "If checked, this rule will be applied. This rule must be validated first."
+
+#. module: msf_field_access_rights
+#: view:msf_field_access_rights.field_access_rule:0
+msgid "Validate Model"
+msgstr "Validate Model"
+
+#. module: msf_field_access_rights
+#: help:msf_field_access_rights.field_access_rule,group_ids:0
+msgid "A list of groups that should be affected by this rule. If you leave this empty, this rule will apply to all groups."
+msgstr "A list of groups that should be affected by this rule. If you leave this empty, this rule will apply to all groups."
+
+#. module: msf_field_access_rights
+#: help:msf_field_access_rights.field_access_rule_line,field_name:0
+msgid "The technical name for the field. This is used to make searching for Field Access Rule Lines easier."
+msgstr "The technical name for the field. This is used to make searching for Field Access Rule Lines easier."
+
+#. module: msf_field_access_rights
+#: view:msf_field_access_rights.field_access_rule_line:0
+#: field:msf_field_access_rights.field_access_rule_line,write_access:0
+msgid "Write Access"
+msgstr "Write Access"
+
+#. module: msf_field_access_rights
+#: field:msf_field_access_rights.field_access_rule_line,value_not_synchronized_on_write:0
+msgid "Value NOT Synchronised on Write"
+msgstr "Value NOT Synchronised on Write"
+
+#. module: msf_field_access_rights
+#: field:msf_field_access_rights.field_access_rule,active:0
+msgid "Active"
+msgstr "Actif"
+
+#. module: msf_field_access_rights
+#: help:msf_field_access_rights.field_access_rule_line,field:0
+msgid "The field of the model for which this rule applies"
+msgstr "The field of the model for which this rule applies"
+
+#. module: msf_field_access_rights
+#: help:msf_field_access_rights.field_access_rule,field_access_rule_line_ids:0
+msgid "A list of fields and their specific access and synchronization propagation rules that will be implemented by this rule. If you have left out any fields, users will have full write access, and all values will be synchronized when the record is created or editted."
+msgstr "A list of fields and their specific access and synchronization propagation rules that will be implemented by this rule. If you have left out any fields, users will have full write access, and all values will be synchronized when the record is created or editted."
+
+#. module: msf_field_access_rights
+#: selection:msf_field_access_rights.field_access_rule,instance_level:0
+msgid "Project"
+msgstr "Project"
+
+#. module: msf_field_access_rights
+#: help:msf_field_access_rights.field_access_rule,domain_id:0
+msgid "Choose a pre-defined Filter to filter which records this rule applies to. Click the Create New Filter button, define some seach criteria, save your custom filter, then return to this form and type your new filters name here to use it for this rule. Note: Due to a technical constraint, all \"like\" or \"ilike\" operators will be automatically replaced with \"=\"."
+msgstr "Choose a pre-defined Filter to filter which records this rule applies to. Click the Create New Filter button, define some seach criteria, save your custom filter, then return to this form and type your new filters name here to use it for this rule. Note: Due to a technical constraint, all \"like\" or \"ilike\" operators will be automatically replaced with \"=\"."
+
+#. module: msf_field_access_rights
+#: field:msf_field_access_rights.field_access_rule_line,field:0
+msgid "Field"
+msgstr "Field"
+
+#. module: msf_field_access_rights
+#: view:msf_field_access_rights.field_access_rule_line:0
+msgid "Search Field Access Rule Lines"
+msgstr "Search Field Access Rule Lines"
+
+#. module: msf_field_access_rights
+#: selection:msf_field_access_rights.field_access_rule,instance_level:0
+msgid "Coordo"
+msgstr "Coordo"
+
+#. module: msf_field_access_rights
+#: field:msf_field_access_rights.field_access_rule_line,value_not_synchronized_on_create:0
+msgid "Value NOT Synchronised on Create"
+msgstr "Value NOT Synchronised on Create"
+
+#. module: msf_field_access_rights
+#: help:msf_field_access_rights.field_access_rule,domain_text:0
+msgid "The Filter that chooses which records this rule applies to"
+msgstr "The Filter that chooses which records this rule applies to"
+
+#. module: msf_field_access_rights
+#: view:msf_field_access_rights.field_access_rule:0
+msgid "Search Field Access Rules"
+msgstr "Search Field Access Rules"
+
+#. module: msf_field_access_rights
+#: sql_constraint:msf_field_access_rights.field_access_rule:0
+msgid "The name you have chosen has already been used, and it must be unique. Please choose a different name."
+msgstr "The name you have chosen has already been used, and it must be unique. Please choose a different name."
+
+#. module: msf_field_access_rights
+#: view:msf_field_access_rights.field_access_rule_line:0
+msgid "No Sync on Create"
+msgstr "No Sync on Create"
+
+#. module: msf_field_access_rights
+#: model:ir.model,name:msf_field_access_rights.model_ir_model_fields
+msgid "Fields"
+msgstr "Champs"
+
+#. module: msf_field_access_rights
+#: view:msf_field_access_rights.field_access_rule:0
+#: field:msf_field_access_rights.field_access_rule,domain_text:0
+msgid "Advanced Filter"
+msgstr "Advanced Filter"
+

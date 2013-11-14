@@ -1,0 +1,863 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* sourcing
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sourcing
+#: selection:sourcing.line,sale_order_state:0
+#: selection:sourcing.line,sale_order_state_search:0
+msgid "Closed"
+msgstr "Clôturé"
+
+#. module: sourcing
+#: model:ir.model,name:sourcing.model_sale_order
+msgid "Sales Order"
+msgstr "Commande de Terrain"
+
+#. module: sourcing
+#: field:multiple.sourcing.wizard,supplier:0
+#: field:procurement.order,supplier:0
+#: view:sourcing.line:0
+#: field:sourcing.line,supplier:0
+msgid "Supplier"
+msgstr "Fournisseur"
+
+#. module: sourcing
+#: view:multiple.sourcing.wizard:0
+msgid "Selected lines to source"
+msgstr "Lignes sélectionnées à sourcer"
+
+#. module: sourcing
+#: field:sourcing.line,need_sourcing:0
+msgid "Only for filtering"
+msgstr "Seulement pour filtrage"
+
+#. module: sourcing
+#: constraint:purchase.order:0
+msgid "If you tick the box \"cross docking\", you cannot have an other location than \"Cross docking\""
+msgstr "Si vous cochez la case \"transbordement\", vous ne pouvez pas avoir d'autre lieu que \"Transbordement\""
+
+#. module: sourcing
+#: model:ir.model,name:sourcing.model_product_supplierinfo
+msgid "Information about a product supplier"
+msgstr "Information sur le fournisseur du produit"
+
+#. module: sourcing
+#: selection:sourcing.line,sale_order_state:0
+#: selection:sourcing.line,sale_order_state_search:0
+msgid "Split"
+msgstr "Fractionner"
+
+#. module: sourcing
+#: model:ir.model,name:sourcing.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Ligne Commande Terrain"
+
+#. module: sourcing
+#: constraint:sale.order.line:0
+#: constraint:sourcing.line:0
+msgid "You must select on order procurement method for Service with Reception products."
+msgstr "Vous devez sélectionner sur la commande le mode d'approvisionnement pour le Service  avec Réception de produits."
+
+#. module: sourcing
+#: model:ir.model,name:sourcing.model_purchase_order
+#: selection:multiple.sourcing.wizard,po_cft:0
+#: selection:procurement.order,po_cft:0
+#: selection:sale.order.line,po_cft:0
+#: selection:sourcing.line,po_cft:0
+msgid "Purchase Order"
+msgstr "Bon de Commande"
+
+#. module: sourcing
+#: field:sourcing.line,reference:0
+msgid "Reference"
+msgstr "Référence"
+
+#. module: sourcing
+#: constraint:purchase.order:0
+msgid "You cannot validate this purchase order because it contains a line with an inactive product"
+msgstr "Vous ne pouvez pas valider ce bon de commande, car il contient une ligne avec des produits inactifs."
+
+#. module: sourcing
+#: selection:sourcing.line,sale_order_line_state:0
+#: selection:sourcing.line,state:0
+msgid "Exception"
+msgstr "Exception"
+
+#. module: sourcing
+#: view:sourcing.line:0
+msgid "In Progress"
+msgstr "In Progress"
+
+#. module: sourcing
+#: selection:multiple.sourcing.wizard,type:0
+#: selection:sourcing.line,type:0
+msgid "from stock"
+msgstr "Du stock"
+
+#. module: sourcing
+#: code:addons/sourcing/sourcing.py:331
+#, python-format
+msgid "service"
+msgstr "service"
+
+#. module: sourcing
+#: field:sourcing.line,display_confirm_button:0
+msgid "Display Button"
+msgstr "Bouton d'Affichage"
+
+#. module: sourcing
+#: code:addons/sourcing/wizard/multiple_sourcing.py:123
+#, python-format
+msgid "There are some errors on sourcing lines : %s"
+msgstr "Il y a des erreurs sur les lignes du sourcing : %s"
+
+#. module: sourcing
+#: view:multiple.sourcing.wizard:0
+msgid "Order reference"
+msgstr "Référence de la Commande"
+
+#. module: sourcing
+#: code:addons/sourcing/sourcing.py:1730
+#, python-format
+msgid "Filter check_partner_rfq different than (arg[0], =, id) not implemented."
+msgstr "Filter check_partner_rfq different than (arg[0], =, id) not implemented."
+
+#. module: sourcing
+#: code:addons/sourcing/sourcing.py:1445
+#, python-format
+msgid "Impossible to make a Purchase Order to your own company !"
+msgstr "Impossible de faire un Bon de Commande pour votre propre société !"
+
+#. module: sourcing
+#: view:sourcing.line:0
+msgid "Proc. Method"
+msgstr "Méthode d'Approvisionnement"
+
+#. module: sourcing
+#: field:sourcing.line,available_stock:0
+msgid "Available Stock"
+msgstr "Stock disponible"
+
+#. module: sourcing
+#: code:addons/sourcing/sourcing.py:340
+#, python-format
+msgid "You can't Source to an '%s' partner if you don't have product."
+msgstr "Vous ne pouvez pas sourcer à un partenaire '%s' si vous n'avez pas de produit."
+
+#. module: sourcing
+#: constraint:sale.order:0
+msgid "You cannot validate this sale order because it contains a line with an inactive product"
+msgstr "Vous ne pouvez pas valider cette commande client car elle contient des lignes avec un produit inactif"
+
+#. module: sourcing
+#: field:purchase.order,customer_id:0
+#: view:sourcing.line:0
+#: field:sourcing.line,customer:0
+msgid "Customer"
+msgstr "Client"
+
+#. module: sourcing
+#: view:sourcing.line:0
+msgid "Source Line"
+msgstr "Ligne de la Source"
+
+#. module: sourcing
+#: view:multiple.sourcing.wizard:0
+msgid "Lines to source"
+msgstr "Lignes à sourcer"
+
+#. module: sourcing
+#: field:multiple.sourcing.wizard,po_cft:0
+#: field:procurement.order,po_cft:0
+#: field:sale.order.line,po_cft:0
+#: field:sourcing.line,po_cft:0
+msgid "PO/CFT"
+msgstr "BC /AdO"
+
+#. module: sourcing
+#: code:addons/sourcing/wizard/multiple_sourcing.py:96
+#, python-format
+msgid "You should select a supplier !"
+msgstr "Vous devriez sélectionner un fournisseur !"
+
+#. module: sourcing
+#: view:sourcing.line:0
+msgid "UoM Stock"
+msgstr "UoM Stock"
+
+#. module: sourcing
+#: code:addons/sourcing/sourcing.py:338
+#, python-format
+msgid "You can't Source 'from stock' if you don't have product."
+msgstr "Vous ne pouvez pas sourcer 'du stock' si vous n'avez pas de produit."
+
+#. module: sourcing
+#: code:addons/sourcing/sourcing.py:1782
+#, python-format
+msgid "Filter check_partner_po different than (arg[0], =, %s) not implemented."
+msgstr "Filter check_partner_po different than (arg[0], =, %s) not implemented."
+
+#. module: sourcing
+#: selection:sourcing.line,sale_order_state:0
+#: selection:sourcing.line,sale_order_state_search:0
+msgid "Invoice Exception"
+msgstr "Exception Facture"
+
+#. module: sourcing
+#: field:sourcing.line,qty:0
+msgid "Quantity"
+msgstr "Quantité"
+
+#. module: sourcing
+#: view:multiple.sourcing.wizard:0
+msgid "Save & source"
+msgstr "Sauvegarder & sourcer"
+
+#. module: sourcing
+#: field:product.template,seller_info_id:0
+msgid "Main Supplier Info"
+msgstr "Informations sur le Fournisseur Principal"
+
+#. module: sourcing
+#: selection:sourcing.line,sale_order_state:0
+#: selection:sourcing.line,sale_order_state_search:0
+msgid "Validated"
+msgstr "Validé"
+
+#. module: sourcing
+#: field:sourcing.line,virtual_stock:0
+msgid "Virtual Stock"
+msgstr "Stock Virtuel"
+
+#. module: sourcing
+#: field:sourcing.line,company_id:0
+msgid "Company"
+msgstr "Société"
+
+#. module: sourcing
+#: code:addons/sourcing/sourcing.py:220
+#: code:addons/sourcing/sourcing.py:231
+#: code:addons/sourcing/sourcing.py:1613
+#, python-format
+msgid "Error !"
+msgstr "Erreur !"
+
+#. module: sourcing
+#: constraint:purchase.order:0
+msgid "You cannot choose an internal supplier for this purchase order"
+msgstr "You cannot choose an internal supplier for this purchase order"
+
+#. module: sourcing
+#: sql_constraint:purchase.order:0
+#: sql_constraint:sale.order:0
+msgid "Order Reference must be unique !"
+msgstr "La Référence de la Commande doit être unique !"
+
+#. module: sourcing
+#: model:ir.model,name:sourcing.model_product_template
+msgid "Product Template"
+msgstr "Modèle de Produit"
+
+#. module: sourcing
+#: code:addons/sourcing/sourcing.py:1682
+#: code:addons/sourcing/sourcing.py:1711
+#: code:addons/sourcing/sourcing.py:1730
+#: code:addons/sourcing/sourcing.py:1751
+#: code:addons/sourcing/sourcing.py:1782
+#: code:addons/sourcing/wizard/multiple_sourcing.py:58
+#: code:addons/sourcing/wizard/multiple_sourcing.py:76
+#: code:addons/sourcing/wizard/multiple_sourcing.py:94
+#: code:addons/sourcing/wizard/multiple_sourcing.py:96
+#: code:addons/sourcing/wizard/multiple_sourcing.py:142
+#, python-format
+msgid "Error"
+msgstr "Erreur"
+
+#. module: sourcing
+#: code:addons/sourcing/wizard/multiple_sourcing.py:58
+#, python-format
+msgid "You should select at least two lines to process."
+msgstr "Vous devriez sélectionner au moins deux lignes à traiter."
+
+#. module: sourcing
+#: selection:sourcing.line,categ:0
+msgid "Transport"
+msgstr "Transport"
+
+#. module: sourcing
+#: selection:sourcing.line,sale_order_state:0
+#: selection:sourcing.line,sale_order_state_search:0
+msgid "Waiting Schedule"
+msgstr "En attente"
+
+#. module: sourcing
+#: field:res.partner,check_partner_ir:0
+msgid "Check Partner Type On IR"
+msgstr "Vérifier le type de partenaire sur DI"
+
+#. module: sourcing
+#: view:sourcing.line:0
+#: field:sourcing.line,priority:0
+#: selection:sourcing.line,priority:0
+msgid "Priority"
+msgstr "Priorité"
+
+#. module: sourcing
+#: model:ir.model,name:sourcing.model_sourcing_line
+#: view:sourcing.line:0
+msgid "Sourcing Line"
+msgstr "Ligne de Sourcing"
+
+#. module: sourcing
+#: selection:sourcing.line,categ:0
+msgid "Other"
+msgstr "Autre"
+
+#. module: sourcing
+#: field:sale.order,sourcing_trace:0
+msgid "Sourcing logs"
+msgstr "Sourcing logs"
+
+#. module: sourcing
+#: view:multiple.sourcing.wizard:0
+msgid "Save"
+msgstr "Sauver"
+
+#. module: sourcing
+#: view:sourcing.line:0
+#: field:sourcing.line,categ:0
+msgid "Category"
+msgstr "Catégorie"
+
+#. module: sourcing
+#: model:ir.model,name:sourcing.model_procurement_order
+msgid "Procurement"
+msgstr "Approvisionnement"
+
+#. module: sourcing
+#: code:addons/sourcing/sourcing.py:324
+#: code:addons/sourcing/sourcing.py:328
+#: code:addons/sourcing/sourcing.py:332
+#: code:addons/sourcing/sourcing.py:336
+#: code:addons/sourcing/sourcing.py:338
+#: code:addons/sourcing/sourcing.py:340
+#: code:addons/sourcing/sourcing.py:513
+#: code:addons/sourcing/sourcing.py:616
+#: code:addons/sourcing/sourcing.py:623
+#: code:addons/sourcing/sourcing.py:631
+#: code:addons/sourcing/sourcing.py:634
+#, python-format
+msgid "Warning"
+msgstr "Avertissement"
+
+#. module: sourcing
+#: model:ir.actions.act_window,name:sourcing.sourcing_line_action
+#: model:ir.ui.menu,name:sourcing.menu_sourcing_line
+msgid "Orders Sourcing Tool"
+msgstr "Outil de Sourcing des Commandes"
+
+#. module: sourcing
+#: constraint:product.template:0
+msgid "Error: The default UOM and the purchase UOM must be in the same category."
+msgstr "Erreur : l'UdM par défaut et l'UdM d'achat doivent appartenir à la même catégorie."
+
+#. module: sourcing
+#: view:multiple.sourcing.wizard:0
+msgid "Source default"
+msgstr "Défaut de la source"
+
+#. module: sourcing
+#: selection:sourcing.line,sale_order_line_state:0
+#: selection:sourcing.line,sale_order_state:0
+#: selection:sourcing.line,sale_order_state_search:0
+#: selection:sourcing.line,state:0
+msgid "Cancelled"
+msgstr "Annulé"
+
+#. module: sourcing
+#: view:sourcing.line:0
+#: selection:sourcing.line,sale_order_line_state:0
+#: selection:sourcing.line,sale_order_state:0
+#: selection:sourcing.line,sale_order_state_search:0
+#: selection:sourcing.line,state:0
+msgid "Sourced"
+msgstr "Sourcé"
+
+#. module: sourcing
+#: view:multiple.sourcing.wizard:0
+msgid "Source multiple lines"
+msgstr "Sourcer des lignes multiples"
+
+#. module: sourcing
+#: field:sourcing.line,stock_uom_id:0
+msgid "UoM"
+msgstr "UoM"
+
+#. module: sourcing
+#: selection:sourcing.line,priority:0
+msgid "Emergency"
+msgstr "Urgence"
+
+#. module: sourcing
+#: selection:sourcing.line,categ:0
+msgid "Logistic"
+msgstr "Logistique"
+
+#. module: sourcing
+#: code:addons/sourcing/sourcing.py:1711
+#, python-format
+msgid "Filter check_partner different than (arg[0], =, id) not implemented."
+msgstr "Filter check_partner different than (arg[0], =, id) not implemented."
+
+#. module: sourcing
+#: field:multiple.sourcing.wizard,error_on_lines:0
+msgid "If there is line without need sourcing on selected lines"
+msgstr "Si il y a une ligne qui n'a pas besoin d'être soucée parmi les lignes selectionées "
+
+#. module: sourcing
+#: field:multiple.sourcing.wizard,company_id:0
+msgid "Current company"
+msgstr "Société actuelle"
+
+#. module: sourcing
+#: view:sourcing.line:0
+#: field:sourcing.line,sale_order_state:0
+#: field:sourcing.line,sale_order_state_search:0
+msgid "Order State"
+msgstr "Statut de la Commande"
+
+#. module: sourcing
+#: sql_constraint:sale.order.line:0
+msgid "Product Quantity must be greater than zero."
+msgstr "La quantité de produits doit être supérieure à zéro."
+
+#. module: sourcing
+#: field:sale.order,sourcing_trace_ok:0
+msgid "Display sourcing logs"
+msgstr "Messages du sourcing"
+
+#. module: sourcing
+#: constraint:purchase.order:0
+msgid "You must specify a Valid Till date."
+msgstr "Spécifiez une date de validité 'Valide Jusque'."
+
+#. module: sourcing
+#: field:res.partner,available_for_dpo:0
+msgid "Available for DPO"
+msgstr "Disponible pour BC directe"
+
+#. module: sourcing
+#: model:ir.module.module,description:sourcing.module_meta_information
+msgid "\n"
+"    Add sourcing specification\n"
+"    "
+msgstr "\n"
+"   Ajouter des spécifications de sourcing\n"
+"    "
+
+#. module: sourcing
+#: code:addons/sourcing/sourcing.py:81
+#, python-format
+msgid "Cannot delete Sale Order Line(s) from the sourcing tool !"
+msgstr "Ne peut effacer la(s) ligne(s) Commande Client à partir de l'outil de sourcing !"
+
+#. module: sourcing
+#: model:ir.model,name:sourcing.model_multiple_sourcing_wizard
+msgid "multiple.sourcing.wizard"
+msgstr "multiple.sourcing.wizard"
+
+#. module: sourcing
+#: constraint:purchase.order:0
+#: constraint:sale.order:0
+msgid "Partner type and order type are incompatible! Please change either order type or partner."
+msgstr "Le type de partnenaire et le type de commande sont incompatibles. Veuillez changer l'un ou l'autre."
+
+#. module: sourcing
+#: code:addons/sourcing/wizard/multiple_sourcing.py:142
+#, python-format
+msgid "You cannot choose Direct Purchase Order as method to source Internal Request lines."
+msgstr "Vous ne pouvez pas choisir un Bon de commande direct comme méthode pour sourcer des lignes de Requêtes internes."
+
+#. module: sourcing
+#: model:ir.model,name:sourcing.model_res_partner
+msgid "Partner"
+msgstr "Partenaire"
+
+#. module: sourcing
+#: field:sourcing.line,sale_order_line_state:0
+msgid "unknown"
+msgstr "inconnu"
+
+#. module: sourcing
+#: field:res.partner,line_contains_fo:0
+msgid "Lines contains FO"
+msgstr "Lignes contiennent Commandes du terrain"
+
+#. module: sourcing
+#: code:addons/sourcing/sourcing.py:81
+#, python-format
+msgid "Invalid action !"
+msgstr "Action invalide !"
+
+#. module: sourcing
+#: field:sourcing.line,sale_order_line_id:0
+msgid "Order Line"
+msgstr "Ligne de Commande"
+
+#. module: sourcing
+#: code:addons/sourcing/sourcing.py:1751
+#, python-format
+msgid "Filter check_partner_ir different than (arg[0], =, id) not implemented."
+msgstr "Filter check_partner_ir different than (arg[0], =, id) not implemented."
+
+#. module: sourcing
+#: field:sourcing.line,uom_id:0
+msgid "UoM"
+msgstr "UdM"
+
+#. module: sourcing
+#: model:ir.actions.act_window,name:sourcing.action_compute_schedulers_sourcing
+msgid "Auto POs creation"
+msgstr "Création Automatique de Bons de Commande"
+
+#. module: sourcing
+#: view:sourcing.line:0
+msgid "Qty"
+msgstr "Qté"
+
+#. module: sourcing
+#: constraint:product.supplierinfo:0
+msgid "Error: The default UOM and the Supplier Product UOM must be in the same category."
+msgstr "Erreur : l'UdM par défaut et l'UdM du Fournisseur de Produit doivent appartenir à la même catégorie."
+
+#. module: sourcing
+#: code:addons/sourcing/sourcing.py:220
+#: code:addons/sourcing/sourcing.py:231
+#: code:addons/sourcing/sourcing.py:1613
+#, python-format
+msgid "Filter not implemented"
+msgstr "Filtre pas mis en oeuvre"
+
+#. module: sourcing
+#: selection:sourcing.line,sale_order_line_state:0
+#: selection:sourcing.line,sale_order_state:0
+#: selection:sourcing.line,sale_order_state_search:0
+#: selection:sourcing.line,state:0
+msgid "Draft"
+msgstr "Brouillon"
+
+#. module: sourcing
+#: view:multiple.sourcing.wizard:0
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: sourcing
+#: selection:multiple.sourcing.wizard,po_cft:0
+#: selection:procurement.order,po_cft:0
+#: selection:sale.order.line,po_cft:0
+#: selection:sourcing.line,po_cft:0
+msgid "Tender"
+msgstr "Appel d'offres"
+
+#. module: sourcing
+#: code:addons/sourcing/sourcing.py:1682
+#, python-format
+msgid "Bad operator"
+msgstr "Mauvais Opérateur"
+
+#. module: sourcing
+#: code:addons/sourcing/sourcing.py:332
+#: code:addons/sourcing/sourcing.py:514
+#, python-format
+msgid "You cannot choose 'from stock' as method to source a %s product !"
+msgstr "Vous ne pouvez pas choisir 'du stock' comme méthode pour sourcer un produit %s !"
+
+#. module: sourcing
+#: view:sale.order:0
+msgid "Sourcing Logs"
+msgstr "Sourcing Logs"
+
+#. module: sourcing
+#: field:sourcing.line,procurement_request:0
+msgid "Procurement Request"
+msgstr "Approvisionnement- Demande"
+
+#. module: sourcing
+#: selection:multiple.sourcing.wizard,type:0
+#: selection:sourcing.line,type:0
+msgid "on order"
+msgstr "Sur commande"
+
+#. module: sourcing
+#: model:ir.module.module,shortdesc:sourcing.module_meta_information
+msgid "Sourcing Tool"
+msgstr "Outil de Sourcing "
+
+#. module: sourcing
+#: code:addons/sourcing/sourcing.py:331
+#, python-format
+msgid "non stockable"
+msgstr "non stockable"
+
+#. module: sourcing
+#: view:sourcing.line:0
+#: field:sourcing.line,sale_order_id:0
+msgid "Order"
+msgstr "Commande"
+
+#. module: sourcing
+#: field:res.partner,check_partner_po:0
+msgid "Check Partner Type On PO"
+msgstr "Vérifier le type de partenaire sur BC"
+
+#. module: sourcing
+#: view:multiple.sourcing.wizard:0
+msgid "Supplier selection"
+msgstr "Sélection du fournisseur"
+
+#. module: sourcing
+#: code:addons/sourcing/sourcing.py:634
+#, python-format
+msgid "For an Internal Request with a procurement method 'On Order' and without product,\n"
+"                    the supplier must be either in 'Internal', 'Inter-Section' or 'Intermission' type.\n"
+"                    "
+msgstr "Pour une Requête interne avec 'Sur commande' comme méthode d'acquisition et sans produit,\n"
+"                    le fournisseur doit être de type soit 'Interne' ou 'Inter-Sections' ou 'Inter-missions'.\n"
+"                    "
+
+#. module: sourcing
+#: view:multiple.sourcing.wizard:0
+msgid "Actions"
+msgstr "Actions"
+
+#. module: sourcing
+#: view:sourcing.line:0
+msgid "Need Sourcing"
+msgstr "Nécessite un Sourcing"
+
+#. module: sourcing
+#: view:sourcing.line:0
+msgid "Group By..."
+msgstr "Grouper Par..."
+
+#. module: sourcing
+#: field:sourcing.line,rts:0
+msgid "RTS"
+msgstr "Request To Send - Demande d'Envoi"
+
+#. module: sourcing
+#: code:addons/sourcing/wizard/multiple_sourcing.py:76
+#, python-format
+msgid "No non-sourced lines are selected. Please select non-sourced lines"
+msgstr "Aucune ligne non sourcée sélectionnée. Veuillez sélectionner des lignes non sourcées"
+
+#. module: sourcing
+#: selection:sourcing.line,sale_order_line_state:0
+#: selection:sourcing.line,sale_order_state:0
+#: selection:sourcing.line,sale_order_state_search:0
+#: selection:sourcing.line,state:0
+msgid "Confirmed"
+msgstr "Confirmé"
+
+#. module: sourcing
+#: selection:sourcing.line,categ:0
+msgid "Service"
+msgstr "Service"
+
+#. module: sourcing
+#: code:addons/sourcing/wizard/multiple_sourcing.py:94
+#, python-format
+msgid "The Procurement method should be filled !"
+msgstr "La méthode d'acquisition devrait être complétée !"
+
+#. module: sourcing
+#: code:addons/sourcing/sourcing.py:616
+#, python-format
+msgid "The product must be chosen before sourcing the line.\n"
+"                Please select it within the lines of the associated Field Order (through the \"Field Orders\" menu).\n"
+"                "
+msgstr "Le produit doit être choisi avant le sourçage de la ligne.\n"
+"                Veuillez sélectionner le produit dans les lignes de la commande de terrain connexe (via le menu \"Commandes de terrain\").\n"
+"                "
+
+#. module: sourcing
+#: view:multiple.sourcing.wizard:0
+msgid "Procurement method"
+msgstr "Méthode d'achat"
+
+#. module: sourcing
+#: field:res.partner,check_partner:0
+#: field:res.partner,check_partner_rfq:0
+msgid "Check Partner Type"
+msgstr "Vérifier le type de partenaire"
+
+#. module: sourcing
+#: code:addons/sourcing/wizard/multiple_sourcing.py:123
+#, python-format
+msgid "Errors"
+msgstr "Errors"
+
+#. module: sourcing
+#: field:sourcing.line,cf_estimated_delivery_date:0
+#: field:sourcing.line,estimated_delivery_date:0
+msgid "Estimated DD"
+msgstr "Date de Livraison Estimée"
+
+#. module: sourcing
+#: code:addons/sourcing/sourcing.py:324
+#: code:addons/sourcing/sourcing.py:623
+#, python-format
+msgid "You can't source a loan 'from stock'."
+msgstr "Vous ne pouvez pas sourcer un prêt 'du stock'."
+
+#. module: sourcing
+#: help:multiple.sourcing.wizard,supplier:0
+msgid "If you have choose lines coming from Field Orders, only External/ESC suppliers will be available."
+msgstr "Si vous avez choisi des lignes venant de commandes de terrain, seuls des fournisseurs Externes/ESC seront disponibles."
+
+#. module: sourcing
+#: code:addons/sourcing/sourcing.py:336
+#, python-format
+msgid "You can't source with 'Tender' if you don't have product."
+msgstr "Vous ne pouvez pas sourcer avec 'Appel d'offres' si vous n'avez pas de produit."
+
+#. module: sourcing
+#: field:sourcing.line,line_number:0
+msgid "Line"
+msgstr "Ligne"
+
+#. module: sourcing
+#: code:addons/sourcing/sourcing.py:328
+#, python-format
+msgid "For an Internal Request with a procurement method 'On Order' and without product, the supplier must be either in 'Internal', 'Inter-section' or 'Intermission type."
+msgstr "Pour une Requête interne avec 'Sur commande' comme méthode d'acquisition et sans produit, le fournisseur doit être de type soit 'Interne' ou 'Inter-sections' ou 'Inter-missions."
+
+#. module: sourcing
+#: field:sourcing.line,name:0
+msgid "Name"
+msgstr "Nom"
+
+#. module: sourcing
+#: view:sourcing.line:0
+msgid "Sale Order"
+msgstr "Commande de Terrain"
+
+#. module: sourcing
+#: selection:multiple.sourcing.wizard,po_cft:0
+#: selection:procurement.order,po_cft:0
+#: selection:sale.order.line,po_cft:0
+#: selection:sourcing.line,po_cft:0
+msgid "Direct Purchase Order"
+msgstr "Bon de Commande Directe"
+
+#. module: sourcing
+#: field:multiple.sourcing.wizard,line_ids:0
+msgid "Sourcing lines"
+msgstr "Lignes de Sourcing"
+
+#. module: sourcing
+#: field:sale.order,sourcing_line_ids:0
+#: field:sale.order.line,sourcing_line_ids:0
+#: view:sourcing.line:0
+msgid "Sourcing Lines"
+msgstr "Lignes de Sourcing"
+
+#. module: sourcing
+#: view:multiple.sourcing.wizard:0
+msgid "Some of the selected lines have already been sourced. These lines have been ignored."
+msgstr "Certaines des lignes sélectionnées ont déjà été sourcées. Ces lignes ont été ignorées."
+
+#. module: sourcing
+#: code:addons/sourcing/sourcing.py:885
+#, python-format
+msgid "Field Orders"
+msgstr "Commandes du terrain"
+
+#. module: sourcing
+#: selection:sourcing.line,priority:0
+msgid "Normal"
+msgstr "Normal"
+
+#. module: sourcing
+#: view:sourcing.line:0
+#: field:sourcing.line,product_id:0
+msgid "Product"
+msgstr "Produit"
+
+#. module: sourcing
+#: view:sourcing.line:0
+msgid "Split line"
+msgstr "Fractionner la ligne"
+
+#. module: sourcing
+#: selection:sourcing.line,categ:0
+msgid "Medical"
+msgstr "Médical"
+
+#. module: sourcing
+#: code:addons/sourcing/sourcing.py:631
+#, python-format
+msgid "The supplier must be chosen before sourcing the line"
+msgstr "Le fournisseur doit être choisi avant de sourcer la ligne"
+
+#. module: sourcing
+#: selection:sourcing.line,sale_order_state:0
+#: selection:sourcing.line,sale_order_state_search:0
+msgid "Shipping Exception"
+msgstr "Expédition Exception"
+
+#. module: sourcing
+#: help:product.template,seller_info_id:0
+msgid "Main Supplier who has highest priority in Supplier List - Info object."
+msgstr "Le Fournisseur Principal à la plus haute priorité sur la Liste Fournisseurs - Info Objet."
+
+#. module: sourcing
+#: field:sourcing.line,state:0
+msgid "State"
+msgstr "Statut"
+
+#. module: sourcing
+#: field:multiple.sourcing.wizard,type:0
+#: field:sourcing.line,type:0
+msgid "Procurement Method"
+msgstr "Approvisionnement- Méthode"
+
+#. module: sourcing
+#: field:sourcing.line,loan_type:0
+msgid "unknown"
+msgstr "unknown"
+
+#. module: sourcing
+#: field:sourcing.line,real_stock:0
+msgid "Real Stock"
+msgstr "Stock réel"
+
+#. module: sourcing
+#: model:ir.actions.act_window,name:sourcing.action_multiple_sourcing
+msgid "Source lines"
+msgstr "Sourcer les lignes"
+
+#. module: sourcing
+#: field:product.supplierinfo,product_product_ids:0
+msgid "Products"
+msgstr "Produits"
+
+#. module: sourcing
+#: selection:sourcing.line,sale_order_line_state:0
+#: selection:sourcing.line,state:0
+msgid "Done"
+msgstr "Terminé"
+

@@ -1,0 +1,185 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* delete_button
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: delete_button
+#: constraint:real.average.consumption:0
+msgid "You cannot confirm this real consumption report because it contains a line with an inactive product"
+msgstr "You cannot confirm this real consumption report because it contains a line with an inactive product"
+
+#. module: delete_button
+#: constraint:stock.picking:0
+msgid "You cannot validate this document because it contains a line with an inactive product"
+msgstr "Vous ne pouvez pas valider ce document car il contient des lignes avec un produit inactif"
+
+#. module: delete_button
+#: model:ir.model,name:delete_button.model_sale_order
+msgid "Sales Order"
+msgstr "Commande de Terrain"
+
+#. module: delete_button
+#: view:purchase.order:0
+#: view:sale.order:0
+#: view:stock.picking:0
+#: view:tender:0
+msgid "Do you really want to delete selected record(s) ?"
+msgstr "Voulez-vous vraiment supprimer le(s) dossier(s) sélectionné(s) ?"
+
+#. module: delete_button
+#: view:purchase.order:0
+#: view:real.average.consumption:0
+#: view:sale.order:0
+#: view:stock.picking:0
+#: view:tender:0
+msgid "Delete"
+msgstr "Supprimer"
+
+#. module: delete_button
+#: constraint:purchase.order:0
+msgid "You must specify a Valid Till date."
+msgstr "Spécifiez une date de validité 'Valide Jusque'."
+
+#. module: delete_button
+#: constraint:purchase.order:0
+msgid "If you tick the box \"cross docking\", you cannot have an other location than \"Cross docking\""
+msgstr "Si vous cochez la case \"transbordement\", vous ne pouvez pas avoir d'autre lieu que \"Transbordement\""
+
+#. module: delete_button
+#: sql_constraint:composition.kit:0
+msgid "Kit Composition List Reference must be unique for a given product."
+msgstr "Référence de la Liste de Composition de kit doit être unique pour un produit donné."
+
+#. module: delete_button
+#: constraint:purchase.order:0
+#: constraint:sale.order:0
+msgid "Partner type and order type are incompatible! Please change either order type or partner."
+msgstr "Le type de partnenaire et le type de commande sont incompatibles. Veuillez changer l'un ou l'autre."
+
+#. module: delete_button
+#: sql_constraint:purchase.order:0
+#: sql_constraint:sale.order:0
+msgid "Order Reference must be unique !"
+msgstr "La Référence de la Commande doit être unique !"
+
+#. module: delete_button
+#: model:ir.model,name:delete_button.model_real_average_consumption
+msgid "Real Average Consumption"
+msgstr "Consommations Moyennes Réelles"
+
+#. module: delete_button
+#: constraint:composition.kit:0
+msgid "Constraint error on Composition Kit."
+msgstr "Erreur de contrainte lors de la Composition Kit."
+
+#. module: delete_button
+#: model:ir.model,name:delete_button.model_purchase_order
+msgid "Purchase Order"
+msgstr "Bon de Commande"
+
+#. module: delete_button
+#: code:addons/delete_button/delete_button.py:44
+#: code:addons/delete_button/delete_button.py:75
+#: code:addons/delete_button/delete_button.py:106
+#: code:addons/delete_button/delete_button.py:137
+#: code:addons/delete_button/delete_button.py:168
+#, python-format
+msgid "You can only delete documents which are in \"Draft\" state."
+msgstr "Vous pouvez uniquement supprimer des documents en mode \"brouillon\"."
+
+#. module: delete_button
+#: constraint:purchase.order:0
+msgid "You cannot validate this purchase order because it contains a line with an inactive product"
+msgstr "Vous ne pouvez pas valider ce bon de commande, car il contient une ligne avec des produits inactifs."
+
+#. module: delete_button
+#: constraint:stock.picking:0
+msgid "Wrong reason type for an OUT created from scratch."
+msgstr "Mauvais type de motif pour une livraison OUT créée à partir de rien."
+
+#. module: delete_button
+#: constraint:tender:0
+msgid "You cannot validate this tender because it contains a line with an inactive product"
+msgstr "Vous ne pouvez pas valider cet appel d'offre car il contient une ligne avec un produit inactif"
+
+#. module: delete_button
+#: constraint:purchase.order:0
+msgid "You cannot choose an internal supplier for this purchase order"
+msgstr "You cannot choose an internal supplier for this purchase order"
+
+#. module: delete_button
+#: model:ir.model,name:delete_button.model_stock_picking
+msgid "Picking List"
+msgstr "Liste de Piquage"
+
+#. module: delete_button
+#: model:ir.model,name:delete_button.model_tender
+msgid "Tender"
+msgstr "Appel d'offres"
+
+#. module: delete_button
+#: code:addons/delete_button/delete_button.py:44
+#: code:addons/delete_button/delete_button.py:75
+#: code:addons/delete_button/delete_button.py:106
+#: code:addons/delete_button/delete_button.py:137
+#: code:addons/delete_button/delete_button.py:168
+#, python-format
+msgid "Warning !"
+msgstr "Avertissement !"
+
+#. module: delete_button
+#: model:ir.module.module,description:delete_button.module_meta_information
+msgid "\n"
+"        Hide delete buttons according to the state.\n"
+"    "
+msgstr "\n"
+"        Cacher les boutons selon l'état.\n"
+"    "
+
+#. module: delete_button
+#: constraint:sale.order:0
+msgid "You cannot validate this sale order because it contains a line with an inactive product"
+msgstr "Vous ne pouvez pas valider cette commande client car elle contient des lignes avec un produit inactif"
+
+#. module: delete_button
+#: view:real.average.consumption:0
+msgid "Do you really want to delete selected record(s) ?"
+msgstr "Do you really want to delete selected record(s) ?"
+
+#. module: delete_button
+#: constraint:composition.kit:0
+msgid "You cannot confirm this kit because it contains a line with an inactive product"
+msgstr "Vous ne pouvez pas confirmer ce kit car il contient des lignes avec un produit inactif"
+
+#. module: delete_button
+#: model:ir.model,name:delete_button.model_composition_kit
+msgid "composition.kit"
+msgstr "composition.kit"
+
+#. module: delete_button
+#: constraint:tender:0
+msgid "You cannot choose an internal supplier for this tender"
+msgstr "You cannot choose an internal supplier for this tender"
+
+#. module: delete_button
+#: sql_constraint:real.average.consumption:0
+msgid "\"Period from\" must be less than or equal to \"Period to\""
+msgstr "\"Période du\" doit être antérieure ou égale à \"Période à'\""
+
+#. module: delete_button
+#: model:ir.module.module,shortdesc:delete_button.module_meta_information
+msgid "MSF Delete Button"
+msgstr "Bouton Supprimer de MSF"
+

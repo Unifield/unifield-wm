@@ -1,0 +1,793 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* sales_followup
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sales_followup
+#: selection:purchase.order.line,po_state:0
+msgid "Wait"
+msgstr "Attendez"
+
+#. module: sales_followup
+#: code:addons/sales_followup/sale_followup.py:374
+#: code:addons/sales_followup/sale_followup.py:388
+#: code:addons/sales_followup/sale_followup.py:420
+#: code:addons/sales_followup/sale_followup.py:452
+#: code:addons/sales_followup/sale_followup.py:480
+#: selection:purchase.order.line,po_state:0
+#, python-format
+msgid "Closed"
+msgstr "Clôturé"
+
+#. module: sales_followup
+#: model:ir.model,name:sales_followup.model_sale_order
+msgid "Sales Order"
+msgstr "Commande de Terrain"
+
+#. module: sales_followup
+#: view:sale.order.line.followup:0
+msgid "Supplier"
+msgstr "Fournisseur"
+
+#. module: sales_followup
+#: code:addons/sales_followup/sale_followup.py:392
+#: code:addons/sales_followup/sale_followup.py:394
+#: code:addons/sales_followup/sale_followup.py:404
+#: code:addons/sales_followup/sale_followup.py:426
+#: code:addons/sales_followup/sale_followup.py:428
+#: code:addons/sales_followup/sale_followup.py:438
+#: code:addons/sales_followup/sale_followup.py:456
+#: code:addons/sales_followup/sale_followup.py:458
+#: code:addons/sales_followup/sale_followup.py:467
+#: code:addons/sales_followup/sale_followup.py:487
+#: code:addons/sales_followup/sale_followup.py:510
+#: code:addons/sales_followup/sale_followup.py:511
+#: code:addons/sales_followup/sale_followup.py:639
+#: code:addons/sales_followup/sale_followup.py:640
+#: code:addons/sales_followup/sale_followup.py:642
+#: code:addons/sales_followup/sale_followup.py:643
+#: code:addons/sales_followup/sale_followup.py:645
+#: code:addons/sales_followup/sale_followup.py:646
+#: code:addons/sales_followup/sale_followup.py:650
+#: code:addons/sales_followup/sale_followup.py:651
+#: code:addons/sales_followup/sale_followup.py:654
+#: code:addons/sales_followup/sale_followup.py:655
+#: code:addons/sales_followup/sale_followup.py:659
+#: code:addons/sales_followup/sale_followup.py:661
+#: code:addons/sales_followup/sale_followup.py:662
+#: code:addons/sales_followup/sale_followup.py:666
+#: code:addons/sales_followup/sale_followup.py:671
+#: code:addons/sales_followup/sale_followup.py:673
+#: code:addons/sales_followup/sale_followup.py:674
+#: code:addons/sales_followup/sale_followup.py:676
+#: code:addons/sales_followup/sale_followup.py:677
+#: code:addons/sales_followup/sale_followup.py:680
+#, python-format
+msgid "Error on state !"
+msgstr "Erreur sur le statut !"
+
+#. module: sales_followup
+#: field:sale.order.followup,requested_date:0
+msgid "Requested date"
+msgstr "Date souhaitée"
+
+#. module: sales_followup
+#: constraint:purchase.order:0
+msgid "If you tick the box \"cross docking\", you cannot have an other location than \"Cross docking\""
+msgstr "Si vous cochez la case \"transbordement\", vous ne pouvez pas avoir d'autre lieu que \"Transbordement\""
+
+#. module: sales_followup
+#: model:ir.actions.server,name:sales_followup.action_sale_order_follow_up
+msgid "Order Follow Up"
+msgstr "Suivi Commande"
+
+#. module: sales_followup
+#: view:sale.order.followup:0
+#: view:sale.order.line.followup:0
+msgid "Order follow up lines"
+msgstr "Lignes de suivi de commande"
+
+#. module: sales_followup
+#: view:sale.order.followup:0
+#: view:sale.order.line.followup:0
+msgid "General Information"
+msgstr "Informations Générales"
+
+#. module: sales_followup
+#: model:ir.model,name:sales_followup.model_purchase_order
+#: field:sale.order.line.followup,purchase_status:0
+msgid "Purchase Order"
+msgstr "Bon de Commande"
+
+#. module: sales_followup
+#: constraint:purchase.order:0
+msgid "You cannot validate this purchase order because it contains a line with an inactive product"
+msgstr "Vous ne pouvez pas valider ce bon de commande, car il contient une ligne avec des produits inactifs."
+
+#. module: sales_followup
+#: code:addons/sales_followup/sale_followup.py:481
+#, python-format
+msgid "Picked"
+msgstr "Prélevé"
+
+#. module: sales_followup
+#: view:sale.order.line.followup:0
+msgid "Incoming"
+msgstr "Entrant"
+
+#. module: sales_followup
+#: model:ir.model,name:sales_followup.model_sale_order_followup_from_menu
+msgid "Sale order followup menu entry"
+msgstr "Suivi commande terrain – Ecriture/entrée Menu"
+
+#. module: sales_followup
+#: constraint:stock.move:0
+msgid "Wrong reason type for an OUT created from scratch."
+msgstr "Mauvais type de motif pour une livraison OUT créée à partir de rien."
+
+#. module: sales_followup
+#: model:ir.ui.menu,name:sales_followup.menuitem_sale_order_followup_from_menu
+msgid "Field Order Follow-Up"
+msgstr "Suivi Commande de Terrain"
+
+#. module: sales_followup
+#: view:sale.order.line.followup:0
+msgid "Outgoing"
+msgstr "Sortant"
+
+#. module: sales_followup
+#: view:sale.order.followup:0
+#: field:sale.order.followup,choose_type:0
+msgid "Type of view"
+msgstr "Type de vue"
+
+#. module: sales_followup
+#: constraint:purchase.order:0
+msgid "You cannot choose an internal supplier for this purchase order"
+msgstr "You cannot choose an internal supplier for this purchase order"
+
+#. module: sales_followup
+#: view:sale.order.line.followup:0
+msgid "State"
+msgstr "Statut"
+
+#. module: sales_followup
+#: selection:sale.order.line.followup,po_cft:0
+msgid "PO"
+msgstr "BC"
+
+#. module: sales_followup
+#: view:sale.order.line.followup:0
+msgid "Incoming Products"
+msgstr "Produits Entrants"
+
+#. module: sales_followup
+#: field:sale.order.line.followup,procure_method:0
+msgid "Proc. Method"
+msgstr "Méthode d'Approvisionnement"
+
+#. module: sales_followup
+#: selection:purchase.order.line,order_type:0
+msgid "Donation before expiry"
+msgstr "Donation avant expiration"
+
+#. module: sales_followup
+#: view:sale.order.line.followup:0
+msgid "Outgoing Products"
+msgstr "Produits Sortants"
+
+#. module: sales_followup
+#: view:sale.order.line.followup:0
+msgid "Dest. Loc."
+msgstr "Zone de Destination"
+
+#. module: sales_followup
+#: selection:purchase.order.line,order_type:0
+msgid "In Kind Donation"
+msgstr "Donation en Nature"
+
+#. module: sales_followup
+#: constraint:sale.order:0
+msgid "You cannot validate this sale order because it contains a line with an inactive product"
+msgstr "Vous ne pouvez pas valider cette commande client car elle contient des lignes avec un produit inactif"
+
+#. module: sales_followup
+#: model:ir.model,name:sales_followup.model_sale_order_followup_test
+msgid "sale.order.followup.test"
+msgstr "sale.order.followup.test"
+
+#. module: sales_followup
+#: view:sale.order.line.followup:0
+msgid "Customer"
+msgstr "Client"
+
+#. module: sales_followup
+#: field:sale.order.line.followup,po_cft:0
+msgid "PO/CFT"
+msgstr "BC /AdO"
+
+#. module: sales_followup
+#: model:ir.actions.act_window,name:sales_followup.action_sale_order_followup_from_menu
+msgid "Sale Order Follow-Up"
+msgstr "Suivi commande terrain"
+
+#. module: sales_followup
+#: selection:purchase.order.line,po_state:0
+msgid "Sent"
+msgstr "Envoyé"
+
+#. module: sales_followup
+#: field:sale.order.line.followup,first_line:0
+msgid "First line"
+msgstr "Première ligne"
+
+#. module: sales_followup
+#: field:sale.order.line.followup,followup_id:0
+msgid "Sale Order Followup"
+msgstr "Suivi commande terrain"
+
+#. module: sales_followup
+#: selection:purchase.order.line,po_state:0
+msgid "Invoice Exception"
+msgstr "Exception Facture"
+
+#. module: sales_followup
+#: view:sale.order.line.followup:0
+msgid "Go to tender form"
+msgstr "Aller sur Formulaire Appels d'Offres"
+
+#. module: sales_followup
+#: view:sale.order.line.followup:0
+msgid "Order follow up line"
+msgstr "Ligne de suivi de commande"
+
+#. module: sales_followup
+#: field:sale.order.followup,order_id:0
+#: field:sale.order.followup.from.menu,order_id:0
+msgid "Internal reference"
+msgstr "Référence Interne"
+
+#. module: sales_followup
+#: code:addons/sales_followup/sale_followup.py:416
+#: code:addons/sales_followup/sale_followup.py:417
+#: selection:purchase.order.line,po_state:0
+#, python-format
+msgid "Validated"
+msgstr "Validé"
+
+#. module: sales_followup
+#: selection:sale.order.line.followup,po_cft:0
+msgid "DPO"
+msgstr "Bon de Commande Directe"
+
+#. module: sales_followup
+#: sql_constraint:purchase.order:0
+#: sql_constraint:sale.order:0
+msgid "Order Reference must be unique !"
+msgstr "La Référence de la Commande doit être unique !"
+
+#. module: sales_followup
+#: field:sale.order.line.followup,available_qty:0
+#: field:sale.order.line.followup,product_available:0
+msgid "Product available"
+msgstr "Produit disponible"
+
+#. module: sales_followup
+#: model:ir.model,name:sales_followup.model_sale_order_line_followup
+msgid "Sales Order Lines Followup"
+msgstr "Suivi des Lignes de commande terrain "
+
+#. module: sales_followup
+#: view:sale.order.line.followup:0
+#: field:sale.order.line.followup,tender_ids:0
+#: field:sale.order.line.followup,tender_status:0
+msgid "Tender"
+msgstr "Appel d'offres"
+
+#. module: sales_followup
+#: constraint:stock.move:0
+msgid "You must assign a batch number for this product."
+msgstr "Vous devez mentionner un numéro de lot pour ce produit."
+
+#. module: sales_followup
+#: model:ir.module.module,description:sales_followup.module_meta_information
+msgid "\n"
+"        Add wizard to allow users to have\n"
+"        an overview of all related \n"
+"        documents to a sale order.\n"
+"    "
+msgstr "\n"
+"       Ajouter l'Assistant pour permettre aux utilisateurs d'avoir\n"
+"         une vue d'ensemble de tous les\n"
+"         documents connexes à une commande terrain."
+
+#. module: sales_followup
+#: code:addons/sales_followup/sale_followup.py:361
+#: code:addons/sales_followup/sale_followup.py:386
+#: code:addons/sales_followup/sale_followup.py:449
+#: code:addons/sales_followup/sale_followup.py:450
+#: code:addons/sales_followup/sale_followup.py:477
+#: code:addons/sales_followup/sale_followup.py:478
+#, python-format
+msgid "Waiting"
+msgstr "En attente"
+
+#. module: sales_followup
+#: field:sale.order.followup,cust_ref:0
+#: field:sale.order.followup.from.menu,cust_order_id:0
+msgid "Customer reference"
+msgstr "Référence Client"
+
+#. module: sales_followup
+#: code:addons/sales_followup/sale_followup.py:133
+#: code:addons/sales_followup/sale_followup.py:159
+#: code:addons/sales_followup/sale_followup.py:161
+#, python-format
+msgid "Error"
+msgstr "Erreur"
+
+#. module: sales_followup
+#: view:sale.order.followup.from.menu:0
+msgid "Go to followup"
+msgstr "Aller sur suivi"
+
+#. module: sales_followup
+#: selection:purchase.order.line,order_type:0
+msgid "Purchase List"
+msgstr "Liste d'Achats"
+
+#. module: sales_followup
+#: view:sale.order.followup.from.menu:0
+msgid "Select Sale Order"
+msgstr "Sélectionner commande terrain "
+
+#. module: sales_followup
+#: code:addons/sales_followup/sale_followup.py:385
+#: code:addons/sales_followup/sale_followup.py:414
+#: code:addons/sales_followup/sale_followup.py:448
+#: code:addons/sales_followup/sale_followup.py:476
+#, python-format
+msgid "Partial"
+msgstr "Partiel"
+
+#. module: sales_followup
+#: selection:purchase.order.line,po_state:0
+msgid "Receipt Exception"
+msgstr "Reception Exception"
+
+#. module: sales_followup
+#: view:sale.order.followup:0
+#: view:sale.order.followup.from.menu:0
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: sales_followup
+#: view:sale.order.line.followup:0
+msgid "Expected receipt"
+msgstr "Reçu prévu"
+
+#. module: sales_followup
+#: view:sale.order.line.followup:0
+msgid "Go to incoming move form"
+msgstr "Aller sur Formulaire Mouvements Entrants"
+
+#. module: sales_followup
+#: sql_constraint:purchase.order.line:0
+#: sql_constraint:tender.line:0
+msgid "Product Quantity must be greater than zero."
+msgstr "La quantité de produits doit être supérieure à zéro."
+
+#. module: sales_followup
+#: view:sale.order.followup.from.menu:0
+msgid "Choose a Sale Order"
+msgstr "Choisir une commande terrain"
+
+#. module: sales_followup
+#: view:sale.order.followup:0
+msgid "Close"
+msgstr "Fermer"
+
+#. module: sales_followup
+#: field:sale.order.followup,creation_date:0
+msgid "Creation date"
+msgstr "Date de Création"
+
+#. module: sales_followup
+#: code:addons/sales_followup/sale_followup.py:376
+#: code:addons/sales_followup/sale_followup.py:389
+#: code:addons/sales_followup/sale_followup.py:421
+#: code:addons/sales_followup/sale_followup.py:453
+#: code:addons/sales_followup/sale_followup.py:484
+#: selection:purchase.order.line,po_state:0
+#, python-format
+msgid "Cancelled"
+msgstr "Annulé"
+
+#. module: sales_followup
+#: field:sale.order.line.followup,sourced_ok:0
+msgid "Sourced"
+msgstr "Sourcé"
+
+#. module: sales_followup
+#: field:sale.order.line.followup,qty_ordered:0
+msgid "Ordered qty"
+msgstr "Qté commandée"
+
+#. module: sales_followup
+#: code:addons/sales_followup/sale_followup.py:133
+#, python-format
+msgid "No followup found ! Cannot update !"
+msgstr "Suivi non trouvé ! Ne peut mettre à jour !"
+
+#. module: sales_followup
+#: constraint:stock.move:0
+msgid "You try to assign a lot which is not from the same product"
+msgstr "Vous essayez d'attribuer un lot qui ne correspond pas au même produit"
+
+#. module: sales_followup
+#: field:sale.order.line.followup,line_id:0
+#: field:sale.order.line.followup,line_number:0
+msgid "Order line"
+msgstr "Ligne d'ordre"
+
+#. module: sales_followup
+#: selection:purchase.order.line,po_state:0
+msgid "Updated"
+msgstr "Mise à jour"
+
+#. module: sales_followup
+#: model:ir.model,name:sales_followup.model_sale_order_followup
+msgid "Sales Order Followup"
+msgstr "Suivi commande terrain "
+
+#. module: sales_followup
+#: model:ir.model,name:sales_followup.model_stock_move
+msgid "Stock Move"
+msgstr "Mouvement de Stock"
+
+#. module: sales_followup
+#: code:addons/sales_followup/sale_followup.py:384
+#, python-format
+msgid "No tender"
+msgstr "Aucun appel d'offre"
+
+#. module: sales_followup
+#: view:sale.order.line.followup:0
+msgid "Expected delivery"
+msgstr "Livraison prévue"
+
+#. module: sales_followup
+#: field:sale.order.line.followup,original_order_id:0
+msgid "Orig. line"
+msgstr "Ligne d'orig."
+
+#. module: sales_followup
+#: code:addons/sales_followup/sale_followup.py:387
+#, python-format
+msgid "In Progress"
+msgstr "En Cours"
+
+#. module: sales_followup
+#: model:ir.module.module,shortdesc:sales_followup.module_meta_information
+msgid "Sales Follow-Up"
+msgstr "Suivi Commandes de Terrain"
+
+#. module: sales_followup
+#: field:sale.order.followup,line_ids:0
+msgid "Lines"
+msgstr "Lignes"
+
+#. module: sales_followup
+#: code:addons/sales_followup/sale_followup.py:360
+#: code:addons/sales_followup/sale_followup.py:475
+#, python-format
+msgid "No deliveries"
+msgstr "Aucune livraison"
+
+#. module: sales_followup
+#: constraint:stock.move:0
+msgid "You must assign an asset for this product."
+msgstr "Vous devez mentionner un bien pour ce produit."
+
+#. module: sales_followup
+#: constraint:purchase.order:0
+msgid "You must specify a Valid Till date."
+msgstr "Spécifiez une date de validité 'Valide Jusque'."
+
+#. module: sales_followup
+#: code:addons/sales_followup/sale_followup.py:482
+#, python-format
+msgid "Packed"
+msgstr "Emballé"
+
+#. module: sales_followup
+#: view:sale.order.followup:0
+#: view:sale.order.line.followup:0
+msgid "Associated documents"
+msgstr "Documents associés"
+
+#. module: sales_followup
+#: constraint:purchase.order:0
+#: constraint:sale.order:0
+msgid "Partner type and order type are incompatible! Please change either order type or partner."
+msgstr "Le type de partnenaire et le type de commande sont incompatibles. Veuillez changer l'un ou l'autre."
+
+#. module: sales_followup
+#: selection:sale.order.followup,choose_type:0
+msgid "Progress view"
+msgstr "Vue de l'Etat d'Avancement"
+
+#. module: sales_followup
+#: field:purchase.order.line,order_type:0
+#: field:purchase.order.line,po_state:0
+msgid "unknown"
+msgstr "inconnu"
+
+#. module: sales_followup
+#: constraint:stock.move:0
+msgid "Constraint error on Uom"
+msgstr "Constraint error on Uom"
+
+#. module: sales_followup
+#: field:sale.order.line.followup,uom_id:0
+msgid "UoM"
+msgstr "UdM"
+
+#. module: sales_followup
+#: selection:purchase.order.line,order_type:0
+msgid "Standard donation"
+msgstr "Donation normale"
+
+#. module: sales_followup
+#: view:sale.order.line.followup:0
+msgid "Go to purchase order form"
+msgstr "Aller sur Formulaire Bons de Commande"
+
+#. module: sales_followup
+#: selection:sale.order.line.followup,procure_method:0
+msgid "From stock"
+msgstr "Du Stock"
+
+#. module: sales_followup
+#: code:addons/sales_followup/sale_followup.py:415
+#: selection:purchase.order.line,po_state:0
+#, python-format
+msgid "Draft"
+msgstr "Brouillon"
+
+#. module: sales_followup
+#: code:addons/sales_followup/sale_followup.py:378
+#: code:addons/sales_followup/sale_followup.py:422
+#: code:addons/sales_followup/sale_followup.py:423
+#, python-format
+msgid "Exception"
+msgstr "Exception"
+
+#. module: sales_followup
+#: code:addons/sales_followup/sale_followup.py:161
+#, python-format
+msgid "You should select one order to follow !"
+msgstr "Veuillez sélectionner une commande pour faire le suivi !"
+
+#. module: sales_followup
+#: view:sale.order.followup:0
+msgid "Choose the view type"
+msgstr "Choisir un type de vue"
+
+#. module: sales_followup
+#: code:addons/sales_followup/sale_followup.py:413
+#, python-format
+msgid "No order"
+msgstr "Aucune commande"
+
+#. module: sales_followup
+#: constraint:stock.move:0
+msgid "You cannot select Service Location as Source Location."
+msgstr "Vous ne pouvez pas sélectionner la Zone Service comme Zone Source"
+
+#. module: sales_followup
+#: field:sale.order.line.followup,product_id:0
+msgid "Product Code"
+msgstr "Code Produit"
+
+#. module: sales_followup
+#: model:ir.model,name:sales_followup.model_tender_line
+msgid "Tender Line"
+msgstr "Ligne Appel d'Offres"
+
+#. module: sales_followup
+#: view:sale.order.line.followup:0
+msgid "Order type"
+msgstr "Type de commande"
+
+#. module: sales_followup
+#: view:sale.order.followup:0
+msgid "Update"
+msgstr "Mettre à jour"
+
+#. module: sales_followup
+#: model:ir.model,name:sales_followup.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Ligne Bon de Commande"
+
+#. module: sales_followup
+#: code:addons/sales_followup/sale_followup.py:451
+#: code:addons/sales_followup/sale_followup.py:479
+#, python-format
+msgid "Available"
+msgstr "Disponible"
+
+#. module: sales_followup
+#: view:sale.order.followup:0
+#: view:sale.order.followup.from.menu:0
+msgid "Actions"
+msgstr "Actions"
+
+#. module: sales_followup
+#: view:sale.order.line.followup:0
+msgid "Go to outgoing move form"
+msgstr "Aller sur Formulaire Mouvements Sortants"
+
+#. module: sales_followup
+#: selection:sale.order.line.followup,procure_method:0
+msgid "On order"
+msgstr "Sur commande"
+
+#. module: sales_followup
+#: code:addons/sales_followup/sale_followup.py:357
+#: code:addons/sales_followup/sale_followup.py:358
+#: code:addons/sales_followup/sale_followup.py:359
+#: code:addons/sales_followup/sale_followup.py:383
+#: code:addons/sales_followup/sale_followup.py:412
+#: code:addons/sales_followup/sale_followup.py:446
+#, python-format
+msgid "N/A"
+msgstr "N/A"
+
+#. module: sales_followup
+#: code:addons/sales_followup/sale_followup.py:419
+#: selection:purchase.order.line,po_state:0
+#, python-format
+msgid "Confirmed"
+msgstr "Confirmé"
+
+#. module: sales_followup
+#: selection:sale.order.followup,choose_type:0
+msgid "Documents view"
+msgstr "Vue Documents "
+
+#. module: sales_followup
+#: field:sale.order.line.followup,incoming_ids:0
+#: field:sale.order.line.followup,incoming_status:0
+msgid "Incoming Shipment"
+msgstr "Livraison Entrante"
+
+#. module: sales_followup
+#: field:sale.order.followup,state:0
+msgid "Order state"
+msgstr "Statut de la commande"
+
+#. module: sales_followup
+#: code:addons/sales_followup/sale_followup.py:483
+#, python-format
+msgid "Shipped"
+msgstr "Expédié"
+
+#. module: sales_followup
+#: selection:purchase.order.line,order_type:0
+msgid "Regular"
+msgstr "Normal"
+
+#. module: sales_followup
+#: view:sale.order.line.followup:0
+msgid "Shipment"
+msgstr "Expédition"
+
+#. module: sales_followup
+#: field:sale.order.line.followup,displayed_out_ids:0
+#: field:sale.order.line.followup,outgoing_ids:0
+msgid "Outgoing Deliveries"
+msgstr "Livraisons Sortantes"
+
+#. module: sales_followup
+#: field:sale.order.followup.test,name:0
+msgid "Name"
+msgstr "Nom"
+
+#. module: sales_followup
+#: selection:purchase.order.line,order_type:0
+msgid "Direct Purchase Order"
+msgstr "Bon de Commande Directe"
+
+#. module: sales_followup
+#: selection:sale.order.line.followup,po_cft:0
+msgid "CFT"
+msgstr "CFT (call for tender)"
+
+#. module: sales_followup
+#: selection:purchase.order.line,order_type:0
+msgid "Loan"
+msgstr "Prêt"
+
+#. module: sales_followup
+#: view:sale.order.line.followup:0
+#: field:sale.order.line.followup,purchase_ids:0
+#: field:sale.order.line.followup,purchase_line_ids:0
+msgid "Purchase Orders"
+msgstr "Bons de Commande"
+
+#. module: sales_followup
+#: view:sale.order.line.followup:0
+msgid "Tenders"
+msgstr "Appels d'Offres"
+
+#. module: sales_followup
+#: view:sale.order.followup:0
+msgid "Go to view"
+msgstr "Aller sur Vue"
+
+#. module: sales_followup
+#: field:sale.order.followup,confirmed_date:0
+msgid "Confirmed date"
+msgstr "Date Confirmée"
+
+#. module: sales_followup
+#: field:sale.order.line.followup,outgoing_nb:0
+#: field:sale.order.line.followup,outgoing_status:0
+msgid "Outgoing delivery"
+msgstr "Livraison Sortante"
+
+#. module: sales_followup
+#: view:sale.order.line.followup:0
+#: field:stock.move,parent_doc_id:0
+msgid "Picking"
+msgstr "Piquage"
+
+#. module: sales_followup
+#: view:sale.order.line.followup:0
+msgid "Source Loc."
+msgstr "Zone Source"
+
+#. module: sales_followup
+#: code:addons/sales_followup/sale_followup.py:447
+#, python-format
+msgid "No shipment"
+msgstr "Aucune expédition"
+
+#. module: sales_followup
+#: code:addons/sales_followup/sale_followup.py:418
+#: selection:purchase.order.line,po_state:0
+#, python-format
+msgid "Confirmed (waiting)"
+msgstr "Confirmé (attente)"
+
+#. module: sales_followup
+#: code:addons/sales_followup/sale_followup.py:159
+#, python-format
+msgid "No order found !"
+msgstr "Pas de Commande trouvée !"
+
+#. module: sales_followup
+#: view:sale.order.followup:0
+msgid "Order follow up"
+msgstr "Suivi des commandes"
+
+#. module: sales_followup
+#: code:addons/sales_followup/sale_followup.py:355
+#: code:addons/sales_followup/sale_followup.py:372
+#, python-format
+msgid "No"
+msgstr "Non"
+

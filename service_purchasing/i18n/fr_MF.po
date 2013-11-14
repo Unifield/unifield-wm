@@ -1,0 +1,283 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* service_purchasing
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: service_purchasing
+#: constraint:stock.move:0
+msgid "Constraint error on Uom"
+msgstr "Constraint error on Uom"
+
+#. module: service_purchasing
+#: model:ir.model,name:service_purchasing.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Ligne Commande Terrain"
+
+#. module: service_purchasing
+#: selection:stock.picking,order_category:0
+msgid "Service"
+msgstr "Service"
+
+#. module: service_purchasing
+#: code:addons/service_purchasing/service_purchasing.py:77
+#, python-format
+msgid "You must select on order procurement method for %s products."
+msgstr "Vous devez sélectionner 'Sur commande' comme méthode d'acquisition pour les produits %s."
+
+#. module: service_purchasing
+#: constraint:stock.move:0
+msgid "You cannot select Service Location as Source Location."
+msgstr "Vous ne pouvez pas sélectionner la Zone Service comme Zone Source"
+
+#. module: service_purchasing
+#: code:addons/service_purchasing/service_purchasing.py:101
+#, python-format
+msgid "You must have a location with \"Service Location\"."
+msgstr "Vous devez avoir une Localisation avec \"Localisation Service\"."
+
+#. module: service_purchasing
+#: model:ir.model,name:service_purchasing.model_sourcing_line
+msgid "Sourcing Line"
+msgstr "Ligne de Sourcing"
+
+#. module: service_purchasing
+#: constraint:purchase.order:0
+msgid "You must specify a Valid Till date."
+msgstr "Spécifiez une date de validité 'Valide Jusque'."
+
+#. module: service_purchasing
+#: model:ir.model,name:service_purchasing.model_stock_location
+msgid "Location"
+msgstr "Zone"
+
+#. module: service_purchasing
+#: constraint:purchase.order:0
+msgid "If you tick the box \"cross docking\", you cannot have an other location than \"Cross docking\""
+msgstr "Si vous cochez la case \"transbordement\", vous ne pouvez pas avoir d'autre lieu que \"Transbordement\""
+
+#. module: service_purchasing
+#: constraint:stock.picking:0
+msgid "You cannot validate this document because it contains a line with an inactive product"
+msgstr "Vous ne pouvez pas valider ce document car il contient des lignes avec un produit inactif"
+
+#. module: service_purchasing
+#: constraint:purchase.order:0
+msgid "Partner type and order type are incompatible! Please change either order type or partner."
+msgstr "Le type de partnenaire et le type de commande sont incompatibles. Veuillez changer l'un ou l'autre."
+
+#. module: service_purchasing
+#: sql_constraint:purchase.order:0
+msgid "Order Reference must be unique !"
+msgstr "La Référence de la Commande doit être unique !"
+
+#. module: service_purchasing
+#: constraint:product.product:0
+msgid "Error: Invalid ean code"
+msgstr "Erreur: code EAN invalide"
+
+#. module: service_purchasing
+#: view:stock.picking:0
+msgid "Partner"
+msgstr "Partenaire"
+
+#. module: service_purchasing
+#: code:addons/service_purchasing/service_purchasing.py:277
+#: code:addons/service_purchasing/service_purchasing.py:301
+#: constraint:product.product:0
+#: constraint:sale.order.line:0
+#: constraint:sourcing.line:0
+#, python-format
+msgid "You must select on order procurement method for Service with Reception products."
+msgstr "Vous devez sélectionner sur la commande le mode d'approvisionnement pour le Service  avec Réception de produits."
+
+#. module: service_purchasing
+#: model:ir.module.module,description:service_purchasing.module_meta_information
+msgid "\n"
+"        Add the capability for a product to be a service with reception in %UOM\n"
+"        "
+msgstr "\n"
+"        Ajouter la capacité d'un produit à être un service de réception dans %UdM"
+
+#. module: service_purchasing
+#: model:ir.model,name:service_purchasing.model_product_template
+msgid "Product Template"
+msgstr "Modèle de Produit"
+
+#. module: service_purchasing
+#: model:ir.model,name:service_purchasing.model_purchase_order
+msgid "Purchase Order"
+msgstr "Bon de Commande"
+
+#. module: service_purchasing
+#: code:addons/service_purchasing/service_purchasing.py:246
+#: code:addons/service_purchasing/service_purchasing.py:250
+#, python-format
+msgid "Service Products must have Cross Docking Location as Source Location."
+msgstr "Les produits de Service doivent avoir comme lieu source le lieu de transbordement."
+
+#. module: service_purchasing
+#: selection:stock.picking,order_category:0
+msgid "Other"
+msgstr "Autre"
+
+#. module: service_purchasing
+#: code:addons/service_purchasing/service_purchasing.py:77
+#: code:addons/service_purchasing/service_purchasing.py:101
+#: code:addons/service_purchasing/service_purchasing.py:244
+#: code:addons/service_purchasing/service_purchasing.py:246
+#: code:addons/service_purchasing/service_purchasing.py:248
+#: code:addons/service_purchasing/service_purchasing.py:250
+#: code:addons/service_purchasing/service_purchasing.py:252
+#: code:addons/service_purchasing/service_purchasing.py:277
+#: code:addons/service_purchasing/service_purchasing.py:301
+#, python-format
+msgid "Error"
+msgstr "Erreur"
+
+#. module: service_purchasing
+#: constraint:purchase.order:0
+msgid "You cannot validate this purchase order because it contains a line with an inactive product"
+msgstr "Vous ne pouvez pas valider ce bon de commande, car il contient une ligne avec des produits inactifs."
+
+#. module: service_purchasing
+#: constraint:stock.location:0
+msgid "You cannot define a quarantine location as chained location."
+msgstr "Vous ne pouvez pas définir une Zone \"Quarantaine\" en tant que Zone enchaînée."
+
+#. module: service_purchasing
+#: selection:stock.picking,order_category:0
+msgid "Transport"
+msgstr "Transport"
+
+#. module: service_purchasing
+#: sql_constraint:product.product:0
+msgid "The \"Product Code\" must be unique"
+msgstr "Le \"Code produit\" doit être unique"
+
+#. module: service_purchasing
+#: constraint:stock.move:0
+#: constraint:stock.picking:0
+msgid "Wrong reason type for an OUT created from scratch."
+msgstr "Mauvais type de motif pour une livraison OUT créée à partir de rien."
+
+#. module: service_purchasing
+#: constraint:stock.location:0
+msgid "Quarantine Location can only have Quarantine Location or Views as parent location."
+msgstr "Zone \"Quarantaine\", on ne peut avoir de Zone \"Quarantaine ''  ou Vues qu'en tant que Zone \"Parent\"."
+
+#. module: service_purchasing
+#: code:addons/service_purchasing/service_purchasing.py:244
+#, python-format
+msgid "Service Products must have Service or Cross Docking Location as Destination Location."
+msgstr "Les produits de Service doivent avoir comme lieu de destination le Lieu de Service ou de transbordement."
+
+#. module: service_purchasing
+#: code:addons/service_purchasing/service_purchasing.py:252
+#, python-format
+msgid "Service Location cannot be used for non Service Products."
+msgstr "Localisation Service ne peut être utilisée pour un produit qui n'est pas un Produit de Service."
+
+#. module: service_purchasing
+#: view:stock.picking:0
+#: field:stock.picking,order_category:0
+msgid "Order Category"
+msgstr "Catégorie de Commande"
+
+#. module: service_purchasing
+#: constraint:purchase.order:0
+msgid "You cannot choose an internal supplier for this purchase order"
+msgstr "You cannot choose an internal supplier for this purchase order"
+
+#. module: service_purchasing
+#: model:ir.model,name:service_purchasing.model_stock_picking
+msgid "Picking List"
+msgstr "Liste de Piquage"
+
+#. module: service_purchasing
+#: model:ir.model,name:service_purchasing.model_product_product
+msgid "Product"
+msgstr "Produit"
+
+#. module: service_purchasing
+#: constraint:product.product:0
+msgid "If you select \"Non-stockable\" as product type then you have to select \"Make to order\" as procurement method"
+msgstr "Si vous sélectionnez \"Non stockable\" comme type de produit, vous devez sélectionner \"Faire sur commande\" comme méthode d'acquisition"
+
+#. module: service_purchasing
+#: selection:stock.picking,order_category:0
+msgid "Medical"
+msgstr "Médical"
+
+#. module: service_purchasing
+#: sql_constraint:sale.order.line:0
+msgid "Product Quantity must be greater than zero."
+msgstr "La quantité de produits doit être supérieure à zéro."
+
+#. module: service_purchasing
+#: constraint:stock.move:0
+msgid "You try to assign a lot which is not from the same product"
+msgstr "Vous essayez d'attribuer un lot qui ne correspond pas au même produit"
+
+#. module: service_purchasing
+#: constraint:product.template:0
+msgid "Error: The default UOM and the purchase UOM must be in the same category."
+msgstr "Erreur : l'UdM par défaut et l'UdM d'achat doivent appartenir à la même catégorie."
+
+#. module: service_purchasing
+#: constraint:stock.move:0
+msgid "You must assign a batch number for this product."
+msgstr "Vous devez mentionner un numéro de lot pour ce produit."
+
+#. module: service_purchasing
+#: constraint:product.product:0
+msgid "Constraint error on Kit Product."
+msgstr "Erreur de Contrainte sur le produit Kit"
+
+#. module: service_purchasing
+#: constraint:product.product:0
+msgid "Warning! GMDN code must be digits!"
+msgstr "Avertissement! Le code  GMDN doit être en chiffres!"
+
+#. module: service_purchasing
+#: model:ir.module.module,shortdesc:service_purchasing.module_meta_information
+msgid "Service Purchasing"
+msgstr "Service Achat"
+
+#. module: service_purchasing
+#: constraint:stock.move:0
+msgid "You must assign an asset for this product."
+msgstr "Vous devez mentionner un bien pour ce produit."
+
+#. module: service_purchasing
+#: model:ir.model,name:service_purchasing.model_stock_move
+msgid "Stock Move"
+msgstr "Mouvement de Stock"
+
+#. module: service_purchasing
+#: code:addons/service_purchasing/service_purchasing.py:248
+#, python-format
+msgid "Service Products must have Service Location as Destination Location."
+msgstr "Les Produits de Service doivent avoir une Localisation Service comme Destination de Localisation."
+
+#. module: service_purchasing
+#: selection:stock.picking,order_category:0
+msgid "Logistic"
+msgstr "Logistique"
+
+#. module: service_purchasing
+#: field:stock.location,service_location:0
+msgid "Service Location"
+msgstr "Zone Service"
+

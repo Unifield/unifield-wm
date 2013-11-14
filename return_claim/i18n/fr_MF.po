@@ -1,0 +1,992 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* return_claim
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: return_claim
+#: selection:claim.product.line,integrity_status_claim_product_line:0
+msgid "The first sequence must start with 1"
+msgstr "La première séquence doit commencer par un 1"
+
+#. module: return_claim
+#: field:add.event,claim_partner_id:0
+msgid "Claim Partner"
+msgstr "Réclamation - Partenaire"
+
+#. module: return_claim
+#: selection:claim.product.line,claim_state_claim_product_line:0
+#: view:return.claim:0
+#: selection:return.claim,fake_state_return_claim:0
+#: selection:return.claim,state:0
+msgid "Closed"
+msgstr "Clôturé"
+
+#. module: return_claim
+#: code:addons/return_claim/return_claim.py:528
+#, python-format
+msgid "Events are not allowed for selected Claim Type."
+msgstr "Evénements non autorisés pour ce Type de Réclamation."
+
+#. module: return_claim
+#: field:claim.product.line,hidden_stock_available_claim_product_line:0
+msgid "Available Stock"
+msgstr "Stock disponible"
+
+#. module: return_claim
+#: model:ir.model,name:return_claim.model_stock_partial_picking
+msgid "Partial Picking"
+msgstr "Piquage Partiel"
+
+#. module: return_claim
+#: field:claim.event,description_claim_event:0
+msgid "Comment"
+msgstr "Commentaire"
+
+#. module: return_claim
+#: field:claim.product.line,stock_move_id_claim_product_line:0
+msgid "Corresponding IN stock move"
+msgstr "IN Correspondant du mouvement de stock"
+
+#. module: return_claim
+#: constraint:stock.picking:0
+msgid "You cannot validate this document because it contains a line with an inactive product"
+msgstr "Vous ne pouvez pas valider ce document car il contient des lignes avec un produit inactif"
+
+#. module: return_claim
+#: code:addons/return_claim/return_claim.py:541
+#, python-format
+msgid "Origin for customer claim must be Deliery Order or Picking Ticket."
+msgstr "L'origine de la réclamation client doit être une Commande de livraison ou un Bon de Prélèvement."
+
+#. module: return_claim
+#: field:claim.product.line,src_location_id_claim_product_line:0
+msgid "Src Location"
+msgstr "Zone Source"
+
+#. module: return_claim
+#: constraint:product.product:0
+msgid "Error: Invalid ean code"
+msgstr "Erreur: code EAN invalide"
+
+#. module: return_claim
+#: code:addons/return_claim/wizard/stock_partial_picking.py:95
+#, python-format
+msgid "The partner of claim must be selected."
+msgstr "Le partenaire de la réclamation doit être sélectionné. "
+
+#. module: return_claim
+#: constraint:return.claim:0
+msgid "Claim Error"
+msgstr "Réclamation - Erreur"
+
+#. module: return_claim
+#: field:return.claim,fake_state_return_claim:0
+msgid "Fake State"
+msgstr "Faux Statut"
+
+#. module: return_claim
+#: constraint:product.product:0
+msgid "You must select on order procurement method for Service with Reception products."
+msgstr "Vous devez sélectionner sur la commande le mode d'approvisionnement pour le Service  avec Réception de produits."
+
+#. module: return_claim
+#: field:return.claim,po_id_return_claim:0
+msgid "Purchase Order"
+msgstr "Bon de Commande"
+
+#. module: return_claim
+#: field:claim.event,name:0
+#: field:return.claim,name:0
+msgid "Reference"
+msgstr "Référence"
+
+#. module: return_claim
+#: selection:claim.product.line,integrity_status_claim_product_line:0
+msgid "Quantity must be greater than 0.0"
+msgstr "Quantité doit être supérieure à 0.0"
+
+#. module: return_claim
+#: constraint:stock.picking:0
+msgid "Wrong reason type for an OUT created from scratch."
+msgstr "Mauvais type de motif pour une livraison OUT créée à partir de rien."
+
+#. module: return_claim
+#: field:claim.product.line,lot_id_claim_product_line:0
+msgid "Batch N."
+msgstr "N de Lot"
+
+#. module: return_claim
+#: code:addons/return_claim/return_claim.py:1490
+#, python-format
+msgid "End"
+msgstr "Fin"
+
+#. module: return_claim
+#: code:addons/return_claim/wizard/stock_partial_picking.py:93
+#, python-format
+msgid "The type of claim must be selected."
+msgstr "Le type de réclamation doit être sélectionné."
+
+#. module: return_claim
+#: field:return.claim,po_so_return_claim:0
+msgid "Order reference"
+msgstr "Référence de la Commande"
+
+#. module: return_claim
+#: code:addons/return_claim/return_claim.py:538
+#, python-format
+msgid "Origin for supplier claim must be Incoming Shipment."
+msgstr "L'origine de la réclamation client doit être une Livraison Entrante"
+
+#. module: return_claim
+#: selection:claim.product.line,integrity_status_claim_product_line:0
+msgid "The sequence overlaps previous one"
+msgstr "La séquence chevauche la précédente"
+
+#. module: return_claim
+#: field:claim.event,state:0
+#: view:return.claim:0
+#: field:return.claim,state:0
+msgid "State"
+msgstr "Statut"
+
+#. module: return_claim
+#: selection:claim.product.line,integrity_status_claim_product_line:0
+msgid "A gap exist in the sequence"
+msgstr "Un écart existe dans la séquence"
+
+#. module: return_claim
+#: code:addons/return_claim/return_claim.py:937
+#, python-format
+msgid "%s Event %s has been processed."
+msgstr "%s Evénement %s a été traité."
+
+#. module: return_claim
+#: sql_constraint:product.product:0
+msgid "The \"Product Code\" must be unique"
+msgstr "Le \"Code produit\" doit être unique"
+
+#. module: return_claim
+#: field:claim.product.line,hidden_asset_claim_product_line:0
+msgid "Asset Check"
+msgstr "Vérification du bien"
+
+#. module: return_claim
+#: field:stock.partial.picking,register_a_claim_partial_picking:0
+msgid "Register a Claim to Supplier"
+msgstr "Enregistrer une réclamation envers un Fournisseur"
+
+#. module: return_claim
+#: code:addons/return_claim/return_claim.py:1440
+#, python-format
+msgid "Corresponding picking object is not an Incoming Shipment. Registration of claim cannot be processed."
+msgstr "Objet de prélèvement correspondant n'est pas une Livraison Entrante. L'enregistrement de la réclamation ne peut être traité"
+
+#. module: return_claim
+#: selection:claim.product.line,integrity_status_claim_product_line:0
+msgid "Asset is Missing"
+msgstr "Bien manquant"
+
+#. module: return_claim
+#: field:add.event,dest_location_id:0
+#: field:claim.event,location_id_claim_event:0
+msgid "Associated Location"
+msgstr "Zone Associée"
+
+#. module: return_claim
+#: field:claim.product.line,expiry_date_claim_product_line:0
+#: field:claim.product.line,hidden_perishable_mandatory_claim_product_line:0
+#: view:return.claim:0
+msgid "Exp"
+msgstr "Exp"
+
+#. module: return_claim
+#: selection:add.event,claim_type:0
+#: selection:claim.product.line,claim_type_claim_product_line:0
+#: view:return.claim:0
+#: selection:return.claim,type_return_claim:0
+msgid "Customer"
+msgstr "Client"
+
+#. module: return_claim
+#: selection:claim.product.line,integrity_status_claim_product_line:0
+msgid "Not Available"
+msgstr "Pas Disponible"
+
+#. module: return_claim
+#: field:return.claim,picking_id_return_claim:0
+msgid "Reception/Shipment reference"
+msgstr "Réception/Livraison référence"
+
+#. module: return_claim
+#: selection:claim.product.line,integrity_status_claim_product_line:0
+msgid "Too much quantity selected"
+msgstr "Trop de quantité sélectionnée "
+
+#. module: return_claim
+#: field:claim.product.line,composition_list_id_claim_product_line:0
+#: view:return.claim:0
+msgid "Kit"
+msgstr "Kit"
+
+#. module: return_claim
+#: field:claim.event,type_claim_event:0
+#: field:return.claim,type_return_claim:0
+msgid "Type"
+msgstr "Type"
+
+#. module: return_claim
+#: code:addons/return_claim/return_claim.py:516
+#, python-format
+msgid "Selected Origin must be in Done state."
+msgstr "L'Origine sélectionnée doit soit être sous statut 'Terminé'."
+
+#. module: return_claim
+#: field:claim.product.line,hidden_kit_claim_product_line:0
+msgid "Kit Check"
+msgstr "Kit Check"
+
+#. module: return_claim
+#: model:ir.model,name:return_claim.model_claim_product_line
+msgid "claim.product.line"
+msgstr "claim.product.line"
+
+#. module: return_claim
+#: field:return.claim,sequence_id_return_claim:0
+msgid "Events Sequence"
+msgstr "Séquence Evénements"
+
+#. module: return_claim
+#: view:return.claim:0
+msgid "Check Integrity"
+msgstr "Vérifier Intégrité (totalité)"
+
+#. module: return_claim
+#: code:addons/return_claim/return_claim.py:144
+#, python-format
+msgid "Previous event (%s) does not allow further event."
+msgstr "L'Evénement précédent (%s) ne permet pas d'autres événements"
+
+#. module: return_claim
+#: field:stock.partial.picking,in_has_partner_id_partial_picking:0
+msgid "IN has Partner specified."
+msgstr "IN a un Partenaire précisé"
+
+#. module: return_claim
+#: code:addons/return_claim/return_claim.py:1542
+#, python-format
+msgid "Error !"
+msgstr "Erreur !"
+
+#. module: return_claim
+#: code:addons/return_claim/return_claim.py:1431
+#, python-format
+msgid "Corresponding Incoming Shipment cannot be found. Registration of claim cannot be processed. (no IN for back order moves)"
+msgstr "Livraison Entrante Correspondante ne peut être trouvée. L'Enregistrement de la réclamation ne peut être traité. (pas de IN pour les mouvements de la commande en souffrance)"
+
+#. module: return_claim
+#: code:addons/return_claim/return_claim.py:525
+#, python-format
+msgid "Draft Picking Tickets are not allowed as Origin, Picking Ticket must be selected."
+msgstr "Les Brouillons de Bons de Prélèvement ne sont pas autorisés comme Origine.  Un Bon de Prélèvement doit être sélectionné."
+
+#. module: return_claim
+#: field:add.event,creation_date:0
+#: field:claim.event,creation_date_claim_event:0
+#: view:return.claim:0
+#: field:return.claim,creation_date_return_claim:0
+msgid "Creation Date"
+msgstr "Date de création"
+
+#. module: return_claim
+#: field:claim.product.line,type_check:0
+msgid "Type Check"
+msgstr "Type Vérification"
+
+#. module: return_claim
+#: view:return.claim:0
+msgid "Close Claim"
+msgstr "Fermer Réclamation"
+
+#. module: return_claim
+#: field:add.event,replacement_picking_expected_partial_picking:0
+msgid "Replacement expected?"
+msgstr "Remplacement prévu?"
+
+#. module: return_claim
+#: selection:claim.product.line,integrity_status_claim_product_line:0
+msgid "Src Location is missing"
+msgstr "Zone Source est manquante"
+
+#. module: return_claim
+#: code:addons/return_claim/return_claim.py:1142
+#, python-format
+msgid "Error"
+msgstr "Erreur"
+
+#. module: return_claim
+#: selection:claim.product.line,integrity_status_claim_product_line:0
+msgid "Batch Number is Missing"
+msgstr "Numéro de lot manquant"
+
+#. module: return_claim
+#: selection:add.event,claim_type:0
+#: selection:claim.product.line,claim_type_claim_product_line:0
+#: view:return.claim:0
+#: selection:return.claim,category_return_claim:0
+#: selection:return.claim,type_return_claim:0
+msgid "Transport"
+msgstr "Transport"
+
+#. module: return_claim
+#: field:return.claim,contains_event_return_claim:0
+msgid "Contains Events"
+msgstr "Contient des Evénements"
+
+#. module: return_claim
+#: selection:claim.product.line,integrity_status_claim_product_line:0
+msgid "Expiry Date is Missing"
+msgstr "Date d'Expiration Manquante"
+
+#. module: return_claim
+#: selection:claim.product.line,integrity_status_claim_product_line:0
+msgid "Does not exist in selected IN/OUT"
+msgstr "N'existe pas sous la sélection IN/OUT"
+
+#. module: return_claim
+#: selection:claim.product.line,integrity_status_claim_product_line:0
+msgid "Weight is Missing"
+msgstr "Le poids est Manquant"
+
+#. module: return_claim
+#: field:return.claim,order_line_number_return_claim:0
+msgid "Order line number"
+msgstr "Numéro de la ligne de la commande"
+
+#. module: return_claim
+#: field:add.event,claim_id:0
+#: code:addons/return_claim/return_claim.py:409
+#: code:addons/return_claim/return_claim.py:826
+#: field:claim.event,return_claim_id_claim_event:0
+#: field:claim.product.line,claim_id_claim_product_line:0
+#: model:ir.actions.act_window,name:return_claim.return_claim_action_purchase
+#: model:ir.actions.act_window,name:return_claim.return_claim_action_sale
+#: model:ir.ui.menu,name:return_claim.return_claim_menu_purchase
+#: model:ir.ui.menu,name:return_claim.return_claim_menu_sale
+#: model:ir.ui.menu,name:return_claim.return_claim_purchase
+#: model:ir.ui.menu,name:return_claim.return_claim_sale
+#: view:return.claim:0
+#, python-format
+msgid "Claim"
+msgstr "Réclamation"
+
+#. module: return_claim
+#: selection:return.claim,category_return_claim:0
+msgid "Other"
+msgstr "Autre"
+
+#. module: return_claim
+#: model:ir.model,name:return_claim.model_stock_picking
+msgid "Picking List"
+msgstr "Liste de Piquage"
+
+#. module: return_claim
+#: field:add.event,claim_type:0
+#: field:claim.product.line,claim_type_claim_product_line:0
+#: field:stock.partial.picking,claim_type_partial_picking:0
+msgid "Claim Type"
+msgstr "Réclamation - Type"
+
+#. module: return_claim
+#: field:return.claim,category_return_claim:0
+msgid "Category"
+msgstr "Catégorie"
+
+#. module: return_claim
+#: code:addons/return_claim/return_claim.py:1137
+#, python-format
+msgid "The selected Expiry Date does not exist in the system. It will be created during validation process."
+msgstr "La Date d'Expiration sélectionnée n'existe pas dans le système. Elle sera créée au cours du processus de validation."
+
+#. module: return_claim
+#: selection:claim.event,type_claim_event:0
+msgid "Scrap"
+msgstr "Rebuts"
+
+#. module: return_claim
+#: code:addons/return_claim/return_claim.py:862
+#, python-format
+msgid "Only events in state draft can be processed."
+msgstr "Seul les évènements sous statut brouillon peuvent être traités."
+
+#. module: return_claim
+#: field:add.event,event_type:0
+msgid "Event Type"
+msgstr "Type d'évènement"
+
+#. module: return_claim
+#: constraint:product.product:0
+msgid "Constraint error on Kit Product."
+msgstr "Erreur de Contrainte sur le produit Kit"
+
+#. module: return_claim
+#: selection:stock.partial.picking,claim_type_partial_picking:0
+msgid "Scrap"
+msgstr "Scrap"
+
+#. module: return_claim
+#: view:return.claim:0
+#: field:return.claim,event_ids_return_claim:0
+msgid "Events"
+msgstr "Evénements"
+
+#. module: return_claim
+#: model:ir.module.module,shortdesc:return_claim.module_meta_information
+msgid "MSF Return-Claim"
+msgstr "MSF Réclamation -Retour"
+
+#. module: return_claim
+#: field:claim.event,replacement_picking_expected_claim_event:0
+#: field:stock.partial.picking,replacement_picking_expected_partial_picking:0
+msgid "Replacement expected for Return Claim?"
+msgstr "Remplacement prévu pour un Retour dû à une Réclamation?"
+
+#. module: return_claim
+#: selection:claim.product.line,integrity_status_claim_product_line:0
+msgid "Too many packs selected"
+msgstr "Trop de paquets sélectionnés "
+
+#. module: return_claim
+#: selection:return.claim,category_return_claim:0
+msgid "Logistic"
+msgstr "Logistique"
+
+#. module: return_claim
+#: view:return.claim:0
+msgid "Notes"
+msgstr "Notes"
+
+#. module: return_claim
+#: field:claim.product.line,integrity_status_claim_product_line:0
+msgid " "
+msgstr " "
+
+#. module: return_claim
+#: selection:claim.product.line,integrity_status_claim_product_line:0
+msgid "No Asset Needed"
+msgstr "Pas besoin de mentionner un Bien"
+
+#. module: return_claim
+#: field:stock.picking,chained_from_in_stock_picking:0
+msgid "Chained Internal Picking from IN"
+msgstr "Enchaînement des Piquages internes à partir des IN (entrées)"
+
+#. module: return_claim
+#: selection:claim.event,hidden_state:0
+#: selection:claim.event,state:0
+#: selection:claim.product.line,claim_state_claim_product_line:0
+#: view:return.claim:0
+#: selection:return.claim,fake_state_return_claim:0
+#: selection:return.claim,state:0
+msgid "In Progress"
+msgstr "En Cours"
+
+#. module: return_claim
+#: code:addons/return_claim/wizard/add_event.py:116
+#, python-format
+msgid "You need to specify a creation date."
+msgstr "Vous avez besoin de préciser une date de création."
+
+#. module: return_claim
+#: view:add.event:0
+msgid "_Close"
+msgstr "_Fermer"
+
+#. module: return_claim
+#: model:ir.model,name:return_claim.model_claim_event
+msgid "claim.event"
+msgstr "claim.event"
+
+#. module: return_claim
+#: selection:claim.product.line,integrity_status_claim_product_line:0
+msgid "Negative Value"
+msgstr "Valeur Négative"
+
+#. module: return_claim
+#: view:return.claim:0
+msgid "Search Claim"
+msgstr "Rechercher Réclamation"
+
+#. module: return_claim
+#: model:ir.model,name:return_claim.model_res_partner
+#: field:return.claim,partner_id_return_claim:0
+msgid "Partner"
+msgstr "Partenaire"
+
+#. module: return_claim
+#: code:addons/return_claim/return_claim.py:277
+#, python-format
+msgid "Product list is empty."
+msgstr "Liste Produits est vide"
+
+#. module: return_claim
+#: code:addons/return_claim/wizard/add_event.py:118
+#, python-format
+msgid "You need to specify an event type."
+msgstr "Vous avez besoin de préciser un type d'évènement."
+
+#. module: return_claim
+#: view:add.event:0
+#: selection:claim.product.line,integrity_status_claim_product_line:0
+msgid "Ok"
+msgstr "Ok"
+
+#. module: return_claim
+#: selection:claim.product.line,integrity_status_claim_product_line:0
+msgid "Assigned qty must be smaller or equal to required qty"
+msgstr "Qté affectée doit être plus petite ou égale à la quantité demandée"
+
+#. module: return_claim
+#: code:addons/return_claim/return_claim.py:1417
+#, python-format
+msgid "Processed an internal picking without moves, cannot find original Incoming shipment for claim registration."
+msgstr "Traiter un prélèvement interne sans mouvements, ne peut pas trouver la Livraison Entrante d'origine pour l'enregistrement des réclamations"
+
+#. module: return_claim
+#: field:claim.product.line,uom_id_claim_product_line:0
+msgid "UoM"
+msgstr "UdM"
+
+#. module: return_claim
+#: model:ir.model,name:return_claim.model_add_event
+msgid "add.event"
+msgstr "add.event"
+
+#. module: return_claim
+#: selection:add.event,claim_type:0
+#: selection:claim.product.line,claim_type_claim_product_line:0
+#: view:return.claim:0
+#: selection:return.claim,type_return_claim:0
+#: field:stock.partial.picking,partner_id_partial_picking:0
+msgid "Supplier"
+msgstr "Fournisseur"
+
+#. module: return_claim
+#: code:addons/return_claim/return_claim.py:1542
+#, python-format
+msgid "Operator is not supported."
+msgstr "L'Opérateur n'est pas supporté."
+
+#. module: return_claim
+#: field:claim.product.line,asset_id_claim_product_line:0
+#: view:return.claim:0
+msgid "Asset"
+msgstr "Biens"
+
+#. module: return_claim
+#: code:addons/return_claim/return_claim.py:152
+#, python-format
+msgid "Claim Type (%s) does not allow events."
+msgstr "Type de Réclamation (%s) ne permet pas les événements."
+
+#. module: return_claim
+#: selection:claim.product.line,integrity_status_claim_product_line:0
+msgid "Wrong Batch Number Type"
+msgstr "Mauvais type de numéro de lot"
+
+#. module: return_claim
+#: field:claim.product.line,hidden_batch_management_mandatory_claim_product_line:0
+msgid "B.Num"
+msgstr "Numéro de Lot"
+
+#. module: return_claim
+#: code:addons/return_claim/return_claim.py:162
+#: view:return.claim:0
+#, python-format
+msgid "Add an Event"
+msgstr "Ajouter Evénement"
+
+#. module: return_claim
+#: selection:claim.event,hidden_state:0
+#: selection:claim.event,state:0
+#: selection:claim.product.line,claim_state_claim_product_line:0
+#: view:return.claim:0
+#: selection:return.claim,fake_state_return_claim:0
+#: selection:return.claim,state:0
+msgid "Draft"
+msgstr "Brouillon"
+
+#. module: return_claim
+#: constraint:product.product:0
+msgid "If you select \"Non-stockable\" as product type then you have to select \"Make to order\" as procurement method"
+msgstr "Si vous sélectionnez \"Non stockable\" comme type de produit, vous devez sélectionner \"Faire sur commande\" comme méthode d'acquisition"
+
+#. module: return_claim
+#: field:stock.picking,corresponding_in_picking_stock_picking:0
+msgid "Corresponding IN for chained internal"
+msgstr "IN Correspondant pour enchaînement interne"
+
+#. module: return_claim
+#: selection:claim.event,type_claim_event:0
+msgid "Move to Quarantine"
+msgstr "A mettre en Quarantaine"
+
+#. module: return_claim
+#: view:return.claim:0
+msgid "Show Inactive"
+msgstr "Montrer les Inactifs"
+
+#. module: return_claim
+#: field:claim.event,hidden_state:0
+msgid "Hidden State"
+msgstr "Statut Caché"
+
+#. module: return_claim
+#: field:stock.partial.picking,description_partial_picking:0
+msgid "Claim Description"
+msgstr "Réclamation - Description"
+
+#. module: return_claim
+#: code:addons/return_claim/return_claim.py:1486
+#, python-format
+msgid "The new %s Event %s has been created."
+msgstr "Le nouveau %s Evénement %s a été créé."
+
+#. module: return_claim
+#: field:claim.product.line,claim_state_claim_product_line:0
+msgid "Claim State"
+msgstr "Réclamation - Statut"
+
+#. module: return_claim
+#: field:add.event,claim_picking_id:0
+msgid "Claim Origin"
+msgstr "Réclamation - Origine"
+
+#. module: return_claim
+#: selection:stock.partial.picking,claim_type_partial_picking:0
+msgid "Return"
+msgstr "Return"
+
+#. module: return_claim
+#: field:claim.product.line,qty_claim_product_line:0
+msgid "Qty"
+msgstr "Qté"
+
+#. module: return_claim
+#: code:addons/return_claim/return_claim.py:535
+#, python-format
+msgid "Event (%s) is not allowed for selected Claim Type."
+msgstr "Evénement (%s) non autorisé pour ce Type de Réclamation"
+
+#. module: return_claim
+#: help:claim.event,replacement_picking_expected_claim_event:0
+#: help:stock.partial.picking,replacement_picking_expected_partial_picking:0
+msgid "An Incoming Shipment will be automatically created corresponding to returned products."
+msgstr "Une Livraison Entrante sera créée automatiquement et correspondra aux produits retournés."
+
+#. module: return_claim
+#: selection:stock.partial.picking,claim_type_partial_picking:0
+msgid "Accept"
+msgstr "Accept"
+
+#. module: return_claim
+#: view:return.claim:0
+msgid "Group By..."
+msgstr "Grouper Par..."
+
+#. module: return_claim
+#: constraint:product.product:0
+msgid "Warning! GMDN code must be digits!"
+msgstr "Avertissement! Le code  GMDN doit être en chiffres!"
+
+#. module: return_claim
+#: view:res.partner:0
+#: field:res.partner,claim_ids_res_partner:0
+msgid "Claims"
+msgstr "Réclamations"
+
+#. module: return_claim
+#: selection:claim.product.line,integrity_status_claim_product_line:0
+msgid "Need Expiry Date (Internal) not Batch Number (Standard)"
+msgstr "Mention nécessaire d'une date d'expiration (Interne) mais pas d'un numéro de lot (Standard)"
+
+#. module: return_claim
+#: view:add.event:0
+#: view:return.claim:0
+msgid "Event"
+msgstr "Evénement"
+
+#. module: return_claim
+#: selection:return.claim,category_return_claim:0
+msgid "Service"
+msgstr "Service"
+
+#. module: return_claim
+#: code:addons/return_claim/return_claim.py:1136
+#, python-format
+msgid "Info"
+msgstr "Info"
+
+#. module: return_claim
+#: selection:stock.partial.picking,claim_type_partial_picking:0
+msgid "Move to Quarantine"
+msgstr "Move to Quarantine"
+
+#. module: return_claim
+#: selection:claim.event,type_claim_event:0
+msgid "Accept"
+msgstr "Accepter"
+
+#. module: return_claim
+#: selection:claim.product.line,integrity_status_claim_product_line:0
+msgid "Empty Picking Ticket"
+msgstr "Vider le Bon de Piquage"
+
+#. module: return_claim
+#: selection:claim.product.line,integrity_status_claim_product_line:0
+msgid "To value must be greater or equal to From value"
+msgstr " 'A Valeur' doit être supérieure ou égale à  'De Valeur'"
+
+#. module: return_claim
+#: field:return.claim,default_src_location_id_return_claim:0
+msgid "Default Source Location"
+msgstr "Zone Source par Défaut"
+
+#. module: return_claim
+#: field:claim.event,order_claim_event:0
+msgid "Creation Order"
+msgstr "Création Commande"
+
+#. module: return_claim
+#: field:claim.event,event_picking_id_claim_event:0
+msgid "Event Picking"
+msgstr "Evénement Piquage"
+
+#. module: return_claim
+#: code:addons/return_claim/return_claim.py:1411
+#, python-format
+msgid "Claim registration during picking process is only available for internal picking."
+msgstr "Enregistrement de réclamation, durant le processus de prélèvement, n'est uniquement disponible que pour la prélèvement interne."
+
+#. module: return_claim
+#: selection:claim.event,type_claim_event:0
+msgid "Return"
+msgstr "Retour"
+
+#. module: return_claim
+#: selection:claim.product.line,integrity_status_claim_product_line:0
+msgid "Assigned qty must be smaller or equal to available qty"
+msgstr "Qté affectée doit être plus petite ou égale à la quantité disponible"
+
+#. module: return_claim
+#: code:addons/return_claim/return_claim.py:599
+#, python-format
+msgid "Only Event in draft state can be deleted."
+msgstr "Seul les évènements sous statut brouillon peuvent être effacés."
+
+#. module: return_claim
+#: selection:claim.product.line,integrity_status_claim_product_line:0
+msgid "No Batch Number/Expiry Date Needed"
+msgstr "Pas besoin de mentionner un numéro de lot/une date d'expiration"
+
+#. module: return_claim
+#: model:ir.model,name:return_claim.model_return_claim
+msgid "return.claim"
+msgstr "return.claim"
+
+#. module: return_claim
+#: view:return.claim:0
+#: field:return.claim,follow_up_return_claim:0
+msgid "Follow Up"
+msgstr "Suivi"
+
+#. module: return_claim
+#: selection:claim.product.line,integrity_status_claim_product_line:0
+msgid "Selected Sequence is out of range"
+msgstr "Séquence Sélectionnée est hors limites"
+
+#. module: return_claim
+#: field:claim.product.line,name:0
+msgid "Name"
+msgstr "Nom"
+
+#. module: return_claim
+#: field:return.claim,so_id_return_claim:0
+msgid "Sale Order"
+msgstr "Commande de Terrain"
+
+#. module: return_claim
+#: code:addons/return_claim/return_claim.py:1143
+#, python-format
+msgid "The selected Expiry Date does not exist in the system."
+msgstr "La date d'expiration sélectionnée n'existe pas dans le système."
+
+#. module: return_claim
+#: model:ir.module.module,description:return_claim.module_meta_information
+msgid "\n"
+"        Return and Claims\n"
+"    "
+msgstr "\n"
+"        Retours et Réclamations\n"
+"    "
+
+#. module: return_claim
+#: view:return.claim:0
+msgid "Process Event"
+msgstr "Traiter Evénement"
+
+#. module: return_claim
+#: code:addons/return_claim/return_claim.py:522
+#, python-format
+msgid "PPL or Packing should not be selected."
+msgstr "Liste de Pré-Colisage ou Emballage ne ​​devrait pas être sélectionné."
+
+#. module: return_claim
+#: selection:claim.product.line,integrity_status_claim_product_line:0
+msgid "Unit Price must be greater than 0.0"
+msgstr "Prix Unitaire doit être supérieur à 0.0"
+
+#. module: return_claim
+#: view:return.claim:0
+msgid "Load Products from IN/OUT"
+msgstr "Charger les produits de IN/OUT"
+
+#. module: return_claim
+#: code:addons/return_claim/return_claim.py:513
+#, python-format
+msgid "Selected Origin must contain at least one stock move."
+msgstr "L'Origine sélectionnée doit  contenir au minimum un mouvement de stock"
+
+#. module: return_claim
+#: code:addons/return_claim/wizard/stock_partial_picking.py:164
+#, python-format
+msgid "Element %s not found."
+msgstr "Le système n'a pas trouvé l'élément %s."
+
+#. module: return_claim
+#: field:claim.product.line,product_id_claim_product_line:0
+#: model:ir.model,name:return_claim.model_product_product
+msgid "Product"
+msgstr "Produit"
+
+#. module: return_claim
+#: selection:claim.product.line,integrity_status_claim_product_line:0
+msgid "Need Batch Number (Standard) not Expiry Date (Internal)"
+msgstr "Mention nécessaire d'un numéro de lot (Standard) mais pas d'une date d'expiration (Interne)"
+
+#. module: return_claim
+#: selection:return.claim,category_return_claim:0
+msgid "Medical"
+msgstr "Médical"
+
+#. module: return_claim
+#: field:product.product,picking_ids:0
+msgid "Picking"
+msgstr "Piquage"
+
+#. module: return_claim
+#: view:add.event:0
+msgid "Add Event"
+msgstr "Ajouter Evénement"
+
+#. module: return_claim
+#: view:return.claim:0
+#: field:return.claim,description_return_claim:0
+msgid "Description"
+msgstr "Description"
+
+#. module: return_claim
+#: view:return.claim:0
+msgid "Lot"
+msgstr "Lot"
+
+#. module: return_claim
+#: code:addons/return_claim/return_claim.py:1474
+#, python-format
+msgid "The new Claim %s to supplier has been registered during internal chained Picking process."
+msgstr "La nouvelle Réclamation %s au fournisseur a été enregistrée au cours de l'enchaînement interne du processus de prélèvement."
+
+#. module: return_claim
+#: code:addons/return_claim/return_claim.py:519
+#, python-format
+msgid "Selected Origin must be either an Incoming Shipment or a Delivery Order or a Picking Ticket."
+msgstr "L'Origine sélectionnée doit soit être une Livraison Entrante, un Bon de Livraison ou un Bon de Prélèvement."
+
+#. module: return_claim
+#: code:addons/return_claim/wizard/stock_partial_picking.py:127
+#, python-format
+msgid "Delivery Orders"
+msgstr "Bons de Livraison"
+
+#. module: return_claim
+#: field:claim.event,from_picking_wizard_claim_event:0
+msgid "From Picking Wizard"
+msgstr "De l'Assistant de Piquage"
+
+#. module: return_claim
+#: code:addons/return_claim/return_claim.py:1425
+#, python-format
+msgid "Corresponding Incoming Shipment cannot be found. Registration of claim cannot be processed. (no back order)"
+msgstr "Livraison Entrante Correspondante ne peut être trouvée. L'Enregistrement de la réclamation ne peut être traité. (pas de commande en souffrance)"
+
+#. module: return_claim
+#: code:addons/return_claim/return_claim.py:148
+#, python-format
+msgid "State of previous event (%s) does not allow further event."
+msgstr "Le Statut de l'événement précédent (%s) ne permet pas d'autres événements."
+
+#. module: return_claim
+#: view:return.claim:0
+#: field:return.claim,product_line_ids_return_claim:0
+msgid "Products"
+msgstr "Produits"
+
+#. module: return_claim
+#: selection:claim.event,hidden_state:0
+#: selection:claim.event,state:0
+msgid "Done"
+msgstr "Terminé"
+
+#. module: return_claim
+#: code:addons/return_claim/return_claim.py:144
+#: code:addons/return_claim/return_claim.py:148
+#: code:addons/return_claim/return_claim.py:152
+#: code:addons/return_claim/return_claim.py:277
+#: code:addons/return_claim/return_claim.py:513
+#: code:addons/return_claim/return_claim.py:516
+#: code:addons/return_claim/return_claim.py:519
+#: code:addons/return_claim/return_claim.py:522
+#: code:addons/return_claim/return_claim.py:525
+#: code:addons/return_claim/return_claim.py:528
+#: code:addons/return_claim/return_claim.py:535
+#: code:addons/return_claim/return_claim.py:538
+#: code:addons/return_claim/return_claim.py:541
+#: code:addons/return_claim/return_claim.py:599
+#: code:addons/return_claim/return_claim.py:862
+#: code:addons/return_claim/return_claim.py:1411
+#: code:addons/return_claim/return_claim.py:1417
+#: code:addons/return_claim/return_claim.py:1425
+#: code:addons/return_claim/return_claim.py:1431
+#: code:addons/return_claim/return_claim.py:1440
+#: code:addons/return_claim/return_claim.py:1490
+#: code:addons/return_claim/wizard/add_event.py:116
+#: code:addons/return_claim/wizard/add_event.py:118
+#: code:addons/return_claim/wizard/stock_partial_picking.py:93
+#: code:addons/return_claim/wizard/stock_partial_picking.py:95
+#: code:addons/return_claim/wizard/stock_partial_picking.py:164
+#, python-format
+msgid "Warning !"
+msgstr "Avertissement !"
+

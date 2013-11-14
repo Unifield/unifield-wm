@@ -1,0 +1,1086 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* account_override
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_override
+#: view:account.invoice:0
+msgid "Open"
+msgstr "Ouvert"
+
+#. module: account_override
+#: report:addons/account_override/report/open_invoices_xls.mako:304
+msgid "Residual amt booking ccy"
+msgstr "Residual amt booking ccy"
+
+#. module: account_override
+#: field:account.analytic.line,exported:0
+#: field:account.move.line,exported:0
+msgid "Exported"
+msgstr "Exported"
+
+#. module: account_override
+#: help:account.move,statement_line_ids:0
+#: help:account.move.reconcile,statement_line_ids:0
+msgid "This field give all statement lines linked to this move."
+msgstr "Ce champ donne toutes les lignes de relevés associées à cette transaction."
+
+#. module: account_override
+#: view:wizard.hq.report:0
+msgid "Export"
+msgstr "Export"
+
+#. module: account_override
+#: field:account.invoice.line,line_number:0
+msgid "Line Number"
+msgstr "Numéro de Ligne"
+
+#. module: account_override
+#: field:account.move,statement_line_ids:0
+#: field:account.move.reconcile,statement_line_ids:0
+msgid "Statement lines"
+msgstr "Lignes de Relevé"
+
+#. module: account_override
+#: view:account.move:0
+msgid "Delete"
+msgstr "Supprimer"
+
+#. module: account_override
+#: code:addons/account_override/account.py:175
+#: code:addons/account_override/account_analytic_line.py:104
+#: code:addons/account_override/account_analytic_line.py:119
+#: code:addons/account_override/account_move_line.py:251
+#: code:addons/account_override/account_move_line.py:281
+#: code:addons/account_override/invoice.py:152
+#, python-format
+msgid "Posting date should be later than Document Date."
+msgstr "Date de comptabilisation devrait être postérieure à celle du document."
+
+#. module: account_override
+#: view:account.move:0
+msgid "Total Booking Credit"
+msgstr "Total Enregistrement Crédit"
+
+#. module: account_override
+#: view:account.account:0
+msgid "Accrual Account"
+msgstr "Accrual Account"
+
+#. module: account_override
+#: selection:account.move,journal_type:0
+#: selection:account.move.line,journal_type:0
+msgid "Purchase Refund"
+msgstr "Purchase Refund"
+
+#. module: account_override
+#: model:ir.module.module,description:account_override.module_meta_information
+msgid "\n"
+"    Add hook to account class, workflow, etc.\n"
+"    "
+msgstr "\n"
+"    Ajouter un crochet à la catégorie de compte, plan de travail, etc.\n"
+"    "
+
+#. module: account_override
+#: report:addons/account_override/report/open_invoices_xls.mako:249
+msgid "OPEN INVOICES"
+msgstr "OPEN INVOICES"
+
+#. module: account_override
+#: view:account.account:0
+msgid "Inactive"
+msgstr "Inactif"
+
+#. module: account_override
+#: field:account.move.line,reference:0
+msgid "Reference"
+msgstr "Référence"
+
+#. module: account_override
+#: selection:account.move,status:0
+msgid "system"
+msgstr "système"
+
+#. module: account_override
+#: field:account.analytic.line,source_date:0
+#: field:account.move.line,source_date:0
+msgid "Source date"
+msgstr "Date Source"
+
+#. module: account_override
+#: selection:account.move,journal_type:0
+#: selection:account.move.line,journal_type:0
+msgid "Bank"
+msgstr "Bank"
+
+#. module: account_override
+#: report:addons/account_override/report/open_invoices_xls.mako:303
+msgid "Source Document"
+msgstr "Source Document"
+
+#. module: account_override
+#: code:addons/account_override/account_bank_statement.py:57
+#, python-format
+msgid "Warning"
+msgstr "Warning"
+
+#. module: account_override
+#: report:addons/account_override/report/open_invoices_xls.mako:306
+msgid "Booking Currency"
+msgstr "Booking Currency"
+
+#. module: account_override
+#: code:addons/account_override/invoice.py:78
+#, python-format
+msgid "Configuration Error !"
+msgstr "Configuration Error !"
+
+#. module: account_override
+#: help:account.invoice,sequence_id:0
+msgid "This field contains the information related to the numbering of the lines of this order."
+msgstr "Ce champ contient l'information relative à la numérotation des lignes de cette commande."
+
+#. module: account_override
+#: field:account.analytic.line,reversal_origin:0
+msgid "Reversal origin"
+msgstr "Origine de la contre-passation"
+
+#. module: account_override
+#: model:ir.model,name:account_override.model_account_move
+msgid "Account Entry"
+msgstr "Ecriture Comptable"
+
+#. module: account_override
+#: report:addons/account_override/report/open_invoices_xls.mako:265
+msgid "Report Date"
+msgstr "Report Date"
+
+#. module: account_override
+#: model:ir.actions.act_window,name:account_override.action_import_account_mappings
+#: view:wizard.import.mapping:0
+msgid "Import Mappings"
+msgstr "Import Mappings"
+
+#. module: account_override
+#: model:ir.model,name:account_override.model_account_bank_statement_line
+msgid "Bank Statement Line"
+msgstr "Ligne de Relevé Bancaire"
+
+#. module: account_override
+#: report:addons/account_override/report/open_invoices_xls.mako:296
+msgid "Supplier"
+msgstr "Supplier"
+
+#. module: account_override
+#: model:ir.model,name:account_override.model_res_currency_rate
+msgid "Currency Rate"
+msgstr "Taux de change"
+
+#. module: account_override
+#: model:ir.actions.report.xml,name:account_override.open_invoices_2
+msgid "Open Invoices"
+msgstr "Factures Ouvertes"
+
+#. module: account_override
+#: help:account.account,type_for_register:0
+msgid "This permit to give a type to this account that impact registers. In fact this will link an account with a type of element \n"
+"            that could be attached. For an example make the account to be a transfer type will display only registers to the user in the Cash Register \n"
+"            when he add a new register line.\n"
+"            "
+msgstr "Ceci permet de définir un type d'élément associé à un compte. Cette fonction est en fait utilisée dans les registres pour afficher automatiquement un tiers à la création d'une ligne de registres.  \n"
+"            Par exemple, passer une écriture sur un compte de transfert entraine l'affichage dans le champ Tiers des journaux correspondants.  \n"
+"            "
+
+#. module: account_override
+#: code:addons/account_override/account.py:296
+#, python-format
+msgid "You cannot have two different currencies for the same Journal Entry!"
+msgstr "Vous ne pouvez pas avoir deux devises différentes pour la même écriture comptable !"
+
+#. module: account_override
+#: field:account.move.line,reconcile_txt:0
+msgid "Reconcile"
+msgstr "Reconcile"
+
+#. module: account_override
+#: report:addons/account_override/report/open_invoices_xls.mako:291
+msgid "Posting Date"
+msgstr "Posting Date"
+
+#. module: account_override
+#: sql_constraint:res.currency.rate:0
+msgid "Only one rate per date is accorded."
+msgstr "Only one rate per date is accorded."
+
+#. module: account_override
+#: selection:account.move,journal_type:0
+#: selection:account.move.line,journal_type:0
+msgid "Sale Refund"
+msgstr "Sale Refund"
+
+#. module: account_override
+#: view:account.move:0
+msgid "Approve"
+msgstr "Approuver"
+
+#. module: account_override
+#: code:addons/account_override/account_move_line.py:307
+#, python-format
+msgid "You cannot change Journal Items that comes from the system!"
+msgstr "Vous ne pouvez pas modifier les lignes d'écritures comptables provenant du système !"
+
+#. module: account_override
+#: help:account.bank.statement,prev_reg_id:0
+msgid "This fields give the previous register from which this one is linked."
+msgstr "Ce champ donne le registre précédent à partir duquel celui-ci est lié. "
+
+#. module: account_override
+#: selection:account.move.line,move_state:0
+msgid "Unposted"
+msgstr "Unposted"
+
+#. module: account_override
+#: field:account.move,journal_type:0
+#: field:account.move.line,journal_type:0
+msgid "Journal Type"
+msgstr "Type de Journal"
+
+#. module: account_override
+#: model:ir.actions.act_window,name:account_override.action_hq_export
+#: model:ir.actions.report.xml,name:account_override.hq_export
+#: model:ir.ui.menu,name:account_override.menu_action_hq_export
+#: view:wizard.hq.report:0
+msgid "Export to HQ system"
+msgstr "Export to HQ system"
+
+#. module: account_override
+#: help:account.move.line,journal_type:0
+msgid "This indicates the type of the Journal attached to this Journal Item"
+msgstr "Ceci indique le type de Journal lié à cette ligne d'écriture comptable"
+
+#. module: account_override
+#: selection:account.move,journal_type:0
+#: selection:account.move.line,journal_type:0
+msgid "Stock"
+msgstr "Stock"
+
+#. module: account_override
+#: constraint:account.move:0
+msgid "You cannot create entries on different periods/journals in the same move"
+msgstr "Vous ne pouvez pas créer des écritures reflétant une seule transaction sur différentes périodes/journaux "
+
+#. module: account_override
+#: constraint:account.export.mapping:0
+msgid "A mapping already exists for this account"
+msgstr "A mapping already exists for this account"
+
+#. module: account_override
+#: field:account.bank.statement,prev_reg_id:0
+msgid "Previous register"
+msgstr "Registre précédent"
+
+#. module: account_override
+#: sql_constraint:account.journal:0
+msgid "The name of the journal must be unique per company and instance !"
+msgstr "Le nom du journal doit être unique par société et instance!"
+
+#. module: account_override
+#: model:ir.model,name:account_override.model_account_voucher
+msgid "Accounting Voucher"
+msgstr "Pièce justificative comptable"
+
+#. module: account_override
+#: report:addons/account_override/report/open_invoices_xls.mako:257
+msgid "Prop. Instance"
+msgstr "Prop. Instance"
+
+#. module: account_override
+#: code:addons/account_override/account_move_line.py:268
+#, python-format
+msgid "Given date [%s] is outside defined period: %s"
+msgstr "La date mentionnée [%s] est en dehors de la période définie : %s"
+
+#. module: account_override
+#: constraint:account.move.line:0
+msgid "Company must be same for its related account and period."
+msgstr "La Société doit être la même pour le compte et période connexes."
+
+#. module: account_override
+#: selection:account.move,journal_type:0
+#: selection:account.move.line,journal_type:0
+msgid "Cheque"
+msgstr "Cheque"
+
+#. module: account_override
+#: sql_constraint:account.move.line:0
+msgid "Wrong credit or debit value in accounting entry !"
+msgstr "Valeur de crédit ou débit erronée sous l'écriture comptable !"
+
+#. module: account_override
+#: view:account.move.line:0
+msgid "Invalid"
+msgstr "Non valide"
+
+#. module: account_override
+#: code:addons/account_override/account.py:243
+#, python-format
+msgid "You cannot edit a Journal Entry created by the system."
+msgstr "Vous ne pouvez pas modifier une écriture comptable créée par le système."
+
+#. module: account_override
+#: view:account.move:0
+msgid "Journal Entries"
+msgstr "Ecritures Comptables"
+
+#. module: account_override
+#: selection:account.account,type_for_register:0
+msgid "Third party required - Payroll"
+msgstr "Tiers requis - Paie"
+
+#. module: account_override
+#: selection:account.account,type_for_register:0
+msgid "Internal Transfer (same currency)"
+msgstr "Transfer Interne (devise identique)"
+
+#. module: account_override
+#: constraint:account.account:0
+msgid "Error ! You can not create recursive accounts."
+msgstr "Erreur ! Vous ne pouvez pas créer des comptes récursifs."
+
+#. module: account_override
+#: model:ir.model,name:account_override.model_account_analytic_line
+msgid "Analytic Line"
+msgstr "Ligne Analytique"
+
+#. module: account_override
+#: constraint:account.move.line:0
+msgid "You can not create move line on view account."
+msgstr "Vous ne pouvez pas créer des écritures sur un compte-groupe"
+
+#. module: account_override
+#: selection:account.move,status:0
+msgid "manual"
+msgstr "manuel"
+
+#. module: account_override
+#: sql_constraint:account.account:0
+msgid "The code of the account must be unique per company !"
+msgstr "Le code du compte doit être unique par société."
+
+#. module: account_override
+#: code:addons/account_override/account.py:175
+#: code:addons/account_override/account.py:190
+#: code:addons/account_override/account.py:309
+#: code:addons/account_override/account.py:335
+#: code:addons/account_override/account_analytic_line.py:104
+#: code:addons/account_override/account_analytic_line.py:119
+#: code:addons/account_override/account_move_line.py:251
+#: code:addons/account_override/account_move_line.py:281
+#: code:addons/account_override/invoice.py:152
+#, python-format
+msgid "Error"
+msgstr "Erreur"
+
+#. module: account_override
+#: constraint:account.account:0
+msgid "Configuration Error! \n"
+"You cannot define children to an account with internal type different of \"View\"! "
+msgstr "Erreur de configuration ! \n"
+"Vous ne pouvez pas définir un compte enfant associé à un compte autre qu'un compte \"Vue\"! "
+
+#. module: account_override
+#: selection:account.move,journal_type:0
+#: selection:account.move.line,journal_type:0
+msgid "In-kind Donation"
+msgstr "In-kind Donation"
+
+#. module: account_override
+#: selection:account.account,type_for_register:0
+msgid "Operational Advance"
+msgstr "Avance Opérationnelle"
+
+#. module: account_override
+#: constraint:account.bank.statement.line:0
+msgid "The amount of the voucher must be the same amount as the one on the statement line"
+msgstr "Le montant du justificatif doit être identique à celui de la ligne concernée"
+
+#. module: account_override
+#: model:ir.model,name:account_override.model_account_account
+msgid "Account"
+msgstr "Compte"
+
+#. module: account_override
+#: view:account.export.mapping:0
+#: model:ir.actions.act_window,name:account_override.export_mapping_action
+#: model:ir.ui.menu,name:account_override.export_mapping_menu
+msgid "Account Mapping"
+msgstr "Account Mapping"
+
+#. module: account_override
+#: field:wizard.import.mapping,import_file:0
+msgid "CSV File"
+msgstr "CSV File"
+
+#. module: account_override
+#: view:wizard.import.mapping:0
+msgid "Import"
+msgstr "Import"
+
+#. module: account_override
+#: report:addons/account_override/report/open_invoices_xls.mako:271
+msgid "Stock Transfer Vouchers"
+msgstr "Bons Client"
+
+#. module: account_override
+#: sql_constraint:account.journal:0
+msgid "The code of the journal must be unique per company and instance !"
+msgstr "Le code du compte doit être unique par société et instance!"
+
+#. module: account_override
+#: view:account.move:0
+msgid "Total Booking Debit"
+msgstr "Total Enregistrement Débit"
+
+#. module: account_override
+#: report:addons/account_override/report/open_invoices_xls.mako:310
+msgid "State"
+msgstr "État"
+
+#. module: account_override
+#: field:account.analytic.line,functional_currency_id:0
+msgid "Func. Currency"
+msgstr "Fonc. Devise"
+
+#. module: account_override
+#: code:addons/account_override/account.py:206
+#: code:addons/account_override/account.py:243
+#: code:addons/account_override/account.py:285
+#: code:addons/account_override/account.py:289
+#: code:addons/account_override/account.py:296
+#: code:addons/account_override/account_move_line.py:268
+#: code:addons/account_override/account_move_line.py:295
+#: code:addons/account_override/account_move_line.py:307
+#: code:addons/account_override/invoice.py:141
+#: code:addons/account_override/invoice.py:170
+#, python-format
+msgid "Warning"
+msgstr "Avertissement"
+
+#. module: account_override
+#: view:account.move:0
+msgid "Func. Credit"
+msgstr "Fonc. Crédit"
+
+#. module: account_override
+#: report:addons/account_override/report/open_invoices_xls.mako:230
+msgid "Open Invoices"
+msgstr "Open Invoices"
+
+#. module: account_override
+#: field:account.move,status:0
+msgid "Status"
+msgstr "Statut(s)"
+
+#. module: account_override
+#: field:account.invoice,from_yml_test:0
+#: field:account.invoice.line,from_yml_test:0
+msgid "Only used to pass addons unit test"
+msgstr "Seulement utilisé pour passer les addons unit test"
+
+#. module: account_override
+#: report:addons/account_override/report/open_invoices_xls.mako:292
+msgid "Number"
+msgstr "Number"
+
+#. module: account_override
+#: code:addons/account_override/invoice.py:170
+#, python-format
+msgid "Document Date is a mandatory field for validation!"
+msgstr "Date Document est un champ obligatoire pour toute validation!"
+
+#. module: account_override
+#: report:addons/account_override/report/open_invoices_xls.mako:307
+msgid "Residual amt func. ccy"
+msgstr "Residual amt func. ccy"
+
+#. module: account_override
+#: field:account.account,filter_active:0
+msgid "Show only active accounts"
+msgstr "Show only active accounts"
+
+#. module: account_override
+#: code:addons/account_override/wizard/wizard_import_mapping.py:59
+#, python-format
+msgid "Error"
+msgstr "Error"
+
+#. module: account_override
+#: field:account.export.mapping,account_id:0
+msgid "Unifield Account Code"
+msgstr "Unifield Account Code"
+
+#. module: account_override
+#: view:account.move:0
+msgid "Posting Date"
+msgstr "Date de Comptabilisation"
+
+#. module: account_override
+#: selection:account.move,journal_type:0
+#: selection:account.move.line,journal_type:0
+msgid "HR"
+msgstr "HR"
+
+#. module: account_override
+#: report:addons/account_override/report/open_invoices_xls.mako:308
+msgid "Total amt func. ccy"
+msgstr "Total amt func. ccy"
+
+#. module: account_override
+#: field:account.account,type_for_register:0
+msgid "Type for specific treatment"
+msgstr "Type pour traitement spécifique"
+
+#. module: account_override
+#: field:account.analytic.line,is_reversal:0
+msgid "Is a reversal line?"
+msgstr "Est-ce une ligne contrepassée?"
+
+#. module: account_override
+#: code:addons/account_override/account.py:335
+#, python-format
+msgid "Period is not open!"
+msgstr "La période n'est pas ouverte !"
+
+#. module: account_override
+#: view:account.move:0
+msgid "Are you sure you want to delete these line?"
+msgstr "Êtes-vous sûr de vouloir supprimer ces lignes ?"
+
+#. module: account_override
+#: selection:account.account,type_for_register:0
+msgid "Down payment"
+msgstr "Acompte"
+
+#. module: account_override
+#: view:account.move:0
+msgid "Book. Currency"
+msgstr "Enreg.Devise"
+
+#. module: account_override
+#: selection:account.move,journal_type:0
+#: selection:account.move.line,journal_type:0
+msgid "HQ"
+msgstr "HQ"
+
+#. module: account_override
+#: report:addons/account_override/report/open_invoices_xls.mako:302
+msgid "Due Date"
+msgstr "Due Date"
+
+#. module: account_override
+#: field:account.analytic.line,is_reallocated:0
+msgid "Have been reallocated?"
+msgstr "Ont été réallouées?"
+
+#. module: account_override
+#: model:ir.model,name:account_override.model_account_move_reconcile
+msgid "Account Reconciliation"
+msgstr "Lettrage de Compte"
+
+#. module: account_override
+#: view:account.move:0
+msgid "Func. Debit"
+msgstr "Fonc. Débit"
+
+#. module: account_override
+#: selection:account.move,journal_type:0
+#: selection:account.move.line,journal_type:0
+msgid "Migration"
+msgstr "Migration"
+
+#. module: account_override
+#: constraint:res.currency:0
+msgid "Another currency have the same name."
+msgstr "Another currency have the same name."
+
+#. module: account_override
+#: field:account.analytic.line,document_date:0
+#: field:account.invoice,document_date:0
+#: field:account.move,document_date:0
+#: field:account.move.line,document_date:0
+msgid "Document Date"
+msgstr "Date du Document "
+
+#. module: account_override
+#: selection:account.account,type_for_register:0
+msgid "Donation"
+msgstr "Donations"
+
+#. module: account_override
+#: view:account.move:0
+msgid "Booking Amount"
+msgstr "Montant d'enregistrement"
+
+#. module: account_override
+#: selection:account.move,journal_type:0
+#: selection:account.move.line,journal_type:0
+msgid "Currency Adjustement"
+msgstr "Currency Adjustement"
+
+#. module: account_override
+#: field:account.move.line,move_state:0
+msgid "Move state"
+msgstr "Statut de la transaction "
+
+#. module: account_override
+#: view:account.move:0
+msgid "Book. Credit"
+msgstr "Enreg.Crédit"
+
+#. module: account_override
+#: constraint:account.invoice.line:0
+msgid "Constraint error on Uom"
+msgstr "Constraint error on Uom"
+
+#. module: account_override
+#: constraint:res.currency:0
+msgid "No rate is set. Please set one before activating the currency. "
+msgstr "Pas de taux fixé. Choisissez en un svp avant d'activer la monnaie."
+
+#. module: account_override
+#: sql_constraint:res.currency:0
+msgid "The currency name exists already in the system!"
+msgstr "Le nom de cette devise existe déjà dans le système!"
+
+#. module: account_override
+#: constraint:account.move:0
+msgid "You cannot create more than one move per period on centralized journal"
+msgstr "Vous ne pouvez pas créer plus d'une écriture par période sur un journal centralisé"
+
+#. module: account_override
+#: view:account.move:0
+msgid "Duplicate"
+msgstr "Dupliquer"
+
+#. module: account_override
+#: selection:account.move,journal_type:0
+#: selection:account.move.line,journal_type:0
+msgid "OD-Extra Accounting"
+msgstr "OD-Extra Accounting"
+
+#. module: account_override
+#: field:account.export.mapping,mapping_value:0
+msgid "HQ System Account Code"
+msgstr "HQ System Account Code"
+
+#. module: account_override
+#: selection:account.move,journal_type:0
+#: selection:account.move.line,journal_type:0
+msgid "Sale"
+msgstr "Sale"
+
+#. module: account_override
+#: field:account.account,is_settled_at_hq:0
+msgid "Settled at HQ"
+msgstr "Settled at HQ"
+
+#. module: account_override
+#: selection:account.move,journal_type:0
+#: selection:account.move.line,journal_type:0
+msgid "Purchase"
+msgstr "Purchase"
+
+#. module: account_override
+#: report:addons/account_override/report/open_invoices_xls.mako:294
+msgid "Customer"
+msgstr "Customer"
+
+#. module: account_override
+#: field:account.bank.statement,next_reg_id:0
+msgid "Next register"
+msgstr "Registre suivant"
+
+#. module: account_override
+#: report:addons/account_override/report/open_invoices_xls.mako:298
+msgid "Partner"
+msgstr "Partner"
+
+#. module: account_override
+#: help:account.invoice,from_yml_test:0
+#: help:account.invoice.line,from_yml_test:0
+msgid "Never set this field to true !"
+msgstr "Ne jamais régler ce champ sur vrai !"
+
+#. module: account_override
+#: report:addons/account_override/report/open_invoices_xls.mako:290
+msgid "Document Date"
+msgstr "Document Date"
+
+#. module: account_override
+#: model:ir.model,name:account_override.model_account_invoice
+msgid "Invoice"
+msgstr "Facture"
+
+#. module: account_override
+#: view:account.move:0
+msgid "Book. Debit"
+msgstr "Enreg.Débit"
+
+#. module: account_override
+#: selection:account.move,journal_type:0
+#: selection:account.move.line,journal_type:0
+msgid "Intermission"
+msgstr "Intermission"
+
+#. module: account_override
+#: selection:account.account,type_for_register:0
+msgid "Internal Transfer"
+msgstr "Transfer Interne"
+
+#. module: account_override
+#: view:account.account:0
+msgid "Receivable Accounts"
+msgstr "Comptes Clients "
+
+#. module: account_override
+#: model:ir.model,name:account_override.model_account_invoice_line
+msgid "Invoice Line"
+msgstr "Ligne de Facture"
+
+#. module: account_override
+#: model:ir.model,name:account_override.model_account_journal
+msgid "Journal"
+msgstr "Journal"
+
+#. module: account_override
+#: constraint:res.currency:0
+msgid "Same currency exists"
+msgstr "Same currency exists"
+
+#. module: account_override
+#: code:addons/account_override/account_bank_statement.py:57
+#: code:addons/account_override/account_move_line.py:295
+#: code:addons/account_override/invoice.py:141
+#, python-format
+msgid "Partner '%s' is not active."
+msgstr "Partner '%s' is not active."
+
+#. module: account_override
+#: view:account.account:0
+msgid "Active"
+msgstr "Actif"
+
+#. module: account_override
+#: model:ir.model,name:account_override.model_res_currency
+msgid "Currency"
+msgstr "Devises"
+
+#. module: account_override
+#: report:addons/account_override/report/open_invoices_xls.mako:271
+msgid "Customer Refunds"
+msgstr "Customer Refunds"
+
+#. module: account_override
+#: sql_constraint:account.bank.statement:0
+msgid "You cannot have a register on the same period and the same journal!"
+msgstr "Vous ne pouvez pas avoir un registre sur la même période et le même journal !"
+
+#. module: account_override
+#: report:addons/account_override/report/open_invoices_xls.mako:361
+msgid "Sub Total"
+msgstr "Sub Total"
+
+#. module: account_override
+#: view:wizard.import.mapping:0
+msgid "Cancel"
+msgstr "Cancel"
+
+#. module: account_override
+#: constraint:account.move.line:0
+msgid "You can not create move line on closed account."
+msgstr "Vous ne pouvez pas créer des écritures dans un journal clôturé."
+
+#. module: account_override
+#: code:addons/account_override/account.py:285
+#, python-format
+msgid "No line found. Please add some lines before Journal Entry validation!"
+msgstr "Pas de ligne trouvée. Veuillez ajouter quelques lignes avant de valider l'entrée du Journal !"
+
+#. module: account_override
+#: code:addons/account_override/invoice.py:78
+#, python-format
+msgid "Can't find any account journal of %s type for this company.\n"
+"\n"
+"You can create one in the menu: \n"
+"Configuration\\Financial Accounting\\Accounts\\Journals."
+msgstr "Can't find any account journal of %s type for this company.\n"
+"\n"
+"You can create one in the menu: \n"
+"Configuration\\Financial Accounting\\Accounts\\Journals."
+
+#. module: account_override
+#: field:account.invoice,sequence_id:0
+msgid "Lines Sequence"
+msgstr "Séquence Lignes"
+
+#. module: account_override
+#: field:wizard.hq.report,instance_id:0
+msgid "Top proprietary instance"
+msgstr "Top proprietary instance"
+
+#. module: account_override
+#: model:ir.module.module,shortdesc:account_override.module_meta_information
+msgid "Account override"
+msgstr "Compte de remplacement"
+
+#. module: account_override
+#: selection:account.move,journal_type:0
+#: selection:account.move.line,journal_type:0
+msgid "Cash"
+msgstr "Cash"
+
+#. module: account_override
+#: selection:account.move,journal_type:0
+#: selection:account.move.line,journal_type:0
+msgid "Opening/Closing Situation"
+msgstr "Opening/Closing Situation"
+
+#. module: account_override
+#: view:account.move:0
+#: model:ir.model,name:account_override.model_account_move_line
+msgid "Journal Items"
+msgstr "Lignes d'Ecritures Comptables"
+
+#. module: account_override
+#: selection:account.move,journal_type:0
+#: selection:account.move.line,journal_type:0
+msgid "Accrual"
+msgstr "Accrual"
+
+#. module: account_override
+#: help:account.move.line,reconcile_txt:0
+msgid "Help user to display and sort Reconciliation"
+msgstr "Help user to display and sort Reconciliation"
+
+#. module: account_override
+#: field:account.move.line,is_write_off:0
+msgid "Is a write-off line?"
+msgstr "Est-ce une ligne d'ajustement? "
+
+#. module: account_override
+#: report:addons/account_override/report/open_invoices_xls.mako:271
+msgid "Supplier Refunds"
+msgstr "Avoirs Fournisseur"
+
+#. module: account_override
+#: model:ir.model,name:account_override.model_account_export_mapping
+msgid "Mapping of UF code into AX code"
+msgstr "Mapping of UF code into AX code"
+
+#. module: account_override
+#: report:addons/account_override/report/open_invoices_xls.mako:301
+msgid "Responsible"
+msgstr "Responsible"
+
+#. module: account_override
+#: view:account.move:0
+msgid "Total Functional Debit"
+msgstr "Total Fonctionnel Débit"
+
+#. module: account_override
+#: help:account.move,document_date:0
+msgid "Used for manual journal entries"
+msgstr "Utilisé pour les écritures comptables manuelles"
+
+#. module: account_override
+#: help:account.analytic.line,source_date:0
+#: help:account.move.line,source_date:0
+msgid "Date used for FX rate re-evaluation"
+msgstr "Date utilisée lors de la ré-évaluation du taux de change"
+
+#. module: account_override
+#: view:account.move:0
+msgid "Total Amount"
+msgstr "Montant Total"
+
+#. module: account_override
+#: field:wizard.hq.report,period_id:0
+msgid "Period"
+msgstr "Period"
+
+#. module: account_override
+#: selection:account.account,type_for_register:0
+msgid "None"
+msgstr "Aucun"
+
+#. module: account_override
+#: code:addons/account_override/wizard/wizard_import_mapping.py:59
+#, python-format
+msgid "The account code %s is not in the database!"
+msgstr "The account code %s is not in the database!"
+
+#. module: account_override
+#: report:addons/account_override/report/open_invoices_xls.mako:309
+msgid "Func. Ccy"
+msgstr "Dev. Fct."
+
+#. module: account_override
+#: model:ir.model,name:account_override.model_wizard_import_mapping
+msgid "wizard.import.mapping"
+msgstr "wizard.import.mapping"
+
+#. module: account_override
+#: field:wizard.hq.report,fiscalyear_id:0
+msgid "Fiscal year"
+msgstr "Fiscal year"
+
+#. module: account_override
+#: model:ir.model,name:account_override.model_wizard_hq_report
+msgid "wizard.hq.report"
+msgstr "wizard.hq.report"
+
+#. module: account_override
+#: code:addons/account_override/account.py:206
+#, python-format
+msgid "No move prefix found for this instance! Please configure it on Company view."
+msgstr "Le système n'a pas trouvé de préfixe de mouvement pour cette instance ! Veuillez en configurer un sur l'écran Société."
+
+#. module: account_override
+#: help:account.bank.statement,next_reg_id:0
+msgid "This fields give the next register if exists."
+msgstr "Ce champ donne le registre suivant si existant."
+
+#. module: account_override
+#: constraint:account.invoice:0
+msgid "You cannot validate this invoice because it contains a line with an inactive product"
+msgstr "Vous ne pouvez pas valider cette facture car elle contient des lignes avec un produit inactif"
+
+#. module: account_override
+#: help:account.move.line,is_addendum_line:0
+msgid "This inform account_reconciliation module that this line is an addendum line for reconciliations."
+msgstr "Ceci informe le module compte_reconciliation que cette ligne est une ligne ajoutée pour le lettrage."
+
+#. module: account_override
+#: field:account.move.line,is_addendum_line:0
+msgid "Is an addendum line?"
+msgstr "Est-ce une ligne addendum?"
+
+#. module: account_override
+#: view:account.move:0
+msgid "Reconcile"
+msgstr "Lettrer"
+
+#. module: account_override
+#: report:addons/account_override/report/open_invoices_xls.mako:305
+msgid "Total amt booking ccy"
+msgstr "Total amt booking ccy"
+
+#. module: account_override
+#: constraint:account.bank.statement.line:0
+msgid "Date is not correct. Verify that it's in the register's period. "
+msgstr "Date incorrecte. Vérifier que ce soit bien dans la période du registre. "
+
+#. module: account_override
+#: code:addons/account_override/account.py:190
+#, python-format
+msgid "Posting date should be include in defined Period%s."
+msgstr "La date de comptabilisation devrait être incluse dans la période définie %s."
+
+#. module: account_override
+#: help:account.move.line,is_write_off:0
+msgid "This inform that no correction is possible for a line that come from a write-off!"
+msgstr "Vous informe qu'aucune correction de ligne n'est possible si elle provient d'un ajustement!"
+
+#. module: account_override
+#: code:addons/account_override/account.py:289
+#, python-format
+msgid "You are not able to approve a Journal Entry that comes from the system!"
+msgstr "Vous ne pouvez pas approuver une écriture comptable provenant du système !"
+
+#. module: account_override
+#: help:account.move,journal_type:0
+msgid "This indicates which Journal Type is attached to this Journal Entry"
+msgstr "Ceci indique le type de Journal lié à cette écriture comptable"
+
+#. module: account_override
+#: help:account.move.line,move_state:0
+msgid "This indicates the state of the Journal Entry."
+msgstr "Ceci indique le statut de l'écriture comptable."
+
+#. module: account_override
+#: help:account.analytic.line,reversal_origin:0
+msgid "Line that have been reversed."
+msgstr "Lignes qui ont été contrepassées."
+
+#. module: account_override
+#: view:account.invoice:0
+msgid "Paid"
+msgstr "Paid"
+
+#. module: account_override
+#: model:ir.model,name:account_override.model_account_bank_statement
+msgid "Bank Statement"
+msgstr "Relevé bancaire"
+
+#. module: account_override
+#: report:addons/account_override/report/open_invoices_xls.mako:300
+msgid "Description"
+msgstr "Description"
+
+#. module: account_override
+#: selection:account.move,journal_type:0
+#: selection:account.move.line,journal_type:0
+msgid "Correction"
+msgstr "Correction"
+
+#. module: account_override
+#: selection:account.move.line,move_state:0
+msgid "Posted"
+msgstr "Comptabilisé"
+
+#. module: account_override
+#: code:addons/account_override/account.py:309
+#, python-format
+msgid "You can only duplicate manual journal entries."
+msgstr "You can only duplicate manual journal entries."
+
+#. module: account_override
+#: selection:account.move,journal_type:0
+#: selection:account.move.line,journal_type:0
+msgid "Depreciation"
+msgstr "Depreciation"
+
+#. module: account_override
+#: report:addons/account_override/report/open_invoices_xls.mako:271
+msgid "Supplier Invoices"
+msgstr "Supplier Invoices"
+
+#. module: account_override
+#: view:account.account:0
+msgid "Payable Accounts"
+msgstr "Comptes Fournisseurs"
+
+#. module: account_override
+#: selection:account.move,journal_type:0
+#: selection:account.move.line,journal_type:0
+msgid "General"
+msgstr "General"
+
+#. module: account_override
+#: view:account.move:0
+msgid "Total Functional Credit"
+msgstr "Total Fonctionnel Crédit"
+

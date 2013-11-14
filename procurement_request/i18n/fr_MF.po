@@ -1,0 +1,448 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* procurement_request
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: procurement_request
+#: field:sale.order,location_requestor_id:0
+msgid "Location Requestor"
+msgstr "Zone de Demande"
+
+#. module: procurement_request
+#: view:sale.order:0
+msgid "Configurator"
+msgstr "Configurateur"
+
+#. module: procurement_request
+#: view:sale.order:0
+msgid "Closed"
+msgstr "Clôturé"
+
+#. module: procurement_request
+#: field:procurement.request.import,message:0
+msgid "Message"
+msgstr "Message"
+
+#. module: procurement_request
+#: model:ir.actions.wizard,name:procurement_request.wizard_request_to_order
+msgid "Purchase Orders"
+msgstr "Bons de Commande"
+
+#. module: procurement_request
+#: view:sale.order:0
+msgid "In Progress"
+msgstr "En Cours"
+
+#. module: procurement_request
+#: view:sale.order:0
+#: field:sale.order,warehouse_id:0
+msgid "Warehouse"
+msgstr "Entrepôt"
+
+#. module: procurement_request
+#: field:sale.order.line,supplier:0
+msgid "Supplier"
+msgstr "Fournisseur"
+
+#. module: procurement_request
+#: field:sale.order.line,product_ok:0
+msgid "Product selected"
+msgstr "Produit sélectionné"
+
+#. module: procurement_request
+#: code:addons/procurement_request/procurement_request.py:522
+#, python-format
+msgid "You can't source a line 'from stock' if line contains a non-stockable or service product."
+msgstr "Vous ne pouvez pas sourcer une ligne 'du stock' si cette ligne contient un produit non stockable ou un produit de service."
+
+#. module: procurement_request
+#: help:sale.order.line,product_id_ok:0
+msgid "for if true the button \"configurator\" is hidden"
+msgstr "car si vrai le bouton \"configurateur\" est caché"
+
+#. module: procurement_request
+#: field:sale.order.line,my_company_id:0
+msgid "Company"
+msgstr "Société"
+
+#. module: procurement_request
+#: code:addons/procurement_request/procurement_request.py:314
+#, python-format
+msgid "The internal request '%s' has been confirmed."
+msgstr "La demande interne '%s' a été confirmée."
+
+#. module: procurement_request
+#: view:sale.order:0
+msgid "Split Line"
+msgstr "Fractionner Ligne"
+
+#. module: procurement_request
+#: constraint:purchase.order:0
+msgid "If you tick the box \"cross docking\", you cannot have an other location than \"Cross docking\""
+msgstr "Si vous cochez la case \"transbordement\", vous ne pouvez pas avoir d'autre lieu que \"Transbordement\""
+
+#. module: procurement_request
+#: view:procurement.request.import:0
+msgid "File to import"
+msgstr "Fichier à importer"
+
+#. module: procurement_request
+#: view:sale.order:0
+msgid "Validated"
+msgstr "Validé"
+
+#. module: procurement_request
+#: code:addons/procurement_request/procurement_request.py:308
+#, python-format
+msgid "Please correct the line %s of the %s: the supplier is required for the procurement method \"On Order\" !"
+msgstr "Veuillez corriger la ligne %s de %s : la mention du fournisseur est requise pour la méthode d'acquisition \"Sur commande\" !"
+
+#. module: procurement_request
+#: view:sale.order:0
+msgid "Cost Price (FC)"
+msgstr "Cost Price (FC)"
+
+#. module: procurement_request
+#: view:sale.order:0
+msgid "Confirm"
+msgstr "Confirmer"
+
+#. module: procurement_request
+#: sql_constraint:purchase.order:0
+#: sql_constraint:sale.order:0
+msgid "Order Reference must be unique !"
+msgstr "La Référence de la Commande doit être unique !"
+
+#. module: procurement_request
+#: help:sale.order,location_requestor_id:0
+msgid "You can only select an internal location"
+msgstr "Vous ne pouvez sélectionner qu'un lieu interne"
+
+#. module: procurement_request
+#: view:sale.order:0
+msgid "Total"
+msgstr "Total"
+
+#. module: procurement_request
+#: field:procurement.request.import,file:0
+msgid "unknown"
+msgstr "inconnu"
+
+#. module: procurement_request
+#: constraint:sale.order.line:0
+msgid "You must select on order procurement method for Service with Reception products."
+msgstr "Vous devez sélectionner sur la commande le mode d'approvisionnement pour le Service  avec Réception de produits."
+
+#. module: procurement_request
+#: view:sale.order:0
+msgid "Validate"
+msgstr "Valider"
+
+#. module: procurement_request
+#: code:addons/procurement_request/procurement_request.py:276
+#, python-format
+msgid "You cannot validate an Internal request with no lines !"
+msgstr "Vous ne pouvez pas valider de Demande Interne sans lignes !"
+
+#. module: procurement_request
+#: model:ir.model,name:procurement_request.model_purchase_order
+msgid "Purchase Order"
+msgstr "Bon de Commande"
+
+#. module: procurement_request
+#: code:addons/procurement_request/procurement_request.py:285
+#, python-format
+msgid "Please check the lines : you cannot have \"To Be confirmed\" for Nomenclature Level\". You have %s lines to correct !"
+msgstr "Veuillez vérifier les lignes : vous ne pouvez pas avoir \"À confirmer\" pour le niveau de nomenclature\". Vous avez %s lignes à corriger !"
+
+#. module: procurement_request
+#: view:sale.order:0
+msgid "Requested date"
+msgstr "Date souhaitée"
+
+#. module: procurement_request
+#: model:ir.actions.act_window,name:procurement_request.action_procurement_request
+#: model:ir.ui.menu,name:procurement_request.menu_procurement_request
+#: view:sale.order:0
+msgid "Internal Requests"
+msgstr "Demandes Internes"
+
+#. module: procurement_request
+#: model:ir.model,name:procurement_request.model_sale_order
+msgid "Sales Order"
+msgstr "Commande de Terrain"
+
+#. module: procurement_request
+#: code:addons/procurement_request/procurement_request.py:276
+#: code:addons/procurement_request/procurement_request.py:285
+#: code:addons/procurement_request/procurement_request.py:301
+#: code:addons/procurement_request/procurement_request.py:308
+#: code:addons/procurement_request/wizard/wizard_import_list.py:92
+#: code:addons/procurement_request/wizard/wizard_import_list.py:114
+#, python-format
+msgid "Error"
+msgstr "Erreur"
+
+#. module: procurement_request
+#: view:sale.order:0
+msgid "Filters"
+msgstr "Filtres"
+
+#. module: procurement_request
+#: code:addons/procurement_request/procurement_request.py:311
+#: code:addons/procurement_request/procurement_request.py:521
+#: code:addons/procurement_request/wizard/wizard_import_list.py:87
+#: code:addons/procurement_request/wizard/wizard_import_list.py:94
+#, python-format
+msgid "Warning"
+msgstr "Avertissement"
+
+#. module: procurement_request
+#: field:sale.order,order_ids:0
+msgid "Orders"
+msgstr "Commandes"
+
+#. module: procurement_request
+#: view:sale.order:0
+msgid "Comment instead of the product"
+msgstr "Commentaire remplacant le produit"
+
+#. module: procurement_request
+#: model:ir.model,name:procurement_request.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Ligne Commande Terrain"
+
+#. module: procurement_request
+#: view:procurement.request.import:0
+msgid "Information"
+msgstr "Information"
+
+#. module: procurement_request
+#: field:sale.order.line,comment_ok:0
+msgid "Comment written"
+msgstr "Commentaire écrit"
+
+#. module: procurement_request
+#: constraint:purchase.order:0
+msgid "You cannot validate this purchase order because it contains a line with an inactive product"
+msgstr "Vous ne pouvez pas valider ce bon de commande, car il contient une ligne avec des produits inactifs."
+
+#. module: procurement_request
+#: constraint:purchase.order:0
+#: constraint:sale.order:0
+msgid "Partner type and order type are incompatible! Please change either order type or partner."
+msgstr "Le type de partnenaire et le type de commande sont incompatibles. Veuillez changer l'un ou l'autre."
+
+#. module: procurement_request
+#: field:procurement.request.import,info:0
+msgid "Info"
+msgstr "Info"
+
+#. module: procurement_request
+#: code:addons/procurement_request/wizard/wizard_import_list.py:87
+#, python-format
+msgid "Please save the Internal Request before importing lines"
+msgstr "Veuillez sauver la Demande Interne avant d'importer des lignes"
+
+#. module: procurement_request
+#: view:sale.order:0
+msgid "Draft"
+msgstr "Brouillon"
+
+#. module: procurement_request
+#: view:procurement.request.import:0
+#: view:sale.order:0
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: procurement_request
+#: view:sale.order:0
+#: field:sale.order,requestor:0
+msgid "Requestor"
+msgstr "Demandeur"
+
+#. module: procurement_request
+#: view:sale.order:0
+msgid "You are about to confirm the Internal Request without going through the sourcing tool. Are you sure?"
+msgstr "Vous êtes sur le point de confirmer la Requête interne sans passer par l'outil de sourçage. Êtes-vous sûr de vouloir continuer ?"
+
+#. module: procurement_request
+#: model:ir.actions.wizard,name:procurement_request.wizard_request_to_rfq
+msgid "Requests for Quotation"
+msgstr "Demandes de Devis"
+
+#. module: procurement_request
+#: constraint:purchase.order:0
+msgid "You cannot choose an internal supplier for this purchase order"
+msgstr "You cannot choose an internal supplier for this purchase order"
+
+#. module: procurement_request
+#: view:sale.order:0
+#: field:sale.order.line,fake_state:0
+msgid "State"
+msgstr "Statut"
+
+#. module: procurement_request
+#: view:procurement.request.import:0
+msgid "Result of importation"
+msgstr "Résultat de l'importation"
+
+#. module: procurement_request
+#: view:sale.order:0
+msgid "Sourcing Documents"
+msgstr "Documents de sourçage"
+
+#. module: procurement_request
+#: sql_constraint:sale.order.line:0
+msgid "Product Quantity must be greater than zero."
+msgstr "La quantité de produits doit être supérieure à zéro."
+
+#. module: procurement_request
+#: code:addons/procurement_request/procurement_request.py:185
+#, python-format
+msgid "Invalid action !"
+msgstr "Action invalide !"
+
+#. module: procurement_request
+#: code:addons/procurement_request/procurement_request.py:311
+#, python-format
+msgid "For an Internal Request with a procurement method 'On Order' and without product,\n"
+"                        the supplier must be either in 'Internal', 'Inter-Section' or 'Intermission' type.\n"
+"                        "
+msgstr "Pour une Requête interne avec sélection de la méthode d'acquisition 'Sur commande' et sans produit,\n"
+"                        le fournisseur doit être soit 'Interne', 'Inter-Sections' ou 'Inter-missions'.\n"
+"                        "
+
+#. module: procurement_request
+#: view:procurement.request.import:0
+msgid "Close"
+msgstr "Fermer"
+
+#. module: procurement_request
+#: model:ir.model,name:procurement_request.model_procurement_request_import
+msgid "Import of Internal Request"
+msgstr "Importation d'un Demande Interne"
+
+#. module: procurement_request
+#: code:addons/procurement_request/wizard/wizard_import_list.py:94
+#, python-format
+msgid "You cannot import lines in a confirmed Internal Request"
+msgstr "Vous ne pouvez pas importer de lignes dans une Demande Interne confirmée"
+
+#. module: procurement_request
+#: constraint:sale.order:0
+msgid "You cannot validate this sale order because it contains a line with an inactive product"
+msgstr "Vous ne pouvez pas valider cette commande client car elle contient des lignes avec un produit inactif"
+
+#. module: procurement_request
+#: field:sale.order.line,product_id_ok:0
+msgid "Product defined?"
+msgstr "Produit défini ?"
+
+#. module: procurement_request
+#: view:sale.order:0
+#: field:sale.order,ir_total_amount:0
+msgid "Indicative Total Value"
+msgstr "Valeur totale"
+
+#. module: procurement_request
+#: code:addons/procurement_request/procurement_request.py:301
+#, python-format
+msgid "You cannot confirm an Internal request with no lines !"
+msgstr "Vous ne pouvez pas confirmer de Demande Interne sans lignes !"
+
+#. module: procurement_request
+#: model:ir.module.module,description:procurement_request.module_meta_information
+msgid "\n"
+"    This modules aims to create a new document called Internal Request to \n"
+"    identify the needs of all and source from stock or from order\n"
+"    "
+msgstr "\n"
+"    Ce module vise à créer un nouveau document, intitulé Demande Interne, afin d'identifier les besoins de tous et de 'sourcer' à partir du stock ou d'une commande\n"
+"    "
+
+#. module: procurement_request
+#: code:addons/procurement_request/wizard/wizard_import_list.py:92
+#, python-format
+msgid "You cannot import lines in a Sale Order"
+msgstr "Vous ne pouvez pas importer de lignes dans une Commande Client"
+
+#. module: procurement_request
+#: view:sale.order:0
+#: field:sale.order,notes:0
+msgid "Notes"
+msgstr "Notes"
+
+#. module: procurement_request
+#: help:sale.order.line,fake_state:0
+msgid "for internal use only"
+msgstr "pour usage interne seulement"
+
+#. module: procurement_request
+#: model:ir.actions.act_window,name:procurement_request.action_open_wizard_import
+#: view:procurement.request.import:0
+msgid "Import lines"
+msgstr "Importer Lignes"
+
+#. module: procurement_request
+#: field:sale.order.line,latest:0
+msgid "Latest documents"
+msgstr "Derniers documents"
+
+#. module: procurement_request
+#: model:ir.module.module,shortdesc:procurement_request.module_meta_information
+#: view:sale.order:0
+#: field:sale.order,procurement_request:0
+#: field:sale.order.line,procurement_request:0
+msgid "Internal Request"
+msgstr "Demande Interne"
+
+#. module: procurement_request
+#: code:addons/procurement_request/wizard/wizard_import_list.py:114
+#, python-format
+msgid "The system hasn't found a Internal Request to import lines"
+msgstr "Le système n'a pas trouvé de Demande Interne pour importer les lignes"
+
+#. module: procurement_request
+#: view:procurement.request.import:0
+msgid "Import file"
+msgstr "Import fichier"
+
+#. module: procurement_request
+#: field:sale.order.line,cost_price:0
+msgid "Cost price"
+msgstr "Cost price"
+
+#. module: procurement_request
+#: view:sale.order:0
+msgid "Group By..."
+msgstr "Grouper Par..."
+
+#. module: procurement_request
+#: code:addons/procurement_request/procurement_request.py:185
+#, python-format
+msgid "Cannot delete Internal Request(s) which are already validated !"
+msgstr "Ne peut effacer la(es) Demandee(s) Interne(s) déjà validée(s) !"
+
+#. module: procurement_request
+#: view:sale.order:0
+msgid "Products"
+msgstr "Produits"
+
+#. module: procurement_request
+#: constraint:purchase.order:0
+msgid "You must specify a Valid Till date."
+msgstr "Spécifiez une date de validité 'Valide Jusque'."
+

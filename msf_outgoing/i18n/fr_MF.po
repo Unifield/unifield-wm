@@ -1,0 +1,3549 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* msf_outgoing
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: msf_outgoing
+#: view:stock.picking:0
+msgid "_Cancel Picking"
+msgstr "_Annuler piquage"
+
+#. module: msf_outgoing
+#: report:certificate.free.gift:0
+#: report:invoice:0
+#: report:packing.list:0
+#: report:pre.packing.list:0
+msgid "Unit Price"
+msgstr "Prix unitaire"
+
+#. module: msf_outgoing
+#: selection:pack.family.memory,state:0
+#: view:shipment:0
+#: selection:shipment,state:0
+#: view:stock.picking:0
+msgid "Closed"
+msgstr "Clôturé"
+
+#. module: msf_outgoing
+#: view:stock.picking:0
+msgid "Actual Pick Date"
+msgstr "Date Réelle de Piquage"
+
+#. module: msf_outgoing
+#: report:picking.ticket:0
+msgid "Qty to Pick:"
+msgstr "Qté à Prélever:"
+
+#. module: msf_outgoing
+#: field:stock.picking,previous_step_id:0
+msgid "Previous step"
+msgstr "Etape précédente "
+
+#. module: msf_outgoing
+#: view:shipment:0
+msgid "Consignee"
+msgstr "Destinataire"
+
+#. module: msf_outgoing
+#: field:stock.move.memory.shipment.additionalitems,wizard_id:0
+msgid "Wizard"
+msgstr "Wizard"
+
+#. module: msf_outgoing
+#: field:ppl.customize.label,pre_packing_list_reference:0
+msgid "Pre-Packing List Reference"
+msgstr "Liste de Pré-Colisage / Référence"
+
+#. module: msf_outgoing
+#: selection:pack.family.memory,state:0
+msgid "Returned from Shipment"
+msgstr "Retour d´Expédition"
+
+#. module: msf_outgoing
+#: view:stock.move.memory.picking:0
+#: view:stock.move.memory.ppl:0
+#: view:stock.move.memory.shipment.returnpacksfromshipment:0
+msgid "Split"
+msgstr "Fractionner"
+
+#. module: msf_outgoing
+#: help:stock.move.memory.picking,currency:0
+#: help:stock.move.memory.ppl,currency:0
+#: help:stock.move.memory.returnproducts,currency:0
+msgid "Currency in which Unit cost is expressed"
+msgstr "Devise dans laquelle le coût unitaire est exprimé"
+
+#. module: msf_outgoing
+#: view:stock.picking:0
+msgid "Confirm"
+msgstr "Confirmer"
+
+#. module: msf_outgoing
+#: report:pre.packing.list:0
+msgid "PrePackingList -"
+msgstr "Liste de Pré-Colisage -"
+
+#. module: msf_outgoing
+#: field:pack.family.memory,name:0
+#: field:shipment,name:0
+msgid "Reference"
+msgstr "Référence"
+
+#. module: msf_outgoing
+#: view:stock.picking:0
+msgid "Origin"
+msgstr "Origine"
+
+#. module: msf_outgoing
+#: model:ir.model,name:msf_outgoing.model_shipment_wizard
+msgid "Shipment Wizard"
+msgstr "Expédition - Assistant"
+
+#. module: msf_outgoing
+#: field:shipment,driver_name:0
+msgid "Driver Name"
+msgstr "Nom du Chauffeur"
+
+#. module: msf_outgoing
+#: model:process.transition,name:msf_outgoing.process_transition_out_assigned_backorder
+#: model:process.transition,note:msf_outgoing.process_transition_out_assigned_backorder
+msgid "From assigned to backorder."
+msgstr "De attribué à reliquat de commande."
+
+#. module: msf_outgoing
+#: selection:stock.move.memory.families,integrity_status:0
+#: selection:stock.move.memory.in,integrity_status:0
+#: selection:stock.move.memory.out,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.ppl,integrity_status:0
+#: selection:stock.move.memory.ppl,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.returnproducts,integrity_status:0
+#: selection:stock.move.memory.returnproducts,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.shipment.create,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacks,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacksfromshipment,integrity_status:0
+msgid "The sequence overlaps previous one"
+msgstr "La séquence chevauche la précédente"
+
+#. module: msf_outgoing
+#: model:process.node,name:msf_outgoing.process_node_draft_pick_draft_ship
+#: model:process.node,name:msf_outgoing.process_node_pick_draft_ship
+#: model:process.node,name:msf_outgoing.process_node_ppl_draft_ship
+#: model:process.process,name:msf_outgoing.process_process_draft_ship0
+#: field:shipment,backshipment_id:0
+msgid "Draft Shipment"
+msgstr "Brouillon Expédition"
+
+#. module: msf_outgoing
+#: report:certificate.free.gift:0
+#: report:invoice:0
+#: report:packing.list:0
+#: report:pre.packing.list:0
+msgid "To p:"
+msgstr "À p:"
+
+#. module: msf_outgoing
+#: field:stock.move.memory.picking,expiry_date_check:0
+#: field:stock.move.memory.ppl,expiry_date_check:0
+#: field:stock.move.memory.returnproducts,expiry_date_check:0
+msgid "Expiry Date Check"
+msgstr "Vérification Date d'Expiration"
+
+#. module: msf_outgoing
+#: view:ppl.customize.label:0
+msgid "Options"
+msgstr "Options"
+
+#. module: msf_outgoing
+#: report:pre.packing.list:0
+msgid "Qty /"
+msgstr "Qté /"
+
+#. module: msf_outgoing
+#: field:stock.move,is_dangerous_good:0
+#: field:stock.picking,is_dangerous_good:0
+msgid "Dangerous Good"
+msgstr "Marchandises Dangereuses"
+
+#. module: msf_outgoing
+#: report:labels:0
+msgid "Our Pre Packing List Reference:"
+msgstr "Notre Référence Liste de Pré-Colisage:"
+
+#. module: msf_outgoing
+#: field:ppl.customize.label,weight:0
+msgid "Weight"
+msgstr "Poids"
+
+#. module: msf_outgoing
+#: report:pre.packing.list:0
+msgid "/"
+msgstr "/"
+
+#. module: msf_outgoing
+#: model:ir.actions.act_window,name:msf_outgoing.action_draft_picking_ticket
+#: model:process.process,name:msf_outgoing.process_process_outgoing1
+msgid "Draft Picking Ticket"
+msgstr "Brouillon Bon de Piquage"
+
+#. module: msf_outgoing
+#: model:ir.model,name:msf_outgoing.model_stock_move_memory_shipment_create
+msgid "stock.move.memory.shipment.create"
+msgstr "stock.move.memory.shipment.create"
+
+#. module: msf_outgoing
+#: report:packing.list:0
+msgid "Packing List -"
+msgstr "Liste de Colisage -"
+
+#. module: msf_outgoing
+#: field:ppl.customize.label,destination_partner:0
+msgid "Destination Partner"
+msgstr "Destination Partenaire"
+
+#. module: msf_outgoing
+#: model:process.node,name:msf_outgoing.process_node_draft_pick_done
+msgid "Draft Picking - closed"
+msgstr "Brouillon Piquage – fermé"
+
+#. module: msf_outgoing
+#: field:create.picking,product_moves_families:0
+#: view:shipment:0
+#: field:shipment.wizard,product_moves_shipment_create:0
+#: field:shipment.wizard,product_moves_shipment_returnpacks:0
+#: field:shipment.wizard,product_moves_shipment_returnpacksfromshipment:0
+#: view:stock.move.memory.families:0
+#: view:stock.move.memory.shipment.create:0
+#: view:stock.move.memory.shipment.returnpacks:0
+#: view:stock.move.memory.shipment.returnpacksfromshipment:0
+msgid "Pack Families"
+msgstr "Colis - Familles"
+
+#. module: msf_outgoing
+#: view:shipment:0
+msgid "Ship"
+msgstr "Expédier"
+
+#. module: msf_outgoing
+#: report:picking.ticket:0
+msgid "Packaging"
+msgstr "Conditionnement"
+
+#. module: msf_outgoing
+#: view:stock.picking:0
+msgid "Force Availability"
+msgstr "Disponibilité des Effectifs"
+
+#. module: msf_outgoing
+#: field:ppl.customize.label,specific_information:0
+msgid "Specific Information"
+msgstr "Information Spécifique"
+
+#. module: msf_outgoing
+#: field:pack.family.memory,total_weight:0
+#: field:shipment,total_weight:0
+#: field:stock.picking,total_weight:0
+msgid "Total Weight[kg]"
+msgstr "Poids Total (kg)"
+
+#. module: msf_outgoing
+#: model:process.node,note:msf_outgoing.process_node_out_assigned
+msgid "Available state of incoming product."
+msgstr "Etat de disponibilité du produit entrant."
+
+#. module: msf_outgoing
+#: report:packing.list:0
+msgid "Tot Val:"
+msgstr "Val Tot:"
+
+#. module: msf_outgoing
+#: model:process.node,note:msf_outgoing.process_node_pick_confirmed
+msgid "Not available state of picking ticket."
+msgstr "Statut non disponible du bon de Piquage"
+
+#. module: msf_outgoing
+#: field:shipment,num_of_packs:0
+msgid "Number of Packs"
+msgstr "Nombre de Colis"
+
+#. module: msf_outgoing
+#: selection:stock.move.memory.families,integrity_status:0
+#: selection:stock.move.memory.in,integrity_status:0
+#: selection:stock.move.memory.out,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.ppl,integrity_status:0
+#: selection:stock.move.memory.ppl,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.returnproducts,integrity_status:0
+#: selection:stock.move.memory.returnproducts,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.shipment.create,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacks,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacksfromshipment,integrity_status:0
+msgid "Expiry Date is Missing"
+msgstr "Date d'Expiration Manquante"
+
+#. module: msf_outgoing
+#: selection:stock.move.memory.families,integrity_status:0
+#: selection:stock.move.memory.in,integrity_status:0
+#: selection:stock.move.memory.out,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.ppl,integrity_status:0
+#: selection:stock.move.memory.ppl,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.returnproducts,integrity_status:0
+#: selection:stock.move.memory.returnproducts,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.shipment.create,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacks,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacksfromshipment,integrity_status:0
+msgid "Does not exist in selected IN/OUT"
+msgstr "N'existe pas sous la sélection IN/OUT"
+
+#. module: msf_outgoing
+#: field:stock.move.memory.picking,ssl_check:0
+#: field:stock.move.memory.ppl,ssl_check:0
+#: field:stock.move.memory.returnproducts,ssl_check:0
+msgid "SSL"
+msgstr "DVC (durée de vie courte)"
+
+#. module: msf_outgoing
+#: model:process.transition,name:msf_outgoing.process_transition_pick_assigned_ppl
+#: model:process.transition,note:msf_outgoing.process_transition_pick_assigned_ppl
+msgid "From assigned to ppl."
+msgstr "De attribué à Liste de Pré-Colisage."
+
+#. module: msf_outgoing
+#: report:invoice:0
+msgid "Total Weight [kg]:"
+msgstr "Poids Total (kg)"
+
+#. module: msf_outgoing
+#: selection:shipment,transport_type:0
+#: selection:shipment.wizard,transport_type:0
+msgid "By road"
+msgstr "Par Route"
+
+#. module: msf_outgoing
+#: field:stock.warehouse,lot_packing_id:0
+msgid "Location Packing"
+msgstr "Zone Colisage"
+
+#. module: msf_outgoing
+#: report:certificate.free.gift:0
+#: report:invoice:0
+#: report:packing.list:0
+#: report:pro.forma.invoice:0
+msgid "High level description of goods:"
+msgstr "Description des marchandises:"
+
+#. module: msf_outgoing
+#: model:ir.actions.act_window,help:msf_outgoing.action_shipment
+msgid "This is the list of all shipment lists that have been picked. The shipment lists are regrouped by address."
+msgstr "Ceci est la liste des toutes les listes d'expédition qui ont été prélevées. Les listes d'expéditions sont regroupées par adresse.  "
+
+#. module: msf_outgoing
+#: view:stock.picking:0
+msgid "Reason Type"
+msgstr "Raison - Type"
+
+#. module: msf_outgoing
+#: field:ppl.customize.label,requestor_order_reference:0
+msgid "Requestor Order Reference"
+msgstr "Référence Auteur de la Commande"
+
+#. module: msf_outgoing
+#: report:picking.ticket:0
+msgid "From Parcel"
+msgstr "De Parcelle"
+
+#. module: msf_outgoing
+#: model:ir.model,name:msf_outgoing.model_wizard
+msgid "wizard"
+msgstr "assistant "
+
+#. module: msf_outgoing
+#: field:stock.move,location_output_id:0
+msgid "Output location"
+msgstr "Sortie - Zone"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/wizard/create_picking.py:254
+#, python-format
+msgid "_Cancel"
+msgstr "_Cancel"
+
+#. module: msf_outgoing
+#: model:process.node,name:msf_outgoing.process_node_draft_ship_done
+msgid "Draft Ship. - closed"
+msgstr "Brouillon Expédition - fermé"
+
+#. module: msf_outgoing
+#: field:stock.move.memory.picking,type_check:0
+#: field:stock.move.memory.ppl,type_check:0
+#: field:stock.move.memory.returnproducts,type_check:0
+msgid "Picking Type Check"
+msgstr "Type de Piquage Vérification"
+
+#. module: msf_outgoing
+#: report:picking.ticket:0
+msgid "Qty Picked"
+msgstr "Qté Prélevée"
+
+#. module: msf_outgoing
+#: model:ir.model,name:msf_outgoing.model_ppl_customize_label
+msgid "ppl.customize.label"
+msgstr "ppl.customize.label"
+
+#. module: msf_outgoing
+#: report:invoice:0
+#: report:pre.packing.list:0
+msgid "Total value:"
+msgstr "Valeur Totale:"
+
+#. module: msf_outgoing
+#: report:picking.ticket:0
+msgid "Product Code:"
+msgstr "Code Produit:"
+
+#. module: msf_outgoing
+#: report:pre.packing.list:0
+msgid "Pack details"
+msgstr "Colis - Détails"
+
+#. module: msf_outgoing
+#: field:stock.move.memory.shipment.create,selected_number:0
+#: field:stock.move.memory.shipment.returnpacks,selected_number:0
+#: field:stock.move.memory.shipment.returnpacksfromshipment,selected_number:0
+msgid "Selected Number"
+msgstr "Selected Number"
+
+#. module: msf_outgoing
+#: model:ir.model,name:msf_outgoing.model_stock_move_memory_returnproducts
+msgid "stock.move.memory.returnproducts"
+msgstr "stock.move.memory.returnproducts"
+
+#. module: msf_outgoing
+#: view:stock.picking:0
+msgid "Dest. Loc"
+msgstr "Zone de Destination"
+
+#. module: msf_outgoing
+#: field:shipment,shipment_actual_date:0
+msgid "Actual Ship Date"
+msgstr "Date Réelle d'Expédition"
+
+#. module: msf_outgoing
+#: field:stock.move.memory.picking,product_uom:0
+#: field:stock.move.memory.ppl,product_uom:0
+#: field:stock.move.memory.returnproducts,product_uom:0
+msgid "Unit of Measure"
+msgstr "Unité de mesure"
+
+#. module: msf_outgoing
+#: model:ir.model,name:msf_outgoing.model_procurement_order
+msgid "Procurement"
+msgstr "Approvisionnement"
+
+#. module: msf_outgoing
+#: field:create.picking,date:0
+#: field:shipment,carrier_date:0
+#: field:shipment,consignee_date:0
+#: field:shipment,shipper_date:0
+#: field:shipment.wizard,date:0
+msgid "Date"
+msgstr "Date"
+
+#. module: msf_outgoing
+#: report:certificate.free.gift:0
+#: report:invoice:0
+#: report:packing.list:0
+#: report:pro.forma.invoice:0
+msgid "From:"
+msgstr "De:"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/msf_outgoing.py:2218
+#, python-format
+msgid "The new Draft Shipment %s has been created."
+msgstr "Les nouveaux %s d'expédition en mode brouillon ont été créés."
+
+#. module: msf_outgoing
+#: model:process.transition,name:msf_outgoing.process_transition_draft_pick_ppl_draft_ship
+#: model:process.transition,name:msf_outgoing.process_transition_pick_ppl_draft_ship
+#: model:process.transition,note:msf_outgoing.process_transition_draft_pick_ppl_draft_ship
+#: model:process.transition,note:msf_outgoing.process_transition_pick_ppl_draft_ship
+msgid "From ppl to draft shipment."
+msgstr "De liste de pré-colisage à brouillon expédition."
+
+#. module: msf_outgoing
+#: selection:shipment,state:0
+msgid "Packed"
+msgstr "Emballé"
+
+#. module: msf_outgoing
+#: selection:stock.move.memory.families,integrity_status:0
+#: selection:stock.move.memory.in,integrity_status:0
+#: selection:stock.move.memory.out,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.ppl,integrity_status:0
+#: selection:stock.move.memory.ppl,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.returnproducts,integrity_status:0
+#: selection:stock.move.memory.returnproducts,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.shipment.create,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacks,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacksfromshipment,integrity_status:0
+msgid "Need Expiry Date (Internal) not Batch Number (Standard)"
+msgstr "Mention nécessaire d'une date d'expiration (Interne) mais pas d'un numéro de lot (Standard)"
+
+#. module: msf_outgoing
+#: model:process.node,name:msf_outgoing.process_node_draft_pick_draft
+msgid "Draft Picking - draft"
+msgstr "Brouillon Piquage - brouillon"
+
+#. module: msf_outgoing
+#: view:shipment:0
+#: view:stock.picking:0
+msgid "Partner"
+msgstr "Partenaire"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/report/picking_ticket.py:43
+#, python-format
+msgid "Picking Ticket is only available for Picking Ticket Objects!"
+msgstr "Bon de Prélèvement n'est disponible que pour les Objets d'un Bon de Prélèvement!"
+
+#. module: msf_outgoing
+#: model:ir.actions.act_window,name:msf_outgoing.action_picking_ticket
+#: view:stock.picking:0
+msgid "Picking Tickets"
+msgstr "Bons de Piquage"
+
+#. module: msf_outgoing
+#: report:certificate.free.gift:0
+#: report:invoice:0
+#: report:packing.list:0
+msgid "Product Description"
+msgstr "Description Produit"
+
+#. module: msf_outgoing
+#: field:product.product,is_keep_cool:0
+#: field:stock.move,is_keep_cool:0
+#: field:stock.picking,is_keep_cool:0
+msgid "Keep Cool"
+msgstr "Garder Frais"
+
+#. module: msf_outgoing
+#: report:picking.ticket:0
+msgid "Height"
+msgstr "Hauteur"
+
+#. module: msf_outgoing
+#: model:process.node,note:msf_outgoing.process_node_ppl_done
+msgid "Closed state of pre-packing list."
+msgstr "Statut fermé de la liste de pré-colisage"
+
+#. module: msf_outgoing
+#: field:memory.additionalitems,name:0
+#: field:shipment.additionalitems,name:0
+#: field:stock.move.memory.shipment.additionalitems,name:0
+msgid "Additional Item"
+msgstr "Additional Item"
+
+#. module: msf_outgoing
+#: model:ir.ui.menu,name:msf_outgoing.menu_warehouse_deliveries
+msgid "Deliveries"
+msgstr "Livraisons"
+
+#. module: msf_outgoing
+#: selection:stock.move.memory.families,integrity_status:0
+#: selection:stock.move.memory.in,integrity_status:0
+#: selection:stock.move.memory.out,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.ppl,integrity_status:0
+#: selection:stock.move.memory.ppl,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.returnproducts,integrity_status:0
+#: selection:stock.move.memory.returnproducts,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.shipment.create,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacks,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacksfromshipment,integrity_status:0
+msgid "Wrong Batch Number Type"
+msgstr "Mauvais type de numéro de lot"
+
+#. module: msf_outgoing
+#: field:stock.move.memory.picking,lot_check:0
+#: field:stock.move.memory.ppl,lot_check:0
+#: field:stock.move.memory.returnproducts,lot_check:0
+msgid "B.Num"
+msgstr "Numéro de Lot"
+
+#. module: msf_outgoing
+#: model:ir.model,name:msf_outgoing.model_stock_move_memory_families
+msgid "stock.move.memory.families"
+msgstr "stock.move.memory.families"
+
+#. module: msf_outgoing
+#: report:picking.ticket:0
+msgid "Gross Weight"
+msgstr "Poids brut"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/msf_outgoing.py:2615
+#, python-format
+msgid "PPL Information - step1"
+msgstr "PPL Information - étape1"
+
+#. module: msf_outgoing
+#: constraint:product.product:0
+msgid "If you select \"Non-stockable\" as product type then you have to select \"Make to order\" as procurement method"
+msgstr "Si vous sélectionnez \"Non stockable\" comme type de produit, vous devez sélectionner \"Faire sur commande\" comme méthode d'acquisition"
+
+#. module: msf_outgoing
+#: field:shipment,carrier_email:0
+#: field:shipment,consignee_email:0
+#: field:shipment,shipper_email:0
+msgid "Email"
+msgstr "Courriel"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/wizard/stock_partial_move.py:278
+#, python-format
+msgid "You must assign a positive \"from pack\" value."
+msgstr "Vous devez attribuer une valeur positive à \"du colis\" ."
+
+#. module: msf_outgoing
+#: view:split.memory.move:0
+msgid "Quantity for the new move"
+msgstr "Quantité pour le nouveau mouvement"
+
+#. module: msf_outgoing
+#: report:certificate.free.gift:0
+#: report:invoice:0
+#: report:packing.list:0
+#: report:pre.packing.list:0
+msgid "Product Code"
+msgstr "Code Produit"
+
+#. module: msf_outgoing
+#: constraint:product.product:0
+msgid "Constraint error on Kit Product."
+msgstr "Erreur de Contrainte sur le produit Kit"
+
+#. module: msf_outgoing
+#: model:ir.actions.report.xml,name:msf_outgoing.report_packing_list
+msgid "Packing List"
+msgstr "Liste de Colisage"
+
+#. module: msf_outgoing
+#: constraint:stock.move:0
+#: constraint:stock.picking:0
+msgid "Wrong reason type for an OUT created from scratch."
+msgstr "Mauvais type de motif pour une livraison OUT créée à partir de rien."
+
+#. module: msf_outgoing
+#: field:stock.move.memory.picking,quantity:0
+#: field:stock.move.memory.ppl,quantity:0
+#: field:stock.move.memory.returnproducts,quantity:0
+msgid "Quantity to process"
+msgstr "Quantité à traiter"
+
+#. module: msf_outgoing
+#: help:shipment,sequence_id:0
+msgid "This field contains the information related to the numbering of the shipment."
+msgstr "Le champ contient des informations relatives à la numérotation de l'expédition"
+
+#. module: msf_outgoing
+#: report:invoice:0
+msgid "Pack Weight [kg]:"
+msgstr "Pack Weight [kg]:"
+
+#. module: msf_outgoing
+#: model:ir.model,name:msf_outgoing.model_stock_move_memory_ppl
+msgid "stock.move.memory.ppl"
+msgstr "stock.move.memory.ppl"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/wizard/create_picking.py:214
+#: code:addons/msf_outgoing/wizard/shipment.py:214
+#, python-format
+msgid "Copy all"
+msgstr "Copier tout"
+
+#. module: msf_outgoing
+#: selection:stock.move.memory.families,integrity_status:0
+#: selection:stock.move.memory.in,integrity_status:0
+#: selection:stock.move.memory.out,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.ppl,integrity_status:0
+#: selection:stock.move.memory.ppl,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.returnproducts,integrity_status:0
+#: selection:stock.move.memory.returnproducts,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.shipment.create,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacks,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacksfromshipment,integrity_status:0
+msgid "Empty Picking Ticket"
+msgstr "Vider le Bon de Piquage"
+
+#. module: msf_outgoing
+#: help:stock.picking,sequence_id:0
+msgid "This field contains the information related to the numbering of the picking tickets."
+msgstr "Le champ contient des informations relatives à  la numérotation des bons de Piquage"
+
+#. module: msf_outgoing
+#: field:stock.move.memory.in,force_complete:0
+#: field:stock.move.memory.out,force_complete:0
+#: field:stock.move.memory.picking,force_complete:0
+#: field:stock.move.memory.ppl,force_complete:0
+#: field:stock.move.memory.returnproducts,force_complete:0
+msgid "Force"
+msgstr "Effectifs"
+
+#. module: msf_outgoing
+#: field:stock.picking,has_draft_moves:0
+msgid "Has draft moves ?"
+msgstr "Has draft moves ?"
+
+#. module: msf_outgoing
+#: field:stock.move.memory.picking,location_id:0
+#: field:stock.move.memory.ppl,location_id:0
+#: field:stock.move.memory.returnproducts,location_id:0
+msgid "Source Location"
+msgstr "Zone Source"
+
+#. module: msf_outgoing
+#: field:shipment,sequence_id:0
+msgid "Shipment Sequence"
+msgstr "Expédition - Séquence"
+
+#. module: msf_outgoing
+#: view:shipment:0
+#: selection:shipment,state:0
+msgid "Shipped"
+msgstr "Expédié"
+
+#. module: msf_outgoing
+#: field:shipment,invoice_id:0
+msgid "Related invoice"
+msgstr "Facture connexe"
+
+#. module: msf_outgoing
+#: selection:stock.move.memory.families,integrity_status:0
+#: selection:stock.move.memory.in,integrity_status:0
+#: selection:stock.move.memory.out,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.ppl,integrity_status:0
+#: selection:stock.move.memory.ppl,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.returnproducts,integrity_status:0
+#: selection:stock.move.memory.returnproducts,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.shipment.create,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacks,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacksfromshipment,integrity_status:0
+msgid "Assigned qty must be smaller or equal to available qty"
+msgstr "Qté affectée doit être plus petite ou égale à la quantité disponible"
+
+#. module: msf_outgoing
+#: selection:stock.move.memory.families,integrity_status:0
+#: selection:stock.move.memory.in,integrity_status:0
+#: selection:stock.move.memory.out,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.ppl,integrity_status:0
+#: selection:stock.move.memory.ppl,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.returnproducts,integrity_status:0
+#: selection:stock.move.memory.returnproducts,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.shipment.create,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacks,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacksfromshipment,integrity_status:0
+msgid "No Batch Number/Expiry Date Needed"
+msgstr "Pas besoin de mentionner un numéro de lot/une date d'expiration"
+
+#. module: msf_outgoing
+#: field:stock.move.memory.picking,batch_number_check:0
+#: field:stock.move.memory.ppl,batch_number_check:0
+#: field:stock.move.memory.returnproducts,batch_number_check:0
+msgid "Batch Number Check"
+msgstr "Vérification Numéro de Lot"
+
+#. module: msf_outgoing
+#: report:certificate.free.gift:0
+#: report:invoice:0
+#: report:packing.list:0
+#: report:pro.forma.invoice:0
+msgid "Packing Reference"
+msgstr "Colisage - Référence"
+
+#. module: msf_outgoing
+#: model:ir.actions.act_window,name:msf_outgoing.action_ppl
+#: view:stock.picking:0
+msgid "Pre-Packing Lists"
+msgstr "Listes de Pré-Colisage"
+
+#. module: msf_outgoing
+#: field:memory.additionalitems,volume:0
+#: field:shipment.additionalitems,volume:0
+#: field:stock.move.memory.shipment.additionalitems,volume:0
+msgid "Volume[dm³]"
+msgstr "Volume[dm³]"
+
+#. module: msf_outgoing
+#: field:stock.move,qty_per_pack:0
+msgid "Qty p.p"
+msgstr "Qté par colis"
+
+#. module: msf_outgoing
+#: field:shipment,transport_type:0
+#: field:shipment.wizard,transport_type:0
+msgid "Transport Type"
+msgstr "Type de Transport"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/msf_outgoing.py:705
+#: code:addons/msf_outgoing/msf_outgoing.py:751
+#, python-format
+msgid "The corresponding Draft Shipment (%s) has been updated."
+msgstr "L'expédition correspondante en mode brouillon (%s) a été mise à jour."
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/wizard/create_picking.py:607
+#: code:addons/msf_outgoing/wizard/create_picking.py:703
+#: code:addons/msf_outgoing/wizard/shipment.py:442
+#, python-format
+msgid "You have to enter the quantities you want to process before processing the move"
+msgstr "Vous devez entrer les quantités à traiter avant de traiter le mouvement"
+
+#. module: msf_outgoing
+#: model:process.node,note:msf_outgoing.process_node_ship_shipped
+msgid "Shipped state of shipment."
+msgstr "Expédié - Statut de l'expédition."
+
+#. module: msf_outgoing
+#: report:labels:0
+msgid "N"
+msgstr "S (N)"
+
+#. module: msf_outgoing
+#: view:stock.move.memory.shipment.create:0
+msgid "Number to Ship"
+msgstr "Nombre à Expédier"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/wizard/stock_partial_move.py:111
+#, python-format
+msgid "Element %s not found."
+msgstr "Le système n'a pas trouvé l'élément %s."
+
+#. module: msf_outgoing
+#: model:ir.model,name:msf_outgoing.model_product_product
+#: field:stock.move.memory.picking,product_id:0
+#: field:stock.move.memory.ppl,product_id:0
+#: field:stock.move.memory.returnproducts,product_id:0
+msgid "Product"
+msgstr "Produit"
+
+#. module: msf_outgoing
+#: model:ir.ui.menu,name:msf_outgoing.menu_action_picking_ticket
+#: selection:stock.picking,subtype:0
+msgid "Picking"
+msgstr "Piquage"
+
+#. module: msf_outgoing
+#: report:picking.ticket:0
+msgid "FO Qty:"
+msgstr "Qté CdT:"
+
+#. module: msf_outgoing
+#: field:stock.move.memory.picking,prodlot_id:0
+#: field:stock.move.memory.ppl,prodlot_id:0
+#: field:stock.move.memory.returnproducts,prodlot_id:0
+msgid "Production Lot"
+msgstr "Lot de Production"
+
+#. module: msf_outgoing
+#: field:stock.picking,line_state:0
+msgid "Lines state"
+msgstr "Lines state"
+
+#. module: msf_outgoing
+#: field:shipment.additionalitems,shipment_id:0
+#: view:stock.move:0
+msgid "Shipment"
+msgstr "Shipment"
+
+#. module: msf_outgoing
+#: field:stock.move.memory.families,wizard_id:0
+#: field:stock.move.memory.picking,wizard_id:0
+#: field:stock.move.memory.picking,wizard_pick_id:0
+#: field:stock.move.memory.ppl,wizard_id:0
+#: field:stock.move.memory.ppl,wizard_pick_id:0
+#: field:stock.move.memory.returnproducts,wizard_id:0
+#: field:stock.move.memory.returnproducts,wizard_pick_id:0
+#: field:stock.move.memory.shipment.create,wizard_id:0
+#: field:stock.move.memory.shipment.returnpacks,wizard_id:0
+#: field:stock.move.memory.shipment.returnpacksfromshipment,wizard_id:0
+msgid "Wizard"
+msgstr "Assistant"
+
+#. module: msf_outgoing
+#: model:process.node,note:msf_outgoing.process_node_draft_pick_ship
+#: model:process.node,note:msf_outgoing.process_node_draft_ship_ship
+#: model:process.node,note:msf_outgoing.process_node_pick_ship
+#: model:process.node,note:msf_outgoing.process_node_ppl_ship
+msgid "Shipment subflow."
+msgstr "Sous-flux Expédition"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/wizard/split_memory_move.py:97
+#, python-format
+msgid "Selected quantity must be greater than 0.0."
+msgstr "Quantité Sélectionnée doit être supérieure à 0.0."
+
+#. module: msf_outgoing
+#: report:labels:0
+msgid "Specific Information:"
+msgstr "Information Spécifique:"
+
+#. module: msf_outgoing
+#: field:memory.additionalitems,quantity:0
+#: report:packing.list:0
+#: field:shipment.additionalitems,quantity:0
+#: field:stock.move.memory.shipment.additionalitems,quantity:0
+msgid "Quantity"
+msgstr "Quantity"
+
+#. module: msf_outgoing
+#: view:stock.picking:0
+msgid "Done"
+msgstr "Terminé"
+
+#. module: msf_outgoing
+#: field:stock.move.memory.picking,kc_check:0
+#: field:stock.move.memory.ppl,kc_check:0
+#: field:stock.move.memory.returnproducts,kc_check:0
+msgid "KC"
+msgstr "GF (KC)"
+
+#. module: msf_outgoing
+#: selection:stock.move.memory.families,integrity_status:0
+#: selection:stock.move.memory.in,integrity_status:0
+#: selection:stock.move.memory.out,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.ppl,integrity_status:0
+#: selection:stock.move.memory.ppl,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.returnproducts,integrity_status:0
+#: selection:stock.move.memory.returnproducts,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.shipment.create,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacks,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacksfromshipment,integrity_status:0
+msgid "The first sequence must start with 1"
+msgstr "La première séquence doit commencer par un 1"
+
+#. module: msf_outgoing
+#: report:pro.forma.invoice:0
+msgid "Pro Forma Invoice -"
+msgstr "Facture Pro Forma -"
+
+#. module: msf_outgoing
+#: model:ir.actions.act_window,name:msf_outgoing.action_shipment
+msgid "Shipment Lists"
+msgstr "Expédition - Listes"
+
+#. module: msf_outgoing
+#: field:pack.family.memory,move_lines:0
+#: view:stock.picking:0
+msgid "Stock Moves"
+msgstr "Mouvements de Stock"
+
+#. module: msf_outgoing
+#: report:picking.ticket:0
+msgid "Product Description:"
+msgstr "Description Produit:"
+
+#. module: msf_outgoing
+#: constraint:product.product:0
+msgid "Error: Invalid ean code"
+msgstr "Erreur: code EAN invalide"
+
+#. module: msf_outgoing
+#: model:process.node,note:msf_outgoing.process_node_ship_delivered
+msgid "Delivered state of shipment."
+msgstr "Statut Livré de l'Expédition."
+
+#. module: msf_outgoing
+#: selection:stock.picking,subtype:0
+msgid "Standard"
+msgstr "Standard"
+
+#. module: msf_outgoing
+#: view:stock.picking:0
+msgid "PT"
+msgstr "PT/Psychotropes"
+
+#. module: msf_outgoing
+#: report:picking.ticket:0
+msgid "To Parcel"
+msgstr "À Parcelle"
+
+#. module: msf_outgoing
+#: constraint:sale.order:0
+msgid "You cannot validate this sale order because it contains a line with an inactive product"
+msgstr "Vous ne pouvez pas valider cette commande client car elle contient des lignes avec un produit inactif"
+
+#. module: msf_outgoing
+#: model:ir.module.module,shortdesc:msf_outgoing.module_meta_information
+msgid "MSF Outgoing Management"
+msgstr "MSF Gestion des Sortants"
+
+#. module: msf_outgoing
+#: model:process.node,name:msf_outgoing.process_node_ppl_assigned
+msgid "PPL - available"
+msgstr "Liste de Pré-Colisage - disponible"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/report/certificate_donation.py:40
+#, python-format
+msgid "Certificate of Donation is only available for Shipment Objects (not draft)!"
+msgstr "Certificat de Donation n'est disponible que pour les Objets d'Expédition (pas brouillon)!"
+
+#. module: msf_outgoing
+#: field:pack.family.memory,state:0
+#: view:shipment:0
+#: field:shipment,state:0
+#: view:stock.picking:0
+msgid "State"
+msgstr "Statut"
+
+#. module: msf_outgoing
+#: field:pack.family.memory,num_of_packs:0
+#: field:stock.move,num_of_packs:0
+#: field:stock.move.memory.ppl,num_of_packs:0
+#: field:stock.move.memory.shipment.create,num_of_packs:0
+#: field:stock.move.memory.shipment.returnpacks,num_of_packs:0
+#: field:stock.move.memory.shipment.returnpacksfromshipment,num_of_packs:0
+#: field:stock.picking,num_of_packs:0
+msgid "#Packs"
+msgstr "#Colis"
+
+#. module: msf_outgoing
+#: sql_constraint:product.product:0
+msgid "The \"Product Code\" must be unique"
+msgstr "Le \"Code produit\" doit être unique"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/msf_outgoing.py:1285
+#, python-format
+msgid "Only draft picking tickets can be deleted."
+msgstr "Seuls les brouillons de bons de prélèvement peuvent être supprimés"
+
+#. module: msf_outgoing
+#: report:certificate.free.gift:0
+#: report:packing.list:0
+msgid "FO ref:"
+msgstr "CdT Réf:"
+
+#. module: msf_outgoing
+#: selection:stock.move.memory.families,integrity_status:0
+#: selection:stock.move.memory.in,integrity_status:0
+#: selection:stock.move.memory.out,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.ppl,integrity_status:0
+#: selection:stock.move.memory.ppl,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.returnproducts,integrity_status:0
+#: selection:stock.move.memory.returnproducts,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.shipment.create,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacks,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacksfromshipment,integrity_status:0
+msgid "Asset is Missing"
+msgstr "Bien manquant"
+
+#. module: msf_outgoing
+#: view:stock.picking:0
+msgid "Return Products..."
+msgstr "Retour de Produits…"
+
+#. module: msf_outgoing
+#: view:ppl.customize.label:0
+#: field:ppl.customize.label,notes:0
+#: view:stock.picking:0
+msgid "Notes"
+msgstr "Notes"
+
+#. module: msf_outgoing
+#: model:process.transition,name:msf_outgoing.process_transition_ship_shipped_done
+#: model:process.transition,note:msf_outgoing.process_transition_ship_shipped_done
+msgid "From shipped to closed."
+msgstr "D'expédié à fermé."
+
+#. module: msf_outgoing
+#: model:process.transition,name:msf_outgoing.process_transition_out_done_delivered
+#: model:process.transition,name:msf_outgoing.process_transition_ship_done_delivered
+#: model:process.transition,note:msf_outgoing.process_transition_out_done_delivered
+#: model:process.transition,note:msf_outgoing.process_transition_ship_done_delivered
+msgid "From closed to delivered."
+msgstr "De fermé à livré."
+
+#. module: msf_outgoing
+#: model:ir.actions.report.xml,name:msf_outgoing.labels
+msgid "Labels"
+msgstr "Étiquettes"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/report/packing_list.py:40
+#, python-format
+msgid "Packing List is only available for Shipment Objects (not draft)!"
+msgstr "Liste de Colisage n'est disponible que pour les Objets d'Expédition (pas brouillon)!"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/wizard/create_picking.py:207
+#: code:addons/msf_outgoing/wizard/shipment.py:214
+#, python-format
+msgid "Process Document"
+msgstr "Traiter document"
+
+#. module: msf_outgoing
+#: field:stock.move.memory.picking,composition_list_id:0
+#: field:stock.move.memory.ppl,composition_list_id:0
+#: field:stock.move.memory.returnproducts,composition_list_id:0
+msgid "Kit"
+msgstr "Kit"
+
+#. module: msf_outgoing
+#: field:memory.additionalitems,comment:0
+#: report:packing.list:0
+#: field:shipment.additionalitems,comment:0
+#: field:stock.move.memory.shipment.additionalitems,comment:0
+msgid "Comment"
+msgstr "Comment"
+
+#. module: msf_outgoing
+#: view:ppl.customize.label:0
+#: field:stock.picking,ppl_customize_label:0
+msgid "Labels Customization"
+msgstr "Personnalisation des Etiquettes"
+
+#. module: msf_outgoing
+#: field:stock.move.memory.picking,move_id:0
+#: field:stock.move.memory.ppl,move_id:0
+#: field:stock.move.memory.returnproducts,move_id:0
+msgid "Move"
+msgstr "Transaction"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/wizard/split_memory_move.py:101
+#, python-format
+msgid "Selected quantity (%0.1f %s) exceeds the available quantity (%0.1f %s)"
+msgstr "Quantité Sélectionnée (%0.1f %s) est supérieure à la quantité disponible (%0.1f %s)"
+
+#. module: msf_outgoing
+#: report:certificate.free.gift:0
+#: report:invoice:0
+#: report:packing.list:0
+#: report:pre.packing.list:0
+#: report:pro.forma.invoice:0
+msgid "Total Weight"
+msgstr "Poids Total"
+
+#. module: msf_outgoing
+#: model:process.node,name:msf_outgoing.process_node_out_backorder
+msgid "Backorder"
+msgstr "Livraison en attente"
+
+#. module: msf_outgoing
+#: field:pack.family.memory,sale_order_id:0
+#: report:pre.packing.list:0
+#: field:stock.move.memory.shipment.create,sale_order_id:0
+#: field:stock.move.memory.shipment.returnpacks,sale_order_id:0
+#: field:stock.move.memory.shipment.returnpacksfromshipment,sale_order_id:0
+msgid "Sale Order Ref"
+msgstr "Réf Commande de Terrain"
+
+#. module: msf_outgoing
+#: sql_constraint:sale.order:0
+msgid "Order Reference must be unique !"
+msgstr "La Référence de la Commande doit être unique !"
+
+#. module: msf_outgoing
+#: field:memory.additionalitems,additional_item_id:0
+#: field:stock.move.memory.shipment.additionalitems,additional_item_id:0
+msgid "Additional item id"
+msgstr "Additional item id"
+
+#. module: msf_outgoing
+#: constraint:stock.move:0
+msgid "You must assign a batch number for this product."
+msgstr "Vous devez mentionner un numéro de lot pour ce produit."
+
+#. module: msf_outgoing
+#: selection:stock.move.memory.families,integrity_status:0
+#: selection:stock.move.memory.in,integrity_status:0
+#: selection:stock.move.memory.out,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.ppl,integrity_status:0
+#: selection:stock.move.memory.ppl,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.returnproducts,integrity_status:0
+#: selection:stock.move.memory.returnproducts,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.shipment.create,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacks,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacksfromshipment,integrity_status:0
+msgid "Batch Number is Missing"
+msgstr "Numéro de lot manquant"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/msf_outgoing.py:393
+#: code:addons/msf_outgoing/wizard/shipment.py:227
+#, python-format
+msgid "Return Packs"
+msgstr "Renvoyer colis"
+
+#. module: msf_outgoing
+#: report:labels:0
+msgid "Parcel No:"
+msgstr " Numéro de la Parcelle:"
+
+#. module: msf_outgoing
+#: field:memory.additionalitems,uom:0
+#: report:packing.list:0
+#: field:shipment.additionalitems,uom:0
+#: field:stock.move.memory.shipment.additionalitems,uom:0
+msgid "UOM"
+msgstr "UOM"
+
+#. module: msf_outgoing
+#: field:stock.move,virtual_available:0
+msgid "Virtual Stock"
+msgstr "Stock Virtuel"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/msf_outgoing.py:2595
+#: model:ir.actions.report.xml,name:msf_outgoing.pre_packing_list
+#: model:process.process,name:msf_outgoing.process_process_ppl0
+#: view:stock.picking:0
+#, python-format
+msgid "Pre-Packing List"
+msgstr "Liste de pré-colisage"
+
+#. module: msf_outgoing
+#: report:certificate.free.gift:0
+msgid "Free Gift Certificate -"
+msgstr "Certificat de Don Gratuit -"
+
+#. module: msf_outgoing
+#: field:shipment,parent_id:0
+msgid "Parent shipment"
+msgstr "Expédition Parent "
+
+#. module: msf_outgoing
+#: model:ir.actions.act_window,help:msf_outgoing.action_closed_shipment
+msgid "This is the list of all shipment lines with product information"
+msgstr "This is the list of all shipment lines with product information"
+
+#. module: msf_outgoing
+#: view:stock.move.memory.shipment.returnpacks:0
+#: view:stock.move.memory.shipment.returnpacksfromshipment:0
+msgid "Weight to Return"
+msgstr "Poids à Retourner"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/report/invoice.py:40
+#, python-format
+msgid "Invoice is only available for Shipment Objects (not draft)!"
+msgstr "Facture non disponible pour les Objets d'Expédition (pas brouillon)!"
+
+#. module: msf_outgoing
+#: report:invoice:0
+msgid "SO ref:"
+msgstr "CdT Réf:"
+
+#. module: msf_outgoing
+#: field:stock.move.memory.shipment.returnpacksfromshipment,return_from:0
+msgid "Return From"
+msgstr "Retour De"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/wizard/create_picking.py:214
+#: code:addons/msf_outgoing/wizard/shipment.py:214
+#, python-format
+msgid "Clear all"
+msgstr "Effacer tout"
+
+#. module: msf_outgoing
+#: report:labels:0
+msgid "Project Destination:"
+msgstr "Projet Destinataire:"
+
+#. module: msf_outgoing
+#: selection:pack.family.memory,state:0
+#: selection:shipment,state:0
+msgid "Cancelled"
+msgstr "Annulé"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/msf_outgoing.py:505
+#: code:addons/msf_outgoing/msf_outgoing.py:2435
+#: code:addons/msf_outgoing/msf_outgoing.py:2845
+#: model:ir.actions.report.xml,name:msf_outgoing.picking_ticket
+#: model:process.node,name:msf_outgoing.process_node_draft_pick_picking
+#: model:process.process,name:msf_outgoing.process_process_picking0
+#: view:stock.picking:0
+#, python-format
+msgid "Picking Ticket"
+msgstr "Bon de piquage"
+
+#. module: msf_outgoing
+#: model:ir.model,name:msf_outgoing.model_stock_move_memory_shipment_returnpacks
+msgid "stock.move.memory.shipment.returnpacks"
+msgstr "stock.move.memory.shipment.returnpacks"
+
+#. module: msf_outgoing
+#: report:picking.ticket:0
+msgid "Length"
+msgstr "Longueur"
+
+#. module: msf_outgoing
+#: view:stock.picking:0
+msgid "Pack..."
+msgstr "Colis..."
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/wizard/create_picking.py:520
+#, python-format
+msgid "Processing quantity %d %s for %s is larger than the available quantity in Batch Number %s (%d) !"
+msgstr "Processing quantity %d %s for %s is larger than the available quantity in Batch Number %s (%d) !"
+
+#. module: msf_outgoing
+#: model:process.node,name:msf_outgoing.process_node_out_delivered
+msgid "Out - delivered"
+msgstr "Sortie - livré"
+
+#. module: msf_outgoing
+#: model:process.node,note:msf_outgoing.process_node_draft_pick_draft
+msgid "Draft state of draft picking ticket."
+msgstr "Statut brouillon du brouillon Bon de Piquage."
+
+#. module: msf_outgoing
+#: constraint:stock.picking:0
+msgid "You cannot validate this document because it contains a line with an inactive product"
+msgstr "Vous ne pouvez pas valider ce document car il contient des lignes avec un produit inactif"
+
+#. module: msf_outgoing
+#: model:ir.model,name:msf_outgoing.model_stock_move_memory_in
+msgid "stock.move.memory.in"
+msgstr "stock.move.memory.in"
+
+#. module: msf_outgoing
+#: model:process.node,name:msf_outgoing.process_node_out_done
+msgid "Out - closed"
+msgstr "Sortie - fermé"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/msf_outgoing.py:973
+#, python-format
+msgid "No %s journal found!"
+msgstr "Le système n'a pas trouvé de journal %s !"
+
+#. module: msf_outgoing
+#: field:split.memory.move,quantity:0
+#: view:stock.move.memory.ppl:0
+msgid "Quantity"
+msgstr "Quantité"
+
+#. module: msf_outgoing
+#: model:ir.model,name:msf_outgoing.model_pack_type
+#: field:pack.family.memory,pack_type:0
+#: field:stock.move,pack_type:0
+#: field:stock.move.memory.families,pack_type:0
+#: field:stock.move.memory.shipment.create,pack_type:0
+#: field:stock.move.memory.shipment.returnpacks,pack_type:0
+#: field:stock.move.memory.shipment.returnpacksfromshipment,pack_type:0
+msgid "Pack Type"
+msgstr "Colis - Type"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/wizard/create_picking.py:240
+#, python-format
+msgid "Next"
+msgstr "Suivant"
+
+#. module: msf_outgoing
+#: report:certificate.free.gift:0
+msgid ":"
+msgstr ":"
+
+#. module: msf_outgoing
+#: field:stock.move,invoice_line_id:0
+msgid "Invoice line"
+msgstr "Ligne de facture"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/msf_outgoing.py:806
+#, python-format
+msgid "Shipment Date of the Field Order '%s' has been updated to %s."
+msgstr "Date d'Expédition de la Commande Client '%s' a été mise à jour au %s."
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/msf_outgoing.py:360
+#, python-format
+msgid "The new Shipment %s has been created."
+msgstr "Les nouveaux %s d'expédition ont été créés."
+
+#. module: msf_outgoing
+#: report:certificate.free.gift:0
+msgid "∑ Value"
+msgstr "∑ Value"
+
+#. module: msf_outgoing
+#: field:pack.family.memory,total_volume:0
+#: field:shipment,total_volume:0
+#: field:stock.picking,total_volume:0
+msgid "Total Volume[dm³]"
+msgstr "Volume Total [dm³]"
+
+#. module: msf_outgoing
+#: report:certificate.free.gift:0
+#: report:invoice:0
+#: report:packing.list:0
+#: view:stock.picking:0
+msgid "Qty"
+msgstr "Qté"
+
+#. module: msf_outgoing
+#: model:ir.module.module,description:msf_outgoing.module_meta_information
+msgid "\n"
+"        MSF module covering business needs for outgoing movement from\n"
+"        an MSF instance.\n"
+"\n"
+"        Three main phases are used to describe the process:\n"
+"            - PICKING\n"
+"            - PACKING\n"
+"            - SHIPMENT\n"
+"        "
+msgstr "\n"
+"       Module MSF couvrant les affaires lors de mouvements sortants d'une instance MSF.\n"
+"\n"
+"         Trois phases principales sont utilisées pour décrire le processus:\n"
+"             - PRELEVEMENT\n"
+"             - COLISAGE\n"
+"             - EXPÉDITION"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/report/pre_packing_list.py:40
+#, python-format
+msgid "Pre-Packing List is only available for completed Pre-Packing List Objects!"
+msgstr "Liste de Pré-Colisage n'est disponible que des objets d'une liste de Pré-Colisage complètée!"
+
+#. module: msf_outgoing
+#: report:packing.list:0
+msgid "Volume"
+msgstr "Volume"
+
+#. module: msf_outgoing
+#: report:certificate.free.gift:0
+#: report:invoice:0
+#: report:packing.list:0
+#: report:pre.packing.list:0
+msgid "#Packs:"
+msgstr "#Colis: "
+
+#. module: msf_outgoing
+#: view:shipment:0
+msgid "Cancel Shipment"
+msgstr "Annuler Expédition"
+
+#. module: msf_outgoing
+#: selection:pack.family.memory,state:0
+#: view:shipment:0
+#: selection:shipment,state:0
+#: view:stock.picking:0
+msgid "Draft"
+msgstr "Brouillon"
+
+#. module: msf_outgoing
+#: model:process.node,name:msf_outgoing.process_node_pick_assigned
+msgid "Picking - available"
+msgstr "Piquage - disponible"
+
+#. module: msf_outgoing
+#: report:picking.ticket:0
+msgid "Picking Ticket -"
+msgstr "Bon de Piquage -"
+
+#. module: msf_outgoing
+#: view:stock.move.memory.shipment.create:0
+msgid "Weight to Ship [kg]"
+msgstr "Poids à Expédier (kg)"
+
+#. module: msf_outgoing
+#: model:ir.model,name:msf_outgoing.model_stock_move_memory_picking
+msgid "stock.move.memory.picking"
+msgstr "stock.move.memory.picking"
+
+#. module: msf_outgoing
+#: view:shipment:0
+msgid "Carrier"
+msgstr "Transporteur"
+
+#. module: msf_outgoing
+#: report:pre.packing.list:0
+msgid "Pack Weight:"
+msgstr "Colis Poids:"
+
+#. module: msf_outgoing
+#: view:stock.picking:0
+msgid "Journal"
+msgstr "Journal"
+
+#. module: msf_outgoing
+#: model:ir.actions.act_window,name:msf_outgoing.action_closed_shipment
+#: model:ir.ui.menu,name:msf_outgoing.menu_action_closed_shipment
+msgid "Closed Shipment Lists"
+msgstr "Closed Shipment Lists"
+
+#. module: msf_outgoing
+#: report:certificate.free.gift:0
+#: report:invoice:0
+#: report:packing.list:0
+#: report:pro.forma.invoice:0
+msgid "To:"
+msgstr "Vers:"
+
+#. module: msf_outgoing
+#: field:stock.move.memory.ppl,qty_per_pack:0
+msgid "Qty p.p."
+msgstr "Qté par colis"
+
+#. module: msf_outgoing
+#: report:certificate.free.gift:0
+#: report:invoice:0
+#: report:packing.list:0
+#: report:pre.packing.list:0
+msgid "From p:"
+msgstr "De p.:"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/msf_outgoing.py:526
+#: code:addons/msf_outgoing/wizard/shipment.py:230
+#, python-format
+msgid "Return Packs from Shipment"
+msgstr "Renvoyer colis de la livraison"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/wizard/stock_partial_move.py:280
+#, python-format
+msgid "You must assign a positive \"to pack\" value."
+msgstr "Vous devez attribuer un poids au colis."
+
+#. module: msf_outgoing
+#: field:stock.move.memory.picking,kit_mem_check:0
+#: field:stock.move.memory.ppl,kit_mem_check:0
+#: field:stock.move.memory.returnproducts,kit_mem_check:0
+msgid "Kit Mem Check"
+msgstr "Kit - Mem Vérification"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/msf_outgoing.py:2880
+#, python-format
+msgid "Some Picking Tickets are in progress. Return products to stock from ppl and shipment and try to cancel again."
+msgstr "Certains bons de piquage sont en cours. Renvoyer les produits au stock à partir de ppl et expédition et réessayer."
+
+#. module: msf_outgoing
+#: model:ir.model,name:msf_outgoing.model_pack_family_memory
+msgid "pack.family.memory"
+msgstr "pack.family.memory"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/msf_outgoing.py:704
+#, python-format
+msgid "Packs from the shipped Shipment (%s) have been returned to %s location."
+msgstr "Packs from the shipped Shipment (%s) have been returned to %s location."
+
+#. module: msf_outgoing
+#: report:picking.ticket:0
+msgid "Free on Stock"
+msgstr "Disponible en Stock"
+
+#. module: msf_outgoing
+#: model:process.node,note:msf_outgoing.process_node_pick_assigned
+msgid "Available state of picking ticket."
+msgstr "Etat de disponibilité du bon de Piquage"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/msf_outgoing.py:490
+#, python-format
+msgid "Packs from the draft Shipment (%s) have been returned to stock."
+msgstr "Colis d'une Expédition sous statut brouillon (%s) a été retourné en stock."
+
+#. module: msf_outgoing
+#: field:stock.move.memory.picking,uom_category:0
+#: field:stock.move.memory.ppl,uom_category:0
+#: field:stock.move.memory.returnproducts,uom_category:0
+msgid "unknown"
+msgstr "unknown"
+
+#. module: msf_outgoing
+#: view:stock.move.memory.picking:0
+#: view:stock.move.memory.ppl:0
+#: view:stock.move.memory.returnproducts:0
+msgid "UOM"
+msgstr "UdM"
+
+#. module: msf_outgoing
+#: field:shipment,registration:0
+msgid "Registration"
+msgstr "Enregistrement"
+
+#. module: msf_outgoing
+#: selection:stock.move.memory.families,integrity_status:0
+#: selection:stock.move.memory.in,integrity_status:0
+#: selection:stock.move.memory.out,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.ppl,integrity_status:0
+#: selection:stock.move.memory.ppl,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.returnproducts,integrity_status:0
+#: selection:stock.move.memory.returnproducts,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.shipment.create,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacks,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacksfromshipment,integrity_status:0
+msgid "To value must be greater or equal to From value"
+msgstr " 'A Valeur' doit être supérieure ou égale à  'De Valeur'"
+
+#. module: msf_outgoing
+#: report:pre.packing.list:0
+msgid "Total Number of Packs"
+msgstr "Nombre Total de Colis"
+
+#. module: msf_outgoing
+#: report:picking.ticket:0
+#: field:stock.move.memory.picking,expiry_date:0
+#: field:stock.move.memory.ppl,expiry_date:0
+#: field:stock.move.memory.returnproducts,expiry_date:0
+msgid "Expiry Date"
+msgstr "Date d'Expiration"
+
+#. module: msf_outgoing
+#: selection:stock.move.memory.families,integrity_status:0
+#: selection:stock.move.memory.in,integrity_status:0
+#: selection:stock.move.memory.out,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.ppl,integrity_status:0
+#: selection:stock.move.memory.ppl,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.returnproducts,integrity_status:0
+#: selection:stock.move.memory.returnproducts,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.shipment.create,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacks,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacksfromshipment,integrity_status:0
+msgid "Selected Sequence is out of range"
+msgstr "Séquence Sélectionnée est hors limites"
+
+#. module: msf_outgoing
+#: view:shipment:0
+msgid "Return Packs to Stock..."
+msgstr "Retour de Colis vers Stock…"
+
+#. module: msf_outgoing
+#: report:certificate.free.gift:0
+#: report:invoice:0
+#: field:pack.family.memory,total_amount:0
+#: report:packing.list:0
+#: report:pro.forma.invoice:0
+#: field:shipment,total_amount:0
+#: field:stock.move,total_amount:0
+#: field:stock.picking,total_amount:0
+msgid "Total Amount"
+msgstr "Montant Total"
+
+#. module: msf_outgoing
+#: view:stock.picking:0
+#: selection:stock.picking,line_state:0
+msgid "Not available"
+msgstr "Not available"
+
+#. module: msf_outgoing
+#: model:process.node,note:msf_outgoing.process_node_out_done
+msgid "Closed state of incoming product."
+msgstr "Statut fermé du produit entrant"
+
+#. module: msf_outgoing
+#: field:stock.move.memory.in,change_reason:0
+#: field:stock.move.memory.out,change_reason:0
+#: field:stock.move.memory.picking,change_reason:0
+#: field:stock.move.memory.ppl,change_reason:0
+#: field:stock.move.memory.returnproducts,change_reason:0
+msgid "Change Reason"
+msgstr "Raison du Changement"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/msf_outgoing.py:493
+#: code:addons/msf_outgoing/msf_outgoing.py:2823
+#: code:addons/msf_outgoing/msf_outgoing.py:2909
+#, python-format
+msgid "The corresponding Draft Picking Ticket (%s) has been updated."
+msgstr "Le bon de piquage correspondant (%s) en mode brouillon a été mis à jour."
+
+#. module: msf_outgoing
+#: field:stock.move,sale_order_line_number:0
+msgid "Sale Order Line Number"
+msgstr "Commande de Terrain – Numéro de Ligne"
+
+#. module: msf_outgoing
+#: model:process.node,name:msf_outgoing.process_node_ship_shipped
+msgid "Shipment - shipped"
+msgstr "Expédition - expédiée"
+
+#. module: msf_outgoing
+#: field:stock.move.memory.in,line_number:0
+#: field:stock.move.memory.out,line_number:0
+#: field:stock.move.memory.picking,line_number:0
+#: field:stock.move.memory.ppl,line_number:0
+#: field:stock.move.memory.returnproducts,line_number:0
+msgid "Line"
+msgstr "Ligne"
+
+#. module: msf_outgoing
+#: model:stock.location,name:msf_outgoing.stock_location_distribution
+msgid "Distribution"
+msgstr "Allocation"
+
+#. module: msf_outgoing
+#: model:process.node,name:msf_outgoing.process_node_out_confirmed
+msgid "Out - not available"
+msgstr "Sortie - non disponible"
+
+#. module: msf_outgoing
+#: model:process.node,name:msf_outgoing.process_node_out_assigned
+msgid "Out - available"
+msgstr "Sortie - disponible"
+
+#. module: msf_outgoing
+#: model:process.node,name:msf_outgoing.process_node_draft_ship_draft
+msgid "Draft Ship. - draft"
+msgstr "Brouillon Piquage - brouillon"
+
+#. module: msf_outgoing
+#: selection:stock.picking,flow_type:0
+msgid "Full"
+msgstr "Complet"
+
+#. module: msf_outgoing
+#: field:shipment,date_of_departure:0
+msgid "Date of Departure"
+msgstr "Date de Départ"
+
+#. module: msf_outgoing
+#: field:ppl.customize.label,destination_address:0
+msgid "Destination Address"
+msgstr "Adresse de Destination"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/wizard/create_picking.py:519
+#: code:addons/msf_outgoing/wizard/create_picking.py:542
+#: code:addons/msf_outgoing/wizard/create_picking.py:607
+#: code:addons/msf_outgoing/wizard/create_picking.py:703
+#: code:addons/msf_outgoing/wizard/shipment.py:442
+#, python-format
+msgid "Processing Error"
+msgstr "Erreur de traitement"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/msf_outgoing.py:2884
+#, python-format
+msgid "The shipment process is completed and cannot be canceled!"
+msgstr "La procédure d'expédition est complete et ne peut être annulée!"
+
+#. module: msf_outgoing
+#: selection:pack.family.memory,state:0
+msgid "Returned to Stock"
+msgstr "Retourné en Stock"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/msf_outgoing.py:3519
+#, python-format
+msgid "Shipment Process in Progress."
+msgstr "Processus d'expédition en cours."
+
+#. module: msf_outgoing
+#: field:pack.family.memory,draft_packing_id:0
+#: field:stock.move.memory.shipment.create,draft_packing_id:0
+#: field:stock.move.memory.shipment.returnpacks,draft_packing_id:0
+#: field:stock.move.memory.shipment.returnpacksfromshipment,draft_packing_id:0
+msgid "Draft Packing Ref"
+msgstr "Référence du Brouillon Colisage"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/msf_outgoing.py:298
+#: code:addons/msf_outgoing/wizard/shipment.py:224
+#, python-format
+msgid "Create Shipment"
+msgstr "Créer une Expédition"
+
+#. module: msf_outgoing
+#: selection:stock.move.memory.families,integrity_status:0
+#: selection:stock.move.memory.in,integrity_status:0
+#: selection:stock.move.memory.out,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.ppl,integrity_status:0
+#: selection:stock.move.memory.ppl,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.returnproducts,integrity_status:0
+#: selection:stock.move.memory.returnproducts,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.shipment.create,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacks,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacksfromshipment,integrity_status:0
+msgid "Src Location is missing"
+msgstr "Zone Source est manquante"
+
+#. module: msf_outgoing
+#: view:stock.picking:0
+msgid "Unit Of Measure"
+msgstr "Unité de mesure"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/wizard/create_picking.py:220
+#: code:addons/msf_outgoing/wizard/shipment.py:214
+#: report:picking.ticket:0
+#: view:stock.picking:0
+#, python-format
+msgid "Products"
+msgstr "Produits"
+
+#. module: msf_outgoing
+#: model:ir.actions.act_window,help:msf_outgoing.action_ppl
+msgid "This is the list of all ppl that have been picked."
+msgstr "Ceci est la liste de tous les Liste de pré-colisage qui ont été prélevés"
+
+#. module: msf_outgoing
+#: field:stock.picking,previous_step_ids:0
+msgid "Previous Step ids"
+msgstr "Etape précédente id's"
+
+#. module: msf_outgoing
+#: view:shipment:0
+msgid "Validate"
+msgstr "Valider"
+
+#. module: msf_outgoing
+#: report:certificate.free.gift:0
+msgid "P. Weight [kg]:"
+msgstr "C. Poids (kg)"
+
+#. module: msf_outgoing
+#: report:pre.packing.list:0
+msgid "Total Weight:"
+msgstr "Poids Total:"
+
+#. module: msf_outgoing
+#: report:certificate.free.gift:0
+msgid "Pack Value"
+msgstr "Pack Value"
+
+#. module: msf_outgoing
+#: model:ir.model,name:msf_outgoing.model_sale_order
+msgid "Sales Order"
+msgstr "Commande de Terrain"
+
+#. module: msf_outgoing
+#: model:ir.model,name:msf_outgoing.model_stock_warehouse
+#: field:stock.picking,warehouse_id:0
+msgid "Warehouse"
+msgstr "Entrepôt"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/wizard/split_memory_move.py:97
+#: code:addons/msf_outgoing/wizard/split_memory_move.py:101
+#, python-format
+msgid "Error!"
+msgstr "Erreur!"
+
+#. module: msf_outgoing
+#: field:stock.move.memory.picking,location_supplier_customer_mem_out:0
+#: field:stock.move.memory.ppl,location_supplier_customer_mem_out:0
+#: field:stock.move.memory.returnproducts,location_supplier_customer_mem_out:0
+msgid "Location Supplier Customer"
+msgstr "Lieu fournisseur client"
+
+#. module: msf_outgoing
+#: model:process.transition,name:msf_outgoing.process_transition_draft_pick_draft_done
+#: model:process.transition,name:msf_outgoing.process_transition_draft_ship_draft_done
+#: model:process.transition,note:msf_outgoing.process_transition_draft_pick_draft_done
+#: model:process.transition,note:msf_outgoing.process_transition_draft_ship_draft_done
+msgid "From draft to closed."
+msgstr "De brouillon à fermé."
+
+#. module: msf_outgoing
+#: view:stock.picking:0
+msgid "Expected Pick Date"
+msgstr "Date Prévue de Piquage"
+
+#. module: msf_outgoing
+#: model:process.node,note:msf_outgoing.process_node_out_draft
+msgid "Draft state of incoming product."
+msgstr "Statut brouillon du brouillon Produit entrant"
+
+#. module: msf_outgoing
+#: view:shipment:0
+msgid "Validate Delivery"
+msgstr "Valider Livraison"
+
+#. module: msf_outgoing
+#: view:shipment:0
+msgid "Create Shipment..."
+msgstr "Créer une Expédition…"
+
+#. module: msf_outgoing
+#: field:stock.move.memory.picking,dg_check:0
+#: field:stock.move.memory.ppl,dg_check:0
+#: field:stock.move.memory.returnproducts,dg_check:0
+msgid "DG"
+msgstr "MD (DG)"
+
+#. module: msf_outgoing
+#: report:labels:0
+msgid "Weight:"
+msgstr "Poids:"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/msf_outgoing.py:973
+#: code:addons/msf_outgoing/msf_outgoing.py:983
+#, python-format
+msgid "Warning"
+msgstr "Avertissement"
+
+#. module: msf_outgoing
+#: field:stock.picking,flow_type:0
+msgid "Flow Type"
+msgstr "Type de Flux"
+
+#. module: msf_outgoing
+#: model:process.node,note:msf_outgoing.process_node_out_delivered
+msgid "Delivered state of incoming product."
+msgstr "Statut Livré du produit entrant."
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/report/cargo_manifest.py:40
+#, python-format
+msgid "Cargo Manifest is only available for Shipment Objects (not draft)!"
+msgstr "Manifeste de fret n'est disponible que pour les Objets d'Expédition (pas brouillon)!"
+
+#. module: msf_outgoing
+#: model:ir.ui.menu,name:msf_outgoing.menu_action_ppl
+#: model:stock.location,name:msf_outgoing.stock_location_packing
+#: view:stock.picking:0
+#: selection:stock.picking,subtype:0
+msgid "Packing"
+msgstr "Colisage"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/msf_outgoing.py:931
+#, python-format
+msgid "Please put a partner on the shipment if you want to generate invoice."
+msgstr "Veuillez mentionner un partenaire sur l'expédition si vous voulez générer une facture."
+
+#. module: msf_outgoing
+#: model:ir.actions.act_window,help:msf_outgoing.action_pack_type_tree
+msgid "This is the list of all your pack types."
+msgstr "Ceci est la liste de tous vos types de colis."
+
+#. module: msf_outgoing
+#: field:pack.family.memory,width:0
+#: field:pack.type,width:0
+#: field:stock.move,width:0
+#: field:stock.move.memory.families,width:0
+#: field:stock.move.memory.shipment.create,width:0
+#: field:stock.move.memory.shipment.returnpacks,width:0
+#: field:stock.move.memory.shipment.returnpacksfromshipment,width:0
+msgid "Width [cm]"
+msgstr "Largeur [cm]"
+
+#. module: msf_outgoing
+#: field:stock.move.memory.picking,asset_check:0
+#: field:stock.move.memory.ppl,asset_check:0
+#: field:stock.move.memory.returnproducts,asset_check:0
+msgid "Asset Check"
+msgstr "Vérification du bien"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/wizard/stock_partial_move.py:401
+#, python-format
+msgid "You must assign a positive selected number of packs value or 0."
+msgstr "Vous devez attribuer 0 ou un nombre sélectionné positif à la valeur des colis ."
+
+#. module: msf_outgoing
+#: report:labels:0
+msgid "KC / "
+msgstr "GF (KC) / "
+
+#. module: msf_outgoing
+#: field:pack.family.memory,location_dest_id:0
+msgid "Dest. Loc."
+msgstr "Zone de Destination"
+
+#. module: msf_outgoing
+#: view:stock.picking:0
+msgid "Convert to Simple Out"
+msgstr "Convertir en Simple Sortie"
+
+#. module: msf_outgoing
+#: field:stock.move.memory.picking,exp_check:0
+#: field:stock.move.memory.ppl,exp_check:0
+#: field:stock.move.memory.returnproducts,exp_check:0
+msgid "Exp"
+msgstr "Exp"
+
+#. module: msf_outgoing
+#: report:picking.ticket:0
+#: field:shipment,partner_id:0
+#: field:shipment,partner_id2:0
+#: field:shipment.wizard,partner_id:0
+msgid "Customer"
+msgstr "Client"
+
+#. module: msf_outgoing
+#: field:shipment,transit_via:0
+msgid "Transit via"
+msgstr "Transit via"
+
+#. module: msf_outgoing
+#: field:pack.family.memory,amount:0
+#: field:stock.move,amount:0
+msgid "Pack Amount"
+msgstr "Valeur Colis"
+
+#. module: msf_outgoing
+#: selection:stock.picking,line_state:0
+msgid "Empty"
+msgstr "Empty"
+
+#. module: msf_outgoing
+#: model:process.node,note:msf_outgoing.process_node_pick_done
+msgid "Closed state of picking ticket."
+msgstr "Statut fermé du bon de Piquage"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/report/certificate_free_gift.py:40
+#, python-format
+msgid "Free Gift Certificate is only available for Shipment Objects (not draft)!"
+msgstr "Certificat de Don Gratuit n'est disponible que pour les Objets d'Expédition (pas brouillon)!"
+
+#. module: msf_outgoing
+#: field:shipment,shipment_expected_date:0
+msgid "Expected Ship Date"
+msgstr "Date Prévue d'Expédition"
+
+#. module: msf_outgoing
+#: model:process.node,name:msf_outgoing.process_node_ship_done
+msgid "Shipment - closed"
+msgstr "Expédition - fermé"
+
+#. module: msf_outgoing
+#: report:picking.ticket:0
+msgid "Type"
+msgstr "Type"
+
+#. module: msf_outgoing
+#: model:ir.model,name:msf_outgoing.model_memory_additionalitems
+#: model:ir.model,name:msf_outgoing.model_shipment_additionalitems
+#: model:ir.model,name:msf_outgoing.model_stock_move_memory_shipment_additionalitems
+#: report:packing.list:0
+#: view:shipment:0
+#: field:shipment,additional_items_ids:0
+#: view:shipment.additionalitems:0
+#: field:shipment.wizard,product_moves_shipment_additionalitems:0
+#: view:stock.move.memory.shipment.additionalitems:0
+msgid "Additional Items"
+msgstr "Additional Items"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/msf_outgoing.py:822
+#, python-format
+msgid "The Shipment %s has been shipped."
+msgstr "Les %s de l'expédition ont été envoyés."
+
+#. module: msf_outgoing
+#: report:pre.packing.list:0
+msgid "x"
+msgstr "x"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/msf_outgoing.py:1372
+#, python-format
+msgid "Corresponding Draft picking ticket is Closed. This picking ticket cannot be copied."
+msgstr "Le bon de piquage en mode brouillon correspondant est clôturé. Il est impossible de copier ce bon de piquage."
+
+#. module: msf_outgoing
+#: report:picking.ticket:0
+msgid "Qty per Parcel"
+msgstr "Qté par Parcelle"
+
+#. module: msf_outgoing
+#: report:certificate.free.gift:0
+msgid "CERTIFICATION: Médecins Sans Frontières declares that no exchange of foreign currency between the country of destination and …...................................................... (the country of origin) is involved in connection with this shipment and that the goods belonging to this shipment will be used for humanitarian purpose only."
+msgstr "CERTIFICATION: Médecins Sans Frontières déclare qu'aucun échange de devises entre les pays de destination et .................................. ....................... (le pays d'origine) n'a été effectué dans le cadre de cette expédition, et que les biens appartenant à cet envoi seront utilisés à des fins humanitaires seulement."
+
+#. module: msf_outgoing
+#: report:invoice:0
+#: report:pre.packing.list:0
+msgid "Pack Value:"
+msgstr "Colis - Valeur"
+
+#. module: msf_outgoing
+#: view:stock.picking:0
+msgid "Additional info"
+msgstr "Informations complémentaires"
+
+#. module: msf_outgoing
+#: view:shipment:0
+#: view:stock.picking:0
+msgid "Not Empty"
+msgstr "Non vide"
+
+#. module: msf_outgoing
+#: view:stock.picking:0
+#: selection:stock.picking,line_state:0
+msgid "Partially available"
+msgstr "Partially available"
+
+#. module: msf_outgoing
+#: view:stock.move:0
+msgid "Pack"
+msgstr "Colis"
+
+#. module: msf_outgoing
+#: model:process.node,note:msf_outgoing.process_node_ppl_assigned
+msgid "Available state of pre-packing list."
+msgstr "Etat de disponibilité de la liste de pré-colisage "
+
+#. module: msf_outgoing
+#: model:process.process,name:msf_outgoing.process_process_outgoing0
+msgid "Standard Outgoing"
+msgstr "Sortant Standard"
+
+#. module: msf_outgoing
+#: report:certificate.free.gift:0
+#: report:invoice:0
+#: report:packing.list:0
+#: report:pro.forma.invoice:0
+#: field:shipment,cargo_manifest_reference:0
+msgid "Cargo Manifest Reference"
+msgstr "Manifeste de fret - Référence"
+
+#. module: msf_outgoing
+#: model:process.node,name:msf_outgoing.process_node_ship_delivered
+msgid "Shipment - delivered"
+msgstr "Expédition - livrée"
+
+#. module: msf_outgoing
+#: model:process.node,name:msf_outgoing.process_node_pick_done
+msgid "Picking - closed"
+msgstr "Piquage – fermé"
+
+#. module: msf_outgoing
+#: selection:stock.move.memory.families,integrity_status:0
+#: selection:stock.move.memory.in,integrity_status:0
+#: selection:stock.move.memory.out,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.ppl,integrity_status:0
+#: selection:stock.move.memory.ppl,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.returnproducts,integrity_status:0
+#: selection:stock.move.memory.returnproducts,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.shipment.create,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacks,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacksfromshipment,integrity_status:0
+msgid "Too much quantity selected"
+msgstr "Trop de quantité sélectionnée "
+
+#. module: msf_outgoing
+#: model:process.node,note:msf_outgoing.process_node_out_confirmed
+msgid "Not available state of incoming product."
+msgstr "Statut non disponible du produit entrant."
+
+#. module: msf_outgoing
+#: model:process.transition,name:msf_outgoing.process_transition_draft_pick_draft_picking
+#: model:process.transition,note:msf_outgoing.process_transition_draft_pick_draft_picking
+msgid "From draft to picking."
+msgstr "De brouillon à  Piquage"
+
+#. module: msf_outgoing
+#: field:shipment,carrier_other:0
+#: field:shipment,consignee_other:0
+#: field:shipment,shipper_other:0
+msgid "Other"
+msgstr "Autre"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/msf_outgoing.py:2821
+#, python-format
+msgid "Products from Pre-Packing List (%s) have been returned to stock."
+msgstr "Produits d'un liste de Pré-Colisage (%s) ont été retournés en stock"
+
+#. module: msf_outgoing
+#: model:process.node,note:msf_outgoing.process_node_draft_pick_ppl
+#: model:process.node,note:msf_outgoing.process_node_pick_ppl
+msgid "Pre-packing list subflow."
+msgstr "Liste de Pré-Colisage - Sous-flux"
+
+#. module: msf_outgoing
+#: model:ir.actions.report.xml,name:msf_outgoing.report_pro_forma_invoice
+msgid "Pro Forma Invoice"
+msgstr "Facture Pro Forma"
+
+#. module: msf_outgoing
+#: field:pack.family.memory,from_pack:0
+#: field:stock.move,from_pack:0
+#: field:stock.move.memory.families,from_pack:0
+#: field:stock.move.memory.ppl,from_pack:0
+#: field:stock.move.memory.shipment.create,from_pack:0
+#: field:stock.move.memory.shipment.returnpacks,from_pack:0
+#: field:stock.move.memory.shipment.returnpacksfromshipment,from_pack:0
+msgid "From p."
+msgstr "De P."
+
+#. module: msf_outgoing
+#: field:pack.family.memory,ppl_id:0
+#: field:stock.move.memory.shipment.create,ppl_id:0
+#: field:stock.move.memory.shipment.returnpacks,ppl_id:0
+#: field:stock.move.memory.shipment.returnpacksfromshipment,ppl_id:0
+msgid "PPL Ref"
+msgstr "Réf. Liste de Pré-Colisage"
+
+#. module: msf_outgoing
+#: report:picking.ticket:0
+msgid "Line:"
+msgstr "Ligne:"
+
+#. module: msf_outgoing
+#: view:stock.picking:0
+msgid "Cancel Availability"
+msgstr "Annuler Disponibilité"
+
+#. module: msf_outgoing
+#: model:ir.model,name:msf_outgoing.model_stock_move
+msgid "Stock Move"
+msgstr "Mouvement de Stock"
+
+#. module: msf_outgoing
+#: field:stock.move.memory.shipment.returnpacksfromshipment,return_to:0
+msgid "Return To"
+msgstr "Retour Vers/A"
+
+#. module: msf_outgoing
+#: field:stock.move.memory.families,integrity_status:0
+#: field:stock.move.memory.in,integrity_status:0
+#: field:stock.move.memory.out,integrity_status:0
+#: field:stock.move.memory.picking,integrity_status:0
+#: field:stock.move.memory.picking,integrity_status_func_stock_memory_move:0
+#: field:stock.move.memory.ppl,integrity_status:0
+#: field:stock.move.memory.ppl,integrity_status_func_stock_memory_move:0
+#: field:stock.move.memory.returnproducts,integrity_status:0
+#: field:stock.move.memory.returnproducts,integrity_status_func_stock_memory_move:0
+#: field:stock.move.memory.shipment.create,integrity_status:0
+#: field:stock.move.memory.shipment.returnpacks,integrity_status:0
+#: field:stock.move.memory.shipment.returnpacksfromshipment,integrity_status:0
+msgid " "
+msgstr " "
+
+#. module: msf_outgoing
+#: field:stock.picking,first_shipment_packing_id:0
+msgid "Shipment First Step"
+msgstr "Expédition - Première Etape"
+
+#. module: msf_outgoing
+#: model:process.node,name:msf_outgoing.process_node_out_draft
+msgid "Out - draft"
+msgstr "Sortie - brouillon"
+
+#. module: msf_outgoing
+#: report:invoice:0
+msgid "Invoice -"
+msgstr "Facture -"
+
+#. module: msf_outgoing
+#: model:ir.model,name:msf_outgoing.model_split_memory_move
+#: view:split.memory.move:0
+msgid "Split Memory Move"
+msgstr "Fractionner le Déplacement de Mémoire"
+
+#. module: msf_outgoing
+#: report:certificate.free.gift:0
+#: report:invoice:0
+#: report:packing.list:0
+#: report:pro.forma.invoice:0
+msgid "Number of Parcels"
+msgstr "Nombre de Parcelles"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/msf_outgoing.py:930
+#, python-format
+msgid "Error, no partner !"
+msgstr "Erreur, pas de partenaire !"
+
+#. module: msf_outgoing
+#: constraint:sale.order:0
+msgid "Partner type and order type are incompatible! Please change either order type or partner."
+msgstr "Le type de partnenaire et le type de commande sont incompatibles. Veuillez changer l'un ou l'autre."
+
+#. module: msf_outgoing
+#: model:ir.actions.act_window,help:msf_outgoing.action_packing
+msgid "This is the list of all packing that have been picked."
+msgstr "Ceci est la liste de tous les colis qui ont été prélevés."
+
+#. module: msf_outgoing
+#: selection:stock.move.memory.families,integrity_status:0
+#: selection:stock.move.memory.in,integrity_status:0
+#: selection:stock.move.memory.out,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.ppl,integrity_status:0
+#: selection:stock.move.memory.ppl,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.returnproducts,integrity_status:0
+#: selection:stock.move.memory.returnproducts,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.shipment.create,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacks,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacksfromshipment,integrity_status:0
+msgid "Negative Value"
+msgstr "Valeur Négative"
+
+#. module: msf_outgoing
+#: help:shipment,address_id:0
+#: help:shipment.wizard,address_id:0
+msgid "Address of customer"
+msgstr "Adresse du client"
+
+#. module: msf_outgoing
+#: view:split.memory.move:0
+#: selection:stock.move.memory.families,integrity_status:0
+#: selection:stock.move.memory.in,integrity_status:0
+#: selection:stock.move.memory.out,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.ppl,integrity_status:0
+#: selection:stock.move.memory.ppl,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.returnproducts,integrity_status:0
+#: selection:stock.move.memory.returnproducts,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.shipment.create,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacks,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacksfromshipment,integrity_status:0
+msgid "Ok"
+msgstr "Ok"
+
+#. module: msf_outgoing
+#: report:labels:0
+msgid "Project Destination Address:"
+msgstr "Adresse Destinataire du Projet:"
+
+#. module: msf_outgoing
+#: field:pack.family.memory,height:0
+#: field:pack.type,height:0
+#: field:stock.move,height:0
+#: field:stock.move.memory.families,height:0
+#: field:stock.move.memory.shipment.create,height:0
+#: field:stock.move.memory.shipment.returnpacks,height:0
+#: field:stock.move.memory.shipment.returnpacksfromshipment,height:0
+msgid "Height [cm]"
+msgstr "Hauteur (cm)"
+
+#. module: msf_outgoing
+#: model:process.transition,name:msf_outgoing.process_transition_out_confirmed_assigned
+#: model:process.transition,name:msf_outgoing.process_transition_pick_confirmed_assigned
+#: model:process.transition,note:msf_outgoing.process_transition_out_confirmed_assigned
+#: model:process.transition,note:msf_outgoing.process_transition_pick_confirmed_assigned
+msgid "From confirmed to assigned."
+msgstr "De confirmé à attribué."
+
+#. module: msf_outgoing
+#: view:stock.move:0
+#: view:stock.picking:0
+msgid "UoM"
+msgstr "UdM"
+
+#. module: msf_outgoing
+#: view:stock.picking:0
+msgid "Dates"
+msgstr "Dates"
+
+#. module: msf_outgoing
+#: report:certificate.free.gift:0
+#: report:invoice:0
+#: report:packing.list:0
+msgid "PPL ref:"
+msgstr "PCL - réf:"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/msf_outgoing.py:2345
+#, python-format
+msgid "Create Picking Ticket"
+msgstr "Créer bon de piquage"
+
+#. module: msf_outgoing
+#: model:ir.actions.act_window,name:msf_outgoing.action_labels_tree
+#: model:ir.ui.menu,name:msf_outgoing.menu_report_custo_labels
+msgid "Labels"
+msgstr "Etiquettes"
+
+#. module: msf_outgoing
+#: view:stock.picking:0
+msgid "Back Orders"
+msgstr "Livraison en attente"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/wizard/stock_partial_move.py:191
+#, python-format
+msgid "You must assign a positive \"quantity to return\" value or 0."
+msgstr "Vous devez attribuer une valeur positive ou égale à 0 à \"qté à retourner\" ."
+
+#. module: msf_outgoing
+#: model:process.node,note:msf_outgoing.process_node_draft_pick_draft_ship
+#: model:process.node,note:msf_outgoing.process_node_pick_draft_ship
+#: model:process.node,note:msf_outgoing.process_node_ppl_draft_ship
+msgid "Draft shipment subflow."
+msgstr "Sous-flux brouillon expédition "
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/msf_outgoing.py:605
+#, python-format
+msgid "Dispatch"
+msgstr "Dispatch"
+
+#. module: msf_outgoing
+#: view:shipment:0
+#: view:stock.picking:0
+msgid "Group By..."
+msgstr "Grouper Par..."
+
+#. module: msf_outgoing
+#: field:stock.move,initial_location:0
+msgid "Initial Picking Location"
+msgstr "Zone du Piquage Initial"
+
+#. module: msf_outgoing
+#: selection:stock.picking,line_state:0
+msgid "Processed"
+msgstr "Processed"
+
+#. module: msf_outgoing
+#: view:stock.picking:0
+msgid "Confirmed"
+msgstr "Confirmé"
+
+#. module: msf_outgoing
+#: constraint:product.product:0
+msgid "Warning! GMDN code must be digits!"
+msgstr "Avertissement! Le code  GMDN doit être en chiffres!"
+
+#. module: msf_outgoing
+#: field:stock.move.memory.picking,uom_ordered:0
+#: field:stock.move.memory.ppl,uom_ordered:0
+#: field:stock.move.memory.returnproducts,uom_ordered:0
+msgid "UoM ordered"
+msgstr "UoM ordered"
+
+#. module: msf_outgoing
+#: view:stock.move:0
+msgid "Closed shipped lines"
+msgstr "Closed shipped lines"
+
+#. module: msf_outgoing
+#: report:packing.list:0
+msgid "Pack Val:"
+msgstr "Colis - Val"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/wizard/create_picking.py:242
+#, python-format
+msgid "Validate PPL"
+msgstr "Validater Liste de Pré-Colisage"
+
+#. module: msf_outgoing
+#: model:process.node,note:msf_outgoing.process_node_draft_ship_done
+msgid "Closed state of draft shipment."
+msgstr "Statut fermé du brouillon expédition"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/msf_outgoing.py:2758
+#: field:create.picking,product_moves_returnproducts:0
+#: view:stock.picking:0
+#, python-format
+msgid "Return Products"
+msgstr "Renvoyer les produits"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/msf_outgoing.py:371
+#: code:addons/msf_outgoing/msf_outgoing.py:717
+#: code:addons/msf_outgoing/msf_outgoing.py:2738
+#: model:ir.ui.menu,name:msf_outgoing.menu_action_shipment
+#: field:pack.family.memory,shipment_id:0
+#: model:process.node,name:msf_outgoing.process_node_draft_pick_ship
+#: model:process.node,name:msf_outgoing.process_node_draft_ship_ship
+#: model:process.node,name:msf_outgoing.process_node_pick_ship
+#: model:process.node,name:msf_outgoing.process_node_ppl_ship
+#: model:process.process,name:msf_outgoing.process_process_ship0
+#: view:shipment:0
+#: model:stock.location,name:msf_outgoing.stock_location_dispatch
+#: field:stock.picking,shipment_id:0
+#, python-format
+msgid "Shipment"
+msgstr "Expédition"
+
+#. module: msf_outgoing
+#: model:ir.actions.act_window,help:msf_outgoing.action_draft_picking_ticket
+msgid "This is the list of draft picking tickets."
+msgstr "Ceci est la liste des brouillons de bons de Piquage."
+
+#. module: msf_outgoing
+#: model:ir.actions.report.xml,name:msf_outgoing.report_certificate_free_gift
+msgid "Free Gift Certificate"
+msgstr "Certificat de Don Gratuit"
+
+#. module: msf_outgoing
+#: model:process.node,note:msf_outgoing.process_node_out_backorder
+msgid "Backorder of incoming products subflow."
+msgstr "Livraison en attente de sous-flux de produits entrants."
+
+#. module: msf_outgoing
+#: report:packing.list:0
+msgid "Pack Wt [kg]:"
+msgstr "Colis - Poids (kg)"
+
+#. module: msf_outgoing
+#: field:stock.move.memory.picking,cost:0
+#: field:stock.move.memory.ppl,cost:0
+#: field:stock.move.memory.returnproducts,cost:0
+msgid "Cost"
+msgstr "Coût"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/msf_outgoing.py:750
+#, python-format
+msgid "The Shipment (%s) has been canceled."
+msgstr "L'expédition (%s) a été annulée."
+
+#. module: msf_outgoing
+#: field:product.product,prodlot_ids:0
+msgid "Batch Numbers"
+msgstr "Numéros de Lots"
+
+#. module: msf_outgoing
+#: view:shipment:0
+msgid "Shipper"
+msgstr "Expéditeur"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/msf_outgoing.py:966
+#, python-format
+msgid "Please configure a default intermission account in Company configuration."
+msgstr "Veuillez configurer un compte intermission par défaut sous la configuration de la société."
+
+#. module: msf_outgoing
+#: model:ir.ui.menu,name:msf_outgoing.menu_report_config
+msgid "Report Customization"
+msgstr "Rapport- Personnalisation"
+
+#. module: msf_outgoing
+#: selection:stock.move.memory.families,integrity_status:0
+#: selection:stock.move.memory.in,integrity_status:0
+#: selection:stock.move.memory.out,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.ppl,integrity_status:0
+#: selection:stock.move.memory.ppl,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.returnproducts,integrity_status:0
+#: selection:stock.move.memory.returnproducts,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.shipment.create,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacks,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacksfromshipment,integrity_status:0
+msgid "Too many packs selected"
+msgstr "Trop de paquets sélectionnés "
+
+#. module: msf_outgoing
+#: field:shipment,carrier_signature:0
+#: field:shipment,consignee_signature:0
+#: field:shipment,shipper_signature:0
+msgid "Signature"
+msgstr "Signature"
+
+#. module: msf_outgoing
+#: model:process.node,note:msf_outgoing.process_node_draft_ship_draft
+msgid "Draft state of draft shipment."
+msgstr "Statut brouillon du brouillon Expédition"
+
+#. module: msf_outgoing
+#: field:ppl.customize.label,packing_parcel_number:0
+msgid "Packing Parcel Number"
+msgstr "Colisage - Numéro de Parcelle"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/msf_outgoing.py:2325
+#, python-format
+msgid "Delivery Orders"
+msgstr "Bons de Livraison"
+
+#. module: msf_outgoing
+#: view:stock.picking:0
+msgid "Create Picking..."
+msgstr "Créer un Piquage..."
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/msf_outgoing.py:80
+#, python-format
+msgid "Shipment copy is forbidden."
+msgstr "Copie de l'expédition interdite."
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/msf_outgoing.py:1285
+#: code:addons/msf_outgoing/msf_outgoing.py:1290
+#: code:addons/msf_outgoing/msf_outgoing.py:2278
+#: code:addons/msf_outgoing/msf_outgoing.py:2880
+#: code:addons/msf_outgoing/msf_outgoing.py:2884
+#: code:addons/msf_outgoing/report/cargo_manifest.py:40
+#: code:addons/msf_outgoing/report/certificate_donation.py:40
+#: code:addons/msf_outgoing/report/certificate_free_gift.py:40
+#: code:addons/msf_outgoing/report/invoice.py:40
+#: code:addons/msf_outgoing/report/labels.py:41
+#: code:addons/msf_outgoing/report/packing_list.py:40
+#: code:addons/msf_outgoing/report/picking_ticket.py:43
+#: code:addons/msf_outgoing/report/pre_packing_list.py:40
+#: code:addons/msf_outgoing/report/pro_forma_invoice.py:40
+#: code:addons/msf_outgoing/report/stock_picking_test.py:45
+#: code:addons/msf_outgoing/wizard/stock_partial_move.py:111
+#: code:addons/msf_outgoing/wizard/stock_partial_move.py:145
+#: code:addons/msf_outgoing/wizard/stock_partial_move.py:191
+#: code:addons/msf_outgoing/wizard/stock_partial_move.py:278
+#: code:addons/msf_outgoing/wizard/stock_partial_move.py:280
+#: code:addons/msf_outgoing/wizard/stock_partial_move.py:282
+#: code:addons/msf_outgoing/wizard/stock_partial_move.py:401
+#, python-format
+msgid "Warning !"
+msgstr "Avertissement !"
+
+#. module: msf_outgoing
+#: view:stock.picking:0
+msgid "Locations"
+msgstr "Zones    "
+
+#. module: msf_outgoing
+#: report:certificate.free.gift:0
+#: report:invoice:0
+#: report:packing.list:0
+#: report:pro.forma.invoice:0
+msgid ","
+msgstr ","
+
+#. module: msf_outgoing
+#: report:picking.ticket:0
+msgid "Width"
+msgstr "Largeur"
+
+#. module: msf_outgoing
+#: field:stock.move,location_virtual_id:0
+msgid "Virtual location"
+msgstr "Zone Virtuelle"
+
+#. module: msf_outgoing
+#: view:stock.move.memory.shipment.returnpacks:0
+msgid "Number to Return"
+msgstr "Nombre à Retourner"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/wizard/stock_partial_move.py:67
+#, python-format
+msgid "Change Product of Selected Stock Move"
+msgstr "Changer le Produit du Mouvement de Stock Sélectionné"
+
+#. module: msf_outgoing
+#: model:process.transition,name:msf_outgoing.process_transition_out_draft_confirmed
+#: model:process.transition,note:msf_outgoing.process_transition_out_draft_confirmed
+msgid "From draft to confirmed."
+msgstr "De brouillon à confirmé."
+
+#. module: msf_outgoing
+#: field:stock.picking,already_shipped:0
+msgid "The shipment is done"
+msgstr "The shipment is done"
+
+#. module: msf_outgoing
+#: field:stock.move,backmove_id:0
+msgid "Corresponding move of previous step"
+msgstr "Mouvement Correspondant à l'étape précédente"
+
+#. module: msf_outgoing
+#: field:stock.move.memory.picking,np_check:0
+#: field:stock.move.memory.ppl,np_check:0
+#: field:stock.move.memory.returnproducts,np_check:0
+msgid "NP"
+msgstr "SP (NP)"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/wizard/create_picking.py:259
+#, python-format
+msgid "Previous"
+msgstr "Précédent"
+
+#. module: msf_outgoing
+#: constraint:product.product:0
+msgid "You must select on order procurement method for Service with Reception products."
+msgstr "Vous devez sélectionner sur la commande le mode d'approvisionnement pour le Service  avec Réception de produits."
+
+#. module: msf_outgoing
+#: field:stock.move.memory.picking,quantity_ordered:0
+#: field:stock.move.memory.ppl,quantity_ordered:0
+#: field:stock.move.memory.returnproducts,quantity_ordered:0
+msgid "Quantity ordered"
+msgstr "Quantité commandée"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/wizard/create_picking.py:234
+#: model:ir.model,name:msf_outgoing.model_create_picking
+#, python-format
+msgid "Create Picking"
+msgstr "Créer un Piquage"
+
+#. module: msf_outgoing
+#: selection:stock.move.memory.families,integrity_status:0
+#: selection:stock.move.memory.in,integrity_status:0
+#: selection:stock.move.memory.out,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.ppl,integrity_status:0
+#: selection:stock.move.memory.ppl,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.returnproducts,integrity_status:0
+#: selection:stock.move.memory.returnproducts,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.shipment.create,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacks,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacksfromshipment,integrity_status:0
+msgid "Quantity must be greater than 0.0"
+msgstr "Quantité doit être supérieure à 0.0"
+
+#. module: msf_outgoing
+#: field:stock.warehouse,lot_distribution_id:0
+msgid "Location Distribution"
+msgstr "Zone Distribution"
+
+#. module: msf_outgoing
+#: model:process.transition,name:msf_outgoing.process_transition_out_assigned_done
+#: model:process.transition,name:msf_outgoing.process_transition_pick_assigned_done
+#: model:process.transition,name:msf_outgoing.process_transition_ppl_assigned_done
+#: model:process.transition,note:msf_outgoing.process_transition_out_assigned_done
+#: model:process.transition,note:msf_outgoing.process_transition_pick_assigned_done
+#: model:process.transition,note:msf_outgoing.process_transition_ppl_assigned_done
+msgid "From assigned to closed."
+msgstr "De attribué à fermé."
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/msf_outgoing.py:2227
+#, python-format
+msgid "The ppl has been added to the existing Draft Shipment %s."
+msgstr "Le ppl a été ajouté aux %s existants d'expédition en mode brouillon."
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/wizard/stock_partial_move.py:145
+#, python-format
+msgid "You must assign a positive quantity value or 0."
+msgstr "Vous devez attribuer une valeur positive ou égale à 0."
+
+#. module: msf_outgoing
+#: view:shipment:0
+msgid "Transport Information"
+msgstr "Information Transport"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/wizard/split_memory_move.py:105
+#, python-format
+msgid "Selected quantity is equal to available quantity (%0.1f %s)."
+msgstr "Quantité Sélectionnée est égale à la quantité disponible (%0.1f %s)"
+
+#. module: msf_outgoing
+#: selection:stock.move.memory.families,integrity_status:0
+#: selection:stock.move.memory.in,integrity_status:0
+#: selection:stock.move.memory.out,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.ppl,integrity_status:0
+#: selection:stock.move.memory.ppl,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.returnproducts,integrity_status:0
+#: selection:stock.move.memory.returnproducts,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.shipment.create,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacks,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacksfromshipment,integrity_status:0
+msgid "A gap exist in the sequence"
+msgstr "Un écart existe dans la séquence"
+
+#. module: msf_outgoing
+#: field:pack.type,name:0
+#: field:ppl.customize.label,name:0
+#: field:shipment,carrier_name:0
+#: field:shipment,consignee_name:0
+#: field:shipment,shipper_name:0
+msgid "Name"
+msgstr "Nom"
+
+#. module: msf_outgoing
+#: view:stock.picking:0
+msgid "Validate Picking..."
+msgstr "Valider Piquage..."
+
+#. module: msf_outgoing
+#: model:process.node,note:msf_outgoing.process_node_draft_pick_picking
+msgid "Picking Ticket subflow."
+msgstr "Bon de Piquage Sous-Flux"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/msf_outgoing.py:2632
+#, python-format
+msgid "PPL Information - step2"
+msgstr "PPL Information - étape2"
+
+#. module: msf_outgoing
+#: model:process.node,note:msf_outgoing.process_node_ship_done
+msgid "Closed state of shipment."
+msgstr "Statut fermé de l'expédition"
+
+#. module: msf_outgoing
+#: view:stock.picking:0
+msgid "Move Information"
+msgstr "Information sur le Mouvement"
+
+#. module: msf_outgoing
+#: report:certificate.free.gift:0
+#: report:invoice:0
+#: report:packing.list:0
+#: report:pre.packing.list:0
+#: report:pro.forma.invoice:0
+msgid "kg"
+msgstr "kg"
+
+#. module: msf_outgoing
+#: model:process.node,note:msf_outgoing.process_node_draft_pick_done
+msgid "Closed state of draft picking ticket."
+msgstr "Statut fermé du brouillon bon de Piquage."
+
+#. module: msf_outgoing
+#: constraint:stock.move:0
+msgid "You must assign an asset for this product."
+msgstr "Vous devez mentionner un bien pour ce produit."
+
+#. module: msf_outgoing
+#: field:memory.additionalitems,picking_id:0
+#: field:stock.move.memory.shipment.additionalitems,picking_id:0
+msgid "PPL"
+msgstr "PPL"
+
+#. module: msf_outgoing
+#: help:stock.move,virtual_available:0
+msgid "Future stock for this product according to the selected locations or all internal if none have been selected. Computed as: Real Stock - Outgoing + Incoming."
+msgstr "Stock à  venir de ce produit d'après les Zone sélectionnées ou de tous les internes si aucune n'a été sélectionnée. Calculé comme suit: Stock réel - Sortant + Entrant."
+
+#. module: msf_outgoing
+#: selection:stock.move.memory.families,integrity_status:0
+#: selection:stock.move.memory.in,integrity_status:0
+#: selection:stock.move.memory.out,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.ppl,integrity_status:0
+#: selection:stock.move.memory.ppl,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.returnproducts,integrity_status:0
+#: selection:stock.move.memory.returnproducts,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.shipment.create,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacks,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacksfromshipment,integrity_status:0
+msgid "Not Available"
+msgstr "Pas Disponible"
+
+#. module: msf_outgoing
+#: view:shipment:0
+msgid "Document Information"
+msgstr "Document d'Information"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/wizard/create_picking.py:236
+#, python-format
+msgid "Validate Picking"
+msgstr "Valider Piquage"
+
+#. module: msf_outgoing
+#: field:stock.picking,subtype:0
+msgid "Subtype"
+msgstr "Sous-type"
+
+#. module: msf_outgoing
+#: view:split.memory.move:0
+msgid "_Cancel"
+msgstr "Annuler"
+
+#. module: msf_outgoing
+#: constraint:stock.move:0
+msgid "You cannot select Service Location as Source Location."
+msgstr "Vous ne pouvez pas sélectionner la Zone Service comme Zone Source"
+
+#. module: msf_outgoing
+#: view:ppl.customize.label:0
+msgid "Customization"
+msgstr "Personnalisation"
+
+#. module: msf_outgoing
+#: model:process.node,name:msf_outgoing.process_node_pick_confirmed
+msgid "Picking - not avail."
+msgstr "Piquage - non disponible"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/msf_outgoing.py:80
+#: code:addons/msf_outgoing/msf_outgoing.py:1372
+#: code:addons/msf_outgoing/msf_outgoing.py:1381
+#: code:addons/msf_outgoing/wizard/split_memory_move.py:105
+#, python-format
+msgid "Error !"
+msgstr "Erreur !"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/msf_outgoing.py:983
+#, python-format
+msgid "No company currency found!"
+msgstr "Aucun devise de société trouvée!"
+
+#. module: msf_outgoing
+#: field:shipment,planned_date_of_arrival:0
+msgid "Planned Date of Arrival"
+msgstr "Date d'Arrivée Prévue"
+
+#. module: msf_outgoing
+#: help:stock.move.memory.picking,cost:0
+#: help:stock.move.memory.ppl,cost:0
+#: help:stock.move.memory.returnproducts,cost:0
+msgid "Unit Cost for this product line"
+msgstr "Coût Unitaire pour cette ligne de produits"
+
+#. module: msf_outgoing
+#: field:shipment,date:0
+msgid "Creation Date"
+msgstr "Date de création"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/report/stock_picking_test.py:45
+#, python-format
+msgid "Pre-Packing List is only available for Pre-Packing Objects!"
+msgstr "Liste de Pré-Colisage n'est disponible que pour les Objets de Pré-Colisage!"
+
+#. module: msf_outgoing
+#: report:picking.ticket:0
+msgid "To parcel"
+msgstr "À Parcelle"
+
+#. module: msf_outgoing
+#: report:certificate.free.gift:0
+#: report:invoice:0
+#: report:packing.list:0
+msgid "Parcels details"
+msgstr "Parcelles - détails"
+
+#. module: msf_outgoing
+#: report:certificate.free.gift:0
+#: report:invoice:0
+#: report:packing.list:0
+#: report:pre.packing.list:0
+msgid "Total Value"
+msgstr "Valeur Totale"
+
+#. module: msf_outgoing
+#: view:shipment:0
+#: view:stock.picking:0
+msgid "Empty"
+msgstr "Vide"
+
+#. module: msf_outgoing
+#: model:ir.actions.act_window,name:msf_outgoing.action_pack_type_tree
+#: model:ir.ui.menu,name:msf_outgoing.menu_action_pack_type_tree
+#: view:pack.type:0
+msgid "Pack Types"
+msgstr "Types de Colis"
+
+#. module: msf_outgoing
+#: field:stock.warehouse,lot_dispatch_id:0
+msgid "Location Dispatch"
+msgstr "Zone Expédition"
+
+#. module: msf_outgoing
+#: field:pack.family.memory,to_pack:0
+#: field:stock.move,to_pack:0
+#: field:stock.move.memory.families,to_pack:0
+#: field:stock.move.memory.ppl,to_pack:0
+#: field:stock.move.memory.shipment.create,to_pack:0
+#: field:stock.move.memory.shipment.returnpacks,to_pack:0
+#: field:stock.move.memory.shipment.returnpacksfromshipment,to_pack:0
+msgid "To p."
+msgstr "À P."
+
+#. module: msf_outgoing
+#: view:stock.picking:0
+msgid "Expected Pack Date"
+msgstr "Date Prévue de Colisage"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/msf_outgoing.py:966
+#, python-format
+msgid "Error"
+msgstr "Erreur"
+
+#. module: msf_outgoing
+#: model:process.node,name:msf_outgoing.process_node_ppl_done
+msgid "PPL - closed"
+msgstr "Liste de Pré-Colisage - fermé"
+
+#. module: msf_outgoing
+#: field:stock.picking,overall_qty:0
+msgid "Overall Qty"
+msgstr "Qté globale"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/report/labels.py:41
+#, python-format
+msgid "Labels are only available for completed Pre-Packing List Objects!"
+msgstr "Etiquettes ne sont disponibles que pour les Objets de Liste de Pré-Colisage complétée!"
+
+#. module: msf_outgoing
+#: view:stock.picking:0
+msgid "State of lines"
+msgstr "State of lines"
+
+#. module: msf_outgoing
+#: model:ir.model,name:msf_outgoing.model_stock_picking
+msgid "Picking List"
+msgstr "Liste de Piquage"
+
+#. module: msf_outgoing
+#: report:certificate.free.gift:0
+msgid "∑ Weight [kg]:"
+msgstr "∑ Poids (kg)"
+
+#. module: msf_outgoing
+#: view:shipment:0
+msgid "Return Packs from Shipment..."
+msgstr "Retour de Colis de l´Expédition…"
+
+#. module: msf_outgoing
+#: field:stock.move,backmove_packing_id:0
+msgid "Corresponding move of previous step in draft packing"
+msgstr "Mouvement Correspondant à l'étape précédente sous le brouillon Colisage"
+
+#. module: msf_outgoing
+#: view:stock.move.memory.picking:0
+#: view:stock.move.memory.ppl:0
+#: view:stock.move.memory.returnproducts:0
+msgid "Product Moves"
+msgstr "Mouvements Produit"
+
+#. module: msf_outgoing
+#: report:packing.list:0
+msgid "Tot Wt [kg]:"
+msgstr "Poids Tot. (kg)"
+
+#. module: msf_outgoing
+#: field:pack.family.memory,location_id:0
+msgid "Src Loc."
+msgstr "Zone Source"
+
+#. module: msf_outgoing
+#: model:process.transition,name:msf_outgoing.process_transition_ppl_assigned_draft_ship
+msgid "From available to draft shipment"
+msgstr "De disponible à brouillon expédition. "
+
+#. module: msf_outgoing
+#: selection:stock.picking,flow_type:0
+msgid "Quick"
+msgstr "Rapide"
+
+#. module: msf_outgoing
+#: constraint:stock.move:0
+msgid "You try to assign a lot which is not from the same product"
+msgstr "Vous essayez d'attribuer un lot qui ne correspond pas au même produit"
+
+#. module: msf_outgoing
+#: view:shipment:0
+#: selection:shipment,state:0
+msgid "Delivered"
+msgstr "Livré"
+
+#. module: msf_outgoing
+#: report:picking.ticket:0
+msgid "UoM:"
+msgstr "UdM:"
+
+#. module: msf_outgoing
+#: report:pre.packing.list:0
+msgid "Qty per Pack"
+msgstr "Qté par Colis"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/msf_outgoing.py:1381
+#, python-format
+msgid "Pre-Packing List copy is forbidden."
+msgstr "Copier la Liste de Pré-Colisage est interdite"
+
+#. module: msf_outgoing
+#: view:stock.picking:0
+msgid "Check Availability"
+msgstr "Vérifier Disponibilité"
+
+#. module: msf_outgoing
+#: field:shipment,carrier_phone:0
+#: field:shipment,consignee_phone:0
+#: field:shipment,shipper_phone:0
+msgid "Phone"
+msgstr "Tél."
+
+#. module: msf_outgoing
+#: model:process.node,name:msf_outgoing.process_node_draft_pick_ppl
+#: model:process.node,name:msf_outgoing.process_node_pick_ppl
+#: view:stock.picking:0
+#: selection:stock.picking,subtype:0
+msgid "PPL"
+msgstr "Liste de Pré-Colisage"
+
+#. module: msf_outgoing
+#: field:stock.move.memory.returnproducts,qty_to_return:0
+msgid "Qty to return"
+msgstr "Qté à retourner"
+
+#. module: msf_outgoing
+#: field:stock.picking,converted_to_standard:0
+msgid "Converted to Standard"
+msgstr "Converti en Standard"
+
+#. module: msf_outgoing
+#: constraint:stock.move:0
+msgid "Constraint error on Uom"
+msgstr "Constraint error on Uom"
+
+#. module: msf_outgoing
+#: view:stock.picking:0
+msgid "Actual Pack Date"
+msgstr "Date Réelle de Colisage"
+
+#. module: msf_outgoing
+#: selection:stock.move.memory.families,integrity_status:0
+#: selection:stock.move.memory.in,integrity_status:0
+#: selection:stock.move.memory.out,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.ppl,integrity_status:0
+#: selection:stock.move.memory.ppl,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.returnproducts,integrity_status:0
+#: selection:stock.move.memory.returnproducts,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.shipment.create,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacks,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacksfromshipment,integrity_status:0
+msgid "No Asset Needed"
+msgstr "Pas besoin de mentionner un Bien"
+
+#. module: msf_outgoing
+#: field:shipment.additionalitems,picking_id:0
+msgid "Picking"
+msgstr "Picking"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/report/pro_forma_invoice.py:40
+#, python-format
+msgid "Pro Forma Invoice is only available for Shipment Objects (not draft)!"
+msgstr "Facture Pro Forma n'est disponible que pour les Objets d'Expédition (pas brouillon)!"
+
+#. module: msf_outgoing
+#: model:ir.actions.act_window,help:msf_outgoing.action_picking_ticket
+msgid "This is the list of all picking tickets (draft and confirmed) that have to be prepared from sales orders."
+msgstr "Ceci est la liste de tous les bons de Piquage (brouillons et confirmés) qui doivent être préparés à partir des commandes terrain."
+
+#. module: msf_outgoing
+#: report:labels:0
+msgid "DG / "
+msgstr "MD (DG) / "
+
+#. module: msf_outgoing
+#: model:ir.model,name:msf_outgoing.model_stock_move_memory_out
+msgid "stock.move.memory.out"
+msgstr "stock.move.memory.out"
+
+#. module: msf_outgoing
+#: report:picking.ticket:0
+msgid "Resv on Stock"
+msgstr "Résv en Stock"
+
+#. module: msf_outgoing
+#: view:shipment:0
+msgid "Synchronization engine should confirm the delivery at the project reception, are you sure?"
+msgstr "Synchronization engine should confirm the delivery at the project reception, are you sure?"
+
+#. module: msf_outgoing
+#: field:pack.family.memory,weight:0
+#: field:stock.move,weight:0
+#: field:stock.move.memory.families,weight:0
+#: field:stock.move.memory.shipment.create,weight:0
+#: field:stock.move.memory.shipment.returnpacks,weight:0
+#: field:stock.move.memory.shipment.returnpacksfromshipment,weight:0
+msgid "Weight p.p [kg]"
+msgstr "Poids p/colis (kg) "
+
+#. module: msf_outgoing
+#: selection:stock.move.memory.families,integrity_status:0
+#: selection:stock.move.memory.in,integrity_status:0
+#: selection:stock.move.memory.out,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.ppl,integrity_status:0
+#: selection:stock.move.memory.ppl,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.returnproducts,integrity_status:0
+#: selection:stock.move.memory.returnproducts,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.shipment.create,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacks,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacksfromshipment,integrity_status:0
+msgid "Assigned qty must be smaller or equal to required qty"
+msgstr "Qté affectée doit être plus petite ou égale à la quantité demandée"
+
+#. module: msf_outgoing
+#: model:process.transition,name:msf_outgoing.process_transition_draft_pick_picking_ppl
+#: model:process.transition,note:msf_outgoing.process_transition_draft_pick_picking_ppl
+msgid "From picking to ppl."
+msgstr "De Piquage à  liste de pré-colisage"
+
+#. module: msf_outgoing
+#: model:ir.actions.act_window,name:msf_outgoing.action_packing
+msgid "Packing (debug)"
+msgstr "Colisage (debogage)"
+
+#. module: msf_outgoing
+#: field:split.memory.move,uom_id:0
+msgid "UoM"
+msgstr "UoM"
+
+#. module: msf_outgoing
+#: field:stock.move.memory.picking,asset_id:0
+#: field:stock.move.memory.ppl,asset_id:0
+#: field:stock.move.memory.returnproducts,asset_id:0
+msgid "Asset"
+msgstr "Biens"
+
+#. module: msf_outgoing
+#: report:packing.list:0
+msgid "Weight"
+msgstr "Weight"
+
+#. module: msf_outgoing
+#: report:pre.packing.list:0
+msgid "Dimensions [cm]:"
+msgstr "Dimensions [cm] :"
+
+#. module: msf_outgoing
+#: view:stock.picking:0
+msgid "Expected Date"
+msgstr "Date Prévue"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/wizard/create_picking.py:543
+#, python-format
+msgid "Processing quantity %d for %s is larger than the available quantity in Batch Number %s (%d) !"
+msgstr "La quantié %d pour %s est plus grande que la quantité disponible du lot %s (%d) !"
+
+#. module: msf_outgoing
+#: view:stock.picking:0
+msgid "Traceability"
+msgstr "Traçabilité"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/wizard/stock_partial_move.py:50
+#, python-format
+msgid "Split Selected Stock Move"
+msgstr "Scinder le mouvement de stock sélectionné"
+
+#. module: msf_outgoing
+#: model:ir.actions.report.xml,name:msf_outgoing.report_invoice
+msgid "Invoice"
+msgstr "Facture"
+
+#. module: msf_outgoing
+#: model:ir.model,name:msf_outgoing.model_shipment
+msgid "represents a group of pack families"
+msgstr "stock.move.memory.families"
+
+#. module: msf_outgoing
+#: report:picking.ticket:0
+#: report:pre.packing.list:0
+#: view:stock.move.memory.picking:0
+#: view:stock.picking:0
+msgid "Batch Number"
+msgstr "Numéro de Lot"
+
+#. module: msf_outgoing
+#: report:labels:0
+msgid "Your Order:"
+msgstr "Votre commande:"
+
+#. module: msf_outgoing
+#: field:stock.move.memory.in,initial_qty:0
+#: field:stock.move.memory.out,initial_qty:0
+#: field:stock.move.memory.picking,initial_qty:0
+#: field:stock.move.memory.ppl,initial_qty:0
+#: field:stock.move.memory.returnproducts,initial_qty:0
+msgid "Initial Qty"
+msgstr "Qté Initiale"
+
+#. module: msf_outgoing
+#: field:pack.family.memory,currency_id:0
+#: field:shipment,currency_id:0
+#: field:stock.move,currency_id:0
+#: field:stock.move.memory.picking,currency:0
+#: field:stock.move.memory.ppl,currency:0
+#: field:stock.move.memory.returnproducts,currency:0
+#: field:stock.picking,currency_id:0
+msgid "Currency"
+msgstr "Devises"
+
+#. module: msf_outgoing
+#: report:pre.packing.list:0
+msgid "Product Description /"
+msgstr "Description Produit /"
+
+#. module: msf_outgoing
+#: selection:pack.family.memory,state:0
+#: view:stock.picking:0
+msgid "Available"
+msgstr "Disponible"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/wizard/stock_partial_move.py:282
+#, python-format
+msgid "\"to pack\" value must be greater or equal to \"from pack\" value."
+msgstr "La valeur \"vers colis\" doit être supérieure ou égale à la valeur \"du colis\"."
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/msf_outgoing.py:2455
+#, python-format
+msgid "Validate Picking Ticket"
+msgstr "Valider bon de piquage"
+
+#. module: msf_outgoing
+#: field:stock.move,is_narcotic:0
+#: field:stock.picking,is_narcotic:0
+msgid "Narcotic"
+msgstr "Narcotique"
+
+#. module: msf_outgoing
+#: selection:stock.picking,line_state:0
+msgid "Available"
+msgstr "Available"
+
+#. module: msf_outgoing
+#: field:memory.additionalitems,weight:0
+#: field:shipment.additionalitems,weight:0
+#: field:stock.move.memory.shipment.additionalitems,weight:0
+msgid "Weight[kg]"
+msgstr "Weight[kg]"
+
+#. module: msf_outgoing
+#: report:picking.ticket:0
+msgid "Order Number"
+msgstr "Numéro de la Commande"
+
+#. module: msf_outgoing
+#: model:ir.model,name:msf_outgoing.model_stock_move_memory_shipment_returnpacksfromshipment
+msgid "stock.move.memory.shipment.returnpacksfromshipment"
+msgstr "stock.move.memory.shipment.returnpacksfromshipment"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/msf_outgoing.py:2282
+#, python-format
+msgid "The Preparation Picking (%s) has been converted to simple Out (%s)."
+msgstr "La Préparation du Prélèvement (%s) a été convertie en simple OUT (Sortie) (%s)."
+
+#. module: msf_outgoing
+#: view:stock.picking:0
+msgid "To Invoice"
+msgstr "À facturer"
+
+#. module: msf_outgoing
+#: report:picking.ticket:0
+#: field:shipment,address_id:0
+#: field:shipment,carrier_address:0
+#: field:shipment,consignee_address:0
+#: field:shipment,shipper_address:0
+#: field:shipment.wizard,address_id:0
+msgid "Address"
+msgstr "Adresse"
+
+#. module: msf_outgoing
+#: report:picking.ticket:0
+#: view:stock.picking:0
+msgid "Order Date"
+msgstr "Date de commande"
+
+#. module: msf_outgoing
+#: field:stock.move.memory.shipment.create,volume:0
+#: field:stock.move.memory.shipment.returnpacks,volume:0
+#: field:stock.move.memory.shipment.returnpacksfromshipment,volume:0
+msgid "Volume [dm³]"
+msgstr "Volume [dm³]"
+
+#. module: msf_outgoing
+#: field:create.picking,product_moves_picking:0
+#: field:create.picking,product_moves_ppl:0
+msgid "Moves"
+msgstr "Mouvements"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/wizard/create_picking.py:244
+#, python-format
+msgid "Return"
+msgstr "Retour"
+
+#. module: msf_outgoing
+#: model:ir.actions.act_window,name:msf_outgoing.action_pt_ppl
+#: view:stock.picking:0
+msgid "Shipment preparation"
+msgstr "Préparation Expédition"
+
+#. module: msf_outgoing
+#: model:process.transition,name:msf_outgoing.process_transition_draft_pick_draft_ship_ship
+#: model:process.transition,name:msf_outgoing.process_transition_draft_ship_draft_ship_ship
+#: model:process.transition,name:msf_outgoing.process_transition_pick_draft_ship_ship
+#: model:process.transition,name:msf_outgoing.process_transition_ppl_draft_ship_ship
+#: model:process.transition,note:msf_outgoing.process_transition_draft_pick_draft_ship_ship
+#: model:process.transition,note:msf_outgoing.process_transition_draft_ship_draft_ship_ship
+#: model:process.transition,note:msf_outgoing.process_transition_pick_draft_ship_ship
+#: model:process.transition,note:msf_outgoing.process_transition_ppl_draft_ship_ship
+msgid "From draft shipment to shipment."
+msgstr "De brouillon expédition à expédition."
+
+#. module: msf_outgoing
+#: field:shipment,pack_family_memory_ids:0
+#: field:stock.picking,pack_family_memory_ids:0
+msgid "Memory Families"
+msgstr "Memoire Familles"
+
+#. module: msf_outgoing
+#: field:stock.picking,sequence_id:0
+msgid "Picking Ticket Sequence"
+msgstr "Bon de Piquage – Séquence"
+
+#. module: msf_outgoing
+#: selection:stock.move.memory.families,integrity_status:0
+#: selection:stock.move.memory.in,integrity_status:0
+#: selection:stock.move.memory.out,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.ppl,integrity_status:0
+#: selection:stock.move.memory.ppl,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.returnproducts,integrity_status:0
+#: selection:stock.move.memory.returnproducts,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.shipment.create,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacks,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacksfromshipment,integrity_status:0
+msgid "Unit Price must be greater than 0.0"
+msgstr "Prix Unitaire doit être supérieur à 0.0"
+
+#. module: msf_outgoing
+#: view:stock.picking:0
+msgid "Cancel Move"
+msgstr "Annuler Mouvement"
+
+#. module: msf_outgoing
+#: selection:stock.move.memory.families,integrity_status:0
+#: selection:stock.move.memory.in,integrity_status:0
+#: selection:stock.move.memory.out,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.ppl,integrity_status:0
+#: selection:stock.move.memory.ppl,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.returnproducts,integrity_status:0
+#: selection:stock.move.memory.returnproducts,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.shipment.create,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacks,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacksfromshipment,integrity_status:0
+msgid "Weight is Missing"
+msgstr "Le poids est Manquant"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/msf_outgoing.py:1107
+#, python-format
+msgid "The Shipment %s has been closed."
+msgstr "Les %s de l'expédition ont été fermés."
+
+#. module: msf_outgoing
+#: selection:stock.move.memory.families,integrity_status:0
+#: selection:stock.move.memory.in,integrity_status:0
+#: selection:stock.move.memory.out,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status:0
+#: selection:stock.move.memory.picking,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.ppl,integrity_status:0
+#: selection:stock.move.memory.ppl,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.returnproducts,integrity_status:0
+#: selection:stock.move.memory.returnproducts,integrity_status_func_stock_memory_move:0
+#: selection:stock.move.memory.shipment.create,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacks,integrity_status:0
+#: selection:stock.move.memory.shipment.returnpacksfromshipment,integrity_status:0
+msgid "Need Batch Number (Standard) not Expiry Date (Internal)"
+msgstr "Mention nécessaire d'un numéro de lot (Standard) mais pas d'une date d'expiration (Interne)"
+
+#. module: msf_outgoing
+#: code:addons/msf_outgoing/msf_outgoing.py:1290
+#: code:addons/msf_outgoing/msf_outgoing.py:2278
+#, python-format
+msgid "Some Picking Tickets are in progress. Return products to stock from ppl and shipment and try again."
+msgstr "Certains bons de piquage sont en cours. Renvoyer les produits au stock à partir de ppl et expédition et réessayer."
+
+#. module: msf_outgoing
+#: view:stock.picking:0
+msgid "Src. Loc"
+msgstr "Zone Source"
+
+#. module: msf_outgoing
+#: model:process.transition,note:msf_outgoing.process_transition_ppl_assigned_draft_ship
+msgid "From available to draft shipment."
+msgstr "De disponible à brouillon expédition. "
+
+#. module: msf_outgoing
+#: field:stock.move.memory.shipment.create,selected_weight:0
+#: field:stock.move.memory.shipment.returnpacks,selected_weight:0
+#: field:stock.move.memory.shipment.returnpacksfromshipment,selected_weight:0
+msgid "Selected Weight [kg]"
+msgstr "Poids Sélectionné [kg]"
+
+#. module: msf_outgoing
+#: field:pack.family.memory,description_ppl:0
+#: field:stock.picking,description_ppl:0
+msgid "Description"
+msgstr "Description"
+
+#. module: msf_outgoing
+#: field:ppl.customize.label,logo:0
+msgid "Company Logo"
+msgstr "Logo de la Société"
+
+#. module: msf_outgoing
+#: field:pack.family.memory,length:0
+#: field:pack.type,length:0
+#: field:stock.move,length:0
+#: field:stock.move.memory.families,length:0
+#: field:stock.move.memory.shipment.create,length:0
+#: field:stock.move.memory.shipment.returnpacks,length:0
+#: field:stock.move.memory.shipment.returnpacksfromshipment,length:0
+msgid "Length [cm]"
+msgstr "Longueur (cm)"
+
+#. module: msf_outgoing
+#: field:stock.picking,backorder_ids:0
+msgid "Backorder ids"
+msgstr "Livraison en attente - id's"
+

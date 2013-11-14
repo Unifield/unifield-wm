@@ -1,0 +1,413 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* procurement_cycle
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: procurement_cycle
+#: view:procurement.cycle.compute.all:0
+msgid "Compute POs Creation"
+msgstr "Calcul la création du Bon de Commande"
+
+#. module: procurement_cycle
+#: field:stock.warehouse.order.cycle,next_date:0
+msgid "Next scheduled date"
+msgstr "Prochaine date programmée"
+
+#. module: procurement_cycle
+#: view:stock.warehouse.order.cycle:0
+msgid "Products that will be included in the current policy"
+msgstr "Produits qui seront inclus dans la politique en cours"
+
+#. module: procurement_cycle
+#: field:stock.warehouse.order.cycle.line,order_cycle_id:0
+msgid "Order cycle"
+msgstr "Cycle de commande"
+
+#. module: procurement_cycle
+#: help:stock.warehouse.order.cycle,frequence_name:0
+msgid "Define the time between two replenishments"
+msgstr "Définir le temps entre deux réapprovisionnements"
+
+#. module: procurement_cycle
+#: model:ir.module.module,shortdesc:procurement_cycle.module_meta_information
+msgid "Procurement Order Cycle"
+msgstr "Cycle de Commande d'Approvisionnement"
+
+#. module: procurement_cycle
+#: view:stock.warehouse.order.cycle:0
+#: field:stock.warehouse.order.cycle,consumption_period_to:0
+msgid "-"
+msgstr "-"
+
+#. module: procurement_cycle
+#: view:stock.warehouse.order.cycle:0
+msgid "Locations"
+msgstr "Zones    "
+
+#. module: procurement_cycle
+#: view:procurement.cycle.compute.all:0
+msgid "POs Creation Cycle Parameters"
+msgstr "Création Bon de Commande - Paramètres du Cycle"
+
+#. module: procurement_cycle
+#: help:stock.warehouse.order.cycle,order_coverage:0
+msgid "In months. Define the time between two replenishments. Time used to compute the quantity of products to order according to the monthly consumption."
+msgstr "En mois. Définir le temps entre deux réapprovisionnements. Temps utilisé pour calculer la quantité de produits à commander en fonction de la consommation mensuelle."
+
+#. module: procurement_cycle
+#: field:stock.warehouse.order.cycle,reviewed_consumption:0
+msgid "Forecasted monthly consumption"
+msgstr "consommation mensuelle prévue"
+
+#. module: procurement_cycle
+#: view:stock.warehouse.order.cycle:0
+msgid "Filters..."
+msgstr "Filtres…"
+
+#. module: procurement_cycle
+#: view:stock.warehouse.order.cycle:0
+msgid "If null, will take the supplier lead time from the product form"
+msgstr "Si nul, prendra le délai d'approvisionnement du fournisseur dans le formulaire produit"
+
+#. module: procurement_cycle
+#: field:stock.warehouse.order.cycle,frequence_id:0
+#: field:stock.warehouse.order.cycle,frequence_name:0
+msgid "Frequency"
+msgstr "Fréquence"
+
+#. module: procurement_cycle
+#: field:stock.warehouse.order.cycle,company_id:0
+msgid "Company"
+msgstr "Société"
+
+#. module: procurement_cycle
+#: view:stock.warehouse.order.cycle:0
+msgid "Main type"
+msgstr "Type principal"
+
+#. module: procurement_cycle
+#: view:stock.warehouse.order.cycle:0
+#: field:stock.warehouse.order.cycle,location_id:0
+msgid "Location"
+msgstr "Zone"
+
+#. module: procurement_cycle
+#: constraint:stock.warehouse.order.cycle.line:0
+msgid "You cannot have two times the same product on the same order cycle rule"
+msgstr "Vous ne pouvez pas avoir deux fois les même produit sur une même règle de cycle de commande"
+
+#. module: procurement_cycle
+#: model:ir.model,name:procurement_cycle.model_stock_frequence
+msgid "Stock scheduler"
+msgstr "Plannificateur Stock "
+
+#. module: procurement_cycle
+#: field:stock.warehouse.order.cycle,safety_stock_time:0
+msgid "Safety stock in time"
+msgstr "Stock de Sécurité à temps"
+
+#. module: procurement_cycle
+#: field:stock.warehouse.order.cycle,sublist_id:0
+msgid "List/Sublist"
+msgstr "Liste/Liste secondaire"
+
+#. module: procurement_cycle
+#: view:stock.warehouse.order.cycle:0
+msgid "General Information"
+msgstr "Informations Générales"
+
+#. module: procurement_cycle
+#: view:stock.warehouse.order.cycle:0
+msgid "Period / Frequence Rule"
+msgstr "Période / Règle de Fréquence"
+
+#. module: procurement_cycle
+#: view:stock.warehouse.order.cycle:0
+msgid "Change/Choose Frequency"
+msgstr "Changer/Choisir une Fréquence"
+
+#. module: procurement_cycle
+#: help:stock.warehouse.order.cycle,active:0
+msgid "If the active field is set to False, it will allow you to hide the automatic supply without removing it."
+msgstr "Si le champs actif est réglé sur Faux, cela vous permettra de cacher l'approvisionnement automatique sans le supprimer."
+
+#. module: procurement_cycle
+#: code:addons/procurement_cycle/procurement.py:43
+#: code:addons/procurement_cycle/procurement.py:62
+#, python-format
+msgid "You should choose a frequence for this rule !"
+msgstr "Veuillez choisir une fréquence pour cette règle !"
+
+#. module: procurement_cycle
+#: field:stock.warehouse.order.cycle.line,safety_stock:0
+msgid "Safety stock (Qty)"
+msgstr "Stock de Sécurité (Qté)"
+
+#. module: procurement_cycle
+#: field:stock.warehouse.order.cycle,name:0
+msgid "Reference"
+msgstr "Référence"
+
+#. module: procurement_cycle
+#: help:stock.warehouse.order.cycle,location_id:0
+msgid "Location where the computation is made"
+msgstr "Zone où le calcul est fait."
+
+#. module: procurement_cycle
+#: view:stock.warehouse.order.cycle:0
+msgid "In months"
+msgstr "En mois"
+
+#. module: procurement_cycle
+#: view:stock.warehouse.order.cycle:0
+msgid "In months (will be converted into quantity regarding monthly consumption)"
+msgstr "En mois (ce sera converti en qté pour ce qui est des consommations mensuelles)"
+
+#. module: procurement_cycle
+#: code:addons/procurement_cycle/procurement.py:43
+#: code:addons/procurement_cycle/procurement.py:62
+#, python-format
+msgid "Error"
+msgstr "Erreur"
+
+#. module: procurement_cycle
+#: field:stock.warehouse.order.cycle.line,uom_id:0
+msgid "UoM"
+msgstr "UdM"
+
+#. module: procurement_cycle
+#: help:stock.warehouse.order.cycle,leadtime:0
+msgid "Delivery lead time in month"
+msgstr "Délai de Livraison exprimé en mois"
+
+#. module: procurement_cycle
+#: model:ir.model,name:procurement_cycle.model_procurement_cycle_compute_all
+msgid "Compute all schedulers"
+msgstr "Calculer tous les planificateurs"
+
+#. module: procurement_cycle
+#: view:stock.warehouse.order.cycle:0
+msgid "Misc"
+msgstr "Divers"
+
+#. module: procurement_cycle
+#: field:stock.warehouse.order.cycle,order_coverage:0
+msgid "Order coverage"
+msgstr "Couverture de la Commande"
+
+#. module: procurement_cycle
+#: help:stock.warehouse.order.cycle,sequence:0
+msgid "A higher order value means a low priority"
+msgstr "Une valeur plus élevée signifie une priorité moindre"
+
+#. module: procurement_cycle
+#: model:ir.actions.act_window,name:procurement_cycle.action_compute_schedulers_cycle
+#: model:ir.ui.menu,name:procurement_cycle.menu_stock_proc_schedulers_cycle
+msgid "POs Creation (Order Cycle)"
+msgstr "Création Bon de Commande - Cycle de Commande"
+
+#. module: procurement_cycle
+#: help:stock.warehouse.order.cycle,safety_stock_time:0
+msgid "In months. Define the time while the stock is not negative but should be replenished. Time used to compute the quantity of products to order according to the monthly consumption."
+msgstr "En mois. Définir le temps alors que le stock n'est pas négatif, mais doit être réapprovisionné. Temps utilisé pour calculer la quantité de produits à commander en fonction de la consommation mensuelle."
+
+#. module: procurement_cycle
+#: model:ir.module.module,description:procurement_cycle.module_meta_information
+msgid "\n"
+"        This module aims to add a new replenishment policies with\n"
+"        fixed dates and variable quantities.\n"
+"        \n"
+"        BE CAREFUL: THIS MODULE WAS CREATED DURING THE DEVELOPMENT\n"
+"        OF THE STOCK REPLENISHMENT MODULE IN ITERATION 1. DON'T FORGET\n"
+"        TO CHANGE BEHAVIOUR OF THIS MODULE IF YOUR CHANGE THE LOGIC OF THIS \n"
+"        NEW MODULE\n"
+"    "
+msgstr "\n"
+"         Ce module vise à ajouter de nouvelles politiques de réapprovisionnement avec dates fixes et quantités variables.\n"
+"        \n"
+"         ATTENTION: CE MODULE A ETE CREE DURANT LE DEVELOPPEMENT DU MODULE DE REAPPROVISIONNEMENT DE STOCK SOUS ITERATION 1. N'OUBLIEZ PAS\n"
+"         DE MODIFIER LE COMPORTEMENT DE CE MODULE SI VOUS CHANGER LA LOGIQUE DE CE NOUVEAU MODULE\n"
+"    "
+
+#. module: procurement_cycle
+#: field:stock.warehouse.order.cycle,past_consumption:0
+msgid "Average monthly consumption"
+msgstr "consommation mensuelle réelle"
+
+#. module: procurement_cycle
+#: view:stock.warehouse.order.cycle:0
+#: field:stock.warehouse.order.cycle,nomen_manda_3:0
+msgid "Root"
+msgstr "Origine"
+
+#. module: procurement_cycle
+#: help:stock.warehouse.order.cycle,manual_consumption:0
+msgid "If not 0.00, the system will used the entered monthly consumption to compute the quantity to order"
+msgstr "Si pas 0.00, le système utilisera la saisie manuelle de consommation mensuelle pour calculer la quantité à commander"
+
+#. module: procurement_cycle
+#: view:stock.warehouse.order.cycle:0
+msgid "Sublist"
+msgstr "Liste secondaire"
+
+#. module: procurement_cycle
+#: view:procurement.cycle.compute.all:0
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: procurement_cycle
+#: help:stock.warehouse.order.cycle,frequence_id:0
+msgid "It's the time between two replenishments"
+msgstr "C'est le temps entre deux réapprovisionnements"
+
+#. module: procurement_cycle
+#: field:stock.warehouse.order.cycle,warehouse_id:0
+msgid "Warehouse"
+msgstr "Entrepôt"
+
+#. module: procurement_cycle
+#: code:addons/procurement_cycle/scheduler.py:172
+#, python-format
+msgid "Procurement cycle: %s"
+msgstr "Cycle d'acquisition : %s"
+
+#. module: procurement_cycle
+#: field:stock.warehouse.order.cycle.line,product_id:0
+msgid "Product"
+msgstr "Produit"
+
+#. module: procurement_cycle
+#: help:stock.warehouse.order.cycle,consumption_period_from:0
+msgid "This period is a number of past months the system has to consider for AMC calculation.By default this value is equal to the order coverage of the rule."
+msgstr "Cette période est un nombre qui correspond aux derniers mois que le système doit prendre en compte pour le calcul des prévisions de consommations mensuelles (PCM). Cette valeur est, par défaut,  égale à la couverture de la commande."
+
+#. module: procurement_cycle
+#: field:stock.warehouse.order.cycle,category_id:0
+msgid "Category"
+msgstr "Catégorie"
+
+#. module: procurement_cycle
+#: model:ir.model,name:procurement_cycle.model_procurement_order
+msgid "Procurement"
+msgstr "Approvisionnement"
+
+#. module: procurement_cycle
+#: field:stock.warehouse.order.cycle,leadtime:0
+msgid "Delivery lead time to consider"
+msgstr "Délai de Livraison à considérer"
+
+#. module: procurement_cycle
+#: view:stock.warehouse.order.cycle:0
+msgid "Order Cycle rules"
+msgstr "Cycle de Commande - Règles"
+
+#. module: procurement_cycle
+#: help:stock.warehouse.order.cycle,past_consumption:0
+msgid "If checked, the system will used the average monthly consumption to compute the quantity to order"
+msgstr "Si coché, le système utilisera la consommation moyenne mensuelle pour calculer la quantité à commander"
+
+#. module: procurement_cycle
+#: model:ir.model,name:procurement_cycle.model_stock_warehouse_order_cycle_line
+msgid "Products to replenish"
+msgstr "Produits à réapprovisionner"
+
+#. module: procurement_cycle
+#: field:stock.warehouse.order.cycle,manual_consumption:0
+msgid "Manual monthly consumption"
+msgstr "Consommation mensuelle saisie manuellement"
+
+#. module: procurement_cycle
+#: view:stock.warehouse.order.cycle:0
+msgid "Product filters"
+msgstr "Produit - Filtres"
+
+#. module: procurement_cycle
+#: field:stock.warehouse.order.cycle,product_id:0
+msgid "Specific product"
+msgstr "Produit Spécifique"
+
+#. module: procurement_cycle
+#: view:stock.warehouse.order.cycle:0
+#: field:stock.warehouse.order.cycle,nomen_manda_2:0
+msgid "Family"
+msgstr "Famille"
+
+#. module: procurement_cycle
+#: field:stock.warehouse.order.cycle,active:0
+msgid "Active"
+msgstr "Actif"
+
+#. module: procurement_cycle
+#: field:stock.warehouse.order.cycle,sequence:0
+msgid "Order"
+msgstr "Commande"
+
+#. module: procurement_cycle
+#: field:stock.warehouse.order.cycle,nomen_manda_0:0
+msgid "Main Type"
+msgstr "Type Principal"
+
+#. module: procurement_cycle
+#: view:stock.warehouse.order.cycle:0
+msgid "Parameter for quantity calculation"
+msgstr "Paramètres pour le calcul des qtés"
+
+#. module: procurement_cycle
+#: model:ir.actions.act_window,name:procurement_cycle.action_order_cycle_tree
+#: model:ir.model,name:procurement_cycle.model_stock_warehouse_order_cycle
+#: model:ir.ui.menu,name:procurement_cycle.menu_order_cycle
+#: field:stock.frequence,order_cycle_ids:0
+#: view:stock.warehouse.order.cycle:0
+msgid "Order Cycle"
+msgstr "Cycle de Commande"
+
+#. module: procurement_cycle
+#: help:stock.warehouse.order.cycle,reviewed_consumption:0
+msgid "If checked, the system will used the forecasted monthly consumption to compute the quantity to order"
+msgstr "Si coché, le système utilisera la prévision de consommation mensuelle pour calculer la quantité à commander"
+
+#. module: procurement_cycle
+#: help:stock.warehouse.order.cycle,next_date:0
+msgid "As this date is not in the past, no new replenishment will be run"
+msgstr "Comme cette date n'est pas dans le passé, aucun nouveau réapprovisionnement ne sera exécuté"
+
+#. module: procurement_cycle
+#: view:stock.warehouse.order.cycle:0
+msgid "Fill lines"
+msgstr "Lignes à remplir"
+
+#. module: procurement_cycle
+#: field:stock.warehouse.order.cycle,consumption_period_from:0
+msgid "Period of calculation"
+msgstr "Période du calcul"
+
+#. module: procurement_cycle
+#: view:stock.warehouse.order.cycle:0
+msgid "Group By..."
+msgstr "Grouper Par..."
+
+#. module: procurement_cycle
+#: view:stock.warehouse.order.cycle:0
+#: field:stock.warehouse.order.cycle,product_ids:0
+#: field:stock.warehouse.order.cycle,product_line_ids:0
+msgid "Products"
+msgstr "Produits"
+
+#. module: procurement_cycle
+#: view:stock.warehouse.order.cycle:0
+#: field:stock.warehouse.order.cycle,nomen_manda_1:0
+msgid "Group"
+msgstr "Groupe"
+

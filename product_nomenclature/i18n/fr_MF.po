@@ -1,0 +1,474 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* product_nomenclature
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: product_nomenclature
+#: code:addons/product_nomenclature/product_nomenclature.py:253
+#, python-format
+msgid "Bad operand : You can only give False or the id of a category"
+msgstr "Bad operand : Vous ne pouvez indiquer que Faux ou l'id d'une catégorie"
+
+#. module: product_nomenclature
+#: field:product.nomenclature,parent_id:0
+msgid "Parent Nomenclature"
+msgstr "Nomenclature Parent "
+
+#. module: product_nomenclature
+#: selection:product.nomenclature,nomen_type_s:0
+msgid "Mandatory"
+msgstr "Mandatory"
+
+#. module: product_nomenclature
+#: selection:product.nomenclature,sub_level:0
+msgid "4"
+msgstr "4"
+
+#. module: product_nomenclature
+#: view:product.product:0
+msgid "Optional Nomenclature Filters..."
+msgstr "Filtres de Nomenclature Optionnelles..."
+
+#. module: product_nomenclature
+#: selection:product.nomenclature,sub_level:0
+msgid "2"
+msgstr "2"
+
+#. module: product_nomenclature
+#: selection:product.nomenclature,sub_level:0
+msgid "5"
+msgstr "5"
+
+#. module: product_nomenclature
+#: field:product.nomenclature,child_id:0
+msgid "Child Nomenclatures"
+msgstr "Nomenclatures Enfant"
+
+#. module: product_nomenclature
+#: code:addons/product_nomenclature/product_nomenclature.py:126
+#: code:addons/product_nomenclature/product_nomenclature.py:880
+#: code:addons/product_nomenclature/product_nomenclature.py:890
+#: code:addons/product_nomenclature/product_nomenclature.py:898
+#, python-format
+msgid "Error!"
+msgstr "Erreur!"
+
+#. module: product_nomenclature
+#: field:product.nomenclature,nomen_manda_0_s:0
+msgid "Main Type"
+msgstr "Main Type"
+
+#. module: product_nomenclature
+#: field:product.nomenclature,complete_name:0
+#: field:product.nomenclature,name:0
+msgid "Name"
+msgstr "Nom"
+
+#. module: product_nomenclature
+#: model:ir.model,name:product_nomenclature.model_product_uom_categ
+msgid "Product uom categ"
+msgstr "Produit - Catégorie d'UdM"
+
+#. module: product_nomenclature
+#: code:addons/product_nomenclature/product_nomenclature.py:881
+#, python-format
+msgid "The selected nomenclature's type is '%s'. Must be '%s' (field's type)."
+msgstr "Le type de nomenclature sélectionné est '%s'. Doit être '%s' (Type terrain)."
+
+#. module: product_nomenclature
+#: help:product.nomenclature,sequence:0
+msgid "Gives the sequence order when displaying a list of product nomenclatures."
+msgstr "Donne l'ordre de la séquence lors de l'affichage d'une liste des nomenclatures de produits."
+
+#. module: product_nomenclature
+#: code:addons/product_nomenclature/product_nomenclature.py:891
+#: code:addons/product_nomenclature/product_nomenclature.py:899
+#, python-format
+msgid "The selected nomenclature's level is '%s'. Must be '%s' (field's level)."
+msgstr "Le niveau de nomenclature sélectionné est '%s'. Doit être '%s' (Niveau terrain)."
+
+#. module: product_nomenclature
+#: code:addons/product_nomenclature/product_nomenclature.py:209
+#: code:addons/product_nomenclature/product_nomenclature.py:406
+#, python-format
+msgid "Error !"
+msgstr "Erreur !"
+
+#. module: product_nomenclature
+#: code:addons/product_nomenclature/product_nomenclature.py:135
+#, python-format
+msgid "You selected a nomenclature of the last mandatory level as parent, the new nomenclature's type must be 'optional'."
+msgstr "Vous avez sélectionné une nomenclature du dernier niveau obligatoire en tant que parent, le type de la nouvelle nomenclature doit être «facultatif»."
+
+#. module: product_nomenclature
+#: constraint:product.nomenclature:0
+msgid "Error! The nomenclature complete name must be unique."
+msgstr "Error! The nomenclature complete name must be unique."
+
+#. module: product_nomenclature
+#: view:product.nomenclature:0
+msgid "Nomenclature Filters..."
+msgstr "Nomenclature Filters..."
+
+#. module: product_nomenclature
+#: view:product.product:0
+msgid "Extended Filters..."
+msgstr "Filtres étendus..."
+
+#. module: product_nomenclature
+#: constraint:product.product:0
+msgid "Error: Invalid ean code"
+msgstr "Erreur: code EAN invalide"
+
+#. module: product_nomenclature
+#: code:addons/product_nomenclature/product_nomenclature.py:126
+#, python-format
+msgid "The selected nomenclature should not be proposed."
+msgstr "La nomenclature sélectionnée de devrait pas être proposée."
+
+#. module: product_nomenclature
+#: field:product.nomenclature,custom_name:0
+msgid "Name"
+msgstr "Name"
+
+#. module: product_nomenclature
+#: view:product.product:0
+msgid "Nomenclature Filters..."
+msgstr "Filtres de Nomenclature ..."
+
+#. module: product_nomenclature
+#: model:ir.model,name:product_nomenclature.model_product_category
+msgid "Product Category"
+msgstr "Catégorie du Produit"
+
+#. module: product_nomenclature
+#: field:product.template,nomen_sub_3:0
+#: field:product.template,nomen_sub_3_s:0
+msgid "Sub Class 4"
+msgstr "Sous-Classe 4"
+
+#. module: product_nomenclature
+#: code:addons/product_nomenclature/product_nomenclature.py:209
+#: code:addons/product_nomenclature/product_nomenclature.py:406
+#, python-format
+msgid "Filter not implemented on %s"
+msgstr "Filtre non mis en oeuvre sur %s"
+
+#. module: product_nomenclature
+#: model:ir.model,name:product_nomenclature.model_product_nomenclature
+#: view:product.nomenclature:0
+msgid "Product Nomenclature"
+msgstr "Nomenclature du Produit"
+
+#. module: product_nomenclature
+#: field:product.nomenclature,nomen_type_s:0
+msgid "Nomenclature type"
+msgstr "Nomenclature type"
+
+#. module: product_nomenclature
+#: field:product.template,nomen_manda_3:0
+#: field:product.template,nomen_manda_3_s:0
+msgid "Root"
+msgstr "Origine"
+
+#. module: product_nomenclature
+#: constraint:product.product:0
+msgid "Warning! GMDN code must be digits!"
+msgstr "Avertissement! Le code  GMDN doit être en chiffres!"
+
+#. module: product_nomenclature
+#: selection:product.nomenclature,nomen_type_s:0
+#: selection:product.nomenclature,type:0
+msgid "Optional"
+msgstr "Optionnel"
+
+#. module: product_nomenclature
+#: code:addons/product_nomenclature/product_nomenclature.py:155
+#: code:addons/product_nomenclature/product_nomenclature.py:158
+#: code:addons/product_nomenclature/product_nomenclature.py:250
+#: code:addons/product_nomenclature/product_nomenclature.py:253
+#: code:addons/product_nomenclature/product_nomenclature.py:820
+#, python-format
+msgid "Error"
+msgstr "Erreur"
+
+#. module: product_nomenclature
+#: model:ir.actions.act_window,help:product_nomenclature.product_nomenclature_normal_action_tree
+msgid "This is the nomenclature tree view"
+msgstr "Ceci est la vue arborecente de la nomenclature "
+
+#. module: product_nomenclature
+#: selection:product.nomenclature,sub_level:0
+msgid "3"
+msgstr "3"
+
+#. module: product_nomenclature
+#: code:addons/product_nomenclature/product_nomenclature.py:155
+#: code:addons/product_nomenclature/product_nomenclature.py:820
+#, python-format
+msgid "Level (%s) must be smaller or equal to %s"
+msgstr "Niveau (%s) doit être plus petit ou égale à %s"
+
+#. module: product_nomenclature
+#: field:product.nomenclature,sequence:0
+msgid "Sequence"
+msgstr "Séquence"
+
+#. module: product_nomenclature
+#: help:product.nomenclature,category_id:0
+msgid "If empty, please contact accounting member to create a new product category associated to this family."
+msgstr "Si cette case est vide, veuillez contacter un membre de la comptabilité pour créer une nouvelle catégorie de produits associée à cette famille."
+
+#. module: product_nomenclature
+#: view:product.product:0
+msgid "Information"
+msgstr "Information"
+
+#. module: product_nomenclature
+#: constraint:product.nomenclature:0
+msgid "Error ! You can not create recursive nomenclature."
+msgstr "Erreur ! Vous ne pouvez pas créer de nomenclature récursive."
+
+#. module: product_nomenclature
+#: field:product.nomenclature,number_of_products:0
+msgid "Number of Products"
+msgstr "Nombre de produits"
+
+#. module: product_nomenclature
+#: selection:product.nomenclature,sub_level:0
+msgid "1"
+msgstr "1"
+
+#. module: product_nomenclature
+#: field:product.nomenclature,nomen_manda_2_s:0
+msgid "Family"
+msgstr "Family"
+
+#. module: product_nomenclature
+#: code:addons/product_nomenclature/product_nomenclature.py:158
+#, python-format
+msgid "The type (%s) must be equal to \"optional\" to inherit from leaves"
+msgstr "Le type (%s) doit être égal à  \"facultatif\" pour hériter des congés"
+
+#. module: product_nomenclature
+#: model:ir.actions.act_window,name:product_nomenclature.product_nomenclature_action_form
+#: model:ir.module.module,shortdesc:product_nomenclature.module_meta_information
+#: model:ir.ui.menu,name:product_nomenclature.menu_product_nomenclature_action_form
+msgid "Products Nomenclature"
+msgstr "Nomenclature Produits"
+
+#. module: product_nomenclature
+#: field:product.template,nomen_sub_5:0
+#: field:product.template,nomen_sub_5_s:0
+msgid "Sub Class 6"
+msgstr "Sous-Classe 6"
+
+#. module: product_nomenclature
+#: constraint:product.category:0
+msgid "Error ! You can not create recursive categories."
+msgstr "Erreur ! Vous ne pouvez pas créer des catégories récursives."
+
+#. module: product_nomenclature
+#: view:product.product:0
+msgid "Optional Levels"
+msgstr "Niveaux Optionnels"
+
+#. module: product_nomenclature
+#: code:addons/product_nomenclature/product_nomenclature.py:250
+#, python-format
+msgid "Bad operator : You can only use '=', '!=' or 'ilike' as operator"
+msgstr "Bad operator : You can only use '=', '!=' or 'ilike' as operator"
+
+#. module: product_nomenclature
+#: model:ir.model,name:product_nomenclature.model_product_product
+msgid "Product"
+msgstr "Produit"
+
+#. module: product_nomenclature
+#: constraint:product.product:0
+msgid "If you select \"Non-stockable\" as product type then you have to select \"Make to order\" as procurement method"
+msgstr "Si vous sélectionnez \"Non stockable\" comme type de produit, vous devez sélectionner \"Faire sur commande\" comme méthode d'acquisition"
+
+#. module: product_nomenclature
+#: code:addons/product_nomenclature/product_nomenclature.py:134
+#, python-format
+msgid "Warning!"
+msgstr "Avertissement!"
+
+#. module: product_nomenclature
+#: field:product.template,nomen_sub_0:0
+#: field:product.template,nomen_sub_0_s:0
+msgid "Sub Class 1"
+msgstr "Sous-Classe 1"
+
+#. module: product_nomenclature
+#: field:product.template,nomen_sub_1:0
+#: field:product.template,nomen_sub_1_s:0
+msgid "Sub Class 2"
+msgstr "Sous-Classe 2"
+
+#. module: product_nomenclature
+#: field:product.nomenclature,category_id:0
+msgid "Category"
+msgstr "Catégorie"
+
+#. module: product_nomenclature
+#: view:product.nomenclature:0
+#: view:product.product:0
+#: field:product.template,nomenclature_description:0
+msgid "Nomenclature"
+msgstr "Nomenclature"
+
+#. module: product_nomenclature
+#: field:product.nomenclature,category_ids:0
+msgid "Categories"
+msgstr "Catégories"
+
+#. module: product_nomenclature
+#: sql_constraint:product.product:0
+msgid "The \"Product Code\" must be unique"
+msgstr "Le \"Code produit\" doit être unique"
+
+#. module: product_nomenclature
+#: constraint:product.template:0
+msgid "Error: The default UOM and the purchase UOM must be in the same category."
+msgstr "Erreur : l'UdM par défaut et l'UdM d'achat doivent appartenir à la même catégorie."
+
+#. module: product_nomenclature
+#: view:product.product:0
+msgid "Mandatory Levels"
+msgstr "Niveaux obligatoires"
+
+#. module: product_nomenclature
+#: field:product.nomenclature,nomen_manda_3_s:0
+msgid "Root"
+msgstr "Root"
+
+#. module: product_nomenclature
+#: field:product.category,family_id:0
+#: field:product.template,nomen_manda_2:0
+#: field:product.template,nomen_manda_2_s:0
+msgid "Family"
+msgstr "Famille"
+
+#. module: product_nomenclature
+#: constraint:product.product:0
+msgid "Constraint error on Kit Product."
+msgstr "Erreur de Contrainte sur le produit Kit"
+
+#. module: product_nomenclature
+#: field:product.category,active:0
+#: field:product.nomenclature,active:0
+#: field:product.uom.categ,active:0
+msgid "Active"
+msgstr "Actif"
+
+#. module: product_nomenclature
+#: help:product.category,active:0
+#: help:product.nomenclature,active:0
+#: help:product.uom.categ,active:0
+msgid "If the active field is set to False, it allows to hide the nomenclature without removing it."
+msgstr "Si ce champ actif est configuré sur Faux, cela permet de cacher la nomenclature sans la supprimer."
+
+#. module: product_nomenclature
+#: field:product.template,nomen_manda_0:0
+#: field:product.template,nomen_manda_0_s:0
+msgid "Main Type"
+msgstr "Type Principal"
+
+#. module: product_nomenclature
+#: constraint:product.nomenclature:0
+msgid "Error ! You can not have a category linked to two different family"
+msgstr "Erreur ! Vous ne pouvez pas lier une catégorie à deux familles différentes"
+
+#. module: product_nomenclature
+#: selection:product.nomenclature,sub_level:0
+msgid "6"
+msgstr "6"
+
+#. module: product_nomenclature
+#: field:product.nomenclature,sub_level:0
+msgid "Sub-Level"
+msgstr "Sous-Niveau"
+
+#. module: product_nomenclature
+#: model:ir.actions.act_window,name:product_nomenclature.product_nomenclature_normal_action_tree
+msgid "Products"
+msgstr "Produits"
+
+#. module: product_nomenclature
+#: field:product.template,nomen_sub_2:0
+#: field:product.template,nomen_sub_2_s:0
+msgid "Sub Class 3"
+msgstr "Sous-Classe 3"
+
+#. module: product_nomenclature
+#: selection:product.nomenclature,type:0
+msgid "Mandatory"
+msgstr "Obligatoire"
+
+#. module: product_nomenclature
+#: model:ir.module.module,description:product_nomenclature.module_meta_information
+msgid "\n"
+"    Add nomenclature abilities to products.\n"
+"    "
+msgstr "\n"
+"   Ajoute des capacités à la nomenclature des produits. "
+
+#. module: product_nomenclature
+#: model:ir.model,name:product_nomenclature.model_ir_actions_act_window
+msgid "ir.actions.act_window"
+msgstr "ir.actions.act_window"
+
+#. module: product_nomenclature
+#: field:product.nomenclature,type:0
+msgid "Nomenclature Type"
+msgstr "Type de Nomenclature"
+
+#. module: product_nomenclature
+#: field:product.template,nomen_sub_4:0
+#: field:product.template,nomen_sub_4_s:0
+msgid "Sub Class 5"
+msgstr "Sous-Classe 5"
+
+#. module: product_nomenclature
+#: model:ir.actions.act_window,name:product_nomenclature.product_nomenclature_link_category_action
+#: model:ir.ui.menu,name:product_nomenclature.menu_link_nomenclature_category
+#: view:product.nomenclature:0
+msgid "Link nomenclature/category"
+msgstr "Lier nomenclature/catégorie"
+
+#. module: product_nomenclature
+#: field:product.nomenclature,level:0
+msgid "Level"
+msgstr "Niveau"
+
+#. module: product_nomenclature
+#: model:ir.model,name:product_nomenclature.model_product_template
+msgid "Product Template"
+msgstr "Modèle de Produit"
+
+#. module: product_nomenclature
+#: constraint:product.product:0
+msgid "You must select on order procurement method for Service with Reception products."
+msgstr "Vous devez sélectionner sur la commande le mode d'approvisionnement pour le Service  avec Réception de produits."
+
+#. module: product_nomenclature
+#: field:product.nomenclature,nomen_manda_1_s:0
+#: field:product.template,nomen_manda_1:0
+#: field:product.template,nomen_manda_1_s:0
+msgid "Group"
+msgstr "Groupe"
+

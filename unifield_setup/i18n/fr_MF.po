@@ -1,0 +1,2581 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* unifield_setup
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: unifield_setup
+#: view:lang.setup:0
+msgid "If you change the default language, you should disconect you and re-login to activate the new language."
+msgstr "Si vous changer le langage par défaut, vous devriez vous déconnecter et re-connecter pour activer le nouveau langage."
+
+#. module: unifield_setup
+#: model:ir.actions.act_window,name:unifield_setup.action_project_leadtime_setup
+msgid "Project lead times Configuration"
+msgstr "Configuration Délais Projet"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Western Sahara"
+msgstr "Western Sahara"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Aruba"
+msgstr "Aruba"
+
+#. module: unifield_setup
+#: constraint:sale.price.setup:0
+msgid "You cannot have a negative field price percentage !"
+msgstr "Vous ne pouvez pas avoir de champ de pourcentage de prix en négatif!"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Montserrat"
+msgstr "Montserrat"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "Delaware"
+msgstr "Delaware"
+
+#. module: unifield_setup
+#: field:base.setup.company,bill_state_id:0
+#: field:base.setup.company,ship_state_id:0
+msgid "Fed. State"
+msgstr "Etat fédéral"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Libya"
+msgstr "Libya"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Greenland"
+msgstr "Greenland"
+
+#. module: unifield_setup
+#: model:ir.module.module,shortdesc:unifield_setup.module_meta_information
+msgid "Unifield Setup"
+msgstr "Installation Unifield"
+
+#. module: unifield_setup
+#: model:ir.model,name:unifield_setup.model_delivery_process_setup
+msgid "delivery.process.setup"
+msgstr "delivery.process.setup"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Mozambique"
+msgstr "Mozambique"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Algeria"
+msgstr "Algeria"
+
+#. module: unifield_setup
+#: model:ir.model,name:unifield_setup.model_currency_setup
+msgid "currency.setup"
+msgstr "currency.setup"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Grenada"
+msgstr "Grenada"
+
+#. module: unifield_setup
+#: field:base.setup.company,bill_street:0
+#: field:base.setup.company,ship_street:0
+msgid "Street"
+msgstr "Rue"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Madagascar"
+msgstr "Madagascar"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "Colorado"
+msgstr "Colorado"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Armenia"
+msgstr "Armenia"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Angola"
+msgstr "Angola"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Greece"
+msgstr "Greece"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Guadeloupe (French)"
+msgstr "Guadeloupe (French)"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Ecuador"
+msgstr "Ecuador"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "S. Georgia & S. Sandwich Isls."
+msgstr "S. Georgia & S. Sandwich Isls."
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Benin"
+msgstr "Benin"
+
+#. module: unifield_setup
+#: view:sale.price.setup:0
+msgid "%"
+msgstr "%"
+
+#. module: unifield_setup
+#: model:ir.module.module,description:unifield_setup.module_meta_information
+msgid "\n"
+"    This module aims at implementing the configuration of a Unifield instance.\n"
+"    "
+msgstr "\n"
+"    Ce module vise à mettre en œuvre la configuration d'une instance Unifield.\n"
+"    "
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Gibraltar"
+msgstr "Gibraltar"
+
+#. module: unifield_setup
+#: field:sale.price.setup,sale_price:0
+#: field:unifield.setup.configuration,sale_price:0
+msgid "Fields price percentage"
+msgstr "Champs Pourcentage de Prix"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Virgin Islands (British)"
+msgstr "Virgin Islands (British)"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Nicaragua"
+msgstr "Nicaragua"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "Pennsylvania"
+msgstr "Pennsylvania"
+
+#. module: unifield_setup
+#: view:lang.setup:0
+msgid "Determines the default language of the system."
+msgstr "Détermine le langage par défaut du système."
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Lesotho"
+msgstr "Lesotho"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Mexico"
+msgstr "Mexico"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Taiwan"
+msgstr "Taiwan"
+
+#. module: unifield_setup
+#: view:restrictive.country.setup:0
+msgid "Country restrictions Configuration"
+msgstr "Configuration des Restrictions du Pays"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "Nevada"
+msgstr "Nevada"
+
+#. module: unifield_setup
+#: constraint:product.template:0
+msgid "Error: The default UOM and the purchase UOM must be in the same category."
+msgstr "Erreur : l'UdM par défaut et l'UdM d'achat doivent appartenir à la même catégorie."
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Kyrgyz Republic (Kyrgyzstan)"
+msgstr "Kyrgyz Republic (Kyrgyzstan)"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Monaco"
+msgstr "Monaco"
+
+#. module: unifield_setup
+#: view:lang.setup:0
+msgid "Configure The System Language"
+msgstr "Configurer Le Langage du Système"
+
+#. module: unifield_setup
+#: view:payroll.setup:0
+msgid "Activate the Payroll feature"
+msgstr "Activer l'attribut Paie"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "New Jersey"
+msgstr "New Jersey"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Italy"
+msgstr "Italy"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Bulgaria"
+msgstr "Bulgaria"
+
+#. module: unifield_setup
+#: view:fixed.asset.setup:0
+msgid "Determines if the system will manage fixed asset."
+msgstr "Détermine si le système gèrera les actifs immobilisés. "
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Rwanda"
+msgstr "Rwanda"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Dominican Republic"
+msgstr "Dominican Republic"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "Washington"
+msgstr "Washington"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Serbia"
+msgstr "Serbia"
+
+#. module: unifield_setup
+#: code:addons/unifield_setup/installer/sales_price.py:174
+#, python-format
+msgid "Warning"
+msgstr "Avertissement"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Belgium"
+msgstr "Belgium"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Niue"
+msgstr "Niue"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Ivory Coast (Cote D'Ivoire)"
+msgstr "Ivory Coast (Cote D'Ivoire)"
+
+#. module: unifield_setup
+#: view:restrictive.country.setup:0
+msgid "Country restrictions"
+msgstr "Pays - Restrictions"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "French Guyana"
+msgstr "French Guyana"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Tunisia"
+msgstr "Tunisia"
+
+#. module: unifield_setup
+#: field:unifield.setup.configuration,lang_id:0
+msgid "Default language"
+msgstr "Langage par Défaut"
+
+#. module: unifield_setup
+#: sql_constraint:res.config.users:0
+msgid "You can not have two users with the same login !"
+msgstr "Vous ne pouvez pas avoir deux utilisateurs avec le nom d'identification !"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Tonga"
+msgstr "Tonga"
+
+#. module: unifield_setup
+#: model:ir.model,name:unifield_setup.model_sale_price_setup
+msgid "sale.price.setup"
+msgstr "sale.price.setup"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "Florida"
+msgstr "Florida"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Saint Helena"
+msgstr "Saint Helena"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Macau"
+msgstr "Macau"
+
+#. module: unifield_setup
+#: field:base.setup.company,bill_street2:0
+#: field:base.setup.company,ship_street2:0
+msgid "Street 2"
+msgstr "Rue 2"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Guatemala"
+msgstr "Guatemala"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Latvia"
+msgstr "Latvia"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Hungary"
+msgstr "Hungary"
+
+#. module: unifield_setup
+#: constraint:product.product:0
+msgid "If you select \"Non-stockable\" as product type then you have to select \"Make to order\" as procurement method"
+msgstr "Si vous sélectionnez \"Non stockable\" comme type de produit, vous devez sélectionner \"Faire sur commande\" comme méthode d'acquisition"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Peru"
+msgstr "Peru"
+
+#. module: unifield_setup
+#: view:restrictive.country.setup:0
+msgid "Determines the country restrictions."
+msgstr "Détermine les restrictions pour le pays."
+
+#. module: unifield_setup
+#: field:allocation.stock.setup,error_po_ids:0
+msgid "PO"
+msgstr "BC"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Guam (USA)"
+msgstr "Guam (USA)"
+
+#. module: unifield_setup
+#: view:sale.price.setup:0
+msgid "Configure Your Sales Price"
+msgstr "Configurer Vos Prix de Terrain"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Panama"
+msgstr "Panama"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "Wyoming"
+msgstr "Wyoming"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Gambia"
+msgstr "Gambia"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "El Salvador"
+msgstr "El Salvador"
+
+#. module: unifield_setup
+#: view:project.leadtime.setup:0
+msgid "Project Lead time Configuration"
+msgstr "Configuration Délai Projet"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "Minnesota"
+msgstr "Minnesota"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Bhutan"
+msgstr "Bhutan"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Croatia"
+msgstr "Croatia"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Japan"
+msgstr "Japan"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Paraguay"
+msgstr "Paraguay"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Zaire"
+msgstr "Zaire"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "Maine"
+msgstr "Maine"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Saint Pierre and Miquelon"
+msgstr "Saint Pierre and Miquelon"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Malaysia"
+msgstr "Malaysia"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Canada"
+msgstr "Canada"
+
+#. module: unifield_setup
+#: model:ir.actions.act_window,name:unifield_setup.action_lang_setup
+msgid "Language Setup Configuration"
+msgstr "Configuration de l'Installation du Langage "
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Singapore"
+msgstr "Singapore"
+
+#. module: unifield_setup
+#: view:allocation.stock.setup:0
+msgid "Allocation Stock Configuration"
+msgstr "Configuration d'Allocation de Stock"
+
+#. module: unifield_setup
+#: model:ir.model,name:unifield_setup.model_product_product
+msgid "Product"
+msgstr "Produit"
+
+#. module: unifield_setup
+#: field:allocation.stock.setup,error_sm_central_ids:0
+#: field:allocation.stock.setup,error_sm_cross_ids:0
+msgid "Picking"
+msgstr "Piquage"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Bosnia-Herzegovina"
+msgstr "Bosnia-Herzegovina"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "South Dakota"
+msgstr "South Dakota"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Suriname"
+msgstr "Suriname"
+
+#. module: unifield_setup
+#: field:res.country.restriction.memory,wizard_id:0
+msgid "Wizard"
+msgstr "Assistant"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Guyana"
+msgstr "Guyana"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Tokelau"
+msgstr "Tokelau"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Thailand"
+msgstr "Thailand"
+
+#. module: unifield_setup
+#: view:restrictive.country.setup:0
+msgid "Products"
+msgstr "Produits"
+
+#. module: unifield_setup
+#: selection:delivery.process.setup,delivery_process:0
+#: selection:unifield.setup.configuration,delivery_process:0
+msgid "PICK/PACK/SHIP"
+msgstr "Piquage/Colisage/Expédition"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Cayman Islands"
+msgstr "Cayman Islands"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Central African Republic"
+msgstr "Central African Republic"
+
+#. module: unifield_setup
+#: model:ir.actions.act_window,name:unifield_setup.action_payroll_setup
+msgid "Activate the payroll feature"
+msgstr "Activer l'attribut Paie"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "Illinois"
+msgstr "Illinois"
+
+#. module: unifield_setup
+#: view:fixed.asset.setup:0
+msgid "Activate the Fixed asset configuration"
+msgstr "Activer la configuration des Actifs Immobilisés  "
+
+#. module: unifield_setup
+#: field:payroll.setup,payroll_ok:0
+msgid "Does the system manage Payrolls import from Homere ?"
+msgstr "Le système gère-t-il l'importation de la paie à partir d'Homere ?"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Namibia"
+msgstr "Namibia"
+
+#. module: unifield_setup
+#: view:currency.setup:0
+msgid "Configure Your Currencies"
+msgstr "Configurer Vos Devises"
+
+#. module: unifield_setup
+#: constraint:product.product:0
+msgid "Error: Invalid ean code"
+msgstr "Erreur: code EAN invalide"
+
+#. module: unifield_setup
+#: field:allocation.stock.setup,progress:0
+#: field:currency.setup,progress:0
+#: field:delivery.process.setup,progress:0
+#: field:field.orders.setup,progress:0
+#: field:fixed.asset.setup,progress:0
+#: field:lang.setup,progress:0
+#: field:payroll.setup,progress:0
+#: field:project.leadtime.setup,progress:0
+#: field:restrictive.country.setup,progress:0
+#: field:sale.price.setup,progress:0
+msgid "Configuration Progress"
+msgstr "Progression de la Configuration"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Iraq"
+msgstr "Iraq"
+
+#. module: unifield_setup
+#: field:currency.setup,functional_id:0
+msgid "Functional currency"
+msgstr "Devise fonctionnelle"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Andorra, Principality of"
+msgstr "Andorra, Principality of"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "New Zealand"
+msgstr "New Zealand"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Moldavia"
+msgstr "Moldavia"
+
+#. module: unifield_setup
+#: model:ir.model,name:unifield_setup.model_fixed_asset_setup
+msgid "fixed.asset.setup"
+msgstr "fixed.asset.setup"
+
+#. module: unifield_setup
+#: field:base.setup.company,bill_city:0
+#: field:base.setup.company,ship_city:0
+msgid "City"
+msgstr "Ville"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Anguilla"
+msgstr "Anguilla"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "French Southern Territories"
+msgstr "French Southern Territories"
+
+#. module: unifield_setup
+#: model:ir.actions.act_window,name:unifield_setup.action_restrictive_countries_setup
+msgid "Restrictive Countries Configuration"
+msgstr "Configuration des Pays avec Restrictions"
+
+#. module: unifield_setup
+#: field:base.setup.company,bill_zip:0
+#: field:base.setup.company,ship_zip:0
+msgid "Zip Code"
+msgstr "Code postal"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Philippines"
+msgstr "Philippines"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Neutral Zone"
+msgstr "Neutral Zone"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Slovenia"
+msgstr "Slovenia"
+
+#. module: unifield_setup
+#: selection:allocation.stock.setup,allocation_setup:0
+#: selection:unifield.setup.configuration,allocation_setup:0
+msgid "Allocated"
+msgstr "Alloué"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "Idaho"
+msgstr "Idaho"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Jamaica"
+msgstr "Jamaica"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Ghana"
+msgstr "Ghana"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "District of Columbia"
+msgstr "District of Columbia"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "Nebraska"
+msgstr "Nebraska"
+
+#. module: unifield_setup
+#: field:base.setup.company,bill_country_id:0
+#: field:base.setup.company,ship_country_id:0
+msgid "Country"
+msgstr "Pays"
+
+#. module: unifield_setup
+#: model:ir.model,name:unifield_setup.model_res_config_users
+msgid "res.config.users"
+msgstr "res.config.users"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Kuwait"
+msgstr "Kuwait"
+
+#. module: unifield_setup
+#: view:currency.setup:0
+msgid "Determines used currencies."
+msgstr "Détermine les devises utilisées"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Burundi"
+msgstr "Burundi"
+
+#. module: unifield_setup
+#: field:unifield.setup.configuration,fixed_asset_ok:0
+msgid "System manages fixed asset ?"
+msgstr "Le Système gère-t-il des biens immobilisés ?"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Montenegro"
+msgstr "Montenegro"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_country_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "Georgia"
+msgstr "Georgia"
+
+#. module: unifield_setup
+#: model:ir.model,name:unifield_setup.model_product_template
+msgid "Product Template"
+msgstr "Modèle de Produit"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "Ohio"
+msgstr "Ohio"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Ethiopia"
+msgstr "Ethiopia"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Denmark"
+msgstr "Denmark"
+
+#. module: unifield_setup
+#: field:res.country.restriction.memory,restrict_id:0
+msgid "Restriction"
+msgstr "Limitation"
+
+#. module: unifield_setup
+#: view:field.orders.setup:0
+msgid "Determines if users could use the Field Orders feature."
+msgstr "Détermine si les utilisateurs peuvent utiliser les fonctionnalités des Commandes de Projet."
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Uzbekistan"
+msgstr "Uzbekistan"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Liechtenstein"
+msgstr "Liechtenstein"
+
+#. module: unifield_setup
+#: model:ir.model,name:unifield_setup.model_allocation_stock_setup
+msgid "allocation.stock.setup"
+msgstr "allocation.stock.setup"
+
+#. module: unifield_setup
+#: view:sale.price.setup:0
+msgid " "
+msgstr " "
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Senegal"
+msgstr "Senegal"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "Oregon"
+msgstr "Oregon"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Belize"
+msgstr "Belize"
+
+#. module: unifield_setup
+#: constraint:product.product:0
+msgid "Constraint error on Kit Product."
+msgstr "Erreur de Contrainte sur le produit Kit"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "Oklahoma"
+msgstr "Oklahoma"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Vanuatu"
+msgstr "Vanuatu"
+
+#. module: unifield_setup
+#: view:fixed.asset.setup:0
+#: model:ir.actions.act_window,name:unifield_setup.action_fixed_asset_setup
+msgid "Activate the Fixed asset feature"
+msgstr "Activer les fonctionnalités des Actifs Immobilisés"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Solomon Islands"
+msgstr "Solomon Islands"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Bahamas"
+msgstr "Bahamas"
+
+#. module: unifield_setup
+#: view:payroll.setup:0
+msgid "Activate the Payroll configuration"
+msgstr "Activer la configuration de la Paie"
+
+#. module: unifield_setup
+#: model:ir.model,name:unifield_setup.model_base_setup_company
+msgid "base.setup.company"
+msgstr "base.setup.company"
+
+#. module: unifield_setup
+#: selection:currency.setup,functional_id:0
+#: selection:currency.setup,section_id:0
+msgid "CHF"
+msgstr "CHF"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Antigua and Barbuda"
+msgstr "Antigua and Barbuda"
+
+#. module: unifield_setup
+#: field:allocation.stock.setup,unallocated_ok:0
+msgid "System will use unallocated moves on finance side ?"
+msgstr "Le Système utilisera-t-il des mouvements non-alloués d'un point de vue financier ?"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Chad"
+msgstr "Chad"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Sudan"
+msgstr "Sudan"
+
+#. module: unifield_setup
+#: code:addons/unifield_setup/installer/sales_price.py:175
+#, python-format
+msgid "The Cost Price must be greater than 0 !"
+msgstr "Le Prix de revient doit être supérieur à 0 !"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Somalia"
+msgstr "Somalia"
+
+#. module: unifield_setup
+#: selection:delivery.process.setup,delivery_process:0
+#: selection:unifield.setup.configuration,delivery_process:0
+msgid "Simple OUT"
+msgstr "Simple OUT (sortie)"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Hong Kong"
+msgstr "Hong Kong"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "China"
+msgstr "China"
+
+#. module: unifield_setup
+#: field:delivery.process.setup,delivery_process:0
+#: field:unifield.setup.configuration,delivery_process:0
+msgid "Delivery process"
+msgstr "Processus de Livraison"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "New York"
+msgstr "New York"
+
+#. module: unifield_setup
+#: model:ir.model,name:unifield_setup.model_lang_setup
+msgid "lang.setup"
+msgstr "lang.setup"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Eritrea"
+msgstr "Eritrea"
+
+#. module: unifield_setup
+#: model:ir.model,name:unifield_setup.model_unifield_setup_configuration
+msgid "unifield.setup.configuration"
+msgstr "unifield.setup.configuration"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Myanmar"
+msgstr "Myanmar"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Dominica"
+msgstr "Dominica"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Kenya"
+msgstr "Kenya"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Switzerland"
+msgstr "Switzerland"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Malawi"
+msgstr "Malawi"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Chile"
+msgstr "Chile"
+
+#. module: unifield_setup
+#: model:ir.model,name:unifield_setup.model_field_orders_setup
+msgid "field.orders.setup"
+msgstr "field.orders.setup"
+
+#. module: unifield_setup
+#: selection:allocation.stock.setup,allocation_setup:0
+#: selection:unifield.setup.configuration,allocation_setup:0
+msgid "Mixed"
+msgstr "Mixte"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Norway"
+msgstr "Norway"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Oman"
+msgstr "Oman"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Mauritania"
+msgstr "Mauritania"
+
+#. module: unifield_setup
+#: field:unifield.setup.configuration,restrict_country_ids:0
+msgid "Restrictive countries"
+msgstr "Pays avec Restrictions"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Northern Mariana Islands"
+msgstr "Northern Mariana Islands"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "Alaska"
+msgstr "Alaska"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Jordan"
+msgstr "Jordan"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Svalbard and Jan Mayen Islands"
+msgstr "Svalbard and Jan Mayen Islands"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Mauritius"
+msgstr "Mauritius"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Sierra Leone"
+msgstr "Sierra Leone"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Nigeria"
+msgstr "Nigeria"
+
+#. module: unifield_setup
+#: field:project.leadtime.setup,shipment_leadtime:0
+msgid "Shipment lead time"
+msgstr "Délai d'expédition"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Egypt"
+msgstr "Egypt"
+
+#. module: unifield_setup
+#: field:fixed.asset.setup,fixed_asset_ok:0
+msgid "Is the system manage Fixed assets ?"
+msgstr "Est-ce que le systèm gère des actifs immobilisés?"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Luxembourg"
+msgstr "Luxembourg"
+
+#. module: unifield_setup
+#: field:res.country.restriction.memory,name:0
+#: field:unifield.setup.configuration,name:0
+msgid "Name"
+msgstr "Nom"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "Utah"
+msgstr "Utah"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "Maryland"
+msgstr "Maryland"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Honduras"
+msgstr "Honduras"
+
+#. module: unifield_setup
+#: field:currency.setup,esc_id:0
+msgid "ESC Currency"
+msgstr "Devise ESC"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Ireland"
+msgstr "Ireland"
+
+#. module: unifield_setup
+#: selection:allocation.stock.setup,unallocated_ok:0
+msgid "Yes"
+msgstr "Oui"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Wallis and Futuna Islands"
+msgstr "Wallis and Futuna Islands"
+
+#. module: unifield_setup
+#: constraint:product.product:0
+msgid "Warning! GMDN code must be digits!"
+msgstr "Avertissement! Le code  GMDN doit être en chiffres!"
+
+#. module: unifield_setup
+#: selection:currency.setup,functional_id:0
+#: selection:currency.setup,section_id:0
+msgid "EUR"
+msgstr "EUR"
+
+#. module: unifield_setup
+#: code:addons/unifield_setup/setup_configuration.py:60
+#, python-format
+msgid "An instance of Unifield setup is already running."
+msgstr "Une instance de l'installation Unifield fonctionne déjà."
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Botswana"
+msgstr "Botswana"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Cameroon"
+msgstr "Cameroon"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Vietnam"
+msgstr "Vietnam"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Haiti"
+msgstr "Haiti"
+
+#. module: unifield_setup
+#: field:unifield.setup.configuration,unallocated_ok:0
+msgid "System uses the unallocated stocks ?"
+msgstr "Le Système utilise-t-il des stocks non-alloués ?"
+
+#. module: unifield_setup
+#: field:restrictive.country.setup,restrict_country_ids:0
+msgid "Country restriction"
+msgstr "Restriction pays"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Albania"
+msgstr "Albania"
+
+#. module: unifield_setup
+#: field:allocation.stock.setup,error_location_ids:0
+msgid "Location"
+msgstr "Zone"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Finland"
+msgstr "Finland"
+
+#. module: unifield_setup
+#: help:project.leadtime.setup,preparation_leadtime:0
+msgid "In days"
+msgstr "En jours."
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Bangladesh"
+msgstr "Bangladesh"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "Connecticut"
+msgstr "Connecticut"
+
+#. module: unifield_setup
+#: selection:allocation.stock.setup,allocation_setup:0
+#: selection:unifield.setup.configuration,allocation_setup:0
+msgid "Unallocated"
+msgstr "Non Alloué"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Lithuania"
+msgstr "Lithuania"
+
+#. module: unifield_setup
+#: view:sale.price.setup:0
+msgid "Determines the percentage which will be applied on field price from the product form."
+msgstr "Détermine le pourcentage qui sera appliqué sur le champ du prix à partir du formulaire de produits."
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Barbados"
+msgstr "Barbados"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Cuba"
+msgstr "Cuba"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Australia"
+msgstr "Australia"
+
+#. module: unifield_setup
+#: field:base.setup.company,partner_name:0
+msgid "Partner name"
+msgstr "Nom du partenaire"
+
+#. module: unifield_setup
+#: field:project.leadtime.setup,preparation_leadtime:0
+msgid "Preparation lead time"
+msgstr "Délai de préparation"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Belarus"
+msgstr "Belarus"
+
+#. module: unifield_setup
+#: view:currency.setup:0
+msgid "ESC currency"
+msgstr "Devise ESC"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Tanzania"
+msgstr "Tanzania"
+
+#. module: unifield_setup
+#: code:addons/unifield_setup/installer/project_leadtime.py:62
+#, python-format
+msgid "You cannot have a lead time greater than 9 !"
+msgstr "Vous ne pouvez pas ajouter de délai supérieur à 9 !"
+
+#. module: unifield_setup
+#: model:ir.model,name:unifield_setup.model_restrictive_country_setup
+msgid "restrictive.country.setup"
+msgstr "restrictive.country.setup"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Guinea"
+msgstr "Guinea"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Cook Islands"
+msgstr "Cook Islands"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Morocco"
+msgstr "Morocco"
+
+#. module: unifield_setup
+#: view:delivery.process.setup:0
+msgid "Configure Your Delivery Process"
+msgstr "Configure Votre Processus de Livraison"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Venezuela"
+msgstr "Venezuela"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Congo"
+msgstr "Congo"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Reunion (French)"
+msgstr "Reunion (French)"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Togo"
+msgstr "Togo"
+
+#. module: unifield_setup
+#: field:lang.setup,lang_id:0
+msgid "Language"
+msgstr "Langue"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Fiji"
+msgstr "Fiji"
+
+#. module: unifield_setup
+#: field:allocation.stock.setup,allocation_setup:0
+#: field:unifield.setup.configuration,allocation_setup:0
+msgid "Allocated stocks"
+msgstr "Stocks Alloués"
+
+#. module: unifield_setup
+#: code:addons/unifield_setup/installer/currency_setup.py:97
+#: code:addons/unifield_setup/installer/currency_setup.py:101
+#, python-format
+msgid "No pricelist found for this currency !"
+msgstr "Le système n'a pas trouvé de liste de prix pour cette devise !"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "British Indian Ocean Territory"
+msgstr "British Indian Ocean Territory"
+
+#. module: unifield_setup
+#: view:delivery.process.setup:0
+#: model:ir.actions.act_window,name:unifield_setup.action_delivery_process_setup
+msgid "Delivery Process Configuration"
+msgstr "Configuration Processus de Livraison"
+
+#. module: unifield_setup
+#: code:addons/unifield_setup/installer/delivery_process.py:116
+#, python-format
+msgid "You have some Picking Tickets, Packing Lists or Shipments not done or cancelled. \n"
+"So, you cannot choose 'Simple OUT' as Delivery process while these documents are not done/cancelled !"
+msgstr "Vous avez quelques Bons de Prélèvements, Listes de Colisage ou des Expéditions qui ne sont pas encore créés ou annulés.\n"
+"Donc, vous ne pouvez pas choisir «OUT(sortie) Simple» en tant que processus de livraison alors que ces documents ne sont pas créés / annulés!"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Qatar"
+msgstr "Qatar"
+
+#. module: unifield_setup
+#: model:ir.actions.act_window,name:unifield_setup.action_allocation_stock_setup
+msgid "Allocated Setup Configuration"
+msgstr "Configuration de l'Installation Allouée"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Tuvalu"
+msgstr "Tuvalu"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Cambodia, Kingdom of"
+msgstr "Cambodia, Kingdom of"
+
+#. module: unifield_setup
+#: field:base.setup.company,second_time:0
+#: field:currency.setup,second_time:0
+msgid "Config. Wizard launched for the second time"
+msgstr "Assistant de configuration lancé pour la deuxième fois"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "North Carolina"
+msgstr "North Carolina"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "South Africa"
+msgstr "South Africa"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Bouvet Island"
+msgstr "Bouvet Island"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "Indiana"
+msgstr "Indiana"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "Virginia"
+msgstr "Virginia"
+
+#. module: unifield_setup
+#: view:allocation.stock.setup:0
+msgid "Display Locations"
+msgstr "Affichage Zones"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Saint Lucia"
+msgstr "Saint Lucia"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "United Arab Emirates"
+msgstr "United Arab Emirates"
+
+#. module: unifield_setup
+#: constraint:res.config.users:0
+msgid "The chosen company is not in the allowed companies for this user"
+msgstr "La société choisie ne fait pas partie des sociétés autorisées pour cet utilisateur."
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Norfolk Island"
+msgstr "Norfolk Island"
+
+#. module: unifield_setup
+#: selection:lang.setup,lang_id:0
+msgid "MSF French"
+msgstr "MSF French"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Guinea Bissau"
+msgstr "Guinea Bissau"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Heard and McDonald Islands"
+msgstr "Heard and McDonald Islands"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Lebanon"
+msgstr "Lebanon"
+
+#. module: unifield_setup
+#: code:addons/unifield_setup/installer/restrictive_country.py:138
+#, python-format
+msgid "You cannot remove this restriction because it is in use in product(s)"
+msgstr "Vous ne pouvez pas supprimer cette restriction car elle est utilisée par le(s) produit (s)"
+
+#. module: unifield_setup
+#: model:ir.model,name:unifield_setup.model_ir_actions_todo
+msgid "ir.actions.todo"
+msgstr "ir.actions.todo"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "Montana"
+msgstr "Montana"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "France"
+msgstr "France"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "North Dakota"
+msgstr "North Dakota"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Kazakhstan"
+msgstr "Kazakhstan"
+
+#. module: unifield_setup
+#: view:allocation.stock.setup:0
+msgid "Display Picking (Cross-docking)"
+msgstr "Affichage Piquage (Transbordement)"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Portugal"
+msgstr "Portugal"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "North Korea"
+msgstr "North Korea"
+
+#. module: unifield_setup
+#: field:field.orders.setup,field_orders_ok:0
+#: field:unifield.setup.configuration,field_orders_ok:0
+msgid "Activate the Field Orders feature ?"
+msgstr "Activer les fonctionnalités des Commandes de Projet ?"
+
+#. module: unifield_setup
+#: selection:lang.setup,lang_id:0
+msgid "MSF English"
+msgstr "MSF English"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Estonia"
+msgstr "Estonia"
+
+#. module: unifield_setup
+#: help:unifield.setup.configuration,sale_price:0
+msgid "This percentage will be applied on field price from product form view."
+msgstr "Ce pourcentage sera appliqué sur le champ du prix  à partir de la vue du formulaire du produit"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Burkina Faso"
+msgstr "Burkina Faso"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Colombia"
+msgstr "Colombia"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "New Hampshire"
+msgstr "New Hampshire"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Puerto Rico"
+msgstr "Puerto Rico"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Israel"
+msgstr "Israel"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Zimbabwe"
+msgstr "Zimbabwe"
+
+#. module: unifield_setup
+#: code:addons/unifield_setup/setup_configuration.py:106
+#, python-format
+msgid "No configuration found !"
+msgstr "Pas de Configuration trouvée !"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Czech Republic"
+msgstr "Czech Republic"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "Hawaii"
+msgstr "Hawaii"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "South Korea"
+msgstr "South Korea"
+
+#. module: unifield_setup
+#: model:ir.model,name:unifield_setup.model_res_config
+msgid "res.config"
+msgstr "res.config"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Gabon"
+msgstr "Gabon"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Kiribati"
+msgstr "Kiribati"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "Missouri"
+msgstr "Missouri"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Sri Lanka"
+msgstr "Sri Lanka"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Turks and Caicos Islands"
+msgstr "Turks and Caicos Islands"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "Kentucky"
+msgstr "Kentucky"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "Iowa"
+msgstr "Iowa"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Congo, The Democratic Republic of the"
+msgstr "Congo, The Democratic Republic of the"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "Tennessee"
+msgstr "Tennessee"
+
+#. module: unifield_setup
+#: view:allocation.stock.setup:0
+msgid "Display Picking (Central stock)"
+msgstr "Affichage Piquage (Stock Central)"
+
+#. module: unifield_setup
+#: selection:lang.setup,lang_id:0
+msgid "MSF Spanish"
+msgstr "MSF Spanish"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Micronesia"
+msgstr "Micronesia"
+
+#. module: unifield_setup
+#: sql_constraint:product.product:0
+msgid "The \"Product Code\" must be unique"
+msgstr "Le \"Code produit\" doit être unique"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "Rhode Island"
+msgstr "Rhode Island"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Brazil"
+msgstr "Brazil"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Brunei Darussalam"
+msgstr "Brunei Darussalam"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Uruguay"
+msgstr "Uruguay"
+
+#. module: unifield_setup
+#: view:allocation.stock.setup:0
+msgid "Display PO"
+msgstr "Affichage BC"
+
+#. module: unifield_setup
+#: field:unifield.setup.configuration,payroll_ok:0
+msgid "System manages payrolls ?"
+msgstr "Le système gère-t-il la paie ?"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Comoros"
+msgstr "Comoros"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "Michigan"
+msgstr "Michigan"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Seychelles"
+msgstr "Seychelles"
+
+#. module: unifield_setup
+#: field:ir.ui.menu,active:0
+msgid "Active"
+msgstr "Actif"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Indonesia"
+msgstr "Indonesia"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Mali"
+msgstr "Mali"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "United Kingdom"
+msgstr "United Kingdom"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Slovak Republic"
+msgstr "Slovak Republic"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Faroe Islands"
+msgstr "Faroe Islands"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Bahrain"
+msgstr "Bahrain"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Cyprus"
+msgstr "Cyprus"
+
+#. module: unifield_setup
+#: selection:allocation.stock.setup,unallocated_ok:0
+msgid "No"
+msgstr "Non"
+
+#. module: unifield_setup
+#: model:ir.model,name:unifield_setup.model_payroll_setup
+msgid "payroll.setup"
+msgstr "payroll.setup"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Yugoslavia"
+msgstr "Yugoslavia"
+
+#. module: unifield_setup
+#: view:allocation.stock.setup:0
+#: view:currency.setup:0
+#: view:delivery.process.setup:0
+#: view:field.orders.setup:0
+#: view:fixed.asset.setup:0
+#: view:lang.setup:0
+#: view:payroll.setup:0
+#: view:project.leadtime.setup:0
+#: view:restrictive.country.setup:0
+#: view:sale.price.setup:0
+msgid "res_config_contents"
+msgstr "res_config_contents"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "American Samoa"
+msgstr "American Samoa"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "Arkansas"
+msgstr "Arkansas"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Swaziland"
+msgstr "Swaziland"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "United States"
+msgstr "United States"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "California"
+msgstr "California"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Azerbaijan"
+msgstr "Azerbaijan"
+
+#. module: unifield_setup
+#: code:addons/unifield_setup/installer/project_leadtime.py:58
+#, python-format
+msgid "You cannot have a negative lead time !"
+msgstr "Vous ne pouvez pas avoir de champ de délai en négatif !"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Turkmenistan"
+msgstr "Turkmenistan"
+
+#. module: unifield_setup
+#: constraint:product.product:0
+msgid "You must select on order procurement method for Service with Reception products."
+msgstr "Vous devez sélectionner sur la commande le mode d'approvisionnement pour le Service  avec Réception de produits."
+
+#. module: unifield_setup
+#: view:restrictive.country.setup:0
+msgid "Configure Your Country Restrictions"
+msgstr "Configurer Vos Restrictions du Pays"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "USA Minor Outlying Islands"
+msgstr "USA Minor Outlying Islands"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Falkland Islands"
+msgstr "Falkland Islands"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "India"
+msgstr "India"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "Alabama"
+msgstr "Alabama"
+
+#. module: unifield_setup
+#: model:ir.model,name:unifield_setup.model_res_country_restriction_memory
+msgid "res.country.restriction.memory"
+msgstr "res.country.restriction.memory"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Austria"
+msgstr "Austria"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Cape Verde"
+msgstr "Cape Verde"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Syria"
+msgstr "Syria"
+
+#. module: unifield_setup
+#: model:ir.model,name:unifield_setup.model_ir_ui_menu
+msgid "ir.ui.menu"
+msgstr "ir.ui.menu"
+
+#. module: unifield_setup
+#: view:payroll.setup:0
+msgid "Determines if the system will manage payrolls."
+msgstr "Détermine si le système gérera la paie."
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Bolivia"
+msgstr "Bolivia"
+
+#. module: unifield_setup
+#: view:field.orders.setup:0
+msgid "Activate the Field orders feature"
+msgstr "Activer les fonctionnalités des Commandes de Projet ?"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "Louisiana"
+msgstr "Louisiana"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Virgin Islands (USA)"
+msgstr "Virgin Islands (USA)"
+
+#. module: unifield_setup
+#: code:addons/unifield_setup/installer/field_orders.py:74
+#, python-format
+msgid "You cannot de-activate the field orders feature, because some field orders are currently not done/cancelled."
+msgstr "Vous ne pouvez pas dés-activer les applications des commandes de projet car certaines de ces commandes sont actuellement annulées ou pas encore créés."
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Martinique (French)"
+msgstr "Martinique (French)"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Netherlands Antilles"
+msgstr "Netherlands Antilles"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Papua New Guinea"
+msgstr "Papua New Guinea"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Trinidad and Tobago"
+msgstr "Trinidad and Tobago"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Iran"
+msgstr "Iran"
+
+#. module: unifield_setup
+#: view:currency.setup:0
+msgid "Currencies Configuration"
+msgstr "Configuration Devises"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Afghanistan, Islamic State of"
+msgstr "Afghanistan, Islamic State of"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Iceland"
+msgstr "Iceland"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "Wisconsin"
+msgstr "Wisconsin"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Netherlands"
+msgstr "Netherlands"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "East Timor"
+msgstr "East Timor"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "Vermont"
+msgstr "Vermont"
+
+#. module: unifield_setup
+#: code:addons/unifield_setup/installer/currency_setup.py:97
+#: code:addons/unifield_setup/installer/currency_setup.py:101
+#: code:addons/unifield_setup/installer/delivery_process.py:116
+#: code:addons/unifield_setup/installer/field_orders.py:74
+#: code:addons/unifield_setup/installer/project_leadtime.py:57
+#: code:addons/unifield_setup/installer/project_leadtime.py:61
+#: code:addons/unifield_setup/installer/restrictive_country.py:138
+#: code:addons/unifield_setup/setup_configuration.py:106
+#: view:allocation.stock.setup:0
+#: field:allocation.stock.setup,error_central_ok:0
+#: field:allocation.stock.setup,error_cross_ok:0
+#: field:allocation.stock.setup,error_location_ok:0
+#: field:allocation.stock.setup,error_msg:0
+#: field:allocation.stock.setup,error_ok:0
+#: field:allocation.stock.setup,error_po_ok:0
+#: field:restrictive.country.setup,error:0
+#: field:restrictive.country.setup,error_msg:0
+#, python-format
+msgid "Error"
+msgstr "Erreur"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "Mississippi"
+msgstr "Mississippi"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Russian Federation"
+msgstr "Russian Federation"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Polynesia (French)"
+msgstr "Polynesia (French)"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Turkey"
+msgstr "Turkey"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "Texas"
+msgstr "Texas"
+
+#. module: unifield_setup
+#: view:delivery.process.setup:0
+msgid "Determines the flow for outgoing deliveries."
+msgstr "Détermine le flux des livraisons sortantes."
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Christmas Island"
+msgstr "Christmas Island"
+
+#. module: unifield_setup
+#: model:ir.model,name:unifield_setup.model_project_leadtime_setup
+msgid "project.leadtime.setup"
+msgstr "project.leadtime.setup"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "FYROM"
+msgstr "FYROM"
+
+#. module: unifield_setup
+#: help:project.leadtime.setup,shipment_leadtime:0
+msgid "In days."
+msgstr "En jours."
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Laos"
+msgstr "Laos"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Pakistan"
+msgstr "Pakistan"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Holy See (Vatican City State)"
+msgstr "Holy See (Vatican City State)"
+
+#. module: unifield_setup
+#: view:currency.setup:0
+#: field:currency.setup,section_id:0
+msgid "Section currency"
+msgstr "Devise de la Section"
+
+#. module: unifield_setup
+#: field:base.setup.company,bill_phone:0
+#: field:base.setup.company,ship_phone:0
+msgid "Phone"
+msgstr "Tél."
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Nepal"
+msgstr "Nepal"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Saint Vincent & Grenadines"
+msgstr "Saint Vincent & Grenadines"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "Arizona"
+msgstr "Arizona"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "South Carolina"
+msgstr "South Carolina"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Tajikistan"
+msgstr "Tajikistan"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Costa Rica"
+msgstr "Costa Rica"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Malta"
+msgstr "Malta"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "San Marino"
+msgstr "San Marino"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Palau"
+msgstr "Palau"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Saint Tome (Sao Tome) and Principe"
+msgstr "Saint Tome (Sao Tome) and Principe"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Liberia"
+msgstr "Liberia"
+
+#. module: unifield_setup
+#: view:allocation.stock.setup:0
+msgid "Determines if the stock is allocated or not or both."
+msgstr "Détermine si le stock est alloué ou pas ou les deux."
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Cocos (Keeling) Islands"
+msgstr "Cocos (Keeling) Islands"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Argentina"
+msgstr "Argentina"
+
+#. module: unifield_setup
+#: view:project.leadtime.setup:0
+msgid "Your company lead times will be used on order dates management."
+msgstr "Vos délais d'entreprise seront utilisés lors de la gestion des dates de commande."
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Equatorial Guinea"
+msgstr "Equatorial Guinea"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Marshall Islands"
+msgstr "Marshall Islands"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Zambia"
+msgstr "Zambia"
+
+#. module: unifield_setup
+#: view:project.leadtime.setup:0
+msgid "Configure Your Company Lead times"
+msgstr "Configurer Vos Délais pour la Société"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Samoa"
+msgstr "Samoa"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "West Virginia"
+msgstr "West Virginia"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Mayotte"
+msgstr "Mayotte"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Saudi Arabia"
+msgstr "Saudi Arabia"
+
+#. module: unifield_setup
+#: view:field.orders.setup:0
+#: model:ir.actions.act_window,name:unifield_setup.action_field_orders_setup
+msgid "Activate the Field orders"
+msgstr "Activer les Commandes de Projet ?"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "Kansas"
+msgstr "Kansas"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Niger"
+msgstr "Niger"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Germany"
+msgstr "Germany"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Saint Kitts & Nevis Anguilla"
+msgstr "Saint Kitts & Nevis Anguilla"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Ukraine"
+msgstr "Ukraine"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Pitcairn Island"
+msgstr "Pitcairn Island"
+
+#. module: unifield_setup
+#: model:ir.model,name:unifield_setup.model_res_config_view
+msgid "res.config.view"
+msgstr "res.config.view"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "New Mexico"
+msgstr "New Mexico"
+
+#. module: unifield_setup
+#: view:lang.setup:0
+msgid "Language Configuration"
+msgstr "Configuration du Langage "
+
+#. module: unifield_setup
+#: model:ir.actions.act_window,name:unifield_setup.action_sale_price_setup
+#: view:sale.price.setup:0
+msgid "Sales Price Configuration"
+msgstr "Configuration Prix de Terrain"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Nauru"
+msgstr "Nauru"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Spain"
+msgstr "Spain"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Mongolia"
+msgstr "Mongolia"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Romania"
+msgstr "Romania"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_state_id:0
+#: selection:base.setup.company,ship_state_id:0
+msgid "Massachusetts"
+msgstr "Massachusetts"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Uganda"
+msgstr "Uganda"
+
+#. module: unifield_setup
+#: view:allocation.stock.setup:0
+msgid "Configure Your Allocated Stock"
+msgstr "Configurer Votre Stock Alloué"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Djibouti"
+msgstr "Djibouti"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Poland"
+msgstr "Poland"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Maldives"
+msgstr "Maldives"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Bermuda"
+msgstr "Bermuda"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Yemen"
+msgstr "Yemen"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Antarctica"
+msgstr "Antarctica"
+
+#. module: unifield_setup
+#: field:allocation.stock.setup,config_logo:0
+#: field:currency.setup,config_logo:0
+#: field:delivery.process.setup,config_logo:0
+#: field:field.orders.setup,config_logo:0
+#: field:fixed.asset.setup,config_logo:0
+#: field:lang.setup,config_logo:0
+#: field:payroll.setup,config_logo:0
+#: field:project.leadtime.setup,config_logo:0
+#: field:restrictive.country.setup,config_logo:0
+#: field:sale.price.setup,config_logo:0
+msgid "Image"
+msgstr "Image"
+
+#. module: unifield_setup
+#: model:ir.actions.act_window,name:unifield_setup.action_currency_setup
+msgid "Currency Setup Configuration"
+msgstr "Configuration de l'Installation Devise"
+
+#. module: unifield_setup
+#: help:sale.price.setup,sale_price:0
+msgid "This percentage will be applied on field price from product form view.\n"
+"  The Field Price is computed as follow: [Standard Price * (1 + Fields price percentage)]"
+msgstr "Ce pourcentage doit être appliqué au prix sur le terrain à partir de l'affichage des produits.\n"
+" Le prix sur le terrain est calculé comme suit : [Prix Standard * (1 + pourcentage prix terrain)]"
+
+#. module: unifield_setup
+#: field:base.setup.company,bill_email:0
+#: field:base.setup.company,ship_email:0
+msgid "E-mail"
+msgstr "Courriel"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "Sweden"
+msgstr "Sweden"
+
+#. module: unifield_setup
+#: selection:base.setup.company,bill_country_id:0
+#: selection:base.setup.company,ship_country_id:0
+msgid "New Caledonia (French)"
+msgstr "New Caledonia (French)"
+

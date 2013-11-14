@@ -1,0 +1,1202 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* specific_rules
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: specific_rules
+#: field:initial.stock.inventory.line,kc_check:0
+#: field:stock.inventory.line,kc_check:0
+#: field:stock.move,kc_check:0
+#: field:stock.move.memory.in,kc_check:0
+#: field:stock.move.memory.out,kc_check:0
+#: field:stock.production.lot,kc_check:0
+msgid "KC"
+msgstr "GF (KC)"
+
+#. module: specific_rules
+#: code:addons/specific_rules/specific_rules.py:666
+#: constraint:stock.move:0
+#, python-format
+msgid "You must assign a batch number for this product."
+msgstr "Vous devez mentionner un numéro de lot pour ce produit."
+
+#. module: specific_rules
+#: code:addons/specific_rules/specific_rules.py:653
+#, python-format
+msgid "The selected product is neither Batch Number Mandatory nor Expiry Date Mandatory."
+msgstr "Pour le produit sélectionné, il n'y a pas d'obligation de mention de numéro de lot ni de date d'expiration."
+
+#. module: specific_rules
+#: field:stock.move,init_inv_ids:0
+msgid "Created Moves"
+msgstr "Created Moves"
+
+#. module: specific_rules
+#: field:initial.stock.inventory.line,average_cost:0
+msgid "Initial average cost"
+msgstr "Coût moyen initial"
+
+#. module: specific_rules
+#: model:ir.model,name:specific_rules.model_stock_report_prodlots_virtual
+msgid "Stock report by production lots virtual"
+msgstr "Rapport de stock par lot de production virtuel"
+
+#. module: specific_rules
+#: model:ir.model,name:specific_rules.model_sale_order
+msgid "Sales Order"
+msgstr "Commande de Terrain"
+
+#. module: specific_rules
+#: code:addons/specific_rules/specific_rules.py:647
+#: code:addons/specific_rules/specific_rules.py:650
+#: code:addons/specific_rules/specific_rules.py:653
+#: code:addons/specific_rules/specific_rules.py:655
+#: code:addons/specific_rules/specific_rules.py:657
+#: code:addons/specific_rules/specific_rules.py:666
+#, python-format
+msgid "Error!"
+msgstr "Erreur!"
+
+#. module: specific_rules
+#: model:ir.model,name:specific_rules.model_stock_partial_picking
+msgid "Partial Picking"
+msgstr "Piquage Partiel"
+
+#. module: specific_rules
+#: constraint:stock.location:0
+msgid "You cannot define a quarantine location as chained location."
+msgstr "Vous ne pouvez pas définir une Zone \"Quarantaine\" en tant que Zone enchaînée."
+
+#. module: specific_rules
+#: view:stock.production.lot:0
+msgid "Delete"
+msgstr "Supprimer"
+
+#. module: specific_rules
+#: field:initial.stock.inventory.line,has_problem:0
+#: field:stock.inventory.line,has_problem:0
+msgid "Has problem"
+msgstr "Problème"
+
+#. module: specific_rules
+#: field:initial.stock.inventory.line,location_id:0
+#: model:ir.model,name:specific_rules.model_stock_location
+#: field:stock.report.prodlots.virtual,location_id:0
+msgid "Location"
+msgstr "Zone"
+
+#. module: specific_rules
+#: constraint:purchase.order:0
+msgid "If you tick the box \"cross docking\", you cannot have an other location than \"Cross docking\""
+msgstr "Si vous cochez la case \"transbordement\", vous ne pouvez pas avoir d'autre lieu que \"Transbordement\""
+
+#. module: specific_rules
+#: model:ir.model,name:specific_rules.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Ligne Commande Terrain"
+
+#. module: specific_rules
+#: view:stock.cost.reevaluation:0
+msgid "Confirm"
+msgstr "Confirmer"
+
+#. module: specific_rules
+#: field:initial.stock.inventory.line,np_check:0
+#: field:stock.inventory.line,np_check:0
+#: field:stock.move,np_check:0
+#: field:stock.move.memory.in,np_check:0
+#: field:stock.move.memory.out,np_check:0
+#: field:stock.production.lot,np_check:0
+msgid "NP"
+msgstr "SP (NP)"
+
+#. module: specific_rules
+#: constraint:product.product:0
+msgid "Error: Invalid ean code"
+msgstr "Erreur: code EAN invalide"
+
+#. module: specific_rules
+#: code:addons/specific_rules/specific_rules.py:1480
+#: code:addons/specific_rules/wizard/stock_partial_move.py:156
+#, python-format
+msgid "The selected Expiry Date does not exist in the system. It will be created during validation process."
+msgstr "La Date d'Expiration sélectionnée n'existe pas dans le système. Elle sera créée au cours du processus de validation."
+
+#. module: specific_rules
+#: field:stock.production.lot,is_expired:0
+msgid "Expired ?"
+msgstr "Expired ?"
+
+#. module: specific_rules
+#: constraint:product.product:0
+#: constraint:sale.order.line:0
+msgid "You must select on order procurement method for Service with Reception products."
+msgstr "Vous devez sélectionner sur la commande le mode d'approvisionnement pour le Service  avec Réception de produits."
+
+#. module: specific_rules
+#: field:stock.move.memory.in,quantity_ordered:0
+#: field:stock.move.memory.out,quantity_ordered:0
+msgid "Quantity ordered"
+msgstr "Quantité commandée"
+
+#. module: specific_rules
+#: code:addons/specific_rules/stock.py:74
+#, python-format
+msgid "Please enter at least one line in stock inventory before confirm it."
+msgstr "Veuillez encoder au moins une ligne dans l'inventaire du stock avant de confirmer."
+
+#. module: specific_rules
+#: help:product.uom,uom_by_parent:0
+msgid "Field used to filter the UoM for a specific product"
+msgstr "Field used to filter the UoM for a specific product"
+
+#. module: specific_rules
+#: view:initial.stock.inventory:0
+#: field:stock.cost.reevaluation,name:0
+msgid "Reference"
+msgstr "Référence"
+
+#. module: specific_rules
+#: model:ir.model,name:specific_rules.model_product_uom
+msgid "Product Unit of Measure"
+msgstr "Produit - Unité de Mesure"
+
+#. module: specific_rules
+#: code:addons/specific_rules/wizard/stock_partial_picking.py:41
+#, python-format
+msgid "You ship %s products, please refer to the appropriate procedure and ensure that the mean of transport is appropriate."
+msgstr "Vous envoyez des %s, merci de vous référer à la procédure appropriée."
+
+#. module: specific_rules
+#: view:report.stock.inventory:0
+msgid "Expiry Month"
+msgstr "Mois d'Expiration"
+
+#. module: specific_rules
+#: field:initial.stock.inventory.line,dg_check:0
+#: field:stock.inventory.line,dg_check:0
+#: field:stock.move,dg_check:0
+#: field:stock.move.memory.in,dg_check:0
+#: field:stock.move.memory.out,dg_check:0
+#: field:stock.production.lot,dg_check:0
+msgid "DG"
+msgstr "MD (DG)"
+
+#. module: specific_rules
+#: model:ir.module.module,description:specific_rules.module_meta_information
+msgid "\n"
+"    Specific Management Rules\n"
+"    "
+msgstr "\n"
+"    Règles de Gestion Spécifique "
+
+#. module: specific_rules
+#: field:initial.stock.inventory.line,currency_id:0
+msgid "Functional currency"
+msgstr "Devise fonctionnelle"
+
+#. module: specific_rules
+#: code:addons/specific_rules/specific_rules.py:300
+#: code:addons/specific_rules/specific_rules.py:342
+#: constraint:stock.warehouse.orderpoint:0
+#, python-format
+msgid "You have to select a product UOM in the same category than the purchase UOM of the product"
+msgstr "Vous devez sélectionner une UdM du produit dans la même catégorie que l'unité de mesure de l'achat du produit"
+
+#. module: specific_rules
+#: constraint:stock.move:0
+#: constraint:stock.picking:0
+msgid "Wrong reason type for an OUT created from scratch."
+msgstr "Mauvais type de motif pour une livraison OUT créée à partir de rien."
+
+#. module: specific_rules
+#: field:initial.stock.inventory.line,prod_lot_id:0
+#: field:initial.stock.inventory.line,prodlot_name:0
+#: view:report.stock.inventory:0
+msgid "Batch"
+msgstr "Lot"
+
+#. module: specific_rules
+#: code:addons/specific_rules/wizard/stock_partial_picking.py:42
+#, python-format
+msgid "Copy all"
+msgstr "Copier tout"
+
+#. module: specific_rules
+#: view:stock.production.lot:0
+msgid "Expiry Dates"
+msgstr "Dates d'Expiration"
+
+#. module: specific_rules
+#: constraint:sale.order:0
+msgid "You cannot validate this sale order because it contains a line with an inactive product"
+msgstr "Vous ne pouvez pas valider cette commande client car elle contient des lignes avec un produit inactif"
+
+#. module: specific_rules
+#: constraint:purchase.order:0
+msgid "You cannot choose an internal supplier for this purchase order"
+msgstr "You cannot choose an internal supplier for this purchase order"
+
+#. module: specific_rules
+#: field:initial.stock.inventory,state:0
+#: field:initial.stock.inventory.line,state:0
+#: field:stock.cost.reevaluation,state:0
+msgid "State"
+msgstr "Statut"
+
+#. module: specific_rules
+#: constraint:initial.stock.inventory.line:0
+msgid "You cannot have two lines with the same product and different average cost."
+msgstr "Vous ne pouvez pas avoir deux lignes pour le produit avec un coût moyen différent."
+
+#. module: specific_rules
+#: code:addons/specific_rules/wizard/stock_partial_picking.py:61
+#, python-format
+msgid "heat sensitive and dangerous goods"
+msgstr "produits sensibles à la chaleur et des marchandises dangereuses"
+
+#. module: specific_rules
+#: field:stock.production.lot,stock_virtual:0
+msgid "Available Stock"
+msgstr "Stock disponible"
+
+#. module: specific_rules
+#: model:ir.module.module,shortdesc:specific_rules.module_meta_information
+msgid "Specific Rules"
+msgstr "Règles Particulières"
+
+#. module: specific_rules
+#: field:product.uom,uom_by_parent:0
+msgid "UoM by Parent"
+msgstr "UoM by Parent"
+
+#. module: specific_rules
+#: model:ir.model,name:specific_rules.model_purchase_order
+msgid "Purchase Order"
+msgstr "Bon de Commande"
+
+#. module: specific_rules
+#: field:stock.move.memory.in,expiry_date_check:0
+#: field:stock.move.memory.out,expiry_date_check:0
+msgid "Expiry Date Check"
+msgstr "Vérification Date d'Expiration"
+
+#. module: specific_rules
+#: field:initial.stock.inventory,nomen_manda_0:0
+#: field:stock.cost.reevaluation,nomen_manda_0:0
+#: field:stock.inventory,nomen_manda_0:0
+msgid "Main Type"
+msgstr "Type Principal"
+
+#. module: specific_rules
+#: view:initial.stock.inventory:0
+#: field:initial.stock.inventory.line,exp_check:0
+#: field:stock.inventory.line,exp_check:0
+#: field:stock.move,exp_check:0
+#: field:stock.move.memory.in,exp_check:0
+#: field:stock.move.memory.out,exp_check:0
+#: field:stock.production.lot,exp_check:0
+msgid "Exp"
+msgstr "Exp"
+
+#. module: specific_rules
+#: model:ir.model,name:specific_rules.model_stock_production_lot_revision
+msgid "Production lot revisions"
+msgstr "Révisions des lots de productions"
+
+#. module: specific_rules
+#: constraint:stock.move:0
+msgid "You must assign an asset for this product."
+msgstr "Vous devez mentionner un bien pour ce produit."
+
+#. module: specific_rules
+#: view:initial.stock.inventory:0
+#: view:stock.cost.reevaluation:0
+#: view:stock.inventory:0
+msgid "Fill lines"
+msgstr "Lignes à remplir"
+
+#. module: specific_rules
+#: sql_constraint:stock.production.lot:0
+msgid "Batch name must be unique per instance and product!"
+msgstr "Batch name must be unique per instance and product!"
+
+#. module: specific_rules
+#: view:initial.stock.inventory:0
+#: field:initial.stock.inventory,inventory_line_id:0
+msgid "Inventory lines"
+msgstr "Lignes d'inventaire"
+
+#. module: specific_rules
+#: code:addons/specific_rules/specific_rules.py:1836
+#: model:ir.actions.server,name:specific_rules.action_server_stock_by_location
+#, python-format
+msgid "Stock by Location"
+msgstr "Stock par Zone"
+
+#. module: specific_rules
+#: field:stock.move,kit_check:0
+msgid "Kit"
+msgstr "Kit"
+
+#. module: specific_rules
+#: constraint:stock.production.lot:0
+msgid "You can't create an internal Batch Number for a product which is batch managed or which is not perishable. If the product is batch managed, please create a standard batch number."
+msgstr "Vous ne pouvez pas créer un numéro de lot interne pour un produit qui est géré par lot ou qui n'est pas périssable. Si le produit est géré par lot, veuillez créer un numéro de lot standard.."
+
+#. module: specific_rules
+#: field:initial.stock.inventory,nomen_manda_1:0
+#: field:stock.cost.reevaluation,nomen_manda_1:0
+#: field:stock.inventory,nomen_manda_1:0
+msgid "Group"
+msgstr "Groupe"
+
+#. module: specific_rules
+#: code:addons/specific_rules/specific_rules.py:713
+#, python-format
+msgid "The selected product is Perishable."
+msgstr "Le produit sélectionné est Périssable"
+
+#. module: specific_rules
+#: help:stock.production.lot,stock_virtual:0
+msgid "Current available quantity of products with this Batch Numbre Number in company warehouses"
+msgstr "Quantité de produits actuellement disponibles sous ce Numéro de Lot dans les entrepôts de la société."
+
+#. module: specific_rules
+#: model:ir.model,name:specific_rules.model_stock_cost_reevaluation_line
+msgid "Cost reevaluation line"
+msgstr "Ligne de réévaluation du coût"
+
+#. module: specific_rules
+#: code:addons/specific_rules/stock.py:455
+#, python-format
+msgid "Please enter at least one revaluation line before confirm it."
+msgstr "Veuillez encoder au moins une ligne de réévaluation avant de confirmer."
+
+#. module: specific_rules
+#: code:addons/specific_rules/specific_rules.py:1371
+#, python-format
+msgid "The product %s is perishable but the line with this product has no expiry date"
+msgstr "Le produit %s est périssable mais la ligne relative à ce produit ne comporte pas de date d'expiration"
+
+#. module: specific_rules
+#: code:addons/specific_rules/stock.py:96
+#, python-format
+msgid "You must assign an Expiry Date on the product %s."
+msgstr "Vous devez mentionner une date d'expiration pour le produit %s."
+
+#. module: specific_rules
+#: code:addons/specific_rules/stock.py:463
+#, python-format
+msgid "You cannot have two lines with the same product. (Product : [%s] %s)"
+msgstr "Vous ne pouvez pas avoir deux lignes avec le même produit. (Product : [%s] %s)"
+
+#. module: specific_rules
+#: constraint:stock.move:0
+msgid "You cannot select Service Location as Source Location."
+msgstr "Vous ne pouvez pas sélectionner la Zone Service comme Zone Source"
+
+#. module: specific_rules
+#: field:initial.stock.inventory.line,comment:0
+msgid "Comment"
+msgstr "Commentaire"
+
+#. module: specific_rules
+#: view:stock.production.lot:0
+msgid "Do you really want to delete selected record(s) ?"
+msgstr "Voulez-vous vraiment supprimer le(s) dossier(s) sélectionné(s) ?"
+
+#. module: specific_rules
+#: field:initial.stock.inventory,company_id:0
+#: field:initial.stock.inventory.line,company_id:0
+msgid "Company"
+msgstr "Société"
+
+#. module: specific_rules
+#: code:addons/specific_rules/report/report_stock_virtual.py:84
+#: code:addons/specific_rules/wizard/stock_partial_move.py:260
+#: code:addons/specific_rules/wizard/stock_partial_picking.py:200
+#, python-format
+msgid "Error !"
+msgstr "Erreur !"
+
+#. module: specific_rules
+#: code:addons/specific_rules/specific_rules.py:1180
+#, python-format
+msgid "You cannot remove a batch number which has stock !"
+msgstr "Vous ne pouvez pas supprimer un numéro de lot lié au stock !"
+
+#. module: specific_rules
+#: constraint:stock.location:0
+msgid "Quarantine Location can only have Quarantine Location or Views as parent location."
+msgstr "Zone \"Quarantaine\", on ne peut avoir de Zone \"Quarantaine ''  ou Vues qu'en tant que Zone \"Parent\"."
+
+#. module: specific_rules
+#: field:initial.stock.inventory,date:0
+msgid "Creation Date"
+msgstr "Date de création"
+
+#. module: specific_rules
+#: field:initial.stock.inventory.line,type_check:0
+#: field:stock.inventory.line,type_check:0
+msgid "Type Check"
+msgstr "Type Vérification"
+
+#. module: specific_rules
+#: field:initial.stock.inventory,name:0
+msgid "Inventory Reference"
+msgstr "Référence Inventaire"
+
+#. module: specific_rules
+#: model:ir.model,name:specific_rules.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Ligne Bon de Commande"
+
+#. module: specific_rules
+#: view:stock.cost.reevaluation:0
+msgid "Validate"
+msgstr "Valider"
+
+#. module: specific_rules
+#: code:addons/specific_rules/stock.py:108
+#, python-format
+msgid "The batch number '%s' is already in the system but its expiry date is %s"
+msgstr "Le numéro de lot '%s' est déjà dans le système mais sa date d'expiration est %s"
+
+#. module: specific_rules
+#: code:addons/specific_rules/specific_rules.py:657
+#, python-format
+msgid "The selected product is Expiry Date Mandatory while the selected Batch number corresponds to Batch Number Mandatory."
+msgstr "Le produit sélectionné à une Date d'Expiration obligatoire tandis que le Numéro de Lot sélectionné correspond à un Numéro de Lot obligatoire. "
+
+#. module: specific_rules
+#: model:ir.model,name:specific_rules.model_stock_report_prodlots
+msgid "Stock report by production lots"
+msgstr "Rapport de Stock par lot de production"
+
+#. module: specific_rules
+#: view:initial.stock.inventory:0
+#: model:ir.actions.act_window,name:specific_rules.action_initial_inventory
+#: model:ir.ui.menu,name:specific_rules.menu_initial_inventory
+msgid "Initial stock inventory"
+msgstr "Inventaire de stock initial"
+
+#. module: specific_rules
+#: field:initial.stock.inventory.line,reason_type_id:0
+msgid "Adjustment type"
+msgstr "Type d'Ajustement"
+
+#. module: specific_rules
+#: code:addons/specific_rules/specific_rules.py:650
+#, python-format
+msgid "You must assign an Expiry Date for this product (Expiry Date Mandatory)."
+msgstr "Vous devez mentionner une date d'expiration pour ce produit (mention obligatoire d'une date d'expiration)"
+
+#. module: specific_rules
+#: field:product.uom,uom_by_product:0
+msgid "UoM by Product"
+msgstr "UdM par Produit"
+
+#. module: specific_rules
+#: model:ir.model,name:specific_rules.model_stock_cost_reevaluation
+msgid "Cost reevaluation"
+msgstr "Réévaluation des coûts"
+
+#. module: specific_rules
+#: field:initial.stock.inventory.line,ssl_check:0
+#: field:stock.inventory.line,ssl_check:0
+#: field:stock.move,ssl_check:0
+#: field:stock.move.memory.in,ssl_check:0
+#: field:stock.move.memory.out,ssl_check:0
+#: field:stock.production.lot,ssl_check:0
+msgid "SSL"
+msgstr "DVC (durée de vie courte)"
+
+#. module: specific_rules
+#: field:stock.location,stock_virtual_specific:0
+msgid "Virtual Stock"
+msgstr "Stock Virtuel"
+
+#. module: specific_rules
+#: field:initial.stock.inventory,nomen_manda_3:0
+#: field:stock.cost.reevaluation,nomen_manda_3:0
+#: field:stock.inventory,nomen_manda_3:0
+msgid "Root"
+msgstr "Origine"
+
+#. module: specific_rules
+#: model:ir.actions.act_window,name:specific_rules.action_cost_reevaluation
+#: model:ir.ui.menu,name:specific_rules.menu_cost_reevaluation
+#: view:stock.cost.reevaluation:0
+msgid "Product cost revaluation"
+msgstr "Revaluation du coût des produits"
+
+#. module: specific_rules
+#: sql_constraint:stock.production.lot:0
+msgid "The combination of serial number and internal reference must be unique !"
+msgstr "La combinaison du numéro de série et de la référence interne doit être unique !"
+
+#. module: specific_rules
+#: model:ir.model,name:specific_rules.model_stock_picking
+msgid "Picking List"
+msgstr "Liste de Piquage"
+
+#. module: specific_rules
+#: view:initial.stock.inventory:0
+msgid "Validate Inventory"
+msgstr "Valider Inventaire"
+
+#. module: specific_rules
+#: sql_constraint:purchase.order.line:0
+#: sql_constraint:sale.order.line:0
+msgid "Product Quantity must be greater than zero."
+msgstr "La quantité de produits doit être supérieure à zéro."
+
+#. module: specific_rules
+#: code:addons/specific_rules/specific_rules.py:1714
+#, python-format
+msgid "You have to select a product UOM in the same category than the purchase UOM of the product !"
+msgstr "You have to select a product UOM in the same category than the purchase UOM of the product !"
+
+#. module: specific_rules
+#: code:addons/specific_rules/wizard/stock_partial_picking.py:43
+#, python-format
+msgid "Clear all"
+msgstr "Effacer tout"
+
+#. module: specific_rules
+#: field:stock.cost.reevaluation,date:0
+msgid "Creation date"
+msgstr "Date de Création"
+
+#. module: specific_rules
+#: selection:initial.stock.inventory,state:0
+msgid "Cancelled"
+msgstr "Annulé"
+
+#. module: specific_rules
+#: constraint:product.product:0
+msgid "Constraint error on Kit Product."
+msgstr "Erreur de Contrainte sur le produit Kit"
+
+#. module: specific_rules
+#: field:stock.move.memory.in,type_check:0
+#: field:stock.move.memory.out,type_check:0
+msgid "Picking Type Check"
+msgstr "Type de Piquage Vérification"
+
+#. module: specific_rules
+#: constraint:stock.move:0
+msgid "You try to assign a lot which is not from the same product"
+msgstr "Vous essayez d'attribuer un lot qui ne correspond pas au même produit"
+
+#. module: specific_rules
+#: selection:stock.production.lot,type:0
+msgid "Standard"
+msgstr "Standard"
+
+#. module: specific_rules
+#: model:ir.model,name:specific_rules.model_stock_move
+msgid "Stock Move"
+msgstr "Mouvement de Stock"
+
+#. module: specific_rules
+#: model:ir.model,name:specific_rules.model_report_stock_inventory
+msgid "Stock Statistics"
+msgstr "Statistiques Stock"
+
+#. module: specific_rules
+#: field:stock.production.lot,delete_ok:0
+msgid "Possible deletion ?"
+msgstr "Suppression possible ?"
+
+#. module: specific_rules
+#: constraint:stock.picking:0
+msgid "You cannot validate this document because it contains a line with an inactive product"
+msgstr "Vous ne pouvez pas valider ce document car il contient des lignes avec un produit inactif"
+
+#. module: specific_rules
+#: field:purchase.order.line,kc_dg:0
+#: field:sale.order.line,kc_dg:0
+#: field:stock.move,kc_dg:0
+msgid "KC/DG"
+msgstr "KC/DG"
+
+#. module: specific_rules
+#: field:initial.stock.inventory.line,inventory_id:0
+#: model:ir.model,name:specific_rules.model_initial_stock_inventory
+#: model:ir.model,name:specific_rules.model_stock_inventory
+msgid "Inventory"
+msgstr "Inventaire"
+
+#. module: specific_rules
+#: field:stock.cost.reevaluation.line,reevaluation_id:0
+msgid "Header"
+msgstr "En-tête"
+
+#. module: specific_rules
+#: view:stock.production.lot:0
+msgid "Batch number"
+msgstr "Numéro de Lot"
+
+#. module: specific_rules
+#: model:ir.model,name:specific_rules.model_stock_move_memory_in
+msgid "stock.move.memory.in"
+msgstr "stock.move.memory.in"
+
+#. module: specific_rules
+#: code:addons/specific_rules/report/report_stock_virtual.py:84
+#, python-format
+msgid "You cannot delete any record!"
+msgstr "Il ne vous est pas permis d'effacer ces entrées !"
+
+#. module: specific_rules
+#: view:initial.stock.inventory:0
+msgid "Confirm Inventory"
+msgstr "Confirmer l'inventaire"
+
+#. module: specific_rules
+#: field:stock.cost.reevaluation,reevaluation_line_ids:0
+msgid "Lines"
+msgstr "Lignes"
+
+#. module: specific_rules
+#: code:addons/specific_rules/specific_rules.py:300
+#: code:addons/specific_rules/specific_rules.py:342
+#, python-format
+msgid "Wrong Product UOM !"
+msgstr "UdM Produit incorrecte !"
+
+#. module: specific_rules
+#: model:ir.model,name:specific_rules.model_stock_warehouse_order_cycle
+msgid "Order Cycle"
+msgstr "Cycle de Commande"
+
+#. module: specific_rules
+#: code:addons/specific_rules/specific_rules.py:647
+#, python-format
+msgid "You must assign a Batch Number for this product (Batch Number Mandatory)."
+msgstr "Vous devez mentionner un numéro de lot pour ce produit (mention obligatoire d'un numéro de lot)"
+
+#. module: specific_rules
+#: constraint:purchase.order:0
+msgid "You must specify a Valid Till date."
+msgstr "Spécifiez une date de validité 'Valide Jusque'."
+
+#. module: specific_rules
+#: code:addons/specific_rules/stock.py:90
+#, python-format
+msgid "You cannot have two lines for the product %s with different average cost."
+msgstr "Vous ne pouvez pas avoir deux lignes pour le produit %s avec un coût moyen différent."
+
+#. module: specific_rules
+#: model:ir.model,name:specific_rules.model_stock_production_lot
+#: field:stock.report.prodlots.virtual,prodlot_id:0
+msgid "Production lot"
+msgstr "Lot de Production"
+
+#. module: specific_rules
+#: selection:stock.production.lot,type:0
+msgid "Internal"
+msgstr "Interne"
+
+#. module: specific_rules
+#: field:initial.stock.inventory.line,product_qty:0
+#: field:stock.report.prodlots.virtual,qty:0
+msgid "Quantity"
+msgstr "Quantité"
+
+#. module: specific_rules
+#: constraint:purchase.order:0
+#: constraint:sale.order:0
+msgid "Partner type and order type are incompatible! Please change either order type or partner."
+msgstr "Le type de partnenaire et le type de commande sont incompatibles. Veuillez changer l'un ou l'autre."
+
+#. module: specific_rules
+#: field:stock.production.lot,sequence_id:0
+msgid "Batch Sequence"
+msgstr "Séquence Lot"
+
+#. module: specific_rules
+#: help:product.uom,uom_by_product:0
+msgid "Field used to filter the UoM for a specific product"
+msgstr "Champ utilisé pour filtrer l'UdM d'un produit en particulier"
+
+#. module: specific_rules
+#: sql_constraint:stock.cost.reevaluation:0
+msgid "The Reference of the Product Cost Revaluation must be unique"
+msgstr "La référence de la revaluation du coût des produits doit être unique"
+
+#. module: specific_rules
+#: model:ir.model,name:specific_rules.model_stock_warehouse_orderpoint
+msgid "Minimum Inventory Rule"
+msgstr "Règle de Stocks Minimum."
+
+#. module: specific_rules
+#: constraint:initial.stock.inventory.line:0
+#: constraint:stock.inventory.line:0
+#: constraint:stock.move:0
+msgid "Constraint error on Uom"
+msgstr "Constraint error on Uom"
+
+#. module: specific_rules
+#: code:addons/specific_rules/stock.py:39
+#, python-format
+msgid "You cannot remove an initial inventory which is done"
+msgstr "Vous ne pouvez pas supprimer un inventaire initial réalisé"
+
+#. module: specific_rules
+#: constraint:initial.stock.inventory:0
+#: constraint:stock.inventory:0
+msgid "You cannot confirm this stock inventory because it contains a line with an inactive product"
+msgstr "Vous ne pouvez pas confirmer cet inventaire car il contient des lignes avec un produit inactif"
+
+#. module: specific_rules
+#: field:initial.stock.inventory,sublist_id:0
+#: field:stock.cost.reevaluation,sublist_id:0
+#: field:stock.inventory,sublist_id:0
+msgid "List/Sublist"
+msgstr "Liste/Liste secondaire"
+
+#. module: specific_rules
+#: code:addons/specific_rules/stock.py:305
+#, python-format
+msgid "You cannot have two lines with the product %s and different average cost."
+msgstr "Vous ne pouvez pas avoir deux lignes pour le produit %s avec un coût moyen différent."
+
+#. module: specific_rules
+#: view:initial.stock.inventory:0
+msgid "Initial stock inventories"
+msgstr "Inventaire de stock initial"
+
+#. module: specific_rules
+#: constraint:purchase.order:0
+msgid "You cannot validate this purchase order because it contains a line with an inactive product"
+msgstr "Vous ne pouvez pas valider ce bon de commande, car il contient une ligne avec des produits inactifs."
+
+#. module: specific_rules
+#: view:initial.stock.inventory:0
+msgid "General information"
+msgstr "Informations Générales"
+
+#. module: specific_rules
+#: code:addons/specific_rules/specific_rules.py:707
+#: code:addons/specific_rules/specific_rules.py:712
+#: code:addons/specific_rules/specific_rules.py:1479
+#: code:addons/specific_rules/wizard/stock_partial_move.py:155
+#, python-format
+msgid "Info"
+msgstr "Info"
+
+#. module: specific_rules
+#: view:initial.stock.inventory:0
+#: field:initial.stock.inventory.line,lot_check:0
+#: field:stock.inventory.line,lot_check:0
+#: field:stock.move,lot_check:0
+#: field:stock.move.memory.in,lot_check:0
+#: field:stock.move.memory.out,lot_check:0
+#: field:stock.production.lot,lot_check:0
+msgid "B.Num"
+msgstr "Numéro de Lot"
+
+#. module: specific_rules
+#: model:ir.model,name:specific_rules.model_stock_partial_move
+msgid "Partial Move"
+msgstr "Mouvement partiel"
+
+#. module: specific_rules
+#: selection:initial.stock.inventory,state:0
+#: selection:stock.cost.reevaluation,state:0
+msgid "Draft"
+msgstr "Brouillon"
+
+#. module: specific_rules
+#: view:stock.cost.reevaluation:0
+#: selection:stock.cost.reevaluation,state:0
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: specific_rules
+#: field:initial.stock.inventory.line,product_uom:0
+msgid "Product UOM"
+msgstr "UdM du Produit"
+
+#. module: specific_rules
+#: field:stock.move.memory.in,uom_ordered:0
+#: field:stock.move.memory.out,uom_ordered:0
+msgid "UoM ordered"
+msgstr "UoM ordered"
+
+#. module: specific_rules
+#: constraint:product.product:0
+msgid "If you select \"Non-stockable\" as product type then you have to select \"Make to order\" as procurement method"
+msgstr "Si vous sélectionnez \"Non stockable\" comme type de produit, vous devez sélectionner \"Faire sur commande\" comme méthode d'acquisition"
+
+#. module: specific_rules
+#: constraint:initial.stock.inventory.line:0
+#: constraint:stock.inventory.line:0
+msgid "The selected product is neither Batch Number Mandatory nor Expiry Date Mandatory"
+msgstr "Le produit sélectionné n'a ni de Numéro de Lot obligatoire ni de Date d'Expiration obligatoire"
+
+#. module: specific_rules
+#: view:initial.stock.inventory:0
+#: view:stock.cost.reevaluation:0
+msgid "Set to Draft"
+msgstr "Passer sous statut Brouillon"
+
+#. module: specific_rules
+#: constraint:stock.production.lot:0
+msgid "You can't create a standard batch number for a product which is not batch mandatory. If the product is perishable, the system will create automatically an internal batch number on reception/inventory."
+msgstr "Vous ne pouvez pas créer un numéro de lot standard pour un produit dont le lot n'est pas obligatoire. Si le produit est périssable, le système créera automatiquement un numéro de lot interne à la réception / inventaire."
+
+#. module: specific_rules
+#: field:stock.production.lot,check_type:0
+msgid "Check Type"
+msgstr "Vérifier Type"
+
+#. module: specific_rules
+#: view:stock.move.memory.in:0
+#: view:stock.move.memory.out:0
+msgid "Batch Number"
+msgstr "Numéro de Lot"
+
+#. module: specific_rules
+#: view:initial.stock.inventory:0
+#: view:stock.cost.reevaluation:0
+#: view:stock.inventory:0
+msgid "Product filters"
+msgstr "Produit - Filtres"
+
+#. module: specific_rules
+#: code:addons/specific_rules/specific_rules.py:655
+#, python-format
+msgid "The selected product is Batch Number Mandatory while the selected Batch number corresponds to Expiry Date Mandatory."
+msgstr "Le produit sélectionné à un Numéro de Lot obligatoire tandis que le Numéro de Lot sélectionné correspond à une Date d'Expiration obligatoire."
+
+#. module: specific_rules
+#: field:stock.production.lot,type:0
+msgid "Type"
+msgstr "Type"
+
+#. module: specific_rules
+#: field:stock.cost.reevaluation.line,currency_id:0
+msgid "Currency"
+msgstr "Devises"
+
+#. module: specific_rules
+#: code:addons/specific_rules/wizard/stock_partial_picking.py:170
+#, python-format
+msgid "No Batch Number set for Batch Number mandatory product(s)."
+msgstr "Pas de Numéro de Lot réglé pour le(s) produit(s) avec Numéro de Lot obligatoire."
+
+#. module: specific_rules
+#: view:stock.production.lot.revision:0
+msgid "Batch Number Revisions"
+msgstr "Révisions du Numéro de Lot"
+
+#. module: specific_rules
+#: view:stock.production.lot:0
+msgid "Batch Number Identification"
+msgstr "Identification du Numéro de Lot"
+
+#. module: specific_rules
+#: code:addons/specific_rules/specific_rules.py:371
+#: code:addons/specific_rules/specific_rules.py:400
+#, python-format
+msgid "Bad comparison operator in domain"
+msgstr "Mauvais Opérateur de comparaison sous le domaine"
+
+#. module: specific_rules
+#: view:stock.production.lot:0
+msgid "Available"
+msgstr "Disponible"
+
+#. module: specific_rules
+#: code:addons/specific_rules/specific_rules.py:708
+#, python-format
+msgid "The selected product is Batch Management."
+msgstr "Le produit sélectionné est Gestion de Lot."
+
+#. module: specific_rules
+#: code:addons/specific_rules/wizard/stock_partial_picking.py:40
+#, python-format
+msgid "You receive %s products, please refer to the appropriate procedure."
+msgstr "Vous recevez des %s, merci de vous référer à la procédure appropriée."
+
+#. module: specific_rules
+#: sql_constraint:stock.warehouse.orderpoint:0
+msgid "Qty Multiple must be greater than zero."
+msgstr "Le Multiple de la Quantité doit être plus grand que zéro."
+
+#. module: specific_rules
+#: model:ir.model,name:specific_rules.model_stock_move_memory_out
+msgid "stock.move.memory.out"
+msgstr "stock.move.memory.out"
+
+#. module: specific_rules
+#: selection:initial.stock.inventory,state:0
+#: selection:stock.cost.reevaluation,state:0
+msgid "Confirmed"
+msgstr "Confirmé"
+
+#. module: specific_rules
+#: field:initial.stock.inventory.line,err_msg:0
+msgid "Message"
+msgstr "Message"
+
+#. module: specific_rules
+#: field:initial.stock.inventory.line,hidden_perishable_mandatory:0
+#: field:stock.inventory.line,hidden_perishable_mandatory:0
+#: field:stock.move,hidden_perishable_mandatory:0
+msgid "Hidden Flag for Perishable product"
+msgstr "Drapeau caché pour produits périssables"
+
+#. module: specific_rules
+#: field:initial.stock.inventory.line,hidden_batch_management_mandatory:0
+#: field:stock.inventory.line,hidden_batch_management_mandatory:0
+#: field:stock.move,hidden_batch_management_mandatory:0
+msgid "Hidden Flag for Batch Management product"
+msgstr "Drapeau caché pour la gestion des produits par lot"
+
+#. module: specific_rules
+#: field:stock.move.memory.in,uom_category:0
+#: field:stock.move.memory.out,uom_category:0
+msgid "unknown"
+msgstr "unknown"
+
+#. module: specific_rules
+#: sql_constraint:product.uom:0
+msgid "The conversion ratio for a unit of measure cannot be 0!"
+msgstr "Le rapport de conversion d'une unité de mesure ne peut pas être 0 !"
+
+#. module: specific_rules
+#: view:stock.production.lot:0
+msgid "Batch numbers"
+msgstr "Numéros de Lot"
+
+#. module: specific_rules
+#: model:ir.model,name:specific_rules.model_stock_warehouse_automatic_supply
+msgid "Automatic Supply"
+msgstr "Approvisionnement Automatique "
+
+#. module: specific_rules
+#: constraint:initial.stock.inventory:0
+#: constraint:stock.inventory:0
+msgid "You must define a stock location for each line"
+msgstr "Vous devez définir un lieu de stock pour chaque ligne"
+
+#. module: specific_rules
+#: field:stock.location,stock_real_specific:0
+msgid "Real Stock"
+msgstr "Stock réel"
+
+#. module: specific_rules
+#: field:initial.stock.inventory.line,expiry_date:0
+#: field:report.stock.inventory,expired_date:0
+#: field:stock.inventory.line,expiry_date:0
+#: field:stock.move.memory.in,expiry_date:0
+#: field:stock.move.memory.out,expiry_date:0
+msgid "Expiry Date"
+msgstr "Date d'Expiration"
+
+#. module: specific_rules
+#: code:addons/specific_rules/wizard/stock_partial_picking.py:63
+#, python-format
+msgid "heat sensitive"
+msgstr "produits sensibles à la chaleur"
+
+#. module: specific_rules
+#: field:initial.stock.inventory,move_ids:0
+msgid "Created Moves"
+msgstr "Mouvements Créés"
+
+#. module: specific_rules
+#: field:stock.move.memory.in,location_id:0
+#: field:stock.move.memory.out,location_id:0
+msgid "Source Location"
+msgstr "Zone Source"
+
+#. module: specific_rules
+#: code:addons/specific_rules/specific_rules.py:1373
+#, python-format
+msgid "The product %s is batch mandatory but the line with this product has no batch"
+msgstr "La mention du numéro de lot est obligatoire pour le produit %s mais la ligne relative à ce produit ne comporte pas de lot"
+
+#. module: specific_rules
+#: code:addons/specific_rules/wizard/stock_partial_picking.py:172
+#, python-format
+msgid "No Expiry Date set for Expiry Date mandatory product(s)."
+msgstr "Pas de Date d'Expiration réglée pour le(s) produits avec Date d'Expiration obligatoire."
+
+#. module: specific_rules
+#: field:stock.move.memory.in,batch_number_check:0
+#: field:stock.move.memory.out,batch_number_check:0
+msgid "Batch Number Check"
+msgstr "Vérification Numéro de Lot"
+
+#. module: specific_rules
+#: constraint:initial.stock.inventory.line:0
+#: constraint:stock.inventory.line:0
+msgid "You must assign a Batch Numbre which corresponds to Expiry Date Mandatory Products."
+msgstr "Vous devez attribuer un Numéro de Lot qui corresponde à la Date d'Expiration Obligatoire des Produits."
+
+#. module: specific_rules
+#: sql_constraint:product.product:0
+msgid "The \"Product Code\" must be unique"
+msgstr "Le \"Code produit\" doit être unique"
+
+#. module: specific_rules
+#: code:addons/specific_rules/specific_rules.py:1486
+#: code:addons/specific_rules/wizard/stock_partial_move.py:162
+#, python-format
+msgid "The selected Expiry Date does not exist in the system."
+msgstr "La date d'expiration sélectionnée n'existe pas dans le système."
+
+#. module: specific_rules
+#: model:ir.model,name:specific_rules.model_initial_stock_inventory_line
+#: model:ir.model,name:specific_rules.model_stock_inventory_line
+msgid "Inventory Line"
+msgstr "Ligne d'Inventaire"
+
+#. module: specific_rules
+#: field:stock.cost.reevaluation.line,average_cost:0
+msgid "Average cost"
+msgstr "Coût moyen"
+
+#. module: specific_rules
+#: sql_constraint:purchase.order:0
+#: sql_constraint:sale.order:0
+msgid "Order Reference must be unique !"
+msgstr "La Référence de la Commande doit être unique !"
+
+#. module: specific_rules
+#: code:addons/specific_rules/wizard/stock_partial_picking.py:65
+#, python-format
+msgid "dangerous goods"
+msgstr "marchandises dangereuses"
+
+#. module: specific_rules
+#: field:initial.stock.inventory.line,dont_move:0
+#: field:stock.inventory.line,dont_move:0
+msgid "Don't create stock.move for this line"
+msgstr "Ne créez pas de mvmnt de stock pour cette ligne"
+
+#. module: specific_rules
+#: code:addons/specific_rules/wizard/stock_partial_move.py:260
+#: code:addons/specific_rules/wizard/stock_partial_picking.py:200
+#, python-format
+msgid "No Batch Number with Expiry Date for Expiry Date Mandatory and not Incoming Shipment should not happen. Please hold..."
+msgstr "Aucune saisie de Lot sans Numéro avec Date d'Expiration pour la Date d'Expiration Obligatoire et ne provenant pas d´une Livraison Entrante, ne devrait se faire. Veuillez patienter…"
+
+#. module: specific_rules
+#: field:initial.stock.inventory.line,product_id:0
+#: model:ir.model,name:specific_rules.model_product_product
+#: field:stock.cost.reevaluation.line,product_id:0
+#: field:stock.report.prodlots.virtual,product_id:0
+msgid "Product"
+msgstr "Produit"
+
+#. module: specific_rules
+#: code:addons/specific_rules/stock.py:94
+#, python-format
+msgid "You must assign a Batch Number on the product %s."
+msgstr "Vous devez mentionner un numéro de lot pour le produit %s."
+
+#. module: specific_rules
+#: field:initial.stock.inventory,date_done:0
+msgid "Date done"
+msgstr "Date tâche effectuée"
+
+#. module: specific_rules
+#: view:stock.production.lot:0
+msgid "Real"
+msgstr "Réel"
+
+#. module: specific_rules
+#: constraint:initial.stock.inventory.line:0
+#: constraint:stock.inventory.line:0
+msgid "You must assign a Batch Number which corresponds to Batch Number Mandatory Products."
+msgstr "Vous devez attribuer un Numéro de Lot qui corresponde au Numéro de Lot Obligatoire des Produits."
+
+#. module: specific_rules
+#: code:addons/specific_rules/wizard/stock_partial_move.py:134
+#, python-format
+msgid "Quantity error"
+msgstr "Quantity error"
+
+#. module: specific_rules
+#: field:initial.stock.inventory,nomen_manda_2:0
+#: field:stock.cost.reevaluation,nomen_manda_2:0
+#: field:stock.inventory,nomen_manda_2:0
+msgid "Family"
+msgstr "Famille"
+
+#. module: specific_rules
+#: constraint:product.product:0
+msgid "Warning! GMDN code must be digits!"
+msgstr "Avertissement! Le code  GMDN doit être en chiffres!"
+
+#. module: specific_rules
+#: code:addons/specific_rules/wizard/stock_partial_move.py:135
+#, python-format
+msgid "The quantity to process is larger than the available quantity in Batch %s"
+msgstr "The quantity to process is larger than the available quantity in Batch %s"
+
+#. module: specific_rules
+#: view:initial.stock.inventory:0
+msgid " "
+msgstr " "
+
+#. module: specific_rules
+#: view:initial.stock.inventory:0
+msgid "Cancel Inventory"
+msgstr "Annuler Inventaire"
+
+#. module: specific_rules
+#: code:addons/specific_rules/specific_rules.py:371
+#: code:addons/specific_rules/specific_rules.py:400
+#: code:addons/specific_rules/specific_rules.py:1180
+#: code:addons/specific_rules/specific_rules.py:1371
+#: code:addons/specific_rules/specific_rules.py:1373
+#: code:addons/specific_rules/specific_rules.py:1485
+#: code:addons/specific_rules/specific_rules.py:1714
+#: code:addons/specific_rules/stock.py:39
+#: code:addons/specific_rules/stock.py:74
+#: code:addons/specific_rules/stock.py:90
+#: code:addons/specific_rules/stock.py:94
+#: code:addons/specific_rules/stock.py:96
+#: code:addons/specific_rules/stock.py:108
+#: code:addons/specific_rules/stock.py:305
+#: code:addons/specific_rules/stock.py:455
+#: code:addons/specific_rules/stock.py:463
+#: code:addons/specific_rules/wizard/stock_partial_move.py:161
+#: code:addons/specific_rules/wizard/stock_partial_picking.py:170
+#: code:addons/specific_rules/wizard/stock_partial_picking.py:172
+#, python-format
+msgid "Error"
+msgstr "Erreur"
+
+#. module: specific_rules
+#: view:initial.stock.inventory:0
+#: view:stock.cost.reevaluation:0
+msgid "Products"
+msgstr "Produits"
+
+#. module: specific_rules
+#: selection:initial.stock.inventory,state:0
+#: selection:stock.cost.reevaluation,state:0
+msgid "Done"
+msgstr "Terminé"
+

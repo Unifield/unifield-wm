@@ -1,0 +1,257 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* useability_dashboard_and_menu
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2013-10-17 08:51+0000\n"
+"PO-Revision-Date: 2013-10-17 08:51+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: useability_dashboard_and_menu
+#: view:board.board:0
+#: model:ir.actions.act_window,name:useability_dashboard_and_menu.order_action_validated
+msgid "Order Waiting For Sourcing"
+msgstr "Commande En Attente de Sourcing"
+
+#. module: useability_dashboard_and_menu
+#: model:ir.ui.menu,name:useability_dashboard_and_menu.config_adresses
+msgid "Adresses"
+msgstr "Adresses"
+
+#. module: useability_dashboard_and_menu
+#: view:sale.order:0
+msgid "Total Tax Included"
+msgstr "Total Toutes Taxes Comprises"
+
+#. module: useability_dashboard_and_menu
+#: view:board.board:0
+msgid "Sales Manager Dashboard"
+msgstr "Tableau de bord du Gérant des commandes"
+
+#. module: useability_dashboard_and_menu
+#: model:ir.ui.menu,name:useability_dashboard_and_menu.menu_supply_config
+msgid "Supply Configuration"
+msgstr "Configuration Approvisionnement"
+
+#. module: useability_dashboard_and_menu
+#: view:board.board:0
+msgid "Warehouse board"
+msgstr "Tableau de l'Entrepôt"
+
+#. module: useability_dashboard_and_menu
+#: model:ir.actions.act_window,name:useability_dashboard_and_menu.action_shipment
+msgid "Shipment Lists"
+msgstr "Expédition - Listes"
+
+#. module: useability_dashboard_and_menu
+#: model:ir.ui.menu,name:useability_dashboard_and_menu.menu_partner
+msgid "Partners"
+msgstr "Partenaires"
+
+#. module: useability_dashboard_and_menu
+#: view:board.board:0
+msgid "Purchase Orders Sourced"
+msgstr "Bon de Commande sourcées"
+
+#. module: useability_dashboard_and_menu
+#: model:ir.ui.menu,name:useability_dashboard_and_menu.menu_asset_type_sales
+msgid "Asset Types"
+msgstr "Bien - Types"
+
+#. module: useability_dashboard_and_menu
+#: model:ir.model,name:useability_dashboard_and_menu.model_sale_shop
+#: view:sale.shop:0
+msgid "Sales Shop"
+msgstr "Magasin"
+
+#. module: useability_dashboard_and_menu
+#: view:board.board:0
+msgid "Purchase Orders Waiting For Validation"
+msgstr "Bons de Commandes en attente de confirmation"
+
+#. module: useability_dashboard_and_menu
+#: model:ir.ui.menu,name:useability_dashboard_and_menu.menu_tools
+msgid "Tools"
+msgstr "Outils"
+
+#. module: useability_dashboard_and_menu
+#: view:sale.order:0
+msgid "Field Orders"
+msgstr "Commandes du terrain"
+
+#. module: useability_dashboard_and_menu
+#: view:board.board:0
+#: model:ir.actions.act_window,name:useability_dashboard_and_menu.action_picking_ticket_board
+msgid "Picking Tickets"
+msgstr "Bons de Piquage"
+
+#. module: useability_dashboard_and_menu
+#: view:board.board:0
+msgid "Procurements in Exception"
+msgstr "Approvisionnements en Exception"
+
+#. module: useability_dashboard_and_menu
+#: model:ir.actions.act_window,help:useability_dashboard_and_menu.action_other_form
+msgid "You see here Other/Manufacturer who can be both Customer and Supplier."
+msgstr "Vous voyez ici Autre/Fabricant qui peut être à la fois Client et Fournisseur."
+
+#. module: useability_dashboard_and_menu
+#: view:board.board:0
+#: model:ir.actions.act_window,name:useability_dashboard_and_menu.internal_request_action_draft
+msgid "Internal Request Waiting For Validation"
+msgstr "Demande interne en attente de validation"
+
+#. module: useability_dashboard_and_menu
+#: model:ir.ui.menu,name:useability_dashboard_and_menu.menu_reg_wh_mngt
+msgid "Regular Warehouse Management"
+msgstr "Gestion Normale d'Entrepôts"
+
+#. module: useability_dashboard_and_menu
+#: view:board.board:0
+#: model:ir.actions.act_window,name:useability_dashboard_and_menu.internal_request_action_validated
+msgid "Internal Request Waiting For Sourcing"
+msgstr "Demande interne en attente de sourcing"
+
+#. module: useability_dashboard_and_menu
+#: view:board.board:0
+msgid "Orders Sourced"
+msgstr "commandes sourcées"
+
+#. module: useability_dashboard_and_menu
+#: view:sale.order:0
+msgid "Total Tax Excluded"
+msgstr "Total Hors-taxes"
+
+#. module: useability_dashboard_and_menu
+#: model:ir.module.module,description:useability_dashboard_and_menu.module_meta_information
+msgid "\n"
+"    This module aims at redefining the dashboards and menus for more useability.\n"
+"    "
+msgstr "\n"
+"    Ce module vise à redéfinir les tableaux de bord et menus pour plus d'exploitabilité.\n"
+"    "
+
+#. module: useability_dashboard_and_menu
+#: view:board.board:0
+#: model:ir.actions.act_window,name:useability_dashboard_and_menu.action_ppl_board
+msgid "Pre-Packing Lists"
+msgstr "Listes de Pré-Colisage"
+
+#. module: useability_dashboard_and_menu
+#: view:sale.order:0
+msgid "State"
+msgstr "Statut"
+
+#. module: useability_dashboard_and_menu
+#: model:ir.actions.act_window,name:useability_dashboard_and_menu.open_board_warehouse_unifield
+msgid "Warehouse Dashboard"
+msgstr "Tableau de bord de l'Entrepôt"
+
+#. module: useability_dashboard_and_menu
+#: view:board.board:0
+msgid "Shipments"
+msgstr "Expéditions"
+
+#. module: useability_dashboard_and_menu
+#: model:ir.actions.act_window,name:useability_dashboard_and_menu.order_action_sourced
+msgid "Order Sourced"
+msgstr "commande sourcée"
+
+#. module: useability_dashboard_and_menu
+#: model:ir.ui.menu,name:useability_dashboard_and_menu.menu_hidden
+msgid "Hidden Menu"
+msgstr "Menu Caché"
+
+#. module: useability_dashboard_and_menu
+#: view:board.board:0
+msgid "Requests for Quotation Waiting For Validation"
+msgstr "Demande(s) de Devis En Attente de Validation"
+
+#. module: useability_dashboard_and_menu
+#: model:ir.ui.menu,name:useability_dashboard_and_menu.menu_customer
+msgid "Customers"
+msgstr "Clients"
+
+#. module: useability_dashboard_and_menu
+#: view:board.board:0
+msgid "Tender"
+msgstr "Appel d'offres"
+
+#. module: useability_dashboard_and_menu
+#: view:board.board:0
+msgid "Requests for Quotation Waiting For Confirmation"
+msgstr "Demande(s) de Devis En Attente de Confirmation"
+
+#. module: useability_dashboard_and_menu
+#: view:board.board:0
+#: model:ir.actions.act_window,name:useability_dashboard_and_menu.order_action_draft
+msgid "Order Waiting For Validation"
+msgstr "Commande En Attente de Validation"
+
+#. module: useability_dashboard_and_menu
+#: model:ir.ui.menu,name:useability_dashboard_and_menu.menu_adv_wh_mngt
+msgid "Advanced Warehouse Management"
+msgstr "Gestion Avancée d'Entrepôts"
+
+#. module: useability_dashboard_and_menu
+#: model:ir.actions.act_window,name:useability_dashboard_and_menu.action_other_form
+#: model:ir.ui.menu,name:useability_dashboard_and_menu.menu_other
+#: model:ir.ui.menu,name:useability_dashboard_and_menu.menu_other_manufacturer
+msgid "Other/Manufacturer"
+msgstr "Autre/Fabricant"
+
+#. module: useability_dashboard_and_menu
+#: view:board.board:0
+msgid "Purchase Orders Waiting Confirmation"
+msgstr "Bons de Commandes en attente de validation"
+
+#. module: useability_dashboard_and_menu
+#: model:ir.ui.menu,name:useability_dashboard_and_menu.menu_report_cust
+msgid "Report Customization"
+msgstr "Rapport- Personnalisation"
+
+#. module: useability_dashboard_and_menu
+#: model:ir.ui.menu,name:useability_dashboard_and_menu.menu_uom
+msgid "Unit Of Measure"
+msgstr "Unité de mesure"
+
+#. module: useability_dashboard_and_menu
+#: model:ir.ui.menu,name:useability_dashboard_and_menu.menu_supplier
+msgid "Suppliers"
+msgstr "Fournisseurs"
+
+#. module: useability_dashboard_and_menu
+#: view:board.board:0
+msgid "My Board"
+msgstr "Mon tableau"
+
+#. module: useability_dashboard_and_menu
+#: view:board.board:0
+#: model:ir.actions.act_window,name:useability_dashboard_and_menu.action_picking_tree_available
+msgid "Incoming Shipments"
+msgstr "Livraisons Entrantes"
+
+#. module: useability_dashboard_and_menu
+#: view:board.board:0
+#: model:ir.actions.act_window,name:useability_dashboard_and_menu.action_outgoing_product_board
+msgid "Delivery Orders"
+msgstr "Bons de Livraison"
+
+#. module: useability_dashboard_and_menu
+#: model:ir.actions.act_window,name:useability_dashboard_and_menu.purchase_sourced
+msgid "Sourced Purchase Orders"
+msgstr "Bons de commande sourcés"
+
+#. module: useability_dashboard_and_menu
+#: model:ir.module.module,shortdesc:useability_dashboard_and_menu.module_meta_information
+msgid "Transport management"
+msgstr "Gestion de Transport "
+
