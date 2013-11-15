@@ -265,7 +265,7 @@
           <Data ss:Type="String">Prop. Instance</Data>
         </Cell>
         <Cell ss:StyleID="header_part_center">
-          <Data ss:Type="String">${( company.instance_id and company.instance_id.code or '')|x}</Data>
+          <Data ss:Type="String">${( company.instance_id and company.instance_id.code or '')|xn}</Data>
         </Cell>
       </Row>
     </Table>
@@ -299,7 +299,7 @@
           <Data ss:Type="String">Name: </Data>
         </Cell>
         <Cell ss:StyleID="header_part_center">
-          <Data ss:Type="String">${o.name or ''|x}</Data>
+          <Data ss:Type="String">${o.name or ''|xn}</Data>
         </Cell>
       </Row>
       <Row ss:Height="14.5134">
@@ -307,7 +307,7 @@
           <Data ss:Type="String">Period: </Data>
         </Cell>
         <Cell ss:StyleID="header_part_center">
-          <Data ss:Type="String">${o.period_id and o.period_id.name or ''|x}</Data>
+          <Data ss:Type="String">${o.period_id and o.period_id.name or ''|xn}</Data>
         </Cell>
       </Row>
       <Row ss:Height="14.5134">
@@ -315,7 +315,7 @@
           <Data ss:Type="String">Currency: </Data>
         </Cell>
         <Cell ss:StyleID="header_part_center">
-          <Data ss:Type="String">${o.currency and o.currency.name or ''|x}</Data>
+          <Data ss:Type="String">${o.currency and o.currency.name or ''|xn}</Data>
         </Cell>
       </Row>
       <Row ss:Height="14.5134">
@@ -323,7 +323,7 @@
           <Data ss:Type="String">Starting balance: </Data>
         </Cell>
         <Cell ss:StyleID="header_part_number">
-          <Data ss:Type="Number">${o.balance_start or 0.0|x}</Data>
+          <Data ss:Type="Number">${o.balance_start or 0.0|xn}</Data>
         </Cell>
       </Row>
       <Row ss:Height="14.5134">
@@ -331,7 +331,7 @@
           <Data ss:Type="String">Closing balance: </Data>
         </Cell>
         <Cell ss:StyleID="header_part_number">
-          <Data ss:Type="Number">${o.balance_end_real or 0.0|x}</Data>
+          <Data ss:Type="Number">${o.balance_end_real or 0.0|xn}</Data>
         </Cell>
       </Row>
       <Row ss:Height="14.5134">
@@ -339,7 +339,7 @@
           <Data ss:Type="String">Calculated balance: </Data>
         </Cell>
         <Cell ss:StyleID="header_part_number">
-          <Data ss:Type="Number">${o.balance_end or 0.0|x}</Data>
+          <Data ss:Type="Number">${o.balance_end or 0.0|xn}</Data>
         </Cell>
       </Row>
       <Row ss:Height="14.5134">
@@ -347,7 +347,7 @@
           <Data ss:Type="String">State: </Data>
         </Cell>
         <Cell ss:StyleID="header_part_center">
-          <Data ss:Type="String">${o.state and getSel(o, 'state') or ''|x}</Data>
+          <Data ss:Type="String">${o.state and getSel(o, 'state') or ''|xn}</Data>
         </Cell>
       </Row>
       <Row ss:Height="14.5134">
@@ -402,7 +402,7 @@
 % for line in sorted(o.line_ids, key=lambda x: x.sequence_for_reference):
       <Row ss:Height="14.5134">
         <Cell ss:StyleID="centre">
-          <Data ss:Type="String">${line.direct_invoice and _('Direct Invoice') or line.from_cash_return and _('Cash Return') or line.is_down_payment and _('Down Payment') and line.from_import_cheque_id and _('Cheque Import') or (line.transfer_journal_id and not line.is_transfer_with_change and _('Transfer')) or (line.transfer_journal_id and line.is_transfer_with_change and _('Transfer with change')) or line.imported_invoice_line_ids and _('Imported Invoice') or line.from_import_cheque_id and _('Imported Cheque') or _('Direct Payment')|x}</Data>
+          <Data ss:Type="String">${line.direct_invoice and _('Direct Invoice') or line.from_cash_return and _('Cash Return') or line.is_down_payment and _('Down Payment') and line.from_import_cheque_id and _('Cheque Import') or (line.transfer_journal_id and not line.is_transfer_with_change and _('Transfer')) or (line.transfer_journal_id and line.is_transfer_with_change and _('Transfer with change')) or line.imported_invoice_line_ids and _('Imported Invoice') or line.from_import_cheque_id and _('Imported Cheque') or _('Direct Payment')|xn}</Data>
         </Cell>
         <Cell ss:StyleID="date">
           <Data ss:Type="DateTime">${line.document_date|n}T00:00:00.000</Data>
@@ -411,19 +411,19 @@
           <Data ss:Type="DateTime">${line.date|n}T00:00:00.000</Data>
         </Cell>
         <Cell ss:StyleID="left_bold">
-          <Data ss:Type="String">${line.sequence_for_reference or ''|x}</Data>
+          <Data ss:Type="String">${line.sequence_for_reference or ''|xn}</Data>
         </Cell>
         <Cell ss:StyleID="left_bold">
-          <Data ss:Type="String">${line.name or ''|x}</Data>
+          <Data ss:Type="String">${line.name or ''|xn}</Data>
         </Cell>
         <Cell ss:StyleID="centre">
-          <Data ss:Type="String">${line.ref or ''|x}</Data>
+          <Data ss:Type="String">${line.ref or ''|xn}</Data>
         </Cell>
         <Cell ss:StyleID="number_centre_bold">
-          <Data ss:Type="Number">${line.account_id.code|x}</Data>
+          <Data ss:Type="Number">${line.account_id.code|xn}</Data>
         </Cell>
         <Cell ss:StyleID="left_bold">
-          <Data ss:Type="String">${(line.partner_id and line.partner_id.name or line.transfer_journal_id and line.transfer_journal_id.name or line.employee_id and line.employee_id.name or '')|x}</Data>
+          <Data ss:Type="String">${(line.partner_id and line.partner_id.name or line.transfer_journal_id and line.transfer_journal_id.name or line.employee_id and line.employee_id.name or '')|xn}</Data>
         </Cell>
         <Cell ss:StyleID="amount_bold">
           <Data ss:Type="Number">${line.amount_in or 0.0}</Data>
@@ -441,10 +441,10 @@
           <Data ss:Type="String"></Data>
         </Cell>
         <Cell ss:StyleID="centre">
-          <Data ss:Type="String">${line.reconciled and 'X' or ''|x}</Data>
+          <Data ss:Type="String">${line.reconciled and 'X' or ''|xn}</Data>
         </Cell>
         <Cell ss:StyleID="centre">
-          <Data ss:Type="String">${line.state and getSel(line, 'state') or ''|x}</Data>
+          <Data ss:Type="String">${line.state and getSel(line, 'state') or ''|xn}</Data>
         </Cell>
       </Row>
 
@@ -455,13 +455,13 @@
           <Data ss:Type="Number">${line.amount and ana_line.percentage and ((line.amount or 0.0) * (ana_line.percentage or 0.0) / 100) or 0.0}</Data>
         </Cell>
         <Cell ss:StyleID="ana_left">
-          <Data ss:Type="String">${ana_line.destination_id and ana_line.destination_id.code or ''|x}</Data>
+          <Data ss:Type="String">${ana_line.destination_id and ana_line.destination_id.code or ''|xn}</Data>
         </Cell>
         <Cell ss:StyleID="ana_left">
-          <Data ss:Type="String">${ana_line.cost_center_id and ana_line.cost_center_id.code or ''|x}</Data>
+          <Data ss:Type="String">${ana_line.cost_center_id and ana_line.cost_center_id.code or ''|xn}</Data>
         </Cell>
         <Cell ss:StyleID="ana_left">
-          <Data ss:Type="String">${ana_line.analytic_id and ana_line.analytic_id.code or ''|x}</Data>
+          <Data ss:Type="String">${ana_line.analytic_id and ana_line.analytic_id.code or ''|xn}</Data>
         </Cell>
         <Cell ss:StyleID="ana_percent">
           <Data ss:Type="Number">${ana_line.percentage or 0.0}</Data>
@@ -475,16 +475,16 @@
 % for inv_line in line.invoice_id.invoice_line:
       <Row>
         <Cell ss:Index="4" ss:StyleID="text_center">
-          <Data ss:Type="String">${inv_line.line_number or ''|x}</Data>
+          <Data ss:Type="String">${inv_line.line_number or ''|xn}</Data>
         </Cell>
         <Cell ss:StyleID="left">
-          <Data ss:Type="String">${inv_line.product_id and inv_line.product_id.name or ''|x}</Data>
+          <Data ss:Type="String">${inv_line.product_id and inv_line.product_id.name or ''|xn}</Data>
         </Cell>
         <Cell ss:StyleID="left">
-          <Data ss:Type="String">${inv_line.name or ''|x}</Data>
+          <Data ss:Type="String">${inv_line.name or ''|xn}</Data>
         </Cell>
         <Cell ss:StyleID="number_centre">
-          <Data ss:Type="Number">${inv_line.account_id and inv_line.account_id.code or ''|x}</Data>
+          <Data ss:Type="Number">${inv_line.account_id and inv_line.account_id.code or ''|xn}</Data>
         </Cell>
         <Cell ss:StyleID="left">
           <Data ss:Type="String"></Data>
@@ -504,13 +504,13 @@
           <Data ss:Type="Number">${inv_line.price_subtotal and inv_ana_line.percentage and ((inv_line.price_subtotal or 0.0) * (inv_ana_line.percentage or 0.0) / 100) or 0.0}</Data>
         </Cell>
         <Cell ss:StyleID="ana_left">
-          <Data ss:Type="String">${inv_ana_line.destination_id and inv_ana_line.destination_id.code or ''|x}</Data>
+          <Data ss:Type="String">${inv_ana_line.destination_id and inv_ana_line.destination_id.code or ''|xn}</Data>
         </Cell>
         <Cell ss:StyleID="ana_left">
-          <Data ss:Type="String">${inv_ana_line.cost_center_id and inv_ana_line.cost_center_id.code or ''|x}</Data>
+          <Data ss:Type="String">${inv_ana_line.cost_center_id and inv_ana_line.cost_center_id.code or ''|xn}</Data>
         </Cell>
         <Cell ss:StyleID="ana_left">
-          <Data ss:Type="String">${inv_ana_line.analytic_id and inv_ana_line.analytic_id.code or ''|x}</Data>
+          <Data ss:Type="String">${inv_ana_line.analytic_id and inv_ana_line.analytic_id.code or ''|xn}</Data>
         </Cell>
         <Cell ss:StyleID="ana_percent">
           <Data ss:Type="Number">${inv_ana_line.percentage or 0.0}</Data>
@@ -524,13 +524,13 @@
           <Data ss:Type="Number">${inv_line.price_subtotal and inv_ana_line.percentage and ((inv_line.price_subtotal or 0.0) * (inv_ana_line.percentage or 0.0) / 100) or 0.0}</Data>
         </Cell>
         <Cell ss:StyleID="ana_left">
-          <Data ss:Type="String">${inv_ana_line.destination_id and inv_ana_line.destination_id.code or ''|x}</Data>
+          <Data ss:Type="String">${inv_ana_line.destination_id and inv_ana_line.destination_id.code or ''|xn}</Data>
         </Cell>
         <Cell ss:StyleID="ana_left">
-          <Data ss:Type="String">${inv_ana_line.cost_center_id and inv_ana_line.cost_center_id.code or ''|x}</Data>
+          <Data ss:Type="String">${inv_ana_line.cost_center_id and inv_ana_line.cost_center_id.code or ''|xn}</Data>
         </Cell>
         <Cell ss:StyleID="ana_left">
-          <Data ss:Type="String">${inv_ana_line.analytic_id and inv_ana_line.analytic_id.code or ''|x}</Data>
+          <Data ss:Type="String">${inv_ana_line.analytic_id and inv_ana_line.analytic_id.code or ''|xn}</Data>
         </Cell>
         <Cell ss:StyleID="ana_percent">
           <Data ss:Type="Number">${inv_ana_line.percentage or 0.0}</Data>
@@ -548,16 +548,16 @@
 % for imp_inv_line in ji.invoice.invoice_line:
       <Row>
         <Cell ss:Index="4" ss:StyleID="text_center">
-          <Data ss:Type="String">${imp_inv_line.line_number or ''|x}</Data>
+          <Data ss:Type="String">${imp_inv_line.line_number or ''|xn}</Data>
         </Cell>
         <Cell ss:StyleID="left">
-          <Data ss:Type="String">${imp_inv_line.product_id and imp_inv_line.product_id.name or ''|x}</Data>
+          <Data ss:Type="String">${imp_inv_line.product_id and imp_inv_line.product_id.name or ''|xn}</Data>
         </Cell>
         <Cell ss:StyleID="left">
-          <Data ss:Type="String">${imp_inv_line.name or ''|x}</Data>
+          <Data ss:Type="String">${imp_inv_line.name or ''|xn}</Data>
         </Cell>
         <Cell ss:StyleID="number_centre">
-          <Data ss:Type="Number">${imp_inv_line.account_id and imp_inv_line.account_id.code or ''|x}</Data>
+          <Data ss:Type="Number">${imp_inv_line.account_id and imp_inv_line.account_id.code or ''|xn}</Data>
         </Cell>
         <Cell ss:StyleID="left">
           <Data ss:Type="String"></Data>
@@ -577,13 +577,13 @@
           <Data ss:Type="Number">${imp_inv_line.price_subtotal and inv_ana_line.percentage and ((imp_inv_line.price_subtotal or 0.0) * (inv_ana_line.percentage or 0.0) / 100) or 0.0}</Data>
         </Cell>
         <Cell ss:StyleID="ana_left">
-          <Data ss:Type="String">${inv_ana_line.destination_id and inv_ana_line.destination_id.code or ''|x}</Data>
+          <Data ss:Type="String">${inv_ana_line.destination_id and inv_ana_line.destination_id.code or ''|xn}</Data>
         </Cell>
         <Cell ss:StyleID="ana_left">
-          <Data ss:Type="String">${inv_ana_line.cost_center_id and inv_ana_line.cost_center_id.code or ''|x}</Data>
+          <Data ss:Type="String">${inv_ana_line.cost_center_id and inv_ana_line.cost_center_id.code or ''|xn}</Data>
         </Cell>
         <Cell ss:StyleID="ana_left">
-          <Data ss:Type="String">${inv_ana_line.analytic_id and inv_ana_line.analytic_id.code or ''|x}</Data>
+          <Data ss:Type="String">${inv_ana_line.analytic_id and inv_ana_line.analytic_id.code or ''|xn}</Data>
         </Cell>
         <Cell ss:StyleID="ana_percent">
           <Data ss:Type="Number">${inv_ana_line.percentage or 0.0}</Data>
@@ -597,13 +597,13 @@
           <Data ss:Type="Number">${imp_inv_line.price_subtotal and inv_ana_line.percentage and ((imp_inv_line.price_subtotal or 0.0) * (inv_ana_line.percentage or 0.0) / 100) or 0.0}</Data>
         </Cell>
         <Cell ss:StyleID="ana_left">
-          <Data ss:Type="String">${inv_ana_line.destination_id and inv_ana_line.destination_id.code or ''|x}</Data>
+          <Data ss:Type="String">${inv_ana_line.destination_id and inv_ana_line.destination_id.code or ''|xn}</Data>
         </Cell>
         <Cell ss:StyleID="ana_left">
-          <Data ss:Type="String">${inv_ana_line.cost_center_id and inv_ana_line.cost_center_id.code or ''|x}</Data>
+          <Data ss:Type="String">${inv_ana_line.cost_center_id and inv_ana_line.cost_center_id.code or ''|xn}</Data>
         </Cell>
         <Cell ss:StyleID="ana_left">
-          <Data ss:Type="String">${inv_ana_line.analytic_id and inv_ana_line.analytic_id.code or ''|x}</Data>
+          <Data ss:Type="String">${inv_ana_line.analytic_id and inv_ana_line.analytic_id.code or ''|xn}</Data>
         </Cell>
         <Cell ss:StyleID="ana_percent">
           <Data ss:Type="Number">${inv_ana_line.percentage or 0.0}</Data>
