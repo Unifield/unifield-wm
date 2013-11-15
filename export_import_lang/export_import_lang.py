@@ -50,6 +50,13 @@ class base_language_export(osv.osv_memory):
     def open_requests(self, cr, uid, ids, context=None):
         return lang_tools.open_requests(self, cr, uid, ids, 'export', context)
 
+    def split_xlscell(self, array):
+        size = len(array)
+        if size > 1 and len('\n'.join(array)) > 32700:
+            return self.split_xlscell(array[:size/2])+self.split_xlscell(array[size/2:])
+        else:
+            return [array]
+
     def _export(self, dbname, uid, ids, context=None):
         #modules = ['account_mcdb']
         modules = 'all_installed'
@@ -81,7 +88,8 @@ class base_language_export(osv.osv_memory):
 
                     trans_data = []
                     for (src, trad), row in grouped_rows.items():
-                        trans_data.append([src, trad, '\n'.join(row['tnrs'])])
+                        for splited in self.split_xlscell(row['tnrs']):
+                            trans_data.append([src, trad, '\n'.join(splited)])
                     xml = SpreadsheetCreator(title=this.name, headers=headers, datas=trans_data)
                     out = base64.encodestring(xml.get_xml(default_filters=['decode.utf8']))
             else:
