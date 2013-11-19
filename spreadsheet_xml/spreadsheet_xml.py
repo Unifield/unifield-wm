@@ -41,7 +41,8 @@ class SpreadsheetCell(SpreadsheetTools):
                     self.type = 'datetime'
                 elif dtype == 'String':
                     self.type = 'str'
-                    self.data = self.data.replace('&#10;', "\n")
+                    if self.data:
+                        self.data = self.data.replace('&#10;', "\n")
 
     def __str__(self):
         return "%s"%(self.data, )
