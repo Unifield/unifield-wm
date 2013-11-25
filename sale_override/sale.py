@@ -782,6 +782,10 @@ class sale_order(osv.osv):
         line = kwargs['line']
         if line.order_id.procurement_request and line.order_id.location_requestor_id.usage == 'customer' and not line.product_id and line.comment:
             result['product_id'] = obj_data.get_object_reference(cr, uid, 'msf_doc_import', 'product_tbd')[1]
+
+        # Set cross docking
+        if line.order_id.procurement_request and line.type == 'make_to_order':
+            result['move_cross_docking_ok'] = True
         
         return result
     
