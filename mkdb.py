@@ -70,8 +70,6 @@
 """
 
 import sys
-import time
-import pdb
 
 #Load config file
 import config
@@ -97,19 +95,8 @@ else:
     # Needed for setUpClass and skipIf methods
     import unittest27 as unittest
 
-skipCreation = False
-skipModules = False
-skipModuleUpdate = False
-skipUniUser = False
-skipGroups = False
-skipPropInstance = False
-skipConfig = False
-skipRegister = False
-skipSync = False
-skipModuleData = False
-skipPartner = False
-skipManualConfig = False
-skipOpenPeriod = False
+bool_configuration_only = False
+bool_creation_only = False
 
 def warn(*messages):
     sys.stderr.write(" ".join(messages)+"\n")
@@ -126,29 +113,37 @@ class skip_all(unittest.TestCase):
 
 
 # Determin skip flags if needed
-if not __name__ == '__main__':
+if __name__ == '__main__':
+    bool_creation_only = bool('creation_only' in sys.argv) or bool(__name__+'.skip_all' in sys.argv)
+    bool_configuration_only = bool('configuration_only' in sys.argv) or bool(__name__+'.skip_all' in sys.argv)
+else:
     bool_skip_all = bool(__name__+'.skip_all' in sys.argv)
     if bool_skip_all:
         bool_creation_only = True
         bool_configuration_only = True
+    #else:
+    #    bool_creation_only = bool(__name__+'.creation_only' in sys.argv)
+    #    bool_creation_only = True
+    #    bool_configuration_only = True
     else:
         bool_creation_only = bool(__name__+'.creation_only' in sys.argv)
         bool_configuration_only = bool(__name__+'.configuration_only' in sys.argv)
 
-    skipCreation = bool_configuration_only
-    skipModules = bool_configuration_only
-    skipModuleUpdate = bool_configuration_only
-    skipUniUser = bool_configuration_only
+print "bool_configuration_only", bool_configuration_only, "bool_creation_only", bool_creation_only
+skipCreation = bool_configuration_only
+skipModules = bool_configuration_only
+skipModuleUpdate = bool_configuration_only
+skipUniUser = bool_configuration_only
 
-    skipGroups = bool_creation_only
-    skipPropInstance = bool_creation_only
-    skipConfig = bool_creation_only
-    skipRegister = bool_creation_only
-    skipSync = bool_creation_only
-    skipModuleData = bool_creation_only
-    skipPartner = bool_creation_only
-    skipManualConfig = bool_creation_only
-    skipOpenPeriod = bool_creation_only
+skipGroups = bool_creation_only
+skipPropInstance = bool_creation_only
+skipConfig = bool_creation_only
+skipRegister = bool_creation_only
+skipSync = bool_creation_only
+skipModuleData = bool_creation_only
+skipPartner = bool_creation_only
+skipManualConfig = bool_creation_only
+skipOpenPeriod = bool_creation_only
 
 
 # Base of database creation
@@ -422,6 +417,15 @@ class client_creation(db_creation):
         Synchro.connect('admin')
         Synchro.user(self.db.name).add(self.db.name).addGroups('Sync / User')
         self.db.connect('admin')
+        # search the current entity
+        entity_id = self.db.get('sync.client.entity').search([])
+        data = {'name': self.db.name, 'identifier': str(uuid.uuid1())}
+        if entity_id:
+            entity_data = self.db.get('sync.client.entity').read(entity_id[0])
+            if entity_data['name'] != self.db.name:
+                self.db.get('sync.client.entity').write(entity_id[0], data)
+        else:
+            self.db.get('sync.client.entity').create(data)
         wizard = self.db.wizard('sync.client.register_entity', {'email':config.default_email})
         # Fetch instances
         wizard.next()
