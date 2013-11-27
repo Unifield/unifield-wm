@@ -387,6 +387,7 @@ class server_creation(db_creation, unittest.TestCase):
     @unittest.skipIf(skipModuleData, "Data module installation desactivated")
     def test_10_install_data_server(self):
         self.db.connect('admin')
+        self.db.module('sync_remote_warehouse_server').install().do()
         self.db.module('msf_sync_data_server').install().do()
 
     @unittest.skipIf(skipConfig, "Modules configuration desactivated")
