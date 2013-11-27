@@ -326,7 +326,7 @@ class db_creation(object):
         if i:
             shutil.move(orig_bck, bckfile)
 
-        bckfile_f = open(bckfile, 'wb')
+        bckfile_f = open(orig_bck, 'wb')
         bckfile_f.write(self.db.dump_db())
         bckfile_f.close()
 
