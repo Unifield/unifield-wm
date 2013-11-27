@@ -3,6 +3,7 @@ from time import sleep
 import re
 
 import csv
+import base64
 
 from xmlrpclib import Fault
 import openerplib103 as openerplib
@@ -40,6 +41,12 @@ class db(object):
         return self
 
     create = create_db
+
+    def dump_db(self):
+        return base64.decodestring(self.service.dump(self.server_password, self.db_name))
+
+    def restore_db(self, dbname, data):
+        return self.service.restore(self.server_password, self.db_name, base64.encodestring(data))
 
     def wait(self):
         if not self.server_password: raise Exception, "The server password is needed for this operation"

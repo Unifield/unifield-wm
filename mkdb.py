@@ -3,77 +3,17 @@
 """
   (C) 2012 OpenERP - All rights reserved
 
-  HOWTO
-  =====
-
-    -v is unittest's verbose flag
-    -f is unittest's failsafe flag (stop execution at first error)
-
-    * make specific databases, you can run the script by using
-      one of these commands:
-       python2 -m unittest -v -f mkdb.hq01_creation
-       python2 -m unittest -v -f mkdb.project01_creation mkdb.project02_creation
-    
-    * make creation step only:
-       python2 -m unittest -v -f mkdb.creation_only mkdb.server_creation
-    
-    * make configuration step only:
-       python2 -m unittest -v -f mkdb.configuration_only mkdb.coordo02_creation
-
-    Note: you can't use the creation_only and configuration_only flag in the
-          same command. Plus they are retroactive ('hq01_creation creation_only'
-          will make only creation of HQ).
-
-    Default behavior (<=> #hqs = 1, #coordos = 1, #projects = 2):
-      python2 -m unittest -v -f mkdb.hq01_creation mkdb.coordo01_creation mkdb.project01_creation mkdb.project02_creation
-
-
-  EXAMPLE OF config.py
-  ====================
-
-    # -*- coding: utf-8 -*-
-
-    # postgres admin password
-    db_password = 'admin'
-
-    # default admin password
-    admin_password = 'admin'
-
-    # default user login & password (when connecting to db)
-    user_login = 'unifield'
-    user_password = 'unifield'
-
-    # infos to connect to instances (client side)
-    client_host = 'localhost'
-    client_port = 8069
-
-    # infos to connect to sync server
-    server_host = 'localhost'
-    server_port = 8069
-
-    # infos for instance connection to sync server
-    netrpc_port = 8070
-
-    # database format name
-    prefix = "TEST"
-
-    # other stuffs
-    default_email = 'nobody@nogroup.net'
-    company_name = 'Médecins Sans Frontières'
-    currency = 'base.EUR'
-
-    # number instance of type coordo and project to create
-    hq_count = 1
-    coordo_count = 1
-    project_count = 2
-
 """
-
-import sys
 
 #Load config file
 import config
 from config import coordo_count, project_count, hq_count
+
+import sys
+import os
+import shutil
+import time
+import uuid
 
 assert hq_count > 0, "You must have at least one HQ!"
 assert hq_count <= coordo_count or coordo_count == 0, \
@@ -97,6 +37,8 @@ else:
 
 bool_configuration_only = False
 bool_creation_only = False
+master_dir = '/'.join(os.path.realpath(__file__).split('/')[0:-1]+['master_dump'])
+master_prefix_name = 'msf_profile_sync_so'
 
 def warn(*messages):
     sys.stderr.write(" ".join(messages)+"\n")
@@ -114,8 +56,8 @@ class skip_all(unittest.TestCase):
 
 # Determin skip flags if needed
 if __name__ == '__main__':
-    bool_creation_only = bool('creation_only' in sys.argv) or bool(__name__+'.skip_all' in sys.argv)
-    bool_configuration_only = bool('configuration_only' in sys.argv) or bool(__name__+'.skip_all' in sys.argv)
+    bool_creation_only = bool('creation_only' in sys.argv) or bool('skip_all' in sys.argv)
+    bool_configuration_only = bool('configuration_only' in sys.argv) or bool('skip_all' in sys.argv)
 else:
     bool_skip_all = bool(__name__+'.skip_all' in sys.argv)
     if bool_skip_all:
@@ -129,12 +71,11 @@ else:
         bool_creation_only = bool(__name__+'.creation_only' in sys.argv)
         bool_configuration_only = bool(__name__+'.configuration_only' in sys.argv)
 
-print "bool_configuration_only", bool_configuration_only, "bool_creation_only", bool_creation_only
 skipCreation = bool_configuration_only
 skipModules = bool_configuration_only
 skipModuleUpdate = bool_configuration_only
 skipUniUser = bool_configuration_only
-
+skipMasterCreation = False
 skipGroups = bool_creation_only
 skipPropInstance = bool_creation_only
 skipConfig = bool_creation_only
@@ -145,6 +86,15 @@ skipPartner = bool_creation_only
 skipManualConfig = bool_creation_only
 skipOpenPeriod = bool_creation_only
 
+# eval cond during the run
+def skip_test_real_eval(cond, reason):
+    def deco(fun):
+        def wrap(*a, **b):
+            if eval(cond):
+                raise unittest.SkipTest(reason)
+            return fun(*a, **b)
+        return wrap
+    return deco
 
 # Base of database creation
 class db_creation(object):
@@ -209,23 +159,24 @@ class db_creation(object):
         self.db.connect('admin')
         self.db.drop()
 
-    @unittest.skipIf(skipCreation, "Creation desactivated")
+    @skip_test_real_eval("skipCreation", "Creation desactivated")
     def test_01_create_db(self):
         self.db.connect('admin')
         self.db.create_db(config.admin_password)
         self.db.wait()
         self.db.user('admin').addGroups('Useability / Extended View')
 
-    @unittest.skipIf(skipModules, "Modules installation desactivated")
+    @skip_test_real_eval("skipModules", "Modules installation desactivated")
     def test_02_base_install(self):
         self.db.connect('admin')
         self.db.module('msf_profile').install().do()
         self.db.module('sync_so').install().do()
 
-    @unittest.skipIf(skipUniUser, "Unifield user creation desactivated")
+    @skip_test_real_eval("skipUniUser", "Unifield user creation desactivated")
     def test_03_unifield_user_creation(self):
         self.db.connect('admin')
         self.db.user('unifield').add('admin').addGroups('Sync / User', 'Purchase / User')
+
 
     def configure(self):
         # We did rather start on msf_instance.setup...
@@ -362,6 +313,29 @@ class db_creation(object):
                 'entity_ids' : [(6,0,entity_ids)],
             })
 
+    def dump_db(self):
+        if not os.path.exists(master_dir):
+            os.makedirs(master_dir)
+        self.db.connect()
+        bckfile = os.path.join(master_dir, '%s.dump' % master_prefix_name)
+        orig_bck = bckfile
+        i = 0
+        while os.path.exists(bckfile):
+            i += 1
+            bckfile = os.path.join(master_dir, '%s_%s.dump' % (master_prefix_name, i))
+        if i:
+            shutil.move(orig_bck, bckfile)
+
+        bckfile_f = open(bckfile, 'wb')
+        bckfile_f.write(self.db.dump_db())
+        bckfile_f.close()
+
+    def restore_db(self):
+        dump = os.path.join(master_dir, "%s.dump" % (master_prefix_name,) ) #self.db.name)
+        f = open(dump, 'rb')
+        self.db.connect('admin')
+        self.db.restore_db(self.db.name, f.read())
+        f.close()
 
 # Run a last sync after all synchronization
 class last_sync(unittest.TestCase):
@@ -378,6 +352,10 @@ class last_sync(unittest.TestCase):
 # Specific Sync Server creation
 class server_creation(db_creation, unittest.TestCase):
     db = Synchro
+    
+    @unittest.skipIf(skipMasterCreation, "Master dump creation desactivated") 
+    def test_04_dump_master(self):
+        self.dump_db()
 
     @unittest.skipIf(skipModuleUpdate, "update_server installation desactivated")
     def test_10_install_update_server(self):
@@ -400,9 +378,19 @@ class server_creation(db_creation, unittest.TestCase):
         self.db.connect('admin')
         Synchro.activate('sync_server.sync_rule', [])
 
-
 # Base for instances creation ('is not Synchro')
 class client_creation(db_creation):
+
+    @unittest.skipIf(skipMasterCreation, "Creation of coordo from master")
+    def test_00_restore_master_coordo(self):
+        global skipCreation
+        global skipModules
+        global skipUniUser
+        skipCreation = True
+        skipModules = True
+        skipUniUser = True
+        self.restore_db()
+
     @unittest.skipIf(skipModuleUpdate, "update_client installation desactivated")
     def test_10_install_update_client(self):
         self.db.connect('admin')
