@@ -1,3 +1,7 @@
+# script: mkdb.py
+  * copy server.log in exports/YYYYMMDDHHMM/
+  * archive server.log
+
 # manage_syncdb.sh
 
   * ask user to confirm for DB restore
