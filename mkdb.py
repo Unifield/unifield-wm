@@ -140,7 +140,7 @@ class update_branches(unittest.TestCase):
                 raise self.fail('server_restart_cmd not define in config.py')
             call(config.server_restart_cmd)
         if not to_up:
-            raise unittest.TestResult().stop()
+            raise self.fail('No new code to pull')
 
 
 # Base of database creation
