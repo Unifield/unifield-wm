@@ -78,6 +78,8 @@ if __name__ == '__main__':
     o = parser.parse_args()
     if o.nodump and 'dump_all' not in o.unit_test_option:
         skipDumpDbs = True
+    elif o.unit_test_option and 'dump_all' not in o.unit_test_option:
+        o.unit_test_option.append('dump_all')
 
     if o.update_code or 'update_branches' in  o.unit_test_option:
         skipBranchesUpdate = False
