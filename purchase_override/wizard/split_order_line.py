@@ -136,11 +136,13 @@ class split_purchase_order_line_wizard(osv.osv_memory):
                                     'so_back_update_dest_po_id_sale_order_line': split.purchase_line_id.order_id.id,
                                     'so_back_update_dest_pol_id_sale_order_line': split.purchase_line_id.id,
                                     }
+                    init_state = split.corresponding_so_line_id_split_po_line_wizard.state
                     new_so_line_id = so_line_obj.copy(cr, uid, split.corresponding_so_line_id_split_po_line_wizard.id, so_copy_data, context=dict(context, keepDateAndDistrib=True))
                     # change the initial qty on the initial FO line
                     so_line_obj.write(cr, uid, split.corresponding_so_line_id_split_po_line_wizard.id, {'product_uom_qty': split.original_qty - split.new_line_qty, 'product_uos_qty': split.original_qty - split.new_line_qty}, context=dict(context, keepDateAndDistrib=True))
                     # call the new procurement creation method
                     so_obj.action_ship_proc_create(cr, uid, [split.corresponding_so_id_split_po_line_wizard.id], context=context)
+                    so_line_obj.write(cr, uid, [new_so_line_id], {'state': init_state}, context=context)
                     # run the procurement, the make_po function detects the link to original po
                     # and force merge the line to this po (even if it is not draft anymore)
                     # run the procurement, the make_po function detects the link to original po
