@@ -15,6 +15,12 @@ import shutil
 import time
 import uuid
 
+from bzrlib.workingtree import WorkingTree
+from bzrlib.branch import BzrBranch
+
+import argparse
+
+
 assert hq_count > 0, "You must have at least one HQ!"
 assert hq_count <= coordo_count or coordo_count == 0, \
     "Wrong number of HQ's and Coordinations!"
@@ -55,7 +61,24 @@ class skip_all(unittest.TestCase):
 
 
 # Determin skip flags if needed
+skipDrop = True
+skipDumpDbs = True
+
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    parser.add_argument("--skip-all", action='store_true', default=False, help="Skip all tests")
+    parser.add_argument("--drop", action='store_true', default=False, help="Drop existing db")
+    parser.add_argument("--dump", action='store_true', default=False, help="Dump all dbs at the end")
+    parser.add_argument('unit_test_option', nargs='*', help='Tests to start: server_creation hq01_creation coordo01_creation dump_all ...')
+
+    o = parser.parse_args()
+    if o.dump:
+        skipDumpDbs = False
+        #o.unit_test_option = ['dump_all']
+
+    sys.argv = [sys.argv[0]] + o.unit_test_option
+    skipDrop = not o.drop
+
     bool_creation_only = bool('creation_only' in sys.argv) or bool('skip_all' in sys.argv)
     bool_configuration_only = bool('configuration_only' in sys.argv) or bool('skip_all' in sys.argv)
 else:
@@ -63,10 +86,6 @@ else:
     if bool_skip_all:
         bool_creation_only = True
         bool_configuration_only = True
-    #else:
-    #    bool_creation_only = bool(__name__+'.creation_only' in sys.argv)
-    #    bool_creation_only = True
-    #    bool_configuration_only = True
     else:
         bool_creation_only = bool(__name__+'.creation_only' in sys.argv)
         bool_configuration_only = bool(__name__+'.configuration_only' in sys.argv)
@@ -76,7 +95,6 @@ skipModules = bool_configuration_only
 skipModuleUpdate = bool_configuration_only
 skipUniUser = bool_configuration_only
 skipMasterCreation = False
-skipDumpDbs = False
 skipGroups = bool_creation_only
 skipPropInstance = bool_creation_only
 skipConfig = bool_creation_only
@@ -155,7 +173,7 @@ class db_creation(object):
         if self.db is None:
             self.fail("Bad use of class")
 
-    @unittest.skipIf(skipCreation, "Creation desactivated")
+    @unittest.skipIf(skipDrop, "Creation desactivated")
     def test_00_drop(self):
         self.db.connect('admin')
         self.db.drop()
@@ -315,15 +333,14 @@ class db_creation(object):
             })
 
     @classmethod
-    def dump_db(self, path, name=None, db=None):
-        print "DUMMMMMMMMMMp", db
-        if db is None:
-            db = self.db
+    def dump_db(self, path, name=None):
+        if self.db is None:
+            self.setUpClass()
         if not os.path.exists(path):
             os.makedirs(path)
         if name is None:
-            db.connect('admin')
-            print db.db_name
+            self.db.connect()
+            name =self.db.db_name
         bckfile = os.path.join(path, '%s.dump' % name)
         orig_bck = bckfile
         i = 0
@@ -334,7 +351,7 @@ class db_creation(object):
             shutil.move(orig_bck, bckfile)
 
         bckfile_f = open(orig_bck, 'wb')
-        bckfile_f.write(db.dump_db())
+        bckfile_f.write(self.db.dump_db())
         bckfile_f.close()
 
     def restore_db(self):
@@ -357,14 +374,54 @@ class last_sync(unittest.TestCase):
 
 
 class dump_all(unittest.TestCase):
-    test_cases = []
+
+    dir_to_dump = os.path.join(config.dump_dir, time.strftime('%Y%m%d%H%M'))
+    
+    @unittest.skipIf(skipDumpDbs, "DBs dump directory creation deactivated")
+    def test_00_create_dump_dir(self):
+        if not os.path.exists(self.dir_to_dump):
+            os.makedirs(self.dir_to_dump)
 
     @unittest.skipIf(skipDumpDbs, "DBs dump deactivated")
     def test_10_dump_all(self):
-        for tc in self.test_cases:
+        for tc in test_cases:
             if issubclass(tc, db_creation):
-                print "1", tc
-                tc.dump_db('/tmp/ooo')
+                tc.dump_db(self.dir_to_dump)
+
+    @unittest.skipIf(skipDumpDbs, "DBs dump deactivated")
+    def test_20_dump_branch_info(self):
+        info = {}
+        for ad in config.addons:
+            src_path = os.path.join(config.source_path, ad)
+            info[ad] = self.get_revno_from_path(src_path)
+        f = open(os.path.join(self.dir_to_dump, 'info.txt'), 'w')
+        for mod, data in info.items():
+            f.write("%s_url=%s\n" % (mod, data['lpurl']))
+            f.write("%s_revno=%s\n" % (mod, data['revno']))
+        f.close()
+
+    def get_lp_branch(self, wk):
+        if isinstance(wk.branch, BzrBranch):
+            parent = wk.branch.get_parent()
+            if parent is None:
+                parent = wk.branch.get_bound_location()
+        else:
+            parent = wk.branch.bzrdir.root_transport.base
+        return parent
+
+    def get_revno_from_path(self, path):
+        if os.path.islink(path):
+            path = os.path.realpath(path)
+        wt = WorkingTree.open(path)
+        lr = wt.last_revision()
+        try:
+            revno = wt.branch.revision_id_to_dotted_revno(lr)[0]
+        except:
+            revno = False
+        rev = wt.branch.repository.get_revision(lr)
+        return {'revno': revno, 'lastmsg': rev.get_summary(), 'lpurl': self.get_lp_branch(wt)}
+
+
 
 
 # Specific Sync Server creation
@@ -635,7 +692,6 @@ class verbose(unittest.TestCase):
 
 # Base Install
 test_cases = [verbose, server_creation]
-#dump_all.test_cases.append(server_creation)
 
 # Create HQ classes
 for i in range(1, hq_count+1):
@@ -644,8 +700,6 @@ for i in range(1, hq_count+1):
         'index' : i,
     }) )
     # Make testcase visible for importation
-    dump_all.test_cases.append(test_cases[-1])
-    print test_cases[-1], server_creation
     globals()[test_cases[-1].__name__] = test_cases[-1]
 
 
@@ -660,7 +714,6 @@ for i in range(1, coordo_count+1):
     test_cases[-1].hq = test_cases[-1].parent
     # Make testcase visible for importation
     globals()[test_cases[-1].__name__] = test_cases[-1]
-    dump_all.test_cases.append(test_cases[-1])
 
 
 # Create Project classes
@@ -674,7 +727,6 @@ for i in range(1, project_count+1):
     test_cases[-1].hq = test_cases[-1].parent.parent
     # Make testcase visible for importation
     globals()[test_cases[-1].__name__] = test_cases[-1]
-    dump_all.test_cases.append(test_cases[-1])
 
 
 # Push last_sync test at last
