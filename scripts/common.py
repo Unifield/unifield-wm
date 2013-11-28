@@ -168,4 +168,5 @@ def check_lp_update(update=False):
             if update:
                 wt = WorkingTree.open(src_path)
                 wt.pull(br)
+                wt.update()
     return to_update

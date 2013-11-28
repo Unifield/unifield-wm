@@ -71,8 +71,8 @@ if __name__ == '__main__':
     parser.add_argument("--nodrop", "-n", action='store_true', default=False, help="Don't drop existing db")
     parser.add_argument("--nodump", action='store_true', default=False, help="Disable dbs dump at the end")
     parser.add_argument("--log-to-file", action='store_true', default=False, help="Log the unittest")
-    #parser.add_argument("--update-code", action='store_true', default=False, help="Update the code and restart servers if needed")
-    parser.add_argument('unit_test_option', nargs='*', help='Tests to start: server_creation hq01_creation coordo01_creation dump_all update_branches ...')
+    parser.add_argument("--update-code", action='store_true', default=False, help="Update the code, restart servers and create db if needed")
+    parser.add_argument('unit_test_option', nargs='*', help='Tests to start: server_creation hq01_creation coordo01_creation dump_all  ...')
 
 
     o = parser.parse_args()
@@ -81,10 +81,10 @@ if __name__ == '__main__':
     elif o.unit_test_option and 'dump_all' not in o.unit_test_option:
         o.unit_test_option.append('dump_all')
 
-    #if o.update_code or 'update_branches' in  o.unit_test_option:
-    #    skipBranchesUpdate = False
-    #    if o.unit_test_option and 'update_branches' not in o.unit_test_option:
-    #        o.unit_test_option.insert(0, 'update_branches')
+    if o.update_code or 'update_branches' in  o.unit_test_option:
+        skipBranchesUpdate = False
+        if o.unit_test_option and 'update_branches' not in o.unit_test_option:
+            o.unit_test_option.insert(0, 'update_branches')
 
     sys.argv = [sys.argv[0]] + o.unit_test_option
     skipDrop = o.nodrop
@@ -139,6 +139,8 @@ class update_branches(unittest.TestCase):
             if not config.server_restart_cmd:
                 raise self.fail('server_restart_cmd not define in config.py')
             call(config.server_restart_cmd)
+        if not to_up:
+            raise unittest.TestResult().stop()
 
 
 # Base of database creation
