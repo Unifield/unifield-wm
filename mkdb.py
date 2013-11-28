@@ -219,7 +219,7 @@ class db_creation(object):
         self.db.module('msf_profile').install().do()
         self.db.module('sync_so').install().do()
 
-    @skip_test_real_eval("skipUniUser", "Unifield user creation desactivated")
+    @skip_test_real_eval("skipUniUser", "UniField user creation desactivated")
     def test_03_unifield_user_creation(self):
         self.db.connect('admin')
         self.db.user('unifield').add('admin').addGroups('Sync / User', 'Purchase / User')
@@ -732,7 +732,10 @@ for i in range(1, project_count+1):
 
 
 # Push last_sync test at last
-test_cases.append( last_sync )
+test_cases.append(last_sync)
+
+# and dump
+test_cases.append(dump_all)
 
 
 def load_tests(loader, tests, pattern):
