@@ -42,6 +42,9 @@ class db(object):
 
     create = create_db
 
+    def list_db(self):
+        return self.service.list()
+
     def dump_db(self):
         return base64.decodestring(self.service.dump(self.server_password, self.db_name))
 

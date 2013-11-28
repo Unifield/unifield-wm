@@ -76,6 +76,7 @@ skipModules = bool_configuration_only
 skipModuleUpdate = bool_configuration_only
 skipUniUser = bool_configuration_only
 skipMasterCreation = False
+skipDumpDbs = False
 skipGroups = bool_creation_only
 skipPropInstance = bool_creation_only
 skipConfig = bool_creation_only
@@ -313,21 +314,27 @@ class db_creation(object):
                 'entity_ids' : [(6,0,entity_ids)],
             })
 
-    def dump_db(self):
-        if not os.path.exists(master_dir):
-            os.makedirs(master_dir)
-        self.db.connect()
-        bckfile = os.path.join(master_dir, '%s.dump' % master_prefix_name)
+    @classmethod
+    def dump_db(self, path, name=None, db=None):
+        print "DUMMMMMMMMMMp", db
+        if db is None:
+            db = self.db
+        if not os.path.exists(path):
+            os.makedirs(path)
+        if name is None:
+            db.connect('admin')
+            print db.db_name
+        bckfile = os.path.join(path, '%s.dump' % name)
         orig_bck = bckfile
         i = 0
         while os.path.exists(bckfile):
             i += 1
-            bckfile = os.path.join(master_dir, '%s_%s.dump' % (master_prefix_name, i))
+            bckfile = os.path.join(path, '%s_%s.dump' % (name, i))
         if i:
             shutil.move(orig_bck, bckfile)
 
         bckfile_f = open(orig_bck, 'wb')
-        bckfile_f.write(self.db.dump_db())
+        bckfile_f.write(db.dump_db())
         bckfile_f.close()
 
     def restore_db(self):
@@ -347,7 +354,18 @@ class last_sync(unittest.TestCase):
         for tc in self.test_cases:
             assert issubclass(tc, db_creation), "The object %s is not of type db_creation!"
             tc.sync()
- 
+
+
+class dump_all(unittest.TestCase):
+    test_cases = []
+
+    @unittest.skipIf(skipDumpDbs, "DBs dump deactivated")
+    def test_10_dump_all(self):
+        for tc in self.test_cases:
+            if issubclass(tc, db_creation):
+                print "1", tc
+                tc.dump_db('/tmp/ooo')
+
 
 # Specific Sync Server creation
 class server_creation(db_creation, unittest.TestCase):
@@ -355,7 +373,7 @@ class server_creation(db_creation, unittest.TestCase):
     
     @unittest.skipIf(skipMasterCreation, "Master dump creation desactivated") 
     def test_04_dump_master(self):
-        self.dump_db()
+        self.dump_db(master_dir, master_prefix_name)
 
     @unittest.skipIf(skipModuleUpdate, "update_server installation desactivated")
     def test_10_install_update_server(self):
@@ -617,6 +635,7 @@ class verbose(unittest.TestCase):
 
 # Base Install
 test_cases = [verbose, server_creation]
+#dump_all.test_cases.append(server_creation)
 
 # Create HQ classes
 for i in range(1, hq_count+1):
@@ -625,6 +644,8 @@ for i in range(1, hq_count+1):
         'index' : i,
     }) )
     # Make testcase visible for importation
+    dump_all.test_cases.append(test_cases[-1])
+    print test_cases[-1], server_creation
     globals()[test_cases[-1].__name__] = test_cases[-1]
 
 
@@ -639,6 +660,7 @@ for i in range(1, coordo_count+1):
     test_cases[-1].hq = test_cases[-1].parent
     # Make testcase visible for importation
     globals()[test_cases[-1].__name__] = test_cases[-1]
+    dump_all.test_cases.append(test_cases[-1])
 
 
 # Create Project classes
@@ -652,6 +674,7 @@ for i in range(1, project_count+1):
     test_cases[-1].hq = test_cases[-1].parent.parent
     # Make testcase visible for importation
     globals()[test_cases[-1].__name__] = test_cases[-1]
+    dump_all.test_cases.append(test_cases[-1])
 
 
 # Push last_sync test at last
