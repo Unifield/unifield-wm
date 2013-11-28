@@ -63,23 +63,21 @@ class skip_all(unittest.TestCase):
 
 # Determin skip flags if needed
 skipDrop = True
-skipDumpDbs = True
+skipDumpDbs = False
 skipBranchesUpdate = True
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument("--nodrop", "-n", action='store_true', default=False, help="Don't drop existing db")
-    parser.add_argument("--dump", action='store_true', default=False, help="Dump all dbs at the end")
+    parser.add_argument("--nodump", action='store_true', default=False, help="Disable dbs dump at the end")
     parser.add_argument("--log-to-file", action='store_true', default=False, help="Log the unittest")
     parser.add_argument("--update-code", action='store_true', default=False, help="Update the code and restart servers if needed")
     parser.add_argument('unit_test_option', nargs='*', help='Tests to start: server_creation hq01_creation coordo01_creation dump_all ...')
 
 
     o = parser.parse_args()
-    if o.dump or 'dump_all' in o.unit_test_option:
-        skipDumpDbs = False
-        if o.unit_test_option and 'dump_all' not in o.unit_test_option:
-            o.unit_test_option.append('dump_all')
+    if o.nodump and 'dump_all' not in o.unit_test_option:
+        skipDumpDbs = True
 
     if o.update_code or 'update_branches' in  o.unit_test_option:
         skipBranchesUpdate = False
