@@ -6,8 +6,12 @@ import openerplib103 as openerplib
 from tests.openerplib import db
 
 import config
+import os
+from bzrlib.workingtree import WorkingTree
+from bzrlib.branch import BzrBranch
 
-__all__ = ['server', 'client', 'db_instance', 'Synchro', 'HQ', 'Coordo', 'Project', 'Project2']
+
+__all__ = ['server', 'client', 'db_instance', 'Synchro', 'HQ', 'Coordo', 'Project', 'Project2', 'check_lp_update', 'get_revno_from_path']
 
 server, client = None, None
 
@@ -128,3 +132,40 @@ Project2 = db_instance(
     }
 )
 
+def get_lp_branch(wk):
+    if isinstance(wk.branch, BzrBranch):
+        parent = wk.branch.get_parent()
+        if parent is None:
+            parent = wk.branch.get_bound_location()
+    else:
+        parent = wk.branch.bzrdir.root_transport.base
+    return parent
+
+def get_revno_from_path(path):
+    if os.path.islink(path):
+        path = os.path.realpath(path)
+    wt = WorkingTree.open(path)
+    lr = wt.last_revision()
+    try:
+        revno = wt.branch.revision_id_to_dotted_revno(lr)[0]
+    except:
+        revno = False
+    rev = wt.branch.repository.get_revision(lr)
+    return {'revno': revno, 'lastmsg': rev.get_summary(), 'lpurl': get_lp_branch(wt)}
+
+def check_lp_update(update=False):
+    to_update = []
+    for ad in config.addons:
+        src_path = os.path.join(config.source_path, ad)
+        info = get_revno_from_path(src_path)
+
+        br = BzrBranch.open(info['lpurl'])
+        lr = br.last_revision()
+        revno = br.revision_id_to_dotted_revno(lr)[0]
+
+        if revno > info['revno']:
+            to_update.append(ad)
+            if update:
+                wt = WorkingTree.open(src_path)
+                wt.pull(br)
+    return to_update

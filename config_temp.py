@@ -32,5 +32,7 @@ project_count = 2
 load_test = 1250
 dump_dir = '/tmp/db_dump_%s' % (prefix,)
 
-source_path = '/home/jf/Unifield/pilot2.7/'
+source_path = ''
 addons = ['unifield-wm', 'unifield-addons', 'unifield-server', 'unifield-web', 'sync_module_prod']
+server_restart_cmd = ''
+web_restart_cmd = ''
