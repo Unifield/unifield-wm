@@ -755,7 +755,7 @@ if __name__ == '__main__':
     if o.log_to_file:
         if not os.path.exists(dir_to_dump):
             os.makedirs(dir_to_dump)
-        f = open(os.path.join(dir_to_dump, 'script_result.txt'), "w")
+        f = open(os.path.join(dir_to_dump, 'script_result.log'), "w")
         stream = f
     else:
         stream = sys.stderr
