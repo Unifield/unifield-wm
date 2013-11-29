@@ -102,6 +102,7 @@ else:
 
 skipCreation = bool_configuration_only
 skipModules = bool_configuration_only
+skipSyncSo = bool_configuration_only
 skipModuleUpdate = bool_configuration_only
 skipUniUser = bool_configuration_only
 skipMasterCreation = False
@@ -219,8 +220,8 @@ class db_creation(object):
         self.db.module('msf_profile').install().do()
 
 
-    @skip_test_real_eval("skipModules", "Modules installation desactivated")
-    def test_04_base_install(self):
+    @skip_test_real_eval("skipSyncSo", "Modules installation desactivated")
+    def test_04_sync_so_install(self):
         self.db.connect('admin')
         self.db.module('sync_so').install().do()
 
@@ -467,10 +468,8 @@ class client_creation(db_creation):
     def test_00_restore_master_coordo(self):
         global skipCreation
         global skipModules
-        global skipUniUser
         skipCreation = True
         skipModules = True
-        skipUniUser = True
         self.restore_db()
 
     @unittest.skipIf(skipModuleUpdate, "update_client installation desactivated")
