@@ -134,12 +134,13 @@ class update_branches(unittest.TestCase):
         if 'unifield-web' in to_up:
             if not config.web_restart_cmd:
                 raise self.fail('web_restart_cmd not define in config.py')
-            call(config.web_restart_cmd)
+            call(config.web_restart_cmd, shell=True)
             to_up.remove('unifield-web')
         if to_up:
             if not config.server_restart_cmd:
                 raise self.fail('server_restart_cmd not define in config.py')
-            call(config.server_restart_cmd)
+            call(config.server_restart_cmd, shell=True)
+            time.sleep(5)
         if not to_up:
             raise self.fail('No new code to pull')
 
