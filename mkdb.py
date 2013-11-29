@@ -217,10 +217,15 @@ class db_creation(object):
     def test_02_base_install(self):
         self.db.connect('admin')
         self.db.module('msf_profile').install().do()
+
+
+    @skip_test_real_eval("skipModules", "Modules installation desactivated")
+    def test_04_base_install(self):
+        self.db.connect('admin')
         self.db.module('sync_so').install().do()
 
     @skip_test_real_eval("skipUniUser", "UniField user creation desactivated")
-    def test_03_unifield_user_creation(self):
+    def test_05_unifield_user_creation(self):
         self.db.connect('admin')
         self.db.user('unifield').add('admin').addGroups('Sync / User', 'Purchase / User')
 
@@ -431,7 +436,7 @@ class server_creation(db_creation, unittest.TestCase):
     db = Synchro
     
     @unittest.skipIf(skipMasterCreation, "Master dump creation desactivated") 
-    def test_04_dump_master(self):
+    def test_03_dump_master(self):
         self.dump_db(master_dir, master_prefix_name)
 
     @unittest.skipIf(skipModuleUpdate, "update_server installation desactivated")
