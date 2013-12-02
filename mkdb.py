@@ -181,10 +181,21 @@ class db_creation(object):
         return self.parent.db.name if self.parent else None
 
     @classmethod
+    def getNameFormat(cls):
+        return  {
+            'db': config.prefix,
+            'ind': cls.index,
+            'pind': cls.parent and cls.parent.index or '','ppind': cls.parent and cls.parent.parent and cls.parent.parent.index or ''
+        }
+
+    @classmethod
     def setUpClass(cls):
         if cls.db is None and hasattr(cls, 'index'):
-            if cls.parent is not None: cls.parent.setUpClass()
-            name = cls.name_format % (config.prefix, cls.index)
+            if cls.parent is not None:
+                cls.parent.setUpClass()
+
+
+            name = cls.name_format % cls.getNameFormat()
             cls.db = db_instance(
                 server=client,
                 name=name,
@@ -395,6 +406,8 @@ class db_creation(object):
         self.db.connect('admin')
         self.db.restore_db(self.db.name, f.read())
         f.close()
+        # wait process
+        time.sleep(10)
 
 # Run a last sync after all synchronization
 class last_sync(unittest.TestCase):
@@ -425,6 +438,8 @@ class dump_all(unittest.TestCase):
         info = {}
         for ad in config.addons:
             src_path = os.path.join(config.source_path, ad)
+            if not os.path.exists(src_path):
+                raise self.fail('%s does not exist ! Did you set source_path in config.py ?' % src_path)
             info[ad] = get_revno_from_path(src_path)
         f = open(os.path.join(dir_to_dump, 'info.txt'), 'w')
         for mod, data in info.items():
@@ -466,7 +481,7 @@ class server_creation(db_creation, unittest.TestCase):
 class client_creation(db_creation):
 
     @unittest.skipIf(skipMasterCreation, "Creation of coordo from master")
-    def test_00_restore_master_coordo(self):
+    def test_00_restore_from_master(self):
         global skipCreation
         global skipModules
         skipCreation = True
@@ -567,7 +582,7 @@ class client_creation(db_creation):
 
 # Replicable class to create hq n
 class hqn_creation(client_creation, unittest.TestCase):
-    name_format = "%s_HQ_%02d"
+    name_format = "%(db)s_HQ%(ind)d"
 
     @unittest.skipIf(skipGroups, "Group creation desactivated")
     def test_30_make_groups_coordo(self):
@@ -607,7 +622,7 @@ class hqn_creation(client_creation, unittest.TestCase):
 
 # Replicable class to create coordo n
 class coordon_creation(client_creation):
-    name_format = "%s_COORDO_%02d"
+    name_format = "%(db)s_HQ%(pind)dC%(ind)d"
 
     @unittest.skipIf(skipGroups, "Group creation desactivated")
     def test_30_make_groups_coordo(self):
@@ -641,7 +656,7 @@ class coordon_creation(client_creation):
 
 # Replicable class to create project n
 class projectn_creation(client_creation):
-    name_format = "%s_PROJECT_%02d"
+    name_format = "%(db)s_HQ%(ppind)dC%(pind)dP%(ind)d"
 
     @unittest.skipIf(skipGroups, "Group creation desactivated")
     def test_30_make_groups_coordo(self):
@@ -678,23 +693,18 @@ class projectn_creation(client_creation):
 
 
 class verbose(unittest.TestCase):
-    def test_10_show_hqs(self):
+    def test_10_show_dbs(self):
         warn("\n"+"-" * 40)
         for tc_hq in filter(lambda tc:issubclass(tc, hqn_creation), test_cases):
-            warn( " * %s" % hqn_creation.name_format % (config.prefix, tc_hq.index))
+            warn( " * %s" % hqn_creation.name_format % tc_hq.getNameFormat())
             for tc in filter(lambda tc:issubclass(tc, coordon_creation) \
                                        and tc.parent is tc_hq, test_cases):
-                warn( "    - %s" % coordon_creation.name_format % (config.prefix, tc.index))
+                warn( "    - %s" % coordon_creation.name_format % tc.getNameFormat())
+                for tp in filter(lambda tp:issubclass(tp, projectn_creation) \
+                                           and tp.parent is tc, test_cases):
+                    warn( "        + %s" % projectn_creation.name_format % tp.getNameFormat())
             warn("-" * 40)
 
-    def test_20_show_coordos(self):
-        warn("\n"+"-" * 40)
-        for tc_coordo in filter(lambda tc:issubclass(tc, coordon_creation), test_cases):
-            warn( " * %s" % coordon_creation.name_format % (config.prefix, tc_coordo.index))
-            for tc in filter(lambda tc:issubclass(tc, projectn_creation) \
-                                       and tc.parent is tc_coordo, test_cases):
-                warn( "    - %s" % projectn_creation.name_format % (config.prefix, tc.index))
-            warn("-" * 40)
 
 
 # Base Install
@@ -702,38 +712,36 @@ test_cases = [verbose, update_branches, server_creation]
 
 # Create HQ classes
 for i in range(1, hq_count+1):
-    test_cases.append( type("hq%02d_creation" % i, (hqn_creation,unittest.TestCase), {
-        'prefix' : hex(i)[2:].rjust(2,'X'),
+    test_cases.append( type("HQ%d_creation" % i, (hqn_creation,unittest.TestCase), {
+        'prefix' : 'HQ%s'%i,
         'index' : i,
     }) )
     # Make testcase visible for importation
     globals()[test_cases[-1].__name__] = test_cases[-1]
 
 
-# Create Coordo classes
-for i in range(1, coordo_count+1):
-    test_cases.append( type("coordo%02d_creation" % i, (coordon_creation,unittest.TestCase), {
-        'prefix' : hex(i+hq_count)[2:].rjust(2,'X'),
-        'index' : i,
-        'parent' : globals()["hq%02d_creation" % (\
-                        ((i-1) % hq_count + 1))],
-    }) )
-    test_cases[-1].hq = test_cases[-1].parent
-    # Make testcase visible for importation
-    globals()[test_cases[-1].__name__] = test_cases[-1]
+    # Create Coordo classes
+    for ci in range(1, coordo_count+1):
+        test_cases.append( type("HQ%d_C%d_creation" % (i, ci), (coordon_creation,unittest.TestCase), {
+            'prefix' : 'C%s%s' % (i, ci),
+            'index' : ci,
+            'parent' : globals()["HQ%d_creation" % i],
+        }) )
+        test_cases[-1].hq = test_cases[-1].parent
+        # Make testcase visible for importation
+        globals()[test_cases[-1].__name__] = test_cases[-1]
 
 
-# Create Project classes
-for i in range(1, project_count+1):
-    test_cases.append( type("project%02d_creation" % i, (projectn_creation,unittest.TestCase), {
-        'prefix' : hex(i+coordo_count+hq_count)[2:].rjust(2,'X'),
-        'index' : i,
-        'parent' : globals()["coordo%02d_creation" % (\
-                        ((i-1) % coordo_count + 1))],
-    }) )
-    test_cases[-1].hq = test_cases[-1].parent.parent
-    # Make testcase visible for importation
-    globals()[test_cases[-1].__name__] = test_cases[-1]
+        # Create Project classes
+        for pi in range(1, project_count+1):
+            test_cases.append( type("HQ%d_C%d_P%d_creation" % (i, ci, pi), (projectn_creation,unittest.TestCase), {
+                'prefix' : 'P%s%s%s'%(i, ci, pi),
+                'index' : pi,
+                'parent' : globals()["HQ%d_C%d_creation" % (i, ci)],
+            }) )
+            test_cases[-1].hq = test_cases[-1].parent.parent
+            # Make testcase visible for importation
+            globals()[test_cases[-1].__name__] = test_cases[-1]
 
 
 # Push last_sync test at last
