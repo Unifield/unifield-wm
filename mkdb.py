@@ -22,10 +22,6 @@ import argparse
 from subprocess import call
 
 assert hq_count > 0, "You must have at least one HQ!"
-assert hq_count <= coordo_count or coordo_count == 0, \
-    "Wrong number of HQ's and Coordinations!"
-assert coordo_count > 0 if project_count > 0 else coordo_count >= 0, \
-    "Wrong number of Coordinations and Projects!"
 
 #from tests import *
 from tests.openerplib import db
