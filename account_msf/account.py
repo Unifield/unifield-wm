@@ -35,12 +35,20 @@ class account_account(osv.osv):
         if context is None:
             context = {}
         res = {}
-        for account in self.browse(cr, uid, ids):
-            res[account.id] = False
-            intermission = self.pool.get('res.users').browse(cr, uid, uid).company_id.intermission_default_counterpart
-            intermission_id = intermission and intermission.id or False
-            if account.id == intermission_id:
-                res[account.id] = True
+        # FIXME: removed for the loop because the code doesn't depend on it
+        intermission = self.pool.get('res.users').browse(cr, uid, uid).company_id.intermission_default_counterpart
+        intermission_id = intermission and intermission.id or False
+
+# FIXME: you don't need to browse records if you only get the id field !!
+#        for account in self.browse(cr, uid, ids):
+#            res[account.id] = False
+#            if account.id == intermission_id:
+#                res[account.id] = True
+
+        for id in ids:
+            res[id] = False
+        if intermission_id in ids:
+            res[intermission_id] = False
         return res
 
     def _search_is_intermission_counterpart(self, cr, uid, ids, field_names, args, context=None):
@@ -50,10 +58,11 @@ class account_account(osv.osv):
         if context is None:
             context = {}
         arg = []
+        # FIXME: outside the loop
+        intermission = self.pool.get('res.users').browse(cr, uid, uid).company_id.intermission_default_counterpart
+        intermission_id = intermission and intermission.id or False
         for x in args:
             if x[0] == 'is_intermission_counterpart' and x[2] is True:
-                intermission = self.pool.get('res.users').browse(cr, uid, uid).company_id.intermission_default_counterpart
-                intermission_id = intermission and intermission.id or False
                 if intermission_id:
                   arg.append(('id', '=', intermission_id))
         return arg

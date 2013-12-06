@@ -101,8 +101,10 @@ class account_account(osv.osv):
                 if x[2] in ACCOUNT_RESTRICTED_AREA:
                     for subdomain in ACCOUNT_RESTRICTED_AREA[x[2]]:
                         arg.append(subdomain)
-            else:
+            # FIXME: never ending loop ...
+            elif x[0] != 'restricted_area':
                 arg.append(x)
+            # FIXME: else raise ...
         return arg
 
     def _get_fake_cash_domain(self, cr, uid, ids, field_name, arg, context=None):
@@ -127,6 +129,7 @@ class account_account(osv.osv):
             if x[0] and x[1] == '=' and x[2]:
                 if x[2] in ['cash', 'bank', 'cheque']:
                     arg.append(('restricted_area', '=', 'journals'))
+            # FIXME else raise filter not implemented ...
         return arg
 
     _columns = {
