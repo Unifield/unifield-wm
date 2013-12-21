@@ -1,0 +1,1 @@
+ - 07/Dec/2013: The script use bzr branch instead of bzr checkout to get the launchap branch.
