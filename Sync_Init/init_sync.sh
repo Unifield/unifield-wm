@@ -7,6 +7,11 @@ BRANCH_DEFAULT_WM="lp:unifield-wm"
 BRANCH_DEFAULT_SYNC="lp:~unifield-team/unifield-wm/sync_module_prod"
 BRANCH_DEFAULT_ENV="lp:~unifield-team/unifield-wm/sync-env"
 
+APACHE_PREFIX="xxx_syncenv"
+APACHE_SITE_AVAILABLE="/etc/apache2/sites-available/syncenv"
+bzr_type=branch
+#bzr_type=checkout --lightweight
+
 REV="$1"
 [ -z "$REV" ] && echo "Please specify revision: dsp-utp141 for example" && exit 1
 BRANCHES="branches/$REV"
@@ -74,6 +79,13 @@ DBNAME="${REV}"
 BZBRANCH=""
 ADMINDBPASS="4unifield"
 
+check_init() {
+    if [ ! -d ${APACHE_SITE_AVAILABLE} ];
+        mkdir -p ${APACHE_SITE_AVAILABLE}
+    fi
+    # TODO: check if
+    #  - linux user exists (home dir ...)
+}
 create_file() {
 sed -e "s#@@USERERP@@#${USERERP}#g" \
     -e "s#@@DBNAME@@#${DBNAME}#g" \
@@ -85,26 +97,21 @@ sed -e "s#@@USERERP@@#${USERERP}#g" \
     -e "s#@@WEBPORT@@#${WEBPORT}#g" $1  > $2
 }
 
-
 config_file() {
     create_file ./File/openerp-server-sprint1  /etc/init.d/${USERERP}-server
     create_file ./File/openerp-web-sprint1 /etc/init.d/${USERERP}-web
     create_file ./File/openerprc /home/${USERERP}/etc/openerprc
     create_file ./File/openerp-web.cfg /home/${USERERP}/etc/openerp-web.cfg
-    create_file ./File/apache.conf /etc/apache2/sites-available/${USERERP}
+    create_file ./File/apache.conf ${APACHE_SITE_AVAILABLE}/${USERERP}
     create_file ./File/sync-env.py /home/${USERERP}/sync_env_script/config.py
 
-    prefix=`perl -e 'opendir DIR,"/etc/apache2/sites-enabled" or die $!;%sites = map {substr($_,0,3), 1} grep {/^\d\d\d/} readdir(DIR); for(1..900){$prefix=sprintf("%03d", $_);if(not exists $sites{$prefix}){print "$prefix\n";last}}'`
-    [ -z "$prefix" ] && echo "Cannot determine prefix in /etc/apache2/sites-enabled!" && exit 1
-    ln -sv "../sites-available/${USERERP}" "/etc/apache2/sites-enabled/${prefix}-${USERERP}"
+    ln -sv "../sites-available/${USERERP}" "/etc/apache2/sites-enabled/${APACHE_PREFIX}-${USERERP}"
     chown ${USERERP}.${USERERP} /home/${USERERP}/etc/openerp-web.cfg /home/${USERERP}/etc/openerprc /home/${USERERP}/sync_env_script/config.py
     update-rc.d ${USERERP}-web defaults
     update-rc.d ${USERERP}-server defaults
     chmod +x /etc/init.d/${USERERP}-web /etc/init.d/${USERERP}-server
 }
 
-bzr_type=branch
-#bzr_type=checkout --lightweight
 init_user() {
     useradd -s /bin/bash -d /home/${USERERP} -m ${USERERP}
     su - postgres -c -- "createuser -S -R -d ${USERERP}"
@@ -135,6 +142,7 @@ restart_servers() {
     /etc/init.d/${USERERP}-web start
 }
 
+check_init
 init_user
 config_file
 restart_servers
