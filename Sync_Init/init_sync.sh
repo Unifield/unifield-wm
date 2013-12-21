@@ -15,6 +15,9 @@ bzr_type=branch
 FROM_DIR_TO_COPY="/opt/tools/runbot"
 HOME_TO_COPY="${FROM_DIR_TO_COPY}/.ssh/ ${FROM_DIR_TO_COPY}/.bazaar/ ${FROM_DIR_TO_COPY}/common/.bzr ${FROM_DIR_TO_COPY}/tmp/"
 
+# directory to store home directory (do NOT add / at the end)
+TARGET_HOME_DIR="/home/SyncEnv"
+
 #bzr_type=checkout --lightweight
 
 REV="$1"
@@ -79,20 +82,27 @@ for my $i ($min..$max) {
 URL="http://$REV.dsp.uf3.unifield.org:$WEBPORT"
 
 USERERP=${REV}
+USERERP_HOME="${TARGET_HOME_DIR}/${REV}"
 APACHEPORT="80"
 APACHEHOST=${REV}
 DBNAME="${REV}"
 ADMINDBPASS="4unifield"
 
 check_init() {
-    if [ ! -d ${APACHE_SITE_AVAILABLE} ];
-        mkdir -p ${APACHE_SITE_AVAILABLE}
+    if [ -d ${USERERP_HOME} ]; then
+        echo "${USERERP_HOME} exists ! Abording ..."
+        exit 1
     fi
-    # TODO: check if
-    #  - linux user exists (home dir ...)
+    if [ ! -d ${TARGET_HOME_DIR} ]; then
+        mkdir -m 755 -p ${TARGET_HOME_DIR}
+    fi
+    if [ ! -d ${APACHE_SITE_AVAILABLE} ]; then
+        mkdir -m 755 -p ${APACHE_SITE_AVAILABLE}
+    fi
 }
 create_file() {
 sed -e "s#@@USERERP@@#${USERERP}#g" \
+    -e "s#@@USERERP_HOME@@#${USERERP_HOME}#g" \
     -e "s#@@DBNAME@@#${DBNAME}#g" \
     -e "s#@@XMLRPCPORT@@#${XMLRPCPORT}#g" \
     -e "s#@@NETRPCPORT@@#${NETRPCPORT}#g" \
@@ -105,25 +115,25 @@ sed -e "s#@@USERERP@@#${USERERP}#g" \
 config_file() {
     create_file ./File/openerp-server-sprint1  /etc/init.d/${USERERP}-server
     create_file ./File/openerp-web-sprint1 /etc/init.d/${USERERP}-web
-    create_file ./File/openerprc /home/${USERERP}/etc/openerprc
-    create_file ./File/openerp-web.cfg /home/${USERERP}/etc/openerp-web.cfg
+    create_file ./File/openerprc ${USERERP_HOME}/etc/openerprc
+    create_file ./File/openerp-web.cfg ${USERERP_HOME}/etc/openerp-web.cfg
     create_file ./File/apache.conf ${APACHE_SITE_AVAILABLE}/${USERERP}
-    create_file ./File/sync-env.py /home/${USERERP}/sync_env_script/config.py
+    create_file ./File/sync-env.py ${USERERP_HOME}/sync_env_script/config.py
 
     ln -sv "../sites-available/${USERERP}" "/etc/apache2/sites-enabled/${APACHE_PREFIX}-${USERERP}"
-    chown ${USERERP}.${USERERP} /home/${USERERP}/etc/openerp-web.cfg /home/${USERERP}/etc/openerprc /home/${USERERP}/sync_env_script/config.py
+    chown ${USERERP}.${USERERP} ${USERERP_HOME}/etc/openerp-web.cfg ${USERERP_HOME}/etc/openerprc ${USERERP_HOME}/sync_env_script/config.py
     update-rc.d ${USERERP}-web defaults
     update-rc.d ${USERERP}-server defaults
     chmod +x /etc/init.d/${USERERP}-web /etc/init.d/${USERERP}-server
 }
 
 init_user() {
-    useradd -s /bin/bash -d /home/${USERERP} -m ${USERERP}
+    useradd -s /bin/bash -d ${USERERP_HOME} -m ${USERERP}
     su - postgres -c -- "createuser -S -R -d ${USERERP}"
     for to_copy in ${HOME_TO_COPY}; do
-        cp -a ${to_copy}/ /home/${USERERP}/
+        cp -a ${to_copy}/ ${USERERP_HOME}
     done
-    chown -R ${USERERP}.${USERERP} /home/${USERERP}/
+    chown -R ${USERERP}.${USERERP} ${USERERP_HOME}
     su - ${USERERP} <<EOF
 
 bzr ${bzr_type} "${wm:=${BRANCH_DEFAULT_WM}}" unifield-wm
@@ -136,8 +146,6 @@ bzr ${bzr_type} "${env:=${BRANCH_DEFAULT_ENV}}" sync_env_script
 mkdir etc log exports
 #createdb ${DBNAME}
 
-#cd /home/${USERERP}/unifield-server/bin/
-#echo unifield-server/bin/openerp-server.py -c ../../etc/openerprc -d ${DBNAME} --without-demo=all
 echo Configure http://${REV}.dsp.uf3.unifield.org/
 EOF
 }

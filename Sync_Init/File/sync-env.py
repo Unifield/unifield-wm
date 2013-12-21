@@ -36,9 +36,9 @@ coordo_count = 1
 project_count = 1
 
 load_test = 1250
-source_path = '/home/@@USERERP@@'
+source_path = '@@USERERP_HOME@@'
 addons = ['unifield-wm', 'unifield-addons', 'unifield-server', 'unifield-web', 'sync_module_prod']
 server_restart_cmd = '/etc/init.d/@@USERERP@@-server restart'
 web_restart_cmd = '/etc/init.d/@@USERERP@@-web restart'
-dump_dir = '/home/@@USERERP@@/exports'
+dump_dir = '@@USERERP_HOME@@/exports'
 

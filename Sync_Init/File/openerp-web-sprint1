@@ -13,7 +13,7 @@
 ### END INIT INFO
 
 PATH=/sbin:/bin:/usr/sbin:/usr/bin
-DAEMON=/home/@@USERERP@@/unifield-web/openerp-web.py
+DAEMON=@@USERERP_HOME@@/unifield-web/openerp-web.py
 NAME=openerp-web-@@USERERP@@
 DESC=openerp-web-@@USERERP@@
 
@@ -21,10 +21,10 @@ DESC=openerp-web-@@USERERP@@
 USER="@@USERERP@@"
 
 # Specify an alternate config file (Default: /etc/openerp-web.cfg).
-CONFIGFILE=/home/@@USERERP@@/etc/openerp-web.cfg
+CONFIGFILE=@@USERERP_HOME@@/etc/openerp-web.cfg
 
 # pidfile
-PIDFILE=/home/@@USERERP@@/etc/openerp-web.pid
+PIDFILE=@@USERERP_HOME@@/etc/openerp-web.pid
 
 # Additional options that are passed to the Daemon.
 DAEMON_OPTS="-c $CONFIGFILE"

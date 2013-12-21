@@ -13,15 +13,15 @@
 ### END INIT INFO
 
 PATH=/sbin:/bin:/usr/sbin:/usr/bin
-DAEMON=/home/@@USERERP@@/unifield-server/bin/openerp-server.py
+DAEMON=@@USERERP_HOME@@/unifield-server/bin/openerp-server.py
 NAME=openerp-server-@@USERERP@@
 DESC=openerp-server-@@USERERP@@
 
 USER=@@USERERP@@
 
-LOG=/home/@@USERERP@@/log/openerp-server.log
-CONFIG=/home/@@USERERP@@/etc/openerprc
-PIDFILE=/home/@@USERERP@@/etc/openerp-server.pid
+LOG=@@USERERP_HOME@@/log/openerp-server.log
+CONFIG=@@USERERP_HOME@@/etc/openerprc
+PIDFILE=@@USERERP_HOME@@/etc/openerp-server.pid
 test -x ${DAEMON} || exit 0
 
 set -e
