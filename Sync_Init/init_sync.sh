@@ -113,8 +113,8 @@ sed -e "s#@@USERERP@@#${USERERP}#g" \
 }
 
 config_file() {
-    create_file ./File/openerp-server-sprint1  /etc/init.d/${USERERP}-server
-    create_file ./File/openerp-web-sprint1 /etc/init.d/${USERERP}-web
+    create_file ./File/openerp-server-initscript  /etc/init.d/${USERERP}-server
+    create_file ./File/openerp-web-initscript /etc/init.d/${USERERP}-web
     create_file ./File/openerprc ${USERERP_HOME}/etc/openerprc
     create_file ./File/openerp-web.cfg ${USERERP_HOME}/etc/openerp-web.cfg
     create_file ./File/apache.conf ${APACHE_SITE_AVAILABLE}/${USERERP}
