@@ -10,6 +10,11 @@ BRANCH_DEFAULT_ENV="lp:~unifield-team/unifield-wm/sync-env"
 APACHE_PREFIX="xxx_syncenv"
 APACHE_SITE_AVAILABLE="/etc/apache2/sites-available/syncenv"
 bzr_type=branch
+
+# @ linux user creation copy some files / dir (used by bzr and homere import)
+FROM_DIR_TO_COPY="/opt/tools/runbot"
+HOME_TO_COPY="${FROM_DIR_TO_COPY}/.ssh/ ${FROM_DIR_TO_COPY}/.bazaar/ ${FROM_DIR_TO_COPY}/common/.bzr ${FROM_DIR_TO_COPY}/tmp/"
+
 #bzr_type=checkout --lightweight
 
 REV="$1"
@@ -25,6 +30,7 @@ fi
 
 while ! [ $correct == "y" ]
 do
+    echo "To get a specific tag or revno use the following notation: '-r revno lp:your_branch'"
     if ! [ "$correct" == "skip" ]; then
         echo -n "Enter server branch [$BRANCH_DEFAULT_SERVER]: "; read server
         [ -z "$server" ] && server=$BRANCH_DEFAULT_SERVER
@@ -76,7 +82,6 @@ USERERP=${REV}
 APACHEPORT="80"
 APACHEHOST=${REV}
 DBNAME="${REV}"
-BZBRANCH=""
 ADMINDBPASS="4unifield"
 
 check_init() {
@@ -115,8 +120,10 @@ config_file() {
 init_user() {
     useradd -s /bin/bash -d /home/${USERERP} -m ${USERERP}
     su - postgres -c -- "createuser -S -R -d ${USERERP}"
-    cp -a ~dvo/.ssh/ ~dvo/.bazaar/ ~dvo/common/.bzr ~dvo/tmp/ /home/${USERERP}/
-    chown -R ${USERERP}.${USERERP} /home/${USERERP}/.ssh /home/${USERERP}/.bazaar /home/${USERERP}/tmp /home/${USERERP}/.bzr
+    for to_copy in ${HOME_TO_COPY}; do
+        cp -a ${to_copy}/ /home/${USERERP}/
+    done
+    chown -R ${USERERP}.${USERERP} /home/${USERERP}/
     su - ${USERERP} <<EOF
 
 bzr ${bzr_type} "${wm:=${BRANCH_DEFAULT_WM}}" unifield-wm
