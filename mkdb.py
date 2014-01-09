@@ -403,7 +403,11 @@ class server_creation(db_creation, unittest.TestCase):
     @unittest.skipIf(skipSync, "Synchronization desactivated")
     def test_40_activate_rules(self):
         self.db.connect('admin')
-        Synchro.activate('sync_server.sync_rule', [])
+        sync_rule_obj = Synchro.get('sync_server.message_rule')
+        rule_ids = sync_rule_obj.search([('active', '=', 1)])
+        for rule in sync_rule_obj.read(rule_ids, ['model_id']):
+             sync_rule_obj.write(rule['id'], {'model_id': rule['model_id'] , 'status': 'valid'})
+        #Synchro.activate('sync_server.sync_rule', [])
 
 
 # Base for instances creation ('is not Synchro')
