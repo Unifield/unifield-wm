@@ -275,11 +275,11 @@ class import_data(osv.osv_memory):
                         nb_update_success += 1
                         cr.commit()
                     else:
-                        impobj.create(cr, uid, data)
+                        impobj.create(cr, uid, data, context={'from_import_menu': True})
                         nb_succes += 1
                         cr.commit()
                 else:
-                    impobj.create(cr, uid, data)
+                    impobj.create(cr, uid, data, context={'from_import_menu': True})
                     nb_succes += 1
                     cr.commit()
             except osv.except_osv, e:
