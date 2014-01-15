@@ -13,10 +13,10 @@
       one of these commands:
        python2 -m unittest -v -f mkdb.hq01_creation
        python2 -m unittest -v -f mkdb.project01_creation mkdb.project02_creation
-    
+
     * make creation step only:
        python2 -m unittest -v -f mkdb.creation_only mkdb.server_creation
-    
+
     * make configuration step only:
        python2 -m unittest -v -f mkdb.configuration_only mkdb.coordo02_creation
 
@@ -154,8 +154,10 @@ if not __name__ == '__main__':
 # Base of database creation
 class db_creation(object):
 
-    #ignore_wizard = ['sale.price.setup'] # Fixed in unifield-wm > SP5
-    ignore_wizard = ['msf_button_access_rights.view_config_wizard_install']
+    ignore_wizard = [
+        'msf_button_access_rights.view_config_wizard_install',
+        'sync_remote_warehouse.setup_remote_warehouse',
+    ]
 
     base_wizards = {
         'base.setup.config' : {
@@ -176,7 +178,7 @@ class db_creation(object):
         },
         'currency.setup' : {
             'functional_id' : 'chf',
-        } 
+        }
     }
 
     db = None
@@ -267,7 +269,7 @@ class db_creation(object):
             monitor = db.get('sync.monitor')
             ids = monitor.search([], 0, 1, '"end" desc')
             raise Exception('Synchronization process of database "%s" failed!\n%s' % (db.db_name,monitor.read(ids, ['error'])[0]['error']))
- 
+
     # Create Cost Center and Proprietary Instance for Test Cases
     def make_prop_instance(self, hq, prop_instance=None, mission=None):
         hq.connect('admin')
@@ -378,7 +380,7 @@ class last_sync(unittest.TestCase):
         for tc in self.test_cases:
             assert issubclass(tc, db_creation), "The object %s is not of type db_creation!"
             tc.sync()
- 
+
 
 # Specific Sync Server creation
 class server_creation(db_creation, unittest.TestCase):
@@ -462,7 +464,7 @@ class client_creation(db_creation):
     def test_91_instance_partner(self):
         self.db.connect('admin')
         account = self.db.get('account.account')
-        
+
         res = self.db.get('res.partner')
         temp_partner = res.search([('name','=','Local Market')])
         if temp_partner:
@@ -493,7 +495,7 @@ class client_creation(db_creation):
         # change all period by draft state (should use action_set_state but openerplib doesn't give way to do this)
         # as it's to open period from created to draft state, it's not very important
         self.db.write('account.period', period_ids, {'state': 'draft'})
-            
+
 
 # Replicable class to create hq n
 class hqn_creation(client_creation, unittest.TestCase):
@@ -526,7 +528,7 @@ class hqn_creation(client_creation, unittest.TestCase):
     def test_42_install_data_client(self):
         self.db.connect('admin')
         self.db.module('msf_sync_data_hq').install().do()
-        
+
     @unittest.skipIf(skipManualConfig, "Manual link on analytic account destination desactivated")
     def test_43_manual_link_on_analytic_account_destination(self):
         self.db.connect('admin')
