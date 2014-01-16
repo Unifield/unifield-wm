@@ -440,9 +440,12 @@ class WizardCurrencyrevaluation(osv.osv_memory):
         account_ana_obj = self.pool.get('account.analytic.account')
         model_data_obj = self.pool.get('ir.model.data')
 
-        #company = user_obj.browse(cr, uid, uid).company_id
-        revaluation_account_id = model_data_obj.get_object_reference(
-            cr, uid, 'msf_chart_of_account', '6940')[1]
+        # UF-2246: Use 6940 account as default for reevaluation line.
+        revaluation_account_ids = account_obj.search(cr, uid, [('code', '=', '6940')])
+        if not revaluation_account_ids:
+            raise osv.except_osv(_('Settings Error!'), _('G/L account 6940 is missing, please create it'))
+
+        revaluation_account_id = revaluation_account_ids[0]
         revaluation_account = account_obj.browse(
             cr, uid, revaluation_account_id, context=context)
 
