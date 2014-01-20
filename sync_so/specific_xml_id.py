@@ -454,12 +454,14 @@ class product_product(osv.osv):
     # UF-2254: Treat the case of product with empty or XXX for default_code
     def write(self, cr, uid, ids, vals, context=None):
         res = super(product_product, self).write(cr, uid, ids, vals, context=context)
-        res_id = ids[0]
-        
-        prod = self.read(cr, uid, res_id, ['default_code'], context=context)['default_code']
-        if prod is not None and prod != 'XXX': # normal case, do nothing
+        if isinstance(ids, (long, int)):
+            ids = [ids]
+        prod = self.search(cr, uid, [('default_code', '=', 'XXX'), ('id', 'in', ids)])
+        if not prod:
             return res
-        
+
+        res_id = prod[0]
+
         # if the default_code is empty or XXX, rebuild the xmlid
         model_data_obj = self.pool.get('ir.model.data')
         sdref_ids = model_data_obj.search(cr, uid, [('model','=',self._name),('res_id','=',res_id),('module','=','sd')])
@@ -476,9 +478,8 @@ class product_product(osv.osv):
                 'name' : name,
             }, context=context)
         else:
-            if prod == 'XXX': # if the system created automatically the xmlid in ir_model_data, just delete it!
-                model_data_obj.unlink(cr, uid, sdref_ids,context=context)
-        
+            model_data_obj.unlink(cr, uid, sdref_ids,context=context)
+
         return res
 
 product_product()
