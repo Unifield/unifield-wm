@@ -227,6 +227,9 @@ class hq_entries(osv.osv):
             if line.user_validated == True:
                 res = True
                 break
+            if line.account_id.is_not_hq_correctible:
+                res = True
+                break
         return res
 
     def get_linked_lines(self, cr, uid, ids, context=None):
