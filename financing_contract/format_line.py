@@ -165,7 +165,7 @@ class financing_contract_format_line(osv.osv):
     def _get_analytic_domain(self, cr, uid, browse_line, domain_type, context=None):
         if browse_line.line_type in ('consumption', 'overhead'):
             # No domain for those
-            return False
+            return []
         else:
             # last domain: get only non-corrected lines.
             non_corrected_domain = [('is_reallocated', '=', False),
@@ -182,8 +182,8 @@ class financing_contract_format_line(osv.osv):
                 return [date_domain[0], date_domain[1]]  + non_corrected_domain + ['|'] + account_destination_domain + account_quadruplet_domain
             else:
                 # Dates are not set (since we are probably in a donor).
-                # Return False
-                return False
+                # No domain
+                return []
     
     def _is_overhead_present(self, cr, uid, ids, context={}):
         for line in self.browse(cr, uid, ids, context=context):
