@@ -214,7 +214,7 @@ class account_line_csv_export(osv.osv_memory):
             csv_line.append(al.amount_currency or 0.0)
             #currency_id
             csv_line.append(al.currency_id and al.currency_id.name and al.currency_id.name.encode('utf-8') or '')
-            if not currency_id:
+            if not currency_id or (currency_id and currency_id == al.functional_currency_id.id):
                 #functional amount
                 csv_line.append(al.amount or 0.0)
                 #company currency
