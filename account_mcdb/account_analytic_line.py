@@ -53,12 +53,18 @@ class account_analytic_line(osv.osv):
             for id in ids:
                 res[id] = {'output_currency': currency_id, 'output_amount': 0.0, 'output_amount_debit': 0.0, 'output_amount_credit': 0.0}
             return res
+        
         for ml in self.browse(cr, uid, ids, context=context):
             res[ml.id] = {'output_currency': False, 'output_amount': 0.0, 'output_amount_debit': 0.0, 'output_amount_credit': 0.0}
             # output_amount field
-            # Update with date
-            context.update({'date': ml.source_date or ml.date or strftime('%Y-%m-%d')})
-            mnt = self.pool.get('res.currency').compute(cr, uid, ml.currency_id.id, currency_id, ml.amount_currency, round=True, context=context)
+            if currency_id and currency_id == ml.functional_currency_id.id:
+                # UFTP-38 if output currency = functional just simply return fonctional 
+                # (no computation from rates)
+                mnt = ml.amount
+            else:
+                # Update with date
+                context.update({'date': ml.source_date or ml.date or strftime('%Y-%m-%d')})
+                mnt = self.pool.get('res.currency').compute(cr, uid, ml.currency_id.id, currency_id, ml.amount_currency, round=True, context=context)
             res[ml.id]['output_amount'] = mnt or 0.0
             if mnt < 0.0:
                 res[ml.id]['output_amount_debit'] = 0.0
