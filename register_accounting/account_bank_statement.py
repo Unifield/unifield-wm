@@ -216,6 +216,7 @@ class account_bank_statement(osv.osv):
     def write(self, cr, uid, ids, values, context=None):
         """
         Bypass disgusting default account_bank_statement write function.
+        TODO Please assess this function during refactoring
         """
         if values.get('open_advance_amount', False):
             values.update({'open_advance_amount': abs(values.get('open_advance_amount'))})
@@ -1260,12 +1261,13 @@ class account_bank_statement_line(osv.osv):
         if values:
             amount_in = values.get('amount_in', 0.0)
             amount_out = values.get('amount_out', 0.0)
-            if amount_in > 0 and amount_out == 0:
+            if amount_out == 0:
                 amount = amount_in
-            elif amount_in == 0 and amount_out > 0:
+            elif amount_in == 0:
                 amount = - amount_out
             else:
-                raise osv.except_osv(_('Error'), _('Please correct amount fields!'))
+                if not values['direct_invoice']:  #uftp-12
+                    raise osv.except_osv(_('Error'), _('Please correct amount fields!'))
         if amount:
             res.update({'amount': amount})
         return res
@@ -1938,6 +1940,7 @@ class account_bank_statement_line(osv.osv):
                 self.write(cr, uid, [absl.id], {'direct_state':'temp'}, context=context)
                 # create the accounting entries
                 account_invoice = self.pool.get('account.invoice')
+                account_invoice_line = self.pool.get('account.invoice.line')
                 account_invoice.action_open_invoice(cr, uid, [absl.invoice_id.id], context=context)
 
                 # set the invoice form open back to draft
@@ -1962,6 +1965,9 @@ class account_bank_statement_line(osv.osv):
                 for line in account_move_line_objs:
                     if line.reconcile_id:
                         account_move_reconcile.unlink(cr,uid,[line.reconcile_id])
+                    if line.invoice_line_id:
+                        account_move_line.write(cr, uid, [line.id],{'reference': line.invoice_line_id.reference, 'partner_id': line.invoice_line_id.partner_id.id }, context=context)
+                        
 
                 # update the invoice 'name' (ref)  TODO - does this need to be set to "/" ?
                 inv_number = self.pool.get('account.invoice').read(cr, uid, absl.invoice_id.id, ['number'])['number']

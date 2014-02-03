@@ -324,13 +324,19 @@ class account_invoice_line(osv.osv):
         # Checks
         if context is None:
             context = {}
-        # Prepare some values
-        res = {}
-        for invl in self.browse(cr, uid, ids):
-            res[invl.id] = []
-            for ml in invl.move_lines or []:
-                if ml.analytic_lines:
-                    res[invl.id] = self.pool.get('account.analytic.line').get_corrections_history(cr, uid, [x.id for x in ml.analytic_lines])
+            
+        # bypass for direct invoice wizard.
+        x = self.__dict__ 
+        if 'move_lines' not in self.__dict__:
+            res = {}
+        else:  
+            # Prepare some values
+            res = {}
+            for invl in self.browse(cr, uid, ids):
+                res[invl.id] = []
+                for ml in invl.move_lines or []:
+                    if ml.analytic_lines:
+                        res[invl.id] = self.pool.get('account.analytic.line').get_corrections_history(cr, uid, [x.id for x in ml.analytic_lines])
         return res
 
     _columns = {

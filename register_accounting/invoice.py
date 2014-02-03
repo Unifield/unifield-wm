@@ -155,6 +155,7 @@ class account_invoice(osv.osv):
         'register_posting_date': fields.date(string="Register posting date for Direct Invoice", required=False),
         'imported_state': fields.function(_get_imported_state, fnct_search=_search_imported_state, method=True, store=False, type='selection', selection=[('none', 'None'), ('imported', 'Imported'), ('not', 'Not Imported'), ('partial', 'Partially Imported')], string='Imported Status'),
         'down_payment_ids': fields.function(_get_down_payment_ids, type="one2many", obj='account.move.line', method=True, string='Down payments'),
+        'reference': fields.char(string="Reference", size=64),
     }
 
     _defaults = {
@@ -405,6 +406,7 @@ class account_invoice_line(osv.osv):
 
     _columns = {
         'product_code': fields.function(_get_product_code, method=True, store=False, string="Product Code", type='char'),
+        'reference': fields.char(string="Reference", size=64),
     }
 
     def create(self, cr, uid, vals, context=None):

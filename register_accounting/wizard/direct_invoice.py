@@ -37,7 +37,7 @@ class wizard_account_invoice(osv.osv):
 
     _columns  = {
         'invoice_line': fields.one2many('wizard.account.invoice.line', 'invoice_id', 'Invoice Lines', readonly=True, states={'draft':[('readonly',False)]}),
-        'partner_id': fields.many2one('res.partner', 'Partner', change_default=True, readonly=True, required=False, 
+        'partner_id': fields.many2one('res.partner', 'Partner', readonly=True, change_default=True, required=False, 
             states={'draft':[('readonly',False)]}, domain=[('supplier','=',True)]),
         'address_invoice_id': fields.many2one('res.partner.address', 'Invoice Address', readonly=True, required=False, states={'draft':[('readonly',False)]}),
         'account_id': fields.many2one('account.account', 'Account', required=False, readonly=True, states={'draft':[('readonly',False)]}, 
@@ -117,7 +117,7 @@ class wizard_account_invoice(osv.osv):
         amount = 0
         if inv['invoice_line']:
             for line in self.pool.get('wizard.account.invoice.line').read(cr, uid, inv['invoice_line'], 
-                ['product_id','account_id', 'account_analytic_id', 'quantity', 'price_unit','price_subtotal','name', 'uos_id','analytic_distribution_id']):
+                ['product_id','account_id', 'account_analytic_id', 'quantity', 'price_unit','price_subtotal','name', 'uos_id','analytic_distribution_id','reference','partner_id']):
                 vals['invoice_line'].append( (0, 0,
                     {
                         'product_id': line['product_id'] and line['product_id'][0] or False,
@@ -129,7 +129,8 @@ class wizard_account_invoice(osv.osv):
                         'price_subtotal': line['price_subtotal'],
                         'name': line['name'],
                         'uos_id': line['uos_id'] and line['uos_id'][0] or False,
-                        'ref': inv['reference'] and inv['reference'] or False,
+                        'reference': line['reference'] and line['reference'] or inv['reference'],
+                        'partner_id': line['partner_id'] and line['partner_id'] or inv['partner_id']
                     }
                 ))
                 amount += line['price_subtotal']
@@ -263,6 +264,7 @@ class wizard_account_invoice_line(osv.osv):
     _columns  = {
         'invoice_id': fields.many2one('wizard.account.invoice', 'Invoice Reference', select=True),
         'product_code': fields.function(_get_product_code, method=True, store=False, string="Product Code", type='char'),
+        'reference': fields.char(string="Reference", size=64),
     }
 
     def button_analytic_distribution(self, cr, uid, ids, context=None):
@@ -281,7 +283,7 @@ class wizard_account_invoice_line(osv.osv):
         
         fields_to_write = ['journal_id', 'partner_id', 'address_invoice_id', 'date_invoice', 'register_posting_date', 
             'account_id', 'partner_bank_id', 'payment_term', 'name', 'document_date',
-            'origin', 'address_contact_id', 'user_id', 'comment', 'reference']
+            'origin', 'address_contact_id', 'user_id', 'comment', 'reference','partner_id']
         to_write = {}
         for f in fields_to_write:
             if 'd_%s'%(f,) in context:
