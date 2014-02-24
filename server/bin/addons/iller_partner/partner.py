@@ -229,7 +229,7 @@ class iller_partner(osv.osv):
                 last_day = 31
             elif today.month in (4,6,9,11):
                 last_day = 30
-            elif today.year/4 == int(today.year/4):
+            elif today.year % 4 == 0:
                 last_day = 29
             else:
                 last_day = 28
