@@ -551,13 +551,13 @@ class client_creation(db_creation):
         res = self.db.get('res.partner')
         temp_partner = res.search([('name','=','Local Market')])
         # new CoA (2014-02-20)
-	payable_ids = account.search([('code','=','30020')])
-	if not payable_ids:
-		payable_ids = account.search([('code','=','3000')])
+        payable_ids = account.search([('code','=','30020')])
+        if not payable_ids:
+            payable_ids = account.search([('code','=','3000')])
 
-	receivable_ids = account.search([('code','=','12050')])
+        receivable_ids = account.search([('code','=','12050')])
         if not receivable_ids:
-		receivable_ids = account.search([('code','=','1205')])
+            receivable_ids = account.search([('code','=','1205')])
         if temp_partner:
             # set account values for local market
             self.db.write('res.partner', temp_partner,{
@@ -624,11 +624,11 @@ class hqn_creation(client_creation, unittest.TestCase):
     def test_43_manual_link_on_analytic_account_destination(self):
         self.db.connect('admin')
         # new CoA (2014-02-20)
-	link_ids = self.db.search_data('account.destination.link', [])
-	if not link_ids:
-		account_ids = self.db.search_data('account.account', [('type','!=','view'),('user_type.code','=','expense')])
-		analytic_account_ids = self.db.search_data('account.analytic.account', [('name', 'in', ['Expatriates','National Staff','Operations','Support'])])
-		self.db.write('account.analytic.account',  analytic_account_ids, {'destination_ids': [(6, 0, account_ids)]})
+        link_ids = self.db.search_data('account.destination.link', [])
+        if not link_ids:
+            account_ids = self.db.search_data('account.account', [('type','!=','view'),('user_type.code','=','expense')])
+            analytic_account_ids = self.db.search_data('account.analytic.account', [('name', 'in', ['Expatriates','National Staff','Operations','Support'])])
+            self.db.write('account.analytic.account',  analytic_account_ids, {'destination_ids': [(6, 0, account_ids)]})
 
 
 # Replicable class to create coordo n
