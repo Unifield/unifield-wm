@@ -61,11 +61,12 @@ class product_uom(osv.osv):
         return res
 
     #--- Methods to search into a fields.function
-    def _get_compatible_uom(self, cr, uid, obj, name, args, context=None):
+
+    def _search_uom_by_product(self, cr, uid, obj, name, args, context=None):
         """
-        Returns the list of products compatible with the given UoM.
-        Compatible products are products that have a default UoM with a
-        category that are the same category as the given UoM
+        Returns the list of UoMs compatible with the given product.
+        Compatible UoMs are UoM that have the same category than
+        the category of the default UoM of the given product.
 
         :param cr: Database cursor
         :param uid: ID of the user that calls the method
@@ -85,26 +86,79 @@ class product_uom(osv.osv):
         res = []
 
         for arg in args:
-            if arg[0] == 'compatible_product_id':
-                if not arg[2]:
-                    return []
-                elif isinstance(arg[2], (int, long)):
-                    product = product_obj.browse(cr, uid, arg[2], context=context)
+            if arg[0] == 'uom_by_product' and arg[1] != '=':
+                raise osv.except_osv(_('Error'), _('Bad comparison operator in domain'))
+            elif arg[0] == 'uom_by_product':
+                product_id = arg[2]
+                if product_id and isinstance(product_id, (int, long)):
+                    product_id = [product_id]
+
+                if product_id:
+                    product = product_obj.browse(cr, uid, product_id[0], context=context)
                     if product:
-                        return [('category_id', '=', product.uom_id.category_id.id)]
+                        res.append(('category_id', '=', product.uom_id.category_id.id))
 
         return res
 
+    def _search_uom_by_parent(self, cr, uid, obj, name, args, context=None):
+        """
+        Returns the list of UoMs compatible with the given UoM.
+        Compatible UoMs are UoM that have the same category than
+        the given one.
+
+        :param cr: Database cursor
+        :param uid: ID of the user that calls the method
+        :param obj: Object that calls the method
+        :param name: Name of the field that calls the method
+        :param args: List of tuples that are used to search the compatible
+        products
+        :param context: Context of the call (Optional)
+
+        :return: A list of tuples to be apply has a domain to search the
+        compatible products
+        :rtype: list
+        """
+        res = []
+
+        for arg in args:
+            if arg[0] == 'uom_by_parent' and arg[1] != '=':
+                raise osv.except_osv(_('Error'), _('Bad comparison operator in domain'))
+            elif arg[0] == 'uom_by_parent':
+                product_uom_id = arg[2]
+                if product_uom_id:
+                    if isinstance(product_uom_id, (int, long)):
+                        product_uom_id = [product_uom_id]
+                    product_uom = self.browse(cr, uid, product_uom_id[0], context=context)
+                    if product_uom:
+                        res.append(('category_id', '=', product_uom.category_id.id))
+
+        return res
+
+    def toto(self, cr, uid, ids):
+        """
+        """
+
+
     _columns = {
-        'compatible_product_id': fields.function(
+        'uom_by_product': fields.function(
             _get_dummy,
-            fnct_search=_get_compatible_uom,
+            fnct_search=_search_uom_by_product,
             method=True,
-            string='Compatible UoM',
+            string='UoM by Product',
             type='boolean',
             readonly=True,
             store=False,
-            help="Is the product is compatible with the given UoM ?",
+            help="Field used to filter the UoM for a specific product",
+        ),
+        'uom_by_parent': fields.function(
+            _get_dummy,
+            fnct_search=_search_uom_by_parent,
+            method=True,
+            string='UoM by Parent',
+            type='boolean',
+            readonly=True,
+            store=False,
+            help="Field used to filter the UoM for a specific product",
         ),
     }
 
