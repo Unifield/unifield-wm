@@ -56,7 +56,7 @@ class product_status(osv.osv):
             context = {}
         if isinstance(ids, (int, long)):
             ids = [ids]
-        ids_p = self.pool.get('product.product').search(cr, uid, [('state','in',ids)])
+        ids_p = self.pool.get('product.product').search(cr, uid, [('state', 'in', ids)])
         if ids_p:
             raise osv.except_osv(_('Error'), _('You cannot delete this status because it\'s used at least in one product'))
         return super(product_status, self).unlink(cr, uid, ids, context=context)
@@ -80,7 +80,7 @@ class product_international_status(osv.osv):
         if isinstance(ids, (int, long)):
             ids = [ids]
         # Raise an error if the status is used in a product
-        ids_p = self.pool.get('product.product').search(cr, uid, [('international_status','in',ids)])
+        ids_p = self.pool.get('product.product').search(cr, uid, [('international_status', 'in', ids)])
         if ids_p:
             raise osv.except_osv(_('Error'), _('You cannot delete this product creator because it\'s used at least in one product'))
 
@@ -111,7 +111,7 @@ class product_heat_sensitive(osv.osv):
             context = {}
         if isinstance(ids, (int, long)):
             ids = [ids]
-        ids_p = self.pool.get('product.product').search(cr, uid, [('heat_sensitive_item','in',ids)])
+        ids_p = self.pool.get('product.product').search(cr, uid, [('heat_sensitive_item', 'in', ids)])
         if ids_p:
             raise osv.except_osv(_('Error'), _('You cannot delete this heat sensitive because it\'s used at least in one product'))
         return super(product_heat_sensitive, self).unlink(cr, uid, ids, context=context)
@@ -130,7 +130,7 @@ class product_cold_chain(osv.osv):
             context = {}
         if isinstance(ids, (int, long)):
             ids = [ids]
-        ids_p = self.pool.get('product.product').search(cr, uid, [('cold_chain','in',ids)])
+        ids_p = self.pool.get('product.product').search(cr, uid, [('cold_chain', 'in', ids)])
         if ids_p:
             raise osv.except_osv(_('Error'), _('You cannot delete this cold chain because it\'s used at least in one product'))
         return super(product_cold_chain, self).unlink(cr, uid, ids, context=context)
@@ -140,7 +140,7 @@ product_cold_chain()
 class product_supply_source(osv.osv):
     _name = "product.supply.source"
     _rec_name = 'source'
-    
+
     _columns = {
         'source': fields.char('Supply source', size=32),
     }
@@ -152,7 +152,7 @@ class product_justification_code(osv.osv):
         'code': fields.char('Justification Code', size=32, required=True, translate=True),
         'description': fields.char('Justification Description', size=256, required=True),
     }
-    
+
     def name_get(self, cr, user, ids, context=None):
         if not ids:
             return []
@@ -162,32 +162,32 @@ class product_justification_code(osv.osv):
             code = record['code']
             res.append((record['id'], code))
         return res
-        
+
 product_justification_code()
 
 class product_attributes_template(osv.osv):
     _inherit = "product.template"
-    
+
     _columns = {
-        'type': fields.selection([('product','Stockable Product'),('consu', 'Non-Stockable')], 'Product Type', required=True, help="Will change the way procurements are processed. Consumables are stockable products with infinite stock, or for use when you have no inventory management in the system."),
+        'type': fields.selection([('product', 'Stockable Product'), ('consu', 'Non-Stockable')], 'Product Type', required=True, help="Will change the way procurements are processed. Consumables are stockable products with infinite stock, or for use when you have no inventory management in the system."),
     }
-    
+
     _defaults = {
         'type': 'product',
         'cost_method': lambda *a: 'average',
     }
-    
+
 product_attributes_template()
 
 
 class product_country_restriction(osv.osv):
     _name = 'res.country.restriction'
-    
+
     _columns = {
         'name': fields.char(size=128, string='Restriction'),
         'product_ids': fields.one2many('product.product', 'country_restriction', string='Products'),
     }
-    
+
 product_country_restriction()
 
 class product_template(osv.osv):
@@ -209,10 +209,10 @@ class product_attributes(osv.osv):
         pathname = path.join('product_attributes', 'product_attributes_data.xml')
         file = tools.file_open(pathname)
         tools.convert_xml_import(cr, 'product_attributes', file, {}, mode='init', noupdate=False)
-    
+
     def _get_nomen(self, cr, uid, ids, field_name, args, context=None):
         res = {}
-        
+
         for product in self.browse(cr, uid, ids, context=context):
             res[product.id] = []
             nomen_field_names = ['nomen_manda_0', 'nomen_manda_1', 'nomen_manda_2', 'nomen_manda_3', 'nomen_sub_0', 'nomen_sub_1', 'nomen_sub_2', 'nomen_sub_3', 'nomen_sub_4', 'nomen_sub_5']
@@ -221,16 +221,16 @@ class product_attributes(osv.osv):
                 if value:
                     res[product.id].append(value)
         return res
-    
+
     def _search_nomen(self, cr, uid, obj, name, args, context=None):
         '''
         Filter the search according to the args parameter
         '''
         if not context:
             context = {}
-            
+
         ids = []
-            
+
         for arg in args:
             if arg[0] == 'nomen_ids' and arg[1] == '=' and arg[2]:
                 nomen = self.pool.get('product.nomenclature').browse(cr, uid, arg[2], context=context)
@@ -256,7 +256,7 @@ class product_attributes(osv.osv):
                         ids.append(self.search(cr, uid, [('nomen_sub_5', '=', nomen.id)], context=context))
             else:
                 return []
-            
+
         return [('id', 'in', ids)]
 
     def _get_restriction(self, cr, uid, ids, field_name, args, context=None):
@@ -276,13 +276,13 @@ class product_attributes(osv.osv):
 
     def _get_international_status(self, cr, uid, ids, context=None):
         return self.pool.get('product.product').search(cr, uid, [('international_status', 'in', ids)], context=context)
-    
+
     def _get_dummy(self, cr, uid, ids, field_name, args, context=None):
         res = {}
         for id in ids:
             res[id] = False
         return res
-    
+
     # This method is here because the following domain didn't work on field order/purchase order lines
     # [('no_internal', '=', parent.partner_type != 'internal'), ('no_external', '=', parent.partner_type != 'external'),('no_esc', '=', parent.partner_type != 'esc'),
     def _src_available_for_restriction(self, cr, uid, obj, name, args, context=None):
@@ -291,7 +291,7 @@ class product_attributes(osv.osv):
         '''
         if not context:
             context = {}
-            
+
         for arg in args:
             if arg[0] == 'available_for_restriction' and arg[1] == '=' and arg[2]:
                 if isinstance(arg[2], dict) and arg[2].get('location_id'):
@@ -313,9 +313,9 @@ class product_attributes(osv.osv):
                     return [('no_storage', '=', False)]
                 elif arg[2] in ('picking', 'tender'):
                     return [('no_external', '=', False), ('no_internal', '=', False), ('no_esc', '=', False)]
-        
+
         return []
-    
+
     _columns = {
         'duplicate_ok': fields.boolean('Is a duplicate'),
         'loc_indic': fields.char('Indicative Location', size=64),
@@ -329,30 +329,30 @@ class product_attributes(osv.osv):
         'product_catalog_page' : fields.char('Product Catalog Page', size=64),
         'product_catalog_path' : fields.char('Product Catalog Path', size=64),
         'short_shelf_life': fields.boolean('Short Shelf Life'),
-        'criticism': fields.selection([('',''),
-            ('exceptional','1-Exceptional'),
-            ('specific','2-Specific'),
-            ('important','3-Important'),
-            ('medium','4-Medium'),
-            ('common','5-Common'),
-            ('other','X-Other')], 'Criticality'),
+        'criticism': fields.selection([('', ''),
+            ('exceptional', '1-Exceptional'),
+            ('specific', '2-Specific'),
+            ('important', '3-Important'),
+            ('medium', '4-Medium'),
+            ('common', '5-Common'),
+            ('other', 'X-Other')], 'Criticality'),
         'narcotic': fields.boolean('Narcotic/Psychotropic'),
-        'abc_class': fields.selection([('',''),
-            ('a','A'),
-            ('b','B'),
-            ('c','C')], 'ABC Class'),
-        'section_code_ids': fields.many2many('product.section.code','product_section_code_rel','product_id','section_code_id','Section Code'),
-        'library': fields.selection([('',''),
-            ('l1','L1'),
-            ('l2','L2'),
-            ('l3','L3'),
-            ('l4','L4')], 'Library'),
+        'abc_class': fields.selection([('', ''),
+            ('a', 'A'),
+            ('b', 'B'),
+            ('c', 'C')], 'ABC Class'),
+        'section_code_ids': fields.many2many('product.section.code', 'product_section_code_rel', 'product_id', 'section_code_id', 'Section Code'),
+        'library': fields.selection([('', ''),
+            ('l1', 'L1'),
+            ('l2', 'L2'),
+            ('l3', 'L3'),
+            ('l4', 'L4')], 'Library'),
 
-        'supply_source_ids': fields.many2many('product.supply.source','product_supply_source_rel','product_id','supply_source_id','Supply Source'),
+        'supply_source_ids': fields.many2many('product.supply.source', 'product_supply_source_rel', 'product_id', 'supply_source_id', 'Supply Source'),
 
         'sublist' : fields.char('Sublist', size=64),
         'composed_kit': fields.boolean('Kit Composed of Kits/Modules'),
-        'options_ids': fields.many2many('product.product','product_options_rel','product_id','product_option_id','Options'),
+        'options_ids': fields.many2many('product.product', 'product_options_rel', 'product_id', 'product_option_id', 'Options'),
 
         'heat_sensitive_item': fields.many2one('product.heat_sensitive', 'Temperature sensitive item',),
         'cold_chain': fields.many2one('product.cold_chain', 'Cold Chain',),
@@ -360,13 +360,13 @@ class product_attributes(osv.osv):
         # Inverse of m2m options_ids
         'options_ids_inv': fields.many2many('product.product', 'product_options_rel', 'product_option_id', 'product_id', 'Options Inv.'),
         'sterilized': fields.selection([('yes', 'Yes'), ('no', 'No')], string='Sterile'),
-        'single_use': fields.selection([('yes', 'Yes'),('no', 'No')], string='Single Use'),
+        'single_use': fields.selection([('yes', 'Yes'), ('no', 'No')], string='Single Use'),
         'justification_code_id': fields.many2one('product.justification.code', 'Justification Code'),
-        'med_device_class': fields.selection([('',''),
-            ('I','Class I (General controls)'),
-            ('II','Class II (General control with special controls)'),
-            ('III','Class III (General controls and premarket)')], 'Medical Device Class'),
-        'closed_article': fields.selection([('yes', 'Yes'), ('no', 'No'),],string='Closed Article'),
+        'med_device_class': fields.selection([('', ''),
+            ('I', 'Class I (General controls)'),
+            ('II', 'Class II (General control with special controls)'),
+            ('III', 'Class III (General controls and premarket)')], 'Medical Device Class'),
+        'closed_article': fields.selection([('yes', 'Yes'), ('no', 'No'), ], string='Closed Article'),
         'dangerous_goods': fields.boolean('Dangerous Goods'),
         'restricted_country': fields.boolean('Restricted in the Country'),
         'country_restriction': fields.many2one('res.country.restriction', 'Country Restriction'),
@@ -390,27 +390,27 @@ class product_attributes(osv.osv):
         'no_external': fields.function(_get_restriction, method=True, type='boolean', string='External partners orders', readonly=True, multi='restriction',
                                        store={'product.product': (lambda self, cr, uid, ids, c=None: ids, ['international_status', 'state'], 20),
                                               'product.status': (_get_product_status, ['no_external'], 10),
-                                              'product.international.status': (_get_international_status, ['no_external'], 10),}),
+                                              'product.international.status': (_get_international_status, ['no_external'], 10), }),
         'no_esc': fields.function(_get_restriction, method=True, type='boolean', string='ESC partners orders', readonly=True, multi='restriction',
                                   store={'product.product': (lambda self, cr, uid, ids, c=None: ids, ['international_status', 'state'], 20),
                                          'product.status': (_get_product_status, ['no_esc'], 10),
-                                         'product.international.status': (_get_international_status, ['no_esc'], 10),}),
+                                         'product.international.status': (_get_international_status, ['no_esc'], 10), }),
         'no_internal': fields.function(_get_restriction, method=True, type='boolean', string='Internal partners orders', readonly=True, multi='restriction',
                                        store={'product.product': (lambda self, cr, uid, ids, c=None: ids, ['international_status', 'state'], 20),
                                               'product.status': (_get_product_status, ['no_internal'], 10),
-                                              'product.international.status': (_get_international_status, ['no_internal'], 10),}),
+                                              'product.international.status': (_get_international_status, ['no_internal'], 10), }),
         'no_consumption': fields.function(_get_restriction, method=True, type='boolean', string='Comsumption', readonly=True, multi='restriction',
                                           store={'product.product': (lambda self, cr, uid, ids, c=None: ids, ['international_status', 'state'], 20),
                                                  'product.status': (_get_product_status, ['no_consumption'], 10),
-                                                 'product.international.status': (_get_international_status, ['no_consumption'], 10),}),
+                                                 'product.international.status': (_get_international_status, ['no_consumption'], 10), }),
         'no_storage': fields.function(_get_restriction, method=True, type='boolean', string='Storage', readonly=True, multi='restriction',
                                       store={'product.product': (lambda self, cr, uid, ids, c=None: ids, ['international_status', 'state'], 20),
                                              'product.status': (_get_product_status, ['no_storage'], 10),
-                                             'product.international.status': (_get_international_status, ['no_storage'], 10),}),
+                                             'product.international.status': (_get_international_status, ['no_storage'], 10), }),
         'available_for_restriction': fields.function(_get_dummy, fnct_search=_src_available_for_restriction, method=True, type='boolean',
                                                  store=False, string='Available for the partner', readonly=True),
     }
-    
+
     def default_get(self, cr, uid, fields, context=None):
         res = super(product_attributes, self).default_get(cr, uid, fields, context=context)
         id = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'product_attributes', 'int_1') and self.pool.get('ir.model.data').get_object_reference(cr, uid, 'product_attributes', 'int_1')[1] or 1
@@ -474,11 +474,11 @@ class product_attributes(osv.osv):
             if isinstance(arg, str):
                 arg = '\'%s\'' % arg
             new_filter = """<filter string="Only not forbidden" name="not_restricted" icon="terp-accessories-archiver-minus" domain="[('available_for_restriction','=',%s)]" />""" % arg
-            #generate new xml form$
+            # generate new xml form$
             new_form = etree.fromstring(new_filter)
             # instert new form just after state index position
-            root.insert(state_index+1, new_form)
-            root.insert(state_index+1, sep_form)
+            root.insert(state_index + 1, new_form)
+            root.insert(state_index + 1, sep_form)
             # generate xml back to string
             res['arch'] = etree.tostring(root)
 
@@ -493,18 +493,18 @@ class product_attributes(osv.osv):
 
         if context is None:
             context = {}
-        
+
         error = False
         error_msg = ''
         constraints = []
         sale_obj = vals.get('obj_type') == 'sale.order'
 
-        # Compute the constraint if a partner is passed in vals 
+        # Compute the constraint if a partner is passed in vals
         if vals.get('partner_id'):
             partner_obj = self.pool.get('res.partner')
-            partner_type = partner_obj.browse(cr, 
-                                              uid, 
-                                              vals.get('partner_id'), 
+            partner_type = partner_obj.browse(cr,
+                                              uid,
+                                              vals.get('partner_id'),
                                               context=context).partner_type
             if partner_type == 'external':
                 constraints.append('external')
@@ -564,7 +564,7 @@ class product_attributes(osv.osv):
                 error_msg = _('The product [%s] %s gets the %s \'%s\' and consequently can\'t %s') % (product.default_code,
                                                                                                       product.name,
                                                                                                       st_type,
-                                                                                                      st_name, 
+                                                                                                      st_name,
                                                                                                       msg)
         if context.get('noraise'):
             error = False
@@ -584,7 +584,7 @@ class product_attributes(osv.osv):
 #    _constraints = [
 #        (_check_uom_category, _('There are some stock moves with this product on the system. So you should keep the same UoM category than these stock moves.'), ['uom_id', 'uom_po_id']),
 #    ]
-    
+
     def _on_change_restriction_error(self, cr, uid, ids, *args, **kwargs):
         '''
         Update the message on on_change of product
@@ -618,7 +618,7 @@ class product_attributes(osv.osv):
             if product.gmdn_code and not int_pattern.match(product.gmdn_code):
                 return False
         return True
-    
+
     def write(self, cr, uid, ids, vals, context=None):
         if 'batch_management' in vals:
             vals['track_production'] = vals['batch_management']
@@ -644,12 +644,12 @@ class product_attributes(osv.osv):
         if product_uom_categ:
             uom_categ = 'uom_id' in vals and vals['uom_id'] and self.pool.get('product.uom').browse(cr, uid, vals['uom_id'], context=context).category_id.id or False
             uos_categ = 'uom_po_id' in vals and vals['uom_po_id'] and self.pool.get('product.uom').browse(cr, uid, vals['uom_po_id'], context=context).category_id.id or False
-        
+
             if (uom_categ and uom_categ not in product_uom_categ) or (uos_categ and uos_categ not in product_uom_categ):
                 raise osv.except_osv(_('Error'), _('You cannot choose an UoM which is not in the same UoM category of default UoM'))
 
         return res
-    
+
     def reactivate_product(self, cr, uid, ids, context=None):
         '''
         Re-activate product.
@@ -657,22 +657,22 @@ class product_attributes(osv.osv):
         for product in self.browse(cr, uid, ids, context=context):
             if product.active:
                 raise osv.except_osv(_('Error'), _('The product [%s] %s is already active.') % (product.default_code, product.name))
-        
+
         self.write(cr, uid, ids, {'active': True}, context=context)
-        
+
         return True
-    
+
     def deactivate_product(self, cr, uid, ids, context=None):
         '''
-        De-activate product. 
+        De-activate product.
         Check if the product is not used in any document in Unifield
         '''
         if not context:
             context = {}
-            
+
         if isinstance(ids, (int, long)):
             ids = [ids]
-            
+
         location_obj = self.pool.get('stock.location')
         po_line_obj = self.pool.get('purchase.order.line')
         tender_line_obj = self.pool.get('tender.line')
@@ -692,30 +692,30 @@ class product_attributes(osv.osv):
 
         error_obj = self.pool.get('product.deactivation.error')
         error_line_obj = self.pool.get('product.deactivation.error.line')
-        
+
         internal_loc = location_obj.search(cr, uid, [('usage', '=', 'internal')], context=context)
-        
+
         c = context.copy()
         c.update({'location_id': internal_loc})
-        
+
         for product in self.browse(cr, uid, ids, context=context):
             # Raise an error if the product is already inactive
             if not product.active:
                 raise osv.except_osv(_('Error'), _('The product [%s] %s is already inactive.') % (product.default_code, product.name))
-            
+
             # Check if the product is in some purchase order lines or request for quotation lines
             has_po_line = po_line_obj.search(cr, uid, [('product_id', '=', product.id),
                                                        ('order_id.state', 'not in', ['draft', 'done', 'cancel'])], context=context)
-                
+
             # Check if the product is in some tender lines
             has_tender_line = tender_line_obj.search(cr, uid, [('product_id', '=', product.id),
                                                                ('tender_id.state', 'not in', ['draft', 'done', 'cancel'])], context=context)
-                
+
             # Check if the product is in field order lines or in internal request lines
             context.update({'procurement_request': True})
             has_fo_line = fo_line_obj.search(cr, uid, [('product_id', '=', product.id),
                                                        ('order_id.state', 'not in', ['draft', 'done', 'cancel'])], context=context)
-            
+
             # Check if the product is in stock picking
             # All stock moves in a stock.picking not draft/cancel/done or all stock moves in a shipment not delivered/done/cancel
             has_move_line = move_obj.search(cr, uid, [('product_id', '=', product.id),
@@ -729,17 +729,17 @@ class product_attributes(osv.osv):
 #                                                      '|', '&', ('picking_id.state', 'not in', ['draft', 'done', 'cancel']),
 #                                                      ('picking_id.shipment_id', '!=', False),
 #                                                      ('picking_id.shipment_id.state', 'not in', ['delivered', 'done', 'cancel'])], context=context)
-                
+
             # Check if the product is in a stock inventory
             has_inventory_line = inv_obj.search(cr, uid, [('product_id', '=', product.id),
                                                           ('inventory_id', '!=', False),
                                                           ('inventory_id.state', 'not in', ['draft', 'done', 'cancel'])], context=context)
-            
+
             # Check if the product is in an initial stock inventory
             has_initial_inv_line = in_inv_obj.search(cr, uid, [('product_id', '=', product.id),
                                                           ('inventory_id', '!=', False),
                                                           ('inventory_id.state', 'not in', ['draft', 'done', 'cancel'])], context=context)
-                
+
             # Check if the product is in a real kit composition
             has_kit = kit_obj.search(cr, uid, [('item_product_id', '=', product.id),
                                                ('item_kit_id.composition_type', '=', 'real'),
@@ -754,17 +754,17 @@ class product_attributes(osv.osv):
             has_invoice_line = invoice_obj.search(cr, uid, [('product_id', '=', product.id),
                                                             ('invoice_id', '!=', False),
                                                             ('invoice_id.state', 'not in', ['draft', 'done', 'cancel'])], context=context)
-            
+
             # Check if the product has stock in internal locations
             has_stock = product.qty_available
-            
+
             opened_object = has_kit or has_initial_inv_line or has_inventory_line or has_move_line or has_fo_line or has_tender_line or has_po_line or has_invoice_line
             if has_stock or opened_object:
                 # Create the error wizard
                 wizard_id = error_obj.create(cr, uid, {'product_id': product.id,
                                                        'stock_exist': has_stock and True or False,
                                                        'opened_object': opened_object}, context=context)
-                
+
                 # Create lines for error in PO/RfQ
                 po_ids = []
                 for po_line in po_line_obj.browse(cr, uid, has_po_line, context=context):
@@ -775,7 +775,7 @@ class product_attributes(osv.osv):
                                                         'internal_type': 'purchase.order',
                                                         'doc_ref': po_line.order_id.name,
                                                         'doc_id': po_line.order_id.id}, context=context)
-                        
+
                 # Create lines for error in Tender
                 tender_ids = []
                 for tender_line in tender_line_obj.browse(cr, uid, has_tender_line, context=context):
@@ -786,7 +786,7 @@ class product_attributes(osv.osv):
                                                         'internal_type': 'tender',
                                                         'doc_ref': tender_line.tender_id.name,
                                                         'doc_id': tender_line.tender_id.id}, context=context)
-                        
+
                 # Create lines for error in FO/IR
                 fo_ids = []
                 for fo_line in fo_line_obj.browse(cr, uid, has_fo_line, context=context):
@@ -797,23 +797,23 @@ class product_attributes(osv.osv):
                                                         'internal_type': 'sale.order',
                                                         'doc_ref': fo_line.order_id.name,
                                                         'doc_id': fo_line.order_id.id}, context=context)
-                        
+
                 # Create lines for error in picking
                 pick_ids = []
                 ship_ids = []
                 pick_type = {'in': 'Incoming shipment',
                              'internal': 'Internal move',
                              'out': 'Delivery Order'}
-                pick_subtype = {'standard': 'Delivery Order', 
-                                'picking': 'Picking Ticket', 
-                                'ppl': 'PPL', 
+                pick_subtype = {'standard': 'Delivery Order',
+                                'picking': 'Picking Ticket',
+                                'ppl': 'PPL',
                                 'packing': 'Packing'}
                 for move in move_obj.browse(cr, uid, has_move_line, context=context):
                     # Get the name of the stock.picking object
                     picking_type = pick_type.get(move.picking_id.type)
                     if move.picking_id.type == 'out':
                         picking_type = pick_subtype.get(move.picking_id.subtype)
-                    
+
                     # If the error picking is in a shipment, display the shipment instead of the picking
                     if move.picking_id.shipment_id and move.picking_id.id not in ship_ids:
                         ship_ids.append(move.picking_id.shipment_id.id)
@@ -822,7 +822,7 @@ class product_attributes(osv.osv):
                                                         'internal_type': 'shipment',
                                                         'doc_ref': move.picking_id.shipment_id.name,
                                                         'doc_id': move.picking_id.shipment_id.id}, context=context)
-                        
+
                     elif not move.picking_id.shipment_id and move.picking_id.id not in pick_ids:
                         pick_ids.append(move.picking_id.id)
                         error_line_obj.create(cr, uid, {'error_id': wizard_id,
@@ -830,7 +830,7 @@ class product_attributes(osv.osv):
                                                         'internal_type': 'stock.picking',
                                                         'doc_ref': move.picking_id.name,
                                                         'doc_id': move.picking_id.id}, context=context)
-                        
+
                 # Create lines for error in kit composition
                 kit_ids = []
                 for kit in kit_obj.browse(cr, uid, has_kit, context=context):
@@ -841,7 +841,7 @@ class product_attributes(osv.osv):
                                                         'internal_type': 'composition.kit',
                                                         'doc_ref': kit.item_kit_id.composition_type == 'real' and kit.item_kit_id.composition_reference or kit.item_kit_id.name,
                                                         'doc_id': kit.item_kit_id.id}, context=context)
-                        
+
                 # Create lines for error in inventory
                 inv_ids = []
                 for inv in inv_obj.browse(cr, uid, has_inventory_line, context=context):
@@ -852,7 +852,7 @@ class product_attributes(osv.osv):
                                                         'internal_type': 'stock.inventory',
                                                         'doc_ref': inv.inventory_id.name,
                                                         'doc_id': inv.inventory_id.id}, context=context)
-                        
+
                 # Create lines for error in inventory
                 inv_ids = []
                 for inv in in_inv_obj.browse(cr, uid, has_initial_inv_line, context=context):
@@ -904,7 +904,7 @@ class product_attributes(osv.osv):
                                                         'internal_type': 'account.invoice',
                                                         'doc_ref': invoice.invoice_id.number,
                                                         'doc_id': invoice.invoice_id.id}, context=context)
-                
+
                 return {'type': 'ir.actions.act_window',
                         'res_model': 'product.deactivation.error',
                         'view_type': 'form',
@@ -912,7 +912,7 @@ class product_attributes(osv.osv):
                         'res_id': wizard_id,
                         'target': 'new',
                         'context': context}
-        
+
         # Remove the replenishment rules associated to this product
         # Automatic supply
         auto_line_ids = auto_supply_line_obj.search(cr, uid, [('product_id', 'in', ids)], context=context)
@@ -921,7 +921,7 @@ class product_attributes(osv.osv):
                 auto_supply_obj.unlink(cr, uid, [auto.supply_id.id], context=context)
             else:
                 auto_supply_line_obj.unlink(cr, uid, [auto.id], context=context)
-                
+
         # Order cycle
         cycle_ids = cycle_line_obj.search(cr, uid, [('product_id', 'in', ids)], context=context)
         for cycle in cycle_line_obj.browse(cr, uid, cycle_ids, context=context):
@@ -929,7 +929,7 @@ class product_attributes(osv.osv):
                 cycle_obj.unlink(cr, uid, [cycle.order_cycle_id.id], context=context)
             else:
                 cycle_line_obj.unlink(cr, uid, [cycle.id], context=context)
-                
+
         # Threshold value
         threshold_ids = threshold_line_obj.search(cr, uid, [('product_id', 'in', ids)], context=context)
         for threshold in threshold_line_obj.browse(cr, uid, threshold_ids, context=context):
@@ -937,15 +937,15 @@ class product_attributes(osv.osv):
                 threshold_obj.unlink(cr, uid, [threshold.threshold_value_id.id], context=context)
             else:
                 threshold_line_obj.unlink(cr, uid, [threshold.id], context=context)
-                
-        # Minimum stock rules
+
+        #  Minimum stock rules
         orderpoint_ids = orderpoint_obj.search(cr, uid, [('product_id', 'in', ids)], context=context)
         orderpoint_obj.unlink(cr, uid, orderpoint_ids, context=context)
-        
+
         self.write(cr, uid, ids, {'active': False}, context=context)
-        
+
         return True
-    
+
     def onchange_batch_management(self, cr, uid, ids, batch_management, context=None):
         '''
         batch management is modified -> modification of Expiry Date Mandatory (perishable)
@@ -962,7 +962,7 @@ class product_attributes(osv.osv):
         if default is None:
             default = {}
         temp_status = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'product_attributes', 'int_5')[1]
-        
+
         copy_pattern = _("%s (copy)")
         copydef = dict(name=(copy_pattern % product2copy['name']),
                        default_code="XXX",
@@ -976,7 +976,7 @@ class product_attributes(osv.osv):
                        )
         copydef.update(default)
         return super(product_attributes, self).copy(cr, uid, id, copydef, context)
-    
+
     def onchange_code(self, cr, uid, ids, default_code):
         '''
         Check if the code already exists
@@ -988,8 +988,8 @@ class product_attributes(osv.osv):
             if duplicate:
                 res.update({'warning': {'title': 'Warning', 'message':'The Code already exists'}})
         return res
-    
-    _constraints = [ 
+
+    _constraints = [
         (_check_gmdn_code, 'Warning! GMDN code must be digits!', ['gmdn_code'])
     ]
 
@@ -997,24 +997,24 @@ product_attributes()
 
 class product_deactivation_error(osv.osv_memory):
     _name = 'product.deactivation.error'
-    
+
     _columns = {
         'product_id': fields.many2one('product.product', string='Product', required=True, readonly=True),
         'stock_exist': fields.boolean(string='Stocks exist (internal locations)', readonly=True),
         'opened_object': fields.boolean(string='Product is contain in opened documents', readonly=True),
         'error_lines': fields.one2many('product.deactivation.error.line', 'error_id', string='Error lines'),
     }
-    
+
     _defaults = {
         'stock_exist': False,
         'opened_object': False,
     }
-    
+
 product_deactivation_error()
 
 class product_deactivation_error_line(osv.osv_memory):
     _name = 'product.deactivation.error.line'
-    
+
     _columns = {
         'error_id': fields.many2one('product.deactivation.error', string='Error', readonly=True),
         'type': fields.char(size=64, string='Documents type'),
@@ -1023,17 +1023,17 @@ class product_deactivation_error_line(osv.osv_memory):
         'doc_id': fields.integer(string='Internal Reference'),
         'view_id': fields.integer(string='Reference of the view to open'),
     }
-    
+
     def open_doc(self, cr, uid, ids, context=None):
         '''
         Open the associated documents
         '''
         if not context:
             context = {}
-            
+
         if isinstance(ids, (int, long)):
             ids = [ids]
-        
+
         for line in self.browse(cr, uid, ids, context=context):
             view_id, context = self._get_view(cr, uid, line, context=context)
             return {'type': 'ir.actions.act_window',
@@ -1053,11 +1053,11 @@ class product_deactivation_error_line(osv.osv_memory):
         '''
         if not context:
             context = {}
-            
+
         view_id = False
         data_obj = self.pool.get('ir.model.data')
         obj = self.pool.get(line.internal_type).browse(cr, uid, line.doc_id)
-        
+
         if line.internal_type == 'composition.kit':
             context.update({'composition_type': 'theoretical'})
             if obj.composition_type == 'real':
@@ -1102,7 +1102,7 @@ class product_deactivation_error_line(osv.osv_memory):
 
         if view_id:
             view_id = [view_id[1]]
-                
+
         return view_id, context
 
 product_deactivation_error_line()
@@ -1126,36 +1126,5 @@ class pricelist_partnerinfo(osv.osv):
         return res
 
 pricelist_partnerinfo()
-
-
-class product_uom(osv.osv):
-    _inherit = 'product.uom'
-
-    def _get_dummy(self, cr, uid, ids, field_name, args, context=None):
-        res = {}
-        for id in ids:
-            res[id] = True
-
-        return res
-
-
-    def _get_compatible_uom(self, cr, uid, obj, name, args, context=None):
-        res = []
-
-        for arg in args:
-            if arg[0] == 'compatible_product_id':
-                if not arg[2]:
-                    return []
-                elif isinstance(arg[2], (int, long)):
-                    product = self.pool.get('product.product').browse(cr, uid, arg[2], context=context)
-                    return [('category_id', '=', product.uom_id.category_id.id)]
-
-        return res
-
-    _columns = {
-        'compatible_product_id': fields.function(_get_dummy, fnct_search=_get_compatible_uom, method=True, type='boolean', string='Compatible UoM'),
-    }
-
-product_uom()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

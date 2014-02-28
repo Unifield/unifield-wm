@@ -33,10 +33,79 @@ class product_uom(osv.osv):
     _inherit = 'product.uom'
 
     #---  Methods to compute fields.function values
+    def _get_dummy(self, cr, uid, ids, field_name, args, context=None):
+        """
+        Return False for all UoM given
+
+        :param cr: Database cursor
+        :param uid: ID of the user that calls the method
+        :param ids: List of ID of UoM that can be computed
+        :param field_name: List of fields that need to be computed
+        :param args: Potential additional arguments (defined in the field
+        declaration)
+        :param context: Context of the call (Optional)
+
+        :return: Dictionary with the value for each ids of the call
+        :rtype: dict
+        """
+        if context is None:
+            context = {}
+
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+
+        res = {}
+        for uom_id in ids:
+            res[uom_id] = True
+
+        return res
 
     #--- Methods to search into a fields.function
+    def _get_compatible_uom(self, cr, uid, obj, name, args, context=None):
+        """
+        Returns the list of products compatible with the given UoM.
+        Compatible products are products that have a default UoM with a
+        category that are the same category as the given UoM
+
+        :param cr: Database cursor
+        :param uid: ID of the user that calls the method
+        :param obj: Object that calls the method
+        :param name: Name of the field that calls the method
+        :param args: List of tuples that are used to search the compatible
+        products
+        :param context: Context of the call (Optional)
+
+        :return: A list of tuples to be apply has a domain to search the
+        compatible products
+        :rtype: list
+        """
+        # Objects
+        product_obj = self.pool.get('product.product')
+
+        res = []
+
+        for arg in args:
+            if arg[0] == 'compatible_product_id':
+                if not arg[2]:
+                    return []
+                elif isinstance(arg[2], (int, long)):
+                    product = product_obj.browse(cr, uid, arg[2], context=context)
+                    if product:
+                        return [('category_id', '=', product.uom_id.category_id.id)]
+
+        return res
 
     _columns = {
+        'compatible_product_id': fields.function(
+            _get_dummy,
+            fnct_search=_get_compatible_uom,
+            method=True,
+            string='Compatible UoM',
+            type='boolean',
+            readonly=True,
+            store=False,
+            help="Is the product is compatible with the given UoM ?",
+        ),
     }
 
     _defaults = {
