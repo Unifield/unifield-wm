@@ -34,6 +34,10 @@ from os import path
 
 from msf_partner import PARTNER_TYPE
 
+########
+## Comment to get a divereged branceh on lp:~unifield-team/unifield-wm/ref_wm_qt
+#####
+
 #----------------------------------------------------------
 # Procurement Order
 #----------------------------------------------------------
