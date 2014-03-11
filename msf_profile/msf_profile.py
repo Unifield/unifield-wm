@@ -95,10 +95,13 @@ class base_setup_company(osv.osv_memory):
     def default_get(self, cr, uid, fields_list=None, context=None):
         ret = super(base_setup_company, self).default_get(cr, uid, fields_list, context)
         if not ret.get('name'):
+            partner_obj = self.pool.get('res.partner')
+            
             ret.update({'name': 'MSF', 'street': 'Rue de Lausanne 78', 'street2': 'CP 116', 'city': 'Geneva', 'zip': '1211', 'phone': '+41 (22) 849.84.00'})
             company = self.pool.get('res.users').browse(cr, uid, uid, context=context).company_id
-            ret['name'] = company.name
-            addresses = self.pool.get('res.partner').address_get(cr, uid, company.id, ['default'])
+            instance_name = company.name 
+            ret['name'] = instance_name 
+            addresses = partner_obj.address_get(cr, uid, company.id, ['default'])
             default_id = addresses.get('default', False)
             # Default address
             if default_id:
@@ -114,7 +117,25 @@ class base_setup_company(osv.osv_memory):
                 ret['currency'] = company.currency_id.id
             elif cur:
                 ret['currency'] = cur[0]
-                
+            main_partner = partner_obj.main_partner(cr, uid)
+            if company.instance_id.level == 'coordo':
+                # UF-1699: create automatically a dup partner with the same name, but typed intermission if the instance is Coordo
+                # first check if that type of partner exists already
+                if not context:
+                    context = {}
+                context.update({'active_test': False})
+                exist = partner_obj.search(cr, uid, [('name','=',instance_name), ('partner_type', '=', 'intermission')], context=context)
+                if not exist: # avoid the re-configation, so need to existing check
+                    vals = ret.copy()
+                    del vals["config_logo"]
+                    vals["partner_type"] = 'intermission'
+                    # set by default these values for the intermission partner
+                    vals["customer"] = True
+                    vals["supplier"] = True
+                    vals["active"] = False 
+                    intermission_partner = partner_obj.copy(cr, uid, main_partner, vals, context)
+                    partner_obj.write(cr, uid, intermission_partner, {'name':instance_name}, context)
+            
             fp = tools.file_open(opj('msf_profile', 'data', 'msf.jpg'), 'rb')
             ret['logo'] = base64.encodestring(fp.read())
             fp.close()
