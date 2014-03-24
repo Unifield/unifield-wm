@@ -2218,6 +2218,100 @@ class sale_order_line(osv.osv):
 
         return res
 
+    # TODO: Maybe move conditions on some methods
+    def _check_line_conditions(self, cr, uid, ids, context=None):
+        """
+        Check if the value of lines are compatible with the other
+        values.
+
+        :param cr: Cursor to the database
+        :param uid: ID of the user that runs the method
+        :param ids: List of IDs of sale.order.line to check
+        :param context: Context of the call
+
+        :return The error message if any or False
+        :rtype boolean
+        """
+        # Objects
+        product_obj = self.pool.get('product.product')
+
+        if not context:
+            context = {}
+        if context.get('no_check_line', False):
+            return True
+
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+        for line in self.browse(cr, uid, ids, context=context):
+            clc = self._check_loan_conditions(cr, uid, line, context=context)
+            if clc:
+                raise osv.except_osv(_('Warning'), clc)
+
+            if line.type == 'make_to_order' and \
+               line.po_cft not in ['cft'] and \
+               not line.product_id and \
+               line.order_id.procurement_request and \
+               line.supplier and \
+               line.supplier.partner_type not in ['internal', 'section', 'intermission']:
+                raise osv.except_osv(
+                    _('Warning'),
+                    _("""For an Internal Request with a procurement method 'On Order' and without product,
+the supplier must be either in 'Internal', 'Inter-section' or 'Intermission type."""),
+                )
+
+            if line.product_id and \
+               line.product_id.type in ('consu', 'service', 'service_recep') and \
+               line.type == 'make_to_stock':
+                product_type = line.product_id.type == 'consu' and _('non stockable') or _('service')
+                raise osv.except_osv(
+                    _('Warning'),
+                    _("""You cannot choose 'from stock' as method to source a %s product !""") % product_type,
+                )
+
+            if line.product_id and \
+               line.po_cft == 'rfq' and \
+               line.supplier.partner_type in ['internal', 'section', 'intermission']:
+                raise osv.except_osv(
+                    _('Warning'),
+                    _("""You can't source with 'Request for Quotation' to an internal/inter-section/intermission partner."""),
+                )
+
+            if not line.product_id:
+                if line.po_cft == 'cft':
+                    raise osv.except_osv(
+                        _('Warning'),
+                        _("You can't source with 'Tender' if you don't have product."),
+                    )
+                if line.po_cft == 'rfq':
+                    raise osv.except_osv(
+                        _('Warning'),
+                        _("You can't source with 'Request for Quotation' if you don't have product."),
+                    )
+                if line.type == 'make_to_stock':
+                    raise osv.except_osv(
+                        _('Warning'),
+                        _("You can't Source 'from stock' if you don't have product."),
+                    )
+                if line.supplier and line.supplier.partner_type in ('external', 'esc'):
+                    raise osv.except_osv(
+                        _('Warning'),
+                        _("You can't Source to an '%s' partner if you don't have product.") %
+                        (line.supplier.partner_type == 'external' and 'External' or 'ESC'),
+                    )
+
+            if line.state not in ('draft', 'cancel') and line.product_id and line.supplier:
+                # Check product constraints (no external supply, no storage...)
+                check_fnct = product_obj._get_restriction_error
+                self._check_product_constraints(cr, uid, line.type, line.po_cft, line.product_id.id, line.supplier.id, check_fnct, context=context)
+
+            if line.order_id and line.order_id.procurement_request and line.type == 'make_to_stock':
+                if line.order_id.location_requestor_id.id == line.location_id.id:
+                    raise osv.except_osv(
+                        _('Warning'),
+                        _("You cannot choose a source location which is the destination location of the Internal Request"),
+                    )
+        return True
+
 sale_order_line()
 
 
