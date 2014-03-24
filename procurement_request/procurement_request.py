@@ -410,31 +410,6 @@ class procurement_request_line(osv.osv):
 
         return res
 
-    def create(self, cr, uid, vals, context=None):
-        '''
-        Adds the date_planned value.
-        Check if product or comment exist and set the the fields required accordingly.
-        '''
-        if context is None:
-            context = {}
-        if vals.get('product_id', False):
-            vals.update({'comment_ok': True})
-        if vals.get('comment', False):
-            vals.update({'product_ok': True})
-
-        if not 'date_planned' in vals and context.get('procurement_request'):
-            if 'date_planned' in context:
-                vals.update({'date_planned': context.get('date_planned')})
-            else:
-                date_planned = self.pool.get('sale.order').browse(cr, uid, vals.get('order_id'), context=context).delivery_requested_date
-                vals.update({'date_planned': date_planned})
-
-        # Compute the rounding of the product qty
-        if vals.get('product_uom') and vals.get('product_uom_qty'):
-            vals['product_uom_qty'] = self.pool.get('product.uom')._compute_round_up_qty(cr, uid, vals.get('product_uom'), vals.get('product_uom_qty'), context=context)
-
-        return super(procurement_request_line, self).create(cr, uid, vals, context=context)
-
     def write(self, cr, uid, ids, vals, context=None):
         '''
         Compute the UoM qty according to UoM rounding value
