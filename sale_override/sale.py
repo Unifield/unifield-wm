@@ -2162,6 +2162,7 @@ class sale_order_line(osv.osv):
             context = {}
 
         product_obj = self.pool.get('product.product')
+        uom_obj = self.pool.get('product.uom')
         partner_obj = self.pool.get('res.partner')
 
         # [= imported from 'sourcing', before super() =]
@@ -2215,12 +2216,22 @@ class sale_order_line(osv.osv):
         self._relatedFields(cr, uid, vals, context)
         # [= / =]
 
+        # [= imported from 'procurement_request' =]
+        # Compute the UoM qty according to UoM rounding value
+        for req in self.browse(cr, uid, ids, context=context):
+            new_vals = vals.copy()
+            # Compute the rounding of the product qty
+            uom_id = new_vals.get('product_uom', req.product_uom.id)
+            uom_qty = new_vals.get('product_uom_qty', req.product_uom_qty)
+            new_vals['product_uom_qty'] = uom_obj._compute_round_up_qty(cr, uid, uom_id, uom_qty, context=context)
+            super(sale_order_line, self).write(cr, uid, [req.id], new_vals, context=context)
+        # [= / =]
+
         # UTP-392: fixed from the previous code: check if the sale order line contains the product, and not only from vals!
         product_id = vals.get('product_id')
         if context.get('sale_id', False):
             if not product_id:
                 product_id = self.browse(cr, uid, ids, context=context)[0].product_id
-
             if not product_id:
                 vals.update({'type': 'make_to_order'})
         # Internal request

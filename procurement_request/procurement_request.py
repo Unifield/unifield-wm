@@ -410,22 +410,6 @@ class procurement_request_line(osv.osv):
 
         return res
 
-    def write(self, cr, uid, ids, vals, context=None):
-        '''
-        Compute the UoM qty according to UoM rounding value
-        '''
-        res = True
-
-        for req in self.browse(cr, uid, ids, context=context):
-            new_vals = vals.copy()
-            # Compute the rounding of the product qty
-            uom_id = new_vals.get('product_uom', req.product_uom.id)
-            uom_qty = new_vals.get('product_uom_qty', req.product_uom_qty)
-            new_vals['product_uom_qty'] = self.pool.get('product.uom')._compute_round_up_qty(cr, uid, uom_id, uom_qty, context=context)
-            res = res and super(procurement_request_line, self).write(cr, uid, [req.id], new_vals, context=context)
-
-        return res
-
     def _get_fake_state(self, cr, uid, ids, field_name, args, context=None):
         if isinstance(ids, (int, long)):
             ids = [ids]
