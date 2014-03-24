@@ -2067,6 +2067,38 @@ class sale_order_line(osv.osv):
         """
         if context is None:
             context = {}
+        order_obj = self.pool.get('sale.order')
+        product_obj = self.pool.get('product.product')
+
+        # [= imported from 'sourcing', before super() =]
+        product = None
+        if vals.get('product_id'):
+            product = product_obj.browse(cr, uid, vals['product_id'], context=context)
+        if vals.get('order_id'):
+            order = order_obj.browse(cr, uid, vals['order_id'], context=context)
+            if order.order_type == 'loan' and order.state == 'validated':
+                vals.update({
+                    'type': 'make_to_stock',
+                    'po_cft': False,
+                    'supplier': False,
+                })
+        if product and vals.get('type') == 'make_to_order' and not vals.get('supplier'):
+            vals['supplier'] = product.seller_id and product.seller_id.id or False
+        if product and product.type in ('consu', 'service', 'service_recep'):
+            vals['type'] = 'make_to_order'
+        # If type is missing, set to make_to_stock and po_cft to False
+        if not vals.get('type'):
+            vals.update({
+                'type': 'make_to_stock',
+                'po_cft': False,
+            })
+        # Fill PO/CfT : by default, if MtO -> PO and PO/Cft is not specified in data, if MtS -> False
+        if not vals.get('po_cft') and vals.get('type') == 'make_to_order':
+            vals['po_cft'] = 'po'
+        elif vals.get('type') == 'make_to_stock':
+            vals['po_cft'] = False
+        # [= / =]
+
         if not vals.get('product_id') and context.get('sale_id', []):
             vals.update({'type': 'make_to_order'})
 
@@ -2075,7 +2107,6 @@ class sale_order_line(osv.osv):
         # UF-1739: as we do not have product_uos_qty in PO (only in FO), we recompute here the product_uos_qty for the SYNCHRO
         qty = vals.get('product_uom_qty')
         product_id = vals.get('product_id')
-        product_obj = self.pool.get('product.product')
         if product_id and qty:
             if isinstance(qty, str):
                 qty = float(qty)
@@ -2090,13 +2121,17 @@ class sale_order_line(osv.osv):
         Add the database ID of the SO line to the value sync_order_line_db_id
         '''
 
-        so_line_ids = super(sale_order_line, self).create(cr, uid, vals, context=context)
+        so_line_id = super(sale_order_line, self).create(cr, uid, vals, context=context)
         if not vals.get('sync_order_line_db_id', False):  # 'sync_order_line_db_id' not in vals or vals:
             if vals.get('order_id', False):
                 name = self.pool.get('sale.order').browse(cr, uid, vals.get('order_id'), context=context).name
-                super(sale_order_line, self).write(cr, uid, so_line_ids, {'sync_order_line_db_id': name + "_" + str(so_line_ids), } , context=context)
+                super(sale_order_line, self).write(cr, uid, so_line_id, {'sync_order_line_db_id': name + "_" + str(so_line_id), } , context=context)
 
-        return so_line_ids
+        # [= imported from 'sourcing', after super() =]
+        self._check_line_conditions(cr, uid, so_line_id, context)
+        # [= / =]
+
+        return so_line_id
 
     def write(self, cr, uid, ids, vals, context=None):
         """

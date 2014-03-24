@@ -555,67 +555,6 @@ The parameter '%s' should be an browse_record instance !""") % (method, self._na
 
         return res
 
-    def create(self, cr, uid, vals=None, context=None):
-        """
-        Update some values according to Field order values
-
-        :param cr: Cursor to the database
-        :param uid: ID of the user that runs the method
-        :param vals: A dictionary with values of the new line to create
-        :param context: Context of the call
-
-        :return The ID of the new line
-        :rtype integer
-        """
-        # Objects
-        order_obj = self.pool.get('sale.order')
-        product_obj = self.pool.get('product.product')
-
-        if context is None:
-            context = {}
-
-        if vals is None:
-            vals = {}
-
-        product = None
-        if vals.get('product_id', False):
-            product = product_obj.browse(cr, uid, vals['product_id'], context=context)
-
-        if vals.get('order_id', False):
-            order = order_obj.browse(cr, uid, vals['order_id'], context=context)
-            if order.order_type == 'loan' and order.state == 'validated':
-                vals.update({
-                    'type': 'make_to_stock',
-                    'po_cft': False,
-                    'supplier': False,
-                })
-
-        if product and vals.get('type', False) == 'make_to_order' and not vals.get('supplier', False):
-            vals['supplier'] = product.seller_id and product.seller_id.id or False
-
-        if product and product.type in ('consu', 'service', 'service_recep'):
-            vals['type'] = 'make_to_order'
-
-        # If type is missing, set to make_to_stock and po_cft to False
-        if not vals.get('type', False):
-            vals.update({
-                'type': 'make_to_stock',
-                'po_cft': False,
-            })
-
-        # Fill PO/CfT : by default, if MtO -> PO and PO/Cft is not specified in data, if MtS -> False
-        if not vals.get('po_cft', False) and vals.get('type', False) == 'make_to_order':
-            vals['po_cft'] = 'po'
-        elif vals.get('type', False) == 'make_to_stock':
-            vals['po_cft'] = False
-
-        # Create the new sale order line
-        res = super(sale_order_line, self).create(cr, uid, vals, context=context)
-
-        self._check_line_conditions(cr, uid, res, context)
-
-        return res
-
     def _check_loan_conditions(self, cr, uid, line, context=None):
         """
         Check if the value of lines are compatible with the value
