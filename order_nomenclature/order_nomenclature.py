@@ -396,22 +396,6 @@ class sale_order_line(osv.osv):
                 vals.update({'name':vals['comment']})
         # clear nomenclature filter values
         #self.pool.get('product.product')._resetNomenclatureFields(vals)
-        
-    def create(self, cr, uid, vals, context=None):
-        '''
-        override create. don't save filtering data
-        '''
-        self._relatedFields(cr, uid, vals, context)
-        
-        return super(sale_order_line, self).create(cr, uid, vals, context=context)
-    
-    def write(self, cr, uid, ids, vals, context=None):
-        '''
-        override write. don't save filtering data
-        '''
-        self._relatedFields(cr, uid, vals, context)
-            
-        return super(sale_order_line, self).write(cr, uid, ids, vals, context=context)
     
     def _setNomenclatureInfo(self, cr, uid, values, context=None):
         '''

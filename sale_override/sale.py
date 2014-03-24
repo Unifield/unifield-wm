@@ -2117,6 +2117,10 @@ class sale_order_line(osv.osv):
         if order_id and self.pool.get('sale.order').read(cr, uid, order_id, ['procurement_request'], context)['procurement_request']:
             vals.update({'cost_price': vals.get('cost_price', False)})
 
+        # [= imported from 'order_nomenclature' =]
+        self._relatedFields(cr, uid, vals, context)
+        # [= / =]
+
         '''
         Add the database ID of the SO line to the value sync_order_line_db_id
         '''
@@ -2189,6 +2193,10 @@ class sale_order_line(osv.osv):
             if loan_sol_ids:
                 # Update lines with loan
                 super(sale_order_line, self).write(cr, uid, loan_sol_ids, loan_vals, context)
+        # [= / =]
+
+        # [= imported from 'order_nomenclature' =]
+        self._relatedFields(cr, uid, vals, context)
         # [= / =]
 
         # UTP-392: fixed from the previous code: check if the sale order line contains the product, and not only from vals!
