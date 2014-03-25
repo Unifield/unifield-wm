@@ -2137,6 +2137,41 @@ class sale_order_line(osv.osv):
         if context is None:
             context = {}
 
+        product_obj = self.pool.get('product.product')
+
+        # [= imported from 'sourcing', before super() =]
+        product = False
+        if vals.get('product_id', False):
+            product = product_obj.browse(cr, uid, vals['product_id'])
+            if product.type in ('consu', 'service', 'service_recep'):
+                vals['type'] = 'make_to_order'
+        if vals.get('state') == 'cancel':
+            self.write(cr, uid, ids, {'cf_estimated_delivery_date': False}, context=context)
+
+        if 'type' in vals:
+            if vals['type'] == 'make_to_stock':
+                vals.update({
+                    'po_cft': False,
+                    'supplier': False,
+                })
+        # Search lines to modify with loan values
+        loan_sol_ids = self.search(
+            cr, uid,
+            [('order_id.order_type', '=', 'loan'),
+             ('order_id.state', '=', 'validated'),
+             ('id', 'in', ids)],
+            context=context)
+        if loan_sol_ids:
+            loan_vals = vals.copy()
+            loan_data = {'type': 'make_to_stock',
+                         'po_cft': False,
+                         'suppier': False}
+            loan_vals.update(loan_data)
+            if loan_sol_ids:
+                # Update lines with loan
+                super(sale_order_line, self).write(cr, uid, loan_sol_ids, loan_vals, context)
+        # [= / =]
+
         # UTP-392: fixed from the previous code: check if the sale order line contains the product, and not only from vals!
         product_id = vals.get('product_id')
         if context.get('sale_id', False):
@@ -2153,6 +2188,14 @@ class sale_order_line(osv.osv):
         self.check_empty_line(cr, uid, ids, vals, context=context)
 
         res = super(sale_order_line, self).write(cr, uid, ids, vals, context=context)
+
+        # [= imported from 'sourcing', after super() =]
+        f_to_check = ['type', 'order_id', 'po_cft', 'product_id', 'supplier', 'state', 'location_id']
+        for f in f_to_check:
+            if vals.get(f, False):
+                self._check_line_conditions(cr, uid, ids, context=context)
+                break
+        # [= / =]
 
         return res
 
