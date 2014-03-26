@@ -2113,6 +2113,22 @@ class sale_order_line(osv.osv):
         if order_id and self.pool.get('sale.order').read(cr, uid, order_id, ['procurement_request'], context)['procurement_request']:
             vals.update({'cost_price': vals.get('cost_price', False)})
 
+        # [= imported from 'procurement_request' =]
+        if vals.get('product_id', False):
+            vals.update({'comment_ok': True})
+        if vals.get('comment', False):
+            vals.update({'product_ok': True})
+        if not 'date_planned' in vals and context.get('procurement_request'):
+            if 'date_planned' in context:
+                vals.update({'date_planned': context.get('date_planned')})
+            else:
+                date_planned = order_obj.browse(cr, uid, vals.get('order_id'), context=context).delivery_requested_date
+                vals.update({'date_planned': date_planned})
+        # Compute the rounding of the product qty
+        if vals.get('product_uom') and vals.get('product_uom_qty'):
+            vals['product_uom_qty'] = self.pool.get('product.uom')._compute_round_up_qty(cr, uid, vals.get('product_uom'), vals.get('product_uom_qty'), context=context)
+        # [= / =]
+
         '''
         Add the database ID of the SO line to the value sync_order_line_db_id
         '''
