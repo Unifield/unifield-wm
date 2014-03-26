@@ -2154,6 +2154,7 @@ class sale_order_line(osv.osv):
             context = {}
 
         product_obj = self.pool.get('product.product')
+        uom_obj = self.pool.get('product.uom')
 
         # [= imported from 'sourcing', before super() =]
         product = False
@@ -2188,12 +2189,23 @@ class sale_order_line(osv.osv):
                 super(sale_order_line, self).write(cr, uid, loan_sol_ids, loan_vals, context)
         # [= / =]
 
+        # [= imported from 'procurement_request' =]
+        if 'product_uom_qty' in vals or 'product_uom' in vals:
+            for req in self.read(cr, uid, ids, ['product_uom_qty', 'product_uom'], context=context):
+                uom_qty_backup = vals['product_uom_qty']    # Backup UoM qty
+                # Compute the rounding of the product qty
+                uom_id = vals.get('product_uom', req['product_uom'][0])
+                uom_qty = vals.get('product_uom_qty', req['product_uom_qty'])
+                vals['product_uom_qty'] = uom_obj._compute_round_up_qty(cr, uid, uom_id, uom_qty, context=context)
+                super(procurement_request_line, self).write(cr, uid, [req['id']], vals, context=context)
+                vals['product_uom_qty'] = uom_qty_backup    # Restore UoM qty
+        # [= / =]
+
         # UTP-392: fixed from the previous code: check if the sale order line contains the product, and not only from vals!
         product_id = vals.get('product_id')
         if context.get('sale_id', False):
             if not product_id:
                 product_id = self.browse(cr, uid, ids, context=context)[0].product_id
-
             if not product_id:
                 vals.update({'type': 'make_to_order'})
         # Internal request
