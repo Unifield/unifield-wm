@@ -2144,12 +2144,17 @@ class sale_order_line(osv.osv):
         if context is None:
             context = {}
 
+        order_obj = self.pool.get('sale.order')
         product_obj = self.pool.get('product.product')
         uom_obj = self.pool.get('product.uom')
 
+        order = None
+        if vals.get('order_id'):
+            order = order_obj.browse(cr, uid, vals['order_id'], context=context)
+
         # [= imported from 'sourcing', before super() =]
         product = False
-        if vals.get('product_id', False):
+        if vals.get('product_id'):
             product = product_obj.browse(cr, uid, vals['product_id'])
             if product.type in ('consu', 'service', 'service_recep'):
                 vals['type'] = 'make_to_order'
@@ -2158,10 +2163,8 @@ class sale_order_line(osv.osv):
 
         if 'type' in vals:
             if vals['type'] == 'make_to_stock':
-                vals.update({
-                    'po_cft': False,
-                    'supplier': False,
-                })
+                vals['po_cft'] = False
+                vals['supplier'] = False
         # Search lines to modify with loan values
         loan_sol_ids = self.search(
             cr, uid,
@@ -2171,13 +2174,11 @@ class sale_order_line(osv.osv):
             context=context)
         if loan_sol_ids:
             loan_vals = vals.copy()
-            loan_data = {'type': 'make_to_stock',
-                         'po_cft': False,
-                         'suppier': False}
-            loan_vals.update(loan_data)
-            if loan_sol_ids:
-                # Update lines with loan
-                super(sale_order_line, self).write(cr, uid, loan_sol_ids, loan_vals, context)
+            loan_vals['type'] = 'make_to_stock'
+            loan_vals['po_cft'] = False
+            loan_vals['supplier'] = False
+            # Update lines with loan
+            super(sale_order_line, self).write(cr, uid, loan_sol_ids, loan_vals, context)
         # [= / =]
 
         # [= imported from 'procurement_request' =]
@@ -2188,7 +2189,7 @@ class sale_order_line(osv.osv):
                 uom_id = vals.get('product_uom', req['product_uom'][0])
                 uom_qty = vals.get('product_uom_qty', req['product_uom_qty'])
                 vals['product_uom_qty'] = uom_obj._compute_round_up_qty(cr, uid, uom_id, uom_qty, context=context)
-                super(procurement_request_line, self).write(cr, uid, [req['id']], vals, context=context)
+                super(sale_order_line, self).write(cr, uid, [req['id']], vals, context=context)
                 vals['product_uom_qty'] = uom_qty_backup    # Restore UoM qty
         # [= / =]
 
@@ -2198,11 +2199,10 @@ class sale_order_line(osv.osv):
             if not product_id:
                 product_id = self.browse(cr, uid, ids, context=context)[0].product_id
             if not product_id:
-                vals.update({'type': 'make_to_order'})
-        # Internal request
-        order_id = vals.get('order_id', False)
-        if order_id and self.pool.get('sale.order').read(cr, uid, order_id, ['procurement_request'], context)['procurement_request']:
-            vals.update({'cost_price': vals.get('cost_price', False)})
+                vals['type'] = 'make_to_order'
+        # Internal request (FIXME useless?)
+        if order and order.procurement_request:
+            vals['cost_price'] = vals.get('cost_price', False)
 
         self.check_empty_line(cr, uid, ids, vals, context=context)
 
