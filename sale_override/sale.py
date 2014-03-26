@@ -28,7 +28,6 @@ from dateutil.relativedelta import relativedelta
 from mx.DateTime import *
 import time
 from tools.translate import _
-import logging
 from workflow.wkf_expr import _eval_expr
 
 import decimal_precision as dp
@@ -2065,29 +2064,27 @@ class sale_order_line(osv.osv):
             context = {}
         order_obj = self.pool.get('sale.order')
         product_obj = self.pool.get('product.product')
+        uom_obj = self.pool.get('product.uom')
 
         # [= imported from 'sourcing', before super() =]
         product = None
         if vals.get('product_id'):
             product = product_obj.browse(cr, uid, vals['product_id'], context=context)
+        order = None
         if vals.get('order_id'):
             order = order_obj.browse(cr, uid, vals['order_id'], context=context)
             if order.order_type == 'loan' and order.state == 'validated':
-                vals.update({
-                    'type': 'make_to_stock',
-                    'po_cft': False,
-                    'supplier': False,
-                })
+                vals['type'] = 'make_to_stock'
+                vals['po_cft'] = False
+                vals['supplier'] = False
         if product and vals.get('type') == 'make_to_order' and not vals.get('supplier'):
             vals['supplier'] = product.seller_id and product.seller_id.id or False
         if product and product.type in ('consu', 'service', 'service_recep'):
             vals['type'] = 'make_to_order'
         # If type is missing, set to make_to_stock and po_cft to False
         if not vals.get('type'):
-            vals.update({
-                'type': 'make_to_stock',
-                'po_cft': False,
-            })
+            vals['type'] = 'make_to_stock'
+            vals['po_cft'] = False
         # Fill PO/CfT : by default, if MtO -> PO and PO/Cft is not specified in data, if MtS -> False
         if not vals.get('po_cft') and vals.get('type') == 'make_to_order':
             vals['po_cft'] = 'po'
@@ -2096,48 +2093,42 @@ class sale_order_line(osv.osv):
         # [= / =]
 
         if not vals.get('product_id') and context.get('sale_id', []):
-            vals.update({'type': 'make_to_order'})
+            vals['type'] = 'make_to_order'
 
         self.check_empty_line(cr, uid, False, vals, context=context)
 
         # UF-1739: as we do not have product_uos_qty in PO (only in FO), we recompute here the product_uos_qty for the SYNCHRO
-        qty = vals.get('product_uom_qty')
-        product_id = vals.get('product_id')
-        if product_id and qty:
-            if isinstance(qty, str):
-                qty = float(qty)
-            vals.update({'product_uos_qty' : qty * product_obj.read(cr, uid, product_id, ['uos_coeff'])['uos_coeff']})
+        if product and vals.get('product_uom_qty'):
+            vals['product_uos_qty'] = float(vals['product_uom_qty']) * product.uos_coeff
 
-        # Internal request
-        order_id = vals.get('order_id', False)
-        if order_id and self.pool.get('sale.order').read(cr, uid, order_id, ['procurement_request'], context)['procurement_request']:
-            vals.update({'cost_price': vals.get('cost_price', False)})
+        # Internal request (FIXME useless?)
+        if order and order.procurement_request:
+            vals['cost_price'] = vals.get('cost_price', False)
 
         # [= imported from 'procurement_request' =]
-        if vals.get('product_id', False):
-            vals.update({'comment_ok': True})
-        if vals.get('comment', False):
-            vals.update({'product_ok': True})
+        if vals.get('product_id'):
+            vals['comment_ok'] = True
+        if vals.get('comment'):
+            vals['product_ok'] = True
         if not 'date_planned' in vals and context.get('procurement_request'):
             if 'date_planned' in context:
-                vals.update({'date_planned': context.get('date_planned')})
+                vals['date_planned'] = context.get('date_planned')
             else:
-                date_planned = order_obj.browse(cr, uid, vals.get('order_id'), context=context).delivery_requested_date
-                vals.update({'date_planned': date_planned})
+                vals['date_planned'] = order.delivery_requested_date
         # Compute the rounding of the product qty
         if vals.get('product_uom') and vals.get('product_uom_qty'):
-            vals['product_uom_qty'] = self.pool.get('product.uom')._compute_round_up_qty(cr, uid, vals.get('product_uom'), vals.get('product_uom_qty'), context=context)
+            vals['product_uom_qty'] = uom_obj._compute_round_up_qty(
+                cr, uid, vals['product_uom'], vals['product_uom_qty'], context=context)
         # [= / =]
 
-        '''
-        Add the database ID of the SO line to the value sync_order_line_db_id
-        '''
-
+        # Add the database ID of the SO line to the value sync_order_line_db_id
         so_line_id = super(sale_order_line, self).create(cr, uid, vals, context=context)
         if not vals.get('sync_order_line_db_id', False):  # 'sync_order_line_db_id' not in vals or vals:
-            if vals.get('order_id', False):
-                name = self.pool.get('sale.order').browse(cr, uid, vals.get('order_id'), context=context).name
-                super(sale_order_line, self).write(cr, uid, so_line_id, {'sync_order_line_db_id': name + "_" + str(so_line_id), } , context=context)
+            if order:
+                super(sale_order_line, self).write(
+                    cr, uid, [so_line_id],
+                    {'sync_order_line_db_id': "%s_%s" % (order.name, so_line_id)},
+                    context=context)
 
         # [= imported from 'sourcing', after super() =]
         self._check_line_conditions(cr, uid, so_line_id, context)
