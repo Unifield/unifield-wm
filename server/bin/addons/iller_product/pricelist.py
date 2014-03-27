@@ -485,9 +485,9 @@ class product_pricelist(osv.osv):
                             price = prod[0].prix_achat
                             #Si DECP alors prix d'achat * 1.1, sinon prix d'achat * 1.05
                             if prod[0].code_affectation == 'DECP':
-                                price = price * 1.1
+                                price = price * 1.14
                             else:
-                                price = price * 1.05
+                                price = price * 1.07
 
                 price = rounding(price, res['price_round'])
                 price += (res['price_surcharge'] or 0.0)
