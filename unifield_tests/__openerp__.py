@@ -32,7 +32,8 @@
         'master_data/010_accounts.yml',
         'master_data/020_partners.yml',
         'master_data/030_journals.yml',
-        'master_data/040_analytic.yml'
+        'master_data/040_analytic.yml',
+        'master_data/050_products.yml',
     ],
     "update_xml" : [],
     "demo_xml" : [],

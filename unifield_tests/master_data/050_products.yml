@@ -1,0 +1,842 @@
+-
+  First transport product
+-
+  !record {model: product.product, id: product_transport1}:
+    default_code : XTRA000---
+    name : Transport by sea
+    track_production : f
+    track_outgoing : f
+    track_incoming : f
+    xmlid_code : XTRA000---
+    narcotic : f
+    single_use : 
+    short_shelf_life : f
+    controlled_substance : f
+    perishable : f
+    show_cold_chain : f
+    restricted_country : f
+    dangerous_goods : f
+    batch_management : f
+    sterilized : 
+    un_code : 
+    international_status : product_attributes.int_1
+    procure_delay : 60.0
+    transport_ok : t
+    list_price : 1.00100
+    weight : 0
+    standard_price : 1.00000
+    uom_id : sd.product_product_uom_unit
+    uom_po_id : sd.product_product_uom_unit
+    type : service_recep
+    volume : 0
+    procure_method : make_to_order
+    cost_method : average
+    nomen_manda_0 : sd.msf_sync_data_hq_nom_2
+    nomen_manda_1 : sd.msf_sync_data_hq_nom_16
+    nomen_manda_2 : sd.msf_sync_data_hq_nom_183
+    nomen_manda_3 : sd.msf_sync_data_hq_nom_197
+    subtype : single
+-
+  
+-
+  !record {model: product.product, id: product_transport2}:
+    default_code : XTRA001---
+    name : Transport by Air
+    track_production : f
+    track_outgoing : f
+    track_incoming : f
+    xmlid_code : XTRA001---
+    narcotic : f
+    single_use : 
+    short_shelf_life : f
+    controlled_substance : f
+    perishable : f
+    show_cold_chain : f
+    restricted_country : f
+    dangerous_goods : f
+    batch_management : f
+    sterilized : 
+    un_code : 
+    international_status : product_attributes.int_1
+    procure_delay : 60.0
+    transport_ok : t
+    list_price : 250.25000
+    weight : 0
+    standard_price : 250.00000
+    uom_id : sd.product_product_uom_unit
+    uom_po_id : sd.product_product_uom_unit
+    type : service_recep
+    volume : 0
+    procure_method : make_to_order
+    cost_method : standard
+    nomen_manda_0 : sd.msf_sync_data_hq_nom_1
+    nomen_manda_1 : sd.msf_sync_data_hq_nom_16
+    nomen_manda_2 : sd.msf_sync_data_hq_nom_183
+    nomen_manda_3 : sd.msf_sync_data_hq_nom_197
+    subtype : single
+-
+  
+-
+  !record {model: product.product, id: product_perishable1}:
+    default_code : DORAABCV2S2
+    name : ABACAVIR sulfate (ABC), 20 mg/ml, oral sol., 240 ml, bot.
+    track_production : f
+    track_outgoing : f
+    track_incoming : f
+    xmlid_code : DORAABCV2S2
+    narcotic : f
+    single_use : no
+    short_shelf_life : f
+    controlled_substance : f
+    perishable : f
+    show_cold_chain : f
+    restricted_country : f
+    dangerous_goods : f
+    batch_management : f
+    sterilized : no
+    un_code : 
+    international_status : product_attributes.int_1
+    procure_delay : 60.0
+    transport_ok : f
+    list_price : 9.33533
+    weight : 
+    standard_price : 9.32600
+    uom_id : sd.product_product_uom_unit
+    uom_po_id : sd.product_product_uom_unit
+    type : product
+    volume : 
+    procure_method : make_to_order
+    cost_method : average
+    nomen_manda_0 : sd.msf_config_locations_nomen_med
+    nomen_manda_1 : sd.msf_sync_data_hq_nom_5
+    nomen_manda_2 : sd.msf_sync_data_hq_nom_35
+    nomen_manda_3 : sd.msf_sync_data_hq_nom_198
+    subtype : single
+-
+  
+-
+  !record {model: product.product, id: product_perishable2}:
+    default_code : DORAABLA6T3
+    name : ABC 60 mg / 3TC 30 mg, tab.
+    track_production : f
+    track_outgoing : f
+    track_incoming : f
+    xmlid_code : DORAABLA6T3
+    narcotic : f
+    single_use : no
+    short_shelf_life : f
+    controlled_substance : f
+    perishable : f
+    show_cold_chain : f
+    restricted_country : f
+    dangerous_goods : f
+    batch_management : f
+    sterilized : no
+    un_code : 
+    international_status : product_attributes.int_1
+    procure_delay : 60.0
+    transport_ok : f
+    list_price : 1.00100
+    weight : 
+    standard_price : 1.00000
+    uom_id : sd.product_product_uom_unit
+    uom_po_id : sd.product_product_uom_unit
+    type : product
+    volume : 
+    procure_method : make_to_order
+    cost_method : average
+    nomen_manda_0 : sd.msf_config_locations_nomen_med
+    nomen_manda_1 : sd.msf_sync_data_hq_nom_5
+    nomen_manda_2 : sd.msf_sync_data_hq_nom_35
+    nomen_manda_3 : sd.msf_sync_data_hq_nom_199
+    subtype : single
+-
+  
+-
+  !record {model: product.product, id: product_bm1}:
+    default_code : DINJACIV2V-
+    name : ACICLOVIR sodium, eq. 250 mg base, powder, vial
+    track_production : t
+    track_outgoing : t
+    track_incoming : t
+    xmlid_code : DINJACIV2V-
+    narcotic : f
+    single_use : no
+    short_shelf_life : f
+    controlled_substance : f
+    perishable : t
+    show_cold_chain : f
+    restricted_country : f
+    dangerous_goods : f
+    batch_management : t
+    sterilized : no
+    un_code : 
+    international_status : product_attributes.int_1
+    procure_delay : 60.0
+    transport_ok : f
+    list_price : 1.00100
+    weight : 
+    standard_price : 1.00000
+    uom_id : sd.product_product_uom_unit
+    uom_po_id : sd.product_product_uom_unit
+    type : product
+    volume : 
+    procure_method : make_to_order
+    cost_method : average
+    nomen_manda_0 : sd.msf_config_locations_nomen_med
+    nomen_manda_1 : sd.msf_sync_data_hq_nom_5
+    nomen_manda_2 : sd.msf_sync_data_hq_nom_34
+    nomen_manda_3 : sd.msf_sync_data_hq_nom_210
+    subtype : single
+-
+  
+-
+  !record {model: product.product, id: product_bm2}:
+    default_code : DINJAMPI5V-
+    name : AMPICILLIN, 500 mg, powder, vial
+    track_production : t
+    track_outgoing : t
+    track_incoming : t
+    xmlid_code : DINJAMPI5V-
+    narcotic : f
+    single_use : no
+    short_shelf_life : f
+    controlled_substance : f
+    perishable : t
+    show_cold_chain : f
+    restricted_country : f
+    dangerous_goods : f
+    batch_management : t
+    sterilized : no
+    un_code : 
+    international_status : product_attributes.int_1
+    procure_delay : 60.0
+    transport_ok : f
+    list_price : 0.21521
+    weight : 0.02
+    standard_price : 0.21500
+    uom_id : sd.product_product_uom_unit
+    uom_po_id : sd.product_product_uom_unit
+    type : product
+    volume : 0.03
+    procure_method : make_to_order
+    cost_method : average
+    nomen_manda_0 : sd.msf_config_locations_nomen_med
+    nomen_manda_1 : sd.msf_sync_data_hq_nom_5
+    nomen_manda_2 : sd.msf_sync_data_hq_nom_34
+    nomen_manda_3 : sd.msf_sync_data_hq_nom_244
+    subtype : single
+-
+  
+-
+  !record {model: product.product, id: product_non_stockable1}:
+    default_code : AFOOBEAN4TF
+    name : BEANS, FRENCH, 400 g, extra thin, tin
+    track_production : f
+    track_outgoing : f
+    track_incoming : f
+    xmlid_code : AFOOBEAN4TF
+    narcotic : f
+    single_use : no
+    short_shelf_life : f
+    controlled_substance : f
+    perishable : f
+    show_cold_chain : f
+    restricted_country : f
+    dangerous_goods : f
+    batch_management : f
+    sterilized : no
+    un_code : 
+    international_status : product_attributes.int_1
+    procure_delay : 60.0
+    transport_ok : f
+    list_price : 1.00100
+    weight : 
+    standard_price : 1.00000
+    uom_id : sd.product_product_uom_unit
+    uom_po_id : sd.product_product_uom_unit
+    type : consu
+    volume : 
+    procure_method : make_to_order
+    cost_method : average
+    nomen_manda_0 : sd.msf_config_locations_nomen_log
+    nomen_manda_1 : sd.msf_sync_data_hq_nom_3
+    nomen_manda_2 : sd.msf_sync_data_hq_nom_18
+    nomen_manda_3 : sd.msf_sync_data_hq_nom_345
+    subtype : single
+-
+  
+-
+  !record {model: product.product, id: product_standard_med1}:
+    default_code : DDGTBLOR1T-
+    name : TEST, BLOOD GROUPING, RHESUS anti D, 10 ml, dropper bottle
+    track_production : f
+    track_outgoing : f
+    track_incoming : f
+    xmlid_code : DDGTBLOR1T-
+    heat_sensitive_item : sd.product_attributes_heat_2
+    narcotic : f
+    single_use : no
+    short_shelf_life : f
+    controlled_substance : f
+    perishable : f
+    show_cold_chain : f
+    restricted_country : f
+    dangerous_goods : f
+    batch_management : f
+    sterilized : no
+    un_code : 
+    international_status : product_attributes.int_1
+    procure_delay : 60.0
+    transport_ok : f
+    list_price : 5.68368
+    weight : 0.04
+    standard_price : 5.67800
+    uom_id : sd.product_product_uom_unit
+    uom_po_id : sd.product_product_uom_unit
+    type : product
+    volume : 0.11
+    procure_method : make_to_order
+    cost_method : average
+    nomen_manda_0 : sd.msf_config_locations_nomen_med
+    nomen_manda_1 : sd.msf_sync_data_hq_nom_5
+    nomen_manda_2 : sd.msf_sync_data_hq_nom_29
+    nomen_manda_3 : sd.msf_sync_data_hq_nom_380
+    subtype : single
+-
+  
+-
+  !record {model: product.product, id: product_non_stockable2}:
+    default_code : AFOOCASS1TD
+    name : CASSOULET, duck, 1 kg, tin
+    track_production : f
+    track_outgoing : f
+    track_incoming : f
+    xmlid_code : AFOOCASS1TD
+    narcotic : f
+    single_use : no
+    short_shelf_life : f
+    controlled_substance : f
+    perishable : f
+    show_cold_chain : f
+    restricted_country : f
+    dangerous_goods : f
+    batch_management : f
+    sterilized : no
+    un_code : 
+    international_status : product_attributes.int_1
+    procure_delay : 60.0
+    transport_ok : f
+    list_price : 1.00100
+    weight : 
+    standard_price : 1.00000
+    uom_id : sd.product_product_uom_unit
+    uom_po_id : sd.product_product_uom_unit
+    type : consu
+    volume : 
+    procure_method : make_to_order
+    cost_method : average
+    nomen_manda_0 : sd.msf_config_locations_nomen_log
+    nomen_manda_1 : sd.msf_sync_data_hq_nom_3
+    nomen_manda_2 : sd.msf_sync_data_hq_nom_18
+    nomen_manda_3 : sd.msf_sync_data_hq_nom_515
+    subtype : single
+-
+  
+-
+  !record {model: product.product, id: product_standard_log1}:
+    default_code : ADAPCOCU---
+    name : COMPUTER, desktop, system unit
+    track_production : f
+    track_outgoing : f
+    track_incoming : f
+    xmlid_code : ADAPCOCU---
+    narcotic : f
+    single_use : no
+    short_shelf_life : f
+    controlled_substance : f
+    perishable : f
+    show_cold_chain : f
+    restricted_country : f
+    dangerous_goods : f
+    batch_management : f
+    sterilized : no
+    un_code : 
+    international_status : product_attributes.int_1
+    procure_delay : 60.0
+    transport_ok : f
+    list_price : 1.00100
+    weight : 
+    standard_price : 1.00000
+    uom_id : sd.product_product_uom_unit
+    uom_po_id : sd.product_product_uom_unit
+    type : product
+    volume : 
+    procure_method : make_to_order
+    cost_method : average
+    nomen_manda_0 : sd.msf_config_locations_nomen_log
+    nomen_manda_1 : sd.msf_sync_data_hq_nom_3
+    nomen_manda_2 : sd.msf_sync_data_hq_nom_17
+    nomen_manda_3 : sd.msf_sync_data_hq_nom_599
+    subtype : single
+-
+  
+-
+  !record {model: product.product, id: product_standard_log2}:
+    default_code : ADAPCOLABAT
+    name : (laptop computer) BATTERY (model to specify)
+    track_production : f
+    track_outgoing : f
+    track_incoming : f
+    xmlid_code : ADAPCOLABAT
+    narcotic : f
+    single_use : no
+    short_shelf_life : f
+    controlled_substance : f
+    perishable : f
+    show_cold_chain : f
+    restricted_country : f
+    dangerous_goods : t
+    batch_management : f
+    sterilized : no
+    un_code : UN3480
+    international_status : product_attributes.int_1
+    procure_delay : 60.0
+    transport_ok : f
+    list_price : 75.63556
+    weight : 0.79
+    standard_price : 75.56000
+    uom_id : sd.product_product_uom_unit
+    uom_po_id : sd.product_product_uom_unit
+    type : product
+    volume : 7.7708
+    procure_method : make_to_order
+    cost_method : average
+    nomen_manda_0 : sd.msf_config_locations_nomen_log
+    nomen_manda_1 : sd.msf_sync_data_hq_nom_3
+    nomen_manda_2 : sd.msf_sync_data_hq_nom_17
+    nomen_manda_3 : sd.msf_sync_data_hq_nom_606
+    subtype : single
+-
+  
+-
+  !record {model: product.product, id: product_log_asset2}:
+    default_code : TOYASSET2
+    name : Toyota HZJ79 Diesel
+    track_production : f
+    track_outgoing : f
+    track_incoming : f
+    xmlid_code : TOYASSET2
+    narcotic : f
+    single_use : 
+    short_shelf_life : f
+    controlled_substance : f
+    perishable : f
+    show_cold_chain : f
+    restricted_country : f
+    dangerous_goods : f
+    batch_management : f
+    sterilized : 
+    un_code : 
+    international_status : product_attributes.int_1
+    procure_delay : 60.0
+    transport_ok : f
+    list_price : 1.00100
+    weight : 0
+    standard_price : 1.00000
+    uom_id : sd.product_product_uom_unit
+    uom_po_id : sd.product_product_uom_unit
+    type : product
+    volume : 0
+    procure_method : make_to_stock
+    cost_method : average
+    nomen_manda_0 : sd.msf_config_locations_nomen_log
+    nomen_manda_1 : sd.msf_sync_data_hq_nom_15
+    nomen_manda_2 : sd.msf_sync_data_hq_nom_166
+    nomen_manda_3 : sd.msf_sync_data_hq_nom_1039
+    subtype : asset
+    asset_type_id : sd.product_asset_asset_type_transport
+-
+  
+-
+  !record {model: product.product, id: product_kit_med1}:
+    default_code : KMEDKBAS3--
+    name : BASIC UNIT, 1 000 persons/3 months IEHK 2011
+    track_production : f
+    track_outgoing : f
+    track_incoming : f
+    xmlid_code : KMEDKBAS3--
+    narcotic : f
+    single_use : no
+    short_shelf_life : f
+    controlled_substance : f
+    perishable : f
+    show_cold_chain : f
+    restricted_country : f
+    dangerous_goods : f
+    batch_management : f
+    sterilized : no
+    un_code : 
+    international_status : product_attributes.int_1
+    procure_delay : 60.0
+    transport_ok : f
+    list_price : 1.00100
+    weight : 
+    standard_price : 1.00000
+    uom_id : sd.product_product_uom_unit
+    uom_po_id : sd.product_product_uom_unit
+    type : product
+    volume : 
+    procure_method : make_to_order
+    cost_method : average
+    nomen_manda_0 : sd.msf_config_locations_nomen_med
+    nomen_manda_1 : sd.msf_sync_data_hq_nom_10
+    nomen_manda_2 : sd.msf_sync_data_hq_nom_64
+    nomen_manda_3 : sd.msf_sync_data_hq_nom_1187
+    subtype : kit
+-
+  
+-
+  !record {model: product.product, id: product_kit_med2}:
+    default_code : KMEDKFAI4--
+    name : KIT, FIRST AID, aluminium case
+    track_production : f
+    track_outgoing : f
+    track_incoming : f
+    xmlid_code : KMEDKFAI4--
+    narcotic : t
+    single_use : no
+    short_shelf_life : f
+    controlled_substance : f
+    perishable : f
+    show_cold_chain : f
+    restricted_country : f
+    dangerous_goods : f
+    batch_management : f
+    sterilized : no
+    un_code : To be c
+    international_status : product_attributes.int_1
+    procure_delay : 60.0
+    transport_ok : f
+    list_price : 705.22452
+    weight : 18
+    standard_price : 704.52000
+    uom_id : sd.product_product_uom_unit
+    uom_po_id : sd.product_product_uom_unit
+    type : product
+    volume : 98
+    procure_method : make_to_order
+    cost_method : average
+    nomen_manda_0 : sd.msf_config_locations_nomen_med
+    nomen_manda_1 : sd.msf_sync_data_hq_nom_10
+    nomen_manda_2 : sd.msf_sync_data_hq_nom_64
+    nomen_manda_3 : sd.msf_sync_data_hq_nom_1200
+    subtype : kit
+-
+  
+-
+  !record {model: product.product, id: product_kit_log2}:
+    default_code : KADMKLIF08-
+    name : KIT, LIFE, TEAM, installation, 8 persons/5 days
+    track_production : f
+    track_outgoing : f
+    track_incoming : f
+    xmlid_code : KADMKLIF08-
+    narcotic : f
+    single_use : no
+    short_shelf_life : f
+    controlled_substance : f
+    perishable : f
+    show_cold_chain : f
+    restricted_country : f
+    dangerous_goods : f
+    batch_management : f
+    sterilized : no
+    un_code : 
+    international_status : product_attributes.int_1
+    procure_delay : 60.0
+    transport_ok : f
+    list_price : 1.00100
+    weight : 655
+    standard_price : 1.00000
+    uom_id : sd.product_product_uom_unit
+    uom_po_id : sd.product_product_uom_unit
+    type : product
+    volume : 3190
+    procure_method : make_to_order
+    cost_method : average
+    nomen_manda_0 : sd.msf_config_locations_nomen_log
+    nomen_manda_1 : sd.msf_sync_data_hq_nom_9
+    nomen_manda_2 : sd.msf_sync_data_hq_nom_60
+    nomen_manda_3 : sd.msf_sync_data_hq_nom_1224
+    subtype : kit
+-
+  
+-
+  !record {model: product.product, id: product_asset_log1}:
+    default_code : PEUGASSET1
+    name : Peugeot Partner M59 Diesel
+    track_production : f
+    track_outgoing : f
+    track_incoming : f
+    xmlid_code : PEUGASSET1
+    narcotic : f
+    single_use : 
+    short_shelf_life : f
+    controlled_substance : f
+    perishable : f
+    show_cold_chain : f
+    restricted_country : f
+    dangerous_goods : f
+    batch_management : f
+    sterilized : 
+    un_code : 
+    international_status : product_attributes.int_1
+    procure_delay : 60.0
+    transport_ok : f
+    list_price : 1.00100
+    weight : 0
+    standard_price : 1.00000
+    uom_id : sd.product_product_uom_unit
+    uom_po_id : sd.product_product_uom_unit
+    type : product
+    volume : 0
+    procure_method : make_to_stock
+    cost_method : average
+    nomen_manda_0 : sd.msf_config_locations_nomen_log
+    nomen_manda_1 : sd.msf_sync_data_hq_nom_15
+    nomen_manda_2 : sd.msf_sync_data_hq_nom_165
+    nomen_manda_3 : sd.msf_sync_data_hq_nom_1337
+    subtype : asset
+    asset_type_id : sd.product_asset_asset_type_telecommunication
+-
+  
+-
+  !record {model: product.product, id: product_standard_med2}:
+    default_code : DDGTMALF41T
+    name : TEST, MALARIA HRP-2, rapid (CareStart), 1 test
+    track_production : f
+    track_outgoing : f
+    track_incoming : f
+    xmlid_code : DDGTMALF41T
+    heat_sensitive_item : sd.product_attributes_heat_2
+    narcotic : f
+    single_use : no
+    short_shelf_life : f
+    controlled_substance : f
+    perishable : f
+    show_cold_chain : f
+    restricted_country : f
+    dangerous_goods : f
+    batch_management : f
+    sterilized : no
+    un_code : 
+    international_status : product_attributes.int_1
+    procure_delay : 60.0
+    transport_ok : f
+    list_price : 0.59059
+    weight : 0.01
+    standard_price : 0.59000
+    uom_id : sd.product_product_uom_unit
+    uom_po_id : sd.product_product_uom_unit
+    type : product
+    volume : 0.04
+    procure_method : make_to_order
+    cost_method : average
+    nomen_manda_0 : sd.msf_config_locations_nomen_med
+    nomen_manda_1 : sd.msf_sync_data_hq_nom_5
+    nomen_manda_2 : sd.msf_sync_data_hq_nom_29
+    nomen_manda_3 : sd.msf_sync_data_hq_nom_1354
+    subtype : single
+-
+  
+-
+  !record {model: product.product, id: product_kit_log1}:
+    default_code : KADMMDUP01-
+    name : MODULE, DUPLICATOR
+    track_production : f
+    track_outgoing : f
+    track_incoming : f
+    xmlid_code : KADMMDUP01-
+    narcotic : f
+    single_use : no
+    short_shelf_life : f
+    controlled_substance : f
+    perishable : f
+    show_cold_chain : f
+    restricted_country : f
+    dangerous_goods : f
+    batch_management : f
+    sterilized : no
+    un_code : 
+    international_status : product_attributes.int_1
+    procure_delay : 60.0
+    transport_ok : f
+    list_price : 1.00100
+    weight : 
+    standard_price : 1.00000
+    uom_id : sd.product_product_uom_unit
+    uom_po_id : sd.product_product_uom_unit
+    type : product
+    volume : 
+    procure_method : make_to_order
+    cost_method : average
+    nomen_manda_0 : sd.msf_config_locations_nomen_log
+    nomen_manda_1 : sd.msf_sync_data_hq_nom_9
+    nomen_manda_2 : sd.msf_sync_data_hq_nom_60
+    nomen_manda_3 : sd.msf_sync_data_hq_nom_1393
+    subtype : kit
+-
+  
+-
+  !record {model: product.product, id: product_service2}:
+    default_code : UFSERV2
+    name : QT's Service Product 2
+    track_production : f
+    track_outgoing : f
+    track_incoming : f
+    xmlid_code : UFSERV2
+    narcotic : f
+    single_use : 
+    short_shelf_life : f
+    controlled_substance : f
+    perishable : f
+    show_cold_chain : f
+    restricted_country : f
+    dangerous_goods : f
+    batch_management : f
+    sterilized : 
+    un_code : 
+    international_status : product_attributes.int_1
+    procure_delay : 60.0
+    transport_ok : f
+    list_price : 1.00100
+    weight : 0
+    standard_price : 1.00000
+    uom_id : sd.product_product_uom_unit
+    uom_po_id : sd.product_product_uom_unit
+    type : service_recep
+    volume : 0
+    procure_method : make_to_order
+    cost_method : average
+    nomen_manda_0 : sd.msf_sync_data_hq_nom_1
+    nomen_manda_1 : sd.msf_sync_data_hq_nom_16
+    nomen_manda_2 : sd.msf_sync_data_hq_nom_180
+    nomen_manda_3 : sd.msf_sync_data_hq_nom_1635
+    subtype : single
+-
+  
+-
+  !record {model: product.product, id: product_service1}:
+    default_code : UFSERV1
+    name : Quentin's Service product 1
+    track_production : f
+    track_outgoing : f
+    track_incoming : f
+    xmlid_code : UFSERV1
+    narcotic : f
+    single_use : 
+    short_shelf_life : f
+    controlled_substance : f
+    perishable : f
+    show_cold_chain : f
+    restricted_country : f
+    dangerous_goods : f
+    batch_management : f
+    sterilized : 
+    un_code : 
+    international_status : product_attributes.int_1
+    procure_delay : 60.0
+    transport_ok : f
+    list_price : 1.00100
+    weight : 0
+    standard_price : 1.00000
+    uom_id : sd.product_product_uom_unit
+    uom_po_id : sd.product_product_uom_unit
+    type : service_recep
+    volume : 0
+    procure_method : make_to_order
+    cost_method : average
+    nomen_manda_0 : sd.msf_sync_data_hq_nom_1
+    nomen_manda_1 : sd.msf_sync_data_hq_nom_16
+    nomen_manda_2 : sd.msf_sync_data_hq_nom_180
+    nomen_manda_3 : sd.msf_sync_data_hq_nom_1635
+    subtype : single
+-
+  
+-
+  !record {model: product.product, id: product_asset_med2}:
+    default_code : SPEPASSET2
+    name : Spectrophotometer (Asset)
+    track_production : f
+    track_outgoing : f
+    track_incoming : f
+    xmlid_code : SPEPASSET2
+    narcotic : f
+    single_use : 
+    short_shelf_life : f
+    controlled_substance : f
+    perishable : f
+    show_cold_chain : f
+    restricted_country : f
+    dangerous_goods : f
+    batch_management : f
+    sterilized : 
+    un_code : 
+    international_status : product_attributes.int_1
+    procure_delay : 60.0
+    transport_ok : f
+    list_price : 1.00100
+    weight : 0
+    standard_price : 1.00000
+    uom_id : sd.product_product_uom_unit
+    uom_po_id : sd.product_product_uom_unit
+    type : product
+    volume : 0
+    procure_method : make_to_stock
+    cost_method : average
+    nomen_manda_0 : sd.msf_config_locations_nomen_med
+    nomen_manda_1 : sd.msf_sync_data_hq_nom_6
+    nomen_manda_2 : sd.msf_sync_data_hq_nom_41
+    nomen_manda_3 : sd.msf_sync_data_hq_nom_2231
+    subtype : asset
+    asset_type_id : sd.product_asset_asset_type_medical
+-
+  
+-
+  !record {model: product.product, id: product_asset_med1}:
+    default_code : XRAYASSET1
+    name : X-ray unit 1 (Asset)
+    track_production : f
+    track_outgoing : f
+    track_incoming : f
+    xmlid_code : XRAYASSET1
+    narcotic : f
+    single_use : 
+    short_shelf_life : f
+    controlled_substance : f
+    perishable : f
+    show_cold_chain : f
+    restricted_country : f
+    dangerous_goods : f
+    batch_management : f
+    sterilized : 
+    un_code : 
+    international_status : product_attributes.int_1
+    procure_delay : 60.0
+    transport_ok : f
+    list_price : 1.00100
+    weight : 0
+    standard_price : 1.00000
+    uom_id : sd.product_product_uom_unit
+    uom_po_id : sd.product_product_uom_unit
+    type : product
+    volume : 0
+    procure_method : make_to_stock
+    cost_method : average
+    nomen_manda_0 : sd.msf_config_locations_nomen_med
+    nomen_manda_1 : sd.msf_sync_data_hq_nom_6
+    nomen_manda_2 : sd.msf_sync_data_hq_nom_39
+    nomen_manda_3 : sd.msf_sync_data_hq_nom_2619
+    subtype : asset
+    asset_type_id : sd.product_asset_asset_type_medical
