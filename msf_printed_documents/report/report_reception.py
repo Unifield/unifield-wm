@@ -116,7 +116,7 @@ class report_reception(report_sxw.rml_parse):
     
     def getQtyIS(self,line,o):
         # Amount received in this IN only
-        if o.state == 'assigned':
+        if o.state in ('assigned', 'shipped'):
             val = 0
         else:
             val = line.product_qty 
