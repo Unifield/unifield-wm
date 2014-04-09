@@ -123,6 +123,7 @@ class output_currency_for_export(osv.osv_memory):
             datas = {'ids': context.get('active_ids', [])}
         else:
             context['from_domain'] = True
+            datas = {'ids': context.get('active_ids', [])}
         # Update context with wizard currency or default currency
         context.update({'output_currency_id': currency_id})
         # Update datas for context

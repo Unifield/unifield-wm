@@ -254,6 +254,7 @@ class account_line_csv_export(osv.osv_memory):
                     csv_line.append(company_currency.encode('utf-8') or '')
                 else:
                     #output debit/credit
+                    context.update({'date': al.date })
                     amount = currency_obj.compute(cr, uid, al.currency_id.id, currency_id, al.amount_currency, round=True, context=context)
                     csv_line.append(amount or 0.0)
                     #output currency
