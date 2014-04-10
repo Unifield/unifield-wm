@@ -260,15 +260,19 @@ class hq_entries_validation(osv.osv_memory):
                     raise osv.except_osv(_('Warning'), _('No analytic correction journal found!'))
                 ana_line_obj.write(cr, uid, res_reverse, {'journal_id': acor_journal_id})
 
-
                 # Mark new analytic items as correction for original line
                 # - take original move line
                 # - search linked analytic line
                 # - use new journal items (from split lines) to find their analytic lines
                 # - add "last_corrected_id" link for all these new analytic lines to the first one (original analytic line)
+                # - update entry sequence of original reversal to OD journal
                 original_aal_ids = ana_line_obj.search(cr, uid, [('move_id', '=', original_ml_result)])
                 new_aal_ids = ana_line_obj.search(cr, uid, [('move_id', 'in', new_expense_ml_ids)])
                 ana_line_obj.write(cr, uid, new_aal_ids, {'last_corrected_id': original_aal_ids[0],})
+                od_entry_seq = ana_line_obj.browse(cr, uid, new_aal_ids, context=context)[0].entry_sequence
+                # check=False not working, resorting to SQL
+                #ana_line_obj.write(cr, uid, res_reverse, {'entry_sequence': od_entry_seq}, context=context, check=False, update_check=False)
+                cr.execute("update account_analytic_line set entry_sequence = '%s' where id = %s" % (od_entry_seq, res_reverse[0]))
             else:
                 # Search the initial analytic lines to reverse them
                 initial_ana_ids = ana_line_obj.search(cr, uid, [('move_id.move_id', '=', move_id)])
