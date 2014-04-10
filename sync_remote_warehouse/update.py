@@ -1,5 +1,10 @@
+import logging
+
 from osv import osv, fields
 import tools
+
+
+_logger = logging.getLogger(__name__)
 
 class UpdateReceived(osv.osv):
     _inherit = 'sync.client.update_received'
@@ -30,6 +35,7 @@ class UpdateToSend(osv.osv):
         return super(UpdateToSend, self).sync_finished(cr, uid, update_ids, sync_field="usb_sync_date", context=context)
     
     def create_update(self, cr, uid, rule_id, session_id, context=None):
+        _logger.debug("Creating Synch RW updates for rule #%d...", rule_id)
         rule = self.pool.get('sync.client.rule').browse(cr, uid, rule_id, context=context)
         update = self
         
