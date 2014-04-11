@@ -3,6 +3,7 @@ import logging
 from osv import osv, fields
 import tools
 
+from sync_client.update import re_fieldname
 
 _logger = logging.getLogger(__name__)
 
@@ -46,7 +47,9 @@ class UpdateToSend(osv.osv):
                 included_fields.append('id')
 
             ids_to_compute = self.usb_need_to_push(cr, uid,
-                self.search_ext(cr, uid, domain, context=context), context=context)
+                self.search_ext(cr, uid, domain, context=context),
+                [m.group(0) for m in map(re_fieldname.match, included_fields)],
+                context=context)
             if not ids_to_compute:
                 return 0
 

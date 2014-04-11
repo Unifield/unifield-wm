@@ -13,7 +13,7 @@ def get_unique_xml_name(self, cr, uid, uuid, table_name, res_id):
     
 orm.orm.get_unique_xml_name = get_unique_xml_name
 
-def usb_need_to_push(self, cr, uid, ids, context=None):
+def usb_need_to_push(self, cr, uid, ids, touched_fields=None, context=None):
         """
         
         Check if records need to be pushed to the next USB synchronization process
@@ -56,7 +56,7 @@ def usb_need_to_push(self, cr, uid, ids, context=None):
         # Optimization for not deleted records:
         # Filter data where sync_date < last_modification OR sync_date IS NULL        
         cr.execute("""\
-        SELECT res_id
+        SELECT res_id, touched
             FROM ir_model_data
             WHERE module = 'sd' AND
                   model = %%s AND
@@ -65,7 +65,15 @@ def usb_need_to_push(self, cr, uid, ids, context=None):
                   (usb_sync_date < last_modification OR usb_sync_date < sync_date OR usb_sync_date IS NULL)""" % {'clone_date' : clone_date},
         [self._name, tuple(ids)])
         
-        result = [row[0] for row in cr.fetchall()]
-        return result if result_iterable else len(result) > 0
+        if touched_fields is None:
+            result = [row[0] for row in cr.fetchall()]
+            return result if result_iterable else len(result) > 0
+        else:
+            touched_fields = set(touched_fields)
+            result = [row[0] for row in cr.fetchall()
+                      if row[1] is None or \
+                         touched_fields.intersection(
+                             eval(row[1]) if row[1] else [])]
+            return result
 
 orm.orm.usb_need_to_push = usb_need_to_push
