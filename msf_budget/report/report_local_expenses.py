@@ -132,12 +132,13 @@ class report_local_expenses(WebKitParser):
                         line += [int(round(sum(expense_values)))]
                         # append to result
                         result_data.append(line)
-                        if expense_account.type != 'view' or data['form']['granularity'] != 'all':
-                            # add to the total
-                            total_line = [sum(pair) for pair in zip(expense_values, total_line)]
-                            total_amount += sum(expense_values)
+                if expense_account.type != 'view': # or data['form']['granularity'] != 'all':
+                    # add to the total
+                    total_line = [sum(pair) for pair in zip(expense_values, total_line)]
+                    total_amount += sum(expense_values)
             # Format total
-            total_line = [_('Total'), ''] + map(int, map(round, total_line)) + [int(round(total_amount))]
+            #total_line = [_('Total'), ''] + map(int, map(round, total_line)) + [int(round(total_amount))]
+            total_line = [_('Total'), ''] + [int(round(total_amount))]
 
             data['form']['header'] = header_data
             data['form']['report_lines'] = result_data
