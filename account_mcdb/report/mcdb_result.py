@@ -35,9 +35,13 @@ limit_tozip = 15000
 def getIds(self, cr, uid, ids, limit=5000, context=None):
     if not context:
         context = {}
-    if context.get('from_domain') and 'search_domain' in context and not context.get('export_selected'):
-        table_obj = pooler.get_pool(cr.dbname).get(self.table)
-        ids = table_obj.search(cr, uid, context.get('search_domain'), limit=limit)
+    #if context.get('from_domain') and 'search_domain' in context and not context.get('export_selected'):
+    if context.get('from_domain') and not context.get('export_selected'):
+        table_obj = pooler.get_pool(cr.dbname).get(context['active_model'])
+        if context.get('search_domain'):
+            ids = table_obj.search(cr, uid, context.get('search_domain'), limit=limit)
+        else:
+            ids = table_obj.search(cr, uid, [(True,'=',True)], limit=limit)
     return ids
 
 def getObjects(self, cr, uid, ids, context):
