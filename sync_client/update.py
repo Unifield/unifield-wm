@@ -706,11 +706,11 @@ class update_received(osv.osv):
             res = True
             msg = 'Current version %s superior to next version: %s' % (data_rec.get('version'), next_version)
         # Conflict if not synchronized (not deleted and no sync_date)
-        if not deleted and not sync_date:
+        elif not deleted and not sync_date:
             res = True
             msg = 'Never synced!'
         # Conflict if 
-        if not deleted and (last_modif and sync_date < last_modif):
+        elif not deleted and (last_modif and sync_date < last_modif):
             res = True
             msg = 'Modification after synchro!'
         return res, msg
