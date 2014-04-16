@@ -696,13 +696,13 @@ class update_received(osv.osv):
         # no data => no record => no conflict
         if not data_id: return 'No data, no record, no conflict'
         data_rec = ir_data.read(cr, uid, data_id, ['is_deleted', 'sync_date', 'last_modification', 'version'], context=context)
-        deleted = data_rec.get('is_deleted', False)
-        version = data_rec.get('version', False)
-        sync_date = data_rec.get('sync_date', False)
-        last_modif = data_rec.get('last_modification', False)
+        deleted = data_rec['is_deleted']
+        version = data_rec['version']
+        sync_date = data_rec['sync_date']
+        last_modif = data_rec['last_modification']
         # Conflict if next_version inferior to current one
         if next_version < version:
-            msg = 'Current version %s superior to next version: %s' % (data_rec.get('version'), next_version)
+            msg = 'Current version %s superior to next version: %s' % (version, next_version)
         # Conflict if not synchronized (not deleted and no sync_date)
         elif not deleted and not sync_date:
             msg = 'Never synced!'
