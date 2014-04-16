@@ -469,10 +469,10 @@ class update_received(osv.osv):
                 versions.append( (update.sdref, update.version) )
 
                 #1 conflict detection
-                conflict_result, conflict_msg = self._conflict(cr, uid, update.sdref, update.version, context=context)
-                if conflict_result:
+                conflict = self._conflict(cr, uid, update.sdref, update.version, context=context)
+                if conflict:
                     #2 if conflict => manage conflict according rules : report conflict and how it's solve
-                    logs[update.id] = sync_log(self, "Conflict detected! %s" % (conflict_msg or ''), 'warning', data=(update.id, update.fields, update.values)) + "\n"
+                    logs[update.id] = sync_log(self, "Conflict detected! %s" % (conflict or ''), 'warning', data=(update.id, update.fields, update.values)) + "\n"
 
             if bad_fields:
                 import_fields = [import_fields[i] for i in range(len(import_fields)) if i not in bad_fields]
@@ -690,12 +690,11 @@ class update_received(osv.osv):
           - never synced (not deleted and no sync_date)
           - not deleted and last_modification and last_modification is superior to sync_date
         '''
-        res = False
         msg = ''
         ir_data = self.pool.get('ir.model.data')
         data_id = ir_data.find_sd_ref(cr, uid, sdref, context=context)
         # no data => no record => no conflict
-        if not data_id: return False, 'No data, no record, no conflict'
+        if not data_id: return 'No data, no record, no conflict'
         data_rec = ir_data.read(cr, uid, data_id, ['is_deleted', 'sync_date', 'last_modification', 'version'], context=context)
         deleted = data_rec.get('is_deleted', False)
         version = data_rec.get('version', False)
@@ -703,17 +702,14 @@ class update_received(osv.osv):
         last_modif = data_rec.get('last_modification', False)
         # Conflict if next_version inferior to current one
         if next_version < version:
-            res = True
             msg = 'Current version %s superior to next version: %s' % (data_rec.get('version'), next_version)
         # Conflict if not synchronized (not deleted and no sync_date)
         elif not deleted and not sync_date:
-            res = True
             msg = 'Never synced!'
         # Conflict if 
         elif not deleted and (last_modif and sync_date < last_modif):
-            res = True
             msg = 'Modification after synchro!'
-        return res, msg
+        return msg
 
     def _check_and_replace_missing_id(self, cr, uid, fields, values, fallback, message, context=None):
         ir_model_data_obj = self.pool.get('ir.model.data')
