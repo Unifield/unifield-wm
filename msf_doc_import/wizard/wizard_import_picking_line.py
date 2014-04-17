@@ -231,7 +231,7 @@ class wizard_import_pick_line(osv.osv_memory):
                                                                                 date_format=date_format,
                                                                                 product_id=to_write.get('product_id'),)
                             to_write.update({'prodlot_id': batch_value['prodlot_id'],
-                                             'expired_date': batch_value['expired_date'],
+                                             'expiry_date': batch_value['expiry_date'],
                                              'error_list': batch_value['error_list']})
 
 
