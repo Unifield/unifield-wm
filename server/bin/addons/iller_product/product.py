@@ -26,6 +26,7 @@ from osv import osv
 from tools import config
 from datetime import datetime
 import time
+import decimal
 
 
 class product_category(osv.osv):
@@ -115,9 +116,10 @@ class product_product(osv.osv):
             vals['prix_blanche'] = vals.get('prix_achat', prd.prix_achat)*vals.get('coeff_blanche', prd.coeff_blanche)
 
             if 'prix_achat' in vals:
+                prix_vente = decimal.Decimal(vals.get('prix_achat')*vals.get('coeff_depart', prd.coeff_depart)).quantize(decimal.Decimal('.01'), rounding=decimal.ROUND_DOWN)
                 data_history = {'name': datetime.now(),
                                 'nouveau_prix_achat': vals.get('prix_achat'),
-                                'nouveau_prix_vente': vals.get('prix_achat')*vals.get('coeff_depart', prd.coeff_depart),
+                                'nouveau_prix_vente': prix_vente,
                                 'nouveau_prix_blanche': vals.get('prix_achat')*vals.get('coeff_blanche', prd.coeff_blanche),
                                 'product_id': prd.id,
                                 'comment': ''}
@@ -129,9 +131,10 @@ class product_product(osv.osv):
                     self.pool.get('product.price.history').create(cr, uid, data_history)
 
             if ('coeff_depart' in vals or 'coeff_blanche' in vals) and not 'prix_achat' in vals:
+                prix_vente = decimal.Decimal(prd.prix_achat*vals.get('coeff_depart', prd.coeff_depart)).quantize(decimal.Decimal('.01'), rounding=decimal.ROUND_DOWN)
                 data_history = {'name': datetime.now(),
                                 'nouveau_prix_achat': prd.prix_achat,
-                                'nouveau_prix_vente': prd.prix_achat*vals.get('coeff_depart', prd.coeff_depart),
+                                'nouveau_prix_vente': prix_vente,
                                 'nouveau_prix_blanche': prd.prix_achat*vals.get('coeff_blanche', prd.coeff_blanche),
                                 'product_id': prd.id,
                                 'comment': ''}
