@@ -694,7 +694,7 @@ class update_received(osv.osv):
         ir_data = self.pool.get('ir.model.data')
         data_id = ir_data.find_sd_ref(cr, uid, sdref, context=context)
         # no data => no record => no conflict
-        if not data_id: return 'No data, no record, no conflict'
+        if not data_id: return ''
         data_rec = ir_data.read(cr, uid, data_id, ['is_deleted', 'sync_date', 'last_modification', 'version'], context=context)
         deleted = data_rec['is_deleted']
         version = data_rec['version']
