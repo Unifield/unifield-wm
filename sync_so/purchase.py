@@ -19,14 +19,16 @@
 #
 ##############################################################################
 
+from textwrap import dedent
+import pprint
+import logging
+
 from osv import osv, fields
+from tools.translate import _
 import netsvc
 
-import logging
-import pdb
-from tools.translate import _
-
 from sync_client import get_sale_purchase_logger
+from sync_common import xmlid_to_sdref
 
 
 class purchase_order_line_sync(osv.osv):
@@ -214,7 +216,7 @@ class purchase_order_sync(osv.osv):
         proc_ids = []
         order_ids = []
         order = self.browse(cr, uid, res_id, context=context)
-        #pdb.set_trace()
+        #import pdb; pdb.set_trace()
         for order_line in order.order_line:
             if order_line.original_purchase_line_id:
                 orig_line = line_obj.search(cr, uid, [('sync_order_line_db_id', '=', order_line.original_purchase_line_id)], context=context)
@@ -532,6 +534,12 @@ class purchase_order_sync(osv.osv):
         self._logger.info(message)
         return message
 
+    ###########################################################################
+    ##
+    ##  Methods to record logs of changes on this model
+    ##
+    #####################################################
+
     def on_create(self, cr, uid, id, values, context=None):
         if context is None \
            or not context.get('sync_message_execution') \
@@ -571,5 +579,91 @@ class purchase_order_sync(osv.osv):
                 logger.is_quantity_modified |= ('product_qty' in line_changes)
                 logger.is_product_price_modified |= \
                     ('price_unit' in line_changes)
+
+    ###########################################################################
+    ##
+    ##  Remote Warehouse Synchronization
+    ##
+    ######################################
+
+    def replicate_approved_po_from_cp_on_rw(
+            self, cr, uid, source, data, context=None):
+        #assert we're a RW instance
+        #assert source is our CP instance
+        model_line = self.pool['purchase.order.line']
+        model_data = self.pool['ir.model.data']
+        model_picking = self.pool['stock.picking']
+
+        # Extract lines and pickings values
+        po = data.values
+        po_sdref = xmlid_to_sdref(po.pop('id'))
+        lines = po.pop('order_line')
+        pickings = po.pop('picking_ids')
+
+        self.convert_sdref_in_dict_to_id(cr, uid, po, context=context)
+
+        # Create purchase order
+        info = dedent("""\
+            Purchase order replicated coming from central platform:
+            sdref: %s
+            ref: %s
+            \n""" % (po_sdref, po['name']))
+        po_id = self.create(cr, uid, po, context=context)
+
+        # overwrite sdref to make it match the one of the message
+        model_data.create(cr, uid, {
+            'module': 'sd', 'name': po_sdref,
+            'model': self._name, 'res_id': po_id,
+        }, context=context)
+
+        # Create lines
+        if lines:
+            info += "Lines:\n"
+            for line in lines:
+                line_sdref = xmlid_to_sdref(line.pop('id'))
+                line['order_id'] = po_id
+                model_line.convert_sdref_in_dict_to_id(
+                    cr, uid, line, context=context)
+                line_id = model_line.create(cr, uid, line, context=context)
+                # overwrite sdref to make it match the one of the message
+                model_data.create(cr, uid, {
+                    'module': 'sd', 'name': line_sdref,
+                    'model': 'purchase.order.line', 'res_id': line_id,
+                }, context=context)
+                info += " - Ref: %s / sdref: %s\n" % (line['name'], line_sdref)
+            info += "\n"
+        else:
+            info += "No line.\n"
+
+        # Confirm
+        netsvc.LocalService("workflow").trg_validate(
+            uid, 'purchase.order', po_id, 'purchase_confirm', cr)
+
+        # Approve (the functional "Confirm")
+        netsvc.LocalService("workflow").trg_validate(
+            uid, 'purchase.order', po_id, 'purchase_approve', cr)
+
+        # Overwrite automatically created pickings by ones of CP
+        if pickings:
+            info += "Pickings:\n"
+            existing_pickings = model_picking.search(cr, uid,
+                [('purchase_id', '=', po_id)], context=context)
+            assert len(pickings) == len(existing_pickings)
+            for i, picking in zip(existing_pickings, pickings):
+                picking_sdref = xmlid_to_sdref(picking.pop('id'))
+                model_picking.convert_sdref_in_dict_to_id(
+                    cr, uid, picking, context=context)
+                model_picking.write(cr, uid, i, picking, context=context)
+                # overwrite sdref to make it match the one of the message
+                model_data.create(cr, uid, {
+                    'module': 'sd', 'name': picking_sdref,
+                    'model': 'stock.picking', 'res_id': i,
+                }, context=context)
+                info += " - Ref: %s / sdref: %s\n" % (line['name'], line_sdref)
+            info += "\n"
+        else:
+            info += "No picking.\n\n"
+
+        return info.rstrip()
 
 purchase_order_sync()
