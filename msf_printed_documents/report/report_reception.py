@@ -20,7 +20,9 @@
 ##############################################################################
 
 import time
+
 from report import report_sxw
+
 
 class report_reception(report_sxw.rml_parse):
     def __init__(self, cr, uid, name, context=None):
@@ -54,7 +56,7 @@ class report_reception(report_sxw.rml_parse):
             'getQtyBO': self.getQtyBO,
         })
 
-    def getOriginRef(self,o):
+    def getOriginRef(self, o):
         return o and o.purchase_id and o.purchase_id.origin or False
 
     def getWarning(self, o):
@@ -72,27 +74,27 @@ class report_reception(report_sxw.rml_parse):
         tab = []
         if kc_flag or dg_flag:
             warn += 'You are about to receive'
-        if kc_flag :
+        if kc_flag:
             tab.append('heat sensitive')
-        if dg_flag :
+        if dg_flag:
             tab.append('dangerous')
-        if len(tab) > 0 :
-            if len(tab) ==1:
+        if len(tab) > 0:
+            if len(tab) == 1:
                 warn += ' ' + tab[0]
             elif len(tab) == 2:
                 warn += ' ' + tab[0] + ' and ' + tab[1]
             elif len(tab) == 3:
-                warn += ' ' + tab[0] + ', ' + tab[1] + ' and ' +  tab[2]
+                warn += ' ' + tab[0] + ', ' + tab[1] + ' and ' + tab[2]
         if warn:
             warn += ' goods products, please refer to the appropriate procedures'
         return warn
 
-    def getQtyPO(self,line):
+    def getQtyPO(self, line):
         # line amount from the PO, always the same on all INs for a given PO
         val = line.purchase_line_id.product_qty if line.purchase_line_id else 0
         return "{0:.2f}".format(val)
 
-    def getQtyBO(self,line,o):
+    def getQtyBO(self, line, o):
         # Back Order amount = PO amount - all receipts
 
         # get PO qty
@@ -101,7 +103,10 @@ class report_reception(report_sxw.rml_parse):
         cr, uid = self.cr, self.uid
         val = 0.00
         stock_move_obj = self.pool.get('stock.move')
-        closed_move_ids = stock_move_obj.search(cr, uid, [('purchase_line_id','=',line.purchase_line_id.id),('state','=','done'),('type','=','in')])
+        closed_move_ids = stock_move_obj.search(cr, uid, [
+            ('purchase_line_id', '=', line.purchase_line_id.id),
+            ('state', '=', 'done'), ('type', '=', 'in'),
+        ])
         if closed_move_ids:
             stock_moves = stock_move_obj.browse(cr, uid, closed_move_ids)
             if stock_moves:
@@ -114,7 +119,7 @@ class report_reception(report_sxw.rml_parse):
 
         return "{0:.2f}".format(qtyBO)
 
-    def getQtyIS(self,line,o):
+    def getQtyIS(self, line, o):
         # Amount received in this IN only
         # REF-96: Don't count the shipped available IN
         if o.state in ('assigned', 'shipped'):
@@ -122,67 +127,61 @@ class report_reception(report_sxw.rml_parse):
         else:
             val = line.product_qty
         if val == 0:
-            return ' ' # Set blank instead of 0.0
+            return ' '  # Set blank instead of 0.0
         return "{0:.2f}".format(val)
 
-
-    def getProject(self,o):
+    def getProject(self, o):
         return o and o.purchase_id and o.purchase_id.dest_address_id and o.purchase_id.dest_address_id.name or False
 
-    def getDetail(self,o):
+    def getDetail(self, o):
         return o and o.purchase_id and o.purchase_id.details or False
 
-    def getPOref(self,o):
+    def getPOref(self, o):
         return o and o.purchase_id and o.purchase_id.name or False
 
-    def getERD(self,o):
-        return time.strftime('%d/%m/%Y', time.strptime(o.min_date,'%Y-%m-%d %H:%M:%S'))
+    def getERD(self, o):
+        return time.strftime('%d/%m/%Y', time.strptime(o.min_date, '%Y-%m-%d %H:%M:%S'))
 
-    def getPartnerCity(self,o):
+    def getPartnerCity(self, o):
         return o.purchase_id and o.purchase_id.partner_address_id and o.purchase_id.partner_address_id.city or False
 
-    def getPartnerPhone(self,o):
+    def getPartnerPhone(self, o):
         return o.purchase_id and o.purchase_id.partner_address_id and o.purchase_id.partner_address_id.phone or False
 
-    def getPartnerName(self,o):
+    def getPartnerName(self, o):
         return o.purchase_id and o.purchase_id.partner_id and o.purchase_id.partner_id.name or False
 
-    def getPartnerAddress(self,o):
+    def getPartnerAddress(self, o):
         temp = o.purchase_id and o.purchase_id.partner_address_id.name_get()
         if temp:
             return temp[0][1]
 
-    def getWarehouse(self,o):
+    def getWarehouse(self, o):
         return o.warehouse_id and o.warehouse_id.name or False
 
-    def getConfirmedDeliveryDate(self,o):
+    def getConfirmedDeliveryDate(self, o):
         if o.purchase_id:
-            return time.strftime('%d/%m/%Y', time.strptime( o.purchase_id.delivery_confirmed_date,'%Y-%m-%d'))
+            return time.strftime('%d/%m/%Y', time.strptime(o.purchase_id.delivery_confirmed_date, '%Y-%m-%d'))
         return False
 
-    def getTotItems(self,o):
+    def getTotItems(self, o):
         return len(o.move_lines)
 
-    def check(self,line,opt):
-        if opt == 'kc':
-            if line.kc_check:
-                return 'X'
-            return ' '
-        elif opt == 'dg':
-            if line.dg_check:
-                return 'X'
-            return ' '
-        elif opt == 'np':
-            if line.np_check:
-                return 'X'
-            return ' '
-        elif opt == 'bm':
-            if line.product_id.batch_management:
-                return 'X'
-            return ' '
-        elif opt == 'ed':
-            if line.product_id.perishable:
-                return 'X'
+    def check(self, line, opt):
+        # Keep Cool
+        kc = opt == 'kc' and line.kc_check
+        # Dangerous goods
+        dg = opt == 'dg' and line.dg_check
+        # Narcotic
+        np = opt == 'np' and line.np_check
+        # Batch mandatory
+        bm = opt == 'bm' and line.product_id and line.product_id.batch_management
+        # Expiry date mandatory
+        ed = opt == 'ed' and line.product_id and line.product_id.perishable
+
+        if kc or dg or np or bm or ed:
+            return 'X'
+        else:
             return ' '
 
     def getNbItem(self, ):
@@ -190,25 +189,30 @@ class report_reception(report_sxw.rml_parse):
         return self.item
 
     def getDateCreation(self, o):
-        return time.strftime('%d-%b-%Y', time.strptime(o.creation_date,'%Y-%m-%d %H:%M:%S'))
+        return time.strftime('%d-%b-%Y', time.strptime(o.creation_date, '%Y-%m-%d %H:%M:%S'))
 
     def getBatch(self, line):
         return line.prodlot_id.name
 
     def getExpDate(self, line):
-        return time.strftime('%d/%m/%Y', time.strptime(line.prodlot_id.life_date,'%Y-%m-%d'))
+        return time.strftime('%d/%m/%Y', time.strptime(line.prodlot_id.life_date, '%Y-%m-%d'))
 
-
-    def getActualReceiptDate(self,o):
+    def getActualReceiptDate(self, o):
         if o.state == 'assigned':
-          actual_receipt_date = ''
+            actual_receipt_date = ''
         else:
-            actual_receipt_date = time.strftime('%d/%m/%Y', time.strptime(o.date,'%Y-%m-%d %H:%M:%S'))
+            actual_receipt_date = time.strftime('%d/%m/%Y', time.strptime(o.date, '%Y-%m-%d %H:%M:%S'))
         return actual_receipt_date
 
     def get_lines(self, o):
         return o.move_lines
 
-report_sxw.report_sxw('report.msf.report_reception_in', 'stock.picking', 'addons/msf_printed_documents/report/report_reception.rml', parser=report_reception, header=False)
+report_sxw.report_sxw(
+    'report.msf.report_reception_in',
+    'stock.picking',
+    'addons/msf_printed_documents/report/report_reception.rml',
+    parser=report_reception,
+    header=False,
+)
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
