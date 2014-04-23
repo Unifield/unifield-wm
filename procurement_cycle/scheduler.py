@@ -51,7 +51,11 @@ class procurement_order(osv.osv):
 
         start_date = time.strftime('%Y-%m-%d %H:%M:%S')
         
-        cycle_ids = cycle_obj.search(cr, uid, [('next_date', '<=', datetime.now())])
+        domain = [
+            ('next_date', '<=', datetime.now()),
+            ('is_in_progress', '!=', True),
+        ]
+        cycle_ids = cycle_obj.search(cr, uid, domain, context=context)
         
         created_proc = []
         report = []
@@ -150,7 +154,7 @@ Created documents : \n'''
 
         if isinstance(product_id, (int, long)):
             product_id = [product_id]
-            
+          
         if d_values.get('past_consumption', False):
             # If the AMC should be used, compute the period of calculation
             if not d_values.get('consumption_period_from', False):
@@ -172,7 +176,11 @@ Created documents : \n'''
         if quantity_to_order <= 0.00:
             return False
         else:
-            proc_id = proc_obj.create(cr, uid, {
+            # set cycle in progress flag
+            cycle_obj.write(cr, uid, [cycle.id], {'is_in_progress': True}, context=context)
+ 
+            try:
+                proc_id = proc_obj.create(cr, uid, {
                                     'name': _('Procurement cycle: %s') % (cycle.name,),
                                     'origin': cycle.name,
                                     'date_planned': newdate,
@@ -181,12 +189,16 @@ Created documents : \n'''
                                     'product_uom': product.uom_id.id,
                                     'location_id': location_id,
                                     'procure_method': 'make_to_order',
-            })
-            # Confirm the procurement order
-            wf_service.trg_validate(uid, 'procurement.order', proc_id, 'button_confirm', cr)
-            wf_service.trg_validate(uid, 'procurement.order', proc_id, 'button_check', cr)
-            context.update({'button': 'scheduler'})
-            cycle_obj.write(cr, uid, [cycle.id], {'procurement_id': proc_id}, context=context)
+                })
+                # Confirm the procurement order
+                wf_service.trg_validate(uid, 'procurement.order', proc_id, 'button_confirm', cr)
+                wf_service.trg_validate(uid, 'procurement.order', proc_id, 'button_check', cr)
+            except Exception, e:
+                # reset in progress flag 
+                cycle_obj.write(cr, uid, [cycle.id], {'is_in_progress': False}, context=context)
+                raise e
+            context['button'] = 'scheduler'
+            cycle_obj.write(cr, uid, [cycle.id], {'procurement_id': proc_id, 'is_in_progress': False}, context=context)
         
         return proc_id
     

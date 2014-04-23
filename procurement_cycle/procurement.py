@@ -160,6 +160,7 @@ Time used to compute the quantity of products to order according to the monthly 
         'nomen_manda_1': fields.many2one('product.nomenclature', 'Group'),
         'nomen_manda_2': fields.many2one('product.nomenclature', 'Family'),
         'nomen_manda_3': fields.many2one('product.nomenclature', 'Root'),
+        'is_in_progress': fields.boolean('In progress flag', invisible=True),  
     }
     
     _defaults = {
@@ -167,6 +168,7 @@ Time used to compute the quantity of products to order according to the monthly 
         'active': lambda *a: 1,
         'name': lambda x,y,z,c: x.pool.get('ir.sequence').get(y,z,'stock.order.cycle') or '',
         'order_coverage': lambda *a: 3,
+        'is_in_progress': False,
     }
     
     def default_get(self, cr, uid, fields, context=None):
@@ -391,6 +393,7 @@ Time used to compute the quantity of products to order according to the monthly 
 
         default.update({
             'name': self.pool.get('ir.sequence').get(cr, uid, 'stock.order.cycle') or '',
+            'is_in_progress': False,  # reset in progress flag
         })
         return super(stock_warehouse_order_cycle, self).copy(cr, uid, ids, default, context=context)
     
