@@ -133,6 +133,9 @@ class message_to_send(osv.osv):
         context = dict(context or {})
         context['active_test'] = False
 
+        if isinstance(rule, (int, long)):
+            rule = self.pool.get('sync.client.message_rule').browse(cr, uid, rule, context=context)
+
         # either use rule filter_method or domain to find records for message
         if rule.filter_method:
             obj_ids = getattr(self.pool.get(rule.model), rule.filter_method)(cr, uid, rule, context=context)
