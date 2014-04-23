@@ -176,6 +176,14 @@ class report_reception(report_sxw.rml_parse):
             if line.np_check:
                 return 'X'
             return ' '
+        elif opt == 'bm':
+            if line.product_id.batch_management:
+                return 'X'
+            return ' '
+        elif opt == 'ed':
+            if line.product_id.perishable:
+                return 'X'
+            return ' '
 
     def getNbItem(self, ):
         self.item += 1
