@@ -120,7 +120,7 @@ class product_product(osv.osv):
         '''
         product_ids = self.search(cr, uid, [], context=context)
         for product in self.browse(cr, uid, product_ids, context=context):
-            prix_vente = decimal.Decimal(product.prix_achat*product.coeff_depart).quantize(decimal.Decimal('.01'), rounding=decimal.ROUND_DOWN)
+            prix_vente = decimal.Decimal(str(product.prix_achat*product.coeff_depart)).quantize(decimal.Decimal('.01'), rounding=decimal.ROUND_DOWN)
             # Mise a jour de list_price
             if product.list_price != float(prix_vente):
                 self.write(cr, uid, [product.id], {'list_price': prix_vente}, context=context)
@@ -187,7 +187,8 @@ class product_product(osv.osv):
         history_obj = self.pool.get('product.price.history')
         for prd in self.browse(cr, uid, ids):
             history_id = history_obj.search(cr, uid, [('name', '=', datetime.now()), ('product_id', '=', prd.id)])
-            prix_vente = decimal.Decimal(vals.get('prix_achat', prd.prix_achat)*vals.get('coeff_depart', prd.coeff_depart)).quantize(decimal.Decimal('.01'), rounding=decimal.ROUND_DOWN)
+            list_price = vals.get('prix_achat', prd.prix_achat)*vals.get('coeff_depart', prd.coeff_depart)
+            prix_vente = decimal.Decimal(str(list_price)).quantize(decimal.Decimal('.01'), rounding=decimal.ROUND_DOWN)
             vals['list_price'] = prix_vente
             vals['prix_blanche'] = vals.get('prix_achat', prd.prix_achat)*vals.get('coeff_blanche', prd.coeff_blanche)
 
