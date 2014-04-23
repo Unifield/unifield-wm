@@ -60,7 +60,7 @@ class product_product(osv.osv):
             _pricelist_calculate,
             method=True,
             string='Sale Pricelists',
-            store=True,
+            store=False,
             type="text"),
         'pricelist_purchase':fields.function(
             _pricelist_calculate,

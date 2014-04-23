@@ -70,6 +70,15 @@ class product_price_history(osv.osv):
         'name': lambda *a: time.strftime('%Y-%m-%d'),
     }
 
+    def update_price(self, cr, uid):
+        product_ids = self.search(cr, uid, [])
+
+        for prd in self.browse(cr, uid, product_ids):
+            cr.execute('''SELECT id FROM product_price_history WHERE product_id=%s  AND name<=%s ORDER BY name desc LIMIT 1''',(prd.id, time.strftime('%Y-%m-%d')))
+            ret = cr.fetchone()
+            prix_vente = decimal.Decimal(prd.prix_achat*prd.coeff_depart).quantize(decimal.Decimal('.01'), rounding=decimal.ROUND_DOWN)
+            cr.execute('UPDATE product_price_history SET nouveau_prix_vente = %s WHERE id = %s') % (prix_vente, ret)
+
 product_price_history()
 
 
@@ -104,6 +113,72 @@ class product_product(osv.osv):
     _inherit = 'product.product'
     _name = 'product.product'
 
+    def update_prix_vente(self, cr, uid, context={}):
+        '''
+            Met a jour le prix de vente du produit si celui-ci n'est pas arrondi
+            correctement.
+        '''
+        product_ids = self.search(cr, uid, [], context=context)
+        for product in self.browse(cr, uid, product_ids, context=context):
+            prix_vente = decimal.Decimal(product.prix_achat*product.coeff_depart).quantize(decimal.Decimal('.01'), rounding=decimal.ROUND_DOWN)
+            # Mise a jour de list_price
+            if product.list_price != float(prix_vente):
+                self.write(cr, uid, [product.id], {'list_price': prix_vente}, context=context)
+            cr.execute('''SELECT name FROM product_price_history WHERE product_id=%s  AND name<=%s ORDER BY name desc LIMIT 1''',(product.id,time.strftime('%Y-%m-%d')))
+            ret = cr.fetchone()
+            if ret:
+                hist_name = ret[0]
+                cr.execute('''SELECT id, nouveau_prix_vente FROM product_price_history WHERE product_id=%s  AND name=%s ORDER BY name desc''',(product.id,hist_name))
+                res = cr.fetchall()
+                for r in res:
+                    history_id = r[0]
+                    hist_vente = r[1]
+                    if hist_vente != float(prix_vente):
+                        cr.execute('''UPDATE product_price_history SET nouveau_prix_vente = %s WHERE id = %s''', (prix_vente, history_id))
+
+        #pricelist_ids = self.pool.get('product.pricelist').search(cr, uid, [('tarif_special_choice', '=', 'oui')])
+        #le = len(pricelist_ids)
+        #i = 0
+        #for pricelist in self.pool.get('product.pricelist').browse(cr,uid, pricelist_ids):
+        #    i += 1
+        #    print 'Traitement %s/%s -- %s' % (i, le, pricelist.name)
+        #    pricelist_id = pricelist.id
+        #    #partner_ids = self.pool.get('res.partner').search(cr, uid, [('property_product_pricelist', '=', pricelist_id)])
+        #    cr.execute("""SELECT res_id FROM ir_property WHERE value = 'product.pricelist,%s'""" % pricelist_id)
+        #    p_res = cr.fetchall()
+        #    partner_ids = []
+        #    for pr in p_res:
+        #        partner_ids.append(int(pr[0].split(',')[1]))
+        #    
+        #    if not partner_ids:
+        #        if not self.pool.get('sale.order').search(cr, uid, [('pricelist_id', '=', pricelist_id)]):
+        #            self.pool.get('product.pricelist').unlink(cr, uid, pricelist_id)
+        #    else:
+        #        for partner in self.pool.get('res.partner').browse(cr, uid, partner_ids):
+        #            tarif_general_choice = self.pool.get('res.partner').getSelectionValue(cr, uid, 'res.partner', 'tarif_general_choice', partner.tarif_general_choice)
+        #            base_ids = self.pool.get('product.pricelist').search(cr, uid, [
+        #                ('mea_choice', '=', partner.mea_choice or 'non'),
+        #                ('promo_choice', '=', partner.promo_choice or 'non'),
+        #                ('tarif_choice', '=', partner.tarif_choice or 'blanche'),
+        #                ('name', 'ilike', tarif_general_choice)], context=context)
+        #            if not base_ids:
+        #                base_ids = self.pool.get('product.pricelist').search(cr, uid, [
+        #                    ('mea_choice', '=', partner.mea_choice or 'non'),
+        #                    ('promo_choice', '=', partner.promo_choice or 'non'),
+        #                    ('tarif_choice', '=', False),
+        #                    ('name', 'ilike', tarif_general_choice)], context=context)
+        #                if not base_ids:
+        #                    print 'Pas de base trouvee pour partner %s (%s, %s, %s, %s)' % (partner.ref, partner.mea_choice or 'non', partner.promo_choice or 'non', partner.tarif_choice or 'blanche', tarif_general_choice)
+        #            else:
+        #                print 'Update %s -- %s' % (partner.name, pricelist.name)
+        #                version_ids = self.pool.get('product.pricelist.version').search(cr, uid, [('pricelist_id', '=', pricelist_id)])
+        #                if len(version_ids) == 1:
+        #                    cr.execute('''UPDATE product_pricelist_item SET base_pricelist_id = %s WHERE price_version_id = %s AND name = 'Tous les produits';''', (base_ids[0], version_ids[0]))
+        #                else:
+        #                    cr.execute('''UPDATE product_pricelist_item SET base_pricelist_id = %s WHERE price_version_id IN %s AND name = 'Tous les produits';''', (base_ids[0], tuple(version_ids)))
+#            cr.commit()
+
+        return True
 
     def write(self, cr, uid, ids, vals, context={}):
         '''
@@ -112,11 +187,11 @@ class product_product(osv.osv):
         history_obj = self.pool.get('product.price.history')
         for prd in self.browse(cr, uid, ids):
             history_id = history_obj.search(cr, uid, [('name', '=', datetime.now()), ('product_id', '=', prd.id)])
-            vals['list_price'] = vals.get('prix_achat', prd.prix_achat)*vals.get('coeff_depart', prd.coeff_depart)
+            prix_vente = decimal.Decimal(vals.get('prix_achat', prd.prix_achat)*vals.get('coeff_depart', prd.coeff_depart)).quantize(decimal.Decimal('.01'), rounding=decimal.ROUND_DOWN)
+            vals['list_price'] = prix_vente
             vals['prix_blanche'] = vals.get('prix_achat', prd.prix_achat)*vals.get('coeff_blanche', prd.coeff_blanche)
 
             if 'prix_achat' in vals:
-                prix_vente = decimal.Decimal(vals.get('prix_achat')*vals.get('coeff_depart', prd.coeff_depart)).quantize(decimal.Decimal('.01'), rounding=decimal.ROUND_DOWN)
                 data_history = {'name': datetime.now(),
                                 'nouveau_prix_achat': vals.get('prix_achat'),
                                 'nouveau_prix_vente': prix_vente,
@@ -131,7 +206,6 @@ class product_product(osv.osv):
                     self.pool.get('product.price.history').create(cr, uid, data_history)
 
             if ('coeff_depart' in vals or 'coeff_blanche' in vals) and not 'prix_achat' in vals:
-                prix_vente = decimal.Decimal(prd.prix_achat*vals.get('coeff_depart', prd.coeff_depart)).quantize(decimal.Decimal('.01'), rounding=decimal.ROUND_DOWN)
                 data_history = {'name': datetime.now(),
                                 'nouveau_prix_achat': prd.prix_achat,
                                 'nouveau_prix_vente': prix_vente,
