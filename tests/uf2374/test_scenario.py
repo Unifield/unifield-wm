@@ -23,9 +23,12 @@ def catch_xmlrpc_errors(func):
         try:
             return func(self, *a, **kw)
         except xmlrpclib.Fault, exc:
+            # TODO retrieve the original stack
             if 'Traceback' in exc.faultString:
-                self.fail("XML-RPC call failed!\n" +
-                    exc.faultString + "\nXML-RPC call failed!")
+                _, _, traceback = sys.exc_info()
+                raise Exception("XML-RPC call failed!\n" +
+                        exc.faultString + "\nXML-RPC call failed!"), \
+                    None, traceback
             raise
     return wrapper
 
