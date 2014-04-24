@@ -156,6 +156,11 @@ class SynchronizePOfromCPtoRW(unittest2.TestCase):
         message_ids = self._execute(
             self.cp, 1, 'admin', 'sync_remote_warehouse.message_to_send',
             'search', [('identifier', '=', self.message_identifier)])
+        # Mark the message has sent to avoid conflict with regular
+        # synchronization
+        self._execute(
+            self.cp, 1, 'admin', 'sync_remote_warehouse.message_to_send',
+            'write', message_ids, {'sent': True})
         self.assertEqual(len(message_ids), 1)
         self.message_id = message_ids.pop()
         # Fetch the message
