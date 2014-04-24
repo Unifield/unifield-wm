@@ -301,10 +301,14 @@ class message_received(osv.osv):
             except BaseException, e:
                 self._logger.exception("Message execution %d failed!" % message.id)
                 cr.execute("ROLLBACK TO SAVEPOINT exec_message")
+                if isinstance(e, osv.except_osv):
+                    log = e.value
+                else:
+                    log = e.__class__.__name__+": "+tools.ustr(e)
                 self.write(cr, uid, message.id, {
                     'execution_date' : execution_date,
                     'run' : False,
-                    'log' : e.__class__.__name__+": "+tools.ustr(e),
+                    'log' : log,
                 }, context=context)
             else:
                 cr.execute("RELEASE SAVEPOINT exec_message")
