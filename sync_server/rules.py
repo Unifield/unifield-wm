@@ -644,7 +644,10 @@ class message_rule(osv.osv):
                 base_field = field.split('/')[0]
                 if not isinstance(field, str): raise TypeError
                 model_ids = self.pool.get(rec.model_id).get_model_ids(cr, uid, context=context)
-                if not len(self.pool.get('ir.model.fields').search(cr, uid,  [('model_id','in', model_ids),('name','=',base_field)], context=context)): 
+                if not (base_field == 'id' or
+                        self.pool.get('ir.model.fields').search(cr, uid,
+                            [('model_id', 'in', model_ids),
+                             ('name', '=', base_field)], context=context)):
                     field_error = field
                     raise KeyError
         except TypeError:
