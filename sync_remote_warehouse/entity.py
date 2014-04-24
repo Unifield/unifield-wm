@@ -1,3 +1,4 @@
+import logging
 import uuid
 import base64
 from zipfile import ZipFile
@@ -12,6 +13,9 @@ from tools.translate import _
 from sync_client import sync_process
 import release
 import pooler
+
+
+_logger = logging.getLogger(__name__)
 
 class Entity(osv.osv):
 
@@ -432,6 +436,7 @@ class Entity(osv.osv):
         
         if rule_ids:
             for rule in rule_pool.browse(cr, uid, rule_ids, context=context):
+                _logger.debug("Create messages from rule %s", rule.id)
                 messages_count += message_pool.create_from_rule(cr, uid, rule, context=context)
                 logger.replace(logger_index, _('Message(s) created: %s') % messages_count)
         
