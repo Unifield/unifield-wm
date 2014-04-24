@@ -67,9 +67,8 @@ class SynchronizePOfromCPtoRW(unittest2.TestCase):
                 'stock.location', 'search', [])[0],
             'pricelist_id': self._execute(self.cp, 1, 'admin',
                 'product.pricelist', 'search', [])[0],
-            # used to avoid "no analytic distribution found" when entering line
-            'order_type': 'loan',
             'delivery_confirmed_date': now(),
+            #'order_type': 'loan',
         }
         self.po_id = self._execute(
             self.cp, 1, 'admin', 'purchase.order', 'create', self.template_po)
@@ -99,6 +98,14 @@ class SynchronizePOfromCPtoRW(unittest2.TestCase):
             'create', self.template_line)
         self.line = self._execute(self.cp, 1, 'admin', 'purchase.order.line',
             'read', self.line_id, ['name'])
+        # Make analytic distribution
+        self.distribution = {
+            'purchase_line_ids' : [(4, self.line_id)],
+        }
+        self.distribution_id = self._execute(self.cp, 1, 'admin',
+            'analytic.distribution', 'create', self.distribution)
+        self.distribution = self._execute(self.cp, 1, 'admin',
+            'analytic.distribution', 'read', self.distribution_id, ['name'])
         # Confirm purchase order
         self._exec_workflow(self.cp, 1, 'admin', 'purchase.order',
             'purchase_confirm', self.po_id)
@@ -132,6 +139,8 @@ class SynchronizePOfromCPtoRW(unittest2.TestCase):
                      for f in ['id', 'name', 'product_id/id', 'product_qty',
                                'product_uom/id', 'price_unit']] +
                     ['picking_ids/' + f
+                     for f in ['id', 'name']] +
+                    ['order_line/analytic_distribution_id/' + f
                      for f in ['id', 'name']]),
             # Non-sense field required otherwise create_from_rule fail
             'destination_name': 'name',
@@ -207,8 +216,17 @@ class SynchronizePOfromCPtoRW(unittest2.TestCase):
         # Purchase order line check
         self.rw_line_id = self.rw_po['order_line'][0]
         self.rw_line = self._execute(self.rw, 1, 'admin',
-            'purchase.order.line', 'read', self.rw_line_id, ['name'])
+            'purchase.order.line', 'read', self.rw_line_id,
+            ['name', 'analytic_distribution_id'])
         self.assertEqual(self.rw_line['name'], self.line['name'])
+        # Analytic distribution check
+        self.rw_distribution_id = self.rw_line['analytic_distribution_id'][0]
+        self.assertTrue(self.rw_distribution_id)
+        self.rw_distribution = self._execute(self.rw, 1, 'admin',
+            'analytic.distribution', 'read', self.rw_distribution_id, ['name'])
+        self.assertDictContainsSubset(
+            dict(self.rw_distribution, id='***'),
+            dict(self.distribution, id='***'))
         # IN shipment check
         self.rw_in_id = self.rw_po['picking_ids'][0]
         self.rw_in = self._execute(self.rw, 1, 'admin',
