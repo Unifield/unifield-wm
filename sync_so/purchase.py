@@ -622,7 +622,6 @@ class purchase_order_sync(osv.osv):
             info += "Lines:\n"
             for line in lines:
                 line_sdref = xmlid_to_sdref(line.pop('id'))
-                distribution = line.pop('analytic_distribution_id')
                 line['order_id'] = po_id
                 model_line.convert_sdref_in_dict_to_id(
                     cr, uid, line, context=context)
@@ -632,21 +631,6 @@ class purchase_order_sync(osv.osv):
                     'module': 'sd', 'name': line_sdref,
                     'model': 'purchase.order.line', 'res_id': line_id,
                 }, context=context)
-                if distribution:
-                    # TODO pop lines
-                    distribution_sdref = distribution.pop('id')
-                    model_distribution.convert_sdref_in_dict_to_id(
-                        cr, uid, distribution, context=context)
-                    distribution_id = model_distribution.create(
-                        cr, uid, distribution, context=context)
-                    model_line.write(cr, uid, line_id,
-                        {'analytic_distribution_id': distribution_id},
-                        context=context)
-                    model_data.create(cr, uid, {
-                        'module': 'sd', 'name': line_sdref,
-                        'model': 'analytic.distribution',
-                        'res_id': distribution_id,
-                    }, context=context)
                 info += " - Ref: %s / sdref: %s\n" % (line['name'], line_sdref)
             info += "\n"
         else:
