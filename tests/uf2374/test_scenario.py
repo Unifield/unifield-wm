@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import os
 import sys
 import functools
@@ -242,3 +244,6 @@ class SynchronizePOfromCPtoRW(unittest2.TestCase):
         self.assertEqual((self.rw_original_picking_count + 1),
             len(self._execute(self.rw, 1, 'admin', 'stock.picking',
                               'search', [])))
+
+if __name__ == '__main__':
+    unittest2.main(failfast=True, verbosity=2)
