@@ -106,10 +106,13 @@ class report_liquidity_position2(report_sxw.rml_parse):
         self.registers = registers
         for x in registers:
             self.iter.append(len(registers[x]))
+        
+        print 'sfc:', registers
 
         return registers
 
     def getConvert(self,cur,func_cur,amount,option):
+        print 'sfc ', self,cur,func_cur,amount,option
         conv = self.pool.get('res.currency').compute(self.cr, self.uid, cur.id, func_cur.id, amount or 0.0, round=True,)
 
         if option == 'cal':
@@ -117,6 +120,7 @@ class report_liquidity_position2(report_sxw.rml_parse):
         elif option == 'reg':
             self.res += 1
 
+        print 'sfc. amount :', amount, 'conv:', conv
         return float(conv)
 
 SpreadsheetReport('report.liquidity.position.2','account.bank.statement','addons/register_accounting/report/liquidity_position_xls.mako', parser=report_liquidity_position2)

@@ -302,7 +302,7 @@
 <Row>
 <Cell>
 <Data ss:Type="String">${_('Prop Instance: ')}</Data>
-</Cell>
+</Cell>github
 <Cell ss:StyleID="pop">
 <Data ss:Type="String">${( company.instance_id and company.instance_id.code or '')|x}</Data>
 </Cell>
@@ -318,6 +318,9 @@
 </Cell>
 		<Cell ss:StyleID="s34" >
 <Data ss:Type="String">${_('Journal Name')}</Data>
+</Cell>
+<Cell ss:StyleID="s34" >
+	<Data ss:Type="String">${_('Status')}</Data>
 </Cell>
 		<Cell ss:StyleID="s34" >
 <Data ss:Type="String">${_('Calculated Balance in register currency')}</Data>
@@ -351,6 +354,9 @@
         <Cell ss:StyleID="s25" >
 <Data ss:Type="String">${(o.journal_id and o.journal_id.name or '')|x}</Data>
 </Cell>
+ <Cell ss:StyleID="s25" >
+	<Data ss:Type="String">${(o.state or '')|x}</Data>
+</Cell>
         <Cell ss:StyleID="s26" >
 <Data ss:Type="Number">${(o.msf_calculated_balance or 0.0)|x}</Data>
 </Cell>
@@ -383,6 +389,9 @@
 	% endif
         <Cell ss:StyleID="s25" >
 <Data ss:Type="String">${( getFuncCur(o) or '')|x}</Data>
+</Cell>
+  <Cell ss:StyleID="s25" >
+<Data ss:Type="String">${( o )|x}</Data>
 </Cell>
 	</Row>
 
