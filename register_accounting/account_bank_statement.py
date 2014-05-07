@@ -709,7 +709,7 @@ class account_bank_statement_line(osv.osv):
             # amount is negative, it should be in amount_out
             elif absl.amount < 0 and field_name == "amount_out":
                 res[absl.id] = abs(absl.amount)
-            # if no resultat, we display 0.0 (default amount)
+            # if no result, we display 0.0 (default amount)
             else:
                 res[absl.id] = default_amount
         return res
@@ -1299,9 +1299,9 @@ class account_bank_statement_line(osv.osv):
         if values:
             amount_in = values.get('amount_in', 0.0)
             amount_out = values.get('amount_out', 0.0)
-            if amount_in > 0 and amount_out == 0:
+            if amount_out == 0:
                 amount = amount_in
-            elif amount_in == 0 and amount_out > 0:
+            elif amount_in == 0:
                 amount = - amount_out
             else:
                 raise osv.except_osv(_('Error'), _('Please correct amount fields!'))
@@ -1341,11 +1341,11 @@ class account_bank_statement_line(osv.osv):
             employee = self.pool.get('hr.employee').read(cr, uid, int(emp_id), ['cost_center_id', 'funding_pool_id', 'free1_id', 'free2_id'])
             if is_expense and employee.get('cost_center_id', False):
                 # Create a distribution
-                destination_id = (employee.get('destination_id', [False])[0]) or (account.get('default_destination_id', [False])[0]) or False
-                cc_id = employee.get('cost_center_id', [False])[0] or False
-                fp_id = employee.get('funding_pool_id',[False])[0] or False
-                f1_id = employee.get('free1_id', [False])[0] or False
-                f2_id = employee.get('free2_id', [False])[0] or False
+                destination_id = (employee.get('destination_id', False) and employee.get('destination_id')[0]) or (account.get('default_destination_id', False) and account.get('default_destination_id')[0]) or False
+                cc_id = employee.get('cost_center_id', False) and employee.get('cost_center_id')[0] or False
+                fp_id = employee.get('funding_pool_id',False) and employee.get('funding_pool_id')[0] or False
+                f1_id = employee.get('free1_id', False) and employee.get('free1_id')[0] or False
+                f2_id = employee.get('free2_id', False) and employee.get('free2_id')[0] or False
                 if not fp_id:
                     fp_id = msf_fp_id
                 distrib_id = self.pool.get('analytic.distribution').create(cr, uid, {})
