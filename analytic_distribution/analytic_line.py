@@ -262,7 +262,7 @@ class analytic_line(osv.osv):
                     # First reverse line
                     rev_ids = self.pool.get('account.analytic.line').reverse(cr, uid, [aline.id], posting_date=date)
                     # UTP-943: Shoud have a correction journal on these lines
-                    self.pool.get('account.analytic.line').write(cr, uid, rev_ids, {'journal_id': correction_journal_id, 'is_reversal': True, 'reversal_origin': aline.id, 'last_corrected_id': False})
+                    self.pool.get('account.analytic.line').write(cr, uid, rev_ids, {'journal_id': correction_journal_id, 'is_reversal': True, 'reversal_origin': aline.id, 'last_corrected_id': False, 'corrected_original_xml_ids': ids})
                     # UTP-943: Check that period is open
                     correction_period_ids = self.pool.get('account.period').get_period_from_date(cr, uid, date, context=context)
                     if not correction_period_ids:
@@ -273,7 +273,8 @@ class analytic_line(osv.osv):
                     # then create new lines
                     cor_ids = self.pool.get('account.analytic.line').copy(cr, uid, aline.id, {fieldname: account_id, 'date': date,
                         'source_date': aline.source_date or aline.date, 'journal_id': correction_journal_id}, context=context)
-                    self.pool.get('account.analytic.line').write(cr, uid, cor_ids, {'last_corrected_id': aline.id})
+                    corrected_original_xml_ids = self.pool.get('account.analytic.line').get_corrected_xml_ids(cr, uid, ids, context)
+                    self.pool.get('account.analytic.line').write(cr, uid, cor_ids, {'last_corrected_id': aline.id, 'corrected_original_xml_ids': corrected_original_xml_ids})
                     # finally flag analytic line as reallocated
                     self.pool.get('account.analytic.line').write(cr, uid, [aline.id], {'is_reallocated': True})
             else:

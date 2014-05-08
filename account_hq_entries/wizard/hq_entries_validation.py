@@ -268,7 +268,8 @@ class hq_entries_validation(osv.osv_memory):
                 # - add "last_corrected_id" link for all these new analytic lines to the first one (original analytic line)
                 original_aal_ids = ana_line_obj.search(cr, uid, [('move_id', '=', original_ml_result)])
                 new_aal_ids = ana_line_obj.search(cr, uid, [('move_id', 'in', new_expense_ml_ids)])
-                ana_line_obj.write(cr, uid, new_aal_ids, {'last_corrected_id': original_aal_ids[0],})
+                corrected_original_xml_ids = self.pool.get('account.analytic.line').get_corrected_xml_ids(cr, uid, original_aal_ids, context)
+                ana_line_obj.write(cr, uid, new_aal_ids, {'last_corrected_id': original_aal_ids[0],'corrected_original_xml_ids': corrected_original_xml_ids,})
             else:
                 # Search the initial analytic lines to reverse them
                 initial_ana_ids = ana_line_obj.search(cr, uid, [('move_id.move_id', '=', move_id)])
@@ -331,7 +332,8 @@ class hq_entries_validation(osv.osv_memory):
                         'account_id': split_line.analytic_id.id, 'destination_id': split_line.destination_id.id, 'journal_id': acor_journal_id, 'last_correction_id': initial_ana_ids[0],
                         'name': corr_name, 'ref': split_line.ref, 'amount_currency': correction_line_amount_booking, 'amount': correction_line_fonctional_amount, })
                     # update new ana line
-                    ana_line_obj.write(cr, uid, cor_id, {'last_corrected_id': initial_ana_ids[0], 'move_id': move_line.id}, context=context)
+                    corrected_original_xml_ids = self.pool.get('account.analytic.line').get_corrected_xml_ids(cr, uid, initial_ana_ids, context)
+                    ana_line_obj.write(cr, uid, cor_id, {'last_corrected_id': initial_ana_ids[0], 'corrected_original_xml_ids': corrected_original_xml_ids, 'move_id': move_line.id}, context=context)
                     # Add correction line to the list of them
                     corrected_line_ids.append(cor_id)
                 # update corrected lines with the new distribution
@@ -452,7 +454,8 @@ class hq_entries_validation(osv.osv_memory):
                 cor_ids = ana_line_obj.copy(cr, uid, fp_old_lines[0], {'date': current_date, 'source_date': line.date, 'cost_center_id': line.cost_center_id.id,
                     'account_id': line.analytic_id.id, 'destination_id': line.destination_id.id, 'journal_id': acor_journal_id, 'last_correction_id': fp_old_lines[0]})
                 # update new ana line
-                ana_line_obj.write(cr, uid, cor_ids, {'last_corrected_id': fp_old_lines[0]})
+                corrected_original_xml_ids = self.pool.get('account.analytic.line').get_corrected_xml_ids(cr, uid, fp_old_lines, context)
+                ana_line_obj.write(cr, uid, cor_ids, {'last_corrected_id': fp_old_lines[0], 'corrected_original_xml_ids': corrected_original_xml_ids,})
                 # update old ana lines
                 ana_line_obj.write(cr, uid, fp_old_lines, {'is_reallocated': True})
 

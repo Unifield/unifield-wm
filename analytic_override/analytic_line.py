@@ -181,6 +181,7 @@ class account_analytic_line(osv.osv):
         if isinstance(ids, (int, long)):
             ids = [ids]
         res = []
+        corrected_original_xml_ids = self.pool.get('account.analytic.line').get_corrected_xml_ids(cr, uid, ids, context)
         for al in self.browse(cr, uid, ids, context=context):
             vals = {
                 'name': self.join_without_redundancy(al.name, 'REV'),
@@ -188,6 +189,7 @@ class account_analytic_line(osv.osv):
                 'date': posting_date,
                 'source_date': al.source_date or al.date,
                 'reversal_origin': al.id,
+                'corrected_original_xml_ids': corrected_original_xml_ids,
                 'amount_currency': al.amount_currency * -1,
                 'currency_id': al.currency_id.id,
                 'is_reversal': True,

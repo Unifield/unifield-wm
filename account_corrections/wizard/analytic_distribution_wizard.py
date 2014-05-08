@@ -236,7 +236,8 @@ class analytic_distribution_wizard(osv.osv_memory):
             reversed_id = self.pool.get('account.analytic.line').reverse(cr, uid, to_reverse_ids[0], posting_date=wizard.date, context=context)[0]
             # Add reversal origin link (to not loose it). last_corrected_id is to prevent case where you do a reverse a line that have been already corrected
 
-            self.pool.get('account.analytic.line').write(cr, uid, [reversed_id], {'reversal_origin': to_reverse_ids[0], 'last_corrected_id': False, 'journal_id': correction_journal_id, 'ref': orig_line.entry_sequence})
+            corrected_original_xml_ids = self.pool.get('account.analytic.line').get_corrected_xml_ids(cr, uid, to_reverse_ids, context)
+            self.pool.get('account.analytic.line').write(cr, uid, [reversed_id], {'reversal_origin': to_reverse_ids[0], 'corrected_original_xml_ids': corrected_original_xml_ids, 'last_corrected_id': False, 'journal_id': correction_journal_id, 'ref': orig_line.entry_sequence})
             # Mark old lines as non reallocatable (ana_ids): why reverse() don't set this flag ?
             self.pool.get('account.analytic.line').write(cr, uid, [to_reverse_ids[0]], {'is_reallocated': True})
             cr.execute('update account_analytic_line set entry_sequence = %s where id = %s', (entry_seq, reversed_id) )
@@ -263,8 +264,9 @@ class analytic_distribution_wizard(osv.osv_memory):
             # Create the new ana line
             ret = fp_distrib_obj.create_analytic_lines(cr, uid, line.distribution_line_id.id, ml.id, date=wizard.date, document_date=orig_document_date, source_date=orig_date, name=name,context=context)
             # Add link to first analytic lines
+            corrected_original_xml_ids = self.pool.get('account.analytic.line').get_corrected_xml_ids(cr, uid, to_reverse_ids, context)
             for ret_id in ret:
-                self.pool.get('account.analytic.line').write(cr, uid, [ret[ret_id]], {'last_corrected_id': to_reverse_ids[0], 'journal_id': correction_journal_id, 'ref': orig_line.entry_sequence })
+                self.pool.get('account.analytic.line').write(cr, uid, [ret[ret_id]], {'last_corrected_id': to_reverse_ids[0], 'corrected_original_xml_ids': corrected_original_xml_ids, 'journal_id': correction_journal_id, 'ref': orig_line.entry_sequence })
                 cr.execute('update account_analytic_line set entry_sequence = %s where id = %s', (entry_seq, ret[ret_id]) )
 
         #####

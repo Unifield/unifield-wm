@@ -1069,14 +1069,15 @@ class analytic_distribution_wizard(osv.osv_memory):
                     if line.reversal:
                         # For each reversal line, search its equivalent and write the right number
                         rev_ana_ids = ana_obj.search(cr, uid, [('move_id', '=', line.reversal_line_id.id)])
+                        corrected_original_xml_ids = self.pool.get('account.analytic.line').get_corrected_xml_ids(cr, uid, rev_ana_ids, context)
                         for rev in self.pool.get('account.analytic.line').browse(cr, uid, rev_ana_ids):
                             to_write = ana_obj.search(cr, uid, [('move_id', '=', line.id), ('cost_center_id', '=', rev.cost_center_id.id), ('account_id', '=', rev.account_id.id), ('destination_id', '=', rev.destination_id.id)])
-                            ana_obj.write(cr, uid, to_write, {'reversal_origin': rev.id, 'is_reversal': True})
+                            ana_obj.write(cr, uid, to_write, {'reversal_origin': rev.id, 'is_reversal': True, 'corrected_original_xml_ids': corrected_original_xml_ids})
                         # Search if some corrections exists for this move line
                         aml_cor_ids = self.pool.get('account.move.line').search(cr, uid, [('corrected_line_id', '=', line.reversal_line_id.id)])
                         if aml_cor_ids:
                             cor_ana_ids = ana_obj.search(cr, uid, [('move_id', 'in', aml_cor_ids)])
-                            ana_obj.write(cr, uid, cor_ana_ids, {'last_corrected_id': rev_ana_ids[0]})
+                            ana_obj.write(cr, uid, cor_ana_ids, {'last_corrected_id': rev_ana_ids[0], 'corrected_original_xml_ids': corrected_original_xml_ids, })
         # Validate account_move if we come from a temp posted register line
         if wiz and (wiz.register_line_id and wiz.register_line_id.state == 'temp'):
             # check account presence

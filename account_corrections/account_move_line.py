@@ -437,7 +437,8 @@ receivable, item have not been corrected, item have not been reversed and accoun
                 raise osv.except_osv(_('Error'), _('No corresponding analytic journal items with this one: %s') % (aal.name or ''))
             if len(old_ids) > 1:
                 raise osv.except_osv(_('Error'), _('More than one corresponding line from this one: %s') % (aal.name or ''))
-            ana_obj.write(cr, uid, aal.id, {'reversal_origin': old_ids[0]}, context=context)
+            corrected_original_xml_ids = self.pool.get('account.analytic.line').get_corrected_xml_ids(cr, uid, old_ids, context)
+            ana_obj.write(cr, uid, aal.id, {'reversal_origin': old_ids[0], 'corrected_original_xml_ids': corrected_original_xml_ids}, context=context)
         return True
 
     def reverse_move(self, cr, uid, ids, date=None, context=None):
@@ -574,7 +575,7 @@ receivable, item have not been corrected, item have not been reversed and accoun
             move_obj.post(cr, uid, [new_move_id], context=context)
             # Update analytic lines data (reversal: True)
             ana_ids = aal_obj.search(cr, uid, [('move_id', 'in', new_ml_ids)])
-            aal_obj.write(cr, uid, ana_ids, {'is_reversal': True, 'journal_id': j_ana_corr_id, 'last_corrected_id': False,})
+            aal_obj.write(cr, uid, ana_ids, {'is_reversal': True, 'journal_id': j_ana_corr_id, 'last_corrected_id': False, 'corrected_original_xml_ids': None,})
             # Update old analytic lines as "is_reallocated" to True
             old_ana_ids = aal_obj.search(cr, uid, [('move_id', 'in', success_move_line_ids)])
             aal_obj.write(cr, uid, old_ana_ids, {'is_reallocated': True,})
@@ -743,6 +744,7 @@ receivable, item have not been corrected, item have not been reversed and accoun
             #- correction line: change is_reallocated and is_reversal to False
             #- old reversal line: reset is_reversal to True (lost previously in validate())
             initial_al_ids = al_obj.search(cr, uid, [('move_id', '=', ml.id)])
+            corrected_original_xml_ids = self.pool.get('account.analytic.line').get_corrected_xml_ids(cr, uid, initial_al_ids, context)
             search_datas = [(ml.id, {'is_reallocated': True}),
                             (rev_line_id, {'is_reversal': True, 'reversal_origin': initial_al_ids[0]}),
                             (correction_line_id, {'is_reallocated': False, 'is_reversal': False, 'last_corrected_id': initial_al_ids[0]})]
@@ -751,6 +753,7 @@ receivable, item have not been corrected, item have not been reversed and accoun
             if ml.corrected_line_id:
                 old_reverse_ids = self.search(cr, uid, [('reversal_line_id', '=', ml.corrected_line_id.id)])
                 if len(old_reverse_ids) > 0:
+                    
                     search_datas += [(old_reverse_ids[0], {'is_reversal': True, 'reversal_origin': first_analytic_line_id})]
             for search_data in search_datas:
                 # keep initial analytic line as corrected line if it the 2nd or more correction on this line
@@ -758,6 +761,7 @@ receivable, item have not been corrected, item have not been reversed and accoun
                     search_data[1].update({'last_corrected_id': first_analytic_line_id, 'have_an_historic': True,})
                 search_ids = al_obj.search(cr, uid, [('move_id', '=', search_data[0]), ('reversal_origin', '=', False), ('last_corrected_id', '=', False)])
                 if search_ids:
+                    search_data[1].update({'corrected_original_xml_ids': corrected_original_xml_ids})
                     al_obj.write(cr, uid, search_ids, search_data[1])
             # Add this line to succeded lines
             success_move_line_ids.append(ml.id)
