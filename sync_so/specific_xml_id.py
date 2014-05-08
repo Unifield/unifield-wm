@@ -297,6 +297,14 @@ class account_analytic_line(osv.osv):
         'correction_date': fields.datetime('Correction Date'), # UF-2343: Add timestamp when making the correction, to be synced
     }
 
+    def get_corrected_xml_ids(self, cr, uid, ids, context=None):
+        identifier = self.pool.get('sync.client.entity')._get_entity(cr).identifier
+        list_xml_ids = []
+        for res_id in ids:
+            name = self.get_unique_xml_name(cr, uid, identifier, self._table, res_id)
+            list_xml_ids.append(name + ",")
+        return list_xml_ids
+
     def get_instance_name_from_cost_center(self, cr, uid, cost_center_id, context=None):
         if cost_center_id:
             target_ids = self.pool.get('account.target.costcenter').search(cr, uid, [('cost_center_id', '=', cost_center_id),
@@ -395,11 +403,20 @@ class account_analytic_line(osv.osv):
     def write(self, cr, uid, ids, vals, context=None):
         if context is None:
             context = {}
-        if not 'cost_center_id' in vals:
-            return super(account_analytic_line, self).write(cr, uid, ids, vals, context=context)
-
         if isinstance(ids, (long, int)):
             ids = [ids]
+
+        if 'corrected_original_xml_ids' in vals:
+            identifier = self.pool.get('sync.client.entity')._get_entity(cr).identifier
+            name = self.get_unique_xml_name(cr, uid, identifier, self._table, ids[0])
+            
+            for ii in vals['corrected_original_xml_ids']:
+                if name in ii:
+                    vals['corrected_original_xml_ids'] = '[]'
+                    break
+
+        if not 'cost_center_id' in vals:
+            return super(account_analytic_line, self).write(cr, uid, ids, vals, context=context)
 
         # Only set the correction date if data not come from sync
         if not context.get('sync_update_execution', False):
