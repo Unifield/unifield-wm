@@ -6,6 +6,7 @@ Created on 15 mai 2012
 
 from osv import osv
 from osv import fields
+from sync_common import xmlid_to_sdref
 
 # Note:
 #
@@ -298,12 +299,13 @@ class account_analytic_line(osv.osv):
     }
 
     def get_corrected_xml_ids(self, cr, uid, ids, context=None):
+        # UFTP-182: Calculate the xml_id for the corrected lines 
         identifier = self.pool.get('sync.client.entity')._get_entity(cr).identifier
         list_xml_ids = []
         for res_id in ids:
             name = self.get_unique_xml_name(cr, uid, identifier, self._table, res_id)
-            list_xml_ids.append(name + ",")
-        return list_xml_ids
+            list_xml_ids.append(name)
+        return ','.join(list_xml_ids)
 
     def get_instance_name_from_cost_center(self, cr, uid, cost_center_id, context=None):
         if cost_center_id:
@@ -406,14 +408,32 @@ class account_analytic_line(osv.osv):
         if isinstance(ids, (long, int)):
             ids = [ids]
 
+        # UFTP-182: Treat the correction history when the link is randomly picked for the reference 
         if 'corrected_original_xml_ids' in vals:
             identifier = self.pool.get('sync.client.entity')._get_entity(cr).identifier
             name = self.get_unique_xml_name(cr, uid, identifier, self._table, ids[0])
             
-            for ii in vals['corrected_original_xml_ids']:
-                if name in ii:
-                    vals['corrected_original_xml_ids'] = '[]'
-                    break
+            xml_ids = vals['corrected_original_xml_ids']
+            if xml_ids:
+                if name in xml_ids:
+                    vals['corrected_original_xml_ids'] = ''
+                    
+                # For sync update: calculate the xml_id provided to res_id of the original corrected line
+                if context.get('sync_update_execution', False):
+                    # If come from sync, then calculate the xml_ids to put in the right column: last_corrected_id or reversal_origin
+                    xml_ids = xml_ids.split(',')
+                    # get the res_id from the given xml_ids
+                    res_id = None
+                    for xml_id in xml_ids: # some xml_ids provided may not have res_id in the local system
+                        xml_id = xml_id.strip()
+                        res_id = self.pool.get('account.analytic.line').find_sd_ref(cr, uid, xml_id, context=context)
+                        if res_id:
+                            break
+                    if vals.get('is_reversal', False):
+                        if not vals.get('reversal_origin', False):
+                            vals['reversal_origin'] = res_id
+                    elif vals.get('last_corrected_id', False):
+                        vals['last_corrected_id'] = res_id
 
         if not 'cost_center_id' in vals:
             return super(account_analytic_line, self).write(cr, uid, ids, vals, context=context)
