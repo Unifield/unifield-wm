@@ -432,7 +432,7 @@ class account_analytic_line(osv.osv):
                     if vals.get('is_reversal', False):
                         if not vals.get('reversal_origin', False):
                             vals['reversal_origin'] = res_id
-                    elif vals.get('last_corrected_id', False):
+                    elif not vals.get('last_corrected_id', False):
                         vals['last_corrected_id'] = res_id
 
         if not 'cost_center_id' in vals:
