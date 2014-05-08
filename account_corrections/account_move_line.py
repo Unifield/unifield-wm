@@ -437,6 +437,7 @@ receivable, item have not been corrected, item have not been reversed and accoun
                 raise osv.except_osv(_('Error'), _('No corresponding analytic journal items with this one: %s') % (aal.name or ''))
             if len(old_ids) > 1:
                 raise osv.except_osv(_('Error'), _('More than one corresponding line from this one: %s') % (aal.name or ''))
+            # UFTP-182: Build xml_ids for the corrected lines and save in the hidden field for sync
             corrected_original_xml_ids = self.pool.get('account.analytic.line').get_corrected_xml_ids(cr, uid, old_ids, context)
             ana_obj.write(cr, uid, aal.id, {'reversal_origin': old_ids[0], 'corrected_original_xml_ids': corrected_original_xml_ids}, context=context)
         return True
@@ -744,6 +745,7 @@ receivable, item have not been corrected, item have not been reversed and accoun
             #- correction line: change is_reallocated and is_reversal to False
             #- old reversal line: reset is_reversal to True (lost previously in validate())
             initial_al_ids = al_obj.search(cr, uid, [('move_id', '=', ml.id)])
+            # UFTP-182: Build xml_ids for the corrected lines and save in the hidden field for sync
             corrected_original_xml_ids = self.pool.get('account.analytic.line').get_corrected_xml_ids(cr, uid, initial_al_ids, context)
             search_datas = [(ml.id, {'is_reallocated': True}),
                             (rev_line_id, {'is_reversal': True, 'reversal_origin': initial_al_ids[0]}),

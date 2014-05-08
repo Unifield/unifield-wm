@@ -273,6 +273,7 @@ class analytic_line(osv.osv):
                     # then create new lines
                     cor_ids = self.pool.get('account.analytic.line').copy(cr, uid, aline.id, {fieldname: account_id, 'date': date,
                         'source_date': aline.source_date or aline.date, 'journal_id': correction_journal_id}, context=context)
+                    # UFTP-182: Build xml_ids for the corrected lines and save in the hidden field for sync
                     corrected_original_xml_ids = self.pool.get('account.analytic.line').get_corrected_xml_ids(cr, uid, ids, context)
                     self.pool.get('account.analytic.line').write(cr, uid, cor_ids, {'last_corrected_id': aline.id, 'corrected_original_xml_ids': corrected_original_xml_ids})
                     # finally flag analytic line as reallocated

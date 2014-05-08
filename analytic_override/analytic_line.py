@@ -181,6 +181,7 @@ class account_analytic_line(osv.osv):
         if isinstance(ids, (int, long)):
             ids = [ids]
         res = []
+        # UFTP-182: Create xml_ids for the corrected lines and save in the hidden field for sync 
         corrected_original_xml_ids = self.pool.get('account.analytic.line').get_corrected_xml_ids(cr, uid, ids, context)
         for al in self.browse(cr, uid, ids, context=context):
             vals = {

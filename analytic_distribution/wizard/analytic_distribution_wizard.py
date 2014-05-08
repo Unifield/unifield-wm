@@ -1069,6 +1069,7 @@ class analytic_distribution_wizard(osv.osv_memory):
                     if line.reversal:
                         # For each reversal line, search its equivalent and write the right number
                         rev_ana_ids = ana_obj.search(cr, uid, [('move_id', '=', line.reversal_line_id.id)])
+                        # UFTP-182: Build xml_ids for the corrected lines and save in the hidden field for sync
                         corrected_original_xml_ids = self.pool.get('account.analytic.line').get_corrected_xml_ids(cr, uid, rev_ana_ids, context)
                         for rev in self.pool.get('account.analytic.line').browse(cr, uid, rev_ana_ids):
                             to_write = ana_obj.search(cr, uid, [('move_id', '=', line.id), ('cost_center_id', '=', rev.cost_center_id.id), ('account_id', '=', rev.account_id.id), ('destination_id', '=', rev.destination_id.id)])

@@ -32,22 +32,8 @@ class account_analytic_line(osv.osv):
     _columns = {
         'is_corrigible': fields.related('move_id', 'is_corrigible', string='Is correctible?', type="boolean", readonly=True),
         'last_corrected_id': fields.many2one('account.analytic.line', string="Last corrected entry", readonly=True),
-        'corrected_original_xml_ids': fields.text(string="All original lines"),
+        'corrected_original_xml_ids': fields.text(string="All original lines"), # UFTP-182: Use to store xml_ids of the corrected lines
     }
-
-
-    def write(self, cr, uid, ids, vals, context=None):
-        if context is None:
-            context = {}
-        if isinstance(ids, (long, int)):
-            ids = [ids]
-
-#        # Only set the correction date if data not come from sync
-#        if 'corrected_original_xml_ids' in vals:
-#            corrected_original_xml_ids = vals['corrected_original_xml_ids']
-#            if len(corrected_original_xml_ids) > 0:
-                
-        return super(account_analytic_line, self).write(cr, uid, ids, vals, context=context)
 
     def get_corrected_xml_ids(self, cr, uid, ids, context=None):
         return super(account_analytic_line, self).get_corrected_xml_ids(cr, uid, ids, context=context)
