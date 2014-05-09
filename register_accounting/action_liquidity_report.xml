@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+    <!-- Liquidity Report -->
+        <act_window id="action_liquidity_report"
+            name="Liquidity Report 2"
+            res_model="wizard.liquidity.report"
+            src_model="account.bank.statement"
+            key2="client_action_multi"
+            view_mode="form"
+            view_type="form"
+            target="new"
+            view_id="wizard_liquidity_report_view"
+            context="{'from': 'account.bank.statement', 'search_domain': search_domain}"/>
+       
+    </data>
+</openerp>
+ 
