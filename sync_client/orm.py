@@ -1,11 +1,12 @@
+from itertools import chain
+import functools
+import types
+from datetime import datetime
+
 from osv import osv, fields, orm
 from osv.orm import browse_record, browse_record_list
 import tools
 from tools.safe_eval import safe_eval as eval
-import logging
-import functools
-import types
-from datetime import date, datetime
 
 from sync_common import MODELS_TO_IGNORE, xmlid_to_sdref
 
@@ -825,6 +826,95 @@ DELETE FROM ir_model_data WHERE model = %s AND res_id IN %s
             for row in self.browse(cr, uid, ids, context):
                 datas.append(__export_row_json(self, cr, uid, row, fields_to_export, context))
             return {'datas': datas}
+
+    def _import_data_row(self, cr, uid, data, info, context=None):
+        method = 'create'
+        values = dict(data)
+        post_imports = []
+        # get the real id from the sdref using the pre-fetched dict info
+        if 'id' in values:
+            method, real_id = info[xmlid_to_sdref(values['id'])]
+            if real_id:
+                values['id'] = real_id
+        # NOTE: if the relation is a dict with only 'id' in its keys, the
+        #       user probably wanted to make a link, not the record itself.
+        if method == 'create' and data.keys() == ['id']:
+            raise ValueError("unable to find sdref: %s" % data['id'])
+
+        # extend operations to do with sub-operations
+        import pdb
+        for field, value in values.items():
+            # *2one relation
+            if isinstance(value, dict):
+                column = self._all_columns[field].column
+                values[field] = self.pool[column._obj]._import_data_row(
+                    cr, uid, value, info, context=context)
+            # *2many relation
+            elif isinstance(value, list):
+                column = self._all_columns[field].column
+                post_imports.extend((column._obj, column._fields_id, sub_data)
+                                    for sub_data in value)
+                del values[field]
+
+        # actually create/write the record
+        if method == 'create':
+            #pdb.set_trace()
+            sdref = values.pop('id', None)
+            record_id = self.create(cr, uid, values, context=context)
+            if sdref:
+                self.pool['ir.model.data'].create(cr, uid, {
+                    'module': 'sd', 'name': xmlid_to_sdref(sdref),
+                    'model': self._name, 'res_id': record_id,
+                }, context=context)
+        elif method == 'write':
+            record_id = values.pop('id')
+            self.write(cr, uid, record_id, values, context=context)
+        else:
+            raise NotImplemented(method)
+
+        # create *2many records
+        for relation_model, relation_field, sub_data in post_imports:
+            #pdb.set_trace()
+            sub_data[relation_field] = record_id
+            self.pool[relation_model]._import_data_row(
+                cr, uid, sub_data, info, context=context)
+
+        return record_id
+
+    def import_data_json(self, cr, uid, datas, context=None):
+        assert hasattr(datas, '__iter__')
+
+        # Pass 1: algorithm to find and replace all sdrefs
+        def find_sdrefs(data):
+            sdrefs = []
+            for field, value in data.items():
+                if field == 'id':
+                    #sdrefs.append((data, field, xmlid_to_sdref(value)))
+                    sdrefs.append(xmlid_to_sdref(value))
+                elif isinstance(value, dict):
+                    sdrefs += find_sdrefs(value)
+                elif isinstance(value, list):
+                    for sub_data in value:
+                        sdrefs += find_sdrefs(sub_data)
+            return sdrefs
+
+        world = list(chain.from_iterable(map(find_sdrefs, datas)))
+        # NOTE: default behavior is to create record, except if an sdref
+        #       is given and the record actually exists
+        info = dict.fromkeys(world, ('create', None))
+        # NOTE: we don't really need to know to which model the sdref belongs
+        #       the thing is: sdrefs are unique for the whole database and
+        #       we let dict structure determine the model related to the res_id
+        for rec in self.pool['ir.model.data'].read(
+                cr, uid, self.pool['ir.model.data'].find_sd_ref(
+                    cr, uid, world, context=context).values(),
+                ['name', 'res_id', 'is_deleted'], context=context):
+            if not rec['is_deleted']:
+                info[rec['name']] = ('write', rec['res_id'])
+
+        # Pass 2: import piece by piece
+        return [self._import_data_row(cr, uid, data, info, context=context)
+                for data in datas]
 
     def get_unique_xml_name(self, cr, uid, uuid, table_name, res_id):
         return uuid + '/' + table_name + '/' + str(res_id)
