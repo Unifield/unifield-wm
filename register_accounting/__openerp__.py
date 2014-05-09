@@ -68,6 +68,8 @@
         'register_accounting_report.xml',
         'account_wizard.xml',
         'wizard/wizard_register_import.xml',
+        'action_liquidity_report.xml',
+        'wizard/wizard_liquidity_report_view.xml',
     ],
     "demo_xml" : [],
     "test": [
