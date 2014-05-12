@@ -588,69 +588,24 @@ class purchase_order_sync(osv.osv):
 
     def replicate_approved_po_from_cp_on_rw(
             self, cr, uid, source, data, context=None):
-        #assert we're a RW instance
-        #assert source is our CP instance
-        model_line = self.pool['purchase.order.line']
-        model_data = self.pool['ir.model.data']
-        model_picking = self.pool['stock.picking']
-        model_distribution = self.pool['analytic.distribution']
 
-        # Extract lines and pickings values
-        po = data.values
-        po_sdref = xmlid_to_sdref(po.pop('id'))
-        lines = po.pop('order_line')
+        # check instance type and source
+        entity = self.pool['sync.client.entity'].get_entity(cr, uid, context)
+        if entity.usb_instance_type == 'central_platform':
+            raise Exception("Can not execute this method in CP!")
+        if not source == entity.name:
+            raise Exception("This message is for instance %s (but I am %s)\n" \
+                            % (source, entity.name))
+
+
+        # Extract pickings
+        po = dict(data.values)
         pickings = po.pop('picking_ids')
 
-        self.convert_sdref_in_dict_to_id(cr, uid, po, context=context)
-
-        # Create purchase order
-        info = dedent("""\
-            Purchase order replicated coming from central platform:
-            sdref: %s
-            ref: %s
-            \n""" % (po_sdref, po['name']))
-        po_id = self.create(cr, uid, po, context=context)
-
-        # overwrite sdref to make it match the one of the message
-        model_data.create(cr, uid, {
-            'module': 'sd', 'name': po_sdref,
-            'model': self._name, 'res_id': po_id,
-        }, context=context)
-
-        # Create lines
-        if lines:
-            info += "Lines:\n"
-            for line in lines:
-                line_sdref = xmlid_to_sdref(line.pop('id'))
-                distribution = line.pop('analytic_distribution_id')
-                line['order_id'] = po_id
-                model_line.convert_sdref_in_dict_to_id(
-                    cr, uid, line, context=context)
-                line_id = model_line.create(cr, uid, line, context=context)
-                # overwrite sdref to make it match the one of the message
-                model_data.create(cr, uid, {
-                    'module': 'sd', 'name': line_sdref,
-                    'model': 'purchase.order.line', 'res_id': line_id,
-                }, context=context)
-                if distribution:
-                    # TODO pop lines
-                    distribution_sdref = distribution.pop('id')
-                    model_distribution.convert_sdref_in_dict_to_id(
-                        cr, uid, distribution, context=context)
-                    distribution_id = model_distribution.create(
-                        cr, uid, distribution, context=context)
-                    model_line.write(cr, uid, line_id,
-                        {'analytic_distribution_id': distribution_id},
-                        context=context)
-                    model_data.create(cr, uid, {
-                        'module': 'sd', 'name': line_sdref,
-                        'model': 'analytic.distribution',
-                        'res_id': distribution_id,
-                    }, context=context)
-                info += " - Ref: %s / sdref: %s\n" % (line['name'], line_sdref)
-            info += "\n"
-        else:
-            info += "No line.\n"
+        # Import purchase.order and all its sub records
+        po_id = self.import_data_json(cr, uid, [po], context=context).pop()
+        info = "Purchase order imported:\nRef: %s\nsdref: %s\n\n" \
+               % (po['name'], po['id'])
 
         # Confirm
         netsvc.LocalService("workflow").trg_validate(
@@ -662,21 +617,22 @@ class purchase_order_sync(osv.osv):
 
         # Overwrite automatically created pickings by ones of CP
         if pickings:
-            info += "Pickings:\n"
-            existing_pickings = model_picking.search(cr, uid,
+            info += "Pickings replaced successfully:\n"
+            existing_pickings = self.pool['stock.picking'].search(cr, uid,
                 [('purchase_id', '=', po_id)], context=context)
             assert len(pickings) == len(existing_pickings)
             for i, picking in zip(existing_pickings, pickings):
-                picking_sdref = xmlid_to_sdref(picking.pop('id'))
-                model_picking.convert_sdref_in_dict_to_id(
-                    cr, uid, picking, context=context)
-                model_picking.write(cr, uid, i, picking, context=context)
                 # overwrite sdref to make it match the one of the message
-                model_data.create(cr, uid, {
-                    'module': 'sd', 'name': picking_sdref,
+                picking_sdref = xmlid_to_sdref(picking['id'])
+                self.pool['ir.model.data'].create(cr, uid, {
                     'model': 'stock.picking', 'res_id': i,
-                }, context=context)
-                info += " - Ref: %s / sdref: %s\n" % (line['name'], line_sdref)
+                    'module': 'sd', 'name': picking_sdref,
+                    }, context=context)
+                info += " - Ref: %s / sdref: %s\n" \
+                        % (picking['name'], picking['id'])
+            # import them all at once (faster)
+            self.pool['stock.picking'].import_data_json(
+                cr, uid, pickings, context=context)
             info += "\n"
         else:
             info += "No picking.\n\n"

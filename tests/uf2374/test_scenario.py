@@ -3,6 +3,7 @@
 import os
 import sys
 import functools
+from itertools import chain
 import string
 import random
 import pprint
@@ -21,6 +22,7 @@ def now():
 
 
 def catch_xmlrpc_errors(func):
+    @functools.wraps(func)
     def wrapper(self, *a, **kw):
         try:
             return func(self, *a, **kw)
@@ -57,6 +59,16 @@ class SynchronizePOfromCPtoRW(unittest2.TestCase):
 
     @catch_xmlrpc_errors
     def test_10_cp_to_rw(self):
+        # Check name of CP and RW entities
+        cp_entity_id = self._execute(
+            self.cp, 1, 'admin', 'sync.client.entity', 'search', []).pop()
+        self.cp_name = self._execute(self.cp, 1, 'admin', 'sync.client.entity',
+            'read', cp_entity_id, ['name'])['name']
+        rw_entity_id = self._execute(
+            self.rw, 1, 'admin', 'sync.client.entity', 'search', []).pop()
+        self.rw_name = self._execute(self.rw, 1, 'admin', 'sync.client.entity',
+            'read', rw_entity_id, ['name'])['name']
+        self.assertEqual(self.cp_name, self.rw_name)
         # Purchase order creation
         self.template_po = {
             'name': random_name(),
@@ -101,13 +113,27 @@ class SynchronizePOfromCPtoRW(unittest2.TestCase):
         self.line = self._execute(self.cp, 1, 'admin', 'purchase.order.line',
             'read', self.line_id, ['name'])
         # Make analytic distribution
-        self.distribution = {
-            'purchase_line_ids' : [(4, self.line_id)],
+        self.distribution_template = {
+            'purchase_line_ids': [(4, self.line_id)],
         }
         self.distribution_id = self._execute(self.cp, 1, 'admin',
-            'analytic.distribution', 'create', self.distribution)
+            'analytic.distribution', 'create', self.distribution_template)
         self.distribution = self._execute(self.cp, 1, 'admin',
             'analytic.distribution', 'read', self.distribution_id, ['name'])
+        # Make CC line
+        self.cc_line_template = {
+            'distribution_id': self.distribution_id,
+            'percentage': 42,
+            'currency_id': self._execute(self.cp, 1, 'admin', 'res.currency',
+                'search', [])[0],
+            'destination_id': self._execute(self.cp, 1, 'admin',
+                'account.analytic.account', 'search', [])[0],
+        }
+        self.cc_line_id = self._execute(self.cp, 1, 'admin',
+            'cost.center.distribution.line', 'create', self.cc_line_template)
+        self.cc_line = self._execute(self.cp, 1, 'admin',
+            'cost.center.distribution.line', 'read', self.cc_line_id,
+                ['percentage'])
         # Confirm purchase order
         self._exec_workflow(self.cp, 1, 'admin', 'purchase.order',
             'purchase_confirm', self.po_id)
@@ -127,23 +153,29 @@ class SynchronizePOfromCPtoRW(unittest2.TestCase):
         self.In = self._execute(self.cp, 1, 'admin', 'stock.picking',
             'read', self.in_id, ['name'])
         # Rule creation
+        self.export_fields = (
+            ['id', 'name', 'partner_id/id', 'partner_address_id/id',
+             'location_id/id', 'pricelist_id/id', 'order_type',
+             'delivery_confirmed_date'] +
+            ['order_line/' + f
+             for f in ['id', 'name', 'product_id/id', 'product_qty',
+                       'product_uom/id', 'price_unit']] +
+            ['picking_ids/' + f
+             for f in ['id', 'name']] +
+            ['order_line/analytic_distribution_id/' + f
+             for f in ['id', 'name']] +
+            ['order_line/analytic_distribution_id/'
+             'cost_center_lines/' + f
+             for f in ['id', 'percentage', 'currency_id/id',
+                       'destination_id/id']]
+        )
         self.rule = {
             'direction_usb': 'cp_to_rw',
             'model': 'purchase.order',
             'domain': str([('state','=','approved')]),
             'remote_call' :
                 'purchase.order.replicate_approved_po_from_cp_on_rw',
-            'arguments' :
-                str(['id', 'name', 'partner_id/id', 'partner_address_id/id',
-                     'location_id/id', 'pricelist_id/id', 'order_type',
-                     'delivery_confirmed_date'] +
-                    ['order_line/' + f
-                     for f in ['id', 'name', 'product_id/id', 'product_qty',
-                               'product_uom/id', 'price_unit']] +
-                    ['picking_ids/' + f
-                     for f in ['id', 'name']] +
-                    ['order_line/analytic_distribution_id/' + f
-                     for f in ['id', 'name']]),
+            'arguments': str(self.export_fields),
             # Non-sense field required otherwise create_from_rule fail
             'destination_name': 'name',
             # Required to to determine the message identifier
@@ -189,7 +221,7 @@ class SynchronizePOfromCPtoRW(unittest2.TestCase):
         # Transfer message to rw instance
         self.rw_message_id = self._execute(
             self.rw, 1, 'admin', 'sync_remote_warehouse.message_received',
-            'create', dict(self.message, source=self.cp))
+            'create', dict(self.message, source=self.cp_name))
         # Execute message in rw instance
         self.assertEqual(self._execute(
             self.rw, 1, 'admin', 'sync_remote_warehouse.message_received',
@@ -204,46 +236,20 @@ class SynchronizePOfromCPtoRW(unittest2.TestCase):
         self.assertTrue(self.rw_message['run'],
             "Message not run because of the following reason:\n" +
             self.rw_message['log'])
-        # Purchase order check
+        # compare export result
+        datas = self._execute(self.cp, 1, 'admin', 'purchase.order',
+            'export_data_json', [self.po_id], self.export_fields)['datas']
+        self.assertTrue(datas, "could not export row")
+        self.export = datas.pop()
         rw_po_ids = self._execute(self.rw, 1, 'admin', 'purchase.order',
             'search', [('name', '=', self.po['name'])])
         self.assertEqual(len(rw_po_ids), 1)
         self.rw_po_id = rw_po_ids.pop()
-        self.rw_po = self._execute(self.rw, 1, 'admin', 'purchase.order',
-            'read', self.rw_po_id,
-            ['name', 'state', 'order_line', 'picking_ids'])
-        self.assertEqual(self.rw_po['state'], 'approved')
-        self.assertEqual(len(self.rw_po['order_line']), 1)
-        self.assertEqual(len(self.rw_po['picking_ids']), 1)
-        # Purchase order line check
-        self.rw_line_id = self.rw_po['order_line'][0]
-        self.rw_line = self._execute(self.rw, 1, 'admin',
-            'purchase.order.line', 'read', self.rw_line_id,
-            ['name', 'analytic_distribution_id'])
-        self.assertEqual(self.rw_line['name'], self.line['name'])
-        # Analytic distribution check
-        self.rw_distribution_id = self.rw_line['analytic_distribution_id'][0]
-        self.assertTrue(self.rw_distribution_id)
-        self.rw_distribution = self._execute(self.rw, 1, 'admin',
-            'analytic.distribution', 'read', self.rw_distribution_id, ['name'])
-        self.assertDictContainsSubset(
-            dict(self.rw_distribution, id='***'),
-            dict(self.distribution, id='***'))
-        # IN shipment check
-        self.rw_in_id = self.rw_po['picking_ids'][0]
-        self.rw_in = self._execute(self.rw, 1, 'admin',
-            'stock.picking', 'read', self.rw_in_id, ['name'])
-        self.assertEqual(self.rw_in['name'], self.In['name'])
-        # Check there is no detritus in rw instance
-        self.assertEqual((self.rw_original_po_count + 1),
-            len(self._execute(self.rw, 1, 'admin', 'purchase.order',
-                              'search', [])))
-        self.assertEqual((self.rw_original_line_count + 1),
-            len(self._execute(self.rw, 1, 'admin', 'purchase.order.line',
-                              'search', [])))
-        self.assertEqual((self.rw_original_picking_count + 1),
-            len(self._execute(self.rw, 1, 'admin', 'stock.picking',
-                              'search', [])))
+        rw_datas = self._execute(self.rw, 1, 'admin', 'purchase.order',
+            'export_data_json', [self.rw_po_id], self.export_fields)['datas']
+        self.assertTrue(rw_datas, "could not export row")
+        self.rw_export = rw_datas.pop()
+        self.assertDictContainsSubset(self.export, self.rw_export)
 
 if __name__ == '__main__':
     unittest2.main(failfast=True, verbosity=2)

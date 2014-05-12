@@ -441,23 +441,6 @@ SELECT name, %s FROM ir_model_data WHERE module = 'sd' AND model = %%s AND name 
             result = dict((sdref, read_result[id][real_field]) for sdref, id in result.items())
         return result if result_iterable else result.get(sdrefs[0], False)
 
-    def convert_sdref_in_dict_to_id(self, cr, uid, Dict, context=None):
-        assert isinstance(Dict, dict)
-        for field, value in Dict.items():
-            if isinstance(value, dict) and 'id' in value:
-                value = value['id']
-            if not isinstance(value, basestring):
-                continue
-            if field == 'id':
-                value = xmlid_to_sdref(value)
-                Dict['id'] = self.find_sd_ref(cr, uid, value, context=context)
-            else:
-                column = self._all_columns[field].column
-                if isinstance(column, fields.many2one):
-                    value = xmlid_to_sdref(value)
-                    Dict[field] = self.pool[column._obj]\
-                        .find_sd_ref(cr, uid, value, context=context)
-
     @orm_method_overload
     def create(self, original_create, cr, uid, values, context=None):
         if context is None: context = {}

@@ -12,6 +12,7 @@ import datetime
 
 
 def catch_xmlrpc_errors(func):
+    @functools.wraps(func)
     def wrapper(self, *a, **kw):
         try:
             return func(self, *a, **kw)
@@ -142,6 +143,12 @@ class SynchronizePOfromCPtoRW(unittest2.TestCase):
             dict(self.rw_distribution, id='*'))
         self.assertDictContainsSubset(
             dict(self.cc_line, id='*'), dict(self.rw_cc_line, id='*'))
+        # compare export result
+        rw_datas = self._execute(self.rw, 1, 'admin', 'purchase.order',
+            'export_data_json', [self.rw_po_id], self.export_fields)['datas']
+        self.assertTrue(rw_datas, "could not export row")
+        self.rw_export = rw_datas.pop()
+        self.assertDictContainsSubset(self.export, self.rw_export)
 
 if __name__ == '__main__':
     unittest2.main(failfast=True, verbosity=2)
