@@ -174,7 +174,7 @@ class update_to_send(osv.osv):
                         'values' : tools.ustr(row),
                         'handle_priority' : rule.handle_priority,
                     }, context=context)
-                    update._logger.debug("Created 'normal' update model=%s id=%d (rule sequence=%d)" % (self._name, update_id, rule.id))
+                    update._logger.debug("Created 'normal' update model=%s id=%d (rule sequence=%d)" % (self._name, update_id, rule.sequence_number))
 
             self.clear_synchronization(cr, uid, ids_to_compute, context=context)
 
