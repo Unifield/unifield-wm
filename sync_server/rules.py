@@ -634,37 +634,37 @@ class message_rule(osv.osv):
 
     check_domain = check_domain
 
-    def check_arguments(self, cr, uid, rec, title="", context=None):
-        message = title
-        error = False
-        try:
-            field_error = False
-            arguments = eval(rec.arguments)
-            for field in arguments:
-                base_field = field.split('/')[0]
-                if not isinstance(field, str): raise TypeError
-                model_ids = self.pool.get(rec.model_id).get_model_ids(cr, uid, context=context)
-                if not (base_field == 'id' or
-                        self.pool.get('ir.model.fields').search(cr, uid,
-                            [('model_id', 'in', model_ids),
-                             ('name', '=', base_field)], context=context)):
-                    field_error = field
-                    raise KeyError
-        except TypeError:
-            message += "failed (Fields list should be a list of string)!\n"
-            error = True
-        except KeyError:
-            message += "failed (Field %s doesn't exist for the selected model/object)!\n" % field_error
-            error = True
-        except:
-            message += "failed! (Syntax Error : not a python expression) \n"
-            error = True
-        else:
-            message += "pass.\n"
-        finally:
-            if error: message += "Example: ['name', 'order_line/product_id/id', 'order_line/product_id/name', 'order_line/product_uom_qty']\n"
-            
-        return (message, error)
+    def _check_arguments(self, cr, uid, rec, context=None):
+        arguments = eval(rec.arguments)
+
+        # check field type
+        if not all(isinstance(f, basestring) for f in arguments):
+            raise TypeError("Some fields are not string")
+
+        # search for duplicateds
+        uniques = set(arguments)
+        if len(uniques) < len(arguments):
+            raise Exception("Duplicate entries in arguments: " + ", ".join(
+                    filter(lambda x: arguments.count(x) > 1, uniques)))
+
+        # check if columns are valid
+        for field in (f.split('/')[0] for f in arguments):
+            # column must exists in _all_columns otherwise it must be a magical
+            # one
+            if field not in ('id', 'create_date', 'write_date',
+                                  'create_uid', 'write_uid'):
+                # expected: raise KeyError if model or column doesn't exists
+                column = \
+                    self.pool[rec.model_id]._all_columns[field].column
+                # some fields cannot be exported
+                if isinstance(column, (fields.related,)):
+                    raise TypeError(
+                        "field %s of model %s can not be exported because the "
+                        "type is %s" % (field, rec.model_id,
+                                        self.pool[rec.model_id]\
+                                            ._all_columns[field]\
+                                            .column.__class__.__name__))
+        return True
 
     def validate(self, cr, uid, ids, context=None):
         error = False
@@ -707,9 +707,20 @@ class message_rule(osv.osv):
                 message.append("pass.\n")
             # Arguments of the call syntax and existence
             
-            mess, err = self.check_arguments(cr, uid, rec, title="* Checking arguments..." , context=context)
-            error = err or error
-            message.append(mess)
+            message.append("* Checking arguments... ")
+            try:
+                self._check_arguments(cr, uid, rec, context=context)
+            except Exception, exc:
+                message.extend([
+                    "failed! ",
+                    "%s: %s\n" % (exc.__class__.__name__, str(exc)),
+                    ("Example: ['name', 'order_line/product_id/id', "
+                     "'order_line/product_id/name', "
+                     "'order_line/product_uom_qty']\n"),
+                ])
+                error |= True
+            else:
+                message.append("pass.\n")
             
             # Sequence is unique
             message.append("* Sequence is unique... ")
@@ -720,7 +731,7 @@ class message_rule(osv.osv):
                 message.append("pass.\n")
                 
             message_header = 'This rule is valid:\n\n' if not error else 'This rule cannot be validated for the following reason:\n\n'
-            message_body = ' '.join(message)
+            message_body = ''.join(message)
             message_data = {'state': 'valid' if not error else 'invalid',
                             'message' : message_header + message_body,
                             'message_rule' : rec.id}
