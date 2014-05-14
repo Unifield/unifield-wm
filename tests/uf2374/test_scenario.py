@@ -152,6 +152,13 @@ class SynchronizePOfromCPtoRW(unittest2.TestCase):
         self.in_id = in_ids.pop()
         self.In = self._execute(self.cp, 1, 'admin', 'stock.picking',
             'read', self.in_id, ['name'])
+        # Find stock.move linked to pickings
+        move_ids = self._execute(self.cp, 1, 'admin', 'stock.move',
+            'search', [('picking_id', '=', self.in_id)])
+        self.assertEqual(len(move_ids), 1)
+        self.move_id = move_ids.pop()
+        self.move = self._execute(self.cp, 1, 'admin', 'stock.move',
+            'read', self.move_id, ['name'])
         # Rule creation
         self.export_fields = (
             ['id', 'name', 'partner_id/id', 'partner_address_id/id',
@@ -162,10 +169,14 @@ class SynchronizePOfromCPtoRW(unittest2.TestCase):
                        'product_uom/id', 'price_unit']] +
             ['picking_ids/' + f
              for f in ['id', 'name']] +
+            ['picking_ids/move_lines/' + f
+             for f in ['id', 'name', 'state', 'product_uom/id',
+                       'company_id/id', 'location_dest_id/id',
+                       'location_id/id', 'product_id/id',
+                       'reason_type_id/id']] +
             ['order_line/analytic_distribution_id/' + f
              for f in ['id', 'name']] +
-            ['order_line/analytic_distribution_id/'
-             'cost_center_lines/' + f
+            ['order_line/analytic_distribution_id/cost_center_lines/' + f
              for f in ['id', 'percentage', 'currency_id/id',
                        'destination_id/id']]
         )
@@ -211,13 +222,6 @@ class SynchronizePOfromCPtoRW(unittest2.TestCase):
             self.cp, 1, 'admin', 'sync_remote_warehouse.message_to_send',
             'read', self.message_id, ['identifier', 'remote_call',
                                       'arguments'])
-        # Gather information on rw instance
-        self.rw_original_po_count = len(self._execute(
-            self.rw, 1, 'admin', 'purchase.order', 'search', []))
-        self.rw_original_line_count = len(self._execute(
-            self.rw, 1, 'admin', 'purchase.order.line', 'search', []))
-        self.rw_original_picking_count = len(self._execute(
-            self.rw, 1, 'admin', 'stock.picking', 'search', []))
         # Transfer message to rw instance
         self.rw_message_id = self._execute(
             self.rw, 1, 'admin', 'sync_remote_warehouse.message_received',

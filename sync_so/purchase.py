@@ -621,15 +621,26 @@ class purchase_order_sync(osv.osv):
             existing_pickings = self.pool['stock.picking'].search(cr, uid,
                 [('purchase_id', '=', po_id)], context=context)
             assert len(pickings) == len(existing_pickings)
-            for i, picking in zip(existing_pickings, pickings):
+            for picking_id, picking in zip(existing_pickings, pickings):
                 # overwrite sdref to make it match the one of the message
                 picking_sdref = xmlid_to_sdref(picking['id'])
                 self.pool['ir.model.data'].create(cr, uid, {
-                    'model': 'stock.picking', 'res_id': i,
+                    'model': 'stock.picking', 'res_id': picking_id,
                     'module': 'sd', 'name': picking_sdref,
                     }, context=context)
                 info += " - Ref: %s / sdref: %s\n" \
                         % (picking['name'], picking['id'])
+                # stock.move: overwrite sdref
+                move_lines = picking['move_lines']
+                existing_moves = self.pool['stock.move'].search(cr, uid,
+                    [('picking_id', '=', picking_id)], context=context)
+                assert len(move_lines) == len(existing_moves)
+                for move_id, move in zip(existing_moves, move_lines):
+                    move_sdref = xmlid_to_sdref(move['id'])
+                    self.pool['ir.model.data'].create(cr, uid, {
+                        'model': 'stock.move', 'res_id': move_id,
+                        'module': 'sd', 'name': move_sdref,
+                        }, context=context)
             # import them all at once (faster)
             self.pool['stock.picking'].import_data_json(
                 cr, uid, pickings, context=context)
