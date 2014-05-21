@@ -942,6 +942,89 @@ class stock_picking(osv.osv):
             invoice_result = super(stock_picking, self).action_invoice_create(cr, uid, ids,
                                   journal_id=journal_id, group=group, type=type, context=context)
         return invoice_result
+
+    def update_int(self, cr, uid, source, data, context=None):
+        entity = self.pool['sync.client.entity'].get_entity(cr, uid, context)
+        if entity.usb_instance_type == 'remote_warehouse':
+            raise Exception("Can not execute this method in RW!")
+        if not source == entity.name:
+            raise Exception("This message is for instance %s (but I am %s)\n" \
+                            % (source, entity.name))
+
+        Int = dict(data.values)
+        In = Int.pop('corresponding_in_picking_stock_picking')
+        # Only make the link in the INT to the IN
+        # (raise ValueError() if IN does not exits)
+        Int['corresponding_in_picking_stock_picking'] = {'id': In['id']}
+        in_lines = In.pop('move_lines')
+
+        self.import_data_json(cr, uid, [In], context=context)
+        info = "IN Updated:\nRef: %s\nsdref: %s\n\n" \
+               % (In['name'], In['id'])
+
+        # Create the Wizard
+        in_id = self.find_sd_ref(cr, uid, xmlid_to_sdref(In['id']), context=context)
+        assert in_id, 'Cannot find IN: sdref=' + In['id']
+        wizard_id = self.action_process(cr, uid, [in_id], context=context).pop('res_id')
+        wizard_lines = self.pool.get('stock.move.in.processor').search(
+            cr, uid, [('wizard_id', '=', wizard_id)], context=context)
+
+        # Validate lines
+        # NOTE: line already process before export no change to do
+        self.pool.get('stock.incoming.processor').copy_all(
+            cr, uid, wizard_id, context=context)
+
+        # Process IN
+        self.pool.get('stock.incoming.processor').\
+            do_incoming_shipment(cr, uid, [wizard_id], context=dict(context, sync_message_execution=False))
+        vals = self.read(cr, uid, in_id, ['state'], context=context)
+        assert vals['state'] == 'done', 'invalid state after processing of ' \
+                                        'IN shipment'
+
+        # Find the created INT and lines
+        stock_picking_int_ids = self.search(
+            cr, uid, [('type', '=', 'internal')], context=context)
+        for existing_int in self.read(cr, uid, stock_picking_int_ids,
+                ['corresponding_in_picking_stock_picking', 'move_lines'],
+                context=context):
+            if existing_int['corresponding_in_picking_stock_picking'] == in_id:
+                int_id = existing_int['id']
+                existing_lines = existing_int['move_lines']
+                break
+        else:
+            raise ValueError("can not find INT")
+
+        # Overwrite sdref of the created INT and lines
+        self.pool['ir.model.data'].create(cr, uid, {
+                'model': 'stock.picking', 'res_id': int_id,
+                'module': 'sd', 'name': xmlid_to_sdref(Int['id']),
+            }, context=context)
+        assert len(existing_lines) == len(Int['move_lines']), \
+            "The number of INT lines should be equal with the original INT"
+        for move_id, line in zip(existing_lines, Int['move_lines']):
+            self.pool['ir.model.data'].create(cr, uid, {
+                    'model': 'stock.move', 'res_id': move_id,
+                    'module': 'sd', 'name': xmlid_to_sdref(line['id']),
+                }, context=context)
+
+        # Import INT
+        self.import_data_json(cr, uid, [Int], context=context)
+        info += "INT imported:\nRef: %s\nsdref: %s\n\n" \
+                % (Int['name'], Int['id'])
+
+        # Import IN lines
+        self.pool['stock.move'].import_data_json(cr, uid, in_lines,
+                                                 context=context)
+
+        # Check corresponding IN
+        vals = self.read(cr, uid, int_id,
+                  ['corresponding_in_picking_stock_picking'],
+                  context=context)
+        assert vals['corresponding_in_picking_stock_picking'] == in_id, \
+            'Link from INT to IN not valid'
+
+        return info.rstrip()
+
 stock_picking()
 
 class shipment(osv.osv):

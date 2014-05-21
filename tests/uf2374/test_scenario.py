@@ -237,9 +237,9 @@ class SynchronizePOfromCPtoRW(unittest2.TestCase):
         # Consistency & execution checks
         self.assertDictContainsSubset(
             dict(self.message, id='***'), dict(self.rw_message, id='***'))
-        self.assertTrue(self.rw_message['run'],
-            "Message not run because of the following reason:\n" +
-            self.rw_message['log'])
+        if not self.rw_message['run']:
+            self.fail("Message not run because of the following reason:\n" +
+                self.rw_message['log'])
         # compare export result
         datas = self._execute(self.cp, 1, 'admin', 'purchase.order',
             'export_data_json', [self.po_id], self.export_fields)['datas']
@@ -254,6 +254,150 @@ class SynchronizePOfromCPtoRW(unittest2.TestCase):
         self.assertTrue(rw_datas, "could not export row")
         self.rw_export = rw_datas.pop()
         self.assertDictContainsSubset(self.export, self.rw_export)
+
+        # return INT rw to cp
+
+        # Process picking/IN
+        self.rw_in_ids = self._execute(self.rw, 1, 'admin', 'stock.picking',
+                                       'search',
+                                        [('purchase_id', '=', self.rw_po_id)])
+        self.assertEqual(len(self.rw_in_ids), 1)
+
+        #recreate the wizard to process the picking
+        wizard_id = self._execute(self.rw, 1, 'admin', 'stock.picking',
+                                        'action_process', self.rw_in_ids)\
+            .pop('res_id')
+
+        wizard_lines = self._execute(self.rw, 1, 'admin',
+                                     'stock.move.in.processor', 'search',
+                                     [('wizard_id','=', wizard_id)])
+        self.assertEqual(len(wizard_lines), 1)
+
+        # set a quantity to be able to continue the workflow
+        self._execute(self.rw, 1, 'admin', 'stock.move.in.processor',
+                      'write', wizard_lines,{'quantity': 1.0})
+
+        # compute the wizard
+        self._execute(self.rw, 1, 'admin', 'stock.incoming.processor',
+                                        'do_incoming_shipment', [wizard_id])
+
+
+        self.rw_in = self._execute(self.rw, 1, 'admin', 'stock.picking',
+                                   'read', self.rw_in_ids, ['state'])[0]
+        # check if after the computation of the wizard we correctly change the
+        # state to done
+        self.assertEqual(self.rw_in['state'], 'done')
+
+        rw_int_ids = self._execute(self.rw, 1, 'admin', 'stock.picking',
+                                        'search',
+                                        [('type', '=', 'internal')])
+
+        # find the int id
+        for Int in self._execute(self.rw, 1, 'admin', 'stock.picking', 'read',
+                                 rw_int_ids, ['id',
+                                    'corresponding_in_picking_stock_picking']):
+            if Int['corresponding_in_picking_stock_picking'] in self.rw_in_ids:
+                self.rw_int_id = Int['id']
+                break
+        else:
+            self.fail("can not find INT")
+
+        self.export_fields_picking = (
+            ['id', 'name'] +
+            ['corresponding_in_picking_stock_picking/' + f
+             for f in ['id', 'name', 'move_lines/id',
+                       'move_lines/picking_id/id',
+                       'move_lines/name']] +
+            ['move_lines/' + f
+             for f in ['id', 'name', 'product_uom/id',
+                       'company_id/id', 'location_dest_id/id',
+                       'location_id/id', 'product_id/id',
+                       'reason_type_id/id', 'move_dest_id/id']]
+        )
+
+        self.rule_picking = {
+            'direction_usb': 'rw_to_cp',
+            'model': 'stock.picking',
+            'domain': str([('state', '=', 'done'), ('type', '=', 'internal')]),
+            'remote_call': 'stock.picking.update_int',
+            'arguments': str(self.export_fields_picking),
+            # Non-sense field required otherwise create_from_rule fail
+            'destination_name': 'name',
+            # Required to to determine the message identifier
+            'server_id': 1,
+        }
+
+        # check the domain
+        self.assertIn(
+            self.rw_int_id,
+            self._execute(self.rw, 1, 'admin', 'stock.picking', 'search',
+                eval(self.rule_picking['domain'])))
+
+        self.rw_rule_id = self._execute(
+            self.rw, 1, 'admin', 'sync.client.message_rule',
+            'create', self.rule_picking)
+
+        # Create the messages
+        self.assertGreater(self._execute(
+            self.rw, 1, 'admin', 'sync_remote_warehouse.message_to_send',
+            'create_from_rule', self.rw_rule_id), 0)
+
+        self.int_sdref = self._execute(
+            self.rw, 1, 'admin', 'stock.picking', 'get_sd_ref', self.rw_int_id)
+
+        # Check that the message has been created
+        self.rw_message_identifier = \
+            "%s_%s" % (self.int_sdref, self.rule_picking['server_id'])
+
+        rw_message2_ids = self._execute(
+            self.rw, 1, 'admin', 'sync_remote_warehouse.message_to_send',
+            'search', [('identifier', '=', self.rw_message_identifier)])
+        self.assertEqual(len(rw_message2_ids), 1)
+        self.rw_message2_id = rw_message2_ids.pop()
+
+        # Mark the message has sent to avoid conflict with regular
+        # synchronization
+        self._execute(
+            self.rw, 1, 'admin', 'sync_remote_warehouse.message_to_send',
+            'write', self.rw_message2_id, {'sent': True})
+        # Fetch the message
+        self.rw_message2 = self._execute(
+            self.rw, 1, 'admin', 'sync_remote_warehouse.message_to_send',
+            'read', self.rw_message2_id, ['identifier', 'remote_call',
+                                          'arguments'])
+
+        # Transfer message to cp instance
+        self.message2_id = self._execute(
+            self.cp, 1, 'admin', 'sync_remote_warehouse.message_received',
+            'create', dict(self.rw_message2, source=self.rw_name))
+
+        # Execute message in rw instance
+        self.assertEqual(self._execute(
+            self.cp, 1, 'admin', 'sync_remote_warehouse.message_received',
+            'execute', [self.message2_id]), 1)
+
+        self.message2 = self._execute(
+            self.cp, 1, 'admin', 'sync_remote_warehouse.message_received',
+            'read', self.message2_id, ['run', 'log'])
+
+        if not self.message2['run']:
+            self.fail("Message not run because of the following reason:\n" +
+                self.message2['log'])
+
+        # export stock picking and check with rw
+        rw_picking_datas = self._execute(self.rw, 1, 'admin', 'stock.picking',
+            'export_data_json', [self.rw_int_id],
+            self.export_fields_picking)['datas'][0]
+
+        self.int_id = self._execute(self.cp, 1, 'admin', 'stock.picking',
+                                    'find_sd_ref', self.int_sdref)
+        self.assertTrue(self.int_id, 'int doesn t exist in cp')
+        cp_picking_datas = self._execute(self.cp, 1, 'admin', 'stock.picking',
+            'export_data_json', [self.int_id],
+            self.export_fields_picking)['datas'][0]
+
+        self.assertDictContainsSubset(rw_picking_datas, cp_picking_datas)
+
 
 if __name__ == '__main__':
     unittest2.main(failfast=True, verbosity=2)
