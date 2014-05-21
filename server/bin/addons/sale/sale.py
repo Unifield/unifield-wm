@@ -1021,7 +1021,9 @@ class sale_order_line(osv.osv):
                         "You have to change either the product, the quantity or the pricelist."
                     }
             else:
-                result.update({'price_unit': price})
+                result.update({
+                    'price_unit': price,
+                })
         return {'value': result, 'domain': domain, 'warning': warning}
 
     def product_uom_change(self, cursor, user, ids, pricelist, product, qty=0,

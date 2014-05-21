@@ -317,15 +317,16 @@ class wizard_configure_tarif_special_client(wizard.interface):
             sequence = 1
             if product[2].get('sequence'):
                 sequence = product[2].get('sequence')
-            p_data = prod_obj.read(cr, uid, product_id, ['name'])
+            p_data = prod_obj.name_get(cr, uid, [product_id])
             item_ids = item_obj.search(cr, uid, [('sequence', '=', 1),
                                                  ('price_version_id', '=', version_id),
                                                  ('product_id', '=', product_id),
                                                  ('base', '=', base_special),])
             item_data = {'sequence': 1,
-                         'name': p_data.get('name'), 
+                         'name': p_data[0][1],
                          'product_id': product_id,
                          'base': base_special,
+                         'type_tarif': 'special',
                          'price_discount' :-1.0,
                          'price_surcharge': product[2].get('prix_special'),
                          'price_version_id': version_id}

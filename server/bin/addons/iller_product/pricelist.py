@@ -204,6 +204,7 @@ product_tarifs_speciaux()
 class product_pricelist_version(osv.osv):
     _name = 'product.pricelist.version'
     _inherit = 'product.pricelist.version'
+    _order = 'date_end desc'
 
     _columns = {
         'base_ok': fields.boolean(string='Base ?'),
@@ -232,6 +233,7 @@ product_tarif_special_client()
 class product_pricelist_item(osv.osv):
     _name = 'product.pricelist.item'
     _inherit = 'product.pricelist.item'
+    _order = 'sequence, name'
 
 
     def write(self, cr, uid, ids, vals, context={}):
@@ -252,6 +254,17 @@ class product_pricelist_item(osv.osv):
         'price_discount': fields.float('Price Discount', digits=(16,6)),
         'bareme_id': fields.many2one('product.pricelist.bareme', string='Barème'),  
         'tarif_special_id': fields.many2one('product.tarif.special.client', string='Tarif spécial client', invisible=True),  
+        'type_tarif': fields.selection(
+            selection=[
+                ('normal', 'PN'),
+                ('jaune', 'PJ'),
+                ('blanche', 'PB'),
+                ('special', 'SP'),
+                ('mea', 'MEA'),
+                ('decembre', 'Noel'),
+            ],
+            string='Type de tarif',
+        ),
     }
 
     def bareme_change(self, cr, uid, ids, bareme_id, base_id, context={}):
@@ -343,7 +356,7 @@ class product_pricelist(osv.osv):
                 if (date_start <= date_commande) and (date_commande <= date_end) and tarif_noel == 'oui':
                     prix_decembre = self.pool.get('product.product').browse(cr,uid,prod_id).prix_decembre
                     if prix_decembre:
-                        res[ids[0]] = prix_decembre
+                        res[ids[0]] = (prix_decembre, 'decembre')
                         return res
 
         return res
@@ -505,7 +518,7 @@ class product_pricelist(osv.osv):
                 product = product_obj.browse(cr, uid, prod_id)
                 uom = product.uos_id or product.uom_id
                 result[id] = self.pool.get('product.uom')._compute_price(cr,
-                        uid, uom.id, result[id], context['uom'])
+                        uid, uom.id, result[id][0], context['uom'])
         return result
         
 product_pricelist()
@@ -695,10 +708,11 @@ class product_pricelist_promo(osv.osv):
             ## Si la promo est de type blanche, on applique
             ## le prix promo blanche pour chaque produit
             for product in product_ids:
-                p_data = prod_obj.read(cr, uid, product[0], ['name'])
+                p_data = prod_obj.name_get(cr, uid, [product[0]])
                 item_id = item_obj.create(cr, uid, {'sequence': 3,
-                                                    'name': p_data.get('name'), 
+                                                    'name': p_data[0][1],
                                                     'product_id': product[0],
+                                                    'type_tarif': 'blanche',
                                                     'base': base,
                                                     'price_version_id': version_id})
                 items.append(item_id)
@@ -717,13 +731,14 @@ class product_pricelist_promo(osv.osv):
             ## Si la promo est de type jaune, on applique
             ## le barème c15 pour chaque produit
             for product in product_ids:
-                p_data = prod_obj.read(cr, uid, product[0], ['name'])
+                p_data = prod_obj.name_get(cr, uid, [product[0]])
                 if product[1]:
                     item_id = item_obj.create(cr, uid, {'sequence': 3,
-                                                    'name': p_data.get('name'), 
+                                                    'name': p_data[0][1],
                                                     'product_id': product[0],
                                                     'base': base,
                                                     'bareme_id': bareme,
+                                                    'type_tarif': 'jaune',
                                                     'price_discount': -1,
                                                     'price_surcharge': product[1],
                                                     'price_version_id': version_id})
@@ -733,6 +748,7 @@ class product_pricelist_promo(osv.osv):
                                                     'product_id': product[0],
                                                     'base': base,
                                                     'bareme_id': bareme,
+                                                    'type_tarif': 'jaune',
                                                     'price_discount': coeff-1,
                                                     'price_version_id': version_id})
                 items.append(item_id)
@@ -1090,20 +1106,22 @@ class product_pricelist_mea(osv.osv):
             ## Si la mea est de type blanche, on applique
             ## le prix mea blanche pour chaque produit
             for product in product_ids:
-                p_data = prod_obj.read(cr, uid, product[0], ['name'])
+                p_data = prod_obj.name_get(cr, uid, [product[0]])
                 if product[2]:
                     item_id = item_obj.create(cr, uid, {'sequence': 3,
-                                                    'name': p_data.get('name'), 
+                                                    'name': p_data[0][1],
                                                     'product_id': product[0],
                                                     'base': base,
                                                     'price_discount': -1,
+                                                    'type_tarif': 'mea',
                                                     'price_surcharge': product[2],
                                                     'price_version_id': version_id})
                 else:
                     item_id = item_obj.create(cr, uid, {'sequence': 3,
-                                                    'name': p_data.get('name'), 
+                                                    'name': p_data[0][1], 
                                                     'product_id': product[0],
                                                     'base': base,
+                                                    'type_tarif': 'mea',
                                                     'price_version_id': version_id})
 
                 items.append(item_id)
@@ -1121,21 +1139,23 @@ class product_pricelist_mea(osv.osv):
             ## Si la mea est de type jaune, on applique
             ## le barème c15 pour chaque produit
             for product in product_ids:
-                p_data = prod_obj.read(cr, uid, product[0], ['name'])
+                p_data = prod_obj.name_get(cr, uid, [product[0]])
                 if product[1]:
                     item_id = item_obj.create(cr, uid, {'sequence': 3,
-                                                    'name': p_data.get('name'), 
+                                                    'name': p_data[0][1],
                                                     'product_id': product[0],
                                                     'base': base,
                                                     'bareme_id': bareme,
+                                                    'type_tarif': 'mea',
                                                     'price_discount': -1,
                                                     'price_surcharge': product[1],
                                                     'price_version_id': version_id})
                 else:
                     item_id = item_obj.create(cr, uid, {'sequence': 3,
-                                                    'name': p_data.get('name'), 
+                                                    'name': p_data[0][1],
                                                     'product_id': product[0],
                                                     'base': base,
+                                                    'type_tarif': 'mea',
                                                     'bareme_id': bareme,
                                                     'price_discount': coeff-1,
                                                     'price_version_id': version_id})

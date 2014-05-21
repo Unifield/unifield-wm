@@ -142,6 +142,17 @@ class iller_sale_line(osv.osv):
         'type_cond': fields.function(_get_info_order_line, type='char', method=True, string=u'Type conditionnement', readonly=True, multi='infos_order_line'),
         'type_prep': fields.function(_get_info_order_line, type='char', method=True, string=u'Type prép.', readonly=True, multi='infos_order_line'),
         'num_lot': fields.char(u'N° Lot', size=64),
+        'type_tarif': fields.selection(
+            selection=[
+                ('normal', 'PN'),
+                ('jaune', 'PJ'),
+                ('blanche', 'PB'),
+                ('special', 'SP'),
+                ('mea', 'MEA'),
+                ('decembre', 'Noel'),
+            ],
+            string='Type tarif',
+        ),
     }
 
 iller_sale_line()
