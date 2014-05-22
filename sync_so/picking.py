@@ -956,7 +956,6 @@ class stock_picking(osv.osv):
         # Only make the link in the INT to the IN
         # (raise ValueError() if IN does not exits)
         Int['corresponding_in_picking_stock_picking'] = {'id': In['id']}
-        in_lines = In.pop('move_lines')
 
         self.import_data_json(cr, uid, [In], context=context)
         info = "IN Updated:\nRef: %s\nsdref: %s\n\n" \
@@ -1011,10 +1010,6 @@ class stock_picking(osv.osv):
         self.import_data_json(cr, uid, [Int], context=context)
         info += "INT imported:\nRef: %s\nsdref: %s\n\n" \
                 % (Int['name'], Int['id'])
-
-        # Import IN lines
-        self.pool['stock.move'].import_data_json(cr, uid, in_lines,
-                                                 context=context)
 
         # Check corresponding IN
         vals = self.read(cr, uid, int_id,
