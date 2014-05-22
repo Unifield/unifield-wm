@@ -37,7 +37,7 @@ def catch_xmlrpc_errors(func):
     return wrapper
 
 
-class SynchronizePOfromCPtoRW(unittest2.TestCase):
+class UF2374_TestCase1(unittest2.TestCase):
     cp  = os.environ.get('DB_CP', "pilot3.0b6-P_2_1")
     rw  = os.environ.get('DB_RW', "pilot3.0b6-P_2_1_RW")
     url = os.environ.get('DB_URL', "http://localhost:8069/xmlrpc")
@@ -58,7 +58,7 @@ class SynchronizePOfromCPtoRW(unittest2.TestCase):
             pprint.pprint(self.__dict__)
 
     @catch_xmlrpc_errors
-    def test_10_cp_to_rw(self):
+    def test_10_scenrios(self):
         # Check name of CP and RW entities
         cp_entity_id = self._execute(
             self.cp, 1, 'admin', 'sync.client.entity', 'search', []).pop()
