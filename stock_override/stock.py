@@ -225,7 +225,7 @@ class stock_picking(osv.osv):
 
         return result
 
-    def _get_do_not_sync(self, cr, uid, ids, context=None):
+    def _get_do_not_sync(self, cr, uid, ids, field_name, args, context=None):
         res = {}
 
         if context is None:
