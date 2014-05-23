@@ -92,6 +92,7 @@ class local_message_rule(osv.osv):
 
         # The rest is just disabled
         self.write(cr, uid, list(remaining_ids), {'active':False}, context=context)
+        return True
 
     def unlink(self, cr, uid, ids, context=None):
         return self.write(cr, uid, ids, {'active':False}, context=context)
