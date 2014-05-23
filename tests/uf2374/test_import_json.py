@@ -17,7 +17,6 @@ def catch_xmlrpc_errors(func):
         try:
             return func(self, *a, **kw)
         except xmlrpclib.Fault, exc:
-            # TODO retrieve the original stack
             if 'Traceback' in exc.faultString:
                 _, _, traceback = sys.exc_info()
                 raise Exception("XML-RPC call failed!\n" +
@@ -69,7 +68,8 @@ class SynchronizePOfromCPtoRW(unittest2.TestCase):
                 'order_line/analytic_distribution_id/cost_center_lines/' + col)
         # find a suitable PO in CP
         po_ids = self._execute(self.cp, 1, 'admin', 'purchase.order', 'search',
-            [('order_line.analytic_distribution_id.id','!=',False)])
+            [('order_line.analytic_distribution_id.cost_center_lines.id',
+              '!=', False)])
         self.assertTrue(po_ids, "can not find a suitable purchase.order")
         self.po_id = po_ids.pop()
         self.po_sdref = self._execute(self.cp, 1, 'admin', 'purchase.order',
@@ -100,11 +100,11 @@ class SynchronizePOfromCPtoRW(unittest2.TestCase):
         self.line_id = self.po.pop('order_line')[0]
         self.line = self._execute(self.cp, 1, 'admin', 'purchase.order.line',
             'read', self.line_id, self.line_cols)
-        self.distribution_id = self.line['analytic_distribution_id'][0]
+        self.distribution_id = self.line.pop('analytic_distribution_id')[0]
         self.distribution = self._execute(self.cp, 1, 'admin',
             'analytic.distribution', 'read', self.distribution_id,
             self.distribution_cols)
-        self.cc_line_id = self.distribution['cost_center_lines'][0]
+        self.cc_line_id = self.distribution.pop('cost_center_lines')[0]
         self.cc_line = self._execute(self.cp, 1, 'admin',
             'cost.center.distribution.line', 'read', self.cc_line_id,
             self.cc_cols)
@@ -126,11 +126,12 @@ class SynchronizePOfromCPtoRW(unittest2.TestCase):
         self.rw_line_id = self.rw_po.pop('order_line')[0]
         self.rw_line = self._execute(self.rw, 1, 'admin',
             'purchase.order.line', 'read', self.rw_line_id, self.line_cols)
-        self.rw_distribution_id = self.rw_line['analytic_distribution_id'][0]
+        self.rw_distribution_id = \
+            self.rw_line.pop('analytic_distribution_id')[0]
         self.rw_distribution = self._execute(self.rw, 1, 'admin',
             'analytic.distribution', 'read', self.rw_distribution_id,
             self.distribution_cols)
-        self.rw_cc_line_id = self.rw_distribution['cost_center_lines'][0]
+        self.rw_cc_line_id = self.rw_distribution.pop('cost_center_lines')[0]
         self.rw_cc_line = self._execute(self.rw, 1, 'admin',
             'cost.center.distribution.line', 'read', self.rw_cc_line_id,
             self.cc_cols)
@@ -149,6 +150,56 @@ class SynchronizePOfromCPtoRW(unittest2.TestCase):
         self.assertTrue(rw_datas, "could not export row")
         self.rw_export = rw_datas.pop()
         self.assertDictContainsSubset(self.export, self.rw_export)
+
+    @catch_xmlrpc_errors
+    def _find_record(self, instance, model, domain, fields):
+        rec_ids = self._execute(instance, 1, 'admin', model, 'search', domain)
+        rec_id = rec_ids.pop()
+        rec_sdref = self._execute(
+            instance, 1, 'admin', model, 'get_sd_ref', rec_id)
+        return rec_id, rec_sdref
+
+    def test_20_ref_does_not_exist(self):
+        # find a suitable PO (anyone is okay)
+        self.po_id, self.po_sdref = self._find_record(
+            self.cp, 'purchase.order', [], ['id'])
+        # generate a corrupted data
+        self.export = {
+            'id': self.po_sdref,
+            'partner_id': {'id': 'sd.test_missing_reference'},
+        }
+        # import from rw
+        try:
+            self._execute(self.cp, 1, 'admin', 'purchase.order',
+                'import_data_json', [self.export])
+        except xmlrpclib.Fault, exc:
+            if 'test_missing_reference' in exc.faultString:
+                self.error = exc.faultString
+            else:
+                raise
+        else:
+            self.fail("should have failed")
+
+    def test_20_ref_does_not_exist_in_2many(self):
+        # find a suitable PO (anyone is okay)
+        self.po_id, self.po_sdref = self._find_record(
+            self.cp, 'purchase.order', [], ['id'])
+        # generate a corrupted data
+        self.export = {
+            'id': self.po_sdref,
+            'order_line': [{'id': 'sd.test_missing_reference'}],
+        }
+        # import from rw
+        try:
+            self._execute(self.cp, 1, 'admin', 'purchase.order',
+                'import_data_json', [self.export])
+        except xmlrpclib.Fault, exc:
+            if 'test_missing_reference' in exc.faultString:
+                self.error = exc.faultString
+            else:
+                raise
+        else:
+            self.fail("should have failed")
 
 if __name__ == '__main__':
     unittest2.main(failfast=True, verbosity=2)

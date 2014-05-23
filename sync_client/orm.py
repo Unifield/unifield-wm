@@ -810,7 +810,8 @@ DELETE FROM ir_model_data WHERE model = %s AND res_id IN %s
                 datas.append(__export_row_json(self, cr, uid, row, fields_to_export, context))
             return {'datas': datas}
 
-    def _import_data_row(self, cr, uid, data, info, context=None):
+    def _import_data_row(self, cr, uid, data, info,
+            link_only=['id'], context=None):
         method = 'create'
         values = dict(data)
         post_imports = []
@@ -821,7 +822,7 @@ DELETE FROM ir_model_data WHERE model = %s AND res_id IN %s
                 values['id'] = real_id
         # NOTE: if the relation is a dict with only 'id' in its keys, the
         #       user probably wanted to make a link, not the record itself.
-        if method == 'create' and data.keys() == ['id']:
+        if method == 'create' and set(data.keys()) == set(link_only):
             raise ValueError("unable to find sdref: %s" % data['id'])
 
         # extend operations to do with sub-operations
@@ -859,8 +860,9 @@ DELETE FROM ir_model_data WHERE model = %s AND res_id IN %s
         for relation_model, relation_field, sub_data in post_imports:
             #pdb.set_trace()
             sub_data[relation_field] = record_id
-            self.pool[relation_model]._import_data_row(
-                cr, uid, sub_data, info, context=context)
+            self.pool[relation_model]._import_data_row(cr, uid,
+                sub_data, info, link_only=['id', relation_field],
+                context=context)
 
         return record_id
 
