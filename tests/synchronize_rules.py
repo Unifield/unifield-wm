@@ -82,8 +82,8 @@ def synchronize_rules(url, master, instances,
 
     for instance in instances:
         # guess probable name
-        matches = re.match(r"^[^-]+-(.+?)(_RW)?$", instance)
-        name = matches.group(1) if matches else instance
+        matches = re.match(r"^([^-_]+[-_])?(.+?)(_RW)?$", instance)
+        name = matches.group(2) if matches else instance
 
         # find UUID
         instance_ids = execute(master, 'sync.server.entity',
