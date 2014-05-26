@@ -597,9 +597,16 @@ class purchase_order_sync(osv.osv):
             raise Exception("This message is for instance %s (but I am %s)\n" \
                             % (source, entity.name))
 
+        po = dict(data.values)
+
+        # Extract procurement from order_lines
+        procurements = []
+        for i, line in enumerate(po['order_line']):
+            po['order_line'][i] = dict(line,
+                procurement_id={'id': line['procurement_id']['id']})
+            procurements.append(line['procurement_id'])
 
         # Extract pickings
-        po = dict(data.values)
         pickings = po.pop('picking_ids')
 
         # Import purchase.order and all its sub records
@@ -647,6 +654,10 @@ class purchase_order_sync(osv.osv):
             info += "\n"
         else:
             info += "No picking.\n\n"
+
+        if procurements:
+            self.pool['procurement.order'].import_data_json(
+                cr, uid, procurements, context=context)
 
         return info.rstrip()
 
