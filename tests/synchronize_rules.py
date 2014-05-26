@@ -41,19 +41,20 @@ def synchronize_rules(url, master, instances,
         execute(instance, 'sync.client.rule', 'save', update_rules)
 
         if clean:
-            # mark all updates received as ran
-            execute(instance, 'sync.client.update_received',
-                'write',
-                execute(instance, 'sync.client.update_received',
-                        'search', [('run', '=', False)]),
-                {'run': True})
+            for basename in ('sync.client', 'sync_remote_warehouse'):
+                # mark all updates received as ran
+                execute(instance, basename + '.update_received',
+                    'write',
+                    execute(instance, basename + '.update_received',
+                            'search', [('run', '=', False)]),
+                    {'run': True})
 
-            # mark all updates to send as sent
-            execute(instance, 'sync.client.update_to_send',
-                'write',
-                execute(instance, 'sync.client.update_to_send',
-                        'search', [('sent', '=', False)]),
-                {'sent': True})
+                # mark all updates to send as sent
+                execute(instance, basename + '.update_to_send',
+                    'write',
+                    execute(instance, basename + '.update_to_send',
+                            'search', [('sent', '=', False)]),
+                    {'sent': True})
 
 
     def update_message_rules(instance, uuid, clean=False):
@@ -65,19 +66,20 @@ def synchronize_rules(url, master, instances,
         execute(instance, 'sync.client.message_rule', 'save', message_rules)
 
         if clean:
-            # mark all messages received as ran
-            execute(instance, 'sync.client.message_received',
-                'write',
-                execute(instance, 'sync.client.message_received',
-                        'search', [('run', '=', False)]),
-                {'run': True})
+            for basename in ('sync.client', 'sync_remote_warehouse'):
+                # mark all messages received as ran
+                execute(instance, basename + '.message_received',
+                    'write',
+                    execute(instance, basename + '.message_received',
+                            'search', [('run', '=', False)]),
+                    {'run': True})
 
-            # mark all messages to send as sent
-            execute(instance, 'sync.client.message_to_send',
-                'write',
-                execute(instance, 'sync.client.message_to_send',
-                        'search', [('sent', '=', False)]),
-                {'sent': True})
+                # mark all messages to send as sent
+                execute(instance,  basename + '.message_to_send',
+                    'write',
+                    execute(instance, basename + '.message_to_send',
+                            'search', [('sent', '=', False)]),
+                    {'sent': True})
 
 
     for instance in instances:
