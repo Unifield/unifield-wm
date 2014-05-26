@@ -18,7 +18,7 @@ for db in $databases
 do
 
 	ssh root@uf0003.unifield.org \
-		su -l -c "'pg_dump -COx $db | gzip'" pilot30b6 \
+		su -l -c "'pg_dump -COx $db | gzip'" $user \
 		> "$out/${db}.dump.gz"
 
 	echo "dropdb \"$db\"" >> "$drop_script"
