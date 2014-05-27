@@ -602,9 +602,10 @@ class purchase_order_sync(osv.osv):
         # Extract procurement from order_lines
         procurements = []
         for i, line in enumerate(po['order_line']):
-            po['order_line'][i] = dict(line,
-                procurement_id={'id': line['procurement_id']['id']})
-            procurements.append(line['procurement_id'])
+            if line['procurement_id']:
+                po['order_line'][i] = dict(line,
+                    procurement_id={'id': line['procurement_id']['id']})
+                procurements.append(line['procurement_id'])
 
         # Extract pickings
         pickings = po.pop('picking_ids')
