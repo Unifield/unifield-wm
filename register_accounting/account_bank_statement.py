@@ -2335,6 +2335,7 @@ class account_bank_statement_line(osv.osv):
 
             default_vals = ({
                 'name': '(copy) ' + line.name,
+                'cheque_number': '',
             })
             self.copy(cr, uid, line.id, default_vals, context=context)
         return True
