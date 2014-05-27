@@ -764,6 +764,7 @@ class stock_picking(osv.osv):
                 backorder_id = self.copy(cr, uid, picking.id, {
                     'name': sequence_obj.get(cr, uid, 'stock.picking.%s' % (picking.type)),
                     'move_lines': [],
+                    'picking_generator_rw': picking.id,
                     'state': 'draft',
                 }, context=context)
 
@@ -781,6 +782,7 @@ class stock_picking(osv.osv):
                             'move_dest_id': False,
                             'change_reason': False,
                             'processed_stock_move': True,
+                            'move_generator_rw': data_back['id'],
                         }
                         bo_values.update(av_values)
                         context['keepLineNumber'] = True

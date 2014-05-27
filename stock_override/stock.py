@@ -263,6 +263,11 @@ class stock_picking(osv.osv):
         'dpo_out': fields.function(_get_dpo_incoming, method=True, type='boolean', string='DPO Out', multi='dpo',
                                         store={'stock.move': (_get_dpo_picking_ids, ['sync_dpo', 'dpo_line_id', 'picking_id'], 10,),
                                                'stock.picking': (lambda self, cr, uid, ids, c={}: ids, ['move_lines'], 10)}),
+        'picking_generator_rw': fields.many2one('stock.picking',
+            help='Link to the generator IN'),
+        'picking_generated_rw': fields.one2many('stock.picking',
+                                                'picking_generator_rw',
+                                             help='Link to the generated INT'),
     }
 
     _defaults = {'from_yml_test': lambda *a: False,
@@ -1132,6 +1137,8 @@ class stock_move(osv.osv):
         'product_tbd': fields.function(_is_expired_lot, method=True, type='boolean', string='TbD', store=False, multi='attribute'),
         'has_to_be_resourced': fields.boolean(string='Has to be resourced'),
         'from_wkf': fields.related('picking_id', 'from_wkf', type='boolean', string='From wkf'),
+        'move_generator_rw': fields.many2one('stock.move',
+            help='Link to the generator move'),
     }
 
     _defaults = {
@@ -1963,6 +1970,7 @@ class stock_move(osv.osv):
             'sale_id': picking.sale_id and picking.sale_id.id or False,
             'auto_picking': picking.type == 'in' and picking.move_lines[0]['direct_incoming'],
             'reason_type_id': reason_type_id,
+            'picking_generator_rw': picking.id,
         }
 
         return picking_obj.create(cr, uid, pick_values, context=context)
