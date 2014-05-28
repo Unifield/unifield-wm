@@ -172,7 +172,7 @@ class UF2375_TestCase4(unittest2.TestCase):
              'delivery_confirmed_date'] +
             ['order_line/' + f
              for f in ['id', 'name', 'product_id/id', 'product_qty',
-                       'product_uom/id', 'price_unit']] +
+                       'product_uom/id', 'price_unit', 'procurement_id/id']] +
             ['picking_ids/' + f
              for f in ['id', 'name']] +
             ['picking_ids/move_lines/' + f
