@@ -943,7 +943,27 @@ class stock_picking(osv.osv):
                                   journal_id=journal_id, group=group, type=type, context=context)
         return invoice_result
 
-    def update_int(self, cr, uid, source, data, context=None):
+    def _replace_picking(self, cr, uid, int_id, data, context=None):
+        vals = self.read(cr, uid, int_id, ['move_lines'], context=context)
+        existing_lines = vals['move_lines']
+
+        # Overwrite sdref of the created INT and lines
+        self.pool['ir.model.data'].create(cr, uid, {
+                'model': 'stock.picking', 'res_id': int_id,
+                'module': 'sd', 'name': xmlid_to_sdref(data['id']),
+            }, context=context)
+        assert len(existing_lines) == len(data['move_lines']), \
+            "The number of INT lines should be equal with the original INT"
+        for move_id, line in zip(existing_lines, data['move_lines']):
+            self.pool['ir.model.data'].create(cr, uid, {
+                    'model': 'stock.move', 'res_id': move_id,
+                    'module': 'sd', 'name': xmlid_to_sdref(line['id']),
+                }, context=context)
+
+        # Import INT
+        return self.import_data_json(cr, uid, [data], context=context)
+
+    def update_in_full(self, cr, uid, source, data, context=None):
         entity = self.pool['sync.client.entity'].get_entity(cr, uid, context)
         if entity.usb_instance_type == 'remote_warehouse':
             raise Exception("Can not execute this method in RW!")
@@ -951,22 +971,19 @@ class stock_picking(osv.osv):
             raise Exception("This message is for instance %s (but I am %s)\n" \
                             % (source, entity.name))
 
-        Int = dict(data.values)
-        In = Int.pop('corresponding_in_picking_stock_picking')
-        # Only make the link in the INT to the IN
-        # (raise ValueError() if IN does not exits)
-        Int['corresponding_in_picking_stock_picking'] = {'id': In['id']}
+        In = dict(data.values)
+        assert len(In['picking_generated_rw']) == 1, \
+            'Missing INT, got: ' + repr(In['picking_generated_rw'])
+        Int = In.pop('picking_generated_rw')[0]
 
+        in_id = self.find_sd_ref(cr, uid, xmlid_to_sdref(In['id']), context=context)
+        assert in_id, 'Cannot find IN: sdref=' + In['id']
         self.import_data_json(cr, uid, [In], context=context)
         info = "IN Updated:\nRef: %s\nsdref: %s\n\n" \
                % (In['name'], In['id'])
 
         # Create the Wizard
-        in_id = self.find_sd_ref(cr, uid, xmlid_to_sdref(In['id']), context=context)
-        assert in_id, 'Cannot find IN: sdref=' + In['id']
         wizard_id = self.action_process(cr, uid, [in_id], context=context).pop('res_id')
-        wizard_lines = self.pool.get('stock.move.in.processor').search(
-            cr, uid, [('wizard_id', '=', wizard_id)], context=context)
 
         # Validate lines
         # NOTE: line already process before export no change to do
@@ -975,39 +992,20 @@ class stock_picking(osv.osv):
 
         # Process IN
         self.pool.get('stock.incoming.processor').\
-            do_incoming_shipment(cr, uid, [wizard_id], context=dict(context, sync_message_execution=False))
-        vals = self.read(cr, uid, in_id, ['state'], context=context)
-        assert vals['state'] == 'done', 'invalid state after processing of ' \
-                                        'IN shipment'
+            do_incoming_shipment(cr, uid, [wizard_id],
+                context=dict(context, sync_message_execution=False))
 
-        # Find the created INT and lines
-        stock_picking_int_ids = self.search(
-            cr, uid, [('type', '=', 'internal')], context=context)
-        for existing_int in self.read(cr, uid, stock_picking_int_ids,
-                ['corresponding_in_picking_stock_picking', 'move_lines'],
-                context=context):
-            if existing_int['corresponding_in_picking_stock_picking'] == in_id:
-                int_id = existing_int['id']
-                existing_lines = existing_int['move_lines']
-                break
-        else:
-            raise ValueError("can not find INT")
+        # Check generated IN state and find generated INT
+        vals = self.read(cr, uid, in_id,
+                         ['state', 'picking_generated_rw'],
+                         context=context)
+        assert vals['state'] == 'done', \
+            'invalid state after processing of origin IN shipment'
+        assert len(vals['picking_generated_rw']) == 1, \
+            'cannot find generated INT'
+        int_id = vals['picking_generated_rw'].pop()
 
-        # Overwrite sdref of the created INT and lines
-        self.pool['ir.model.data'].create(cr, uid, {
-                'model': 'stock.picking', 'res_id': int_id,
-                'module': 'sd', 'name': xmlid_to_sdref(Int['id']),
-            }, context=context)
-        assert len(existing_lines) == len(Int['move_lines']), \
-            "The number of INT lines should be equal with the original INT"
-        for move_id, line in zip(existing_lines, Int['move_lines']):
-            self.pool['ir.model.data'].create(cr, uid, {
-                    'model': 'stock.move', 'res_id': move_id,
-                    'module': 'sd', 'name': xmlid_to_sdref(line['id']),
-                }, context=context)
-
-        # Import INT
-        self.import_data_json(cr, uid, [Int], context=context)
+        self._replace_picking(cr, uid, int_id, Int, context=context)
         info += "INT imported:\nRef: %s\nsdref: %s\n\n" \
                 % (Int['name'], Int['id'])
 
@@ -1019,6 +1017,113 @@ class stock_picking(osv.osv):
             'Link from INT to IN not valid'
 
         return info.rstrip()
+
+    def update_in_partial(self, cr, uid, source, data, context=None):
+        entity = self.pool['sync.client.entity'].get_entity(cr, uid, context)
+        if entity.usb_instance_type == 'remote_warehouse':
+            raise Exception("Can not execute this method in RW!")
+        if not source == entity.name:
+            raise Exception("This message is for instance %s (but I am %s)\n" \
+                            % (source, entity.name))
+
+        In = dict(data.values)
+        assert len(In['picking_generated_rw']) == 1, \
+            'Missing INT, got: ' + repr(In['picking_generated_rw'])
+        Int = In.pop('picking_generated_rw')[0]
+        assert In['picking_generator_rw'], 'Missing origin IN'
+        origin_in = In.pop('picking_generator_rw')
+        origin_moves = origin_in.pop('move_lines')
+
+        origin_in_id = self.find_sd_ref(
+            cr, uid, xmlid_to_sdref(origin_in['id']), context=context)
+        assert origin_in_id, 'Cannot find origin IN: sdref=' + origin_in['id']
+        self.import_data_json(cr, uid, [origin_in], context=context)
+        info = "Origin IN Updated:\nRef: %s\nsdref: %s\n\n" \
+               % (In['name'], In['id'])
+
+        # Create the Wizard
+        wizard_id = self.action_process(
+            cr, uid, [origin_in_id], context=context).pop('res_id')
+
+        wizard_browse = self.pool['stock.incoming.processor'].browse(
+            cr, uid, wizard_id, context=context)
+        vals = {}
+        for wiz_line in wizard_browse.move_ids:
+            vals[wiz_line.move_id.id] = wiz_line.id
+        move_id_sd_ref = {}
+
+        translate_move_wiz = {
+            'id': 'id',
+            'product_qty': 'quantity',
+            'product_uom': 'uom_id',
+        }
+        for In_move_line in In['move_lines']:
+            In_move_line_id = self.pool['stock.move'].find_sd_ref(
+                cr, uid, xmlid_to_sdref(In_move_line['id']), context=context)
+            if In_move_line_id and vals[In_move_line_id]:
+                move_id_sd_ref[vals[In_move_line_id]] = In_move_line['id']
+                wiz_move_sdref = self.pool['stock.move.in.processor']\
+                    .get_sd_ref(cr, uid, vals[In_move_line_id], context=context)
+                # NOTE: in case of KeyError, please provide the corresponding
+                #       field in translate_move_wiz, thanks
+                values = dict(
+                    (translate_move_wiz[f], v)
+                    for f, v in In_move_line.items()
+                )
+                self.pool['stock.move.in.processor'].import_data_json(
+                    cr, uid, [dict(values, id=wiz_move_sdref)],
+                    context=context)
+
+        # Process IN
+        self.pool.get('stock.incoming.processor').\
+            do_incoming_shipment(cr, uid, [wizard_id],
+                context=dict(context, sync_message_execution=False))
+
+        # Check origin IN state and find generated IN
+        vals = self.read(cr, uid, origin_in_id,
+                         ['state', 'picking_generated_rw'], context=context)
+        assert vals['state'] == 'assigned', \
+            'invalid state after processing of origin IN shipment'
+        assert len(vals['picking_generated_rw']) == 1, \
+            'cannot find generated IN'
+        in_id = vals['picking_generated_rw'].pop()
+
+        self._replace_picking(cr, uid, in_id, In, context=context)
+        info += "IN imported:\nRef: %s\nsdref: %s\n\n" \
+                % (In['name'], In['id'])
+
+        # Check generated IN state and find generated INT
+        vals = self.read(cr, uid, in_id,
+                         ['state', 'picking_generated_rw'],
+                         context=context)
+        assert vals['state'] == 'done', \
+            'invalid state after processing of origin IN shipment'
+        assert len(vals['picking_generated_rw']) == 1, \
+            'cannot find generated INT'
+        int_id = vals['picking_generated_rw'].pop()
+
+        self._replace_picking(cr, uid, int_id, Int, context=context)
+        info += "INT imported:\nRef: %s\nsdref: %s\n\n" \
+                % (Int['name'], Int['id'])
+
+        # Check corresponding IN
+        vals = self.read(cr, uid, int_id,
+                  ['corresponding_in_picking_stock_picking'],
+                  context=context)
+        assert vals['corresponding_in_picking_stock_picking'] == in_id, \
+            'Link from INT to IN not valid'
+
+        # Re-import origin IN lines
+        #self.pool['stock.move'].import_data_json(cr, uid, origin_moves,
+        #                                        context=context)
+        origin_in['move_lines'] = origin_moves
+        self._replace_picking(cr, uid, origin_in_id, origin_in, context=context)
+        info += "IN imported:\nRef: %s\nsdref: %s\n\n" \
+                % (Int['name'], Int['id'])
+
+        return info.rstrip()
+
+
 
 stock_picking()
 

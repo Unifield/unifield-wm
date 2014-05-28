@@ -37,7 +37,7 @@ def catch_xmlrpc_errors(func):
     return wrapper
 
 
-class UF2375_TestCase2(unittest2.TestCase):
+class UF2375_TestCase4(unittest2.TestCase):
     cp  = os.environ.get('DB_CP', "pilot3.0b6-P_2_1")
     rw  = os.environ.get('DB_RW', "pilot3.0b6-P_2_1_RW")
     url = os.environ.get('DB_URL', "http://localhost:8069/xmlrpc")
@@ -64,7 +64,7 @@ class UF2375_TestCase2(unittest2.TestCase):
             pprint.pprint(self.__dict__)
 
     @catch_xmlrpc_errors
-    def test_10_scenrios(self):
+    def test_10_scenario_partial(self):
         # Check name of CP and RW entities
         cp_entity_id = self._execute(
             self.cp, 1, 'admin', 'sync.client.entity', 'search', []).pop()
@@ -189,7 +189,7 @@ class UF2375_TestCase2(unittest2.TestCase):
         self.rule = {
             'direction_usb': 'cp_to_rw',
             'model': 'purchase.order',
-            'domain': str([('state','=','approved')]),
+            'domain': str([('state', '=', 'approved')]),
             'remote_call' :
                 'purchase.order.replicate_approved_po_from_cp_on_rw',
             'arguments': str(self.export_fields),
@@ -289,51 +289,51 @@ class UF2375_TestCase2(unittest2.TestCase):
 
 
         self.rw_in = self._execute(self.rw, 1, 'admin', 'stock.picking',
-                                   'read', self.rw_in_ids, ['state'])[0]
+                                   'read', self.rw_in_ids,
+                                   ['state', 'backorder_id',
+                                    'picking_generated_rw'])[0]
         # check if after the computation of the wizard we correctly change the
         # state to done
         self.assertEqual(self.rw_in['state'], 'assigned')
+        self.rw_backorder_id = self.rw_in['backorder_id'][0]
+        self.assertEqual(self.rw_backorder_id,
+                         self.rw_in['picking_generated_rw'][0])
 
-        rw_int_ids = self._execute(self.rw, 1, 'admin', 'stock.picking',
-                                        'search',
-                                        [('type', '=', 'internal')])
-
-        # find the int id
-        for Int in self._execute(self.rw, 1, 'admin', 'stock.picking', 'read',
-                                 rw_int_ids, ['id',
-                                    'corresponding_in_picking_stock_picking']):
-            if Int['corresponding_in_picking_stock_picking'] in self.rw_in_ids:
-                self.rw_int_id = Int['id']
-                break
-        else:
-            self.fail("can not find INT")
+        self.rw_backorder_in = self._execute(
+            self.rw, 1, 'admin', 'stock.picking', 'read', self.rw_backorder_id,
+            ['state', 'picking_generated_rw', 'type'])
+        # check if after the computation of the wizard we correctly change the
+        # state to done
+        self.assertEqual(self.rw_backorder_in['state'], 'done')
+        self.assertEqual(self.rw_backorder_in['type'], 'in')
+        self.assertEqual(len(self.rw_backorder_in['picking_generated_rw']), 1)
+        self.rw_int_id = self.rw_backorder_in['picking_generated_rw'][0]
 
         self.export_fields_picking = (
-            # INT data
-            ['id', 'name'] +
-            ['move_lines/' + f
-             for f in ['id', 'name', 'product_uom/id',
-                       'company_id/id', 'location_dest_id/id',
-                       'location_id/id', 'product_id/id',
-                       'reason_type_id/id', 'move_dest_id/id']] +
-            # 'done' IN data
-            ['corresponding_in_picking_stock_picking/' + f
-             for f in ['id', 'name', 'move_lines/id',
-                       'move_lines/picking_id/id',
-                       'move_lines/name']] +
-            # 'assigned' IN data (original IN)
-            ['backorder_ids/' + f
-             for f in ['id', 'name', 'move_lines/id', 'move_lines/name',
-                       'move_lines/prodcut_qty']
-            ]
+            # 'done' IN
+            ['id', 'name',
+             'move_lines/id',
+             'move_lines/product_qty'] +
+            # INT generated
+            ['picking_generated_rw/' + f
+             for f in ['id', 'name'] +
+                      ['move_lines/' + f
+                       for f in ['id', 'name', 'product_uom/id',
+                                 'company_id/id', 'location_dest_id/id',
+                                 'location_id/id', 'product_id/id',
+                                 'reason_type_id/id', 'move_dest_id/id']]] +
+            # origin IN
+            ['picking_generator_rw/' + f
+             for f in ['id', 'name'] +
+                      ['move_lines/' + f
+                       for f in ['id', 'name']]]
         )
 
         self.rule_picking = {
             'direction_usb': 'rw_to_cp',
             'model': 'stock.picking',
-            'domain': str([('state', '=', 'assigned'), ('type', '=',
-                                                     'internal')]),
-            'remote_call': 'stock.picking.update_int',
+            'domain': str([('state', '=', 'done'), ('type', '=', 'in')]),
+            'remote_call': 'stock.picking.update_in_partial',
             'arguments': str(self.export_fields_picking),
             # Non-sense field required otherwise create_from_rule fail
             'destination_name': 'name',
@@ -343,7 +343,7 @@ class UF2375_TestCase2(unittest2.TestCase):
 
         # check the domain
         self.assertIn(
-            self.rw_int_id,
+            self.rw_backorder_id,
             self._execute(self.rw, 1, 'admin', 'stock.picking', 'search',
                 eval(self.rule_picking['domain'])))
 
@@ -356,12 +356,12 @@ class UF2375_TestCase2(unittest2.TestCase):
             self.rw, 1, 'admin', 'sync_remote_warehouse.message_to_send',
             'create_from_rule', self.rw_rule_id), 0)
 
-        self.int_sdref = self._execute(
-            self.rw, 1, 'admin', 'stock.picking', 'get_sd_ref', self.rw_int_id)
+        self.backorder_sdref = self._execute_rw(
+            'stock.picking', 'get_sd_ref', self.rw_backorder_id)
 
         # Check that the message has been created
         self.rw_message_identifier = \
-            "%s_%s" % (self.int_sdref, self.rule_picking['server_id'])
+            "%s_%s" % (self.backorder_sdref, self.rule_picking['server_id'])
 
         rw_message2_ids = self._execute(
             self.rw, 1, 'admin', 'sync_remote_warehouse.message_to_send',
@@ -399,15 +399,15 @@ class UF2375_TestCase2(unittest2.TestCase):
                 self.message2['log'])
 
         # export stock picking and check with rw
-        rw_picking_datas = self._execute(self.rw, 1, 'admin', 'stock.picking',
-            'export_data_json', [self.rw_int_id],
+        rw_picking_datas = self._execute_rw('stock.picking',
+            'export_data_json', [self.rw_backorder_id],
             self.export_fields_picking)['datas'][0]
 
-        self.int_id = self._execute(self.cp, 1, 'admin', 'stock.picking',
-                                    'find_sd_ref', self.int_sdref)
-        self.assertTrue(self.int_id, 'int doesn t exist in cp')
-        cp_picking_datas = self._execute(self.cp, 1, 'admin', 'stock.picking',
-            'export_data_json', [self.int_id],
+        self.backorder_id = self._execute_cp(
+            'stock.picking', 'find_sd_ref', self.backorder_sdref)
+        self.assertTrue(self.backorder_id, "back order doesn't exist in cp")
+        cp_picking_datas = self._execute_cp('stock.picking',
+            'export_data_json', [self.backorder_id],
             self.export_fields_picking)['datas'][0]
 
         self.assertDictContainsSubset(rw_picking_datas, cp_picking_datas)

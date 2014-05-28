@@ -58,7 +58,7 @@ class UF2374_TestCase1(unittest2.TestCase):
             pprint.pprint(self.__dict__)
 
     @catch_xmlrpc_errors
-    def test_10_scenrios(self):
+    def test_10_scenario_full(self):
         # Check name of CP and RW entities
         cp_entity_id = self._execute(
             self.cp, 1, 'admin', 'sync.client.entity', 'search', []).pop()
@@ -284,44 +284,35 @@ class UF2374_TestCase1(unittest2.TestCase):
                                         'do_incoming_shipment', [wizard_id])
 
 
-        self.rw_in = self._execute(self.rw, 1, 'admin', 'stock.picking',
-                                   'read', self.rw_in_ids, ['state'])[0]
+        self.rw_in = self._execute(
+            self.rw, 1, 'admin', 'stock.picking', 'read', self.rw_in_ids,
+            ['state', 'picking_generated_rw'])[0]
         # check if after the computation of the wizard we correctly change the
         # state to done
         self.assertEqual(self.rw_in['state'], 'done')
-
-        rw_int_ids = self._execute(self.rw, 1, 'admin', 'stock.picking',
-                                        'search',
-                                        [('type', '=', 'internal')])
-
-        # find the int id
-        for Int in self._execute(self.rw, 1, 'admin', 'stock.picking', 'read',
-                                 rw_int_ids, ['id',
-                                    'corresponding_in_picking_stock_picking']):
-            if Int['corresponding_in_picking_stock_picking'] in self.rw_in_ids:
-                self.rw_int_id = Int['id']
-                break
-        else:
-            self.fail("can not find INT")
+        self.assertEqual(len(self.rw_in['picking_generated_rw']), 1)
+        self.rw_int_id = self.rw_in['picking_generated_rw'][0]
 
         self.export_fields_picking = (
-            ['id', 'name'] +
-            ['corresponding_in_picking_stock_picking/' + f
-             for f in ['id', 'name', 'move_lines/id',
-                       'move_lines/picking_id/id',
-                       'move_lines/name']] +
-            ['move_lines/' + f
-             for f in ['id', 'name', 'product_uom/id',
-                       'company_id/id', 'location_dest_id/id',
-                       'location_id/id', 'product_id/id',
-                       'reason_type_id/id', 'move_dest_id/id']]
+            # IN original
+            ['id', 'name',
+             'move_lines/id',
+             'move_lines/name'] +
+            # INT generated
+            ['picking_generated_rw/' + f
+             for f in ['id', 'name'] +
+                      ['move_lines/' + f
+                       for f in ['id', 'name', 'product_uom/id',
+                                 'company_id/id', 'location_dest_id/id',
+                                 'location_id/id', 'product_id/id',
+                                 'reason_type_id/id', 'move_dest_id/id']]]
         )
 
         self.rule_picking = {
             'direction_usb': 'rw_to_cp',
             'model': 'stock.picking',
-            'domain': str([('state', '=', 'done'), ('type', '=', 'internal')]),
-            'remote_call': 'stock.picking.update_int',
+            'domain': str([('state', '=', 'done'), ('type', '=', 'in')]),
+            'remote_call': 'stock.picking.update_in_full',
             'arguments': str(self.export_fields_picking),
             # Non-sense field required otherwise create_from_rule fail
             'destination_name': 'name',
@@ -331,7 +322,7 @@ class UF2374_TestCase1(unittest2.TestCase):
 
         # check the domain
         self.assertIn(
-            self.rw_int_id,
+            self.rw_in_ids[0],
             self._execute(self.rw, 1, 'admin', 'stock.picking', 'search',
                 eval(self.rule_picking['domain'])))
 
@@ -344,12 +335,13 @@ class UF2374_TestCase1(unittest2.TestCase):
             self.rw, 1, 'admin', 'sync_remote_warehouse.message_to_send',
             'create_from_rule', self.rw_rule_id), 0)
 
-        self.int_sdref = self._execute(
-            self.rw, 1, 'admin', 'stock.picking', 'get_sd_ref', self.rw_int_id)
+        self.in_sdref = self._execute(
+            self.rw, 1, 'admin', 'stock.picking', 'get_sd_ref',
+            self.rw_in_ids[0])
 
         # Check that the message has been created
         self.rw_message_identifier = \
-            "%s_%s" % (self.int_sdref, self.rule_picking['server_id'])
+            "%s_%s" % (self.in_sdref, self.rule_picking['server_id'])
 
         rw_message2_ids = self._execute(
             self.rw, 1, 'admin', 'sync_remote_warehouse.message_to_send',
@@ -388,14 +380,11 @@ class UF2374_TestCase1(unittest2.TestCase):
 
         # export stock picking and check with rw
         rw_picking_datas = self._execute(self.rw, 1, 'admin', 'stock.picking',
-            'export_data_json', [self.rw_int_id],
+            'export_data_json', self.rw_in_ids,
             self.export_fields_picking)['datas'][0]
 
-        self.int_id = self._execute(self.cp, 1, 'admin', 'stock.picking',
-                                    'find_sd_ref', self.int_sdref)
-        self.assertTrue(self.int_id, 'int doesn t exist in cp')
         cp_picking_datas = self._execute(self.cp, 1, 'admin', 'stock.picking',
-            'export_data_json', [self.int_id],
+            'export_data_json', [self.in_id],
             self.export_fields_picking)['datas'][0]
 
         self.assertDictContainsSubset(rw_picking_datas, cp_picking_datas)
