@@ -963,7 +963,7 @@ class stock_picking(osv.osv):
         # Import INT
         return self.import_data_json(cr, uid, [data], context=context)
 
-    def update_in_full(self, cr, uid, source, data, context=None):
+    def update_int_from_in_full(self, cr, uid, source, data, context=None):
         entity = self.pool['sync.client.entity'].get_entity(cr, uid, context)
         if entity.usb_instance_type == 'remote_warehouse':
             raise Exception("Can not execute this method in RW!")
@@ -971,10 +971,9 @@ class stock_picking(osv.osv):
             raise Exception("This message is for instance %s (but I am %s)\n" \
                             % (source, entity.name))
 
-        In = dict(data.values)
-        assert len(In['picking_generated_rw']) == 1, \
-            'Missing INT, got: ' + repr(In['picking_generated_rw'])
-        Int = In.pop('picking_generated_rw')[0]
+        Int = dict(data.values)
+        assert Int['picking_generator_rw'], "Missing origin IN"
+        In = Int.pop('picking_generator_rw')
 
         in_id = self.find_sd_ref(cr, uid, xmlid_to_sdref(In['id']), context=context)
         assert in_id, 'Cannot find IN: sdref=' + In['id']

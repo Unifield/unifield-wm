@@ -46,6 +46,12 @@ class UF2374_TestCase1(unittest2.TestCase):
     def _execute(self, *args):
         return self.proxy.execute(*args)
 
+    def _execute_cp(self, *args):
+        return self.proxy.execute(self.cp, 1, 'admin', *args)
+
+    def _execute_rw(self, *args):
+        return self.proxy.execute(self.rw, 1, 'admin', *args)
+
     def _exec_workflow(self, *args):
         return self.proxy.exec_workflow(*args)
 
@@ -286,7 +292,7 @@ class UF2374_TestCase1(unittest2.TestCase):
 
         self.rw_in = self._execute(
             self.rw, 1, 'admin', 'stock.picking', 'read', self.rw_in_ids,
-            ['state', 'picking_generated_rw'])[0]
+            ['state', 'picking_generated_rw', 'backorder_id'])[0]
         # check if after the computation of the wizard we correctly change the
         # state to done
         self.assertEqual(self.rw_in['state'], 'done')
@@ -294,25 +300,27 @@ class UF2374_TestCase1(unittest2.TestCase):
         self.rw_int_id = self.rw_in['picking_generated_rw'][0]
 
         self.export_fields_picking = (
-            # IN original
-            ['id', 'name',
-             'move_lines/id',
-             'move_lines/name'] +
             # INT generated
-            ['picking_generated_rw/' + f
-             for f in ['id', 'name'] +
-                      ['move_lines/' + f
-                       for f in ['id', 'name', 'product_uom/id',
-                                 'company_id/id', 'location_dest_id/id',
-                                 'location_id/id', 'product_id/id',
-                                 'reason_type_id/id', 'move_dest_id/id']]]
+            ['id', 'name'] +
+            ['move_lines/' + f
+             for f in ['id', 'name', 'product_uom/id',
+                       'company_id/id', 'location_dest_id/id',
+                       'location_id/id', 'product_id/id',
+                       'reason_type_id/id', 'move_dest_id/id']] +
+            # IN original
+            ['picking_generator_rw/' + f
+             for f in ['id', 'name',
+                       'move_lines/id',
+                       'move_lines/name']]
         )
 
         self.rule_picking = {
             'direction_usb': 'rw_to_cp',
             'model': 'stock.picking',
-            'domain': str([('state', '=', 'done'), ('type', '=', 'in')]),
-            'remote_call': 'stock.picking.update_in_full',
+            'domain': str([('state', '=', 'done'),
+                           ('type', '=', 'internal'),
+                           ('picking_generator_rw.backorder_id','=',False)]),
+            'remote_call': 'stock.picking.update_int_from_in_full',
             'arguments': str(self.export_fields_picking),
             # Non-sense field required otherwise create_from_rule fail
             'destination_name': 'name',
@@ -322,7 +330,7 @@ class UF2374_TestCase1(unittest2.TestCase):
 
         # check the domain
         self.assertIn(
-            self.rw_in_ids[0],
+            self.rw_int_id,
             self._execute(self.rw, 1, 'admin', 'stock.picking', 'search',
                 eval(self.rule_picking['domain'])))
 
@@ -335,13 +343,13 @@ class UF2374_TestCase1(unittest2.TestCase):
             self.rw, 1, 'admin', 'sync_remote_warehouse.message_to_send',
             'create_from_rule', self.rw_rule_id), 0)
 
-        self.in_sdref = self._execute(
+        self.int_sdref = self._execute(
             self.rw, 1, 'admin', 'stock.picking', 'get_sd_ref',
-            self.rw_in_ids[0])
+            self.rw_int_id)
 
         # Check that the message has been created
         self.rw_message_identifier = \
-            "%s_%s" % (self.in_sdref, self.rule_picking['server_id'])
+            "%s_%s" % (self.int_sdref, self.rule_picking['server_id'])
 
         rw_message2_ids = self._execute(
             self.rw, 1, 'admin', 'sync_remote_warehouse.message_to_send',
@@ -380,11 +388,14 @@ class UF2374_TestCase1(unittest2.TestCase):
 
         # export stock picking and check with rw
         rw_picking_datas = self._execute(self.rw, 1, 'admin', 'stock.picking',
-            'export_data_json', self.rw_in_ids,
+            'export_data_json', [self.rw_int_id],
             self.export_fields_picking)['datas'][0]
 
-        cp_picking_datas = self._execute(self.cp, 1, 'admin', 'stock.picking',
-            'export_data_json', [self.in_id],
+        self.int_id = self._execute_cp(
+            'stock.picking', 'find_sd_ref', self.int_sdref)
+        self.assertTrue(self.int_id, "INT doesn't exist in cp")
+        cp_picking_datas = self._execute_cp(
+            'stock.picking', 'export_data_json', [self.int_id],
             self.export_fields_picking)['datas'][0]
 
         self.assertDictContainsSubset(rw_picking_datas, cp_picking_datas)
