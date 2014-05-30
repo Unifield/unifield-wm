@@ -278,6 +278,16 @@ class stock_picking(osv.osv):
         ),
     }
 
+    def copy_data(self, cr, uid, id, defaults=None, context=None):
+        if defaults is None:
+            defaults = {}
+        if 'picking_generator_rw' not in defaults:
+            defaults['picking_generator_rw'] = False
+        if 'picking_generated_rw' not in defaults:
+            defaults['picking_generated_rw'] = False
+        return super(stock_picking, self).copy_data(
+            cr, uid, id, defaults, context=context)
+
     def _stock_picking_action_process_hook(self, cr, uid, ids, context=None, *args, **kwargs):
         '''
         Please copy this to your module's method also.
