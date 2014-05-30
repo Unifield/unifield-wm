@@ -1137,8 +1137,6 @@ class stock_move(osv.osv):
         'product_tbd': fields.function(_is_expired_lot, method=True, type='boolean', string='TbD', store=False, multi='attribute'),
         'has_to_be_resourced': fields.boolean(string='Has to be resourced'),
         'from_wkf': fields.related('picking_id', 'from_wkf', type='boolean', string='From wkf'),
-        'move_generator_rw': fields.many2one('stock.move',
-            help='Link to the generator move'),
     }
 
     _defaults = {

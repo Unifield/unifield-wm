@@ -782,7 +782,6 @@ class stock_picking(osv.osv):
                             'move_dest_id': False,
                             'change_reason': False,
                             'processed_stock_move': True,
-                            'move_generator_rw': data_back['id'],
                         }
                         bo_values.update(av_values)
                         context['keepLineNumber'] = True
