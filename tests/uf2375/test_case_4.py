@@ -307,8 +307,7 @@ class UF2375_TestCase4(unittest2.TestCase):
         # state to done
         self.assertEqual(self.rw_in['state'], 'assigned')
         self.rw_backorder_id = self.rw_in['backorder_id'][0]
-        self.assertEqual(self.rw_backorder_id,
-                         self.rw_in['picking_generated_rw'][0])
+        self.assertIn(self.rw_backorder_id, self.rw_in['picking_generated_rw'])
 
         self.rw_backorder_in = self._execute(
             self.rw, 1, 'admin', 'stock.picking', 'read', self.rw_backorder_id,
