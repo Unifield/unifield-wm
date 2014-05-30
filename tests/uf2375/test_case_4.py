@@ -269,7 +269,18 @@ class UF2375_TestCase4(unittest2.TestCase):
                                         [('purchase_id', '=', self.rw_po_id)])
         self.assertEqual(len(self.rw_in_ids), 1)
 
-        #recreate the wizard to process the picking
+        # process & check the picking
+        self._process_picking_one()
+        self._process_picking_two()
+
+    def _process_picking_one(self):
+        self._process_picking()
+
+    def _process_picking_two(self):
+        self._process_picking()
+
+    def _process_picking(self):
+        # create the wizard to process the picking
         wizard_id = self._execute(self.rw, 1, 'admin', 'stock.picking',
                                         'action_process', self.rw_in_ids)\
             .pop('res_id')
