@@ -1772,8 +1772,8 @@ class account_bank_statement_line(osv.osv):
             values = self._update_employee_analytic_distribution(cr, uid, values=values)
         if 'cheque_number' in values:
             cr.execute('''select id from account_bank_statement_line where cheque_number = '%s' ''' % (values['cheque_number']))
-                for row in cr.dictfetchall():                
-                    raise osv.except_osv(_('Info'),_('This cheque number has already been used'))    
+            for row in cr.dictfetchall():                
+                raise osv.except_osv(_('Info'),_('This cheque number has already been used'))    
         # Then create a new bank statement line
         absl = super(account_bank_statement_line, self).create(cr, uid, values, context=context)
         return absl
