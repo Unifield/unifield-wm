@@ -806,6 +806,7 @@ DELETE FROM ir_model_data WHERE model = %s AND res_id IN %s
 
             fields_to_export = map(fsplit, fields_to_export)
             datas = []
+            assert hasattr(ids, '__iter__'), "argument 'ids' is not iterable"
             for row in self.browse(cr, uid, ids, context):
                 datas.append(__export_row_json(self, cr, uid, row, fields_to_export, context))
             return {'datas': datas}
