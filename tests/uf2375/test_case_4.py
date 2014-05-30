@@ -319,11 +319,22 @@ class UF2375_TestCase4(unittest2.TestCase):
         self.assertEqual(len(self.rw_backorder_in['picking_generated_rw']), 1)
         self.rw_int_id = self.rw_backorder_in['picking_generated_rw'][0]
 
+        # change the reference of the backorder to itself (circular reference)
+        # NOTE: this is actually wrong but the purpose here is only to test
+        #       that the backorder will be correctly overwritten at the end of
+        #       the message execution. If it doesn't, it means we can't
+        #       synchronize the reference and therefore the backorder assembly
+        #       could be wrong (depending on the message execution order)
+        self._execute_rw(
+            'stock.picking', 'write', self.rw_backorder_id,
+            {'backorder_id': self.rw_backorder_id})
+
         self.export_fields_picking = (
             # 'done' IN
             ['id', 'name',
              'move_lines/id',
-             'move_lines/product_qty'] +
+             'move_lines/product_qty',
+             'backorder_id/id'] +
             # INT generated
             ['picking_generated_rw/' + f
              for f in ['id', 'name'] +
