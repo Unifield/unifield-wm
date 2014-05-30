@@ -1039,7 +1039,7 @@ class stock_picking(osv.osv):
         assert origin_in_id, 'Cannot find origin IN: sdref=' + origin_in['id']
         self.import_data_json(cr, uid, [origin_in], context=context)
         info = "Origin IN Updated:\nRef: %s\nsdref: %s\n\n" \
-               % (In['name'], In['id'])
+               % (origin_in['name'], origin_in['id'])
 
         # Create the Wizard
         wizard_id = self.action_process(
@@ -1089,7 +1089,7 @@ class stock_picking(osv.osv):
         in_id = vals['picking_generated_rw'].pop()
 
         self._replace_picking(cr, uid, in_id, In, context=context)
-        info += "IN imported:\nRef: %s\nsdref: %s\n\n" \
+        info += "Backorder imported:\nRef: %s\nsdref: %s\n\n" \
                 % (In['name'], In['id'])
 
         # Check generated IN state and find generated INT
@@ -1118,8 +1118,6 @@ class stock_picking(osv.osv):
         #                                        context=context)
         origin_in['move_lines'] = origin_moves
         self._replace_picking(cr, uid, origin_in_id, origin_in, context=context)
-        info += "IN imported:\nRef: %s\nsdref: %s\n\n" \
-                % (Int['name'], Int['id'])
 
         return info.rstrip()
 
