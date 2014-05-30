@@ -1081,12 +1081,13 @@ class stock_picking(osv.osv):
 
         # Check origin IN state and find generated IN
         vals = self.read(cr, uid, origin_in_id,
-                         ['state', 'picking_generated_rw'], context=context)
+                         ['state', 'backorder_id', 'picking_generated_rw'],
+                         context=context)
         assert vals['state'] == 'assigned', \
             'invalid state after processing of origin IN shipment'
-        assert len(vals['picking_generated_rw']) == 1, \
-            'cannot find generated IN'
-        in_id = vals['picking_generated_rw'].pop()
+        assert vals['backorder_id'], "Unable to find back order IN " \
+            "(generator IN is %s)" % origin_in['id']
+        in_id = vals['backorder_id'][0]
 
         self._replace_picking(cr, uid, in_id, In, context=context)
         info += "Backorder imported:\nRef: %s\nsdref: %s\n\n" \
