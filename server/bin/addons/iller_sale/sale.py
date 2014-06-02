@@ -35,13 +35,13 @@ class iller_sale_line(osv.osv):
         '''
         comment_obj = self.pool.get('iller.sale.comment')
         
-        for line in self.browse(cr, uid, ids):
-            line_data = {'unit_price': data.get('price_unit', line.price_unit),
-                         'qty': data.get('product_uom_qty', line.product_uom_qty),
-                         'partner_id': line.order_id.partner_id.id,
-                         'pricelist_id': line.order_id.pricelist_id.id,
-                         'name': line.product_id.name,
-                         'prix_vente': line.product_id.list_price}
+#        for line in self.browse(cr, uid, ids):
+#            line_data = {'unit_price': data.get('price_unit', line.price_unit),
+#                         'qty': data.get('product_uom_qty', line.product_uom_qty),
+#                         'partner_id': line.order_id.partner_id.id,
+#                         'pricelist_id': line.order_id.pricelist_id.id,
+#                         'name': line.product_id.name,
+#                         'prix_vente': line.product_id.list_price}
             #control = self.pool.get('sale.order.line').control_unit_price(cr, uid, [line_data], context=context)
             #if not control[0] and not line.product_id.depassement_autorise and line.order_id.partner_id.ref != '160053':
             #    raise osv.except_osv('Erreur', 'Impossible d\'enregistrer la commande car le prix unitaire sur la ligne %s n\'est pas correct !' % line_data['name'])

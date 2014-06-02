@@ -352,6 +352,7 @@ class wizard_configure_tarif_special_client(wizard.interface):
         version_obj = pool_obj.get('product.pricelist.version')
         promo_obj = pool_obj.get('product.pricelist.promo')
         product_obj = pool_obj.get('product.product')
+        item_obj = pool_obj.get('product.pricelist.item')
         client_obj = pool_obj.get('res.partner')
         mea_obj = pool_obj.get('product.pricelist.mea')
 
@@ -418,38 +419,36 @@ class wizard_configure_tarif_special_client(wizard.interface):
                 client_obj.write(cr, uid, client.id, {'property_product_pricelist': pricelist_id}, context=context)
                 new_pricelist = True
             else:
-                # On récupère la liste de prix du client correspondant à ses paramètres
-                if client.promo_choice == 'non' and client.mea_choice == 'non':
-                    pricelist_ids = pricelist_obj.search(
-                            cr, uid, [
-                                        ('promo_choice', '=', client.promo_choice or 'non'),
-                                        ('mea_choice', '=', client.mea_choice or 'non'),
-                                        ('name', 'ilike',  client.tarif_general_choice or 'NU01')
-                                    ], context=context)
-                else:
-                    pricelist_ids = pricelist_obj.search(
-                            cr, uid, [
-                                        ('tarif_choice', '=', client.tarif_choice or 'blanche'),
-                                        ('promo_choice', '=', client.promo_choice or 'non'),
-                                        ('mea_choice', '=', client.mea_choice or 'non'),
-                                        ('name', 'ilike',  client.tarif_general_choice or 'NU01')
-                                    ], context=context)
+                pricelist_ids = pricelist_obj.search(
+                    cr, uid, [
+                        ('tarif_choice', '=', client.tarif_choice or 'blanche'),
+                        ('promo_choice', '=', client.promo_choice or 'non'),
+                        ('mea_choice', '=', client.mea_choice or 'non'),
+                        ('name', 'ilike',  client.tarif_general_choice or 'NU01'),
+                    ], context=context)
                 # Si les paramètres du client sont bien paramétrés on copie la liste de prix associée
-                if pricelist_ids:
-                    previous_pricelist = pricelist_ids[0]
-                    # On copie la liste de prix pour en créer une par rapport au tarif spécial
-                    pricelist_id = pricelist_obj.copy(cr, uid, pricelist_ids[0],
-                                                        {
-                                                            'name': 'CSP %s %s' % (client.ref, client.name),
-                                                            'tarif_special_choice': 'oui',
-                                                            'promo_choice': 'non',
-                                                            'mea_choice': 'non',
-                                                        }, context=context)
-                    client_obj.write(cr, uid, client.id, {'property_product_pricelist': pricelist_id}, context=context)
-                    new_pricelist = True
-                else:
-                    pricelist_id = previous_pricelist = client.property_product_pricelist.id
-                    new_pricelist = False
+                if not pricelist_ids:
+                    pricelist_ids = [client.property_product_pricelist.id]
+
+                previous_pricelist = pricelist_ids[0]
+                # On copie la liste de prix pour en créer une par rapport au tarif spécial
+                pricelist_id = pricelist_obj.copy(cr, uid, pricelist_ids[0],
+                        {
+                            'name': 'CSP %s %s' % (client.ref, client.name),
+                            'tarif_special_choice': 'oui',
+                        }, context=context)
+
+                # On modifie la pricelist de référénce pour 'Tous les produits'
+                version_ids = version_obj.search(cr, uid, [('pricelist_id', '=', pricelist_id)], context=context)
+                item_ids = item_obj.search(cr, uid, [('price_version_id', 'in', version_ids), ('name', '=', 'Tous les produits')], context=context)
+                item_obj.write(cr, uid, item_ids, {'base_pricelist_id': pricelist_ids[0]}, context=context)
+                
+                client_obj.write(cr, uid, client.id, {'property_product_pricelist': pricelist_id}, context=context)
+                new_pricelist = True
+
+                #else:
+                #    pricelist_id = previous_pricelist = client.property_product_pricelist.id
+                #    new_pricelist = False
  
         new_version = version_obj.search(cr, uid, [('tarifs_specs_id', '=', tarifs_speciaux_id)], context=context)
         if new_version:

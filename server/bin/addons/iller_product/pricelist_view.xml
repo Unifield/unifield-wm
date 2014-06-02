@@ -55,8 +55,8 @@
             <field name="type">tree</field>
             <field name="arch" type="xml">
                 <tree string="Barèmes">
-                    <field name="name" />
-                    <field name="valeur" />
+                    <field name="name" select="1" />
+                    <field name="valeur" select="1" />
                 </tree>
             </field>
         </record>

@@ -71,7 +71,7 @@ class iller_commission_line(osv.osv):
                 l['order_id'] = data.get('order_id')
 
  
-        if len(lines) < 1:
+        if len(lines) < 1 and data.get('product_id'):
             product = product_obj.browse(cr, uid, data.get('product_id'))
             lines.append({'unit_price': data.get('price_unit'),
                           'qty': data.get('product_uom_qty'),
@@ -240,7 +240,6 @@ class iller_sale_commission(osv.osv):
 
     _columns = {
         'commission': fields.function(_get_commission, method=True, string='Commission', store=False, readonly=True),
-        'product_uom_qty': fields.float('Quantity (UoM)', digits=(16, 3), required=True, readonly=True, states={'draft':[('readonly',False)]}),
     }
 
 iller_sale_commission()

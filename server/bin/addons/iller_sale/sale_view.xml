@@ -22,7 +22,7 @@
                             <tree string="Lignes de commande" editable="top">
                                 <field name="product_id" readonly="0" colspan="4" 
                                     context="{'partner_id':parent.partner_id,'quantity':product_uom_qty,'pricelist':parent.pricelist_id,'shop':parent    .shop_id,'uom':product_uom,'from':'sale.order.line'}"
-                                    on_change="product_id_change(parent.pricelist_id,product_id,product_uom_qty,product_uom,product_uos_qty,product_uos,name,parent.partner_id, 'lang' in context and context['lang'], True, parent.date_order, product_packaging, parent.fiscal_position, tournee_id=parent.tournee_id)"
+                                    on_change="product_id_change(parent.pricelist_id,product_id,product_uom_qty,product_uom,product_uos_qty,product_uos,name,parent.partner_id, 'lang' in context and context['lang'], True, parent.date_order, product_packaging, parent.fiscal_position,parent.tournee_id)"
                                     select="1"/>
                                 <field name="product_uom_qty" string="Qté" readonly="0" digits='(16, 3)'
                                     context="partner_id=parent.partner_id,quantity=product_uom_qty,pricelist=parent.pricelist_id,shop=parent.shop_id,uom=product_uom"
@@ -42,6 +42,7 @@
                                 <field name="name" readonly="0" invisible="1"/>
                                 <field name="product_uos" readonly="0" invisible="1"/>
                                 <field name="product_uos_qty" readonly="0" invisible="1"/>
+                                <field name="product_packaging" invisible="1" />
                             </tree>
                             <form string="Sale Order Lines">
                                 <notebook>

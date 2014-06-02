@@ -41,9 +41,9 @@ class product_bareme_matrice(osv.osv):
     _description = 'Matrice des prix pour les baremes'
 
     _columns = {
-        'bareme_id':fields.many2one('product.pricelist.bareme', string=u'Numéro de barème', required=True),
-        'valeur': fields.float(digits=(16,2), string='Nouvelle valeur'),
-        'prix_produit': fields.float(digits=(16,2), string=u'Prix de départ du produit'),
+        'bareme_id':fields.many2one('product.pricelist.bareme', string=u'Numéro de barème', required=True, select=1),
+        'valeur': fields.float(digits=(16,2), string='Nouvelle valeur', select=1),
+        'prix_produit': fields.float(digits=(16,2), string=u'Prix de départ du produit', select=1),
     }
 
     _defaults = {
@@ -472,6 +472,7 @@ class product_pricelist(osv.osv):
                             product_obj.price_get(cr, uid, [prod_id],
                                 price_type.field,context=context)[prod_id], round=False)
 
+                            
                 price_limit = price
 
                 # Si notre list item a un bareme
@@ -518,7 +519,7 @@ class product_pricelist(osv.osv):
                 product = product_obj.browse(cr, uid, prod_id)
                 uom = product.uos_id or product.uom_id
                 result[id] = self.pool.get('product.uom')._compute_price(cr,
-                        uid, uom.id, result[id][0], context['uom'])
+                        uid, uom.id, result[id], context['uom'])
         return result
         
 product_pricelist()
@@ -1145,7 +1146,6 @@ class product_pricelist_mea(osv.osv):
                                                     'name': p_data[0][1],
                                                     'product_id': product[0],
                                                     'base': base,
-                                                    'bareme_id': bareme,
                                                     'type_tarif': 'mea',
                                                     'price_discount': -1,
                                                     'price_surcharge': product[1],
@@ -1156,8 +1156,7 @@ class product_pricelist_mea(osv.osv):
                                                     'product_id': product[0],
                                                     'base': base,
                                                     'type_tarif': 'mea',
-                                                    'bareme_id': bareme,
-                                                    'price_discount': coeff-1,
+                                                    'price_discount': -1,
                                                     'price_version_id': version_id})
                 items.append(item_id)
 
