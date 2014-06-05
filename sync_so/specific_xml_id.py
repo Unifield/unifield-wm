@@ -352,13 +352,13 @@ class account_analytic_line(osv.osv):
         # NEED REFACTORING FOR THIS METHOD, if the action write on Analytic.line happens often!
         msg_to_send_obj = self.pool.get("sync.client.message_to_send")
         instance_name = self.pool.get("sync.client.entity").get_entity(cr, uid, context=context).name
-        xml_ids = self.pool.get('ir.model.data').get(cr, uid, self, ids, context=context)
+        xml_ids = self.get_sd_ref(cr, uid, ids, context=context)
         line_data = self.read(cr, uid, ids, ['cost_center_id'], context=context)
         line_data = dict((data['id'], data) for data in line_data)
 
-        for i, xml_id_record in enumerate(self.pool.get('ir.model.data').browse(cr, uid, xml_ids, context=context)):
-            xml_id = '%s.%s' % (xml_id_record.module, xml_id_record.name)
-            old_cost_center_id = line_data[ids[i]]['cost_center_id'] and line_data[ids[i]]['cost_center_id'][0] or False
+        for index in xml_ids:
+            xml_id = xml_ids[index]
+            old_cost_center_id = line_data[index]['cost_center_id'] and line_data[index]['cost_center_id'][0] or False
             new_cost_center_id = False
             if 'cost_center_id' in vals:
                 new_cost_center_id = vals['cost_center_id']
