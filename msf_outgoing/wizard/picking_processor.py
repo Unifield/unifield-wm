@@ -821,6 +821,35 @@ class stock_move_processor(osv.osv):
 
         return pick_wiz_id
 
+    def open_select_asset(self, cr, uid, ids, context=None):
+        """
+        Open the wizard to select mulitple asset in one view
+        """
+        wizard_obj = self.pool.get('stock.move.select.asset')
+
+        if context is None:
+            context = {}
+
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+
+        move = self.browse(cr, uid, ids[0], context=context)
+
+        wizard_id = wizard_obj.create(cr, uid, {
+            'move_processor_id': '%s,%s' % (self._name, ids[0]),
+            'product_id': move.product_id.id,
+        }, context=context)
+
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': 'stock.move.select.asset',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_id': wizard_id,
+            'target': 'new',
+            'context': context,
+        }
+
     """
     Controller methods
     """

@@ -72,6 +72,12 @@
                            string="Quantity"
                            readonly="1"
                            />
+                    <button name="open_select_asset"
+                            type="object"
+                            icon="gtk-sort-descending"
+                            string="Select assets"
+                            attrs="{'invisible': [('asset_check', '=', False)]}"
+                            />
                     <field name="uom_id"
                            string="UOM" 
                            readonly="True"
