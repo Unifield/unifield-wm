@@ -813,6 +813,7 @@ class stock_move_processor(osv.osv):
         wr_vals = {
             'change_reason': change_reason,
             'product_id': product_id,
+            'asset_id': False,
         }
         self._update_change_product_wr_vals(vals=wr_vals)  # w/o overriding, just return wr_vals
         self.write(cr, uid, ids, wr_vals, context=context)

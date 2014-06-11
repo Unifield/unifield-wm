@@ -76,7 +76,11 @@ class change_product_memory_move(osv.osv_memory):
         data = self.read(cr, uid, ids, ['change_reason', 'new_product_id'], context=context)[0]
         change_reason = data['change_reason']
         new_product_id = data['new_product_id']
-        values = {'change_reason': change_reason, 'product_id': new_product_id}
+        values = {
+            'change_reason': change_reason,
+            'product_id': new_product_id,
+            'asset_id': False,
+        }
         # update the object    
         memory_move_obj.write(cr, uid, memory_move_ids, values, context=context)
         # no data for type 'back'
