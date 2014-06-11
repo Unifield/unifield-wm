@@ -91,13 +91,16 @@
                             />
                     <field name="asset_id"
                            domain="[('product_id', '=', product_id)]"
-                           attrs="{'readonly': [('asset_check', '=', False)], 'required': [('location_supplier_customer_mem_out', '=', True), ('asset_check', '=', True)]}"
+                           attrs="{
+                                'readonly': ['|', ('ordered_quantity', '!=', 1), ('asset_check', '=', False)],
+                                'required': [('location_supplier_customer_mem_out', '=', True), ('asset_check', '=', True), ('ordered_quantity', '=', 1)],
+                           }"
                            />
                     <button name="open_select_asset"
                             type="object"
                             icon="gtk-sort-descending"
                             string="Select assets"
-                            attrs="{'invisible': [('asset_check', '=', False)]}"
+                            attrs="{'invisible': ['|', ('ordered_quantity', '=', 1), ('asset_check', '=', False)]}"
                             />
                     <field name="composition_list_id"
                            domain="[('composition_product_id', '=', product_id), ('state', '=', 'completed'), ('composition_type', '=', 'real')]"
