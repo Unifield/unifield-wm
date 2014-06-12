@@ -322,7 +322,7 @@ class stock_move_processor(osv.osv):
 
         return res
 
-    def _asset_integrity(self, line, res='empty'):
+    def _asset_integrity(self, cr, uid, line, res='empty'):
         """
         Check integrity of the asset management according to line values
         """
@@ -337,6 +337,28 @@ class stock_move_processor(osv.osv):
             res = 'missing_asset'
         elif not asset_mandatory and line.asset_id:
             res = 'not_asset_needed'
+
+        if asset_mandatory and line.asset_id:
+            # Looking for one asset form selected on two different lines
+            too_many_asset = self.search(cr, uid, [
+                ('id', '!=', line.id),
+                ('wizard_id', '=', line.wizard_id.id),
+                ('quantity', '!=', 0.00),
+                ('asset_id', '=', line.asset_id.id),
+            ], count=True)
+
+            asset_loc_id = line.asset_id.location_id
+            if line.wizard_id.picking_id.type == 'in':
+                if asset_loc_id and asset_loc_id.usage not in ('customer', 'supplier', 'production', 'inventory', 'procurement'):
+                    res = 'non_av_asset'
+            elif not asset_loc_id or asset_loc_id.id != line.move_id.location_id.id:
+                res = 'non_av_asset'
+
+            if too_many_asset:
+                res = 'too_many_asset'
+            
+            if line.ordered_quantity != 1 or line.quantity not in (0.00, 1.00):
+                res = 'bad_asset_quantity'
 
         return res
 
@@ -362,15 +384,36 @@ class stock_move_processor(osv.osv):
                 # Batch management check
                 res_value = self._batch_integrity(line, res_value)
                 # Asset management check
-                res_value = self._asset_integrity(line, res_value)
+                res_value = self._asset_integrity(cr, uid, line, res_value)
                 # For internal or simple out, cannot process more than specified in stock move
                 if line.wizard_id.picking_id.type in ['out', 'internal']:
                     proc_qty = uom_obj._compute_qty(cr, uid, line.uom_id.id, line.quantity, line.ordered_uom_id.id)
                     if proc_qty > line.ordered_quantity:
                         res_value = 'greater_than_available'
+
             elif line.quantity < 0.00:
                 # Quantity cannot be negative
                 res_value = 'must_be_greater_than_0'
+            
+            # Reset errors on other line with the same asset form
+            # Looking for one asset form selected on two different lines        
+            if line.asset_id:
+                too_many_asset = self.search(cr, uid, [                             
+                    ('id', '!=', line.id),                                          
+                    ('wizard_id', '=', line.wizard_id.id),                          
+                    ('quantity', '!=', 0.00),                                       
+                    ('asset_id', '=', line.asset_id.id),                            
+                ])
+
+                # Put lm_id in context to avoid max. depth recursion
+                context.setdefault('asset_move_ids', [])
+                context['asset_move_ids'].append(line.id)
+
+                for lm_id in context.get('asset_move_ids'):
+                    if lm_id in too_many_asset:
+                        too_many_asset.remove(lm_id)
+
+                self.write(cr, uid, too_many_asset, {}, context=context)
 
             res[line.id] = res_value
         return res
