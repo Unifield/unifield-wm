@@ -90,10 +90,15 @@
                             attrs="{'invisible': [('type_check', '!=', 'in')]}"
                             />
                     <field name="asset_id"
-                           domain="[('product_id', '=', product_id)]"
+                           domain="[('product_id', '=', product_id), ('is_in_location', '=', False)]"
                            attrs="{
                                 'readonly': ['|', ('ordered_quantity', '!=', 1), ('asset_check', '=', False)],
                                 'required': [('location_supplier_customer_mem_out', '=', True), ('asset_check', '=', True), ('ordered_quantity', '=', 1)],
+                           }"
+                           context="{
+                                'search_default_product_id': product_id,
+                                'default_product_id': product_id,
+                                'hide_new_button': False,
                            }"
                            />
                     <button name="open_select_asset"
