@@ -8,11 +8,12 @@
             <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Move multiple assets">
-                    <field name="product_id" invisible="1" />
-                    <field name="location_id" invisible="1" />
-                    <field name="create_or_select" invisible="0" />
+                    <field name="create_or_select" invisible="1" />
+                    <field name="move_processor_id" invisible="1" />
                     <separator colspan="4" string="Move information" />
-                    <field name="move_processor_id" readonly="0" />
+                    <field name="product_id" />
+                    <field name="quantity" />
+                    <field name="location_id" />
                     <separator colspan="4" string="Assets" />
                     <field name="asset_ids"
                            nolabel="1"

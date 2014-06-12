@@ -55,7 +55,12 @@ class stock_move_select_asset(osv.osv_memory):
         ),
         'location_id': fields.many2one(
             'stock.location',
-            string='Location',
+            string='Source location',
+            readonly=True,
+        ),
+        'quantity': fields.float(
+            digits=(16,2),
+            string='Quantity',
             readonly=True,
         ),
         'create_or_select': fields.selection(

@@ -883,6 +883,7 @@ class stock_move_processor(osv.osv):
         wizard_id = wizard_obj.create(cr, uid, {
             'move_processor_id': '%s,%s' % (self._name, ids[0]),
             'product_id': move.product_id.id,
+            'quantity': move.ordered_quantity,
             'location_id': move.move_id.picking_id.type != 'in' and move.move_id.location_id.id or False,
             'create_or_select': move.move_id.picking_id.type == 'in' and 'create' or 'select',
         }, context=context)
