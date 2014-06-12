@@ -252,6 +252,11 @@ class product_asset(osv.osv):
                 'partner_id': fields.many2one('res.partner', string="Supplier", readonly=True, required=False),
                 'partner_name': fields.char('Partner', size=128, required=True),
                 'xmlid_name': fields.char('XML Code, hidden field', size=128, required=True),
+                # Stock availability
+                'location_id': fields.many2one(
+                    'stock.location',
+                    string='Location where is the asset',
+                ),
     }
     
     _defaults = {
