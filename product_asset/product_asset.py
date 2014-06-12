@@ -211,6 +211,35 @@ class product_asset(osv.osv):
 
         return res
 
+    def _get_dummy(self, cr, uid, ids, field_name, args, context=None):
+        res = {}
+        for asset_id in ids:
+            res[asset_id] = True
+
+        return res
+
+    def _src_is_in_loc(self, cr, uid, obj, name, args, context=None):
+        '''
+        Return all asset forms that are in the location_id passed in parameters
+        '''
+        loc_obj = self.pool.get('stock.location')
+
+        res = []
+
+        for arg in args:
+            if arg[0] == 'is_in_location' and arg[1] == '=':
+                if arg[2] == 'available' or arg[2] == False:
+                    loc_ids = loc_obj.search(cr, uid, [
+                        ('usage', 'in', ['supplier', 'customer', 'inventory', 'production', 'procurement']),
+                    ], context=context)
+                    
+                    res.extend(['|', ('location_id', '=', False), ('location_id', 'in', loc_ids)])
+                else:
+                    res.append(('location_id', arg[1], arg[2]))
+
+        return res
+
+
     _columns = {
                 # asset
                 'name': fields.char('Asset Code', size=128, required=True),
@@ -256,6 +285,14 @@ class product_asset(osv.osv):
                 'location_id': fields.many2one(
                     'stock.location',
                     string='Location where is the asset',
+                ),
+                'is_in_location': fields.function(
+                    _get_dummy,
+                    fnct_search=_src_is_in_loc,
+                    method=True,
+                    type='boolean',
+                    string='Is in location',
+                    store=False,
                 ),
     }
     
@@ -531,6 +568,30 @@ class stock_move(osv.osv):
         (_check_asset,
             'You must assign an asset for this product.',
             ['asset_id']),]
+
+    def action_done(self, cr, uid, ids, context=None):
+        '''
+        Set the location_id field of product assets with the location_dest_id
+        value of the stock move when the stock move is done
+        '''
+        asset_obj = self.pool.get('product.asset')
+
+        res = super(stock_move, self).action_done(cr, uid, ids, context=context)
+
+        asset_move_ids = self.search(cr, uid, [
+            ('id', 'in', ids),
+            ('state', '=', 'done'),
+            ('asset_id', '!=', False),
+        ], context=context)
+        
+        if asset_move_ids:
+            for move in self.browse(cr, uid, asset_move_ids, context=context):
+                # Avoid modification of the location_id of the asset if we are
+                # in a chained stock move
+                if move.location_dest_id.chained_location_type == 'none' or move.location_dest_id.chained_auto_packing == 'transparent':
+                    asset_obj.write(cr, uid, [move.asset_id.id], {'location_id': move.location_dest_id.id}, context=context)
+
+        return res
     
 stock_move()
 
