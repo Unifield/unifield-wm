@@ -21,6 +21,10 @@
 
 from osv import fields, osv
 from tools.translate import _
+
+# xml parser
+from lxml import etree
+
 import decimal_precision as dp
 import math
 import re
@@ -191,7 +195,22 @@ class product_asset(osv.osv):
             value.update({'year': ''})
         
         return result
+
+    def fields_view_get(self, cr, uid, view_id=None, view_type='form', context=None, toolbar=False, submenu=False):
+        if context is None:
+            context = {}
         
+        res = super(product_asset, self).fields_view_get(cr, uid, view_id, view_type, context=context, toolbar=toolbar, submenu=submenu)
+
+        if context.get('active_id') and context.get('hide_new_button') and view_type == 'tree':
+            root = etree.fromstring(res['arch'])
+            fields = root.xpath('/tree')
+            for field in fields:
+                root.set('hide_new_button', 'True')
+            res['arch'] = etree.tostring(root)
+
+        return res
+
     _columns = {
                 # asset
                 'name': fields.char('Asset Code', size=128, required=True),

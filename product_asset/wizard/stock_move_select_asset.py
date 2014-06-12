@@ -39,6 +39,7 @@ class stock_move_select_asset(osv.osv_memory):
                 ('return.ppl.move.processor', 'Move'),
             ],
             size=256,
+            required=True,
         ),
         'asset_ids': fields.many2many(
             'product.asset',
@@ -52,6 +53,18 @@ class stock_move_select_asset(osv.osv_memory):
             string='Product',
             readonly=True,
         ),
+        'create_or_select': fields.selection(
+            selection=[
+                ('create', 'Create'),
+                ('select', 'Select'),
+            ],
+            string='Create or select',
+            readonly=True,
+        ),
+    }
+
+    _defaults = {
+        'create_or_select': 'create',
     }
 
     def put_in_processor(self, cr, uid, ids, context=None):
@@ -67,14 +80,30 @@ class stock_move_select_asset(osv.osv_memory):
             ids = [ids]
 
         for wiz in self.browse(cr, uid, ids, context=context):
-            import pdb
-            pdb.set_trace()
+            move_proc_obj = self.pool.get(wiz.move_processor_id._name)
             if len(wiz.asset_ids) > wiz.move_processor_id.ordered_quantity:
                 raise osv.except_osv(
                     _('Error'),
                     _('You cannot choose a higher number of assets (%d) than the initial quantity (%d).') %
                     (len(wiz.asset_ids), wiz.move_processor_id.ordered_quantity),
                 )
+
+            remain_qty = wiz.move_processor_id.ordered_quantity
+            for asset in wiz.asset_ids:
+                move_proc_obj.copy(cr, uid, wiz.move_processor_id.id, {
+                    'ordered_quantity': 1.0,
+                    'quantity': 1.0,
+                    'asset_id': asset.id,
+                }, context=context)
+                remain_qty -= 1
+
+            if remain_qty:
+                move_proc_obj.write(cr, uid, [wiz.move_processor_id.id], {
+                    'ordered_quantity': remain_qty,
+                    'quantity': min(remain_qty, wiz.move_processor_id.quantity),
+                }, context=context)
+            else:
+                move_proc_obj.unlink(cr, uid, [wiz.move_processor_id.id], context=context)
 
         return self.close_window(cr, uid, ids, context=context)
 
@@ -92,10 +121,10 @@ class stock_move_select_asset(osv.osv_memory):
 
         return {
             'type': 'ir.actions.act_window',
-            'res_model': wiz.move_processor_id,
+            'res_model': wiz.move_processor_id.wizard_id._name,
             'view_type': 'form',
             'view_mode': 'form',
-            'res_id': wiz.move_processor_id,
+            'res_id': wiz.move_processor_id.wizard_id.id,
             'target': 'new',
             'context': context,
         }
