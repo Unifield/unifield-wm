@@ -328,8 +328,9 @@ class stock_move_processor(osv.osv):
         """
         # Asset is not mandatory for moves performed internally
         asset_mandatory = False
-        if line.wizard_id.picking_id.type in ['out', 'in'] \
-           and line.product_id.type == 'product' \
+#        if line.wizard_id.picking_id.type in ['out', 'in'] \
+#           and line.product_id.type == 'product' \
+        if line.product_id.type == 'product' \
            and line.product_id.subtype == 'asset':
             asset_mandatory = True
 

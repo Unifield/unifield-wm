@@ -587,8 +587,10 @@ class stock_move(osv.osv):
         if asset_move_ids:
             for move in self.browse(cr, uid, asset_move_ids, context=context):
                 # Avoid modification of the location_id of the asset if we are
-                # in a chained stock move
-                if move.location_dest_id.chained_location_type == 'none' or move.location_dest_id.chained_auto_packing == 'transparent':
+                # in a chained stock move or when the draft picking ticket is closed (qty = 0.00)
+                if move.product_qty != 0.00 and \
+                   (move.location_dest_id.chained_location_type == 'none' or 
+                   move.location_dest_id.chained_auto_packing == 'transparent'):
                     asset_obj.write(cr, uid, [move.asset_id.id], {'location_id': move.location_dest_id.id}, context=context)
 
         return res

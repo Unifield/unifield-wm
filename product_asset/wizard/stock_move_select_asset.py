@@ -95,20 +95,22 @@ class stock_move_select_asset(osv.osv_memory):
 
             remain_qty = wiz.move_processor_id.ordered_quantity
             for asset in wiz.asset_ids:
-                move_proc_obj.copy(cr, uid, wiz.move_processor_id.id, {
+                line_values = {
                     'ordered_quantity': 1.0,
                     'quantity': 1.0,
                     'asset_id': asset.id,
-                }, context=context)
+                }
                 remain_qty -= 1
-
+                if remain_qty:
+                    move_proc_obj.copy(cr, uid, wiz.move_processor_id.id, line_values, context=context)
+                else:
+                    move_proc_obj.write(cr, uid, [wiz.move_processor_id.id], line_values, context=context)
+                            
             if remain_qty:
                 move_proc_obj.write(cr, uid, [wiz.move_processor_id.id], {
                     'ordered_quantity': remain_qty,
                     'quantity': min(remain_qty, wiz.move_processor_id.quantity),
                 }, context=context)
-            else:
-                move_proc_obj.unlink(cr, uid, [wiz.move_processor_id.id], context=context)
 
         return self.close_window(cr, uid, ids, context=context)
 
