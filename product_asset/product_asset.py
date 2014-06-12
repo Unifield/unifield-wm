@@ -211,6 +211,19 @@ class product_asset(osv.osv):
 
         return res
 
+    def search(self, cr, uid, args, offset=0, limit=None, order=None, context=None, count=False):
+        '''
+        If 'asset_ids' is in context, don't dispaly these product assets
+        '''
+        if context is None:
+            context = {}
+
+        if context.get('asset_ids') and isinstance(context.get('asset_ids'), list):
+            no_ids = context.get('asset_ids')[0][2]
+            args.append(('id', 'not in', no_ids))
+
+        return super(product_asset, self).search(cr, uid, args, offset=offset, limit=limit, order=order, context=context, count=count)
+
     def _get_dummy(self, cr, uid, ids, field_name, args, context=None):
         res = {}
         for asset_id in ids:
