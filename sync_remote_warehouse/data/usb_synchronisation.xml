@@ -17,6 +17,7 @@
             <field name="view_type">form</field>
             <field name="vieww_mode">tree</field>
             <field name="domain">[('res_model', '=', 'res.company')]</field>
+            <field name="context">{'from': 'usb_synchronization'}</field>
         </record>
 
         <menuitem id="menu_usb_files" name="USB Synchro files" action="action_ir_attachment_company" parent="sync_client.sync_menu" sequence="40"/>

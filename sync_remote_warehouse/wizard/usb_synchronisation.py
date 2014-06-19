@@ -166,7 +166,7 @@ class usb_synchronisation(osv.osv_memory):
                 'datas': base64.encodestring(synchro.get('push_file')),
             })
         # Delete all previous attachment except last 10
-        number = 10 # default value
+        number = 5 # default value
         to_delete = []
         a_ids = attachment_obj.search(cr, uid, [], order='id desc')
         for idx, el in enumerate(a_ids):
