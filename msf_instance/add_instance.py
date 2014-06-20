@@ -420,4 +420,18 @@ class account_cashbox_line(osv.osv):
         return super(account_cashbox_line, self).write(cr, uid, ids, vals, context=context)
 
 account_cashbox_line()
+
+class account_analytic_account(osv.osv):
+    _name = 'account.analytic.account'
+    _inherit = 'account.analytic.account'
+
+    _columns = {
+        'instance_id': fields.many2one('msf.instance', 'Proprietary Instance', required=True, readonly=True),
+    }
+
+    _defaults = {
+        'instance_id': lambda self, cr, uid, c: self.pool.get('res.users').browse(cr, uid, uid, c).company_id.instance_id.id,
+    }
+
+account_analytic_account()
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
