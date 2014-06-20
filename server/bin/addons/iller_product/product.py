@@ -73,11 +73,14 @@ class product_price_history(osv.osv):
     def update_price(self, cr, uid):
         product_ids = self.search(cr, uid, [])
 
-        for prd in self.browse(cr, uid, product_ids):
-            cr.execute('''SELECT id FROM product_price_history WHERE product_id=%s  AND name<=%s ORDER BY name desc LIMIT 1''',(prd.id, time.strftime('%Y-%m-%d')))
-            ret = cr.fetchone()
-            prix_vente = decimal.Decimal(prd.prix_achat*prd.coeff_depart).quantize(decimal.Decimal('.01'), rounding=decimal.ROUND_DOWN)
-            cr.execute('UPDATE product_price_history SET nouveau_prix_vente = %s WHERE id = %s') % (prix_vente, ret)
+        for prd in self.pool.get('product.product').read(cr, uid, product_ids,  ['default_code', 'prix_achat', 'coeff_depart']):
+            cr.execute('''SELECT id, nouveau_prix_achat FROM product_price_history WHERE product_id=%s  AND name<=%s ORDER BY name desc''',(prd['id'], time.strftime('%Y-%m-%d')))
+            ret = cr.dictfetchall()
+            for r in ret:
+                prix_vente = decimal.Decimal(str(r['nouveau_prix_achat']*prd['coeff_depart'])).quantize(decimal.Decimal('.01'), rounding=decimal.ROUND_DOWN)
+                cr.execute('UPDATE product_price_history SET nouveau_prix_vente = %s WHERE id = %s', (prix_vente, r['id']))
+
+        return True
 
 product_price_history()
 
