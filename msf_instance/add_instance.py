@@ -20,6 +20,7 @@
 ##############################################################################
 
 from osv import fields, osv
+from tools.translate import _
 
 class account_analytic_journal(osv.osv):
     _name = 'account.analytic.journal'
@@ -425,13 +426,63 @@ class account_analytic_account(osv.osv):
     _name = 'account.analytic.account'
     _inherit = 'account.analytic.account'
 
+    def _get_current_instance_type(self, cr, uid, ids, field_name=None, arg=None, context=None):
+        """
+        Get current instance type
+        """
+        res = {}
+        current_instance_type = self.pool.get('res.users').browse(cr, uid, uid, context=context).company_id.instance_id.level
+        for account in self.browse(cr, uid, ids, context=context):
+            res[account.id] = current_instance_type
+        return res
+
     _columns = {
-        'instance_id': fields.many2one('msf.instance', 'Proprietary Instance', required=True, readonly=True),
+        'instance_id': fields.many2one('msf.instance', 'Proprietary Instance'),
+        'current_instance_type': fields.function(_get_current_instance_type, method=True, store=False, string='Instance type', type='selection', selection=[('section', 'HQ'), ('coordo', 'Coordo'), ('project', 'Project')], readonly=True),
     }
 
     _defaults = {
         'instance_id': lambda self, cr, uid, c: self.pool.get('res.users').browse(cr, uid, uid, c).company_id.instance_id.id,
+        'current_instance_type': lambda self, cr, uid, c: self.pool.get('res.users').browse(cr, uid, uid, c).company_id.instance_id.level,
     }
+
+    def check_fp(self, cr, uid, vals):
+        """
+        Check that FP have an instance_id
+        Check that the given instance is not section level!
+        """
+        if not vals:
+            return True
+        cat = vals.get('category', False)
+        if cat == 'FUNDING':
+            instance_id = vals.get('instance_id', False) and vals.get('instance_id')[0] or False
+            if not instance_id:
+                raise osv.except_osv(_('Error'), _('Proprietary Instance is mandatory for FP accounts!'))
+            instance_level = self.pool.get('msf.instance').browse(cr, uid, instance_id).level
+            if instance_level == 'section':
+                raise osv.except_osv(_('Warning'), _('Proprietary Instance for FP accounts should be only COORDO and/or MISSION'))
+        return True
+
+    def create(self, cr, uid, vals, context=None):
+        """
+        Check FPs
+        """
+        if context is None:
+            context = {}
+        # Check that instance_id is filled in for FP
+        self.check_fp(cr, uid, vals)
+        return super(account_analytic_account, self).create(cr, uid, vals, context=context)
+
+    def write(self, cr, uid, ids, vals, context=None):
+        """
+        Check FPs
+        """
+        if context is None:
+            context = {}
+        res = super(account_analytic_account, self).write(cr, uid, ids, vals, context=context)
+        for a in self.read(cr, uid, ids, context=context):
+            self.check_fp(cr, uid, a)
+        return res
 
 account_analytic_account()
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
