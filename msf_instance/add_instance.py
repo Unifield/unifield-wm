@@ -446,11 +446,13 @@ class account_analytic_account(osv.osv):
         'current_instance_type': lambda self, cr, uid, c: self.pool.get('res.users').browse(cr, uid, uid, c).company_id.instance_id.level,
     }
 
-    def check_fp(self, cr, uid, vals):
+    def check_fp(self, cr, uid, vals, context=None):
         """
         Check that FP have an instance_id
         Check that the given instance is not section level!
         """
+        if context is None:
+            context = {}
         if not vals:
             return True
         cat = vals.get('category', False)
@@ -470,7 +472,8 @@ class account_analytic_account(osv.osv):
         if context is None:
             context = {}
         # Check that instance_id is filled in for FP
-        self.check_fp(cr, uid, vals)
+        if context.get('from_web', False) is True:
+            self.check_fp(cr, uid, vals, context=context)
         return super(account_analytic_account, self).create(cr, uid, vals, context=context)
 
     def write(self, cr, uid, ids, vals, context=None):
@@ -480,8 +483,9 @@ class account_analytic_account(osv.osv):
         if context is None:
             context = {}
         res = super(account_analytic_account, self).write(cr, uid, ids, vals, context=context)
-        for a in self.read(cr, uid, ids, context=context):
-            self.check_fp(cr, uid, a)
+        if context.get('from_web', False) is True:
+            for a in self.read(cr, uid, ids, context=context):
+                self.check_fp(cr, uid, a, context=context)
         return res
 
 account_analytic_account()
