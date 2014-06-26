@@ -459,7 +459,10 @@ class account_analytic_account(osv.osv):
         if cat == 'FUNDING':
             instance_id = vals.get('instance_id', False) or False
             if not instance_id:
-                raise osv.except_osv(_('Error'), _('Proprietary Instance is mandatory for FP accounts!'))
+                current_instance = self.pool.get('res.users').browse(cr, uid, uid, context=context).company_id.instance_id
+                if not current_instance or current_instance.level == 'section':
+                    raise osv.except_osv(_('Error'), _('Proprietary Instance is mandatory for FP accounts!'))
+                instance_id = current_instance.id
             instance_level = self.pool.get('msf.instance').browse(cr, uid, instance_id).level
             if instance_level == 'section':
                 raise osv.except_osv(_('Warning'), _('Proprietary Instance for FP accounts should be only COORDO and/or MISSION'))
