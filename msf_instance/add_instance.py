@@ -457,7 +457,7 @@ class account_analytic_account(osv.osv):
             return True
         cat = vals.get('category', False)
         if cat == 'FUNDING':
-            instance_id = vals.get('instance_id', False) and vals.get('instance_id')[0] or False
+            instance_id = vals.get('instance_id', False) or False
             if not instance_id:
                 raise osv.except_osv(_('Error'), _('Proprietary Instance is mandatory for FP accounts!'))
             instance_level = self.pool.get('msf.instance').browse(cr, uid, instance_id).level
@@ -484,7 +484,8 @@ class account_analytic_account(osv.osv):
             context = {}
         res = super(account_analytic_account, self).write(cr, uid, ids, vals, context=context)
         if context.get('from_web', False) is True:
-            for a in self.read(cr, uid, ids, context=context):
+            for a in self.read(cr, uid, ids, ['category', 'instance_id'], context=context):
+                a.update({'instance_id': a.get('instance_id', [])[0]})
                 self.check_fp(cr, uid, a, context=context)
         return res
 
