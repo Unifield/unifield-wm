@@ -866,9 +866,9 @@ class composition_kit(osv.osv):
     _constraints = [(_composition_kit_constraint, 'Constraint error on Composition Kit.', []),
                     (_check_active_product, 'You cannot confirm this kit because it contains a line with an inactive product', ['state', 'composition_item_ids']),
                     ]
-    _sql_constraints = [('unique_composition_kit_real_ref', "unique(composition_product_id,composition_reference)", 'Kit Composition List Reference must be unique for a given product.'),
+    _sql_constraints = [('unique_composition_kit_real_ref', "unique(composition_product_id,composition_reference)", _('Kit Composition List Reference must be unique for a given product.')),
                         # the composition list with lot A should not be taken into account if state is in ['done', 'cancel']
-#                        ('unique_composition_kit_real_lot', "unique(composition_lot_id)", 'Batch Number can only be used by one Kit Composition List.'),
+#                        ('unique_composition_kit_real_lot', "unique(composition_lot_id)", _('Batch Number can only be used by one Kit Composition List.')),
                         ]
 
 composition_kit()
@@ -1334,7 +1334,7 @@ class stock_move(osv.osv):
         composition_batch_check = obj.product_id.batch_management
         composition_expiry_check = obj.product_id.perishable
         
-        return {'name': 'Kit Composition List',
+        return {'name': _('Kit Composition List'),
                 'view_id': False,
                 'view_type': 'form',
                 'view_mode': 'form,tree',
