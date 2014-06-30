@@ -21668,6 +21668,7 @@ msgstr "Third Party Mandatory"
 #: sql_constraint:composition.kit:0
 #: sql_constraint:composition.kit:0
 #: sql_constraint:composition.kit:0
+#: code:addons/kit/kit.py:869
 msgid "Kit Composition List Reference must be unique for a given product."
 msgstr "Référence de la Liste de Composition de kit doit être unique pour un produit donné."
 
@@ -41261,6 +41262,7 @@ msgstr "Taux de change"
 #. module: kit
 #: code:addons/kit/kit.py:242
 #: field:assign.to.kit.line,kit_id_assign_to_kit_line:0
+#: code:addons/kit/kit.py:1337
 #: model:ir.actions.act_window,name:kit.kit_composition_real_action
 #: model:ir.actions.act_window,name:kit.kit_composition_real_action2
 #: model:ir.ui.menu,name:kit.kit_composition_real_menu
