@@ -50248,7 +50248,7 @@ msgstr "Modèle de Correspondance Fiscale de Compte"
 #. module: msf_supply_doc_export
 #: model:ir.actions.report.xml,name:msf_supply_doc_export.report_real_composition_kit_xls
 msgid "Real Composition Kit Excel Export"
-msgstr "Real Composition Kit Excel Export"
+msgstr "Export Excel des compositions de kit réel"
 
 #. module: msf_budget
 #: report:msf.pdf.budget.monthly:0
