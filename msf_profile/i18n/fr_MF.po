@@ -13598,7 +13598,7 @@ msgstr "* Quand un compte est créé, il est sous statut \"Brouillon\".         
 " S'il doit être révisé, alors le statut est \"En attente\".\n"
 " Quand le projet est terminé, le statut passe sous \"Terminé\"."
 
-#. module: return_claim
+#. module: return_claim, msf_outgoing
 #: field:add.event,claim_id:0
 #: code:addons/return_claim/return_claim.py:409
 #: code:addons/return_claim/return_claim.py:826
@@ -13611,6 +13611,7 @@ msgstr "* Quand un compte est créé, il est sous statut \"Brouillon\".         
 #: model:ir.ui.menu,name:return_claim.return_claim_purchase
 #: model:ir.ui.menu,name:return_claim.return_claim_sale
 #: view:return.claim:0
+#: view:internal.picking.processor:0
 #, python-format
 msgid "Claim"
 msgstr "Réclamation"
@@ -34580,8 +34581,11 @@ msgstr "The product was not defined properly."
 msgid "Virtual location"
 msgstr "Zone Virtuelle"
 
-#. module: return_claim
+#. module: return_claim,msf_outgoing
 #: field:stock.partial.picking,register_a_claim_partial_picking:0
+#: field:create.picking.processor,register_a_claim:0
+#: field:internal.picking.processor,register_a_claim:0
+#: field:outgoing.delivery.processor,register_a_claim:0
 msgid "Register a Claim to Supplier"
 msgstr "Enregistrer une réclamation envers un Fournisseur"
 
@@ -54732,8 +54736,12 @@ msgstr "Réccurence"
 msgid "Invoice"
 msgstr "Facture"
 
-#. module: return_claim
+#. module: return_claim, msf_outgoing
 #: field:stock.partial.picking,description_partial_picking:0
+#: field:create.picking.processor,claim_description:0
+#: view:internal.picking.processor:0
+#: field:internal.picking.processor,claim_description:0
+#: field:outgoing.delivery.processor,claim_description:0
 msgid "Claim Description"
 msgstr "Réclamation - Description"
 
