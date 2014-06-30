@@ -9559,7 +9559,7 @@ msgstr "Ligne de la Source"
 #. module: purchase
 #: view:purchase.order:0
 msgid "Delivery & Invoicing"
-msgstr "Livraison & Facturation"
+msgstr "Livraison"
 
 #. module: account_mcdb
 #: field:account.mcdb,amount_from:0
