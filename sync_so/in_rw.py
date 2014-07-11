@@ -78,13 +78,15 @@ class stock_picking(osv.osv):
                 header_result['already_replicated'] = True
                 
                 # Check if the PICK is already there, then do not create it, just inform the existing of it, and update the possible new name
-                existing_pick = self.search(cr, uid, [('origin', '=', origin), ('subtype', '=', 'picking'), ('type', '=', 'in'), ('state', '=', 'draft')], context=context)
+                existing_pick = self.search(cr, uid, [('origin', '=', origin), ('type', '=', 'in'), ('state', '=', 'draft')], context=context)
                 if existing_pick:
                     message = "Sorry, the IN: " + pick_name + " existed already in " + cr.dbname
                     self._logger.info(message)
                     return message
                 pick_id = self.create(cr, uid, header_result , context=context)
-                self.draft_force_assign(cr, uid, [pick_id]) # Fixed by JF: To send the IN to the right state 
+                self.action_confirm(cr, uid, [pick_id]) # Just confirm the IN to have a check availability
+                wf_service = netsvc.LocalService("workflow")
+                wf_service.trg_validate(uid, 'stock.picking', pick_id, 'button_confirm', cr)
 
                 '''
                     Update the sequence for the IN object in Remote Warehouse to have the same value as of in CP
@@ -195,7 +197,9 @@ class stock_picking(osv.osv):
                     self._logger.info(message)
                     return message
                 pick_id = self.create(cr, uid, header_result , context=context)
-                self.draft_force_assign(cr, uid, [pick_id]) # Fixed by JF: To send the IN to the right state 
+                self.action_confirm(cr, uid, [pick_id]) # Just confirm the IN to have a check availability
+                wf_service = netsvc.LocalService("workflow")
+                wf_service.trg_validate(uid, 'stock.picking', pick_id, 'button_confirm', cr)
                 
                 if 'rw_force_seq' in pick_dict and pick_dict.get('rw_force_seq', False):
                     self.alter_sequence_for_rw_pick(cr, uid, 'stock.picking.internal', pick_dict.get('rw_force_seq') + 1, context)
