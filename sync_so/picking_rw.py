@@ -421,7 +421,8 @@ class stock_picking(osv.osv):
                     self._logger.info(message)
                     return message
                 pick_id = self.create(cr, uid, header_result , context=context)
-                self.draft_force_assign(cr, uid, [pick_id])
+                # Launch a first check availability
+                self.action_assign(cr, uid, [pick_id], context=context)
                 
                 # Check if this PICK/OUT comes from a procurement, if yes, then update the move id to the procurement if exists
                 if pick_id:
