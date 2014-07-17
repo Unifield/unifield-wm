@@ -1039,6 +1039,7 @@ class stock_picking(osv.osv):
         pick = self.browse(cr, uid, pick_id, context=context)
         
         # Objects
+        order_line_obj = self.pool.get('sale.order.line')
         ship_proc_obj = self.pool.get('shipment.processor')
         ship_proc_vals = {
             'shipment_id': pick.shipment_id.id,
@@ -1057,13 +1058,22 @@ class stock_picking(osv.osv):
             sline = sline[2]
             to_pack = sline['to_pack']
             from_pack = sline['from_pack']
+            
+            sale_order_id = False
+            #get sale order from this sline:
+            if sline['sale_line_id']:
+                sale_order_id = order_line_obj.read(cr, uid, sline['sale_line_id'], ['order_id'])['order_id']
+                if sale_order_id:
+                    sale_order_id = sale_order_id[0]
 
             for family in wizard.family_ids:
-                if family.from_pack <= from_pack and family.to_pack >= to_pack:
+                family_sale_id = family.sale_order_id and family.sale_order_id.id or False
+                if family.from_pack <= from_pack and family.to_pack >= to_pack and sale_order_id == family_sale_id:
                     family_vals = {
-                        'selected_number': sline['to_pack'] - sline['from_pack'] + 1,
+                        'selected_number': to_pack - from_pack + 1,
                     }
                     wizard_line_obj.write(cr, uid, [family.id], family_vals, context=context)
+                    print family.id, " - ", family_vals['selected_number'] 
 
                     
         # TO BE REVIEWED AND REMOVED THE FOLLOWING BLOCK OF CODE!
