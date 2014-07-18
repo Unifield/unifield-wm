@@ -562,6 +562,7 @@ product_nouveau_prix_achat()
 class product_pricelist_promo(osv.osv):
     _name = 'product.pricelist.promo'
     _description = 'Promo'
+    _order = 'end_date desc'
 
     def create(self, cr, uid, vals, context=None):
         if not context:
@@ -867,7 +868,7 @@ pricelist_mea_configuration()
 class product_in_promo(osv.osv):
     _name = 'product.pricelist.promo.in'
     _description = 'Produit dans la promo'
-    _order = 'name'
+    _order = 'name, product_name'
 
 
     def onchange_prix_blanche(self, cr, uid, ids, product_id, prix_blanche, context=None):
@@ -927,6 +928,7 @@ class product_in_promo(osv.osv):
     _columns = {
         'name': fields.integer(string='Séquence', readonly=True),
         'product_id': fields.many2one('product.product', string='Produit', required='1'),
+        'product_name': fields.related('product_id', 'default_code', type='char', string='PName', store=True, size=64),
         'promo_id': fields.many2one('product.pricelist.promo', ondelete='cascade'),
         'prix_blanche': fields.related('product_id', 'prix_blanche', string='Prix blanche', readonly=True),
         'prix_jaune': fields.function(_get_prix_jaune, method=True, string='Prix jaune', readonly=True, store=False,),
@@ -962,6 +964,7 @@ product_tarif_special_client_wizard()
 class product_pricelist_mea(osv.osv):
     _name = 'product.pricelist.mea'
     _description = 'MEA'
+    _order = 'end_date desc'
 
     def create(self, cr, uid, vals, context=None):
         if not context:
@@ -1214,7 +1217,7 @@ product_pricelist_mea()
 class product_in_mea(osv.osv):
     _name = 'product.pricelist.mea.in'
     _description = 'Produit dans la mea'
-    _order = 'name'
+    _order = 'name, product_name'
         
     def _get_prix_achat(self, cr, uid, ids, field_name, arg, context=None):
         history_obj = self.pool.get('product.price.history')
@@ -1244,20 +1247,21 @@ class product_in_mea(osv.osv):
     def _check_prix_blanche(self, cr, uid, ids, context=None):
         for this in self.browse(cr, uid, ids, context=context):
             if not this.new_prix_blanche or this.new_prix_blanche <= 0:
-                raise osv.except_osv(_('Attention %s - %s !') % (this.product_id.name.strip(), this.new_prix_blanche), u'Le prix blanche doit être supérieur à 0 : (produit : %s, prix blanc : %s)' % (this.product_id.name.strip(), this.new_prix_blanche))
+                raise osv.except_osv(_('Attention %s - %s !') % (this.product_id.name.strip(), this.new_prix_blanche), u'Le prix blanche doit être supérieur à 0 : (produit : [%s] %s, prix blanc : %s)' % (this.product_id.default_code, this.product_id.name.strip(), this.new_prix_blanche))
                 return False
         return True
 
     def _check_prix_jaune(self, cr, uid, ids, context=None):
         for this in self.browse(cr, uid, ids, context=context):
             if not this.new_prix_jaune or this.new_prix_jaune <= 0:
-                raise osv.except_osv(_('Attention %s - %s !') % (this.product_id.name.strip(), this.new_prix_jaune), u'Le prix jaune doit être supérieur à 0 : (produit : %s, prix blanc : %s)' % (this.product_id.name.strip(), this.new_prix_jaune))
+                raise osv.except_osv(_('Attention %s - %s !') % (this.product_id.name.strip(), this.new_prix_jaune), u'Le prix jaune doit être supérieur à 0 : (produit : [%s] %s, prix blanc : %s)' % (this.product_id.default_code, this.product_id.name.strip(), this.new_prix_jaune))
                 return False
         return True
 
     _columns = {
         'name': fields.integer(string='Séquence', readonly=True),
         'product_id': fields.many2one('product.product', string='Produit', required='1'),
+        'product_name': fields.related('product_id', 'default_code', type='char', string='PName', store=True, size=64),
         'promo_id': fields.many2one('product.pricelist.mea', ondelete='cascade'),
         'new_prix_blanche': fields.float(digits=(16,2), string='Prix blanche', required=True),
         'new_prix_jaune': fields.float(digits=(16,2), string='Prix jaune', required=True),
