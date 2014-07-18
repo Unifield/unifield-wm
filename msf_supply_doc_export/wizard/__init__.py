@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2012 TeMPO Consulting, MSF. All Rights Reserved
+#    Copyright (C) 2011 MSF, TeMPO Consulting
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -18,22 +18,5 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
-{
-    "name" : "Export Files in Excel Format",
-    "version" : "0.1",
-    "description" : "This module enables to export file in xls format",
-    "author" : "MSF - TeMPO Consulting",
-    "category" : "Sale",
-    "depends" : ["sale", "purchase","specific_rules"],
-    "init_xml" : [],
-    "update_xml" : [
-        'msf_export_report.xml',
-        'wizard/supply_kpi_view.xml',
-        'supply_kpi_menu.xml',
-    ],
-    "demo_xml" : [],
-    "test": [],
-    "installable": True,
-    "active": False
-}
+import supply_kpi
+import kpi_refresh

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+   <data>
+      <!--  Supply KPI Dashboard -->
+      <record id="supply_kpi_view" model="ir.ui.view">
+         <field name="name">supply.kpi.view</field>
+         <field name="model">supply.kpi</field>
+         <field name="type">form</field>
+         <field name="arch" type="xml">
+            <form string="Supply Key Performance Indicators">
+               <group col="10" colspan="2">
+                   <field name="running" colspan="1"/>
+                   <field name="refresh_dttm" colspan="1"/>
+                   <button name="button_refresh" type="object" string="Refresh KPIs" icon="gtk-ok" colspan="1" />
+               </group>
+               <separator string="Supplier punctuality" colspan="10" />
+               <group col="2" colspan="1">
+                  <field name="dim_3a" colspan="1" />
+               </group>
+               <group col="10" colspan="2">
+                  <field name="dim_3a_supplier_checkbox" colspan="2" />
+                  <field name="dim_3a_supplier_type_checkbox" colspan="2" />
+                  <field name="dim_3a_zone_checkbox" colspan="2" />
+                  <field name="dim_3a_order_type_checkbox" colspan="2" />
+                  <field name="dim_3a_order_category_checkbox" colspan="2" />
+                  <field name="dim_3a_priority_checkbox" colspan="2" />
+                  <field name="dim_3a_product_checkbox" colspan="2" />
+                  <field name="dim_3a_main_type_checkbox" colspan="2" />
+                  <field name="dim_3a_group_checkbox" colspan="2" />
+                  <field name="dim_3a_family_checkbox" colspan="2" />
+                  <field name="dim_3a_root_checkbox" colspan="2" />
+               </group>
+               <button name="button_3a" type="object" string="Excel" icon="gtk-ok" colspan="1" />
+        
+        <separator string="Value of quantity expired / loss" colspan="10" />
+               <group col="2" colspan="1">
+                  <field name="dim_6a" colspan="1" />
+                  <field name="dim_6a_currency" colspan="1" />
+               </group>
+               <group col="10" colspan="2">
+                  <field name="dim_6a_reason_type_checkbox" colspan="2" />
+                  <field name="dim_6a_product_checkbox" colspan="2" />
+                  <field name="dim_6a_main_type_checkbox" colspan="2" />
+                  <field name="dim_6a_group_checkbox" colspan="2" />
+                  <field name="dim_6a_family_checkbox" colspan="2" />
+                  <field name="dim_6a_root_checkbox" colspan="2" />              
+                  <field name="dim_6a_month_checkbox" colspan="2" />
+                  <field name="dim_6a_year_checkbox" colspan="2" />
+               </group>
+               <button name="button_6a" type="object" string="Excel" icon="gtk-ok" colspan="1" />    
+        
+             <separator string="Purchase Volume" colspan="10" />
+               <group col="2" colspan="1">
+                  <field name="dim_8b" colspan="1" />
+               </group>
+               <group col="10" colspan="2">
+                  <field name="dim_8b_order_category_checkbox" colspan="2" />
+                  <field name="dim_8b_order_type_checkbox" colspan="2" />
+                  <field name="dim_8b_priority_checkbox" colspan="2" />
+                  <field name="dim_8b_partner_type_checkbox" colspan="2" />
+                  <field name="dim_8b_partner_checkbox" colspan="2" />
+                  <field name="dim_8b_week_checkbox" colspan="2" />
+                  <field name="dim_8b_month_checkbox" colspan="2" />
+                  <field name="dim_8b_year_checkbox" colspan="2" />
+               </group>
+               <button name="button_8b" type="object" string="Excel" icon="gtk-ok" colspan="1" />    
+        
+        
+            </form>
+            
+            
+         </field>
+      </record>
+   </data>
+</openerp>

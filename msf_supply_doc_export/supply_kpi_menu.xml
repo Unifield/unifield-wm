@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+  
+      <record id="supply_kpi_menu" model="ir.actions.act_window">
+         <field name="name">Supply KPIs</field>
+         <field name="res_model">supply.kpi</field>
+         <field name="view_type">form</field>
+         <field name="view_mode">tree,graph</field>
+         <field name="view_id" ref="supply_kpi_view"></field>
+         <field name="context">{}</field>
+         <field name="help">Supply Key Performance Indicators.</field>
+      </record>
+      
+        <menuitem id="supply_kpi_menu2" action="supply_kpi_menu" parent="base.next_id_73" sequence="5" />
+    </data>
+</openerp>

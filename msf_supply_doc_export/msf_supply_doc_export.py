@@ -29,6 +29,7 @@ from spreadsheet_xml.spreadsheet_xml_write import SpreadsheetReport
 from tools.translate import _
 
 import pooler
+import time
 
 
 class _int_noformat(report_sxw._int_format):
@@ -302,6 +303,34 @@ class internal_move_xls(WebKitParser):
 internal_move_xls('report.internal.move.xls', 'stock.picking', 'addons/msf_supply_doc_export/report/report_internal_move_xls.mako')
 
 
+
+
+class parser_kpi_detail_xls(report_sxw.rml_parse):
+
+    def __init__(self, cr, uid, name, context=None):
+        super(parser_kpi_detail_xls, self).__init__(cr, uid, name, context=context)
+        self.localcontext.update({
+            'time': time,
+        })
+
+   
+
+class kpi_detail_report_xls(SpreadsheetReport):
+
+    def __init__(self, name, table, rml=False, parser=report_sxw.rml_parse, header='external', store=False):
+        super(kpi_detail_report_xls, self).__init__(name, table, rml=rml, parser=parser, header=header, store=store)
+
+    def create(self, cr, uid, ids, data, context=None):
+        a = super(kpi_detail_report_xls, self).create(cr, uid, ids, data, context=context)
+        return (a[0], 'xls')
+
+kpi_detail_report_xls('report.kpi.detail_xls', 'supply.kpi', 'addons/msf_supply_doc_export/report/report_kpi_detail_xls.mako', parser=parser_kpi_detail_xls, header='internal')
+
+
+
+
+
+
 class incoming_shipment_xls(report_sxw.rml_parse):
     def __init__(self, cr, uid, name, context):
         super(incoming_shipment_xls, self).__init__(cr, uid, name, context=context)
@@ -328,6 +357,12 @@ class incoming_shipment_xml(WebKitParser):
         return (a[0], 'xml')
 
 incoming_shipment_xml('report.incoming.shipment.xml', 'stock.picking', 'addons/msf_supply_doc_export/report/report_incoming_shipment_xml.mako')
+
+
+    
+
+
+
 
 
 class ir_values(osv.osv):
