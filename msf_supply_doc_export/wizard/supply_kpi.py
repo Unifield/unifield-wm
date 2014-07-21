@@ -112,8 +112,10 @@ class supply_kpi(osv.osv):
         headers.extend([elem[1] for elem in fields])
         selects = ', '.join([elem[0] for elem in fields])
         sql = "select " + aggregate[0] + ', ' + selects + ' from dimension_' + prefix[4:] + ' ' + group_by
-        
-        return {'headers': headers, 'sql': sql }
+        print sql
+        cr.execute(sql)
+        report_lines = cr.dictfetchall()
+        return {'report_header': headers, 'report_lines': report_lines }
     
     
     def button_3a(self, cr, uid, ids, context=None):
@@ -123,9 +125,9 @@ class supply_kpi(osv.osv):
         fields = [['state','State',-1]]
         
         datas = self.prepare_report_data(cr, uid, ids, prefix, aggregate, fields, context=None)
-        print datas
+        print 'datas sfc:', datas
         
-        datas = {'ids': ids, 'report_header': 'header', 'report_parms': 'report_parms'}  
+        #datas = {'ids': ids, 'report_header': 'header', 'report_parms': 'report_parms'}  
         return {                                                                
             'type': 'ir.actions.report.xml',                                    
             'report_name': 'kpi.detail_xls',                                       

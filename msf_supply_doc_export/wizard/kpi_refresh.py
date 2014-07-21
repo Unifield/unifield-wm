@@ -41,9 +41,18 @@ class kpi_refresh(osv.osv_memory):
         cr.execute('''insert into po_flat select * from po_flat_vw''')
         cr.execute('''insert into stock_move_flat select * from stock_move_flat_vw''')
         cr.execute('''insert into product_flat select * from product_flat_vw''')
-        cr.execute('''insert into dimension_3_base select * from dimension_3_base_vw''')
-        cr.execute('''insert into dimension_3a select * from dimension_3a_vw''')
-        cr.execute('''insert into dimension_8b select * from dimension_8b_vw''')
+        
+        # dimension_3a. columns need to be named because openerp creates tables with random column order
+        cr.execute('''insert into dimension_3a(create_uid,create_date,write_date,write_uid,pct_ontime,po_id,pol_id,sp_id, 
+                    sm_id,delivery_requested_date,sp_expect_date,sm_actual_receipt_date,categ,order_type,priority, 
+                    partner_type,name,zone,state,default_code,pn_main_type,pn_group,pn_family,pn_root,cnt)  
+                    select 1 as create_uid,current_date as create_date,current_date as write_date,1 as write_uid,  
+                    pct_ontime,po_id,pol_id,sp_id,sm_id,delivery_requested_date, sp_expect_date,sm_actual_receipt_date,  
+                    categ,order_type,priority,partner_type,name,zone,state,default_code,pn_main_type,pn_group,pn_family,             
+                    pn_root,cnt from dimension_3a_vw''')
+        
+        #cr.execute('''insert into dimension_3a select * from dimension_3a_vw''')
+        #cr.execute('''insert into dimension_8b select * from dimension_8b_vw''')
         print 'data refreshed'
         return True
         

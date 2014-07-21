@@ -311,7 +311,18 @@ class parser_kpi_detail_xls(report_sxw.rml_parse):
         super(parser_kpi_detail_xls, self).__init__(cr, uid, name, context=context)
         self.localcontext.update({
             'time': time,
+            'getHeaderLine': self.getHeaderLine,
+            'getReportLines': self.getReportLines,
         })
+        
+    def getHeaderLine(self):
+        print 'datas:', self.datas
+        print 'getHeaderLine:', self.datas['report_header']
+        return self.datas['report_header']
+    
+    def getReportLines(self):
+        print 'getReportLines:', self.datas['report_lines']
+        return self.datas['report_lines']
 
    
 

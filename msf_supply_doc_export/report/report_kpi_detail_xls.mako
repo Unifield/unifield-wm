@@ -20,7 +20,7 @@
   <ProtectStructure>False</ProtectStructure>
   <ProtectWindows>False</ProtectWindows>
  </ExcelWorkbook>
-<Styles>% for o in objects:
+<Styles>
     
     <Row> 
      
@@ -33,7 +33,7 @@
   <Style ss:ID="mainheader">
         <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="0"/>
         <Font ss:FontName="Calibri" x:Family="Swiss" ss:Color="#000000"/>
-        <Interior ss:Color="#E6E6E6" ss:Pattern="Solid"/>% for o in objects:
+        <Interior ss:Color="#E6E6E6" ss:Pattern="Solid"/>
     
     <Row> 
      
@@ -61,7 +61,6 @@
           <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" />
         </Borders>
     </Style>
-    
     <Style ss:ID="header">
         <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
         <Interior ss:Color="#d3d3d3" ss:Pattern="Solid"/>
@@ -77,7 +76,7 @@
         <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
         <Borders>
           <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" />
-          <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" />% for o in objects:
+          <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" />
     
     <Row> 
      
@@ -126,6 +125,16 @@
 </Row>
 <Row></Row>
 <Row></Row>
+
+% for o in objects:
+    
+    <Row> 
+       % for header in getHeaderLine():
+    	  <Cell ss:StyleID="poheader"><Data ss:Type="String">${header |x}</Data></Cell>
+       % endfor
+    </Row>
+    
+% endfor  
 
 
    
