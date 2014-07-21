@@ -134,6 +134,14 @@
        % endfor
     </Row>
     
+    % for line in getReportLines():
+    	<Row>
+    		% for cell in line:
+    		    <Cell ss:StyleID="header"><Data ss:Type="String">${cell}</Data></Cell>
+    		% endfor
+    	
+    	</Row>
+    % endfor  
 % endfor  
 
 

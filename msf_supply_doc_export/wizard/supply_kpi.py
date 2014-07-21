@@ -104,7 +104,8 @@ class supply_kpi(osv.osv):
         supply_kpi = self.browse(cr, uid, ids, context=None)[0]  
         cols = self.col_map[prefix]
         fields.extend([cols[key] for key in cols if getattr(supply_kpi,key)])
-        fields.sort(key=lambda x: x[2])
+        fields.sort(key=lambda x: x[2])   # use the numeric ranking, element 3, to sort
+        print 'fields:', fields
         group_by = ', '.join([elem[0] for elem in fields]) 
         if group_by:       # possible to have no selectable and no static group by fields, in which case no group by is needed
             group_by = 'group by ' + group_by
@@ -114,7 +115,11 @@ class supply_kpi(osv.osv):
         sql = "select " + aggregate[0] + ', ' + selects + ' from dimension_' + prefix[4:] + ' ' + group_by
         print sql
         cr.execute(sql)
-        report_lines = cr.dictfetchall()
+        report_lines_dicts = cr.dictfetchall()   # list of dicts
+        print 'report_lines_dicts:', report_lines_dicts
+        report_lines = [x.values() for x in report_lines_dicts]  # convert to list of lists
+        print 'report_lines list:', report_lines
+        
         return {'report_header': headers, 'report_lines': report_lines }
     
     

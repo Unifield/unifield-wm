@@ -316,7 +316,6 @@ class parser_kpi_detail_xls(report_sxw.rml_parse):
         })
         
     def getHeaderLine(self):
-        print 'datas:', self.datas
         print 'getHeaderLine:', self.datas['report_header']
         return self.datas['report_header']
     
