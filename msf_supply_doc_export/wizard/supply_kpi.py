@@ -29,7 +29,7 @@ from datetime import datetime
 
 
 
-class supply_kpi(osv.osv):
+class supply_kpi(osv.osv_memory):
     _name = 'supply.kpi'
     _description = 'Supply Key Performance Indicators'
     
@@ -53,7 +53,7 @@ class supply_kpi(osv.osv):
     _columns = {
          'running': fields.boolean(string='Is the KPI data generation running ?', readonly=True),
          'refresh_dttm': fields.datetime('KPIs last refreshed', readonly=True),
-         'dim_3a': fields.float("PO Lines on time", readonly=True),
+         'dim_3a': fields.float("PO Lines on time", readonly=True), 
          'dim_3a_supplier_checkbox': fields.boolean(string='Supplier'),
          'dim_3a_supplier_type_checkbox': fields.boolean(string='Supplier Type'),
          'dim_3a_zone_checkbox': fields.boolean(string='Zone'),
@@ -96,37 +96,68 @@ class supply_kpi(osv.osv):
         kpi_obj = self.pool.get('kpi.refresh') 
         kpi_obj.truncate_tables(cr, uid)
         kpi_obj.refresh_data(cr,uid)
+        self.update_wizard(cr, uid, ids, context)
         return True
     
     
     def prepare_report_data(self, cr, uid, ids, prefix, aggregate, fields, context=None):
              
-        supply_kpi = self.browse(cr, uid, ids, context=None)[0]  
+        supply_kpi = self.browse(cr, uid, ids, context=None)[0] 
+        
+        # get fields 
         cols = self.col_map[prefix]
-        fields.extend([cols[key] for key in cols if getattr(supply_kpi,key)])
+        fields.extend([cols[key] for key in cols if getattr(supply_kpi,key)]) 
         fields.sort(key=lambda x: x[2])   # use the numeric ranking, element 3, to sort
         print 'fields:', fields
+        
+        # build header list
         group_by = ', '.join([elem[0] for elem in fields]) 
         if group_by:       # possible to have no selectable and no static group by fields, in which case no group by is needed
             group_by = 'group by ' + group_by
         headers = [aggregate[1]]
         headers.extend([elem[1] for elem in fields])
+        print 'headers: ', headers
+        
+        # build select for data
         selects = ', '.join([elem[0] for elem in fields])
         sql = "select " + aggregate[0] + ', ' + selects + ' from dimension_' + prefix[4:] + ' ' + group_by
-        print sql
+        print 'sql:', sql
         cr.execute(sql)
-        report_lines_dicts = cr.dictfetchall()   # list of dicts
-        print 'report_lines_dicts:', report_lines_dicts
-        report_lines = [x.values() for x in report_lines_dicts]  # convert to list of lists
+        
+        # organise returned data for report
+        report_lines_dict = cr.dictfetchall()   # list of dicts
+        print 'report_lines_dicts:', report_lines_dict
+        
+        
+        # sort data according to order in the fields list & convert to list of lists
+        report_lines = []
+        for line in report_lines_dict:
+            print 'line: ', line
+            sorted_line = [aggregate[1]]
+            for i, elem in enumerate(fields):
+                sorted_line.append(line[elem[0]])
+            report_lines.append(sorted_line)
+
         print 'report_lines list:', report_lines
         
         return {'report_header': headers, 'report_lines': report_lines }
     
     
+    def update_wizard(self,cr, uid, ids, context=None):
+        context = {}
+        kss_obj = self.pool.get('supply.kpi.summary')
+        kss_id = kss_obj.search(cr, uid, [(uid,'=',uid)],context)[0]
+        kss = kss_obj.browse(cr, uid, kss_id, context)
+        self.write(cr,uid,ids,{'dim_3a': kss.dim_3a,'dim_6a': kss.dim_6a, 'dim_6a_currency': kss.dim_6a_currency, 'dim_8b': kss.dim_8b},context)
+        
+        
+        
+    
+    
     def button_3a(self, cr, uid, ids, context=None):
         print 'button 3a pressed'
         prefix='dim_3a'
-        aggregate = ['sum(cnt)','Total']
+        aggregate = ['sum(pct_ontime)','Total']
         fields = [['state','State',-1]]
         
         datas = self.prepare_report_data(cr, uid, ids, prefix, aggregate, fields, context=None)
@@ -160,3 +191,25 @@ class supply_kpi(osv.osv):
     
     
 supply_kpi()
+
+
+class supply_kpi_summary(osv.osv):
+    _name = 'supply.kpi.summary'
+    _description = 'Supply KPI Summary Fields'
+    
+    _columns = {
+        'dim_3a': fields.float("PO Lines on time", readonly=True), 
+        'dim_6a': fields.float('Value of expired loss', readonly=True),
+        'dim_6a_currency': fields.char('Currency', size=3, readonly=True),
+        'dim_8b': fields.float('Number of Purchase order lines', readonly=True),
+    }
+
+    def create(self, cr, uid, vals, context=None):
+        return super(supply_kpi_summary, self).create(cr, uid, vals, context=context)
+    
+
+    def write(self, cr, uid, ids, vals, context=None):
+        return super(supply_kpi_summary, self).write(cr, uid, vals, context=context)
+    
+    
+supply_kpi_summary()
