@@ -96,7 +96,7 @@ class supply_kpi(osv.osv_memory):
         kpi_obj = self.pool.get('kpi.refresh') 
         kpi_obj.truncate_tables(cr, uid)
         kpi_obj.refresh_data(cr,uid)
-        self.update_wizard(cr, uid, ids, context)
+        #self.update_wizard(cr, uid, ids, context)
         return True
     
     
@@ -182,10 +182,12 @@ class supply_kpi(osv.osv_memory):
         
 
     def create(self, cr, uid, vals, context=None):
+        context = {}
         return super(supply_kpi, self).create(cr, uid, vals, context=context)
     
 
     def write(self, cr, uid, ids, vals, context=None):
+        context = {}
         return super(supply_kpi, self).write(cr, uid, vals, context=context)
        
     
