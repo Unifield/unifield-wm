@@ -183,11 +183,13 @@ class supply_kpi(osv.osv_memory):
 
     def create(self, cr, uid, vals, context=None):
         context = {}
+        vals = {}
         return super(supply_kpi, self).create(cr, uid, vals, context=context)
     
 
     def write(self, cr, uid, ids, vals, context=None):
         context = {}
+        vals = {}
         return super(supply_kpi, self).write(cr, uid, vals, context=context)
        
     
