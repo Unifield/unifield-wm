@@ -361,6 +361,35 @@ class stock_picking(osv.osv):
         
         return entity.usb_instance_type
 
+    def create(self, cr, uid, vals, context=None):
+        '''
+        Put -RW to the name of the Picking created on RW instance
+        '''
+        noname = not vals.get('name') and self._get_usb_entity_type(cr, uid, context=context) == 'remote_warehouse'
+        
+        res = super(stock_picking, self).create(cr, uid, vals, context=context)
+
+        if noname:
+            pick = self.browse(cr, uid, res, context=context)
+            if pick.type != 'out' or (pick.type == 'out' and pick.subtype in ('standard', 'picking')):
+                name = '%s-RW' % pick.name
+                self.write(cr, uid, [pick.id], {'name': name}, context=context)
+
+        return res
+
+    def copy(self, cr, uid, pick_id, defaults, context=None):
+        noname = not defaults.get('name') and self._get_usb_entity_type(cr, uid, context=context) == 'remote_warehouse'
+
+        res = super(stock_picking, self).copy(cr, uid, pick_id, defaults, context=context)
+
+        if noname:
+            pick = self.browse(cr, uid, res, context=context)
+            if pick.type != 'out' or (pick.type == 'out' and pick.subtype in ('standard', 'picking')):
+                name = '%s-RW' % pick.name
+                self.write(cr, uid, [pick.id], {'name': name}, context=context)
+
+        return res
+
 
     def _hook_check_cp_instance(self, cr, uid, ids, context=None):
         '''
