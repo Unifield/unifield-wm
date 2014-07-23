@@ -104,7 +104,7 @@ class supply_kpi(osv.osv_memory):
              
         supply_kpi = self.browse(cr, uid, ids, context=None)[0] 
         
-        # get fields 
+        # get fields in the correct order
         cols = self.col_map[prefix]
         fields.extend([cols[key] for key in cols if getattr(supply_kpi,key)]) 
         fields.sort(key=lambda x: x[2])   # use the numeric ranking, element 3, to sort
@@ -133,8 +133,10 @@ class supply_kpi(osv.osv_memory):
         report_lines = []
         for line in report_lines_dict:
             print 'line: ', line
-            sorted_line = [aggregate[1]]
+            sorted_line = []
+            sorted_line.append(line[aggregate[2]])   # sorted_line assignment split into 2 statements for readability
             for i, elem in enumerate(fields):
+                print 'sorted: ', sorted_line
                 sorted_line.append(line[elem[0]])
             report_lines.append(sorted_line)
 
@@ -151,19 +153,17 @@ class supply_kpi(osv.osv_memory):
         self.write(cr,uid,ids,{'dim_3a': kss.dim_3a,'dim_6a': kss.dim_6a, 'dim_6a_currency': kss.dim_6a_currency, 'dim_8b': kss.dim_8b},context)
         
         
-        
     
     
     def button_3a(self, cr, uid, ids, context=None):
         print 'button 3a pressed'
+        
         prefix='dim_3a'
-        aggregate = ['sum(pct_ontime)','Total']
+        aggregate = ['sum(pct_ontime)','Total','sum']   # 0: sql command, 1: report heading, 2: sql column name
         fields = [['state','State',-1]]
         
         datas = self.prepare_report_data(cr, uid, ids, prefix, aggregate, fields, context=None)
-        print 'datas sfc:', datas
         
-        #datas = {'ids': ids, 'report_header': 'header', 'report_parms': 'report_parms'}  
         return {                                                                
             'type': 'ir.actions.report.xml',                                    
             'report_name': 'kpi.detail_xls',                                       

@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//financing_contract/contract.py=utf-8
 encoding//msf_supply_doc_export/__openerp__.py=utf-8
 encoding//msf_supply_doc_export/supply_kpi_models.py=utf-8
 encoding//msf_supply_doc_export/wizard/supply_kpi.py=utf-8
