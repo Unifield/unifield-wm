@@ -46,6 +46,7 @@ class supply_kpi(osv.osv_memory):
             'dim_3a_family_checkbox': ['pn_family','Family',10],
             'dim_3a_root_checkbox': ['pn_root','Root',11],
             }
+               
     }
 
     
@@ -96,7 +97,7 @@ class supply_kpi(osv.osv_memory):
         kpi_obj = self.pool.get('kpi.refresh') 
         kpi_obj.truncate_tables(cr, uid)
         kpi_obj.refresh_data(cr,uid)
-        #self.update_wizard(cr, uid, ids, context)
+        self.default_get(cr, uid, ids, context)
         return True
     
     
@@ -145,26 +146,32 @@ class supply_kpi(osv.osv_memory):
         return {'report_header': headers, 'report_lines': report_lines }
     
     
-    def update_wizard(self,cr, uid, ids, context=None):
+    def default_get(self, cr, uid, fields=None, context=None):       
         context = {}
         kss_obj = self.pool.get('supply.kpi.summary')
         kss_id = kss_obj.search(cr, uid, [(uid,'=',uid)],context)[0]
         kss = kss_obj.browse(cr, uid, kss_id, context)
-        self.write(cr,uid,ids,{'dim_3a': kss.dim_3a,'dim_6a': kss.dim_6a, 'dim_6a_currency': kss.dim_6a_currency, 'dim_8b': kss.dim_8b},context)
-        
-        
+        #self.write(cr,uid,ids,{'dim_3a': kss.dim_3a,'dim_6a': kss.dim_6a, 'dim_6a_currency': kss.dim_6a_currency, 'dim_8b': kss.dim_8b},context)
+        res = super(supply_kpi, self).default_get(cr, uid, fields, context=context)
+        res['dim_3a'] = kss.dim_3a
+        res['dim_6a'] = kss.dim_6a
+        res['dim_6a_currency'] = kss.dim_6a_currency
+        res['dim_8b'] = kss.dim_8b
+        return res                                                                  
+     
     
     
     def button_3a(self, cr, uid, ids, context=None):
         print 'button 3a pressed'
         
         prefix='dim_3a'
-        aggregate = ['sum(pct_ontime)','Total','sum']   # 0: sql command, 1: report heading, 2: sql column name
+        aggregate = ['round(sum(pct_ontime)::numeric,2) as sum','Total','sum']   # 0: sql command, 1: report heading, 2: sql column name
         fields = [['state','State',-1]]
         
         datas = self.prepare_report_data(cr, uid, ids, prefix, aggregate, fields, context=None)
         
-        return {                                                                
+        return {
+        
             'type': 'ir.actions.report.xml',                                    
             'report_name': 'kpi.detail_xls',                                       
             'datas': datas,                                                     
@@ -183,13 +190,11 @@ class supply_kpi(osv.osv_memory):
 
     def create(self, cr, uid, vals, context=None):
         context = {}
-        vals = {}
         return super(supply_kpi, self).create(cr, uid, vals, context=context)
     
 
     def write(self, cr, uid, ids, vals, context=None):
         context = {}
-        vals = {}
         return super(supply_kpi, self).write(cr, uid, vals, context=context)
        
     

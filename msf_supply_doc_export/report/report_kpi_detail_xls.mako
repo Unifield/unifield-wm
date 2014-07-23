@@ -21,28 +21,10 @@
   <ProtectWindows>False</ProtectWindows>
  </ExcelWorkbook>
 <Styles>
-    
-    <Row> 
-     
-    </Row>
-
-    <Row>
-          
-    </Row>
-    
   <Style ss:ID="mainheader">
         <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="0"/>
         <Font ss:FontName="Calibri" x:Family="Swiss" ss:Color="#000000"/>
         <Interior ss:Color="#E6E6E6" ss:Pattern="Solid"/>
-    
-    <Row> 
-     
-    </Row>
-
-    <Row>
-          
-    </Row>
-    
         <Borders>
           <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" />
           <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" />
@@ -77,15 +59,6 @@
         <Borders>
           <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" />
           <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" />
-    
-    <Row> 
-     
-    </Row>
-
-    <Row>
-          
-    </Row>
-    
           <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" />
           <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" />
         </Borders>
