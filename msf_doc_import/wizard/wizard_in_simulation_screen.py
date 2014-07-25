@@ -556,10 +556,16 @@ class wizard_import_in_simulation_screen(osv.osv):
                             values_line_errors.append(err)
                             file_line_error.append(err1)
 
-                    if not values.get(x, [''])[0]:
+                    if not values.get(x, [''])[0].strip():
                         line_number = False
                     else:
-                        line_number = int(values.get(x, [''])[0])
+                        try:
+                            line_number = int(values.get(x, [''])[0].strip())
+                        except ValueError, e:
+                            err1 = _('The value in column \'Line number\' is not an integer')
+                            err = _('Line %s of the file: %s') % (x, err1)
+                            values_line_errors.append(err)
+                            file_line_error.append(err1)
 
                     if not_ok:
                         not_ok_file_lines[x] = ' - '.join(err for err in file_line_error)
@@ -760,7 +766,7 @@ class wizard_import_in_simulation_screen(osv.osv):
                         SIMU_LINES[wiz.id]['line_ids'].pop(index_in_line)
                     vals = values.get(in_line, [])
                     new_wl_id = wl_obj.create(cr, uid, {'type_change': 'new',
-                                                        'line_number': values.get(in_line, [''])[0] and int(values.get(in_line, [''])[0]) or False,
+                                                        'line_number': values.get(in_line, [''])[0].strip() and int(values.get(in_line, [''])[0].strip()) or False,
                                                         'simu_id': wiz.id}, context=context)
                     err_msg = wl_obj.import_line(cr, uid, new_wl_id, vals, prodlot_cache, context=context)
                     if in_line in not_ok_file_lines:
@@ -811,7 +817,7 @@ class wizard_import_in_simulation_screen(osv.osv):
             CURRENCY_NAME_ID = {}
             SIMU_LINES = {}
         except Exception, e:
-            self.write(cr, uid, ids, {'message': e}, context=context)
+            self.write(cr, uid, ids, {'message': e, 'state': 'error'}, context=context)
             cr.commit()
             cr.close()
 
