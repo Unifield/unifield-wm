@@ -912,7 +912,7 @@ class sale_order_line(osv.osv):
         product_obj = self.pool.get('product.product')
         if partner_id:
             lang = partner_obj.browse(cr, uid, partner_id).lang
-        context = {'lang': lang, 'partner_id': partner_id}
+        context = {'lang': lang, 'partner_id': partner_id, }
         if not product:
             return {'value': {'th_weight': 0, 'product_packaging': False,
                 'product_uos_qty': qty}, 'domain': {'product_uom': [],
@@ -1008,11 +1008,17 @@ class sale_order_line(osv.osv):
                     'Please set one before choosing a product.'
                 }
         else:
-            price = self.pool.get('product.pricelist').price_get(cr, uid, [pricelist],
+            price_vals= self.pool.get('product.pricelist').price_get(cr, uid, [pricelist],
                     product, qty or 1.0, partner_id, {
                         'uom': uom,
                         'date': date_order,
+                        'type_tarif_for_sale': True,
                         })[pricelist]
+            p_type = False
+            if isinstance(price_vals, tuple):
+                price, p_type = price_vals
+            else:
+                price = price_vals
             if price is False:
                 warning = {
                     'title': 'No valid pricelist line found !',
@@ -1023,6 +1029,7 @@ class sale_order_line(osv.osv):
             else:
                 result.update({
                     'price_unit': price,
+                    'type_tarif': p_type or 'normal',
                 })
         return {'value': result, 'domain': domain, 'warning': warning}
 

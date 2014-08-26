@@ -304,7 +304,13 @@ class product_pricelist(osv.osv):
             context['datestandard'] = context['date']
             
     # Calcul habituel du prix 
-        res = self._orig_price_get(cr, uid, ids, prod_id, qty, partner, context)
+        tmp_res = self._orig_price_get(cr, uid, ids, prod_id, qty, partner, context)
+        res = tmp_res
+        if not context.get('type_tarif_for_sale'):
+            res = {}
+            for p_id, vals in tmp_res.iteritems():
+                res[p_id] = vals[0]
+
 
 
     # L'éventuel prix de Noel du produit est appliqué si la date de la commande est incluse dans la promo de Noel 
@@ -358,7 +364,6 @@ class product_pricelist(osv.osv):
                     if prix_decembre:
                         res[ids[0]] = (prix_decembre, 'decembre')
                         return res
-
         return res
 
     def _orig_price_get(self, cr, uid, ids, prod_id, qty, partner=None, context=None):
@@ -434,7 +439,10 @@ class product_pricelist(osv.osv):
                 'ORDER BY sequence LIMIT 1',
                 (tmpl_id, prod_id, plversion['id'], qty))
             res = cr.dictfetchone()
+            type_tarif = False
             if res:
+                if 'type_tarif' in res and res['type_tarif']:
+                    type_tarif = res['type_tarif']
                 if res['base'] == -1:
                     if not res['base_pricelist_id']:
                         price = 0.0
@@ -443,6 +451,8 @@ class product_pricelist(osv.osv):
                         price_tmp = self.price_get(cr, uid,
                                 [res['base_pricelist_id']], prod_id,
                                 qty,context=context)[res['base_pricelist_id']]
+                        if isinstance(price_tmp, tuple):
+                            price_tmp = price_tmp[0]
                         ptype_src = self.browse(cr, uid,
                                 res['base_pricelist_id']).currency_id.id
                         price = currency_obj.compute(cr, uid, ptype_src,
@@ -514,12 +524,12 @@ class product_pricelist(osv.osv):
                 # False means no valid line found ! But we may not raise an
                 # exception here because it breaks the search
                 price = False
-            result[id] = price
+            result[id] = price, type_tarif
             if context and ('uom' in context):
                 product = product_obj.browse(cr, uid, prod_id)
                 uom = product.uos_id or product.uom_id
                 result[id] = self.pool.get('product.uom')._compute_price(cr,
-                        uid, uom.id, result[id], context['uom'])
+                        uid, uom.id, price, context['uom']), type_tarif
         return result
         
 product_pricelist()

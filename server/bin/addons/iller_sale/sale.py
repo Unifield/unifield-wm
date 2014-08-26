@@ -113,6 +113,10 @@ class iller_sale_line(osv.osv):
                 type_cond = self.getSelectionValue(cr, uid, 'product.product', 'type_cond', product_id.type_cond)
             code_affect = product_id.code_affectation
 
+        com_res = self.price_unit_change(cr, uid, ids, res['value'].get('price_unit', 0.00), product, qty, partner_id, pricelist, context={})
+        res['value'].update(com_res.get('value'))
+        res.setdefault('warning', com_res.get('warning'))
+
         res['value'].update({
             'notes': comment, 
             'type_prep': code_affect,
