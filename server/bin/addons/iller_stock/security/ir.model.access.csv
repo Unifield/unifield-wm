@@ -1,7 +1,0 @@
-"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
-"access_wizard_iller_partial_picking","wizard.iller.partial.picking","model_wizard_iller_partial_picking","stock.group_stock_user",1,1,1,1
-"access_wizard_iller_partial_picking_mgmt","wizard.iller.partial.picking.mgmt","model_wizard_iller_partial_picking","stock.group_stock_manager",1,1,1,1
-"access_wizard_iller_partial_picking_compta","wizard.iller.partial.compta","model_wizard_iller_partial_picking","account.group_account_manager",1,1,1,1
-"access_wizard_iller_partial_picking_distri","wizard.iller.partial.distri","model_wizard_iller_partial_picking","iller_groups.group_distri",1,1,1,1
-"access_wizard_iller_partial_picking_achpro","wizard.iller.partial.achpro","model_wizard_iller_partial_picking","purchase.group_purchase_manager",1,1,1,1
-"access_wizard_iller_partial_picking_rh","wizard.iller.partial.rh","model_wizard_iller_partial_picking","hr.group_hr_manager",1,1,1,1

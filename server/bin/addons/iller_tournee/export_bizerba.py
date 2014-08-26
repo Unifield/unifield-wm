@@ -25,7 +25,7 @@ class export_bizerba(osv.osv_memory):
         # LCOM
         res.append('LCOM')
         # (9) Num commande sur 9 chiffres (complété par des 0)
-        res.append(ustr(commande.name or 0).rjust(9, "0"))
+        res.append(ustr(commande.client_order_ref[:10] or 0).rjust(9, "0"))
         # (9) Numéro de ligne de commande (complété par des 0)
         res.append(ustr(num_ligne or 0).rjust(9, "0"))
         # (20) Nom du client (complété par des espaces)
@@ -42,7 +42,7 @@ class export_bizerba(osv.osv_memory):
         # (3) Numéro tournée sur 3 (complété par 0)
         res.append(ustr(tournee.id or "0").rjust(3, "0"))
         # (30) Nom tournée sur 30
-        res.append(ustr(tournee.name or " ")[:30].rjust(30, " "))
+        res.append(ustr(tournee.name or " ")[:30].ljust(30, " "))
         # (8) Date de livraison AAAAMMJJ
         # date de commande + delay (sur sale_order_line)
         date_livraison = datetime.datetime(date.year, date.month, date.day) + datetime.timedelta(days=sol.delay)
