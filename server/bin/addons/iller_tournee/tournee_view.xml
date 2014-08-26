@@ -194,48 +194,6 @@
             <field name="domain">[('type', '=', 'DECP')]</field>
         </record>
 
-        <act_window id="action_commandes_par_tournee"
-            name="Commandes en cours par tournée/date"
-            res_model="commandes.par.tournee"
-            src_model="tournee.iller"
-            view_mode='form'
-            view_type='form'
-            target='new' />
-
-        <act_window id="action_articles_par_tournee"
-            name="Articles par tournée/liste prépa."
-            res_model="articles.par.tournee"
-            src_model="tournee.iller"
-            view_mode='form'
-            view_type='form'
-            target='new' />
-
-        <act_window id="action_produits_a_expedier_par_tournee"
-            name="Produits à expédier par tournée"
-            res_model="produits.a.expedier.par.tournee"
-            src_model="tournee.iller"
-            view_mode='form'
-            view_type='form'
-            context="{'sp_state': False}"
-            target='new' />
-
-        <act_window id="action_etat_produits_a_expedier_par_tournee"
-            name="État des produits à expédier par tournée/date"
-            res_model="produits.a.expedier.par.tournee"
-            src_model="tournee.iller"
-            view_mode='form'
-            view_type='form'
-            context="{'sp_state': True}"
-            target='new' />
-
-        <act_window id="action_produits_par_poste"
-            name="Produits à expédier par poste/date/tournée"
-            res_model="produits.par.poste"
-            src_model="tournee.iller"
-            view_mode='form'
-            view_type='form'
-            target='new' />
-
         <!-- Menus -->
         <menuitem id="menu_tournee_tree"
                   action="action_tournee_tree"
@@ -256,31 +214,6 @@
         <menuitem id="menu_preparation_tree"
                   action="action_preparation_poste_tree"
                   parent="menu_postes" />
-
-        <menuitem id="menu_iller_stock_report"
-                  name="Rapports"
-                  parent="stock.menu_stock_root" />
-
-        <menuitem id="menu_commandes_par_tournee"
-                action="action_commandes_par_tournee"
-                parent="menu_iller_stock_report" />
-
-        <menuitem id="menu_articles_par_tournee"
-                action="action_articles_par_tournee"
-                parent="menu_iller_stock_report" />
-
-        <menuitem id="menu_produits_a_expedier_par_tournee"
-                action="action_produits_a_expedier_par_tournee"
-                parent="menu_iller_stock_report" />
-
-        <menuitem id="menu_etat_produits_a_expedier_par_tournee"
-                action="action_etat_produits_a_expedier_par_tournee"
-                parent="menu_iller_stock_report" />
-
-        <menuitem id="menu_produits_par_poste"
-                action="action_produits_par_poste"
-                parent="menu_iller_stock_report" />
-
 
     </data>
 </openerp>

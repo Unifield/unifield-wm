@@ -43,8 +43,6 @@
         'control_price_view.xml',
         'control_price_data.xml',
         'product_view.xml',
-        'sale_wizard.xml',
-        'sale_report.xml',
         'invoice_sequence.xml',
         'invoice_view.xml',
         'security/ir.model.access.csv',

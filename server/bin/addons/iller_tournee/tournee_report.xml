@@ -2,38 +2,5 @@
 <openerp>
     <data>
 
-        <report 
-            id="report_commandes_par_tournee" 
-            string="Liste des articles" 
-            model="sale.order" 
-            name="commandes.par.tournee" 
-            rml="iller_tournee/report/report_commandes_par_tournee.rml" 
-            header="False" 
-            auto="False" 
-            menu="True"
-            />
-
-        <report 
-            id="report_articles_par_tournee" 
-            string="Liste des articles" 
-            model="sale.order.line" 
-            name="articles.par.tournee" 
-            rml="iller_tournee/report/report_articles_par_tournee.rml" 
-            header="False" 
-            auto="False" 
-            menu="False"
-            />
-
-        <report 
-            id="report_produits_a_expedier_par_tournee" 
-            string="Liste des articles à expédier" 
-            model="stock.picking" 
-            name="produits_a_expedier_par_tournee" 
-            rml="iller_tournee/report/report_produits_a_expedier_par_tournee.rml" 
-            header="False" 
-            auto="False" 
-            menu="False"
-            />
-
     </data>
 </openerp>

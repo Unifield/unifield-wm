@@ -24,10 +24,9 @@ import sale
 import control_price
 import stock
 import product
-import wizard
-import report
 import account_move_line
 import invoice
+import report
 import commission
 import report
 

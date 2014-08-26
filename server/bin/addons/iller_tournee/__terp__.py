@@ -40,9 +40,7 @@
             'tournee_view.xml',
             'stock_view.xml',
             'sale_view.xml',
-            'tournee_report.xml',
             'security/ir.model.access.csv',
-            'report/report_picking.xml'
     ],
     'installable': True,
     'active': False,
