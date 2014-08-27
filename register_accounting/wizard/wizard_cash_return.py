@@ -27,6 +27,7 @@ from osv import fields
 from tools.translate import _
 import time
 from lxml import etree
+import datetime
 
 class wizard_invoice_line(osv.osv_memory):
     """
@@ -51,6 +52,88 @@ class wizard_advance_line(osv.osv_memory):
     A register line simulation.
     """
     _name = 'wizard.advance.line'
+    
+    
+    def create(self, cr, uid, values, context=None):
+        pass
+        if values['analytic_distribution_id'] is False:
+            reg_obj = self.pool.get('account.bank.statement')
+            reg = reg_obj.browse(cr, uid, context['statement_id'],context)
+            currency_id = reg.journal_id.currency.id
+            values['analytic_distribution_id'] = self._create_distribution_from_employee(cr, uid, currency_id, context)
+        res = super(wizard_advance_line, self).create(cr, uid, values, context=context)
+        return res
+    
+    
+    def _create_distribution_from_employee(self, cr, uid, currency_id, context):
+        employee_distribution = self._get_employee_distribution(cr, uid, context)
+        if employee_distribution is False:
+            return False
+        employee_distribution['currency_id'] = currency_id
+        distribution_id = self.create_distribution_api(cr, uid, employee_distribution, context)
+        return distribution_id
+    
+    
+    def _get_employee_distribution(self, cr, uid, context):
+        absl = self.pool.get('account.bank.statement.line')
+        he = self.pool.get('hr.employee')
+        employee_id = absl.browse(cr, uid, context['statement_line_id'],context).employee_id.id
+        employee_distribution = he.browse(cr, uid, employee_id, context)
+    
+        empl_dist = {}
+        empl_dist['cost_center_id'] = employee_distribution.cost_center_id.id
+        empl_dist['destination_id'] = employee_distribution.destination_id.id
+        empl_dist['funding_pool_id'] = employee_distribution.funding_pool_id.id
+        
+        if False in empl_dist.values():
+            return False
+        return empl_dist
+    
+    
+    def create_distribution_api(self, cr, uid, distribution, context):
+        '''
+          Pass a dictionary of values and a new distribution object and dependent objects is created.
+          The generated distribution id is returned.
+          This simple API will only create a distribution with a single distribution line, and assigned as 100%
+          Example dictionary: {'currency_id': 5, 'cost_center_id': 26, 'destination_id': 10, 'funding_pool_id': 6}
+        '''
+        
+        print distribution 
+        
+        ad_obj = self.pool.get('analytic.distribution')
+        ccdl_obj = self.pool.get('cost.center.distribution.line')
+        fpdl_obj = self.pool.get('funding.pool.distribution.line')
+        
+        currency_id = distribution['currency_id']
+        name = 'Distribution Line'
+        date = datetime.datetime.now()
+        
+        # header
+        distribution_id = ad_obj.create(cr, uid, {}, context)
+        
+        # cost center
+        ccdl_obj.create(cr, uid, {'currency_id': currency_id,
+                                  'name': name,
+                                  'analytic_id': distribution['cost_center_id'],
+                                  'distribution_id': distribution_id,
+                                  'source_date': date,
+                                  'destination_id': distribution['destination_id'],
+                                  'date': date,
+                                  'percentage': 100.0 }, context)
+        
+        # funding pool
+        fpdl_obj.create(cr, uid, {'currency_id': currency_id,
+                                  'name': name,
+                                  'cost_center_id': distribution['cost_center_id'],
+                                  'analytic_id': distribution['funding_pool_id'],
+                                  'distribution_id': distribution_id,
+                                  'source_date': date,
+                                  'destination_id': distribution['destination_id'],
+                                  'date': date,
+                                  'percentage': 100.0}, context)
+        
+        return distribution_id
+
 
     def _get_distribution_state(self, cr, uid, ids, name, args, context=None):
         """

@@ -338,6 +338,12 @@ class wizard_account_invoice_line(osv.osv):
         if not isinstance(ids, list):
             return res[0]
         return res
+    
+    def write(self, cr, uid, ids, fields=None, context=None):
+        print 'sfc'
+     
+        res = super(wizard_account_invoice_line, self).write(cr, uid, ids, fields, context)
+        return res
 
     def button_analytic_distribution(self, cr, uid, ids, context=None):
         """
