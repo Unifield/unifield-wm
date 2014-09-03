@@ -272,12 +272,12 @@ Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
     ${Base64_Encode} "$TextPostgreSQLPassword"
     Pop $R0
 
-    Push $AdminEncode
+    Push $R1
     ${Base64_Encode} "$TextSuperAdminPassword"
-    Pop $AdminEncode
+    Pop $R1
 
 # If there is a previous install of the OpenERP Server, keep the login/password from the config file
-    WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "admin_passwd" $AdminEncode
+    WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "admin_passwd" $R1
     WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "db_host" $TextPostgreSQLHostname
     WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "db_user" $TextPostgreSQLUsername
     WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "db_password" $R0
