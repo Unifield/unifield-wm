@@ -165,7 +165,7 @@ class db_creation(object):
             'button' : 'action_stop',
         },
         'currency.setup' : {
-            'functional_id' : 'chf',
+            'functional_id' : config.currency,
         } 
     }
 

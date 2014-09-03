@@ -23,7 +23,7 @@ prefix = "SPRINT5"
 ## Other stuffs
 default_email = 'null@msf.org'
 company_name = 'Médecins Sans Frontières'
-currency = 'base.EUR'
+currency = 'chf' # either 'chf' or 'eur' (field.selection in the setup currency wizard)
 
 hq_count = 2
 coordo_count = 2
