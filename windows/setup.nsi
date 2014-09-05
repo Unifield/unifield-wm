@@ -96,7 +96,8 @@
 !define DEFAULT_POSTGRESQL_HOSTNAME 'localhost'
 !define DEFAULT_POSTGRESQL_PORT 5432
 !define DEFAULT_POSTGRESQL_USERNAME 'openpg'
-!define DEFAULT_POSTGRESQL_PASSWORD 'openpgpwd'
+!define DEFAULT_POSTGRESQL_PASSWORD '4Unifieldpg'
+!define DEFAULT_SUPER_ADMIN_PASSWORD '4UnifieldAdmin'
 
 !define PGVERSION '8.4.17-1'
 
@@ -137,6 +138,7 @@ Var TextPostgreSQLHostname
 Var TextPostgreSQLPort
 Var TextPostgreSQLUsername
 Var TextPostgreSQLPassword
+Var TextSuperAdminPassword
 
 Var HWNDPostgreSQLInstancesList
 Var HWNDPostgreSQLInstPath
@@ -269,7 +271,13 @@ Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
     Push $R0
     ${Base64_Encode} "$TextPostgreSQLPassword"
     Pop $R0
+
+    Push $R1
+    ${Base64_Encode} "$TextSuperAdminPassword"
+    Pop $R1
+
 # If there is a previous install of the OpenERP Server, keep the login/password from the config file
+    WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "admin_passwd" $R1
     WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "db_host" $TextPostgreSQLHostname
     WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "db_user" $TextPostgreSQLUsername
     WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "db_password" $R0
@@ -402,6 +410,7 @@ Function .onInit
     StrCpy $TextPostgreSQLPassword ${DEFAULT_POSTGRESQL_PASSWORD}
     StrCpy $TextPostgreSQLInstPath "${DEFAULT_POSTGRESQL_INSTPATH}"
     StrCpy $CmdLPostgreSQLInstPath "${DEFAULT_POSTGRESQL_INSTPATH}"
+    StrCpy $TextSuperAdminPassword ${DEFAULT_SUPER_ADMIN_PASSWORD}
 
     Push $R0
     ${GetOptions} $cmdLineParams '/allinone' $R0
