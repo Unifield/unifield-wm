@@ -887,7 +887,36 @@ receivable, item have not been corrected, item have not been reversed and accoun
             # UF-1746: Set also all other move lines as corrected upstream to disallow projet user to correct any move line of this move.
             move_ids = [x and x.get('move_id', False) and x.get('move_id')[0] for x in self.read(cr, uid, ids, ['move_id'], context=context)]
             ml_ids = self.search(cr, uid, [('move_id', 'in', move_ids)])
-            self.write(cr, uid, ml_ids, {'corrected_upstream': True}, check=False, update_check=False, context=context)
+            # UTP-1011: Make a dictionnary of the all entire analytic distribution and load it into corrected_upstream with cPickle (serialization)
+            from cPickle import dump
+            distrib_obj = self.pool.get('analytic.distribution')
+            for ml in self.read(cr, uid, ml_ids, ['analytic_distribution_id'], context=context):
+                distrib_id = ml.get('analytic_distribution_id', False)
+                if not distrib_id:
+                    continue
+                ml_result = {
+                    'distrib_id': ml.get('analytic_distribution_id', False),
+                    'funding_pool_lines': [],
+                    'cost_center_lines': [],
+                    'free_1_lines': [],
+                    'free_2_lines': [],
+                }
+                # Browse distribution to remember it
+                distrib = distrib_obj.browse(cr, uid, [distrib_id], context=context)[0]
+                for object_name in [('funding_pool_lines', 'funding.pool.distribution.line'), ('cost_center_lines', 'cost.center.distribution.line'), ('free_1_lines', 'free.1.distribution.line'), ('free_2_lines', 'free.2.distribution.line')]:
+                    distrib_line_ids = getattr(distrib, object_name[0], False)
+                    if distrib_line_ids:
+                        # fetch info from the object
+                        object_obj = self.pool.get(object_name[1])
+                        res = {}
+                        if isinstance(distrib_line_ids, (int, long)):
+                            distrib_line_ids = [distrib_line_ids]
+                        for distrib_line in object_obj.read(cr, uid, distrib_line_ids, context=context):
+                            ml_result[object_name[0]].append(distrib_line)
+                # Transform dict into a serialized object
+                binary_content = False
+                dump(ml_result, binary_content)
+            self.write(cr, uid, ml_ids, {'corrected_upstream': binary_content}, check=False, update_check=False, context=context)
         return True
 
 account_move_line()

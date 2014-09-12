@@ -193,7 +193,7 @@ class mass_reallocation_wizard(osv.osv_memory):
                     ('from_write_off', '=', True),
                     ('move_state', '=', 'draft'),
                     ('account_id.category', 'in', ['FREE1', 'FREE2']),
-                    ('move_id.corrected_upstream', '=', True)
+                    ('move_id.corrected_upstream', '!=', False)
                 ]
 
             search_ns_ids = self.pool.get('account.analytic.line').search(cr, uid, search_args, context=context)
@@ -290,7 +290,7 @@ class mass_reallocation_wizard(osv.osv_memory):
                     ('from_write_off', '=', True),
                     ('move_state', '=', 'draft'),
                     ('account_id.category', 'in', ['FREE1', 'FREE2']),
-                    ('move_id.corrected_upstream', '=', True)
+                    ('move_id.corrected_upstream', '!=', False)
                 ]
             search_ns_ids = self.pool.get('account.analytic.line').search(cr, uid, search_args)
             if search_ns_ids:

@@ -260,7 +260,7 @@ class account_move_line(osv.osv):
         ),
         'is_reconciled': fields.function(_get_is_reconciled, fnct_search=_search_is_reconciled, type='boolean', method=True, string="Is reconciled", help="Is that line partially/totally reconciled?"),
         'balance_currency': fields.function(_balance_currency, fnct_search=_balance_currency_search, method=True, string='Balance Booking'),
-        'corrected_upstream': fields.boolean('Corrected from CC/HQ', readonly=True, help='This line have been corrected from Coordo or HQ level to a cost center that have the same level or superior.'),
+        'corrected_upstream': fields.binary('Corrected from CC/HQ', readonly=True, help='This line have been corrected from Coordo or HQ level to a cost center that have the same level or superior. The binary contains the analytic distribution found at Coordo Level.'),
         'line_number': fields.integer(string='Line Number'),
         'invoice_partner_link': fields.many2one('account.invoice', string="Invoice partner link", readonly=True,
             help="This link implies this line come from the total of an invoice, directly from partner account.", ondelete="cascade"),
@@ -383,7 +383,8 @@ class account_move_line(osv.osv):
 
     def write(self, cr, uid, ids, vals, context=None, check=True, update_check=True):
         """
-        Check document_date and date validity
+        Check document_date and date validity.
+        If vals contains corrected_upstream (during synchronization), adapt the analytic distribution to the new one.
         """
         if not context:
             context = {}
@@ -403,6 +404,12 @@ class account_move_line(osv.osv):
                     context.update({'date': m.date})
         # Note that _check_document_date HAVE TO be BEFORE the super write. If not, some problems appears in ournal entries document/posting date changes at the same time!
         self._check_document_date(cr, uid, ids, vals)
+        # UTP-1011: If corrected_upstream, apply the given analytic distribution
+        # TODO: finish this code
+        if vals.get('corrected_upstream', False):
+            from cPickle import load
+            print load(vals.get('corrected_upstream'))
+            raise osv.except_osv('error', 'programmed error')
         res = super(account_move_line, self).write(cr, uid, ids, vals, context=context, check=check, update_check=update_check)
         return res
 
