@@ -260,7 +260,7 @@ class account_move_line(osv.osv):
         ),
         'is_reconciled': fields.function(_get_is_reconciled, fnct_search=_search_is_reconciled, type='boolean', method=True, string="Is reconciled", help="Is that line partially/totally reconciled?"),
         'balance_currency': fields.function(_balance_currency, fnct_search=_balance_currency_search, method=True, string='Balance Booking'),
-        'corrected_upstream': fields.binary('Corrected from CC/HQ', readonly=True, help='This line have been corrected from Coordo or HQ level to a cost center that have the same level or superior. The binary contains the analytic distribution found at Coordo Level.'),
+        'corrected_upstream': fields.text('Corrected from CC/HQ', readonly=True, help='This line have been corrected from Coordo or HQ level to a cost center that have the same level or superior. The binary contains the analytic distribution found at Coordo Level.'),
         'line_number': fields.integer(string='Line Number'),
         'invoice_partner_link': fields.many2one('account.invoice', string="Invoice partner link", readonly=True,
             help="This link implies this line come from the total of an invoice, directly from partner account.", ondelete="cascade"),
@@ -407,9 +407,11 @@ class account_move_line(osv.osv):
         # UTP-1011: If corrected_upstream, apply the given analytic distribution
         # TODO: finish this code
         if vals.get('corrected_upstream', False):
-            from cPickle import load
-            print load(vals.get('corrected_upstream'))
-            raise osv.except_osv('error', 'programmed error')
+            company = self.pool.get('res.users').browse(cr, uid, uid, context=context).company_id
+            if company and company.instance_id and company.instance_id.level in ['project']:
+                from cPickle import loads
+                print loads(vals.get('corrected_upstream'))
+                raise osv.except_osv('error', 'programmed error')
         res = super(account_move_line, self).write(cr, uid, ids, vals, context=context, check=check, update_check=update_check)
         return res
 
