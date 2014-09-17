@@ -60,7 +60,7 @@ def impression_bon(sale, salel, partner):
 		return nblig
 
 	
-	ficname = sale[0]['client_order_ref']  + ".txt"
+	ficname = "/Data/prodbon/" + sale[0]['client_order_ref']  + ".txt"
 	ficsor = open( ficname ,"w")
 	
 	#ficsor.write(" " +   "\n")
