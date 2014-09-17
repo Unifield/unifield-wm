@@ -347,6 +347,51 @@ class account_move_line(osv.osv):
                 raise osv.except_osv(_('Warning'), _('Given date [%s] is outside defined period: %s') % (date, period and period.name or ''))
         return True
 
+    def _generate_distribution_from_corrected(self, cr, uid, corrected_dict, context=None):
+        """
+        Check given dictionary, extract distribution and make a new distribution in the system.
+        Then return result
+        """
+        res = False
+        if context is None:
+            context = {}
+        if not corrected_dict:
+            return res
+        # Example of what is fetch
+        # {'free_2_lines': [], 'distrib_id': (1, u'0 CC; 1 FP; 0 F1; 0 F2'), 'cost_center_lines': [], 'funding_pool_lines': [{'destination_id/id': [u'sd.analytic_distribution_analytic_account_destination_operation'], 'cost_center_id/id': [u'sd.OC_HT101_HT101'], 'analytic_id/id': [u'sd.analytic_distribution_analytic_account_msf_private_funds'], 'source_date': [u'2014-09-16'], 'date': [u'2014-09-16'], 'percentage': [u'100.0']}], 'free_1_lines': []}
+        distrib_id = self.pool.get('analytic.distribution').create(cr, uid, {}, context=context)
+        objs = [('funding_pool_lines', 'funding.pool.distribution.line'), ('cost_center_lines', 'cost.center.distribution.line'), ('free_2_lines', 'free.2.distribution.line'), ('free_1_lines', 'free.1.distribution.line')]
+        data_obj = self.pool.get('ir.model.data')
+        for obj in objs:
+            if corrected_dict.get(obj[0], False):
+                for line in corrected_dict.get(obj[0]):
+                    # Initial values (distribution that we will use)
+                    vals = {
+                        'distribution_id': distrib_id,
+                    }
+                    # Normal fields
+                    for field in ['source_date', 'date', 'percentage']:
+                        vals.update({
+                            field: line[field] and line[field][0] or False,
+                        })
+                    # Specific fields
+                    fields = [('analytic_id/id', 'analytic_id', 'account.analytic.account'), ('destination_id/id', 'destination_id', 'account.analytic.account'), ('currency_id/id', 'currency_id', 'res.currency')]
+                    if obj[0] == 'funding_pool_lines':
+                        fields.append(('cost_center_id/id', 'cost_center_id', 'account.analytic.account'))
+                    for field in fields:
+                        if line.get(field[0]):
+                            module, xml_id = line.get(field[0])[0].rsplit('.', 1)
+                            data_ids = data_obj.search(cr, uid, [('model', '=', field[2]), ('name', '=', xml_id), ('module', '=', module)])
+                            if data_ids and len(data_ids) == 1:
+                                data = data_obj.read(cr, uid, data_ids, ['res_id'])[0]
+                                vals.update({
+                                    field[1]: data.get('res_id'),
+                                })
+                    self.pool.get(obj[1]).create(cr, uid, vals)
+        if distrib_id:
+            res = distrib_id
+        return res
+
     def create(self, cr, uid, vals, context=None, check=True):
         """
         Filled in 'document_date' if we come from tests
@@ -409,8 +454,11 @@ class account_move_line(osv.osv):
             company = self.pool.get('res.users').browse(cr, uid, uid, context=context).company_id
             if company and company.instance_id and company.instance_id.level in ['project']:
                 from cPickle import loads
-                print loads(vals.get('corrected_upstream').encode('utf-8'))
-                raise osv.except_osv('error', 'programmed error')
+                corrected_dict = loads(vals.get('corrected_upstream').encode('utf-8'))
+                if corrected_dict:
+                    distrib_id = self._generate_distribution_from_corrected(cr, uid, corrected_dict, context=context)
+                    if distrib_id:
+                        vals.update({'analytic_distribution_id': distrib_id})
         res = super(account_move_line, self).write(cr, uid, ids, vals, context=context, check=check, update_check=update_check)
         return res
 

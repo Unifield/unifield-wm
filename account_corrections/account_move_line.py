@@ -910,7 +910,7 @@ receivable, item have not been corrected, item have not been reversed and accoun
                     if distrib_lines:
                         # fetch info from the object
                         object_obj = self.pool.get(object_name[1])
-                        fields = ['date', 'source_date', 'percentage', 'destination_id/id', 'analytic_id/id']
+                        fields = ['date', 'source_date', 'percentage', 'destination_id/id', 'analytic_id/id', 'currency_id/id']
                         if object_name[0] == 'funding_pool_lines':
                             fields.append('cost_center_id/id')
                         distrib_line_ids = [x.id for x in distrib_lines]
