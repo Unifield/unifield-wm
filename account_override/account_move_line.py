@@ -404,13 +404,12 @@ class account_move_line(osv.osv):
                     context.update({'date': m.date})
         # Note that _check_document_date HAVE TO be BEFORE the super write. If not, some problems appears in ournal entries document/posting date changes at the same time!
         self._check_document_date(cr, uid, ids, vals)
-        # UTP-1011: If corrected_upstream, apply the given analytic distribution
-        # TODO: finish this code
-        if vals.get('corrected_upstream', False):
+        # UTP-1011: If corrected_upstream, apply the given analytic distribution. But only when you come from synchro and that you are in project level
+        if vals.get('corrected_upstream', False) and context.get('sync_update_execution', False):
             company = self.pool.get('res.users').browse(cr, uid, uid, context=context).company_id
             if company and company.instance_id and company.instance_id.level in ['project']:
                 from cPickle import loads
-                print loads(vals.get('corrected_upstream'))
+                print loads(vals.get('corrected_upstream').encode('utf-8'))
                 raise osv.except_osv('error', 'programmed error')
         res = super(account_move_line, self).write(cr, uid, ids, vals, context=context, check=check, update_check=update_check)
         return res

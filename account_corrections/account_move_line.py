@@ -910,12 +910,21 @@ receivable, item have not been corrected, item have not been reversed and accoun
                     if distrib_lines:
                         # fetch info from the object
                         object_obj = self.pool.get(object_name[1])
-                        res = {}
+                        fields = ['date', 'source_date', 'percentage', 'destination_id/id', 'analytic_id/id']
+                        if object_name[0] == 'funding_pool_lines':
+                            fields.append('cost_center_id/id')
                         distrib_line_ids = [x.id for x in distrib_lines]
+                        distrib_list = []
                         if isinstance(distrib_line_ids, (int, long)):
                             distrib_line_ids = [distrib_line_ids]
-                        for distrib_line in object_obj.read(cr, uid, distrib_line_ids, context=context):
-                            ml_result[object_name[0]].append(distrib_line)
+                        for distrib_line_id in distrib_line_ids:
+                            distrib_dict = {}
+                            for field in fields:
+                                distrib_dict.update({
+                                    field: object_obj.export_data(cr, uid, [distrib_line_id], [field], context=context).get('datas', [False])[0],
+                                })
+                            distrib_list.append(distrib_dict)
+                        ml_result[object_name[0]].append(distrib_dict)
                 # Transform dict into a serialized object
                 binary_content = False
                 binary_content = dumps(ml_result)
