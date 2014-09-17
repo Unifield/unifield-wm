@@ -3,6 +3,9 @@
 
 from osv import osv
 from osv import fields
+
+import prodbon
+
 import netsvc
 
 
@@ -34,6 +37,15 @@ class iller_sale(osv.osv):
                             sm_obj.write(cr, uid, [line.id], {'poste_id':so.tournee_id.decoupe_id.id}, *args)
                         else:
                             sm_obj.write(cr, uid, [line.id], {'poste_id':so.tournee_id.prep_id.id}, *args)
+
+        # Traitement avec le script prodbon
+        for sale_id in ids:
+            sale_order = self.read(cr, uid, [sale_id])
+            partner = self.pool.get('res.partner').read(cr, uid, [sale_order[0]['partner_id'][0]])
+            sale_lines_ids = self.pool.get('sale.order.line').search(cr, uid, [('order_id', '=', sale_id)])
+            sale_lines = self.pool.get('sale.order.line').read(cr, uid, sale_lines_ids)
+            prodbon.impression_bon(sale_order, sale_lines, partner)
+            prodbon.impression_hote_bizerba(sale_order, sale_lines, partner)
 
         return res
 

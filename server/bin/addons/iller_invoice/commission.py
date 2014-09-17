@@ -1,5 +1,25 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
+##############################################################################
+#
+#    OpenERP, Open Source Management Solution    
+#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>). All Rights Reserved
+#    Tempo Consulting (<http://www.tempo-consulting.fr/>).
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+##############################################################################
 
 from osv import osv
 from osv import fields
@@ -25,24 +45,36 @@ class iller_commission_line(osv.osv):
         '''
             On calcule le montant de la commission lors de la création
         '''
+        invoice_obj = self.pool.get('account.invoice')
         if 'price_unit' in data and 'invoice_id' in data:
-            if self.pool.get('account.invoice').browse(cr, uid, data.get('invoice_id'), context=context).type == 'out_invoice':
-                data['commission'] = self._compute_commission(cr, uid, [], data, context)
+            inv_type = invoice_obj.\
+                browse(cr, uid, data['invoice_id'], context=context).type
 
-        return super(iller_commission_line, self).create(cr, uid, data, context=context)
+            if inv_type == 'out_invoice':
+                data['commission'] = self.\
+                    _compute_commission(cr, uid, [], data, context)
 
+        return super(iller_commission_line, self).\
+            create(cr, uid, data, context=context)
   
     def write(self, cr, uid, ids, data, context={}):
         '''
-            Si le prix unitaire a changé, on recalcule le montant de la commission
+            Si le prix unitaire a changé, 
+            on recalcule le montant de la commission
         '''
+        inv_obj = self.pool.get('account.invoice')
         for line in self.browse(cr, uid, ids, context=context):
             if 'price_unit' in data:
-                if self.pool.get('account.invoice').browse(cr, uid, data.get('invoice_id', line.invoice_id.id), context=context).type == 'out_invoice':
-                    data['commission'] = self._compute_commission(cr, uid, ids, data, context)
+                inv_id = data.get('invoice_id', line.invoice_id.id)
+                inv_type = inv_obj.\
+                    browse(cr, uid, inv_id, context=context).type
 
-        return super(iller_commission_line, self).write(cr, uid, ids, data, context=context)
+                if inv_type == 'out_invoice':
+                    data['commission'] = self.\
+                        _compute_commission(cr, uid, ids, data, context)
 
+        return super(iller_commission_line, self).\
+            write(cr, uid, ids, data, context=context)
 
     def _compute_commission(self, cr, uid, ids, data, context={}):
         '''
@@ -50,13 +82,14 @@ class iller_commission_line(osv.osv):
             la commission et envoie ces données à la foncion de calcul
         '''
         product_obj = self.pool.get('product.product')
+        inv_obj = self.pool.get('account.invoice')
         
         lines = []
 
         if ids:
             for line in self.browse(cr, uid, ids, context=context):
-                print line.name
-                if line.name != 'Frais de port' and line.invoice_id.type == 'out_invoice':
+                port = line.name == 'Frais de port'
+                if not port and line.invoice_id.type == 'out_invoice':
                     lines.append({'unit_price': line.price_unit,
                                   'qty': line.quantity,
                                   'invoice_id': line.invoice_id.id,
@@ -75,7 +108,7 @@ class iller_commission_line(osv.osv):
                 l['invoice_id'] = data.get('invoice_id')
 
         if 'invoice_id' in data:
-            invoice = self.pool.get('account.invoice').browse(cr, uid, data.get('invoice_id'))
+            invoice = inv_obj.browse(cr, uid, data.get('invoice_id'))
             if len(lines) < 1:
                 if invoice.type == 'out_invoice':
                     product = product_obj.browse(cr, uid, data.get('product_id'))
