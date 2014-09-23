@@ -365,6 +365,19 @@ class account_move_line(osv.osv):
         for obj in objs:
             if corrected_dict.get(obj[0], False):
                 for line in corrected_dict.get(obj[0]):
+                    # Check for FP lines that CC is allowed
+                    if obj[0] == 'funding_pool_lines' and line.get('cost_center_id/id'):
+                        # Search ID for the cost center
+                        module, xml_id = line.get('cost_center_id/id')[0].rsplit('.', 1)
+                        data_ids = data_obj.search(cr, uid, [('model', '=', 'account.analytic.account'), ('name', '=', xml_id), ('module', '=', module)])
+                        if data_ids and len(data_ids) == 1:
+                            data = data_obj.read(cr, uid, data_ids, ['res_id'])[0]
+                            cc_id = data.get('res_id')
+                            # Pass the line creation if CC is not in targeted CC
+                            target_cc = self.pool.get('res.users').browse(cr, uid, uid).company_id.instance_id.target_cost_center_ids
+                            target_ids = [x.id for x in target_cc if x]
+                            if cc_id not in target_ids:
+                                continue
                     # Initial values (distribution that we will use)
                     vals = {
                         'distribution_id': distrib_id,
