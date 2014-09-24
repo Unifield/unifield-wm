@@ -555,6 +555,18 @@ class analytic_distribution_wizard(osv.osv_memory):
                 res[wiz.id] = abs(wiz.total_amount)
         return res
 
+    def _get_corrected_upstream(self, cr, uid, ids, name, args, context=None):
+        """
+        Check if Journal Item have a corrected_upstream field filled in. If yes, corrected_upstream on wizard is True.
+        """
+        # Prepare some values
+        res = {}
+        for wiz in self.browse(cr, uid, ids):
+            res[wiz.id] = False
+            if wiz.move_line_id and wiz.move_line_id.corrected_upstream:
+                res[wiz.id] = True
+        return res
+
     def _get_register_line_state(self, cr, uid, ids, name, args, context=None):
         """
         Get register line state if present.
@@ -606,6 +618,7 @@ class analytic_distribution_wizard(osv.osv_memory):
         'partner_type': fields.text(string='Partner Type of FO/PO', required=False, readonly=True), #UF-2138: added the ref to partner type of FO/PO
         'cash_return_id': fields.many2one('wizard.cash.return', string="Advance Return"),
         'cash_return_line_id': fields.many2one('wizard.advance.line', string="Advance Return Line"),
+        'corrected_upstream': fields.function(_get_corrected_upstream, method=True, string="Corrected upstream?", type='boolean', readonly=True),
     }
 
     _defaults = {

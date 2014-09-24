@@ -93,6 +93,12 @@
                             <label string="*: this action will copy the analytic distribution from the header to the line allowing then the user to make changes starting from the copied distribution." colspan="3" />
                         </group>
                     </group>
+                    <group colspan="4">
+                      <field name="corrected_upstream" invisible="1"/>
+                      <group colspan="3" col="3" attrs="{'invisible': [('corrected_upstream', '=', False)]}">
+                        <label string="This allocation was corrected upstream."/>
+                        </group>
+                    </group>
                     <group colspan="4" col="2" attrs="{'invisible': [('state', '!=', 'cc')]}">
                         <separator string="Cost Center"/>
                         <field colspan="4" name="line_ids" nolabel="1" widget="one2many_list" context="{'mode': entry_mode, 'from_purchase': purchase_id, 'from_sale_order': sale_order_id, 'parent_id':active_id}" attrs="{'readonly': [('is_writable', '=', False)]}"/>
