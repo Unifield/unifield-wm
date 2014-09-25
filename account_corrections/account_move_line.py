@@ -892,6 +892,7 @@ receivable, item have not been corrected, item have not been reversed and accoun
             distrib_obj = self.pool.get('analytic.distribution')
             for ml in self.read(cr, uid, ml_ids, ['analytic_distribution_id'], context=context):
                 distrib_id = ml.get('analytic_distribution_id', False)
+                ml_id = ml.get('id')
                 if not distrib_id:
                     continue
                 else:
@@ -902,7 +903,11 @@ receivable, item have not been corrected, item have not been reversed and accoun
                     'cost_center_lines': [],
                     'free_1_lines': [],
                     'free_2_lines': [],
+                    'corrected': False,
                 }
+                # Give another information: if this line was initially corrected or not. If this line was not originally corrected, so do no specific changes on it. Just keep the corrected_upstream field as it is.
+                if ml_id in ids:
+                    ml_result.update({'corrected': True})
                 # Browse distribution to remember it
                 distrib = distrib_obj.browse(cr, uid, [distrib_id], context=context)[0]
                 for object_name in [('funding_pool_lines', 'funding.pool.distribution.line'), ('cost_center_lines', 'cost.center.distribution.line'), ('free_1_lines', 'free.1.distribution.line'), ('free_2_lines', 'free.2.distribution.line')]:
@@ -928,7 +933,7 @@ receivable, item have not been corrected, item have not been reversed and accoun
                 # Transform dict into a serialized object
                 binary_content = False
                 binary_content = dumps(ml_result)
-            self.write(cr, uid, ml_ids, {'corrected_upstream': binary_content}, check=False, update_check=False, context=context)
+                self.write(cr, uid, ml_id, {'corrected_upstream': binary_content}, check=False, update_check=False, context=context)
         return True
 
 account_move_line()

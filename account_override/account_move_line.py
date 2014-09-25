@@ -355,10 +355,11 @@ class account_move_line(osv.osv):
         res = False
         if context is None:
             context = {}
-        if not corrected_dict:
+        # If not "corrected" or "corrected" is False, then return False
+        if not corrected_dict or not corrected_dict.get('corrected', False):
             return res
         # Example of what is fetch
-        # {'free_2_lines': [], 'distrib_id': (1, u'0 CC; 1 FP; 0 F1; 0 F2'), 'cost_center_lines': [], 'funding_pool_lines': [{'destination_id/id': [u'sd.analytic_distribution_analytic_account_destination_operation'], 'cost_center_id/id': [u'sd.OC_HT101_HT101'], 'analytic_id/id': [u'sd.analytic_distribution_analytic_account_msf_private_funds'], 'source_date': [u'2014-09-16'], 'date': [u'2014-09-16'], 'percentage': [u'100.0']}], 'free_1_lines': []}
+        # {'corrected': True, 'free_2_lines': [], 'distrib_id': (1, u'0 CC; 1 FP; 0 F1; 0 F2'), 'cost_center_lines': [], 'funding_pool_lines': [{'destination_id/id': [u'sd.analytic_distribution_analytic_account_destination_operation'], 'cost_center_id/id': [u'sd.OC_HT101_HT101'], 'analytic_id/id': [u'sd.analytic_distribution_analytic_account_msf_private_funds'], 'source_date': [u'2014-09-16'], 'date': [u'2014-09-16'], 'percentage': [u'100.0']}], 'free_1_lines': []}
         distrib_id = self.pool.get('analytic.distribution').create(cr, uid, {}, context=context)
         objs = [('funding_pool_lines', 'funding.pool.distribution.line'), ('cost_center_lines', 'cost.center.distribution.line'), ('free_2_lines', 'free.2.distribution.line'), ('free_1_lines', 'free.1.distribution.line')]
         data_obj = self.pool.get('ir.model.data')
@@ -472,6 +473,9 @@ class account_move_line(osv.osv):
                     distrib_id = self._generate_distribution_from_corrected(cr, uid, corrected_dict, context=context)
                     if distrib_id:
                         vals.update({'analytic_distribution_id': distrib_id})
+                        # Change check and update_check so that it deletes all analytic lines and recreate them with the right analytic distribution
+                        check = True
+                        update_check = True
         res = super(account_move_line, self).write(cr, uid, ids, vals, context=context, check=check, update_check=update_check)
         return res
 
