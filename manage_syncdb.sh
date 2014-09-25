@@ -82,16 +82,19 @@ backup() {
 # restore all .dump file that have a prefix with "${dbname}_"
 restore() {
   for file in `ls ${1}_*`; do
-    db=`basename $file .dump`
-    exists=`psql template1 -t -c "SELECT COUNT(datname) from pg_database WHERE datname = '$db'"`
-    if [ $exists == 1 ] ; then
-      echo -n "$db exists. Deleting: "
-      dropdb $db || error_and_exit "An error occured @DB deletion: $db"
+    # do not make process on directories
+    if [ -f $file ] ; then
+      db=`basename $file .dump`
+      exists=`psql template1 -t -c "SELECT COUNT(datname) from pg_database WHERE datname = '$db'"`
+      if [ $exists == 1 ] ; then
+        echo -n "$db exists. Deleting: "
+        dropdb $db || error_and_exit "An error occured @DB deletion: $db"
+        echo "DONE."
+      fi
+      echo -e -n "Restoring $db: "
+      createdb $db && pg_restore -d $db $file >/dev/null 2>&1
       echo "DONE."
     fi
-    echo -e -n "Restoring $db: "
-    createdb $db && pg_restore -d $db $file >/dev/null 2>&1
-    echo "DONE."
   done
 }
 
