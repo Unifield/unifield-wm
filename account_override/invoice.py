@@ -217,6 +217,7 @@ class account_invoice(osv.osv):
             states={'draft':[('readonly',False)]}),
         'register_posting_date': fields.date(string="Register posting date for Direct Invoice", required=False),
         'vat_ok': fields.function(_get_vat_ok, method=True, type='boolean', string='VAT OK', store=False, readonly=True),
+        'refund_source_inv_id': fields.many2one('account.invoice', 'Source invoice of the refund', readonly=True, invisible=True, help="Link to the invoice from which this one exists. The original one have generated this one via a refund wizard/button."),
     }
 
     _defaults = {
