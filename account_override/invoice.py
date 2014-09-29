@@ -624,6 +624,11 @@ class account_invoice(osv.osv):
                     }
 
             wf_service.trg_validate(uid, 'account.invoice', inv.id, 'invoice_open', cr)
+            if inv.type in ('in_refund', 'out_refund', ):
+                # UTP-594
+                # we are validating an supplier invoice
+                self.pool.get("account.invoice.refund")._hook_validate_refund(
+                    cr, uid, inv.id, context=context)
         return True
 
     def action_reconcile_imported_invoice(self, cr, uid, ids, context=None):
