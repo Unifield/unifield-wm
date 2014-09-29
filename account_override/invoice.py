@@ -745,7 +745,10 @@ class account_invoice(osv.osv):
         if not context:
             context = {}
         res = super(account_invoice, self).line_get_convert(cr, uid, x, part, date, context)
-        res.update({'invoice_line_id': x.get('invoice_line_id', False)})
+        res.update({
+            'invoice_line_id': x.get('invoice_line_id', False),
+            'reference': x.get('reference', False),
+        })
         return res
 
     def finalize_invoice_move_lines(self, cr, uid, inv, line):
@@ -766,6 +769,8 @@ class account_invoice(osv.osv):
         for el in line:
             if el[2]:
                 el[2].update({'document_date': inv.document_date})
+                if inv.refund_source_inv_id:
+                    el[2].update({'reference': inv.origin})
             if el[2] and is_partner_line(el[2]):
                 el[2].update({'invoice_partner_link': inv.id})
                 new_line.append((el[0], el[1], el[2]))
