@@ -575,6 +575,9 @@
                     <xpath expr="/form" position="attributes">
                         <attribute name="string">Stock Transfer Voucher</attribute>
                     </xpath>
+                    <xpath expr="/form/group/field[@string='Customer']" position="attributes">
+                        <attribute name="domain">[('customer','=','t')]</attribute>
+                    </xpath>
                     <xpath expr="/form/notebook/page[@string='Invoice']/field[@name='account_id']" position="attributes">
                         <attribute name="domain">[('company_id', '=', company_id), ('restricted_area', '=', 'out_invoice')]</attribute>
                     </xpath>
