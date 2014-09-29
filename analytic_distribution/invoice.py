@@ -154,14 +154,14 @@ class account_invoice(osv.osv):
                 raise osv.except_osv(_('Error'), _("Posting date for the refund is before the invoice's posting date!"))
             if document_date and document_date < inv.document_date:
                 raise osv.except_osv(_('Error'), _("Document date for the refund is before the invoice's document date!"))
-            new_id = super(account_invoice, self).refund(cr, uid, inv.id, date, period_id, description, journal_id)
+            new_id = super(account_invoice, self).refund(cr, uid, [inv.id], date, period_id, description, journal_id)
             # UTP-594: Add Source Document on new invoice (origin field) and a link to the original invoice
-            self.write(cr, uid, new_id, {
-                'origin': inv.number or '',
-                'refund_source_inv_id': inv.id,
-            })
             if isinstance(new_id, (int, long)):
                 new_id = [new_id]
+            self.write(cr, uid, new_id, {
+                'origin': inv.number,
+                'refund_source_inv_id': inv.id,
+            })
             new_ids += new_id
         # add document date
         if document_date:
