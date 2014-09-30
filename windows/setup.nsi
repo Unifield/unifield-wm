@@ -39,12 +39,12 @@
     Push $R0
     Push $R1
     Push $R2
- 
+
     # XXX bug if ${ROOT}, ${MAIN_KEY} or ${KEY} use $R0 or $R1
- 
+
     StrCpy $R1 "0" # loop index
     StrCpy $R2 "0" # not found
- 
+
     ${Do}
         EnumRegKey $R0 ${ROOT} "${MAIN_KEY}" "$R1"
         ${If} $R0 == "${KEY}"
@@ -53,9 +53,9 @@
         ${EndIf}
         IntOp $R1 $R1 + 1
     ${LoopWhile} $R0 != ""
- 
+
     ClearErrors
- 
+
     Exch 2
     Pop $R0
     Pop $R1
@@ -101,6 +101,10 @@
 
 !define PGVERSION '8.4.17-1'
 
+!define DEFAULT_OPENERP_DROP_PWD 'admin'
+!define DEFAULT_OPENERP_BKP_PWD 'admin'
+!define DEFAULT_OPENERP_RESTORE_PWD 'admin'
+
 Name '${DISPLAY_NAME}'
 Caption "${PRODUCT_NAME} ${VERSION} Setup"
 OutFile "openerp-allinone-setup-${VERSION}.exe"
@@ -119,7 +123,7 @@ RequestExecutionLevel admin
 
 #VIAddVersionKey "ProductName" "${PRODUCT_NAME}"
 #VIAddVersionKey "CompanyName" "${PUBLISHER}"
-#VIAddVersionKey "FileDescription" "Installer of ${DISPLAY_NAME}" 
+#VIAddVersionKey "FileDescription" "Installer of ${DISPLAY_NAME}"
 #VIAddVersionKey "LegalCopyright" "${PUBLISHER}"
 #VIAddVersionKey "LegalTrademark" "OpenERP is a trademark of ${PUBLISHER}"
 #VIAddVersionKey "FileVersion" "${MAJOR_VERSION}.${MINOR_VERSION}.${REVISION_VERSION}"
@@ -140,6 +144,10 @@ Var TextPostgreSQLUsername
 Var TextPostgreSQLPassword
 Var TextSuperAdminPassword
 
+Var TextOPENERPDROPPWD
+Var TextOPENERPBKPPWD
+Var TextOPENERPRESTOREPWD
+
 Var HWNDPostgreSQLInstancesList
 Var HWNDPostgreSQLInstPath
 Var HWNDPostgreSQLInstPath_Btn
@@ -149,6 +157,10 @@ Var HWNDPostgreSQLHostname
 Var HWNDPostgreSQLPort
 Var HWNDPostgreSQLUsername
 Var HWNDPostgreSQLPassword
+
+Var HWNDOpenERPDropPwd
+Var HWNDOpenERPBkpPwd
+Var HWNDOpenERPRestorePwd
 
 !define STATIC_PATH "static"
 !define PIXMAPS_PATH "${STATIC_PATH}\pixmaps"
@@ -175,6 +187,7 @@ Var HWNDPostgreSQLPassword
 !define MUI_PAGE_CUSTOMFUNCTION_LEAVE ComponentLeave
 !insertmacro MUI_PAGE_COMPONENTS
 !insertmacro MUI_PAGE_DIRECTORY
+Page Custom DBPasswordPage LeaveDBPasswordPage
 Page Custom ShowPostgreSQL LeavePostgreSQL
 !insertmacro MUI_PAGE_INSTFILES
 
@@ -183,7 +196,7 @@ Page Custom ShowPostgreSQL LeavePostgreSQL
 !define MUI_FINISHPAGE_RUN_CHECKED
 !define MUI_FINISHPAGE_RUN_TEXT "$(DESC_FinishPageText)"
 !define MUI_FINISHPAGE_RUN_FUNCTION "LaunchLink"
-!define MUI_FINISHPAGE_LINK $(DESC_FinishPage_Link) 
+!define MUI_FINISHPAGE_LINK $(DESC_FinishPage_Link)
 !define MUI_FINISHPAGE_LINK_LOCATION "http://www.openerp.com/contact"
 !insertmacro MUI_PAGE_FINISH
 
@@ -226,6 +239,13 @@ LangString TITLE_OpenERP_Server ${LANG_ENGLISH} "OpenERP Server"
 LangString TITLE_OpenERP_Web_Client ${LANG_ENGLISH} "OpenERP Web Client"
 LangString TITLE_PostgreSQL ${LANG_ENGLISH} "PostgreSQL Database"
 LangString DESC_FinishPageText ${LANG_ENGLISH} "Connect to OpenERP Web"
+LangString DESC_OPENERPPage ${LANG_ENGLISH} "Configure the passwords for DB drop,backup and create from openerp"
+LangString DESC_OPENERP_DROP_PWD ${LANG_ENGLISH} "Password to drop DB"
+LangString DESC_OPENERP_BKP_PWD ${LANG_ENGLISH} "Password to backup DB"
+LangString DESC_OPENERP_RESTORE_PWD ${LANG_ENGLISH} "Password to restore DB"
+LangString WARNING_OPENERP_DROP_PasswordIsEmpty ${LANG_ENGLISH} "Password to drop DB is emptyy"
+LangString WARNING_OPENERP_BKP_PasswordIsEmpty ${LANG_ENGLISH} "Password to backup DB is emptyy"
+LangString WARNING_OPENERP_RESTORE_PasswordIsEmpty ${LANG_ENGLISH} "Password to restore DB is emptyy"
 
 ; French
 LangString MSG_ConnectionOK ${LANG_FRENCH} "Connection réussie!"
@@ -257,6 +277,13 @@ LangString TITLE_OpenERP_Server ${LANG_FRENCH} "Serveur OpenERP"
 LangString TITLE_OpenERP_Web_Client ${LANG_FRENCH} "OpenERP Client Web"
 LangString TITLE_PostgreSQL ${LANG_FRENCH} "Installation du serveur de base de donn?es PostgreSQL"
 LangString DESC_FinishPageText ${LANG_FRENCH} "Se connecter à OpenERP Web"
+LangString DESC_OPENERPPage ${LANG_FRENCH} "Definissez les mots de passe pour la manipulation des bdd depuis OpenERP"
+LangString DESC_OPENERP_DROP_PWD ${LANG_FRENCH} "MdP pour supprimer une bdd"
+LangString DESC_OPENERP_BKP_PWD ${LANG_FRENCH} "MdP pour sauvegarder une bdd"
+LangString DESC_OPENERP_RESTORE_PWD ${LANG_FRENCH} "MdP pour restaurer une bdd"
+LangString WARNING_OPENERP_DROP_PasswordIsEmpty ${LANG_FRENCH} "MdP pour supprimer une bdd est vide"
+LangString WARNING_OPENERP_BKP_PasswordIsEmpty ${LANG_FRENCH} "MdP pour sauvegarder une bdd est vide"
+LangString WARNING_OPENERP_RESTORE_PasswordIsEmpty ${LANG_FRENCH} "MdP pour restaurer une bdd est vide"
 
 InstType $(Profile_AllInOne)
 InstType $(Profile_Server)
@@ -286,6 +313,19 @@ Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
     # Always override pg_path by the correct instance choosen by the user (newly installed or not...)
     WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "pg_path" "$TextPostgreSQLInstPath\bin"
 
+    Push $R1
+    ${Base64_Encode} "$TextOPENERPDROPPWD"
+    Pop $R1
+    WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "admin_dropdb_passwd" $R1
+    Push $R2
+    ${Base64_Encode} "$TextOPENERPBKPPWD"
+    Pop $R2
+    WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "admin_bkpdb_passwd" $R2
+    Push $R3
+    ${Base64_Encode} "$TextOPENERPRESTOREPWD"
+    Pop $R3
+    WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "admin_restoredb_passwd" $R3
+
     File /r "static\server-extra"
     CopyFiles "$TEMP\server-extra\*.*" "$INSTDIR\Server"
 
@@ -296,7 +336,7 @@ Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
     sleep 2
 
 SectionEnd
-    
+
 Section $(TITLE_OpenERP_Web_Client) SectionOpenERP_Web_Client
     SectionIn 1 4
     SetOutPath "$TEMP"
@@ -412,6 +452,10 @@ Function .onInit
     StrCpy $CmdLPostgreSQLInstPath "${DEFAULT_POSTGRESQL_INSTPATH}"
     StrCpy $TextSuperAdminPassword ${DEFAULT_SUPER_ADMIN_PASSWORD}
 
+    StrCpy $TextOPENERPDROPPWD ${DEFAULT_OPENERP_DROP_PWD}
+    StrCpy $TextOPENERPBKPPWD ${DEFAULT_OPENERP_BKP_PWD}
+    StrCpy $TextOPENERPRESTOREPWD ${DEFAULT_OPENERP_RESTORE_PWD}
+
     Push $R0
     ${GetOptions} $cmdLineParams '/allinone' $R0
     IfErrors +2 0
@@ -425,7 +469,7 @@ Function .onInit
         MessageBox MB_OK|MB_ICONINFORMATION "All In One"
 
     NoAllInOneMode:
-    
+
     !insertmacro MUI_LANGDLL_DISPLAY
 
     ; check for forced PostgreSQL install path on command line
@@ -606,6 +650,65 @@ Function LeavePostgreSQL
     ${EndIf}
 FunctionEnd
 
+
+Function DBPasswordPage
+  SectionGetFlags ${SectionOpenERP_Server} $0
+  IntOp $0 $0 & ${SF_SELECTED}
+  IntCmp $0 ${SF_SELECTED} LaunchDBPwdConfiguration
+  Abort
+  LaunchDBPwdConfiguration:
+
+  nsDialogs::Create /NOUNLOAD 1018
+  Pop $0
+
+  ${If} $0 == error
+      Abort
+  ${EndIf}
+
+  ${NSD_CreateLabel} 0 0 100% 10u $(DESC_OPENERPPage)
+  Pop $0
+
+  ${NSD_CreateLabel} 0 85 90u 12u $(DESC_OPENERP_DROP_PWD)
+  Pop $0
+  ${NSD_CreateText} 150 85 150u 12u $TextOPENERPDROPPWD
+  Pop $HWNDOpenERPDropPwd
+  ${NSD_CreateLabel} 0 115 80u 12u $(DESC_OPENERP_BKP_PWD)
+  Pop $0
+  ${NSD_CreateText} 150 115 150u 12u $TextOPENERPBKPPWD
+  Pop $HWNDOpenERPBkpPwd
+  ${NSD_CreateLabel} 0 145 80u 12u $(DESC_OPENERP_RESTORE_PWD)
+  Pop $0
+  ${NSD_CreateText} 150 145 150u 12u $TextOPENERPRESTOREPWD
+  Pop $HWNDOpenERPRestorePwd
+
+  nsDialogs::Show
+
+FunctionEnd
+
+
+Function LeaveDBPasswordPage
+    ${NSD_GetText} $HWNDOpenERPDropPwd $TextOPENERPDROPPWD
+    ${NSD_GetText} $HWNDOpenERPBkpPwd $TextOPENERPBKPPWD
+    ${NSD_GetText} $HWNDOpenERPRestorePwd $TextOPENERPRESTOREPWD
+
+    StrLen $1 $TextOPENERPDROPPWD
+    ${If} $1 == 0
+        MessageBox MB_ICONEXCLAMATION|MB_OK $(WARNING_OPENERP_DROP_PasswordIsEmpty)
+        Abort
+    ${EndIf}
+
+    StrLen $1 $TextOPENERPBKPPWD
+    ${If} $1 == 0
+        MessageBox MB_ICONEXCLAMATION|MB_OK $(WARNING_OPENERP_BKP_PasswordIsEmpty)
+        Abort
+    ${EndIf}
+
+    StrLen $1 $TextOPENERPRESTOREPWD
+    ${If} $1 == 0
+        MessageBox MB_ICONEXCLAMATION|MB_OK $(WARNING_OPENERP_RESTORE_PasswordIsEmpty)
+        Abort
+    ${EndIf}
+FunctionEnd
 
 Function func_PostgreSQL_TestConn_Click
     Pop $R0
