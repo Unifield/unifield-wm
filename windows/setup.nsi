@@ -101,9 +101,9 @@
 
 !define PGVERSION '8.4.17-1'
 
-!define DEFAULT_OPENERP_DROP_PWD 'admin'
-!define DEFAULT_OPENERP_BKP_PWD 'admin'
-!define DEFAULT_OPENERP_RESTORE_PWD 'admin'
+!define DEFAULT_OPENERP_DROP_PWD 'dropAdmin'
+!define DEFAULT_OPENERP_BKP_PWD 'bkAdmin'
+!define DEFAULT_OPENERP_RESTORE_PWD 'restoreAdmin'
 
 Name '${DISPLAY_NAME}'
 Caption "${PRODUCT_NAME} ${VERSION} Setup"
