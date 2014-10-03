@@ -767,25 +767,14 @@ class sync_manager(osv.osv):
         # return the memory usage in MB
         import psutil
         import os
+        import gc
+        collected = gc.collect()
         process = psutil.Process(os.getpid())
         mem = process.get_memory_info()[0] / float(2 ** 20)
-        import objgraph
-        objgraph.show_most_common_types(limit=20)
-        import gc
-        """
-        show us what's the garbage about
-        """
-            
-        # force collection
-        print "\nGARBAGE:"
-        gc.collect()
-    
-        print "\nGARBAGE OBJECTS:"
-        for x in gc.garbage:
-            s = str(x)
-            if len(s) > 80: s = s[:80]
-            print type(x),"\n  ", s
-            
         return mem
+    
+    def save_puller(self, cr, uid, context=None):
+        self.pool.get('sync.server.update')._save_puller(cr, uid, context=context)
+        return (True,)
 
 sync_manager()

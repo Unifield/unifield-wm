@@ -54,6 +54,7 @@ class SavePullerCache(object):
             self.__cache__.append( (entity_id, update_ids) )
 
     def merge(self, cr, uid, context=None):
+        print "merge Save Puller"
         if not self.__cache__:
             return
         with self.__lock__:
@@ -68,6 +69,9 @@ class SavePullerCache(object):
         for id, entity_ids in todo.items():
             puller_ids = [(0, 0, {'entity_id':x}) for x in entity_ids]
             self.__model__.write(cr, uid, [id], {'puller_ids': puller_ids}, context)
+        import pprint
+        del todo
+        del cache
 
 class puller_ids_rel(osv.osv):
     _name = "sync.server.puller_logs"
@@ -412,7 +416,7 @@ class update(osv.osv):
             return None
 
         # Point of no return
-        #self._cache_pullers.add(entity, update_to_send)
+        self._cache_pullers.add(entity, update_to_send)
 
         ## Package template
         data = {
