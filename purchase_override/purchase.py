@@ -3459,6 +3459,59 @@ class purchase_order_line_deleted(osv.osv):
 
 purchase_order_line_deleted()
 
+
+class sale_order_line(osv.osv):
+    _inherit = 'sale.order.line'
+
+    def _get_line_to_remove(self, cr, uid, ids, field_name, args, context=None):
+        """
+        Return True if all quantities of the line will be removed when the PO
+        will be confirmed/canceled.
+        """
+        res = {}
+
+        for line in self.browse(cr, uid, ids, context=context):
+            res[line.id] = False
+            line_qty = line.product_uom_qty
+            for del_line in line.del_po_line_ids:
+
+                res[line.id] = True
+
+        return res
+
+    def _get_del_po_line(self, cr, uid, ids, context=None):
+        line_ids = []
+        for del_line in self.browse(cr, uid, ids, context=context):
+            for sol in del_line.sol_ids:
+                line_ids.append(sol.id)
+
+        return line_ids
+
+    _columns = {
+        'del_po_line_ids': fields.many2many(
+            'purchase.order.line.deleted',
+            'sol_pol_rel',
+            'sol_id',
+            'pol_id',
+            string='Deleted PO lines',
+        ),
+        'to_remove': fields.function(
+            _get_line_to_remove,
+            method=True,
+            type='boolean',
+            string='To remove',
+            help="This field is used to mark a FO/IR line as canceled "\
+                 "but the true cancelation/deletion will be ran only "\
+                 "on PO confirmation/cancelation",
+            store={
+                'sale.order.line': (lambda self, cr, uid, ids, c=None: ids, ['del_po_line_ids'], 10),
+                'purchase.order.line.deleted': (_get_del_po_line, ['sol_ids'], 10),
+            }
+        ),
+    }
+
+sale_order_line()
+
 class purchase_order_line_unlink_wizard(osv.osv_memory):
     _name = 'purchase.order.line.unlink.wizard'
 
