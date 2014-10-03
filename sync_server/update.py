@@ -412,7 +412,7 @@ class update(osv.osv):
             return None
 
         # Point of no return
-        self._cache_pullers.add(entity, update_to_send)
+        #self._cache_pullers.add(entity, update_to_send)
 
         ## Package template
         data = {

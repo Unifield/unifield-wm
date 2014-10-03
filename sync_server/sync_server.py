@@ -759,5 +759,33 @@ class sync_manager(osv.osv):
     @check_validated
     def message_recover_from_seq(self, cr, uid, entity, start_seq, context=None):
         return (True, self.pool.get('sync.server.message').recovery(cr, 1, entity, start_seq, context=context))
+    
+    def get_memory_usage(self, cr, uid, context=None):
+        """
+            Use this fonction to track memory usage problem
+        """
+        # return the memory usage in MB
+        import psutil
+        import os
+        process = psutil.Process(os.getpid())
+        mem = process.get_memory_info()[0] / float(2 ** 20)
+        import objgraph
+        objgraph.show_most_common_types(limit=20)
+        import gc
+        """
+        show us what's the garbage about
+        """
+            
+        # force collection
+        print "\nGARBAGE:"
+        gc.collect()
+    
+        print "\nGARBAGE OBJECTS:"
+        for x in gc.garbage:
+            s = str(x)
+            if len(s) > 80: s = s[:80]
+            print type(x),"\n  ", s
+            
+        return mem
 
 sync_manager()
