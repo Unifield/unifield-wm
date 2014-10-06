@@ -227,10 +227,11 @@ class msf_budget_tools(osv.osv):
                                 'month12': csv_line.get('month12', 0.0),
                             })
                     # Create destination line
-                    budget_line_obj.create(cr, uid, budget_line_vals, context=context)
+                    budget_line_id = budget_line_obj.create(cr, uid,
+                        budget_line_vals, context=context)
                     self._create_missing_parent_budgets_destination_line(cr,
-                        uid, parent_budget_ids, budget_line_vals,
-                        context=context)  # UF-2488
+                        uid, parent_budget_ids, budget_line_id,
+                        budget_line_vals, context=context)  # UF-2488
         # Fill in parent lines (only if sequence is given which means that we have probably some values in destination lines)
         if sequence:
             vals_headers = ['month1', 'month2', 'month3', 'month4', 'month5', 'month6', 'month7', 'month8', 'month9', 'month10', 'month11', 'month12']
@@ -247,22 +248,25 @@ class msf_budget_tools(osv.osv):
         return True
 
     def _create_missing_parent_budgets_destination_line(self, cr, uid,
-        parent_budget_ids, budget_line_vals, context=None):
+        parent_budget_ids, origin_budget_line_id, budget_line_vals,
+        context=None):
         # UF-2488
         # for each parent budget (of parent cost center(s))
         # create missing destination line (was not previously imported in child)
         if not parent_budget_ids or not budget_line_vals:
             return
         budget_line_obj = self.pool.get('msf.budget.line')
-        local_budget_line_vals = budget_line_vals.copy()
-        origin_parent_id = local_budget_line_vals.get('parent_id', False)
+        origin_parent_id = budget_line_vals.get('parent_id', False)
+        default_vals = {}
+        for m in range(1, 13):
+            default_vals['month%d' % (m, )] = 0.  # default month amounts
 
         for pb_id in parent_budget_ids:
             domain = [
                 ('budget_id', '=', pb_id),
-                ('account_id', '=', local_budget_line_vals['account_id']),
-                ('destination_id', '=', local_budget_line_vals['destination_id']),
-                ('line_type', '=', local_budget_line_vals['line_type']),
+                ('account_id', '=', budget_line_vals['account_id']),
+                ('destination_id', '=', budget_line_vals['destination_id']),
+                ('line_type', '=', budget_line_vals['line_type']),
             ]
             parent_line_count = budget_line_obj.search(cr, uid, domain,
                 count=True, context=context)
@@ -286,12 +290,12 @@ class msf_budget_tools(osv.osv):
                         parent_id = parent_ids[0]
 
                 # create the missing parent line
-                local_budget_line_vals.update({
+                default_vals.update({
                     'budget_id': pb_id,
                     'parent_id': parent_id,
                 })
-                id = budget_line_obj.create(cr, uid, local_budget_line_vals,
-                    context=context)
+                id = budget_line_obj.copy(cr, uid, origin_budget_line_id,
+                    default_vals, context=context)
 
     def _create_expense_account_line_amounts(self, cr, uid, account_ids, actual_amounts, context=None):
         # Some checks
