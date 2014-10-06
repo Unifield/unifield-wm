@@ -110,6 +110,31 @@ class msf_budget_tools(osv.osv):
             context = {}
         if not budget_id:
             return False
+
+        # UF-2488 get parent budgets (of parent cost center)
+        # because we will create missing line of parent budgets
+        # (budgets of parent cost centers)
+        budget_obj = self.pool.get('msf.budget')
+        parent_budget_ids = False
+        budget_fields = ['cost_center_id', ]
+        # no browse for perf we just want cost center
+        # and we not want to load lines
+        budget_r = budget_obj.read(cr, uid, [budget_id], budget_fields,
+            context=context)
+        if budget_r:
+            aaa_obj = self.pool.get('account.analytic.account')
+            budget_r = budget_r[0]
+            parent_cc_ids = aaa_obj._get_parent_of(cr, uid,
+                budget_r['cost_center_id'][0], context=context)
+            if parent_cc_ids:
+                domain = [
+                    ('cost_center_id', 'in', parent_cc_ids),
+                ]
+                parent_budget_ids = budget_obj.search(cr, uid, domain,
+                    context=context)
+                if parent_budget_ids and budget_id in parent_budget_ids:
+                    parent_budget_ids.remove(budget_id)
+
         # Prepare some values
         a_obj = self.pool.get('account.account')
         chart_of_account_ids = a_obj.search(cr, uid, [('code', '=', 'MSF')], context=context)
@@ -203,6 +228,20 @@ class msf_budget_tools(osv.osv):
                             })
                     # Create destination line
                     budget_line_obj.create(cr, uid, budget_line_vals, context=context)
+                    # UF-2488 create missing (brand new) parent line if needed
+                    # (was not imported before in child)
+                    if parent_budget_ids:
+                        for pb_id in parent_budget_ids:
+                            parent_line_count = budget_line_obj.search(cr, uid, [
+                                ('budget_id', '=', pb_id),
+                                ('account_id', '=', budget_line_vals['account_id']),
+                                ('destination_id', '=', budget_line_vals['destination_id']),
+                                ('line_type', '=', budget_line_vals['line_type']),
+                                ], count=True, context=context)
+                            if not parent_line_count:
+                                budget_line_vals['budget_id'] = pb_id
+                                budget_line_obj.create(cr, uid,
+                                    budget_line_vals, context=context)
         # Fill in parent lines (only if sequence is given which means that we have probably some values in destination lines)
         if sequence:
             vals_headers = ['month1', 'month2', 'month3', 'month4', 'month5', 'month6', 'month7', 'month8', 'month9', 'month10', 'month11', 'month12']
