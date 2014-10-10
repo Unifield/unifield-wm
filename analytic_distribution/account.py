@@ -93,6 +93,8 @@ class account_destination_link(osv.osv):
         'used': fields.function(_get_used, string='Used', method=True, type='boolean'),
     }
 
+    _sql_constraints = [('unique_account_destination', 'unique(account_id, destination_id)', 'Couple account, destination must be unique!')]
+
 account_destination_link()
 
 class account_destination_summary(osv.osv):
