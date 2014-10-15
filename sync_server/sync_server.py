@@ -49,7 +49,7 @@ def check_validated(f):
         if not entity.user_id.id == int(uid):
             return (False, "You are not supposed to use this user to connect to the synchronization server")
         return f(self, cr, uid, entity, *args, **kargs)
-        
+
     return check
 
 class entity_group0(osv.osv):
@@ -63,21 +63,21 @@ entity0()
 
 class group_type(osv.osv):
     """ OpenERP type of group of entities """
-    
+
     _name = "sync.server.group_type"
     _description = "Synchronization Instance Group Type"
 
     _columns = {
         'name': fields.char('Type Name', size = 64, required = True),
     }
-    
+
     #Check that the group type has an unique name
     _sql_constraints = [('unique_name', 'unique(name)', 'Group type name must be unique')]
 group_type()
 
 class entity_group(osv.osv):
     """ OpenERP group of entities """
-    
+
     _name = "sync.server.entity_group"
     _description = "Synchronization Instance Group"
 
@@ -86,20 +86,20 @@ class entity_group(osv.osv):
         'entity_ids': fields.many2many('sync.server.entity', 'sync_entity_group_rel', 'group_id', 'entity_id', string="Instances"),
         'type_id': fields.many2one('sync.server.group_type', 'Group Type', ondelete="set null", required=True),
     }
-    
+
     def get_group_name(self, cr, uid, context=None):
         ids = self.search(cr, uid, [], context=context)
         res = []
         for group in self.browse(cr, uid, ids, context=context):
             res.append({'name': group.name, 'type': group.type_id.name})
         return res
-     
+
     def get(self, cr, uid, name, context=None):
         return self.search(cr, uid, [('name', '=', name)], context=context)
-    
+
     #Check that the group has an unique name
     _sql_constraints = [('unique_name', 'unique(name)', 'Group name must be unique')]
-    
+
 entity_group()
 
 class entity(osv.osv):
@@ -140,7 +140,7 @@ class entity(osv.osv):
         'state' : fields.selection([('pending', 'Pending'), ('validated', 'Validated'), ('invalidated', 'Invalidated'), ('updated', 'Updated')], 'State'),
         'email':fields.char('Contact Email', size=512),
         'user_id': fields.many2one('res.users', 'User', ondelete='restrict', required=True),
-        
+
         #just in case, since the many2one exist it has no cost in database
         'children_ids' : fields.one2many('sync.server.entity', 'parent_id', 'Children Instances'),
         'update_token' : fields.char('Update security token', size=256),
@@ -150,7 +150,7 @@ class entity(osv.osv):
 
         'parent_left' : fields.integer("Left Parent", select=1),
         'parent_right' : fields.integer("Right Parent", select=1),
-        
+
         'msg_ids_tmp':fields.text('List of temporary ids of message to be pulled'),
     }
 
@@ -159,24 +159,24 @@ class entity(osv.osv):
             if rec.parent_id:
                 raise osv.except_osv(_("Error!"), _("Can not delete an instance that have children!"))
         return super(entity, self).unlink(cr, uid, ids, context=None)
-   
+
     def get_security_token(self):
         return uuid.uuid4().hex
-    
+
     def _check_duplicate(self, cr, uid, name, uuid, context=None):
         duplicate_id = self.search(cr, uid, [('user_id', '!=', uid), '|', ('name', '=', name), ('identifier', '=', uuid)], context=context)
         return bool(duplicate_id)
-        
+
     def _get_ancestor(self, cr, uid, id, context=None):
         def _get_ancestor_rec(entity, ancestor_list):
             if entity and entity.parent_id:
                 ancestor_list.append(entity.parent_id.id)
                 _get_ancestor_rec(entity.parent_id, ancestor_list)
             return ancestor_list
-        
+
         entity = self.browse(cr, uid, id, context=context)
         return _get_ancestor_rec(entity, [])
-        
+
     def _get_all_children(self, cr, uid, id, context=None):
         res = self.search(cr, uid, [('id','child_of',[id])], context=context)
         res.remove(id)
@@ -189,18 +189,18 @@ class entity(osv.osv):
             if not uuid in uuid_child:
                 return False
         return True
-        
+
     def _get_entity_id(self, cr, uid, name, uuid, context=None):
         ids = self.search(cr, uid, [('user_id', '=', uid), '|', ('name', '=', name), ('identifier', '=', uuid)])
         return ids and ids[0] or False
-    
+
     def get(self, cr, uid, name=False, uuid=False, context=None):
         if uuid:
             return self.search(cr, uid, [('identifier', '=', uuid)], context=context)
         if name:
             return self.search(cr, uid, [('name', '=', name)], context=context)
         return False
-    
+
     """
         Public interface
     """
@@ -209,13 +209,13 @@ class entity(osv.osv):
             Allow to change uuid,
             and reactivate the link between an local instance and his data on the server
         """
-        ids = self.search(cr, uid, [('user_id', '=', uid), 
+        ids = self.search(cr, uid, [('user_id', '=', uid),
                                     ('hardware_id', "=", hardware_id),
-                                    ('name', '=', name), 
+                                    ('name', '=', name),
                                     ('state', '=', 'updated')], context=context)
         if not ids:
             return (False, 'No entity matches with this name')
-        
+
         token = uuid.uuid4().hex
         self.write(cr, 1, ids, {'identifier': identifier, 'update_token': token}, context=context)
         entity = self.browse(cr, uid, ids, context=context)[0]
@@ -228,15 +228,15 @@ class entity(osv.osv):
                 'security_token': token,
         }
         return (True, data)
-    
+
     def update(self, cr, uid, identifier, hardware_id, context=None):
         ids = self.search(cr, uid, [('identifier', '=' , identifier),
-                                    ('hardware_id', '=', hardware_id), 
-                                    ('user_id', '=', uid), 
+                                    ('hardware_id', '=', hardware_id),
+                                    ('user_id', '=', uid),
                                     ('state', '=', 'updated')], context=context)
         if not ids:
             return (False, 'No update is ready for your entity. If you cannot synchronize data, check that your parent has validated your registration')
-        
+
         token = uuid.uuid4().hex
         self.write(cr, 1, ids, {'update_token' : token}, context=context)
         entity = self.browse(cr, uid, ids, context=context)[0]
@@ -249,44 +249,44 @@ class entity(osv.osv):
                 'security_token': token,
         }
         return (True, data)
-    
+
     def ack_update(self, cr, uid, uuid, hardware_id, token, context=None):
-        ids = self.search(cr, uid, [('identifier', '=' , uuid), 
+        ids = self.search(cr, uid, [('identifier', '=' , uuid),
                                     ('hardware_id', '=', hardware_id),
-                                    ('user_id', '=', uid), 
-                                    ('state', '=', 'updated'), 
+                                    ('user_id', '=', uid),
+                                    ('state', '=', 'updated'),
                                     ('update_token', '=', token)], context=context)
         if not ids:
             return (False, 'Ack not valid')
         self.write(cr, 1, ids, {'state' : 'validated'}, context=context)
         return (True, "Instance Validated")
-    
+
     def write(self, cr, uid, ids, vals, context=None):
         if not context:
             context = {}
         update = context.get('update', False)
-        
+
         if update:
             vals['state'] = 'updated'
-            
+
         return super(entity, self).write(cr, uid, ids, vals, context=context)
-    
+
     def create(self, cr, uid, vals, context=None):
         if not context:
             context = {}
         update = context.get('update', False)
-        
+
         if update:
             vals['state'] = 'updated'
-            
+
         return super(entity, self).create(cr, uid, vals, context=context)
-        
+
     def register(self, cr, uid, data, context=None):
         """
             data = {
                 'parent_name' : 'name'
                 'group_names' : ['group1', 'group2']
-                'identifier' : 'uuid', 
+                'identifier' : 'uuid',
                 'hardware_id' : 'hardware_id'
                 'name' : 'name',
                 'email' : 'cur.email',
@@ -297,7 +297,7 @@ class entity(osv.osv):
             if parent_name:
                 return self.get(cr, uid, name=parent_name, context=context)
             return False
-    
+
         def get_groups(group_names):
             groups = []
             if group_names:
@@ -307,20 +307,20 @@ class entity(osv.osv):
                         groups.extend(group_id)
                 return [(6, 0, groups)]
             return False
-        
+
         if self._check_duplicate(cr, uid, data['name'], data['identifier'], context=context):
             return (False, "Duplicate Name or identifier, please select another one")
-        
+
         parent_name = data.pop('parent_name')
         parent_id = get_parent(parent_name)
         parent_id = parent_id and parent_id[0] or False
-        
+
         if parent_name and not parent_id:
             return (False, "Parent does not exist, please choose an existing one")
-        
+
         groups_names = data.pop('group_names')
         group_ids = get_groups(groups_names)
-            
+
         entity_id = self._get_entity_id(cr, uid, data['name'], data['identifier'], context=context)
         data.update({'group_ids' : group_ids, 'parent_id' : parent_id, 'user_id': uid, 'state' : 'pending'})
         if entity_id:
@@ -340,7 +340,7 @@ class entity(osv.osv):
                 return (True, "Registration successfully done, waiting for parent validation")
             else:
                 return (False, "Registration failed!")
-    
+
     @check_validated
     def get_entity(self, cr, uid, entity, context=None):
         return (True, {
@@ -365,9 +365,9 @@ class entity(osv.osv):
                     'group': ', '.join([group.name for group in child.group_ids]),
             }
             res.append(data)
-        
+
         return (True, res)
-        
+
     @check_validated
     def end_synchronization(self, cr, uid, entity, context=None):
         self.pool.get('sync.server.entity').set_activity(cr, uid, entity, _('Inactive'))
@@ -384,7 +384,7 @@ class entity(osv.osv):
         self.write(cr, 1, ids_to_validate, {'state': 'validated'}, context=context)
         self._send_validation_email(cr, uid, entity, ids_to_validate, context=context)
         return (True, "Instance %s are now validated" % ", ".join(uuid_list))
-    
+
     @check_validated
     def invalidate(self, cr, uid, entity, uuid_list, context=None):
         for uuid in uuid_list:
@@ -396,23 +396,23 @@ class entity(osv.osv):
         self.write(cr, 1, ids_to_validate, {'state': 'invalidated'}, context=context)
         self._send_invalidation_email(cr, uid, entity, ids_to_validate, context=context)
         return (True, "Instance %s are now invalidated" % ", ".join(uuid_list))
-        
+
     def validate_action(self, cr, uid, ids, context=None):
         if not context:
             context = {}
-            
+
         context['update'] = False
         self.write(cr, uid, ids, {'state': 'validated'}, context)
         return True
-        
+
     def invalidate_action(self, cr, uid, ids, context=None):
         if not context:
             context={}
-            
+
         context['update'] = False
         self.write(cr, uid, ids, {'state': 'invalidated'}, context)
         return True
-      
+
     def _send_registration_email(self, cr, uid, data, groups_name, context=None):
         parent_id = data.get('parent_id')
         if not parent_id or not data.get('email'):
@@ -434,7 +434,7 @@ class entity(osv.osv):
                     Group : %s
                 """ % (data.get('name'), data.get('identifier'), parent.name, data.get('email'), ', '.join(groups_name)),
         )
-    
+
     def _send_validation_email(self, cr, uid, entity, ids_validated, context=None):
         email_from = entity.email
         email_to = []
@@ -442,27 +442,27 @@ class entity(osv.osv):
             if child.email:
                 email_list = child.email and child.email.split(',') or []
                 email_to.extend(email_list)
-                
+
         if not email_from or not email_to:
             return
-        
+
         tools.email_send(
                 email_from,
                 email_to,
                 "Your registration has been validated by your parent %s" % entity.name,
                 "You can start to synchronize your data."
         )
-        
+
     def _send_invalidation_email(self, cr, uid, entity, ids_validated, context=None):
         email_from = entity.email
         email_to = []
         for child in self.browse(cr, uid, ids_validated, context=None):
             email_list = child.email and child.email.split(',') or []
             email_to.extend(email_list)
-        
+
         if not email_from or not email_to:
             return
-        
+
         tools.email_send(
                 email_from,
                 email_to,
@@ -499,7 +499,7 @@ class entity(osv.osv):
 
         visited_branch.remove(id)
         return True
-    
+
     def get_entities_priorities(self, cr, uid, context=None):
         return dict([
             (rec.name, rec.parent_left)
@@ -521,7 +521,11 @@ entity()
 class sync_manager(osv.osv):
     _name = "sync.server.sync_manager"
     _logger = logging.getLogger('sync.server')
-    
+    _oldmem=2
+    _oldmem2=0
+    _oldram=None
+    _oldram2=None
+
     """
         Data synchronization
     """
@@ -532,7 +536,7 @@ class sync_manager(osv.osv):
             @param entity: string : uuid of the synchronizing entity
             @return tuple : (a, b, c):
                     a is True is if the call is succesfull, False otherwise
-                    b : is a list of dictionaries that contains all the rule 
+                    b : is a list of dictionaries that contains all the rule
                         that apply for the synchronizing instance.
                         The format of the dict that contains a single rule definition
                         {
@@ -544,11 +548,11 @@ class sync_manager(osv.osv):
                             'sequence_number' : integer : Sequence number of the rule,
                             'included_fields' : string : list of fields to include, same format as the one needed for export data
                         }
-                    
+
         """
         res = self.pool.get('sync_server.sync_rule')._get_rule(cr, uid, entity, context=context)
         return (True, res[1], get_md5(res[1]))
-        
+
     @check_validated
     def receive_package(self, cr, uid, entity, packet, context=None):
         """
@@ -567,7 +571,7 @@ class sync_manager(osv.osv):
                                                     'values' : string : list of values in the matching order of fields
                                                              format "['value1', 'value2']"
                                                 }, ...]
-                            
+
                             }
             @return: tuple : (a,b)
                      a : boolean : is True is if the call is succesfull, False otherwise
@@ -579,14 +583,14 @@ class sync_manager(osv.osv):
             check_md5(context['md5'], packet, _('server method receive_package'))
         res = self.pool.get("sync.server.update").unfold_package(cr, 1, entity, packet, context=context)
         return (True, res)
-            
+
     @check_validated
     def confirm_update(self, cr, uid, entity, session_id, context=None):
         """
             Synchronizing entity confirm that all the packet of this session are sent
             @param entity : string : uuid of the synchronizing entity
             @param session_id : string : the synchronization session_id given at the beginning of the session by get_model_sync.
-            @return tuple : (a, b) 
+            @return tuple : (a, b)
                 a : boolean : is True is if the call is succesfull, False otherwise
                 b : int : sequence number given
         """
@@ -597,7 +601,7 @@ class sync_manager(osv.osv):
 
         return self.pool.get("sync.server.update").confirm_updates(cr, 1, entity, session_id, context=context)
 
-    
+
     @check_validated
     def get_max_sequence(self, cr, uid, entity, context=None):
         """
@@ -606,26 +610,26 @@ class sync_manager(osv.osv):
             @return a tuple (a, b)
                 a : boolean : is True is if the call is succesfull, False otherwise
                 b : integer : is the sequence number of the last successfull push session by any entity
-        
+
         """
         last_seq = self.pool.get('sync.server.update').get_last_sequence(cr, uid, context=context)
         return (True, last_seq, get_md5(last_seq))
-    
+
     @check_validated
     def get_update(self, cr, uid, entity, last_seq, offset, max_size, max_seq, recover=False, context=None):
         """
             @param entity : string : uuid of the synchronizing entity
-            @param last_seq : integer : Last sequence of update receive succefully in the previous pull session. 
+            @param last_seq : integer : Last sequence of update receive succefully in the previous pull session.
             @param offset : integer : Number of record receive after the last_seq
-            @param max_size : integer : The number of record max per packet. 
+            @param max_size : integer : The number of record max per packet.
             @param max_seq : interger : The sequence max that the update the sync server send to the client in get_max_sequence, to tell the server don't send me
                             newer update then the one already their when the pull session start.
             @param recover : flag : If set to True, will recover self-owned package too.
-            @return tuple : (a,b,c) 
+            @return tuple : (a,b,c)
                 a : boolean : True if the call is successfull, False otherwise
                 b : dictionnary : Package if there is some update to send remaining, False otherwise
                 c : boolean : False if there is some update to send remaining, True otherwise
-                              Package format : 
+                              Package format :
                               {
                                     'model': string : model's name of the update
                                     'source_name' : string : source entity's name
@@ -641,15 +645,21 @@ class sync_manager(osv.osv):
                                                              format "['value1', 'value2']"
                                             }, ..]
                               }
-                              
+
         """
+        #from guppy import hpy
+        #hp = hpy()
+        #before = hp.heap()
         package = self.pool.get("sync.server.update").get_package(cr, uid, entity, last_seq, offset, max_size, max_seq, recover=recover, context=context)
+        #after = hp.heap()
+        #leftover = after - before
+        #print leftover[0].bysize[:4].byvia
         return (True, package or False, not package, get_md5(package))
-    
+
     """
         Message synchronization
     """
-    
+
     @check_validated
     def get_message_rule(self, cr, uid, entity, context=None):
         """
@@ -657,7 +667,7 @@ class sync_manager(osv.osv):
             @param entity: string : uuid of the synchronizing entity
             @return a Tuple (a, b):
                     a : boolean : is True is if the call is succesfull, False otherwise
-                    b : list of dictionaries : if a is True, is a list of dictionaries that contains all the rule 
+                    b : list of dictionaries : if a is True, is a list of dictionaries that contains all the rule
                         that apply for the synchronizing instance.
                         The format of the dict that contains a single rule definition
                         {
@@ -670,11 +680,11 @@ class sync_manager(osv.osv):
                             'arguments' : string : list of fields use in argument for the remote_call, see fields in receive_package
                             'destination_name' : string : Name of the field that will give the destination name,
                         }
-                        
+
         """
         res = self.pool.get('sync_server.message_rule')._get_message_rule(cr, uid, entity, context=context)
         return (True, res, get_md5(res))
-    
+
     @check_validated
     def send_message(self, cr, uid, entity, packet, context=None):
         """
@@ -685,7 +695,7 @@ class sync_manager(osv.osv):
                                 'call' : string : name of the method to call when the receiver will execute the message
                                 'dest' : string : name of the destination (generaly a partner Name)
                                 'args' : string : Arguments of the call, the format is a a dictionnary that represent is object that generate the message serialiaze in json
-                                        see export_data_jso in ir_model_data.py 
+                                        see export_data_jso in ir_model_data.py
                             }
             @return: tuple : (a, b):
                      a : boolean : is True is if the call is succesfull, False otherwise
@@ -702,21 +712,21 @@ class sync_manager(osv.osv):
     @check_validated
     def get_message_ids(self, cr, uid, entity, context=None):
         # UTP-1179: store temporarily this ids of messages to be sent to this entity at the moment of getting the update
-        # to avoid having messages that are not belonging to the same "sequence" of the update  
+        # to avoid having messages that are not belonging to the same "sequence" of the update
         msg_ids_tmp = self.pool.get("sync.server.message").search(cr, uid, [('destination', '=', entity.id), ('sent', '=', False)], context=context)
-        
+
         len_ids = 0
         if msg_ids_tmp:
             len_ids = len(msg_ids_tmp)
             self.pool.get('sync.server.entity').write(cr, 1, entity.id, {'msg_ids_tmp': msg_ids_tmp}, context=context)
-            
-        self._logger.info("::::::::The instance " + entity.name + " pulled " + str(len_ids) + " messages.")        
+
+        self._logger.info("::::::::The instance " + entity.name + " pulled " + str(len_ids) + " messages.")
         return (True, len_ids)
 
     @check_validated
     def reset_message_ids(self, cr, uid, entity, context=None):
         # UTP-1179: store temporarily this ids of messages to be sent to this entity at the moment of getting the update
-        # to avoid having messages that are not belonging to the same "sequence" of the update  
+        # to avoid having messages that are not belonging to the same "sequence" of the update
         self.pool.get('sync.server.entity').write(cr, 1, entity.id, {'msg_ids_tmp': False}, context=context)
         return (True, 0)
 
@@ -733,13 +743,13 @@ class sync_manager(osv.osv):
                     'call' : string : name of the method to call when the receiver will execute the message
                     'source' : string : name of the entity that generated the message
                     'args' : string : Arguments of the call, the format is a a dictionnary that represent is object that generate the message serialiaze in json
-                                         see export_data_jso in ir_model_data.py 
+                                         see export_data_jso in ir_model_data.py
                 },..]
         """
-        
+
         res = self.pool.get('sync.server.message').get_message_packet(cr, uid, entity, max_packet_size, context=context)
         return (True, res, get_md5(res))
-        
+
     @check_validated
     def message_received(self, cr, uid, entity, message_ids, context=None):
         """
@@ -748,7 +758,7 @@ class sync_manager(osv.osv):
             @return: tuple : (a,b)
                      a : boolean : is True is if the call is succesfull, False otherwise
                      b : message : is an error message if a is False
-              
+
         """
         if context is None:
             context = {}
@@ -759,7 +769,7 @@ class sync_manager(osv.osv):
     @check_validated
     def message_recover_from_seq(self, cr, uid, entity, start_seq, context=None):
         return (True, self.pool.get('sync.server.message').recovery(cr, 1, entity, start_seq, context=context))
-    
+
     def get_memory_usage(self, cr, uid, context=None):
         """
             Use this fonction to track memory usage problem
@@ -771,8 +781,21 @@ class sync_manager(osv.osv):
         collected = gc.collect()
         process = psutil.Process(os.getpid())
         mem = process.get_memory_info()[0] / float(2 ** 20)
+
+        self._oldmem2 = self._oldmem
+        self._oldmem = mem
+        if self._oldmem - self._oldmem2>10:
+            print "croissance %s %s %s" % (self._oldmem,self._oldmem2,self._oldmem - self._oldmem2)
+            #from guppy import hpy
+            #hp = hpy()
+            #ram = hp.heap()
+            #print ram
+            import gc
+            gc.collect()
+            import objgraph
+            objgraph.show_most_common_types()
         return mem
-    
+
     def save_puller(self, cr, uid, context=None):
         self.pool.get('sync.server.update')._save_puller(cr, uid, context=context)
         return (True,)

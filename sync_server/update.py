@@ -30,6 +30,8 @@ pp = pprint.PrettyPrinter(indent=4)
 import logging
 from tools.safe_eval import safe_eval as eval
 import threading
+from datetime import datetime
+import time
 
 from sync_common import add_sdref_column, translate_column, fancy_integer
 
@@ -54,12 +56,14 @@ class SavePullerCache(object):
             self.__cache__.append( (entity_id, update_ids) )
 
     def merge(self, cr, uid, context=None):
-        print "merge Save Puller"
+        print "merge Save Puller %s" % datetime.now().isoformat()
         if not self.__cache__:
             return
         with self.__lock__:
             cache, self.__cache__ = self.__cache__, type(self.__cache__)()
+
         todo = {}
+        cache_size = 0
         for entity_id, updates in cache:
             for update_id in updates:
                 try:
@@ -67,8 +71,12 @@ class SavePullerCache(object):
                 except KeyError:
                     todo[update_id] = set([entity_id])
         for id, entity_ids in todo.items():
-            puller_ids = [(0, 0, {'entity_id':x}) for x in entity_ids]
-            self.__model__.write(cr, uid, [id], {'puller_ids': puller_ids}, context)
+            #puller_ids = [(0, 0, {'entity_id':x}) for x in entity_ids]
+            #self.__model__.write(cr, uid, [id], {'puller_ids': puller_ids}, context)
+            datas = [{'entity_id':x, 'update_id':id} for x in entity_ids]
+            for dt in datas:
+                self.__model__.write_logs(cr, uid, dt, context)
+
         import pprint
         del todo
         del cache
@@ -97,8 +105,8 @@ class puller_ids_rel(osv.osv):
 
     def init(self, cr):
         cr.execute("""\
-SELECT column_name 
-  FROM information_schema.columns 
+SELECT column_name
+  FROM information_schema.columns
   WHERE table_name=%s AND column_name='id';""", [self._table])
         if not cr.fetchone():
             self._logger.info("Migrate old relational table %s to OpenERP model" % self._table)
@@ -130,12 +138,12 @@ class update(osv.osv):
     """
     _name = "sync.server.update"
     _rec_name = 'source'
-    
+
     _logger = logging.getLogger('sync.server')
 
     _columns = {
-        'source': fields.many2one('sync.server.entity', string="Source Instance", select=True), 
-        'owner': fields.many2one('sync.server.entity', string="Owner Instance", select=True), 
+        'source': fields.many2one('sync.server.entity', string="Source Instance", select=True),
+        'owner': fields.many2one('sync.server.entity', string="Owner Instance", select=True),
         'model': fields.char('Model', size=128, readonly=True),
         'sdref': fields.char('SD ref', size=128, readonly=True),
         'session_id': fields.char('Session Id', size=128),
@@ -176,7 +184,18 @@ class update(osv.osv):
         super(update, self).__init__(pool, cr)
 
     def _save_puller(self, cr, uid, context=None):
+        def waituntil(towait):
+            time.sleep(towait)
+
+        from multiprocessing import Process
+        p = Process(target=waituntil, args=(30,))
+        p.start()
+        self._cache_pullers.merge(cr, uid, context)
+        p.join()
         return self._cache_pullers.merge(cr, uid, context)
+
+    def write_logs(self, cr, uid, datas, context=None):
+        self.pool.get('sync.server.puller_logs').create(cr, uid, datas, context)
 
     def unfold_package(self, cr, uid, entity, packet, context=None):
         """
@@ -280,7 +299,7 @@ class update(osv.osv):
             @return : int : sequence number
         """
         return int(self.pool.get('ir.sequence').get(cr, uid, 'sync.server.update'))
-    
+
     def get_last_sequence(self, cr, uid, context=None):
         """
             Get the id of the last sequence number in the database
@@ -295,7 +314,7 @@ class update(osv.osv):
             return 0
         seq = self.browse(cr, uid, ids, context=context)[0].sequence
         return seq
-    
+
     def get_update_to_send(self,cr, uid, entity, update_ids, recover=False, context=None):
         """
             Called by get_package during the client instance pull process.
@@ -319,7 +338,7 @@ class update(osv.osv):
             @return : list of browse record of the updates to send
         """
         update_to_send = []
-        ancestor = self.pool.get('sync.server.entity')._get_ancestor(cr, uid, entity.id, context=context) 
+        ancestor = self.pool.get('sync.server.entity')._get_ancestor(cr, uid, entity.id, context=context)
         children = self.pool.get('sync.server.entity')._get_all_children(cr, uid, entity.id, context=context)
         for update in self.browse(cr, uid, update_ids, context=context):
             if update.rule_id.direction == 'bi-private':
@@ -339,7 +358,7 @@ class update(osv.osv):
                (update.rule_id.direction == 'bidirectional') or \
                (entity.id in privates) or \
                (recover and entity.id == update.source.id):
-                
+
                 source_rules_ids = self.pool.get('sync_server.sync_rule')._get_groups_per_rule(cr, uid, update.source, context)
                 s_group = source_rules_ids.get(update.rule_id.id, [])
                 if any(group.id in s_group for group in entity.group_ids):
@@ -356,9 +375,9 @@ class update(osv.osv):
             @param cr : cr
             @param uid : uid
             @param entity : browse_record(sync.server.entity) : client instance entity
-            @param last_seq : integer : Last sequence of update receive succefully in the previous pull session. 
+            @param last_seq : integer : Last sequence of update receive succefully in the previous pull session.
             @param offset : integer : Number of record receive after the last_seq
-            @param max_size : integer : The number of record max per packet. 
+            @param max_size : integer : The number of record max per packet.
             @param max_seq : interger : The sequence max that the update the sync server send to the client in get_max_sequence, to tell the server don't send me
                     newer update then the one already their when the pull session start.
             @param recover : flag : If set to True, will recover self-owned package too.
@@ -432,7 +451,7 @@ class update(osv.osv):
             data['unload'] = [update.sdref for update in update_to_send]
             data['type'] = 'delete'
         else:
-            complete_fields, forced_values = self.get_additional_forced_field(update_master) 
+            complete_fields, forced_values = self.get_additional_forced_field(update_master)
             data.update({
                 'fields' : tools.ustr(complete_fields),
                 'fallback_values' : update_master.rule_id.fallback_values,
@@ -455,8 +474,8 @@ class update(osv.osv):
         self._logger.info("[%s] Data pull :: Server last sequence number: %s" % (entity.name, self.get_last_sequence(cr, uid)))
         self._logger.info("[%s] Data pull :: Number of data pulled: %s" % (entity.name, len(update_to_send)))
         return data
-    
-    def get_additional_forced_field(self, update): 
+
+    def get_additional_forced_field(self, update):
         fields = eval(update.fields)
         forced_values = eval(update.rule_id.forced_values or '{}')
         if forced_values:
@@ -471,7 +490,7 @@ class update(osv.osv):
         return fields, forced_values
 
     _order = 'create_date desc'
-    
+
 update()
 puller_ids_rel()
 
