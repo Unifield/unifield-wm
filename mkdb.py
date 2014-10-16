@@ -232,6 +232,16 @@ class db_creation(object):
     def test_04_sync_so_install(self):
         self.db.connect('admin')
         self.db.module('sync_so').install().do()
+        # disable automatic backup
+        backup_ids = self.db.get('ir.model').search([('model', '=', 'backup.config')])
+        if backup_ids:
+            self.db.get('backup.config').write([1], {
+                'beforemanualsync': False,
+                'beforeautomaticsync': False,
+                'aftermanualsync': False,
+                'afterautomaticsync': False,
+                'scheduledbackup': False
+            })
 
     @skip_test_real_eval("skipUniUser", "UniField user creation desactivated")
     def test_05_unifield_user_creation(self):
