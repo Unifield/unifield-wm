@@ -232,10 +232,10 @@ class db_creation(object):
     def test_04_sync_so_install(self):
         self.db.connect('admin')
         self.db.module('sync_so').install().do()
-        backup_obj = self.db.get('backup.config')
         # disable automatic backup
-        if backup_obj:
-            backup_obj.write([1], {
+        backup_ids = self.db.get('ir.model').search([('model', '=', 'backup.config')])
+        if backup_ids:
+            self.db.get('backup.config').write([1], {
                 'beforemanualsync': False,
                 'beforeautomaticsync': False,
                 'aftermanualsync': False,
