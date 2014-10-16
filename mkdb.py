@@ -235,7 +235,7 @@ class db_creation(object):
         backup_obj = self.db.get('backup.config')
         # disable automatic backup
         if backup_obj:
-            backup_obj.write(1, {
+            backup_obj.write([1], {
                 'beforemanualsync': False,
                 'beforeautomaticsync': False,
                 'aftermanualsync': False,
