@@ -445,7 +445,6 @@ class hr_payroll_employee_import(osv.osv_memory):
         # Prepare some values
         staff_file = 'staff.csv'
         contract_file = 'contrat.csv'
-        job_file = 'fonction.csv'
         res = False
         message = _("Employee import FAILED.")
         created = 0
@@ -500,16 +499,10 @@ class hr_payroll_employee_import(osv.osv_memory):
             if staff_file not in list_of_files:
                 raise osv.except_osv(_('Error'), _('%s not found in given zip file!') % (staff_file,))
             # read files
-
-
-
             contract_reader = csv.DictReader(archive_obj.open(contract_file), quotechar='"', delimiter=',', doublequote=False, escapechar='\\')
             contract_ids = self.update_contract(cr, uid, ids, contract_reader, context=context)
             # Doublequote and escapechar avoid some problems
             reader = csv.DictReader(archive_obj.open(staff_file), quotechar='"', delimiter=',', doublequote=False, escapechar='\\')
-
-            raise osv.except_osv('error', 'programming error')
-
             # UF-2472: Read all lines to check employee's code before importing
             staff_data = []
             staff_codes = []
@@ -539,19 +532,6 @@ class hr_payroll_employee_import(osv.osv_memory):
                 # (because already read/looped above for staff codes)
                 reader = csv.DictReader(archive_obj.open(staff_file), quotechar='"',
                     delimiter=',', doublequote=False, escapechar='\\')
-
-
-
-
-
-
-                # FIXME: CHANGE THE CODE HERE TO ADAPT REGARDING 7Z FILES
-
-
-
-
-
-
                 for i, employee_data in enumerate(reader):
                     update, nb_created, nb_updated = self.update_employee_infos(cr, uid, employee_data, wiz.id, i)
                     if not update:

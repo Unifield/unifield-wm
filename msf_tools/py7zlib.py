@@ -832,9 +832,10 @@ class Archive7z(Base):
         file_stream = self.getmember(name)
         if not file_stream:
             return []
-        # We need to transform this to an iterator
-        # TODO:
-        return file_stream.read().split('\n')
+        # We need to transform this to an iterator.
+        #+ So we use split() method to get a list
+        res = file_stream.read()
+        return res.splitlines()
 
     def list(self, verbose=True):
         print ('total %d files in %sarchive' % (self.numfiles, (self.solid and 'solid ') or ''))
