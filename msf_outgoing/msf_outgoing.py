@@ -3026,7 +3026,7 @@ class stock_picking(osv.osv):
                 'backorder_id': picking.id,
                 'move_lines': [],
             }
-            tmp_allow_copy = context.get('allow_copy')
+            tmp_allow_copy = context.get('allow_copy', False)
             context.update({
                 'wkf_copy': True,
                 'allow_copy': True,

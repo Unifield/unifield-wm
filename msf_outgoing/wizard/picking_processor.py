@@ -126,6 +126,9 @@ class stock_picking_processor(osv.osv):
         """
         Fill all lines with the original quantity as quantity
         """
+        if context is None:
+            context = {}
+
         if isinstance(ids, (int, long)):
             ids = [ids]
 

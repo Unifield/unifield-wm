@@ -182,6 +182,8 @@ No split of FO found !""")
         :return The ID of the new Internal request or field orde
         :rtype int
         """
+        order_obj = db.get('sale.order')
+        order_line_obj = db.get('sale.order.line')
 
         # Prepare values for the field order
         prod_log1_id = self.get_record(db, 'prod_log_1')
@@ -192,7 +194,7 @@ No split of FO found !""")
 
         order_values = self._get_order_values(db)
 
-        order_id = self.order_obj.create(order_values)
+        order_id = order_obj.create(order_values)
 
         # Create order lines
         # First line
@@ -203,28 +205,28 @@ No split of FO found !""")
             'product_uom_qty': 10.0,
             'type': 'make_to_order',
         }
-        self.order_line_obj.create(line_values)
+        order_line_obj.create(line_values)
 
         # Second line
         line_values.update({
             'product_id': prod_log2_id,
             'product_uom_qty': 20.0,
         })
-        self.order_line_obj.create(line_values)
+        order_line_obj.create(line_values)
 
         # Third line
         line_values.update({
             'product_id': prod_med1_id,
             'product_uom_qty': 30.0,
         })
-        self.order_line_obj.create(line_values)
+        order_line_obj.create(line_values)
 
         # Fourth line
         line_values.update({
             'product_id': prod_med2_id,
             'product_uom_qty': 40.0,
         })
-        self.order_line_obj.create(line_values)
+        order_line_obj.create(line_values)
 
         if self.pr:
             # Validate the Internal Request
@@ -235,7 +237,7 @@ No split of FO found !""")
 
         return order_id
 
-    def order_source_all_one_po(self, db):
+    def order_source_all_one_po(self, db, partner_id=None):
         """
         Create an order and source all lines of this order to a PO (same
         supplier) for all lines.
@@ -245,39 +247,45 @@ No split of FO found !""")
                 order and a list of ID of PO lines created to source the
                 order.
         """
+        order_line_obj = db.get('sale.order.line')
+        pol_obj = db.get('purchase.order.line')
+
         # Create the field order
         order_id = self.create_order(db)
 
+        if partner_id is None:
+            partner_id = self.get_record(db, 'ext_supplier_1')
+
         # Source all lines on a Purchase Order to ext_supplier_1
-        line_ids = self.order_line_obj.search([('order_id', '=', order_id)])
-        self.order_line_obj.write(line_ids, {
+        line_ids = order_line_obj.search([('order_id', '=', order_id)])
+        order_line_obj.write(line_ids, {
             'po_cft': 'po',
-            'supplier': self.get_record(db, 'ext_supplier_1'),
+            'supplier': partner_id,
         })
-        self.order_line_obj.confirmLine(line_ids)
+        order_line_obj.confirmLine(line_ids)
 
         # Run the scheduler
         new_order_id = self.run_auto_pos_creation(db, order_to_check=order_id)
 
-        line_ids = self.order_line_obj.search([('order_id', '=', new_order_id)])
+        line_ids = order_line_obj.search([('order_id', '=', new_order_id)])
         not_sourced = True
         while not_sourced:
             not_sourced = False
-            for line in self.order_line_obj.browse(line_ids):
-               if line.procurement_id and line.procurement_id.state != 'running':
+            for line in order_line_obj.browse(line_ids):
+                if line.procurement_id and line.procurement_id.state != 'running':
                     not_sourced = True
             if not_sourced:
                 time.sleep(1)
 
         po_ids = set()
         po_line_ids = []
-        for line in self.order_line_obj.browse(line_ids):
+        for line in order_line_obj.browse(line_ids):
             if line.procurement_id:
-                po_line_ids.extend(self.pol_obj.search([
+                po_line_ids.extend(pol_obj.search([
                     ('procurement_id', '=', line.procurement_id.id),
                 ]))
 
-        for po_line in self.pol_obj.read(po_line_ids, ['order_id']):
+        for po_line in pol_obj.read(po_line_ids, ['order_id']):
             po_ids.add(po_line['order_id'][0])
 
         return new_order_id, line_ids, list(po_ids), po_line_ids
@@ -292,23 +300,26 @@ No split of FO found !""")
         :param po_ids: List of ID of purchase.order to validate
         :return The list of ID of purchase.order validated
         """
+        pol_obj = db.get('purchase.order.line')
+        po_obj = db.get('purchase.order')
+
         # Add an analytic distribution on PO lines that have no
-        no_ana_line_ids = self.pol_obj.search([
+        no_ana_line_ids = pol_obj.search([
             ('order_id', 'in', po_ids),
             ('analytic_distribution_id', '=', False),
         ])
-        self.pol_obj.write(no_ana_line_ids, {
+        pol_obj.write(no_ana_line_ids, {
             'analytic_distribution_id': self.get_record(db, 'distrib_1'),
         })
 
         # Check if the PO is draft
         for po_id in po_ids:
-            po_state = self.po_obj.read(po_id, ['state'])['state']
+            po_state = po_obj.read(po_id, ['state'])['state']
             self.assert_(po_state == 'draft', msg="""
 The state of the generated PO is %s - Should be 'draft'""" % po_state)
             # Validate the PO
             db.exec_workflow('purchase.order', 'purchase_confirm', po_id)
-            po_state = self.po_obj.browse(po_id).state
+            po_state = po_obj.browse(po_id).state
             self.assert_(po_state == 'confirmed', msg="""
 The state of the generated PO is %s - Should be 'confirmed'""" % po_state)
 
