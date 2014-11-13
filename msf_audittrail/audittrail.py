@@ -523,15 +523,30 @@ class audittrail_rule(osv.osv):
                             # UTP-360
                             if description == 'Pricelist':
                                 description = 'Currency'
-                            line.update({
-                              'field_id': fields_to_trace[field].id,
-                              'field_description': description,
-                              'log': self.get_sequence(cr, uid, model_name_tolog, vals['res_id'], context=context),
-                              'name': field,
-                              'new_value': new_value,
-                              'old_value': old_value,
-                            })
-                            log_line_obj.create(cr, uid, line)
+                            log_id = self.get_sequence(cr, uid, model_name_tolog, vals['res_id'], context=context)
+
+                            # UFTP-409: For some reason the log_id contains the -RW in it, making this value not integer anymore, causing error in the create audittrail method
+                            # The following fix is to avoid this case, or if log_id is still not an int --> just do not log this. 
+                            if '-RW' in log_id:
+                                log_id = log_id[:-3] # cut the -RW part
+                            try:
+                                log_id = int(log_id)
+                            except ValueError:
+                                log_id = None
+                                msg_log = _('Sorry, the object %s, field %s (id= %s) cannot be audittrail!.') % (model_name_tolog, description, vals['res_id'])
+                                logger = logging.getLogger('audittrail')
+                                logger.info(msg_log)
+                                
+                            if isinstance(log_id, int):
+                                line.update({
+                                  'field_id': fields_to_trace[field].id,
+                                  'field_description': description,
+                                  'log': log_id,
+                                  'name': field,
+                                  'new_value': new_value,
+                                  'old_value': old_value,
+                                })
+                                log_line_obj.create(cr, uid, line)
 
     def get_sequence(self, cr, uid, obj_name, res_id, context=None):
         log_seq_obj = self.pool.get('audittrail.log.sequence')

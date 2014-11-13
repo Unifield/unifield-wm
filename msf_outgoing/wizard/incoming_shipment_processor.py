@@ -213,7 +213,9 @@ class stock_incoming_processor(osv.osv):
             in_proc_obj.unlink(cr, uid, to_unlink, context=context)
 
         cr.commit()
-        new_thread = threading.Thread(target=picking_obj.do_incoming_shipment_new_cr, args=(cr, uid, ids, context))
+        #new_thread = threading.Thread(target=picking_obj.do_incoming_shipment_new_cr, args=(cr, uid, ids, context))
+        # UFTP-409: QT suggested to use this in order to have the clear error message, and not the general one
+        new_thread = threading.Thread(target=picking_obj.do_incoming_shipment, args=(cr, uid, ids, context))
         new_thread.start()
         new_thread.join(30.0)
 
