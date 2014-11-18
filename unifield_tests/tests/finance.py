@@ -43,11 +43,8 @@ class FinanceTest(UnifieldTest):
                     print(e.message)
                 except Exception, e:
                     raise Exception('error', str(e))
-            # Write the fact that data have been loaded
+            # Write the fact that data have been checked
             database.get(self.test_module_obj_name).create({'name': keyword, 'active': True})
-            print (database.colored_name + ' [' + colors.BGreen + 'OK'.center(4) + colors.Color_Off + '] %s: Data loaded' % (keyword))
-        else:
-            print (database.colored_name + ' [' + colors.BYellow + 'WARN'.center(4) + colors.Color_Off + '] %s: Data already exists' % (keyword))
         return super(FinanceTest, self)._hook_db_process(name, database)
 
     def create_journal_entry(self, database):
