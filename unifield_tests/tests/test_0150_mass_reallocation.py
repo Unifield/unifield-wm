@@ -7,9 +7,7 @@ from time import strftime
 class MassReallocationTest(FinanceTest):
 
     def test_010_fp_changes(self):
-        '''
-        Create analytic lines then reallocate them on another destination axis.
-        '''
+        '''Analytic lines reallocation on another destination'''
         # Prepare some values
         db = self.p1
         ana_obj = db.get('account.analytic.line')

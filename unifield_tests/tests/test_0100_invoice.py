@@ -8,10 +8,7 @@ from time import strftime
 class InvoiceTest(FinanceTest):
 
     def test_010_supplier_invoice(self):
-        '''
-        I create an invoice with an external supplier and one invoice line.
-        Then I validate this invoice.
-        '''
+        '''External supplier invoice with 1 line'''
         # Prepare some values
         db = self.p1
         partner_obj = db.get('res.partner')
@@ -84,7 +81,7 @@ class InvoiceTest(FinanceTest):
         self.assertNotEqual(analytic_lines, [], "No analytic lines generated!")
 
     def test_020_purchase_order_invoice(self):
-        '''
+        '''TODO: Empty test
         Create a regular purchase order with an external supplier.
         First Validate the purchase order.
         Then process the stock.picking.
