@@ -20,6 +20,12 @@ If not, use this:
 
 And it will do the trick.
 
+## Depends
+
+The script depends on:
+
+  * python-dateutil
+
 # Use it!
 
 To use PyUnit tests in this directory:
