@@ -4,8 +4,9 @@ from unifield_test import UnifieldTest
 from oerplib.error import RPCError
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
+from finance import FinanceTest
 
-class AccountTest(UnifieldTest):
+class AccountTest(FinanceTest):
 
     def setUp(self):
         '''
@@ -55,21 +56,10 @@ class AccountTest(UnifieldTest):
 
     def test_020_account_creation(self):
         '''Check P/L account creation'''
-        type_ids = self.type_obj.search([('code', '=', 'payable')])
-        type_id = type_ids and type_ids[0] or False
-        # Prepare some values
-        vals = {
-            'name': 'Test P/L Account',
-            'code': '123456-test',
-            'currency_mode': 'current',
-            'type': 'other',
-            'user_type': type_id,
-        }
-        # Account creation
         try:
-            a_id = self.acc_obj.create(vals)
+            a_id = self.create_account(self.p1, 'other', 'payable')
         except RPCError, e:
-            raise Exception("%s\n\n%s", (e.message, e.oerp_traceback))
+            raise Exception('%s\n\n%s', (e.message, e.oerp_traceback))
         # Do not forget to delete this account after tets
         self.account_to_delete.append(a_id)
 

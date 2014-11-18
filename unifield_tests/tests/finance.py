@@ -113,4 +113,43 @@ class FinanceTest(UnifieldTest):
         move_obj.button_validate([move_id]) # WARNING: we use button_validate so that it check the analytic distribution validity/presence
         return move_id, aml_expense_id, aml_counterpart_id
 
+    def create_account(self, database, code, account_type='other', user_type_code='specific', destination_code='OPS'):
+        '''
+        Create an account and send the ID
+        '''
+        # Prepare some values
+        acc_obj = database.get('account.account')
+        type_obj = database.get('account.account.type')
+        ana_obj = database.get('account.analytic.account')
+        destination_mandatory_types = ['expense']
+        # Search user_type
+        type_ids = type_obj.search([('code', '=', user_type_code)])
+        user_type_id = type_ids and type_ids[0] or False
+        if not user_type_id:
+            raise Exception("User type not found: %s" % (user_type_code))
+        # Search destination (only for expense accounts)
+        destination_id = False
+        if user_type_code in destination_mandatory_types:
+            dest_ids = ana_obj.search([('category', '=', 'DEST'), ('code', '=', destination_code)])
+            destination_id = dest_ids and dest_ids[0] or False
+            if not destination_id:
+                raise Exception("Destination not found: %s" % (destination_code))
+        # Create values
+        vals = {
+            'name': code,
+            'code': code,
+            'type': account_type,
+            'user_type': user_type_id,
+        }
+        if destination_id:
+            vals.update({'default_destination_id': destination_id})
+        # Create account
+        try:
+            res_id = acc_obj.create(vals)
+        except error.RPCError, e:
+            raise Exception("Account creation failed!\n%s\n\n%s", (e.message, e.oerp_traceback))
+        except Exception, e:
+            raise Exception('error', str(e))
+        return res_id
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
