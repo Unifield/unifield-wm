@@ -11,10 +11,14 @@ class AccountTest(UnifieldTest):
         '''
         Initialize some accounting objects
         '''
+        # Prepare some values
         self.ana_account_to_delete = []
+        self.account_to_delete = []
         db = self.p1
+        # Objects
         self.acc_obj = db.get('account.account')
         self.ana_obj = db.get('account.analytic.account')
+        self.type_obj = db.get('account.account.type')
 
     def tearDown(self):
         '''
@@ -22,6 +26,8 @@ class AccountTest(UnifieldTest):
         '''
         if self.ana_account_to_delete:
             self.ana_obj.unlink(self.ana_account_to_delete)
+        if self.account_to_delete:
+            self.acc_obj.unlink(self.account_to_delete)
 
     def test_010_coa(self):
         '''Check Chart of Account length'''
@@ -30,6 +36,7 @@ class AccountTest(UnifieldTest):
 
     def test_020_analytic_creation(self):
         '''Check activation date is 3 month ago for ANA account'''
+        # Prepare some values
         nextDate = '%s-01-01' % (datetime.now().year + 2)
         vals = {
             'name': 'Test Account',
@@ -45,6 +52,26 @@ class AccountTest(UnifieldTest):
         account = self.ana_obj.browse(ana_id)
         previousDate = (datetime.today() + relativedelta(months=-3)).strftime('%Y-%m-%d')
         self.assert_(str(account.date_start) == previousDate, "Wrong date: %s (%s). Should be: %s (%s)" % (account.date_start, type(account.date_start), previousDate, type(previousDate)))
+
+    def test_020_account_creation(self):
+        '''Check P/L account creation'''
+        type_ids = self.type_obj.search([('code', '=', 'payable')])
+        type_id = type_ids and type_ids[0] or False
+        # Prepare some values
+        vals = {
+            'name': 'Test P/L Account',
+            'code': '123456-test',
+            'currency_mode': 'current',
+            'type': 'other',
+            'user_type': type_id,
+        }
+        # Account creation
+        try:
+            a_id = self.acc_obj.create(vals)
+        except RPCError, e:
+            raise Exception("%s\n\n%s", (e.message, e.oerp_traceback))
+        # Do not forget to delete this account after tets
+        self.account_to_delete.append(a_id)
 
     def test_100_acoa(self):
         '''Print Analytic Chart of Account through the wizard'''
