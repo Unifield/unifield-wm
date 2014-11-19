@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf8 -*-
-from unifield_test import UnifieldTest
 from oerplib.error import RPCError
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
