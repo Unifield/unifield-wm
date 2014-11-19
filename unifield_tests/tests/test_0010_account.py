@@ -20,15 +20,22 @@ class AccountTest(FinanceTest):
         self.acc_obj = db.get('account.account')
         self.ana_obj = db.get('account.analytic.account')
         self.type_obj = db.get('account.account.type')
+        self.dest_link_obj = db.get('account.destination.link')
 
     def tearDown(self):
         '''
-        Clean up database
+        Clean up database by deleting created accounts.
+        NB: this check that we can delete accounts.
         '''
         if self.ana_account_to_delete:
             self.ana_obj.unlink(self.ana_account_to_delete)
         if self.account_to_delete:
-            self.acc_obj.unlink(self.account_to_delete)
+            for account in self.acc_obj.browse(self.account_to_delete):
+                if account.destination_ids:
+                    analytic_ids = [x.id for x in account.destination_ids]
+                    to_delete = self.dest_link_obj.search([('account_id', '=', account.id), ('destination_id', 'in', analytic_ids)])
+                    self.dest_link_obj.unlink(to_delete)
+                self.acc_obj.unlink([account.id])
 
     def test_010_coa(self):
         '''Check Chart of Account length'''
@@ -55,13 +62,20 @@ class AccountTest(FinanceTest):
         self.assert_(str(account.date_start) == previousDate, "Wrong date: %s (%s). Should be: %s (%s)" % (account.date_start, type(account.date_start), previousDate, type(previousDate)))
 
     def test_020_account_creation(self):
-        '''Check P/L account creation'''
+        '''Check payable account creation then expense one'''
+        # Payable account
         try:
-            a_id = self.create_account(self.p1, 'other', 'payable')
+            payable_id = self.create_account(self.p1, '123456-test', 'other', 'payable')
         except RPCError, e:
-            raise Exception('%s\n\n%s', (e.message, e.oerp_traceback))
+            raise Exception('%s\n\n%s' % (e.message, e.oerp_traceback))
         # Do not forget to delete this account after tets
-        self.account_to_delete.append(a_id)
+        self.account_to_delete.append(payable_id)
+        # Expense account
+        try:
+            expense_id = self.create_account(self.p1, '6xxx-test', 'other', 'expense', 'SUP')
+        except RPCError, e:
+            raise Exception('%s\n\n%s' % (e.message, e.oerp_traceback))
+        self.account_to_delete.append(expense_id)
 
     def test_100_acoa(self):
         '''Print Analytic Chart of Account through the wizard'''

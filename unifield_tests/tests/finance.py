@@ -120,14 +120,14 @@ class FinanceTest(UnifieldTest):
         ana_obj = database.get('account.analytic.account')
         destination_mandatory_types = ['expense']
         # Search user_type
-        type_ids = type_obj.search([('code', '=', user_type_code)])
+        type_ids = type_obj.search([('code', '=ilike', user_type_code)])
         user_type_id = type_ids and type_ids[0] or False
         if not user_type_id:
             raise Exception("User type not found: %s" % (user_type_code))
         # Search destination (only for expense accounts)
         destination_id = False
         if user_type_code in destination_mandatory_types:
-            dest_ids = ana_obj.search([('category', '=', 'DEST'), ('code', '=', destination_code)])
+            dest_ids = ana_obj.search([('category', '=', 'DEST'), ('code', '=ilike', destination_code)])
             destination_id = dest_ids and dest_ids[0] or False
             if not destination_id:
                 raise Exception("Destination not found: %s" % (destination_code))
