@@ -84,9 +84,17 @@ class AccountTest(FinanceTest):
         res = wiz_obj.button_export([wiz_id], {})
         # Check wizard result
         self.assert_(res.get('type', False) == 'ir.actions.report.xml', "Wrong report type")
-        # Launch report
-        # TODO: find a way to launch a report
-#        report_res = self.p1.report('account_analytic_chart_export', 'account.analytic.account', res.get('datas').get('ids'), 'webkit', {'show_inactive': True})
+        # Launch report. This use the name given in the parser declaration in the .py file in Unifield
+        try:
+            new_context = dict(self.p1.context)
+            new_context.update({
+                'show_inactive': True,
+                'display_fp': True,
+            })
+            report_res = self.p1.report('account.analytic.chart.export', 'account.analytic.account', res.get('datas').get('ids'), 'webkit', new_context)
+        except RPCError, e:
+            raise Exception("Analytic chart of account report failed!\n%s\n\n%s" % (e.message, e.oerp_traceback))
+        # report_res is the absolute path in the system where the result file is. If you want to make some test on it, you can.
 
 def get_test_class():
     '''Return the class to use for tests'''
