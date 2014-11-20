@@ -701,7 +701,9 @@ class HTMLTestRunner(Template_mixin):
         heading = self.HEADING_TMPL % dict(
             title = saxutils.escape(self.title),
             parameters = ''.join(a_lines),
-            description = saxutils.escape(self.description),
+            description = self.description,
+            # Deleted to permit us to display tags
+            #description = saxutils.escape(self.description),
         )
         return heading
 

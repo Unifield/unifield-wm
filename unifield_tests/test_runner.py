@@ -74,8 +74,13 @@ def main():
         # Run tests
         campaign = HTMLTestRunner.HTMLTestRunner(
             stream=output,
-            title='Example tests',
-            description='A suite of tests that permit to test PyUnit class'
+            title='Unifield tests',
+            description="""Because each software needs stability and robustness, enjoy our tests !<br />
+            Tests are done for Finance/Supply side.<br />
+            They could be used - probably - for code coverage and more.<br />
+            Do not hesitate to add tests. The more tests you have, the less bug you have.<br />
+            Each bug should imply a test in this directory. This will avoid regression in next releases.<br />
+            Enjoy !"""
         )
         print('Launch UnifieldTest ' + c.BGreen + 'Campaign' + c.Color_Off)
         print('----------------------------\n')
