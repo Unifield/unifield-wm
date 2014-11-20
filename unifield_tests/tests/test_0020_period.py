@@ -77,7 +77,7 @@ class PeriodTest(FinanceTest):
         for state in ['draft', 'field-closed', 'mission-closed', 'done']:
             period = self.period_obj.browse(period_id)
             try:
-                self.period_obj.action_set_state(jan_ids, {'state': state})
+                self.period_obj.action_set_state([period_id], {'state': state})
             except RPCError, e:
                 raise Exception('Change January period failed! Should be: %s. Current: %s\n%s\n\n%s' % (state, period.state, e.message, e.oerp_traceback))
             # Refresh period content to test its current state
@@ -91,7 +91,7 @@ class PeriodTest(FinanceTest):
         self.assert_(len(march_ids) == 1, "Too many march period found: %s" % len(march_ids))
         period_id = march_ids[0]
         try:
-            self.period_obj.action_set_state([march_ids], {'state': 'open'})
+            self.period_obj.action_set_state([period_id], {'state': 'open'})
             self.AssertTrue(False, "You should not be allowed to open march period!")
         except RPCError, e:
             pass # all is OK because we're not allowed to open march period. System should return an RPCError, which make our test valid.
