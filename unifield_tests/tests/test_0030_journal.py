@@ -35,36 +35,16 @@ class JournalTest(FinanceTest):
         '''Create a cash journal and check that a register exists'''
         # Prepare some values
         journal_name = "Cash Journal EUR"
-        vals = {
-            'name': journal_name,
-            'code': 'CSHEUR',
-            'type': 'cash',
-        }
         # Search default cash account
         type_ids = self.type_obj.search([('code', '=', 'cash')])
         self.assert_(type_ids != [], "No cash account type found!")
         a_ids = self.a_obj.search([('type', '=', 'liquidity'), ('user_type', 'in', type_ids)])
         self.assert_(a_ids != [], "No cash account found!")
         account_id = a_ids[0]
-        vals.update({
-            'default_debit_account_id': account_id,
-            'default_credit_account_id': account_id,
-        })
-        # Search analytic journal
-        aj_ids = self.aj_obj.search([('type', '=', 'cash')])
-        self.assert_(aj_ids != [], "No cash analytic journal found!")
-        vals.update({
-            'analytic_journal_id': aj_ids[0],
-        })
-        # Search EUR currency
-        c_ids = self.cur_obj.search([('name', '=', 'EUR')])
-        self.assert_(c_ids != [], "No EUR currency found!")
-        journal_currency = c_ids[0]
-        vals.update({
-            'currency': journal_currency,
-        })
-        # Create the register
-        j_id = self.j_obj.create(vals)
+        code = self.a_obj.browse(account_id).code
+        # Create the journal
+        j_id = self.create_journal(self.p1, journal_name, 'CSHEUR', 'cash', account_code=code, currency_name='EUR')
+        # Add it to journal to clean up after tests
         self.journal_to_delete.append(j_id)
         # Check data
         journal = self.j_obj.browse(j_id)
@@ -80,7 +60,7 @@ class JournalTest(FinanceTest):
         register_id = reg_ids[0]
         register = self.reg_obj.browse(register_id)
         self.assert_(register.name == journal_name, "Wrong cash register name. Expected: %s. Current: %s" % (journal_name, register.name))
-        self.assert_(register.currency.id == journal_currency, "Wrong cash register currency. Expected: %s. Current: %s" % ("EUR", register.currency.name))
+        self.assert_(register.currency.id == journal.currency.id, "Wrong cash register currency. Expected: %s. Current: %s" % ("EUR", register.currency.name))
 
 def get_test_class():
     '''Return the class to use for tests'''

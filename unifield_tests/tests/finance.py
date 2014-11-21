@@ -149,4 +149,46 @@ class FinanceTest(UnifieldTest):
             raise Exception('error', str(e))
         return res_id
 
+    def create_journal(self, database, name, code, journal_type, analytic_journal_id=False, account_code=False, currency_name=False):
+        '''
+        Create a journal with given info.
+        If journal type is bank/cash/cheque, it needs account_code and currency_name.
+        '''
+        # Some checks
+        if not name or not code or not journal_type:
+            raise Exception("Some info missing. Name: '%s'. Code: '%s'. Type: '%s'" % (name or '', code or '', journal_type or ''))
+        # Case where journal type is bank/cash/cheque
+        if journal_type in ['bank', 'cheque', 'cash']:
+            if not account_code or not currency_name:
+                raise Exception("Bank/Cash/Cheque journals need an account code and a currency. Account: '%s'. Currency: '%s'" % (account_code or '', currency_name or ''))
+        # Check that we have an analytic journal
+        if not analytic_journal_id:
+            aj_obj = database.get('account.analytic.journal')
+            aj_ids =aj_obj.search([('type', '=', journal_type)])
+            self.assert_(aj_ids != [], "No analytic journal found with this type: %s. Please add an analytic journal ID instead." % journal_type)
+            analytic_journal_id = aj_ids[0]
+        # Prepare values
+        vals = {
+            'name': name,
+            'code': code,
+            'type': journal_type,
+            'analytic_journal_id': analytic_journal_id,
+        }
+        if account_code:
+            a_obj = database.get('account.account')
+            a_ids = a_obj.search([('code', '=', account_code)])
+            self.assert_(a_ids != False, "No account found for the given code: %s." % account_code)
+            account_id = a_ids[0]
+            vals.update({
+                'default_debit_account_id': account_id,
+                'default_credit_account_id': account_id,
+            })
+        if currency_name:
+            c_obj = database.get('res.currency')
+            c_ids = c_obj.search([('name', '=', currency_name)])
+            self.assert_(c_ids != [], "Currency not found: %s" % currency_name)
+            vals.update({'currency': c_ids[0]})
+        # Create the journal
+        return database.get('account.journal').create(vals)
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
