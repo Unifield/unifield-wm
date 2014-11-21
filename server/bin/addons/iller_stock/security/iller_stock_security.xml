@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<openerp>
+    <data>
+
+        <record id="stock.menu_stock_configuration" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+        <record id="stock.menu_action_picking_tree_delivery" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0,[ref('account.group_account_manager'), ref('iller_groups.group_distri'), ref('purchase.group_purchase_manager'), ref('hr.group_hr_manager')])]" />
+        </record>
+
+    </data>
+</openerp>
+
