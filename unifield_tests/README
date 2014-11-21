@@ -24,6 +24,7 @@ And it will do the trick.
 
 The script depends on:
 
+  * python 2.7 (because of @decorator in unittest)
   * python-dateutil
 
 # Use it!
