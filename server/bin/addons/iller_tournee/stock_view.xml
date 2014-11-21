@@ -61,10 +61,8 @@
           <field name="arch" type="xml">
             <xpath expr="/tree" position="replace">
                 <tree colors="grey:state=='cancel';green:state=='draft';orange:state=='assigned';yellow:state=='waiting';red:state=='confirmed'" string="Moves" editable="top">
-                    <field name="name"/>
-<!--
+                    <!--<field name="name"/>-->
                     <field name="product_id"/>
--->
 <!--
                     <field name="prodlot_id"/>
 -->

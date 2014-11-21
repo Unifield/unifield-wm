@@ -25,7 +25,8 @@ class export_bizerba(osv.osv_memory):
         # LCOM
         res.append('LCOM')
         # (9) Num commande sur 9 chiffres (complété par des 0)
-        res.append(ustr(commande.client_order_ref[:10] or 0).rjust(9, "0"))
+        cli_ref = commande.client_order_ref
+        res.append(ustr(cli_ref and cli_ref[:10] or 0).rjust(9, "0"))
         # (9) Numéro de ligne de commande (complété par des 0)
         res.append(ustr(num_ligne or 0).rjust(9, "0"))
         # (20) Nom du client (complété par des espaces)
