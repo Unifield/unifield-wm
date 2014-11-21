@@ -149,7 +149,7 @@ class FinanceTest(UnifieldTest):
             raise Exception('error', str(e))
         return res_id
 
-    def create_journal(self, database, name, code, journal_type, analytic_journal_id=False, account_code=False, currency_name=False):
+    def create_journal(self, database, name, code, journal_type, analytic_journal_id=False, account_code=False, currency_name=False, bank_journal_id=False):
         '''
         Create a journal with given info.
         If journal type is bank/cash/cheque, it needs account_code and currency_name.
@@ -161,6 +161,9 @@ class FinanceTest(UnifieldTest):
         if journal_type in ['bank', 'cheque', 'cash']:
             if not account_code or not currency_name:
                 raise Exception("Bank/Cash/Cheque journals need an account code and a currency. Account: '%s'. Currency: '%s'" % (account_code or '', currency_name or ''))
+        # Bank journal ID is mandatory for cheque journal
+        if journal_type == 'cheque' and not bank_journal_id:
+            raise Exception("Bank journal is mandatory for cheque journals!")
         # Check that we have an analytic journal
         if not analytic_journal_id:
             aj_obj = database.get('account.analytic.journal')
@@ -188,7 +191,24 @@ class FinanceTest(UnifieldTest):
             c_ids = c_obj.search([('name', '=', currency_name)])
             self.assert_(c_ids != [], "Currency not found: %s" % currency_name)
             vals.update({'currency': c_ids[0]})
+        if bank_journal_id:
+            vals.update({'bank_journal_id': bank_journal_id})
         # Create the journal
         return database.get('account.journal').create(vals)
+
+    def create_register(self, database, name, code, register_type, account_code, currency_name, bank_journal_id=False):
+        '''
+        Create a register in the current period.
+        Return register_id and journal_id.
+        '''
+        # Create the journal
+        j_id = self.create_journal(database, name, code, register_type, account_code, currency_name, bank_journal_id)
+        # Search the register
+        reg_ids = database.get('account.bank.statement').search([('journal_id', '=', j_id)])
+        r_id = False
+        if reg_ids:
+            r_id = reg_ids[0]
+        # Return register ID, journal ID
+        return r_id, j_id
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
