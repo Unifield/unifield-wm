@@ -293,7 +293,11 @@ class iller_partner(osv.osv):
                                     string='Total ristourne'),
         'appeler_ok': fields.boolean(string='Client à appeler', help='Cochez \
                 la case si le client a besoin d\'être appelé.'),
-        'tele_user_id': fields.many2one('res.users', string='Télé-vendeuse'),
+        #'tele_user_id': fields.many2one('res.users', string='Télé-vendeuse'),
+        'tele_user_id': fields.char(
+            size=64,
+            string='Télé-vendeur',
+        ),
 
         ## Autres champs
         'commentaire_prep': fields.text(string='Commentaire Préparation'),
