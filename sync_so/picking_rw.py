@@ -857,18 +857,30 @@ class stock_picking(osv.osv):
         pick_dict = in_info.to_dict()
         pick_name = pick_dict['name']
         origin = pick_dict['origin']
-            
+        spcw_obj = self.pool.get('stock.picking.cancel.wizard')
+
         self._logger.info("+++ RW: Cancel the Picking/OUT: %s from %s to %s" % (pick_name, source, cr.dbname))
 
         rw_type = self._get_usb_entity_type(cr, uid)
         if rw_type == self.REMOTE_WAREHOUSE:
             if origin:
-                existing_pick = self.search(cr, uid, [('origin', '=', origin), ('name', '=', pick_name), ('type', '=', 'out'), ('state', '!=', 'done')], context=context)
+                existing_pick = self.search(cr, uid, [
+                    ('origin', '=', origin),
+                    ('name', '=', pick_name),
+                    ('type', '=', 'out'),
+                    ('subtype', 'in', ['picking', 'standard']),
+                    ('state', '!=', 'done'),
+                ], context=context)
                 if not existing_pick:
                     message = "Sorry, the IN: " + pick_name + " does not exist in " + cr.dbname
                     self._logger.info(message)
                     raise Exception, message
-                
+
+                tmp_context = context.copy()
+                tmp_context['active_id'] = existing_pick[0]
+                wiz_id = spcw_obj.create(cr, uid, {}, context=tpm_context)
+                spcw_obj.just_cancel(cr, uid, [wiz_id], context=context)
+
                 self.action_cancel(cr, uid, existing_pick, context=context)
                 message = "Cancelled successfully the Picking/OUT: " + pick_name
             else:
@@ -877,7 +889,7 @@ class stock_picking(osv.osv):
                 raise Exception, message
         else:
             message = "Sorry, the given operation is only available for Remote Warehouse instance!"
-        
+
         self._logger.info(message)
         return message
 
