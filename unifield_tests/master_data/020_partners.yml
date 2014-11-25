@@ -44,6 +44,24 @@
     name: S3
     partner_id: supplier3
 -
+  Create an ESC partner for test
+-
+  Create an ESC supplier
+-
+  !record {model: res.partner, id: esc_supplier_1}:
+    name: ESC Supplier 1 (Test)
+    supplier: 1
+    customer: 0
+    partner_type: 'esc'
+    property_account_receivable: account_account_receivable_supplier0
+    property_account_payable: account_account_payable_supplier0
+-
+  Create an address for esc supplier 1
+-
+  !record {model: res.partner.address, id: esc_supplier_1_addr}:
+    partner_id: esc_supplier_1
+    name: ESC Supplier 1 (Test)
+-
   Create 3 suppliers for test
 -
   Create an external supplier

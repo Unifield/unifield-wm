@@ -179,13 +179,16 @@ class purchase_order_line(osv.osv):
         '''
         Create lines according to product in list
         '''
+        if context is None:
+            context = {}
+
         p_obj  = self.pool.get('product.product')
         po_obj = self.pool.get('purchase.order')
 
         context = context is None and {} or context
         product_ids = isinstance(product_ids, (int, long)) and [product_ids] or product_ids
 
-        for p_data in p_obj.read(cr, uid, product_ids, ['uom_id', 'standard_price'], context=context):
+        for p_data in p_obj.read(cr, uid, product_ids, ['uom_id', 'standard_pri ce'], context=context):
             po_data = po_obj.read(cr, uid, parent_id, ['pricelist_id', 'partner_id', 'date_order',
                                                        'fiscal_position', 'state'], context=context)
 
@@ -229,7 +232,9 @@ class purchase_order(osv.osv):
         '''
         Open the wizard to open multiple lines
         '''
-        context = context is None and {} or context
+        if context is None:
+            context = {}
+
         ids = isinstance(ids, (int, long)) and [ids] or ids
 
         order_id = self.browse(cr, uid, ids[0], context=context)
