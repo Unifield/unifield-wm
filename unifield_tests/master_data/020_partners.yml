@@ -55,6 +55,8 @@
     partner_type: 'esc'
     property_account_receivable: account_account_receivable_supplier0
     property_account_payable: account_account_payable_supplier0
+    property_product_pricelist_purchase: purchase.list0
+    property_product_pricelist: product.list0
 -
   Create an address for esc supplier 1
 -

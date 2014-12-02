@@ -188,7 +188,7 @@ class purchase_order_line(osv.osv):
         context = context is None and {} or context
         product_ids = isinstance(product_ids, (int, long)) and [product_ids] or product_ids
 
-        for p_data in p_obj.read(cr, uid, product_ids, ['uom_id', 'standard_pri ce'], context=context):
+        for p_data in p_obj.read(cr, uid, product_ids, ['uom_id', 'standard_price'], context=context):
             po_data = po_obj.read(cr, uid, parent_id, ['pricelist_id', 'partner_id', 'date_order',
                                                        'fiscal_position', 'state'], context=context)
 

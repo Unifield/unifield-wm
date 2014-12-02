@@ -181,5 +181,28 @@ class UnifieldTest(unittest.TestCase):
         company_ids = company_obj.search([])
         return company_obj.browse(company_ids[0]).partner_id.name
 
+    def get_sync_partner_id(self, used_db, sync_db):
+        """
+        Return the ID of the partner associated to the company of the
+        synchronized database in the used database.
+
+        For example, you need the ID of the Coordination partner on the
+        project database.
+
+        :param used_db: DB on which you want the ID of the partner
+        :param sync_db: Synchonized DB to get the partner name
+        :return: The ID of the partner associated to the company of the
+                 synchronized DB.
+        """
+        partner_name = self.get_db_partner_name(sync_db)
+        partner_ids = used_db.get('res.partner').search([
+            ('name', '=', partner_name),
+        ])
+        self.assert_(
+            partner_ids,
+            "No partner found for %s on Project database" % sync_db.db_name,
+        )
+        return partner_ids[0]
+
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

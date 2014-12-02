@@ -155,6 +155,9 @@ class stock_incoming_processor(osv.osv):
         if context is None:
             context = {}
 
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+
         if not ids:
             raise osv.except_osv(
                 _('Error'),

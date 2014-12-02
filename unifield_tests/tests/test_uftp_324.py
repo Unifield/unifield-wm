@@ -90,7 +90,7 @@ class UFTP324Test(ResourcingTest):
         })
         self.p_pol_obj.create(line_values)
 
-        # Validate the sale order
+        # Validate the purchase order
         self.p1.exec_workflow('purchase.order', 'purchase_confirm', self.p_po_id)
 
         self.p_po_name = self.p_po_obj.read(self.p_po_id, ['name'])['name']
