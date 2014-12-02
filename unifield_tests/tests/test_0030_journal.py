@@ -61,6 +61,12 @@ class JournalTest(FinanceTest):
         register = self.reg_obj.browse(register_id)
         self.assert_(register.name == journal_name, "Wrong cash register name. Expected: %s. Current: %s" % (journal_name, register.name))
         self.assert_(register.currency.id == journal.currency.id, "Wrong cash register currency. Expected: %s. Current: %s" % ("EUR", register.currency.name))
+        # Check that a normal journal doesn't generate any new register
+        all_register_ids = self.reg_obj.search([])
+        purchase_journal_id = self.create_journal(self.p1, "Purchase Journal TEST", 'PURTEST', 'purchase', account_code=False)
+        self.journal_to_delete.append(purchase_journal_id)
+        new_all_register_ids = self.reg_obj.search([])
+        self.assert_(len(all_register_ids) == len(new_all_register_ids), "The purchase journal creation seems to have generated registers. It should not.")
 
 def get_test_class():
     '''Return the class to use for tests'''
