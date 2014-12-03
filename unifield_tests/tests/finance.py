@@ -180,7 +180,7 @@ class FinanceTest(UnifieldTest):
         if account_code:
             a_obj = database.get('account.account')
             a_ids = a_obj.search([('code', '=', account_code)])
-            self.assert_(a_ids != False, "No account found for the given code: %s." % account_code)
+            self.assert_(a_ids != [], "No account found for the given code: %s." % account_code)
             account_id = a_ids[0]
             vals.update({
                 'default_debit_account_id': account_id,
