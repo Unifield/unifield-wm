@@ -167,7 +167,10 @@ class FinanceTest(UnifieldTest):
         # Check that we have an analytic journal
         if not analytic_journal_id:
             aj_obj = database.get('account.analytic.journal')
-            aj_ids =aj_obj.search([('type', '=', journal_type)])
+            analytic_journal_type = journal_type
+            if journal_type in ['bank', 'cheque']:
+                analytic_journal_type = 'cash'
+            aj_ids =aj_obj.search([('type', '=', analytic_journal_type)])
             self.assert_(aj_ids != [], "No analytic journal found with this type: %s. Please add an analytic journal ID instead." % journal_type)
             analytic_journal_id = aj_ids[0]
         # Prepare values
