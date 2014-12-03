@@ -205,7 +205,7 @@ class FinanceTest(UnifieldTest):
         Return register_id and journal_id.
         '''
         # Create the journal
-        j_id = self.create_journal(database, name, code, register_type, account_code, currency_name, bank_journal_id)
+        j_id = self.create_journal(database, name, code, register_type, account_code=account_code, currency_name=currency_name, bank_journal_id=bank_journal_id)
         # Search the register
         reg_ids = database.get('account.bank.statement').search([('journal_id', '=', j_id)])
         r_id = False
