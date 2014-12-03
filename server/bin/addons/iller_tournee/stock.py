@@ -117,6 +117,9 @@ class iller_stock_move(osv.osv):
 
     def create(self, cr, uid, data, context=None):
 
+        if not 'initial_qty' in data and 'product_qty' in data:
+            data['initial_qty'] = data['product_qty']
+
         res = super(iller_stock_move, self).create(cr, uid, data, context=context)
 
         sp_obj = self.pool.get('stock.picking')
@@ -135,6 +138,14 @@ class iller_stock_move(osv.osv):
     _columns = {
         'poste_id': fields.many2one('iller.poste', string="Poste Prépa.", required=False),
         'num_lot': fields.char("Lot de production", size=64, required=False),
+        'initial_qty': fields.float(
+            string='Qté initiale',
+            digits=(16,2),
+        ),
+        'reliquat': fields.float(
+            string='Reliquat',
+            digits=(16, 2),
+        ),
         'state': fields.selection([('draft', 'Draft'), ('waiting', 'Waiting'), ('confirmed', 'Confirmed'), ('assigned', 'Available'), ('done', 'Done'), ('cancel', 'Cancelled')], 'Status', readonly=True, select=True),
     }
 
@@ -158,6 +169,22 @@ class iller_stock_move(osv.osv):
             if prod_id:
                 product = self.pool.get('product.product').browse(cr, uid, [prod_id], context={})[0]
                 res['value']['product_uos']  = product.uom_id and product.uom_id.id or False
+
+        return res
+
+    def onchange_quantity(self, cr, uid, ids, product_id=False, product_qty=0.00, product_uom=False, product_uos=False):
+        res = super(iller_stock_move, self).onchange_quantity(cr, uid, ids,
+                product_id=product_id, product_qty=product_qty, product_uom=product_uom, product_uos=product_uos)
+
+        if ids:
+            for move in self.browse(cr, uid, ids):
+                move_init_qty = move.initial_qty
+                reliquat = move.initial_qty - product_qty
+                if reliquat >= 0.00:
+                    res.setdefault('value', {})
+                    res['value'].update({'reliquat': reliquat})
+                else:
+                    res['value'].update({'reliquat': 0.00})
 
         return res
 

@@ -339,7 +339,16 @@ def _do_split(self, cr, uid, data, context):
     complete, too_many, too_few = [], [], []
     pool = pooler.get_pool(cr.dbname)
     for move in move_obj.browse(cr, uid, data['form'].get('moves',[])):
-        reliquat = data['form'].get('reliquat%s' % move.id, False)
+#        reliquat = data['form'].get('reliquat%s' % move.id, False)
+        reliquat = move.reliquat
+        if not reliquat:
+            if move.product_qty == move.initial_qty:
+                complete.append(move)
+            elif move.product_qty < move.initial_qty:
+                too_many.append(move)
+        else:
+            too_few.append(move)
+        """
         if move.product_qty == data['form']['move%s' % move.id]:
             complete.append(move)
         elif move.product_qty > data['form']['move%s' % move.id]:
@@ -349,6 +358,7 @@ def _do_split(self, cr, uid, data, context):
                 complete.append(move)
         else:
             too_many.append(move)
+        """
 
         # Average price computation
         if (pick.type == 'in') and (move.product_id.cost_method == 'average'):
