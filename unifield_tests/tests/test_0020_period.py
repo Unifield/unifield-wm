@@ -92,7 +92,7 @@ class PeriodTest(FinanceTest):
         period_id = march_ids[0]
         try:
             self.period_obj.action_set_state([period_id], {'state': 'open'})
-            self.AssertTrue(False, "You should not be allowed to open march period!")
+            self.assertTrue(False, "You should not be allowed to open march period!")
         except RPCError, e:
             pass # all is OK because we're not allowed to open march period. System should return an RPCError, which make our test valid.
 
