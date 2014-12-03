@@ -73,6 +73,57 @@ class JournalTest(FinanceTest):
         new_all_register_ids = self.reg_obj.search([])
         self.assert_(len(all_register_ids) == len(new_all_register_ids), "The purchase journal creation seems to have generated registers. It should not.")
 
+    def test_020_deletion(self):
+        """Test journal deletion for normal journal and for register journals"""
+        # First create a cash journal (with register) and a purchase one.
+        cash_journal_id = self.create_cash_journal('Cash Journal in EUR')
+        self.journal_to_delete.append(cash_journal_id)
+        purchase_journal_id = self.create_journal(self.p1, "Purchase Journal Deletion", 'PURDELTEST', 'purchase', account_code=False)
+        self.journal_to_delete.append(purchase_journal_id)
+        
+        # Then attempt to delete the purchase journal (which should be ok)
+        try:
+            self.j_obj.unlink(purchase_journal_id)
+        except RPCError, e:
+            raise Exception("%s\n\n%s", (e.message, e.oerp_traceback))
+        self.journal_to_delete.remove(purchase_journal_id) # as it was deleted, no supplementary process on it
+        
+        # Do same test on cash journal (should not work because of the register)
+        try:
+            self.j_obj.unlink(cash_journal_id)
+            self.journal_to_delete.remove(cash_journal_id)
+            self.assertTrue(False, "You should not be allowed to delete a cash journal without using the specific delete button!")
+        except RPCError, e:
+            pass # all is OK because we're not allowed to delete the cash journal without using a specific delete button
+        
+        # Try to delete the cash journal using the delete button
+        try:
+            self.j_obj.button_delete_journal([cash_journal_id])
+        except RPCError, e:
+            raise Exception("%s\n\n%s", (e.message, e.oerp_traceback))
+        self.journal_to_delete.remove(cash_journal_id) # as it was deleted, no supplementary deletion needed for this journal
+
+        # We now create a cash journal with a register and open this register. Then we attempt to delete the journal: not allowed
+        cash_journal_id = self.create_cash_journal('Deletion not allowed')
+        self.journal_to_delete.append(cash_journal_id)
+        reg_ids = self.reg_obj.search([('journal_id', '=', cash_journal_id)])
+        # Open the register
+        res_open_cash = self.reg_obj.button_open_cash(reg_ids)
+        if isinstance(res_open_cash, dict):
+            if res_open_cash.get('res_model'):
+                wiz_obj = self.p1.get(res_open_cash.get('res_model'))
+                wiz_id = wiz_obj.create({})
+                wiz_obj.button_open_empty_cashbox([wiz_id], res_open_cash.get('context'))
+        # Try to delete the cash journal (should not be possible) using the delete button
+        try:
+            self.j_obj.button_delete_journal([cash_journal_id])
+            self.journal_to_delete.remove(cash_journal_id)
+            self.assertTrue(False, "You should not be allowed to delete a cash journal that have an OPEN register!")
+        except RPCError, e:
+            pass # All is OK, we shouldn't be able to delete the journal
+        # Change the state of the register so that it can be deleted by "tearDown" method
+        self.reg_obj.write(reg_ids, {'state': 'draft'})
+
 def get_test_class():
     '''Return the class to use for tests'''
     return JournalTest
