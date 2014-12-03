@@ -406,6 +406,7 @@ def _do_split(self, cr, uid, data, context):
             move_obj.copy(cr, uid, move.id, {
                 'product_qty' : data['form']['move%s' % move.id],
                 'product_uos_qty':data['form']['move%s' % move.id],
+                'initial_qty': data['form']['move%s' % move.id],
                 'picking_id' : new_picking,
                 'state': 'assigned',
                 'move_dest_id': False,
@@ -413,8 +414,13 @@ def _do_split(self, cr, uid, data, context):
             })
 
         move_obj.write(cr, uid, [move.id], {
-            'product_qty' : move.product_qty - data['form']['move%s' % move.id],
-            'product_uos_qty':move.product_qty - data['form']['move%s' % move.id],
+#            'product_qty' : move.product_qty - data['form']['move%s' % move.id],
+#            'product_uos_qty':move.product_qty - data['form']['move%s' % move.id],
+            'initial_qty': move.reliquat,
+            'product_qty': move.reliquat,
+            'product_uos_qty': move.reliquat,
+            'reliquat': 0.00,
+            'num_lot': '',
         })
 
     if new_picking:
@@ -624,13 +630,15 @@ class iller_partial_picking(wizard.interface):
                 _get_moves,
             ],
             'result': {
-                'type': 'form',
-                'arch': _moves_arch,
-                'fields': _moves_fields,
-                'state': (
-                    ('end', '_Annuler'),
-                    ('split', '_Faire colisage')
-                )
+                'type': 'choice',
+                'next_state': lambda *a: 'split',
+#                'type': 'form',
+#                'arch': _moves_arch,
+#                'fields': _moves_fields,
+#                'state': (
+#                    ('end', '_Annuler'),
+#                    ('split', '_Faire colisage')
+#                )
             },
         },
         'split': {
