@@ -11,6 +11,8 @@ import unittest
 from connection import XMLRPCConnection as XMLConn
 from connection import UnifieldTestConfigParser
 from colors import TerminalColors
+from random import randrange
+from datetime import timedelta
 
 class UnifieldTest(unittest.TestCase):
     '''
@@ -181,5 +183,12 @@ class UnifieldTest(unittest.TestCase):
         company_ids = company_obj.search([])
         return company_obj.browse(company_ids[0]).partner_id.name
 
+    def random_date(self, start, end):
+        """Take a random date between the first date (start) and the second one (stop).
+        This method was taken from http://stackoverflow.com/questions/553303/generate-a-random-date-between-two-other-dates"""
+        delta = end - start
+        int_delta = (delta.days * 24 * 60 * 60) + delta.seconds
+        random_second = randrange(int_delta)
+        return (start + timedelta(seconds=random_second))
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
