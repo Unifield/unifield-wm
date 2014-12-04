@@ -214,4 +214,24 @@ class FinanceTest(UnifieldTest):
         # Return register ID, journal ID
         return r_id, j_id
 
+    def open_register(self, database, ids):
+        '''
+        Open the given register
+        '''
+        if not ids:
+            return False
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+        reg_obj = database.get('account.bank.statement')
+        for register in reg_obj.browse(ids):
+            if not register.journal_id.type or register.state != 'draft':
+                continue
+            if register.journal_id.type == 'cash':
+                reg_obj.button_open_cash([register.id])
+            elif register.journal_id.type == 'bank':
+                reg_obj.button_open_bank([register.id])
+            elif register.journal_id.type == 'cheque':
+                reg_obj.button_open_cheque([register.id])
+        return True
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

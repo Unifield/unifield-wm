@@ -23,10 +23,13 @@ class RegisterTest(FinanceTest):
             register_id, journal_id = self.create_register(db, 'Banktest in CHF', 'BNKCHF', 'bank', '10200', 'CHF')
             self.journal_id = journal_id
             self.register_id = register_id
+            # open register
+            self.open_register(db, [self.register_id])
         else:
             self.journal_id = j_ids[0]
             register_ids = self.reg_obj.search([('journal_id', '=', self.journal_id)])
             self.register_id = register_ids[0]
+            self.open_register(db, [self.register_id])
 
     def create_register_line(self, register_id, code, amount, date=False, document_date=False, third_partner_id=False, third_employee_id=False, third_journal_id=False):
         """Create a register line with the given account code and amount. Optionnaly third party"""
