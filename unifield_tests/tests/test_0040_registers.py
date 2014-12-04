@@ -33,6 +33,8 @@ class RegisterTest(FinanceTest):
         # Check register_id presence
         if not register_id:
             raise Exception("Register ID is missing.")
+        # Prepare some values
+        description = ''
         register = self.reg_obj.browse(register_id)
         # Check account code
         code_ids = self.a_obj.search(['|', ('name', 'ilike', code), ('code', 'ilike', code)])
@@ -50,12 +52,15 @@ class RegisterTest(FinanceTest):
         if not document_date:
             document_date = date
         # Prepare some values
+        if not description:
+            description = self.random_word()
         vals = {
             'statement_id': register_id,
             'account_id': account_id,
             'document_date': document_date,
             'date': date,
             'amount': amount,
+            'name': description,
         }
         if third_partner_id:
             vals.update({'partner_id': third_partner_id})
