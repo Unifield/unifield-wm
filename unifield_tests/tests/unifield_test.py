@@ -11,7 +11,7 @@ import unittest
 from connection import XMLRPCConnection as XMLConn
 from connection import UnifieldTestConfigParser
 from colors import TerminalColors
-from random import randrange
+from random import randrange, choice
 from datetime import timedelta
 
 class UnifieldTest(unittest.TestCase):
@@ -190,5 +190,11 @@ class UnifieldTest(unittest.TestCase):
         int_delta = (delta.days * 24 * 60 * 60) + delta.seconds
         random_second = randrange(int_delta)
         return (start + timedelta(seconds=random_second))
+
+    def random_word(self):
+        """Give a random word using a dictionnary containing a lot of french words"""
+        f = 'french_words.txt'
+        WORDS = open(f).read().splitlines()
+        return choice(WORDS)
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
