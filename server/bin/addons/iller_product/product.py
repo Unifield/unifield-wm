@@ -108,6 +108,14 @@ class product_uom(osv.osv):
                 res = self.search(cr, uid, [('name','ilike',name)], limit=limit, context=context)
                 return self.name_get(cr, uid, res, context)
             res = self.search(cr, uid, [('code_uom','ilike',name)], limit=limit, context=context)
+        else:
+            return super(product_uom, self).\
+                name_search(cr, uid,
+                            args=args,
+                            operator=operator,
+                            context=context,
+                            limit=limit)
+
         return self.name_get(cr, uid, res, context)
 
 product_uom()
