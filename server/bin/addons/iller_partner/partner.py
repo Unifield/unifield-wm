@@ -315,6 +315,7 @@ class iller_partner(osv.osv):
         'mea_choice': fields.selection([('oui', 'Oui'), ('non', 'Non')], string='Mise en avant'),
         'promo_choice': fields.selection([('oui', 'Oui'), ('non', 'Non')], string='Promo'),
         'tarif_choice': fields.selection([('blanche', 'Blanche'), ('jaune', 'Jaune')], string='Tarification'),
+        'no_frais_de_port': fields.boolean(string='Pas de frais de port'),
     }
 
     _defaults = {
