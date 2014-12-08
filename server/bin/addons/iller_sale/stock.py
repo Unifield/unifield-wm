@@ -163,8 +163,6 @@ class iller_stock_picking(osv.osv):
             res2 = super(iller_stock_picking, self).action_invoice_create(cr, uid, [sp.id], journal_id, group, inv_type, context)
             inv_ids = res2.values()
 
-            import pdb
-            pdb.set_trace()
             if inv_ids and (sp.sale_id.amount_untaxed < 50) and sp.include_port and not self.check_created_invoice(cr, uid, inv_ids[0], context=context):
                 ait_obj = self.pool.get('account.invoice.tax')
                 tax = self.pool.get('account.tax').search(cr, uid, [('amount', '=', 0.20), ('type_tax_use', '=', 'sale')], context=context)
