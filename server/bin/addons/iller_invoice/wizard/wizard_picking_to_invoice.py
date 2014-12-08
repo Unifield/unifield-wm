@@ -121,27 +121,16 @@ class wizard_picking_to_invoice(osv.osv_memory):
                     client_sans_mode.append(client_id)
                     continue
                 # Récupération des livraisons à facturer
-                sp_ids = so_obj.search(cr, uid, [('invoice_state', '=', '2binvoiced'), 
-                    ('address_id.partner_id', '=', client_id), ('state', '=', 'done')]) or None
+                sp_ids = so_obj.search(cr, uid, [
+                    ('invoice_state', '=', '2binvoiced'),
+                    ('address_id.partner_id', '=', client_id),
+                    ('state', '=', 'done'),
+                    ('date_done', '<', last_date.strftime('%Y-%m-%d')),
+                ])
 
                 # Tri des éléments à facturer
                 if sp_ids:
-                    bon_du_client = []
-                    for sp_id in sp_ids:
-                        # Recherche des dates du bon de livraison
-                        sp_date = datetime.strptime(so_obj.read(cr, uid, sp_id, ['date_done']).get('date_done'), 
-                            '%Y-%m-%d %H:%M:%S')
-                        # Si la date de la facture est inférieure à 
-                        #+ last_date, alors on récupère l'identifiant de la
-                        #+ livraison
-                        if sp_date < last_date:
-                            # Ajout du bon de livraison dans les éléments à 
-                            #+ facturer du client
-                            bon_du_client.append(sp_id)
-                    # Si le client possède des éléments à facturer, on 
-                    #+ l'ajoute dans la liste des 'bon_a_facturer'
-                    if bon_du_client:
-                        bon_a_facturer[client_id] = bon_du_client
+                    bon_a_facturer[client_id] = sp_ids
             else:
                 client_sans_mode.append(client_id)
 

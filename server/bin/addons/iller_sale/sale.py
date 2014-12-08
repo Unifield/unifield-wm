@@ -220,6 +220,7 @@ class iller_sale(osv.osv):
                 all_order_ids = self.search(cr, uid, [
                     ('partner_id', '=', order.partner_id.id),
                     ('date_order', '=', order.date_order),
+                    ('state', 'not in', ['cancel']),
                     ('id', '!=', order.id),
                 ], context=context)
                 order_infos = self.read(cr, uid, all_order_ids, ['amount_untaxed', 'frais_de_port'])

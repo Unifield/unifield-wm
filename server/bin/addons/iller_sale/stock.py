@@ -163,19 +163,21 @@ class iller_stock_picking(osv.osv):
             res2 = super(iller_stock_picking, self).action_invoice_create(cr, uid, [sp.id], journal_id, group, inv_type, context)
             inv_ids = res2.values()
 
+            import pdb
+            pdb.set_trace()
             if inv_ids and (sp.sale_id.amount_untaxed < 50) and sp.include_port and not self.check_created_invoice(cr, uid, inv_ids[0], context=context):
                 ait_obj = self.pool.get('account.invoice.tax')
-                tax = self.pool.get('account.tax').search(cr, uid, [('base_code_id', '=', 3)], context=context)
+                tax = self.pool.get('account.tax').search(cr, uid, [('amount', '=', 0.20), ('type_tax_use', '=', 'sale')], context=context)
                 # Si le montant de la commande est < 50 et que le colis comprend les frais de port
                 # alors on crée une nouvelle ligne de facture pour le frais de port
                 inv_line_id = self.pool.get('account.invoice.line').create(cr, uid, {
                     'name': "Frais de port",
                     'origin': sp.name + ':' + sp.sale_id.name,
                     'account_id': self.pool.get('account.account').search(cr, uid, [('code', '=', '70811000')], context=context)[0], #854
-                    'price_unit': sp.sale_id.frais_de_port,
+                    'price_unit': 3.0,
                     'quantity': 1.0,
                     'invoice_id': inv_ids[0],
-                    'invoice_line_tax_id': [(6, 0, tax)],
+                    'invoice_line_tax_id': [(6, 0, [tax[0]])],
                     'product_id': self.pool.get('product.product').search(cr, uid, [('default_code', '=', '999999')], context=context)[0], #2675
                 }, context=context)
                 # On recalcule les taxes
