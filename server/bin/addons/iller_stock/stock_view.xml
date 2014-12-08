@@ -56,7 +56,7 @@
             <field name="view_mode">tree,form,calendar</field>
             <field name="domain">[('state','=','done'),('type','=','out')]</field>
             <field name="context">{'contact_display': 'partner'}</field>
-            <field name="view_id" ref="stock.view_picking_out_tree"/>stock
+            <field name="view_id" ref="stock.view_picking_out_tree"/>
         </record>
         <record id="action_picking_tree_out_iller_envoyees" model="ir.actions.act_window.view">
             <field eval="1" name="sequence"/>
