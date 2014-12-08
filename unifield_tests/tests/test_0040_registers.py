@@ -47,8 +47,7 @@ class RegisterTest(FinanceTest):
         move_ids = [x.id for x in line.move_ids]
         self.assert_(move_ids == [], "Move lines detected on line (ID: %s). Should not. Current: %s" % (line_id, move_ids))
         # Attach a distribution analytic on it
-        distrib_id = self.generate_analytic_distribution(self.p1)
-        self.absl_obj.write([line.id], {'analytic_distribution_id': distrib_id}, {})
+        distrib_id = self.generate_analytic_distribution(self.p1, line, True)
         # Temp post the line
         try:
             self.absl_obj.posting([line.id], 'temp')
