@@ -59,8 +59,8 @@ def impression_bon(sale, salel, partner):
 			nblig += 1
 		return nblig
 
-	
-	ficname = "/Data/prodbon/" + sale[0]['client_order_ref']  + ".txt"
+	order_ref = sale[0]['client_order_ref'] and sale[0]['client_order_ref'] or sale[0]['name']
+	ficname = "/Data/prodbon/" + order_ref  + ".txt"
 	ficsor = open( ficname ,"w")
 	
 	#ficsor.write(" " +   "\n")
@@ -107,7 +107,7 @@ def impression_bon(sale, salel, partner):
 	 
 	nblig = affext(nblig,"NU BON	  :" )
 	nblig = affext(nblig," " * 05)
-	nblig = affext(nblig, sale[0]['client_order_ref'] )
+	nblig = affext(nblig, sale[0]['client_order_ref'] or sale[0]['name'] )
 	
 	nblig = affext(nblig,crlf)
 	

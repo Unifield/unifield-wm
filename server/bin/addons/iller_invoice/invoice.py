@@ -162,6 +162,24 @@ class account_invoice(osv.osv):
             for line in invoice.tax_line:
                 res[invoice.id]['amount_tax'] += line.amount
 
+            need_fdp = res[invoice.id]['amount_untaxed'] < 50.00
+            need_fdp = need_fdp and not invoice.partner_id.no_frais_de_port
+            
+            if need_fdp:
+                all_invoice_ids = self.search(cr, uid, [
+                    ('partner_id', '=', invoice.partner_id.id),
+                    ('date_invoice', '=', invoice.date_invoice),
+                ], context=context)
+                invoice_infos = self.read(cr, uid, all_invoice_ids, ['amount_untaxed', 'frais_de_port'])
+                need_fdp = not any([x['frais_de_port'] for x in invoice_infos])
+                need_fdp = need_fdp and (sum([x['amount_untaxed'] for x in invoice_infos]) + res[invoice.id]['amount_untaxed']) < 50.00
+
+            if need_fdp:
+                res[invoice.id]['frais_de_port'] = 3.00
+            else:
+                res[invoice.id]['frais_de_port'] = 0.00
+
+            """
             # On recherche les sale_order sur le nom par rapport à
             # l'origine de la facture
             sale_ids = so_obj.search(cr, uid, [
@@ -195,7 +213,7 @@ class account_invoice(osv.osv):
                             res[invoice.id]['frais_de_port'] = frais_de_port
                         else:
                             res[invoice.id]['frais_de_port'] = 0.00
-
+            """
             # On fait le calcul du montant final
             res[invoice.id]['amount_total'] = \
                 res[invoice.id]['amount_untaxed'] + \

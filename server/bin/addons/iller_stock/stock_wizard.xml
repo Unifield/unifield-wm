@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!-- Ancien wizard (wizard.interface) pour le colisage des produits à expédier -->
+        <wizard id="iller_partial_picking"
+                model="stock.picking"
+                multi="True"
+                name="iller_partial_picking"
+                string="Faire le colisage" />
+
+    </data>
+</openerp>

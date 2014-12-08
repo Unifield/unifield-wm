@@ -212,7 +212,22 @@ class iller_sale(osv.osv):
             res[order.id]['amount_tax'] = cur_obj.round(cr, uid, cur, val)
             res[order.id]['amount_untaxed'] = cur_obj.round(cr, uid, cur, val1)
             
-            if res[order.id]['amount_untaxed'] < 50.00:
+            need_fdp = res[order.id]['amount_untaxed'] < 50.00
+            need_fdp = need_fdp and order.tournee_id.code_tournee != 16
+            need_fdp = need_fdp and not order.partner_id.no_frais_de_port
+            
+            if need_fdp:
+                all_order_ids = self.search(cr, uid, [
+                    ('partner_id', '=', order.partner_id.id),
+                    ('date_order', '=', order.date_order),
+                    ('state', 'not in', ['cancel']),
+                    ('id', '!=', order.id),
+                ], context=context)
+                order_infos = self.read(cr, uid, all_order_ids, ['amount_untaxed', 'frais_de_port'])
+                need_fdp = not any([x['frais_de_port'] for x in order_infos])
+                need_fdp = need_fdp and (sum([x['amount_untaxed'] for x in order_infos]) + res[order.id]['amount_untaxed']) < 50.00
+
+            if need_fdp:
                 res[order.id]['frais_de_port'] = 3.00
                 res[order.id]['amount_tax'] += res[order.id]['frais_de_port'] * 0.1960
                 res[order.id]['amount_total'] = res[order.id]['amount_untaxed'] + res[order.id]['amount_tax'] + res[order.id]['frais_de_port']
@@ -232,7 +247,11 @@ class iller_sale(osv.osv):
         'code': fields.function(_get_code_client, type='char', method=True, string='Code', readonly=True),
         'frais_de_port': fields.function(_amount_all, type='float', method=True,
             string='Frais de port', digits=(3, int(config['price_accuracy'])), readonly=True,
-            help='Ajout automatique de 3 euros si le montant de la commande est inférieur à 50 euros.', multi='sums'),
+            help='Ajout automatique de 3 euros si le montant de la commande est inférieur à 50 euros.', multi='sums',
+            store={
+                'sale.order': (lambda self, cr, uid, ids, c={}: ids, ['order_line', 'partner_id', 'date_order'], 10),
+                'sale.order.line': (_get_order, ['price_unit', 'tax_id', 'discount', 'product_uom_qty'], 10),
+            }),
         ##Ajout des champs des montants de la commande pour pouvoir ajouter les frais de port
         'amount_untaxed': fields.function(_amount_all, method=True, digits=(16, int(config['price_accuracy'])), string='Untaxed Amount',
             store = {

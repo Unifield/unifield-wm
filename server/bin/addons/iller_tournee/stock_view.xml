@@ -61,23 +61,22 @@
           <field name="arch" type="xml">
             <xpath expr="/tree" position="replace">
                 <tree colors="grey:state=='cancel';green:state=='draft';orange:state=='assigned';yellow:state=='waiting';red:state=='confirmed'" string="Moves" editable="top">
-                    <field name="name"/>
-<!--
+                    <!--<field name="name"/>-->
                     <field name="product_id"/>
--->
 <!--
                     <field name="prodlot_id"/>
 -->
                     <field name="num_lot"/>
                     <field name="product_qty" on_change="onchange_quantity(product_id, product_qty, product_uom, product_uos)"/>
-                    <field name="product_uom" string="UOM"/>
-                    <field name="poste_id" />
-                    <field name="picking_id" select="1"/>
+                    <field name="product_uom" string="UOM" readonly="1" />
+                    <field name="reliquat" />
+                    <field name="poste_id" readonly="1" />
+                    <field name="picking_id" select="1" invisible="1" />
 
-                    <field name="location_id"/>
-                    <field name="location_dest_id"/>
-                    <field name="date_planned"/>
-                    <field name="state"/>
+                    <field name="location_id" invisible="1" />
+                    <field name="location_dest_id" invisible="1" />
+                    <field name="date_planned" invisible="1" />
+                    <field name="state" invisible="1" />
                 </tree>
             </xpath>
           </field>

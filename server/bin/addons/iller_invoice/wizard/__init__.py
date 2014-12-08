@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- encoding: utf-8 -*-
+#-*- encoding:utf-8 -*-
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution    
@@ -21,9 +21,7 @@
 #
 ##############################################################################
 
-import invoice
-import commission
-import report
-import wizard
+import wizard_picking_to_invoice
+import wizard_account_move_export
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

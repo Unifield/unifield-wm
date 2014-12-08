@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- encoding: utf-8 -*-
+#-*- encoding:utf-8 -*-
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution    
@@ -21,9 +21,27 @@
 #
 ##############################################################################
 
-import invoice
-import commission
-import report
-import wizard
-
+{
+    'name': 'Gestion des stocks',
+    'version': '0.1',
+    'category': 'Generic Modules/Projects & Services',
+    'description': """
+        Ce module ajoute la gestion des reliquats pour les livraisons de Iller.
+""",
+    'author': 'TeMPO Consulting',
+    'website': 'http://www.tempo-consulting.fr',
+    'depends': [
+        'stock',
+    ],
+    'init_xml': [],
+    'demo_xml': [],
+    'update_xml': [
+        'stock_wizard.xml',
+        'stock_view.xml',
+        #'security/ir.model.access.csv',
+        #'security/iller_stock_security.xml',
+    ],
+    'installable': True,
+    'active': False,
+}
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -18,6 +18,40 @@
                 </data>
             </field>
         </record>
+
+        <!-- Wizard pour la génération des factures à partir des bons de préparations pour l'ensemble des clients suivant leur délai de paiement -->
+        <record model="ir.ui.view" id="wizard_picking_to_invoice_form">
+            <field name='name'>wizard.picking.to.invoice.form</field>
+            <field name='model'>wizard.picking.to.invoice</field>
+            <field name='type'>form</field>
+            <field name='arch' type='xml'>
+                <form string="Création des factures - Assistant">
+                    <group colspan="4" col="1">
+                        <label>
+Cet assistant va lancer le processus de génération des factures en arrière plan. Cela prendra de quelques minutes à quelques heures suivant la quantité de clients et de bons de préparation à traiter. Merci de patienter. Le résultat sera visible dans une requête utilisateur pour l'utilisateur qui a lancé la demande de traitement.
+                        </label>
+                    </group>
+                    <group colspan="4" col="2">
+                        <field name="journal_id" />
+                    </group>
+                    <button string='Ok' name='action_make_invoices' type='object' icon='gtk-apply' colspan="2"/>
+                    <button string='Cancel' special='cancel' icon='gtk-cancel' colspan="2"/>
+                </form>
+            </field>
+        </record>
+
+        <!-- Actions -->
+        <act_window id="action_make_invoices"
+                    name="Générer les factures"
+                    res_model="wizard.picking.to.invoice"
+                    view_mode='form'
+                    view_type='form'
+                    target='new' />
+
+        <!-- Menus -->
+        <menuitem id="menu_makes_invoices"
+                  action="action_make_invoices"
+                  parent="account.menu_finance" />
         
     </data>
 </openerp>
