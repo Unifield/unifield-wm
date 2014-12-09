@@ -258,19 +258,19 @@ class UnifieldTest(unittest.TestCase):
             elif object_name == 'sale.order': # default field
                 account_id = False
             elif object_name == 'purchase.order.line': # default field
-                pass
+                account_id = record.account_4_distribution.id or False
             elif object_name == 'sale.order.line': # default field
-                pass
+                account_id = record.account_4_distribution.id or False
             elif object_name == 'account.move.line': # default field
-                pass
+                account_id = record.account_id.id or False
             elif object_name == 'account.commitment': # default field
                 account_id = False
             elif object_name == 'account.commitment.line': # default field
-                pass
+                account_id = record.account_id.id or False
             elif object_name == 'account.invoice': # default field
                 account_id = False
             elif object_name == 'account.invoice.line': # default field
-                pass
+                account_id = record.account_id.id or False
             elif object_name == 'account.analytic.line':
                 field = 'distribution_id'
                 account_id = record.general_account_id.id or False
