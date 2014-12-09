@@ -204,6 +204,7 @@ class UnifieldTest(unittest.TestCase):
         :param write: If True, attempt to write the analytic distribution result to the given object. It only works if you give a record!
         :return: analytic distribution ID (or False if failed)
         """
+        # TODO: Add a new attribute "account" that permit to only return a compatible distribution on this account (account.account)
         # Prepare some value
         res = False
         company_obj = db.get('res.company')

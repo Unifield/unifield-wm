@@ -235,7 +235,7 @@ class FinanceTest(UnifieldTest):
                 reg_obj.button_open_cheque([register.id])
         return True
 
-    def create_register_line(self, register_id, code, amount, date=False, document_date=False, third_partner_id=False, third_employee_id=False, third_journal_id=False):
+    def create_register_line(self, register_id, code, amount, generate_distribution=False, date=False, document_date=False, third_partner_id=False, third_employee_id=False, third_journal_id=False):
         """Create a register line with the given account code and amount. Optionnaly third party"""
         # Check register_id presence
         if not register_id:
@@ -247,7 +247,8 @@ class FinanceTest(UnifieldTest):
         code_ids = self.a_obj.search(['|', ('name', 'ilike', code), ('code', 'ilike', code)])
         if len(code_ids) != 1:
             raise Exception("Error searching for this account code: %s. Need %s codes." % (code, len(code_ids) > 1 and 'less' or 'more'))
-        account_id = code_ids[0]
+        account = self.a_obj.browse(code_ids[0])
+        account_id = account.id
         # Check dates
         if not date:
             date_start = register.period_id.date_start or False
@@ -275,6 +276,12 @@ class FinanceTest(UnifieldTest):
             vals.update({'employee_id': third_employee_id})
         if third_journal_id:
             vals.update({'transfer_journal_id': third_journal_id})
-        return self.absl_obj.create(vals)
+        res = self.absl_obj.create(vals)
+        if generate_distribution and account.is_analytic_addicted:
+            absl = self.absl_obj.browse(res)
+            distrib_id = self.generate_analytic_distribution(self.p1, absl, True)
+        else:
+            distrib_id = False
+        return res, distrib_id
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
