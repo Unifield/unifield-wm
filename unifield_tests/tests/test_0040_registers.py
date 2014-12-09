@@ -3,7 +3,7 @@
 from oerplib.error import RPCError
 from finance import FinanceTest
 from datetime import datetime
-from random import randint
+from random import randint, choice
 
 class RegisterTest(FinanceTest):
 
@@ -18,6 +18,7 @@ class RegisterTest(FinanceTest):
         self.j_obj = db.get('account.journal')
         self.reg_obj = db.get('account.bank.statement') # Register
         self.absl_obj = db.get('account.bank.statement.line') # Register Line
+        self.partner_obj = db.get('res.partner')
         # Check that the register used for test already exists (check journal)
         j_ids = self.j_obj.search([('type', '=', 'bank'), ('code', '=', 'BNKCHF')])
         if not j_ids:
@@ -36,7 +37,7 @@ class RegisterTest(FinanceTest):
         """Direct payment: a register line with an expense account and WITHOUT 3RD PARTY."""
         # Create the direct payment
         amount = -1 * randint(1, 10000)
-        line_id = self.create_register_line(self.register_id, '63000', amount)
+        line_id, distrib_id = self.create_register_line(self.register_id, '63000', amount, True)
         if not line_id:
             raise Exception("No register line created.")
         # Some checks on it
@@ -46,8 +47,6 @@ class RegisterTest(FinanceTest):
         # Check that no move line is attached
         move_ids = [x.id for x in line.move_ids]
         self.assert_(move_ids == [], "Move lines detected on line (ID: %s). Should not. Current: %s" % (line_id, move_ids))
-        # Attach a distribution analytic on it
-        distrib_id = self.generate_analytic_distribution(self.p1, line, True)
         # Temp post the line
         try:
             self.absl_obj.posting([line.id], 'temp')
@@ -68,6 +67,21 @@ class RegisterTest(FinanceTest):
         line = self.absl_obj.browse(line_id) # need to browse register line to update record values
         # Check state, move lines presence and journal entry state
         self.assert_(line.state == 'hard', "Wrong line state (ID: %s). Should be: %s. Current: %s" % (line.id, 'hard', line.state))
+
+    def test_020_direct_expense(self):
+        """A direct expense is a register expense line with a supplier 3RD party that generates a supplementary Journal Entry"""
+        # Prepare some values
+        amount = -1 * randint(1, 10000)
+        partner_ids = self.partner_obj.search([('supplier', '=', True)])
+        self.assert_(partner_ids != [], "No partner found!")
+        partner_id = choice(partner_ids)
+        # Create the direct expense
+        line_id, distrib_id = self.create_register_line(self.register_id, '61000', amount, True, False, False, partner_id)
+        if not line_id:
+            raise Exception("No register line created.")
+        # Some checks on it
+        line = self.absl_obj.browse(line_id)
+        self.assert_(line.state == 'draft', "Wrong line state (ID: %s). Should be: %s. Current: %s" % (line_id, 'draft', line.state or ''))
 
 def get_test_class():
     '''Return the class to use for tests'''
