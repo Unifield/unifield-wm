@@ -79,12 +79,24 @@ class iller_stock_picking(osv.osv):
 
     def _is_reliquat(self, cr, uid, ids, name, args, context=None):
         res = {}
+        sale_obj = self.pool.get('sale.order')
         # On regarde si le stock picking en cours est un reliquat
         for this in self.browse(cr, uid, ids, context=context):
             if not this.backorder_id:
-                res[this.id] = True
+                date_order = this.sale_id and this.sale_id.date_order or time.strftime('%Y-%m-%d')
+                order_ids = sale_obj.search(cr, uid, [
+                    ('partner_id', '=', this.address_id.partner_id.id),
+                    ('date_order', '=', date_order),
+                ], context=context)
+                order_brw = sale_obj.read(cr, uid, order_ids, ['frais_de_port', 'amount_untaxed'])
+                fdp = this.sale_id and this.sale_id.frais_de_port or False
+                fdp = fdp and sum([x['amount_untaxed'] for x in order_brw]) < 50.0
+                fpd = fdp and any([x['frais_de_port'] for x in order_brw if not this.sale_id or x['id'] != this.sale_id.id])
+
+                res[this.id] = fdp
             else:
                 res[this.id] = False
+                continue
         return res
 
     _columns = {

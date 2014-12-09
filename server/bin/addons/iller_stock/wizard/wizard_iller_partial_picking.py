@@ -338,7 +338,8 @@ def _do_split(self, cr, uid, data, context):
 
     complete, too_many, too_few = [], [], []
     pool = pooler.get_pool(cr.dbname)
-    for move in move_obj.browse(cr, uid, data['form'].get('moves',[])):
+
+    for move in pick.move_lines:
 #        reliquat = data['form'].get('reliquat%s' % move.id, False)
         reliquat = move.reliquat
         if not reliquat:
@@ -370,10 +371,10 @@ def _do_split(self, cr, uid, data, context):
             product = product_obj.browse(cr, uid, [move.product_id.id])[0]
             user = users_obj.browse(cr, uid, [uid])[0]
 
-            qty = data['form']['move%s' % move.id]
-            uom = data['form']['uom%s' % move.id]
-            price = data['form']['price%s' % move.id]
-            currency = data['form']['currency%s' % move.id]
+            qty = move.product_qty
+            uom = move.product_uom
+            price = move.price_unit
+            currency = move.pricelist_id and move.pricelist_id.currency_id.id or user.company_id.currency_id.id
 
             qty = uom_obj.compute_qty(cr, uid, uom, qty, product.uom_id.id)
             if qty > 0:
@@ -402,16 +403,16 @@ def _do_split(self, cr, uid, data, context):
                 'state':'draft',
             })
 
-        if data['form']['move%s' % move.id] != 0:
-            move_obj.copy(cr, uid, move.id, {
-                'product_qty' : data['form']['move%s' % move.id],
-                'product_uos_qty':data['form']['move%s' % move.id],
-                'initial_qty': data['form']['move%s' % move.id],
-                'picking_id' : new_picking,
-                'state': 'assigned',
-                'move_dest_id': False,
-                'price_unit': move.price_unit,
-            })
+        move_obj.copy(cr, uid, move.id, {
+            'product_qty': move.product_qty,
+            'product_uos_qty': move.product_qty,
+            'initial_qty': move.product_qty,
+            'picking_id': new_picking,
+            'state': 'assigned',
+            'move_dest_id': False,
+            'price_unit': move.price_unit,
+            'num_lot': move.num_lot,
+        })
 
         move_obj.write(cr, uid, [move.id], {
 #            'product_qty' : move.product_qty - data['form']['move%s' % move.id],
@@ -429,21 +430,21 @@ def _do_split(self, cr, uid, data, context):
         })
         for move in too_many:
             move_obj.write(cr, uid, [move.id], {
-                'product_qty' : data['form']['move%s' % move.id],
-                'product_uos_qty': data['form']['move%s' % move.id],
+                'product_qty' : move.product_qty,
+                'product_uos_qty': move.product_qty,
                 'picking_id': new_picking,
             })
     else:
         # Cas des éléments complets mais possiblement modifiés
         for move in complete:
             move_obj.write(cr, uid, [move.id], {
-                'product_qty': data['form']['move%s' % move.id],
-                'product_uos_qty': data['form']['move%s' % move.id]
+                'product_qty': move.product_qty,
+                'product_uos_qty': move.product_qty,
             })
         for move in too_many:
             move_obj.write(cr, uid, [move.id], {
-                'product_qty': data['form']['move%s' % move.id],
-                'product_uos_qty': data['form']['move%s' % move.id]
+                'product_qty': move.product_qty,
+                'product_uos_qty': move.product_qty
             })
 
     data['new_picking'] = new_picking
