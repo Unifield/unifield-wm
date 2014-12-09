@@ -51,12 +51,23 @@ class RegisterTest(FinanceTest):
         # Temp post the line
         try:
             self.absl_obj.posting([line.id], 'temp')
-        except RPCError, e:
+        except RPCError as e:
             raise Exception('ERROR WHILE %s POSTING LINE:\n%s\n\n%s' % ('temp', e.message, e.oerp_traceback))
+        line = self.absl_obj.browse(line_id) # need to browse register line to update record values
         # Check state, move lines presence and journal entry state
         self.assert_(line.state == 'temp', "Wrong line state (ID: %s). Should be: %s. Current: %s" % (line_id, 'temp', line.state or ''))
         move_ids = [x.id for x in line.move_ids]
         self.assert_(move_ids != [], "No move lines detected on line (ID: %s)." % (line_id))
+        for move in line.move_ids:
+            self.assert_(move.state == 'draft', "Register line (ID: %s) have journal entry (ID: %s) in wrong state. Should be draft. Current: %s." % (line.id, move.id, move.state))
+        # Hard post the line
+        try:
+            self.absl_obj.posting([line.id], 'hard')
+        except RPCError as e:
+            raise Exception('ERROR WHILE %s POSTING LINE:\n%s\n\n%s' % ('hard', e.message, e.oerp_traceback))
+        line = self.absl_obj.browse(line_id) # need to browse register line to update record values
+        # Check state, move lines presence and journal entry state
+        self.assert_(line.state == 'hard', "Wrong line state (ID: %s). Should be: %s. Current: %s" % (line.id, 'hard', line.state))
 
 def get_test_class():
     '''Return the class to use for tests'''
