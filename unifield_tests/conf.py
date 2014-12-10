@@ -18,7 +18,7 @@ import os
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
-sys.path.insert(0, os.path.abspath('./tests'))
+sys.path.insert(0, os.path.abspath('tests'))
 
 # -- General configuration ------------------------------------------------
 
@@ -46,7 +46,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Unifield tests software'
+project = u'Unifield testing tool'
 copyright = u'2014, TeMPO Consulting'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -196,7 +196,7 @@ html_static_path = ['_static']
 #html_search_scorer = 'scorer.js'
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'Unifieldtestssoftwaredoc'
+htmlhelp_basename = 'Unifieldtestingtooldoc'
 
 # -- Options for LaTeX output ---------------------------------------------
 
@@ -218,7 +218,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  ('index', 'Unifieldtestssoftware.tex', u'Unifield tests software Documentation',
+  ('index', 'Unifieldtestingtool.tex', u'Unifield testing tool Documentation',
    u'TeMPO Consulting', 'manual'),
 ]
 
@@ -248,7 +248,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'unifieldtestssoftware', u'Unifield tests software Documentation',
+    ('index', 'unifieldtestingtool', u'Unifield testing tool Documentation',
      [u'TeMPO Consulting'], 1)
 ]
 
@@ -262,8 +262,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'Unifieldtestssoftware', u'Unifield tests software Documentation',
-   u'TeMPO Consulting', 'Unifieldtestssoftware', 'One line description of project.',
+  ('index', 'Unifieldtestingtool', u'Unifield testing tool Documentation',
+   u'TeMPO Consulting', 'Unifieldtestingtool', 'One line description of project.',
    'Miscellaneous'),
 ]
 
@@ -278,3 +278,6 @@ texinfo_documents = [
 
 # If true, do not generate a @detailmenu in the "Top" node's menu.
 #texinfo_no_detailmenu = False
+
+# Include TODO element in documentation
+todo_include_todos = True

@@ -19,14 +19,15 @@ from time import strftime
 
 class UnifieldTest(unittest.TestCase):
     '''
-    Main test class for Unifield tests using TestCase and Openerplib as main inheritance
-    @var sync: contains Synchro Server oerplib connection
-    @var hq1: same as sync for HQ1 DB
-    @var c1: same as sync for HQ1C1 DB
-    @var p1: same as sync for HQ1C1P1 DB
-    @var db: contains the list of DB connections
-    @var test_module_name: name of the module used to create extended table for tests
-    @var test_module_obj_name: name of the OpenERP object to use to access to extended table
+    Main test class for Unifield tests using TestCase and Openerplib as main inheritance.
+
+    :var sync: contains Synchro Server oerplib connection
+    :var hq1: same as sync for HQ1 DB
+    :var c1: same as sync for HQ1C1 DB
+    :var p1: same as sync for HQ1C1P1 DB
+    :var db: contains the list of DB connections
+    :var test_module_name: name of the module used to create extended table for tests
+    :var test_module_obj_name: name of the OpenERP object to use to access to extended table
     '''
     # global variable
     db = {}
@@ -130,8 +131,8 @@ class UnifieldTest(unittest.TestCase):
         :param db: Connection to the database
         :param object_ref: XML ID of the object to find
 
-        :return The ID of the object given in object_ref
-        :rtype integer or False
+        :return: The ID of the object given in object_ref
+        :rtype: integer or False
         '''
         # Object
         data_obj = db.get('ir.model.data')
@@ -150,6 +151,7 @@ class UnifieldTest(unittest.TestCase):
         '''
         Connect the 'db' database to the sync. server and run  synchronization.
         If no database givent in parameters, sync. all databases.
+
         :param db: DB connection to synchronize (can be None or a list).
         :return: True
         '''
@@ -172,6 +174,7 @@ class UnifieldTest(unittest.TestCase):
     def get_db_partner_name(self, db):
         '''
         Return the name of partner associated to the company of the database.
+
         :param db: DB connection of which we get the partner.
         :return: Name of the partner associated to the company of the database.
         '''
@@ -196,6 +199,7 @@ class UnifieldTest(unittest.TestCase):
 
     def generate_analytic_distribution(self, db, record=False, write=False):
         """Create an analytic distribution and return its ID.
+
         :param db: DB connection to fetch data
         :param record: Browse record of the object on which we want a generic analytic distribution. If False, give a default analytic distribution.
         :param write: If True, attempt to write the analytic distribution result to the given object. It only works if you give a record!
@@ -287,7 +291,9 @@ class UnifieldTest(unittest.TestCase):
         Create a journal entry (account.move) with 2 lines: 
         - an expense one (with an analytic distribution)
         - a counterpart one
-        Return the move ID, expense line ID, then counterpart ID
+
+        :return: move ID, expense line ID and counterpart ID
+        :rtype: int
         '''
         # Prepare some values
         move_obj = database.get('account.move')
@@ -437,7 +443,9 @@ class UnifieldTest(unittest.TestCase):
     def create_register(self, database, name, code, register_type, account_code, currency_name, bank_journal_id=False):
         '''
         Create a register in the current period.
-        Return register_id and journal_id.
+        
+        :return: register_id and journal_id
+        :rtype: int
         '''
         # Create the journal
         j_id = self.create_journal(database, name, code, register_type, account_code=account_code, currency_name=currency_name, bank_journal_id=bank_journal_id)

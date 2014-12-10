@@ -1,11 +1,20 @@
 #!/usr/bin/env python
 # -*- coding: utf8 -*-
+"""
+.. module:: resourcing
+   :platform: Unix
+   :synopsis: Class used for all other Supply tests in Unifield.
+
+.. moduleauthor:: Quentin THEURET <qt@tempo-consulting.fr>
+
+"""
 from __future__ import print_function
 from unifield_test import UnifieldTest
 
 import time
 
 class ResourcingTest(UnifieldTest):
+    """Supply class"""
 
     def setUp(self):
         self.used_db = self.c1
@@ -25,7 +34,8 @@ class ResourcingTest(UnifieldTest):
     def tearDown(self):
         """
         Done all remaining documents
-        :return:
+
+        :return: Nothing
         """
         db = self.used_db
 
@@ -50,8 +60,8 @@ class ResourcingTest(UnifieldTest):
         :param db: Cursor to the database
         :param order_to_checK: ID of the order to check
 
-        :return True
-        :rtype bool
+        :return: True
+        :rtype: bool
         """
         order_obj = db.get('sale.order')
         proc_obj = db.get('procurement.order')
@@ -93,8 +103,8 @@ No split of FO found !""")
         :param db: Cursor to the database
         :param values: Default values to update
 
-        :return The values of the order
-        :rtype dict
+        :return: The values of the order
+        :rtype: dict
         """
         if values is None:
             values = {}
@@ -127,8 +137,8 @@ No split of FO found !""")
         :param db: Cursor to the database
         :param values: Default values to update
 
-        :return The values of the internal request
-        :rtype dict
+        :return: The values of the internal request
+        :rtype: dict
         """
         if values is None:
             values = {}
@@ -152,8 +162,8 @@ No split of FO found !""")
         :param db: Cursor to the database
         :param values: Default values to update
 
-        :return The values for the order
-        :rtype dict
+        :return: The values for the order
+        :rtype: dict
         """
         if not values:
             values = {}
@@ -168,19 +178,23 @@ No split of FO found !""")
     def create_order(self, db):
         """
         Create a field order or an internal request (sale.order) with 4 lines:
-          - 2 lines with LOG products:
-            - 1 line with 10 PCE
-            - 1 line with 20 PCE
-          - 2 lines with MED products:
-            - 1 line with 30 PCE
-            - 1 line with 40 PCE
+
+        * 2 lines with LOG products:
+
+          - 1 line with 10 PCE
+          - 1 line with 20 PCE
+
+        * 2 lines with MED products:
+
+          - 1 line with 30 PCE
+          - 1 line with 40 PCE
 
         :param db: Connection to the database
-        :param pr: True if we want to create an Internal request, False if we
-                   want to create a Field Order
+        :param pr: True if we want to create an Internal request, False if we \
+            want to create a Field Order
 
-        :return The ID of the new Internal request or field orde
-        :rtype int
+        :return: The ID of the new Internal request or field orde
+        :rtype: int
         """
 
         # Prepare values for the field order
@@ -240,7 +254,7 @@ No split of FO found !""")
         Create an order and source all lines of this order to a PO (same
         supplier) for all lines.
 
-        :return The ID of the created order, the list of ID of lines of the
+        :return: The ID of the created order, the list of ID of lines of the
                 created order, the list of ID of PO created to source the
                 order and a list of ID of PO lines created to source the
                 order.
@@ -290,7 +304,7 @@ No split of FO found !""")
 
         :param db: Connection to the database
         :param po_ids: List of ID of purchase.order to validate
-        :return The list of ID of purchase.order validated
+        :return: The list of ID of purchase.order validated
         """
         # Add an analytic distribution on PO lines that have no
         no_ana_line_ids = self.pol_obj.search([
@@ -319,6 +333,7 @@ The state of the generated PO is %s - Should be 'confirmed'""" % po_state)
         1/ Check if the PO are in 'confirrmed' state
         2/ Confirm them
         3/ Check if all PO are now in 'assigned' state
+
         :param db: Connection to the database
         :param po_ids: List of ID of purchase.order to confirm
         :param dcd: Delivery confirmed date to set
@@ -356,6 +371,7 @@ The state of the generated PO is %s - Should be 'confirmed'""" % po_state)
     def _get_number_of_ir_valid_lines(self, db, order_id):
         """
         Returns the number of lines in the FO
+
         :param db: Connection to the database
         :param order_id: ID of the sale.order to get the number of lines
         :return: The number of lines in the FO
@@ -368,6 +384,7 @@ The state of the generated PO is %s - Should be 'confirmed'""" % po_state)
     def _get_number_of_fo_valid_lines(self, db, order_id):
         """
         Returns the number of lines in the FO
+
         :param db: Connection to the database
         :param order_id: ID of the sale.order to get the number of lines
         :return: The number of lines in the FO
@@ -383,6 +400,7 @@ The state of the generated PO is %s - Should be 'confirmed'""" % po_state)
     def create_analytic_distribution(self, db):
         """
         Create an analytic distribution
+
         :param db: Connection on which the distribution must be created
         :return: The ID of distribution
         """

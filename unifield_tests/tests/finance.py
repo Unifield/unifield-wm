@@ -1,11 +1,20 @@
 #!/usr/bin/env python
 # -*- coding: utf8 -*-
+"""
+.. module:: finance
+   :platform: Unix
+   :synopsis: Class used for all other Finance tests in Unifield.
+
+.. moduleauthor:: Olivier DOSSMANN <od@tempo-consulting.fr>
+
+"""
 from __future__ import print_function
 from unifield_test import UnifieldTest
 from time import strftime
 from oerplib import error
 
 class FinanceTest(UnifieldTest):
+    """Finance Class"""
 
     def __init__(self, *args, **kwargs):
         '''
