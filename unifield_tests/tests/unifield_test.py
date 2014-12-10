@@ -1,11 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf8 -*-
-'''
-Created on Feb 28, 2014
+"""
+.. module:: unifield_test
+   :platform: Unix
+   :synopsis: Class used for all other tests in Unifield.
 
-@author: qt
-Modified by 'od' on 2014 March, the 11th
-'''
+.. moduleauthor:: Quentin THEURET <qt@tempo-consulting.fr>
+
+"""
 from __future__ import print_function
 import unittest
 from connection import XMLRPCConnection as XMLConn
@@ -146,12 +148,9 @@ class UnifieldTest(unittest.TestCase):
 
     def synchronize(self, db=None):
         '''
-        Connect the 'db' database to the sync. server
-        and run  synchronization.
-        If no database givent in parameters, sync. all
-        databases.
-        :param db: DB connection to synchronize (can be None
-                   or a list.
+        Connect the 'db' database to the sync. server and run  synchronization.
+        If no database givent in parameters, sync. all databases.
+        :param db: DB connection to synchronize (can be None or a list).
         :return: True
         '''
         if not db:
@@ -172,12 +171,9 @@ class UnifieldTest(unittest.TestCase):
 
     def get_db_partner_name(self, db):
         '''
-        Return the name of partner associated
-        to the company of the database
-        :param db: DB connection of which we
-                   get the partner.
-        :return: Name of the partner associated
-                 to the company of the database
+        Return the name of partner associated to the company of the database.
+        :param db: DB connection of which we get the partner.
+        :return: Name of the partner associated to the company of the database.
         '''
         company_obj = db.get('res.company')
 
@@ -289,8 +285,8 @@ class UnifieldTest(unittest.TestCase):
     def create_journal_entry(self, database):
         '''
         Create a journal entry (account.move) with 2 lines: 
-          - an expense one (with an analytic distribution)
-          - a counterpart one
+        - an expense one (with an analytic distribution)
+        - a counterpart one
         Return the move ID, expense line ID, then counterpart ID
         '''
         # Prepare some values
