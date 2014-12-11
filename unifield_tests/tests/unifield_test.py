@@ -40,6 +40,10 @@ class UnifieldTest(unittest.TestCase):
     def _addConnection(self, db_suffix, name):
         '''
         Add new connection
+
+        :param str db_suffix: Database suffix. Example (database is uftp362_HQ1C1P1): HQ1C1P1
+
+        :return: Nothing
         '''
         con = XMLConn(db_suffix)
         setattr(self, name, con)
@@ -51,11 +55,18 @@ class UnifieldTest(unittest.TestCase):
 
     def _hook_db_process(self, name, database):
         '''
-        Some process to do for each database (except SYNC DB)
+        Some process you want to add for each database (except SYNC DB).
+
+        :return: True
+        :rtype: bool
         '''
         return True
 
     def __init__(self, *args, **kwargs):
+        """
+        Install this module on each databases to load master data. Then flag database as "loaded" so 
+        that we don't reload master data if this script is reloaded on same databases.
+        """
         # Default behaviour
         super(UnifieldTest, self).__init__(*args, **kwargs)
         # Prepare some values
@@ -113,7 +124,13 @@ class UnifieldTest(unittest.TestCase):
 
     def is_keyword_present(self, db, keyword):
         '''
-        Check that the given keyword is present in given db connection and active.
+        Check on each database if a specific parameter is present and active.
+        
+        :param db: oerplib database xmlrpc connection on which the check is done
+        :param str keyword: string you're searching for
+
+        :return: True
+        :rtype: bool
         '''
         res = False
         if not db or not keyword:
@@ -126,13 +143,14 @@ class UnifieldTest(unittest.TestCase):
 
     def get_record(self, db, object_ref, module=None):
         '''
-        Returns the object created by the test files.
+        Get object that have 'object_ref' as XML ID reference.
+        Commonly used to find test file object with its ID.
 
         :param db: Connection to the database
         :param object_ref: XML ID of the object to find
 
         :return: The ID of the object given in object_ref
-        :rtype: integer or False
+        :rtype: int or False
         '''
         # Object
         data_obj = db.get('ir.model.data')
@@ -149,8 +167,8 @@ class UnifieldTest(unittest.TestCase):
 
     def synchronize(self, db=None):
         '''
-        Connect the 'db' database to the sync. server and run  synchronization.
-        If no database givent in parameters, sync. all databases.
+        Connect the 'db' database to the synchronization server and run a synchronization.
+        If no database given in parameters, sync. all databases.
 
         :param db: DB connection to synchronize (can be None or a list).
         :return: True
@@ -170,6 +188,7 @@ class UnifieldTest(unittest.TestCase):
         conn_obj.action_connect(conn_ids)
         sync_ids = sync_obj.search([])
         sync_obj.sync(sync_ids)
+        return True
 
     def get_db_partner_name(self, db):
         '''
@@ -177,6 +196,7 @@ class UnifieldTest(unittest.TestCase):
 
         :param db: DB connection of which we get the partner.
         :return: Name of the partner associated to the company of the database.
+        :rtype: str
         '''
         company_obj = db.get('res.company')
 
@@ -184,28 +204,45 @@ class UnifieldTest(unittest.TestCase):
         return company_obj.browse(company_ids[0]).partner_id.name
 
     def random_date(self, start, end):
-        """Take a random date between the first date (start) and the second one (stop).
-        This method was taken from http://stackoverflow.com/questions/553303/generate-a-random-date-between-two-other-dates"""
+        """Give a random date between the first date (start) and the second one (stop).
+
+        This method was taken from http://stackoverflow.com/questions/553303/generate-a-random-date-between-two-other-dates
+
+        :param datetime start: Starting date
+        :param datetime end: Ending date
+
+        :return: Random datetime
+        :rtype: datetime
+        """
         delta = end - start
         int_delta = (delta.days * 24 * 60 * 60) + delta.seconds
         random_second = randrange(int_delta)
         return (start + timedelta(seconds=random_second))
 
     def random_word(self):
-        """Give a random word using a dictionnary containing a lot of french words"""
+        """Give a random word using a dictionnary containing a lot of french words. Available in /usr/share/dict/french.
+
+        :return: Random french word
+        :rtype: string
+        """
         f = 'french_words.txt'
         WORDS = open(f).read().splitlines()
         return choice(WORDS)
 
     def generate_analytic_distribution(self, db, record=False, write=False):
-        """Create an analytic distribution and return its ID.
+        """Create a compatible or generic analytic distribution.
+        If write is True and some record given: write result to the given record.
 
-        :param db: DB connection to fetch data
-        :param record: Browse record of the object on which we want a generic analytic distribution. If False, give a default analytic distribution.
+        .. todo::
+
+           Add a new param "account" so that we permit user to only give an account and have a compatible distribution on it.
+
+        :param db: oerplib XMLRPC database connection
+        :param BrowseRecord record: Browse record of the object on which we want a generic analytic distribution. If False, give a default analytic distribution.
         :param write: If True, attempt to write the analytic distribution result to the given object. It only works if you give a record!
         :return: analytic distribution ID (or False if failed)
+        :rtype: int or False
         """
-        # TODO: Add a new attribute "account" that permit to only return a compatible distribution on this account (account.account)
         # Prepare some value
         res = False
         company_obj = db.get('res.company')
@@ -288,10 +325,12 @@ class UnifieldTest(unittest.TestCase):
 
     def create_journal_entry(self, database):
         '''
-        Create a journal entry (account.move) with 2 lines: 
+        Create a posted journal entry (account.move) with 2 lines: 
+
         - an expense one (with an analytic distribution)
         - a counterpart one
 
+        :param database: oerplib database xmlrpc connection
         :return: move ID, expense line ID and counterpart ID
         :rtype: int
         '''
@@ -353,7 +392,25 @@ class UnifieldTest(unittest.TestCase):
 
     def create_account(self, database, code, account_type='other', user_type_code='specific', destination_code='OPS'):
         '''
-        Create an account and send the ID
+        Create an account (account.account).
+
+        :param database: oerplib xmlrpc database connection
+        :param string code: account code
+        :param string account_type: account type (Internal Type) selection key. By default: other (Regular). Available values::
+
+         * view (View)
+         * other (Regular)
+         * receivable (Receivable)
+         * payable (Payable)
+         * liquidity (Liquidity)
+         * consolidation (Consolidation)
+         * closed (Closed)
+
+        :param string user_type_code: account user type code (account.account.type). By default: specific
+        :param string destination_code: destination code (displayed to the user). By default: OPS
+
+        :return: account ID
+        :rtype: int
         '''
         # Prepare some values
         acc_obj = database.get('account.account')
@@ -392,8 +449,44 @@ class UnifieldTest(unittest.TestCase):
 
     def create_journal(self, database, name, code, journal_type, analytic_journal_id=False, account_code=False, currency_name=False, bank_journal_id=False):
         '''
-        Create a journal with given info.
+        Permit to create a customized journal.
+
         If journal type is bank/cash/cheque, it needs account_code and currency_name.
+
+        :param database: oerplib xmlrpc database connection
+        :param string name: Name of journal
+        :param string code: Journal's code
+        :param string journal_type: Journal's type. Available types::
+
+         * accrual
+         * bank
+         * cash
+         * cheque
+         * correction
+         * cur_adj
+         * depreciation
+         * general
+         * hq
+         * hr
+         * inkind
+         * intermission
+         * migration
+         * extra
+         * situation
+         * purchase
+         * purchase_refund
+         * revaluation
+         * sale
+         * sale_refund
+         * stock
+
+        :param int analytic_journal_id: (optional) linked analytic journal ID. If False, attempt to search an analytic journal that have the same journal_type
+        :param string account_code: (optional) account code that will be used in debit/credit for the journal. This param is only mandatory for bank/cash/cheque journal types
+        :param string currency_name: (optional) journal currency name
+        :param int bank_journal_id: (mandatory for cheque journal type) linked bank journal ID
+
+        :return: Journal's ID
+        :rtype: int
         '''
         # Some checks
         if not name or not code or not journal_type:
@@ -442,8 +535,29 @@ class UnifieldTest(unittest.TestCase):
 
     def create_register(self, database, name, code, register_type, account_code, currency_name, bank_journal_id=False):
         '''
-        Create a register in the current period.
-        
+        Create a register in the current period. This use the :func:`create_journal` to create a journal that replace journal_type param with register_type one.
+
+        :param database: oerplib xmlrpc database connection
+        :param string name: register name (used as journal's name)
+        :param string code: register's code (used as journal's code)
+        :param string register_type: register's type regarding::
+
+         * bank
+         * cash
+         * cheque
+
+        :param string account_code: account's code used for debit/credit account at journal's creation. And so used by the register.
+        :param string currency_name: name of currency that will be used.
+
+        .. note::
+
+           Currency should exists otherwise register creation will fail.
+
+        :param int bank_journal_id: (optional) in case you create a cheque register you need to give the bank journal that would be linked to.
+
+        :return: register ID and journal ID
+        :rtype: int
+
         :return: register_id and journal_id
         :rtype: int
         '''
@@ -459,7 +573,13 @@ class UnifieldTest(unittest.TestCase):
 
     def open_register(self, database, ids):
         '''
-        Open the given register
+        Open all given registers.
+
+        :param database: oerplib xmlrpc database connection
+        :param list ids: list of register's ID to open
+
+        :return: True or False
+        :rtype: bool
         '''
         if not ids:
             return False
@@ -478,7 +598,22 @@ class UnifieldTest(unittest.TestCase):
         return True
 
     def create_register_line(self, register_id, code, amount, generate_distribution=False, date=False, document_date=False, third_partner_id=False, third_employee_id=False, third_journal_id=False):
-        """Create a register line with the given account code and amount. Optionnaly third party"""
+        """
+        Create a register line in the given register.
+
+        :param int register_id: register's ID into you will create the new register line
+        :param string code: register line's account code
+        :param amount: register line's amount. If positive it will be an amount IN. If negative: amount out.
+        :param generate_distribution: (optional) If True, generate a compatible analytic distribution and attach it to the register line.
+        :param datetime date: register line's posting date
+        :param datetime document_date: register line's document date
+        :param third_partner_id: register line's partner ID
+        :param third_employee_id: register line's employee ID
+        :param third_journal_id: register line's transfer journal ID
+
+        :return: Register line ID and analytic distribution ID (if not: return False)
+        :rtype: int
+        """
         # Check register_id presence
         if not register_id:
             raise Exception("Register ID is missing.")
