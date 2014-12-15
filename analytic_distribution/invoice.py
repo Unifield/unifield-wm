@@ -30,11 +30,16 @@ class account_invoice(osv.osv):
         '''
         Check if the Purchase order contains a line with an inactive products
         '''
-        inactive_lines = self.pool.get('account.invoice.line').search(cr, uid, [
-            ('product_id.active', '=', False),
-            ('invoice_id', 'in', ids),
-            ('invoice_id.state', 'not in', ['draft', 'cancel', 'done'])
-        ], context=context)
+        sql = """SELECT il.id
+        FROM account_invoice_line AS il, product_product AS prod, account_invoice AS inv
+        WHERE il.product_id = prod.id
+        AND il.invoice_id = inv.id
+        AND prod.active = 'f'
+        AND inv.state in ('draft', 'cancel', 'done')
+        AND il.invoice_id in %s
+        """
+        cr.execute(sql, (tuple(ids),))
+        inactive_lines = [x and x[0] for x in cr.fetchall()]
 
         if inactive_lines:
             plural = len(inactive_lines) == 1 and _('A product has') or _('Some products have')
