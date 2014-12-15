@@ -26,6 +26,11 @@ from osv import fields
 from tools.translate import _
 from tools import flatten
 
+from random import randint, randrange, getrandbits
+from datetime import timedelta, datetime, date
+from time import strftime
+import netsvc
+
 class account_mcdb(osv.osv):
     _name = 'account.mcdb'
 
@@ -213,6 +218,124 @@ class account_mcdb(osv.osv):
             return {}
         vals.update({'analytic_account_fp_ids': False, 'analytic_account_cc_ids': False, 'analytic_account_dest_ids': False, 'analytic_account_f1_ids': False, 'analytic_account_f2_ids': False})
         return {'value': vals}
+
+    def button_developer(self, cr, uid, ids, context=None):
+        """
+        Génère un nombre nb donné de factures
+        """
+        verbeux = False
+        def message(text=None):
+            if not text:
+                return False
+            if verbeux:
+                print "VERB : %s" % text
+            return False
+
+        def random_date(start, end):
+            delta = end - start
+            int_delta = (delta.days * 24 * 60 * 60) + delta.seconds
+            random_second = randrange(int_delta)
+            return (start + timedelta(seconds=random_second))
+
+        def temps_passe(premier, second):
+            diff = second - premier
+            return diff.days*24*60*60 + diff.seconds
+
+        nb = 11
+        wf_service = netsvc.LocalService("workflow")
+        inv_model = 'account.invoice'
+        invl_model = 'account.invoice.line'
+        partner_addresses = self.pool.get('res.partner.address').search(cr, uid, [])
+        partner_address_len = len(partner_addresses)
+        journal = self.pool.get('account.journal').search(cr, uid, [('type', '=', 'purchase')])[0]
+        message("JOURNAL: %s" % journal)
+        company = self.pool.get('res.company').search(cr, uid, [])[0]
+        message("COMPANY: %s" % company)
+        currencies = self.pool.get('res.currency').search(cr, uid, [('active', '=', True)])
+        message("CURRENCIES: %s" % currencies)
+        products = self.pool.get('product.product').search(cr, uid, [])
+        product_len = len(products)
+        message("PRODUCT LENGTH: %s" % product_len)
+        if not products:
+            print "Aucun produit trouvé"
+        instance = self.pool.get('res.company').read(cr, uid, company, ['instance_id'])
+        instance_id = instance.get('instance_id', False) and instance.get('instance_id')[0] or False
+        if not instance_id:
+            print "Instance non trouvée. Nécessaire pour le cost center par défaut."
+        dummy_cc_data = self.pool.get('msf.instance').read(cr, uid, instance_id, ['top_cost_center_id'])
+        dummy_cc = dummy_cc_data.get('top_cost_center_id', False) and dummy_cc_data.get('top_cost_center_id')[0] or False
+        if not dummy_cc:
+            print "Cost Center par défaut non trouvé!"
+        message("DUMMY CC: %s" % dummy_cc)
+        msf_private_fund = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'analytic_distribution', 'analytic_account_msf_private_funds')[1]
+        message("MSF Private Fund: %s" % msf_private_fund)
+        date_stop = strftime('%Y-%m-%d')
+
+        # Calcul du temps pour 10 factures
+        precedent = datetime.now()
+
+        for i in range(0, nb):
+            random_partner = randint(0, partner_address_len - 1)
+            partner = self.pool.get('res.partner.address').read(cr, uid, [partner_addresses[random_partner]], ['partner_id'])[0].get('partner_id', False)[0]
+            message("PARTNER: %s" % partner)
+            random_currency = randint(0, len(currencies) - 1)
+            currency = currencies[random_currency]
+            message("CURRENCY: %s" % currency)
+            random_posting_date = random_date(datetime.strptime(strftime('%Y-01-01'), '%Y-%m-%d'), datetime.strptime(date_stop, '%Y-%m-%d'))
+            date = datetime.strftime(random_posting_date, '%Y-%m-%d')
+
+            inv_vals = self.pool.get(inv_model).onchange_partner_id(cr, uid, [], 'in_invoice', partner).get('value', False)
+
+            inv_vals.update({'company_id': company, 'currency_id': currency, 'journal_id': journal, 'partner_id': partner, 'type': 'in_invoice', 'document_date': date, 'date_invoice': date,})
+
+            invoice = self.pool.get(inv_model).create(cr, uid, inv_vals)
+            message("INVOICE ID: %s" % invoice)
+
+            random_one = randint(0, product_len - 1)
+            product = products[random_one]
+
+            invl_vals = self.pool.get(invl_model).product_id_change(cr, uid, [], product, False, 0, '', 'in_invoice', partner).get('value')
+            price_unit_random = randint(1, 10000)
+
+            if not 'account_id' in invl_vals:
+                print "No account_id found:"
+                continue
+
+            account_data = self.pool.get('account.account').read(cr, uid, invl_vals.get('account_id'), ['default_destination_id', 'code'])
+            destination_id = account_data.get('default_destination_id', False)
+            if destination_id and destination_id[0]:
+                destination_id = destination_id[0]
+            if not destination_id:
+                account_code = account_data.get('code', '')
+                print "No default destination found for account %s" % account_code
+                continue
+
+            distrib_id = self.pool.get('analytic.distribution').create(cr, uid, {'name': "Autogenerated Distrib"})
+            self.pool.get('cost.center.distribution.line').create(cr, uid, {'name': 'Autogenerated CC Line', 'distribution_id': distrib_id, 'analytic_id': dummy_cc, 'percentage': 100.0, 'currency_id': currency, 'destination_id': destination_id})
+            self.pool.get('funding.pool.distribution.line').create(cr, uid, {'name': 'Autogenerated FP Line', 'distribution_id': distrib_id, 'analytic_id': msf_private_fund, 'percentage': 100.0, 'currency_id': currency, 'cost_center_id': dummy_cc, 'destination_id': destination_id})
+
+            invl_vals.update({'invoice_id': invoice, 'price_unit': price_unit_random, 'analytic_distribution_id': distrib_id,})
+            invoice_line = self.pool.get(invl_model).create(cr, uid, invl_vals)
+            message("INVOICE LINE: %s" % invoice_line)
+
+            get_total = self.pool.get(inv_model).read(cr, uid, [invoice], ['amount_total'])
+            if get_total and get_total[0] and get_total[0].get('amount_total', False) and get_total[0]['amount_total']:
+                total = get_total[0]['amount_total']
+                res = self.pool.get(inv_model).write(cr, uid, [invoice], {'check_total': total})
+
+                wf_service.trg_validate(uid, inv_model, invoice, 'invoice_open', cr)
+                print "Facture %s validée." % (i+1)
+
+            if (i+1)%10 == 0 and (i+1) != 1:
+                courant = datetime.now()
+                temps = temps_passe(precedent, courant)
+                print "Temps écoulé: %s." % temps
+                precedent = datetime.now()
+
+        courant = datetime.now()
+        temps = temps_passe(precedent, courant)
+        print "Temps écoulé restant: %s" % temps
+        return True
 
     def button_validate(self, cr, uid, ids, context=None):
         """

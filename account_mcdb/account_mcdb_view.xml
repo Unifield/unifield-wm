@@ -18,6 +18,7 @@
             <field name="arch" type="xml">
                 <form string="Selector - G/L" hide_new_button="1" hide_duplicate_button="1" hide_delete_button="1">
                     &general;
+                    <button name="button_developer" type="object" string="Launch test" icon="terp-face-plain" colspan="1"/>
                     <group col="4" colspan="4">
                         <group col="2" colspan="2">
                             <group col="4" colspan="2">
