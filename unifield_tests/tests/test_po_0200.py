@@ -118,6 +118,62 @@ should be %s.""" % (po_brw.priority, o_priority),
 
         return self.po_id
 
+    def create_service_lines(self):
+        """
+        Add four lines on the PO. All lines contain service products.
+
+        :return:
+        """
+         # New line with SRV product
+        line_data = {
+            'product_id': self.get_record(self.p1, 'prod_srv_1'),
+            'product_uom': self.get_record(self.p1,
+                                           'product_uom_unit', 'product'),
+            'price_unit': 3.05,
+            'product_qty': 150.00,
+            'order_id': self.po_id,
+        }
+        self.p1_pol_ids.append(
+            self.p1_pol_obj.create(line_data)
+        )
+
+        line_data = {
+            'product_id': self.get_record(self.p1,
+                                          'prod_srv_2'),
+            'product_uom': self.get_record(self.p1,
+                                           'product_uom_unit', 'product'),
+            'price_unit': 4.18,
+            'product_qty': 230.00,
+            'order_id': self.po_id,
+        }
+        self.p1_pol_ids.append(
+            self.p1_pol_obj.create(line_data)
+        )
+
+        line_data = {
+            'product_id': self.get_record(self.p1, 'prod_srv_3'),
+            'product_uom': self.get_record(self.p1,
+                                           'product_uom_unit', 'product'),
+            'price_unit': 3.05,
+            'product_qty': 150.00,
+            'order_id': self.po_id,
+        }
+        self.p1_pol_ids.append(
+            self.p1_pol_obj.create(line_data)
+        )
+
+        line_data = {
+            'product_id': self.get_record(self.p1, 'prod_srv_4'),
+            'product_uom': self.get_record(self.p1,
+                                           'product_uom_unit', 'product'),
+            'price_unit': 18.00,
+            'product_qty': 10.00,
+            'order_id': self.po_id,
+        }
+        self.p1_pol_ids.append(
+            self.p1_pol_obj.create(line_data)
+        )
+
     def create_lines_from_scratch(self):
         """
         Add four lines on the PO. Two with a MED product and the two others
@@ -176,7 +232,7 @@ should be %s.""" % (po_brw.priority, o_priority),
             self.p1_pol_obj.create(line_data)
         )
 
-    def generate_test(self, cat, prio):
+    def generate_test(self, cat, prio, sp=False):
         """
         1. Create a new PO with these attributes:
             * Order type: Regular
@@ -205,7 +261,10 @@ should be %s.""" % (po_brw.priority, o_priority),
             o_priority=prio,
         )
 
-        self.create_lines_from_scratch()
+        if sp:
+            self.create_service_lines()
+        else:
+            self.create_lines_from_scratch()
 
         # Try to print the PO report
         self.p1.report(
@@ -415,7 +474,7 @@ should be %s.""" % (po_brw.priority, o_priority),
         """
         self.generate_test('other', 'priority')
 
-    def test_po_0203_esc_emergency_other(self):
+    def test_po_0203_mergency_other(self):
         """
         PO with these parameters:
           * Partner type: Internal
@@ -426,7 +485,7 @@ should be %s.""" % (po_brw.priority, o_priority),
         """
         self.generate_test('other', 'emergency')
 
-    def test_po_0204_esc_normal_log(self):
+    def test_po_0204_normal_log(self):
         """
         PO with these parameters:
           * Partner type: Internal
@@ -437,7 +496,7 @@ should be %s.""" % (po_brw.priority, o_priority),
         """
         self.generate_test('log', 'normal')
 
-    def test_po_0205_esc_priority_log(self):
+    def test_po_0205_priority_log(self):
         """
         PO with these parameters:
           * Partner type: Internal
@@ -448,7 +507,7 @@ should be %s.""" % (po_brw.priority, o_priority),
         """
         self.generate_test('log', 'priority')
 
-    def test_po_0206_esc_emergency_log(self):
+    def test_po_0206_emergency_log(self):
         """
         PO with these parameters:
           * Partner type: Internal
@@ -459,7 +518,7 @@ should be %s.""" % (po_brw.priority, o_priority),
         """
         self.generate_test('log', 'emergency')
 
-    def test_po_0207_esc_normal_medical(self):
+    def test_po_0207_normal_medical(self):
         """
         PO with these parameters:
           * Partner type: Internal
@@ -470,7 +529,7 @@ should be %s.""" % (po_brw.priority, o_priority),
         """
         self.generate_test('medical', 'normal')
 
-    def test_po_0208_esc_priority_medical(self):
+    def test_po_0208_priority_medical(self):
         """
         PO with these parameters:
           * Partner type: Internal
@@ -481,7 +540,7 @@ should be %s.""" % (po_brw.priority, o_priority),
         """
         self.generate_test('medical', 'priority',)
 
-    def test_po_0209_esc_emergency_medical(self):
+    def test_po_0209_emergency_medical(self):
         """
         PO with these parameters:
           * Partner type: Internal
@@ -491,6 +550,19 @@ should be %s.""" % (po_brw.priority, o_priority),
         :return:
         """
         self.generate_test('medical', 'emergency')
+
+    def test_po_0300_service_products(self):
+        """
+        PO with these parameters:
+          * Partner type: Internal
+          * Order priority: Emergency
+          * Order category: Service
+
+        Add only service products.
+
+        :return:
+        """
+        self.generate_test('service', 'emergency', sp=True)
 
 def get_test_class():
     return TestPO0200

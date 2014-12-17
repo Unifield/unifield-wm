@@ -70,3 +70,32 @@
     location_id: stock.stock_location_stock
     nomen_id: nomen_med_main_type
     dest_location_id: msf_config_locations.stock_location_medical
+-
+  Create SRV nomenclatures for tests
+-
+-
+  Create a Main Type SRV
+-
+  !record {model: product.nomenclature, id: nomen_srv_main_type}:
+    name: Main Type SRV (Test)
+-
+  Create a Group SRV
+-
+  !record {model: product.nomenclature, id: nomen_srv_group}:
+    name: Group SRV (Test)
+    level: 1
+    parent_id: nomen_srv_main_type
+-
+  Create a Family SRV
+-
+  !record {model: product.nomenclature, id: nomen_srv_family}:
+    name: Family SRV (Test)
+    level: 2
+    parent_id: nomen_srv_group
+-
+  Create a Root SRV
+-
+  !record {model: product.nomenclature, id: nomen_srv_root}:
+    name: Root SRV (Test)
+    level: 3
+    parent_id: nomen_srv_family

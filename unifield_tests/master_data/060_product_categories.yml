@@ -14,3 +14,11 @@
     family_id: nomen_med_family
     property_account_income_categ: account_account_6101
     property_account_expense_categ: account_account_6101
+-
+  Create a product category for SRV products
+-
+  !record {model: product.category, id: product_categ_srv}:
+    name: SRV Category (Test)
+    family_id: nomen_srv_family
+    property_account_income_categ: account_account_6101
+    property_account_expense_categ: account_account_6101

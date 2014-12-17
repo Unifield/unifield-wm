@@ -79,7 +79,6 @@ class product_list(osv.osv):
         'product_ids': fields.one2many('product.list.line', 'list_id', string='Products'),
         'old_product_ids': fields.one2many('old.product.list.line', 'list_id', string='Old Products'),
         'nb_products': fields.function(_get_nb_products, method=True, type='integer', string='# of products'),
-        
     }
     
     _defaults = {

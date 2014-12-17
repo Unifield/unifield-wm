@@ -143,6 +143,57 @@ should be %s.""" % (po_brw.priority, o_priority),
 
         return self.po_id
 
+    def create_service_lines(self):
+        """
+        Add four lines on the PO. All lines contain service products.
+
+        :return:
+        """
+         # New line with SRV product
+        line_data = {
+            'product_id': self.get_record('prod_srv_1'),
+            'product_uom': self.get_record('product_uom_unit', 'product'),
+            'price_unit': 3.05,
+            'product_qty': 150.00,
+            'order_id': self.po_id,
+        }
+        self.pol_ids.append(
+            self.pol_obj.create(line_data)
+        )
+
+        line_data = {
+            'product_id': self.get_record('prod_srv_2'),
+            'product_uom': self.get_record('product_uom_unit', 'product'),
+            'price_unit': 4.18,
+            'product_qty': 230.00,
+            'order_id': self.po_id,
+        }
+        self.pol_ids.append(
+            self.pol_obj.create(line_data)
+        )
+
+        line_data = {
+            'product_id': self.get_record('prod_srv_3'),
+            'product_uom': self.get_record('product_uom_unit', 'product'),
+            'price_unit': 3.05,
+            'product_qty': 150.00,
+            'order_id': self.po_id,
+        }
+        self.pol_ids.append(
+            self.pol_obj.create(line_data)
+        )
+
+        line_data = {
+            'product_id': self.get_record('prod_srv_4'),
+            'product_uom': self.get_record('product_uom_unit', 'product'),
+            'price_unit': 18.00,
+            'product_qty': 10.00,
+            'order_id': self.po_id,
+        }
+        self.pol_ids.append(
+            self.pol_obj.create(line_data)
+        )
+
     def create_lines_from_scratch(self):
         """
         Add two lines on the PO. One with a MED product and the other
@@ -220,7 +271,7 @@ should be %s.""" % (po_brw.priority, o_priority),
                 self.pol_ids.append(pol.id)
                 self.pol_obj.write([pol.id], {'product_qty': 3.0*pol.id})
 
-    def generate_test(self, cat, prio, part_type):
+    def generate_test(self, cat, prio, part_type, sp=False):
         """
         1. Create a new PO with these attributes:
             * Order type: Regular
@@ -244,8 +295,11 @@ should be %s.""" % (po_brw.priority, o_priority),
             p_type=part_type,
         )
 
-        self.create_lines_from_scratch()
-        self.create_multiple_lines()
+        if sp:
+            self.create_service_lines()
+        else:
+            self.create_lines_from_scratch()
+            self.create_multiple_lines()
 
         # Try to print the PO report
         self.used_db.report(
@@ -559,6 +613,30 @@ be 'assigned'""" % in_state,
         :return:
         """
         self.generate_test('medical', 'emergency', 'external')
+
+    def test_po_0300_external_service(self):
+        """
+        PO with these parameters:
+          * Partner type: External
+          * Order priority: Emergency
+          * Order category: Service
+
+        With only service products
+        :return:
+        """
+        self.generate_test('service', 'emergency', 'external', sp=True)
+
+    def test_po_0301_esc_service(self):
+        """
+        PO with these parameters:
+          * Partner type: ESC
+          * Order priority: Emergency
+          * Order category: Service
+
+        With only service products
+        :return:
+        """
+        self.generate_test('service', 'emergency', 'esc', sp=True)
 
 
 def get_test_class():
