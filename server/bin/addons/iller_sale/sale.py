@@ -95,6 +95,7 @@ class iller_sale_line(osv.osv):
 
         comment_obj = self.pool.get('iller.sale.comment')
         comment = ''
+        prix_achat = 0.00
         res = super(iller_sale_line, self).product_id_change(cr, uid, ids, pricelist, product, qty, uom, qty_uos, uos, name, partner_id, \
                                                              lang, update_tax, date_order, packaging, fiscal_position, tournee_id, flag)
 
@@ -112,6 +113,7 @@ class iller_sale_line(osv.osv):
             if type_cond == '':
                 type_cond = self.getSelectionValue(cr, uid, 'product.product', 'type_cond', product_id.type_cond)
             code_affect = product_id.code_affectation
+            prix_achat = product_id.prix_achat
 
         com_res = self.price_unit_change(cr, uid, ids, res['value'].get('price_unit', 0.00), product, qty, partner_id, pricelist, context={})
         res['value'].update(com_res.get('value'))
@@ -122,6 +124,7 @@ class iller_sale_line(osv.osv):
             'type_prep': code_affect,
             'type_cond': type_cond,
             'product_uom': uom or 2,
+            'prix_achat': prix_achat,
         })
         return res
 
@@ -146,6 +149,7 @@ class iller_sale_line(osv.osv):
         'type_cond': fields.function(_get_info_order_line, type='char', method=True, string=u'Type conditionnement', readonly=True, multi='infos_order_line'),
         'type_prep': fields.function(_get_info_order_line, type='char', method=True, string=u'Type prép.', readonly=True, multi='infos_order_line'),
         'num_lot': fields.char(u'N° Lot', size=64),
+        'prix_achat': fields.float('Prix achat', digits=(16, 2)),
         'type_tarif': fields.selection(
             selection=[
                 ('normal', 'PN'),
