@@ -97,7 +97,7 @@ class register_creation(osv.osv_memory):
         """
         Clear the list of registers to create
         """
-        if not context:
+        if context is None:
             context = {}
         if isinstance(ids, (int, long)):
             ids = [ids]
@@ -120,6 +120,8 @@ class register_creation(osv.osv_memory):
         """
         Update new_register_ids field by put in all register that could be created soon.
         """
+        if context is None:
+            context = {}
         # Some verification
         wizard = self.browse(cr, uid, ids[0], context=context)
         if not wizard.period_id:
@@ -187,7 +189,7 @@ class register_creation(osv.osv_memory):
         """
         if isinstance(ids, (int, long)):
             ids = [ids]
-        if not context:
+        if context is None:
             context = {}
         wizard = self.browse(cr, uid, ids[0], context=context)
         if not wizard.new_register_ids:
