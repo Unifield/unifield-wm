@@ -108,11 +108,21 @@ class import_commitment_wizard(osv.osv_memory):
                             check_date_not_in_hq_closed_period(self.pool, cr,
                                 uid, now, sequence_number, context=context)
                         line_document_date = now  # now by default
+                        if date and line_document_date > line_date:
+                            # no doc date in line but a posting is set
+                            # as posting date should be >= to doc date
+                            # assume document date <=> posting date
+                            line_document_date = line_date
                     else:
                         try:
                             line_document_date = time.strftime('%Y-%m-%d', time.strptime(document_date, '%d/%m/%Y'))
                         except ValueError, e:
                             raise osv.except_osv(_('Error'), raise_msg_prefix + (_('Document date wrong format for date: %s: %s') % (document_date, e)))
+                    if not date and line_document_date > line_date:
+                        # no posting date in line but a doc is set
+                        # as posting date should be >= to doc date
+                        # assume default today posting date prevails
+                        line_document_date = line_date
                     vals['document_date'] = line_document_date
 
                     # G/L account
