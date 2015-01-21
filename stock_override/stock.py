@@ -597,6 +597,9 @@ class stock_picking(osv.osv):
             if pick.type == 'out' and pick.subtype == 'picking' and pick.backorder_id and True:
                 continue
 
+            if pick.sale_id:
+                fo_ids.add(pick.sale_id.id)
+
             for move in pick.move_lines:
                 if move.sale_line_id and move.product_qty > 0.00:
                     fo_ids.add(move.sale_line_id.order_id.id)
