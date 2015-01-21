@@ -3787,6 +3787,7 @@ class stock_picking(osv.osv):
             if picking.subtype == 'picking' and picking.state in ('draft',):
                 if self.has_picking_ticket_in_progress(cr, uid, [picking.id], context=context)[picking.id]:
                     raise osv.except_osv(_('Warning !'), _('Some Picking Tickets are in progress. Return products to stock from ppl and shipment and try to cancel again.'))
+                context['call_unlink'] = True
                 return super(stock_picking, self).action_cancel(cr, uid, ids, context=context)
             # if not draft or qty does not match, the shipping is already in progress
             if picking.subtype == 'picking' and picking.state in ('done',):
