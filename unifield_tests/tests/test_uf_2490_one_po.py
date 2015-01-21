@@ -435,10 +435,64 @@ class UF2490OnePO(ResourcingTest):
         """
         Create a FO/IR with 4 lines. Source all lines on
         a PO, then validate and confirm the PO.
-        Process partially the IN and cancel the back order
+        Cancel the whole IN
         :return:
         """
         db = self.used_db
+        pick_obj = db.get('stock.picking')
+        wiz_obj = db.get('enter.reason')
+
+        self.create_order_and_source()
+        self.pol_obj.write(self.pol_ids, {'price_unit': 2.00})
+
+        self._validate_po(db, [self.po_id])
+        self._confirm_po(db, [self.po_id])
+
+        in_ids = pick_obj.search([
+        ])
+
+        proc_res = pick_obj.action_process(in_ids)
+        proc_id = proc_res.get('res_id')
+        move_in_ids = move_in_obj.search([('wizard_id', '=', proc_id)])
+        move_in_obj.write([move_in_ids[0]], {'quantity': 1.0})
+        proc_obj.do_incoming_shipment([proc_id])
+
+        in_ids = pick_obj.search([
+            ('purchase_id', '=', self.po_id),
+            ('state', '!=', 'done'),
+        ])
+        out_ids = pick_obj.search([
+            ('sale_id', '=', self.order_id),
+        ])
+        for out in pick_obj.browse(out_ids):
+            if out.state in ('confirmed', 'assigned'):
+                if out.subtype == 'picking':
+                    pick_obj.convert_to_standard([out.id])
+
+                out_res = pick_obj.action_process([out.id])
+                wiz_id = out_res.get('res_id')
+                out_wiz_obj.copy_all([wiz_id], {})
+                out_wiz_obj.do_partial([wiz_id])
+
+    def test_cancel_whole_in(self):
+        """
+        Create a FO/IR with 4 lines. Source all lines on
+        a PO, then validate and confirm the PO.
+        Process partially the IN and cancel the back order
+        :return:
+        """
+        db = self.p1
+        self.used_db = db
+        self.po_obj = db.get('purchase.order')
+        self.order_obj = db.get('sale.order')
+        self.order_line_obj = db.get('sale.order.line')
+        self.po_obj = db.get('purchase.order')
+        self.pol_obj = db.get('purchase.order.line')
+        self.proc_obj = db.get('procurement.order')
+        self.data_obj = db.get('ir.model.data')
+        self.tender_obj = db.get('tender')
+        self.tender_line_obj = db.get('tender.line')
+        self.need_ext_loc = True
 
         pick_obj = db.get('stock.picking')
         wiz_obj = db.get('enter.reason')
@@ -455,17 +509,6 @@ class UF2490OnePO(ResourcingTest):
         in_ids = pick_obj.search([
             ('purchase_id', '=', self.po_id),
         ])
-
-        proc_res = pick_obj.action_process(in_ids)
-        proc_id = proc_res.get('res_id')
-        move_in_ids = move_in_obj.search([('wizard_id', '=', proc_id)])
-        move_in_obj.write([move_in_ids[0]], {'quantity': 1.0})
-        proc_obj.do_incoming_shipment([proc_id])
-
-        in_ids = pick_obj.search([
-            ('purchase_id', '=', self.po_id),
-            ('state', '!=', 'done'),
-        ])
         wiz_res = pick_obj.enter_reason(in_ids)
         wiz_id = wiz_res.get('res_id')
 
@@ -474,19 +517,6 @@ class UF2490OnePO(ResourcingTest):
         }
         wiz_obj.write([wiz_id], {'change_reason': 'US 6 test'})
         wiz_obj.do_cancel([wiz_id], ctx)
-
-        out_ids = pick_obj.search([
-            ('sale_id', '=', self.order_id),
-        ])
-        for out in pick_obj.browse(out_ids):
-            if out.state in ('confirmed', 'assigned'):
-                if out.subtype == 'picking':
-                    pick_obj.convert_to_standard([out.id])
-
-                out_res = pick_obj.action_process([out.id])
-                wiz_id = out_res.get('res_id')
-                out_wiz_obj.copy_all([wiz_id], {})
-                out_wiz_obj.do_partial([wiz_id])
 
 
 class UF2490FOOnePO(UF2490OnePO):
