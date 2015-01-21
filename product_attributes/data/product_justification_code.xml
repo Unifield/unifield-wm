@@ -54,6 +54,30 @@
             <field name="code">38 J(PME)</field>
             <field name="description">Article only for a properly designed Programme, it may imply a Medical risk if misused, Expensive.</field>
         </record>
-        
+        <record id="justification_code_js" model="product.justification.code">
+            <field name="code">50 J(S)</field>
+            <field name="description">Second choice. Article must only be used if the first choice is not available or cannot be used in a specific context.</field>
+        </record>
+        <record id="justification_code_jsm" model="product.justification.code">
+            <field name="code">51 J(SM)</field>
+            <field name="description">Second choice &amp; medical risk. Article must be only used if the first choice is not available or cannot be used in a specific context. The article may imply medical risks if misused by persons with insufficient training or knowledge. (SM)</field>
+        </record>
+        <record id="justification_code_jsp" model="product.justification.code">
+            <field name="code">52 J(SP)</field>
+            <field name="description">Second Choice &amp; specific programme. The article must only be used if the first choice is not available or cannot be used in a specific context. The article must be used only in a properly designed programme.</field>
+        </record>
+        <record id="justification_code_jc" model="product.justification.code">
+            <field name="code">19 J(C)</field>
+            <field name="description">The article is potentially subject to important modifications (supply sources, better alternatives).</field>
+        </record>
+        <record id="justification_code_jom" model="product.justification.code">
+            <field name="code">28 J(OM)</field>
+            <field name="description">The article and its specifications are obsolete , it may imply a medical risk if misused.</field>
+        </record>
+        <record id="justification_code_jop" model="product.justification.code">
+            <field name="code">29 J(OP)</field>
+            <field name="description">The article and its specifications are obsolete , it has to be used only in a specific program.</field>
+        </record>
+
     </data>
 </openerp>
