@@ -5,6 +5,7 @@
     name: S1
     supplier: True
     partner_type: internal
+    active: 1
     property_account_receivable: account_account_receivable_supplier0
     property_account_payable: account_account_payable_supplier0
 -
@@ -13,12 +14,14 @@
   !record {model: res.partner.address, id: address1}:
     name: S1
     partner_id: supplier1
+    active: 1
 -
     I create the supplier S2
 -
   !record {model: res.partner, id: supplier2}:
     name: S2
     supplier: True
+    active: 1
     partner_type: external
     property_account_receivable: account_account_receivable_supplier0
     property_account_payable: account_account_payable_supplier0
@@ -28,12 +31,14 @@
   !record {model: res.partner.address, id: address2}:
     name: S2
     partner_id: supplier2
+    active: 1
 -
     I create the supplier S3
 -
   !record {model: res.partner, id: supplier3}:
     name: S3
     supplier: True
+    active: 1
     partner_type: esc
     property_account_receivable: account_account_receivable_supplier0
     property_account_payable: account_account_payable_supplier0
@@ -43,6 +48,7 @@
   !record {model: res.partner.address, id: address3}:
     name: S3
     partner_id: supplier3
+    active: 1
 -
   Create 3 suppliers for test
 -
@@ -52,6 +58,7 @@
     name: External Supplier 1 (Test)
     supplier: 1
     customer: 0
+    active: 1
     partner_type: 'external'
     property_account_receivable: account_account_receivable_supplier0
     property_account_payable: account_account_payable_supplier0
@@ -61,6 +68,7 @@
   !record {model: res.partner.address, id: ext_supplier_1_addr}:
     partner_id: ext_supplier_1
     name: External Supplier 1 (Test)
+    active: 1
 -
   Create an external supplier
 -
@@ -68,6 +76,7 @@
     name: External Supplier 2 (Test)
     supplier: 1
     customer: 0
+    active: 1
     partner_type: 'external'
     property_account_receivable: account_account_receivable_supplier0
     property_account_payable: account_account_payable_supplier0
@@ -77,6 +86,7 @@
   !record {model: res.partner.address, id: ext_supplier_2_addr}:
     partner_id: ext_supplier_2
     name: External Supplier 2 (Test)
+    active: 1
 -
   Create an external supplier
 -
@@ -84,6 +94,7 @@
     name: External Supplier 3 (Test)
     supplier: 1
     customer: 0
+    active: 1
     partner_type: 'external'
     property_account_receivable: account_account_receivable_supplier0
     property_account_payable: account_account_payable_supplier0
@@ -93,6 +104,7 @@
   !record {model: res.partner.address, id: ext_supplier_3_addr}:
     partner_id: ext_supplier_3
     name: External Supplier 3 (Test)
+    active: 1
 -
   Create 3 customers for test
 -
@@ -102,6 +114,7 @@
     name: External Customer 1 (Test)
     customer: 1
     supplier: 0
+    active: 1
     partner_type: 'external'
     property_account_receivable: account_account_receivable_supplier0
     property_account_payable: account_account_payable_supplier0
@@ -118,6 +131,7 @@
     name: External Customer 2 (Test)
     customer: 1
     supplier: 0
+    active: 1
     partner_type: 'external'
     property_account_receivable: account_account_receivable_supplier0
     property_account_payable: account_account_payable_supplier0
@@ -127,6 +141,7 @@
   !record {model: res.partner.address, id: ext_customer_2_addr}:
     partner_id: ext_customer_2
     name: External Customer 2 (Test)
+    active: 1
 -
   Create an external customer
 -
@@ -134,6 +149,7 @@
     name: External Customer 3 (Test)
     customer: 1
     supplier: 0
+    active: 1
     partner_type: 'external'
     property_account_receivable: account_account_receivable_supplier0
     property_account_payable: account_account_payable_supplier0
@@ -143,3 +159,4 @@
   !record {model: res.partner.address, id: ext_customer_3_addr}:
     partner_id: ext_customer_3
     name: External Customer 3 (Test)
+    active: 1

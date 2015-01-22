@@ -441,6 +441,9 @@ class UF2490OnePO(ResourcingTest):
         db = self.used_db
         pick_obj = db.get('stock.picking')
         wiz_obj = db.get('enter.reason')
+        out_wiz_obj = db.get('outgoing.delivery.processor')
+        proc_obj = db.get('stock.incoming.processor')
+        move_in_obj = db.get('stock.move.in.processor')
 
         self.create_order_and_source()
         self.pol_obj.write(self.pol_ids, {'price_unit': 2.00})
@@ -449,6 +452,8 @@ class UF2490OnePO(ResourcingTest):
         self._confirm_po(db, [self.po_id])
 
         in_ids = pick_obj.search([
+            ('purchase_id', '=', self.po_id),
+            ('state', '!=', 'done'),
         ])
 
         proc_res = pick_obj.action_process(in_ids)
@@ -457,10 +462,6 @@ class UF2490OnePO(ResourcingTest):
         move_in_obj.write([move_in_ids[0]], {'quantity': 1.0})
         proc_obj.do_incoming_shipment([proc_id])
 
-        in_ids = pick_obj.search([
-            ('purchase_id', '=', self.po_id),
-            ('state', '!=', 'done'),
-        ])
         out_ids = pick_obj.search([
             ('sale_id', '=', self.order_id),
         ])
@@ -496,9 +497,6 @@ class UF2490OnePO(ResourcingTest):
 
         pick_obj = db.get('stock.picking')
         wiz_obj = db.get('enter.reason')
-        out_wiz_obj = db.get('outgoing.delivery.processor')
-        proc_obj = db.get('stock.incoming.processor')
-        move_in_obj = db.get('stock.move.in.processor')
 
         self.create_order_and_source()
         self.pol_obj.write(self.pol_ids, {'price_unit': 2.00})
