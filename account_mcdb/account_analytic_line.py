@@ -145,14 +145,12 @@ class account_analytic_line(osv.osv):
         'cheque_number': fields.function(_get_cheque_number, type='char',
             method=True, string='Cheque Number',
             fnct_search=_search_cheque_number),
-        # BKLG-7: selector move partner_id search
-        # (as with partner_txt we have not partner type)
+        # BKLG-7: selector move third-party partner search
         'partner_id': fields.function(_get_fake,
             type='many2one', relation='res.partner',
             method=True, string='Partner',
             fnct_search=_search_partner_id),
-        # BKLG-7: selector move partner_id search
-        # (as with partner_txt we have not partner type)
+        # BKLG-7: selector move third-party employee search
         'employee_id': fields.function(_get_fake,
             type='many2one', relation='hr.employee',
             method=True, string='Employee',
