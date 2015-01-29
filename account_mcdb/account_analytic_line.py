@@ -81,22 +81,41 @@ class account_analytic_line(osv.osv):
                 self_br.move_id.cheque_number or ''
         return res
         
-    def _search_cheque_number(self, cr, uid, ids, name, args, context=None):
+    def _search_check_args(self, args, operators):
+        """
+        check domain for selector search fields
+        domain should have only 1 tuple element
+        :param args: search field domain to check
+        :type args: list
+        :param operators: allowed operator(s)
+        :type operators: str/list
+        """
         if not len(args):
             return []
         if len(args) != 1:
             msg = _("Domain %s not suported") % (str(args), )
             raise osv.except_osv(_('Error'), msg)
-        if args[0][1] != 'ilike':
-            # g/l selector / analytical selector default operator not found
+        if isinstance(operators, str):
+            operators = [operators]
+        if args[0][1] not in operators:
             msg = _("Operator '%s' not suported") % (args[0][1], )
             raise osv.except_osv(_('Error'), msg)
         if not args[0][2]:
             return []
+        return True
         
+    def _search_move_compute_domain(self, cr, uid, args, foreign_field,
+        operator, context=None):
+        args_check = self._search_check_args(args, [operator])
+        if not args_check:
+            return args_check
         m_ids = self.pool.get('account.move.line').search(cr, uid,
-            [('cheque_number', 'ilike', args[0][2])], context=context)
+            [(foreign_field, operator, args[0][2])], context=context)
         return [('move_id', 'in', m_ids)] if m_ids else [('id', 'in', [])]
+        
+    def _search_cheque_number(self, cr, uid, ids, name, args, context=None):
+        return self._search_move_compute_domain(cr, uid, args,
+            'cheque_number', 'ilike', context=context)
         
     def _get_fake(self, cr, uid, ids, name, args, context=None):
         res = {}
@@ -109,21 +128,12 @@ class account_analytic_line(osv.osv):
         return res
         
     def _search_partner_id(self, cr, uid, ids, name, args, context=None):
-        if not len(args):
-            return []
-        if len(args) != 1:
-            msg = _("Domain %s not suported") % (str(args), )
-            raise osv.except_osv(_('Error'), msg)
-        if args[0][1] != '=':
-            # g/l selector / analytical selector default operator not found
-            msg = _("Operator '%s' not suported") % (args[0][1], )
-            raise osv.except_osv(_('Error'), msg)
-        if not args[0][2]:
-            return []
+        return self._search_move_compute_domain(cr, uid, args,
+            'partner_id', '=', context=context)
         
-        m_ids = self.pool.get('account.move.line').search(cr, uid,
-            [('partner_id', '=', args[0][2])], context=context)
-        return [('move_id', 'in', m_ids)] if m_ids else [('id', 'in', [])]
+    def _search_employee_id(self, cr, uid, ids, name, args, context=None):
+        return self._search_move_compute_domain(cr, uid, args,
+            'employee_id', '=', context=context)
 
     _columns = {
         'output_amount': fields.function(_get_output, string="Output amount", type='float', method=True, store=False, multi="analytic_output_currency"),
@@ -141,6 +151,12 @@ class account_analytic_line(osv.osv):
             type='many2one', relation='res.partner',
             method=True, string='Partner',
             fnct_search=_search_partner_id),
+        # BKLG-7: selector move partner_id search
+        # (as with partner_txt we have not partner type)
+        'employee_id': fields.function(_get_fake,
+            type='many2one', relation='hr.employee',
+            method=True, string='Employee',
+            fnct_search=_search_employee_id),
     }
 
     def fields_view_get(self, cr, uid, view_id=None, view_type='form', context=None, toolbar=False, submenu=False):
