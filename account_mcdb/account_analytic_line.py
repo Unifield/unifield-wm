@@ -89,13 +89,40 @@ class account_analytic_line(osv.osv):
             raise osv.except_osv(_('Error'), msg)
         if args[0][1] != 'ilike':
             # g/l selector / analytical selector default operator not found
-            msg = _("Operator %s not suported") % (args[0][1], )
+            msg = _("Operator '%s' not suported") % (args[0][1], )
             raise osv.except_osv(_('Error'), msg)
         if not args[0][2]:
             return []
         
         m_ids = self.pool.get('account.move.line').search(cr, uid,
             [('cheque_number', 'ilike', args[0][2])], context=context)
+        return [('move_id', 'in', m_ids)] if m_ids else [('id', 'in', [])]
+        
+    def _get_fake(self, cr, uid, ids, name, args, context=None):
+        res = {}
+        if not ids:
+            return res
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+        for id in ids:
+            res[id] = False
+        return res
+        
+    def _search_partner_id(self, cr, uid, ids, name, args, context=None):
+        if not len(args):
+            return []
+        if len(args) != 1:
+            msg = _("Domain %s not suported") % (str(args), )
+            raise osv.except_osv(_('Error'), msg)
+        if args[0][1] != '=':
+            # g/l selector / analytical selector default operator not found
+            msg = _("Operator '%s' not suported") % (args[0][1], )
+            raise osv.except_osv(_('Error'), msg)
+        if not args[0][2]:
+            return []
+        
+        m_ids = self.pool.get('account.move.line').search(cr, uid,
+            [('partner_id', '=', args[0][2])], context=context)
         return [('move_id', 'in', m_ids)] if m_ids else [('id', 'in', [])]
 
     _columns = {
@@ -104,9 +131,16 @@ class account_analytic_line(osv.osv):
         'output_amount_credit': fields.function(_get_output, string="Output credit", type='float', method=True, store=False, multi="analytic_output_currency"),
         'output_currency': fields.function(_get_output, string="Output curr.", type='many2one', relation='res.currency', method=True, store=False,
             multi="analytic_output_currency"),
+        # BKLG-7: selector move cheque number search and value
         'cheque_number': fields.function(_get_cheque_number, type='char',
             method=True, string='Cheque Number',
-            fnct_search=_search_cheque_number)  # BKLG-7: move cheque number
+            fnct_search=_search_cheque_number),
+        # BKLG-7: selector move partner_id search
+        # (as with partner_txt we have not partner type)
+        'partner_id': fields.function(_get_fake,
+            type='many2one', relation='res.partner',
+            method=True, string='Partner',
+            fnct_search=_search_partner_id),
     }
 
     def fields_view_get(self, cr, uid, view_id=None, view_type='form', context=None, toolbar=False, submenu=False):
