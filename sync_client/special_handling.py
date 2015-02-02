@@ -136,6 +136,10 @@ class account_move_line(osv.osv):
                 if 'ref' in fields and 'ref' not in vals:
                     # UTP-1097: same issue as UTP-1100 (when ref field is cleared)
                     vals['ref'] = False
+                if 'reconcile_partial_id/id' in fields and 'reconcile_partial_id' not in vals:
+                    vals['reconcile_partial_id'] = False
+                if 'reconcile_id/id' in fields and 'reconcile_id' not in vals:
+                    vals['reconcile_id'] = False
                 
         return super(account_move_line, self).write(cr, uid, ids, vals, context=context, check=sync_check, update_check=update_check)
     
