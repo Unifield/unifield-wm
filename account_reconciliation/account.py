@@ -53,6 +53,11 @@ class account_move_reconcile(osv.osv):
             return []
         result = []
         for r in self.browse(cr, uid, ids, context=context):
+            if r.is_lower_level:
+                name = '%s (%.2f)' % (r.name, r.amount_left)
+                result.append((r.id,name))
+                continue
+
             total = reduce(lambda y,t: (t.debit_currency or 0.0) - (t.credit_currency or 0.0) + y, r.line_partial_ids, 0.0)
             if total:
                 name = '%s (%.2f)' % (r.name, total)

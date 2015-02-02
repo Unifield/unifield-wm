@@ -27,6 +27,7 @@ import time
 import netsvc
 from tools.translate import _
 from tools.misc import flatten
+import decimal_precision as dp
 
 class account_move_line(osv.osv):
     _inherit = 'account.move.line'
@@ -89,8 +90,17 @@ class account_move_line(osv.osv):
         # UTP-752: Add an attribute to reconciliation element if different instance levels
         previous_level = False
         different_level = False
+        max_level = False
         for line in self.browse(cr, uid, ids, context=context):
             # Do level check only if we don't know if more than 1 different level exists between lines
+            level = line.instance_id.level
+            if not max_level:
+                max_level = level
+            elif max_level != 'section':
+                if max_level == 'project' and level == 'coordo':
+                    max_level = 'coordo'
+                if max_level in ('coordo', 'project') and level == 'section':
+                    max_level = 'section'
             if not different_level:
                 if not previous_level:
                     previous_level = line.instance_id.id
@@ -118,8 +128,11 @@ class account_move_line(osv.osv):
             'type': type,
             'line_partial_ids': map(lambda x: (4,x,False), merges+unmerge),
             'is_multi_instance': different_level,
+            'lines_max_level': max_level,
+            'amount_left': total,
         })
-        
+        if merges_rec:
+            self.write(cr, uid, merges_rec, {'amount_left': 0, 'lines_max_level': False})
         # UF-2011: synchronize move lines (not "marked" after reconcile creation)
         if self.pool.get('sync.client.orm_extended'):
             self.pool.get('account.move.line').synchronize(cr, uid, merges+unmerge, context=context)
@@ -316,11 +329,26 @@ class account_move_reconcile(osv.osv):
     _name = 'account.move.reconcile'
     _inherit = 'account.move.reconcile'
 
+    def _get_is_lower_level(self, cr, uid, ids, field_names, args, context=None):
+        current_level = self.pool.get('res.users').browse(cr, uid, uid, context=context).company_id.instance_id.level
+        ret = {}
+        for rec in self.read(cr, uid, ids, ['lines_max_level', 'line_partial_ids']):
+            ret[rec['id']] = False
+            if rec['line_partial_ids'] and rec['lines_max_level']:
+                ret[rec['id']] = current_level =='project' and rec['lines_max_level'] in ('coordo', 'section') or current_level == 'coordo' and rec['lines_max_level'] == 'section'
+        return ret
+
     _columns = {
         'is_multi_instance': fields.boolean(string="Reconcile at least 2 lines that comes from different instance levels."),
         'multi_instance_level_creation': fields.selection([('section', 'Section'), ('coordo', 'Coordo'), ('project', 'Project')],
             string='Where the adjustement line should be created'
-        )
+        ),
+
+        'amount_left': fields.float('Amount Left', digits_compute=dp.get_precision('Account')),
+        'lines_max_level': fields.selection([('section', 'Section'), ('coordo', 'Coordo'), ('project', 'Project')],
+                    string='Level to compute the amount left'
+        ),
+        'is_lower_level': fields.function(_get_is_lower_level, type='boolean', method=True, string='Is current instance lower than the reconcile'),
     }
 
     _defaults = {
