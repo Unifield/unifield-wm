@@ -106,10 +106,16 @@ class account_analytic_line(osv.osv):
         return True
         
     def _search_move_compute_domain(self, cr, uid, args, foreign_field,
-        operator, context=None):
-        args_check = self._search_check_args(args, [operator])
+        operator, ilike_emul=False, context=None):
+        check_operators = [operator, ]
+        if operator == '=' and ilike_emul:
+            # assume 'ilike' tolerated when wanting '='
+            # (AJI search view m2o 'ilike' by default)
+            check_operators.append('ilike')
+        args_check = self._search_check_args(args, check_operators)
         if not args_check:
             return args_check
+            
         m_ids = self.pool.get('account.move.line').search(cr, uid,
             [(foreign_field, operator, args[0][2])], context=context)
         return [('move_id', 'in', m_ids)] if m_ids else [('id', 'in', [])]
@@ -130,11 +136,11 @@ class account_analytic_line(osv.osv):
         
     def _search_partner_id(self, cr, uid, ids, name, args, context=None):
         return self._search_move_compute_domain(cr, uid, args,
-            'partner_id', '=', context=context)
+            'partner_id', '=', ilike_emul=True, context=context)
         
     def _search_employee_id(self, cr, uid, ids, name, args, context=None):
         return self._search_move_compute_domain(cr, uid, args,
-            'employee_id', '=', context=context)
+            'employee_id', '=', ilike_emul=True, context=context)
 
     _columns = {
         'output_amount': fields.function(_get_output, string="Output amount", type='float', method=True, store=False, multi="analytic_output_currency"),
