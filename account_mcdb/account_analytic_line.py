@@ -105,24 +105,14 @@ class account_analytic_line(osv.osv):
             return []
         return True
         
-    def _search_move_compute_domain(self, cr, uid, args, foreign_field,
-        operator, ilike_emul=False, context=None):
-        check_operators = [operator, ]
-        if operator == '=' and ilike_emul:
-            # assume 'ilike' tolerated when wanting '='
-            # (AJI search view m2o 'ilike' by default)
-            check_operators.append('ilike')
-        args_check = self._search_check_args(args, check_operators)
+    def _search_cheque_number(self, cr, uid, ids, name, args, context=None):
+        operator = 'ilike'
+        args_check = self._search_check_args(args, [operator])
         if not args_check:
             return args_check
-            
         m_ids = self.pool.get('account.move.line').search(cr, uid,
-            [(foreign_field, operator, args[0][2])], context=context)
+            [('cheque_number', operator, args[0][2])], context=context)
         return [('move_id', 'in', m_ids)] if m_ids else [('id', 'in', [])]
-        
-    def _search_cheque_number(self, cr, uid, ids, name, args, context=None):
-        return self._search_move_compute_domain(cr, uid, args,
-            'cheque_number', 'ilike', context=context)
         
     def _get_fake(self, cr, uid, ids, name, args, context=None):
         res = {}
@@ -134,13 +124,35 @@ class account_analytic_line(osv.osv):
             res[id] = False
         return res
         
+    def _search_third_party(self, cr, uid, model, foreign_key, args,
+        context=None):
+        args_check = self._search_check_args(args, ['ilike', '='])
+        if not args_check:
+            return args_check
+            
+        operator = args[0][1]
+        # search for matching ilike third party
+        if operator == 'ilike':
+            # search operand <=> text search
+            tp_ids = self.pool.get(model).search(cr, uid,
+                [('name', operator, args[0][2])], context=context)
+            if not tp_ids:  # not found
+                return [('id', 'in', [])]
+        else:
+            # = operator: search operand <=> third party id
+            tp_ids = [args[0][2], ]  # search operand <=> text search
+            
+        m_ids = self.pool.get('account.move.line').search(cr, uid,
+            [(foreign_key, 'in', tp_ids)], context=context)
+        return [('move_id', 'in', m_ids)] if m_ids else [('id', 'in', [])]
+        
     def _search_partner_id(self, cr, uid, ids, name, args, context=None):
-        return self._search_move_compute_domain(cr, uid, args,
-            'partner_id', '=', ilike_emul=True, context=context)
+        return self._search_third_party(cr, uid, 'res.partner', 'partner_id',
+            args, context=context)
         
     def _search_employee_id(self, cr, uid, ids, name, args, context=None):
-        return self._search_move_compute_domain(cr, uid, args,
-            'employee_id', '=', ilike_emul=True, context=context)
+        return self._search_third_party(cr, uid, 'hr.employee', 'employee_id',
+            args, context=context)
 
     _columns = {
         'output_amount': fields.function(_get_output, string="Output amount", type='float', method=True, store=False, multi="analytic_output_currency"),
