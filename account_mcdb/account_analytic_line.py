@@ -141,9 +141,26 @@ class account_analytic_line(osv.osv):
         else:
             # = operator: search operand <=> third party id
             tp_ids = [args[0][2], ]  # search operand <=> text search
-            
-        m_ids = self.pool.get('account.move.line').search(cr, uid,
-            [(foreign_key, 'in', tp_ids)], context=context)
+         
+        m_ids = False
+        if tp_ids:
+            m_ids = self.pool.get('account.move.line').search(cr, uid,
+                [(foreign_key, 'in', tp_ids)], context=context)
+        if not tp_ids or not m_ids:
+            # at project level, search by partner_txt field as AJI could have
+            # no thirdparty m2o link by sync (only partner_txt)
+            if self.pool.get('res.users').browse(cr, uid, [uid], 
+                context=context)[0].company_id.instance_id.level == 'project':
+                if operator == 'ilike':
+                    name = args[0][2]
+                else:
+                    # operator '=': get name from id
+                    model_r = self.pool.get(model).read(cr, uid, [args[0][2]],
+                        ['name'], context=context)[0]
+                    if model_r and model_r['name']:
+                        name = model_r['name']
+                if name:
+                    return [('partner_txt', operator, name)]
         return [('move_id', 'in', m_ids)] if m_ids else [('id', 'in', [])]
         
     def _search_partner_id(self, cr, uid, ids, name, args, context=None):
