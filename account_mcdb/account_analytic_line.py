@@ -136,8 +136,6 @@ class account_analytic_line(osv.osv):
             # search operand <=> text search
             tp_ids = self.pool.get(model).search(cr, uid,
                 [('name', operator, args[0][2])], context=context)
-            if not tp_ids:  # not found
-                return [('id', 'in', [])]
         else:
             # = operator: search operand <=> third party id
             tp_ids = [args[0][2], ]  # search operand <=> text search
@@ -168,6 +166,8 @@ class account_analytic_line(osv.osv):
             args, context=context)
         
     def _search_employee_id(self, cr, uid, ids, name, args, context=None):
+        import pdb
+        pdb.set_trace()
         return self._search_third_party(cr, uid, 'hr.employee', 'employee_id',
             args, context=context)
 
