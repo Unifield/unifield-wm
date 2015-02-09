@@ -166,8 +166,6 @@ class account_analytic_line(osv.osv):
             args, context=context)
         
     def _search_employee_id(self, cr, uid, ids, name, args, context=None):
-        import pdb
-        pdb.set_trace()
         return self._search_third_party(cr, uid, 'hr.employee', 'employee_id',
             args, context=context)
 
