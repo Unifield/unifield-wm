@@ -291,6 +291,7 @@ class procurement_request(osv.osv):
             for line in req.order_line:
                 if line.id not in line_ids:
                     line_ids.append(line.id)
+            self.infolog(cr, uid, _('The Internal Request \'%s\' has been canceled (state: %s).') % (req.name, req.state))
 
         self.write(cr, uid, ids, {'state': 'cancel'}, context=context)
         self.pool.get('sale.order.line').write(cr, uid, line_ids, {'state': 'cancel'}, context=context)
@@ -323,6 +324,7 @@ class procurement_request(osv.osv):
                     raise osv.except_osv(_('Error'), _('A line must a have a quantity larger than 0.00'))
             if nb_lines:
                 raise osv.except_osv(_('Error'), _('Please check the lines : you cannot have "To Be confirmed" for Nomenclature Level". You have %s lines to correct !') % nb_lines)
+            self.infolog(cr, uid, _('The Internal Request \'%s\' has been validated.') % req.name)
         self.write(cr, uid, ids, {'state': 'validated'}, context=context)
 
         return True
@@ -355,6 +357,7 @@ class procurement_request(osv.osv):
             proc_view = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'procurement_request', 'procurement_request_form_view')
             context.update({'view_id': proc_view and proc_view[1] or False})
             self.log(cr, uid, request.id, message, context=context)
+            self.infolog(cr, uid, message)
 
         self.action_ship_create(cr, uid, ids, context=context)
 
