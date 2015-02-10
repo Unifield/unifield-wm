@@ -1039,6 +1039,7 @@ The parameter '%s' should be an browse_record instance !""") % (method, self._na
         order_name = self.read(cr, uid, order_id, ['name'], context=context)['name']
 
         self.log(cr, uid, order_id, _('The Field order %s has been created to re-source the canceled needs') % order_name, context=dict(context, procurement_request=order.procurement_request))
+        self.infolog(cr, uid, _('The Field order %s has been created to re-source the canceled needs') % order_name, context=dict(context, procurement_request=order.procurement_request))
 
         return order_id
 
@@ -2001,6 +2002,7 @@ The parameter '%s' should be an browse_record instance !""") % (method, self._na
                 # display message for sourced
                 if display_log:
                     self.log(cr, uid, order.id, _('The split \'%s\' is sourced.') % (order.name))
+                self.infolog(cr, uid, _('The split \'%s\' is sourced.') % order.name)
 
             prog_id = self.update_sourcing_progress(cr, uid, order, prog_id, {
                 'line_completed': _('In Progress (%s/%s)') % (line_done, line_total),

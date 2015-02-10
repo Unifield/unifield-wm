@@ -138,6 +138,7 @@ class purchase_order(osv.osv):
         data = self.read(cr, uid, new_po_id, ['name'], context=context)
         # log message describing the previous action
         self.log(cr, uid, new_po_id, _('The Purchase Order %s has been generated from Request for Quotation.')%data['name'])
+        self.infolog(cr, uid, _('The Purchase Order %s has been generated from Request for Quotation.')%data['name'])
         # close the current po
         wf_service = netsvc.LocalService("workflow")
         wf_service.trg_validate(uid, 'purchase.order', ids[0], 'rfq_done', cr)

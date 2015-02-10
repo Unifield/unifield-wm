@@ -472,7 +472,9 @@ class shipment(osv.osv):
                 picking_obj.force_assign(cr, uid, [new_packing_id])
 
             # Log creation message
-            self.log(cr, uid, shipment.id, _('The new Shipment %s has been created.') % (shipment_name,))
+            message = _('The new Shipment %s has been created.') % (shipment.name,)
+            self.log(cr, uid, shipment.id, message)
+            self.infolog(cr, uid, message)
             # The shipment is automatically shipped, no more pack states in between.
             self.ship(cr, uid, [shipment_id], context=context)
 
