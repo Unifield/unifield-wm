@@ -334,6 +334,11 @@ The parameter '%s' should be an browse_record instance !""") % (method, self._na
 
         context.update({'no_check_line': True})
         self.write(cr, uid, ids, {'delivery_confirmed_date': time.strftime('%Y-%m-%d')}, context=context)
+
+
+        for order in self.browse(cr, uid, ids, context=context):
+            self.infolog(cr, uid, _('Cancelation of the field order %s') % order.name)
+
         return super(sale_order, self).action_cancel(cr, uid, ids, context=context)
 
     #@@@override sale.sale_order._invoiced
@@ -886,9 +891,12 @@ The parameter '%s' should be an browse_record instance !""") % (method, self._na
         # Display validation message to the user
         for order in order_brw_list:
             if not order.procurement_request:
-                self.log(cr, uid, order.id, 'The Field order \'%s\' has been validated.' % order.name, context=context)
+                message = _('The Field order \'%s\' has been validated.') % order.name
             else:
-                self.log(cr, uid, order.id, 'The Internal Request \'%s\' has been validated.' % order.name, context=context)
+                message = _('The Internal Request \'%s\' has been validated') % order.name
+
+            self.log(cr, uid, order.id, message, context=context)
+            self.infolog(cr, uid, message)
 
         return True
 
@@ -2208,9 +2216,13 @@ class sale_order_line(osv.osv):
         '''
         sale_ids = []
         res = False
-        for line in self.read(cr, uid, ids, ['order_id'], context=context):
-            if line['order_id'][0] not in sale_ids:
-                sale_ids.append(line['order_id'][0])
+        for line in self.browse(cr, uid, ids, context=context):
+            self.infolog(cr, uid, _('Line #%s of the order %s removed.') % (
+                line.line_number,
+                line.order_id.name,
+            ))
+            if line.order_id.id not in sale_ids:
+                sale_ids.append(line.order_id.id)
 
         self.unlink(cr, uid, ids, context=context)
 
