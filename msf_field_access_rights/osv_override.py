@@ -150,6 +150,7 @@ def infolog(self, cr, uid, message):
     )
 
 orm.orm.infolog = infolog
+orm.orm_template.infolog = infolog
 
 
 def _values_equate(field_type, current_value, new_value):

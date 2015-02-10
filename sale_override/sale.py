@@ -979,6 +979,7 @@ The parameter '%s' should be an browse_record instance !""") % (method, self._na
                                                               'split_type_sale_order': fo_type,
                                                               'ready_to_ship_date': line.order_id.ready_to_ship_date,
                                                               'original_so_id_sale_order': so.id}, context=dict(context, keepDateAndDistrib=True, keepClientOrder=True))
+                        self.infolog(cr, uid, _('The \'%s\' split \'%s\' has been created.') % (selec_name, fo_name))
                         # log the action of split
                         self.log(cr, uid, split_id, _('The %s split %s has been created.') % (selec_name, fo_name))
                         split_fo_dic[fo_type] = split_id
@@ -1082,6 +1083,8 @@ The parameter '%s' should be an browse_record instance !""") % (method, self._na
             sol_obj.write(cr, uid, sol_ids, {'state': 'done'}, context=context)
         self.write(cr, uid, ids, {'state': 'done',
                                   'active': False}, context=context)
+        for order in self.browse(cr, uid, ids, context=context):
+            self.infolog(cr, uid, _('The Field order \'%s\' has been splitted') % order.name)
         return True
 
     def get_po_ids_from_so_ids(self, cr, uid, ids, context=None):
