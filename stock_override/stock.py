@@ -550,14 +550,20 @@ class stock_picking(osv.osv):
 
     @check_cp_rw
     def force_assign(self, cr, uid, ids, context=None):
+        for pick in self.read(cr, uid, ids, ['name'], context=context):
+            self.infolog(cr, uid, _('Force availability run on %s') % pick['name'])
         return super(stock_picking, self).force_assign(cr, uid, ids)
 
     @check_cp_rw
     def action_assign(self, cr, uid, ids, context=None):
+        for pick in self.read(cr, uid, ids, ['name'], context=context):
+            self.infolog(cr, uid, _('Check availability run on %s') % pick['name'])
         return super(stock_picking, self).action_assign(cr, uid, ids, context=context)
 
     @check_cp_rw
     def cancel_assign(self, cr, uid, ids, *args, **kwargs):
+        for pick in self.read(cr, uid, ids, ['name'], context=context):
+            self.infolog(cr, uid, _('Cancel availability run on %s') % pick['name'])
         return super(stock_picking, self).cancel_assign(cr, uid, ids)
 
     def call_cancel_wizard(self, cr, uid, ids, context=None):
@@ -1326,6 +1332,8 @@ class stock_move(osv.osv):
         for move in self.browse(cr, uid, ids, context=context):
             if move.product_id.id == product_tbd and move.from_wkf_line:
                 ids.pop(ids.index(move.id))
+            else:
+                self.infolog(cr, uid, _('Force availability run on stock move #%s of %s') % (move.line_number, move.picking_id.name))
 
         return super(stock_move, self).force_assign(cr, uid, ids, context=context)
 
@@ -1774,6 +1782,8 @@ class stock_move(osv.osv):
     @check_cp_rw
     def cancel_assign(self, cr, uid, ids, context=None):
         res = super(stock_move, self).cancel_assign(cr, uid, ids, context=context)
+        for move in self.browse(cr, uid, ids, context=context):
+            self.infolog(cr, uid, _('Cancel availability run on stock move #%s of %s') % (move.line_number, move.picking_id.name))
         res = []
 
         fields_to_read = ['picking_id', 'product_id', 'product_uom', 'location_id',
