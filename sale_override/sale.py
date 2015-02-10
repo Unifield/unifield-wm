@@ -337,7 +337,7 @@ The parameter '%s' should be an browse_record instance !""") % (method, self._na
 
 
         for order in self.browse(cr, uid, ids, context=context):
-            self.infolog(cr, uid, _('Cancelation of the field order %s') % order.name)
+            self.infolog(cr, uid, _('Cancelation of the field order %s (state: %s)') % (order.name, order.state))
 
         return super(sale_order, self).action_cancel(cr, uid, ids, context=context)
 
@@ -1039,7 +1039,7 @@ The parameter '%s' should be an browse_record instance !""") % (method, self._na
         order_name = self.read(cr, uid, order_id, ['name'], context=context)['name']
 
         self.log(cr, uid, order_id, _('The Field order %s has been created to re-source the canceled needs') % order_name, context=dict(context, procurement_request=order.procurement_request))
-        self.infolog(cr, uid, _('The Field order %s has been created to re-source the canceled needs') % order_name, context=dict(context, procurement_request=order.procurement_request))
+        self.infolog(cr, uid, _('The Field order %s has been created to re-source the canceled needs') % order_name)
 
         return order_id
 

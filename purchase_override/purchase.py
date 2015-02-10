@@ -3024,6 +3024,7 @@ class purchase_order_line(osv.osv):
         proc_ids = []
         purchase_ids = []
         line_to_cancel = []
+        messages = []
 
         for line in self.browse(cr, uid, ids, context=context):
             # Set the procurement orders to delete
@@ -3036,7 +3037,10 @@ class purchase_order_line(osv.osv):
             if not self.pool.get('sale.order.line.cancel').search(cr, uid, [
                 ('sync_order_line_db_id', '=', line.sync_order_line_db_id),
             ], context=context):
+                messages.append(_('Line #%s of the PO %s has been canceled. The corresponding IR/FO line has been updated/canceled') % (line.line_number, line.order_id.name))
                 so_to_cancel = self.cancel_sol(cr, uid, [line.id], context=context)
+            else:
+                messages.append(_('Line #%s of the PO %s has been canceled.') % (line.line_numbre, line.order_id.name))
 
             # we want to skip resequencing because unlink is performed on merged purchase order lines
             tmp_Resequencing = context.get('skipResequencing', False)
@@ -3053,6 +3057,9 @@ class purchase_order_line(osv.osv):
 
         self.write(cr, uid, ids, {'state': 'cancel'}, context=context)
         self.unlink(cr, uid, line_to_cancel, context=context)
+
+        for msg in messages:
+            self.infolog(cr, uid, msg)
 
         return so_to_cancel
 
