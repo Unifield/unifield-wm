@@ -1540,6 +1540,16 @@ The parameter '%s' should be an browse_record instance !""") % (method, self._na
                     if not picking_id:
                         picking_data = self._get_picking_data(cr, uid, order)
                         picking_id = picking_obj.create(cr, uid, picking_data, context=context)
+                        order_type = order.procurement_request and 'IR' or 'FO'
+                        pick_type = 'Picking Ticket'
+                        if picking_data.get('type') == 'internal':
+                            pick_type = 'Internal move'
+                        elif picking_data.get('subtype') == 'standard':
+                            pick_type = 'Outgoing delivery'
+                        msg = _('The %s \'%s\' has been generated from %s \'%s\'') % (
+                            pick_type, picking_data.get('name'), order_type, order.name
+                        )
+                        self.infolog(cr, uid, msg)
 
                     # Get move data and create the move
                     move_data = self._get_move_data(cr, uid, order, line, picking_id, context=context)
