@@ -3088,14 +3088,19 @@ class purchase_order_line(osv.osv):
             ids = [ids]
 
         order_ids = []
-        for line in self.read(cr, uid, ids, ['id', 'order_id'], context=context):
+        messages = []
+        for line in self.browse(cr, uid, ids, context=context):
             # we want to skip resequencing because unlink is performed on merged purchase order lines
             tmp_skip_resourcing = context.get('skipResourcing', False)
             context['skipResourcing'] = True
-            self._update_merged_line(cr, uid, line['id'], False, context=context)
+            self._update_merged_line(cr, uid, line.id, False, context=context)
             context['skipResourcing'] = tmp_skip_resourcing
-            if line['order_id'][0] not in order_ids:
-                order_ids.append(line['order_id'][0])
+            if line.order_id.id not in order_ids:
+                order_ids.append(line.order_id.id)
+
+            if not line.order_id.rfq_ok:
+                messages.append(_('The line #%s of the PO \'%s\' has been deleted.') % (line.line_number, line.order_id.name))
+
 
         if context.get('from_del_wizard'):
             return self.ask_unlink(cr, uid, ids, context=context)
@@ -3103,6 +3108,9 @@ class purchase_order_line(osv.osv):
         res = super(purchase_order_line, self).unlink(cr, uid, ids, context=context)
 
         po_obj.wkf_confirm_trigger(cr, uid, order_ids, context=context)
+
+        for msg in messages:
+            self.infolog(cr, uid, msg)
 
         return res
 
