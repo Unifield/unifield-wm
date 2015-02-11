@@ -62,6 +62,7 @@ class enter_reason(osv.osv_memory):
         change_reason = data['change_reason']
         values = {'change_reason': change_reason}
         # update the object
+        messages =  []
         for obj in picking_obj.browse(cr, uid, picking_ids, context=context):
             # purchase order line to re-source
             pol_ids = []
@@ -76,12 +77,14 @@ class enter_reason(osv.osv_memory):
                     pol_qty[move.purchase_line_id.id] += move.product_qty
 
             # if full cancel (no resource), we updated corresponding out and correct po state
+            rsrc = ''
             picking_obj.cancel_and_update_out(cr, uid, [obj.id], context=context)
             if cancel_type != 'update_out':
                 context['pol_qty'] = pol_qty
                 context['from_in_cancel'] = True
                 pol_obj.write(cr, uid, pol_ids, {'has_to_be_resourced': True}, context=context)
                 pol_obj.cancel_sol(cr, uid, pol_ids, context=context)
+                rsrc = _(' Needs sourced by this IN has been resourced.')
             
             # cancel the IN
             wf_service.trg_validate(uid, 'stock.picking', obj.id, 'button_cancel', cr)
@@ -90,6 +93,11 @@ class enter_reason(osv.osv_memory):
             if obj.purchase_id:
                 wf_service.trg_validate(uid, 'purchase.order', obj.purchase_id.id, 'picking_ok', cr)
                 purchase_obj.log(cr, uid, obj.purchase_id.id, _('The Purchase Order %s is %s%% received')%(obj.purchase_id.name, round(obj.purchase_id.shipped_rate,2)))
+
+            messages.append(_('The IN \'%s\' has been canceled. %s') % (obj.name, rsrc))
+
+        for msg in messages:
+            picking_obj.infolog(cr, uid, msg)
 
         return {'type': 'ir.actions.act_window_close'}
     

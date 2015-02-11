@@ -1040,7 +1040,6 @@ The parameter '%s' should be an browse_record instance !""") % (method, self._na
         order_name = self.read(cr, uid, order_id, ['name'], context=context)['name']
 
         self.log(cr, uid, order_id, _('The Field order %s has been created to re-source the canceled needs') % order_name, context=dict(context, procurement_request=order.procurement_request))
-        self.infolog(cr, uid, _('The Field order %s has been created to re-source the canceled needs') % order_name)
 
         return order_id
 

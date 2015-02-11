@@ -294,7 +294,9 @@ class tender(osv.osv):
         obj_data = self.pool.get('ir.model.data')
 
         # no suppliers -> raise error
+        messages = []
         for tender in self.browse(cr, uid, ids, context=context):
+            rfq_names = []
             # check some supplier have been selected
             if not tender.supplier_ids:
                 raise osv.except_osv(_('Warning !'), _('You must select at least one supplier!'))
@@ -340,7 +342,8 @@ class tender(osv.osv):
                           }
                 # create the rfq - dic is udpated for default partner_address_id at purchase.order level
                 po_id = po_obj.create(cr, uid, values, context=dict(context, partner_id=supplier.id, rfq_ok=True))
-                
+                rfq_names.append('\'%s\'' % po_obj.read(cr, uid, po_id, ['name'])['name'])
+
                 for line in tender.tender_line_ids:
                     if line.line_state == 'cancel':
                         continue
@@ -375,8 +378,17 @@ class tender(osv.osv):
                                                             'res_id': po_id,
                                                             'domain': [('rfq_ok', '=', True)],
                                                             }, context={'rfq_ok': True})
+
+            messages.append(_('The RfQ %s have been generated from the tender \'%s\'') % (
+                ', '.join(rfq_names),
+                tender.name,
+            ))
             
         self.write(cr, uid, ids, {'state':'comparison'}, context=context)
+
+        for msg in messages:
+            self.infolog(cr, uid, msg)
+
         return True
     
     def wkf_action_done(self, cr, uid, ids, context=None):
@@ -709,6 +721,7 @@ class tender(osv.osv):
         wf_service = netsvc.LocalService("workflow")
 
         # set state
+        messages = []
         self.write(cr, uid, ids, {'state': 'cancel'}, context=context)
         for tender in self.browse(cr, uid, ids, context=context):
             # trigger all related rfqs
@@ -716,8 +729,19 @@ class tender(osv.osv):
             for rfq_id in rfq_ids:
                 wf_service.trg_validate(uid, 'purchase.order', rfq_id, 'purchase_cancel', cr)
 
+            has_to_be_resourced = False
             for line in tender.tender_line_ids:
+                if line.has_to_be_resourced:
+                    has_to_be_resourced = True
                 t_line_obj.cancel_sourcing(cr, uid, [line.id], context=context)
+
+            if has_to_be_resourced:
+                messages.append(_('The tender \'%s\' has been canceled. The needs sourced by this tender have been re-sourced.') % (tender.name))
+            else:
+                messages.append(_('The tender \'%s\' has been canceled.') % (tender.name))
+
+        for msg in messages:
+            self.infolog(cr, uid, msg)
                 
         return True
 
@@ -1929,6 +1953,16 @@ class tender_line_cancel_wizard(osv.osv_memory):
             for so_id in tender_so_ids:
                 if so_obj._get_ready_to_cancel(cr, uid, so_id, context=context)[so_id]:
                     so_to_cancel_ids.append(so_id)
+
+        for line in line_obj.browse(cr, uid, line_ids, context=context):
+            rsrc = ''
+            if line.has_to_be_resourced:
+                rsrc = _(' The needs sourced by this line have been resourced.')
+            self.infolog(cr, uid, _('The line with the product \'%s\' of the tender \'%s\' has been canceled.%s') % (
+                line.product_id.default_code,
+                line.tender_id.name,
+                rsrc
+            ))
 
         if so_to_cancel_ids:
             # Ask user to choose what must be done on the FO/IR

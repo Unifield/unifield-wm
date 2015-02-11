@@ -613,13 +613,13 @@ class stock_picking(osv.osv):
         fo_ids = set()
         for pick in self.browse(cr, uid, ids, context=context):
             p_type = 'Internal move'
-            if pick.type == 'in':
-                p_type = _('Incoming shipment')
-            elif pick.type == 'out' and pick.subtype == 'standard':
+            if pick.type == 'out' and pick.subtype == 'standard':
                 p_type = _('Outgoing delivery')
             else:
                 p_type = _('Picking Ticket')
-            self.infolog(cr, uid, _('The %s \'%s\' has been canceled (state: %s') % (p_type, pick.name, pick.state))
+
+            if pick.type != 'in':
+                self.infolog(cr, uid, _('The %s \'%s\' has been canceled (state: %s') % (p_type, pick.name, pick.state))
             # Don't delete lines if an Available PT is canceled
             if pick.type == 'out' and pick.subtype == 'picking' and pick.backorder_id and True:
                 continue
