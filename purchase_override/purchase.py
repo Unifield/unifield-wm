@@ -485,6 +485,7 @@ class purchase_order(osv.osv):
                             so_to_cancel_ids.add(exp.order_id.id)
 
             wf_service.trg_validate(uid, 'purchase.order', po.id, 'purchase_cancel', cr)
+            self.infolog(cr, uid, _('The PO \'%s\' has been canceled') % po.name)
 
         # Ask user to choose what must be done on the FO/IR
         if so_to_cancel_ids:
