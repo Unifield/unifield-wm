@@ -228,6 +228,13 @@ class split_purchase_order_line_wizard(osv.osv_memory):
                     if context.get('from_simu_screen'):
                         return new_line_ids[0]
 
+                self.infolog(cr, uid, _('The line #%s of the PO \'%s\' has been split (old qty: %s - new qty: %s).') % (
+                    split.purchase_line_id.line_number,
+                    split.purchase_line_id.order_id.name,
+                    split.original_qty,
+                    split.original_qty - split.new_line_qty,
+                ))
+
         if context.get('from_simu_screen'):
             return False
 
