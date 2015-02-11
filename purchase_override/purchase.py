@@ -138,7 +138,10 @@ class purchase_order(osv.osv):
         data = self.read(cr, uid, new_po_id, ['name'], context=context)
         # log message describing the previous action
         self.log(cr, uid, new_po_id, _('The Purchase Order %s has been generated from Request for Quotation.')%data['name'])
-        self.infolog(cr, uid, _('The Purchase Order %s has been generated from Request for Quotation.')%data['name'])
+        self.infolog(cr, uid, _('The Purchase Order \'%s\' has been generated from Request for Quotation \'%s\'.') % (
+            data['name'],
+            self.read(cr, uid, ids[0], ['name'])['name']
+        ))
         # close the current po
         wf_service = netsvc.LocalService("workflow")
         wf_service.trg_validate(uid, 'purchase.order', ids[0], 'rfq_done', cr)
@@ -485,7 +488,9 @@ class purchase_order(osv.osv):
                             so_to_cancel_ids.add(exp.order_id.id)
 
             wf_service.trg_validate(uid, 'purchase.order', po.id, 'purchase_cancel', cr)
-            self.infolog(cr, uid, _('The PO \'%s\' has been canceled') % po.name)
+
+            po_type = po.rfq_ok and 'RfQ' or 'PO'
+            self.infolog(cr, uid, _('The %s \'%s\' has been canceled') % (po_type, po.name))
 
         # Ask user to choose what must be done on the FO/IR
         if so_to_cancel_ids:

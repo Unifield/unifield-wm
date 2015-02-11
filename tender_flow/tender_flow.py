@@ -1613,9 +1613,11 @@ class purchase_order(osv.osv):
         if isinstance(ids, (int, long)):
             ids = [ids]
         self.hook_rfq_sent_check_lines(cr, uid, ids, context=context)
+        messages = []
         for rfq in self.browse(cr, uid, ids, context=context):
             wf_service = netsvc.LocalService("workflow")
             wf_service.trg_validate(uid, 'purchase.order', rfq.id, 'rfq_sent', cr)
+            messages.append(_('The RfQ \'%s\' has been sent') % rfq.name)
             
         self.write(cr, uid, ids, {'date_confirm': time.strftime('%Y-%m-%d')}, context=context)
 
@@ -1623,6 +1625,9 @@ class purchase_order(osv.osv):
         if len(ids) == 1:
             # UFTP-92: give a name to report when generated from RfQ worklow sent_rfq stage
             datas['target_filename'] = 'RFQ_' + rfq.name
+
+        for msg in messages:
+            self.infolog(cr, uid, msg)
 
         return {'type': 'ir.actions.report.xml',
                 'report_name': 'msf.purchase.quotation',
@@ -1635,6 +1640,7 @@ class purchase_order(osv.osv):
         if isinstance(ids, (int, long)):
             ids = [ids]
 
+        messages = []
         wf_service = netsvc.LocalService("workflow")
         for rfq in self.browse(cr, uid, ids, context=context):
             if not rfq.valid_till:
@@ -1653,6 +1659,11 @@ class purchase_order(osv.osv):
                                        'tender_id': rfq.tender_id.id,
                                        'created_by_rfq': True}
                             tl_id = tl_obj.create(cr, uid, tl_vals, context=context)
+                            msg = _('A new tender line has been created from the line #%s of the RfQ \'%s\'.') % (
+                                line.line_number,
+                                rfq.name
+                            )
+                            messages.append(msg)
                         line_obj.write(cr, uid, [line.id], {'tender_line_id': tl_id}, context=context)
             elif rfq.rfq_ok:
                 line_ids = line_obj.search(cr, uid, [
@@ -1667,6 +1678,10 @@ price. Please set unit price on these lines or cancel them'''),
                     )
 
             wf_service.trg_validate(uid, 'purchase.order', rfq.id, 'rfq_updated', cr)
+            messages.append(_('The RfQ \'%s\' has been updated') % (rfq.name))
+
+        for msg in messages:
+            self.infolog(cr, uid, msg)
 
         return {
             'type': 'ir.actions.act_window',
