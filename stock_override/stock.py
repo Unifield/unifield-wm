@@ -562,7 +562,7 @@ class stock_picking(osv.osv):
 
     @check_cp_rw
     def cancel_assign(self, cr, uid, ids, *args, **kwargs):
-        for pick in self.read(cr, uid, ids, ['name'], context=context):
+        for pick in self.read(cr, uid, ids, ['name']):
             self.infolog(cr, uid, _('Cancel availability run on %s') % pick['name'])
         return super(stock_picking, self).cancel_assign(cr, uid, ids)
 

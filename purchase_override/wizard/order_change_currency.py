@@ -79,6 +79,7 @@ class purchase_order_change_currency(osv.osv_memory):
         line_obj = self.pool.get('purchase.order.line')
         order_obj = self.pool.get('purchase.order')
             
+        messages = []
         for wiz in self.browse(cr, uid, ids, context=context):            
             for line in wiz.order_id.order_line:
                 new_price = currency_obj.compute(cr, uid, wiz.old_pricelist_id.currency_id.id, wiz.new_pricelist_id.currency_id.id, line.price_unit, round=False, context=context)
@@ -94,6 +95,16 @@ class purchase_order_change_currency(osv.osv_memory):
                     order_data.update({'transport_currency_id': cur_id})
             
             order_obj.write(cr, uid, wiz.order_id.id, order_data)
+            o_type = wiz.order_id.rfq_ok and 'RfQ' or 'PO'
+            messages.append(_('The currency of the %s \'%s\' has been changed (from %s to %s).') % (
+                o_type,
+                wiz.order_id.name,
+                wiz.old_pricelist_id.currency_id.name,
+                wiz.new_pricelist_id.currency_id.name,
+            ))
+            
+        for msg in messages:
+            self.infolog(cr, uid, msg)
             
         return {'type': 'ir.actions.act_window_close'}
     
