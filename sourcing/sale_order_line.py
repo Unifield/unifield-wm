@@ -1124,9 +1124,12 @@ the supplier must be either in 'Internal', 'Inter-section' or 'Intermission type
 
         for order_id in order_ids:
             try:
+                order_name = self.pool.get('sale.order').read(cr, uid, order_id, ['name'])['name']
                 if state_to_use == 'confirmed':
+                    self.infolog(cr, uid, _('All lines of the IR \'%s\' have been sourced.') % order_name)
                     wf_service.trg_validate(uid, 'sale.order', order_id, 'procurement_confirm', cr)
                 else:
+                    self.infolog(cr, uid, _('All lines of the FO \'%s\' have been sourced.') % order_name)
                     wf_service.trg_validate(uid, 'sale.order', order_id, 'order_confirm', cr)
                 self.pool.get('sale.order').write(cr, uid, [order_id],
                                                   {'sourcing_trace_ok': False,
