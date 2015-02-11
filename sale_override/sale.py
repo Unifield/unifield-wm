@@ -2248,6 +2248,23 @@ class sale_order_line(osv.osv):
 
         return res
 
+    def unlink(self, cr, uid, ids, context=None):
+        messages = []
+        for line in self.browse(cr, uid, ids, context=context):
+            if line.order_id and line.order_id.procurement_request:
+                messages.append(
+                    _('The line #%s of IR \'%s\' has been removed') % (
+                        line.line_number, line.order_id.name
+                    )
+                )
+
+        res = super(sale_order_line, self).unlink(cr, uid, ids, context=context)
+
+        for msg in messages:
+            self.infolog(cr, uid, msg)
+
+        return res
+
     def _check_restriction_line(self, cr, uid, ids, context=None):
         '''
         Check if there is restriction on lines

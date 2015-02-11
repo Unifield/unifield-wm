@@ -1046,6 +1046,7 @@ stock moves which are already processed : '''
 
         todo = []
 
+        messages = []
         for po in self.browse(cr, uid, ids, context=context):
             # Check if the pricelist of the order is good according to currency of the partner
             pricelist_ids = self.pool.get('product.pricelist').search(cr, uid, [('in_search', '=', po.partner_id.partner_type)], context=context)
@@ -1064,7 +1065,7 @@ stock moves which are already processed : '''
 
             message = _("Purchase order '%s' is validated.") % (po.name,)
             self.log(cr, uid, po.id, message)
-            self.infolog(cr, uid, message)
+            messages.append(message)
             # hook for corresponding Fo update
             self._hook_confirm_order_update_corresponding_so(cr, uid, ids, context=context, po=po)
 
@@ -1075,6 +1076,9 @@ stock moves which are already processed : '''
                                   'date_confirm': strftime('%Y-%m-%d')}, context=context)
 
         self.check_analytic_distribution(cr, uid, ids, context=context)
+
+        for msg in messages:
+            self.infolog(cr, uid, msg)
 
         return True
 
