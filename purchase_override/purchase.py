@@ -1903,6 +1903,8 @@ stock moves which are already processed : '''
                 picking_values.update({'reason_type_id': reason_type_id})
 
             picking_id = self.pool.get('stock.picking').create(cr, uid, picking_values, context=context)
+            from tools.translate import _
+            msg = _('The IN \'%s\' has been generated from the confirmation of the PO \'%s\'.') % (pick_name, order.name)
             todo_moves = []
             for order_line in order.order_line:
                 # Reload the data of the line because if the line comes from an ISR and it's a duplicate line,
@@ -1960,6 +1962,9 @@ stock moves which are already processed : '''
                 if self._hook_action_picking_create_modify_out_source_loc_check(cr, uid, ids, context=context, order_line=order_line, move_id=move):
                     moves_to_update.append(order_line.move_dest_id.id)
                 todo_moves.append(move)
+
+            self.infolog(cr, uid, msg)
+
             # compute function fields
             if todo_moves:
                 compute_store = self.pool.get('stock.move')._store_get_values(cr, uid, todo_moves, None, context)
@@ -1974,6 +1979,7 @@ stock moves which are already processed : '''
             move_obj.force_assign(cr, uid, todo_moves)
             wf_service = netsvc.LocalService("workflow")
             wf_service.trg_validate(uid, 'stock.picking', picking_id, 'button_confirm', cr)
+
         return picking_id
         # @@@end
 
