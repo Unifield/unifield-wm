@@ -76,6 +76,15 @@ class split_sale_order_line_wizard(osv.osv_memory):
                 # Create the new line
                 new_line_id = line_obj.copy(cr, uid, split.sale_line_id.id, so_copy_data, context=context)
 
+                order_type = split.sale_line_id.order_id.procurement_request and 'IR' or 'FO'
+                self.infolog(cr, uid, _('The line #%s of the %s \'%s\' has been split (old qty: %s - new qty: %s)') % (
+                    split.sale_line_id.line_number,
+                    order_type,
+                    split.sale_line_id.order_id.name,
+                    split.original_qty,
+                    split.original_qty - split.new_line_qty,
+                ))
+
         return {'type': 'ir.actions.act_window_close'}
 
     def line_qty_change(self, cr, uid, ids, original_qty, new_line_qty, context=None):
