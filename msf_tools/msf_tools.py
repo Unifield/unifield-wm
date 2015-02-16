@@ -186,7 +186,7 @@ class fields_tools(osv.osv):
         
         result = [x.id for x in browse_list]
         return result
-        
+
     def remove_sql_constraint(self, cr, table_name, field_name):
         """
         remove from field the constraint if it exists in current schema

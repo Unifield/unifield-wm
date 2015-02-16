@@ -142,7 +142,7 @@ class purchase_order(osv.osv):
         wf_service = netsvc.LocalService("workflow")
         wf_service.trg_validate(uid, 'purchase.order', ids[0], 'rfq_done', cr)
 
-        return True
+        return new_po_id
 
     def copy(self, cr, uid, p_id, default=None, context=None):
         '''
@@ -2385,7 +2385,7 @@ purchase_order_merged_line()
 class purchase_order_line(osv.osv):
     _name = 'purchase.order.line'
     _inherit = 'purchase.order.line'
-    
+
     def init(self, cr):
         self.pool.get('fields.tools').remove_sql_constraint(cr,
             'purchase_order_line', 'product_qty')
@@ -2573,7 +2573,7 @@ class purchase_order_line(osv.osv):
         '''
         if context is None:
             context = {}
-            
+
         po_obj = self.pool.get('purchase.order')
         seq_pool = self.pool.get('ir.sequence')
         so_obj = self.pool.get('sale.order')
@@ -2592,7 +2592,7 @@ class purchase_order_line(osv.osv):
             if not vals.get('price_unit', False):
                 vals['price_unit'] = 1.00
             # [/]
-        
+
         # Update the name attribute if a product is selected
         self._update_name_attr(cr, uid, vals, context=context)
 
@@ -3210,7 +3210,7 @@ class purchase_order_line(osv.osv):
     _columns = {
         'is_line_split': fields.boolean(string='This line is a split line?'), # UTP-972: Use boolean to indicate if the line is a split line
         'merged_id': fields.many2one('purchase.order.merged.line', string='Merged line'),
-        'origin': fields.char(size=64, string='Origin'),
+        'origin': fields.char(size=512, string='Origin'),
         'link_so_id': fields.many2one('sale.order', string='Linked FO/IR', readonly=True),
         'dpo_received': fields.boolean(string='Is the IN has been received at Project side ?'),
         'change_price_ok': fields.function(_get_price_change_ok, type='boolean', method=True, string='Price changing'),
