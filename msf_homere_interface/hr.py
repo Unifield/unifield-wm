@@ -67,7 +67,29 @@ class hr_employee(osv.osv):
                 allowed = True
             res['value'].update({'allow_edition': allowed,})
         return res
-
+        
+    def onchange_identification_id(self, cr, uid, ids, identification_id,
+        employee_type, context=None):
+        res = {}
+        if not ids or not employee_type:
+            return res
+            
+        if context is None:
+            context = {}
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+        if employee_type and employee_type == 'ex':
+            # US-94 expatriate employee
+            # do not let modify identification id if already set
+            emp_r = self.read(cr, uid, ids[0], ['identification_id', ],
+                context=context)
+            if emp_r['identification_id']:
+                # already set so keep it (cancel change)
+                if not 'value' in res:
+                    res['value'] = {}
+                res['value']['identification_id'] = emp_r['identification_id']
+        return res
+            
     _columns = {
         'employee_type': fields.selection([('', ''), ('local', 'Local Staff'), ('ex', 'Expatriate employee')], string="Type", required=True),
         'cost_center_id': fields.many2one('account.analytic.account', string="Cost Center", required=False, domain="[('category','=','OC'), ('type', '!=', 'view'), ('state', '=', 'open')]"),
