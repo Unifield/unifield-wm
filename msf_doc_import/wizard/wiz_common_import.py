@@ -178,7 +178,8 @@ class wizard_common_import_line(osv.osv_memory):
         '''
         Fill the line of attached document
         '''
-        context = context is None and {} or context
+        if context is None:
+            context = {}
         ids = isinstance(ids, (int, long)) and [ids] or ids
 
         fields_to_read = ['parent_id',
