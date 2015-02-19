@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="action_start_comparison" model="ir.actions.server">
+            <field name="name">Start Comparison</field>
+            <field name="model_id" ref="model_sync_compare"/>
+            <field name="empty_ids">1</field>
+            <field name="state">code</field>
+            <field name="code">action = obj.display_start_wizard(context=context)</field>
+        </record>
+
+        <record id="act_start_comparison" model="ir.values">
+            <field name="key2">client_action_multi</field>
+            <field name="model">sync.compare</field>
+            <field name="name">Start Comparison</field>
+            <field eval="'ir.actions.server,%d'%action_start_comparison" name="value"/>
+            <field eval="True" name="object"/>
+            <field eval="1" name="sequence"/>
+        </record>
+
+        <record id="action_report_gl_account" model="ir.actions.server">
+            <field name="name">Start Comparison</field>
+            <field name="model_id" ref="model_sync_compare"/>
+            <field name="empty_ids">1</field>
+            <field name="state">code</field>
+            <field name="code">action = {'type': 'ir.actions.report.xml', 'report_name': 'export_gl_coa', 'datas': {'ids': [1]}, 'context': context}</field>
+        </record>
+
+        <record id="act_report_gl_account" model="ir.values">
+            <field name="key2">client_print_multi</field>
+            <field name="model">sync.compare</field>
+            <field name="name">G/L Comparison</field>
+            <field eval="'ir.actions.server,%d'%action_report_gl_account" name="value"/>
+            <field eval="True" name="object"/>
+            <field eval="1" name="sequence"/>
+        </record>
+
+    </data>
+</openerp>

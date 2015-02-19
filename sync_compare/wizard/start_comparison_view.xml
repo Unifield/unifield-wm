@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+<data>
+
+    <record id="sync_compare_start_comparison_form" model="ir.ui.view">
+        <field name="name">sync.compare.start_comparison.form</field>
+        <field name="model">sync.compare.start_comparison</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form>
+                <separator colspan="4" string="Please fill the db name for each instances" />
+                <field name="instance_ids" colspan="4" nolabel="1">
+                    <tree hide_new_button="1" editable="top" string="Instances db name">
+                      <field name="instance_id" />
+                      <field name="dbname" />
+                    </tree>
+                </field>
+                <button colspan="4" type="object" name="start" string="Start" />
+            </form>
+        </field>
+    </record>
+
+</data>
+</openerp>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+<data>
+    <record id="sync_compare_form" model="ir.ui.view">
+        <field name="name">sync.compare.form</field>
+        <field name="model">sync.compare</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form>
+                <field name="object" />
+                <field name="object_info" />
+                <field name="from_instance" />
+                <field name="to_instance" />
+                <field name="xmlid" colspan="4"/>
+                <field name="error" colspan="4" nolabel="1"/>
+                <field name="note" colspan="4"/>
+                <field name="ack" />
+            </form>
+        </field>
+    </record>
+
+    <record id="sync_compare_tree" model="ir.ui.view">
+        <field name="name">sync.compare.tree</field>
+        <field name="model">sync.compare</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="object" />
+                <field name="object_info" />
+                <field name="xmlid" />
+                <field name="from_instance" />
+                <field name="to_instance" />
+                <field name="type" />
+                <field name="ack" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="sync_compare_search" model="ir.ui.view">
+        <field name="name">sync.compare.search</field>
+        <field name="model">sync.compare</field>
+        <field name="type">search</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="object" />
+                <field name="object_info" />
+                <field name="xmlid" />
+                <field name="from_instance" />
+                <field name="to_instance" />
+                <field name="type" />
+                <field name="ack" />
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="sync_compare_action">
+        <field name="name">Synchronisation Finance Comparison</field>
+        <field name="res_model">sync.compare</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="sync_compare_menu" name="Synchronisation Finance Comparison"
+        parent="sync_client.mon_menu" sequence="20" action="sync_compare_action"/>
+
+</data>
+</openerp>

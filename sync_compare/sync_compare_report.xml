@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<openerp>
+    <data>
+    <report
+        id="export_gl_coa"
+        string="Export COA"
+        model="sync.compare"
+        menu="False"
+        name="export_gl_coa"
+    />
+    </data>
+</openerp>
