@@ -19,7 +19,7 @@
         </record>
 
         <record id="action_report_gl_account" model="ir.actions.server">
-            <field name="name">Start Comparison</field>
+            <field name="name">G/L Comparison</field>
             <field name="model_id" ref="model_sync_compare"/>
             <field name="empty_ids">1</field>
             <field name="state">code</field>

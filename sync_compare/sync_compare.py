@@ -128,7 +128,7 @@ where t.is_target = 't' ''')
             closed = []
             add_sql = ''
             if inst.db == cr.dbname:
-                add_sql = " and comparison_done = 'f' "
+                add_sql = " and COALESCE(comparison_done, 'f') = 'f' "
 
             inst.cr.execute("select name from account_period where state in ('mission-closed','done')"+add_sql)
             for cl in inst.cr.fetchall():
