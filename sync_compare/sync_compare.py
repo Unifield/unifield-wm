@@ -187,15 +187,16 @@ fund.category = 'FUNDING' and
             for parent in level.all_parents:
                 self.compare_aji(cr, uid, level, target_aji, parent, "up", query_aji)
 
-            # Get AJIs targeted to other instances
-            for instance in instances.values():
-                if instance != level and instance.target_cc:
-                    other_aji = {}
-                    level.cr.execute(query_aji, (tuple(instance.target_cc), ))
-                    for al in level.cr.fetchall():
-                        other_aji[al['xmlid']] = al
-                    if other_aji:
-                        self.compare_aji(cr, uid, level, other_aji, instance, "cross", query_aji)
+            if not instance.children_name:
+                # Get AJIs targeted to other instances
+                for instance in instances.values():
+                    if instance != level and instance.target_cc:
+                        other_aji = {}
+                        level.cr.execute(query_aji, (tuple(instance.target_cc), ))
+                        for al in level.cr.fetchall():
+                            other_aji[al['xmlid']] = al
+                        if other_aji:
+                            self.compare_aji(cr, uid, level, other_aji, instance, "cross", query_aji)
 
     def compare_aji(self, cr, uid, from_instance, list_aji, to_instance, sync_type, query_aji):
         tmp = list_aji.copy()
