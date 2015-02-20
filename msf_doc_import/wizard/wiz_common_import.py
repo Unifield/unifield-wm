@@ -286,7 +286,7 @@ class product_product(osv.osv):
         return res
 
     def _check_concurrency(self, cr, ids, context=None):
-        if context.get('add_multiple_lines'):
+        if context and context.get('add_multiple_lines'):
             return
 
         return super(product_product, self)._check_concurrency(cr, ids, context=context)
