@@ -187,7 +187,7 @@ fund.category = 'FUNDING' and
             for parent in level.all_parents:
                 self.compare_aji(cr, uid, level, target_aji, parent, "up", query_aji)
 
-            if not instance.children_name:
+            if not level.children_name:
                 # Get AJIs targeted to other instances
                 for instance in instances.values():
                     if instance != level and instance.target_cc:
