@@ -133,7 +133,8 @@ class so_po_common(osv.osv_memory):
         if not po_id:
             return False
 
-        in_ids = self.pool.get('stock.picking').search(cr, uid, [('purchase_id', '=', po_id), ('state', '=', 'assigned')], 0, None, None, context)
+        # US-109: Added the state shipped when looking for IN
+        in_ids = self.pool.get('stock.picking').search(cr, uid, [('purchase_id', '=', po_id), ('state', 'in', ['assigned', 'shipped'])], 0, None, None, context)
         if in_ids:
             return in_ids[0]
         return False
