@@ -158,6 +158,12 @@ where t.is_target = 't' ''')
             return True
         return False
 
+    def _get_target_instance_and_children(self, level, instances):
+        target_cc = level.target_cc
+        for child in level.children_name:
+            target_cc += instances[child].target_cc
+        return target_cc
+
     def start_compare_aji(self, cr, uid, instances, periods_name):
         sql_date = self._get_filter_closed_period(cr, uid, instances, periods_name)
         query_aji = """select
@@ -180,33 +186,34 @@ fund.category = 'FUNDING' and
             target_aji = {}
             # Get the AJIs targeted to the instance
             if level.target_cc:
-                level.cr.execute(query_aji, (tuple(level.target_cc), ))
+                target_cc = tuple(self._get_target_instance_and_children(level,instances))
+                level.cr.execute(query_aji, (target_cc, ))
                 for al in level.cr.fetchall():
                     target_aji[al['xmlid']] = al
             # Compare those AJIs, with parent levels
             for parent in level.all_parents:
-                self.compare_aji(cr, uid, level, target_aji, parent, "up", query_aji)
+                self.compare_aji(cr, uid, level, target_aji, parent, "up", query_aji, target_cc)
 
             if not level.children_name:
+                # at project compare with all other instances
                 # Get AJIs targeted to other instances
                 for instance in instances.values():
                     if instance != level and instance.target_cc:
                         other_aji = {}
-                        level.cr.execute(query_aji, (tuple(instance.target_cc), ))
+                        target_cc = tuple(instance.target_cc)
+                        level.cr.execute(query_aji, (target_cc, ))
                         for al in level.cr.fetchall():
                             other_aji[al['xmlid']] = al
                         if other_aji:
-                            self.compare_aji(cr, uid, level, other_aji, instance, "cross", query_aji)
+                            self.compare_aji(cr, uid, level, other_aji, instance, "cross", query_aji, target_cc)
 
-    def compare_aji(self, cr, uid, from_instance, list_aji, to_instance, sync_type, query_aji):
+    def compare_aji(self, cr, uid, from_instance, list_aji, to_instance, sync_type, query_aji, target_cc):
         tmp = list_aji.copy()
         if sync_type == 'cross':
-            target_cc = tuple(to_instance.target_cc)
             target_str = 'target %s' % to_instance.name
             query = query_aji + ' and d.name in %s '
             to_instance.cr.execute(query,(target_cc, tuple(list_aji.keys())))
         else:
-            target_cc = tuple(from_instance.target_cc)
             target_str = 'target %s' % from_instance.name
             query = query_aji
             to_instance.cr.execute(query,(target_cc, ))
