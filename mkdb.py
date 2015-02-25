@@ -202,6 +202,9 @@ class db_creation(object):
                     'database' : Synchro.name,
                     'login' : name,
                     'password' : name,
+                    'timeout': 600,
+                    'netrpc_retry': 10,
+                    'xmlrpc_retry': 10,
                 },
             )
             last_sync.test_cases.append(cls)
