@@ -18,7 +18,7 @@
                 <field name="picking_id" invisible="1"/>
                 <field name="location_id" invisible="1"/>
                 <field name="location_dest_id" invisible="1"/>
-                <field name="product_id" invisible="0"/>
+                <field name="product_id" invisible="1" />
                 <field name="categ_id" invisible="1"/>
                 <field name="state" invisible="1"/>
                 <field name="comment" invisible="1"/>
@@ -35,6 +35,8 @@
                 <field name="day_diff1"/>
                 <field name="day_diff"/>
                 <field name="day_diff2" string="Delay(Days)"/>
+                <field name="product_name" invisible="'group_product_id' not in context.get('group_by', [])" string="" />
+                <field name="product_code" invisible="'group_product_id' not in context.get('group_by', [])" string="" />
            </tree>
         </field>
     </record>

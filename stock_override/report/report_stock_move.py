@@ -55,7 +55,7 @@ class report_stock_move(osv.osv):
                     res[report.id]['order_category'] = order.categ
                 if 'order_type' in fields_name:
                     res[report.id]['order_type'] = order.order_type
-        
+
         return res
 
     _columns = {
@@ -67,6 +67,8 @@ class report_stock_move(osv.osv):
             ('10','October'), ('11','November'), ('12','December')], 'Month',readonly=True),
         'partner_id':fields.many2one('res.partner', 'Partner', readonly=True),
         'product_id':fields.many2one('product.product', 'Product', readonly=True),
+        'product_code': fields.char(size=128, string='Product Code', readonly=True),
+        'product_name': fields.char(size=128, string='Product Description', readonly=True),
         'product_uom': fields.many2one('product.uom', 'UoM', readonly=True),
         'company_id':fields.many2one('res.company', 'Company', readonly=True),
         'picking_id':fields.many2one('stock.picking', 'Reference', readonly=True),
@@ -83,9 +85,9 @@ class report_stock_move(osv.osv):
         'day_diff1':fields.float('Planned Lead Time (Days)',readonly=True, digits_compute=dp.get_precision('Shipping Delay'), group_operator="avg"),
         'day_diff':fields.float('Execution Lead Time (Days)',readonly=True,  digits_compute=dp.get_precision('Shipping Delay'), group_operator="avg"),
         'stock_journal': fields.many2one('stock.journal','Stock Journal', select=True),
-        'order_type': fields.function(_get_order_information, method=True, string='Order Type', type='selection', 
-                                      selection=[('regular', 'Regular'), ('donation_exp', 'Donation before expiry'), 
-                                                 ('donation_st', 'Standard donation'), ('loan', 'Loan'), 
+        'order_type': fields.function(_get_order_information, method=True, string='Order Type', type='selection',
+                                      selection=[('regular', 'Regular'), ('donation_exp', 'Donation before expiry'),
+                                                 ('donation_st', 'Standard donation'), ('loan', 'Loan'),
                                                  ('in_kind', 'In Kind Donation'), ('purchase_list', 'Purchase List'),
                                                  ('direct', 'Direct Purchase Order')], multi='move_order'),
         'comment': fields.char(size=128, string='Comment'),
@@ -119,6 +121,8 @@ class report_stock_move(osv.osv):
                         al.in_qty as product_qty_in,
                         al.partner_id as partner_id,
                         al.product_id as product_id,
+                        al.product_name as product_name,
+                        al.product_code as product_code,
                         al.state as state ,
                         al.product_uom as product_uom,
                         al.categ_id as categ_id,
@@ -172,6 +176,8 @@ class report_stock_move(osv.osv):
                         pt.nomen_manda_2 as categ_id,
                         sp.partner_id2 as partner_id,
                         sm.product_id as product_id,
+                        pt.name as product_name,
+                        pp.default_code as product_code,
                         sm.origin as origin,
                         sm.reason_type_id as reason_type_id,
                         sm.picking_id as picking_id,
@@ -191,7 +197,7 @@ class report_stock_move(osv.osv):
 
                     GROUP BY
                         sm.id,sp.type, sm.date,sp.partner_id2,
-                        sm.product_id,sm.state,pt.uom_id,sm.date_expected, sm.origin,
+                        sm.product_id,pt.name,pp.default_code,sm.state,pt.uom_id,sm.date_expected, sm.origin,
                         sm.product_id,pt.standard_price, sm.picking_id, sm.product_qty, sm.prodlot_id, sm.comment, sm.tracking_id,
                         sm.company_id,sm.product_qty, sm.location_id,sm.location_dest_id,pu.factor,pt.nomen_manda_2, sp.stock_journal_id, sm.reason_type_id)
                     AS al
@@ -199,7 +205,7 @@ class report_stock_move(osv.osv):
                     GROUP BY
                         al.out_qty,al.in_qty,al.curr_year,al.curr_month,
                         al.curr_day,al.curr_day_diff,al.curr_day_diff1,al.curr_day_diff2,al.dp,al.location_id,al.location_dest_id,
-                        al.partner_id,al.product_id,al.state,al.product_uom, al.sm_id, al.origin,
+                        al.partner_id,al.product_id,al.product_code,al.product_name,al.state,al.product_uom, al.sm_id, al.origin,
                         al.picking_id,al.company_id,al.type,al.product_qty, al.categ_id, al.stock_journal, al.tracking_id, al.comment, al.prodlot_id, al.reason_type_id
                )
         """)
@@ -210,12 +216,68 @@ class report_stock_move(osv.osv):
         if fields is None:
             fields = []
         context['with_expiry'] = 1
-        return super(report_stock_move, self).read(cr, uid, ids, fields, context, load)
-    
+
+        if 'product_id' in fields:
+            if 'product_name' in fields:
+                fields.remove('product_name')
+            fields.insert(fields.index('product_id'), 'product_name')
+
+            if 'product_code' in fields:
+                fields.remove('product_code')
+            fields.insert(fields.index('product_id'), 'product_code')
+
+        res = super(report_stock_move, self).read(cr, uid, ids, fields, context, load)
+        return res
+
+    def export_sort_fld_to_read(self, cr, uid, fields):
+        fields = super(report_stock_move, self).export_sort_fld_to_read(cr, uid, fields)
+
+        if 'product_id' in fields:
+            if 'product_code' in fields:
+                fields.remove('product_code')
+            fields.insert(fields.index('product_id'), 'product_code')
+
+            if 'product_name' in fields:
+                fields.remove('product_name')
+            fields.insert(fields.index('product_id'), 'product_name')
+
+        return fields
+
+    def export_filter_results(self, cr, uid, result, fields, fields2):
+        result, fields, fields2 = super(report_stock_move, self).export_filter_results(cr, uid, result, fields, fields2)
+
+        if 'product_id' in fields:
+            for res in result:
+                del res['product_id']
+            fields.remove('product_id')
+
+        if 'product_id' in fields2:
+            fields2.remove('product_id')
+
+        return result, fields, fields2
+
+    def export_get_fld_realname(self, cr, uid, fields):
+        fields = super(report_stock_move, self).export_get_fld_realname(cr, uid, fields)
+
+        new_fields = []
+        for f in fields:
+            new_fields.append(self._columns[f].string)
+
+        return new_fields
+
     def read_group(self, cr, uid, domain, fields, groupby, offset=0, limit=None, context=None, orderby=False):
         '''
         Add functional currency on all lines
         '''
+        if 'product_id' in fields:
+            if 'product_name' in fields:
+                fields.remove('product_name')
+            fields.insert(fields.index('product_id'), 'product_name')
+
+            if 'product_code' in fields:
+                fields.remove('product_code')
+            fields.insert(fields.index('product_id'), 'product_code')
+
         res = super(report_stock_move, self).read_group(cr, uid, domain, fields, groupby, offset, limit, context, orderby)
         if self._name == 'report.stock.move':
             for data in res:
@@ -244,7 +306,9 @@ class report_stock_move(osv.osv):
                     data.update({'product_qty_in': ''})
                 if not product_id and 'product_qty_out' in data:
                     data.update({'product_qty_out': ''})
-                
+
         return res
 
 report_stock_move()
+
+
