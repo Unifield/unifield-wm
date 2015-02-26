@@ -11,6 +11,9 @@ import psycopg2
 import psycopg2.extras
 import decimal
 
+import threading
+import pooler
+
 class ir_actions_server(osv.osv):
     _inherit ='ir.actions.server'
     _name = 'ir.actions.server'
@@ -81,14 +84,43 @@ class sync_compare(osv.osv):
         'type': fields.selection([('mismatch', 'Mismatch'), ('not_sync', 'Not Sync')], 'Type', readonly=1)
     }
 
+    def thread_compare(self, dbname, uid, periods_name):
+        try:
+            cr = pooler.get_db(dbname).cursor()
+            instances = self.init_db(cr, uid)
+            self.gl_balance(cr, uid, instances, periods_name)
+            self._logger.info("G/L Balance computation done")
+            self.start_compare_aji(cr, uid, instances, periods_name)
+            self._logger.info("AJI comparison done")
+            self.start_compare_ji(cr, uid, instances, periods_name)
+            self._logger.info("JI comparison done")
+            p_obj = self.pool.get('account.period')
+            p_ids = p_obj.search(cr, uid, [('name', 'in', periods_name)])
+            p_obj.write(cr, uid, p_ids, {'comparison_done': 1})
+            req_id = self.pool.get('res.request').create(cr, uid, {
+                'name': 'Finance Comparison',
+                'act_from': uid,
+                'act_to': uid,
+                'body': '''The finance comparison has been successfully generated'''
+            })
+            cr.commit()
+        except Exception, e:
+            cr.rollback()
+            req_id = self.pool.get('res.request').create(cr, uid, {
+                'name': 'Finance Comparison Failed',
+                'act_from': uid,
+                'act_to': uid,
+                'body': '''The process to generate finance comparison failed !
+
+                %s''' % (e,)
+            })
+
+        finally:
+            cr.close()
+
     def compare(self, cr, uid, periods_name):
-        instances = self.init_db(cr, uid)
-        self.gl_balance(cr, uid, instances, periods_name)
-        self.start_compare_aji(cr, uid, instances, periods_name)
-        self.start_compare_ji(cr, uid, instances, periods_name)
-        p_obj = self.pool.get('account.period')
-        p_ids = p_obj.search(cr, uid, [('name', 'in', periods_name)])
-        p_obj.write(cr, uid, p_ids, {'comparison_done': 1})
+        thread = threading.Thread(target=self.thread_compare, args=(cr.dbname, uid, periods_name))
+        thread.start()
         return True
 
     def init_db(self, cr, uid, context=None):
@@ -153,7 +185,7 @@ where t.is_target = 't' ''')
                 return False
             if b is None and not a:
                 return False
-            if isinstance(a, (float, decimal.Decimal)) and isinstance(b, (float, decimal.Decimal)) and abs(b-a) < 0.001:
+            if isinstance(a, (float, decimal.Decimal)) and isinstance(b, (float, decimal.Decimal)) and abs(round(b, 2) - round(a, 2)) < 0.001:
                 return False
             return True
         return False

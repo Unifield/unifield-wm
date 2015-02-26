@@ -15,7 +15,10 @@
                       <field name="dbname" />
                     </tree>
                 </field>
-                <button colspan="4" type="object" name="start" string="Start" />
+                <field name="prefix" />
+                <newline />
+                <field name="delete" />
+                <button colspan="4" type="object" name="start" string="Start" icon="gtk-execute"/>
             </form>
         </field>
     </record>
