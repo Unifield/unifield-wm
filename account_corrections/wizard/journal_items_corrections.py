@@ -61,6 +61,33 @@ class journal_items_corrections_lines(osv.osv_memory):
         for line_br in self.browse(cr, uid, ids, context=context):
             res[line_br.id] = line_br.account_id and line_br.account_id.is_analytic_addicted or False
         return res
+        
+    def _get_has_ajis_corrected(self, cr, uid, ids, field_names, args,
+        context=None):
+        def get_cor_rev_ajis_count(move_line_id):
+            # get count of cor/rev AJIs of the JI
+            # (they are always tied to the JI of the corrected AJI)
+            domain = [
+                '&',
+                ('move_id', '=', move_line_id),
+                '|',
+                ('is_reversal', '=', True),
+                ('last_corrected_id', '!=', False),
+            ]
+            return aal_obj.search(cr, uid, domain, count=True,
+                context=context)
+            
+        res = {}
+        if not ids:
+            return res
+            
+        aal_obj = self.pool.get('account.analytic.line')
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+        for line_br in self.browse(cr, uid, ids, context=context):
+            res[line_br.id] = line_br.move_line_id and \
+                bool(get_cor_rev_ajis_count(line_br.move_line_id.id)) or False
+        return res
 
     _columns = {
         'move_line_id': fields.many2one('account.move.line', string="Account move line", readonly=True, required=True),
@@ -82,11 +109,16 @@ class journal_items_corrections_lines(osv.osv_memory):
             selection=[('none', 'None'), ('valid', 'Valid'), ('invalid', 'Invalid')],
             string="Distribution state", help="Informs from distribution state among 'none', 'valid', 'invalid."),
         'is_analytic_target': fields.function(_get_is_analytic_target, type='boolean', string='Is analytic target', method=True, invisible=True),
+        # BKLG-12: field to flag if the JI is tied with corrected/reversed AJIs
+        'has_ajis_corrected': fields.function(_get_has_ajis_corrected,
+            type='boolean', method=True,
+            string="Is tied to corrected analytic items"),
     }
 
     _defaults = {
         'from_donation': lambda *a: False,
         'is_analytic_target': lambda *a: False,
+        'has_ajis_corrected': lambda *a: False,
     }
 
     def fields_view_get(self, cr, uid, view_id=None, view_type='form', context=None, toolbar=False, submenu=False):
