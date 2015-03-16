@@ -89,7 +89,9 @@
         <para style="P7">[[repeatIn(range(pack_family.from_pack,pack_family.to_pack+1),'titi')]]</para>
         <blockTable colWidths="186.0,351.0" style="Table6">
           <tr>
-            <td><image>[[ company.logo or removeParentNode('image') ]]</image></td>
+              <td>
+                  <image height="60" width="143">[[ company.logo or removeParentNode('image') ]]</image>
+              </td>
             <td></td>
           </tr>
           <tr>
