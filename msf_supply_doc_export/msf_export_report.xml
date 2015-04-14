@@ -205,5 +205,17 @@
            menu="False"
            />
 
+        <!-- KPI detail report -->
+        <report
+            id="report_kpi_detail_xls"
+            string="KPI detail report"
+            model="supply.kpi"
+            name="kpi.detail_xls"
+            file="msf_supply_doc_export/report/report_kpi_detail_xls.mako"
+            report_type="webkit"
+            header="False"
+            auto="False"
+            menu="False"
+            />
     </data>
 </openerp>

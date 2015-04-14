@@ -32,6 +32,8 @@
         'wizard/po_follow_up_view.xml',
         'po_follow_up_menu.xml',
         'report/po_follow_up_report.xml',
+        'wizard/supply_kpi_view.xml',
+        'supply_kpi_menu.xml',
     ],
     "demo_xml" : [],
     "test": [],

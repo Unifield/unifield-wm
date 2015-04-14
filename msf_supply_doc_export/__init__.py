@@ -22,4 +22,4 @@
 import msf_supply_doc_export
 import wizard
 import report
-
+import supply_kpi_models
