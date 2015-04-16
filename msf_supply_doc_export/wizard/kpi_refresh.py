@@ -5,8 +5,7 @@ class kpi_refresh(osv.osv_memory):
     _name = 'kpi.refresh'
     _description = 'Shared library for KPI database refresh'
 
-    def truncate_tables(self,cr,uid):
-        print 'truncate tables'
+    def truncate_tables(self, cr, uid):
         cr.execute('''truncate table kpi_purchase_order''')
         cr.execute('''truncate table kpi_purchase_order_line''')
         cr.execute('''truncate table kpi_res_partner''')
@@ -27,12 +26,10 @@ class kpi_refresh(osv.osv_memory):
 
 
         cr.execute('''truncate table supply_kpi_summary''')
-        print 'tables truncated'
         return True
 
+    def refresh_data(self, cr, uid):
 
-    def refresh_data(self,cr,uid):
-        print 'refreshing data'
         cr.execute('''insert into kpi_purchase_order select * from purchase_order''')
         cr.execute('''insert into kpi_purchase_order_line select * from purchase_order_line''')
         cr.execute('''insert into kpi_res_partner select * from res_partner''')
@@ -48,13 +45,28 @@ class kpi_refresh(osv.osv_memory):
 
         # dimension_3a. columns need to be named because openerp creates tables with random column order
         cr.execute('''insert into dimension_3_base select * from dimension_3_base_vw''')
-        cr.execute('''insert into dimension_3a(create_uid,create_date,write_date,write_uid,pct_ontime,po_id,pol_id,sp_id,
-                    sm_id,delivery_requested_date,sp_expect_date,sm_actual_receipt_date,categ,order_type,priority,
-                    partner_type,name,zone,state,default_code,pn_main_type,pn_group,pn_family,pn_root,cnt)
-                    select 1 as create_uid,current_date as create_date,current_date as write_date,1 as write_uid,
-                    pct_ontime,po_id,pol_id,sp_id,sm_id,delivery_requested_date, sp_expect_date,sm_actual_receipt_date,
-                    categ,order_type,priority,partner_type,name,zone,state,default_code,pn_main_type,pn_group,pn_family,
-                    pn_root,cnt from dimension_3a_vw''')
+        cr.execute('''  insert into dimension_3a(
+                            create_uid, create_date, write_date,
+                            write_uid, pct_ontime, po_id,
+                            pol_id, sp_id, sm_id,
+                            delivery_requested_date, sp_expect_date, sm_actual_receipt_date,
+                            categ, order_type, priority,
+                            partner_type, name, zone,
+                            state, default_code, pn_main_type,
+                            pn_group, pn_family, pn_root,
+                            cnt
+                        )
+                        select
+                            1 as create_uid, current_date as create_date, current_date as write_date,
+                            1 as write_uid, pct_ontime, po_id,
+                            pol_id, sp_id, sm_id,
+                            delivery_requested_date, sp_expect_date, sm_actual_receipt_date,
+                            categ, order_type, priority,
+                            partner_type, name, zone,
+                            state, default_code, pn_main_type,
+                            pn_group, pn_family, pn_root,
+                            cnt
+                        from dimension_3a_vw''')
 
         cr.execute('''insert into dimension_8b select * from dimension_8b_vw''')
         cr.execute('''insert into dimension_6a select * from dimension_6a_vw''')
@@ -66,7 +78,7 @@ class kpi_refresh(osv.osv_memory):
                                                     dim_6a = (select sum(value) from dimension_6a),
                                                     dim_6a_currency = (select distinct currency_code from dimension_6a),
                                                     dim_8b = (select sum(cnt) from dimension_8b)''')
-        print 'data refreshed'
+
         return True
 
 kpi_refresh()
