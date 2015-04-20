@@ -21,6 +21,8 @@
 
 from osv import osv
 from osv import fields
+import threading
+import pooler
 from tools.translate import _
 from lxml import etree
 
@@ -48,26 +50,29 @@ class supply_kpi(osv.osv):
             },
 
         'dim_6a': {
-            'dim_6a_currency':                  ['currency_code',   'Currency', 1],
-            'dim_6a_reason_type_checkbox':      ['reason_type',     'Reason Type', 2],
-            'dim_6a_product_checkbox':          ['product_qty',     'Product quantity', 3],
-            'dim_6a_main_type_checkbox':        ['pn_main_type',    'Main Type', 4],
-            'dim_6a_group_checkbox':            ['pn_group',        'Group', 5],
-            'dim_6a_family_checkbox':           ['pn_family',       'Family', 6],
-            'dim_6a_root_checkbox':             ['pn_root',         'Root', 7],
-            'dim_6a_month_checkbox':            ['sm_created_month', 'Month', 8],
-            'dim_6a_year_checkbox':             ['sm_created_year', 'Year', 9],
+
+            'dim_6a_year_checkbox':             ['sm_created_year', 'Year', 1],
+            'dim_6a_month_checkbox':            ['sm_created_month', 'Month', 2],
+            'dim_6a_currency':                  ['currency_code',   'Currency', 4], #3 is for state
+            'dim_6a_reason_type_checkbox':      ['reason_type',     'Reason Type', 5],
+            'dim_6a_product_checkbox':          ['product_qty',     'Product quantity', 6],
+            'dim_6a_main_type_checkbox':        ['pn_main_type',    'Main Type', 7],
+            'dim_6a_group_checkbox':            ['pn_group',        'Group', 8],
+            'dim_6a_family_checkbox':           ['pn_family',       'Family', 9],
+            'dim_6a_root_checkbox':             ['pn_root',         'Root', 10],
+
             },
 
         'dim_8b': {
-            'dim_8b_order_category_checkbox':   ['categ',           'Order category', 1],
-            'dim_8b_order_type_checkbox':       ['order_type',      'Order Type', 2],
-            'dim_8b_priority_checkbox':         ['priority',        'Priority', 3],
-            'dim_8b_partner_type_checkbox':     ['partner_type',    'Partner Type', 4],
-            'dim_8b_partner_checkbox':          ['name',            'Partner', 5],
-            'dim_8b_week_checkbox':             ['po_created_week', 'Week', 6],
-            'dim_8b_month_checkbox':            ['po_created_month', 'Month', 7],
-            'dim_8b_year_checkbox':             ['po_created_year', 'Year', 8],
+
+            'dim_8b_year_checkbox':             ['po_created_year', 'Year', 1],
+            'dim_8b_month_checkbox':            ['po_created_month', 'Month', 2],
+            'dim_8b_week_checkbox':             ['po_created_week', 'Week', 3],
+            'dim_8b_order_category_checkbox':   ['categ',           'Order category', 5],#4 is for state
+            'dim_8b_order_type_checkbox':       ['order_type',      'Order Type', 6],
+            'dim_8b_priority_checkbox':         ['priority',        'Priority', 7],
+            'dim_8b_partner_type_checkbox':     ['partner_type',    'Partner Type', 8],
+            'dim_8b_partner_checkbox':          ['name',            'Partner', 9],
             }
     }
 
@@ -110,45 +115,57 @@ class supply_kpi(osv.osv):
         'dim_8b_year_checkbox': fields.boolean(string="Year"),
     }
 
-    def button_refresh(self, cr, uid, ids, context=None):
-        self.running = True
-        self.refresh_dttm = datetime.now()
+    def launch_refresh_thread(self, cr, uid, ids, context=None):
+
+        print "Start refreshing KPI at " + str(datetime.now())
+        # Mettre date dans BDD => active
+        cr = pooler.get_db(cr.dbname).cursor()
         kpi_obj = self.pool.get('kpi.refresh')
         kpi_obj.truncate_tables(cr, uid)
         kpi_obj.refresh_data(cr, uid)
-        self.default_get(cr, uid, ids, context)
+        #self.default_get(cr, uid, ids, context)
+        # Mettre date dans BDD => desactive
+        print "Stop refreshing KPI at " + str(datetime.now())
+        cr.close()
+
+    def button_refresh(self, cr, uid, ids, context=None):
+        refresh = threading.Thread(None, self.launch_refresh_thread, None, (cr, uid, ids), {'context': context})
+        refresh.start()
         return True
 
     def prepare_report_data(self, cr, uid, ids, prefix, aggregate, fields, context=None):
-
-        supply_kpi = self.browse(cr, uid, ids, context=None)[0]
+        supply_kpi_brw = self.browse(cr, uid, ids, context=None)[0]
         # get fields in the correct order
         cols = self.col_map[prefix]
-        fields.extend([cols[key] for key in cols if getattr(supply_kpi, key)])
+        fields.extend([cols[key] for key in cols if getattr(supply_kpi_brw, key)])
         fields.sort(key=lambda x: x[2])   # use the numeric ranking, element 3, to sort
 
         # build header list
         group_by = ', '.join([elem[0] for elem in fields])
-        if group_by:       # possible to have no selectable and no static group by fields, in which case no group by is needed
-            group_by = 'group by ' + group_by
+        # possible to have no selectable and no static group by fields, in which case no group by is needed
+        if group_by:
+            group_by = 'GROUP BY ' + group_by + ' ORDER BY ' + group_by
+
         headers = [aggregate[1]]
         headers.extend([elem[1] for elem in fields])
 
         # build select for data
         selects = ', '.join([elem[0] for elem in fields])
-        sql = "select " + aggregate[0] + ', ' + selects + ' from dimension_' + prefix[4:] + ' ' + group_by
+        sql = "SELECT " + aggregate[0] + ', ' + selects + ' FROM dimension_' + prefix[4:] + ' ' + group_by
         cr.execute(sql)
-
         # organise returned data for report
         report_lines_dict = cr.dictfetchall()   # list of dicts
-
         # sort data according to order in the fields list & convert to list of lists
         report_lines = []
         for line in report_lines_dict:
             sorted_line = list()
             sorted_line.append(line[aggregate[2]])   # sorted_line assignment split into 2 statements for readability
             for i, elem in enumerate(fields):
-                sorted_line.append(line[elem[0]])
+                #Replace & by AND
+                if isinstance(line[elem[0]], basestring):
+                    sorted_line.append(line[elem[0]].replace("&", "AND"))
+                else:
+                    sorted_line.append(line[elem[0]])
             report_lines.append(sorted_line)
         return {'report_header': headers, 'report_lines': report_lines}
 
@@ -174,11 +191,13 @@ class supply_kpi(osv.osv):
         return res
 
     def button_3a(self, cr, uid, ids, context=None):
+        print "Button at " + str(datetime.now())
         prefix = 'dim_3a'
-        aggregate = ['round(sum(pct_ontime)::numeric,2) as sum', 'Total', 'sum']   # 0: sql command, 1: report heading, 2: sql column name
+        # 0: sql command, 1: report heading, 2: sql column name
+        aggregate = ['round(sum(pct_ontime)::numeric,2) as sum', 'Total', 'sum']
         fields = [['state', 'State', -1]]
         data = self.prepare_report_data(cr, uid, ids, prefix, aggregate, fields, context=None)
-
+        print "Return at " + str(datetime.now())
         return {
             'type': 'ir.actions.report.xml',
             'report_name': 'kpi.detail_xls',
@@ -189,9 +208,9 @@ class supply_kpi(osv.osv):
 
     def button_6a(self, cr, uid, ids, context=None):
         prefix = 'dim_6a'
-        aggregate = ['round(sum(value)::numeric,2) as sum', 'Total', 'sum']   # 0: sql command, 1: report heading, 2: sql column name
+        # 0: sql command, 1: report heading, 2: sql column name
+        aggregate = ['round(sum(value)::numeric,2) as sum', 'Total', 'sum']
         fields = []
-        #fields = [['state', 'State', -1]]
         data = self.prepare_report_data(cr, uid, ids, prefix, aggregate, fields, context=None)
 
         return {
@@ -204,8 +223,9 @@ class supply_kpi(osv.osv):
 
     def button_8b(self, cr, uid, ids, context=None):
         prefix = 'dim_8b'
-        aggregate = ['round(sum(cnt)::numeric,2) as sum', 'Total', 'sum']   # 0: sql command, 1: report heading, 2: sql column name
-        fields = [['state', 'State', -1]]
+        # 0: sql command, 1: report heading, 2: sql column name
+        aggregate = ['round(sum(cnt)::numeric,2) as sum', 'Total', 'sum']
+        fields = [['state', 'State', 4]]
         data = self.prepare_report_data(cr, uid, ids, prefix, aggregate, fields, context=None)
 
         return {
@@ -221,7 +241,7 @@ class supply_kpi(osv.osv):
         res_ids = super(supply_kpi, self).search(cr, uid, args, context=context)
         if res_ids:
             if res_ids[0]:
-                #Force update first record
+                # Force update first record
                 res_ids = res_ids[0]
             super(supply_kpi, self).write(cr, uid, [res_ids], values, context=context)
             return res_ids

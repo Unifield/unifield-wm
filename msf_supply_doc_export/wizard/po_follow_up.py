@@ -37,19 +37,20 @@ PURCHASE_ORDER_STATE_SELECTION = [
     ('cancel', 'Cancelled'),
 ]
 
+
 class po_follow_up(osv.osv_memory):
     _name = 'po.follow.up'
     _description = 'PO Follow up report wizard'
 
     _columns = {
-         'po_id':fields.many2one('purchase.order',string="Order Reference", help="Unique number of the Purchase Order. Optional", required=False),
-         'state': fields.selection(PURCHASE_ORDER_STATE_SELECTION, 'State', help="The state of the purchase order. Optional", select=True, required=False),
-         'po_date_from':fields.date("PO date from", required="False"),
-         'po_date_thru':fields.date("PO date to", required="False"),
-         'partner_id':fields.many2one('res.partner', 'Supplier', required=False),
-         'project_ref':fields.char('Supplier reference', size=64, required=False),
-         'export_format': fields.selection([('xls', 'Excel'), ('pdf', 'PDF')], string="Export format", required=True),    
-         'background_time': fields.integer('Number of second before background processing'),
+        'po_id': fields.many2one('purchase.order', string="Order Reference", help="Unique number of the Purchase Order. Optional", required=False),
+        'state': fields.selection(PURCHASE_ORDER_STATE_SELECTION, 'State', help="The state of the purchase order. Optional", select=True, required=False),
+        'po_date_from': fields.date("PO date from", required="False"),
+        'po_date_thru': fields.date("PO date to", required="False"),
+        'partner_id': fields.many2one('res.partner', 'Supplier', required=False),
+        'project_ref': fields.char('Supplier reference', size=64, required=False),
+        'export_format': fields.selection([('xls', 'Excel'), ('pdf', 'PDF')], string="Export format", required=True),
+        'background_time': fields.integer('Number of second before background processing'),
     }
     
     _defaults = {
@@ -64,43 +65,43 @@ class po_follow_up(osv.osv_memory):
         states = {}
         for state_val, state_string in PURCHASE_ORDER_STATE_SELECTION:
             states[state_val] = state_string
-        report_parms =  {
+        report_parms = {
             'title': 'PO Follow Up per Supplier',
             'run_date': time.strftime("%d/%m/%Y"),
             'date_from': '',
             'date_thru': '',
             'state': '',
-            'supplier':''
+            'supplier': ''
         }
          
         # PO number
         if wiz.po_id:
-            domain.append(('id','=', wiz.po_id.id))
+            domain.append(('id', '=', wiz.po_id.id))
    
         # Status
         if wiz.state:
-            domain.append(('state','=', wiz.state))
+            domain.append(('state', '=', wiz.state))
             report_parms['state'] = states[wiz.state]
             
         # Dates
         if wiz.po_date_from:
-            domain.append(('date_order','>=',wiz.po_date_from))
-            tmp = datetime.strptime(wiz.po_date_from,"%Y-%m-%d")
+            domain.append(('date_order', '>=', wiz.po_date_from))
+            tmp = datetime.strptime(wiz.po_date_from, "%Y-%m-%d")
             report_parms['date_from'] = tmp.strftime("%d/%m/%Y")
 
         if wiz.po_date_thru:
-            domain.append(('date_order','<=',wiz.po_date_thru))
-            tmp = datetime.strptime(wiz.po_date_thru,"%Y-%m-%d")
+            domain.append(('date_order', '<=', wiz.po_date_thru))
+            tmp = datetime.strptime(wiz.po_date_thru, "%Y-%m-%d")
             report_parms['date_thru'] = tmp.strftime("%d/%m/%Y")
 
         # Supplier
         if wiz.partner_id:
-            domain.append(('partner_id','=', wiz.partner_id.id))
+            domain.append(('partner_id', '=', wiz.partner_id.id))
             report_parms['supplier'] = wiz.partner_id.name  
             
         # Supplier Reference
         if wiz.project_ref:
-            domain.append(('project_ref','like',wiz.project_ref))
+            domain.append(('project_ref', 'like', wiz.project_ref))
         
         # get the PO ids based on the selected criteria
         po_obj = self.pool.get('purchase.order')
@@ -133,7 +134,7 @@ class po_follow_up(osv.osv_memory):
             report_name = 'po.follow.up_rml'
             
         if wiz.po_date_from:
-            domain.append(('date_order','>=',wiz.po_date_from))
+            domain.append(('date_order', '>=', wiz.po_date_from))
                    
         background_id = self.pool.get('memory.background.report').create(cr, uid, {'file_name': report_name, 'report_name': report_name}, context=context)
         context['background_id'] = background_id
@@ -160,6 +161,7 @@ class background_report(osv.osv_memory):
             'report_id': fields.integer('Report id'),
             'percent': fields.float('Percent'),
         }
+
         def update_percent(self, cr, uid, ids, percent, context=None):
             self.write(cr, uid, ids, {'percent': percent})
 
