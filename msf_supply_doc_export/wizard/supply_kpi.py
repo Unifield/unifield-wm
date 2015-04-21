@@ -23,11 +23,9 @@ from osv import osv
 from osv import fields
 import threading
 import pooler
-from tools.translate import _
-from lxml import etree
 
-import time
 from datetime import datetime
+from datetime import timedelta
 
 
 class supply_kpi(osv.osv):
@@ -115,23 +113,37 @@ class supply_kpi(osv.osv):
         'dim_8b_year_checkbox': fields.boolean(string="Year"),
     }
 
-    def launch_refresh_thread(self, cr, uid, ids, context=None):
-
+    def launch_refresh_thread(self, cr, uid, kpi_id, context=None):
         print "Start refreshing KPI at " + str(datetime.now())
-        # Mettre date dans BDD => active
         cr = pooler.get_db(cr.dbname).cursor()
         kpi_obj = self.pool.get('kpi.refresh')
         kpi_obj.truncate_tables(cr, uid)
         kpi_obj.refresh_data(cr, uid)
-        #self.default_get(cr, uid, ids, context)
-        # Mettre date dans BDD => desactive
+        values = {'running': False}
+        super(supply_kpi, self).write(cr, uid, kpi_id, values, context=context)
         print "Stop refreshing KPI at " + str(datetime.now())
+        cr.commit()
         cr.close()
 
     def button_refresh(self, cr, uid, ids, context=None):
-        refresh = threading.Thread(None, self.launch_refresh_thread, None, (cr, uid, ids), {'context': context})
-        refresh.start()
-        return True
+        args = [('create_uid', '=', uid)]
+        kpi_id = self.search(cr, uid, args, context=context)
+        kpi_obj = self.browse(cr, uid, kpi_id, context=context)[0]
+
+        # kpi refresh is blocked when a refresh is already running, but if refresh start begin
+        # one hour or more, we suppose it's not finish :
+        # For example during a refresh, the server restart.
+        time_outdated = datetime.now() - timedelta(minutes=60)
+        refresh_time = datetime.strptime(kpi_obj['refresh_dttm'], "%Y-%m-%d %H:%M:%S.%f")
+        if not kpi_obj['running'] or refresh_time < time_outdated:
+            values = {'running': True, 'refresh_dttm': datetime.now()}
+            super(supply_kpi, self).write(cr, uid, kpi_id, values, context=context)
+            refresh = threading.Thread(None, self.launch_refresh_thread, None, (cr, uid, kpi_id), {'context': context})
+            refresh.start()
+        else:
+            raise osv.except_osv("Refresh data",
+                                 "You can not update the data for the moment: a refresh is already running")
+        return self.default_get(cr, uid, ids, context)
 
     def prepare_report_data(self, cr, uid, ids, prefix, aggregate, fields, context=None):
         supply_kpi_brw = self.browse(cr, uid, ids, context=None)[0]
@@ -170,7 +182,7 @@ class supply_kpi(osv.osv):
         return {'report_header': headers, 'report_lines': report_lines}
 
     def default_get(self, cr, uid, fields=None, context=None):
-        kss_obj = self.pool.get('supply.kpi.summary')
+        kss_obj = super(supply_kpi, self)
         args = [('create_uid', '=', uid)]
         res_ids = super(supply_kpi, self).search(cr, uid, args, context=context)
         res = super(supply_kpi, self).read(cr, uid, res_ids, context=context)
