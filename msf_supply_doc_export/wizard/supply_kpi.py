@@ -126,22 +126,9 @@ class supply_kpi(osv.osv):
         cr.close()
 
     def button_refresh(self, cr, uid, ids, context=None):
-        args = [('create_uid', '=', uid)]
-        kpi_id = self.search(cr, uid, args, context=context)
-        kpi_obj = self.browse(cr, uid, kpi_id, context=context)[0]
-
-        # kpi refresh is blocked when a refresh is already running, but if refresh start begin
-        # one hour or more, we suppose it's not finish :
-        # For example during a refresh, the server restart.
-        refresh_time = 0
-        time_outdated = 0
-        if isinstance(kpi_obj['refresh_dttm'], basestring):
-            refresh_time = datetime.strptime(kpi_obj['refresh_dttm'], "%Y-%m-%d %H:%M:%S.%f")
-            time_outdated = datetime.now() - timedelta(minutes=60)
-
-        if not kpi_obj['running'] or refresh_time <= time_outdated:
-            values = {'running': True, 'refresh_dttm': datetime.now()}
-            super(supply_kpi, self).write(cr, uid, kpi_id, values, context=context)
+        if not self.check_kpi_running(cr, uid, context=None):
+            args = [('create_uid', '=', uid)]
+            kpi_id = self.search(cr, uid, args, context=context)
             refresh = threading.Thread(None, self.launch_refresh_thread, None, (cr, uid, kpi_id), {'context': context})
             refresh.start()
         else:
@@ -206,51 +193,79 @@ class supply_kpi(osv.osv):
             res['dim_8b'] = kss.dim_8b
         return res
 
+    def check_kpi_running(self, cr, uid, context=None):
+        args = [('create_uid', '=', uid)]
+        kpi_id = self.search(cr, uid, args, context=context)
+        kpi_obj = self.browse(cr, uid, kpi_id, context=context)[0]
+
+        # kpi refresh is blocked when a refresh is already running, but if refresh start begin
+        # one hour or more, we suppose it's not finish :
+        # For example during a refresh, the server restart.
+        refresh_time = 0
+        time_outdated = 0
+        if isinstance(kpi_obj['refresh_dttm'], basestring):
+            refresh_time = datetime.strptime(kpi_obj['refresh_dttm'], "%Y-%m-%d %H:%M:%S.%f")
+            time_outdated = datetime.now() - timedelta(minutes=60)
+        if not kpi_obj['running'] or refresh_time <= time_outdated:
+            return False
+        else:
+            return True
+
     def button_3a(self, cr, uid, ids, context=None):
-        print "Button at " + str(datetime.now())
-        prefix = 'dim_3a'
-        # 0: sql command, 1: report heading, 2: sql column name
-        aggregate = ['round(sum(pct_ontime)::numeric,2) as sum', 'Total', 'sum']
-        fields = [['state', 'State', -1]]
-        data = self.prepare_report_data(cr, uid, ids, prefix, aggregate, fields, context=None)
-        print "Return at " + str(datetime.now())
-        return {
-            'type': 'ir.actions.report.xml',
-            'report_name': 'kpi.detail_xls',
-            'datas': data,
-            'nodestroy': True,
-            'context': context,
-        }
+        if not self.check_kpi_running(cr, uid, context=None):
+            print "Button at " + str(datetime.now())
+            prefix = 'dim_3a'
+            # 0: sql command, 1: report heading, 2: sql column name
+            aggregate = ['round(sum(pct_ontime)::numeric,2) as sum', 'Total', 'sum']
+            fields = [['state', 'State', -1]]
+            data = self.prepare_report_data(cr, uid, ids, prefix, aggregate, fields, context=None)
+            print "Return at " + str(datetime.now())
+            return {
+                'type': 'ir.actions.report.xml',
+                'report_name': 'kpi.detail_xls',
+                'datas': data,
+                'nodestroy': True,
+                'context': context,
+            }
+        else:
+            raise osv.except_osv("Refresh data",
+                                 "You can not export data for the moment: a refresh is already running")
 
     def button_6a(self, cr, uid, ids, context=None):
-        prefix = 'dim_6a'
-        # 0: sql command, 1: report heading, 2: sql column name
-        aggregate = ['round(sum(value)::numeric,2) as sum', 'Total', 'sum']
-        fields = []
-        data = self.prepare_report_data(cr, uid, ids, prefix, aggregate, fields, context=None)
-
-        return {
-            'type': 'ir.actions.report.xml',
-            'report_name': 'kpi.detail_xls',
-            'datas': data,
-            'nodestroy': True,
-            'context': context,
-        }
+        if not self.check_kpi_running(cr, uid, context=None):
+            prefix = 'dim_6a'
+            # 0: sql command, 1: report heading, 2: sql column name
+            aggregate = ['round(sum(value)::numeric,2) as sum', 'Total', 'sum']
+            fields = []
+            data = self.prepare_report_data(cr, uid, ids, prefix, aggregate, fields, context=None)
+            return {
+                'type': 'ir.actions.report.xml',
+                'report_name': 'kpi.detail_xls',
+                'datas': data,
+                'nodestroy': True,
+                'context': context,
+            }
+        else:
+            raise osv.except_osv("Refresh data",
+                                 "You can not export data for the moment: a refresh is already running")
 
     def button_8b(self, cr, uid, ids, context=None):
-        prefix = 'dim_8b'
-        # 0: sql command, 1: report heading, 2: sql column name
-        aggregate = ['round(sum(cnt)::numeric,2) as sum', 'Total', 'sum']
-        fields = [['state', 'State', 4]]
-        data = self.prepare_report_data(cr, uid, ids, prefix, aggregate, fields, context=None)
-
-        return {
-            'type': 'ir.actions.report.xml',
-            'report_name': 'kpi.detail_xls',
-            'datas': data,
-            'nodestroy': True,
-            'context': context,
-        }
+        if not self.check_kpi_running(cr, uid, context=None):
+            prefix = 'dim_8b'
+            # 0: sql command, 1: report heading, 2: sql column name
+            aggregate = ['round(sum(cnt)::numeric,2) as sum', 'Total', 'sum']
+            fields = [['state', 'State', 4]]
+            data = self.prepare_report_data(cr, uid, ids, prefix, aggregate, fields, context=None)
+            return {
+                'type': 'ir.actions.report.xml',
+                'report_name': 'kpi.detail_xls',
+                'datas': data,
+                'nodestroy': True,
+                'context': context,
+            }
+        else:
+            raise osv.except_osv("Refresh data",
+                                 "You can not export data for the moment: a refresh is already running")
 
     def create(self, cr, uid, values, context=None):
         args = [('create_uid', '=', uid)]

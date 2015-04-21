@@ -21,7 +21,7 @@ class kpi_refresh(osv.osv_memory):
         cr.execute('''drop table if exists product_flat cascade;''')
         cr.execute('''drop table if exists dimension_8b cascade;''')
         cr.execute('''drop table if exists dimension_3_base cascade;''')
-        cr.execute('''drop table if exists dimension_3a cascade;''')
+        cr.execute('''drop table if exists dimension_6a cascade;''')
         cr.execute('''drop view if exists dimension_8b_vw cascade;''')
         cr.execute('''drop view if exists dimension_3_base_vw cascade;''')
         cr.execute('''drop view if exists dimension_3a_vw cascade;''')
@@ -30,7 +30,7 @@ class kpi_refresh(osv.osv_memory):
         cr.execute('''drop view if exists product_flat_vw cascade;''')
 
         cr.execute('''truncate table supply_kpi_summary''')
-        cr.execute('''truncate table dimension_6a''')
+        cr.execute('''truncate table dimension_3a''')
         cr.commit()
 
         print "Tables dropped and truncated"
@@ -175,13 +175,13 @@ class kpi_refresh(osv.osv_memory):
             where ontime.sm_actual_receipt_date is not null
             and ontime.sm_actual_receipt_date <= ontime.delivery_requested_date;''')
         cr.commit()
-        cr.execute('''create table dimension_3a as select * from dimension_3a_vw limit 0;''')
-        cr.commit()
-        cr.execute('''ALTER TABLE dimension_3a ADD dim_3a_id SERIAL;''')
-        cr.commit()
-        cr.execute('''ALTER TABLE dimension_3a ADD CONSTRAINT dim_3a_id_key PRIMARY KEY (dim_3a_id);''')
+        #cr.execute('''create table dimension_3a as select * from dimension_3a_vw limit 0;''')
+        #cr.commit()
+        #cr.execute('''ALTER TABLE dimension_3a ADD dim_3a_id SERIAL;''')
+        #cr.commit()
+        #cr.execute('''ALTER TABLE dimension_3a ADD CONSTRAINT dim_3a_id_key PRIMARY KEY (dim_3a_id);''')
         #cr.execute('''CREATE INDEX dimension_3a_index ON dimension_3a (sm_id, name, priority);''')
-        cr.commit()
+        #cr.commit()
         cr.execute('''create view dimension_6a_vw as
               select  sm.sm_id as sm_id,
                       prd.id as prd_id,
@@ -202,6 +202,8 @@ class kpi_refresh(osv.osv_memory):
                    product_flat prd
               where sm.product_id = prd.id
               and sm.reason_type in ('Loss','Scrap','Sample','Expiry','Damage');''')
+        cr.commit()
+        cr.execute('''create table dimension_6a as select * from dimension_6a_vw limit 0;''')
         cr.commit()
         cr.execute('''create view dimension_8b_vw as
             select pf.categ,
