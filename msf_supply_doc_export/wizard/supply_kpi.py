@@ -133,9 +133,13 @@ class supply_kpi(osv.osv):
         # kpi refresh is blocked when a refresh is already running, but if refresh start begin
         # one hour or more, we suppose it's not finish :
         # For example during a refresh, the server restart.
-        time_outdated = datetime.now() - timedelta(minutes=60)
-        refresh_time = datetime.strptime(kpi_obj['refresh_dttm'], "%Y-%m-%d %H:%M:%S.%f")
-        if not kpi_obj['running'] or refresh_time < time_outdated:
+        refresh_time = 0
+        time_outdated = 0
+        if isinstance(kpi_obj['refresh_dttm'], basestring):
+            refresh_time = datetime.strptime(kpi_obj['refresh_dttm'], "%Y-%m-%d %H:%M:%S.%f")
+            time_outdated = datetime.now() - timedelta(minutes=60)
+
+        if not kpi_obj['running'] or refresh_time <= time_outdated:
             values = {'running': True, 'refresh_dttm': datetime.now()}
             super(supply_kpi, self).write(cr, uid, kpi_id, values, context=context)
             refresh = threading.Thread(None, self.launch_refresh_thread, None, (cr, uid, kpi_id), {'context': context})
