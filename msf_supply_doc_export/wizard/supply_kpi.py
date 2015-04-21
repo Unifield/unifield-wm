@@ -181,8 +181,12 @@ class supply_kpi(osv.osv):
             if isinstance(kpi['refresh_dttm'], basestring):
                 refresh_time = datetime.strptime(kpi['refresh_dttm'], "%Y-%m-%d %H:%M:%S.%f")
                 time_outdated = datetime.now() - timedelta(minutes=60)
+                print " R = " + str(refresh_time)
+                print " O = " + str(time_outdated)
                 if refresh_time >= time_outdated:
+                    print "Return true"
                     return True
+        print "Return False"
         return False
 
     def refresh_thread(self, cr, uid, kpi_id, context=None):
@@ -201,7 +205,7 @@ class supply_kpi(osv.osv):
         if not self.check_kpi_running(cr, uid, context=None):
             args = [('create_uid', '=', uid)]
             kpi_id = self.search(cr, uid, args, context=context)
-            values = {'running': True}
+            values = {'running': True, 'refresh_dttm': datetime.now()}
             super(supply_kpi, self).write(cr, uid, kpi_id, values, context=context)
             refresh = threading.Thread(None, self.refresh_thread, None, (cr, uid, kpi_id), {'context': context})
             refresh.start()
