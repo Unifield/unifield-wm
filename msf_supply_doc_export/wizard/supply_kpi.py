@@ -191,7 +191,7 @@ class supply_kpi(osv.osv):
 
     def refresh_thread(self, cr, uid, kpi_id, context=None):
         print "Start refreshing KPI at " + str(datetime.now())
-        Logger.info("Start refreshing KPI at " + str(datetime.now()))
+        Logger.error("Start refreshing KPI at " + str(datetime.now()))
         cr = pooler.get_db(cr.dbname).cursor()
         kpi_obj = self.pool.get('kpi.refresh')
         kpi_obj.truncate_tables(cr, uid)
@@ -199,7 +199,7 @@ class supply_kpi(osv.osv):
         values = {'running': False}
         super(supply_kpi, self).write(cr, uid, kpi_id, values, context=context)
         print "Stop refreshing KPI at " + str(datetime.now())
-        Logger.info("Stop refreshing KPI at " + str(datetime.now()))
+        Logger.error("Stop refreshing KPI at " + str(datetime.now()))
         cr.commit()
         cr.close()
 
