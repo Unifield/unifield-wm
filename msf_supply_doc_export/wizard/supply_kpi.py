@@ -113,29 +113,6 @@ class supply_kpi(osv.osv):
         'dim_8b_year_checkbox': fields.boolean(string="Year"),
     }
 
-    def launch_refresh_thread(self, cr, uid, kpi_id, context=None):
-        print "Start refreshing KPI at " + str(datetime.now())
-        cr = pooler.get_db(cr.dbname).cursor()
-        kpi_obj = self.pool.get('kpi.refresh')
-        kpi_obj.truncate_tables(cr, uid)
-        kpi_obj.refresh_data(cr, uid)
-        values = {'running': False}
-        super(supply_kpi, self).write(cr, uid, kpi_id, values, context=context)
-        print "Stop refreshing KPI at " + str(datetime.now())
-        cr.commit()
-        cr.close()
-
-    def button_refresh(self, cr, uid, ids, context=None):
-        if not self.check_kpi_running(cr, uid, context=None):
-            args = [('create_uid', '=', uid)]
-            kpi_id = self.search(cr, uid, args, context=context)
-            refresh = threading.Thread(None, self.launch_refresh_thread, None, (cr, uid, kpi_id), {'context': context})
-            refresh.start()
-        else:
-            raise osv.except_osv("Refresh data",
-                                 "You can not update the data for the moment: a refresh is already running")
-        return self.default_get(cr, uid, ids, context)
-
     def prepare_report_data(self, cr, uid, ids, prefix, aggregate, fields, context=None):
         supply_kpi_brw = self.browse(cr, uid, ids, context=None)[0]
         # get fields in the correct order
@@ -194,22 +171,44 @@ class supply_kpi(osv.osv):
         return res
 
     def check_kpi_running(self, cr, uid, context=None):
-        args = [('create_uid', '=', uid)]
+        args = [('running', '=', True)]
         kpi_id = self.search(cr, uid, args, context=context)
-        kpi_obj = self.browse(cr, uid, kpi_id, context=context)[0]
+        kpi_obj = self.browse(cr, uid, kpi_id, context=context)
 
-        # kpi refresh is blocked when a refresh is already running, but if refresh start begin
-        # one hour or more, we suppose it's not finish :
+        # if refresh start begin one hour or more, we suppose it's not finish :
         # For example during a refresh, the server restart.
-        refresh_time = 0
-        time_outdated = 0
-        if isinstance(kpi_obj['refresh_dttm'], basestring):
-            refresh_time = datetime.strptime(kpi_obj['refresh_dttm'], "%Y-%m-%d %H:%M:%S.%f")
-            time_outdated = datetime.now() - timedelta(minutes=60)
-        if not kpi_obj['running'] or refresh_time <= time_outdated:
-            return False
+        for kpi in kpi_obj:
+            if isinstance(kpi['refresh_dttm'], basestring):
+                refresh_time = datetime.strptime(kpi['refresh_dttm'], "%Y-%m-%d %H:%M:%S.%f")
+                time_outdated = datetime.now() - timedelta(minutes=60)
+                if refresh_time >= time_outdated:
+                    return True
+        return False
+
+    def refresh_thread(self, cr, uid, kpi_id, context=None):
+        print "Start refreshing KPI at " + str(datetime.now())
+        cr = pooler.get_db(cr.dbname).cursor()
+        kpi_obj = self.pool.get('kpi.refresh')
+        kpi_obj.truncate_tables(cr, uid)
+        kpi_obj.refresh_data(cr, uid)
+        values = {'running': False}
+        super(supply_kpi, self).write(cr, uid, kpi_id, values, context=context)
+        print "Stop refreshing KPI at " + str(datetime.now())
+        cr.commit()
+        cr.close()
+
+    def button_refresh(self, cr, uid, ids, context=None):
+        if not self.check_kpi_running(cr, uid, context=None):
+            args = [('create_uid', '=', uid)]
+            kpi_id = self.search(cr, uid, args, context=context)
+            values = {'running': True}
+            super(supply_kpi, self).write(cr, uid, kpi_id, values, context=context)
+            refresh = threading.Thread(None, self.refresh_thread, None, (cr, uid, kpi_id), {'context': context})
+            refresh.start()
+            return self.default_get(cr, uid, ids, context)
         else:
-            return True
+            raise osv.except_osv("Refresh data",
+                                 "You can not update the data for the moment: a refresh is already running")
 
     def button_3a(self, cr, uid, ids, context=None):
         if not self.check_kpi_running(cr, uid, context=None):
