@@ -144,6 +144,8 @@ class supply_kpi(osv.osv):
                 # Replace & by AND
                 if isinstance(line[elem[0]], basestring):
                     sorted_line.append(line[elem[0]].replace("&", "AND"))
+                elif isinstance(line[elem[0]], float):
+                    sorted_line.append(float("{0:.2f}".format(line[elem[0]])))
                 else:
                     sorted_line.append(line[elem[0]])
             report_lines.append(sorted_line)
