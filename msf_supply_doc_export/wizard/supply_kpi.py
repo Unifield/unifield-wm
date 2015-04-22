@@ -160,12 +160,13 @@ class supply_kpi(osv.osv):
 
         if kpi_id:
             kss_obj = self.pool.get('supply.kpi.summary')
-            kss_id = kss_obj.search(cr, uid, [(uid, '=', uid)], context=context)[0]
-            kss = kss_obj.browse(cr, uid, kss_id, context)
-            kpi_id['dim_3a'] = kss.dim_3a
-            kpi_id['dim_6a'] = kss.dim_6a
-            kpi_id['dim_6a_currency'] = kss.dim_6a_currency
-            kpi_id['dim_8b'] = kss.dim_8b
+            kss_ids = kss_obj.search(cr, uid, [(uid, '=', uid)], context=context)
+            if kss_ids[0]:
+                kss = kss_obj.browse(cr, uid, kss_ids[0], context)
+                kpi_id['dim_3a'] = kss.dim_3a
+                kpi_id['dim_6a'] = kss.dim_6a
+                kpi_id['dim_6a_currency'] = kss.dim_6a_currency
+                kpi_id['dim_8b'] = kss.dim_8b
         return kpi_id
 
     def check_kpi_running(self, cr, uid, context=None):
