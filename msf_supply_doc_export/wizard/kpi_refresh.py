@@ -33,8 +33,6 @@ class kpi_refresh(osv.osv_memory):
         cr.execute('''truncate table dimension_3a''')
         cr.commit()
 
-        print "Tables dropped and truncated"
-
         cr.execute('''create table kpi_purchase_order as select * from purchase_order limit 0;''')
         cr.execute('''create table kpi_purchase_order_line as select * from purchase_order_line limit 0;''')
         cr.execute('''create table kpi_res_partner as select * from res_partner limit 0;''')
@@ -226,12 +224,9 @@ class kpi_refresh(osv.osv_memory):
         cr.commit()
         cr.execute('''create table dimension_8b as select * from dimension_8b_vw;''')
         cr.commit()
-        print "tables recreated"
         return True
 
     def refresh_data(self, cr, uid):
-
-        print "KPI Group 1"
 
         cr.execute('''insert into kpi_purchase_order select * from purchase_order''')
         cr.execute('''insert into kpi_purchase_order_line select * from purchase_order_line''')
@@ -242,7 +237,7 @@ class kpi_refresh(osv.osv_memory):
         cr.execute('''insert into kpi_product_template select * from product_template''')
         cr.execute('''insert into kpi_product_nomenclature select * from product_nomenclature''')
         cr.commit()
-        print "KPI Group 2"
+
         cr.execute('''insert into po_flat select * from po_flat_vw''')
         cr.commit()
         cr.execute('''insert into stock_move_flat select * from stock_move_flat_vw''')
@@ -250,7 +245,6 @@ class kpi_refresh(osv.osv_memory):
         cr.execute('''insert into product_flat select * from product_flat_vw''')
         cr.commit()
 
-        print "KPI Group 3"
         # dimension_3a. columns need to be named because openerp creates tables with random column order
         cr.execute('''insert into dimension_3_base select * from dimension_3_base_vw''')
         cr.commit()
@@ -277,13 +271,12 @@ class kpi_refresh(osv.osv_memory):
                             cnt
                         from dimension_3a_vw''')
         cr.commit()
-        print "KPI Group 4"
+
         cr.execute('''insert into dimension_8b select * from dimension_8b_vw''')
         cr.commit()
         cr.execute('''insert into dimension_6a select * from dimension_6a_vw''')
         cr.commit()
 
-        print "KPI Group 5"
         cr.execute('''insert into supply_kpi_summary(create_uid,create_date,write_date,write_uid)
                       select distinct 1 as create_uid,current_date as create_date,current_date as write_date,1 as write_uid''')
         cr.commit()
@@ -294,6 +287,7 @@ class kpi_refresh(osv.osv_memory):
                                                     dim_8b = (select sum(cnt) from dimension_8b)''')
         cr.commit()
 
+        print "Kpi refreshed"
         return True
 
 kpi_refresh()
