@@ -51,7 +51,7 @@ class supply_kpi(osv.osv):
 
             'dim_6a_year_checkbox':             ['sm_created_year', 'Year', 1],
             'dim_6a_month_checkbox':            ['sm_created_month', 'Month', 2],
-            'dim_6a_currency':                  ['currency_code',   'Currency', 4], #3 is for state
+            'dim_6a_currency':                  ['currency_code',   'Currency', 4],  # 3 is for state
             'dim_6a_reason_type_checkbox':      ['reason_type',     'Reason Type', 5],
             'dim_6a_product_checkbox':          ['product_qty',     'Product quantity', 6],
             'dim_6a_main_type_checkbox':        ['pn_main_type',    'Main Type', 7],
@@ -66,7 +66,7 @@ class supply_kpi(osv.osv):
             'dim_8b_year_checkbox':             ['po_created_year', 'Year', 1],
             'dim_8b_month_checkbox':            ['po_created_month', 'Month', 2],
             'dim_8b_week_checkbox':             ['po_created_week', 'Week', 3],
-            'dim_8b_order_category_checkbox':   ['categ',           'Order category', 5],#4 is for state
+            'dim_8b_order_category_checkbox':   ['categ',           'Order category', 5],  # 4 is for state
             'dim_8b_order_type_checkbox':       ['order_type',      'Order Type', 6],
             'dim_8b_priority_checkbox':         ['priority',        'Priority', 7],
             'dim_8b_partner_type_checkbox':     ['partner_type',    'Partner Type', 8],
@@ -141,7 +141,7 @@ class supply_kpi(osv.osv):
             sorted_line = list()
             sorted_line.append(line[aggregate[2]])   # sorted_line assignment split into 2 statements for readability
             for i, elem in enumerate(fields):
-                #Replace & by AND
+                # Replace & by AND
                 if isinstance(line[elem[0]], basestring):
                     sorted_line.append(line[elem[0]].replace("&", "AND"))
                 else:
@@ -149,26 +149,24 @@ class supply_kpi(osv.osv):
             report_lines.append(sorted_line)
         return {'report_header': headers, 'report_lines': report_lines}
 
-    def default_get(self, cr, uid, fields=None, context=None):
-        kss_obj = super(supply_kpi, self)
-        args = [('create_uid', '=', uid)]
-        res_ids = super(supply_kpi, self).search(cr, uid, args, context=context)
-        res = super(supply_kpi, self).read(cr, uid, res_ids, context=context)
-        if res:
-            if res[0]:
-                res = res[0]
-        else:
-            res = super(supply_kpi, self).default_get(cr, uid, fields, context=context)
+    def default_get(self, cr, uid, ids, context=None):
 
-        kss_ids = kss_obj.search(cr, uid, [(uid, '=', uid)], context=context)
-        if kss_ids:
-            kss_id = kss_ids[0]
-            kss = kss_obj.browse(cr, uid, kss_id, context=context)
-            res['dim_3a'] = kss.dim_3a
-            res['dim_6a'] = kss.dim_6a
-            res['dim_6a_currency'] = kss.dim_6a_currency
-            res['dim_8b'] = kss.dim_8b
-        return res
+        kpi_ids = super(supply_kpi, self).search(cr, uid, [('create_uid', '=', uid)], context=context)
+        kpi_id = super(supply_kpi, self).read(cr, uid, kpi_ids, context=context)
+        if not kpi_id:
+            kpi_id = super(supply_kpi, self).default_get(cr, uid, ids, context=context)
+        if kpi_id[0]:
+            kpi_id = kpi_id[0]
+
+        if kpi_id:
+            kss_obj = self.pool.get('supply.kpi.summary')
+            kss_id = kss_obj.search(cr, uid, [(uid, '=', uid)], context=context)[0]
+            kss = kss_obj.browse(cr, uid, kss_id, context)
+            kpi_id['dim_3a'] = kss.dim_3a
+            kpi_id['dim_6a'] = kss.dim_6a
+            kpi_id['dim_6a_currency'] = kss.dim_6a_currency
+            kpi_id['dim_8b'] = kss.dim_8b
+        return kpi_id
 
     def check_kpi_running(self, cr, uid, context=None):
         args = [('running', '=', True)]
@@ -181,12 +179,8 @@ class supply_kpi(osv.osv):
             if isinstance(kpi['refresh_dttm'], basestring):
                 refresh_time = datetime.strptime(kpi['refresh_dttm'], "%Y-%m-%d %H:%M:%S.%f")
                 time_outdated = datetime.now() - timedelta(minutes=60)
-                print " R = " + str(refresh_time)
-                print " O = " + str(time_outdated)
                 if refresh_time >= time_outdated:
-                    print "Return true"
                     return True
-        print "Return False"
         return False
 
     def refresh_thread(self, cr, uid, kpi_id, context=None):
@@ -200,6 +194,7 @@ class supply_kpi(osv.osv):
         super(supply_kpi, self).write(cr, uid, kpi_id, values, context=context)
         print "Stop refreshing KPI at " + str(datetime.now())
         logging.info("KPI: Stop refreshing KPI at " + str(datetime.now()))
+        self.default_get(cr, uid, None, context)
         cr.commit()
         cr.close()
 
