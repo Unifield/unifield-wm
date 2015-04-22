@@ -113,6 +113,26 @@ class supply_kpi(osv.osv):
         'dim_8b_year_checkbox': fields.boolean(string="Year"),
     }
 
+    def get_sql_report(self, cr, uid, ids, prefix, aggregate, fields, context=None):
+        supply_kpi_brw = self.browse(cr, uid, ids, context=None)[0]
+        # get fields in the correct order
+        cols = self.col_map[prefix]
+        fields.extend([cols[key] for key in cols if getattr(supply_kpi_brw, key)])
+        fields.sort(key=lambda x: x[2])   # use the numeric ranking, element 3, to sort
+
+        # build header list
+        group_by = ', '.join([elem[0] for elem in fields])
+        # possible to have no selectable and no static group by fields, in which case no group by is needed
+        if group_by:
+            group_by = 'GROUP BY ' + group_by + ' ORDER BY ' + group_by
+
+        # build select for data
+        selects = ', '.join([elem[0] for elem in fields])
+        sql = "SELECT " + aggregate[0] + ', ' + selects + ' FROM dimension_' + prefix[4:] + ' ' + group_by
+        cr.execute(sql)
+        return sql
+
+    """
     def prepare_report_data(self, cr, uid, ids, prefix, aggregate, fields, context=None):
         supply_kpi_brw = self.browse(cr, uid, ids, context=None)[0]
         # get fields in the correct order
@@ -144,12 +164,11 @@ class supply_kpi(osv.osv):
                 # Replace & by AND
                 if isinstance(line[elem[0]], basestring):
                     sorted_line.append(line[elem[0]].replace("&", "AND"))
-                elif isinstance(line[elem[0]], float):
-                    sorted_line.append(float("{0:.2f}".format(line[elem[0]])))
                 else:
                     sorted_line.append(line[elem[0]])
             report_lines.append(sorted_line)
         return {'report_header': headers, 'report_lines': report_lines}
+    """
 
     def default_get(self, cr, uid, ids, context=None):
 
@@ -217,17 +236,15 @@ class supply_kpi(osv.osv):
 
     def button_3a(self, cr, uid, ids, context=None):
         if not self.check_kpi_running(cr, uid, context=None):
-            print "Button at " + str(datetime.now())
             prefix = 'dim_3a'
-            # 0: sql command, 1: report heading, 2: sql column name
             aggregate = ['round(sum(pct_ontime)::numeric,2) as sum', 'Total', 'sum']
             fields = [['state', 'State', -1]]
-            data = self.prepare_report_data(cr, uid, ids, prefix, aggregate, fields, context=None)
-            print "Return at " + str(datetime.now())
+            sql = self.get_sql_report(cr, uid, ids, prefix, aggregate, fields, context=None)
+
             return {
                 'type': 'ir.actions.report.xml',
                 'report_name': 'kpi.detail_xls',
-                'datas': data,
+                'datas': {"sql": sql, "aggregate": aggregate, "fields": fields},
                 'nodestroy': True,
                 'context': context,
             }
@@ -241,11 +258,12 @@ class supply_kpi(osv.osv):
             # 0: sql command, 1: report heading, 2: sql column name
             aggregate = ['round(sum(value)::numeric,2) as sum', 'Total', 'sum']
             fields = []
-            data = self.prepare_report_data(cr, uid, ids, prefix, aggregate, fields, context=None)
+            sql = self.get_sql_report(cr, uid, ids, prefix, aggregate, fields, context=None)
+            #data = self.prepare_report_data(cr, uid, ids, prefix, aggregate, fields, context=None)
             return {
                 'type': 'ir.actions.report.xml',
                 'report_name': 'kpi.detail_xls',
-                'datas': data,
+                'datas': {"sql": sql, "aggregate": aggregate, "fields": fields},
                 'nodestroy': True,
                 'context': context,
             }
@@ -259,11 +277,12 @@ class supply_kpi(osv.osv):
             # 0: sql command, 1: report heading, 2: sql column name
             aggregate = ['round(sum(cnt)::numeric,2) as sum', 'Total', 'sum']
             fields = [['state', 'State', 4]]
-            data = self.prepare_report_data(cr, uid, ids, prefix, aggregate, fields, context=None)
+            sql = self.get_sql_report(cr, uid, ids, prefix, aggregate, fields, context=None)
+            #data = self.prepare_report_data(cr, uid, ids, prefix, aggregate, fields, context=None)
             return {
                 'type': 'ir.actions.report.xml',
                 'report_name': 'kpi.detail_xls',
-                'datas': data,
+                'datas': {"sql": sql, "aggregate": aggregate, "fields": fields},
                 'nodestroy': True,
                 'context': context,
             }

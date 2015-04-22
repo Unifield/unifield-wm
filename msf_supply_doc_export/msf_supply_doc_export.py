@@ -308,6 +308,7 @@ class parser_kpi_detail_xls(report_sxw.rml_parse):
 
     def __init__(self, cr, uid, name, context=None):
         super(parser_kpi_detail_xls, self).__init__(cr, uid, name, context=context)
+
         self.localcontext.update({
             'time': time,
             'getHeaderLine': self.getHeaderLine,
@@ -328,9 +329,32 @@ class kpi_detail_report_xls(SpreadsheetReport):
     def __init__(self, name, table, rml=False, parser=report_sxw.rml_parse, header='external', store=False):
         super(kpi_detail_report_xls, self).__init__(name, table, rml=rml, parser=parser, header=header, store=store)
 
+    def get_report_data(self, cr, sql, aggregate, fields):
+        cr.execute(sql)
+
+        report_lines_dict = cr.dictfetchall()
+        report_lines = []
+
+        headers = [aggregate[1]]
+        headers.extend([elem[1] for elem in fields])
+        for line in report_lines_dict:
+            sorted_line = list()
+            sorted_line.append(line[aggregate[2]])  # sorted_line assignment split into 2 statements for readability
+            for i, elem in enumerate(fields):
+                # Replace & by AND
+                if isinstance(line[elem[0]], basestring):
+                    sorted_line.append(line[elem[0]].replace("&", "AND"))
+                else:
+                    sorted_line.append(line[elem[0]])
+            report_lines.append(sorted_line)
+        return {'report_header': headers, 'report_lines': report_lines}
+
     def create(self, cr, uid, ids, data, context=None):
+        data_xls = self.get_report_data(cr, data['sql'], data['aggregate'], data['fields'])
+        data.update(data_xls)
+
         a = super(kpi_detail_report_xls, self).create(cr, uid, ids, data, context=context)
-        return (a[0], 'xls')
+        return a[0], 'xls'
 
 kpi_detail_report_xls('report.kpi.detail_xls', 'supply.kpi', 'addons/msf_supply_doc_export/report/report_kpi_detail_xls.mako', parser=parser_kpi_detail_xls, header='internal')
 
