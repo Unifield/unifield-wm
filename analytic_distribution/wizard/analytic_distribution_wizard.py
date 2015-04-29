@@ -512,12 +512,17 @@ class analytic_distribution_wizard(osv.osv_memory):
             # UFTP-363: Do not edit any element of JI or JE if the JE is imported
             if el.move_id and el.move_id.state not in ['draft']:
                 res[el.id] = False
-            if el.move_id and el.move_id.imported is True:
+            if el.move_id and el.move_id.imported is True and el.move_id.state not in ['draft']:
+                # US-99 JE imported posted: AD not writable
                 res[el.id] = False
             if el.move_line_id and el.move_line_id.move_id and el.move_line_id.move_id.state not in ['draft'] and not context.get('from_correction', False):
                 res[el.id] = False
-            if el.move_line_id and el.move_line_id.move_id and el.move_line_id.move_id.imported is True and not context.get('from_correction', False):
-                res[el.id] = False
+            if el.move_line_id and el.move_line_id.move_id and el.move_line_id.move_id.imported:
+                # US-99 JI imported not draft: AD not writable
+                # (from correction wizard: always writable)
+                if not context.get('from_correction', False) and \
+                    el.move_id.state and el.move_id.state not in ['draft']:
+                    res[el.id] = False
         return res
 
     def _have_header(self, cr, uid, ids, name, args, context=None):
@@ -992,8 +997,13 @@ class analytic_distribution_wizard(osv.osv_memory):
 
         wiz2 = self.browse(cr, uid, ids, context=context)[0]
         line_totals = 0.0
-        for line in wiz2.line_ids or wiz2.fp_line_ids:
-            line_totals += line.amount
+        if wiz2.state == 'cc':
+            # supply mode
+            for line in wiz2.line_ids:
+                line_totals += line.amount
+        else:
+            for line in wiz2.fp_line_ids:
+                line_totals += line.amount
 
         if abs(wiz2.amount - line_totals) > 10**-3:
             raise osv.except_osv(_('Error'), _('Line amounts do not equal the total.'))
@@ -1126,6 +1136,11 @@ class analytic_distribution_wizard(osv.osv_memory):
         # Update analytic lines
         self.update_analytic_lines(cr, uid, ids, context=context)
 
+        if wiz and wiz.move_line_id and wiz.move_line_id.move_id and \
+            wiz.move_line_id.move_id.imported:
+            # US-99 do not refresh lines as imported JE has no pencil
+            # (only AD wizard button allowed)
+            o2m_toreload = {}
         return_wiz =  dict(type='ir.actions.act_window_close', **o2m_toreload)
         if context.get("from_cash_return_analytic_dist"):
             # If the wizard was called from the cash return line, the perform some actions before returning back to the caller wizard
@@ -1275,6 +1290,11 @@ class analytic_distribution_wizard(osv.osv_memory):
             o2m_toreload['o2m_refresh'] = context['from_list_grid']
         # Retrieve some values to verify if we come from a direct invoice
         wiz = self.browse(cr, uid, ids, context=context)[0]
+        if wiz and wiz.move_line_id and wiz.move_line_id.move_id and \
+            wiz.move_line_id.move_id.imported:
+            # US-99 do not refresh lines as imported JE has no pencil
+            # (only AD wizard button allowed)
+            o2m_toreload = {}
         if wiz and (wiz.direct_invoice_id or wiz.direct_invoice_line_id):
             # Get direct_invoice id
             direct_invoice_id = (wiz.direct_invoice_id and wiz.direct_invoice_id.id) or \

@@ -1155,12 +1155,18 @@ class account_bank_statement_line(osv.osv):
                     if ad.analytic_lines:
                         aal_ids.append(ad.analytic_lines[0].id)
 
+                from_sync = False
+                if context.get('sync_update_execution'):
+                    from_sync = True
+                    del context['sync_update_execution']
                 account_analytic_line.unlink(cr, uid, aal_ids, context=context)
                 analytic_distribution.unlink(cr, uid, ad_ids, context=context)
 
                 # Save the seqnums and delete the move lines
                 context['seqnums'] = seqnums
                 account_move.unlink(cr, uid, move_ids, context=context)
+                if from_sync:
+                    context['sync_update_execution'] = True
         return True
 
 
@@ -1552,6 +1558,8 @@ class account_bank_statement_line(osv.osv):
                 move_vals = { 'partner_type': partner_type, }
                 if 'ref' in values: # only get this value if it presented in "values"
                     move_vals['ref'] = values.get('ref', False)
+                if 'date' in move_line_values:  # US-84
+                    move_vals.update({'date': move_line_values.get('date')})
                 if 'document_date' in move_line_values:
                     move_vals.update({'document_date': move_line_values.get('document_date')})
                 if 'cheque_number' in move_line_values:
@@ -2229,6 +2237,8 @@ class account_bank_statement_line(osv.osv):
                 # unlink moves and analytic lines before deleting the line
                 self.unlink_moves(cr, uid, [st_line.id], context=context)
                 self.pool.get('account.invoice').unlink(cr, uid, [st_line.invoice_id.id], {'from_register': True})
+            elif st_line.direct_invoice and st_line.direct_invoice_move_id and not context.get('from_direct_invoice', False):
+                self.pool.get('account.move').unlink(cr, uid, [st_line.direct_invoice_move_id.id], context=context)
         return super(account_bank_statement_line, self).unlink(cr, uid, ids)
 
     def button_advance(self, cr, uid, ids, context=None):
