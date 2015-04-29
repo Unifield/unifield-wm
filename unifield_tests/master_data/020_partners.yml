@@ -114,6 +114,54 @@
     partner_id: ext_supplier_3
     name: External Supplier 3 (Test)
 -
+  Create an intermission supplier
+-
+  !record {model: res.partner, id: im_supplier_1}:
+    name: Intermission Supplier 1 (Test)
+    supplier: 1
+    customer: 0
+    partner_type: 'intermission'
+    property_account_receivable: account_account_receivable_supplier0
+    property_account_payable: account_account_payable_supplier0
+-
+  Create an address for intermission supplier 1
+-
+  !record {model: res.partner.address, id: im_supplier_1_addr}:
+    partner_id: im_supplier_1
+    name: Intermission Supplier 1 (Test)
+-
+  Create an intersection supplier
+-
+  !record {model: res.partner, id: is_supplier_1}:
+    name: Intersection Supplier 1 (Test)
+    supplier: 1
+    customer: 0
+    partner_type: 'section'
+    property_account_receivable: account_account_receivable_supplier0
+    property_account_payable: account_account_payable_supplier0
+-
+  Create an address for intersection supplier 1
+-
+  !record {model: res.partner.address, is_supplier_1_addr}:
+    partner_id: is_supplier_1
+    name: Intersection Supplier 1 (Test)
+-
+  Create an ESC supplier
+-
+  !record {model: res.partner, id: esc_supplier_1}:
+    name: ESC Supplier 1 (Test)
+    supplier: 1
+    customer: 1
+    partner_type: 'esc'
+    property_account_receivable: account_account_receivable_supplier0
+    property_account_payable: account_account_payable_supplier0
+-
+  Create an address for ESC supplier
+-
+  !record {model: res.partner.address, id: esc_supplier_1_addr}:
+    partner_id: esc_supplier_1
+    name: ESC Supplier 1 (Test)
+-
   Create 3 customers for test
 -
   Create an external customer
