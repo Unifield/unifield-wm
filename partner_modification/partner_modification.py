@@ -167,6 +167,14 @@ class res_partner(osv.osv):
                  'transport_2_lt': 0,
                  'po_by_project': lambda *a: 'all',
                  }
+                 
+    def create(self, cr, uid, vals, context=None):
+        ptype = vals.get('partner_type', False)
+        if ptype and ptype == 'external':
+            # US-126: by default when creating an external partner leave the
+            # "active" checkbox unticked
+            vals['active'] = False
+        return super(res_partner, self).create(cr, uid, vals, context=context)
 
 res_partner()
 
