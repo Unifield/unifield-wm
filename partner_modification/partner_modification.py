@@ -175,6 +175,21 @@ class res_partner(osv.osv):
             # "active" checkbox unticked
             vals['active'] = False
         return super(res_partner, self).create(cr, uid, vals, context=context)
+        
+    def update_exported_fields(self, cr, uid, fields):
+        # US-126: add an "Active" column in the partners import file
+        if fields is None:
+            fields = []
+            
+        has_active = False
+        for f in fields:
+            if f[0] == 'active':
+                has_active = True
+                break
+        if not has_active:
+            fields.insert(0, ['active', 'Active'])
+            
+        return super(res_partner, self).update_exported_fields(cr, uid, fields)
 
 res_partner()
 
