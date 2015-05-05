@@ -132,44 +132,6 @@ class supply_kpi(osv.osv):
         cr.execute(sql)
         return sql
 
-    """
-    def prepare_report_data(self, cr, uid, ids, prefix, aggregate, fields, context=None):
-        supply_kpi_brw = self.browse(cr, uid, ids, context=None)[0]
-        # get fields in the correct order
-        cols = self.col_map[prefix]
-        fields.extend([cols[key] for key in cols if getattr(supply_kpi_brw, key)])
-        fields.sort(key=lambda x: x[2])   # use the numeric ranking, element 3, to sort
-
-        # build header list
-        group_by = ', '.join([elem[0] for elem in fields])
-        # possible to have no selectable and no static group by fields, in which case no group by is needed
-        if group_by:
-            group_by = 'GROUP BY ' + group_by + ' ORDER BY ' + group_by
-
-        headers = [aggregate[1]]
-        headers.extend([elem[1] for elem in fields])
-
-        # build select for data
-        selects = ', '.join([elem[0] for elem in fields])
-        sql = "SELECT " + aggregate[0] + ', ' + selects + ' FROM dimension_' + prefix[4:] + ' ' + group_by
-        cr.execute(sql)
-        # organise returned data for report
-        report_lines_dict = cr.dictfetchall()   # list of dicts
-        # sort data according to order in the fields list & convert to list of lists
-        report_lines = []
-        for line in report_lines_dict:
-            sorted_line = list()
-            sorted_line.append(line[aggregate[2]])   # sorted_line assignment split into 2 statements for readability
-            for i, elem in enumerate(fields):
-                # Replace & by AND
-                if isinstance(line[elem[0]], basestring):
-                    sorted_line.append(line[elem[0]].replace("&", "AND"))
-                else:
-                    sorted_line.append(line[elem[0]])
-            report_lines.append(sorted_line)
-        return {'report_header': headers, 'report_lines': report_lines}
-    """
-
     def default_get(self, cr, uid, ids, context=None):
 
         kpi_ids = super(supply_kpi, self).search(cr, uid, [('create_uid', '=', uid)], context=context)
@@ -222,6 +184,18 @@ class supply_kpi(osv.osv):
         cr.commit()
         cr.close()
 
+    def button_f5(self, cr, uid, ids, context=None):
+        action = self.pool.get('ir.actions.act_window')\
+                .for_xml_id(cr, uid,
+                            'msf_supply_doc_export',
+                            'supply_kpi_menu',
+                            context=context)
+        action['target'] = 'same'
+        action['res_id'] = ids
+        action['active_id'] = ids
+        action['active_ids'] = ids
+        return action
+
     def button_refresh(self, cr, uid, ids, context=None):
         if not self.check_kpi_running(cr, uid, context=None):
             args = [('create_uid', '=', uid)]
@@ -230,7 +204,8 @@ class supply_kpi(osv.osv):
             super(supply_kpi, self).write(cr, uid, kpi_id, values, context=context)
             refresh = threading.Thread(None, self.refresh_thread, None, (cr, uid, kpi_id), {'context': context})
             refresh.start()
-            return self.default_get(cr, uid, ids, context)
+            return {}
+            #return self.default_get(cr, uid, ids, context)
         else:
             raise osv.except_osv("Refresh data",
                                  "You can not update the data for the moment: a refresh is already running")

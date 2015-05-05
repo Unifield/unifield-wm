@@ -8,10 +8,12 @@
             <field name="type">form</field>
             <field name="arch" type="xml">
                 <form string="Supply Key Performance Indicators">
-                    <group col="10" colspan="2">
-                        <field name="running" colspan="1"/>
+                    <group col="10" colspan="4">
+                        <field name="running" invisible="True" colspan="1"/>
                         <field name="refresh_dttm" colspan="1"/>
-                        <button name="button_refresh" type="object" string="Refresh KPIs" icon="gtk-ok" colspan="1" />
+                        <button name="button_refresh" type="object" string="Refresh KPIs" icon="gtk-ok" colspan="1" attrs="{'readonly':[('running','=',True)]}" />
+                        <button name="button_f5" type="object" string="Update progress status" icon="gtk-ok" colspan="1" attrs="{'invisible':[('running','=',False)]}" />
+                        <button name="button_f5" type="object" string="Ready to generate report" icon="gtk-ok" colspan="1" attrs="{'invisible':[('running','=',True)]}" />
                     </group>
                     <separator string="Supplier punctuality" colspan="10" />
                     <group col="2" colspan="1">
@@ -30,7 +32,7 @@
                         <field name="dim_3a_family_checkbox" colspan="2" />
                         <field name="dim_3a_root_checkbox" colspan="2" />
                     </group>
-                    <button name="button_3a" type="object" string="Excel" icon="gtk-ok" colspan="1" />
+                    <button name="button_3a" type="object" string="Excel" icon="gtk-ok" colspan="1" attrs="{'readonly':[('running','=',True)]}" />
 
                     <separator string="Value of quantity expired / loss" colspan="10" />
                     <group col="2" colspan="1">
@@ -47,7 +49,7 @@
                         <field name="dim_6a_month_checkbox" colspan="2" />
                         <field name="dim_6a_year_checkbox" colspan="2" />
                     </group>
-                    <button name="button_6a" type="object" string="Excel" icon="gtk-ok" colspan="1" />
+                    <button name="button_6a" type="object" string="Excel" icon="gtk-ok" colspan="1" attrs="{'readonly':[('running','=',True)]}" />
 
                     <separator string="Purchase Volume" colspan="10" />
                     <group col="2" colspan="1">
@@ -63,7 +65,7 @@
                         <field name="dim_8b_month_checkbox" colspan="2" />
                         <field name="dim_8b_year_checkbox" colspan="2" />
                     </group>
-                    <button name="button_8b" type="object" string="Excel" icon="gtk-ok" colspan="1" />
+                    <button name="button_8b" type="object" string="Excel" icon="gtk-ok" colspan="1" attrs="{'readonly':[('running','=',True)]}" />
                 </form>
             </field>
         </record>
