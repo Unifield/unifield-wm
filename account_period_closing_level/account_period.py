@@ -330,7 +330,7 @@ class account_period(osv.osv):
         return self.action_set_state(cr, uid, ids, context)
 
     def action_close_field_reopen(self, cr, uid, ids, context=None):
-        return action_close_field(cr, uid, ids, context=context)
+        return self.action_close_field(cr, uid, ids, context=context)
 
     def action_close_field(self, cr, uid, ids, context=None):
         if context is None:
