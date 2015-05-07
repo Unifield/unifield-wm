@@ -124,7 +124,7 @@ msgstr ""
 "Project-Id-Version: OpenERP Server UF1.0-4\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2015-05-07 07:14+0000\n"
-"PO-Revision-Date: 2015-05-07 11:40+0100\n"
+"PO-Revision-Date: 2015-05-07 14:23+0100\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -23197,7 +23197,7 @@ msgstr "By account"
 #. module: register_accounting
 #: report:bank.reconciliation:0
 msgid "Closing Date:"
-msgstr "Closing Date:"
+msgstr "Date de fermeture:"
 
 #. module: msf_button_access_rights
 #: model:ir.model,name:msf_button_access_rights.model_msf_button_access_rights_view_config_wizard_install_results
@@ -45268,7 +45268,7 @@ msgstr "VVFB - Vesico-vaginal fistula book"
 #. module: register_accounting
 #: report:bank.reconciliation:0
 msgid "Opening Date:"
-msgstr "Opening Date:"
+msgstr "Date d'ouverture:"
 
 #. module: purchase
 #: model:ir.model,name:purchase.model_purchase_installer
