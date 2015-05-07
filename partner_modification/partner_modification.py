@@ -169,11 +169,12 @@ class res_partner(osv.osv):
                  }
                  
     def create(self, cr, uid, vals, context=None):
-        ptype = vals.get('partner_type', False)
-        if ptype and ptype == 'external':
-            # US-126: by default when creating an external partner leave the
-            # "active" checkbox unticked
-            vals['active'] = False
+        if not context or not 'sync_update_execution' in context:
+            ptype = vals.get('partner_type', False)
+            if ptype and ptype == 'external':
+                # US-126: by default when creating an external partner FROM user
+                # interface leave the "active" checkbox unticked
+                vals['active'] = False
         return super(res_partner, self).create(cr, uid, vals, context=context)
         
     def update_exported_fields(self, cr, uid, fields):
