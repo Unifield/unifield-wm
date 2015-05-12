@@ -33,6 +33,7 @@ import netsvc
 
 import decimal_precision as dp
 
+
 class account_invoice(osv.osv):
     _name = 'account.invoice'
     _inherit = 'account.invoice'
@@ -186,6 +187,17 @@ class account_invoice(osv.osv):
 
         return res
 
+    def _get_reference_type(self, cr, uid, context=None):
+        # BKLG-61
+        return [('none', _('Free Reference'))]
+
+    def _get_first_reference_type(self, cr, uid, context=None):
+        # BKLG-61
+        refs = self._get_reference_type(cr, uid, context=context)
+        for ref in refs:
+            return refs[0][0]
+        return _('none')
+
     _columns = {
         'from_yml_test': fields.boolean('Only used to pass addons unit test', readonly=True, help='Never set this field to true !'),
         'sequence_id': fields.many2one('ir.sequence', string='Lines Sequence', ondelete='cascade',
@@ -219,6 +231,8 @@ class account_invoice(osv.osv):
         'register_posting_date': fields.date(string="Register posting date for Direct Invoice", required=False),
         'vat_ok': fields.function(_get_vat_ok, method=True, type='boolean', string='VAT OK', store=False, readonly=True),
         'st_lines': fields.one2many('account.bank.statement.line', 'invoice_id', string="Register lines", readonly=True, help="Register lines that have a link to this invoice."),
+        'reference_type': fields.selection(_get_reference_type, 'Reference Type',
+            required=False, readonly=True, states={'draft':[('readonly',False)]}),
     }
 
     _defaults = {
@@ -229,6 +243,7 @@ class account_invoice(osv.osv):
         'is_inkind_donation': lambda obj, cr, uid, c: c.get('is_inkind_donation', False),
         'is_intermission': lambda obj, cr, uid, c: c.get('is_intermission', False),
         'is_direct_invoice': lambda *a: False,
+        'reference_type': _get_first_reference_type,
         'vat_ok': lambda obj, cr, uid, context: obj.pool.get('unifield.setup.configuration').get_config(cr, uid).vat_ok,
     }
 
@@ -255,7 +270,7 @@ class account_invoice(osv.osv):
             # TODO: it's very bad to set a domain by onchange method, no time to rewrite UniField !
             res['domain']['journal_id'] = [('id', 'in', journal_ids)]
         return res
-        
+
     def onchange_partner_id(self, cr, uid, ids, ctype, partner_id,\
         date_invoice=False, payment_term=False, partner_bank_id=False, company_id=False, is_inkind_donation=False, is_intermission=False, is_debit_note=False, is_direct_invoice=False):
         """
@@ -486,6 +501,12 @@ class account_invoice(osv.osv):
             context = {}
         if isinstance(ids, (int, long)):
             ids = [ids]
+        # BKLG-61 : Field is not mandatory for users (colorised)
+        # but, cannot be NULL or False
+        if 'reference_type' in vals:
+            if vals['reference_type'] is "" or not vals['reference_type']:
+                refs = self._get_reference_type(cr, uid, context=context)
+                vals['reference_type'] = refs[0][0]
         res = super(account_invoice, self).write(cr, uid, ids, vals, context=context)
         self._check_document_date(cr, uid, ids)
         return res
