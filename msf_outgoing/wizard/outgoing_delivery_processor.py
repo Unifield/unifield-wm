@@ -26,6 +26,7 @@ import time
 import decimal_precision as dp
 from msf_outgoing import INTEGRITY_STATUS_SELECTION
 
+
 class outgoing_delivery_processor(osv.osv):
     """
     Outgoing delivery processing wizard
@@ -40,6 +41,11 @@ class outgoing_delivery_processor(osv.osv):
             'wizard_id',
             string='Moves',
         ),
+        'draft': fields.boolean('Draft')
+    }
+
+    _defaults = {
+        'draft': lambda *a: False,
     }
 
     """
@@ -71,6 +77,42 @@ class outgoing_delivery_processor(osv.osv):
         # call stock_picking method which returns action call
         res = picking_obj.do_partial_out(cr, uid, ids, context=context)
         return self.return_hook_do_partial(cr, uid, ids, context=context, res=res)
+
+    def do_reset(self, cr, uid, ids, context=None):
+        delivery_obj = self.pool.get('outgoing.delivery.processor')
+        stock_picking_obj = self.pool.get('stock.picking')
+
+        if context is None:
+            context = {}
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+        if not ids:
+            raise osv.except_osv(
+                _('Processing Error'),
+                _('No data to process !'),
+            )
+        deliveries = delivery_obj.browse(cr, uid, ids, context=context)
+        res_id = []
+        for delivery in deliveries:
+            res_id = delivery['picking_id']['id']
+        delivery_obj.write(cr, uid, ids, {'draft': False}, context=context)
+        return stock_picking_obj.action_process(cr, uid, res_id, context=context)
+
+    def do_save_draft(self, cr, uid, ids, context=None):
+        delivery_obj = self.pool.get('outgoing.delivery.processor')
+        stock_picking_obj = self.pool.get('outgoing.delivery.processor')
+
+        if context is None:
+            context = {}
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+        if not ids:
+            raise osv.except_osv(
+                _('Processing Error'),
+                _('No data to process !'),
+            )
+        delivery_obj.write(cr, uid, ids, {'draft': True}, context=context)
+        return {}
 
     def return_hook_do_partial(self, cr, uid, ids, context=None, *args, **kwargs):
         '''
@@ -369,4 +411,3 @@ class outgoing_delivery_move_processor(osv.osv):
     }
 
 outgoing_delivery_move_processor()
-

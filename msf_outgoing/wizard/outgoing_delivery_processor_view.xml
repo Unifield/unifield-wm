@@ -15,16 +15,20 @@
                     <separator colspan="4" string="Move lines" />
                     <field name="move_ids" mode="tree"
                            colspan="4" nolabel="1" />
+                    <field name="draft" invisible="1" />
                     <group colspan="4" col="6" name="actions">
                         <separator string="Actions" colspan="6" />
-                        <label colspan="4"> </label>
+                        <label colspan="2"> </label>
+
+                        <button name="do_reset" type="object" string="Reset" attrs="{'invisible':[('draft','!=',True)]}" icon="gtk-go-forward" />
+                        <button name="do_save_draft" type="object" string="Save as draft" icon="gtk-go-forward" />
                         <button special="cancel" string="Cancel" icon="gtk-cancel" />
                         <button name="do_partial" type="object" string="Process" icon="gtk-go-forward" />
                     </group>
                 </form>
             </field>
         </record>
-        
+
         <record id="outgoing_delivery_move_processor_tree_view" model="ir.ui.view">
             <field name="name">outgoing.delivery.move.processor.tree.view</field>
             <field name="model">outgoing.delivery.move.processor</field>
@@ -82,7 +86,7 @@
                            attrs="{'readonly': [('lot_check', '=', False), ('exp_check', '=', False)]}"
                            on_change="change_lot(prodlot_id)"
                            />
-                    <field name="expiry_date" 
+                    <field name="expiry_date"
                            attrs="{'readonly': ['|', '&amp;', ('lot_check', '=', False), ('exp_check', '=', False), '&amp;', ('lot_check', '=', True), ('exp_check', '=', True)]}"
                            on_change="change_expiry(expiry_date, product_id, type_check)" />
                     <field name="lot_check" />
@@ -96,7 +100,6 @@
                 </tree>
             </field>
         </record>
-        
+
     </data>
 </openerp>
-
