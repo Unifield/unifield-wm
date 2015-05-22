@@ -97,10 +97,10 @@
 !define DEFAULT_POSTGRESQL_PORT 5432
 !define DEFAULT_POSTGRESQL_USERNAME 'openpg'
 !define DEFAULT_POSTGRESQL_PASSWORD '4Unifieldpg'
-!define DEFAULT_SUPER_ADMIN_PASSWORD '4UnifieldAdmin'
 
 !define PGVERSION '8.4.17-1'
 
+!define DEFAULT_OPENERP_PASSWORD '4UnifieldAdmin'
 !define DEFAULT_OPENERP_DROP_PWD 'dropAdmin'
 !define DEFAULT_OPENERP_BKP_PWD 'bkAdmin'
 !define DEFAULT_OPENERP_RESTORE_PWD 'restoreAdmin'
@@ -142,8 +142,8 @@ Var TextPostgreSQLHostname
 Var TextPostgreSQLPort
 Var TextPostgreSQLUsername
 Var TextPostgreSQLPassword
-Var TextSuperAdminPassword
 
+Var TextOPENERPPWD
 Var TextOPENERPDROPPWD
 Var TextOPENERPBKPPWD
 Var TextOPENERPRESTOREPWD
@@ -158,6 +158,7 @@ Var HWNDPostgreSQLPort
 Var HWNDPostgreSQLUsername
 Var HWNDPostgreSQLPassword
 
+Var HWNDOpenERPPwd
 Var HWNDOpenERPDropPwd
 Var HWNDOpenERPBkpPwd
 Var HWNDOpenERPRestorePwd
@@ -240,12 +241,14 @@ LangString TITLE_OpenERP_Web_Client ${LANG_ENGLISH} "OpenERP Web Client"
 LangString TITLE_PostgreSQL ${LANG_ENGLISH} "PostgreSQL Database"
 LangString DESC_FinishPageText ${LANG_ENGLISH} "Connect to OpenERP Web"
 LangString DESC_OPENERPPage ${LANG_ENGLISH} "Configure the passwords for DB drop,backup and create from openerp"
+LangString DESC_OPENERP_PWD ${LANG_ENGLISH} "Password to create DB"
 LangString DESC_OPENERP_DROP_PWD ${LANG_ENGLISH} "Password to drop DB"
 LangString DESC_OPENERP_BKP_PWD ${LANG_ENGLISH} "Password to backup DB"
 LangString DESC_OPENERP_RESTORE_PWD ${LANG_ENGLISH} "Password to restore DB"
-LangString WARNING_OPENERP_DROP_PasswordIsEmpty ${LANG_ENGLISH} "Password to drop DB is emptyy"
-LangString WARNING_OPENERP_BKP_PasswordIsEmpty ${LANG_ENGLISH} "Password to backup DB is emptyy"
-LangString WARNING_OPENERP_RESTORE_PasswordIsEmpty ${LANG_ENGLISH} "Password to restore DB is emptyy"
+LangString WARNING_OPENERP_PasswordIsEmpty ${LANG_ENGLISH} "Password to create DB is empty"
+LangString WARNING_OPENERP_DROP_PasswordIsEmpty ${LANG_ENGLISH} "Password to drop DB is empty"
+LangString WARNING_OPENERP_BKP_PasswordIsEmpty ${LANG_ENGLISH} "Password to backup DB is empty"
+LangString WARNING_OPENERP_RESTORE_PasswordIsEmpty ${LANG_ENGLISH} "Password to restore DB is empty"
 
 ; French
 LangString MSG_ConnectionOK ${LANG_FRENCH} "Connection réussie!"
@@ -278,9 +281,11 @@ LangString TITLE_OpenERP_Web_Client ${LANG_FRENCH} "OpenERP Client Web"
 LangString TITLE_PostgreSQL ${LANG_FRENCH} "Installation du serveur de base de donn?es PostgreSQL"
 LangString DESC_FinishPageText ${LANG_FRENCH} "Se connecter à OpenERP Web"
 LangString DESC_OPENERPPage ${LANG_FRENCH} "Definissez les mots de passe pour la manipulation des bdd depuis OpenERP"
+LangString DESC_OPENERP_PWD ${LANG_FRENCH} "MdP pour créer un bdd"
 LangString DESC_OPENERP_DROP_PWD ${LANG_FRENCH} "MdP pour supprimer une bdd"
 LangString DESC_OPENERP_BKP_PWD ${LANG_FRENCH} "MdP pour sauvegarder une bdd"
 LangString DESC_OPENERP_RESTORE_PWD ${LANG_FRENCH} "MdP pour restaurer une bdd"
+LangString WARNING_OPENERP_PasswordIsEmpty ${LANG_FRENCH} "MdP pour créer un bdd est vide"
 LangString WARNING_OPENERP_DROP_PasswordIsEmpty ${LANG_FRENCH} "MdP pour supprimer une bdd est vide"
 LangString WARNING_OPENERP_BKP_PasswordIsEmpty ${LANG_FRENCH} "MdP pour sauvegarder une bdd est vide"
 LangString WARNING_OPENERP_RESTORE_PasswordIsEmpty ${LANG_FRENCH} "MdP pour restaurer une bdd est vide"
@@ -299,12 +304,7 @@ Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
     ${Base64_Encode} "$TextPostgreSQLPassword"
     Pop $R0
 
-    Push $R1
-    ${Base64_Encode} "$TextSuperAdminPassword"
-    Pop $R1
-
 # If there is a previous install of the OpenERP Server, keep the login/password from the config file
-    WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "admin_passwd" $R1
     WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "db_host" $TextPostgreSQLHostname
     WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "db_user" $TextPostgreSQLUsername
     WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "db_password" $R0
@@ -314,17 +314,21 @@ Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
     WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "pg_path" "$TextPostgreSQLInstPath\bin"
 
     Push $R1
-    ${Base64_Encode} "$TextOPENERPDROPPWD"
+    ${Base64_Encode} "$TextOPENERPPWD"
     Pop $R1
-    WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "admin_dropdb_passwd" $R1
+    WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "admin_passwd" $R1
     Push $R2
-    ${Base64_Encode} "$TextOPENERPBKPPWD"
+    ${Base64_Encode} "$TextOPENERPDROPPWD"
     Pop $R2
-    WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "admin_bkpdb_passwd" $R2
+    WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "admin_dropdb_passwd" $R2
     Push $R3
-    ${Base64_Encode} "$TextOPENERPRESTOREPWD"
+    ${Base64_Encode} "$TextOPENERPBKPPWD"
     Pop $R3
-    WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "admin_restoredb_passwd" $R3
+    WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "admin_bkpdb_passwd" $R3
+    Push $R4
+    ${Base64_Encode} "$TextOPENERPRESTOREPWD"
+    Pop $R4
+    WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "admin_restoredb_passwd" $R4
 
     File /r "static\server-extra"
     CopyFiles "$TEMP\server-extra\*.*" "$INSTDIR\Server"
@@ -450,8 +454,8 @@ Function .onInit
     StrCpy $TextPostgreSQLPassword ${DEFAULT_POSTGRESQL_PASSWORD}
     StrCpy $TextPostgreSQLInstPath "${DEFAULT_POSTGRESQL_INSTPATH}"
     StrCpy $CmdLPostgreSQLInstPath "${DEFAULT_POSTGRESQL_INSTPATH}"
-    StrCpy $TextSuperAdminPassword ${DEFAULT_SUPER_ADMIN_PASSWORD}
 
+    StrCpy $TextOPENERPPWD ${DEFAULT_OPENERP_PASSWORD}
     StrCpy $TextOPENERPDROPPWD ${DEFAULT_OPENERP_DROP_PWD}
     StrCpy $TextOPENERPBKPPWD ${DEFAULT_OPENERP_BKP_PWD}
     StrCpy $TextOPENERPRESTOREPWD ${DEFAULT_OPENERP_RESTORE_PWD}
@@ -668,17 +672,21 @@ Function DBPasswordPage
   ${NSD_CreateLabel} 0 0 100% 10u $(DESC_OPENERPPage)
   Pop $0
 
-  ${NSD_CreateLabel} 0 85 90u 12u $(DESC_OPENERP_DROP_PWD)
+  ${NSD_CreateLabel} 0 85 90u 12u $(DESC_OPENERP_PWD)
   Pop $0
-  ${NSD_CreateText} 150 85 150u 12u $TextOPENERPDROPPWD
+  ${NSD_CreateText} 150 85 150u 12u $TextOPENERPPWD
+  Pop $HWNDOpenERPPwd
+  ${NSD_CreateLabel} 0 115 90u 12u $(DESC_OPENERP_DROP_PWD)
+  Pop $0
+  ${NSD_CreateText} 150 115 150u 12u $TextOPENERPDROPPWD
   Pop $HWNDOpenERPDropPwd
-  ${NSD_CreateLabel} 0 115 80u 12u $(DESC_OPENERP_BKP_PWD)
+  ${NSD_CreateLabel} 0 145 90u 12u $(DESC_OPENERP_BKP_PWD)
   Pop $0
-  ${NSD_CreateText} 150 115 150u 12u $TextOPENERPBKPPWD
+  ${NSD_CreateText} 150 145 150u 12u $TextOPENERPBKPPWD
   Pop $HWNDOpenERPBkpPwd
-  ${NSD_CreateLabel} 0 145 80u 12u $(DESC_OPENERP_RESTORE_PWD)
+  ${NSD_CreateLabel} 0 175 90u 12u $(DESC_OPENERP_RESTORE_PWD)
   Pop $0
-  ${NSD_CreateText} 150 145 150u 12u $TextOPENERPRESTOREPWD
+  ${NSD_CreateText} 150 175 150u 12u $TextOPENERPRESTOREPWD
   Pop $HWNDOpenERPRestorePwd
 
   nsDialogs::Show
@@ -687,9 +695,16 @@ FunctionEnd
 
 
 Function LeaveDBPasswordPage
+    ${NSD_GetText} $HWNDOpenERPPwd $TextOPENERPPWD
     ${NSD_GetText} $HWNDOpenERPDropPwd $TextOPENERPDROPPWD
     ${NSD_GetText} $HWNDOpenERPBkpPwd $TextOPENERPBKPPWD
     ${NSD_GetText} $HWNDOpenERPRestorePwd $TextOPENERPRESTOREPWD
+
+    StrLen $1 $TextOPENERPPWD
+    ${If} $1 == 0
+        MessageBox MB_ICONEXCLAMATION|MB_OK $(WARNING_OPENERP_PasswordIsEmpty)
+        Abort
+    ${EndIf}
 
     StrLen $1 $TextOPENERPDROPPWD
     ${If} $1 == 0
