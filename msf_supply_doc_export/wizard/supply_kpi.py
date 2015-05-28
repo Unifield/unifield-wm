@@ -76,7 +76,7 @@ class supply_kpi(osv.osv):
 
     _columns = {
         'running': fields.boolean(string='Is the KPI data generation running ?', readonly=True),
-        'refresh_dttm': fields.datetime('KPIs last refreshed', readonly=True),
+        'refresh_dttm': fields.datetime('KPI last calculated', readonly=True),
 
         'dim_3a': fields.float("PO Lines on time", readonly=True),
         'dim_3a_supplier_checkbox': fields.boolean(string='Supplier'),
@@ -170,30 +170,34 @@ class supply_kpi(osv.osv):
         return False
 
     def refresh_thread(self, cr, uid, kpi_id, context=None):
-        print "Start refreshing KPI at " + str(datetime.now())
-        logging.info("KPI: Start refreshing KPI at " + str(datetime.now()))
         cr = pooler.get_db(cr.dbname).cursor()
+        logging.info("KPI: Start refreshing KPI at " + str(datetime.now()))
+
         kpi_obj = self.pool.get('kpi.refresh')
         kpi_obj.truncate_tables(cr, uid)
         kpi_obj.refresh_data(cr, uid)
+
         values = {'running': False}
         super(supply_kpi, self).write(cr, uid, kpi_id, values, context=context)
-        print "Stop refreshing KPI at " + str(datetime.now())
         logging.info("KPI: Stop refreshing KPI at " + str(datetime.now()))
+
         self.default_get(cr, uid, None, context)
         cr.commit()
         cr.close()
 
+    def _check_concurrency(self, cr, ids, context):
+        if 'button' in context and context['button'] == 'button_f5':
+            return
+        super(supply_kpi, self)._check_concurrency(cr, ids, context=context)
+
     def button_f5(self, cr, uid, ids, context=None):
+        context = {}
         action = self.pool.get('ir.actions.act_window')\
-                .for_xml_id(cr, uid,
-                            'msf_supply_doc_export',
-                            'supply_kpi_menu',
-                            context=context)
+                          .for_xml_id(cr, uid,
+                                      'msf_supply_doc_export',
+                                      'supply_kpi_menu',
+                                      context=context)
         action['target'] = 'same'
-        action['res_id'] = ids
-        action['active_id'] = ids
-        action['active_ids'] = ids
         return action
 
     def button_refresh(self, cr, uid, ids, context=None):
@@ -205,7 +209,6 @@ class supply_kpi(osv.osv):
             refresh = threading.Thread(None, self.refresh_thread, None, (cr, uid, kpi_id), {'context': context})
             refresh.start()
             return {}
-            #return self.default_get(cr, uid, ids, context)
         else:
             raise osv.except_osv("Refresh data",
                                  "You can not update the data for the moment: a refresh is already running")
@@ -220,7 +223,7 @@ class supply_kpi(osv.osv):
             return {
                 'type': 'ir.actions.report.xml',
                 'report_name': 'kpi.detail_xls',
-                'datas': {"sql": sql, "aggregate": aggregate, "fields": fields},
+                'datas': {"sql": sql, "date": "Dt", "aggregate": aggregate, "fields": fields},
                 'nodestroy': True,
                 'context': context,
             }
@@ -239,7 +242,7 @@ class supply_kpi(osv.osv):
             return {
                 'type': 'ir.actions.report.xml',
                 'report_name': 'kpi.detail_xls',
-                'datas': {"sql": sql, "aggregate": aggregate, "fields": fields},
+                'datas': {"sql": sql, "date": "Dt", "aggregate": aggregate, "fields": fields},
                 'nodestroy': True,
                 'context': context,
             }
@@ -258,7 +261,7 @@ class supply_kpi(osv.osv):
             return {
                 'type': 'ir.actions.report.xml',
                 'report_name': 'kpi.detail_xls',
-                'datas': {"sql": sql, "aggregate": aggregate, "fields": fields},
+                'datas': {"sql": sql, "date": "Dt", "aggregate": aggregate, "fields": fields},
                 'nodestroy': True,
                 'context': context,
             }

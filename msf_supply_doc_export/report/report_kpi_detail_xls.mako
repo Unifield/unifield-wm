@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <?mso-application progid="Excel.Sheet"?>
 <Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
-          xmlns:o="urn:schemas-microsoft-com:office:office"
-          xmlns:x="urn:schemas-microsoft-com:office:excel"
-          xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
-          xmlns:html="http://www.w3.org/TR/REC-html40">
+    xmlns:o="urn:schemas-microsoft-com:office:office"
+    xmlns:x="urn:schemas-microsoft-com:office:excel"
+    xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+    xmlns:html="http://www.w3.org/TR/REC-html40">
     <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
         <Author>MSFUser</Author>
         <LastAuthor>MSFUser</LastAuthor>
@@ -26,10 +26,10 @@
             <Font ss:FontName="Calibri" x:Family="Swiss" ss:Color="#000000"/>
             <Interior ss:Color="#E6E6E6" ss:Pattern="Solid"/>
             <Borders>
-             <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" />
-            <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" />
-            <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" />
-            <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" />
+                <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" />
+                <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" />
+                <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" />
+                <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" />
             </Borders>
         </Style>
 
@@ -37,48 +37,48 @@
             <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
             <Interior ss:Color="#ffcc99" ss:Pattern="Solid"/>
             <Borders>
-             <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" />
-            <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" />
-            <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" />
-            <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" />
+                <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" />
+                <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" />
+                <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" />
+                <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" />
             </Borders>
         </Style>
         <Style ss:ID="header">
             <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
             <Interior ss:Color="#d3d3d3" ss:Pattern="Solid"/>
             <Borders>
-             <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" />
-            <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" />
-            <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" />
-            <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" />
+                <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" />
+                <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" />
+                <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" />
+                <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" />
             </Borders>
         </Style>
 
         <Style ss:ID="line">
             <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
             <Borders>
-             <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" />
-            <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" />
-            <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" />
-            <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" />
+                <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1" />
+                <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1" />
+                <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1" />
+                <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1" />
             </Borders>
         </Style>
 
         <Style ss:ID="short_date">
             <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
             <Borders>
-             <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
-            <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
-            <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
-            <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+                <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+                <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+                <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+                <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
             </Borders>
-              <NumberFormat ss:Format="Short Date"/>
+            <NumberFormat ss:Format="Short Date"/>
         </Style>
     </Styles>
 
     <ss:Worksheet ss:Name="KPI Detail">
         ## definition of the columns' size
-        <% nb_of_columns = 12 %>
+        <% nb_of_columns = 15 %>
         <Table x:FullColumns="1" x:FullRows="1">
             <Column ss:AutoFitWidth="1" ss:Width="120" />
             <Column ss:AutoFitWidth="1" ss:Width="120" />
@@ -93,26 +93,34 @@
             <Column ss:AutoFitWidth="1" ss:Width="80" />
             <Column ss:AutoFitWidth="1" ss:Width="80" />
 
-            <Row>
-
-            </Row>
-            <Row></Row>
-            <Row></Row>
 
             % for o in objects:
+                <Row></Row>
+                <Row>
+                    <Cell ss:StyleID="poheader"><Data ss:Type="String">KPI date calculation :</Data></Cell>
+                    <Cell ss:StyleID="poheader"><Data ss:Type="String">${o.refresh_dttm[0:19] |n}</Data></Cell>
+                </Row>
+                <Row>
+                    <Cell ss:StyleID="poheader"><Data ss:Type="String">Columns :</Data></Cell>
+                    % for header in getHeaderLine():
+                        <Cell><Data ss:Type="String">${header |x}</Data></Cell>
+                    % endfor
+                </Row>
+                <Row></Row>
+
                 <Row>
                     % for header in getHeaderLine():
                         <Cell ss:StyleID="poheader"><Data ss:Type="String">${header |x}</Data></Cell>
                     % endfor
                 </Row>
 
-            % for line in getReportLines():
-                <Row>
-                    % for cell in line:
-                        <Cell ss:StyleID="header"><Data ss:Type="String">${cell}</Data></Cell>
-                    % endfor
-                </Row>
-            % endfor
+                % for line in getReportLines():
+                    <Row>
+                        % for cell in line:
+                            <Cell ss:StyleID="header"><Data ss:Type="String">${cell}</Data></Cell>
+                        % endfor
+                    </Row>
+                % endfor
             % endfor
         </Table>
         <x:WorksheetOptions/>

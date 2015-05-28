@@ -186,7 +186,7 @@ tender_report_xls('report.tender_xls','tender','addons/msf_supply_doc_export/rep
 class stock_cost_reevaluation_report_xls(WebKitParser):
     def __init__(self, name, table, rml=False, parser=report_sxw.rml_parse, header='external', store=False):
         WebKitParser.__init__(self, name, table, rml=rml, parser=parser, header=header, store=store)
-    
+
     def create_single_pdf(self, cr, uid, ids, data, report_xml, context=None):
         report_xml.webkit_debug = 1
         report_xml.header= " "
@@ -334,7 +334,6 @@ class kpi_detail_report_xls(SpreadsheetReport):
 
         report_lines_dict = cr.dictfetchall()
         report_lines = []
-
         headers = [aggregate[1]]
         headers.extend([elem[1] for elem in fields])
         for line in report_lines_dict:
@@ -401,7 +400,7 @@ class po_follow_up_mixin(object):
         for state_val, state_string in PURCHASE_ORDER_STATE_SELECTION:
             states[state_val] = state_string
         return states
-     
+
     def getHeaderLine(self,obj):
         ''' format the header line for each PO object '''
         po_header = []
@@ -422,13 +421,13 @@ class po_follow_up_mixin(object):
         po_header['deldate'] = 'Confirmed delivery date: ' + obj.delivery_confirmed_date
         po_header['items'] = 'Nb items: ' + str(len(obj.order_line))
         po_header['amount'] = 'Estimated amount: ' + str(obj.amount_total)
-        line = po_header['ref'] + po_header['status'] + po_header['created'] + po_header['deldate'] + po_header['items'] + po_header['amount'] 
+        line = po_header['ref'] + po_header['status'] + po_header['created'] + po_header['deldate'] + po_header['items'] + po_header['amount']
         return line
 
-    
+
     def getReportHeaderLine1(self):
         return self.datas['report_parms']
-    
+
     def getReportHeaderLine2(self):
         return self.datas.get('report_header')[1]
 
@@ -463,7 +462,7 @@ class po_follow_up_mixin(object):
         ''' developer note: would be a lot easier to write this as a single sql and then use on-break '''
         # TODO the multiplier is the value populated for no change in stock_move.price_unit
         # TODO it probably should be 1
-        multiplier = 1.0000100000000001 
+        multiplier = 1.0000100000000001
         po_obj = self.pool.get('purchase.order')
         pol_obj = self.pool.get('purchase.order.line')
         prod_obj = self.pool.get('product.product')
@@ -625,13 +624,13 @@ class po_follow_up_mixin(object):
 
     def getReportHeaderLine1(self):
         return self.datas.get('report_header')[0]
-    
+
     def getReportHeaderLine2(self):
         return self.datas.get('report_header')[1]
 
     def getPOLineHeaders(self):
         return ['Order Ref', 'Item','Code','Description','Qty ordered','UoM','Qty received','IN','Qty backorder','Unit Price','IN unit price', 'Created', 'Confirmed Delivery', 'Status', 'Destination','Cost Center']
-      
+
 
 
 class parser_po_follow_up_xls(po_follow_up_mixin, report_sxw.rml_parse):
@@ -650,7 +649,7 @@ class parser_po_follow_up_xls(po_follow_up_mixin, report_sxw.rml_parse):
             'getRunParms': self.getRunParms,
         })
 
-    
+
 
 
 class po_follow_up_report_xls(SpreadsheetReport):
@@ -708,7 +707,7 @@ class ir_values(osv.osv):
 #                or v[2].get('report_name', False) == 'request.for.quotation_xls' and context['_terp_view_name'] == 'Requests for Quotation' :
 #                    new_act.append(v)
 #                values = new_act
-        
+
         Internal_Requests = trans_obj.tr_view(cr, 'Internal Requests', context)
         Field_Orders = trans_obj.tr_view(cr, 'Sales Orders', context)
         if key == 'action' and key2 == 'client_print_multi' and 'sale.order' in [x[0] for x in models]:
@@ -725,7 +724,7 @@ class ir_values(osv.osv):
                     or v[1] == 'Order Follow Up': # this is a sale order, we only display Order Follow Up for client_action_multi --- using the name of screen, and the name of the action is definitely the wrong way to go...
                         new_act.append(v)
                 values = new_act
-                
+
         elif (context.get('_terp_view_name') or context.get('picking_type')) and key == 'action' and key2 == 'client_print_multi' and 'stock.picking' in [x[0] for x in models] and context.get('picking_type', False) != 'incoming_shipment':
             new_act = []
             Picking_Tickets = trans_obj.tr_view(cr, 'Picking Tickets', context)

@@ -11,9 +11,9 @@
                     <group col="10" colspan="4">
                         <field name="running" invisible="True" colspan="1"/>
                         <field name="refresh_dttm" colspan="1"/>
-                        <button name="button_refresh" type="object" string="Refresh KPIs" icon="gtk-ok" colspan="1" attrs="{'readonly':[('running','=',True)]}" />
+                        <button name="button_refresh" type="object" string="Calculate KPIs" icon="gtk-ok" colspan="1" attrs="{'readonly':[('running','=',True)]}" />
                         <button name="button_f5" type="object" string="Update progress status" icon="gtk-ok" colspan="1" attrs="{'invisible':[('running','=',False)]}" />
-                        <button name="button_f5" type="object" string="Ready to generate report" icon="gtk-ok" colspan="1" attrs="{'invisible':[('running','=',True)]}" />
+                        <button name="button_f5" type="object" string="Ready to generate report" icon="gtk-ok" readonly="True" colspan="1" attrs="{'invisible':[('running','=',True)]}" />
                     </group>
                     <separator string="Supplier punctuality" colspan="10" />
                     <group col="2" colspan="1">

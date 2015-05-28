@@ -287,7 +287,6 @@ class kpi_refresh(osv.osv_memory):
                                                     dim_8b = (select sum(cnt) from dimension_8b)''')
         cr.commit()
 
-        print "Kpi refreshed"
         return True
 
 kpi_refresh()
