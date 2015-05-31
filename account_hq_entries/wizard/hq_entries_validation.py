@@ -136,9 +136,17 @@ class hq_entries_validation(osv.osv_memory):
                     'account_id': line.account_id_first_value.id,
                     'period_id': period_id,
                     'journal_id': journal_id,
+                    
+'''              
+                    # US-306: Use new dates given with the new period ---- check also if the period is different, if not use the old code
                     'date': line.date,
                     'date_maturity': line.date,
                     'document_date': line.document_date,
+'''                    
+                    'date': date,
+                    'date_maturity': date,
+                    'document_date': date,
+
                     'move_id': move_id,
                     'analytic_distribution_id': distrib_id,
                     'name': line.name or '',
@@ -339,8 +347,22 @@ class hq_entries_validation(osv.osv_memory):
                 if line.is_original or line.is_split:
                     split_change.append(line)
                     continue
+                
+                # US-306: Check the if period is open, if not get the next open one
+                period = line.period_id
+                date = line.date
+                if period.state != 'draft':
+                    periods = self.pool.get('account.period').search(cr, uid, [('number','>',period.number),('state','=','draft')], 
+                                                                 context=context, limit=1, order='number')
+                    if not periods:
+                        raise osv.except_osv(_('Warning'), _('Sorry, No open period for creating the register!'))
+                    period = periods[0]
+                    date = self.pool.get('account.period').browse(cr, uid, period, context=context).date_start
+                else: 
+                    period = period.id
+                
                 if not line.user_validated:
-                    to_write.setdefault(line.currency_id.id, {}).setdefault(line.period_id.id, {}).setdefault(line.date, []).append(line.id)
+                    to_write.setdefault(line.currency_id.id, {}).setdefault(period, {}).setdefault(date, []).append(line.id)
 
                     if line.account_id.id != line.account_id_first_value.id:
                         if line.cost_center_id.id != line.cost_center_id_first_value.id or line.destination_id.id != line.destination_id_first_value.id:
