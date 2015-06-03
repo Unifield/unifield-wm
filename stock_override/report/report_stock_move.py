@@ -33,7 +33,6 @@ from service.web_services import report_spool
 
 class report_stock_move(osv.osv):
     _name = "report.stock.move"
-    _rec_name = 'location_id'
     _description = "Moves Statistics"
     _auto = False
 

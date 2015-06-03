@@ -23,7 +23,6 @@ from osv import fields
 from osv import osv
 
 from tools.translate import _
-from msf_order_date import TRANSPORT_TYPE
 
 import time
 
@@ -48,7 +47,9 @@ class shipment_processor(osv.osv):
         'date': fields.datetime(string='Date', required=True),
         'transport_type': fields.selection(
             string='Transport type',
-            selection=TRANSPORT_TYPE,
+            selection=[
+                ('by_road', 'By Road'),
+            ],
             readonly=True,
         ),
         'address_id': fields.many2one(

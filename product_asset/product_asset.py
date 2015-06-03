@@ -250,7 +250,6 @@ product_asset()
     
 class product_asset_event(osv.osv):
     _name = "product.asset.event"
-    _rec_name = 'asset_id'
     _description = "Event for asset follow up"
     
     stateSelection = [('blank', ' '),

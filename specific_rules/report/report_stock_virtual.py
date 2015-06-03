@@ -27,7 +27,6 @@ from tools.sql import drop_view_if_exists
 class stock_report_prodlots_virtual(osv.osv):
     _name = "stock.report.prodlots.virtual"
     _description = "Stock report by production lots virtual"
-    _rec_name = 'prodlot_id'
     _auto = False
     _columns = {
         'qty': fields.float('Quantity', readonly=True),
@@ -89,7 +88,6 @@ stock_report_prodlots_virtual()
 
 class stock_report_prodlots(osv.osv):
     _inherit = 'stock.report.prodlots'
-    _rec_name = 'prodlot_id'
 
     def init(self, cr):
         drop_view_if_exists(cr, 'stock_report_prodlots')

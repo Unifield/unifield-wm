@@ -839,7 +839,6 @@ class tender_line(osv.osv):
     tender lines
     '''
     _name = 'tender.line'
-    _rec_name = 'product_id'
     _description= 'Tender Line'
     
     _SELECTION_TENDER_STATE = [('draft', 'Draft'),('comparison', 'Comparison'), ('done', 'Closed'),]
