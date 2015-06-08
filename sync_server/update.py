@@ -329,6 +329,9 @@ class update(osv.osv):
                 elif not update.owner:
                     privates = []
                 else:
+                    # SP-195: If it's a bi-private rule and the owner is prop instance, then only send the update to the puller!
+                    if update.owner._table_name == 'sync.server.entity' and  entity.id != update.owner.id:
+                        continue
                     privates = self.pool.get('sync.server.entity')._get_ancestor(cr, uid, update.owner.id, context=context) + \
                                [update.owner.id]
             else:
