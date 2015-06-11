@@ -93,14 +93,14 @@ class product_nomenclature(osv.osv):
         return result
 
     def _getDefaultSequence(self, cr, uid, context=None):
-        '''
+        """
         not use presently. the idea was to use the sequence
         in order to sort nomenclatures in the tree view
-        '''
+        """
         return 0
 
-    def onChangeParentId(self, cr, uid, id, type, parentId):
-        '''
+    def onChangeParentId(self, cr, uid, id, type, parent_id):
+        """
         parameters:
         - type : the selected type for nomenclature
         - parentId : the id of newly selected parent nomenclature
@@ -108,17 +108,18 @@ class product_nomenclature(osv.osv):
         onChange method called when the parent nomenclature changes updates the parentLevel value from the parent object
 
         improvement :
+        """
 
-        '''
         value = {'level': 0}
         result = {'value': value, 'warning': {}}
-
         # empty field
-        if not parentId:
+        if not parent_id:
             return result
 
-        parentLevel = self.browse(cr, uid, parentId).level
-        level = parentLevel + 1
+        parent_level = self.browse(cr, uid, parent_id).level
+        if not parent_level:
+            return result
+        level = parent_level + 1
 
         # level check - parent_id : False + error message
         if level > _LEVELS:
@@ -151,6 +152,7 @@ class product_nomenclature(osv.osv):
             level = vals['level']
             type = vals['type']
             # level test
+            level = int(level)
             if level > _LEVELS:
                 raise osv.except_osv(_('Error'), _('Level (%s) must be smaller or equal to %s') % (level, _LEVELS))
             # type test
@@ -158,16 +160,35 @@ class product_nomenclature(osv.osv):
                 raise osv.except_osv(_('Error'), _('The type (%s) must be equal to "optional" to inherit from leaves') % (type,))
 
     def write(self, cr, user, ids, vals, context=None):
-        '''
+        """
         override write method to check the validity of selected
         parent
-        '''
+        """
+
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+
+        msfid = vals.get('msfid', '')
+        if msfid != '':
+            lines = self.search(cr, user, [('msfid', '=', msfid)], context=context)
+            for line in lines:
+                if line != ids[0]:
+                    raise osv.except_osv(_('Error'), _('A nomenclature already have the same MSFID: %s') % (msfid))
         self._nomenclatureCheck(vals)
 
         # save the data to db
         return super(product_nomenclature, self).write(cr, user, ids, vals, context)
 
     def create(self, cr, user, vals, context=None):
+        msfid = vals.get('msfid', '')
+        from_import_menu = context.get('from_import_menu', False)
+        if msfid != '':
+            lines = self.search(cr, user, [('msfid', '=', msfid)], context=context)
+            for line in lines:
+                if from_import_menu:
+                    self.write(cr, user, line, vals, context=context)
+                else:
+                    raise osv.except_osv(_('Error'), _('A nomenclature already have the same MSFID "%s"') % (msfid))
         '''
         override create method to check the validity of selected parent
         '''
@@ -468,18 +489,19 @@ nomenclature, so you can't remove it''' % nomen_name),
         'nomen_manda_3_s': fields.function(_get_nomen_s, method=True, type='many2one', relation='product.nomenclature', string='Root', fnct_search=_search_nomen_s, multi="nom_s"),
 
         'nomen_type_s': fields.function(_get_fake, method=True, type='selection', selection=[('mandatory', 'Mandatory'), ('optional', 'Optional')], string='Nomenclature type', fnct_search=_search_nomen_type_s),
-
+        'msfid': fields.char('MSFID', size=64, required=True, select=True),
     }
 
     _defaults = {
-                 'level' : _getDefaultLevel,  # no access to actual new values, use onChange function instead
-                 'type' : lambda *a : 'mandatory',
-                 'sub_level': lambda *a : '0',
-                 'sequence': _getDefaultSequence,
-                 'active': True,
+        'level': _getDefaultLevel,  # no access to actual new values, use onChange function instead
+        'type': lambda *a: 'mandatory',
+        'sub_level': lambda *a: '0',
+        'sequence': _getDefaultSequence,
+        'active': True,
     }
 
     _order = "sequence, id"
+
     def _check_recursion(self, cr, uid, ids, context=None):
         level = 100
         while len(ids):
@@ -805,9 +827,7 @@ class product_product(osv.osv):
             to_overwrite = 1
 
         sale._setNomenclatureInfo(cr, uid, vals, context)
-
         res = super(product_product, self).create(cr, uid, vals, context=context)
-
         prod_default_code = default_code or self.read(cr, uid, res, ['default_code'], context=context)
         if to_overwrite:
             self.write(cr, uid, res, {'xmlid_code': prod_default_code}, context=context)
@@ -826,6 +846,7 @@ class product_product(osv.osv):
         '''
         override to complete nomenclature_description
         '''
+
         sale = self.pool.get('sale.order.line')
         sale._setNomenclatureInfo(cr, uid, vals, context)
 

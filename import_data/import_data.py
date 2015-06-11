@@ -43,9 +43,18 @@ class import_data(osv.osv_memory):
 
     def _set_nomen_level(self, cr, uid, data, row, headers):
         if data.get('parent_id'):
-            v = self.onChangeParentId(cr, uid, id, data.get('type'), data['parent_id'])
-            if v['value']['level']:
-                data['level'] = v['value']['level']
+            parent_ids = self.search(cr, uid, [('msfid', '=', data['parent_id'])])
+            if parent_ids:
+                if isinstance(parent_ids, (int, long)):
+                    parent_ids = [parent_ids]
+                data['parent_id'] = parent_ids[0]
+
+                id = False  # Not used
+                v = self.onChangeParentId(cr, uid, id, data.get('type'), data['parent_id'])
+                if v['value']['level']:
+                    data['level'] = v['value']['level']
+            else:
+                raise osv.except_osv(_('Warning !'), _('Product Nomenclature MSFID "%s" not found')%(data['parent_id']))
 
     def _set_full_path_nomen(self, cr, uid, headers, row, col):
         if not col:
@@ -132,7 +141,6 @@ class import_data(osv.osv_memory):
 
         obj = self.read(cr, uid, ids[0])
         import_mode = obj.get('import_mode')
-
         objname = ""
         for sel in self._columns['object'].selection:
             if sel[0] == obj['object']:
@@ -351,11 +359,11 @@ WHERE n3.level = 3)
                                 data[points[0]] = _get_obj(h, row[n], fields_def) or False
                         elif fields_def[points[0]]['type'] in 'many2many' and row[n]:
                             data.setdefault(points[0], []).append((4, _get_obj(h, row[n], fields_def)))
+
                 if not line_ok:
                     continue
                 if newo2m and o2mdatas:
                     data.setdefault(newo2m, []).append((0, 0, o2mdatas.copy()))
-
                 if self.post_hook.get(impobj._name):
                     self.post_hook[impobj._name](impobj, cr, uid, data, row, headers)
 
@@ -366,6 +374,8 @@ WHERE n3.level = 3)
                     if impobj._name == 'product.product':
                         # UF-2254: Allow to update the product, use xmlid_code now for searching
                         ids_to_update = impobj.search(cr, uid, [('xmlid_code', '=', data['xmlid_code'])])
+                    elif impobj._name == 'product.nomenclature':
+                        ids_to_update = impobj.search(cr, uid, [('msfid', '=', data['msfid'])])
 
                     if ids_to_update:
                         #UF-2170: remove the standard price value from the list for update product case
@@ -455,6 +465,7 @@ Find in attachment the rejected lines'''%(nb_error)
 
 import_data()
 
+
 class import_product(osv.osv_memory):
     _name = 'import_product'
     _inherit = 'import_data'
@@ -483,6 +494,28 @@ class import_product(osv.osv_memory):
                 'target': 'new'}
 
 import_product()
+
+
+class import_nomenclature(osv.osv_memory):
+    _name = 'import_nomenclature'
+    _inherit = 'import_data'
+
+    _defaults = {
+        'object': lambda *a: 'product.nomenclature',
+    }
+
+    def import_csv(self, cr, uid, ids, context=None):
+        super(import_nomenclature, self).import_csv(cr, uid, ids, context=context)
+        view_id = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'import_data', 'import_nomenclature_end')[1]
+        return {'type': 'ir.actions.act_window',
+                'res_model': 'import_nomenclature',
+                'view_mode': 'form',
+                'view_type': 'form',
+                'view_id': [view_id],
+                'target': 'new'}
+
+import_nomenclature()
+
 
 class update_product(osv.osv_memory):
     _name = 'update_product'
