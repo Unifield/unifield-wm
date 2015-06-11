@@ -99,6 +99,13 @@ class product_nomenclature(osv.osv):
         """
         return 0
 
+    def _getDefaultMsfid(self, cr, uid, context=None):
+        """
+        not use presently. the idea was to use the sequence
+        in order to sort nomenclatures in the tree view
+        """
+        return "No MSFID"
+
     def onChangeParentId(self, cr, uid, id, type, parent_id):
         """
         parameters:
@@ -498,6 +505,7 @@ nomenclature, so you can't remove it''' % nomen_name),
         'sub_level': lambda *a: '0',
         'sequence': _getDefaultSequence,
         'active': True,
+        'msfid': _getDefaultMsfid,
     }
 
     _order = "sequence, id"
