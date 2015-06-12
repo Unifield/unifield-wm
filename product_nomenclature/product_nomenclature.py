@@ -491,7 +491,7 @@ nomenclature, so you can't remove it''' % nomen_name),
         'nomen_manda_3_s': fields.function(_get_nomen_s, method=True, type='many2one', relation='product.nomenclature', string='Root', fnct_search=_search_nomen_s, multi="nom_s"),
 
         'nomen_type_s': fields.function(_get_fake, method=True, type='selection', selection=[('mandatory', 'Mandatory'), ('optional', 'Optional')], string='Nomenclature type', fnct_search=_search_nomen_type_s),
-        'msfid': fields.char('MSFID', size=64, required=True, select=True),
+        'msfid': fields.char('MSFID', size=128, required=True, select=True),
     }
 
     _defaults = {
@@ -1148,7 +1148,7 @@ class product_category(osv.osv):
         return ""
 
     _columns = {
-        'msfid': fields.char('MSFID', size=64, required=True, select=True),
+        'msfid': fields.char('MSFID', size=128, required=True, select=True),
         'active': fields.boolean('Active', help="If the active field is set to False, it allows to hide the nomenclature without removing it."),
         'family_id': fields.many2one('product.nomenclature', string='Family',
                                      domain="[('level', '=', '2'), ('type', '=', 'mandatory'), ('category_id', '=', False)]",
