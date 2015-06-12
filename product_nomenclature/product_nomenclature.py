@@ -64,7 +64,6 @@ class product_nomenclature(osv.osv):
             res.append((record['id'], name))
         return res
 
-
     def _name_get_fnc(self, cr, uid, ids, prop, unknow_none, context=None):
         res = self.name_get(cr, uid, ids, context=context)
         return dict(res)
@@ -100,11 +99,7 @@ class product_nomenclature(osv.osv):
         return 0
 
     def _getDefaultMsfid(self, cr, uid, context=None):
-        """
-        not use presently. the idea was to use the sequence
-        in order to sort nomenclatures in the tree view
-        """
-        return "No MSFID"
+        return ""
 
     def onChangeParentId(self, cr, uid, id, type, parent_id):
         """
@@ -166,7 +161,7 @@ class product_nomenclature(osv.osv):
             if (level == _LEVELS) and (type != 'optional'):
                 raise osv.except_osv(_('Error'), _('The type (%s) must be equal to "optional" to inherit from leaves') % (type,))
 
-    def write(self, cr, user, ids, vals, context=None):
+    def write(self, cr, uid, ids, vals, context=None):
         """
         override write method to check the validity of selected
         parent
@@ -175,34 +170,34 @@ class product_nomenclature(osv.osv):
         if isinstance(ids, (int, long)):
             ids = [ids]
 
-        msfid = vals.get('msfid', '')
-        if msfid != '':
-            lines = self.search(cr, user, [('msfid', '=', msfid)], context=context)
-            for line in lines:
-                if line != ids[0]:
-                    raise osv.except_osv(_('Error'), _('A nomenclature already have the same MSFID: %s') % (msfid))
+        msfid = vals.get('msfid', "")
+        if msfid is None or msfid == "":
+            nomenclature = self.browse(cr, uid, ids, context=context)
+            msfid = self._getMsfid(cr, uid, nomenclature.name, nomenclature.parent_id)
+
+        lines = self.search(cr, uid, [('msfid', '=', msfid)], context=context)
+        for line in lines:
+            if line != ids[0]:
+                raise osv.except_osv(_('Error'), _('A nomenclature already have the same MSFID: %s') % (msfid))
         self._nomenclatureCheck(vals)
-
         # save the data to db
-        return super(product_nomenclature, self).write(cr, user, ids, vals, context)
+        return super(product_nomenclature, self).write(cr, uid, ids, vals, context)
 
-    def create(self, cr, user, vals, context=None):
-        msfid = vals.get('msfid', '')
+    def create(self, cr, uid, vals, context=None):
+
         from_import_menu = context.get('from_import_menu', False)
-        if msfid != '':
-            lines = self.search(cr, user, [('msfid', '=', msfid)], context=context)
-            for line in lines:
-                if from_import_menu:
-                    self.write(cr, user, line, vals, context=context)
-                else:
-                    raise osv.except_osv(_('Error'), _('A nomenclature already have the same MSFID "%s"') % (msfid))
-        '''
-        override create method to check the validity of selected parent
-        '''
-        self._nomenclatureCheck(vals)
+        msfid = vals.get('msfid', "")
+        if msfid is None or msfid == "":
+            msfid = self._getMsfid(cr, uid, vals.get('name', None), vals.get('parent_id', None))
 
-        # save the data to db
-        return super(product_nomenclature, self).create(cr, user, vals, context)
+        lines = self.search(cr, uid, [('msfid', '=', msfid)], context=context)
+        for line in lines:
+            if from_import_menu:
+                self.write(cr, uid, line, vals, context=context)
+            else:
+                raise osv.except_osv(_('Error'), _('A nomenclature already have the same MSFID "%s"') % (msfid))
+        self._nomenclatureCheck(vals)
+        return super(product_nomenclature, self).create(cr, uid, vals, context)
 
     def unlink(self, cr, uid, ids, context=None):
         """
@@ -514,7 +509,7 @@ nomenclature, so you can't remove it''' % nomen_name),
         level = 100
         while len(ids):
             cr.execute('select distinct parent_id from product_nomenclature where id IN %s', (tuple(ids),))
-            ids = filter(None, map(lambda x:x[0], cr.fetchall()))
+            ids = filter(None, map(lambda x: x[0], cr.fetchall()))
             if not level:
                 return False
             level -= 1
@@ -1125,6 +1120,7 @@ class product_product(osv.osv):
 
 product_product()
 
+
 class product_category(osv.osv):
     _name = 'product.category'
     _inherit = 'product.category'
@@ -1148,16 +1144,11 @@ class product_category(osv.osv):
             file = tools.file_open(pathname)
             tools.convert_xml_import(cr, 'product_nomenclature', file, {}, mode='init', noupdate=False)
 
-    def create(self, cr, uid, vals, context=None):
-        '''
-        Set default values for datas.xml and tests.yml
-        '''
-        if context is None:
-            context = {}
-
-        return super(product_category, self).create(cr, uid, vals, context)
+    def _getDefaultMsfid(self, cr, uid, context=None):
+        return ""
 
     _columns = {
+        'msfid': fields.char('MSFID', size=64, required=True, select=True),
         'active': fields.boolean('Active', help="If the active field is set to False, it allows to hide the nomenclature without removing it."),
         'family_id': fields.many2one('product.nomenclature', string='Family',
                                      domain="[('level', '=', '2'), ('type', '=', 'mandatory'), ('category_id', '=', False)]",
@@ -1165,8 +1156,36 @@ class product_category(osv.osv):
     }
 
     _defaults = {
-                 'active': True,
+        'active': True,
+        'msfid': _getDefaultMsfid,
     }
+
+    def create(self, cr, uid, vals, context=None):
+        if context is None:
+            context = {}
+
+        msfid = vals.get('msfid', '')
+        from_import_menu = context.get('from_import_menu', False)
+        if msfid != '':
+            lines = self.search(cr, uid, [('msfid', '=', msfid)], context=context)
+            for line in lines:
+                if from_import_menu:
+                    self.write(cr, uid, line, vals, context=context)
+                else:
+                    raise osv.except_osv(_('Error'), _('A product category already have the same MSFID "%s"') % (msfid))
+        return super(product_category, self).create(cr, uid, vals, context)
+
+    def write(self, cr, uid, ids, vals, context=None):
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+
+        msfid = vals.get('msfid', '')
+        if msfid != '':
+            lines = self.search(cr, uid, [('msfid', '=', msfid)], context=context)
+            for line in lines:
+                if line != ids[0]:
+                    raise osv.except_osv(_('Error'), _('A product category already have the same MSFID: %s') % (msfid))
+        return super(product_category, self).write(cr, uid, ids, vals, context)
 
     def unlink(self, cr, uid, ids, context=None):
         """

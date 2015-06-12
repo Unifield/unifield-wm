@@ -31,6 +31,7 @@ from mx import DateTime
 import re
 import logging
 
+
 class import_data(osv.osv_memory):
     _name = 'import_data'
     _description = 'Import Datas'
@@ -53,6 +54,25 @@ class import_data(osv.osv_memory):
                 v = self.onChangeParentId(cr, uid, id, data.get('type'), data['parent_id'])
                 if v['value']['level']:
                     data['level'] = v['value']['level']
+            else:
+                raise osv.except_osv(_('Warning !'), _('Product Nomenclature MSFID "%s" not found')%(data['parent_id']))
+
+    def _set_product_category(self, cr, uid, data, row, headers):
+        if data.get('parent_id'):
+            parent_ids = self.search(cr, uid, [('msfid', '=', data['parent_id'])])
+            if parent_ids:
+                if isinstance(parent_ids, (int, long)):
+                    parent_ids = [parent_ids]
+                data['parent_id'] = parent_ids[0]
+            else:
+                raise osv.except_osv(_('Warning !'), _('Product Nomenclature MSFID "%s" not found')%(data['parent_id']))
+
+        if data.get('family_id'):
+            family_ids = self.pool.get('product.nomenclature').search(cr, uid, [('msfid', '=', data['family_id'])])
+            if family_ids:
+                if isinstance(family_ids, (int, long)):
+                    family_ids = [family_ids]
+                data['family_id'] = family_ids[0]
             else:
                 raise osv.except_osv(_('Warning !'), _('Product Nomenclature MSFID "%s" not found')%(data['parent_id']))
 
@@ -92,6 +112,7 @@ class import_data(osv.osv_memory):
         'account.budget.post': _set_code_name,
         'product.nomenclature': _set_nomen_level,
         'product.product': _set_default_value,
+        'product.category': _set_product_category,
     }
 
     pre_hook = {
@@ -151,7 +172,10 @@ class import_data(osv.osv_memory):
         fileobj.write(base64.decodestring(obj['file']))
         fileobj.seek(0)
         impobj = self.pool.get(obj['object'])
-        reader = csv.reader(fileobj, quotechar='"', delimiter=';')
+        delimiter = ";"
+        if impobj._name == 'product.nomenclature' or impobj._name == 'product.category':
+            delimiter = ","
+        reader = csv.reader(fileobj, quotechar='"', delimiter=delimiter)
         headers = []
 
         if impobj._name == 'product.product':
@@ -515,6 +539,27 @@ class import_nomenclature(osv.osv_memory):
                 'target': 'new'}
 
 import_nomenclature()
+
+
+class import_product_category(osv.osv_memory):
+    _name = 'import_category'
+    _inherit = 'import_data'
+
+    _defaults = {
+        'object': lambda *a: 'product.category',
+    }
+
+    def import_csv(self, cr, uid, ids, context=None):
+        super(import_product_category, self).import_csv(cr, uid, ids, context=context)
+        view_id = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'import_data', 'import_category_end')[1]
+        return {'type': 'ir.actions.act_window',
+                'res_model': 'import_nomenclature',
+                'view_mode': 'form',
+                'view_type': 'form',
+                'view_id': [view_id],
+                'target': 'new'}
+
+import_product_category()
 
 
 class update_product(osv.osv_memory):

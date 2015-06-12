@@ -51,6 +51,26 @@ class patch_scripts(osv.osv):
             getattr(model_obj, method)(cr, uid, *a, **b)
             self.write(cr, uid, [ps['id']], {'run': True})
 
+    def update_us_332(self, cr, uid, *a, **b):
+        nomenclature_obj = self.pool.get('product.nomenclature')
+        ids = nomenclature_obj.search(cr, uid, [])
+
+        for id in ids:
+            nomenclature = nomenclature_obj.browse(cr, uid, id, context={})
+            if nomenclature.msfid is None or nomenclature.msfid == "":
+                msfid = ""
+                if nomenclature.parent_id is not None and nomenclature.parent_id is not "":
+                    if nomenclature.parent_id and nomenclature.parent_id != "":
+                        if nomenclature.parent_id.msfid and nomenclature.parent_id.msfid != "":
+                            msfid += nomenclature.parent_id.msfid + "-"
+
+                name_first_word = nomenclature.name.split(' ')[0]
+                msfid += name_first_word
+                ids = nomenclature_obj.search(cr, uid, [('msfid', '=', msfid)])
+                if ids:
+                    msfid += str(nomenclature.id)
+                nomenclature_obj.write(cr, uid, id, {'msfid': msfid})
+
     def update_us_133(self, cr, uid, *a, **b):
         p_obj = self.pool.get('res.partner')
         po_obj = self.pool.get('purchase.order')
