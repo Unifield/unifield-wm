@@ -417,6 +417,22 @@ class account_cashbox_line(osv.osv):
         'instance_id': fields.many2one('msf.instance', 'Proprietary Instance'),
     }
 
+    #us-404: Remove all duplicated lines
+    def remove_duplicates(self, cr, uid, context=None):
+        domain = [('starting_id', '>', 0)]
+        ids = self.search(cr, uid, domain, order="id DESC", context=context)
+        objs = self.browse(cr, uid, ids, context=context)
+        unlink_ids = []
+        for obj in objs:
+            if obj.id not in unlink_ids:
+                duplicate_domain = [('starting_id', '=', obj.starting_id),
+                                    ('pieces', '=', obj.pieces),
+                                    ('id', '<', obj.id)]
+                duplicate_ids = self.search(cr, uid, duplicate_domain,
+                                            context=context)
+                unlink_ids = unlink_ids + duplicate_ids
+        return self.unlink(cr, uid, unlink_ids, context=context)
+
     def create(self, cr, uid, vals, context=None):
         if 'starting_id' in vals:
             register = self.pool.get('account.bank.statement').read(cr, uid, vals['starting_id'], ['instance_id'], context=context)
@@ -424,7 +440,17 @@ class account_cashbox_line(osv.osv):
         elif 'ending_id' in vals:
             register = self.pool.get('account.bank.statement').read(cr, uid, vals['ending_id'], ['instance_id'], context=context)
             vals['instance_id'] = register.get('instance_id')[0]
-        return super(account_cashbox_line, self).create(cr, uid, vals, context=context)
+        # US-404: If line already exist with the same starting_id and piece
+        ids = None
+        if 'starting_id' in vals and 'pieces' in vals:
+            domain = [('starting_id', '=', vals['starting_id']),
+                      ('pieces', '=', vals['pieces'])]
+            ids = self.search(cr, uid, domain, context=context)
+        if ids:
+            return self.write(cr, uid, ids[0], vals, context=context)
+        else:
+            return super(account_cashbox_line, self).create(cr, uid, vals,
+                                                            context=context)
 
     def write(self, cr, uid, ids, vals, context=None):
         if 'starting_id' in vals:

@@ -51,6 +51,11 @@ class patch_scripts(osv.osv):
             getattr(model_obj, method)(cr, uid, *a, **b)
             self.write(cr, uid, [ps['id']], {'run': True})
 
+    def update_us_404(self, cr, uid, *a, **b):
+        obj = self.pool.get('account.cashbox.line')
+        print "starting patch"
+        obj.remove_duplicates(cr, uid, context={})
+
     def update_us_133(self, cr, uid, *a, **b):
         p_obj = self.pool.get('res.partner')
         po_obj = self.pool.get('purchase.order')
