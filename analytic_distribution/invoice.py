@@ -128,6 +128,7 @@ class account_invoice(osv.osv):
         """
         Copy global distribution and give it to new invoice
         """
+        print "COPYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
         if not context:
             context = {}
         if not default:
@@ -143,14 +144,28 @@ class account_invoice(osv.osv):
         """
         Reverse lines for given invoice
         """
+        check_dates = True
         if isinstance(ids, (int, long)):
             ids = [ids]
+
+        # US_349: Don't check dates if refund type is "modify"
+        obj_refund = self.pool.get('account.invoice.refund')
         for inv in self.browse(cr, uid, ids):
+            if journal_id:
+                refund_ids = obj_refund.search(cr, uid,
+                                               [('journal_id', '=',
+                                                journal_id)])
+                refunds = obj_refund.browse(cr, uid, refund_ids)
+                for refund in refunds:
+                    if refund['filter_refund'] == 'modify':
+                        check_dates = False
+
             # Check for dates (refund must be done after invoice)
-            if date and date < inv.date_invoice:
-                raise osv.except_osv(_('Error'), _("Posting date for the refund is before the invoice's posting date!"))
-            if document_date and document_date < inv.document_date:
-                raise osv.except_osv(_('Error'), _("Document date for the refund is before the invoice's document date!"))
+            if check_dates:
+                if date and date < inv.date_invoice:
+                    raise osv.except_osv(_('Error'), _("Posting date for the refund is before the invoice's posting date!"))
+                if document_date and document_date < inv.document_date:
+                    raise osv.except_osv(_('Error'), _("Document date for the refund is before the invoice's document date!"))
         new_ids = super(account_invoice, self).refund(cr, uid, ids, date, period_id, description, journal_id)
         # add document date
         if document_date:
