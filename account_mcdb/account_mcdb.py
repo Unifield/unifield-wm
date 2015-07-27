@@ -105,7 +105,7 @@ class account_mcdb(osv.osv):
         'user': fields.many2one('res.users', "User"),
         'cheque_number': fields.char('Cheque Number', size=120),  # BKLG-7
         'partner_txt': fields.char('Third Party', size=120),  # BKLG-7
-        'show_only_active': fields.boolean('Show only active'),
+        'show_inactive': fields.boolean('Show inactive'),
     }
 
     _defaults = {
@@ -125,7 +125,7 @@ class account_mcdb(osv.osv):
         'display_cost_center': lambda *a: False,
         'display_destination': lambda *a: False,
         'user': lambda self, cr, uid, c: uid or False,
-        'show_only_active': True,
+        'show_inactive': False,
     }
 
     def onchange_currency_choice(self, cr, uid, ids, choice, func_curr=False, mnt_from=0.0, mnt_to=0.0, context=None):

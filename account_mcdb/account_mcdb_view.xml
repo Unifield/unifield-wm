@@ -72,9 +72,9 @@
                     <group colspan="4" col="6">
                         <separator string="Third Party" colspan="6"/>
 
-                        <field name="show_only_active" colspan="6"/>
-                        <field name="partner_id" colspan="2" domain="['|', ('active', '=', show_only_active), ('active', '=', True)]"/>
-                        <field name="employee_id" colspan="2" domain="['|', ('active', '=', show_only_active), ('active', '=', True)]" context="{'disrupt_inactive': True}"/>
+                        <field name="show_inactive" colspan="6"/>
+                        <field name="partner_id" colspan="2" domain="['|', ('active', '=', True), ('active', '!=', show_inactive)]"/>
+                        <field name="employee_id" colspan="2" domain="['|', ('active', '=', True), ('active', '!=', show_inactive)]" context="{'disrupt_inactive': True}"/>
                         <field name="transfer_journal_id" colspan="2"/>
                     </group>
                     &end;
