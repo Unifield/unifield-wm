@@ -2287,6 +2287,13 @@ class account_bank_statement_line(osv.osv):
         """
         Write some statement line into some account move lines in posted state.
         """
+
+        wdp_obj = self.pool.get('wizard.down.payment')
+        lines = self.browse(cr, uid, ids, context=context)
+        for line in lines:
+            wdp_obj.check_register_line_and_po(cr, uid, line['id'],
+                                               line['down_payment_id']['id'],
+                                               context=context)
         return self.posting(cr, uid, ids, 'hard', context=context)
 
     def button_temp_posting(self, cr, uid, ids, context=None):
