@@ -128,7 +128,6 @@ class account_invoice(osv.osv):
         """
         Copy global distribution and give it to new invoice
         """
-        print "COPYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
         if not context:
             context = {}
         if not default:
@@ -140,7 +139,7 @@ class account_invoice(osv.osv):
                 default.update({'analytic_distribution_id': new_distrib_id})
         return super(account_invoice, self).copy(cr, uid, inv_id, default, context)
 
-    def refund(self, cr, uid, ids, date=None, period_id=None, description=None, journal_id=None, document_date=None):
+    def refund(self, cr, uid, ids, date=None, period_id=None, description=None, journal_id=None, document_date=None, refund_type=None):
         """
         Reverse lines for given invoice
         """
@@ -151,14 +150,8 @@ class account_invoice(osv.osv):
         # US_349: Don't check dates if refund type is "modify"
         obj_refund = self.pool.get('account.invoice.refund')
         for inv in self.browse(cr, uid, ids):
-            if journal_id:
-                refund_ids = obj_refund.search(cr, uid,
-                                               [('journal_id', '=',
-                                                journal_id)])
-                refunds = obj_refund.browse(cr, uid, refund_ids)
-                for refund in refunds:
-                    if refund['filter_refund'] == 'modify':
-                        check_dates = False
+            if refund_type == 'modify':
+                check_dates = False
 
             # Check for dates (refund must be done after invoice)
             if check_dates:
