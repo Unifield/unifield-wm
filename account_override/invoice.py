@@ -308,8 +308,8 @@ class account_invoice(osv.osv):
         if isinstance(ids, (int, long)):
             ids = [ids]
         for i in self.browse(cr, uid, ids):
-            if i.document_date and i.date_invoice and i.date_invoice < i.document_date:
-                raise osv.except_osv(_('Error'), _('Posting date should be later than Document Date.'))
+            self.pool.get('finance.tools').check_document_date(cr, uid,
+                i.document_date, i.date_invoice)
         return True
 
     def _refund_cleanup_lines(self, cr, uid, lines):
@@ -385,6 +385,12 @@ class account_invoice(osv.osv):
                 name = _('Partner')
             for node in nodes:
                 node.set('string', name)
+            res['arch'] = etree.tostring(doc)
+        elif view_type in ('tree', 'search') and context.get('type') in ['out_invoice', 'out_refund']:
+            doc = etree.XML(res['arch'])
+            nodes = doc.xpath("//field[@name='supplier_reference']")
+            for node in nodes:
+                node.getparent().remove(node)
             res['arch'] = etree.tostring(doc)
         return res
 
@@ -468,9 +474,14 @@ class account_invoice(osv.osv):
         """
         if not context:
             context = {}
+        if 'document_date' in vals and 'date_invoice' in vals:
+            self.pool.get('finance.tools').check_document_date(cr, uid,
+                vals['document_date'], vals['date_invoice'], context=context)
+
         # Create a sequence for this new invoice
         res_seq = self.create_sequence(cr, uid, vals, context)
         vals.update({'sequence_id': res_seq,})
+
         # UTP-317 # Check that no inactive partner have been used to create this invoice
         if 'partner_id' in vals:
             partner_id = vals.get('partner_id')
@@ -479,6 +490,7 @@ class account_invoice(osv.osv):
             partner = self.pool.get('res.partner').browse(cr, uid, [partner_id])
             if partner and partner[0] and not partner[0].active:
                 raise osv.except_osv(_('Warning'), _("Partner '%s' is not active.") % (partner[0] and partner[0].name or '',))
+
         return super(account_invoice, self).create(cr, uid, vals, context)
 
     def write(self, cr, uid, ids, vals, context=None):
