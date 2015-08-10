@@ -44,11 +44,17 @@ class purchase_order_line_sync(osv.osv):
         This method parses the line_info values and transform this data to call
         the partial_shipped_fo_updates_in_po() method of stock.picking
         """
+        
         if context is None:
             context ={}
+        
+        # US-499: Do not treat the mesasges with source and destination are the same 
+        c = self.pool.get('res.users').browse(cr, uid, uid).company_id
+        instance_name = c and c.instance_id and c.instance_id.instance
+        if source == cr.dbname or source == instance_name:
+            return "Message ignored: destination and source instance are identical: " + source            
 
         line_dict = line_info.to_dict()
-
         out_info = {
             'state': 'draft',
             'subtype': 'picking',
@@ -63,7 +69,7 @@ class purchase_order_line_sync(osv.osv):
                 'date_expected': line_dict.get('confirmed_delivery_date', time.strftime('%Y-%m-%d %H:%M:%S')),
                 'name': line_dict.get('name', ''),
                 'product_uom': line_dict.get('product_uom'),
-                'line_number': line_dict.get('link_sol_id', {}).get('line_number', 0),
+                'line_number': line_dict.get('link_sol_id', {}) is True and line_dict.get('link_sol_id', {}).get('line_number', 0),
                 'dpo_line_id': int(line_dict.get('fake_id', '0')),
                 'state': 'done',
                 'original_qty_partial': -1,
