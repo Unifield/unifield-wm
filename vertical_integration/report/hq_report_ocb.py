@@ -77,7 +77,8 @@ class finance_archive(finance_export.finance_archive):
             if len(tmp_line) > (partner_id_column_number - 1):
                 partner_id = tmp_line[partner_id_column_number - 1]
                 if partner_id:
-                    partner_id_present = True
+                    # US-497: extract name from partner_id (better than partner_txt)
+                    tmp_line[partner_name_column_number - 1] = partner_obj.read(cr, uid, partner_id, ['name'])['name']
             # If not partner_id, then check 'Third Party' column to search it by name
             if not partner_id_present:
                 partner_name = tmp_line[partner_name_column_number - 1]
@@ -86,7 +87,7 @@ class finance_archive(finance_export.finance_archive):
                     # UFT-8 encoding
                     if isinstance(partner_name, unicode):
                         partner_name = partner_name.encode('utf-8')
-                    partner_ids = partner_obj.search(cr, uid, [('name', '=ilike', partner_name), ('active', 'in', ['t', 'f'])])
+                    partner_ids = partner_obj.search(cr, uid, [('name', '=ilike', partner_name), ('active', 'in', ['t', 'f'])], order='id')
                     if partner_ids:
                         partner_id = partner_ids[0]
             # If we get some ids, fetch the partner hash
@@ -444,7 +445,7 @@ class hq_report_ocb(report_sxw.report_sxw):
             'bs_entries': """
                 SELECT aml.id, i.code, j.code, m.name as "entry_sequence", aml.name, aml.ref, aml.document_date, aml.date, 
                        a.code, aml.partner_txt, '', '', '', aml.debit_currency, aml.credit_currency, c.name,
-                       ROUND(aml.debit, 2), ROUND(aml.credit, 2), cc.name, hr.identification_id as "Emplid"
+                       ROUND(aml.debit, 2), ROUND(aml.credit, 2), cc.name, hr.identification_id as "Emplid", aml.partner_id
                 FROM account_move_line aml left outer join hr_employee hr on hr.id = aml.employee_id, 
                      account_account AS a, 
                      res_currency AS c, 
