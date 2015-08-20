@@ -66,6 +66,7 @@ class finance_archive(finance_export.finance_archive):
         partner_obj = pool.get('res.partner')
         partner_name_column_number = 10
         partner_id_column_number = 21
+        employee_name_column = 22
         for line in data:
             tmp_line = list(line)
             line_ids = str(line[column_number])
@@ -102,7 +103,10 @@ class finance_archive(finance_export.finance_archive):
 
             if emplid:
                 partner_hash = ''
+                if tmp_line[employee_name_column - 1]:
+                    tmp_line[partner_name_column_number - 1] = tmp_line[employee_name_column - 1]
             tmp_line[partner_id_column_number - 1] = partner_hash
+            del(tmp_line[employee_name_column - 1])
             # Add result to new_data
             new_data.append(self.line_to_utf8(tmp_line))
         res = self.postprocess_selection_columns(cr, uid, new_data, [], column_deletion=column_deletion)
@@ -391,7 +395,7 @@ class hq_report_ocb(report_sxw.report_sxw):
                        c.name AS "booking_currency", 
                        CASE WHEN al.amount < 0 THEN ABS(ROUND(al.amount, 2)) ELSE 0.0 END AS debit, 
                        CASE WHEN al.amount > 0 THEN ROUND(al.amount, 2) ELSE 0.0 END AS credit,
-                       cc.name AS "functional_currency", hr.identification_id as "emplid", aml.partner_id
+                       cc.name AS "functional_currency", hr.identification_id as "emplid", aml.partner_id, hr.name_resource as hr_name
                 FROM account_analytic_line AS al, 
                      account_account AS a, 
                      account_analytic_account AS aa, 
@@ -445,7 +449,7 @@ class hq_report_ocb(report_sxw.report_sxw):
             'bs_entries': """
                 SELECT aml.id, i.code, j.code, m.name as "entry_sequence", aml.name, aml.ref, aml.document_date, aml.date, 
                        a.code, aml.partner_txt, '', '', '', aml.debit_currency, aml.credit_currency, c.name,
-                       ROUND(aml.debit, 2), ROUND(aml.credit, 2), cc.name, hr.identification_id as "Emplid", aml.partner_id
+                       ROUND(aml.debit, 2), ROUND(aml.credit, 2), cc.name, hr.identification_id as "Emplid", aml.partner_id, hr.name_resource as hr_name
                 FROM account_move_line aml left outer join hr_employee hr on hr.id = aml.employee_id, 
                      account_account AS a, 
                      res_currency AS c, 
@@ -543,7 +547,7 @@ class hq_report_ocb(report_sxw.report_sxw):
                 'fnct_params': [('financing.contract.contract', 'state', 5)],
                 },
             {
-                'headers': ['DB ID', 'Instance', 'Journal', 'Entry sequence', 'Description', 'Reference', 'Document date', 'Posting date', 'G/L Account', 'Third party', 'Destination', 'Cost centre', 'Funding pool', 'Booking debit', 'Booking credit', 'Booking currency', 'Functional debit', 'Functional credit',  'Functional CCY', 'Emplid', 'Partner DB ID'],
+                'headers': ['DB ID', 'Instance', 'Journal', 'Entry sequence', 'Description', 'Reference', 'Document date', 'Posting date', 'G/L Account', 'Third party', 'Destination', 'Cost centre', 'Funding pool', 'Booking debit', 'Booking credit', 'Booking currency', 'Functional debit', 'Functional credit',  'Functional CCY', 'Emplid', 'Partner DB ID', 'Employee Name'],
                 'filename': instance_name + '_' + year + month + '_Monthly Export.csv',
                 'key': 'rawdata',
                 'function': 'postprocess_add_db_id', # to take analytic line IDS and make a DB ID with
