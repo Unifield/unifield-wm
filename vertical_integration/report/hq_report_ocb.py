@@ -101,6 +101,18 @@ class finance_archive(finance_export.finance_archive):
                 tmp_line.append('')
             emplid = tmp_line[partner_id_column_number - 2]
 
+            if not emplid and not partner_id and tmp_line[partner_name_column_number - 1]:
+                employee_obj = pool.get('hr.employee')
+                # we don't have partner and employee, if update employee creation is not run check if he duplicates in the DB
+                partner_name = tmp_line[partner_name_column_number - 1]
+                if isinstance(partner_name, unicode):
+                    partner_name = partner_name.encode('utf-8')
+                emp_ids = employee_obj.search(cr, uid, [('name', '=', partner_name), ('active', 'in', ['t', 'f'])])
+                if emp_ids:
+                    empl_code = employee_obj.read(cr, uid, emp_ids[0], ['identification_id'])['identification_id']
+                    if empl_code:
+                        tmp_line[partner_id_column_number - 2] = empl_code
+
             if emplid:
                 partner_hash = ''
                 if tmp_line[employee_name_column - 1]:
@@ -547,7 +559,7 @@ class hq_report_ocb(report_sxw.report_sxw):
                 'fnct_params': [('financing.contract.contract', 'state', 5)],
                 },
             {
-                'headers': ['DB ID', 'Instance', 'Journal', 'Entry sequence', 'Description', 'Reference', 'Document date', 'Posting date', 'G/L Account', 'Third party', 'Destination', 'Cost centre', 'Funding pool', 'Booking debit', 'Booking credit', 'Booking currency', 'Functional debit', 'Functional credit',  'Functional CCY', 'Emplid', 'Partner DB ID', 'Employee Name'],
+                'headers': ['DB ID', 'Instance', 'Journal', 'Entry sequence', 'Description', 'Reference', 'Document date', 'Posting date', 'G/L Account', 'Third party', 'Destination', 'Cost centre', 'Funding pool', 'Booking debit', 'Booking credit', 'Booking currency', 'Functional debit', 'Functional credit',  'Functional CCY', 'Emplid', 'Partner DB ID'],
                 'filename': instance_name + '_' + year + month + '_Monthly Export.csv',
                 'key': 'rawdata',
                 'function': 'postprocess_add_db_id', # to take analytic line IDS and make a DB ID with
