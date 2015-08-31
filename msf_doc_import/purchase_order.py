@@ -43,23 +43,6 @@ import datetime
 class purchase_order(osv.osv):
     _inherit = 'purchase.order'
 
-    def init(self, cr):
-        """
-        Load data (product_data.xml) before self
-        """
-        if hasattr(super(purchase_order, self), 'init'):
-            super(purchase_order, self).init(cr)
-
-        logging.getLogger('init').info('HOOK: module product: loading product_data.xml')
-        pathname = path.join('product', 'product_data.xml')
-        file = tools.file_open(pathname)
-        tools.convert_xml_import(cr, 'product', file, {}, mode='init', noupdate=False)
-
-        logging.getLogger('init').info('HOOK: module product_attributes: loading data/sale_data.yml')
-        pathname = path.join('product_attributes', 'data', 'sale_data.yml')
-        file = tools.file_open(pathname)
-        tools.convert_yaml_import(cr, 'product_attributes', file, {}, mode='init', noupdate=False)
-
     def hook_rfq_sent_check_lines(self, cr, uid, ids, context=None):
         '''
         Please copy this to your module's method also.

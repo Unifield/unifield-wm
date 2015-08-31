@@ -33,19 +33,6 @@ from os import path
 class unifield_setup_configuration(osv.osv):
     _name = 'unifield.setup.configuration'
     
-    def init(self, cr):
-        """
-        Load setup_data.xml before self
-        """
-        if hasattr(super(unifield_setup_configuration, self), 'init'):
-            super(unifield_setup_configuration, self).init(cr)
-
-        mod_obj = self.pool.get('ir.module.module')
-        logging.getLogger('init').info('HOOK: module unifield_setup: loading setup_data.xml')
-        pathname = path.join('unifield_setup', 'setup_data.xml')
-        file = tools.file_open(pathname)
-        tools.convert_xml_import(cr, 'unifield_setup', file, {}, mode='init', noupdate=False)
-    
     def _check_uniqueness(self, cr, uid, ids, context=None):
         '''
         Limit the creation of one and only one instance configuration

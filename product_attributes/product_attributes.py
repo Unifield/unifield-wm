@@ -202,14 +202,6 @@ product_template()
 class product_attributes(osv.osv):
     _inherit = "product.product"
 
-    def init(self, cr):
-        if hasattr(super(product_attributes, self), 'init'):
-            super(product_attributes, self).init(cr)
-        logging.getLogger('init').info('HOOK: module product_attributes: loading product_attributes_data.xml')
-        pathname = path.join('product_attributes', 'product_attributes_data.xml')
-        file = tools.file_open(pathname)
-        tools.convert_xml_import(cr, 'product_attributes', file, {}, mode='init', noupdate=False)
-
     def _get_nomen(self, cr, uid, ids, field_name, args, context=None):
         res = {}
 

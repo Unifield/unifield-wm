@@ -33,25 +33,6 @@ class stock_reason_type(osv.osv):
     _name = 'stock.reason.type'
     _description = 'Reason Types Moves'
 
-    def init(self, cr):
-        """
-        Load reason_type_data.xml brefore product
-        """
-        if hasattr(super(stock_reason_type, self), 'init'):
-            super(stock_reason_type, self).init(cr)
-
-        mod_obj = self.pool.get('ir.module.module')
-        demo = False
-        mod_id = mod_obj.search(cr, 1, [('name', '=', 'reason_types_moves')])
-        if mod_id:
-            demo = mod_obj.read(cr, 1, mod_id, ['demo'])[0]['demo']
-
-        if demo:
-            logging.getLogger('init').info('HOOK: module reason_types_moves: loading reason_type_data.xml')
-            pathname = path.join('reason_types_moves', 'reason_type_data.xml')
-            file = tools.file_open(pathname)
-            tools.convert_xml_import(cr, 'reason_types_moves', file, {}, mode='init', noupdate=False)
-
     def return_level(self, cr, uid, type, level=0):
         if type.parent_id:
             level += 1
