@@ -133,6 +133,12 @@ class PickConvertToStandardTest(ResourcingTest):
         self.c_out_ids = self.c_pick_obj.search([('sale_id', '=', self.c_so_id), ('type', '=', 'out')])
 
     def tearDown(self):
+        self.synchronize(self.c1)
+        self.synchronize(self.p1)
+        self.synchronize(self.c1)
+
+#        c_not_run_msg = self.c1.get('self.pool.get('sync.client.update_received').search(cr, uid, [('run', '=', False)], count=True)
+
         return
 
     def process_incoming(self):
