@@ -116,7 +116,6 @@ class account_move_line(osv.osv):
                 total += (line.debit_currency or 0.0) - (line.credit_currency or 0.0)
         if already_reconciled:
             raise osv.except_osv(_('Warning'), _('Already Reconciled!'))
-        raise osv.except_osv(_('Warning'), _('Stop debug'))
         if self.pool.get('res.currency').is_zero(cr, uid, company_currency_id, total):
             res = self.reconcile(cr, uid, merges+unmerge, context=context)
             return res
