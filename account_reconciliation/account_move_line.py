@@ -89,6 +89,7 @@ class account_move_line(osv.osv):
         # UTP-752: Add an attribute to reconciliation element if different instance levels
         previous_level = False
         different_level = False
+        already_reconciled = True
         for line in self.browse(cr, uid, ids, context=context):
             # Do level check only if we don't know if more than 1 different level exists between lines
             if not different_level:
@@ -97,8 +98,11 @@ class account_move_line(osv.osv):
                 if previous_level != line.instance_id.id:
                     different_level = True
             company_currency_id = line.company_id.currency_id
-            if line.reconcile_id:
-                raise osv.except_osv(_('Warning'), _('Already Reconciled!'))
+
+            if not line.reconcile_id:
+                already_reconciled = False
+            # if line.reconcile_id:
+                # raise osv.except_osv(_('Warning'), _('Already Reconciled!'))
             if line.reconcile_partial_id:
                 for line2 in line.reconcile_partial_id.line_partial_ids:
                     if not line2.reconcile_id:
@@ -110,7 +114,9 @@ class account_move_line(osv.osv):
             else:
                 unmerge.append(line.id)
                 total += (line.debit_currency or 0.0) - (line.credit_currency or 0.0)
-
+        if already_reconciled:
+            raise osv.except_osv(_('Warning'), _('Already Reconciled!'))
+        raise osv.except_osv(_('Warning'), _('Stop debug'))
         if self.pool.get('res.currency').is_zero(cr, uid, company_currency_id, total):
             res = self.reconcile(cr, uid, merges+unmerge, context=context)
             return res
