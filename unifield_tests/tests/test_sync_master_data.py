@@ -339,8 +339,7 @@ class MasterDataSyncTest(UnifieldTest):
         """
         def get_pnomenclature_id(nomen_name):
             """get product nomenclature id from name"""
-            return self.get_id_from_key(db, 'product.nomenclature', nomen_name,
-                raise_if_no_ids=True)
+            return self.get_id_from_key(db, 'product.nomenclature', nomen_name, raise_if_no_ids=True)
 
         product_vals = {
             'default_code': code,
@@ -388,8 +387,7 @@ class MasterDataSyncTest(UnifieldTest):
         # product list line
         # unique comment per list id/lineid/product code (for search)
         product_id = self.get_id_from_key(db, 'product.product',
-            PRODUCT_TEST_CODE, key_field='default_code',
-            raise_if_no_ids=True)
+            PRODUCT_TEST_CODE, key_field='default_code', raise_if_no_ids=True)
         comment = "%d/%d/%s UF Product List Line Test" % (plist_id,
             product_id, PRODUCT_TEST_CODE, )
         vals = {
@@ -423,8 +421,7 @@ class MasterDataSyncTest(UnifieldTest):
         check_batch = []
 
         def create_catalogue_line(comment_prefix):
-            product_uom_id = self.get_id_from_key(db, 'product.uom', 'PCE',
-                raise_if_no_ids=True)
+            product_uom_id = self.get_id_from_key(db, 'product.uom', 'PCE', raise_if_no_ids=True)
 
             line_vals = {
                 'catalogue_id': catalogue_id,
@@ -448,8 +445,7 @@ class MasterDataSyncTest(UnifieldTest):
         # 1) 1 catalogue not ESC should sync
 
         # create catalog
-        partner_id = self.get_id_from_key(db, 'res.partner', 'Local Market',
-            raise_if_no_ids=True)
+        partner_id = self.get_id_from_key(db, 'res.partner', 'Local Market', raise_if_no_ids=True)
         vals = {
             'name': 'Unifield Supplier Catalogue TEST',
             'state': 'confirmed',

@@ -1004,8 +1004,7 @@ class FinanceTestCorCases(FinanceTest):
             
         # close financing contract FC1: soft-close it
         fcc_obj = db.get('financing.contract.contract')
-        fc_id = self.get_id_from_key(db, 'financing.contract.contract', 'FC1',
-            assert_if_no_ids=True)
+        fc_id = self.get_id_from_key(db, 'financing.contract.contract', 'FC1', raise_if_no_ids=True)
         fcc_obj.contract_soft_closed([fc_id])
         
         # select an AJI booked on FP1, correction wizard

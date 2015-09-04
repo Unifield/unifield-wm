@@ -244,8 +244,7 @@ class UnifieldTest(unittest.TestCase):
         inst = self.get_instance(db)
         return inst and inst.id or False
 
-    def get_id_from_key(self, db, model_name, search_val, key_field='name',
-        assert_if_no_ids=False):
+    def get_id_from_key(self, db, model_name, search_val, key_field='name', raise_if_no_ids=False):
         """
         get record id from model and record name
         :param db: db
@@ -261,7 +260,7 @@ class UnifieldTest(unittest.TestCase):
         ids = db.get(model_name).search([(key_field, '=', search_val)])
         if ids:
             return ids[0]
-        if assert_if_no_ids:
+        if raise_if_no_ids:
             assert(
                 ids != False,
                 "'%s' not found in '%s' :: %s" % (search_val, model_name,
