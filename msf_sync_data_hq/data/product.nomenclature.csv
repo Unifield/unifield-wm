@@ -1,6 +1,7 @@
 id,level,name,type,parent_id
 nom_1,0,LIB,Mandatory,
 nom_2,0,SRV,Mandatory,
+nom_2_2,0,LOG,Mandatory,
 nom_3,1,A - Administration,Mandatory,LOG
 nom_4,1,C - Camp,Mandatory,LOG
 nom_5,1,D - Drugs,Mandatory,MED
