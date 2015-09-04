@@ -3,7 +3,9 @@ url: localhost
 port: 8069
 
 [DB]
-db_prefix: test-finance
+db_prefix: db_
+instance_prefix = db_
+project_level: 1
 username: admin
 password: admin
 # If tempo_mkdb is True, it means you use mkdb from OpenERP to create DB. If not, you use tempo's one.
