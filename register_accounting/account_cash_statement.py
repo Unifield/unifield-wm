@@ -112,18 +112,37 @@ class account_cash_statement(osv.osv):
         self._get_starting_balance(cr, uid, [res_id], context=context)
         return res_id
 
+    def update_next_balance_start(self, cr, uid, ids, bal_s, context=None):
+        if context is None:
+            context = {}
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+        vals = {}
+        objs = self.browse(cr, uid, ids, context=context)
+        for obj in objs:
+            if obj.balance_start is not False and \
+               obj.balance_end_real is not False:
+                new_bal_end = bal_s + (obj.balance_end_real - obj.balance_start)
+                vals['balance_end_real'] = new_bal_end
+        vals['balance_start'] = bal_s
+        self.write(cr, uid, ids, vals, context=context)
+
     def write(self, cr, uid, ids, vals, context=None):
         if context is None:
             context = {}
+        if isinstance(ids, (int, long)):
+            ids = [ids]
 
-        if not context.get('sync_update_execution') and vals.get('balance_end_real', False):
+        res = super(account_cash_statement, self).write(cr, uid, ids, vals,
+                                                        context=context)
+        if not context.get('sync_update_execution') and vals.get('balance_end_real'):
             for id in ids:
                 args = [('prev_reg_id', '=', id)]
                 search_ids = self.search(cr, uid, args, context=context)
-                new_vals = {'balance_start': vals['balance_end_real']}
-                self.write(cr, uid, search_ids, new_vals, context=context)
-
-        return super(account_cash_statement, self).write(cr, uid, ids, vals, context=context)
+                self.update_next_balance_start(cr, uid, search_ids,
+                                               vals['balance_end_real'],
+                                               context=context)
+        return res
 
     def button_open_cash(self, cr, uid, ids, context=None):
         if not context:
