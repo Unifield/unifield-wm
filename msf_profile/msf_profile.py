@@ -400,3 +400,20 @@ class email_configuration(osv.osv):
         (_update_email_config, 'Always true: update email configuration', [])
     ]
 email_configuration()
+
+class load_yml_file(osv.osv_memory):
+    _name = 'load_yml_file'
+    _descritpion = 'load_yml_file'
+
+    _columns = {
+    }
+
+    def load(self, cr, uid, filename, context=None):
+        if uid != 1:
+            raise osv.except_osv('Warning !', 'No way')
+        pathname = os.path.join('unifield_tests', 'master_data', filename)
+        file = tools.file_open(pathname)
+        tools.convert_yaml_import(cr, 'unifield_tests', file, {}, mode='init', noupdate=False)
+        return True
+
+load_yml_file()

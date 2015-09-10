@@ -500,10 +500,10 @@ class FinanceTest(UnifieldTest):
             dest_id != False,
             "dest '%s' not found" % (dest_code, )
         )
-            
+
         aaa_obj = db.get('account.analytic.account')
         fp_br = aaa_obj.browse(fp_id)
-        
+
         # search account/dest tuple in FP ?
         for tda in fp_br.tuple_destination_account_ids:
             if tda.account_id.id == account_id and \
@@ -517,7 +517,7 @@ class FinanceTest(UnifieldTest):
         else:
             tuple_id = tuple_id[0]
         aaa_obj.write(fp_id, {'tuple_destination_account_ids': [(4, tuple_id)]})
-        
+
     def analytic_distribution_create(self, db,
         breakdown_data=[(100., 'OPS', False, False)]):
         """
@@ -1201,8 +1201,8 @@ class FinanceTest(UnifieldTest):
             'amount_currency': random_amount,
         }
         # Search analytic distribution
-        distribution_ids = distrib_obj.search([('name', '=', 'DISTRIB 1')])
-        distribution_id = distrib_obj.copy(distribution_ids[0],
+        d_id = distrib_obj.find_sd_ref('unifield_tests_distrib_1', 'res_id')
+        distribution_id = distrib_obj.copy(d_id,
             {'name': 'distribution-test'})
         vals.update({'analytic_distribution_id': distribution_id})
         aml_expense_id = aml_obj.create(vals)

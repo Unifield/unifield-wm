@@ -10,10 +10,10 @@
     type: product
     uom_id: product.product_uom_unit
     uom_po_id: product.product_uom_unit
-    nomen_manda_0: nomen_log_main_type
-    nomen_manda_1: nomen_log_group
-    nomen_manda_2: nomen_log_family
-    nomen_manda_3: nomen_log_root
+    nomen_manda_0: sd.unifield_tests_nomen_log_main_type
+    nomen_manda_1: sd.unifield_tests_nomen_log_group
+    nomen_manda_2: sd.unifield_tests_nomen_log_family
+    nomen_manda_3: sd.unifield_tests_nomen_log_root
 -
   Create Product PL2
 -
@@ -24,10 +24,10 @@
     type: product
     uom_id: product.product_uom_unit
     uom_po_id: product.product_uom_unit
-    nomen_manda_0: nomen_log_main_type
-    nomen_manda_1: nomen_log_group
-    nomen_manda_2: nomen_log_family
-    nomen_manda_3: nomen_log_root
+    nomen_manda_0: sd.unifield_tests_nomen_log_main_type
+    nomen_manda_1: sd.unifield_tests_nomen_log_group
+    nomen_manda_2: sd.unifield_tests_nomen_log_family
+    nomen_manda_3: sd.unifield_tests_nomen_log_root
 -
   Create Product PL3
 -
@@ -38,10 +38,10 @@
     type: product
     uom_id: product.product_uom_unit
     uom_po_id: product.product_uom_unit
-    nomen_manda_0: nomen_log_main_type
-    nomen_manda_1: nomen_log_group
-    nomen_manda_2: nomen_log_family
-    nomen_manda_3: nomen_log_root
+    nomen_manda_0: sd.unifield_tests_nomen_log_main_type
+    nomen_manda_1: sd.unifield_tests_nomen_log_group
+    nomen_manda_2: sd.unifield_tests_nomen_log_family
+    nomen_manda_3: sd.unifield_tests_nomen_log_root
 -
   Create Product PL4
 -
@@ -52,10 +52,10 @@
     type: product
     uom_id: product.product_uom_unit
     uom_po_id: product.product_uom_unit
-    nomen_manda_0: nomen_log_main_type
-    nomen_manda_1: nomen_log_group
-    nomen_manda_2: nomen_log_family
-    nomen_manda_3: nomen_log_root
+    nomen_manda_0: sd.unifield_tests_nomen_log_main_type
+    nomen_manda_1: sd.unifield_tests_nomen_log_group
+    nomen_manda_2: sd.unifield_tests_nomen_log_family
+    nomen_manda_3: sd.unifield_tests_nomen_log_root
 -
   Create Product PL5
 -
@@ -66,10 +66,10 @@
     type: product
     uom_id: product.product_uom_unit
     uom_po_id: product.product_uom_unit
-    nomen_manda_0: nomen_log_main_type
-    nomen_manda_1: nomen_log_group
-    nomen_manda_2: nomen_log_family
-    nomen_manda_3: nomen_log_root
+    nomen_manda_0: sd.unifield_tests_nomen_log_main_type
+    nomen_manda_1: sd.unifield_tests_nomen_log_group
+    nomen_manda_2: sd.unifield_tests_nomen_log_family
+    nomen_manda_3: sd.unifield_tests_nomen_log_root
 -
   Create MED products
 -
@@ -82,10 +82,10 @@
     type: product
     uom_id: product.product_uom_unit
     uom_po_id: product.product_uom_unit
-    nomen_manda_0: nomen_log_main_type
-    nomen_manda_1: nomen_log_group
-    nomen_manda_2: nomen_log_family
-    nomen_manda_3: nomen_log_root
+    nomen_manda_0: sd.unifield_tests_nomen_log_main_type
+    nomen_manda_1: sd.unifield_tests_nomen_log_group
+    nomen_manda_2: sd.unifield_tests_nomen_log_family
+    nomen_manda_3: sd.unifield_tests_nomen_log_root
 -
   Create Product PM
 -
@@ -96,10 +96,10 @@
     type: product
     uom_id: product.product_uom_unit
     uom_po_id: product.product_uom_unit
-    nomen_manda_0: nomen_log_main_type
-    nomen_manda_1: nomen_log_group
-    nomen_manda_2: nomen_log_family
-    nomen_manda_3: nomen_log_root
+    nomen_manda_0: sd.unifield_tests_nomen_log_main_type
+    nomen_manda_1: sd.unifield_tests_nomen_log_group
+    nomen_manda_2: sd.unifield_tests_nomen_log_family
+    nomen_manda_3: sd.unifield_tests_nomen_log_root
 -
   Create Product PM3
 -
@@ -110,10 +110,10 @@
     type: product
     uom_id: product.product_uom_unit
     uom_po_id: product.product_uom_unit
-    nomen_manda_0: nomen_log_main_type
-    nomen_manda_1: nomen_log_group
-    nomen_manda_2: nomen_log_family
-    nomen_manda_3: nomen_log_root
+    nomen_manda_0: sd.unifield_tests_nomen_log_main_type
+    nomen_manda_1: sd.unifield_tests_nomen_log_group
+    nomen_manda_2: sd.unifield_tests_nomen_log_family
+    nomen_manda_3: sd.unifield_tests_nomen_log_root
 -
   Create Product PM4
 -
@@ -124,10 +124,10 @@
     type: product
     uom_id: product.product_uom_unit
     uom_po_id: product.product_uom_unit
-    nomen_manda_0: nomen_log_main_type
-    nomen_manda_1: nomen_log_group
-    nomen_manda_2: nomen_log_family
-    nomen_manda_3: nomen_log_root
+    nomen_manda_0: sd.unifield_tests_nomen_log_main_type
+    nomen_manda_1: sd.unifield_tests_nomen_log_group
+    nomen_manda_2: sd.unifield_tests_nomen_log_family
+    nomen_manda_3: sd.unifield_tests_nomen_log_root
 -
   Create Product PM5
 -
@@ -138,7 +138,7 @@
     type: product
     uom_id: product.product_uom_unit
     uom_po_id: product.product_uom_unit
-    nomen_manda_0: nomen_log_main_type
-    nomen_manda_1: nomen_log_group
-    nomen_manda_2: nomen_log_family
-    nomen_manda_3: nomen_log_root
+    nomen_manda_0: sd.unifield_tests_nomen_log_main_type
+    nomen_manda_1: sd.unifield_tests_nomen_log_group
+    nomen_manda_2: sd.unifield_tests_nomen_log_family
+    nomen_manda_3: sd.unifield_tests_nomen_log_root

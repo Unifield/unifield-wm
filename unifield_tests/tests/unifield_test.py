@@ -163,7 +163,10 @@ class UnifieldTest(unittest.TestCase):
         if module is None:
             module = self.test_module_name
 
-        obj = data_obj.get_object_reference(module, object_ref)
+        try:
+            obj = data_obj.get_object_reference(module, object_ref)
+        except:
+            return data_obj.find_sd_ref('%s_%s' % (self.test_module_name, object_ref), 'res_id')
 
         if obj:
             return obj[1]
@@ -261,7 +264,7 @@ class UnifieldTest(unittest.TestCase):
         if ids:
             return ids[0]
         if raise_if_no_ids:
-            assert(
+            self.assert_(
                 ids != False,
                 "'%s' not found in '%s' :: %s" % (search_val, model_name,
                     db.colored_name, )

@@ -33,9 +33,9 @@ class InvoiceTest(FinanceTest):
         journal_ids = journal_obj.search([('type', '=', 'purchase')])
         self.assert_(journal_ids != [], "No purchase journal found!")
         # Search analytic distribution
-        distribution_ids = analytic_distribution_obj.search([('name', '=', 'DISTRIB 1')])
-        self.assert_(distribution_ids != [], "No distribution 'DISTRIB 1' found!")
-        distribution_id = analytic_distribution_obj.copy(distribution_ids[0], {'name': 'distribution-test'})
+        d_id = analytic_distribution_obj.find_sd_ref('unifield_tests_distrib_1', 'res_id')
+        self.assert_(d_id, "No distribution 'DISTRIB 1' found!")
+        distribution_id = analytic_distribution_obj.copy(d_id, {'name': 'distribution-test'})
         # Create the invoice
         invoice_vals = {
             'type': 'in_invoice',

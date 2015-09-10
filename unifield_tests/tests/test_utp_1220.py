@@ -56,7 +56,13 @@ class UTP1220Test(UnifieldTest):
         """
         Create a RfQ from scratch with three lines.
         """
-        partner_id = self.get_record(self.used_db, 'supplier1')
+        partner_id = self.used_db.get('res.partner').create({
+            'name': 'Supplier 1',
+            'supplier': True,
+            'property_account_receivable': self.get_record(self.used_db, 'account_account_receivable_supplier0'),
+            'property_account_payable': self.get_record(self.used_db, 'account_account_payable_supplier0'),
+            'address_ids': [(0, 0, {'name': 'addr sup1'})]
+        })
         location_id = self.get_record(
             self.used_db,
             'stock_location_stock',
