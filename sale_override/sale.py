@@ -1609,6 +1609,12 @@ The parameter '%s' should be an browse_record instance !""") % (method, self._na
                     # defer overall_qty computation at the end of this method
                     context['bypass_store_function'] = [('stock.picking', ['overall_qty'])]
                     move_id = self.pool.get('stock.move').create(cr, uid, move_data, context=context)
+                    if line.type == 'make_to_stock':
+                        pick_name = self.pool.get('stock.move').read(cr, uid, move_id, ['picking_id'], context=context)['picking_id'][1]
+                        msg = _('The line #%s of %s has been sourced \'from stock\' with the %s') % (
+                            line.line_number, line.order_id.name, pick_name,
+                        )
+                        self.infolog(cr, uid, msg)
                     move_ids.append(move_id)
                     context['bypass_store_function'] = False
 
