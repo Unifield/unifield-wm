@@ -44,7 +44,7 @@ class account_invoice_refund(osv.osv_memory):
                 args = [('type', '=', 'purchase_refund')]
         if user.company_id.instance_id:
             args.append(('is_current_instance','=',True))
-        journal = obj_journal.search(cr, uid, [('type', '=', 'purchase_refund'), ('is_current_instance', '=', True)])
+        journal = obj_journal.search(cr, uid, args)
         return journal and journal[0] or False
 
     def fields_view_get(self, cr, uid, view_id=None, view_type=False, context=None, toolbar=False, submenu=False):
@@ -71,6 +71,7 @@ class account_invoice_refund(osv.osv_memory):
         'document_date': lambda *a: time.strftime('%Y-%m-%d'),
         #UTP-961: refund DI: only refund option is available
         'filter_refund': 'refund',
+        'journal_id': _get_journal,  # US-193
     }
 
     def onchange_date(self, cr, uid, ids, date, context=None):
@@ -103,8 +104,8 @@ class account_invoice_refund(osv.osv_memory):
         Permits to adapt refund creation
         """
         if form.get('document_date', False):
-            if date < form['document_date']:
-                raise osv.except_osv(_('Error'), _('Posting date should be later than Document Date.'))
+            self.pool.get('finance.tools').check_document_date(cr, uid,
+                form['document_date'], date)
             return self.pool.get('account.invoice').refund(cr, uid, inv_ids, date, period, description, journal_id, form['document_date'])
         else:
             return self.pool.get('account.invoice').refund(cr, uid, inv_ids, date, period, description, journal_id)
@@ -114,8 +115,8 @@ class account_invoice_refund(osv.osv_memory):
         Permits to adapt invoice creation
         """
         if form.get('document_date', False) and form.get('date', False):
-            if form['date'] < form['document_date']:
-                raise osv.except_osv(_('Error'), _('Posting date should be later than Document Date.'))
+            self.pool.get('finance.tools').check_document_date(cr, uid,
+                form['document_date'], form['date'])
             data.update({'document_date': form['document_date']})
         return super(account_invoice_refund, self)._hook_create_invoice(cr, uid, data, form)
 

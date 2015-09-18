@@ -22,15 +22,38 @@
 ##############################################################################
 
 from zipfile import ZipFile as zf
+from zipfile import is_zipfile
+import py7zlib
 from osv import osv
 from osv import fields
-from tempfile import NamedTemporaryFile
+from tempfile import NamedTemporaryFile,mkdtemp
 import csv
 from base64 import decodestring
 from time import strftime
 from tools.misc import ustr
+from addons import get_module_resource
+from tools.which import which
 from tools.translate import _
 from lxml import etree
+import subprocess
+import os
+import shutil
+
+try:
+    from io import BytesIO
+except ImportError:
+    from cStringIO import StringIO as BytesIO
+
+
+def get_7z():
+    if os.name == 'nt':
+        return get_module_resource('msf_homere_interface', 'wizard', '7za.exe')
+    try:
+        return which('7z')
+    except:
+        raise osv.except_osv(_('Error'), _('7z is not installed on the server. Please install the package p7zip-full'))
+
+
 
 class hr_payroll_import_confirmation(osv.osv_memory):
     _name = 'hr.payroll.import.confirmation'
@@ -117,8 +140,12 @@ class hr_payroll_import_confirmation(osv.osv_memory):
                 domain = ""
                 context.update({'search_default_non_validated': 1})
             if context.get('from') == 'expat_employee_import':
-                result = ('editable_view_employee_tree', 'hr.employee')
                 context.update({'search_default_employee_type_expatriate': 1})
+                action = self.pool.get('ir.actions.act_window').for_xml_id(cr,
+                    uid, 'hr', 'open_view_employee_list_my', context=context)
+                action['target'] = 'same'
+                action['context'] = context
+                return action
             if context.get('from') == 'nat_staff_import':
                 result = ('inherit_view_employee_tree', 'hr.employee')
                 context.update({'search_default_employee_type_local': 1, 'search_default_active': 1})
@@ -145,6 +172,7 @@ hr_payroll_import_confirmation()
 
 class hr_payroll_employee_import_errors(osv.osv):
     _name = 'hr.payroll.employee.import.errors'
+    _rec_name = 'wizard_id'
     _description = 'Employee Import Errors'
 
     _columns = {
@@ -437,6 +465,64 @@ class hr_payroll_employee_import(osv.osv_memory):
                     res.append(new_line)
         return res
 
+    def _extract_7z(self, cr, uid, filename):
+        tmp_dir = mkdtemp()
+        passwd = self.pool.get('hr.payroll.import')._get_homere_password(cr, uid, pass_type='permois')
+        szexe = get_7z()
+        devnull = open(os.devnull, 'w')
+        szret = subprocess.call([szexe, 'x', '-p%s' % passwd, '-o%s' % tmp_dir, '-y', filename], stdout=devnull)
+        devnull.close()
+        if szret != 0:
+            raise osv.except_osv(_('Error'), _('Error when extracting the file with 7-zip'))
+        return tmp_dir
+
+    def read_files(self, cr, uid, filename):
+        staff_file = 'staff.csv'
+        contract_file = 'contrat.csv'
+        job_file = 'fonction.csv'
+        job_reader =False
+        contract_reader = False
+        staff_reader = False
+        desc_to_close = []
+        tmpdir = False
+        if is_zipfile(filename):
+            zipobj = zf(filename)
+            if zipobj.namelist() and job_file in zipobj.namelist():
+                job_reader = csv.DictReader(zipobj.open(job_file), quotechar='"', delimiter=',', doublequote=False, escapechar='\\')
+                # Do not raise error for job file because it's just a useful piece of data, but not more.
+        # read the contract file
+            if zipobj.namelist() and contract_file in zipobj.namelist():
+                contract_reader = csv.DictReader(zipobj.open(contract_file), quotechar='"', delimiter=',', doublequote=False, escapechar='\\')
+        # read the staff file
+            if zipobj.namelist() and staff_file in zipobj.namelist():
+                # Doublequote and escapechar avoid some problems
+                staff_reader = csv.DictReader(zipobj.open(staff_file), quotechar='"', delimiter=',', doublequote=False, escapechar='\\')
+        else:
+            tmpdir = self._extract_7z(cr, uid, filename)
+            job_file_name = os.path.join(tmpdir, job_file)
+            if os.path.isfile(job_file_name):
+                job_file_desc = open(job_file_name, 'rb')
+                desc_to_close.append(job_file_desc)
+                job_reader = csv.DictReader(job_file_desc, quotechar='"', delimiter=',', doublequote=False, escapechar='\\')
+
+            contract_file_name = os.path.join(tmpdir, contract_file)
+            if os.path.isfile(contract_file_name):
+                contract_file_desc = open(contract_file_name, 'rb')
+                desc_to_close.append(contract_file_desc)
+                contract_reader = csv.DictReader(contract_file_desc, quotechar='"', delimiter=',', doublequote=False, escapechar='\\')
+
+            staff_file_name = os.path.join(tmpdir, staff_file)
+            if os.path.isfile(staff_file_name):
+                staff_file_desc = open(staff_file_name, 'rb')
+                desc_to_close.append(staff_file_desc)
+                staff_reader = csv.DictReader(staff_file_desc, quotechar='"', delimiter=',', doublequote=False, escapechar='\\')
+
+        if not contract_reader:
+            raise osv.except_osv(_('Error'), _('%s not found in given zip file!') % (contract_file,))
+        if not staff_reader:
+            raise osv.except_osv(_('Error'), _('%s not found in given zip file!') % (staff_file,))
+        return (job_reader, contract_reader, staff_reader, desc_to_close, tmpdir)
+
     def button_validate(self, cr, uid, ids, context=None):
         """
         Open ZIP file and search staff.csv
@@ -465,35 +551,24 @@ class hr_payroll_employee_import(osv.osv_memory):
             # now we determine the file format
             filename = fileobj.name
             fileobj.close()
-            try:
-                zipobj = zf(filename)
-                filename = wiz.filename or ""
-            except:
-                raise osv.except_osv(_('Error'), _('Given file is not a zip file!'))
-            # read the staff's job file
+            job_reader, contract_reader, staff_reader, desc_to_close, tmpdir = self.read_files(cr, uid, filename)
+            filename = wiz.filename or ""
+
             job_ids = False
-            if zipobj.namelist() and job_file in zipobj.namelist():
-                job_reader = csv.DictReader(zipobj.open(job_file), quotechar='"', delimiter=',', doublequote=False, escapechar='\\')
+            if job_reader:
                 job_ids = self.update_job(cr, uid, ids, job_reader, context=context)
             # Do not raise error for job file because it's just a useful piece of data, but not more.
             # read the contract file
             contract_ids = False
-            if zipobj.namelist() and contract_file in zipobj.namelist():
-                contract_reader = csv.DictReader(zipobj.open(contract_file), quotechar='"', delimiter=',', doublequote=False, escapechar='\\')
+            if contract_reader:
                 contract_ids = self.update_contract(cr, uid, ids, contract_reader, context=context)
-            else:
-                raise osv.except_osv(_('Error'), _('%s not found in given zip file!') % (contract_file,))
-            # read the staff file
-            if zipobj.namelist() and staff_file in zipobj.namelist():
-                # Doublequote and escapechar avoid some problems
-                reader = csv.DictReader(zipobj.open(staff_file), quotechar='"', delimiter=',', doublequote=False, escapechar='\\')
-            else:
-                raise osv.except_osv(_('Error'), _('%s not found in given zip file!') % (staff_file,))
             # UF-2472: Read all lines to check employee's code before importing
             staff_data = []
             staff_codes = []
             duplicates = []
-            for line in reader:
+            staff_seen = []
+            for line in staff_reader:
+                staff_seen.append(line)
                 data = self.read_employee_infos(cr, uid, line)
                 processed += 1
                 if data: # to avoid False value in staff_data list
@@ -516,9 +591,7 @@ class hr_payroll_employee_import(osv.osv_memory):
                 updated = 0
                 # UF-2504 read staff file again for next enumeration
                 # (because already read/looped above for staff codes)
-                reader = csv.DictReader(zipobj.open(staff_file), quotechar='"',
-                    delimiter=',', doublequote=False, escapechar='\\')
-                for i, employee_data in enumerate(reader):
+                for i, employee_data in enumerate(staff_seen):
                     update, nb_created, nb_updated = self.update_employee_infos(cr, uid, employee_data, wiz.id, i)
                     if not update:
                         res = False
@@ -533,6 +606,10 @@ class hr_payroll_employee_import(osv.osv_memory):
             # Delete previous created lines for employee's contracts
             if contract_ids:
                 self.pool.get('hr.contract.msf').unlink(cr, uid, contract_ids)
+            for to_close in desc_to_close:
+                to_close.close()
+            if tmpdir:
+                shutil.rmtree(tmpdir)
         if res:
             message = _("Employee import successful.")
         else:

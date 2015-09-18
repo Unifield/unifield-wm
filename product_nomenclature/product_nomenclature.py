@@ -43,11 +43,13 @@ class product_nomenclature(osv.osv):
             return []
         if context is None:
             context = {}
-        # UF-1662: Set the correct lang of the user, otherwise the system will get by default the wrong en_US value
-        lang_dict = self.pool.get('res.users').read(cr, uid, uid, ['context_lang'])
-        if not context.get('yml_test', False):
-            if lang_dict.get('context_lang'):
-                context['lang'] = lang_dict.get('context_lang')
+            
+        if not context.get('lang') or context.get('lang') == 'en_US':
+            # UF-1662: Set the correct lang of the user, otherwise the system will get by default the wrong en_US value
+            lang_dict = self.pool.get('res.users').read(cr, uid, uid, ['context_lang'])
+            if not context.get('yml_test', False):
+                if lang_dict.get('context_lang'):
+                    context['lang'] = lang_dict.get('context_lang')
 
         fields = ['name', 'parent_id']
         if context.get('withnum') == 1:
@@ -197,8 +199,7 @@ class product_nomenclature(osv.osv):
                     nomen_name = self.read(cr, uid, nomen_id, ['name'])['name']
                     raise osv.except_osv(
                         _('Error'),
-                        _('''The nomenclature '%s' is an Unifield internal
-nomenclature, so you can't remove it''' % nomen_name),
+                        _('''The nomenclature '%s' is an Unifield internal nomenclature, so you can't remove it''') % nomen_name,
                     )
             except ValueError:
                 pass
@@ -789,12 +790,15 @@ class product_product(osv.osv):
         to_overwrite = False
         # The first 2 cases: dup of default_code/xmlid_code not allow
         if context.get('from_import_menu') or context.get('sync_update_execution', False):
+            xmlid_code = vals.get('xmlid_code', default_code)
             if not default_code or not vals.get('xmlid_code', False):
                 raise Exception, "Problem creating product: Missing xmlid_code/default_code in the data"
-            exist_dc_xc = self.search(cr, uid, ['|', ('default_code', '=', default_code),
-                                                     ('xmlid_code', '=', default_code)], context=context)
-            if exist_dc_xc:  # if any of the code exists, report error!,
-                raise Exception, "Problem creating product: Duplicate xmlid_code/default_code found"
+            exist_dc = self.search(cr, uid, [('default_code', '=', default_code)], limit=1, context=context)
+            exist_xc = self.search(cr, uid, [('xmlid_code', 'in', [default_code, xmlid_code])], limit=1, context=context)
+            if exist_dc:  # if any of the code exists, report error!,
+                raise Exception, "Problem creating product: Duplicate default_code found"
+            if exist_xc:  # if any of the code exists, report error!,
+                raise Exception, "Problem creating product: Duplicate xmlid_code found"
         elif default_code:  # cases 3, 4
             vals['xmlid_code'] = default_code
         else:
@@ -1154,8 +1158,7 @@ class product_category(osv.osv):
                     categ_name = self.read(cr, uid, categ_id, ['name'])['name']
                     raise osv.except_osv(
                         _('Error'),
-                        _('''The category '%s' is an Unifield internal
-category, so you can't remove it''' % categ_name),
+                        _('''The category '%s' is an Unifield internal category, so you can't remove it''') % categ_name,
                     )
             except ValueError:
                 pass
@@ -1205,11 +1208,10 @@ class product_uom_categ(osv.osv):
                 cat_id = data_obj.get_object_reference(
                     cr, uid, 'msf_doc_import', data_id)[1]
                 if cat_id in ids:
-                    uom_name = self.read(cr, uid, cat_id, ['name'])['name'] 
+                    uom_name = self.read(cr, uid, cat_id, ['name'])['name']
                     raise osv.except_osv(
                         _('Error'),
-                        _('''The UoM category '%s' is an Unifield internal
-Uom category, so you can't remove it''' % uom_name),
+                        _('''The UoM category '%s' is an Unifield internal Uom category, so you can't remove it''') % uom_name,
                     )
             except ValueError:
                 pass

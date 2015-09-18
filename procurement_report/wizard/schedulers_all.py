@@ -55,6 +55,11 @@ class procurement_purchase_compute_all(osv.osv_memory):
         @param ids: List of IDs selected
         @param context: A standard dictionary
         """
+        if context is None:
+            context = {}
+
+        context.update({'run_id': True})
+
         threaded_calculation = threading.Thread(target=self._procure_calculation_all_purchase, args=(cr, uid, ids, context))
         threaded_calculation.start()
         self.infolog(cr, uid, _(
@@ -63,6 +68,7 @@ class procurement_purchase_compute_all(osv.osv_memory):
         return {'type': 'ir.actions.act_window_close'}
 
 procurement_purchase_compute_all()
+
 
 class procurement_min_max_compute_all(osv.osv_memory):
     _name = 'procurement.min.max.compute.all'

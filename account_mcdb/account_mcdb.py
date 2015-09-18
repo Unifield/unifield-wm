@@ -57,7 +57,7 @@ class account_mcdb(osv.osv):
         'currency_id': fields.many2one('res.currency', string="Currency"),
         'amount_from': fields.float('Begin amount in given currency type'),
         'amount_to': fields.float('Ending amount in given currency type'),
-        'account_type_ids': fields.many2many(obj='account.account.type', rel='account_account_type_mcdb', id1='mcdb_id', id2='account_type_id', 
+        'account_type_ids': fields.many2many(obj='account.account.type', rel='account_account_type_mcdb', id1='mcdb_id', id2='account_type_id',
             string="Account type"),
         'reconcile_id': fields.many2one('account.move.reconcile', string="Reconcile Reference"),
         'ref': fields.char(string='Reference', size=255),
@@ -66,16 +66,16 @@ class account_mcdb(osv.osv):
         'model': fields.selection([('account.move.line', 'Journal Items'), ('account.analytic.line', 'Analytic Journal Items')], string="Type"),
         'display_in_output_currency': fields.many2one('res.currency', string='Display in output currency'),
         'fx_table_id': fields.many2one('res.currency.table', string="FX Table"),
-        'analytic_account_cc_ids': fields.many2many(obj='account.analytic.account', rel="account_analytic_cc_mcdb", id1="mcdb_id", id2="analytic_account_id", 
+        'analytic_account_cc_ids': fields.many2many(obj='account.analytic.account', rel="account_analytic_cc_mcdb", id1="mcdb_id", id2="analytic_account_id",
             string="Cost Center"),
         'rev_analytic_account_cc_ids': fields.boolean('Exclude Cost Center selection'),
-        'analytic_account_fp_ids': fields.many2many(obj='account.analytic.account', rel="account_analytic_fp_mcdb", id1="mcdb_id", id2="analytic_account_id", 
+        'analytic_account_fp_ids': fields.many2many(obj='account.analytic.account', rel="account_analytic_fp_mcdb", id1="mcdb_id", id2="analytic_account_id",
             string="Funding Pool"),
         'rev_analytic_account_fp_ids': fields.boolean('Exclude Funding Pool selection'),
-        'analytic_account_f1_ids': fields.many2many(obj='account.analytic.account', rel="account_analytic_f1_mcdb", id1="mcdb_id", id2="analytic_account_id", 
+        'analytic_account_f1_ids': fields.many2many(obj='account.analytic.account', rel="account_analytic_f1_mcdb", id1="mcdb_id", id2="analytic_account_id",
             string="Free 1"),
         'rev_analytic_account_f1_ids': fields.boolean('Exclude free 1 selection'),
-        'analytic_account_f2_ids': fields.many2many(obj='account.analytic.account', rel="account_analytic_f2_mcdb", id1="mcdb_id", id2="analytic_account_id", 
+        'analytic_account_f2_ids': fields.many2many(obj='account.analytic.account', rel="account_analytic_f2_mcdb", id1="mcdb_id", id2="analytic_account_id",
             string="Free 2"),
         'rev_analytic_account_f2_ids': fields.boolean('Exclude free 2 selection'),
         'reallocated': fields.selection([('reallocated', 'Reallocated'), ('unreallocated', 'NOT reallocated')], string='Reallocated?'),
@@ -87,7 +87,7 @@ class account_mcdb(osv.osv):
         'rev_instance_ids': fields.boolean('Exclude instance selection'),
         'analytic_axis': fields.selection([('fp', 'Funding Pool'), ('f1', 'Free 1'), ('f2', 'Free 2')], string='Display'),
         'rev_analytic_account_dest_ids': fields.boolean('Exclude Destination selection'),
-        'analytic_account_dest_ids': fields.many2many(obj='account.analytic.account', rel="account_analytic_dest_mcdb", id1="mcdb_id", id2="analytic_account_id", 
+        'analytic_account_dest_ids': fields.many2many(obj='account.analytic.account', rel="account_analytic_dest_mcdb", id1="mcdb_id", id2="analytic_account_id",
             string="Destination"),
         'display_journal': fields.boolean('Display journals?'),
         'display_period': fields.boolean('Display periods?'),
@@ -103,6 +103,8 @@ class account_mcdb(osv.osv):
         'display_free1': fields.boolean('Display Free 1?'),
         'display_free2': fields.boolean('Display Free 2?'),
         'user': fields.many2one('res.users', "User"),
+        'cheque_number': fields.char('Cheque Number', size=120),  # BKLG-7
+        'partner_txt': fields.char('Third Party', size=120),  # BKLG-7
     }
 
     _defaults = {
@@ -218,6 +220,7 @@ class account_mcdb(osv.osv):
         """
         Validate current forms and give result
         """
+
         # Some verifications
         if not context:
             context = {}
@@ -230,9 +233,9 @@ class account_mcdb(osv.osv):
         if res_model:
             # Prepare domain values
             # First MANY2MANY fields
-            m2m_fields = [('period_ids', 'period_id'), ('journal_ids', 'journal_id'), ('analytic_journal_ids', 'journal_id'), 
-                ('analytic_account_fp_ids', 'account_id'), ('analytic_account_cc_ids', 'cost_center_id'), 
-                ('analytic_account_f1_ids', 'account_id'), ('analytic_account_f2_ids', 'account_id'), ('analytic_account_dest_ids', 'destination_id'), 
+            m2m_fields = [('period_ids', 'period_id'), ('journal_ids', 'journal_id'), ('analytic_journal_ids', 'journal_id'),
+                ('analytic_account_fp_ids', 'account_id'), ('analytic_account_cc_ids', 'cost_center_id'),
+                ('analytic_account_f1_ids', 'account_id'), ('analytic_account_f2_ids', 'account_id'), ('analytic_account_dest_ids', 'destination_id'),
                 ('instance_ids', 'instance_id')]
             if res_model == 'account.analytic.line':
                 m2m_fields.append(('account_ids', 'general_account_id'))
@@ -297,15 +300,17 @@ class account_mcdb(osv.osv):
                             continue
                     domain.append((m2m[1], operator, tuple([x.id for x in getattr(wiz, m2m[0])])))
             # Then MANY2ONE fields
-            for m2o in [('abs_id', 'statement_id'), ('partner_id', 'partner_id'), ('employee_id', 'employee_id'), 
+            for m2o in [('abs_id', 'statement_id'), ('partner_id', 'partner_id'), ('employee_id', 'employee_id'),
                 ('transfer_journal_id', 'transfer_journal_id'), ('booking_currency_id', 'currency_id'), ('reconcile_id', 'reconcile_id')]:
                 if getattr(wiz, m2o[0]):
                     domain.append((m2o[1], '=', getattr(wiz, m2o[0]).id))
             # Finally others fields
             # LOOKS LIKE fields
-            for ll in [('ref', 'ref'), ('name', 'name')]:
+            for ll in [('ref', 'ref'), ('name', 'name'), ('cheque_number', 'cheque_number'), ('partner_txt', 'partner_txt')]:
                 if getattr(wiz, ll[0]):
                     domain.append((ll[1], 'ilike', '%%%s%%' % getattr(wiz, ll[0])))
+                    if ll[0] == 'cheque_number':
+                        context['selector_display_cheque_number'] = True
             # DOCUMENT CODE fields
             if wiz.document_code and wiz.document_code != '':
                 document_code_field = 'move_id.name'
@@ -376,7 +381,7 @@ class account_mcdb(osv.osv):
             #+ ['|', '&', ('balance', '>=', -600), ('balance', '<=', -400), '&', ('balance', '>=', 400), ('balance', '<=', '600')]
             #+ 3/ FROM is 400, TO is 0.0. Domain is ['|', ('balance', '<=', -400), ('balance', '>=', 400)]
             #+ 4/ FROM is 0.0, TO is 600. Domain is ['&', ('balance', '>=', -600), ('balance', '<=', 600)]
-            
+
             # prepare tuples that would be processed
             booking = ('amount_book_from', 'amount_book_to', 'amount_currency')
             functional = ('amount_func_from', 'amount_func_to', 'balance')
@@ -395,7 +400,10 @@ class account_mcdb(osv.osv):
                 # domain elements initialisation
                 domain_elements = []
                 if mnt_from and mnt_to:
-                    domain_elements = ['|', '&', (field, '>=', min_to), (field, '<=', min_from), '&', (field, '>=', abs_from), (field, '<=', abs_to)]
+                    if min_from == min_to:
+                        domain_elements = ['|', (field, '=', min_to), (field, '=', abs_from)]
+                    else:
+                        domain_elements = ['|', '&', (field, '>=', min_to), (field, '<=', min_from), '&', (field, '>=', abs_from), (field, '<=', abs_to)]
                 elif mnt_from:
                     domain_elements = ['|', (field, '<=', min_from), (field, '>=', abs_from)]
                 elif mnt_to:

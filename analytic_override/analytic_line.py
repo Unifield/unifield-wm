@@ -104,22 +104,25 @@ class account_analytic_line(osv.osv):
             context = {}
         if not 'account_id' in vals:
             raise osv.except_osv(_('Error'), _('No account_id found in given values!'))
-        if 'date' in vals and vals['date'] is not False:
+
+        #US-419: Use the document date and not posting date when checking the validity of analytic account
+        # tech: replaced all date by document_date
+        if 'document_date' in vals and vals['document_date'] is not False:
             account_obj = self.pool.get('account.analytic.account')
-            date = vals['date']
+            document_date = vals['document_date']
             account = account_obj.browse(cr, uid, vals['account_id'], context=context)
             # FIXME: refactoring of next code
-            if date < account.date_start or (account.date != False and date >= account.date):
+            if document_date < account.date_start or (account.date != False and document_date >= account.date):
                 if 'from' not in context or context.get('from') != 'mass_reallocation':
                     raise osv.except_osv(_('Error'), _("The analytic account selected '%s' is not active.") % (account.name or '',))
             if vals.get('cost_center_id', False):
                 cc = account_obj.browse(cr, uid, vals['cost_center_id'], context=context)
-                if date < cc.date_start or (cc.date != False and date >= cc.date):
+                if document_date < cc.date_start or (cc.date != False and document_date >= cc.date):
                     if 'from' not in context or context.get('from') != 'mass_reallocation':
                         raise osv.except_osv(_('Error'), _("The analytic account selected '%s' is not active.") % (cc.name or '',))
             if vals.get('destination_id', False):
                 dest = account_obj.browse(cr, uid, vals['destination_id'], context=context)
-                if date < dest.date_start or (dest.date != False and date >= dest.date):
+                if document_date < dest.date_start or (dest.date != False and document_date >= dest.date):
                     if 'from' not in context or context.get('from') != 'mass_reallocation':
                         raise osv.except_osv(_('Error'), _("The analytic account selected '%s' is not active.") % (dest.name or '',))
         return True
@@ -129,8 +132,8 @@ class account_analytic_line(osv.osv):
         Check that document's date is done BEFORE posting date
         """
         for aal in self.browse(cr, uid, ids):
-            if aal.document_date and aal.date and aal.date < aal.document_date:
-                raise osv.except_osv(_('Error'), _('Posting date (%s) should be later than Document Date (%s).') % (aal.date, aal.document_date))
+            self.pool.get('finance.tools').check_document_date(cr, uid,
+                aal.document_date, aal.date, show_date=True)
         return True
 
     def fields_view_get(self, cr, uid, view_id=None, view_type='form', context=None, toolbar=False, submenu=False):
@@ -146,6 +149,10 @@ class account_analytic_line(osv.osv):
 
         view = super(account_analytic_line, self).fields_view_get(cr, uid, view_id, view_type, context, toolbar, submenu)
         if view_type in ('tree', 'search') and is_funding_pool_view:
+            # commitments activated in configurator ?
+            setup_br = self.pool.get('unifield.setup.configuration').get_config(cr, uid)
+            is_commitment = setup_br and setup_br.import_commitments or False
+
             tree = etree.fromstring(view['arch'])
             # Change OC field
             fields = tree.xpath('/' + view_type + '//field[@name="account_id"]')
@@ -153,10 +160,6 @@ class account_analytic_line(osv.osv):
                 field.set('string', _("Funding Pool"))
                 field.set('domain', "[('category', '=', 'FUNDING'), ('type', '<>', 'view')]")
             if "engagement_line_tree" in context:
-                # commitments activated in configurator ?
-                setup_br = self.pool.get('unifield.setup.configuration').get_config(cr, uid)
-                is_commitment = setup_br and setup_br.import_commitments or False
-
                 if is_commitment:
                     if view_type == 'tree':
                         # BKLG-4: comming from commitments list, allow delete of
@@ -170,12 +173,12 @@ class account_analytic_line(osv.osv):
                             attrs="{'invisible': [('is_engi', '!=', True)]}",
                             confirm='Do you really want to delete selected record(s) ?'
                         )
-                else:
-                    if view_type == 'search':
-                        # BKLG-4/6: commitments desactivated, no ENGI filter
-                        filter_nodes = tree.xpath('/search/group[1]/filter[@name="intl_engagements"]')
-                        if filter_nodes:
-                            filter_nodes[0].getparent().remove(filter_nodes[0])
+
+            if view_type == 'search' and not is_commitment:
+                # BKLG-4/6: commitments desactivated, no ENGI filter
+                filter_nodes = tree.xpath('/search/group[1]/filter[@name="intl_engagements"]')
+                if filter_nodes:
+                    filter_nodes[0].getparent().remove(filter_nodes[0])
             view['arch'] = etree.tostring(tree)
         return view
 
@@ -195,8 +198,10 @@ class account_analytic_line(osv.osv):
             if not context.get('sync_update_execution', False) or not vals.get('document_date', False):
                 logging.getLogger('init').info('AAL: set document_date')
                 vals['document_date'] = strftime('%Y-%m-%d')
-        if vals.get('document_date', False) and vals.get('date', False) and vals.get('date') < vals.get('document_date'):
-            raise osv.except_osv(_('Error'), _('Posting date (%s) should be later than Document Date (%s).') % (vals.get('date', False), vals.get('document_date', False)))
+        if vals.get('document_date', False) and vals.get('date', False):
+            self.pool.get('finance.tools').check_document_date(cr, uid,
+                vals.get('document_date'), vals.get('date'), show_date=True,
+                context=context)
         # Default behaviour
         res = super(account_analytic_line, self).create(cr, uid, vals, context=context)
         # Check date
@@ -226,7 +231,7 @@ class account_analytic_line(osv.osv):
         self._check_document_date(cr, uid, ids)
         return res
 
-    def reverse(self, cr, uid, ids, posting_date=strftime('%Y-%m-%d'), context=None):
+    def reverse(self, cr, uid, ids, posting_date=None, context=None):
         """
         Reverse an analytic line:
          - keep date as source_date
@@ -236,6 +241,8 @@ class account_analytic_line(osv.osv):
             context = {}
         if isinstance(ids, (int, long)):
             ids = [ids]
+        if posting_date is None:
+            posting_date = strftime('%Y-%m-%d')
         res = []
         for al in self.browse(cr, uid, ids, context=context):
             vals = {

@@ -20,9 +20,21 @@
 ##############################################################################
 
 import time
+import pooler
 from osv import osv
 from tools.translate import _
 from report import report_sxw
+from report_webkit.webkit_report import WebKitParser
+
+
+def getIds(self, cr, uid, ids, context):
+    if context is None:
+        context = {}
+    if context.get('from_domain') and 'search_domain' in context:
+        table_obj = pooler.get_pool(cr.dbname).get(self.table)
+        ids = table_obj.search(cr, uid, context.get('search_domain'), limit=5000)
+    return ids
+
 
 class packing_list(report_sxw.rml_parse):
     def __init__(self, cr, uid, name, context=None):
@@ -55,10 +67,11 @@ class packing_list(report_sxw.rml_parse):
                 'total_weight': 0.00,
                 'nb_parcel': 0,
             })
-            res[pf.ppl_id.name]['pf'].append(pf)
-            res[pf.ppl_id.name]['total_volume'] += pf.total_volume
-            res[pf.ppl_id.name]['total_weight'] += pf.total_weight
-            res[pf.ppl_id.name]['nb_parcel'] += pf.num_of_packs
+            if not pf.not_shipped:
+                res[pf.ppl_id.name]['pf'].append(pf)
+                res[pf.ppl_id.name]['total_volume'] += pf.total_volume
+                res[pf.ppl_id.name]['total_weight'] += pf.total_weight
+                res[pf.ppl_id.name]['nb_parcel'] += pf.num_of_packs
 
         sort_keys = sorted(res.keys())
 
@@ -108,7 +121,10 @@ class packing_list(report_sxw.rml_parse):
             elif field == 'street2':
                 return addr.street2
             elif field == 'city':
-                return '%s %s' % (addr.zip, addr.city)
+                zip = ""
+                if addr.zip is not False:
+                    zip = addr.zip
+                return '%s %s' % (zip, addr.city)
             elif field == 'country':
                 return addr.country_id and addr.country_id.name or ''
             elif field == 'phone':
@@ -127,3 +143,22 @@ class packing_list(report_sxw.rml_parse):
         return super(packing_list, self).set_context(objects, data, ids, report_type=report_type)
 
 report_sxw.report_sxw('report.packing.list', 'shipment', 'addons/msf_outgoing/report/packing_list.rml', parser=packing_list, header="external")
+
+
+class packing_list_xls(WebKitParser):
+
+    def __init__(self, name, table, rml=False, parser=report_sxw.rml_parse, header='external', store=False):
+        WebKitParser.__init__(self, name, table, rml=rml, parser=parser, header=header, store=store)
+
+    def create_single_pdf(self, cr, uid, ids, data, report_xml, context=None):
+        report_xml.webkit_debug = 1
+        report_xml.header = " "
+        report_xml.webkit_header.html = "${_debug or ''|n}"
+        return super(packing_list_xls, self).create_single_pdf(cr, uid, ids, data, report_xml, context)
+
+    def create(self, cr, uid, ids, data, context=None):
+        ids = getIds(self, cr, uid, ids, context)
+        a = super(packing_list_xls, self).create(cr, uid, ids, data, context)
+        return (a[0], 'xls')
+
+packing_list_xls('report.packing.list.xls', 'shipment', 'msf_outgoing/report/packing_list_xls.mako', parser=packing_list)

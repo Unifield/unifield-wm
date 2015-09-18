@@ -147,6 +147,7 @@ product_supply_source()
 
 class product_justification_code(osv.osv):
     _name = "product.justification.code"
+    _rec_name = 'code'
     _columns = {
         'code': fields.char('Justification Code', size=32, required=True, translate=True),
         'description': fields.char('Justification Description', size=256, required=True),
@@ -204,10 +205,12 @@ class product_attributes(osv.osv):
     def init(self, cr):
         if hasattr(super(product_attributes, self), 'init'):
             super(product_attributes, self).init(cr)
+        mod_obj = self.pool.get('ir.module.module')
+        mode = mod_obj.search(cr, 1, [('name', '=', 'product_attributes'), ('state', '=', 'to install')]) and 'init' or 'update'
         logging.getLogger('init').info('HOOK: module product_attributes: loading product_attributes_data.xml')
         pathname = path.join('product_attributes', 'product_attributes_data.xml')
         file = tools.file_open(pathname)
-        tools.convert_xml_import(cr, 'product_attributes', file, {}, mode='init', noupdate=False)
+        tools.convert_xml_import(cr, 'product_attributes', file, {}, mode=mode, noupdate=True)
 
     def _get_nomen(self, cr, uid, ids, field_name, args, context=None):
         res = {}
@@ -424,6 +427,8 @@ class product_attributes(osv.osv):
         'fit_value': fields.text(string='Form', translate=True),
         'function_value': fields.text(string='Form', translate=True),
         'standard_ok': fields.boolean(string='Standard'),
+        'soq_weight': fields.float(digits=(16,5), string='SoQ Weight'),
+        'soq_volume': fields.float(digits=(16,5), string='SoQ Volume'),
         'vat_ok': fields.function(_get_vat_ok, method=True, type='boolean', string='VAT OK', store=False, readonly=True),
     }
 

@@ -62,6 +62,42 @@ class sync_order_label(osv.osv):
 
 sync_order_label()
 
+class sync_sale_order_line_split(osv.osv):
+    _name = 'sync.sale.order.line.split'
+    _rec_name = 'partner_id'
+
+    _columns = {
+        'partner_id': fields.many2one(
+            'res.partner',
+            'Partner',
+            readonly=True,
+        ),
+        'old_sync_order_line_db_id': fields.text(
+            string='Sync order line DB Id of the splitted line',
+            required=True,
+            readonly=True,
+        ),
+        'new_sync_order_line_db_id': fields.text(
+            string='Sync order line DB ID of the new created line',
+            required=True,
+            readonly=True,
+        ),
+        'old_line_qty': fields.float(
+            digits=(16,2),
+            string='Old line qty',
+            required=True,
+            readonly=True,
+        ),
+        'new_line_qty': fields.float(
+            digit=(16,2),
+            string='New line qty',
+            required=True,
+            readonly=True,
+        ),
+    }
+
+sync_sale_order_line_split()
+
 class sale_order_sourcing_progress(osv.osv):
     _name = 'sale.order.sourcing.progress'
     _rec_name = 'order_id'
@@ -861,6 +897,21 @@ The parameter '%s' should be an browse_record instance !""") % (method, self._na
         self.analytic_distribution_checks(cr, uid, order_brw_list)
 
         for order in order_brw_list:
+            no_price_lines = []
+            if order.order_type == 'regular':
+                cr.execute('SELECT line_number FROM sale_order_line WHERE (price_unit*product_uom_qty < 0.01 OR price_unit = 0.00) AND order_id = %s', (order.id,))
+                line_errors = cr.dictfetchall()
+                for l_id in line_errors:
+                    if l_id not in no_price_lines:
+                        no_price_lines.append(l_id['line_number'])
+
+            if no_price_lines:
+                errors = ' / '.join(str(x) for x in no_price_lines)
+                raise osv.except_osv(
+                    _('Warning'),
+                    _('FO cannot be validated as line cannot have unit price of zero or subtotal of zero. Lines in exception: %s') % errors,
+                )
+
             # 2/ Check if there is lines in order
             if len(order.order_line) < 1:
                 raise osv.except_osv(_('Error'), _('You cannot validate a Field order without line !'))
@@ -977,6 +1028,7 @@ The parameter '%s' should be an browse_record instance !""") % (method, self._na
                                                               'order_line': [],
                                                               'loan_id': so.loan_id and so.loan_id.id or False,
                                                               'delivery_requested_date': so.delivery_requested_date,
+                                                              'transport_type': so.transport_type,
                                                               'split_type_sale_order': fo_type,
                                                               'ready_to_ship_date': line.order_id.ready_to_ship_date,
                                                               'original_so_id_sale_order': so.id}, context=dict(context, keepDateAndDistrib=True, keepClientOrder=True))
@@ -1498,6 +1550,7 @@ The parameter '%s' should be an browse_record instance !""") % (method, self._na
         data_obj = self.pool.get('ir.model.data')
         sol_obj = self.pool.get('sale.order.line')
         config_obj = self.pool.get('unifield.setup.configuration')
+        prsd_obj = self.pool.get('procurement.request.sourcing.document')
         date_tools = self.pool.get('date.tools')
         fields_tools = self.pool.get('fields.tools')
 
@@ -1561,6 +1614,12 @@ The parameter '%s' should be an browse_record instance !""") % (method, self._na
 
                     if order.procurement_request:
                         move_obj.action_confirm(cr, uid, [move_id], context=context)
+                        prsd_obj.chk_create(cr, uid, {
+                            'order_id': order.id,
+                            'sourcing_document_id': picking_id,
+                            'sourcing_document_model': 'stock.picking',
+                            'sourcing_document_type': picking_data.get('type'),
+                        }, context=context)
 
                     """
                     We update the procurement and the purchase orders if we are treating o FO which is
@@ -1683,6 +1742,7 @@ The parameter '%s' should be an browse_record instance !""") % (method, self._na
                 if order.procurement_request:
                     proc = proc_obj.browse(cr, uid, [proc_id], context=context)
                     pick_id = proc and proc[0] and proc[0].move_id and proc[0].move_id.picking_id and proc[0].move_id.picking_id.id or False
+
                     if pick_id:
                         picks_to_check.add(pick_id)
 
@@ -2200,7 +2260,8 @@ class sale_order_line(osv.osv):
                 'created_by_rfq_line': fields.many2one('purchase.order.line', string='Created by RfQ line'),
                 'dpo_line_id': fields.many2one('purchase.order.line', string='DPO line'),
                 'sync_sourced_origin': fields.char(string='Sync. Origin', size=256),
-                'cancel_split_ok': fields.boolean(
+                'cancel_split_ok': fields.float(
+                    digits=(16,2),
                     string='Cancel split',
                     help='If the line has been canceled/removed on the splitted FO',
                 ),
@@ -2316,7 +2377,8 @@ class sale_order_line(osv.osv):
             picking_ids = set()
             move_ids = move_obj.search(cr, uid, [('sale_line_id', '=', line.id), ('state', 'not in', ['done', 'cancel']), ('in_out_updated', '=', False)], context=context)
             for move in move_obj.read(cr, uid, move_ids, ['picking_id'], context=context):
-                picking_ids.add(move['picking_id'][0])
+                if move['picking_id']:
+                    picking_ids.add(move['picking_id'][0])
 
             if line.order_id.procurement_request and line.order_id.location_requestor_id.usage == 'customer':
                 move_obj.write(cr, uid, move_ids, {'state': 'draft'}, context=context)
@@ -2332,7 +2394,8 @@ class sale_order_line(osv.osv):
                     pick_obj.validate(cr, uid, [pick.id])
 
             if line.original_line_id:
-                self.write(cr, uid, [line.original_line_id.id], {'cancel_split_ok': True}, context=context)
+                cancel_split_qty = line.original_line_id.cancel_split_ok + line.product_uom_qty
+                self.write(cr, uid, [line.original_line_id.id], {'cancel_split_ok': cancel_split_qty}, context=context)
 
             # UFTP-82:
             # do not delete cancelled IR line from PO cancelled
@@ -2631,7 +2694,12 @@ class sale_order_line(osv.osv):
         '''
         context = context is None and {} or context
 
-        if not context.get('noraise') and not context.get('import_in_progress'):
+        if context.get('button') in ['button_remove_lines', 'check_lines_to_fix', 'add_multiple_lines', 'wizard_import_ir_line']:
+            return True
+        cond1 = not context.get('noraise')
+        cond2 = not context.get('import_in_progress')
+
+        if cond1 and cond2:
             empty_lines = False
             if ids and not 'product_uom_qty' in vals:
                 empty_lines = self.search(cr, uid, [
@@ -2719,6 +2787,7 @@ sale_order_line()
 
 class sale_order_line_cancel(osv.osv):
     _name = 'sale.order.line.cancel'
+    _rec_name = 'sync_order_line_db_id'
 
     _columns = {
         'sync_order_line_db_id': fields.text(string='Sync order line DB ID', required=True),
@@ -2734,6 +2803,7 @@ sale_order_line_cancel()
 
 class expected_sale_order_line(osv.osv):
     _name = 'expected.sale.order.line'
+    _rec_name = 'order_id'
 
     _columns = {
         'order_id': fields.many2one(
@@ -2936,6 +3006,7 @@ sale_order_cancelation_wizard()
 
 class sale_order_leave_close(osv.osv_memory):
     _name = 'sale.order.leave.close'
+    _rec_name = 'order_id'
 
     _columns = {
         'wizard_id': fields.many2one(
