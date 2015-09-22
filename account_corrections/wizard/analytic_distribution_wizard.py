@@ -25,6 +25,7 @@ from osv import osv
 from osv import fields
 from tools.translate import _
 import time
+import datetime
 from collections import defaultdict
 
 class analytic_distribution_wizard(osv.osv_memory):
@@ -143,8 +144,30 @@ class analytic_distribution_wizard(osv.osv_memory):
             raise osv.except_osv(_('Warning'), _('No period found for creating sequence on the given date: %s') % (wizard.date or ''))
         period = self.pool.get('account.period').browse(cr, uid, period_ids)[0]
         move_prefix = self.pool.get('res.users').browse(cr, uid, uid, context).company_id.instance_id.move_prefix
-        seqnum = self.pool.get('ir.sequence').get_id(cr, uid, journal.sequence_id.id, context={'fiscalyear_id': period.fiscalyear_id.id})
-        entry_seq = "%s-%s-%s" % (move_prefix, code, seqnum)
+        
+        # is where OD analytic entries for the same JE for current day date ?
+        # => considered as the same accounting write transaction:
+        # => use same sequence number to regroup cor/rev entries for consistency
+        dtools_obj = self.pool.get('date.tools')
+        dt_now = datetime.datetime.now().date()
+        dt_now_orm = dtools_obj.date2orm(dt_now)
+        dt_tomorrow_orm = dtools_obj.date2orm(
+            dt_now + datetime.timedelta(days=1))
+        je_analytic_cor_domain = [
+            ('move_id.move_id', '=', wizard.move_line_id.move_id.id),
+            ('journal_id', '=', correction_journal_id),
+            ('write_date', '>=', dt_now_orm + ' 00:00:00'),
+            ('write_date', '<', dt_tomorrow_orm + ' 00:00:00'),
+        ]
+        cor_rev_ids = ana_obj.search(cr, uid, je_analytic_cor_domain,
+            context=context)
+        if cor_rev_ids:
+            entry_seq = ana_obj.browse(cr, uid, cor_rev_ids[0],
+                context=context).entry_sequence
+        else:
+            # DEFAULT: get next sequence number
+            seqnum = self.pool.get('ir.sequence').get_id(cr, uid, journal.sequence_id.id, context={'fiscalyear_id': period.fiscalyear_id.id})
+            entry_seq = "%s-%s-%s" % (move_prefix, code, seqnum)
 
         #####
         ## FUNDING POOL
