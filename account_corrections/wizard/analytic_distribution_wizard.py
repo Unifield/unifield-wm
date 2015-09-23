@@ -148,19 +148,30 @@ class analytic_distribution_wizard(osv.osv_memory):
         # is where OD analytic entries for the same JE for current day date ?
         # => considered as the same accounting write transaction:
         # => use same sequence number to regroup cor/rev entries for consistency
+        cor_rev_ids = False
+        
         dtools_obj = self.pool.get('date.tools')
         dt_now = datetime.datetime.now().date()
         dt_now_orm = dtools_obj.date2orm(dt_now)
         dt_tomorrow_orm = dtools_obj.date2orm(
             dt_now + datetime.timedelta(days=1))
-        je_analytic_cor_domain = [
-            ('move_id.move_id', '=', wizard.move_line_id.move_id.id),
-            ('journal_id', '=', correction_journal_id),
-            ('write_date', '>=', dt_now_orm + ' 00:00:00'),
-            ('write_date', '<', dt_tomorrow_orm + ' 00:00:00'),
-        ]
-        cor_rev_ids = ana_obj.search(cr, uid, je_analytic_cor_domain,
-            context=context)
+        
+        # check pure AD case (JE as no cor/rev JIs)
+        am_obj = self.pool.get('account.move.line')
+        rev_jis_count = am_obj.search(cr, uid, [
+            ('move_id', '=', wizard.move_line_id.move_id.id),
+            ('corrected', '=', True),
+        ], context=context, count=True)
+        if not rev_jis_count:            
+            je_analytic_cor_domain = [
+                ('move_id.move_id', '=', wizard.move_line_id.move_id.id),
+                ('journal_id', '=', correction_journal_id),
+                ('write_date', '>=', dt_now_orm + ' 00:00:00'),
+                ('write_date', '<', dt_tomorrow_orm + ' 00:00:00'),
+            ]
+            cor_rev_ids = ana_obj.search(cr, uid, je_analytic_cor_domain,
+                context=context)
+            
         if cor_rev_ids:
             entry_seq = ana_obj.browse(cr, uid, cor_rev_ids[0],
                 context=context).entry_sequence
