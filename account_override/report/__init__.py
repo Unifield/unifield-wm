@@ -3,3 +3,4 @@ import account_print_invoice
 import report_open_invoices
 import report_allocation_synthesis_invoices
 import report_allocation_invoices
+import account_balance_sheet
