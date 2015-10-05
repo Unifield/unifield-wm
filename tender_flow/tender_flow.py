@@ -1372,7 +1372,15 @@ class procurement_order(osv.osv):
             self.write(cr, uid, ids, {'rfq_id': rfq_id, 'rfq_line_id': rfq_line_id}, context=context)
             
             # log message concerning RfQ creation
-            rfq_obj.log(cr, uid, rfq_id, "The Request for Quotation '%s' has been created and must be completed before purchase order creation."%rfq_obj.browse(cr, uid, rfq_id, context=context).name, context={'rfq_ok': 1})
+            rfq_name = rfq_obj.browse(cr, uid, rfq_id, context=context).name
+            rfq_obj.log(cr, uid, rfq_id, "The Request for Quotation '%s' has been created and must be completed before purchase order creation."%rfq_name, context={'rfq_ok': 1})
+
+            msg = _("The line #%s of %s has been sourced on the RfQ %s") % (
+                sale_order_line.line_number,
+                sale_order.name,
+                rfq_name,
+            )
+            self.infolog(cr, uid, msg)
         # state of procurement is Tender
         self.write(cr, uid, ids, {'state': 'rfq'}, context=context)
         
@@ -1407,6 +1415,7 @@ class procurement_order(osv.osv):
                                                         'priority': sale_order.priority,
                                                         'warehouse_id': sale_order.shop_id.warehouse_id.id,
                                                         'requested_date': proc.date_planned,
+     
                                                         }, context=context)
             prsd_obj.chk_create(cr, uid, {
                 'order_id': sale_order.id,
@@ -1428,7 +1437,16 @@ class procurement_order(osv.osv):
             self.write(cr, uid, ids, {'tender_id': tender_id, 'tender_line_id': tender_line_id}, context=context)
             
             # log message concerning tender creation
-            tender_obj.log(cr, uid, tender_id, "The tender '%s' has been created and must be completed before purchase order creation."%tender_obj.browse(cr, uid, tender_id, context=context).name)
+            tender_name = tender_obj.browse(cr, uid, tender_id, context=context).name
+            tender_obj.log(cr, uid, tender_id, "The tender '%s' has been created and must be completed before purchase order creation."%tender_name)
+
+            msg = _("The line #%s of %s has been sourced on the tender %s") % (
+                sale_order_line.line_number,
+                sale_order.name,
+                tender_name,
+            )
+            self.infolog(cr, uid, msg)
+
         # state of procurement is Tender
         self.write(cr, uid, ids, {'state': 'tender'}, context=context)
         
@@ -1473,10 +1491,21 @@ class procurement_order(osv.osv):
         result = super(procurement_order, self).action_po_assign(cr, uid, ids, context=context)
         # The quotation 'SO001' has been converted to a sales order.
         if result:
+            po_name = po_obj.read(cr, uid, result, ['name'], context=context)['name']
+            sol_ids = sol_obj.search(cr, uid, [
+                ('procurement_id', 'in', ids),
+            ], context=context)
+            sol_flds = ['line_number', 'order_id', 'po_cft']
+            for sol in sol_obj.read(cr, uid, sol_ids, sol_flds, context=context):
+                msg = _("The line #%s of %s has been sourced to the %sPO %s") % (
+                    sol['line_number'], sol['order_id'][1],
+                    sol['po_cft'] == 'dpo' and 'D' or '', po_name,
+                )
+                self.infolog(cr, uid, msg)
             # do not display a log if we come from po update backward update of so
             data = self.read(cr, uid, ids, ['so_back_update_dest_po_id_procurement_order'], context=context)
             if not data[0]['so_back_update_dest_po_id_procurement_order']:
-                po_obj.log(cr, uid, result, "The Purchase Order '%s' has been created following 'on order' sourcing."%po_obj.browse(cr, uid, result, context=context).name)
+                po_obj.log(cr, uid, result, "The Purchase Order '%s' has been created following 'on order' sourcing."%po_name)
         return result
     
     def po_values_hook(self, cr, uid, ids, context=None, *args, **kwargs):
