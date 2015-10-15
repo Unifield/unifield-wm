@@ -11,42 +11,24 @@ import sys
 class SyncPerfomance(ResourcingTest):
 
     def setUp(self):
-        """
-        Create a PO at Project side to Coordo with
-        two lines.
-        :return:
-        """
-
         super(SyncPerfomance, self).setUp()
 
-        # C1
-        self.c_so_obj = self.c1.get('sale.order')
-        self.c_sol_obj = self.c1.get('sale.order.line')
-        self.c_po_obj = self.c1.get('purchase.order')
-        self.c_pol_obj = self.c1.get('purchase.order.line')
-        self.c_partner_obj = self.c1.get('res.partner')
-        self.c_lc_obj = self.c1.get('sale.order.leave.close')
-        self.c_so_cancel_obj = self.c1.get('sale.order.cancelation.wizard')
-
         # P1
-        self.p_so_obj = self.p1.get('sale.order')
-        self.p_sol_obj = self.p1.get('sale.order.line')
         self.p_po_obj = self.p1.get('purchase.order')
         self.p_pol_obj = self.p1.get('purchase.order.line')
         self.p_partner_obj = self.p1.get('res.partner')
-        self.p_lc_obj = self.p1.get('sale.order.leave.close')
-        self.p_so_cancel_obj = self.p1.get('sale.order.cancelation.wizard')
         self.start_time = time.time()
 
     def tearDown(self):
         duration = time.time() - self.start_time
-        #self.duration += duration
-
         # write time result to be able to bench
         #print "%s: %.3f" % (self.id(), duration)
         super(SyncPerfomance, self).tearDown()
 
     def createObject(self, object_number=1):
+        """Create as much PO as object_number at Project side with two lines.
+        :return:
+        """
         for i in range(object_number):
             # Create a PO at P1 with two products to C1
             # Prepare values for the field order
@@ -54,11 +36,9 @@ class SyncPerfomance(ResourcingTest):
             prod_log2_id = self.get_record(self.p1, 'prod_log_2')
             uom_pce_id = self.get_record(self.p1, 'product_uom_unit', module='product')
             location_id = self.get_record(self.p1, 'stock_location_stock', module='stock')
-
             partner_name = self.get_db_partner_name(self.c1)
             partner_ids = self.p_partner_obj.search([('name', '=', partner_name)])
             distrib_id = self.create_analytic_distribution(self.p1)
-
             order_values = {
                 'order_type': 'regular',
                 'partner_id': partner_ids[0],
@@ -68,7 +48,8 @@ class SyncPerfomance(ResourcingTest):
             }
 
             change_vals = self.p_po_obj.\
-                onchange_partner_id(None, partner_ids[0], time.strftime('%Y-%m-%d')).get('value', {})
+                onchange_partner_id(None, partner_ids[0],
+                                    time.strftime('%Y-%m-%d')).get('value', {})
             order_values.update(change_vals)
 
             self.p_po_id = self.p_po_obj.create(order_values)
@@ -93,38 +74,42 @@ class SyncPerfomance(ResourcingTest):
             })
             self.p_pol_obj.create(line_values)
 
-            # Validate the sale order, to have them synchronized
+            # Validate the Purchase Order in order to have it synchronized to
+            # the Coordo
             self.p1.exec_workflow('purchase.order', 'purchase_confirm', self.p_po_id)
 
     def synchronizeInstances(self):
+        '''Synchronize the instances to create Sale Order on Coordo side with
+        the Purchase Order of the Project side.
+        Synchronization process is what we want to measure here.
+        '''
+        # Synchronize
+        self.synchronize(self.p1)
+        self.synchronize(self.c1)
 
-            # Synchronize
-            self.synchronize(self.p1)
-            self.synchronize(self.c1)
 
+   # def test_010_objectCreation(self):
+   #     """Create object, synchronize, and check the synchronization was done
+   #     correctly
+   #     :return:
+   #     """
+   #     self.synchronizeInstances()
+   #     self.createObject(object_number=10)
 
-    def test_010_objectCreation(self):
-        """Create object, synchronize, and check the synchronization was done
-        correctly
-        :return:
-        """
+   # def test_020_synchronisation(self):
+   #     """Do the synchronization in a separate test as we want to improve
+   #     synchronization performance, it is better to do it in a separate test.
+   #     That's why the order of these tests is very important. They are
+   #     launched with there alphabetical name priority.
+   #     """
+   #     self.synchronizeInstances()
+
+    def test_030_1000objectsCreation(self):
         self.synchronizeInstances()
-        self.createObject(object_number=10)
+        self.createObject(object_number=1000)
 
-    def test_020_synchronisation(self):
-        """Do the synchronization in a separate test as we want to improve
-        synchronization performance, it is better to do it in a separate test.
-        That's why the order of these tests is very important. They are
-        launched with there alphabetical name priority.
-        """
-        self.synchronizeInstances()
-
-    def test_030_100objectsCreation(self):
-        self.synchronizeInstances()
-        self.createObject(object_number=100)
-
-    def test_040_100synchronisations(self):
-        self.synchronizeInstances()
+   # def test_040_1000synchronisations(self):
+   #     self.synchronizeInstances()
 
 
 def get_test_class():

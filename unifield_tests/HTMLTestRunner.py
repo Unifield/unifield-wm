@@ -526,6 +526,7 @@ class _TestResult(TestResult):
         self.success_count = 0
         self.failure_count = 0
         self.error_count = 0
+        self.start_time = 0
         self.verbosity = verbosity
 
         # result is a list of result in 4 tuple
