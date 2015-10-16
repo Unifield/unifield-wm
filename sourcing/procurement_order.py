@@ -66,8 +66,14 @@ The parameter '%s' should be an browse_record instance !""") % (method, self._na
         return True
 
     _columns = {
-        'supplier': fields.many2one('res.partner', 'Supplier'),
-        'po_cft': fields.selection(_SELECTION_PO_CFT, string="PO/CFT"),
+        'supplier': fields.many2one(
+            'res.partner',
+            string='Supplier',
+        ),
+        'po_cft': fields.selection(
+            selection=_SELECTION_PO_CFT,
+            string="PO/CFT",
+        ),
         'unique_rule_type': fields.char(
             size=128,
             string='Unique Replenishment rule type',
@@ -76,7 +82,14 @@ The parameter '%s' should be an browse_record instance !""") % (method, self._na
 rules if the supplier 'Order creation method' is set to 'Requirements by Order'.
 """,
         ),
-        'from_splitted_po_line': fields.boolean(string='From splitted PO line'),
+        'from_splitted_po_line': fields.boolean(
+            string='From splitted PO line',
+        ),
+        'sale_line_id': fields.many2one(
+            'sale.order.line',
+            string='FO/IR line sourced',
+            help="The FO/IR sourced by the procurement order",
+        ),
     }
 
     def copy_data(self, cr, uid, copy_id, default_values=None, context=None):
@@ -85,6 +98,9 @@ rules if the supplier 'Order creation method' is set to 'Requirements by Order'.
 
         if not default_values.get('from_splitted_po_line'):
             default_values['from_splitted_po_line'] = False
+
+        if not default_values.get('sale_line_id'):
+            default_values['sale_line_id'] = False
 
         return super(procurement_order, self).copy_data(cr, uid, copy_id, default_values, context=context)
 
