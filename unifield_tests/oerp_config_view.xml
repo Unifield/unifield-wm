@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<openerp>
+    <data>
+
+        <menuitem
+            id="menu_automatic_tests"
+            name="Automatic Tests"
+            parent="base.menu_custom" />
+
+        <record id="test_db_mapping_list_view" model="ir.ui.view">
+            <field name="name">test.db.mapping.list.view</field>
+            <field name="model">test.db.mapping</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="DB mapping" editable="top" hide_delete_button="True" hide_new_button="True">
+                    <field name="keyword" readonly="True" />
+                    <field name="instance_id" attrs="{'readonly': [('custom_name_ok', '=', True)], 'required': [('custom_name_ok', '=', False)]}" widget="selection" />
+                    <field name="custom_name_ok" />
+                    <field name="custom_name" attrs="{'readonly': [('custom_name_ok', '=', False)], 'required': [('custom_name_ok', '=', True)]}" />
+                    <field name="db_to_use" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_test_db_mapping_list" model="ir.actions.act_window">
+            <field name="name">DB Mapping for Tests</field>
+            <field name="res_model">test.db.mapping</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_type">form</field>
+        </record>
+
+        <menuitem
+            action="action_test_db_mapping_list"
+            id="menu_test_db_mapping_list"
+            parent="menu_automatic_tests" />
+
+    </data>
+</openerp>

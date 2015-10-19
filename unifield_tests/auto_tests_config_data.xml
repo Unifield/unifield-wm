@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<openerp>
+    <data>
+
+        <record id="test_db_mapping_sync_server" model="test.db.mapping">
+            <field name="keyword">sync_server</field>
+            <field name="custom_name_ok" eval="True" />
+        </record>
+
+        <record id="test_db_mapping_hq1" model="test.db.mapping">
+            <field name="keyword">hq1</field>
+        </record>
+
+        <record id="test_db_mapping_hq1c1" model="test.db.mapping">
+            <field name="keyword">hq1c1</field>
+        </record>
+
+        <record id="test_db_mapping_hq1c1p1" model="test.db.mapping">
+            <field name="keyword">hq1c1p1</field>
+        </record>
+
+        <record id="test_db_mapping_hq1c2" model="test.db.mapping">
+            <field name="keyword">hq1c2</field>
+        </record>
+
+        <record id="test_db_mapping_hq1c2p1" model="test.db.mapping">
+            <field name="keyword">hq1c2p1</field>
+        </record>
+
+        <record id="test_db_mapping_hq2" model="test.db.mapping">
+            <field name="keyword">hq2</field>
+        </record>
+
+        <record id="test_db_mapping_hq2c1" model="test.db.mapping">
+            <field name="keyword">hq2c1</field>
+        </record>
+
+        <record id="test_db_mapping_hq2c1p1" model="test.db.mapping">
+            <field name="keyword">hq2c1p1</field>
+        </record>
+
+    </data>
+</openerp>
