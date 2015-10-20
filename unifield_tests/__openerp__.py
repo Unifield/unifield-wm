@@ -34,10 +34,14 @@
     "init_xml" : [
         'oerp_config_view.xml',
         'auto_tests_config_data.xml',
+        'automatic_tests_view.xml',
     ],
     "update_xml" : [],
     "demo_xml" : [],
     "test": [],
+    "function": [
+        ('automatic.test.template', 'update_automatic_test_template'),
+    ],
     "installable": True,
     "active": False
 }

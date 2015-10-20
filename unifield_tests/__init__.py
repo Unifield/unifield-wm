@@ -22,5 +22,6 @@
 ##############################################################################
 
 import oerp_config
+import automatic_tests
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

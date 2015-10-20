@@ -28,6 +28,8 @@ class UnifieldTest(unittest.TestCase):
     test_module_name = 'unifield_tests'
     test_module_obj_name = 'unifield.test'
     already_loaded = False
+    description = ''        # Description of the test class (used in Automated Tests)
+    category = 'Unifield'   # Category of the test (used in Automatic Tests)
 
     # FIXME/TODO: Make unittest.TestCase inherit from oerplib.error class because of RPCError that could be raised by unittest.TestCase
 

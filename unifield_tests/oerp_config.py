@@ -123,8 +123,8 @@ class test_db_mapping(osv.osv):
         if db_name:
             same_maps = self.search(cr, uid, [
                 ('db_to_use', '=', db_name),
-            ], limit=1, context=context)
-            if same_maps:
+            ], limit=2, context=context)
+            if len(same_maps) > 1:
                 raise osv.except_osv(
                     _('Error'),
                     _('You cannot have a DB name mapped twice.'),
