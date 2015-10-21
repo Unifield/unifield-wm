@@ -25,9 +25,10 @@ import threading
 import unittest
 import time
 
+import pooler
+
 import unifield_unittest
 
-from os import walk
 from os import path
 
 from osv import osv
@@ -40,11 +41,11 @@ class automatic_test_template(osv.osv):
     _description = 'Template of the automatic test'
 
     def update_automatic_test_template(self, cr, uid, *a, **b):
+        """
+        Create automatic test templates according to test in unifield_tests
+        module.
+        """
         tmpl_obj = self.pool.get('automatic.test.template')
-        # Prepare some values
-        test_modules = []   # moduls thar are in 'tests' directory
-        added_paths = []    # path added to PYTHONPATH
-        test_classes = []
 
         test_dir = '%s/tests/' % path.dirname(path.realpath(__file__))
         loader = unittest.loader.TestLoader()
@@ -178,17 +179,17 @@ class automatic_test_campaign(osv.osv):
                     'state': 'not_run',
                 }, context=context))
 
-        self.run_tests(cr, uid, ids, context=context)
-#        thread = threading.Thread(
-#            target=self.run_tests,
-#            args=(cr, uid, ids, context),
-#        )
-#        thread.start()
-
         self.write(cr, uid, ids, {
             'state': 'progress',
             'start_date': time.strftime('%Y-%m-%d %H:%M:%S'),
         }, context=context)
+
+#        self.run_tests(cr, uid, ids, context=context)
+        thread = threading.Thread(
+            target=self.run_tests,
+            args=(cr, uid, ids, context, use_new_cursor=True),
+        )
+        thread.start()
 
         return self.update(cr, uid, ids, context=context)
 
@@ -207,7 +208,7 @@ class automatic_test_campaign(osv.osv):
             'context': context,
         }
 
-    def run_tests(self, cr, uid, ids, context=None):
+    def run_tests(self, cr, uid, ids, context=None, use_new_cursor=False):
         """
         Run the test campaign
         """
@@ -216,6 +217,9 @@ class automatic_test_campaign(osv.osv):
 
         if isinstance(ids, (int, long)):
             ids = [ids]
+
+        if use_new_cursor:
+            cr = pooler.get_db(cr.dbname).cursor()
 
         test_dir = '%s/tests/' % path.dirname(path.realpath(__file__))
         for camp in self.browse(cr, uid, ids, context=context):
