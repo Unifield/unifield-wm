@@ -25,7 +25,7 @@ class UnifieldTest(unittest.TestCase):
     '''
     # global variable
     db = {}
-    test_module_name = 'unifield_tests'
+    test_data_module_name = 'unifield_tests_data'
     test_module_obj_name = 'unifield.test'
     already_loaded = False
     description = ''        # Description of the test class (used in Automated Tests)
@@ -33,14 +33,72 @@ class UnifieldTest(unittest.TestCase):
 
     # FIXME/TODO: Make unittest.TestCase inherit from oerplib.error class because of RPCError that could be raised by unittest.TestCase
 
-    def _addConnection(self, db_suffix, name):
+    def getDBConnectionsFromConfigFile(self):
+        """
+        Read the Configuration file and add Connection toh the good databases
+        """
+        # Read config file
+        c = UnifieldTestConfigParser()
+        self.config = c.read()
+
+        tempo_mkdb = c.getboolean('DB', 'tempo_mkdb')
+        db_suffixes = ['SYNC_SERVER', 'HQ1', 'HQ1C1', 'HQ1C1P1']
+        names = ['sync', 'hq1', 'c1', 'p1']
+        if not tempo_mkdb:
+            db_suffixes = ['SYNC_SERVER', 'HQ_01', 'COORDO_01', 'PROJECT_01']
+
+        # Check Remote warehouse and complete old params
+        self.is_remote_warehouse = False
+        remote_warehouse = c.get('DB', 'RW') or False
+        if remote_warehouse:
+            self.is_remote_warehouse = True
+
+        # Add remote warehouse
+        if remote_warehouse:
+            self._addConnection(remote_warehouse, 'rw')
+
+        # Prepare paramaters for XMLRPCConnection
+        self.server_port = config.getint('Server', 'port')
+        self.server_url = config.get('Server', 'url')
+        self.uid = config.get('DB', 'username')
+        self.pwd = config.get('DB', 'password')
+        db_prefix = config.get('DB', 'db_prefix')
+
+        # Create XMLRPCConnections
+        for db_tuple in zip(db_suffixes, names):
+            db_name = '%s%s' % (db_prefix, db_tuple[0])
+            self._addConnection(db_name, db_tuple[1])
+
+    def getDBConnectionsFromSyncServer(self):
+        """
+        Open a Connection to the Sync. Server database and read the DB mapping
+        to create DB connections.
+        """
+        # TODO: Put this configuration on a osv object
+        self.server_port = '8069'
+        self.server_url = '127.0.0.1'
+        self.uid = 'admin'
+        self.pwd = 'admin'
+
+        # Create a first connection to the sync. server database
+        sync_db_name = self.cr.dbname
+        self._addConnection(sync_db_name, 'sync')
+
+        # Read all mapped DB
+        db_map_obj = self.sync.get('test.db.mapping')
+        db_map_ids = db_map_obj.search([('keyword', '!=', 'sync'), ('db_to_use', '!=', False)])
+        for db_map in db_map_obj.browse(db_map_ids):
+            self._addConnection(db_map.db_to_use, db_map.keyword)
+
+    def _addConnection(self, db_name, name):
         '''
         Add new connection
         '''
         if name not in self.db:
-            con = XMLConn(db_suffix)
+            con = XMLConn(db_name, self.server_port, self.server_url, self.uid, self.pwd)
             setattr(self, name, con)
             self.db[name] = con
+
         # Set colors
         colors = self.colors
         database_display = colors.BRed + '[' + colors.Color_Off + name.center(6) + colors.BRed + ']' + colors.Color_Off
@@ -65,35 +123,33 @@ class UnifieldTest(unittest.TestCase):
         return super(UnifieldTest, self).run(*args, **kwargs)
 
     def __init__(self, *args, **kwargs):
-        # Default behaviour
+        """
+        Initialize the TestCase from Sync. Database or Config. file
+        """
+        # DB values
         self.cr = kwargs.pop('cr', None)
         self.uid = kwargs.pop('uid', None)
         self.cid = kwargs.pop('cid', None)
+        self.update_module = kwargs.pop('update_module', False)
+
         super(UnifieldTest, self).__init__(*args, **kwargs)
-        return
-        # Prepare some values
-        c = UnifieldTestConfigParser()
-        self.config = c.read()
-        tempo_mkdb = c.getboolean('DB', 'tempo_mkdb')
-        db_suffixes = ['SYNC_SERVER', 'HQ1', 'HQ1C1', 'HQ1C1P1']
-        names = ['sync', 'hq1', 'c1', 'p1']
-        if not tempo_mkdb:
-            db_suffixes = ['SYNC_SERVER', 'HQ_01', 'COORDO_01', 'PROJECT_01']
-        # Check Remote warehouse and complete old params
-        remote_warehouse = c.get('DB', 'RW') or False
-        self.is_remote_warehouse = False
-        if remote_warehouse:
-            self.is_remote_warehouse = True
-        self.is_remote_warehouse = False
-        # Other values
+
+        # In case of update test cases at unifield_test module update
+        if self.update_module:
+            return
+
+        # Get TerminalColors
         colors = TerminalColors()
         self.colors = colors
-        # Keep each database connection
-        for db_tuple in zip(db_suffixes, names):
-            self._addConnection(db_tuple[0], db_tuple[1])
-        # Add remote warehouse
-        if remote_warehouse:
-            self._addConnection(remote_warehouse, 'rw')
+
+        if not self.db:
+            if not self.cr:
+                self.getDBConnectionsFromConfigFile()
+            else:
+                self.getDBConnectionsFromSyncServer()
+
+        return
+
         # For each database, check that unifield_tests module is loaded
         #+ If not, load it.
         #+ Except if the database is sync one
@@ -104,19 +160,19 @@ class UnifieldTest(unittest.TestCase):
                 continue
             database = self.db.get(database_name)
             module_obj = database.get('ir.module.module')
-            m_ids = module_obj.search([('name', '=', self.test_module_name)])
+            m_ids = module_obj.search([('name', '=', self.test_data_module_name)])
             database_display = database.colored_name
             for module in module_obj.read(m_ids, ['state']):
                 state = module.get('state', '')
                 if state == 'uninstalled':
-                    print (database_display + ' [' + colors.BYellow + 'UP'.center(4) + colors.Color_Off + '] Module %s' % (self.test_module_name))
+                    print (database_display + ' [' + colors.BYellow + 'UP'.center(4) + colors.Color_Off + '] Module %s' % (self.test_data_module_name))
                     module_obj.button_install([module.get('id')])
                     database.get('base.module.upgrade').upgrade_module([])
                 elif state in ['to upgrade', 'to install']:
-                    print (database_display + ' [' + colors.BYellow + 'UP'.center(4) + colors.Color_Off + '] Module %s' % (self.test_module_name))
+                    print (database_display + ' [' + colors.BYellow + 'UP'.center(4) + colors.Color_Off + '] Module %s' % (self.test_data_module_name))
                     database.get('base.module.upgrade').upgrade_module([])
                 elif state in ['installed']:
-                    print (database_display + ' [' + colors.BGreen + 'OK'.center(4) + colors.Color_Off + '] Module %s' % (self.test_module_name))
+                    print (database_display + ' [' + colors.BGreen + 'OK'.center(4) + colors.Color_Off + '] Module %s' % (self.test_data_module_name))
                     pass
                 else:
                     raise EnvironmentError(' Wrong module state: %s' % (state or '',))
@@ -151,7 +207,7 @@ class UnifieldTest(unittest.TestCase):
         data_obj = db.get('ir.model.data')
 
         if module is None:
-            module = self.test_module_name
+            module = self.test_data_module_name
 
         obj = data_obj.get_object_reference(module, object_ref)
 

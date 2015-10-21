@@ -24,6 +24,7 @@ from __future__ import print_function
 from ConfigParser import ConfigParser
 from oerplib.oerp import OERP
 import os
+import time
 
 class UnifieldTestConfigParser(ConfigParser):
     '''
@@ -44,29 +45,25 @@ class XMLRPCConnection(OERP):
     XML-RPC connection class to connect with OERP
     '''
 
-    def __init__(self, db_suffix):
+    def __init__(self, db_name, port, url, uid, pwd):
         '''
         Constructor
         '''
-        # Read configuration file
-        config = UnifieldTestConfigParser()
-        config.read()
-        # Prepare some values
-        server_port = config.getint('Server', 'port')
-        server_url = config.get('Server', 'url')
-        uid = config.get('DB', 'username')
-        pwd = config.get('DB', 'password')
-        db_prefix = config.get('DB', 'db_prefix')
         # OpenERP connection
         super(XMLRPCConnection, self).__init__(
-            server=server_url,
+            server=url,
             protocol='xmlrpc',
-            port=server_port,
+            port=port,
             timeout=3600
         )
         # Login initialization
-        db_name = '%s%s' % (db_prefix, db_suffix)
-        self.login(uid, pwd, db_name)
+        try:
+            self.login(uid, pwd, db_name)
+            print ('%s :: Connection...' % db_name)
+        except Exception as e:
+            if e.message.startswith('ServerUpdate:'):
+                time.sleep(5)
+                self.login(uid, pwd, db_name)
         self.db_name = db_name
 
 if __name__ == '__main__':

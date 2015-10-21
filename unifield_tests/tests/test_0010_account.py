@@ -6,7 +6,7 @@ class AccountTest(UnifieldTest):
 
     def test_010_coa(self):
         '''Check Chart of Account length'''
-        ids = self.p1.get('account.account').search([])
+        ids = self.hq1c1p1.get('account.account').search([])
         self.assert_(len(ids) == 357, "Chart of Account length: %s" % len(ids))
 
 def get_test_class():
