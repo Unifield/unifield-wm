@@ -39,11 +39,11 @@ class UnifieldTest(unittest.TestCase):
         """
         # Read config file
         c = UnifieldTestConfigParser()
-        self.config = c.read()
+        c.read()
 
         tempo_mkdb = c.getboolean('DB', 'tempo_mkdb')
         db_suffixes = ['SYNC_SERVER', 'HQ1', 'HQ1C1', 'HQ1C1P1']
-        names = ['sync', 'hq1', 'c1', 'p1']
+        names = ['sync', 'hq1', 'hq1c1', 'hq1c1p1']
         if not tempo_mkdb:
             db_suffixes = ['SYNC_SERVER', 'HQ_01', 'COORDO_01', 'PROJECT_01']
 
@@ -58,11 +58,11 @@ class UnifieldTest(unittest.TestCase):
             self._addConnection(remote_warehouse, 'rw')
 
         # Prepare paramaters for XMLRPCConnection
-        self.server_port = config.getint('Server', 'port')
-        self.server_url = config.get('Server', 'url')
-        self.uid = config.get('DB', 'username')
-        self.pwd = config.get('DB', 'password')
-        db_prefix = config.get('DB', 'db_prefix')
+        self.server_port = c.getint('Server', 'port')
+        self.server_url = c.get('Server', 'url')
+        self.uid = c.get('DB', 'username')
+        self.pwd = c.get('DB', 'password')
+        db_prefix = c.get('DB', 'db_prefix')
 
         # Create XMLRPCConnections
         for db_tuple in zip(db_suffixes, names):
@@ -86,7 +86,7 @@ class UnifieldTest(unittest.TestCase):
 
         # Read all mapped DB
         db_map_obj = self.sync.get('test.db.mapping')
-        db_map_ids = db_map_obj.search([('keyword', '!=', 'sync'), ('db_to_use', '!=', False)])
+        db_map_ids = db_map_obj.search([('keyword', '!=', 'sync'), ('db_to_use', '!=', '')])
         for db_map in db_map_obj.browse(db_map_ids):
             self._addConnection(db_map.db_to_use, db_map.keyword)
 
@@ -147,8 +147,6 @@ class UnifieldTest(unittest.TestCase):
                 self.getDBConnectionsFromConfigFile()
             else:
                 self.getDBConnectionsFromSyncServer()
-
-        return
 
         # For each database, check that unifield_tests module is loaded
         #+ If not, load it.

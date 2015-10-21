@@ -57,13 +57,18 @@ class XMLRPCConnection(OERP):
             timeout=3600
         )
         # Login initialization
-        try:
-            self.login(uid, pwd, db_name)
-            print ('%s :: Connection...' % db_name)
-        except Exception as e:
-            if e.message.startswith('ServerUpdate:'):
-                time.sleep(5)
+        error = 100
+        while error != 0:
+            try:
                 self.login(uid, pwd, db_name)
+                error = 0
+            except Exception as e:
+                if e.message.startswith('ServerUpdate:'):
+                    time.sleep(1)
+                    error -= 1
+                else:
+                    error = 0
+
         self.db_name = db_name
 
 if __name__ == '__main__':
