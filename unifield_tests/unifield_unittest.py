@@ -37,6 +37,9 @@ class UnifieldTestLoader(unittest.loader.TestLoader):
     suiteClass = UnifieldTestSuite
 
     def __init__(self, pool, cr, uid, cid):
+        """
+        Give information the the sync. DB connection
+        """
         self.pool = pool
         self.cr = cr
         self.uid = uid
@@ -64,6 +67,9 @@ class UnifieldTestLoader(unittest.loader.TestLoader):
         return res
 
     def discover(self, start_dir, pattern='test*.py', top_level_dir=None):
+        """
+        Discover all tests in the tests directory
+        """
         set_implicit_top = False
         if top_level_dir is None and self._top_level_dir is not None:
             # make top_level_dir optional if called from load_tests in a package
@@ -116,6 +122,10 @@ class UnifieldTestLoader(unittest.loader.TestLoader):
 
 
 class UnifieldTestResult(unittest.runner.TextTestResult):
+    """
+    Override of a TextTestResult to write information on the sync. database
+    at each test done/error/failure.
+    """
 
     def __init__(self, stream=None, descriptions=None, verbosity=None, pool=None, cr=None, uid=None, cid=None):
         super(UnifieldTestResult, self).__init__(stream, descriptions, verbosity)
