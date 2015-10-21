@@ -45,12 +45,15 @@ class UnifieldTest(unittest.TestCase):
         colors = self.colors
         database_display = colors.BRed + '[' + colors.Color_Off + name.center(6) + colors.BRed + ']' + colors.Color_Off
         self.db[name].colored_name = database_display
-    
+
     def __getattr__(self, attr):
-        if attr in self.db:
+        """
+        Returns the DB connection if exists or an error if not
+        """
+        if attr != 'test_id' and attr in self.db:
             return self.db[attr]
         else:
-            super(UnifieldTest, self).__getattr__(attr)
+            raise NameError("No DB connection found the keyword '%s'!" % attr)
 
     def _hook_db_process(self, name, database):
         '''
@@ -58,16 +61,19 @@ class UnifieldTest(unittest.TestCase):
         '''
         return True
 
+    def run(self, *args, **kwargs):
+        return super(UnifieldTest, self).run(*args, **kwargs)
+
     def __init__(self, *args, **kwargs):
         # Default behaviour
+        self.cr = kwargs.pop('cr', None)
+        self.uid = kwargs.pop('uid', None)
+        self.cid = kwargs.pop('cid', None)
         super(UnifieldTest, self).__init__(*args, **kwargs)
+        return
         # Prepare some values
-    #    print hasattr(self, 'test_id')
-        try:
-            c = UnifieldTestConfigParser()
-            self.config = c.read()
-        except:
-            return
+        c = UnifieldTestConfigParser()
+        self.config = c.read()
         tempo_mkdb = c.getboolean('DB', 'tempo_mkdb')
         db_suffixes = ['SYNC_SERVER', 'HQ1', 'HQ1C1', 'HQ1C1P1']
         names = ['sync', 'hq1', 'c1', 'p1']

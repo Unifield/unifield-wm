@@ -118,9 +118,20 @@ class UnifieldTestLoader(unittest.loader.TestLoader):
         return self.suiteClass(tests, self)
 
     def loadTestsFromTestCase(self, testCaseClass):
-        res = super(UnifieldTestLoader, self).loadTestsFromTestCase(testCaseClass)
-        res.loader = self
-        return res
+        """Return a suite of all tests cases contained in testCaseClass"""
+        if issubclass(testCaseClass, unittest.suite.TestSuite):
+            raise TypeError("Test cases should not be derived from TestSuite."
+                                " Maybe you meant to derive from TestCase?")
+        testCaseNames = self.getTestCaseNames(testCaseClass)
+        if not testCaseNames and hasattr(testCaseClass, 'runTest'):
+            testCaseNames = ['runTest']
+        testCases = []
+        for tcn in testCaseNames:
+            testCases.append(testCaseClass(tcn, cr=self.cr, uid=self.uid, cid=self.cid))
+
+        loaded_suite = self.suiteClass(testCases)
+        loaded_suite.loadder = self
+        return loaded_suite
 
 
 def format_error(error):

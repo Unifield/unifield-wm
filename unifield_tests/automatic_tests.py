@@ -186,12 +186,12 @@ class automatic_test_campaign(osv.osv):
             'start_date': time.strftime('%Y-%m-%d %H:%M:%S'),
         }, context=context)
 
-#        self.run_tests(cr, uid, ids, context=context)
-        thread = threading.Thread(
-            target=self.run_tests,
-            args=(cr, uid, ids, context, True),
-        )
-        thread.start()
+        self.run_tests(cr, uid, ids, context=context)
+#        thread = threading.Thread(
+#            target=self.run_tests,
+#            args=(cr, uid, ids, context, True),
+#        )
+#        thread.start()
 
         return self.update(cr, uid, ids, context=context)
 
@@ -243,11 +243,14 @@ class automatic_test_campaign(osv.osv):
                     'state': 'done',
                     'end_date': time.strftime('%Y-%m-%d %H:%M:%S'),
                 })
-            cr.commit()
+            if use_new_cursor:
+                cr.commit()
         except:
-            cr.rollback()
+            if use_new_cursor:
+                cr.rollback()
         finally:
-            cr.close()
+            if use_new_cursor:
+                cr.close()
 
         return True
 
