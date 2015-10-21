@@ -62,8 +62,12 @@ class UnifieldTest(unittest.TestCase):
         # Default behaviour
         super(UnifieldTest, self).__init__(*args, **kwargs)
         # Prepare some values
-        c = UnifieldTestConfigParser()
-        self.config = c.read()
+    #    print hasattr(self, 'test_id')
+        try:
+            c = UnifieldTestConfigParser()
+            self.config = c.read()
+        except:
+            return
         tempo_mkdb = c.getboolean('DB', 'tempo_mkdb')
         db_suffixes = ['SYNC_SERVER', 'HQ1', 'HQ1C1', 'HQ1C1P1']
         names = ['sync', 'hq1', 'c1', 'p1']

@@ -154,6 +154,8 @@ class automatic_test_campaign(osv.osv):
             defaults['start_date'] = False
         if 'end_date' not in defaults:
             defaults['end_date'] = False
+        if 'test_ids' not in defaults:
+            defaults['test_ids'] = []
 
         return super(automatic_test_campaign, self).copy(cr, uid, copy_id, defaults, context=context)
 
@@ -187,7 +189,7 @@ class automatic_test_campaign(osv.osv):
 #        self.run_tests(cr, uid, ids, context=context)
         thread = threading.Thread(
             target=self.run_tests,
-            args=(cr, uid, ids, context, use_new_cursor=True),
+            args=(cr, uid, ids, context, True),
         )
         thread.start()
 
@@ -221,25 +223,31 @@ class automatic_test_campaign(osv.osv):
         if use_new_cursor:
             cr = pooler.get_db(cr.dbname).cursor()
 
-        test_dir = '%s/tests/' % path.dirname(path.realpath(__file__))
-        for camp in self.browse(cr, uid, ids, context=context):
-            # Discover and filter test cases
-            loader = unifield_unittest.UnifieldTestLoader(self.pool, cr, uid, camp.id)
-            suite = loader.discover(test_dir, pattern='test*.py')
+        try:
+            test_dir = '%s/tests/' % path.dirname(path.realpath(__file__))
+            for camp in self.browse(cr, uid, ids, context=context):
+                # Discover and filter test cases
+                loader = unifield_unittest.UnifieldTestLoader(self.pool, cr, uid, camp.id)
+                suite = loader.discover(test_dir, pattern='test*.py')
 
-            # Create a runner linked to the campaign
-            result = unifield_unittest.UnifieldTestResult(
-                pool=self.pool,
-                cr=cr,
-                uid=uid,
-                cid=camp.id)
-            # Launch tests
-            suite(result)
+                # Create a runner linked to the campaign
+                result = unifield_unittest.UnifieldTestResult(
+                    pool=self.pool,
+                    cr=cr,
+                    uid=uid,
+                    cid=camp.id)
+                # Launch tests
+                suite(result)
 
-            self.write(cr, uid, [camp.id], {
-                'state': 'done',
-                'end_date': time.strftime('%Y-%m-%d %H:%M:%S'),
-            })
+                self.write(cr, uid, [camp.id], {
+                    'state': 'done',
+                    'end_date': time.strftime('%Y-%m-%d %H:%M:%S'),
+                })
+            cr.commit()
+        except:
+            cr.rollback()
+        finally:
+            cr.close()
 
         return True
 
@@ -287,6 +295,10 @@ class automatic_test(osv.osv):
         ),
         'message': fields.text(
             string='Message',
+            readonly=True,
+        ),
+        'traceback': fields.text(
+            string='Traceback',
             readonly=True,
         ),
     }

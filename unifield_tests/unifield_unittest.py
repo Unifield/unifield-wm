@@ -21,6 +21,7 @@
 ##############################################################################
 
 import unittest
+import traceback
 import os
 import sys
 import time
@@ -57,6 +58,7 @@ class UnifieldTestLoader(unittest.loader.TestLoader):
                     ('campaign_id', '=', self.cid),
                 ], limit=1)
                 if t_id:
+                    t.test_id = t_id
                     res.append(t)
             elif isinstance(t, unittest.suite.TestSuite):
                 if t._tests:
@@ -121,6 +123,25 @@ class UnifieldTestLoader(unittest.loader.TestLoader):
         return res
 
 
+def format_error(error):
+    """
+    Format error message
+    """
+    if not isinstance(error, (tuple, list)):
+        raise TypeError('error parameter must be a list')
+
+    if not error:
+        return ''
+
+    if len(error) > 1:
+        return '%s: %s' % (
+            error[0],
+            error[1],
+        )
+    else:
+        return error[0]
+
+
 class UnifieldTestResult(unittest.runner.TextTestResult):
     """
     Override of a TextTestResult to write information on the sync. database
@@ -166,15 +187,17 @@ class UnifieldTestResult(unittest.runner.TextTestResult):
 
     def addError(self, test, err):
         self.write_test(test, {
-            'message': err,
+            'message': format_error(err),
             'state': 'error',
+            'traceback': traceback.format_exc(err[2]),
         })
         return super(UnifieldTestResult, self).addError(test, err)
 
     def addFailure(self, test, err):
         self.write_test(test, {
-            'message': err,
+            'message': format_error(err),
             'state': 'fail',
+            'traceback': traceback.format_exc(err[2]),
         })
         return super(UnifieldTestResult, self).addFailure(test, err)
 
@@ -193,8 +216,9 @@ class UnifieldTestResult(unittest.runner.TextTestResult):
 
     def addExpectedFailure(self, test, err):
         self.write_test(test, {
-            'message': err,
+            'message': format_error(err),
             'state': 'done',
+            'traceback': traceback.format_exc(err[2]),
         })
         return super(UnifieldTestResult, self).addExpectedFailure(test, err)
 

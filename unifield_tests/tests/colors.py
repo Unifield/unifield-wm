@@ -72,12 +72,3 @@ class TerminalColors():
     On_IPurple='\033[0;105m'  # Purple
     On_ICyan='\033[0;106m'    # Cyan
     On_IWhite='\033[0;107m'   # White
-
-if __name__ == '__main__':
-    c = TerminalColors()
-    print(c.BBlue + "Bold blue")
-    print(c.Blue + "Dark blue")
-    print(c.Purple + "Purple")
-    print(c.Yellow + "Yellow")
-    print(c.Green + "Green")
-    print(c.BGreen + "Bold green")
