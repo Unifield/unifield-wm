@@ -48,7 +48,7 @@ class automatic_test_template(osv.osv):
         tmpl_obj = self.pool.get('automatic.test.template')
 
         test_dir = '%s/tests/' % path.dirname(path.realpath(__file__))
-        loader = unittest.loader.TestLoader()
+        loader = unifield_unittest.UnifieldTestLoader(self.pool, cr, uid, None, update_module=True)
         suite = loader.discover(test_dir, pattern='test*.py')
 
         tests = []
