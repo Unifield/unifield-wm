@@ -8,7 +8,7 @@ import time
 class ResourcingTest(UnifieldTest):
 
     def setUp(self):
-        self.used_db = self.c1
+        self.used_db = self.hq1c1
         db = self.used_db
         self.order_obj = db.get('sale.order')
         self.order_line_obj = db.get('sale.order.line')

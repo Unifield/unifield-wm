@@ -482,7 +482,7 @@ class UF2490OnePO(ResourcingTest):
         Process partially the IN and cancel the back order
         :return:
         """
-        db = self.p1
+        db = self.hq1c1p1
         self.used_db = db
         self.po_obj = db.get('purchase.order')
         self.order_obj = db.get('sale.order')

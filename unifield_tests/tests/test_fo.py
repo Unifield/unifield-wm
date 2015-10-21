@@ -10,7 +10,7 @@ import time
 class FOTest(UnifieldTest):
 
     def setUp(self):
-        self.used_db = self.c1
+        self.used_db = self.hq1c1
         db = self.used_db
         self.fo_obj = db.get('sale.order')
         self.fol_obj = db.get('sale.order.line')
@@ -63,7 +63,7 @@ class FOTest(UnifieldTest):
         self.fol_obj.create(line_values)
 
         try:
-            self.c1.exec_workflow('sale.order', 'order_validated', order_id)
+            self.hq1c1.exec_workflow('sale.order', 'order_validated', order_id)
             self.assert_(
                 False,
                 'No error message at FO validation with line with no price.',

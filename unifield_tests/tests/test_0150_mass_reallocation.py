@@ -13,7 +13,7 @@ class MassReallocationTest(FinanceTest):
         # Prepare some values
         # TODO: To remove when fixed
         return
-        db = self.p1
+        db = self.hq1c1p1
         ana_obj = db.get('account.analytic.line')
         ana_acc_obj = db.get('account.analytic.account')
         wiz_obj = db.get('mass.reallocation.wizard')

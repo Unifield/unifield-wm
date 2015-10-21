@@ -19,42 +19,42 @@ class UFTP324Test(ResourcingTest):
 
         super(UFTP324Test, self).setUp()
 
-        self.synchronize(self.c1)
-        self.synchronize(self.p1)
+        self.synchronize(self.hq1c1)
+        self.synchronize(self.hq1c1p1)
 
         # C1
-        self.c_so_obj = self.c1.get('sale.order')
-        self.c_sol_obj = self.c1.get('sale.order.line')
-        self.c_po_obj = self.c1.get('purchase.order')
-        self.c_pol_obj = self.c1.get('purchase.order.line')
-        self.c_partner_obj = self.c1.get('res.partner')
-        self.c_lc_obj = self.c1.get('sale.order.leave.close')
-        self.c_so_cancel_obj = self.c1.get('sale.order.cancelation.wizard')
+        self.c_so_obj = self.hq1c1.get('sale.order')
+        self.c_sol_obj = self.hq1c1.get('sale.order.line')
+        self.c_po_obj = self.hq1c1.get('purchase.order')
+        self.c_pol_obj = self.hq1c1.get('purchase.order.line')
+        self.c_partner_obj = self.hq1c1.get('res.partner')
+        self.c_lc_obj = self.hq1c1.get('sale.order.leave.close')
+        self.c_so_cancel_obj = self.hq1c1.get('sale.order.cancelation.wizard')
 
         # P1
-        self.p_so_obj = self.p1.get('sale.order')
-        self.p_sol_obj = self.p1.get('sale.order.line')
-        self.p_po_obj = self.p1.get('purchase.order')
-        self.p_pol_obj = self.p1.get('purchase.order.line')
-        self.p_partner_obj = self.p1.get('res.partner')
-        self.p_lc_obj = self.p1.get('sale.order.leave.close')
-        self.p_so_cancel_obj = self.p1.get('sale.order.cancelation.wizard')
+        self.p_so_obj = self.hq1c1p1.get('sale.order')
+        self.p_sol_obj = self.hq1c1p1.get('sale.order.line')
+        self.p_po_obj = self.hq1c1p1.get('purchase.order')
+        self.p_pol_obj = self.hq1c1p1.get('purchase.order.line')
+        self.p_partner_obj = self.hq1c1p1.get('res.partner')
+        self.p_lc_obj = self.hq1c1p1.get('sale.order.leave.close')
+        self.p_so_cancel_obj = self.hq1c1p1.get('sale.order.cancelation.wizard')
 
         # Create a PO at P1 with two products to C1
         # Prepare values for the field order
-        prod_log1_id = self.get_record(self.p1, 'prod_log_1')
-        prod_log2_id = self.get_record(self.p1, 'prod_log_2')
-        uom_pce_id = self.get_record(self.p1, 'product_uom_unit', module='product')
-        location_id = self.get_record(self.p1, 'stock_location_stock', module='stock')
+        prod_log1_id = self.get_record(self.hq1c1p1, 'prod_log_1')
+        prod_log2_id = self.get_record(self.hq1c1p1, 'prod_log_2')
+        uom_pce_id = self.get_record(self.hq1c1p1, 'product_uom_unit', module='product')
+        location_id = self.get_record(self.hq1c1p1, 'stock_location_stock', module='stock')
 
-        partner_name = self.get_db_partner_name(self.c1)
+        partner_name = self.get_db_partner_name(self.hq1c1)
         partner_ids = self.p_partner_obj.search([('name', '=', partner_name)])
         self.assert_(
             partner_ids,
-            "No partner found for %s" % self.c1.db_name,
+            "No partner found for %s" % self.hq1c1.db_name,
         )
 
-        distrib_id = self.create_analytic_distribution(self.p1)
+        distrib_id = self.create_analytic_distribution(self.hq1c1p1)
 
         order_values = {
             'order_type': 'regular',
@@ -91,13 +91,13 @@ class UFTP324Test(ResourcingTest):
         self.p_pol_obj.create(line_values)
 
         # Validate the sale order
-        self.p1.exec_workflow('purchase.order', 'purchase_confirm', self.p_po_id)
+        self.hq1c1p1.exec_workflow('purchase.order', 'purchase_confirm', self.p_po_id)
 
         self.p_po_name = self.p_po_obj.read(self.p_po_id, ['name'])['name']
 
         # Synchronize
-        self.synchronize(self.p1)
-        self.synchronize(self.c1)
+        self.synchronize(self.hq1c1p1)
+        self.synchronize(self.hq1c1)
 
         self.c_so_id = None
 
@@ -110,7 +110,7 @@ class UFTP324Test(ResourcingTest):
             self.c_so_id = c_so_id
 
         # Validate the sale order
-        self.c1.exec_workflow('sale.order', 'order_validated', self.c_so_id)
+        self.hq1c1.exec_workflow('sale.order', 'order_validated', self.c_so_id)
 
     def test_utp_324(self):
         """
@@ -119,21 +119,21 @@ class UFTP324Test(ResourcingTest):
         :return:
         """
         wiz_model = 'purchase.order.cancel.wizard'
-        c_wiz_obj = self.c1.get(wiz_model)
-        c_lc_wiz_obj = self.c1.get('sale.order.leave.close')
-        c_cancel_so_wiz_obj = self.c1.get('sale.order.cancelation.wizard')
+        c_wiz_obj = self.hq1c1.get(wiz_model)
+        c_lc_wiz_obj = self.hq1c1.get('sale.order.leave.close')
+        c_cancel_so_wiz_obj = self.hq1c1.get('sale.order.cancelation.wizard')
 
         # Source all lines on a Purchase Order to ext_supplier_1
         line_ids = self.c_sol_obj.search([('order_id', '=', self.c_so_id)])
         self.c_sol_obj.write(line_ids, {
             'type': 'make_to_order',
             'po_cft': 'po',
-            'supplier': self.get_record(self.c1, 'ext_supplier_1'),
+            'supplier': self.get_record(self.hq1c1, 'ext_supplier_1'),
         })
         self.c_sol_obj.confirmLine(line_ids)
 
         # Run the scheduler
-        self.c_so_id = self.run_auto_pos_creation(self.c1, order_to_check=self.c_so_id)
+        self.c_so_id = self.run_auto_pos_creation(self.hq1c1, order_to_check=self.c_so_id)
 
         line_ids = self.c_sol_obj.search([('order_id', '=', self.c_so_id)])
         not_sourced = True
@@ -173,8 +173,8 @@ class UFTP324Test(ResourcingTest):
         c_lc_wiz_obj.write(w_line_ids, {'action': 'close'})
         c_cancel_so_wiz_obj.close_fo(w_res.get('res_id'))
 
-        self.synchronize(self.c1)
-        self.synchronize(self.p1)
+        self.synchronize(self.hq1c1)
+        self.synchronize(self.hq1c1p1)
 
         # Check state of the PO at project side
         c_so_name = self.c_so_obj.read(self.c_so_id, ['name'])['name']

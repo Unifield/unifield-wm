@@ -12,8 +12,8 @@ class UFTP416Test(UFTP326Test):
 
     def setUp(self):
         super(UFTP416Test, self).setUp()
-        self.c_move_obj = self.c1.get('stock.move')
-        self.c_move_cancel_obj = self.c1.get('stock.move.cancel.wizard')
+        self.c_move_obj = self.hq1c1.get('stock.move')
+        self.c_move_cancel_obj = self.hq1c1.get('stock.move.cancel.wizard')
 
     def test_cancel_po_at_coordo(self):
         """
@@ -32,8 +32,8 @@ class UFTP416Test(UFTP326Test):
         :return:
         """
         # Validate and confirm the PO
-        self._validate_po(self.c1, [self.c_po_id])
-        self._confirm_po(self.c1, [self.c_po_id])
+        self._validate_po(self.hq1c1, [self.c_po_id])
+        self._confirm_po(self.hq1c1, [self.c_po_id])
 
         # Get the IN associated to this PO
         c_in_ids = self.c_pick_obj.search([('purchase_id', '=', self.c_po_id), ('type', '=', 'in')])

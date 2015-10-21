@@ -10,7 +10,7 @@ import time
 class UTP1220Test(UnifieldTest):
 
     def setUp(self):
-        self.used_db = self.c1
+        self.used_db = self.hq1c1
         db = self.used_db
         self.po_obj = db.get('purchase.order')
         self.pol_obj = db.get('purchase.order.line')

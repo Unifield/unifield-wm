@@ -21,36 +21,36 @@ class US311Test(ResourcingTest):
         7/ Source the two lines to an external supplier
         """
         super(US311Test, self).setUp()
-        self.synchronize(self.c1)
-        self.synchronize(self.p1)
+        self.synchronize(self.hq1c1)
+        self.synchronize(self.hq1c1p1)
         # Project objects mapper
-        self.p_so_obj = self.p1.get('sale.order')
-        self.p_sol_obj = self.p1.get('sale.order.line')
-        self.p_po_obj = self.p1.get('purchase.order')
-        self.p_pol_obj = self.p1.get('purchase.order.line')
-        self.p_pick_obj = self.p1.get('stock.picking')
-        self.p_move_obj = self.p1.get('stock.move')
-        self.p_partner_obj = self.p1.get('res.partner')
+        self.p_so_obj = self.hq1c1p1.get('sale.order')
+        self.p_sol_obj = self.hq1c1p1.get('sale.order.line')
+        self.p_po_obj = self.hq1c1p1.get('purchase.order')
+        self.p_pol_obj = self.hq1c1p1.get('purchase.order.line')
+        self.p_pick_obj = self.hq1c1p1.get('stock.picking')
+        self.p_move_obj = self.hq1c1p1.get('stock.move')
+        self.p_partner_obj = self.hq1c1p1.get('res.partner')
         # Coordo objects mapper
-        self.c_so_obj = self.c1.get('sale.order')
-        self.c_sol_obj = self.c1.get('sale.order.line')
-        self.c_po_obj = self.c1.get('purchase.order')
-        self.c_pol_obj = self.c1.get('purchase.order.line')
-        self.c_pick_obj = self.c1.get('stock.picking')
-        self.c_move_obj = self.c1.get('stock.move')
-        self.c_partner_obj = self.c1.get('res.partner')
+        self.c_so_obj = self.hq1c1.get('sale.order')
+        self.c_sol_obj = self.hq1c1.get('sale.order.line')
+        self.c_po_obj = self.hq1c1.get('purchase.order')
+        self.c_pol_obj = self.hq1c1.get('purchase.order.line')
+        self.c_pick_obj = self.hq1c1.get('stock.picking')
+        self.c_move_obj = self.hq1c1.get('stock.move')
+        self.c_partner_obj = self.hq1c1.get('res.partner')
 
         # Products
-        self.p_prd1_id = self.get_record(self.p1, 'prod_log_1')
-        self.p_prd2_id = self.get_record(self.p1, 'prod_log_2')
-        self.p_prd3_id = self.get_record(self.p1, 'prod_log_3')
-        self.c_prd1_id = self.get_record(self.c1, 'prod_log_1')
-        self.c_prd2_id = self.get_record(self.c1, 'prod_log_2')
-        self.c_prd3_id = self.get_record(self.c1, 'prod_log_3')
+        self.p_prd1_id = self.get_record(self.hq1c1p1, 'prod_log_1')
+        self.p_prd2_id = self.get_record(self.hq1c1p1, 'prod_log_2')
+        self.p_prd3_id = self.get_record(self.hq1c1p1, 'prod_log_3')
+        self.c_prd1_id = self.get_record(self.hq1c1, 'prod_log_1')
+        self.c_prd2_id = self.get_record(self.hq1c1, 'prod_log_2')
+        self.c_prd3_id = self.get_record(self.hq1c1, 'prod_log_3')
 
         # Get Project and Coordo partners
-        project_name = self.get_db_partner_name(self.p1)
-        coordo_name = self.get_db_partner_name(self.c1)
+        project_name = self.get_db_partner_name(self.hq1c1p1)
+        coordo_name = self.get_db_partner_name(self.hq1c1)
         c_proj_ids = self.c_partner_obj.search([('name', '=', project_name)])
         p_coordo_ids = self.p_partner_obj.search([('name', '=', coordo_name)])
 
@@ -66,8 +66,8 @@ class US311Test(ResourcingTest):
         self.p_crd_id = p_coordo_ids[0]
 
         # Prepare values for IR
-        uom_pce_id = self.get_record(self.p1, 'product_uom_unit', module='product')
-        distrib_id = self.create_analytic_distribution(self.p1)
+        uom_pce_id = self.get_record(self.hq1c1p1, 'product_uom_unit', module='product')
+        distrib_id = self.create_analytic_distribution(self.hq1c1p1)
 
         """
         1/ Create an IR with two lines at project:
@@ -76,7 +76,7 @@ class US311Test(ResourcingTest):
         """
         ir_values = {
             'procurement_request': True,
-            'location_requestor_id': self.get_record(self.p1, 'external_cu'),
+            'location_requestor_id': self.get_record(self.hq1c1p1, 'external_cu'),
         }
         self.p_ir_id = self.p_so_obj.create(ir_values)
         l1_values = {
@@ -99,7 +99,7 @@ class US311Test(ResourcingTest):
         """
         2/ Validate the IR
         """
-        self.p1.exec_workflow('sale.order', 'procurement_validate', self.p_ir_id)
+        self.hq1c1p1.exec_workflow('sale.order', 'procurement_validate', self.p_ir_id)
 
         """
         3/ Source all lines to the coordo
@@ -111,7 +111,7 @@ class US311Test(ResourcingTest):
         self.p_sol_obj.confirmLine([self.p_irl1_id, self.p_irl2_id])
 
         # Run the scheduler
-        self.p_ir_id = self.run_auto_pos_creation(self.p1, order_to_check=self.p_ir_id)
+        self.p_ir_id = self.run_auto_pos_creation(self.hq1c1p1, order_to_check=self.p_ir_id)
         line_ids = self.p_sol_obj.search([('order_id', '=', self.p_ir_id)])
         not_sourced = True
         while not_sourced:
@@ -138,13 +138,13 @@ class US311Test(ResourcingTest):
         """
         4/ Validate the PO
         """
-        self._validate_po(self.p1, [self.p_po_id])
+        self._validate_po(self.hq1c1p1, [self.p_po_id])
 
         """
         5/ Sync.
         """
-        self.synchronize(self.p1)
-        self.synchronize(self.c1)
+        self.synchronize(self.hq1c1p1)
+        self.synchronize(self.hq1c1)
 
         """
         6/ At coordo, validate the FO
@@ -159,7 +159,7 @@ class US311Test(ResourcingTest):
             self.c_fo_id = c_fo_id
 
         # Validate the Field order
-        self.c1.exec_workflow('sale.order', 'order_validated', self.c_fo_id)
+        self.hq1c1.exec_workflow('sale.order', 'order_validated', self.c_fo_id)
 
         """
         7/ Source the two lines to an external supplier
@@ -168,12 +168,12 @@ class US311Test(ResourcingTest):
         self.c_sol_obj.write(line_ids, {
             'type': 'make_to_order',
             'po_cft': 'po',
-            'supplier': self.get_record(self.c1, 'ext_supplier_1'),
+            'supplier': self.get_record(self.hq1c1, 'ext_supplier_1'),
         })
         self.c_sol_obj.confirmLine(line_ids)
 
         # Get the generated PO
-        self.c_fo_id = self.run_auto_pos_creation(self.c1, order_to_check=self.c_fo_id)
+        self.c_fo_id = self.run_auto_pos_creation(self.hq1c1, order_to_check=self.c_fo_id)
         line_ids = self.c_sol_obj.search([('order_id', '=', self.c_fo_id)])
         self.po_ids = set()
         po_line_ids = []
@@ -215,7 +215,7 @@ class US311Test(ResourcingTest):
         Sync
         """
         # Confirm the PO
-        self._confirm_po(self.c1, [self.c_po_id])
+        self._confirm_po(self.hq1c1, [self.c_po_id])
 
         # Process the IN
         c_in_ids = self.c_pick_obj.search([('purchase_id', '=', self.c_po_id), ('type', '=', 'in')])
@@ -223,7 +223,7 @@ class US311Test(ResourcingTest):
             len(c_in_ids) == 1,
             "There are %s IN association to PO - Should be 1" % len(c_in_ids),
         )
-        proc_obj = self.c1.get('stock.incoming.processor')
+        proc_obj = self.hq1c1.get('stock.incoming.processor')
         proc_res = self.c_pick_obj.action_process(c_in_ids)
         proc_id = proc_res.get('res_id')
         proc_obj.copy_all([proc_id])
@@ -235,22 +235,22 @@ class US311Test(ResourcingTest):
             len(c_out_ids) == 1,
             "There are %s OUT/PICK associated to FO - Should be 1" % len(c_out_ids),
         )
-        out_proc_obj = self.c1.get('outgoing.delivery.processor')
+        out_proc_obj = self.hq1c1.get('outgoing.delivery.processor')
         conv_res = self.c_pick_obj.convert_to_standard(c_out_ids)
         out_id = conv_res.get('res_id')
         proc_res = self.c_pick_obj.action_process([out_id])
         out_proc_obj.copy_all([proc_res.get('res_id')])
         out_proc_obj.do_partial([proc_res.get('res_id')])
 
-        self.synchronize(self.c1)
-        self.synchronize(self.p1)
+        self.synchronize(self.hq1c1)
+        self.synchronize(self.hq1c1p1)
 
     def close_flow(self):
         """
         Process the IN and the OUT at project
         """
         # Process the IN
-        proc_obj = self.p1.get('stock.incoming.processor')
+        proc_obj = self.hq1c1p1.get('stock.incoming.processor')
         for in_id in self.p_in_ids:
             proc_res = self.p_pick_obj.action_process([in_id])
             proc_id = proc_res.get('res_id')
@@ -258,7 +258,7 @@ class US311Test(ResourcingTest):
             proc_obj.do_incoming_shipment([proc_id])
 
         # Process the OUT
-        out_proc_obj = self.p1.get('outgoing.delivery.processor')
+        out_proc_obj = self.hq1c1p1.get('outgoing.delivery.processor')
         for out_id in self.out_ids:
             proc_res = self.p_pick_obj.action_process([out_id])
             out_proc_obj.copy_all([proc_res.get('res_id')])
@@ -284,10 +284,10 @@ class US311Test(ResourcingTest):
 
         product_name = {}
         for pkey in ex_vals.keys():
-            product_name[pkey] = self.p1.get('product.product').read(pkey, ['name'])['name']
+            product_name[pkey] = self.hq1c1p1.get('product.product').read(pkey, ['name'])['name']
         for pkey in real_vals.keys():
             if pkey not in product_name:
-                product_name[pkey] = self.p1.get('product.product').read(pkey, ['name'])['name']
+                product_name[pkey] = self.hq1c1p1.get('product.product').read(pkey, ['name'])['name']
 
         kdiff = set(ex_vals.keys()) - set(real_vals.keys())
         self.assert_(
@@ -385,7 +385,7 @@ class US311Test(ResourcingTest):
            * One line with 15 PCE
            * One line with 10 PCE
         """
-        split_obj = self.c1.get('split.purchase.order.line.wizard')
+        split_obj = self.hq1c1.get('split.purchase.order.line.wizard')
         split_id = split_obj.create({
             'purchase_line_id': self.c_pol_25,
             'original_qty': 25.00,
@@ -418,7 +418,7 @@ class US311Test(ResourcingTest):
             res.get('res_id', False) and res.get('res_model', False) == 'purchase.order.line.unlink.wizard',
             "There is no wizard displayed when cancel a PO line that sources a FO/IR line",
         )
-        w_res = self.c1.get('purchase.order.line.unlink.wizard').just_cancel(res.get('res_id'))
+        w_res = self.hq1c1.get('purchase.order.line.unlink.wizard').just_cancel(res.get('res_id'))
 
     def test_simple_split_1(self):
         """
@@ -430,7 +430,7 @@ class US311Test(ResourcingTest):
         #1 Split the PO line
         self.split_po_line()
         #2 Validate the PO
-        self._validate_po(self.c1, [self.c_po_id])
+        self._validate_po(self.hq1c1, [self.c_po_id])
         #3 Confirm the PO and #4 Sync
         self.run_flow()
 
@@ -447,9 +447,9 @@ class US311Test(ResourcingTest):
         #1 Split the PO line
         self.split_po_line()
         #2 Validate the PO
-        self._validate_po(self.c1, [self.c_po_id])
+        self._validate_po(self.hq1c1, [self.c_po_id])
         #3 Sync
-        self.synchronize(self.c1)
+        self.synchronize(self.hq1c1)
         #4 Confirm the PO and #5 Sync
         self.run_flow()
 
@@ -463,7 +463,7 @@ class US311Test(ResourcingTest):
         #4 Sync
         """
         #1 Validate the PO
-        self._validate_po(self.c1, [self.c_po_id])
+        self._validate_po(self.hq1c1, [self.c_po_id])
         #2 Split the PO line
         self.split_po_line()
         #3 Confirm the PO and #4 Sync
@@ -484,7 +484,7 @@ class US311Test(ResourcingTest):
         #2 Cancel the PO line
         self.cancel_po_line()
         #3 Validate the PO
-        self._validate_po(self.c1, [self.c_po_id])
+        self._validate_po(self.hq1c1, [self.c_po_id])
         #4 Confirm the PO and #5 Sync
         self.run_flow()
 
@@ -501,7 +501,7 @@ class US311Test(ResourcingTest):
         #1 Split the PO line
         self.split_po_line()
         #2 Validate the PO
-        self._validate_po(self.c1, [self.c_po_id])
+        self._validate_po(self.hq1c1, [self.c_po_id])
         #3 Cancel the PO line
         self.cancel_po_line()
         #4 Confirm the PO and #5 Sync
@@ -518,7 +518,7 @@ class US311Test(ResourcingTest):
         #5 Sync
         """
         #1 Validate the PO
-        self._validate_po(self.c1, [self.c_po_id])
+        self._validate_po(self.hq1c1, [self.c_po_id])
         #2 Split the PO line
         self.split_po_line()
         #3 Cancel the PO line
@@ -542,9 +542,9 @@ class US311Test(ResourcingTest):
         #2 Cancel the PO line
         self.cancel_po_line()
         #3 Validate the PO
-        self._validate_po(self.c1, [self.c_po_id])
+        self._validate_po(self.hq1c1, [self.c_po_id])
         #4 Synchronize
-        self.synchronize(self.c1)
+        self.synchronize(self.hq1c1)
         #5 Confirm the PO and #6 Sync
         self.run_flow()
 
@@ -562,11 +562,11 @@ class US311Test(ResourcingTest):
         #1 Split the PO line
         self.split_po_line()
         #2 Validate the PO
-        self._validate_po(self.c1, [self.c_po_id])
+        self._validate_po(self.hq1c1, [self.c_po_id])
         #3 Cancel the PO line
         self.cancel_po_line()
         #4 Synchronize
-        self.synchronize(self.c1)
+        self.synchronize(self.hq1c1)
         #5 Confirm the PO and #6 Sync
         self.run_flow()
 
@@ -584,9 +584,9 @@ class US311Test(ResourcingTest):
         #1 Split the PO line
         self.split_po_line()
         #2 Validate the PO
-        self._validate_po(self.c1, [self.c_po_id])
+        self._validate_po(self.hq1c1, [self.c_po_id])
         #3 Synchronize
-        self.synchronize(self.c1)
+        self.synchronize(self.hq1c1)
         #4 Cancel the PO line
         self.cancel_po_line()
         #5 Confirm the PO and #6 Sync
@@ -604,13 +604,13 @@ class US311Test(ResourcingTest):
         #6 Sync
         """
         #1 Synchronize
-        self.synchronize(self.c1)
+        self.synchronize(self.hq1c1)
         #2 Split the PO line
         self.split_po_line()
         #3 Cancel the PO line
         self.cancel_po_line()
         #4 Validate the PO
-        self._validate_po(self.c1, [self.c_po_id])
+        self._validate_po(self.hq1c1, [self.c_po_id])
         #5 Confirm the PO and #6 Sync
         self.run_flow()
 
@@ -626,11 +626,11 @@ class US311Test(ResourcingTest):
         #6 Sync
         """
         #1 Synchronize
-        self.synchronize(self.c1)
+        self.synchronize(self.hq1c1)
         #2 Split the PO line
         self.split_po_line()
         #3 Validate the PO
-        self._validate_po(self.c1, [self.c_po_id])
+        self._validate_po(self.hq1c1, [self.c_po_id])
         #4 Cancel the PO line
         self.cancel_po_line()
         #5 Confirm the PO and #6 Sync
@@ -648,9 +648,9 @@ class US311Test(ResourcingTest):
         #6 Sync
         """
         #1 Synchronize
-        self.synchronize(self.c1)
+        self.synchronize(self.hq1c1)
         #2 Validate the PO
-        self._validate_po(self.c1, [self.c_po_id])
+        self._validate_po(self.hq1c1, [self.c_po_id])
         #3 Split the PO line
         self.split_po_line()
         #4 Cancel the PO line
@@ -671,15 +671,15 @@ class US311Test(ResourcingTest):
         #7 Sync
         """
         #1 Synchronize
-        self.synchronize(self.c1)
+        self.synchronize(self.hq1c1)
         #2 Split the PO line
         self.split_po_line()
         #3 Cancel the PO line
         self.cancel_po_line()
         #4 Validate the PO
-        self._validate_po(self.c1, [self.c_po_id])
+        self._validate_po(self.hq1c1, [self.c_po_id])
         #5 Synchronize
-        self.synchronize(self.c1)
+        self.synchronize(self.hq1c1)
         #6 Confirm the PO and #7 Sync
         self.run_flow()
 
@@ -696,15 +696,15 @@ class US311Test(ResourcingTest):
         #7 Sync
         """
         #1 Synchronize
-        self.synchronize(self.c1)
+        self.synchronize(self.hq1c1)
         #2 Split the PO line
         self.split_po_line()
         #3 Validate the PO
-        self._validate_po(self.c1, [self.c_po_id])
+        self._validate_po(self.hq1c1, [self.c_po_id])
         #4 Cancel the PO line
         self.cancel_po_line()
         #5 Synchronize
-        self.synchronize(self.c1)
+        self.synchronize(self.hq1c1)
         #6 Confirm the PO and #7 Sync
         self.run_flow()
 
@@ -721,13 +721,13 @@ class US311Test(ResourcingTest):
         #7 Sync
         """
         #1 Synchronize
-        self.synchronize(self.c1)
+        self.synchronize(self.hq1c1)
         #2 Split the PO line
         self.split_po_line()
         #3 Validate the PO
-        self._validate_po(self.c1, [self.c_po_id])
+        self._validate_po(self.hq1c1, [self.c_po_id])
         #4 Synchronize
-        self.synchronize(self.c1)
+        self.synchronize(self.hq1c1)
         #5 Cancel the PO line
         self.cancel_po_line()
         #6 Confirm the PO and #7 Sync
@@ -748,7 +748,7 @@ class US311Test(ResourcingTest):
             res.get('res_id', False) and res.get('res_model', False) == 'purchase.order.line.unlink.wizard',
             "There is no wizard displayed when cancel a PO line that sources a FO/IR line",
         )
-        w_res = self.c1.get('purchase.order.line.unlink.wizard').just_cancel(res.get('res_id'))
+        w_res = self.hq1c1.get('purchase.order.line.unlink.wizard').just_cancel(res.get('res_id'))
 
         self.run_flow()
 
@@ -823,7 +823,7 @@ class US311TestCancelNewLine(US311Test):
             res.get('res_id', False) and res.get('res_model', False) == 'purchase.order.line.unlink.wizard',
             "There is no wizard displayed when cancel a PO line that sources a FO/IR line",
         )
-        w_res = self.c1.get('purchase.order.line.unlink.wizard').just_cancel(res.get('res_id'))
+        w_res = self.hq1c1.get('purchase.order.line.unlink.wizard').just_cancel(res.get('res_id'))
 
 class US311TestCancelOldLine(US311Test):
     """
@@ -850,7 +850,7 @@ class US311TestCancelOldLine(US311Test):
             res.get('res_id', False) and res.get('res_model', False) == 'purchase.order.line.unlink.wizard',
             "There is no wizard displayed when cancel a PO line that sources a FO/IR line",
         )
-        w_res = self.c1.get('purchase.order.line.unlink.wizard').just_cancel(res.get('res_id'))
+        w_res = self.hq1c1.get('purchase.order.line.unlink.wizard').just_cancel(res.get('res_id'))
 
 class US311TestCancelNewLineMoreOnNewLine(US311TestCancelNewLine):
     """
@@ -1040,13 +1040,13 @@ class US311TestCancelAllLines(US311Test):
             res.get('res_id', False) and res.get('res_model', False) == 'purchase.order.line.unlink.wizard',
             "There is no wizard displayed when cancel a PO line that sources a FO/IR line",
         )
-        w_res = self.c1.get('purchase.order.line.unlink.wizard').just_cancel(res.get('res_id'))
+        w_res = self.hq1c1.get('purchase.order.line.unlink.wizard').just_cancel(res.get('res_id'))
         res = self.c_pol_obj.ask_unlink(self.c_pol_15)
         self.assert_(
             res.get('res_id', False) and res.get('res_model', False) == 'purchase.order.line.unlink.wizard',
             "There is no wizard displayed when cancel a PO line that sources a FO/IR line",
         )
-        w_res = self.c1.get('purchase.order.line.unlink.wizard').just_cancel(res.get('res_id'))
+        w_res = self.hq1c1.get('purchase.order.line.unlink.wizard').just_cancel(res.get('res_id'))
 
 #def get_test_class():
 #    return US311TestCancelNewLine

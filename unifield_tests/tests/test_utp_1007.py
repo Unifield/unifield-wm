@@ -21,19 +21,19 @@ class UTP1007Test(ResourcingTest):
         5/ Cancel and resource the backorder
         """
         super(UTP1007Test, self).setUp()
-        self.c_so_obj = self.c1.get('sale.order')
-        self.c_sol_obj = self.c1.get('sale.order.line')
-        self.c_po_obj = self.c1.get('purchase.order')
-        self.c_pol_obj = self.c1.get('purchase.order.line')
-        self.c_proc_obj = self.c1.get('stock.incoming.processor')
-        self.c_proc_line_obj = self.c1.get('stock.move.in.processor')
-        self.c_pick_obj = self.c1.get('stock.picking')
-        self.c_enter_reason_obj = self.c1.get('enter.reason')
+        self.c_so_obj = self.hq1c1.get('sale.order')
+        self.c_sol_obj = self.hq1c1.get('sale.order.line')
+        self.c_po_obj = self.hq1c1.get('purchase.order')
+        self.c_pol_obj = self.hq1c1.get('purchase.order.line')
+        self.c_proc_obj = self.hq1c1.get('stock.incoming.processor')
+        self.c_proc_line_obj = self.hq1c1.get('stock.move.in.processor')
+        self.c_pick_obj = self.hq1c1.get('stock.picking')
+        self.c_enter_reason_obj = self.hq1c1.get('enter.reason')
 
         # Prepare values for the internal request
-        prod_log1_id = self.get_record(self.c1, 'prod_log_1')
-        uom_pce_id = self.get_record(self.c1, 'product_uom_unit', module='product')
-        distrib_id = self.create_analytic_distribution(self.c1)
+        prod_log1_id = self.get_record(self.hq1c1, 'prod_log_1')
+        uom_pce_id = self.get_record(self.hq1c1, 'product_uom_unit', module='product')
+        distrib_id = self.create_analytic_distribution(self.hq1c1)
 
         """
         1/ Create an IR with one line of 10
@@ -41,7 +41,7 @@ class UTP1007Test(ResourcingTest):
         """
         order_values = {
             'procurement_request': True,
-            'location_requestor_id': self.get_record(self.c1, 'stock_location_stock', module='stock'),
+            'location_requestor_id': self.get_record(self.hq1c1, 'stock_location_stock', module='stock'),
         }
 
         self.c_so_id = self.c_so_obj.create(order_values)
@@ -59,7 +59,7 @@ class UTP1007Test(ResourcingTest):
         self.c_sol_obj.create(line_values)
 
         # Validate the sale order
-        self.c1.exec_workflow('sale.order', 'procurement_validate', self.c_so_id)
+        self.hq1c1.exec_workflow('sale.order', 'procurement_validate', self.c_so_id)
 
         """
         2/ Source the IR to an external partner
@@ -67,12 +67,12 @@ class UTP1007Test(ResourcingTest):
         line_ids = self.c_sol_obj.search([('order_id', '=', self.c_so_id)])
         self.c_sol_obj.write(line_ids, {
             'po_cft': 'po',
-            'supplier': self.get_record(self.c1, 'ext_supplier_1'),
+            'supplier': self.get_record(self.hq1c1, 'ext_supplier_1'),
         })
         self.c_sol_obj.confirmLine(line_ids)
 
         # Run the scheduler
-        self.c_so_id = self.run_auto_pos_creation(self.c1, order_to_check=self.c_so_id)
+        self.c_so_id = self.run_auto_pos_creation(self.hq1c1, order_to_check=self.c_so_id)
 
         line_ids = self.c_sol_obj.search([('order_id', '=', self.c_so_id)])
         not_sourced = True
@@ -101,8 +101,8 @@ class UTP1007Test(ResourcingTest):
         """
         3/ Validate and confirm the PO
         """
-        self._validate_po(self.c1, [self.c_po_id])
-        self._confirm_po(self.c1, [self.c_po_id])
+        self._validate_po(self.hq1c1, [self.c_po_id])
+        self._confirm_po(self.hq1c1, [self.c_po_id])
 
         """
         4/ Receive 98 PCE

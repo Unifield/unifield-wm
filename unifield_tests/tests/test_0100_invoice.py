@@ -13,7 +13,7 @@ class InvoiceTest(FinanceTest):
         Then I validate this invoice.
         '''
         # Prepare some values
-        db = self.p1
+        db = self.hq1c1p1
         partner_obj = db.get('res.partner')
         invoice_obj = db.get('account.invoice')
         account_obj = db.get('account.account')
