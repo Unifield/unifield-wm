@@ -37,7 +37,7 @@ class UnifieldTestSuite(unittest.suite.TestSuite):
 class UnifieldTestLoader(unittest.loader.TestLoader):
     suiteClass = UnifieldTestSuite
 
-    def __init__(self, pool, cr, uid, cid):
+    def __init__(self, pool, cr, uid, cid, update_module=False):
         """
         Give information the the sync. DB connection
         """
@@ -45,6 +45,7 @@ class UnifieldTestLoader(unittest.loader.TestLoader):
         self.cr = cr
         self.uid = uid
         self.cid = cid
+        self.update_module = update_module
 
     def filter_tests(self, tests):
         """
@@ -127,7 +128,13 @@ class UnifieldTestLoader(unittest.loader.TestLoader):
             testCaseNames = ['runTest']
         testCases = []
         for tcn in testCaseNames:
-            testCases.append(testCaseClass(tcn, cr=self.cr, uid=self.uid, cid=self.cid))
+            testCases.append(testCaseClass(
+                tcn,
+                cr=self.cr,
+                uid=self.uid,
+                cid=self.cid,
+                update_module=self.update_module,
+            ))
 
         loaded_suite = self.suiteClass(testCases)
         loaded_suite.loadder = self
