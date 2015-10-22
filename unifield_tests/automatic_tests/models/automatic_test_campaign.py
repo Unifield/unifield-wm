@@ -31,7 +31,7 @@ from osv import osv
 from osv import fields
 from tools.translate import _
 
-from unifield_tests import unifield_unittest
+from unifield_tests.lib import unifield_unittest
 
 
 class automatic_test_campaign(osv.osv):
@@ -154,8 +154,6 @@ class automatic_test_campaign(osv.osv):
                 _('You cannot run a campaign without tests'),
             )
         else:
-            import pdb
-            pdb.set_trace()
             test_obj.write(cr, uid, test_ids, {
                 'state': 'not_run',
             }, context=context)

@@ -28,7 +28,7 @@ from osv import osv
 from osv import fields
 from tools.translate import _
 
-from unifield_tests import unifield_unittest
+from unifield_tests.lib import unifield_unittest
 
 
 class automatic_test_template(osv.osv):
