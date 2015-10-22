@@ -102,8 +102,8 @@ class automatic_test(osv.osv):
             required=True,
             ondelete='cascade',
         ),
-        'test_file': fields.binary(
-            string='Test file',
+        'data_file': fields.binary(
+            string='Data file',
         ),
         'state': fields.function(
             _get_state,
@@ -138,6 +138,48 @@ class automatic_test(osv.osv):
             readonly=True,
         ),
     }
+
+    def name_get(self, cr, uid, ids, context=None):
+        """
+        Return the name of the template instead of this ID
+        """
+        if context is None:
+            context = {}
+
+        if not ids:
+            return []
+
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+
+        return [(r['id'], r['template_id'][1]) for r in self.read(
+            cr, uid, ids, ['template_id'], context, load='_classic_read')]
+
+
+    def add_file(self, cr, uid, ids, context=None):
+        """
+        Run a wizard to select a file
+        """
+        if context is None:
+            context = {}
+
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+
+        wiz_model = 'automatic.test.add.file'
+        wiz_id = self.pool.get(wiz_model).create(cr, uid, {
+            'test_id': ids[0],
+        }, context=context)
+
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': wiz_model,
+            'res_id': wiz_id,
+            'view_mode': 'form',
+            'view_type': 'form',
+            'target': 'new',
+            'context': context,
+        }
 
 automatic_test()
 

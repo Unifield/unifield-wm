@@ -133,7 +133,6 @@ class UnifieldTest(unittest.TestCase):
         self.update_module = kwargs.pop('update_module', False)
 
         self.unifield_test = True
-        print(self.__class__)
 
         super(UnifieldTest, self).__init__(*args, **kwargs)
 

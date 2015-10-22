@@ -37,6 +37,7 @@
         'automatic_tests/views/automatic_test_template_view.xml',
         'automatic_tests/views/automatic_test_campaign_view.xml',
         'automatic_tests/views/automatic_test_view.xml',
+        'automatic_tests/wizard/views/automatic_test_add_file_view.xml',
     ],
     "update_xml" : [],
     "demo_xml" : [],
