@@ -69,7 +69,7 @@ class automatic_test_template(osv.osv):
             ])
             if not tmpl_id:
                 tmpl_obj.create(cr, uid, {
-                    'name': hasattr(t, 'description') and t.description or t._testMethodName,
+                    'name': hasattr(t, 'description') and t.description or t.__class__.__name__,
                     'test_class': t.__class__.__name__,
                     'test_type': hasattr(t, 'category') and t.category or False,
                 })
@@ -186,12 +186,13 @@ class automatic_test_campaign(osv.osv):
             'start_date': time.strftime('%Y-%m-%d %H:%M:%S'),
         }, context=context)
 
-#        self.run_tests(cr, uid, ids, context=context)
-        thread = threading.Thread(
-            target=self.run_tests,
-            args=(cr, uid, ids, context, True),
-        )
-        thread.start()
+        self.run_tests(cr, uid, ids, context=context)
+#        cr.commit()
+#        thread = threading.Thread(
+#            target=self.run_tests,
+#            args=(cr, uid, ids, context, True),
+#        )
+#        thread.start()
 
         return self.update(cr, uid, ids, context=context)
 
@@ -262,6 +263,64 @@ class automatic_test(osv.osv):
     _description = 'A functional test to launch or launched'
     _rec_name = 'template_id'
 
+    def _get_end_date(self, cr, uid, ids, field_name, args, context=None):
+        """
+        Compute the end date as the max end date of the tests.
+        """
+        if context is None:
+            context = {}
+
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+
+        res = {}
+        for test in self.browse(cr, uid, ids, context=context):
+            edate = False
+            for method in test.method_ids:
+                if not edate or edate < method.end_date:
+                    edate = method.end_date
+
+            res[test.id] = edate
+
+        return res
+
+    def _get_state(self, cr, uid, ids, field_name, args, context=None):
+        """
+        Compute the state of the test according to result of Test methods.
+        """
+        if context is None:
+            context = {}
+
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+
+        res = {}
+        for test in self.browse(cr, uid, ids, context=context):
+            res[test.id] = 'not_run'
+            done = 0
+            progress = 0
+            fail = 0
+
+            for method in test.method_ids:
+                if method.state == 'done':
+                    done += 1
+                elif method.state == 'progress':
+                    progress += 1
+                elif method.state == 'fail':
+                    fail += 1
+                elif method.state == 'error':
+                    res[test.id] = 'error'
+                    break
+
+            if done == len(test.method_ids):
+                res[test.id] = 'done'
+            elif fail:
+                res[test.id] = 'fail'
+            elif progress:
+                res[test.id] = 'progress'
+
+        return res
+
     _columns = {
         'template_id': fields.many2one(
             'automatic.test.template',
@@ -275,6 +334,57 @@ class automatic_test(osv.osv):
             required=True,
             ondelete='cascade',
         ),
+        'state': fields.function(
+            _get_state,
+            method=True,
+            type='selection',
+            selection=[
+                ('not_run', 'Not run'),
+                ('progress', 'In progress'),
+                ('done', 'Done'),
+                ('fail', 'Failed'),
+                ('error', 'Error'),
+            ],
+            string='Status',
+            readonly=True,
+        ),
+        'method_ids': fields.one2many(
+            'automatic.test.method',
+            'test_id',
+            string='Test methods',
+            readonly=True,
+        ),
+        'start_date': fields.datetime(
+            string='Start date',
+            readonly=True,
+        ),
+        'end_date': fields.function(
+            _get_end_date,
+            method=True,
+            type='datetime',
+            string='End date',
+            readonly=True,
+        ),
+    }
+
+automatic_test()
+
+
+class automatic_test_method(osv.osv):
+    _name = 'automatic.test.method'
+    _description = 'A test method for a functional test case'
+
+    _columns = {
+        'name': fields.char(
+            string='Name',
+            size=256,
+        ),
+        'test_id': fields.many2one(
+            'automatic.test',
+            string='Test Case',
+            readonly=True,
+            ondelete='cascade',
+        ),
         'state': fields.selection(
             selection=[
                 ('not_run', 'Not run'),
@@ -285,7 +395,6 @@ class automatic_test(osv.osv):
                 ('skip', 'Skip'),
             ],
             string='Status',
-            required=True,
             readonly=True,
         ),
         'start_date': fields.datetime(
@@ -310,6 +419,6 @@ class automatic_test(osv.osv):
         'state': lambda *a: 'not_run',
     }
 
-automatic_test()
+automatic_test_method()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

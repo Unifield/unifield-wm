@@ -54,12 +54,21 @@ class UnifieldTestLoader(unittest.loader.TestLoader):
         res = []
         for t in tests:
             if isinstance(t, unittest.case.TestCase):
-                t_id = self.pool.get('automatic.test').search(self.cr, self.uid, [
+                t_ids = self.pool.get('automatic.test').search(self.cr, self.uid, [
                     ('template_id.test_class', '=', t.__class__.__name__),
                     ('campaign_id', '=', self.cid),
                 ], limit=1)
-                if t_id:
-                    t.test_id = t_id
+                if t_ids:
+                    t.test_id = t_ids
+                    for t_id in t_ids:
+                        self.pool.get('automatic.test.method').create(
+                            self.cr,
+                            self.uid,
+                            {
+                                'test_id': t_id,
+                                'name': t._testMethodName,
+                            },
+                        )
                     res.append(t)
             elif isinstance(t, unittest.suite.TestSuite):
                 if t._tests:
@@ -173,38 +182,49 @@ class UnifieldTestResult(unittest.runner.TextTestResult):
         self.uid = uid
         self.cid = cid
         self.test_obj = None
+        self.method_obj = None
         if self.pool:
             self.test_obj = self.pool.get('automatic.test')
+            self.method_obj = self.pool.get('automatic.test.method')
 
-    def write_test(self, test, data=None):
+    def write_test_method(self, test, data=None):
         """
         Return the ID of the automatic test
         """
         if data is None:
             data = {}
 
-        if self.test_obj and data:
-            t_ids = self.test_obj.search(self.cr, self.uid, [
-                ('campaign_id', '=', self.cid),
-                ('template_id.test_class', '=', test.__class__.__name__),
+        if self.method_obj and data:
+            t_ids = self.method_obj.search(self.cr, self.uid, [
+                ('test_id', '=', test.test_id),
+                ('name', '=', test._testMethodName),
             ])
-            return self.test_obj.write(self.cr, self.uid, t_ids, data)
+            return self.method_obj.write(self.cr, self.uid, t_ids, data)
 
         return False
 
     def startTest(self, test):
-        self.write_test(test, {
+        self.write_test_method(test, {
             'start_date': time.strftime('%Y-%m-%d %H:%M:%S'),
             'state': 'progress',
         })
+        if self.test_obj:
+            m_id = self.test_obj.search(self.cr, self.uid, [
+                ('id', '=', test.test_id),
+                ('start_date', '=', False),
+            ])
+            if m_id:
+                self.test_obj.write(self.cr, self.uid, m_id, {
+                    'start_date': time.strftime('%Y-%m-%d %H:%M:%S'),
+                })
         return super(UnifieldTestResult, self).startTest(test)
 
     def stopTest(self, test):
-        self.write_test(test, {'end_date': time.strftime('%Y-%m-%d %H:%M:%S')})
+        self.write_test_method(test, {'end_date': time.strftime('%Y-%m-%d %H:%M:%S')})
         return super(UnifieldTestResult, self).stopTest(test)
 
     def addError(self, test, err):
-        self.write_test(test, {
+        self.write_test_method(test, {
             'message': format_error(err),
             'state': 'error',
             'traceback': traceback.format_exc(err[2]),
@@ -212,7 +232,7 @@ class UnifieldTestResult(unittest.runner.TextTestResult):
         return super(UnifieldTestResult, self).addError(test, err)
 
     def addFailure(self, test, err):
-        self.write_test(test, {
+        self.write_test_method(test, {
             'message': format_error(err),
             'state': 'fail',
             'traceback': traceback.format_exc(err[2]),
@@ -220,20 +240,20 @@ class UnifieldTestResult(unittest.runner.TextTestResult):
         return super(UnifieldTestResult, self).addFailure(test, err)
 
     def addSuccess(self, test):
-        self.write_test(test, {
+        self.write_test_method(test, {
             'state': 'done',
         })
         return super(UnifieldTestResult, self).addSuccess(test)
 
     def addSkip(self, test, reason):
-        self.write_test(test, {
+        self.write_test_method(test, {
             'message': reason,
             'state': 'skip',
         })
         return super(UnifieldTestResult, self).addSkip(test, reason)
 
     def addExpectedFailure(self, test, err):
-        self.write_test(test, {
+        self.write_test_method(test, {
             'message': format_error(err),
             'state': 'done',
             'traceback': traceback.format_exc(err[2]),
@@ -241,7 +261,7 @@ class UnifieldTestResult(unittest.runner.TextTestResult):
         return super(UnifieldTestResult, self).addExpectedFailure(test, err)
 
     def addUnexpectedSuccess(self, test):
-        self.write_test(test, {
+        self.write_test_method(test, {
             'message': 'Test succeed but should failed',
             'state': 'fail',
         })
