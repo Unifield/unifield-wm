@@ -21,31 +21,10 @@
 #
 ##############################################################################
 
-{
-    "name" : "Unifield Unit Tests",
-    "version" : "0.1",
-    "description" : "This module adds unit test for Unifield modules",
-    "author" : "TeMPO Consulting, MSF",
-    "category" : "Tests",
-    "depends" : [
-        'base',
-        'sync_server',
-    ],
-    "init_xml" : [
-        'automatic_tests/data/test_db_mapping_data.xml',
-        'automatic_tests/views/test_db_mapping_view.xml',
-        'automatic_tests/views/automatic_test_template_view.xml',
-        'automatic_tests/views/automatic_test_campaign_view.xml',
-        'automatic_tests/views/automatic_test_view.xml',
-    ],
-    "update_xml" : [],
-    "demo_xml" : [],
-    "test": [],
-    "function": [
-        ('automatic.test.template', 'update_automatic_test_template'),
-    ],
-    "installable": True,
-    "active": False
-}
+import test_db_mapping
+import automatic_test_template
+import automatic_test_campaign
+import automatic_test
+import automatic_test_method
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

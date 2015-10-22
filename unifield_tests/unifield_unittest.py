@@ -78,7 +78,7 @@ class UnifieldTestLoader(unittest.loader.TestLoader):
 
         return res
 
-    def discover(self, start_dir, pattern='test*.py', top_level_dir=None):
+    def discover(self, start_dir, pattern='test*.py', top_level_dir=None, from_update=False):
         """
         Discover all tests in the tests directory
         """
@@ -123,9 +123,11 @@ class UnifieldTestLoader(unittest.loader.TestLoader):
             raise ImportError('Start directory is not importable: %r' % start_dir)
 
         base_tests = list(self._find_tests(start_dir, pattern))
-        tests = self.filter_tests(base_tests)
+        if not from_update:
+            tests = self.filter_tests(base_tests)
+            return self.suiteClass(tests, self)
 
-        return self.suiteClass(tests, self)
+        return self.suiteClass(base_tests, self)
 
     def loadTestsFromTestCase(self, testCaseClass):
         """Return a suite of all tests cases contained in testCaseClass"""

@@ -20,14 +20,10 @@
 #
 ##############################################################################
 
-import sys
 import threading
-import unittest
 import time
 
 import pooler
-
-import unifield_unittest
 
 from os import path
 
@@ -35,66 +31,7 @@ from osv import osv
 from osv import fields
 from tools.translate import _
 
-
-class automatic_test_template(osv.osv):
-    _name = 'automatic.test.template'
-    _description = 'Template of the automatic test'
-
-    def update_automatic_test_template(self, cr, uid, *a, **b):
-        """
-        Create automatic test templates according to test in unifield_tests
-        module.
-        """
-        tmpl_obj = self.pool.get('automatic.test.template')
-
-        test_dir = '%s/tests/' % path.dirname(path.realpath(__file__))
-        loader = unifield_unittest.UnifieldTestLoader(self.pool, cr, uid, None, update_module=True)
-        suite = loader.discover(test_dir, pattern='test*.py')
-
-        tests = []
-
-        def discover_tests(d_suite):
-            for test in d_suite:
-                if isinstance(test, unittest.suite.TestSuite):
-                    discover_tests(test)
-                elif isinstance(test, unittest.case.TestCase):
-                    if test not in tests:
-                        tests.append(test)
-
-        discover_tests(suite)
-
-        for t in tests:
-            tmpl_id = tmpl_obj.search(cr, uid, [
-                ('test_class', '=', t.__class__.__name__),
-            ])
-            if not tmpl_id:
-                tmpl_obj.create(cr, uid, {
-                    'name': hasattr(t, 'description') and t.description or t.__class__.__name__,
-                    'test_class': t.__class__.__name__,
-                    'test_type': hasattr(t, 'category') and t.category or False,
-                })
-
-        return True
-
-    _columns = {
-        'name': fields.char(
-            string='Name',
-            size=256,
-            required=True,
-        ),
-        'test_type': fields.char(
-            string='Type',
-            size=256,
-            required=False,
-        ),
-        'test_class': fields.char(
-            string='Model',
-            size=256,
-            required=True,
-        ),
-    }
-
-automatic_test_template()
+from unifield_tests import unifield_unittest
 
 
 class automatic_test_campaign(osv.osv):
@@ -158,7 +95,8 @@ class automatic_test_campaign(osv.osv):
         if 'test_ids' not in defaults:
             defaults['test_ids'] = []
 
-        return super(automatic_test_campaign, self).copy(cr, uid, copy_id, defaults, context=context)
+        return super(automatic_test_campaign, self).\
+            copy(cr, uid, copy_id, defaults, context=context)
 
     def generate_tests(self, cr, uid, ids, context=None):
         """
@@ -266,10 +204,11 @@ class automatic_test_campaign(osv.osv):
             cr = pooler.get_db(cr.dbname).cursor()
 
         try:
-            test_dir = '%s/tests/' % path.dirname(path.realpath(__file__))
+            test_dir = '%s/../../tests/' % path.dirname(path.realpath(__file__))
             for camp in self.browse(cr, uid, ids, context=context):
                 # Discover and filter test cases
-                loader = unifield_unittest.UnifieldTestLoader(self.pool, cr, uid, camp.id)
+                loader = unifield_unittest.\
+                    UnifieldTestLoader(self.pool, cr, uid, camp.id)
                 suite = loader.discover(test_dir, pattern='test*.py')
 
                 # Create a runner linked to the campaign
@@ -297,173 +236,5 @@ class automatic_test_campaign(osv.osv):
         return True
 
 automatic_test_campaign()
-
-
-class automatic_test(osv.osv):
-    _name = 'automatic.test'
-    _description = 'A functional test to launch or launched'
-    _rec_name = 'template_id'
-
-    def _get_end_date(self, cr, uid, ids, field_name, args, context=None):
-        """
-        Compute the end date as the max end date of the tests.
-        """
-        if context is None:
-            context = {}
-
-        if isinstance(ids, (int, long)):
-            ids = [ids]
-
-        res = {}
-        for test in self.browse(cr, uid, ids, context=context):
-            edate = False
-            for method in test.method_ids:
-                if not edate or edate < method.end_date:
-                    edate = method.end_date
-
-            res[test.id] = edate
-
-        return res
-
-    def _get_state(self, cr, uid, ids, field_name, args, context=None):
-        """
-        Compute the state of the test according to result of Test methods.
-        """
-        if context is None:
-            context = {}
-
-        if isinstance(ids, (int, long)):
-            ids = [ids]
-
-        res = {}
-        for test in self.browse(cr, uid, ids, context=context):
-            res[test.id] = test.campaign_id and test.campaign_id.state in ('draft', 'not_run') and 'draft' or 'not_run'
-            done = 0
-            progress = 0
-            fail = 0
-
-            for method in test.method_ids:
-                if method.state == 'done':
-                    done += 1
-                elif method.state == 'progress':
-                    progress += 1
-                elif method.state == 'fail':
-                    fail += 1
-                elif method.state == 'error':
-                    res[test.id] = 'error'
-                    break
-
-            if done and done == len(test.method_ids):
-                res[test.id] = 'done'
-            elif fail:
-                res[test.id] = 'fail'
-            elif progress:
-                res[test.id] = 'progress'
-
-        return res
-
-    _columns = {
-        'template_id': fields.many2one(
-            'automatic.test.template',
-            string='Template',
-            required=True,
-            ondelete='cascade',
-        ),
-        'campaign_id': fields.many2one(
-            'automatic.test.campaign',
-            string='Campaign',
-            required=True,
-            ondelete='cascade',
-        ),
-        'test_file': fields.binary(
-            string='Test file',
-        ),
-        'state': fields.function(
-            _get_state,
-            method=True,
-            type='selection',
-            selection=[
-                ('draft', 'Draft'),
-                ('not_run', 'Not run'),
-                ('progress', 'In progress'),
-                ('done', 'Done'),
-                ('fail', 'Failed'),
-                ('error', 'Error'),
-            ],
-            string='Status',
-            readonly=True,
-        ),
-        'method_ids': fields.one2many(
-            'automatic.test.method',
-            'test_id',
-            string='Test methods',
-            readonly=True,
-        ),
-        'start_date': fields.datetime(
-            string='Start date',
-            readonly=True,
-        ),
-        'end_date': fields.function(
-            _get_end_date,
-            method=True,
-            type='datetime',
-            string='End date',
-            readonly=True,
-        ),
-    }
-
-automatic_test()
-
-
-class automatic_test_method(osv.osv):
-    _name = 'automatic.test.method'
-    _description = 'A test method for a functional test case'
-
-    _columns = {
-        'name': fields.char(
-            string='Name',
-            size=256,
-        ),
-        'test_id': fields.many2one(
-            'automatic.test',
-            string='Test Case',
-            readonly=True,
-            ondelete='cascade',
-        ),
-        'state': fields.selection(
-            selection=[
-                ('not_run', 'Not run'),
-                ('progress', 'In progress'),
-                ('done', 'Done'),
-                ('fail', 'Failed'),
-                ('error', 'Error'),
-                ('skip', 'Skip'),
-            ],
-            string='Status',
-            readonly=True,
-        ),
-        'start_date': fields.datetime(
-            string='Start date',
-            readonly=True,
-        ),
-        'end_date': fields.datetime(
-            string='End date',
-            readonly=True,
-        ),
-        'message': fields.text(
-            string='Message',
-            readonly=True,
-        ),
-        'traceback': fields.text(
-            string='Traceback',
-            readonly=True,
-        ),
-    }
-
-    _defaults = {
-        'state': lambda *a: 'not_run',
-    }
-
-automatic_test_method()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
