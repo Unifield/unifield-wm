@@ -30,6 +30,20 @@
         </record>
 
         <!-- AUTOMATIC TEST -->
+        <record id="automatic_test_tree_view" model="ir.ui.view">
+            <field name="name">automatic.test.tree.view</field>
+            <field name="model">automatic.test</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Running tests" colors="red: state=='error'; green: state=='done'; orange: state=='fail'; grey: state=='skip'; blue: state=='progress'">
+                    <field name="template_id" />
+                    <button string="Add a file" type="object" name="add_file" icon="gtk-file" states="draft" />
+                    <field name="start_date" />
+                    <field name="end_date" />
+                   <field name="state" />
+               </tree>
+           </field>
+        </record>
         <record id="automatic_test_form_view" model="ir.ui.view">
             <field name="name">automatic.test.form.view</field>
             <field name="model">automatic.test</field>
@@ -78,27 +92,25 @@
                     <field name="end_date" />
                     <notebook colspan="4">
                         <page string="Test cases">
-                            <field name="test_template_ids" colspan="4" mode="tree" nolabel="True">
-                                <tree string="Test cases">
+                            <field name="test_template_ids" colspan="4" mode="tree" nolabel="True" attrs="{'readonly': [('state', '!=', 'draft')]}">
+                                <tree string="Test cases" hide_edit_button="True">
                                     <field name="name" />
+                                    <field name="test_class" />
+                                    <field name="test_type" />
                                 </tree>
                             </field>
                         </page>
                         <page string="Running tests">
                             <button colspan="4" type="object" name="update" icon="gtk-refresh" string="Update" states="progress" />
-                            <field name="test_ids" colspan="4" mode="tree,form" readonly="True" nolabel="True">
-                                <tree string="Running tests" colors="red: state=='error'; green: state=='done'; orange: state=='fail'; grey: state=='skip'; blue: state=='progress'">
-                                    <field name="template_id" />
-                                    <field name="start_date" />
-                                    <field name="end_date" />
-                                    <field name="state" />
-                                </tree>
-                            </field>
+                            <field name="test_ids" colspan="4" mode="tree,form" readonly="True" nolabel="True" />
                         </page>
                     </notebook>
                     <separator colspan="4" string="Status" />
                     <field name="state" />
-                    <button colspan="2" type="object" name="run_campaign" icon="gtk-execute" string="Run campaign" states="not_run" />
+                    <group colspan="2" col="4">
+                        <button colspan="2" type="object" name="generate_tests" icon="gtk-execute" string="Generate tests to run" states="draft" />
+                        <button colspan="2" type="object" name="run_campaign" icon="gtk-execute" string="Run campaign" states="not_run" />
+                    </group>
                 </form>
             </field>
         </record>

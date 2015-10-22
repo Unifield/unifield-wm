@@ -121,6 +121,7 @@ class automatic_test_campaign(osv.osv):
         ),
         'state': fields.selection(
             selection=[
+                ('draft', 'Draft'),
                 ('not_run', 'Not Run'),
                 ('progress', 'In progress'),
                 ('done', 'Done'),
@@ -140,7 +141,7 @@ class automatic_test_campaign(osv.osv):
     }
 
     _defaults = {
-        'state': lambda *a: 'not_run',
+        'state': lambda *a: 'draft',
     }
 
     def copy(self, cr, uid, copy_id, defaults, context=None):
@@ -159,10 +160,10 @@ class automatic_test_campaign(osv.osv):
 
         return super(automatic_test_campaign, self).copy(cr, uid, copy_id, defaults, context=context)
 
-    def run_campaign(self, cr, uid, ids, context=None):
+    def generate_tests(self, cr, uid, ids, context=None):
         """
         Check if the campaign as only one test case choosen.
-        Create the functional tests and run them.
+        Create the functional tests.
         """
         test_obj = self.pool.get('automatic.test')
 
@@ -174,12 +175,52 @@ class automatic_test_campaign(osv.osv):
 
         test_to_run = []
         for campaign in self.browse(cr, uid, ids, context=context):
+            if not campaign.test_template_ids:
+                raise osv.except_osv(
+                    _('Error'),
+                    _('You have to select test cases before generate tests.'),
+                )
+
             for tmp in campaign.test_template_ids:
                 test_to_run.append(test_obj.create(cr, uid, {
                     'template_id': tmp.id,
                     'campaign_id': campaign.id,
-                    'state': 'not_run',
+                    'state': 'draft',
                 }, context=context))
+
+        self.write(cr, uid, ids, {'state': 'not_run'}, context=context)
+
+        return self.update(cr, uid, ids, context=context)
+
+    def run_campaign(self, cr, uid, ids, context=None):
+        """
+        Check if the campaign as only one test generated and run them.
+        """
+        test_obj = self.pool.get('automatic.test')
+
+        if context is None:
+            context = {}
+
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+
+        # TODO: Add a check to get all DB mappings good before running campaign
+
+        test_ids = test_obj.search(cr, uid, [
+            ('campaign_id', 'in', ids),
+            ('state', '=', 'draft'),
+        ], limit=1, context=context)
+        if not test_ids:
+            raise osv.except_osv(
+                _('Error'),
+                _('You cannot run a campaign without tests'),
+            )
+        else:
+            import pdb
+            pdb.set_trace()
+            test_obj.write(cr, uid, test_ids, {
+                'state': 'not_run',
+            }, context=context)
 
         self.write(cr, uid, ids, {
             'state': 'progress',
@@ -296,7 +337,7 @@ class automatic_test(osv.osv):
 
         res = {}
         for test in self.browse(cr, uid, ids, context=context):
-            res[test.id] = 'not_run'
+            res[test.id] = test.campaign_id and test.campaign_id.state in ('draft', 'not_run') and 'draft' or 'not_run'
             done = 0
             progress = 0
             fail = 0
@@ -312,7 +353,7 @@ class automatic_test(osv.osv):
                     res[test.id] = 'error'
                     break
 
-            if done == len(test.method_ids):
+            if done and done == len(test.method_ids):
                 res[test.id] = 'done'
             elif fail:
                 res[test.id] = 'fail'
@@ -334,11 +375,15 @@ class automatic_test(osv.osv):
             required=True,
             ondelete='cascade',
         ),
+        'test_file': fields.binary(
+            string='Test file',
+        ),
         'state': fields.function(
             _get_state,
             method=True,
             type='selection',
             selection=[
+                ('draft', 'Draft'),
                 ('not_run', 'Not run'),
                 ('progress', 'In progress'),
                 ('done', 'Done'),
