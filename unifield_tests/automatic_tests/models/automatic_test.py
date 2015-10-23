@@ -20,8 +20,12 @@
 #
 ##############################################################################
 
+import base64
+
 from osv import osv
 from osv import fields
+
+from unifield_tests.lib import yaml_import
 
 
 class automatic_test(osv.osv):
@@ -155,6 +159,22 @@ class automatic_test(osv.osv):
         return [(r['id'], r['template_id'][1]) for r in self.read(
             cr, uid, ids, ['template_id'], context, load='_classic_read')]
 
+    def parse_file(self, cr, uid, ids, context=None):
+        """
+        Parse Yaml file
+        """
+        if context is None:
+            context = {}
+
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+
+        for test in self.browse(cr, uid, ids, context=context):
+            yaml_interpreter = yaml_import.UnifieldYamlInterpreter(cr, 'unifield_tests', {}, 'init', filename='test_fo.yml',)
+            yaml_interpreter.process(base64.decodestring(test.data_file))
+#            yaml_import(cr, 'unifield_tests', base64.decodestring(test.data_file))
+
+        return True
 
     def add_file(self, cr, uid, ids, context=None):
         """

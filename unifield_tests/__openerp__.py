@@ -32,6 +32,8 @@
         'sync_server',
     ],
     "init_xml" : [
+    ],
+    "update_xml" : [
         'automatic_tests/data/test_db_mapping_data.xml',
         'automatic_tests/views/test_db_mapping_view.xml',
         'automatic_tests/views/automatic_test_template_view.xml',
@@ -39,7 +41,6 @@
         'automatic_tests/views/automatic_test_view.xml',
         'automatic_tests/wizard/views/automatic_test_add_file_view.xml',
     ],
-    "update_xml" : [],
     "demo_xml" : [],
     "test": [],
     "function": [

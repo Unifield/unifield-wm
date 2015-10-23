@@ -11,6 +11,7 @@
                 <tree string="Running tests" colors="red: state=='error'; green: state=='done'; orange: state=='fail'; grey: state=='skip'; blue: state=='progress'">
                     <field name="template_id" />
                     <button string="Add a file" type="object" name="add_file" icon="gtk-file" states="draft" />
+                    <button string="Parse file" type="object" name="parse_file" icon="gtk-execute" />
                     <field name="start_date" />
                     <field name="end_date" />
                    <field name="state" />

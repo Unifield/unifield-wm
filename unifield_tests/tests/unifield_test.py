@@ -204,7 +204,7 @@ class UnifieldTest(unittest.TestCase):
         :rtype integer or False
         '''
         # Object
-        data_obj = db.get('ir.model.data')
+        data_obj = db.get('test.model.data')
 
         if module is None:
             module = self.test_data_module_name
