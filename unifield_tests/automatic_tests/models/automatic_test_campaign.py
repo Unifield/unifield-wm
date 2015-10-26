@@ -22,6 +22,7 @@
 
 import threading
 import time
+import base64
 
 import pooler
 
@@ -32,6 +33,7 @@ from osv import fields
 from tools.translate import _
 
 from unifield_tests.lib import unifield_unittest
+from unifield_tests.lib import yaml_import
 
 
 class automatic_test_campaign(osv.osv):
@@ -119,8 +121,11 @@ class automatic_test_campaign(osv.osv):
                     _('You have to select test cases before generate tests.'),
                 )
 
+            seq = 0
             for tmp in campaign.test_template_ids:
+                seq += 1
                 test_to_run.append(test_obj.create(cr, uid, {
+                    'sequence_nb': seq,
                     'template_id': tmp.id,
                     'campaign_id': campaign.id,
                     'state': 'draft',
@@ -153,15 +158,6 @@ class automatic_test_campaign(osv.osv):
                 _('Error'),
                 _('You cannot run a campaign without tests'),
             )
-        else:
-            test_obj.write(cr, uid, test_ids, {
-                'state': 'not_run',
-            }, context=context)
-
-        self.write(cr, uid, ids, {
-            'state': 'progress',
-            'start_date': time.strftime('%Y-%m-%d %H:%M:%S'),
-        }, context=context)
 
         self.run_tests(cr, uid, ids, context=context)
 #        cr.commit()
@@ -192,6 +188,8 @@ class automatic_test_campaign(osv.osv):
         """
         Run the test campaign
         """
+        test_obj = self.pool.get('automatic.test')
+
         if context is None:
             context = {}
 
@@ -202,8 +200,33 @@ class automatic_test_campaign(osv.osv):
             cr = pooler.get_db(cr.dbname).cursor()
 
         try:
+            test_ids = test_obj.search(cr, uid, [
+                ('campaign_id', 'in', ids),
+                ('state', '=', 'draft'),
+            ], limit=1, context=context)
+            test_obj.write(cr, uid, test_ids, {
+                'state': 'not_run',
+            }, context=context)
+
+            self.write(cr, uid, ids, {
+                'state': 'progress',
+                'start_date': time.strftime('%Y-%m-%d %H:%M:%S'),
+            }, context=context)
+
             test_dir = '%s/../../tests/' % path.dirname(path.realpath(__file__))
             for camp in self.browse(cr, uid, ids, context=context):
+                # Parse Yaml file
+                yaml_interpreter = yaml_import.UnifieldYamlInterpreter(
+                    cr,
+                    'unifield_test',
+                    {},
+                    'init',
+                    filename='unifield.test',
+                )
+                for test in camp.test_ids:
+                    if test.data_file:
+                        yaml_interpreter.process(base64.decodestring(test.data_file))
+
                 # Discover and filter test cases
                 loader = unifield_unittest.\
                     UnifieldTestLoader(self.pool, cr, uid, camp.id)
@@ -224,7 +247,7 @@ class automatic_test_campaign(osv.osv):
                 })
             if use_new_cursor:
                 cr.commit()
-        except:
+        except Exception as e:
             if use_new_cursor:
                 cr.rollback()
         finally:

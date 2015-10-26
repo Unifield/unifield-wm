@@ -50,16 +50,21 @@ class UnifieldYamlInterpreter(YamlInterpreter):
 
         for curs in self.cursors.values():
             cursor = curs.cursor()
-            mod_obj = pooler.get_pool(cursor.dbname).get('ir.module.module')
-            up_obj = pooler.get_pool(cursor.dbname).get('base.module.upgrade')
-            mod_ids = mod_obj.search(cursor, 1, [
-                ('name', '=', 'unifield_tests_data'),
-                ('state', '!=', 'installed'),
-            ], context=self.context)
-            mod_obj.button_install(cursor, 1, mod_ids, context=self.context)
-            up_id = up_obj.upgrade_module(cursor, 1, [], context=self.context)
-            cursor.commit()
-            cursor.close()
+
+            try:
+                mod_obj = pooler.get_pool(cursor.dbname).get('ir.module.module')
+                up_obj = pooler.get_pool(cursor.dbname).get('base.module.upgrade')
+                mod_ids = mod_obj.search(cursor, 1, [
+                    ('name', '=', 'unifield_tests_data'),
+                    ('state', '!=', 'installed'),
+                ], context=self.context)
+                mod_obj.button_install(cursor, 1, mod_ids, context=self.context)
+                up_id = up_obj.upgrade_module(cursor, 1, [], context=self.context)
+                cursor.commit()
+            except Exception as e:
+                cursor.rollback()
+            finally:
+                cursor.close()
 
 
     def process(self, yaml_string):
@@ -67,13 +72,23 @@ class UnifieldYamlInterpreter(YamlInterpreter):
         Commit and close all cursors
         """
         for key, cr in self.cursors.iteritems():
-            self.cursors[key] = cr.cursor()
+            self.cursors[key] = pooler.get_db(cr.dbname).cursor()
 
-        res = super(UnifieldYamlInterpreter, self).process(yaml_string)
-
-        for cr in self.cursors.values():
-            cr.commit()
-            cr.close()
+        try:
+            # Remove old test dat Remove old test dataa
+            for cursor in self.cursors.itervalues():
+                tmd_obj = pooler.get_pool(cursor.dbname).get('test.model.data')
+                tmd_ids = tmd_obj.search(cursor, self.uid, [], context=self.context)
+                tmd_obj.unlink(cursor, self.uid, tmd_ids, context=self.context)
+            res = super(UnifieldYamlInterpreter, self).process(yaml_string)
+            for cursorr in self.cursors.values():
+                cursor.commit()
+        except:
+            for cr in self.cursors.values():
+                cr.rollback()
+        finally:
+            for cr in self.cursors.values():
+                cr.close()
 
     def process_record(self, node):
         """
@@ -101,12 +116,21 @@ class UnifieldYamlInterpreter(YamlInterpreter):
                     data_exist = True
                     if record.xml_id != record.id:
                         data_obj.copy(self.cr, self.uid, data_ids[0], {
+                            'module': self.module,
                             'name': record.id,
                         }, context=self.context)
 
             # In case of non-existing data in ir_module_data, create a new record
             if not data_exist:
-                res = super(UnifieldYamlInterpreter, self).process_record(node)
+                super(UnifieldYamlInterpreter, self).process_record(node)
+                if record.id in self.id_map:
+                    data_obj.create(self.cr, self.uid, {
+                        'name': record.id,
+                        'module': self.module,
+                        'res_id': self.id_map[record.id],
+                        'model': record.model,
+                    }, context=self.context)
+
             self.cr = old_cr
         else:
             return super(UnifieldYamlInterpreter, self).process_record(node)

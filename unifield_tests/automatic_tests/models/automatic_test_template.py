@@ -54,7 +54,7 @@ class automatic_test_template(osv.osv):
                 if isinstance(test, unittest.suite.TestSuite):
                     discover_tests(test)
                 elif isinstance(test, unittest.case.TestCase):
-                    if test not in tests:
+                    if test not in tests and (not hasattr(test, 'no_auto') or test._testMethodName not in test.no_auto):
                         tests.append(test)
 
         discover_tests(suite)

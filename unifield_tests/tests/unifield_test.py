@@ -30,6 +30,7 @@ class UnifieldTest(unittest.TestCase):
     already_loaded = False
     description = ''        # Description of the test class (used in Automated Tests)
     category = 'Unifield'   # Category of the test (used in Automatic Tests)
+    no_auto = []
 
     # FIXME/TODO: Make unittest.TestCase inherit from oerplib.error class because of RPCError that could be raised by unittest.TestCase
 
@@ -212,7 +213,7 @@ class UnifieldTest(unittest.TestCase):
         obj = data_obj.get_object_reference(module, object_ref)
 
         if obj:
-            return obj[1]
+            return obj[2]
 
         return False
 

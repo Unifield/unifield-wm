@@ -20,7 +20,7 @@ class FOTest(UnifieldTest):
         Create a FO with two lines. One of these lines have no price unit.
         Expected result: An error must be raised
         """
-        partner_id = self.get_record(self.used_db, 'ext_customer_1')
+        partner_id = self.get_record(self.used_db, 'fo_test_ext_custx')
         order_type = 'regular'
 
         # Get the analytic distribution

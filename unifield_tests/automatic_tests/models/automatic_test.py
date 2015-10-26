@@ -32,6 +32,7 @@ class automatic_test(osv.osv):
     _name = 'automatic.test'
     _description = 'A functional test to launch or launched'
     _rec_name = 'template_id'
+    _order = 'sequence_nb'
 
     def _get_end_date(self, cr, uid, ids, field_name, args, context=None):
         """
@@ -108,6 +109,10 @@ class automatic_test(osv.osv):
         ),
         'data_file': fields.binary(
             string='Data file',
+        ),
+        'sequence_nb': fields.integer(
+            string='Sequence',
+            readonly=True,
         ),
         'state': fields.function(
             _get_state,
