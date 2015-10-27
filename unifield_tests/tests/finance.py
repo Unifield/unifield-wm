@@ -22,8 +22,6 @@
 
 
 from __future__ import print_function
-from unifield_test import UnifieldTestException
-from unifield_test import UnifieldTest
 from datetime import datetime
 from datetime import timedelta
 from time import strftime
@@ -31,6 +29,9 @@ from time import sleep
 from random import randint
 from random import randrange
 from oerplib import error
+
+from unifield_test import UnifieldTestException
+from unifield_test import UnifieldTest
 
 
 FINANCE_TEST_MASK = {

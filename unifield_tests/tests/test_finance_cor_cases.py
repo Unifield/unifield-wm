@@ -334,7 +334,7 @@ class FinanceTestCorCases(FinanceTest):
                                     pass
 
         def set_funding_pools():
-            c = self.c1
+            c = self.hq1c1
             aaa_model = 'account.analytic.account'
 
             for instance, fp in meta.fp_ccs:
@@ -504,24 +504,24 @@ class FinanceTestCorCases(FinanceTest):
 
     def _sync_down(self, c2=False):
         self.synchronize(self.hq1)
-        self.synchronize(self.c1)  # pull from hq
-        self.synchronize(self.c1)  # push to projects
-        self.synchronize(self.p1)
+        self.synchronize(self.hq1c1)  # pull from hq
+        self.synchronize(self.hq1c1)  # push to projects
+        self.synchronize(self.hq1c1p1)
         self.synchronize(self.hq1c1p2)  # C1P2
 
         # TODO:C2 level and C2P1/P2 (C2 not use in scenario at this time)
         """
         if c2:
-            self.synchronize(self.c2) # pull from hq
-            self.synchronize(self.c2)  # push to projects
-            self.synchronize(self.p2)
+            self.synchronize(self.hq1c2) # pull from hq
+            self.synchronize(self.hq1c2)  # push to projects
+            self.synchronize(self.hq1c2p1)
             self.synchronize(self.hq1c2p2)  # C2P2
         """
 
     def _sync_from_c1(self):
-        self.synchronize(self.c1)
+        self.synchronize(self.hq1c1)
         #self.synchronize(self.hq1)
-        self.synchronize(self.p1)
+        self.synchronize(self.hq1c1p1)
         self.synchronize(self.hq1c1p2)  # C1P2
 
     def _get_default_date(self):
@@ -531,7 +531,7 @@ class FinanceTestCorCases(FinanceTest):
             ccy_name=False):
         dataset_meta = self._get_dataset_meta()
 
-        db = self.c1
+        db = self.hq1c1
         aj_obj = db.get('account.journal')
         abs_obj = db.get('account.bank.statement')
         if period_id is None:
@@ -596,7 +596,7 @@ class FinanceTestCorCases(FinanceTest):
         python -m unittest tests.test_finance_cor_cases.FinanceTestCorCases.test_cor_01
         G/L ACCOUNT 60010=>60020
         """
-        db = self.c1
+        db = self.hq1c1
         self._register_set(db)
 
         reg_id = self._register_get(db, browse=False)
@@ -636,7 +636,7 @@ class FinanceTestCorCases(FinanceTest):
         python -m unittest tests.test_finance_cor_cases.FinanceTestCorCases.test_cor_02
         DEST REPLACE OPS=>NAT NO REV/COR
         """
-        db = self.c1
+        db = self.hq1c1
         self._register_set(db)
 
         reg_id = self._register_get(db, browse=False)
@@ -674,7 +674,7 @@ class FinanceTestCorCases(FinanceTest):
         python -m unittest tests.test_finance_cor_cases.FinanceTestCorCases.test_cor_03
         CC REPLACE HT101=>HT120 NO REV/COR
         """
-        db = self.c1
+        db = self.hq1c1
         self._register_set(db)
 
         reg_id = self._register_get(db, browse=False)
@@ -712,7 +712,7 @@ class FinanceTestCorCases(FinanceTest):
         python -m unittest tests.test_finance_cor_cases.FinanceTestCorCases.test_cor_04
         FP REPLACE PF=>FP1 NO REV/COR
         """
-        db = self.c1
+        db = self.hq1c1
         self._register_set(db)
 
         reg_id = self._register_get(db, browse=False)
@@ -750,7 +750,7 @@ class FinanceTestCorCases(FinanceTest):
         python -m unittest tests.test_finance_cor_cases.FinanceTestCorCases.test_cor_05
         G/L ACCOUNT 60010=>60000 and new AD
         """
-        db = self.c1
+        db = self.hq1c1
         self._register_set(db)
 
         reg_id = self._register_get(db, browse=False)
@@ -795,7 +795,7 @@ class FinanceTestCorCases(FinanceTest):
         cd unifield/test-finance/unifield-wm/unifield_tests
         python -m unittest tests.test_finance_cor_cases.FinanceTestCorCases.test_cor_06
         """
-        db = self.c1
+        db = self.hq1c1
         self._register_set(db, ccy_name='USD')
 
         reg_id = self._register_get(db, browse=False, ccy_name='USD')
@@ -854,7 +854,7 @@ class FinanceTestCorCases(FinanceTest):
         python -m unittest tests.test_finance_cor_cases.FinanceTestCorCases.test_cor_07
         G/L ACCOUNT 60010=>60030
         """
-        db = self.c1
+        db = self.hq1c1
 
         # REOPEN period closed in case 06 (if it fails)
         self.period_reopen(db, 'm', 1)
@@ -906,7 +906,7 @@ class FinanceTestCorCases(FinanceTest):
         cd unifield/test-finance/unifield-wm/unifield_tests
         python -m unittest tests.test_finance_cor_cases.FinanceTestCorCases.test_cor_08
         """
-        db = self.c1
+        db = self.hq1c1
         self._register_set(db)
 
         reg_id = self._register_get(db, browse=False)
@@ -950,7 +950,7 @@ class FinanceTestCorCases(FinanceTest):
         python -m unittest tests.test_finance_cor_cases.FinanceTestCorCases.test_cor_09
         G/L ACCOUNT 13000=>13010
         """
-        db = self.c1
+        db = self.hq1c1
         self._register_set(db)
 
         reg_id = self._register_get(db, browse=False)
@@ -985,7 +985,7 @@ class FinanceTestCorCases(FinanceTest):
         cd unifield/test-finance/unifield-wm/unifield_tests
         python -m unittest tests.test_finance_cor_cases.FinanceTestCorCases.test_cor_10
         """
-        db = self.c1
+        db = self.hq1c1
         self._register_set(db)
 
         reg_id = self._register_get(db, browse=False)
@@ -1029,7 +1029,7 @@ class FinanceTestCorCases(FinanceTest):
         cd unifield/test-finance/unifield-wm/unifield_tests
         python -m unittest tests.test_finance_cor_cases.FinanceTestCorCases.test_cor_11
         """
-        db = self.c1
+        db = self.hq1c1
 
         aal_obj = db.get('account.analytic.line')
 
@@ -1121,7 +1121,7 @@ class FinanceTestCorCases(FinanceTest):
         cd unifield/test-finance/unifield-wm/unifield_tests
         python -m unittest tests.test_finance_cor_cases.FinanceTestCorCases.test_cor_12
         """
-        db = self.c1
+        db = self.hq1c1
 
         invoice_lines_accounts = [ '60010', '60020', '60030', ]
 
@@ -1187,7 +1187,7 @@ class FinanceTestCorCases(FinanceTest):
         cd unifield/test-finance/unifield-wm/unifield_tests
         python -m unittest tests.test_finance_cor_cases.FinanceTestCorCases.test_cor_13
         """
-        db = self.c1
+        db = self.hq1c1
 
         # REOPEN period closed in case 12 (if it fails)
         self.period_reopen(db, 'm', 1)
@@ -1295,7 +1295,7 @@ class FinanceTestCorCases(FinanceTest):
         cd unifield/test-finance/unifield-wm/unifield_tests
         python -m unittest tests.test_finance_cor_cases.FinanceTestCorCases.test_cor_14
         """
-        db = self.c1
+        db = self.hq1c1
 
         self._register_set(db)
 
@@ -1334,7 +1334,7 @@ class FinanceTestCorCases(FinanceTest):
         cd unifield/test-finance/unifield-wm/unifield_tests
         python -m unittest tests.test_finance_cor_cases.FinanceTestCorCases.test_cor_20
         """
-        push_db = self.c1
+        push_db = self.hq1c1
         model_aal = 'account.analytic.line'
 
         invoice_lines_accounts = [ '63100', '63110', '63120', ]
@@ -1373,7 +1373,7 @@ class FinanceTestCorCases(FinanceTest):
         self.synchronize(push_db)
 
         # 20.5
-        pull_db = self.p1
+        pull_db = self.hq1c1p1
         self.synchronize(pull_db)
 
         # pull 1 AJI: 63120 HT112
@@ -1444,7 +1444,7 @@ class FinanceTestCorCases(FinanceTest):
         self.synchronize(push_db)
 
         # 20.11
-        pull_db = self.p1
+        pull_db = self.hq1c1p1
         self.synchronize(pull_db)
 
         # 1 AJI deleted
@@ -1498,7 +1498,7 @@ class FinanceTestCorCases(FinanceTest):
         cd unifield/test-finance/unifield-wm/unifield_tests
         python -m unittest tests.test_finance_cor_cases.FinanceTestCorCases.test_cor_21
         """
-        push_db = self.c1
+        push_db = self.hq1c1
         model_aal = 'account.analytic.line'
 
         invoice_lines_accounts = [ '63100', '63110', '63120', ]
@@ -1534,7 +1534,7 @@ class FinanceTestCorCases(FinanceTest):
         self.synchronize(push_db)
 
         # 21.5
-        pull_db = self.p1
+        pull_db = self.hq1c1p1
         self.synchronize(pull_db)
 
         # pull 1 1JI: 63120 HT112
@@ -1613,7 +1613,7 @@ class FinanceTestCorCases(FinanceTest):
         self.synchronize(push_db)
 
         # 21.11
-        pull_db = self.p1
+        pull_db = self.hq1c1p1
         self.synchronize(pull_db)
 
         # pull update of AJI 63120 HT112 (amount changed)
@@ -1669,7 +1669,7 @@ class FinanceTestCorCases(FinanceTest):
         cd unifield/test-finance/unifield-wm/unifield_tests
         python -m unittest tests.test_finance_cor_cases.FinanceTestCorCases.test_cor_22
         """
-        push_db = self.c1
+        push_db = self.hq1c1
         model_aal = 'account.analytic.line'
         model_aml = 'account.move.line'
 
@@ -1706,7 +1706,7 @@ class FinanceTestCorCases(FinanceTest):
         self.synchronize(push_db)
 
         # 22.5
-        pull_db = self.p1
+        pull_db = self.hq1c1p1
         self.synchronize(pull_db)
 
         # pull 2 AJIs: 63120 HT111, 63120 HT112
@@ -1741,7 +1741,7 @@ class FinanceTestCorCases(FinanceTest):
         cd unifield/test-finance/unifield-wm/unifield_tests
         python -m unittest tests.test_finance_cor_cases.FinanceTestCorCases.test_cor_23
         """
-        push_db = self.c1
+        push_db = self.hq1c1
         model_aal = 'account.analytic.line'
 
         invoice_lines_accounts = [ '63100', '63110', '63120', ]
@@ -1777,7 +1777,7 @@ class FinanceTestCorCases(FinanceTest):
         self.synchronize(push_db)
 
         # 23.5
-        pull_db = self.p1
+        pull_db = self.hq1c1p1
         self.synchronize(pull_db)
 
         # pull 2 AJI: 63129 HT11/HT112
@@ -1866,7 +1866,7 @@ class FinanceTestCorCases(FinanceTest):
         cd unifield/test-finance/unifield-wm/unifield_tests
         python -m unittest tests.test_finance_cor_cases.FinanceTestCorCases.test_cor_24
         """
-        push_db = self.c1
+        push_db = self.hq1c1
         model_aal = 'account.analytic.line'
 
         invoice_lines_accounts = [ '63100', '63110', '63120', ]
@@ -1911,7 +1911,7 @@ class FinanceTestCorCases(FinanceTest):
         self.synchronize(push_db)
 
         # 24.5
-        pull_db = self.p1
+        pull_db = self.hq1c1p1
         self.synchronize(pull_db)
 
         # pull 1 AJI: 63120 HT111
@@ -2014,7 +2014,7 @@ class FinanceTestCorCases(FinanceTest):
         self.synchronize(push_db)
 
         # 24.10
-        pull_db = self.p1
+        pull_db = self.hq1c1p1
         self.synchronize(pull_db)
 
         # delete 1 AJI: 63120 HT111
@@ -2068,7 +2068,7 @@ class FinanceTestCorCases(FinanceTest):
         cd unifield/test-finance/unifield-wm/unifield_tests
         python -m unittest tests.test_finance_cor_cases.FinanceTestCorCases.test_cor_25
         """
-        push_db = self.c1
+        push_db = self.hq1c1
         model_aal = 'account.analytic.line'
 
         invoice_lines_accounts = [ '63100', '63110', '63120', ]
@@ -2104,7 +2104,7 @@ class FinanceTestCorCases(FinanceTest):
         self.synchronize(push_db)
 
         # 25.5
-        pull_db = self.p1
+        pull_db = self.hq1c1p1
         self.synchronize(pull_db)
 
         # pull 1 AJI: 63120 HT111
@@ -2217,7 +2217,7 @@ class FinanceTestCorCases(FinanceTest):
         self.synchronize(push_db)
 
         # 25.11
-        pull_db = self.p1
+        pull_db = self.hq1c1p1
         self.synchronize(pull_db)
 
         # pull 1 REV AJI 63120 HT111
@@ -2287,10 +2287,10 @@ class FinanceTestCorCases(FinanceTest):
         python -m unittest tests.test_finance_cor_cases.FinanceTestCorCases.test_cor_26
         """
         # REOPEN period closed in case 25 (if it fails)
-        self.period_reopen(self.c1, 'm', 1)
-        self.period_reopen(self.c1, 'f', 1)
-        self.period_reopen(self.p1, 'm', 1)
-        self.period_reopen(self.p1, 'f', 1)
+        self.period_reopen(self.hq1c1, 'm', 1)
+        self.period_reopen(self.hq1c1, 'f', 1)
+        self.period_reopen(self.hq1c1p1, 'm', 1)
+        self.period_reopen(self.hq1c1p1, 'f', 1)
 
         model_aal = 'account.analytic.line'
 
@@ -2303,9 +2303,9 @@ class FinanceTestCorCases(FinanceTest):
         # 26.1, 26.2, 26.3
         inv_out = {}
         ji_ids = self.invoice_validate(
-            self.p1,
+            self.hq1c1p1,
             self.invoice_create_supplier_invoice(
-                self.p1,
+                self.hq1c1p1,
                 ccy_code=False,
                 is_refund=False,
                 date=self._get_default_date(),
@@ -2316,28 +2316,28 @@ class FinanceTestCorCases(FinanceTest):
                 tag="CT_26"),
             out=inv_out
         )
-        jis_by_account = self.get_jis_by_account(self.p1, ji_ids)
+        jis_by_account = self.get_jis_by_account(self.hq1c1p1, ji_ids)
 
         # get sdref of entries that will be pull deleted after the following
         # correction on 26.7/8
-        sdref_60000_ht112 = self.get_ji_ajis_by_account(self.p1, ji_ids,
+        sdref_60000_ht112 = self.get_ji_ajis_by_account(self.hq1c1p1, ji_ids,
             account_code_filter='60000',
                 cc_code_filter='HT112')[0][1]
-        sdref_60000_ht122 = self.get_ji_ajis_by_account(self.p1, ji_ids,
+        sdref_60000_ht122 = self.get_ji_ajis_by_account(self.hq1c1p1, ji_ids,
             account_code_filter='60000',
             cc_code_filter='HT122')[0][1]
-        sdref_60010_ht112 = self.get_ji_ajis_by_account(self.p1, ji_ids,
+        sdref_60010_ht112 = self.get_ji_ajis_by_account(self.hq1c1p1, ji_ids,
             account_code_filter='60010',
                 cc_code_filter='HT112')[0][1]
-        sdref_60010_ht122 = self.get_ji_ajis_by_account(self.p1, ji_ids,
+        sdref_60010_ht122 = self.get_ji_ajis_by_account(self.hq1c1p1, ji_ids,
             account_code_filter='60010',
             cc_code_filter='HT122')[0][1]
 
         # 26.4
-        self.synchronize(self.p1)
+        self.synchronize(self.hq1c1p1)
 
         # 26.5
-        self.synchronize(self.c1)
+        self.synchronize(self.hq1c1)
         # check 3 JIs pulled
 
         push_expected = [
@@ -2349,10 +2349,10 @@ class FinanceTestCorCases(FinanceTest):
         ]
         self.assert_(
             all(self.flat_dict_vals(self.check_ji_record_sync_push_pulled(
-                push_db=self.p1,
+                push_db=self.hq1c1p1,
                 push_expected=push_expected,
                 push_not_expected=push_not_expected,
-                pull_db=self.c1
+                pull_db=self.hq1c1
             ))),
             "SYNC mismatch"
         )
@@ -2368,10 +2368,10 @@ class FinanceTestCorCases(FinanceTest):
         ]
         self.assert_(
             all(self.flat_dict_vals(self.check_aji_record_sync_push_pulled(
-                push_db=self.p1,  # from P1
+                push_db=self.hq1c1p1,  # from P1
                 push_expected=push_expected,
                 push_not_expected=push_not_expected,
-                pull_db=self.c1  # to C1
+                pull_db=self.hq1c1  # to C1
             ))),
             "SYNC mismatch"
         )
@@ -2391,7 +2391,7 @@ class FinanceTestCorCases(FinanceTest):
         ]
         self.assert_(
             all(self.flat_dict_vals(self.check_aji_record_sync_push_pulled(
-                push_db=self.c1,  # from C1
+                push_db=self.hq1c1,  # from C1
                 push_expected=push_expected,
                 push_not_expected=push_not_expected,
                 pull_db=self.hq1c1p2  # to C1P2
@@ -2404,16 +2404,16 @@ class FinanceTestCorCases(FinanceTest):
             (100., 'OPS', 'HT120', 'PF'),
         ]
         # convert 60000 JI from P1 sdref to C1 id
-        ji_60000_id = self.get_record_id_from_sdref(self.c1,
+        ji_60000_id = self.get_record_id_from_sdref(self.hq1c1,
             jis_by_account['60000'][0][1])
-        self.simulation_correction_wizard(self.c1,
+        self.simulation_correction_wizard(self.hq1c1,
             ji_60000_id,
             cor_date=False,
             new_account_code=False,
             new_ad_breakdown_data=new_ad,
             ad_replace_data=False
         )
-        self.check_ji_correction(self.c1,
+        self.check_ji_correction(self.hq1c1,
             ji_60000_id,
             '60000', new_account_code=False,
             expected_ad=new_ad,
@@ -2428,16 +2428,16 @@ class FinanceTestCorCases(FinanceTest):
             (40., 'NAT', new_cc, 'PF'),
         ]
         # convert 60010 JI from P1 sdref to C1 id
-        ji_60010_id = self.get_record_id_from_sdref(self.c1,
+        ji_60010_id = self.get_record_id_from_sdref(self.hq1c1,
             jis_by_account['60010'][0][1])
-        self.simulation_correction_wizard(self.c1,
+        self.simulation_correction_wizard(self.hq1c1,
             ji_60010_id,
             cor_date=False,
             new_account_code=False,
             new_ad_breakdown_data=False,
             ad_replace_data={ 40.: {'cc': new_cc, } }
         )
-        self.check_ji_correction(self.c1,
+        self.check_ji_correction(self.hq1c1,
             ji_60010_id,
             '60010', new_account_code=False,
             expected_ad=new_ad,
@@ -2446,7 +2446,7 @@ class FinanceTestCorCases(FinanceTest):
         )
 
         # 26.9
-        self.synchronize(self.c1)
+        self.synchronize(self.hq1c1)
 
         # 26.10
         self.synchronize(self.hq1c1p2)  # C1P2
@@ -2462,7 +2462,7 @@ class FinanceTestCorCases(FinanceTest):
         ]
         self.assert_(
             all(self.flat_dict_vals(self.check_aji_record_sync_push_pulled(
-                push_db=self.c1,  # from C1
+                push_db=self.hq1c1,  # from C1
                 push_expected=push_expected,
                 push_not_expected=push_not_expected,
                 push_should_deleted=push_should_deleted,
@@ -2472,7 +2472,7 @@ class FinanceTestCorCases(FinanceTest):
         )
 
         # 26.11
-        self.synchronize(self.p1)
+        self.synchronize(self.hq1c1p1)
 
         # check 1 AJI deleted 60000 HT112
         # (the 40% one from 60000) (left the 60% from 60010)
@@ -2485,11 +2485,11 @@ class FinanceTestCorCases(FinanceTest):
         ]
         self.assert_(
             all(self.flat_dict_vals(self.check_aji_record_sync_push_pulled(
-                push_db=self.c1,  # from C1
+                push_db=self.hq1c1,  # from C1
                 push_expected=push_expected,
                 push_not_expected=push_not_expected,
                 push_should_deleted=push_should_deleted,
-                pull_db=self.p1  # to C1P1
+                pull_db=self.hq1c1p1  # to C1P1
             ))),
             "SYNC mismatch"
         )
