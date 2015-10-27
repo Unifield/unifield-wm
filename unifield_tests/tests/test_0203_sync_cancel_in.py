@@ -374,5 +374,3 @@ class SyncCancelINTest(ResourcingTest):
             "The number of IN moves by states is not correct :: Should be {'cancel': 0, 'assigned': 2} :: It is %s" % res,
         )
 
-def get_test_class():
-    return SyncCancelINTest

@@ -291,5 +291,3 @@ class UFTP326Test(ResourcingTest):
         """
         self.cancel_or_resource_in_at_coordo(resource=True)
 
-def get_test_class():
-    return UFTP326Test

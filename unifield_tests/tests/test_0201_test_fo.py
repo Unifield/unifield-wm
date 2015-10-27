@@ -92,6 +92,3 @@ class FOTest(UnifieldTest):
         except RPCError as e:
             return True
 
-
-def get_test_class():
-    return FOTest

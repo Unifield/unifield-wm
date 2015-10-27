@@ -135,6 +135,3 @@ class UF2490IROneTender(UF2490OneTender):
         self.pr = True
         super(UF2490IROneTender, self).setUp()
 
-
-def get_test_suite():
-    return UF2490IROneTender, UF2490FOOneTender

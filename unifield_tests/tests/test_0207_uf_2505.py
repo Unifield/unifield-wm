@@ -89,8 +89,3 @@ class UF2505IRResourcingTest(UF2505ResourcingTest):
         self.pr = True
         super(UF2505IRResourcingTest, self).setUp()
 
-
-
-def get_test_suite():
-    '''Return the class to use for tests'''
-    return UF2505FOResourcingTest, UF2505IRResourcingTest

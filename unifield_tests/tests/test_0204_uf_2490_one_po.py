@@ -554,7 +554,3 @@ class UF2490IROnePO(UF2490OnePO):
     def test_create_order_cancel_po_close_order(self):
         pass
 
-
-def get_test_suite():
-    '''Return the class to use for tests'''
-    return UF2490FOOnePO, UF2490IROnePO
