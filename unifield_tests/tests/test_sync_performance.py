@@ -19,12 +19,6 @@ class SyncPerfomance(ResourcingTest):
         self.p_partner_obj = self.p1.get('res.partner')
         self.start_time = time.time()
 
-    def tearDown(self):
-        duration = time.time() - self.start_time
-        # write time result to be able to bench
-        #print "%s: %.3f" % (self.id(), duration)
-        super(SyncPerfomance, self).tearDown()
-
     def createObject(self, object_number=1):
         """Create as much PO as object_number at Project side with two lines.
         :return:
@@ -88,28 +82,28 @@ class SyncPerfomance(ResourcingTest):
         self.synchronize(self.c1)
 
 
-   # def test_010_objectCreation(self):
-   #     """Create object, synchronize, and check the synchronization was done
-   #     correctly
-   #     :return:
-   #     """
-   #     self.synchronizeInstances()
-   #     self.createObject(object_number=10)
+    def test_010_objectCreation(self):
+        """Create object, synchronize, and check the synchronization was done
+        correctly
+        :return:
+        """
+        self.synchronizeInstances()
+        self.createObject(object_number=10)
 
-   # def test_020_synchronisation(self):
-   #     """Do the synchronization in a separate test as we want to improve
-   #     synchronization performance, it is better to do it in a separate test.
-   #     That's why the order of these tests is very important. They are
-   #     launched with there alphabetical name priority.
-   #     """
-   #     self.synchronizeInstances()
+    def test_020_synchronisation(self):
+        """Do the synchronization in a separate test as we want to improve
+        synchronization performance, it is better to do it in a separate test.
+        That's why the order of these tests is very important. They are
+        launched with there alphabetical name priority.
+        """
+        self.synchronizeInstances()
 
     def test_030_1000objectsCreation(self):
         self.synchronizeInstances()
         self.createObject(object_number=1000)
 
-   # def test_040_1000synchronisations(self):
-   #     self.synchronizeInstances()
+    def test_040_1000synchronisations(self):
+        self.synchronizeInstances()
 
 
 def get_test_class():
