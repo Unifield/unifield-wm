@@ -15,21 +15,30 @@ from colors import TerminalColors
 class UnifieldTest(unittest.TestCase):
     '''
     Main test class for Unifield tests using TestCase and Openerplib as main inheritance
-    @var sync: contains Synchro Server oerplib connection
-    @var hq1: same as sync for HQ1 DB
-    @var c1: same as sync for HQ1C1 DB
-    @var p1: same as sync for HQ1C1P1 DB
-    @var db: contains the list of DB connections
-    @var test_module_name: name of the module used to create extended table for tests
-    @var test_module_obj_name: name of the OpenERP object to use to access to extended table
+    @var sync:      contains Synchro Server oerplib connection
+    @var hq1:       same as sync for HQ1 DB
+    @var hq1c1:     same as sync for HQ1C1 DB
+    @var hq1c1p1:   same as sync for HQ1C1P1 DB
+    @var hq1c2:     same as sync for HQ1C2 DB
+    @var hq1c2p1:   same as sync for HQ1C2P1 DB
+    @var hq2:       same as sync for HQ2 DB
+    @var hq2c1:     same as sync for HQ2C1 DB
+    @var hq2c1p1:   same as sync for HQ2C1P1 DB
+    @var db:        contains the list of DB connections
+    @var test_module_data_name: name of the module used to create extended table for tests
+    @var test_module_obj_name:  name of the OpenERP object to use to access to extended table
+    @var already_loaded:        if the module is already loaded, don't try to re-install it
+    @var description:           descripton of the test class (displayed to end-users in Automated tests)
+    @var category:              category of the test (displayed to end-users in Automated tests)
+    @var no_auto:               list of test methods names that must be filtered in Automated tests
     '''
     # global variable
     db = {}
     test_data_module_name = 'unifield_tests_data'
     test_module_obj_name = 'unifield.test'
     already_loaded = False
-    description = ''        # Description of the test class (used in Automated Tests)
-    category = 'Unifield'   # Category of the test (used in Automatic Tests)
+    description = ''
+    category = 'Unifield'
     no_auto = []
 
     # FIXME/TODO: Make unittest.TestCase inherit from oerplib.error class because of RPCError that could be raised by unittest.TestCase
@@ -120,9 +129,6 @@ class UnifieldTest(unittest.TestCase):
         '''
         return True
 
-    def run(self, *args, **kwargs):
-        return super(UnifieldTest, self).run(*args, **kwargs)
-
     def __init__(self, *args, **kwargs):
         """
         Initialize the TestCase from Sync. Database or Config. file
@@ -156,6 +162,7 @@ class UnifieldTest(unittest.TestCase):
         #+ Except if the database is sync one
         if UnifieldTest.already_loaded:
             return
+
         for database_name in self.db:
             if database_name == 'sync':
                 continue
@@ -206,6 +213,9 @@ class UnifieldTest(unittest.TestCase):
         '''
         # Object
         data_obj = db.get('test.model.data')
+        # If the record is not found in test_model_data table,
+        # the method get_object_reference will check automatically
+        # in ir_model_data table
 
         if module is None:
             module = self.test_data_module_name

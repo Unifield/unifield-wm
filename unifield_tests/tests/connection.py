@@ -26,6 +26,7 @@ from oerplib.oerp import OERP
 import os
 import time
 
+
 class UnifieldTestConfigParser(ConfigParser):
     '''
     Special ConfigParser for Unifield tests battery
@@ -39,6 +40,7 @@ class UnifieldTestConfigParser(ConfigParser):
         if not os.path.exists(conf_file):
             raise NameError('unifield.config file not found!')
         return ConfigParser.read(self, [conf_file])
+
 
 class XMLRPCConnection(OERP):
     '''
@@ -70,10 +72,5 @@ class XMLRPCConnection(OERP):
                     error = 0
 
         self.db_name = db_name
-
-if __name__ == '__main__':
-    c = XMLRPCConnection('HQ1C1P1')
-    if c:
-        print("Connection succeeded")
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
