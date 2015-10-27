@@ -19,12 +19,20 @@
             <field name="keyword">hq1c1p1</field>
         </record>
 
+        <record id="test_db_mapping_hq1c1p2" model="test.db.mapping">
+            <field name="keyword">hq1c1p2</field>
+        </record>
+
         <record id="test_db_mapping_hq1c2" model="test.db.mapping">
             <field name="keyword">hq1c2</field>
         </record>
 
         <record id="test_db_mapping_hq1c2p1" model="test.db.mapping">
             <field name="keyword">hq1c2p1</field>
+        </record>
+
+        <record id="test_db_mapping_hq1c2p2" model="test.db.mapping">
+            <field name="keyword">hq1c2p2</field>
         </record>
 
         <record id="test_db_mapping_hq2" model="test.db.mapping">
@@ -37,6 +45,22 @@
 
         <record id="test_db_mapping_hq2c1p1" model="test.db.mapping">
             <field name="keyword">hq2c1p1</field>
+        </record>
+
+        <record id="test_db_mapping_hq2c1p2" model="test.db.mapping">
+            <field name="keyword">hq2c1p2</field>
+        </record>
+
+        <record id="test_db_mapping_hq2c2" model="test.db.mapping">
+            <field name="keyword">hq2c2</field>
+        </record>
+
+        <record id="test_db_mapping_hq2c2p1" model="test.db.mapping">
+            <field name="keyword">hq2c2p1</field>
+        </record>
+
+        <record id="test_db_mapping_hq2c2p2" model="test.db.mapping">
+            <field name="keyword">hq2c2p2</field>
         </record>
 
     </data>
