@@ -20,11 +20,13 @@
 #
 ##############################################################################
 
+
+import os
+import time
+
 from __future__ import print_function
 from ConfigParser import ConfigParser
 from oerplib.oerp import OERP
-import os
-import time
 
 
 class UnifieldTestConfigParser(ConfigParser):
