@@ -1106,7 +1106,10 @@ class analytic_distribution_wizard(osv.osv_memory):
                     reversal = True
                 if line.corrected:
                     correction = True
-            #self.pool.get('account.move').validate(cr, uid, [move_id])
+            if wiz.move_id:
+                # AD changed at header level: all JIs should recreate AJI
+                self.pool.get('account.move').validate(cr, uid, [move_id])
+
             # As analytic lines were deleted and recreated, we need to recreate links between reversal, corrections, etc.
             if reversal or correction:
                 for line in move.line_id:
