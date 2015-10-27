@@ -4,7 +4,6 @@
 
         <record id="test_db_mapping_sync_server" model="test.db.mapping">
             <field name="keyword">sync</field>
-            <field name="custom_name_ok" eval="True" />
         </record>
 
         <record id="test_db_mapping_hq1" model="test.db.mapping">

@@ -30,28 +30,6 @@ class test_db_mapping(osv.osv):
     _description = 'Mapping between keyword used in test and DB name'
     _rec_name = 'keyword'
 
-    def _get_db_to_use(self, cr, uid, ids, field_name, args, context=None):
-        """
-        If the mapping use a custom name, return the custom name entered,
-        else, use the name of the instance.
-        """
-        if context is None:
-            context = {}
-
-        if isinstance(ids, (int, long)):
-            ids = [ids]
-
-        res = {}
-        for db_map in self.browse(cr, uid, ids, context=context):
-            if db_map.custom_name_ok:
-                res[db_map.id] = db_map.custom_name
-            else:
-                res[db_map.id] = db_map.instance_id.name
-
-            self._check_unique_name(cr, uid, res[db_map.id], context=context)
-
-        return res
-
     _columns = {
         'keyword': fields.char(
             string='Keyword',
@@ -59,58 +37,81 @@ class test_db_mapping(osv.osv):
             required=True,
             readonly=True,
         ),
-        'db_to_use': fields.function(
-            _get_db_to_use,
-            method=True,
-            type='char',
-            string='DB to use',
-            size=512,
-            readonly=True,
-            store={
-                'test.db.mapping': (
-                    lambda self, cr, uid, ids, c=None: ids,
-                    ['instance_id', 'custom_name', 'custom_name_ok'],
-                    10,
-                ),
-            },
-        ),
         'instance_id': fields.many2one(
             'sync.server.entity',
-            string='Instance',
+            string='Linked instance',
         ),
-        'custom_name_ok': fields.boolean(
-            string='Use a custom name ?',
-        ),
-        'custom_name': fields.char(
+        'db_to_use': fields.char(
             size=512,
-            string='Custom name',
+            string='Name of the DB to use',
         ),
     }
 
     _defaults = {
         'instance_id': False,
-        'custom_name_ok': False,
-        'custom_name': False,
+        'db_to_use': False,
     }
 
-    def _check_unique_name(self, cr, uid, db_name, context=None):
+    def on_change_instance(self, cr, uid, ids, instance_id, context=None):
         """
-        Check that a DB name to use is not already set on a mapping.
+        Fill the DB to use field with the name of the selected instance.
+        """
+        inst_obj = self.pool.get('sync.server.entity')
+
+        if context is None:
+            context = {}
+
+        if instance_id:
+            inst_name = inst_obj.\
+                read(cr, uid, instance_id, ['name'], context=context)
+            return {
+                'value': {
+                    'db_to_use': inst_name['name'],
+                },
+            }
+
+        return {}
+
+    def create(self, cr, uid, vals, context=None):
+        """
+        Check if there is no other DB mapping with the same db_to_use value
         """
         if context is None:
             context = {}
 
-        if db_name:
+        if vals.get('db_to_use'):
             same_maps = self.search(cr, uid, [
-                ('db_to_use', '=', db_name),
-            ], limit=2, context=context)
-            if len(same_maps) > 1:
+                ('db_to_use', '=', vals.get('db_to_use')),
+            ], limit=1, context=context)
+            if same_maps:
                 raise osv.except_osv(
                     _('Error'),
                     _('You cannot have a DB name mapped twice.'),
                 )
 
-        return True
+        return super(test_db_mapping, self).\
+            create(cr, uid, vals, context=context)
+
+    def write(self, cr, uid, ids, vals, context=None):
+        """
+        Check if there is no other DB mapping with the same db_to_use value
+        """
+        if context is None:
+            context = {}
+
+        if vals.get('db_to_use'):
+            same_maps = self.search(cr, uid, [
+                ('id', 'not in', ids),
+                ('db_to_use', '=', vals.get('db_to_use')),
+            ], limit=1, context=context)
+            if same_maps:
+                raise osv.except_osv(
+                    _('Error'),
+                    _('You cannot have a DB name mapped twice.'),
+                )
+
+        return super(test_db_mapping, self).\
+            write(cr, uid, ids, vals, context=context)
 
 test_db_mapping()
 

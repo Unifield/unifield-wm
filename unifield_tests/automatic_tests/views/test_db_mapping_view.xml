@@ -14,10 +14,8 @@
             <field name="arch" type="xml">
                 <tree string="DB mapping" editable="top" hide_delete_button="True" hide_new_button="True">
                     <field name="keyword" readonly="True" />
-                    <field name="instance_id" attrs="{'readonly': [('custom_name_ok', '=', True)], 'required': [('custom_name_ok', '=', False)]}" widget="selection" />
-                    <field name="custom_name_ok" />
-                    <field name="custom_name" attrs="{'readonly': [('custom_name_ok', '=', False)], 'required': [('custom_name_ok', '=', True)]}" />
-                    <field name="db_to_use" />
+                    <field name="instance_id" on_change="on_change_instance(instance_id)" widget="selection" />
+                    <field name="db_to_use" required="True" />
                 </tree>
             </field>
         </record>
