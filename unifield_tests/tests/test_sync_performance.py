@@ -17,7 +17,6 @@ class SyncPerfomance(ResourcingTest):
         self.p_po_obj = self.p1.get('purchase.order')
         self.p_pol_obj = self.p1.get('purchase.order.line')
         self.p_partner_obj = self.p1.get('res.partner')
-        self.start_time = time.time()
 
     def createObject(self, object_number=1):
         """Create as much PO as object_number at Project side with two lines.
