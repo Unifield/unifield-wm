@@ -81,7 +81,7 @@ class UnifieldYamlInterpreter(YamlInterpreter):
                 tmd_ids = tmd_obj.search(cursor, self.uid, [], context=self.context)
                 tmd_obj.unlink(cursor, self.uid, tmd_ids, context=self.context)
             res = super(UnifieldYamlInterpreter, self).process(yaml_string)
-            for cursorr in self.cursors.values():
+            for cursor in self.cursors.values():
                 cursor.commit()
         except:
             for cr in self.cursors.values():

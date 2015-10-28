@@ -62,6 +62,7 @@ class UnifieldTest(unittest.TestCase):
     # global variable
     db = {}
     test_data_module_name = 'unifield_tests_data'
+    test_module_name = 'unifield_tests'
     test_module_obj_name = 'unifield.test'
     already_loaded = False
     description = ''
@@ -219,12 +220,12 @@ class UnifieldTest(unittest.TestCase):
             return
 
         for database_name in self.db:
-            if database_name == 'sync':
-                continue
             database = self.db.get(database_name)
-            print (database_name)
             module_obj = database.get('ir.module.module')
-            m_ids = module_obj.search([('name', '=', self.test_data_module_name)])
+            if database_name == 'sync':
+                m_ids = module_obj.search([('name', '=', self.test_module_name)])
+            else:
+                m_ids = module_obj.search([('name', '=', self.test_data_module_name)])
             database_display = database.colored_name
             for module in module_obj.read(m_ids, ['state']):
                 state = module.get('state', '')
@@ -255,19 +256,9 @@ class UnifieldTest(unittest.TestCase):
         if not self.yaml_file:
             raise AttributeError('No yaml_file attribute')
 
-        yaml_interpreter = yaml_import.UnifieldYamlInterpreter(
-            self,
-            'unifield_tests',
-            {},
-            'init',
-            filename=self.yaml_file,
-        )
-
         yaml_file_path = path.dirname(path.realpath(__file__))
         yaml_string = file('%s/data/%s' % (yaml_file_path, self.yaml_file)).read()
-        yaml_interpreter.process(yaml_string)
-
-
+        self.sync.get('automatic.test').load_data_from_yml(self.yaml_file, yaml_string)
 
     def is_keyword_present(self, db, keyword):
         '''

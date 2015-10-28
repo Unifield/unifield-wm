@@ -206,6 +206,16 @@ class automatic_test(osv.osv):
             'context': context,
         }
 
+    def load_data_from_yml(self, cr, uid, filename, yaml_string):
+        """
+        Generic method to load data from Yaml files if the tests are run
+        manually by the CLI
+        """
+        yaml_interpreter = yaml_import.UnifieldYamlInterpreter(cr, 'unifield_tests_data', {}, 'init', filename=filename,)
+        yaml_interpreter.process(yaml_string)
+
+        return True
+
 automatic_test()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
