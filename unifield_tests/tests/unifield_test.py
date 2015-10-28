@@ -69,6 +69,7 @@ class UnifieldTest(unittest.TestCase):
     category = 'Unifield'
     no_auto = []
     yaml_file = None
+    yalml_already_loaded = False
 
     # FIXME/TODO: Make unittest.TestCase inherit from oerplib.error class because of RPCError that could be raised by unittest.TestCase
 
@@ -244,10 +245,17 @@ class UnifieldTest(unittest.TestCase):
             # Some processes after instanciation for this database
             self._hook_db_process(database_name, database)
 
-        if self.yaml_file:
+        UnifieldTest.already_loaded = True
+
+    def run(self):
+        """
+        Load the data from Yaml file
+        """
+        if self.yaml_file and not self.yaml_already_loaded:
             self.load_data_from_yaml()
 
-        UnifieldTest.already_loaded = True
+        return super(UnifieldTest, self).run()
+
 
     def load_data_from_yaml(self):
         """
@@ -259,6 +267,7 @@ class UnifieldTest(unittest.TestCase):
         yaml_file_path = path.dirname(path.realpath(__file__))
         yaml_string = file('%s/data/%s' % (yaml_file_path, self.yaml_file)).read()
         self.sync.get('automatic.test').load_data_from_yml(self.yaml_file, yaml_string)
+        self.yaml_already_loaded = True
 
     def is_keyword_present(self, db, keyword):
         '''
