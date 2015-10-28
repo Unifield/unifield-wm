@@ -24,10 +24,14 @@ import unittest
 import sys
 
 from os import path
+from os import walk
 from oerplib import error
 
 from tests import colors
 from HTMLTestRunner import HTMLTestRunner
+
+
+path_for_tests = 'tests'
 
 
 def main():
@@ -38,17 +42,48 @@ def main():
     test_dir = '%s/tests/' % path.dirname(path.realpath(__file__))
 
     # Prepare some values
-    loader = unittest.TestLoader()
+    suite = unittest.TestSuite()
+    test_modules = []
+    added_paths = []
 
+    run_only_modules = False
     if len(sys.argv) > 1:
         # In case of specific module to run
-        specific_suites = []
-        for pattern in sys.argv[1:]:
-            specific_suites.append(loader.discover(test_dir, pattern='%s.py' % pattern))
-        suite = unittest.TestSuite(tuple(specific_suites))
-    else:
-        # Load all tests
-        suite = loader.discover(test_dir)
+        run_only_modules = sys.argv[1:]
+
+    print c.BGreen + 'Browsing' + c.Color_Off + ' %s directory.' % path_for_tests
+    for racine, _, files in walk(path_for_tests):
+        directory = path.basename(racine)
+        if directory == 'tests':
+            for f in files:
+                if (f.startswith('test') and f.endswith('.py') and f != 'test.py'):
+                    mod_name = f[:-3]
+                    if not run_only_modules or \
+                     (run_only_modules and mod_name in run_only_modules):
+                        name = path.join(racine, f)
+                        test_modules.append((name, mod_name))
+
+    print c.BGreen + 'Import' + c.Color_Off + ' modules + instanciate them'
+    for module_info in sorted(test_modules, key=lambda x: x[1]):
+        module_path = path.dirname(module_info[0])
+        if module_path not in sys.path:
+            sys.path.append(module_path)
+            added_paths.append(module_path)
+
+        module = __import__(module_info[1])
+        if 'get_test_class' in module.__dict__:
+            class_type = module.get_test_class()
+            print ("%s module:" % (class_type.__module__,))
+            test_suite = unittest.TestSuite((unittest.makeSuite(class_type), ))
+            suite.addTest(test_suite)
+
+        if 'get_test_suite' in module.__dict__:
+            suite_type = module.get_test_suite()
+            print ("%s module:" % (suite_type[0].__module__,))
+            for class_type in suite_type:
+                test_suite = unittest.TestSuite((unittest.makeSuite(class_type), ))
+                suite.addTest(test_suite)
+
 
     # Create a file for the output result
     output = file('output.html', 'wb')

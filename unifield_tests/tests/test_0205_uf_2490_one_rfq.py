@@ -155,3 +155,6 @@ class UF2490IROneRfQ(UF2490OneRfQ):
     def test_create_order_cancel_po_close_order(self):
         pass
 
+def get_test_suite():
+    '''Return the class to use for tests'''
+    return UF2490FOOneRfQ, UF2490IROneRfQ

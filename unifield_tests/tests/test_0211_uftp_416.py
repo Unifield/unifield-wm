@@ -194,3 +194,5 @@ class UFTP416IRTest(UFTP416Test):
                 "The OUT move has not been well removed",
             )
 
+def get_test_suite():
+    return UFTP416FOTest, UFTP416IRTest

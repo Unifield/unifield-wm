@@ -26,6 +26,11 @@ from resourcing import ResourcingTest
 import time
 
 class PickConvertToStandardTest(ResourcingTest):
+    category = 'Supply'
+    description = 'Test the conversion between Picking Tickets and standard '\
+                  'OUT with some moves in P/P/S steps or not'
+    no_auto = []
+    yaml_file = 'test_0202_pick_convert_to_standard.yml'
 
     def setUp(self):
         """
@@ -54,10 +59,10 @@ class PickConvertToStandardTest(ResourcingTest):
         self.c_move_in_obj = self.hq1c1.get('stock.move.in.processor')
 
         # Prepare values for the field order
-        prod_log1_id = self.get_record(self.hq1c1, 'prod_log_1')
-        prod_log2_id = self.get_record(self.hq1c1, 'prod_log_2')
+        prod_log1_id = self.get_record(self.hq1c1, 'test_0202_prod_log_1')
+        prod_log2_id = self.get_record(self.hq1c1, 'test_0202_prod_log_2')
         uom_pce_id = self.get_record(self.hq1c1, 'product_uom_unit', module='product')
-        ext_cu = self.get_record(self.hq1c1, 'external_cu')
+        ext_cu = self.get_record(self.hq1c1, 'test_0202_external_cu')
 
         partner_name = self.get_db_partner_name(self.hq1c1p1)
         partner_ids = self.c_partner_obj.search([('name', '=', partner_name)])
@@ -107,11 +112,11 @@ class PickConvertToStandardTest(ResourcingTest):
         # Validate the sale order
         self.hq1c1.exec_workflow('sale.order', 'order_validated', self.c_so_id)
 
-        # Source all lines on a Purchase Order to ext_supplier_1
+        # Source all lines on a Purchase Order to test_0202_ext_supplier
         line_ids = self.c_sol_obj.search([('order_id', '=', self.c_so_id)])
         self.c_sol_obj.write(line_ids, {
             'po_cft': 'po',
-            'supplier': self.get_record(self.hq1c1, 'ext_supplier_1'),
+            'supplier': self.get_record(self.hq1c1, 'test_0202_ext_supplier'),
         })
         self.c_sol_obj.confirmLine(line_ids)
 
@@ -569,3 +574,6 @@ class PickConvertToStandardPartialTest(PickConvertToStandardTest):
         self.assert_(
             all(x['state'] == 'assigned' for x in moves),
             "All moves in the draft picking ticket are not draft and should be")
+
+def get_test_suite():
+    return PickConvertToStandardTest, PickConvertToStandardTest

@@ -1066,3 +1066,5 @@ class US311TestCancelAllLines(US311Test):
         )
         w_res = self.hq1c1.get('purchase.order.line.unlink.wizard').just_cancel(res.get('res_id'))
 
+def get_test_suite():
+    return US311TestCancelNewLine, US311TestCancelNewLineMoreOnNewLine, US311TestCancelNewLineMoreOnOldLine, US311TestCancelNewLineLessOnNewLine, US311TestCancelNewLineLessOnOldLine, US311TestCancelOldLine, US311TestCancelOldLineMoreOnNewLine, US311TestCancelOldLineMoreOnOldLine, US311TestCancelOldLineLessOnNewLine, US311TestCancelOldLineLessOnOldLine, US311TestCancelAllLines

@@ -212,3 +212,5 @@ class UTP1007Test(ResourcingTest):
             "The quantity on original IR is %s - Should be 2.00" % sol_qty
         )
 
+def get_test_class():
+    return UTP1007Test

@@ -209,3 +209,5 @@ class UFTP324Test(ResourcingTest):
             "There is always lines in PO at project side"
         )
 
+def get_test_class():
+    return UFTP324Test

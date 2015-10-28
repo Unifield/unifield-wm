@@ -73,4 +73,7 @@ class MassReallocationTest(FinanceTest):
         self.assert_(line.destination_id.code == 'SUP', "Analytic line have wrong DESTINATION: %s (should be SUP)" % (line.destination_id.code))
         self.assert_(line.account_id.code == 'PF', "Analytic line have wrong FP: %s (should be PF)" % (line.account_id.code))
 
+def get_test_class():
+    '''Return the class to use for tests'''
+    return MassReallocationTest
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

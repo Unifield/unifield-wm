@@ -84,17 +84,17 @@ class UnifieldTest(unittest.TestCase):
         tempo_mkdb = c.getboolean('DB', 'tempo_mkdb')
         db_suffixes = [
             'SYNC_SERVER',
-            'HQ1', 'HQ2',                               # HQs
-            'HQ1C1', 'HQ1C2', 'HQ2C1', 'HQ2C2',         # COORDOs
+            'HQ1', #'HQ2',                               # HQs
+            'HQ1C1', 'HQ1C2', #'HQ2C1', 'HQ2C2',         # COORDOs
             'HQ1C1P1', 'HQ1C1P2', 'HQ1C2P1', 'HQ1C2P2',  # HQ1 PROJECTs
-            'HQ2C1P1', 'HQ2C1P2', 'HQ2C2P1', 'HQ2C2P2', # HQ2 PROJECTs
+#            'HQ2C1P1', 'HQ2C1P2', 'HQ2C2P1', 'HQ2C2P2', # HQ2 PROJECTs
         ]
         names = [
             'sync',
-            'hq1', 'hq2',                               # HQs
-            'hq1c1', 'hq1c2', 'hq2c1', 'hq2c2',         # COORDOs
+            'hq1', #'hq2',                               # HQs
+            'hq1c1', 'hq1c2', #'hq2c1', 'hq2c2',         # COORDOs
             'hq1c1p1', 'hq1c1p2', 'hq1c2p1', 'hq1c2p2', # HQ1 PROJECTs
-            'hq2c1p1', 'hq2c1p2', 'hq2c2p1', 'hq2c2p2', # HQ2 PROJECTs
+#            'hq2c1p1', 'hq2c1p2', 'hq2c2p1', 'hq2c2p2', # HQ2 PROJECTs
         ]
 
         # Check Remote warehouse and complete old params
@@ -164,7 +164,7 @@ class UnifieldTest(unittest.TestCase):
         if name not in self.db:
             con = XMLConn(db_name, self.server_port, self.server_url, self.uid, self.pwd)
             setattr(self, name, con)
-            self.db[name] = con
+            UnifieldTest.db[name] = con
 
         # Set colors
         colors = self.colors
@@ -177,6 +177,8 @@ class UnifieldTest(unittest.TestCase):
         """
         if attr != 'test_id' and attr in self.db:
             return self.db[attr]
+        elif attr != 'test_id' and attr in UnifieldTest.db:
+            return UnifieldTest.db
         else:
             raise NameError("No DB connection found the keyword '%s'!" % attr)
 
@@ -252,6 +254,8 @@ class UnifieldTest(unittest.TestCase):
         Load the data from Yaml file
         """
         if self.yaml_file and not self.yaml_already_loaded:
+            import pdb
+            pdb.set_trace()
             self.load_data_from_yaml()
 
         return super(UnifieldTest, self).run(*args, **kwargs)

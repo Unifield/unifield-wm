@@ -2494,3 +2494,5 @@ class FinanceTestCorCases(FinanceTest):
             "SYNC mismatch"
         )
 
+def get_test_class():
+    return FinanceTestCorCases

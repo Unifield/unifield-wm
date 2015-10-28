@@ -114,4 +114,8 @@ class InvoiceTest(FinanceTest):
         # TODO: CREATE THIS TEST IN ORDER TO CHECK INVOICE CREATION AFTER A PO CREATION + STOCK process validation
         pass
 
+def get_test_class():
+    '''Return the class to use for tests'''
+    return InvoiceTest
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -170,4 +170,6 @@ class UTP1220Test(UnifieldTest):
             "The generated PO must have only 1 line (res: %s)" % len(pol_ids),
         )
 
+def get_test_class():
+    return UTP1220Test
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

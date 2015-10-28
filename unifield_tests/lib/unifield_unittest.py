@@ -36,6 +36,7 @@ class UnifieldTestSuite(unittest.suite.TestSuite):
 
 class UnifieldTestLoader(unittest.loader.TestLoader):
     suiteClass = UnifieldTestSuite
+    _top_level_dir = None
 
     def __init__(self, pool, cr, uid, cid, update_module=False):
         """
@@ -128,6 +129,28 @@ class UnifieldTestLoader(unittest.loader.TestLoader):
             return self.suiteClass(tests, self)
 
         return self.suiteClass(base_tests, self)
+
+    def _get_directory_containing_module(self, module_name):
+        module = sys.modules[module_name]
+        full_path = os.path.abspath(module.__file__)
+
+        if os.path.basename(full_path).lower().startswith('__init__.py'):
+            return os.path.dirname(os.path.dirname(full_path))
+        else:
+            # here we have been given a module rather than a package - so
+            # all we can do is search the *same* directory the module is in
+            # should an exception be raised instead
+            return os.path.dirname(full_path)
+
+    def _get_name_from_path(self, path):
+        path = os.path.splitext(os.path.normpath(path))[0]
+
+        _relpath = os.path.relpath(path, self._top_level_dir)
+        assert not os.path.isabs(_relpath), "Path must be within the project"
+        assert not _relpath.startswith('..'), "Path must be within the project"
+
+        name = _relpath.replace(os.path.sep, '.')
+        return name
 
     def loadTestsFromTestCase(self, testCaseClass):
         """Return a suite of all tests cases contained in testCaseClass"""

@@ -30,4 +30,8 @@ class AccountTest(UnifieldTest):
         ids = self.hq1c1p1.get('account.account').search([])
         self.assert_(len(ids) == 357, "Chart of Account length: %s" % len(ids))
 
+def get_test_class():
+    '''Return the class to use for tests'''
+    return AccountTest
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
