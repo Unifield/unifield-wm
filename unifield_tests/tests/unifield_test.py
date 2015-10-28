@@ -28,9 +28,12 @@ from connection import UnifieldTestConfigParser
 from colors import TerminalColors
 from datetime import datetime
 from datetime import timedelta
+from os import path
 import time
 import random
 from uuid import uuid4
+
+from unifield_tests.lib import yaml_import
 
 
 class UnifieldTestException(Exception):
@@ -64,6 +67,7 @@ class UnifieldTest(unittest.TestCase):
     description = ''
     category = 'Unifield'
     no_auto = []
+    yaml_file = None
 
     # FIXME/TODO: Make unittest.TestCase inherit from oerplib.error class because of RPCError that could be raised by unittest.TestCase
 
@@ -77,11 +81,11 @@ class UnifieldTest(unittest.TestCase):
 
         tempo_mkdb = c.getboolean('DB', 'tempo_mkdb')
         db_suffixes = [
-            'SYNC_SERVER'
+            'SYNC_SERVER',
             'HQ1', 'HQ2',                               # HQs
             'HQ1C1', 'HQ1C2', 'HQ2C1', 'HQ2C2',         # COORDOs
-            'HQ1C1P1', 'HQ1C1P2', 'HQ1C2P1', 'HQ1C2P2'  # HQ1 PROJECTs
-            'HQ2C1P1', 'HQ2C1P2', 'HQ2C2P1', 'HQ2C2P2'  # HQ2 PROJECTs
+            'HQ1C1P1', 'HQ1C1P2', 'HQ1C2P1', 'HQ1C2P2',  # HQ1 PROJECTs
+            'HQ2C1P1', 'HQ2C1P2', 'HQ2C2P1', 'HQ2C2P2', # HQ2 PROJECTs
         ]
         names = [
             'sync',
@@ -218,26 +222,52 @@ class UnifieldTest(unittest.TestCase):
             if database_name == 'sync':
                 continue
             database = self.db.get(database_name)
+            print (database_name)
             module_obj = database.get('ir.module.module')
             m_ids = module_obj.search([('name', '=', self.test_data_module_name)])
             database_display = database.colored_name
             for module in module_obj.read(m_ids, ['state']):
                 state = module.get('state', '')
                 if state == 'uninstalled':
-                    print (database_display + ' [' + colors.BYellow + 'UP'.center(4) + colors.Color_Off + '] Module %s' % (self.test_data_module_name))
+                    print (database_display + ' [' + colors.BYellow + 'UP'.center(4) + colors.Color_Off + '] Installation module %s' % (self.test_data_module_name))
                     module_obj.button_install([module.get('id')])
                     database.get('base.module.upgrade').upgrade_module([])
                 elif state in ['to upgrade', 'to install']:
-                    print (database_display + ' [' + colors.BYellow + 'UP'.center(4) + colors.Color_Off + '] Module %s' % (self.test_data_module_name))
+                    print (database_display + ' [' + colors.BYellow + 'UP'.center(4) + colors.Color_Off + '] Installation module %s' % (self.test_data_module_name))
                     database.get('base.module.upgrade').upgrade_module([])
                 elif state in ['installed']:
-                    print (database_display + ' [' + colors.BGreen + 'OK'.center(4) + colors.Color_Off + '] Module %s' % (self.test_data_module_name))
+                    print (database_display + ' [' + colors.BGreen + 'OK'.center(4) + colors.Color_Off + '] Module %s already installed' % (self.test_data_module_name))
                     pass
                 else:
                     raise EnvironmentError(' Wrong module state: %s' % (state or '',))
             # Some processes after instanciation for this database
             self._hook_db_process(database_name, database)
+
+        if self.yaml_file:
+            self.load_data_from_yaml()
+
         UnifieldTest.already_loaded = True
+
+    def load_data_from_yaml(self):
+        """
+        Parse the Yaml file attached to the test and create objects
+        """
+        if not self.yaml_file:
+            raise AttributeError('No yaml_file attribute')
+
+        yaml_interpreter = yaml_import.UnifieldYamlInterpreter(
+            self,
+            'unifield_tests',
+            {},
+            'init',
+            filename=self.yaml_file,
+        )
+
+        yaml_file_path = path.dirname(path.realpath(__file__))
+        yaml_string = file('%s/data/%s' % (yaml_file_path, self.yaml_file)).read()
+        yaml_interpreter.process(yaml_string)
+
+
 
     def is_keyword_present(self, db, keyword):
         '''

@@ -21,10 +21,11 @@
 ##############################################################################
 
 
+from __future__ import print_function
+
 import os
 import time
 
-from __future__ import print_function
 from ConfigParser import ConfigParser
 from oerplib.oerp import OERP
 
@@ -62,16 +63,21 @@ class XMLRPCConnection(OERP):
         )
         # Login initialization
         error = 100
+        in_error = True
         while error != 0:
             try:
                 self.login(uid, pwd, db_name)
                 error = 0
+                in_error = False
             except Exception as e:
                 if e.message.startswith('ServerUpdate:'):
                     time.sleep(1)
                     error -= 1
                 else:
                     error = 0
+                    in_error = e
+        if error == 0 and in_error:
+            raise RuntimeError('The connection to \'%s\' is not possible : %s' % (db_name, e))
 
         self.db_name = db_name
 

@@ -29,6 +29,10 @@ import time
 
 
 class FOTest(UnifieldTest):
+    category = 'Supply'
+    description = 'Some integrity checks on FO'
+    no_auto = []
+    yaml_file = 'test_0201_test_fo.yml'
 
     def setUp(self):
         self.used_db = self.hq1c1
@@ -41,7 +45,7 @@ class FOTest(UnifieldTest):
         Create a FO with two lines. One of these lines have no price unit.
         Expected result: An error must be raised
         """
-        partner_id = self.get_record(self.used_db, 'fo_test_ext_custx')
+        partner_id = self.get_record(self.used_db, 'fo_test_ext_cust')
         order_type = 'regular'
 
         # Get the analytic distribution

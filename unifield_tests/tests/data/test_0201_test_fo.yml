@@ -1,0 +1,54 @@
+-
+  Data for test_0201_test_fo
+-
+  Create an external customer
+-
+  !record {model: res.partner, id: fo_test_ext_cust, db: hq1c1}:
+    name: Ext Customer for FO Test
+    # Not editable values
+    customer: 1
+    supplier: 0
+    partner_type: 'external'
+    property_account_receivable: unifield_data_tests.account_account_receivable_supplier0
+    property_account_payable: unifield_data_tests.account_account_payable_supplier0
+-
+  Create an address for the external customer
+-
+  !record {model: res.partner.address, id: fo_test_ext_cust_addr, db: hq1c1}:
+    name: Ext. Customer for FO Test
+    street: Main Street
+    street2: 
+    zip: 63523
+    city: Test City
+    # Not editable values
+    partner_id: fo_test_ext_cust
+-
+  Create a first LOG product
+-
+  !record {model: product.product, id: fo_test_prod_log_1, db: hq1c1}:
+    default_code: PL1FOTest
+    name: PL1 (FO Test)
+    uom_id: product.product_uom_unit
+    uom_po_id: product.product_uom_unit
+    # Not editable values
+    supply_method: buy
+    type: product
+    nomen_manda_0: unifield_tests_data.nomen_log_main_type
+    nomen_manda_1: unifield_tests_data.nonem_log_group
+    nomen_manda_2: unifield_tests_data.nomen_log_family
+    nomen_manda_3: unifield_tests_data.nomen_log_root
+-
+  Create a second LOG product
+-
+  !record {model: product.product, id: fo_test_prod_log_2, db: hq1c1}:
+    default_code: PL2FOTest
+    name: PL2 (FO Test)
+    uom_id: product.product_uom_unit
+    uom_po_id: product.product_uom_unit
+    # Not editable values
+    supply_method: buy
+    type: product
+    nomen_manda_0: unifield_tests_data.nomen_log_main_type
+    nomen_manda_1: unifield_tests_data.nonem_log_group
+    nomen_manda_2: unifield_tests_data.nomen_log_family
+    nomen_manda_3: unifield_tests_data.nomen_log_root
