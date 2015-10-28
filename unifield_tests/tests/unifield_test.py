@@ -69,7 +69,7 @@ class UnifieldTest(unittest.TestCase):
     category = 'Unifield'
     no_auto = []
     yaml_file = None
-    yalml_already_loaded = False
+    yaml_already_loaded = False
 
     # FIXME/TODO: Make unittest.TestCase inherit from oerplib.error class because of RPCError that could be raised by unittest.TestCase
 
@@ -247,14 +247,14 @@ class UnifieldTest(unittest.TestCase):
 
         UnifieldTest.already_loaded = True
 
-    def run(self):
+    def run(self, *args, **kwargs):
         """
         Load the data from Yaml file
         """
         if self.yaml_file and not self.yaml_already_loaded:
             self.load_data_from_yaml()
 
-        return super(UnifieldTest, self).run()
+        return super(UnifieldTest, self).run(*args, **kwargs)
 
 
     def load_data_from_yaml(self):
