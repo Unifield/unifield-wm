@@ -162,13 +162,22 @@ class automatic_test_campaign(osv.osv):
                 _('You cannot run a campaign without tests'),
             )
 
-        self.run_tests(cr, uid, ids, context=context)
-#        cr.commit()
-#        thread = threading.Thread(
-#            target=self.run_tests,
-#            args=(cr, uid, ids, context, True),
-#        )
-#        thread.start()
+        test_obj.write(cr, uid, test_ids, {
+            'state': 'not_run',
+        }, context=context)
+
+        self.write(cr, uid, ids, {
+            'state': 'progress',
+            'start_date': time.strftime('%Y-%m-%d %H:%M:%S'),
+        }, context=context)
+
+        #self.run_tests(cr, uid, ids, context=context)
+        cr.commit()
+        thread = threading.Thread(
+            target=self.run_tests,
+            args=(cr, uid, ids, context, True),
+        )
+        thread.start()
 
         return self.update(cr, uid, ids, context=context)
 
@@ -203,19 +212,6 @@ class automatic_test_campaign(osv.osv):
             cr = pooler.get_db(cr.dbname).cursor()
 
         try:
-            test_ids = test_obj.search(cr, uid, [
-                ('campaign_id', 'in', ids),
-                ('state', '=', 'draft'),
-            ], limit=1, context=context)
-            test_obj.write(cr, uid, test_ids, {
-                'state': 'not_run',
-            }, context=context)
-
-            self.write(cr, uid, ids, {
-                'state': 'progress',
-                'start_date': time.strftime('%Y-%m-%d %H:%M:%S'),
-            }, context=context)
-
             test_dir = '%s/../../' % path.dirname(path.realpath(__file__))
             for camp in self.browse(cr, uid, ids, context=context):
                 # Parse Yaml file
