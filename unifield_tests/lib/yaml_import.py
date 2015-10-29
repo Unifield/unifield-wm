@@ -42,7 +42,8 @@ class UnifieldYamlInterpreter(YamlInterpreter):
         self.cursors = {}
         db_map_ids = db_map_obj.search(self.cr, self.uid, [
             ('db_to_use', '!=', ''),
-            ('keyword', '!=', 'sync'),
+#            ('keyword', '!=', 'sync'),
+            ('keyword', 'not in', ['sync', 'hq2', 'hq2c1', 'hq2c2', 'hq2c1p1',' hq2c1p2', 'hq2c2p1', 'hq2c2p2']),
         ], context=self.context)
         for db_map in db_map_obj.browse(self.cr, self.uid, db_map_ids, context=self.context):
             new_cr = pooler.get_db(db_map.db_to_use)

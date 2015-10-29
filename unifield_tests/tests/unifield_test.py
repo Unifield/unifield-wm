@@ -253,7 +253,7 @@ class UnifieldTest(unittest.TestCase):
         """
         Load the data from Yaml file
         """
-        if self.yaml_file and not self.yaml_already_loaded:
+        if self.yaml_file and not UnifieldTest.yaml_already_loaded:
             self.load_data_from_yaml()
 
         return super(UnifieldTest, self).run(*args, **kwargs)
@@ -263,13 +263,16 @@ class UnifieldTest(unittest.TestCase):
         """
         Parse the Yaml file attached to the test and create objects
         """
+        if self.cr:
+            return True
+
         if not self.yaml_file:
             raise AttributeError('No yaml_file attribute')
 
         yaml_file_path = path.dirname(path.realpath(__file__))
         yaml_string = file('%s/data/%s' % (yaml_file_path, self.yaml_file)).read()
         self.sync.get('automatic.test').load_data_from_yml(self.yaml_file, yaml_string)
-        self.yaml_already_loaded = True
+        UnifieldTest.yaml_already_loaded = True
 
     def is_keyword_present(self, db, keyword):
         '''

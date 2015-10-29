@@ -21,7 +21,7 @@
 #
 ##############################################################################
 
-import oerp_config
+import unifield_tests_test
 import automatic_tests
 import lib
 

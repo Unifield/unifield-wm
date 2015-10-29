@@ -23,10 +23,13 @@
 import threading
 import time
 import base64
+import sys
+import unittest
 
 import pooler
 
 from os import path
+from os import walk
 
 from osv import osv
 from osv import fields
@@ -213,7 +216,7 @@ class automatic_test_campaign(osv.osv):
                 'start_date': time.strftime('%Y-%m-%d %H:%M:%S'),
             }, context=context)
 
-            test_dir = '%s/../../tests/' % path.dirname(path.realpath(__file__))
+            test_dir = '%s/../../' % path.dirname(path.realpath(__file__))
             for camp in self.browse(cr, uid, ids, context=context):
                 # Parse Yaml file
                 yaml_interpreter = yaml_import.UnifieldYamlInterpreter(
@@ -230,7 +233,38 @@ class automatic_test_campaign(osv.osv):
                 # Discover and filter test cases
                 loader = unifield_unittest.\
                     UnifieldTestLoader(self.pool, cr, uid, camp.id)
-                suite = loader.discover(test_dir, pattern='test*.py')
+                suite = unifield_unittest.UnifieldTestSuite()
+                test_modules = []
+                added_paths = []
+
+                for racine, _, files in walk(test_dir):
+                    directory = path.basename(racine)
+                    if directory == 'tests':
+                        for f in files:
+                            if (f.startswith('test') and f.endswith('.py') and f != 'test.py'):
+                                mod_name = f[:-3]
+                                name = path.join(racine, f)
+                                test_modules.append((name, mod_name))
+
+                for module_info in sorted(test_modules, key=lambda x: x[1]):
+                    module_path = path.dirname(module_info[0])
+                    if module_path not in sys.path:
+                        sys.path.append(module_path)
+                        added_paths.append(module_path)
+
+                    module = __import__(module_info[1])
+                    if 'get_test_class' in module.__dict__:
+                        class_type = module.get_test_class()
+                        test_suite = loader.loadTestsFromTestCase(class_type)
+                        suite.addTest(test_suite)
+
+                    if 'get_test_suite' in module.__dict__:
+                        suite_type = module.get_test_suite()
+                        for class_type in suite_type:
+                            test_suite = loader.loadTestsFromTestCase(class_type)
+                            suite.addTest(test_suite)
+
+                suite2 = unifield_unittest.UnifieldTestSuite(loader.filter_tests(suite))
 
                 # Create a runner linked to the campaign
                 result = unifield_unittest.UnifieldTestResult(
@@ -239,7 +273,7 @@ class automatic_test_campaign(osv.osv):
                     uid=uid,
                     cid=camp.id)
                 # Launch tests
-                suite(result)
+                suite2(result)
 
                 self.write(cr, uid, [camp.id], {
                     'state': 'done',
