@@ -21,7 +21,7 @@
 ##############################################################################
 
 
-from finance import FinanceTest
+from finance_test import FinanceTest
 from oerplib.error import RPCError
 from time import strftime
 

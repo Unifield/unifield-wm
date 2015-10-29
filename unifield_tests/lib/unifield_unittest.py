@@ -27,14 +27,14 @@ import sys
 import time
 
 
-class UnifieldTestSuite(unittest.suite.TestSuite):
+class UnifieldTestSuite(unittest.TestSuite):
 
     def __init__(self, tests=(), loader=False):
         self.loader = loader
         super(UnifieldTestSuite, self).__init__(tests)
 
 
-class UnifieldTestLoader(unittest.loader.TestLoader):
+class UnifieldTestLoader(unittest.TestLoader):
     suiteClass = UnifieldTestSuite
     _top_level_dir = None
 
@@ -54,7 +54,7 @@ class UnifieldTestLoader(unittest.loader.TestLoader):
         """
         res = []
         for t in tests:
-            if isinstance(t, unittest.case.TestCase):
+            if isinstance(t, unittest.TestCase):
                 t_ids = self.pool.get('automatic.test').search(self.cr, self.uid, [
                     ('template_id.test_class', '=', t.__class__.__name__),
                     ('campaign_id', '=', self.cid),
@@ -71,7 +71,7 @@ class UnifieldTestLoader(unittest.loader.TestLoader):
                             },
                         )
                     res.append(t)
-            elif isinstance(t, unittest.suite.TestSuite):
+            elif isinstance(t, unittest.TestSuite):
                 if t._tests:
                     flt = self.filter_tests(t)
                     if flt:
@@ -132,7 +132,7 @@ class UnifieldTestLoader(unittest.loader.TestLoader):
 
     def loadTestsFromTestCase(self, testCaseClass):
         """Return a suite of all tests cases contained in testCaseClass"""
-        if issubclass(testCaseClass, unittest.suite.TestSuite):
+        if issubclass(testCaseClass, unittest.TestSuite):
             raise TypeError("Test cases should not be derived from TestSuite."
                                 " Maybe you meant to derive from TestCase?")
         testCaseNames = self.getTestCaseNames(testCaseClass)
@@ -172,7 +172,7 @@ def format_error(error):
         return error[0]
 
 
-class UnifieldTestResult(unittest.runner.TextTestResult):
+class UnifieldTestResult(unittest._TextTestResult):
     """
     Override of a TextTestResult to write information on the sync. database
     at each test done/error/failure.

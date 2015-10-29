@@ -254,8 +254,6 @@ class UnifieldTest(unittest.TestCase):
         Load the data from Yaml file
         """
         if self.yaml_file and not self.yaml_already_loaded:
-            import pdb
-            pdb.set_trace()
             self.load_data_from_yaml()
 
         return super(UnifieldTest, self).run(*args, **kwargs)

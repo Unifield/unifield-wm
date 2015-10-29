@@ -26,8 +26,8 @@
 from __future__ import print_function
 from unifield_test import UnifieldTestException
 from unifield_test import UnifieldTest
-from finance import FinanceTestException
-from finance import FinanceTest
+from finance_test import FinanceTestException
+from finance_test import FinanceTest
 
 import time
 from datetime import datetime

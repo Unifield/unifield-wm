@@ -21,7 +21,7 @@
 ##############################################################################
 
 
-from test_uf_2490_one_po import ResourcingTest
+from test_0204_uf_2490_one_po import ResourcingTest
 
 import time
 

@@ -26,7 +26,7 @@ from resourcing import ResourcingTest
 import time
 
 
-class UF2490OnePO(object):
+class UF2490OnePO(ResourcingTest):
     category = 'Supply'
     no_auto = []
     yaml_file = 'test_0204_uf_2490_one_po.yml'
@@ -538,7 +538,7 @@ class UF2490OnePO(object):
         wiz_obj.do_cancel([wiz_id], ctx)
 
 
-class UF2490FOOnePO(UF2490OnePO, ResourcingTest):
+class UF2490FOOnePO(UF2490OnePO):
     description = 'Test Cancel and resource feature on PO that sources a FO'
 
     def setUp(self):
@@ -546,7 +546,7 @@ class UF2490FOOnePO(UF2490OnePO, ResourcingTest):
         super(UF2490FOOnePO, self).setUp()
 
 
-class UF2490IROnePO(UF2490OnePO, ResourcingTest):
+class UF2490IROnePO(UF2490OnePO):
     description = 'Test Cancel and resource feature on PO that sources an IR'
 
     def setUp(self):
