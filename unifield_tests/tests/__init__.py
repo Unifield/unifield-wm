@@ -20,5 +20,12 @@
 #
 ##############################################################################
 
+from os import path
+
 import sys
+
+if path.realpath('.').split('/')[-1] == 'unifield_tests':
+    sys.path.append('tests')
+
 sys.path.append('../')
+

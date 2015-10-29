@@ -21,7 +21,7 @@
 ##############################################################################
 
 
-from finance import FinanceTest
+from finance_test import FinanceTest
 from time import strftime
 
 class MassReallocationTest(FinanceTest):

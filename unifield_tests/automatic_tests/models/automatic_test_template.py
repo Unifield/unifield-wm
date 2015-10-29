@@ -20,9 +20,13 @@
 #
 ##############################################################################
 
+
+import sys
+
 import unittest
 
 from os import path
+from os import walk
 
 from osv import osv
 from osv import fields
@@ -42,18 +46,50 @@ class automatic_test_template(osv.osv):
         """
         tmpl_obj = self.pool.get('automatic.test.template')
 
-        test_dir = '%s/../../tests/' % path.dirname(path.realpath(__file__))
+        test_dir = '%s/../../' % path.dirname(path.realpath(__file__))
+        sys.path.append('%stests' % test_dir)
+
+        suite = unifield_unittest.UnifieldTestSuite()
+        test_modules = []
+        added_paths = []
+
         loader = unifield_unittest.\
             UnifieldTestLoader(self.pool, cr, uid, None, update_module=True)
-        suite = loader.discover(test_dir, pattern='test*.py', from_update=True)
+
+        for racine, _, files in walk(test_dir):
+            directory = path.basename(racine)
+            if directory == 'tests':
+                for f in files:
+                    if (f.startswith('test') and f.endswith('.py') and f != 'test.py'):
+                        mod_name = f[:-3]
+                        name = path.join(racine, f)
+                        test_modules.append((name, mod_name))
+
+        for module_info in sorted(test_modules, key=lambda x: x[1]):
+            module_path = path.dirname(module_info[0])
+            if module_path not in sys.path:
+                sys.path.append(module_path)
+                added_paths.append(module_path)
+
+            module = __import__(module_info[1])
+            if 'get_test_class' in module.__dict__:
+                class_type = module.get_test_class()
+                test_suite = loader.loadTestsFromTestCase(class_type)
+                suite.addTest(test_suite)
+
+            if 'get_test_suite' in module.__dict__:
+                suite_type = module.get_test_suite()
+                for class_type in suite_type:
+                    test_suite = loader.loadTestsFromTestCase(class_type)
+                    suite.addTest(test_suite)
 
         tests = []
 
         def discover_tests(d_suite):
             for test in d_suite:
-                if isinstance(test, unittest.suite.TestSuite):
+                if isinstance(test, unittest.TestSuite):
                     discover_tests(test)
-                elif isinstance(test, unittest.case.TestCase):
+                elif isinstance(test, unittest.TestCase):
                     if test not in tests and (not hasattr(test, 'no_auto') or test._testMethodName not in test.no_auto):
                         tests.append(test)
 

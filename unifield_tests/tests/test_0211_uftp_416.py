@@ -21,7 +21,7 @@
 ##############################################################################
 
 
-from test_uftp_326 import UFTP326Test
+from test_0210_uftp_326 import UFTP326Test
 
 import time
 
