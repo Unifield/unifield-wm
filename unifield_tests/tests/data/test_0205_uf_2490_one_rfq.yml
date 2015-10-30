@@ -25,7 +25,7 @@
 -
   Create a first LOG product
 -
-  !record {model: product.product, id: test_0204_prod_log_1, db: hq1c1, xml_id: fo_test_prod_log_1}:
+  !record {model: product.product, id: test_0205_prod_log_1, db: hq1c1, xml_id: fo_test_prod_log_1}:
     default_code: PL1FOTest
     name: PL1 (FO Test)
     uom_id: product.product_uom_unit
@@ -41,7 +41,7 @@
 -
   Create a second LOG product
 -
-  !record {model: product.product, id: test_0204_prod_log_2, db: hq1c1, xml_id: fo_test_prod_log_2}:
+  !record {model: product.product, id: test_0205_prod_log_2, db: hq1c1, xml_id: fo_test_prod_log_2}:
     default_code: PL2FOTest
     name: PL2 (FO Test)
     uom_id: product.product_uom_unit
@@ -57,7 +57,7 @@
 -
   Create an external Consumption unit
 -
-  !record {model: stock.location, id: test_0204_external_cu, db: hq1c1, xml_id: test_0202_external_cu}:
+  !record {model: stock.location, id: test_0205_external_cu, db: hq1c1, xml_id: test_0202_external_cu}:
     name: External CU for 0204
     # Not editable values
     location_category: consumption_unit

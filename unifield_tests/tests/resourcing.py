@@ -29,16 +29,14 @@ import time
 class ResourcingTest(UnifieldTest):
 
     def setUp(self):
-        self.used_db = self.hq1c1
-        db = self.used_db
-        self.order_obj = db.get('sale.order')
-        self.order_line_obj = db.get('sale.order.line')
-        self.po_obj = db.get('purchase.order')
-        self.pol_obj = db.get('purchase.order.line')
-        self.proc_obj = db.get('procurement.order')
-        self.data_obj = db.get('ir.model.data')
-        self.tender_obj = db.get('tender')
-        self.tender_line_obj = db.get('tender.line')
+        self.order_obj = self.hq1c1.get('sale.order')
+        self.order_line_obj = self.hq1c1.get('sale.order.line')
+        self.po_obj = self.hq1c1.get('purchase.order')
+        self.pol_obj = self.hq1c1.get('purchase.order.line')
+        self.proc_obj = self.hq1c1.get('procurement.order')
+        self.data_obj = self.hq1c1.get('ir.model.data')
+        self.tender_obj = self.hq1c1.get('tender')
+        self.tender_line_obj = self.hq1c1.get('tender.line')
 
         if not hasattr(self, 'pr'):
             self.pr = False
@@ -48,10 +46,8 @@ class ResourcingTest(UnifieldTest):
         Done all remaining documents
         :return:
         """
-        db = self.used_db
-
-        ddw_obj = db.get('documents.done.wizard')
-        ddp_obj = db.get('documents.done.problem')
+        ddw_obj = self.hq1c1.get('documents.done.wizard')
+        ddp_obj = self.hq1c1.get('documents.done.problem')
 
         ddw_ids = ddw_obj.search([])
         while ddw_ids:
@@ -106,7 +102,7 @@ No split of FO found !""")
 
         return new_order_id
 
-    def _get_fo_values(self, db, values=None):
+    def _get_fo_values(self, db, data_prefix, values=None):
         """
         Returns specific values for a Field order (partner, partner address,
         pricelist...)
@@ -121,7 +117,7 @@ No split of FO found !""")
             values = {}
 
         # Prepare values for the field order
-        partner_id = self.get_record(db, 'ext_customer_1')
+        partner_id = self.get_record(db, '%sext_customer' % data_prefix)
         order_type = 'regular'
 
         change_vals = self.order_obj.\
@@ -166,7 +162,7 @@ No split of FO found !""")
 
         return values
 
-    def _get_order_values(self, db, values=None):
+    def _get_order_values(self, db, data_prefix, values=None):
         """
         Returns values for the order
 
@@ -182,11 +178,11 @@ No split of FO found !""")
         if self.pr:
             values = self._get_ir_values(db, values)
         else:
-            values = self._get_fo_values(db, values)
+            values = self._get_fo_values(db, data_prefix, values)
 
         return values
 
-    def create_order(self, db):
+    def create_order(self, db, data_prefix):
         """
         Create a field order or an internal request (sale.order) with 4 lines:
           - 2 lines with LOG products:
@@ -205,13 +201,13 @@ No split of FO found !""")
         """
 
         # Prepare values for the field order
-        prod_log1_id = self.get_record(db, 'prod_log_1')
-        prod_log2_id = self.get_record(db, 'prod_log_2')
-        prod_med1_id = self.get_record(db, 'prod_med_1')
-        prod_med2_id = self.get_record(db, 'prod_med_2')
+        prod_log1_id = self.get_record(db, '%sprod_log_1' % data_prefix)
+        prod_log2_id = self.get_record(db, '%sprod_log_2' % data_prefix)
+        prod_med1_id = self.get_record(db, '%sprod_med_1' % data_prefix)
+        prod_med2_id = self.get_record(db, '%sprod_med_2' % data_prefix)
         uom_pce_id = self.get_record(db, 'product_uom_unit', module='product')
 
-        order_values = self._get_order_values(db)
+        order_values = self._get_order_values(db, data_prefix)
 
         order_id = self.order_obj.create(order_values)
 
@@ -257,7 +253,7 @@ No split of FO found !""")
 
         return order_id
 
-    def order_source_all_one_po(self, db):
+    def order_source_all_one_po(self, db, data_prefix):
         """
         Create an order and source all lines of this order to a PO (same
         supplier) for all lines.
@@ -268,13 +264,13 @@ No split of FO found !""")
                 order.
         """
         # Create the field order
-        order_id = self.create_order(db)
+        order_id = self.create_order(db, data_prefix)
 
         # Source all lines on a Purchase Order to ext_supplier_1
         line_ids = self.order_line_obj.search([('order_id', '=', order_id)])
         self.order_line_obj.write(line_ids, {
             'po_cft': 'po',
-            'supplier': self.get_record(db, 'ext_supplier_1'),
+            'supplier': self.get_record(db, '%sext_supplier' % data_prefix),
         })
         self.order_line_obj.confirmLine(line_ids)
 
