@@ -220,53 +220,73 @@ class UnifieldTestResult(unittest._TextTestResult):
                 self.test_obj.write(self.cr, self.uid, m_id, {
                     'start_date': time.strftime('%Y-%m-%d %H:%M:%S'),
                 })
-        return super(UnifieldTestResult, self).startTest(test)
+        res = super(UnifieldTestResult, self).startTest(test)
+        self.cr.commit()
+        return res
 
     def stopTest(self, test):
-        self.write_test_method(test, {'end_date': time.strftime('%Y-%m-%d %H:%M:%S')})
-        return super(UnifieldTestResult, self).stopTest(test)
+        res = super(UnifieldTestResult, self).stopTest(test)
+        self.cr.commit()
+        return res
 
     def addError(self, test, err):
         self.write_test_method(test, {
             'message': format_error(err),
             'state': 'error',
             'traceback': traceback.format_exc(err[2]),
+            'end_date': time.strftime('%Y-%m-%d %H:%M:%S'),
         })
-        return super(UnifieldTestResult, self).addError(test, err)
+        res = super(UnifieldTestResult, self).addError(test, err)
+        self.cr.commit()
+        return res
 
     def addFailure(self, test, err):
         self.write_test_method(test, {
             'message': format_error(err),
             'state': 'fail',
             'traceback': traceback.format_exc(err[2]),
+            'end_date': time.strftime('%Y-%m-%d %H:%M:%S'),
         })
-        return super(UnifieldTestResult, self).addFailure(test, err)
+        res = super(UnifieldTestResult, self).addFailure(test, err)
+        self.cr.commit()
+        return res
 
     def addSuccess(self, test):
         self.write_test_method(test, {
             'state': 'done',
+            'end_date': time.strftime('%Y-%m-%d %H:%M:%S'),
         })
-        return super(UnifieldTestResult, self).addSuccess(test)
+        res = super(UnifieldTestResult, self).addSuccess(test)
+        self.cr.commit()
+        return res
 
     def addSkip(self, test, reason):
         self.write_test_method(test, {
             'message': reason,
             'state': 'skip',
         })
-        return super(UnifieldTestResult, self).addSkip(test, reason)
+        res = super(UnifieldTestResult, self).addSkip(test, reason)
+        self.cr.commit()
+        return res
 
     def addExpectedFailure(self, test, err):
         self.write_test_method(test, {
             'message': format_error(err),
             'state': 'done',
+            'end_date': time.strftime('%Y-%m-%d %H:%M:%S'),
             'traceback': traceback.format_exc(err[2]),
         })
-        return super(UnifieldTestResult, self).addExpectedFailure(test, err)
+        res = super(UnifieldTestResult, self).addExpectedFailure(test, err)
+        self.cr.commit()
+        return res
 
     def addUnexpectedSuccess(self, test):
         self.write_test_method(test, {
             'message': 'Test succeed but should failed',
             'state': 'fail',
+            'end_date': time.strftime('%Y-%m-%d %H:%M:%S'),
         })
-        return super(UnifieldTestResult, self).addUnexpectedSuccess(test)
+        res = super(UnifieldTestResult, self).addUnexpectedSuccess(test)
+        self.cr.commit()
+        return res
 

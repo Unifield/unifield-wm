@@ -77,7 +77,7 @@ class UTP1220Test(UnifieldTest):
         """
         Create a RfQ from scratch with three lines.
         """
-        partner_id = self.get_record(self.used_db, 'supplier1')
+        partner_id = self.get_record(self.used_db, 'test_0214_internal_supplier')
         location_id = self.get_record(
             self.used_db,
             'stock_location_stock',
@@ -106,8 +106,8 @@ class UTP1220Test(UnifieldTest):
         self.rfq_id = self.po_obj.create(rfq_values)
 
         # Add two lines
-        prod1_id = self.get_record(self.used_db, 'prod_log_1')
-        prod2_id = self.get_record(self.used_db, 'prod_log_2')
+        prod1_id = self.get_record(self.used_db, 'test_0214_prod_log_1')
+        prod2_id = self.get_record(self.used_db, 'test_0214_prod_log_2')
         uom_id = self.get_record(
             self.used_db,
             'product_uom_unit',

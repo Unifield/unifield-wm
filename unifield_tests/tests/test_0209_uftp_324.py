@@ -60,8 +60,8 @@ class UFTP324Test(ResourcingTest):
 
         # Create a PO at P1 with two products to C1
         # Prepare values for the field order
-        prod_log1_id = self.get_record(self.hq1c1p1, 'prod_log_1')
-        prod_log2_id = self.get_record(self.hq1c1p1, 'prod_log_2')
+        prod_log1_id = self.get_record(self.hq1c1p1, 'test_0209_prod_log_1')
+        prod_log2_id = self.get_record(self.hq1c1p1, 'test_0209_prod_log_2')
         uom_pce_id = self.get_record(self.hq1c1p1, 'product_uom_unit', module='product')
         location_id = self.get_record(self.hq1c1p1, 'stock_location_stock', module='stock')
 
@@ -146,7 +146,7 @@ class UFTP324Test(ResourcingTest):
         self.c_sol_obj.write(line_ids, {
             'type': 'make_to_order',
             'po_cft': 'po',
-            'supplier': self.get_record(self.hq1c1, 'ext_supplier_1'),
+            'supplier': self.get_record(self.hq1c1, 'test_0204_ext_supplier'),
         })
         self.c_sol_obj.confirmLine(line_ids)
 

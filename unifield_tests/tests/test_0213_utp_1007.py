@@ -49,7 +49,7 @@ class UTP1007Test(ResourcingTest):
         self.c_enter_reason_obj = self.hq1c1.get('enter.reason')
 
         # Prepare values for the internal request
-        prod_log1_id = self.get_record(self.hq1c1, 'prod_log_1')
+        prod_log1_id = self.get_record(self.hq1c1, 'test_0213_prod_log_1')
         uom_pce_id = self.get_record(self.hq1c1, 'product_uom_unit', module='product')
         distrib_id = self.create_analytic_distribution(self.hq1c1)
 
@@ -85,7 +85,7 @@ class UTP1007Test(ResourcingTest):
         line_ids = self.c_sol_obj.search([('order_id', '=', self.c_so_id)])
         self.c_sol_obj.write(line_ids, {
             'po_cft': 'po',
-            'supplier': self.get_record(self.hq1c1, 'ext_supplier_1'),
+            'supplier': self.get_record(self.hq1c1, 'test_0213_ext_supplier'),
         })
         self.c_sol_obj.confirmLine(line_ids)
 

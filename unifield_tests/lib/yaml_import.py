@@ -42,7 +42,8 @@ class UnifieldYamlInterpreter(YamlInterpreter):
         self.cursors = {}
         db_map_ids = db_map_obj.search(self.cr, self.uid, [
             ('db_to_use', '!=', ''),
-            ('keyword', '!=', 'sync'),
+#            ('keyword', '!=', 'sync'),
+            ('keyword', 'not in', ['sync', 'hq2', 'hq2c1', 'hq2c2', 'hq2c1p1',' hq2c1p2', 'hq2c2p1', 'hq2c2p2']),
         ], context=self.context)
         for db_map in db_map_obj.browse(self.cr, self.uid, db_map_ids, context=self.context):
             new_cr = pooler.get_db(db_map.db_to_use)
@@ -105,13 +106,18 @@ class UnifieldYamlInterpreter(YamlInterpreter):
             data_obj = pooler.get_pool(self.cr.dbname).get('test.model.data')
             data_exist = False
             if record.xml_id:
+#                import pdb
+#                pdb.set_trace()
                 module = self.module
                 data_ref = record.xml_id
                 if '.' in record.xml_id:
                     module, data_ref = record.xml_id.split('.')
 
-                data_ids = data_obj.get_object_reference(self.cr, self.uid,
-                    module, data_ref)
+                try:
+                    data_ids = data_obj.get_object_reference(self.cr, self.uid,
+                        module, data_ref)
+                except ValueError, e:
+                    data_ids = []
                 if data_ids:
                     data_exist = True
                     if record.xml_id != record.id:

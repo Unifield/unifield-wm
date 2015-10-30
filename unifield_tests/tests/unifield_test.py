@@ -253,7 +253,7 @@ class UnifieldTest(unittest.TestCase):
         """
         Load the data from Yaml file
         """
-        if self.yaml_file and not self.yaml_already_loaded:
+        if self.yaml_file and not UnifieldTest.yaml_already_loaded:
             self.load_data_from_yaml()
 
         return super(UnifieldTest, self).run(*args, **kwargs)
@@ -263,13 +263,16 @@ class UnifieldTest(unittest.TestCase):
         """
         Parse the Yaml file attached to the test and create objects
         """
+        if self.cr:
+            return True
+
         if not self.yaml_file:
             raise AttributeError('No yaml_file attribute')
 
         yaml_file_path = path.dirname(path.realpath(__file__))
         yaml_string = file('%s/data/%s' % (yaml_file_path, self.yaml_file)).read()
         self.sync.get('automatic.test').load_data_from_yml(self.yaml_file, yaml_string)
-        self.yaml_already_loaded = True
+        UnifieldTest.yaml_already_loaded = True
 
     def is_keyword_present(self, db, keyword):
         '''
@@ -802,5 +805,64 @@ class UnifieldTest(unittest.TestCase):
                 return item
             i += 1
         return None
+
+    def create_analytic_distribution(self, db):
+        """
+        Create an analytic distribution
+        :param db: Connection on which the distribution must be created
+        :return: The ID of distribution
+        """
+        distrib_obj = db.get('analytic.distribution')
+        cc_line_obj = db.get('cost.center.distribution.line')
+        fp_line_obj = db.get('funding.pool.distribution.line')
+
+        distrib_id = distrib_obj.create({
+            'name': 'Distrib 2',
+        })
+
+        cc_line1_id = cc_line_obj.create({
+            'name': 'CC Line 1',
+            'amount': 0.0,
+            'percentage': 75.0,
+            'currency_id': self.get_record(db, 'EUR', module='base'),
+            'analytic_id': self.get_record(db, 'analytic_cc1'),
+            'distribution_id': distrib_id,
+            'destination_id': self.get_record(db, 'analytic_account_destination_operation', module='analytic_distribution'),
+        })
+
+        cc_line2_id = cc_line_obj.create({
+            'name': 'CC Line 2',
+            'amount': 0.0,
+            'percentage': 25.0,
+            'currency_id': self.get_record(db, 'EUR', module='base'),
+            'analytic_id': self.get_record(db, 'analytic_cc2'),
+            'distribution_id': distrib_id,
+            'destination_id': self.get_record(db, 'analytic_account_destination_operation', module='analytic_distribution'),
+        })
+
+        fp_line1_id = fp_line_obj.create({
+            'name': 'FP Line 1',
+            'amount': 0.0,
+            'percentage': 75.0,
+            'currency_id': self.get_record(db, 'EUR', module='base'),
+            'analytic_id': self.get_record(db, 'analytic_cc1'),
+            'distribution_id': distrib_id,
+            'cost_center_id': self.get_record(db, 'analytic_cc1'),
+            'destination_id': self.get_record(db, 'analytic_account_destination_operation', module='analytic_distribution'),
+        })
+
+        fp_line2_id = fp_line_obj.create({
+            'name': 'FP Line 2',
+            'amount': 0.0,
+            'percentage': 25.0,
+            'currency_id': self.get_record(db, 'EUR', module='base'),
+            'analytic_id': self.get_record(db, 'analytic_cc2'),
+            'distribution_id': distrib_id,
+            'cost_center_id': self.get_record(db, 'analytic_cc1'),
+            'destination_id': self.get_record(db, 'analytic_account_destination_operation', module='analytic_distribution'),
+        })
+
+        return distrib_id
+
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
