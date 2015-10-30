@@ -132,6 +132,8 @@ class automatic_test_campaign(osv.osv):
                     'template_id': tmp.id,
                     'campaign_id': campaign.id,
                     'state': 'draft',
+                    'data_file': tmp.data_file,
+                    'data_filename': tmp.data_filename,
                 }, context=context))
 
         self.write(cr, uid, ids, {'state': 'not_run'}, context=context)

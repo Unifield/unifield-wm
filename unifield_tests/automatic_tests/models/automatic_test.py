@@ -110,6 +110,10 @@ class automatic_test(osv.osv):
         'data_file': fields.binary(
             string='Data file',
         ),
+        'data_filename': fields.char(
+            string='Data filename',
+            size=256,
+        ),
         'sequence_nb': fields.integer(
             string='Sequence',
             readonly=True,
@@ -192,8 +196,11 @@ class automatic_test(osv.osv):
             ids = [ids]
 
         wiz_model = 'automatic.test.add.file'
+        test = self.browse(cr, uid, ids[0], context=context)
         wiz_id = self.pool.get(wiz_model).create(cr, uid, {
-            'test_id': ids[0],
+            'test_id': test.id,
+            'data_file': test.data_file,
+            'data_filename': test.data_filename,
         }, context=context)
 
         return {

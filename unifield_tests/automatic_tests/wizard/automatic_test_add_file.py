@@ -40,6 +40,10 @@ class automatic_test_add_file(osv.osv_memory):
             string='Data file',
             required=True,
         ),
+        'data_filename': fields.char(
+            string='Data filename',
+            size=256,
+        ),
     }
 
     def add_file(self, cr, uid, ids, context=None):

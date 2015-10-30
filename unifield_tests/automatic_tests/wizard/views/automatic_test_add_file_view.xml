@@ -11,7 +11,8 @@
                     <separator colspan="4" string="Test case" />
                     <field name="test_id" />
                     <separator colspan="4" string="Data file" />
-                    <field name="data_file" />
+                    <field name="data_filename" invisible="1" />
+                    <field name="data_file" filename="data_filename" />
                     <separator colspan="4" string="Actions" />
                     <label colspan="2" string="" />
                     <button name="add_file" type="object" string="Add file" icon="gtk-execute" colspan="2" />

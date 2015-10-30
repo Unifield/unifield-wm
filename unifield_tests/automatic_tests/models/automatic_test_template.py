@@ -22,6 +22,7 @@
 
 
 import sys
+import base64
 
 import unittest
 
@@ -109,6 +110,8 @@ class automatic_test_template(osv.osv):
                     'name': desc or t.__class__.__name__,
                     'test_class': t.__class__.__name__,
                     'test_type': cat,
+                    'data_file': t.yaml_file and base64.encodestring(file('%s/tests/data/%s' % (test_dir, t.yaml_file)).read()) or False,
+                    'data_filename': t.yaml_file,
                 })
 
         return True
@@ -128,6 +131,13 @@ class automatic_test_template(osv.osv):
             string='Model',
             size=256,
             required=True,
+        ),
+        'data_file': fields.binary(
+            string='Data file',
+        ),
+        'data_filename': fields.char(
+            string='Data filename',
+            size=256,
         ),
     }
 
