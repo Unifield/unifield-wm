@@ -106,13 +106,18 @@ class UnifieldYamlInterpreter(YamlInterpreter):
             data_obj = pooler.get_pool(self.cr.dbname).get('test.model.data')
             data_exist = False
             if record.xml_id:
+#                import pdb
+#                pdb.set_trace()
                 module = self.module
                 data_ref = record.xml_id
                 if '.' in record.xml_id:
                     module, data_ref = record.xml_id.split('.')
 
-                data_ids = data_obj.get_object_reference(self.cr, self.uid,
-                    module, data_ref)
+                try:
+                    data_ids = data_obj.get_object_reference(self.cr, self.uid,
+                        module, data_ref)
+                except ValueError, e:
+                    data_ids = []
                 if data_ids:
                     data_exist = True
                     if record.xml_id != record.id:

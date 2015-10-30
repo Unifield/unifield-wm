@@ -59,12 +59,12 @@ class US311Test(ResourcingTest):
         self.c_partner_obj = self.hq1c1.get('res.partner')
 
         # Products
-        self.p_prd1_id = self.get_record(self.hq1c1p1, 'prod_log_1')
-        self.p_prd2_id = self.get_record(self.hq1c1p1, 'prod_log_2')
-        self.p_prd3_id = self.get_record(self.hq1c1p1, 'prod_log_3')
-        self.c_prd1_id = self.get_record(self.hq1c1, 'prod_log_1')
-        self.c_prd2_id = self.get_record(self.hq1c1, 'prod_log_2')
-        self.c_prd3_id = self.get_record(self.hq1c1, 'prod_log_3')
+        self.p_prd1_id = self.get_record(self.hq1c1p1, 'test_0212_prod_log_1')
+        self.p_prd2_id = self.get_record(self.hq1c1p1, 'test_0212_prod_log_2')
+        self.p_prd3_id = self.get_record(self.hq1c1p1, 'test_0212prod_log_3')
+        self.c_prd1_id = self.get_record(self.hq1c1, 'test_0212_prod_log_1')
+        self.c_prd2_id = self.get_record(self.hq1c1, 'test_0212_prod_log_2')
+        self.c_prd3_id = self.get_record(self.hq1c1, 'test_0212_prod_log_3')
 
         # Get Project and Coordo partners
         project_name = self.get_db_partner_name(self.hq1c1p1)
@@ -186,7 +186,7 @@ class US311Test(ResourcingTest):
         self.c_sol_obj.write(line_ids, {
             'type': 'make_to_order',
             'po_cft': 'po',
-            'supplier': self.get_record(self.hq1c1, 'ext_supplier_1'),
+            'supplier': self.get_record(self.hq1c1, 'test_0212_ext_supplier'),
         })
         self.c_sol_obj.confirmLine(line_ids)
 

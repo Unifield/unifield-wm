@@ -132,7 +132,7 @@ class SyncCancelINTest(ResourcingTest):
         line_ids = self.c_sol_obj.search([('order_id', '=', self.c_so_id)])
         self.c_sol_obj.write(line_ids, {
             'po_cft': 'po',
-            'supplier': self.get_record(self.hq1c1, 'test_0203_ext_supplier_1'),
+            'supplier': self.get_record(self.hq1c1, 'test_0203_ext_supplier'),
         })
         self.c_sol_obj.confirmLine(line_ids)
 

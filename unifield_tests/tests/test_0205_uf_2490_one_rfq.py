@@ -35,11 +35,11 @@ class UF2490OneRfQ(UF2490OnePO):
         db = self.used_db
 
         # Create PO
-        partner_id = self.get_record(db, 'ext_supplier_1')
+        partner_id = self.get_record(db, 'test_0205_ext_supplier_1')
         po_values = {
             'rfq_ok': True,
             'partner_id': partner_id,
-            'partner_address_id': self.get_record(db, 'ext_supplier_1_addr'),
+            'partner_address_id': self.get_record(db, 'test_0205_ext_supplier_1_addr'),
             'location_id': self.get_record(db, 'stock_location_stock', module='stock'),
         }
         po_values.update(
@@ -62,11 +62,11 @@ class UF2490OneRfQ(UF2490OnePO):
         # Create the field order
         order_id = self.create_order(db)
 
-        # Source all lines on a Purchase Order to ext_supplier_1
+        # Source all lines on a Purchase Order to test_0205_ext_supplier_1
         line_ids = self.order_line_obj.search([('order_id', '=', order_id)])
         self.order_line_obj.write(line_ids, {
             'po_cft': 'rfq',
-            'supplier': self.get_record(db, 'ext_supplier_1'),
+            'supplier': self.get_record(db, 'test_0205_ext_supplier_1'),
         })
         self.order_line_obj.confirmLine(line_ids)
 
@@ -126,7 +126,7 @@ class UF2490OneRfQ(UF2490OnePO):
         self.create_po_line(po_id)
 
         # Add an analytic distribution on the PO
-        ad_id = self.get_record(db, 'distrib_1')
+        ad_id = self.create_analytic_distribution(db)
         self.po_obj.write(po_id, {'analytic_distribution_id': ad_id})
 
         # Validate the PO

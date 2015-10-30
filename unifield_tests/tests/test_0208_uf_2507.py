@@ -93,12 +93,12 @@ class UF2507ResourcingTest(ResourcingTest):
         """
         ana_distrib_id = self.pol_obj.read(po_line_ids[1], ['analytic_distribution_id'])['analytic_distribution_id']
         if not ana_distrib_id:
-            ana_distrib_id = self.get_record(db, 'distrib_1')
+            ana_distrib_id = self.create_analytic_distribution(db)
         else:
             ana_distrib_id = ana_distrib_id[0]
         line_values = {
             'order_id': po_ids[0],
-            'product_id': self.get_record(db, 'prod_log_1'),
+            'product_id': self.get_record(db, 'test_0206_prod_log_1'),
             'product_uom': self.get_record(db, 'product_uom_unit', module='product'),
             'product_qty': 123,
             'price_unit': 01.20,

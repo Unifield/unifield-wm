@@ -263,7 +263,7 @@ class UF2490OnePO(ResourcingTest):
         self.create_po_line(po_id)
 
         # Add an analytic distribution on the PO
-        ad_id = self.get_record(db, 'distrib_1')
+        ad_id = self.create_analytic_distribution(db)
         self.po_obj.write(po_id, {'analytic_distribution_id': ad_id})
 
         # Validate the PO
@@ -314,7 +314,7 @@ class UF2490OnePO(ResourcingTest):
         self.create_po_line(po_id)
 
         # Add an analytic distribution on the PO
-        ad_id = self.get_record(self.used_db, 'distrib_1')
+        ad_id = self.create_analytic_distribution(self.used_db)
         self.po_obj.write(po_id, {'analytic_distribution_id': ad_id})
 
         # Validate the PO

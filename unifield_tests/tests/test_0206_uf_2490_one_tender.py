@@ -50,7 +50,7 @@ class UF2490OneTender(ResourcingTest):
         # Create tender line
         self.tender_line_id = self.tender_line_obj.create({
             'tender_id': self.tender_id,
-            'product_id': self.get_record(db, 'prod_log_1'),
+            'product_id': self.get_record(db, 'test_0206_prod_log_1'),
             'product_uom': self.get_record(db, 'product_uom_unit', module='product'),
         })
 

@@ -21,9 +21,14 @@
 ##############################################################################
 
 
+# Standard Python imports
 from __future__ import print_function
-from unifield_test import UnifieldTest
+
+# Specific imports
 from oerplib.error import RPCError
+
+# Unifield Tests imports
+from unifield_test import UnifieldTest
 
 import time
 
@@ -35,21 +40,19 @@ class FOTest(UnifieldTest):
     yaml_file = 'test_0201_test_fo.yml'
 
     def setUp(self):
-        self.used_db = self.hq1c1
-        db = self.used_db
-        self.fo_obj = db.get('sale.order')
-        self.fol_obj = db.get('sale.order.line')
+        self.fo_obj = self.hq1c1.get('sale.order')
+        self.fol_obj = self.hq1c1.get('sale.order.line')
 
     def test_validation_no_price_unit(self):
         """
         Create a FO with two lines. One of these lines have no price unit.
         Expected result: An error must be raised
         """
-        partner_id = self.get_record(self.used_db, 'fo_test_ext_cust')
+        partner_id = self.get_record(self.hq1c1, 'test_0201_ext_cust')
         order_type = 'regular'
 
         # Get the analytic distribution
-        distrib_id = self.get_record(self.used_db, 'distrib_1')
+        distrib_id = self.create_analytic_distribution(self.hq1c1)
 
         order_values = self.fo_obj.\
             onchange_partner_id(None, partner_id, order_type).get('value', {})
@@ -63,10 +66,10 @@ class FOTest(UnifieldTest):
         order_id = self.fo_obj.create(order_values)
 
         # Create order lines
-        prod_log1_id = self.get_record(self.used_db, 'prod_log_1')
-        prod_log2_id = self.get_record(self.used_db, 'prod_log_2')
+        prod_log1_id = self.get_record(self.hq1c1, 'test_0201_prod_log_1')
+        prod_log2_id = self.get_record(self.hq1c1, 'test_0201_prod_log_2')
         uom_pce_id = self.get_record(
-            self.used_db,
+            self.hq1c1,
             'product_uom_unit',
             module='product'
         )
