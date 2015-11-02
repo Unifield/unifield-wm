@@ -173,7 +173,7 @@ class UnifieldTest(unittest.TestCase):
 
     def __getattr__(self, attr):
         """
-        Returns the DB connection if exists or an error if not
+        Returns the DB connection if exists or an error if not
         """
         if attr != 'test_id' and attr in self.db:
             return self.db[attr]

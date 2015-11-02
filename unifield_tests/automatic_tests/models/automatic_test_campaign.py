@@ -203,6 +203,7 @@ class automatic_test_campaign(osv.osv):
         Run the test campaign
         """
         test_obj = self.pool.get('automatic.test')
+        meth_obj = self.pool.get('automatic.test.method')
 
         if context is None:
             context = {}
@@ -224,59 +225,82 @@ class automatic_test_campaign(osv.osv):
                     'init',
                     filename='unifield.test',
                 )
-                for test in camp.test_ids:
-                    if test.data_file:
-                        yaml_interpreter.process(base64.decodestring(test.data_file))
+                try:
+                    for test in camp.test_ids:
+                        if test.data_file:
+                            yaml_interpreter.process(base64.decodestring(test.data_file))
 
-                # Discover and filter test cases
-                loader = unifield_unittest.\
-                    UnifieldTestLoader(self.pool, cr, uid, camp.id)
-                suite = unifield_unittest.UnifieldTestSuite()
-                test_modules = []
-                added_paths = []
+                    # Discover and filter test cases
+                    loader = unifield_unittest.\
+                        UnifieldTestLoader(self.pool, cr, uid, camp.id)
+                    suite = unifield_unittest.UnifieldTestSuite()
+                    test_modules = []
+                    added_paths = []
 
-                for racine, _, files in walk(test_dir):
-                    directory = path.basename(racine)
-                    if directory == 'tests':
-                        for f in files:
-                            if (f.startswith('test') and f.endswith('.py') and f != 'test.py'):
-                                mod_name = f[:-3]
-                                name = path.join(racine, f)
-                                test_modules.append((name, mod_name))
+                    for racine, _, files in walk(test_dir):
+                        directory = path.basename(racine)
+                        if directory == 'tests':
+                            for f in files:
+                                if (f.startswith('test') and f.endswith('.py') and f != 'test.py'):
+                                    mod_name = f[:-3]
+                                    name = path.join(racine, f)
+                                    test_modules.append((name, mod_name))
 
-                for module_info in sorted(test_modules, key=lambda x: x[1]):
-                    module_path = path.dirname(module_info[0])
-                    if module_path not in sys.path:
-                        sys.path.append(module_path)
-                        added_paths.append(module_path)
+                    for module_info in sorted(test_modules, key=lambda x: x[1]):
+                        module_path = path.dirname(module_info[0])
+                        if module_path not in sys.path:
+                            sys.path.append(module_path)
+                            added_paths.append(module_path)
 
-                    module = __import__(module_info[1])
-                    if 'get_test_class' in module.__dict__:
-                        class_type = module.get_test_class()
-                        test_suite = loader.loadTestsFromTestCase(class_type)
-                        suite.addTest(test_suite)
-
-                    if 'get_test_suite' in module.__dict__:
-                        suite_type = module.get_test_suite()
-                        for class_type in suite_type:
+                        module = __import__(module_info[1])
+                        if 'get_test_class' in module.__dict__:
+                            class_type = module.get_test_class()
                             test_suite = loader.loadTestsFromTestCase(class_type)
                             suite.addTest(test_suite)
 
-                suite2 = unifield_unittest.UnifieldTestSuite(loader.filter_tests(suite))
+                        if 'get_test_suite' in module.__dict__:
+                            suite_type = module.get_test_suite()
+                            for class_type in suite_type:
+                                test_suite = loader.loadTestsFromTestCase(class_type)
+                                suite.addTest(test_suite)
 
-                # Create a runner linked to the campaign
-                result = unifield_unittest.UnifieldTestResult(
-                    pool=self.pool,
-                    cr=cr,
-                    uid=uid,
-                    cid=camp.id)
-                # Launch tests
-                suite2(result)
+                    suite2 = unifield_unittest.UnifieldTestSuite(loader.filter_tests(suite))
+                    print suite2
+
+                    # Create a runner linked to the campaign
+                    result = unifield_unittest.UnifieldTestResult(
+                        pool=self.pool,
+                        cr=cr,
+                        uid=uid,
+                        cid=camp.id)
+                    # Launch tests
+                    suite2(result)
+                except Exception as e:
+                    test_ids = []
+                    method_ids = []
+                    for test in camp.test_ids:
+                        if test.state not in ('done', 'fail', 'error'):
+                            test_ids.append(test.id)
+                        for meth in test.method_ids:
+                            if meth.state not in ('done', 'fail', 'error', 'skip'):
+                                method_ids.append(meth.id)
+
+                    test_obj.write(cr, uid, test_ids, {
+                        'state': 'error',
+                    }, context=context)
+                    meth_obj.write(cr, uid, method_ids, {
+                        'state': 'error',
+                        'message': e,
+                    }, context=context)
+
 
                 self.write(cr, uid, [camp.id], {
                     'state': 'done',
                     'end_date': time.strftime('%Y-%m-%d %H:%M:%S'),
                 })
+                cr.commit()
+                cr.close()
+
             if use_new_cursor:
                 cr.commit()
         except Exception as e:

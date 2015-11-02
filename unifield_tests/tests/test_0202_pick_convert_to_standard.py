@@ -576,4 +576,4 @@ class PickConvertToStandardPartialTest(PickConvertToStandardTest):
             "All moves in the draft picking ticket are not draft and should be")
 
 def get_test_suite():
-    return PickConvertToStandardTest, PickConvertToStandardTest
+    return PickConvertToStandardTest

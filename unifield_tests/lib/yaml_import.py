@@ -106,8 +106,6 @@ class UnifieldYamlInterpreter(YamlInterpreter):
             data_obj = pooler.get_pool(self.cr.dbname).get('test.model.data')
             data_exist = False
             if record.xml_id:
-#                import pdb
-#                pdb.set_trace()
                 module = self.module
                 data_ref = record.xml_id
                 if '.' in record.xml_id:
@@ -116,7 +114,7 @@ class UnifieldYamlInterpreter(YamlInterpreter):
                 try:
                     data_ids = data_obj.get_object_reference(self.cr, self.uid,
                         module, data_ref)
-                except ValueError, e:
+                except Exception as e:
                     data_ids = []
                 if data_ids:
                     data_exist = True
@@ -128,14 +126,17 @@ class UnifieldYamlInterpreter(YamlInterpreter):
 
             # In case of non-existing data in ir_module_data, create a new record
             if not data_exist:
-                super(UnifieldYamlInterpreter, self).process_record(node)
-                if record.id in self.id_map:
-                    data_obj.create(self.cr, self.uid, {
-                        'name': record.id,
-                        'module': self.module,
-                        'res_id': self.id_map[record.id],
-                        'model': record.model,
-                    }, context=self.context)
+                try:
+                    super(UnifieldYamlInterpreter, self).process_record(node)
+                    if record.id in self.id_map:
+                        data_obj.create(self.cr, self.uid, {
+                            'name': record.id,
+                            'module': self.module,
+                            'res_id': self.id_map[record.id],
+                            'model': record.model,
+                        }, context=self.context)
+                except Exception as e:
+                    self.cr.rollback()
 
             self.cr = old_cr
         else:

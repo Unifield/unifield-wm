@@ -14,14 +14,14 @@
 -
   Create an address for the external supplier
 -
-  !record {model: res.partner.address, id: test_0204_ext_cust_addr, db: hq1c1, xml_id: test_0202_ext_cust_addr}:
+  !record {model: res.partner.address, id: test_0204_ext_supplier_addr, db: hq1c1, xml_id: test_0202_ext_supplier_addr}:
     name: Ext. Customer for Test 0202
     street: Main Street
     street2: 
     zip: 63523
     city: Test City
     # Not editable values
-    partner_id: test_0204_ext_cust
+    partner_id: test_0204_supplier_cust
 -
   Create a first LOG product
 -

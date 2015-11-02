@@ -43,10 +43,10 @@ class UF2490OnePO(ResourcingTest):
         db = self.used_db
 
         # Create PO
-        partner_id = self.get_record(db, 'ext_supplier_1')
+        partner_id = self.get_record(db, 'test_0204_ext_supplier')
         po_values = {
             'partner_id': partner_id,
-            'partner_address_id': self.get_record(db, 'ext_supplier_1_addr'),
+            'partner_address_id': self.get_record(db, 'test_0204_ext_supplier_addr'),
             'location_id': self.get_record(db, 'stock_location_stock', module='stock'),
         }
         po_values.update(
@@ -66,7 +66,7 @@ class UF2490OnePO(ResourcingTest):
 
         po_brw = self.po_obj.browse(order_id)
 
-        product_id = self.get_record(db, 'prod_log_1')
+        product_id = self.get_record(db, 'test_0204_prod_log_1')
         uom_id = self.get_record(db, 'product_uom_unit', module='product')
         pol_values = {
             'product_id': product_id,
@@ -151,7 +151,7 @@ class UF2490OnePO(ResourcingTest):
         Create a FO/IR with 4 lines, source it to a Po
         :return:
         """
-        fo_id, fo_line_ids, po_ids, pol_ids = self.order_source_all_one_po(self.used_db)
+        fo_id, fo_line_ids, po_ids, pol_ids = self.order_source_all_one_po(self.used_db, data_prefix='test_0204_')
         self.order_id = fo_id
         self.po_id = po_ids[0]
         self.pol_ids = pol_ids
