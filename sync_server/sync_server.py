@@ -209,9 +209,11 @@ class entity(osv.osv):
         
         'msg_ids_tmp':fields.text('List of temporary ids of message to be pulled'),
         'version': fields.integer('version'),
+        'last_sequence': fields.integer('Last update sequence pulled'),
     }
     _defaults = {
         'version': lambda *a: 0,
+        'last_sequence': lambda *a: 0,
     }
     def unlink(self, cr, uid, ids, context=None):
         for rec in self.browse(cr, uid, ids, context=context):
@@ -718,8 +720,12 @@ class sync_manager(osv.osv):
                                                              format "['value1', 'value2']"
                                             }, ..]
                               }
-                              
+
         """
+        if offset == 0 and not recover:
+            # store the last_ses
+            self.pool.get('sync.server.entity').write(cr, uid, [entity.id], {'last_sequence': last_seq}, context=context)
+
         package = self.pool.get("sync.server.update").get_package(cr, uid, entity, last_seq, offset, max_size, max_seq, recover=recover, context=context)
         return (True, package or False, not package, get_md5(package))
     
