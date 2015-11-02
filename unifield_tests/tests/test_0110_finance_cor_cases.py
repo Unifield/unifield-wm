@@ -93,6 +93,11 @@ class FinanceTestCorCasesException(UnifieldTestException):
 
 
 class FinanceTestCorCases(FinanceTest):
+    category = 'Finance'
+    description = 'Finance GL Account/Analytic correction tests'
+    no_auto = []
+    yaml_file = 'test_0110_finance_cor_cases.yml'
+
     class DataSetMeta(object):
         functional_ccy = 'EUR'
 
