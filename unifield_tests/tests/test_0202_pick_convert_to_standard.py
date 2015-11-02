@@ -575,5 +575,5 @@ class PickConvertToStandardPartialTest(PickConvertToStandardTest):
             all(x['state'] == 'assigned' for x in moves),
             "All moves in the draft picking ticket are not draft and should be")
 
-def get_test_suite():
+def get_test_class():
     return PickConvertToStandardTest

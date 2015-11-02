@@ -253,7 +253,7 @@ class UnifieldTest(unittest.TestCase):
         """
         Load the data from Yaml file
         """
-        if self.yaml_file and not UnifieldTest.yaml_already_loaded:
+        if not self.cr and self.yaml_file and not UnifieldTest.yaml_already_loaded:
             self.load_data_from_yaml()
 
         return super(UnifieldTest, self).run(*args, **kwargs)

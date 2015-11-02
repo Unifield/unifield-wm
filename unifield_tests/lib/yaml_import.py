@@ -76,11 +76,11 @@ class UnifieldYamlInterpreter(YamlInterpreter):
             self.cursors[key] = pooler.get_db(cr.dbname).cursor()
 
         try:
-            # Remove old test dat Remove old test dataa
-            for cursor in self.cursors.itervalues():
-                tmd_obj = pooler.get_pool(cursor.dbname).get('test.model.data')
-                tmd_ids = tmd_obj.search(cursor, self.uid, [], context=self.context)
-                tmd_obj.unlink(cursor, self.uid, tmd_ids, context=self.context)
+            # Remove old test data
+            #for cursor in self.cursors.itervalues():
+                #tmd_obj = pooler.get_pool(cursor.dbname).get('test.model.data')
+                #tmd_ids = tmd_obj.search(cursor, self.uid, [], context=self.context)
+                #tmd_obj.unlink(cursor, self.uid, tmd_ids, context=self.context)
             res = super(UnifieldYamlInterpreter, self).process(yaml_string)
             for cursor in self.cursors.values():
                 cursor.commit()
@@ -136,7 +136,7 @@ class UnifieldYamlInterpreter(YamlInterpreter):
                             'model': record.model,
                         }, context=self.context)
                 except Exception as e:
-                    self.cr.rollback()
+                    pass
 
             self.cr = old_cr
         else:
