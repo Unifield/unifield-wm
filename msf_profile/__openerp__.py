@@ -122,6 +122,7 @@
         "unifield_version_view.xml",
         'view/group_view.xml',
         'view/email_configuration_view.xml',
+        'view/archive_view.xml',
         "data/patches.xml",
     ],
     "demo_xml": [

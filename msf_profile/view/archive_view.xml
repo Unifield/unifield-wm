@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<openerp>
+    <data>
+
+        <record id="msf_archive_form_view" model="ir.ui.view">
+            <field name="name">msf.archive.form</field>
+            <field name="model">msf.archive</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Archive">
+                    <field name="name" />
+                    <field name="maxdate" />
+                    <field name="data" />
+                </form>
+            </field>
+        </record>
+
+        <record id="msf_archive_tree_view" model="ir.ui.view">
+            <field name="name">msf.archive.tree</field>
+            <field name="model">msf.archive</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Archive">
+                    <field name="name" />
+                    <field name="maxdate" />
+                    <button type="object" name="get_content" string="Get Content" icon="gtk-go-forward"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_msf_archive" model="ir.actions.act_window">
+            <field name="name">Archive</field>
+            <field name="res_model">msf.archive</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem
+            id="menu_msf_archive"
+            action="action_msf_archive"
+            sequence="10030"
+            parent="base.menu_config" />
+
+    </data>
+</openerp>
