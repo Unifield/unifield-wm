@@ -8,7 +8,7 @@
     # Not editable values
     customer: 0
     supplier: 1
-    partner_type: 'external'
+    partner_type: external
     property_account_receivable: unifield_tests_data.account_account_receivable_supplier0
     property_account_payable: unifield_tests_data.account_account_payable_supplier0
 -
@@ -37,6 +37,7 @@
     nomen_manda_1: unifield_tests_data.nomen_log_group
     nomen_manda_2: unifield_tests_data.nomen_log_family
     nomen_manda_3: unifield_tests_data.nomen_log_root
+    international_status: product_attributes.int_1
 -
   Create a second LOG product
 -
@@ -52,6 +53,7 @@
     nomen_manda_1: unifield_tests_data.nomen_log_group
     nomen_manda_2: unifield_tests_data.nomen_log_family
     nomen_manda_3: unifield_tests_data.nomen_log_root
+    international_status: product_attributes.int_1
 -
   Create an external Consumption unit
 -

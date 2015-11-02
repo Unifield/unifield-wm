@@ -60,9 +60,16 @@ class test_model_data(osv.osv):
             data_id = data_ids[0]
         else:
             data_ids = self.pool.get('ir.model.data').search(cr, uid, [
+                '&', '|', '&',
                 ('module', '=', module),
                 ('name', '=', xml_id),
             ])
+            # Check if the data is synchronized
+            if not data_ids:
+                data_ids = self.pool.get('ir.model.data').search(cr, uid, [
+                    ('module', '=', 'sd'),
+                    ('name', '=', '%s_%s' % (module, xml_id)),
+                ])
             if data_ids:
                 data_brw = self.pool.get('ir.model.data').browse(cr, uid, data_ids[0])
                 data_id = self.create(cr, uid, {

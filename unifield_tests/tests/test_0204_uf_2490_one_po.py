@@ -40,14 +40,12 @@ class UF2490OnePO(ResourcingTest):
         Create a PO from scratch, then cancel it.
         :return: The ID of the new purchase order
         """
-        db = self.used_db
-
         # Create PO
-        partner_id = self.get_record(db, 'test_0204_ext_supplier')
+        partner_id = self.get_record(self.hq1c1, 'test_0204_ext_supplier')
         po_values = {
             'partner_id': partner_id,
-            'partner_address_id': self.get_record(db, 'test_0204_ext_supplier_addr'),
-            'location_id': self.get_record(db, 'stock_location_stock', module='stock'),
+            'partner_address_id': self.get_record(self.hq1c1, 'test_0204_ext_supplier_addr'),
+            'location_id': self.get_record(self.hq1c1, 'stock_location_stock', module='stock'),
         }
         po_values.update(
             self.po_obj.onchange_partner_id(None, partner_id, time.strftime('%Y-%m-%d'), None, None).get('value', {})
@@ -62,12 +60,10 @@ class UF2490OnePO(ResourcingTest):
         :param order_id: The ID of the order where the line will be added
         :return: The ID of the new purchase order line
         """
-        db = self.used_db
-
         po_brw = self.po_obj.browse(order_id)
 
-        product_id = self.get_record(db, 'test_0204_prod_log_1')
-        uom_id = self.get_record(db, 'product_uom_unit', module='product')
+        product_id = self.get_record(self.hq1c1, 'test_0204_prod_log_1')
+        uom_id = self.get_record(self.hq1c1, 'product_uom_unit', module='product')
         pol_values = {
             'product_id': product_id,
             'product_uom': uom_id,
@@ -92,8 +88,6 @@ class UF2490OnePO(ResourcingTest):
         :param order_id: The ID of the PO to cancel
         :return: ID of the canceled PO
         """
-        db = self.used_db
-
         self.po_obj.purchase_cancel(order_id)
 
         # Check state of the PO
@@ -127,21 +121,7 @@ class UF2490OnePO(ResourcingTest):
             values = {}
 
         if self.pr and self.need_ext_loc:
-            ext_loc_ids = db.get('stock.location').search([
-                ('usage', '=', 'customer'),
-                ('location_category', '=', 'consumption_unit'),
-            ])
-            if not ext_loc_ids:
-                ext_loc_id = db.get('stock.location').create({
-                    'name': 'External CU for test',
-                    'location_category': 'consumption_unit',
-                    'usage': 'customer',
-                    'location_id': self.get_record(db, 'stock', 'stock_location_internal_customers'),
-                    'optional_loc': True,
-                })
-            else:
-                ext_loc_id = ext_loc_ids[0]
-
+            ext_loc_id = self.get_record(db, 'test_0204_external_cu')
             values.update({'location_requestor_id': ext_loc_id})
 
         return values
@@ -151,7 +131,7 @@ class UF2490OnePO(ResourcingTest):
         Create a FO/IR with 4 lines, source it to a Po
         :return:
         """
-        fo_id, fo_line_ids, po_ids, pol_ids = self.order_source_all_one_po(self.used_db, data_prefix='test_0204_')
+        fo_id, fo_line_ids, po_ids, pol_ids = self.order_source_all_one_po(self.hq1c1, data_prefix='test_0204_')
         self.order_id = fo_id
         self.po_id = po_ids[0]
         self.pol_ids = pol_ids
@@ -162,11 +142,9 @@ class UF2490OnePO(ResourcingTest):
         Then cancel the PO
         :return: Result of the PO cancelation wizard
         """
-        db = self.used_db
-
         # Prepare object
         wiz_model = 'purchase.order.cancel.wizard'
-        wiz_obj = db.get(wiz_model)
+        wiz_obj = self.hq1c1.get(wiz_model)
 
         # Create the FO/IR and source it
         self.create_order_and_source()
@@ -254,8 +232,6 @@ class UF2490OnePO(ResourcingTest):
         Create a PO from scratch, add a line on the PO,
         validate it, then cancel it
         """
-        db = self.used_db
-
         # Create PO
         po_id = self.create_po_from_scratch()
 
@@ -263,11 +239,11 @@ class UF2490OnePO(ResourcingTest):
         self.create_po_line(po_id)
 
         # Add an analytic distribution on the PO
-        ad_id = self.create_analytic_distribution(db)
+        ad_id = self.create_analytic_distribution(self.hq1c1)
         self.po_obj.write(po_id, {'analytic_distribution_id': ad_id})
 
         # Validate the PO
-        db.exec_workflow('purchase.order', 'purchase_confirm', po_id)
+        self.hq1c1.exec_workflow('purchase.order', 'purchase_confirm', po_id)
 
         # Cancel the PO
         self.cancel_po(po_id)
@@ -314,11 +290,11 @@ class UF2490OnePO(ResourcingTest):
         self.create_po_line(po_id)
 
         # Add an analytic distribution on the PO
-        ad_id = self.create_analytic_distribution(self.used_db)
+        ad_id = self.create_analytic_distribution(self.hq1c1)
         self.po_obj.write(po_id, {'analytic_distribution_id': ad_id})
 
         # Validate the PO
-        self.used_db.exec_workflow('purchase.order', 'purchase_confirm', po_id)
+        self.hq1c1.exec_workflow('purchase.order', 'purchase_confirm', po_id)
 
         # Cancel the PO line
         line_ids = self.pol_obj.search([('order_id', '=', po_id)])
@@ -338,11 +314,9 @@ class UF2490OnePO(ResourcingTest):
         what should be done on FO/IR, choose leave it
         :return:
         """
-        db = self.used_db
-
         # Prepare object
-        w_line_obj = db.get('sale.order.leave.close')
-        wiz_obj = db.get('sale.order.cancelation.wizard')
+        w_line_obj = self.hq1c1.get('sale.order.leave.close')
+        wiz_obj = self.hq1c1.get('sale.order.cancelation.wizard')
 
         w_res = self.create_order_cancel_po()
 
@@ -370,11 +344,9 @@ class UF2490OnePO(ResourcingTest):
         what should be done on FO/IR, choose close it
         :return:
         """
-        db = self.used_db
-
         # Prepare object
-        w_line_obj = db.get('sale.order.leave.close')
-        wiz_obj = db.get('sale.order.cancelation.wizard')
+        w_line_obj = self.hq1c1.get('sale.order.leave.close')
+        wiz_obj = self.hq1c1.get('sale.order.cancelation.wizard')
 
         w_res = self.create_order_cancel_po()
 
@@ -401,10 +373,8 @@ class UF2490OnePO(ResourcingTest):
         a PO, then cancel line.
         :return:
         """
-        db = self.used_db
-
-        wiz_obj = db.get('sale.order.cancelation.wizard')
-        w_line_obj = db.get('sale.order.leave.close')
+        wiz_obj = self.hq1c1.get('sale.order.cancelation.wizard')
+        w_line_obj = self.hq1c1.get('sale.order.leave.close')
 
         self.create_order_and_source()
 
@@ -417,7 +387,7 @@ class UF2490OnePO(ResourcingTest):
                 "There is no wizard displayed when cancel a PO line that sources a FO/IR line",
             )
 
-            w_res = db.get('purchase.order.line.unlink.wizard').just_cancel(res.get('res_id'))
+            w_res = self.hq1c1.get('purchase.order.line.unlink.wizard').just_cancel(res.get('res_id'))
 
             # Check if the wizard to cancel the PO is displayed
             if x == len(line_ids)-1:
@@ -440,13 +410,13 @@ class UF2490OnePO(ResourcingTest):
                     "The wizard to cancel the PO because there is no lines on PO is not displayed",
                 )
 
-            order_nb_lines = self._get_number_of_valid_lines(db, self.order_id)
+            order_nb_lines = self._get_number_of_valid_lines(self.hq1c1, self.order_id)
             self.assert_(
                 order_nb_lines == (3-x),
                 "There is %s lines on the FO/IR - Should be %s" % (order_nb_lines, 4-x),
             )
 
-        order_nb_lines = self._get_number_of_valid_lines(db, self.order_id)
+        order_nb_lines = self._get_number_of_valid_lines(self.hq1c1, self.order_id)
         self.assert_(
             order_nb_lines == 0,
             "There is %s lines on the FO/IR - Should be %s" % (order_nb_lines, 0),
@@ -459,18 +429,17 @@ class UF2490OnePO(ResourcingTest):
         Cancel the whole IN
         :return:
         """
-        db = self.used_db
-        pick_obj = db.get('stock.picking')
-        wiz_obj = db.get('enter.reason')
-        out_wiz_obj = db.get('outgoing.delivery.processor')
-        proc_obj = db.get('stock.incoming.processor')
-        move_in_obj = db.get('stock.move.in.processor')
+        pick_obj = self.hq1c1.get('stock.picking')
+        wiz_obj = self.hq1c1.get('enter.reason')
+        out_wiz_obj = self.hq1c1.get('outgoing.delivery.processor')
+        proc_obj = self.hq1c1.get('stock.incoming.processor')
+        move_in_obj = self.hq1c1.get('stock.move.in.processor')
 
         self.create_order_and_source()
         self.pol_obj.write(self.pol_ids, {'price_unit': 2.00})
 
-        self._validate_po(db, [self.po_id])
-        self._confirm_po(db, [self.po_id])
+        self._validate_po(self.hq1c1, [self.po_id])
+        self._confirm_po(self.hq1c1, [self.po_id])
 
         in_ids = pick_obj.search([
             ('purchase_id', '=', self.po_id),
@@ -504,7 +473,6 @@ class UF2490OnePO(ResourcingTest):
         :return:
         """
         db = self.hq1c1p1
-        self.used_db = db
         self.po_obj = db.get('purchase.order')
         self.order_obj = db.get('sale.order')
         self.order_line_obj = db.get('sale.order.line')

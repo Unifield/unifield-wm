@@ -29,16 +29,14 @@ import time
 class ResourcingTest(UnifieldTest):
 
     def setUp(self):
-        self.used_db = self.hq1c1
-        db = self.used_db
-        self.order_obj = db.get('sale.order')
-        self.order_line_obj = db.get('sale.order.line')
-        self.po_obj = db.get('purchase.order')
-        self.pol_obj = db.get('purchase.order.line')
-        self.proc_obj = db.get('procurement.order')
-        self.data_obj = db.get('ir.model.data')
-        self.tender_obj = db.get('tender')
-        self.tender_line_obj = db.get('tender.line')
+        self.order_obj = self.hq1c1.get('sale.order')
+        self.order_line_obj = self.hq1c1.get('sale.order.line')
+        self.po_obj = self.hq1c1.get('purchase.order')
+        self.pol_obj = self.hq1c1.get('purchase.order.line')
+        self.proc_obj = self.hq1c1.get('procurement.order')
+        self.data_obj = self.hq1c1.get('ir.model.data')
+        self.tender_obj = self.hq1c1.get('tender')
+        self.tender_line_obj = self.hq1c1.get('tender.line')
 
         if not hasattr(self, 'pr'):
             self.pr = False
@@ -48,10 +46,8 @@ class ResourcingTest(UnifieldTest):
         Done all remaining documents
         :return:
         """
-        db = self.used_db
-
-        ddw_obj = db.get('documents.done.wizard')
-        ddp_obj = db.get('documents.done.problem')
+        ddw_obj = self.hq1c1.get('documents.done.wizard')
+        ddp_obj = self.hq1c1.get('documents.done.problem')
 
         ddw_ids = ddw_obj.search([])
         while ddw_ids:

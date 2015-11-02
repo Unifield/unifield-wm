@@ -236,6 +236,8 @@ class SyncCancelINTest(ResourcingTest):
         )
 
     def test_cancel_sync_before_out_processing(self):
+        import pdb
+        pdb.set_trace()
         self.process_partial_and_cancel_in()
 
         self.launch_sync()

@@ -1,6 +1,28 @@
 -
   Data for test_0204_uf_2490_one_po
 -
+  Create an external customer
+-
+  !record {model: res.partner, id: test_0204_ext_customer, db: hq1c1, xml_id: False}:
+    name: Ext Customer for Test 0204
+    # Not editable values
+    customer: 1
+    supplier: 0
+    partner_type: external
+    property_account_receivable: unifield_tests_data.account_account_receivable_supplier0
+    property_account_payable: unifield_tests_data.account_account_payable_supplier0
+-
+  Create an address for the external customer
+-
+  !record {model: res.partner.address, id: test_0204_ext_customer_addr, db: hq1c1, xml_id: False}:
+    name: Ext. Customer for Test 0204
+    street: Main Street
+    street2: 
+    zip: 63523
+    city: Test City
+    # Not editable values
+    partner_id: test_0204_ext_customer
+-
   Create an external supplier
 -
   !record {model: res.partner, id: test_0204_ext_supplier, db: hq1c1, xml_id: test_0202_ext_supplier}:
@@ -8,20 +30,20 @@
     # Not editable values
     customer: 0
     supplier: 1
-    partner_type: 'external'
+    partner_type: external
     property_account_receivable: unifield_tests_data.account_account_receivable_supplier0
     property_account_payable: unifield_tests_data.account_account_payable_supplier0
 -
   Create an address for the external supplier
 -
   !record {model: res.partner.address, id: test_0204_ext_supplier_addr, db: hq1c1, xml_id: test_0202_ext_supplier_addr}:
-    name: Ext. Customer for Test 0202
+    name: Ext. Supplier for Test 0204
     street: Main Street
     street2: 
     zip: 63523
     city: Test City
     # Not editable values
-    partner_id: test_0204_supplier_cust
+    partner_id: test_0204_ext_supplier
 -
   Create a first LOG product
 -
@@ -37,12 +59,13 @@
     nomen_manda_1: unifield_tests_data.nomen_log_group
     nomen_manda_2: unifield_tests_data.nomen_log_family
     nomen_manda_3: unifield_tests_data.nomen_log_root
+    international_status: product_attributes.int_1
 -
   Create a second LOG product
 -
   !record {model: product.product, id: test_0204_prod_log_2, db: hq1c1, xml_id: fo_test_prod_log_2}:
-    default_code: PL2FOTest
-    name: PL2 (FO Test)
+    default_code: PL20204
+    name: PL2 (0204 Test)
     uom_id: product.product_uom_unit
     uom_po_id: product.product_uom_unit
     # Not editable values
@@ -52,10 +75,53 @@
     nomen_manda_1: unifield_tests_data.nomen_log_group
     nomen_manda_2: unifield_tests_data.nomen_log_family
     nomen_manda_3: unifield_tests_data.nomen_log_root
+    international_status: product_attributes.int_1
+-
+  Create a first MED product
+-
+  !record {model: product.product, id: test_0204_prod_med_1, db: hq1c1, xml_id: False}:
+    default_code: PM10204
+    name: PM1 (0204 Test)
+    uom_id: product.product_uom_unit
+    uom_po_id: product.product_uom_unit
+    # Not editable values
+    supply_method: buy
+    type: product
+    nomen_manda_0: unifield_tests_data.nomen_med_main_type
+    nomen_manda_1: unifield_tests_data.nomen_med_group
+    nomen_manda_2: unifield_tests_data.nomen_med_family
+    nomen_manda_3: unifield_tests_data.nomen_med_root
+    international_status: product_attributes.int_1
+-
+  Create a second MED product
+-
+  !record {model: product.product, id: test_0204_prod_med_2, db: hq1c1, xml_id: False}:
+    default_code: PM20204
+    name: PM2 (0204 Test)
+    uom_id: product.product_uom_unit
+    uom_po_id: product.product_uom_unit
+    # Not editable values
+    supply_method: buy
+    type: product
+    nomen_manda_0: unifield_tests_data.nomen_med_main_type
+    nomen_manda_1: unifield_tests_data.nomen_med_group
+    nomen_manda_2: unifield_tests_data.nomen_med_family
+    nomen_manda_3: unifield_tests_data.nomen_med_root
+    international_status: product_attributes.int_1
 -
   Create an external Consumption unit
 -
   !record {model: stock.location, id: test_0204_external_cu, db: hq1c1, xml_id: test_0202_external_cu}:
+    name: External CU for 0204
+    # Not editable values
+    location_category: consumption_unit
+    usage: customer
+    location_id: stock.stock_location_internal_customers
+    optional_loc: True
+-
+  Create an external Consumption unit
+-
+  !record {model: stock.location, id: test_0204_external_cu, db: hq1c1p1, xml_id: test_0202_external_cu}:
     name: External CU for 0204
     # Not editable values
     location_category: consumption_unit
