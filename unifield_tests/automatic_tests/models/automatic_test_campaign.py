@@ -292,7 +292,6 @@ class automatic_test_campaign(osv.osv):
                         'message': e,
                     }, context=context)
                     cr.commit()
-                    cr.close()
 
                 self.write(cr, uid, [camp.id], {
                     'state': 'done',
