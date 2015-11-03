@@ -33,6 +33,7 @@ class UnifieldYamlInterpreterException(Exception):
     pass
 
 class UnifieldYamlInterpreter(YamlInterpreter):
+    _INCLUDE_HQ2 = False
 
     def __init__(self, cr, module, id_map, mode, filename, noupdate=False):
         """
@@ -48,11 +49,12 @@ class UnifieldYamlInterpreter(YamlInterpreter):
             ('db_to_use', '!=', ''),
 #            ('keyword', '!=', 'sync'),
             ('keyword', 'not in', ['sync',
-                'hq1c2', 'hq1c2p1', 'hq1c2p2',      # Comment this line to get HQ1C2
-                'hq2', 'hq2c1', 'hq2c2', 'hq2c1p1',' hq2c1p2', 'hq2c2p1', 'hq2c2p2',    # Comment this line to get HQ1
+                'hq1c2', 'hq1c2p1', 'hq1c2p2',  # Comment this line to get HQ1C2
             ]),
         ], context=self.context)
         for db_map in db_map_obj.browse(self.cr, self.uid, db_map_ids, context=self.context):
+            if not self._INCLUDE_HQ2 and db_map.keyword.startswith('hq2'):
+                continue  # skip HQ2 tree
             new_cr = pooler.get_db(db_map.db_to_use)
             self.cursors[db_map.keyword] = new_cr
 
@@ -151,10 +153,10 @@ class UnifieldYamlInterpreter(YamlInterpreter):
 
     def _eval_field(self, model, field_name, expression):
         # TODO
-        """if column._type == "many2one":
+        if column._type == "many2one":
             if expression[0] == '@':
                 import pdb; pdb.set_trace()
-                expression = self._eval_field_ex(expression[:1])"""
+                expression = self._eval_field_ex(expression[:1])
         return super(UnifieldYamlInterpreter, self)._eval_field(model,
             field_name, expression)
 
@@ -181,7 +183,6 @@ class UnifieldYamlInterpreter(YamlInterpreter):
             domain += ']'
 
         domain = safe_eval.save_eval(domain)
-        print '_eval_field_ex_search', domain
         return False
 
 

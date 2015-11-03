@@ -25,6 +25,7 @@ import sys
 
 from os import path
 from os import walk
+from os import sys as os_sys
 from oerplib import error
 
 from tests import colors
@@ -32,6 +33,17 @@ from HTMLTestRunner import HTMLTestRunner
 
 
 path_for_tests = 'tests'
+
+
+import_server_base_rel_dir = '/../../unifield-server/bin/'
+import_server_rel_dirs = [
+    'addons',
+    'ir',
+    'osv',
+    'service',
+    'tools',
+    'wizard',
+]
 
 
 def main():
@@ -104,8 +116,17 @@ def main():
         print e.oerp_traceback
         print e.message
 
+def import_dirs():
+    current_dir = path.dirname(path.abspath(__file__))
+
+    os_sys.path.append(path.abspath(current_dir + import_server_base_rel_dir))
+    for rd in import_server_rel_dirs:
+        os_sys.path.append(path.abspath(
+            current_dir + import_server_base_rel_dir + rd))
+
 
 if __name__ == "__main__":
+    import_dirs()
     main()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
