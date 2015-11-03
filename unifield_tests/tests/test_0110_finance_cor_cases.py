@@ -582,19 +582,19 @@ class FinanceTestCorCases(FinanceTest):
     # play all flow:
     # cd unifield/test-finance/unifield-wm/unifield_tests
     # python -m unittest tests.test_finance_cor_cases
-
-    '''def test_cor_00(self):
+    # TODO comment test_cor_00 when automated test finished
+    def test_cor_00(self):
         """
         fake unit test for dataset testing
         cd unifield/test-finance/unifield-wm/unifield_tests
         python -m unittest tests.test_finance_cor_cases.FinanceTestCorCases.test_cor_00
         """
-        pass'''
+        pass
 
     # -------------------------------------------------------------------------
     # SINGLE CASES FLOW: from 01 to 14
     # -------------------------------------------------------------------------
-
+    '''
     def test_cor_01(self):
         """
         cd unifield/test-finance/unifield-wm/unifield_tests
@@ -2498,6 +2498,7 @@ class FinanceTestCorCases(FinanceTest):
             ))),
             "SYNC mismatch"
         )
+    '''
 
 def get_test_class():
     return FinanceTestCorCases

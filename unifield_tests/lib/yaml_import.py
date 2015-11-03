@@ -24,9 +24,13 @@
 import yaml
 
 import pooler
+from tools import safe_eval
 
 from tools.yaml_import import YamlInterpreter
 
+
+class UnifieldYamlInterpreterException(Exception):
+    pass
 
 class UnifieldYamlInterpreter(YamlInterpreter):
 
@@ -141,5 +145,41 @@ class UnifieldYamlInterpreter(YamlInterpreter):
             self.cr = old_cr
         else:
             return super(UnifieldYamlInterpreter, self).process_record(node)
+
+    def _eval_field(self, model, field_name, expression):
+        # TODO
+        """if column._type == "many2one":
+            if expression[0] == '@':
+                import pdb; pdb.set_trace()
+                expression = self._eval_field_ex(expression[:1])"""
+        return super(UnifieldYamlInterpreter, self)._eval_field(model,
+            field_name, expression)
+
+    def _eval_field_ex(self, expression):
+        args = map(lambda e: e.strip(), expression.split(';'))
+        if not args or len(args) < 2:
+            raise UnifieldYamlInterpreterException('invalid expression')
+        method = args[0]
+        model = args[1]
+        args = len(args) > 2 and args[2:] or []
+
+        if method == 'search':
+            return self._eval_field_ex_search(model, args)
+        return False
+
+    def _eval_field_ex_search(self, model, args):
+        if not args or len(args) != 1:
+            raise UnifieldYamlInterpreterException(
+                '@search;model;domain expected')
+        domain = args[0]
+        if not domain.startswidth('['):
+            domain = '[' + domain
+        if not domain.endswidth(']'):
+            domain += ']'
+
+        domain = safe_eval.save_eval(domain)
+        print '_eval_field_ex_search', domain
+        return False
+
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

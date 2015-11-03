@@ -1,0 +1,17 @@
+-
+  FINANCE COR TEST
+  Data for test_0110_finance_cor_cases
+-
+  Create COST CENTER HT120
+-
+  !record {model: account.analytic.account, id: test_0110_cc_ht120, db: hq1}:
+    code: HT120,
+    name: HT120,
+    date_start: 2015-01-01,
+
+    # Not editable values
+    state: open
+    type: normal,
+    category: OC,
+    parent_id: @search;account.analytic.account;('code','=','HT1'),('type','=','view'),('category','=','OC')
+-
