@@ -105,6 +105,8 @@ class UnifieldYamlInterpreter(YamlInterpreter):
         Use the good cursor to have the record created in the good DB
         """
         record, fields = node.items()[0]
+        print record  # TODO remove
+        print fields  # TODO remove
 
         # Use the good cursor to have the record created in the good DB
         if record.db:
@@ -153,13 +155,14 @@ class UnifieldYamlInterpreter(YamlInterpreter):
 
     def _eval_field(self, model, field_name, expression):
         # TODO
-        if column._type == "many2one":
-            if expression[0] == '@':
-                import pdb; pdb.set_trace()
-                expression = self._eval_field_ex(expression[:1])
+        """if column._type == "many2one":
+            import pdb; pdb.set_trace()
+            if expression[0] == "'":
+                expression = self._eval_field_ex(expression[:1])"""
         return super(UnifieldYamlInterpreter, self)._eval_field(model,
             field_name, expression)
 
+    """
     def _eval_field_ex(self, expression):
         args = map(lambda e: e.strip(), expression.split(';'))
         if not args or len(args) < 2:
@@ -183,7 +186,8 @@ class UnifieldYamlInterpreter(YamlInterpreter):
             domain += ']'
 
         domain = safe_eval.save_eval(domain)
-        return False
+        return 25  # HT1 for testing
+    """
 
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

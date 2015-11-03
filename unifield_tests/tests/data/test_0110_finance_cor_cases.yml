@@ -5,13 +5,55 @@
   Create COST CENTER HT120
 -
   !record {model: account.analytic.account, id: test_0110_cc_ht120, db: hq1}:
-    code: HT120,
-    name: HT120,
-    date_start: 2015-01-01,
+    code: HT120
+    name: HT120
+    date_start: 2015-01-01
 
     # Not editable values
     state: open
-    type: normal,
-    category: OC,
-    parent_id: @search;account.analytic.account;('code','=','HT1'),('type','=','view'),('category','=','OC')
+    type: normal
+    category: OC
+    parent_id: "@search;account.analytic.account;('code','=','HT1'),('type','=','view'),('category','=','OC')"
+-
+-
+  Create COST CENTER HT112
+-
+  !record {model: account.analytic.account, id: test_0110_cc_ht112, db: hq1}:
+    code: HT112
+    name: HT112
+    date_start: 2015-01-01
+
+    # Not editable values
+    state: open
+    type: normal
+    category: OC
+    parent_id: "@search;account.analytic.account;('code','=','HT1'),('type','=','view'),('category','=','OC')"
+-
+-
+  Create COST CENTER HT122
+-
+  !record {model: account.analytic.account, id: test_0110_cc_ht122, db: hq1}:
+    code: HT122
+    name: HT122
+    date_start: 2015-01-01
+
+    # Not editable values
+    state: open
+    type: normal
+    category: OC
+    parent_id: "@search;account.analytic.account;('code','=','HT1'),('type','=','view'),('category','=','OC')"
+-
+-
+  Create COST CENTER HT220
+-
+  !record {model: account.analytic.account, id: test_0110_cc_ht220, db: hq1}:
+    code: HT220
+    name: HT220
+    date_start: 2015-01-01
+
+    # Not editable values
+    state: open
+    type: normal
+    category: OC
+    parent_id: "@search;account.analytic.account;('code','=','HT2'),('type','=','view'),('category','=','OC')"
 -

@@ -149,6 +149,7 @@ class FinanceTestCorCases(FinanceTest):
         if not hasattr(self, 'dataset_meta'):
             self.dataset_meta = self.DataSetMeta()
         return self.dataset_meta
+
     # end of dataset Meta
 
     # -------------------------------------------------------------------------
@@ -181,6 +182,9 @@ class FinanceTestCorCases(FinanceTest):
     # -------------------------------------------------------------------------
 
     def _set_dataset(self):
+        # TODO: uncomment to restore dataset sequence
+        return
+
         def get_instance_id_from_code(db, code):
             instance_ids = db.get('msf.instance').search(
                 [('code', '=', self.get_db_name_from_suffix(code))])
