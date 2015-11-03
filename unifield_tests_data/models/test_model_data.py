@@ -60,7 +60,6 @@ class test_model_data(osv.osv):
             data_id = data_ids[0]
         else:
             data_ids = self.pool.get('ir.model.data').search(cr, uid, [
-                '&', '|', '&',
                 ('module', '=', module),
                 ('name', '=', xml_id),
             ])

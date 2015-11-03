@@ -114,8 +114,8 @@ class UF2490OnePO(ResourcingTest):
             "The %s state is '%s' - Should be '%s'" % (self.pr and 'IR' or 'FO', order_state, order_to_check),
         )
 
-    def _get_ir_values(self, db, values=None):
-        values = super(UF2490OnePO, self)._get_ir_values(db, values=values)
+    def _get_ir_values(self, db, values=None, data_prefix=''):
+        values = super(UF2490OnePO, self)._get_ir_values(db, values=values, data_prefix=data_prefix)
 
         if not values:
             values = {}
@@ -472,7 +472,7 @@ class UF2490OnePO(ResourcingTest):
         Process partially the IN and cancel the back order
         :return:
         """
-        db = self.hq1c1p1
+        db = self.hq1c1
         self.po_obj = db.get('purchase.order')
         self.order_obj = db.get('sale.order')
         self.order_line_obj = db.get('sale.order.line')

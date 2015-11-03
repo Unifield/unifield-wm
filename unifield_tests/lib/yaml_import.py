@@ -47,7 +47,10 @@ class UnifieldYamlInterpreter(YamlInterpreter):
         db_map_ids = db_map_obj.search(self.cr, self.uid, [
             ('db_to_use', '!=', ''),
 #            ('keyword', '!=', 'sync'),
-            ('keyword', 'not in', ['sync', 'hq2', 'hq2c1', 'hq2c2', 'hq2c1p1',' hq2c1p2', 'hq2c2p1', 'hq2c2p2']),
+            ('keyword', 'not in', ['sync',
+                'hq1c2', 'hq1c2p1', 'hq1c2p2',      # Comment this line to get HQ1C2
+                'hq2', 'hq2c1', 'hq2c2', 'hq2c1p1',' hq2c1p2', 'hq2c2p1', 'hq2c2p2',    # Comment this line to get HQ1
+            ]),
         ], context=self.context)
         for db_map in db_map_obj.browse(self.cr, self.uid, db_map_ids, context=self.context):
             new_cr = pooler.get_db(db_map.db_to_use)
@@ -80,11 +83,11 @@ class UnifieldYamlInterpreter(YamlInterpreter):
             self.cursors[key] = pooler.get_db(cr.dbname).cursor()
 
         try:
-            # Remove old test dat Remove old test dataa
-            for cursor in self.cursors.itervalues():
-                tmd_obj = pooler.get_pool(cursor.dbname).get('test.model.data')
-                tmd_ids = tmd_obj.search(cursor, self.uid, [], context=self.context)
-                tmd_obj.unlink(cursor, self.uid, tmd_ids, context=self.context)
+            # Remove old test data
+            #for cursor in self.cursors.itervalues():
+                #tmd_obj = pooler.get_pool(cursor.dbname).get('test.model.data')
+                #tmd_ids = tmd_obj.search(cursor, self.uid, [], context=self.context)
+                #tmd_obj.unlink(cursor, self.uid, tmd_ids, context=self.context)
             res = super(UnifieldYamlInterpreter, self).process(yaml_string)
             for cursor in self.cursors.values():
                 cursor.commit()
@@ -140,7 +143,7 @@ class UnifieldYamlInterpreter(YamlInterpreter):
                             'model': record.model,
                         }, context=self.context)
                 except Exception as e:
-                    self.cr.rollback()
+                    pass
 
             self.cr = old_cr
         else:

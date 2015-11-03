@@ -141,8 +141,9 @@ class UnifieldTest(unittest.TestCase):
         Open a Connection to the Sync. Server database and read the DB mapping
         to create DB connections.
         """
+        from tools.config import config
         # TODO: Put this configuration on a osv object
-        self.server_port = '8069'
+        self.server_port = config['xmlrpc_port']
         self.server_url = '127.0.0.1'
         self.uid = 'admin'
         self.pwd = 'admin'
@@ -253,7 +254,7 @@ class UnifieldTest(unittest.TestCase):
         """
         Load the data from Yaml file
         """
-        if self.yaml_file and not UnifieldTest.yaml_already_loaded:
+        if not self.cr and self.yaml_file and not UnifieldTest.yaml_already_loaded:
             self.load_data_from_yaml()
 
         return super(UnifieldTest, self).run(*args, **kwargs)

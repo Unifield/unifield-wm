@@ -265,7 +265,6 @@ class automatic_test_campaign(osv.osv):
                                 suite.addTest(test_suite)
 
                     suite2 = unifield_unittest.UnifieldTestSuite(loader.filter_tests(suite))
-                    print suite2
 
                     # Create a runner linked to the campaign
                     result = unifield_unittest.UnifieldTestResult(
@@ -292,14 +291,12 @@ class automatic_test_campaign(osv.osv):
                         'state': 'error',
                         'message': e,
                     }, context=context)
-
+                    cr.commit()
 
                 self.write(cr, uid, [camp.id], {
                     'state': 'done',
                     'end_date': time.strftime('%Y-%m-%d %H:%M:%S'),
                 })
-                cr.commit()
-                cr.close()
 
             if use_new_cursor:
                 cr.commit()

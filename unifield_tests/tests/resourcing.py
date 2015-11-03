@@ -117,7 +117,7 @@ No split of FO found !""")
             values = {}
 
         # Prepare values for the field order
-        partner_id = self.get_record(db, '%sext_customer_1' % data_prefix)
+        partner_id = self.get_record(db, '%sext_customer' % data_prefix)
         order_type = 'regular'
 
         change_vals = self.order_obj.\
@@ -207,7 +207,7 @@ No split of FO found !""")
         prod_med2_id = self.get_record(db, '%sprod_med_2' % data_prefix)
         uom_pce_id = self.get_record(db, 'product_uom_unit', module='product')
 
-        order_values = self._get_order_values(db, data_prefix)
+        order_values = self._get_order_values(db, data_prefix=data_prefix)
 
         order_id = self.order_obj.create(order_values)
 
@@ -270,7 +270,7 @@ No split of FO found !""")
         line_ids = self.order_line_obj.search([('order_id', '=', order_id)])
         self.order_line_obj.write(line_ids, {
             'po_cft': 'po',
-            'supplier': self.get_record(db, '%sext_supplier_1' % data_prefix),
+            'supplier': self.get_record(db, '%sext_supplier' % data_prefix),
         })
         self.order_line_obj.confirmLine(line_ids)
 

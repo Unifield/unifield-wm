@@ -3,7 +3,7 @@
 -
   Create a first LOG product
 -
-  !record {model: product.product, id: test_0208_prod_log_1, db: hq1c1, xml_id: fo_test_prod_log_1}:
+  !record {model: product.product, id: test_0208_prod_log_1, db: hq1c1, xml_id: test_0201_prod_log_1}:
     default_code: PL1FOTest
     name: PL1 (FO Test)
     uom_id: product.product_uom_unit
