@@ -43,7 +43,10 @@ class UnifieldYamlInterpreter(YamlInterpreter):
         db_map_ids = db_map_obj.search(self.cr, self.uid, [
             ('db_to_use', '!=', ''),
 #            ('keyword', '!=', 'sync'),
-            ('keyword', 'not in', ['sync', 'hq2', 'hq2c1', 'hq2c2', 'hq2c1p1',' hq2c1p2', 'hq2c2p1', 'hq2c2p2']),
+            ('keyword', 'not in', ['sync',
+                'hq1c2', 'hq1c2p1', 'hq1c2p2',      # Comment this line to get HQ1C2
+                'hq2', 'hq2c1', 'hq2c2', 'hq2c1p1',' hq2c1p2', 'hq2c2p1', 'hq2c2p2',    # Comment this line to get HQ1
+            ]),
         ], context=self.context)
         for db_map in db_map_obj.browse(self.cr, self.uid, db_map_ids, context=self.context):
             new_cr = pooler.get_db(db_map.db_to_use)
