@@ -118,7 +118,7 @@
 -
   Create FUNDING POOL FP2
 -
- !record {model: account.analytic.account, id: test_0110_fp1, db: hq1}:
+ !record {model: account.analytic.account, id: test_0110_fp2, db: hq1}:
    instance_id: "@search;msf.instance;('code','=','sp-209_HQ1C1')"
    code: FP2
    name: FP2
