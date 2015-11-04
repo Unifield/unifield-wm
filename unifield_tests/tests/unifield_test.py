@@ -275,18 +275,19 @@ class UnifieldTest(unittest.TestCase):
         self.sync.get('automatic.test').load_data_from_yml(self.yaml_file, yaml_string)
         UnifieldTest.yaml_already_loaded = True
 
-    def add_test_info(self, message=None):
+    def add_test_info(self, db, message):
         """
         Add information lines on automatic.test.method to see which documents
         are created in which instance...
         """
-        if self.method_id and message:
+        if self.method_id:
+            msg = '[%s] %s' % (db.db_name, message)
             atm_obj = self.sync.get('automatic.test.method')
             exist_info = atm_obj.read(self.method_id, ['information'])['information']
             if exist_info:
-                new_info = exist_info + '\n' + message
+                new_info = exist_info + '\n' + mg
             else:
-                new_info = message
+                new_info = msg
             atm_obj.write([self.method_id], {'information': new_info})
 
         return True
