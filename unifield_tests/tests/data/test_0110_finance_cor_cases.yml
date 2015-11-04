@@ -20,11 +20,12 @@
   TARGET HT120
 -
   !record {model: account.target.costcenter, id: test_0110_cc_ht120_target_c1, db: hq1}:
-   # COST CENTER to target: edit only parent in ('code','=',...)
-   cost_center_id: "@search;account.analytic.account;('code','=','HT120'),('type','=','normal'),('category','=','OC')"
    # INSTANCE TO TARGET
    instance_id: "@search;msf.instance;('code','=','sp-209_HQ1C1')"
    is_target: True
+
+   # Not editable values
+   cost_center_id: test_0110_cc_ht120
 -
   Create COST CENTER HT112
 -
@@ -44,11 +45,12 @@
   TARGET HT112
 -
   !record {model: account.target.costcenter, id: test_0110_cc_ht112_target_c1p1, db: hq1}:
-   # COST CENTER to target: edit only parent in ('code','=',...)
-   cost_center_id: "@search;account.analytic.account;('code','=','HT112'),('type','=','normal'),('category','=','OC')"
    # INSTANCE TO TARGET
    instance_id: "@search;msf.instance;('code','=','sp-209_HQ1C1P1')"
    is_target: True
+
+   # Not editable values
+   cost_center_id: test_0110_cc_ht112
 -
   Create COST CENTER HT122
 -
@@ -68,18 +70,18 @@
   TARGET HT122
 -
   !record {model: account.target.costcenter, id: test_0110_cc_ht122_target_c1p2, db: hq1}:
-   # COST CENTER to target: edit only parent in ('code','=',...)
-   cost_center_id: "@search;account.analytic.account;('code','=','HT122'),('type','=','normal'),('category','=','OC')"
    # INSTANCE TO TARGET
    instance_id: "@search;msf.instance;('code','=','sp-209_HQ1C1P2')"
    is_target: True
+
+   # Not editable values
+   cost_center_id: test_0110_cc_ht122
 -
   Create COST CENTER HT220
 -
   !record {model: account.analytic.account, id: test_0110_cc_ht220, db: hq1}:
     # PARENT CC: edit only parent in ('code','=',...)
     parent_id: "@search;account.analytic.account;('code','=','HT2'),('type','=','view'),('category','=','OC')"
-
 
     code: HT220
     name: HT220
@@ -93,9 +95,57 @@
   TARGET HT220
 -
   !record {model: account.target.costcenter, id: test_0110_cc_ht220_target_c2, db: hq1}:
-   # COST CENTER to target: edit only parent in ('code','=',...)
-   cost_center_id: "@search;account.analytic.account;('code','=','HT220'),('type','=','normal'),('category','=','OC')"
    # INSTANCE TO TARGET
    instance_id: "@search;msf.instance;('code','=','sp-209_HQ1C2')"
    is_target: True
+
+   # Not editable values
+   cost_center_id: test_0110_cc_ht220
+-
+  Create FUNDING POOL FP1
+-
+ !record {model: account.analytic.account, id: test_0110_fp1, db: hq1}:
+   instance_id: "@search;msf.instance;('code','=','sp-209_HQ1C1')"
+   code: FP1
+   name: FP1
+   date_start: 2015-01-01
+
+   # Not editable values
+   state: open
+   type: normal
+   category: FUNDING
+   parent_id: "@search;account.analytic.account;('code','=','FUNDING'),('type','=','view'),('category','=','FUNDING')"
+-
+  Create FUNDING POOL FP2
+-
+ !record {model: account.analytic.account, id: test_0110_fp1, db: hq1}:
+   instance_id: "@search;msf.instance;('code','=','sp-209_HQ1C1')"
+   code: FP2
+   name: FP2
+   date_start: 2015-01-01
+
+   # Not editable values
+   state: open
+   type: normal
+   category: FUNDING
+   parent_id: "@search;account.analytic.account;('code','=','FUNDING'),('type','=','view'),('category','=','FUNDING')"
+-
+  Create FINANCING CONTRACT DONOR
+-
+ !record {model: financing.contract.donor, id: test_0110_donor, db: hq1}:
+   code: DONOR
+   name: DONOR
+   reporting_currency: sd.base_EUR
+-
+  Create FINANCING CONTRACT FC1
+-
+ !record {model: financing.contract.contract, id: test_0110_fc1, db: hq1}:
+   code: FC1
+   name: FC1
+   donor_id: test_0110_donor
+   instance_id: "@search;msf.instance;('code','=','sp-209_HQ1C1')"
+   eligibility_from_date: 2015-01-01
+   eligibility_to_date: 2016-12-31
+   grant_amount: 0
+   state: open
 -
