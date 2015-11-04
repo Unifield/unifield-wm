@@ -24,7 +24,7 @@
 import yaml
 
 import pooler
-from tools import safe_eval
+#from tools import safe_eval
 
 from tools.yaml_import import YamlInterpreter
 
@@ -76,7 +76,6 @@ class UnifieldYamlInterpreter(YamlInterpreter):
             finally:
                 cursor.close()
 
-
     def process(self, yaml_string):
         """
         Commit and close all cursors
@@ -105,8 +104,6 @@ class UnifieldYamlInterpreter(YamlInterpreter):
         Use the good cursor to have the record created in the good DB
         """
         record, fields = node.items()[0]
-        print record  # TODO remove
-        print fields  # TODO remove
 
         # Use the good cursor to have the record created in the good DB
         if record.db:
@@ -154,15 +151,17 @@ class UnifieldYamlInterpreter(YamlInterpreter):
             return super(UnifieldYamlInterpreter, self).process_record(node)
 
     def _eval_field(self, model, field_name, expression):
-        # TODO
-        """if column._type == "many2one":
-            import pdb; pdb.set_trace()
-            if expression[0] == "'":
-                expression = self._eval_field_ex(expression[:1])"""
+        column = False
+        if field_name in model._columns:
+            column = model._columns[field_name]
+        elif field_name in model._inherit_fields:
+            column = model._inherit_fields[field_name][2]
+        if column and column._type == "many2one":
+            if expression[0] == '@':
+                expression = self._eval_field_ex(expression[1:])
         return super(UnifieldYamlInterpreter, self)._eval_field(model,
             field_name, expression)
 
-    """
     def _eval_field_ex(self, expression):
         args = map(lambda e: e.strip(), expression.split(';'))
         if not args or len(args) < 2:
@@ -175,19 +174,23 @@ class UnifieldYamlInterpreter(YamlInterpreter):
             return self._eval_field_ex_search(model, args)
         return False
 
-    def _eval_field_ex_search(self, model, args):
+    def _eval_field_ex_search(self, model_name, args):
+        # parse domain str
         if not args or len(args) != 1:
             raise UnifieldYamlInterpreterException(
                 '@search;model;domain expected')
         domain = args[0]
-        if not domain.startswidth('['):
+        if not domain[0] == '[':
             domain = '[' + domain
-        if not domain.endswidth(']'):
+        if not domain[-1] == ']':
             domain += ']'
+        # TODO use save_eval: issue with save_eval (list of chars obtained)
+        #domain = safe_eval.save_eval(domain)
+        domain = eval(domain)
 
-        domain = safe_eval.save_eval(domain)
-        return 25  # HT1 for testing
-    """
-
+        # proceed search
+        ids =  pooler.get_pool(self.cr.dbname).get(model_name).search(
+            self.cr, self.uid, domain)
+        return ids and ids[0] or False
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
