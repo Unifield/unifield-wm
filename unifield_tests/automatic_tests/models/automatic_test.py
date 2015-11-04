@@ -124,7 +124,7 @@ class automatic_test(osv.osv):
             type='selection',
             selection=[
                 ('draft', 'Draft'),
-                ('not_run', 'Not run'),
+                ('not_run', 'Not started'),
                 ('progress', 'In progress'),
                 ('done', 'Done'),
                 ('fail', 'Failed'),

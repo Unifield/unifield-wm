@@ -64,7 +64,7 @@ class automatic_test_campaign(osv.osv):
         'state': fields.selection(
             selection=[
                 ('draft', 'Draft'),
-                ('not_run', 'Not Run'),
+                ('not_run', 'Not Started'),
                 ('progress', 'In progress'),
                 ('done', 'Done'),
             ],
