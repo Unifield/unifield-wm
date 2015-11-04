@@ -62,7 +62,7 @@ class UnifieldTestLoader(unittest.TestLoader):
                 if t_ids:
                     t.test_id = t_ids
                     for t_id in t_ids:
-                        self.pool.get('automatic.test.method').create(
+                        m_id = self.pool.get('automatic.test.method').create(
                             self.cr,
                             self.uid,
                             {
@@ -70,6 +70,7 @@ class UnifieldTestLoader(unittest.TestLoader):
                                 'name': t._testMethodName,
                             },
                         )
+                        t.method_id = m_id
                     res.append(t)
             elif isinstance(t, unittest.TestSuite):
                 if t._tests:

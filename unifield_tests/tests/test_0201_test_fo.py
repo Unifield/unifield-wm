@@ -64,6 +64,9 @@ class FOTest(UnifieldTest):
             'analytic_distribution_id': distrib_id,
         })
         order_id = self.fo_obj.create(order_values)
+        self.add_test_info("The FO %s has been created on hq1c1 db" % (
+            self.fo_obj.read(order_id, ['name'])['name'],
+        ))
 
         # Create order lines
         prod_log1_id = self.get_record(self.hq1c1, 'test_0201_prod_log_1')

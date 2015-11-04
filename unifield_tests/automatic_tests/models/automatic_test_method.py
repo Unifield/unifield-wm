@@ -67,6 +67,10 @@ class automatic_test_method(osv.osv):
             string='Traceback',
             readonly=True,
         ),
+        'information': fields.text(
+            string='Information',
+            readonly=True,
+        ),
     }
 
     _defaults = {

@@ -45,8 +45,14 @@
                             <field name="state" />
                             <newline />
                             <field colspan="4" name="message" widget="char" />
-                            <separator colspan="4" string="Traceback" />
-                            <field name="traceback" colspan="4" nolabel="1" />
+                            <notebook colspan="4">
+                                <page string="Information">
+                                    <field name="information" colspan="4" nolabel="1" />
+                                </page>
+                                <page string="Traceback">
+                                    <field name="traceback" colspan="4" nolabel="1" />
+                                </page>
+                            </notebook>
                         </form>
                     </field>
                 </form>

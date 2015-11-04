@@ -275,6 +275,22 @@ class UnifieldTest(unittest.TestCase):
         self.sync.get('automatic.test').load_data_from_yml(self.yaml_file, yaml_string)
         UnifieldTest.yaml_already_loaded = True
 
+    def add_test_info(self, message=None):
+        """
+        Add information lines on automatic.test.method to see which documents
+        are created in which instance...
+        """
+        if self.method_id and message:
+            atm_obj = self.sync.get('automatic.test.method')
+            exist_info = atm_obj.read(self.method_id, ['information'])['information']
+            if exist_info:
+                new_info = exist_info + '\n' + message
+            else:
+                new_info = message
+            atm_obj.write([self.method_id], {'information': new_info})
+
+        return True
+
     def is_keyword_present(self, db, keyword):
         '''
         Check that the given keyword is present in given db connection and active.
