@@ -156,13 +156,30 @@ class UnifieldYamlInterpreter(YamlInterpreter):
             column = model._columns[field_name]
         elif field_name in model._inherit_fields:
             column = model._inherit_fields[field_name][2]
-        if column and column._type == "many2one":
-            if expression[0] == '@':
-                expression = self._eval_field_ex(expression[1:])
+
+        if column:
+            if column._type == "many2one":
+                if expression[0] == '@':
+                    return self._eval_field_custom_expression(expression[1:])
+            elif column._type == "many2many":
+                ids = []
+                if isinstance(expression, (list, tuple)):
+                    for e in expression:
+                        if e[0] == '@':
+                            id = self._eval_field_custom_expression(e[1:])
+                        else:
+                            id = self.get_id(e)
+                        ids.append(id)
+                else:
+                    ids = self._eval_field_custom_expression(expression[1:],
+                        is_ids=True)
+                return [(6, 0, ids)]
+
+        # default
         return super(UnifieldYamlInterpreter, self)._eval_field(model,
             field_name, expression)
 
-    def _eval_field_ex(self, expression):
+    def _eval_field_custom_expression(self, expression, is_ids=False):
         args = map(lambda e: e.strip(), expression.split(';'))
         if not args or len(args) < 2:
             raise UnifieldYamlInterpreterException('invalid expression')
@@ -171,10 +188,12 @@ class UnifieldYamlInterpreter(YamlInterpreter):
         args = len(args) > 2 and args[2:] or []
 
         if method == 'search':
-            return self._eval_field_ex_search(model, args)
+            return self._eval_field_custom_expression_search(model, args,
+                is_ids=is_ids)
         return False
 
-    def _eval_field_ex_search(self, model_name, args):
+    def _eval_field_custom_expression_search(self, model_name, args,
+            is_ids=False):
         # parse domain str
         if not args or len(args) != 1:
             raise UnifieldYamlInterpreterException(
@@ -191,6 +210,8 @@ class UnifieldYamlInterpreter(YamlInterpreter):
         # proceed search
         ids =  pooler.get_pool(self.cr.dbname).get(model_name).search(
             self.cr, self.uid, domain)
+        if is_ids:
+            return ids and ids or False
         return ids and ids[0] or False
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

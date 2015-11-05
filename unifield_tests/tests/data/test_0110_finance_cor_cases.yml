@@ -109,6 +109,7 @@
    code: FP1
    name: FP1
    date_start: 2015-01-01
+   cost_center_ids: [ "@search;account.analytic.account;('code','=','HT101'),('type','=','normal'),('category','=','OC')", test_0110_cc_ht120 ]
 
    # Not editable values
    state: open
@@ -123,6 +124,7 @@
    code: FP2
    name: FP2
    date_start: 2015-01-01
+   cost_center_ids: "@search;account.analytic.account;('code','in',('HT101', 'HT120', 'HT121')),('type','=','normal'),('category','=','OC')"
 
    # Not editable values
    state: open
