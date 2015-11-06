@@ -111,7 +111,9 @@ class account_move_line(osv.osv):
                 unmerge.append(line.id)
                 total += (line.debit_currency or 0.0) - (line.credit_currency or 0.0)
 
-        if self.pool.get('res.currency').is_zero(cr, uid, company_currency_id, total):
+        # US-518/2: force full reconcile if required
+        if 'reconcile_amount_currency_diff' in context or \
+            self.pool.get('res.currency').is_zero(cr, uid, company_currency_id, total):
             res = self.reconcile(cr, uid, merges+unmerge, context=context)
             return res
         r_id = move_rec_obj.create(cr, uid, {

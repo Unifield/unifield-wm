@@ -1710,7 +1710,7 @@ class account_bank_statement_line(osv.osv):
          - reconcile lines from the move
         """
         # Some verifications
-        if not context:
+        if context is None:
             context = {}
         if not st_line:
             return False
@@ -1742,7 +1742,44 @@ class account_bank_statement_line(osv.osv):
         res_ml_ids = []
         process_invoice_move_line_ids = []
         total_payment = True
-        if st_line.first_move_line_id.amount_currency != total_amount:
+        force_total_payment_gap_ml_id = False
+
+        # US-512/2
+        amount_currency_diff = st_line.amount_out - abs(total_amount)
+        if amount_currency_diff < 0:
+            # regline amount < imported amount
+            # check if diff 0 < diff < 1 functional to process an auto gap entry
+            amount_currency_diff = abs(amount_currency_diff)
+            ml =  st_line.first_move_line_id
+            ctx = context.copy()
+            ctx['date'] = ml.date or ml.source_date or False
+            amount_func_diff = self.pool.get('res.currency').compute(cr, uid,
+                ml.currency_id.id, ml.functional_currency_id.id,
+                amount_currency_diff, round=True, context=ctx)
+            if 0 <= amount_func_diff < 1:
+                # create gap move line and reconcile it
+                # and consider total payment
+                # for POC on account 67000
+                vals =  {
+                    'account_id': self.pool.get('account.account').search(cr,
+                        uid, [('code', '=', '67000')], context=context)[0],
+                    'period_id': ml.period_id.id,
+                    'date': ml.date or ml.source_date or False,
+                    'document_date': ml.document_date or ml.date or ml.source_date or False,
+                    'journal_id': ml.journal_id.id,
+                    'currency_id': ml.currency_id.id,
+                    'credit_currency': amount_currency_diff,
+                    'functional_currency_id': ml.functional_currency_id.id,
+                    'credit': amount_func_diff,
+                    'move_id': ml.move_id.id,
+                    'name': 'Auto system entry (pending payment)',
+                    'state': 'valid',
+                }
+                force_total_payment_gap_ml_id = move_line_obj.create(cr, uid,
+                    vals, context=context)
+
+        if not force_total_payment_gap_ml_id \
+            and st_line.first_move_line_id.amount_currency != total_amount:
             # multi unpartial payment
             total_payment = False
             # Delete them
@@ -1783,7 +1820,9 @@ class account_bank_statement_line(osv.osv):
 
         # STEP 3 : Reconcile
         # UTP-574 Avoid problem of reconciliation for pending payments
-        context.update({'pending_payment': True})
+        context['pending_payment'] = True
+        if amount_currency_diff:
+            context['reconcile_amount_currency_diff'] = amount_currency_diff
         if total_payment:
             move_line_obj.reconcile_partial(cr, uid, move_lines+[x.id for x in st_line.imported_invoice_line_ids], context=context)
         else:
