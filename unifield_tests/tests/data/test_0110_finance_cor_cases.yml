@@ -150,4 +150,12 @@
    eligibility_to_date: 2016-12-31
    grant_amount: 0
    state: open
+   cost_center_ids: "@search;account.analytic.account;('code','in',('HT101', 'HT120')),('type','=','normal'),('category','=','OC')"
+   funding_pool_ids:
+     - funding_pool_id: test_0110_fp1
+       funded: True
+       total_project: True
+     - funding_pool_id: test_0110_fp2
+       funded: True
+       total_project: True
 -
