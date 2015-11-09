@@ -128,7 +128,6 @@ class FinanceTestCorCases(FinanceTest):
             print(prefix_pattern + msg)
 
         keyword = 'finance_test_cor_cases_dataset'  # dataset flag at HQ level
-
         if not self.is_keyword_present(self.hq1, keyword):
             # dataset to generate
             dataset_msg('GENERATING...')
@@ -201,12 +200,11 @@ class FinanceTestCorCases(FinanceTest):
             # check instance dataset
             company = self.get_company(db)
 
-            # TODO restore
-            """self.assert_(
+            self.assert_(
                 company.currency_id.name == meta.functional_ccy,
                  "wrong functionnal ccy: '%s' is expected" % (
                     meta.functional_ccy, )
-            )"""
+            )
 
             # open current month period
             period_id = self.get_period_id(db, now.month)
