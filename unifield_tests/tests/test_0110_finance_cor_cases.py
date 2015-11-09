@@ -35,7 +35,7 @@ from datetime import datetime
 
 # play all flow:
 # cd unifield/test-finance/unifield-wm/unifield_tests
-# python -m unittest tests.test_finance_cor_cases
+# python -m unittest tests.test_0110_finance_cor_cases
 
 
 DEFAULT_DATE_PERIOD_ID = 1
@@ -107,42 +107,6 @@ class FinanceTestCorCases(FinanceTest):
             'USD': [ 1.24, 1.28, ],
         }
 
-        # COST CENTERS BREAKDOWN related prop instances
-        # SET HERE WHAT YOU EXCEPT FOR TREE
-        # - only missing link will be created
-        # - and is_target will be update for already existing link
-        ccs = {
-            # 'CC': [(Prop Instance, is_target), ]
-
-            # C1 tree
-            'HT101': [ ('HQ1C1', True), ],
-            'HT120': [ ('HQ1C1', True), ],
-            'HT111': [ ('HQ1C1', False), ('HQ1C1P1', True), ],
-            'HT112': [ ('HQ1C1', False), ('HQ1C1P1', True), ],
-            'HT121': [ ('HQ1C1', False), ('HQ1C1P2', True), ],
-            'HT122': [ ('HQ1C1', False), ('HQ1C1P2', True), ],
-
-            # C2 tree
-            'HT201': [ ('HQ1C2', True), ],
-            'HT220': [ ('HQ1C2', True), ],
-            'HT211': [ ('HQ1C2', True), ('HQ1C2P1', True),],
-        }
-
-        # new FUNDING POOLS (and related cost centers)
-        fp_ccs = {
-            ('HQ1C1', 'FP1'): [ 'HT101', 'HT120', ],
-            ('HQ1C1', 'FP2'): [ 'HT101', 'HT120', 'HT121', 'HT122', ],
-         }
-
-        # financing contracts
-        financing_contracts_donor = 'DONOR'
-        financing_contracts = {
-            ('HQ1C1', 'FC1'): {
-                'ccs' : [ 'HT101', 'HT120', ],
-                'fps': [ 'FP1', 'FP2', ],
-            },
-        }
-
         register_prefix = 'BNK'
 
     def _get_dataset_meta(self):
@@ -165,14 +129,16 @@ class FinanceTestCorCases(FinanceTest):
 
         keyword = 'finance_test_cor_cases_dataset'  # dataset flag at HQ level
 
-        if not self.is_keyword_present(self.hq1, keyword):
+        """if not self.is_keyword_present(self.hq1, keyword):
             # dataset to generate
             dataset_msg('GENERATING')
             self._set_dataset()
             self.hq1.get(self.test_module_obj_name).create({
                 'name': keyword,
                 'active': True,
-            })
+            })"""
+        dataset_msg('GENERATING')
+        self._set_dataset()
 
     def tearDown(self):
         pass
@@ -184,33 +150,6 @@ class FinanceTestCorCases(FinanceTest):
     def _set_dataset(self):
         # TODO: uncomment to restore dataset sequence
         return
-
-        def get_instance_id_from_code(db, code):
-            instance_ids = db.get('msf.instance').search(
-                [('code', '=', self.get_db_name_from_suffix(code))])
-            if not instance_ids:
-                # default dev instance (db/prop instances name from a RB)
-                target_instance_code = "%s%s" % (
-                    self._db_instance_prefix or self_db_prefix, code, )
-                instance_ids = db.get('msf.instance').search(
-                        [('code', '=', target_instance_code)])
-                if not instance_ids:
-                   # instance doesn't exist, create it
-                   newcode = self.get_db_name_from_suffix(code)
-                   return db.get('msf.instance').create({
-                        'code': newcode,
-                        'reconcile_prefix': newcode,
-                        'move_prefix': newcode,
-                        'name': newcode,
-                        'level': 'coordo',
-                        'instance': newcode,
-                        'state': 'inactive',
-                        'parent_id': self.get_company(db).instance_id.id,
-                        'instance_identifier': newcode,
-                   })
-                #self.assert_(instance_ids != False, "instance not found")
-
-            return instance_ids and instance_ids[0] or False
 
         def activate_currencies(db, codes):
             if isinstance(codes, (str, unicode, )):
@@ -250,222 +189,16 @@ class FinanceTestCorCases(FinanceTest):
 
                         index += 1
 
-        def set_cost_centers():
-            hq = self.hq1
-            aaa_model = 'account.analytic.account'
-            aaa_obj = hq.get(aaa_model)
-            atcc_obj = hq.get('account.target.costcenter')
-
-            company = self.get_company(hq)
-
-            cc_id = False
-            parent_cc_ids = {}
-            for cc in meta.ccs:
-                cc_ids = aaa_obj.search(
-                    [('code', '=', cc), ('category', '=', 'OC')])
-
-                if not cc_ids:
-                    # CC to create
-
-                    # get parent (parent code: 3 first caracters (HT1, HT2,...))
-                    parent_code = cc[:3]
-                    if not parent_code in parent_cc_ids:
-                        parent_ids = aaa_obj.search([
-                            ('type', '=', 'view'),
-                            ('category', '=', 'OC'),
-                            ('code', '=', parent_code),
-                        ])
-                        parent_id = parent_ids and parent_ids[0] or False
-                        if not parent_id:
-                            parent_id = aaa_obj.create({
-                                  'type': 'view',
-                                  'category': 'OC',
-                                  'code': parent_code,
-                                  'currency_id': company.currency_id.id,
-                                  'date_start': time.strftime('%Y-01-01'),
-                                  'name': parent_code,
-                                  'state': 'open',
-                                  'parent_id': aaa_obj.search([('type', '=', 'view'), ('category', '=', 'OC'), ('parent_id', '=', False)])[0],
-                            })
-                        parent_cc_ids[parent_code] = parent_id
-                    else:
-                        parent_id = parent_cc_ids.get(parent_code, False)
-                    self.assert_(
-                        parent_id != False,
-                        "parent cost center not found '%s'" % (parent_code, )
-                    )
-
-                    vals = {
-                        'code': cc,
-                        'description': cc,
-                        'currency_id': company.currency_id.id,
-                        'name': cc,
-                        'date_start': date_fy_start,
-                        'parent_id': parent_id,
-                        'state': 'open',
-                        'type': 'normal',
-                        'category': 'OC',
-                        'instance_id': company.instance_id.id,
-                    }
-                    cc_id = aaa_obj.create(vals)
-                else:
-                    cc_id = cc_ids[0]
-
-                if cc_id:
-                    # set target instance or/and is target
-                    for instance_code, is_target in meta.ccs[cc]:
-                        instance_id = get_instance_id_from_code(hq,
-                            instance_code)
-                        if instance_id:
-                            target_ids = atcc_obj.search([
-                                ('instance_id', '=', instance_id),
-                                ('cost_center_id', '=', cc_id),
-                            ])
-
-                            if not target_ids:
-                                # create new link CC to prop instance
-                                target_id = atcc_obj.create({
-                                    'instance_id': instance_id,
-                                    'cost_center_id': cc_id,
-                                })
-                            else:
-                                target_id = target_ids[0]
-
-                            if is_target and target_id:
-                                # target expected update new or existing
-                                # do not raise except regarding already a target
-                                # to not block test dataset build and flow test
-                                try:
-                                    atcc_obj.write([target_id], {
-                                        'is_target': True,
-                                    })
-                                except Exception:
-                                    pass
-
-        def set_funding_pools():
-            c = self.hq1c1
-            aaa_model = 'account.analytic.account'
-
-            for instance, fp in meta.fp_ccs:
-                aaa_obj = c.get(aaa_model)
-                company = self.get_company(c)
-
-                parent_ids = aaa_obj.search([
-                    ('code', '=', 'FUNDING'),
-                    ('type', '=', 'view')
-                ])
-                self.assert_(
-                    parent_ids != False,
-                    'parent funding pool not found'
-                )
-
-                vals = {
-                    'code': fp,
-                    'description': fp,
-                    'currency_id': company.currency_id.id,
-                    'name': fp,
-                    'date_start': date_fy_start,
-                    'parent_id': parent_ids[0],
-                    'state': 'open',
-                    'type': 'normal',
-                    'category': 'FUNDING',
-                    'instance_id': company.instance_id.id,
-                }
-                if not self.record_exists(c, aaa_model,
-                        self.dfv(vals, include=('code', 'instance_id', ))):
-                    # get related CCs and set them
-                    cc_ids = aaa_obj.search([
-                        ('category', '=', 'OC'),
-                        ('code', 'in', meta.fp_ccs[(instance, fp)]),
-                    ])
-                    if cc_ids:
-                        vals['cost_center_ids'] = [(6, 0, cc_ids)]
-                    aaa_obj.create(vals)
-
-        def set_financing_contracts():
-            model = 'financing.contract.contract'
-            model_fcd = 'financing.contract.donor'
-            model_fcfpl = 'financing.contract.funding.pool.line'
-            model_aaa = 'account.analytic.account'
-
-            for instance, fc in meta.financing_contracts:
-                db = self.get_db_from_name(
-                    self.get_db_name_from_suffix(instance))
-                company = self.get_company(db)
-
-                # set donor
-                donor_code = "%s_%s" % (
-                    instance, meta.financing_contracts_donor, )
-                vals = {
-                    'code': donor_code,
-                    'name': donor_code.replace('_', ' '),
-                    'reporting_currency': company.currency_id.id,
-                }
-                donor_ids = db.get(model_fcd).search(
-                    self.dfv(vals, include=('code', )))
-                if not donor_ids:
-                    donor_ids = [db.get(model_fcd).create(vals), ]
-
-                if not self.record_exists(db, model, [('code', '=', fc)]):
-                    # set vals
-                    vals = {
-                        'code': fc,
-                        'name': fc,
-                        'donor_id': donor_ids[0],
-                        'instance_id': company.instance_id.id,
-                        'eligibility_from_date': date_fy_start,
-                        'eligibility_to_date': date_fy_stop,
-                        'grant_amount': 0.,
-                        'state': 'open',
-                        'open_date': date_now,
-                    }
-
-                    # set cost centers
-                    cc_codes = meta.financing_contracts[(instance, fc)].get(
-                        'ccs', False)
-                    if cc_codes:
-                        cc_ids = db.get(model_aaa).search([
-                            ('category', '=', 'OC'),
-                            ('code', 'in', cc_codes),
-                        ])
-                        if cc_ids:
-                            vals['cost_center_ids'] = [(6, 0, cc_ids)]
-
-                    contract_id = db.get(model).create(vals, {'fake': 1})
-
-                    # set funding pools
-                    # NEED TO BE DONE AFTER CREATE (KO if done during create)
-                    vals = {}
-                    fp_codes = meta.financing_contracts[(instance, fc)].get(
-                        'fps', False)
-                    if fp_codes:
-                        fp_ids = db.get(model_aaa).search([
-                            ('category', '=', 'FUNDING'),
-                            ('code', 'in', fp_codes),
-                        ])
-                        if fp_ids:
-                            vals['funding_pool_ids'] = []
-                            for fp_id in fp_ids:
-                                vals['funding_pool_ids'].append((0, 0, {
-                                        'funding_pool_id': fp_id,
-                                        'funded': True,
-                                        'total_project': True,
-                                    'instance_id': company.instance_id.id,
-                                    }))
-                    if vals:
-                        contract_id = db.get(model).write([contract_id], vals,
-                            {'fake': 1})
-
         # ---------------------------------------------------------------------
         meta = self._get_dataset_meta()
 
         now = datetime.now()
-        year = now.year
         date_fy_start = self.get_orm_date_fy_start()
-        date_fy_stop = self.get_orm_date_fy_stop()
-        date_now = self.get_orm_date_now()
 
-        # activate all analytic account (date start) from HQ
+        # HQ level: activate analytic accounts since FY start
+        self.analytic_account_activate_since(self.hq1, date_fy_start)
+
+        # HQ level: activate all analytic account (date start) from HQ
         # (will be synced later here)
         for i in self._instances_suffixes:
             # check instance dataset
@@ -478,9 +211,6 @@ class FinanceTestCorCases(FinanceTest):
                     meta.functional_ccy, )
             )
 
-            # activate analytic accounts since FY start
-            self.analytic_account_activate_since(self.hq1, date_fy_start)
-
             # open current month period
             period_id = self.get_period_id(db, now.month)
             if period_id:
@@ -491,21 +221,11 @@ class FinanceTestCorCases(FinanceTest):
             # activate currencies (if required)
             activate_currencies(db, [ccy_name for ccy_name in meta.rates])
 
-        # set default rates: at HQ then sync down
+        # HQ level: set default rates
         set_default_currency_rates(self.hq1)
+
+        # sync down all HQ level updates
         self._sync_down()
-
-        # HQ level: set cost centers + target CC of instance + sync down
-        set_cost_centers()
-        self._sync_down()
-
-        # C1 level: set funding pool + sync up/down (from c1)
-        set_funding_pools()
-        self._sync_from_c1()
-
-        # C1 level: set financing contract + sync up/down (from c1)
-        set_financing_contracts()
-        self._sync_from_c1()
 
     # -------------------------------------------------------------------------
     # PRIVATE TOOLS FUNCTIONS
@@ -585,13 +305,17 @@ class FinanceTestCorCases(FinanceTest):
 
     # play all flow:
     # cd unifield/test-finance/unifield-wm/unifield_tests
-    # python -m unittest tests.test_finance_cor_cases
+    # python -m unittest tests.test_0110_finance_cor_cases
+
+    # -------------------------------------------------------------------------
+    # EMPTY case: dataset test flow
+    # -------------------------------------------------------------------------
     # TODO comment test_cor_00 when automated test finished
     def test_cor_00(self):
         """
         fake unit test for dataset testing
         cd unifield/test-finance/unifield-wm/unifield_tests
-        python -m unittest tests.test_finance_cor_cases.FinanceTestCorCases.test_cor_00
+        python -m unittest tests.test_0110_finance_cor_cases.FinanceTestCorCases.test_cor_00
         """
         pass
 
@@ -602,7 +326,7 @@ class FinanceTestCorCases(FinanceTest):
     def test_cor_01(self):
         """
         cd unifield/test-finance/unifield-wm/unifield_tests
-        python -m unittest tests.test_finance_cor_cases.FinanceTestCorCases.test_cor_01
+        python -m unittest tests.test_0110_finance_cor_cases.FinanceTestCorCases.test_cor_01
         G/L ACCOUNT 60010=>60020
         """
         db = self.hq1c1
@@ -642,7 +366,7 @@ class FinanceTestCorCases(FinanceTest):
     def test_cor_02(self):
         """
         cd unifield/test-finance/unifield-wm/unifield_tests
-        python -m unittest tests.test_finance_cor_cases.FinanceTestCorCases.test_cor_02
+        python -m unittest tests.test_0110_finance_cor_cases.FinanceTestCorCases.test_cor_02
         DEST REPLACE OPS=>NAT NO REV/COR
         """
         db = self.hq1c1
@@ -680,7 +404,7 @@ class FinanceTestCorCases(FinanceTest):
     def test_cor_03(self):
         """
         cd unifield/test-finance/unifield-wm/unifield_tests
-        python -m unittest tests.test_finance_cor_cases.FinanceTestCorCases.test_cor_03
+        python -m unittest tests.test_0110_finance_cor_cases.FinanceTestCorCases.test_cor_03
         CC REPLACE HT101=>HT120 NO REV/COR
         """
         db = self.hq1c1
@@ -718,7 +442,7 @@ class FinanceTestCorCases(FinanceTest):
     def test_cor_04(self):
         """
         cd unifield/test-finance/unifield-wm/unifield_tests
-        python -m unittest tests.test_finance_cor_cases.FinanceTestCorCases.test_cor_04
+        python -m unittest tests.test_0110_finance_cor_cases.FinanceTestCorCases.test_cor_04
         FP REPLACE PF=>FP1 NO REV/COR
         """
         db = self.hq1c1
@@ -756,7 +480,7 @@ class FinanceTestCorCases(FinanceTest):
     def test_cor_05(self):
         """
         cd unifield/test-finance/unifield-wm/unifield_tests
-        python -m unittest tests.test_finance_cor_cases.FinanceTestCorCases.test_cor_05
+        python -m unittest tests.test_0110_finance_cor_cases.FinanceTestCorCases.test_cor_05
         G/L ACCOUNT 60010=>60000 and new AD
         """
         db = self.hq1c1
@@ -802,7 +526,7 @@ class FinanceTestCorCases(FinanceTest):
     def test_cor_06(self):
         """
         cd unifield/test-finance/unifield-wm/unifield_tests
-        python -m unittest tests.test_finance_cor_cases.FinanceTestCorCases.test_cor_06
+        python -m unittest tests.test_0110_finance_cor_cases.FinanceTestCorCases.test_cor_06
         """
         db = self.hq1c1
         self._register_set(db, ccy_name='USD')
@@ -860,7 +584,7 @@ class FinanceTestCorCases(FinanceTest):
     def test_cor_07(self):
         """
         cd unifield/test-finance/unifield-wm/unifield_tests
-        python -m unittest tests.test_finance_cor_cases.FinanceTestCorCases.test_cor_07
+        python -m unittest tests.test_0110_finance_cor_cases.FinanceTestCorCases.test_cor_07
         G/L ACCOUNT 60010=>60030
         """
         db = self.hq1c1
@@ -913,7 +637,7 @@ class FinanceTestCorCases(FinanceTest):
     def test_cor_08(self):
         """
         cd unifield/test-finance/unifield-wm/unifield_tests
-        python -m unittest tests.test_finance_cor_cases.FinanceTestCorCases.test_cor_08
+        python -m unittest tests.test_0110_finance_cor_cases.FinanceTestCorCases.test_cor_08
         """
         db = self.hq1c1
         self._register_set(db)
@@ -956,7 +680,7 @@ class FinanceTestCorCases(FinanceTest):
     def test_cor_09(self):
         """
         cd unifield/test-finance/unifield-wm/unifield_tests
-        python -m unittest tests.test_finance_cor_cases.FinanceTestCorCases.test_cor_09
+        python -m unittest tests.test_0110_finance_cor_cases.FinanceTestCorCases.test_cor_09
         G/L ACCOUNT 13000=>13010
         """
         db = self.hq1c1
@@ -992,7 +716,7 @@ class FinanceTestCorCases(FinanceTest):
     def test_cor_10(self):
         """
         cd unifield/test-finance/unifield-wm/unifield_tests
-        python -m unittest tests.test_finance_cor_cases.FinanceTestCorCases.test_cor_10
+        python -m unittest tests.test_0110_finance_cor_cases.FinanceTestCorCases.test_cor_10
         """
         db = self.hq1c1
         self._register_set(db)
@@ -1036,7 +760,7 @@ class FinanceTestCorCases(FinanceTest):
     def test_cor_11(self):
         """
         cd unifield/test-finance/unifield-wm/unifield_tests
-        python -m unittest tests.test_finance_cor_cases.FinanceTestCorCases.test_cor_11
+        python -m unittest tests.test_0110_finance_cor_cases.FinanceTestCorCases.test_cor_11
         """
         db = self.hq1c1
 
@@ -1128,7 +852,7 @@ class FinanceTestCorCases(FinanceTest):
     def test_cor_12(self):
         """
         cd unifield/test-finance/unifield-wm/unifield_tests
-        python -m unittest tests.test_finance_cor_cases.FinanceTestCorCases.test_cor_12
+        python -m unittest tests.test_0110_finance_cor_cases.FinanceTestCorCases.test_cor_12
         """
         db = self.hq1c1
 
@@ -1194,7 +918,7 @@ class FinanceTestCorCases(FinanceTest):
     def test_cor_13(self):
         """
         cd unifield/test-finance/unifield-wm/unifield_tests
-        python -m unittest tests.test_finance_cor_cases.FinanceTestCorCases.test_cor_13
+        python -m unittest tests.test_0110_finance_cor_cases.FinanceTestCorCases.test_cor_13
         """
         db = self.hq1c1
 
@@ -1302,7 +1026,7 @@ class FinanceTestCorCases(FinanceTest):
     def test_cor_14(self):
         """
         cd unifield/test-finance/unifield-wm/unifield_tests
-        python -m unittest tests.test_finance_cor_cases.FinanceTestCorCases.test_cor_14
+        python -m unittest tests.test_0110_finance_cor_cases.FinanceTestCorCases.test_cor_14
         """
         db = self.hq1c1
 
@@ -1341,7 +1065,7 @@ class FinanceTestCorCases(FinanceTest):
     def test_cor_20(self):
         """
         cd unifield/test-finance/unifield-wm/unifield_tests
-        python -m unittest tests.test_finance_cor_cases.FinanceTestCorCases.test_cor_20
+        python -m unittest tests.test_0110_finance_cor_cases.FinanceTestCorCases.test_cor_20
         """
         push_db = self.hq1c1
         model_aal = 'account.analytic.line'
@@ -1505,7 +1229,7 @@ class FinanceTestCorCases(FinanceTest):
     def test_cor_21(self):
         """
         cd unifield/test-finance/unifield-wm/unifield_tests
-        python -m unittest tests.test_finance_cor_cases.FinanceTestCorCases.test_cor_21
+        python -m unittest tests.test_0110_finance_cor_cases.FinanceTestCorCases.test_cor_21
         """
         push_db = self.hq1c1
         model_aal = 'account.analytic.line'
@@ -1676,7 +1400,7 @@ class FinanceTestCorCases(FinanceTest):
     def test_cor_22(self):
         """
         cd unifield/test-finance/unifield-wm/unifield_tests
-        python -m unittest tests.test_finance_cor_cases.FinanceTestCorCases.test_cor_22
+        python -m unittest tests.test_0110_finance_cor_cases.FinanceTestCorCases.test_cor_22
         """
         push_db = self.hq1c1
         model_aal = 'account.analytic.line'
@@ -1748,7 +1472,7 @@ class FinanceTestCorCases(FinanceTest):
     def test_cor_23(self):
         """
         cd unifield/test-finance/unifield-wm/unifield_tests
-        python -m unittest tests.test_finance_cor_cases.FinanceTestCorCases.test_cor_23
+        python -m unittest tests.test_0110_finance_cor_cases.FinanceTestCorCases.test_cor_23
         """
         push_db = self.hq1c1
         model_aal = 'account.analytic.line'
@@ -1873,7 +1597,7 @@ class FinanceTestCorCases(FinanceTest):
     def test_cor_24(self):
         """
         cd unifield/test-finance/unifield-wm/unifield_tests
-        python -m unittest tests.test_finance_cor_cases.FinanceTestCorCases.test_cor_24
+        python -m unittest tests.test_0110_finance_cor_cases.FinanceTestCorCases.test_cor_24
         """
         push_db = self.hq1c1
         model_aal = 'account.analytic.line'
@@ -2075,7 +1799,7 @@ class FinanceTestCorCases(FinanceTest):
     def test_cor_25(self):
         """
         cd unifield/test-finance/unifield-wm/unifield_tests
-        python -m unittest tests.test_finance_cor_cases.FinanceTestCorCases.test_cor_25
+        python -m unittest tests.test_0110_finance_cor_cases.FinanceTestCorCases.test_cor_25
         """
         push_db = self.hq1c1
         model_aal = 'account.analytic.line'
@@ -2293,7 +2017,7 @@ class FinanceTestCorCases(FinanceTest):
     def test_cor_26(self):
         """
         cd unifield/test-finance/unifield-wm/unifield_tests
-        python -m unittest tests.test_finance_cor_cases.FinanceTestCorCases.test_cor_26
+        python -m unittest tests.test_0110_finance_cor_cases.FinanceTestCorCases.test_cor_26
         """
         # REOPEN period closed in case 25 (if it fails)
         self.period_reopen(self.hq1c1, 'm', 1)
