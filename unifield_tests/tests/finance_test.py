@@ -64,6 +64,9 @@ class FinanceTest(UnifieldTest):
         '''
         super(FinanceTest, self).__init__(*args, **kwargs)
 
+        self._instance_names = [
+            n for n in self.db if not n.endswith('SYNC_SERVER') ]
+
     def _hook_db_process(self, name, database):
         '''
         Check that finance data are loaded into the given database

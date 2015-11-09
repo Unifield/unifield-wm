@@ -420,6 +420,16 @@ class UnifieldTest(unittest.TestCase):
             )
         return False
 
+    def get_instances_dbs(self):
+        """
+        get instances dbs (all dbs except sync server)
+        :rtype: list
+        """
+        return [ self.db[n] for n in self.db if not n.endswith('SYNC_SERVER') ]
+
+    def get_db(self, name):
+        return self.db.get(name)
+
     def get_db_name_from_suffix(self, suffix):
         return self._db_prefix + suffix
 
