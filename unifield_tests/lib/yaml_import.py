@@ -104,6 +104,9 @@ class UnifieldYamlInterpreter(YamlInterpreter):
         Use the good cursor to have the record created in the good DB
         """
         record, fields = node.items()[0]
+        if record.model == 'automatic.test.key.value':
+            # self.cr <=> sync
+            return super(UnifieldYamlInterpreter, self).process_record(node)
 
         # Use the good cursor to have the record created in the good DB
         if record.db:

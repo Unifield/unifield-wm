@@ -161,19 +161,19 @@
 -
   Map HT101 (HT101 in COR TEST CASES) to my COST CENTER
 -
- !record {model: automatic.test.key.value, id: test_0110_map_ht101, db: sync}:
+ !record {model: automatic.test.key.value, id: test_0110_map_ht101}:
    key: test_0110.HT101
    val: HT101
 -
   Map HT111 (HT111 in COR TEST CASES) to my COST CENTER
 -
- !record {model: automatic.test.key.value, id: test_0110_map_ht111, db: sync}:
+ !record {model: automatic.test.key.value, id: test_0110_map_ht111}:
    key: test_0110.HT111
    val: HT111
 -
   Map HT111 (HT121 in COR TEST CASES) to my COST CENTER
 -
- !record {model: automatic.test.key.value, id: test_0110_map_ht121, db: sync}:
+ !record {model: automatic.test.key.value, id: test_0110_map_ht121}:
    key: test_0110.HT121
    val: HT121
 -

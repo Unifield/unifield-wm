@@ -882,16 +882,13 @@ class UnifieldTest(unittest.TestCase):
 
         return distrib_id
 
-    def get_key_val(self, cr, uid, key_or_yaml_record_id, default=None,
-            context=None):
+    def get_key_val(self, cr, uid, key, default=None, context=None):
         """
         get val from key/val sync store by yaml record id or key
         """
         if isinstance(key_or_yaml_record_id, (int, long, )):
-            key_or_id = self.get_record(self.sync, key_or_yaml_record_id)
-        else:
-            key_or_id = key_or_yaml_record_id
-        return self.sync.get('automatic.test.key.value').get_val(key_or_id,
+            raise UnifieldTestException('invalid key')
+        return self.sync.get('automatic.test.key.value').get_val(key,
             default=default, context=context)
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
