@@ -159,3 +159,21 @@
        funded: True
        total_project: True
 -
+  Map HT101 (HT101 in COR TEST CASES) to my COST CENTER
+-
+ !record {model: automatic.test.key.value, id: test_0110_map_ht101, db: sync}:
+   key: test_0110.HT101
+   val: HT101
+-
+  Map HT111 (HT111 in COR TEST CASES) to my COST CENTER
+-
+ !record {model: automatic.test.key.value, id: test_0110_map_ht111, db: sync}:
+   key: test_0110.HT111
+   val: HT111
+-
+  Map HT111 (HT121 in COR TEST CASES) to my COST CENTER
+-
+ !record {model: automatic.test.key.value, id: test_0110_map_ht121, db: sync}:
+   key: test_0110.HT121
+   val: HT121
+-

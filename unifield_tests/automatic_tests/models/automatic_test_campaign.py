@@ -148,6 +148,7 @@ class automatic_test_campaign(osv.osv):
 
         if context is None:
             context = {}
+        context['automatic_test'] = True
 
         if isinstance(ids, (int, long)):
             ids = [ids]
