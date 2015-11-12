@@ -416,7 +416,7 @@ class FinanceTestCorCases(FinanceTest):
         if reg_id:
             account = '60010'
             cc = self.map_vals['ht101']
-            new_cc = self.get_record_id_from_sdref(db,
+            new_cc = self.get_aa_code_from_sdref(db,
                 'unifield_tests_data_test_0110_cc_ht120')
 
             regl_id, distrib_id, ji_id = self.register_create_line(
@@ -456,7 +456,7 @@ class FinanceTestCorCases(FinanceTest):
             account = '60010'
             ht_101 = self.map_vals['ht101']
             fp = 'PF'
-            new_fp = self.get_record_id_from_sdref(db,
+            new_fp = self.get_aa_code_from_sdref(db,
                 'unifield_tests_data_test_0110_fp1')
 
             regl_id, distrib_id, ji_id = self.register_create_line(
@@ -541,7 +541,7 @@ class FinanceTestCorCases(FinanceTest):
         if reg_id:
             account = '60010'
             ht101 = self.map_vals['ht101']
-            ht120 = self.get_record_id_from_sdref(db,
+            ht120 = self.get_aa_code_from_sdref(db,
                 'unifield_tests_data_test_0110_cc_ht120')
 
             ad = [
@@ -609,7 +609,7 @@ class FinanceTestCorCases(FinanceTest):
             account = '60010'
             new_account = '60030'
             ht101 = self.map_vals['ht101']
-            ht120 = self.get_record_id_from_sdref(db,
+            ht120 = self.get_aa_code_from_sdref(db,
                 'unifield_tests_data_test_0110_cc_ht120')
 
             ad = [
@@ -659,12 +659,14 @@ class FinanceTestCorCases(FinanceTest):
             account = '60010'
             new_account = '13310'
             ht101 = self.map_vals['ht101']
+            fp1 = self.get_aa_code_from_sdref(db,
+                'unifield_tests_data_test_0110_cc_fp1')
 
             ad = [
                 (10., 'OPS', ht101, 'PF'),
                 (90., 'OPS', ht101, 'FP1'),
             ]
-            self.analytic_distribution_set_fp_account_dest(db, 'FP1', account,
+            self.analytic_distribution_set_fp_account_dest(db, fp1, account,
                 'OPS')
 
             regl_id, distrib_id, ji_id = self.register_create_line(
@@ -739,9 +741,9 @@ class FinanceTestCorCases(FinanceTest):
             account = '13300'
             new_account = '61000'
             ht101 = self.map_vals['ht101']
-            ht120 = self.get_record_id_from_sdref(db,
+            ht120 = self.get_aa_code_from_sdref(db,
                 'unifield_tests_data_test_0110_cc_ht120')
-            fp1 = self.get_record_id_from_sdref(db,
+            fp1 = self.get_aa_code_from_sdref(db,
                 'unifield_tests_data_test_0110_fp1')
 
             regl_id, distrib_id, ji_id = self.register_create_line(
@@ -785,10 +787,10 @@ class FinanceTestCorCases(FinanceTest):
         aal_obj = db.get('account.analytic.line')
 
         ht101 = self.map_vals['ht101']
-        ht120 = self.get_record_id_from_sdref(db,
-            'unifield_tests_data_test_0110_cc_ht120')
-        fp1 = self.get_record_id_from_sdref(db,
-                'unifield_tests_data_test_0110_fp1')
+        ht120 = self.get_aa_code_from_sdref(db,
+            'unifield_tests_data_test_0110_ht120')
+        fp1 = self.get_aa_code_from_sdref(db,
+            'unifield_tests_data_test_0110_fp1')
 
         ad=[
             (40., 'NAT', ht101, 'PF'),
@@ -882,7 +884,7 @@ class FinanceTestCorCases(FinanceTest):
 
         invoice_lines_accounts = [ '60010', '60020', '60030', ]
         ht101 = self.map_vals['ht101']
-        ht120 = self.get_record_id_from_sdref(db,
+        ht120 = self.get_aa_code_from_sdref(db,
             'unifield_tests_data_test_0110_cc_ht120')
 
         ad = [
@@ -950,11 +952,11 @@ class FinanceTestCorCases(FinanceTest):
         db = self.hq1c1
 
         ht101 = self.map_vals['ht101']
-        ht120 = self.get_record_id_from_sdref(db,
+        ht120 = self.get_aa_code_from_sdref(db,
             'unifield_tests_data_test_0110_cc_ht120')
-        fp1 = self.get_record_id_from_sdref(db,
+        fp1 = self.get_aa_code_from_sdref(db,
             'unifield_tests_data_test_0110_fp1')
-        fp2 = self.get_record_id_from_sdref(db,
+        fp2 = self.get_aa_code_from_sdref(db,
             'unifield_tests_data_test_0110_fp2')
 
         # REOPEN period closed in case 12 (if it fails)
@@ -1035,6 +1037,8 @@ class FinanceTestCorCases(FinanceTest):
             (70., 'OPS', ht120, fp2),
             (30., 'OPS', ht101, fp2),
         ]
+        self.analytic_distribution_set_fp_account_dest(db, fp1, new_account3,
+            'OPS')
         self.analytic_distribution_set_fp_account_dest(db, fp2, new_account3,
             'OPS')
 

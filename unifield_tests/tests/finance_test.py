@@ -1853,4 +1853,9 @@ class FinanceTest(UnifieldTest):
                 'date', 'document_date', ]
         )
 
+    def get_aa_code_from_sdref(self, db, sdref):
+        """ get analytic account code from sdref """
+        return self.get_rec_name_from_sdref(db, sdref,
+            'account.analytic.account', name='code')
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

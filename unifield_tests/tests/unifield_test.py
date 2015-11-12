@@ -563,6 +563,19 @@ class UnifieldTest(unittest.TestCase):
             return False
         return db.get('ir.model.data').browse(ids[0]).res_id
 
+    def get_rec_name_from_sdref(self, db, sdref, model_name, name='name'):
+        """
+        get rec name from sdref
+        :param name: name of the field to use as rec_name ('name', 'code', ...)
+        :rtype: str/False
+        """
+        id = self.get_record_id_from_sdref(db, sdref)
+        if id:
+            rec = db.get(model_name).browse(id)
+            if rec and hasattr(rec, name):
+                return getattr(rec, name)
+        return False
+
     def get_record_sdref_from_id(self, model, db, id):
         """
         :param model: target model
