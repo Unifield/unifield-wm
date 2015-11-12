@@ -365,7 +365,6 @@ class FinanceTestCorCases(FinanceTest):
                 check_sequence_number=True
             )
 
-    '''
     def test_cor_02(self):
         """
         cd unifield/test-finance/unifield-wm/unifield_tests
@@ -384,7 +383,7 @@ class FinanceTestCorCases(FinanceTest):
             regl_id, distrib_id, ji_id = self.register_create_line(
                 db, reg_id,
                 account, self.get_random_amount(True),
-                ad_breakdown_data=[(100., dest, 'HT101', 'PF'), ],
+                ad_breakdown_data=[(100., dest, self.map_vals['ht101'], 'PF') ],
                 date=False, document_date=False,
                 do_hard_post=True,
                 tag="CT_02"
@@ -399,7 +398,7 @@ class FinanceTestCorCases(FinanceTest):
 
             self.check_ji_correction(db, ji_id,
                 account, new_account_code=False,
-                expected_ad=[(100., new_dest, 'HT101', 'PF'), ],
+                expected_ad=[(100., new_dest, self.map_vals['ht101'], 'PF'), ],
                 expected_ad_rev=False,
                 expected_ad_cor=False,
             )
@@ -416,8 +415,9 @@ class FinanceTestCorCases(FinanceTest):
         reg_id = self._register_get(db, browse=False)
         if reg_id:
             account = '60010'
-            cc = 'HT101'
-            new_cc = 'HT120'
+            cc = self.map_vals['ht101']
+            new_cc = self.get_record_id_from_sdref(db,
+                'unifield_tests_data.test_0110_cc_ht120')
 
             regl_id, distrib_id, ji_id = self.register_create_line(
                 db, reg_id,
@@ -442,6 +442,7 @@ class FinanceTestCorCases(FinanceTest):
                 expected_ad_cor=False,
             )
 
+    '''
     def test_cor_04(self):
         """
         cd unifield/test-finance/unifield-wm/unifield_tests

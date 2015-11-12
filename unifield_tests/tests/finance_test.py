@@ -136,10 +136,15 @@ class FinanceTest(UnifieldTest):
         )
         return ids
 
-    def get_account_from_code(self, db, code, is_analytic=False):
+    def get_account_from_code(self, db, code_or_id, is_analytic=False):
+        """
+        get account by code or by id wrapper
+        """
+        if isinstance(code_or_id, (int, long, )):
+            return code_or_id
         model = 'account.analytic.account' if is_analytic \
             else 'account.account'
-        ids = db.get(model).search([('code', '=', code)])
+        ids = db.get(model).search([('code', '=', code_or_id)])
         return ids and ids[0] or False
 
     def get_account_code(self, db, id, is_analytic=False):
@@ -571,28 +576,34 @@ class FinanceTest(UnifieldTest):
         distrib_id = ad_obj.create({'name': name})
 
         for purcent, dest, cc, fp in breakdown_data:
-            dest_id = aaa_obj.search([
-                ('category', '=', 'DEST'),
-                ('type', '=', 'normal'),
-                ('code', '=', dest),
-            ])
-            self.assert_(
-                dest_id != False,
-                'no destination found %s' % (dest, )
-            )
-            dest_id = dest_id[0]
-
-            if cc:
-                cost_center_id = aaa_obj.search([
-                    ('category', '=', 'OC'),
+            if isinstance(dest, (int, long, )):
+                dest_id = dest
+            else:
+                dest_id = aaa_obj.search([
+                    ('category', '=', 'DEST'),
                     ('type', '=', 'normal'),
-                    ('code', '=', cc),
+                    ('code', '=', dest),
                 ])
                 self.assert_(
-                    cost_center_id != False,
-                    'no cost center found %s' % (cc, )
+                    dest_id != False,
+                    'no destination found %s' % (dest, )
                 )
-                cost_center_id = cost_center_id[0]
+                dest_id = dest_id[0]
+
+            if cc:
+                if isinstance(cc, (int, long, )):
+                    cost_center_id = cc
+                else:
+                    cost_center_id = aaa_obj.search([
+                        ('category', '=', 'OC'),
+                        ('type', '=', 'normal'),
+                        ('code', '=', cc),
+                    ])
+                    self.assert_(
+                        cost_center_id != False,
+                        'no cost center found %s' % (cc, )
+                    )
+                    cost_center_id = cost_center_id[0]
             else:
                 cost_center_id = company.instance_id.top_cost_center_id \
                     and company.instance_id.top_cost_center_id.id or False
@@ -602,16 +613,19 @@ class FinanceTest(UnifieldTest):
                         company.name or '', )
                 )
             if fp:
-                funding_pool_id = aaa_obj.search([
-                    ('category', '=', 'FUNDING'),
-                    ('type', '=', 'normal'),
-                    ('code', '=', fp),
-                ])
-                self.assert_(
-                    funding_pool_id != False,
-                    'no funding pool found %s' % (fp, )
-                )
-                funding_pool_id = funding_pool_id[0]
+                if isinstance(fp, (int, long, )):
+                    funding_pool_id = fp
+                else:
+                    funding_pool_id = aaa_obj.search([
+                        ('category', '=', 'FUNDING'),
+                        ('type', '=', 'normal'),
+                        ('code', '=', fp),
+                    ])
+                    self.assert_(
+                        funding_pool_id != False,
+                        'no funding pool found %s' % (fp, )
+                    )
+                    funding_pool_id = funding_pool_id[0]
             else:
                 funding_pool_id = funding_pool_pf_id  # default PF
 
