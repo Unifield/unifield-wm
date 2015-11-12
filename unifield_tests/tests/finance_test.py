@@ -501,6 +501,7 @@ class FinanceTest(UnifieldTest):
         fp_name, account_code, dest_code):
         """
         add account/dest tuple to FP
+        for each fp/account/dest: can be the code or directly the id
         """
         if fp_name and fp_name == 'PF':
             return  # nothing to do
