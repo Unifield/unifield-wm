@@ -122,6 +122,11 @@ class SyncCancelINTest(ResourcingTest):
         })
         self.c_sol_obj.create(line_values)
 
+        self.add_test_info(self.hq1c1, "The %s %s has been created with two lines." % (
+            self.pr and 'IR' or 'FO',
+            self.c_so_obj.read(self.c_so_id, ['name'])['name']
+        ))
+
         # Validate the sale order
         if self.procurement_request:
             self.hq1c1.exec_workflow('sale.order', 'procurement_validate', self.c_so_id)
@@ -160,6 +165,9 @@ class SyncCancelINTest(ResourcingTest):
         for po_line in self.c_pol_obj.read(po_line_ids, ['order_id']):
             po_ids.add(po_line['order_id'][0])
 
+        for po in self.c_po_obj.browse(list(po_ids)):
+            self.add_test_info(self.hq1c1, "The %s has been created by the Auto POs creation" % po.name)
+
         self.c_po_id = po_ids and list(po_ids)[0] or False
         self.c_so_name = self.c_so_obj.read(self.c_so_id, ['name'])['name']
 
@@ -187,6 +195,8 @@ class SyncCancelINTest(ResourcingTest):
         for move_in in self.c_move_in_obj.browse(move_in_ids):
             self.c_move_in_obj.write([move_in.id], {'quantity': 2})
         self.c_proc_in_obj.do_incoming_shipment([proc_id])
+        for c_in in self.c_pick_obj.read(self.c_in_ids, ['name']):
+            self.add_test_info(self.hq1c1, "The IN %s has been partially processed" % c_in['name'])
 
         # Cancel the IN
         wiz_id = self.c_enter_reason_obj.create({
@@ -197,6 +207,10 @@ class SyncCancelINTest(ResourcingTest):
             'active_ids': self.c_in_ids,
         }
         self.c_enter_reason_obj.do_cancel([wiz_id], ctx)
+        for c_in in self.c_pick_obj.browse(self.c_in_ids):
+            self.add_test_info(self.hq1c1, "The IN %s (BO of %s) has been canceled" % (
+                c_in.name, c_in.backorder_id.name,
+            ))
 
     def test_sync_then_cancel(self):
         self.launch_sync()
@@ -209,9 +223,20 @@ class SyncCancelINTest(ResourcingTest):
         ])
         conv_res = self.c_pick_obj.convert_to_standard(self.c_out_ids)
         out_id = conv_res.get('res_id')
+
+        for pick in self.c_pick_obj.read(self.c_out_ids, ['name']):
+            self.add_test_info(self.hq1c1, "The Picking ticket %s has been convert to OUT %s" % (
+                pick['name'],
+                self.c_pick_obj.read(out_id, ['name'])['name'],
+            ))
+
         proc_res = self.c_pick_obj.action_process([out_id])
         self.c_proc_out_obj.copy_all([proc_res.get('res_id')])
         self.c_proc_out_obj.do_partial([proc_res.get('res_id')])
+
+        self.add_test_info(self.hq1c1, "The OUT %s has been processed" % (
+            self.c_pick_obj.read(out_id, ['name'])['name'],
+        ))
 
         self.launch_sync()
 
@@ -247,9 +272,18 @@ class SyncCancelINTest(ResourcingTest):
         ])
         conv_res = self.c_pick_obj.convert_to_standard(self.c_out_ids)
         out_id = conv_res.get('res_id')
+        for pick in self.c_pick_obj.read(self.c_out_ids, ['name']):
+            self.add_test_info(self.hq1c1, "The Picking ticket %s has been convert to OUT %s" % (
+                pick['name'],
+                self.c_pick_obj.read(out_id, ['name'])['name'],
+            ))
         proc_res = self.c_pick_obj.action_process([out_id])
         self.c_proc_out_obj.copy_all([proc_res.get('res_id')])
         self.c_proc_out_obj.do_partial([proc_res.get('res_id')])
+
+        self.add_test_info(self.hq1c1, "The OUT %s has been processed" % (
+            self.c_pick_obj.read(out_id, ['name'])['name'],
+        ))
 
         self.launch_sync()
 
@@ -285,6 +319,11 @@ class SyncCancelINTest(ResourcingTest):
         ])
         conv_res = self.c_pick_obj.convert_to_standard(self.c_out_ids)
         out_id = conv_res.get('res_id')
+        for pick in self.c_pick_obj.read(self.c_out_ids, ['name']):
+            self.add_test_info(self.hq1c1, "The Picking ticket %s has been convert to OUT %s" % (
+                pick['name'],
+                self.c_pick_obj.read(out_id, ['name'])['name'],
+            ))
         proc_res = self.c_pick_obj.action_process([out_id])
         out_move_ids = self.c_proc_out_move_obj.search([
             ('wizard_id', '=', proc_res.get('res_id')),
@@ -292,6 +331,10 @@ class SyncCancelINTest(ResourcingTest):
         for out_move in self.c_proc_out_move_obj.browse(out_move_ids):
             self.c_proc_out_move_obj.write(out_move.id, {'quantity': 1})
         self.c_proc_out_obj.do_partial([proc_res.get('res_id')])
+
+        self.add_test_info(self.hq1c1, "The OUT %s has been processed" % (
+            self.c_pick_obj.read(out_id, ['name'])['name'],
+        ))
 
         self.launch_sync()
 
@@ -352,9 +395,18 @@ class SyncCancelINTest(ResourcingTest):
         ])
         conv_res = self.c_pick_obj.convert_to_standard(self.c_out_ids)
         out_id = conv_res.get('res_id')
+        for pick in self.c_pick_obj.read(self.c_out_ids, ['name']):
+            self.add_test_info(self.hq1c1, "The Picking ticket %s has been convert to OUT %s" % (
+                pick['name'],
+                self.c_pick_obj.read(out_id, ['name'])['name'],
+            ))
         proc_res = self.c_pick_obj.action_process([out_id])
         self.c_proc_out_obj.copy_all([proc_res.get('res_id')])
         self.c_proc_out_obj.do_partial([proc_res.get('res_id')])
+
+        self.add_test_info(self.hq1c1, "The OUT %s has been processed" % (
+            self.c_pick_obj.read(out_id, ['name'])['name'],
+        ))
 
         self.launch_sync()
 

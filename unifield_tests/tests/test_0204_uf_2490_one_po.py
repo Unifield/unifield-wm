@@ -52,6 +52,10 @@ class UF2490OnePO(ResourcingTest):
         )
         po_id = self.po_obj.create(po_values)
 
+        self.add_test_info(self.hq1c1, "The PO %s has been created" % (
+            self.po_obj.read(po_id, ['name'])['name'],
+        ))
+
         return po_id
 
     def create_po_line(self, order_id):
@@ -89,6 +93,10 @@ class UF2490OnePO(ResourcingTest):
         :return: ID of the canceled PO
         """
         self.po_obj.purchase_cancel(order_id)
+
+        self.add_test_info(self.hq1c1, "The PO %s has been canceled" % (
+            self.po_obj.read(order_id, ['name'])['name'],
+        ))
 
         # Check state of the PO
         po_state = self.po_obj.read(order_id, ['state'])['state']
