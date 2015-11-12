@@ -198,6 +198,7 @@ class UnifieldTest(unittest.TestCase):
         self.uid = kwargs.pop('uid', None)
         self.cid = kwargs.pop('cid', None)
         self.update_module = kwargs.pop('update_module', False)
+        self.method_id = False
 
         self.unifield_test = True
 
@@ -285,7 +286,7 @@ class UnifieldTest(unittest.TestCase):
             atm_obj = self.sync.get('automatic.test.method')
             exist_info = atm_obj.read(self.method_id, ['information'])['information']
             if exist_info:
-                new_info = exist_info + '\n' + mg
+                new_info = exist_info + '\n' + msg
             else:
                 new_info = msg
             atm_obj.write([self.method_id], {'information': new_info})

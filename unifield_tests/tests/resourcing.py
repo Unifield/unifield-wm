@@ -210,6 +210,12 @@ No split of FO found !""")
         order_values = self._get_order_values(db, data_prefix=data_prefix)
 
         order_id = self.order_obj.create(order_values)
+        order_name = self.order_obj.read(order_id, ['name'])['name']
+
+        self.add_test_info(db, "The %s %s has been created" % (
+            self.pr and 'Internal request' or 'Field order',
+            order_name,
+        ))
 
         # Create order lines
         # First line
@@ -221,28 +227,48 @@ No split of FO found !""")
             'type': 'make_to_order',
             'price_unit': 12.24,
         }
-        self.order_line_obj.create(line_values)
+        line_id = self.order_line_obj.create(line_values)
+        self.add_test_info(db, "The %s line %s has been added to %s" % (
+            self.pr and 'IR' or 'FO',
+            self.order_line_obj.read(line_id, ['line_number'])['line_number'],
+            order_name,
+        ))
 
         # Second line
         line_values.update({
             'product_id': prod_log2_id,
             'product_uom_qty': 20.0,
         })
-        self.order_line_obj.create(line_values)
+        line_id = self.order_line_obj.create(line_values)
+        self.add_test_info(db, "The %s line %s has been added to %s" % (
+            self.pr and 'IR' or 'FO',
+            self.order_line_obj.read(line_id, ['line_number'])['line_number'],
+            order_name,
+        ))
 
         # Third line
         line_values.update({
             'product_id': prod_med1_id,
             'product_uom_qty': 30.0,
         })
-        self.order_line_obj.create(line_values)
+        line_id = self.order_line_obj.create(line_values)
+        self.add_test_info(db, "The %s line %s has been added to %s" % (
+            self.pr and 'IR' or 'FO',
+            self.order_line_obj.read(line_id, ['line_number'])['line_number'],
+            order_name,
+        ))
 
         # Fourth line
         line_values.update({
             'product_id': prod_med2_id,
             'product_uom_qty': 40.0,
         })
-        self.order_line_obj.create(line_values)
+        line_id = self.order_line_obj.create(line_values)
+        self.add_test_info(db, "The %s line %s has been added to %s" % (
+            self.pr and 'IR' or 'FO',
+            self.order_line_obj.read(line_id, ['line_number'])['line_number'],
+            order_name,
+        ))
 
         if self.pr:
             # Validate the Internal Request
@@ -274,6 +300,9 @@ No split of FO found !""")
         })
         self.order_line_obj.confirmLine(line_ids)
 
+        order_name = self.order_obj.read(order_id, ['name'])['name']
+        self.add_test_info(db, "All lines of %s have been sourced on PO to external supplier" % order_name)
+
         # Run the scheduler
         new_order_id = self.run_auto_pos_creation(db, order_to_check=order_id)
 
@@ -297,6 +326,9 @@ No split of FO found !""")
 
         for po_line in self.pol_obj.read(po_line_ids, ['order_id']):
             po_ids.add(po_line['order_id'][0])
+
+        for po in self.po_obj.browse(list(po_ids)):
+            self.add_test_info(db, "The %s has been created by the Auto POs creation" % po.name)
 
         return new_order_id, line_ids, list(po_ids), po_line_ids
 
@@ -329,9 +361,11 @@ No split of FO found !""")
 The state of the generated PO is %s - Should be 'draft'""" % po_state)
             # Validate the PO
             db.exec_workflow('purchase.order', 'purchase_confirm', po_id)
-            po_state = po_obj.browse(po_id).state
+            po = po_obj.browse(po_id)
+            po_state = po.state
             self.assert_(po_state == 'confirmed', msg="""
 The state of the generated PO is %s - Should be 'confirmed'""" % po_state)
+            self.add_test_info(db, "The %s has been validated" % po.name)
 
         return po_ids
 
@@ -368,11 +402,14 @@ The state of the generated PO is %s - Should be 'confirmed'""" % po_state)
             """
             3/ Check if all PO are now in 'approved' state
             """
-            po_state = po_obj.read(po_id, ['state'])['state']
+            po_rd = po_obj.read(po_id, ['state', 'name'])
+            po_state = po_rd['state']
+            po_name = po_rd['name']
             self.assert_(
                 po_state == 'approved',
                 "The state of the generated PO is %s - Should be 'approved'" % po_state,
             )
+            self.add_test_info(db, "The %s has been confirmed" % po_name)
 
         return po_ids
 

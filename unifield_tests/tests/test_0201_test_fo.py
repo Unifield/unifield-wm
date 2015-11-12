@@ -64,9 +64,6 @@ class FOTest(UnifieldTest):
             'analytic_distribution_id': distrib_id,
         })
         order_id = self.fo_obj.create(order_values)
-        self.add_test_info(self.hq1c1, "The FO %s has been created." % (
-            self.fo_obj.read(order_id, ['name'])['name'],
-        ))
 
         # Create order lines
         prod_log1_id = self.get_record(self.hq1c1, 'test_0201_prod_log_1')
@@ -92,6 +89,10 @@ class FOTest(UnifieldTest):
             'price_unit': 0.0,
         })
         self.fol_obj.create(line_values)
+
+        self.add_test_info(self.hq1c1, "The FO %s has been created with two lines." % (
+            self.fo_obj.read(order_id, ['name'])['name'],
+        ))
 
         try:
             self.hq1c1.exec_workflow('sale.order', 'order_validated', order_id)

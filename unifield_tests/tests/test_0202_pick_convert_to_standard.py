@@ -109,8 +109,16 @@ class PickConvertToStandardTest(ResourcingTest):
         })
         self.c_sol_obj.create(line_values)
 
+        self.add_test_info(self.hq1c1, "The FO %s has been created with two lines." % (
+            self.c_so_obj.read(self.c_so_id, ['name'])['name'],
+        ))
+
         # Validate the sale order
         self.hq1c1.exec_workflow('sale.order', 'order_validated', self.c_so_id)
+
+        self.add_test_info(self.hq1c1, "The FO %s has been validated." % (
+            self.c_so_obj.read(self.c_so_id, ['name'])['name'],
+        ))
 
         # Source all lines on a Purchase Order to test_0202_ext_supplier
         line_ids = self.c_sol_obj.search([('order_id', '=', self.c_so_id)])
@@ -144,6 +152,9 @@ class PickConvertToStandardTest(ResourcingTest):
         for po_line in self.c_pol_obj.read(po_line_ids, ['order_id']):
             po_ids.add(po_line['order_id'][0])
 
+        for po in self.c_po_obj.browse(list(po_ids)):
+            self.add_test_info(self.hq1c1, "The %s has been created by the Auto POs creation" % po.name)
+
         self.c_po_id = po_ids and list(po_ids)[0] or False
         self.c_so_name = self.c_so_obj.read(self.c_so_id, ['name'])['name']
 
@@ -171,6 +182,8 @@ class PickConvertToStandardTest(ResourcingTest):
 
         for pick in pick_ids:
             conv_res = self.c_pick_obj.convert_to_standard([pick])
+            self.add_test_info(self.hq1c1, "The %s has been converted to OUT" %
+                self.c_pick_obj.read(pick, ['name'])['name'])
             out_id = conv_res.get('res_id')
             self.process_out([out_id])
 
@@ -185,6 +198,8 @@ class PickConvertToStandardTest(ResourcingTest):
             proc_res = self.c_pick_obj.action_process([out_id])
             proc_out_obj.copy_all([proc_res.get('res_id')])
             proc_out_obj.do_partial([proc_res.get('res_id')])
+            self.add_test_info(self.hq1c1, "The %s has been processed" %
+                self.c_pick_obj.read(out_id, ['name'])['name'])
 
     def create_pick(self, pick_ids, full=False):
         proc_obj = self.hq1c1.get('create.picking.processor')
@@ -202,6 +217,8 @@ class PickConvertToStandardTest(ResourcingTest):
                 proc_move_qty = proc_move_obj.browse(proc_move_ids[0]).ordered_quantity
                 proc_move_obj.write([proc_move_ids[0]], {'quantity': proc_move_qty})
             proc_obj.do_create_picking([proc_res.get('res_id')])
+            self.add_test_info(self.hq1c1, "The %s has been created" %
+                self.c_pick_obj.read(pick_id, ['name'])['name'])
 
         self.c_out_ids = self.c_pick_obj.search([('sale_id', '=', self.c_so_id), ('type', '=', 'out')])
 
@@ -221,6 +238,8 @@ class PickConvertToStandardTest(ResourcingTest):
                 proc_move_qty = proc_move_obj.browse(proc_move_ids[0]).ordered_quantity
                 proc_move_obj.write([proc_move_ids[0]], {'quantity': proc_move_qty})
             proc_obj.do_validate_picking([proc_res.get('res_id')])
+            self.add_test_info(self.hq1c1, "The %s has been validated" %
+                self.c_pick_obj.read(pick_id, ['name'])['name'])
 
     def do_ppl(self, ppl_ids):
         proc_obj = self.hq1c1.get('ppl.processor')
@@ -237,6 +256,8 @@ class PickConvertToStandardTest(ResourcingTest):
             fam_ids = proc_fam_obj.search([('wizard_id', '=', proc_res2.get('res_id'))])
             proc_fam_obj.write(fam_ids, {'weight': 1.00})
             ship_id = proc_obj.do_ppl_step2([proc_res2.get('res_id')]).get('res_id')
+            self.add_test_info(self.hq1c1, "The %s has been processed" %
+                self.c_pick_obj.read(ppl_id, ['name'])['name'])
 
         return ship_id
 
@@ -250,6 +271,8 @@ class PickConvertToStandardTest(ResourcingTest):
         for ship_id in ship_ids:
             proc_res = self.c_ship_obj.create_shipment([ship_id])
             v_ship_id = proc_obj.do_create_shipment([proc_res.get('res_id')]).get('res_id')
+            self.add_test_info(self.hq1c1, "The %s has been created" %
+                self.c_ship_obj.read(v_ship_id, ['name'])['name'])
 
         return v_ship_id
 
@@ -547,6 +570,8 @@ class PickConvertToStandardPartialTest(PickConvertToStandardTest):
                     proc_move_qty = proc_move_obj.browse(proc_move_id).ordered_quantity
                     proc_move_obj.write([proc_move_id], {'quantity': proc_move_qty-1})
             proc_obj.do_create_picking([proc_res.get('res_id')])
+            self.add_test_info(self.hq1c1, "The %s has been created" %
+                self.c_pick_obj.read(pick_id, ['name'])['name'])
 
         self.c_out_ids = self.c_pick_obj.search([('sale_id', '=', self.c_so_id), ('type', '=', 'out')])
 
@@ -567,6 +592,8 @@ class PickConvertToStandardPartialTest(PickConvertToStandardTest):
                     proc_move_qty = proc_move_obj.browse(proc_move_id).ordered_quantity
                     proc_move_obj.write([proc_move_id], {'quantity': proc_move_qty-1})
             proc_obj.do_validate_picking([proc_res.get('res_id')])
+            self.add_test_info(self.hq1c1, "The %s has been validated" %
+                self.c_pick_obj.read(pick_id, ['name'])['name'])
 
     def check_draft_pick_move_state(self, draft_picks):
         move_ids = self.c_move_obj.search([('picking_id', 'in', draft_picks)])
