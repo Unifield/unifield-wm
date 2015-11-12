@@ -892,6 +892,9 @@ The parameter '%s' should be an browse_record instance !""") % (method, self._na
         self.analytic_distribution_checks(cr, uid, order_brw_list)
 
         for order in order_brw_list:
+            line_ids = []
+            for line in order.order_line:
+                line_ids.append(line.id)
             no_price_lines = []
             if order.order_type == 'regular':
                 cr.execute('SELECT line_number FROM sale_order_line WHERE (price_unit*product_uom_qty < 0.01 OR price_unit = 0.00) AND order_id = %s', (order.id,))
@@ -928,6 +931,9 @@ The parameter '%s' should be an browse_record instance !""") % (method, self._na
                     _('The currency used on the order is not compatible with the supplier. '\
 'Please change the currency to choose a compatible currency.'),
                 )
+
+            if not order.procurement_request:
+                line_obj.update_supplier_on_line(cr, uid, line_ids, context=context)
 
         self.write(cr, uid, ids, {
             'state': 'validated',
@@ -2307,6 +2313,26 @@ class sale_order_line(osv.osv):
                 res = self.pool.get('sale.order.unlink.wizard').ask_unlink(cr, uid, order['id'], context=context)
 
         return res
+
+    def unlink(self, cr, uid, ids, context=None):
+        """
+        When delete a FO/IR line, check if the FO/IR must be confirmed
+        """
+        lines_to_check = []
+        for line in self.read(cr, uid, ids, ['order_id'], context=context):
+            ltc_ids = self.search(cr, uid, [
+                ('order_id', '=', line['order_id'][0]),
+                ('id', '!=', line['id']),
+            ], limit=1, context=context)
+            if ltc_ids[0] not in lines_to_check:
+                lines_to_check.append(ltc_ids[0])
+
+        res = super(sale_order_line, self).unlink(cr, uid, ids, context=context)
+
+        self.check_confirm_order(cr, uid, lines_to_check, context=context)
+
+        return res
+
 
     def _check_restriction_line(self, cr, uid, ids, context=None):
         '''

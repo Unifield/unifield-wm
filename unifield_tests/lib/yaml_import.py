@@ -24,11 +24,16 @@
 import yaml
 
 import pooler
+#from tools import safe_eval
 
 from tools.yaml_import import YamlInterpreter
 
 
+class UnifieldYamlInterpreterException(Exception):
+    pass
+
 class UnifieldYamlInterpreter(YamlInterpreter):
+    _INCLUDE_HQ2 = False
 
     def __init__(self, cr, module, id_map, mode, filename, noupdate=False):
         """
@@ -44,11 +49,12 @@ class UnifieldYamlInterpreter(YamlInterpreter):
             ('db_to_use', '!=', ''),
 #            ('keyword', '!=', 'sync'),
             ('keyword', 'not in', ['sync',
-                'hq1c2', 'hq1c2p1', 'hq1c2p2',      # Comment this line to get HQ1C2
-                'hq2', 'hq2c1', 'hq2c2', 'hq2c1p1',' hq2c1p2', 'hq2c2p1', 'hq2c2p2',    # Comment this line to get HQ1
+                'hq1c2', 'hq1c2p1', 'hq1c2p2',  # Comment this line to get HQ1C2
             ]),
         ], context=self.context)
         for db_map in db_map_obj.browse(self.cr, self.uid, db_map_ids, context=self.context):
+            if not self._INCLUDE_HQ2 and db_map.keyword.startswith('hq2'):
+                continue  # skip HQ2 tree
             new_cr = pooler.get_db(db_map.db_to_use)
             self.cursors[db_map.keyword] = new_cr
 
@@ -69,7 +75,6 @@ class UnifieldYamlInterpreter(YamlInterpreter):
                 cursor.rollback()
             finally:
                 cursor.close()
-
 
     def process(self, yaml_string):
         """
@@ -99,6 +104,9 @@ class UnifieldYamlInterpreter(YamlInterpreter):
         Use the good cursor to have the record created in the good DB
         """
         record, fields = node.items()[0]
+        if record.model == 'automatic.test.key.value':
+            # self.cr <=> sync
+            return super(UnifieldYamlInterpreter, self).process_record(node)
 
         # Use the good cursor to have the record created in the good DB
         if record.db:
@@ -144,5 +152,69 @@ class UnifieldYamlInterpreter(YamlInterpreter):
             self.cr = old_cr
         else:
             return super(UnifieldYamlInterpreter, self).process_record(node)
+
+    def _eval_field(self, model, field_name, expression):
+        column = False
+        if field_name in model._columns:
+            column = model._columns[field_name]
+        elif field_name in model._inherit_fields:
+            column = model._inherit_fields[field_name][2]
+
+        if column:
+            if column._type == "many2one":
+                if expression[0] == '@':
+                    return self._eval_field_custom_expression(expression[1:])
+            elif column._type == "many2many":
+                ids = []
+                if isinstance(expression, (list, tuple)):
+                    for e in expression:
+                        if e[0] == '@':
+                            id = self._eval_field_custom_expression(e[1:])
+                        else:
+                            id = self.get_id(e)
+                        ids.append(id)
+                else:
+                    ids = self._eval_field_custom_expression(expression[1:],
+                        is_ids=True)
+                return [(6, 0, ids)]
+
+        # default
+        return super(UnifieldYamlInterpreter, self)._eval_field(model,
+            field_name, expression)
+
+    def _eval_field_custom_expression(self, expression, is_ids=False):
+        args = map(lambda e: e.strip(), expression.split(';'))
+        if not args or len(args) < 2:
+            raise UnifieldYamlInterpreterException('invalid expression')
+        method = args[0]
+        model = args[1]
+        args = len(args) > 2 and args[2:] or []
+
+        if method == 'search':
+            return self._eval_field_custom_expression_search(model, args,
+                is_ids=is_ids)
+        return False
+
+    def _eval_field_custom_expression_search(self, model_name, args,
+            is_ids=False):
+        # parse domain str
+        if not args or len(args) != 1:
+            raise UnifieldYamlInterpreterException(
+                '@search;model;domain expected')
+        domain = args[0]
+        if not domain[0] == '[':
+            domain = '[' + domain
+        if not domain[-1] == ']':
+            domain += ']'
+        # TODO use save_eval: issue with save_eval (list of chars obtained)
+        #domain = safe_eval.save_eval(domain)
+        domain = eval(domain)
+
+        # proceed search
+        ids =  pooler.get_pool(self.cr.dbname).get(model_name).search(
+            self.cr, self.uid, domain)
+        if is_ids:
+            return ids and ids or False
+        return ids and ids[0] or False
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

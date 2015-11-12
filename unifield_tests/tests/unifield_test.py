@@ -59,6 +59,9 @@ class UnifieldTest(unittest.TestCase):
     @var category:              category of the test (displayed to end-users in Automated tests)
     @var no_auto:               list of test methods names that must be filtered in Automated tests
     '''
+    # defines
+    _INCLUDE_HQ2 = False
+
     # global variable
     db = {}
     test_data_module_name = 'unifield_tests_data'
@@ -87,14 +90,14 @@ class UnifieldTest(unittest.TestCase):
             'HQ1', #'HQ2',                               # HQs
             'HQ1C1', 'HQ1C2', #'HQ2C1', 'HQ2C2',         # COORDOs
             'HQ1C1P1', 'HQ1C1P2', 'HQ1C2P1', 'HQ1C2P2',  # HQ1 PROJECTs
-#            'HQ2C1P1', 'HQ2C1P2', 'HQ2C2P1', 'HQ2C2P2', # HQ2 PROJECTs
+            'HQ2C1P1', 'HQ2C1P2', 'HQ2C2P1', 'HQ2C2P2', # HQ2 PROJECTs
         ]
         names = [
             'sync',
             'hq1', #'hq2',                               # HQs
             'hq1c1', 'hq1c2', #'hq2c1', 'hq2c2',         # COORDOs
             'hq1c1p1', 'hq1c1p2', 'hq1c2p1', 'hq1c2p2', # HQ1 PROJECTs
-#            'hq2c1p1', 'hq2c1p2', 'hq2c2p1', 'hq2c2p2', # HQ2 PROJECTs
+#           'hq2c1p1', 'hq2c1p2', 'hq2c2p1', 'hq2c2p2', # HQ2 PROJECTs
         ]
 
         # Check Remote warehouse and complete old params
@@ -133,8 +136,9 @@ class UnifieldTest(unittest.TestCase):
         # Create XMLRPCConnections
         for db_tuple in zip(db_suffixes, names):
             db_name = '%s%s' % (db_prefix, db_tuple[0])
+            if not self._INCLUDE_HQ2 and db_name.startswith('hq2'):
+                continue  # skip HQ2 tree
             self._addConnection(db_name, db_tuple[1])
-
 
     def getDBConnectionsFromSyncServer(self):
         """
@@ -156,6 +160,8 @@ class UnifieldTest(unittest.TestCase):
         db_map_obj = self.sync.get('test.db.mapping')
         db_map_ids = db_map_obj.search([('keyword', '!=', 'sync'), ('db_to_use', '!=', '')])
         for db_map in db_map_obj.browse(db_map_ids):
+            if not self._INCLUDE_HQ2 and db_map.keyword.startswith('hq2'):
+                continue  # skip HQ2 tree
             self._addConnection(db_map.db_to_use, db_map.keyword)
 
     def _addConnection(self, db_name, name):
@@ -217,6 +223,7 @@ class UnifieldTest(unittest.TestCase):
                 self.getDBConnectionsFromConfigFile()
             else:
                 self.getDBConnectionsFromSyncServer()
+        self.is_automatic_test = self.cr
 
         # For each database, check that unifield_tests module is loaded
         #+ If not, load it.
@@ -430,6 +437,16 @@ class UnifieldTest(unittest.TestCase):
                     db.colored_name, )
             )
         return False
+
+    def get_instances_dbs(self):
+        """
+        get instances dbs (all dbs except sync server)
+        :rtype: list
+        """
+        return [ self.db[n] for n in self.db if not n.endswith('SYNC_SERVER') ]
+
+    def get_db(self, name):
+        return self.db.get(name)
 
     def get_db_name_from_suffix(self, suffix):
         return self._db_prefix + suffix
@@ -883,5 +900,14 @@ class UnifieldTest(unittest.TestCase):
 
         return distrib_id
 
+    def get_key_val(self, key, default=None, context=None):
+        """
+        get val from key/val sync store, by key
+        """
+        if isinstance(key, (int, long, )):
+            raise UnifieldTestException('invalid key')
+        # default is passed as 'arg' are named parameters are not supported in
+        # oerlib version we use
+        return self.sync.get('automatic.test.key.value').get_val(key, default)
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -26,5 +26,6 @@ import automatic_test_template
 import automatic_test_campaign
 import automatic_test
 import automatic_test_method
+import automatic_test_key_value
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
