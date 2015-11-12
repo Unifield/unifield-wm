@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<openerp>
+    <data>
+
+        <!-- AUTOMATIC TEST METHOD -->
+        <record id="automatic_test_method_tree_view" model="ir.ui.view">
+            <field name="name">automatic.test.method.tree.view</field>
+            <field name="model">automatic.test.method</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Tests" colors="red: state=='error'; green: state=='done'; orange: state=='fail'; grey: state=='skip'; blue: state=='progress'">
+                    <field name="name" />
+                    <field name="start_date" />
+                    <field name="end_date" />
+                    <field name="state" />
+                </tree>
+           </field>
+        </record>
+        <record id="automatic_test_method_form_view" model="ir.ui.view">
+            <field name="name">automatic.test.method.form.view</field>
+            <field name="model">automatic.test.method</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Tests">
+                    <field name="test_id" />
+                    <field name="name" />
+                    <field name="start_date" />
+                    <field name="end_date" />
+                    <field name="state" />
+                    <button name="update" string="Update" icon="gtk-refresgtk-refresh" type="object" colspan="4" />
+                    <newline />
+                    <field colspan="4" name="message" widget="char" />
+                    <notebook colspan="4">
+                        <page string="Information">
+                            <field name="information" colspan="4" nolabel="1" />
+                        </page>
+                        <page string="Traceback">
+                            <field name="traceback" colspan="4" nolabel="1" />
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>

@@ -32,6 +32,7 @@ class automatic_test_method(osv.osv):
         'name': fields.char(
             string='Name',
             size=256,
+            readonly=True,
         ),
         'test_id': fields.many2one(
             'automatic.test',
@@ -76,6 +77,26 @@ class automatic_test_method(osv.osv):
     _defaults = {
         'state': lambda *a: 'not_run',
     }
+
+    def update(self, cr, uid, ids, context=None):
+        """
+        Just return the form view of the first test method
+        """
+        if context is None:
+            context = {}
+
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': self._name,
+            'res_id': ids[0],
+            'view_type': 'form',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': context,
+        }
 
 automatic_test_method()
 
