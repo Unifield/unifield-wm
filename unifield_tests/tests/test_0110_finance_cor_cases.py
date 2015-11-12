@@ -26,6 +26,7 @@
 from __future__ import print_function
 from unifield_test import UnifieldTestException
 from unifield_test import UnifieldTest
+from unifield_test import Dict2Obj
 from finance_test import FinanceTestException
 from finance_test import FinanceTest
 
@@ -139,12 +140,30 @@ class FinanceTestCorCases(FinanceTest):
                 'active': True,
             })
 
-        # load key/val mapping values
-        self.map_vals = {
+        # load key/val mapping values of accounts code
+        # accounts are read from HQ
+        db = self.hq1
+        map = {
+            # existing accounts
             'ht101': self.get_key_val('test_0110.HT101', default='HT101'),
             'ht111': self.get_key_val('test_0110.HT111', default='HT111'),
             'ht121': self.get_key_val('test_0110.HT121', default='HT121'),
+
+            # yaml accounts
+            'ht112': self.get_aa_code_from_sdref(db,
+                'unifield_tests_data_test_0110_cc_ht112'),
+            'ht120': self.get_aa_code_from_sdref(db,
+                'unifield_tests_data_test_0110_cc_ht120'),
+            'ht122': self.get_aa_code_from_sdref(db,
+                'unifield_tests_data_test_0110_cc_ht122'),
+            'ht220': self.get_aa_code_from_sdref(db,
+                'unifield_tests_data_test_0110_cc_ht220'),
+            'fp1': self.get_aa_code_from_sdref(db,
+                'unifield_tests_data_test_0110_fp1'),
+            'fp2': self.get_aa_code_from_sdref(db,
+                'unifield_tests_data_test_0110_fp2'),
         }
+        self.map = Dict2Obj(**map)
 
     def tearDown(self):
         pass
@@ -313,8 +332,7 @@ class FinanceTestCorCases(FinanceTest):
     # -------------------------------------------------------------------------
     # EMPTY case: dataset test flow
     # -------------------------------------------------------------------------
-    '''
-    def test_cor_00(self):
+    '''def test_cor_00(self):
         """
         fake unit test for dataset testing
         cd unifield/test-finance/unifield-wm/unifield_tests
@@ -339,7 +357,7 @@ class FinanceTestCorCases(FinanceTest):
             account = '60010'
             new_account = '60020'
 
-            ad = [(100., 'OPS', self.map_vals['ht101'], 'PF'), ]
+            ad = [(100., 'OPS', self.map.ht101, 'PF'), ]
 
             regl_id, distrib_id, ji_id = self.register_create_line(
                 db, reg_id,
@@ -365,6 +383,7 @@ class FinanceTestCorCases(FinanceTest):
                 check_sequence_number=True
             )
 
+    '''
     def test_cor_02(self):
         """
         cd unifield/test-finance/unifield-wm/unifield_tests
@@ -383,7 +402,7 @@ class FinanceTestCorCases(FinanceTest):
             regl_id, distrib_id, ji_id = self.register_create_line(
                 db, reg_id,
                 account, self.get_random_amount(True),
-                ad_breakdown_data=[(100., dest, self.map_vals['ht101'], 'PF') ],
+                ad_breakdown_data=[(100., dest, self.map.ht101, 'PF') ],
                 date=False, document_date=False,
                 do_hard_post=True,
                 tag="CT_02"
@@ -398,7 +417,7 @@ class FinanceTestCorCases(FinanceTest):
 
             self.check_ji_correction(db, ji_id,
                 account, new_account_code=False,
-                expected_ad=[(100., new_dest, self.map_vals['ht101'], 'PF'), ],
+                expected_ad=[(100., new_dest, self.map.ht101, 'PF'), ],
                 expected_ad_rev=False,
                 expected_ad_cor=False,
             )
@@ -415,9 +434,8 @@ class FinanceTestCorCases(FinanceTest):
         reg_id = self._register_get(db, browse=False)
         if reg_id:
             account = '60010'
-            cc = self.map_vals['ht101']
-            new_cc = self.get_aa_code_from_sdref(db,
-                'unifield_tests_data_test_0110_cc_ht120')
+            cc = self.map.ht101
+            new_cc = self.map.ht120
 
             regl_id, distrib_id, ji_id = self.register_create_line(
                 db, reg_id,
@@ -454,15 +472,13 @@ class FinanceTestCorCases(FinanceTest):
         reg_id = self._register_get(db, browse=False)
         if reg_id:
             account = '60010'
-            ht_101 = self.map_vals['ht101']
             fp = 'PF'
-            new_fp = self.get_aa_code_from_sdref(db,
-                'unifield_tests_data_test_0110_fp1')
+            new_fp = self.map.fp1
 
             regl_id, distrib_id, ji_id = self.register_create_line(
                 db, reg_id,
                 account, self.get_random_amount(True),
-                ad_breakdown_data=[(100., 'OPS', ht_101, fp), ],
+                ad_breakdown_data=[(100., 'OPS', self.map.ht101, fp), ],
                 date=False, document_date=False,
                 do_hard_post=True,
                 tag="CT_04"
@@ -477,7 +493,7 @@ class FinanceTestCorCases(FinanceTest):
 
             self.check_ji_correction(db, ji_id,
                 account, new_account_code=False,
-                expected_ad=[(100., 'OPS', ht_101, new_fp), ],
+                expected_ad=[(100., 'OPS', self.map.ht101, new_fp), ],
                 expected_ad_rev=False,
                 expected_ad_cor=False,
             )
@@ -495,9 +511,8 @@ class FinanceTestCorCases(FinanceTest):
         if reg_id:
             account = '60010'
             new_account = '60000'
-            ht101 = self.map_vals['ht101']
 
-            ad = [(100., 'OPS', ht101, 'PF'), ]
+            ad = [(100., 'OPS', self.map.ht101, 'PF'), ]
 
             regl_id, distrib_id, ji_id = self.register_create_line(
                 db, reg_id,
@@ -512,8 +527,8 @@ class FinanceTestCorCases(FinanceTest):
             # AD 100% OPS, HT101, PF -> 55% OPS, HT101, PF
             #                        -> 45% NAT, HT101, PF
             new_ad=[
-                (55., 'OPS', ht101, 'PF'),
-                (45., 'NAT', ht101, 'PF'),
+                (55., 'OPS', self.map.ht101, 'PF'),
+                (45., 'NAT', self.map.ht101, 'PF'),
             ]
             self.simulation_correction_wizard(db, ji_id,
                     new_account_code=new_account,
@@ -540,13 +555,10 @@ class FinanceTestCorCases(FinanceTest):
         reg_id = self._register_get(db, browse=False, ccy_name='USD')
         if reg_id:
             account = '60010'
-            ht101 = self.map_vals['ht101']
-            ht120 = self.get_aa_code_from_sdref(db,
-                'unifield_tests_data_test_0110_cc_ht120')
 
             ad = [
-                (60., 'OPS', ht101, 'PF'),
-                (40., 'OPS', ht120, 'PF'),
+                (60., 'OPS', self.map.ht101, 'PF'),
+                (40., 'OPS', self.map.ht120, 'PF'),
             ]
 
             regl_id, distrib_id, ji_id = self.register_create_line(
@@ -563,8 +575,8 @@ class FinanceTestCorCases(FinanceTest):
             self.period_close(db, 'm', 1)
 
             new_ad=[
-                (70., 'OPS', ht101, 'PF'),
-                (30., 'OPS', ht120, 'PF'),
+                (70., 'OPS', self.map.ht101, 'PF'),
+                (30., 'OPS', self.map.ht120, 'PF'),
             ]
             self.simulation_correction_wizard(db, ji_id,
                     cor_date=self.get_orm_fy_date(2, 7),  # 7 Feb of this year
@@ -572,7 +584,7 @@ class FinanceTestCorCases(FinanceTest):
                     new_ad_breakdown_data=False,
                     ad_replace_data={
                             60.: {'per': 70., },
-                            40.: {'per': 30., 'cc': ht120, },
+                            40.: {'per': 30., 'cc': self.map.ht120, },
                         },
             )
 
@@ -608,13 +620,10 @@ class FinanceTestCorCases(FinanceTest):
         if reg_id:
             account = '60010'
             new_account = '60030'
-            ht101 = self.map_vals['ht101']
-            ht120 = self.get_aa_code_from_sdref(db,
-                'unifield_tests_data_test_0110_cc_ht120')
 
             ad = [
-                (60., 'OPS', ht101, 'PF'),
-                (40., 'OPS', ht120, 'PF'),
+                (60., 'OPS', self.map.ht101, 'PF'),
+                (40., 'OPS', self.map.ht120, 'PF'),
             ]
 
             regl_id, distrib_id, ji_id = self.register_create_line(
@@ -627,8 +636,8 @@ class FinanceTestCorCases(FinanceTest):
             )
 
             new_ad=[
-                (70., 'OPS', ht101, 'PF'),
-                (30., 'OPS', ht120, 'PF'),
+                (70., 'OPS', self.map.ht101, 'PF'),
+                (30., 'OPS',self.map. ht120, 'PF'),
             ]
             self.simulation_correction_wizard(db, ji_id,
                     cor_date=self.get_orm_fy_date(2, 7),  # 7 Feb of this year
@@ -658,16 +667,13 @@ class FinanceTestCorCases(FinanceTest):
         if reg_id:
             account = '60010'
             new_account = '13310'
-            ht101 = self.map_vals['ht101']
-            fp1 = self.get_aa_code_from_sdref(db,
-                'unifield_tests_data_test_0110_cc_fp1')
 
             ad = [
-                (10., 'OPS', ht101, 'PF'),
-                (90., 'OPS', ht101, 'FP1'),
+                (10., 'OPS', self.map.ht101, 'PF'),
+                (90., 'OPS', self.map.ht101, 'FP1'),
             ]
-            self.analytic_distribution_set_fp_account_dest(db, fp1, account,
-                'OPS')
+            self.analytic_distribution_set_fp_account_dest(db, self.map.fp1,
+                account, 'OPS')
 
             regl_id, distrib_id, ji_id = self.register_create_line(
                 db, reg_id,
@@ -740,11 +746,6 @@ class FinanceTestCorCases(FinanceTest):
         if reg_id:
             account = '13300'
             new_account = '61000'
-            ht101 = self.map_vals['ht101']
-            ht120 = self.get_aa_code_from_sdref(db,
-                'unifield_tests_data_test_0110_cc_ht120')
-            fp1 = self.get_aa_code_from_sdref(db,
-                'unifield_tests_data_test_0110_fp1')
 
             regl_id, distrib_id, ji_id = self.register_create_line(
                 db, reg_id,
@@ -755,12 +756,12 @@ class FinanceTestCorCases(FinanceTest):
             )
 
             ad=[
-                (30., 'OPS', ht101, 'PF'),
-                (30., 'OPS', ht101, fp1),
-                (40., 'OPS', ht120, fp1),
+                (30., 'OPS', self.map.ht101, 'PF'),
+                (30., 'OPS', self.map.ht101, self.map.fp1),
+                (40., 'OPS', self.map.ht120, self.map.fp1),
             ]
-            self.analytic_distribution_set_fp_account_dest(db, fp1, new_account,
-                'OPS')
+            self.analytic_distribution_set_fp_account_dest(db, self.map.fp1,
+                new_account, 'OPS')
 
             self.simulation_correction_wizard(db, ji_id,
                     cor_date=False,
@@ -786,25 +787,20 @@ class FinanceTestCorCases(FinanceTest):
 
         aal_obj = db.get('account.analytic.line')
 
-        ht101 = self.map_vals['ht101']
-        ht120 = self.get_aa_code_from_sdref(db,
-            'unifield_tests_data_test_0110_ht120')
-        fp1 = self.get_aa_code_from_sdref(db,
-            'unifield_tests_data_test_0110_fp1')
-
         ad=[
-            (40., 'NAT', ht101, 'PF'),
-            (60., 'NAT', ht120, fp1),
+            (40., 'NAT', self.map.ht101, 'PF'),
+            (60., 'NAT', self.map.ht120, self.map.fp1),
         ]
 
         new_ad=[
-            (40., 'NAT', ht101, 'PF'),
-            (60., 'NAT', ht120, 'PF'),
+            (40., 'NAT', self.map.ht101, 'PF'),
+            (60., 'NAT', self.map.ht120, 'PF'),
         ]
 
         invoice_lines_accounts = [ '66002', '66003', '66004', ]
         for a in invoice_lines_accounts:
-            self.analytic_distribution_set_fp_account_dest(db, fp1, a, 'NAT')
+            self.analytic_distribution_set_fp_account_dest(db, self.map.fp1, a,
+                'NAT')
 
         ji_ids = self.invoice_validate(db,
             self.invoice_create_supplier_invoice(
@@ -825,7 +821,7 @@ class FinanceTestCorCases(FinanceTest):
         fcc_obj.contract_soft_closed([fc_id])
 
         # select an AJI booked on FP1, correction wizard
-        fp1_id = self.get_account_from_code(db, fp1, is_analytic=True)
+        fp1_id = self.get_account_from_code(db, self.map.fp1, is_analytic=True)
         aji_ids = aal_obj.search([
             ('move_id', 'in', ji_ids),
             ('account_id', '=', fp1_id),
@@ -883,13 +879,10 @@ class FinanceTestCorCases(FinanceTest):
         db = self.hq1c1
 
         invoice_lines_accounts = [ '60010', '60020', '60030', ]
-        ht101 = self.map_vals['ht101']
-        ht120 = self.get_aa_code_from_sdref(db,
-            'unifield_tests_data_test_0110_cc_ht120')
 
         ad = [
-            (60., 'OPS', ht101, 'PF'),
-            (40., 'OPS', ht120, 'PF'),
+            (60., 'OPS', self.map.ht101, 'PF'),
+            (40., 'OPS', self.map.ht120, 'PF'),
         ]
 
         ji_ids = self.invoice_validate(db,
@@ -909,8 +902,8 @@ class FinanceTestCorCases(FinanceTest):
         self.period_close(db, 'm', 1)
 
         new_ad = [
-            (70., 'OPS', ht101, 'PF'),
-            (30., 'OPS', ht120, 'PF'),
+            (70., 'OPS', self.map.ht101, 'PF'),
+            (30., 'OPS', self.map.ht120, 'PF'),
         ]
 
         # simu of cor for each invoice JIs
@@ -951,14 +944,6 @@ class FinanceTestCorCases(FinanceTest):
         """
         db = self.hq1c1
 
-        ht101 = self.map_vals['ht101']
-        ht120 = self.get_aa_code_from_sdref(db,
-            'unifield_tests_data_test_0110_cc_ht120')
-        fp1 = self.get_aa_code_from_sdref(db,
-            'unifield_tests_data_test_0110_fp1')
-        fp2 = self.get_aa_code_from_sdref(db,
-            'unifield_tests_data_test_0110_fp2')
-
         # REOPEN period closed in case 12 (if it fails)
         self.period_reopen(db, 'm', 1)
         self.period_reopen(db, 'f', 1)
@@ -966,8 +951,8 @@ class FinanceTestCorCases(FinanceTest):
         invoice_lines_accounts = [ '60010', '60020', ]
 
         ad = [
-            (55., 'OPS', ht101, 'PF'),
-            (45., 'OPS', ht120, 'PF'),
+            (55., 'OPS', self.map.ht101, 'PF'),
+            (45., 'OPS', self.map.ht120, 'PF'),
         ]
 
         aml_obj = db.get('account.move.line')
@@ -986,7 +971,7 @@ class FinanceTestCorCases(FinanceTest):
 
         # 13.4 account/ad correction of 1st invoice line
         new_account = '60000'
-        new_ad = [ (100., 'OPS', ht120, 'PF'), ]
+        new_ad = [ (100., 'OPS', self.map.ht120, 'PF'), ]
         ji_br = db.get('account.move.line').browse(ji_ids[0])
 
         self.simulation_correction_wizard(db, ji_ids[0],
@@ -1009,9 +994,9 @@ class FinanceTestCorCases(FinanceTest):
         self.assert_(cor1_ids != False, 'COR-1 JI not found!')
 
         new_account2 = '60030'
-        new_ad2 = [ (100., 'OPS', ht120, fp1), ]
-        self.analytic_distribution_set_fp_account_dest(db, fp1, new_account2,
-            'OPS')
+        new_ad2 = [ (100., 'OPS', self.map.ht120, self.map.fp1), ]
+        self.analytic_distribution_set_fp_account_dest(db, self.map.fp1,
+            new_account2, 'OPS')
 
         self.simulation_correction_wizard(db, cor1_ids[0],
             cor_date=False,
@@ -1034,13 +1019,13 @@ class FinanceTestCorCases(FinanceTest):
         # correction of COR-2 => will generate COR-3
         new_account3 = '60100'
         new_ad3 = [
-            (70., 'OPS', ht120, fp2),
-            (30., 'OPS', ht101, fp2),
+            (70., 'OPS', self.map.ht120, self.map.fp2),
+            (30., 'OPS', self.map.ht101, self.map.fp2),
         ]
-        self.analytic_distribution_set_fp_account_dest(db, fp1, new_account3,
-            'OPS')
-        self.analytic_distribution_set_fp_account_dest(db, fp2, new_account3,
-            'OPS')
+        self.analytic_distribution_set_fp_account_dest(db, self.map.fp1,
+            new_account3, 'OPS')
+        self.analytic_distribution_set_fp_account_dest(db, self.map.fp2,
+            new_account3, 'OPS')
 
         cor2_ids = aml_obj.search([('corrected_line_id', '=', cor1_ids[0])])
         self.assert_(cor2_ids != False, 'COR-2 JI not found!')
@@ -1074,7 +1059,7 @@ class FinanceTestCorCases(FinanceTest):
             regl_id, distrib_id, ji_id = self.register_create_line(
                 db, reg_id,
                 '60000', self.get_random_amount(),
-                ad_breakdown_data=[(100., 'OPS', self.map_vals['ht101'], 'PF')],
+                ad_breakdown_data=[(100., 'OPS', self.map.ht101, 'PF')],
                 date=False, document_date=False,
                 do_temp_post=True, do_hard_post=False,
                 tag="CT_14"
@@ -1098,7 +1083,6 @@ class FinanceTestCorCases(FinanceTest):
     # -------------------------------------------------------------------------
     # SYNC CASES FLOW: from 20 to 26
     # -------------------------------------------------------------------------
-    '''
     def test_cor_20(self):
         """
         cd unifield/test-finance/unifield-wm/unifield_tests

@@ -35,6 +35,9 @@ from uuid import uuid4
 
 from unifield_tests.lib import yaml_import
 
+class Dict2Obj:
+    def __init__(self, **entries):
+        self.__dict__.update(entries)
 
 class UnifieldTestException(Exception):
     pass
