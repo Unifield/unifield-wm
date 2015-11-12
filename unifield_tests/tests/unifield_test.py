@@ -882,13 +882,14 @@ class UnifieldTest(unittest.TestCase):
 
         return distrib_id
 
-    def get_key_val(self, cr, uid, key, default=None, context=None):
+    def get_key_val(self, key, default=None, context=None):
         """
-        get val from key/val sync store by yaml record id or key
+        get val from key/val sync store, by key
         """
-        if isinstance(key_or_yaml_record_id, (int, long, )):
+        if isinstance(key, (int, long, )):
             raise UnifieldTestException('invalid key')
-        return self.sync.get('automatic.test.key.value').get_val(key,
-            default=default, context=context)
+        # default is passed as 'arg' are named parameters are not supported in
+        # oerlib version we use
+        return self.sync.get('automatic.test.key.value').get_val(key, default)
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

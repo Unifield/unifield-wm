@@ -121,6 +121,7 @@ class FinanceTestCorCases(FinanceTest):
     # -------------------------------------------------------------------------
 
     def setUp(self):
+        # data set
         def dataset_msg(msg):
             prefix = 'FinanceTestCorCases DATASET'
             prefix_pattern = '[' + self.colors.BGreen + prefix \
@@ -137,6 +138,13 @@ class FinanceTestCorCases(FinanceTest):
                 'name': keyword,
                 'active': True,
             })
+
+        # load key/val mapping values
+        self.map_vals = {
+            'ht101': self.get_key_val('test_0110.HT101', default='HT101'),
+            'ht111': self.get_key_val('test_0110.HT111', default='HT111'),
+            'ht121': self.get_key_val('test_0110.HT121', default='HT121'),
+        }
 
     def tearDown(self):
         pass
@@ -305,19 +313,18 @@ class FinanceTestCorCases(FinanceTest):
     # -------------------------------------------------------------------------
     # EMPTY case: dataset test flow
     # -------------------------------------------------------------------------
-    # TODO comment test_cor_00 when automated test finished
+    '''
     def test_cor_00(self):
         """
         fake unit test for dataset testing
         cd unifield/test-finance/unifield-wm/unifield_tests
         python -m unittest tests.test_0110_finance_cor_cases.FinanceTestCorCases.test_cor_00
         """
-        pass
+        pass'''
 
     # -------------------------------------------------------------------------
     # SINGLE CASES FLOW: from 01 to 14
     # -------------------------------------------------------------------------
-    '''
     def test_cor_01(self):
         """
         cd unifield/test-finance/unifield-wm/unifield_tests
@@ -332,7 +339,7 @@ class FinanceTestCorCases(FinanceTest):
             account = '60010'
             new_account = '60020'
 
-            ad = [(100., 'OPS', 'HT101', 'PF'), ]
+            ad = [(100., 'OPS', self.map_vals['ht101'], 'PF'), ]
 
             regl_id, distrib_id, ji_id = self.register_create_line(
                 db, reg_id,
@@ -358,6 +365,7 @@ class FinanceTestCorCases(FinanceTest):
                 check_sequence_number=True
             )
 
+    '''
     def test_cor_02(self):
         """
         cd unifield/test-finance/unifield-wm/unifield_tests
