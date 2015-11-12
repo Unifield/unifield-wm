@@ -417,7 +417,7 @@ class FinanceTestCorCases(FinanceTest):
             account = '60010'
             cc = self.map_vals['ht101']
             new_cc = self.get_record_id_from_sdref(db,
-                'unifield_tests_data.test_0110_cc_ht120')
+                'unifield_tests_data_test_0110_cc_ht120')
 
             regl_id, distrib_id, ji_id = self.register_create_line(
                 db, reg_id,
@@ -454,14 +454,15 @@ class FinanceTestCorCases(FinanceTest):
         reg_id = self._register_get(db, browse=False)
         if reg_id:
             account = '60010'
+            ht_101 = self.map_vals['ht101']
             fp = 'PF'
             new_fp = self.get_record_id_from_sdref(db,
-                'unifield_tests_data.test_0110_fp1')
+                'unifield_tests_data_test_0110_fp1')
 
             regl_id, distrib_id, ji_id = self.register_create_line(
                 db, reg_id,
                 account, self.get_random_amount(True),
-                ad_breakdown_data=[(100., 'OPS', 'HT101', fp), ],
+                ad_breakdown_data=[(100., 'OPS', ht_101, fp), ],
                 date=False, document_date=False,
                 do_hard_post=True,
                 tag="CT_04"
@@ -476,7 +477,7 @@ class FinanceTestCorCases(FinanceTest):
 
             self.check_ji_correction(db, ji_id,
                 account, new_account_code=False,
-                expected_ad=[(100., 'OPS', 'HT101', new_fp), ],
+                expected_ad=[(100., 'OPS', ht_101, new_fp), ],
                 expected_ad_rev=False,
                 expected_ad_cor=False,
             )
@@ -541,7 +542,7 @@ class FinanceTestCorCases(FinanceTest):
             account = '60010'
             ht101 = self.map_vals['ht101']
             ht120 = self.get_record_id_from_sdref(db,
-                'unifield_tests_data.test_0110_cc_ht120')
+                'unifield_tests_data_test_0110_cc_ht120')
 
             ad = [
                 (60., 'OPS', ht101, 'PF'),
@@ -609,7 +610,7 @@ class FinanceTestCorCases(FinanceTest):
             new_account = '60030'
             ht101 = self.map_vals['ht101']
             ht120 = self.get_record_id_from_sdref(db,
-                'unifield_tests_data.test_0110_cc_ht120')
+                'unifield_tests_data_test_0110_cc_ht120')
 
             ad = [
                 (60., 'OPS', ht101, 'PF'),
@@ -739,9 +740,9 @@ class FinanceTestCorCases(FinanceTest):
             new_account = '61000'
             ht101 = self.map_vals['ht101']
             ht120 = self.get_record_id_from_sdref(db,
-                'unifield_tests_data.test_0110_cc_ht120')
+                'unifield_tests_data_test_0110_cc_ht120')
             fp1 = self.get_record_id_from_sdref(db,
-                'unifield_tests_data.test_0110_fp1')
+                'unifield_tests_data_test_0110_fp1')
 
             regl_id, distrib_id, ji_id = self.register_create_line(
                 db, reg_id,
@@ -785,9 +786,9 @@ class FinanceTestCorCases(FinanceTest):
 
         ht101 = self.map_vals['ht101']
         ht120 = self.get_record_id_from_sdref(db,
-            'unifield_tests_data.test_0110_cc_ht120')
+            'unifield_tests_data_test_0110_cc_ht120')
         fp1 = self.get_record_id_from_sdref(db,
-                'unifield_tests_data.test_0110_fp1')
+                'unifield_tests_data_test_0110_fp1')
 
         ad=[
             (40., 'NAT', ht101, 'PF'),
@@ -818,7 +819,7 @@ class FinanceTestCorCases(FinanceTest):
         # close financing contract FC1: soft-close it
         fcc_obj = db.get('financing.contract.contract')
         fc_id = self.get_record_id_from_sdref(db,
-            'unifield_tests_data.test_0110_fc1')
+            'unifield_tests_data_test_0110_fc1')
         fcc_obj.contract_soft_closed([fc_id])
 
         # select an AJI booked on FP1, correction wizard
@@ -882,7 +883,7 @@ class FinanceTestCorCases(FinanceTest):
         invoice_lines_accounts = [ '60010', '60020', '60030', ]
         ht101 = self.map_vals['ht101']
         ht120 = self.get_record_id_from_sdref(db,
-            'unifield_tests_data.test_0110_cc_ht120')
+            'unifield_tests_data_test_0110_cc_ht120')
 
         ad = [
             (60., 'OPS', ht101, 'PF'),
@@ -950,11 +951,11 @@ class FinanceTestCorCases(FinanceTest):
 
         ht101 = self.map_vals['ht101']
         ht120 = self.get_record_id_from_sdref(db,
-            'unifield_tests_data.test_0110_cc_ht120')
+            'unifield_tests_data_test_0110_cc_ht120')
         fp1 = self.get_record_id_from_sdref(db,
-            'unifield_tests_data.test_0110_fp1')
+            'unifield_tests_data_test_0110_fp1')
         fp2 = self.get_record_id_from_sdref(db,
-            'unifield_tests_data.test_0110_fp2')
+            'unifield_tests_data_test_0110_fp2')
 
         # REOPEN period closed in case 12 (if it fails)
         self.period_reopen(db, 'm', 1)
@@ -1034,7 +1035,7 @@ class FinanceTestCorCases(FinanceTest):
             (70., 'OPS', ht120, fp2),
             (30., 'OPS', ht101, fp2),
         ]
-        self.analytic_distribution_set_fp_account_dest(db, 'FP2', new_account3,
+        self.analytic_distribution_set_fp_account_dest(db, fp2, new_account3,
             'OPS')
 
         cor2_ids = aml_obj.search([('corrected_line_id', '=', cor1_ids[0])])
