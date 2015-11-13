@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<openerp>
+    <data>
+
+        <!-- TEST TEMPLATE -->
+        <record id="automatic_test_template_tree_view" model="ir.ui.view">
+            <field name="name">automatic.test.template.tree.view</field>
+            <field name="model">automatic.test.template</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Automatic test templates">
+                    <field name="name" />
+                    <field name="test_class" />
+                    <field name="test_type" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="automatic_test_template_search_view" model="ir.ui.view">
+            <field name="name">automatic.test.template.search.view</field>
+            <field name="model">automatic.test.template</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Automatic test templates">
+                    <field name="name" />
+                    <field name="test_class" />
+                    <field name="test_type" />
+                </search>
+            </field>
+        </record>
+
+    </data>
+</openerp>

@@ -1,0 +1,179 @@
+-
+  FINANCE COR TEST
+  Data for test_0110_finance_cor_cases
+-
+  Create COST CENTER HT120
+-
+  !record {model: account.analytic.account, id: test_0110_cc_ht120, db: hq1}:
+    # PARENT CC: edit only parent in ('code','=',...)
+    parent_id: "@search;account.analytic.account;('code','=','HT1'),('type','=','view'),('category','=','OC')"
+
+    code: HT120
+    name: HT120
+    date_start: 2015-01-01
+
+    # Not editable values
+    state: open
+    type: normal
+    category: OC
+-
+  TARGET HT120 to C1
+-
+  !record {model: account.target.costcenter, id: test_0110_cc_ht120_target_c1, db: hq1}:
+   # INSTANCE TO TARGET
+   instance_id: "@search;msf.instance;('code','=','vg-sp-208_HQ1C1')"
+   is_target: True
+
+   # Not editable values
+   cost_center_id: test_0110_cc_ht120
+-
+  Create COST CENTER HT112
+-
+  !record {model: account.analytic.account, id: test_0110_cc_ht112, db: hq1}:
+    # PARENT CC: edit only parent in ('code','=',...)
+    parent_id: "@search;account.analytic.account;('code','=','HT1'),('type','=','view'),('category','=','OC')"
+
+    code: HT112
+    name: HT112
+    date_start: 2015-01-01
+
+    # Not editable values
+    state: open
+    type: normal
+    category: OC
+-
+  TARGET HT112 to C1P1
+-
+  !record {model: account.target.costcenter, id: test_0110_cc_ht112_target_c1p1, db: hq1}:
+   # INSTANCE TO TARGET
+   instance_id: "@search;msf.instance;('code','=','vg-sp-208_HQ1C1P1')"
+   is_target: True
+
+   # Not editable values
+   cost_center_id: test_0110_cc_ht112
+-
+  Create COST CENTER HT122
+-
+  !record {model: account.analytic.account, id: test_0110_cc_ht122, db: hq1}:
+    # PARENT CC: edit only parent in ('code','=',...)
+    parent_id: "@search;account.analytic.account;('code','=','HT1'),('type','=','view'),('category','=','OC')"
+
+    code: HT122
+    name: HT122
+    date_start: 2015-01-01
+
+    # Not editable values
+    state: open
+    type: normal
+    category: OC
+-
+  TARGET HT122 to C1P1
+-
+  !record {model: account.target.costcenter, id: test_0110_cc_ht122_target_c1p2, db: hq1}:
+   # INSTANCE TO TARGET
+   instance_id: "@search;msf.instance;('code','=','vg-sp-208_HQ1C1P2')"
+   is_target: True
+
+   # Not editable values
+   cost_center_id: test_0110_cc_ht122
+-
+  Create COST CENTER HT220
+-
+  !record {model: account.analytic.account, id: test_0110_cc_ht220, db: hq1}:
+    # PARENT CC: edit only parent in ('code','=',...)
+    parent_id: "@search;account.analytic.account;('code','=','HT2'),('type','=','view'),('category','=','OC')"
+
+    code: HT220
+    name: HT220
+    date_start: 2015-01-01
+
+    # Not editable values
+    state: open
+    type: normal
+    category: OC
+-
+  TARGET HT220 to C2
+-
+  !record {model: account.target.costcenter, id: test_0110_cc_ht220_target_c2, db: hq1}:
+   # INSTANCE TO TARGET
+   instance_id: "@search;msf.instance;('code','=','vg-sp-208_HQ1C2')"
+   is_target: True
+
+   # Not editable values
+   cost_center_id: test_0110_cc_ht220
+-
+  Create FUNDING POOL FP1
+-
+ !record {model: account.analytic.account, id: test_0110_fp1, db: hq1}:
+   instance_id: "@search;msf.instance;('code','=','vg-sp-208_HQ1C1')"
+   code: FP1
+   name: FP1
+   date_start: 2015-01-01
+   cost_center_ids: [ "@search;account.analytic.account;('code','=','HT101'),('type','=','normal'),('category','=','OC')", test_0110_cc_ht120 ]
+
+   # Not editable values
+   state: open
+   type: normal
+   category: FUNDING
+   parent_id: "@search;account.analytic.account;('code','=','FUNDING'),('type','=','view'),('category','=','FUNDING')"
+-
+  Create FUNDING POOL FP2
+-
+ !record {model: account.analytic.account, id: test_0110_fp2, db: hq1}:
+   instance_id: "@search;msf.instance;('code','=','vg-sp-208_HQ1C1')"
+   code: FP2
+   name: FP2
+   date_start: 2015-01-01
+   cost_center_ids: "@search;account.analytic.account;('code','in',('HT101', 'HT120', 'HT121')),('type','=','normal'),('category','=','OC')"
+
+   # Not editable values
+   state: open
+   type: normal
+   category: FUNDING
+   parent_id: "@search;account.analytic.account;('code','=','FUNDING'),('type','=','view'),('category','=','FUNDING')"
+-
+  Create FINANCING CONTRACT DONOR
+-
+ !record {model: financing.contract.donor, id: test_0110_donor, db: hq1}:
+   code: DONOR
+   name: DONOR
+   reporting_currency: sd.base_EUR
+-
+  Create FINANCING CONTRACT FC1
+-
+ !record {model: financing.contract.contract, id: test_0110_fc1, db: hq1}:
+   code: FC1
+   name: FC1
+   donor_id: test_0110_donor
+   instance_id: "@search;msf.instance;('code','=','vg-sp-208_HQ1C1')"
+   eligibility_from_date: 2015-01-01
+   eligibility_to_date: 2016-12-31
+   grant_amount: 0
+   state: open
+   cost_center_ids: "@search;account.analytic.account;('code','in',('HT101', 'HT120')),('type','=','normal'),('category','=','OC')"
+   funding_pool_ids:
+     - funding_pool_id: test_0110_fp1
+       funded: True
+       total_project: True
+     - funding_pool_id: test_0110_fp2
+       funded: True
+       total_project: True
+-
+  Map HT101 (HT101 in COR TEST CASES) to my COST CENTER
+-
+ !record {model: automatic.test.key.value, id: test_0110_map_ht101}:
+   key: test_0110.HT101
+   val: HT101
+-
+  Map HT111 (HT111 in COR TEST CASES) to my COST CENTER
+-
+ !record {model: automatic.test.key.value, id: test_0110_map_ht111}:
+   key: test_0110.HT111
+   val: HT111
+-
+  Map HT111 (HT121 in COR TEST CASES) to my COST CENTER
+-
+ !record {model: automatic.test.key.value, id: test_0110_map_ht121}:
+   key: test_0110.HT121
+   val: HT121
+-

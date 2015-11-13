@@ -20,12 +20,18 @@
 #
 ##############################################################################
 
-from os import path
 
-import sys
+from unifield_test import UnifieldTest
 
-if path.realpath('.').split('/')[-1] == 'unifield_tests':
-    sys.path.append('tests')
+class AccountTest(UnifieldTest):
 
-sys.path.append('../')
+    def test_010_coa(self):
+        '''Check Chart of Account length'''
+        ids = self.hq1c1p1.get('account.account').search([])
+        self.assert_(len(ids) == 357, "Chart of Account length: %s" % len(ids))
 
+def get_test_class():
+    '''Return the class to use for tests'''
+    return AccountTest
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

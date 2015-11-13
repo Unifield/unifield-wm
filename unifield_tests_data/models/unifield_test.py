@@ -1,5 +1,5 @@
-#!/usr/bin/python
-# -*- coding: utf8 -*-
+#!/usr/bin/env python
+#-*- coding:utf-8 -*-
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
@@ -20,12 +20,28 @@
 #
 ##############################################################################
 
-from os import path
+from osv import osv
+from osv import fields
+from tools.translate import _
 
-import sys
 
-if path.realpath('.').split('/')[-1] == 'unifield_tests':
-    sys.path.append('tests')
+class unifield_test(osv.osv):
+    _name = "unifield.test"
+    _description = "List of Unifield tests"
 
-sys.path.append('../')
+    _columns = {
+        'name': fields.char('Name', size=512, required=True, translate=False),
+        'active': fields.boolean('Active?', readonly=True),
+    }
 
+    _defaults = {
+        'active': lambda *a: True,
+    }
+
+    _sql_constraints = [
+        ('unifield_test_name_uniq', 'unique (name)', 'You cannot have 2 unifield test with the same name!')
+    ]
+
+unifield_test()
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

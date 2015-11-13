@@ -32,8 +32,8 @@ from base64 import decodestring
 #####
 ## VARIABLES
 ###
-p1_name='uf2377b_HQ1C1P1'
-p1rw_name='uf2377b_HQ1C1P1_RW'
+hq1hq1hq1c1hq1c1p1_name='uf2377b_HQ1C1P1'
+hq1hq1hq1c1hq1c1p1rw_name='uf2377b_HQ1C1P1_RW'
 login = 'admin'
 pwd = 'admin'
 timeout = 3600
@@ -122,13 +122,13 @@ def put_file_into(db_connection, content, filename='noname'):
 
 def main():
     # Prepare the connection to the OpenERP server
-    p1, p1_user = connect('localhost', p1_name, timeout=timeout)
-    rw, rw_user = connect('localhost', p1rw_name, timeout=timeout)
+    hq1hq1hq1c1hq1c1p1, hq1hq1hq1c1hq1c1p1_user = connect('localhost', hq1hq1hq1c1hq1c1p1_name, timeout=timeout)
+    rw, rw_user = connect('localhost', hq1hq1hq1c1hq1c1p1rw_name, timeout=timeout)
 
     # First generate file from P1
-    generate_file_from(p1)
+    generate_file_from(hq1hq1hq1c1hq1c1p1)
     # Then get file (from P1)
-    zipfile, filename = get_file_from(p1)
+    zipfile, filename = get_file_from(hq1hq1hq1c1hq1c1p1)
     # Finally put file into RW
     put_file_into(rw, zipfile, filename)
 

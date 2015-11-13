@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<openerp>
+    <data>
+        
+    <record id="automatic_test_key_val_tree_view" model="ir.ui.view">
+            <field name="name">automatic.test.key.value.tree.view</field>
+            <field name="model">automatic.test.key.value</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Key/Value storage" editable="top">
+                    <field name="key" readonly="0" />
+                    <field name="val" />
+               </tree>
+           </field>
+        </record>
+
+    <record id="action_test_key_val_tree" model="ir.actions.act_window">
+        <field name="name">Key/Value storage</field>
+        <field name="res_model">automatic.test.key.value</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_type">form</field>
+    </record>
+
+    <menuitem
+        action="action_test_key_val_tree"
+        id="menu_test_test_key_val_tree"
+        sequence="999"
+        parent="menu_automatic_tests" />
+
+    </data>
+</openerp>

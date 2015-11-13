@@ -1,9 +1,10 @@
-#!/usr/bin/python
-# -*- coding: utf8 -*-
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2014 TeMPO Consulting, MSF. All Rights Reserved
+#    Copyright (C) 2011 TeMPO Consulting, MSF. All Rights Reserved
+#    Developer: Olivier DOSSMANN
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -20,12 +21,6 @@
 #
 ##############################################################################
 
-from os import path
+import automatic_test_add_file
 
-import sys
-
-if path.realpath('.').split('/')[-1] == 'unifield_tests':
-    sys.path.append('tests')
-
-sys.path.append('../')
-
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

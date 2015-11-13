@@ -27,20 +27,27 @@
     "description" : "This module adds unit test for Unifield modules",
     "author" : "TeMPO Consulting, MSF",
     "category" : "Tests",
-    "depends" : [],
-    "init_xml" : [
-        'master_data/010_accounts.yml',
-        'master_data/020_partners.yml',
-        'master_data/030_journals.yml',
-        'master_data/040_analytic.yml',
-        'master_data/050_product_nomenclatures.yml',
-        'master_data/060_product_categories.yml',
-        'master_data/070_products.yml',
-        'master_data/080_locations.yml',
+    "depends" : [
+        'base',
+        'sync_server',
     ],
-    "update_xml" : [],
+    "init_xml" : [
+    ],
+    "update_xml" : [
+        'automatic_tests/data/test_db_mapping_data.xml',
+        'automatic_tests/views/test_db_mapping_view.xml',
+        'automatic_tests/views/automatic_test_template_view.xml',
+        'automatic_tests/views/automatic_test_campaign_view.xml',
+        'automatic_tests/views/automatic_test_view.xml',
+        'automatic_tests/views/automatic_test_method_view.xml',
+        'automatic_tests/views/automatic_test_key_val_view.xml',
+        'automatic_tests/wizard/views/automatic_test_add_file_view.xml',
+    ],
     "demo_xml" : [],
     "test": [],
+    "function": [
+        ('automatic.test.template', 'update_automatic_test_template'),
+    ],
     "installable": True,
     "active": False
 }

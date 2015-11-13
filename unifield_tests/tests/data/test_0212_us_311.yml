@@ -1,0 +1,72 @@
+-
+  Data for test_0212_us_311
+-
+  Create an external supplier
+-
+  !record {model: res.partner, id: test_0212_ext_supplier, db: hq1c1, xml_id: test_0202_ext_supplier}:
+    name: Ext Supplier for Test 0204
+    # Not editable values
+    customer: 0
+    supplier: 1
+    partner_type: 'external'
+    property_account_receivable: unifield_tests_data.account_account_receivable_supplier0
+    property_account_payable: unifield_tests_data.account_account_payable_supplier0
+-
+  Create an address for the external supplier
+-
+  !record {model: res.partner.address, id: test_0212_ext_supplier_addr, db: hq1c1, xml_id: test_0202_ext_supplier_addr}:
+    name: Ext. Customer for Test 0202
+    street: Main Street
+    street2: 
+    zip: 63523
+    city: Test City
+    # Not editable values
+    partner_id: test_0204_supplier_cust
+-
+  Create a first LOG product
+-
+  !record {model: product.product, id: test_0212_prod_log_1, db: hq1c1, xml_id: test_0201_prod_log_1}:
+    default_code: PL1FOTest
+    name: PL1 (FO Test)
+    uom_id: product.product_uom_unit
+    uom_po_id: product.product_uom_unit
+    # Not editable values
+    supply_method: buy
+    type: product
+    nomen_manda_0: unifield_tests_data.nomen_log_main_type
+    nomen_manda_1: unifield_tests_data.nomen_log_group
+    nomen_manda_2: unifield_tests_data.nomen_log_family
+    nomen_manda_3: unifield_tests_data.nomen_log_root
+    international_status: product_attributes.int_1
+-
+  Create a second LOG product
+-
+  !record {model: product.product, id: test_0212_prod_log_2, db: hq1c1, xml_id: test_0201_prod_log_2}:
+    default_code: PL2FOTest
+    name: PL2 (FO Test)
+    uom_id: product.product_uom_unit
+    uom_po_id: product.product_uom_unit
+    # Not editable values
+    supply_method: buy
+    type: product
+    nomen_manda_0: unifield_tests_data.nomen_log_main_type
+    nomen_manda_1: unifield_tests_data.nomen_log_group
+    nomen_manda_2: unifield_tests_data.nomen_log_family
+    nomen_manda_3: unifield_tests_data.nomen_log_root
+    international_status: product_attributes.int_1
+-
+  Create a third LOG product
+-
+  !record {model: product.product, id: test_0212_prod_log_3, db: hq1c1, xml_id: False}:
+    default_code: PL3_US311
+    name: PL3 (US_311 Test)
+    uom_id: product.product_uom_unit
+    uom_po_id: product.product_uom_unit
+    # Not editable values
+    supply_method: buy
+    type: product
+    nomen_manda_0: unifield_tests_data.nomen_log_main_type
+    nomen_manda_1: unifield_tests_data.nomen_log_group
+    nomen_manda_2: unifield_tests_data.nomen_log_family
+    nomen_manda_3: unifield_tests_data.nomen_log_root
+    international_status: product_attributes.int_1

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<openerp>
+    <data>
+
+        <!-- TEST CAMPAIGN -->
+        <record id="automatic_test_campaign_form_view" model="ir.ui.view">
+            <field name="name">automatic.test.campaign.form.view</field>
+            <field name="model">automatic.test.campaign</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Automatic test campaign">
+                    <separator colspan="4" string="Campaign parameters" />
+                    <field name="name" />
+                    <field name="start_date" />
+                    <field name="end_date" />
+                    <notebook colspan="4">
+                        <page string="Test cases">
+                            <field name="test_template_ids" colspan="4" mode="tree" nolabel="True" attrs="{'readonly': [('state', '!=', 'draft')]}">
+                                <tree string="Test cases" hide_edit_button="True">
+                                    <field name="name" />
+                                    <field name="test_class" />
+                                    <field name="test_type" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Running tests">
+                            <button colspan="4" type="object" name="update" icon="gtk-refresh" string="Update" states="progress" />
+                            <field name="test_ids" colspan="4" mode="tree,form" readonly="True" nolabel="True" />
+                        </page>
+                    </notebook>
+                    <separator colspan="4" string="Status" />
+                    <field name="state" />
+                    <group colspan="2" col="4">
+                        <button colspan="2" type="object" name="generate_tests" icon="gtk-execute" string="Generate tests to run" states="draft" />
+                        <button colspan="2" type="object" name="run_campaign" icon="gtk-execute" string="Run campaign" states="not_run" />
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="automatic_test_campaigne_tree_view" model="ir.ui.view">
+            <field name="name">automatic.test.campaign.tree.view</field>
+            <field name="model">automatic.test.campaign</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Automatic test campaigns">
+                    <field name="name" />
+                    <field name="start_date" />
+                    <field name="end_date" />
+                    <field name="state" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_automatic_test_campaign" model="ir.actions.act_window">
+            <field name="name">Automatic test campaign</field>
+            <field name="res_model">automatic.test.campaign</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_type">form</field>
+        </record>
+
+        <menuitem
+            action="action_automatic_test_campaign"
+            id="menu_automatic_test_campaign"
+            parent="menu_automatic_tests" />
+
+    </data>
+</openerp>

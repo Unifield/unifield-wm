@@ -1,5 +1,26 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 # -*- coding: utf8 -*-
+##############################################################################
+#
+#    OpenERP, Open Source Management Solution
+#    Copyright (C) 2014 TeMPO Consulting, MSF. All Rights Reserved
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+##############################################################################
+
+
 from __future__ import print_function
 from unifield_test import UnifieldTest
 
@@ -8,16 +29,14 @@ import time
 class ResourcingTest(UnifieldTest):
 
     def setUp(self):
-        self.used_db = self.c1
-        db = self.used_db
-        self.order_obj = db.get('sale.order')
-        self.order_line_obj = db.get('sale.order.line')
-        self.po_obj = db.get('purchase.order')
-        self.pol_obj = db.get('purchase.order.line')
-        self.proc_obj = db.get('procurement.order')
-        self.data_obj = db.get('ir.model.data')
-        self.tender_obj = db.get('tender')
-        self.tender_line_obj = db.get('tender.line')
+        self.order_obj = self.hq1c1.get('sale.order')
+        self.order_line_obj = self.hq1c1.get('sale.order.line')
+        self.po_obj = self.hq1c1.get('purchase.order')
+        self.pol_obj = self.hq1c1.get('purchase.order.line')
+        self.proc_obj = self.hq1c1.get('procurement.order')
+        self.data_obj = self.hq1c1.get('ir.model.data')
+        self.tender_obj = self.hq1c1.get('tender')
+        self.tender_line_obj = self.hq1c1.get('tender.line')
 
         if not hasattr(self, 'pr'):
             self.pr = False
@@ -27,10 +46,8 @@ class ResourcingTest(UnifieldTest):
         Done all remaining documents
         :return:
         """
-        db = self.used_db
-
-        ddw_obj = db.get('documents.done.wizard')
-        ddp_obj = db.get('documents.done.problem')
+        ddw_obj = self.hq1c1.get('documents.done.wizard')
+        ddp_obj = self.hq1c1.get('documents.done.problem')
 
         ddw_ids = ddw_obj.search([])
         while ddw_ids:
@@ -85,7 +102,7 @@ No split of FO found !""")
 
         return new_order_id
 
-    def _get_fo_values(self, db, values=None):
+    def _get_fo_values(self, db, values=None, data_prefix=''):
         """
         Returns specific values for a Field order (partner, partner address,
         pricelist...)
@@ -100,7 +117,7 @@ No split of FO found !""")
             values = {}
 
         # Prepare values for the field order
-        partner_id = self.get_record(db, 'ext_customer_1')
+        partner_id = self.get_record(db, '%sext_customer' % data_prefix)
         order_type = 'regular'
 
         change_vals = self.order_obj.\
@@ -120,7 +137,7 @@ No split of FO found !""")
 
         return values
 
-    def _get_ir_values(self, db, values=None):
+    def _get_ir_values(self, db, values=None, data_prefix=''):
         """
         Returns specific values for an Internal Request
 
@@ -145,7 +162,7 @@ No split of FO found !""")
 
         return values
 
-    def _get_order_values(self, db, values=None):
+    def _get_order_values(self, db, values=None, data_prefix=''):
         """
         Returns values for the order
 
@@ -159,13 +176,13 @@ No split of FO found !""")
             values = {}
 
         if self.pr:
-            values = self._get_ir_values(db, values)
+            values = self._get_ir_values(db, values, data_prefix)
         else:
-            values = self._get_fo_values(db, values)
+            values = self._get_fo_values(db, values, data_prefix)
 
         return values
 
-    def create_order(self, db):
+    def create_order(self, db, data_prefix=''):
         """
         Create a field order or an internal request (sale.order) with 4 lines:
           - 2 lines with LOG products:
@@ -184,15 +201,21 @@ No split of FO found !""")
         """
 
         # Prepare values for the field order
-        prod_log1_id = self.get_record(db, 'prod_log_1')
-        prod_log2_id = self.get_record(db, 'prod_log_2')
-        prod_med1_id = self.get_record(db, 'prod_med_1')
-        prod_med2_id = self.get_record(db, 'prod_med_2')
+        prod_log1_id = self.get_record(db, '%sprod_log_1' % data_prefix)
+        prod_log2_id = self.get_record(db, '%sprod_log_2' % data_prefix)
+        prod_med1_id = self.get_record(db, '%sprod_med_1' % data_prefix)
+        prod_med2_id = self.get_record(db, '%sprod_med_2' % data_prefix)
         uom_pce_id = self.get_record(db, 'product_uom_unit', module='product')
 
-        order_values = self._get_order_values(db)
+        order_values = self._get_order_values(db, data_prefix=data_prefix)
 
         order_id = self.order_obj.create(order_values)
+        order_name = self.order_obj.read(order_id, ['name'])['name']
+
+        self.add_test_info(db, "The %s %s has been created" % (
+            self.pr and 'Internal request' or 'Field order',
+            order_name,
+        ))
 
         # Create order lines
         # First line
@@ -204,28 +227,48 @@ No split of FO found !""")
             'type': 'make_to_order',
             'price_unit': 12.24,
         }
-        self.order_line_obj.create(line_values)
+        line_id = self.order_line_obj.create(line_values)
+        self.add_test_info(db, "The %s line %s has been added to %s" % (
+            self.pr and 'IR' or 'FO',
+            self.order_line_obj.read(line_id, ['line_number'])['line_number'],
+            order_name,
+        ))
 
         # Second line
         line_values.update({
             'product_id': prod_log2_id,
             'product_uom_qty': 20.0,
         })
-        self.order_line_obj.create(line_values)
+        line_id = self.order_line_obj.create(line_values)
+        self.add_test_info(db, "The %s line %s has been added to %s" % (
+            self.pr and 'IR' or 'FO',
+            self.order_line_obj.read(line_id, ['line_number'])['line_number'],
+            order_name,
+        ))
 
         # Third line
         line_values.update({
             'product_id': prod_med1_id,
             'product_uom_qty': 30.0,
         })
-        self.order_line_obj.create(line_values)
+        line_id = self.order_line_obj.create(line_values)
+        self.add_test_info(db, "The %s line %s has been added to %s" % (
+            self.pr and 'IR' or 'FO',
+            self.order_line_obj.read(line_id, ['line_number'])['line_number'],
+            order_name,
+        ))
 
         # Fourth line
         line_values.update({
             'product_id': prod_med2_id,
             'product_uom_qty': 40.0,
         })
-        self.order_line_obj.create(line_values)
+        line_id = self.order_line_obj.create(line_values)
+        self.add_test_info(db, "The %s line %s has been added to %s" % (
+            self.pr and 'IR' or 'FO',
+            self.order_line_obj.read(line_id, ['line_number'])['line_number'],
+            order_name,
+        ))
 
         if self.pr:
             # Validate the Internal Request
@@ -236,7 +279,7 @@ No split of FO found !""")
 
         return order_id
 
-    def order_source_all_one_po(self, db):
+    def order_source_all_one_po(self, db, data_prefix=''):
         """
         Create an order and source all lines of this order to a PO (same
         supplier) for all lines.
@@ -247,15 +290,18 @@ No split of FO found !""")
                 order.
         """
         # Create the field order
-        order_id = self.create_order(db)
+        order_id = self.create_order(db, data_prefix)
 
         # Source all lines on a Purchase Order to ext_supplier_1
         line_ids = self.order_line_obj.search([('order_id', '=', order_id)])
         self.order_line_obj.write(line_ids, {
             'po_cft': 'po',
-            'supplier': self.get_record(db, 'ext_supplier_1'),
+            'supplier': self.get_record(db, '%sext_supplier' % data_prefix),
         })
         self.order_line_obj.confirmLine(line_ids)
+
+        order_name = self.order_obj.read(order_id, ['name'])['name']
+        self.add_test_info(db, "All lines of %s have been sourced on PO to external supplier" % order_name)
 
         # Run the scheduler
         new_order_id = self.run_auto_pos_creation(db, order_to_check=order_id)
@@ -280,6 +326,9 @@ No split of FO found !""")
 
         for po_line in self.pol_obj.read(po_line_ids, ['order_id']):
             po_ids.add(po_line['order_id'][0])
+
+        for po in self.po_obj.browse(list(po_ids)):
+            self.add_test_info(db, "The %s has been created by the Auto POs creation" % po.name)
 
         return new_order_id, line_ids, list(po_ids), po_line_ids
 
@@ -312,9 +361,11 @@ No split of FO found !""")
 The state of the generated PO is %s - Should be 'draft'""" % po_state)
             # Validate the PO
             db.exec_workflow('purchase.order', 'purchase_confirm', po_id)
-            po_state = po_obj.browse(po_id).state
+            po = po_obj.browse(po_id)
+            po_state = po.state
             self.assert_(po_state == 'confirmed', msg="""
 The state of the generated PO is %s - Should be 'confirmed'""" % po_state)
+            self.add_test_info(db, "The %s has been validated" % po.name)
 
         return po_ids
 
@@ -351,11 +402,14 @@ The state of the generated PO is %s - Should be 'confirmed'""" % po_state)
             """
             3/ Check if all PO are now in 'approved' state
             """
-            po_state = po_obj.read(po_id, ['state'])['state']
+            po_rd = po_obj.read(po_id, ['state', 'name'])
+            po_state = po_rd['state']
+            po_name = po_rd['name']
             self.assert_(
                 po_state == 'approved',
                 "The state of the generated PO is %s - Should be 'approved'" % po_state,
             )
+            self.add_test_info(db, "The %s has been confirmed" % po_name)
 
         return po_ids
 
@@ -385,63 +439,5 @@ The state of the generated PO is %s - Should be 'confirmed'""" % po_state)
             return self._get_number_of_ir_valid_lines(db, order_id)
         else:
             return self._get_number_of_fo_valid_lines(db, order_id)
-
-    def create_analytic_distribution(self, db):
-        """
-        Create an analytic distribution
-        :param db: Connection on which the distribution must be created
-        :return: The ID of distribution
-        """
-        distrib_obj = db.get('analytic.distribution')
-        cc_line_obj = db.get('cost.center.distribution.line')
-        fp_line_obj = db.get('funding.pool.distribution.line')
-
-        distrib_id = distrib_obj.create({
-            'name': 'Distrib 2',
-        })
-
-        cc_line1_id = cc_line_obj.create({
-            'name': 'CC Line 1',
-            'amount': 0.0,
-            'percentage': 75.0,
-            'currency_id': self.get_record(db, 'EUR', module='base'),
-            'analytic_id': self.get_record(db, 'analytic_cc1'),
-            'distribution_id': distrib_id,
-            'destination_id': self.get_record(db, 'analytic_account_destination_operation', module='analytic_distribution'),
-        })
-
-        cc_line2_id = cc_line_obj.create({
-            'name': 'CC Line 2',
-            'amount': 0.0,
-            'percentage': 25.0,
-            'currency_id': self.get_record(db, 'EUR', module='base'),
-            'analytic_id': self.get_record(db, 'analytic_cc2'),
-            'distribution_id': distrib_id,
-            'destination_id': self.get_record(db, 'analytic_account_destination_operation', module='analytic_distribution'),
-        })
-
-        fp_line1_id = fp_line_obj.create({
-            'name': 'FP Line 1',
-            'amount': 0.0,
-            'percentage': 75.0,
-            'currency_id': self.get_record(db, 'EUR', module='base'),
-            'analytic_id': self.get_record(db, 'analytic_cc1'),
-            'distribution_id': distrib_id,
-            'cost_center_id': self.get_record(db, 'analytic_cc1'),
-            'destination_id': self.get_record(db, 'analytic_account_destination_operation', module='analytic_distribution'),
-        })
-
-        fp_line2_id = fp_line_obj.create({
-            'name': 'FP Line 2',
-            'amount': 0.0,
-            'percentage': 25.0,
-            'currency_id': self.get_record(db, 'EUR', module='base'),
-            'analytic_id': self.get_record(db, 'analytic_cc2'),
-            'distribution_id': distrib_id,
-            'cost_center_id': self.get_record(db, 'analytic_cc1'),
-            'destination_id': self.get_record(db, 'analytic_account_destination_operation', module='analytic_distribution'),
-        })
-
-        return distrib_id
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

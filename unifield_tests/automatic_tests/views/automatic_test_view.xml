@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<openerp>
+    <data>
+
+        <!-- AUTOMATIC TEST -->
+        <record id="automatic_test_tree_view" model="ir.ui.view">
+            <field name="name">automatic.test.tree.view</field>
+            <field name="model">automatic.test</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Running tests" colors="red: state=='error'; green: state=='done'; orange: state=='fail'; grey: state=='skip'; blue: state=='progress'">
+                    <field name="sequence_nb" />
+                    <field name="template_id" />
+                    <button string="Add a file" type="object" name="add_file" icon="gtk-file" states="draft" />
+                    <field name="start_date" />
+                    <field name="end_date" />
+                   <field name="state" />
+               </tree>
+           </field>
+        </record>
+        <record id="automatic_test_form_view" model="ir.ui.view">
+            <field name="name">automatic.test.form.view</field>
+            <field name="model">automatic.test</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Automatic test">
+                    <field name="template_id" />
+                    <newline />
+                    <field name="start_date" />
+                    <field name="end_date" />
+                    <field name="state" />
+                    <separator colspan="4" string="Tests" />
+                    <field name="method_ids" mode="tree,form" readonly="True" colspan="4" nolabel="1" />
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>

@@ -1,10 +1,26 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 # -*- coding: utf8 -*-
-'''
-Created on Feb 28, 2014
+##############################################################################
+#
+#    OpenERP, Open Source Management Solution
+#    Copyright (C) 2014 TeMPO Consulting, MSF. All Rights Reserved
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+##############################################################################
 
-@author: qt and vg
-'''
+
 from __future__ import print_function
 import unittest
 from connection import XMLRPCConnection as XMLConn
@@ -12,9 +28,12 @@ from connection import UnifieldTestConfigParser
 from colors import TerminalColors
 from datetime import datetime
 from datetime import timedelta
+from os import path
 import time
 import random
 from uuid import uuid4
+
+from unifield_tests.lib import yaml_import
 
 
 class UnifieldTestException(Exception):
@@ -23,40 +42,152 @@ class UnifieldTestException(Exception):
 class UnifieldTest(unittest.TestCase):
     '''
     Main test class for Unifield tests using TestCase and Openerplib as main inheritance
-    @var sync: contains Synchro Server oerplib connection
-    @var hq1: same as sync for HQ1 DB
-    @var c1: same as sync for HQ1C1 DB
-    @var p1: same as sync for HQ1C1P1 DB
-    @var db: contains the list of DB connections
-    @var test_module_name: name of the module used to create extended table for tests
-    @var test_module_obj_name: name of the OpenERP object to use to access to extended table
+    @var sync:      contains Synchro Server oerplib connection
+    @var hq1:       same as sync for HQ1 DB
+    @var hq1c1:     same as sync for HQ1C1 DB
+    @var hq1c1p1:   same as sync for HQ1C1P1 DB
+    @var hq1c2:     same as sync for HQ1C2 DB
+    @var hq1c2p1:   same as sync for HQ1C2P1 DB
+    @var hq2:       same as sync for HQ2 DB
+    @var hq2c1:     same as sync for HQ2C1 DB
+    @var hq2c1p1:   same as sync for HQ2C1P1 DB
+    @var db:        contains the list of DB connections
+    @var test_module_data_name: name of the module used to create extended table for tests
+    @var test_module_obj_name:  name of the OpenERP object to use to access to extended table
+    @var already_loaded:        if the module is already loaded, don't try to re-install it
+    @var description:           descripton of the test class (displayed to end-users in Automated tests)
+    @var category:              category of the test (displayed to end-users in Automated tests)
+    @var no_auto:               list of test methods names that must be filtered in Automated tests
     '''
+    # defines
+    _INCLUDE_HQ2 = False
+
     # global variable
     db = {}
+    test_data_module_name = 'unifield_tests_data'
     test_module_name = 'unifield_tests'
     test_module_obj_name = 'unifield.test'
     already_loaded = False
+    description = ''
+    category = 'Unifield'
+    no_auto = []
+    yaml_file = None
+    yaml_already_loaded = False
 
     # FIXME/TODO: Make unittest.TestCase inherit from oerplib.error class because of RPCError that could be raised by unittest.TestCase
 
-    def _addConnection(self, db_suffix, name):
+    def getDBConnectionsFromConfigFile(self):
+        """
+        Read the Configuration file and add Connection toh the good databases
+        """
+        # Read config file
+        c = UnifieldTestConfigParser()
+        c.read()
+
+        tempo_mkdb = c.getboolean('DB', 'tempo_mkdb')
+        db_suffixes = [
+            'SYNC_SERVER',
+            'HQ1', #'HQ2',                               # HQs
+            'HQ1C1', 'HQ1C2', #'HQ2C1', 'HQ2C2',         # COORDOs
+            'HQ1C1P1', 'HQ1C1P2', 'HQ1C2P1', 'HQ1C2P2',  # HQ1 PROJECTs
+            'HQ2C1P1', 'HQ2C1P2', 'HQ2C2P1', 'HQ2C2P2', # HQ2 PROJECTs
+        ]
+        names = [
+            'sync',
+            'hq1', #'hq2',                               # HQs
+            'hq1c1', 'hq1c2', #'hq2c1', 'hq2c2',         # COORDOs
+            'hq1c1p1', 'hq1c1p2', 'hq1c2p1', 'hq1c2p2', # HQ1 PROJECTs
+#           'hq2c1p1', 'hq2c1p2', 'hq2c2p1', 'hq2c2p2', # HQ2 PROJECTs
+        ]
+
+        # Check Remote warehouse and complete old params
+        self.is_remote_warehouse = False
+        remote_warehouse = c.get('DB', 'RW') or False
+        if remote_warehouse:
+            self.is_remote_warehouse = True
+
+        # Add remote warehouse
+        if remote_warehouse:
+            self._addConnection(remote_warehouse, 'rw')
+
+        # TODO: Add option in config file to limit the DBs
+        # Check project level
+        #p_level = 1
+        #if c.has_option('DB', 'project_level'):
+        #    p_level = c.getint('DB', 'project_level') or p_level
+        #
+        #if p_level > 1:
+        #    levels = range(2, p_level + 1)
+        #    db_suffixes += [ 'HQ1C1P%d' % (l, ) for l in levels ]
+        #    names += [ 'p1%d' % (l, ) for l in levels ]
+        #    # TODO: p21 for 'HQ1C2P1', p22 for 'HQ1C2P2'
+
+        # instance suffixes except sync server
+        self._instances_suffixes = list(db_suffixes)
+        self._instances_suffixes.remove('SYNC_SERVER')
+
+        # Prepare paramaters for XMLRPCConnection
+        self.server_port = c.getint('Server', 'port')
+        self.server_url = c.get('Server', 'url')
+        self.uid = c.get('DB', 'username')
+        self.pwd = c.get('DB', 'password')
+        db_prefix = c.get('DB', 'db_prefix')
+
+        # Create XMLRPCConnections
+        for db_tuple in zip(db_suffixes, names):
+            db_name = '%s%s' % (db_prefix, db_tuple[0])
+            if not self._INCLUDE_HQ2 and db_name.startswith('hq2'):
+                continue  # skip HQ2 tree
+            self._addConnection(db_name, db_tuple[1])
+
+    def getDBConnectionsFromSyncServer(self):
+        """
+        Open a Connection to the Sync. Server database and read the DB mapping
+        to create DB connections.
+        """
+        from tools.config import config
+        # TODO: Put this configuration on a osv object
+        self.server_port = config['xmlrpc_port']
+        self.server_url = '127.0.0.1'
+        self.uid = 'admin'
+        self.pwd = 'admin'
+
+        # Create a first connection to the sync. server database
+        sync_db_name = self.cr.dbname
+        self._addConnection(sync_db_name, 'sync')
+
+        # Read all mapped DB
+        db_map_obj = self.sync.get('test.db.mapping')
+        db_map_ids = db_map_obj.search([('keyword', '!=', 'sync'), ('db_to_use', '!=', '')])
+        for db_map in db_map_obj.browse(db_map_ids):
+            if not self._INCLUDE_HQ2 and db_map.keyword.startswith('hq2'):
+                continue  # skip HQ2 tree
+            self._addConnection(db_map.db_to_use, db_map.keyword)
+
+    def _addConnection(self, db_name, name):
         '''
         Add new connection
         '''
         if name not in self.db:
-            con = XMLConn(db_suffix)
+            con = XMLConn(db_name, self.server_port, self.server_url, self.uid, self.pwd)
             setattr(self, name, con)
-            self.db[name] = con
+            UnifieldTest.db[name] = con
+
         # Set colors
         colors = self.colors
         database_display = colors.BRed + '[' + colors.Color_Off + name.center(6) + colors.BRed + ']' + colors.Color_Off
         self.db[name].colored_name = database_display
 
     def __getattr__(self, attr):
-        if attr in self.db:
+        """
+        Returns the DB connection if exists or an error if not
+        """
+        if attr != 'test_id' and attr in self.db:
             return self.db[attr]
+        elif attr != 'test_id' and attr in UnifieldTest.db:
+            return UnifieldTest.db
         else:
-            super(UnifieldTest, self).__getattr__(attr)
+            raise NameError("No DB connection found the keyword '%s'!" % attr)
 
     def _hook_db_process(self, name, database):
         '''
@@ -65,79 +196,109 @@ class UnifieldTest(unittest.TestCase):
         return True
 
     def __init__(self, *args, **kwargs):
-        # Default behaviour
+        """
+        Initialize the TestCase from Sync. Database or Config. file
+        """
+        # DB values
+        self.cr = kwargs.pop('cr', None)
+        self.uid = kwargs.pop('uid', None)
+        self.cid = kwargs.pop('cid', None)
+        self.update_module = kwargs.pop('update_module', False)
+        self.method_id = False
+
+        self.unifield_test = True
+
         super(UnifieldTest, self).__init__(*args, **kwargs)
-        # Prepare some values
-        c = UnifieldTestConfigParser()
-        self.config = c.read()
-        self._db_prefix = c.get('DB', 'db_prefix')
-        self._db_instance_prefix = False
-        if c.has_option('DB', 'instance_prefix'):
-            self._db_instance_prefix = c.get('DB', 'instance_prefix') \
-                or self._db_instance_prefix
-        tempo_mkdb = c.getboolean('DB', 'tempo_mkdb')
-        db_suffixes = ['SYNC_SERVER', 'HQ1', 'HQ1C1', 'HQ1C1P1']
-        names = ['sync', 'hq1', 'c1', 'p1']
-        if not tempo_mkdb:
-            db_suffixes = ['SYNC_SERVER', 'HQ_01', 'COORDO_01', 'PROJECT_01']
-        # Check Remote warehouse and complete old params
-        remote_warehouse = c.get('DB', 'RW') or False
-        self.is_remote_warehouse = False
-        if remote_warehouse:
-            self.is_remote_warehouse = True
-        self.is_remote_warehouse = False
-        # TODO: Check coordo level (c2 for 'HQ1C2')
-        # Check project level
-        p_level = '1'
-        if c.has_option('DB', 'project_level'):
-            p_level = c.get('DB', 'project_level') or p_level
-        p_level = int(p_level)
-        if p_level > 1:
-            levels = range(2, p_level + 1)
-            db_suffixes += [ 'HQ1C1P%d' % (l, ) for l in levels ]
-            names += [ 'p1%d' % (l, ) for l in levels ]
-            # TODO: p21 for 'HQ1C2P1', p22 for 'HQ1C2P2'
-        # instance suffixes except sync server
-        self._instances_suffixes = list(db_suffixes)
-        self._instances_suffixes.remove('SYNC_SERVER')
-        # Other values
+
+        # In case of update test cases at unifield_test module update
+        if self.update_module:
+            return
+
+        # Get TerminalColors
         colors = TerminalColors()
         self.colors = colors
-        # Keep each database connection
-        for db_tuple in zip(db_suffixes, names):
-            self._addConnection(db_tuple[0], db_tuple[1])
-        # Add remote warehouse
-        if remote_warehouse:
-            self._addConnection(remote_warehouse, 'rw')
+
+        if not self.db:
+            if not self.cr:
+                self.getDBConnectionsFromConfigFile()
+            else:
+                self.getDBConnectionsFromSyncServer()
+        self.is_automatic_test = self.cr
+
         # For each database, check that unifield_tests module is loaded
         #+ If not, load it.
         #+ Except if the database is sync one
         if UnifieldTest.already_loaded:
             return
+
         for database_name in self.db:
-            if database_name == 'sync':
-                continue
             database = self.db.get(database_name)
             module_obj = database.get('ir.module.module')
-            m_ids = module_obj.search([('name', '=', self.test_module_name)])
+            if database_name == 'sync':
+                m_ids = module_obj.search([('name', '=', self.test_module_name)])
+            else:
+                m_ids = module_obj.search([('name', '=', self.test_data_module_name)])
             database_display = database.colored_name
             for module in module_obj.read(m_ids, ['state']):
                 state = module.get('state', '')
                 if state == 'uninstalled':
-                    print (database_display + ' [' + colors.BYellow + 'UP'.center(4) + colors.Color_Off + '] Module %s' % (self.test_module_name))
+                    print (database_display + ' [' + colors.BYellow + 'UP'.center(4) + colors.Color_Off + '] Installation module %s' % (self.test_data_module_name))
                     module_obj.button_install([module.get('id')])
                     database.get('base.module.upgrade').upgrade_module([])
                 elif state in ['to upgrade', 'to install']:
-                    print (database_display + ' [' + colors.BYellow + 'UP'.center(4) + colors.Color_Off + '] Module %s' % (self.test_module_name))
+                    print (database_display + ' [' + colors.BYellow + 'UP'.center(4) + colors.Color_Off + '] Installation module %s' % (self.test_data_module_name))
                     database.get('base.module.upgrade').upgrade_module([])
                 elif state in ['installed']:
-                    print (database_display + ' [' + colors.BGreen + 'OK'.center(4) + colors.Color_Off + '] Module %s' % (self.test_module_name))
+                    print (database_display + ' [' + colors.BGreen + 'OK'.center(4) + colors.Color_Off + '] Module %s already installed' % (self.test_data_module_name))
                     pass
                 else:
                     raise EnvironmentError(' Wrong module state: %s' % (state or '',))
             # Some processes after instanciation for this database
             self._hook_db_process(database_name, database)
+
         UnifieldTest.already_loaded = True
+
+    def run(self, *args, **kwargs):
+        """
+        Load the data from Yaml file
+        """
+        if not self.cr and self.yaml_file and not UnifieldTest.yaml_already_loaded:
+            self.load_data_from_yaml()
+
+        return super(UnifieldTest, self).run(*args, **kwargs)
+
+
+    def load_data_from_yaml(self):
+        """
+        Parse the Yaml file attached to the test and create objects
+        """
+        if self.cr:
+            return True
+
+        if not self.yaml_file:
+            raise AttributeError('No yaml_file attribute')
+
+        yaml_file_path = path.dirname(path.realpath(__file__))
+        yaml_string = file('%s/data/%s' % (yaml_file_path, self.yaml_file)).read()
+        self.sync.get('automatic.test').load_data_from_yml(self.yaml_file, yaml_string)
+        UnifieldTest.yaml_already_loaded = True
+
+    def add_test_info(self, db, message):
+        """
+        Add information lines on automatic.test.method to see which documents
+        are created in which instance...
+        """
+        if self.method_id:
+            msg = '[%s] %s' % (db.db_name, message)
+            atm_obj = self.sync.get('automatic.test.method')
+            exist_info = atm_obj.read(self.method_id, ['information'])['information']
+            if exist_info:
+                new_info = exist_info + '\n' + msg
+            else:
+                new_info = msg
+            atm_obj.write([self.method_id], {'information': new_info})
+
+        return True
 
     def is_keyword_present(self, db, keyword):
         '''
@@ -163,15 +324,18 @@ class UnifieldTest(unittest.TestCase):
         :rtype integer or False
         '''
         # Object
-        data_obj = db.get('ir.model.data')
+        data_obj = db.get('test.model.data')
+        # If the record is not found in test_model_data table,
+        # the method get_object_reference will check automatically
+        # in ir_model_data table
 
         if module is None:
-            module = self.test_module_name
+            module = self.test_data_module_name
 
         obj = data_obj.get_object_reference(module, object_ref)
 
         if obj:
-            return obj[1]
+            return obj[2]
 
         return False
 
@@ -273,6 +437,16 @@ class UnifieldTest(unittest.TestCase):
                     db.colored_name, )
             )
         return False
+
+    def get_instances_dbs(self):
+        """
+        get instances dbs (all dbs except sync server)
+        :rtype: list
+        """
+        return [ self.db[n] for n in self.db if not n.endswith('SYNC_SERVER') ]
+
+    def get_db(self, name):
+        return self.db.get(name)
 
     def get_db_name_from_suffix(self, suffix):
         return self._db_prefix + suffix
@@ -667,5 +841,73 @@ class UnifieldTest(unittest.TestCase):
                 return item
             i += 1
         return None
+
+    def create_analytic_distribution(self, db):
+        """
+        Create an analytic distribution
+        :param db: Connection on which the distribution must be created
+        :return: The ID of distribution
+        """
+        distrib_obj = db.get('analytic.distribution')
+        cc_line_obj = db.get('cost.center.distribution.line')
+        fp_line_obj = db.get('funding.pool.distribution.line')
+
+        distrib_id = distrib_obj.create({
+            'name': 'Distrib 2',
+        })
+
+        cc_line1_id = cc_line_obj.create({
+            'name': 'CC Line 1',
+            'amount': 0.0,
+            'percentage': 75.0,
+            'currency_id': self.get_record(db, 'EUR', module='base'),
+            'analytic_id': self.get_record(db, 'analytic_cc1'),
+            'distribution_id': distrib_id,
+            'destination_id': self.get_record(db, 'analytic_account_destination_operation', module='analytic_distribution'),
+        })
+
+        cc_line2_id = cc_line_obj.create({
+            'name': 'CC Line 2',
+            'amount': 0.0,
+            'percentage': 25.0,
+            'currency_id': self.get_record(db, 'EUR', module='base'),
+            'analytic_id': self.get_record(db, 'analytic_cc2'),
+            'distribution_id': distrib_id,
+            'destination_id': self.get_record(db, 'analytic_account_destination_operation', module='analytic_distribution'),
+        })
+
+        fp_line1_id = fp_line_obj.create({
+            'name': 'FP Line 1',
+            'amount': 0.0,
+            'percentage': 75.0,
+            'currency_id': self.get_record(db, 'EUR', module='base'),
+            'analytic_id': self.get_record(db, 'analytic_cc1'),
+            'distribution_id': distrib_id,
+            'cost_center_id': self.get_record(db, 'analytic_cc1'),
+            'destination_id': self.get_record(db, 'analytic_account_destination_operation', module='analytic_distribution'),
+        })
+
+        fp_line2_id = fp_line_obj.create({
+            'name': 'FP Line 2',
+            'amount': 0.0,
+            'percentage': 25.0,
+            'currency_id': self.get_record(db, 'EUR', module='base'),
+            'analytic_id': self.get_record(db, 'analytic_cc2'),
+            'distribution_id': distrib_id,
+            'cost_center_id': self.get_record(db, 'analytic_cc1'),
+            'destination_id': self.get_record(db, 'analytic_account_destination_operation', module='analytic_distribution'),
+        })
+
+        return distrib_id
+
+    def get_key_val(self, key, default=None, context=None):
+        """
+        get val from key/val sync store, by key
+        """
+        if isinstance(key, (int, long, )):
+            raise UnifieldTestException('invalid key')
+        # default is passed as 'arg' are named parameters are not supported in
+        # oerlib version we use
+        return self.sync.get('automatic.test.key.value').get_val(key, default)
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
