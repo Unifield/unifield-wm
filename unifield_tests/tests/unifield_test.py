@@ -189,8 +189,9 @@ class UnifieldTest(unittest.TestCase):
             return self.db[attr]
         elif attr != 'test_id' and attr in UnifieldTest.db:
             return UnifieldTest.db
-        else:
-            raise NameError("No DB connection found the keyword '%s'!" % attr)
+        return super(UnifieldTest, self).__getattr__(attr)
+        #else:
+        #    raise NameError("No DB connection found the keyword '%s'!" % attr)
 
     def _hook_db_process(self, name, database):
         '''

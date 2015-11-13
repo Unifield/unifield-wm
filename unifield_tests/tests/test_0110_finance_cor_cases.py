@@ -143,7 +143,7 @@ class FinanceTestCorCases(FinanceTest):
         # load key/val mapping values of accounts code
         # accounts are read from HQ
         db = self.hq1
-        map = {
+        self.map = Dict2Obj(**{
             # existing accounts
             'ht101': self.get_key_val('test_0110.HT101', default='HT101'),
             'ht111': self.get_key_val('test_0110.HT111', default='HT111'),
@@ -162,8 +162,7 @@ class FinanceTestCorCases(FinanceTest):
                 'unifield_tests_data_test_0110_fp1'),
             'fp2': self.get_aa_code_from_sdref(db,
                 'unifield_tests_data_test_0110_fp2'),
-        }
-        self.map = Dict2Obj(**map)
+        })
 
     def tearDown(self):
         pass
@@ -1118,7 +1117,6 @@ class FinanceTestCorCases(FinanceTest):
             )
         )
         jis_by_account = self.get_jis_by_account(push_db, ji_ids)
-        ajis_by_account = self.get_ji_ajis_by_account(push_db, ji_ids)
         aji_HT112 = self.get_ji_ajis_by_account(push_db, ji_ids,
             account_code_filter='63120', cc_code_filter=self.map.ht112)[0]
 
@@ -1830,8 +1828,8 @@ class FinanceTestCorCases(FinanceTest):
         invoice_lines_accounts = [ '63100', '63110', '63120', ]
 
         invoice_lines_breakdown_data = {
-            1: [ (100., 'OPS', self.map.ht101, self.fp1), ],
-            2: [ (100., 'OPS', self.map.ht121, self.fp2), ],
+            1: [ (100., 'OPS', self.map.ht101, self.map.fp1), ],
+            2: [ (100., 'OPS', self.map.ht121, self.map.fp2), ],
             3: [ (50., 'OPS', self.map.ht111, 'PF'),
                     (50., 'OPS', self.map.ht121, 'PF'), ],
         }
@@ -2038,6 +2036,7 @@ class FinanceTestCorCases(FinanceTest):
         self.period_reopen(push_db, 'm', 1)
         self.period_reopen(push_db, 'f', 1)
 
+    '''
     def test_cor_26(self):
         """
         cd unifield/test-finance/unifield-wm/unifield_tests
@@ -2250,6 +2249,7 @@ class FinanceTestCorCases(FinanceTest):
             ))),
             "SYNC mismatch"
         )
+    '''
 
 def get_test_class():
     return FinanceTestCorCases
