@@ -21,7 +21,7 @@
 -
   !record {model: account.target.costcenter, id: test_0110_cc_ht120_target_c1, db: hq1}:
    # INSTANCE TO TARGET
-   instance_id: "@search;msf.instance;('code','=','vg-sp-208_HQ1C1')"
+   instance_id: "@search;msf.instance;('code','=','sp-209_HQ1C1')"
    is_target: True
 
    # Not editable values
@@ -46,7 +46,7 @@
 -
   !record {model: account.target.costcenter, id: test_0110_cc_ht112_target_c1p1, db: hq1}:
    # INSTANCE TO TARGET
-   instance_id: "@search;msf.instance;('code','=','vg-sp-208_HQ1C1P1')"
+   instance_id: "@search;msf.instance;('code','=','sp-209_HQ1C1P1')"
    is_target: True
 
    # Not editable values
@@ -71,41 +71,16 @@
 -
   !record {model: account.target.costcenter, id: test_0110_cc_ht122_target_c1p2, db: hq1}:
    # INSTANCE TO TARGET
-   instance_id: "@search;msf.instance;('code','=','vg-sp-208_HQ1C1P2')"
+   instance_id: "@search;msf.instance;('code','=','sp-209_HQ1C1P2')"
    is_target: True
 
    # Not editable values
    cost_center_id: test_0110_cc_ht122
 -
-  Create COST CENTER HT220
--
-  !record {model: account.analytic.account, id: test_0110_cc_ht220, db: hq1}:
-    # PARENT CC: edit only parent in ('code','=',...)
-    parent_id: "@search;account.analytic.account;('code','=','HT2'),('type','=','view'),('category','=','OC')"
-
-    code: HT220
-    name: HT220
-    date_start: 2015-01-01
-
-    # Not editable values
-    state: open
-    type: normal
-    category: OC
--
-  TARGET HT220 to C2
--
-  !record {model: account.target.costcenter, id: test_0110_cc_ht220_target_c2, db: hq1}:
-   # INSTANCE TO TARGET
-   instance_id: "@search;msf.instance;('code','=','vg-sp-208_HQ1C2')"
-   is_target: True
-
-   # Not editable values
-   cost_center_id: test_0110_cc_ht220
--
   Create FUNDING POOL FP1
 -
  !record {model: account.analytic.account, id: test_0110_fp1, db: hq1}:
-   instance_id: "@search;msf.instance;('code','=','vg-sp-208_HQ1C1')"
+   instance_id: "@search;msf.instance;('code','=','sp-209_HQ1C1')"
    code: FP1
    name: FP1
    date_start: 2015-01-01
@@ -120,7 +95,7 @@
   Create FUNDING POOL FP2
 -
  !record {model: account.analytic.account, id: test_0110_fp2, db: hq1}:
-   instance_id: "@search;msf.instance;('code','=','vg-sp-208_HQ1C1')"
+   instance_id: "@search;msf.instance;('code','=','sp-209_HQ1C1')"
    code: FP2
    name: FP2
    date_start: 2015-01-01
@@ -145,7 +120,7 @@
    code: FC1
    name: FC1
    donor_id: test_0110_donor
-   instance_id: "@search;msf.instance;('code','=','vg-sp-208_HQ1C1')"
+   instance_id: "@search;msf.instance;('code','=','sp-209_HQ1C1')"
    eligibility_from_date: 2015-01-01
    eligibility_to_date: 2016-12-31
    grant_amount: 0
