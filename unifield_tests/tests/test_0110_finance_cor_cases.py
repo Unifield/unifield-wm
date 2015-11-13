@@ -26,6 +26,7 @@
 from __future__ import print_function
 from unifield_test import UnifieldTestException
 from unifield_test import UnifieldTest
+from unifield_test import Dict2Obj
 from finance_test import FinanceTestException
 from finance_test import FinanceTest
 
@@ -139,12 +140,29 @@ class FinanceTestCorCases(FinanceTest):
                 'active': True,
             })
 
-        # load key/val mapping values
-        self.map_vals = {
+        # load key/val mapping values of accounts code
+        # accounts are read from HQ
+        db = self.hq1
+        self.map = Dict2Obj(**{
+            # existing accounts
             'ht101': self.get_key_val('test_0110.HT101', default='HT101'),
             'ht111': self.get_key_val('test_0110.HT111', default='HT111'),
             'ht121': self.get_key_val('test_0110.HT121', default='HT121'),
-        }
+
+            # yaml accounts
+            'ht112': self.get_aa_code_from_sdref(db,
+                'unifield_tests_data_test_0110_cc_ht112'),
+            'ht120': self.get_aa_code_from_sdref(db,
+                'unifield_tests_data_test_0110_cc_ht120'),
+            'ht122': self.get_aa_code_from_sdref(db,
+                'unifield_tests_data_test_0110_cc_ht122'),
+            #'ht220': self.get_aa_code_from_sdref(db,
+            #    'unifield_tests_data_test_0110_cc_ht220'),
+            'fp1': self.get_aa_code_from_sdref(db,
+                'unifield_tests_data_test_0110_fp1'),
+            'fp2': self.get_aa_code_from_sdref(db,
+                'unifield_tests_data_test_0110_fp2'),
+        })
 
     def tearDown(self):
         pass
@@ -313,8 +331,7 @@ class FinanceTestCorCases(FinanceTest):
     # -------------------------------------------------------------------------
     # EMPTY case: dataset test flow
     # -------------------------------------------------------------------------
-    '''
-    def test_cor_00(self):
+    '''def test_cor_00(self):
         """
         fake unit test for dataset testing
         cd unifield/test-finance/unifield-wm/unifield_tests
@@ -339,7 +356,7 @@ class FinanceTestCorCases(FinanceTest):
             account = '60010'
             new_account = '60020'
 
-            ad = [(100., 'OPS', self.map_vals['ht101'], 'PF'), ]
+            ad = [(100., 'OPS', self.map.ht101, 'PF'), ]
 
             regl_id, distrib_id, ji_id = self.register_create_line(
                 db, reg_id,
@@ -383,7 +400,7 @@ class FinanceTestCorCases(FinanceTest):
             regl_id, distrib_id, ji_id = self.register_create_line(
                 db, reg_id,
                 account, self.get_random_amount(True),
-                ad_breakdown_data=[(100., dest, self.map_vals['ht101'], 'PF') ],
+                ad_breakdown_data=[(100., dest, self.map.ht101, 'PF') ],
                 date=False, document_date=False,
                 do_hard_post=True,
                 tag="CT_02"
@@ -398,7 +415,7 @@ class FinanceTestCorCases(FinanceTest):
 
             self.check_ji_correction(db, ji_id,
                 account, new_account_code=False,
-                expected_ad=[(100., new_dest, self.map_vals['ht101'], 'PF'), ],
+                expected_ad=[(100., new_dest, self.map.ht101, 'PF'), ],
                 expected_ad_rev=False,
                 expected_ad_cor=False,
             )
@@ -415,9 +432,8 @@ class FinanceTestCorCases(FinanceTest):
         reg_id = self._register_get(db, browse=False)
         if reg_id:
             account = '60010'
-            cc = self.map_vals['ht101']
-            new_cc = self.get_record_id_from_sdref(db,
-                'unifield_tests_data.test_0110_cc_ht120')
+            cc = self.map.ht101
+            new_cc = self.map.ht120
 
             regl_id, distrib_id, ji_id = self.register_create_line(
                 db, reg_id,
@@ -442,7 +458,6 @@ class FinanceTestCorCases(FinanceTest):
                 expected_ad_cor=False,
             )
 
-    '''
     def test_cor_04(self):
         """
         cd unifield/test-finance/unifield-wm/unifield_tests
@@ -456,12 +471,12 @@ class FinanceTestCorCases(FinanceTest):
         if reg_id:
             account = '60010'
             fp = 'PF'
-            new_fp = 'FP1'
+            new_fp = self.map.fp1
 
             regl_id, distrib_id, ji_id = self.register_create_line(
                 db, reg_id,
                 account, self.get_random_amount(True),
-                ad_breakdown_data=[(100., 'OPS', 'HT101', fp), ],
+                ad_breakdown_data=[(100., 'OPS', self.map.ht101, fp), ],
                 date=False, document_date=False,
                 do_hard_post=True,
                 tag="CT_04"
@@ -476,7 +491,7 @@ class FinanceTestCorCases(FinanceTest):
 
             self.check_ji_correction(db, ji_id,
                 account, new_account_code=False,
-                expected_ad=[(100., 'OPS', 'HT101', new_fp), ],
+                expected_ad=[(100., 'OPS', self.map.ht101, new_fp), ],
                 expected_ad_rev=False,
                 expected_ad_cor=False,
             )
@@ -495,11 +510,11 @@ class FinanceTestCorCases(FinanceTest):
             account = '60010'
             new_account = '60000'
 
-            ad = [(100., 'OPS', 'HT101', 'PF'), ]
+            ad = [(100., 'OPS', self.map.ht101, 'PF'), ]
 
             regl_id, distrib_id, ji_id = self.register_create_line(
                 db, reg_id,
-                account, -100.,  # 100 amount to easyly check AD brakdown
+                account, -100.,  # 100 amount to easyly check AD breakdown
                 ad_breakdown_data=ad,
                 date=False, document_date=False,
                 do_hard_post=True,
@@ -510,8 +525,8 @@ class FinanceTestCorCases(FinanceTest):
             # AD 100% OPS, HT101, PF -> 55% OPS, HT101, PF
             #                        -> 45% NAT, HT101, PF
             new_ad=[
-                (55., 'OPS', 'HT101', 'PF'),
-                (45., 'NAT', 'HT101', 'PF'),
+                (55., 'OPS', self.map.ht101, 'PF'),
+                (45., 'NAT', self.map.ht101, 'PF'),
             ]
             self.simulation_correction_wizard(db, ji_id,
                     new_account_code=new_account,
@@ -540,8 +555,8 @@ class FinanceTestCorCases(FinanceTest):
             account = '60010'
 
             ad = [
-                (60., 'OPS', 'HT101', 'PF'),
-                (40., 'OPS', 'HT120', 'PF'),
+                (60., 'OPS', self.map.ht101, 'PF'),
+                (40., 'OPS', self.map.ht120, 'PF'),
             ]
 
             regl_id, distrib_id, ji_id = self.register_create_line(
@@ -558,8 +573,8 @@ class FinanceTestCorCases(FinanceTest):
             self.period_close(db, 'm', 1)
 
             new_ad=[
-                (70., 'OPS', 'HT101', 'PF'),
-                (30., 'OPS', 'HT120', 'PF'),
+                (70., 'OPS', self.map.ht101, 'PF'),
+                (30., 'OPS', self.map.ht120, 'PF'),
             ]
             self.simulation_correction_wizard(db, ji_id,
                     cor_date=self.get_orm_fy_date(2, 7),  # 7 Feb of this year
@@ -567,7 +582,7 @@ class FinanceTestCorCases(FinanceTest):
                     new_ad_breakdown_data=False,
                     ad_replace_data={
                             60.: {'per': 70., },
-                            40.: {'per': 30., 'cc': 'HT120', },
+                            40.: {'per': 30., 'cc': self.map.ht120, },
                         },
             )
 
@@ -605,8 +620,8 @@ class FinanceTestCorCases(FinanceTest):
             new_account = '60030'
 
             ad = [
-                (60., 'OPS', 'HT101', 'PF'),
-                (40., 'OPS', 'HT120', 'PF'),
+                (60., 'OPS', self.map.ht101, 'PF'),
+                (40., 'OPS', self.map.ht120, 'PF'),
             ]
 
             regl_id, distrib_id, ji_id = self.register_create_line(
@@ -619,8 +634,8 @@ class FinanceTestCorCases(FinanceTest):
             )
 
             new_ad=[
-                (70., 'OPS', 'HT101', 'PF'),
-                (30., 'OPS', 'HT101', 'PF'),
+                (70., 'OPS', self.map.ht101, 'PF'),
+                (30., 'OPS',self.map. ht120, 'PF'),
             ]
             self.simulation_correction_wizard(db, ji_id,
                     cor_date=self.get_orm_fy_date(2, 7),  # 7 Feb of this year
@@ -652,11 +667,11 @@ class FinanceTestCorCases(FinanceTest):
             new_account = '13310'
 
             ad = [
-                (10., 'OPS', 'HT101', 'PF'),
-                (90., 'OPS', 'HT101', 'FP1'),
+                (10., 'OPS', self.map.ht101, 'PF'),
+                (90., 'OPS', self.map.ht101, self.map.fp1),
             ]
-            self.analytic_distribution_set_fp_account_dest(db, 'FP1', account,
-                'OPS')
+            self.analytic_distribution_set_fp_account_dest(db, self.map.fp1,
+                account, 'OPS')
 
             regl_id, distrib_id, ji_id = self.register_create_line(
                 db, reg_id,
@@ -739,11 +754,11 @@ class FinanceTestCorCases(FinanceTest):
             )
 
             ad=[
-                (30., 'OPS', 'HT101', 'PF'),
-                (30., 'OPS', 'HT101', 'FP1'),
-                (40., 'OPS', 'HT120', 'FP1'),
+                (30., 'OPS', self.map.ht101, 'PF'),
+                (30., 'OPS', self.map.ht101, self.map.fp1),
+                (40., 'OPS', self.map.ht120, self.map.fp1),
             ]
-            self.analytic_distribution_set_fp_account_dest(db, 'FP1',
+            self.analytic_distribution_set_fp_account_dest(db, self.map.fp1,
                 new_account, 'OPS')
 
             self.simulation_correction_wizard(db, ji_id,
@@ -771,18 +786,19 @@ class FinanceTestCorCases(FinanceTest):
         aal_obj = db.get('account.analytic.line')
 
         ad=[
-            (40., 'NAT', 'HT101', 'PF'),
-            (60., 'NAT', 'HT120', 'FP1'),
+            (40., 'NAT', self.map.ht101, 'PF'),
+            (60., 'NAT', self.map.ht120, self.map.fp1),
         ]
 
         new_ad=[
-            (40., 'NAT', 'HT101', 'PF'),
-            (60., 'NAT', 'HT120', 'PF'),
+            (40., 'NAT', self.map.ht101, 'PF'),
+            (60., 'NAT', self.map.ht120, 'PF'),
         ]
 
         invoice_lines_accounts = [ '66002', '66003', '66004', ]
         for a in invoice_lines_accounts:
-            self.analytic_distribution_set_fp_account_dest(db, 'FP1', a, 'NAT')
+            self.analytic_distribution_set_fp_account_dest(db, self.map.fp1, a,
+                'NAT')
 
         ji_ids = self.invoice_validate(db,
             self.invoice_create_supplier_invoice(
@@ -798,12 +814,12 @@ class FinanceTestCorCases(FinanceTest):
 
         # close financing contract FC1: soft-close it
         fcc_obj = db.get('financing.contract.contract')
-        fc_id = self.get_id_from_key(db, 'financing.contract.contract', 'FC1',
-            assert_if_no_ids=True)
+        fc_id = self.get_record_id_from_sdref(db,
+            'unifield_tests_data_test_0110_fc1')
         fcc_obj.contract_soft_closed([fc_id])
 
         # select an AJI booked on FP1, correction wizard
-        fp1_id = self.get_account_from_code(db, 'FP1', is_analytic=True)
+        fp1_id = self.get_account_from_code(db, self.map.fp1, is_analytic=True)
         aji_ids = aal_obj.search([
             ('move_id', 'in', ji_ids),
             ('account_id', '=', fp1_id),
@@ -863,8 +879,8 @@ class FinanceTestCorCases(FinanceTest):
         invoice_lines_accounts = [ '60010', '60020', '60030', ]
 
         ad = [
-            (60., 'OPS', 'HT101', 'PF'),
-            (40., 'OPS', 'HT120', 'PF'),
+            (60., 'OPS', self.map.ht101, 'PF'),
+            (40., 'OPS', self.map.ht120, 'PF'),
         ]
 
         ji_ids = self.invoice_validate(db,
@@ -884,8 +900,8 @@ class FinanceTestCorCases(FinanceTest):
         self.period_close(db, 'm', 1)
 
         new_ad = [
-            (70., 'OPS', 'HT101', 'PF'),
-            (30., 'OPS', 'HT120', 'PF'),
+            (70., 'OPS', self.map.ht101, 'PF'),
+            (30., 'OPS', self.map.ht120, 'PF'),
         ]
 
         # simu of cor for each invoice JIs
@@ -933,8 +949,8 @@ class FinanceTestCorCases(FinanceTest):
         invoice_lines_accounts = [ '60010', '60020', ]
 
         ad = [
-            (55., 'OPS', 'HT101', 'PF'),
-            (45., 'OPS', 'HT120', 'PF'),
+            (55., 'OPS', self.map.ht101, 'PF'),
+            (45., 'OPS', self.map.ht120, 'PF'),
         ]
 
         aml_obj = db.get('account.move.line')
@@ -953,7 +969,7 @@ class FinanceTestCorCases(FinanceTest):
 
         # 13.4 account/ad correction of 1st invoice line
         new_account = '60000'
-        new_ad = [ (100., 'OPS', 'HT120', 'PF'), ]
+        new_ad = [ (100., 'OPS', self.map.ht120, 'PF'), ]
         ji_br = db.get('account.move.line').browse(ji_ids[0])
 
         self.simulation_correction_wizard(db, ji_ids[0],
@@ -976,9 +992,9 @@ class FinanceTestCorCases(FinanceTest):
         self.assert_(cor1_ids != False, 'COR-1 JI not found!')
 
         new_account2 = '60030'
-        new_ad2 = [ (100., 'OPS', 'HT120', 'FP1'), ]
-        self.analytic_distribution_set_fp_account_dest(db, 'FP1', new_account2,
-            'OPS')
+        new_ad2 = [ (100., 'OPS', self.map.ht120, self.map.fp1), ]
+        self.analytic_distribution_set_fp_account_dest(db, self.map.fp1,
+            new_account2, 'OPS')
 
         self.simulation_correction_wizard(db, cor1_ids[0],
             cor_date=False,
@@ -1001,13 +1017,13 @@ class FinanceTestCorCases(FinanceTest):
         # correction of COR-2 => will generate COR-3
         new_account3 = '60100'
         new_ad3 = [
-            (70., 'OPS', 'HT120', 'FP2'),
-            (30., 'OPS', 'HT101', 'FP2'),
+            (70., 'OPS', self.map.ht120, self.map.fp2),
+            (30., 'OPS', self.map.ht101, self.map.fp2),
         ]
-        self.analytic_distribution_set_fp_account_dest(db, 'FP1', new_account3,
-            'OPS')
-        self.analytic_distribution_set_fp_account_dest(db, 'FP2', new_account3,
-            'OPS')
+        self.analytic_distribution_set_fp_account_dest(db, self.map.fp1,
+            new_account3, 'OPS')
+        self.analytic_distribution_set_fp_account_dest(db, self.map.fp2,
+            new_account3, 'OPS')
 
         cor2_ids = aml_obj.search([('corrected_line_id', '=', cor1_ids[0])])
         self.assert_(cor2_ids != False, 'COR-2 JI not found!')
@@ -1041,7 +1057,7 @@ class FinanceTestCorCases(FinanceTest):
             regl_id, distrib_id, ji_id = self.register_create_line(
                 db, reg_id,
                 '60000', self.get_random_amount(),
-                ad_breakdown_data=[ (100., 'OPS', 'HT101', 'PF'), ]  ,
+                ad_breakdown_data=[(100., 'OPS', self.map.ht101, 'PF')],
                 date=False, document_date=False,
                 do_temp_post=True, do_hard_post=False,
                 tag="CT_14"
@@ -1065,7 +1081,6 @@ class FinanceTestCorCases(FinanceTest):
     # -------------------------------------------------------------------------
     # SYNC CASES FLOW: from 20 to 26
     # -------------------------------------------------------------------------
-
     def test_cor_20(self):
         """
         cd unifield/test-finance/unifield-wm/unifield_tests
@@ -1077,14 +1092,14 @@ class FinanceTestCorCases(FinanceTest):
         invoice_lines_accounts = [ '63100', '63110', '63120', ]
 
         invoice_lines_breakdown_data = {
-            1: [ (100., 'OPS', 'HT101', 'FP1'), ],
-            2: [ (100., 'OPS', 'HT120', 'FP2'), ],
-            3: [ (100., 'OPS', 'HT112', 'PF'), ],
+            1: [ (100., 'OPS', self.map.ht101, self.map.fp1), ],
+            2: [ (100., 'OPS', self.map.ht120, self.map.fp2), ],
+            3: [ (100., 'OPS', self.map.ht112, 'PF'), ],
         }
-        self.analytic_distribution_set_fp_account_dest(push_db, 'FP1', '63100',
-            'OPS')
-        self.analytic_distribution_set_fp_account_dest(push_db, 'FP2', '63110',
-            'OPS')
+        self.analytic_distribution_set_fp_account_dest(push_db, self.map.fp1,
+            '63100', 'OPS')
+        self.analytic_distribution_set_fp_account_dest(push_db, self.map.fp2,
+            '63110', 'OPS')
         self._sync_from_c1()  # sync down fp account/dest
 
         # 20.1, 20.2, 20.3
@@ -1102,9 +1117,8 @@ class FinanceTestCorCases(FinanceTest):
             )
         )
         jis_by_account = self.get_jis_by_account(push_db, ji_ids)
-        ajis_by_account = self.get_ji_ajis_by_account(push_db, ji_ids)
         aji_HT112 = self.get_ji_ajis_by_account(push_db, ji_ids,
-            account_code_filter='63120', cc_code_filter='HT112')[0]
+            account_code_filter='63120', cc_code_filter=self.map.ht112)[0]
 
         # 20.4
         self.synchronize(push_db)
@@ -1120,10 +1134,10 @@ class FinanceTestCorCases(FinanceTest):
         push_not_expected=[
             self.get_ji_ajis_by_account(push_db, ji_ids,
                 account_code_filter='63100',
-                cc_code_filter='HT101')[0][1],
+                cc_code_filter=self.map.ht101)[0][1],
             self.get_ji_ajis_by_account(push_db, ji_ids,
                 account_code_filter='63110',
-                cc_code_filter='HT120')[0][1],
+                cc_code_filter=self.map.ht120)[0][1],
         ]
         self.assert_(
             all(self.flat_dict_vals(self.check_aji_record_sync_push_pulled(
@@ -1145,10 +1159,10 @@ class FinanceTestCorCases(FinanceTest):
             aji_HT112[1],
             self.get_ji_ajis_by_account(push_db, ji_ids,
                 account_code_filter='63100',
-                cc_code_filter='HT101')[0][1],
+                cc_code_filter=self.map.ht101)[0][1],
             self.get_ji_ajis_by_account(push_db, ji_ids,
                 account_code_filter='63110',
-                cc_code_filter='HT120')[0][1],
+                cc_code_filter=self.map.ht120)[0][1],
         ]
         self.assert_(
             all(self.flat_dict_vals(self.check_aji_record_sync_push_pulled(
@@ -1161,7 +1175,7 @@ class FinanceTestCorCases(FinanceTest):
         )
 
         # 20.7/8/9 (change 63120 refund line AD CC HT112 to HT121)
-        new_CC = 'HT121'
+        new_CC = self.map.ht121
         self.simulation_correction_wizard(push_db,
             jis_by_account['63120'][0][0],
             cor_date=False,
@@ -1213,7 +1227,7 @@ class FinanceTestCorCases(FinanceTest):
             # target instance changed CC HT112 to HT121: AJI moved to C1P2
             self.get_ji_ajis_by_account(push_db, ji_ids,
                 account_code_filter='63120',
-                cc_code_filter='HT121')[0][1],
+                cc_code_filter=self.map.ht121)[0][1],
         ]
         push_not_expected=[
         ]
@@ -1241,14 +1255,14 @@ class FinanceTestCorCases(FinanceTest):
         invoice_lines_accounts = [ '63100', '63110', '63120', ]
 
         invoice_lines_breakdown_data = {
-            1: [ (100., 'OPS', 'HT101', 'FP1'), ],
-            2: [ (100., 'OPS', 'HT120', 'FP2'), ],
-            3: [ (100., 'OPS', 'HT112', 'PF'), ],
+            1: [ (100., 'OPS', self.map.ht101, self.map.fp1), ],
+            2: [ (100., 'OPS', self.map.ht120, self.map.fp2), ],
+            3: [ (100., 'OPS', self.map.ht112, 'PF'), ],
         }
-        self.analytic_distribution_set_fp_account_dest(push_db, 'FP1', '63100',
-            'OPS')
-        self.analytic_distribution_set_fp_account_dest(push_db, 'FP2', '63110',
-            'OPS')
+        self.analytic_distribution_set_fp_account_dest(push_db, self.map.fp1,
+            '63100', 'OPS')
+        self.analytic_distribution_set_fp_account_dest(push_db, self.map.fp2,
+            '63110', 'OPS')
         self._sync_from_c1()  # sync down fp account/dest
 
         # 21.1, 21.2, 21.3
@@ -1278,15 +1292,15 @@ class FinanceTestCorCases(FinanceTest):
         push_expected=[
             self.get_ji_ajis_by_account(push_db, ji_ids,
                 account_code_filter='63120',
-                cc_code_filter='HT112')[0][1],
+                cc_code_filter=self.map.ht112)[0][1],
         ]
         push_not_expected=[
             self.get_ji_ajis_by_account(push_db, ji_ids,
                 account_code_filter='63100',
-                cc_code_filter='HT101')[0][1],
+                cc_code_filter=self.map.ht101)[0][1],
             self.get_ji_ajis_by_account(push_db, ji_ids,
                 account_code_filter='63110',
-                cc_code_filter='HT120')[0][1],
+                cc_code_filter=self.map.ht120)[0][1],
         ]
         self.assert_(
             all(self.flat_dict_vals(self.check_aji_record_sync_push_pulled(
@@ -1307,13 +1321,13 @@ class FinanceTestCorCases(FinanceTest):
         push_not_expected = [
             self.get_ji_ajis_by_account(push_db, ji_ids,
                 account_code_filter='63100',
-                cc_code_filter='HT101')[0][1],
+                cc_code_filter=self.map.ht101)[0][1],
             self.get_ji_ajis_by_account(push_db, ji_ids,
                 account_code_filter='63110',
-                cc_code_filter='HT120')[0][1],
+                cc_code_filter=self.map.ht120)[0][1],
             self.get_ji_ajis_by_account(push_db, ji_ids,
                 account_code_filter='63120',
-                cc_code_filter='HT112')[0][1],
+                cc_code_filter=self.map.ht112)[0][1],
         ]
         self.assert_(
             all(self.flat_dict_vals(self.check_aji_record_sync_push_pulled(
@@ -1327,8 +1341,8 @@ class FinanceTestCorCases(FinanceTest):
 
         # 21.7/21.8/21.9
         new_ad = [
-            (50., 'OPS', 'HT112', 'PF'),
-            (50., 'OPS', 'HT121', 'PF'),
+            (50., 'OPS', self.map.ht112, 'PF'),
+            (50., 'OPS', self.map.ht121, 'PF'),
         ]
         self.simulation_correction_wizard(push_db,
             jis_by_account['63120'][0][0],
@@ -1357,11 +1371,11 @@ class FinanceTestCorCases(FinanceTest):
         push_expected=[
             self.get_ji_ajis_by_account(push_db, ji_ids,
                 account_code_filter='63120',
-                cc_code_filter='HT112')[0][1],
+                cc_code_filter=self.map.ht112)[0][1],
         ]
         aji_ht121 = self.get_ji_ajis_by_account(push_db, ji_ids,
                 account_code_filter='63120',
-                cc_code_filter='HT121')[0]
+                cc_code_filter=self.map.ht121)[0]
         push_not_expected=[
             aji_ht121[1],  # not expected HT121 from AD split when C1 COR
         ]
@@ -1413,14 +1427,15 @@ class FinanceTestCorCases(FinanceTest):
         invoice_lines_accounts = [ '63100', '63110', '63120', ]
 
         invoice_lines_breakdown_data = {
-            1: [ (100., 'OPS', 'HT101', 'FP1'), ],
-            2: [ (100., 'OPS', 'HT120', 'FP2'), ],
-            3: [ (50., 'OPS', 'HT111', 'PF'), (50., 'OPS', 'HT112', 'PF'), ],
+            1: [ (100., 'OPS', self.map.ht101, self.map.fp1), ],
+            2: [ (100., 'OPS', self.map.ht120, self.map.fp2), ],
+            3: [ (50., 'OPS', self.map.ht111, 'PF'),
+                    (50., 'OPS', self.map.ht112, 'PF'), ],
         }
-        self.analytic_distribution_set_fp_account_dest(push_db, 'FP1', '63100',
-            'OPS')
-        self.analytic_distribution_set_fp_account_dest(push_db, 'FP2', '63110',
-            'OPS')
+        self.analytic_distribution_set_fp_account_dest(push_db, self.map.fp1,
+            '63100', 'OPS')
+        self.analytic_distribution_set_fp_account_dest(push_db, self.map.fp2,
+            '63110', 'OPS')
         self._sync_from_c1()  # sync down fp account/dest
 
         # 22.1, 22.2, 22.3
@@ -1450,18 +1465,18 @@ class FinanceTestCorCases(FinanceTest):
         push_expected = [
             # 2 AJIs HT111 & HT112
             self.get_ji_ajis_by_account(push_db, ji_ids,  # get sdref from c1
-                cc_code_filter='HT111')['63120'][0][1],
+                cc_code_filter=self.map.ht111)['63120'][0][1],
             self.get_ji_ajis_by_account(push_db, ji_ids,
                 account_code_filter='63120',
-                cc_code_filter='HT112')[0][1],
+                cc_code_filter=self.map.ht112)[0][1],
         ]
         push_not_expected=[
             self.get_ji_ajis_by_account(push_db, ji_ids,
                 account_code_filter='63100',
-                cc_code_filter='HT101')[0][1],
+                cc_code_filter=self.map.ht101)[0][1],
             self.get_ji_ajis_by_account(push_db, ji_ids,
                 account_code_filter='63110',
-                cc_code_filter='HT120')[0][1],
+                cc_code_filter=self.map.ht120)[0][1],
         ]
         self.assert_(
             all(self.flat_dict_vals(self.check_aji_record_sync_push_pulled(
@@ -1484,14 +1499,15 @@ class FinanceTestCorCases(FinanceTest):
         invoice_lines_accounts = [ '63100', '63110', '63120', ]
 
         invoice_lines_breakdown_data = {
-            1: [ (100., 'OPS', 'HT101', 'FP1'), ],
-            2: [ (100., 'OPS', 'HT120', 'FP2'), ],
-            3: [ (50., 'OPS', 'HT111', 'PF'), (50., 'OPS', 'HT112', 'PF'), ],
+            1: [ (100., 'OPS', self.map.ht101, self.map.fp1), ],
+            2: [ (100., 'OPS', self.map.ht120, self.map.fp2), ],
+            3: [ (50., 'OPS', self.map.ht111, 'PF'),
+                    (50., 'OPS', self.map.ht112, 'PF'), ],
         }
-        self.analytic_distribution_set_fp_account_dest(push_db, 'FP1', '63100',
-            'OPS')
-        self.analytic_distribution_set_fp_account_dest(push_db, 'FP2', '63110',
-            'OPS')
+        self.analytic_distribution_set_fp_account_dest(push_db, self.map.fp1,
+            '63100', 'OPS')
+        self.analytic_distribution_set_fp_account_dest(push_db, self.map.fp2,
+            '63110', 'OPS')
         self._sync_from_c1()  # sync down fp account/dest
 
         # 23.1, 23.2, 23.3
@@ -1521,18 +1537,18 @@ class FinanceTestCorCases(FinanceTest):
         push_expected = [
             self.get_ji_ajis_by_account(push_db, ji_ids,
                 account_code_filter='63120',
-                cc_code_filter='HT111')[0][1],
+                cc_code_filter=self.map.ht111)[0][1],
             self.get_ji_ajis_by_account(push_db, ji_ids,
                 account_code_filter='63120',
-                cc_code_filter='HT112')[0][1],
+                cc_code_filter=self.map.ht112)[0][1],
         ]
         push_not_expected=[
             self.get_ji_ajis_by_account(push_db, ji_ids,
                 account_code_filter='63100',
-                cc_code_filter='HT101')[0][1],
+                cc_code_filter=self.map.ht101)[0][1],
             self.get_ji_ajis_by_account(push_db, ji_ids,
                 account_code_filter='63110',
-                cc_code_filter='HT120')[0][1],
+                cc_code_filter=self.map.ht120)[0][1],
         ]
         self.assert_(
             all(self.flat_dict_vals(self.check_aji_record_sync_push_pulled(
@@ -1546,9 +1562,9 @@ class FinanceTestCorCases(FinanceTest):
 
         # 23.6/7
         new_ad = [
-            (20., 'OPS', 'HT111', 'PF'),
-            (35., 'OPS', 'HT112', 'PF'),
-            (45., 'OPS', 'HT112', 'FP1'),
+            (20., 'OPS', self.map.ht111, 'PF'),
+            (35., 'OPS', self.map.ht112, 'PF'),
+            (45., 'OPS', self.map.ht112, self.map.fp1),
         ]
         self.simulation_correction_wizard(push_db,
             jis_by_account['63120'][0][0],
@@ -1573,20 +1589,20 @@ class FinanceTestCorCases(FinanceTest):
 
         ht112_ajis = self.get_ji_ajis_by_account(push_db, ji_ids,
                 account_code_filter='63120',
-                cc_code_filter='HT112')  # 2 items since C1 COR
+                cc_code_filter=self.map.ht112)  # 2 items since C1 COR
         push_expected = [
             self.get_ji_ajis_by_account(push_db, ji_ids,
-                cc_code_filter='HT111')['63120'][0][1],
+                cc_code_filter=self.map.ht111)['63120'][0][1],
             ht112_ajis[0][1],
             ht112_ajis[1][1],
         ]
         push_not_expected=[
             self.get_ji_ajis_by_account(push_db, ji_ids,
                 account_code_filter='63100',
-                cc_code_filter='HT101')[0][1],
+                cc_code_filter=self.map.ht101)[0][1],
             self.get_ji_ajis_by_account(push_db, ji_ids,
                 account_code_filter='63110',
-                cc_code_filter='HT120')[0][1],
+                cc_code_filter=self.map.ht120)[0][1],
         ]
         self.assert_(
             all(self.flat_dict_vals(self.check_aji_record_sync_push_pulled(
@@ -1609,14 +1625,15 @@ class FinanceTestCorCases(FinanceTest):
         invoice_lines_accounts = [ '63100', '63110', '63120', ]
 
         invoice_lines_breakdown_data = {
-            1: [ (100., 'OPS', 'HT101', 'FP1'), ],
-            2: [ (100., 'OPS', 'HT121', 'FP2'), ],
-            3: [ (50., 'OPS', 'HT111', 'PF'), (50., 'OPS', 'HT121', 'PF'), ],
+            1: [ (100., 'OPS', self.map.ht101, self.map.fp1), ],
+            2: [ (100., 'OPS', self.map.ht121, self.map.fp2), ],
+            3: [ (50., 'OPS', self.map.ht111, 'PF'),
+                    (50., 'OPS', self.map.ht121, 'PF'), ],
         }
-        self.analytic_distribution_set_fp_account_dest(push_db, 'FP1', '63100',
-            'OPS')
-        self.analytic_distribution_set_fp_account_dest(push_db, 'FP2', '63110',
-            'OPS')
+        self.analytic_distribution_set_fp_account_dest(push_db, self.map.fp1,
+            '63100', 'OPS')
+        self.analytic_distribution_set_fp_account_dest(push_db, self.map.fp2,
+            '63110', 'OPS')
         self._sync_from_c1()  # sync down fp account/dest
 
         # 24.1, 24.2, 24.3
@@ -1638,11 +1655,11 @@ class FinanceTestCorCases(FinanceTest):
         # get 63120 HT111 sdref: will be deleted later(C1P1) and need to assert
         aji_63120_HT111_sdref = self.get_ji_ajis_by_account(push_db, ji_ids,
             account_code_filter='63120',
-            cc_code_filter='HT111')[0][1]
+            cc_code_filter=self.map.ht111)[0][1]
         # get 63120 HT121 sdref: will be deleted later(C1P2) and need to assert
         aji_63120_HT121_sdref = self.get_ji_ajis_by_account(push_db, ji_ids,
             account_code_filter='63120',
-            cc_code_filter='HT121')[0][1]
+            cc_code_filter=self.map.ht121)[0][1]
 
         # 24.4
         self.synchronize(push_db)
@@ -1655,18 +1672,18 @@ class FinanceTestCorCases(FinanceTest):
         push_expected = [
             self.get_ji_ajis_by_account(push_db, ji_ids,
                 account_code_filter='63120',
-                cc_code_filter='HT111')[0][1],
+                cc_code_filter=self.map.ht111)[0][1],
         ]
         push_not_expected=[
             self.get_ji_ajis_by_account(push_db, ji_ids,
                 account_code_filter='63100',
-                cc_code_filter='HT101')[0][1],
+                cc_code_filter=self.map.ht101)[0][1],
             self.get_ji_ajis_by_account(push_db, ji_ids,
                 account_code_filter='63110',
-                cc_code_filter='HT121')[0][1],
+                cc_code_filter=self.map.ht121)[0][1],
             self.get_ji_ajis_by_account(push_db, ji_ids,
                 account_code_filter='63120',
-                cc_code_filter='HT121')[0][1],
+                cc_code_filter=self.map.ht121)[0][1],
         ]
         self.assert_(
             all(self.flat_dict_vals(self.check_aji_record_sync_push_pulled(
@@ -1685,17 +1702,17 @@ class FinanceTestCorCases(FinanceTest):
         # pull 2 AJIs: 63110 HT121, 63120 HT121
         push_expected = [
             self.get_ji_ajis_by_account(push_db, ji_ids,
-                cc_code_filter='HT121')['63110'][0][1],
+                cc_code_filter=self.map.ht121)['63110'][0][1],
             self.get_ji_ajis_by_account(push_db, ji_ids,
-                cc_code_filter='HT121')['63120'][0][1],
+                cc_code_filter=self.map.ht121)['63120'][0][1],
         ]
         push_not_expected=[
             self.get_ji_ajis_by_account(push_db, ji_ids,
                 account_code_filter='63100',
-                cc_code_filter='HT101')[0][1],
+                cc_code_filter=self.map.ht101)[0][1],
             self.get_ji_ajis_by_account(push_db, ji_ids,
                 account_code_filter='63120',
-                cc_code_filter='HT111')[0][1],
+                cc_code_filter=self.map.ht111)[0][1],
         ]
         self.assert_(
             all(self.flat_dict_vals(self.check_aji_record_sync_push_pulled(
@@ -1709,7 +1726,7 @@ class FinanceTestCorCases(FinanceTest):
 
         # 24.7
         new_ad = [
-            (100., 'OPS', 'HT120', 'PF'),
+            (100., 'OPS',self.map.ht120, 'PF'),
         ]
         self.simulation_correction_wizard(push_db,
             jis_by_account['63120'][0][0],
@@ -1727,9 +1744,9 @@ class FinanceTestCorCases(FinanceTest):
         )
 
         # 24.8
-        new_cc = 'HT122'
+        new_cc = self.map.ht122
         new_ad = [
-            (100., 'OPS', new_cc, 'FP2'),
+            (100., 'OPS', new_cc, self.map.fp2),
         ]
         self.simulation_correction_wizard(push_db,
             jis_by_account['63110'][0][0],
@@ -1782,7 +1799,7 @@ class FinanceTestCorCases(FinanceTest):
         push_expected = [
             self.get_ji_ajis_by_account(push_db, ji_ids,
                 account_code_filter='63110',
-                cc_code_filter='HT122')[0][1],
+                cc_code_filter=self.map.ht122)[0][1],
         ]
         push_not_expected = [
         ]
@@ -1811,14 +1828,15 @@ class FinanceTestCorCases(FinanceTest):
         invoice_lines_accounts = [ '63100', '63110', '63120', ]
 
         invoice_lines_breakdown_data = {
-            1: [ (100., 'OPS', 'HT101', 'FP1'), ],
-            2: [ (100., 'OPS', 'HT121', 'FP2'), ],
-            3: [ (50., 'OPS', 'HT111', 'PF'), (50., 'OPS', 'HT121', 'PF'), ],
+            1: [ (100., 'OPS', self.map.ht101, self.map.fp1), ],
+            2: [ (100., 'OPS', self.map.ht121, self.map.fp2), ],
+            3: [ (50., 'OPS', self.map.ht111, 'PF'),
+                    (50., 'OPS', self.map.ht121, 'PF'), ],
         }
-        self.analytic_distribution_set_fp_account_dest(push_db, 'FP1', '63100',
-            'OPS')
-        self.analytic_distribution_set_fp_account_dest(push_db, 'FP2', '63110',
-            'OPS')
+        self.analytic_distribution_set_fp_account_dest(push_db, self.map.fp1,
+            '63100', 'OPS')
+        self.analytic_distribution_set_fp_account_dest(push_db, self.map.fp2,
+            '63110', 'OPS')
         self._sync_from_c1()  # sync down fp account/dest
 
         # 25.1, 25.2, 25.3
@@ -1848,18 +1866,18 @@ class FinanceTestCorCases(FinanceTest):
         push_expected = [
             self.get_ji_ajis_by_account(push_db, ji_ids,
                 account_code_filter='63120',
-                cc_code_filter='HT111')[0][1],
+                cc_code_filter=self.map.ht111)[0][1],
         ]
         push_not_expected=[
             self.get_ji_ajis_by_account(push_db, ji_ids,
                 account_code_filter='63100',
-                cc_code_filter='HT101')[0][1],
+                cc_code_filter=self.map.ht101)[0][1],
             self.get_ji_ajis_by_account(push_db, ji_ids,
                 account_code_filter='63110',
-                cc_code_filter='HT121')[0][1],
+                cc_code_filter=self.map.ht121)[0][1],
             self.get_ji_ajis_by_account(push_db, ji_ids,
                 account_code_filter='63120',
-                cc_code_filter='HT121')[0][1],
+                cc_code_filter=self.map.ht121)[0][1],
         ]
         self.assert_(
             all(self.flat_dict_vals(self.check_aji_record_sync_push_pulled(
@@ -1878,17 +1896,17 @@ class FinanceTestCorCases(FinanceTest):
         # pull 2 AJIs: 63110 HT121, 63120 HT121
         push_expected = [
             self.get_ji_ajis_by_account(push_db, ji_ids,
-                cc_code_filter='HT121')['63110'][0][1],
+                cc_code_filter=self.map.ht121)['63110'][0][1],
             self.get_ji_ajis_by_account(push_db, ji_ids,
-                cc_code_filter='HT121')['63120'][0][1],
+                cc_code_filter=self.map.ht121)['63120'][0][1],
         ]
         push_not_expected=[
             self.get_ji_ajis_by_account(push_db, ji_ids,
                 account_code_filter='63100',
-                cc_code_filter='HT101')[0][1],
+                cc_code_filter=self.map.ht101)[0][1],
             self.get_ji_ajis_by_account(push_db, ji_ids,
                 account_code_filter='63120',
-                cc_code_filter='HT111')[0][1],
+                cc_code_filter=self.map.ht111)[0][1],
         ]
         self.assert_(
             all(self.flat_dict_vals(self.check_aji_record_sync_push_pulled(
@@ -1906,11 +1924,11 @@ class FinanceTestCorCases(FinanceTest):
 
         # 25.8
         old_ad = [
-            (50., 'OPS', 'HT111', 'PF'),
-            (50., 'OPS', 'HT121', 'PF'),
+            (50., 'OPS', self.map.ht111, 'PF'),
+            (50., 'OPS', self.map.ht121, 'PF'),
         ]
         new_ad = [
-            (100., 'OPS', 'HT120', 'PF'),
+            (100., 'OPS', self.map.ht120, 'PF'),
         ]
         self.simulation_correction_wizard(push_db,
             jis_by_account['63120'][0][0],
@@ -1929,10 +1947,10 @@ class FinanceTestCorCases(FinanceTest):
         )
 
         # 25.9
-        old_ad = [ (100., 'OPS', 'HT121', 'FP2'), ]
-        new_cc = 'HT122'
+        old_ad = [ (100., 'OPS',self.map.ht121,self.map.fp2), ]
+        new_cc = self.map.ht122
         new_ad = [
-            (100., 'OPS', new_cc, 'FP2'),
+            (100., 'OPS', new_cc, self.map.fp2),
         ]
         self.simulation_correction_wizard(push_db,
             jis_by_account['63110'][0][0],
@@ -1963,7 +1981,7 @@ class FinanceTestCorCases(FinanceTest):
                 push_db,
                 self.get_ji_ajis_by_account(push_db, ji_ids,
                     account_code_filter='63120',
-                    cc_code_filter='HT111')[0][0]
+                    cc_code_filter=self.map.ht111)[0][0]
             )[0][1],
         ]
         push_not_expected=[
@@ -1987,7 +2005,7 @@ class FinanceTestCorCases(FinanceTest):
         # b) 1REV 63120 HT121 PF due to 25.8
         ht121_63110_id = self.get_ji_ajis_by_account(push_db, ji_ids,
             account_code_filter='63110',
-            cc_code_filter='HT121')[0][0]
+            cc_code_filter=self.map.ht121)[0][0]
         push_expected = [
             # a) 63110
             self.get_aji_revs(push_db, ht121_63110_id)[0][1],
@@ -1999,7 +2017,7 @@ class FinanceTestCorCases(FinanceTest):
                 push_db,
                 self.get_ji_ajis_by_account(push_db, ji_ids,
                 account_code_filter='63120',
-                cc_code_filter='HT121')[0][0]
+                cc_code_filter=self.map.ht121)[0][0]
             )[0][1],
         ]
         push_not_expected=[
@@ -2018,6 +2036,7 @@ class FinanceTestCorCases(FinanceTest):
         self.period_reopen(push_db, 'm', 1)
         self.period_reopen(push_db, 'f', 1)
 
+    '''
     def test_cor_26(self):
         """
         cd unifield/test-finance/unifield-wm/unifield_tests
@@ -2033,8 +2052,8 @@ class FinanceTestCorCases(FinanceTest):
 
         invoice_lines_accounts = [ '60000', '60010', ]
         header_ad = [
-            (60., 'OPS', 'HT112', 'PF'),
-            (40., 'NAT', 'HT122', 'PF'),
+            (60., 'OPS', self.map.ht112, 'PF'),
+            (40., 'NAT', self.map.ht122, 'PF'),
         ]
 
         # 26.1, 26.2, 26.3
@@ -2059,16 +2078,16 @@ class FinanceTestCorCases(FinanceTest):
         # correction on 26.7/8
         sdref_60000_ht112 = self.get_ji_ajis_by_account(self.hq1c1p1, ji_ids,
             account_code_filter='60000',
-                cc_code_filter='HT112')[0][1]
+                cc_code_filter=self.map.ht112)[0][1]
         sdref_60000_ht122 = self.get_ji_ajis_by_account(self.hq1c1p1, ji_ids,
             account_code_filter='60000',
-            cc_code_filter='HT122')[0][1]
+            cc_code_filter=self.map.ht122)[0][1]
         sdref_60010_ht112 = self.get_ji_ajis_by_account(self.hq1c1p1, ji_ids,
             account_code_filter='60010',
-                cc_code_filter='HT112')[0][1]
+                cc_code_filter=self.map.ht112)[0][1]
         sdref_60010_ht122 = self.get_ji_ajis_by_account(self.hq1c1p1, ji_ids,
             account_code_filter='60010',
-            cc_code_filter='HT122')[0][1]
+            cc_code_filter=self.map.ht122)[0][1]
 
         # 26.4
         self.synchronize(self.hq1c1p1)
@@ -2138,7 +2157,7 @@ class FinanceTestCorCases(FinanceTest):
 
         # 26.7
         new_ad = [
-            (100., 'OPS', 'HT120', 'PF'),
+            (100., 'OPS', self.map.ht120, 'PF'),
         ]
         # convert 60000 JI from P1 sdref to C1 id
         ji_60000_id = self.get_record_id_from_sdref(self.hq1c1,
@@ -2159,9 +2178,9 @@ class FinanceTestCorCases(FinanceTest):
         )
 
         # 26.8
-        new_cc = 'HT120'
+        new_cc = self.map.ht120
         new_ad = [
-            (60., 'OPS', 'HT112', 'PF'),
+            (60., 'OPS', self.map.ht112, 'PF'),
             (40., 'NAT', new_cc, 'PF'),
         ]
         # convert 60010 JI from P1 sdref to C1 id

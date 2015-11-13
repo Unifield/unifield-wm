@@ -501,6 +501,7 @@ class FinanceTest(UnifieldTest):
         fp_name, account_code, dest_code):
         """
         add account/dest tuple to FP
+        for each fp/account/dest: can be the code or directly the id
         """
         if fp_name and fp_name == 'PF':
             return  # nothing to do
@@ -1851,5 +1852,10 @@ class FinanceTest(UnifieldTest):
                 'general_account_id', 'cost_center_id', 'account_id',
                 'date', 'document_date', ]
         )
+
+    def get_aa_code_from_sdref(self, db, sdref):
+        """ get analytic account code from sdref """
+        return self.get_rec_name_from_sdref(db, sdref,
+            'account.analytic.account', name='code')
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -35,6 +35,9 @@ from uuid import uuid4
 
 from unifield_tests.lib import yaml_import
 
+class Dict2Obj:
+    def __init__(self, **entries):
+        self.__dict__.update(entries)
 
 class UnifieldTestException(Exception):
     pass
@@ -186,8 +189,9 @@ class UnifieldTest(unittest.TestCase):
             return self.db[attr]
         elif attr != 'test_id' and attr in UnifieldTest.db:
             return UnifieldTest.db
-        else:
-            raise NameError("No DB connection found the keyword '%s'!" % attr)
+        return super(UnifieldTest, self).__getattr__(attr)
+        #else:
+        #    raise NameError("No DB connection found the keyword '%s'!" % attr)
 
     def _hook_db_process(self, name, database):
         '''
@@ -580,6 +584,19 @@ class UnifieldTest(unittest.TestCase):
         if not ids:
             return False
         return db.get('ir.model.data').browse(ids[0]).res_id
+
+    def get_rec_name_from_sdref(self, db, sdref, model_name, name='name'):
+        """
+        get rec name from sdref
+        :param name: name of the field to use as rec_name ('name', 'code', ...)
+        :rtype: str/False
+        """
+        id = self.get_record_id_from_sdref(db, sdref)
+        if id:
+            rec = db.get(model_name).browse(id)
+            if rec and hasattr(rec, name):
+                return getattr(rec, name)
+        return False
 
     def get_record_sdref_from_id(self, model, db, id):
         """
