@@ -192,10 +192,24 @@ class analytic_distribution_wizard(osv.osv_memory):
                 if (old_line.cost_center_id.id != wiz_line.cost_center_id.id or
                         old_line.destination_id.id != wiz_line.destination_id.id or
                         old_line.percentage != wiz_line.percentage):
-                    if period_closed or ml.journal_id.code == 'HQ': #US-714: For HQ Entries, always create the COR and REV even the period is closed
+
+                    #TEMP TEMP                    
+                    #US-714: For HQ Entries, always create the COR and REV even the period is closed
+                    original_al_id = ana_obj.search(cr, uid, [('distrib_line_id', '=', 'funding.pool.distribution.line,%d'%old_line.id), ('is_reversal', '=', False), ('is_reallocated', '=', False)])
+                    is_HQ_entries = False
+                    if original_al_id and len(original_al_id) == 1:
+                        original_al = ana_obj.browse(cr, uid, original_al_id[0], context)
+                        if original_al.journal_id.code == 'HQ':
+                            is_HQ_entries = True
+    
+                    if period_closed or is_HQ_entries: #US-714: For HQ Entries, always create the COR and REV even the period is closed
                         to_reverse.append(wiz_line)
                     else:
                         to_override.append(wiz_line)
+                        
+                    #END TEMP TEMP                    
+                        
+                        
                 elif old_line.analytic_id.id != wiz_line.analytic_id.id:
                     to_override.append(wiz_line)
 
