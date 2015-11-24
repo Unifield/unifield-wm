@@ -1,4 +1,5 @@
 "id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+".access_delete_objects","Everybody access Deleted Object","msf_profile.model_deleted_object","",1,0,1,0
 "access_pack_type","admin access Pack Type","msf_outgoing.model_pack_type","base.group_erp_manager",1,1,1,1
 "access_product_category","admin access Product Category","product.model_product_category","base.group_erp_manager",1,1,1,1
 "access_product_manufacturer_attribute","admin access Product attributes","product_manufacturer.model_product_manufacturer_attribute","base.group_erp_manager",1,1,1,1
