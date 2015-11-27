@@ -603,7 +603,7 @@ class sync_manager(osv.osv):
         Data synchronization
     """
     @check_validated
-    def get_model_to_sync(self, cr, uid, entity, context=None):
+    def get_model_to_sync(self, cr, uid, entity, level=False, context=None):
         """
             Initialize a Push session, send the session id and the list of rule
             @param entity: string : uuid of the synchronizing entity
@@ -623,7 +623,7 @@ class sync_manager(osv.osv):
                         }
                     
         """
-        res = self.pool.get('sync_server.sync_rule')._get_rule(cr, uid, entity, context=context)
+        res = self.pool.get('sync_server.sync_rule')._get_rule(cr, uid, entity, level=level, context=context)
         return (True, res[1], get_md5(res[1]))
         
     @check_validated

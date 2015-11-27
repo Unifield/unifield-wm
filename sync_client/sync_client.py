@@ -431,8 +431,10 @@ class Entity(osv.osv):
         updates = self.pool.get(context.get('update_to_send_model', 'sync.client.update_to_send'))
 
         def set_rules(identifier):
+            instance = self.pool.get('res.users').get_browse_user_instance(cr, uid, context=context)
+            level = instance and instance.level
             proxy = self.pool.get("sync.client.sync_server_connection").get_connection(cr, uid, "sync.server.sync_manager")
-            res = proxy.get_model_to_sync(identifier, self._hardware_id)
+            res = proxy.get_model_to_sync(identifier, self._hardware_id, level)
             if not res[0]:
                 raise Exception, res[1]
             check_md5(res[2], res[1], _('method create_update'))

@@ -147,8 +147,8 @@ class sync_rule(osv.osv):
     _order = 'sequence_number asc,model_id asc'
 
     #TODO add a last update to send only rule that were updated before => problem of dates
-    def _get_rule(self, cr, uid, entity, context=None):
-        rules_ids = self._compute_rules_to_send(cr, uid, entity, context)
+    def _get_rule(self, cr, uid, entity, level=False, context=None):
+        rules_ids = self._compute_rules_to_send(cr, uid, entity, level, context)
         return (True, self._serialize_rule(cr, uid, rules_ids, context))
 
     def get_groups(self, cr, uid, ids, context=None):
@@ -189,7 +189,7 @@ class sync_rule(osv.osv):
                       GROUP BY r.id""", (tuple(x.id for x in entity.group_ids),))
         return dict(cr.fetchall())
 
-    def _compute_rules_to_send(self, cr, uid, entity, context=None):
+    def _compute_rules_to_send(self, cr, uid, entity, level=False, context=None):
         rules_ids = self._get_rules_per_group(cr, uid, entity, context)
         ancestor_group = self._get_ancestor_groups(cr, uid, entity, context)
         children_group = self._get_children_groups(cr, uid, entity, context)
@@ -204,7 +204,11 @@ class sync_rule(osv.osv):
                     if group_id in children_group:
                         rules_to_send.add(rule.id)
                 else:
-                    rules_to_send.add(rule.id)
+                    # SP-217: don't send down rules to project and up rules to HQ
+                    if not (rule.direction == 'down' and level == 'project' or rule.direction == 'up' and level == 'section'):
+                        rules_to_send.add(rule.id)
+                    else:
+                        self._logger.warn('[%s : %s] Rule not sent id:%s, seq:%s, direction:%s' % (entity.name, level, rule.id, rule.sequence_number, rule.direction))
 
         return list(rules_to_send)
 
