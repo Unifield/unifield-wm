@@ -542,6 +542,7 @@ class FinanceTestCorCases(FinanceTest):
                 expected_ad_cor=new_ad,
                 check_sequence_number=True
             )
+    '''
 
     def test_cor_06(self):
         """
@@ -575,7 +576,7 @@ class FinanceTestCorCases(FinanceTest):
 
             new_ad=[
                 (70., 'OPS', self.map.ht101, 'PF'),
-                (30., 'OPS', self.map.ht120, 'PF'),
+                (30., 'OPS', self.map.ht101, 'PF'),
             ]
             self.simulation_correction_wizard(db, ji_id,
                     cor_date=self.get_orm_fy_date(2, 7),  # 7 Feb of this year
@@ -583,7 +584,7 @@ class FinanceTestCorCases(FinanceTest):
                     new_ad_breakdown_data=False,
                     ad_replace_data={
                             60.: {'per': 70., },
-                            40.: {'per': 30., 'cc': self.map.ht120, },
+                            40.: {'per': 30., 'cc': self.map.ht101, },
                         },
             )
 
@@ -600,7 +601,7 @@ class FinanceTestCorCases(FinanceTest):
             self.period_reopen(db, 'm', 1)
             self.period_reopen(db, 'f', 1)
 
-
+    '''
     def test_cor_07(self):
         """
         cd unifield/test-finance/unifield-wm/unifield_tests
@@ -2036,7 +2037,6 @@ class FinanceTestCorCases(FinanceTest):
         # REOPEN period for over cases flow
         self.period_reopen(push_db, 'm', 1)
         self.period_reopen(push_db, 'f', 1)
-    '''
 
     def test_cor_26(self):
         """
@@ -2250,6 +2250,7 @@ class FinanceTestCorCases(FinanceTest):
             ))),
             "SYNC mismatch"
         )
+    '''
 
 def get_test_class():
     return FinanceTestCorCases
