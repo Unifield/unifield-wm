@@ -73,6 +73,7 @@ class UnifieldYamlInterpreter(YamlInterpreter):
                 cursor.commit()
             except Exception as e:
                 cursor.rollback()
+                raise e
             finally:
                 cursor.close()
 

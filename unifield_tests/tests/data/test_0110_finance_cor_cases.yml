@@ -21,7 +21,7 @@
 -
   !record {model: account.target.costcenter, id: test_0110_cc_ht120_target_c1, db: hq1}:
    # INSTANCE TO TARGET
-   instance_id: "@search;msf.instance;('code','=','sp-209_HQ1C1')"
+   instance_id: "@search;msf.instance;('code','=','sp-208_HQ1C1')"
    is_target: True
 
    # Not editable values
@@ -46,7 +46,7 @@
 -
   !record {model: account.target.costcenter, id: test_0110_cc_ht112_target_c1p1, db: hq1}:
    # INSTANCE TO TARGET
-   instance_id: "@search;msf.instance;('code','=','sp-209_HQ1C1P1')"
+   instance_id: "@search;msf.instance;('code','=','sp-208_HQ1C1P1')"
    is_target: True
 
    # Not editable values
@@ -67,11 +67,21 @@
     type: normal
     category: OC
 -
-  TARGET HT122 to C1P1
+  ADD HT122 to C1
+-
+  !record {model: account.target.costcenter, id: test_0110_cc_ht122_add_c1, db: hq1}:
+   # INSTANCE TO ADD TO
+   instance_id: "@search;msf.instance;('code','=','sp-208_HQ1C1')"
+   is_target: False
+
+   # Not editable values
+   cost_center_id: test_0110_cc_ht122
+-
+  TARGET HT122 to C1P2
 -
   !record {model: account.target.costcenter, id: test_0110_cc_ht122_target_c1p2, db: hq1}:
    # INSTANCE TO TARGET
-   instance_id: "@search;msf.instance;('code','=','sp-209_HQ1C1P2')"
+   instance_id: "@search;msf.instance;('code','=','sp-208_HQ1C1P2')"
    is_target: True
 
    # Not editable values
@@ -80,7 +90,7 @@
   Create FUNDING POOL FP1
 -
  !record {model: account.analytic.account, id: test_0110_fp1, db: hq1}:
-   instance_id: "@search;msf.instance;('code','=','sp-209_HQ1C1')"
+   instance_id: "@search;msf.instance;('code','=','sp-208_HQ1C1')"
    code: FP1
    name: FP1
    date_start: 2015-01-01
@@ -95,7 +105,7 @@
   Create FUNDING POOL FP2
 -
  !record {model: account.analytic.account, id: test_0110_fp2, db: hq1}:
-   instance_id: "@search;msf.instance;('code','=','sp-209_HQ1C1')"
+   instance_id: "@search;msf.instance;('code','=','sp-208_HQ1C1')"
    code: FP2
    name: FP2
    date_start: 2015-01-01
@@ -120,7 +130,7 @@
    code: FC1
    name: FC1
    donor_id: test_0110_donor
-   instance_id: "@search;msf.instance;('code','=','sp-209_HQ1C1')"
+   instance_id: "@search;msf.instance;('code','=','sp-208_HQ1C1')"
    eligibility_from_date: 2015-01-01
    eligibility_to_date: 2016-12-31
    grant_amount: 0

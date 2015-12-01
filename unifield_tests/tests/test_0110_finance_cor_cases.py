@@ -342,6 +342,7 @@ class FinanceTestCorCases(FinanceTest):
     # -------------------------------------------------------------------------
     # SINGLE CASES FLOW: from 01 to 14
     # -------------------------------------------------------------------------
+    '''
     def test_cor_01(self):
         """
         cd unifield/test-finance/unifield-wm/unifield_tests
@@ -2035,8 +2036,8 @@ class FinanceTestCorCases(FinanceTest):
         # REOPEN period for over cases flow
         self.period_reopen(push_db, 'm', 1)
         self.period_reopen(push_db, 'f', 1)
-
     '''
+
     def test_cor_26(self):
         """
         cd unifield/test-finance/unifield-wm/unifield_tests
@@ -2249,7 +2250,6 @@ class FinanceTestCorCases(FinanceTest):
             ))),
             "SYNC mismatch"
         )
-    '''
 
 def get_test_class():
     return FinanceTestCorCases

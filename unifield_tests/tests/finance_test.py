@@ -586,7 +586,7 @@ class FinanceTest(UnifieldTest):
                     ('code', '=', dest),
                 ])
                 self.assert_(
-                    dest_id != False,
+                    dest_id,
                     'no destination found %s' % (dest, )
                 )
                 dest_id = dest_id[0]
@@ -609,7 +609,7 @@ class FinanceTest(UnifieldTest):
                 cost_center_id = company.instance_id.top_cost_center_id \
                     and company.instance_id.top_cost_center_id.id or False
                 self.assert_(
-                    cost_center_id != False,
+                    cost_center_id,
                     'no top cost center found for instance %s' % (
                         company.name or '', )
                 )
@@ -623,7 +623,7 @@ class FinanceTest(UnifieldTest):
                         ('code', '=', fp),
                     ])
                     self.assert_(
-                        funding_pool_id != False,
+                        funding_pool_id,
                         'no funding pool found %s' % (fp, )
                     )
                     funding_pool_id = funding_pool_id[0]
