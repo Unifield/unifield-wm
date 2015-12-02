@@ -731,6 +731,7 @@ class claim_event(osv.osv):
         # objects
         move_obj = self.pool.get('stock.move')
         pick_obj = self.pool.get('stock.picking')
+        pol_obj = self.pool.get('purchase.order.line')
         picking_tools = self.pool.get('picking.tools')
         # event picking object
         event_picking = obj.event_picking_id_claim_event
@@ -798,12 +799,29 @@ class claim_event(osv.osv):
                 # resend to customer, from stock by default (can be changed by user later)
                 replacement_move_values.update({'location_id': context['common']['stock_id'],
                                                 'location_dest_id': claim.partner_id_return_claim.property_stock_customer.id})
+
             # we copy the event return picking
             replacement_id = pick_obj.copy(cr, uid, event_picking.id, replacement_values, context=dict(context, keepLineNumber=True))
             # update the moves
             replacement_move_ids = move_obj.search(cr, uid, [('picking_id', '=', replacement_id)], context=context)
             # get the move values according to claim type
             move_obj.write(cr, uid, replacement_move_ids, replacement_move_values, context=context)
+
+            # If the Origin is an incoming shipment coming from a PO, on the replacement, put the link IN <-> PO
+            if origin_picking.purchase_id:
+                for move in move_obj.browse(cr, uid, replacement_move_ids, context=context):
+                    in_ids = move_obj.search(cr, uid, [
+                        ('picking_id', '=', origin_picking.id),
+                        ('line_number', '=', move.line_number),
+                        ('purchase_line_id', '!=', False),
+                    ], context=context)
+                    if in_ids:
+                        in_brw = move_obj.browse(cr, uid, in_ids[0], context=context)
+                        move_obj.write(cr, uid, [move.id], {
+                            'price_currency_id': in_brw.purchase_line_id.order_id.pricelist_id.currency_id.id,
+                            'price_unit': in_brw.purchase_line_id.price_unit,
+                            'purchase_line_id': in_brw.purchase_line_id.id,
+                        }, context=context)
             # confirm and check availability of replacement picking
             picking_tools.confirm(cr, uid, replacement_id, context=context)
             picking_tools.check_assign(cr, uid, replacement_id, context=context)
