@@ -172,6 +172,15 @@ class FinanceTestCorCases(FinanceTest):
     # -------------------------------------------------------------------------
 
     def _set_dataset(self):
+        def open_periods(db):
+            # open FY periods in chronological order, next after next
+            for m in range(1, 13):
+                period_id = self.get_period_id(db, m)
+                if period_id:
+                    db.get('account.period').write([period_id], {
+                        'state': 'draft',
+                    })
+
         def activate_currencies(db, codes):
             if isinstance(codes, (str, unicode, )):
                 codes = [codes]
@@ -232,12 +241,10 @@ class FinanceTestCorCases(FinanceTest):
                     meta.functional_ccy, )
             )
 
-            # open current month period
-            period_id = self.get_period_id(db, now.month)
-            if period_id:
-                db.get('account.period').write([period_id], {
-                    'state': 'draft',
-                })
+            # open FY periods
+            # (to create register journals we need current (today) date period
+            # opened even if we change later the period of the 1st register)
+            open_periods(db)
 
             # activate currencies (if required)
             activate_currencies(db, [ccy_name for ccy_name in meta.rates])
@@ -342,7 +349,6 @@ class FinanceTestCorCases(FinanceTest):
     # -------------------------------------------------------------------------
     # SINGLE CASES FLOW: from 01 to 14
     # -------------------------------------------------------------------------
-    '''
     def test_cor_01(self):
         """
         cd unifield/test-finance/unifield-wm/unifield_tests
@@ -542,7 +548,6 @@ class FinanceTestCorCases(FinanceTest):
                 expected_ad_cor=new_ad,
                 check_sequence_number=True
             )
-    '''
 
     def test_cor_06(self):
         """
@@ -601,7 +606,6 @@ class FinanceTestCorCases(FinanceTest):
             self.period_reopen(db, 'm', 1)
             self.period_reopen(db, 'f', 1)
 
-    '''
     def test_cor_07(self):
         """
         cd unifield/test-finance/unifield-wm/unifield_tests
@@ -2250,7 +2254,6 @@ class FinanceTestCorCases(FinanceTest):
             ))),
             "SYNC mismatch"
         )
-    '''
 
 def get_test_class():
     return FinanceTestCorCases
