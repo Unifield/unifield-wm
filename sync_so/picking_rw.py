@@ -525,13 +525,17 @@ class stock_picking(osv.osv):
         else:
             raise Exception, "Reason Type at line cannot be empty"
 
+        if data['price_currency_id'] and data['price_currency_id']['id']:
+            price_currency_id = self.pool.get('res.currency').find_sd_ref(cr, uid, xmlid_to_sdref(data['price_currency_id']['id']), context=context)
+        else:
+            raise Exception, "Currency  at line cannot be empty"
+        
         uom_name = data['product_uom']['name']
         uom_ids = uom_obj.search(cr, uid, [('name', '=', uom_name)], context=context)
         if not uom_ids:
             raise Exception, "The corresponding uom does not exist here. Uom name: %s" % uom_name
         uom_id = uom_ids[0]
         
-
         batch_id = False
         if data['prodlot_id']:
             batch_id = self.pool.get('stock.production.lot').find_sd_ref(cr, uid, xmlid_to_sdref(data['prodlot_id']['id']), context=context)
@@ -561,6 +565,7 @@ class stock_picking(osv.osv):
                   'location_id': location_id,
                   'location_requestor_rw': location_requestor_rw,
                   'reason_type_id': reason_type_id,
+                  'price_currency_id': price_currency_id,
                   
                   'from_pack': data['from_pack'] or 0,
                   'to_pack': data['to_pack'] or 0,
