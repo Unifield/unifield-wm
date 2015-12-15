@@ -237,6 +237,9 @@ class module(object):
         self.module_proxy.button_uninstall(self.ids)
         return self
 
+    def set_notinstalled(self):
+        self.module_proxy.write(self.ids, {'state': 'uninstalled'})
+
     uninstall = remove
 
     def install(self):

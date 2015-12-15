@@ -1,0 +1,2845 @@
+level,name,type,parent_id,msfid
+0,LIB,Mandatory,,LIB
+0,LOG,Mandatory,,LOG
+0,MED,Mandatory,,MED
+0,SRV,Mandatory,,SRV
+1,A - Administration,Mandatory,LOG,LOG-A
+1,C - Camp,Mandatory,LOG,LOG-C
+1,D - Drugs,Mandatory,MED,MED-D
+1,E - Medical Equipment,Mandatory,MED,MED-E
+1,I - Inventory lists / checklists,Mandatory,MED,MED-I
+1,K - Lib Kits,Mandatory,LIB,LIB-K
+1,K - Log Kits,Mandatory,LOG,LOG-K
+1,K - Med Kits,Mandatory,MED,MED-K
+1,L - Library,Mandatory,LIB,LIB-L
+1,N - Nutrition,Mandatory,MED,MED-N
+1,P - Program support,Mandatory,LOG,LOG-P
+1,S - Medical renewable supplies,Mandatory,MED,MED-S
+1,T - Transport,Mandatory,LOG,LOG-T
+1,X - Services,Mandatory,SRV,SRV-X
+2,ADAP - Data Processing,Mandatory,LOG-A,LOG-A-ADAP
+2,AFOO - Food For Msf Staff,Mandatory,LOG-A,LOG-A-AFOO
+2,AFUR - Furnitures,Mandatory,LOG-A,LOG-A-AFUR
+2,ALIF - Team Life,Mandatory,LOG-A,LOG-A-ALIF
+2,ALST - Logistic Stationery,Mandatory,LOG-A,LOG-A-ALST
+2,AOFF - Office Equipment,Mandatory,LOG-A,LOG-A-AOFF
+2,ASTA - Stationery,Mandatory,LOG-A,LOG-A-ASTA
+2,CBUI - Building,Mandatory,LOG-C,LOG-C-CBUI
+2,CSEM - Semipermanent Shelter,Mandatory,LOG-C,LOG-C-CSEM
+2,CSHE - Shelters,Mandatory,LOG-C,LOG-C-CSHE
+2,CWAT - Water And Sanitation,Mandatory,LOG-C,LOG-C-CWAT
+2,CXHA - Spare Parts Hayward,Mandatory,LOG-C,LOG-C-CXHA
+2,DDGT - Diagnostic tests,Mandatory,MED-D,MED-D-DDGT
+2,DDIS - Disinfectants,Mandatory,MED-D,MED-D-DDIS
+2,DEXO - Ophtalmic Drugs For External Use,Mandatory,MED-D,MED-D-DEXO
+2,DEXT - Drugs External Use,Mandatory,MED-D,MED-D-DEXT
+2,DINF - Infusions,Mandatory,MED-D,MED-D-DINF
+2,DINJ - Injectable Drugs,Mandatory,MED-D,MED-D-DINJ
+2,DORA - Oral Drugs,Mandatory,MED-D,MED-D-DORA
+2,DVAC - Vaccines,Mandatory,MED-D,MED-D-DVAC
+2,EANE - Anaesthesia,Mandatory,MED-E,MED-E-EANE
+2,EANT - Anthropometric Equipment,Mandatory,MED-E,MED-E-EANT
+2,EDIM - Diagnostic Imaging equipment,Mandatory,MED-E,MED-E-EDIM
+2,EHOE - Hospital Equipment,Mandatory,MED-E,MED-E-EHOE
+2,ELAE - Laboratory Equipment,Mandatory,MED-E,MED-E-ELAE
+2,ELIN - Linen And Protective Clothing,Mandatory,MED-E,MED-E-ELIN
+2,EMEQ - Medical Equipment,Mandatory,MED-E,MED-E-EMEQ
+2,EPHY - Physiotherapy equipment,Mandatory,MED-E,MED-E-EPHY
+2,EPSY - Equipment for psychological support,Mandatory,MED-E,MED-E-EPSY
+2,ESIG - NAIL of SIGN material,Mandatory,MED-E,MED-E-ESIG
+2,ESTE - Sterilization,Mandatory,MED-E,MED-E-ESTE
+2,ESTR - Stryker material for internal fixation,Mandatory,MED-E,MED-E-ESTR
+2,ESUD - Dental Surgical Instruments,Mandatory,MED-E,MED-E-ESUD
+2,ESUF - Surgical Instruments For External Fixator,Mandatory,MED-E,MED-E-ESUF
+2,ESUO - Ophtalmic Surgical Instruments,Mandatory,MED-E,MED-E-ESUO
+2,ESUR - Surgical Instruments,Mandatory,MED-E,MED-E-ESUR
+2,ETMA - Training Mannequins,Mandatory,MED-E,MED-E-ETMA
+2,ETPO - Training Posters,Mandatory,MED-E,MED-E-ETPO
+2,IDIM - Diagnostic imaging checklists,Mandatory,MED-I,MED-I-IDIM
+2,IEME - Emergency items list,Mandatory,MED-I,MED-I-IEME
+2,ILAB - Laboratory checklists,Mandatory,MED-I,MED-I-ILAB
+2,IPED - Paediatric checklists,Mandatory,MED-I,MED-I-IPED
+2,ISUI - Internal fixation checklists,Mandatory,MED-I,MED-I-ISUI
+2,KADM - Administration Kits,Mandatory,LOG-K,LOG-K-KADM
+2,KCAM - Camps Kits,Mandatory,LOG-K,LOG-K-KCAM
+2,KCOM - Communication Kits,Mandatory,LOG-K,LOG-K-KCOM
+2,"KLIB - KIT, LIBRARY",Mandatory,LIB-K,LIB-K-KLIB
+2,KMED - Medical Kits,Mandatory,MED-K,MED-K-KMED
+2,KPRO - Programme Support Kits,Mandatory,LOG-K,LOG-K-KPRO
+2,KSUD - Dental Instrument Box,Mandatory,MED-K,MED-K-KSUD
+2,KSUO - Ophthalmic instruments boxes,Mandatory,MED-K,MED-K-KSUO
+2,KSUR - Surgical Instruments Sets,Mandatory,MED-K,MED-K-KSUR
+2,KTRA - Transport Kits,Mandatory,LOG-K,LOG-K-KTRA
+2,KWAT - Water And Sanitation Kits,Mandatory,LOG-K,LOG-K-KWAT
+2,L000 - MSF (articles written by MSF),Mandatory,LIB-L,LIB-L-L000
+2,L001 - Medicine General Information,Mandatory,LIB-L,LIB-L-L001
+2,L002 - Internal Medicine,Mandatory,LIB-L,LIB-L-L002
+2,L003 - Viral Infectious Diseases,Mandatory,LIB-L,LIB-L-L003
+2,L004 - Bacterial Infectious Diseases,Mandatory,LIB-L,LIB-L-L004
+2,L005 - MYCOLOGICAL INFECTIOUS DISEASES,Mandatory,LIB-L,LIB-L-L005
+2,L006 - Parasitic Infectious Diseases,Mandatory,LIB-L,LIB-L-L006
+2,L007 - Std - Aids,Mandatory,LIB-L,LIB-L-L007
+2,L008 - Surgery-Anaesthesia-Dentistry-Physiotherapy-Transf,Mandatory,LIB-L,LIB-L-L008
+2,L009 - Gynaecology - Obstetrics,Mandatory,LIB-L,LIB-L-L009
+2,L010 - Paediatrics,Mandatory,LIB-L,LIB-L-L010
+2,L011 - Ophthalmology - Dermatology,Mandatory,LIB-L,LIB-L-L011
+2,L012 - Radiology - Medical Imaging,Mandatory,LIB-L,LIB-L-L012
+2,L013 - Laboratory,Mandatory,LIB-L,LIB-L-L013
+2,L014 - Pharmacology,Mandatory,LIB-L,LIB-L-L014
+2,L015 - Immunization - Cold Chain,Mandatory,LIB-L,LIB-L-L015
+2,L016 - Nutrition,Mandatory,LIB-L,LIB-L-L016
+2,L017 - REPRODUCTIVE HEALTH,Mandatory,LIB-L,LIB-L-L017
+2,L018 - Water & Sanitation,Mandatory,LIB-L,LIB-L-L018
+2,L019 - Refugees - Displaced,Mandatory,LIB-L,LIB-L-L019
+2,L020 - Emergencies - Disasters - Conflicts,Mandatory,LIB-L,LIB-L-L020
+2,L021 - Training - Education,Mandatory,LIB-L,LIB-L-L021
+2,L022 - Community Health,Mandatory,LIB-L,LIB-L-L022
+2,L023 - Anthropology,Mandatory,LIB-L,LIB-L-L023
+2,L024 - Epidemiology - Statistics,Mandatory,LIB-L,LIB-L-L024
+2,L025 - Health Services Management,Mandatory,LIB-L,LIB-L-L025
+2,L026 - Drugs Management,Mandatory,LIB-L,LIB-L-L026
+2,L027 - Mental Health,Mandatory,LIB-L,LIB-L-L027
+2,L028 - Health Of Expatriates,Mandatory,LIB-L,LIB-L-L028
+2,L029 - Nursing - Infection Control,Mandatory,LIB-L,LIB-L-L029
+2,L030 - INFECTION CONTROL,Mandatory,LIB-L,LIB-L-L030
+2,L031 - SOCIAL ISSUES,Mandatory,LIB-L,LIB-L-L031
+2,L040 - Logistics,Mandatory,LIB-L,LIB-L-L040
+2,L041 - Mechanics /Transport,Mandatory,LIB-L,LIB-L-L041
+2,L042 - Telecommunication,Mandatory,LIB-L,LIB-L-L042
+2,L043 - Building - Shelters,Mandatory,LIB-L,LIB-L-L043
+2,L044 - Data Processing,Mandatory,LIB-L,LIB-L-L044
+2,L045 - Catalogues & Order Lists,Mandatory,LIB-L,LIB-L-L045
+2,L046 - Food Aid,Mandatory,LIB-L,LIB-L-L046
+2,L047 - Supply,Mandatory,LIB-L,LIB-L-L047
+2,L048 - Energy,Mandatory,LIB-L,LIB-L-L048
+2,L050 - Administration - Finances,Mandatory,LIB-L,LIB-L-L050
+2,L051 - Human Resources Management,Mandatory,LIB-L,LIB-L-L051
+2,L052 - Security,Mandatory,LIB-L,LIB-L-L052
+2,L060 - MSF - GENERAL FACTS,Mandatory,LIB-L,LIB-L-L060
+2,L061 - Msf - Publications,Mandatory,LIB-L,LIB-L-L061
+2,L062 - MSF - INTERNAL DOCUMENTS,Mandatory,LIB-L,LIB-L-L062
+2,L070 - Humanitarian Assistance,Mandatory,LIB-L,LIB-L-L070
+2,L071 - CONTEXTS - GEOPOLITICS,Mandatory,LIB-L,LIB-L-L071
+2,L072 - Humanitarian Assistance - Law,Mandatory,LIB-L,LIB-L-L072
+2,L073 - Humanitarian Assistance - Interventions,Mandatory,LIB-L,LIB-L-L073
+2,L074 - NTERNATIONAL ORGANISATIONS,Mandatory,LIB-L,LIB-L-L074
+2,L075 - NGO's,Mandatory,LIB-L,LIB-L-L075
+2,L076 - STATES: HUM. ASSISTANCE,Mandatory,LIB-L,LIB-L-L076
+2,L077 - Languages,Mandatory,LIB-L,LIB-L-L077
+2,LEAF - Leaflets,Mandatory,LIB-L,LIB-L-LEAF
+2,NFOO - Food Commodities,Mandatory,MED-N,MED-N-NFOO
+2,NFOS - Specialized Food,Mandatory,MED-N,MED-N-NFOS
+2,NFST - Food commodities stationary,Mandatory,MED-N,MED-N-NFST
+2,NSFO - Stationary food commodities,Mandatory,MED-N,MED-N-NSFO
+2,NSFS - Stationary Specialized food,Mandatory,MED-N,MED-N-NSFS
+2,NSST - Specialized food stationary,Mandatory,MED-N,MED-N-NSST
+2,PCOL - Cold Chain,Mandatory,LOG-P,LOG-P-PCOL
+2,PCOM - Communication,Mandatory,LOG-P,LOG-P-PCOM
+2,PCOO - Cooking,Mandatory,LOG-P,LOG-P-PCOO
+2,PELE - Electricity,Mandatory,LOG-P,LOG-P-PELE
+2,PHDW - Hardware,Mandatory,LOG-P,LOG-P-PHDW
+2,PHYG - Hygiene,Mandatory,LOG-P,LOG-P-PHYG
+2,PIDE - Identification,Mandatory,LOG-P,LOG-P-PIDE
+2,PLIG - Lighting,Mandatory,LOG-P,LOG-P-PLIG
+2,PPAC - Packing And Handling,Mandatory,LOG-P,LOG-P-PPAC
+2,PPAI - Paint,Mandatory,LOG-P,LOG-P-PPAI
+2,PSAF - Safety And Protective Equipment,Mandatory,LOG-P,LOG-P-PSAF
+2,PTOO - Tools,Mandatory,LOG-P,LOG-P-PTOO
+2,PX-- - Spare parts,Mandatory,LOG-P,LOG-P-PX--
+2,PXDV - Spare Parts Davey,Mandatory,LOG-P,LOG-P-PXDV
+2,PXHO - Spare Parts Honda,Mandatory,LOG-P,LOG-P-PXHO
+2,PXKO - Spare Parts Koshin,Mandatory,LOG-P,LOG-P-PXKO
+2,PXLI - Spare Parts Lister,Mandatory,LOG-P,LOG-P-PXLI
+2,PXLO - Spare Parts Lombardini,Mandatory,LOG-P,LOG-P-PXLO
+2,PXRO - Spare Parts Robin,Mandatory,LOG-P,LOG-P-PXRO
+2,PXYN - Spare Parts Yanmar,Mandatory,LOG-P,LOG-P-PXYN
+2,"SCTD - Catheters, Tubes And Drains",Mandatory,MED-S,MED-S-SCTD
+2,SDIM - Diagnostic imaging supplies,Mandatory,MED-S,MED-S-SDIM
+2,SDRE - Dressings,Mandatory,MED-S,MED-S-SDRE
+2,SIGN - NAIL OF SIGN material,Mandatory,MED-S,MED-S-SIGN
+2,SINS - Injection Supplies,Mandatory,MED-S,MED-S-SINS
+2,SLAS - Laboratory Reagents,Mandatory,MED-S,MED-S-SLAS
+2,SMST - Medical Stationery,Mandatory,MED-S,MED-S-SMST
+2,SMSU - Small Medical Supplies,Mandatory,MED-S,MED-S-SMSU
+2,SSUT - Sutures,Mandatory,MED-S,MED-S-SSUT
+2,STRY - Stryker,Mandatory,MED-S,MED-S-STRY
+2,SXRS - X-ray supplies (stopped),Mandatory,MED-S,MED-S-SXRS
+2,TBOA - Boats,Mandatory,LOG-T,LOG-T-TBOA
+2,THON - Honda,Mandatory,LOG-T,LOG-T-THON
+2,TMER - Mercedes,Mandatory,LOG-T,LOG-T-TMER
+2,TPEU - Peugeot,Mandatory,LOG-T,LOG-T-TPEU
+2,TTOY - Toyota Vehicles,Mandatory,LOG-T,LOG-T-TTOY
+2,TVEA - Vehicles Accessories,Mandatory,LOG-T,LOG-T-TVEA
+2,TVEC - Vehicles Consumables,Mandatory,LOG-T,LOG-T-TVEC
+2,TVEM - Vehicles Modifications,Mandatory,LOG-T,LOG-T-TVEM
+2,TXHO - Spare parts Honda,Mandatory,LOG-T,LOG-T-TXHO
+2,TXLA - Spare Parts Land Rover,Mandatory,LOG-T,LOG-T-TXLA
+2,TXME - Spare parts Mercedes,Mandatory,LOG-T,LOG-T-TXME
+2,TXPE - Spare Parts Peugeot,Mandatory,LOG-T,LOG-T-TXPE
+2,TXTO - Spare Parts Toyota,Mandatory,LOG-T,LOG-T-TXTO
+2,TXYA - Spare Parts Yamaha,Mandatory,LOG-T,LOG-T-TXYA
+2,XCUS - Custom fees,Mandatory,SRV-X,SRV-X-XCUS
+2,XFRE - Freight,Mandatory,SRV-X,SRV-X-XFRE
+2,XINS - Insurance,Mandatory,SRV-X,SRV-X-XINS
+2,XMAI - Maintenance,Mandatory,SRV-X,SRV-X-XMAI
+2,XREN - Rental,Mandatory,SRV-X,SRV-X-XREN
+2,XREP - Repairs,Mandatory,SRV-X,SRV-X-XREP
+2,XTAX - Taxes,Mandatory,SRV-X,SRV-X-XTAX
+2,XTRA - Transport,Mandatory,SRV-X,SRV-X-XTRA
+3,046+ - DRILL BITS,Mandatory,MED-S-SIGN,MED-S-SIGN-046+
+3,0600 - SET & INSTRUMENTS,Mandatory,MED-S-SIGN,MED-S-SIGN-0600
+3,063+ - SLOT FINDERS,Mandatory,MED-S-SIGN,MED-S-SIGN-063+
+3,064+ - GUIDES,Mandatory,MED-S-SIGN,MED-S-SIGN-064+
+3,1NTR - Introduction on boats,Mandatory,LOG-T-TBOA,LOG-T-TBOA-1NTR
+3,1NTR - Premliminary notes immunoglob./vaccines,Mandatory,MED-D-DVAC,MED-D-DVAC-1NTR
+3,A--- - Watsan assemblies,Mandatory,LOG-C-CWAT,LOG-C-CWAT-A---
+3,AAAA - Custom fees,Mandatory,SRV-X-XCUS,SRV-X-XCUS-AAAA
+3,AAAA - Freight fees,Mandatory,SRV-X-XFRE,SRV-X-XFRE-AAAA
+3,AAAA - Generic Repairs,Mandatory,SRV-X-XREP,SRV-X-XREP-AAAA
+3,AAAA - Insurance fees,Mandatory,SRV-X-XINS,SRV-X-XINS-AAAA
+3,AAAA - Maintenance fees,Mandatory,SRV-X-XMAI,SRV-X-XMAI-AAAA
+3,AAAA - Taxes,Mandatory,SRV-X-XTAX,SRV-X-XTAX-AAAA
+3,AAAA - Transport cost,Mandatory,SRV-X-XTRA,SRV-X-XTRA-AAAA
+3,ABCV - Abacavir,Mandatory,MED-D-DORA,MED-D-DORA-ABCV
+3,ABLA - Abacavir / Lamivudine,Mandatory,MED-D-DORA,MED-D-DORA-ABLA
+3,ABLZ - Abacavir / Lamivudine / Zidovudine,Mandatory,MED-D-DORA,MED-D-DORA-ABLZ
+3,ABRR - Abdominal retractor ring,Mandatory,MED-E-ESUR,MED-E-ESUR-ABRR
+3,ABSS - Shock absorber for LAND ROVER,Mandatory,LOG-T-TXLA,LOG-T-TXLA-ABSS
+3,ABSS - Shock absorber for TOYOTA,Mandatory,LOG-T-TXTO,LOG-T-TXTO-ABSS
+3,ACD4 - Analyser CD4,Mandatory,MED-D-DDGT,MED-D-DDGT-ACD4
+3,ACD4 - Analyser CD4,Mandatory,MED-S-SLAS,MED-S-SLAS-ACD4
+3,ACD4 - CD4 PIMA,Mandatory,MED-E-ELAE,MED-E-ELAE-ACD4
+3,ACD4 - Checklist laboratory CD4 analyser,Mandatory,MED-I-ILAB,MED-I-ILAB-ACD4
+3,ACEA - Acetic Acid,Mandatory,MED-S-SLAS,MED-S-SLAS-ACEA
+3,ACEO - Acetone,Mandatory,MED-S-SLAS,MED-S-SLAS-ACEO
+3,ACET - Acetazolamide,Mandatory,MED-D-DORA,MED-D-DORA-ACET
+3,ACIV - Aciclovir,Mandatory,MED-D-DEXO,MED-D-DEXO-ACIV
+3,ACIV - Aciclovir,Mandatory,MED-D-DINJ,MED-D-DINJ-ACIV
+3,ACIV - Aciclovir,Mandatory,MED-D-DORA,MED-D-DORA-ACIV
+3,"ACLR - Rod cleaning, assembly",Mandatory,LOG-C-CWAT,LOG-C-CWAT-ACLR
+3,ACPL - AC plug,Mandatory,LOG-P-PX--,LOG-P-PX---ACPL
+3,ACRI - Acridine orange,Mandatory,MED-S-SLAS,MED-S-SLAS-ACRI
+3,ACSA - Acetyl Salicylic Acid,Mandatory,MED-D-DORA,MED-D-DORA-ACSA
+3,ACTC - Action card,Mandatory,LOG-A-ALST,LOG-A-ALST-ACTC
+3,ADAC - Coaxial adaptor,Mandatory,LOG-P-PCOM,LOG-P-PCOM-ADAC
+3,ADAS - Adenosime Deaminase Assay,Mandatory,MED-S-SLAS,MED-S-SLAS-ADAS
+3,ADAS - Adenosine Deaminase Assay,Mandatory,MED-D-DDGT,MED-D-DDGT-ADAS
+3,ADDI - Additive,Mandatory,LOG-T-TVEC,LOG-T-TVEC-ADDI
+3,"AIDB - AIDS, Book",Mandatory,LIB-L-L007,LIB-L-L007-AIDB
+3,"AIDB - AIDS, Book",Mandatory,LIB-L-L029,LIB-L-L029-AIDB
+3,AIDB - AIDS/HIV Book,Mandatory,LIB-L-L016,LIB-L-L016-AIDB
+3,"AIDG - AIDS, Guide",Mandatory,LIB-L-L007,LIB-L-L007-AIDG
+3,"AIDG - AIDS, Guide",Mandatory,LIB-L-L028,LIB-L-L028-AIDG
+3,AIDG - AIDS/HIV Guide,Mandatory,LIB-L-L016,LIB-L-L016-AIDG
+3,AIRG - Airways Guedel,Mandatory,MED-E-EANE,MED-E-EANE-AIRG
+3,ALBE - Albendazole,Mandatory,MED-D-DORA,MED-D-DORA-ALBE
+3,ALBF - Artemeter / Lumefantrine,Mandatory,MED-D-DORA,MED-D-DORA-ALBF
+3,ALCO - Alcohol-based hand rub,Mandatory,MED-D-DEXT,MED-D-DEXT-ALCO
+3,ALEK - Alen key,Mandatory,LOG-P-PTOO,LOG-P-PTOO-ALEK
+3,ALUM - Aluminium boat,Mandatory,LOG-T-TBOA,LOG-T-TBOA-ALUM
+3,ALUM - Aluminium Hydr. / Magnesium Trisil.,Mandatory,MED-D-DORA,MED-D-DORA-ALUM
+3,AMBC - Amphotericin B conventional,Mandatory,MED-D-DINJ,MED-D-DINJ-AMBC
+3,AMBL - Amphotericin B liposomal,Mandatory,MED-D-DINJ,MED-D-DINJ-AMBL
+3,AMDR - Dropping ampoule,Mandatory,MED-E-ELAE,MED-E-ELAE-AMDR
+3,AMIK - Amikacin,Mandatory,MED-D-DINJ,MED-D-DINJ-AMIK
+3,AMIO - Amiodarone,Mandatory,MED-D-DINJ,MED-D-DINJ-AMIO
+3,AMIT - Amitriptyline,Mandatory,MED-D-DORA,MED-D-DORA-AMIT
+3,AMNH - Amniohook,Mandatory,MED-E-ESUR,MED-E-ESUR-AMNH
+3,AMNH - Amniohook,Mandatory,MED-S-SMSU,MED-S-SMSU-AMNH
+3,AMOC - Amoxycillin + Clavunanic acid,Mandatory,MED-D-DINJ,MED-D-DINJ-AMOC
+3,AMOC - Amoxycillin + Clavunanic acid,Mandatory,MED-D-DORA,MED-D-DORA-AMOC
+3,AMOO - Ammonium Oxalate,Mandatory,MED-S-SLAS,MED-S-SLAS-AMOO
+3,AMOX - Amoxycilline,Mandatory,MED-D-DORA,MED-D-DORA-AMOX
+3,AMPH - Amphotericin B,Mandatory,MED-D-DINJ,MED-D-DINJ-AMPH
+3,AMPH - Amphotericin B,Mandatory,MED-S-SLAS,MED-S-SLAS-AMPH
+3,AMPI - Ampicilline,Mandatory,MED-D-DINJ,MED-D-DINJ-AMPI
+3,ANAA - (anaesthesia ventilator) accessories,Mandatory,MED-E-EANE,MED-E-EANE-ANAA
+3,"ANAB - Anaesthesia, Book",Mandatory,LIB-L-L008,LIB-L-L008-ANAB
+3,ANAE - anaesthesia machine,Mandatory,MED-E-EANE,MED-E-EANE-ANAE
+3,"ANAG - Anaesthesia, Guide",Mandatory,LIB-L-L008,LIB-L-L008-ANAG
+3,ANAL - ANALYSER,Mandatory,MED-E-ELAE,MED-E-ELAE-ANAL
+3,ANAL - Analysis request,Mandatory,MED-N-NSFO,MED-N-NSFO-ANAL
+3,ANAL - Clinical chemistry analyzer,Mandatory,MED-D-DDGT,MED-D-DDGT-ANAL
+3,ANAS - (anaesthesia ventilator) spare-parts,Mandatory,MED-E-EANE,MED-E-EANE-ANAS
+3,ANCH - Anchor,Mandatory,LOG-T-TBOA,LOG-T-TBOA-ANCH
+3,ANHF - HF antenna,Mandatory,LOG-P-PCOM,LOG-P-PCOM-ANHF
+3,ANOD - Anode for YAMAHA,Mandatory,LOG-T-TXYA,LOG-T-TXYA-ANOD
+3,ANTA - Antenna accessories,Mandatory,LOG-P-PCOM,LOG-P-PCOM-ANTA
+3,"ANTB - Anthropology, Book",Mandatory,LIB-L-L023,LIB-L-L023-ANTB
+3,ANTE - Antenna,Mandatory,LOG-P-PCOM,LOG-P-PCOM-ANTE
+3,ANTH - Anti Haemorroid,Mandatory,MED-D-DEXT,MED-D-DEXT-ANTH
+3,ANUH - UHF antenna,Mandatory,LOG-P-PCOM,LOG-P-PCOM-ANUH
+3,ANVH - VHF antenna,Mandatory,LOG-P-PCOM,LOG-P-PCOM-ANVH
+3,"AOUT - Outlet, assembly",Mandatory,LOG-C-CWAT,LOG-C-CWAT-AOUT
+3,APAN - Antibiotic mixture PANTA,Mandatory,MED-S-SLAS,MED-S-SLAS-APAN
+3,APBF - Atovaquone / Proguanil,Mandatory,MED-D-DORA,MED-D-DORA-APBF
+3,"APRF - X-ray protection apron, frontal",Mandatory,MED-E-EDIM,MED-E-EDIM-APRF
+3,"APRO - Apron, complete",Mandatory,MED-E-EDIM,MED-E-EDIM-APRO
+3,APRO - Protective apron,Mandatory,LOG-P-PSAF,LOG-P-PSAF-APRO
+3,APRP - Apron,Mandatory,MED-E-ELIN,MED-E-ELIN-APRP
+3,"APRS - Apron, Surgical",Mandatory,MED-E-ELIN,MED-E-ELIN-APRS
+3,ARAC - Artesunate / amodiaquine (fdc),Mandatory,MED-D-DORA,MED-D-DORA-ARAC
+3,"ARIB - Acute Respiratory Infections, Book",Mandatory,LIB-L-L010,LIB-L-L010-ARIB
+3,ARLU - Artemeter / Lumefantrine,Mandatory,MED-D-DORA,MED-D-DORA-ARLU
+3,ARMB - Armband,Mandatory,LOG-P-PIDE,LOG-P-PIDE-ARMB
+3,ARTE - Artemeter,Mandatory,MED-D-DINJ,MED-D-DINJ-ARTE
+3,ARTS - Artesunate,Mandatory,MED-D-DEXT,MED-D-DEXT-ARTS
+3,ARTS - Artesunate,Mandatory,MED-D-DINJ,MED-D-DINJ-ARTS
+3,ASAQ - Artesunate / amodiaquine,Mandatory,MED-D-DORA,MED-D-DORA-ASAQ
+3,ASCA - Ascorbic Acid,Mandatory,MED-D-DORA,MED-D-DORA-ASCA
+3,ASMQ - Artesunate / Mefloquine,Mandatory,MED-D-DORA,MED-D-DORA-ASMQ
+3,ASPB - Artesunate + sulfadoxine/pyrimethamine,Mandatory,MED-D-DORA,MED-D-DORA-ASPB
+3,"ASSB - Assessment, Book",Mandatory,LIB-L-L020,LIB-L-L020-ASSB
+3,"ASSB - Assessment, Book",Mandatory,LIB-L-L025,LIB-L-L025-ASSB
+3,"ASSG - Assessment, guide",Mandatory,LIB-L-L020,LIB-L-L020-ASSG
+3,"ASSG - Assessment, Guide",Mandatory,LIB-L-L025,LIB-L-L025-ASSG
+3,ASSP - Artesunate + sulfadoxine/pyrimethamine,Mandatory,MED-D-DORA,MED-D-DORA-ASSP
+3,ASTS - Antibiotic AST SIRE Kit,Mandatory,MED-S-SLAS,MED-S-SLAS-ASTS
+3,ATAZ - Atazanavir,Mandatory,MED-D-DORA,MED-D-DORA-ATAZ
+3,ATEN - Atenolol,Mandatory,MED-D-DORA,MED-D-DORA-ATEN
+3,ATET - Antitoxin Tetanus,Mandatory,MED-D-DVAC,MED-D-DVAC-ATET
+3,ATOP - Atovaquone / Proguanil,Mandatory,MED-D-DORA,MED-D-DORA-ATOP
+3,ATRB - Atracurium besilate,Mandatory,MED-D-DINJ,MED-D-DINJ-ATRB
+3,ATRO - Atropine,Mandatory,MED-D-DEXO,MED-D-DEXO-ATRO
+3,ATRO - Atropine,Mandatory,MED-D-DINJ,MED-D-DINJ-ATRO
+3,ATVR - Atazanavir / ritonavir,Mandatory,MED-D-DORA,MED-D-DORA-ATVR
+3,AURA - Auramine,Mandatory,MED-S-SLAS,MED-S-SLAS-AURA
+3,AUTA - (autoclave) accessories,Mandatory,MED-E-ESTE,MED-E-ESTE-AUTA
+3,AUTC - (autoclave) consumables,Mandatory,MED-E-ESTE,MED-E-ESTE-AUTC
+3,AUTE - Autoclave,Mandatory,MED-E-ESTE,MED-E-ESTE-AUTE
+3,AUTO - Autoclave,Mandatory,MED-E-ESTE,MED-E-ESTE-AUTO
+3,AUTS - (autoclave) spare-parts,Mandatory,MED-E-ESTE,MED-E-ESTE-AUTS
+3,"AWEL - Well head, assembly",Mandatory,LOG-C-CWAT,LOG-C-CWAT-AWEL
+3,AWLK - Awl of Küntscher,Mandatory,MED-E-ESUR,MED-E-ESUR-AWLK
+3,AXEW - Axe,Mandatory,LOG-P-PTOO,LOG-P-PTOO-AXEW
+3,AZIT - Azithromycine,Mandatory,MED-D-DORA,MED-D-DORA-AZIT
+3,BABD - Abdominal set,Mandatory,MED-K-KSUR,MED-K-KSUR-BABD
+3,BABR - Abdominal retractor ring,Mandatory,MED-K-KSUR,MED-K-KSUR-BABR
+3,BABT - Blood Taking Bag,Mandatory,MED-S-SINS,MED-S-SINS-BABT
+3,"BACB - Bacterial infectious disease, Book",Mandatory,LIB-L-L004,LIB-L-L004-BACB
+3,BACI - Battery charger / inverter,Mandatory,LOG-P-PELE,LOG-P-PELE-BACI
+3,BACK - Backpack,Mandatory,LOG-A-ALIF,LOG-A-ALIF-BACK
+3,BACO - Colostomy Bag,Mandatory,MED-S-SCTD,MED-S-SCTD-BACO
+3,"BACS - Casting tape, synthetic",Mandatory,MED-S-SDRE,MED-S-SDRE-BACS
+3,BADG - Badge,Mandatory,LOG-P-PIDE,LOG-P-PIDE-BADG
+3,BAES - Bandage Esmarch,Mandatory,MED-E-EANE,MED-E-EANE-BAES
+3,"BAGB - Bag, Body",Mandatory,MED-S-SMSU,MED-S-SMSU-BAGB
+3,BAGG - Gunny bag,Mandatory,LOG-P-PPAC,LOG-P-PPAC-BAGG
+3,BAGI - Isothermal bag,Mandatory,LOG-P-PPAC,LOG-P-PPAC-BAGI
+3,"BAGP - Bag, plastic",Mandatory,MED-E-ELAE,MED-E-ELAE-BAGP
+3,"BAGP - Bag, Plastic",Mandatory,MED-S-SMSU,MED-S-SMSU-BAGP
+3,BAGP - Plastic bag,Mandatory,LOG-P-PPAC,LOG-P-PPAC-BAGP
+3,"BAGR - Bag, refuse 'biohazard'",Mandatory,MED-E-ELAE,MED-E-ELAE-BAGR
+3,BAGR - Refuse bags,Mandatory,LOG-P-PHYG,LOG-P-PHYG-BAGR
+3,BAGS - Soft tool bag,Mandatory,LOG-P-PTOO,LOG-P-PTOO-BAGS
+3,BAGS - Soft tool bag,Mandatory,LOG-T-TVEA,LOG-T-TVEA-BAGS
+3,BAGT - Travel bag,Mandatory,LOG-P-PPAC,LOG-P-PPAC-BAGT
+3,BAGU - Urine Bag,Mandatory,MED-S-SCTD,MED-S-SCTD-BAGU
+3,BALA - Balance,Mandatory,LOG-P-PTOO,LOG-P-PTOO-BALA
+3,"BALA - Balloon, Anaesthesia",Mandatory,MED-E-EANE,MED-E-EANE-BALA
+3,BALL - ball,Mandatory,MED-E-EPSY,MED-E-EPSY-BALL
+3,BAMP - Amputation set,Mandatory,MED-K-KSUR,MED-K-KSUR-BAMP
+3,BANA - Adhesive Elastic Bandage,Mandatory,MED-S-SDRE,MED-S-SDRE-BANA
+3,BANC - Compression Bandage,Mandatory,MED-S-SDRE,MED-S-SDRE-BANC
+3,BAND - Band (Head-Band),Mandatory,MED-E-EANE,MED-E-EANE-BAND
+3,"BANE - Bandage, Elastic",Mandatory,MED-S-SDRE,MED-S-SDRE-BANE
+3,BANP - Plaster Of Paris Bandage,Mandatory,MED-S-SDRE,MED-S-SDRE-BANP
+3,BANT - Tubular Tricot Bandage,Mandatory,MED-S-SDRE,MED-S-SDRE-BANT
+3,BAPP - Balloon post-partum haemorrhage,Mandatory,MED-S-SCTD,MED-S-SCTD-BAPP
+3,BASK - Basket,Mandatory,MED-E-ESTE,MED-E-ESTE-BASK
+3,BASK - Filing basket,Mandatory,LOG-A-ASTA,LOG-A-ASTA-BASK
+3,"BASL - KIT, BASIC LIBRARY",Mandatory,LIB-K-KLIB,LIB-K-KLIB-BASL
+3,"BASS - List, laboratory check list",Mandatory,MED-I-ILAB,MED-I-ILAB-BASS
+3,BATA - (water bath) accessories,Mandatory,MED-E-ELAE,MED-E-ELAE-BATA
+3,BATC - Battery charger,Mandatory,LOG-P-PELE,LOG-P-PELE-BATC
+3,BATE - Water-bath,Mandatory,MED-E-ELAE,MED-E-ELAE-BATE
+3,"BATH - Bath, water",Mandatory,MED-E-ELAE,MED-E-ELAE-BATH
+3,BATM - Starter battery,Mandatory,LOG-P-PELE,LOG-P-PELE-BATM
+3,BATS - Stationary battery,Mandatory,LOG-P-PELE,LOG-P-PELE-BATS
+3,BATT - Battery,Mandatory,LOG-P-PELE,LOG-P-PELE-BATT
+3,BBON - Bone set,Mandatory,MED-K-KSUR,MED-K-KSUR-BBON
+3,BCES - Caesarean section set,Mandatory,MED-K-KSUR,MED-K-KSUR-BCES
+3,BCLA - Clamp set,Mandatory,MED-K-KSUR,MED-K-KSUR-BCLA
+3,BCRA - Cranioclasty Craniotomy set,Mandatory,MED-K-KSUR,MED-K-KSUR-BCRA
+3,BCUR - Curetage set,Mandatory,MED-K-KSUR,MED-K-KSUR-BCUR
+3,BCVT - Cervico vaginal tear set,Mandatory,MED-K-KSUR,MED-K-KSUR-BCVT
+3,BDEL - Episiotomy Delivery set,Mandatory,MED-K-KSUR,MED-K-KSUR-BDEL
+3,"BDEN - Box, Dental",Mandatory,MED-K-KSUD,MED-K-KSUD-BDEN
+3,BDRE - Dressing set,Mandatory,MED-K-KSUR,MED-K-KSUR-BDRE
+3,BEAC - Beard cover,Mandatory,MED-E-ELIN,MED-E-ELIN-BEAC
+3,"BEAG - Beaker, glass",Mandatory,MED-E-ELAE,MED-E-ELAE-BEAG
+3,BEAK - Beaker,Mandatory,LOG-C-CWAT,LOG-C-CWAT-BEAK
+3,"BEAK - Beaker, plastic",Mandatory,MED-E-ELAE,MED-E-ELAE-BEAK
+3,BEAM - Beamer,Mandatory,LOG-A-AOFF,LOG-A-AOFF-BEAM
+3,BEAN - Beans,Mandatory,LOG-A-AFOO,LOG-A-AFOO-BEAN
+3,BEAN - Beans,Mandatory,MED-N-NFOO,MED-N-NFOO-BEAN
+3,BECL - Beclomethasone,Mandatory,MED-D-DORA,MED-D-DORA-BECL
+3,BEDC - Cholera bed,Mandatory,MED-E-EHOE,MED-E-EHOE-BEDC
+3,BEDF - Foldable bed,Mandatory,LOG-A-AFUR,LOG-A-AFUR-BEDF
+3,BEDH - Hospital Bed,Mandatory,MED-E-EHOE,MED-E-EHOE-BEDH
+3,BEDP - Bed Pan,Mandatory,MED-E-EMEQ,MED-E-EMEQ-BEDP
+3,BEDR - Rigid bed,Mandatory,LOG-A-AFUR,LOG-A-AFUR-BEDR
+3,BEEF - Beef,Mandatory,LOG-A-AFOO,LOG-A-AFOO-BEEF
+3,BEFA - Fan belt,Mandatory,LOG-P-PX--,LOG-P-PX---BEFA
+3,"BEGL - Beads, glass",Mandatory,MED-E-ELAE,MED-E-ELAE-BEGL
+3,BELT - Belt,Mandatory,LOG-P-PPAC,LOG-P-PPAC-BELT
+3,BELT - Belt for LISTER engine,Mandatory,LOG-P-PXLI,LOG-P-PXLI-BELT
+3,BELT - Towing belt,Mandatory,LOG-T-TVEA,LOG-T-TVEA-BELT
+3,BEND - Benznidazole,Mandatory,MED-D-DORA,MED-D-DORA-BEND
+3,BENS - Benzoic Acid,Mandatory,MED-D-DEXT,MED-D-DEXT-BENS
+3,BENU - Enucleation set,Mandatory,MED-K-KSUR,MED-K-KSUR-BENU
+3,BENZ - Benzyl Benzaote,Mandatory,MED-D-DEXT,MED-D-DEXT-BENZ
+3,BFIX - Fixator External set,Mandatory,MED-K-KSUR,MED-K-KSUR-BFIX
+3,BFRA - Open fracture set,Mandatory,MED-K-KSUR,MED-K-KSUR-BFRA
+3,BHAE - Haemostatic dressing,Mandatory,MED-S-SDRE,MED-S-SDRE-BHAE
+3,BIND - Binder,Mandatory,LOG-A-ASTA,LOG-A-ASTA-BIND
+3,BIOP - Skin snip biopsy set,Mandatory,MED-S-SINS,MED-S-SINS-BIOP
+3,BIPE - Biperiden,Mandatory,MED-D-DORA,MED-D-DORA-BIPE
+3,BISA - Bisacodyl,Mandatory,MED-D-DORA,MED-D-DORA-BISA
+3,BISC - Biscuits,Mandatory,LOG-A-AFOO,LOG-A-AFOO-BISC
+3,BISC - Biscuits,Mandatory,MED-N-NFOS,MED-N-NFOS-BISC
+3,BITU - Bitumen,Mandatory,LOG-C-CBUI,LOG-C-CBUI-BITU
+3,BIUD - Intra Uterine Device set,Mandatory,MED-K-KSUR,MED-K-KSUR-BIUD
+3,BLAN - Blanket,Mandatory,LOG-C-CSHE,LOG-C-CSHE-BLAN
+3,BLAN - Blanket,Mandatory,MED-S-SMSU,MED-S-SMSU-BLAN
+3,BLEO - Bleomycin,Mandatory,MED-D-DINJ,MED-D-DINJ-BLEO
+3,BLOC - Blood Group Control Test,Mandatory,MED-D-DDGT,MED-D-DDGT-BLOC
+3,BLOC - Concrete block,Mandatory,LOG-C-CBUI,LOG-C-CBUI-BLOC
+3,BLOG - Blood Group Test,Mandatory,MED-D-DDGT,MED-D-DDGT-BLOG
+3,"BLOR - Blood Group Test, Rhesus",Mandatory,MED-D-DDGT,MED-D-DDGT-BLOR
+3,BLOS - Checklist laboratory blood samples,Mandatory,MED-I-ILAB,MED-I-ILAB-BLOS
+3,BMVA - Manual Vacuum Aspiration set,Mandatory,MED-K-KSUR,MED-K-KSUR-BMVA
+3,BOAR - Board,Mandatory,LOG-A-ASTA,LOG-A-ASTA-BOAR
+3,BOAR - Electrical board,Mandatory,LOG-P-PELE,LOG-P-PELE-BOAR
+3,"BOBP - Bottle Bijoux sterile, plastic",Mandatory,MED-E-ELAE,MED-E-ELAE-BOBP
+3,BOFI - Obstetric fistula set,Mandatory,MED-K-KSUR,MED-K-KSUR-BOFI
+3,"BOGS - Bottle, glass, srew",Mandatory,MED-E-ELAE,MED-E-ELAE-BOGS
+3,BOLB - Black bolt,Mandatory,LOG-P-PHDW,LOG-P-PHDW-BOLB
+3,BOLC - Timber bolt,Mandatory,LOG-P-PHDW,LOG-P-PHDW-BOLC
+3,BOLG - Galvanized bolt,Mandatory,LOG-P-PHDW,LOG-P-PHDW-BOLG
+3,BOLT - Threaded bolt,Mandatory,LOG-P-PHDW,LOG-P-PHDW-BOLT
+3,BOOA - Account book,Mandatory,LOG-A-ASTA,LOG-A-ASTA-BOOA
+3,BOOC - Counterfoil book,Mandatory,LOG-A-ASTA,LOG-A-ASTA-BOOC
+3,BOOE - Notebook,Mandatory,LOG-A-ASTA,LOG-A-ASTA-BOOE
+3,BOOL - Leather boots,Mandatory,LOG-A-ALIF,LOG-A-ALIF-BOOL
+3,BOOR - Rubber boots,Mandatory,LOG-A-ALIF,LOG-A-ALIF-BOOR
+3,BOOR - Rubber boots,Mandatory,LOG-P-PHYG,LOG-P-PHYG-BOOR
+3,BOOS - Safety boots,Mandatory,LOG-P-PSAF,LOG-P-PSAF-BOOS
+3,BOOT - Boot remover,Mandatory,LOG-A-ALIF,LOG-A-ALIF-BOOT
+3,BORE - Boreflow,Mandatory,LOG-C-CWAT,LOG-C-CWAT-BORE
+3,BOSU - Bosun chair,Mandatory,LOG-P-PSAF,LOG-P-PSAF-BOSU
+3,BOTD - Bottle,Mandatory,MED-E-ELAE,MED-E-ELAE-BOTD
+3,"BOTG - Bottle, glass, brown",Mandatory,MED-E-ELAE,MED-E-ELAE-BOTG
+3,BOTI - Isothermal bottle,Mandatory,LOG-A-ALIF,LOG-A-ALIF-BOTI
+3,BOTL - Bottle,Mandatory,LOG-A-ALIF,LOG-A-ALIF-BOTL
+3,"BOTP - Bottle, Plastic",Mandatory,MED-E-EMEQ,MED-E-EMEQ-BOTP
+3,BOTW - Wash Bottle,Mandatory,MED-E-ELAE,MED-E-ELAE-BOTW
+3,BOWB - Bow of Boehler,Mandatory,MED-E-ESUR,MED-E-ESUR-BOWB
+3,BOWK - Bow Of Kirschner,Mandatory,MED-E-ESUR,MED-E-ESUR-BOWK
+3,BOWL - Bowl,Mandatory,LOG-P-PCOO,LOG-P-PCOO-BOWL
+3,BOWL - Washing up bowl,Mandatory,LOG-P-PHYG,LOG-P-PHYG-BOWL
+3,"BOXA - Box, First Aid",Mandatory,MED-E-EMEQ,MED-E-EMEQ-BOXA
+3,BOXC - Cold box,Mandatory,LOG-P-PCOL,LOG-P-PCOL-BOXC
+3,BOXC - Cold box,Mandatory,LOG-P-PCOO,LOG-P-PCOO-BOXC
+3,BOXD - Distribution box,Mandatory,LOG-P-PELE,LOG-P-PELE-BOXD
+3,BOXF - Flush box,Mandatory,LOG-P-PELE,LOG-P-PELE-BOXF
+3,BOXI - Isothermal box,Mandatory,LOG-P-PCOO,LOG-P-PCOO-BOXI
+3,BOXI - Isothermal box,Mandatory,LOG-P-PPAC,LOG-P-PPAC-BOXI
+3,BOXJ - Junction box,Mandatory,LOG-P-PELE,LOG-P-PELE-BOXJ
+3,BOXL - Box For Slides,Mandatory,MED-E-ELAE,MED-E-ELAE-BOXL
+3,BOXP - Box Plastic,Mandatory,LOG-C-CWAT,LOG-C-CWAT-BOXP
+3,"BOXP - Box, Plastic",Mandatory,MED-S-SMSU,MED-S-SMSU-BOXP
+3,BOXP - Pallet-box,Mandatory,LOG-P-PPAC,LOG-P-PPAC-BOXP
+3,BOXP - Plastic box,Mandatory,LOG-P-PCOO,LOG-P-PCOO-BOXP
+3,BOXS - Box for index card,Mandatory,LOG-A-ASTA,LOG-A-ASTA-BOXS
+3,BOXW - Wooden box,Mandatory,LOG-P-PPAC,LOG-P-PPAC-BOXW
+3,BPED - Paediatric instruments set,Mandatory,MED-K-KSUR,MED-K-KSUR-BPED
+3,BPIN - Pins set,Mandatory,MED-K-KSUR,MED-K-KSUR-BPIN
+3,BPLA - Plastic surgery set,Mandatory,MED-K-KSUR,MED-K-KSUR-BPLA
+3,BRAB - Brachial bracelet,Mandatory,MED-E-EANT,MED-E-EANT-BRAB
+3,BRAG - DRILL BRACE,Mandatory,MED-E-ESUF,MED-E-ESUF-BRAG
+3,BRAI - Identification Brace,Mandatory,MED-S-SMSU,MED-S-SMSU-BRAI
+3,BRCF - Breathing circuit filter,Mandatory,MED-S-SCTD,MED-S-SCTD-BRCF
+3,BREA - Circuit-breaker,Mandatory,LOG-P-PELE,LOG-P-PELE-BREA
+3,BRIC - Brik,Mandatory,LOG-C-CBUI,LOG-C-CBUI-BRIC
+3,BROO - Broom,Mandatory,LOG-P-PHYG,LOG-P-PHYG-BROO
+3,BRUS - Brush,Mandatory,MED-E-EMEQ,MED-E-EMEQ-BRUS
+3,BRUS - Brush,Mandatory,LOG-P-PHYG,LOG-P-PHYG-BRUS
+3,BRUS - Brush,Mandatory,LOG-P-PPAI,LOG-P-PPAI-BRUS
+3,BRUS - Brush,Mandatory,LOG-P-PTOO,LOG-P-PTOO-BRUS
+3,BRUS - Brush for cleaning tubes,Mandatory,MED-E-ESTE,MED-E-ESTE-BRUS
+3,BSCA - Biological safety cabinet,Mandatory,MED-E-ELAE,MED-E-ELAE-BSCA
+3,BSCE - Biological safety cabinet,Mandatory,MED-E-ELAE,MED-E-ELAE-BSCE
+3,BSCS - (biological safety cabinet) spare-parts,Mandatory,MED-E-ELAE,MED-E-ELAE-BSCS
+3,"BSTE - Basket, instruments f sterilization",Mandatory,MED-E-ESUO,MED-E-ESUO-BSTE
+3,"BSTE - Basket, instruments f sterilization",Mandatory,MED-E-ESUR,MED-E-ESUR-BSTE
+3,BSUR - Basic Surgery set,Mandatory,MED-K-KSUR,MED-K-KSUR-BSUR
+3,BSUT - Suture Abcess set,Mandatory,MED-K-KSUR,MED-K-KSUR-BSUT
+3,BSVM - Blood sampling device Microtainer,Mandatory,MED-E-ELAE,MED-E-ELAE-BSVM
+3,BSVT - Blood sampling vacuum tubes,Mandatory,MED-E-ELAE,MED-E-ELAE-BSVT
+3,BSVV - Blood sampling device Vacutainer,Mandatory,MED-E-ELAE,MED-E-ELAE-BSVV
+3,BTNE - Elastic Tubular Net Bandage,Mandatory,MED-S-SDRE,MED-S-SDRE-BTNE
+3,BTRA - Board for transfer,Mandatory,MED-E-EHOE,MED-E-EHOE-BTRA
+3,BTRA - Tracheo set,Mandatory,MED-K-KSUR,MED-K-KSUR-BTRA
+3,BTRE - Trepanation set,Mandatory,MED-K-KSUR,MED-K-KSUR-BTRE
+3,BTRN - Traction set,Mandatory,MED-K-KSUR,MED-K-KSUR-BTRN
+3,BUCK - Bucket,Mandatory,LOG-C-CWAT,LOG-C-CWAT-BUCK
+3,BUCK - Bucket,Mandatory,LOG-P-PCOO,LOG-P-PCOO-BUCK
+3,BUCK - Bucket,Mandatory,LOG-P-PHYG,LOG-P-PHYG-BUCK
+3,BUFF - Buffer Ph=7,Mandatory,MED-S-SLAS,MED-S-SLAS-BUFF
+3,BUFF - Buffer solution,Mandatory,LOG-C-CWAT,LOG-C-CWAT-BUFF
+3,"BUIB - Building, book",Mandatory,LIB-L-L043,LIB-L-L043-BUIB
+3,"BUIG - Building, guide",Mandatory,LIB-L-L043,LIB-L-L043-BUIG
+3,BULB - Bulb,Mandatory,LOG-P-PLIG,LOG-P-PLIG-BULB
+3,BULB - Bulb,Mandatory,LOG-T-TVEC,LOG-T-TVEC-BULB
+3,BUNB - Bunsen burner,Mandatory,MED-E-ELAE,MED-E-ELAE-BUNB
+3,BUNG - Bungee,Mandatory,LOG-T-TVEA,LOG-T-TVEA-BUNG
+3,BUPI - Bupivacaine,Mandatory,MED-D-DINJ,MED-D-DINJ-BUPI
+3,BURN - Burner,Mandatory,MED-E-ESTE,MED-E-ESTE-BURN
+3,BURN - Burner,Mandatory,LOG-P-PCOL,LOG-P-PCOL-BURN
+3,CABA - Accelerator cable for YAMAHA,Mandatory,LOG-T-TXYA,LOG-T-TXYA-CABA
+3,"CABA - Coaxial cable, Aircell",Mandatory,LOG-P-PCOM,LOG-P-PCOM-CABA
+3,CABA - Earth cable,Mandatory,LOG-P-PELE,LOG-P-PELE-CABA
+3,CABD - Adapter cable,Mandatory,LOG-P-PELE,LOG-P-PELE-CABD
+3,CABE - Extension cable,Mandatory,LOG-P-PELE,LOG-P-PELE-CABE
+3,CABG - Cabergoline,Mandatory,MED-D-DORA,MED-D-DORA-CABG
+3,CABI - Cabinet,Mandatory,MED-E-EHOE,MED-E-EHOE-CABI
+3,CABL - Cable,Mandatory,LOG-T-TVEA,LOG-T-TVEA-CABL
+3,CABL - Cable,Mandatory,LOG-T-TVEM,LOG-T-TVEM-CABL
+3,"CABL - Coaxial cable, RG",Mandatory,LOG-P-PCOM,LOG-P-PCOM-CABL
+3,CABL - Data processing cable,Mandatory,LOG-A-ADAP,LOG-A-ADAP-CABL
+3,CABL - Data processing cable,Mandatory,LOG-A-ADAP,LOG-A-ADAP-CABL
+3,CABL - Electric cable,Mandatory,LOG-P-PELE,LOG-P-PELE-CABL
+3,CABL - Steel cable,Mandatory,LOG-P-PHDW,LOG-P-PHDW-CABL
+3,CABT - Towing cable,Mandatory,LOG-P-PHDW,LOG-P-PHDW-CABT
+3,"CADH - Cap, Hood",Mandatory,MED-E-ELIN,MED-E-ELIN-CADH
+3,"CADS - CAP, DRESSING, SURGICAL",Mandatory,MED-E-ELIN,MED-E-ELIN-CADS
+3,CAFC - Caffeine citrate,Mandatory,MED-D-DINJ,MED-D-DINJ-CAFC
+3,CAHO - X-ray film cassette holder,Mandatory,MED-E-EDIM,MED-E-EDIM-CAHO
+3,CALA - Calamine,Mandatory,MED-D-DEXT,MED-D-DEXT-CALA
+3,CALC - Calcium carbonate,Mandatory,MED-D-DORA,MED-D-DORA-CALC
+3,CALC - Calculator,Mandatory,LOG-A-AOFF,LOG-A-AOFF-CALC
+3,CALG - Calcium Gluconate,Mandatory,MED-D-DINJ,MED-D-DINJ-CALG
+3,CAME - Camera,Mandatory,LOG-A-AOFF,LOG-A-AOFF-CAME
+3,CAND - Candle,Mandatory,LOG-A-ALIF,LOG-A-ALIF-CAND
+3,"CANN - Cannula, nasal",Mandatory,MED-S-SCTD,MED-S-SCTD-CANN
+3,CAPB - Baseball cap,Mandatory,LOG-P-PSAF,LOG-P-PSAF-CAPB
+3,CAPD - Dust protection cap,Mandatory,LOG-P-PSAF,LOG-P-PSAF-CAPD
+3,CAPO - Capnograph + oxymeter,Mandatory,MED-E-EANE,MED-E-EANE-CAPO
+3,CAPR - Capreomycin,Mandatory,MED-D-DINJ,MED-D-DINJ-CAPR
+3,CARA - Carabiner,Mandatory,LOG-P-PSAF,LOG-P-PSAF-CARA
+3,"CARA - Card, anaesthesia",Mandatory,MED-S-SMST,MED-S-SMST-CARA
+3,CARB - Carbamazepine,Mandatory,MED-D-DORA,MED-D-DORA-CARB
+3,CARB - Spare parts for YAMAHA carburator,Mandatory,LOG-T-TXYA,LOG-T-TXYA-CARB
+3,CARD - Card,Mandatory,LOG-A-ASTA,LOG-A-ASTA-CARD
+3,CARD - Card,Mandatory,MED-S-SMST,MED-S-SMST-CARD
+3,CARD - Cardboard box,Mandatory,LOG-P-PPAC,LOG-P-PPAC-CARD
+3,"CARI - CARD, immunization",Mandatory,MED-S-SMST,MED-S-SMST-CARI
+3,"CARN - Card, nutrition",Mandatory,MED-S-SMST,MED-S-SMST-CARN
+3,"CARO - Card, obstetrics",Mandatory,MED-S-SMST,MED-S-SMST-CARO
+3,CARO - Carots,Mandatory,LOG-A-AFOO,LOG-A-AFOO-CARO
+3,CARR - Cardboard box for regulated transport,Mandatory,LOG-P-PPAC,LOG-P-PPAC-CARR
+3,CART - Printer cartridge,Mandatory,LOG-A-ADAP,LOG-A-ADAP-CART
+3,CASC - Cassettes + screen,Mandatory,MED-E-EDIM,MED-E-EDIM-CASC
+3,CASD - Digital imaging cassette,Mandatory,MED-E-EDIM,MED-E-EDIM-CASD
+3,CASE - Case,Mandatory,LOG-P-PPAC,LOG-P-PPAC-CASE
+3,CASP - Suprapubic catheter,Mandatory,MED-S-SCTD,MED-S-SCTD-CASP
+3,CASS - Cassava,Mandatory,MED-N-NFOO,MED-N-NFOO-CASS
+3,CASS - Cassoulet,Mandatory,LOG-A-AFOO,LOG-A-AFOO-CASS
+3,CATG - ITC catalogues,Mandatory,LIB-L-L045,LIB-L-L045-CATG
+3,CATM - Catheter mount,Mandatory,MED-E-EANE,MED-E-EANE-CATM
+3,CATU - Uretheral Catheter,Mandatory,MED-S-SCTD,MED-S-SCTD-CATU
+3,"CAUN - CATHETER URINARY, Nelaton type",Mandatory,MED-S-SCTD,MED-S-SCTD-CAUN
+3,CAUR - Urinary Catheter,Mandatory,MED-S-SCTD,MED-S-SCTD-CAUR
+3,CCHA - (clinical chemistry anal) accessories,Mandatory,MED-E-ELAE,MED-E-ELAE-CCHA
+3,CCHC - (clinical chemistry anal.) consumables,Mandatory,MED-E-ELAE,MED-E-ELAE-CCHC
+3,CCHE - clinical chemistry analyser,Mandatory,MED-E-ELAE,MED-E-ELAE-CCHE
+3,CCHS - (clinical chemistry anal) spare-parts,Mandatory,MED-E-ELAE,MED-E-ELAE-CCHS
+3,CCHT - (clinical chemistry anal) test & control,Mandatory,MED-E-ELAE,MED-E-ELAE-CCHT
+3,"CCOL - Collar, cervical",Mandatory,MED-E-EMEQ,MED-E-EMEQ-CCOL
+3,CCRO - Cold room,Mandatory,LOG-P-PCOL,LOG-P-PCOL-CCRO
+3,CD4A - CD4 accessories,Mandatory,MED-E-ELAE,MED-E-ELAE-CD4A
+3,CD4C - CD4 consumables,Mandatory,MED-E-ELAE,MED-E-ELAE-CD4C
+3,CD4E - CD4 equipment,Mandatory,MED-E-ELAE,MED-E-ELAE-CD4E
+3,CD4T - CD4 tests and controls,Mandatory,MED-E-ELAE,MED-E-ELAE-CD4T
+3,CEFA - Cefazolin,Mandatory,MED-D-DINJ,MED-D-DINJ-CEFA
+3,CEFI - Cefixime,Mandatory,MED-D-DORA,MED-D-DORA-CEFI
+3,CEFL - Ceftriaxone + lidocaine,Mandatory,MED-D-DINJ,MED-D-DINJ-CEFL
+3,CEFO - Cefotaxime,Mandatory,MED-D-DINJ,MED-D-DINJ-CEFO
+3,CEFT - Ceftriaxone,Mandatory,MED-D-DINJ,MED-D-DINJ-CEFT
+3,CEFX - Cefalexin,Mandatory,MED-D-DORA,MED-D-DORA-CEFX
+3,CEME - Cement,Mandatory,LOG-C-CBUI,LOG-C-CBUI-CEME
+3,CENA - (centrifuge) accessories,Mandatory,MED-E-ELAE,MED-E-ELAE-CENA
+3,CENE - Centrifuge,Mandatory,MED-E-ELAE,MED-E-ELAE-CENE
+3,CENS - (centrifuge) spare-parts,Mandatory,MED-E-ELAE,MED-E-ELAE-CENS
+3,CENT - Centrifuge,Mandatory,MED-E-ELAE,MED-E-ELAE-CENT
+3,CERM - Medical certificate,Mandatory,MED-S-SMST,MED-S-SMST-CERM
+3,CERT - Donation certificate,Mandatory,LOG-A-ALST,LOG-A-ALST-CERT
+3,CERV - Cervix examination,Mandatory,MED-E-ETMA,MED-E-ETMA-CERV
+3,"CFLW - Compact fluorescent bulb, white",Mandatory,LOG-P-PLIG,LOG-P-PLIG-CFLW
+3,"CFLY - Compact fluorescent bulb, yellow",Mandatory,LOG-P-PLIG,LOG-P-PLIG-CFLY
+3,"CHAB - Chagas Disease, Book",Mandatory,LIB-L-L006,LIB-L-L006-CHAB
+3,CHAI - Chain,Mandatory,LOG-P-PHDW,LOG-P-PHDW-CHAI
+3,CHAI - Chains,Mandatory,LOG-T-TVEA,LOG-T-TVEA-CHAI
+3,CHAI - Chair,Mandatory,LOG-A-AFUR,LOG-A-AFUR-CHAI
+3,CHAL - Chalk,Mandatory,LOG-A-ASTA,LOG-A-ASTA-CHAL
+3,CHAR - Charcoal activated,Mandatory,MED-D-DORA,MED-D-DORA-CHAR
+3,CHEC - Checklist hygiene,Mandatory,LOG-P-PHYG,LOG-P-PHYG-CHEC
+3,CHEE - Cheese,Mandatory,LOG-A-AFOO,LOG-A-AFOO-CHEE
+3,CHIM - Chimney,Mandatory,LOG-C-CBUI,LOG-C-CBUI-CHIM
+3,CHIS - Chisel,Mandatory,LOG-P-PTOO,LOG-P-PTOO-CHIS
+3,"CHIS - Chisel, Stille",Mandatory,MED-E-ESUR,MED-E-ESUR-CHIS
+3,CHLH - Chlorhexidine,Mandatory,MED-D-DEXT,MED-D-DEXT-CHLH
+3,CHLM - Chlorpromazine,Mandatory,MED-D-DINJ,MED-D-DINJ-CHLM
+3,CHLM - Chlorpromazine,Mandatory,MED-D-DORA,MED-D-DORA-CHLM
+3,CHLO - Chloramphenicol,Mandatory,MED-D-DEXO,MED-D-DEXO-CHLO
+3,CHLO - Chloramphenicol,Mandatory,MED-D-DINJ,MED-D-DINJ-CHLO
+3,CHLO - Chloramphenicol,Mandatory,MED-D-DORA,MED-D-DORA-CHLO
+3,CHLO - Chlorine,Mandatory,LOG-C-CWAT,LOG-C-CWAT-CHLO
+3,CHLP - Chlorpheniramine,Mandatory,MED-D-DORA,MED-D-DORA-CHLP
+3,CHLQ - Chloroquine,Mandatory,MED-D-DORA,MED-D-DORA-CHLQ
+3,"CHOB - Cholera, Book",Mandatory,LIB-L-L004,LIB-L-L004-CHOB
+3,CHOC - Chocolate,Mandatory,LOG-A-AFOO,LOG-A-AFOO-CHOC
+3,"CHOG - Cholera, Guide",Mandatory,LIB-L-L004,LIB-L-L004-CHOG
+3,CHOL - Cholera rapid test,Mandatory,MED-D-DDGT,MED-D-DDGT-CHOL
+3,"CHWB - Community Health Worker, Book",Mandatory,LIB-L-L022,LIB-L-L022-CHWB
+3,"CHWD - Community Health Worker, Digital Media",Mandatory,LIB-L-L022,LIB-L-L022-CHWD
+3,"CHWG - Community Health Work, Guide",Mandatory,LIB-L-L022,LIB-L-L022-CHWG
+3,CIME - Cimetidine,Mandatory,MED-D-DORA,MED-D-DORA-CIME
+3,CIPR - Ciprofloxacin,Mandatory,MED-D-DEXT,MED-D-DEXT-CIPR
+3,CIPR - Ciprofloxacin,Mandatory,MED-D-DORA,MED-D-DORA-CIPR
+3,CLAG - CLUSTER CLAMP,Mandatory,MED-E-ESUF,MED-E-ESUF-CLAG
+3,CLAM - Cable clamp,Mandatory,LOG-P-PHDW,LOG-P-PHDW-CLAM
+3,CLAM - Clamp,Mandatory,LOG-P-PTOO,LOG-P-PTOO-CLAM
+3,CLAM - Clamp,Mandatory,LOG-T-TVEA,LOG-T-TVEA-CLAM
+3,CLAM - Clamp,Mandatory,LOG-T-TVEM,LOG-T-TVEM-CLAM
+3,CLAM - Clamp for cable,Mandatory,LOG-P-PELE,LOG-P-PELE-CLAM
+3,CLAR - Clarithromycine,Mandatory,MED-D-DORA,MED-D-DORA-CLAR
+3,"CLBD - Clamp, Bull Dog, Bakey",Mandatory,MED-E-ESUR,MED-E-ESUR-CLBD
+3,"CLCD - Clamp, Cardiovascular, DeBakey",Mandatory,MED-E-ESUR,MED-E-ESUR-CLCD
+3,CLEC - Cleaning cloth,Mandatory,LOG-P-PTOO,LOG-P-PTOO-CLEC
+3,"CLIB - Clinical, Book",Mandatory,LIB-L-L002,LIB-L-L002-CLIB
+3,"CLIG - Clinical, Guide",Mandatory,LIB-L-L002,LIB-L-L002-CLIG
+3,CLIN - Clindamycin,Mandatory,MED-D-DINJ,MED-D-DINJ-CLIN
+3,CLIN - Clindamycin,Mandatory,MED-D-DORA,MED-D-DORA-CLIN
+3,CLIP - Paper clips,Mandatory,LOG-A-ASTA,LOG-A-ASTA-CLIP
+3,CLOC - Alarm clock,Mandatory,LOG-A-ALIF,LOG-A-ALIF-CLOC
+3,CLOC - Wall clock,Mandatory,LOG-A-AFUR,LOG-A-AFUR-CLOC
+3,CLOF - Clofazimine,Mandatory,MED-D-DORA,MED-D-DORA-CLOF
+3,CLOG - CLOGS,Mandatory,MED-E-ELIN,MED-E-ELIN-CLOG
+3,CLOM - Clomipramide,Mandatory,MED-D-DORA,MED-D-DORA-CLOM
+3,CLOO - Vinyl table cloth,Mandatory,LOG-P-PHYG,LOG-P-PHYG-CLOO
+3,CLOT - Cloth,Mandatory,LOG-P-PHYG,LOG-P-PHYG-CLOT
+3,CLOT - Clotrimazole,Mandatory,MED-D-DEXT,MED-D-DEXT-CLOT
+3,CLOT - Emery cloth,Mandatory,LOG-P-PTOO,LOG-P-PTOO-CLOT
+3,CLOX - Cloxacilline,Mandatory,MED-D-DINJ,MED-D-DINJ-CLOX
+3,CLOX - Cloxacilline,Mandatory,MED-D-DORA,MED-D-DORA-CLOX
+3,CLTB - Towel Clamp Of Backhaus,Mandatory,MED-E-ESUR,MED-E-ESUR-CLTB
+3,COAE - Coagulator,Mandatory,MED-E-ELAE,MED-E-ELAE-COAE
+3,COAG - Coagulant,Mandatory,LOG-C-CWAT,LOG-C-CWAT-COAG
+3,COAG - Coagulator,Mandatory,MED-E-ELAE,MED-E-ELAE-COAG
+3,COAH - COAT HANGER,Mandatory,MED-E-EDIM,MED-E-EDIM-COAH
+3,COAP - Coat peg,Mandatory,LOG-P-PHYG,LOG-P-PHYG-COAP
+3,COAW - White Coat,Mandatory,MED-E-ELIN,MED-E-ELIN-COAW
+3,COCE - Desktop computer,Mandatory,MED-E-EDIM,MED-E-EDIM-COCE
+3,COCF - Counting Chamber Fuch-Rosenthal,Mandatory,MED-E-ELAE,MED-E-ELAE-COCF
+3,COCK - Counting Chamber Kovaslide,Mandatory,MED-E-ELAE,MED-E-ELAE-COCK
+3,COCN - Counting Chamber Neubauer,Mandatory,MED-E-ELAE,MED-E-ELAE-COCN
+3,COCU - Desktop computer,Mandatory,LOG-A-ADAP,LOG-A-ADAP-COCU
+3,COCU - Desktop computer,Mandatory,MED-E-EDIM,MED-E-EDIM-COCU
+3,CODE - Codeine,Mandatory,MED-D-DORA,MED-D-DORA-CODE
+3,COFF - Coffe,Mandatory,LOG-A-AFOO,LOG-A-AFOO-COFF
+3,COFM - Coffee machine,Mandatory,LOG-A-ALIF,LOG-A-ALIF-COFM
+3,COFP - Coffee pot,Mandatory,LOG-P-PCOO,LOG-P-PCOO-COFP
+3,COLA - Collar,Mandatory,LOG-A-ALIF,LOG-A-ALIF-COLA
+3,COLA - Laptop computer,Mandatory,LOG-A-ADAP,LOG-A-ADAP-COLA
+3,COLB - COLD CHAIN book,Mandatory,LIB-L-L040,LIB-L-L040-COLB
+3,"COLB - Cold Chain, Book",Mandatory,LIB-L-L015,LIB-L-L015-COLB
+3,COLC - Colecalciferol (Vit D3),Mandatory,MED-D-DORA,MED-D-DORA-COLC
+3,COLG - COLD CHAIN GUIDELINE,Mandatory,LIB-L-L040,LIB-L-L040-COLG
+3,"COLG - Cold Chain, Guide",Mandatory,LIB-L-L015,LIB-L-L015-COLG
+3,COLL - Radiation shielding collar,Mandatory,MED-E-EDIM,MED-E-EDIM-COLL
+3,"COMN - Compress, non woven",Mandatory,MED-S-SDRE,MED-S-SDRE-COMN
+3,COMP - Compass,Mandatory,LOG-A-ALIF,LOG-A-ALIF-COMP
+3,COMP - Compress,Mandatory,MED-S-SDRE,MED-S-SDRE-COMP
+3,COMP - Compressor,Mandatory,LOG-P-PTOO,LOG-P-PTOO-COMP
+3,CONC - Coaxial connector,Mandatory,LOG-P-PCOM,LOG-P-PCOM-CONC
+3,CONC - Concentrator,Mandatory,MED-E-EHOE,MED-E-EHOE-CONC
+3,COND - Cable conduit,Mandatory,LOG-P-PELE,LOG-P-PELE-COND
+3,COND - Lubricated Condom,Mandatory,MED-S-SMSU,MED-S-SMSU-COND
+3,CONG - CONNECTION,Mandatory,MED-E-ESUF,MED-E-ESUF-CONG
+3,CONM - Conductivity meter,Mandatory,LOG-C-CWAT,LOG-C-CWAT-CONM
+3,CONN - Connecting bar,Mandatory,LOG-P-PELE,LOG-P-PELE-CONN
+3,CONN - Connection,Mandatory,MED-S-SCTD,MED-S-SCTD-CONN
+3,CONN - Connector,Mandatory,LOG-T-TVEA,LOG-T-TVEA-CONN
+3,CONP - Container protection,Mandatory,MED-E-ELAE,MED-E-ELAE-CONP
+3,CONT - Container,Mandatory,LOG-C-CSEM,LOG-C-CSEM-CONT
+3,CONT - Container,Mandatory,LOG-C-CWAT,LOG-C-CWAT-CONT
+3,CONT - Container,Mandatory,MED-E-ELAE,MED-E-ELAE-CONT
+3,CONT - Container,Mandatory,LOG-P-PPAC,LOG-P-PPAC-CONT
+3,CONT - Container,Mandatory,MED-S-SINS,MED-S-SINS-CONT
+3,CONT - Temperature monitor,Mandatory,LOG-P-PCOL,LOG-P-PCOL-CONT
+3,CONV - Converted LAND CRUISER,Mandatory,LOG-T-TTOY,LOG-T-TTOY-CONV
+3,CONV - Converter DC/DC,Mandatory,LOG-P-PELE,LOG-P-PELE-CONV
+3,COOK - Cooker,Mandatory,LOG-A-ALIF,LOG-A-ALIF-COOK
+3,COOP - Cooking pot,Mandatory,LOG-P-PCOO,LOG-P-PCOO-COOP
+3,CORD - Grommet,Mandatory,LOG-P-PELE,LOG-P-PELE-CORD
+3,CORS - Corkscrew,Mandatory,LOG-P-PCOO,LOG-P-PCOO-CORS
+3,COTR - Cotrimoxazole,Mandatory,MED-D-DINJ,MED-D-DINJ-COTR
+3,COTR - Cotrimoxazole,Mandatory,MED-D-DORA,MED-D-DORA-COTR
+3,COTW - Cotton Roll,Mandatory,MED-S-SDRE,MED-S-SDRE-COTW
+3,COUA - Adapter coupling,Mandatory,LOG-C-CWAT,LOG-C-CWAT-COUA
+3,COUB - Bend coupling,Mandatory,LOG-C-CWAT,LOG-C-CWAT-COUB
+3,"COUB - Counselling, Book",Mandatory,LIB-L-L007,LIB-L-L007-COUB
+3,"COUB - Counselling, book",Mandatory,LIB-L-L027,LIB-L-L027-COUB
+3,COUC - Band clip,Mandatory,LOG-C-CWAT,LOG-C-CWAT-COUC
+3,COUE - Elbow coupling,Mandatory,LOG-C-CWAT,LOG-C-CWAT-COUE
+3,COUF - Flange coupling,Mandatory,LOG-C-CWAT,LOG-C-CWAT-COUF
+3,"COUG - Counselling, Guide",Mandatory,LIB-L-L007,LIB-L-L007-COUG
+3,"COUG - Counselling, Guide",Mandatory,LIB-L-L027,LIB-L-L027-COUG
+3,COUH - Symmetrical half coupling,Mandatory,LOG-C-CWAT,LOG-C-CWAT-COUH
+3,COUI - Spherical coupling,Mandatory,LOG-C-CWAT,LOG-C-CWAT-COUI
+3,COUM - Coupler,Mandatory,LOG-P-PTOO,LOG-P-PTOO-COUM
+3,COUN - Counter,Mandatory,LOG-A-ALIF,LOG-A-ALIF-COUN
+3,COUN - Counter,Mandatory,MED-E-ELAE,MED-E-ELAE-COUN
+3,COUN - Hour counter,Mandatory,LOG-P-PELE,LOG-P-PELE-COUN
+3,COUN - Hour counter,Mandatory,LOG-T-TVEC,LOG-T-TVEC-COUN
+3,COUN - Nipple coupling,Mandatory,LOG-C-CWAT,LOG-C-CWAT-COUN
+3,COUP - Plug / cap,Mandatory,LOG-C-CWAT,LOG-C-CWAT-COUP
+3,COUR - Reducer coupling,Mandatory,LOG-C-CWAT,LOG-C-CWAT-COUR
+3,COUS - Couscous,Mandatory,LOG-A-AFOO,LOG-A-AFOO-COUS
+3,COUS - Socket coupling,Mandatory,LOG-C-CWAT,LOG-C-CWAT-COUS
+3,COUT - T-coupling,Mandatory,LOG-C-CWAT,LOG-C-CWAT-COUT
+3,COUU - Union coupling,Mandatory,LOG-C-CWAT,LOG-C-CWAT-COUU
+3,COUV - Non-return valve,Mandatory,LOG-C-CWAT,LOG-C-CWAT-COUV
+3,COUY - Y-coupling,Mandatory,LOG-C-CWAT,LOG-C-CWAT-COUY
+3,COVG - Cover glass,Mandatory,MED-E-ELAE,MED-E-ELAE-COVG
+3,CPCL - CETYLPIRIDINIUM CHLORIDE (CPC),Mandatory,MED-S-SLAS,MED-S-SLAS-CPCL
+3,CRAB - Cranioclast Of Braun,Mandatory,MED-E-ESUR,MED-E-ESUR-CRAB
+3,CRAB - Crowbar,Mandatory,LOG-P-PTOO,LOG-P-PTOO-CRAB
+3,CREB - Cresyl Blue Shining,Mandatory,MED-S-SLAS,MED-S-SLAS-CREB
+3,CREC - Checklist control upon receipt,Mandatory,MED-N-NSFS,MED-N-NSFS-CREC
+3,CREC - Control upon receipt,Mandatory,MED-N-NSFO,MED-N-NSFO-CREC
+3,CREE - Creatinine analyser,Mandatory,MED-E-ELAE,MED-E-ELAE-CREE
+3,CRES - Sun cream,Mandatory,LOG-A-ALIF,LOG-A-ALIF-CRES
+3,CRET - (creatinine analyser) tests and controls,Mandatory,MED-E-ELAE,MED-E-ELAE-CRET
+3,CRRE - CR Reader,Mandatory,MED-E-EDIM,MED-E-EDIM-CRRE
+3,CRUT - Crutches,Mandatory,MED-E-EPHY,MED-E-EPHY-CRUT
+3,CRYP - Cryptococcus test,Mandatory,MED-D-DDGT,MED-D-DDGT-CRYP
+3,"CUBV - Curette, Volkman",Mandatory,MED-E-ESUR,MED-E-ESUR-CUBV
+3,CUEV - Curette for Evisceration,Mandatory,MED-E-ESUO,MED-E-ESUO-CUEV
+3,CUFF - Cuff,Mandatory,MED-E-EMEQ,MED-E-EMEQ-CUFF
+3,CUPB - Cupboard,Mandatory,LOG-A-AFUR,LOG-A-AFUR-CUPB
+3,CUPP - Cup,Mandatory,LOG-P-PCOO,LOG-P-PCOO-CUPP
+3,CURG - Curette of Gracey,Mandatory,MED-E-ESUD,MED-E-ESUD-CURG
+3,CURH - Curette of Hemingway,Mandatory,MED-E-ESUD,MED-E-ESUD-CURH
+3,"CUSG - CUSHION, gel",Mandatory,MED-E-EHOE,MED-E-EHOE-CUSG
+3,CUTT - Cutter,Mandatory,LOG-P-PTOO,LOG-P-PTOO-CUTT
+3,CWAT - CHECKLIST for watsan kits,Mandatory,LIB-L-LEAF,LIB-L-LEAF-CWAT
+3,CYCL - Cycloserine,Mandatory,MED-D-DORA,MED-D-DORA-CYCL
+3,CYFC - Cyflow counter,Mandatory,MED-E-ELAE,MED-E-ELAE-CYFC
+3,CYFC - Cyflow counter,Mandatory,MED-S-SLAS,MED-S-SLAS-CYFC
+3,"CYLG - Cylinder, measuring, glass",Mandatory,MED-E-ELAE,MED-E-ELAE-CYLG
+3,"CYLM - Measuring cylinder, plastic",Mandatory,MED-E-ELAE,MED-E-ELAE-CYLM
+3,"DANG - Dangerous articles, Guideline",Mandatory,LIB-L-L040,LIB-L-L040-DANG
+3,DAPS - Dapsone,Mandatory,MED-D-DORA,MED-D-DORA-DAPS
+3,DARU - Darunavir,Mandatory,MED-D-DORA,MED-D-DORA-DARU
+3,DATR - Temperature data recorder,Mandatory,LOG-P-PCOL,LOG-P-PCOL-DATR
+3,DATT - Direct agglutination test,Mandatory,MED-D-DDGT,MED-D-DDGT-DATT
+3,DBOT - Drainage bottle,Mandatory,MED-E-EMEQ,MED-E-EMEQ-DBOT
+3,DCDR - CD-R,Mandatory,LOG-A-ADAP,LOG-A-ADAP-DCDR
+3,DCDW - CD-RW,Mandatory,LOG-A-ADAP,LOG-A-ADAP-DCDW
+3,DDMY - Digestion / decontamination kit,Mandatory,MED-S-SLAS,MED-S-SLAS-DDMY
+3,DEAB - Death guide,Mandatory,LIB-L-L020,LIB-L-L020-DEAB
+3,DEET - D.E.E.T.,Mandatory,MED-D-DEXT,MED-D-DEXT-DEET
+3,DEFI - Defibrillator,Mandatory,MED-E-EHOE,MED-E-EHOE-DEFI
+3,DELI - Delivery,Mandatory,MED-E-ETMA,MED-E-ETMA-DELI
+3,DELI - Delivery,Mandatory,MED-E-ETPO,MED-E-ETPO-DELI
+3,"DENB - Dengue, Book",Mandatory,LIB-L-L003,LIB-L-L003-DENB
+3,DENG - Dengue rapid test,Mandatory,MED-D-DDGT,MED-D-DDGT-DENG
+3,"DENG - Dengue, Guide",Mandatory,LIB-L-L003,LIB-L-L003-DENG
+3,DEPT - Tongue Depressor,Mandatory,MED-S-SMSU,MED-S-SMSU-DEPT
+3,"DERB - Dermatology, Book",Mandatory,LIB-L-L011,LIB-L-L011-DERB
+3,"DERE - Dermatome, electric",Mandatory,MED-E-EHOE,MED-E-EHOE-DERE
+3,DERG - Dermatome of Goulian,Mandatory,MED-E-ESUR,MED-E-ESUR-DERG
+3,DERH - Dermatome of Humby,Mandatory,MED-E-ESUR,MED-E-ESUR-DERH
+3,DERW - Dermatome of Watson,Mandatory,MED-E-ESUR,MED-E-ESUR-DERW
+3,DESK - Desk,Mandatory,LOG-A-AFUR,LOG-A-AFUR-DESK
+3,DESO - Desogestrel,Mandatory,MED-D-DORA,MED-D-DORA-DESO
+3,DESS - Dessicant,Mandatory,MED-S-SLAS,MED-S-SLAS-DESS
+3,DETA - Detergent with ammoniac,Mandatory,LOG-P-PHYG,LOG-P-PHYG-DETA
+3,"DETB - Dentistry, book",Mandatory,LIB-L-L008,LIB-L-L008-DETB
+3,DETD - Detergent powder,Mandatory,LOG-P-PHYG,LOG-P-PHYG-DETD
+3,"DEVB - Development, Book",Mandatory,LIB-L-L073,LIB-L-L073-DEVB
+3,DEVE - Developer X-Ray,Mandatory,MED-S-SDIM,MED-S-SDIM-DEVE
+3,DEXA - Dexamethazone,Mandatory,MED-D-DINJ,MED-D-DINJ-DEXA
+3,DEXN - Dexamethasone + neomycine,Mandatory,MED-D-DEXO,MED-D-DEXO-DEXN
+3,DEXT - Dextrose,Mandatory,MED-D-DINF,MED-D-DINF-DEXT
+3,DHAP - Dihydroartemisinin / piperaquine,Mandatory,MED-D-DORA,MED-D-DORA-DHAP
+3,"DIAB - Diarrhoea, Book",Mandatory,LIB-L-L002,LIB-L-L002-DIAB
+3,"DIAB - Diarrhoea, Book",Mandatory,LIB-L-L010,LIB-L-L010-DIAB
+3,DIAG - Checklist laboratory diagnosis,Mandatory,MED-I-ILAB,MED-I-ILAB-DIAG
+3,DIAZ - Diazepam,Mandatory,MED-D-DINJ,MED-D-DINJ-DIAZ
+3,DIAZ - Diazepam,Mandatory,MED-D-DORA,MED-D-DORA-DIAZ
+3,"DICB - Dictionary, Book",Mandatory,LIB-L-L077,LIB-L-L077-DICB
+3,"DICB - Dictionnary, Medical terms, Book",Mandatory,LIB-L-L001,LIB-L-L001-DICB
+3,"DICG - Dictionary, Guide",Mandatory,LIB-L-L077,LIB-L-L077-DICG
+3,DICL - Diclofenac,Mandatory,MED-D-DINJ,MED-D-DINJ-DICL
+3,DIDA - Didanosine,Mandatory,MED-D-DORA,MED-D-DORA-DIDA
+3,DIES - Diesel,Mandatory,LOG-T-TVEC,LOG-T-TVEC-DIES
+3,DIET - Diethylcarbamazine,Mandatory,MED-D-DORA,MED-D-DORA-DIET
+3,DIGB - Digging bar,Mandatory,LOG-P-PTOO,LOG-P-PTOO-DIGB
+3,DIGO - Digoxine,Mandatory,MED-D-DINJ,MED-D-DINJ-DIGO
+3,DIGO - Digoxine,Mandatory,MED-D-DORA,MED-D-DORA-DIGO
+3,"DILL - Dilatator, Laborde, Tracheal",Mandatory,MED-E-ESUR,MED-E-ESUR-DILL
+3,DIMD - Diagnostic Imaging Digital Media,Mandatory,LIB-L-L012,LIB-L-L012-DIMD
+3,DINO - Dinoprostone,Mandatory,MED-D-DEXT,MED-D-DEXT-DINO
+3,"DIPG - Diphteria, Guide",Mandatory,LIB-L-L004,LIB-L-L004-DIPG
+3,DIPM - Dipmeter,Mandatory,LOG-C-CWAT,LOG-C-CWAT-DIPM
+3,DIRE - Director,Mandatory,MED-E-ESUR,MED-E-ESUR-DIRE
+3,DIRE - Directory,Mandatory,LOG-A-ASTA,LOG-A-ASTA-DIRE
+3,DISA - (digital image scanner) accessories,Mandatory,MED-E-EDIM,MED-E-EDIM-DISA
+3,DISC - (digital imaging scanner) consumables,Mandatory,MED-E-EDIM,MED-E-EDIM-DISC
+3,"DISE - Digital imaging scanner, CR",Mandatory,MED-E-EDIM,MED-E-EDIM-DISE
+3,DISE - Distiller,Mandatory,MED-E-ELAE,MED-E-ELAE-DISE
+3,DISM - Dissector MacDonald,Mandatory,MED-E-ESUR,MED-E-ESUR-DISM
+3,"DISO - Dissector, Olivercrona",Mandatory,MED-E-ESUR,MED-E-ESUR-DISO
+3,DIST - Distiller,Mandatory,MED-E-ELAE,MED-E-ELAE-DIST
+3,"DIUH - Dilator, Uterine, Hegar",Mandatory,MED-E-ESUR,MED-E-ESUR-DIUH
+3,DIVI - Divider,Mandatory,LOG-A-ASTA,LOG-A-ASTA-DIVI
+3,DIVR - Diving rod,Mandatory,LOG-C-CWAT,LOG-C-CWAT-DIVR
+3,DMAT - Door mat,Mandatory,LOG-P-PHYG,LOG-P-PHYG-DMAT
+3,DMSO - Dimethyl sulfoxide,Mandatory,MED-S-SLAS,MED-S-SLAS-DMSO
+3,DOLL - Doll,Mandatory,MED-E-EPSY,MED-E-EPSY-DOLL
+3,DOOF - Door frame,Mandatory,LOG-C-CBUI,LOG-C-CBUI-DOOF
+3,DOOR - Door,Mandatory,LOG-C-CBUI,LOG-C-CBUI-DOOR
+3,DOPA - Dopamine,Mandatory,MED-D-DINJ,MED-D-DINJ-DOPA
+3,DOPL - Doxorubicin Pegylated Liposomal,Mandatory,MED-D-DINJ,MED-D-DINJ-DOPL
+3,DOSP - Dosing pump,Mandatory,LOG-C-CWAT,LOG-C-CWAT-DOSP
+3,DOXY - Doxycycline,Mandatory,MED-D-DORA,MED-D-DORA-DOXY
+3,DRAD - Drain Of Delbet,Mandatory,MED-S-SCTD,MED-S-SCTD-DRAD
+3,DRAK - Drain plug spanner,Mandatory,LOG-P-PTOO,LOG-P-PTOO-DRAK
+3,DRAP - Drain Of Penrose,Mandatory,MED-S-SCTD,MED-S-SCTD-DRAP
+3,DRAS - Champ chirurgical,Mandatory,MED-E-ELIN,MED-E-ELIN-DRAS
+3,DRAT - Thoracic Drainage,Mandatory,MED-S-SCTD,MED-S-SCTD-DRAT
+3,DRAW - DRAWSHEET,Mandatory,MED-E-ELIN,MED-E-ELIN-DRAW
+3,DRIB - Drill bit,Mandatory,LOG-P-PTOO,LOG-P-PTOO-DRIB
+3,"DRIH - Drill, Hudson",Mandatory,MED-E-ESUR,MED-E-ESUR-DRIH
+3,DRIL - Drill,Mandatory,MED-E-ESUR,MED-E-ESUR-DRIL
+3,DRIL - Drill,Mandatory,LOG-P-PTOO,LOG-P-PTOO-DRIL
+3,DRIV - CORDLESS DRIVER,Mandatory,MED-S-STRY,MED-S-STRY-DRIV
+3,DRSS - Surgical drape single use,Mandatory,MED-E-ELIN,MED-E-ELIN-DRSS
+3,DRTH - Thoracic drain,Mandatory,MED-S-SCTD,MED-S-SCTD-DRTH
+3,DRTT - Drain + Thoracic Trocard,Mandatory,MED-S-SCTD,MED-S-SCTD-DRTT
+3,"DRTV - Drain + Thoracic Trocard, Valve",Mandatory,MED-S-SCTD,MED-S-SCTD-DRTV
+3,"DRUB - Drugs for AIDS and STD, Book",Mandatory,LIB-L-L007,LIB-L-L007-DRUB
+3,"DRUB - Drugs, Book",Mandatory,LIB-L-L014,LIB-L-L014-DRUB
+3,"DRUB - Drugs, Book",Mandatory,LIB-L-L026,LIB-L-L026-DRUB
+3,"DRUD - Drugs, DVD",Mandatory,LIB-L-L014,LIB-L-L014-DRUD
+3,"DRUG - Drugs, Guide",Mandatory,LIB-L-L007,LIB-L-L007-DRUG
+3,"DRUG - Drugs, Guide",Mandatory,LIB-L-L014,LIB-L-L014-DRUG
+3,"DRUG - Drugs, Guide",Mandatory,LIB-L-L026,LIB-L-L026-DRUG
+3,DRYE - Tumble-dryer,Mandatory,LOG-P-PHYG,LOG-P-PHYG-DRYE
+3,DRYM - Dehydrated meal,Mandatory,LOG-A-AFOO,LOG-A-AFOO-DRYM
+3,DRYM - Tumble-dryer,Mandatory,LOG-P-PHYG,LOG-P-PHYG-DRYM
+3,DTUB - Tuberculin,Mandatory,MED-D-DVAC,MED-D-DVAC-DTUB
+3,DUCK - Duck,Mandatory,LOG-A-AFOO,LOG-A-AFOO-DUCK
+3,DUPL - Duplicator,Mandatory,LOG-A-AOFF,LOG-A-AOFF-DUPL
+3,DUST - Duster,Mandatory,LOG-C-CWAT,LOG-C-CWAT-DUST
+3,"DVDR - DVD, recordable",Mandatory,LOG-A-ADAP,LOG-A-ADAP-DVDR
+3,DYNA - Dynabeads agitator,Mandatory,MED-E-ELAE,MED-E-ELAE-DYNA
+3,DYNB - Dynabeads,Mandatory,MED-S-SLAS,MED-S-SLAS-DYNB
+3,DYNM - Dynabeads magnet,Mandatory,MED-E-ELAE,MED-E-ELAE-DYNM
+3,ECGR - E.C.G.,Mandatory,MED-E-EHOE,MED-E-EHOE-ECGR
+3,ECOG - Ecology Guide,Mandatory,LIB-L-L040,LIB-L-L040-ECOG
+3,EFAV - Efavirenz,Mandatory,MED-D-DORA,MED-D-DORA-EFAV
+3,EFLO - Eflornithine,Mandatory,MED-D-DINJ,MED-D-DINJ-EFLO
+3,EFPU - Enteral feeding pump,Mandatory,MED-E-EHOE,MED-E-EHOE-EFPU
+3,EHRI - Ethambutol/Isoniazid/Rifampicin,Mandatory,MED-D-DORA,MED-D-DORA-EHRI
+3,EHZR - Ethamb./Isoniaz./Pyraz./Rifamp. FDC,Mandatory,MED-D-DORA,MED-D-DORA-EHZR
+3,ELEV - Elevator,Mandatory,MED-E-ESUD,MED-E-ESUD-ELEV
+3,ELIA - ELISA accessories,Mandatory,MED-E-ELAE,MED-E-ELAE-ELIA
+3,ELIC - ELISA consumables,Mandatory,MED-E-ELAE,MED-E-ELAE-ELIC
+3,ELIE - ELISA equipment,Mandatory,MED-E-ELAE,MED-E-ELAE-ELIE
+3,ELIS - ELISA spare-parts,Mandatory,MED-E-ELAE,MED-E-ELAE-ELIS
+3,ELIT - ELISA test & control,Mandatory,MED-E-ELAE,MED-E-ELAE-ELIT
+3,ELSU - Electro Surgical Unit,Mandatory,MED-E-EHOE,MED-E-EHOE-ELSU
+3,"EMEB - Emergency, Book",Mandatory,LIB-L-L020,LIB-L-L020-EMEB
+3,EMED - Emergencies CDRom,Mandatory,LIB-L-L020,LIB-L-L020-EMED
+3,"EMEG - Emergency, Guide",Mandatory,LIB-L-L020,LIB-L-L020-EMEG
+3,"EMER - KIT, EMERGENCY LIBRARY",Mandatory,LIB-K-KLIB,LIB-K-KLIB-EMER
+3,EMFR - Emergency Food ration,Mandatory,MED-N-NFOS,MED-N-NFOS-EMFR
+3,ENAL - Enalapril,Mandatory,MED-D-DORA,MED-D-DORA-ENAL
+3,ENEB - Energy book,Mandatory,LIB-L-L048,LIB-L-L048-ENEB
+3,ENEG - Energy guide,Mandatory,LIB-L-L048,LIB-L-L048-ENEG
+3,"ENGB - Engineering, Book",Mandatory,LIB-L-L018,LIB-L-L018-ENGB
+3,"ENGB - Engineering, Book",Mandatory,LIB-L-L040,LIB-L-L040-ENGB
+3,ENGD - Diesel engine,Mandatory,LOG-T-TBOA,LOG-T-TBOA-ENGD
+3,ENGI - Outboard engine,Mandatory,LOG-T-TBOA,LOG-T-TBOA-ENGI
+3,ENVE - Envelope,Mandatory,LOG-A-ASTA,LOG-A-ASTA-ENVE
+3,EPHE - Ephedrine,Mandatory,MED-D-DINJ,MED-D-DINJ-EPHE
+3,"EPIB - EPI, Book",Mandatory,LIB-L-L044,LIB-L-L044-EPIB
+3,"EPIB - Epidemiology, Book",Mandatory,LIB-L-L024,LIB-L-L024-EPIB
+3,"EPID - EPI, CD Rom",Mandatory,LIB-L-L044,LIB-L-L044-EPID
+3,EPIN - Epinephrine,Mandatory,MED-D-DINJ,MED-D-DINJ-EPIN
+3,ERAS - Eraser / correction fluid,Mandatory,LOG-A-ASTA,LOG-A-ASTA-ERAS
+3,ERYT - Erythromycin,Mandatory,MED-D-DINJ,MED-D-DINJ-ERYT
+3,ERYT - Erythromycine,Mandatory,MED-D-DORA,MED-D-DORA-ERYT
+3,ETHA - Ethambutol,Mandatory,MED-D-DORA,MED-D-DORA-ETHA
+3,ETHA - Ethylic Alcool,Mandatory,MED-S-SLAS,MED-S-SLAS-ETHA
+3,ETHB - ETHAMBUTOL,Mandatory,MED-S-SLAS,MED-S-SLAS-ETHB
+3,ETHL - Ethinylestradiol / Levonorgestrel,Mandatory,MED-D-DORA,MED-D-DORA-ETHL
+3,ETHN - Ethionamide,Mandatory,MED-D-DORA,MED-D-DORA-ETHN
+3,ETON - Etonogestrel,Mandatory,MED-D-DINJ,MED-D-DINJ-ETON
+3,ETRA - Etravirine,Mandatory,MED-D-DORA,MED-D-DORA-ETRA
+3,EUKI - Eukitt,Mandatory,MED-S-SLAS,MED-S-SLAS-EUKI
+3,"EVAB - Evaluation, Book",Mandatory,LIB-L-L019,LIB-L-L019-EVAB
+3,"EVAG - Evaluation, Guide",Mandatory,LIB-L-L019,LIB-L-L019-EVAG
+3,"EXCB - EXCEL, Book",Mandatory,LIB-L-L044,LIB-L-L044-EXCB
+3,EXCG - Excel Guide,Mandatory,LIB-L-L044,LIB-L-L044-EXCG
+3,"EXMU - Extractor, mucus",Mandatory,MED-S-SCTD,MED-S-SCTD-EXMU
+3,EXTP - Extractor,Mandatory,LOG-P-PTOO,LOG-P-PTOO-EXTP
+3,EXTS - Extension tubing + Stopcock,Mandatory,MED-S-SINS,MED-S-SINS-EXTS
+3,EYEC - Cable eye,Mandatory,LOG-P-PHDW,LOG-P-PHDW-EYEC
+3,EYEL - Eyelets,Mandatory,LOG-C-CSHE,LOG-C-CSHE-EYEL
+3,EYEW - EYE WASH BOTTLE,Mandatory,MED-E-EMEQ,MED-E-EMEQ-EYEW
+3,FACE - Face shield,Mandatory,LOG-P-PSAF,LOG-P-PSAF-FACE
+3,FACS - FACScount,Mandatory,MED-E-ELAE,MED-E-ELAE-FACS
+3,FACS - FACScount,Mandatory,MED-S-SLAS,MED-S-SLAS-FACS
+3,FAIB - First Aid bag,Mandatory,LOG-P-PSAF,LOG-P-PSAF-FAIB
+3,FAIB - First aid book,Mandatory,LIB-L-L002,LIB-L-L002-FAIB
+3,FAIB - First aid book,Mandatory,LIB-L-L020,LIB-L-L020-FAIB
+3,FALA - Fall arrester,Mandatory,LOG-P-PSAF,LOG-P-PSAF-FALA
+3,FANC - Ceiling fan,Mandatory,LOG-P-PELE,LOG-P-PELE-FANC
+3,FANS - Standing fan,Mandatory,LOG-P-PELE,LOG-P-PELE-FANS
+3,FAPB - Family planning book,Mandatory,LIB-L-L009,LIB-L-L009-FAPB
+3,FAPL - Family planning,Mandatory,MED-E-ETMA,MED-E-ETMA-FAPL
+3,"FDEN - Freight, delivery note",Mandatory,LOG-A-ALST,LOG-A-ALST-FDEN
+3,FENT - Fentanyl,Mandatory,MED-D-DINJ,MED-D-DINJ-FENT
+3,FERF - Ferrous Sulfate / Folic Acid,Mandatory,MED-D-DORA,MED-D-DORA-FERF
+3,FERS - Ferrous Sulfate,Mandatory,MED-D-DORA,MED-D-DORA-FERS
+3,"FFGC - Freight, free gift certificate",Mandatory,LOG-A-ALST,LOG-A-ALST-FFGC
+3,"FHCC - Forceps, haemostatic, Coller-Crile",Mandatory,MED-E-ESUR,MED-E-ESUR-FHCC
+3,FHDD - Foetal Heart Detector,Mandatory,MED-E-EHOE,MED-E-EHOE-FHDD
+3,"FHHA - Forceps, haemostatic, Halsted",Mandatory,MED-E-ESUR,MED-E-ESUR-FHHA
+3,"FHRO - Forceps, haemostatic, R-Ochsner",Mandatory,MED-E-ESUR,MED-E-ESUR-FHRO
+3,"FHRP - Forceps, haemostatic, R-Pean",Mandatory,MED-E-ESUR,MED-E-ESUR-FHRP
+3,FIES - Field stain,Mandatory,MED-S-SLAS,MED-S-SLAS-FIES
+3,FILA - Air filter,Mandatory,LOG-P-PX--,LOG-P-PX---FILA
+3,"FILB - Filarial infections, Book",Mandatory,LIB-L-L013,LIB-L-L013-FILB
+3,"FILB - Filariosis, Book",Mandatory,LIB-L-L006,LIB-L-L006-FILB
+3,"FILB - File, bone",Mandatory,MED-E-ESUR,MED-E-ESUR-FILB
+3,FILE - File,Mandatory,LOG-P-PTOO,LOG-P-PTOO-FILE
+3,FILE - File,Mandatory,MED-S-SMSU,MED-S-SMSU-FILE
+3,FILF - Fuel filter,Mandatory,LOG-P-PX--,LOG-P-PX---FILF
+3,FILM - Film,Mandatory,MED-E-ELAE,MED-E-ELAE-FILM
+3,FILM - Film,Mandatory,LOG-P-PPAC,LOG-P-PPAC-FILM
+3,"FILM - FILM, x-ray",Mandatory,MED-S-SDIM,MED-S-SDIM-FILM
+3,FILS - Filter for syringe,Mandatory,MED-E-ELAE,MED-E-ELAE-FILS
+3,FILS - Filter straw,Mandatory,MED-S-SINS,MED-S-SINS-FILS
+3,FILT - Filter for HONDA engine,Mandatory,LOG-P-PXHO,LOG-P-PXHO-FILT
+3,FILT - Filter for LISTER engine,Mandatory,LOG-P-PXLI,LOG-P-PXLI-FILT
+3,FILT - Filter for LOMBARDINI engine,Mandatory,LOG-P-PXLO,LOG-P-PXLO-FILT
+3,FILT - Filter for PEUGEOT,Mandatory,LOG-T-TXPE,LOG-T-TXPE-FILT
+3,FILT - Filter for ROBIN engine,Mandatory,LOG-P-PXRO,LOG-P-PXRO-FILT
+3,FILT - Filter for TOYOTA,Mandatory,LOG-T-TXTO,LOG-T-TXTO-FILT
+3,FILT - Filter for YANMAR engine,Mandatory,LOG-P-PXYN,LOG-P-PXYN-FILT
+3,FILT - Spare parts for filter HAYWARD,Mandatory,LOG-C-CXHA,LOG-C-CXHA-FILT
+3,FILT - Water filter,Mandatory,LOG-C-CWAT,LOG-C-CWAT-FILT
+3,"FINB - Finances, Book",Mandatory,LIB-L-L025,LIB-L-L025-FINB
+3,"FIND - CD Rom, Financial management",Mandatory,LIB-L-L050,LIB-L-L050-FIND
+3,"FING - Finances, Guide",Mandatory,LIB-L-L050,LIB-L-L050-FING
+3,FIRB - Fire blanket,Mandatory,LOG-P-PSAF,LOG-P-PSAF-FIRB
+3,FIRE - Fire extinguisher,Mandatory,LOG-P-PSAF,LOG-P-PSAF-FIRE
+3,FIRO - Firewall / router,Mandatory,LOG-A-ADAP,LOG-A-ADAP-FIRO
+3,FISH - Fish,Mandatory,LOG-A-AFOO,LOG-A-AFOO-FISH
+3,FIXA - Antenna fixing device,Mandatory,LOG-T-TVEM,LOG-T-TVEM-FIXA
+3,FIXA - Fixer x-ray,Mandatory,MED-S-SDIM,MED-S-SDIM-FIXA
+3,FIXS - Fixing device,Mandatory,LOG-T-TVEM,LOG-T-TVEM-FIXS
+3,FIXT - Tuner fixing device,Mandatory,LOG-T-TVEM,LOG-T-TVEM-FIXT
+3,FLAG - Flag,Mandatory,LOG-P-PIDE,LOG-P-PIDE-FLAG
+3,FLBU - Flask bulb,Mandatory,MED-E-ELAE,MED-E-ELAE-FLBU
+3,"FLEN - Flask erlenmeyer, narrow",Mandatory,MED-E-ELAE,MED-E-ELAE-FLEN
+3,"FLES - Flask erlenmeyer, screw",Mandatory,MED-E-ELAE,MED-E-ELAE-FLES
+3,FLIP - Flip chart,Mandatory,LOG-A-ASTA,LOG-A-ASTA-FLIP
+3,FLOA - Float,Mandatory,LOG-C-CWAT,LOG-C-CWAT-FLOA
+3,FLOP - Floor paint,Mandatory,LOG-P-PPAI,LOG-P-PPAI-FLOP
+3,"FLTB - Fluorescent tube, big",Mandatory,LOG-P-PLIG,LOG-P-PLIG-FLTB
+3,"FLTM - Fluorescent tube, mini",Mandatory,LOG-P-PLIG,LOG-P-PLIG-FLTM
+3,FLUC - (fluor. reader MGIT BD) consumables,Mandatory,MED-E-ELAE,MED-E-ELAE-FLUC
+3,FLUC - Fluconazole,Mandatory,MED-D-DINJ,MED-D-DINJ-FLUC
+3,FLUC - Fluconazole,Mandatory,MED-D-DORA,MED-D-DORA-FLUC
+3,FLUE - Fluorescence reader,Mandatory,MED-E-ELAE,MED-E-ELAE-FLUE
+3,FLUI - Fluid,Mandatory,LOG-T-TVEC,LOG-T-TVEC-FLUI
+3,FLUO - Fluorescein,Mandatory,MED-D-DEXO,MED-D-DEXO-FLUO
+3,FLUO - Fluoreslens,Mandatory,MED-E-ELAE,MED-E-ELAE-FLUO
+3,FLUX - Fluoxetine,Mandatory,MED-D-DORA,MED-D-DORA-FLUX
+3,FLUY - Flucytosine,Mandatory,MED-D-DORA,MED-D-DORA-FLUY
+3,FLYC - Fly catcher,Mandatory,LOG-C-CWAT,LOG-C-CWAT-FLYC
+3,"FMUB - Female genital mutilation, Book",Mandatory,LIB-L-L009,LIB-L-L009-FMUB
+3,FMUG - Female mutilation guide,Mandatory,LIB-L-L009,LIB-L-L009-FMUG
+3,"FOAB - Forceps, haemostatic, Bengolea",Mandatory,MED-E-ESUR,MED-E-ESUR-FOAB
+3,"FOAC - Forceps, haemostatic, Chaput",Mandatory,MED-E-ESUR,MED-E-ESUR-FOAC
+3,"FOAE - Forceps, Haemostatic, Kelly",Mandatory,MED-E-ESUR,MED-E-ESUR-FOAE
+3,"FOAH - Forceps, haemostatic, Halsted",Mandatory,MED-E-ESUR,MED-E-ESUR-FOAH
+3,"FOAK - Forceps, haemostatic, Kocher",Mandatory,MED-E-ESUR,MED-E-ESUR-FOAK
+3,"FOAM - Forceps, haemostatic, Mixter",Mandatory,MED-E-ESUR,MED-E-ESUR-FOAM
+3,"FOAP - Forceps, haemostatic, Pean",Mandatory,MED-E-ESUR,MED-E-ESUR-FOAP
+3,"FOAR - Foetus, articulated",Mandatory,MED-E-ETMA,MED-E-ETMA-FOAR
+3,"FOBH - Forceps, bone holding",Mandatory,MED-E-ESUR,MED-E-ESUR-FOBH
+3,"FOBL - Forceps, Bone Cutting, Liston",Mandatory,MED-E-ESUR,MED-E-ESUR-FOBL
+3,FOBR - Forceps Of Brucelle,Mandatory,MED-E-ELAE,MED-E-ELAE-FOBR
+3,"FOCU - forceps, Cutter",Mandatory,MED-E-ESUR,MED-E-ESUR-FOCU
+3,"FODC - Forceps, Dressing, Cheron",Mandatory,MED-E-ESUR,MED-E-ESUR-FODC
+3,"FODD - Forceps, dressing, delicate",Mandatory,MED-E-ESUR,MED-E-ESUR-FODD
+3,FODE - Forceps Dental,Mandatory,MED-E-ESUD,MED-E-ESUD-FODE
+3,"FODR - Forceps, Dressing",Mandatory,MED-E-ESUR,MED-E-ESUR-FODR
+3,"FODV - Forceps, vascular",Mandatory,MED-E-ESUR,MED-E-ESUR-FODV
+3,FOET - Foetus,Mandatory,MED-E-ETPO,MED-E-ETPO-FOET
+3,FOHA - Forceps Of Halstead,Mandatory,MED-E-ESUO,MED-E-ESUO-FOHA
+3,"FOHG - Forceps, hysterectomy, Glenner",Mandatory,MED-E-ESUR,MED-E-ESUR-FOHG
+3,"FOIB - Forceps, intestinal Babcock",Mandatory,MED-E-ESUR,MED-E-ESUR-FOIB
+3,"FOID - Forceps, Intestinal, Doyen",Mandatory,MED-E-ESUR,MED-E-ESUR-FOID
+3,FOLA - Folic Acid,Mandatory,MED-D-DORA,MED-D-DORA-FOLA
+3,FOLC - Calcium folinate,Mandatory,MED-D-DORA,MED-D-DORA-FOLC
+3,FOLD - Folder,Mandatory,LOG-A-ASTA,LOG-A-ASTA-FOLD
+3,"FOLE - Forceps, Lester",Mandatory,MED-E-ESUO,MED-E-ESUO-FOLE
+3,FOMA - Forceps Of Magill,Mandatory,MED-E-EANE,MED-E-EANE-FOMA
+3,FOME - Forceps of Meriam,Mandatory,MED-E-ESUD,MED-E-ESUD-FOME
+3,FOMU - Forceps Of Muzeux,Mandatory,MED-E-ESUR,MED-E-ESUR-FOMU
+3,"FOOB - Food Aid, Book",Mandatory,LIB-L-L046,LIB-L-L046-FOOB
+3,"FOOB - Forceps, Obstetrical",Mandatory,MED-E-ESUR,MED-E-ESUR-FOOB
+3,"FOOG - Food, Guide",Mandatory,LIB-L-L046,LIB-L-L046-FOOG
+3,FOPA - Forceps Of Paufique,Mandatory,MED-E-ESUO,MED-E-ESUO-FOPA
+3,"FOPF - Forceps, Peritoneal, Faure",Mandatory,MED-E-ESUR,MED-E-ESUR-FOPF
+3,"FOPO - Forceps, Tenaculum, Pozzi",Mandatory,MED-E-ESUR,MED-E-ESUR-FOPO
+3,FORK - Fork,Mandatory,LOG-P-PCOO,LOG-P-PCOO-FORK
+3,FORO - Formaldehyd Commercial,Mandatory,MED-S-SLAS,MED-S-SLAS-FORO
+3,"FORS - Fork, knife and spoon set",Mandatory,LOG-P-PCOO,LOG-P-PCOO-FORS
+3,FOSF - Fosfomycin,Mandatory,MED-D-DORA,MED-D-DORA-FOSF
+3,FOST - Suture Tightening Forceps,Mandatory,MED-E-ESUO,MED-E-ESUO-FOST
+3,"FOTA - Forceps, tissue, Allis",Mandatory,MED-E-ESUR,MED-E-ESUR-FOTA
+3,"FOTC - Forceps, Tissue, Collin",Mandatory,MED-E-ESUR,MED-E-ESUR-FOTC
+3,"FOTD - Forceps, Tissue, Duval",Mandatory,MED-E-ESUR,MED-E-ESUR-FOTD
+3,"FOTI - Forceps, Tissue",Mandatory,MED-E-ESUR,MED-E-ESUR-FOTI
+3,FOVA - Foetus for vacuum delivery,Mandatory,MED-E-ETMA,MED-E-ETMA-FOVA
+3,"FPAC - Freight, packing list",Mandatory,LOG-A-ALST,LOG-A-ALST-FPAC
+3,FREE - Freezer,Mandatory,LOG-P-PCOL,LOG-P-PCOL-FREE
+3,FRIB - Blood bank refrigerator,Mandatory,LOG-P-PCOL,LOG-P-PCOL-FRIB
+3,FRID - Refrigerator,Mandatory,LOG-P-PCOL,LOG-P-PCOL-FRID
+3,FRIF - Refrigerator/freezer,Mandatory,LOG-P-PCOL,LOG-P-PCOL-FRIF
+3,FRIS - Solar refrigerator,Mandatory,LOG-P-PCOL,LOG-P-PCOL-FRIS
+3,FRUI - Fruit,Mandatory,LOG-A-AFOO,LOG-A-AFOO-FRUI
+3,"FTDA - Forceps, tissue, delicate, Adson",Mandatory,MED-E-ESUR,MED-E-ESUR-FTDA
+3,FUCB - Basic Fuchsin,Mandatory,MED-S-SLAS,MED-S-SLAS-FUCB
+3,FUCG - Fuchia,Mandatory,LIB-L-L044,LIB-L-L044-FUCG
+3,"FUCK - Fuchsin, Kinyoun",Mandatory,MED-S-SLAS,MED-S-SLAS-FUCK
+3,"FUCZ - Fuchsin, Ziehl",Mandatory,MED-S-SLAS,MED-S-SLAS-FUCZ
+3,FUEL - Fuel,Mandatory,LOG-T-TVEC,LOG-T-TVEC-FUEL
+3,"FUNG - Funnel, glass",Mandatory,MED-E-ELAE,MED-E-ELAE-FUNG
+3,FUNM - Funnel with water retention filter,Mandatory,LOG-T-TVEA,LOG-T-TVEA-FUNM
+3,FUNN - Funnel,Mandatory,MED-E-ELAE,MED-E-ELAE-FUNN
+3,FUNN - Funnel,Mandatory,LOG-T-TVEA,LOG-T-TVEA-FUNN
+3,"FUPL - Funnel, plastic, large stem",Mandatory,MED-E-ELAE,MED-E-ELAE-FUPL
+3,FURO - Furosemide,Mandatory,MED-D-DINJ,MED-D-DINJ-FURO
+3,FURO - Furosemide,Mandatory,MED-D-DORA,MED-D-DORA-FURO
+3,FUSC - Ceramic fuse,Mandatory,LOG-P-PELE,LOG-P-PELE-FUSC
+3,FUSF - Fork fuse for Toyota,Mandatory,LOG-T-TVEC,LOG-T-TVEC-FUSF
+3,FUSG - Glass fuse,Mandatory,LOG-P-PELE,LOG-P-PELE-FUSG
+3,"FVDB - Forceps, vascular",Mandatory,MED-E-ESUR,MED-E-ESUR-FVDB
+3,"FWAY - Freight, waybill",Mandatory,LOG-A-ALST,LOG-A-ALST-FWAY
+3,GALI - Gallipot,Mandatory,MED-E-ESUR,MED-E-ESUR-GALI
+3,GANC - Ganciclovir,Mandatory,MED-D-DINJ,MED-D-DINJ-GANC
+3,GASD - Gas devices accessories,Mandatory,LOG-P-PCOL,LOG-P-PCOL-GASD
+3,GASK - Gasket,Mandatory,LOG-P-PHDW,LOG-P-PHDW-GASK
+3,GASK - Gasket,Mandatory,LOG-P-PX--,LOG-P-PX---GASK
+3,GASK - Gasket for DAVEY pump,Mandatory,LOG-P-PXDV,LOG-P-PXDV-GASK
+3,GASK - Gasket for LISTER engine,Mandatory,LOG-P-PXLI,LOG-P-PXLI-GASK
+3,GASK - Gasket for LOMBARDINI engine,Mandatory,LOG-P-PXLO,LOG-P-PXLO-GASK
+3,GASK - Gasket for ROBIN engine,Mandatory,LOG-P-PXRO,LOG-P-PXRO-GASK
+3,GAUG - Feeler gauge,Mandatory,LOG-P-PTOO,LOG-P-PTOO-GAUG
+3,GAUG - Gauge,Mandatory,LOG-T-TVEA,LOG-T-TVEA-GAUG
+3,GEN0 - Remarks on generators,Mandatory,LOG-P-PELE,LOG-P-PELE-GEN0
+3,GENB - Violet Gentian For Bacteriologie,Mandatory,MED-S-SLAS,MED-S-SLAS-GENB
+3,GEND - Diesel generator,Mandatory,LOG-P-PELE,LOG-P-PELE-GEND
+3,GENE - GENERATOR BAGS,Mandatory,MED-S-SLAS,MED-S-SLAS-GENE
+3,GENF - Female genital organs,Mandatory,MED-E-ETPO,MED-E-ETPO-GENF
+3,GENP - Petrol generator,Mandatory,LOG-P-PELE,LOG-P-PELE-GENP
+3,GENP - Violet Gentian Carbolated,Mandatory,MED-S-SLAS,MED-S-SLAS-GENP
+3,GENT - Gentamycine,Mandatory,MED-D-DINJ,MED-D-DINJ-GENT
+3,GENX - GeneXpert,Mandatory,MED-D-DDGT,MED-D-DDGT-GENX
+3,GENX - Genexpert,Mandatory,MED-E-ELAE,MED-E-ELAE-GENX
+3,GIEM - Giemsa,Mandatory,MED-S-SLAS,MED-S-SLAS-GIEM
+3,GLAF - Fibreglass,Mandatory,LOG-P-PHDW,LOG-P-PHDW-GLAF
+3,GLAS - Glass,Mandatory,LOG-C-CBUI,LOG-C-CBUI-GLAS
+3,GLAS - Glass,Mandatory,LOG-P-PCOO,LOG-P-PCOO-GLAS
+3,GLAS - Glasses,Mandatory,MED-E-EMEQ,MED-E-EMEQ-GLAS
+3,"GLEN - Examination glove, nitrile",Mandatory,MED-S-SMSU,MED-S-SMSU-GLEN
+3,GLIB - Glibenclamide,Mandatory,MED-D-DORA,MED-D-DORA-GLIB
+3,GLOC - Cleaning gloves,Mandatory,LOG-P-PHYG,LOG-P-PHYG-GLOC
+3,"GLOE - Examination glove, latex",Mandatory,MED-S-SMSU,MED-S-SMSU-GLOE
+3,GLOG - Gynaecological gloves,Mandatory,MED-S-SMSU,MED-S-SMSU-GLOG
+3,GLOP - Protective gloves,Mandatory,MED-S-SMSU,MED-S-SMSU-GLOP
+3,GLOS - Surgical gloves,Mandatory,MED-S-SMSU,MED-S-SMSU-GLOS
+3,GLOV - Gloves,Mandatory,LOG-A-ALIF,LOG-A-ALIF-GLOV
+3,GLOV - Gloves,Mandatory,LOG-P-PSAF,LOG-P-PSAF-GLOV
+3,GLUC - Glucose Hypertonic,Mandatory,MED-D-DINJ,MED-D-DINJ-GLUC
+3,GLUC - Glucosemeter,Mandatory,MED-E-ELAE,MED-E-ELAE-GLUC
+3,GLUC - Glucosemeter (Nova),Mandatory,MED-S-SLAS,MED-S-SLAS-GLUC
+3,GLUE - Glucometer,Mandatory,MED-E-ELAE,MED-E-ELAE-GLUE
+3,GLUE - Glue,Mandatory,LOG-A-ASTA,LOG-A-ASTA-GLUE
+3,GLUE - Glue,Mandatory,LOG-C-CWAT,LOG-C-CWAT-GLUE
+3,GLUE - Glue,Mandatory,LOG-P-PHDW,LOG-P-PHDW-GLUE
+3,GLUE - Glue for windshield,Mandatory,LOG-T-TVEC,LOG-T-TVEC-GLUE
+3,GLUT - (glucometer) test & controls,Mandatory,MED-E-ELAE,MED-E-ELAE-GLUT
+3,GLYC - Glycerol,Mandatory,MED-S-SLAS,MED-S-SLAS-GLYC
+3,GLYT - Glycerine Trinitrate,Mandatory,MED-D-DORA,MED-D-DORA-GLYT
+3,GOGG - Goggles,Mandatory,LOG-P-PSAF,LOG-P-PSAF-GOGG
+3,GOKI - LIST of EMERGENCY ITEMS,Mandatory,MED-I-IEME,MED-I-IEME-GOKI
+3,GONS - Gonad shield,Mandatory,MED-E-EDIM,MED-E-EDIM-GONS
+3,GOWI - Isolation gown,Mandatory,MED-E-ELIN,MED-E-ELIN-GOWI
+3,"GOWS - GOWN, SURGICAL",Mandatory,MED-E-ELIN,MED-E-ELIN-GOWS
+3,GPSG - GPS (Garmin),Mandatory,LOG-P-PCOM,LOG-P-PCOM-GPSG
+3,GRAM - Kit Gram Hucker,Mandatory,MED-S-SLAS,MED-S-SLAS-GRAM
+3,GRAV - Gravel,Mandatory,LOG-C-CBUI,LOG-C-CBUI-GRAV
+3,GREA - Grease,Mandatory,LOG-T-TVEC,LOG-T-TVEC-GREA
+3,GREA - Greasing nipple,Mandatory,LOG-P-PHDW,LOG-P-PHDW-GREA
+3,GREG - Grease gun,Mandatory,LOG-P-PTOO,LOG-P-PTOO-GREG
+3,GRID - X-ray grid,Mandatory,MED-E-EDIM,MED-E-EDIM-GRID
+3,GRIN - Grinder,Mandatory,LOG-P-PTOO,LOG-P-PTOO-GRIN
+3,GRIS - Griseovulvine,Mandatory,MED-D-DORA,MED-D-DORA-GRIS
+3,GRIT - Grinding tool,Mandatory,LOG-P-PTOO,LOG-P-PTOO-GRIT
+3,GUID - Guide,Mandatory,MED-S-SMST,MED-S-SMST-GUID
+3,"GULK - Guide, liigature, Koenig",Mandatory,MED-E-ESUR,MED-E-ESUR-GULK
+3,GUMB - Gum elastic bougie,Mandatory,MED-E-EANE,MED-E-EANE-GUMB
+3,GUMS - Gums,Mandatory,LOG-A-AFOO,LOG-A-AFOO-GUMS
+3,GUNS - Silicone gun,Mandatory,LOG-P-PTOO,LOG-P-PTOO-GUNS
+3,"GYNB - Gynaecology, Book",Mandatory,LIB-L-L009,LIB-L-L009-GYNB
+3,H76D - Toyota HZJ76 diesel,Mandatory,LOG-T-TTOY,LOG-T-TTOY-H76D
+3,H78D - Toyota HZJ78 diesel,Mandatory,LOG-T-TTOY,LOG-T-TTOY-H78D
+3,H79D - Toyota HZJ79 diesel,Mandatory,LOG-T-TTOY,LOG-T-TTOY-H79D
+3,H80D - Toyota HZJ80 diesel,Mandatory,LOG-T-TTOY,LOG-T-TTOY-H80D
+3,HAAC - (haematologic analyzer) consumables,Mandatory,MED-E-ELAE,MED-E-ELAE-HAAC
+3,HAAE - Haematologic analyzer equipment,Mandatory,MED-E-ELAE,MED-E-ELAE-HAAE
+3,HAAT - (haemotologic analyser) tests & controls,Mandatory,MED-E-ELAE,MED-E-ELAE-HAAT
+3,HACS - Hacksaw,Mandatory,LOG-P-PTOO,LOG-P-PTOO-HACS
+3,HAEA - (haemoglobinometer) accessories,Mandatory,MED-E-ELAE,MED-E-ELAE-HAEA
+3,HAEC - (haemoglobinometer) consumables,Mandatory,MED-E-ELAE,MED-E-ELAE-HAEC
+3,HAEE - Haemoglonine equipment,Mandatory,MED-E-ELAE,MED-E-ELAE-HAEE
+3,HAEM - HAEMOGLOBINOMETER,Mandatory,MED-E-ELAE,MED-E-ELAE-HAEM
+3,HAEM - Haemoglobinometer,Mandatory,MED-S-SLAS,MED-S-SLAS-HAEM
+3,HAET - (haemoglobinometer) control,Mandatory,MED-E-ELAE,MED-E-ELAE-HAET
+3,HAIB - Hairbrush,Mandatory,LOG-P-PHYG,LOG-P-PHYG-HAIB
+3,HALO - Halothane,Mandatory,MED-D-DORA,MED-D-DORA-HALO
+3,HALP - Haloperidol,Mandatory,MED-D-DINJ,MED-D-DINJ-HALP
+3,HALP - Haloperidol,Mandatory,MED-D-DORA,MED-D-DORA-HALP
+3,HAMM - Hammer,Mandatory,LOG-P-PTOO,LOG-P-PTOO-HAMM
+3,HAMR - Hammer For Reflexes,Mandatory,MED-E-EMEQ,MED-E-EMEQ-HAMR
+3,HANA - Checklist lab haemotology analyzers,Mandatory,MED-I-ILAB,MED-I-ILAB-HANA
+3,HANA - Haematologic analyzer,Mandatory,MED-E-ELAE,MED-E-ELAE-HANA
+3,HANA - Haematologic analyzer,Mandatory,MED-S-SLAS,MED-S-SLAS-HANA
+3,HAND - Handle,Mandatory,MED-E-ESUD,MED-E-ESUD-HAND
+3,HAND - Handle,Mandatory,LOG-P-PHDW,LOG-P-PHDW-HAND
+3,HAND - Handle,Mandatory,LOG-P-PPAC,LOG-P-PPAC-HAND
+3,HANG - Hanger,Mandatory,MED-E-EDIM,MED-E-EDIM-HANG
+3,HARH - Hard hat,Mandatory,LOG-P-PSAF,LOG-P-PSAF-HARH
+3,HARN - Harness,Mandatory,LOG-P-PSAF,LOG-P-PSAF-HARN
+3,HATL - Lined hat,Mandatory,LOG-A-ALIF,LOG-A-ALIF-HATL
+3,HATS - Sun hat,Mandatory,LOG-A-ALIF,LOG-A-ALIF-HATS
+3,HBBI - Helping babies breathe,Mandatory,MED-E-ETPO,MED-E-ETPO-HBBI
+3,HBTE - Hepatitis B test,Mandatory,MED-D-DDGT,MED-D-DDGT-HBTE
+3,HCTE - Hepatitis C test,Mandatory,MED-D-DDGT,MED-D-DDGT-HCTE
+3,HDDE - External hard drive,Mandatory,LOG-A-ADAP,LOG-A-ADAP-HDDE
+3,HDWR - Hardware,Mandatory,LOG-T-TVEM,LOG-T-TVEM-HDWR
+3,HEAF - Fuel heater,Mandatory,LOG-C-CSHE,LOG-C-CSHE-HEAF
+3,HEAG - Gas heater,Mandatory,LOG-C-CSHE,LOG-C-CSHE-HEAG
+3,"HEAP - Heating pad, electrical",Mandatory,MED-E-EHOE,MED-E-EHOE-HEAP
+3,HEAR - Hearing protection,Mandatory,LOG-P-PSAF,LOG-P-PSAF-HEAR
+3,HEAS - Space heater,Mandatory,LOG-C-CSHE,LOG-C-CSHE-HEAS
+3,HEAT - Heater,Mandatory,LOG-T-TVEM,LOG-T-TVEM-HEAT
+3,HEBF - Isoniazid / Ethambutol Blister FDC,Mandatory,MED-D-DORA,MED-D-DORA-HEBF
+3,"HEFB - Haemorrhagic fever, Book",Mandatory,LIB-L-L003,LIB-L-L003-HEFB
+3,HEFD - Isoniazid / Ethambutol FDC,Mandatory,MED-D-DORA,MED-D-DORA-HEFD
+3,"HEFG - Haemorrhagic fever, guide",Mandatory,LIB-L-L003,LIB-L-L003-HEFG
+3,"HEFV - Haemorrhagic fever, Video",Mandatory,LIB-L-L003,LIB-L-L003-HEFV
+3,"HELB - Helminths, Book",Mandatory,LIB-L-L013,LIB-L-L013-HELB
+3,HELM - Helmet,Mandatory,LOG-P-PIDE,LOG-P-PIDE-HELM
+3,HELM - Helmet,Mandatory,LOG-P-PSAF,LOG-P-PSAF-HELM
+3,HEPA - Heparin,Mandatory,MED-D-DINJ,MED-D-DINJ-HEPA
+3,HEPB - Hepatitis book,Mandatory,LIB-L-L003,LIB-L-L003-HEPB
+3,"HEXB - Health of expatriates, Book",Mandatory,LIB-L-L028,LIB-L-L028-HEXB
+3,"HEXD - Health of Expatriates, Digital Media",Mandatory,LIB-L-L028,LIB-L-L028-HEXD
+3,HEXG - Health expatriates,Mandatory,LIB-L-L052,LIB-L-L052-HEXG
+3,"HEXG - Health of expatriates, Guide",Mandatory,LIB-L-L028,LIB-L-L028-HEXG
+3,"HIAD - Toyota HI ACE, Commuter bus",Mandatory,LOG-T-TTOY,LOG-T-TTOY-HIAD
+3,HILD - Toyota Hilux diesel,Mandatory,LOG-T-TTOY,LOG-T-TTOY-HILD
+3,HING - Hinge,Mandatory,LOG-P-PHDW,LOG-P-PHDW-HING
+3,HIVD - HIV Determine test,Mandatory,MED-D-DDGT,MED-D-DDGT-HIVD
+3,"HIVI - HIV test, Immunoflow",Mandatory,MED-D-DDGT,MED-D-DDGT-HIVI
+3,"HIVS - HIV test, STAT-PAK",Mandatory,MED-D-DDGT,MED-D-DDGT-HIVS
+3,HIVU - HIV Unigold test,Mandatory,MED-D-DDGT,MED-D-DDGT-HIVU
+3,HODB - Decapitation Hook Of Braun,Mandatory,MED-E-ESUR,MED-E-ESUR-HODB
+3,HOEP - Hoe,Mandatory,LOG-P-PTOO,LOG-P-PTOO-HOEP
+3,"HOFI - Hook, fistula, Emmet",Mandatory,MED-E-ESUR,MED-E-ESUR-HOFI
+3,HOLD - Holder,Mandatory,LOG-A-ASTA,LOG-A-ASTA-HOLD
+3,HOLD - Holder,Mandatory,LOG-P-PLIG,LOG-P-PLIG-HOLD
+3,HOLD - Holder for cable seath,Mandatory,LOG-P-PELE,LOG-P-PELE-HOLD
+3,HOLS - Hole saw,Mandatory,LOG-P-PTOO,LOG-P-PTOO-HOLS
+3,"HONE - Hook, nerve",Mandatory,MED-E-ESUR,MED-E-ESUR-HONE
+3,HOOK - Fixing hook,Mandatory,LOG-T-TVEC,LOG-T-TVEC-HOOK
+3,HOOK - Hook,Mandatory,LOG-P-PHDW,LOG-P-PHDW-HOOK
+3,HOOK - Towing hook,Mandatory,LOG-T-TVEM,LOG-T-TVEM-HOOK
+3,HOOS - Strabismus Hook,Mandatory,MED-E-ESUO,MED-E-ESUO-HOOS
+3,HOOS - Surgical hood,Mandatory,MED-E-ELIN,MED-E-ELIN-HOOS
+3,HOSE - Fuel hose,Mandatory,LOG-T-TVEA,LOG-T-TVEA-HOSE
+3,HOSE - Hose,Mandatory,LOG-C-CWAT,LOG-C-CWAT-HOSE
+3,HOSF - Flat hose,Mandatory,LOG-C-CWAT,LOG-C-CWAT-HOSF
+3,HOSG - Garden hose,Mandatory,LOG-C-CWAT,LOG-C-CWAT-HOSG
+3,HOSS - Spiral hose,Mandatory,LOG-C-CWAT,LOG-C-CWAT-HOSS
+3,HOSY - Yellow wastewater hose,Mandatory,LOG-C-CWAT,LOG-C-CWAT-HOSY
+3,HRIF - Isoniazid / Rifampicin FDC,Mandatory,MED-D-DORA,MED-D-DORA-HRIF
+3,HUBU - USB hub,Mandatory,LOG-A-ADAP,LOG-A-ADAP-HUBU
+3,"HUMB - Humanitarian, Book",Mandatory,LIB-L-L070,LIB-L-L070-HUMB
+3,"HUMG - Humanitarian Assistance, Guide",Mandatory,LIB-L-L070,LIB-L-L070-HUMG
+3,HVIJ - Hi-visibility jacket,Mandatory,LOG-P-PSAF,LOG-P-PSAF-HVIJ
+3,HYAC - Hydrochloric Acid,Mandatory,MED-S-SLAS,MED-S-SLAS-HYAC
+3,HYDA - Hydralazine,Mandatory,MED-D-DINJ,MED-D-DINJ-HYDA
+3,HYDA - Hydralazine,Mandatory,MED-D-DORA,MED-D-DORA-HYDA
+3,HYDO - Hydrochlorothiazide,Mandatory,MED-D-DORA,MED-D-DORA-HYDO
+3,HYDR - Hydrocortisone,Mandatory,MED-D-DEXT,MED-D-DEXT-HYDR
+3,HYDR - Hydrocortisone,Mandatory,MED-D-DINJ,MED-D-DINJ-HYDR
+3,HYDR - Hydrometer,Mandatory,LOG-P-PTOO,LOG-P-PTOO-HYDR
+3,"HYGB - Hygiene, Book",Mandatory,LIB-L-L018,LIB-L-L018-HYGB
+3,HYGB - Infection control book,Mandatory,LIB-L-L029,LIB-L-L029-HYGB
+3,"HYGG - Infection control, guide",Mandatory,LIB-L-L029,LIB-L-L029-HYGG
+3,"HYGV - Infection control, video",Mandatory,LIB-L-L029,LIB-L-L029-HYGV
+3,HYOS - Hyoscine butylbromide,Mandatory,MED-D-DINJ,MED-D-DINJ-HYOS
+3,HYOS - Hyoscine butylbromide,Mandatory,MED-D-DORA,MED-D-DORA-HYOS
+3,IADD - Insecticide adulticide,Mandatory,LOG-C-CWAT,LOG-C-CWAT-IADD
+3,IBUP - Ibuprofene,Mandatory,MED-D-DORA,MED-D-DORA-IBUP
+3,ICES - Anti-icing,Mandatory,LOG-T-TVEC,LOG-T-TVEC-ICES
+3,ICOF - Insecticide for cockroaches,Mandatory,LOG-C-CWAT,LOG-C-CWAT-ICOF
+3,"IECB - Information, Educ., Comm. Book",Mandatory,LIB-L-L007,LIB-L-L007-IECB
+3,"IECG - Information, Education, Comm. Guide",Mandatory,LIB-L-L007,LIB-L-L007-IECG
+3,IICL - Insecticide impregnation of clothing,Mandatory,LOG-C-CWAT,LOG-C-CWAT-IICL
+3,IIDU - Insecticide for dusting,Mandatory,LOG-C-CWAT,LOG-C-CWAT-IIDU
+3,IINK - India ink,Mandatory,MED-S-SLAS,MED-S-SLAS-IINK
+3,IIRS - Insecticide for residual spraying,Mandatory,LOG-C-CWAT,LOG-C-CWAT-IIRS
+3,ILAT - Insecticide larvicide,Mandatory,LOG-C-CWAT,LOG-C-CWAT-ILAT
+3,IMAS - Immunoglobulins antivenom snakes,Mandatory,MED-D-DVAC,MED-D-DVAC-IMAS
+3,IMHR - Immunoglobulins human antirabies,Mandatory,MED-D-DVAC,MED-D-DVAC-IMHR
+3,IMMA - Immatriculation,Mandatory,LOG-T-TVEA,LOG-T-TVEA-IMMA
+3,"IMMB - Immunization, Book",Mandatory,LIB-L-L015,LIB-L-L015-IMMB
+3,"IMMD - Immunization, CD-Rom",Mandatory,LIB-L-L015,LIB-L-L015-IMMD
+3,"IMMG - Immunization, Guide",Mandatory,LIB-L-L015,LIB-L-L015-IMMG
+3,IMON - Insecticide for mosquito nets,Mandatory,LOG-C-CWAT,LOG-C-CWAT-IMON
+3,"IMTE - Immunoglobulin, tetanus",Mandatory,MED-D-DVAC,MED-D-DVAC-IMTE
+3,INCA - (incubator) accessories,Mandatory,MED-E-ELAE,MED-E-ELAE-INCA
+3,INCE - Incubator,Mandatory,MED-E-ELAE,MED-E-ELAE-INCE
+3,INCI - De Montfort Incinerator components,Mandatory,LOG-C-CWAT,LOG-C-CWAT-INCI
+3,INCU - Incubator,Mandatory,MED-E-ELAE,MED-E-ELAE-INCU
+3,INDI - Indinavir,Mandatory,MED-D-DORA,MED-D-DORA-INDI
+3,INFB - INFLUENZA BOOKS,Mandatory,LIB-L-L003,LIB-L-L003-INFB
+3,"INFG - Influenza, Guide",Mandatory,LIB-L-L003,LIB-L-L003-INFG
+3,INHV - HF/VHF interface,Mandatory,LOG-P-PCOM,LOG-P-PCOM-INHV
+3,INSH - Insulin (Human),Mandatory,MED-D-DINJ,MED-D-DINJ-INSH
+3,INSK - Insect killer,Mandatory,LOG-A-ALIF,LOG-A-ALIF-INSK
+3,INSP - Inspection contract,Mandatory,MED-N-NSFO,MED-N-NSFO-INSP
+3,INVE - Inverter,Mandatory,LOG-P-PELE,LOG-P-PELE-INVE
+3,INVG - Inventory,Mandatory,LIB-L-L045,LIB-L-L045-INVG
+3,IODI - Iodine,Mandatory,MED-S-SLAS,MED-S-SLAS-IODI
+3,IODO - Iodized Oil,Mandatory,MED-D-DORA,MED-D-DORA-IODO
+3,IODP - Iodine Povidone,Mandatory,MED-D-DEXT,MED-D-DEXT-IODP
+3,IRON - Electrical iron,Mandatory,LOG-P-PHYG,LOG-P-PHYG-IRON
+3,IROP - Steel section,Mandatory,LOG-C-CBUI,LOG-C-CBUI-IROP
+3,IROR - Iron rod,Mandatory,LOG-C-CBUI,LOG-C-CBUI-IROR
+3,IROW - Wire-mesh,Mandatory,LOG-C-CBUI,LOG-C-CBUI-IROW
+3,"ISAT - ISATPHONE PRO, satellite phone",Mandatory,LOG-P-PCOM,LOG-P-PCOM-ISAT
+3,ISOB - Isorbide dinitrate,Mandatory,MED-D-DORA,MED-D-DORA-ISOB
+3,ISOB - Isosorbide dinitrate,Mandatory,MED-D-DINJ,MED-D-DINJ-ISOB
+3,ISOF - Isoflurane,Mandatory,MED-D-DORA,MED-D-DORA-ISOF
+3,ISON - Isoniazid,Mandatory,MED-D-DORA,MED-D-DORA-ISON
+3,ISON - Isoniazide,Mandatory,MED-S-SLAS,MED-S-SLAS-ISON
+3,"ISYG - Isystock, guide",Mandatory,LIB-L-L044,LIB-L-L044-ISYG
+3,ITRA - Itraconazol,Mandatory,MED-D-DORA,MED-D-DORA-ITRA
+3,IUDE - Intra Uterine Device,Mandatory,MED-S-SMSU,MED-S-SMSU-IUDE
+3,IVER - Ivermectine,Mandatory,MED-D-DORA,MED-D-DORA-IVER
+3,IVPP - Catheter with injection port,Mandatory,MED-S-SINS,MED-S-SINS-IVPP
+3,"JACB - Jack, bottle type",Mandatory,LOG-T-TVEA,LOG-T-TVEA-JACB
+3,JACK - Jack,Mandatory,LOG-P-PTOO,LOG-P-PTOO-JACK
+3,JACK - Jack,Mandatory,LOG-T-TVEA,LOG-T-TVEA-JACK
+3,JACK - Jacket,Mandatory,LOG-P-PIDE,LOG-P-PIDE-JACK
+3,JAMF - Jam,Mandatory,LOG-A-AFOO,LOG-A-AFOO-JAMF
+3,JARF - Forceps Jar,Mandatory,MED-E-EMEQ,MED-E-EMEQ-JARF
+3,"JARI - Jar, incubation",Mandatory,MED-E-ELAE,MED-E-ELAE-JARI
+3,JARS - staining jar,Mandatory,MED-E-ELAE,MED-E-ELAE-JARS
+3,JERR - Jerrycan,Mandatory,LOG-C-CWAT,LOG-C-CWAT-JERR
+3,JERR - Jerrycan,Mandatory,LOG-T-TVEA,LOG-T-TVEA-JERR
+3,JOIC - Joint compound,Mandatory,LOG-C-CWAT,LOG-C-CWAT-JOIC
+3,JUIC - Fruit juice,Mandatory,LOG-A-AFOO,LOG-A-AFOO-JUIC
+3,"KADM - Kit, administration",Mandatory,LOG-K-KADM,LOG-K-KADM-KADM
+3,"KAMB - KIT, AMBULANCE medicalised",Mandatory,LOG-K-KTRA,LOG-K-KTRA-KAMB
+3,KANA - Kanamycin,Mandatory,MED-D-DINJ,MED-D-DINJ-KANA
+3,KANA - Kanamycin,Mandatory,MED-S-SLAS,MED-S-SLAS-KANA
+3,KBAG - Kit bag,Mandatory,LOG-P-PSAF,LOG-P-PSAF-KBAG
+3,KBAS - Basis Kit,Mandatory,MED-K-KMED,MED-K-KMED-KBAS
+3,KBDA - Keyboard AZERTY,Mandatory,LOG-A-ADAP,LOG-A-ADAP-KBDA
+3,KBDQ - Keyboard QWERTY,Mandatory,LOG-A-ADAP,LOG-A-ADAP-KBDQ
+3,"KBOA - Kit, boat",Mandatory,LOG-K-KTRA,LOG-K-KTRA-KBOA
+3,KBOD - Body management kit,Mandatory,LOG-K-KWAT,LOG-K-KWAT-KBOD
+3,"KCHL - Kit, chlorination",Mandatory,LOG-K-KWAT,LOG-K-KWAT-KCHL
+3,KCHO - Cholera Kit,Mandatory,MED-K-KMED,MED-K-KMED-KCHO
+3,"KDEN - Kit, Dengue",Mandatory,LOG-K-KWAT,LOG-K-KWAT-KDEN
+3,KEBO - Viral haemorrhagic fever kit,Mandatory,MED-K-KMED,MED-K-KMED-KEBO
+3,KEME - Emergency Health Kit,Mandatory,MED-K-KMED,MED-K-KMED-KEME
+3,KERO - Kerosene,Mandatory,LOG-T-TVEC,LOG-T-TVEC-KERO
+3,KETA - Ketamine,Mandatory,MED-D-DINJ,MED-D-DINJ-KETA
+3,KETT - Kettel,Mandatory,LOG-P-PCOO,LOG-P-PCOO-KETT
+3,KFAI - First Aid Kit,Mandatory,MED-K-KMED,MED-K-KMED-KFAI
+3,"KFRI - Kit, refrigerator/freezer",Mandatory,LOG-K-KPRO,LOG-K-KPRO-KFRI
+3,"KGEN - Kit, generator",Mandatory,LOG-K-KPRO,LOG-K-KPRO-KGEN
+3,KHDE - PART hospital delivery room,Mandatory,MED-K-KMED,MED-K-KMED-KHDE
+3,"KHFM - Kit, HF mobile station",Mandatory,LOG-K-KCOM,LOG-K-KCOM-KHFM
+3,"KHHW - Kit, Household water treatment",Mandatory,LOG-K-KWAT,LOG-K-KWAT-KHHW
+3,"KHIM - Intensive care unit module, medicines",Mandatory,MED-K-KMED,MED-K-KMED-KHIM
+3,"KHIS - Intensive care unit module, renew.suppl.",Mandatory,MED-K-KMED,MED-K-KMED-KHIS
+3,"KHLA - PART hospital, laboratory",Mandatory,MED-K-KMED,MED-K-KMED-KHLA
+3,KHMI - PART hospital divers modules,Mandatory,MED-K-KMED,MED-K-KMED-KHMI
+3,"KHOC - KIT HOSPITAL, complete",Mandatory,MED-K-KMED,MED-K-KMED-KHOC
+3,"KHOE - Operation theatre module, equipment",Mandatory,MED-K-KMED,MED-K-KMED-KHOE
+3,KHPH - PART hospital central pharmacy,Mandatory,MED-K-KMED,MED-K-KMED-KHPH
+3,"KHST - PART hospital, central sterilization",Mandatory,MED-K-KMED,MED-K-KMED-KHST
+3,"KHTE - Module triage & OPD, equipment",Mandatory,MED-K-KMED,MED-K-KMED-KHTE
+3,"KHTS - Module triage & OPD, medical supplies",Mandatory,MED-K-KMED,MED-K-KMED-KHTS
+3,"KHWE - Module ward, equipment",Mandatory,MED-K-KMED,MED-K-KMED-KHWE
+3,"KHWS - Module ward, renewable supplies",Mandatory,MED-K-KMED,MED-K-KMED-KHWS
+3,KHXR - PART hospital radiology,Mandatory,MED-K-KMED,MED-K-KMED-KHXR
+3,"KHYG - Kit, Hygiene",Mandatory,LOG-K-KCAM,LOG-K-KCAM-KHYG
+3,KIDD - Kidney Dish,Mandatory,MED-E-EMEQ,MED-E-EMEQ-KIDD
+3,KIMM - Immunization Kit,Mandatory,MED-K-KMED,MED-K-KMED-KIMM
+3,"KINC - Kit, incinerator",Mandatory,LOG-K-KWAT,LOG-K-KWAT-KINC
+3,"KJET - Kit, jetting",Mandatory,LOG-K-KWAT,LOG-K-KWAT-KJET
+3,KLAB - Laboratory Kit,Mandatory,MED-K-KMED,MED-K-KMED-KLAB
+3,"KLIF - Kit, team life",Mandatory,LOG-K-KADM,LOG-K-KADM-KLIF
+3,"KLIG - Kit, lighting",Mandatory,LOG-K-KPRO,LOG-K-KPRO-KLIG
+3,KMCU - Checklist for Kangaroo Mother Care Unit,Mandatory,MED-I-IPED,MED-I-IPED-KMCU
+3,"KMEG - Kit, mégaphone",Mandatory,LOG-K-KCOM,LOG-K-KCOM-KMEG
+3,"KMOD - Kit, vehicle modification",Mandatory,LOG-K-KTRA,LOG-K-KTRA-KMOD
+3,KMSU - Medical Surgical Kit,Mandatory,MED-K-KMED,MED-K-KMED-KMSU
+3,KNIF - Knife,Mandatory,LOG-P-PCOO,LOG-P-PCOO-KNIF
+3,KNIF - Knife,Mandatory,LOG-P-PPAC,LOG-P-PPAC-KNIF
+3,KNIF - Knife,Mandatory,LOG-P-PTOO,LOG-P-PTOO-KNIF
+3,KNUT - Checklist for nutrition kits,Mandatory,LIB-L-LEAF,LIB-L-LEAF-KNUT
+3,KNUT - Nutritional Equipment Kit,Mandatory,MED-K-KMED,MED-K-KMED-KNUT
+3,"KPAT - Kit, Patient transport",Mandatory,LOG-K-KTRA,LOG-K-KTRA-KPAT
+3,KPSY - Psycho-social kit,Mandatory,MED-K-KMED,MED-K-KMED-KPSY
+3,"KPUD - Kit, diesel motor pump",Mandatory,LOG-K-KWAT,LOG-K-KWAT-KPUD
+3,"KPUE - Kit, electrical pump",Mandatory,LOG-K-KWAT,LOG-K-KWAT-KPUE
+3,"KPUF - Kit, fuel pump",Mandatory,LOG-K-KPRO,LOG-K-KPRO-KPUF
+3,"KPUP - Kit, petrol motor pump",Mandatory,LOG-K-KWAT,LOG-K-KWAT-KPUP
+3,"KRTX - Kit, radio telex",Mandatory,LOG-K-KCOM,LOG-K-KCOM-KRTX
+3,"KSAT - Kit, satellite",Mandatory,LOG-K-KCOM,LOG-K-KCOM-KSAT
+3,"KSEA - Kit, crimping tools",Mandatory,LOG-K-KPRO,LOG-K-KPRO-KSEA
+3,"KSHE - Kit, shelter",Mandatory,LOG-K-KCAM,LOG-K-KCAM-KSHE
+3,"KSOL - Kit, solar",Mandatory,LOG-K-KCOM,LOG-K-KCOM-KSOL
+3,"KSPR - Kit, spraying",Mandatory,LOG-K-KWAT,LOG-K-KWAT-KSPR
+3,KSUR - Surgical Kit,Mandatory,MED-K-KMED,MED-K-KMED-KSUR
+3,"KTAN - Kit, water tank",Mandatory,LOG-K-KWAT,LOG-K-KWAT-KTAN
+3,"KTES - Kit, water testing",Mandatory,LOG-K-KWAT,LOG-K-KWAT-KTES
+3,"KTOO - Kit, tools",Mandatory,LOG-K-KPRO,LOG-K-KPRO-KTOO
+3,"KTOO - Kit, water tools",Mandatory,LOG-K-KWAT,LOG-K-KWAT-KTOO
+3,"KTRE - Kit, water treatment",Mandatory,LOG-K-KWAT,LOG-K-KWAT-KTRE
+3,"KTRI - Kit, tripod",Mandatory,LOG-K-KWAT,LOG-K-KWAT-KTRI
+3,"KUHF - Kit, UHF",Mandatory,LOG-K-KCOM,LOG-K-KCOM-KUHF
+3,"KVAL - Kit, valve adjustment",Mandatory,LOG-K-KTRA,LOG-K-KTRA-KVAL
+3,"KVEH - Kit, tools for vehicle",Mandatory,LOG-K-KTRA,LOG-K-KTRA-KVEH
+3,"KVHF - Kit, VHF",Mandatory,LOG-K-KCOM,LOG-K-KCOM-KVHF
+3,KWAT - Technical notes for Watsan kits,Mandatory,LIB-L-LEAF,LIB-L-LEAF-KWAT
+3,LABA - Adhesive labels,Mandatory,LOG-A-ASTA,LOG-A-ASTA-LABA
+3,"LABB - Laboratory, Book",Mandatory,LIB-L-L013,LIB-L-L013-LABB
+3,LABE - Label,Mandatory,LOG-P-PPAC,LOG-P-PPAC-LABE
+3,LABE - Labetalol,Mandatory,MED-D-DINJ,MED-D-DINJ-LABE
+3,LABE - Labetalol,Mandatory,MED-D-DORA,MED-D-DORA-LABE
+3,"LABG - Laboratory, Guide",Mandatory,LIB-L-L013,LIB-L-L013-LABG
+3,"LABL - Laryngoscope, Blade",Mandatory,MED-E-EANE,MED-E-EANE-LABL
+3,LABS - Leaflet laboratory sample,Mandatory,LIB-L-LEAF,LIB-L-LEAF-LABS
+3,LACE - Lactate analyser equipment,Mandatory,MED-E-ELAE,MED-E-ELAE-LACE
+3,LACT - Analyser lactate,Mandatory,MED-S-SLAS,MED-S-SLAS-LACT
+3,LACT - Lactatometer,Mandatory,MED-E-ELAE,MED-E-ELAE-LACT
+3,LACT - Lactulose,Mandatory,MED-D-DORA,MED-D-DORA-LACT
+3,LADD - Ladder,Mandatory,LOG-P-PSAF,LOG-P-PSAF-LADD
+3,LADL - Ladle,Mandatory,LOG-P-PCOO,LOG-P-PCOO-LADL
+3,"LAEX - Lamp, Examination",Mandatory,MED-E-EHOE,MED-E-EHOE-LAEX
+3,LAMA - Label maker,Mandatory,LOG-A-AOFF,LOG-A-AOFF-LAMA
+3,LAMD - Lamp darkroom,Mandatory,MED-E-EDIM,MED-E-EDIM-LAMD
+3,LAMF - Fluorescent lamp,Mandatory,LOG-P-PLIG,LOG-P-PLIG-LAMF
+3,LAMI - Lamivudine (3CT),Mandatory,MED-D-DORA,MED-D-DORA-LAMI
+3,LAMP - Lamp,Mandatory,MED-E-ELAE,MED-E-ELAE-LAMP
+3,LAMP - Lamp,Mandatory,LOG-P-PLIG,LOG-P-PLIG-LAMP
+3,LANC - Blood Lancet,Mandatory,MED-E-ELAE,MED-E-ELAE-LANC
+3,LANY - Lanyard,Mandatory,LOG-P-PSAF,LOG-P-PSAF-LANY
+3,LAOP - Operating Lamp,Mandatory,MED-E-EHOE,MED-E-EHOE-LAOP
+3,"LARB - Laryngoscope, Bulb",Mandatory,MED-E-EANE,MED-E-EANE-LARB
+3,LARY - Laryngoscope,Mandatory,MED-E-EANE,MED-E-EANE-LARY
+3,"LAWB - Law, Book",Mandatory,LIB-L-L072,LIB-L-L072-LAWB
+3,"LAWG - Law, Guide",Mandatory,LIB-L-L072,LIB-L-L072-LAWG
+3,LAZI - Lamivudine + Zidovudine,Mandatory,MED-D-DORA,MED-D-DORA-LAZI
+3,LBUI - Building list,Mandatory,LOG-K-KCAM,LOG-K-KCAM-LBUI
+3,LEAS - Leaf spring  for TOYOTA,Mandatory,LOG-T-TXTO,LOG-T-TXTO-LEAS
+3,LEFL - Levofloxacin,Mandatory,MED-D-DORA,MED-D-DORA-LEFL
+3,LEFX - Levofloxacin,Mandatory,MED-D-DORA,MED-D-DORA-LEFX
+3,"LEIB - Leishmaniosis, Book",Mandatory,LIB-L-L006,LIB-L-L006-LEIB
+3,LEID - Leishmaniosis on CD rom,Mandatory,LIB-L-L006,LIB-L-L006-LEID
+3,"LEIG - Leishmaniosis, Guide",Mandatory,LIB-L-L006,LIB-L-L006-LEIG
+3,LEIS - Leishmaniasis rapid test,Mandatory,MED-D-DDGT,MED-D-DDGT-LEIS
+3,LENT - Lentils,Mandatory,MED-N-NFOO,MED-N-NFOO-LENT
+3,"LEPB - Leprosy, Book",Mandatory,LIB-L-L004,LIB-L-L004-LEPB
+3,"LETT - Letter, brasse",Mandatory,MED-E-EDIM,MED-E-EDIM-LETT
+3,LEVB - Levobupivacaine,Mandatory,MED-D-DINJ,MED-D-DINJ-LEVB
+3,LEVC - Levodopa / Carbidopa,Mandatory,MED-D-DORA,MED-D-DORA-LEVC
+3,LEVE - Level,Mandatory,LOG-P-PTOO,LOG-P-PTOO-LEVE
+3,LEVE - Tyre lever,Mandatory,LOG-T-TVEA,LOG-T-TVEA-LEVE
+3,LEVN - Levonorgestrel,Mandatory,MED-D-DINJ,MED-D-DINJ-LEVN
+3,LEVN - Levonorgestrel,Mandatory,MED-D-DORA,MED-D-DORA-LEVN
+3,LEVO - Levothyroxine,Mandatory,MED-D-DORA,MED-D-DORA-LEVO
+3,"LIBG - Library, Guide",Mandatory,LIB-L-L045,LIB-L-L045-LIBG
+3,LIBR - Library checklist for diagnostic imaging,Mandatory,MED-I-IDIM,MED-I-IDIM-LIBR
+3,LICO - Lightning protector,Mandatory,LOG-P-PCOM,LOG-P-PCOM-LICO
+3,LIDE - Lidocaine/Epinephrine,Mandatory,MED-D-DINJ,MED-D-DINJ-LIDE
+3,LIDO - Lidocaine,Mandatory,MED-D-DEXT,MED-D-DEXT-LIDO
+3,LIDO - Lidocaine,Mandatory,MED-D-DINJ,MED-D-DINJ-LIDO
+3,LIFE - Fall arrest lifeline,Mandatory,LOG-P-PSAF,LOG-P-PSAF-LIFE
+3,LIFJ - Life jacket,Mandatory,LOG-P-PSAF,LOG-P-PSAF-LIFJ
+3,LIGH - Light,Mandatory,LOG-T-TVEA,LOG-T-TVEA-LIGH
+3,LIGH - Lighter,Mandatory,LOG-A-ALIF,LOG-A-ALIF-LIGH
+3,LIME - Hydraulic lime,Mandatory,LOG-C-CBUI,LOG-C-CBUI-LIME
+3,LINE - Linezolid,Mandatory,MED-D-DORA,MED-D-DORA-LINE
+3,LIQU - Liquid,Mandatory,LOG-T-TVEC,LOG-T-TVEC-LIQU
+3,LIQW - Washing-up liquid,Mandatory,LOG-P-PHYG,LOG-P-PHYG-LIQW
+3,LLIN - Long lasting insecticidal net,Mandatory,LOG-C-CWAT,LOG-C-CWAT-LLIN
+3,LNSS - Lipid-based Nutrient Supplement SQ,Mandatory,MED-N-NFOS,MED-N-NFOS-LNSS
+3,LOCK - Lock,Mandatory,LOG-P-PHDW,LOG-P-PHDW-LOCK
+3,LOGB - Logbook holder,Mandatory,LOG-T-TVEA,LOG-T-TVEA-LOGB
+3,LOGD - Logistics CD-Rom,Mandatory,LIB-L-L040,LIB-L-L040-LOGD
+3,LOGG - Logistic guide,Mandatory,LIB-L-L047,LIB-L-L047-LOGG
+3,"LOGG - Logistics, Guide",Mandatory,LIB-L-L040,LIB-L-L040-LOGG
+3,"LOGG - Logistix, Guide",Mandatory,LIB-L-L044,LIB-L-L044-LOGG
+3,LOJE - Lowenstein-Jensen,Mandatory,MED-S-SLAS,MED-S-SLAS-LOJE
+3,LOPE - Loperamide,Mandatory,MED-D-DORA,MED-D-DORA-LOPE
+3,LPRF - Lopinavir (LPV) / Ritonavir (r),Mandatory,MED-D-DORA,MED-D-DORA-LPRF
+3,LPUR - Local purchase,Mandatory,LOG-A-ALST,LOG-A-ALST-LPUR
+3,LPVR - Lopinavir (LPV) / Ritonavir (r),Mandatory,MED-D-DORA,MED-D-DORA-LPVR
+3,LSNV - Lamivudine / Stavudine / Nevirapine,Mandatory,MED-D-DORA,MED-D-DORA-LSNV
+3,LSTA - Lamivudine / Stavudine,Mandatory,MED-D-DORA,MED-D-DORA-LSTA
+3,LUBR - Lubricant,Mandatory,LOG-C-CWAT,LOG-C-CWAT-LUBR
+3,LUBR - Lubricant,Mandatory,LOG-T-TVEC,LOG-T-TVEC-LUBR
+3,LUGG - Logul Of Gram,Mandatory,MED-S-SLAS,MED-S-SLAS-LUGG
+3,LUGO - Lugol,Mandatory,MED-S-SLAS,MED-S-SLAS-LUGO
+3,LZAB - Lamivudine/ Zidovudine + ABC,Mandatory,MED-D-DORA,MED-D-DORA-LZAB
+3,LZAF - Lamivudine / Zidovudine / Abacavir,Mandatory,MED-D-DORA,MED-D-DORA-LZAF
+3,LZEB - Lamivudine / Zidovudine + Efavirenz,Mandatory,MED-D-DORA,MED-D-DORA-LZEB
+3,LZEF - Lamivudine / Zidovudine + Efavirenz,Mandatory,MED-D-DORA,MED-D-DORA-LZEF
+3,LZNV - Lamivudine / Zidovudine / Nevirapin,Mandatory,MED-D-DORA,MED-D-DORA-LZNV
+3,M59D - Peugeot Partner M59 diesel,Mandatory,LOG-T-TPEU,LOG-T-TPEU-M59D
+3,"MABB - Mallet, Bone, Bergmann",Mandatory,MED-E-ESUR,MED-E-ESUR-MABB
+3,MACE - Macedoine,Mandatory,LOG-A-AFOO,LOG-A-AFOO-MACE
+3,MACH - Machete,Mandatory,LOG-P-PTOO,LOG-P-PTOO-MACH
+3,MACK - Mackerel,Mandatory,LOG-A-AFOO,LOG-A-AFOO-MACK
+3,"MADA - Module, adaptation",Mandatory,LOG-K-KWAT,LOG-K-KWAT-MADA
+3,"MADM - Module, administration",Mandatory,LOG-K-KADM,LOG-K-KADM-MADM
+3,MAFT - Mask fit test,Mandatory,MED-E-ELIN,MED-E-ELIN-MAFT
+3,MAGG - Magnifying glass,Mandatory,LOG-A-ASTA,LOG-A-ASTA-MAGG
+3,MAGN - Magnesium,Mandatory,MED-D-DORA,MED-D-DORA-MAGN
+3,MAGO - Malachite Green Oxalate,Mandatory,MED-S-SLAS,MED-S-SLAS-MAGO
+3,MAGS - Magnesium sulfate,Mandatory,MED-D-DINJ,MED-D-DINJ-MAGS
+3,MAIZ - Maize,Mandatory,MED-N-NFOO,MED-N-NFOO-MAIZ
+3,MALA - Malathion,Mandatory,MED-D-DEXT,MED-D-DEXT-MALA
+3,"MALA - Mask, laryngeal",Mandatory,MED-E-EANE,MED-E-EANE-MALA
+3,"MALB - Malaria, Book",Mandatory,LIB-L-L006,LIB-L-L006-MALB
+3,"MALB - Malaria, Book",Mandatory,LIB-L-L013,LIB-L-L013-MALB
+3,"MALF - Malaria P.f. diagnostic test, CD",Mandatory,LIB-L-LEAF,LIB-L-LEAF-MALF
+3,"MALF - Malaria, p. falciparum",Mandatory,MED-D-DDGT,MED-D-DDGT-MALF
+3,"MALG - Malaria, Guide",Mandatory,LIB-L-L006,LIB-L-L006-MALG
+3,MALL - Mallet,Mandatory,LOG-P-PTOO,LOG-P-PTOO-MALL
+3,"MALP - Malaria  P.f./Pan-Combo diagn. test, CD",Mandatory,LIB-L-LEAF,LIB-L-LEAF-MALP
+3,"MALP - Malaria, pan pLDH",Mandatory,MED-D-DDGT,MED-D-DDGT-MALP
+3,MANA - Anaesthesia Module,Mandatory,MED-K-KMED,MED-K-KMED-MANA
+3,"MANB - Management, Book",Mandatory,LIB-L-L025,LIB-L-L025-MANB
+3,"MANG - Management, Guide",Mandatory,LIB-L-L025,LIB-L-L025-MANG
+3,"MANG - Management, Guide",Mandatory,LIB-L-L050,LIB-L-L050-MANG
+3,"MANG - Management, Guide",Mandatory,LIB-L-L051,LIB-L-L051-MANG
+3,"MANT - Module, antenna",Mandatory,LOG-K-KCOM,LOG-K-KCOM-MANT
+3,"MARC - Marker, colour",Mandatory,MED-E-EPSY,MED-E-EPSY-MARC
+3,MARG - Margarine,Mandatory,LOG-A-AFOO,LOG-A-AFOO-MARG
+3,"MARK - Marker, permanent, black",Mandatory,MED-E-ELAE,MED-E-ELAE-MARK
+3,MASA - Anaesthesia Mask,Mandatory,MED-E-EANE,MED-E-EANE-MASA
+3,MASG - Gas mask,Mandatory,LOG-P-PSAF,LOG-P-PSAF-MASG
+3,"MASO - Mask, oxygen",Mandatory,MED-S-SCTD,MED-S-SCTD-MASO
+3,MASP - Respirator,Mandatory,MED-E-ELIN,MED-E-ELIN-MASP
+3,MASP - Respiratory protection,Mandatory,LOG-P-PSAF,LOG-P-PSAF-MASP
+3,MASS - Surgical Mask,Mandatory,MED-E-ELIN,MED-E-ELIN-MASS
+3,MATC - Matches,Mandatory,LOG-A-ALIF,LOG-A-ALIF-MATC
+3,MATG - Ground mat,Mandatory,LOG-A-ALIF,LOG-A-ALIF-MATG
+3,MATT - Matting,Mandatory,LOG-C-CBUI,LOG-C-CBUI-MATT
+3,MATT - Mattress,Mandatory,LOG-A-ALIF,LOG-A-ALIF-MATT
+3,MATT - Mattress,Mandatory,MED-E-EHOE,MED-E-EHOE-MATT
+3,"MAUT - Module, autoclave",Mandatory,MED-K-KMED,MED-K-KMED-MAUT
+3,MBAS - Basic Module,Mandatory,MED-K-KMED,MED-K-KMED-MBAS
+3,"MCAB - Module, electrical cable",Mandatory,LOG-K-KPRO,LOG-K-KPRO-MCAB
+3,"MCAL - Module, calculator",Mandatory,LOG-K-KADM,LOG-K-KADM-MCAL
+3,MCHB - Mother and child health book,Mandatory,LIB-L-L009,LIB-L-L009-MCHB
+3,"MCHL - Module, chlorination",Mandatory,LOG-K-KWAT,LOG-K-KWAT-MCHL
+3,MCHO - Cholera Module,Mandatory,MED-K-KMED,MED-K-KMED-MCHO
+3,"MCOL - Module, laptop computer",Mandatory,LOG-K-KADM,LOG-K-KADM-MCOL
+3,MCOM - Module Complementary,Mandatory,MED-K-KMED,MED-K-KMED-MCOM
+3,"MCOO - Module, cooking",Mandatory,LOG-K-KCAM,LOG-K-KCAM-MCOO
+3,MCUP - Medicine cup,Mandatory,MED-E-EMEQ,MED-E-EMEQ-MCUP
+3,"MDEN - Module, dengue, 1 000 persons",Mandatory,LOG-K-KWAT,LOG-K-KWAT-MDEN
+3,MDIS - Disaster Module,Mandatory,MED-K-KMED,MED-K-KMED-MDIS
+3,"MDIS - Module, water distribution",Mandatory,LOG-K-KWAT,LOG-K-KWAT-MDIS
+3,"MDOS - Module, dosing pump",Mandatory,LOG-K-KWAT,LOG-K-KWAT-MDOS
+3,MDRE - Dressing Module,Mandatory,MED-K-KMED,MED-K-KMED-MDRE
+3,MDRS - Dressing Module,Mandatory,MED-K-KMED,MED-K-KMED-MDRS
+3,"MDUP - Module, duplicator",Mandatory,LOG-K-KADM,LOG-K-KADM-MDUP
+3,MEAA - Measuring apparatus,Mandatory,MED-E-EANT,MED-E-EANT-MEAA
+3,"MEAB - Measles, Book",Mandatory,LIB-L-L003,LIB-L-L003-MEAB
+3,"MEAG - Measle, Guide",Mandatory,LIB-L-L003,LIB-L-L003-MEAG
+3,"MEAG - Measles vaccination, guide",Mandatory,LIB-L-L015,LIB-L-L015-MEAG
+3,MEAJ - Measuring jug,Mandatory,LOG-P-PCOO,LOG-P-PCOO-MEAJ
+3,MEAR - Measuring tools,Mandatory,LOG-P-PTOO,LOG-P-PTOO-MEAR
+3,MEAT - Meat,Mandatory,LOG-A-AFOO,LOG-A-AFOO-MEAT
+3,MEBE - Mebendazole,Mandatory,MED-D-DORA,MED-D-DORA-MEBE
+3,MEBO - Viral haemorrhagic fever module,Mandatory,MED-K-KMED,MED-K-KMED-MEBO
+3,"MECB - Mechanic, Book",Mandatory,LIB-L-L041,LIB-L-L041-MECB
+3,"MECD - Mechanics, Digital Media",Mandatory,LIB-L-L041,LIB-L-L041-MECD
+3,"MECG - Mechanic, Guide",Mandatory,LIB-L-L040,LIB-L-L040-MECG
+3,"MECG - Mechanic, Guide",Mandatory,LIB-L-L041,LIB-L-L041-MECG
+3,MECY - Menstruation cycle,Mandatory,MED-E-ETPO,MED-E-ETPO-MECY
+3,"MEDB - Medecine, Humanitary, Book",Mandatory,LIB-L-L001,LIB-L-L001-MEDB
+3,"MEDB - Medecine, Humanitary, Book",Mandatory,LIB-L-L070,LIB-L-L070-MEDB
+3,"MEDB - Medical, Book",Mandatory,LIB-L-L002,LIB-L-L002-MEDB
+3,MEDR - Depo Medroxyprogesterone,Mandatory,MED-D-DINJ,MED-D-DINJ-MEDR
+3,MEET - Mercapto-ethanol,Mandatory,MED-S-SLAS,MED-S-SLAS-MEET
+3,MEFL - Mefloquine,Mandatory,MED-D-DORA,MED-D-DORA-MEFL
+3,MEGA - Megaphone,Mandatory,LOG-P-PCOM,LOG-P-PCOM-MEGA
+3,MEGA - Meglumine Antimoniate,Mandatory,MED-D-DINJ,MED-D-DINJ-MEGA
+3,MEHB - Mental health,Mandatory,LIB-L-L019,LIB-L-L019-MEHB
+3,MELA - Melarsoprol,Mandatory,MED-D-DINJ,MED-D-DINJ-MELA
+3,MEMK - USB memory key,Mandatory,LOG-A-ADAP,LOG-A-ADAP-MEMK
+3,MEMR - RAM memory,Mandatory,LOG-A-ADAP,LOG-A-ADAP-MEMR
+3,"MEND - Meningitis, Digital Media",Mandatory,LIB-L-L013,LIB-L-L013-MEND
+3,"MENG - Meningitis, Guide",Mandatory,LIB-L-L004,LIB-L-L004-MENG
+3,MENT - Meningitis Test,Mandatory,MED-D-DDGT,MED-D-DDGT-MENT
+3,MERG - Methylergometrine,Mandatory,MED-D-DINJ,MED-D-DINJ-MERG
+3,MERG - Methylergometrine,Mandatory,MED-D-DORA,MED-D-DORA-MERG
+3,MESG - skin graft mesher,Mandatory,MED-E-ESUR,MED-E-ESUR-MESG
+3,"MESN - Mesh, surgical, NON absorbable",Mandatory,MED-S-SSUT,MED-S-SSUT-MESN
+3,META - Methylic Alcool,Mandatory,MED-S-SLAS,MED-S-SLAS-META
+3,METB - Methylene Blue,Mandatory,MED-S-SLAS,MED-S-SLAS-METB
+3,METF - Metformin,Mandatory,MED-D-DORA,MED-D-DORA-METF
+3,METN - Metronidazol,Mandatory,MED-D-DINJ,MED-D-DINJ-METN
+3,METN - Metronidazol,Mandatory,MED-D-DORA,MED-D-DORA-METN
+3,METO - Metoclopramide,Mandatory,MED-D-DINJ,MED-D-DINJ-METO
+3,METO - Metoclopramide,Mandatory,MED-D-DORA,MED-D-DORA-METO
+3,METR - Metrology tools,Mandatory,LOG-P-PTOO,LOG-P-PTOO-METR
+3,METY - Methyldopa,Mandatory,MED-D-DORA,MED-D-DORA-METY
+3,MEXA - Examination Material Module,Mandatory,MED-K-KMED,MED-K-KMED-MEXA
+3,MFAI - First Aid Drugs Module,Mandatory,MED-K-KMED,MED-K-KMED-MFAI
+3,"MFAX - Module, fax machine",Mandatory,LOG-K-KADM,LOG-K-KADM-MFAX
+3,"MFOS - Module, sampling food commodities",Mandatory,MED-K-KMED,MED-K-KMED-MFOS
+3,"MFRI - Module, refrigerator maintenance",Mandatory,LOG-K-KPRO,LOG-K-KPRO-MFRI
+3,"MFUR - Module, furniture",Mandatory,LOG-K-KADM,LOG-K-KADM-MFUR
+3,MGIA - (mycobacterial detection) accessories,Mandatory,MED-E-ELAE,MED-E-ELAE-MGIA
+3,MGIC - (mycobacterial detection) consumables,Mandatory,MED-E-ELAE,MED-E-ELAE-MGIC
+3,MGIE - Mycobacterial detection system,Mandatory,MED-E-ELAE,MED-E-ELAE-MGIE
+3,MGIT - Mycobacteria growth indicator,Mandatory,MED-S-SLAS,MED-S-SLAS-MGIT
+3,MGIT - Mycobacterial detection system,Mandatory,MED-E-ELAE,MED-E-ELAE-MGIT
+3,MHDE - Module hospital delivery room,Mandatory,MED-K-KMED,MED-K-KMED-MHDE
+3,"MHDW - Module, hardware",Mandatory,LOG-K-KPRO,LOG-K-KPRO-MHDW
+3,MHEX - Disinfectant medical material,Mandatory,MED-D-DDIS,MED-D-DDIS-MHEX
+3,"MHFB - Module, HF base station",Mandatory,LOG-K-KCOM,LOG-K-KCOM-MHFB
+3,"MHFM - Module, HF mobile station",Mandatory,LOG-K-KCOM,LOG-K-KCOM-MHFM
+3,"MHHE - Module hospital, equipment",Mandatory,MED-K-KMED,MED-K-KMED-MHHE
+3,"MHHM - Module hospital, medicines",Mandatory,MED-K-KMED,MED-K-KMED-MHHM
+3,"MHHS - Module hospital, renewable supplies",Mandatory,MED-K-KMED,MED-K-KMED-MHHS
+3,"MHHW - Module, Household water treatment",Mandatory,LOG-K-KWAT,LOG-K-KWAT-MHHW
+3,"MHIM - Module intensive care unit, medicines",Mandatory,MED-K-KMED,MED-K-KMED-MHIM
+3,"MHIS - Module intensive care unit, renew.suppl.",Mandatory,MED-K-KMED,MED-K-KMED-MHIS
+3,"MHLA - Module hospital, laboratory",Mandatory,MED-K-KMED,MED-K-KMED-MHLA
+3,MHMI - Module hospital divers,Mandatory,MED-K-KMED,MED-K-KMED-MHMI
+3,MHMI - Module stationary hospital kit,Mandatory,LOG-K-KADM,LOG-K-KADM-MHMI
+3,"MHOE - Module operation theatre, equipment",Mandatory,MED-K-KMED,MED-K-KMED-MHOE
+3,"MHOM - Operation theatre module, medicines",Mandatory,MED-K-KMED,MED-K-KMED-MHOM
+3,"MHOO - KIT HOSPITAL, ordering information",Mandatory,MED-K-KMED,MED-K-KMED-MHOO
+3,"MHOS - Module, hose",Mandatory,LOG-K-KWAT,LOG-K-KWAT-MHOS
+3,"MHOS - Operation theatre module, renew.supplies",Mandatory,MED-K-KMED,MED-K-KMED-MHOS
+3,MHPH - Module hospital central pharmacy,Mandatory,MED-K-KMED,MED-K-KMED-MHPH
+3,"MHTE - Module triage & OPD, equipment",Mandatory,MED-K-KMED,MED-K-KMED-MHTE
+3,"MHTM - Module triage & OPD, medicines",Mandatory,MED-K-KMED,MED-K-KMED-MHTM
+3,"MHTS - Module triage & OPD, medical supplies",Mandatory,MED-K-KMED,MED-K-KMED-MHTS
+3,"MHWE - Module ward, equipment",Mandatory,MED-K-KMED,MED-K-KMED-MHWE
+3,"MHWM - Module ward, medicines",Mandatory,MED-K-KMED,MED-K-KMED-MHWM
+3,"MHWS - Module ward, renewable supplies",Mandatory,MED-K-KMED,MED-K-KMED-MHWS
+3,MHXR - Module hospital radiology,Mandatory,MED-K-KMED,MED-K-KMED-MHXR
+3,MICA - (microscope) accessories,Mandatory,MED-E-ELAE,MED-E-ELAE-MICA
+3,MICE - Microscope,Mandatory,MED-E-ELAE,MED-E-ELAE-MICE
+3,MICO - Miconazole,Mandatory,MED-D-DEXT,MED-D-DEXT-MICO
+3,MICO - Miconazole,Mandatory,MED-D-DORA,MED-D-DORA-MICO
+3,MICR - Microscope,Mandatory,MED-E-ELAE,MED-E-ELAE-MICR
+3,MICS - (microscope) spare-parts,Mandatory,MED-E-ELAE,MED-E-ELAE-MICS
+3,MIDA - Midazolam,Mandatory,MED-D-DINJ,MED-D-DINJ-MIDA
+3,MIDB - Middlebrook,Mandatory,MED-S-SLAS,MED-S-SLAS-MIDB
+3,"MIDE - Module, identification",Mandatory,LOG-K-KPRO,LOG-K-KPRO-MIDE
+3,MIFP - Mifepristone,Mandatory,MED-D-DORA,MED-D-DORA-MIFP
+3,"MILI - Milk, infant",Mandatory,MED-N-NFOS,MED-N-NFOS-MILI
+3,MILK - Milk,Mandatory,LOG-A-AFOO,LOG-A-AFOO-MILK
+3,MILK - Milk,Mandatory,MED-N-NFOS,MED-N-NFOS-MILK
+3,MILL - Millet,Mandatory,MED-N-NFOO,MED-N-NFOO-MILL
+3,MILP - Microloop Pasteur,Mandatory,MED-E-ELAE,MED-E-ELAE-MILP
+3,MILT - Miltefosine,Mandatory,MED-D-DORA,MED-D-DORA-MILT
+3,MIMM - Module Immunization,Mandatory,MED-K-KMED,MED-K-KMED-MIMM
+3,MINB - Minimum to know,Mandatory,LOG-C-CBUI,LOG-C-CBUI-MINB
+3,"MINC - Module, incinerator",Mandatory,LOG-K-KWAT,LOG-K-KWAT-MINC
+3,"MINS - Module, installation",Mandatory,LOG-K-KCAM,LOG-K-KCAM-MINS
+3,MINU - Micronutrient complex,Mandatory,MED-N-NFOS,MED-N-NFOS-MINU
+3,MIRR - Mirror,Mandatory,MED-E-ESUD,MED-E-ESUD-MIRR
+3,MIRR - Mirror,Mandatory,LOG-P-PHYG,LOG-P-PHYG-MIRR
+3,MIRR - Mirror,Mandatory,LOG-P-PTOO,LOG-P-PTOO-MIRR
+3,MISC - Miscellaneous,Mandatory,LOG-A-ADAP,LOG-A-ADAP-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-A-AFOO,LOG-A-AFOO-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-A-AFUR,LOG-A-AFUR-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-A-ALIF,LOG-A-ALIF-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-A-ALST,LOG-A-ALST-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-A-AOFF,LOG-A-AOFF-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-A-ASTA,LOG-A-ASTA-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-C-CBUI,LOG-C-CBUI-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-C-CSHE,LOG-C-CSHE-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-C-CWAT,LOG-C-CWAT-MISC
+3,MISC - Miscellaneous,Mandatory,MED-D-DDGT,MED-D-DDGT-MISC
+3,MISC - Miscellaneous,Mandatory,MED-D-DEXO,MED-D-DEXO-MISC
+3,MISC - Miscellaneous,Mandatory,MED-D-DEXT,MED-D-DEXT-MISC
+3,MISC - Miscellaneous,Mandatory,MED-D-DINF,MED-D-DINF-MISC
+3,MISC - Miscellaneous,Mandatory,MED-D-DINJ,MED-D-DINJ-MISC
+3,MISC - Miscellaneous,Mandatory,MED-D-DORA,MED-D-DORA-MISC
+3,MISC - Miscellaneous,Mandatory,MED-D-DVAC,MED-D-DVAC-MISC
+3,MISC - Miscellaneous,Mandatory,MED-E-EANE,MED-E-EANE-MISC
+3,MISC - Miscellaneous,Mandatory,MED-E-EANT,MED-E-EANT-MISC
+3,MISC - Miscellaneous,Mandatory,MED-E-EDIM,MED-E-EDIM-MISC
+3,MISC - Miscellaneous,Mandatory,MED-E-EHOE,MED-E-EHOE-MISC
+3,MISC - Miscellaneous,Mandatory,MED-E-ELAE,MED-E-ELAE-MISC
+3,MISC - Miscellaneous,Mandatory,MED-E-ELIN,MED-E-ELIN-MISC
+3,MISC - Miscellaneous,Mandatory,MED-E-EMEQ,MED-E-EMEQ-MISC
+3,MISC - Miscellaneous,Mandatory,MED-E-EPSY,MED-E-EPSY-MISC
+3,MISC - Miscellaneous,Mandatory,MED-E-ESTE,MED-E-ESTE-MISC
+3,MISC - Miscellaneous,Mandatory,MED-E-ESUD,MED-E-ESUD-MISC
+3,MISC - Miscellaneous,Mandatory,MED-E-ESUF,MED-E-ESUF-MISC
+3,MISC - Miscellaneous,Mandatory,MED-E-ESUO,MED-E-ESUO-MISC
+3,MISC - Miscellaneous,Mandatory,MED-E-ESUR,MED-E-ESUR-MISC
+3,MISC - Miscellaneous,Mandatory,MED-E-ETMA,MED-E-ETMA-MISC
+3,MISC - Miscellaneous,Mandatory,MED-E-ETPO,MED-E-ETPO-MISC
+3,MISC - Miscellaneous,Mandatory,MED-S-SIGN,MED-S-SIGN-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-K-KADM,LOG-K-KADM-MISC
+3,MISC - Miscellaneous,Mandatory,MED-N-NFOO,MED-N-NFOO-MISC
+3,MISC - Miscellaneous,Mandatory,MED-N-NFOS,MED-N-NFOS-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-P-PCOL,LOG-P-PCOL-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-P-PCOM,LOG-P-PCOM-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-P-PCOO,LOG-P-PCOO-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-P-PELE,LOG-P-PELE-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-P-PHDW,LOG-P-PHDW-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-P-PHYG,LOG-P-PHYG-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-P-PIDE,LOG-P-PIDE-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-P-PLIG,LOG-P-PLIG-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-P-PPAC,LOG-P-PPAC-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-P-PPAI,LOG-P-PPAI-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-P-PSAF,LOG-P-PSAF-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-P-PTOO,LOG-P-PTOO-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-P-PX--,LOG-P-PX---MISC
+3,MISC - Miscellaneous,Mandatory,MED-S-SCTD,MED-S-SCTD-MISC
+3,MISC - Miscellaneous,Mandatory,MED-S-SDRE,MED-S-SDRE-MISC
+3,MISC - Miscellaneous,Mandatory,MED-S-SINS,MED-S-SINS-MISC
+3,MISC - Miscellaneous,Mandatory,MED-S-SLAS,MED-S-SLAS-MISC
+3,MISC - Miscellaneous,Mandatory,MED-S-SMST,MED-S-SMST-MISC
+3,MISC - Miscellaneous,Mandatory,MED-S-SMSU,MED-S-SMSU-MISC
+3,MISC - Miscellaneous,Mandatory,MED-S-SSUT,MED-S-SSUT-MISC
+3,MISC - Miscellaneous,Mandatory,MED-S-SDIM,MED-S-SDIM-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-T-TBOA,LOG-T-TBOA-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-T-TTOY,LOG-T-TTOY-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-T-TVEA,LOG-T-TVEA-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-T-TVEC,LOG-T-TVEC-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-T-TVEM,LOG-T-TVEM-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-T-TXTO,LOG-T-TXTO-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-T-TXYA,LOG-T-TXYA-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-C-CSEM,LOG-C-CSEM-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-C-CXHA,LOG-C-CXHA-MISC
+3,MISC - Miscellaneous,Mandatory,MED-D-DDIS,MED-D-DDIS-MISC
+3,MISC - Miscellaneous,Mandatory,MED-E-EPHY,MED-E-EPHY-MISC
+3,MISC - Miscellaneous,Mandatory,MED-E-ESIG,MED-E-ESIG-MISC
+3,MISC - Miscellaneous,Mandatory,MED-E-ESTR,MED-E-ESTR-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-K-KCAM,LOG-K-KCAM-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-K-KCOM,LOG-K-KCOM-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-K-KLIB,LIB-K-KLIB-MISC
+3,MISC - Miscellaneous,Mandatory,MED-K-KMED,MED-K-KMED-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-K-KPRO,LOG-K-KPRO-MISC
+3,MISC - Miscellaneous,Mandatory,MED-K-KSUD,MED-K-KSUD-MISC
+3,MISC - Miscellaneous,Mandatory,MED-K-KSUO,MED-K-KSUO-MISC
+3,MISC - Miscellaneous,Mandatory,MED-K-KSUR,MED-K-KSUR-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-K-KTRA,LOG-K-KTRA-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-K-KWAT,LOG-K-KWAT-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L000,LIB-L-L000-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L001,LIB-L-L001-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L002,LIB-L-L002-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L003,LIB-L-L003-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L004,LIB-L-L004-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L005,LIB-L-L005-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L006,LIB-L-L006-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L007,LIB-L-L007-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L008,LIB-L-L008-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L009,LIB-L-L009-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L010,LIB-L-L010-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L011,LIB-L-L011-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L012,LIB-L-L012-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L013,LIB-L-L013-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L014,LIB-L-L014-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L015,LIB-L-L015-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L016,LIB-L-L016-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L017,LIB-L-L017-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L018,LIB-L-L018-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L019,LIB-L-L019-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L020,LIB-L-L020-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L021,LIB-L-L021-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L022,LIB-L-L022-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L023,LIB-L-L023-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L024,LIB-L-L024-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L025,LIB-L-L025-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L026,LIB-L-L026-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L027,LIB-L-L027-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L028,LIB-L-L028-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L029,LIB-L-L029-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L030,LIB-L-L030-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L031,LIB-L-L031-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L040,LIB-L-L040-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L041,LIB-L-L041-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L042,LIB-L-L042-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L043,LIB-L-L043-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L044,LIB-L-L044-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L045,LIB-L-L045-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L046,LIB-L-L046-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L047,LIB-L-L047-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L048,LIB-L-L048-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L050,LIB-L-L050-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L051,LIB-L-L051-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L052,LIB-L-L052-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L060,LIB-L-L060-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L061,LIB-L-L061-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L062,LIB-L-L062-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L070,LIB-L-L070-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L071,LIB-L-L071-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L072,LIB-L-L072-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L073,LIB-L-L073-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L074,LIB-L-L074-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L075,LIB-L-L075-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L076,LIB-L-L076-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-L077,LIB-L-L077-MISC
+3,MISC - Miscellaneous,Mandatory,LIB-L-LEAF,LIB-L-LEAF-MISC
+3,MISC - Miscellaneous,Mandatory,MED-N-NFST,MED-N-NFST-MISC
+3,MISC - Miscellaneous,Mandatory,MED-N-NSST,MED-N-NSST-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-P-PXDV,LOG-P-PXDV-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-P-PXHO,LOG-P-PXHO-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-P-PXKO,LOG-P-PXKO-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-P-PXLI,LOG-P-PXLI-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-P-PXLO,LOG-P-PXLO-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-P-PXRO,LOG-P-PXRO-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-P-PXYN,LOG-P-PXYN-MISC
+3,MISC - Miscellaneous,Mandatory,MED-S-SXRS,MED-S-SXRS-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-T-THON,LOG-T-THON-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-T-TMER,LOG-T-TMER-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-T-TPEU,LOG-T-TPEU-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-T-TXHO,LOG-T-TXHO-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-T-TXLA,LOG-T-TXLA-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-T-TXME,LOG-T-TXME-MISC
+3,MISC - Miscellaneous,Mandatory,LOG-T-TXPE,LOG-T-TXPE-MISC
+3,MISC - Miscellaneous,Mandatory,SRV-X-XCUS,SRV-X-XCUS-MISC
+3,MISC - Miscellaneous,Mandatory,SRV-X-XFRE,SRV-X-XFRE-MISC
+3,MISC - Miscellaneous,Mandatory,SRV-X-XINS,SRV-X-XINS-MISC
+3,MISC - Miscellaneous,Mandatory,SRV-X-XMAI,SRV-X-XMAI-MISC
+3,MISC - Miscellaneous,Mandatory,SRV-X-XREN,SRV-X-XREN-MISC
+3,MISC - Miscellaneous,Mandatory,SRV-X-XREP,SRV-X-XREP-MISC
+3,MISC - Miscellaneous,Mandatory,SRV-X-XTAX,SRV-X-XTAX-MISC
+3,MISC - Miscellaneous,Mandatory,SRV-X-XTRA,SRV-X-XTRA-MISC
+3,MISP - Misoprostol,Mandatory,MED-D-DORA,MED-D-DORA-MISP
+3,MLAB - Laboratory Module,Mandatory,MED-K-KMED,MED-K-KMED-MLAB
+3,"MLIF - Module, team life",Mandatory,LOG-K-KADM,LOG-K-KADM-MLIF
+3,"MLIG - Module, lighting",Mandatory,LOG-K-KPRO,LOG-K-KPRO-MLIG
+3,"MLIS - Linen, single use",Mandatory,MED-K-KMED,MED-K-KMED-MLIS
+3,"MLOG - Module, logistic",Mandatory,LOG-K-KPRO,LOG-K-KPRO-MLOG
+3,"MMAI - Module, generator maintenance",Mandatory,LOG-K-KPRO,LOG-K-KPRO-MMAI
+3,"MMAI - Module, vehicle maintenance",Mandatory,LOG-K-KTRA,LOG-K-KTRA-MMAI
+3,MMHO - Module maintenance for HONDA engine,Mandatory,LOG-K-KPRO,LOG-K-KPRO-MMHO
+3,MMNS - Multiple micronutrient,Mandatory,MED-D-DORA,MED-D-DORA-MMNS
+3,"MMOD - Module, vehicle modification",Mandatory,LOG-K-KTRA,LOG-K-KTRA-MMOD
+3,MMSU - Medical-Surgical Module,Mandatory,MED-K-KMED,MED-K-KMED-MMSU
+3,MMYN - Module maintenance for YANMAR engine,Mandatory,LOG-K-KPRO,LOG-K-KPRO-MMYN
+3,MNUT - Nutrition Module,Mandatory,MED-K-KMED,MED-K-KMED-MNUT
+3,MOBP - Mobile phone,Mandatory,LOG-P-PCOM,LOG-P-PCOM-MOBP
+3,MODE - Modem,Mandatory,LOG-A-ADAP,LOG-A-ADAP-MODE
+3,MONI - Monitor,Mandatory,MED-E-EANE,MED-E-EANE-MONI
+3,MONI - Monitor,Mandatory,MED-E-EDIM,MED-E-EDIM-MONI
+3,MONI - Monitor,Mandatory,MED-E-EHOE,MED-E-EHOE-MONI
+3,MORP - Morphine,Mandatory,MED-D-DINJ,MED-D-DINJ-MORP
+3,MORP - Morphine,Mandatory,MED-D-DORA,MED-D-DORA-MORP
+3,MORT - Mortar,Mandatory,MED-E-ELAE,MED-E-ELAE-MORT
+3,MOSN - Mosquito net,Mandatory,LOG-P-PHDW,LOG-P-PHDW-MOSN
+3,MOSN - Mosquito net,Mandatory,LOG-T-TVEA,LOG-T-TVEA-MOSN
+3,MOSQ - Anti- Mosquito cream,Mandatory,MED-D-DEXT,MED-D-DEXT-MOSQ
+3,MOUS - Mouse,Mandatory,LOG-A-ADAP,LOG-A-ADAP-MOUS
+3,MOXI - Moxifloxacine,Mandatory,MED-D-DORA,MED-D-DORA-MOXI
+3,MPEP - Module Post Exposure Prophylaxis,Mandatory,MED-K-KMED,MED-K-KMED-MPEP
+3,"MPHO - Module, photocopier",Mandatory,LOG-K-KADM,LOG-K-KADM-MPHO
+3,"MPOS - Module, power supply",Mandatory,LOG-K-KPRO,LOG-K-KPRO-MPOS
+3,"MPPE - Module, personal protective equipment",Mandatory,LOG-K-KWAT,LOG-K-KWAT-MPPE
+3,"MPRI - Module, printer",Mandatory,LOG-K-KADM,LOG-K-KADM-MPRI
+3,"MPUD - Module, diesel motor pump",Mandatory,LOG-K-KWAT,LOG-K-KWAT-MPUD
+3,"MPUE - Module, electrical pump",Mandatory,LOG-K-KWAT,LOG-K-KWAT-MPUE
+3,"MPUP - Module, petrol motor pump",Mandatory,LOG-K-KWAT,LOG-K-KWAT-MPUP
+3,MREC - Recovery room,Mandatory,MED-K-KMED,MED-K-KMED-MREC
+3,"MREP - Module, repeater",Mandatory,LOG-K-KCOM,LOG-K-KCOM-MREP
+3,MRES - Resuscitation Module,Mandatory,MED-K-KMED,MED-K-KMED-MRES
+3,"MRTX - Module, radio telex",Mandatory,LOG-K-KCOM,LOG-K-KCOM-MRTX
+3,MSAM - Sampling Module,Mandatory,MED-K-KMED,MED-K-KMED-MSAM
+3,MSDS - Material safety data sheet,Mandatory,LOG-P-PSAF,LOG-P-PSAF-MSDS
+3,MSFB - MSF publication,Mandatory,LIB-L-L061,LIB-L-L061-MSFB
+3,"MSFD - MSF Publication, Digital",Mandatory,LIB-L-L061,LIB-L-L061-MSFD
+3,"MSFG - MSF, Guide",Mandatory,LIB-L-L061,LIB-L-L061-MSFG
+3,"MSHE - Module, shelter",Mandatory,LOG-K-KCAM,LOG-K-KCAM-MSHE
+3,"MSOL - Module, solar",Mandatory,LOG-K-KPRO,LOG-K-KPRO-MSOL
+3,"MSPR - Module, spraying",Mandatory,LOG-K-KWAT,LOG-K-KWAT-MSPR
+3,"MSTA - Module, stationery",Mandatory,LOG-K-KADM,LOG-K-KADM-MSTA
+3,MSTE - Sterilization Module,Mandatory,MED-K-KMED,MED-K-KMED-MSTE
+3,MSUR - Surgical Module,Mandatory,MED-K-KMED,MED-K-KMED-MSUR
+3,MSUT - Sutures Module,Mandatory,MED-K-KMED,MED-K-KMED-MSUT
+3,"MTAN - Module, water tank",Mandatory,LOG-K-KWAT,LOG-K-KWAT-MTAN
+3,"MTAP - Module, tap",Mandatory,LOG-K-KWAT,LOG-K-KWAT-MTAP
+3,"MTES - Module, water testing",Mandatory,LOG-K-KWAT,LOG-K-KWAT-MTES
+3,"MTOO - MODULE, tools",Mandatory,LOG-K-KPRO,LOG-K-KPRO-MTOO
+3,"MTOO - Module, tools for radio",Mandatory,LOG-K-KCOM,LOG-K-KCOM-MTOO
+3,"MTOO - Module, water tools",Mandatory,LOG-K-KWAT,LOG-K-KWAT-MTOO
+3,MTRA - Module Transfusion,Mandatory,MED-K-KMED,MED-K-KMED-MTRA
+3,"MTRE - Module, water treatment",Mandatory,LOG-K-KWAT,LOG-K-KWAT-MTRE
+3,MTUB - Module tuberculosis O2 concentrator,Mandatory,MED-K-KMED,MED-K-KMED-MTUB
+3,"MUHF - Module, UHF",Mandatory,LOG-K-KCOM,LOG-K-KCOM-MUHF
+3,MULT - Multimeter,Mandatory,LOG-P-PELE,LOG-P-PELE-MULT
+3,MULT - Multimeter,Mandatory,LOG-P-PTOO,LOG-P-PTOO-MULT
+3,MULT - Multivitamin,Mandatory,MED-D-DORA,MED-D-DORA-MULT
+3,MUSH - Mushrooms,Mandatory,LOG-A-AFOO,LOG-A-AFOO-MUSH
+3,MVAC - Manual vacuum asp cannula,Mandatory,MED-S-SCTD,MED-S-SCTD-MVAC
+3,MVAS - Manual vacuum asp syringe,Mandatory,MED-S-SCTD,MED-S-SCTD-MVAS
+3,"MVEH - Module, for vehicle",Mandatory,LOG-K-KTRA,LOG-K-KTRA-MVEH
+3,"MVHF - Module, VHF",Mandatory,LOG-K-KCOM,LOG-K-KCOM-MVHF
+3,"MWAM - Module, waste management",Mandatory,LOG-K-KWAT,LOG-K-KWAT-MWAM
+3,"MWHE - Module, second spare wheel",Mandatory,LOG-K-KTRA,LOG-K-KTRA-MWHE
+3,"MWIN - Module, winter preparation",Mandatory,LOG-K-KTRA,LOG-K-KTRA-MWIN
+3,NADC - NaDCC,Mandatory,MED-D-DDIS,MED-D-DDIS-NADC
+3,NADR - Nadroparin,Mandatory,MED-D-DINJ,MED-D-DINJ-NADR
+3,NAIL - Nail,Mandatory,LOG-P-PHDW,LOG-P-PHDW-NAIL
+3,"NAIS - Nail, Steinmann",Mandatory,MED-E-ESUR,MED-E-ESUR-NAIS
+3,NALC - N-Actetyl-L-Cysteine,Mandatory,MED-S-SLAS,MED-S-SLAS-NALC
+3,NALO - Nalaxone,Mandatory,MED-D-DINJ,MED-D-DINJ-NALO
+3,NANO - Nano station,Mandatory,LOG-A-ADAP,LOG-A-ADAP-NANO
+3,NAPP - Nappy,Mandatory,LOG-P-PHYG,LOG-P-PHYG-NAPP
+3,NASS - NAS package,Mandatory,LOG-A-ADAP,LOG-A-ADAP-NASS
+3,NEBB - Needle bone marrow asp./biopsy,Mandatory,MED-S-SINS,MED-S-SINS-NEBB
+3,NEBC - Nebulizer + compressor,Mandatory,MED-E-EHOE,MED-E-EHOE-NEBC
+3,"NEBU - Nebulizer, ultrasonic",Mandatory,MED-E-EHOE,MED-E-EHOE-NEBU
+3,NEED - Needle,Mandatory,LOG-P-PTOO,LOG-P-PTOO-NEED
+3,NEED - Single use needle,Mandatory,MED-S-SINS,MED-S-SINS-NEED
+3,"NEET - Needle,'Tronculaire'",Mandatory,MED-E-ESUD,MED-E-ESUD-NEET
+3,NEGA - Surgical needle GA,Mandatory,MED-E-ESUR,MED-E-ESUR-NEGA
+3,NEHC - Neddle Holder Of Castraviejo,Mandatory,MED-E-ESUO,MED-E-ESUO-NEHC
+3,NEHC - Needle Holder of Crile-Wood,Mandatory,MED-E-ESUR,MED-E-ESUR-NEHC
+3,NEHH - Needle holder of Heaney,Mandatory,MED-E-ESUR,MED-E-ESUR-NEHH
+3,NEHM - Needle Holder Of Mayo-Hegar,Mandatory,MED-E-ESUR,MED-E-ESUR-NEHM
+3,NEHN - Needle holder Neivert,Mandatory,MED-E-ESUR,MED-E-ESUR-NEHN
+3,"NEHS - Needle holder, Stratte",Mandatory,MED-E-ESUR,MED-E-ESUR-NEHS
+3,NEIO - Intra-osseaous needle,Mandatory,MED-S-SINS,MED-S-SINS-NEIO
+3,NELI - Ligature needles,Mandatory,MED-E-ESUR,MED-E-ESUR-NELI
+3,NEOB - Neonatal care book,Mandatory,LIB-L-L010,LIB-L-L010-NEOB
+3,NEOG - Neonatal care guide,Mandatory,LIB-L-L010,LIB-L-L010-NEOG
+3,NEOS - Neostigmine,Mandatory,MED-D-DINJ,MED-D-DINJ-NEOS
+3,"NERD - Needle, spinal anaesthesia",Mandatory,MED-S-SINS,MED-S-SINS-NERD
+3,NESC - (nerve stimulator) consumables,Mandatory,MED-E-EANE,MED-E-EANE-NESC
+3,"NESD - Needle, spinal",Mandatory,MED-S-SINS,MED-S-SINS-NESD
+3,NESE - Nerve stimulator,Mandatory,MED-E-EANE,MED-E-EANE-NESE
+3,NESU - Needle for sutures,Mandatory,MED-E-ESUR,MED-E-ESUR-NESU
+3,NETB - Boundary net,Mandatory,LOG-P-PSAF,LOG-P-PSAF-NETB
+3,NETG - Internet/Extranet/Intranet Guide,Mandatory,LIB-L-L044,LIB-L-L044-NETG
+3,NETS - Shade net,Mandatory,LOG-C-CSHE,LOG-C-CSHE-NETS
+3,NEVI - Nevirapine,Mandatory,MED-D-DORA,MED-D-DORA-NEVI
+3,NFBE - DOCUMENTS FOR BEANS PURCHASE,Mandatory,LIB-L-LEAF,LIB-L-LEAF-NFBE
+3,NFCA - DOCUMENTS FOR CASSAVA PURCHASE,Mandatory,LIB-L-LEAF,LIB-L-LEAF-NFCA
+3,NFLE - DOCUMENTS FOR LENTILS PURCHASE,Mandatory,LIB-L-LEAF,LIB-L-LEAF-NFLE
+3,NFMA - DOCUMENTS FOR MAIZE PURCHASE,Mandatory,LIB-L-LEAF,LIB-L-LEAF-NFMA
+3,NFMI - DOCUMENTS FOR MILLET PURCHASE,Mandatory,LIB-L-LEAF,LIB-L-LEAF-NFMI
+3,NFOI - DOCUMENTS FOR OIL PURCHASE,Mandatory,LIB-L-LEAF,LIB-L-LEAF-NFOI
+3,NFPE - DOCUMENTS FOR PEAS PURCHASE,Mandatory,LIB-L-LEAF,LIB-L-LEAF-NFPE
+3,NFRI - DOCUMENTS FOR RICE PURCHASE,Mandatory,LIB-L-LEAF,LIB-L-LEAF-NFRI
+3,NFSA - DOCUMENTS FOR SALT PURCHASE,Mandatory,LIB-L-LEAF,LIB-L-LEAF-NFSA
+3,NFSO - DOCUMENTS FOR SORGHUM PURCHASE,Mandatory,LIB-L-LEAF,LIB-L-LEAF-NFSO
+3,NFSU - DOCUMENTS FOR SUGAR PURCHASE,Mandatory,LIB-L-LEAF,LIB-L-LEAF-NFSU
+3,NFWH - DOCUMENTS FOR WHEAT PURCHASE,Mandatory,LIB-L-LEAF,LIB-L-LEAF-NFWH
+3,NHMH - Needle holder Mayo-Hegar HM,Mandatory,MED-E-ESUR,MED-E-ESUR-NHMH
+3,NIAC - Niacin test,Mandatory,MED-D-DDGT,MED-D-DDGT-NIAC
+3,NIBE - 4-NITROBENZOIC ACID,Mandatory,MED-S-SLAS,MED-S-SLAS-NIBE
+3,NICA - Nicardipine,Mandatory,MED-D-DINJ,MED-D-DINJ-NICA
+3,NICO - Nicotinamide,Mandatory,MED-D-DORA,MED-D-DORA-NICO
+3,NICU - Checklist Neonatal Intensive Care Unit,Mandatory,MED-I-IPED,MED-I-IPED-NICU
+3,NIFE - Nifedipine,Mandatory,MED-D-DORA,MED-D-DORA-NIFE
+3,NIFU - Nifurtimox,Mandatory,MED-D-DORA,MED-D-DORA-NIFU
+3,NOOD - Noodles,Mandatory,LOG-A-AFOO,LOG-A-AFOO-NOOD
+3,NOTP - Notepad,Mandatory,LOG-A-ASTA,LOG-A-ASTA-NOTP
+3,NRES - Newborn child resuscitation,Mandatory,MED-E-ETMA,MED-E-ETMA-NRES
+3,NSBI - CHECKLIST FOR BISCUIT QUALITY CONTROL,Mandatory,LIB-L-LEAF,LIB-L-LEAF-NSBI
+3,NSCO - CHECKLIST NFOS CONTROL UPON RECEIPT,Mandatory,LIB-L-LEAF,LIB-L-LEAF-NSCO
+3,NSPF - CHECKLIST PRECOOKED FORTIFIED FLOOR QC,Mandatory,LIB-L-LEAF,LIB-L-LEAF-NSPF
+3,NSRU - CHECKLIST FOR RUF PASTE QUALITY CONTROL,Mandatory,LIB-L-LEAF,LIB-L-LEAF-NSRU
+3,NSSA - NFOS SAMPLING REPORT FORM,Mandatory,LIB-L-LEAF,LIB-L-LEAF-NSSA
+3,NSTM - CHECKLIST FOR THER. MILK QUALITY CONTROL,Mandatory,LIB-L-LEAF,LIB-L-LEAF-NSTM
+3,"NURB - Nurse, Book",Mandatory,LIB-L-L029,LIB-L-L029-NURB
+3,"NURG - Nurse, Guide",Mandatory,LIB-L-L029,LIB-L-L029-NURG
+3,"NUTB - Nutrition, Book",Mandatory,LIB-L-L016,LIB-L-L016-NUTB
+3,"NUTD - Nutrition, Digital Media",Mandatory,LIB-L-L016,LIB-L-L016-NUTD
+3,NUTG - Galvanized nut,Mandatory,LOG-P-PHDW,LOG-P-PHDW-NUTG
+3,"NUTG - Nutrition, Guide",Mandatory,LIB-L-L016,LIB-L-L016-NUTG
+3,NYST - Nystatin,Mandatory,MED-D-DORA,MED-D-DORA-NYST
+3,OADC - OADC,Mandatory,MED-S-SLAS,MED-S-SLAS-OADC
+3,OBFI - Library Kit Obstetric Fistula,Mandatory,LIB-K-KLIB,LIB-K-KLIB-OBFI
+3,"OBSB - Obstetrics, Book",Mandatory,LIB-L-L009,LIB-L-L009-OBSB
+3,"OBSG - Obstetrics, Guide",Mandatory,LIB-L-L009,LIB-L-L009-OBSG
+3,"OFFB - Microsoft Office, Book",Mandatory,LIB-L-L044,LIB-L-L044-OFFB
+3,OFLO - Oflaxacin,Mandatory,MED-S-SLAS,MED-S-SLAS-OFLO
+3,OILC - Oil can,Mandatory,LOG-P-PTOO,LOG-P-PTOO-OILC
+3,OILE - Engine oil,Mandatory,LOG-T-TVEC,LOG-T-TVEC-OILE
+3,OILG - Gear oil,Mandatory,LOG-T-TVEC,LOG-T-TVEC-OILG
+3,OILI - Immersion Oil,Mandatory,MED-S-SLAS,MED-S-SLAS-OILI
+3,OILP - Oil paint,Mandatory,LOG-P-PPAI,LOG-P-PPAI-OILP
+3,OILR - Oil,Mandatory,LOG-T-TVEC,LOG-T-TVEC-OILR
+3,OILS - Oil,Mandatory,LOG-A-AFOO,LOG-A-AFOO-OILS
+3,OILS - Oil spray for instruments,Mandatory,MED-E-ESUR,MED-E-ESUR-OILS
+3,OILS - Oil syringe,Mandatory,LOG-P-PTOO,LOG-P-PTOO-OILS
+3,OILT - Transmission oil,Mandatory,LOG-T-TVEC,LOG-T-TVEC-OILT
+3,"OILV - OIL, VEGETABLE",Mandatory,MED-N-NFOO,MED-N-NFOO-OILV
+3,OINT - International order,Mandatory,LOG-A-ALST,LOG-A-ALST-OINT
+3,OMEP - Omeprazole,Mandatory,MED-D-DINJ,MED-D-DINJ-OMEP
+3,OMEP - Omeprazole,Mandatory,MED-D-DORA,MED-D-DORA-OMEP
+3,ONDA - Ondasetron,Mandatory,MED-D-DORA,MED-D-DORA-ONDA
+3,OPEN - Opener,Mandatory,LOG-P-PCOO,LOG-P-PCOO-OPEN
+3,"OPHB - Ophthalmology, Book",Mandatory,LIB-L-L011,LIB-L-L011-OPHB
+3,OPHT - Ophtalmoscope,Mandatory,MED-E-EMEQ,MED-E-EMEQ-OPHT
+3,OPRO - Project order,Mandatory,LOG-A-ALST,LOG-A-ALST-OPRO
+3,ORDG - Order lists,Mandatory,LIB-L-L045,LIB-L-L045-ORDG
+3,OREQ - Order request,Mandatory,LOG-A-ALST,LOG-A-ALST-OREQ
+3,ORIR - Orifice reducer cap,Mandatory,MED-S-SCTD,MED-S-SCTD-ORIR
+3,ORMA - Mix for rehydration of malnourished,Mandatory,MED-D-DORA,MED-D-DORA-ORMA
+3,ORSA - Ors Rehydratation Salt,Mandatory,MED-D-DORA,MED-D-DORA-ORSA
+3,OSEL - Oseltamivir,Mandatory,MED-D-DORA,MED-D-DORA-OSEL
+3,OSTS - Osteotome Of Stille,Mandatory,MED-E-ESUR,MED-E-ESUR-OSTS
+3,OTOS - Otoscope,Mandatory,MED-E-EMEQ,MED-E-EMEQ-OTOS
+3,OVER - Overall,Mandatory,LOG-P-PSAF,LOG-P-PSAF-OVER
+3,OVER - Overall protective,Mandatory,MED-E-ELIN,MED-E-ELIN-OVER
+3,OXYB - Oxybuprocaine,Mandatory,MED-D-DEXO,MED-D-DEXO-OXYB
+3,OXYM - Oxymeter,Mandatory,MED-E-EANE,MED-E-EANE-OXYM
+3,OXYM - Oxymeter Pulse,Mandatory,MED-E-EHOE,MED-E-EHOE-OXYM
+3,OXYT - Oxytocine,Mandatory,MED-D-DINJ,MED-D-DINJ-OXYT
+3,PACK - Icepack / cooling pack,Mandatory,LOG-P-PCOL,LOG-P-PCOL-PACK
+3,PADC - Cast padding,Mandatory,MED-S-SDRE,MED-S-SDRE-PADC
+3,PADD - Paddle spoon,Mandatory,LOG-P-PCOO,LOG-P-PCOO-PADD
+3,PADH - Hygienic pad,Mandatory,LOG-P-PHYG,LOG-P-PHYG-PADH
+3,PADL - Paddle,Mandatory,LOG-T-TBOA,LOG-T-TBOA-PADL
+3,PADL - Padlock,Mandatory,LOG-P-PPAC,LOG-P-PPAC-PADL
+3,PADM - Menstrual pad,Mandatory,MED-S-SDRE,MED-S-SDRE-PADM
+3,PADP - Paper pad,Mandatory,LOG-A-ASTA,LOG-A-ASTA-PADP
+3,PAIN - Paint,Mandatory,LOG-T-TVEC,LOG-T-TVEC-PAIN
+3,PALL - Pallet,Mandatory,LOG-P-PPAC,LOG-P-PPAC-PALL
+3,PALL - Pallet knife,Mandatory,MED-E-EMEQ,MED-E-EMEQ-PALL
+3,PANE - Solar panel,Mandatory,LOG-P-PLIG,LOG-P-PLIG-PANE
+3,PANF - Frying pan,Mandatory,LOG-P-PCOL,LOG-P-PCOL-PANF
+3,PANS - Stewing pan,Mandatory,LOG-P-PCOO,LOG-P-PCOO-PANS
+3,PAPE - Paper,Mandatory,LOG-A-ASTA,LOG-A-ASTA-PAPE
+3,PAPE - Paper,Mandatory,MED-E-ELAE,MED-E-ELAE-PAPE
+3,"PAPF - Paper, filter",Mandatory,MED-E-ELAE,MED-E-ELAE-PAPF
+3,PAPK - Kitchen paper,Mandatory,LOG-P-PHYG,LOG-P-PHYG-PAPK
+3,"PAPN - Sheet, sterilization, non-woven",Mandatory,MED-E-ESTE,MED-E-ESTE-PAPN
+3,PAPP - PROTECTION PAPER,Mandatory,MED-E-ELAE,MED-E-ELAE-PAPP
+3,PAPR - Paper roll,Mandatory,LOG-A-AOFF,LOG-A-AOFF-PAPR
+3,PAPS - Sandpaper,Mandatory,LOG-P-PHDW,LOG-P-PHDW-PAPS
+3,PAPS - Sterilization paper,Mandatory,MED-E-ESTE,MED-E-ESTE-PAPS
+3,PAPT - Toilet paper,Mandatory,LOG-P-PHYG,LOG-P-PHYG-PAPT
+3,"PAPW - Paper, Whatman",Mandatory,MED-E-ELAE,MED-E-ELAE-PAPW
+3,PARA - Paracetamol,Mandatory,MED-D-DINJ,MED-D-DINJ-PARA
+3,PARA - Paracetamol,Mandatory,MED-D-DORA,MED-D-DORA-PARA
+3,PARO - Paromomycin,Mandatory,MED-D-DINJ,MED-D-DINJ-PARO
+3,PART - Particles,Mandatory,LOG-P-PPAC,LOG-P-PPAC-PART
+3,PARX - Paroxetine,Mandatory,MED-D-DORA,MED-D-DORA-PARX
+3,PASA - Para-aminosalicilic acid (PAS),Mandatory,MED-D-DORA,MED-D-DORA-PASA
+3,PASA - Para-aminosalicylic acid (PAS),Mandatory,MED-S-SLAS,MED-S-SLAS-PASA
+3,PASA - SCOOP for Para-aminosialicylic acid,Mandatory,MED-S-SMSU,MED-S-SMSU-PASA
+3,PASD - Pastels for drawing,Mandatory,MED-E-EPSY,MED-E-EPSY-PASD
+3,PASS - Para-aminosalicilic sodium (PAS),Mandatory,MED-D-DORA,MED-D-DORA-PASS
+3,PASS - SCOOP for Para-aminosalicilic sodium,Mandatory,MED-S-SMSU,MED-S-SMSU-PASS
+3,PAST - Paste,Mandatory,LOG-T-TVEC,LOG-T-TVEC-PAST
+3,PCRA - PCR accessories,Mandatory,MED-E-ELAE,MED-E-ELAE-PCRA
+3,PCRC - PCR consumables,Mandatory,MED-E-ELAE,MED-E-ELAE-PCRC
+3,PCRE - PCR equipment,Mandatory,MED-E-ELAE,MED-E-ELAE-PCRE
+3,PCRS - PCR spare-parts,Mandatory,MED-E-ELAE,MED-E-ELAE-PCRS
+3,PCRT - PCR test & control,Mandatory,MED-E-ELAE,MED-E-ELAE-PCRT
+3,PEAS - Peas,Mandatory,LOG-A-AFOO,LOG-A-AFOO-PEAS
+3,PEAS - Peas,Mandatory,MED-N-NFOO,MED-N-NFOO-PEAS
+3,PEDB - paediatric,Mandatory,LIB-L-L016,LIB-L-L016-PEDB
+3,"PEDB - Paediatrics, Book",Mandatory,LIB-L-L010,LIB-L-L010-PEDB
+3,"PEDG - Paediatrics, Guide",Mandatory,LIB-L-L010,LIB-L-L010-PEDG
+3,PEDI - Petri dish,Mandatory,MED-E-ELAE,MED-E-ELAE-PEDI
+3,PEFM - Peak-flow meter,Mandatory,MED-E-EMEQ,MED-E-EMEQ-PEFM
+3,PEGM - Mud peg,Mandatory,LOG-C-CSHE,LOG-C-CSHE-PEGM
+3,PEGS - Sand peg,Mandatory,LOG-C-CSHE,LOG-C-CSHE-PEGS
+3,PEGW - Wind peg,Mandatory,LOG-C-CSHE,LOG-C-CSHE-PEGW
+3,PENB - Ball point pen,Mandatory,LOG-A-ASTA,LOG-A-ASTA-PENB
+3,PENB - Penicilline Benzathine,Mandatory,MED-D-DINJ,MED-D-DINJ-PENB
+3,PENC - Pencil,Mandatory,LOG-A-ASTA,LOG-A-ASTA-PENC
+3,PENC - Pencil,Mandatory,MED-E-ELAE,MED-E-ELAE-PENC
+3,PENC - Pencil,Mandatory,MED-E-EPSY,MED-E-EPSY-PENC
+3,PENF - Felt-tip pen,Mandatory,LOG-A-ASTA,LOG-A-ASTA-PENF
+3,PENG - Penicilline Benzyl,Mandatory,MED-D-DINJ,MED-D-DINJ-PENG
+3,PENM - Marker,Mandatory,LOG-A-ASTA,LOG-A-ASTA-PENM
+3,PENP - Penicilline Procaine,Mandatory,MED-D-DINJ,MED-D-DINJ-PENP
+3,PENS - Pen for sterilization sheets,Mandatory,MED-E-ESTE,MED-E-ESTE-PENS
+3,PENS - Pencil sharpener,Mandatory,LOG-A-ASTA,LOG-A-ASTA-PENS
+3,PENT - Pentamidine,Mandatory,MED-D-DINJ,MED-D-DINJ-PENT
+3,PENV - Penicilline Phenoxymethyl,Mandatory,MED-D-DORA,MED-D-DORA-PENV
+3,PEPP - Pepper,Mandatory,LOG-A-AFOO,LOG-A-AFOO-PEPP
+3,PERI - Peritofix,Mandatory,MED-S-SCTD,MED-S-SCTD-PERI
+3,PERM - Permethrin,Mandatory,MED-D-DEXT,MED-D-DEXT-PERM
+3,"PERS - Perforator, Smellie",Mandatory,MED-E-ESUR,MED-E-ESUR-PERS
+3,PETR - Petrol,Mandatory,LOG-T-TVEC,LOG-T-TVEC-PETR
+3,PFFL - Precooked fortified flour,Mandatory,MED-N-NFOS,MED-N-NFOS-PFFL
+3,PFFM - Precooked fortified flour with milk,Mandatory,MED-N-NFOS,MED-N-NFOS-PFFM
+3,PHEN - Phenobarbital,Mandatory,MED-D-DINJ,MED-D-DINJ-PHEN
+3,PHEN - Phenobarbital,Mandatory,MED-D-DORA,MED-D-DORA-PHEN
+3,PHEN - Phenol,Mandatory,MED-S-SLAS,MED-S-SLAS-PHEN
+3,PHEY - Phenytoin,Mandatory,MED-D-DINJ,MED-D-DINJ-PHEY
+3,PHEY - Phenytoine,Mandatory,MED-D-DORA,MED-D-DORA-PHEY
+3,PHMA - (pH meter) accessories,Mandatory,MED-E-ELAE,MED-E-ELAE-PHMA
+3,PHMC - (pH meter) consumables,Mandatory,MED-E-ELAE,MED-E-ELAE-PHMC
+3,PHME - pH meter,Mandatory,MED-E-ELAE,MED-E-ELAE-PHME
+3,PHME - pH meter,Mandatory,MED-S-SLAS,MED-S-SLAS-PHME
+3,PHOT - Photocopier,Mandatory,LOG-A-AOFF,LOG-A-AOFF-PHOT
+3,PHOT - Phototherapy unit for infants,Mandatory,MED-E-EHOE,MED-E-EHOE-PHOT
+3,"PHYB - Physiotherapy, Book",Mandatory,LIB-L-L008,LIB-L-L008-PHYB
+3,PHYT - Phytomenadione,Mandatory,MED-D-DINJ,MED-D-DINJ-PHYT
+3,PHYT - Phytomenadione,Mandatory,MED-D-DORA,MED-D-DORA-PHYT
+3,"PIAA - Pipette, automatic, adjustable",Mandatory,MED-E-ELAE,MED-E-ELAE-PIAA
+3,"PIAF - Pipette, automatic, fixed volume",Mandatory,MED-E-ELAE,MED-E-ELAE-PIAF
+3,"PIAM - Pipette, automatic,  multichannel",Mandatory,MED-E-ELAE,MED-E-ELAE-PIAM
+3,PICA - Pipette calibration kit,Mandatory,MED-E-ELAE,MED-E-ELAE-PICA
+3,PICC - Peripherally-inserted central catheter,Mandatory,MED-S-SINS,MED-S-SINS-PICC
+3,PICK - Pickaxe,Mandatory,LOG-P-PTOO,LOG-P-PTOO-PICK
+3,"PIDF - Pipette, disposable, fixed volume",Mandatory,MED-E-ELAE,MED-E-ELAE-PIDF
+3,"PIFA - Pipette filler, automatic",Mandatory,MED-E-ELAE,MED-E-ELAE-PIFA
+3,PIFI - Pipette filler,Mandatory,MED-E-ELAE,MED-E-ELAE-PIFI
+3,"PIGP - Pipette, glass, Pasteur",Mandatory,MED-E-ELAE,MED-E-ELAE-PIGP
+3,PILO - Pilocarpine,Mandatory,MED-D-DEXO,MED-D-DEXO-PILO
+3,"PIMA - Multipipette (Eppendorf), automatic",Mandatory,MED-E-ELAE,MED-E-ELAE-PIMA
+3,PIND - Drawing pins,Mandatory,LOG-A-ASTA,LOG-A-ASTA-PIND
+3,PING - PIN,Mandatory,MED-E-ESUF,MED-E-ESUF-PING
+3,PINS - Safety Pin,Mandatory,MED-S-SMSU,MED-S-SMSU-PINS
+3,PINS - Split pin,Mandatory,LOG-P-PHDW,LOG-P-PHDW-PINS
+3,"PIPC - Pipette, plastic, cotton",Mandatory,MED-E-ELAE,MED-E-ELAE-PIPC
+3,PIPG - Galvanized pipe,Mandatory,LOG-C-CWAT,LOG-C-CWAT-PIPG
+3,"PIPG - Pipette, plastic, graduated",Mandatory,MED-E-ELAE,MED-E-ELAE-PIPG
+3,PIPS - Piperacillin sodium,Mandatory,MED-S-SLAS,MED-S-SLAS-PIPS
+3,"PIPT - Pipette, transfer",Mandatory,MED-E-ELAE,MED-E-ELAE-PIPT
+3,PIPV - PVC pipe,Mandatory,LOG-C-CWAT,LOG-C-CWAT-PIPV
+3,PIPW - Pipe wall mount,Mandatory,LOG-C-CWAT,LOG-C-CWAT-PIPW
+3,"PITG - PIN, transfixing",Mandatory,MED-E-ESUF,MED-E-ESUF-PITG
+3,PLAB - Plague book,Mandatory,LIB-L-L004,LIB-L-L004-PLAB
+3,"PLAB - Planning, Book",Mandatory,LIB-L-L025,LIB-L-L025-PLAB
+3,"PLAG - Plague, Guide",Mandatory,LIB-L-L004,LIB-L-L004-PLAG
+3,"PLAG - Planning, Guide",Mandatory,LIB-L-L025,LIB-L-L025-PLAG
+3,PLAN - Plane,Mandatory,LOG-P-PTOO,LOG-P-PTOO-PLAN
+3,PLAP - Protection plate,Mandatory,LOG-T-TVEM,LOG-T-TVEM-PLAP
+3,PLAQ - Information sheet,Mandatory,LOG-T-TVEM,LOG-T-TVEM-PLAQ
+3,PLAS - Plasma Substitute,Mandatory,MED-D-DINF,MED-D-DINF-PLAS
+3,PLAS - Plastic sheeting,Mandatory,LOG-C-CSHE,LOG-C-CSHE-PLAS
+3,PLAT - Plate,Mandatory,MED-E-ELAE,MED-E-ELAE-PLAT
+3,PLAT - Plate,Mandatory,LOG-P-PCOO,LOG-P-PCOO-PLAT
+3,PLAT - Plate,Mandatory,LOG-T-TVEA,LOG-T-TVEA-PLAT
+3,"PLIE - Plier, flat nose",Mandatory,MED-E-ESUR,MED-E-ESUR-PLIE
+3,PLIE - Pliers,Mandatory,LOG-P-PTOO,LOG-P-PTOO-PLIE
+3,PLSH - Plastic foil,Mandatory,LOG-A-ASTA,LOG-A-ASTA-PLSH
+3,PLUA - Adaptor plug,Mandatory,LOG-P-PELE,LOG-P-PELE-PLUA
+3,PLUG - Plug,Mandatory,LOG-P-PELE,LOG-P-PELE-PLUG
+3,PLUG - Plug,Mandatory,LOG-P-PHDW,LOG-P-PHDW-PLUG
+3,PLUG - Plug,Mandatory,LOG-P-PXKO,LOG-P-PXKO-PLUG
+3,PLUG - Plug for DAVEY pump,Mandatory,LOG-P-PXDV,LOG-P-PXDV-PLUG
+3,PLUG - Plug for HONDA engine,Mandatory,LOG-P-PXHO,LOG-P-PXHO-PLUG
+3,PLUG - Plug for ROBIN engine,Mandatory,LOG-P-PXRO,LOG-P-PXRO-PLUG
+3,PLUG - Spark plug,Mandatory,LOG-P-PX--,LOG-P-PX---PLUG
+3,PLUG - Spark plug  for YAMAHA,Mandatory,LOG-T-TXYA,LOG-T-TXYA-PLUG
+3,PMVA - Pelvis for MVA procedure,Mandatory,MED-E-ETMA,MED-E-ETMA-PMVA
+3,POCK - Pocket,Mandatory,LOG-P-PPAC,LOG-P-PPAC-POCK
+3,POCU - Positioning cushions,Mandatory,MED-E-EDIM,MED-E-EDIM-POCU
+3,PODO - Podophyllotoxine,Mandatory,MED-D-DEXT,MED-D-DEXT-PODO
+3,"POLB - Poliomyelitis, Book",Mandatory,LIB-L-L003,LIB-L-L003-POLB
+3,POLE - Pole,Mandatory,LOG-C-CSHE,LOG-C-CSHE-POLE
+3,"POLG - Policy paper, guide",Mandatory,LIB-L-L001,LIB-L-L001-POLG
+3,PONC - Poncho,Mandatory,LOG-P-PSAF,LOG-P-PSAF-PONC
+3,"POPG - Population, Guide",Mandatory,LIB-L-L061,LIB-L-L061-POPG
+3,POPH - Potassium phosphate,Mandatory,MED-S-SLAS,MED-S-SLAS-POPH
+3,POTC - Potassium Chloride,Mandatory,MED-D-DINJ,MED-D-DINJ-POTC
+3,POTC - Potassium Chloride,Mandatory,MED-D-DORA,MED-D-DORA-POTC
+3,POTP - Potassium permanganate,Mandatory,MED-S-SLAS,MED-S-SLAS-POTP
+3,POTT - Potty,Mandatory,MED-E-EMEQ,MED-E-EMEQ-POTT
+3,PRAZ - Praziquantel,Mandatory,MED-D-DORA,MED-D-DORA-PRAZ
+3,PREC - Pressure cleaner,Mandatory,LOG-P-PTOO,LOG-P-PTOO-PREC
+3,PRED - Prednisolone,Mandatory,MED-D-DORA,MED-D-DORA-PRED
+3,PREG - Pregnancy Test,Mandatory,MED-D-DDGT,MED-D-DDGT-PREG
+3,PRER - Prerequisites,Mandatory,LOG-C-CBUI,LOG-C-CBUI-PRER
+3,PRES - Hydraulic Press,Mandatory,LOG-P-PTOO,LOG-P-PTOO-PRES
+3,PRES - Wood preservative,Mandatory,LOG-P-PPAI,LOG-P-PPAI-PRES
+3,PRIC - (x-ray printer Agfa Drystar 5300) consum,Mandatory,MED-E-EDIM,MED-E-EDIM-PRIC
+3,PRIE - x-ray printer,Mandatory,MED-E-EDIM,MED-E-EDIM-PRIE
+3,PRIM - Primaquine,Mandatory,MED-D-DORA,MED-D-DORA-PRIM
+3,PRIN - Printer,Mandatory,LOG-A-ADAP,LOG-A-ADAP-PRIN
+3,PRIP - Primer paint,Mandatory,LOG-P-PPAI,LOG-P-PPAI-PRIP
+3,PROB - Probe,Mandatory,MED-E-ESUD,MED-E-ESUD-PROB
+3,PROB - Probe,Mandatory,MED-E-ESUR,MED-E-ESUR-PROB
+3,PROB - Probenecid,Mandatory,MED-D-DORA,MED-D-DORA-PROB
+3,PROJ - Projector,Mandatory,LOG-A-AOFF,LOG-A-AOFF-PROJ
+3,PROM - Promethazine,Mandatory,MED-D-DINJ,MED-D-DINJ-PROM
+3,PROM - Promethazine,Mandatory,MED-D-DORA,MED-D-DORA-PROM
+3,PRON - Prothionamide,Mandatory,MED-D-DORA,MED-D-DORA-PRON
+3,PROP - Propeller for YAMAHA,Mandatory,LOG-T-TXYA,LOG-T-TXYA-PROP
+3,PROT - Protamine,Mandatory,MED-D-DINJ,MED-D-DINJ-PROT
+3,PRPL - Priming plug,Mandatory,LOG-P-PX--,LOG-P-PX---PRPL
+3,"PSYB - Psychiatry, Book",Mandatory,LIB-L-L027,LIB-L-L027-PSYB
+3,"PSYD - Psychiatry/Mental Health, Digital Media",Mandatory,LIB-L-L027,LIB-L-L027-PSYD
+3,"PSYG - Mental health, guide",Mandatory,LIB-L-L027,LIB-L-L027-PSYG
+3,PUDD - Pudding,Mandatory,LOG-A-AFOO,LOG-A-AFOO-PUDD
+3,PULL - Pulley,Mandatory,LOG-P-PHDW,LOG-P-PHDW-PULL
+3,PULL - Pulley,Mandatory,LOG-P-PTOO,LOG-P-PTOO-PULL
+3,PUMB - Breast pump,Mandatory,MED-E-EMEQ,MED-E-EMEQ-PUMB
+3,PUMD - Diesel motor pump,Mandatory,LOG-C-CWAT,LOG-C-CWAT-PUMD
+3,PUME - Electrical motor pump,Mandatory,LOG-C-CWAT,LOG-C-CWAT-PUME
+3,PUMF - Foot-operated pump,Mandatory,LOG-C-CWAT,LOG-C-CWAT-PUMF
+3,PUMH - Hand pump,Mandatory,LOG-C-CWAT,LOG-C-CWAT-PUMH
+3,PUMI - Injection pump for TOYOTA,Mandatory,LOG-T-TXTO,LOG-T-TXTO-PUMI
+3,PUMM - Manual pump,Mandatory,LOG-C-CWAT,LOG-C-CWAT-PUMM
+3,PUMP - Petrol motor pump,Mandatory,LOG-C-CWAT,LOG-C-CWAT-PUMP
+3,PUMP - Pump,Mandatory,LOG-P-PTOO,LOG-P-PTOO-PUMP
+3,PUMP - Pump,Mandatory,LOG-T-TVEA,LOG-T-TVEA-PUMP
+3,PUMP - Spare parts for YAMAHA petrol pump,Mandatory,LOG-T-TXYA,LOG-T-TXYA-PUMP
+3,"PUMS - Pump, suction",Mandatory,MED-E-EANE,MED-E-EANE-PUMS
+3,PUMS - Succion Pump,Mandatory,MED-E-EHOE,MED-E-EHOE-PUMS
+3,PUMW - Spare parts for YAMAHA water pump,Mandatory,LOG-T-TXYA,LOG-T-TXYA-PUMW
+3,PUNC - Paper punch,Mandatory,LOG-A-ASTA,LOG-A-ASTA-PUNC
+3,PUNC - Punch,Mandatory,LOG-P-PTOO,LOG-P-PTOO-PUNC
+3,PURC - Local purchase contract,Mandatory,MED-N-NSFO,MED-N-NSFO-PURC
+3,PUTT - Putty,Mandatory,LOG-P-PHDW,LOG-P-PHDW-PUTT
+3,PYRI - Pyridoxine,Mandatory,MED-D-DORA,MED-D-DORA-PYRI
+3,PYRM - Pyrimethamine,Mandatory,MED-D-DORA,MED-D-DORA-PYRM
+3,PYRZ - Pyrazinamide,Mandatory,MED-D-DORA,MED-D-DORA-PYRZ
+3,PZAD - (BACTEC MGIT 960) PZA Drug,Mandatory,MED-S-SLAS,MED-S-SLAS-PZAD
+3,PZAM - (BACTEC MGIT 960) PZA Medium,Mandatory,MED-S-SLAS,MED-S-SLAS-PZAM
+3,QCON - Checklist for quality control,Mandatory,MED-N-NSFS,MED-N-NSFS-QCON
+3,QUEN - Quenelles,Mandatory,LOG-A-AFOO,LOG-A-AFOO-QUEN
+3,QUIN - Quinine,Mandatory,MED-D-DINJ,MED-D-DINJ-QUIN
+3,QUIN - Quinine,Mandatory,MED-D-DORA,MED-D-DORA-QUIN
+3,RABB - Rabies Book,Mandatory,LIB-L-L003,LIB-L-L003-RABB
+3,RABG - Rabies Guide,Mandatory,LIB-L-L003,LIB-L-L003-RABG
+3,RACK - Slide Stain Rack,Mandatory,MED-E-ELAE,MED-E-ELAE-RACK
+3,"RADB - Radio communication, Book",Mandatory,LIB-L-L042,LIB-L-L042-RADB
+3,"RADG - Radio communication, Guide",Mandatory,LIB-L-L042,LIB-L-L042-RADG
+3,RADS - Ratchet die stock,Mandatory,LOG-P-PTOO,LOG-P-PTOO-RADS
+3,RAGC - Cotton rag,Mandatory,LOG-T-TVEC,LOG-T-TVEC-RAGC
+3,RAIW - Rain wear,Mandatory,LOG-P-PSAF,LOG-P-PSAF-RAIW
+3,RAKE - Rake,Mandatory,LOG-P-PTOO,LOG-P-PTOO-RAKE
+3,"RALE - Ral 555, Eosine",Mandatory,MED-S-SLAS,MED-S-SLAS-RALE
+3,RALF - Ral Fixator,Mandatory,MED-S-SLAS,MED-S-SLAS-RALF
+3,"RALK - Ral 555, Kit",Mandatory,MED-S-SLAS,MED-S-SLAS-RALK
+3,"RALM - Ral 555, Methylene Blue",Mandatory,MED-S-SLAS,MED-S-SLAS-RALM
+3,RALT - Raltegravir,Mandatory,MED-D-DORA,MED-D-DORA-RALT
+3,RAMP - Ramp,Mandatory,LOG-C-CWAT,LOG-C-CWAT-RAMP
+3,"RARD - Raspatory, Rib, Doyen",Mandatory,MED-E-ESUR,MED-E-ESUR-RARD
+3,RASL - Raspatory Of Lambotte,Mandatory,MED-E-ESUR,MED-E-ESUR-RASL
+3,RASP - Rasp for wood,Mandatory,LOG-P-PTOO,LOG-P-PTOO-RASP
+3,RAZO - Razor,Mandatory,MED-S-SMSU,MED-S-SMSU-RAZO
+3,"REAB - Retractor, abdominal, Balfour-Baby",Mandatory,MED-E-ESUR,MED-E-ESUR-REAB
+3,"REAC - Retractor, Abdominal, Collin",Mandatory,MED-E-ESUR,MED-E-ESUR-REAC
+3,REAF - Retractor of Fritsch,Mandatory,MED-E-ESUR,MED-E-ESUR-REAF
+3,"REAG - Retractor, Abdominal, Gosset",Mandatory,MED-E-ESUR,MED-E-ESUR-REAG
+3,REAM - Reamer,Mandatory,MED-E-ESUR,MED-E-ESUR-REAM
+3,"REBH - Retractor, bone Hohmann",Mandatory,MED-E-ESUR,MED-E-ESUR-REBH
+3,"REBL - Retractor, bladder, Hryntschak",Mandatory,MED-E-ESUR,MED-E-ESUR-REBL
+3,RECP - Receipt of payment,Mandatory,LOG-A-ALST,LOG-A-ALST-RECP
+3,REDA - Alene Needle For Redon Set,Mandatory,MED-S-SCTD,MED-S-SCTD-REDA
+3,REDB - Bottle For Redon,Mandatory,MED-S-SCTD,MED-S-SCTD-REDB
+3,REDC - Connectors for drain,Mandatory,MED-S-SCTD,MED-S-SCTD-REDC
+3,"REDC - Retractor, delicate, Cushing",Mandatory,MED-E-ESUR,MED-E-ESUR-REDC
+3,REDD - Drain For Redon,Mandatory,MED-S-SCTD,MED-S-SCTD-REDD
+3,REDE - Retractor Deaver,Mandatory,MED-E-ESUR,MED-E-ESUR-REDE
+3,"REDF - Retractor, delicate, Freer",Mandatory,MED-E-ESUR,MED-E-ESUR-REDF
+3,REDL - Tube-clamp for manometric plug,Mandatory,MED-S-SCTD,MED-S-SCTD-REDL
+3,REDP - Redon system plastic,Mandatory,MED-S-SCTD,MED-S-SCTD-REDP
+3,REDR - Ring for redon bottle,Mandatory,MED-S-SCTD,MED-S-SCTD-REDR
+3,"REDS - Retractor, delicate, Senn-Miller",Mandatory,MED-E-ESUR,MED-E-ESUR-REDS
+3,REDS - Spigott For Manometric Plug,Mandatory,MED-S-SCTD,MED-S-SCTD-REDS
+3,REEL - Reel,Mandatory,LOG-P-PPAC,LOG-P-PPAC-REEL
+3,"REFB - Refugees, Book",Mandatory,LIB-L-L019,LIB-L-L019-REFB
+3,"REFG - Refugees, Guide",Mandatory,LIB-L-L019,LIB-L-L019-REFG
+3,"REFI - Retractor, Finochietto",Mandatory,MED-E-ESUR,MED-E-ESUR-REFI
+3,REGI - Register,Mandatory,LOG-A-ASTA,LOG-A-ASTA-REGI
+3,REIN - Reinforcement,Mandatory,LOG-T-TVEM,LOG-T-TVEM-REIN
+3,"RELA - Retractor, Langenbeck",Mandatory,MED-E-ESUR,MED-E-ESUR-RELA
+3,REMO - Valve remover,Mandatory,LOG-T-TVEA,LOG-T-TVEA-REMO
+3,RENK - Retractor nasal Kilner,Mandatory,MED-E-ESUR,MED-E-ESUR-RENK
+3,REPA - Repair kit,Mandatory,LOG-T-TVEA,LOG-T-TVEA-REPA
+3,REPE - Repeater,Mandatory,LOG-P-PCOM,LOG-P-PCOM-REPE
+3,"RESR - Retractor, self-retaining",Mandatory,MED-E-ESUR,MED-E-ESUR-RESR
+3,RESU - Resuscitator,Mandatory,MED-E-EANE,MED-E-EANE-RESU
+3,RETD - Retractor Of Desmarres,Mandatory,MED-E-ESUO,MED-E-ESUO-RETD
+3,RETF - Retractor Of Faraboeuf,Mandatory,MED-E-ESUR,MED-E-ESUR-RETF
+3,RETG - Retractor of Gelpi,Mandatory,MED-E-ESUR,MED-E-ESUR-RETG
+3,RETI - Retinol,Mandatory,MED-D-DORA,MED-D-DORA-RETI
+3,RETP - Retractor of Percy,Mandatory,MED-E-ESUR,MED-E-ESUR-RETP
+3,RETR - Retriever,Mandatory,LOG-P-PTOO,LOG-P-PTOO-RETR
+3,RETW - Retractor Of Weitlaner,Mandatory,MED-E-ESUR,MED-E-ESUR-RETW
+3,RETW - Retractor of Wells,Mandatory,MED-E-ESUO,MED-E-ESUO-RETW
+3,"REVA - Retractor, Vaginal, Auvard",Mandatory,MED-E-ESUR,MED-E-ESUR-REVA
+3,"REVD - Vaginal retractor, Doyen",Mandatory,MED-E-ESUR,MED-E-ESUR-REVD
+3,"REVS - Speculum, vaginal, Sims",Mandatory,MED-E-ESUR,MED-E-ESUR-REVS
+3,RHEF - Rifampicin/Isoniazid/Ethambutol,Mandatory,MED-D-DORA,MED-D-DORA-RHEF
+3,RHFD - Rifampicin / Isoniazid FDC,Mandatory,MED-D-DORA,MED-D-DORA-RHFD
+3,RHZE - Rifamp./Isoniaz./Pyraz./Ethamb. FDC,Mandatory,MED-D-DORA,MED-D-DORA-RHZE
+3,RHZF - Rifampicin/Isoniazide/Pyraz. FDC,Mandatory,MED-D-DORA,MED-D-DORA-RHZF
+3,RIBA - Ribavirin,Mandatory,MED-D-DORA,MED-D-DORA-RIBA
+3,RIBA - Ribavirine,Mandatory,MED-D-DINJ,MED-D-DINJ-RIBA
+3,RICE - Rice,Mandatory,LOG-A-AFOO,LOG-A-AFOO-RICE
+3,RICE - Rice,Mandatory,MED-N-NFOO,MED-N-NFOO-RICE
+3,RIFA - Rifampicine,Mandatory,MED-D-DORA,MED-D-DORA-RIFA
+3,RIFA - RIFAMPICINE,Mandatory,MED-S-SLAS,MED-S-SLAS-RIFA
+3,RIFB - Rifabutin,Mandatory,MED-D-DORA,MED-D-DORA-RIFB
+3,RING - Key ring,Mandatory,LOG-A-ASTA,LOG-A-ASTA-RING
+3,RING - Ring,Mandatory,LOG-P-PTOO,LOG-P-PTOO-RING
+3,RINL - Ringer Lactate,Mandatory,MED-D-DINF,MED-D-DINF-RINL
+3,RISP - Risperidone,Mandatory,MED-D-DORA,MED-D-DORA-RISP
+3,RITO - Ritonavir,Mandatory,MED-D-DORA,MED-D-DORA-RITO
+3,RIVB - Blind rivet,Mandatory,LOG-P-PHDW,LOG-P-PHDW-RIVB
+3,RIVE - Riveting,Mandatory,LOG-P-PTOO,LOG-P-PTOO-RIVE
+3,ROAD - Rota- & adenovirus rapid test,Mandatory,MED-D-DDGT,MED-D-DDGT-ROAD
+3,"ROBL - Bone Rongeur , Luer",Mandatory,MED-E-ESUR,MED-E-ESUR-ROBL
+3,RODG - Rod,Mandatory,MED-E-ELAE,MED-E-ELAE-RODG
+3,ROLE - ROLLER MIXER,Mandatory,MED-E-ELAE,MED-E-ELAE-ROLE
+3,ROLL - Roller,Mandatory,LOG-P-PPAI,LOG-P-PPAI-ROLL
+3,ROLM - ROLLER MIXER,Mandatory,MED-E-ELAE,MED-E-ELAE-ROLM
+3,ROOP - Roof paint,Mandatory,LOG-P-PPAI,LOG-P-PPAI-ROOP
+3,ROPE - Rope,Mandatory,LOG-C-CSHE,LOG-C-CSHE-ROPE
+3,ROPE - Safety rope,Mandatory,LOG-P-PSAF,LOG-P-PSAF-ROPE
+3,ROTA - Rotator,Mandatory,MED-E-ELAE,MED-E-ELAE-ROTA
+3,ROTE - Rotator,Mandatory,MED-E-ELAE,MED-E-ELAE-ROTE
+3,RPBA - Radiation protection barrier,Mandatory,MED-E-EDIM,MED-E-EDIM-RPBA
+3,RPSH - Radition protection sheeting,Mandatory,MED-E-EDIM,MED-E-EDIM-RPSH
+3,RPWI - Radiation protection window,Mandatory,MED-E-EDIM,MED-E-EDIM-RPWI
+3,RTLX - Radio telex,Mandatory,LOG-P-PCOM,LOG-P-PCOM-RTLX
+3,RUBB - Rubber repair patch,Mandatory,LOG-T-TVEC,LOG-T-TVEC-RUBB
+3,RUBB - Rubbish bin,Mandatory,LOG-P-PHYG,LOG-P-PHYG-RUBB
+3,RULE - Ruler,Mandatory,LOG-A-ASTA,LOG-A-ASTA-RULE
+3,RUSA - ruck sac first aid,Mandatory,MED-E-EMEQ,MED-E-EMEQ-RUSA
+3,RUSF - Ready to use supplementary food,Mandatory,MED-N-NFOS,MED-N-NFOS-RUSF
+3,RUTF - Ready to use therapeutic food,Mandatory,MED-N-NFOS,MED-N-NFOS-RUTF
+3,"SABB - Sutures, absorbable",Mandatory,MED-S-SSUT,MED-S-SSUT-SABB
+3,"SABR - Sutures, absorbable rapid",Mandatory,MED-S-SSUT,MED-S-SSUT-SABR
+3,SAFR - Safranine,Mandatory,MED-S-SLAS,MED-S-SLAS-SAFR
+3,SALB - Salbutamol,Mandatory,MED-D-DINJ,MED-D-DINJ-SALB
+3,SALB - Salbutamol,Mandatory,MED-D-DORA,MED-D-DORA-SALB
+3,SALS - Salsify,Mandatory,LOG-A-AFOO,LOG-A-AFOO-SALS
+3,SALT - Salt,Mandatory,LOG-A-AFOO,LOG-A-AFOO-SALT
+3,SALT - Salt,Mandatory,MED-N-NFOO,MED-N-NFOO-SALT
+3,SAMC - Sample cholera,Mandatory,MED-E-ELAE,MED-E-ELAE-SAMC
+3,SAMP - Sampling report,Mandatory,MED-N-NSFS,MED-N-NSFS-SAMP
+3,SAMS - Sample serology,Mandatory,MED-E-ELAE,MED-E-ELAE-SAMS
+3,"SANB - Sanitation, Book",Mandatory,LIB-L-L018,LIB-L-L018-SANB
+3,SAND - Sand,Mandatory,LOG-C-CBUI,LOG-C-CBUI-SAND
+3,"SANG - Sanitation, Guide",Mandatory,LIB-L-L018,LIB-L-L018-SANG
+3,SARD - Sardines,Mandatory,LOG-A-AFOO,LOG-A-AFOO-SARD
+3,SATC - Satchel,Mandatory,LOG-A-ASTA,LOG-A-ASTA-SATC
+3,"SATG - Satellite, Guide",Mandatory,LIB-L-L042,LIB-L-L042-SATG
+3,SAWA - Amputation saw,Mandatory,MED-E-ESUR,MED-E-ESUR-SAWA
+3,"SAWG - Saw, Gigli",Mandatory,MED-E-ESUR,MED-E-ESUR-SAWG
+3,SAWH - Handsaw,Mandatory,LOG-P-PTOO,LOG-P-PTOO-SAWH
+3,"SAWO - Saw, oscillating",Mandatory,MED-E-EHOE,MED-E-EHOE-SAWO
+3,SAWW - Wood saw,Mandatory,LOG-P-PTOO,LOG-P-PTOO-SAWW
+3,SCAA - (Salter scale type) trousers,Mandatory,MED-E-EANT,MED-E-EANT-SCAA
+3,SCAA - (scale) accessories,Mandatory,MED-E-ELAE,MED-E-ELAE-SCAA
+3,SCAE - Scale,Mandatory,MED-E-ELAE,MED-E-ELAE-SCAE
+3,SCAL - Blade,Mandatory,MED-E-ESUR,MED-E-ESUR-SCAL
+3,SCAL - Scale,Mandatory,MED-E-EANT,MED-E-EANT-SCAL
+3,SCAL - Scale,Mandatory,MED-E-ELAE,MED-E-ELAE-SCAL
+3,SCAL - Scale,Mandatory,LOG-P-PCOO,LOG-P-PCOO-SCAL
+3,SCAL - Scale,Mandatory,LOG-P-PPAC,LOG-P-PPAC-SCAL
+3,SCAR - Stock card,Mandatory,LOG-A-ALST,LOG-A-ALST-SCAR
+3,SCAV - Scalp,Mandatory,MED-S-SINS,MED-S-SINS-SCAV
+3,SCAV - Scavenger,Mandatory,MED-E-EANE,MED-E-EANE-SCAV
+3,"SCDI - Scissors, dissecting",Mandatory,MED-E-ESUR,MED-E-ESUR-SCDI
+3,"SCDJ - Scissors, dissecting Joseph",Mandatory,MED-E-ESUR,MED-E-ESUR-SCDJ
+3,"SCDR - Scissors, dissecting, Ragnell",Mandatory,MED-E-ESUR,MED-E-ESUR-SCDR
+3,SCEN - Enucleation Scissors,Mandatory,MED-E-ESUO,MED-E-ESUO-SCEN
+3,"SCHB - Schistosomiasis, Book",Mandatory,LIB-L-L006,LIB-L-L006-SCHB
+3,"SCIE - Scissors, Metzembaum",Mandatory,MED-E-ESUR,MED-E-ESUR-SCIE
+3,"SCIM - Scissors, Mayo",Mandatory,MED-E-ESUR,MED-E-ESUR-SCIM
+3,SCIS - Scissors,Mandatory,LOG-A-ASTA,LOG-A-ASTA-SCIS
+3,SCIS - Scissors,Mandatory,MED-E-EMEQ,MED-E-EMEQ-SCIS
+3,SCIS - Scissors,Mandatory,LOG-P-PTOO,LOG-P-PTOO-SCIS
+3,"SCIT - Scissors, Thorek",Mandatory,MED-E-ESUR,MED-E-ESUR-SCIT
+3,"SCOD - Scissors, operating, Dubois",Mandatory,MED-E-ESUR,MED-E-ESUR-SCOD
+3,"SCOE - Scissors, operating, Deaver",Mandatory,MED-E-ESUR,MED-E-ESUR-SCOE
+3,SCOO - Scoop,Mandatory,LOG-P-PCOO,LOG-P-PCOO-SCOO
+3,"SCOP - Scissors, operating",Mandatory,MED-E-ESUR,MED-E-ESUR-SCOP
+3,"SCPC - Scoop, Placenta, Cuzzi",Mandatory,MED-E-ESUR,MED-E-ESUR-SCPC
+3,SCPH - Storage phosphor screen,Mandatory,MED-E-EDIM,MED-E-EDIM-SCPH
+3,SCRA - Scraper,Mandatory,LOG-P-PTOO,LOG-P-PTOO-SCRA
+3,SCRD - Screwdriver,Mandatory,LOG-P-PTOO,LOG-P-PTOO-SCRD
+3,SCRE - Screen,Mandatory,LOG-A-ADAP,LOG-A-ADAP-SCRE
+3,SCRE - Screen,Mandatory,LOG-A-AOFF,LOG-A-AOFF-SCRE
+3,"SCRE - Set of screws, nuts and washers",Mandatory,LOG-P-PHDW,LOG-P-PHDW-SCRE
+3,SCRS - Self perforating screw,Mandatory,LOG-P-PHDW,LOG-P-PHDW-SCRS
+3,SCRW - Wood screw,Mandatory,LOG-P-PHDW,LOG-P-PHDW-SCRW
+3,SCTE - Tenotomy Scissors,Mandatory,MED-E-ESUO,MED-E-ESUO-SCTE
+3,"SCUG - Scoop, Uterine, Gourdet",Mandatory,MED-E-ESUR,MED-E-ESUR-SCUG
+3,"SCUS - Scoop, Uterine, Simon",Mandatory,MED-E-ESUR,MED-E-ESUR-SCUS
+3,"SCVP - Scissors, vascular, Potts-Smiths",Mandatory,MED-E-ESUR,MED-E-ESUR-SCVP
+3,SEAH - Hemp seal,Mandatory,LOG-C-CWAT,LOG-C-CWAT-SEAH
+3,SEAL - Sealing,Mandatory,LOG-P-PPAC,LOG-P-PPAC-SEAL
+3,SEBG - Blood transfusion set + Needle,Mandatory,MED-S-SINS,MED-S-SINS-SEBG
+3,"SECB - Security, Book",Mandatory,LIB-L-L013,LIB-L-L013-SECB
+3,"SECB - Security, Book",Mandatory,LIB-L-L052,LIB-L-L052-SECB
+3,"SECD - Security, CD Rom",Mandatory,LIB-L-L052,LIB-L-L052-SECD
+3,SECG - Security guidelines,Mandatory,LIB-L-L013,LIB-L-L013-SECG
+3,"SECG - Security, Guide",Mandatory,LIB-L-L052,LIB-L-L052-SECG
+3,SEQI - Equipment identification,Mandatory,LOG-A-ALST,LOG-A-ALST-SEQI
+3,SETI - Perfusion Set,Mandatory,MED-S-SINS,MED-S-SINS-SETI
+3,"SETP - Perfusion Set, paediatric",Mandatory,MED-S-SINS,MED-S-SINS-SETP
+3,SEVB - Sexual violence guide,Mandatory,LIB-L-L009,LIB-L-L009-SEVB
+3,SEVD - Sexual Violence Digital Media,Mandatory,LIB-L-L009,LIB-L-L009-SEVD
+3,SEVG - Sexual violence book,Mandatory,LIB-L-L009,LIB-L-L009-SEVG
+3,SEWB - Sewing Box,Mandatory,LOG-A-ALIF,LOG-A-ALIF-SEWB
+3,SFUP - Follow-up,Mandatory,LOG-A-ALST,LOG-A-ALST-SFUP
+3,SHAC - Shackle,Mandatory,LOG-P-PHDW,LOG-P-PHDW-SHAC
+3,SHAF - Shaving foam,Mandatory,LOG-P-PHYG,LOG-P-PHYG-SHAF
+3,SHAM - Shampoo,Mandatory,LOG-P-PHYG,LOG-P-PHYG-SHAM
+3,SHEA - Aluminium sheet,Mandatory,LOG-C-CBUI,LOG-C-CBUI-SHEA
+3,SHEA - Shears,Mandatory,LOG-P-PTOO,LOG-P-PTOO-SHEA
+3,"SHEB - SHEET, BED, woven, 180 x 290 cm",Mandatory,MED-E-ELIN,MED-E-ELIN-SHEB
+3,"SHEB - Shelter, book",Mandatory,LIB-L-L043,LIB-L-L043-SHEB
+3,SHEE - Sheet,Mandatory,LOG-A-ALIF,LOG-A-ALIF-SHEE
+3,SHEE - Sheet,Mandatory,MED-E-ELIN,MED-E-ELIN-SHEE
+3,SHEE - Sheet,Mandatory,LOG-P-PPAC,LOG-P-PPAC-SHEE
+3,SHEE - Sheet,Mandatory,MED-S-SMST,MED-S-SMST-SHEE
+3,SHEF - Fibreglass sheet,Mandatory,LOG-C-CBUI,LOG-C-CBUI-SHEF
+3,SHEI - Galvanized iron sheet,Mandatory,LOG-C-CBUI,LOG-C-CBUI-SHEI
+3,SHEL - Shelves,Mandatory,LOG-A-AFUR,LOG-A-AFUR-SHEL
+3,SHEP - Plaster Shears,Mandatory,MED-E-ESUR,MED-E-ESUR-SHEP
+3,SHEP - PVC sheet,Mandatory,LOG-C-CBUI,LOG-C-CBUI-SHEP
+3,"SHER - Shears, Rib",Mandatory,MED-E-ESUR,MED-E-ESUR-SHER
+3,"SHIB - Shigella, Book",Mandatory,LIB-L-L004,LIB-L-L004-SHIB
+3,SHIE - Face Shield,Mandatory,MED-S-SMSU,MED-S-SMSU-SHIE
+3,SHIE - PROTECTIVE FACE SHIELD,Mandatory,MED-E-ELAE,MED-E-ELAE-SHIE
+3,SHOC - Shoe cover,Mandatory,MED-E-ELIN,MED-E-ELIN-SHOC
+3,SHOS - Safety shoes,Mandatory,LOG-P-PSAF,LOG-P-PSAF-SHOS
+3,SHOV - Shovel,Mandatory,LOG-P-PTOO,LOG-P-PTOO-SHOV
+3,"SIBS - Self Inflating bag, silicone",Mandatory,MED-E-EANE,MED-E-EANE-SIBS
+3,SICK - Sickle,Mandatory,LOG-P-PTOO,LOG-P-PTOO-SICK
+3,SIEV - Sieve,Mandatory,LOG-P-PCOO,LOG-P-PCOO-SIEV
+3,SIGN - NAIL of SIGN osteosynthesis check list,Mandatory,MED-I-ISUI,MED-I-ISUI-SIGN
+3,SIGN - SIGNALISATION SET,Mandatory,LOG-A-ALST,LOG-A-ALST-SIGN
+3,SILI - Silicagel,Mandatory,MED-S-SLAS,MED-S-SLAS-SILI
+3,SILN - Silver Nitrate,Mandatory,MED-D-DEXT,MED-D-DEXT-SILN
+3,SINV - Stock inventory,Mandatory,LOG-A-ALST,LOG-A-ALST-SINV
+3,SIRE - SIRE Kit,Mandatory,MED-S-SLAS,MED-S-SLAS-SIRE
+3,SIRE - Siren,Mandatory,LOG-T-TVEA,LOG-T-TVEA-SIRE
+3,SLAS - Slasher,Mandatory,LOG-P-PTOO,LOG-P-PTOO-SLAS
+3,SLEB - Sleeping bag,Mandatory,LOG-A-ALIF,LOG-A-ALIF-SLEB
+3,SLID - Slide,Mandatory,MED-E-ELAE,MED-E-ELAE-SLID
+3,SLIS - SPREADER,Mandatory,MED-E-ELAE,MED-E-ELAE-SLIS
+3,SLOO - Surgical loop,Mandatory,MED-S-SSUT,MED-S-SSUT-SLOO
+3,"SLRG - SLEEVE, reduction",Mandatory,MED-E-ESUF,MED-E-ESUF-SLRG
+3,"SMAD - SMART, Digital Media",Mandatory,LIB-L-L044,LIB-L-L044-SMAD
+3,SMOK - Smoke detector,Mandatory,LOG-P-PSAF,LOG-P-PSAF-SMOK
+3,SNAH - Snap hook,Mandatory,LOG-P-PHDW,LOG-P-PHDW-SNAH
+3,"SNAM - Sutures, Non Absorb, Monofil.",Mandatory,MED-S-SSUT,MED-S-SSUT-SNAM
+3,SOAP - Soap,Mandatory,MED-D-DEXT,MED-D-DEXT-SOAP
+3,SOAP - Soap,Mandatory,LOG-P-PHYG,LOG-P-PHYG-SOAP
+3,SOCF - Flush socket,Mandatory,LOG-P-PELE,LOG-P-PELE-SOCF
+3,SOCK - Socket,Mandatory,LOG-P-PELE,LOG-P-PELE-SOCK
+3,SOCK - Socket,Mandatory,LOG-P-PTOO,LOG-P-PTOO-SOCK
+3,SOCW - Wall socket,Mandatory,LOG-P-PELE,LOG-P-PELE-SOCW
+3,SODB - Sodium Bicarbonate,Mandatory,MED-D-DEXT,MED-D-DEXT-SODB
+3,SODB - Sodium Bicarbonate,Mandatory,MED-D-DINJ,MED-D-DINJ-SODB
+3,SODC - Sodium Chloride,Mandatory,MED-D-DINF,MED-D-DINF-SODC
+3,SODC - Sodium Chloride,Mandatory,MED-D-DINJ,MED-D-DINJ-SODC
+3,SODC - Sodium Chloride,Mandatory,MED-D-DORA,MED-D-DORA-SODC
+3,SODC - Sodium Chloride,Mandatory,MED-S-SLAS,MED-S-SLAS-SODC
+3,SODD - Sodium Disulfite,Mandatory,MED-S-SLAS,MED-S-SLAS-SODD
+3,SODH - Sodium hydroxide,Mandatory,MED-S-SLAS,MED-S-SLAS-SODH
+3,SODS - Sodium Stibogluconate,Mandatory,MED-D-DINJ,MED-D-DINJ-SODS
+3,SOFT - Software,Mandatory,LOG-A-ADAP,LOG-A-ADAP-SOFT
+3,SOLD - Soldering iron,Mandatory,LOG-P-PTOO,LOG-P-PTOO-SOLD
+3,SOPH - Disodium phosphate,Mandatory,MED-S-SLAS,MED-S-SLAS-SOPH
+3,SORG - Sorghum (Millet),Mandatory,MED-N-NFOO,MED-N-NFOO-SORG
+3,SOSU - Sodium sulphite,Mandatory,MED-S-SLAS,MED-S-SLAS-SOSU
+3,"SOUM - Sound, Uterine, Martin",Mandatory,MED-E-ESUR,MED-E-ESUR-SOUM
+3,SOUP - Soup,Mandatory,LOG-A-AFOO,LOG-A-AFOO-SOUP
+3,SOUU - Urethral sound,Mandatory,MED-E-ESUR,MED-E-ESUR-SOUU
+3,SPAC - Spacer,Mandatory,MED-E-EMEQ,MED-E-EMEQ-SPAC
+3,SPAN - Spanner,Mandatory,LOG-P-PTOO,LOG-P-PTOO-SPAN
+3,SPAO - Spanner for oil filter,Mandatory,LOG-P-PTOO,LOG-P-PTOO-SPAO
+3,SPAQ - Sulfadoxine/Pyrimethamine + Amodiaquine,Mandatory,MED-D-DORA,MED-D-DORA-SPAQ
+3,SPAS - Spanner for spark plug,Mandatory,LOG-P-PTOO,LOG-P-PTOO-SPAS
+3,SPAT - Spatula,Mandatory,MED-E-ELAE,MED-E-ELAE-SPAT
+3,SPAT - Spatula,Mandatory,MED-E-ESUR,MED-E-ESUR-SPAT
+3,SPAW - Wheel spanner,Mandatory,LOG-P-PTOO,LOG-P-PTOO-SPAW
+3,SPEC - (spectrophotometer) consumables,Mandatory,MED-E-ELAE,MED-E-ELAE-SPEC
+3,SPEC - Spectinomycin,Mandatory,MED-D-DINJ,MED-D-DINJ-SPEC
+3,SPEE - Spectrophotometer equipment,Mandatory,MED-E-ELAE,MED-E-ELAE-SPEE
+3,SPEP - Dosage kit for spectrophotometer,Mandatory,MED-D-DDGT,MED-D-DDGT-SPEP
+3,SPEP - Spectrophotometer,Mandatory,MED-E-ELAE,MED-E-ELAE-SPEP
+3,SPEP - Spectrophotometer control solutions,Mandatory,MED-S-SLAS,MED-S-SLAS-SPEP
+3,SPES - (spectrophotometer) spare-parts,Mandatory,MED-E-ELAE,MED-E-ELAE-SPES
+3,SPHY - Sphygmomanometer,Mandatory,MED-E-EMEQ,MED-E-EMEQ-SPHY
+3,SPIB - Spine board,Mandatory,MED-E-EHOE,MED-E-EHOE-SPIB
+3,SPIN - Spinach,Mandatory,LOG-A-AFOO,LOG-A-AFOO-SPIN
+3,SPIR - Spironolactone,Mandatory,MED-D-DORA,MED-D-DORA-SPIR
+3,"SPLB - Splint, Boppe Type",Mandatory,MED-E-EMEQ,MED-E-EMEQ-SPLB
+3,"SPLD - Splint, traction (Donway)",Mandatory,MED-E-EMEQ,MED-E-EMEQ-SPLD
+3,SPLI - Splint,Mandatory,MED-E-EMEQ,MED-E-EMEQ-SPLI
+3,SPLI - Split die,Mandatory,LOG-P-PTOO,LOG-P-PTOO-SPLI
+3,"SPLK - Splint, Krammer Type",Mandatory,MED-E-EMEQ,MED-E-EMEQ-SPLK
+3,SPMO - Speculum Of Morax,Mandatory,MED-E-ESUO,MED-E-ESUO-SPMO
+3,SPON - Sponge,Mandatory,LOG-P-PHYG,LOG-P-PHYG-SPON
+3,SPOO - Spoon,Mandatory,LOG-P-PCOO,LOG-P-PCOO-SPOO
+3,SPPL - Spreader for plaster,Mandatory,MED-E-ESUR,MED-E-ESUR-SPPL
+3,SPRA - Spray,Mandatory,LOG-T-TVEC,LOG-T-TVEC-SPRA
+3,SPRA - Sprayer,Mandatory,LOG-C-CWAT,LOG-C-CWAT-SPRA
+3,SPRA - Spray-on paint,Mandatory,LOG-P-PPAI,LOG-P-PPAI-SPRA
+3,SPRC - Spring compressor,Mandatory,LOG-P-PTOO,LOG-P-PTOO-SPRC
+3,SPRI - Spring for YAMAHA,Mandatory,LOG-T-TXYA,LOG-T-TXYA-SPRI
+3,"SPVC - Speculum, Vaginal, Collin",Mandatory,MED-E-ESUR,MED-E-ESUR-SPVC
+3,SQUA - Square,Mandatory,LOG-P-PTOO,LOG-P-PTOO-SQUA
+3,SQUP - Squatting plate,Mandatory,LOG-C-CWAT,LOG-C-CWAT-SQUP
+3,SQUS - Squatting slab,Mandatory,LOG-C-CWAT,LOG-C-CWAT-SQUS
+3,SRHB - Sexual and Reproductive Health Book,Mandatory,LIB-L-L009,LIB-L-L009-SRHB
+3,SRHG - Sexual and Reproductive Health,Mandatory,LIB-L-L009,LIB-L-L009-SRHG
+3,SSGL - Sodium Stibogluconate,Mandatory,MED-D-DINJ,MED-D-DINJ-SSGL
+3,STAB - Bowl-stand,Mandatory,MED-E-EHOE,MED-E-EHOE-STAB
+3,"STAB - Statistics, Book",Mandatory,LIB-L-L024,LIB-L-L024-STAB
+3,"STAI - Stand, infusion",Mandatory,MED-E-EHOE,MED-E-EHOE-STAI
+3,STAM - Stamp,Mandatory,LOG-A-ASTA,LOG-A-ASTA-STAM
+3,STAN - Stand,Mandatory,LOG-P-PTOO,LOG-P-PTOO-STAN
+3,STAP - Stapler,Mandatory,LOG-A-ASTA,LOG-A-ASTA-STAP
+3,STAP - Stappler,Mandatory,LOG-P-PTOO,LOG-P-PTOO-STAP
+3,STAR - Starter for YAMAHA,Mandatory,LOG-T-TXYA,LOG-T-TXYA-STAR
+3,STAR - Starter rope,Mandatory,LOG-P-PXHO,LOG-P-PXHO-STAR
+3,STAV - Stavudine,Mandatory,MED-D-DORA,MED-D-DORA-STAV
+3,STCR - STC redox indicator,Mandatory,MED-S-SLAS,MED-S-SLAS-STCR
+3,STDB - Sexually tranmitted diseases,Mandatory,LIB-L-L013,LIB-L-L013-STDB
+3,"STDB - STD, Book",Mandatory,LIB-L-L007,LIB-L-L007-STDB
+3,"STDD - STD, Digital Media",Mandatory,LIB-L-L007,LIB-L-L007-STDD
+3,STEG - Sterilisation tray,Mandatory,MED-E-ESUF,MED-E-ESUF-STEG
+3,"STEG - Sterilization, Guide",Mandatory,LIB-L-L029,LIB-L-L029-STEG
+3,STEN - Stencil,Mandatory,LOG-P-PPAC,LOG-P-PPAC-STEN
+3,STET - Stetoscope,Mandatory,MED-E-EMEQ,MED-E-EMEQ-STET
+3,STIA - Sticker ambulance,Mandatory,LOG-P-PIDE,LOG-P-PIDE-STIA
+3,STIC - APPLICATOR STICK,Mandatory,MED-E-ELAE,MED-E-ELAE-STIC
+3,STIC - Signalling-sticker,Mandatory,LOG-P-PSAF,LOG-P-PSAF-STIC
+3,STIC - Sticker,Mandatory,LOG-P-PIDE,LOG-P-PIDE-STIC
+3,STIM - MSF sticker,Mandatory,LOG-P-PIDE,LOG-P-PIDE-STIM
+3,STON - Stone,Mandatory,LOG-C-CBUI,LOG-C-CBUI-STON
+3,STOO - Stool,Mandatory,MED-E-EHOE,MED-E-EHOE-STOO
+3,STOV - Stove,Mandatory,LOG-A-ALIF,LOG-A-ALIF-STOV
+3,STPG - Sampling and transport guide,Mandatory,LIB-L-L013,LIB-L-L013-STPG
+3,STRA - Strainer,Mandatory,LOG-C-CWAT,LOG-C-CWAT-STRA
+3,STRA - Strap,Mandatory,LOG-T-TVEM,LOG-T-TVEM-STRA
+3,STRA - Strapping,Mandatory,LOG-P-PPAC,LOG-P-PPAC-STRA
+3,STRE - STREPTOMYCIN,Mandatory,MED-S-SLAS,MED-S-SLAS-STRE
+3,STRE - Streptomycine,Mandatory,MED-D-DINJ,MED-D-DINJ-STRE
+3,"STRI - Strip, adhesive skin closure",Mandatory,MED-S-SSUT,MED-S-SSUT-STRI
+3,STRO - Oil strainer,Mandatory,LOG-P-PX--,LOG-P-PX---STRO
+3,STRT - Stretcher,Mandatory,MED-E-EHOE,MED-E-EHOE-STRT
+3,STRY - STRYKER SPS internal fixationcheck list,Mandatory,MED-I-ISUI,MED-I-ISUI-STRY
+3,SUAC - Sulphuric Acid,Mandatory,MED-S-SLAS,MED-S-SLAS-SUAC
+3,SUBA - Bumper,Mandatory,LOG-T-TVEC,LOG-T-TVEC-SUBA
+3,SUDI - Sulfadiazine,Mandatory,MED-D-DORA,MED-D-DORA-SUDI
+3,SUGA - Sugar,Mandatory,LOG-A-AFOO,LOG-A-AFOO-SUGA
+3,SUGA - Sugar,Mandatory,MED-N-NFOO,MED-N-NFOO-SUGA
+3,SULP - Sulfadoxine / Pyrimethamine,Mandatory,MED-D-DORA,MED-D-DORA-SULP
+3,"SULZ - Sulfadiazine, Silver",Mandatory,MED-D-DEXT,MED-D-DEXT-SULZ
+3,SUNG - Sunglasses,Mandatory,LOG-A-ALIF,LOG-A-ALIF-SUNG
+3,"SUPB - Supervision, Book",Mandatory,LIB-L-L021,LIB-L-L021-SUPB
+3,"SUPG - Supervision, Guide",Mandatory,LIB-L-L021,LIB-L-L021-SUPG
+3,SUPG - Supply Guide,Mandatory,LIB-L-L040,LIB-L-L040-SUPG
+3,"SUPG - Supply, Guidelines",Mandatory,LIB-L-L047,LIB-L-L047-SUPG
+3,SUPP - Flag support,Mandatory,LOG-P-PIDE,LOG-P-PIDE-SUPP
+3,SUPP - Support,Mandatory,LOG-T-TVEM,LOG-T-TVEM-SUPP
+3,"SURB - Surgical, Book",Mandatory,LIB-L-L008,LIB-L-L008-SURB
+3,"SURD - Surgical, Digital Media",Mandatory,LIB-L-L008,LIB-L-L008-SURD
+3,SURF - Surface detergent/disinfectant,Mandatory,MED-D-DDIS,MED-D-DDIS-SURF
+3,"SURG - Surgical, Guide",Mandatory,LIB-L-L008,LIB-L-L008-SURG
+3,SURP - Surge protector,Mandatory,LOG-A-ADAP,LOG-A-ADAP-SURP
+3,SURS - Suramin,Mandatory,MED-D-DINJ,MED-D-DINJ-SURS
+3,SUSV - Suspending vehicle,Mandatory,MED-D-DORA,MED-D-DORA-SUSV
+3,"SUTU - Suture set, single use",Mandatory,MED-S-SDRE,MED-S-SDRE-SUTU
+3,SUXC - Suxamethonium,Mandatory,MED-D-DINJ,MED-D-DINJ-SUXC
+3,SWAB - SWAB,Mandatory,MED-E-ELAE,MED-E-ELAE-SWAB
+3,SWEE - Sweet,Mandatory,LOG-A-AFOO,LOG-A-AFOO-SWEE
+3,SWIC - Change over switch,Mandatory,LOG-P-PELE,LOG-P-PELE-SWIC
+3,SWIF - Flush switch,Mandatory,LOG-P-PELE,LOG-P-PELE-SWIF
+3,SWIT - Switch,Mandatory,LOG-A-ADAP,LOG-A-ADAP-SWIT
+3,SWIT - Switch,Mandatory,LOG-P-PELE,LOG-P-PELE-SWIT
+3,SWIT - Switch,Mandatory,LOG-T-TVEM,LOG-T-TVEM-SWIT
+3,SWIW - Wall switch,Mandatory,LOG-P-PELE,LOG-P-PELE-SWIW
+3,"SYAI - Syringe, autodestruct, immunization",Mandatory,MED-S-SINS,MED-S-SINS-SYAI
+3,SYDE - Dental Syringe,Mandatory,MED-E-ESUD,MED-E-ESUD-SYDE
+3,"SYDF - Syringe, disposable, feeding",Mandatory,MED-S-SCTD,MED-S-SCTD-SYDF
+3,"SYDF - Syringe, disposable, feeding",Mandatory,MED-S-SINS,MED-S-SINS-SYDF
+3,"SYDI - Syringe, s.u., immunization",Mandatory,MED-S-SINS,MED-S-SINS-SYDI
+3,"SYDL - Syringe, s.u., Luer",Mandatory,MED-S-SINS,MED-S-SINS-SYDL
+3,"SYDN - Syringe, s.u., insuline",Mandatory,MED-S-SINS,MED-S-SINS-SYDN
+3,SYLL - Syringe luer lock,Mandatory,MED-S-SINS,MED-S-SINS-SYLL
+3,SYNC - Syndesmotome Of Chompret,Mandatory,MED-E-ESUD,MED-E-ESUD-SYNC
+3,"SYPT - Syphilis, test",Mandatory,MED-D-DDGT,MED-D-DDGT-SYPT
+3,"SYRO - Syringe, oral",Mandatory,MED-S-SCTD,MED-S-SCTD-SYRO
+3,SYRP - Syringe pump,Mandatory,MED-E-EHOE,MED-E-EHOE-SYRP
+3,TAAU - Autoclave Tape,Mandatory,MED-E-ESTE,MED-E-ESTE-TAAU
+3,TABD - Delivery Table,Mandatory,MED-E-EHOE,MED-E-EHOE-TABD
+3,TABE - Examination Table,Mandatory,MED-E-EHOE,MED-E-EHOE-TABE
+3,"TABI - Table, instruments",Mandatory,MED-E-EHOE,MED-E-EHOE-TABI
+3,TABL - Table,Mandatory,LOG-A-AFUR,LOG-A-AFUR-TABL
+3,TABM - Mayo Table,Mandatory,MED-E-EHOE,MED-E-EHOE-TABM
+3,TABO - Tabbouleh,Mandatory,LOG-A-AFOO,LOG-A-AFOO-TABO
+3,TABO - Table Operating,Mandatory,MED-E-EHOE,MED-E-EHOE-TABO
+3,TACO - Tablet counter,Mandatory,MED-E-EMEQ,MED-E-EMEQ-TACO
+3,TACR - Tablet crusher,Mandatory,MED-E-EMEQ,MED-E-EMEQ-TACR
+3,TACT - Container for drugs,Mandatory,MED-E-EMEQ,MED-E-EMEQ-TACT
+3,TACU - Tablet cutter,Mandatory,MED-E-EMEQ,MED-E-EMEQ-TACU
+3,TALC - Talc,Mandatory,MED-D-DEXT,MED-D-DEXT-TALC
+3,TANK - Water tank,Mandatory,LOG-C-CWAT,LOG-C-CWAT-TANK
+3,TANO - Onion water tank,Mandatory,LOG-C-CWAT,LOG-C-CWAT-TANO
+3,TAPA - Adhesive tape,Mandatory,LOG-A-ASTA,LOG-A-ASTA-TAPA
+3,"TAPA - Tape, Adhesive",Mandatory,MED-S-SDRE,MED-S-SDRE-TAPA
+3,TAPD - Taps and dies,Mandatory,LOG-P-PTOO,LOG-P-PTOO-TAPD
+3,TAPE - Adhesive tape,Mandatory,LOG-P-PPAC,LOG-P-PPAC-TAPE
+3,TAPE - Boundary tape,Mandatory,LOG-P-PSAF,LOG-P-PSAF-TAPE
+3,TAPE - Insulating tape,Mandatory,LOG-P-PELE,LOG-P-PELE-TAPE
+3,TAPE - Masking tape,Mandatory,LOG-P-PPAI,LOG-P-PPAI-TAPE
+3,"TAPE - TAPE, multipurpose",Mandatory,LOG-P-PHDW,LOG-P-PHDW-TAPE
+3,TAPH - Tap holder,Mandatory,LOG-P-PTOO,LOG-P-PTOO-TAPH
+3,TAPL - Tablet planner,Mandatory,MED-E-EMEQ,MED-E-EMEQ-TAPL
+3,TAPM - Measuring tape,Mandatory,LOG-P-PTOO,LOG-P-PTOO-TAPM
+3,"TAPM - Tape, measure",Mandatory,MED-E-EANT,MED-E-EANT-TAPM
+3,TARP - Tarpaulin,Mandatory,LOG-C-CSHE,LOG-C-CSHE-TARP
+3,TASU - Tape Suspensory,Mandatory,MED-S-SSUT,MED-S-SSUT-TASU
+3,TBCU - Checklist laboratory TB Culture,Mandatory,MED-I-ILAB,MED-I-ILAB-TBCU
+3,TBID - Tuberculosis identification test,Mandatory,MED-D-DDGT,MED-D-DDGT-TBID
+3,"TBOD - Test, Bowie-Dick",Mandatory,MED-E-ESTE,MED-E-ESTE-TBOD
+3,TEAS - Tea,Mandatory,LOG-A-AFOO,LOG-A-AFOO-TEAS
+3,TEAT - Teat,Mandatory,MED-E-ELAE,MED-E-ELAE-TEAT
+3,TEEF - Tenofovir/Emtricitabine/Efavirenz,Mandatory,MED-D-DORA,MED-D-DORA-TEEF
+3,TEEM - Tenofovir/Emtricitabine,Mandatory,MED-D-DORA,MED-D-DORA-TEEM
+3,TEES - Tee-shirt,Mandatory,LOG-A-ALIF,LOG-A-ALIF-TEES
+3,TEES - Tee-shirt,Mandatory,LOG-P-PIDE,LOG-P-PIDE-TEES
+3,TEFT - Tenofovir/Emtricitabine,Mandatory,MED-D-DORA,MED-D-DORA-TEFT
+3,TELA - Tenofovir/Lamivudine,Mandatory,MED-D-DORA,MED-D-DORA-TELA
+3,TELE - Tenofovir/Lamivudine/Efavirenz,Mandatory,MED-D-DORA,MED-D-DORA-TELE
+3,TELF - Fax machine,Mandatory,LOG-A-AOFF,LOG-A-AOFF-TELF
+3,TELF - Telephone,Mandatory,LOG-P-PCOM,LOG-P-PCOM-TELF
+3,TEMP - Temporizer,Mandatory,LOG-P-PELE,LOG-P-PELE-TEMP
+3,TEND - Dispensary tent,Mandatory,LOG-C-CSHE,LOG-C-CSHE-TEND
+3,TENF - Family tent,Mandatory,LOG-C-CSHE,LOG-C-CSHE-TENF
+3,TENH - Hospital tent,Mandatory,LOG-C-CSHE,LOG-C-CSHE-TENH
+3,TENM - Multipurpose tent,Mandatory,LOG-C-CSHE,LOG-C-CSHE-TENM
+3,TENO - Tenofovir,Mandatory,MED-D-DORA,MED-D-DORA-TENO
+3,TENT - Tent for teams,Mandatory,LOG-C-CSHE,LOG-C-CSHE-TENT
+3,TESP - Pool tester,Mandatory,LOG-C-CWAT,LOG-C-CWAT-TESP
+3,TEST - Tester,Mandatory,LOG-P-PTOO,LOG-P-PTOO-TEST
+3,TEST - Voltage tester,Mandatory,LOG-P-PELE,LOG-P-PELE-TEST
+3,TEST - Water testing,Mandatory,LOG-C-CWAT,LOG-C-CWAT-TEST
+3,TESW - Water testing (DelAgua),Mandatory,LOG-C-CWAT,LOG-C-CWAT-TESW
+3,TETR - Tetracycline,Mandatory,MED-D-DEXO,MED-D-DEXO-TETR
+3,TFOG - Thermofogger,Mandatory,LOG-C-CWAT,LOG-C-CWAT-TFOG
+3,THCB - Therapeutic care book,Mandatory,LIB-L-L016,LIB-L-L016-THCB
+3,"THCG - Therapeutic centre, guide",Mandatory,LIB-L-L016,LIB-L-L016-THCG
+3,THEF - Antitheft system,Mandatory,LOG-T-TVEA,LOG-T-TVEA-THEF
+3,THER - Thermometer,Mandatory,LOG-P-PCOL,LOG-P-PCOL-THER
+3,THER - Thermometer,Mandatory,MED-S-SMSU,MED-S-SMSU-THER
+3,THER - Thermometer for X-Ray bath,Mandatory,MED-E-EDIM,MED-E-EDIM-THER
+3,THER - Thermostat for YAMAHA,Mandatory,LOG-T-TXYA,LOG-T-TXYA-THER
+3,THIA - Thiamine,Mandatory,MED-D-DINJ,MED-D-DINJ-THIA
+3,THIA - Thiamine,Mandatory,MED-D-DORA,MED-D-DORA-THIA
+3,THIN - Thinner,Mandatory,LOG-P-PPAI,LOG-P-PPAI-THIN
+3,THIO - Thiopental,Mandatory,MED-D-DINJ,MED-D-DINJ-THIO
+3,THMI - Therapeutic milk,Mandatory,MED-N-NFOS,MED-N-NFOS-THMI
+3,THRE - Thread restoring,Mandatory,LOG-P-PTOO,LOG-P-PTOO-THRE
+3,THUR - Thuraya satellite phone,Mandatory,LOG-P-PCOM,LOG-P-PCOM-THUR
+3,TIES - Tie,Mandatory,LOG-P-PCOM,LOG-P-PCOM-TIES
+3,TIES - Tie,Mandatory,LOG-P-PELE,LOG-P-PELE-TIES
+3,TILE - Tile,Mandatory,MED-E-ELAE,MED-E-ELAE-TILE
+3,TILF - Tile for floor,Mandatory,LOG-C-CBUI,LOG-C-CBUI-TILF
+3,TILG - Tile glue,Mandatory,LOG-C-CBUI,LOG-C-CBUI-TILG
+3,TILW - Tile for wall,Mandatory,LOG-C-CBUI,LOG-C-CBUI-TILW
+3,TIME - Timer,Mandatory,MED-E-ELAE,MED-E-ELAE-TIME
+3,TIME - Timer,Mandatory,MED-E-ESTE,MED-E-ESTE-TIME
+3,TIME - TIMER respiratory,Mandatory,MED-E-EMEQ,MED-E-EMEQ-TIME
+3,TINI - Tinidazole,Mandatory,MED-D-DORA,MED-D-DORA-TINI
+3,"TMAB - TRANSPORT MEDIUM, aerobic bacteria",Mandatory,MED-S-SLAS,MED-S-SLAS-TMAB
+3,TMCF - TRANSPORT MEDIUM FOR CSF,Mandatory,MED-S-SLAS,MED-S-SLAS-TMCF
+3,"TOCS - Tool, combination spanner",Mandatory,LOG-P-PCOM,LOG-P-PCOM-TOCS
+3,TOGG - Toggle,Mandatory,LOG-C-CSHE,LOG-C-CSHE-TOGG
+3,TOMA - Tomato sauce,Mandatory,LOG-A-AFOO,LOG-A-AFOO-TOMA
+3,TOOB - Tool kit,Mandatory,LOG-P-PTOO,LOG-P-PTOO-TOOB
+3,TOOB - Toothbrush,Mandatory,LOG-P-PHYG,LOG-P-PHYG-TOOB
+3,TOOH - Tool holder,Mandatory,LOG-P-PTOO,LOG-P-PTOO-TOOH
+3,TOOL - Tools,Mandatory,LOG-C-CWAT,LOG-C-CWAT-TOOL
+3,TOOL - Tools specifically for vehicles,Mandatory,LOG-T-TVEA,LOG-T-TVEA-TOOL
+3,TOOP - Toothpaste,Mandatory,LOG-P-PHYG,LOG-P-PHYG-TOOP
+3,TOOS - Tool set,Mandatory,LOG-P-PTOO,LOG-P-PTOO-TOOS
+3,TORK - Torx® key,Mandatory,LOG-P-PTOO,LOG-P-PTOO-TORK
+3,"TOSD - Tool, screwdriver",Mandatory,LOG-P-PCOM,LOG-P-PCOM-TOSD
+3,TOUR - Tourniquet,Mandatory,MED-E-EANE,MED-E-EANE-TOUR
+3,TOUR - Tourniquet,Mandatory,MED-E-EMEQ,MED-E-EMEQ-TOUR
+3,TOWE - Towel,Mandatory,LOG-P-PHYG,LOG-P-PHYG-TOWE
+3,TPTB - Transport book,Mandatory,LIB-L-L013,LIB-L-L013-TPTB
+3,"TRAB - Training, Book",Mandatory,LIB-L-L021,LIB-L-L021-TRAB
+3,TRAC - Tracer thermofogger,Mandatory,LOG-C-CWAT,LOG-C-CWAT-TRAC
+3,TRAD - Dressing Tray,Mandatory,MED-E-EMEQ,MED-E-EMEQ-TRAD
+3,TRAF - Orthopedic traction frame Trillat,Mandatory,MED-E-EHOE,MED-E-EHOE-TRAF
+3,"TRAG - Training, Guide",Mandatory,LIB-L-L021,LIB-L-L021-TRAG
+3,TRAM - Tramadol,Mandatory,MED-D-DINJ,MED-D-DINJ-TRAM
+3,TRAM - Tramadol,Mandatory,MED-D-DORA,MED-D-DORA-TRAM
+3,TRAN - Tranexamic acid,Mandatory,MED-D-DORA,MED-D-DORA-TRAN
+3,TRAN - Transparency,Mandatory,LOG-A-ASTA,LOG-A-ASTA-TRAN
+3,TRAY - Paint tray,Mandatory,LOG-P-PPAI,LOG-P-PPAI-TRAY
+3,"TRCB - Trachoma, book",Mandatory,LIB-L-L011,LIB-L-L011-TRCB
+3,"TRES - Suction side dosing, accessories",Mandatory,LOG-C-CWAT,LOG-C-CWAT-TRES
+3,"TREU - Water treatment unit, accessories",Mandatory,LOG-C-CWAT,LOG-C-CWAT-TREU
+3,TRFB - Transfusion book,Mandatory,LIB-L-L008,LIB-L-L008-TRFB
+3,"TRFB - Transfusion, book",Mandatory,LIB-L-L013,LIB-L-L013-TRFB
+3,"TRFD - Transfusion, CD-Rom",Mandatory,LIB-L-L008,LIB-L-L008-TRFD
+3,"TRFG - Transfusion, guide",Mandatory,LIB-L-L008,LIB-L-L008-TRFG
+3,TRHF - Transceiver HF,Mandatory,LOG-P-PCOM,LOG-P-PCOM-TRHF
+3,TRHG - HANDLE FOR TROCAR,Mandatory,MED-E-ESUF,MED-E-ESUF-TRHG
+3,TRIB - Triclabendazole,Mandatory,MED-D-DORA,MED-D-DORA-TRIB
+3,TRIC - Trisodium citrate,Mandatory,MED-S-SLAS,MED-S-SLAS-TRIC
+3,TRIH - Trihexyphenidyl,Mandatory,MED-D-DINJ,MED-D-DINJ-TRIH
+3,TRIM - Trimethoprim,Mandatory,MED-S-SLAS,MED-S-SLAS-TRIM
+3,TRIP - Fall arrest tripod,Mandatory,LOG-P-PSAF,LOG-P-PSAF-TRIP
+3,TRIS - Tripod stand,Mandatory,MED-E-ELAE,MED-E-ELAE-TRIS
+3,TROA - Anaesthesia Table,Mandatory,MED-E-EHOE,MED-E-EHOE-TROA
+3,"TROB - Tropical Medicine, Book",Mandatory,LIB-L-L002,LIB-L-L002-TROB
+3,TROC - Trocar,Mandatory,MED-S-SINS,MED-S-SINS-TROC
+3,"TROG - Tropical Medicine, Guide",Mandatory,LIB-L-L002,LIB-L-L002-TROG
+3,TROL - Trolley,Mandatory,MED-E-EHOE,MED-E-EHOE-TROL
+3,TROL - Trolley,Mandatory,LOG-P-PHYG,LOG-P-PHYG-TROL
+3,TROL - Trolley,Mandatory,LOG-P-PPAC,LOG-P-PPAC-TROL
+3,TROP - Tropicamide Mydriaticum,Mandatory,MED-D-DEXO,MED-D-DEXO-TROP
+3,"TROS - Trousers, Surgical",Mandatory,MED-E-ELIN,MED-E-ELIN-TROS
+3,TROU - Trousers for Salter scale type,Mandatory,MED-E-EANT,MED-E-EANT-TROU
+3,TROW - Trowel,Mandatory,LOG-P-PTOO,LOG-P-PTOO-TROW
+3,TRPG - Transport guide,Mandatory,LIB-L-L041,LIB-L-L041-TRPG
+3,"TRSA - Transceiver, satellite",Mandatory,LOG-P-PCOM,LOG-P-PCOM-TRSA
+3,TRSG - TROCAR/SLEEVE,Mandatory,MED-E-ESUF,MED-E-ESUF-TRSG
+3,TRUC - Pallet truck,Mandatory,LOG-P-PPAC,LOG-P-PPAC-TRUC
+3,TRUH - Transceiver UHF,Mandatory,LOG-P-PCOM,LOG-P-PCOM-TRUH
+3,TRUI - Transceiver UHF (Icom),Mandatory,LOG-P-PCOM,LOG-P-PCOM-TRUI
+3,TRUN - Trunck,Mandatory,LOG-P-PPAC,LOG-P-PPAC-TRUN
+3,TRVH - Transceiver VHF,Mandatory,LOG-P-PCOM,LOG-P-PCOM-TRVH
+3,TRVI - Transceiver VHF (Icom),Mandatory,LOG-P-PCOM,LOG-P-PCOM-TRVI
+3,"TRYB - Trypanosomiasis, Book",Mandatory,LIB-L-L006,LIB-L-L006-TRYB
+3,"TRYC - Trypanosomiasis, Chagas",Mandatory,MED-D-DDGT,MED-D-DDGT-TRYC
+3,"TRYD - Trypanosomiasis, Digital media",Mandatory,LIB-L-L006,LIB-L-L006-TRYD
+3,"TRYG - Trypanosomiasis, Guide",Mandatory,LIB-L-L006,LIB-L-L006-TRYG
+3,TRYT - Trypano Test,Mandatory,MED-D-DDGT,MED-D-DDGT-TRYT
+3,TSBA - Tryptic Soy Blood Agar Base,Mandatory,MED-S-SLAS,MED-S-SLAS-TSBA
+3,TSTI - Temperature Steam Time Indicator,Mandatory,MED-E-ESTE,MED-E-ESTE-TSTI
+3,"TUBB - Tuberculosis, Book",Mandatory,LIB-L-L004,LIB-L-L004-TUBB
+3,"TUBB - Tuberculosis, book",Mandatory,LIB-L-L007,LIB-L-L007-TUBB
+3,TUBE - Extension tube,Mandatory,LOG-P-PTOO,LOG-P-PTOO-TUBE
+3,TUBE - Inner tube,Mandatory,LOG-T-TVEC,LOG-T-TVEC-TUBE
+3,TUBE - Measuring tube,Mandatory,LOG-C-CWAT,LOG-C-CWAT-TUBE
+3,TUBE - Plastic tube,Mandatory,LOG-P-PPAC,LOG-P-PPAC-TUBE
+3,TUBE - Tube,Mandatory,MED-E-EANE,MED-E-EANE-TUBE
+3,"TUBE - Tube, sampling",Mandatory,MED-E-ELAE,MED-E-ELAE-TUBE
+3,"TUBE - Tube, silicone",Mandatory,MED-S-SCTD,MED-S-SCTD-TUBE
+3,"TUBG - Tuberculosis, Guide",Mandatory,LIB-L-L004,LIB-L-L004-TUBG
+3,"TUBG - Tuberculosis, guide",Mandatory,LIB-L-L040,LIB-L-L040-TUBG
+3,TUBH - Hematocritis Tube,Mandatory,MED-E-ELAE,MED-E-ELAE-TUBH
+3,TUBI - Tubing,Mandatory,LOG-P-PELE,LOG-P-PELE-TUBI
+3,TUBP - Tuberculin Purified,Mandatory,MED-D-DDGT,MED-D-DDGT-TUBP
+3,TUBT - Tube Tracheotomy,Mandatory,MED-S-SCTD,MED-S-SCTD-TUBT
+3,TUBT - Tuberculose test,Mandatory,MED-D-DDGT,MED-D-DDGT-TUBT
+3,TUCA - Tube Capillary,Mandatory,MED-E-ELAE,MED-E-ELAE-TUCA
+3,"TUCE - Tube, centrifuge",Mandatory,MED-E-ELAE,MED-E-ELAE-TUCE
+3,"TUCG - TUBE, carbon",Mandatory,MED-E-ESUF,MED-E-ESUF-TUCG
+3,"TUEC - Connector, Endotracheal Tube",Mandatory,MED-S-SCTD,MED-S-SCTD-TUEC
+3,"TUED - Endotracheal Tube, Disp.",Mandatory,MED-S-SCTD,MED-S-SCTD-TUED
+3,"TUGA - Tube, Gastric",Mandatory,MED-S-SCTD,MED-S-SCTD-TUGA
+3,"TUGL - Tube, Gastric, Luer",Mandatory,MED-S-SCTD,MED-S-SCTD-TUGL
+3,"TUGS - Gastric tube, Salem type",Mandatory,MED-S-SCTD,MED-S-SCTD-TUGS
+3,"TUGS - Tube, glass, srew cap",Mandatory,MED-E-ELAE,MED-E-ELAE-TUGS
+3,TUHA - Tube haemolysis,Mandatory,MED-E-ELAE,MED-E-ELAE-TUHA
+3,TUHF - Tuner HF,Mandatory,LOG-P-PCOM,LOG-P-PCOM-TUHF
+3,"TULG - TUBE, LENGTHENING/COMPRESSION",Mandatory,MED-E-ESUF,MED-E-ESUF-TULG
+3,TUMI - Microtube,Mandatory,MED-E-ELAE,MED-E-ELAE-TUMI
+3,"TUNS - TUNIC, SURGICAL, woven",Mandatory,MED-E-ELIN,MED-E-ELIN-TUNS
+3,TUOX - Oxygen tube,Mandatory,MED-S-SCTD,MED-S-SCTD-TUOX
+3,TURK - Turck solution,Mandatory,MED-S-SLAS,MED-S-SLAS-TURK
+3,"TUSF - Tube, suction, Frazier",Mandatory,MED-E-ESUR,MED-E-ESUR-TUSF
+3,"TUSP - Tube, suction, Poole",Mandatory,MED-E-ESUR,MED-E-ESUR-TUSP
+3,TUSU - Suction Tube,Mandatory,MED-S-SCTD,MED-S-SCTD-TUSU
+3,"TUSY - Tube, Suction, type Yankauer",Mandatory,MED-S-SCTD,MED-S-SCTD-TUSY
+3,TWEE - Tweezers,Mandatory,LOG-P-PTOO,LOG-P-PTOO-TWEE
+3,"TYFB - Typhoid Fever, Book",Mandatory,LIB-L-L004,LIB-L-L004-TYFB
+3,TYPE - Typewriter accessories,Mandatory,LOG-A-ASTA,LOG-A-ASTA-TYPE
+3,TYR+ - Tyre for Land Cruiser,Mandatory,LOG-T-TVEC,LOG-T-TVEC-TYR+
+3,"TYRA - Tyre, all terrain profile",Mandatory,LOG-T-TVEC,LOG-T-TVEC-TYRA
+3,"TYRH - Tyre, heavy duty profile",Mandatory,LOG-T-TVEC,LOG-T-TVEC-TYRH
+3,"TYRM - Tyre, mud profile",Mandatory,LOG-T-TVEC,LOG-T-TVEC-TYRM
+3,"TYRS - Tyre, sand profile",Mandatory,LOG-T-TVEC,LOG-T-TVEC-TYRS
+3,ULCB - Buruli Ulcer Book,Mandatory,LIB-L-L004,LIB-L-L004-ULCB
+3,ULSA - (ultrasound) accessories,Mandatory,MED-E-EDIM,MED-E-EDIM-ULSA
+3,ULSC - (ultrasound) consumables,Mandatory,MED-E-EDIM,MED-E-EDIM-ULSC
+3,ULSE - Ultrasound scanner,Mandatory,MED-E-EDIM,MED-E-EDIM-ULSE
+3,ULSS - (ultrasound) spare-parts,Mandatory,MED-E-EDIM,MED-E-EDIM-ULSS
+3,"ULTB - Ultrasound, Book",Mandatory,LIB-L-L012,LIB-L-L012-ULTB
+3,ULTS - Ultrasound scanner,Mandatory,MED-E-EDIM,MED-E-EDIM-ULTS
+3,UMBC - Umbilical Cord / Clamp,Mandatory,MED-S-SDRE,MED-S-SDRE-UMBC
+3,UN62 - UN packaging for class 6.2,Mandatory,LOG-P-PPAC,LOG-P-PPAC-UN62
+3,UPSD - UPS double conversion,Mandatory,LOG-P-PELE,LOG-P-PELE-UPSD
+3,UPSD - UPS for desktop,Mandatory,LOG-A-ADAP,LOG-A-ADAP-UPSD
+3,"URBG - Urbain health, Guide",Mandatory,LIB-L-L025,LIB-L-L025-URBG
+3,URIN - Urinal Bottle,Mandatory,MED-E-EMEQ,MED-E-EMEQ-URIN
+3,"URIS - Urine, diagnostic strips",Mandatory,MED-D-DDGT,MED-D-DDGT-URIS
+3,VACC - Vacuum cleaner,Mandatory,LOG-P-PTOO,LOG-P-PTOO-VACC
+3,VACE - Vaccuum Extractor,Mandatory,MED-E-EHOE,MED-E-EHOE-VACE
+3,VALB - Ball valve,Mandatory,LOG-C-CWAT,LOG-C-CWAT-VALB
+3,VALD - Valve Of Digbyleight,Mandatory,MED-E-EANE,MED-E-EANE-VALD
+3,VALG - Gate valve,Mandatory,LOG-C-CWAT,LOG-C-CWAT-VALG
+3,VALG - Valganciclovir,Mandatory,MED-D-DORA,MED-D-DORA-VALG
+3,VALL - Valve lifter,Mandatory,LOG-P-PTOO,LOG-P-PTOO-VALL
+3,VALP - VALPROATE SODIUM,Mandatory,MED-D-DORA,MED-D-DORA-VALP
+3,VALV - Valve,Mandatory,LOG-C-CWAT,LOG-C-CWAT-VALV
+3,VARN - Varnish,Mandatory,LOG-P-PPAI,LOG-P-PPAI-VARN
+3,VBCG - Vaccine Bcg,Mandatory,MED-D-DVAC,MED-D-DVAC-VBCG
+3,VCHO - Vaccine cholera,Mandatory,MED-D-DVAC,MED-D-DVAC-VCHO
+3,VCTB - Volontary counselling & testing,Mandatory,LIB-L-L007,LIB-L-L007-VCTB
+3,"VDHH - Vaccine, DPT+hepatitis B+Hib",Mandatory,MED-D-DVAC,MED-D-DVAC-VDHH
+3,VDPT - Vaccine Dpt/Dptp,Mandatory,MED-D-DVAC,MED-D-DVAC-VDPT
+3,"VDTB - Vaccine, diptheria/tetanus, booster",Mandatory,MED-D-DVAC,MED-D-DVAC-VDTB
+3,VDTE - Vaccine Diphteria/Tetanus,Mandatory,MED-D-DVAC,MED-D-DVAC-VDTE
+3,"VECB - Vector, Book",Mandatory,LIB-L-L018,LIB-L-L018-VECB
+3,VECB - Vecuronium,Mandatory,MED-D-DINJ,MED-D-DINJ-VECB
+3,VENC - Vaccine Japonese Encephalitis,Mandatory,MED-D-DVAC,MED-D-DVAC-VENC
+3,VENT - Vacuum extractor,Mandatory,MED-E-EMEQ,MED-E-EMEQ-VENT
+3,VENT - Ventouse,Mandatory,MED-E-ESUR,MED-E-ESUR-VENT
+3,VERA - Verapamil,Mandatory,MED-D-DINJ,MED-D-DINJ-VERA
+3,VERA - Verapamil,Mandatory,MED-D-DORA,MED-D-DORA-VERA
+3,VERM - Vermiculite,Mandatory,LOG-C-CBUI,LOG-C-CBUI-VERM
+3,VEST - Vest,Mandatory,LOG-A-ALIF,LOG-A-ALIF-VEST
+3,VEST - Vest,Mandatory,LOG-P-PIDE,LOG-P-PIDE-VEST
+3,"VHEA - Vaccine, Hepatitis A",Mandatory,MED-D-DVAC,MED-D-DVAC-VHEA
+3,VHEB - Vaccine Hepatitis B,Mandatory,MED-D-DVAC,MED-D-DVAC-VHEB
+3,VIBE - View box,Mandatory,MED-E-EDIM,MED-E-EDIM-VIBE
+3,VIBO - View box,Mandatory,MED-E-EDIM,MED-E-EDIM-VIBO
+3,VIBS - (view box) SPARE-PARTS,Mandatory,MED-E-EDIM,MED-E-EDIM-VIBS
+3,VICE - Vice,Mandatory,LOG-P-PTOO,LOG-P-PTOO-VICE
+3,VINC - Vincristine,Mandatory,MED-D-DINJ,MED-D-DINJ-VINC
+3,VMEA - Vaccine Measles,Mandatory,MED-D-DVAC,MED-D-DVAC-VMEA
+3,VMEN - Vaccine Meningitis,Mandatory,MED-D-DVAC,MED-D-DVAC-VMEN
+3,VOLA - Voltage adaptor,Mandatory,LOG-P-PELE,LOG-P-PELE-VOLA
+3,VOLL - Voltage limiter,Mandatory,LOG-P-PELE,LOG-P-PELE-VOLL
+3,VOLS - Voltage stabiliser,Mandatory,LOG-P-PELE,LOG-P-PELE-VOLS
+3,VOLT - Voltage transformer,Mandatory,LOG-P-PELE,LOG-P-PELE-VOLT
+3,VORE - Vortex mixer,Mandatory,MED-E-ELAE,MED-E-ELAE-VORE
+3,VORT - Vortex mixer,Mandatory,MED-E-ELAE,MED-E-ELAE-VORT
+3,VOUC - Voucher,Mandatory,LOG-A-ALST,LOG-A-ALST-VOUC
+3,VPNE - Vaccine Pneumococcal conjugate,Mandatory,MED-D-DVAC,MED-D-DVAC-VPNE
+3,VPOL - Vaccine Polio Oral,Mandatory,MED-D-DVAC,MED-D-DVAC-VPOL
+3,VRAB - Vaccine Antirabius,Mandatory,MED-D-DVAC,MED-D-DVAC-VRAB
+3,VTET - Vaccine Tetanus,Mandatory,MED-D-DVAC,MED-D-DVAC-VTET
+3,VTYP - Vaccine Typhoid,Mandatory,MED-D-DVAC,MED-D-DVAC-VTYP
+3,VULT - Vulcanising tape,Mandatory,LOG-P-PCOM,LOG-P-PCOM-VULT
+3,VVFB - Vesico-vaginal fistula book,Mandatory,LIB-L-L008,LIB-L-L008-VVFB
+3,VYEF - Vaccine Yellow Fever,Mandatory,MED-D-DVAC,MED-D-DVAC-VYEF
+3,WAMB - Waste Management Book,Mandatory,LIB-L-L029,LIB-L-L029-WAMB
+3,WAPI - Wireless Access Point,Mandatory,LOG-A-ADAP,LOG-A-ADAP-WAPI
+3,WARE - Warehouse,Mandatory,LOG-C-CSHE,LOG-C-CSHE-WARE
+3,"WARI - Warmer, infant",Mandatory,MED-E-EHOE,MED-E-EHOE-WARI
+3,WASH - Washer,Mandatory,LOG-P-PHDW,LOG-P-PHDW-WASH
+3,WASM - Washing machine,Mandatory,LOG-A-ALIF,LOG-A-ALIF-WASM
+3,WASM - Washing machine,Mandatory,LOG-P-PHYG,LOG-P-PHYG-WASM
+3,WASO - Water-softener,Mandatory,MED-E-ESTE,MED-E-ESTE-WASO
+3,WASP - Washing powder,Mandatory,LOG-A-ALIF,LOG-A-ALIF-WASP
+3,WASP - Washing powder,Mandatory,LOG-P-PHYG,LOG-P-PHYG-WASP
+3,"WATB - Water, Book",Mandatory,LIB-L-L018,LIB-L-L018-WATB
+3,"WATD - Water, Digital Media",Mandatory,LIB-L-L018,LIB-L-L018-WATD
+3,WATE - Water for injection,Mandatory,MED-D-DINF,MED-D-DINF-WATE
+3,"WATE - Water, Distilled",Mandatory,MED-D-DINJ,MED-D-DINJ-WATE
+3,"WATE - Water, Distilled",Mandatory,MED-S-SLAS,MED-S-SLAS-WATE
+3,"WATG - Water, Guide",Mandatory,LIB-L-L018,LIB-L-L018-WATG
+3,"WATI - Water, deionized",Mandatory,MED-S-SLAS,MED-S-SLAS-WATI
+3,WATP - Water paint,Mandatory,LOG-P-PPAI,LOG-P-PPAI-WATP
+3,WCLO - Washcloth,Mandatory,LOG-P-PHYG,LOG-P-PHYG-WCLO
+3,WELD - Welder,Mandatory,LOG-P-PTOO,LOG-P-PTOO-WELD
+3,WHEA - Wheat,Mandatory,MED-N-NFOO,MED-N-NFOO-WHEA
+3,WHEB - Wheel barrow,Mandatory,LOG-P-PTOO,LOG-P-PTOO-WHEB
+3,WHEC - Wheelchair,Mandatory,MED-E-EPHY,MED-E-EPHY-WHEC
+3,WHEV - Wheel valve,Mandatory,LOG-T-TVEA,LOG-T-TVEA-WHEV
+3,WHIS - Whisk,Mandatory,LOG-P-PCOO,LOG-P-PCOO-WHIS
+3,WHIW - Whitewashing paint,Mandatory,LOG-P-PPAI,LOG-P-PPAI-WHIW
+3,"WINB - WINDOWS, Book",Mandatory,LIB-L-L044,LIB-L-L044-WINB
+3,WINC - Hand winch,Mandatory,LOG-T-TVEA,LOG-T-TVEA-WINC
+3,WINC - Winch,Mandatory,LOG-P-PSAF,LOG-P-PSAF-WINC
+3,WINE - Wine,Mandatory,LOG-A-AFOO,LOG-A-AFOO-WINE
+3,WINS - Wind screen for TOYOTA,Mandatory,LOG-T-TXTO,LOG-T-TXTO-WINS
+3,WIRB - Baling wire,Mandatory,LOG-P-PHDW,LOG-P-PHDW-WIRB
+3,WIRE - Wire,Mandatory,MED-E-ESUR,MED-E-ESUR-WIRE
+3,WIRE - Wire,Mandatory,LOG-P-PHDW,LOG-P-PHDW-WIRE
+3,WIRE - Wire netting,Mandatory,LOG-C-CBUI,LOG-C-CBUI-WIRE
+3,WIRK - Wire Of Kirschner,Mandatory,MED-E-ESUR,MED-E-ESUR-WIRK
+3,WOOB - Wood board,Mandatory,LOG-C-CBUI,LOG-C-CBUI-WOOB
+3,WOOL - Steel wool,Mandatory,LOG-P-PHDW,LOG-P-PHDW-WOOL
+3,WOOP - Wood plank,Mandatory,LOG-C-CBUI,LOG-C-CBUI-WOOP
+3,WOOS - Wood stud,Mandatory,LOG-C-CBUI,LOG-C-CBUI-WOOS
+3,WOOT - Wood timber,Mandatory,LOG-C-CBUI,LOG-C-CBUI-WOOT
+3,WORG - Word Guide,Mandatory,LIB-L-L044,LIB-L-L044-WORG
+3,WREN - Wrench,Mandatory,LOG-P-PTOO,LOG-P-PTOO-WREN
+3,"XRAB - X-Ray, Book",Mandatory,LIB-L-L012,LIB-L-L012-XRAB
+3,XRAC - Xray cd rom,Mandatory,LIB-L-L012,LIB-L-L012-XRAC
+3,"XRAG - X-Ray, Guide",Mandatory,LIB-L-L012,LIB-L-L012-XRAG
+3,XRAY - X-ray unit,Mandatory,MED-E-EDIM,MED-E-EDIM-XRAY
+3,XRAY - x-ray unit checklists,Mandatory,MED-I-IDIM,MED-I-IDIM-XRAY
+3,XRFC - (fluoroscopic x-ray) consumables,Mandatory,MED-E-EDIM,MED-E-EDIM-XRFC
+3,XRFE - Fluoroscopic x-ray system,Mandatory,MED-E-EDIM,MED-E-EDIM-XRFE
+3,XRFL - Fluoroscopic x-ray system,Mandatory,MED-E-EDIM,MED-E-EDIM-XRFL
+3,XRUE - X-ray unit,Mandatory,MED-E-EDIM,MED-E-EDIM-XRUE
+3,XTOY - TOYOTA spare parts (catalogue),Mandatory,LOG-T-TXTO,LOG-T-TXTO-XTOY
+3,XYLE - Xylene,Mandatory,MED-S-SLAS,MED-S-SLAS-XYLE
+3,YALS - Aluminium sulfate,Mandatory,LOG-C-CWAT,LOG-C-CWAT-YALS
+3,YCAH - Calcium hypochlorite (HTH),Mandatory,LOG-C-CWAT,LOG-C-CWAT-YCAH
+3,YCHN - Chlorine (NADCC),Mandatory,LOG-C-CWAT,LOG-C-CWAT-YCHN
+3,"YEFB - Yellow Fever, Book",Mandatory,LIB-L-L003,LIB-L-L003-YEFB
+3,"YEFG - Yellow Fever, Guide",Mandatory,LIB-L-L003,LIB-L-L003-YEFG
+3,YIDO - Zidovudine (AZT),Mandatory,MED-D-DINJ,MED-D-DINJ-YIDO
+3,YIDO - Zidovudine (AZT),Mandatory,MED-D-DORA,MED-D-DORA-YIDO
+3,YILA - Zidovudine + Lamivudine,Mandatory,MED-D-DORA,MED-D-DORA-YILA
+3,YINO - Zinc Oxide,Mandatory,MED-D-DEXT,MED-D-DEXT-YINO
+3,YINS - Zinc Sulfate,Mandatory,MED-D-DORA,MED-D-DORA-YINS
+3,YLIM - Lime,Mandatory,LOG-C-CWAT,LOG-C-CWAT-YLIM
+3,YODI - Zodiac,Mandatory,LOG-T-TBOA,LOG-T-TBOA-YODI
+3,YYCO - Couplings and others,Mandatory,LOG-C-CWAT,LOG-C-CWAT-YYCO
