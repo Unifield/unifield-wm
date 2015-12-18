@@ -312,7 +312,7 @@
                                         </form>
                                     </field>
                                     <field name="closing_balance_frozen" invisible="1"/>
-                                    <field name="ending_details_ids" nolabel="1" colspan="2" attrs="{'readonly':['|', ('state','!=','open'), ('closing_balance_frozen', '=', True)]}">
+                                    <field name="ending_details_ids" nolabel="1" colspan="2" attrs="{'readonly':['|', ('state','!=','open'), ('closing_balance_frozen', '=', True)]}" context="{'pager_no_select': 1}">
                                         <tree string = "Closing Balance" editable="bottom">
                                             <field name="pieces"/>
                                             <field name="number" on_change="on_change_sub(pieces,number, parent.balance_end)"/>
