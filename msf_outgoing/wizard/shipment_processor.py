@@ -23,6 +23,7 @@ from osv import fields
 from osv import osv
 
 from tools.translate import _
+from msf_order_date import TRANSPORT_TYPE
 
 import time
 
@@ -47,9 +48,7 @@ class shipment_processor(osv.osv):
         'date': fields.datetime(string='Date', required=True),
         'transport_type': fields.selection(
             string='Transport type',
-            selection=[
-                ('by_road', 'By Road'),
-            ],
+            selection=TRANSPORT_TYPE,
             readonly=True,
         ),
         'address_id': fields.many2one(
@@ -289,7 +288,7 @@ class shipment_family_processor(osv.osv):
         for line in self.browse(cr, uid, ids, context=context):
             num_of_packs = line.to_pack - line.from_pack + 1
             res[line.id] = {
-                'volume': (line.length * line.width * line.height * float(num_of_packs)) / 100.0,
+                'volume': (line.length * line.width * line.height * float(num_of_packs)) / 1000.0,
                 'num_of_packs': num_of_packs,
                 'selected_weight': line.weight * line.selected_number,
             }

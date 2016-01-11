@@ -147,6 +147,7 @@ product_supply_source()
 
 class product_justification_code(osv.osv):
     _name = "product.justification.code"
+    _rec_name = 'code'
     _columns = {
         'code': fields.char('Justification Code', size=32, required=True, translate=True),
         'description': fields.char('Justification Description', size=256, required=True),
@@ -204,10 +205,12 @@ class product_attributes(osv.osv):
     def init(self, cr):
         if hasattr(super(product_attributes, self), 'init'):
             super(product_attributes, self).init(cr)
+        mod_obj = self.pool.get('ir.module.module')
+        mode = mod_obj.search(cr, 1, [('name', '=', 'product_attributes'), ('state', '=', 'to install')]) and 'init' or 'update'
         logging.getLogger('init').info('HOOK: module product_attributes: loading product_attributes_data.xml')
         pathname = path.join('product_attributes', 'product_attributes_data.xml')
         file = tools.file_open(pathname)
-        tools.convert_xml_import(cr, 'product_attributes', file, {}, mode='init', noupdate=False)
+        tools.convert_xml_import(cr, 'product_attributes', file, {}, mode=mode, noupdate=True)
 
     def _get_nomen(self, cr, uid, ids, field_name, args, context=None):
         res = {}
@@ -261,12 +264,27 @@ class product_attributes(osv.osv):
     def _get_restriction(self, cr, uid, ids, field_name, args, context=None):
         res = {}
 
-        for product in self.browse(cr, uid, ids, context=context):
-            res[product.id] = {'no_external': product.state.no_external or product.international_status.no_external or False,
-                               'no_esc': product.state.no_esc or product.international_status.no_esc or False,
-                               'no_internal': product.state.no_internal or product.international_status.no_internal or False,
-                               'no_consumption': product.state.no_consumption or product.international_status.no_consumption or False,
-                               'no_storage': product.state.no_storage or product.international_status.no_storage or False}
+        product_state = self.pool.get('product.status')
+        intl_state = self.pool.get('product.international.status')
+        for product in self.read(cr, uid, ids, ['state', 'international_status'], context=context):
+            res[product['id']] = {
+                'no_external': False,
+                'no_esc': False,
+                'no_internal': False,
+                'no_consumption': False,
+                'no_storage': False
+            }
+            fields = ['no_external', 'no_esc', 'no_internal', 'no_consumption', 'no_storage']
+            state = None
+            intl = None
+            if product['state']:
+                state = product_state.read(cr, uid, product['state'][0], fields, context=context)
+            if product['international_status']:
+                intl = intl_state.read(cr, uid, product['international_status'][0], fields, context=context)
+
+            if state or intl:
+                for f in fields:
+                    res[product['id']][f] = (state and state[f]) or (intl and intl[f]) or False
 
         return res
 
@@ -280,6 +298,18 @@ class product_attributes(osv.osv):
         res = {}
         for id in ids:
             res[id] = False
+
+        return res
+
+    def _get_vat_ok(self, cr, uid, ids, field_name, args, context=None):
+        '''
+        Return True if the system configuration VAT management is set to True
+        '''
+        vat_ok = self.pool.get('unifield.setup.configuration').get_config(cr, uid).vat_ok
+        res = {}
+        for id in ids:
+            res[id] = vat_ok
+
         return res
 
     # This method is here because the following domain didn't work on field order/purchase order lines
@@ -322,7 +352,7 @@ class product_attributes(osv.osv):
         'old_code' : fields.char('Old code', size=64),
         'new_code' : fields.char('New code', size=64),
 
-        'international_status': fields.many2one('product.international.status', 'Product Creator', required=True),
+        'international_status': fields.many2one('product.international.status', 'Product Creator', required=False),
         'perishable': fields.boolean('Expiry Date Mandatory'),
         'batch_management': fields.boolean('Batch Number Mandatory'),
         'product_catalog_page' : fields.char('Product Catalog Page', size=64),
@@ -409,16 +439,22 @@ class product_attributes(osv.osv):
         'available_for_restriction': fields.function(_get_dummy, fnct_search=_src_available_for_restriction, method=True, type='boolean',
                                                  store=False, string='Available for the partner', readonly=True),
         'form_value': fields.text(string='Form', translate=True),
-        'fit_value': fields.text(string='Form', translate=True),
-        'function_value': fields.text(string='Form', translate=True),
+        'fit_value': fields.text(string='Fit', translate=True),
+        'function_value': fields.text(string='Function', translate=True),
         'standard_ok': fields.boolean(string='Standard'),
+        'soq_weight': fields.float(digits=(16,5), string='SoQ Weight'),
+        'soq_volume': fields.float(digits=(16,5), string='SoQ Volume'),
+        'vat_ok': fields.function(_get_vat_ok, method=True, type='boolean', string='VAT OK', store=False, readonly=True),
     }
 
-    def default_get(self, cr, uid, fields, context=None):
-        res = super(product_attributes, self).default_get(cr, uid, fields, context=context)
-        id = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'product_attributes', 'int_1') and self.pool.get('ir.model.data').get_object_reference(cr, uid, 'product_attributes', 'int_1')[1] or 1
-        res.update({'international_status': id })
-        return res
+    # US-43: Remove the default_get that set value on Product Creator field. By removing the required = True value
+    # in the field (international_status) declaration and put required=True in the XML view, the default value
+    # is blank and the field is mandatory before save
+    #def default_get(self, cr, uid, fields, context=None):
+    #    res = super(product_attributes, self).default_get(cr, uid, fields, context=context)
+    #    id = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'product_attributes', 'int_1') and self.pool.get('ir.model.data').get_object_reference(cr, uid, 'product_attributes', 'int_1')[1] or 1
+    #    res.update({'international_status': id })
+    #    return res
 
     _defaults = {
         'duplicate_ok': True,
@@ -431,6 +467,7 @@ class product_attributes(osv.osv):
         'restricted_country': False,
         'currency_id': lambda obj, cr, uid, c: obj.pool.get('res.users').browse(cr, uid, uid).company_id.currency_id.id,
         'field_currency_id': lambda obj, cr, uid, c: obj.pool.get('res.users').browse(cr, uid, uid).company_id.currency_id.id,
+        'vat_ok': lambda obj, cr, uid, c: obj.pool.get('unifield.setup.configuration').get_config(cr, uid).vat_ok,
     }
 
     def _check_uom_category(self, cr, uid, ids, context=None):
@@ -704,6 +741,7 @@ class product_attributes(osv.osv):
         threshold_obj = self.pool.get('threshold.value')
         threshold_line_obj = self.pool.get('threshold.value.line')
         orderpoint_obj = self.pool.get('stock.warehouse.orderpoint')
+        orderpoint_line_obj = self.pool.get('stock.warehouse.orderpoint.line')
         invoice_obj = self.pool.get('account.invoice.line')
 
         error_obj = self.pool.get('product.deactivation.error')
@@ -769,7 +807,7 @@ class product_attributes(osv.osv):
             # Check if the product is in an invoice
             has_invoice_line = invoice_obj.search(cr, uid, [('product_id', '=', product.id),
                                                             ('invoice_id', '!=', False),
-                                                            ('invoice_id.state', 'not in', ['draft', 'done', 'cancel'])], context=context)
+                                                            ('invoice_id.state', 'not in', ['open', 'paid', 'proforma', 'proforma2', 'cancel'])], context=context)
 
             # Check if the product has stock in internal locations
             has_stock = product.qty_available
@@ -955,8 +993,16 @@ class product_attributes(osv.osv):
                 threshold_line_obj.unlink(cr, uid, [threshold.id], context=context)
 
         # Minimum stock rules
-        orderpoint_ids = orderpoint_obj.search(cr, uid, [('product_id', 'in', ids)], context=context)
-        orderpoint_obj.unlink(cr, uid, orderpoint_ids, context=context)
+        orderpoint_line_ids = orderpoint_line_obj.search(cr, uid,
+            [('product_id', 'in', ids)], context=context)
+        for orderpoint_line in orderpoint_line_obj.browse(cr, uid,
+            orderpoint_line_ids, context=context):
+            if len(orderpoint_line.supply_id.line_ids) == 1:
+                orderpoint_obj.unlink(cr, uid, [orderpoint_line.supply_id.id],
+                    context=context)
+            else:
+                orderpoint_line_obj.unlink(cr, uid, [orderpoint_line.id],
+                    context=context)
 
         self.write(cr, uid, ids, {'active': False}, context=context)
 
@@ -1184,6 +1230,32 @@ class product_uom(osv.osv):
     _columns = {
         'compatible_product_id': fields.function(_get_dummy, fnct_search=_get_compatible_uom, method=True, type='boolean', string='Compatible UoM'),
     }
+
+    def unlink(self, cr, uid, ids, context=None):
+        """
+        Check if the deleted product category is not a system one
+        """
+        data_obj = self.pool.get('ir.model.data')
+
+        uom_data_id = [
+            'uom_tbd',
+            ]
+
+        for data_id in uom_data_id:
+            try:
+                uom_id = data_obj.get_object_reference(
+                    cr, uid, 'msf_doc_import', data_id)[1]
+                if uom_id in ids:
+                    uom_name = self.read(cr, uid, uom_id, ['name'])['name'] 
+                    raise osv.except_osv(
+                        _('Error'),
+                        _('''The UoM '%s' is an Unifield internal
+Uom, so you can't remove it''' % uom_name),
+                    )
+            except ValueError:
+                pass
+
+        return super(product_uom, self).unlink(cr, uid, ids, context=context)
 
 product_uom()
 

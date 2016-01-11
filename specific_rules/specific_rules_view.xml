@@ -475,7 +475,7 @@
                     <field name="prod_lot_id" position="replace">
                         <field name="prod_lot_id"
                             on_change="change_lot(prod_lot_id)"
-                            context="{'location_id':location_id, 'product_id': product_id, 'hidden_perishable_mandatory': hidden_perishable_mandatory}"
+                            context="{'location_id':location_id, 'product_id': product_id}"
                             domain="[('check_type','=', True), ('product_id', '=', product_id)]"
                             attrs="{'required': [('hidden_batch_management_mandatory', '=', True)], 'readonly': [('hidden_perishable_mandatory', '=', False), ('hidden_batch_management_mandatory', '=', False)]}" />
                            <field name="expiry_date"
@@ -491,6 +491,8 @@
                         <field name="ssl_check" invisible="True" />
                         <field name="dg_check" />
                         <field name="np_check" />
+                        <button name="btn_dl" type="object" string="Line is duplicated" icon="gtk-dialog-warning" attrs="{'invisible': [('duplicate_line', '=', False)]}" />
+                        <field name="duplicate_line" invisible="True" />
                     <field name="has_problem" invisible="True" />
                     </field>
                 </data>
@@ -609,20 +611,32 @@
                 <data>
 
                     <xpath expr="//field[@name='product_id']" position="attributes">
-                        <attribute name="on_change">onchange_product_id(product_id, product_uom, product_min_qty, product_max_qty)</attribute>
+                        <attribute name="invisible">1</attribute>
                     </xpath>
 
                     <xpath expr="/form//field[@name='product_uom']" position="attributes">
-                        <attribute name="on_change">onchange_uom_qty(product_id, product_uom, product_min_qty, product_max_qty)</attribute>
-                        <attribute name="domain">[('uom_by_product', '=', product_id)]</attribute>
+                        <attribute name="invisible">1</attribute>
                     </xpath>
 
-                    <xpath expr="//field[@name='product_min_qty']" position="attributes">
-                        <attribute name="on_change">onchange_uom_qty(product_id, product_uom, product_min_qty, product_max_qty)</attribute>
-                    </xpath>
-
-                    <xpath expr="//field[@name='product_max_qty']" position="attributes">
-                        <attribute name="on_change">onchange_uom_qty(product_id, product_uom, product_min_qty, product_max_qty)</attribute>
+                    <xpath expr="//group[5]" position="replace">
+                        <!-- Procurement Orders to Process replaced by stock.warehouse.orderpoint lines -->
+                        <group colspan="4" col="4">
+                        <separator colspan="4" string="Order min/max quantity by product" />
+                        <field name="line_ids" nolabel="1" colspan="4"
+                            context="{'product_min_qty': product_min_qty, 'product_max_qty': product_max_qty, 'qty_multiple': qty_multiple}">
+                            <tree string="Products" editable="top"
+                                colors="red: product_qty &lt;= 0.00">
+                                <field name="product_id" on_change="onchange_product_id(product_id, product_uom_id, product_min_qty, product_max_qty)" />
+                                <field name="product_uom_id" domain="[('uom_by_product', '=', product_id)]"
+                                    on_change="onchange_uom_qty(product_uom_id, product_min_qty, product_max_qty)"/>
+                                <field name="product_min_qty"
+                                    on_change="onchange_uom_qty(product_uom_id, product_min_qty, product_max_qty)" />
+                                <field name="product_max_qty"
+                                    on_change="onchange_uom_qty(product_uom_id, product_min_qty, product_max_qty)" />
+                                <field name="qty_multiple" />
+                            </tree>
+                        </field>
+                        </group>
                     </xpath>
 
                 </data>

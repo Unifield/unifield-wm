@@ -46,10 +46,10 @@ class stock_inventory(osv.osv):
     _columns = {
         'file_to_import': fields.binary(string='File to import', filters='*.xml',
                                         help="""You can use the template of the export for the format that you need to use. \n The file should be in XML Spreadsheet 2003 format.
-                                        \n The columns should be in this order : Product Code*, Product Description*, Initial Average Cost, Location*, Batch, Expiry Date, Quantity"""),
+                                        \n The columns should be in this order : Product Code*, Product Description*, Location*, Batch, Expiry Date, Quantity"""),
         'import_error_ok':fields.function(_get_import_error,  method=True, type="boolean", string="Error in Import", store=True),
     }
-    
+
     def _check_active_product(self, cr, uid, ids, context=None):
         '''
         Check if the stock inventory contains a line with an inactive products
@@ -57,7 +57,7 @@ class stock_inventory(osv.osv):
         inactive_lines = self.pool.get('stock.inventory.line').search(cr, uid, [('product_id.active', '=', False),
                                                                                 ('inventory_id', 'in', ids),
                                                                                 ('inventory_id.state', 'not in', ['draft', 'cancel', 'done'])], context=context)
-        
+
         if inactive_lines:
             plural = len(inactive_lines) == 1 and _('A product has') or _('Some products have')
             l_plural = len(inactive_lines) == 1 and _('line') or _('lines')
@@ -65,11 +65,11 @@ class stock_inventory(osv.osv):
             raise osv.except_osv(_('Error'), _('%s been inactivated. If you want to validate this document you have to remove/correct the %s containing %s (see red %s of the document)') % (plural, l_plural, p_plural, l_plural))
             return False
         return True
-    
+
     _constraints = [
         (_check_active_product, "You cannot confirm this stock inventory because it contains a line with an inactive product", ['order_line', 'state'])
     ]
-    
+
     def import_file(self, cr, uid, ids, context=None):
         '''
         Import lines form file
@@ -97,7 +97,7 @@ class stock_inventory(osv.osv):
 
         # iterator on rows
         reader = fileobj.getRows()
-        
+
         # ignore the first row
         reader.next()
         line_num = 1
@@ -114,6 +114,7 @@ Product Code*, Product Description*, Location*, Batch*, Expiry Date*, Quantity*"
             currency_id = self.pool.get('res.users').browse(cr, uid, uid).company_id.currency_id.id
             location_id = False
             batch = False
+            batch_name = False
             expiry = False
             product_qty = 0.00
             product_uom = False
@@ -144,28 +145,10 @@ Product Code*, Product Description*, Location*, Batch*, Expiry Date*, Quantity*"
 
             # Product name
             p_name = row.cells[1].data
-            if not product_id and not p_name:
+            if not product_id:
                 to_correct_ok = True
                 import_to_correct = True
-                error_list.append(_('No Product Description'))
-            else:
-                try:
-                    p_name = p_name.strip()
-                    product_ids = product_obj.search(cr, uid, [('name', '=', p_name)], context=context)
-                    if not product_ids:
-                        to_correct_ok = True
-                        import_to_correct = True
-                        error_list.append(_('The Product was not found in the list of the products.'))
-                    else:
-                        product_id = product_ids[0]
-                except Exception:
-                     error_list.append(_('The Product Description has to be a string.'))
-                     to_correct_ok = True
-                     import_to_correct = True
-
-            if not product_id:
-                if not product_code and not p_name:
-                    raise osv.except_osv(_('Error'), _('You have to fill at least the product code or the product name on each line'))
+                error_list.append(_('The Product was not found in the list of the products.'))
                 raise osv.except_osv(_('Error'), _('The Product [%s] %s was not found in the list of the products') % (product_code or '', p_name or ''))
 
             # Location
@@ -189,10 +172,16 @@ Product Code*, Product Description*, Location*, Batch*, Expiry Date*, Quantity*"
                 except Exception:
                     error_list.append(_('The Location has to be a string.'))
                     location_id = False
-            
+
+            product = False
+            if product_id:
+                product = product_obj.browse(cr, uid, product_id)
+
             # Batch
             batch = row.cells[3].data
             if batch:
+                if isinstance(batch, int):
+                    batch = str(batch)
                 try:
                     batch = batch.strip()
                     batch_ids = batch_obj.search(cr, uid, [('product_id', '=', product_id), ('name', '=', batch)], context=context)
@@ -205,6 +194,7 @@ Product Code*, Product Description*, Location*, Batch*, Expiry Date*, Quantity*"
                     else:
                         batch = batch_ids[0]
                 except Exception:
+                    batch = False
                     error_list.append(_('The Batch has to be a string.'))
 
             # Expiry date
@@ -216,14 +206,31 @@ Product Code*, Product Description*, Location*, Batch*, Expiry Date*, Quantity*"
                     to_correct_ok = True
                     import_to_correct = True
                 if expiry and not batch:
-                    batch_ids = batch_obj.search(cr, uid, [('product_id', '=', product_id), ('life_date', '=', expiry)], context=context)
-                    if not batch_ids:
+                    if product.batch_management and batch_name:
+                        batch = batch_obj.create(cr, uid, {
+                            'product_id': product_id,
+                            'life_date': expiry,
+                            'name': batch_name,
+                        }, context=context)
+                    elif product.batch_management and not batch_name:
                         batch = False
                         to_correct_ok = True
                         import_to_correct = True
-                        error_list.append(_('No batch found for the expiry date %s.') % (expiry,))
+                        error_list.append(_('Batch is missing'))
                     else:
-                        batch = batch_ids[0]
+                        if batch_name:
+                            batch_ids = batch_obj.search(cr, uid, [('product_id', '=', product_id), ('life_date', '=', expiry), ('name', '=', batch_name)], context=context)
+                        else:
+                            batch_ids = batch_obj.search(cr, uid, [('product_id', '=', product_id), ('life_date', '=', expiry)], context=context)
+                        if not batch_ids:
+                            if batch_name:
+                                expiry = False
+                            batch = False
+                            to_correct_ok = True
+                            import_to_correct = True
+                            error_list.append(_('No batch found for the expiry date %s.') % (expiry,))
+                        else:
+                            batch = batch_ids[0]
                 elif expiry and batch:
                     b_expiry = batch_obj.browse(cr, uid, batch, context=context).life_date
                     if expiry != b_expiry:
@@ -231,6 +238,13 @@ Product Code*, Product Description*, Location*, Batch*, Expiry Date*, Quantity*"
                         error_list.append(err_exp_message)
                         comment += err_exp_message
                         comment += '\n'
+
+#            if not expiry and batch:
+#                expiry = batch_obj.read(cr, uid, [batch], ['life_date'], context=context)[0]['life_date']
+#                err_exp_message = _('Expiry date not set. Get the expiry date from batch')
+#                error_list.append(err_exp_message)
+#                comment += err_exp_message
+#                comment += '\n'
 
             # Quantity
             p_qty = row.cells[5].data
@@ -246,20 +260,22 @@ Product Code*, Product Description*, Location*, Batch*, Expiry Date*, Quantity*"
 
             if not location_id:
                 comment += _('Location is missing.\n')
-            if product_id:
-                product = product_obj.browse(cr, uid, product_id)
+            if product:
                 product_uom = product.uom_id.id
                 hidden_batch_management_mandatory = product.batch_management
                 hidden_perishable_mandatory = product.perishable
                 if hidden_batch_management_mandatory and not batch:
-                    comment += _('Batch is missing.\n')
+                    if batch_name:
+                        comment += _('Batch not found.\n')
+                    else:
+                        comment += _('Batch is missing.\n')
                 if hidden_perishable_mandatory and not expiry:
                     comment += _('Expiry date is missing.\n')
-                if not hidden_perishable_mandatory and not hidden_batch_management_mandatory and batch:
-                    comment += _('This product is not Batch Number managed.')
+                if not hidden_perishable_mandatory and not hidden_batch_management_mandatory and batch_name:
+                    comment += _('This product is not Batch Number managed.\n')
                     batch = False
                 if not hidden_perishable_mandatory and expiry:
-                    comment += _('This product is not Expiry Date managed.')
+                    comment += _('This product is not Expiry Date managed.\n')
                     expiry = False
             else:
                 product_uom = self.pool.get('product.uom').search(cr, uid, [], context=context)[0]
@@ -273,6 +289,7 @@ Product Code*, Product Description*, Location*, Batch*, Expiry Date*, Quantity*"
 
             to_write = {
                 'product_id': product_id,
+                'batch_name': batch_name,
                 'reason_type_id': discrepancy_id,
                 'currency_id': currency_id,
                 'location_id': location_id,
@@ -285,26 +302,28 @@ Product Code*, Product Description*, Location*, Batch*, Expiry Date*, Quantity*"
                 'comment': comment,
                 'to_correct': to_correct_ok,
             }
-            
+
             vals['inventory_line_id'].append((0, 0, to_write))
-            
+
         # write order line on Inventory
+        context['import_in_progress'] = True
         vals.update({'file_to_import': False})
         self.write(cr, uid, ids, vals, context=context)
-        
+        context['import_in_progress'] = False
+
         view_id = obj_data.get_object_reference(cr, uid, 'specific_rules','stock_initial_inventory_form_view')[1]
-       
+
         if import_to_correct:
             msg_to_return = _("The import of lines had errors, please correct the red lines below")
-        
+
         return self.log(cr, uid, obj.id, msg_to_return, context={'view_id': view_id,})
-        
+
     def check_lines_to_fix(self, cr, uid, ids, context=None):
         if isinstance(ids, (int, long)):
             ids = [ids]
         message = ''
         plural= ''
-            
+
         for var in self.browse(cr, uid, ids, context=context):
             if var.inventory_line_id:
                 for var in var.inventory_line_id:
@@ -323,7 +342,7 @@ stock_inventory()
 
 class stock_inventory_line(osv.osv):
     _inherit = 'stock.inventory.line'
-    
+
     def _get_inactive_product(self, cr, uid, ids, field_name, args, context=None):
         '''
         Fill the error message if the product of the line is inactive
@@ -339,49 +358,75 @@ class stock_inventory_line(osv.osv):
                     'inactive_product': True,
                     'inactive_error': _('The product in line is inactive !')
                 }
-                
+
         return res
-    
+
     _columns = {
+        'batch_name': fields.char(size=128, string='Batch name'),
         'to_correct_ok': fields.boolean('To correct'),
         'comment': fields.text('Comment', readonly=True),
         'inactive_product': fields.function(_get_inactive_product, method=True, type='boolean', string='Product is inactive', store=False, multi='inactive'),
         'inactive_error': fields.function(_get_inactive_product, method=True, type='char', string='Comment', store=False, multi='inactive'),
     }
-    
+
     _defaults = {
         'inactive_product': False,
         'inactive_error': lambda *a: '',
     }
-    
+
     def create(self, cr, uid, vals, context=None):
+        if context is None:
+            context = {}
         comment = ''
+        pl_obj = self.pool.get('stock.production.lot')
         hidden_batch_management_mandatory = False
         hidden_perishable_mandatory = False
-        
+
         if vals.get('product_id', False):
             product = self.pool.get('product.product').browse(cr, uid, vals.get('product_id'), context=context)
             hidden_batch_management_mandatory = product.batch_management
-            hidden_perishable_mandatory = product.perishable
+            hidden_perishable_mandatory = not product.batch_management and product.perishable
+            vals['hidden_batch_management_mandatory'] = hidden_batch_management_mandatory
+            vals['hidden_perishable_mandatory'] = hidden_perishable_mandatory
 
         location_id = vals.get('location_id')
         batch = vals.get('prod_lot_id')
         expiry = vals.get('expiry_date')
-
+        batch_name = vals.get('batch_name')
 
         if not location_id:
             comment += _('Location is missing.\n')
 
         if hidden_batch_management_mandatory and not batch:
-            comment += _('Batch is missing.\n')
-        if hidden_perishable_mandatory and not expiry:
+            if batch_name:
+                comment += _('Batch not found.\n')
+            else:
+                comment += _('Batch is missing.\n')
+                vals['expiry_date'] = False
+
+        if hidden_perishable_mandatory and not expiry and not batch and batch_name:
+            comment += _('Batch not found.\n')
+        elif hidden_perishable_mandatory and not expiry:
             comment += _('Expiry date is missing.\n')
+            vals['expiry_date'] = False
+
+        if batch and expiry and pl_obj.read(cr, uid, batch, ['life_date'], context=context)['life_date'] != expiry:
+            comment += _('Expiry date and batch not consistent')
+            vals.update({
+                'prod_lot_id': False,
+                'expiry_date': False,
+            })
+
+        if hidden_batch_management_mandatory and batch and not expiry:
+            expiry = pl_obj.read(cr, uid, batch, ['life_date'], context=context)['life_date']
+            vals['expiry_date'] = expiry
+            comment += _('Please check Expiry Date is correct!')
 
         if not comment:
             if vals.get('comment'):
                 comment = vals.get('comment')
             vals.update({'comment': comment, 'to_correct_ok': False})
-        else:
+        elif context.get('import_in_progress'):
             vals.update({'comment': comment, 'to_correct_ok': True})
 
         res = super(stock_inventory_line, self).create(cr, uid, vals, context=context)
@@ -389,7 +434,7 @@ class stock_inventory_line(osv.osv):
 
     def write(self, cr, uid, ids, vals, context=None):
         comment = ''
-        
+
         line = self.browse(cr, uid, ids[0], context=context)
 
         if vals.get('product_id', False):
@@ -400,14 +445,20 @@ class stock_inventory_line(osv.osv):
         location_id = vals.get('location_id') or line.location_id
         batch = vals.get('prod_lot_id') or line.prod_lot_id
         expiry = vals.get('expiry_date') or line.expiry_date
+        batch_name = vals.get('batch_name') or line.batch_name
 
         hidden_batch_management_mandatory = product.batch_management
-        hidden_perishable_mandatory = product.perishable
+        hidden_perishable_mandatory = not product.batch_management and product.perishable
+        vals['hidden_batch_management_mandatory'] = hidden_batch_management_mandatory
+        vals['hidden_perishable_mandatory'] = hidden_perishable_mandatory
 
         if not location_id:
             comment += _('Location is missing.\n')
         if hidden_batch_management_mandatory and not batch:
-            comment += _('Batch is missing.\n')
+            if batch_name:
+                comment += _('Batch not found.\n')
+            else:
+                comment += _('Batch is missing.\n')
         if hidden_perishable_mandatory and not expiry:
             comment += _('Expiry date is missing.\n')
 
@@ -444,7 +495,7 @@ class initial_stock_inventory(osv.osv):
                                         \n The columns should be in this order : Product Code*, Product Description*, Initial Average Cost, Location*, Batch, Expiry Date, Quantity"""),
         'import_error_ok':fields.function(_get_import_error,  method=True, type="boolean", string="Error in Import", store=True),
     }
-    
+
     def _check_active_product(self, cr, uid, ids, context=None):
         '''
         Check if the initial stock inventory contains a line with an inactive products
@@ -452,7 +503,7 @@ class initial_stock_inventory(osv.osv):
         inactive_lines = self.pool.get('initial.stock.inventory.line').search(cr, uid, [('product_id.active', '=', False),
                                                                                         ('inventory_id', 'in', ids),
                                                                                         ('inventory_id.state', 'not in', ['draft', 'cancel', 'done'])], context=context)
-        
+
         if inactive_lines:
             plural = len(inactive_lines) == 1 and _('A product has') or _('Some products have')
             l_plural = len(inactive_lines) == 1 and _('line') or _('lines')
@@ -460,7 +511,7 @@ class initial_stock_inventory(osv.osv):
             raise osv.except_osv(_('Error'), _('%s been inactivated. If you want to validate this document you have to remove/correct the %s containing %s (see red %s of the document)') % (plural, l_plural, p_plural, l_plural))
             return False
         return True
-    
+
     _constraints = [
         (_check_active_product, "You cannot confirm this stock inventory because it contains a line with an inactive product", ['order_line', 'state'])
     ]
@@ -491,7 +542,7 @@ class initial_stock_inventory(osv.osv):
 
         # iterator on rows
         reader = fileobj.getRows()
-        
+
         # ignore the first row
         reader.next()
         line_num = 1
@@ -538,28 +589,10 @@ Product Code*, Product Description*, Initial Average Cost*, Location*, Batch*, E
 
             # Product name
             p_name = row.cells[1].data
-            if not product_id and not p_name:
+            if not product_id:
                 to_correct_ok = True
                 import_to_correct = True
-                error_list.append(_('No Product Description'))
-            else:
-                try:
-                    p_name = p_name.strip()
-                    product_ids = product_obj.search(cr, uid, [('name', '=', p_name)], context=context)
-                    if not product_ids:
-                        to_correct_ok = True
-                        import_to_correct = True
-                        error_list.append(_('The Product was not found in the list of the products.'))
-                    else:
-                        product_id = product_ids[0]
-                except Exception:
-                     error_list.append(_('The Product Description has to be a string.'))
-                     to_correct_ok = True
-                     import_to_correct = True
-
-            if not product_id:
-                if not product_code and not p_name:
-                    raise osv.except_osv(_('Error'), _('You have to fill at least the product code or the product name on each line'))
+                error_list.append(_('The Product was not found in the list of the products.'))
                 raise osv.except_osv(_('Error'), _('The Product [%s] %s was not found in the list of the products') % (product_code or '', p_name or ''))
 
             # Average cost
@@ -580,8 +613,8 @@ Product Code*, Product Description*, Initial Average Cost*, Location*, Batch*, E
                 else:
                     product_cost = 1.00
                     error_list.append(_('The Average Cost was not set, we set it to 1.00.'))
-                    
-           
+
+
             # Location
             loc_id = row.cells[3].data
             if not loc_id:
@@ -603,12 +636,13 @@ Product Code*, Product Description*, Initial Average Cost*, Location*, Batch*, E
                 except Exception:
                     error_list.append(_('The Location has to be a string.'))
                     location_id = False
-            
+
             # Batch
             batch = row.cells[4].data
             if batch:
                 try:
                     batch = batch.strip()
+                    batch_name = batch
                 except Exception:
                     error_list.append(_('The Batch has to be a string.'))
 
@@ -645,7 +679,10 @@ Product Code*, Product Description*, Initial Average Cost*, Location*, Batch*, E
                 hidden_batch_management_mandatory = product.batch_management
                 hidden_perishable_mandatory = product.perishable
                 if hidden_batch_management_mandatory and not batch:
-                    comment += _('Batch is missing.\n')
+                    if batch_name:
+                        comment += _('Batch not found.\n')
+                    else:
+                        comment += _('Batch is missing.\n')
                 if hidden_perishable_mandatory and not expiry:
                     comment += _('Expiry date is missing.\n')
             else:
@@ -662,7 +699,7 @@ Product Code*, Product Description*, Initial Average Cost*, Location*, Batch*, E
                 'currency_id': currency_id,
                 'location_id': location_id,
                 'prodlot_name': batch,
-                'expiry_date': expiry,
+                'expiry_date': expiry and expiry.strftime('%Y-%m-%d') or False,
                 'product_qty': product_qty,
                 'product_uom': product_uom,
                 'hidden_batch_management_mandatory': hidden_batch_management_mandatory,
@@ -670,26 +707,26 @@ Product Code*, Product Description*, Initial Average Cost*, Location*, Batch*, E
                 'comment': comment,
                 'to_correct': to_correct_ok,
             }
-            
+
             vals['inventory_line_id'].append((0, 0, to_write))
-            
+
         # write order line on Inventory
         vals.update({'file_to_import': False})
         self.write(cr, uid, ids, vals, context=context)
-        
+
         view_id = obj_data.get_object_reference(cr, uid, 'specific_rules','stock_initial_inventory_form_view')[1]
-       
+
         if import_to_correct:
             msg_to_return = _("The import of lines had errors, please correct the red lines below")
-        
+
         return self.log(cr, uid, obj.id, msg_to_return, context={'view_id': view_id,})
-        
+
     def check_lines_to_fix(self, cr, uid, ids, context=None):
         if isinstance(ids, (int, long)):
             ids = [ids]
         message = ''
         plural= ''
-            
+
         for var in self.browse(cr, uid, ids, context=context):
             if var.inventory_line_id:
                 for var in var.inventory_line_id:
@@ -710,7 +747,7 @@ class initial_stock_inventory_line(osv.osv):
     override of initial_stock_inventory_line class
     '''
     _inherit = 'initial.stock.inventory.line'
-    
+
     def _get_inactive_product(self, cr, uid, ids, field_name, args, context=None):
         '''
         Fill the error message if the product of the line is inactive
@@ -726,41 +763,49 @@ class initial_stock_inventory_line(osv.osv):
                     'inactive_product': True,
                     'inactive_error': _('The product in line is inactive !')
                 }
-                
+
         return res
-    
+
     _columns = {
         'to_correct_ok': fields.boolean('To correct'),
         'comment': fields.text('Comment', readonly=True),
         'inactive_product': fields.function(_get_inactive_product, method=True, type='boolean', string='Product is inactive', store=False, multi='inactive'),
         'inactive_error': fields.function(_get_inactive_product, method=True, type='char', string='Comment', store=False, multi='inactive'),
     }
-    
+
     _defaults = {
         'inactive_product': False,
         'inactive_error': lambda *a: '',
     }
-    
+
     def create(self, cr, uid, vals, context=None):
         comment = ''
         hidden_batch_management_mandatory = False
         hidden_perishable_mandatory = False
-        
+
         if vals.get('product_id', False):
             product = self.pool.get('product.product').browse(cr, uid, vals.get('product_id'), context=context)
             hidden_batch_management_mandatory = product.batch_management
             hidden_perishable_mandatory = product.perishable
 
         location_id = vals.get('location_id')
-        batch = vals.get('prodlot_name')
-        expiry = vals.get('expiry_date')
 
+        batch = vals.get('prodlot_name')
+        batch_numer = vals.get('prod_lot_id', False)
+        if batch_numer and not batch: # for the sync case, sometime only the prodlot id is given but not the name, so search for name
+            batch = self.pool.get('stock.production.lot').browse(cr, uid, batch_numer, context=context).name
+            vals.update({'prodlot_name':batch})
+        expiry = vals.get('expiry_date')
+        batch_name = vals.get('batch_name')
 
         if not location_id:
             comment += _('Location is missing.\n')
 
         if hidden_batch_management_mandatory and not batch:
-            comment += _('Batch is missing.\n')
+            if batch_name:
+                comment += _('Batch not found.\n')
+            else:
+                comment += _('Batch is missing.\n')
         if hidden_perishable_mandatory and not expiry:
             comment += _('Expiry date is missing.\n')
 
@@ -774,7 +819,7 @@ class initial_stock_inventory_line(osv.osv):
 
     def write(self, cr, uid, ids, vals, context=None):
         comment = ''
-        
+
         line = self.browse(cr, uid, ids[0], context=context)
 
         if vals.get('product_id', False):
@@ -792,7 +837,10 @@ class initial_stock_inventory_line(osv.osv):
         if not location_id:
             comment += _('Location is missing.\n')
         if hidden_batch_management_mandatory and not batch:
-            comment += _('Batch is missing.\n')
+            if batch_name:
+                comment += _('Batch not found.\n')
+            else:
+                comment += _('Batch is missing.\n')
         if hidden_perishable_mandatory and not expiry:
             comment += _('Expiry date is missing.\n')
 

@@ -436,24 +436,27 @@ class user_access_configurator(osv.osv_memory):
 
         # objects
         menu_obj = self.pool.get('ir.ui.menu')
+        groups_obj = self.pool.get('res.groups')
         # data structure
         data_structure = context['data_structure']
         # get all menus from database
         all_menus_context = dict(context)
         all_menus_context.update({'ir.ui.menu.full_list': True})
         db_menu_ids = menu_obj.search(cr, uid, [], context=all_menus_context)
-
+        admin_group_id = self._get_admin_user_rights_group_id(cr, uid, context=context)
+        groups_to_write = {}
         for obj in self.browse(cr, uid, ids, context=context):
             # check each menus from database
             for db_menu_id in db_menu_ids:
                 # group ids to be linked to
                 group_ids = []
+                groups_not_in_file = []
+                db_menu = menu_obj.browse(cr, uid, db_menu_id, context=context)
                 # UF-1996 : If the items found in the import file, then modify accordingly (do not delete and re create).
                 # If the menu entry is in file but with no groups, set the Admin rights on it
                 if db_menu_id in data_structure[obj.id]['menus_groups'] and not data_structure[obj.id]['menus_groups'].get(db_menu_id):
                     # we modify the groups to admin only if the menu is not linked to one of the group of DNCGL
                     skip_update = False
-                    db_menu = menu_obj.browse(cr, uid, db_menu_id, context=context)
                     dncgl_ids = self._get_DNCGL_ids(cr, uid, ids, context=context)
                     for group in db_menu.groups_id:
                         if group.id in dncgl_ids:
@@ -461,14 +464,36 @@ class user_access_configurator(osv.osv_memory):
                     # the menu does not exist in the file OR the menu does not belong to any group
                     # link (6,0,[id]) to administration / access rights
                     if not skip_update:
-                        admin_group_id = self._get_admin_user_rights_group_id(cr, uid, context=context)
                         group_ids = [admin_group_id]
                 elif data_structure[obj.id]['menus_groups'].get(db_menu_id, []):
                     # find the id of corresponding groups, and write (6,0, ids) in groups_id
                     group_ids = self._get_ids_from_group_names(cr, uid, context=context, group_names=data_structure[obj.id]['menus_groups'][db_menu_id])
+                for group in db_menu.groups_id:
+                    if group.name not in data_structure[obj.id]['group_name_list'] and group.id != admin_group_id:
+                        groups_not_in_file.append(group.id)
+
                 # link the menu to selected group ids
                 if group_ids:
-                    menu_obj.write(cr, uid, [db_menu_id], {'groups_id': [(6, 0, group_ids)]}, context=context)
+                    if groups_not_in_file:
+                        # remove from menu object groups not listed in the file
+                        menu_obj.write(cr, uid, [db_menu_id], {'groups_id': [(3,x) for x in groups_not_in_file]}, context=context)
+                    for gp_id in group_ids:
+                        groups_to_write.setdefault(gp_id, [])
+                        groups_to_write[gp_id].append(db_menu_id)
+            grp_ids = groups_obj.search(cr, uid, [], context=context)
+            all_menu_in_file = data_structure[obj.id]['menus_groups'].keys()
+
+            # keep in group menu not listed in the file
+            for group in groups_obj.browse(cr, uid, grp_ids):
+                if group.id in groups_to_write:
+                    access_not_in_file = [x.id for x in group.menu_access if x.id not in all_menu_in_file]
+                    if access_not_in_file:
+                        groups_to_write[group.id] += access_not_in_file
+                if group.name in data_structure[obj.id]['group_name_list'] and group.id not in groups_to_write:
+                     groups_obj.write(cr, uid, [group.id], {'menu_access': [(6, 0, [])]}, context=context)
+
+            for gp_id in groups_to_write:
+                groups_obj.write(cr, uid, [gp_id], {'menu_access': [(6, 0, groups_to_write[gp_id])]}, context=context)
 
         return True
 
@@ -512,20 +537,6 @@ class user_access_configurator(osv.osv_memory):
         two_lines_ids = dict((x['model_id'][0], x['id']) for x in data if x['model_id'])
         # drop all ACL
         access_obj.unlink(cr, uid, access_ids, context=context)
-        # one line data
-        acl_one_line_read_no_group_values = {'name': 'not admin',
-                                             'group_id': False,
-                                             'perm_read': True,
-                                             'perm_write': True,
-                                             'perm_create': True,
-                                             'perm_unlink': True,
-                                             }
-        # create one line for all objects no linked to admin
-        no_linked_to_admin_ids = [x for x in model_ids if x not in two_lines_ids.keys()]
-        # we add the ir.values in the list "no_linked_to_admin_ids" because we want the user to be able to add "default" values (utp-457)
-        ir_values_id = self.pool.get('ir.model').search(cr, uid, [('model', '=', 'ir.values')], context=context)[0]
-        no_linked_to_admin_ids.append(ir_values_id)
-        model_obj.write(cr, uid, no_linked_to_admin_ids, {'access_ids' : [(0, 0, acl_one_line_read_no_group_values)]}, context=context)
         # first line, for admin group, all access
         acl_admin_values = {'name': 'admin',
                             'group_id': admin_group_user_rights_id,
@@ -586,7 +597,7 @@ class user_access_configurator(osv.osv_memory):
         # UF-1996 : Don't reset the Object ACL at reloading of Menu Access from file
         # self._process_objects_uac(cr, uid, context=context)
         # process rules
-        self._process_record_rules_uac(cr, uid, context=context)
+        #self._process_record_rules_uac(cr, uid, context=context)
         return data_structure
 
     def do_process_uac(self, cr, uid, ids, context=None):
@@ -637,7 +648,7 @@ class user_access_configurator(osv.osv_memory):
                 m_obj = self.pool.get(model)
                 cr.execute('''select m.id from '''+ m_obj._table+''' m
                     left join ir_model_data d on d.res_id = m.id and d.model = %s
-                    where module not in ('sd', 'sync_client', 'sync_server', 'sync_common', 'sync_so', 'update_client', 'update_server')
+                    where module not in ('sd', 'sync_client', 'sync_server', 'sync_common', 'sync_so', 'update_client', 'update_server', '')
                 ''', (model,))
                 ids_to_del = [x[0] for x in cr.fetchall()]
                 if ids_to_del:
@@ -903,9 +914,45 @@ class res_users(osv.osv):
                 if group.is_an_admin_profile:
                     return True
         return False
+        
+    def _get_fake(self, cr, uid, ids, field_names, args, context=None):
+        res = {}
+        if not ids:
+            return res
+
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+        for id in ids:
+            res[id] = False
+        return res
+        
+    def _search_get_is_admin(self, cr, uid, obj, name, args, context=None):
+        """
+        US-42: 'is_admin' field search for ir.rule domain
+        - if we are here, we are not logged as admin as ir rules are not applied
+        - we just return a domain to exclude admin record when applying rule
+          of id 'res_users_model_res_users_Administrator_User_Profile_Access'
+          (Consolidated Record Rules.csv)
+        """
+        if context is None:
+            context = {}
+        if not obj or not args or len(args) != 1:
+            return []
+        if args[0][1] not in ('=', '!=', ):
+            msg = _("Operator '%s' not suported") % (args[0][1], )
+            raise osv.except_osv(_('Error'), msg)
+            
+        admin_id = self._get_admin_id(cr)
+        return admin_id and [('id', 'not in', [admin_id])] or []
+        
+    _columns = {
+        'is_admin': fields.function(_get_fake, fnct_search=_search_get_is_admin,
+            type='boolean', method=True, string='Is editable user ?'),
+    }
 
     _defaults = {
         'groups_id': lambda *a: [],
+        'is_admin': False,
     }
 res_users()
 
@@ -961,3 +1008,54 @@ class ir_values(osv.osv):
         return True
 
 ir_values()
+
+
+class board_board(osv.osv):
+    '''
+    Override the board object because the ACL aren't used on dashboard
+    and user can show an error message if he tries to open a dashboard
+    containing a view of an object on which he doesn't have access.
+    '''
+    _inherit = 'board.board'
+
+    def remove_unauthorized_children(self,cr, uid, node):
+        for child in node.iterchildren():
+            if child.tag == 'action':
+                if child.get('invisible'):
+                    node.remove(child)
+                    break
+                elif child.get('name'):
+                    action_id = int(child.get('name'))
+                    model = self.pool.get('ir.actions.act_window').browse(cr, uid, action_id).res_model
+                    if not self.pool.get('ir.model.access').check(cr, uid, model, mode='read', raise_exception=False):
+                        node.remove(child)
+                        break
+
+                if child.get('menu_ref'):
+                    menu_ids = child.get('menu_ref').split(',')
+                    if not isinstance(menu_ids, list):
+                        menu_ids = [menu_ids]
+
+                    for menu_id in menu_ids:
+                        menu_id = int(menu_id)
+                        if not self.pool.get('ir.ui.menu').search(cr, uid, [('id', '=', menu_id)]):
+                            node.remove(child)
+                            break
+            else:
+                child = self.remove_unauthorized_children(cr, uid, child)
+
+        return node
+
+    def _arch_preprocessing(self, cr, user, arch, context=None):
+        from lxml import etree
+
+        def encode(s):
+            if isinstance(s, unicode):
+                return s.encode('utf8')
+            return s
+
+        archnode = etree.fromstring(encode(arch))
+        return etree.tostring(self.remove_unauthorized_children(cr, user, archnode),pretty_print=True)
+
+
+board_board()

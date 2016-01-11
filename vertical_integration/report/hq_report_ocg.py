@@ -53,9 +53,8 @@ class hq_report_ocg(report_sxw.report_sxw):
     def create_subtotal(self, cr, uid, line_key, line_debit, counterpart_date, period_name, department_info):
         pool = pooler.get_pool(cr.dbname)
         # method to create subtotal + counterpart line
-        if len(line_key) > 2 and line_debit != 0.0:
-            journal = pool.get('account.journal').browse(cr, uid, line_key[1])
-            currency = pool.get('res.currency').browse(cr, uid, line_key[2])
+        if len(line_key) > 1 and line_debit != 0.0:
+            currency = pool.get('res.currency').browse(cr, uid, line_key[1])
             description = ""
             # Description for the line
             if line_key[0] == "1000 0000":
@@ -70,10 +69,10 @@ class hq_report_ocg(report_sxw.report_sxw):
                     if account_values != "":
                         account_values += "-"
                     account_values += mapping.account_id.code
-                description = "Mvts_" + account_values + period_name + journal.code + "_" + currency.name
+                description = "Mvts_" + account_values + period_name + "_" + currency.name
             
-            return [[journal.instance_id and journal.instance_id.code or "",
-                     journal.code,
+            return [["", # US-20 was 'journal.instance_id.code' now breakdown account+ccy instead of account+journal+ccy
+                     "",  # US-20 was 'journal.code' now breakdown account+ccy instead of account+journal+ccy
                      "",
                      description,
                      "",
@@ -147,10 +146,13 @@ class hq_report_ocg(report_sxw.report_sxw):
         
         move_line_ids = pool.get('account.move.line').search(cr, uid, [('period_id', '=', data['form']['period_id']),
                                                                        ('instance_id', 'in', data['form']['instance_ids']),
-                                                                       ('analytic_distribution_id', '=', False),
-                                                                       ('journal_id.type', 'not in', ['hq', 'cur_adj', 'inkind'])], context=context)
+                                                                       ('account_id.is_analytic_addicted', '=', False),
+                                                                       ('journal_id.type', 'not in', ['migration', 'hq', 'cur_adj', 'inkind'])], context=context)
         
         for move_line in pool.get('account.move.line').browse(cr, uid, move_line_ids, context=context):
+            # UFTP-194: Just take posted move lines
+            if move_line.move_id.state != 'posted':
+                continue
             journal = move_line.journal_id
             account = move_line.account_id
             currency = move_line.currency_id
@@ -178,15 +180,15 @@ class hq_report_ocg(report_sxw.report_sxw):
             first_result_lines.append(formatted_data)
             
             # For second report: add to corresponding sub
-            if journal.type in ['correction', 'intermission'] or not account.shrink_entries_for_hq:
+            if not account.shrink_entries_for_hq:
                 if (journal.code, journal.id, currency.id) not in main_lines:
                     main_lines[(journal.code, journal.id, currency.id)] = []
                 main_lines[(journal.code, journal.id, currency.id)].append(formatted_data[:9] + [formatted_data[10]] + [department_info] + formatted_data[11:12] + formatted_data[13:17])
             else:
                 translated_account_code = self.translate_account(cr, uid, pool, account)
-                if (translated_account_code, journal.id, currency.id) not in account_lines_debit:
-                    account_lines_debit[(translated_account_code, journal.id, currency.id)] = 0.0
-                account_lines_debit[(translated_account_code, journal.id, currency.id)] += (move_line.debit_currency - move_line.credit_currency)
+                if (translated_account_code, currency.id) not in account_lines_debit:
+                    account_lines_debit[(translated_account_code, currency.id)] = 0.0
+                account_lines_debit[(translated_account_code, currency.id)] += (move_line.debit_currency - move_line.credit_currency)
                             
                             
                             
@@ -198,12 +200,16 @@ class hq_report_ocg(report_sxw.report_sxw):
         
         analytic_line_ids = pool.get('account.analytic.line').search(cr, uid, [('period_id', '=', data['form']['period_id']),
                                                                                ('instance_id', 'in', data['form']['instance_ids']),
-                                                                               ('journal_id.type', 'not in', ['hq', 'engagement', 'inkind']),
+                                                                               ('journal_id.type', 'not in', ['migration', 'hq', 'engagement', 'inkind']),
                                                                                ('journal_id', 'not in', ana_cur_journal_ids)], context=context)
         for analytic_line in pool.get('account.analytic.line').browse(cr, uid, analytic_line_ids, context=context):
+            # Just take analytic lines that comes from posted move lines
+            if analytic_line.move_state != 'posted':
+                continue
             journal = analytic_line.move_id and analytic_line.move_id.journal_id
             account = analytic_line.general_account_id
             currency = analytic_line.currency_id
+            cost_center_code = analytic_line.cost_center_id and analytic_line.cost_center_id.code or ""
             # For first report: as is
             formatted_data = [analytic_line.instance_id and analytic_line.instance_id.code or "",
                               analytic_line.journal_id and analytic_line.journal_id.code or "",
@@ -213,10 +219,11 @@ class hq_report_ocg(report_sxw.report_sxw):
                               datetime.datetime.strptime(analytic_line.document_date, '%Y-%m-%d').date().strftime('%d/%m/%Y'),
                               datetime.datetime.strptime(analytic_line.date, '%Y-%m-%d').date().strftime('%d/%m/%Y'),
                               analytic_line.period_id and analytic_line.period_id.code or "",
-                              account and account.code,
+                              self.translate_account(cr, uid, pool, account),
+                              #account and account.code,
                               account and account.code + " " + account.name or "",
                               analytic_line.destination_id and analytic_line.destination_id.code or "",
-                              analytic_line.cost_center_id and analytic_line.cost_center_id.code or "",
+                              cost_center_code,
                               analytic_line.account_id and analytic_line.account_id.code or "",
                               analytic_line.partner_txt or "",
                               analytic_line.amount_currency > 0 and "0.00" or round(-analytic_line.amount_currency, 2),
@@ -229,6 +236,10 @@ class hq_report_ocg(report_sxw.report_sxw):
             
             cost_center = formatted_data[11][:5] or " "
             field_activity = formatted_data[11][6:] or " "
+            # UTP-1104: Hard code the fact that cc-intermission should appears as MI998 + SUPZZZ
+            if cost_center_code == 'cc-intermission':
+                cost_center = 'MI998'
+                field_activity = 'SUPZZZ'
             
             if (journal.code, journal.id, currency.id) not in main_lines:
                 main_lines[(journal.code, journal.id, currency.id)] = []

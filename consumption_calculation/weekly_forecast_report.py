@@ -49,7 +49,7 @@ class weekly_forecast_report(osv.osv):
     '''
     _name = 'weekly.forecast.report'
     _description = 'Stock forecast by week'
-    _rec_name = 'id'
+    _rec_name = 'location_id'
     _order = 'requestor_date desc, id'
 
     _columns = {
@@ -653,7 +653,7 @@ class weekly_forecast_report(osv.osv):
             self.write(new_cr, uid, [report.id], {'status': 'error', 'progress_comment': progress_comment}, context=context)
             new_cr.commit()
 
-        new_cr.close()
+        new_cr.close(True)
 
         return True
 
@@ -821,6 +821,18 @@ class weekly_forecast_report(osv.osv):
                s.product_id IN %(product_ids)s
                AND
                s.state IN ('assigned', 'confirmed')
+               AND
+               s.id NOT IN 
+                    (SELECT
+                        l.move_dest_id
+                     FROM
+                        purchase_order_line l
+                        LEFT JOIN purchase_order o ON o.id = l.order_id
+                     WHERE
+                        l.move_dest_id IS NOT NULL
+                        AND
+                        o.state NOT IN ('approved', 'except_picking', 'except_invoice', 'done')
+                    )
             GROUP BY p.id, s.date)
         UNION
             (SELECT
@@ -839,6 +851,18 @@ class weekly_forecast_report(osv.osv):
               s.product_id IN %(product_ids)s
               AND
               s.state IN ('assigned', 'confirmed')
+              AND
+              s.id NOT IN 
+                   (SELECT
+                       l.move_dest_id
+                    FROM
+                       purchase_order_line l
+                       LEFT JOIN purchase_order o ON o.id = l.order_id
+                    WHERE
+                       l.move_dest_id IS NOT NULL
+                       AND
+                       o.state NOT IN ('approved', 'except_picking', 'except_invoice', 'done')
+                   )
             GROUP BY p.id, s.date))
             AS subrequest
             GROUP BY product_id, date;

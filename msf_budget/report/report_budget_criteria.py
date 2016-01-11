@@ -42,6 +42,7 @@ class report_budget_actual_2(report_sxw.rml_parse):
             'companyCurrency': self.getCompanyCurrency,
             'process': self.process,
             'getAccountName': self.getAccountName,
+            'getAccountNameEx': self.getAccountNameEx,
             'currencyTable': self.getCurrencyTable,
         })
         return
@@ -122,7 +123,7 @@ class report_budget_actual_2(report_sxw.rml_parse):
         """
         Return the last date of given period in parameters. If no parameters, return 'default' value.
         """
-        res = default
+        res = default and default.val
         parameters = self.localcontext.get('data',{}).get('form',{})
         if 'period_id' in parameters:
             period_data = self.pool.get('account.period').read(self.cr, self.uid, parameters['period_id'], ['date_stop'])
@@ -192,7 +193,7 @@ class report_budget_actual_2(report_sxw.rml_parse):
             sql_end = """ GROUP BY aal.currency_id, month ORDER BY month"""
         # Do sql request
         request = sql + sql_conditions + sql_end
-        params = [tuple(cost_center_ids), date_start.val, date_stop.val] + sql_conditions_params
+        params = [tuple(cost_center_ids), date_start, date_stop] + sql_conditions_params
         self.cr.execute(request, params) # Will return a list of tuple: (currency_id, month_number, journal_type, value, booking_value)
         #+ If not add_commitment, we have a list of tuple as: (currency_id, month_number, value, booking_value)
         analytics = self.cr.fetchall()
@@ -246,13 +247,18 @@ class report_budget_actual_2(report_sxw.rml_parse):
         """
         Do a separation between accont code and account name
         """
+        return self.getAccountNameEx(name, ' ')
+
+    def getAccountNameEx(self, name, separator):
+        """
+        Do a separation between accont code and account name
+        """
         res = ''
         if name:
-            split = name.split(' ')
+            split = name.split(separator)
             if len(split) and len(split) > 1:
                 res = ' '.join(split[1:])
         return res
-
     def process(self, budget_line_ids, add_commitment=False, currency_table=False):
         """
         Permit to process all lines in one transaction to improve report generation.
@@ -260,8 +266,11 @@ class report_budget_actual_2(report_sxw.rml_parse):
         # Some checks
         if not budget_line_ids:
             return {}, {}
-        # Prepare some values
         context = {}
+        parameters = self.localcontext.get('data',{}).get('form',{})
+        if 'period_id' in parameters:
+            context.update({'period_id': parameters['period_id']})
+        # Prepare some values
         ids = [x.id for x in budget_line_ids]
         fields = [
             'account_code',

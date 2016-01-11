@@ -57,6 +57,8 @@ class procurement_order(osv.osv):
         report = []
         report_except = 0
         ran_proc = []
+
+        self.check_exception_proc(cr, uid, [], context=context)
         
         # We start with only category Automatic Supply
         for cycle in cycle_obj.browse(cr, uid, cycle_ids):
@@ -129,7 +131,7 @@ Created documents : \n'''
         
         if use_new_cursor:
             cr.commit()
-            cr.close()
+            cr.close(True)
             
         return {}
     
@@ -175,6 +177,7 @@ Created documents : \n'''
             proc_id = proc_obj.create(cr, uid, {
                                     'name': _('Procurement cycle: %s') % (cycle.name,),
                                     'origin': cycle.name,
+                                    'unique_rule_type': 'stock.warehouse.order.cycle',
                                     'date_planned': newdate,
                                     'product_id': product.id,
                                     'product_qty': quantity_to_order,
@@ -281,7 +284,7 @@ Created documents : \n'''
             
         available_stock = product.qty_available + picked_resa.get(product.id)
             
-        quantity_on_order = product_obj.get_product_available(cr, uid, [product_id], context={'states': ['confirmed'],
+        quantity_on_order = product_obj.get_product_available(cr, uid, [product_id], context={'states': ['confirmed', 'hidden'],
                                                                                               'what': ('in, out'), 
                                                                                               'location': location_id,
                                                                                               'compute_child': True,})

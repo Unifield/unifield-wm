@@ -12,8 +12,9 @@
                 <form string="Account Journal" position="replace">
                     <form string="Account Journal" hide_duplicate_button="1">
                         <group colspan="4" col="6">
+                            <field name="has_entries" invisible="1"/>
                             <field name="name" select="1"/>
-                            <field name="code" select="1"/>
+                            <field name="code" select="1" attrs="{'readonly': [('has_entries', '=', True)]}"/>
                             <field name="type" on_change="onchange_type(type, currency, context)"/>
                         </group>
                         <group col="2" colspan="2">
@@ -25,6 +26,7 @@
                             <separator string="Company" colspan="4"/>
                             <field name="currency" attrs="{'required': [('type', 'in', ('cash', 'bank', 'cheque'))]}"/>
                             <field name="analytic_journal_id" domain="[('is_current_instance','=',True)]" attrs="{'required': [('type', 'not in', ('situation', 'stock'))]}"/>
+                            <field name="bank_journal_id" attrs="{'invisible': [('type', '!=', 'cheque')], 'required': [('type', '=', 'cheque')]}"/>
                         </group>
                         <group colspan="4" col="4">
                             <label string="" colspan="2"/>
@@ -34,7 +36,7 @@
                 </form>
             </field>
         </record>
-        
+
         <record id="view_account_journal_tree_inherit" model="ir.ui.view">
             <field name="name">account.journal.tree.inherit</field>
             <field name="model">account.journal</field>

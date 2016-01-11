@@ -24,10 +24,6 @@
 from osv import osv
 from osv import fields
 from tools.translate import _
-from base64 import encodestring
-from time import strftime
-import csv
-from tempfile import TemporaryFile
 
 def get_back_browse(self, cr, uid, context):
     background_id = context.get('background_id')
@@ -146,7 +142,7 @@ class account_line_csv_export(osv.osv_memory):
                     csv_line.append(field_sel(cr, uid, ml, 'move_state', context).encode('utf-8'))
                     # Write line
                     writer.writerow(csv_line)
-            
+
             #############################
             ###
             # This function could be used with a fields parameter in this method in order to create a CSV with field that could change
@@ -254,12 +250,11 @@ class account_line_csv_export(osv.osv_memory):
                     csv_line.append(company_currency.encode('utf-8') or '')
                 else:
                     #output debit/credit
-                    # ref98
-                    context.update({'date': al.date})
+                    context['date'] = al.source_date or al.date  # uftp-361 [FIX] reversal line: source_date or posting_date
                     if al.is_reversal == True:
-                      context.update({'date': al.document_date})
-                    if al.last_corrected_id:                    
-                      context.update({'date': al.document_date})
+                        context.update({'date': al.document_date})
+                    if al.last_corrected_id:
+                        context.update({'date': al.document_date})
                     amount = currency_obj.compute(cr, uid, al.currency_id.id, currency_id, al.amount_currency, round=True, context=context)
                     csv_line.append(amount or 0.0)
                     #output currency

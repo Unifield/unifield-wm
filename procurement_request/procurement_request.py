@@ -26,6 +26,146 @@ import decimal_precision as dp
 from sale_override import SALE_ORDER_STATE_SELECTION
 from msf_order_date.order_dates import compute_rts
 
+
+class procurement_request_sourcing_document(osv.osv):
+    _name = 'procurement.request.sourcing.document'
+    _rec_name = 'order_id'
+
+    def _get_doc_name(self, cr, uid, ids, field_name, args, context=None):
+        """
+        Return for each record, the name of the sourcing document according to
+        the model of the sourcing document and its ID.
+        """
+        if context is None:
+            context = {}
+
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+
+        res = {}
+        for doc in self.browse(cr, uid, ids, context=context):
+            res[doc.id] = self.pool.get(doc.sourcing_document_model).browse(
+                cr, uid, doc.sourcing_document_id, context=context).name
+
+        return res
+
+    _columns = {
+        'order_id': fields.many2one(
+            'sale.order',
+            string='Internal request',
+            required=True,
+        ),
+        'sourcing_document_id': fields.integer(
+            string='Sourcing document ID',
+            required=True,
+        ),
+        'sourcing_document_type': fields.selection(
+            selection=[
+                ('rfq', 'Request for Quotation'),
+                ('tender', 'Tender'),
+                ('po', 'Purchase order'),
+                ('internal', 'Internal move'),
+                ('out', 'Outgoing delivery'),
+            ],
+            string='Type',
+            required=True,
+        ),
+        'sourcing_document_model': fields.selection(
+            selection=[
+                ('purchase.order', 'Purchase order'),
+                ('tender', 'Tender'),
+                ('stock.picking', 'Picking'),
+            ],
+            string='Model',
+            required=True,
+        ),
+        'sourcing_document_name': fields.function(
+            _get_doc_name,
+            method=True,
+            string='Document name',
+            type='char',
+            size=64,
+            readonly=True,
+            store=False,
+        ),
+    }
+
+    def go_to_document(self, cr, uid, ids, context=None):
+        """
+        Open the sourcing document in the new tab
+        """
+        data_obj = self.pool.get('ir.model.data')
+
+        if context is None:
+            context = {}
+
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+
+        brw = self.browse(cr, uid, ids[0], context=context)
+        doc = self.pool.get(brw.sourcing_document_model).browse(
+            cr, uid, brw.sourcing_document_id, context=context)
+
+        if brw.sourcing_document_type == 'rfq':
+            context.update({
+                'rfq_ok': True
+            })
+        elif brw.sourcing_document_type == 'out':
+            pick_type = 'delivery'
+            if doc.subtype == 'picking':
+                pick_type = 'picking_ticket'
+
+            context.update({
+                'pick_type': pick_type,
+            })
+
+        res = {
+            'type': 'ir.actions.act_window',
+            'res_model': brw.sourcing_document_model,
+            'view_type': 'form',
+            'view_mode': 'form,tree',
+            'res_id': brw.sourcing_document_id,
+            'context': context,
+        }
+
+        if brw.sourcing_document_type == 'out':
+            if doc.subtype == 'picking':
+                view_id = data_obj.get_object_reference(cr, uid,
+                    'msf_outgoing', 'view_picking_ticket_form')[1]
+            elif doc.subtype == 'standard':
+                view_id = data_obj.get_object_reference(cr, uid,
+                    'stock', 'view_picking_out_form')[1]
+
+            res['view_id'] = [view_id]
+
+        return res
+
+    def chk_create(self, cr, uid, vals, context=None):
+        """
+        Check if a same record already exist. If not, create a new record.
+        """
+        if context is None:
+            context = {}
+
+        chk_ids = self.search(cr, uid, [
+            ('order_id', '=', vals.get('order_id')),
+            ('sourcing_document_id', '=', vals.get('sourcing_document_id')),
+            ('sourcing_document_model', '=', vals.get('sourcing_document_model')),
+        ], context=context)
+
+        if not chk_ids:
+            self.create(cr, uid, {
+                'order_id': vals.get('order_id'),
+                'sourcing_document_id': vals.get('sourcing_document_id'),
+                'sourcing_document_model': vals.get('sourcing_document_model'),
+                'sourcing_document_type': vals.get('sourcing_document_type'),
+            }, context=context)
+
+        return True
+
+procurement_request_sourcing_document()
+
+
 class procurement_request(osv.osv):
     _name = 'sale.order'
     _inherit = 'sale.order'
@@ -117,10 +257,14 @@ class procurement_request(osv.osv):
         'requestor': fields.char(size=128, string='Requestor', states={'draft': [('readonly', False)]}, readonly=True),
         'procurement_request': fields.boolean(string='Internal Request', readonly=True),
         'warehouse_id': fields.many2one('stock.warehouse', string='Warehouse', states={'draft': [('readonly', False)]}, readonly=True),
-        'origin': fields.char(size=64, string='Origin', states={'draft': [('readonly', False)]}, readonly=True),
+        'origin': fields.char(size=512, string='Origin', states={'draft': [('readonly', False)]}, readonly=True),
         'notes': fields.text(string='Notes'),
-        'order_ids': fields.many2many('purchase.order', 'procurement_request_order_rel',
-                                      'request_id', 'order_id', string='Orders', readonly=True),
+        'order_ids': fields.one2many(
+            'procurement.request.sourcing.document',
+            'order_id',
+            string='Sourcing document',
+            readonly=True,
+        ),
         'ir_total_amount': fields.function(_ir_amount_all, method=True, digits_compute=dp.get_precision('Sale Price'), string='Indicative Total Value'),
         'amount_untaxed': fields.function(_amount_all, method=True, digits_compute=dp.get_precision('Sale Price'), string='Untaxed Amount',
             store={
@@ -259,11 +403,8 @@ class procurement_request(osv.osv):
         if not default:
             default = {}
 
-        seq_obj = self.pool.get('ir.sequence')
         order = self.browse(cr, uid, id)
-
         proc = order.procurement_request or context.get('procurement_request', False)
-
         default.update({
             'shipped': False,
             'invoice_ids': [],
@@ -271,14 +412,17 @@ class procurement_request(osv.osv):
             'date_confirm': False,
             'procurement_request': proc,
         })
-
-        if not 'name' in default:
-            name = (order.procurement_request or context.get('procurement_request', False)) and seq_obj.get(cr, uid, 'procurement.request') or seq_obj.get(cr, uid, 'sale.order')
-            default.update({'name': name})
-
+        # UFTP-322: Remove the block of code to calculate 'name' as the creation could be blocked by the user right to make a wrong increase of sequence
+        # moved this block of code to analytic_distribution_supply/sale.py method copy_data() 
         return default
 
     def copy(self, cr, uid, id, default, context=None):
+        if not default:
+            default = {}
+
+        if not default.get('order_ids'):
+            default['order_ids'] = None
+
         # bypass name sequence
         new_id = super(procurement_request, self).copy(cr, uid, id, default, context=context)
         if new_id:
@@ -301,6 +445,9 @@ class procurement_request(osv.osv):
         self.write(cr, uid, ids, {'state': 'cancel'}, context=context)
         self.pool.get('sale.order.line').write(cr, uid, line_ids, {'state': 'cancel'}, context=context)
 
+        for ir_id in ids:
+            self.infolog(cr, uid, "The IR id:%s has been canceled" % ir_id)
+
         return True
 
     def validate_procurement(self, cr, uid, ids, context=None):
@@ -309,16 +456,19 @@ class procurement_request(osv.osv):
         It is the action called on the activity of the workflow.
         '''
         obj_data = self.pool.get('ir.model.data')
+        line_obj = self.pool.get('sale.order.line')
         nomen_manda_0 = obj_data.get_object_reference(cr, uid, 'msf_doc_import', 'nomen_tbd0')[1]
         nomen_manda_1 = obj_data.get_object_reference(cr, uid, 'msf_doc_import', 'nomen_tbd1')[1]
         nomen_manda_2 = obj_data.get_object_reference(cr, uid, 'msf_doc_import', 'nomen_tbd2')[1]
         nomen_manda_3 = obj_data.get_object_reference(cr, uid, 'msf_doc_import', 'nomen_tbd3')[1]
         uom_tbd = obj_data.get_object_reference(cr, uid, 'msf_doc_import', 'uom_tbd')[1]
         nb_lines = 0
+        line_ids = []
         for req in self.browse(cr, uid, ids, context=context):
             if len(req.order_line) <= 0:
                 raise osv.except_osv(_('Error'), _('You cannot validate an Internal request with no lines !'))
             for line in req.order_line:
+                line_ids.append(line.id)
                 if line.nomen_manda_0.id == nomen_manda_0 \
                 or line.nomen_manda_1.id == nomen_manda_1 \
                 or line.nomen_manda_2.id == nomen_manda_2 \
@@ -329,6 +479,8 @@ class procurement_request(osv.osv):
                     raise osv.except_osv(_('Error'), _('A line must a have a quantity larger than 0.00'))
             if nb_lines:
                 raise osv.except_osv(_('Error'), _('Please check the lines : you cannot have "To Be confirmed" for Nomenclature Level". You have %s lines to correct !') % nb_lines)
+            self.log(cr, uid, req.id, _("The internal request '%s' has been validated (nb lines: %s).") % (req.name, len(req.order_line)), context=context)
+        line_obj.update_supplier_on_line(cr, uid, line_ids, context=context)
         self.write(cr, uid, ids, {'state': 'validated'}, context=context)
 
         return True
@@ -357,7 +509,7 @@ class procurement_request(osv.osv):
                         raise osv.except_osv(_('Warning'), _("""For an Internal Request with a procurement method 'On Order' and without product,
                         the supplier must be either in 'Internal', 'Inter-Section' or 'Intermission' type.
                         """))
-            message = _("The internal request '%s' has been confirmed.") % (request.name,)
+            message = _("The internal request '%s' has been confirmed (nb lines: %s).") % (request.name, len(request.order_line))
             proc_view = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'procurement_request', 'procurement_request_form_view')
             context.update({'view_id': proc_view and proc_view[1] or False})
             self.log(cr, uid, request.id, message, context=context)
@@ -366,12 +518,31 @@ class procurement_request(osv.osv):
 
         return True
 
+    def test_state_done(self, cr, uid, ids, mode, *args):
+        if not self.test_state(cr, uid, ids, mode, *args):
+            return False
+
+        for ir in self.browse(cr, uid, ids):
+            is_out = ir.location_requestor_id.usage == 'customer'
+            if not is_out:
+                return True
+
+            ir_lines = [x.id for x in ir.order_line]
+            out_move_ids = self.pool.get('stock.move').search(cr, uid, [
+                ('picking_id.type', '=', 'out'),
+                ('sale_line_id', 'in', ir_lines),
+                ('state', 'not in', ['done', 'cancel']),
+            ])
+            if out_move_ids:
+                return False
+
+        return True
+
     def procurement_done(self, cr, uid, ids, context=None):
         '''
         Creates all procurement orders according to lines
         '''
         self.write(cr, uid, ids, {'state': 'done'})
-
         return True
 
     def pricelist_id_change(self, cr, uid, ids, pricelist_id):
@@ -505,6 +676,9 @@ class procurement_request_line(osv.osv):
         'product_ok': False,
         'comment_ok': True,
     }
+
+    def update_supplier_on_line(self, cr, uid, ids, context=None):
+        return True
 
 
     def requested_product_id_change(self, cr, uid, ids, product_id, comment=False, context=None):

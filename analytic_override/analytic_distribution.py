@@ -93,6 +93,8 @@ class analytic_distribution1(osv.osv):
         account = self.pool.get('account.analytic.account').browse(cr, uid, [account_id], context=context)[0]
         if account.category == 'OC':
             vals = {'cost_center_id': account_id}
+        elif account.category == 'DEST':
+            vals = {'destination_id': account_id}
         else:
             vals = {'analytic_id': account_id}
         return self.pool.get('funding.pool.distribution.line').write(cr, uid, line_ids, vals)
@@ -222,7 +224,7 @@ class distribution_line(osv.osv):
 
     _columns = {
         'name': fields.char('Name', size=64),
-        "distribution_id": fields.many2one('analytic.distribution', 'Associated Analytic Distribution', ondelete='cascade'),
+        "distribution_id": fields.many2one('analytic.distribution', 'Associated Analytic Distribution', ondelete='cascade', select="1"), # select is for optimisation purposes. Example: 3 seconds on 1 invoice creation+validation
         "analytic_id": fields.many2one('account.analytic.account', 'Analytical Account'),
         "amount": fields.float('Amount', digits_compute=dp.get_precision('Account')),
         "percentage": fields.float('Percentage', digits=(16,4)),
@@ -251,7 +253,7 @@ class distribution_line(osv.osv):
         (_check_percentage, '0 is not allowed as percentage value!', ['percentage']),
     ]
 
-    def create_analytic_lines(self, cr, uid, ids, move_line_id, date, document_date, source_date=False, name=False, context=None):
+    def create_analytic_lines(self, cr, uid, ids, move_line_id, date, document_date, source_date=False, name=False, ref='', context=None):
         '''
         Creates an analytic lines from a distribution line and an account.move.line
         '''
@@ -260,26 +262,32 @@ class distribution_line(osv.osv):
 
         ret = {}
         move_line = self.pool.get('account.move.line').browse(cr, uid, move_line_id)
-        company_currency_id = self.pool.get('res.users').browse(cr, uid, uid).company_id.currency_id.id
+        company = self.pool.get('res.users').browse(cr, uid, uid).company_id
+        company_currency_id = company.currency_id.id
+        instance_id = company.instance_id.id
 
         for line in self.browse(cr, uid, ids):
             amount_cur = (move_line.credit_currency - move_line.debit_currency) * line.percentage / 100
             ctx = {'date': source_date or date}
             amount = self.pool.get('res.currency').compute(cr, uid, move_line.currency_id.id, company_currency_id, amount_cur, round=False, context=ctx)
             vals = {
+                'instance_id': instance_id,
                 'account_id': line.analytic_id.id,
                 'amount_currency': amount_cur,
                 'amount': amount,
                 'currency_id': move_line.currency_id.id,
                 'general_account_id': move_line.account_id.id,
                 'date': date,
-                'source_date': source_date,
+                # UFTP-361: source_date or source date from line or from line posting date if any
+                # for rev line must be the source date of the move line: posting date of reversed line
+                'source_date': source_date or move_line.source_date or move_line.date,
                 'document_date': document_date,
                 'journal_id': move_line.journal_id and move_line.journal_id.analytic_journal_id and move_line.journal_id.analytic_journal_id.id or False,
                 'move_id': move_line.id,
                 'name': name or move_line.name,
                 'distrib_id': line.distribution_id.id,
                 'distrib_line_id': '%s,%s'%(self._name, line.id),
+                'ref': ref or move_line.move_id.name,
             }
             if self._name == 'funding.pool.distribution.line':
                 vals.update({

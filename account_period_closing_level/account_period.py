@@ -29,16 +29,28 @@ class account_period(osv.osv):
     _name = "account.period"
     _inherit = "account.period"
 
-    # To avoid issues with existing OpenERP code (account move line for example),
+    # To avoid issues with existing OpenERP code (account move line for example)
     # the state are:
     #  - 'created' for Draft
     #  - 'draft' for Open
     #  - 'done' for HQ-Closed
-        # 1 = state created as 'Draft' ('created') at HQ (update to state handled in create)
-        # 2 = state moves from 'Open' ('draft') -> any close at HQ (sync down)
-        # 3 =
-        # 3 = state reopened at HQ -> reopen at all levels
+    # 1 = state created as 'Draft' ('created') at HQ (update to state handled
+    #   in create)
+    # 2 = state moves from 'Open' ('draft') -> any close at HQ (sync down)
+    # 3 =
+    # 3 = state reopened at HQ -> reopen at all levels
 
+    def check_unposted_entries(self, cr, uid, period_id, context=None):
+        """
+        Check that no oustanding unposted entries remain
+        """
+        sql = """SELECT COUNT(id) FROM account_move WHERE period_id = %s AND state != 'posted'""" % period_id
+        cr.execute(sql)
+        sql_res = cr.fetchall()
+        count_moves = sql_res and sql_res[0] and sql_res[0][0] or 0
+        if count_moves > 0:
+            raise osv.except_osv(_('Warning'), _('Period closing is denied: some Journal Entries remain unposted in this period.'))
+        return True
 
     def action_set_state(self, cr, uid, ids, context):
         """
@@ -166,6 +178,8 @@ class account_period(osv.osv):
                     payroll_rows = hr_payroll_msf_obj.search(cr, uid, [('period_id','=', period.id),('state','=','draft')])
                     if payroll_rows:
                         raise osv.except_osv(_('Error !'), _('There are outstanding payroll entries in this period; you must validate them to field-close this period.'))
+                    # UFTP-351: Check that no Journal Entries are Unposted for this period
+                    self.check_unposted_entries(cr, uid, period.id, context=context)
 
                 # first verify that all existent registers for this period are closed
                 reg_ids = reg_obj.search(cr, uid, [('period_id', '=', period.id)], context=context)
@@ -214,6 +228,10 @@ class account_period(osv.osv):
                 for p_id in ids:
                     self.write(cr, uid, p_id, {'state':'field-closed', 'field_process': False}, context=context)
                 return True
+
+            # UFTP-351: Check that no Journal Entries are Unposted for this period
+            if period.state == 'field-closed' and context['state'] == 'mission-closed':
+                self.check_unposted_entries(cr, uid, period.id, context=context)
 
         # check if unposted move lines are linked to this period
         move_line_obj = self.pool.get('account.move.line')
@@ -270,7 +288,10 @@ class account_period(osv.osv):
             logging.getLogger('init').info('Loading default draft - created - state for account.period')
             vals['state'] = 'created'
 
-        return super(account_period, self).create(cr, uid, vals, context=context)
+        res = super(account_period, self).create(cr, uid, vals, context=context)
+        self.pool.get('account.period.state').update_state(cr, uid, res,
+                                                           context=context)
+        return res
 
     def write(self, cr, uid, ids, vals, context=None):
         if not context:
@@ -283,7 +304,10 @@ class account_period(osv.osv):
             else:
                 vals['state_sync_flag'] = 'none'
 
-        return super(account_period, self).write(cr, uid, ids, vals, context=context)
+        res = super(account_period, self).write(cr, uid, ids, vals, context=context)
+        self.pool.get('account.period.state').update_state(cr, uid, ids,
+                                                           context=context)
+        return res
 
     _defaults = {
         'state': lambda *a: 'created',
@@ -310,6 +334,9 @@ class account_period(osv.osv):
             context = {}
         context['state'] = 'draft'
         return self.action_set_state(cr, uid, ids, context)
+
+    def action_close_field_reopen(self, cr, uid, ids, context=None):
+        return self.action_close_field(cr, uid, ids, context=context)
 
     def action_close_field(self, cr, uid, ids, context=None):
         if context is None:
@@ -507,7 +534,9 @@ class account_period(osv.osv):
             'view_mode': 'tree,form',
             'view_type': 'form',
             'context': context,
-            'domain': [('user_validated', '=', 'False'), ('period_id', 'in', ids)]
+            # BKLG-15 do not use ('user_validated', '=', 'False') in domain
+            # as already used by 'search_default_non_validated' in context
+            'domain': [('period_id', 'in', ids)],
         }
 
     def button_recurring(self, cr, uid, ids, context=None):

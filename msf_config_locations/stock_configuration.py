@@ -187,9 +187,31 @@ class stock_location(osv.osv):
                 else:
                     # All internal locations except Quarantine (both), Output (& children) and Input locations
                     res = [('usage', '=', 'internal'), ('quarantine_location', '=', False), ('output_ok', '=', False), ('input_ok', '=', False)]
-                    
+
         return res
-    
+
+    def _dest_out(self, cr, uid, obj, name, args, context=None):
+        '''
+        Returns the available locations for destination location of an outgoing delivery according to the partner in context
+        '''
+        res = []
+        for arg in args:
+            if arg[0] == 'outgoing_dest' and arg[1] == '=':
+                if not context.get('partner_id'):
+                    break
+                partner_id = context.get('partner_id')
+                if partner_id == self.pool.get('res.users').browse(cr, uid, uid).company_id.partner_id.id:
+                    res = [('location_category', '=', 'consumption_unit'), ('usage', '=', 'customer')]
+
+        if not res:
+            wh_ids = self.pool.get('stock.warehouse').search(cr, uid, [])
+            output_loc = []
+            for wh in self.pool.get('stock.warehouse').browse(cr, uid, wh_ids):
+                output_loc.append(wh.lot_output_id.id)
+            res = ['|', ('id', 'in', output_loc), '&', '&', ('usage', '!=', 'view'), ('usage', '=', 'customer'), ('location_category', '!=', 'consumption_unit')]
+
+        return res
+ 
     def _src_int(self, cr, uid, obj, name, args, context=None):
         '''
         Return the available locations for source location of an internal picking according to the product
@@ -279,6 +301,8 @@ class stock_location(osv.osv):
                                          help="Returns the available locations for destination location of an incoming shipment according to the product."),
         'outgoing_src': fields.function(_get_dummy, fnct_search=_src_out, method=True, string='Outgoing delivery Src. Loc.', type='boolean',
                                         help='Returns the available locations for source location of an outgoing delivery according to the product.'),
+        'outgoing_dest': fields.function(_get_dummy, fnct_search=_dest_out, method=True, string='Outgoing delivery Dest. Loc.', type='boolean',
+                                         help='Returns the available locations for destination location of an outgoing delivery according to the address.'),
         'internal_src': fields.function(_get_dummy, fnct_search=_src_int, method=True, string='Internal Picking Src. Loc.', type='boolean',
                                         help='Returns the available locations form source loctaion of an internal picking according to the product.'),
         'internal_dest': fields.function(_get_dummy, fnct_search=_dest_int, method=True, string='Internal Picking Dest. Loc.', type='boolean',
@@ -373,6 +397,13 @@ class stock_location_configuration_wizard(osv.osv_memory):
             context = {}
         if isinstance(ids, (int, long)):
             ids = [ids]
+
+        #US-702: This action can only be done in RW instances
+        picking_obj = self.pool.get('stock.picking')
+        usb_entity = picking_obj._get_usb_entity_type(cr, uid)
+        if usb_entity == picking_obj.REMOTE_WAREHOUSE:
+            raise osv.except_osv(_('Info!'), _('This action can only be performed at the main instance (CP) and sync to RW!'))
+
         data_obj = self.pool.get('ir.model.data')
         location_obj = self.pool.get('stock.location')
         parent_location_id = False
@@ -384,7 +415,7 @@ class stock_location_configuration_wizard(osv.osv_memory):
         chained_picking_type = 'internal'
         chained_location_id = False
         location = False
-        
+
         for wizard in self.browse(cr, uid, ids, context=context):
             # Check if errors on location name
             errors = self.name_on_change(cr, uid, ids, wizard.location_name, wizard.location_type, wizard.location_usage, context=context)
@@ -588,6 +619,13 @@ Please click on the 'Children locations' button to see all children locations.''
         return {}
         
     def deactivate_location(self, cr, uid, ids, context=None):
+
+        #US-702: This action can only be done in RW instances
+        picking_obj = self.pool.get('stock.picking')
+        usb_entity = picking_obj._get_usb_entity_type(cr, uid)
+        if usb_entity == picking_obj.REMOTE_WAREHOUSE:
+            raise osv.except_osv(_('Info!'), _('This action can only be performed at the main instance (CP) and sync to RW!'))
+
         '''
         Deactivate the selected location
         '''

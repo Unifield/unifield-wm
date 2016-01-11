@@ -25,7 +25,6 @@ import decimal_precision as dp
 
 import netsvc
 
-
 class enter_reason(osv.osv_memory):
     '''
     wizard called to split a memory stock move from create picking wizard
@@ -65,16 +64,21 @@ class enter_reason(osv.osv_memory):
         for obj in picking_obj.browse(cr, uid, picking_ids, context=context):
             # purchase order line to re-source
             pol_ids = []
+            pol_qty = {}
             # set the reason
             obj.write({'change_reason': change_reason}, context=context)
 
             for move in obj.move_lines:
-                pol_ids.append(move.purchase_line_id.id)
+                if move.state != 'cancel':
+                    pol_ids.append(move.purchase_line_id.id)
+                    pol_qty.setdefault(move.purchase_line_id.id, 0.00)
+                    pol_qty[move.purchase_line_id.id] += move.product_qty
 
             # if full cancel (no resource), we updated corresponding out and correct po state
-            if cancel_type == 'update_out':
-                picking_obj.cancel_and_update_out(cr, uid, [obj.id], context=context)
-            else:
+            picking_obj.cancel_and_update_out(cr, uid, [obj.id], context=context)
+            if cancel_type != 'update_out':
+                context['pol_qty'] = pol_qty
+                context['from_in_cancel'] = True
                 pol_obj.write(cr, uid, pol_ids, {'has_to_be_resourced': True}, context=context)
                 pol_obj.cancel_sol(cr, uid, pol_ids, context=context)
             

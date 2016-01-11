@@ -23,15 +23,15 @@
 
 from osv import osv
 from osv import fields
-import os.path
 from base64 import decodestring
 from tempfile import NamedTemporaryFile
 import csv
-from tools.misc import ustr
 from tools.translate import _
 import time
-import locale
+#import locale
 from account_override import ACCOUNT_RESTRICTED_AREA
+from tools.misc import ustr
+
 
 class hq_entries_import_wizard(osv.osv_memory):
     _name = 'hq.entries.import'
@@ -45,11 +45,11 @@ class hq_entries_import_wizard(osv.osv_memory):
     def parse_date(self, date):
         try:
             pdate = time.strptime(date, '%d/%m/%y')
-        except ValueError, e:
+        except ValueError:
             pdate = time.strptime(date, '%d/%m/%Y')
         return time.strftime('%Y-%m-%d', pdate)
 
-    def update_hq_entries(self, cr, uid, line):
+    def update_hq_entries(self, cr, uid, line, context=None):
         """
         Import hq entry regarding all elements given in "line"
         """
@@ -94,13 +94,11 @@ class hq_entries_import_wizard(osv.osv_memory):
                 vals.update({'document_date': dd})
             except ValueError, e:
                 raise osv.except_osv(_('Error'), _('Wrong format for date: %s: %s') % (document_date, e))
-        # [utp-928] 
+        # [utp-928]
         # Make it impossible to import HQ entries where Doc Date > Posting Date,
         # it will spare trouble at HQ entry validation.
-        if dd and line_date and dd > line_date:
-            raise osv.except_osv(_('Error'),
-                                  _('Document date "%s" is greater than Posting date "%s"') % (document_date, line_date)
-            )
+        self.pool.get('finance.tools').check_document_date(cr, uid,
+            dd, line_date, show_date=True)
         # Retrieve account
         if account_description:
             account_data = account_description.split(' ')
@@ -170,9 +168,9 @@ class hq_entries_import_wizard(osv.osv_memory):
             free2_id = free2_id[0]
             aa_check_ids.append(free2_id)
         vals.update({'destination_id_first_value': destination_id, 'destination_id': destination_id, 'cost_center_id': cc_id, 'analytic_id': fp_id, 'cost_center_id_first_value': cc_id, 'analytic_id_first_value': fp_id, 'free_1_id': free1_id, 'free_2_id': free2_id,})
-        
-        # [utp-928] do not import line with a 
-        # 'Destination' or 'Cost Center' or 'Funding Pool', 
+
+        # [utp-928] do not import line with a
+        # 'Destination' or 'Cost Center' or 'Funding Pool',
         # of type 'view'
         aa_check_errors = []
         aa_check_category_map = {
@@ -193,7 +191,7 @@ class hq_entries_import_wizard(osv.osv_memory):
                     aa_check_errors.append('%s"%s - %s" of type "view" is not allowed for import' % (category, aa_r['code'], aa_r['name']))
         if aa_check_errors:
             raise osv.except_osv(_('Error'), ", ".join(aa_check_errors))
-        
+
         # Fetch description
         if description:
             vals.update({'name': description})
@@ -206,6 +204,7 @@ class hq_entries_import_wizard(osv.osv_memory):
         # Search if 3RD party exists as employee
         emp_ids = self.pool.get('hr.employee').search(cr, uid, [('name', '=', third_party)])
         # If yes, get its analytic distribution
+        employee = False
         if len(emp_ids) and len(emp_ids) == 1:
             employee = self.pool.get('hr.employee').browse(cr, uid, emp_ids)[0]
             if employee.destination_id and employee.destination_id.id:
@@ -241,6 +240,38 @@ class hq_entries_import_wizard(osv.osv_memory):
         # Fetch amount
         if booking_amount:
             vals.update({'amount': booking_amount,})
+
+        # BKLG-63/US-414: unicity check
+        # Description (name), Reference (ref), Posting date (date),
+        # Document date (document_date), Amount (amount),
+        # and Account (account_id) and 3rd Party and CC
+        unicity_fields = [
+            'name', 'ref', 'date', 'document_date', 'amount', 'account_id',
+            'cost_center_id',
+        ]
+
+        unicity_domain = [
+            (f, '=', vals.get(f, False)) for f in unicity_fields
+        ]
+        # US-414: add 3rd party for unicity check
+        unicity_domain.append(('partner_txt', '=', third_party or False))
+
+        if hq_obj.search(cr, uid, unicity_domain, limit=1, context=context):
+            # raise unicity check failure
+            # (fields listed like in csv order for user info)
+            emp_cc_id = employee and employee.cost_center_id
+
+            pattern = _("Entry already imported: %s / %s / %s (doc) /" \
+                " %s (posting) / %s (account) / %s (amount) / %s (3rd party) /" \
+                " %s (%s)")
+            raise osv.except_osv(_('Error'), pattern % (
+                description, reference, document_date, date,
+                account_description, booking_amount,
+                ustr(third_party),
+                emp_cc_id and emp_cc_id.name or cost_center,
+                emp_cc_id and 'Emp default CC' or 'CC'
+            ))
+
         # Line creation
         res = hq_obj.create(cr, uid, vals)
         if res:
@@ -259,23 +290,21 @@ class hq_entries_import_wizard(osv.osv_memory):
         # Do verifications
         if not context:
             context = {}
-        
+
         # Verify that an HQ journal exists
         journal_ids = self.pool.get('account.journal').search(cr, uid, [('type', '=', 'hq'),
                                                                         ('is_current_instance', '=', True)])
         if not journal_ids:
             raise osv.except_osv(_('Error'), _('You cannot import HQ entries because no HQ Journal exists.'))
-        
+
         # Prepare some values
-        file_ext_separator = '.'
-        file_ext = "csv"
         message = _("HQ Entries import failed.")
         res = False
         created = 0
         processed = 0
         errors = []
         filename = ""
-        
+
         # Browse all given wizard
         for wiz in self.browse(cr, uid, ids):
             if not wiz.file:
@@ -296,7 +325,6 @@ class hq_entries_import_wizard(osv.osv_memory):
                 if filename.split('.')[-1] != 'csv':
                     raise osv.except_osv(_('Warning'), _('You are trying to import a file with the wrong file format; please import a CSV file.'))
             res = True
-            amount = 0.0
             # Omit first line that contains columns ' name
             try:
                 reader.next()
@@ -307,28 +335,28 @@ class hq_entries_import_wizard(osv.osv_memory):
                 nbline += 1
                 processed += 1
                 try:
-                    update = self.update_hq_entries(cr, uid, line)
+                    self.update_hq_entries(cr, uid, line, context=context)
                     created += 1
                 except osv.except_osv, e:
                     errors.append('Line %s, %s'%(nbline, e.value))
             fileobj.close()
-        
+
         if res:
             message = _("HQ Entries import successful")
         context.update({'message': message})
-        
+
         if errors:
             cr.rollback()
             view_id = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'msf_homere_interface', 'payroll_import_error')
         else:
             view_id = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'msf_homere_interface', 'payroll_import_confirmation')
         view_id = view_id and view_id[1] or False
-        
+
         # This is to redirect to HQ Entries Tree View
         context.update({'from': 'hq_entries_import'})
-        
+
         res_id = self.pool.get('hr.payroll.import.confirmation').create(cr, uid, {'filename': filename, 'created': created, 'total': processed, 'state': 'hq', 'errors': "\n".join(errors), 'nberrors': len(errors)}, context=context)
-        
+
         return {
             'name': 'HQ Entries Import Confirmation',
             'type': 'ir.actions.act_window',

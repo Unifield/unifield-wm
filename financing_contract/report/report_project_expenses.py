@@ -6,6 +6,7 @@ from spreadsheet_xml.spreadsheet_xml_write import SpreadsheetReport
 from tools.translate import _
 
 
+
 class report_project_expenses(report_sxw.report_sxw):
     def __init__(self, name, table, rml=False, parser=report_sxw.rml_parse, header='external', store=False):
         report_sxw.report_sxw.__init__(self, name, table, rml=rml, parser=parser, header=header, store=store)
@@ -94,10 +95,13 @@ class report_project_expenses2(report_sxw.rml_parse):
         return temp
 
     def getSub2(self,):
-        temp = self.len2
+        """
+        len2 gives the number of previous line for a given CC.
+        Return number of lines then intialize to 0
+        """
+        res = self.len2
         self.len2 = 0
-        return temp
-
+        return res
 
     def getBookAm(self,contract,analytic_line):
         date_context = {'date': analytic_line.document_date,'currency_table_id': contract.currency_table_id and contract.currency_table_id.id or None}
@@ -118,7 +122,10 @@ class report_project_expenses2(report_sxw.rml_parse):
 
     def getLines(self,contract):
         lines = {}
-        pool = pooler.get_pool(self.cr.dbname)
+        if self.objects[0].format_id.reporting_type == 'allocated' and self.name == 'financing.project.expenses.2':
+            return []
+        if self.objects[0].format_id.reporting_type == 'project' and self.name == 'financing.allocated.expenses.2':
+            return []
         contract_obj = self.pool.get('financing.contract.contract')
         format_line_obj = self.pool.get('financing.contract.format.line')
         contract_domain = contract_obj.get_contract_domain(self.cr, self.uid, contract, reporting_type=self.reporting_type)
@@ -147,7 +154,10 @@ class report_project_expenses2(report_sxw.rml_parse):
 
         # UFTP-16: First search in the triplet in format line, then in the second block below, search in quadruplet
         for analytic_line in analytic_line_obj.browse(self.cr, self.uid, analytic_lines, context=None):
-            ids_adl = self.pool.get('financing.contract.account.quadruplet').search(self.cr, self.uid,[('account_id', '=', analytic_line.general_account_id.id),('account_destination_id','=',analytic_line.destination_id.id) ])
+            # US-460: Include also the funding pool in the criteria when searching for the quadruplet of the contract line 
+            criteria_for_adl = [('account_id', '=', analytic_line.general_account_id.id), ('account_destination_id', '=', analytic_line.destination_id.id), ('funding_pool_id', '=', analytic_line.account_id.id)]
+            ids_adl = self.pool.get('financing.contract.account.quadruplet').search(self.cr, self.uid, criteria_for_adl)
+
             ids_fcfl = format_line_obj.search(self.cr, self.uid, [('account_quadruplet_ids','in',ids_adl), ('format_id', '=', contract.format_id.id)])
             for fcfl in format_line_obj.browse(self.cr, self.uid, ids_fcfl):
                 ana_tuple = (analytic_line, fcfl.code, fcfl.name)

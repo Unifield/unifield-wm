@@ -63,9 +63,51 @@ class account_move_line_compute_currency(osv.osv):
     def create_addendum_line(self, cr, uid, lines, total, context=None):
         """
         Create an addendum line.
-        posting_date and document_date should be the oldiest date from all lines!
+
+        Since US-236: default document and posting dates should belong to the
+        first open period found after the highest posting date involved in the
+        reconciliation
         """
-        current_date = time.strftime('%Y-%m-%d')
+        if context is None:
+            context = {}
+
+        current_instance = self.pool.get('res.users').browse(cr, uid, uid, context=context).company_id.instance_id
+        current_instance_level = current_instance.level
+        current_instance_id = current_instance.id
+        all_line_equal_to_current = True
+        to_create = False
+        previous = None
+        has_section_line = False
+        for line in self.browse(cr, uid, lines):
+            if not previous:
+                previous = line.instance_id.id
+
+            if line.instance_id.level == 'section':
+                has_section_line = True
+
+            if not has_section_line and current_instance_level == 'section' and line.instance_id.level == 'project':
+                to_create = False
+                all_line_equal_to_current = False
+                break
+
+            if previous != line.instance_id.id:
+                all_line_equal_to_current = False
+                to_create = True
+                if current_instance_level != 'section':
+                    break
+            elif line.instance_id.id != current_instance_id:
+                all_line_equal_to_current = False
+                to_create = False
+
+            previous = line.instance_id.id
+
+        if all_line_equal_to_current:
+            to_create = True
+
+        if not to_create:
+            return False
+
+        period_obj = self.pool.get('account.period')
         j_obj = self.pool.get('account.journal')
         company_currency_id = self.pool.get('res.users').browse(cr, uid, uid, context=context).company_id.currency_id.id
         # Search Miscellaneous Transactions journal
@@ -106,21 +148,40 @@ class account_move_line_compute_currency(osv.osv):
                     oldiest_date = rline.date or False
                 if rline.date > oldiest_date:
                     oldiest_date = rline.date
-#                break
-            
-            # Search attached period
-            period_id = None
-            for tested_date in [oldiest_date, current_date]:
-                period_ids = self.pool.get('account.period').search(cr, uid, [('date_start', '<=', tested_date), ('date_stop', '>=', tested_date)], context=context, limit=1, order='date_start, name')
-                if not period_ids:
-                    raise osv.except_osv(_('Error'), _('No attached period found!'))
-                if self.pool.get('account.period').browse(cr, uid, period_ids[0]).state == 'draft':
-                    period_id = period_ids[0]
-                    break
-            
-            if not period_id:
-                raise osv.except_osv(_('Warning'), _('No open period found for this date: %s') % current_date)
-            
+
+            # US-236: default document and posting dates should belong to the
+            # first open period found after the highest posting date involved in
+            # the reconciliation
+            current_date = time.strftime('%Y-%m-%d')
+            current_date_dt = self.pool.get('date.tools').orm2date(current_date)
+            oldiest_date_dt = self.pool.get('date.tools').orm2date(oldiest_date)
+            base_date = oldiest_date or current_date
+            base_date_dt = self.pool.get('date.tools').orm2date(base_date)
+
+            # search first opened period since latest posting date
+            period_from = "%04d-%02d-%02d" % (base_date_dt.year,
+                base_date_dt.month, 1, )
+            period_ids = period_obj.search(cr, uid, [
+                ('date_start', '>=', period_from),
+                ('state', '=', 'draft'),  # first opened period since 
+            ], limit=1, order='date_start, name', context=context)
+            if not period_ids:
+                raise osv.except_osv(_('Warning'),
+                    _('No open period found since this date: %s') % base_date)
+            period_id = period_ids[0]
+            period_br = period_obj.browse(cr, uid, period_id, context=context)
+
+            if current_date_dt.year == oldiest_date_dt.year \
+                and current_date_dt.month == oldiest_date_dt.month \
+                and current_date_dt.day > oldiest_date_dt.day \
+                and period_br.date_start <= current_date <= period_br.date_stop:
+                # current date in 'opened period found': use it as 'base date'
+                base_date = current_date
+            elif period_br.date_start > base_date:
+                # opened period finally found after the latest posting date:
+                # use the period start date as 'base date'
+                base_date = period_br.date_start
+
             # verify that a fx gain/loss account exists
             search_ids = self.pool.get('account.analytic.account').search(cr, uid, [('for_fx_gain_loss', '=', True)], context=context)
             if not search_ids:
@@ -147,8 +208,8 @@ class account_move_line_compute_currency(osv.osv):
                     'currency_id': company_currency_id,
                     'analytic_id': search_ids[0],
                     'percentage': 100.0,
-                    'date': oldiest_date or current_date,
-                    'source_date': oldiest_date or current_date,
+                    'date': base_date,
+                    'source_date': base_date,
                     'destination_id': addendum_line_account_default_destination_id,
                 }
                 cc_id = self.pool.get('cost.center.distribution.line').create(cr, uid, distrib_line_vals, context=context)
@@ -161,14 +222,14 @@ class account_move_line_compute_currency(osv.osv):
                     raise osv.except_osv(_('Error'), _('No "MSF Private Fund" found!'))
                 distrib_line_vals.update({'analytic_id': fp_id, 'cost_center_id': search_ids[0],})
                 self.pool.get('funding.pool.distribution.line').create(cr, uid, distrib_line_vals, context=context)
-            
-            move_id = self.pool.get('account.move').create(cr, uid,{'journal_id': journal_id, 'period_id': period_id, 'date': oldiest_date or current_date}, context=context)
+
+            move_id = self.pool.get('account.move').create(cr, uid,{'journal_id': journal_id, 'period_id': period_id, 'date': base_date}, context=context)
             # Create default vals for the new two move lines
             vals = {
                 'move_id': move_id,
-                'date': oldiest_date or current_date,
-                'source_date': oldiest_date or current_date,
-                'document_date': oldiest_date or current_date,
+                'date': base_date,
+                'source_date': base_date,
+                'document_date': base_date,
                 'journal_id': journal_id,
                 'period_id': period_id,
                 'partner_id': partner_id,
@@ -187,6 +248,8 @@ class account_move_line_compute_currency(osv.osv):
                 vals.update({'currency_id': functional_currency_id})
             # Create partner line
             vals.update({'account_id': account_id, 'debit': partner_db or 0.0, 'credit': partner_cr or 0.0,})
+            # UTP-1022: Allow account.move.line creation when we come from "create_addendum_line" because of currencies rate redefinition
+            context.update({'addendum_line_creation': True})
             partner_line_id = self.create(cr, uid, vals, context=context)
             # Create addendum_line
             if distrib_id:
@@ -287,25 +350,32 @@ class account_move_line_compute_currency(osv.osv):
                 if not reconciled_line_ids:
                     continue
                 total = self._accounting_balance(cr, uid, reconciled_line_ids, context=context)[0]
-                if total != 0.0:
+                if abs(total) > 10**-3:
                     # UTP-752: Do not make FX Adjustement line (addendum line) if the reconciliation comes from a multi instance and that we are in synchronization
                     multi_instance = reconciled.is_multi_instance
+                    current_instance = self.pool.get('res.users').browse(cr, uid, uid).company_id.instance_id
+                    current_instance_id = current_instance.id
+                    current_instance_level = current_instance.level
+                    # UF-2501: when proj + coor are reconciled from HQ adj line should be created at coordo only
+                    if not multi_instance and reconciled.multi_instance_level_creation:
+                        multi_instance = reconciled.multi_instance_level_creation != current_instance_level
+
                     from_sync = context.get('sync_update_execution', False) and context.get('sync_update_execution') is True or False
                     from_another_instance = False
                     reconciliation_instance = reconciled.instance_id and reconciled.instance_id.id or False
-                    current_instance = self.pool.get('res.users').browse(cr, uid, uid).company_id.instance_id.id
-                    if reconciliation_instance and reconciliation_instance != current_instance:
+                    if reconciliation_instance and reconciliation_instance != current_instance_id:
                         from_another_instance = True
                     if multi_instance and (from_sync or from_another_instance):
                         continue
                     # If no exception, do main process about new addendum lines
                     partner_line_id = self.create_addendum_line(cr, uid, reconciled_line_ids, total)
-                    # Add it to reconciliation (same that other lines)
-                    reconcile_txt = ''
-                    data = self.pool.get('account.move.reconcile').name_get(cr, uid, [reconciled.id])
-                    if data and data[0] and data[0][1]:
-                        reconcile_txt = data[0][1]
-                    cr.execute('update account_move_line set reconcile_id=%s, reconcile_txt=%s where id=%s',(reconciled.id, reconcile_txt or '', partner_line_id))
+                    if partner_line_id:
+                        # Add it to reconciliation (same that other lines)
+                        reconcile_txt = ''
+                        data = self.pool.get('account.move.reconcile').name_get(cr, uid, [reconciled.id])
+                        if data and data[0] and data[0][1]:
+                            reconcile_txt = data[0][1]
+                        cr.execute('update account_move_line set reconcile_id=%s, reconcile_txt=%s where id=%s',(reconciled.id, reconcile_txt or '', partner_line_id))
         return True
 
     def update_amounts(self, cr, uid, ids):
@@ -317,7 +387,6 @@ class account_move_line_compute_currency(osv.osv):
         # Prepare some values
         cur_obj = self.pool.get('res.currency')
         analytic_obj = self.pool.get('account.analytic.line')
-        reconciled_move = {}
         for move_line in self.browse(cr, uid, ids):
             if move_line.is_addendum_line:
                 # addendum line will be reevaluated after the reevaluation of the reconlied lines
@@ -331,7 +400,7 @@ class account_move_line_compute_currency(osv.osv):
             # source_date is more important than date
             if move_line.source_date:
                 ctx['date'] = move_line.source_date
-            
+
             if move_line.period_id.state != 'done':
                 if move_line.debit_currency != 0.0 or move_line.credit_currency != 0.0:
                     # amount currency is not set; it is computed from the 2 other fields
@@ -342,7 +411,7 @@ class account_move_line_compute_currency(osv.osv):
                         move_line.functional_currency_id.id, move_line.credit_currency, round=True, context=ctx)
                     cr.execute('update account_move_line set debit=%s, \
                                                              credit=%s, \
-                                                             amount_currency=%s where id=%s', 
+                                                             amount_currency=%s where id=%s',
                               (debit_computed, credit_computed, amount_currency, move_line.id))
                 elif move_line.debit_currency == 0.0 and \
                      move_line.credit_currency == 0.0 and \
@@ -357,7 +426,7 @@ class account_move_line_compute_currency(osv.osv):
                     amount_currency = debit_currency_computed - credit_currency_computed
                     cr.execute('update account_move_line set debit_currency=%s, \
                                                              credit_currency=%s, \
-                                                             amount_currency=%s where id=%s', 
+                                                             amount_currency=%s where id=%s',
                               (debit_currency_computed, credit_currency_computed, amount_currency, move_line.id))
                 elif move_line.debit_currency == 0.0 and \
                      move_line.credit_currency == 0.0 and \
@@ -370,19 +439,13 @@ class account_move_line_compute_currency(osv.osv):
                     else:
                         debit_currency = move_line.amount_currency
                     cr.execute('update account_move_line set debit_currency=%s, \
-                                                             credit_currency=%s where id=%s', 
+                                                             credit_currency=%s where id=%s',
                               (debit_currency, credit_currency, move_line.id))
                 # Refresh the associated analytic lines
                 analytic_line_ids = []
                 for analytic_line in move_line.analytic_lines:
                     analytic_line_ids.append(analytic_line.id)
                 analytic_obj.update_amounts(cr, uid, analytic_line_ids)
-            # Reconciliation verification
-            if move_line.reconcile_id:
-                reconciled_move[move_line.reconcile_id.id] = True
-#                self.reconciliation_update(cr, uid, [move_line.id])
-        if reconciled_move:
-            self.reconciliation_update(cr, uid, reconciled_move.keys())
         return True
 
     def check_date(self, cr, uid, vals):
@@ -396,16 +459,16 @@ class account_move_line_compute_currency(osv.osv):
         newvals = {}
         ctxcurr = {}
         cur_obj = self.pool.get('res.currency')
-        
+
         # WARNING: source_date field have priority to date field. This is because of SP2 Specifications
         if vals.get('date', date):
             ctxcurr['date'] = vals.get('date', date)
         if vals.get('source_date', source_date):
             ctxcurr['date'] = vals.get('source_date', source_date)
-        
+
 #        if ctxcurr.get('date', False):
 #            newvals['date'] = ctxcurr['date']
-        
+
         if vals.get('credit_currency') or vals.get('debit_currency'):
             newvals['amount_currency'] = vals.get('debit_currency') or 0.0 - vals.get('credit_currency') or 0.0
             newvals['debit'] = cur_obj.compute(cr, uid, currency_id, curr_fun, vals.get('debit_currency') or 0.0, round=True, context=ctxcurr)
@@ -439,6 +502,12 @@ class account_move_line_compute_currency(osv.osv):
         # Some verifications
         self.check_date(cr, uid, vals)
         date_to_compute = False
+
+        if 'period_id' in vals:
+            period = self.pool.get('account.period').browse(cr, uid, vals.get('period_id'), context)
+            if period and period.state == 'created':
+                raise osv.except_osv(_('Error !'), _('Period \'%s\' is not open! No Journal Item is created') % (period.name,))
+
         if not 'date' in vals:
             if vals.get('move_id'):
                 date_to_compute = self.pool.get('account.move').read(cr, uid, vals['move_id'], ['date'])['date']
@@ -446,9 +515,12 @@ class account_move_line_compute_currency(osv.osv):
                 logger = netsvc.Logger()
                 logger.notifyChannel("warning", netsvc.LOG_WARNING, "No date for new account_move_line!")
                 traceback.print_stack()
+                # UTP-1194: Raise exception if the move is not in vals when creating move line
+                raise osv.except_osv(_('Error !'), _('Cannot create Journal Item due to missing the parent Journal Entry or Date'))
+
         if not context:
             context = {}
-        
+
         ctx = context.copy()
         data = {}
         if 'journal_id' in vals:
@@ -463,10 +535,10 @@ class account_move_line_compute_currency(osv.osv):
                 m_currency = self.pool.get('account.move').read(cr, uid, vals.get('move_id'), ['manual_currency_id'])
                 if m_currency and m_currency.get('manual_currency_id'):
                     vals.update({'currency_id': m_currency.get('manual_currency_id')[0]})
-        
+
         account = self.pool.get('account.account').browse(cr, uid, vals['account_id'], context=context)
         curr_fun = account.company_id.currency_id.id
-        
+
         newvals = vals.copy()
         if not newvals.get('currency_id'):
             if account.currency_id:
@@ -512,7 +584,7 @@ class account_move_line_compute_currency(osv.osv):
 
     def _get_journal_move_line(self, cr, uid, ids, context=None):
         return self.pool.get('account.move.line').search(cr, uid, [('journal_id', 'in', ids)])
-    
+
     def _get_line_account_type(self, cr, uid, ids, field_name=None, arg=None, context=None):
         if isinstance(ids, (long, int)):
             ids = [ids]

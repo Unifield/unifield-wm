@@ -83,6 +83,63 @@ def _set_third_parties(self, cr, uid, obj_id, name=None, value=None, fnct_inv_ar
         cr.execute("UPDATE %s SET employee_id = Null, partner_id = Null, transfer_journal_id = Null WHERE id = %s" % (self._table, obj_id))
     return True
 
+
+def _populate_third_party_name(self, cr, uid, obj_id, field_name, name=None, context=None):
+    """
+    Populate changes to move line and analytic line when the employee or partner name got changed
+    field_name must be 'employee_id' or partner_id (field of account_bank_statement_line)
+    """
+    absl_obj = self.pool.get('account.bank.statement.line')
+    aml_obj = self.pool.get('account.move.line')
+    aal_obj = self.pool.get('account.analytic.line')
+
+    # search all register lines that linked to this employee/partner
+    domain = [
+        (field_name, '=', obj_id),
+        # FIX of BKLG-80: only temp posted
+        # http://jira.unifield.org/browse/BKLG-80?focusedCommentId=39205&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-39205
+        ('state', '=', 'temp'),
+    ]
+
+    absl_ids = absl_obj.search(cr, uid, domain, context=context)
+    for absl in absl_ids:
+        # search for the account.move.line that linked to the given
+        je_ids = absl_obj._get_move_ids(cr, uid, [absl], context=context)
+        domain = [
+            ('move_id', 'in', je_ids),
+            # just in case of posted JIs returned by _get_move_ids
+            ('move_id.state', '=', 'draft'),
+            # only records with previous name
+            ('partner_txt', '!=', name),  
+        ]
+        aml_ids = aml_obj.search(cr, uid, domain, context=context)
+
+        if aml_ids:
+            # register_line to update the partner_txt field
+            # (using write to send sync messages)
+            aml_obj.write(cr, uid, aml_ids, {'partner_txt': name},
+                context=context)
+
+            # get reg line AJIs
+            domain = [
+                ('account_id.category', 'in', ('FUNDING', 'FREE1', 'FREE2')),
+                ('move_id', 'in', aml_ids),
+            ]
+            aal_ids = aal_obj.search(cr, uid, domain, context=context)
+
+            if aal_ids:
+                """
+                perform changes to regline JIs AJIs,
+                a bit tricky, it must be done with sql,
+                otherwise it will use always the "previous" value
+                NOTE: pay attention that the write of move line deleted the
+                current analytic line then recreates new analytic lines!
+                """
+                sql = "UPDATE account_analytic_line SET partner_txt = %s" \
+                    " WHERE id in %s"
+                cr.execute(sql, (name, tuple(aal_ids), ))
+    return True
+
 def _get_third_parties_name(self, cr, uid, vals, context=None):
     """
     Get third parties name from vals that could contain:
@@ -201,6 +258,32 @@ def previous_register_id(self, cr, uid, period_id, journal_id, context=None):
         return False
     return previous_reg_ids[0]
 
+
+def previous_register_instance_id(self, cr, uid, period_id, journal_id, context=None):
+    """
+    get instance_id for the previous register 
+     - period_id: the period of current register
+     - journal_id: this include same currency and same type
+     - fiscalyear_id: current fiscalyear
+    """
+    # TIP - Use this postgresql query to verify current registers:
+    # select s.id, s.state, s.journal_id, j.type, s.period_id, s.name, c.name
+    # from account_bank_statement as s, account_journal as j, res_currency as c
+    # where s.journal_id = j.id and j.currency = c.id;
+
+    # Prepare some values
+    st_obj = self.pool.get('account.bank.statement')
+    # Search journal_ids that have the type we search
+    prev_period_id = previous_period_id(self, cr, uid, period_id, context=context)
+    previous_reg_ids = st_obj.search(cr, uid, [('journal_id', '=', journal_id), ('period_id', '=', prev_period_id)], context=context)
+    prev_reg_browse = st_obj.browse(cr, uid, previous_reg_ids, context=context)
+
+    if len(previous_reg_ids) != 1:
+        return False
+    instance_id = prev_reg_browse[0].instance_id.id
+    return instance_id
+
+
 def previous_register_is_closed(self, cr, uid, ids, context=None):
     """
     Return true if previous register is closed. Otherwise return an exception
@@ -211,7 +294,7 @@ def previous_register_is_closed(self, cr, uid, ids, context=None):
         ids = [ids]
     # Verify that the previous register is closed
     for reg in self.pool.get('account.bank.statement').browse(cr, uid, ids, context=context):
-        # if no previous register (case where register is the first register) we don't need to close unexistent register
+        # if no previous register (case where register is the first register) we don't need to close non-existent registers
         if reg.prev_reg_id:
             if reg.prev_reg_id.state not in ['partial_close', 'confirm']:
                 raise osv.except_osv(_('Error'),

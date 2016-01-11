@@ -67,6 +67,8 @@ class account_move_line(osv.osv):
         Only permit to import invoice regarding some criteria (Cf. dom1 variable content).
         Add debit note default account filter for search (if this account have been selected)
         """
+        if context is None:
+            context = {}
         if not args:
             return []
         dom1 = [
@@ -74,9 +76,23 @@ class account_move_line(osv.osv):
             ('reconcile_id','=',False),
             ('state', '=', 'valid'),
             ('move_state', '=', 'posted'), # UFTP-204: Exclude the Direct Invoice from the list
-            ('journal_id.type', 'in', ['purchase', 'sale','purchase_refund','sale_refund', 'hr']),
-            ('account_id.type_for_register', 'not in', ['down_payment'])
+            ('journal_id.type', 'not in', ['migration']),  # US-70 Open the pending payment to receivable and payable entries from all journals except for the migration journal
+            ('account_id.type_for_register', 'not in', ['down_payment', 'advance', ]),
+            # UTP-1088 exclude correction/reversal lines as can be in journal of type correction
+            ('corrected_line_id', '=', False),  # is a correction line if has a corrected line
+            ('reversal_line_id', '=', False),  # is a reversal line if a reversed line
         ]
+
+        # UFTP-358: do not allow to import an entry from November in an October
+        # entry (from a future period)
+        st_period_id = context.get('st_period_id', False)  # register period id
+        if st_period_id:
+            period_r = self.pool.get('account.period').read(cr, uid,
+                [st_period_id], ['date_stop'], context=context)[0]
+            if period_r:
+                # exclude future periods
+                dom1.append(('date', '<=', period_r['date_stop']))
+
         # verify debit note default account configuration
         default_account = self.pool.get('res.users').browse(cr, uid, uid, context).company_id.import_invoice_default_account
         if default_account:
@@ -191,6 +207,7 @@ class account_move_line(osv.osv):
                           'account.bank.statement.line': (_get_linked_statement, None, 10),
                         }),
         'partner_txt': fields.text(string="Third Parties", help="Help user to display and sort Third Parties"),
+        'partner_identification': fields.related('employee_id', 'identification_id', type='char', string='Id No', size=32),
         'down_payment_id': fields.many2one('purchase.order', string="Purchase Order for Down Payment", readonly=True, ondelete='cascade'),
         'down_payment_amount': fields.float(string='Down Payment used amount', readonly=True),
         'transfer_amount': fields.float(string="Transfer amount", readonly=True, required=False),

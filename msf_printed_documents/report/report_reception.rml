@@ -9,6 +9,13 @@
             <drawString x="20" y="560.0">Reception</drawString>
             <fill color="blue"/>
             <drawString x="20" y="540.0">[[ '%s' % (objects[0].name) ]]</drawString>
+
+
+            <fill color="blue">[[ getState(objects[0]) == "cancel" and removeParentNode('fill') ]]</fill>
+            <fill color="red">[[ getState(objects[0]) != "cancel" and removeParentNode('fill') ]]</fill>
+
+            <drawString x="20" y="520.0">[[ getSel(objects[0], 'state') ]]</drawString>
+
             <image x="700" y="530.0" height="53.3" width="100">[[ company.logo or removeParentNode('image') ]]</image>
             <setFont name="Helvetica" size="8"/>
             <fill color="black"/>
@@ -108,7 +115,7 @@
         <blockTableStyle id="OrderInformations3">
             <blockAlignment value="CENTER" />
             <blockVAlign value="CENTER" />
-            <blockTopPadding value="0" />  
+            <blockTopPadding value="0" />
             <blockBottomPadding value="0" />
 
             <lineStyle kind="LINEBEFORE" colorName="black"  start="2,0" thickness="0.5" />
@@ -117,7 +124,8 @@
         <blockTableStyle id="OrderInformations4">
             <blockAlignment value="CENTER" />
             <blockVAlign value="CENTER" />
-            <lineStyle kind="GRID" colorName="#000000" thickness="0.5" />
+            <lineStyle kind="INNERGRID" colorName="#000000" thickness="0.5" />
+            <lineStyle kind="LINEBEFORE" colorName="#000000" thickness="0.5" start="0,0" stop="1,-1" />
         </blockTableStyle>
 
         <blockTableStyle id="ItemsTitleS">
@@ -247,7 +255,7 @@
         </initialize>
 
         <paraStyle name="Standard" fontName="Helvetica" fontSize="8.0" />
-        
+
 		<!-- Header font style -->
         <paraStyle name="Header" fontName="Helvetica-Bold" fontSize="13.0" leading="15" alignment="LEFT" spaceBefore="0.0" spaceAfter="3.0" />
         <paraStyle name="Header_9" fontName="Helvetica-Bold" fontSize="8.0" leading="15" alignment="LEFT" spaceBefore="0.0" spaceAfter="3.0" />
@@ -474,14 +482,14 @@
 
             <tr>
                 <td>
-                    <blockTable colWidths="30,365,50,50,50,60,75,60,20,20,20" style="OrderInformations3">
+                    <blockTable colWidths="30,325,50,50,50,60,75,60,20,20,20,20,20" style="OrderInformations3">
                         <tr>
                                 <td>
                                     <para style="TextInformation4" alignment="CENTER">Item</para>
                                 </td>
 
                                 <td>
-                                <blockTable colWidths="65,300" style="OrderInformations4">
+                                <blockTable colWidths="65,260" style="OrderInformations4">
                                     <tr>
                                         <td>
                                             <para style="TextInformation" alignment="LEFT">Code</para>
@@ -518,7 +526,13 @@
                                     <para style="TextInformation5" alignment="CENTER">Batch / Serial number</para>
                                 </td>
                                 <td>
-                                    <para style="TextInformation5" alignment="CENTER">Expiry date</para>
+                                    <para style="TextInformation4" alignment="CENTER">Expiry date</para>
+                                </td>
+                                <td>
+                                    <para style="TextInformation4" alignment="CENTER">ED</para>
+                                </td>
+                                <td>
+                                    <para style="TextInformation4" alignment="CENTER">BM</para>
                                 </td>
                                 <td>
                                     <para style="TextInformation4" alignment="CENTER">KC</para>
@@ -543,14 +557,14 @@
             <tr>
             [[ repeatIn(get_lines(objects[0]), 'line') ]]
                 <td>
-                    <blockTable colWidths="30,365,50,50,50,60,75,60,20,20,20" style="OrderInformations3">
+                    <blockTable colWidths="30,325,50,50,50,60,75,60,20,20,20,20,20" style="OrderInformations3">
                         <tr>
                                 <td>
                                     <para style="TextInformation4" alignment="CENTER">[[ getNbItem() ]]</para>
                                 </td>
 
                                 <td>
-                                <blockTable colWidths="65,300" style="OrderInformations4">
+                                <blockTable colWidths="65,260" style="OrderInformations4">
                                     <tr>
                                         <td>
                                             <para style="TextInformationSpe" alignment="CENTER">[[ line.product_id and line.product_id.default_code or False ]]</para>
@@ -590,6 +604,12 @@
                                     <para style="TextInformation4" alignment="CENTER">[[ getExpDate(line) ]]</para>
                                 </td>
                                 <td>
+                                    <para style="TextInformation4" alignment="CENTER">[[ check(line,'ed') ]]</para>
+                                </td>
+                                <td>
+                                    <para style="TextInformation4" alignment="CENTER">[[ check(line,'bm') ]]</para>
+                                </td>
+                                <td>
                                     <para style="TextInformation4" alignment="CENTER">[[ check(line,'kc') ]]</para>
                                 </td>
                                 <td>
@@ -627,7 +647,7 @@
             <tr>
                 <td>
                   <para style="TextInformation" alignment="LEFT">REMARKS :</para>
-
+                  <para style="TextInformation" alignment="LEFT">[[ objects[0].note ]]</para>
                 </td>
             </tr>
         </blockTable>
@@ -840,5 +860,5 @@
 
 
     </story>
-    
+
 </document>

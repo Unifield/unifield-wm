@@ -42,13 +42,18 @@ class account_move_line(osv.osv):
          - The account is not the default credit/debit account of the attached statement (register)
          - All items attached to the entry have no reconcile_id on reconciliable account
          - The line doesn't come from a write-off
+         - The line is "corrected_upstream" that implies the line have been already corrected from a coordo or a hq to a level that is superior or equal to these instance.
         """
+        # Some checks
         if context is None:
             context = {}
+        # Prepare some values
         res = {}
         # Search all accounts that are used in bank, cheque and cash registers
         journal_ids = self.pool.get('account.journal').search(cr, uid, [('type', 'in', ['bank', 'cheque', 'cash'])])
         account_ids = []
+        company = self.pool.get('res.users').browse(cr, uid, uid, context=context).company_id
+        level = company and company.instance_id and company.instance_id.level or ''
         for j in self.pool.get('account.journal').read(cr, uid, journal_ids, ['default_debit_account_id', 'default_credit_account_id']):
             if j.get('default_debit_account_id', False) and j.get('default_debit_account_id')[0] not in account_ids:
                 account_ids.append(j.get('default_debit_account_id')[0])
@@ -56,7 +61,7 @@ class account_move_line(osv.osv):
                 account_ids.append(j.get('default_credit_account_id')[0])
 
         # Skip to next element if the line is set to False
-        for ml in self.browse(cr, uid, ids, context=context):
+        for ml in self.browse(cr, 1, ids, context=context):
             res[ml.id] = True
             # False if account type is transfer
             if ml.account_id.type_for_register in ['transfer', 'transfer_same']:
@@ -107,9 +112,14 @@ class account_move_line(osv.osv):
             if ml.account_id.id in account_ids:
                 res[ml.id] = False
                 continue
+            # False if "corrected_upstream" is True and that we come from project level
+            if ml.corrected_upstream and level == 'project':
+                res[ml.id] = False
+                continue
             # False if this line is a revaluation
             if ml.journal_id.type == 'revaluation':
                 res[ml.id] = False
+                continue
         return res
 
     _columns = {
@@ -129,6 +139,9 @@ receivable, item have not been corrected, item have not been reversed and accoun
             store=False),
         'corrected_st_line_id': fields.many2one('account.bank.statement.line', string="Corrected register line", readonly=True,
             help="This register line is those which have been corrected last."),
+        'last_cor_was_only_analytic': fields.boolean(string="AD Corrected?",
+            invisible=True,
+            help="If true, this line has been corrected by an accounting correction wizard but with only an AD correction (no G/L correction)"),
     }
 
     _defaults = {
@@ -136,6 +149,7 @@ receivable, item have not been corrected, item have not been reversed and accoun
         'reversal': lambda *a: False,
         'have_an_historic': lambda *a: False,
         'is_corrigible': lambda *a: True,
+        'last_cor_was_only_analytic': lambda *a: False,
     }
 
     def copy(self, cr, uid, aml_id, default=None, context=None):
@@ -153,6 +167,7 @@ receivable, item have not been corrected, item have not been reversed and accoun
             'have_an_historic': False,
             'corrected': False,
             'reversal': False,
+            'last_cor_was_only_analytic': False,
         })
         # Add default date if no one given
         if not 'date' in default:
@@ -260,6 +275,9 @@ receivable, item have not been corrected, item have not been reversed and accoun
         # Change wizard state in order to change date requirement on wizard
         wiz_obj.write(cr, uid, [wizard], {'state': 'open'}, context=context)
         # Update context
+        # UFTP-354: Delete "from_web_menu" to avoid conflict with UFTP-262
+        if 'from_web_menu' in context:
+            del(context['from_web_menu'])
         context.update({
             'active_id': ids[0],
             'active_ids': ids,
@@ -607,9 +625,17 @@ receivable, item have not been corrected, item have not been reversed and accoun
             # Case where this move line have a link to some statement lines
             if ml.statement_id and ml.move_id.statement_line_ids:
                 for st_line in ml.move_id.statement_line_ids:
-                    absl_obj.write(cr, uid, [st_line.id], {'account_id': account_id}, context=context)
-                    # we informs new move line that it have correct a statement line
-                    self.write(cr, uid, corrected_line_ids, {'corrected_st_line_id': st_line.id}, context=context)
+                    # US-303: only update the statement line that links to this move line
+                    if st_line.cash_return_move_line_id:
+                        if st_line.cash_return_move_line_id.id == ml.id:
+                            absl_obj.write(cr, uid, [st_line.id], {'account_id': account_id}, context=context)
+                            # we informs new move line that it have correct a statement line
+                            self.write(cr, uid, corrected_line_ids, {'corrected_st_line_id': st_line.id}, context=context)
+                            break
+                    else:
+                        #US-303: If not the case, then we inform the new move line that it has corrected a statement line
+                        absl_obj.write(cr, uid, [st_line.id], {'account_id': account_id}, context=context)
+                        self.write(cr, uid, corrected_line_ids, {'corrected_st_line_id': st_line.id}, context=context)
             # if not, this move line should have a direct link to a register line
             elif ml.statement_id and ml.corrected_st_line_id:
                 absl_obj.write(cr, uid, [ml.corrected_st_line_id.id], {'account_id': account_id}, context=context)
@@ -628,27 +654,55 @@ receivable, item have not been corrected, item have not been reversed and accoun
             date = strftime('%Y-%m-%d')
         if not new_account_id:
             raise osv.except_osv(_('Error'), _('No new account_id given!'))
+
         # Prepare some values
         move_obj = self.pool.get('account.move')
         j_obj = self.pool.get('account.journal')
         al_obj = self.pool.get('account.analytic.line')
         success_move_line_ids = []
+
+        # New account
+        new_account = self.pool.get('account.account').browse(cr, uid,
+            new_account_id, context=context)
+
         # Search correction journal
         j_corr_ids = j_obj.search(cr, uid, [('type', '=', 'correction'),
                                             ('is_current_instance', '=', True)], context=context)
         j_corr_id = j_corr_ids and j_corr_ids[0] or False
+
         # Search extra-accounting journal
         j_extra_ids = j_obj.search(cr, uid, [('type', '=', 'extra'),
                                              ('is_current_instance', '=', True)])
         j_extra_id = j_extra_ids and j_extra_ids[0] or False
+
         # Search attached period
         period_ids = self.pool.get('account.period').search(cr, uid, [('date_start', '<=', date), ('date_stop', '>=', date)],
             context=context, limit=1, order='date_start, name')
+
         # Browse all given move line for correct them
         for ml in self.browse(cr, uid, ids, context=context):
             # Abort process if this move line was corrected before
             if ml.corrected:
                 continue
+
+            # UTP-1187 check corrected line has an AD if need one
+            # + BKLG-19/3: search only for fp ones as 'free' are not synced to
+            # HQ and initial_al_ids[0] is used to set reversal_origin
+            initial_al_ids = al_obj.search(cr, uid,
+                [('move_id', '=', ml.id), ('account_id.category', '=', 'FUNDING')],
+                context=context)
+            # Note: this search result will be used near end of this function
+            # (see # Change analytic lines that come from)
+            if not distrib_id and \
+                not initial_al_ids and new_account and \
+                new_account.is_analytic_addicted:
+                # we check only if no distrib_id arg passed to function
+                msg = _("The line '%s' with new account '%s - %s' need an" \
+                    " analytic distribution (you may have changed account from" \
+                    " one with no AD required to a new one with AD required).")
+                raise osv.except_osv(_('Error'), msg % (ml.move_id.name,
+                    new_account.code, new_account.name, ))
+
             # If this line was already been corrected, check the first analytic line ID (but not the first first analytic line)
             first_analytic_line_id = False
             first_ana_ids = self.pool.get('account.analytic.line').search(cr, uid, [('move_id', '=', ml.id)])
@@ -664,8 +718,6 @@ receivable, item have not been corrected, item have not been reversed and accoun
                 journal_id = j_extra_id
                 if not journal_id:
                     raise osv.except_osv(_('Error'), _('No OD-Extra Accounting Journal found!'))
-
-                new_account = self.pool.get('account.account').browse(cr, uid, new_account_id)
                 if new_account.type_for_register != 'donation':
                     raise osv.except_osv(_('Error'), _('You come from a donation account. And new one is not a Donation account. You should give a Donation account!'))
             if not journal_id:
@@ -724,7 +776,7 @@ receivable, item have not been corrected, item have not been reversed and accoun
             }
             if distrib_id:
                 cor_vals['analytic_distribution_id'] = distrib_id
-            else:
+            elif ml.analytic_distribution_id:
                 cor_vals['analytic_distribution_id'] = self.pool.get('analytic.distribution').copy(cr, uid, ml.analytic_distribution_id.id, {}, context=context)
             self.write(cr, uid, [correction_line_id], cor_vals, context=context, check=False, update_check=False)
             # UF-2231: Remove the update to the statement line
@@ -742,25 +794,27 @@ receivable, item have not been corrected, item have not been reversed and accoun
             #- reversal move line: is_reversal is True + initial analytic line
             #- correction line: change is_reallocated and is_reversal to False
             #- old reversal line: reset is_reversal to True (lost previously in validate())
-            initial_al_ids = al_obj.search(cr, uid, [('move_id', '=', ml.id)])
-            search_datas = [(ml.id, {'is_reallocated': True}),
-                            (rev_line_id, {'is_reversal': True, 'reversal_origin': initial_al_ids[0]}),
-                            (correction_line_id, {'is_reallocated': False, 'is_reversal': False, 'last_corrected_id': initial_al_ids[0]})]
-            # If line is already a correction, take the previous reversal move line id
-            # (UF_1234: otherwise, the reversal is not set correctly)
-            if ml.corrected_line_id:
-                old_reverse_ids = self.search(cr, uid, [('reversal_line_id', '=', ml.corrected_line_id.id)])
-                if len(old_reverse_ids) > 0:
-                    search_datas += [(old_reverse_ids[0], {'is_reversal': True, 'reversal_origin': first_analytic_line_id})]
-            for search_data in search_datas:
-                # keep initial analytic line as corrected line if it the 2nd or more correction on this line
-                if ml.corrected_line_id and search_data[0] == ml.id and first_analytic_line_id:
-                    search_data[1].update({'last_corrected_id': first_analytic_line_id, 'have_an_historic': True,})
-                search_ids = al_obj.search(cr, uid, [('move_id', '=', search_data[0]), ('reversal_origin', '=', False), ('last_corrected_id', '=', False)])
-                if search_ids:
-                    al_obj.write(cr, uid, search_ids, search_data[1])
+            if initial_al_ids:  # as initial AD
+                search_datas = [(ml.id, {'is_reallocated': True}),
+                                (rev_line_id, {'is_reversal': True, 'reversal_origin': initial_al_ids[0]}),
+                                (correction_line_id, {'is_reallocated': False, 'is_reversal': False, 'last_corrected_id': initial_al_ids[0]})]
+                # If line is already a correction, take the previous reversal move line id
+                # (UF_1234: otherwise, the reversal is not set correctly)
+                if ml.corrected_line_id:
+                    old_reverse_ids = self.search(cr, uid, [('reversal_line_id', '=', ml.corrected_line_id.id)])
+                    if len(old_reverse_ids) > 0:
+                        search_datas += [(old_reverse_ids[0], {'is_reversal': True, 'reversal_origin': first_analytic_line_id})]
+                for search_data in search_datas:
+                    # keep initial analytic line as corrected line if it the 2nd or more correction on this line
+                    if ml.corrected_line_id and search_data[0] == ml.id and first_analytic_line_id:
+                        search_data[1].update({'last_corrected_id': first_analytic_line_id, 'have_an_historic': True,})
+                    search_ids = al_obj.search(cr, uid, [('move_id', '=', search_data[0]), ('reversal_origin', '=', False), ('last_corrected_id', '=', False)])
+                    if search_ids:
+                        al_obj.write(cr, uid, search_ids, search_data[1])
             # Add this line to succeded lines
             success_move_line_ids.append(ml.id)
+            # Mark it as "corrected_upstream" if needed
+            self.corrected_upstream_marker(cr, uid, [ml.id], context=context)
         return success_move_line_ids
 
     def correct_partner_id(self, cr, uid, ids, date=None, partner_id=None, context=None):
@@ -858,6 +912,25 @@ receivable, item have not been corrected, item have not been reversed and accoun
             # Add this line to succeded lines
             success_move_line_ids.append(move_line.id)
         return success_move_line_ids
+
+    def corrected_upstream_marker(self, cr, uid, ids, context=None):
+        """
+        Check if we are in a COORDO / HQ instance. If yes, set move line(s) as corrected upstream.
+        """
+        # Some check
+        if context is None:
+            context = {}
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+        # Prepare some values
+        company = self.pool.get('res.users').browse(cr, uid, uid, context=context).company_id
+        # Check if we come from COORDO/HQ instance
+        if company and company.instance_id and company.instance_id.level in ['section', 'coordo']:
+            # UF-1746: Set also all other move lines as corrected upstream to disallow projet user to correct any move line of this move.
+            move_ids = [x and x.get('move_id', False) and x.get('move_id')[0] for x in self.read(cr, uid, ids, ['move_id'], context=context)]
+            ml_ids = self.search(cr, uid, [('move_id', 'in', move_ids), ('corrected_upstream', '!=', True)])
+            self.write(cr, uid, ml_ids, {'corrected_upstream': True}, check=False, update_check=False, context=context)
+        return True
 
 account_move_line()
 

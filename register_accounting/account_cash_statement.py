@@ -66,7 +66,11 @@ class account_cash_statement(osv.osv):
         j_obj = self.pool.get('account.journal')
         journal = j_obj.browse(cr, uid, vals['journal_id'], context=context)
         # @@@override@account.account_cash_statement.create()
-        if journal.type == 'cash':
+
+        # UFTP-116: Fixed a serious problem detected very late: the cashbox lines created by default even for the Cash Reg from sync!
+        # This leads to the problem that each time, a Cash Reg is new from a sync, it added new 16 lines for the Cash Reg
+        sync_update = context.get('sync_update_execution', False)
+        if journal.type == 'cash' and not sync_update:
             open_close = self._get_cash_open_close_box_lines(cr, uid, context)
             if vals.get('starting_details_ids', False):
                 for start in vals.get('starting_details_ids'):
@@ -83,22 +87,43 @@ class account_cash_statement(osv.osv):
                 'ending_details_ids': False,
                 'starting_details_ids': False
             })
+
+        # UF-2479: Block the creation of the register if the given period is not open, in sync context
+        if 'period_id' in vals and sync_update:
+            period = self.pool.get('account.period').browse(cr, uid, vals.get('period_id'), context)
+            if period and period.state == 'created':
+                raise osv.except_osv(_('Error !'), _('Period \'%s\' is not open! No Register is created') % (period.name,))
+
         # @@@end
         # Observe register state
         prev_reg_id = vals.get('prev_reg_id', False)
         if prev_reg_id:
             prev_reg = self.browse(cr, uid, [prev_reg_id], context=context)[0]
             # if previous register closing balance is freezed, then retrieving previous closing balance
-            if prev_reg.closing_balance_frozen:
-                if journal.type == 'bank':
-                    vals.update({'balance_start': prev_reg.msf_calculated_balance})
+            # US_410: retrieving previous closing balance even closing balance is not freezed
+            # if prev_reg.closing_balance_frozen:
+            if journal.type == 'bank':
+                vals.update({'balance_start': prev_reg.balance_end_real})
         res_id = osv.osv.create(self, cr, uid, vals, context=context)
         # take on previous lines if exists (or discard if they come from sync)
-        if prev_reg_id and not context.get('sync_data', False):
+        if prev_reg_id and not sync_update:
             create_cashbox_lines(self, cr, uid, [prev_reg_id], ending=True, context=context)
         # update balance_end
         self._get_starting_balance(cr, uid, [res_id], context=context)
         return res_id
+
+    def write(self, cr, uid, ids, vals, context=None):
+        if context is None:
+            context = {}
+
+        if not context.get('sync_update_execution') and vals.get('balance_end_real', False):
+            for id in ids:
+                args = [('prev_reg_id', '=', id)]
+                search_ids = self.search(cr, uid, args, context=context)
+                new_vals = {'balance_start': vals['balance_end_real']}
+                self.write(cr, uid, search_ids, new_vals, context=context)
+
+        return super(account_cash_statement, self).write(cr, uid, ids, vals, context=context)
 
     def button_open_cash(self, cr, uid, ids, context=None):
         if not context:
@@ -136,7 +161,7 @@ class account_cash_statement(osv.osv):
             ids = [ids] # Calculate the starting balance
 
         # Prepare some values
-        st = self.browse(cr, uid, ids)[0]
+        st = self.browse(cr, uid, ids, context=context)[0]
 
         # Complete closing balance with all elements of starting balance
         cashbox_line_obj = self.pool.get('account.cashbox.line')
@@ -257,7 +282,7 @@ class account_cash_statement(osv.osv):
             'state': fields.selection((('draft', 'Draft'), ('open', 'Open'), ('partial_close', 'Partial Close'), ('confirm', 'Closed')),
                 readonly="True", string='State'),
             'name': fields.char('Register Name', size=64, required=False, readonly=True, states={'draft': [('readonly', False)]}),
-            'period_id': fields.many2one('account.period', 'Period', required=True, states={'draft':[('readonly', False)]}, readonly=True),
+            'period_id': fields.many2one('account.period', 'Period', required=True),
             'line_ids': fields.one2many('account.bank.statement.line', 'statement_id', 'Statement lines',
                 states={'partial_close':[('readonly', True)], 'confirm':[('readonly', True)], 'draft':[('readonly', True)]}),
             'open_advance_amount': fields.float('Unrecorded Advances'),

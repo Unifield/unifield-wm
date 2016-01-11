@@ -99,11 +99,15 @@ class res_partner(osv.osv):
         '''
         Returns information from product supplierinfo if product_id is in context
         '''
-        if not context:
+        if context is None:
             context = {}
 
         partner_price = self.pool.get('pricelist.partnerinfo')
         res = {}
+        if not ids:
+            return res
+        if isinstance(ids, (int, long, )):
+            ids = [ids]
 
         for id in ids:
             res[id] = {'price_currency': False,
@@ -141,6 +145,50 @@ class res_partner(osv.osv):
 
 ## QT : Remove _get_valide_until_date
 
+    def _get_vat_ok(self, cr, uid, ids, field_name, args, context=None):
+        '''
+        Return True if the system configuration VA management is set to True
+        '''
+        res = {}
+        if not ids:
+            return res
+        if isinstance(ids, (int, long, )):
+            ids = [ids]
+
+        vat_ok = self.pool.get('unifield.setup.configuration').get_config(cr, uid,).vat_ok
+        for id in ids:
+            res[id] = vat_ok
+
+        return res
+
+    def _get_is_instance(self, cr, uid, ids, field_name, args, context=None):
+        """ return the instance's partner id """
+        res = {}
+        if not ids:
+            return res
+        if isinstance(ids, (int, long, )):
+            ids = [ids]
+
+        partner_id = False
+        user = self.pool.get('res.users').browse(cr, uid, [uid],
+            context=context)[0]
+        if user and user.company_id and user.company_id.partner_id:
+            partner_id = user.company_id.partner_id.id
+
+        for id in ids:
+            res[id] = partner_id and id == partner_id or False
+        return res
+
+    def _get_is_instance_search(self, cr, uid, ids, field_name, args,
+        context=None):
+        """ search the instance's partner id """
+        partner_id = False
+        user = self.pool.get('res.users').browse(cr, uid, [uid],
+            context=context)[0]
+        if user and user.company_id and user.company_id.partner_id:
+            partner_id = user.company_id.partner_id.id
+        return partner_id and [('id', '=', partner_id)] or []
+
     _columns = {
         'manufacturer': fields.boolean(string='Manufacturer', help='Check this box if the partner is a manufacturer'),
         'partner_type': fields.selection(PARTNER_TYPE, string='Partner type', required=True),
@@ -167,16 +215,95 @@ class res_partner(osv.osv):
             view_load=True,
             required=True,
             help="This currency will be used, instead of the default one, for field orders to the current partner"),
+        'property_stock_customer': fields.property(
+            'stock.location',
+            type='many2one',
+            relation='stock.location',
+            string='Customer Location',
+            method=True,
+            view_load=True,
+            required=True,
+            help="This stock location will be used, instead of the default one, as the destination location for goods you send to this partner.",
+        ),
+        'property_stock_supplier': fields.property(
+            'stock.location',
+            type='many2one',
+            relation='stock.location',
+            string='Supplier Location',
+            method=True,
+            view_load=True,
+            required=True,
+            help="This stock location will be used, instead of the default one, as the source location for goods you receive from the current partner.",
+        ),
         'price_unit': fields.function(_get_price_info, method=True, type='float', string='Unit price', multi='info'),
         'valide_until_date' : fields.function(_get_price_info, method=True, type='char', string='Valid until date', multi='info'),
         'price_currency': fields.function(_get_price_info, method=True, type='many2one', relation='res.currency', string='Currency', multi='info'),
+        'vat_ok': fields.function(_get_vat_ok, method=True, type='boolean', string='VAT OK', store=False, readonly=True),
+        'is_instance': fields.function(_get_is_instance, fnct_search=_get_is_instance_search, method=True, type='boolean', string='Is current instance partner id'),
+        'transporter': fields.boolean(string='Transporter'),
     }
 
     _defaults = {
         'manufacturer': lambda *a: False,
+        'transporter': lambda *a: False,
         'partner_type': lambda *a: 'external',
+        'vat_ok': lambda obj, cr, uid, c: obj.pool.get('unifield.setup.configuration').get_config(cr, uid).vat_ok,
     }
 
+    def check_pricelists_vals(self, cr, uid, vals, context=None):
+        """
+        Put the good pricelist on the good field
+        """
+        pricelist_obj = self.pool.get('product.pricelist')
+        pppp_id = vals.get('property_product_pricelist_purchase', False)
+        ppp_id = vals.get('property_product_pricelist', False)
+
+        if pppp_id:
+            pppp = pricelist_obj.browse(cr, uid, pppp_id, context=context)
+            if pppp.type != 'purchase':
+                purchase_pricelists = pricelist_obj.search(cr, uid, [
+                    ('currency_id', '=', pppp.currency_id.id),
+                    ('type', '=', 'purchase'),
+                ], context=context)
+                if purchase_pricelists:
+                    vals['property_product_pricelist_purchase'] = purchase_pricelists[0]
+
+        if ppp_id:
+            ppp = pricelist_obj.browse(cr, uid, ppp_id, context=context)
+            if ppp.type != 'sale':
+                sale_pricelists = pricelist_obj.search(cr, uid, [
+                    ('currency_id', '=', ppp.currency_id.id),
+                    ('type', '=', 'sale'),
+                ], context=context)
+                if sale_pricelists:
+                    vals['property_product_pricelist'] = sale_pricelists[0]
+
+        return vals
+
+    def unlink(self, cr, uid, ids, context=None):
+        """
+        Check if the deleted partner is not a system one
+        """
+        data_obj = self.pool.get('ir.model.data')
+
+        partner_data_id = [
+            'supplier_tbd',
+        ]
+
+        for data_id in partner_data_id:
+            try:
+                part_id = data_obj.get_object_reference(
+                    cr, uid, 'msf_doc_import', data_id)[1]
+                if part_id in ids:
+                    part_name = self.read(cr, uid, part_id, ['name'])['name']
+                    raise osv.except_osv(
+                        _('Error'),
+                        _('''The partner '%s' is an Unifield internal partner, so you can't remove it''') % part_name,
+                    )
+            except ValueError:
+                pass
+
+        return super(res_partner, self).unlink(cr, uid, ids, context=context)
 
     def _check_main_partner(self, cr, uid, ids, vals, context=None):
         if context is None:
@@ -217,6 +344,15 @@ class res_partner(osv.osv):
 
     _constraints = [
     ]
+
+    def transporter_ticked(self, cr, uid, ids, transporter, context=None):
+        """
+        If the transporter box is ticked, automatically ticked the supplier
+        box.
+        """
+        if transporter:
+            return {'value': {'supplier': True}}
+        return {}
 
     def get_objects_for_partner(self, cr, uid, ids, context):
         """
@@ -336,10 +472,15 @@ class res_partner(osv.osv):
         )
 
     def write(self, cr, uid, ids, vals, context=None):
+        vals = self.check_pricelists_vals(cr, uid, vals, context=context)
         if isinstance(ids, (int, long)):
             ids = [ids]
         if not context:
             context = {}
+
+        #US-126: when it's an update from the sync, then just remove the forced 'active' parameter
+        if context.get('sync_update_execution', False) and 'active' in vals:
+            del vals['active']
 
         self._check_main_partner(cr, uid, ids, vals, context=context)
         bro_uid = self.pool.get('res.users').browse(cr,uid,uid)
@@ -353,14 +494,18 @@ class res_partner(osv.osv):
                     del vals[field]
         # [utp-315] avoid deactivating partner that have still open document linked to them
         if 'active' in vals and vals.get('active') == False:
-            objects_linked_to_partner = self.get_objects_for_partner(cr, uid, ids, context)
-            if objects_linked_to_partner:
-                raise osv.except_osv(_('Warning'),
-                                     _("""The following documents linked to the partner need to be closed before deactivating the partner: %s"""
-                                       ) % (objects_linked_to_partner))
+            # UTP-1214: only show error message if it is really a "deactivate partner" action, if not, just ignore 
+            oldValue = self.read(cr, uid, ids[0], ['active'], context=context)['active']
+            if oldValue == True: # from active to inactive ---> check if any ref to it
+                objects_linked_to_partner = self.get_objects_for_partner(cr, uid, ids, context)
+                if objects_linked_to_partner:
+                    raise osv.except_osv(_('Warning'),
+                                         _("""The following documents linked to the partner need to be closed before deactivating the partner: %s"""
+                                           ) % (objects_linked_to_partner))
         return super(res_partner, self).write(cr, uid, ids, vals, context=context)
 
     def create(self, cr, uid, vals, context=None):
+        vals = self.check_pricelists_vals(cr, uid, vals, context=context)
         if 'partner_type' in vals and vals['partner_type'] in ('internal', 'section', 'esc', 'intermission'):
             msf_customer = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'stock', 'stock_location_internal_customers')
             msf_supplier = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'stock', 'stock_location_internal_suppliers')
@@ -368,6 +513,20 @@ class res_partner(osv.osv):
                 vals['property_stock_customer'] = msf_customer[1]
             if msf_supplier and not 'property_stock_supplier' in vals:
                 vals['property_stock_supplier'] = msf_supplier[1]
+
+            if vals.get('partner_type') == 'esc':
+                eur_cur = self.pool.get('res.currency').search(cr, uid, [('name', '=', 'EUR')], context=context)
+                if eur_cur:
+                    pl_ids = self.pool.get('product.pricelist').search(cr, uid, [('currency_id', 'in', eur_cur)], context=context)
+                    for pl in self.pool.get('product.pricelist').browse(cr, uid, pl_ids, context=context):
+                        if pl.type == 'sale':
+                            vals['property_product_pricelist'] = pl.id
+                        elif pl.type == 'purchase':
+                            vals['property_product_pricelist_purchase'] = pl.id
+
+        if not vals.get('address'):
+            vals['address'] = [(0, 0, {'function': False, 'city': False, 'fax': False, 'name': False, 'zip': False, 'title': False, 'mobile': False, 'street2': False, 'country_id': False, 'phone': False, 'street': False, 'active': True, 'state_id': False, 'type': False, 'email': False})]
+
         return super(res_partner, self).create(cr, uid, vals, context=context)
 
 
@@ -395,10 +554,13 @@ class res_partner(osv.osv):
         """
         [utp-315] avoid deactivating partner that have still open document linked to them.
         """
+        # some verifications
+        if not ids:
+            return {}
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+        # UF-2463: If the partner is not saved into the system yet, just ignore this check
         if not active:
-            # some verifications
-            if isinstance(ids, (int, long)):
-                ids = [ids]
             if context is None:
                 context = {}
 
@@ -408,6 +570,39 @@ class res_partner(osv.osv):
                         'warning': {'title': _('Error'),
                                     'message': _("Some documents linked to this partner need to be closed or cancelled before deactivating the partner: %s"
                                                 ) % (objects_linked_to_partner,)}}
+        else:
+            # US-49 check that activated partner is not using a not active CCY
+            check_pricelist_ids = []
+            fields_pricelist = [
+                'property_product_pricelist_purchase',
+                'property_product_pricelist'
+            ]
+            check_ccy_ids = []
+            for r in self.read(cr, uid, ids, fields_pricelist,
+                context=context):
+                for f in fields_pricelist:
+                    if r[f] and r[f][0] not in check_pricelist_ids:
+                        check_pricelist_ids.append(r[f][0])
+            if check_pricelist_ids:
+                for cpl_r in self.pool.get('product.pricelist').read(cr,
+                    uid, check_pricelist_ids, ['currency_id'],
+                    context=context):
+                    if cpl_r['currency_id'] and \
+                        cpl_r['currency_id'][0] not in check_ccy_ids:
+                        check_ccy_ids.append(cpl_r['currency_id'][0])
+                if check_ccy_ids:
+                    count = self.pool.get('res.currency').search(cr, uid, [
+                            ('active', '!=', True),
+                            ('id', 'in', check_ccy_ids),
+                        ], count=True, context=context)
+                    if count:
+                        return {
+                            'value': {'active': False},
+                            'warning': {
+                                'title': _('Error'),
+                                'message': _('PO or FO currency is not active'),
+                            }
+                        }
         return {}
 
     def on_change_partner_type(self, cr, uid, ids, partner_type, sale_pricelist, purchase_pricelist):
@@ -445,6 +640,9 @@ class res_partner(osv.osv):
             other_supplier = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'stock', 'stock_location_suppliers')
             if other_supplier:
                 r.update({'property_stock_supplier': other_supplier[1]})
+
+        if partner_type and partner_type == 'esc':
+            r['zone'] = 'international'
 
         return {'value': r}
 
@@ -502,6 +700,66 @@ class res_partner(osv.osv):
         return view
 
 res_partner()
+
+
+class res_partner_address(osv.osv):
+    _inherit = 'res.partner.address'
+
+    def unlink(self, cr, uid, ids, context=None):
+        """
+        Check if the deleted address is not a system one
+        """
+        data_obj = self.pool.get('ir.model.data')
+
+        addr_data_id = [
+            'address_tbd',
+        ]
+
+        for data_id in addr_data_id:
+            try:
+                addr_id = data_obj.get_object_reference(
+                    cr, uid, 'msf_doc_import', data_id)[1]
+                if addr_id in ids:
+                    addr_name = self.read(cr, uid, addr_id, ['name'])['name']
+                    raise osv.except_osv(
+                        _('Error'),
+                        _('''The Address '%s' is an Unifield internal address, so you can't remove it''') % addr_name,
+                    )
+            except ValueError:
+                pass
+
+        return super(res_partner_address, self).unlink(cr, uid, ids, context=context)
+
+    def create(self, cr, uid, vals, context=None):
+        '''
+        Remove empty addresses if exist and create the new one
+        '''
+        if vals.get('partner_id'):
+            domain_dict = {
+                'partner_id': vals.get('partner_id'),
+                'function': False,
+                'city': False,
+                'fax': False,
+                'name': False,
+                'zip': False,
+                'title': False,
+                'mobile': False,
+                'street2': False,
+                'country_id': False,
+                'phone': False,
+                'street': False,
+                'active': True,
+                'state_id': False,
+                'type': False,
+                'email': False,
+            }
+            domain = [(k, '=', v) for k, v in domain_dict.iteritems()]
+            addr_ids = self.search(cr, uid, domain, context=context)
+            self.unlink(cr, uid, addr_ids, context=context)
+
+        return super(res_partner_address, self).create(cr, uid, vals, context=context)
+
+res_partner_address()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

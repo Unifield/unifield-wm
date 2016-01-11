@@ -30,6 +30,7 @@ from lxml import etree
 import re
 import netsvc
 
+
 import decimal_precision as dp
 
 class account_invoice(osv.osv):
@@ -116,7 +117,7 @@ class account_invoice(osv.osv):
             ('reconciled','=',False),
             ('state', '=', 'open'),
             ('type', '=', 'out_invoice'),
-            ('journal_id.type', 'in', ['sale']),
+            ('journal_id.type', 'not in', ['migration']),
             ('partner_id.partner_type', '=', 'section'),
         ]
         return dom1+[('is_debit_note', '=', False)]
@@ -174,6 +175,38 @@ class account_invoice(osv.osv):
             'virtual_partner_id': inv.partner_id.id or False}
         return res
 
+    def _get_vat_ok(self, cr, uid, ids, field_name, args, context=None):
+        '''
+        Return True if the system configuration VAT management is set to True
+        '''
+        vat_ok = self.pool.get('unifield.setup.configuration').get_config(cr, uid).vat_ok
+        res = {}
+        for id in ids:
+            res[id] = vat_ok
+
+        return res
+
+    def _get_can_merge_lines(self, cr, uid, ids, field_name, args,
+        context=None):
+        res = {}
+        if not ids:
+            return res
+        if isinstance(ids, (int, long, )):
+            ids = [ids]
+
+        for inv_br in self.browse(cr, uid, ids, context=context):
+            # US-357: allow merge of line only for draft SI
+            res[inv_br.id] = inv_br.state and inv_br.state == 'draft' \
+                and inv_br.invoice_line \
+                and inv_br.type == 'in_invoice' \
+                and not inv_br.is_direct_invoice \
+                and not inv_br.is_inkind_donation \
+                and not inv_br.is_debit_note \
+                and not inv_br.is_intermission \
+                or False
+
+        return res
+
     _columns = {
         'from_yml_test': fields.boolean('Only used to pass addons unit test', readonly=True, help='Never set this field to true !'),
         'sequence_id': fields.many2one('ir.sequence', string='Lines Sequence', ondelete='cascade',
@@ -205,6 +238,10 @@ class account_invoice(osv.osv):
         'address_invoice_id': fields.many2one('res.partner.address', 'Invoice Address', readonly=True, required=False,
             states={'draft':[('readonly',False)]}),
         'register_posting_date': fields.date(string="Register posting date for Direct Invoice", required=False),
+        'vat_ok': fields.function(_get_vat_ok, method=True, type='boolean', string='VAT OK', store=False, readonly=True),
+        'st_lines': fields.one2many('account.bank.statement.line', 'invoice_id', string="Register lines", readonly=True, help="Register lines that have a link to this invoice."),
+        'can_merge_lines': fields.function(_get_can_merge_lines, method=True, type='boolean', string='Can merge lines ?'),
+        'is_merged_by_account': fields.boolean("Is merged by account"),
     }
 
     _defaults = {
@@ -215,6 +252,9 @@ class account_invoice(osv.osv):
         'is_inkind_donation': lambda obj, cr, uid, c: c.get('is_inkind_donation', False),
         'is_intermission': lambda obj, cr, uid, c: c.get('is_intermission', False),
         'is_direct_invoice': lambda *a: False,
+        'vat_ok': lambda obj, cr, uid, context: obj.pool.get('unifield.setup.configuration').get_config(cr, uid).vat_ok,
+        'can_merge_lines': lambda *a: False,
+        'is_merged_by_account': lambda *a: False,
     }
 
     def onchange_company_id(self, cr, uid, ids, company_id, part_id, ctype, invoice_line, currency_id):
@@ -281,6 +321,9 @@ class account_invoice(osv.osv):
                         res['value'] = {'currency_id': c_id}
                     else:
                         res['value'].update({'currency_id': c_id})
+        # UFTP-168: If debit note, set account to False value
+        if is_debit_note:
+            res['value'].update({'account_id': False, 'fake_account_id': False})
         return res
 
     def _check_document_date(self, cr, uid, ids):
@@ -290,17 +333,36 @@ class account_invoice(osv.osv):
         if isinstance(ids, (int, long)):
             ids = [ids]
         for i in self.browse(cr, uid, ids):
-            if i.document_date and i.date_invoice and i.date_invoice < i.document_date:
-                raise osv.except_osv(_('Error'), _('Posting date should be later than Document Date.'))
+            self.pool.get('finance.tools').check_document_date(cr, uid,
+                i.document_date, i.date_invoice)
         return True
+
+    def _check_invoice_merged_lines(self, cr, uid, ids, context=None):
+        """
+        US-357:
+            merge of lines by account break lines descriptions (required field)
+            => before next workflow stage from draft (validate, split)
+               check that user has entered description on each line
+               (force user to enter a custom description)
+        """
+        for self_br in self.browse(cr, uid, ids, context=context):
+            if self_br.is_merged_by_account:
+                if not all([ l.name for l in self_br.invoice_line ]):
+                    raise osv.except_osv(
+                        _('Error'),
+                        _('Please enter a description in each merged line' \
+                            ' before invoice validation')
+                    )
 
     def _refund_cleanup_lines(self, cr, uid, lines):
         """
         Remove useless fields
         """
         for line in lines:
-            del line['move_lines']
-            del line['import_invoice_id']
+            if line.get('move_lines',False):
+                del line['move_lines']
+            if line.get('import_invoice_id',False):
+                del line['import_invoice_id']
         res = super(account_invoice, self)._refund_cleanup_lines(cr, uid, lines)
         return res
 
@@ -312,10 +374,17 @@ class account_invoice(osv.osv):
             context = {}
         if isinstance(ids, (int, long)):
             ids = [ids]
-        for inv in self.read(cr, uid, ids, ['purchase_ids', 'type', 'is_inkind_donation', 'is_debit_note']):
+        purchase_obj = self.pool.get('purchase.order')
+        commitment_obj = self.pool.get('account.commitment')
+        for inv in self.read(cr, uid, ids, ['purchase_ids', 'type', 'is_inkind_donation', 'is_debit_note', 'state']):
             if inv.get('type', '') == 'in_invoice' and not inv.get('is_inkind_donation', False) and not inv.get('is_debit_note', False):
                 if inv.get('purchase_ids', False):
-                    raise osv.except_osv(_('Warning'), _('You cannot cancel or delete a supplier invoice linked to a PO.'))
+                    # UTP-808: Allow draft invoice deletion. If commitment exists, set them as done.
+                    if inv.get('state', '') != 'draft':
+                        raise osv.except_osv(_('Warning'), _('You cannot cancel or delete a supplier invoice linked to a PO.'))
+                    else:
+                        for purchase in purchase_obj.browse(cr, uid, inv.get('purchase_ids', []), context=context):
+                            commitment_obj.action_commitment_done(cr, uid, [x.id for x in purchase.commitment_ids])
         return True
 
     def _hook_period_id(self, cr, uid, inv, context=None):
@@ -358,6 +427,12 @@ class account_invoice(osv.osv):
                 name = _('Partner')
             for node in nodes:
                 node.set('string', name)
+            res['arch'] = etree.tostring(doc)
+        elif view_type in ('tree', 'search') and context.get('type') in ['out_invoice', 'out_refund']:
+            doc = etree.XML(res['arch'])
+            nodes = doc.xpath("//field[@name='supplier_reference']")
+            for node in nodes:
+                node.getparent().remove(node)
             res['arch'] = etree.tostring(doc)
         return res
 
@@ -414,6 +489,9 @@ class account_invoice(osv.osv):
         # Reset register_line_ids if not given in default
         if 'register_line_ids' not in default:
             default['register_line_ids'] = []
+        # US-267: Reset st_lines if not given in default, otherwise a new line in Reg will be added
+        if 'st_lines' not in default:
+            default['st_lines'] = []
         # Default behaviour
         new_id = super(account_invoice, self).copy(cr, uid, inv_id, default, context)
         # Case where you split an invoice
@@ -438,9 +516,14 @@ class account_invoice(osv.osv):
         """
         if not context:
             context = {}
+        if 'document_date' in vals and 'date_invoice' in vals:
+            self.pool.get('finance.tools').check_document_date(cr, uid,
+                vals['document_date'], vals['date_invoice'], context=context)
+
         # Create a sequence for this new invoice
         res_seq = self.create_sequence(cr, uid, vals, context)
         vals.update({'sequence_id': res_seq,})
+
         # UTP-317 # Check that no inactive partner have been used to create this invoice
         if 'partner_id' in vals:
             partner_id = vals.get('partner_id')
@@ -449,16 +532,32 @@ class account_invoice(osv.osv):
             partner = self.pool.get('res.partner').browse(cr, uid, [partner_id])
             if partner and partner[0] and not partner[0].active:
                 raise osv.except_osv(_('Warning'), _("Partner '%s' is not active.") % (partner[0] and partner[0].name or '',))
+
         return super(account_invoice, self).create(cr, uid, vals, context)
 
     def write(self, cr, uid, ids, vals, context=None):
         """
         Check document_date
         """
-        if not context:
+        if context is None:
             context = {}
         if isinstance(ids, (int, long)):
             ids = [ids]
+
+        # US_286: Forbit possibility to add include price tax
+        # in bottom left corner
+        if 'tax_line' in vals:
+            tax_obj = self.pool.get('account.tax')
+            for tax_line in vals['tax_line']:
+                if tax_line[2]:
+                    if 'account_tax_id' in tax_line[2]:
+                        args = [('price_include', '=', '1'),
+                                ('id', '=', tax_line[2]['account_tax_id'])]
+                        tax_ids = tax_obj.search(cr, uid, args, context=context)
+                        if tax_ids:
+                            raise osv.except_osv(_('Error'),
+                                                 _('Tax included in price can not be tied to the whole invoice.'))
+
         res = super(account_invoice, self).write(cr, uid, ids, vals, context=context)
         self._check_document_date(cr, uid, ids)
         return res
@@ -557,7 +656,7 @@ class account_invoice(osv.osv):
                 supplier_view_id = supplier_invoice_res and supplier_invoice_res[1] or False
                 local_ctx.update({'journal_type': 'purchase',
                                 'view_id': supplier_view_id})
-            elif local_ctx.get('journal_type', False) == 'purchase': # UFTP-166: The wrong context saved in log
+            elif local_ctx.get('direct_invoice_view', False): # UFTP-166: The wrong context saved in log
                 supplier_view_id = supplier_direct_invoice_res and supplier_direct_invoice_res[1] or False
                 local_ctx = {'journal_type': 'purchase',
                              'view_id': supplier_view_id}
@@ -570,6 +669,7 @@ class account_invoice(osv.osv):
         # Some verifications
         if not context:
             context = {}
+        self._check_invoice_merged_lines(cr, uid, ids, context=context)
 
         # Prepare workflow object
         wf_service = netsvc.LocalService("workflow")
@@ -633,7 +733,11 @@ class account_invoice(osv.osv):
         if inv.move_id and inv.register_line_ids:
             ml_obj = self.pool.get('account.move.line')
             # First search move line that becomes from invoice
-            res_ml_ids = ml_obj.search(cr, uid, [('move_id', '=', inv.move_id.id), ('account_id', '=', inv.account_id.id)])
+            res_ml_ids = ml_obj.search(cr, uid, [
+                ('move_id', '=', inv.move_id.id),
+                ('account_id', '=', inv.account_id.id),
+                ('invoice_line_id', '=', False),  # US-254: do not seek invoice line's JIs (if same account as header)
+            ])
             if len(res_ml_ids) > 1:
                 raise osv.except_osv(_('Error'), _('More than one journal items found for this invoice.'))
             invoice_move_line_id = res_ml_ids[0]
@@ -786,6 +890,8 @@ class account_invoice(osv.osv):
             context={}
         if isinstance(ids, (int, long)):
             ids = [ids]
+        self._check_invoice_merged_lines(cr, uid, ids, context=context)
+
         # Prepare some value
         wiz_lines_obj = self.pool.get('wizard.split.invoice.lines')
         inv_lines_obj = self.pool.get('account.invoice.line')
@@ -846,6 +952,207 @@ class account_invoice(osv.osv):
     def button_dummy_compute_total(self, cr, uid, ids, context=None):
         return True
 
+    def button_merge_lines(self, cr, uid, ids, context=None):
+        # US-357 merge lines (by account) button for draft SIs
+        def check(inv_br):
+            if not inv_br.can_merge_lines:
+                raise osv.except_osv(_('Error'),
+                    _("Invoice not eligible for lines merging"))
+
+            account_iterations = {}
+            for l in inv_br.invoice_line:
+                account_iterations[l.account_id.id] = \
+                    account_iterations.setdefault(l.account_id.id, 0) + 1
+
+            any_to_merge = False
+            if account_iterations:
+                for a in account_iterations:
+                    if account_iterations[a] > 1:
+                        any_to_merge = True
+                        break
+
+            if not any_to_merge:
+                raise osv.except_osv(_('Error'),
+                    _("Invoice has no line to merge by account"))
+
+        def compute_merge(inv_br):
+            """
+            :result:
+                - A: lines vals by line number
+                - B: and list of inv id to keep (1 line by account (not merged))
+            :rtype : [dict, list]
+
+            NOTES:
+            - no impact on 'import_invoice_id', 'is_corrected' as the 
+              invoice is draft so not imported, and no accounting entries
+            - for order_line_id and sale_order_line_id these m2o are used
+              for AD at line level but when merging we keep only AD from header
+            """
+            index = 1
+            vals_template = {
+                '_index_': index,  # internal merged line index
+
+                'account_id': False,
+                'company_id': inv_br.company_id.id,
+                'discount': 0.,
+                'invoice_id': inv_br.id,
+                'invoice_line_tax_id': None,  # m2m (None to distinguished False)
+                'name': '',
+                'partner_id': inv_br.partner_id.id,
+                'price_unit': 0.,
+                'quantity': 1.,
+            }
+
+            by_account_vals = {}  # key: account_id
+            for l in inv_br.invoice_line:
+                # get current merge vals for account or create new
+                if l.account_id.id in by_account_vals:
+                    vals = by_account_vals[l.account_id.id]
+                else:
+                    # new account to merge
+                    vals = vals_template.copy()
+                    vals.update({
+                        '_index_': index,
+                        'account_id': l.account_id.id,
+                    })
+                    index += 1
+
+                # merge line
+                vals['price_unit'] += l.price_subtotal  # qty 1 and price
+                if vals['invoice_line_tax_id'] is None:
+                    vals['invoice_line_tax_id'] = l.invoice_line_tax_id \
+                        and [ t.id for t in l.invoice_line_tax_id ] or False
+                else:
+                    # get rid of the product tax line if <> between merged lines
+                    if vals['invoice_line_tax_id'] is None:
+                        # first tax line browsed for the account
+                        if l.invoice_line_tax_id:
+                            vals['invoice_line_tax_id'] = [ 
+                                t.id for t in l.invoice_line_tax_id ]
+                        else:
+                            vals['invoice_line_tax_id'] = False
+                    elif vals['invoice_line_tax_id'] and l.invoice_line_tax_id:
+                        # track <> tax lines, if the case abort tax(es) in merge
+                        tax_ids = [ t.id for t in l.invoice_line_tax_id ]
+                        if cmp(vals['invoice_line_tax_id'], tax_ids) != 0:
+                            vals['invoice_line_tax_id'] = False
+                    else:
+                        # no tax(es) for this line,  abort tax(es) in merge
+                        vals['invoice_line_tax_id'] = False
+
+                # update merge line
+                by_account_vals[l.account_id.id] = vals
+
+                # internal merged lines ids
+                if not '_ids_' in by_account_vals[l.account_id.id]:
+                    by_account_vals[l.account_id.id]['_ids_'] = []
+                by_account_vals[l.account_id.id]['_ids_'].append(l.id)
+
+            # result by index
+            res = [{}, []]
+            for a in by_account_vals:
+                if len(by_account_vals[a]['_ids_']) > 1:
+                    # more than 1 inv line by account
+                    index = by_account_vals[a]['_index_']
+                    del by_account_vals[a]['_index_']
+                    del by_account_vals[a]['_ids_']
+                    res[0][index] = by_account_vals[a]
+                else:
+                    res[1].append(by_account_vals[a]['_ids_'][0])
+            return res
+
+        def delete_lines(inv_br, skip_ids):
+            # get ids to delete
+            ad_to_del_ids = []
+            line_to_del_ids = []
+
+            for l in inv_br.invoice_line:
+                if l.id in skip_ids:
+                    continue  # line not to del (1 by account)
+                # delete AD
+                if l.analytic_distribution_id \
+                    and not l.analytic_distribution_id.id in ad_to_del_ids:
+                    ad_to_del_ids.append(l.analytic_distribution_id.id)
+                line_to_del_ids.append(l.id)
+
+            # delete ADs
+            if ad_to_del_ids:
+                ad_obj.unlink(cr, uid, ad_to_del_ids, context=context)
+
+            # delete lines
+            if line_to_del_ids:
+                ail_obj.unlink(cr, uid, line_to_del_ids, context=context)
+
+        def do_merge(inv_br, lines_vals, not_merged_ids):
+            """
+            :param lines_vals: lines vals in order
+            :type lines_vals: dict
+            """
+            # the invoice is reviewed with merge lines
+            # => reset the line number sequence from 1
+            if inv_br.sequence_id:
+                inv_br.sequence_id.write({'number_next': 1}, context=context)
+
+            # create merge lines
+            for ln in sorted(lines_vals.keys()):
+                vals = lines_vals[ln]
+
+                # post encode tax m2m
+                vals['invoice_line_tax_id'] = vals['invoice_line_tax_id'] \
+                    and [(6, 0, vals['invoice_line_tax_id'])] or False
+
+                # create merge line
+                if not self.pool.get('account.invoice.line').create(cr, uid,
+                    vals, context=context):
+                    break
+
+            # recompute seq number for not merged lines
+            ail_obj = self.pool.get('account.invoice.line')
+            if not_merged_ids:
+                for lid in not_merged_ids:
+                    ln = inv_br.sequence_id.get_id(code_or_id='id')
+                    ail_obj.write(cr, uid, [lid], {
+                        'line_number': ln,
+                    })
+
+        def merge_invoice(inv_br):
+            check(inv_br)
+            merge_res = compute_merge(inv_br)
+            delete_lines(inv_br, merge_res[1])
+            do_merge(inv_br, merge_res[0], merge_res[1])
+
+            # set merged flag
+            inv_br.write({'is_merged_by_account': True}, context=context)
+
+            # recompute taxes (reset not manual ones)
+            self.button_reset_taxes(cr, uid, [inv_br.id], context=context)
+
+        def post_merge(inv_br):
+            inv_br.write({
+                # update check total for accurate check amount at validation
+                'check_total':
+                    inv_br.amount_total or inv_br.check_amount or 0.,
+            }, context=context)
+
+        res = {}
+        if not ids:
+            return False
+        if isinstance(ids, (int, long, )):
+            ids = [ids]
+
+        ail_obj = self.pool.get('account.invoice.line')
+        ad_obj = self.pool.get('analytic.distribution')
+
+        # merging
+        for inv_br in self.browse(cr, uid, ids, context=context):
+            merge_invoice(inv_br)
+
+        # post processing (reload invoices)
+        for inv_br in self.browse(cr, uid, ids, context=context):
+            post_merge(inv_br)
+
+        return res
+
 account_invoice()
 
 class account_invoice_line(osv.osv):
@@ -890,6 +1197,17 @@ class account_invoice_line(osv.osv):
             res[inv_line.id] = ''
             if inv_line.product_id:
                 res[inv_line.id] = inv_line.product_id.default_code
+
+        return res
+    def _get_vat_ok(self, cr, uid, ids, field_name, args, context=None):
+        '''
+        Return True if the system configuration VAT management is set to True
+        '''
+        vat_ok = self.pool.get('unifield.setup.configuration').get_config(cr, uid).vat_ok
+        res = {}
+        for id in ids:
+            res[id] = vat_ok
+
         return res
 
     _columns = {
@@ -903,12 +1221,14 @@ class account_invoice_line(osv.osv):
             store=False),
         'product_code': fields.function(_get_product_code, method=True, store=False, string="Product Code", type='char'),
         'reference': fields.char(string="Reference", size=64),
+        'vat_ok': fields.function(_get_vat_ok, method=True, type='boolean', string='VAT OK', store=False, readonly=True),
     }
 
     _defaults = {
         'price_unit': lambda *a: 0.00,
         'from_yml_test': lambda *a: False,
         'is_corrected': lambda *a: False,
+        'vat_ok': lambda obj, cr, uid, context: obj.pool.get('unifield.setup.configuration').get_config(cr, uid).vat_ok,
     }
 
     _order = 'line_number'
@@ -953,6 +1273,7 @@ class account_invoice_line(osv.osv):
          - compute total amount (check_total field)
          - write total to the register line
         """
+
         if not context:
             context = {}
         if isinstance(ids, (int, long)):
@@ -1073,4 +1394,74 @@ class account_invoice_line(osv.osv):
         return self.pool.get('account.analytic.line').button_open_analytic_corrections(cr, uid, al_ids, context=context)
 
 account_invoice_line()
+
+
+class res_partner(osv.osv):
+    _description='Partner'
+    _inherit = "res.partner"
+
+    def _get_fake(self, cr, uid, ids, name, args, context=None):
+        res = {}
+        if not ids:
+            return res
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+        for id in ids:
+            res[id] = False
+        return res
+
+    def _get_search_by_invoice_type(self, cr, uid, obj, name, args,
+        context=None):
+        res = []
+        if not len(args):
+            return res
+        if context is None:
+            context = {}
+        if len(args) != 1:
+            msg = _("Domain %s not suported") % (str(args), )
+            raise osv.except_osv(_('Error'), msg)
+        if args[0][1] != '=':
+            msg = _("Operator '%s' not suported") % (args[0][1], )
+            raise osv.except_osv(_('Error'), msg)
+        if not args[0][2]:
+            return res
+
+        invoice_type = context.get('type', False)
+        if invoice_type:
+            if invoice_type in ('in_invoice', 'in_refund', ):
+                # in invoices: only supplier partner
+                res = [('supplier', '=', True)]
+            elif invoice_type in ('out_invoice', 'out_refund', ):
+                # out invoices: only customer partner
+                res = [('customer', '=', True)]
+
+        return res
+
+    _columns = {
+        'by_invoice_type': fields.function(_get_fake, type='boolean',
+            fnct_search=_get_search_by_invoice_type, method=True),
+    }
+
+    def name_search(self, cr, uid, name='', args=None, operator='ilike',
+        context=None, limit=100):
+        # BKLG-50: IN/OUT invoice/refund partner autocompletion filter
+        # regarding supplier/customer
+        if context is None:
+            context = {}
+
+        alternate_domain = False
+        invoice_type = context.get('type', False)
+        if invoice_type:
+            if invoice_type in ('in_invoice', 'in_refund', ):
+                alternate_domain = [('supplier', '=', True)]
+            elif invoice_type in ('out_invoice', 'out_refund', ):
+                alternate_domain = [('customer', '=', True)]
+        if alternate_domain:
+            args += alternate_domain
+
+        return super(res_partner, self).name_search(cr, uid, name=name,
+            args=args, operator=operator, context=context, limit=limit)
+
+res_partner()
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

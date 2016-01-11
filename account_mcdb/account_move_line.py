@@ -30,13 +30,13 @@ class account_move_line(osv.osv):
     _name = 'account.move.line'
     _inherit = 'account.move.line'
 
-    # UTP-936: Extract the method to calculate the output here, so that it can be used at other places, for example: 
+    # UTP-936: Extract the method to calculate the output here, so that it can be used at other places, for example:
     # account_mcdb/report/account_mcdb_export.py, which is used to generate csv reports
     def calculate_output(self, cr, uid, currency_id, ml, round, context):
         currency_obj = self.pool.get('res.currency')
         func_amount = ml.amount_currency
         original_currency = ml.currency_id.id
-        if ml.journal_id.type == 'cur_adj':
+        if ml.journal_id.type in ['cur_adj','revaluation']:
             # UF-2296: in case of Current Adjustmeent Journal (MT)
             # if output ccy == fonctional ccy we must return functional amount
             # explanation: export search result account_mcdb/report/account_mcdb_export.py
@@ -69,41 +69,44 @@ class account_move_line(osv.osv):
             context = {}
         # Return nothing if no 'output_currency_id' in context
         if not context or not context.get('output_currency_id', False):
-            for id in ids:
-                res[id] = {'output_currency': False, 'output_amount': 0.0, 'output_amount_debit': 0.0, 'output_amount_credit': 0.0}
+            for o_id in ids:
+                res[o_id] = {'output_currency': False, 'output_amount': 0.0, 'output_amount_debit': 0.0, 'output_amount_credit': 0.0}
             return res
         # Retrieve currency
+        company_currency_id = self.pool.get('res.users').browse(cr, uid, uid, context=context).company_id.currency_id.id
         currency_id = context.get('output_currency_id')
         currency_obj = self.pool.get('res.currency')
         rate = currency_obj.read(cr, uid, currency_id, ['rate'], context=context).get('rate', False)
         # Do calculation
         if not rate:
-            for id in ids:
-                res[id] = {'output_currency': currency_id, 'output_amount': 0.0, 'output_amount_debit': 0.0, 'output_amount_credit': 0.0}
+            for out_id in ids:
+                res[out_id] = {'output_currency': currency_id, 'output_amount': 0.0, 'output_amount_debit': 0.0, 'output_amount_credit': 0.0}
             return res
         for ml in self.browse(cr, uid, ids, context=context):
-            res[ml.id] = {'output_currency': False, 'output_amount': 0.0, 'output_amount_debit': 0.0, 'output_amount_credit': 0.0}
+            res[ml.id] = {'output_currency': currency_id, 'output_amount': 0.0, 'output_amount_debit': 0.0, 'output_amount_credit': 0.0}
             # output_amount field
             # Update with date
             context.update({'date': ml.source_date or ml.date or strftime('%Y-%m-%d')})
-            # Now call the common method to calculate the output values      
-            amount = self.calculate_output(cr, uid, currency_id, ml, round=True, context=context)
-            res[ml.id]['output_amount'] = amount or 0.0
-            if amount < 0.0:
-                res[ml.id]['output_amount_debit'] = 0.0
-                res[ml.id]['output_amount_credit'] = abs(amount) or 0.0
+            # Now call the common method to calculate the output values
+            if currency_id == company_currency_id:
+                res[ml.id].update({'output_amount': ml.debit - ml.credit, 'output_amount_debit': ml.debit, 'output_amount_credit': ml.credit})
             else:
-                res[ml.id]['output_amount_debit'] = abs(amount) or 0.0
-                res[ml.id]['output_amount_credit'] = 0.0
-                # or output_currency field
-            res[ml.id]['output_currency'] = currency_id
+                amount = self.calculate_output(cr, uid, currency_id, ml, round=True, context=context)
+                res[ml.id]['output_amount'] = amount or 0.0
+                if amount < 0.0:
+                    res[ml.id]['output_amount_debit'] = 0.0
+                    res[ml.id]['output_amount_credit'] = abs(amount) or 0.0
+                else:
+                    res[ml.id]['output_amount_debit'] = abs(amount) or 0.0
+                    res[ml.id]['output_amount_credit'] = 0.0
+                    # or output_currency field
         return res
 
     _columns = {
         'output_amount': fields.function(_get_output, string="Output amount", type='float', method=True, store=False, multi="output_currency"),
         'output_amount_debit': fields.function(_get_output, string="Output debit", type='float', method=True, store=False, multi="output_currency"),
         'output_amount_credit': fields.function(_get_output, string="Output credit", type='float', method=True, store=False, multi="output_currency"),
-        'output_currency': fields.function(_get_output, string="Output curr.", type='many2one', relation='res.currency', method=True, store=False, 
+        'output_currency': fields.function(_get_output, string="Output curr.", type='many2one', relation='res.currency', method=True, store=False,
             multi="output_currency"),
     }
 
@@ -121,6 +124,26 @@ class account_move_line(osv.osv):
                 element_fields = tree.xpath('/tree/field[@name="' + element + '"]')
                 for field in element_fields:
                     tree.remove(field)
+            view['arch'] = etree.tostring(tree)
+
+        if view_type == 'tree' and \
+            context.get('selector_display_cheque_number', False):
+            # BKLG-7: cheque_number used in G/L selector: display it
+            view['fields']['cheque_number'] = {
+                'type': 'char',
+                'string': 'Cheque Number',
+            }
+
+            tree = etree.fromstring(view['arch'])
+
+            cheque_number_node = etree.Element('field', attrib={
+                'name': 'cheque_number',
+            })
+            # insert it after entry sequence
+            es_node = tree.find('.//field[@name="move_id"]')
+            tree.insert(es_node.getparent().index(es_node) + 1,
+                cheque_number_node)
+
             view['arch'] = etree.tostring(tree)
         return view
 

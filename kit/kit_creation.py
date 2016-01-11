@@ -1233,6 +1233,7 @@ class stock_move(osv.osv):
             # assigned qty
             assigned_qty = 0.0
             # if the product is perishable (or batch management), we gather assigned qty from kit items
+
             if obj.product_id.perishable:
                 item_ids = item_obj.search(cr, uid, [('item_stock_move_id', '=', obj.id)], context=context)
                 if item_ids:
@@ -1247,7 +1248,7 @@ class stock_move(osv.osv):
             # hidden_state
             result[obj.id].update({'hidden_state': obj.state})
             # hidden_prodlot_id
-            result[obj.id].update({'hidden_prodlot_id': obj.prodlot_id.id})
+            result[obj.id].update({'hidden_prodlot_id': obj.lot_check})
             # hidden_exp_check
             result[obj.id].update({'hidden_exp_check': obj.exp_check})
             # hidden_asset_check
@@ -1272,12 +1273,12 @@ class stock_move(osv.osv):
                 'original_from_process_stock_move': fields.boolean(string='Original', readonly=True),
                 # functions
                 'hidden_state': fields.function(_vals_get_kit_creation, method=True, type='selection', selection=SELECTION, string='Hidden State', multi='get_vals_kit_creation', store=False, readonly=True),
-                'hidden_prodlot_id': fields.function(_vals_get_kit_creation, method=True, type='many2one', relation='stock.production.lot', string='Hidden Prodlot', multi='get_vals_kit_creation', store=False, readonly=True),
+                'hidden_prodlot_id': fields.function(_vals_get_kit_creation, method=True, type='boolean', string='Hidden Prodlot', multi='get_vals_kit_creation', store=False, readonly=True),
                 'hidden_exp_check': fields.function(_vals_get_kit_creation, method=True, type='boolean', string='Hidden Expiry Check', multi='get_vals_kit_creation', store=False, readonly=True),
                 'hidden_asset_check': fields.function(_vals_get_kit_creation, method=True, type='boolean', string='Hidden Asset Check', multi='get_vals_kit_creation', store=False, readonly=True),
                 'hidden_creation_state': fields.function(_vals_get_kit_creation, method=True, type='selection', selection=KIT_CREATION_STATE, string='Hidden Creation State', multi='get_vals_kit_creation', store=False, readonly=True),
                 'assigned_qty_stock_move': fields.function(_vals_get_kit_creation, method=True, type='float', string='Assigned Qty', multi='get_vals_kit_creation', store=False, readonly=True),
-                'hidden_creation_qty_stock_move': fields.function(_vals_get_kit_creation, method=True, type='integer', string='Hidden Creation Qty', multi='get_vals_kit_creation', store=False, readonly=True),
+                'hidden_creation_qty_stock_move': fields.function(_vals_get_kit_creation, method=True, type='float', string='Hidden Creation Qty', multi='get_vals_kit_creation', store=False, readonly=True),
                 'kol_lot_manual': fields.boolean(string='The batch is set manually'),
                 }
     
@@ -1359,12 +1360,13 @@ class stock_move(osv.osv):
             # we assign automatically the lot to the kit only for products perishable at least (perishable and batch management)
             if move.product_id.perishable:
                 # openERP bug -> fields.function integer returns a string
-                if move.hidden_creation_qty_stock_move in [1, '1']:
+                self.automatic_assignment(cr, uid, [move.id], context=context)
+                #if move.hidden_creation_qty_stock_move in [1, '1']:
                     # if only one kit, automatic assignement
-                    self.automatic_assignment(cr, uid, [move.id], context=context)
-                else:
+                #    self.automatic_assignment(cr, uid, [move.id], context=context)
+                #else:
                     # multiple kit, we open the assignation wizard
-                    return self.assign_to_kit(cr, uid, ids, context=context)
+                #    return self.assign_to_kit(cr, uid, ids, context=context)
         
         # refresh the vue so the completed flag is updated and Confirm Kitting button possibly appears
         data_obj = self.pool.get('ir.model.data')

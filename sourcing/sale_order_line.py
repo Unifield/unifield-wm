@@ -29,12 +29,12 @@ from osv.orm import browse_record
 import pooler
 from tools import misc
 from tools.translate import _
+from collections import deque
 
 import decimal_precision as dp
 from order_types import ORDER_PRIORITY
 from order_types import ORDER_CATEGORY
 from sale_override import SALE_ORDER_STATE_SELECTION
-
 
 _SELECTION_PO_CFT = [
     ('po', 'Purchase Order'),
@@ -47,6 +47,13 @@ _SELECTION_PO_CFT = [
 class sale_order_line(osv.osv):
     _inherit = 'sale.order.line'
     _description = 'Sales Order Line'
+
+    _replace_exported_fields = {
+        'product_id': [
+            (['product_code', 'Product Code'], 10),
+            (['product_name', 'Product Description'], 20),
+        ],
+    }
 
     """
     Other methods
@@ -111,7 +118,7 @@ The parameter '%s' should be an browse_record instance !""") % (method, self._na
 
         self._check_browse_param(order, method='_get_sale_order_state')
 
-        if order and order.state == 'done' and order.split_type_sale_order == 'original_sale_order':
+        if order and not order.procurement_request and order.state == 'done' and order.split_type_sale_order == 'original_sale_order':
             return 'split_so'
         elif order:
             return order.state
@@ -219,6 +226,9 @@ The parameter '%s' should be an browse_record instance !""") % (method, self._na
 
                 if line.type == 'make_to_stock' and line.location_id:
                     context['location'] = line.location_id.id
+
+                if 'to_date' in context:
+                    del context['to_date']
 
                 product = product_obj.get_product_available(cr, uid, [line.product_id.id], context=context)
                 res = real_stock + product.get(line.product_id.id, 0.00)
@@ -356,6 +366,44 @@ The parameter '%s' should be an browse_record instance !""") % (method, self._na
 
         return [('state', '=', 'draft'), ('sale_order_state', '=', 'validated')]
 
+    def _search_in_progress(self, cr, uid, obj, name, args, context=None):
+        """
+        Returns all field order lines that are sourcing in progress according to
+        the domain given in args.
+
+        :param cr: Cursor to the database
+        :param uid: ID of the user that runs the method
+        :param obj: Object on which the search is
+        :param field_name: Name of the field on which the search is
+        :param args: The domain
+        :param context: Context of the call
+
+        :return A list of tuples that allows the system to return the list
+                 of matching field order lines
+        :rtype list
+        """
+        if context is None:
+            context = {}
+
+        if not args:
+            return []
+
+        # Put procurement_request = True in context to get FO and IR
+        context['procurement_request'] = True
+
+        if args[0][1] != '=' or not args[0][2]:
+            raise osv.except_osv(_('Error !'), _('Filter not implemented'))
+
+        return [
+            ('display_confirm_button', '=', False),
+            ('state', '!=', 'draft'),
+            ('sale_order_in_progress', '=', False),
+            '|', '&',
+            ('type', '=', 'make_to_order'),
+            ('procurement_id.state', '=', 'confirmed'),
+            ('sale_order_state', '=', 'validated'),
+        ]
+
     _columns = {
         'customer': fields.related(
             'order_id',
@@ -450,6 +498,13 @@ The parameter '%s' should be an browse_record instance !""") % (method, self._na
             string='Only for filtering',
             fnct_search=_search_need_sourcing,
         ),
+        'in_progress': fields.function(
+            _get_fake,
+            method=True,
+            type='boolean',
+            string='Only for filtering',
+            fnct_search=_search_in_progress,
+        ),
         # UTP-392: if the FO is loan type, then the procurement method is only Make to Stock allowed
         'loan_type': fields.function(
             _get_line_values,
@@ -488,6 +543,23 @@ The parameter '%s' should be an browse_record instance !""") % (method, self._na
             string='Available Stock',
             digits_compute=dp.get_precision('Product UoM'),
             readonly=True,
+        ),
+        # Fields used for export
+        'product_code': fields.related(
+            'product_id',
+            'default_code',
+            type='char',
+            size=64,
+            string='Product code',
+            store=False,
+        ),
+        'product_name': fields.related(
+            'product_id',
+            'name',
+            type='char',
+            size=128,
+            string='Product description',
+            store=False,
         ),
     }
 
@@ -569,6 +641,7 @@ The parameter '%s' should be an browse_record instance !""") % (method, self._na
         """
         # Objects
         order_obj = self.pool.get('sale.order')
+        partner_obj = self.pool.get('res.partner')
         product_obj = self.pool.get('product.product')
         data_obj = self.pool.get('ir.model.data')
 
@@ -582,8 +655,12 @@ The parameter '%s' should be an browse_record instance !""") % (method, self._na
         if vals.get('product_id', False):
             product = product_obj.browse(cr, uid, vals['product_id'], context=context)
 
+        ir = False
+        order_p_type = False
         if vals.get('order_id', False):
             order = order_obj.browse(cr, uid, vals['order_id'], context=context)
+            ir = order.procurement_request
+            order_p_type = order.partner_type
             if order.order_type == 'loan' and order.state == 'validated':
                 vals.update({
                     'type': 'make_to_stock',
@@ -596,6 +673,12 @@ The parameter '%s' should be an browse_record instance !""") % (method, self._na
 
         if product and product.type in ('consu', 'service', 'service_recep'):
             vals['type'] = 'make_to_order'
+
+        if product and product.type in ('service', 'service_recep'):
+            if ir and vals.get('po_cft', 'dpo') == 'dpo':
+                vals['po_cft'] = 'po'
+            elif not ir and vals.get('po_cft', 'po') == 'po':
+                vals['po_cft'] = 'dpo'
 
         # If type is missing, set to make_to_stock and po_cft to False
         if not vals.get('type', False):
@@ -613,6 +696,10 @@ The parameter '%s' should be an browse_record instance !""") % (method, self._na
         # UFTP-11: if make_to_order can not have a location
         if vals.get('type', False) == 'make_to_order':
             vals['location_id'] = False
+            if vals.get('supplier') and order_p_type == 'internal':
+                sup = partner_obj.read(cr, uid, vals.get('supplier'), ['partner_type'], context=context)
+                if sup['partner_type'] == 'internal':
+                    vals['supplier'] = False
 
         # UFTP-139: if make_to_stock and no location, put Stock as location
         if vals.get('type', False) == 'make_to_stock' and not vals.get('location_id', False):
@@ -625,6 +712,33 @@ The parameter '%s' should be an browse_record instance !""") % (method, self._na
         self._check_line_conditions(cr, uid, res, context)
 
         return res
+
+    def update_supplier_on_line(self, cr, uid, line_ids, context=None):
+        """
+        Update the selected supplier on lines for line in make_to_order.
+
+        :param cr: Cursor to the database
+        :param uid: ID of the user that runs the method
+        :param line_ids: List of ID of sale.order.line to update
+        :param context: Context of the call
+
+        :return True
+        :rtype bool
+        """
+        if context is None:
+            context = {}
+
+        if isinstance(line_ids, (int, long)):
+            line_ids = [line_ids]
+
+        for line in self.browse(cr, uid, line_ids, context=context):
+            if line.type == 'make_to_order' and line.product_id \
+               and line.product_id.seller_id:
+                self.write(cr, uid, [line.id], {
+                    'supplier': line.product_id.seller_id.id,
+                }, context=context)
+
+        return True
 
     def _check_loan_conditions(self, cr, uid, line, context=None):
         """
@@ -718,6 +832,15 @@ the supplier must be either in 'Internal', 'Inter-section' or 'Intermission type
                 raise osv.except_osv(
                     _('Warning'),
                     _("""You can't source with 'Request for Quotation' to an internal/inter-section/intermission partner."""),
+                )
+
+            if line.product_id and \
+               line.product_id.type in ('service', 'service_recep') and \
+               not line.order_id.procurement_request and \
+               line.po_cft == 'po':
+                raise osv.except_osv(
+                    _('Warning'),
+                    _("""'Purchase Order' is not allowed to source a 'Service' product."""),
                 )
 
             if not line.product_id:
@@ -972,10 +1095,54 @@ the supplier must be either in 'Internal', 'Inter-section' or 'Intermission type
                 _('Warning'),
                 _('A location must be chosen before sourcing the line.'),
             )
+        # US_376: If order type is loan, we accept unit price as zero
+        no_price_ids = self.search(cr, uid, [
+           ('id', 'in', ids),
+           ('price_unit', '=', 0.00),
+           ('order_id.order_type', 'not in', ['loan', 'donation_st', 'donation_exp']),
+           ('order_id.procurement_request', '=', False),
+        ], limit=1, context=context)
+
+        if no_price_ids:
+            raise osv.except_osv(
+                _('Warning'),
+                _('You cannot confirm the sourcing of a line with unit price as zero.'),
+            )
+
+        int_int_supplier = self.search(cr, uid, [
+            ('id', 'in', ids),
+            ('supplier.partner_type', '=', 'internal'),
+            ('order_id.partner_type', '=', 'internal'),
+            ('order_id.procurement_request', '=', False),
+        ], count=True, context=context)
+        if int_int_supplier:
+            raise osv.except_osv(
+                _('Warning'),
+                _('You cannot confirm the sourcing of a line to an internal customer with an internal supplier.'),
+            )
+
+        self.check_confirm_order(cr, uid, ids, context=context)
+
+        return True
+
+    def check_confirm_order(self, cr, uid, ids, context=None):
+        """
+        Run the confirmation of the FO/IR if all lines are confirmed
+        """
+        # Objects
+        order_obj = self.pool.get('sale.order')
+
+        if context is None:
+            context = {}
+
+        if isinstance(ids, (int, long)):
+            ids = [ids]
 
         order_to_check = {}
-        for line in self.read(cr, uid, ids, ['order_id', 'estimated_delivery_date'], context=context):
-            order_proc = order_obj.read(cr, uid, line['order_id'][0], ['procurement_request'], context=context)['procurement_request']
+        for line in self.read(cr, uid, ids, ['order_id', 'estimated_delivery_date', 'price_unit', 'product_uom_qty'], context=context):
+            order_data = order_obj.read(cr, uid, line['order_id'][0], ['procurement_request', 'order_type'], context=context)
+            order_proc = order_data['procurement_request']
+            order_type = order_data['order_type']
             state_to_use = order_proc and 'confirmed' or 'sourced'
             self.write(cr, uid, [line['id']], {
                 'state': state_to_use,
@@ -984,6 +1151,13 @@ the supplier must be either in 'Internal', 'Inter-section' or 'Intermission type
             if line['order_id'][0] not in order_to_check:
                 order_to_check.update({line['order_id'][0]: state_to_use})
 
+            if order_type == 'regular' and not order_proc and line['price_unit'] * line['product_uom_qty'] < 0.01:
+                raise osv.except_osv(
+                    _('Warning'),
+                    _('You cannot confirm the sourcing of a line with a subtotal of zero.'),
+                )
+
+        order_to_process = {}
         for order_id, state_to_use in order_to_check.iteritems():
             lines_not_confirmed = self.search(cr, uid, [
                 ('order_id', '=', order_id),
@@ -991,24 +1165,49 @@ the supplier must be either in 'Internal', 'Inter-section' or 'Intermission type
             ], count=True, context=context)
 
             if lines_not_confirmed:
-                break
+                pass
+            else:
+                order_to_process.setdefault(state_to_use, [])
+                order_to_process[state_to_use].append(order_id)
 
-            self.pool.get('sale.order').write(cr, uid, [order_id], {
-                'sourcing_trace_ok': True,
-                'sourcing_trace': 'Sourcing in progress',
-            }, context=context)
-            thread = threading.Thread(target=self.confirmOrder, args=(cr, uid, order_id, state_to_use, context))
-            thread.start()
+        for state_to_use, val in order_to_process.iteritems():
+            queue = deque(val)
+            while queue:
+                i = 0
+                order_ids = []
+                # We create 20 threads (so if there are 15 order to process,
+                # we will create 15 threads (1 per order), but if there are 50
+                # order to process, we will create 20 threads (1 per 2/3 orders)
+                while i < (len(order_to_check)/20 or 1) and queue:
+                    i +=1
+                    order_id = queue.popleft()
+                    order_ids.append(order_id)
+
+                    # Create the sourcing process object
+                    self.pool.get('sale.order.sourcing.progress').create(cr, uid, {
+                        'order_id': order_id,
+                        'start_date': time.strftime('%Y-%m-%d %H:%M:%S'),
+                    }, context=context)
+
+                self.pool.get('sale.order').write(cr, uid, order_ids, {
+                    'sourcing_trace_ok': True,
+                    'sourcing_trace': 'Sourcing in progress',
+                }, context=context)
+
+                for order_id in order_ids:
+                    self.infolog(cr, uid, "All lines of the FO/IR id:%s have been sourced" % order_id)
+                thread = threading.Thread(target=self.confirmOrder, args=(cr, uid, order_ids, state_to_use, context))
+                thread.start()
 
         return True
 
-    def confirmOrder(self, cr, uid, order_id, state_to_use, context=None, new_cursor=True):
+    def confirmOrder(self, cr, uid, order_ids, state_to_use, context=None, new_cursor=True):
         """
         Confirm the order specified in the parameter.
 
         :param cr: Cursor to the database
         :param uid: ID of the user that runs the method
-        :param order_id: ID of the order to confirm
+        :param order_id: List of ID of the orders to confirm
         :param state_to_use: Determine if the order is an IR or a FO
         :param context: Context of the call
         :param new_cursor: Use a new DB cursor or not
@@ -1024,28 +1223,47 @@ the supplier must be either in 'Internal', 'Inter-section' or 'Intermission type
         if new_cursor:
             cr = pooler.get_db(cr.dbname).cursor()
 
-        try:
-            if state_to_use == 'confirmed':
-                wf_service.trg_validate(uid, 'sale.order', order_id, 'procurement_confirm', cr)
-            else:
-                wf_service.trg_validate(uid, 'sale.order', order_id, 'order_confirm', cr)
-            self.pool.get('sale.order').write(cr, uid, [order_id],
-                                              {'sourcing_trace_ok': False,
-                                               'sourcing_trace': ''}, context=context)
-        except osv.except_osv, e:
-            cr.rollback()
-            self.pool.get('sale.order').write(cr, uid, order_id,
-                                              {'sourcing_trace_ok': True,
-                                               'sourcing_trace': e.value}, context=context)
-        except Exception, e:
-            cr.rollback()
-            self.pool.get('sale.order').write(cr, uid, order_id,
-                                              {'sourcing_trace_ok': True,
-                                               'sourcing_trace': misc.ustr(e)}, context=context)
+        for order_id in order_ids:
+            try:
+                if state_to_use == 'confirmed':
+                    wf_service.trg_validate(uid, 'sale.order', order_id, 'procurement_confirm', cr)
+                else:
+                    wf_service.trg_validate(uid, 'sale.order', order_id, 'order_confirm', cr)
+                self.pool.get('sale.order').write(cr, uid, [order_id],
+                                                  {'sourcing_trace_ok': False,
+                                                   'sourcing_trace': ''}, context=context)
+                prog_ids = self.pool.get('sale.order.sourcing.progress').search(cr, uid, [
+                    ('order_id', '=', order_id),
+                ], context=context)
+                self.pool.get('sale.order.sourcing.progress').write(cr, uid, prog_ids, {
+                    'end_date': time.strftime('%Y-%m-%d %H:%M:%S'),
+                }, context=context)
+            except osv.except_osv, e:
+                cr.rollback()
+                self.pool.get('sale.order').write(cr, uid, order_id,
+                                                  {'sourcing_trace_ok': True,
+                                                   'sourcing_trace': e.value}, context=context)
+                prog_ids = self.pool.get('sale.order.sourcing.progress').search(cr, uid, [
+                    ('order_id', '=', order_id),
+                ], context=context)
+                self.pool.get('sale.order.sourcing.progress').write(cr, uid, prog_ids, {
+                    'error': e.value,
+                }, context=context)
+            except Exception, e:
+                cr.rollback()
+                self.pool.get('sale.order').write(cr, uid, order_id,
+                                                  {'sourcing_trace_ok': True,
+                                                   'sourcing_trace': misc.ustr(e)}, context=context)
+                prog_ids = self.pool.get('sale.order.sourcing.progress').search(cr, uid, [
+                    ('order_id', '=', order_id),
+                ], context=context)
+                self.pool.get('sale.order.sourcing.progress').write(cr, uid, prog_ids, {
+                    'error': misc.ustr(e),
+                }, context=context)
 
         if new_cursor:
             cr.commit()
-            cr.close()
+            cr.close(True)
 
         return True
 
@@ -1177,12 +1395,19 @@ the supplier must be either in 'Internal', 'Inter-section' or 'Intermission type
         sellerId = False
         po_cft = False
         l_type = 'type' in result['value'] and result['value']['type']
+
+        line = None
+        if ids:
+            line = self.browse(cr, uid, ids[0])
+
         if product and type:
             seller = product_obj.browse(cr, uid, product).seller_id
             sellerId = (seller and seller.id) or False
 
             if l_type == 'make_to_order':
                 po_cft = 'po'
+                if line and line.product_id and line.product_id.type in ('service', 'service_recep') and line.order_id and not line.order_id.procurement_request:
+                    po_cft = 'dpo'
 
             result['value'].update({
                 'supplier': sellerId,
@@ -1232,6 +1457,14 @@ the supplier must be either in 'Internal', 'Inter-section' or 'Intermission type
         res = {'value': value, 'warning': warning}
 
         line = self.browse(cr, uid, line_id, context=context)
+
+        if line.product_id.type in ('service', 'service_recep') and not line.order_id.procurement_request and po_cft == 'po':
+            res['warning'] = {
+                'title': _('Warning'),
+                'message': _("""'Purchase Order' is not allowed to source a 'Service' product."""),
+            }
+            res['value'].update({'po_cft': 'dpo'})
+
         partner_id = 'supplier' in value and value['supplier'] or partner_id
         if line_id and partner_id and line.product_id:
             check_fnct = product_obj._on_change_restriction_error
@@ -1286,7 +1519,7 @@ the supplier must be either in 'Internal', 'Inter-section' or 'Intermission type
             line = self.browse(cr, uid, line_id, context=context)
             if line.product_id.type in ('consu', 'service', 'service_recep') and l_type == 'make_to_stock':
                 product_type = line.product_id.type == 'consu' and 'non stockable' or 'service'
-                value['l_type'] = 'make_to_order'
+                value['type'] = 'make_to_order'
                 message.update({
                     'title': _('Warning'),
                     'message': _('You cannot choose \'from stock\' as method to source a %s product !') % product_type,
@@ -1398,6 +1631,28 @@ the supplier must be either in 'Internal', 'Inter-section' or 'Intermission type
                 return result
 
         return result
+
+    def read_group(self, cr, uid, domain, fields, groupby, offset=0, limit=None,
+        context=None, orderby=False):
+        res = super(sale_order_line, self).read_group(cr, uid, domain, fields,
+            groupby, offset=offset, limit=limit, context=context,
+            orderby=orderby)
+
+        if 'line_number' in fields:
+            """
+            UFTP-346 'order sourcing tool search view'
+            (and all SO line search views with line_number field)
+            replace the sum of 'line_number' by count of so lines
+            """
+            for g in res:
+                # for each group line, compute so lines count by domain,
+                # then replace sum('line_number') value by the count
+                if '__domain' in g:
+                    # aware to manage all group levels chain with __domain
+                    line_count = self.search(cr, uid, g.get('__domain', []),
+                        context={}, count=True)  # search with 'new' context
+                    g['line_number'] = line_count
+        return res
 
 sale_order_line()
 

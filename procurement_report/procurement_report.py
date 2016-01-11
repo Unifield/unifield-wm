@@ -25,6 +25,7 @@ from decimal_precision import decimal_precision as dp
 
 class procurement_rules_report(osv.osv):
     _name = 'procurement.rules.report'
+    _rec_name = 'product_id'
     _auto = False
     _order = 'product_reference, product_name, product_id, location_id'
     
@@ -127,10 +128,14 @@ class procurement_rules_report(osv.osv):
                     0 AS swoc_ok,
                     1 AS swop_ok,
                     0 AS swtv_ok,
-                    swop.product_id AS product_id,
+                    swopl.product_id AS product_id,
                     swop.location_id AS location_id
                 FROM
-                    stock_warehouse_orderpoint swop WHERE swop.active=True))
+                    stock_warehouse_orderpoint_line swopl
+                    LEFT JOIN
+                        stock_warehouse_orderpoint swop
+                    ON swopl.supply_id = swop.id
+                WHERE swop.active = True))
                 UNION
                 (SELECT
                     0 AS swas_ok,

@@ -12,7 +12,8 @@
                         <field name="name" colspan="1" attrs="{'readonly': [('state', 'in', ('soft_closed', 'hard_closed'))]}"/>
                         <field name="donor_id" colspan="2" on_change="onchange_donor_id(donor_id, format_id, actual_line_ids)"
                             attrs="{'readonly': [('state', 'in', ('soft_closed', 'hard_closed'))]}"/>
-                        <field name="instance_id" colspan="1" domain="[('level','=','coordo')]" attrs="{'readonly': [('state','in',('soft_closed','hard_closed'))]}" /> 
+                        <field name="instance_level" invisible="1" />
+                        <field name="instance_id" colspan="1" domain="[('level','=','coordo')]" attrs="{'readonly': ['|', ('state','in',('soft_closed','hard_closed')), ('instance_level', '!=', 'section')]}" />
                         <field name="reporting_type" attrs="{'readonly': [('state', 'in', ('soft_closed', 'hard_closed'))]}"/>
                         <separator string="Dates"/>
                         <field name="eligibility_from_date" on_change="onchange_date(eligibility_from_date, eligibility_to_date)"
@@ -131,10 +132,23 @@
                             <field name="hard_closed_date" colspan="2" readonly="1"/>
                             <field name="state" colspan="2" readonly="1"/>
                         </group>
-                        <button name="contract_open" states="draft" string="Open" type="workflow" icon="gtk-go-forward"/>
-                        <button name="contract_soft_closed" states="open" string="Soft-close" type="workflow" icon="gtk-go-forward"/>
+                        <button name="contract_open_proxy" states="draft" string="Open" type="object" icon="gtk-go-forward"/>
+                        <button name="contract_soft_closed_proxy" states="open" string="Soft-close" type="object" icon="gtk-go-forward"/>
                         <button name="contract_reopen" states="soft_closed" string="Re-Open" type="workflow" icon="gtk-go-forward"/>
-                        <button name="contract_hard_closed" states="soft_closed" string="Hard-close" type="workflow" icon="gtk-ok"/>
+                        <button name="contract_hard_closed_proxy" states="soft_closed" string="Hard-close" type="object" icon="gtk-ok"/>
+                    </form>
+                </field>
+            </record>
+
+            <record id="view_financing_contract_contract_warning_form" model="ir.ui.view">
+                <field name="name">wizard.financing.contract.contract.warning.form</field>
+                <field name="model">wizard.financing.contract.contract.warning</field>
+                <field name="type">form</field>
+                <field name="arch" type="xml">
+                    <form string="Financing Contract Warning">
+                        <field name="warn_message" nolabel="1" />
+                        <newline />
+                        <button name="btn_close" type="object" string="OK" icon="gtk-ok"/>
                     </form>
                 </field>
             </record>
@@ -153,7 +167,7 @@
                         </tree>
                 </field>
             </record>
-    
+
             <record id="view_financing_contract_account_quadruplet_tree" model="ir.ui.view">
                 <field name="name">financing.contract.account.quadruplet.tree</field>
                 <field name="model">financing.contract.account.quadruplet</field>
@@ -168,7 +182,7 @@
                     </tree>
                 </field>
             </record>
-            
+
             <record id="view_financing_contract_account_quadruplet_form" model="ir.ui.view">
                 <field name="name">financing.contract.account.quadruplet.form</field>
                 <field name="model">financing.contract.account.quadruplet</field>
@@ -185,19 +199,19 @@
                     </form>
                 </field>
             </record>
-	
-	        <record id="view_financing_contract_account_quadruplet_search" model="ir.ui.view">
-	            <field name="name">financing.contract.account.quadruplet.search</field>
-	            <field name="model">financing.contract.account.quadruplet</field>
-	            <field name="type">search</field>
-	            <field name="arch" type="xml">
-	                <search string="Search Account/Destination/Funding Pool/Cost Centre">
-                        <field name="account_destination_name" string="Account"/>
-                        <field name="funding_pool_id" domain="[('category', '=', 'FUNDING')]"/>
-                        <field name="cost_center_id" domain="[('category', '=', 'OC')]"/>
-	                </search>
-	            </field>
-	        </record>
+
+            <record id="view_financing_contract_account_quadruplet_search" model="ir.ui.view">
+                <field name="name">financing.contract.account.quadruplet.search</field>
+                <field name="model">financing.contract.account.quadruplet</field>
+                <field name="type">search</field>
+                <field name="arch" type="xml">
+                    <search string="Search Account/Destination/Funding Pool/Cost Centre">
+                            <field name="account_destination_name" string="Account"/>
+                            <field name="funding_pool_id" domain="[('category', '=', 'FUNDING')]"/>
+                            <field name="cost_center_id" domain="[('category', '=', 'OC')]"/>
+                    </search>
+                </field>
+            </record>
 
             <record id="view_financing_contract_contract_tree" model="ir.ui.view">
                 <field name="name">financing.contract.contract.tree</field>
@@ -259,6 +273,7 @@
                         <newline/>
                         <field name="reporting_type"/>
                         <field name="active" colspan="2"/>
+                        <field name="reporting_currency"/>
                         <newline/>
                         <field name="overhead_type"/>
                         <field name="overhead_percentage" colspan="2"/>
@@ -469,6 +484,23 @@
                 <field eval="True" name="object"/>
             </record>
 
+        <!-- Allocated expense report -->
+            <record id="act_allocated_expenses_report" model="ir.actions.server">
+                <field name="name">Allocated Expenses</field>
+                <field name="model_id" ref="model_financing_contract_contract"/>
+                <field name="state">code</field>
+                <field name="code">action = obj.allocated_expenses_report(context=context)</field>
+            </record>
+
+            <record id="ir_allocated_expenses_report" model="ir.values">
+                <field eval="'client_print_multi'" name="key2"/>
+                <field eval="'financing.contract.contract'" name="model"/>
+                <field name="name">Allocated Expenses</field>
+                <field eval="'ir.actions.server,%d'%act_allocated_expenses_report" name="value"/>
+                <field eval="True" name="object"/>
+                <field name="sequence" eval="1"/>
+            </record>
+
             <record id="action_open_analytic_lines_button" model="ir.actions.act_window">
                 <field name="name">Analytic Items</field>
                 <field name="res_model">account.analytic.line</field>
@@ -487,4 +519,4 @@
             </record>
 
        </data>
-</openerp> 
+</openerp>

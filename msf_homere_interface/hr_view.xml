@@ -15,10 +15,11 @@
             <form string="Employee">
                 <group colspan="4" col="8">
                     <field name="allow_edition" invisible="1"/>
+                    <field name="ex_allow_edition" invisible="1"/>
                     <field colspan="6" name="name" attrs="{'readonly': [('employee_type', '=', 'local'), ('allow_edition', '=', False)]}"/>
                     <field name="user_id" on_change="onchange_user(user_id)" attrs="{'readonly': [('employee_type', '=', 'local'), ('allow_edition', '=', False)]}"/>
                     <field name="company_id" widget="selection" on_change="onchange_company(company_id)" attrs="{'readonly': [('employee_type', '=', 'local'), ('allow_edition', '=', False)]}"/>
-                    <field name="active" attrs="{'readonly': [('employee_type', '=', 'local'), ('allow_edition', '=', False)]}"/>
+                    <field name="active" />
                     <field name="employee_type" attrs="{'readonly': [('employee_type', '=', 'local'), ('allow_edition', '=', False)]}" on_change="onchange_type(employee_type)"/>
                     <newline/>
                     <field name="department_id" widget="selection" attrs="{'readonly': [('employee_type', '=', 'local'), ('allow_edition', '=', False)]}"/>
@@ -38,7 +39,7 @@
                             <separator colspan="2" string="Social IDs"/>
                             <field name="ssnid" attrs="{'readonly': [('employee_type', '=', 'local'), ('allow_edition', '=', False)]}"/>
                             <field name="sinid" attrs="{'readonly': [('employee_type', '=', 'local'), ('allow_edition', '=', False)]}"/>
-                            <field name="identification_id" attrs="{'readonly': [('employee_type', '=', 'local'), ('allow_edition', '=', False)], 'required': [('employee_type', '=', 'local')]}"/>
+                            <field name="identification_id" attrs="{'readonly': ['|', '&amp;', ('employee_type', '=', 'local'), ('allow_edition', '=', False), '&amp;', ('employee_type', '=', 'ex'), ('ex_allow_edition', '=', False)], 'required': [('employee_type', 'in', ('local', 'ex'))]}"/>
                             <field name="passport_id" attrs="{'readonly': [('employee_type', '=', 'local'), ('allow_edition', '=', False)]}"/>
                         </group>
                         <group col="2" colspan="2">
@@ -127,6 +128,7 @@
         <field name="name">editable.view.employee.tree</field>
         <field name="model">hr.employee</field>
         <field name="type">tree</field>
+        <field name="priority" eval="10" />
         <field name="arch" type="xml">
             <tree string="Employees" editable="top" colors="red:not active">
                 <field name="allow_edition" invisible="1"/>
@@ -185,9 +187,11 @@
         <field name="name">view.employee.filter.2</field>
         <field name="model">hr.employee</field>
         <field name="type">search</field>
+        <field name="priority" eval="15"/>
         <field name="arch" type="xml">
             <search>
-                <filter icon="terp-personal+" domain="[('active','=',True)]" name="active" string="Active" groups="base.group_extended"/>
+
+                <filter icon="terp-personal+" name="inactive" string="Show Inactive" domain="[('active', '=', False)]" groups="base.group_extended"/>
                 <separator orientation="vertical" />
                 <field name="name"/>
                 <field name="job_id" widget="selection"/>

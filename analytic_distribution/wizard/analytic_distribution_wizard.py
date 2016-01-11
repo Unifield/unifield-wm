@@ -63,6 +63,7 @@ class analytic_distribution_wizard_lines(osv.osv_memory):
             #+ to construct object research !
         'destination_id': fields.many2one('account.analytic.account', string="Destination", required=True,
             domain="[('type', '!=', 'view'), ('category', '=', 'DEST'), ('state', '=', 'open')]"),
+        'is_percentage_amount_touched': fields.boolean('Is percentage/amount updated ?', invisible=True),
     }
 
     def default_get(self, cr, uid, fields, context=None):
@@ -142,6 +143,7 @@ class analytic_distribution_wizard_lines(osv.osv_memory):
         'percentage': _get_remaining_allocation,
         'amount': _get_remaining_allocation,
         'type': lambda *a: 'cost.center',
+        'is_percentage_amount_touched': False,
     }
 
     def onchange_percentage(self, cr, uid, ids, percentage, total_amount):
@@ -153,7 +155,7 @@ class analytic_distribution_wizard_lines(osv.osv_memory):
         if not percentage or not total_amount:
             return {}
         amount = abs((total_amount * percentage) / 100)
-        return {'value': {'amount': amount}}
+        return {'value': {'amount': amount, 'is_percentage_amount_touched': True}}
 
     def onchange_amount(self, cr, uid, ids, amount, total_amount):
         """
@@ -164,7 +166,7 @@ class analytic_distribution_wizard_lines(osv.osv_memory):
         if not amount or not total_amount:
             return {}
         percentage = abs((amount / total_amount) * 100)
-        return {'value': {'percentage': percentage}}
+        return {'value': {'percentage': percentage, 'is_percentage_amount_touched': True}}
 
     def fields_view_get(self, cr, uid, view_id=None, view_type='form', context=None, toolbar=False, submenu=False):
         """
@@ -352,8 +354,14 @@ class analytic_distribution_wizard_lines(osv.osv_memory):
             wiz = self.browse(cr, uid, ids, context=context)
             if wiz and wiz[0].wizard_id and wiz[0].wizard_id.total_amount:
                 vals.update({'percentage': abs((vals.get('amount') / wiz[0].wizard_id.total_amount) * 100.0)})
-        if vals.get('percentage', False) == 0.0:
-            raise osv.except_osv(_('Error'), _('0 is not allowed as percentage value!'))
+        if vals.get('is_percentage_amount_touched', False):
+            if vals.get('percentage', False) == 0.0:
+                raise osv.except_osv(_('Error'), _('0 is not allowed as percentage value!'))
+        else:
+            if 'percentage' in vals:
+                del vals['percentage']
+            if 'amount' in vals:
+                del vals['amount']
         res = super(analytic_distribution_wizard_lines, self).write(cr, uid, ids, vals, context=context)
         # Retrieve wizard_id field
         data = self.read(cr, uid, [ids[0]], ['wizard_id'], context=context)
@@ -500,7 +508,7 @@ class analytic_distribution_wizard(osv.osv_memory):
             if el.commitment_line_id and el.commitment_line_id.commit_id and el.commitment_line_id.commit_id.state in ['done']:
                 res[el.id] = False
             # verify accrual line state
-            if el.accrual_line_id and el.accrual_line_id.state in ['posted']:
+            if el.accrual_line_id and el.accrual_line_id.state != 'draft':
                 res[el.id] = False
             # verify sale order state
             if el.sale_order_id and el.sale_order_id.state not in ['draft', 'validated']:
@@ -509,10 +517,20 @@ class analytic_distribution_wizard(osv.osv_memory):
             if el.sale_order_line_id and el.sale_order_line_id.order_id and el.sale_order_line_id.order_id.state not in ['draft', 'validated']:
                 res[el.id] = False
             # verify move state
+            # UFTP-363: Do not edit any element of JI or JE if the JE is imported
             if el.move_id and el.move_id.state not in ['draft']:
+                res[el.id] = False
+            if el.move_id and el.move_id.imported is True and el.move_id.state not in ['draft']:
+                # US-99 JE imported posted: AD not writable
                 res[el.id] = False
             if el.move_line_id and el.move_line_id.move_id and el.move_line_id.move_id.state not in ['draft'] and not context.get('from_correction', False):
                 res[el.id] = False
+            if el.move_line_id and el.move_line_id.move_id and el.move_line_id.move_id.imported:
+                # US-99 JI imported not draft: AD not writable
+                # (from correction wizard: always writable)
+                if not context.get('from_correction', False) and \
+                    el.move_id.state and el.move_id.state not in ['draft']:
+                    res[el.id] = False
         return res
 
     def _have_header(self, cr, uid, ids, name, args, context=None):
@@ -600,7 +618,6 @@ class analytic_distribution_wizard(osv.osv_memory):
         'sale_order_id': fields.many2one('sale.order', string="Sale Order"),
         'sale_order_line_id': fields.many2one('sale.order.line', string="Sale Order Line"),
         'amount': fields.function(_get_amount, method=True, string="Total amount", type="float", readonly=True),
-        'from_direct_inv': fields.many2one('account.bank.statement.line', string="Register Line For Direct Invoice"),
         'posting_date': fields.date('Posting date', readonly=True),
         'document_date': fields.date('Document date', readonly=True),
         'register_line_state': fields.function(_get_register_line_state, method=True, string='Register line state', type='selection', selection=[('draft', 'Draft'), ('temp', 'Temp'), ('hard', 'Hard'), ('unknown', 'Unknown')], readonly=True, store=False),
@@ -612,7 +629,6 @@ class analytic_distribution_wizard(osv.osv_memory):
     _defaults = {
         'state': lambda *a: 'draft',
         'entry_mode': lambda *a: 'percentage',
-        'from_direct_inv': lambda *a: False,
     }
 
     def dummy(self, cr, uid, ids, context=None, *args, **kwargs):
@@ -805,7 +821,7 @@ class analytic_distribution_wizard(osv.osv_memory):
                     'currency_id': wizard.currency_id and wizard.currency_id.id or False, 'analytic_id': el[0], 'destination_id': el[1]}, context=context)
             # else change current cost center
             else:
-                res = cc_obj.write(cr, uid, search_ids, {'percentage': cc_data[el]}, context=context)
+                res = cc_obj.write(cr, uid, search_ids, {'percentage': cc_data[el], 'is_percentage_amount_touched': True}, context=context)
             if res:
                 update_lines.append(res)
         # Delete useless cost center lines
@@ -902,6 +918,7 @@ class analytic_distribution_wizard(osv.osv_memory):
             if line in wiz_lines:
                 wiz_lines.remove(line)
                 processed_line_ids.append(line.get('id'))
+        distrib_changed = len(wiz_lines) > 0
         # Write changes for line that already exists
         for i in range(0,len(wiz_lines)):
             line = wiz_lines[i]
@@ -927,8 +944,9 @@ class analytic_distribution_wizard(osv.osv_memory):
         search_ids = line_obj.search(cr, uid, [('distribution_id', '=', distrib.id)], context=context)
         for obj_id in search_ids:
             if obj_id not in processed_line_ids:
+                distrib_changed = True
                 line_obj.unlink(cr, uid, obj_id, context=context)
-        return True
+        return distrib_changed
 
     def _check_analytic_account_validity(self, cr, uid, ids, context=None):
         """
@@ -959,10 +977,25 @@ class analytic_distribution_wizard(osv.osv_memory):
             # For funding pool analytic account, check is done on DOCUMENT date. It HAVE TO BE in context to be well processed (filter_active is a function that need a context)
             if w.distribution_id and w.document_date:
                 # We only check funding pool distribution line on which there is funding pool analytic account
-                for fpline in self.pool.get('funding.pool.distribution.line').browse(cr, uid, [x.id for x in w.distribution_id.funding_pool_lines], {'date': w.posting_date}):
+                # US-419: Fixed the typo error, to use posting date instead of document date
+                for fpline in self.pool.get('funding.pool.distribution.line').browse(cr, uid, [x.id for x in w.distribution_id.funding_pool_lines], {'date': w.document_date}):
                     if not fpline.analytic_id.filter_active:
                         raise osv.except_osv(_('Error'), _('Funding Pool %s is not active at this date: %s') % (fpline.analytic_id.code or '', w.document_date))
         return True
+
+    def _check_open_wizard_account_invoice(self, cr, uid, wiz, context):
+        if context.get('from_register') and wiz and wiz.invoice_id and wiz.invoice_id.is_direct_invoice:
+            invoice_id = wiz.invoice_id.id
+        elif context.get('from_register') and wiz and wiz.invoice_line_id.invoice_id and wiz.invoice_line_id.invoice_id.is_direct_invoice:
+            invoice_id = wiz.invoice_line_id.invoice_id.id
+        else:
+            invoice_id = False
+
+        if invoice_id:
+            st_obj = self.pool.get('account.bank.statement.line')
+            st_id = st_obj.search(cr, uid, [('invoice_id', '=', invoice_id)], context=context)
+            return st_obj.button_open_invoice(cr, uid, st_id, context=context)
+        return False
 
     def button_confirm(self, cr, uid, ids, context=None):
         """
@@ -970,13 +1003,28 @@ class analytic_distribution_wizard(osv.osv_memory):
         """
         if not context:
             context = {}
-
         if isinstance(ids, (int, long)):
             ids = [ids]
+        wiz2 = self.browse(cr, uid, ids, context=context)[0]
+        line_totals = 0.0
+        if wiz2.state == 'cc':
+            # supply mode
+            for line in wiz2.line_ids:
+                line_totals += line.amount
+        else:
+            for line in wiz2.fp_line_ids:
+                line_totals += line.amount
+
+        if abs(wiz2.amount - line_totals) > 10**-3:
+            raise osv.except_osv(_('Error'), _('Line amounts do not equal the total.'))
+
         o2m_toreload = {}
         if context.get('from_list_grid'):
             o2m_toreload['o2m_refresh'] = context['from_list_grid']
         for wiz in self.browse(cr, uid, ids, context=context):
+            # Check if we come from a hard posted register line
+            if wiz and (wiz.register_line_id and wiz.register_line_id.state == 'hard'):
+                raise osv.except_osv(_('Error'), _('Change allocation on a hard posted register line is forbidden!'))
             # Update cost center lines
             if not self.update_cost_center_lines(cr, uid, wiz.id, context=context):
                 raise osv.except_osv(_('Error'), _('Cost center update failure.'))
@@ -1004,9 +1052,10 @@ class analytic_distribution_wizard(osv.osv_memory):
                         obj_id = getattr(wiz, el[0], False).id
                         self.pool.get(el[1]).write(cr, uid, [obj_id], {'analytic_distribution_id': distrib_id}, context=context)
             # Finally do registration for each type
+            new_distrib = False
             for line_type in ['cost.center', 'funding.pool', 'free.1', 'free.2']:
                 # Compare and write modifications done on analytic lines
-                self.compare_and_write_modifications(cr, uid, wiz.id, line_type, context=context)
+                new_distrib = self.compare_and_write_modifications(cr, uid, wiz.id, line_type, context=context) or new_distrib
                 # Create funding pool lines from CC lines if wizard is from PO/FO
                 # PAY ATTENTION THAT break avoid problem that delete new created funding pool
                 if line_type == 'cost.center' and wiz.state == 'cc' and (wiz.purchase_id or wiz.purchase_line_id or wiz.sale_order_id or wiz.sale_order_line_id):
@@ -1044,8 +1093,11 @@ class analytic_distribution_wizard(osv.osv_memory):
                     'res_id': direct_invoice_id,
                     'context': context,
                 }
+        wizard_account_invoice = self._check_open_wizard_account_invoice(cr, uid, wiz, context)
+        if wizard_account_invoice:
+            return wizard_account_invoice
         # Validate account_move if we come from a Journal Entry or a Journal Item
-        if wiz and (wiz.move_id or wiz.move_line_id):
+        if wiz and (wiz.move_id or wiz.move_line_id) and new_distrib:
             move_id = False
             if wiz.move_id:
                 move_id = wiz.move_id.id
@@ -1062,7 +1114,10 @@ class analytic_distribution_wizard(osv.osv_memory):
                     reversal = True
                 if line.corrected:
                     correction = True
+            # AD changed at header level: all JIs should recreate AJI
+            # if an AD is set on a new line, this JI and all JIs in the same move can be valide
             self.pool.get('account.move').validate(cr, uid, [move_id])
+
             # As analytic lines were deleted and recreated, we need to recreate links between reversal, corrections, etc.
             if reversal or correction:
                 for line in move.line_id:
@@ -1082,19 +1137,27 @@ class analytic_distribution_wizard(osv.osv_memory):
             # check account presence
             if not wiz.account_id:
                 raise osv.except_osv(_('Warning'), _('Seems that no G/L account was found for this Register Analytic Distribution Wizard. Please give one.'))
-            distribution_id = wiz.distribution_id and wiz.distribution_id.id or False
-            # write analytic distribution on move line and validate move
-            ml_ids = self.pool.get('account.move.line').search(cr, uid, [('account_id', '=', wiz.register_line_id.account_id.id), ('id', 'not in', [wiz.register_line_id.first_move_line_id.id]), ('move_id', 'in', [x and x.id for x in wiz.register_line_id.move_ids])])
-            # copy distribution
-            new_distrib_id = self.pool.get('analytic.distribution').copy(cr, uid, distribution_id, {}, context=context)
-            new_register_distribution_id = self.pool.get('analytic.distribution').copy(cr, uid, distribution_id, {}, context=context)
-            # write changes - first on account move line WITH account_id from wizard, THEN on register line with given account
-            self.pool.get('account.move.line').write(cr, uid, ml_ids, {'analytic_distribution_id': new_distrib_id, 'account_id': wiz.account_id.id}, check=False, update_check=False)
-            self.pool.get('account.bank.statement.line').write(cr, uid, [wiz.register_line_id.id], {'account_id': wiz.account_id.id, 'analytic_distribution_id': new_register_distribution_id}, context=context)
-            self.pool.get('account.move').validate(cr, uid, [x.id for x in wiz.register_line_id.move_ids])
-        # Update analytic lines
-        self.update_analytic_lines(cr, uid, ids, context=context)
+            if wiz.account_id.id != wiz.register_line_id.account_id.id or new_distrib:
+                distribution_id = wiz.distribution_id and wiz.distribution_id.id or False
+                # write analytic distribution on move line and validate move
+                ml_ids = self.pool.get('account.move.line').search(cr, uid, [('account_id', '=', wiz.register_line_id.account_id.id), ('id', 'not in', [wiz.register_line_id.first_move_line_id.id]), ('move_id', 'in', [x and x.id for x in wiz.register_line_id.move_ids])])
+                # copy distribution
+                new_distrib_id = self.pool.get('analytic.distribution').copy(cr, uid, distribution_id, {}, context=context)
+                new_register_distribution_id = self.pool.get('analytic.distribution').copy(cr, uid, distribution_id, {}, context=context)
+                # write changes - first on account move line WITH account_id from wizard, THEN on register line with given account
+                self.pool.get('account.move.line').write(cr, uid, ml_ids, {'analytic_distribution_id': new_distrib_id, 'account_id': wiz.account_id.id}, check=False, update_check=False)
+                self.pool.get('account.bank.statement.line').write(cr, uid, [wiz.register_line_id.id], {'account_id': wiz.account_id.id, 'analytic_distribution_id': new_register_distribution_id}, context=context)
+                # account.move validate is called in account.bank.statement.line write
+                #self.pool.get('account.move').validate(cr, uid, [x.id for x in wiz.register_line_id.move_ids])
+        elif new_distrib:
+            # Update analytic lines
+            self.update_analytic_lines(cr, uid, ids, context=context)
 
+        if wiz and wiz.move_line_id and wiz.move_line_id.move_id and \
+            wiz.move_line_id.move_id.imported:
+            # US-99 do not refresh lines as imported JE has no pencil
+            # (only AD wizard button allowed)
+            o2m_toreload = {}
         return_wiz =  dict(type='ir.actions.act_window_close', **o2m_toreload)
         if context.get("from_cash_return_analytic_dist"):
             # If the wizard was called from the cash return line, the perform some actions before returning back to the caller wizard
@@ -1128,8 +1191,6 @@ class analytic_distribution_wizard(osv.osv_memory):
                     'res_id': wizard_id,
                     'context': context,
                  }
-        elif wiz.from_direct_inv:
-            return self.pool.get('account.bank.statement.line').button_open_invoice(cr, uid, [wiz.from_direct_inv.id], context)
         return return_wiz
 
     def validate(self, cr, uid, wizard_id, context=None):
@@ -1246,6 +1307,11 @@ class analytic_distribution_wizard(osv.osv_memory):
             o2m_toreload['o2m_refresh'] = context['from_list_grid']
         # Retrieve some values to verify if we come from a direct invoice
         wiz = self.browse(cr, uid, ids, context=context)[0]
+        if wiz and wiz.move_line_id and wiz.move_line_id.move_id and \
+            wiz.move_line_id.move_id.imported:
+            # US-99 do not refresh lines as imported JE has no pencil
+            # (only AD wizard button allowed)
+            o2m_toreload = {}
         if wiz and (wiz.direct_invoice_id or wiz.direct_invoice_line_id):
             # Get direct_invoice id
             direct_invoice_id = (wiz.direct_invoice_id and wiz.direct_invoice_id.id) or \
@@ -1270,8 +1336,9 @@ class analytic_distribution_wizard(osv.osv_memory):
                     'res_id': direct_invoice_id,
                     'context': context,
                 }
-        elif wiz.from_direct_inv:
-            return self.pool.get('account.bank.statement.line').button_open_invoice(cr, uid, [wiz.from_direct_inv.id], context)
+        wizard_account_invoice = self._check_open_wizard_account_invoice(cr, uid, wiz, context)
+        if wizard_account_invoice:
+            return wizard_account_invoice
 
         return dict(type='ir.actions.act_window_close', **o2m_toreload)
 

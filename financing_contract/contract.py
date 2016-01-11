@@ -21,16 +21,19 @@
 import datetime
 from osv import fields, osv
 from tools.translate import _
+import netsvc
 
 class financing_contract_funding_pool_line(osv.osv):
     _name = "financing.contract.funding.pool.line"
     _description = "Funding pool line"
+    _rec_name = 'contract_id'
 
     _columns = {
         'contract_id': fields.many2one('financing.contract.format', 'Contract', required=True),
         'funding_pool_id': fields.many2one('account.analytic.account', 'Funding pool name', required=True),
         'funded': fields.boolean('Earmarked'),
         'total_project': fields.boolean('Total project'),
+        'instance_id': fields.many2one('msf.instance','Proprietary Instance'),
     }
 
     _defaults = {
@@ -56,10 +59,20 @@ class financing_contract_funding_pool_line(osv.osv):
         return True
 
     def create(self, cr, uid, vals, context=None):
+        # US-113: Check if the call is from sync update
+        if context.get('sync_update_execution') and vals.get('contract_id', False):
+            # US-113: and if there is any financing contract existed for this format, if no, then ignore this call
+            exist = self.pool.get('financing.contract.contract').search(cr, uid, [('format_id', '=', vals['contract_id'])])
+            if not exist:
+                return None
+
         result = super(financing_contract_funding_pool_line, self).create(cr, uid, vals, context=context)
         # when a new funding pool is added to contract, then add all of the cost centers to the cost center tab, unless
         # the cost center is already there. No action is taken when a cost center is deleted
-        if 'contract_id' in vals and 'funding_pool_id' in vals:
+
+        #US-345: the following block cannot be executed in the sync context, because it would then reset all costcenters from the funding pools!
+        # making that the deleted costcenters from the sender were not taken into account
+        if not context.get('sync_update_execution') and 'contract_id' in vals and 'funding_pool_id' in vals:
             # get the cc ids from for this funding pool
             quad_obj = self.pool.get('financing.contract.account.quadruplet')
             quad_ids = quad_obj.search(cr, uid, [('funding_pool_id','=',vals['funding_pool_id'])],context=context)
@@ -91,6 +104,15 @@ class financing_contract_funding_pool_line(osv.osv):
         """
         if context is None:
             context = {}
+
+        # US-180: Check if it comes from the sync update, and if any contract  
+        if context.get('sync_update_execution') and vals.get('format_id', False):
+            # Check if this format line belongs to any financing contract/format
+            ctr_obj = self.pool.get('financing.contract.contract')
+            exist = ctr_obj.search(cr, uid, [('format_id', '=', vals['format_id'])])
+            if not exist:
+                return True
+
         res = super(financing_contract_funding_pool_line, self).write(cr, uid, ids, vals, context=context)
         self.check_fp(cr, uid, ids)
         return res
@@ -103,11 +125,16 @@ class financing_contract_contract(osv.osv):
     _inherits = {"financing.contract.format": "format_id"}
     _trace = True
 
+    def contract_open_proxy(self, cr, uid, ids, context=None):
+        # utp-1030/7: check grant amount when going on in workflow
+        return self._check_grant_amount_proxy(cr, uid, ids,
+            'contract_open', context=context)
+
     def contract_open(self, cr, uid, ids, *args):
         self.write(cr, uid, ids, {
             'state': 'open',
             'open_date': datetime.date.today().strftime('%Y-%m-%d'),
-            'soft_closed_date': None
+            'soft_closed_date': None,
         })
         return True
 
@@ -138,6 +165,11 @@ class financing_contract_contract(osv.osv):
                     res += [x and x[0] for x in sql_res]
         return res
 
+    def contract_soft_closed_proxy(self, cr, uid, ids, context=None):
+        # utp-1030/7: check grant amount when going on in workflow
+        return self._check_grant_amount_proxy(cr, uid, ids,
+            'contract_soft_closed', context=context)
+
     def contract_soft_closed(self, cr, uid, ids, *args):
         """
         If some draft/temp posted register lines that have an analytic distribution in which funding pool lines have an analytic account set to those given in contract, then raise an error.
@@ -160,39 +192,70 @@ class financing_contract_contract(osv.osv):
         # Normal behaviour (change contract ' state)
         self.write(cr, uid, ids, {
             'state': 'soft_closed',
-            'soft_closed_date': datetime.date.today().strftime('%Y-%m-%d')
+            'soft_closed_date': datetime.date.today().strftime('%Y-%m-%d'),
         })
         return True
+
+    def contract_hard_closed_proxy(self, cr, uid, ids, context=None):
+        # utp-1030/7: check grant amount when going on in workflow
+        return self._check_grant_amount_proxy(cr, uid, ids,
+            'contract_hard_closed', context=context)
 
     def contract_hard_closed(self, cr, uid, ids, *args):
         self.write(cr, uid, ids, {
             'state': 'hard_closed',
-            'hard_closed_date': datetime.date.today().strftime('%Y-%m-%d')
+            'hard_closed_date': datetime.date.today().strftime('%Y-%m-%d'),
         })
         return True
 
-    def get_contract_domain(self, cr, uid, browse_contract, reporting_type=None, context=None):
-        # we update the context with the contract reporting type and currency
+    def add_general_domain(self, cr, uid, domain, browse_format_id, reporting_type, context=None):
         format_line_obj = self.pool.get('financing.contract.format.line')
+        general_domain = format_line_obj._get_general_domain(cr, uid, browse_format_id, reporting_type, context=context)
+        # UTP-1063: Don't use MSF Private Funds anymore
+        try:
+            fp_id = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'analytic_distribution', 'analytic_account_msf_private_funds')[1]
+        except Exception as e:
+            fp_id = 0
+
+        #US-385: Move the funding pool and cost center outside the loop, put them at header of the domain
+        temp_domain = []
+        cc_domain = eval(general_domain['cost_center_domain'])
+        date_domain = eval(general_domain['date_domain'])
+        if general_domain.get('funding_pool_domain', False):
+            temp_domain = ['&', '&'] + [cc_domain] + [eval(general_domain['funding_pool_domain'])] + date_domain
+
+        res = [('account_id', '!=', fp_id)]
+        if domain:
+            res = ['&'] + res + domain
+
+        if temp_domain:
+            res = ['&'] + temp_domain + res
+        return res
+
+    def get_contract_domain(self, cr, uid, browse_contract, reporting_type=None, context=None):
         # Values to be set
         if reporting_type is None:
             reporting_type = browse_contract.reporting_type
 
         analytic_domain = False
         isFirst = True
+
+        format_line_obj = self.pool.get('financing.contract.format.line')
+
         # parse parent lines (either value or sum of children's values)
         for line in browse_contract.actual_line_ids:
             if not line.parent_id:
                 # Calculate the all the children lines account domain
                 temp = format_line_obj._get_analytic_domain(cr, uid, line, reporting_type, isFirst, context=context)
                 if analytic_domain:
-                    # if there exist already previous view, just add an OR operator
-                    analytic_domain = ['|'] + analytic_domain + temp
+                    if temp: # US-385: Added this check, otherwise there will be a extra "|" causing error! 
+                        # if there exist already previous view, just add an OR operator
+                        analytic_domain = ['|'] + analytic_domain + temp
                 else:
                     # first time
                     analytic_domain = temp
 
-        return analytic_domain
+        return self.add_general_domain(cr, uid, analytic_domain, browse_contract.format_id, reporting_type, context)
 
     def _get_overhead_amount(self, cr, uid, ids, field_name=None, arg=None, context=None):
         """
@@ -207,6 +270,30 @@ class financing_contract_contract(osv.osv):
             elif budget.overhead_type == 'grant_percentage':
                 res[budget.id] = round(budget.grant_amount * budget.overhead_percentage / 100.0)
         return res
+
+    def __get_instance_level(self, cr, uid, context=None):
+        """
+        get instance level (from connected user)
+        @return (instance id, instance level) or (False, False)
+        @rtype tuple(id, str)
+        """
+        # get company instance
+        user = self.pool.get('res.users').browse(cr, uid, [uid],
+            context=context)[0]
+        if user and user.company_id and user.company_id.instance_id:
+            instance_level = (user.company_id.instance_id.id,
+                user.company_id.instance_id.level, )
+        else:
+            instance_level = (False, False, )
+        return instance_level
+
+    def _get_instance_level(self, cr, uid, ids, field_name=None, arg=None,
+        context=None):
+        """ get instance level (from connected user) """
+        if not ids:
+            return {}
+        instance_level = self.__get_instance_level(cr, uid, context=context)[1]
+        return dict((id, instance_level) for id in ids)
 
     _columns = {
         'name': fields.char('Financing contract name', size=64, required=True),
@@ -229,7 +316,8 @@ class financing_contract_contract(osv.osv):
         'instance_id': fields.many2one('msf.instance','Proprietary Instance', required=True),
         # Define for _inherits
         'format_id': fields.many2one('financing.contract.format', 'Format', ondelete="cascade"),
-        'fp_added_flag': fields.boolean('Flag when new FP is added')
+        'fp_added_flag': fields.boolean('Flag when new FP is added'),
+        'instance_level': fields.function(_get_instance_level, method=True, string="Current instance level", type="char", readonly=True),  # UFTP-343
     }
 
     _defaults = {
@@ -267,6 +355,7 @@ class financing_contract_contract(osv.osv):
         self.pool.get('financing.contract.format').copy_format_lines(cr, uid, contract.format_id.id, copy.format_id.id, context=context)
         return copy_id
 
+
     def onchange_donor_id(self, cr, uid, ids, donor_id, format_id, actual_line_ids, context=None):
         res = {}
         if donor_id:
@@ -278,8 +367,10 @@ class financing_contract_contract(osv.osv):
                     'reporting_type': source_format.reporting_type,
                     'overhead_type': source_format.overhead_type,
                     'overhead_percentage': source_format.overhead_percentage,
+                    'reporting_currency': donor.reporting_currency.id,
                 }
                 res = {'value': format_vals}
+
         return res
 
     def onchange_currency_table(self, cr, uid, ids, currency_table_id, reporting_currency_id, context=None):
@@ -323,6 +414,7 @@ class financing_contract_contract(osv.osv):
                                                                browse_contract.reporting_type,
                                                                True,
                                                                context=context)
+        analytic_domain = self.pool.get('financing.contract.contract').add_general_domain(cr, uid, analytic_domain, browse_format_line.format_id, browse_contract.reporting_type, context)
         vals = {'name': browse_format_line.name,
                 'code': browse_format_line.code,
                 'line_type': browse_format_line.line_type,
@@ -443,6 +535,7 @@ class financing_contract_contract(osv.osv):
     def menu_project_expense_report(self, cr, uid, ids, context=None):
         if context is None:
             context = {}
+
         wiz_obj = self.pool.get('wizard.expense.report')
         wiz_id = wiz_obj.create(cr, uid, {'reporting_type': 'project',
                                           'filename': 'project_expenses.csv',
@@ -475,10 +568,52 @@ class financing_contract_contract(osv.osv):
                 'context': context,
         }
 
+    def allocated_expenses_report(self, cr, uid, ids, context=None):
+        """
+        Check if contract gives some FP. If not raise an error.
+        Otherwise launch the report.
+        """
+        # Some verifications
+        if not context:
+            context = {}
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+        for contract in self.browse(cr, uid, ids, context=context):
+            if not contract.format_id.funding_pool_ids:
+                raise osv.except_osv(_('Error'), _('No FP selected in the financing contract: %s') % (contract.name or ''))
+        # We launch the report
+        return {
+            'type': 'ir.actions.report.xml',
+            'report_name': 'financing.allocated.expenses.2',
+            'datas': {'ids': ids},
+            'context': context,
+        }
+
+    def default_get(self, cr, uid, fields, context=None):
+        res = super(financing_contract_contract, self).default_get(cr, uid,
+            fields, context=context)
+
+        instance_id, instance_level = self.__get_instance_level(cr, uid,
+            context=context)
+        res['instance_level'] = instance_level
+        if instance_level and instance_level == 'coordo':
+            """
+            UFTP-343
+            - coordo level: we can only pick 'this' instance so instance
+                is set in create and instance is readonly
+            - hq: instance can be modified and picked from coordo instances
+            - project: no right to create a financial contract at all,
+                so keep instance readonly and empty to prevent any creation
+                (in case of right issue)
+            """
+            res['instance_id'] = instance_id
+        return res
+
     def create(self, cr, uid, vals, context=None):
         # Do not copy lines from the Donor on create if coming from the sync server
         if context is None:
             context = {}
+
         result = super(financing_contract_contract, self).create(cr, uid, vals, context=context)
         if not context.get('sync_update_execution'):
             contract = self.browse(cr, uid, result, context=context)
@@ -519,6 +654,12 @@ class financing_contract_contract(osv.osv):
         # get list of all valid ids for this contract
         format =  self.browse(cr,uid,ids,context=context)[0].format_id
         funding_pool_ids = [x.funding_pool_id.id for x in format.funding_pool_ids]
+
+        earmarked_funding_pools = [x.funded for x in format.funding_pool_ids]
+        if not any(earmarked_funding_pools) and format.reporting_type == 'allocated':
+            raise osv.except_osv(_('Error'), _("At least one funding pool should be defined as earmarked in the funding pool list of this financing contract."))
+
+
         cost_center_ids = [x.id for x in format.cost_center_ids]
 
         quad_obj = self.pool.get('financing.contract.account.quadruplet')
@@ -528,12 +669,127 @@ class financing_contract_contract(osv.osv):
         format_obj = self.pool.get('financing.contract.format')
         format_line_obj = self.pool.get('financing.contract.format.line')
         format_browse = format_obj.browse(cr, uid, format.id, context=context)
+        fcfpl_line_obj = self.pool.get('financing.contract.funding.pool.line')
+
+        # US-113: Populate the instance_id down to format, format line and also funding pool line
+        instance_id = vals.get('instance_id', False)
+        if not instance_id:
+            # US-330: If the prop instance is not in vals, still check in the FC
+            instance_id =  self.browse(cr,uid,ids,context=context)[0].instance_id
+            if instance_id:
+                instance_id = instance_id.id
+
+        if instance_id:
+            if not format.hidden_instance_id or format.hidden_instance_id.id != instance_id:
+                format_obj.write(cr, uid, format.id, {'hidden_instance_id': instance_id}, context=context)
+
         for format_line in format_browse.actual_line_ids:
             account_quadruplet_ids = [account_quadruplet.id for account_quadruplet in format_line.account_quadruplet_ids]
             filtered_quads = [x for x in account_quadruplet_ids if x in valid_quad_ids]
             list_diff = set(account_quadruplet_ids).symmetric_difference(set(filtered_quads))
+            list_to_update = {}
             if list_diff:
-                ret = format_line_obj.write(cr, uid, format_line.id, {'account_quadruplet_ids': [(6, 0, filtered_quads)]}, context=context)
+                list_to_update['account_quadruplet_ids'] = [(6, 0, filtered_quads)]
+            if instance_id:
+                if not format_line.instance_id or format_line.instance_id.id != instance_id:
+                    list_to_update['instance_id'] = instance_id
+            if len(list_to_update) > 0:
+                format_line_obj.write(cr, uid, format_line.id, list_to_update, context=context)
+
+        # populate the instance_id to the funding pool lines
+        if instance_id:
+            for fpid in format.funding_pool_ids:
+                list_to_update = {}
+                if not fpid.instance_id or fpid.instance_id.id != instance_id:
+                    list_to_update['instance_id'] = instance_id
+                if len(list_to_update) > 0:
+                    fcfpl_line_obj.write(cr, uid, fpid.id, list_to_update, context=context)
+
+        return res
+
+    def _check_grant_amount_proxy(self, cr, uid, ids, signal, context=None):
+        if isinstance(ids, (long, int)):
+            ids = [ids]
+        check_action = self._check_grant_amount(cr, uid, ids, signal,
+            context=context)
+        if check_action:
+            return check_action
+        wf_service = netsvc.LocalService("workflow")
+        for id in ids:
+            wf_service.trg_validate(uid, self._name, id, signal, cr)
+        return True
+
+    def _check_grant_amount(self, cr, uid, ids, signal, context=None):
+        """
+        UTP-1030/7: display a warning wizard if funded budget <> grant amount
+        except for "Total project only"
+        :return action to forward or False to let default behaviour
+        :rtype dict/False
+        """
+        if not ids:
+            return False
+        if isinstance(ids, (long, int)):
+            ids = [ids]
+        if len(ids) != 1:
+            return False  # only warn from form (1 id)
+
+        self_br = self.browse(cr, uid, ids[0], context=context)
+        if not self_br.reporting_type or self_br.reporting_type == 'project':
+            return False  # no warn for "Total project only"
+
+        # proceed check
+        funded_budget = 0.0
+        for rl in self_br.actual_line_ids:
+            if rl.line_type != 'view': #US-385: Exclude the view line in the calculation
+                funded_budget += rl.allocated_budget
+        if funded_budget != self_br.grant_amount:
+            if context is None:
+                context = {}
+            warn_msg = _("WARNING: 'Grant' amount is not equal to "
+                "'Funded - Budget'.\nGrant: %.2f\nFunded Budget: %.2f")
+            context['financing_contract_warning'] = {
+                'text': warn_msg % (self_br.grant_amount, funded_budget, ),
+                'signal': signal,
+                'res_id': ids[0],
+            }
+            view_id = self.pool.get('ir.model.data').get_object_reference(cr,
+                uid, 'financing_contract',
+                'view_financing_contract_contract_warning_form')[1]
+            return {
+                'name': 'Financing Contract Warning',
+                'type': 'ir.actions.act_window',
+                'res_model': 'wizard.financing.contract.contract.warning',
+                'view_type': 'form',
+                'view_mode': 'form',
+                'view_id': [view_id],
+                'target': 'new',
+                'context': context,
+            }
+
+        return False
+
+    # US-113: unlink all relevant objects of this FC, because it's not automatic and would left orphan data, also impact to the sync 
+    def unlink(self, cr, uid, ids, context=None):
+        format_obj = self.pool.get('financing.contract.format')
+        format_line_obj = self.pool.get('financing.contract.format.line')
+        fcfpl_line_obj = self.pool.get('financing.contract.funding.pool.line')
+
+        format_to_del = []
+        for fcc in self.browse(cr,uid,ids,context=context):
+            format_to_del.append(fcc.format_id.id)
+            for format_line in fcc.format_id.actual_line_ids:
+                format_line_obj.unlink(cr, uid, format_line.id, context)
+
+            for fpid in fcc.format_id.funding_pool_ids:
+                fcfpl_line_obj.unlink(cr, uid, fpid.id, context)
+
+        # the FC itself
+        res = super(financing_contract_contract, self).unlink(cr, uid, ids, context)
+
+        # then finally the format line attached to this FC
+        if format_to_del:
+            format_obj.unlink(cr, uid, format_to_del, context)
+
         return res
 
 financing_contract_contract()

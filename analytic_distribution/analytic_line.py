@@ -82,19 +82,22 @@ class analytic_line(osv.osv):
             context = {}
         res = {}
         for l in self.browse(cr, uid, ids, context):
-            res[l.id] = ''
-            if l.move_id:
-                res[l.id] = l.move_id.move_id.name
-            elif l.commitment_line_id:
-                res[l.id] = l.commitment_line_id.commit_id.name
-            elif l.imported_commitment:
-                res[l.id] = l.imported_entry_sequence
-            elif not l.move_id:
-                # UF-2217
-                # on create the value is inserted by a sql query, so we can retreive it after the insertion
-                # the field has store=True so we don't create a loop
-                # on write the value is not updated by the query, the method always returns the value set at creation
+            if l.entry_sequence:
                 res[l.id] = l.entry_sequence
+            else:
+                res[l.id] = ''
+                if l.move_id:
+                    res[l.id] = l.move_id.move_id.name
+                elif l.commitment_line_id:
+                    res[l.id] = l.commitment_line_id.commit_id.name
+                elif l.imported_commitment:
+                    res[l.id] = l.imported_entry_sequence
+                elif not l.move_id:
+                    # UF-2217
+                    # on create the value is inserted by a sql query, so we can retreive it after the insertion
+                    # the field has store=True so we don't create a loop
+                    # on write the value is not updated by the query, the method always returns the value set at creation
+                    res[l.id] = l.entry_sequence
         return res
 
     def _get_period_id(self, cr, uid, ids, field_name, args, context=None):
@@ -236,13 +239,26 @@ class analytic_line(osv.osv):
             return False
         if not date:
             date = strftime('%Y-%m-%d')
+
         # Prepare some value
         account = self.pool.get('account.analytic.account').browse(cr, uid, [account_id], context)[0]
         context.update({'from': 'mass_reallocation'}) # this permits reallocation to be accepted when rewrite analaytic lines
-        correction_journal_ids = self.pool.get('account.analytic.journal').search(cr, uid, [('type', '=', 'correction'), ('is_current_instance', '=', True)])
+        move_prefix = self.pool.get('res.users').browse(cr, uid, uid, context).company_id.instance_id.move_prefix
+
+        aaj_obj = self.pool.get('account.analytic.journal')
+        correction_journal_ids = aaj_obj.search(cr, uid, [('type', '=', 'correction'), ('is_current_instance', '=', True)])
         correction_journal_id = correction_journal_ids and correction_journal_ids[0] or False
         if not correction_journal_id:
             raise osv.except_osv(_('Error'), _('No analytic journal found for corrections!'))
+
+        # sequence info from GL journal
+        aj_obj = self.pool.get('account.journal')
+        gl_correction_journal_ids = aj_obj.search(cr, uid, [('type', '=', 'correction'), ('is_current_instance', '=', True)])
+        gl_correction_journal_id = gl_correction_journal_ids and gl_correction_journal_ids[0] or False
+        if not gl_correction_journal_id:
+            raise osv.except_osv(_('Error'), _('No GL journal found for corrections!'))
+        gl_correction_journal_rec = aj_obj.browse(cr, uid, gl_correction_journal_id, context=context)
+
         # Process lines
         for aline in self.browse(cr, uid, ids, context=context):
             if account.category in ['OC', 'DEST']:
@@ -252,13 +268,31 @@ class analytic_line(osv.osv):
                 fieldname = 'cost_center_id'
                 if account.category == 'DEST':
                     fieldname = 'destination_id'
-                # if period is not closed, so override line.
-                if period and period.state not in ['done', 'mission-closed']:
+
+                # update or reverse ?
+                update = period and period.state not in ['done', 'mission-closed']
+                if aline.journal_id.type == 'hq':
+                    # US-773/2: if HQ entry always like period closed fashion
+                    update = False
+
+                if update:
+                    # not mission close: override line
                     # Update account # Date: UTP-943 speak about original date for non closed periods
-                    self.write(cr, uid, [aline.id], {fieldname: account_id, 'date': aline.date,
-                        'source_date': aline.source_date or aline.date}, context=context)
+                    vals = {
+                        fieldname: account_id,
+                        'date': aline.date,
+                        'source_date': aline.source_date or aline.date,
+                    }
+                    self.write(cr, uid, [aline.id], vals, context=context)
                 # else reverse line before recreating them with right values
                 else:
+                    # mission close or + or HQ entry: reverse
+
+                    # compute entry sequence
+                    seq_num_ctx = period and {'fiscalyear_id': period.fiscalyear_id.id} or None
+                    seqnum = self.pool.get('ir.sequence').get_id(cr, uid, gl_correction_journal_rec.sequence_id.id, context=seq_num_ctx)
+                    entry_seq = "%s-%s-%s" % (move_prefix, gl_correction_journal_rec.code, seqnum)
+
                     # First reverse line
                     rev_ids = self.pool.get('account.analytic.line').reverse(cr, uid, [aline.id], posting_date=date)
                     # UTP-943: Shoud have a correction journal on these lines
@@ -276,9 +310,19 @@ class analytic_line(osv.osv):
                     self.pool.get('account.analytic.line').write(cr, uid, cor_ids, {'last_corrected_id': aline.id})
                     # finally flag analytic line as reallocated
                     self.pool.get('account.analytic.line').write(cr, uid, [aline.id], {'is_reallocated': True})
+
+                    if isinstance(rev_ids, (int, long, )):
+                        rev_ids = [rev_ids]
+                    if isinstance(cor_ids, (int, long, )):
+                        cor_ids = [cor_ids]
+                    for rev_cor_id in rev_ids + cor_ids:
+                        cr.execute('update account_analytic_line set entry_sequence = %s where id = %s', (entry_seq, rev_cor_id))
             else:
                 # Update account
                 self.write(cr, uid, [aline.id], {'account_id': account_id}, context=context)
+            # Set line as corrected upstream if we are in COORDO/HQ instance
+            if aline.move_id:
+                self.pool.get('account.move.line').corrected_upstream_marker(cr, uid, [aline.move_id.id], context=context)
         return True
 
     def check_analytic_account(self, cr, uid, ids, account_id, context=None):
@@ -351,6 +395,10 @@ class analytic_line(osv.osv):
                 # - the destination is in compatible account/destination tuple
                 if aline.cost_center_id and aline.cost_center_id.id in cc_ids and aline.general_account_id and aline.destination_id and (aline.general_account_id.id, aline.destination_id.id) in tuple_list:
                     res.append(aline.id)
+        elif account_type == "DEST":
+            for aline in self.browse(cr, uid, ids, context=context):
+                if aline.general_account_id and account_id in [x.id for x in aline.general_account_id.destination_ids]:
+                    res.append(aline.id)
         else:
             # Case of FREE1 and FREE2 lines
             for i in ids:
@@ -359,6 +407,126 @@ class analytic_line(osv.osv):
         for e in expired_date_ids:
             if e in res:
                 res.remove(e)
+        return res
+
+    def check_dest_cc_fp_compatibility(self, cr, uid, ids,
+        dest_id=False, cc_id=False, fp_id=False,
+        from_import=False, from_import_general_account_id=False,
+        from_import_posting_date=False,
+        context=None):
+        """
+        check compatibility of new dest/cc/fp to reallocate
+        :return list of not compatible entries tuples
+        :rtype: list of tuples [(id, entry_sequence, reason), ]
+        """
+        def check_date(aaa_br, posting_date):
+            if aaa_br.date_start and aaa_br.date:
+                return aaa_br.date > posting_date >= aaa_br.date_start or False
+            elif aaa_br.date_start:
+                return posting_date >= aaa_br.date_start or False
+            return False
+
+        def check_entry(id, entry_sequence,
+            general_account_br, posting_date,
+            new_dest_id, new_dest_br,
+            new_cc_id, new_cc_br,
+            new_fp_id, new_fp_br):
+            if not general_account_br.is_analytic_addicted:
+                res.append((id, entry_sequence, ''))
+                return False
+
+            # check cost center with general account
+            dest_ids = [d.id for d in general_account_br.destination_ids]
+            if not new_dest_id in dest_ids:
+                # not compatible with general account
+                res.append((id, entry_sequence, 'DEST'))
+                return False
+
+            # check funding pool (expect for MSF Private Fund)
+            if not new_fp_id == msf_pf_id:  # all OK for MSF Private Fund
+                # - cost center and funding pool compatibility
+                cc_ids = [cc.id for cc in new_fp_br.cost_center_ids]
+                if not new_cc_id in cc_ids:
+                    # not compatible with CC
+                    res.append((id, entry_sequence, 'CC'))
+                    return False
+
+                # - destination / account
+                acc_dest = (general_account_br.id, new_dest_id)
+                if acc_dest not in [x.account_id and x.destination_id and \
+                    (x.account_id.id, x.destination_id.id) \
+                        for x in new_fp_br.tuple_destination_account_ids]:
+                    # not compatible with dest/account
+                    res.append((id, entry_sequence, 'account/dest'))
+                    return False
+
+            # check active date
+            if not check_date(new_dest_br, posting_date):
+                res.append((id, entry_sequence, 'DEST date'))
+                return False
+            if not check_date(new_cc_br, posting_date):
+                res.append((id, entry_sequence, 'CC date'))
+                return False
+            if new_fp_id != msf_pf_id and not \
+                check_date(new_fp_br, posting_date):
+                res.append((id, entry_sequence, 'FP date'))
+                return False
+
+            return True
+
+        res = []
+        if from_import:
+            if not dest_id or not cc_id or not fp_id or \
+                not from_import_general_account_id or \
+                not from_import_posting_date:
+                return [(False, '', '')]  # tripplet required at import
+        elif not ids:
+            return res
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+        if not dest_id and not cc_id and not fp_id:
+            return [(id, '', '') for id in ids]  # all uncompatible
+        if context is None:
+            context = {}
+
+        aaa_obj = self.pool.get('account.analytic.account')
+        if dest_id:
+            dest_br = aaa_obj.browse(cr, uid, dest_id, context=context)
+        else:
+            dest_br = False
+        if cc_id:
+            cc_br = aaa_obj.browse(cr, uid, cc_id, context=context)
+        else:
+            cc_br = False
+        if fp_id:
+            fp_br = aaa_obj.browse(cr, uid, fp_id, context=context)
+        else:
+            fp_br = False
+
+        # MSF Private Fund
+        msf_pf_id = self.pool.get('ir.model.data').get_object_reference(cr, uid,
+            'analytic_distribution', 'analytic_account_msf_private_funds')[1]
+
+        if from_import:
+            account_br = self.pool.get('account.account').browse(cr, uid,
+                from_import_general_account_id, context=context)
+            check_entry(False, '', account_br, from_import_posting_date,
+                dest_id, dest_br, cc_id, cc_br, fp_id, fp_br)
+        else:
+            for self_br in self.browse(cr, uid, ids, context=context):
+                new_dest_id = dest_id or self_br.destination_id.id
+                new_dest_br = dest_br or self_br.destination_id
+                new_cc_id = cc_id or self_br.cost_center_id.id
+                new_cc_br = cc_br or self_br.cost_center_id
+                new_fp_id = fp_id or self_br.account_id.id
+                new_fp_br = fp_br or self_br.account_id
+
+                check_entry(self_br.id, self_br.entry_sequence,
+                    self_br.general_account_id, self_br.date,
+                    new_dest_id, new_dest_br,
+                    new_cc_id, new_cc_br,
+                    new_fp_id, new_fp_br)
+
         return res
 
 analytic_line()

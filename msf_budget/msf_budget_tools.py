@@ -70,7 +70,7 @@ class msf_budget_tools(osv.osv):
             SELECT id, CASE WHEN type != 'view' THEN 'normal' ELSE 'view' END AS account_type, parent_id
             FROM account_account
             WHERE id IN %s
-            ORDER BY parent_id ASC"""
+            ORDER BY parent_left"""
         cr.execute(sql, (tuple(account_ids),))
         if not cr.rowcount:
             raise osv.except_osv(_('Error'), _('Unable to find needed info.'))

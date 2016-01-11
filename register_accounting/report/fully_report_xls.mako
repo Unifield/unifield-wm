@@ -467,6 +467,11 @@
         <Cell ss:StyleID="column_headers">
           <Data ss:Type="String">Ref</Data>
         </Cell>
+        % if o.journal_id.type == 'cheque':
+          <Cell ss:StyleID="column_headers">
+            <Data ss:Type="String">Chk num</Data>
+          </Cell>
+        % endif
         <Cell ss:StyleID="column_headers">
           <Data ss:Type="String">Acct</Data>
         </Cell>
@@ -513,8 +518,13 @@
           <Data ss:Type="String">${line.name or ''|x}</Data>
         </Cell>
         <Cell ss:StyleID="centre">
-          <Data ss:Type="String">${line.ref or ''|x}</Data>
+          <Data ss:Type="String">${getRegRef(line) or ''|x}</Data>
         </Cell>
+        % if o.journal_id.type == 'cheque':
+          <Cell ss:StyleID="centre">
+            <Data ss:Type="String">${line.cheque_number}</Data>
+          </Cell>
+        % endif
         <Cell ss:StyleID="left_bold">
           <Data ss:Type="String">${line.account_id.code + ' ' + line.account_id.name|x}</Data>
         </Cell>
@@ -545,28 +555,31 @@
       </Row>
 
 <!-- Direct invoice and invoice that comes from a PL (in a cash return) -->
-<% invoice_lines = [] %>
+<% move_lines = [] %>
 % if line.invoice_id:
-<% invoice_lines = line.invoice_id.invoice_line %>
+<% move_lines = getMoveLines([line.invoice_id.move_id], line) %>
 % elif line.imported_invoice_line_ids:
-% for ji in line.imported_invoice_line_ids:
-% if ji.invoice and ji.invoice.invoice_line:
-<% invoice_lines += ji.invoice.invoice_line %>
-% endif
-% endfor
+<% move_lines = getImportedMoveLines([ml for ml in line.imported_invoice_line_ids], line) %>
+% elif line.direct_invoice_move_id:
+<% move_lines = getMoveLines([line.direct_invoice_move_id], line) %>
 % endif
 
-% for inv_line in invoice_lines:
+% for inv_line in move_lines:
       <Row>
         <Cell ss:Index="4" ss:StyleID="text_center">
-          <Data ss:Type="String">${inv_line.line_number or ''|x}</Data>
-        </Cell>
-        <Cell ss:StyleID="left">
-          <Data ss:Type="String">${inv_line.product_id and inv_line.product_id.name or ''|x}</Data>
+          <Data ss:Type="String">${hasattr(inv_line, 'line_number') and inv_line.line_number or ''|x}</Data>
         </Cell>
         <Cell ss:StyleID="left">
           <Data ss:Type="String">${inv_line.name or ''|x}</Data>
         </Cell>
+        <Cell ss:StyleID="left">
+          <Data ss:Type="String">${inv_line.move_id and inv_line.move_id.name or hasattr(inv_line, 'reference') and inv_line.reference or ''|x}</Data>
+        </Cell>
+        % if o.journal_id.type == 'cheque':
+        <Cell ss:StyleID="left">
+          <Data ss:Type="String"></Data>
+        </Cell>
+        % endif
         <Cell ss:StyleID="left">
           <Data ss:Type="String">${inv_line.account_id and inv_line.account_id.code + ' ' + inv_line.account_id.name or ''|x}</Data>
         </Cell>
@@ -577,10 +590,11 @@
           <Data ss:Type="String"></Data>
         </Cell>
         <Cell ss:StyleID="amount">
-          <Data ss:Type="Number">${inv_line.price_subtotal or 0.0}</Data>
+          <Data ss:Type="Number">${hasattr(inv_line, 'amount_currency') and inv_line.amount_currency or 0.0}</Data>
         </Cell>
       </Row>
-% for ana_line in sorted(inv_line.analytic_lines, key=lambda x: x.id):
+% if hasattr(inv_line, 'analytic_lines'):
+% for ana_line in sorted(getAnalyticLines([x.id for x in inv_line.analytic_lines]), key=lambda x: x.id):
 <%
 line_color = 'blue'
 if ana_line.is_reallocated:
@@ -592,7 +606,11 @@ elif ana_line.last_corrected_id:
 endif
 %>
       <Row>
-        <Cell ss:Index="7" ss:StyleID="${line_color}_ana_left">
+        % if o.journal_id.type == 'cheque':
+          <Cell ss:Index="8" ss:StyleID="${line_color}_ana_left">
+        % else:
+          <Cell ss:Index="7" ss:StyleID="${line_color}_ana_left">
+        % endif
           <Data ss:Type="String">${ana_line.general_account_id.code + ' ' + ana_line.general_account_id.name|x}</Data>
         </Cell>
         <Cell>
@@ -618,11 +636,17 @@ endif
         </Cell>
       </Row>
 % endfor
+% endif
 % endfor
 
 <!-- Display analytic lines linked to this register line -->
-% if line.fp_analytic_lines and not line.invoice_id and not line.imported_invoice_line_ids:
-% for ana_line in sorted(line.fp_analytic_lines, key=lambda x: x.id):
+<%
+a_lines = False
+if line.fp_analytic_lines and not line.invoice_id and not line.imported_invoice_line_ids:
+    a_lines = line.cash_return_move_line_id and line.cash_return_move_line_id.analytic_lines or line.fp_analytic_lines
+%>
+% if a_lines:
+% for ana_line in sorted(a_lines, key=lambda x: x.id):
 <%
 line_color = 'blue'
 if ana_line.is_reallocated:
@@ -634,7 +658,11 @@ elif ana_line.last_corrected_id:
 endif
 %>
       <Row>
-        <Cell ss:Index="7" ss:StyleID="${line_color}_ana_left">
+        % if o.journal_id.type == 'cheque':
+          <Cell ss:Index="8" ss:StyleID="${line_color}_ana_left">
+        % else:
+          <Cell ss:Index="7" ss:StyleID="${line_color}_ana_left">
+        % endif
           <Data ss:Type="String">${ana_line.general_account_id.code + ' ' + ana_line.general_account_id.name|x}</Data>
         </Cell>
         <Cell>

@@ -65,7 +65,7 @@ LINES_COLUMNS = [(0, _('Line number'), 'optionnal'),
                  ]
 
 HEADER_COLUMNS = [(1, _('Freight'), 'optionnal'),
-                  (2, _('Picking Reference'), 'mandatory'),
+                  (2, _('Picking Reference'), 'optionnal'),
                   (3, _('Origin'), 'optionnal'),
                   (4, _('Supplier'), 'optionnal'),
                   (5, _('Transport mode'), 'optionnal'),
@@ -129,7 +129,7 @@ class wizard_import_in_simulation_screen(osv.osv):
         'import_error_ok': fields.boolean(string='Error at import'),
         # Related fields
         'origin': fields.function(_get_related_values, method=True, string='Origin',
-                                  readonly=True, type='char', size=128, multi='related'),
+                                  readonly=True, type='char', size=512, multi='related'),
         'creation_date': fields.function(_get_related_values, method=True, string='Creation date',
                                          readonly=True, type='datetime', multi='related'),
         'purchase_id': fields.function(_get_related_values, method=True, string='Purchase Order',
@@ -258,6 +258,11 @@ class wizard_import_in_simulation_screen(osv.osv):
             ids = [ids]
 
         for wiz in self.browse(cr, uid, ids, context=context):
+            if not wiz.file_to_import:
+                raise osv.except_osv(
+                    _('Error'),
+                    _('Please select a file to import !'),
+                )
             if wiz.filetype == 'excel':
                 xml_file = base64.decodestring(wiz.file_to_import)
                 excel_file = SpreadsheetXML(xmlstring=xml_file)
@@ -491,7 +496,7 @@ class wizard_import_in_simulation_screen(osv.osv):
                     self.write(cr, uid, [wiz.id], {'message': message, 'state': 'error'}, context)
                     res = self.go_to_simulation(cr, uid, [wiz.id], context=context)
                     cr.commit()
-                    cr.close()
+                    cr.close(True)
                     return res
 
                 '''
@@ -504,19 +509,6 @@ class wizard_import_in_simulation_screen(osv.osv):
 
                 # Line 2: Picking Reference
                 picking_ref = values.get(2, ['', ''])[1]
-                if picking_ref != wiz.picking_id.name:
-                    message = _('''## IMPORT STOPPED ##
-
-    LINE 1 OF THE IMPORTED FILE: THE PICKING REFERENCE \
-    IN THE FILE IS NOT THE SAME AS THE ORDER REFERENCE OF THE SIMULATION SCREEN.\
-
-    YOU SHOULD IMPORT A FILE THAT HAS THE SAME PICKING REFERENCE THAT THE SIMULATION\
-    SCREEN!''')
-                    self.write(cr, uid, [wiz.id], {'message': message, 'state': 'error'}, context)
-                    res = self.go_to_simulation(cr, uid, [wiz.id], context=context)
-                    cr.commit()
-                    cr.close()
-                    return res
 
                 # Line 3: Origin
                 origin = values.get(3, ['', ''])[1]
@@ -799,11 +791,11 @@ class wizard_import_in_simulation_screen(osv.osv):
 
                 res = self.go_to_simulation(cr, uid, [wiz.id], context=context)
                 cr.commit()
-                cr.close()
+                cr.close(True)
                 return res
 
             cr.commit()
-            cr.close()
+            cr.close(True)
 
             # Clear the cache
             PRODUCT_CODE_ID = {}
@@ -813,7 +805,7 @@ class wizard_import_in_simulation_screen(osv.osv):
         except Exception, e:
             self.write(cr, uid, ids, {'message': e}, context=context)
             cr.commit()
-            cr.close()
+            cr.close(True)
 
         return {'type': 'ir.actions.act_window_close'}
 
@@ -887,7 +879,7 @@ class wizard_import_in_line_simulation_screen(osv.osv):
                and line.move_id.picking_id.purchase_id.pricelist_id.currency_id:
                 curr_id = line.move_id.picking_id.purchase_id.pricelist_id.currency_id.id
             elif line.move_id and line.move_id.price_currency_id:
-                curr_id = line.move_id.price_currency_id
+                curr_id = line.move_id.price_currency_id.id
             elif line.parent_line_id and line.parent_line_id.move_currency_id:
                 curr_id = line.parent_line_id.move_currency_id.id
             else:
@@ -1043,8 +1035,8 @@ class wizard_import_in_line_simulation_screen(osv.osv):
                     write_vals['imp_product_id'] = prod_id
 
             product = False
-            if prod_id:
-                product = prod_obj.browse(cr, uid, prod_id, context=context)
+            if write_vals.get('imp_product_id'):
+                product = prod_obj.browse(cr, uid, write_vals.get('imp_product_id'), context=context)
 
 
             # Product Qty
@@ -1070,6 +1062,13 @@ class wizard_import_in_line_simulation_screen(osv.osv):
                         errors.append(_('UoM not found in database'))
                 else:
                     write_vals['imp_uom_id'] = uom_id
+
+            # Check UoM consistency
+            if write_vals.get('imp_uom_id') and product:
+                prod_uom_c_id = product.uom_id.category_id.id
+                uom_c_id = uom_obj.browse(cr, uid, write_vals['imp_uom_id']).category_id.id
+                if prod_uom_c_id != uom_c_id:
+                    errors.append(_("Given UoM is not compatible with the product UoM"))
 
             # Unit price
             err_msg = _('Incorrect float value for field \'Price Unit\'')
@@ -1106,6 +1105,7 @@ class wizard_import_in_line_simulation_screen(osv.osv):
                 batch_id = PRODLOT_NAME_ID.get(str(batch_value))
                 batch_ids = prodlot_obj.search(cr, uid, [('product_id', '=', write_vals['imp_product_id'])], context=context)
                 if not batch_id or batch_id not in batch_ids:
+                    batch_id = None # UFTP-386: If the batch number does not belong to the batch_idS of the given product --> set it to None again!
                     batch_ids = prodlot_obj.search(cr, uid, [('name', '=', str(batch_value)), ('product_id', '=', write_vals['imp_product_id'])], context=context)
                     if batch_ids:
                         batch_id = batch_ids[0]
@@ -1124,6 +1124,13 @@ class wizard_import_in_line_simulation_screen(osv.osv):
                         'imp_batch_id': batch_id,
                         'imp_batch_name': str(batch_value),
                     })
+                else:
+                    # UFTP-386: Add the warning message indicating that the batch does not exist for THIS product (but for others!)
+                    # If the batch is a completely new, no need to warn.
+                    batch_ids = prodlot_obj.search(cr, uid, [('name', '=', str(batch_value))], context=context)
+                    if batch_ids:
+                        warnings.append(_('The given batch does not exist for the given product, but will be created automatically during the process.'))
+                        write_vals.update({'imp_batch_name': str(batch_value),})
 
             # Expired date
             exp_value = values[8]

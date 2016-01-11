@@ -43,11 +43,16 @@ class res_currency_rate_functional(osv.osv):
         move_line_ids = move_line_obj.search(cr, uid, move_line_search_params)
         move_line_obj.update_amounts(cr, uid, move_line_ids)
         move_ids = []
-        for ml in move_line_obj.read(cr, uid, move_line_ids, ['move_id']):
+        reconcile = set()
+        for ml in move_line_obj.read(cr, uid, move_line_ids, ['move_id', 'reconcile_id']):
+            if ml['reconcile_id']:
+                reconcile.add(ml['reconcile_id'][0])
             if ml.get('move_id', False):
                 move_ids.append(ml.get('move_id')[0])
         if move_ids:
-            self.pool.get('account.move').balance_move(cr, uid, list(set(move_ids)))
+            reconcile.update(self.pool.get('account.move').balance_move(cr, uid, list(set(move_ids))))
+        if reconcile:
+            move_line_obj.reconciliation_update(cr, uid, list(reconcile))
         return True
 
     def refresh_analytic_lines(self, cr, uid, ids, date=None, currency=None, context=None):
@@ -62,11 +67,15 @@ class res_currency_rate_functional(osv.osv):
         eng_obj = self.pool.get('account.analytic.line')
         # Search all engagement journal lines that don't come from a move and which date is superior to the rate
         search_params = [('move_id', '=', '')]
-        if date:
-            search_params.append(('source_date', '>=', date))
         if currency:
             search_params.append(('currency_id', '=', currency))
-        eng_ids = eng_obj.search(cr, uid, [('move_id', '=', ''), ('source_date', '>=', date)])
+        if date:
+            search_params.append('|')
+            search_params.append(('source_date', '>=', date))
+            search_params.append('&')  # UFTP-361 in case source_date no set
+            search_params.append(('source_date', '=', False))
+            search_params.append(('date', '>=', date))
+        eng_ids = eng_obj.search(cr, uid, search_params, context=context)
         if eng_ids:
             eng_obj.update_amounts(cr, uid, eng_ids, context=context)
         return True

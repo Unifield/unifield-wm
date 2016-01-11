@@ -320,6 +320,44 @@ def quantity_value(**kwargs):
     return {'product_qty': product_qty, 'error_list': error_list, 'warning_list': warning_list}
 
 
+def number_value(**kwargs):
+    """
+    get/check value of a number cell
+    kwargs must contains 'field_name' and 'cell_nb' values
+    kwargs must contains 'to_write/error_list' and 'to_write/warning_list' values
+    kwargs should contain a 'field_desc' value
+    kwargs should contain a 'default' value (0 if not set)
+    :rtype: dict
+    """
+    field_name = kwargs['field_name']  # let raise an except if missing bc mandatory
+    cell_nb = kwargs['cell_nb']  # let raise an except if missing bc mandatory
+    field_desc = kwargs.get('field_desc', 'Cell %d' % (cell_nb, ))
+    default = kwargs.get('default', 0)
+    res_val = default
+
+    row = kwargs['row']
+    error_list = kwargs['to_write']['error_list']
+    # with warning_list: the line does not appear in red, it is just informative
+    warning_list = kwargs['to_write']['warning_list']
+    try:
+        if not row.cells[cell_nb]:
+            warning_list.append(_('%s was not set. It is set to %d by default.') % (field_desc, default, ))
+        else:
+            if row.cells[cell_nb].type in ['int', 'float']:
+                res_val = row.cells[cell_nb].data
+            else:
+                error_list.append(_('%s was not a number, it is set to %d by default.') % (field_desc, default, ))
+    # if the cell is empty
+    except IndexError:
+        warning_list.append(_('%s was not set. It is set to %d by default.') % (field_desc, default, ))
+    res = {
+        'error_list': error_list,
+        'warning_list': warning_list
+    }
+    res[field_name] = res_val
+    return res
+
+
 def compute_uom_value(cr, uid, **kwargs):
     """
     Retrieves product UOM from Excel file
@@ -334,7 +372,7 @@ def compute_uom_value(cr, uid, **kwargs):
     uom_id = kwargs['to_write'].get('uom_id', False)
     # The tender line may have a default UOM if it is not found
     obj_data = kwargs['obj_data']
-    cell_nb = kwargs.get('cell_nb', 4)
+    cell_nb = kwargs.get('cell_nb', 3)
     msg = ''
     try:
         if row.cells[cell_nb] and row.cells[cell_nb].data is not None:
@@ -436,6 +474,7 @@ def compute_batch_expiry_value(cr, uid, **kwargs):
     bn_cell_nb = kwargs['bn_cell_nb']
     ed_cell_nb = kwargs['ed_cell_nb']
     bn_obj = kwargs['bn_obj']
+    product_obj = kwargs['product_obj']
     product_id = kwargs['product_id']
     date_format = kwargs['date_format']
     error_list = kwargs['to_write']['error_list']
@@ -452,30 +491,34 @@ def compute_batch_expiry_value(cr, uid, **kwargs):
     if row.cells[ed_cell_nb] and row.cells[ed_cell_nb].type == 'datetime' and row.cells[ed_cell_nb].data:
         expiry_date = row.cells[ed_cell_nb].data
 
+    prd_brw = product_id and product_obj and product_obj.browse(cr, uid, product_id) or False
+
+    bn_mgmt = prd_brw and prd_brw.batch_management
+    ed_mgmt = prd_brw and prd_brw.perishable
+
     if not bn_ids and product_id and batch_name and expiry_date:
-        bn_ids = bn_obj.search(cr, uid, [('product_id', '=', product_id), ('name', '=', batch_name), ('life_date', '=', expiry_date)])
-        if bn_ids:
-            batch_number = bn_ids[0]
+        bn_ids = bn_obj.search(cr, uid, [('product_id', '=', product_id), ('name', '=', batch_name), ('life_date', '=', expiry_date.strftime('%Y-%m-%d'))])
+        if not bn_ids:
+            if bn_obj.search(cr, uid, [('product_id', '=', product_id), ('name', '=', batch_name)]):
+                if bn_mgmt:
+                    error_list.append(_('The expiry date doesn\'t match with the expiry date of the batch. Batch not selected'))
+                else:
+                    error_list.append(_('The expiry date doesn\'t match with the expiry date of the batch. Expiry date not selected'))
+            else:
+                error_list.append(_('Batch not found.'))
+    elif not bn_ids and product_id and expiry_date:
+        if bn_mgmt:
+            error_list.append(_('The Batch number is not set.'))
+        elif ed_mgmt:
+            bn_ids = bn_obj.search(cr, uid, [('product_id', '=', product_id), ('life_date', '=', expiry_date.strftime('%Y-%m-%d'))])
+    elif not bn_ids and product_id and batch_name:
+        if bn_mgmt:
+            error_list.append(_('Expiry date is not set, so batch not selected.'))
+        else:
+            error_list.append(_('Expiry date is not set.'))
 
-    if not bn_ids and product_id and batch_name:
-        bn_ids = bn_obj.search(cr, uid, [('product_id', '=', product_id), ('name', '=', batch_name)])
-        if bn_ids:
-            batch_number = bn_ids[0]
-
-        # Set an error message for non matching between BN and Expiry date
-        if expiry_date:
-            warning_list.append(_('The expiry date %s not corresponding to the expiry date of the Batch Number %s − The expiry date of the batch has been set instead.') % (expiry_date.strftime(date_format), batch_name))
-
-        # Set expiry date with the life date of the BN
-        expiry_date = bn_obj.browse(cr, uid, batch_number).life_date
-
-    if not bn_ids and product_id and expiry_date:
-        bn_ids = bn_obj.search(cr, uid, [('product_id', '=', product_id), ('life_date', '=', expiry_date.strftime('%Y-%m-%d'))])
-        if bn_ids:
-            batch_number = bn_ids[0]
-
-    if (batch_name or expiry_date) and not bn_ids:
-        error_list.append(_('The Batch number was not found.'))
+    if bn_ids:
+        batch_number = bn_ids[0]
 
     return {'prodlot_id': batch_number, 'expired_date': expiry_date, 'error_list': error_list, 'warning_list': warning_list}
 
@@ -504,11 +547,19 @@ def compute_currency_value(cr, uid, **kwargs):
                     curr_name = curr.strip().upper()
                     currency_ids = currency_obj.search(cr, uid, [('name', '=', curr_name)], context=context)
                     if currency_ids and browse_sale:
-                        if currency_ids[0] == browse_sale.pricelist_id.currency_id.id:
+                        if browse_sale.procurement_request:
+                            order_cur_id = browse_sale.functional_currency_id.id
+                        else:
+                            # UFTP-395: just a small typo bug
+                            order_cur_id = browse_sale.pricelist_id.currency_id.id
+                        if currency_ids[0] == order_cur_id:
                             fc_id = currency_ids[0]
                         else:
                             imported_curr_name = currency_obj.browse(cr, uid, currency_ids)[0].name
-                            default_curr_name = browse_sale.pricelist_id.currency_id.name
+                            if browse_sale.procurement_request:
+                                default_curr_name = browse_sale.functional_currency_id.name
+                            else:
+                                default_curr_name = browse_sale.pricelist_id.currency_id.name
                             msg = _("The imported currency '%s' was not consistent and has been replaced by the \
                                 currency '%s' of the order, please check the price.") % (imported_curr_name, default_curr_name)
                     elif currency_ids and browse_purchase:
@@ -563,10 +614,13 @@ def check_lines_currency(rows, ccy_col_index, ccy_expected_code):
     res = 0
     for row in rows:
         if row.cells:
-            cell = row.cells[ccy_col_index]
-            if cell.type == 'str':
-                if str(cell) != ccy_expected_code:
-                    res += 1
-            else:
+            if len(row.cells) < ccy_col_index + 1:
                 res += 1
+            else:
+                cell = row.cells[ccy_col_index]
+                if cell.type == 'str':
+                    if str(cell).upper() != ccy_expected_code.upper():
+                        res += 1
+                else:
+                    res += 1
     return res

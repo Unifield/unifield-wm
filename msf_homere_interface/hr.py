@@ -29,6 +29,7 @@ from tools.translate import _
 class hr_employee(osv.osv):
     _name = 'hr.employee'
     _inherit = 'hr.employee'
+    _rec_name = 'name_resource'
 
     _order = 'name_resource'
 
@@ -47,6 +48,26 @@ class hr_employee(osv.osv):
             allowed = True
         for e in ids:
             res[e] = allowed
+        return res
+
+    def _get_ex_allow_edition(self, cr, uid, ids, field_name=None, arg=None,
+        context=None):
+        """
+        US-94 do not allow to modify an already set identification id for expat
+        """
+        res = {}
+        if not ids:
+            return res
+
+        if not context:
+            context = {}
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+        for self_br in self.browse(cr, uid, ids, context=context):
+            can_edit = True
+            if self_br.employee_type == 'ex' and self_br.identification_id:
+                can_edit = False
+            res[self_br.id] = can_edit
         return res
 
     def onchange_type(self, cr, uid, ids, e_type=None, context=None):
@@ -83,6 +104,7 @@ class hr_employee(osv.osv):
         'destination_id': fields.many2one('account.analytic.account', string="Destination", domain="[('category', '=', 'DEST'), ('type', '!=', 'view'), ('state', '=', 'open')]"),
         'allow_edition': fields.function(_get_allow_edition, method=True, type='boolean', store=False, string="Allow local employee edition?", readonly=True),
         'photo': fields.binary('Photo', readonly=True),
+        'ex_allow_edition': fields.function(_get_ex_allow_edition, method=True, type='boolean', store=False, string="Allow expat employee edition?", readonly=True),
     }
 
     _defaults = {
@@ -91,6 +113,7 @@ class hr_employee(osv.osv):
         'homere_id_staff': lambda *a: 0.0,
         'homere_id_unique': lambda *a: '',
         'gender': lambda *a: 'unknown',
+        'ex_allow_edition': lambda *a: True,
     }
 
     def _check_unicity(self, cr, uid, ids, context=None):
@@ -105,6 +128,13 @@ class hr_employee(osv.osv):
             if e.identification_id:
                 same = self.search(cr, uid, [('identification_id', '=', e.identification_id)])
                 if same and len(same) > 1:
+                    same_data = self.read(cr, uid, same, ['name'])
+                    names = [e.name]
+                    for employee in same_data:
+                        employee_name = employee.get('name', False)
+                        if employee_name and employee_name not in names:
+                            names.append(employee_name)
+                    raise osv.except_osv(_('Error'), _('Some employees have the same unique code: %s') % (';'.join(names)))
                     return False
         return True
 
@@ -261,6 +291,27 @@ class hr_employee(osv.osv):
                 vals.update({'funding_pool_id': False})
         return {'value': vals}
 
+    def search(self, cr, uid, args, offset=0, limit=None, order=None,
+               context=None, count=False):
+
+        if not args:
+            args = []
+        if context is None:
+            context = {}
+        # US_262: add disrupt in search
+        # If disrupt is not define don't block inactive
+        disrupt = False
+        if context.get('disrupt_inactive', True):
+            disrupt = True
+
+        if not disrupt:
+            if ('active', '=', False) not in args \
+               and ('active', '=', True) not in args:
+                args += [('active', '=', True)]
+        return super(hr_employee, self).search(cr, uid, args, offset=offset,
+                                               limit=limit, order=order,
+                                               context=context, count=count)
+
     def name_search(self, cr, uid, name, args=None, operator='ilike', context=None, limit=100):
         if not args:
             args=[]
@@ -273,6 +324,7 @@ class hr_employee(osv.osv):
         if not disrupt:
             if not ('active', '=', False) or not ('active', '=', True) in args:
                 args += [('active', '=', True)]
+
         return super(hr_employee, self).name_search(cr, uid, name, args, operator, context, limit)
 
 hr_employee()

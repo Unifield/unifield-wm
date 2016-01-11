@@ -37,6 +37,7 @@ from msf_doc_import import MAX_LINES_NB
 from msf_doc_import.wizard import PO_COLUMNS_FOR_INTEGRATION as columns_for_po_integration, PO_COLUMNS_HEADER_FOR_INTEGRATION, NEW_COLUMNS_HEADER
 
 from lxml import etree
+import datetime
 
 
 class purchase_order(osv.osv):
@@ -54,6 +55,11 @@ class purchase_order(osv.osv):
         file = tools.file_open(pathname)
         tools.convert_xml_import(cr, 'product', file, {}, mode='init', noupdate=False)
 
+        logging.getLogger('init').info('HOOK: module product_attributes: loading data/sale_data.yml')
+        pathname = path.join('product_attributes', 'data', 'sale_data.yml')
+        file = tools.file_open(pathname)
+        tools.convert_yaml_import(cr, 'product_attributes', file, {}, mode='init', noupdate=False)
+
     def hook_rfq_sent_check_lines(self, cr, uid, ids, context=None):
         '''
         Please copy this to your module's method also.
@@ -65,8 +71,36 @@ class purchase_order(osv.osv):
             res = False
         return res
 
+    def _get_import_progress(self, cr, uid, ids, field_name, args, context=None):
+        """
+        Check if there are import wizard associated to POs
+        """
+        wiz_obj = self.pool.get('wizard.import.po.line')
+
+        if context is None:
+            context = {}
+
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+
+        res = {}
+
+        for po_id in ids:
+            res[po_id] = wiz_obj.search(cr, 1, [
+                ('po_id', '=', po_id),
+                ('state', '=', 'in_progress'),
+            ], limit=1, context=context) and True or False
+
+        return res
+
     _columns = {
-        'import_in_progress': fields.boolean(string='Importing'),
+        'import_in_progress': fields.function(
+            _get_import_progress,
+            method=True,
+            type='boolean',
+            string='Import in progress',
+            store=False,
+        ),
         'import_filenames': fields.one2many('purchase.order.simu.import.file', 'order_id', string='Imported files', readonly=True),
     }
 
@@ -156,6 +190,24 @@ class purchase_order(osv.osv):
                 'target': 'new',
                 'context': context}
 
+    def export_get_file_name(self, cr, uid, ids, prefix='PO', context=None):
+        """
+        UFTP-56: get export file name
+        :param prefix: prefix of the file (POV for PO Validated, etc)
+        :return POV_14_OC_MW101_PO00060_YYYY_MM_DD.xls or POV_14_OC_MW101_PO00060_YYYY_MM_DD.xml
+        """
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+        if len(ids) != 1:
+            return False
+        po_r = self.read(cr, uid, ids[0], ['name'], context=context)
+        if not po_r or not po_r['name']:
+            return False
+        dt_now = datetime.datetime.now()
+        po_name = "%s_%s_%d_%02d_%02d" % (prefix,
+            po_r['name'].replace('/', '_'),
+            dt_now.year, dt_now.month, dt_now.day)
+        return po_name
 
     def export_xml_po_integration(self, cr, uid, ids, context=None):
         '''
@@ -169,6 +221,10 @@ class purchase_order(osv.osv):
 
         datas = {}
         datas['ids'] = ids
+        file_name = self.export_get_file_name(cr, uid, ids, prefix='POV',
+            context=context)
+        if file_name:
+            datas['target_filename'] = file_name
         report_name = 'validated.purchase.order_xml'
 
         return {
@@ -190,6 +246,10 @@ class purchase_order(osv.osv):
 
         datas = {}
         datas['ids'] = ids
+        file_name = self.export_get_file_name(cr, uid, ids, prefix='POV',
+            context=context)
+        if file_name:
+            datas['target_filename'] = file_name
         report_name = 'validated.purchase.order_xls'
 
         return {
@@ -260,7 +320,7 @@ class purchase_order(osv.osv):
         if isinstance(ids, (int, long)):
             ids = [ids]
         for var in self.browse(cr, uid, ids, context=context):
-            if not var.from_sync and var.partner_type != 'external':
+            if not var.from_sync and var.partner_type not in ('external', 'esc'):
                 raise osv.except_osv(_('Warning !'), _("""You can\'t cancel the PO because it may have already been synchronized,
                 the cancellation should then come from the supplier instance (and synchronize down to the requestor instance)."""))
         return True
@@ -457,6 +517,7 @@ wizard_export_po_validated()
 class purchase_order_simu_import_file(osv.osv):
     _name = 'purchase.order.simu.import.file'
     _order = 'timestamp'
+    _rec_name = 'order_id'
 
     _columns = {
         'order_id': fields.many2one('purchase.order', string='Order', required=True),

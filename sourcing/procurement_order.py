@@ -22,13 +22,15 @@
 from osv import fields
 from osv import osv
 from osv.orm import browse_record
-
+from workflow.wkf_expr import _eval_expr
 from tools.translate import _
 
 from sourcing.sale_order_line import _SELECTION_PO_CFT
 
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
+
+import netsvc
 
 
 class procurement_order(osv.osv):
@@ -66,7 +68,25 @@ The parameter '%s' should be an browse_record instance !""") % (method, self._na
     _columns = {
         'supplier': fields.many2one('res.partner', 'Supplier'),
         'po_cft': fields.selection(_SELECTION_PO_CFT, string="PO/CFT"),
+        'unique_rule_type': fields.char(
+            size=128,
+            string='Unique Replenishment rule type',
+            readonly=True,
+            help="""This field is used to have only one PO by replenishment
+rules if the supplier 'Order creation method' is set to 'Requirements by Order'.
+""",
+        ),
+        'from_splitted_po_line': fields.boolean(string='From splitted PO line'),
     }
+
+    def copy_data(self, cr, uid, copy_id, default_values=None, context=None):
+        if default_values is None:
+            default_values = {}
+
+        if not default_values.get('from_splitted_po_line'):
+            default_values['from_splitted_po_line'] = False
+
+        return super(procurement_order, self).copy_data(cr, uid, copy_id, default_values, context=context)
 
     def po_line_values_hook(self, cr, uid, ids, context=None, *args, **kwargs):
         '''
@@ -186,10 +206,19 @@ The parameter '%s' should be an browse_record instance !""") % (method, self._na
         else:
             purchase_domain.append(('order_type', '!=', 'direct'))
 
+        if procurement.tender_line_id and procurement.tender_line_id.purchase_order_line_id:
+            purchase_domain.append(('pricelist_id', '=', procurement.tender_line_id.purchase_order_line_id.order_id.pricelist_id.id))
+        elif procurement.rfq_id:
+            purchase_domain.append(('pricelist_id', '=', procurement.rfq_id.pricelist_id.id))
+
         line = None
         sale_line_ids = self.pool.get('sale.order.line').search(cr, uid, [('procurement_id', '=', procurement.id)], context=context)
         if sale_line_ids:
             line = self.pool.get('sale.order.line').browse(cr, uid, sale_line_ids[0], context=context)
+            if line.product_id.type in ('service', 'service_recep') and not line.order_id.procurement_request:
+                if ('order_type', '!=', 'direct') in purchase_domain:
+                    purchase_domain.remove(('order_type', '!=', 'direct'))
+                purchase_domain.append(('order_type', '=', 'direct'))
 
         if partner.po_by_project in ('project', 'category_project') or (procurement.po_cft == 'dpo' and partner.po_by_project == 'all'):
             if line:
@@ -202,7 +231,15 @@ The parameter '%s' should be an browse_record instance !""") % (method, self._na
 
         # Isolated requirements => One PO for one IR/FO
         if partner.po_by_project == 'isolated':
-            purchase_domain.append(('origin', '=', procurement.origin))
+            if line and line.order_id:
+                purchase_domain.append(('unique_fo_id', '=', line.order_id.id))
+                values['unique_fo_id'] = line.order_id.id
+            elif procurement.unique_rule_type:
+                purchase_domain.append(('unique_rule_type', '=', procurement.unique_rule_type))
+                values['unique_rule_type'] = procurement.unique_rule_type
+
+        if procurement.unique_rule_type:
+            values['po_from_rr'] = True
 
         # Category requirements => Search a PO with the same category than the IR/FO category
         if partner.po_by_project in ('category_project', 'category'):
@@ -213,6 +250,8 @@ The parameter '%s' should be an browse_record instance !""") % (method, self._na
         # the purchase order to merge the new line to is locked and provided in the procurement
         if procurement.so_back_update_dest_po_id_procurement_order:
             purchase_ids = [procurement.so_back_update_dest_po_id_procurement_order.id]
+        elif procurement.from_splitted_po_line and procurement.purchase_id:
+            purchase_ids = [procurement.purchase_id.id]
         else:
             # search for purchase order according to defined domain
             purchase_ids = po_obj.search(cr, uid, purchase_domain, context=context)
@@ -237,10 +276,13 @@ The parameter '%s' should be an browse_record instance !""") % (method, self._na
         sol_ids = self.pool.get('sale.order.line').search(cr, uid, [('procurement_id', '=', procurement.id)], context=context)
         location_id = False
         categ = False
+        ir_to_link = None
         if sol_ids:
             sol = self.pool.get('sale.order.line').browse(cr, uid, sol_ids[0], context=context)
             if sol.order_id:
                 categ = sol.order_id.categ
+                if sol.order_id.procurement_request:
+                    ir_to_link = sol.order_id.id
 
             if sol.analytic_distribution_id:
                 new_analytic_distribution_id = self.pool.get('analytic.distribution').copy(
@@ -289,16 +331,32 @@ The parameter '%s' should be an browse_record instance !""") % (method, self._na
             if location_id:
                 po_values.update({'location_id': location_id, 'cross_docking_ok': False})
 
+            if values.get('cross_docking_ok') == True:
+                po_values['cross_docking_ok'] = values.get('cross_docking_ok')
+
             if po_values:
                 self.pool.get('purchase.order').write(cr, uid, purchase_ids[0], po_values, context=dict(context, import_in_progress=True))
-            self.pool.get('purchase.order.line').create(cr, uid, line_values, context=context)
+            pol_id = self.pool.get('purchase.order.line').create(cr, uid, line_values, context=context)
+
+            if ir_to_link:
+                self.pool.get('procurement.request.sourcing.document').chk_create(
+                    cr, uid, {
+                        'order_id': ir_to_link,
+                        'sourcing_document_model': 'purchase.order',
+                        'sourcing_document_type': 'po',
+                        'sourcing_document_id': purchase_ids[0],
+                    }, context=context)
+
+            if line:
+                self.infolog(cr, uid, "The FO/IR line id:%s has been sourced on order to the PO line id:%s of the PO id:%s" % (line.id, pol_id, purchase_ids[0]))
+
             return purchase_ids[0]
         else:
-            if procurement.po_cft == 'dpo':
+            if procurement.po_cft == 'dpo' or procurement.product_id.type in ('service', 'service_recep'):
                 sol_ids = self.pool.get('sale.order.line').search(cr, uid, [('procurement_id', '=', procurement.id)], context=context)
                 if sol_ids:
                     sol = self.pool.get('sale.order.line').browse(cr, uid, sol_ids[0], context=context)
-                    if not sol.procurement_request:
+                    if not sol.order_id.procurement_request:
                         values.update({'order_type': 'direct',
                                        'dest_partner_id': sol.order_id.partner_id.id,
                                        'dest_address_id': sol.order_id.partner_shipping_id.id})
@@ -312,6 +370,20 @@ The parameter '%s' should be an browse_record instance !""") % (method, self._na
             if categ:
                 values.update({'categ': categ})
             purchase_id = super(procurement_order, self).create_po_hook(cr, uid, ids, context=context, *args, **kwargs)
+
+            if ir_to_link:
+                self.pool.get('procurement.request.sourcing.document').chk_create(
+                    cr, uid, {
+                        'order_id': ir_to_link,
+                        'sourcing_document_model': 'purchase.order',
+                        'sourcing_document_type': 'po',
+                        'sourcing_document_id': purchase_id,
+                    }, context=context)
+
+            if line:
+                self.infolog(cr, uid, "The FO/IR line id:%s has been sourced on order to the PO id:%s" % (
+                    line.id, purchase_id))
+
             return purchase_id
 
     def write(self, cr, uid, ids, vals, context=None):
@@ -471,6 +543,9 @@ The parameter '%s' should be an browse_record instance !""") % (method, self._na
             if procurement.product_id.product_tmpl_id.supply_method <> 'buy':
                 return False
 
+            if procurement.purchase_id:
+                return True
+
             if procurement.supplier:
                 partner = procurement.supplier
             elif procurement.product_id.seller_id:
@@ -593,6 +668,37 @@ The parameter '%s' should be an browse_record instance !""") % (method, self._na
             self.write(cr, uid, [procurement.id], {'state': 'running', 'purchase_id': purchase_id})
         return res
     # @@@END override
+
+    def _do_create_proc_hook(self, cr, uid, ids, context=None, *args, **kwargs):
+        """
+        Puth the unique rule type on the procurement order
+        """
+        res = super(procurement_order, self)._do_create_proc_hook(cr, uid, ids, context=context, *args, **kwargs)
+
+        if res is None:
+            res = {}
+
+        res['unique_rule_type'] = 'stock.warehouse.orderpoint'
+
+        return res
+    def set_manually_done(self, cr, uid, ids, all_doc=False, context=None):
+        """
+        Detach the workflow of the procurement.order object and set state
+        to done.
+        """
+        wf_service = netsvc.LocalService("workflow")
+
+        if isinstance(ids, (int, long)):
+            ids = [ids]
+
+        for proc_id in ids:
+            wf_service.trg_delete(uid, 'procurement.order', proc_id, cr)
+            # Search the method called when the workflow enter in the last activity
+            wkf_id = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'procurement', 'act_done')[1]
+            activity = self.pool.get('workflow.activity').browse(cr, uid, wkf_id, context=context)
+            _eval_expr(cr, [uid, 'procurement.order', proc_id], False, activity.action)
+
+        return True
 
 procurement_order()
 

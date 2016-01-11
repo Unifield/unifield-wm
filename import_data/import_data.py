@@ -31,6 +31,7 @@ from mx import DateTime
 import re
 import logging
 
+
 class import_data(osv.osv_memory):
     _name = 'import_data'
     _description = 'Import Datas'
@@ -42,10 +43,76 @@ class import_data(osv.osv_memory):
             data['code'] = row[0]
 
     def _set_nomen_level(self, cr, uid, data, row, headers):
-        if data.get('parent_id'):
-            v = self.onChangeParentId(cr, uid, id, data.get('type'), data['parent_id'])
-            if v['value']['level']:
-                data['level'] = v['value']['level']
+
+        if data.get('parent_id', False):
+            n_obj = self.pool.get('product.nomenclature')
+            parent_ids = n_obj.search(cr, uid, [('msfid', '=', data['parent_id'])], limit=1)
+            if parent_ids:
+                parent_id = parent_ids[0]
+
+                v = self.onChangeParentId(cr, uid, id, data.get('type'),
+                                          parent_id)
+                if v['value']['level']:
+                    data['level'] = v['value']['level']
+                data['parent_id'] = parent_id
+            else:
+                raise osv.except_osv(_('Warning !'),
+                                     _('Parent Nomenclature "%s" not found')
+                                     % (data['parent_id']))
+
+    def _set_product_category(self, cr, uid, data, row, headers):
+        n_obj = self.pool.get('product.nomenclature')
+        aa_obj = self.pool.get('account.account')
+        context = {}
+
+        family_msfid = data.get('family_id', False)
+        if family_msfid:
+            nomen_ids = n_obj.search(cr, uid, [('msfid', '=', family_msfid)], limit=1, context=context)
+            if nomen_ids:
+                data['family_id'] = nomen_ids[0]
+            else:
+                raise osv.except_osv(_('Warning !'),
+                                     _('Product category MSFID "%s" not found')
+                                     % (family_msfid))
+        else:
+            raise osv.except_osv(_('Warning !'),
+                                 _('Product category MSFID required'))
+
+        paec_code = data.get('property_account_expense_categ', False)
+        if paec_code:
+            paec_ids = aa_obj.search(cr, uid, [('code', '=', paec_code)], context=context)
+            if paec_ids:
+                data['property_account_expense_categ'] = paec_ids[0]
+            else:
+                raise osv.except_osv(_('Warning !'),
+                                     _('Account code "%s" not found')
+                                     % (paec_code))
+        else:
+            data['property_account_expense_categ'] = None
+
+        paic_code = data.get('property_account_income_categ', False)
+        if paic_code:
+            paic_ids = aa_obj.search(cr, uid, [('code', '=', paic_code)], context=context)
+            if paic_ids:
+                data['property_account_income_categ'] = paic_ids[0]
+            else:
+                raise osv.except_osv(_('Warning !'),
+                                     _('Account code "%s" not found')
+                                     % (paic_code))
+        else:
+            data['property_account_income_categ'] = None
+
+        dea_code = data.get('donation_expense_account', False)
+        if dea_code:
+            dea_ids = aa_obj.search(cr, uid, [('code', '=', dea_code)], context=context)
+            if dea_ids:
+                data['donation_expense_account'] = dea_ids[0]
+            else:
+                raise osv.except_osv(_('Warning !'),
+                                     _('Expense account code "%s" not found')
+                                     % (dea_code))
+        else:
+            data['donation_expense_account'] = None
 
     def _set_full_path_nomen(self, cr, uid, headers, row, col):
         if not col:
@@ -78,11 +145,11 @@ class import_data(osv.osv_memory):
             if h in defaults and (not h in data or not data[h]):
                 data[h] = defaults[h]
 
-
     post_hook = {
         'account.budget.post': _set_code_name,
         'product.nomenclature': _set_nomen_level,
         'product.product': _set_default_value,
+        'product.category': _set_product_category,
     }
 
     pre_hook = {
@@ -124,6 +191,10 @@ class import_data(osv.osv_memory):
     }
 
     def _import(self, dbname, uid, ids, context=None):
+        """if context includes 'import_data_field_max_size' dict,
+        this dict specifies the max tolerated field length at import
+        (key: field name, value: field size)
+        """
         cr = pooler.get_db(dbname).cursor()
 
         obj = self.read(cr, uid, ids[0])
@@ -139,7 +210,10 @@ class import_data(osv.osv_memory):
         fileobj.write(base64.decodestring(obj['file']))
         fileobj.seek(0)
         impobj = self.pool.get(obj['object'])
-        reader = csv.reader(fileobj, quotechar='"', delimiter=';')
+        delimiter = ";"
+        if impobj._name == 'product.nomenclature' or impobj._name == 'product.category':
+            delimiter = ","
+        reader = csv.reader(fileobj, quotechar='"', delimiter=delimiter)
         headers = []
 
         if impobj._name == 'product.product':
@@ -298,11 +372,35 @@ WHERE n3.level = 3)
             data = {}
             try:
                 n = 0
+                line_ok = True
                 if self.pre_hook.get(impobj._name):
                     self.pre_hook[impobj._name](impobj, cr, uid, headers, row, col_datas)
 
+                if impobj._name == 'product.nomenclature' or \
+                   impobj._name == 'product.category':
+                    import_mode = 'update'
+
                 for n,h in enumerate(headers):
                     row[n] = row[n].rstrip()
+
+                    # UFTP-327
+                    # if required reject cells with exceeded field length
+                    if 'import_data_field_max_size' in context:
+                        if h in context['import_data_field_max_size']:
+                            max_size = context['import_data_field_max_size'][h]
+                            if len(row[n]) > max_size:
+                                msg_tpl = "field '%s' value exceed field length of %d"
+                                msg = msg_tpl % (h , max_size, )
+                                logging.getLogger('import data').info(
+                                    'Error %s'% (msg, ))
+                                cr.rollback()
+                                row.append("Line %s, row: %s, %s" % (i, n,
+                                    msg, ))
+                                writer.writerow(row)
+                                nb_error += 1
+                                line_ok = False
+                                break
+
                     if newo2m and ('.' not in h or h.split('.')[0] != newo2m or h.split('.')[1] == delimiter):
                         data.setdefault(newo2m, []).append((0, 0, o2mdatas.copy()))
                         o2mdatas = {}
@@ -327,6 +425,8 @@ WHERE n3.level = 3)
                                 data[points[0]] = _get_obj(h, row[n], fields_def) or False
                         elif fields_def[points[0]]['type'] in 'many2many' and row[n]:
                             data.setdefault(points[0], []).append((4, _get_obj(h, row[n], fields_def)))
+                if not line_ok:
+                    continue
                 if newo2m and o2mdatas:
                     data.setdefault(newo2m, []).append((0, 0, o2mdatas.copy()))
 
@@ -334,12 +434,17 @@ WHERE n3.level = 3)
                     self.post_hook[impobj._name](impobj, cr, uid, data, row, headers)
 
                 if import_mode == 'update':
+
                     # Search if an object already exist. If not, create it.
                     ids_to_update = []
 
                     if impobj._name == 'product.product':
                         # UF-2254: Allow to update the product, use xmlid_code now for searching
                         ids_to_update = impobj.search(cr, uid, [('xmlid_code', '=', data['xmlid_code'])])
+                    elif impobj._name == 'product.nomenclature':
+                        ids_to_update = impobj.search(cr, uid, [('msfid', '=', data['msfid'])])
+                    elif impobj._name == 'product.category':
+                        ids_to_update = impobj.search(cr, uid, [('msfid', '=', data['msfid'])])
 
                     if ids_to_update:
                         #UF-2170: remove the standard price value from the list for update product case
@@ -420,7 +525,7 @@ Find in attachment the rejected lines'''%(nb_error)
 
         errorfile.close()
         cr.commit()
-        cr.close()
+        cr.close(True)
 
     def import_csv(self, cr, uid, ids, context=None):
         thread = threading.Thread(target=self._import, args=(cr.dbname, uid, ids, context))
@@ -438,6 +543,15 @@ class import_product(osv.osv_memory):
     }
 
     def import_csv(self, cr, uid, ids, context=None):
+        # UFTP-327
+        fg = self.pool.get('product.product').fields_get(cr, uid,
+            fields=['default_code', 'xmlid_code'], context=context)
+        if fg and 'default_code' in fg and 'size' in fg['default_code']:
+            context['import_data_field_max_size'] = {
+                'default_code': fg['default_code']['size'],
+                'xmlid_code': fg['xmlid_code']['size'],
+            }
+
         super(import_product, self).import_csv(cr, uid, ids, context=context)
         view_id = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'import_data', 'import_product_end')[1]
         return {'type': 'ir.actions.act_window',
@@ -448,6 +562,49 @@ class import_product(osv.osv_memory):
                 'target': 'new'}
 
 import_product()
+
+
+class import_nomenclature(osv.osv_memory):
+    _name = 'import_nomenclature'
+    _inherit = 'import_data'
+
+    _defaults = {
+        'object': lambda *a: 'product.nomenclature',
+    }
+
+    def import_csv(self, cr, uid, ids, context=None):
+        super(import_nomenclature, self).import_csv(cr, uid, ids, context=context)
+        view_id = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'import_data', 'import_nomenclature_end')[1]
+        return {'type': 'ir.actions.act_window',
+                'res_model': 'import_nomenclature',
+                'view_mode': 'form',
+                'view_type': 'form',
+                'view_id': [view_id],
+                'target': 'new'}
+
+import_nomenclature()
+
+
+class import_product_category(osv.osv_memory):
+    _name = 'import_category'
+    _inherit = 'import_data'
+
+    _defaults = {
+        'object': lambda *a: 'product.category',
+    }
+
+    def import_csv(self, cr, uid, ids, context=None):
+        super(import_product_category, self).import_csv(cr, uid, ids, context=context)
+        view_id = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'import_data', 'import_category_end')[1]
+        return {'type': 'ir.actions.act_window',
+                'res_model': 'import_category',
+                'view_mode': 'form',
+                'view_type': 'form',
+                'view_id': [view_id],
+                'target': 'new'}
+
+import_product_category()
+
 
 class update_product(osv.osv_memory):
     _name = 'update_product'

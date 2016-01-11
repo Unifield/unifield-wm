@@ -11,7 +11,7 @@
         report_type="webkit"
         header="False"
         auto="False"
-        menu="True"/>
+        menu="False"/>
         
         <report id="project_expenses_2"
         string="Project Expenses"
@@ -35,7 +35,7 @@
         header="False"/>
         
         <report id="contract_list"
-        string="Financing Contract List"
+        string="Financing Contract List - pdf"
         model="financing.contract.contract"
         name="financing.contract.list"
         target_filename="Contract List_%(instance_code)s_%(year)s%(month)s%(day)s"
@@ -44,11 +44,22 @@
         menu="True"
         header="False"/>
 
+        <report id="contract_list_xls"
+        string="Financing Contract List"
+        model="financing.contract.contract"
+        name="financing.contract.list_xls"
+        target_filename="Contract List_%(instance_code)s_%(year)s%(month)s%(day)s"
+        file="financing_contract/report/contract_list.mako"
+        report_type="webkit"
+        auto="False"
+        menu="True"
+        header="False"/>
+
         <report id="financing_interactive_2"
         string="Financing interactive"
         model="financing.contract.contract"
         name="financing.interactive.2"
-        target_filename="Interactive Report_%(instance_code)s_%(year)s%(month)s%(day)s"
+        target_filename="Financing Contract Budget vs Actuals_%(instance_code)s_%(year)s%(month)s%(day)s"
         file="financing_contract/report/financing_interactive_xls.mako"
         report_type="webkit"
         header="False"
