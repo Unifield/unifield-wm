@@ -61,8 +61,11 @@ if __name__ == '__main__':
     else:
         for tc in test_cases:
             if issubclass(tc, client_creation):
-                tc.setUpClass()
-                tc.db.connect('admin')
-                print "Syncing %s ..." % tc.db.db_name
-                tc.sync()
+                try:
+                    tc.setUpClass()
+                    tc.db.connect('admin')
+                    print "Syncing %s ..." % tc.db.db_name
+                    tc.sync()
+                except Exception, e:
+                    print "Error", tc.db.db_name, e
 

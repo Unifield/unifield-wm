@@ -21,6 +21,9 @@ from bzrlib.branch import BzrBranch
 import argparse
 from subprocess import call
 
+import base64
+import csv
+
 assert hq_count > 0, "You must have at least one HQ!"
 
 #from tests import *
@@ -55,6 +58,49 @@ class configuration_only(unittest.TestCase):
 
 class skip_all(unittest.TestCase):
     pass
+
+def get_users_from_file(filename):
+
+    LOGIN_COLUMN_INDEX=1
+    PASSWD_COLUMN_INDEX=2
+    FOR_HQ_COLUMN_INDEX=3
+    FOR_COORDO_COLUMN_INDEX=4
+    FOR_PROJECT_COLUMN_INDEX=5
+
+    FIRST_GROUP_COLUMN_INDEX=6
+
+    SELECTION_CHAR='X'
+
+    users = []
+    with open(filename, 'rb') as csvfile:
+        reader = csv.reader(csvfile, delimiter=';')
+        header=False
+
+        groups = []
+
+        for row in reader:
+            if not header:
+                header=True
+
+                for index in range(FIRST_GROUP_COLUMN_INDEX, len(row)):
+                    groups.append((index, row[index]))
+            else:
+                user_groups = []
+                for grp in groups:
+                    if row[grp[0]] == SELECTION_CHAR:
+                        user_groups.append(grp[1])
+
+                data = {
+                    'login': row[LOGIN_COLUMN_INDEX],
+                    'passwd': row[PASSWD_COLUMN_INDEX],
+                    'for_hq': True if row[FOR_HQ_COLUMN_INDEX] == SELECTION_CHAR else False,
+                    'for_co': True if row[FOR_COORDO_COLUMN_INDEX] == SELECTION_CHAR else False,
+                    'for_pr': True if row[FOR_PROJECT_COLUMN_INDEX] == SELECTION_CHAR else False,
+                    'groups': user_groups
+                }
+
+                users.append(data)
+    return users
 
 
 # Determin skip flags if needed
@@ -107,10 +153,14 @@ skipPropInstance = bool_creation_only
 skipConfig = bool_creation_only
 skipRegister = bool_creation_only
 skipSync = bool_creation_only
+skipSync = bool_creation_only
 skipModuleData = bool_creation_only
 skipPartner = bool_creation_only
 skipManualConfig = bool_creation_only
 skipOpenPeriod = bool_creation_only
+skipLoadUACFile = bool_creation_only
+skipCreateUsers = bool_creation_only
+skipLoadExtraFiles = bool_creation_only
 
 # eval cond during the run
 def skip_test_real_eval(cond, reason):
@@ -192,6 +242,11 @@ class db_creation(object):
 
 
             name = cls.name_format % cls.getNameFormat()
+            if hasattr(config, 'sync_user_admin') and config.sync_user_admin:
+                sync_user = 'admin'
+            else:
+                sync_user = name
+
             cls.db = db_instance(
                 server=client,
                 name=name,
@@ -200,8 +255,8 @@ class db_creation(object):
                     'host' : config.server_host,
                     'port' : config.netrpc_port,
                     'database' : Synchro.name,
-                    'login' : name,
-                    'password' : name,
+                    'login' : sync_user,
+                    'password' : sync_user,
                     'timeout': 600,
                     'netrpc_retry': 10,
                     'xmlrpc_retry': 10,
@@ -249,7 +304,8 @@ class db_creation(object):
     @skip_test_real_eval("skipUniUser", "UniField user creation desactivated")
     def test_05_unifield_user_creation(self):
         self.db.connect('admin')
-        self.db.user('unifield').add('admin').addGroups('Sync / User', 'Purchase / User')
+        if not hasattr(config, 'load_uac_file') or not config.load_uac_file:
+            self.db.user('unifield').add('admin').addGroups('Sync / User', 'Purchase / User')
 
 
     def configure(self):
@@ -425,9 +481,10 @@ class last_sync(unittest.TestCase):
     def test_50_last_synchronization(self):
         if not self.test_cases:
             self.skipTest("No database to update")
-        for tc in self.test_cases:
-            assert issubclass(tc, db_creation), "The object %s is not of type db_creation!"
-            tc.sync()
+        for i in [0,1]:
+            for tc in self.test_cases:
+                assert issubclass(tc, db_creation), "The object %s is not of type db_creation!"
+                tc.sync()
 
 class dump_all(unittest.TestCase):
 
@@ -460,7 +517,24 @@ class dump_all(unittest.TestCase):
 # Specific Sync Server creation
 class server_creation(db_creation, unittest.TestCase):
     db = Synchro
-    
+
+    def test_02_install_lang(self):
+        self.db.connect('admin')
+        lang = False
+        if hasattr(config, 'lang'):
+            lang = config.lang
+        if lang:
+            if self.db.get('sync.client.entity'):
+                call(config.server_restart_cmd, shell=True)
+                time.sleep(5)
+            lang_obj = self.db.get('res.lang')
+            lang_id = lang_obj.search([('code', '=', lang)]) 
+            mod_obj = self.db.get('ir.module.module')
+            if lang_id:
+                lang_obj.write(lang_id, {'translatable': True})
+                mod_ids = mod_obj.search([('state', '=', 'installed')])
+                mod_obj.button_update_translations(mod_ids, lang)
+
     @unittest.skipIf(skipMasterCreation, "Master dump creation desactivated") 
     def test_03_dump_master(self):
         self.dump_db(master_dir, master_prefix_name)
@@ -492,6 +566,33 @@ class server_creation(db_creation, unittest.TestCase):
 
 # Base for instances creation ('is not Synchro')
 class client_creation(db_creation):
+    def import_csv(self, filename):
+        model = os.path.splitext(os.path.basename(filename))[0]
+        if model in ('product.nomenclature', 'product.category', 'product.product'):
+            req = self.db.get('res.request')
+            nb = req.search([])
+            wiz = self.db.get('import_data')
+            f = open(filename, 'rb')
+            rec_id = wiz.create({'object': model, 'file': base64.encodestring(f.read())})
+            f.close()
+            wiz.import_csv([rec_id], {})
+            imported = False
+            while not imported:
+               time.sleep(5)
+               imported = nb != req.search([])
+            return
+        with open(filename, 'rb') as csvfile:
+            reader = csv.reader(csvfile, delimiter=',')
+            fields = False
+            data = []
+            for row in reader:
+                if not fields:
+                    fields = row
+                else:
+                    data.append(row)
+            obj = self.db.get(model)
+            if obj and fields and data:
+                obj.import_data(fields, data)
 
     @unittest.skipIf(skipMasterCreation, "Creation of coordo from master")
     def test_00_restore_from_master(self):
@@ -514,7 +615,8 @@ class client_creation(db_creation):
     @unittest.skipIf(skipRegister, "Registration desactivated")
     def test_20_register_entity(self):
         Synchro.connect('admin')
-        Synchro.user(self.db.name).add(self.db.name).addGroups('Sync / User')
+        if not hasattr(config, 'sync_user_admin') or not config.sync_user_admin:
+            Synchro.user(self.db.name).add(self.db.name).addGroups('Sync / User')
         self.db.connect('admin')
         # search the current entity
         entity_id = self.db.get('sync.client.entity').search([])
@@ -551,16 +653,36 @@ class client_creation(db_creation):
         self.db.connect('admin')
         self.sync()
 
+    @unittest.skipIf(skipCreateUsers, "Create users desactivated")
+    def test_70_create_users(self):
+        if not hasattr(config, 'load_users_file') or not config.load_users_file:
+            return
+
+        is_hq = isinstance(self, hqn_creation)
+        is_coordo = isinstance(self, coordon_creation)
+        is_project = isinstance(self, projectn_creation)
+
+        if is_hq or is_coordo or is_project:
+            users = get_users_from_file(config.load_users_file);
+            for u in users:
+                if (is_hq and u['for_hq']) or (is_coordo and u['for_co']) or (is_project and u['for_pr']):
+                    self.db.user(u['login']).add(u['passwd']).addGroups(*u['groups'])
+
+
     @unittest.skipIf(skipModuleData, "Data module installation desactivated")
     def test_90_install_post_data(self):
         self.db.connect('admin')
-        self.db.module('msf_sync_data_post_synchro').install().do()
+        if hasattr(config, 'load_data') and config.load_data:
+            for filename in config.load_data:
+                self.import_csv(filename)
+        else:
+            self.db.module('msf_sync_data_post_synchro').install().do().set_notinstalled()
 
     @unittest.skipIf(skipPartner, "Partner creation desactivated")
     def test_91_instance_partner(self):
         self.db.connect('admin')
         account = self.db.get('account.account')
-        
+
         res = self.db.get('res.partner')
         temp_partner = res.search([('name','=','Local Market')])
         # new CoA (2014-02-20)
@@ -599,7 +721,7 @@ class client_creation(db_creation):
         # change all period by draft state (should use action_set_state but openerplib doesn't give way to do this)
         # as it's to open period from created to draft state, it's not very important
         self.db.write('account.period', period_ids, {'state': 'draft'})
-            
+
 
 # Replicable class to create hq n
 class hqn_creation(client_creation, unittest.TestCase):
@@ -610,7 +732,7 @@ class hqn_creation(client_creation, unittest.TestCase):
         self.add_to_group('Coordinations of %s' % self.db.name, 'COORDINATIONS')
         self.add_to_group('OC_%02d' % self.index, 'OC')
         for i in range(1, coordo_count+1):
-            self.add_to_group('HQ + Mission %s' % i, 'HQ + MISSION')
+            self.add_to_group('HQ%s + Mission %s' % (self.index, i), 'HQ + MISSION')
 
     @unittest.skipIf(skipPropInstance, "Proprietary Instance creation desactivated")
     def test_40_prop_instance(self):
@@ -631,8 +753,12 @@ class hqn_creation(client_creation, unittest.TestCase):
     @unittest.skipIf(skipModuleData, "Data module installation desactivated")
     def test_42_install_data_client(self):
         self.db.connect('admin')
-        self.db.module('msf_sync_data_hq').install().do()
-        
+        if hasattr(config, 'load_hq_data') and config.load_hq_data:
+            for filename in config.load_hq_data:
+                self.import_csv(filename)
+        else:
+            self.db.module('msf_sync_data_hq').install().do().set_notinstalled()
+
     @unittest.skipIf(skipManualConfig, "Manual link on analytic account destination desactivated")
     def test_43_manual_link_on_analytic_account_destination(self):
         self.db.connect('admin')
@@ -644,6 +770,39 @@ class hqn_creation(client_creation, unittest.TestCase):
             self.db.write('account.analytic.account',  analytic_account_ids, {'destination_ids': [(6, 0, account_ids)]})
 
 
+    @unittest.skipIf(skipLoadExtraFiles, "Load Extra Data Files desactivated")
+    def test_46_load_extra_data_files(self):
+        if not hasattr(config, 'load_extra_files') or not config.load_extra_files:
+            return
+
+        for filename in config.load_extra_files:
+            self.import_csv(filename)
+
+    @unittest.skipIf(skipLoadUACFile, "Load UAC File desactivated")
+    def test_45_load_uac_file(self):
+        if not hasattr(config, 'load_uac_file') or not config.load_uac_file:
+            return
+
+        self.db.connect('admin')
+
+        f = open(config.load_uac_file)
+        data = base64.encodestring(f.read())
+        f.close()
+
+        wiz = self.db.get('user.access.configurator')
+        rec_id = wiz.create({'file_to_import_uac': data})
+        try:
+            wiz.do_process_uac([rec_id])
+        except:
+            pass
+        user_obj = self.db.get('res.users')
+        user_ids = user_obj.search([('login', '!=', 'admin')])
+        if user_ids:
+            user_obj.unlink(user_ids)
+        #wizard = self.db.wizard('user.access.configurator', {'file_to_import_uac': data})
+        #wizard.do_process_uac()
+
+
 # Replicable class to create coordo n
 class coordon_creation(client_creation):
     name_format = "%(db)s_HQ%(pind)dC%(ind)d"
@@ -652,8 +811,8 @@ class coordon_creation(client_creation):
     def test_30_make_groups_coordo(self):
         self.add_to_group('OC_%02d' % self.hq.index, 'OC')
         self.add_to_group('Coordinations of %s' % self.hq.db.name, 'COORDINATIONS')
-        self.add_to_group('Mission %s' % self.index, 'MISSION')
-        self.add_to_group('HQ + Mission %s' % self.index, 'HQ + MISSION')
+        self.add_to_group('Mission %s-%s' % (self.hq.index, self.index), 'MISSION')
+        self.add_to_group('HQ%s + Mission %s' % (self.hq.index, self.index), 'HQ + MISSION')
 
     @unittest.skipIf(skipPropInstance, "Proprietary Instance creation desactivated")
     def test_40_prop_instance(self):
@@ -675,7 +834,7 @@ class coordon_creation(client_creation):
     @unittest.skipIf(skipModuleData, "Data module installation desactivated")
     def test_61_install_data_client(self):
         self.db.connect('admin')
-        self.db.module('msf_sync_data_coordo').install().do()
+        self.db.module('msf_sync_data_coordo').install().do().set_notinstalled()
 
 
 # Replicable class to create project n
@@ -685,8 +844,8 @@ class projectn_creation(client_creation):
     @unittest.skipIf(skipGroups, "Group creation desactivated")
     def test_30_make_groups_coordo(self):
         self.add_to_group('OC_%02d' % self.hq.index, 'OC')
-        self.add_to_group('Mission %s' % self.parent.index, 'MISSION')
-        self.add_to_group('HQ + Mission %s' % self.parent.index, 'HQ + MISSION')
+        self.add_to_group('Mission %s-%s' % (self.hq.index, self.parent.index), 'MISSION')
+        self.add_to_group('HQ%s + Mission %s' % (self.hq.index, self.parent.index), 'HQ + MISSION')
 
     @unittest.skipIf(skipGroups, "Group creation desactivated")
     def test_31_make_groups_project(self):

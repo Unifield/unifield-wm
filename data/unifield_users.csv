@@ -1,0 +1,28 @@
+Description;Login;Password;HQ;COORDO;PROJECT;Fin_Accounting_Entries_Act;Fin_Accounting_Entries_Consult;Fin_Accounting_Reports;Fin_Advanced_Accounting;Fin_Bnk_Chk_Registers;Fin_Budget;Fin_Cash_Registers;Fin_Cash_Responsible_Access;Fin_Config_Coordo;Fin_Config_Full;Fin_Config_HQ;Fin_Config_Project;Fin_Consult_Sup;Fin_Grant_Mgt;Fin_Hard_Posting;Fin_HQ_Entries;Fin_HR;Fin_Invoicing_Advanced;Fin_Local_Payroll;Fin_Supplier_Invoices;Fin_Supplier_Invoices_Validation;Sup_Consumption_Management;Sup_Consumption_Only;Sup_Demand_Manager;Sup_Fin_Read;Sup_Med_Read;Sup_Product_Manager;Sup_Purchase_CR;Sup_Purchase_Manager;Sup_Purchase_Officer;Sup_Read_All;Sup_Request_Validator;Sup_Requester;Sup_Store_Keeper;Sup_Supply_Config;Sup_Supply_System_Administrator;Sup_Warehouse_CR;Sup_Warehouse_Manager;Sync / User;Sync_Config;Sync_Manual;Useability / Extended View;Useability / No One;User_Manager
+Field Logistician;Field Logistician;temp;;;X;;;;;;;;;;;;;;;;;;;;;;X;;X;;;X;X;X;;;;;;X;;X;X;X;X;X;;;
+Field Supply Officer;Field Supply Officer;temp;;;X;;;;;;;;;;;;;;;;;;;;;;X;;X;;;X;;X;;;;;;X;;;X;X;;;;;
+Field Purchaser;Field Purchaser;temp;;;X;;;;;;;;;;;;;;;;;;;;;;;;;;;;;X;;;;;;;;;;X;;;;;
+Field Storekeeper;Field Storekeeper;temp;;;X;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;X;;;;;X;;;;;
+Supply Manager;Supply Manager;temp;;X;;;;;;;;;;;;;;;;;;;;;;;X;;X;;;X;X;X;;;;;;;X;X;X;X;;X;;;
+Supply Officer;Supply Officer;temp;;X;;;;;;;;;;;;;;;;;;;;;;;X;;X;;;X;X;X;;;;;;;;X;X;X;;;;;
+Purchase Manager;Purchase Manager;temp;;X;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;X;;;;;;;;;;X;;;;;
+Purchase Officer;Purchase Officer;temp;;X;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;X;;;;;;;;;X;;;;;
+Warehouse manager;Warehouse manager;temp;;X;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;X;X;X;;;;;
+Storekeeper;Storekeeper;temp;;X;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;X;;;;;X;;;;;
+Logistics Coordinator;Logistics Coordinator;temp;;X;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;X;;;X;X;;;;X
+Head of supply;Head of supply;temp;X;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;X;;;X;;;;;
+HQ Purchaser;HQ Purchaser;temp;X;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;X;;;X;;;;;
+Medical profiles;Medical profiles;temp;X;X;X;;;;;;;;;;;;;;;;;;;;;;;X;;;X;;;;;X;;;;;;;;X;;;;;
+Coordinators profiles;Coordinators profiles;temp;X;X;X;;X;;;;;;;;;;;X;;;;;;;;;;X;;X;;;;;;;;;;;;;;X;;;;;
+Fin Co;Fin Co;temp;;X;X;X;;X;X;X;X;;X;X;;;;;X;X;X;X;X;X;;X;;;;;;;;;;;;;;;;;;X;;X;;;
+ACMA;ACMA;temp;;X;X;X;;X;X;X;X;;X;X;;;;;;X;X;X;X;X;;X;;;;;;;;;;;;;;;;;;X;;X;;;
+Admin / Fin;Admin / Fin;temp;;X;X;X;;X;X;X;X;;X;;;;X;;;X;;X;X;X;;X;;;;;;;;;;;;;;;;;;X;;X;;;
+Fin Ass;Fin Ass;temp;;X;X;X;;X;;X;;X;;;;;;X;;X;;;X;X;;X;;;;;;;;;;;;;;;;;;X;;;;;
+Cashier;Cashier;temp;;X;X;;X;;;;;X;;;;;;;;X;;;;X;X;X;;;;;;;;;;;;;;;;;;X;;;;;
+HQ Accountant;HQ Accountant;temp;X;;;;X;X;;;;;;;;X;;;;;;;;;;;;;;;;;;;;;;;;;;;;X;;X;;;
+HQ Fin OP;HQ Fin OP;temp;X;;;;X;X;;;X;;;;;;;;X;;;;;;;;;;;;;;;;;;;;;;;;;X;;X;;;
+IS Officer;IS Officer;temp;X;X;X;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;X;X;X;;;X
+Sup Referent;Sup Referent;temp;X;X;X;;;;;;;;;;;;;;;;;;;;;;X;;X;;;X;;X;X;;X;X;X;X;X;;X;X;X;X;;;X
+Finance Referent;Finance Referent;temp;X;X;X;;X;X;X;X;X;;X;;X;;;;X;X;X;X;X;X;;X;;;;;;;;;;;;;;;;;;X;X;X;;;X
+Sup Trainers;Sup Trainers;temp;X;X;X;;;;;;;;;;;;;;;;;;;;;;X;;X;;;X;X;X;X;;X;X;X;X;X;X;X;X;X;X;;;X
+Fin Trainers;Fin Trainers;temp;X;X;X;X;;X;X;X;X;;X;X;;;X;;X;X;X;X;X;X;;X;;;;;;;;;;;;;;;;;;X;X;X;;;X
