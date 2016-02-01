@@ -38,6 +38,7 @@ addons = ['unifield-wm', 'unifield-addons', 'unifield-server', 'unifield-web', '
 server_restart_cmd = ''
 web_restart_cmd = ''
 
+# uncomment the next 3 parameters to load UserRights
 #load_uac_file = 'data/uac.xml'
 #load_users_file = 'data/unifield_users.csv'
 #load_extra_files = [
@@ -48,6 +49,8 @@ web_restart_cmd = ''
 #    'data/extra/msf_field_access_rights.field_access_rule_line.csv',
 #    'data/extra/msf_button_access_rights.button_access_rule.csv',
 #]
+
+# if empty or not defined module msf_sync_data_hq is installed
 #load_hq_data = [
 #    'data/master_hq/account.analytic.account.csv',
 #    'data/master_hq/account.account.csv',
@@ -56,6 +59,8 @@ web_restart_cmd = ''
 #    'data/master_hq/product.category.csv',
 #    'data/master_hq/product.product.csv',
 #]
+
+# if empty or not defined module msf_sync_data_post_synchro is installed
 #load_data = [
 #    'data/master/account.analytic.journal.csv',
 #    'data/master/account.journal.csv',
