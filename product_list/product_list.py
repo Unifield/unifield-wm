@@ -119,7 +119,7 @@ class product_list(osv.osv):
         ),
         'reviewer_id': fields.many2one(
             'res.users',
-            string='Reviewed by',
+            string='Reviewer',
             readonly=True,
         ),
         'parent_id': fields.many2one(
