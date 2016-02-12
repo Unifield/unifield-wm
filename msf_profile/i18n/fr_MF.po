@@ -21416,7 +21416,7 @@ msgstr "expected a date with 'dd/mm/YYYY' format"
 #. module: delete_button
 #: view:real.average.consumption:0
 msgid "Do you really want to delete selected record(s) ?"
-msgstr "Do you really want to delete selected record(s) ?"
+msgstr "Voulez-vous réellement supprimer les enregistrements sélectionnés?"
 
 #. module: stock
 #: selection:stock.location,chained_auto_packing:0
@@ -30394,7 +30394,7 @@ msgstr "Engagements"
 #: view:tender:0
 #: view:stock.production.lot:0
 msgid "Do you really want to delete selected record(s) ?"
-msgstr "Voulez-vous vraiment supprimer le(s) dossier(s) sélectionné(s) ?"
+msgstr "Voulez-vous réellement supprimer les enregistrements sélectionnés?"
 
 #. module: msf_homere_interface
 #: sql_constraint:hr.payroll.import.period:0
@@ -30411,7 +30411,7 @@ msgstr "Inclure les enfants"
 #: code:addons/stock_override/stock.py:694
 #, python-format
 msgid "No company currency found!"
-msgstr "Aucun devise de société trouvée!"
+msgstr "Aucune devise de société trouvée!"
 
 #. module: product
 #: view:product.pricelist.item:0
