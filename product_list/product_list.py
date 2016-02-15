@@ -21,7 +21,7 @@
 
 from osv import osv, fields
 from tools.translate import _
-
+import tools
 import time
 import logging
 
@@ -40,6 +40,30 @@ class product_list(osv.osv):
             res[list.id] = len(list.product_ids)
 
         return res
+
+    def _get_my_level(self, cr, uid, ids, field_name, arg, context=None):
+        ret = {}
+        for id in ids:
+            ret[id] = False
+        return ret
+
+    def _search_my_level(self, cr, uid, obj, name, args, context=None):
+        dom = []
+        for arg in args:
+            if arg[0] == 'my_level':
+                if arg[1] != '=' or not arg[2]:
+                    raise osv.except_osv(_('Error'), _('Filter my_level not implemented with these args.'))
+                level = ['temp']
+                inst = self.pool.get('res.users').browse(cr, uid, uid, context=context).company_id.instance_id
+                if inst and inst.level:
+                    if inst.level == 'section':
+                        level.append('hq')
+                    else:
+                        level.append(inst.level)
+                dom.append(('creator', 'in', level))
+            else:
+                dom.append(arg)
+        return dom
 
     def write(self, cr, uid, ids, vals, context=None):
         '''
@@ -150,7 +174,8 @@ class product_list(osv.osv):
             type='integer',
             string='# of products',
         ),
-
+        'my_level': fields.function( _get_my_level, method=True, type='boolean',
+            string='Filter by creator', fnct_search=_search_my_level),
     }
 
     _defaults = {

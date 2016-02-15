@@ -41,6 +41,7 @@ class product_to_list(osv.osv_memory):
         'list_id': fields.many2one(
             'product.list',
             string='Existing list',
+            domain=[('my_level', '=', True)],
         ),
         'new_list_name': fields.char(
             size=128,
