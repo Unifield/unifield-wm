@@ -21413,8 +21413,9 @@ msgstr "Unité d'Echange"
 msgid "expected a date with 'dd/mm/YYYY' format"
 msgstr "expected a date with 'dd/mm/YYYY' format"
 
-#. module: delete_button
+#. modules: delete_button, register_accounting
 #: view:real.average.consumption:0
+#: view:account.bank.statement:0
 msgid "Do you really want to delete selected record(s) ?"
 msgstr "Voulez-vous réellement supprimer les enregistrements sélectionnés?"
 
