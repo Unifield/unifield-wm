@@ -350,7 +350,10 @@ class db_creation(object):
         # Get 2 cost centers: the top one and the normal one
         cost_center_id = False
         top_cost_center_id = False
+        mission_suffix = 'OC'
         if mission and mission.db is hq:
+            # coordo
+            mission_suffix = "%02d" % self.index
             top_data = {
                 'name' : "HT%d" % (self.index),
                 'code' : "HT%d" % (self.index),
@@ -368,6 +371,8 @@ class db_creation(object):
             }
             cost_center_id = hq.get('account.analytic.account').create(data)
         elif self.db is not hq:
+            # project
+            mission_suffix = "%02d" % mission.index
             parent_cost_center_id = hq.search_data('account.analytic.account', {'Code':"HT%d" % (mission.index)})[0]
             data = {
                 'name' : "HT%d%d1" % (mission.index, self.index),
@@ -381,7 +386,7 @@ class db_creation(object):
             'code' : self.db.name,
             'name' : self.db.name,
             'instance' : self.db.name,
-            'mission' : '%s_MISSION_%s' % (config.prefix, ("OC" if mission is None else "%02d" % mission.index)),
+            'mission' : '%s_MISSION_%s' % (config.prefix, mission_suffix),
             'state' : 'active',
         }
         if prop_instance is not None:
@@ -678,6 +683,31 @@ class client_creation(db_creation):
         else:
             self.db.module('msf_sync_data_post_synchro').install().do().set_notinstalled()
 
+    def search_account(self, code):
+        account = self.db.get('account.account')
+        ac_ids = account.search([('code', '=', code)])
+        if ac_ids:
+            return ac_ids[0]
+        return False
+
+    def test_91_configure_company_accounts(self):
+        company_fields = {
+            'salaries_default_account': '30100',
+            'counterpart_hq_entries_default_account': '33010',
+            'import_invoice_default_account': '12011',
+            'intermission_default_counterpart': '14010',
+            'revaluation_default_account': '67050',
+            'ye_pl_cp_for_bs_debit_bal_account': '69001',
+            'ye_pl_cp_for_bs_credit_bal_account': '79002',
+            'ye_pl_pos_credit_account': '79003',
+            'ye_pl_ne_credit_account': '50000',
+            'ye_pl_pos_debit_account': '51000',
+            'ye_pl_ne_debit_account': '69002',
+        }
+        for f in company_fields:
+            company_fields[f] = self.search_account(company_fields[f])
+        self.db.get('res.company').write([1], company_fields)
+
     @unittest.skipIf(skipPartner, "Partner creation desactivated")
     def test_91_instance_partner(self):
         self.db.connect('admin')
@@ -700,7 +730,6 @@ class client_creation(db_creation):
                 'property_account_receivable' : receivable_ids[0],
                 'city': 'Geneva',
                 })
-
         temp_partner = res.search([('name','=',self.db.name)])
         if temp_partner:
             # set account values for the default user
