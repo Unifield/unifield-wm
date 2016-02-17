@@ -100,10 +100,19 @@ class account_cash_statement(osv.osv):
         if prev_reg_id:
             prev_reg = self.browse(cr, uid, [prev_reg_id], context=context)[0]
             # if previous register closing balance is freezed, then retrieving previous closing balance
-            # US_410: retrieving previous closing balance even closing balance is not freezed
+            # US-410: retrieving previous closing balance even closing balance is not freezed
             # if prev_reg.closing_balance_frozen:
             if journal.type == 'bank':
-                vals.update({'balance_start': prev_reg.balance_end_real})
+                # US-948/US-645
+                # - register frozen: take balance_end_real (closing balance)
+                # like was during US-645
+                # - not frozen: take msf_calculated_balance like was done before
+                # US-410/US-645 (but inconsistent with an already frozen
+                # register and partially fixed during US-645)
+                bal = prev_reg.closing_balance_frozen \
+                    and prev_reg.balance_end_real \
+                    or prev_reg.msf_calculated_balance
+                vals.update({'balance_start': bal})
         res_id = osv.osv.create(self, cr, uid, vals, context=context)
         # take on previous lines if exists (or discard if they come from sync)
         if prev_reg_id and not sync_update:
