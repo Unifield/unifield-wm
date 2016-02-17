@@ -11,5 +11,3 @@ Reconcile Entries,account.move.line.reconcile.select,form,account.move.line.reco
 Reconcile Entries,account.move.line.reconcile,form,account.move.line.reconcile.full.form,,"Fin_Accounting_Entries_Act,Fin_Accounting_Entries_Consult",sd.account_action_view_account_move_line_reconcile
 Reconciliation: Go to Next Partner,account.partner.reconcile.process,form,Partner Reconcilation Process,,"Fin_Accounting_Entries_Act,Fin_Accounting_Entries_Consult",sd.account_action_account_partner_reconcile
 Re-Open cash box,cashbox.write.off,form,,[],"Fin_Advanced_Accounting,Fin_Config_Coordo,Fin_Config_Project",sd.register_accounting_action_write_off
-Re-open partially closed register,cashbox.write.off,form,,[],"Fin_Advanced_Accounting,Fin_Config_Coordo,Fin_Config_Project",sd.register_accounting_action_write_off
-Re-open closed register,register.reopen,form,,[],"Administration / Access Rights",sd.register_accounting_action_wizard_reopen_register
