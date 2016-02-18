@@ -10,3 +10,4 @@ FALSE,TRUE,TRUE,TRUE,"[('category', 'in', ['FUNDING'])] ",Fin_Config_HQ,analytic
 FALSE,TRUE,TRUE,TRUE,"[('category', 'in', ['FREE1','FREE2'])] ",Fin_Config_Project,analytic_model_account_analytic_account_Analytic_accounts_Fin_config_Project,Analytic accounts Fin config Project,sd.analytic_model_account_analytic_account
 FALSE,TRUE,TRUE,TRUE,"[('category', 'in', ['FUNDING','FREE1','FREE2'])] ",Fin_Config_Coordo,analytic_model_account_analytic_account_Analytic_accounts_Fin_config_Coordo,Analytic accounts Fin config Coordo,sd.analytic_model_account_analytic_account
 FALSE,FALSE,TRUE,TRUE,"[('is_admin', '!=', False)]",,res_users_model_res_users_Administrator_User_Profile_Access,Administrator User Profile Access,sd.base_model_res_users
+FALSE,TRUE,TRUE,TRUE,"[('creator', 'in', ['temp', user.company_id.instance_id.level.replace('section', 'hq')])]",,Prodcuts_List_filter_by_creator,Products List,sd.product_list_model_product_list

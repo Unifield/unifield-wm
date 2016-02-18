@@ -38,3 +38,6 @@ TRUE,,,,"Sup_Supply_System_Administrator,Sup_Warehouse_Manager,Sup_Store_Keeper"
 TRUE,,[],,"Sup_Supply_Config,Sup_Requester,Sup_Request_Validator,Sup_Supply_System_Administrator,Sup_Purchase_Manager",ALL_PRODUCTS_HQ_NO_ACCESS,hq,All Products - HQ - No Field,sd.product_model_product_product,domain_validated
 TRUE,,[],,"Sup_Supply_Config,Sup_Requester,Sup_Request_Validator,Sup_Supply_System_Administrator,Sup_Purchase_Manager",ALL_PRODUCTS_COORDO_NO_ACCESS,coordo,All Products - Coordination - No Field,sd.product_model_product_product,domain_validated
 TRUE,,[],,"Sup_Supply_Config,Sup_Requester,Sup_Request_Validator,Sup_Supply_System_Administrator,Sup_Purchase_Manager",ALL_PRODUCTS_PROJECT_NO_ACCESS,project,All Products - Project - No Field,sd.product_model_product_product,domain_validated
+TRUE,,"[('creator', 'in', ['coordo', 'project'])]",,,HQ_PRODUCT_LIST,hq,HQ Products List,sd.product_list_model_product_list,domain_validated
+TRUE,,"[('creator', 'in', ['hq', 'project'])]",,,COORDO_PRODUCT_LIST,coordo,COORDO Products List,sd.product_list_model_product_list,domain_validated
+TRUE,,"[('creator', 'in', ['coordo', 'hq'])]",,,PROJECT_PRODUCT_LIST,project,PROJECT Products List,sd.product_list_model_product_list,domain_validated
