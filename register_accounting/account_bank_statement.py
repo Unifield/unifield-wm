@@ -1973,7 +1973,7 @@ class account_bank_statement_line(osv.osv):
 
                 new_distrib = values.get('analytic_distribution_id', False)
                 # US-351: Fixed the wrong condition
-                if new_distrib and old_distrib != new_distrib and line.get('first_move_line_id', False) and line.get('move_ids', False):
+                if not context.get('sync_update_execution') and new_distrib and old_distrib != new_distrib and line.get('first_move_line_id', False) and line.get('move_ids', False):
                     first_move_line_id = line.get('first_move_line_id')[0]
                     move_ids = line.get('move_ids')[0]
                     if isinstance(move_ids, (int, long)):

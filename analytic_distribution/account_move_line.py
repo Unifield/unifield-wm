@@ -405,6 +405,13 @@ class account_move_line(osv.osv):
                 tmp_res = super(account_move_line, self).write(cr, uid, [ml.id], vals, context, False, False)
                 res.append(tmp_res)
             return res
+        if context.get('sync_update_execution') and vals.get('analytic_distribution_id'):
+            # in sync context ids is a list of one id
+            old_distrib = self.read(cr, uid, ids, ['analytic_distribution_id'])[0]['analytic_distribution_id']
+            if old_distrib and old_distrib[0] != vals.get('analytic_distribution_id'):
+                aa_ids = self.pool.get('account.analytic.line').search(cr, uid, [('distribution_id', '=', old_distrib[0]), ('move_id', 'in', [ids[0]])], context=context)
+                if aa_ids:
+                    self.pool.get('account.analytic.line').unlink(cr, uid, aa_ids, context=context)
         res = super(account_move_line, self).write(cr, uid, ids, vals, context, check, update_check)
         return res
 
