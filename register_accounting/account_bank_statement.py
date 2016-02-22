@@ -1914,6 +1914,8 @@ class account_bank_statement_line(osv.osv):
         # Verify that the statement line isn't in hard state
         if state  == 'hard':
             if values == {'from_cash_return': True} or values.get('analytic_distribution_id', False) or (values.get('invoice_id', False) and len(values.keys()) == 2 and values.get('from_cash_return')) or 'from_correction' in context or context.get('sync_update_execution', False):
+                if context.get('sync_update_execution') and 'direct_state' in values:
+                    del(values['direct_state'])
                 return super(account_bank_statement_line, self).write(cr, uid, ids, values, context=context)
             raise osv.except_osv(_('Warning'), _('You cannot write a hard posted entry.'))
         # First update amount
