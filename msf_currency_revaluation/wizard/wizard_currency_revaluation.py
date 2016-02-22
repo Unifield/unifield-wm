@@ -749,7 +749,8 @@ class WizardCurrencyrevaluation(osv.osv_memory):
                     # if the revaluation method is 'Other B/S'
                     if form.revaluation_method in ['liquidity_year', 'other_bs']:
                         move_id, rev_line_ids = self._reverse_other_bs_move_lines(
-                            cr, uid, form, move_id, new_ids, context=context)
+                            cr, uid, form, move_id, new_ids, context=context,
+                            next_fiscalyear_id=next_fiscalyear_id)
                         created_ids.extend(rev_line_ids)
 
         if created_ids:
@@ -814,7 +815,8 @@ class WizardCurrencyrevaluation(osv.osv_memory):
         return period_ids[0]
 
     def _reverse_other_bs_move_lines(
-            self, cr, uid, form, move_id, line_ids, context=None):
+        self, cr, uid, form, move_id, line_ids, context=None,
+        next_fiscalyear_id=False):
         """Reverse 'Other B/S' revaluation entries."""
         if context is None:
             context = {}
@@ -856,6 +858,17 @@ class WizardCurrencyrevaluation(osv.osv_memory):
             rev_line_id = line_obj.copy(cr, uid, line.id, vals, context=context)
             # Do the reverse
             amt = -1 * line.amount_currency
+
+            source_date = line.date
+            if line.period_id.fiscalyear_id.id == next_fiscalyear_id \
+                and line.period_id.number == 1:
+                # US-957: recording Jan FY+1 REV entries of yearly/other BS:
+                # source_date <=> date of end of FY revaluated
+                # => source_date is used to mark yearly rev entries: FY+1 Jan
+                # can be monthly revaluated if only previous FY revaluation
+                # entries found in Jan.
+                source_date = form.fiscalyear_id.date_stop
+
             vals.update({
                 'debit': line.credit,
                 'credit': line.debit,
@@ -864,12 +877,13 @@ class WizardCurrencyrevaluation(osv.osv_memory):
                 'name': line_obj.join_without_redundancy(line.name, 'REV'),
                 'reversal_line_id': line.id,
                 'account_id': line.account_id.id,
-                'source_date': line.date,
+                'source_date': source_date,
                 'reversal': True,
                 'reference': line.move_id and line.move_id.name or '',
                 'ref': line.move_id and line.move_id.name or '',
             })
             line_obj.write(cr, uid, [rev_line_id], vals, context=context)
+
             # Keep lines to reconcile
             if line.account_id.reconcile:
                 lines_to_reconcile.append((line.id, rev_line_id))
