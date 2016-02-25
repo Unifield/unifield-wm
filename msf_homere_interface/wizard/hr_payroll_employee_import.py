@@ -308,6 +308,7 @@ class hr_payroll_employee_import(osv.osv_memory):
             # UTP-1098: If what_changed is not None, we should search the employee only on code_staff
             if what_changed:
                 e_ids = self.pool.get('hr.employee').search(cr, uid, [('identification_id', '=', ustr(code_staff)), ('name', '=', employee_name)])
+                
             # Prepare vals
             res = False
             vals = {
@@ -388,6 +389,13 @@ class hr_payroll_employee_import(osv.osv_memory):
             # Desactivate employee if no current contract
             if not current_contract:
                 vals.update({'active': False})
+                
+            # US-671: Search for the cost center from codeterrain and set this value, if not, set empty
+            account_analytic_obj = self.pool.get('account.analytic.account')
+            cc_ids = account_analytic_obj.search(cr, uid,[('code', '=', codeterrain)])
+            if cc_ids and len(cc_ids) == 1:
+                vals.update({'cost_center_id': cc_ids[0],})
+                
             if not e_ids:
                 res = self.pool.get('hr.employee').create(cr, uid, vals, {'from': 'import'})
                 if res:
