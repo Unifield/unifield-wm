@@ -385,9 +385,17 @@ class hr_payroll_employee_import(osv.osv_memory):
                 # Check job
                 if contract.job_id:
                     vals.update({'job_id': contract.job_id.id})
+                    
             # Desactivate employee if no current contract
             if not current_contract:
                 vals.update({'active': False})
+
+            # US-671: Search for the cost center from codeterrain and set this value, if not, set empty
+            account_analytic_obj = self.pool.get('account.analytic.account')
+            cc_ids = account_analytic_obj.search(cr, uid,[('code', '=', codeterrain)])
+            if cc_ids and len(cc_ids) == 1:
+                vals.update({'cost_center_id': cc_ids[0],})
+            
             if not e_ids:
                 res = self.pool.get('hr.employee').create(cr, uid, vals, {'from': 'import'})
                 if res:
