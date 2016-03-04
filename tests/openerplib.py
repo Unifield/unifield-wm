@@ -9,6 +9,7 @@ import shutil
 from xmlrpclib import Fault
 import openerplib103 as openerplib
 
+from tempfile import NamedTemporaryFile
 import config
 
 import pdb
@@ -68,7 +69,11 @@ class db(object):
     def restore_db_file(self, dbname, from_file):
         if self.server.connector.hostname in ('127.0.0.1', 'localhost'):
             try:
-                self.service.restore_file(self.server_password, self.db_name, from_file)
+                tmpfile = NamedTemporaryFile('w+b', delete=False)
+                filename = tmpfile.name
+                shutil.copyfile(from_file, filename)
+                tmpfile.close()
+                self.service.restore_file(self.server_password, self.db_name, filename)
                 return True
             except Fault, e:
                 if 'Method not found' not in e.faultString:
