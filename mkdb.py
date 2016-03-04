@@ -465,17 +465,12 @@ class db_creation(object):
             bckfile = os.path.join(path, '%s_%s.dump' % (name, i))
         if i:
             shutil.move(orig_bck, bckfile)
-
-        bckfile_f = open(orig_bck, 'wb')
-        bckfile_f.write(self.db.dump_db())
-        bckfile_f.close()
+        self.db.dump_db_file(orig_bck)
 
     def restore_db(self):
         dump = os.path.join(master_dir, "%s.dump" % (master_prefix_name,) ) #self.db.name)
-        f = open(dump, 'rb')
         self.db.connect('admin')
-        self.db.restore_db(self.db.name, f.read())
-        f.close()
+        self.db.restore_db_file(self.db.name, dump)
         # wait process
         time.sleep(10)
 
@@ -751,6 +746,17 @@ class client_creation(db_creation):
         # as it's to open period from created to draft state, it's not very important
         self.db.write('account.period', period_ids, {'state': 'draft'})
 
+    def test_99_add_shortcut(self):
+        self.db.connect('admin')
+        menu_to_add = ['sync_client.sync_wiz_menu', 'sync_client.sync_monitor_menu']
+        for menu in menu_to_add:
+            module, xml = menu.split('.')
+            menu_id = self.db.get('ir.model.data').get_object_reference(module, xml)[1]
+            menu_name = self.db.get('ir.ui.menu').name_get([menu_id])[0][1]
+            try:
+                self.db.get('ir.ui.view_sc').create({'res_id': menu_id, 'name': menu_name})
+            except:
+                raise
 
 # Replicable class to create hq n
 class hqn_creation(client_creation, unittest.TestCase):

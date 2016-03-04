@@ -4,6 +4,7 @@ import re
 
 import csv
 import base64
+import shutil
 
 from xmlrpclib import Fault
 import openerplib103 as openerplib
@@ -48,8 +49,34 @@ class db(object):
     def dump_db(self):
         return base64.decodestring(self.service.dump(self.server_password, self.db_name))
 
+    def dump_db_file(self, to_file):
+        if self.server.connector.hostname in ('127.0.0.1', 'localhost'):
+            try:
+                shutil.move(self.service.dump_file(self.server_password, self.db_name), to_file)
+                return True
+            except Fault, e:
+                if 'Method not found' not in e.faultString:
+                    raise
+        bckfile_f = open(to_file, 'wb')
+        bckfile_f.write(self.dump_db())
+        bckfile_f.close()
+        return True
+
     def restore_db(self, dbname, data):
         return self.service.restore(self.server_password, self.db_name, base64.encodestring(data))
+
+    def restore_db_file(self, dbname, from_file):
+        if self.server.connector.hostname in ('127.0.0.1', 'localhost'):
+            try:
+                self.service.restore_file(self.server_password, self.db_name, from_file)
+                return True
+            except Fault, e:
+                if 'Method not found' not in e.faultString:
+                    raise
+        f = open(from_file, 'rb')
+        result = self.restore_db(dbname, f.read())
+        f.close()
+        return result
 
     def wait(self):
         if not self.server_password: raise Exception, "The server password is needed for this operation"
