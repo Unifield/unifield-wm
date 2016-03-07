@@ -707,9 +707,8 @@ class stock_picking(osv.osv):
         batch_dict = out_info.to_dict()
         error_message = "Create Batch Number: Something go wrong with this message, invalid instance reference"
 
-        batch_dict['partner_name'] = source
-
-        existing_bn = batch_obj.search(cr, uid, [('xmlid_name', '=', batch_dict['xmlid_name']), ('partner_name', '=', source)], context=context)
+        #US-981: Use the partner name provided by the sync, not taking the wrong default source value!
+        existing_bn = batch_obj.search(cr, uid, [('xmlid_name', '=', batch_dict['xmlid_name']), ('partner_name', '=', batch_dict['partner_name'])], context=context)
         if existing_bn:  # existed already, then don't need to create a new one
             message = "Create Batch Number: the given BN exists already at local instance, no new BN will be created"
             self._logger.info(message)
