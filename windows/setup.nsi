@@ -98,7 +98,7 @@
 !define DEFAULT_POSTGRESQL_USERNAME 'openpg'
 !define DEFAULT_POSTGRESQL_PASSWORD '4Unifieldpg'
 
-!define PGVERSION '8.4.17-1'
+!define PGVERSION '8.4.22-1'
 
 !define DEFAULT_OPENERP_PASSWORD '4UnifieldAdmin'
 !define DEFAULT_OPENERP_DROP_PWD 'dropAdmin'
