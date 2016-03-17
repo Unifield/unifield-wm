@@ -187,7 +187,7 @@ class product_product(osv.osv):
                 if not setup_br:
                     return res
                 
-                percentage = setup_obj.browse(cr, uid, setup_br.id, context)[0].sale_price
+                percentage = setup_obj.browse(cr, uid, [setup_br.id], context)[0].sale_price
                 list_price = standard_price * (1 + (percentage/100.00))
                 if 'value' in res:
                     res['value'].update({'list_price': list_price})
