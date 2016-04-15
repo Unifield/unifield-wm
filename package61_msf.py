@@ -105,9 +105,10 @@ def update(o):
 def update_branch_summary(o):
     s = ['PACKAGING:']
     s.append(branch_get_summary('packging branch', '.'))
-    s.append('ADDONS:')
-    for i, (addon_branch, addon_dir) in enumerate(zip(o.addons_branches, o.addons_dirs)):
-        s.append(branch_get_summary(addon_branch,addon_dir))
+    if o.addons_branches:
+        s.append('ADDONS:')
+        for i, (addon_branch, addon_dir) in enumerate(zip(o.addons_branches, o.addons_dirs)):
+            s.append(branch_get_summary(addon_branch,addon_dir))
     s.append('SERVER:')
     s.append(branch_get_summary(o.server_branch,o.server_dir))
     #branch_revert_and_apply_patches(o.server_dir, o.server_patches)
@@ -360,7 +361,7 @@ def options():
     o.work_client = join(o.build, 'openerp-client-%s'%o.version_full)
     o.work_addons = join(o.work, 'bin', 'addons')
     o.work_client_web = join(o.build, 'openerp-client-web-%s'%o.version_full)
-    o.addons_branches = o.addons_branch.split(',')
+    o.addons_branches = o.addons_branch and o.addons_branch.split(',') or []
     o.addons_dirs = [ join(o.repo, url2dir(addon_branch)) for addon_branch in o.addons_branches ]
     o.server_dir = join(o.repo, url2dir(o.server_branch))
     o.web_dir = join(o.repo, url2dir(o.web_branch))
