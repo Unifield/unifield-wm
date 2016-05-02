@@ -18,6 +18,8 @@ TRUE,,"[('international_status', '=', 4)]",,Sup_Product_Manager,LOCAL_PRODUCT_CO
 TRUE,,"[('international_status', '=', 4)]",,Sup_Product_Manager,LOCAL_PRODUCT_HQ,hq,LOCAL Product HQ,sd.product_model_product_product,domain_validated
 TRUE,,"[('international_status', '=', 5)]",,Sup_Product_Manager,TEMP_PRODUCT_COORDO,coordo,TEMP Product Coordo,sd.product_model_product_product,domain_validated
 TRUE,,"[('international_status', '=', 5)]",,Sup_Product_Manager,TEMP_PRODUCT_HQ,hq,TEMP Product HQ,sd.product_model_product_product,domain_validated
+TRUE,,"[('international_status', '=', 6)]",,Sup_Product_Manager,UNIDATA_PRODUCT_HQ,hq,UNIDATA Product HQ,sd.product_model_product_product,domain_validated
+TRUE,,"[('international_status', '=', 6)]",,Sup_Product_Manager,UNIDATA_PRODUCT_COORDO,coordo,UNIDATA Product Coordo,sd.product_model_product_product,domain_validated
 TRUE,,[],,"Sup_Supply_Config,Sup_Supply_System_Administrator,Sup_Purchase_Officer,Sup_Purchase_Manager,Sup_Consumption_Management,Sup_Demand_Manager,Sup_Warehouse_Manager,Sup_Store_Keeper",PRODUCTS_PROJECTS_NO_ACCESS,project,Products - Project - No Access,sd.product_model_product_product,domain_validated
 TRUE,,[],,Sup_Product_Manager,PRODUCTS_PROJECTS_CHANGES_ALLOWED,project,Products - Project - Changes allowed,sd.product_model_product_product,domain_validated
 TRUE,"For Fin_Config_Full, gives access to change the Accounting codes of international products (in HQ)","[('international_status', 'in', ['1','2','3'])]",,Fin_Config_Full,HQ_PROD_FIN_CONFIG_FULL_HQ,hq,HQ Product - Fin Config Full - HQ Access,sd.product_model_product_product,domain_validated
@@ -38,6 +40,3 @@ TRUE,,,,"Sup_Supply_System_Administrator,Sup_Warehouse_Manager,Sup_Store_Keeper"
 TRUE,,[],,"Sup_Supply_Config,Sup_Requester,Sup_Request_Validator,Sup_Supply_System_Administrator,Sup_Purchase_Manager",ALL_PRODUCTS_HQ_NO_ACCESS,hq,All Products - HQ - No Field,sd.product_model_product_product,domain_validated
 TRUE,,[],,"Sup_Supply_Config,Sup_Requester,Sup_Request_Validator,Sup_Supply_System_Administrator,Sup_Purchase_Manager",ALL_PRODUCTS_COORDO_NO_ACCESS,coordo,All Products - Coordination - No Field,sd.product_model_product_product,domain_validated
 TRUE,,[],,"Sup_Supply_Config,Sup_Requester,Sup_Request_Validator,Sup_Supply_System_Administrator,Sup_Purchase_Manager",ALL_PRODUCTS_PROJECT_NO_ACCESS,project,All Products - Project - No Field,sd.product_model_product_product,domain_validated
-TRUE,,"[('creator', 'in', ['coordo', 'project'])]",,,HQ_PRODUCT_LIST,hq,HQ Products List,sd.product_list_model_product_list,domain_validated
-TRUE,,"[('creator', 'in', ['hq', 'project'])]",,,COORDO_PRODUCT_LIST,coordo,COORDO Products List,sd.product_list_model_product_list,domain_validated
-TRUE,,"[('creator', 'in', ['coordo', 'hq'])]",,,PROJECT_PRODUCT_LIST,project,PROJECT Products List,sd.product_list_model_product_list,domain_validated
