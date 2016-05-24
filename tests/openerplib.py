@@ -1,4 +1,4 @@
-from os import path
+from os import path, chmod
 from time import sleep
 import re
 
@@ -54,6 +54,7 @@ class db(object):
         if self.server.connector.hostname in ('127.0.0.1', 'localhost'):
             try:
                 shutil.move(self.service.dump_file(self.server_password, self.db_name), to_file)
+                chmod(to_file, 0744)
                 return True
             except Fault, e:
                 if 'Method not found' not in e.faultString:
