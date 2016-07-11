@@ -13,5 +13,3 @@ Reconciliation: Go to Next Partner,account.partner.reconcile.process,form,Partne
 Re-Open cash box,cashbox.write.off,form,,[],"Fin_Advanced_Accounting,Fin_Config_Coordo,Fin_Config_Project",sd.register_accounting_action_write_off
 Re-open partially closed register,cashbox.write.off,form,,[],"Fin_Advanced_Accounting,Fin_Config_Coordo,Fin_Config_Project",sd.register_accounting_action_write_off
 Re-open closed register,register.reopen,form,,[],"Administration / Access Rights",sd.register_accounting_action_wizard_reopen_register
-Validate Accrual Lines,wizard.accrual.validation,form,,[],"Fin_Config_Coordo",sd.msf_accrual_action_wizard_accrual_validation
-Post Accrual Reversal,wizard.accrual.reversal,form,,[],"Fin_Config_Coordo",sd.msf_accrual_action_wizard_post_accrual_reversal

@@ -22,7 +22,7 @@ PO Coordo,msf_order_date.field_sale_order_delivery_requested_date,TRUE,FALSE,FAL
 PO Coordo,purchase.field_purchase_order_dest_address_id,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/21
 PO Coordo,purchase_override.field_purchase_order_dest_partner_id,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/22
 PO Coordo,sale_override.field_sale_order_details,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/23
-PO Coordo,transport_mgmt.field_purchase_order_display_intl_transport_ok,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/24
+PO Coordo,transport_mgmt.field_purchase_order_display_intl_transport_ok,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/24
 PO Coordo,register_accounting.field_purchase_order_down_payment_filter,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/25
 PO Coordo,register_accounting.field_purchase_order_down_payment_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/26
 PO Coordo,msf_order_date.field_sale_order_est_transport_lead_time,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/27
@@ -37,7 +37,7 @@ PO Coordo,res_currency_functional.field_sale_order_functional_currency_id,FALSE,
 PO Coordo,msf_doc_import.field_sale_order_import_in_progress,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/36
 PO Coordo,transport_mgmt.field_purchase_order_incoterm_id,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/37
 PO Coordo,msf_order_date.field_sale_order_internal_type,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/38
-PO Coordo,transport_mgmt.field_purchase_order_intl_supplier_ok,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/39
+PO Coordo,transport_mgmt.field_purchase_order_intl_supplier_ok,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/39
 PO Coordo,purchase_override.field_purchase_order_invoice_address_id,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/40
 PO Coordo,sale.field_sale_order_invoice_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/41
 PO Coordo,purchase.field_purchase_order_invoice_method,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/42
@@ -59,7 +59,7 @@ PO Coordo,tender_flow.field_purchase_order_origin_tender_id,FALSE,FALSE,FALSE,ms
 PO Coordo,purchase.field_purchase_order_partner_address_id,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/58
 PO Coordo,sale.field_sale_order_partner_id,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/59
 PO Coordo,product.field_product_product_partner_ref,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/60
-PO Coordo,msf_order_date.field_sale_order_partner_type,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/61
+PO Coordo,msf_order_date.field_sale_order_partner_type,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/61
 PO Coordo,return_claim.field_product_product_picking_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/62
 PO Coordo,transport_mgmt.field_purchase_order_picking_transport_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/63
 PO Coordo,purchase_override.field_purchase_order_po_from_fo,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/64
@@ -524,6 +524,7 @@ Field Order Project,msf_order_date.field_sale_order_transport_type,TRUE,FALSE,FA
 Field Order Project,sale.field_sale_order_user_id,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/523
 Field Order Project,sale_override.field_sale_order_validated_date,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/524
 Field Order Project,procurement_request.field_sale_order_warehouse_id,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/525
+ESC Product HQ,product.field_product_product_active,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/12526
 ESC Product Coordo,product.field_product_product_active,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/676
 ESC Product Coordo,product_expiry.field_product_product_alert_time,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/677
 ESC Product Coordo,product_asset.field_product_product_asset_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/678
@@ -672,7 +673,7 @@ ESC Product Coordo,product.field_product_template_volume,FALSE,FALSE,FALSE,msf_p
 ESC Product Coordo,product.field_product_template_warranty,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/823
 ESC Product Coordo,product.field_product_template_weight,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/824
 ESC Product Coordo,product.field_product_template_weight_net,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/825
-Products at HQ,product.field_product_product_active,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/826
+ITC Product HQ,product.field_product_product_active,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/826
 ITC Product Coordo,product.field_product_product_active,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/976
 ITC Product Coordo,product_expiry.field_product_product_alert_time,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/977
 ITC Product Coordo,product_asset.field_product_product_asset_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/978
@@ -821,6 +822,7 @@ ITC Product Coordo,product.field_product_template_volume,FALSE,FALSE,FALSE,msf_p
 ITC Product Coordo,product.field_product_template_warranty,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/1123
 ITC Product Coordo,product.field_product_template_weight,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/1124
 ITC Product Coordo,product.field_product_template_weight_net,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/1125
+LOCAL Product HQ,product.field_product_product_active,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/1126
 LOCAL Product Coordo,product_expiry.field_product_product_alert_time,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1277
 LOCAL Product Coordo,product_asset.field_product_product_asset_ids,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1278
 LOCAL Product Coordo,product_asset.field_product_template_asset_type_id,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1279
@@ -968,6 +970,7 @@ LOCAL Product Coordo,product.field_product_template_volume,TRUE,FALSE,FALSE,msf_
 LOCAL Product Coordo,product.field_product_template_warranty,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1423
 LOCAL Product Coordo,product.field_product_template_weight,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1424
 LOCAL Product Coordo,product.field_product_template_weight_net,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1425
+TEMP Product HQ,product.field_product_product_active,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/1426
 TEMP Product Coordo,product.field_product_product_active,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1576
 TEMP Product Coordo,product_expiry.field_product_product_alert_time,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1577
 TEMP Product Coordo,product_asset.field_product_product_asset_ids,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1578
@@ -2546,6 +2549,7 @@ Local Product - Fin Config Full - Project Access,product.field_product_template_
 Local Product - Fin Config Full - Project Access,product.field_product_template_weight,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3169
 Local Product - Fin Config Full - Project Access,product.field_product_template_weight_net,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3170
 Local Product - Fin Config Full - Project Access,product_list.field_product_product_xmlid_code,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3171
+UNIDATA Product HQ,product.field_product_product_active,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/526
 UNIDATA Product Coordo,product.field_product_product_active,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/4000
 UNIDATA Product Coordo,product_expiry.field_product_product_alert_time,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/4001
 UNIDATA Product Coordo,product_asset.field_product_product_asset_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/4002
@@ -3201,4 +3205,3 @@ All Products - Project - No Field,product.field_product_template_warranty,FALSE,
 All Products - Project - No Field,product.field_product_template_weight,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3682
 All Products - Project - No Field,product.field_product_template_weight_net,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3683
 All Products - Project - No Field,product_list.field_product_product_xmlid_code,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3684
-Products at HQ - UniData,product.field_product_product_active,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/3685

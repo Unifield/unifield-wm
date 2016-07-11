@@ -10,12 +10,15 @@ TRUE,,[],,Fin_Consult_Sup,PARTNER_ACCOUNT_CODES_COORDO,coordo,Partner Account Co
 TRUE,,[],,Fin_Consult_Sup,PARTNER_ACCOUNT_CODES_PROJECT,project,Partner Account Codes - Project - No Access,sd.base_model_res_partner,domain_validated
 TRUE,,[],,"Sup_Purchase_Manager,Sup_Supply_System_Administrator,Fin_Config_Coordo",PARTNER_ACCOUNT_CODES_COORDO_ACCESS,coordo,Partner Account Codes - Coordo - Have Access,sd.base_model_res_partner,domain_validated
 TRUE,,[],,"Sup_Purchase_Manager,Sup_Supply_System_Administrator,Fin_Config_Project",PARTNER_ACCOUNT_CODES_PROJECT_ACCESS,project,Partner Account Codes - Project - Have Access,sd.base_model_res_partner,domain_validated
-TRUE,,"[('international_status', 'in', ['1','2','4','5','6'])]",,Sup_Product_Manager,PRODUCT_HQ,hq,Products at HQ,sd.product_model_product_product,domain_validated
-TRUE,,"[('international_status', 'in', ['1','2','4','5','6'])]",,UniData,PRODUCT_HQ_UNIDATA,hq,Products at HQ - UniData,sd.product_model_product_product,domain_validated
+TRUE,,"[('international_status', '=', 1)]",,Sup_Product_Manager,ITC_PRODUCT_HQ,hq,ITC Product HQ,sd.product_model_product_product,domain_validated
 TRUE,,"[('international_status', '=', 1)]",,Sup_Product_Manager,ITC_PRODUCT_COORDO,coordo,ITC Product Coordo,sd.product_model_product_product,domain_validated
 TRUE,,"[('international_status', '=', 2)]",,Sup_Product_Manager,ESC_PRODUCT_COORDO,coordo,ESC Product Coordo,sd.product_model_product_product,domain_validated
+TRUE,,"[('international_status', '=', 2)]",,Sup_Product_Manager,ESC_PRODUCT_HQ,hq,ESC Product HQ,sd.product_model_product_product,domain_validated
 TRUE,,"[('international_status', '=', 4)]",,Sup_Product_Manager,LOCAL_PRODUCT_COORDO,coordo,LOCAL Product Coordo,sd.product_model_product_product,domain_validated
+TRUE,,"[('international_status', '=', 4)]",,Sup_Product_Manager,LOCAL_PRODUCT_HQ,hq,LOCAL Product HQ,sd.product_model_product_product,domain_validated
 TRUE,,"[('international_status', '=', 5)]",,Sup_Product_Manager,TEMP_PRODUCT_COORDO,coordo,TEMP Product Coordo,sd.product_model_product_product,domain_validated
+TRUE,,"[('international_status', '=', 5)]",,Sup_Product_Manager,TEMP_PRODUCT_HQ,hq,TEMP Product HQ,sd.product_model_product_product,domain_validated
+TRUE,,"[('international_status', '=', 6)]",,Sup_Product_Manager,UNIDATA_PRODUCT_HQ,hq,UNIDATA Product HQ,sd.product_model_product_product,domain_validated
 TRUE,,"[('international_status', '=', 6)]",,Sup_Product_Manager,UNIDATA_PRODUCT_COORDO,coordo,UNIDATA Product Coordo,sd.product_model_product_product,domain_validated
 TRUE,,[],,"Sup_Supply_Config,Sup_Supply_System_Administrator,Sup_Purchase_Officer,Sup_Purchase_Manager,Sup_Consumption_Management,Sup_Demand_Manager,Sup_Warehouse_Manager,Sup_Store_Keeper",PRODUCTS_PROJECTS_NO_ACCESS,project,Products - Project - No Access,sd.product_model_product_product,domain_validated
 TRUE,,[],,Sup_Product_Manager,PRODUCTS_PROJECTS_CHANGES_ALLOWED,project,Products - Project - Changes allowed,sd.product_model_product_product,domain_validated
