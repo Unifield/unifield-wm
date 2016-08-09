@@ -322,9 +322,9 @@ class db_creation(object):
                     proxy = self.db.get(model)
                     answer = proxy.action_skip([])
                 elif model == 'msf_instance.setup':
-                    answer = self.db.wizard(model, {
-                        'instance_id' : self.db.search_data('msf.instance', [('instance','=',self.db.name)])[0],
-                    }).action_next()
+                    instance_id = self.db.search_data('msf.instance', [('instance','=',self.db.name)])[0]
+                    self.db.get('res.company').write([1], {'instance_id': instance_id})
+                    answer = self.db.wizard(model, {'instance_id': instance_id}).action_next()
                 else:
                     data = dict(self.base_wizards.get(model, {}))
                     button = data.pop('button', 'action_next')
