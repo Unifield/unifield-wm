@@ -793,6 +793,23 @@ class hqn_creation(client_creation, unittest.TestCase):
                 self.import_csv(filename)
         else:
             self.db.module('msf_sync_data_hq').install().do().set_notinstalled()
+        # duplicate as UniData
+        if hq_count > 1:
+            data = [
+                'DORADIDA15T',
+                'DINJCEFA1V-',
+                'ADAPCABL1S-',
+                'ADAPCABL2S-',
+                'ADAPCART02-',
+            ]
+            prod = self.db.get('product.product')
+            msfid = 100
+            for code in data:
+                p_id = prod.search([('default_code', '=', code)])
+                if p_id:
+                    newcode = 'HQ%s%s' % (self.index, code)
+                    prod.copy(p_id[0], {'default_code': newcode, 'name': newcode, 'international_status': 'UniData', 'msfid': msfid})
+                msfid += 10
 
     @unittest.skipIf(skipManualConfig, "Manual link on analytic account destination desactivated")
     def test_43_manual_link_on_analytic_account_destination(self):
