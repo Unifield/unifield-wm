@@ -803,12 +803,14 @@ class hqn_creation(client_creation, unittest.TestCase):
                 'ADAPCART02-',
             ]
             prod = self.db.get('product.product')
+            unidata_id = self.db.get('ir.model.data').get_object_reference('product_attributes', 'int_6')[1]
             msfid = 100
             for code in data:
                 p_id = prod.search([('default_code', '=', code)])
                 if p_id:
                     newcode = 'HQ%s%s' % (self.index, code)
-                    prod.copy(p_id[0], {'default_code': newcode, 'name': newcode, 'international_status': 'UniData', 'msfid': msfid})
+                    copy_id = prod.copy(p_id[0], {'default_code': newcode, 'international_status': unidata_id, 'msfid': msfid})
+                    prod.write([copy_id], {'name': newcode})
                 msfid += 10
 
     @unittest.skipIf(skipManualConfig, "Manual link on analytic account destination desactivated")
