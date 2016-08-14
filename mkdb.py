@@ -793,6 +793,25 @@ class hqn_creation(client_creation, unittest.TestCase):
                 self.import_csv(filename)
         else:
             self.db.module('msf_sync_data_hq').install().do().set_notinstalled()
+        # duplicate as UniData
+        if hq_count > 1:
+            data = [
+                'DORADIDA15T',
+                'DINJCEFA1V-',
+                'ADAPCABL1S-',
+                'ADAPCABL2S-',
+                'ADAPCART02-',
+            ]
+            prod = self.db.get('product.product')
+            unidata_id = self.db.get('ir.model.data').get_object_reference('product_attributes', 'int_6')[1]
+            msfid = 100
+            for code in data:
+                p_id = prod.search([('default_code', '=', code)])
+                if p_id:
+                    newcode = 'HQ%s%s' % (self.index, code)
+                    copy_id = prod.copy(p_id[0], {'default_code': newcode, 'international_status': unidata_id, 'msfid': msfid})
+                    prod.write([copy_id], {'name': newcode})
+                msfid += 10
 
     @unittest.skipIf(skipManualConfig, "Manual link on analytic account destination desactivated")
     def test_43_manual_link_on_analytic_account_destination(self):
@@ -870,6 +889,28 @@ class coordon_creation(client_creation):
     def test_61_install_data_client(self):
         self.db.connect('admin')
         self.db.module('msf_sync_data_coordo').install().do().set_notinstalled()
+
+    def test_70_create_intersection_parnter(self):
+        for tc in test_cases:
+            if issubclass(tc, coordon_creation) and tc.hq.index != self.hq.index:
+                partner = self.db.get('res.partner')
+                account = self.db.get('account.account')
+                if tc.db is None:
+                   db_name = tc.name_format % tc.getNameFormat()
+                else:
+                   db_name = tc.db.name
+                partner.create({
+                    'name': db_name,
+                    'partner_type': 'section',
+                    'po_by_project': 'project',
+                    'customer': True,
+                    'supplier': True, 
+                    'property_account_payable':  account.search([('code','=','30010')])[0],
+                    'property_account_receivable': account.search([('code','=','12010')])[0],
+                    'city': 'XXX',
+                    })
+
+
 
 
 # Replicable class to create project n
