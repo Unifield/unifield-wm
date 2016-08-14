@@ -871,6 +871,22 @@ class coordon_creation(client_creation):
         self.db.connect('admin')
         self.db.module('msf_sync_data_coordo').install().do().set_notinstalled()
 
+    def test_70_create_intersection_parnter(self):
+        for tc in self.test_cases:
+            if issubclass(tc, coordon_creation) and tc.hq.index != self.hq.index:
+                partner = self.db.get('res.partner')
+                account = self.db.get('account.account')
+                self.db.create('res.partner', {
+                    'name': tc.name,
+                    'partner_type': 'section',
+                    'po_by_project': 'project',
+                    'property_account_payable':  account.search([('code','=','30010')])[0],
+                    'property_account_receivable': account.search([('code','=','12010')])[0],
+                    'city': 'XXX',
+                    })
+
+
+
 
 # Replicable class to create project n
 class projectn_creation(client_creation):
