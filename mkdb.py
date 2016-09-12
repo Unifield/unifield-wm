@@ -368,6 +368,7 @@ class db_creation(object):
                 'category' : 'OC',
                 'type' : 'normal',
                 'parent_id' : top_cost_center_id,
+                'date_start': '2013-01-01',
             }
             cost_center_id = hq.get('account.analytic.account').create(data)
         elif self.db is not hq:
@@ -380,6 +381,7 @@ class db_creation(object):
                 'category' : 'OC',
                 'type' : 'normal',
                 'parent_id' : parent_cost_center_id,
+                'date_start': '2013-01-01',
             }
             top_cost_center_id = hq.get('account.analytic.account').create(data)
         data = {
@@ -564,6 +566,18 @@ class server_creation(db_creation, unittest.TestCase):
              sync_rule_obj.write(rule['id'], {'model_id': rule['model_id'] , 'status': 'valid'})
         #Synchro.activate('sync_server.sync_rule', [])
 
+    def test_99_add_shortcut(self):
+        self.db.connect('admin')
+        menu_to_add = ['sync_server.entity_menu', 'sync_server.sync_rule_menu', 'sync_server.message_rule_menu']
+        for menu in menu_to_add:
+            module, xml = menu.split('.')
+            menu_id = self.db.get('ir.model.data').get_object_reference(module, xml)[1]
+            menu_name = self.db.get('ir.ui.menu').name_get([menu_id])[0][1]
+            try:
+                self.db.get('ir.ui.view_sc').create({'res_id': menu_id, 'name': menu_name})
+            except:
+                raise
+
 # Base for instances creation ('is not Synchro')
 class client_creation(db_creation):
     def import_csv(self, filename):
@@ -746,6 +760,27 @@ class client_creation(db_creation):
         # as it's to open period from created to draft state, it's not very important
         self.db.write('account.period', period_ids, {'state': 'draft'})
 
+    def set_analytic_loss(self, db, code):
+        db.connect('admin')
+        ana_obj = db.get('account.analytic.account')
+        ids = ana_obj.search([('code', '=', code)])
+        if ids:
+            ana_obj.write(ids[0], {'for_fx_gain_loss': True})
+
+    def test_93_set_gain_loss(self):
+        to_hq = False
+        code = False
+        if isinstance(self, projectn_creation):
+            code = "HT%d%d1" % (self.parent.index, self.index)
+        elif isinstance(self, coordon_creation):
+            code = "HT%d01" % (self.index)
+            if self.index == 1:
+                to_hq = True
+        if code:
+            self.set_analytic_loss(self.db, code)
+            if to_hq:
+                self.set_analytic_loss(self.hq.db, code)
+
     def test_99_add_shortcut(self):
         self.db.connect('admin')
         menu_to_add = ['sync_client.sync_wiz_menu', 'sync_client.sync_monitor_menu']
@@ -890,11 +925,11 @@ class coordon_creation(client_creation):
         self.db.connect('admin')
         self.db.module('msf_sync_data_coordo').install().do().set_notinstalled()
 
-    def test_70_create_intersection_parnter(self):
+    def test_70_create_inter_partner(self):
+        partner = self.db.get('res.partner')
+        account = self.db.get('account.account')
         for tc in test_cases:
             if issubclass(tc, coordon_creation) and tc.hq.index != self.hq.index:
-                partner = self.db.get('res.partner')
-                account = self.db.get('account.account')
                 if tc.db is None:
                    db_name = tc.name_format % tc.getNameFormat()
                 else:
@@ -904,13 +939,21 @@ class coordon_creation(client_creation):
                     'partner_type': 'section',
                     'po_by_project': 'project',
                     'customer': True,
-                    'supplier': True, 
+                    'supplier': True,
                     'property_account_payable':  account.search([('code','=','30010')])[0],
                     'property_account_receivable': account.search([('code','=','12010')])[0],
                     'city': 'XXX',
                     })
 
-
+        partner.create({
+            'name': self.db.name,
+            'partner_type': 'intermission',
+            'customer': False,
+            'supplier': False,
+            'property_account_payable':  account.search([('code','=','30020')])[0],
+            'property_account_receivable': account.search([('code','=','12050')])[0],
+            'city': 'XXX',
+        })
 
 
 # Replicable class to create project n
