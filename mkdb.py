@@ -429,7 +429,7 @@ class db_creation(object):
                     hq.write('account.target.costcenter', project_target_ids, {'is_target': True, 'is_top_cost_center': True, 'is_po_fo_cost_center' : True})
                 self.sync(hq)
 
-    def add_to_group(self, group_name, group_type):
+    def add_to_group(self, group_name, group_type, oc='oca'):
         Synchro.connect('admin')
         entity_ids = Synchro.get('sync.server.entity').search([('name','=',self.db.name)])
         assert len(entity_ids) == 1, "The entity must exists!"
@@ -448,6 +448,7 @@ class db_creation(object):
                 'name' : group_name,
                 'type_id' : type_ids[0],
                 'entity_ids' : [(6,0,entity_ids)],
+                'oc': oc
             })
 
     @classmethod
