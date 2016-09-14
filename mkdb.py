@@ -7,7 +7,7 @@
 
 #Load config file
 import config
-from config import coordo_count, project_count, hq_count
+from config import coordo_count, project_count, hq_count, default_oc
 
 import sys
 import os
@@ -429,7 +429,7 @@ class db_creation(object):
                     hq.write('account.target.costcenter', project_target_ids, {'is_target': True, 'is_top_cost_center': True, 'is_po_fo_cost_center' : True})
                 self.sync(hq)
 
-    def add_to_group(self, group_name, group_type, oc='oca'):
+    def add_to_group(self, group_name, group_type, oc=default_oc):
         Synchro.connect('admin')
         entity_ids = Synchro.get('sync.server.entity').search([('name','=',self.db.name)])
         assert len(entity_ids) == 1, "The entity must exists!"
@@ -635,14 +635,20 @@ class client_creation(db_creation):
         self.db.connect('admin')
         # search the current entity
         entity_id = self.db.get('sync.client.entity').search([])
-        data = {'name': self.db.name, 'identifier': str(uuid.uuid1())}
+        data = {
+                'name': self.db.name,
+                'identifier': str(uuid.uuid1()),
+                'oc': default_oc
+        }
         if entity_id:
             entity_data = self.db.get('sync.client.entity').read(entity_id[0])
             if entity_data['name'] != self.db.name:
                 self.db.get('sync.client.entity').write(entity_id[0], data)
         else:
             self.db.get('sync.client.entity').create(data)
-        wizard = self.db.wizard('sync.client.register_entity', {'email':config.default_email})
+        wizard = self.db.wizard('sync.client.register_entity', {
+            'email': config.default_email,
+            'oc': default_oc,})
         # Fetch instances
         wizard.next()
         # Group state
