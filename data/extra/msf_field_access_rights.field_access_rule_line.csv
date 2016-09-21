@@ -611,7 +611,7 @@ ESC Product Coordo,product.field_product_product_price,FALSE,FALSE,FALSE,msf_pro
 ESC Product Coordo,product.field_product_product_price_extra,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/762
 ESC Product Coordo,product.field_product_product_price_margin,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/763
 ESC Product Coordo,product.field_product_product_pricelist_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/764
-ESC Product Coordo,consumption_calculation.field_product_product_procure_delay,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/765
+ESC Product Coordo,consumption_calculation.field_product_product_procure_delay,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/765
 ESC Product Coordo,product.field_product_template_procure_method,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/766
 ESC Product Coordo,msf_outgoing.field_product_product_prodlot_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/767
 ESC Product Coordo,product.field_product_template_produce_delay,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/768
@@ -760,7 +760,7 @@ ITC Product Coordo,product.field_product_product_price,FALSE,FALSE,FALSE,msf_pro
 ITC Product Coordo,product.field_product_product_price_extra,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/1062
 ITC Product Coordo,product.field_product_product_price_margin,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/1063
 ITC Product Coordo,product.field_product_product_pricelist_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/1064
-ITC Product Coordo,consumption_calculation.field_product_product_procure_delay,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/1065
+ITC Product Coordo,consumption_calculation.field_product_product_procure_delay,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1065
 ITC Product Coordo,product.field_product_template_procure_method,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/1066
 ITC Product Coordo,msf_outgoing.field_product_product_prodlot_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/1067
 ITC Product Coordo,product.field_product_template_produce_delay,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/1068
@@ -2632,7 +2632,7 @@ UNIDATA Product Coordo,product.field_product_product_price,FALSE,FALSE,FALSE,msf
 UNIDATA Product Coordo,product.field_product_product_price_extra,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/4092
 UNIDATA Product Coordo,product.field_product_product_price_margin,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/4093
 UNIDATA Product Coordo,product.field_product_product_pricelist_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/4094
-UNIDATA Product Coordo,consumption_calculation.field_product_product_procure_delay,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/4095
+UNIDATA Product Coordo,consumption_calculation.field_product_product_procure_delay,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/4095
 UNIDATA Product Coordo,product.field_product_template_procure_method,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/4096
 UNIDATA Product Coordo,msf_outgoing.field_product_product_prodlot_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/4097
 UNIDATA Product Coordo,product.field_product_template_produce_delay,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/4098
@@ -2867,173 +2867,173 @@ All Products - HQ - No Field,product.field_product_template_warranty,FALSE,FALSE
 All Products - HQ - No Field,product.field_product_template_weight,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3344
 All Products - HQ - No Field,product.field_product_template_weight_net,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3345
 All Products - HQ - No Field,product_list.field_product_product_xmlid_code,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3346
-All Products - Coordination - No Field,product_attributes.field_product_product_abc_class,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3347
-All Products - Coordination - No Field,product.field_product_product_active,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3348
-All Products - Coordination - No Field,product_expiry.field_product_product_alert_time,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3349
-All Products - Coordination - No Field,product_asset.field_product_product_asset_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3350
-All Products - Coordination - No Field,product_asset.field_product_template_asset_type_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3351
-All Products - Coordination - No Field,product_manufacturer.field_product_product_attribute_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3352
-All Products - Coordination - No Field,product_attributes.field_product_product_available_for_restriction,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3353
-All Products - Coordination - No Field,product_attributes.field_product_product_batch_management,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3354
-All Products - Coordination - No Field,supplier_catalogue.field_product_product_catalogue_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3355
-All Products - Coordination - No Field,product.field_product_template_categ_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3356
-All Products - Coordination - No Field,product_attributes.field_product_product_closed_article,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3357
-All Products - Coordination - No Field,product.field_product_product_code,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3358
-All Products - Coordination - No Field,product_attributes.field_product_product_cold_chain,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3359
-All Products - Coordination - No Field,product.field_product_template_company_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3360
-All Products - Coordination - No Field,product_attributes.field_product_product_composed_kit,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3361
-All Products - Coordination - No Field,product_attributes.field_product_product_controlled_substance,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3362
-All Products - Coordination - No Field,product.field_product_template_cost_method,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3363
-All Products - Coordination - No Field,product_attributes.field_product_product_country_restriction,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3364
-All Products - Coordination - No Field,product_attributes.field_product_product_criticism,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3365
-All Products - Coordination - No Field,product_attributes.field_product_product_currency_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3366
-All Products - Coordination - No Field,product_attributes.field_product_product_dangerous_goods,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3367
-All Products - Coordination - No Field,product.field_product_product_default_code,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3368
-All Products - Coordination - No Field,partner_modification.field_product_template_delay_for_supplier,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3369
-All Products - Coordination - No Field,product.field_product_template_description,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3370
-All Products - Coordination - No Field,product.field_product_template_description_purchase,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3371
-All Products - Coordination - No Field,product.field_product_template_description_sale,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3372
-All Products - Coordination - No Field,product_attributes.field_product_product_description2,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3373
-All Products - Coordination - No Field,account_override.field_product_product_donation_expense_account,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3374
-All Products - Coordination - No Field,product_attributes.field_product_product_duplicate_ok,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3375
-All Products - Coordination - No Field,product.field_product_product_ean13,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3376
-All Products - Coordination - No Field,product_attributes.field_product_product_field_currency_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3377
-All Products - Coordination - No Field,product_attributes.field_product_product_fit_value,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3378
-All Products - Coordination - No Field,stock_schedule.field_product_product_fnct_categ_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3379
-All Products - Coordination - No Field,product_attributes.field_product_product_form_value,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3380
-All Products - Coordination - No Field,product_attributes.field_product_product_function_value,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3381
-All Products - Coordination - No Field,product_attributes.field_product_product_gmdn_code,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3382
-All Products - Coordination - No Field,product_attributes.field_product_product_gmdn_description,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3383
-All Products - Coordination - No Field,kit.field_product_product_has_active_completed_theo_kit_kit,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3384
-All Products - Coordination - No Field,product_attributes.field_product_product_heat_sensitive_item,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3385
-All Products - Coordination - No Field,msf_doc_import.field_product_product_import_product_qty,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/3386
-All Products - Coordination - No Field,product.field_product_product_incoming_qty,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3387
-All Products - Coordination - No Field,product_attributes.field_product_product_international_status,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3388
-All Products - Coordination - No Field,product_attributes.field_product_product_justification_code_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3390
-All Products - Coordination - No Field,product_attributes.field_product_product_library,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3391
-All Products - Coordination - No Field,product_expiry.field_product_product_life_time,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3392
-All Products - Coordination - No Field,product_list.field_product_product_list_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3393
-All Products - Coordination - No Field,product.field_product_template_loc_case,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3395
-All Products - Coordination - No Field,product_attributes.field_product_product_loc_indic,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3396
-All Products - Coordination - No Field,product.field_product_template_loc_rack,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3397
-All Products - Coordination - No Field,product.field_product_template_loc_row,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3398
-All Products - Coordination - No Field,stock.field_product_product_location_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3399
-All Products - Coordination - No Field,product.field_product_product_lst_price,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3400
-All Products - Coordination - No Field,product_manufacturer.field_product_product_manufacturer,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3401
-All Products - Coordination - No Field,product_manufacturer.field_product_product_manufacturer_pname,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3402
-All Products - Coordination - No Field,product_manufacturer.field_product_product_manufacturer_pref,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3403
-All Products - Coordination - No Field,product_attributes.field_product_product_med_device_class,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3404
-All Products - Coordination - No Field,product.field_product_template_mes_type,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3405
-All Products - Coordination - No Field,consumption_calculation.field_product_product_monthly_consumption,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3406
-All Products - Coordination - No Field,product_list.field_product_product_msfid,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3407
-All Products - Coordination - No Field,product.field_product_template_name,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3408
-All Products - Coordination - No Field,product.field_product_product_name_template,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3409
-All Products - Coordination - No Field,product_attributes.field_product_product_narcotic,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3410
-All Products - Coordination - No Field,product_attributes.field_product_product_new_code,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3411
-All Products - Coordination - No Field,product_attributes.field_product_product_no_consumption,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3412
-All Products - Coordination - No Field,product_attributes.field_product_product_no_esc,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3413
-All Products - Coordination - No Field,product_attributes.field_product_product_no_external,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3414
-All Products - Coordination - No Field,product_attributes.field_product_product_no_internal,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3415
-All Products - Coordination - No Field,product_attributes.field_product_product_no_storage,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3416
-All Products - Coordination - No Field,product_attributes.field_product_product_nomen_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3417
-All Products - Coordination - No Field,product_nomenclature.field_product_template_nomen_manda_0,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3418
-All Products - Coordination - No Field,product_nomenclature.field_product_template_nomen_manda_0_s,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3419
-All Products - Coordination - No Field,product_nomenclature.field_product_template_nomen_manda_1,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3420
-All Products - Coordination - No Field,product_nomenclature.field_product_template_nomen_manda_1_s,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3421
-All Products - Coordination - No Field,product_nomenclature.field_product_template_nomen_manda_2,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3422
-All Products - Coordination - No Field,product_nomenclature.field_product_template_nomen_manda_2_s,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3423
-All Products - Coordination - No Field,product_nomenclature.field_product_template_nomen_manda_3,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3424
-All Products - Coordination - No Field,product_nomenclature.field_product_template_nomen_manda_3_s,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3425
-All Products - Coordination - No Field,product_nomenclature.field_product_template_nomen_sub_0,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3426
-All Products - Coordination - No Field,product_nomenclature.field_product_template_nomen_sub_0_s,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3427
-All Products - Coordination - No Field,product_nomenclature.field_product_template_nomen_sub_1,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3428
-All Products - Coordination - No Field,product_nomenclature.field_product_template_nomen_sub_1_s,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3429
-All Products - Coordination - No Field,product_nomenclature.field_product_template_nomen_sub_2,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3430
-All Products - Coordination - No Field,product_nomenclature.field_product_template_nomen_sub_2_s,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3431
-All Products - Coordination - No Field,product_nomenclature.field_product_template_nomen_sub_3,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3432
-All Products - Coordination - No Field,product_nomenclature.field_product_template_nomen_sub_3_s,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3433
-All Products - Coordination - No Field,product_nomenclature.field_product_template_nomen_sub_4,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3434
-All Products - Coordination - No Field,product_nomenclature.field_product_template_nomen_sub_4_s,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3435
-All Products - Coordination - No Field,product_nomenclature.field_product_template_nomen_sub_5,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3436
-All Products - Coordination - No Field,product_nomenclature.field_product_template_nomen_sub_5_s,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3437
-All Products - Coordination - No Field,product_nomenclature.field_product_template_nomenclature_description,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3438
-All Products - Coordination - No Field,product_attributes.field_product_product_old_code,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3439
-All Products - Coordination - No Field,product_attributes.field_product_product_options_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3440
-All Products - Coordination - No Field,product_attributes.field_product_product_options_ids_inv,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3441
-All Products - Coordination - No Field,product.field_product_product_outgoing_qty,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3442
-All Products - Coordination - No Field,product.field_product_product_packaging,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3443
-All Products - Coordination - No Field,product.field_product_product_partner_ref,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3444
-All Products - Coordination - No Field,product_attributes.field_product_product_perishable,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3445
-All Products - Coordination - No Field,return_claim.field_product_product_picking_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3446
-All Products - Coordination - No Field,product.field_product_product_price,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3447
-All Products - Coordination - No Field,product.field_product_product_price_extra,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3448
-All Products - Coordination - No Field,product.field_product_product_price_margin,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3449
-All Products - Coordination - No Field,product.field_product_product_pricelist_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3450
-All Products - Coordination - No Field,consumption_calculation.field_product_product_procure_delay,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3451
-All Products - Coordination - No Field,product.field_product_template_procure_method,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3452
-All Products - Coordination - No Field,msf_outgoing.field_product_product_prodlot_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3453
-All Products - Coordination - No Field,product.field_product_template_produce_delay,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3454
-All Products - Coordination - No Field,consumption_calculation.field_product_product_product_amc,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3455
-All Products - Coordination - No Field,product_attributes.field_product_product_product_catalog_page,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3456
-All Products - Coordination - No Field,product_attributes.field_product_product_product_catalog_path,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3457
-All Products - Coordination - No Field,product.field_product_template_product_manager,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3458
-All Products - Coordination - No Field,product.field_product_product_product_tmpl_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3459
-All Products - Coordination - No Field,account.field_product_template_property_account_expense,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3460
-All Products - Coordination - No Field,account.field_product_template_property_account_income,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3461
-All Products - Coordination - No Field,stock.field_product_template_property_stock_account_input,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3462
-All Products - Coordination - No Field,stock.field_product_template_property_stock_account_output,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3463
-All Products - Coordination - No Field,stock.field_product_template_property_stock_inventory,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3464
-All Products - Coordination - No Field,stock.field_product_template_property_stock_procurement,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3465
-All Products - Coordination - No Field,stock.field_product_template_property_stock_production,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3466
-All Products - Coordination - No Field,product.field_product_template_purchase_ok,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3467
-All Products - Coordination - No Field,purchase_override.field_product_product_purchase_type,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3468
-All Products - Coordination - No Field,product.field_product_product_qty_available,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3469
-All Products - Coordination - No Field,product_expiry.field_product_product_removal_time,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3470
-All Products - Coordination - No Field,product.field_product_template_rental,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3471
-All Products - Coordination - No Field,product_attributes.field_product_product_restricted_country,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3472
-All Products - Coordination - No Field,consumption_calculation.field_product_product_reviewed_consumption,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3473
-All Products - Coordination - No Field,product.field_product_template_sale_delay,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3474
-All Products - Coordination - No Field,product.field_product_template_sale_ok,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3475
-All Products - Coordination - No Field,product_attributes.field_product_product_section_code_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3476
-All Products - Coordination - No Field,product.field_product_template_seller_delay,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3477
-All Products - Coordination - No Field,product.field_product_template_seller_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3478
-All Products - Coordination - No Field,product.field_product_template_seller_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3479
-All Products - Coordination - No Field,sourcing.field_product_template_seller_info_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3480
-All Products - Coordination - No Field,product.field_product_template_seller_qty,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3481
-All Products - Coordination - No Field,product_attributes.field_product_product_short_shelf_life,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3482
-All Products - Coordination - No Field,product_attributes.field_product_product_show_cold_chain,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3483
-All Products - Coordination - No Field,product_attributes.field_product_product_single_use,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3484
-All Products - Coordination - No Field,product_attributes.field_product_product_standard_ok,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3485
-All Products - Coordination - No Field,product.field_product_template_standard_price,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3486
-All Products - Coordination - No Field,product.field_product_template_state,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3487
-All Products - Coordination - No Field,product_attributes.field_product_product_sterilized,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3488
-All Products - Coordination - No Field,product_attributes.field_product_product_sublist,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3489
-All Products - Coordination - No Field,product_asset.field_product_template_subtype,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3490
-All Products - Coordination - No Field,account.field_product_template_supplier_taxes_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3491
-All Products - Coordination - No Field,product.field_product_template_supply_method,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3492
-All Products - Coordination - No Field,product_attributes.field_product_product_supply_source_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3493
-All Products - Coordination - No Field,account.field_product_template_taxes_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3494
-All Products - Coordination - No Field,stock.field_product_product_track_incoming,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3495
-All Products - Coordination - No Field,stock.field_product_product_track_outgoing,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3496
-All Products - Coordination - No Field,stock.field_product_product_track_production,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3497
-All Products - Coordination - No Field,transport_mgmt.field_product_product_transport_ok,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3498
-All Products - Coordination - No Field,product.field_product_template_type,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3499
-All Products - Coordination - No Field,product_attributes.field_product_product_un_code,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3500
-All Products - Coordination - No Field,product_attributes.field_product_product_uom_category_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3501
-All Products - Coordination - No Field,product.field_product_template_uom_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3502
-All Products - Coordination - No Field,product.field_product_template_uom_po_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3503
-All Products - Coordination - No Field,product.field_product_template_uos_coeff,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3504
-All Products - Coordination - No Field,product.field_product_template_uos_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3505
-All Products - Coordination - No Field,product_expiry.field_product_product_use_time,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3506
-All Products - Coordination - No Field,stock.field_product_product_valuation,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3507
-All Products - Coordination - No Field,product.field_product_product_variants,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3508
-All Products - Coordination - No Field,product_attributes.field_product_product_vat_ok,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3509
-All Products - Coordination - No Field,product.field_product_product_virtual_available,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3510
-All Products - Coordination - No Field,product.field_product_template_volume,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3511
-All Products - Coordination - No Field,product.field_product_template_warranty,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3512
-All Products - Coordination - No Field,product.field_product_template_weight,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3513
-All Products - Coordination - No Field,product.field_product_template_weight_net,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3514
-All Products - Coordination - No Field,product_list.field_product_product_xmlid_code,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3515
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_abc_class,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3347
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_product_active,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3348
+HQ ESC ITC UD Products - Coordination - No Field,product_expiry.field_product_product_alert_time,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3349
+HQ ESC ITC UD Products - Coordination - No Field,product_asset.field_product_product_asset_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3350
+HQ ESC ITC UD Products - Coordination - No Field,product_asset.field_product_template_asset_type_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3351
+HQ ESC ITC UD Products - Coordination - No Field,product_manufacturer.field_product_product_attribute_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3352
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_available_for_restriction,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3353
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_batch_management,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3354
+HQ ESC ITC UD Products - Coordination - No Field,supplier_catalogue.field_product_product_catalogue_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3355
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_template_categ_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3356
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_closed_article,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3357
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_product_code,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3358
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_cold_chain,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3359
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_template_company_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3360
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_composed_kit,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3361
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_controlled_substance,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3362
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_template_cost_method,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3363
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_country_restriction,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/3364
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_criticism,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3365
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_currency_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3366
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_dangerous_goods,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3367
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_product_default_code,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3368
+HQ ESC ITC UD Products - Coordination - No Field,partner_modification.field_product_template_delay_for_supplier,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3369
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_template_description,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3370
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_template_description_purchase,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3371
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_template_description_sale,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3372
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_description2,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3373
+HQ ESC ITC UD Products - Coordination - No Field,account_override.field_product_product_donation_expense_account,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3374
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_duplicate_ok,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3375
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_product_ean13,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3376
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_field_currency_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3377
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_fit_value,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3378
+HQ ESC ITC UD Products - Coordination - No Field,stock_schedule.field_product_product_fnct_categ_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3379
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_form_value,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3380
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_function_value,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3381
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_gmdn_code,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3382
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_gmdn_description,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3383
+HQ ESC ITC UD Products - Coordination - No Field,kit.field_product_product_has_active_completed_theo_kit_kit,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3384
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_heat_sensitive_item,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3385
+HQ ESC ITC UD Products - Coordination - No Field,msf_doc_import.field_product_product_import_product_qty,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/3386
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_product_incoming_qty,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3387
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_international_status,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3388
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_justification_code_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3390
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_library,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3391
+HQ ESC ITC UD Products - Coordination - No Field,product_expiry.field_product_product_life_time,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3392
+HQ ESC ITC UD Products - Coordination - No Field,product_list.field_product_product_list_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3393
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_template_loc_case,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3395
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_loc_indic,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3396
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_template_loc_rack,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3397
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_template_loc_row,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3398
+HQ ESC ITC UD Products - Coordination - No Field,stock.field_product_product_location_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3399
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_product_lst_price,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3400
+HQ ESC ITC UD Products - Coordination - No Field,product_manufacturer.field_product_product_manufacturer,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3401
+HQ ESC ITC UD Products - Coordination - No Field,product_manufacturer.field_product_product_manufacturer_pname,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3402
+HQ ESC ITC UD Products - Coordination - No Field,product_manufacturer.field_product_product_manufacturer_pref,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3403
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_med_device_class,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3404
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_template_mes_type,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3405
+HQ ESC ITC UD Products - Coordination - No Field,consumption_calculation.field_product_product_monthly_consumption,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3406
+HQ ESC ITC UD Products - Coordination - No Field,product_list.field_product_product_msfid,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3407
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_template_name,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3408
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_product_name_template,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3409
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_narcotic,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3410
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_new_code,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3411
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_no_consumption,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3412
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_no_esc,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3413
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_no_external,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3414
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_no_internal,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3415
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_no_storage,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3416
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_nomen_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3417
+HQ ESC ITC UD Products - Coordination - No Field,product_nomenclature.field_product_template_nomen_manda_0,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3418
+HQ ESC ITC UD Products - Coordination - No Field,product_nomenclature.field_product_template_nomen_manda_0_s,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3419
+HQ ESC ITC UD Products - Coordination - No Field,product_nomenclature.field_product_template_nomen_manda_1,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3420
+HQ ESC ITC UD Products - Coordination - No Field,product_nomenclature.field_product_template_nomen_manda_1_s,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3421
+HQ ESC ITC UD Products - Coordination - No Field,product_nomenclature.field_product_template_nomen_manda_2,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3422
+HQ ESC ITC UD Products - Coordination - No Field,product_nomenclature.field_product_template_nomen_manda_2_s,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3423
+HQ ESC ITC UD Products - Coordination - No Field,product_nomenclature.field_product_template_nomen_manda_3,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3424
+HQ ESC ITC UD Products - Coordination - No Field,product_nomenclature.field_product_template_nomen_manda_3_s,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3425
+HQ ESC ITC UD Products - Coordination - No Field,product_nomenclature.field_product_template_nomen_sub_0,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3426
+HQ ESC ITC UD Products - Coordination - No Field,product_nomenclature.field_product_template_nomen_sub_0_s,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3427
+HQ ESC ITC UD Products - Coordination - No Field,product_nomenclature.field_product_template_nomen_sub_1,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3428
+HQ ESC ITC UD Products - Coordination - No Field,product_nomenclature.field_product_template_nomen_sub_1_s,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3429
+HQ ESC ITC UD Products - Coordination - No Field,product_nomenclature.field_product_template_nomen_sub_2,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3430
+HQ ESC ITC UD Products - Coordination - No Field,product_nomenclature.field_product_template_nomen_sub_2_s,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3431
+HQ ESC ITC UD Products - Coordination - No Field,product_nomenclature.field_product_template_nomen_sub_3,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3432
+HQ ESC ITC UD Products - Coordination - No Field,product_nomenclature.field_product_template_nomen_sub_3_s,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3433
+HQ ESC ITC UD Products - Coordination - No Field,product_nomenclature.field_product_template_nomen_sub_4,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3434
+HQ ESC ITC UD Products - Coordination - No Field,product_nomenclature.field_product_template_nomen_sub_4_s,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3435
+HQ ESC ITC UD Products - Coordination - No Field,product_nomenclature.field_product_template_nomen_sub_5,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3436
+HQ ESC ITC UD Products - Coordination - No Field,product_nomenclature.field_product_template_nomen_sub_5_s,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3437
+HQ ESC ITC UD Products - Coordination - No Field,product_nomenclature.field_product_template_nomenclature_description,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3438
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_old_code,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3439
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_options_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3440
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_options_ids_inv,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3441
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_product_outgoing_qty,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3442
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_product_packaging,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3443
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_product_partner_ref,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3444
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_perishable,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3445
+HQ ESC ITC UD Products - Coordination - No Field,return_claim.field_product_product_picking_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3446
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_product_price,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3447
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_product_price_extra,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3448
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_product_price_margin,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3449
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_product_pricelist_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3450
+HQ ESC ITC UD Products - Coordination - No Field,consumption_calculation.field_product_product_procure_delay,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3451
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_template_procure_method,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3452
+HQ ESC ITC UD Products - Coordination - No Field,msf_outgoing.field_product_product_prodlot_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3453
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_template_produce_delay,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3454
+HQ ESC ITC UD Products - Coordination - No Field,consumption_calculation.field_product_product_product_amc,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3455
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_product_catalog_page,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3456
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_product_catalog_path,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3457
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_template_product_manager,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3458
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_product_product_tmpl_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3459
+HQ ESC ITC UD Products - Coordination - No Field,account.field_product_template_property_account_expense,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3460
+HQ ESC ITC UD Products - Coordination - No Field,account.field_product_template_property_account_income,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3461
+HQ ESC ITC UD Products - Coordination - No Field,stock.field_product_template_property_stock_account_input,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3462
+HQ ESC ITC UD Products - Coordination - No Field,stock.field_product_template_property_stock_account_output,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3463
+HQ ESC ITC UD Products - Coordination - No Field,stock.field_product_template_property_stock_inventory,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3464
+HQ ESC ITC UD Products - Coordination - No Field,stock.field_product_template_property_stock_procurement,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3465
+HQ ESC ITC UD Products - Coordination - No Field,stock.field_product_template_property_stock_production,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3466
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_template_purchase_ok,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3467
+HQ ESC ITC UD Products - Coordination - No Field,purchase_override.field_product_product_purchase_type,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3468
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_product_qty_available,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3469
+HQ ESC ITC UD Products - Coordination - No Field,product_expiry.field_product_product_removal_time,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3470
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_template_rental,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3471
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_restricted_country,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/3472
+HQ ESC ITC UD Products - Coordination - No Field,consumption_calculation.field_product_product_reviewed_consumption,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3473
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_template_sale_delay,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3474
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_template_sale_ok,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3475
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_section_code_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3476
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_template_seller_delay,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3477
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_template_seller_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3478
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_template_seller_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3479
+HQ ESC ITC UD Products - Coordination - No Field,sourcing.field_product_template_seller_info_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3480
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_template_seller_qty,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3481
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_short_shelf_life,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3482
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_show_cold_chain,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3483
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_single_use,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3484
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_standard_ok,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3485
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_template_standard_price,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3486
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_template_state,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3487
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_sterilized,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3488
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_sublist,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3489
+HQ ESC ITC UD Products - Coordination - No Field,product_asset.field_product_template_subtype,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3490
+HQ ESC ITC UD Products - Coordination - No Field,account.field_product_template_supplier_taxes_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3491
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_template_supply_method,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3492
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_supply_source_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3493
+HQ ESC ITC UD Products - Coordination - No Field,account.field_product_template_taxes_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3494
+HQ ESC ITC UD Products - Coordination - No Field,stock.field_product_product_track_incoming,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3495
+HQ ESC ITC UD Products - Coordination - No Field,stock.field_product_product_track_outgoing,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3496
+HQ ESC ITC UD Products - Coordination - No Field,stock.field_product_product_track_production,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3497
+HQ ESC ITC UD Products - Coordination - No Field,transport_mgmt.field_product_product_transport_ok,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3498
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_template_type,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3499
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_un_code,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3500
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_uom_category_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3501
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_template_uom_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3502
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_template_uom_po_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3503
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_template_uos_coeff,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3504
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_template_uos_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3505
+HQ ESC ITC UD Products - Coordination - No Field,product_expiry.field_product_product_use_time,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3506
+HQ ESC ITC UD Products - Coordination - No Field,stock.field_product_product_valuation,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3507
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_product_variants,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3508
+HQ ESC ITC UD Products - Coordination - No Field,product_attributes.field_product_product_vat_ok,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3509
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_product_virtual_available,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3510
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_template_volume,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3511
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_template_warranty,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3512
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_template_weight,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3513
+HQ ESC ITC UD Products - Coordination - No Field,product.field_product_template_weight_net,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3514
+HQ ESC ITC UD Products - Coordination - No Field,product_list.field_product_product_xmlid_code,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3515
 All Products - Project - No Field,product_attributes.field_product_product_abc_class,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3516
 All Products - Project - No Field,product.field_product_product_active,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3517
 All Products - Project - No Field,product_expiry.field_product_product_alert_time,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3518
@@ -3202,3 +3202,172 @@ All Products - Project - No Field,product.field_product_template_weight,FALSE,FA
 All Products - Project - No Field,product.field_product_template_weight_net,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3683
 All Products - Project - No Field,product_list.field_product_product_xmlid_code,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/3684
 Products at HQ - UniData,product.field_product_product_active,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/3685
+Products at HQ - UniData,product_attributes.field_product_product_standard_ok,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20000
+UNIDATA Product Coordo,product_attributes.field_product_product_standard_ok,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20001
+UNIDATA Product Coordo,product_attributes.field_product_product_fit_value,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20002
+UNIDATA Product Coordo,product_attributes.field_product_product_form_value,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20003
+UNIDATA Product Coordo,product_attributes.field_product_product_function_value,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20004
+UNIDATA Product Coordo,account_override.field_product_product_donation_expense_account,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20005
+ESC Product Coordo,product_attributes.field_product_product_standard_ok,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20006
+ESC Product Coordo,product_attributes.field_product_product_fit_value,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20007
+ESC Product Coordo,product_attributes.field_product_product_form_value,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20008
+ESC Product Coordo,product_attributes.field_product_product_function_value,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20009
+ESC Product Coordo,account_override.field_product_product_donation_expense_account,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20010
+ITC Product Coordo,product_attributes.field_product_product_standard_ok,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20011
+ITC Product Coordo,product_attributes.field_product_product_fit_value,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20012
+ITC Product Coordo,product_attributes.field_product_product_form_value,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20013
+ITC Product Coordo,product_attributes.field_product_product_function_value,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20014
+ITC Product Coordo,account_override.field_product_product_donation_expense_account,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20015
+HQ Product Coordo,product_attributes.field_product_product_standard_ok,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20016
+HQ Product Coordo,product_attributes.field_product_product_fit_value,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20017
+HQ Product Coordo,product_attributes.field_product_product_form_value,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20018
+HQ Product Coordo,product_attributes.field_product_product_function_value,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20019
+HQ Product Coordo,account_override.field_product_product_donation_expense_account,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20020
+HQ Product Coordo,product.field_product_product_active,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20021
+HQ Product Coordo,product_expiry.field_product_product_alert_time,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20022
+HQ Product Coordo,product_asset.field_product_product_asset_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20023
+HQ Product Coordo,product_asset.field_product_template_asset_type_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20024
+HQ Product Coordo,product_manufacturer.field_product_product_attribute_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20025
+HQ Product Coordo,product_attributes.field_product_product_batch_management,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20026
+HQ Product Coordo,product.field_product_template_categ_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20027
+HQ Product Coordo,product_attributes.field_product_product_closed_article,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20028
+HQ Product Coordo,product.field_product_product_code,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20029
+HQ Product Coordo,product_attributes.field_product_product_cold_chain,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20030
+HQ Product Coordo,product.field_product_template_company_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20031
+HQ Product Coordo,product_attributes.field_product_product_composed_kit,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20032
+HQ Product Coordo,product_attributes.field_product_product_controlled_substance,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20033
+HQ Product Coordo,product.field_product_template_cost_method,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20034
+HQ Product Coordo,product_attributes.field_product_product_country_restriction,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20035
+HQ Product Coordo,product_attributes.field_product_product_criticism,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20036
+HQ Product Coordo,product_attributes.field_product_product_currency_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20037
+HQ Product Coordo,product_attributes.field_product_product_dangerous_goods,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20038
+HQ Product Coordo,product.field_product_product_default_code,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20039
+HQ Product Coordo,partner_modification.field_product_template_delay_for_supplier,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20040
+HQ Product Coordo,product.field_product_template_description,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20041
+HQ Product Coordo,product.field_product_template_description_purchase,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20042
+HQ Product Coordo,product.field_product_template_description_sale,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20043
+HQ Product Coordo,product_attributes.field_product_product_description2,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20044
+HQ Product Coordo,product_attributes.field_product_product_duplicate_ok,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20045
+HQ Product Coordo,product.field_product_product_ean13,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20046
+HQ Product Coordo,product_attributes.field_product_product_field_currency_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20047
+HQ Product Coordo,stock_schedule.field_product_product_fnct_categ_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20048
+HQ Product Coordo,product_attributes.field_product_product_gmdn_code,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20049
+HQ Product Coordo,product_attributes.field_product_product_gmdn_description,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20050
+HQ Product Coordo,kit.field_product_product_has_active_completed_theo_kit_kit,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20051
+HQ Product Coordo,product_attributes.field_product_product_heat_sensitive_item,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20052
+HQ Product Coordo,product_attributes.field_product_product_international_status,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20053
+HQ Product Coordo,product_attributes.field_product_product_justification_code_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20054
+HQ Product Coordo,product_attributes.field_product_product_library,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20055
+HQ Product Coordo,product_expiry.field_product_product_life_time,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20056
+HQ Product Coordo,product_list.field_product_product_list_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20057
+HQ Product Coordo,product.field_product_template_loc_case,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20058
+HQ Product Coordo,product_attributes.field_product_product_loc_indic,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20059
+HQ Product Coordo,product.field_product_template_loc_rack,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20060
+HQ Product Coordo,product.field_product_template_loc_row,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20061
+HQ Product Coordo,stock.field_product_product_location_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20062
+HQ Product Coordo,product.field_product_product_lst_price,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20063
+HQ Product Coordo,product_manufacturer.field_product_product_manufacturer,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20064
+HQ Product Coordo,product_manufacturer.field_product_product_manufacturer_pname,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20065
+HQ Product Coordo,product_manufacturer.field_product_product_manufacturer_pref,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20066
+HQ Product Coordo,product_attributes.field_product_product_med_device_class,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20067
+HQ Product Coordo,product.field_product_template_mes_type,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20068
+HQ Product Coordo,consumption_calculation.field_product_product_monthly_consumption,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20069
+HQ Product Coordo,product.field_product_template_name,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20070
+HQ Product Coordo,product.field_product_product_name_template,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20071
+HQ Product Coordo,product_attributes.field_product_product_narcotic,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20072
+HQ Product Coordo,product_attributes.field_product_product_new_code,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20073
+HQ Product Coordo,product_attributes.field_product_product_nomen_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20074
+HQ Product Coordo,product_nomenclature.field_product_template_nomen_manda_0,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20075
+HQ Product Coordo,product_nomenclature.field_product_template_nomen_manda_0_s,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20076
+HQ Product Coordo,product_nomenclature.field_product_template_nomen_manda_1,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20077
+HQ Product Coordo,product_nomenclature.field_product_template_nomen_manda_1_s,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20078
+HQ Product Coordo,product_nomenclature.field_product_template_nomen_manda_2,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20079
+HQ Product Coordo,product_nomenclature.field_product_template_nomen_manda_2_s,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20080
+HQ Product Coordo,product_nomenclature.field_product_template_nomen_manda_3,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20081
+HQ Product Coordo,product_nomenclature.field_product_template_nomen_manda_3_s,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20082
+HQ Product Coordo,product_nomenclature.field_product_template_nomen_sub_0,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20083
+HQ Product Coordo,product_nomenclature.field_product_template_nomen_sub_0_s,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20084
+HQ Product Coordo,product_nomenclature.field_product_template_nomen_sub_1,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20085
+HQ Product Coordo,product_nomenclature.field_product_template_nomen_sub_1_s,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20086
+HQ Product Coordo,product_nomenclature.field_product_template_nomen_sub_2,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20087
+HQ Product Coordo,product_nomenclature.field_product_template_nomen_sub_2_s,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20088
+HQ Product Coordo,product_nomenclature.field_product_template_nomen_sub_3,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20089
+HQ Product Coordo,product_nomenclature.field_product_template_nomen_sub_3_s,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20090
+HQ Product Coordo,product_nomenclature.field_product_template_nomen_sub_4,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20091
+HQ Product Coordo,product_nomenclature.field_product_template_nomen_sub_4_s,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20092
+HQ Product Coordo,product_nomenclature.field_product_template_nomen_sub_5,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20093
+HQ Product Coordo,product_nomenclature.field_product_template_nomen_sub_5_s,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20094
+HQ Product Coordo,product_nomenclature.field_product_template_nomenclature_description,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20095
+HQ Product Coordo,product_attributes.field_product_product_old_code,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20096
+HQ Product Coordo,product_attributes.field_product_product_options_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20097
+HQ Product Coordo,product.field_product_product_outgoing_qty,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20098
+HQ Product Coordo,product.field_product_product_packaging,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20099
+HQ Product Coordo,product.field_product_product_partner_ref,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20100
+HQ Product Coordo,product_attributes.field_product_product_perishable,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20101
+HQ Product Coordo,return_claim.field_product_product_picking_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20102
+HQ Product Coordo,product.field_product_product_price,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20103
+HQ Product Coordo,product.field_product_product_price_extra,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20104
+HQ Product Coordo,product.field_product_product_price_margin,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20105
+HQ Product Coordo,product.field_product_product_pricelist_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20106
+HQ Product Coordo,consumption_calculation.field_product_product_procure_delay,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20107
+HQ Product Coordo,product.field_product_template_procure_method,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20108
+HQ Product Coordo,msf_outgoing.field_product_product_prodlot_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20109
+HQ Product Coordo,product.field_product_template_produce_delay,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20110
+HQ Product Coordo,consumption_calculation.field_product_product_product_amc,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20111
+HQ Product Coordo,product_attributes.field_product_product_product_catalog_page,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20112
+HQ Product Coordo,product_attributes.field_product_product_product_catalog_path,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20113
+HQ Product Coordo,product.field_product_template_product_manager,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20114
+HQ Product Coordo,product.field_product_product_product_tmpl_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20115
+HQ Product Coordo,account.field_product_template_property_account_expense,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20116
+HQ Product Coordo,account.field_product_template_property_account_income,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20117
+HQ Product Coordo,stock.field_product_template_property_stock_account_input,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20118
+HQ Product Coordo,stock.field_product_template_property_stock_account_output,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20119
+HQ Product Coordo,stock.field_product_template_property_stock_inventory,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20120
+HQ Product Coordo,stock.field_product_template_property_stock_procurement,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20121
+HQ Product Coordo,stock.field_product_template_property_stock_production,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20122
+HQ Product Coordo,product.field_product_template_purchase_ok,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20123
+HQ Product Coordo,purchase_override.field_product_product_purchase_type,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20124
+HQ Product Coordo,product.field_product_product_qty_available,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20125
+HQ Product Coordo,product_expiry.field_product_product_removal_time,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20126
+HQ Product Coordo,product.field_product_template_rental,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20127
+HQ Product Coordo,product_attributes.field_product_product_restricted_country,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20128
+HQ Product Coordo,consumption_calculation.field_product_product_reviewed_consumption,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20129
+HQ Product Coordo,product.field_product_template_sale_delay,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20130
+HQ Product Coordo,product.field_product_template_sale_ok,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20131
+HQ Product Coordo,product_attributes.field_product_product_section_code_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20132
+HQ Product Coordo,product.field_product_template_seller_delay,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20133
+HQ Product Coordo,product.field_product_template_seller_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20134
+HQ Product Coordo,product.field_product_template_seller_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20135
+HQ Product Coordo,sourcing.field_product_template_seller_info_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20136
+HQ Product Coordo,product.field_product_template_seller_qty,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20137
+HQ Product Coordo,product_attributes.field_product_product_short_shelf_life,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20138
+HQ Product Coordo,product_attributes.field_product_product_single_use,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20139
+HQ Product Coordo,product.field_product_template_standard_price,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20140
+HQ Product Coordo,product.field_product_template_state,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20141
+HQ Product Coordo,product_attributes.field_product_product_sterilized,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20142
+HQ Product Coordo,product_attributes.field_product_product_sublist,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20143
+HQ Product Coordo,product_asset.field_product_template_subtype,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20144
+HQ Product Coordo,account.field_product_template_supplier_taxes_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20145
+HQ Product Coordo,product.field_product_template_supply_method,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20146
+HQ Product Coordo,product_attributes.field_product_product_supply_source_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20147
+HQ Product Coordo,account.field_product_template_taxes_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20148
+HQ Product Coordo,stock.field_product_product_track_incoming,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20149
+HQ Product Coordo,stock.field_product_product_track_outgoing,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20150
+HQ Product Coordo,stock.field_product_product_track_production,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20151
+HQ Product Coordo,transport_mgmt.field_product_product_transport_ok,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20152
+HQ Product Coordo,product.field_product_template_type,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20153
+HQ Product Coordo,product_attributes.field_product_product_un_code,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20154
+HQ Product Coordo,product_attributes.field_product_product_uom_category_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20155
+HQ Product Coordo,product.field_product_template_uom_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20156
+HQ Product Coordo,product.field_product_template_uom_po_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20157
+HQ Product Coordo,product.field_product_template_uos_coeff,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20158
+HQ Product Coordo,product.field_product_template_uos_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20159
+HQ Product Coordo,product_expiry.field_product_product_use_time,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20160
+HQ Product Coordo,stock.field_product_product_valuation,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20161
+HQ Product Coordo,product.field_product_product_variants,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20162
+HQ Product Coordo,product.field_product_product_virtual_available,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20163
+HQ Product Coordo,product.field_product_template_volume,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20164
+HQ Product Coordo,product.field_product_template_warranty,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20165
+HQ Product Coordo,product.field_product_template_weight,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20166
+HQ Product Coordo,product.field_product_template_weight_net,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20167
+HQ Product Coordo,product.field_product_product_incoming_qty,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20168

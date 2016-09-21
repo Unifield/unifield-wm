@@ -1,8 +1,8 @@
 active,comment,domain_text,comment,group_ids,id,instance_level,name,model_id/id,status
-TRUE,,[],,Fin_Cash_Responsible_Access,CASH_RESTRICTION_EDIT,coordo,Cash restriction responsible_Can edit Responsible,sd.account_model_account_bank_statement,domain_validated
-TRUE,,[],,Fin_Cash_Registers,CASH_RESTRICTION_VIEW,coordo,Cash restriction responsible_View Responsible,sd.account_model_account_bank_statement,domain_validated
-TRUE,,[],,Fin_Cash_Responsible_Access,CASH_RESTRICTION_EDIT_P,project,Cash restriction responsible_Can edit Responsible Project,sd.account_model_account_bank_statement,domain_validated
-TRUE,,[],,Fin_Cash_Registers,CASH_RESTRICTION_VIEW_P,project,Cash restriction responsible_View Responsible Project,sd.account_model_account_bank_statement,domain_validated
+TRUE,,[],,"Fin_Cash_Responsible_Access,Fin_Bnk_Chk_Responsible_Access",CASH_RESTRICTION_EDIT,coordo,Cash restriction responsible_Can edit Responsible,sd.account_model_account_bank_statement,domain_validated
+TRUE,,[],,"Fin_Cash_Registers,Fin_Bnk_Chk_Registers",CASH_RESTRICTION_VIEW,coordo,Cash restriction responsible_View Responsible,sd.account_model_account_bank_statement,domain_validated
+TRUE,,[],,"Fin_Cash_Responsible_Access,Fin_Bnk_Chk_Responsible_Access",CASH_RESTRICTION_EDIT_P,project,Cash restriction responsible_Can edit Responsible Project,sd.account_model_account_bank_statement,domain_validated
+TRUE,,[],,"Fin_Cash_Registers,Fin_Bnk_Chk_Registers",CASH_RESTRICTION_VIEW_P,project,Cash restriction responsible_View Responsible Project,sd.account_model_account_bank_statement,domain_validated
 TRUE,,[],,Fin_Config_Full,COMPANY_HQ,hq,Company - HQ,sd.base_model_res_company,domain_validated
 TRUE,,[],,Fin_Config_Coordo,COMPANY_COORDO,coordo,Company - Coordination,sd.base_model_res_company,domain_validated
 TRUE,,[],,"Fin_Config_Project,Fin_Config_Coordo",COMPANY_PROJECT,project,Company - Project,sd.base_model_res_company,domain_validated
@@ -17,6 +17,7 @@ TRUE,,"[('international_status', '=', 2)]",,Sup_Product_Manager,ESC_PRODUCT_COOR
 TRUE,,"[('international_status', '=', 4)]",,Sup_Product_Manager,LOCAL_PRODUCT_COORDO,coordo,LOCAL Product Coordo,sd.product_model_product_product,domain_validated
 TRUE,,"[('international_status', '=', 5)]",,Sup_Product_Manager,TEMP_PRODUCT_COORDO,coordo,TEMP Product Coordo,sd.product_model_product_product,domain_validated
 TRUE,,"[('international_status', '=', 6)]",,Sup_Product_Manager,UNIDATA_PRODUCT_COORDO,coordo,UNIDATA Product Coordo,sd.product_model_product_product,domain_validated
+TRUE,,"[('international_status', '=', 3)]",,Sup_Product_Manager,HQ_PRODUCT_COORDO,coordo,HQ Product Coordo,sd.product_model_product_product,domain_validated
 TRUE,,[],,"Sup_Supply_Config,Sup_Supply_System_Administrator,Sup_Purchase_Officer,Sup_Purchase_Manager,Sup_Consumption_Management,Sup_Demand_Manager,Sup_Warehouse_Manager,Sup_Store_Keeper",PRODUCTS_PROJECTS_NO_ACCESS,project,Products - Project - No Access,sd.product_model_product_product,domain_validated
 TRUE,,[],,Sup_Product_Manager,PRODUCTS_PROJECTS_CHANGES_ALLOWED,project,Products - Project - Changes allowed,sd.product_model_product_product,domain_validated
 TRUE,"For Fin_Config_Full, gives access to change the Accounting codes of international products (in HQ)","[('international_status', 'in', ['1','2','3'])]",,Fin_Config_Full,HQ_PROD_FIN_CONFIG_FULL_HQ,hq,HQ Product - Fin Config Full - HQ Access,sd.product_model_product_product,domain_validated
@@ -35,5 +36,6 @@ TRUE,,,,"Sup_Supply_System_Administrator,Sup_Warehouse_Manager,Sup_Store_Keeper"
 TRUE,,,,"Sup_Supply_System_Administrator,Sup_Warehouse_Manager,Sup_Store_Keeper",IN_COORDO,coordo,IN Coordo,sd.stock_model_stock_picking,domain_validated
 TRUE,,,,"Sup_Supply_System_Administrator,Sup_Warehouse_Manager,Sup_Store_Keeper",IN_PROJECT,project,IN Project,sd.stock_model_stock_picking,domain_validated
 TRUE,,[],,"Sup_Supply_Config,Sup_Requester,Sup_Request_Validator,Sup_Supply_System_Administrator,Sup_Purchase_Manager",ALL_PRODUCTS_HQ_NO_ACCESS,hq,All Products - HQ - No Field,sd.product_model_product_product,domain_validated
-TRUE,,[],,"Sup_Supply_Config,Sup_Requester,Sup_Request_Validator,Sup_Supply_System_Administrator,Sup_Purchase_Manager",ALL_PRODUCTS_COORDO_NO_ACCESS,coordo,All Products - Coordination - No Field,sd.product_model_product_product,domain_validated
+TRUE,,"[('international_status', 'in', ['1','2','3','6'])]",,"Sup_Supply_Config,Sup_Requester,Sup_Request_Validator,Sup_Supply_System_Administrator,Sup_Purchase_Manager",HQ_ESC_ITC_UD_PRODUCTS_COORDO_NO_ACCESS,coordo,HQ ESC ITC UD Products - Coordination - No Field,sd.product_model_product_product,domain_validated
 TRUE,,[],,"Sup_Supply_Config,Sup_Requester,Sup_Request_Validator,Sup_Supply_System_Administrator,Sup_Purchase_Manager",ALL_PRODUCTS_PROJECT_NO_ACCESS,project,All Products - Project - No Field,sd.product_model_product_product,domain_validated
+TRUE,,"[('international_status', '=', 4)]",,"Sup_Supply_Config,Sup_Supply_System_Administrator,Sup_Purchase_Officer,Sup_Purchase_Manager,Sup_Consumption_Management,Sup_Demand_Manager,Sup_Warehouse_Manager,Sup_Store_Keeper",LOCAL_PRODUCT_COORDO_COMMON,coordo,LOCAL Product Coordo Common,sd.product_model_product_product,domain_validated
