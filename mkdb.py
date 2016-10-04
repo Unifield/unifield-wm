@@ -848,6 +848,29 @@ class hqn_creation(client_creation, unittest.TestCase):
                     prod.write([copy_id], {'name': newcode})
                 msfid += 10
 
+    def test_41_load_rates(self):
+        cur_dir = os.path.realpath(__file__)
+        rate_file = os.path.join(cur_dir, '%s.txt' % config.currency)
+        if os.path.isfile(rate_file):
+            rate_obj = self.db.get('res.currency')
+            fx_rate_obj = self.db.get('res.currency.rate')
+            rate_ids = rate_obj.search([('active', 'in', ['t', 'f'])])
+            rate_dict = {}
+            for x in rate_obj.read(rate_ids, ['name']):
+                rate_dict[x['name']] = x['id']
+            fx_rate_obj.create({'currency_id': rate_dict[config.currency.upper()], 'rate': 1, 'name': '2016-01-01'})
+            f = open(rate_file, 'r')
+            date = False
+            for data in f.read():
+                if data[0]:
+                    date = data[0]
+                elif data[0] == ' ' and ':' in data:
+                    cur, rate = data[1:].split(':')
+                    if rate_dict.get(cur):
+                        fx_rate_obj.create({'currency_id': rate_dict[cur], 'rate': rate, 'name': date})
+
+
+
     @unittest.skipIf(skipManualConfig, "Manual link on analytic account destination desactivated")
     def test_43_manual_link_on_analytic_account_destination(self):
         self.db.connect('admin')
