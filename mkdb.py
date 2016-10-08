@@ -793,6 +793,11 @@ class client_creation(db_creation):
             except:
                 raise
 
+    @unittest.skipIf(skipSync, "Synchronization desactivated")
+    def test_99_synchronize(self):
+        self.db.connect('admin')
+        self.sync()
+
 # Replicable class to create hq n
 class hqn_creation(client_creation, unittest.TestCase):
     name_format = "%(db)s_HQ%(ind)d"
@@ -1035,33 +1040,49 @@ class verbose(unittest.TestCase):
 test_cases = [verbose, update_branches, server_creation]
 
 # Create HQ classes
-for i in range(1, hq_count+1):
-    test_cases.append( type("HQ%d_creation" % i, (hqn_creation,unittest.TestCase), {
-        'prefix' : 'HQ%s'%i,
-        'index' : i,
+if not hasattr(config, 'instance_tree') or not config.instance_tree:
+    config.instance_tree = {}
+    for i in range(1, hq_count+1):
+        config.instance_tree['HQ%d'%i] = {}
+        for ci in range(1, coordo_count+1):
+            config.instance_tree['HQ%d'%i]['C%d'%ci] = []
+            for pi in range(1, project_count+1):
+                config.instance_tree['HQ%d'%i]['C%d'%ci].append('P%d'%pi)
+else:
+    hq_count = len(config.instance_tree.keys())
+    coordo_count = max([len(x.values()) for x in config.instance_tree.values()])
+
+hq_index = 0
+for hq, coordos in config.instance_tree.iteritems():
+    hq_index += 1
+    test_cases.append( type("HQ%d_creation" % hq_index, (hqn_creation,unittest.TestCase), {
+        'prefix' : 'HQ%s'%hq_index,
+        'index' : hq_index,
     }) )
     # Make testcase visible for importation
     globals()[test_cases[-1].__name__] = test_cases[-1]
 
-
+    coordo_index = 0
     # Create Coordo classes
-    for ci in range(1, coordo_count+1):
-        test_cases.append( type("HQ%d_C%d_creation" % (i, ci), (coordon_creation,unittest.TestCase), {
-            'prefix' : 'C%s%s' % (i, ci),
-            'index' : ci,
-            'parent' : globals()["HQ%d_creation" % i],
+    for coordo in sorted(coordos.keys()):
+        coordo_index += 1
+        test_cases.append( type("HQ%d_C%d_creation" % (hq_index, coordo_index), (coordon_creation,unittest.TestCase), {
+            'prefix' : 'C%s%s' % (hq_index, coordo_index),
+            'index' : coordo_index,
+            'parent' : globals()["HQ%d_creation" % hq_index],
         }) )
         test_cases[-1].hq = test_cases[-1].parent
         # Make testcase visible for importation
         globals()[test_cases[-1].__name__] = test_cases[-1]
 
-
+        project_index = 0
         # Create Project classes
-        for pi in range(1, project_count+1):
-            test_cases.append( type("HQ%d_C%d_P%d_creation" % (i, ci, pi), (projectn_creation,unittest.TestCase), {
-                'prefix' : 'P%s%s%s'%(i, ci, pi),
-                'index' : pi,
-                'parent' : globals()["HQ%d_C%d_creation" % (i, ci)],
+        for pi in coordos[coordo]:
+            project_index += 1
+            test_cases.append( type("HQ%d_C%d_P%d_creation" % (hq_index, coordo_index, project_index), (projectn_creation,unittest.TestCase), {
+                'prefix' : 'P%s%s%s'%(hq_index, coordo_index, project_index),
+                'index' : project_index,
+                'parent' : globals()["HQ%d_C%d_creation" % (hq_index, coordo_index)],
             }) )
             test_cases[-1].hq = test_cases[-1].parent.parent
             # Make testcase visible for importation

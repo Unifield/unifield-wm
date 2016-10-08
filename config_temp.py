@@ -29,7 +29,18 @@ sync_user_admin = False
 hq_count = 1
 coordo_count = 1
 project_count = 1
-
+# or describe the instances with instance_tree
+"""
+instance_tree = {
+    'HQ1': {
+        'C1': ['P1', 'P2'],
+        'C2': ['P1'],
+    },
+    'HQ2': {
+        'C1': [],
+    },
+}
+"""
 load_test = 1250
 dump_dir = '/tmp/db_dump_%s' % (prefix,)
 
