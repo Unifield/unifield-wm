@@ -836,7 +836,7 @@ LOCAL Product Coordo,product_attributes.field_product_product_controlled_substan
 LOCAL Product Coordo,product.field_product_template_cost_method,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1289
 LOCAL Product Coordo,product_attributes.field_product_product_country_restriction,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1290
 LOCAL Product Coordo,product_attributes.field_product_product_criticism,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1291
-LOCAL Product Coordo,product_attributes.field_product_product_currency_id,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1292
+LOCAL Product Coordo,product_attributes.field_product_product_currency_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/1292
 LOCAL Product Coordo,product_attributes.field_product_product_dangerous_goods,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1293
 LOCAL Product Coordo,product.field_product_product_default_code,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1294
 LOCAL Product Coordo,partner_modification.field_product_template_delay_for_supplier,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1295
@@ -846,7 +846,7 @@ LOCAL Product Coordo,product.field_product_template_description_sale,TRUE,FALSE,
 LOCAL Product Coordo,product_attributes.field_product_product_description2,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1299
 LOCAL Product Coordo,product_attributes.field_product_product_duplicate_ok,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1300
 LOCAL Product Coordo,product.field_product_product_ean13,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1301
-LOCAL Product Coordo,product_attributes.field_product_product_field_currency_id,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1302
+LOCAL Product Coordo,product_attributes.field_product_product_field_currency_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/1302
 LOCAL Product Coordo,stock_schedule.field_product_product_fnct_categ_id,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1303
 LOCAL Product Coordo,product_attributes.field_product_product_gmdn_code,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1304
 LOCAL Product Coordo,product_attributes.field_product_product_gmdn_description,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1305
@@ -925,11 +925,11 @@ LOCAL Product Coordo,stock.field_product_template_property_stock_procurement,TRU
 LOCAL Product Coordo,stock.field_product_template_property_stock_production,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1380
 LOCAL Product Coordo,product.field_product_template_purchase_ok,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1381
 LOCAL Product Coordo,purchase_override.field_product_product_purchase_type,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1382
-LOCAL Product Coordo,product.field_product_product_qty_available,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1383
+LOCAL Product Coordo,product.field_product_product_qty_available,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/1383
 LOCAL Product Coordo,product_expiry.field_product_product_removal_time,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1384
 LOCAL Product Coordo,product.field_product_template_rental,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1385
 LOCAL Product Coordo,product_attributes.field_product_product_restricted_country,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1386
-LOCAL Product Coordo,consumption_calculation.field_product_product_reviewed_consumption,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1387
+LOCAL Product Coordo,consumption_calculation.field_product_product_reviewed_consumption,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/1387
 LOCAL Product Coordo,product.field_product_template_sale_delay,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1388
 LOCAL Product Coordo,product.field_product_template_sale_ok,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1389
 LOCAL Product Coordo,product_attributes.field_product_product_section_code_ids,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1390
@@ -963,7 +963,7 @@ LOCAL Product Coordo,product.field_product_template_uos_id,TRUE,FALSE,FALSE,msf_
 LOCAL Product Coordo,product_expiry.field_product_product_use_time,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1418
 LOCAL Product Coordo,stock.field_product_product_valuation,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1419
 LOCAL Product Coordo,product.field_product_product_variants,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1420
-LOCAL Product Coordo,product.field_product_product_virtual_available,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1421
+LOCAL Product Coordo,product.field_product_product_virtual_available,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/1421
 LOCAL Product Coordo,product.field_product_template_volume,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1422
 LOCAL Product Coordo,product.field_product_template_warranty,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1423
 LOCAL Product Coordo,product.field_product_template_weight,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1424
@@ -984,7 +984,7 @@ TEMP Product Coordo,product_attributes.field_product_product_controlled_substanc
 TEMP Product Coordo,product.field_product_template_cost_method,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1589
 TEMP Product Coordo,product_attributes.field_product_product_country_restriction,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1590
 TEMP Product Coordo,product_attributes.field_product_product_criticism,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1591
-TEMP Product Coordo,product_attributes.field_product_product_currency_id,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1592
+TEMP Product Coordo,product_attributes.field_product_product_currency_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/1592
 TEMP Product Coordo,product_attributes.field_product_product_dangerous_goods,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1593
 TEMP Product Coordo,product.field_product_product_default_code,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1594
 TEMP Product Coordo,partner_modification.field_product_template_delay_for_supplier,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1595
@@ -994,7 +994,7 @@ TEMP Product Coordo,product.field_product_template_description_sale,TRUE,FALSE,F
 TEMP Product Coordo,product_attributes.field_product_product_description2,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1599
 TEMP Product Coordo,product_attributes.field_product_product_duplicate_ok,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1600
 TEMP Product Coordo,product.field_product_product_ean13,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1601
-TEMP Product Coordo,product_attributes.field_product_product_field_currency_id,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1602
+TEMP Product Coordo,product_attributes.field_product_product_field_currency_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/1602
 TEMP Product Coordo,stock_schedule.field_product_product_fnct_categ_id,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1603
 TEMP Product Coordo,product_attributes.field_product_product_gmdn_code,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1604
 TEMP Product Coordo,product_attributes.field_product_product_gmdn_description,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1605
@@ -1073,11 +1073,11 @@ TEMP Product Coordo,stock.field_product_template_property_stock_procurement,TRUE
 TEMP Product Coordo,stock.field_product_template_property_stock_production,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1680
 TEMP Product Coordo,product.field_product_template_purchase_ok,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1681
 TEMP Product Coordo,purchase_override.field_product_product_purchase_type,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1682
-TEMP Product Coordo,product.field_product_product_qty_available,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1683
+TEMP Product Coordo,product.field_product_product_qty_available,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/1683
 TEMP Product Coordo,product_expiry.field_product_product_removal_time,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1684
 TEMP Product Coordo,product.field_product_template_rental,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1685
 TEMP Product Coordo,product_attributes.field_product_product_restricted_country,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1686
-TEMP Product Coordo,consumption_calculation.field_product_product_reviewed_consumption,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1687
+TEMP Product Coordo,consumption_calculation.field_product_product_reviewed_consumption,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/1687
 TEMP Product Coordo,product.field_product_template_sale_delay,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1688
 TEMP Product Coordo,product.field_product_template_sale_ok,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1689
 TEMP Product Coordo,product_attributes.field_product_product_section_code_ids,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1690
@@ -1111,7 +1111,7 @@ TEMP Product Coordo,product.field_product_template_uos_id,TRUE,FALSE,FALSE,msf_p
 TEMP Product Coordo,product_expiry.field_product_product_use_time,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1718
 TEMP Product Coordo,stock.field_product_product_valuation,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1719
 TEMP Product Coordo,product.field_product_product_variants,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1720
-TEMP Product Coordo,product.field_product_product_virtual_available,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1721
+TEMP Product Coordo,product.field_product_product_virtual_available,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/1721
 TEMP Product Coordo,product.field_product_template_volume,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1722
 TEMP Product Coordo,product.field_product_template_warranty,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1723
 TEMP Product Coordo,product.field_product_template_weight,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/1724
