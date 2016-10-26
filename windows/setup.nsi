@@ -333,6 +333,8 @@ Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
     File /r "static\server-extra"
     CopyFiles "$TEMP\server-extra\*.*" "$INSTDIR\Server"
 
+    nsExec::Exec "sc config openerp-server-6.0 depend= PostgreSQL_For_OpenERP"
+
     nsExec::Exec "net stop openerp-server-6.0"
     sleep 2
 
@@ -413,9 +415,9 @@ Section -Post
 SectionEnd
 
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
+    !insertmacro MUI_DESCRIPTION_TEXT ${SectionPostgreSQL} $(DESC_PostgreSQL)
     !insertmacro MUI_DESCRIPTION_TEXT ${SectionOpenERP_Server} $(DESC_OpenERP_Server)
     !insertmacro MUI_DESCRIPTION_TEXT ${SectionOpenERP_Web_Client} $(DESC_OpenERP_Web_Client)
-    !insertmacro MUI_DESCRIPTION_TEXT ${SectionPostgreSQL} $(DESC_PostgreSQL)
 !insertmacro MUI_FUNCTION_DESCRIPTION_END
 
 Section "Uninstall"
