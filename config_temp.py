@@ -24,6 +24,8 @@ prefix = "SPRINT5"
 default_email = 'null@msf.org'
 company_name = 'Médecins Sans Frontières'
 currency = 'chf' # either 'chf' or 'eur' (field.selection in the setup currency wizard)
+default_oc = 'oca'
+
 lang = False # fr_MF or es_MF
 sync_user_admin = False
 hq_count = 1

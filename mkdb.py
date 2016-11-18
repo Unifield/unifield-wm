@@ -7,16 +7,13 @@
 
 #Load config file
 import config
-from config import coordo_count, project_count, hq_count
+from config import coordo_count, project_count, hq_count, default_oc
 
 import sys
 import os
 import shutil
 import time
 import uuid
-
-from bzrlib.workingtree import WorkingTree
-from bzrlib.branch import BzrBranch
 
 import argparse
 from subprocess import call
@@ -343,7 +340,7 @@ class db_creation(object):
             monitor = db.get('sync.monitor')
             ids = monitor.search([], 0, 1, '"end" desc')
             raise Exception('Synchronization process of database "%s" failed!\n%s' % (db.db_name,monitor.read(ids, ['error'])[0]['error']))
- 
+
     # Create Cost Center and Proprietary Instance for Test Cases
     def make_prop_instance(self, hq, prop_instance=None, mission=None):
         hq.connect('admin')
@@ -429,7 +426,7 @@ class db_creation(object):
                     hq.write('account.target.costcenter', project_target_ids, {'is_target': True, 'is_top_cost_center': True, 'is_po_fo_cost_center' : True})
                 self.sync(hq)
 
-    def add_to_group(self, group_name, group_type):
+    def add_to_group(self, group_name, group_type, oc=default_oc):
         Synchro.connect('admin')
         entity_ids = Synchro.get('sync.server.entity').search([('name','=',self.db.name)])
         assert len(entity_ids) == 1, "The entity must exists!"
@@ -448,6 +445,7 @@ class db_creation(object):
                 'name' : group_name,
                 'type_id' : type_ids[0],
                 'entity_ids' : [(6,0,entity_ids)],
+                'oc': oc
             })
 
     @classmethod
@@ -563,7 +561,7 @@ class server_creation(db_creation, unittest.TestCase):
         sync_rule_obj = Synchro.get('sync_server.message_rule')
         rule_ids = sync_rule_obj.search([('active', '=', 1)])
         for rule in sync_rule_obj.read(rule_ids, ['model_id']):
-             sync_rule_obj.write(rule['id'], {'model_id': rule['model_id'] , 'status': 'valid'})
+            sync_rule_obj.write(rule['id'], {'model_id': rule['model_id'] , 'status': 'valid'})
         #Synchro.activate('sync_server.sync_rule', [])
 
     def test_99_add_shortcut(self):
@@ -592,8 +590,8 @@ class client_creation(db_creation):
             wiz.import_csv([rec_id], {})
             imported = False
             while not imported:
-               time.sleep(5)
-               imported = nb != req.search([])
+                time.sleep(5)
+                imported = nb != req.search([])
             return
         with open(filename, 'rb') as csvfile:
             reader = csv.reader(csvfile, delimiter=',')
@@ -634,14 +632,20 @@ class client_creation(db_creation):
         self.db.connect('admin')
         # search the current entity
         entity_id = self.db.get('sync.client.entity').search([])
-        data = {'name': self.db.name, 'identifier': str(uuid.uuid1())}
+        data = {
+            'name': self.db.name,
+            'identifier': str(uuid.uuid1()),
+            'oc': default_oc
+        }
         if entity_id:
             entity_data = self.db.get('sync.client.entity').read(entity_id[0])
             if entity_data['name'] != self.db.name:
                 self.db.get('sync.client.entity').write(entity_id[0], data)
         else:
             self.db.get('sync.client.entity').create(data)
-        wizard = self.db.wizard('sync.client.register_entity', {'email':config.default_email})
+        wizard = self.db.wizard('sync.client.register_entity', {
+            'email': config.default_email,
+            'oc': default_oc,})
         # Fetch instances
         wizard.next()
         # Group state
@@ -738,14 +742,14 @@ class client_creation(db_creation):
                 'property_account_payable' : payable_ids[0],
                 'property_account_receivable' : receivable_ids[0],
                 'city': 'Geneva',
-                })
+            })
         temp_partner = res.search([('name','=',self.db.name)])
         if temp_partner:
             # set account values for the default user
             self.db.write('res.partner', temp_partner,{
                 'property_account_payable' : payable_ids[0],
                 'property_account_receivable' : receivable_ids[0],
-                })
+            })
 
     @unittest.skipIf(skipOpenPeriod, "Open Period desactivated")
     def test_92_open_period(self):
@@ -958,9 +962,9 @@ class coordon_creation(client_creation):
         for tc in test_cases:
             if issubclass(tc, coordon_creation) and tc.hq.index != self.hq.index:
                 if tc.db is None:
-                   db_name = tc.name_format % tc.getNameFormat()
+                    db_name = tc.name_format % tc.getNameFormat()
                 else:
-                   db_name = tc.db.name
+                    db_name = tc.db.name
                 partner.create({
                     'name': db_name,
                     'partner_type': 'section',
@@ -970,7 +974,7 @@ class coordon_creation(client_creation):
                     'property_account_payable':  account.search([('code','=','30010')])[0],
                     'property_account_receivable': account.search([('code','=','12010')])[0],
                     'city': 'XXX',
-                    })
+                })
 
         partner.create({
             'name': self.db.name,
@@ -1027,10 +1031,10 @@ class verbose(unittest.TestCase):
         for tc_hq in filter(lambda tc:issubclass(tc, hqn_creation), test_cases):
             warn( " * %s" % hqn_creation.name_format % tc_hq.getNameFormat())
             for tc in filter(lambda tc:issubclass(tc, coordon_creation) \
-                                       and tc.parent is tc_hq, test_cases):
+                             and tc.parent is tc_hq, test_cases):
                 warn( "    - %s" % coordon_creation.name_format % tc.getNameFormat())
                 for tp in filter(lambda tp:issubclass(tp, projectn_creation) \
-                                           and tp.parent is tc, test_cases):
+                                 and tp.parent is tc, test_cases):
                     warn( "        + %s" % projectn_creation.name_format % tp.getNameFormat())
             warn("-" * 40)
 
