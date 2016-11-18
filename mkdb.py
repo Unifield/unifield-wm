@@ -631,21 +631,28 @@ class client_creation(db_creation):
             Synchro.user(self.db.name).add(self.db.name).addGroups('Sync / User')
         self.db.connect('admin')
         # search the current entity
+        with_oc_field = False
+        entity_fields = self.db.get('sync.client.entity').fields_get(['oc'])
+        if entity_fields.get('oc'):
+            with_oc_field = True
+
         entity_id = self.db.get('sync.client.entity').search([])
         data = {
             'name': self.db.name,
             'identifier': str(uuid.uuid1()),
-            'oc': default_oc
         }
+        if with_oc_field:
+            data['oc'] = default_oc
         if entity_id:
             entity_data = self.db.get('sync.client.entity').read(entity_id[0])
             if entity_data['name'] != self.db.name:
                 self.db.get('sync.client.entity').write(entity_id[0], data)
         else:
             self.db.get('sync.client.entity').create(data)
-        wizard = self.db.wizard('sync.client.register_entity', {
-            'email': config.default_email,
-            'oc': default_oc,})
+        wiz_data = {'email': config.default_email}
+        if with_oc_field:
+            wiz_data['oc'] = default_oc
+        wizard = self.db.wizard('sync.client.register_entity', wiz_data)
         # Fetch instances
         wizard.next()
         # Group state
