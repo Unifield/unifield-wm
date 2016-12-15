@@ -40,7 +40,7 @@ PO Coordo,msf_order_date.field_sale_order_internal_type,TRUE,FALSE,FALSE,msf_pro
 PO Coordo,transport_mgmt.field_purchase_order_intl_supplier_ok,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/39
 PO Coordo,purchase_override.field_purchase_order_invoice_address_id,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/40
 PO Coordo,sale.field_sale_order_invoice_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/41
-PO Coordo,purchase.field_purchase_order_invoice_method,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/42
+PO Coordo,purchase.field_purchase_order_invoice_method,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/42
 PO Coordo,sale.field_sale_order_invoiced,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/43
 PO Coordo,sale.field_sale_order_invoiced_rate,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/44
 PO Coordo,sale_override.field_sale_order_is_a_counterpart,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/45
@@ -132,7 +132,7 @@ PO Project,msf_order_date.field_sale_order_internal_type,TRUE,FALSE,FALSE,msf_pr
 PO Project,transport_mgmt.field_purchase_order_intl_supplier_ok,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/131
 PO Project,purchase_override.field_purchase_order_invoice_address_id,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/132
 PO Project,sale.field_sale_order_invoice_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/133
-PO Project,purchase.field_purchase_order_invoice_method,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/134
+PO Project,purchase.field_purchase_order_invoice_method,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/134
 PO Project,sale.field_sale_order_invoiced,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/135
 PO Project,sale.field_sale_order_invoiced_rate,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/136
 PO Project,sale_override.field_sale_order_is_a_counterpart,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/137
@@ -224,7 +224,7 @@ PO HQ,msf_order_date.field_sale_order_internal_type,FALSE,FALSE,FALSE,msf_profil
 PO HQ,transport_mgmt.field_purchase_order_intl_supplier_ok,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/223
 PO HQ,purchase_override.field_purchase_order_invoice_address_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/224
 PO HQ,sale.field_sale_order_invoice_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/225
-PO HQ,purchase.field_purchase_order_invoice_method,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/226
+PO HQ,purchase.field_purchase_order_invoice_method,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/226
 PO HQ,sale.field_sale_order_invoiced,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/227
 PO HQ,sale.field_sale_order_invoiced_rate,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/228
 PO HQ,sale_override.field_sale_order_is_a_counterpart,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/229
@@ -3371,3 +3371,833 @@ HQ Product Coordo,product.field_product_template_warranty,FALSE,FALSE,FALSE,msf_
 HQ Product Coordo,product.field_product_template_weight,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20166
 HQ Product Coordo,product.field_product_template_weight_net,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20167
 HQ Product Coordo,product.field_product_product_incoming_qty,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20168
+Section partner restriction- Coordo,base.field_res_partner_active,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20169
+Section partner restriction- Coordo,base.field_res_partner_address,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20170
+Section partner restriction- Coordo,sourcing.field_res_partner_available_for_dpo,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20171
+Section partner restriction- Coordo,base.field_res_partner_bank_ids,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20172
+Section partner restriction- Coordo,account_override.field_res_partner_by_invoice_type,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20173
+Section partner restriction- Coordo,supplier_catalogue.field_res_partner_catalogue_bool,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20174
+Section partner restriction- Coordo,supplier_catalogue.field_res_partner_catalogue_ids,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20175
+Section partner restriction- Coordo,base.field_res_partner_category_id,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20176
+Section partner restriction- Coordo,sourcing.field_res_partner_check_partner,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20177
+Section partner restriction- Coordo,sourcing.field_res_partner_check_partner_ir,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20178
+Section partner restriction- Coordo,sourcing.field_res_partner_check_partner_po,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20179
+Section partner restriction- Coordo,sourcing.field_res_partner_check_partner_rfq,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20180
+Section partner restriction- Coordo,sale_override.field_res_partner_check_partner_so,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20181
+Section partner restriction- Coordo,base.field_res_partner_child_ids,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20182
+Section partner restriction- Coordo,base.field_res_partner_city,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20183
+Section partner restriction- Coordo,return_claim.field_res_partner_claim_ids_res_partner,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20184
+Section partner restriction- Coordo,base.field_res_partner_comment,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20185
+Section partner restriction- Coordo,base.field_res_partner_company_id,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20186
+Section partner restriction- Coordo,account.field_res_partner_contract_ids,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20187
+Section partner restriction- Coordo,base.field_res_partner_country,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20188
+Section partner restriction- Coordo,account.field_res_partner_credit,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20189
+Section partner restriction- Coordo,base.field_res_partner_credit_limit,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20190
+Section partner restriction- Coordo,base.field_res_partner_customer,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20191
+Section partner restriction- Coordo,partner_modification.field_res_partner_customer_lt,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20192
+Section partner restriction- Coordo,base.field_res_partner_date,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20193
+Section partner restriction- Coordo,account.field_res_partner_debit,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20194
+Section partner restriction- Coordo,account.field_res_partner_debit_limit,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20195
+Section partner restriction- Coordo,partner_modification.field_res_partner_default_delay,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20196
+Section partner restriction- Coordo,msf_partner.field_res_partner_delay,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20197
+Section partner restriction- Coordo,account_override.field_res_partner_donation_payable_account,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20198
+Section partner restriction- Coordo,base.field_res_partner_ean13,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20199
+Section partner restriction- Coordo,base.field_res_partner_email,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20200
+Section partner restriction- Coordo,base.field_res_partner_employee,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20201
+Section partner restriction- Coordo,base.field_res_partner_events,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20202
+Section partner restriction- Coordo,register_accounting.field_res_partner_filter_for_third_party,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20203
+Section partner restriction- Coordo,register_accounting.field_res_partner_filter_for_third_party_in_advance_return,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20204
+Section partner restriction- Coordo,msf_partner.field_res_partner_in_product,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20205
+Section partner restriction- Coordo,account.field_res_partner_invoice_ids,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20206
+Section partner restriction- Coordo,msf_partner.field_res_partner_is_coordo,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20207
+Section partner restriction- Coordo,msf_partner.field_res_partner_is_instance,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20208
+Section partner restriction- Coordo,base.field_res_partner_lang,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20209
+Section partner restriction- Coordo,account.field_res_partner_last_reconciliation_date,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20210
+Section partner restriction- Coordo,msf_order_date.field_res_partner_leadtime,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20211
+Section partner restriction- Coordo,sourcing.field_res_partner_line_contains_fo,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20212
+Section partner restriction- Coordo,msf_partner.field_res_partner_manufacturer,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20213
+Section partner restriction- Coordo,msf_partner.field_res_partner_min_qty,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20214
+Section partner restriction- Coordo,base.field_res_partner_mobile,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20215
+Section partner restriction- Coordo,base.field_res_partner_name,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20216
+Section partner restriction- Coordo,base.field_res_partner_parent_id,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20217
+Section partner restriction- Coordo,sale_override.field_res_partner_partner_not_int,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20218
+Section partner restriction- Coordo,msf_partner.field_res_partner_partner_type,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20219
+Section partner restriction- Coordo,base.field_res_partner_phone,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20220
+Section partner restriction- Coordo,partner_modification.field_res_partner_po_by_project,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20221
+Section partner restriction- Coordo,msf_partner.field_res_partner_price_currency,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20222
+Section partner restriction- Coordo,msf_partner.field_res_partner_price_unit,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20223
+Section partner restriction- Coordo,partner_modification.field_res_partner_procurement_lt,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20224
+Section partner restriction- Coordo,account.field_res_partner_property_account_payable,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20225
+Section partner restriction- Coordo,account.field_res_partner_property_account_position,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20226
+Section partner restriction- Coordo,account.field_res_partner_property_account_receivable,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20227
+Section partner restriction- Coordo,account.field_res_partner_property_payment_term,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20228
+Section partner restriction- Coordo,product.field_res_partner_property_product_pricelist,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20229
+Section partner restriction- Coordo,purchase.field_res_partner_property_product_pricelist_purchase,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20230
+Section partner restriction- Coordo,stock.field_res_partner_property_stock_customer,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20231
+Section partner restriction- Coordo,stock.field_res_partner_property_stock_supplier,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20232
+Section partner restriction- Coordo,base.field_res_partner_ref,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20233
+Section partner restriction- Coordo,account.field_res_partner_ref_companies,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20234
+Section partner restriction- Coordo,msf_partner.field_res_partner_split_po,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20235
+Section partner restriction- Coordo,base.field_res_partner_supplier,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20236
+Section partner restriction- Coordo,partner_modification.field_res_partner_supplier_lt,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20237
+Section partner restriction- Coordo,base.field_res_partner_title,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20238
+Section partner restriction- Coordo,partner_modification.field_res_partner_transport_0,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20239
+Section partner restriction- Coordo,partner_modification.field_res_partner_transport_0_lt,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20240
+Section partner restriction- Coordo,partner_modification.field_res_partner_transport_1,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20241
+Section partner restriction- Coordo,partner_modification.field_res_partner_transport_1_lt,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20242
+Section partner restriction- Coordo,partner_modification.field_res_partner_transport_2,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20243
+Section partner restriction- Coordo,partner_modification.field_res_partner_transport_2_lt,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20244
+Section partner restriction- Coordo,msf_partner.field_res_partner_transporter,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20245
+Section partner restriction- Coordo,base.field_res_partner_user_id,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20246
+Section partner restriction- Coordo,msf_partner.field_res_partner_valide_until_date,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20247
+Section partner restriction- Coordo,base.field_res_partner_vat,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20248
+Section partner restriction- Coordo,msf_partner.field_res_partner_vat_ok,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20249
+Section partner restriction- Coordo,base.field_res_partner_website,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20250
+Section partner restriction- Coordo,partner_modification.field_res_partner_zone,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20251
+Section partner restriction - Project,base.field_res_partner_active,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20252
+Section partner restriction - Project,base.field_res_partner_address,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20253
+Section partner restriction - Project,sourcing.field_res_partner_available_for_dpo,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20254
+Section partner restriction - Project,base.field_res_partner_bank_ids,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20255
+Section partner restriction - Project,account_override.field_res_partner_by_invoice_type,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20256
+Section partner restriction - Project,supplier_catalogue.field_res_partner_catalogue_bool,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20257
+Section partner restriction - Project,supplier_catalogue.field_res_partner_catalogue_ids,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20258
+Section partner restriction - Project,base.field_res_partner_category_id,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20259
+Section partner restriction - Project,sourcing.field_res_partner_check_partner,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20260
+Section partner restriction - Project,sourcing.field_res_partner_check_partner_ir,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20261
+Section partner restriction - Project,sourcing.field_res_partner_check_partner_po,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20262
+Section partner restriction - Project,sourcing.field_res_partner_check_partner_rfq,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20263
+Section partner restriction - Project,sale_override.field_res_partner_check_partner_so,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20264
+Section partner restriction - Project,base.field_res_partner_child_ids,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20265
+Section partner restriction - Project,base.field_res_partner_city,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20266
+Section partner restriction - Project,return_claim.field_res_partner_claim_ids_res_partner,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20267
+Section partner restriction - Project,base.field_res_partner_comment,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20268
+Section partner restriction - Project,base.field_res_partner_company_id,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20269
+Section partner restriction - Project,account.field_res_partner_contract_ids,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20270
+Section partner restriction - Project,base.field_res_partner_country,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20271
+Section partner restriction - Project,account.field_res_partner_credit,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20272
+Section partner restriction - Project,base.field_res_partner_credit_limit,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20273
+Section partner restriction - Project,base.field_res_partner_customer,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20274
+Section partner restriction - Project,partner_modification.field_res_partner_customer_lt,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20275
+Section partner restriction - Project,base.field_res_partner_date,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20276
+Section partner restriction - Project,account.field_res_partner_debit,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20277
+Section partner restriction - Project,account.field_res_partner_debit_limit,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20278
+Section partner restriction - Project,partner_modification.field_res_partner_default_delay,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20279
+Section partner restriction - Project,msf_partner.field_res_partner_delay,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20280
+Section partner restriction - Project,account_override.field_res_partner_donation_payable_account,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20281
+Section partner restriction - Project,base.field_res_partner_ean13,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20282
+Section partner restriction - Project,base.field_res_partner_email,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20283
+Section partner restriction - Project,base.field_res_partner_employee,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20284
+Section partner restriction - Project,base.field_res_partner_events,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20285
+Section partner restriction - Project,register_accounting.field_res_partner_filter_for_third_party,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20286
+Section partner restriction - Project,register_accounting.field_res_partner_filter_for_third_party_in_advance_return,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20287
+Section partner restriction - Project,msf_partner.field_res_partner_in_product,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20288
+Section partner restriction - Project,account.field_res_partner_invoice_ids,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20289
+Section partner restriction - Project,msf_partner.field_res_partner_is_coordo,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20290
+Section partner restriction - Project,msf_partner.field_res_partner_is_instance,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20291
+Section partner restriction - Project,base.field_res_partner_lang,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20292
+Section partner restriction - Project,account.field_res_partner_last_reconciliation_date,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20293
+Section partner restriction - Project,msf_order_date.field_res_partner_leadtime,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20294
+Section partner restriction - Project,sourcing.field_res_partner_line_contains_fo,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20295
+Section partner restriction - Project,msf_partner.field_res_partner_manufacturer,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20296
+Section partner restriction - Project,msf_partner.field_res_partner_min_qty,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20297
+Section partner restriction - Project,base.field_res_partner_mobile,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20298
+Section partner restriction - Project,base.field_res_partner_name,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20299
+Section partner restriction - Project,base.field_res_partner_parent_id,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20300
+Section partner restriction - Project,sale_override.field_res_partner_partner_not_int,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20301
+Section partner restriction - Project,msf_partner.field_res_partner_partner_type,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20302
+Section partner restriction - Project,base.field_res_partner_phone,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20303
+Section partner restriction - Project,partner_modification.field_res_partner_po_by_project,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20304
+Section partner restriction - Project,msf_partner.field_res_partner_price_currency,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20305
+Section partner restriction - Project,msf_partner.field_res_partner_price_unit,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20306
+Section partner restriction - Project,partner_modification.field_res_partner_procurement_lt,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20307
+Section partner restriction - Project,account.field_res_partner_property_account_payable,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20308
+Section partner restriction - Project,account.field_res_partner_property_account_position,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20309
+Section partner restriction - Project,account.field_res_partner_property_account_receivable,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20310
+Section partner restriction - Project,account.field_res_partner_property_payment_term,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20311
+Section partner restriction - Project,product.field_res_partner_property_product_pricelist,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20312
+Section partner restriction - Project,purchase.field_res_partner_property_product_pricelist_purchase,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20313
+Section partner restriction - Project,stock.field_res_partner_property_stock_customer,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20314
+Section partner restriction - Project,stock.field_res_partner_property_stock_supplier,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20315
+Section partner restriction - Project,base.field_res_partner_ref,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20316
+Section partner restriction - Project,account.field_res_partner_ref_companies,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20317
+Section partner restriction - Project,msf_partner.field_res_partner_split_po,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20318
+Section partner restriction - Project,base.field_res_partner_supplier,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20319
+Section partner restriction - Project,partner_modification.field_res_partner_supplier_lt,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20320
+Section partner restriction - Project,base.field_res_partner_title,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20321
+Section partner restriction - Project,partner_modification.field_res_partner_transport_0,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20322
+Section partner restriction - Project,partner_modification.field_res_partner_transport_0_lt,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20323
+Section partner restriction - Project,partner_modification.field_res_partner_transport_1,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20324
+Section partner restriction - Project,partner_modification.field_res_partner_transport_1_lt,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20325
+Section partner restriction - Project,partner_modification.field_res_partner_transport_2,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20326
+Section partner restriction - Project,partner_modification.field_res_partner_transport_2_lt,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20327
+Section partner restriction - Project,msf_partner.field_res_partner_transporter,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20328
+Section partner restriction - Project,base.field_res_partner_user_id,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20329
+Section partner restriction - Project,msf_partner.field_res_partner_valide_until_date,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20330
+Section partner restriction - Project,base.field_res_partner_vat,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20331
+Section partner restriction - Project,msf_partner.field_res_partner_vat_ok,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20332
+Section partner restriction - Project,base.field_res_partner_website,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20333
+Section partner restriction - Project,partner_modification.field_res_partner_zone,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20334
+ESC partner restriction - Coordo,base.field_res_partner_active,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20335
+ESC partner restriction - Coordo,base.field_res_partner_address,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20336
+ESC partner restriction - Coordo,sourcing.field_res_partner_available_for_dpo,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20337
+ESC partner restriction - Coordo,base.field_res_partner_bank_ids,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20338
+ESC partner restriction - Coordo,account_override.field_res_partner_by_invoice_type,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20339
+ESC partner restriction - Coordo,supplier_catalogue.field_res_partner_catalogue_bool,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20340
+ESC partner restriction - Coordo,supplier_catalogue.field_res_partner_catalogue_ids,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20341
+ESC partner restriction - Coordo,base.field_res_partner_category_id,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20342
+ESC partner restriction - Coordo,sourcing.field_res_partner_check_partner,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20343
+ESC partner restriction - Coordo,sourcing.field_res_partner_check_partner_ir,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20344
+ESC partner restriction - Coordo,sourcing.field_res_partner_check_partner_po,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20345
+ESC partner restriction - Coordo,sourcing.field_res_partner_check_partner_rfq,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20346
+ESC partner restriction - Coordo,sale_override.field_res_partner_check_partner_so,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20347
+ESC partner restriction - Coordo,base.field_res_partner_child_ids,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20348
+ESC partner restriction - Coordo,base.field_res_partner_city,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20349
+ESC partner restriction - Coordo,return_claim.field_res_partner_claim_ids_res_partner,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20350
+ESC partner restriction - Coordo,base.field_res_partner_comment,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20351
+ESC partner restriction - Coordo,base.field_res_partner_company_id,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20352
+ESC partner restriction - Coordo,account.field_res_partner_contract_ids,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20353
+ESC partner restriction - Coordo,base.field_res_partner_country,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20354
+ESC partner restriction - Coordo,account.field_res_partner_credit,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20355
+ESC partner restriction - Coordo,base.field_res_partner_credit_limit,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20356
+ESC partner restriction - Coordo,base.field_res_partner_customer,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20357
+ESC partner restriction - Coordo,partner_modification.field_res_partner_customer_lt,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20358
+ESC partner restriction - Coordo,base.field_res_partner_date,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20359
+ESC partner restriction - Coordo,account.field_res_partner_debit,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20360
+ESC partner restriction - Coordo,account.field_res_partner_debit_limit,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20361
+ESC partner restriction - Coordo,partner_modification.field_res_partner_default_delay,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20362
+ESC partner restriction - Coordo,msf_partner.field_res_partner_delay,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20363
+ESC partner restriction - Coordo,account_override.field_res_partner_donation_payable_account,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20364
+ESC partner restriction - Coordo,base.field_res_partner_ean13,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20365
+ESC partner restriction - Coordo,base.field_res_partner_email,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20366
+ESC partner restriction - Coordo,base.field_res_partner_employee,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20367
+ESC partner restriction - Coordo,base.field_res_partner_events,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20368
+ESC partner restriction - Coordo,register_accounting.field_res_partner_filter_for_third_party,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20369
+ESC partner restriction - Coordo,register_accounting.field_res_partner_filter_for_third_party_in_advance_return,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20370
+ESC partner restriction - Coordo,msf_partner.field_res_partner_in_product,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20371
+ESC partner restriction - Coordo,account.field_res_partner_invoice_ids,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20372
+ESC partner restriction - Coordo,msf_partner.field_res_partner_is_coordo,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20373
+ESC partner restriction - Coordo,msf_partner.field_res_partner_is_instance,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20374
+ESC partner restriction - Coordo,base.field_res_partner_lang,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20375
+ESC partner restriction - Coordo,account.field_res_partner_last_reconciliation_date,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20376
+ESC partner restriction - Coordo,msf_order_date.field_res_partner_leadtime,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20377
+ESC partner restriction - Coordo,sourcing.field_res_partner_line_contains_fo,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20378
+ESC partner restriction - Coordo,msf_partner.field_res_partner_manufacturer,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20379
+ESC partner restriction - Coordo,msf_partner.field_res_partner_min_qty,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20380
+ESC partner restriction - Coordo,base.field_res_partner_mobile,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20381
+ESC partner restriction - Coordo,base.field_res_partner_name,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20382
+ESC partner restriction - Coordo,base.field_res_partner_parent_id,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20383
+ESC partner restriction - Coordo,sale_override.field_res_partner_partner_not_int,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20384
+ESC partner restriction - Coordo,msf_partner.field_res_partner_partner_type,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20385
+ESC partner restriction - Coordo,base.field_res_partner_phone,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20386
+ESC partner restriction - Coordo,partner_modification.field_res_partner_po_by_project,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20387
+ESC partner restriction - Coordo,msf_partner.field_res_partner_price_currency,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20388
+ESC partner restriction - Coordo,msf_partner.field_res_partner_price_unit,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20389
+ESC partner restriction - Coordo,partner_modification.field_res_partner_procurement_lt,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20390
+ESC partner restriction - Coordo,account.field_res_partner_property_account_payable,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20391
+ESC partner restriction - Coordo,account.field_res_partner_property_account_position,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20392
+ESC partner restriction - Coordo,account.field_res_partner_property_account_receivable,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20393
+ESC partner restriction - Coordo,account.field_res_partner_property_payment_term,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20394
+ESC partner restriction - Coordo,product.field_res_partner_property_product_pricelist,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20395
+ESC partner restriction - Coordo,purchase.field_res_partner_property_product_pricelist_purchase,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20396
+ESC partner restriction - Coordo,stock.field_res_partner_property_stock_customer,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20397
+ESC partner restriction - Coordo,stock.field_res_partner_property_stock_supplier,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20398
+ESC partner restriction - Coordo,base.field_res_partner_ref,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20399
+ESC partner restriction - Coordo,account.field_res_partner_ref_companies,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20400
+ESC partner restriction - Coordo,msf_partner.field_res_partner_split_po,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20401
+ESC partner restriction - Coordo,base.field_res_partner_supplier,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20402
+ESC partner restriction - Coordo,partner_modification.field_res_partner_supplier_lt,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20403
+ESC partner restriction - Coordo,base.field_res_partner_title,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20404
+ESC partner restriction - Coordo,partner_modification.field_res_partner_transport_0,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20405
+ESC partner restriction - Coordo,partner_modification.field_res_partner_transport_0_lt,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20406
+ESC partner restriction - Coordo,partner_modification.field_res_partner_transport_1,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20407
+ESC partner restriction - Coordo,partner_modification.field_res_partner_transport_1_lt,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20408
+ESC partner restriction - Coordo,partner_modification.field_res_partner_transport_2,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20409
+ESC partner restriction - Coordo,partner_modification.field_res_partner_transport_2_lt,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20410
+ESC partner restriction - Coordo,msf_partner.field_res_partner_transporter,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20411
+ESC partner restriction - Coordo,base.field_res_partner_user_id,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20412
+ESC partner restriction - Coordo,msf_partner.field_res_partner_valide_until_date,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20413
+ESC partner restriction - Coordo,base.field_res_partner_vat,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20414
+ESC partner restriction - Coordo,msf_partner.field_res_partner_vat_ok,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20415
+ESC partner restriction - Coordo,base.field_res_partner_website,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20416
+ESC partner restriction - Coordo,partner_modification.field_res_partner_zone,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20417
+ESC partner restriction - Project,base.field_res_partner_active,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20418
+ESC partner restriction - Project,base.field_res_partner_address,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20419
+ESC partner restriction - Project,sourcing.field_res_partner_available_for_dpo,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20420
+ESC partner restriction - Project,base.field_res_partner_bank_ids,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20421
+ESC partner restriction - Project,account_override.field_res_partner_by_invoice_type,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20422
+ESC partner restriction - Project,supplier_catalogue.field_res_partner_catalogue_bool,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20423
+ESC partner restriction - Project,supplier_catalogue.field_res_partner_catalogue_ids,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20424
+ESC partner restriction - Project,base.field_res_partner_category_id,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20425
+ESC partner restriction - Project,sourcing.field_res_partner_check_partner,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20426
+ESC partner restriction - Project,sourcing.field_res_partner_check_partner_ir,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20427
+ESC partner restriction - Project,sourcing.field_res_partner_check_partner_po,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20428
+ESC partner restriction - Project,sourcing.field_res_partner_check_partner_rfq,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20429
+ESC partner restriction - Project,sale_override.field_res_partner_check_partner_so,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20430
+ESC partner restriction - Project,base.field_res_partner_child_ids,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20431
+ESC partner restriction - Project,base.field_res_partner_city,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20432
+ESC partner restriction - Project,return_claim.field_res_partner_claim_ids_res_partner,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20433
+ESC partner restriction - Project,base.field_res_partner_comment,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20434
+ESC partner restriction - Project,base.field_res_partner_company_id,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20435
+ESC partner restriction - Project,account.field_res_partner_contract_ids,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20436
+ESC partner restriction - Project,base.field_res_partner_country,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20437
+ESC partner restriction - Project,account.field_res_partner_credit,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20438
+ESC partner restriction - Project,base.field_res_partner_credit_limit,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20439
+ESC partner restriction - Project,base.field_res_partner_customer,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20440
+ESC partner restriction - Project,partner_modification.field_res_partner_customer_lt,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20441
+ESC partner restriction - Project,base.field_res_partner_date,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20442
+ESC partner restriction - Project,account.field_res_partner_debit,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20443
+ESC partner restriction - Project,account.field_res_partner_debit_limit,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20444
+ESC partner restriction - Project,partner_modification.field_res_partner_default_delay,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20445
+ESC partner restriction - Project,msf_partner.field_res_partner_delay,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20446
+ESC partner restriction - Project,account_override.field_res_partner_donation_payable_account,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20447
+ESC partner restriction - Project,base.field_res_partner_ean13,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20448
+ESC partner restriction - Project,base.field_res_partner_email,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20449
+ESC partner restriction - Project,base.field_res_partner_employee,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20450
+ESC partner restriction - Project,base.field_res_partner_events,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20451
+ESC partner restriction - Project,register_accounting.field_res_partner_filter_for_third_party,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20452
+ESC partner restriction - Project,register_accounting.field_res_partner_filter_for_third_party_in_advance_return,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20453
+ESC partner restriction - Project,msf_partner.field_res_partner_in_product,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20454
+ESC partner restriction - Project,account.field_res_partner_invoice_ids,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20455
+ESC partner restriction - Project,msf_partner.field_res_partner_is_coordo,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20456
+ESC partner restriction - Project,msf_partner.field_res_partner_is_instance,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20457
+ESC partner restriction - Project,base.field_res_partner_lang,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20458
+ESC partner restriction - Project,account.field_res_partner_last_reconciliation_date,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20459
+ESC partner restriction - Project,msf_order_date.field_res_partner_leadtime,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20460
+ESC partner restriction - Project,sourcing.field_res_partner_line_contains_fo,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20461
+ESC partner restriction - Project,msf_partner.field_res_partner_manufacturer,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20462
+ESC partner restriction - Project,msf_partner.field_res_partner_min_qty,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20463
+ESC partner restriction - Project,base.field_res_partner_mobile,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20464
+ESC partner restriction - Project,base.field_res_partner_name,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20465
+ESC partner restriction - Project,base.field_res_partner_parent_id,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20466
+ESC partner restriction - Project,sale_override.field_res_partner_partner_not_int,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20467
+ESC partner restriction - Project,msf_partner.field_res_partner_partner_type,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20468
+ESC partner restriction - Project,base.field_res_partner_phone,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20469
+ESC partner restriction - Project,partner_modification.field_res_partner_po_by_project,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20470
+ESC partner restriction - Project,msf_partner.field_res_partner_price_currency,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20471
+ESC partner restriction - Project,msf_partner.field_res_partner_price_unit,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20472
+ESC partner restriction - Project,partner_modification.field_res_partner_procurement_lt,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20473
+ESC partner restriction - Project,account.field_res_partner_property_account_payable,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20474
+ESC partner restriction - Project,account.field_res_partner_property_account_position,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20475
+ESC partner restriction - Project,account.field_res_partner_property_account_receivable,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20476
+ESC partner restriction - Project,account.field_res_partner_property_payment_term,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20477
+ESC partner restriction - Project,product.field_res_partner_property_product_pricelist,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20478
+ESC partner restriction - Project,purchase.field_res_partner_property_product_pricelist_purchase,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20479
+ESC partner restriction - Project,stock.field_res_partner_property_stock_customer,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20480
+ESC partner restriction - Project,stock.field_res_partner_property_stock_supplier,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20481
+ESC partner restriction - Project,base.field_res_partner_ref,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20482
+ESC partner restriction - Project,account.field_res_partner_ref_companies,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20483
+ESC partner restriction - Project,msf_partner.field_res_partner_split_po,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20484
+ESC partner restriction - Project,base.field_res_partner_supplier,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20485
+ESC partner restriction - Project,partner_modification.field_res_partner_supplier_lt,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20486
+ESC partner restriction - Project,base.field_res_partner_title,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20487
+ESC partner restriction - Project,partner_modification.field_res_partner_transport_0,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20488
+ESC partner restriction - Project,partner_modification.field_res_partner_transport_0_lt,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20489
+ESC partner restriction - Project,partner_modification.field_res_partner_transport_1,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20490
+ESC partner restriction - Project,partner_modification.field_res_partner_transport_1_lt,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20491
+ESC partner restriction - Project,partner_modification.field_res_partner_transport_2,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20492
+ESC partner restriction - Project,partner_modification.field_res_partner_transport_2_lt,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20493
+ESC partner restriction - Project,msf_partner.field_res_partner_transporter,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20494
+ESC partner restriction - Project,base.field_res_partner_user_id,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20495
+ESC partner restriction - Project,msf_partner.field_res_partner_valide_until_date,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20496
+ESC partner restriction - Project,base.field_res_partner_vat,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20497
+ESC partner restriction - Project,msf_partner.field_res_partner_vat_ok,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20498
+ESC partner restriction - Project,base.field_res_partner_website,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20499
+ESC partner restriction - Project,partner_modification.field_res_partner_zone,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20500
+Intermission partner restriction - Coordo,base.field_res_partner_active,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20501
+Intermission partner restriction - Coordo,base.field_res_partner_address,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20502
+Intermission partner restriction - Coordo,sourcing.field_res_partner_available_for_dpo,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20503
+Intermission partner restriction - Coordo,base.field_res_partner_bank_ids,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20504
+Intermission partner restriction - Coordo,account_override.field_res_partner_by_invoice_type,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20505
+Intermission partner restriction - Coordo,supplier_catalogue.field_res_partner_catalogue_bool,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20506
+Intermission partner restriction - Coordo,supplier_catalogue.field_res_partner_catalogue_ids,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20507
+Intermission partner restriction - Coordo,base.field_res_partner_category_id,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20508
+Intermission partner restriction - Coordo,sourcing.field_res_partner_check_partner,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20509
+Intermission partner restriction - Coordo,sourcing.field_res_partner_check_partner_ir,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20510
+Intermission partner restriction - Coordo,sourcing.field_res_partner_check_partner_po,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20511
+Intermission partner restriction - Coordo,sourcing.field_res_partner_check_partner_rfq,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20512
+Intermission partner restriction - Coordo,sale_override.field_res_partner_check_partner_so,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20513
+Intermission partner restriction - Coordo,base.field_res_partner_child_ids,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20514
+Intermission partner restriction - Coordo,base.field_res_partner_city,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20515
+Intermission partner restriction - Coordo,return_claim.field_res_partner_claim_ids_res_partner,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20516
+Intermission partner restriction - Coordo,base.field_res_partner_comment,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20517
+Intermission partner restriction - Coordo,base.field_res_partner_company_id,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20518
+Intermission partner restriction - Coordo,account.field_res_partner_contract_ids,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20519
+Intermission partner restriction - Coordo,base.field_res_partner_country,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20520
+Intermission partner restriction - Coordo,account.field_res_partner_credit,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20521
+Intermission partner restriction - Coordo,base.field_res_partner_credit_limit,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20522
+Intermission partner restriction - Coordo,base.field_res_partner_customer,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20523
+Intermission partner restriction - Coordo,partner_modification.field_res_partner_customer_lt,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20524
+Intermission partner restriction - Coordo,base.field_res_partner_date,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20525
+Intermission partner restriction - Coordo,account.field_res_partner_debit,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20526
+Intermission partner restriction - Coordo,account.field_res_partner_debit_limit,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20527
+Intermission partner restriction - Coordo,partner_modification.field_res_partner_default_delay,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20528
+Intermission partner restriction - Coordo,msf_partner.field_res_partner_delay,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20529
+Intermission partner restriction - Coordo,account_override.field_res_partner_donation_payable_account,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20530
+Intermission partner restriction - Coordo,base.field_res_partner_ean13,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20531
+Intermission partner restriction - Coordo,base.field_res_partner_email,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20532
+Intermission partner restriction - Coordo,base.field_res_partner_employee,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20533
+Intermission partner restriction - Coordo,base.field_res_partner_events,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20534
+Intermission partner restriction - Coordo,register_accounting.field_res_partner_filter_for_third_party,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20535
+Intermission partner restriction - Coordo,register_accounting.field_res_partner_filter_for_third_party_in_advance_return,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20536
+Intermission partner restriction - Coordo,msf_partner.field_res_partner_in_product,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20537
+Intermission partner restriction - Coordo,account.field_res_partner_invoice_ids,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20538
+Intermission partner restriction - Coordo,msf_partner.field_res_partner_is_coordo,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20539
+Intermission partner restriction - Coordo,msf_partner.field_res_partner_is_instance,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20540
+Intermission partner restriction - Coordo,base.field_res_partner_lang,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20541
+Intermission partner restriction - Coordo,account.field_res_partner_last_reconciliation_date,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20542
+Intermission partner restriction - Coordo,msf_order_date.field_res_partner_leadtime,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20543
+Intermission partner restriction - Coordo,sourcing.field_res_partner_line_contains_fo,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20544
+Intermission partner restriction - Coordo,msf_partner.field_res_partner_manufacturer,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20545
+Intermission partner restriction - Coordo,msf_partner.field_res_partner_min_qty,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20546
+Intermission partner restriction - Coordo,base.field_res_partner_mobile,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20547
+Intermission partner restriction - Coordo,base.field_res_partner_name,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20548
+Intermission partner restriction - Coordo,base.field_res_partner_parent_id,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20549
+Intermission partner restriction - Coordo,sale_override.field_res_partner_partner_not_int,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20550
+Intermission partner restriction - Coordo,msf_partner.field_res_partner_partner_type,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20551
+Intermission partner restriction - Coordo,base.field_res_partner_phone,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20552
+Intermission partner restriction - Coordo,partner_modification.field_res_partner_po_by_project,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20553
+Intermission partner restriction - Coordo,msf_partner.field_res_partner_price_currency,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20554
+Intermission partner restriction - Coordo,msf_partner.field_res_partner_price_unit,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20555
+Intermission partner restriction - Coordo,partner_modification.field_res_partner_procurement_lt,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20556
+Intermission partner restriction - Coordo,account.field_res_partner_property_account_payable,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20557
+Intermission partner restriction - Coordo,account.field_res_partner_property_account_position,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20558
+Intermission partner restriction - Coordo,account.field_res_partner_property_account_receivable,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20559
+Intermission partner restriction - Coordo,account.field_res_partner_property_payment_term,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20560
+Intermission partner restriction - Coordo,product.field_res_partner_property_product_pricelist,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20561
+Intermission partner restriction - Coordo,purchase.field_res_partner_property_product_pricelist_purchase,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20562
+Intermission partner restriction - Coordo,stock.field_res_partner_property_stock_customer,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20563
+Intermission partner restriction - Coordo,stock.field_res_partner_property_stock_supplier,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20564
+Intermission partner restriction - Coordo,base.field_res_partner_ref,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20565
+Intermission partner restriction - Coordo,account.field_res_partner_ref_companies,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20566
+Intermission partner restriction - Coordo,msf_partner.field_res_partner_split_po,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20567
+Intermission partner restriction - Coordo,base.field_res_partner_supplier,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20568
+Intermission partner restriction - Coordo,partner_modification.field_res_partner_supplier_lt,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20569
+Intermission partner restriction - Coordo,base.field_res_partner_title,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20570
+Intermission partner restriction - Coordo,partner_modification.field_res_partner_transport_0,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20571
+Intermission partner restriction - Coordo,partner_modification.field_res_partner_transport_0_lt,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20572
+Intermission partner restriction - Coordo,partner_modification.field_res_partner_transport_1,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20573
+Intermission partner restriction - Coordo,partner_modification.field_res_partner_transport_1_lt,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20574
+Intermission partner restriction - Coordo,partner_modification.field_res_partner_transport_2,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20575
+Intermission partner restriction - Coordo,partner_modification.field_res_partner_transport_2_lt,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20576
+Intermission partner restriction - Coordo,msf_partner.field_res_partner_transporter,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20577
+Intermission partner restriction - Coordo,base.field_res_partner_user_id,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20578
+Intermission partner restriction - Coordo,msf_partner.field_res_partner_valide_until_date,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20579
+Intermission partner restriction - Coordo,base.field_res_partner_vat,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20580
+Intermission partner restriction - Coordo,msf_partner.field_res_partner_vat_ok,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20581
+Intermission partner restriction - Coordo,base.field_res_partner_website,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20582
+Intermission partner restriction - Coordo,partner_modification.field_res_partner_zone,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20583
+Intermission partner restriction - Project,base.field_res_partner_active,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20584
+Intermission partner restriction - Project,base.field_res_partner_address,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20585
+Intermission partner restriction - Project,sourcing.field_res_partner_available_for_dpo,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20586
+Intermission partner restriction - Project,base.field_res_partner_bank_ids,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20587
+Intermission partner restriction - Project,account_override.field_res_partner_by_invoice_type,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20588
+Intermission partner restriction - Project,supplier_catalogue.field_res_partner_catalogue_bool,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20589
+Intermission partner restriction - Project,supplier_catalogue.field_res_partner_catalogue_ids,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20590
+Intermission partner restriction - Project,base.field_res_partner_category_id,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20591
+Intermission partner restriction - Project,sourcing.field_res_partner_check_partner,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20592
+Intermission partner restriction - Project,sourcing.field_res_partner_check_partner_ir,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20593
+Intermission partner restriction - Project,sourcing.field_res_partner_check_partner_po,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20594
+Intermission partner restriction - Project,sourcing.field_res_partner_check_partner_rfq,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20595
+Intermission partner restriction - Project,sale_override.field_res_partner_check_partner_so,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20596
+Intermission partner restriction - Project,base.field_res_partner_child_ids,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20597
+Intermission partner restriction - Project,base.field_res_partner_city,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20598
+Intermission partner restriction - Project,return_claim.field_res_partner_claim_ids_res_partner,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20599
+Intermission partner restriction - Project,base.field_res_partner_comment,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20600
+Intermission partner restriction - Project,base.field_res_partner_company_id,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20601
+Intermission partner restriction - Project,account.field_res_partner_contract_ids,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20602
+Intermission partner restriction - Project,base.field_res_partner_country,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20603
+Intermission partner restriction - Project,account.field_res_partner_credit,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20604
+Intermission partner restriction - Project,base.field_res_partner_credit_limit,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20605
+Intermission partner restriction - Project,base.field_res_partner_customer,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20606
+Intermission partner restriction - Project,partner_modification.field_res_partner_customer_lt,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20607
+Intermission partner restriction - Project,base.field_res_partner_date,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20608
+Intermission partner restriction - Project,account.field_res_partner_debit,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20609
+Intermission partner restriction - Project,account.field_res_partner_debit_limit,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20610
+Intermission partner restriction - Project,partner_modification.field_res_partner_default_delay,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20611
+Intermission partner restriction - Project,msf_partner.field_res_partner_delay,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20612
+Intermission partner restriction - Project,account_override.field_res_partner_donation_payable_account,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20613
+Intermission partner restriction - Project,base.field_res_partner_ean13,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20614
+Intermission partner restriction - Project,base.field_res_partner_email,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20615
+Intermission partner restriction - Project,base.field_res_partner_employee,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20616
+Intermission partner restriction - Project,base.field_res_partner_events,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20617
+Intermission partner restriction - Project,register_accounting.field_res_partner_filter_for_third_party,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20618
+Intermission partner restriction - Project,register_accounting.field_res_partner_filter_for_third_party_in_advance_return,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20619
+Intermission partner restriction - Project,msf_partner.field_res_partner_in_product,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20620
+Intermission partner restriction - Project,account.field_res_partner_invoice_ids,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20621
+Intermission partner restriction - Project,msf_partner.field_res_partner_is_coordo,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20622
+Intermission partner restriction - Project,msf_partner.field_res_partner_is_instance,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20623
+Intermission partner restriction - Project,base.field_res_partner_lang,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20624
+Intermission partner restriction - Project,account.field_res_partner_last_reconciliation_date,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20625
+Intermission partner restriction - Project,msf_order_date.field_res_partner_leadtime,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20626
+Intermission partner restriction - Project,sourcing.field_res_partner_line_contains_fo,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20627
+Intermission partner restriction - Project,msf_partner.field_res_partner_manufacturer,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20628
+Intermission partner restriction - Project,msf_partner.field_res_partner_min_qty,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20629
+Intermission partner restriction - Project,base.field_res_partner_mobile,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20630
+Intermission partner restriction - Project,base.field_res_partner_name,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20631
+Intermission partner restriction - Project,base.field_res_partner_parent_id,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20632
+Intermission partner restriction - Project,sale_override.field_res_partner_partner_not_int,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20633
+Intermission partner restriction - Project,msf_partner.field_res_partner_partner_type,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20634
+Intermission partner restriction - Project,base.field_res_partner_phone,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20635
+Intermission partner restriction - Project,partner_modification.field_res_partner_po_by_project,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20636
+Intermission partner restriction - Project,msf_partner.field_res_partner_price_currency,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20637
+Intermission partner restriction - Project,msf_partner.field_res_partner_price_unit,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20638
+Intermission partner restriction - Project,partner_modification.field_res_partner_procurement_lt,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20639
+Intermission partner restriction - Project,account.field_res_partner_property_account_payable,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20640
+Intermission partner restriction - Project,account.field_res_partner_property_account_position,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20641
+Intermission partner restriction - Project,account.field_res_partner_property_account_receivable,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20642
+Intermission partner restriction - Project,account.field_res_partner_property_payment_term,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20643
+Intermission partner restriction - Project,product.field_res_partner_property_product_pricelist,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20644
+Intermission partner restriction - Project,purchase.field_res_partner_property_product_pricelist_purchase,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20645
+Intermission partner restriction - Project,stock.field_res_partner_property_stock_customer,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20646
+Intermission partner restriction - Project,stock.field_res_partner_property_stock_supplier,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20647
+Intermission partner restriction - Project,base.field_res_partner_ref,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20648
+Intermission partner restriction - Project,account.field_res_partner_ref_companies,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20649
+Intermission partner restriction - Project,msf_partner.field_res_partner_split_po,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20650
+Intermission partner restriction - Project,base.field_res_partner_supplier,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20651
+Intermission partner restriction - Project,partner_modification.field_res_partner_supplier_lt,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20652
+Intermission partner restriction - Project,base.field_res_partner_title,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20653
+Intermission partner restriction - Project,partner_modification.field_res_partner_transport_0,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20654
+Intermission partner restriction - Project,partner_modification.field_res_partner_transport_0_lt,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20655
+Intermission partner restriction - Project,partner_modification.field_res_partner_transport_1,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20656
+Intermission partner restriction - Project,partner_modification.field_res_partner_transport_1_lt,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20657
+Intermission partner restriction - Project,partner_modification.field_res_partner_transport_2,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20658
+Intermission partner restriction - Project,partner_modification.field_res_partner_transport_2_lt,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20659
+Intermission partner restriction - Project,msf_partner.field_res_partner_transporter,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20660
+Intermission partner restriction - Project,base.field_res_partner_user_id,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20661
+Intermission partner restriction - Project,msf_partner.field_res_partner_valide_until_date,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20662
+Intermission partner restriction - Project,base.field_res_partner_vat,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20663
+Intermission partner restriction - Project,msf_partner.field_res_partner_vat_ok,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20664
+Intermission partner restriction - Project,base.field_res_partner_website,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20665
+Intermission partner restriction - Project,partner_modification.field_res_partner_zone,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20666
+Internal partner restriction - Coordo,base.field_res_partner_active,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20667
+Internal partner restriction - Coordo,base.field_res_partner_address,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20668
+Internal partner restriction - Coordo,sourcing.field_res_partner_available_for_dpo,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20669
+Internal partner restriction - Coordo,base.field_res_partner_bank_ids,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20670
+Internal partner restriction - Coordo,account_override.field_res_partner_by_invoice_type,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20671
+Internal partner restriction - Coordo,supplier_catalogue.field_res_partner_catalogue_bool,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20672
+Internal partner restriction - Coordo,supplier_catalogue.field_res_partner_catalogue_ids,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20673
+Internal partner restriction - Coordo,base.field_res_partner_category_id,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20674
+Internal partner restriction - Coordo,sourcing.field_res_partner_check_partner,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20675
+Internal partner restriction - Coordo,sourcing.field_res_partner_check_partner_ir,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20676
+Internal partner restriction - Coordo,sourcing.field_res_partner_check_partner_po,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20677
+Internal partner restriction - Coordo,sourcing.field_res_partner_check_partner_rfq,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20678
+Internal partner restriction - Coordo,sale_override.field_res_partner_check_partner_so,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20679
+Internal partner restriction - Coordo,base.field_res_partner_child_ids,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20680
+Internal partner restriction - Coordo,base.field_res_partner_city,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20681
+Internal partner restriction - Coordo,return_claim.field_res_partner_claim_ids_res_partner,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20682
+Internal partner restriction - Coordo,base.field_res_partner_comment,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20683
+Internal partner restriction - Coordo,base.field_res_partner_company_id,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20684
+Internal partner restriction - Coordo,account.field_res_partner_contract_ids,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20685
+Internal partner restriction - Coordo,base.field_res_partner_country,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20686
+Internal partner restriction - Coordo,account.field_res_partner_credit,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20687
+Internal partner restriction - Coordo,base.field_res_partner_credit_limit,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20688
+Internal partner restriction - Coordo,base.field_res_partner_customer,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20689
+Internal partner restriction - Coordo,partner_modification.field_res_partner_customer_lt,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20690
+Internal partner restriction - Coordo,base.field_res_partner_date,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20691
+Internal partner restriction - Coordo,account.field_res_partner_debit,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20692
+Internal partner restriction - Coordo,account.field_res_partner_debit_limit,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20693
+Internal partner restriction - Coordo,partner_modification.field_res_partner_default_delay,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20694
+Internal partner restriction - Coordo,msf_partner.field_res_partner_delay,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20695
+Internal partner restriction - Coordo,account_override.field_res_partner_donation_payable_account,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20696
+Internal partner restriction - Coordo,base.field_res_partner_ean13,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20697
+Internal partner restriction - Coordo,base.field_res_partner_email,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20698
+Internal partner restriction - Coordo,base.field_res_partner_employee,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20699
+Internal partner restriction - Coordo,base.field_res_partner_events,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20700
+Internal partner restriction - Coordo,register_accounting.field_res_partner_filter_for_third_party,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20701
+Internal partner restriction - Coordo,register_accounting.field_res_partner_filter_for_third_party_in_advance_return,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20702
+Internal partner restriction - Coordo,msf_partner.field_res_partner_in_product,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20703
+Internal partner restriction - Coordo,account.field_res_partner_invoice_ids,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20704
+Internal partner restriction - Coordo,msf_partner.field_res_partner_is_coordo,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20705
+Internal partner restriction - Coordo,msf_partner.field_res_partner_is_instance,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20706
+Internal partner restriction - Coordo,base.field_res_partner_lang,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20707
+Internal partner restriction - Coordo,account.field_res_partner_last_reconciliation_date,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20708
+Internal partner restriction - Coordo,msf_order_date.field_res_partner_leadtime,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20709
+Internal partner restriction - Coordo,sourcing.field_res_partner_line_contains_fo,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20710
+Internal partner restriction - Coordo,msf_partner.field_res_partner_manufacturer,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20711
+Internal partner restriction - Coordo,msf_partner.field_res_partner_min_qty,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20712
+Internal partner restriction - Coordo,base.field_res_partner_mobile,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20713
+Internal partner restriction - Coordo,base.field_res_partner_name,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20714
+Internal partner restriction - Coordo,base.field_res_partner_parent_id,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20715
+Internal partner restriction - Coordo,sale_override.field_res_partner_partner_not_int,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20716
+Internal partner restriction - Coordo,msf_partner.field_res_partner_partner_type,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20717
+Internal partner restriction - Coordo,base.field_res_partner_phone,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20718
+Internal partner restriction - Coordo,partner_modification.field_res_partner_po_by_project,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20719
+Internal partner restriction - Coordo,msf_partner.field_res_partner_price_currency,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20720
+Internal partner restriction - Coordo,msf_partner.field_res_partner_price_unit,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20721
+Internal partner restriction - Coordo,partner_modification.field_res_partner_procurement_lt,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20722
+Internal partner restriction - Coordo,account.field_res_partner_property_account_payable,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20723
+Internal partner restriction - Coordo,account.field_res_partner_property_account_position,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20724
+Internal partner restriction - Coordo,account.field_res_partner_property_account_receivable,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20725
+Internal partner restriction - Coordo,account.field_res_partner_property_payment_term,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20726
+Internal partner restriction - Coordo,product.field_res_partner_property_product_pricelist,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20727
+Internal partner restriction - Coordo,purchase.field_res_partner_property_product_pricelist_purchase,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20728
+Internal partner restriction - Coordo,stock.field_res_partner_property_stock_customer,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20729
+Internal partner restriction - Coordo,stock.field_res_partner_property_stock_supplier,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20730
+Internal partner restriction - Coordo,base.field_res_partner_ref,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20731
+Internal partner restriction - Coordo,account.field_res_partner_ref_companies,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20732
+Internal partner restriction - Coordo,msf_partner.field_res_partner_split_po,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20733
+Internal partner restriction - Coordo,base.field_res_partner_supplier,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20734
+Internal partner restriction - Coordo,partner_modification.field_res_partner_supplier_lt,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20735
+Internal partner restriction - Coordo,base.field_res_partner_title,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20736
+Internal partner restriction - Coordo,partner_modification.field_res_partner_transport_0,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20737
+Internal partner restriction - Coordo,partner_modification.field_res_partner_transport_0_lt,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20738
+Internal partner restriction - Coordo,partner_modification.field_res_partner_transport_1,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20739
+Internal partner restriction - Coordo,partner_modification.field_res_partner_transport_1_lt,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20740
+Internal partner restriction - Coordo,partner_modification.field_res_partner_transport_2,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20741
+Internal partner restriction - Coordo,partner_modification.field_res_partner_transport_2_lt,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20742
+Internal partner restriction - Coordo,msf_partner.field_res_partner_transporter,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20743
+Internal partner restriction - Coordo,base.field_res_partner_user_id,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20744
+Internal partner restriction - Coordo,msf_partner.field_res_partner_valide_until_date,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20745
+Internal partner restriction - Coordo,base.field_res_partner_vat,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20746
+Internal partner restriction - Coordo,msf_partner.field_res_partner_vat_ok,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20747
+Internal partner restriction - Coordo,base.field_res_partner_website,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20748
+Internal partner restriction - Coordo,partner_modification.field_res_partner_zone,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20749
+Internal partner restriction - Project,base.field_res_partner_active,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20750
+Internal partner restriction - Project,base.field_res_partner_address,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20751
+Internal partner restriction - Project,sourcing.field_res_partner_available_for_dpo,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20752
+Internal partner restriction - Project,base.field_res_partner_bank_ids,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20753
+Internal partner restriction - Project,account_override.field_res_partner_by_invoice_type,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20754
+Internal partner restriction - Project,supplier_catalogue.field_res_partner_catalogue_bool,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20755
+Internal partner restriction - Project,supplier_catalogue.field_res_partner_catalogue_ids,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20756
+Internal partner restriction - Project,base.field_res_partner_category_id,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20757
+Internal partner restriction - Project,sourcing.field_res_partner_check_partner,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20758
+Internal partner restriction - Project,sourcing.field_res_partner_check_partner_ir,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20759
+Internal partner restriction - Project,sourcing.field_res_partner_check_partner_po,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20760
+Internal partner restriction - Project,sourcing.field_res_partner_check_partner_rfq,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20761
+Internal partner restriction - Project,sale_override.field_res_partner_check_partner_so,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20762
+Internal partner restriction - Project,base.field_res_partner_child_ids,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20763
+Internal partner restriction - Project,base.field_res_partner_city,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20764
+Internal partner restriction - Project,return_claim.field_res_partner_claim_ids_res_partner,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20765
+Internal partner restriction - Project,base.field_res_partner_comment,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20766
+Internal partner restriction - Project,base.field_res_partner_company_id,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20767
+Internal partner restriction - Project,account.field_res_partner_contract_ids,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20768
+Internal partner restriction - Project,base.field_res_partner_country,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20769
+Internal partner restriction - Project,account.field_res_partner_credit,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20770
+Internal partner restriction - Project,base.field_res_partner_credit_limit,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20771
+Internal partner restriction - Project,base.field_res_partner_customer,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20772
+Internal partner restriction - Project,partner_modification.field_res_partner_customer_lt,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20773
+Internal partner restriction - Project,base.field_res_partner_date,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20774
+Internal partner restriction - Project,account.field_res_partner_debit,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20775
+Internal partner restriction - Project,account.field_res_partner_debit_limit,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20776
+Internal partner restriction - Project,partner_modification.field_res_partner_default_delay,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20777
+Internal partner restriction - Project,msf_partner.field_res_partner_delay,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20778
+Internal partner restriction - Project,account_override.field_res_partner_donation_payable_account,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20779
+Internal partner restriction - Project,base.field_res_partner_ean13,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20780
+Internal partner restriction - Project,base.field_res_partner_email,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20781
+Internal partner restriction - Project,base.field_res_partner_employee,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20782
+Internal partner restriction - Project,base.field_res_partner_events,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20783
+Internal partner restriction - Project,register_accounting.field_res_partner_filter_for_third_party,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20784
+Internal partner restriction - Project,register_accounting.field_res_partner_filter_for_third_party_in_advance_return,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20785
+Internal partner restriction - Project,msf_partner.field_res_partner_in_product,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20786
+Internal partner restriction - Project,account.field_res_partner_invoice_ids,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20787
+Internal partner restriction - Project,msf_partner.field_res_partner_is_coordo,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20788
+Internal partner restriction - Project,msf_partner.field_res_partner_is_instance,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20789
+Internal partner restriction - Project,base.field_res_partner_lang,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20790
+Internal partner restriction - Project,account.field_res_partner_last_reconciliation_date,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20791
+Internal partner restriction - Project,msf_order_date.field_res_partner_leadtime,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20792
+Internal partner restriction - Project,sourcing.field_res_partner_line_contains_fo,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20793
+Internal partner restriction - Project,msf_partner.field_res_partner_manufacturer,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20794
+Internal partner restriction - Project,msf_partner.field_res_partner_min_qty,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20795
+Internal partner restriction - Project,base.field_res_partner_mobile,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20796
+Internal partner restriction - Project,base.field_res_partner_name,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20797
+Internal partner restriction - Project,base.field_res_partner_parent_id,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20798
+Internal partner restriction - Project,sale_override.field_res_partner_partner_not_int,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20799
+Internal partner restriction - Project,msf_partner.field_res_partner_partner_type,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20800
+Internal partner restriction - Project,base.field_res_partner_phone,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20801
+Internal partner restriction - Project,partner_modification.field_res_partner_po_by_project,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20802
+Internal partner restriction - Project,msf_partner.field_res_partner_price_currency,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20803
+Internal partner restriction - Project,msf_partner.field_res_partner_price_unit,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20804
+Internal partner restriction - Project,partner_modification.field_res_partner_procurement_lt,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20805
+Internal partner restriction - Project,account.field_res_partner_property_account_payable,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20806
+Internal partner restriction - Project,account.field_res_partner_property_account_position,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20807
+Internal partner restriction - Project,account.field_res_partner_property_account_receivable,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20808
+Internal partner restriction - Project,account.field_res_partner_property_payment_term,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20809
+Internal partner restriction - Project,product.field_res_partner_property_product_pricelist,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20810
+Internal partner restriction - Project,purchase.field_res_partner_property_product_pricelist_purchase,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20811
+Internal partner restriction - Project,stock.field_res_partner_property_stock_customer,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20812
+Internal partner restriction - Project,stock.field_res_partner_property_stock_supplier,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20813
+Internal partner restriction - Project,base.field_res_partner_ref,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20814
+Internal partner restriction - Project,account.field_res_partner_ref_companies,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20815
+Internal partner restriction - Project,msf_partner.field_res_partner_split_po,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20816
+Internal partner restriction - Project,base.field_res_partner_supplier,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20817
+Internal partner restriction - Project,partner_modification.field_res_partner_supplier_lt,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20818
+Internal partner restriction - Project,base.field_res_partner_title,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20819
+Internal partner restriction - Project,partner_modification.field_res_partner_transport_0,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20820
+Internal partner restriction - Project,partner_modification.field_res_partner_transport_0_lt,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20821
+Internal partner restriction - Project,partner_modification.field_res_partner_transport_1,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20822
+Internal partner restriction - Project,partner_modification.field_res_partner_transport_1_lt,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20823
+Internal partner restriction - Project,partner_modification.field_res_partner_transport_2,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20824
+Internal partner restriction - Project,partner_modification.field_res_partner_transport_2_lt,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20825
+Internal partner restriction - Project,msf_partner.field_res_partner_transporter,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20826
+Internal partner restriction - Project,base.field_res_partner_user_id,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20827
+Internal partner restriction - Project,msf_partner.field_res_partner_valide_until_date,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20828
+Internal partner restriction - Project,base.field_res_partner_vat,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20829
+Internal partner restriction - Project,msf_partner.field_res_partner_vat_ok,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20830
+Internal partner restriction - Project,base.field_res_partner_website,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20831
+Internal partner restriction - Project,partner_modification.field_res_partner_zone,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20832
+External partner restriction - Coordo,base.field_res_partner_active,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20833
+External partner restriction - Coordo,base.field_res_partner_address,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20834
+External partner restriction - Coordo,sourcing.field_res_partner_available_for_dpo,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20835
+External partner restriction - Coordo,base.field_res_partner_bank_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20836
+External partner restriction - Coordo,account_override.field_res_partner_by_invoice_type,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20837
+External partner restriction - Coordo,supplier_catalogue.field_res_partner_catalogue_bool,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20838
+External partner restriction - Coordo,supplier_catalogue.field_res_partner_catalogue_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20839
+External partner restriction - Coordo,base.field_res_partner_category_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20840
+External partner restriction - Coordo,sourcing.field_res_partner_check_partner,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20841
+External partner restriction - Coordo,sourcing.field_res_partner_check_partner_ir,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20842
+External partner restriction - Coordo,sourcing.field_res_partner_check_partner_po,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20843
+External partner restriction - Coordo,sourcing.field_res_partner_check_partner_rfq,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20844
+External partner restriction - Coordo,sale_override.field_res_partner_check_partner_so,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20845
+External partner restriction - Coordo,base.field_res_partner_child_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20846
+External partner restriction - Coordo,base.field_res_partner_city,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20847
+External partner restriction - Coordo,return_claim.field_res_partner_claim_ids_res_partner,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20848
+External partner restriction - Coordo,base.field_res_partner_comment,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20849
+External partner restriction - Coordo,base.field_res_partner_company_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20850
+External partner restriction - Coordo,account.field_res_partner_contract_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20851
+External partner restriction - Coordo,base.field_res_partner_country,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20852
+External partner restriction - Coordo,account.field_res_partner_credit,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20853
+External partner restriction - Coordo,base.field_res_partner_credit_limit,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20854
+External partner restriction - Coordo,base.field_res_partner_customer,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20855
+External partner restriction - Coordo,partner_modification.field_res_partner_customer_lt,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20856
+External partner restriction - Coordo,base.field_res_partner_date,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20857
+External partner restriction - Coordo,account.field_res_partner_debit,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20858
+External partner restriction - Coordo,account.field_res_partner_debit_limit,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20859
+External partner restriction - Coordo,partner_modification.field_res_partner_default_delay,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20860
+External partner restriction - Coordo,msf_partner.field_res_partner_delay,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20861
+External partner restriction - Coordo,account_override.field_res_partner_donation_payable_account,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20862
+External partner restriction - Coordo,base.field_res_partner_ean13,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20863
+External partner restriction - Coordo,base.field_res_partner_email,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20864
+External partner restriction - Coordo,base.field_res_partner_employee,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20865
+External partner restriction - Coordo,base.field_res_partner_events,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20866
+External partner restriction - Coordo,register_accounting.field_res_partner_filter_for_third_party,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20867
+External partner restriction - Coordo,register_accounting.field_res_partner_filter_for_third_party_in_advance_return,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20868
+External partner restriction - Coordo,msf_partner.field_res_partner_in_product,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20869
+External partner restriction - Coordo,account.field_res_partner_invoice_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20870
+External partner restriction - Coordo,msf_partner.field_res_partner_is_coordo,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20871
+External partner restriction - Coordo,msf_partner.field_res_partner_is_instance,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20872
+External partner restriction - Coordo,base.field_res_partner_lang,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20873
+External partner restriction - Coordo,account.field_res_partner_last_reconciliation_date,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20874
+External partner restriction - Coordo,msf_order_date.field_res_partner_leadtime,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20875
+External partner restriction - Coordo,sourcing.field_res_partner_line_contains_fo,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20876
+External partner restriction - Coordo,msf_partner.field_res_partner_manufacturer,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20877
+External partner restriction - Coordo,msf_partner.field_res_partner_min_qty,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20878
+External partner restriction - Coordo,base.field_res_partner_mobile,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20879
+External partner restriction - Coordo,base.field_res_partner_name,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20880
+External partner restriction - Coordo,base.field_res_partner_parent_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20881
+External partner restriction - Coordo,sale_override.field_res_partner_partner_not_int,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20882
+External partner restriction - Coordo,msf_partner.field_res_partner_partner_type,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20883
+External partner restriction - Coordo,base.field_res_partner_phone,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20884
+External partner restriction - Coordo,partner_modification.field_res_partner_po_by_project,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20885
+External partner restriction - Coordo,msf_partner.field_res_partner_price_currency,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20886
+External partner restriction - Coordo,msf_partner.field_res_partner_price_unit,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20887
+External partner restriction - Coordo,partner_modification.field_res_partner_procurement_lt,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20888
+External partner restriction - Coordo,account.field_res_partner_property_account_payable,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20889
+External partner restriction - Coordo,account.field_res_partner_property_account_position,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20890
+External partner restriction - Coordo,account.field_res_partner_property_account_receivable,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20891
+External partner restriction - Coordo,account.field_res_partner_property_payment_term,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20892
+External partner restriction - Coordo,product.field_res_partner_property_product_pricelist,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20893
+External partner restriction - Coordo,purchase.field_res_partner_property_product_pricelist_purchase,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20894
+External partner restriction - Coordo,stock.field_res_partner_property_stock_customer,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20895
+External partner restriction - Coordo,stock.field_res_partner_property_stock_supplier,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20896
+External partner restriction - Coordo,base.field_res_partner_ref,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20897
+External partner restriction - Coordo,account.field_res_partner_ref_companies,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20898
+External partner restriction - Coordo,msf_partner.field_res_partner_split_po,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20899
+External partner restriction - Coordo,base.field_res_partner_supplier,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20900
+External partner restriction - Coordo,partner_modification.field_res_partner_supplier_lt,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20901
+External partner restriction - Coordo,base.field_res_partner_title,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20902
+External partner restriction - Coordo,partner_modification.field_res_partner_transport_0,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20903
+External partner restriction - Coordo,partner_modification.field_res_partner_transport_0_lt,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20904
+External partner restriction - Coordo,partner_modification.field_res_partner_transport_1,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20905
+External partner restriction - Coordo,partner_modification.field_res_partner_transport_1_lt,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20906
+External partner restriction - Coordo,partner_modification.field_res_partner_transport_2,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20907
+External partner restriction - Coordo,partner_modification.field_res_partner_transport_2_lt,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20908
+External partner restriction - Coordo,msf_partner.field_res_partner_transporter,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20909
+External partner restriction - Coordo,base.field_res_partner_user_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20910
+External partner restriction - Coordo,msf_partner.field_res_partner_valide_until_date,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20911
+External partner restriction - Coordo,base.field_res_partner_vat,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20912
+External partner restriction - Coordo,msf_partner.field_res_partner_vat_ok,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20913
+External partner restriction - Coordo,base.field_res_partner_website,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20914
+External partner restriction - Coordo,partner_modification.field_res_partner_zone,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20915
+External partner restriction - Project,base.field_res_partner_active,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/20916
+External partner restriction - Project,base.field_res_partner_address,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20917
+External partner restriction - Project,sourcing.field_res_partner_available_for_dpo,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20918
+External partner restriction - Project,base.field_res_partner_bank_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20919
+External partner restriction - Project,account_override.field_res_partner_by_invoice_type,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20920
+External partner restriction - Project,supplier_catalogue.field_res_partner_catalogue_bool,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20921
+External partner restriction - Project,supplier_catalogue.field_res_partner_catalogue_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20922
+External partner restriction - Project,base.field_res_partner_category_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20923
+External partner restriction - Project,sourcing.field_res_partner_check_partner,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20924
+External partner restriction - Project,sourcing.field_res_partner_check_partner_ir,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20925
+External partner restriction - Project,sourcing.field_res_partner_check_partner_po,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20926
+External partner restriction - Project,sourcing.field_res_partner_check_partner_rfq,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20927
+External partner restriction - Project,sale_override.field_res_partner_check_partner_so,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20928
+External partner restriction - Project,base.field_res_partner_child_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20929
+External partner restriction - Project,base.field_res_partner_city,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20930
+External partner restriction - Project,return_claim.field_res_partner_claim_ids_res_partner,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20931
+External partner restriction - Project,base.field_res_partner_comment,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20932
+External partner restriction - Project,base.field_res_partner_company_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20933
+External partner restriction - Project,account.field_res_partner_contract_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20934
+External partner restriction - Project,base.field_res_partner_country,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20935
+External partner restriction - Project,account.field_res_partner_credit,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20936
+External partner restriction - Project,base.field_res_partner_credit_limit,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20937
+External partner restriction - Project,base.field_res_partner_customer,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20938
+External partner restriction - Project,partner_modification.field_res_partner_customer_lt,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20939
+External partner restriction - Project,base.field_res_partner_date,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20940
+External partner restriction - Project,account.field_res_partner_debit,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20941
+External partner restriction - Project,account.field_res_partner_debit_limit,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20942
+External partner restriction - Project,partner_modification.field_res_partner_default_delay,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20943
+External partner restriction - Project,msf_partner.field_res_partner_delay,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20944
+External partner restriction - Project,account_override.field_res_partner_donation_payable_account,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20945
+External partner restriction - Project,base.field_res_partner_ean13,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20946
+External partner restriction - Project,base.field_res_partner_email,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20947
+External partner restriction - Project,base.field_res_partner_employee,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20948
+External partner restriction - Project,base.field_res_partner_events,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20949
+External partner restriction - Project,register_accounting.field_res_partner_filter_for_third_party,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20950
+External partner restriction - Project,register_accounting.field_res_partner_filter_for_third_party_in_advance_return,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20951
+External partner restriction - Project,msf_partner.field_res_partner_in_product,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20952
+External partner restriction - Project,account.field_res_partner_invoice_ids,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20953
+External partner restriction - Project,msf_partner.field_res_partner_is_coordo,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20954
+External partner restriction - Project,msf_partner.field_res_partner_is_instance,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20955
+External partner restriction - Project,base.field_res_partner_lang,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20956
+External partner restriction - Project,account.field_res_partner_last_reconciliation_date,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20957
+External partner restriction - Project,msf_order_date.field_res_partner_leadtime,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20958
+External partner restriction - Project,sourcing.field_res_partner_line_contains_fo,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20959
+External partner restriction - Project,msf_partner.field_res_partner_manufacturer,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20960
+External partner restriction - Project,msf_partner.field_res_partner_min_qty,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20961
+External partner restriction - Project,base.field_res_partner_mobile,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20962
+External partner restriction - Project,base.field_res_partner_name,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20963
+External partner restriction - Project,base.field_res_partner_parent_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20964
+External partner restriction - Project,sale_override.field_res_partner_partner_not_int,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20965
+External partner restriction - Project,msf_partner.field_res_partner_partner_type,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20966
+External partner restriction - Project,base.field_res_partner_phone,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20967
+External partner restriction - Project,partner_modification.field_res_partner_po_by_project,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20968
+External partner restriction - Project,msf_partner.field_res_partner_price_currency,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20969
+External partner restriction - Project,msf_partner.field_res_partner_price_unit,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20970
+External partner restriction - Project,partner_modification.field_res_partner_procurement_lt,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20971
+External partner restriction - Project,account.field_res_partner_property_account_payable,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20972
+External partner restriction - Project,account.field_res_partner_property_account_position,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20973
+External partner restriction - Project,account.field_res_partner_property_account_receivable,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20974
+External partner restriction - Project,account.field_res_partner_property_payment_term,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20975
+External partner restriction - Project,product.field_res_partner_property_product_pricelist,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20976
+External partner restriction - Project,purchase.field_res_partner_property_product_pricelist_purchase,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20977
+External partner restriction - Project,stock.field_res_partner_property_stock_customer,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20978
+External partner restriction - Project,stock.field_res_partner_property_stock_supplier,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20979
+External partner restriction - Project,base.field_res_partner_ref,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20980
+External partner restriction - Project,account.field_res_partner_ref_companies,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20981
+External partner restriction - Project,msf_partner.field_res_partner_split_po,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20982
+External partner restriction - Project,base.field_res_partner_supplier,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20983
+External partner restriction - Project,partner_modification.field_res_partner_supplier_lt,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20984
+External partner restriction - Project,base.field_res_partner_title,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20985
+External partner restriction - Project,partner_modification.field_res_partner_transport_0,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20986
+External partner restriction - Project,partner_modification.field_res_partner_transport_0_lt,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20987
+External partner restriction - Project,partner_modification.field_res_partner_transport_1,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20988
+External partner restriction - Project,partner_modification.field_res_partner_transport_1_lt,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20989
+External partner restriction - Project,partner_modification.field_res_partner_transport_2,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20990
+External partner restriction - Project,partner_modification.field_res_partner_transport_2_lt,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20991
+External partner restriction - Project,msf_partner.field_res_partner_transporter,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20992
+External partner restriction - Project,base.field_res_partner_user_id,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20993
+External partner restriction - Project,msf_partner.field_res_partner_valide_until_date,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20994
+External partner restriction - Project,base.field_res_partner_vat,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20995
+External partner restriction - Project,msf_partner.field_res_partner_vat_ok,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20996
+External partner restriction - Project,base.field_res_partner_website,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20997
+External partner restriction - Project,partner_modification.field_res_partner_zone,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20998
