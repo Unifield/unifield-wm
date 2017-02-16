@@ -42,6 +42,9 @@ bool_creation_only = False
 master_dir = '/'.join(os.path.realpath(__file__).split('/')[0:-1]+['master_dump'])
 master_prefix_name = 'msf_profile_sync_so'
 dir_to_dump = os.path.join(config.dump_dir, time.strftime('%Y%m%d%H%M'))
+attach_dir = os.path.join(config.dump_dir, 'attach')
+if not os.path.exists(attach_dir):
+    os.makedirs(attach_dir)
 
 def warn(*messages):
     sys.stderr.write(" ".join(messages)+"\n")
@@ -474,6 +477,10 @@ class db_creation(object):
         # wait process
         time.sleep(10)
 
+    def test_99_attachement_to_filesystem(self):
+        self.db.connect('admin')
+        self.db.get('attachment.config').write([1], {'name': attach_dir, 'next_migration': '2017-01-01 00:00:00'})
+           
 # Run a last sync after all synchronization
 class last_sync(unittest.TestCase):
     test_cases = []
