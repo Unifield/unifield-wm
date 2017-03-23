@@ -4201,3 +4201,7 @@ External partner restriction - Project,base.field_res_partner_vat,FALSE,FALSE,FA
 External partner restriction - Project,msf_partner.field_res_partner_vat_ok,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20996
 External partner restriction - Project,base.field_res_partner_website,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20997
 External partner restriction - Project,partner_modification.field_res_partner_zone,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/20998
+Admin can edit Log XMLRPC,base.field_res_users_log_xmlrpc,TRUE,FALSE,FALSE,msf_profile/field_access_rule_line/30000
+User not admin can't edit Log XMLRPC on HQ,base.field_res_users_log_xmlrpc,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/30001
+User not admin can't edit Log XMLRPC on Project,base.field_res_users_log_xmlrpc,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/30002
+User not admin can't edit Log XMLRPC on Coordo,base.field_res_users_log_xmlrpc,FALSE,FALSE,FALSE,msf_profile/field_access_rule_line/30003
