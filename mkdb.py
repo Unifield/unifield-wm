@@ -628,7 +628,7 @@ class client_creation(db_creation):
     def test_20_register_entity(self):
         Synchro.connect('admin')
         if not hasattr(config, 'sync_user_admin') or not config.sync_user_admin:
-            Synchro.user(self.db.name).add(self.db.name).addGroups('Sync / User')
+            Synchro.user(self.db.name).add(self.db.name).addGroups('Instance Sync')
         self.db.connect('admin')
         # search the current entity
         with_oc_field = False
