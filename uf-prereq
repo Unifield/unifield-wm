@@ -1,0 +1,27 @@
+#!/bin/sh
+
+# Prefer c:\Python27 over the Python stuff from Cygwin
+PATH=/cygdrive/c/Python27/Scripts:/cygdrive/c/Python27:$PATH
+export PATH
+
+set -x -e
+
+# Python
+rm -f python-2.7.13.msi
+wget https://www.python.org/ftp/python/2.7.13/python-2.7.13.msi
+msiexec.exe /qn /i python-2.7.13.msi
+rm -f python-2.7.13.msi
+
+# PIP
+rm -f get-pip.py
+wget https://bootstrap.pypa.io/get-pip.py
+python get-pip.py
+rm -f get-pip.py
+
+# Now install the pre-reqs to being able to load UF's setup.py
+# These should be listed in the setup_requires, see:
+# https://pip.readthedocs.io/en/1.4.1/cookbook.html
+pip install py2exe_py2 pytz
+
+# Now shut down the server
+shutdown -s -t 0

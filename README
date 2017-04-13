@@ -1,0 +1,19 @@
+done:
+	base image
+	prereq script
+	prereq image
+	use prereq image, in snapshot mode
+	install modules via pip from server/web setup.py's
+	removed derived files from bzr
+
+todo:
+	find out how to make py2exe succeed
+        install nsis
+
+To make the prereq image:
+
+  qemu-img create -f qcow2 -b w8.qcow2 prereq.qcow2
+  kvm -m 1G -net nic -net user,hostfwd=tcp:127.0.0.1:10022-:22 -drive file=prereq.qcow2 -nographic &
+  scp -P 10022 -i vagrant-key uf-prereq vagrant@localhost:
+  ssh -p 10022 -i vagrant-key vagrant@localhost sh uf-prereq
+
