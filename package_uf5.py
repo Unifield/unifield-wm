@@ -127,7 +127,6 @@ class KVM(object):
         l="kvm -m 700M -net nic -net user,hostfwd=tcp:127.0.0.1:10022-:22 -drive".split(" ")
         l.append('file=%s,snapshot=on'%self.image)
         l.append('-nographic')
-        print l
         self.pid=os.spawnvp(os.P_NOWAIT, l[0], l)
         time.sleep(30)
         signal.alarm(5000)
@@ -164,8 +163,6 @@ class KVMWinBuildAllInOneExe(KVM):
         self.rsync('windows/wkhtmltopdf/ vagrant@%s:build/server/win32/wkhtmltopdf/' % (self.remoteip,))
         self.ssh("/cygdrive/c/Python27/Scripts/pip --no-cache-dir install ./build/server")
         self.ssh("/cygdrive/c/Python27/Scripts/pip --no-cache-dir install ./build/web")
-        import pdb
-        pdb.set_trace()
         self.ssh("PATH=/cygdrive/c/Python27:/cygdrive/c/Python27/Scripts:$PATH make -C build/windows allinone")
         # For an unknown reason it seems that files timestamp matters
         self.rsync('vagrant@%s:build/windows/files/ %s/'% (self.remoteip, self.o.pkg,) ,'')

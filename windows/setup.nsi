@@ -810,10 +810,6 @@ Function ComponentLeave
     IntOp $0 $0 & ${SF_SELECTED}
     IntCmp $0 ${SF_SELECTED} Done
 
-    ChooseAtLeastOneComponent:
-        MessageBox MB_ICONEXCLAMATION|MB_OK $(DESC_AtLeastOneComponent)
-        Abort
-
     DontInstallPostgreSQL:
         MessageBox MB_ICONEXCLAMATION|MB_OK $(DESC_CanNotInstallPostgreSQL)
         Abort
