@@ -628,7 +628,12 @@ class client_creation(db_creation):
     def test_20_register_entity(self):
         Synchro.connect('admin')
         if not hasattr(config, 'sync_user_admin') or not config.sync_user_admin:
-            Synchro.user(self.db.name).add(self.db.name).addGroups('Instance Sync')
+            # keep backward compatibility: if the new group 'Instance Sync'
+            # don't exists, use the old 'Sync / User' instead
+            if Synchro.group('Instance Sync').exists():
+                Synchro.user(self.db.name).add(self.db.name).addGroups('Instance Sync')
+            else:
+                Synchro.user(self.db.name).add(self.db.name).addGroups('Sync / User')
         self.db.connect('admin')
         # search the current entity
         with_oc_field = False
