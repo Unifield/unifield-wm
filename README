@@ -7,9 +7,7 @@ done:
 	removed derived files from bzr
 
 todo:
-	find out how to make py2exe succeed
-        install nsis
-	remove sdelete.zip
+	Look for fix in _cpserver.py to make max_request_body_size into a long
 
 To make the prereq image:
 
