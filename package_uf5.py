@@ -124,7 +124,7 @@ class KVM(object):
         os.kill(self.pid,15)
 
     def start(self):
-        l="kvm -m 700M -net nic -net user,hostfwd=tcp:127.0.0.1:10022-:22 -drive".split(" ")
+        l="kvm -m 1G -net nic -net user,hostfwd=tcp:127.0.0.1:10022-:22 -drive".split(" ")
         l.append('file=%s,snapshot=on'%self.image)
         l.append('-nographic')
         self.pid=os.spawnvp(os.P_NOWAIT, l[0], l)
@@ -160,9 +160,8 @@ class KVMWinBuildAllInOneExe(KVM):
         f.write('BUILD_VERSION=%s\n' % (self.o.timestamp,))
         f.close()
         self.rsync('windows/ vagrant@%s:build/windows/' % (self.remoteip,))
-        self.rsync('windows/wkhtmltopdf/ vagrant@%s:build/server/win32/wkhtmltopdf/' % (self.remoteip,))
-        self.ssh("/cygdrive/c/Python27/Scripts/pip --no-cache-dir install ./build/server")
-        self.ssh("/cygdrive/c/Python27/Scripts/pip --no-cache-dir install ./build/web")
+        self.ssh("/cygdrive/c/Python27/Scripts/pip --verbose --no-cache-dir install ./build/server")
+        self.ssh("/cygdrive/c/Python27/Scripts/pip --verbose --no-cache-dir install ./build/web")
         self.ssh("PATH=/cygdrive/c/Python27:/cygdrive/c/Python27/Scripts:$PATH make -C build/windows allinone")
         # For an unknown reason it seems that files timestamp matters
         self.rsync('vagrant@%s:build/windows/files/ %s/'% (self.remoteip, self.o.pkg,) ,'')

@@ -11,22 +11,37 @@ todo:
 
 To make the prereq image:
 
+  chmod 400 vagrant-key
+  rm prereq.qcow2
   qemu-img create -f qcow2 -b w8.qcow2 prereq.qcow2
   kvm -m 1G -net nic -net user,hostfwd=tcp:127.0.0.1:10022-:22 -drive file=prereq.qcow2 -nographic
   # In another window:
   scp -P 10022 -i vagrant-key uf-prereq vagrant@localhost:
   scp -P 10022 -i vagrant-key -r whl vagrant@localhost:
   ssh -p 10022 -i vagrant-key vagrant@localhost sh uf-prereq
+  # protect it so that it is not changed by accident
+  chmod 444 prereq.qcow2
 
 The base image came from "Vagrant up" and then the VDMK was
 converted to qcow2. Install Cygwin, including the following:
-make, wget, rsync, openssh-server
+  make, wget, rsync, openssh-server
 Start a cygwin terminal in Admin mode and then use ssh-host-config
-to turn on SSHd as a service. see http://www.noah.org/ssh/cygwin-sshd.html
+to turn on SSHd as a service. See http://www.noah.org/ssh/cygwin-sshd.html
 
-To edit the base image:
+Editing the base image should be rare or never needed. The only thing
+in the base image should be enough Cygwin stuff to allow SSH in to
+create the prereq image. To edit the base image:
 
+  chmod 644 w8.qcow2
   kvm -m 700M -net nic -net user,hostfwd=tcp:127.0.0.1:10022-:22 -drive file=w8.qcow2
+  # Will pop up a window. Login with user Vagrant, pass: vagrant. Shutdown
+  # Windows when you are done.
+  chmod 444 w8.qcow2
 
-(user Vagrant, pass: vagrant)
+To setup a system to run this:
 
+  sudo -s
+  apt install kvm qemu-system-common qemu-utils
+  # make it so that user aio can run kvm without being root
+  usermod -a -G kvm aio
+ 

@@ -21,7 +21,7 @@ rm -f get-pip.py
 # Now install the pre-reqs to being able to load UF's setup.py
 # These should be listed in the setup_requires, see:
 # https://pip.readthedocs.io/en/1.4.1/cookbook.html
-pip install setuptools==28.8.0 py2exe_py2 pytz
+pip install py2exe_py2 pytz
 
 # Install the packages which are not installable via "pip install"
 # and instead have to come from WHL.
@@ -36,4 +36,4 @@ wget https://downloads.sourceforge.net/project/nsis/NSIS%203/3.01/nsis-3.01.zip
 rm -f unzip.exe nsis-3.01.zip
 
 # Now shut down the server
-#shutdown -s -t 0
+shutdown -s -t 0
