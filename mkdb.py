@@ -671,7 +671,7 @@ class client_creation(db_creation):
     def test_50_synchronize(self):
         self.db.connect('admin')
         self.sync()
-    
+
     def test_70_create_intermission(self):
         if isinstance(self, hqn_creation):
             return True
@@ -801,6 +801,29 @@ class client_creation(db_creation):
             self.set_analytic_loss(self.db, code)
             if to_hq:
                 self.set_analytic_loss(self.hq.db, code)
+
+    def test_95_create_registers(self):
+        if isinstance(self, hqn_creation):
+            return True
+
+        reg = {}
+        for j_type, account_code in [('bank', '10200'), ('cash', '10100'), ('cheque', '10210')]:
+            account_id = self.db.get('account.account').search([('code', '=', account_code)])[0]
+            data = {
+                'name': '%s %s' % (j_type, self.db.name),
+                'code': '%s%s' % (j_type, self.db.name[-2:]),
+                'type': j_type,
+                'currency': self.db.get('res.currency.rate').search([('name', '=', 'EUR')])[0],
+                'default_credit_account_id': account_id,
+                'default_debit_account_id': account_id,
+            }
+            if j_type == 'cheque':
+                if not reg.get('bank'):
+                    continue
+                data['bank_journal_id'] = reg['bank']
+
+            reg[j_type] = self.db.get('account.journal').create(data)
+
 
     def test_99_add_shortcut(self):
         self.db.connect('admin')
@@ -939,6 +962,18 @@ class hqn_creation(client_creation, unittest.TestCase):
         #wizard = self.db.wizard('user.access.configurator', {'file_to_import_uac': data})
         #wizard.do_process_uac()
 
+    def test_99_create_esc(self):
+        account = self.db.get('account.account')
+        self.db.get('res.partner').create({
+            'name': 'ESC',
+                'partner_type': 'esc',
+                'po_by_project': 'project',
+                'supplier': True,
+                'customer': False,
+                'property_account_payable':  account.search([('code','=','30010')])[0],
+                'property_account_receivable': account.search([('code','=','12050')])[0],
+                'city': 'XXX',
+        })
 
 # Replicable class to create coordo n
 class coordon_creation(client_creation):
