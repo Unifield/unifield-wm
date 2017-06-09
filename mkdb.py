@@ -23,14 +23,8 @@ import csv
 
 assert hq_count > 0, "You must have at least one HQ!"
 
-#from tests import *
-from tests.openerplib import db
+from scripts.common import client, db_instance, Synchro, check_lp_update, get_revno_from_path
 
-from scripts.common import *
-
-#Load tests procedures
-#TODO: use unittest2 instead of unittest to make the command-line arguments
-#      work with python < 2.7
 if sys.version_info >= (2, 7):
     import unittest
 else:
@@ -677,6 +671,22 @@ class client_creation(db_creation):
     def test_50_synchronize(self):
         self.db.connect('admin')
         self.sync()
+    
+    def test_70_create_intermission(self):
+        if isinstance(self, hqn_creation):
+            return True
+
+        partner = self.hq.db.get('res.partner')
+        account = self.hq.db.get('account.account')
+        partner.create({
+            'name': self.db.name,
+            'partner_type': 'intermission',
+            'customer': False,
+            'supplier': False,
+            'property_account_payable':  account.search([('code','=','30020')])[0],
+            'property_account_receivable': account.search([('code','=','12050')])[0],
+            'city': 'XXX',
+        })
 
     @unittest.skipIf(skipCreateUsers, "Create users desactivated")
     def test_70_create_users(self):
@@ -963,9 +973,9 @@ class coordon_creation(client_creation):
         self.db.connect('admin')
         self.db.module('msf_sync_data_coordo').install().do().set_notinstalled()
 
-    def test_70_create_inter_partner(self):
-        partner = self.db.get('res.partner')
-        account = self.db.get('account.account')
+    def test_70_create_intersection(self):
+        partner = self.hq.db.get('res.partner')
+        account = self.hq.db.get('account.account')
         for tc in test_cases:
             if issubclass(tc, coordon_creation) and tc.hq.index != self.hq.index:
                 if tc.db is None:
@@ -982,16 +992,6 @@ class coordon_creation(client_creation):
                     'property_account_receivable': account.search([('code','=','12010')])[0],
                     'city': 'XXX',
                 })
-
-        partner.create({
-            'name': self.db.name,
-            'partner_type': 'intermission',
-            'customer': False,
-            'supplier': False,
-            'property_account_payable':  account.search([('code','=','30020')])[0],
-            'property_account_receivable': account.search([('code','=','12050')])[0],
-            'city': 'XXX',
-        })
 
 
 # Replicable class to create project n
