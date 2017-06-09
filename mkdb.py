@@ -813,7 +813,7 @@ class client_creation(db_creation):
                 'name': '%s %s' % (j_type, self.db.name),
                 'code': '%s%s' % (j_type, self.db.name[-2:]),
                 'type': j_type,
-                'currency': self.db.get('res.currency.rate').search([('name', '=', 'EUR')])[0],
+                'currency': self.db.get('res.currency').search([('name', '=', 'EUR')])[0],
                 'default_credit_account_id': account_id,
                 'default_debit_account_id': account_id,
             }
