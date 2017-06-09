@@ -962,6 +962,26 @@ class hqn_creation(client_creation, unittest.TestCase):
         #wizard = self.db.wizard('user.access.configurator', {'file_to_import_uac': data})
         #wizard.do_process_uac()
 
+    def test_70_create_intersection(self):
+        partner = self.db.get('res.partner')
+        account = self.db.get('account.account')
+        for tc in test_cases:
+            if (issubclass(tc, coordon_creation) or issubclass(tc, projectn_creation)) and tc.hq.index != self.index:
+                if tc.db is None:
+                    db_name = tc.name_format % tc.getNameFormat()
+                else:
+                    db_name = tc.db.name
+                partner.create({
+                    'name': db_name,
+                    'partner_type': 'section',
+                    'po_by_project': 'project',
+                    'customer': True,
+                    'supplier': True,
+                    'property_account_payable':  account.search([('code','=','30010')])[0],
+                    'property_account_receivable': account.search([('code','=','12010')])[0],
+                    'city': 'XXX',
+                })
+
     def test_99_create_esc(self):
         account = self.db.get('account.account')
         self.db.get('res.partner').create({
@@ -974,6 +994,7 @@ class hqn_creation(client_creation, unittest.TestCase):
                 'property_account_receivable': account.search([('code','=','12050')])[0],
                 'city': 'XXX',
         })
+
 
 # Replicable class to create coordo n
 class coordon_creation(client_creation):
