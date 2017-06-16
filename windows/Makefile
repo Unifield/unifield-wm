@@ -38,7 +38,7 @@ web_clean:
 	rm -rf $(WEB_CLIENT_DIRECTORY)/*.exe
 	rm -rf $(WEB_CLIENT_DIRECTORY)/.cyg*
 
-web:	web_clean
+web: web_clean
 	(cd $(WEB_CLIENT_DIRECTORY)/win32 && $(LAUNCH_PY2EXE))
 	(cd $(WEB_CLIENT_DIRECTORY) && $(LAUNCH_PY2EXE))
 	(cd $(WEB_CLIENT_DIRECTORY) && $(LAUNCH_MAKENSIS))
@@ -46,7 +46,21 @@ web:	web_clean
 
 standalone:	server web
 
-allinone:	standalone
+PG_VER=9.6.3-2
+# Only update this on major versions, i.e. 9.x.y -> 10.x
+PG_DIR=pgsql-9
+PG_ZIP=postgresql-$(PG_VER)-windows-binaries.zip
+
+$(PG_ZIP):
+	wget https://get.enterprisedb.com/postgresql/$(PG_ZIP)
+
+# Extract the minimal Postgres install from the distribution zip file
+$(PG_DIR): $(PG_ZIP)
+	unzip $(PG_ZIP) pgsql/bin/ pgsql/lib/ pgsql/share/ -d $(PG_DIR)
+	mv $(PG_DIR)/pgsql/* $(PG_DIR)
+	rmdir $(PG_DIR)/pgsql
+
+allinone: standalone $(PG_DIR)
 	$(LAUNCH_MAKENSIS)
 	cp ./openerp-*.exe $(FILES_DIRECTORY)/openerp-allinone-setup-$(MAJOR_VERSION).$(MINOR_VERSION)-$(BUILD_VERSION)-r$(REVISION_VERSION).exe
 	cp ./static/server-extra/PKGINFO $(FILES_DIRECTORY)/openerp-allinone-setup-$(MAJOR_VERSION).$(MINOR_VERSION)-$(BUILD_VERSION)-r$(REVISION_VERSION).txt

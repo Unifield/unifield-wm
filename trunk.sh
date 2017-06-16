@@ -7,8 +7,8 @@ CLIWEB_BRANCH=lp:unifield-web/trunk
 
 br=`basename $SERVER_BRANCH`
 
-./package_uf5.py \
-        --version uf5.0-$br \
+./package.py \
+        --version uf6.0-$br \
         --server-branch=$SERVER_BRANCH \
         --client-web-branch=$CLIWEB_BRANCH \
         $@

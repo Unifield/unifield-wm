@@ -1,13 +1,32 @@
-done:
-	base image
-	prereq script
-	prereq image
-	use prereq image, in snapshot mode
-	install modules via pip from server/web setup.py's
-	removed derived files from bzr
+This is a system for creating the Windows virtual machine
+where AIOs are built. When building an AIO, the following 3
+images are used:
 
-todo:
-	Look for fix in _cpserver.py to make max_request_body_size into a long
+  1. w8.qcow2, the read-only base. It only has SSH to get remote
+     access.
+  2. prereq.qcow2, which captures the work done by uf-prereq. It holds
+     the minimum things necessary to launch the AIO build process.
+  3. the anonymous snapshot that exists while package.py starts
+     the VM and builds the AIO. During the AIO build, pip is used to
+     get the correct Python modules. Once the AIO is built and copied out
+     of the image, package.py kills the VM and the anonymous image is
+     thrown away.
+
+Images 1 and 2 rarely change. Image 3 is created from zero in a predictable
+way on every build so that we know the AIO has exactly the correct modules
+in it.
+
+What you might want to modify:
+  * To change/upgrade modules that Unifield depends on, update setup.py
+    in the unifield-server or unifield-web directory.
+  * To change the Python version, edit uf-prereq and make a new prereq.qcow2
+    file.
+  * If you wanted to change the operating system, you'd replace w8.qcow2
+    with a new copy, and then adjust uf-prereq as necessary. Should not
+    be needed until W8 is End Of Life, in 2023.
+
+Creating a new prereq.qcow2 after editing uf-prereq
+---------------------------------------------------
 
 To make the prereq image:
 
@@ -22,7 +41,10 @@ To make the prereq image:
   # protect it so that it is not changed by accident
   chmod 444 prereq.qcow2
 
-The base image came from "Vagrant up" and then the VDMK was
+Editing the base image (DON'T DO IT)
+------------------------------------
+
+The base image (w8.qcow) came from "Vagrant up" and then the VDMK was
 converted to qcow2. Install Cygwin, including the following:
   make, wget, rsync, openssh-server
 Start a cygwin terminal in Admin mode and then use ssh-host-config
@@ -38,7 +60,10 @@ create the prereq image. To edit the base image:
   # Windows when you are done.
   chmod 444 w8.qcow2
 
-To setup a system to run this:
+Installing on a new machine
+---------------------------
+
+To setup a system to run this stuff: 
 
   sudo -s
   apt install kvm qemu-system-common qemu-utils
