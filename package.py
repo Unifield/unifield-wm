@@ -163,7 +163,6 @@ class KVMWinBuildAllInOneExe(KVM):
         self.ssh("PYTHONHTTPSVERIFY=0 /cygdrive/c/Python27/Scripts/pip --verbose --no-cache-dir install egenix-mx-base")
         self.ssh("/cygdrive/c/Python27/Scripts/pip --verbose --no-cache-dir install ./build/server")
         self.ssh("/cygdrive/c/Python27/Scripts/pip --verbose --no-cache-dir install ./build/web")
-	return
         self.ssh("PATH=/cygdrive/c/Python27:/cygdrive/c/Python27/Scripts:$PATH make -C build/windows allinone")
         # For an unknown reason it seems that files timestamp matters
         self.rsync('Naresh@%s:build/windows/files/ %s/'% (self.remoteip, self.o.pkg,) ,'')
