@@ -24,9 +24,6 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #####################################################################################
 
-# TODO: Avoid to uninstall the database
-# TODO: We can update the server or the clients without to uninstall the all-in-one
-
 !include 'MUI2.nsh'
 !include 'FileFunc.nsh'
 !include 'LogicLib.nsh'
@@ -62,7 +59,7 @@
     Exch $R2
 !macroend
 
-!define PUBLISHER 'OpenERP S.A.'
+!define PUBLISHER 'Unifield'
 
 !ifndef MAJOR_VERSION
     !define MAJOR_VERSION '6'
@@ -86,7 +83,6 @@
 !define REGISTRY_ROOT HKLM
 !define UNINSTALL_BASE_REGISTRY_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall"
 !define UNINSTALL_REGISTRY_KEY "${UNINSTALL_BASE_REGISTRY_KEY}\${DISPLAY_NAME}"
-
 !define UNINSTALL_REGISTRY_KEY_SERVER "${UNINSTALL_BASE_REGISTRY_KEY}\OpenERP Server ${MAJOR_VERSION}.${MINOR_VERSION}"
 !define UNINSTALL_REGISTRY_KEY_WEB_CLIENT "${UNINSTALL_BASE_REGISTRY_KEY}\OpenERP Web Client ${MAJOR_VERSION}.${MINOR_VERSION}"
 
@@ -98,8 +94,6 @@
 !define DEFAULT_POSTGRESQL_USERNAME 'openpg'
 !define DEFAULT_POSTGRESQL_PASSWORD '4Unifieldpg'
 
-!define PGVERSION '8.4.17-1'
-
 !define DEFAULT_OPENERP_PASSWORD '4UnifieldAdmin'
 !define DEFAULT_OPENERP_DROP_PWD 'dropAdmin'
 !define DEFAULT_OPENERP_BKP_PWD 'bkAdmin'
@@ -108,8 +102,6 @@
 Name '${DISPLAY_NAME}'
 Caption "${PRODUCT_NAME} ${VERSION} Setup"
 OutFile "openerp-allinone-setup-${VERSION}.exe"
-#SetCompressor /final /solid lzma
-#SetCompress auto
 ShowInstDetails show
 
 XPStyle on
@@ -121,19 +113,10 @@ BrandingText '${PRODUCT_NAME} ${VERSION}'
 
 RequestExecutionLevel admin
 
-#VIAddVersionKey "ProductName" "${PRODUCT_NAME}"
-#VIAddVersionKey "CompanyName" "${PUBLISHER}"
-#VIAddVersionKey "FileDescription" "Installer of ${DISPLAY_NAME}"
-#VIAddVersionKey "LegalCopyright" "${PUBLISHER}"
-#VIAddVersionKey "LegalTrademark" "OpenERP is a trademark of ${PUBLISHER}"
-#VIAddVersionKey "FileVersion" "${MAJOR_VERSION}.${MINOR_VERSION}.${REVISION_VERSION}"
-#VIProductVersion "${MAJOR_VERSION}.${MINOR_VERSION}.${REVISION_VERSION}"
-
 !insertmacro GetParameters
 !insertmacro GetOptions
 
 Var Option_AllInOne
-Var HasPostgreSQL
 Var cmdLineParams
 
 Var CmdLPostgreSQLInstPath
@@ -148,10 +131,8 @@ Var TextOPENERPDROPPWD
 Var TextOPENERPBKPPWD
 Var TextOPENERPRESTOREPWD
 
-Var HWNDPostgreSQLInstancesList
 Var HWNDPostgreSQLInstPath
 Var HWNDPostgreSQLInstPath_Btn
-Var HWNDPostgreSQLTestConn_Btn
 
 Var HWNDPostgreSQLHostname
 Var HWNDPostgreSQLPort
@@ -165,7 +146,6 @@ Var HWNDOpenERPRestorePwd
 
 !define STATIC_PATH "static"
 !define PIXMAPS_PATH "${STATIC_PATH}\pixmaps"
-!define POSTGRESQL_EXE "${STATIC_PATH}\postgresql-${PGVERSION}-windows.exe"
 
 !define OPENERP_SERVER_SETUP 'openerp-server-setup-${VERSION}.exe'
 !define OPENERP_WEB_SETUP 'openerp-web-setup-${VERSION}.exe'
@@ -185,7 +165,6 @@ Var HWNDOpenERPRestorePwd
 !insertmacro MUI_PAGE_WELCOME
 !insertmacro MUI_PAGE_LICENSE "${STATIC_PATH}\doc\LICENSE"
 !define MUI_COMPONENTSPAGE_SMALLDESC
-!define MUI_PAGE_CUSTOMFUNCTION_LEAVE ComponentLeave
 !insertmacro MUI_PAGE_COMPONENTS
 !insertmacro MUI_PAGE_DIRECTORY
 Page Custom DBPasswordPage LeaveDBPasswordPage
@@ -213,7 +192,6 @@ Page Custom ShowPostgreSQL LeavePostgreSQL
 ; English
 LangString MSG_ConnectionOK ${LANG_ENGLISH} "Connection successful!"
 LangString MSG_ConnectionFAILED ${LANG_ENGLISH} "Connection failed!"
-LangString DESC_TestConnection ${LANG_ENGLISH} "Test connection"
 LangString DESC_OpenERP_Server ${LANG_ENGLISH} "Install the OpenERP Server with all the OpenERP standard modules."
 LangString DESC_OpenERP_Web_Client ${LANG_ENGLISH} "Install the OpenERP Web Client if you want to access the OpenERP Server with your internet browser."
 LangString DESC_PostgreSQL ${LANG_ENGLISH} "Install the PostgreSQL RDBMS used by OpenERP."
@@ -238,9 +216,8 @@ LangString Profile_Server ${LANG_ENGLISH} "Server only"
 LangString Profile_Web_Client ${LANG_ENGLISH} "Web environment"
 LangString TITLE_OpenERP_Server ${LANG_ENGLISH} "OpenERP Server"
 LangString TITLE_OpenERP_Web_Client ${LANG_ENGLISH} "OpenERP Web Client"
-LangString TITLE_PostgreSQL ${LANG_ENGLISH} "PostgreSQL Database"
 LangString DESC_FinishPageText ${LANG_ENGLISH} "Connect to OpenERP Web"
-LangString DESC_OPENERPPage ${LANG_ENGLISH} "Configure the passwords for DB drop,backup and create from openerp"
+LangString DESC_OPENERPPage ${LANG_ENGLISH} "Configure the passwords for DB drop, backup and create from openerp"
 LangString DESC_OPENERP_PWD ${LANG_ENGLISH} "Password to create DB"
 LangString DESC_OPENERP_DROP_PWD ${LANG_ENGLISH} "Password to drop DB"
 LangString DESC_OPENERP_BKP_PWD ${LANG_ENGLISH} "Password to backup DB"
@@ -253,7 +230,6 @@ LangString WARNING_OPENERP_RESTORE_PasswordIsEmpty ${LANG_ENGLISH} "Password to 
 ; French
 LangString MSG_ConnectionOK ${LANG_FRENCH} "Connection réussie!"
 LangString MSG_ConnectionFAILED ${LANG_FRENCH} "Échec de la connection!"
-LangString DESC_TestConnection ${LANG_FRENCH} "Tester la connection"
 LangString DESC_OpenERP_Server ${LANG_FRENCH} "Installation du Serveur OpenERP avec tous les modules OpenERP standards."
 LangString DESC_OpenERP_Web_Client ${LANG_FRENCH} "Installation du Client OpenERP Web si vous d?siez acc?der ? OpenERP avec votre navigateur web"
 LangString DESC_PostgreSQL ${LANG_FRENCH} "Installation de la base de donn?es PostgreSQL utilis?e par OpenERP."
@@ -278,7 +254,6 @@ LangString Profile_Server ${LANG_FRENCH} "Seulement le serveur"
 LangString Profile_Web_Client ${LANG_FRENCH} "Environement Web"
 LangString TITLE_OpenERP_Server ${LANG_FRENCH} "Serveur OpenERP"
 LangString TITLE_OpenERP_Web_Client ${LANG_FRENCH} "OpenERP Client Web"
-LangString TITLE_PostgreSQL ${LANG_FRENCH} "Installation du serveur de base de donn?es PostgreSQL"
 LangString DESC_FinishPageText ${LANG_FRENCH} "Se connecter à OpenERP Web"
 LangString DESC_OPENERPPage ${LANG_FRENCH} "Definissez les mots de passe pour la manipulation des bdd depuis OpenERP"
 LangString DESC_OPENERP_PWD ${LANG_FRENCH} "MdP pour créer un bdd"
@@ -311,7 +286,7 @@ Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
     WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "db_port" $TextPostgreSQLPort
     WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "db_maxconn" 95
     # Always override pg_path by the correct instance choosen by the user (newly installed or not...)
-    WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "pg_path" "$TextPostgreSQLInstPath\bin"
+    WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "pg_path" "$INSTDIR\${PG_DIR}\bin"
 
     Push $R1
     ${Base64_Encode} "$TextOPENERPPWD"
@@ -333,12 +308,57 @@ Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
     File /r "static\server-extra"
     CopyFiles "$TEMP\server-extra\*.*" "$INSTDIR\Server"
 
+    # Install Postgres
+
+    nsExec::Exec 'sc stop Postgres'
+    nsExec::Exec 'sc delete Postgres'
+    nsExec::Exec 'net user openpgsvc /delete'
+
+    SetOutPath "$INSTDIR"
+    File /r "${PG_DIR}"
+
+    # Put the db admin user password into a file so that initdb can find it.
+    GetTempFileName $0
+    FileOpen $1 $0 w
+    FileWrite $1 "$TextPostgreSQLPassword"
+    FileClose $1
+
+    # Init the DB
+    Rmdir /r "$TextPostgreSQLInstPath"
+    nsExec::ExecToLog '${PG_DIR}\bin\initdb --pwfile "$0" \
+        -U "$TextPostgreSQLUsername" \
+        --locale="English_United States" -E UTF8 \
+        "$TextPostgreSQLInstPath"'
+    Delete $0
+
+    # Create the service user and service
+    nsExec::Exec 'net user openpgsvc 0p3npgsvcPWD /add'
+    SimpleSC::GrantServiceLogonPrivilege openpgsvc
+    nsExec::ExecToLog 'icacls "$TextPostgreSQLInstPath" /c /t /grant openpgsvc:F'
+    nsExec::ExecToLog '${PG_DIR}\bin\pg_ctl register -N Postgres \
+        -U openpgsvc -P 0p3npgsvcPWD -D "$TextPostgreSQLInstPath"'
+
+    # Edit the postgresql.conf to limit listening and set port.
+
+    Push $R0
+    FileOpen $R0 "$TextPostgreSQLInstPath\postgresql.conf" a
+    FileSeek $R0 0 "END"
+    # Start of custom PostgreSQL options
+    FileWrite $R0 "listen_addresses = 'localhost'"
+    # add \r\n
+    FileWriteByte $R0 "13"
+    FileWriteByte $R0 "10"
+    FileWrite $R0 "port = $TextPostgreSQLPort"
+    # add \r\n
+    FileWriteByte $R0 "13"
+    FileWriteByte $R0 "10"
+    FileClose $R0
+    Pop $R0
+
+    nsExec::Exec 'net start Postgres'
+    sleep 2
     nsExec::Exec "net stop openerp-server-6.0"
-    sleep 2
-
     nsExec::Exec "net start openerp-server-6.0"
-    sleep 2
-
 SectionEnd
 
 Section $(TITLE_OpenERP_Web_Client) SectionOpenERP_Web_Client
@@ -346,52 +366,6 @@ Section $(TITLE_OpenERP_Web_Client) SectionOpenERP_Web_Client
     SetOutPath "$TEMP"
     File "files\${OPENERP_WEB_SETUP}"
     ExecWait '"$TEMP\${OPENERP_WEB_SETUP}" /S /D=$INSTDIR\Web'
-SectionEnd
-
-Section $(TITLE_PostgreSQL) SectionPostgreSQL
-    SectionIn 1 2
-    SetOutPath '$TEMP'
-    nsExec::Exec 'net user openpgsvc /delete'
-
-    File "postgresql-${PGVERSION}-windows.exe"
-
-    ReadRegStr $0 HKLM "System\CurrentControlSet\Control\ComputerName\ActiveComputerName" "ComputerName"
-    StrCmp $0 "" win9x
-    Goto done
-    win9x:
-        ReadRegStr $0 HKLM "System\CurrentControlSet\Control\ComputerName\ComputerName" "ComputerName"
-    done:
-	Rmdir /r "$TextPostgreSQLInstPath"
-	ExecWait '"$TEMP\postgresql-${PGVERSION}-windows.exe" \
-		--mode unattended \
-		--prefix "$TextPostgreSQLInstPath" \
-		--datadir "$TextPostgreSQLInstPath\data" \
-		--servicename "PostgreSQL_For_OpenERP" \
-		--serviceaccount "openpgsvc" --servicepassword "0p3npgsvcPWD" \
-		--superaccount "$TextPostgreSQLUsername" --superpassword "$TextPostgreSQLPassword" \
-		--serverport $TextPostgreSQLPort'
-
-	Push $R0
-	FileOpen $R0 "$TextPostgreSQLInstPath\data\postgresql.conf" a
-	FileSeek $R0 0 "END"
-	# Start of custom PostgreSQL options
-	FileWrite $R0 "listen_addresses = 'localhost'"
-	# add \r\n
-	FileWriteByte $R0 "13"
-	FileWriteByte $R0 "10"
-	FileClose $R0
-	FileClose $R0
-	Pop $R0
-
-	nsExec::Exec 'net stop PostgreSQL_For_OpenERP'
-	nsExec::Exec 'net start PostgreSQL_For_OpenERP'
-#    ExecWait 'msiexec /i \
-#        "$TEMP\postgresql-8.4.9-1-windows.exe" /qn INTERNALLAUNCH=1 \
-#        ADDLOCAL=server,pgadmin \
-#        SERVICEDOMAIN="$0" SERVICEACCOUNT="openpgsvc" SERVICEPASSWORD="0p3npgsvcPWD" CREATESERVICEUSER=1 SERVICENAME="PostgreSQL For OpenERP" \
-#        SUPERUSER="$TextPostgreSQLUsername" \
-#        SUPERPASSWORD="$TextPostgreSQLPassword" DOINITDB=1 DOSERVICE=1 \
-#        LISTENPORT=$TextPostgreSQLPort ENCODING=UTF-8 BASEDIR="$INSTDIR\PostgreSQL"'
 SectionEnd
 
 Section -Post
@@ -415,7 +389,6 @@ SectionEnd
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
     !insertmacro MUI_DESCRIPTION_TEXT ${SectionOpenERP_Server} $(DESC_OpenERP_Server)
     !insertmacro MUI_DESCRIPTION_TEXT ${SectionOpenERP_Web_Client} $(DESC_OpenERP_Web_Client)
-    !insertmacro MUI_DESCRIPTION_TEXT ${SectionPostgreSQL} $(DESC_PostgreSQL)
 !insertmacro MUI_FUNCTION_DESCRIPTION_END
 
 Section "Uninstall"
@@ -432,7 +405,11 @@ Section "Uninstall"
     ReadRegStr $0 HKLM "${UNINSTALL_REGISTRY_KEY_WEB_CLIENT}" "UninstallString"
     ExecWait '"$0" /S'
 
-    #Rmdir /r "$INSTDIR"
+    # Uninstall Postgres
+    nsExec::Exec 'sc stop Postgres'
+    nsExec::Exec 'sc delete Postgres'
+    nsExec::Exec 'net user openpgsvc /delete'
+    Rmdir /r "$INSTDIR/${PG_DIR}"
 
     DeleteRegKey HKLM "${UNINSTALL_REGISTRY_KEY}"
 SectionEnd
@@ -446,7 +423,6 @@ Function .onInit
     Pop $R0
 
     StrCpy $Option_AllInOne 0
-    StrCpy $HasPostgreSQL 0
 
     StrCpy $TextPostgreSQLHostname ${DEFAULT_POSTGRESQL_HOSTNAME}
     StrCpy $TextPostgreSQLPort ${DEFAULT_POSTGRESQL_PORT}
@@ -486,25 +462,6 @@ Function .onInit
     StrCpy $CmdLPostgreSQLInstPath $R0
     Pop $R0
 
-    ClearErrors
-    EnumRegKey $0 HKLM "SOFTWARE\PostgreSQL\Installations" 0
-    IfErrors DoInstallPostgreSQL 0
-		StrCmp $0 "" DoInstallPostgreSQL # Empty value means no subkey, i.e PostgreSQL not installed
-        StrCpy $HasPostgreSQL 1
-        #SectionSetText ${SectionPostgreSQL} ""
-        !insertmacro UnselectSection ${SectionPostgreSQL}
-        SectionSetFlags ${SectionPostgreSQL} ${SF_RO}
-
-    DoInstallPostgreSQL:
-FunctionEnd
-
-Function .onSelChange
-    ${If} $HasPostgreSQL == 1
-        !insertmacro UnselectSection ${SectionPostgreSQL}
-    ${EndIf}
-FunctionEnd
-
-Function PostgreSQLOnBack
 FunctionEnd
 
 Function ShowPostgreSQL
@@ -521,23 +478,11 @@ Function ShowPostgreSQL
         Abort
     ${EndIf}
 
-    GetFunctionAddress $0 PostgreSQLOnBack
-    nsDialogs::OnBack $0
-
     ${NSD_CreateLabel} 0 0 100% 10u $(DESC_PostgreSQLPage)
     Pop $0
 
-    ${NSD_CreateDropList} 0 25 215u 12u ""
-    Pop $HWNDPostgreSQLInstancesList
-    SetCtlColors $HWNDPostgreSQLInstancesList 0x000000 0xFFFFFF
-    ${NSD_OnChange} $HWNDPostgreSQLInstancesList OnPostgresInstanceChange
-
     ; setup and update default postgresql install path
-    ${If} $CmdLPostgreSQLInstPath == ""
-        StrCpy $TextPostgreSQLInstPath "$INSTDIR\PostgreSQL"
-    ${Else}
-        StrCpy $TextPostgreSQLInstPath "$CmdLPostgreSQLInstPath"
-    ${EndIf}
+    StrCpy $TextPostgreSQLInstPath "$CmdLPostgreSQLInstPath"
     ${NSD_CreateLabel} 0 55 60u 12u $(DESC_PostgreSQL_InstPath)
     Pop $0
     ${NSD_CreateText} 100 55 140u 12u $TextPostgreSQLInstPath
@@ -564,44 +509,6 @@ Function ShowPostgreSQL
     Pop $0
     ${NSD_CreateText} 100 175 150u 12u $TextPostgreSQLPassword
     Pop $HWNDPostgreSQLPassword
-
-    ${NSD_CreateButton} 0 205 100u 12u $(DESC_TestConnection)
-    Pop $HWNDPostgreSQLTestConn_Btn
-    ${NSD_OnClick} $HWNDPostgreSQLTestConn_Btn func_PostgreSQL_TestConn_Click
-
-    ; === detect PostgreSQL installations ====
-    ClearErrors
-    StrCpy $5 ""; the default value for selection
-    StrCpy $0 0
-    pginst_loop:
-        EnumRegKey $1 HKLM "SOFTWARE\PostgreSQL\Installations" $0
-        StrCmp $1 "" pginst_done
-        ReadRegStr $2 HKLM "SOFTWARE\PostgreSQL\Installations\$1" "Service ID"
-        ReadRegStr $3 HKLM "SOFTWARE\PostgreSQL\Installations\$1" "Version"
-        ${NSD_CB_AddString} $HWNDPostgreSQLInstancesList "$0: $2 ($3)"
-        ${If} $5 == ""
-            StrCpy $5 "$0: $2 ($3)"
-        ${EndIf}
-        IntOp $0 $0 + 1
-        Goto pginst_loop
-    pginst_done:
-        ClearErrors
-
-    ; select default value for instances droplist
-    ${If} $0 == 0
-        ${NSD_CB_AddString} $HWNDPostgreSQLInstancesList $(DESC_PostgreSQLNewInstall)
-        ${NSD_CB_SelectString} $HWNDPostgreSQLInstancesList $(DESC_PostgreSQLNewInstall)
-    ${Else}
-        ${NSD_CB_SelectString} $HWNDPostgreSQLInstancesList $5
-    ${EndIf}
-    ; setup default view state
-    EnableWindow $HWNDPostgreSQLInstPath 0
-    EnableWindow $HWNDPostgreSQLInstPath_Btn 0
-    ShowWindow $HWNDPostgreSQLTestConn_Btn 0
-
-    ; call onchange with initial value
-    Push $HWNDPostgreSQLInstancesList
-    Call OnPostgresInstanceChange
 
     nsDialogs::Show
 FunctionEnd
@@ -725,35 +632,6 @@ Function LeaveDBPasswordPage
     ${EndIf}
 FunctionEnd
 
-Function func_PostgreSQL_TestConn_Click
-    Pop $R0
-    ${If} $R0 == $HWNDPostgreSQLTestConn_Btn
-        ${NSD_GetText} $HWNDPostgreSQLInstPath $R1
-        ${NSD_GetText} $HWNDPostgreSQLHostname $R2
-        ${NSD_GetText} $HWNDPostgreSQLPort $R3
-        ${NSD_GetText} $HWNDPostgreSQLUsername $R4
-        ${NSD_GetText} $HWNDPostgreSQLPassword $R5
-        StrCpy $R6 '"$R1\bin\psql.exe" -h "$R2" -p "$R3" -U "$R4" -d postgres -c ""'
-        ; set connection password from testing
-        System::Call 'Kernel32::SetEnvironmentVariableA(t, t) i("PGPASSWORD", R5).r2'
-        ; run connection test command
-        StrCpy $R8 ""
-        ClearErrors
-        ExecWait $R6 $R8
-        ; check return code and display status (success / fail)
-        StrCmp $R8 0 testok
-        MessageBox MB_OK "$(MSG_ConnectionFAILED)"
-        Goto testdone
-        testok:
-            MessageBox MB_OK "$(MSG_ConnectionOK)"
-        testdone:
-        ; clear connection password
-        StrCpy $R5 ""
-        System::Call 'Kernel32::SetEnvironmentVariableA(t, t) i("PGPASSWORD", R5).r2'
-    ${EndIf}
-
-FunctionEnd
-
 Function func_PostgreSQL_InstPath_Choose_Click
     Pop $R0
     ${If} $R0 == $HWNDPostgreSQLInstPath_Btn
@@ -764,56 +642,6 @@ Function func_PostgreSQL_InstPath_Choose_Click
             ${NSD_SetText} $HWNDPostgreSQLInstPath "$R0\PostgreSQL"
         ${EndIf}
     ${EndIf}
-FunctionEnd
-
-Function OnPostgresInstanceChange
-    Pop $1
-    ${NSD_GetText} $HWNDPostgreSQLInstancesList $0
-    ${If} $0 == $(DESC_PostgreSQLNewInstall)
-        ; allow choosing install path, but disable test connection
-        ; (as postgresql are not install now ;-D)
-        EnableWindow $HWNDPostgreSQLInstPath 1
-        EnableWindow $HWNDPostgreSQLInstPath_Btn 1
-        ShowWindow $HWNDPostgreSQLTestConn_Btn 0
-    ${Else}
-        ; disable choosing install path, but allow test connection
-        ; (already installed postgres path come from win32 registry)
-        EnableWindow $HWNDPostgreSQLInstPath 0
-        EnableWindow $HWNDPostgreSQLInstPath_Btn 0
-        ShowWindow $HWNDPostgreSQLTestConn_Btn 1
-
-        ; extract instance number from droplist test (0: ... => 1st instance)
-        StrCpy $R0 0; string index
-        pginst_loop_index:
-            StrCpy $R1 $0 1 $R0
-            StrCmp $R1 ":" pginst_done_index
-            IntOp $R0 $R0 + 1
-            Goto pginst_loop_index
-        pginst_done_index:
-            StrCpy $2 $0 $R0 0
-            EnumRegKey $3 HKLM "SOFTWARE\PostgreSQL\Installations" $2
-            ReadRegStr $4 HKLM "SOFTWARE\PostgreSQL\Installations\$3" "Base Directory"
-            ${NSD_SetText} $HWNDPostgreSQLInstPath $4
-    ${EndIf}
-FunctionEnd
-
-Function ComponentLeave
-    SectionGetFlags ${SectionOpenERP_Server} $0
-    IntOp $0 $0 & ${SF_SELECTED}
-    IntCmp $0 ${SF_SELECTED} Done
-
-    SectionGetFlags ${SectionPostgreSQL} $0
-    IntOp $0 $0 & ${SF_SELECTED}
-    IntCmp $0 ${SF_SELECTED} DontInstallPostgreSQL
-
-    SectionGetFlags ${SectionOpenERP_Web_Client} $0
-    IntOp $0 $0 & ${SF_SELECTED}
-    IntCmp $0 ${SF_SELECTED} Done
-
-    DontInstallPostgreSQL:
-        MessageBox MB_ICONEXCLAMATION|MB_OK $(DESC_CanNotInstallPostgreSQL)
-        Abort
-    Done:
 FunctionEnd
 
 Function LaunchLink

@@ -1,8 +1,11 @@
+AIO Builder
+-----------
+
 This is a system for creating the Windows virtual machine
 where AIOs are built. When building an AIO, the following 3
 images are used:
 
-  1. w8.qcow2, the read-only base. It only has SSH to get remote
+  1. winxp.qcow2, the read-only base. It only has SSH to get remote
      access.
   2. prereq.qcow2, which captures the work done by uf-prereq. It holds
      the minimum things necessary to launch the AIO build process.
@@ -14,51 +17,50 @@ images are used:
 
 Images 1 and 2 rarely change. Image 3 is created from zero in a predictable
 way on every build so that we know the AIO has exactly the correct modules
-in it.
+in it, and so that upgrading a module is simply a matter of changing
+setup.py and rebuilding the AIO.
 
 What you might want to modify:
   * To change/upgrade modules that Unifield depends on, update setup.py
     in the unifield-server or unifield-web directory.
   * To change the Python version, edit uf-prereq and make a new prereq.qcow2
     file.
-  * If you wanted to change the operating system, you'd replace w8.qcow2
-    with a new copy, and then adjust uf-prereq as necessary. Should not
-    be needed until W8 is End Of Life, in 2023.
+  * If you wanted to change the operating system, you'd replace winxp.qcow2
+    with a new copy, and then adjust uf-prereq as necessary.
 
 Creating a new prereq.qcow2 after editing uf-prereq
 ---------------------------------------------------
 
 To make the prereq image:
 
-  chmod 400 vagrant-key
-  rm prereq.qcow2
-  qemu-img create -f qcow2 -b w8.qcow2 prereq.qcow2
-  kvm -m 1G -net nic -net user,hostfwd=tcp:127.0.0.1:10022-:22 -drive file=prereq.qcow2 -nographic
-  # In another window:
-  scp -P 10022 -i vagrant-key uf-prereq vagrant@localhost:
-  scp -P 10022 -i vagrant-key -r whl vagrant@localhost:
-  ssh -p 10022 -i vagrant-key vagrant@localhost sh uf-prereq
-  # protect it so that it is not changed by accident
+  rm -f prereq.qcow2
+  qemu-img create -f qcow2 -b winxp.qcow2 prereq.qcow2
+  kvm -m 1G -net nic,model=rtl8139 -net user,hostfwd=tcp:127.0.0.1:10022-:22 -drive file=prereq.qcow2 -nographic
+  # after it is shutdown: protect it so that it is not changed by accident
   chmod 444 prereq.qcow2
+
+  # In another window:
+  chmod 400 key
+  scp -P 10022 -i key -r uf-prereq lib Naresh@localhost:
+  ssh -p 10022 -i key Naresh@localhost sh uf-prereq
 
 Editing the base image (DON'T DO IT)
 ------------------------------------
 
-The base image (w8.qcow) came from "Vagrant up" and then the VDMK was
-converted to qcow2. Install Cygwin, including the following:
-  make, wget, rsync, openssh-server
-Start a cygwin terminal in Admin mode and then use ssh-host-config
-to turn on SSHd as a service. See http://www.noah.org/ssh/cygwin-sshd.html
+The base image (winxp.qcow) came from the previous AIO builder
+and was manually cleaned up to not have Python on it. It does have
+Cygwin, including the following:
+  make, wget, rsync, openssh-server, unzip
 
 Editing the base image should be rare or never needed. The only thing
 in the base image should be enough Cygwin stuff to allow SSH in to
 create the prereq image. To edit the base image:
 
-  chmod 644 w8.qcow2
-  kvm -m 700M -net nic -net user,hostfwd=tcp:127.0.0.1:10022-:22 -drive file=w8.qcow2
-  # Will pop up a window. Login with user Vagrant, pass: vagrant. Shutdown
+  chmod 644 winxp.qcow2
+  kvm -m 1G -net nic -net user -drive file=winxp.qcow2
+  # Will pop up a window. Login with user Naresh, pass: openerp. Shutdown
   # Windows when you are done.
-  chmod 444 w8.qcow2
+  chmod 444 winxp.qcow2
 
 Installing on a new machine
 ---------------------------

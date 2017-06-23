@@ -6,6 +6,10 @@ export PATH
 
 set -x -e
 
+# The VC Redist for VC2008
+chmod +x lib/vcredist_x86.exe
+./lib/vcredist_x86.exe /q
+
 # Python
 rm -f python-2.7.13.msi
 wget https://www.python.org/ftp/python/2.7.13/python-2.7.13.msi
@@ -25,15 +29,23 @@ pip install py2exe_py2 pytz
 
 # Install the packages which are not installable via "pip install"
 # and instead have to come from WHL.
-pip install whl/*
+pip install lib/whl/*
+rm -rf lib
 
-# Need unzip to install NSIS
-rm -f unzip.exe
-wget http://stahlworks.com/dev/unzip.exe
-chmod +x unzip.exe
 wget https://downloads.sourceforge.net/project/nsis/NSIS%203/3.01/nsis-3.01.zip
-./unzip -o nsis-3.01.zip
-rm -f unzip.exe nsis-3.01.zip
+unzip -o nsis-3.01.zip
+chmod +x nsis-3.01/*.exe nsis-3.01/Bin/*
+rm -f nsis-3.01.zip
+
+mkdir s
+cd s
+wget http://nsis.sourceforge.net/mediawiki/images/c/c9/NSIS_Simple_Service_Plugin_1.30.zip
+unzip ../NSIS_Simple_Service_Plugin_1.30.zip
+mv SimpleSC.dll ../nsis-3.01/Plugins/x86-ansi/
+cd ..
+rm -rf s
+
+rm uf-prereq
 
 # Now shut down the server
 shutdown -s -t 0

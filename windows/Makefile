@@ -4,10 +4,14 @@ WEB_CLIENT_DIRECTORY=../web
 SERVER_DIRECTORY=../server
 FILES_DIRECTORY=files
 
+PG_VER=9.6.3-2
+# Only update this on major versions, i.e. 9.x.y -> 10.x
+PG_DIR=pgsql-9
+PG_ZIP=postgresql-$(PG_VER)-windows-binaries.zip
+
+MAKENSIS_ARGUMENTS=/DMAJOR_VERSION=$(MAJOR_VERSION) /DMINOR_VERSION=$(MINOR_VERSION) /DREVISION_VERSION=$(REVISION_VERSION) /DBUILD_VERSION=$(BUILD_VERSION) /DPG_DIR=$(PG_DIR) /DPG_VER=$(PG_VER)
+
 LAUNCH_PY2EXE=python -B setup.py py2exe
-
-MAKENSIS_ARGUMENTS=/DMAJOR_VERSION=$(MAJOR_VERSION) /DMINOR_VERSION=$(MINOR_VERSION) /DREVISION_VERSION=$(REVISION_VERSION) /DBUILD_VERSION=$(BUILD_VERSION)
-
 LAUNCH_MAKENSIS=$(HOME)/nsis-3.01/makensis.exe $(MAKENSIS_ARGUMENTS) setup.nsi
 
 default: allinone
@@ -46,19 +50,18 @@ web: web_clean
 
 standalone:	server web
 
-PG_VER=9.6.3-2
-# Only update this on major versions, i.e. 9.x.y -> 10.x
-PG_DIR=pgsql-9
-PG_ZIP=postgresql-$(PG_VER)-windows-binaries.zip
-
 $(PG_ZIP):
 	wget https://get.enterprisedb.com/postgresql/$(PG_ZIP)
 
 # Extract the minimal Postgres install from the distribution zip file
 $(PG_DIR): $(PG_ZIP)
-	unzip $(PG_ZIP) pgsql/bin/ pgsql/lib/ pgsql/share/ -d $(PG_DIR)
+	unzip $(PG_ZIP) pgsql/bin/* pgsql/lib/* pgsql/share/* -d $(PG_DIR)
 	mv $(PG_DIR)/pgsql/* $(PG_DIR)
 	rmdir $(PG_DIR)/pgsql
+# the origin.txt file serves two purposes: to show where the files
+# came from, and to workaround a bug in NSIS that it cannot scan a
+# directory with only subdirs in it (it needs a file)
+	echo $(PG_ZIP) > $(PG_DIR)/origin.txt
 
 allinone: standalone $(PG_DIR)
 	$(LAUNCH_MAKENSIS)

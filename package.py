@@ -123,7 +123,7 @@ class KVM(object):
         os.kill(self.pid,15)
 
     def start(self):
-        l="kvm -m 1G -net nic -net user,hostfwd=tcp:127.0.0.1:10022-:22 -drive".split(" ")
+        l="kvm -m 1G -net nic,model=rtl8139 -net user,hostfwd=tcp:127.0.0.1:10022-:22 -drive".split(" ")
         l.append('file=%s,snapshot=on'%self.image)
         l.append('-nographic')
         self.pid=os.spawnvp(os.P_NOWAIT, l[0], l)
@@ -148,22 +148,25 @@ class KVM(object):
 
 class KVMWinBuildAllInOneExe(KVM):
     def run(self):
-        self.login = 'vagrant'
+        self.login = 'Naresh'
         self.ssh("mkdir -p build")
-        self.rsync('%s/ vagrant@%s:build/server/'% (self.o.work, self.remoteip))
-        self.rsync('%s/ vagrant@%s:build/web/' % (self.o.work_client_web, self.remoteip))
+        self.rsync('%s/ Naresh@%s:build/server/'% (self.o.work, self.remoteip))
+        self.rsync('%s/ Naresh@%s:build/web/' % (self.o.work_client_web, self.remoteip))
         f = open('windows/Makefile.version','w')
         f.write('MAJOR_VERSION=%s\n' % (self.o.major,))
         f.write('MINOR_VERSION=%s\n' % (self.o.minor,))
         f.write('REVISION_VERSION=%s\n' % (1,))
         f.write('BUILD_VERSION=%s\n' % (self.o.timestamp,))
         f.close()
-        self.rsync('windows/ vagrant@%s:build/windows/' % (self.remoteip,))
+        self.rsync('windows/ Naresh@%s:build/windows/' % (self.remoteip,))
+        # This one uses a let's encrypt cert, which WinXP cannot handle.
+        self.ssh("PYTHONHTTPSVERIFY=0 /cygdrive/c/Python27/Scripts/pip --verbose --no-cache-dir install egenix-mx-base")
         self.ssh("/cygdrive/c/Python27/Scripts/pip --verbose --no-cache-dir install ./build/server")
         self.ssh("/cygdrive/c/Python27/Scripts/pip --verbose --no-cache-dir install ./build/web")
+	return
         self.ssh("PATH=/cygdrive/c/Python27:/cygdrive/c/Python27/Scripts:$PATH make -C build/windows allinone")
         # For an unknown reason it seems that files timestamp matters
-        self.rsync('vagrant@%s:build/windows/files/ %s/'% (self.remoteip, self.o.pkg,) ,'')
+        self.rsync('Naresh@%s:build/windows/files/ %s/'% (self.remoteip, self.o.pkg,) ,'')
         os.chmod(join(self.o.pkg, 'openerp-allinone-setup-%(major)s.%(minor)s-%(timestamp)s-r1.txt' % \
                                   dict([(x, getattr(self.o, x)) for x in ['major','minor','timestamp']])), 0644)
         print "KVMWinBuildExe.run(): done"
@@ -180,7 +183,7 @@ def options():
     op.add_option("-s", "--server-branch", default='lp:~openerp/openobject-server/6.1', help="%default")
     op.add_option("-y", "--client-web-branch", default='lp:~openerp/openobject-client-web/6.0', help="%default")
     op.add_option("", "--win-image", default='prereq.qcow2', help="%default")
-    op.add_option("", "--win-key", default='vagrant-key', help="%default")
+    op.add_option("", "--win-key", default='key', help="%default")
     (o, args) = op.parse_args()
     # derive other options
     o.repo = join(o.build, 'repo')
