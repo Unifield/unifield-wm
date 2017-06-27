@@ -40,7 +40,7 @@ rm -f nsis-3.01.zip
 mkdir s
 cd s
 wget http://nsis.sourceforge.net/mediawiki/images/c/c9/NSIS_Simple_Service_Plugin_1.30.zip
-unzip ../NSIS_Simple_Service_Plugin_1.30.zip
+unzip NSIS_Simple_Service_Plugin_1.30.zip
 mv SimpleSC.dll ../nsis-3.01/Plugins/x86-ansi/
 cd ..
 rm -rf s
