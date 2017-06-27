@@ -286,7 +286,7 @@ Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
     WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "db_port" $TextPostgreSQLPort
     WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "db_maxconn" 95
     # Always override pg_path by the correct instance choosen by the user (newly installed or not...)
-    WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "pg_path" "$INSTDIR\${PG_DIR}\bin"
+    WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "pg_path" "$INSTDIR\pgsql\bin"
 
     Push $R1
     ${Base64_Encode} "$TextOPENERPPWD"
@@ -315,7 +315,7 @@ Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
     nsExec::Exec 'net user openpgsvc /delete'
 
     SetOutPath "$INSTDIR"
-    File /r "${PG_DIR}"
+    File /r "pgsql"
 
     # Put the db admin user password into a file so that initdb can find it.
     GetTempFileName $0
@@ -325,7 +325,7 @@ Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
 
     # Init the DB
     Rmdir /r "$TextPostgreSQLInstPath"
-    nsExec::ExecToLog '${PG_DIR}\bin\initdb --pwfile "$0" \
+    nsExec::ExecToLog 'pgsql\bin\initdb --pwfile "$0" \
         -U "$TextPostgreSQLUsername" \
         --locale="English_United States" -E UTF8 \
         "$TextPostgreSQLInstPath"'
@@ -335,7 +335,7 @@ Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
     nsExec::Exec 'net user openpgsvc 0p3npgsvcPWD /add'
     SimpleSC::GrantServiceLogonPrivilege openpgsvc
     nsExec::ExecToLog 'icacls "$TextPostgreSQLInstPath" /c /t /grant openpgsvc:F'
-    nsExec::ExecToLog '${PG_DIR}\bin\pg_ctl register -N Postgres \
+    nsExec::ExecToLog 'pgsql\bin\pg_ctl register -N Postgres \
         -U openpgsvc -P 0p3npgsvcPWD -D "$TextPostgreSQLInstPath"'
 
     # Edit the postgresql.conf to limit listening and set port.
@@ -409,7 +409,7 @@ Section "Uninstall"
     nsExec::Exec 'sc stop Postgres'
     nsExec::Exec 'sc delete Postgres'
     nsExec::Exec 'net user openpgsvc /delete'
-    Rmdir /r "$INSTDIR/${PG_DIR}"
+    Rmdir /r "$INSTDIR/pgsql"
 
     DeleteRegKey HKLM "${UNINSTALL_REGISTRY_KEY}"
 SectionEnd

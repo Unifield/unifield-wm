@@ -5,11 +5,9 @@ SERVER_DIRECTORY=../server
 FILES_DIRECTORY=files
 
 PG_VER=9.6.3-2
-# Only update this on major versions, i.e. 9.x.y -> 10.x
-PG_DIR=pgsql-9
 PG_ZIP=postgresql-$(PG_VER)-windows-binaries.zip
 
-MAKENSIS_ARGUMENTS=/DMAJOR_VERSION=$(MAJOR_VERSION) /DMINOR_VERSION=$(MINOR_VERSION) /DREVISION_VERSION=$(REVISION_VERSION) /DBUILD_VERSION=$(BUILD_VERSION) /DPG_DIR=$(PG_DIR) /DPG_VER=$(PG_VER)
+MAKENSIS_ARGUMENTS=/DMAJOR_VERSION=$(MAJOR_VERSION) /DMINOR_VERSION=$(MINOR_VERSION) /DREVISION_VERSION=$(REVISION_VERSION) /DBUILD_VERSION=$(BUILD_VERSION) /DPG_VER=$(PG_VER)
 
 LAUNCH_PY2EXE=python -B setup.py py2exe
 LAUNCH_MAKENSIS=$(HOME)/nsis-3.01/makensis.exe $(MAKENSIS_ARGUMENTS) setup.nsi
@@ -54,16 +52,14 @@ $(PG_ZIP):
 	wget https://get.enterprisedb.com/postgresql/$(PG_ZIP)
 
 # Extract the minimal Postgres install from the distribution zip file
-$(PG_DIR): $(PG_ZIP)
-	unzip $(PG_ZIP) pgsql/bin/* pgsql/lib/* pgsql/share/* -d $(PG_DIR)
-	mv $(PG_DIR)/pgsql/* $(PG_DIR)
-	rmdir $(PG_DIR)/pgsql
+pgsql: $(PG_ZIP)
+	unzip $(PG_ZIP) pgsql/bin/* pgsql/lib/* pgsql/share/*
 # the origin.txt file serves two purposes: to show where the files
 # came from, and to workaround a bug in NSIS that it cannot scan a
 # directory with only subdirs in it (it needs a file)
-	echo $(PG_ZIP) > $(PG_DIR)/origin.txt
+	echo $(PG_ZIP) > pgsql/origin.txt
 
-allinone: standalone $(PG_DIR)
+allinone: standalone pgsql
 	$(LAUNCH_MAKENSIS)
 	cp ./openerp-*.exe $(FILES_DIRECTORY)/openerp-allinone-setup-$(MAJOR_VERSION).$(MINOR_VERSION)-$(BUILD_VERSION)-r$(REVISION_VERSION).exe
 	cp ./static/server-extra/PKGINFO $(FILES_DIRECTORY)/openerp-allinone-setup-$(MAJOR_VERSION).$(MINOR_VERSION)-$(BUILD_VERSION)-r$(REVISION_VERSION).txt
