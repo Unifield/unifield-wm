@@ -817,6 +817,8 @@ class client_creation(db_creation):
                 'default_credit_account_id': account_id,
                 'default_debit_account_id': account_id,
             }
+            get_ana = self.db.get('account.journal').onchange_type(False, j_type, False)
+            data['analytic_journal_id'] = get_ana.get('value', {}).get('analytic_journal_id', False)
             if j_type == 'cheque':
                 if not reg.get('bank'):
                     continue
