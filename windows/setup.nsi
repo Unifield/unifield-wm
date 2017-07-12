@@ -1,4 +1,4 @@
-#####################################################################################
+﻿#####################################################################################
 #
 # Copyright (c) 2004-TODAY OpenERP S.A. (http://www.openerp.com) All Rights Reserved.
 #
@@ -116,7 +116,6 @@ RequestExecutionLevel admin
 !insertmacro GetParameters
 !insertmacro GetOptions
 
-Var Option_AllInOne
 Var cmdLineParams
 
 Var CmdLPostgreSQLInstPath
@@ -310,9 +309,9 @@ Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
 
     # Install Postgres
 
-    nsExec::Exec 'sc stop Postgres'
-    nsExec::Exec 'sc delete Postgres'
-    nsExec::Exec 'net user openpgsvc /delete'
+    nsExec::ExecToLog 'sc stop Postgres'
+    nsExec::ExecToLog 'sc delete Postgres'
+    nsExec::ExecToLog 'net user openpgsvc /delete'
 
     SetOutPath "$INSTDIR"
     File /r "pgsql"
@@ -326,13 +325,14 @@ Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
     # Init the DB
     Rmdir /r "$TextPostgreSQLInstPath"
     nsExec::ExecToLog 'pgsql\bin\initdb --pwfile "$0" \
+	--data-checksums -A md5 \
         -U "$TextPostgreSQLUsername" \
         --locale="English_United States" -E UTF8 \
         "$TextPostgreSQLInstPath"'
     Delete $0
 
     # Create the service user and service
-    nsExec::Exec 'net user openpgsvc 0p3npgsvcPWD /add'
+    nsExec::ExecToLog 'net user openpgsvc 0p3npgsvcPWD /add'
     SimpleSC::GrantServiceLogonPrivilege openpgsvc
     nsExec::ExecToLog 'icacls "$TextPostgreSQLInstPath" /c /t /grant openpgsvc:F'
     nsExec::ExecToLog 'pgsql\bin\pg_ctl register -N Postgres \
@@ -355,10 +355,10 @@ Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
     FileClose $R0
     Pop $R0
 
-    nsExec::Exec 'net start Postgres'
+    nsExec::ExecToLog 'net start Postgres'
     sleep 2
-    nsExec::Exec "net stop openerp-server-6.0"
-    nsExec::Exec "net start openerp-server-6.0"
+    nsExec::ExecToLog "net stop openerp-server-6.0"
+    nsExec::ExecToLog "net start openerp-server-6.0"
 SectionEnd
 
 Section $(TITLE_OpenERP_Web_Client) SectionOpenERP_Web_Client
@@ -406,9 +406,9 @@ Section "Uninstall"
     ExecWait '"$0" /S'
 
     # Uninstall Postgres
-    nsExec::Exec 'sc stop Postgres'
-    nsExec::Exec 'sc delete Postgres'
-    nsExec::Exec 'net user openpgsvc /delete'
+    nsExec::ExecToLog 'sc stop Postgres'
+    nsExec::ExecToLog 'sc delete Postgres'
+    nsExec::ExecToLog 'net user openpgsvc /delete'
     Rmdir /r "$INSTDIR/pgsql"
 
     DeleteRegKey HKLM "${UNINSTALL_REGISTRY_KEY}"
@@ -422,8 +422,6 @@ Function .onInit
 
     Pop $R0
 
-    StrCpy $Option_AllInOne 0
-
     StrCpy $TextPostgreSQLHostname ${DEFAULT_POSTGRESQL_HOSTNAME}
     StrCpy $TextPostgreSQLPort ${DEFAULT_POSTGRESQL_PORT}
     StrCpy $TextPostgreSQLUsername ${DEFAULT_POSTGRESQL_USERNAME}
@@ -435,20 +433,6 @@ Function .onInit
     StrCpy $TextOPENERPDROPPWD ${DEFAULT_OPENERP_DROP_PWD}
     StrCpy $TextOPENERPBKPPWD ${DEFAULT_OPENERP_BKP_PWD}
     StrCpy $TextOPENERPRESTOREPWD ${DEFAULT_OPENERP_RESTORE_PWD}
-
-    Push $R0
-    ${GetOptions} $cmdLineParams '/allinone' $R0
-    IfErrors +2 0
-    StrCpy $Option_AllInOne 1
-    Pop $R0
-
-    StrCmp $Option_AllInOne 1 AllInOneMode
-    StrCmp $Option_AllInOne 0 NoAllInOneMode
-
-    AllInOneMode:
-        MessageBox MB_OK|MB_ICONINFORMATION "All In One"
-
-    NoAllInOneMode:
 
     !insertmacro MUI_LANGDLL_DISPLAY
 
