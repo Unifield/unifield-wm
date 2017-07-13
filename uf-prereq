@@ -6,7 +6,7 @@ export PATH
 
 set -x -e
 
-# The VC Redist for VC2008
+# The VC Redist for VC2008, required for SimpleSC.dll below
 chmod +x lib/vcredist_x86.exe
 ./lib/vcredist_x86.exe /q
 
