@@ -1,0 +1,5 @@
+msf
+prereq.qcow2
+winxp.qcow2
+windows/Makefile.version
+windows/static/server-extra/PKGINFO
