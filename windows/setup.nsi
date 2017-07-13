@@ -118,7 +118,6 @@ RequestExecutionLevel admin
 
 Var cmdLineParams
 
-Var CmdLPostgreSQLInstPath
 Var TextPostgreSQLInstPath
 Var TextPostgreSQLHostname
 Var TextPostgreSQLPort
@@ -307,6 +306,13 @@ Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
     File /r "static\server-extra"
     CopyFiles "$TEMP\server-extra\*.*" "$INSTDIR\Server"
 
+    # Install the MSVC 2013 redistributable, needed by PostgreSQL
+
+    SetOutPath "$TEMP"
+    File vcredist_x86.exe
+    nsExec::ExecToLog '$TEMP\vcredist_x86.exe /install /quiet /norestart'
+    Delete "$TEMP\vcredist_x86.exe"
+
     # Install Postgres
 
     nsExec::ExecToLog 'sc stop Postgres'
@@ -322,8 +328,11 @@ Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
     FileWrite $1 "$TextPostgreSQLPassword"
     FileClose $1
 
-    # Init the DB
-    Rmdir /r "$TextPostgreSQLInstPath"
+    # Init the DB, unless it already exists.
+    ${If} ${FileExists} "$TextPostgreSQLInstPath\*"
+        MessageBox MB_OK "Database directory $TextPostgreSQLInstPath already exists. Stopping installation."
+        Abort
+    ${EndIf}
     nsExec::ExecToLog 'pgsql\bin\initdb --pwfile "$0" \
 	--data-checksums -A md5 \
         -U "$TextPostgreSQLUsername" \
@@ -338,7 +347,7 @@ Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
     nsExec::ExecToLog 'pgsql\bin\pg_ctl register -N Postgres \
         -U openpgsvc -P 0p3npgsvcPWD -D "$TextPostgreSQLInstPath"'
 
-    # Edit the postgresql.conf to limit listening and set port.
+    # Edit the postgresql.conf
 
     Push $R0
     FileOpen $R0 "$TextPostgreSQLInstPath\postgresql.conf" a
@@ -348,8 +357,16 @@ Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
     # add \r\n
     FileWriteByte $R0 "13"
     FileWriteByte $R0 "10"
+
     FileWrite $R0 "port = $TextPostgreSQLPort"
-    # add \r\n
+    FileWriteByte $R0 "13"
+    FileWriteByte $R0 "10"
+
+    # The Unifield IT manual says a Unifield server should have
+    # minimum 4 gig ram, suggested 8 gig of ram.
+    # For why I chose 4gb*0.25 = 1024MB see:
+    # http://thebuild.com/blog/2017/06/09/shared_buffers-is-not-a-sensitive-setting/
+    FileWrite $R0 "shared_buffers = 1024MB"
     FileWriteByte $R0 "13"
     FileWriteByte $R0 "10"
     FileClose $R0
@@ -427,7 +444,6 @@ Function .onInit
     StrCpy $TextPostgreSQLUsername ${DEFAULT_POSTGRESQL_USERNAME}
     StrCpy $TextPostgreSQLPassword ${DEFAULT_POSTGRESQL_PASSWORD}
     StrCpy $TextPostgreSQLInstPath "${DEFAULT_POSTGRESQL_INSTPATH}"
-    StrCpy $CmdLPostgreSQLInstPath "${DEFAULT_POSTGRESQL_INSTPATH}"
 
     StrCpy $TextOPENERPPWD ${DEFAULT_OPENERP_PASSWORD}
     StrCpy $TextOPENERPDROPPWD ${DEFAULT_OPENERP_DROP_PWD}
@@ -443,7 +459,6 @@ Function .onInit
     ${GetOptions} $cmdLineParams '/PGINSTDIR=' $R0
     IfErrors +3 0
     StrCpy $TextPostgreSQLInstPath $R0
-    StrCpy $CmdLPostgreSQLInstPath $R0
     Pop $R0
 
 FunctionEnd
@@ -466,7 +481,6 @@ Function ShowPostgreSQL
     Pop $0
 
     ; setup and update default postgresql install path
-    StrCpy $TextPostgreSQLInstPath "$CmdLPostgreSQLInstPath"
     ${NSD_CreateLabel} 0 55 60u 12u $(DESC_PostgreSQL_InstPath)
     Pop $0
     ${NSD_CreateText} 100 55 140u 12u $TextPostgreSQLInstPath
