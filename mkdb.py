@@ -826,6 +826,15 @@ class client_creation(db_creation):
 
             reg[j_type] = self.db.get('account.journal').create(data)
 
+    def test_95_create_stock_cu(self):
+        if isinstance(self, hqn_creation):
+            return True
+
+        stock_wiz = self.db.get('stock.location.configuration.wizard')
+        w_id = stock_wiz.create({'location_usage': 'consumption_unit', 'location_type': 'internal', 'location_name': 'IntCU'})
+        stock_wiz.confirm_creation(w_id)
+        w_id = stock_wiz.create({'location_usage': 'consumption_unit', 'location_type': 'customer', 'location_name': 'ExtCU'})
+        stock_wiz.confirm_creation(w_id)
 
     def test_99_add_shortcut(self):
         self.db.connect('admin')
