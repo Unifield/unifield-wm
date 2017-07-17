@@ -6,7 +6,8 @@ export PATH
 
 set -x -e
 
-# The VC Redist for VC2008, required for SimpleSC.dll below
+# The VC Redist for VC2008, required for Python on the
+# WinXP builder machine.
 chmod +x lib/vcredist_x86.exe
 ./lib/vcredist_x86.exe /q
 
@@ -28,7 +29,7 @@ rm -f get-pip.py
 pip install py2exe_py2 pytz
 
 # Install the packages which are not installable via "pip install"
-# and instead have to come from WHL.
+# and instead have to come from a .whl file.
 pip install lib/whl/*
 rm -rf lib
 

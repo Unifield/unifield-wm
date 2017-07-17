@@ -1,0 +1,47 @@
+#!/bin/sh
+
+if [ -z "$1" -o -z "$2" ]; then
+   echo "usage: $0 <from-ver> <to-ver>"
+   echo " e.g. ./mk-pg-patch 9.6.3-2 9.6.4-1"
+   exit 1
+fi
+
+set -e
+
+from=$1
+from2=`echo $from | awk -F- '{print $1}'`
+to=$2
+to2=`echo $to | awk -F- '{print $1}'`
+out=pgsql-$from2-$to2-patch
+
+# fetch
+
+base=https://get.enterprisedb.com/postgresql
+for ver in $from $to; do
+    file=postgresql-$ver-windows-binaries.zip
+    if [ ! -f $file ]; then
+	wget $base/$file
+    fi
+done
+
+# extract
+rm -rf pgsql $from2 $to2
+unzip postgresql-$from-windows-binaries.zip \
+      pgsql/bin/* pgsql/lib/* pgsql/share/*
+mv pgsql $from2
+unzip postgresql-$to-windows-binaries.zip \
+      pgsql/bin/* pgsql/lib/* pgsql/share/*
+mv pgsql $to2
+
+# find the tool to make patches
+
+bsdiff=msf/repo/lpunifield-server_trunk/bin/bsdifftree.py
+if [ ! -f $bsdiff ]; then
+    echo "Required file $bsdiff not found."
+    echo "You need to build an AIO in this directory before this script will work."
+    echo "Run: ./aio.sh"
+    exit 1
+fi
+
+# make it!
+python $bsdiff mkpatch $from2 $to2 $out
