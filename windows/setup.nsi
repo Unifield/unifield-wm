@@ -338,7 +338,12 @@ Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
         -U "$TextPostgreSQLUsername" \
         --locale="English_United States" -E UTF8 \
         "$TextPostgreSQLInstPath"'
+    Pop $1
     Delete $0
+    ${If} $1 != 0
+        MessageBox MB_OK "Failed to create database in ${TextPostgreSQLInstPath}. Stopping installation."
+        Abort
+    ${Endif}
 
     # Create the service user and service
     nsExec::ExecToLog 'net user openpgsvc 0p3npgsvcPWD /add'
