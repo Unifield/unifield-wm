@@ -269,42 +269,6 @@ InstType $(Profile_Web_Client)
 
 Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
     SectionIn 1 2
-    SetOutPath "$TEMP"
-    File "files\${OPENERP_SERVER_SETUP}"
-    ExecWait '"$TEMP\${OPENERP_SERVER_SETUP}" /S /D=$INSTDIR\Server'
-
-    Push $R0
-    ${Base64_Encode} "$TextPostgreSQLPassword"
-    Pop $R0
-
-# If there is a previous install of the OpenERP Server, keep the login/password from the config file
-    WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "db_host" $TextPostgreSQLHostname
-    WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "db_user" $TextPostgreSQLUsername
-    WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "db_password" $R0
-    WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "db_port" $TextPostgreSQLPort
-    WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "db_maxconn" 95
-    # Always override pg_path by the correct instance choosen by the user (newly installed or not...)
-    WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "pg_path" "$INSTDIR\pgsql\bin"
-
-    Push $R1
-    ${Base64_Encode} "$TextOPENERPPWD"
-    Pop $R1
-    WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "admin_passwd" $R1
-    Push $R2
-    ${Base64_Encode} "$TextOPENERPDROPPWD"
-    Pop $R2
-    WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "admin_dropdb_passwd" $R2
-    Push $R3
-    ${Base64_Encode} "$TextOPENERPBKPPWD"
-    Pop $R3
-    WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "admin_bkpdb_passwd" $R3
-    Push $R4
-    ${Base64_Encode} "$TextOPENERPRESTOREPWD"
-    Pop $R4
-    WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "admin_restoredb_passwd" $R4
-
-    File /r "static\server-extra"
-    CopyFiles "$TEMP\server-extra\*.*" "$INSTDIR\Server"
 
     # Install the MSVC 2013 redistributable, needed by PostgreSQL
 
@@ -341,7 +305,7 @@ Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
     Pop $1
     Delete $0
     ${If} $1 != 0
-        MessageBox MB_OK "Failed to create database in ${TextPostgreSQLInstPath}. Stopping installation."
+        MessageBox MB_OK "Failed to create database in $TextPostgreSQLInstPath. Stopping installation."
         Abort
     ${Endif}
 
@@ -379,7 +343,44 @@ Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
 
     nsExec::ExecToLog 'net start Postgres'
     sleep 2
-    nsExec::ExecToLog "net stop openerp-server-6.0"
+
+    # Install OpenERP Server
+    SetOutPath "$TEMP"
+    File "files\${OPENERP_SERVER_SETUP}"
+    ExecWait '"$TEMP\${OPENERP_SERVER_SETUP}" /S /D=$INSTDIR\Server'
+
+    Push $R0
+    ${Base64_Encode} "$TextPostgreSQLPassword"
+    Pop $R0
+
+# If there is a previous install of the OpenERP Server, keep the login/password from the config file
+    WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "db_host" $TextPostgreSQLHostname
+    WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "db_user" $TextPostgreSQLUsername
+    WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "db_password" $R0
+    WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "db_port" $TextPostgreSQLPort
+    WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "db_maxconn" 95
+    # Always override pg_path by the correct instance choosen by the user (newly installed or not...)
+    WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "pg_path" "$INSTDIR\pgsql\bin"
+
+    Push $R1
+    ${Base64_Encode} "$TextOPENERPPWD"
+    Pop $R1
+    WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "admin_passwd" $R1
+    Push $R2
+    ${Base64_Encode} "$TextOPENERPDROPPWD"
+    Pop $R2
+    WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "admin_dropdb_passwd" $R2
+    Push $R3
+    ${Base64_Encode} "$TextOPENERPBKPPWD"
+    Pop $R3
+    WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "admin_bkpdb_passwd" $R3
+    Push $R4
+    ${Base64_Encode} "$TextOPENERPRESTOREPWD"
+    Pop $R4
+    WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "admin_restoredb_passwd" $R4
+
+    File /r "static\server-extra"
+    CopyFiles "$TEMP\server-extra\*.*" "$INSTDIR\Server"
     nsExec::ExecToLog "net start openerp-server-6.0"
 SectionEnd
 
