@@ -271,7 +271,6 @@ Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
     SectionIn 1 2
 
     # Install the MSVC 2013 redistributable, needed by PostgreSQL
-
     SetOutPath "$TEMP"
     File vcredist_x86.exe
     nsExec::ExecToLog '$TEMP\vcredist_x86.exe /install /quiet /norestart'
@@ -304,8 +303,8 @@ Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
         "$TextPostgreSQLInstPath"'
     Pop $1
     Delete $0
-    ${If} $1 != 0
-        MessageBox MB_OK "Failed to create database in $TextPostgreSQLInstPath. Stopping installation."
+    ${If} "$1" != "0"
+        MessageBox MB_OK "Failed to create database in $TextPostgreSQLInstPath. Stopping installation. (Result code $1)"
         Abort
     ${Endif}
 
@@ -328,6 +327,10 @@ Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
     FileWriteByte $R0 "10"
 
     FileWrite $R0 "port = $TextPostgreSQLPort"
+    FileWriteByte $R0 "13"
+    FileWriteByte $R0 "10"
+
+    FileWrite $R0 "logging_collector = on"
     FileWriteByte $R0 "13"
     FileWriteByte $R0 "10"
 

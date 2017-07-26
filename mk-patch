@@ -1,0 +1,47 @@
+#!/bin/sh
+
+echo "This script is not working for now."
+echo "The problem is that the AIO cannot be installed inside of XP."
+exit 1
+
+# Driver for mk-patch.py, which is run from INSIDE of the builder VM.
+
+if [ -z "$1" -o -z "$2" ]; then
+	echo "usage: $0 from-exe to-exe"
+	exit 1
+fi
+
+from=$1
+to=$2
+
+kvm -m 1G -net nic,model=rtl8139 -net user,hostfwd=tcp:127.0.0.1:10022-:22 -drive file=prereq.qcow2,snapshot=on -nographic &
+pid=$!
+sleep 15
+
+# Put the script and the two files on the VM
+echo "Copying the files over to the VM."
+scp -P 10022 -i key mk-patch.py \
+	$from $to \
+	Naresh@localhost:
+
+from=`basename $from`
+to=`basename $to`
+
+echo ssh -p 10022 -i key Naresh@localhost chmod +x $from $fo
+ssh -p 10022 -i key Naresh@localhost chmod +x $from $fo
+
+echo ssh -p 10022 -i key Naresh@localhost /cygdrive/c/Python27/python mk-patch.py $from $to
+ssh -p 10022 -i key Naresh@localhost /cygdrive/c/Python27/python mk-patch.py $from $to
+
+rm patch.zip
+echo scp -P 10022 -i key Naresh@localhost:patch.zip .
+scp -P 10022 -i key Naresh@localhost:patch.zip .
+
+echo "Waiting for the VM to exit."
+kill -15 $pid
+wait
+echo "VM exited."
+
+echo 
+echo "The new patch is in patch.zip. Rename it as desired."
+ls -l patch.zip
