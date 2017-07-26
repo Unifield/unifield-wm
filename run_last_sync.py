@@ -47,9 +47,9 @@ if __name__ == '__main__':
                 server=client,
                 name=name,
                 synchro={
-                    'protocol' : 'netrpc',
+                    'protocol' : 'xmlrpc',
                     'host' : config.server_host,
-                    'port' : config.netrpc_port,
+                    'port' : config.server_port,
                     'database' : Synchro.name,
                     'login' : name,
                     'password' : name,

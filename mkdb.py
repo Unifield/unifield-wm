@@ -242,9 +242,9 @@ class db_creation(object):
                 server=client,
                 name=name,
                 synchro={
-                    'protocol' : 'netrpc',
+                    'protocol' : 'xmlrpc',
                     'host' : config.server_host,
-                    'port' : config.netrpc_port,
+                    'port' : config.server_port,
                     'database' : Synchro.name,
                     'login' : sync_user,
                     'password' : sync_user,
