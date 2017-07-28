@@ -27,13 +27,13 @@ def should_skip(name):
                 'release.py',
                 # these are related to the AIO and should not go in the patch
                 'Uninstall.exe',
-                'web/Uninstall.exe',
+                os.path.join('web', 'Uninstall.exe'),
                 'setup.py',
                 'setup_py2exe_custom.py',
                 # these config files on the end-user installs should never
                 # be overwritten
                 'openerp-server.conf',
-                'web/conf/openerp-web-oc.cfg',
+                os.path.join('web', 'conf', 'openerp-web-oc.cfg'),
             ])
 
 # Change the directory from the filesystem into a destination directory in
@@ -42,7 +42,7 @@ def should_skip(name):
 
 def dirmap(directory):
     directory = directory.replace(sys.argv[2], '')
-    if directory.startswith('/'):
+    if directory.startswith(os.path.sep):
         directory = directory[1:]
     # unpdater.py expects lower case
     if directory.startswith('Web'):
@@ -50,7 +50,7 @@ def dirmap(directory):
     # change directory Server/foo to foo
     if directory == 'Server':
         directory = ''
-    elif directory.startswith('Server/'):
+    elif directory.startswith('Server'+os.path.sep):
         directory = directory[7:]
     return directory
 
@@ -71,8 +71,8 @@ def dirmap(directory):
 #   if we did not already see it:
 #     add to patch file
 
-old = r'c:\Program Files\msf\Unifield-old'
-new = r'c:\Program Files\msf\Unifield'
+old = r'c:\Program Files (x86)\msf\Unifield-old'
+new = r'c:\Program Files (x86)\msf\Unifield'
 
 print "Unpacking %s" % from_exe
 sys.stdout.flush()
@@ -80,8 +80,8 @@ subprocess.call([ from_exe, '/S', r'/PGINSTDIR=c:\from_db' ])
 
 print "Stopping servers."
 sys.stdout.flush()
-subprocess.call('net stop openerp-server-6.0', shell=True)
-subprocess.call('net stop openerp-web-6.0', shell=True)
+subprocess.call('net stop openerp-server-6.0 /y', shell=True)
+subprocess.call('net stop openerp-web-6.0 /y', shell=True)
 
 # it gets installed into new, so move it to old, so we can install
 # to_exe into new
@@ -99,7 +99,7 @@ zf = zipfile.ZipFile('patch.zip', mode='w', compression=zipfile.ZIP_DEFLATED)
 
 for (dirpath, dirnames, filenames) in os.walk(old):
     relpath = dirpath.replace(old, '')
-    if len(relpath) > 0 and relpath[0] == '/':
+    if len(relpath) > 0 and relpath[0] == os.path.sep:
         relpath = relpath[1:]
     if relpath == 'ServerLog':
         continue
@@ -119,7 +119,7 @@ for (dirpath, dirnames, filenames) in os.walk(old):
 
 for (dirpath, dirnames, filenames) in os.walk(new):
     relpath = dirpath.replace(new, '')
-    if len(relpath) > 0 and relpath[0] == '/':
+    if len(relpath) > 0 and relpath[0] == os.path.sep:
         relpath = relpath[1:]
     if relpath == 'ServerLog':
         continue
@@ -155,4 +155,5 @@ zf.writestr('release.py', ''.join(out))
 zf.writestr('delete.txt', '\n'.join(deleted))
 zf.close()
 
-print "Done. The resulting patch is in the VM in ~/patch.zip. Use scp to fetch it."
+print "Done. The resulting patch is:"
+subprocess.call("dir patch.zip", shell=True)
