@@ -9,7 +9,6 @@ import zipfile
 import time
 import re
 import filecmp
-import tempfile
 import os
 import subprocess
 
@@ -34,7 +33,7 @@ def should_skip(name):
                 # be overwritten
                 'openerp-server.conf',
                 os.path.join('web', 'conf', 'openerp-web-oc.cfg'),
-            ])
+    ])
 
 # Change the directory from the filesystem into a destination directory in
 # the patchfile (this mapping was set by the implementation of
@@ -103,6 +102,8 @@ for (dirpath, dirnames, filenames) in os.walk(old):
         relpath = relpath[1:]
     if relpath == 'ServerLog':
         continue
+    if relpath == 'pgsql':
+        continue
     for f in filenames:
         oldf = os.path.join(dirpath, f)
         newf = os.path.join(new, relpath, f)
@@ -123,6 +124,8 @@ for (dirpath, dirnames, filenames) in os.walk(new):
         relpath = relpath[1:]
     if relpath == 'ServerLog':
         continue
+    if relpath == 'pgsql':
+        continue
     for f in filenames:
         newf = os.path.join(new, relpath, f)
         dest = os.path.join(dirmap(relpath), f)
@@ -130,7 +133,7 @@ for (dirpath, dirnames, filenames) in os.walk(new):
             continue
         print "write add %s" % dest
         zf.write(newf, dest)
-        
+
 # special case for release.py: add the date onto the end of the
 # given version
 version = 'unknown'
@@ -142,7 +145,7 @@ for line in lines:
         exec(line)
     else:
         out += line
-                            
+
 if not re.match('.*-[0-9]{8}-[0-9]{6}$', version):
     version += time.strftime('-%Y%m%d-%H%M%S')
     print "Version inserted into the patch is: %s" % version
