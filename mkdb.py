@@ -775,6 +775,12 @@ class client_creation(db_creation):
         month = time.strftime('%m')
         # search current fiscalyear
         fy_ids = self.db.search_data('account.fiscalyear', [('date_start', '<=', today), ('date_stop', '>=', today)])
+        if not fy_ids:
+            create_fy_wiz = self.db.get('account.period.create')
+            wiz_id = create_fy_wiz.create({'fiscalyear': 'current'})
+            create_fy_wiz.account_period_create_periods([wiz_id])
+            fy_ids = self.db.search_data('account.fiscalyear', [('date_start', '<=', today), ('date_stop', '>=', today)])
+
         assert len(fy_ids) > 0, "No fiscalyear found!"
         period_ids = self.db.search_data('account.period', [('fiscalyear_id', 'in', fy_ids), ('number', '<=', month), ('state', '=', 'created')])
         # change all period by draft state (should use action_set_state but openerplib doesn't give way to do this)
