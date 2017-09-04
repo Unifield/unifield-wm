@@ -33,6 +33,13 @@ unzip postgresql-$to-windows-binaries.zip \
       pgsql/bin/* pgsql/lib/* pgsql/share/*
 mv pgsql $to2
 
+# Special case: add msvcr120.dll into 9.x, because
+# they depend on it, and during patching we don't have a
+# change to run the MSVC runtime installer like we do
+# during PG install.
+[ "$from2" != "8.4.17" ] && cp windows/msvcr120.dll $from2/bin
+cp windows/msvcr120.dll $to2/bin
+
 # find the tool to make patches
 
 bsdiff=msf/repo/lpunifield-server_trunk/bin/bsdifftree.py
