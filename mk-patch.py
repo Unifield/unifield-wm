@@ -124,7 +124,7 @@ for (dirpath, dirnames, filenames) in os.walk(new):
         relpath = relpath[1:]
     if relpath == 'ServerLog':
         continue
-    if relpath == 'pgsql':
+    if relpath.startswith('pgsql'):
         continue
     for f in filenames:
         newf = os.path.join(new, relpath, f)
