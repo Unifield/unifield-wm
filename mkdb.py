@@ -1045,6 +1045,10 @@ class coordon_creation(client_creation):
     def test_61_install_data_client(self):
         self.db.connect('admin')
         self.db.module('msf_sync_data_coordo').install().do().set_notinstalled()
+        partner_obj = self.db.get('res.partner')
+        p_ids = partner_obj.search([('name', '=', 'ESC'), ('active', '=', False)])
+        if p_ids:
+            partner_obj.write(p_ids, {'active': True})
 
 
 # Replicable class to create project n
