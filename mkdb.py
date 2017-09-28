@@ -37,6 +37,14 @@ master_dir = '/'.join(os.path.realpath(__file__).split('/')[0:-1]+['master_dump'
 master_prefix_name = 'msf_profile_sync_so'
 dir_to_dump = os.path.join(config.dump_dir, time.strftime('%Y%m%d%H%M'))
 
+def get_file_from_source(filename):
+    if filename:
+        last = filename.split('/')[-1]
+        newfile = os.path.expanduser('~/unifield-server/bin/addons/msf_profile/user_rights/%s' % last)
+        if os.path.exists(newfile):
+            return newfile
+    return filename
+
 def warn(*messages):
     sys.stderr.write(" ".join(messages)+"\n")
 
@@ -953,7 +961,7 @@ class hqn_creation(client_creation, unittest.TestCase):
             return
 
         for filename in config.load_extra_files:
-            self.import_csv(filename)
+            self.import_csv(get_file_from_source(filename))
 
     @unittest.skipIf(skipLoadUACFile, "Load UAC File desactivated")
     def test_45_load_uac_file(self):
@@ -962,7 +970,7 @@ class hqn_creation(client_creation, unittest.TestCase):
 
         self.db.connect('admin')
 
-        f = open(config.load_uac_file)
+        f = open(get_file_from_source(config.load_uac_file))
         data = base64.encodestring(f.read())
         f.close()
 
