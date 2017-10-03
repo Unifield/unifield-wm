@@ -17,6 +17,7 @@ import uuid
 
 import argparse
 from subprocess import call
+import subprocess
 
 import base64
 import csv
@@ -467,6 +468,7 @@ class db_creation(object):
         self.db.restore_db_file(self.db.name, dump)
         # wait process
         time.sleep(10)
+
 
 # Run a last sync after all synchronization
 class last_sync(unittest.TestCase):
@@ -1103,9 +1105,15 @@ class verbose(unittest.TestCase):
             warn("-" * 40)
 
 
+# Check SQL injection flaws existance
+class sql_injection(unittest.TestCase):
+    def test_11_test_sql_injection_flaw(self):
+        path_to_scan = os.path.join(config.source_path, 'unifield-server')
+        injection_script = os.path.join(path_to_scan, 'tools', 'find_sql_injection.py')
+        subprocess.check_call([injection_script, str(path_to_scan)])
 
 # Base Install
-test_cases = [verbose, update_branches, server_creation]
+test_cases = [verbose, sql_injection, update_branches, server_creation]
 
 # Create HQ classes
 if not hasattr(config, 'instance_tree') or not config.instance_tree:
