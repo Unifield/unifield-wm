@@ -24,6 +24,7 @@ def should_skip(name):
             name in [
                 # this will be added at the end of this script instead
                 'release.py',
+                'unifield-version.txt',
                 # these are related to the AIO and should not go in the patch
                 'Uninstall.exe',
                 os.path.join('web', 'Uninstall.exe'),
@@ -73,9 +74,10 @@ def dirmap(directory):
 old = r'c:\Program Files (x86)\msf\Unifield-old'
 new = r'c:\Program Files (x86)\msf\Unifield'
 
-print "Unpacking %s" % from_exe
 sys.stdout.flush()
-subprocess.call([ from_exe, '/S', r'/PGINSTDIR=c:\from_db' ])
+cmd_call = [from_exe, '/S', r'/PGINSTDIR=c:\from_db']
+print "Unpacking %s" % (' '.join(cmd_call),)
+subprocess.call(cmd_call)
 
 print "Stopping servers."
 sys.stdout.flush()
@@ -88,9 +90,10 @@ print "Moving to %s" % old
 sys.stdout.flush()
 os.rename(new, old)
 
-print "Unpacking %s" % to_exe
+cmd_call = [to_exe, '/S', r'/PGINSTDIR=c:\to_db']
+print "Unpacking: %s" % (' '.join(cmd_call), )
 sys.stdout.flush()
-subprocess.call([ to_exe, '/S', r'/PGINSTDIR=c:\to_db' ])
+subprocess.call(cmd_call)
 
 deleted = []
 seen = {}
