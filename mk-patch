@@ -1,47 +1,51 @@
-#!/bin/sh
+#!/bin/bash
 
-echo "This script is not working for now."
-echo "The problem is that the AIO cannot be installed inside of XP."
-exit 1
-
+ssh_user=JFTEMP
+ssh_host=192.168.122.156
+ssh_port=22
 # Driver for mk-patch.py, which is run from INSIDE of the builder VM.
 
 if [ -z "$1" -o -z "$2" ]; then
-	echo "usage: $0 from-exe to-exe"
-	exit 1
+    echo "usage: $0 from-exe to-exe"
+    exit 1
 fi
 
 from=$1
 to=$2
 
-kvm -m 1G -net nic,model=rtl8139 -net user,hostfwd=tcp:127.0.0.1:10022-:22 -drive file=prereq.qcow2,snapshot=on -nographic &
-pid=$!
-sleep 15
+
+#kvm -m 1G -net nic,model=rtl8139 -net user,hostfwd=tcp:127.0.0.1:10022-:22 -drive file=prereq.qcow2,snapshot=on -nographic &
+#pid=$!
+#sleep 15
+
+ssh_args="-p $ssh_port $ssh_user@$ssh_host"
+ssh $ssh_args -- net stop Postgres /y
+ssh $ssh_args -- rm -fr /cygdrive/c/to_db/
+ssh $ssh_args -- rm -fr "/cygdrive/c/Program\ Files\ \(x86\)/msf"
 
 # Put the script and the two files on the VM
 echo "Copying the files over to the VM."
-scp -P 10022 -i key mk-patch.py \
+scp -P $ssh_port mk-patch.py \
 	$from $to \
-	Naresh@localhost:
+	$ssh_user@$ssh_host:
 
 from=`basename $from`
 to=`basename $to`
 
-echo ssh -p 10022 -i key Naresh@localhost chmod +x $from $fo
-ssh -p 10022 -i key Naresh@localhost chmod +x $from $fo
+split_to=(${to//-/ })
+version=${split_to[3]}
+echo ssh $ssh_args chmod +x $from $fo
+ssh $ssh_args chmod +x $from $fo
 
-echo ssh -p 10022 -i key Naresh@localhost /cygdrive/c/Python27/python mk-patch.py $from $to
-ssh -p 10022 -i key Naresh@localhost /cygdrive/c/Python27/python mk-patch.py $from $to
+echo ssh $ssh_args /cygdrive/c/Python27/python mk-patch.py $from $to
+ssh $ssh_args /cygdrive/c/Python27/python mk-patch.py $from $to
 
-rm patch.zip
-echo scp -P 10022 -i key Naresh@localhost:patch.zip .
-scp -P 10022 -i key Naresh@localhost:patch.zip .
+rm -f ${version}.patch.zip
+echo scp -P $ssh_port $ssh_user@$ssh_host:patch.zip ${version}.patch.zip
+scp -P $ssh_port $ssh_user@$ssh_host:patch.zip ${version}.patch.zip
 
-echo "Waiting for the VM to exit."
-kill -15 $pid
-wait
-echo "VM exited."
 
 echo 
 echo "The new patch is in patch.zip. Rename it as desired."
-ls -l patch.zip
+ls -l ${version}.patch.zip
+md5sum ${version}.patch.zip
