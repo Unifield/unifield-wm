@@ -980,12 +980,6 @@ class hqn_creation(client_creation, unittest.TestCase):
             wiz.do_process_uac([rec_id])
         except:
             pass
-        user_obj = self.db.get('res.users')
-        user_ids = user_obj.search([('login', '!=', 'admin')])
-        if user_ids:
-            user_obj.unlink(user_ids)
-        #wizard = self.db.wizard('user.access.configurator', {'file_to_import_uac': data})
-        #wizard.do_process_uac()
 
     def test_70_create_intersection(self):
         partner = self.db.get('res.partner')
