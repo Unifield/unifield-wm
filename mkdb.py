@@ -489,18 +489,20 @@ class last_sync(unittest.TestCase):
                 tc.sync()
 
 class activate_inter_partner(unittest.TestCase):
-    test_cases = []
 
     def test_99_activate_inter_partner(self):
-        if not self.test_cases:
-            self.skipTest("No database to update")
-        for tc in self.test_cases:
+        for tc in test_cases:
             if issubclass(tc, (coordon_creation, projectn_creation)):
                 db = tc.db
                 db.connect('admin')
-                partner_ids = db.get('res_partner').search([('partner_type', 'in', ['section', 'intermission']), ('active', '=', False), ('name', '!=', db.name)])
+                p_obj = db.get('res.partner')
+                same_mission_ids = p_obj.search([('partner_type', '=', 'internal')])
+                exclude_name = []
+                for p in p_obj.read(same_mission_ids, ['name']):
+                    exclude_name.append(p['name'])
+                partner_ids = p_obj.search([('partner_type', 'in', ['section', 'intermission']), ('active', '=', False), ('name', 'not in', exclude_name)])
                 if partner_ids:
-                    db.get('res_partner').write(partner_ids, {'active': True})
+                    p_obj.write(partner_ids, {'active': True})
 
 class dump_all(unittest.TestCase):
 
