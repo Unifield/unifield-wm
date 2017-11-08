@@ -488,6 +488,20 @@ class last_sync(unittest.TestCase):
                 assert issubclass(tc, db_creation), "The object %s is not of type db_creation!"
                 tc.sync()
 
+class activate_inter_partner(unittest.TestCase):
+    test_cases = []
+
+    def test_99_activate_inter_partner(self):
+        if not self.test_cases:
+            self.skipTest("No database to update")
+        for tc in self.test_cases:
+            if issubclass(tc, (coordon_creation, projectn_creation)):
+                db = tc.db
+                db.connect('admin')
+                partner_ids = db.get('res_partner').search([('partner_type', 'in', ['section', 'intermission']), ('active', '=', False), ('name', '!=', db.name)])
+                if partner_ids:
+                    db.get('res_partner').write(partner_ids, {'active': True})
+
 class dump_all(unittest.TestCase):
 
     @unittest.skipIf(skipDumpDbs, "DBs dump directory creation deactivated")
@@ -1161,6 +1175,9 @@ for hq, coordos in config.instance_tree.iteritems():
 
 # Push last_sync test at last
 test_cases.append(last_sync)
+
+# activate inter partners
+test_cases.append(activate_inter_partner)
 
 # and dump
 test_cases.append(dump_all)
