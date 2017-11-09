@@ -501,6 +501,9 @@ class activate_inter_partner(unittest.TestCase):
                 db.connect('admin')
                 p_obj = db.get('res.partner')
                 exclude_name = [db.name]
+                same_mission_ids = p_obj.search([('partner_type', '=', 'internal')])
+                for p in p_obj.read(same_mission_ids, ['name']):
+                    exclude_name.append(p['name'])
                 exclude_name += all_projects
                 partner_ids = p_obj.search([('partner_type', 'in', ['section', 'intermission']), ('active', '=', False), ('name', 'not in', exclude_name)])
                 if partner_ids:
