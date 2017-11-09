@@ -491,19 +491,17 @@ class last_sync(unittest.TestCase):
 class activate_inter_partner(unittest.TestCase):
 
     def test_99_activate_inter_partner(self):
+        all_projects = []
+        for tc in test_cases:
+            if issubclass(tc, projectn_creation):
+                all_projects.append(tc.db.name)
         for tc in test_cases:
             if issubclass(tc, (coordon_creation, projectn_creation)):
                 db = tc.db
                 db.connect('admin')
                 p_obj = db.get('res.partner')
-                same_mission_ids = p_obj.search([('partner_type', '=', 'internal')])
-                exclude_name = []
-                for p in p_obj.read(same_mission_ids, ['name']):
-                    exclude_name.append(p['name'])
-                instance_obj = db.get('msf.instance')
-                instance_ids = instance_obj.search([('level', '=', 'project')])
-                for p in instance_obj.read(instance_ids, ['instance']):
-                    exclude_name.append(p['instance'])
+                exclude_name = [db.name]
+                exclude_name += all_projects
                 partner_ids = p_obj.search([('partner_type', 'in', ['section', 'intermission']), ('active', '=', False), ('name', 'not in', exclude_name)])
                 if partner_ids:
                     p_obj.write(partner_ids, {'active': True})
