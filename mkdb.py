@@ -501,7 +501,7 @@ class activate_inter_partner(unittest.TestCase):
                 for p in p_obj.read(same_mission_ids, ['name']):
                     exclude_name.append(p['name'])
                 instance_obj = db.get('msf.instance')
-                instance_ids = instance_obj.seach([('level', '=', 'project')])
+                instance_ids = instance_obj.search([('level', '=', 'project')])
                 for p in instance_obj.read(instance_ids, ['instance']):
                     exclude_name.append(p['instance'])
                 partner_ids = p_obj.search([('partner_type', 'in', ['section', 'intermission']), ('active', '=', False), ('name', 'not in', exclude_name)])
