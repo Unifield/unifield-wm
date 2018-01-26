@@ -160,7 +160,7 @@ class KVMWinBuildAllInOneExe(KVM):
         f.close()
         self.rsync('windows/ Naresh@%s:build/windows/' % (self.remoteip,))
         # This one uses a let's encrypt cert, which WinXP cannot handle.
-        self.ssh("PYTHONHTTPSVERIFY=0 /cygdrive/c/Python27/Scripts/pip --verbose --no-cache-dir install egenix-mx-base")
+        self.ssh("PYTHONHTTPSVERIFY=0 /cygdrive/c/Python27/Scripts/pip --verbose --no-cache-dir install egenix-mx-base==3.2.9")
         self.ssh("/cygdrive/c/Python27/Scripts/pip --verbose --no-cache-dir install ./build/server")
         self.ssh("/cygdrive/c/Python27/Scripts/pip --verbose --no-cache-dir install ./build/web")
         self.ssh("PATH=/cygdrive/c/Python27:/cygdrive/c/Python27/Scripts:$PATH make -C build/windows allinone")
