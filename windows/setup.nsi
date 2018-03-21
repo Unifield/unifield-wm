@@ -292,21 +292,19 @@ Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
     FileClose $1
 
     # Init the DB, unless it already exists.
-    ${If} ${FileExists} "$TextPostgreSQLInstPath\*"
-        MessageBox MB_OK "Database directory $TextPostgreSQLInstPath already exists. Stopping installation."
-        Abort
+    ${IfNot} ${FileExists} "$TextPostgreSQLInstPath\*"
+        nsExec::ExecToLog 'pgsql\bin\initdb --pwfile "$0" \
+            --data-checksums -A md5 \
+            -U "$TextPostgreSQLUsername" \
+            --locale="English_United States" -E UTF8 \
+            "$TextPostgreSQLInstPath"'
+        Pop $1
+        Delete $0
+        ${If} "$1" != "0"
+            MessageBox MB_OK "Failed to create database in $TextPostgreSQLInstPath. Stopping installation. (Result code $1)"
+            Abort
+        ${Endif}
     ${EndIf}
-    nsExec::ExecToLog 'pgsql\bin\initdb --pwfile "$0" \
-	--data-checksums -A md5 \
-        -U "$TextPostgreSQLUsername" \
-        --locale="English_United States" -E UTF8 \
-        "$TextPostgreSQLInstPath"'
-    Pop $1
-    Delete $0
-    ${If} "$1" != "0"
-        MessageBox MB_OK "Failed to create database in $TextPostgreSQLInstPath. Stopping installation. (Result code $1)"
-        Abort
-    ${Endif}
 
     # Create the service user and service
     nsExec::ExecToLog 'net user openpgsvc 0p3npgsvcPWD /add'
@@ -543,6 +541,15 @@ Function LeavePostgreSQL
 	Abort
     pginstpathok:
 
+    ${If} ${FileExists} "$TextPostgreSQLInstPath\*"
+        MessageBox MB_YESNO "Database directory $TextPostgreSQLInstPath already exists. Ignore PostgreSQL install ?" IDYES true IDNO false
+        true:
+            Goto next
+        false:
+            Abort
+    ${EndIf}
+
+    next:
     StrLen $1 $TextPostgreSQLHostname
     ${If} $1 == 0
         MessageBox MB_ICONEXCLAMATION|MB_OK $(WARNING_HostNameIsEmpty)
