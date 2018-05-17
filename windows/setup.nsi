@@ -307,11 +307,12 @@ Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
     ${EndIf}
 
     # Create the service user and service
-    nsExec::ExecToLog 'net user openpgsvc 0p3npgsvcPWD /add'
+    nsExec::ExecToLog 'net user openpgsvc 0p3npgsvcPWD /EXPIRES:NEVER /add'
     SimpleSC::GrantServiceLogonPrivilege openpgsvc
     nsExec::ExecToLog 'icacls "$TextPostgreSQLInstPath" /c /t /grant openpgsvc:F'
     nsExec::ExecToLog 'pgsql\bin\pg_ctl register -N Postgres \
         -U openpgsvc -P 0p3npgsvcPWD -D "$TextPostgreSQLInstPath"'
+    nsExec::ExecToLog `WMIC USERACCOUNT WHERE "Name='openpgsvc'" SET PasswordExpires=FALSE`
 
     # Edit the postgresql.conf
 
