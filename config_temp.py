@@ -23,8 +23,15 @@ prefix = "SPRINT5"
 ## Other stuffs
 default_email = 'null@msf.org'
 company_name = 'Médecins Sans Frontières'
-currency = 'chf' # either 'chf' or 'eur' (field.selection in the setup currency wizard)
 default_oc = 'oca'
+default_currency = 'chf' # either 'chf' or 'eur' (field.selection in the setup currency wizard)
+# or describe custom currency for HQs here (override default_currency above):
+'''
+currency_tree = {
+    'HQ1': 'eur',
+    'HQ2': 'chf',
+}
+'''
 
 lang = False # fr_MF or es_MF
 sync_user_admin = False

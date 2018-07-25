@@ -214,7 +214,7 @@ class db_creation(object):
             'button' : 'action_stop',
         },
         'currency.setup' : {
-            'functional_id' : config.currency,
+            'functional_id' : config.default_currency,
         } 
     }
 
@@ -945,7 +945,13 @@ class hqn_creation(client_creation, unittest.TestCase):
 
     def test_41_load_rates(self):
         cur_dir = os.path.dirname(os.path.realpath(__file__))
-        rate_file = os.path.join(cur_dir, 'data', '%s.txt' % config.currency)
+
+        cur_to_load = config.default_currency
+        db_level_name = self.db.name.split('_')[-1] # e.g 'HQ1'
+        if hasattr(config, 'currency_tree') and config.currency_tree.get(db_level_name, False):
+            cur_to_load = config.currency_tree[db_level_name]
+
+        rate_file = os.path.join(cur_dir, 'data', '%s.txt' % cur_to_load)
         if os.path.isfile(rate_file):
             rate_obj = self.db.get('res.currency')
             fx_rate_obj = self.db.get('res.currency.rate')
@@ -953,7 +959,7 @@ class hqn_creation(client_creation, unittest.TestCase):
             rate_dict = {}
             for x in rate_obj.read(rate_ids, ['name']):
                 rate_dict[x['name']] = x['id']
-            fx_rate_obj.create({'currency_id': rate_dict[config.currency.upper()], 'rate': 1, 'name': '2016-01-01'})
+            fx_rate_obj.create({'currency_id': rate_dict[cur_to_load.upper()], 'rate': 1, 'name': '2016-01-01'})
             f = open(rate_file, 'r')
             date = False
             for data in f:
