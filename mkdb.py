@@ -14,6 +14,7 @@ import os
 import shutil
 import time
 import uuid
+import re
 
 import argparse
 from subprocess import call
@@ -326,6 +327,10 @@ class db_creation(object):
                     answer = self.db.wizard(model, {'instance_id': instance_id}).action_next()
                 else:
                     data = dict(self.base_wizards.get(model, {}))
+                    if model == 'currency.setup':
+                        db_level_name = self.db and self.db.name.split('_')[-1] or '' # e.g 'HQ1'
+                        if re.match(r'HQ[0-9]+$', db_level_name) and hasattr(config, 'currency_tree') and config.currency_tree.get(db_level_name, False):
+                            data['functional_id'] = config.currency_tree[db_level_name]
                     button = data.pop('button', 'action_next')
                     answer = getattr(self.db.wizard(model, data), button)()
                 model = answer.get('res_model', None)
@@ -947,8 +952,8 @@ class hqn_creation(client_creation, unittest.TestCase):
         cur_dir = os.path.dirname(os.path.realpath(__file__))
 
         cur_to_load = config.default_currency
-        db_level_name = self.db.name.split('_')[-1] # e.g 'HQ1'
-        if hasattr(config, 'currency_tree') and config.currency_tree.get(db_level_name, False):
+        db_level_name = self.db and self.db.name.split('_')[-1] or '' # e.g 'HQ1'
+        if re.match(r'HQ[0-9]+$', db_level_name) and hasattr(config, 'currency_tree') and config.currency_tree.get(db_level_name, False):
             cur_to_load = config.currency_tree[db_level_name]
 
         rate_file = os.path.join(cur_dir, 'data', '%s.txt' % cur_to_load)
