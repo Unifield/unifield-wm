@@ -328,9 +328,9 @@ class db_creation(object):
                 else:
                     data = dict(self.base_wizards.get(model, {}))
                     if model == 'currency.setup':
-                        db_level_name = self.db and self.db.name.split('_')[-1] or '' # e.g 'HQ1'
-                        if re.match(r'HQ[0-9]+$', db_level_name) and hasattr(config, 'currency_tree') and config.currency_tree.get(db_level_name, False):
-                            data['functional_id'] = config.currency_tree[db_level_name]
+                        hq_name = self.db and self.db.name and re.findall(r'HQ[0-9]+', self.db.name)
+                        if hq_name and hasattr(config, 'currency_tree'):
+                            data['functional_id'] = config.currency_tree.get(hq_name[-1], config.default_currency)
                     button = data.pop('button', 'action_next')
                     answer = getattr(self.db.wizard(model, data), button)()
                 model = answer.get('res_model', None)
