@@ -952,9 +952,9 @@ class hqn_creation(client_creation, unittest.TestCase):
         cur_dir = os.path.dirname(os.path.realpath(__file__))
 
         cur_to_load = config.default_currency
-        db_level_name = self.db and self.db.name.split('_')[-1] or '' # e.g 'HQ1'
-        if re.match(r'HQ[0-9]+$', db_level_name) and hasattr(config, 'currency_tree') and config.currency_tree.get(db_level_name, False):
-            cur_to_load = config.currency_tree[db_level_name]
+        hq_name = self.db and self.db.name and re.findall(r'HQ[0-9]+', self.db.name)
+        if hq_name and hasattr(config, 'currency_tree'):
+            cur_to_load = config.currency_tree.get(hq_name[-1], config.default_currency)
 
         rate_file = os.path.join(cur_dir, 'data', '%s.txt' % cur_to_load)
         if os.path.isfile(rate_file):
