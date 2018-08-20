@@ -14,6 +14,7 @@ import os
 import shutil
 import time
 import uuid
+import re
 
 import argparse
 from subprocess import call
@@ -214,8 +215,8 @@ class db_creation(object):
             'button' : 'action_stop',
         },
         'currency.setup' : {
-            'functional_id' : config.currency,
-        } 
+            'functional_id' : config.default_currency,
+        }
     }
 
     db = None
@@ -326,6 +327,10 @@ class db_creation(object):
                     answer = self.db.wizard(model, {'instance_id': instance_id}).action_next()
                 else:
                     data = dict(self.base_wizards.get(model, {}))
+                    if model == 'currency.setup':
+                        hq_name = self.db and self.db.name and re.findall(r'HQ[0-9]+', self.db.name)
+                        if hq_name and hasattr(config, 'currency_tree'):
+                            data['functional_id'] = config.currency_tree.get(hq_name[-1], config.default_currency)
                     button = data.pop('button', 'action_next')
                     answer = getattr(self.db.wizard(model, data), button)()
                 model = answer.get('res_model', None)
@@ -551,14 +556,14 @@ class server_creation(db_creation, unittest.TestCase):
                 call(config.server_restart_cmd, shell=True)
                 time.sleep(5)
             lang_obj = self.db.get('res.lang')
-            lang_id = lang_obj.search([('code', '=', lang)]) 
+            lang_id = lang_obj.search([('code', '=', lang)])
             mod_obj = self.db.get('ir.module.module')
             if lang_id:
                 lang_obj.write(lang_id, {'translatable': True})
                 mod_ids = mod_obj.search([('state', '=', 'installed')])
                 mod_obj.button_update_translations(mod_ids, lang)
 
-    @unittest.skipIf(skipMasterCreation, "Master dump creation desactivated") 
+    @unittest.skipIf(skipMasterCreation, "Master dump creation desactivated")
     def test_03_dump_master(self):
         self.dump_db(master_dir, master_prefix_name)
 
@@ -945,7 +950,13 @@ class hqn_creation(client_creation, unittest.TestCase):
 
     def test_41_load_rates(self):
         cur_dir = os.path.dirname(os.path.realpath(__file__))
-        rate_file = os.path.join(cur_dir, 'data', '%s.txt' % config.currency)
+
+        cur_to_load = config.default_currency
+        hq_name = self.db and self.db.name and re.findall(r'HQ[0-9]+', self.db.name)
+        if hq_name and hasattr(config, 'currency_tree'):
+            cur_to_load = config.currency_tree.get(hq_name[-1], config.default_currency)
+
+        rate_file = os.path.join(cur_dir, 'data', '%s.txt' % cur_to_load)
         if os.path.isfile(rate_file):
             rate_obj = self.db.get('res.currency')
             fx_rate_obj = self.db.get('res.currency.rate')
@@ -953,7 +964,7 @@ class hqn_creation(client_creation, unittest.TestCase):
             rate_dict = {}
             for x in rate_obj.read(rate_ids, ['name']):
                 rate_dict[x['name']] = x['id']
-            fx_rate_obj.create({'currency_id': rate_dict[config.currency.upper()], 'rate': 1, 'name': '2016-01-01'})
+            fx_rate_obj.create({'currency_id': rate_dict[cur_to_load.upper()], 'rate': 1, 'name': '2016-01-01'})
             f = open(rate_file, 'r')
             date = False
             for data in f:
@@ -1005,6 +1016,9 @@ class hqn_creation(client_creation, unittest.TestCase):
     def test_70_create_intersection(self):
         partner = self.db.get('res.partner')
         account = self.db.get('account.account')
+        pricelist = self.db.get('product.pricelist')
+        purch_eur = pricelist.search([('type', '=', 'purchase'), ('currency_id.name', '=', 'EUR')])
+        sale_eur = pricelist.search([('type', '=', 'sale'), ('currency_id.name', '=', 'EUR')])
         for tc in test_cases:
             if (issubclass(tc, coordon_creation) or issubclass(tc, projectn_creation)) and tc.hq.index != self.index:
                 if tc.db is None:
@@ -1020,6 +1034,8 @@ class hqn_creation(client_creation, unittest.TestCase):
                     'property_account_payable':  account.search([('code','=','30010')])[0],
                     'property_account_receivable': account.search([('code','=','12010')])[0],
                     'city': 'XXX',
+                    'property_product_pricelist_purchase': purch_eur[0],
+                    'property_product_pricelist': sale_eur[0],
                 })
 
     def test_99_create_esc(self):
