@@ -4,7 +4,7 @@ WEB_CLIENT_DIRECTORY=../web
 SERVER_DIRECTORY=../server
 FILES_DIRECTORY=files
 
-PG_VER=9.6.3-2
+PG_VER=9.6.10-1
 PG_ZIP=postgresql-$(PG_VER)-windows-binaries.zip
 
 MAKENSIS_ARGUMENTS=/DMAJOR_VERSION=$(MAJOR_VERSION) /DMINOR_VERSION=$(MINOR_VERSION) /DREVISION_VERSION=$(REVISION_VERSION) /DBUILD_VERSION=$(BUILD_VERSION) /DPG_VER=$(PG_VER)
@@ -49,7 +49,7 @@ web: web_clean
 standalone:	server web
 
 $(PG_ZIP):
-	wget https://get.enterprisedb.com/postgresql/$(PG_ZIP)
+	test -f $(PG_ZIP) || wget https://get.enterprisedb.com/postgresql/$(PG_ZIP)
 
 # Extract the minimal Postgres install from the distribution zip file
 pgsql: $(PG_ZIP)
