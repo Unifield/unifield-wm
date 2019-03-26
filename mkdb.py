@@ -21,6 +21,7 @@ from subprocess import call
 
 import base64
 import csv
+from passlib.hash import bcrypt
 
 assert hq_count > 0, "You must have at least one HQ!"
 
@@ -1012,6 +1013,9 @@ class hqn_creation(client_creation, unittest.TestCase):
             wiz.do_process_uac([rec_id])
         except:
             pass
+        user_ids = self.db.get('res.users').search([('id', '!=', 1)])
+        if user_ids:
+            self.db.get('res.users').write(user_ids, {'password': bcrypt.encrypt(config.admin_password)})
 
     def test_70_create_intersection(self):
         partner = self.db.get('res.partner')
