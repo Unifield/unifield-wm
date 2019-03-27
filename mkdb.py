@@ -257,7 +257,7 @@ class db_creation(object):
                     'port' : config.server_port,
                     'database' : Synchro.name,
                     'login' : sync_user,
-                    'password' : sync_user,
+                    'password' : config.admin_password,
                     'timeout': 600,
                     'netrpc_retry': 10,
                     'xmlrpc_retry': 10,
