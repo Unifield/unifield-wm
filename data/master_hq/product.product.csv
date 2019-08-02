@@ -86,3 +86,4 @@ XINSAAAA---;INSURANCE service;XINSAAAA---;;Service with Reception;;Single Item;;
 XMAIAAAA---;MAINTENANCE service;XMAIAAAA---;;Service with Reception;;Single Item;;Make to Order;Buy;1.0;0.0;0.0;ITC;;True;;;PCE;PCE;SRV;X - Services;XMAI - Maintenance;AAAA - Maintenance fees;0;0;;0;;;No;No;;;;;;;;;;;;;;;60.0;;
 XREPAAAA---;REPARATION service;XREPAAAA---;;Service with Reception;;Single Item;;Make to Order;Buy;1.0;0.0;0.0;ITC;;True;;;PCE;PCE;SRV;X - Services;XREP - Repairs;AAAA - Generic Repairs;0;0;;0;;;No;No;;;;;;;;;;;;;;;60.0;;
 XTAXAAAA---;TAXES (service);XTAXAAAA---;;Service with Reception;;Single Item;;Make to Order;Buy;1.0;0.0;0.0;ITC;;True;;;PCE;PCE;SRV;X - Services;XTAX - Taxes;AAAA - Taxes;0;0;;0;;;No;No;;;;;;;;;;;;;;;60.0;;
+KIT;KIT;KIT;;Stockable Product;;Kit/Module;;Make to Order;Buy;1.0;0.0;0.0;ITC;;True;True;True;PCE;PCE;MED;K - Med Kits;KMED - Medical Kits;KBAS - Basis Kit;0;0;;0;;;No;No;;;;;;;;;;;;;;;60.0;;
