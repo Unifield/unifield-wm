@@ -929,6 +929,10 @@ class hqn_creation(client_creation, unittest.TestCase):
                 self.import_csv(filename)
         else:
             self.db.module('msf_sync_data_hq').install().do().set_notinstalled()
+
+        for x in ['ESP', 'CHQ', 'VIR']:
+            self.db.get('hr.payment.method').create({'name': x})
+
         # duplicate as UniData
         if hq_count > 1:
             data = [
