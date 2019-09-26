@@ -761,7 +761,6 @@ class client_creation(db_creation):
             'counterpart_hq_entries_default_account': '33010',
             'import_invoice_default_account': '12011',
             'intermission_default_counterpart': '14010',
-            'revaluation_default_account': '67050',
             'ye_pl_cp_for_bs_debit_bal_account': '69001',
             'ye_pl_cp_for_bs_credit_bal_account': '79002',
             'ye_pl_pos_credit_account': '79003',
