@@ -849,25 +849,26 @@ class client_creation(db_creation):
         if isinstance(self, hqn_creation):
             return True
 
-        reg = {}
+        reg = {'EUR': {}, 'CHF': {}}
         for j_type, account_code in [('bank', '10200'), ('cash', '10100'), ('cheque', '10210')]:
             account_id = self.db.get('account.account').search([('code', '=', account_code)])[0]
-            data = {
-                'name': '%s %s' % (j_type, self.db.name),
-                'code': '%s%s' % (j_type, self.db.name[-2:]),
-                'type': j_type,
-                'currency': self.db.get('res.currency').search([('name', '=', 'EUR')])[0],
-                'default_credit_account_id': account_id,
-                'default_debit_account_id': account_id,
-            }
-            get_ana = self.db.get('account.journal').onchange_type(False, j_type, False)
-            data['analytic_journal_id'] = get_ana.get('value', {}).get('analytic_journal_id', False)
-            if j_type == 'cheque':
-                if not reg.get('bank'):
-                    continue
-                data['bank_journal_id'] = reg['bank']
+            for cur in ['EUR', 'CHF']:
+                data = {
+                    'name': '%s %s %s' % (j_type, self.db.name, cur),
+                    'code': '%s%s%s' % (j_type, self.db.name[-2:], cur),
+                    'type': j_type,
+                    'currency': self.db.get('res.currency').search([('name', '=', cur)])[0],
+                    'default_credit_account_id': account_id,
+                    'default_debit_account_id': account_id,
+                }
+                get_ana = self.db.get('account.journal').onchange_type(False, j_type, False)
+                data['analytic_journal_id'] = get_ana.get('value', {}).get('analytic_journal_id', False)
+                if j_type == 'cheque':
+                    if not reg[cur].get('bank'):
+                        continue
+                    data['bank_journal_id'] = reg[cur]['bank']
 
-            reg[j_type] = self.db.get('account.journal').create(data)
+                reg[cur][j_type] = self.db.get('account.journal').create(data)
 
     def test_95_create_stock_cu(self):
         if isinstance(self, hqn_creation):
