@@ -47,6 +47,14 @@ def get_file_from_source(filename):
             return newfile
     return filename
 
+def get_oc(dbname):
+    if isinstance(default_oc, dict):
+        hq_name = re.findall(r'HQ[0-9]+', dbname)
+        if hq_name:
+            return default_oc.get(hq_name[-1], 'oca')
+        return 'oca'
+    return default_oc
+
 def warn(*messages):
     sys.stderr.write(" ".join(messages)+"\n")
 
@@ -434,8 +442,9 @@ class db_creation(object):
                     hq.write('account.target.costcenter', project_target_ids, {'is_target': True, 'is_top_cost_center': True, 'is_po_fo_cost_center' : True})
                 self.sync(hq)
 
-    def add_to_group(self, group_name, group_type, oc=default_oc):
+    def add_to_group(self, group_name, group_type):
         Synchro.connect('admin')
+        oc = get_oc(self.db.name)
         entity_ids = Synchro.get('sync.server.entity').search([('name','=',self.db.name)])
         assert len(entity_ids) == 1, "The entity must exists!"
         # Make groups
@@ -659,19 +668,14 @@ class client_creation(db_creation):
         if not hasattr(config, 'sync_user_admin') or not config.sync_user_admin:
             Synchro.user(self.db.name).add(self.db.name).addGroups('Sync / User')
         self.db.connect('admin')
-        # search the current entity
-        with_oc_field = False
-        entity_fields = self.db.get('sync.client.entity').fields_get(['oc'])
-        if entity_fields.get('oc'):
-            with_oc_field = True
 
+        oc = get_oc(self.db.name)
         entity_id = self.db.get('sync.client.entity').search([])
         data = {
             'name': self.db.name,
             'identifier': str(uuid.uuid1()),
         }
-        if with_oc_field:
-            data['oc'] = default_oc
+        data['oc'] = oc
         if entity_id:
             entity_data = self.db.get('sync.client.entity').read(entity_id[0])
             if entity_data['name'] != self.db.name:
@@ -679,8 +683,7 @@ class client_creation(db_creation):
         else:
             self.db.get('sync.client.entity').create(data)
         wiz_data = {'email': config.default_email}
-        if with_oc_field:
-            wiz_data['oc'] = default_oc
+        wiz_data['oc'] = oc
         wizard = self.db.wizard('sync.client.register_entity', wiz_data)
         # Fetch instances
         wizard.next()
