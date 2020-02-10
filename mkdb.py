@@ -225,6 +225,9 @@ class db_creation(object):
         },
         'currency.setup' : {
             'functional_id' : config.default_currency,
+        },
+        'base.setup.company': {
+            'contact_name': 'msf',
         }
     }
 
