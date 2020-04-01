@@ -773,6 +773,12 @@ class client_creation(db_creation):
             'ye_pl_ne_credit_account': '50000',
             'ye_pl_pos_debit_account': '51000',
             'ye_pl_ne_debit_account': '69002',
+            'cheque_debit_account_id': '10210',
+            'cheque_credit_account_id': '10210',
+            'bank_debit_account_id': '10200',
+            'bank_credit_account_id': '10200',
+            'cash_debit_account_id': '10100',
+            'cash_credit_account_id': '10100',
         }
         for f in company_fields:
             company_fields[f] = self.search_account(company_fields[f])
