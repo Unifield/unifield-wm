@@ -1,0 +1,72 @@
+#!/bin/bash
+
+ssh_user=JFTEMP
+ssh_host=win10
+ssh_port=22
+ssh_args="-p $ssh_port $ssh_user@$ssh_host"
+
+main_path="/cygdrive/c/Program\\ Files\\ \\(x86\\)/msf"
+ssh $ssh_args <<EOF
+net stop Postgres /y
+net stop openerp-server-6.0 /y
+net stop openerp-web-6.0 /y
+
+for install in Unifield Unifield-old; do
+if [ -f ""$main_path/\$install/Server/Uninstall.exe"" ]; then
+    echo "Uninstall \$install/Server"
+    ""$main_path/\$install/Server/Uninstall.exe"" /S
+fi
+
+if [ -f ""$main_path/\$install/Web/Uninstall.exe"" ]; then
+    echo "Uninstall \$install/Web"
+    ""$main_path/\$install/Web/Uninstall.exe"" /S
+fi
+
+
+if [ -f ""$main_path/\$install/Uninstall.exe"" ]; then
+    echo "Uninstall \$install/Uninstall.exe"
+    ""$main_path/\$install/Uninstall.exe"" /S
+fi
+
+if [ -d ""$main_path/\$install/Server/"" ]; then
+    echo "Remove \$install/Server"
+    rm -fr ""$main_path/\$install/Server/""
+fi
+
+if [ -d ""$main_path/\$install/Web"" ]; then
+    echo ""Remove \$install/Web/""
+    rm -fr ""$main_path/\$install/Web/""
+fi
+
+if [ -d /cygdrive/c/to_db/ ]; then
+    echo "Remove /cygdrive/c/to_db/"
+    rm -fr /cygdrive/c/to_db/
+fi
+
+if [ -d /cygdrive/c/from_db/ ]; then
+    echo "Remove /cygdrive/c/from_db/"
+    rm -fr /cygdrive/c/from_db/
+fi
+done
+
+if [ -d ""$main_path/Unifield-old"" ]; then
+    echo "Remove Unifield-old"
+    rm -fr ""$main_path/Unifield-old""
+fi
+
+#if [ -d /cygdrive/d/MSF\ data/Unifield/PostgreSQL ]; then
+#    echo "Move d/MSF\ data/Unifield/PostgreSQL"
+#    mv /cygdrive/d/MSF\ data/Unifield/PostgreSQL /cygdrive/d/MSF\ data/Unifield/PostgreSQL-`date +%Y%m%d-%H%M`
+#fi
+EOF
+
+if [ "$1" == "-a" ]; then
+ssh $ssh_args <<EOF
+if [ -d /cygdrive/d/MSF\ data/Unifield/PostgreSQL ]; then
+    echo "Move d/MSF\ data/Unifield/PostgreSQL"
+    rm -fr  ""/cygdrive/d/MSF\ data/Unifield/PostgreSQL""
+    rm -fr ""$main_path/Unifield""
+fi
+
+EOF
+fi
