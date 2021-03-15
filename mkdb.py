@@ -565,9 +565,9 @@ class server_creation(db_creation, unittest.TestCase):
         if hasattr(config, 'lang'):
             lang = config.lang
         if lang:
-            if self.db.get('sync.client.entity'):
-                call(config.server_restart_cmd, shell=True)
-                time.sleep(5)
+            #if self.db.get('sync.client.entity'):
+            #    call(config.server_restart_cmd, shell=True)
+            #    time.sleep(5)
             lang_obj = self.db.get('res.lang')
             lang_id = lang_obj.search([('code', '=', lang)])
             mod_obj = self.db.get('ir.module.module')
