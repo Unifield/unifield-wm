@@ -319,6 +319,9 @@ Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
     Push $R0
     FileOpen $R0 "$TextPostgreSQLInstPath\postgresql.conf" a
     FileSeek $R0 0 "END"
+    # add \r\n
+    FileWriteByte $R0 "13"
+    FileWriteByte $R0 "10"
     # Start of custom PostgreSQL options
     FileWrite $R0 "listen_addresses = 'localhost'"
     # add \r\n
