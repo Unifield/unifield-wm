@@ -1,7 +1,7 @@
 #!/bin/bash
 
-ssh_user=JFTEMP
-ssh_host=win10
+ssh_user=tempo
+ssh_host=win10-2
 ssh_port=22
 ssh_args="-p $ssh_port $ssh_user@$ssh_host"
 

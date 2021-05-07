@@ -123,7 +123,7 @@ class KVM(object):
         os.kill(self.pid,15)
 
     def start(self):
-        l="kvm -m 1G -net nic,model=rtl8139 -net user,hostfwd=tcp:127.0.0.1:10022-:22 -drive".split(" ")
+        l="kvm -m 4G -net nic,model=rtl8139 -net user,hostfwd=tcp:127.0.0.1:10022-:22 -drive".split(" ")
         l.append('file=%s,snapshot=on'%self.image)
         l.append('-nographic')
         self.pid=os.spawnvp(os.P_NOWAIT, l[0], l)
