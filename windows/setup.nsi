@@ -23,6 +23,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #####################################################################################
+Unicode True
 
 !include 'MUI2.nsh'
 !include 'FileFunc.nsh'
@@ -77,6 +78,13 @@
 !else
     !define VERSION "${MAJOR_VERSION}.${MINOR_VERSION}-${BUILD_VERSION}-r${REVISION_VERSION}"
 !endif
+!ifndef WINPYVERSION
+    !define WINPYVERSION 'WPy64-3940'
+!endif
+!ifndef PYTHONVERSION
+	!define PYTHONVERSION '3.9.4'
+!endif
+
 !define PRODUCT_NAME "OpenERP"
 !define DISPLAY_NAME "${PRODUCT_NAME} ${MAJOR_VERSION}.${MINOR_VERSION}"
 
@@ -88,7 +96,6 @@
 
 !define REGISTRY_KEY "Software\${DISPLAY_NAME}"
 
-!define DEFAULT_POSTGRESQL_INSTPATH 'D:\MSF data\Unifield\PostgreSQL'
 !define DEFAULT_POSTGRESQL_HOSTNAME 'localhost'
 !define DEFAULT_POSTGRESQL_PORT 5432
 !define DEFAULT_POSTGRESQL_USERNAME 'openpg'
@@ -98,6 +105,8 @@
 !define DEFAULT_OPENERP_DROP_PWD 'dropAdmin'
 !define DEFAULT_OPENERP_BKP_PWD 'bkAdmin'
 !define DEFAULT_OPENERP_RESTORE_PWD 'restoreAdmin'
+!define DEFAULT_POSTGRESQL_INSTPATH 'D:\MSF data\Unifield\PostgreSQL'
+
 
 Name '${DISPLAY_NAME}'
 Caption "${PRODUCT_NAME} ${VERSION} Setup"
@@ -210,7 +219,7 @@ LangString DESC_PostgreSQL_Username ${LANG_ENGLISH} "Username"
 LangString DESC_PostgreSQL_Password ${LANG_ENGLISH} "Password"
 LangString DESC_PostgreSQL_InstPath ${LANG_ENGLISH} "Installation path"
 LangString Profile_AllInOne ${LANG_ENGLISH} "All In One"
-LangString Profile_Server ${LANG_ENGLISH} "Server only"
+LangString Profile_Server ${LANG_ENGLISH} "UniField Servers and PostgreSQL"
 LangString Profile_Web_Client ${LANG_ENGLISH} "Web environment"
 LangString TITLE_OpenERP_Server ${LANG_ENGLISH} "OpenERP Server"
 LangString TITLE_OpenERP_Web_Client ${LANG_ENGLISH} "OpenERP Web Client"
@@ -229,8 +238,8 @@ LangString WARNING_OPENERP_RESTORE_PasswordIsEmpty ${LANG_ENGLISH} "Password to 
 LangString MSG_ConnectionOK ${LANG_FRENCH} "Connection réussie!"
 LangString MSG_ConnectionFAILED ${LANG_FRENCH} "Échec de la connection!"
 LangString DESC_OpenERP_Server ${LANG_FRENCH} "Installation du Serveur OpenERP avec tous les modules OpenERP standards."
-LangString DESC_OpenERP_Web_Client ${LANG_FRENCH} "Installation du Client OpenERP Web si vous d?siez acc?der ? OpenERP avec votre navigateur web"
-LangString DESC_PostgreSQL ${LANG_FRENCH} "Installation de la base de donn?es PostgreSQL utilis?e par OpenERP."
+LangString DESC_OpenERP_Web_Client ${LANG_FRENCH} "Installation du Client OpenERP Web si vous désiez accéder à OpenERP avec votre navigateur web"
+LangString DESC_PostgreSQL ${LANG_FRENCH} "Installation de la base de données PostgreSQL utilisée par OpenERP."
 LangString DESC_FinishPage_Link ${LANG_FRENCH} "Contactez OpenERP pour un Partenariat et/ou du Support"
 LangString DESC_AtLeastOneComponent ${LANG_FRENCH} "Vous devez choisir au moins un composant"
 LangString DESC_CanNotInstallPostgreSQL ${LANG_FRENCH} "Vous ne pouvez pas installer la base de données PostgreSQL sans le serveur OpenERP"
@@ -239,16 +248,16 @@ LangString WARNING_InstallPathEmpty ${LANG_FRENCH} "Le chemin d'installation du 
 LangString WARNING_HostNameIsEmpty ${LANG_FRENCH} "L'adresse pour la connection au serveur PostgreSQL est vide"
 LangString WARNING_UserNameIsEmpty ${LANG_FRENCH} "Le nom d'utilisateur pour la connection au serveur PostgreSQL est vide"
 LangString WARNING_PasswordIsEmpty ${LANG_FRENCH} "Le mot de passe pour la connection au serveur PostgreSQL est vide"
-LangString WARNING_PortIsWrong ${LANG_FRENCH} "Le port pour la connection au serveur PostgreSQL est erron? (d?faut: 5432)"
+LangString WARNING_PortIsWrong ${LANG_FRENCH} "Le port pour la connection au serveur PostgreSQL est erroné (défaut: 5432)"
 LangString DESC_PostgreSQLNewInstall ${LANG_FRENCH} "Nouvelle installation"
 LangString DESC_PostgreSQLPage ${LANG_FRENCH} "Configurez les informations de connection pour le serveur PostgreSQL"
-LangString DESC_PostgreSQL_Hostname ${LANG_FRENCH} "H?te"
+LangString DESC_PostgreSQL_Hostname ${LANG_FRENCH} "Hôte"
 LangString DESC_PostgreSQL_Port ${LANG_FRENCH} "Port"
 LangString DESC_PostgreSQL_Username ${LANG_FRENCH} "Utilisateur"
 LangString DESC_PostgreSQL_Password ${LANG_FRENCH} "Mot de passe"
 LangString DESC_PostgreSQL_InstPath ${LANG_FRENCH} "Chemin d'install"
 LangString Profile_AllInOne ${LANG_FRENCH} "All In One"
-LangString Profile_Server ${LANG_FRENCH} "Seulement le serveur"
+LangString Profile_Server ${LANG_FRENCH} "UniField Serveurs at PostgreSQL"
 LangString Profile_Web_Client ${LANG_FRENCH} "Environement Web"
 LangString TITLE_OpenERP_Server ${LANG_FRENCH} "Serveur OpenERP"
 LangString TITLE_OpenERP_Web_Client ${LANG_FRENCH} "OpenERP Client Web"
@@ -263,9 +272,7 @@ LangString WARNING_OPENERP_DROP_PasswordIsEmpty ${LANG_FRENCH} "MdP pour supprim
 LangString WARNING_OPENERP_BKP_PasswordIsEmpty ${LANG_FRENCH} "MdP pour sauvegarder une bdd est vide"
 LangString WARNING_OPENERP_RESTORE_PasswordIsEmpty ${LANG_FRENCH} "MdP pour restaurer une bdd est vide"
 
-InstType $(Profile_AllInOne)
 InstType $(Profile_Server)
-InstType $(Profile_Web_Client)
 
 Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
     SectionIn 1 2
@@ -308,7 +315,7 @@ Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
 
     # Create the service user and service
     nsExec::ExecToLog 'net user openpgsvc 0p3npgsvcPWD /EXPIRES:NEVER /add'
-    SimpleSC::GrantServiceLogonPrivilege openpgsvc
+    SimpleSC::GrantServiceLogonPrivilege "openpgsvc"
     nsExec::ExecToLog 'icacls "$TextPostgreSQLInstPath" /c /t /grant openpgsvc:F'
     nsExec::ExecToLog 'pgsql\bin\pg_ctl register -N Postgres \
         -U openpgsvc -P 0p3npgsvcPWD -D "$TextPostgreSQLInstPath"'
@@ -349,16 +356,26 @@ Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
     nsExec::ExecToLog 'net start Postgres'
     sleep 2
 
-    # Install OpenERP Server
-    SetOutPath "$TEMP"
-    File "files\${OPENERP_SERVER_SETUP}"
-    ExecWait '"$TEMP\${OPENERP_SERVER_SETUP}" /S /D=$INSTDIR\Server'
+    # Installing winpython
+    SetOutPath "$INSTDIR\python"
+    File /r /x "__pycache__" "..\..\${WINPYVERSION}\python-${PYTHONVERSION}.amd64\*"
 
+    # Install OpenERP Server
+    SetOutPath "$INSTDIR\Server"
+    File /r /x "__pycache__" "..\server\bin\*"
+    File /r "static\server-extra\*.*"
+    
+    # Install OpenERP Web
+    SetOutPath "$INSTDIR\Web"
+    File /r /x "__pycache__" "..\web\*"
+
+    SetOutPath "$INSTDIR\nssm"
+    File /r "..\..\nssm-2.24-101-g897c7ad\win64\*"
     Push $R0
     ${Base64_Encode} "$TextPostgreSQLPassword"
     Pop $R0
 
-# If there is a previous install of the OpenERP Server, keep the login/password from the config file
+    # If there is a previous install of the OpenERP Server, keep the login/password from the config file
     WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "db_host" $TextPostgreSQLHostname
     WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "db_user" $TextPostgreSQLUsername
     WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "db_password" $R0
@@ -367,7 +384,7 @@ Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
     # Always override pg_path by the correct instance choosen by the user (newly installed or not...)
     WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "pg_path" "$INSTDIR\pgsql\bin"
 
-    Push $R1
+   Push $R1
     ${Base64_Encode} "$TextOPENERPPWD"
     Pop $R1
     WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "admin_passwd" $R1
@@ -384,16 +401,22 @@ Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
     Pop $R4
     WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "admin_restoredb_passwd" $R4
 
-    File /r "static\server-extra"
-    CopyFiles "$TEMP\server-extra\*.*" "$INSTDIR\Server"
-    nsExec::ExecToLog "net start openerp-server-6.0"
-SectionEnd
+    nsExec::Exec '"$INSTDIR\python\python.exe" "\"$INSTDIR\Server\openerp-server.py\"" --stop-after-init --logfile "$INSTDIR\..\ServerLog\openerp-server.log" -s'
+    nsExec::ExecToLog '"$INSTDIR\nssm\nssm.exe" install openerp-server-6.0 "$INSTDIR\python\python.exe" "\"$INSTDIR\Server\openerp-server.py\""'
+    nsExec::ExecToLog '"$INSTDIR\nssm\\nssm.exe" set openerp-server-6.0 AppDirectory "$\"$INSTDIR\Server$\""'
+    
+    nsExec::ExecToLog '"$INSTDIR\nssm\nssm.exe" install openerp-web-6.0 "$INSTDIR\python\python.exe" "\"$INSTDIR\Web\openerp-web.py\""'
+    nsExec::ExecToLog '"$INSTDIR\nssm\nssm.exe" set openerp-web-6.0 AppDirectory "$\"$INSTDIR\Web$\""'
 
-Section $(TITLE_OpenERP_Web_Client) SectionOpenERP_Web_Client
-    SectionIn 1 4
-    SetOutPath "$TEMP"
-    File "files\${OPENERP_WEB_SETUP}"
-    ExecWait '"$TEMP\${OPENERP_WEB_SETUP}" /S /D=$INSTDIR\Web'
+    nsExec::Exec "net stop openerp-server-6.0"
+    nsExec::Exec "net stop openerp-web-6.0"
+    sleep 20
+
+    nsExec::Exec "net start openerp-server-6.0"
+    nsExec::Exec "net start openerp-web-6.0"
+    sleep 2
+
+
 SectionEnd
 
 Section -Post
@@ -416,28 +439,25 @@ SectionEnd
 
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
     !insertmacro MUI_DESCRIPTION_TEXT ${SectionOpenERP_Server} $(DESC_OpenERP_Server)
-    !insertmacro MUI_DESCRIPTION_TEXT ${SectionOpenERP_Web_Client} $(DESC_OpenERP_Web_Client)
 !insertmacro MUI_FUNCTION_DESCRIPTION_END
 
 Section "Uninstall"
-    # Check if the server is installed
-    !insertmacro IfKeyExists "HKLM" "${UNINSTALL_REGISTRY_KEY_SERVER}" "UninstallString"
-    Pop $R0
+    nsExec::Exec "net stop openerp-server-6.0"
+    nsExec::Exec "net stop openerp-web-6.0"
+    nsExec::Exec "sc delete openerp-server-6.0"
+    nsExec::Exec "sc delete openerp-web-6.0"
+    sleep 20
 
-    ReadRegStr $0 HKLM "${UNINSTALL_REGISTRY_KEY_SERVER}" "UninstallString"
-    ExecWait '"$0" /S'
-
-    !insertmacro IfKeyExists "HKLM" "${UNINSTALL_REGISTRY_KEY_WEB_CLIENT}" "UninstallString"
-    Pop $R0
-
-    ReadRegStr $0 HKLM "${UNINSTALL_REGISTRY_KEY_WEB_CLIENT}" "UninstallString"
-    ExecWait '"$0" /S'
+    Rmdir /r "$INSTDIR\Server"
+    Rmdir /r "$INSTDIR\Web"
+    Rmdir /r "$INSTDIR\python"
+    Rmdir /r "$INSTDIR\nssm"
 
     # Uninstall Postgres
     nsExec::ExecToLog 'sc stop Postgres'
     nsExec::ExecToLog 'sc delete Postgres'
     nsExec::ExecToLog 'net user openpgsvc /delete'
-    Rmdir /r "$INSTDIR/pgsql"
+    Rmdir /r "$INSTDIR\pgsql"
 
     DeleteRegKey HKLM "${UNINSTALL_REGISTRY_KEY}"
 SectionEnd
@@ -449,7 +469,6 @@ Function .onInit
     ClearErrors
 
     Pop $R0
-
     StrCpy $TextPostgreSQLHostname ${DEFAULT_POSTGRESQL_HOSTNAME}
     StrCpy $TextPostgreSQLPort ${DEFAULT_POSTGRESQL_PORT}
     StrCpy $TextPostgreSQLUsername ${DEFAULT_POSTGRESQL_USERNAME}

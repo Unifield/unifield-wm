@@ -1,8 +1,8 @@
 #!/bin/sh
 
 # Prefer c:\Python27 over the Python stuff from Cygwin
-PATH=/cygdrive/c/Python27/Scripts:/cygdrive/c/Python27:$PATH
-export PATH
+#PATH=/cygdrive/c/Python27/Scripts:/cygdrive/c/Python27:$PATH
+#export PATH
 
 set -x -e
 
@@ -11,43 +11,48 @@ set -x -e
 chmod +x lib/vcredist_x86.exe
 ./lib/vcredist_x86.exe /q
 
+wget https://github.com/winpython/winpython/releases/download/4.1.20210417/Winpython64-3.9.4.0dot.exe
+chmod +x Winpython64-3.9.4.0dot.exe
+./Winpython64-3.9.4.0dot.exe
+rm -fr Winpython64-3.9.4.0dot.exe
+
 # Python
-rm -f python-2.7.13.msi
-wget https://www.python.org/ftp/python/2.7.13/python-2.7.13.msi
-msiexec.exe /qn /i python-2.7.13.msi
-rm -f python-2.7.13.msi
+#rm -f python-2.7.13.msi
+#wget https://www.python.org/ftp/python/2.7.13/python-2.7.13.msi
+#msiexec.exe /qn /i python-2.7.13.msi
+#rm -f python-2.7.13.msi
 
 # PIP
-rm -f get-pip.py
-wget https://bootstrap.pypa.io/get-pip.py
-python get-pip.py
-rm -f get-pip.py
+#rm -f get-pip.py
+#wget https://bootstrap.pypa.io/get-pip.py
+#python get-pip.py
+#rm -f get-pip.py
 
 # Now install the pre-reqs to being able to load UF's setup.py
 # These should be listed in the setup_requires, see:
 # https://pip.readthedocs.io/en/1.4.1/cookbook.html
-pip install py2exe_py2==0.6.9 pytz==2017.2
+#pip install py2exe_py2==0.6.9 pytz==2017.2
 
 # Install the packages which are not installable via "pip install"
 # and instead have to come from a .whl file.
-pip install lib/whl/*
-for i in lib/exe/*
-do
-	easy_install $i
-done
+#pip install lib/whl/*
+#for i in lib/exe/*
+#do
+#	easy_install $i
+#done
 
-rm -rf lib
+#rm -rf lib
 
-wget https://downloads.sourceforge.net/project/nsis/NSIS%203/3.01/nsis-3.01.zip
-unzip -o nsis-3.01.zip
-chmod +x nsis-3.01/*.exe nsis-3.01/Bin/*
-rm -f nsis-3.01.zip
+wget https://sourceforge.net/projects/nsis/files/NSIS%203/3.06.1/nsis-3.06.1.zip
+unzip -o nsis-3.06.1.zip
+chmod +x nsis-3.06.1/*.exe nsis-3.06.1/Bin/*
+rm -f nsis-3.06.1
 
 mkdir s
 cd s
-wget http://nsis.sourceforge.net/mediawiki/images/c/c9/NSIS_Simple_Service_Plugin_1.30.zip
-unzip NSIS_Simple_Service_Plugin_1.30.zip
-mv SimpleSC.dll ../nsis-3.01/Plugins/x86-ansi/
+wget https://nsis.sourceforge.io/mediawiki/images/e/ef/NSIS_Simple_Service_Plugin_Unicode_1.30.zip
+unzip NSIS_Simple_Service_Plugin_Unicode_1.30.zip
+mv SimpleSC.dll ../nsis-3.06.1/Plugins/x86-unicode/
 cd ..
 rm -rf s
 

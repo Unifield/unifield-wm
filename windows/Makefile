@@ -1,50 +1,29 @@
 include Makefile.version
 
-WEB_CLIENT_DIRECTORY=../web
+WEB_DIRECTORY=../web
 SERVER_DIRECTORY=../server
+PY_DIRECTORY=../../WPy64-3940/python-3.9.4.amd64/
 FILES_DIRECTORY=files
 
 PG_VER=9.6.10-1
 PG_ZIP=postgresql-$(PG_VER)-windows-binaries.zip
 
-MAKENSIS_ARGUMENTS=/DMAJOR_VERSION=$(MAJOR_VERSION) /DMINOR_VERSION=$(MINOR_VERSION) /DREVISION_VERSION=$(REVISION_VERSION) /DBUILD_VERSION=$(BUILD_VERSION) /DPG_VER=$(PG_VER)
+# vebose mode: /V4
+MAKENSIS_ARGUMENTS=/DMAJOR_VERSION=$(MAJOR_VERSION) /DMINOR_VERSION=$(MINOR_VERSION) /DREVISION_VERSION=$(REVISION_VERSION) /DBUILD_VERSION=$(BUILD_VERSION) /DPG_VER=$(PG_VER) /X"SetCompressor /FINAL lzma"
 
 LAUNCH_PY2EXE=python -B setup.py py2exe
-LAUNCH_MAKENSIS=$(HOME)/nsis-3.01/makensis.exe $(MAKENSIS_ARGUMENTS) setup.nsi
+LAUNCH_MAKENSIS=$(HOME)/nsis-3.06.1/Bin/makensis.exe $(MAKENSIS_ARGUMENTS) setup.nsi
 
 default: allinone
 
-clean: server_clean web_clean
-	rm -rf $(FILES_DIRECTORY)/*.exe
-	rm -rf *.exe
+server:
+	$(PY_DIRECTORY)python.exe -m pip install -U pip
+	$(PY_DIRECTORY)python.exe -m pip install bsdiff4-1.2.1-cp39-cp39-win_amd64.whl
+	$(PY_DIRECTORY)python.exe -m pip install -r $(SERVER_DIRECTORY)/requirements.txt
 
-server_clean:
-	rm -rf $(SERVER_DIRECTORY)/dist 
-	rm -rf $(SERVER_DIRECTORY)/build
-	rm -rf $(SERVER_DIRECTORY)/win32/dist 
-	rm -rf $(SERVER_DIRECTORY)/win32/build
-	rm -rf $(SERVER_DIRECTORY)/*.exe
-	rm -rf $(SERVER_DIRECTORY)/.cyg*
-
-server: server_clean
-	(cd $(SERVER_DIRECTORY)/win32 && $(LAUNCH_PY2EXE))
-	(cd $(SERVER_DIRECTORY) && $(LAUNCH_PY2EXE))
-	(cd $(SERVER_DIRECTORY) && $(LAUNCH_MAKENSIS))
-	cp $(SERVER_DIRECTORY)/openerp-*.exe $(FILES_DIRECTORY)/openerp-server-setup-$(MAJOR_VERSION).$(MINOR_VERSION)-$(BUILD_VERSION)-r$(REVISION_VERSION).exe
-
-web_clean:
-	rm -rf $(WEB_CLIENT_DIRECTORY)/dist 
-	rm -rf $(WEB_CLIENT_DIRECTORY)/build
-	rm -rf $(WEB_CLIENT_DIRECTORY)/win32/dist 
-	rm -rf $(WEB_CLIENT_DIRECTORY)/win32/build
-	rm -rf $(WEB_CLIENT_DIRECTORY)/*.exe
-	rm -rf $(WEB_CLIENT_DIRECTORY)/.cyg*
-
-web: web_clean
-	(cd $(WEB_CLIENT_DIRECTORY)/win32 && $(LAUNCH_PY2EXE))
-	(cd $(WEB_CLIENT_DIRECTORY) && $(LAUNCH_PY2EXE))
-	(cd $(WEB_CLIENT_DIRECTORY) && $(LAUNCH_MAKENSIS))
-	cp $(WEB_CLIENT_DIRECTORY)/openerp-*.exe $(FILES_DIRECTORY)/openerp-web-setup-$(MAJOR_VERSION).$(MINOR_VERSION)-$(BUILD_VERSION)-r$(REVISION_VERSION).exe
+web:
+	$(PY_DIRECTORY)python.exe -m pip install bsdiff4-1.2.1-cp39-cp39-win_amd64.whl
+	$(PY_DIRECTORY)python.exe -m pip install -r $(WEB_DIRECTORY)/requirements.txt
 
 standalone:	server web
 
