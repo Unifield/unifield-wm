@@ -364,10 +364,14 @@ Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
     SetOutPath "$INSTDIR\Server"
     File /r /x "__pycache__" "..\server\bin\*"
     File /r "static\server-extra\*.*"
-    
+
     # Install OpenERP Web
     SetOutPath "$INSTDIR\Web"
     File /r /x "__pycache__" "..\web\*"
+    SetOutPath "$INSTDIR\Web\conf"
+    File "/oname=openerp-web.cfg" "..\web\doc\openerp-web-win.cfg"
+    File "/oname=openerp-web-oc.cfg" "..\web\doc\openerp-web-oc.cfg"
+
 
     SetOutPath "$INSTDIR\nssm"
     File /r "..\..\nssm-2.24-101-g897c7ad\win64\*"
@@ -384,7 +388,7 @@ Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
     # Always override pg_path by the correct instance choosen by the user (newly installed or not...)
     WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "pg_path" "$INSTDIR\pgsql\bin"
 
-   Push $R1
+    Push $R1
     ${Base64_Encode} "$TextOPENERPPWD"
     Pop $R1
     WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "admin_passwd" $R1
