@@ -401,7 +401,7 @@ Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
     Pop $R4
     WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "admin_restoredb_passwd" $R4
 
-    nsExec::Exec '"$INSTDIR\python\python.exe" "\"$INSTDIR\Server\openerp-server.py\"" --stop-after-init --logfile "$INSTDIR\..\ServerLog\openerp-server.log" -s'
+    nsExec::Exec '"$INSTDIR\python\python.exe" "$INSTDIR\Server\openerp-server.py" --stop-after-init --logfile "$INSTDIR\..\ServerLog\openerp-server.log" -s'
     nsExec::ExecToLog '"$INSTDIR\nssm\nssm.exe" install openerp-server-6.0 "$INSTDIR\python\python.exe" "\"$INSTDIR\Server\openerp-server.py\""'
     nsExec::ExecToLog '"$INSTDIR\nssm\\nssm.exe" set openerp-server-6.0 AppDirectory "$\"$INSTDIR\Server$\""'
     
