@@ -13,28 +13,29 @@ import os
 import subprocess
 
 if len(sys.argv) != 3:
-    print 'Expected 2 arguments: <from_exe> <to_exe>'
+    print('Expected 2 arguments: <from_exe> <to_exe>')
     sys.exit()
 from_exe = sys.argv[1]
 to_exe = sys.argv[2]
 
 # Skip things that do not belong in patch files.
 def should_skip(name):
-    return (name.endswith('.pyc') or
-            name in [
-                # this will be added at the end of this script instead
-                'release.py',
-                'unifield-version.txt',
-                # these are related to the AIO and should not go in the patch
-                'Uninstall.exe',
-                os.path.join('web', 'Uninstall.exe'),
-                'setup.py',
-                'setup_py2exe_custom.py',
-                # these config files on the end-user installs should never
-                # be overwritten
-                'openerp-server.conf',
-                os.path.join('web', 'conf', 'openerp-web-oc.cfg'),
-    ])
+    return (
+        name.endswith('.pyc') or
+        '__pychache__' in name or
+        name in [
+            # this will be added at the end of this script instead
+            os.path.join('Server', 'release.py'),
+            os.path.join('Server', 'unifield-version.txt'),
+            # these are related to the AIO and should not go in the patch
+            # TODO: except for the migration ....
+            'Uninstall.exe',
+            os.path.join('Web', 'Uninstall.exe'),
+            # these config files on the end-user installs should never
+            # be overwritten
+            os.path.join('Server', 'openerp-server.conf'),
+            os.path.join('Web', 'conf', 'openerp-web-oc.cfg'),
+        ])
 
 # Change the directory from the filesystem into a destination directory in
 # the patchfile (this mapping was set by the implementation of
@@ -44,14 +45,6 @@ def dirmap(directory):
     directory = directory.replace(sys.argv[2], '')
     if directory.startswith(os.path.sep):
         directory = directory[1:]
-    # unpdater.py expects lower case
-    if directory.startswith('Web'):
-        directory = 'w' + directory[1:]
-    # change directory Server/foo to foo
-    if directory == 'Server':
-        directory = ''
-    elif directory.startswith('Server'+os.path.sep):
-        directory = directory[7:]
     return directory
 
 # The plan:
@@ -76,22 +69,22 @@ new = r'c:\Program Files (x86)\msf\Unifield'
 
 sys.stdout.flush()
 cmd_call = [from_exe, '/S', r'/PGINSTDIR=c:\from_db']
-print "Unpacking %s" % (' '.join(cmd_call),)
+print("Unpacking %s" % (' '.join(cmd_call),))
 subprocess.call(cmd_call)
 
-print "Stopping servers."
+print("Stopping servers.")
 sys.stdout.flush()
 subprocess.call('net stop openerp-server-6.0 /y', shell=True)
 subprocess.call('net stop openerp-web-6.0 /y', shell=True)
 
 # it gets installed into new, so move it to old, so we can install
 # to_exe into new
-print "Moving to %s" % old
+print("Moving to %s" % old)
 sys.stdout.flush()
 os.rename(new, old)
 
 cmd_call = [to_exe, '/S', r'/PGINSTDIR=c:\to_db']
-print "Unpacking: %s" % (' '.join(cmd_call), )
+print("Unpacking: %s" % (' '.join(cmd_call), ))
 sys.stdout.flush()
 subprocess.call(cmd_call)
 
@@ -114,10 +107,10 @@ for (dirpath, dirnames, filenames) in os.walk(old):
         if should_skip(dest):
             continue
         if not os.path.exists(newf):
-            print "del %s" % dest
+            print("del %s" % dest)
             deleted.append(dest)
         elif not filecmp.cmp(oldf, newf, False):
-            print "write mod %s" % dest
+            print("write mod %s" % dest)
             zf.write(newf, dest)
         seen[dest] = True
 
@@ -134,7 +127,7 @@ for (dirpath, dirnames, filenames) in os.walk(new):
         dest = os.path.join(dirmap(relpath), f)
         if should_skip(dest) or dest in seen:
             continue
-        print "write add %s" % dest
+        print("write add %s" % dest)
         zf.write(newf, dest)
 
 # special case for release.py: add the date onto the end of the
@@ -151,15 +144,15 @@ for line in lines:
 
 if not re.match('.*-[0-9]{8}-[0-9]{6}$', version):
     version += time.strftime('-%Y%m%d-%H%M%S')
-    print "Version inserted into the patch is: %s" % version
+    print("Version inserted into the patch is: %s" % version)
 else:
-    print "Version in the source is already timestamped: %s" % version
+    print("Version in the source is already timestamped: %s" % version)
 
 out += 'version = \'%s\'\n' % version
-zf.writestr('release.py', ''.join(out))
+zf.writestr('Server/release.py', ''.join(out))
 
 zf.writestr('delete.txt', '\n'.join(deleted))
 zf.close()
 
-print "Done. The resulting patch is:"
+print("Done. The resulting patch is:")
 subprocess.call("dir patch.zip", shell=True)

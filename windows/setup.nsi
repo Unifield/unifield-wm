@@ -406,18 +406,18 @@ Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
     WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "admin_restoredb_passwd" $R4
 
     nsExec::Exec '"$INSTDIR\python\python.exe" "$INSTDIR\Server\openerp-server.py" --stop-after-init --logfile "$INSTDIR\..\ServerLog\openerp-server.log" -s'
-    nsExec::ExecToLog '"$INSTDIR\nssm\nssm.exe" install openerp-server-6.0 "$INSTDIR\python\python.exe" "\"$INSTDIR\Server\openerp-server.py\""'
-    nsExec::ExecToLog '"$INSTDIR\nssm\\nssm.exe" set openerp-server-6.0 AppDirectory "$\"$INSTDIR\Server$\""'
+    nsExec::ExecToLog '"$INSTDIR\nssm\nssm.exe" install openerp-server-py3 "$INSTDIR\python\python.exe" -Xutf8 "\"$INSTDIR\Server\openerp-server.py\""'
+    nsExec::ExecToLog '"$INSTDIR\nssm\\nssm.exe" set openerp-server-py3 AppDirectory "$\"$INSTDIR\Server$\""'
     
-    nsExec::ExecToLog '"$INSTDIR\nssm\nssm.exe" install openerp-web-6.0 "$INSTDIR\python\python.exe" "\"$INSTDIR\Web\openerp-web.py\""'
-    nsExec::ExecToLog '"$INSTDIR\nssm\nssm.exe" set openerp-web-6.0 AppDirectory "$\"$INSTDIR\Web$\""'
+    nsExec::ExecToLog '"$INSTDIR\nssm\nssm.exe" install openerp-web-py3 "$INSTDIR\python\python.exe" -Xutf8 "\"$INSTDIR\Web\openerp-web.py\""'
+    nsExec::ExecToLog '"$INSTDIR\nssm\nssm.exe" set openerp-web-py3 AppDirectory "$\"$INSTDIR\Web$\""'
 
-    nsExec::Exec "net stop openerp-server-6.0"
-    nsExec::Exec "net stop openerp-web-6.0"
+    nsExec::Exec "net stop openerp-server-py3"
+    nsExec::Exec "net stop openerp-web-py3"
     sleep 20
 
-    nsExec::Exec "net start openerp-server-6.0"
-    nsExec::Exec "net start openerp-web-6.0"
+    nsExec::Exec "net start openerp-server-py3"
+    nsExec::Exec "net start openerp-web-py3"
     sleep 2
 
 
@@ -446,10 +446,10 @@ SectionEnd
 !insertmacro MUI_FUNCTION_DESCRIPTION_END
 
 Section "Uninstall"
-    nsExec::Exec "net stop openerp-server-6.0"
-    nsExec::Exec "net stop openerp-web-6.0"
-    nsExec::Exec "sc delete openerp-server-6.0"
-    nsExec::Exec "sc delete openerp-web-6.0"
+    nsExec::Exec "net stop openerp-server-py3"
+    nsExec::Exec "net stop openerp-web-py3"
+    nsExec::Exec "sc delete openerp-server-py3"
+    nsExec::Exec "sc delete openerp-web-py3"
     sleep 20
 
     Rmdir /r "$INSTDIR\Server"
