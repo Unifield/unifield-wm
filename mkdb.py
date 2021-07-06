@@ -405,7 +405,6 @@ class db_creation(object):
             'name' : self.db.name,
             'instance' : self.db.name,
             'mission' : '%s_MISSION_%s' % (config.prefix, mission_suffix),
-            'state' : 'active',
         }
         if prop_instance is not None:
             data.update(prop_instance)
