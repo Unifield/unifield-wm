@@ -849,7 +849,7 @@ class client_creation(db_creation):
             if self.index == 1:
                 to_hq = True
         if code:
-            self.set_analytic_loss(self.db, code)
+            self.db.get('ir.config_parameter').set_param('INIT_CC_FX_GAIN', code)
             if to_hq:
                 self.set_analytic_loss(self.hq.db, code)
 
