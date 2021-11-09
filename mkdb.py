@@ -583,6 +583,7 @@ class server_creation(db_creation, unittest.TestCase):
     def test_10_install_update_server(self):
         self.db.connect('admin')
         self.db.module('update_server').install().do()
+        self.db.module('update_client').install().do()
 
     @unittest.skipIf(skipModuleData, "Data module installation desactivated")
     def test_10_install_data_server(self):
