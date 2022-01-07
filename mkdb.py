@@ -705,8 +705,6 @@ class client_creation(db_creation):
             if not parents:
                 self.fail('Cannot find parent entity for %s!' % self.db.name)
             entities.write(entity_ids, {'parent_id':parents[0]})
-        # Server accept validation
-        entities.validate_action(entity_ids)
 
     @unittest.skipIf(skipSync, "Synchronization desactivated")
     def test_50_synchronize(self):
@@ -916,6 +914,9 @@ class hqn_creation(client_creation, unittest.TestCase):
         self.add_to_group('OC_%02d' % self.index, 'OC')
         for i in range(1, coordo_count+1):
             self.add_to_group('HQ%s + Mission %s' % (self.index, i), 'HQ + MISSION')
+        entities = Synchro.get('sync.server.entity')
+        entity_ids = entities.search([('name','=',self.db.name)])
+        entities.validate_action(entity_ids)
 
     @unittest.skipIf(skipPropInstance, "Proprietary Instance creation desactivated")
     def test_40_prop_instance(self):
@@ -1083,6 +1084,10 @@ class coordon_creation(client_creation):
         self.add_to_group('Coordinations of %s' % self.hq.db.name, 'COORDINATIONS')
         self.add_to_group('Mission %s-%s' % (self.hq.index, self.index), 'MISSION')
         self.add_to_group('HQ%s + Mission %s' % (self.hq.index, self.index), 'HQ + MISSION')
+        entities = Synchro.get('sync.server.entity')
+        entity_ids = entities.search([('name','=',self.db.name)])
+        entities.validate_action(entity_ids)
+
 
     @unittest.skipIf(skipPropInstance, "Proprietary Instance creation desactivated")
     def test_40_prop_instance(self):
@@ -1120,6 +1125,9 @@ class projectn_creation(client_creation):
         self.add_to_group('OC_%02d' % self.hq.index, 'OC')
         self.add_to_group('Mission %s-%s' % (self.hq.index, self.parent.index), 'MISSION')
         self.add_to_group('HQ%s + Mission %s' % (self.hq.index, self.parent.index), 'HQ + MISSION')
+        entities = Synchro.get('sync.server.entity')
+        entity_ids = entities.search([('name','=',self.db.name)])
+        entities.validate_action(entity_ids)
 
     @unittest.skipIf(skipGroups, "Group creation desactivated")
     def test_31_make_groups_project(self):
