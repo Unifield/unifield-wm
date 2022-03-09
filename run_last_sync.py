@@ -56,7 +56,7 @@ if __name__ == '__main__':
                 },
             )
             db.connect('admin')
-            print "Syncing %s ..." % db.db_name
+            print("Syncing %s ..." % db.db_name)
             db_creation.sync(db)
     else:
         for tc in test_cases:
@@ -64,8 +64,8 @@ if __name__ == '__main__':
                 try:
                     tc.setUpClass()
                     tc.db.connect('admin')
-                    print "Syncing %s ..." % tc.db.db_name
+                    print("Syncing %s ..." % tc.db.db_name)
                     tc.sync()
-                except Exception, e:
-                    print "Error", tc.db.db_name, e
+                except Exception as e:
+                    print("Error", tc.db.db_name, e)
 

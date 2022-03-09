@@ -6,7 +6,7 @@ import csv
 import base64
 import shutil
 
-from xmlrpclib import Fault
+from xmlrpc.client import Fault
 import openerplib103 as openerplib
 
 from tempfile import NamedTemporaryFile
@@ -37,7 +37,7 @@ class db(object):
         return self
 
     def create_db(self, password, demo=False, lang='en_US', wait=False):
-        if not self.server_password: raise Exception, "The server password is needed for this operation"
+        if not self.server_password: raise Exception("The server password is needed for this operation")
         self.id = self.service.create(self.server_password, self.db_name, demo, 'en_US', password)
         if wait: self.wait()
         return self
@@ -54,9 +54,9 @@ class db(object):
         if self.server.connector.hostname in ('127.0.0.1', 'localhost'):
             try:
                 shutil.move(self.service.dump_file(self.server_password, self.db_name), to_file)
-                chmod(to_file, 0744)
+                chmod(to_file, 0o744)
                 return True
-            except Fault, e:
+            except Fault as e:
                 if 'Method not found' not in e.faultString:
                     raise
         bckfile_f = open(to_file, 'wb')
@@ -76,7 +76,7 @@ class db(object):
                 tmpfile.close()
                 self.service.restore_file(self.server_password, self.db_name, filename)
                 return True
-            except Fault, e:
+            except Fault as e:
                 if 'Method not found' not in e.faultString:
                     raise
         f = open(from_file, 'rb')
@@ -85,7 +85,7 @@ class db(object):
         return result
 
     def wait(self):
-        if not self.server_password: raise Exception, "The server password is needed for this operation"
+        if not self.server_password: raise Exception("The server password is needed for this operation")
         while True:
             try:
                 running = self.service.get_progress(self.server_password, self.id)
@@ -96,7 +96,7 @@ class db(object):
         return self
 
     def drop(self):
-        if not self.server_password: raise Exception, "The server password is needed for this operation"
+        if not self.server_password: raise Exception("The server password is needed for this operation")
         ## TODO does'n handle database current access prevent dropping
         #self.service.drop(self.server_password, self.db_name)
         if self.db_name in self.service.list():
@@ -128,7 +128,7 @@ class db(object):
 
     def search_data(self, model, data, domain=None, action=None, active='active', pdb=False):
         if isinstance(data, dict):
-            searchDomain = [(field,'=',value) for (field,value) in data.items() if value]
+            searchDomain = [(field,'=',value) for (field,value) in list(data.items()) if value]
         elif isinstance(data, (list,tuple)):
             searchDomain = list(data)
         else:
@@ -137,7 +137,7 @@ class db(object):
             searchDomain += list(domain)
         if active == 'unactive': searchDomain.append(('active','=',0))
         elif active == 'both': searchDomain.extend(['|',('active','=',0),('active','=',1)])
-        elif not active == 'active': raise Exception, "'active' prameter must be one of these: active, unactive or both"
+        elif not active == 'active': raise Exception("'active' prameter must be one of these: active, unactive or both")
         proxy = self.get(model)
         ids = proxy.search(searchDomain)
         if not ids and pdb:
@@ -176,7 +176,7 @@ class db(object):
         if path.isfile(filepath):
             if filepath[-4:] == '.csv':
                 ch = csv.reader(open(filepath, 'rb'), quotechar='"', delimiter=',')
-                fields = ch.next()
+                fields = next(ch)
                 datetime_re = re.compile(r"^\d\d\d\d-\d\d-\d\d( \d\d:\d\d:\d\d)?$")
                 for values in ch:
                     evaluated_values = []
@@ -186,25 +186,25 @@ class db(object):
                             evaluated_values += [eval(v)]
                         except:
                             evaluated_values += [eval('"""'+v+'"""')]
-                    datas.append(dict(zip(fields, evaluated_values)))
+                    datas.append(dict(list(zip(fields, evaluated_values))))
             elif filepath[-4:] == '.xml':
-                raise Exception, 'While importing XML file: Not yet implemented'
+                raise Exception('While importing XML file: Not yet implemented')
             else:
-                raise Exception, 'Cannot import file "%s": unrecognized file type!' % (filepath,)
+                raise Exception('Cannot import file "%s": unrecognized file type!' % (filepath,))
         else:
-            raise IOError, 'Can\'t access to file "%s", check read permission!' % (filepath,)
+            raise IOError('Can\'t access to file "%s", check read permission!' % (filepath,))
         return datas
 
     def Import(self, model, datas, mode='init'):
         if type(datas) == dict:
-            fields = datas.keys()
-            datas = [datas.values()]
+            fields = list(datas.keys())
+            datas = [list(datas.values())]
         elif not type(datas) == list:
-            raise Exception, 'Cannot import data: datas must be a list of dict!'
+            raise Exception('Cannot import data: datas must be a list of dict!')
         else:
             fields = []
             for i in datas:
-                fields = set(list(fields) + i.keys())
+                fields = set(list(fields) + list(i.keys()))
             fields = list(fields)
             old_datas = datas
             datas = []
@@ -218,7 +218,7 @@ class db(object):
         if 'reconcile note' in fields: pdb.set_trace()
         result, rows, warning_msg, dummy = self.get(model).import_data(fields, datas, mode)
         if result == -1:
-            raise Exception, "Unable to import data: "+str(warning_msg)
+            raise Exception("Unable to import data: "+str(warning_msg))
         return self
 
 class ref(object):
@@ -238,7 +238,7 @@ class ref(object):
 
 class wizard(object):
     def __init__(self, db, model, data):
-        for k, v in data.items():
+        for k, v in list(data.items()):
             if isinstance(v, ref):
                 data[k] = v.get(db)
         self.proxy = db.get(model)
@@ -263,7 +263,7 @@ class module(object):
             name = 'base'
         self.ids = self.module_proxy.search([('name','=',name)])
         if not self.ids:
-            raise Exception, "Unable to find module %s!" % (name,)
+            raise Exception("Unable to find module %s!" % (name,))
 
     def remove(self):
         self.expect = 'uninstalled'
@@ -288,7 +288,7 @@ class module(object):
     def do(self):
         self.db.get('base.module.upgrade').upgrade_module([])
         if self.module_proxy.search([('id','in',self.ids),('state','=',self.expect)], 0, False, False, True) == len(self.ids):
-            raise Exception, "Modules modifications not applied"
+            raise Exception("Modules modifications not applied")
         return self
 
 class user(object):
@@ -302,17 +302,17 @@ class user(object):
             self.id = None
 
     def delGroups(self, *groups):
-        if not self.id: raise Exception, 'Cannot remove groups to unknown user: '+self.login
+        if not self.id: raise Exception('Cannot remove groups to unknown user: '+self.login)
         group_ids = [i.id if type(i) == group else group(self.db, i).id for i in groups]
-        if None in group_ids: raise Exception, 'Cannot find some groups in this list: '+', '.join(groups)
+        if None in group_ids: raise Exception('Cannot find some groups in this list: '+', '.join(groups))
         group_changes = [(3,i,) for i in group_ids]
         self.users.write([self.id],{'groups_id':group_changes})
         return self
 
     def addGroups(self, *groups):
-        if not self.id: raise Exception, 'Cannot add groups to unknown user: '+self.login
+        if not self.id: raise Exception('Cannot add groups to unknown user: '+self.login)
         group_ids = [i.id if type(i) == group else group(self.db, i).id for i in groups]
-        if None in group_ids: raise Exception, 'Cannot find some groups in this list: '+', '.join(groups)
+        if None in group_ids: raise Exception('Cannot find some groups in this list: '+', '.join(groups))
         group_changes = [(4,i,) for i in group_ids]
         self.users.write([self.id],{'groups_id':group_changes})
         return self
@@ -336,7 +336,7 @@ class group(object):
     def delUsers(self, *users):
         if not self.id: self.add()
         user_ids = [i.id if type(i) == user else user(self.db, i).id for i in users]
-        if None in user_ids: raise Exception, 'Cannot find some users in this list: '+', '.join(users)
+        if None in user_ids: raise Exception('Cannot find some users in this list: '+', '.join(users))
         user_changes = [(3,i,) for i in user_ids]
         self.groups.write([self.id],{'users':user_changes})
         return self
@@ -344,7 +344,7 @@ class group(object):
     def addUsers(self, *users):
         if not self.id: self.add()
         user_ids = [i.id if type(i) == user else user(self.db, i).id for i in users]
-        if None in user_ids: raise Exception, 'Cannot find some users in this list: '+', '.join(users)
+        if None in user_ids: raise Exception('Cannot find some users in this list: '+', '.join(users))
         user_changes = [(4,i,) for i in user_ids]
         self.groups.write([self.id],{'users':user_changes})
         return self

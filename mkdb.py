@@ -81,7 +81,7 @@ def get_users_from_file(filename):
     SELECTION_CHAR='X'
 
     users = []
-    with open(filename, 'rb') as csvfile:
+    with open(filename, 'r') as csvfile:
         reader = csv.reader(csvfile, delimiter=';')
         header=False
 
@@ -548,7 +548,7 @@ class dump_all(unittest.TestCase):
                 raise self.fail('%s does not exist ! Did you set source_path in config.py ?' % src_path)
             info[ad] = get_revno_from_path(src_path)
         f = open(os.path.join(dir_to_dump, 'info.txt'), 'w')
-        for mod, data in info.items():
+        for mod, data in list(info.items()):
             f.write("%s_url=%s\n" % (mod, data['lpurl']))
             f.write("%s_revno=%s\n" % (mod, data['revno']))
         f.close()
@@ -626,7 +626,7 @@ class client_creation(db_creation):
             nb = req.search([])
             wiz = self.db.get('import_data')
             f = open(filename, 'rb')
-            rec_id = wiz.create({'object': model, 'file': base64.encodestring(f.read())})
+            rec_id = wiz.create({'object': model, 'file': base64.b64encode(f.read()).decode('utf8')})
             f.close()
             wiz.import_csv([rec_id], {})
             imported = False
@@ -634,7 +634,7 @@ class client_creation(db_creation):
                 time.sleep(5)
                 imported = nb != req.search([])
             return
-        with open(filename, 'rb') as csvfile:
+        with open(filename, 'r') as csvfile:
             reader = csv.reader(csvfile, delimiter=',')
             fields = False
             data = []
@@ -689,7 +689,7 @@ class client_creation(db_creation):
         wiz_data['oc'] = oc
         wizard = self.db.wizard('sync.client.register_entity', wiz_data)
         # Fetch instances
-        wizard.next()
+        print(wizard)
         # Group state
         wizard.group_state()
         # Register instance
@@ -1011,6 +1011,7 @@ class hqn_creation(client_creation, unittest.TestCase):
         if not hasattr(config, 'load_extra_files') or not config.load_extra_files:
             return
 
+        self.db.connect('admin')
         for filename in config.load_extra_files:
             self.import_csv(get_file_from_source(filename))
 
@@ -1021,8 +1022,8 @@ class hqn_creation(client_creation, unittest.TestCase):
 
         self.db.connect('admin')
 
-        f = open(get_file_from_source(config.load_uac_file))
-        data = base64.encodestring(f.read())
+        f = open(get_file_from_source(config.load_uac_file), 'rb')
+        data = base64.b64encode(f.read()).decode('utf8')
         f.close()
 
         wiz = self.db.get('user.access.configurator')
@@ -1160,13 +1161,13 @@ class projectn_creation(client_creation):
 class verbose(unittest.TestCase):
     def test_10_show_dbs(self):
         warn("\n"+"-" * 40)
-        for tc_hq in filter(lambda tc:issubclass(tc, hqn_creation), test_cases):
+        for tc_hq in [tc for tc in test_cases if issubclass(tc, hqn_creation)]:
             warn( " * %s" % hqn_creation.name_format % tc_hq.getNameFormat())
-            for tc in filter(lambda tc:issubclass(tc, coordon_creation) \
-                             and tc.parent is tc_hq, test_cases):
+            for tc in [tc for tc in test_cases if issubclass(tc, coordon_creation) \
+                             and tc.parent is tc_hq]:
                 warn( "    - %s" % coordon_creation.name_format % tc.getNameFormat())
-                for tp in filter(lambda tp:issubclass(tp, projectn_creation) \
-                                 and tp.parent is tc, test_cases):
+                for tp in [tp for tp in test_cases if issubclass(tp, projectn_creation) \
+                                 and tp.parent is tc]:
                     warn( "        + %s" % projectn_creation.name_format % tp.getNameFormat())
             warn("-" * 40)
 
@@ -1185,11 +1186,11 @@ if not hasattr(config, 'instance_tree') or not config.instance_tree:
             for pi in range(1, project_count+1):
                 config.instance_tree['HQ%d'%i]['C%d'%ci].append('P%d'%pi)
 else:
-    hq_count = len(config.instance_tree.keys())
-    coordo_count = max([len(x.values()) for x in config.instance_tree.values()])
+    hq_count = len(list(config.instance_tree.keys()))
+    coordo_count = max([len(list(x.values())) for x in list(config.instance_tree.values())])
 
 hq_index = 0
-for hq, coordos in config.instance_tree.iteritems():
+for hq, coordos in config.instance_tree.items():
     hq_index += 1
     test_cases.append( type("HQ%d_creation" % hq_index, (hqn_creation,unittest.TestCase), {
         'prefix' : 'HQ%s'%hq_index,

@@ -1,6 +1,6 @@
 import sys
 import textwrap
-from StringIO import StringIO
+from io import StringIO
 from test import test_support
 
 import traceback
@@ -422,8 +422,8 @@ class TestOutputBuffering(unittest.TestCase):
         result._original_stdout = StringIO()
         result._original_stderr = StringIO()
 
-        print 'foo'
-        print >> sys.stderr, 'bar'
+        print('foo')
+        print('bar', file=sys.stderr)
 
         self.assertEqual(out_stream.getvalue(), 'foo\n')
         self.assertEqual(err_stream.getvalue(), 'bar\n')
@@ -466,9 +466,9 @@ class TestOutputBuffering(unittest.TestCase):
             result._original_stdout = StringIO()
             result._original_stderr = StringIO()
 
-            print >> sys.stdout, 'foo'
+            print('foo', file=sys.stdout)
             if include_error:
-                print >> sys.stderr, 'bar'
+                print('bar', file=sys.stderr)
 
 
             addFunction = getattr(result, add_attr)

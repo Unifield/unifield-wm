@@ -37,19 +37,19 @@ Home page: http://pypi.python.org/pypi/openerp-client-lib
 Code repository: https://code.launchpad.net/~niv-openerp/openerp-client-lib/trunk
 """
 
-import xmlrpclib
+import xmlrpc.client
 import logging 
 import socket
 
 try:
-    import cPickle as pickle
+    import pickle as pickle
 except ImportError:
     import pickle
 
 try:
-    import cStringIO as StringIO
+    import io as StringIO
 except ImportError:
-    import StringIO
+    import io
 
 _logger = logging.getLogger(__name__)
 
@@ -91,7 +91,7 @@ class XmlRPCConnector(Connector):
 
     def send(self, service_name, method, *args):
         url = '%s/%s' % (self.url, service_name)
-        service = xmlrpclib.ServerProxy(url)
+        service = xmlrpc.client.ServerProxy(url)
         return getattr(service, method)(*args)
 
 class NetRPC_Exception(Exception):
@@ -133,7 +133,7 @@ class NetRPC(object):
         while totalsent < size:
             sent = self.sock.send(msg[totalsent:])
             if sent == 0:
-                raise RuntimeError, "socket connection broken"
+                raise RuntimeError("socket connection broken")
             totalsent = totalsent + sent
 
     def myreceive(self):
@@ -141,7 +141,7 @@ class NetRPC(object):
         while len(buf) < 8:
             chunk = self.sock.recv(8 - len(buf))
             if chunk == '':
-                raise RuntimeError, "socket connection broken"
+                raise RuntimeError("socket connection broken")
             buf += chunk
         size = int(buf)
         buf = self.sock.recv(1)
@@ -153,9 +153,9 @@ class NetRPC(object):
         while len(msg) < size:
             chunk = self.sock.recv(size-len(msg))
             if chunk == '':
-                raise RuntimeError, "socket connection broken"
+                raise RuntimeError("socket connection broken")
             msg = msg + chunk
-        msgio = StringIO.StringIO(msg)
+        msgio = io.StringIO(msg)
         unpickler = pickle.Unpickler(msgio)
         unpickler.find_global = None
         res = unpickler.load()

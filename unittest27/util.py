@@ -142,7 +142,7 @@ def _ordered_count(iterable):
         except KeyError:
             counts[elem] = 1
             order.append(elem)
-    c = zip(order, [counts[elem] for elem in order])
+    c = list(zip(order, [counts[elem] for elem in order]))
     return c
 
 def _count_diff_hashable(actual, expected):

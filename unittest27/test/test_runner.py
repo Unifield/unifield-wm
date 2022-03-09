@@ -1,6 +1,6 @@
 import unittest
 
-from cStringIO import StringIO
+from io import StringIO
 import pickle
 
 from .support import LoggingResult, ResultWithNoStartTestRunStopTestRun
@@ -225,7 +225,7 @@ class Test_TextTestRunner(unittest.TestCase):
     def test_pickle_unpickle(self):
         # Issue #7197: a TextTestRunner should be (un)pickleable. This is
         # required by test_multiprocessing under Windows (in verbose mode).
-        from StringIO import StringIO as PickleableIO
+        from io import StringIO as PickleableIO
         # cStringIO objects are not pickleable, but StringIO objects are.
         stream = PickleableIO("foo")
         runner = unittest.TextTestRunner(stream)

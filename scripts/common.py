@@ -1,14 +1,16 @@
 from sys import stdout, stderr, exit
 
-from xmlrpclib import Fault
+from xmlrpc.client import Fault
 import openerplib103 as openerplib
 
 from tests.openerplib import db
 
 import config
 import os
-from bzrlib.workingtree import WorkingTree
-from bzrlib.branch import BzrBranch
+from breezy.workingtree import WorkingTree
+from breezy.branch import Branch
+#from bzrlib.workingtree import WorkingTree
+#from bzrlib.branch import BzrBranch
 
 
 __all__ = ['server', 'client', 'db_instance', 'Synchro', 'HQ', 'Coordo', 'Project', 'Project2', 'check_lp_update', 'get_revno_from_path']
@@ -133,7 +135,7 @@ Project2 = db_instance(
 )
 
 def get_lp_branch(wk):
-    if isinstance(wk.branch, BzrBranch):
+    if isinstance(wk.branch, Branch):
         parent = wk.branch.get_parent()
         if parent is None:
             parent = wk.branch.get_bound_location()
@@ -159,7 +161,7 @@ def check_lp_update(update=False):
         src_path = os.path.join(config.source_path, ad)
         info = get_revno_from_path(src_path)
 
-        br = BzrBranch.open(info['lpurl'])
+        br = Branch.open(info['lpurl'])
         lr = br.last_revision()
         revno = br.revision_id_to_dotted_revno(lr)[0]
 

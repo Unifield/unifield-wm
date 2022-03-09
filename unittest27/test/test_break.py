@@ -4,7 +4,7 @@ import sys
 import signal
 import weakref
 
-from cStringIO import StringIO
+from io import StringIO
 
 
 import unittest

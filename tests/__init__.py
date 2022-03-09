@@ -1,12 +1,12 @@
 from os import path
 import sys, traceback, re
 from sys import stdout, stderr
-from xmlrpclib import Fault, ProtocolError
+from xmlrpc.client import Fault, ProtocolError
 
 
 ## Continue raising exception
 def raise_error():
-    raise sys.exc_info()[0], sys.exc_info()[1]
+    raise sys.exc_info()[0](sys.exc_info()[1])
 
 
 ## Make a test
@@ -18,7 +18,7 @@ class test(object):
         if name != None: self.name = name
         self.reset()
 
-    def next(self):
+    def __next__(self):
         if self.step == 'finally': return False
         next_possibilities = ['finally']
         if not self.failure():
@@ -58,7 +58,7 @@ class test(object):
         try:
             foo = getattr(self, "step_"+str(self.step))
         except:
-            if self.step not in (0, 'finally', ): raise Exception, "Cannot find step `"+str(self.step)+"'!"
+            if self.step not in (0, 'finally', ): raise Exception("Cannot find step `"+str(self.step)+"'!")
         else:
             if self.step == 'finally':
                 try:
@@ -69,11 +69,11 @@ class test(object):
                 self.status = 'execution'
                 try:
                     self.next_step = foo()
-                except Fault, e:
+                except Fault as e:
                     self.traceback = "\n".join(traceback.format_exc().splitlines()[0:-1]) + "\n" + e.faultString
                     self.failed('Fault: '+str(e.faultCode))
                 ## TODO not tested
-                except ProtocolError, e:
+                except ProtocolError as e:
                     self.traceback = "\n".join(traceback.format_exc().splitlines()[0:-1]) + "\n" + e.faultString
                     self.failed('ProtocolError: %s: %s' % (e.errcode, e.errmsg,))
                 except:
@@ -84,7 +84,7 @@ class test(object):
     def run(self):
         stdout.write(self.name)
         stdout.flush()
-        while self.next():
+        while next(self):
             self.execute()
             if not self.failure():
                 stdout.write('.')
@@ -125,7 +125,7 @@ class serie(test):
         stdout.write(self.name+' ended.\n')
 
     def execute(self):
-        foo = self.it.next()
+        foo = next(self.it)
         foo.run()
         if foo.failure():
             self.traceback = foo.traceback
@@ -150,7 +150,7 @@ if __name__ == '__main__':
 
         def step_3(self):
             pass
-            raise StandardError
+            raise Exception
 
         def step_finally(self):
             #raise Exception
@@ -163,7 +163,7 @@ if __name__ == '__main__':
     s = myserie()
 
     s.run()
-    if s.failure(): print s.reason
+    if s.failure(): print(s.reason)
 
-    print a
+    print(a)
 

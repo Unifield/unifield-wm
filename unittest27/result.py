@@ -4,7 +4,7 @@ import os
 import sys
 import traceback
 
-from StringIO import StringIO
+from io import StringIO
 
 from . import util
 from functools import wraps

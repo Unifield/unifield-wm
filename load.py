@@ -121,7 +121,7 @@ class load(synchronize, unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        print cls.logs.strip()
+        print(cls.logs.strip())
 
 test_cases = [clean,make_records,load,check_records]
 

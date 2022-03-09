@@ -70,7 +70,7 @@ class Test_Assertions(unittest.TestCase):
         with self.assertRaises(KeyError) as cm:
             try:
                 raise KeyError
-            except Exception, e:
+            except Exception as e:
                 raise
         self.assertIs(cm.exception, e)
 
@@ -95,7 +95,7 @@ class Test_Assertions(unittest.TestCase):
         self.assertNotRegexpMatches('Ala ma kota', r'r+')
         try:
             self.assertNotRegexpMatches('Ala ma kota', r'k.t', 'Message')
-        except self.failureException, e:
+        except self.failureException as e:
             self.assertIn("'kot'", e.args[0])
             self.assertIn('Message', e.args[0])
         else:
@@ -141,7 +141,7 @@ class TestLongMessage(unittest.TestCase):
     def test_formatMessage_unicode_error(self):
         one = ''.join(chr(i) for i in range(255))
         # this used to cause a UnicodeDecodeError constructing msg
-        self.testableTrue._formatMessage(one, u'\uFFFD')
+        self.testableTrue._formatMessage(one, '\uFFFD')
 
     def assertMessages(self, methodName, args, errors):
         def getMethod(i):
@@ -159,7 +159,7 @@ class TestLongMessage(unittest.TestCase):
             if withMsg:
                 kwargs = {"msg": "oops"}
 
-            with self.assertRaisesRegexp(self.failureException,
+            with self.assertRaisesRegex(self.failureException,
                                          expected_regexp=expected_regexp):
                 testMethod(*args, **kwargs)
 
