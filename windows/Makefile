@@ -2,27 +2,35 @@ include Makefile.version
 
 WEB_DIRECTORY=../web
 SERVER_DIRECTORY=../server
-PY_DIRECTORY=../../WPy64-3940/python-3.9.4.amd64/
+#PY_DIRECTORY=../../WPy64-3940/python-3.9.4.amd64/
+#BSDIFF=bsdiff4-1.2.1-cp39-cp39-win_amd64.whl
+
+PY_DIRECTORY=../../WPy64-31020/python-3.10.2.amd64/
+BSDIFF=bsdiff4-1.2.1-cp310-cp310-win_amd64.whl
+
+#PY_DIRECTORY=../../WPy64-38100/python-3.8.10.amd64/
+#BSDIFF=bsdiff4-1.2.1-cp38-cp38-win_amd64.whl
+
 FILES_DIRECTORY=files
 
-PG_VER=9.6.10-1
-PG_ZIP=postgresql-$(PG_VER)-windows-binaries.zip
+PG_VER=14.2-2
+PG_ZIP=postgresql-$(PG_VER)-windows-x64-binaries.zip
 
 # vebose mode: /V4
 MAKENSIS_ARGUMENTS=/DMAJOR_VERSION=$(MAJOR_VERSION) /DMINOR_VERSION=$(MINOR_VERSION) /DREVISION_VERSION=$(REVISION_VERSION) /DBUILD_VERSION=$(BUILD_VERSION) /DPG_VER=$(PG_VER) /X"SetCompressor /SOLID lzma"
 
-LAUNCH_PY2EXE=python -B setup.py py2exe
-LAUNCH_MAKENSIS=$(HOME)/nsis-3.06.1/Bin/makensis.exe $(MAKENSIS_ARGUMENTS) setup.nsi
+LAUNCH_MAKENSIS=$(HOME)/nsis-3.06.1/makensis.exe $(MAKENSIS_ARGUMENTS) setup.nsi
 
 default: allinone
 
 server:
 	$(PY_DIRECTORY)python.exe -m pip install -U pip
-	$(PY_DIRECTORY)python.exe -m pip install bsdiff4-1.2.1-cp39-cp39-win_amd64.whl
+	$(PY_DIRECTORY)python.exe -m pip install $(BSDIFF)
+	$(PY_DIRECTORY)python.exe -m pip install cffi-1.14.5-cp310-cp310-win_amd64.whl
 	$(PY_DIRECTORY)python.exe -m pip install -r $(SERVER_DIRECTORY)/requirements.txt
 
 web:
-	$(PY_DIRECTORY)python.exe -m pip install bsdiff4-1.2.1-cp39-cp39-win_amd64.whl
+	$(PY_DIRECTORY)python.exe -m pip install $(BSDIFF)
 	$(PY_DIRECTORY)python.exe -m pip install -r $(WEB_DIRECTORY)/requirements.txt
 
 standalone:	server web

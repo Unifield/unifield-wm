@@ -79,10 +79,10 @@ Unicode True
     !define VERSION "${MAJOR_VERSION}.${MINOR_VERSION}-${BUILD_VERSION}-r${REVISION_VERSION}"
 !endif
 !ifndef WINPYVERSION
-    !define WINPYVERSION 'WPy64-3940'
+    !define WINPYVERSION 'WPy64-31020'
 !endif
 !ifndef PYTHONVERSION
-	!define PYTHONVERSION '3.9.4'
+    !define PYTHONVERSION '3.10.2'
 !endif
 
 !define PRODUCT_NAME "OpenERP"
@@ -359,6 +359,8 @@ Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
     # Installing winpython
     SetOutPath "$INSTDIR\python"
     File /r /x "__pycache__" "..\..\${WINPYVERSION}\python-${PYTHONVERSION}.amd64\*"
+    #CopyFiles /SILENT $INSTDIR\python\python.exe $INSTDIR\python\unifield-server.exe
+    #CopyFiles /SILENT $INSTDIR\python\python.exe $INSTDIR\python\unifield-web.exe
 
     # Install OpenERP Server
     SetOutPath "$INSTDIR\Server"
@@ -405,10 +407,10 @@ Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
     Pop $R4
     WriteIniStr "$INSTDIR\Server\openerp-server.conf" "options" "admin_restoredb_passwd" $R4
 
-    nsExec::Exec '"$INSTDIR\python\python.exe" "$INSTDIR\Server\openerp-server.py" --stop-after-init --logfile "$INSTDIR\..\ServerLog\openerp-server.log" -s'
+    nsExec::Exec '"$INSTDIR\python\python.exe" "$INSTDIR\Server\openerp-server.py" --stop-after-init --logfile "$INSTDIR\ServerLog\openerp-server.log" -s'
     nsExec::ExecToLog '"$INSTDIR\nssm\nssm.exe" install openerp-server-py3 "$INSTDIR\python\python.exe" -Xutf8 "\"$INSTDIR\Server\openerp-server.py\""'
     nsExec::ExecToLog '"$INSTDIR\nssm\\nssm.exe" set openerp-server-py3 AppDirectory "$\"$INSTDIR\Server$\""'
-    
+
     nsExec::ExecToLog '"$INSTDIR\nssm\nssm.exe" install openerp-web-py3 "$INSTDIR\python\python.exe" -Xutf8 "\"$INSTDIR\Web\openerp-web.py\""'
     nsExec::ExecToLog '"$INSTDIR\nssm\nssm.exe" set openerp-web-py3 AppDirectory "$\"$INSTDIR\Web$\""'
 
