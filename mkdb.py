@@ -689,7 +689,6 @@ class client_creation(db_creation):
         wiz_data['oc'] = oc
         wizard = self.db.wizard('sync.client.register_entity', wiz_data)
         # Fetch instances
-        print(wizard)
         # Group state
         wizard.group_state()
         # Register instance
@@ -1034,7 +1033,7 @@ class hqn_creation(client_creation, unittest.TestCase):
             pass
         user_ids = self.db.get('res.users').search([('id', '!=', 1)])
         if user_ids:
-            self.db.get('res.users').write(user_ids, {'password': bcrypt.encrypt(config.admin_password)})
+            self.db.get('res.users').write(user_ids, {'password': bcrypt.hash(config.admin_password)})
 
     def test_70_create_intersection(self):
         partner = self.db.get('res.partner')
@@ -1164,10 +1163,10 @@ class verbose(unittest.TestCase):
         for tc_hq in [tc for tc in test_cases if issubclass(tc, hqn_creation)]:
             warn( " * %s" % hqn_creation.name_format % tc_hq.getNameFormat())
             for tc in [tc for tc in test_cases if issubclass(tc, coordon_creation) \
-                             and tc.parent is tc_hq]:
+                       and tc.parent is tc_hq]:
                 warn( "    - %s" % coordon_creation.name_format % tc.getNameFormat())
                 for tp in [tp for tp in test_cases if issubclass(tp, projectn_creation) \
-                                 and tp.parent is tc]:
+                           and tp.parent is tc]:
                     warn( "        + %s" % projectn_creation.name_format % tp.getNameFormat())
             warn("-" * 40)
 
