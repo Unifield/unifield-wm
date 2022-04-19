@@ -6,8 +6,9 @@ if [ "$1" = "-h" ]; then
 fi
 
 set -e
-SERVER_BRANCH=lp:unifield-server/trunk
-CLIWEB_BRANCH=lp:unifield-web/trunk
+SERVER_BRANCH=lp:~jfb-tempo-consulting/unifield-server/py3
+CLIWEB_BRANCH=lp:~jfb-tempo-consulting/unifield-web/py3
+PREREQ=/opt/prereq-py3.10-win-aio.qcow2
 [ -n "$1" ] && SERVER_BRANCH=$1
 [ -n "$2" ] && CLIWEB_BRANCH=$2
 
@@ -17,7 +18,8 @@ echo "Web branch: $CLIWEB_BRANCH"
 br=`basename $SERVER_BRANCH`
 
 ./package.py \
-        --version uf6.0-$br \
+        --version uf24.0py3 \
+        --win-image=$PREREQ \
         --server-branch=$SERVER_BRANCH \
         --client-web-branch=$CLIWEB_BRANCH \
         $@

@@ -76,6 +76,8 @@ print("Stopping servers.")
 sys.stdout.flush()
 subprocess.call('net stop openerp-server-6.0 /y', shell=True)
 subprocess.call('net stop openerp-web-6.0 /y', shell=True)
+subprocess.call('net stop openerp-server-py3 /y', shell=True)
+subprocess.call('net stop openerp-web-py3 /y', shell=True)
 
 # it gets installed into new, so move it to old, so we can install
 # to_exe into new

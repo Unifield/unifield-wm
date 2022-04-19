@@ -138,34 +138,37 @@ class KVM(object):
             time.sleep(5)
 
     def ssh(self,cmd):
-        l=['ssh','-o','UserKnownHostsFile=/dev/null','-o','StrictHostKeyChecking=no','-p',self.remoteport,'-i',self.ssh_key,'%s@%s'%(self.login,self.remoteip),cmd]
+        #l=['ssh','-o','UserKnownHostsFile=/dev/null','-o','StrictHostKeyChecking=no','-p',self.remoteport,'-i',self.ssh_key,'%s@%s'%(self.login,self.remoteip),cmd]
+        l=['ssh','-o','UserKnownHostsFile=/dev/null','-o','StrictHostKeyChecking=no','-p',self.remoteport,'%s@%s'%(self.login,self.remoteip),cmd]
         system(l)
     def rsync(self,args,options='--delete --exclude .bzrignore'):
-        cmd ='rsync -rtv -e "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p %s -i %s" %s %s' % (self.remoteport, self.ssh_key, options, args)
+        #cmd ='rsync -rtv -e "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p %s -i %s" %s %s' % (self.remoteport, self.ssh_key, options, args)
+        cmd ='rsync -rtv -e "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p %s " %s %s' % (self.remoteport, options, args)
         system(cmd)
     def run(self):
         pass
 
 class KVMWinBuildAllInOneExe(KVM):
     def run(self):
-        self.login = 'Naresh'
+        self.login = 'jfb'
         self.ssh("mkdir -p build")
-        self.rsync('%s/ Naresh@%s:build/server/'% (self.o.work, self.remoteip))
-        self.rsync('%s/ Naresh@%s:build/web/' % (self.o.work_client_web, self.remoteip))
+        self.rsync('%s/ %s@%s:build/server/'% (self.o.work, self.login, self.remoteip))
+        self.rsync('%s/ %s@%s:build/web/' % (self.o.work_client_web, self.login, self.remoteip))
         f = open('windows/Makefile.version','w')
         f.write('MAJOR_VERSION=%s\n' % (self.o.major,))
         f.write('MINOR_VERSION=%s\n' % (self.o.minor,))
         f.write('REVISION_VERSION=%s\n' % (1,))
         f.write('BUILD_VERSION=%s\n' % (self.o.timestamp,))
         f.close()
-        self.rsync('windows/ Naresh@%s:build/windows/' % (self.remoteip,))
+        self.rsync('windows/ %s@%s:build/windows/' % (self.login, self.remoteip))
         # This one uses a let's encrypt cert, which WinXP cannot handle.
-        self.ssh("PYTHONHTTPSVERIFY=0 /cygdrive/c/Python27/Scripts/pip --verbose --no-cache-dir install egenix-mx-base==3.2.9")
-        self.ssh("/cygdrive/c/Python27/Scripts/pip --verbose --no-cache-dir install ./build/server")
-        self.ssh("/cygdrive/c/Python27/Scripts/pip --verbose --no-cache-dir install ./build/web")
-        self.ssh("PATH=/cygdrive/c/Python27:/cygdrive/c/Python27/Scripts:$PATH make -C build/windows allinone")
+        #self.ssh("PYTHONHTTPSVERIFY=0 /cygdrive/c/Python27/Scripts/pip --verbose --no-cache-dir install egenix-mx-base==3.2.9")
+        #self.ssh("/cygdrive/c/Python27/Scripts/pip --verbose --no-cache-dir install ./build/server")
+        #self.ssh("/cygdrive/c/Python27/Scripts/pip --verbose --no-cache-dir install ./build/web")
+        #self.ssh("PATH=/cygdrive/c/Python27:/cygdrive/c/Python27/Scripts:$PATH make -C build/windows allinone")
+        self.ssh("make -C build/windows allinone")
         # For an unknown reason it seems that files timestamp matters
-        self.rsync('Naresh@%s:build/windows/files/ %s/'% (self.remoteip, self.o.pkg,) ,'')
+        self.rsync('%s@%s:build/windows/files/ %s/'% (self.login, self.remoteip, self.o.pkg) ,'')
         os.chmod(join(self.o.pkg, 'openerp-allinone-setup-%(major)s.%(minor)s-%(timestamp)s-r1.txt' % \
                                   dict([(x, getattr(self.o, x)) for x in ['major','minor','timestamp']])), 0644)
         print "KVMWinBuildExe.run(): done"
@@ -181,7 +184,7 @@ def options():
     op.add_option("-t", "--timestamp", default=time.strftime("%Y%m%d-%H%M%S",time.gmtime()), help="timestamp (%default)")
     op.add_option("-s", "--server-branch", default='lp:~openerp/openobject-server/6.1', help="%default")
     op.add_option("-y", "--client-web-branch", default='lp:~openerp/openobject-client-web/6.0', help="%default")
-    op.add_option("", "--win-image", default='prereq.qcow2', help="%default")
+    op.add_option("", "--win-image", default='/opt/prereq-win-aio.qcow2', help="%default")
     op.add_option("", "--win-key", default='key', help="%default")
     (o, args) = op.parse_args()
     # derive other options

@@ -35,7 +35,7 @@ To make the prereq image:
 
   rm -f prereq.qcow2
   qemu-img create -f qcow2 -b winxp.qcow2 prereq.qcow2
-  kvm -m 1G -net nic,model=rtl8139 -net user,hostfwd=tcp:127.0.0.1:10022-:22 -drive file=prereq.qcow2 -nographic
+  kvm -m 4G -net nic,model=rtl8139 -net user,hostfwd=tcp:127.0.0.1:10022-:22 -drive file=prereq.qcow2
   # after it is shutdown: protect it so that it is not changed by accident
   chmod 444 prereq.qcow2
 

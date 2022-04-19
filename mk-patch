@@ -1,8 +1,8 @@
 #!/bin/bash
 
-ssh_user=tempo
-ssh_host=win10-2
-ssh_port=22
+ssh_user=jfb
+ssh_host=127.0.0.1
+ssh_port=10022
 # Driver for mk-patch.py, which is run from INSIDE of the builder VM.
 
 if [ -z "$1" -o -z "$2" ]; then
@@ -14,9 +14,9 @@ from=$1
 to=$2
 
 
-#kvm -m 1G -net nic,model=rtl8139 -net user,hostfwd=tcp:127.0.0.1:10022-:22 -drive file=prereq.qcow2,snapshot=on -nographic &
-#pid=$!
-#sleep 15
+kvm -m 4G -net nic,model=rtl8139 -net user,hostfwd=tcp:127.0.0.1:10022-:22 -drive file=/opt/prereq-win-aio.qcow2,snapshot=on -nographic &
+pid=$!
+sleep 30
 
 ssh_args="-p $ssh_port $ssh_user@$ssh_host"
 ssh $ssh_args -- net stop Postgres /y
@@ -37,8 +37,8 @@ version=${split_to[3]}
 echo ssh $ssh_args chmod +x $from $fo
 ssh $ssh_args chmod +x $from $fo
 
-echo ssh $ssh_args /cygdrive/c/Python27/python mk-patch.py $from $to
-ssh $ssh_args /cygdrive/c/Python27/python mk-patch.py $from $to
+echo ssh $ssh_args WPy64-38100/python-3.8.10.amd64/python.exe  mk-patch.py $from $to
+ssh $ssh_args WPy64-38100/python-3.8.10.amd64/python.exe mk-patch.py $from $to
 
 rm -f ${version}.patch.zip
 echo scp -P $ssh_port $ssh_user@$ssh_host:patch.zip ${version}.patch.zip
@@ -49,3 +49,5 @@ echo
 echo "The new patch is in patch.zip. Rename it as desired."
 ls -l ${version}.patch.zip
 md5sum ${version}.patch.zip
+
+kill -9 $pid

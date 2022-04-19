@@ -20,7 +20,7 @@ base=https://get.enterprisedb.com/postgresql
 for ver in $from $to; do
     file=postgresql-$ver-windows-binaries.zip
     if [ ! -f $file ]; then
-	wget $base/$file
+        wget $base/$file
     fi
 done
 
@@ -42,7 +42,8 @@ cp windows/msvcr120.dll $to2/bin
 
 # find the tool to make patches
 
-bsdiff=msf/repo/lpunifield-server_trunk/bin/bsdifftree.py
+#bsdiff=msf/repo/lpunifield-server_trunk/bin/bsdifftree.py
+bsdiff=msf/repo/lpjfb-tempo-consulting_unifield-server_py3/bin/bsdifftree.py
 if [ ! -f $bsdiff ]; then
     echo "Required file $bsdiff not found."
     echo "You need to build an AIO in this directory before this script will work."
