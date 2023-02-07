@@ -525,6 +525,9 @@ class activate_inter_partner(unittest.TestCase):
                 partner_ids = p_obj.search([('partner_type', 'in', ['section', 'intermission']), ('active', '=', False), ('name', 'not in', exclude_name)])
                 if partner_ids:
                     p_obj.write(partner_ids, {'active': True})
+                ext_ids = p_obj.search([('partner_type', '=', 'external'), ('active', '=', False)])
+                if ext_ids:
+                    p_obj.write(ext_ids, {'active': True})
 
 class dump_all(unittest.TestCase):
 
