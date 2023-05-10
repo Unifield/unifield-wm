@@ -7,6 +7,7 @@ from tests.openerplib import db
 
 import config
 import os
+import breezy.bzr
 from breezy.workingtree import WorkingTree
 from breezy.branch import Branch
 #from bzrlib.workingtree import WorkingTree
