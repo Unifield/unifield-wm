@@ -384,7 +384,6 @@ class db_creation(object):
                 'category' : 'OC',
                 'type' : 'normal',
                 'parent_id' : top_cost_center_id,
-                'date_start': '2013-01-01',
             }
             cost_center_id = hq.get('account.analytic.account').create(data)
         elif self.db is not hq:
@@ -397,7 +396,6 @@ class db_creation(object):
                 'category' : 'OC',
                 'type' : 'normal',
                 'parent_id' : parent_cost_center_id,
-                'date_start': '2013-01-01',
             }
             top_cost_center_id = hq.get('account.analytic.account').create(data)
         data = {
