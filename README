@@ -42,7 +42,7 @@ To make the prereq image:
   # In another window:
   chmod 400 key
   scp -P 10022 -i key -r uf-prereq lib Naresh@localhost:
-  ssh -p 10022 -i key Naresh@localhost sh uf-prereq
+  ssh -p 10022 -i key jfb@localhost sh uf-prereq
 
 Editing the base image (DON'T DO IT)
 ------------------------------------

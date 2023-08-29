@@ -10,6 +10,13 @@ ssh $ssh_args <<EOF
 net stop Postgres /y
 net stop openerp-server-6.0 /y
 net stop openerp-web-6.0 /y
+net stop openerp-server-py3 /y
+net stop openerp-web-py3 /y
+sc delete openerp-server-6.0
+sc delete openerp-web-6.0
+sc delete openerp-server-py3
+sc delete openerp-web-py3
+
 
 for install in Unifield Unifield-old; do
 if [ -f ""$main_path/\$install/Server/Uninstall.exe"" ]; then

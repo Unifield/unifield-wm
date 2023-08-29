@@ -22,7 +22,7 @@ to_exe = sys.argv[2]
 def should_skip(name):
     return (
         name.endswith('.pyc') or
-        '__pychache__' in name or
+        '__pycache__' in name or
         name in [
             # this will be added at the end of this script instead
             os.path.join('Server', 'release.py'),
@@ -67,6 +67,8 @@ def dirmap(directory):
 old = r'c:\Program Files (x86)\msf\Unifield-old'
 new = r'c:\Program Files (x86)\msf\Unifield'
 
+for to_create in [r'c:\from_db', r'c:\to_db']:
+    os.mkdir(to_create)
 sys.stdout.flush()
 cmd_call = [from_exe, '/S', r'/PGINSTDIR=c:\from_db']
 print("Unpacking %s" % (' '.join(cmd_call),))
@@ -82,6 +84,7 @@ subprocess.call('net stop openerp-web-py3 /y', shell=True)
 # it gets installed into new, so move it to old, so we can install
 # to_exe into new
 print("Moving to %s" % old)
+
 sys.stdout.flush()
 os.rename(new, old)
 
@@ -100,7 +103,7 @@ for (dirpath, dirnames, filenames) in os.walk(old):
         relpath = relpath[1:]
     if relpath == 'ServerLog':
         continue
-    if relpath == 'pgsql':
+    if relpath.startswith('pgsql'):
         continue
     for f in filenames:
         oldf = os.path.join(dirpath, f)

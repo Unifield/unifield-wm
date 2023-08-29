@@ -5,15 +5,21 @@ SERVER_DIRECTORY=../server
 #PY_DIRECTORY=../../WPy64-3940/python-3.9.4.amd64/
 #BSDIFF=bsdiff4-1.2.1-cp39-cp39-win_amd64.whl
 
-PY_DIRECTORY=../../WPy64-31020/python-3.10.2.amd64/
-BSDIFF=bsdiff4-1.2.1-cp310-cp310-win_amd64.whl
+#PY_DIRECTORY=../../WPy64-31020/python-3.10.2.amd64/
+#BSDIFF=bsdiff4-1.2.1-cp310-cp310-win_amd64.whl
+#PYyaml=PyYAML-5.4.1-cp310-cp310-win_amd64.whl
 
 #PY_DIRECTORY=../../WPy64-38100/python-3.8.10.amd64/
 #BSDIFF=bsdiff4-1.2.1-cp38-cp38-win_amd64.whl
 
+
+PY_DIRECTORY=../../WPy64-310111/python-3.10.11.amd64/
+BSDIFF=bsdiff4-1.2.1-cp310-cp310-win_amd64.whl
+# to change in windows/setup.nsi
+
 FILES_DIRECTORY=files
 
-PG_VER=14.2-2
+PG_VER=14.9-1
 PG_ZIP=postgresql-$(PG_VER)-windows-x64-binaries.zip
 
 # vebose mode: /V4
@@ -26,6 +32,7 @@ default: allinone
 server:
 	$(PY_DIRECTORY)python.exe -m pip install -U pip
 	$(PY_DIRECTORY)python.exe -m pip install $(BSDIFF)
+	#$(PY_DIRECTORY)python.exe -m pip install $(PYyaml)
 	$(PY_DIRECTORY)python.exe -m pip install cffi-1.14.5-cp310-cp310-win_amd64.whl
 	$(PY_DIRECTORY)python.exe -m pip install -r $(SERVER_DIRECTORY)/requirements.txt
 

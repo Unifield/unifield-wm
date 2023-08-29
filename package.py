@@ -21,7 +21,7 @@ def url2dir(n):
     return n.replace('/','_').replace(':','').replace('~','')
 
 def system(l,chdir=None, exit_on_failure=True):
-    print l
+    print(l)
     if chdir:
         cwd = os.getcwd()
         os.chdir(chdir)
@@ -78,9 +78,9 @@ def branch_or_update(b,d):
 
 def branch_get_summary(prefix, d):
     branch_info = system_w_output(['bzr', 'info', '-q'], d)
-    branch_location = re.findall('parent branch: (.*)$', branch_info, re.M)[0]
+    branch_location = re.findall('parent branch: (.*)$', str(branch_info), re.M)[0]
     branch_revno = system_w_output(['bzr', 'revno'], d)
-    summary = "%s:\n    URL: %s\n    REV: %s" % (prefix, branch_location, branch_revno)
+    summary = "%s:\n    URL: %s\n    REV: %s" % (prefix, str(branch_location), branch_revno)
     return summary
 
 def update(o):
@@ -119,15 +119,16 @@ class KVM(object):
         self.login = 'openerp'
 
     def timeout(self,signum,frame):
-        print "vm timeout kill",self.pid
+        print("vm timeout kill",self.pid)
         os.kill(self.pid,15)
 
     def start(self):
-        l="kvm -m 4G -net nic,model=rtl8139 -net user,hostfwd=tcp:127.0.0.1:10022-:22 -drive".split(" ")
-        l.append('file=%s,snapshot=on'%self.image)
-        l.append('-nographic')
+        l="kvm -m 6G -smp 2 -machine accel=kvm -net nic,model=rtl8139 -net user,hostfwd=tcp:127.0.0.1:10022-:22 -drive".split(" ")
+        l.append('file=%s,if=virtio,snapshot=on'%self.image)
+        #l.append('-nographic')
+        print('Start: %s' % ' '.join(l))
         self.pid=os.spawnvp(os.P_NOWAIT, l[0], l)
-        time.sleep(30)
+        time.sleep(60)
         signal.alarm(5000)
         signal.signal(signal.SIGALRM, self.timeout)
         try:
@@ -170,8 +171,8 @@ class KVMWinBuildAllInOneExe(KVM):
         # For an unknown reason it seems that files timestamp matters
         self.rsync('%s@%s:build/windows/files/ %s/'% (self.login, self.remoteip, self.o.pkg) ,'')
         os.chmod(join(self.o.pkg, 'openerp-allinone-setup-%(major)s.%(minor)s-%(timestamp)s-r1.txt' % \
-                                  dict([(x, getattr(self.o, x)) for x in ['major','minor','timestamp']])), 0644)
-        print "KVMWinBuildExe.run(): done"
+                                  dict([(x, getattr(self.o, x)) for x in ['major','minor','timestamp']])), 0o644)
+        print("KVMWinBuildExe.run(): done")
 
 #----------------------------------------------------------
 # Options and Main

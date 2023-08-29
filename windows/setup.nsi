@@ -79,10 +79,10 @@ Unicode True
     !define VERSION "${MAJOR_VERSION}.${MINOR_VERSION}-${BUILD_VERSION}-r${REVISION_VERSION}"
 !endif
 !ifndef WINPYVERSION
-    !define WINPYVERSION 'WPy64-31020'
+    !define WINPYVERSION 'WPy64-310111'
 !endif
 !ifndef PYTHONVERSION
-    !define PYTHONVERSION '3.10.2'
+    !define PYTHONVERSION '3.10.11'
 !endif
 
 !define PRODUCT_NAME "OpenERP"

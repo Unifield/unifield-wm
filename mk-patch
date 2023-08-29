@@ -14,9 +14,10 @@ from=$1
 to=$2
 
 
-kvm -m 4G -net nic,model=rtl8139 -net user,hostfwd=tcp:127.0.0.1:10022-:22 -drive file=/opt/prereq-win-aio.qcow2,snapshot=on -nographic &
+#kvm -m 4G -net nic,model=rtl8139 -net user,hostfwd=tcp:127.0.0.1:10022-:22 -drive file=/opt/prereq-win-aio.qcow2,snapshot=on -nographic &
+kvm -m 6G -net nic,model=rtl8139 -smp 2 -machine accel=kvm -net user,hostfwd=tcp:127.0.0.1:10022-:22 -drive file=/opt/prereq-win-aio.qcow2,if=virtio,snapshot=on &
 pid=$!
-sleep 30
+sleep 10
 
 ssh_args="-p $ssh_port $ssh_user@$ssh_host"
 ssh $ssh_args -- net stop Postgres /y
@@ -26,8 +27,8 @@ ssh $ssh_args -- rm -fr "/cygdrive/c/Program\ Files\ \(x86\)/msf"
 # Put the script and the two files on the VM
 echo "Copying the files over to the VM."
 scp -P $ssh_port mk-patch.py \
-	$from $to \
-	$ssh_user@$ssh_host:
+    $from $to \
+    $ssh_user@$ssh_host:
 
 from=`basename $from`
 to=`basename $to`
