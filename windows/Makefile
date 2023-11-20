@@ -19,7 +19,8 @@ BSDIFF=bsdiff4-1.2.1-cp310-cp310-win_amd64.whl
 
 FILES_DIRECTORY=files
 
-PG_VER=14.9-1
+# https://www.enterprisedb.com/download-postgresql-binaries
+PG_VER=14.10-1
 PG_ZIP=postgresql-$(PG_VER)-windows-x64-binaries.zip
 
 # vebose mode: /V4
