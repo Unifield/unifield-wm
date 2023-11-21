@@ -33,6 +33,10 @@ else:
     # Needed for setUpClass and skipIf methods
     import unittest27 as unittest
 
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
+
+
 bool_configuration_only = False
 bool_creation_only = False
 master_dir = '/'.join(os.path.realpath(__file__).split('/')[0:-1]+['master_dump'])
@@ -343,6 +347,8 @@ class db_creation(object):
                         hq_name = self.db and self.db.name and re.findall(r'HQ[0-9]+', self.db.name)
                         if hq_name and hasattr(config, 'currency_tree'):
                             data['functional_id'] = config.currency_tree.get(hq_name[-1], config.default_currency)
+                    if model == 'fixed.asset.setup':
+                        data['fixed_asset_ok'] = True
                     button = data.pop('button', 'action_next')
                     answer = getattr(self.db.wizard(model, data), button)()
                 model = answer.get('res_model', None)
@@ -367,6 +373,7 @@ class db_creation(object):
         cost_center_id = False
         top_cost_center_id = False
         mission_suffix = 'OC'
+        month_12 = (datetime.now() + relativedelta(day=1, months=-12)).strftime('%Y-%m-%d')
         if mission and mission.db is hq:
             # coordo
             mission_suffix = "%02d" % self.index
@@ -376,6 +383,7 @@ class db_creation(object):
                 'category' : 'OC',
                 'type' : 'view',
                 'parent_id' : hq.search_data('account.analytic.account', {'Code':'OC'})[0],
+                'date_start': month_12,
             }
             top_cost_center_id = hq.get('account.analytic.account').create(top_data)
             data = {
@@ -384,6 +392,7 @@ class db_creation(object):
                 'category' : 'OC',
                 'type' : 'normal',
                 'parent_id' : top_cost_center_id,
+                'date_start': month_12,
             }
             cost_center_id = hq.get('account.analytic.account').create(data)
         elif self.db is not hq:
@@ -396,6 +405,7 @@ class db_creation(object):
                 'category' : 'OC',
                 'type' : 'normal',
                 'parent_id' : parent_cost_center_id,
+                'date_start': month_12,
             }
             top_cost_center_id = hq.get('account.analytic.account').create(data)
         data = {
