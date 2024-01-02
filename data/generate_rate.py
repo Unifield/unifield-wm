@@ -2,7 +2,7 @@ import requests
 from mx import DateTime
 date_now = DateTime.now()+DateTime.RelativeDateTime(day=1)
 #for base in ['eur', 'chf']:
-date_from = DateTime.strptime('2022-01-01', '%Y-%m-%d')
+date_from = DateTime.strptime('2023-01-01', '%Y-%m-%d')
 feur = open('eur.txt', 'w')
 fchf = open('chf.txt', 'w')
 
