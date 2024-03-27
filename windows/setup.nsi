@@ -466,6 +466,7 @@ Section "Uninstall"
     Rmdir /r "$INSTDIR\pgsql"
 
     DeleteRegKey HKLM "${UNINSTALL_REGISTRY_KEY}"
+    DeleteRegKey HKLM "SYSTEM\ControlSet001\services\eventlog\Application\openerp-web-6.0"
 SectionEnd
 
 Function .onInit
