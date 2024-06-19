@@ -339,8 +339,7 @@ class db_creation(object):
                     answer = proxy.action_skip([])
                 elif model == 'msf_instance.setup':
                     instance_id = self.db.search_data('msf.instance', [('instance','=',self.db.name)])[0]
-                    self.db.get('res.company').write([1], {'instance_id': instance_id})
-                    answer = self.db.wizard(model, {'instance_id': instance_id}).action_next()
+                    answer = self.db.wizard(model, {'first_run': False, 'instance_id': instance_id}).action_check()
                 else:
                     data = dict(self.base_wizards.get(model, {}))
                     if model == 'currency.setup':
@@ -462,6 +461,9 @@ class db_creation(object):
         # Make or update OC group
         group_ids = group.search([('name','=',group_name)])
         if group_ids:
+            if group_type == 'HQ + MISSION':
+                hq_id = Synchro.get('sync.server.entity').search([('name','=', self.hq.db.name)])
+                group.write(group_ids, {'entity_ids' : [(4,hq_id[0])]})
             group.write(group_ids, {'entity_ids' : [(4,entity_ids[0])]})
         else:
             Type = Synchro.get('sync.server.group_type')
