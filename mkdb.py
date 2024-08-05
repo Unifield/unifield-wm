@@ -949,7 +949,7 @@ class hqn_creation(client_creation, unittest.TestCase):
                 self.db.get('hr.payment.method').create({'name': x})
 
         # duplicate as UniData
-        if hq_count > 1:
+        if False and hq_count > 1:
             data = [
                 'DORADIDA15T',
                 'DINJCEFA1V-',
