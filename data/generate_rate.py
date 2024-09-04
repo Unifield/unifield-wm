@@ -1,8 +1,10 @@
 import requests
-from mx import DateTime
-date_now = DateTime.now()+DateTime.RelativeDateTime(day=1)
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
+
+date_now = datetime.now() + relativedelta(day=1)
 #for base in ['eur', 'chf']:
-date_from = DateTime.strptime('2023-01-01', '%Y-%m-%d')
+date_from = datetime.strptime('2023-01-01', '%Y-%m-%d')
 feur = open('eur.txt', 'w')
 fchf = open('chf.txt', 'w')
 
@@ -21,6 +23,6 @@ while date_from < date_now:
     for code in cur:
         if code != 'CHF':
             fchf.write(" %s:%s\n" % (code, cur[code]/cur['CHF']))
-    date_from += DateTime.RelativeDateTime(months=1)
+    date_from += relativedelta(months=1)
 feur.close()
 fchf.close()
