@@ -279,9 +279,9 @@ Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
 
     # Install the MSVC 2013 redistributable, needed by PostgreSQL
     SetOutPath "$TEMP"
-    File vcredist_x86.exe
-    nsExec::ExecToLog '$TEMP\vcredist_x86.exe /install /quiet /norestart'
-    Delete "$TEMP\vcredist_x86.exe"
+    File vc_redist.x64.exe
+    nsExec::ExecToLog '$TEMP\vc_redist.x64.exe /install /quiet /norestart'
+    Delete "$TEMP\vc_redist.x64.exe"
 
     # Install Postgres
 
