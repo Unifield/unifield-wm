@@ -732,8 +732,8 @@ class client_creation(db_creation):
         partner.create({
             'name': self.db.name,
             'partner_type': 'intermission',
-            'customer': False,
-            'supplier': False,
+            'customer': True,
+            'supplier': True,
             'property_account_payable':  account.search([('code','=','30020')])[0],
             'property_account_receivable': account.search([('code','=','12050')])[0],
             'city': 'XXX',
