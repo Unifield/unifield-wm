@@ -105,7 +105,8 @@ Unicode True
 !define DEFAULT_OPENERP_DROP_PWD 'dropAdmin'
 !define DEFAULT_OPENERP_BKP_PWD 'bkAdmin'
 !define DEFAULT_OPENERP_RESTORE_PWD 'restoreAdmin'
-!define DEFAULT_POSTGRESQL_INSTPATH 'D:\MSF data\Unifield\PostgreSQL'
+!define DEFAULT_POSTGRESQL_INSTPATH_D 'D:\MSF data\Unifield\PostgreSQL'
+!define DEFAULT_POSTGRESQL_INSTPATH_C 'C:\MSF data\Unifield\PostgreSQL'
 
 
 Name '${DISPLAY_NAME}'
@@ -124,6 +125,7 @@ RequestExecutionLevel admin
 
 !insertmacro GetParameters
 !insertmacro GetOptions
+!insertmacro GetRoot
 
 Var cmdLineParams
 
@@ -150,6 +152,8 @@ Var HWNDOpenERPPwd
 Var HWNDOpenERPDropPwd
 Var HWNDOpenERPBkpPwd
 Var HWNDOpenERPRestorePwd
+
+Var RootPostgreSQLFolder
 
 !define STATIC_PATH "static"
 !define PIXMAPS_PATH "${STATIC_PATH}\pixmaps"
@@ -211,6 +215,7 @@ LangString WARNING_HostNameIsEmpty ${LANG_ENGLISH} "The hostname for the connect
 LangString WARNING_UserNameIsEmpty ${LANG_ENGLISH} "The username for the connection to the PostgreSQL Server is empty"
 LangString WARNING_PasswordIsEmpty ${LANG_ENGLISH} "The password for the connection to the PostgreSQL Server is empty"
 LangString WARNING_PortIsWrong ${LANG_ENGLISH} "The port for the connexion to the PostgreSQL Server is wrong (default: 5432)"
+LangString WARNING_PsqlDrive ${LANG_ENGLISH} "The PostgreSQL installation drive does not exist"
 LangString DESC_PostgreSQLNewInstall ${LANG_ENGLISH} "New installation"
 LangString DESC_PostgreSQLPage ${LANG_ENGLISH} "Configure the information for the PostgreSQL connection"
 LangString DESC_PostgreSQL_Hostname ${LANG_ENGLISH} "Hostname"
@@ -248,6 +253,7 @@ LangString WARNING_InstallPathEmpty ${LANG_FRENCH} "Le chemin d'installation du 
 LangString WARNING_HostNameIsEmpty ${LANG_FRENCH} "L'adresse pour la connection au serveur PostgreSQL est vide"
 LangString WARNING_UserNameIsEmpty ${LANG_FRENCH} "Le nom d'utilisateur pour la connection au serveur PostgreSQL est vide"
 LangString WARNING_PasswordIsEmpty ${LANG_FRENCH} "Le mot de passe pour la connection au serveur PostgreSQL est vide"
+LangString WARNING_PsqlDrive ${LANG_FRENCH} "Le lecteur du chemin d'installation du serveur PostgreSQL n'existe pas"
 LangString WARNING_PortIsWrong ${LANG_FRENCH} "Le port pour la connection au serveur PostgreSQL est erroné (défaut: 5432)"
 LangString DESC_PostgreSQLNewInstall ${LANG_FRENCH} "Nouvelle installation"
 LangString DESC_PostgreSQLPage ${LANG_FRENCH} "Configurez les informations de connection pour le serveur PostgreSQL"
@@ -480,7 +486,11 @@ Function .onInit
     StrCpy $TextPostgreSQLPort ${DEFAULT_POSTGRESQL_PORT}
     StrCpy $TextPostgreSQLUsername ${DEFAULT_POSTGRESQL_USERNAME}
     StrCpy $TextPostgreSQLPassword ${DEFAULT_POSTGRESQL_PASSWORD}
-    StrCpy $TextPostgreSQLInstPath "${DEFAULT_POSTGRESQL_INSTPATH}"
+    ${If} ${FileExists} "D:\*.*"
+        StrCpy $TextPostgreSQLInstPath "${DEFAULT_POSTGRESQL_INSTPATH_D}"
+    ${Else}
+        StrCpy $TextPostgreSQLInstPath "${DEFAULT_POSTGRESQL_INSTPATH_C}"
+    ${Endif}
 
     StrCpy $TextOPENERPPWD ${DEFAULT_OPENERP_PASSWORD}
     StrCpy $TextOPENERPDROPPWD ${DEFAULT_OPENERP_DROP_PWD}
@@ -577,6 +587,12 @@ Function LeavePostgreSQL
             Goto next
         false:
             Abort
+    ${EndIf}
+
+    ${GetRoot} "$TextPostgreSQLInstPath" $RootPostgreSQLFolder
+    ${IfNot} ${FileExists} "$RootPostgreSQLFolder\*.*"
+        MessageBox MB_ICONEXCLAMATION|MB_OK $(WARNING_PsqlDrive)
+        Abort
     ${EndIf}
 
     next:
