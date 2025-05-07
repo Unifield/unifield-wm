@@ -79,10 +79,13 @@ Unicode True
     !define VERSION "${MAJOR_VERSION}.${MINOR_VERSION}-${BUILD_VERSION}-r${REVISION_VERSION}"
 !endif
 !ifndef WINPYVERSION
-    !define WINPYVERSION 'WPy64-310111'
+    !define WINPYVERSION '.'
 !endif
 !ifndef PYTHONVERSION
-    !define PYTHONVERSION '3.10.11'
+    !define PYTHONVERSION '3.12.9'
+!endif
+!ifndef PY_DIR
+    !define PY_DIR '..\..\python\'
 !endif
 
 !define PRODUCT_NAME "OpenERP"
@@ -364,7 +367,7 @@ Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
 
     # Installing winpython
     SetOutPath "$INSTDIR\python"
-    File /r /x "__pycache__" "..\..\${WINPYVERSION}\python-${PYTHONVERSION}.amd64\*"
+    File /r /x "__pycache__" "${PY_DIR}\*"
     #CopyFiles /SILENT $INSTDIR\python\python.exe $INSTDIR\python\unifield-server.exe
     #CopyFiles /SILENT $INSTDIR\python\python.exe $INSTDIR\python\unifield-web.exe
 

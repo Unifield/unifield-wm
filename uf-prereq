@@ -23,6 +23,12 @@ chmod +x Winpython64-3.10.11.1dot.exe
 rm -fr Winpython64-3.10.11.1dot.exe
 # => python is in WPy64-310111/python-3.10.11.amd64/
 
+wget https://aka.ms/nugetclidl
+chmod +x nugetclidl
+./nugetclidl install python -Version 3.12.9 -OutputDirectory .
+mv python.3.12.9/tools/ python-3.12.9
+
+
 # Python
 #rm -f python-2.7.13.msi
 #wget https://www.python.org/ftp/python/2.7.13/python-2.7.13.msi

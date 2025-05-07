@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import re
 import os
 import sys
@@ -123,12 +123,12 @@ class KVM(object):
         os.kill(self.pid,15)
 
     def start(self):
-        l="kvm -m 6G -smp 2 -machine accel=kvm -net nic,model=rtl8139 -net user,hostfwd=tcp:127.0.0.1:10022-:22 -drive".split(" ")
+        l="kvm -m 10G -smp 8 -cpu host -machine accel=kvm -net nic,model=virtio -net user,hostfwd=tcp:127.0.0.1:10022-:22 -drive".split(" ")
         l.append('file=%s,if=virtio,snapshot=on'%self.image)
         #l.append('-nographic')
         print('Start: %s' % ' '.join(l))
         self.pid=os.spawnvp(os.P_NOWAIT, l[0], l)
-        time.sleep(60)
+        time.sleep(20)
         signal.alarm(5000)
         signal.signal(signal.SIGALRM, self.timeout)
         try:
@@ -160,6 +160,8 @@ class KVMWinBuildAllInOneExe(KVM):
         f.write('MINOR_VERSION=%s\n' % (self.o.minor,))
         f.write('REVISION_VERSION=%s\n' % (1,))
         f.write('BUILD_VERSION=%s\n' % (self.o.timestamp,))
+        f.write('PY_DIRECTORY=%s\n' % (self.o.pypath,))
+        f.write('PG_VER=%s\n' % (self.o.pgver,))
         f.close()
         self.rsync('windows/ %s@%s:build/windows/' % (self.login, self.remoteip))
         # This one uses a let's encrypt cert, which WinXP cannot handle.
@@ -187,6 +189,8 @@ def options():
     op.add_option("-y", "--client-web-branch", default='lp:~openerp/openobject-client-web/6.0', help="%default")
     op.add_option("", "--win-image", default='/opt/prereq-win-aio.qcow2', help="%default")
     op.add_option("", "--win-key", default='key', help="%default")
+    op.add_option("", "--pypath", default='', help="location of python path on virtual win")
+    op.add_option("", "--pgver", default='', help="postgresql version")
     (o, args) = op.parse_args()
     # derive other options
     o.repo = join(o.build, 'repo')
