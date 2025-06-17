@@ -93,9 +93,39 @@ print("Unpacking: %s" % (' '.join(cmd_call), ))
 sys.stdout.flush()
 subprocess.call(cmd_call)
 
+
+def get_psql_version(path):
+    version = False
+    origin = os.path.join(path, 'origin.txt')
+    if os.path.exists(origin):
+        with open(origin, 'r') as l:
+            line = l.readline()
+            version = line.split('-')[1]
+        if version:
+            os.remove(origin)
+    return version
+
+old_psql_path = os.path.join(old, 'pgsql')
+new_psql_path = os.path.join(new, 'pgsql')
+old_psql_version = get_psql_version(old_psql_path)
+new_psql_version = get_psql_version(new_psql_path)
+out_psql = False
+print('old_psql', old_psql_version, 'new_psql', new_psql_version)
+if old_psql_version and new_psql_version and old_psql_version != new_psql_version:
+    print('Include postgresql migration')
+    new_python = os.path.join(new, 'python/python.exe')
+    bsidff = os.path.join(new, 'Server/bsdifftree.py')
+    out_psql='pgsql-%s-%s-patch' % (old_psql_version, new_psql_version)
+    cmd = [new_python, bsidff, 'mkpatch', old_psql_path, new_psql_path, out_psql]
+    subprocess.call(cmd)
+
+
 deleted = []
 seen = {}
 zf = zipfile.ZipFile('patch.zip', mode='w', compression=zipfile.ZIP_DEFLATED)
+
+if out_psql:
+    zf.write(out_psql, 'Server/%s' % out_psql)
 
 for (dirpath, dirnames, filenames) in os.walk(old):
     relpath = dirpath.replace(old, '')
@@ -158,6 +188,7 @@ zf.writestr('Server/release.py', ''.join(out))
 
 zf.writestr('delete.txt', '\n'.join(deleted))
 zf.close()
-
+if out_psql:
+    print('psql patch included %s' % out_psql)
 print("Done. The resulting patch is:")
 subprocess.call("dir patch.zip", shell=True)
