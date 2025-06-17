@@ -17,7 +17,7 @@ SERVER_DIRECTORY=../server
 
 #PY_DIRECTORY=../../python-3.13.3/
 PY_WIN_DIR := $(subst \\,/,$(PY_DIRECTORY))
-BSDIFF=bsdiff4-1.2.1-cp310-cp310-win_amd64.whl
+#BSDIFF=bsdiff4-1.2.1-cp310-cp310-win_amd64.whl
 # to change in windows/setup.nsi
 
 FILES_DIRECTORY=files
@@ -37,13 +37,17 @@ default: allinone
 server:
 	$(PY_DIRECTORY)python.exe -m pip install -U pip
 	$(PY_DIRECTORY)python.exe -m pip install wheel
+    ifdef $(BSDIFF)
 	$(PY_DIRECTORY)python.exe -m pip install $(BSDIFF)
+    endif
 	#$(PY_DIRECTORY)python.exe -m pip install $(PYyaml)
 #	$(PY_DIRECTORY)python.exe -m pip install cffi-1.14.5-cp310-cp310-win_amd64.whl
 	$(PY_DIRECTORY)python.exe -m pip install -r $(SERVER_DIRECTORY)/requirements.txt
 
 web:
+    ifdef $(BSDIFF)
 	$(PY_DIRECTORY)python.exe -m pip install $(BSDIFF)
+    endif
 	$(PY_DIRECTORY)python.exe -m pip install -r $(WEB_DIRECTORY)/requirements.txt
 
 standalone:	server web

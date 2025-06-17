@@ -162,6 +162,7 @@ class KVMWinBuildAllInOneExe(KVM):
         f.write('BUILD_VERSION=%s\n' % (self.o.timestamp,))
         f.write('PY_DIRECTORY=%s\n' % (self.o.pypath,))
         f.write('PG_VER=%s\n' % (self.o.pgver,))
+        f.write('BSDIFF=%s\n' % (self.o.bsdiff,))
         f.close()
         self.rsync('windows/ %s@%s:build/windows/' % (self.login, self.remoteip))
         # This one uses a let's encrypt cert, which WinXP cannot handle.
@@ -191,6 +192,7 @@ def options():
     op.add_option("", "--win-key", default='key', help="%default")
     op.add_option("", "--pypath", default='', help="location of python path on virtual win")
     op.add_option("", "--pgver", default='', help="postgresql version")
+    op.add_option("", "--bsdiff", default='', help="bsfidd wheel to install")
     (o, args) = op.parse_args()
     # derive other options
     o.repo = join(o.build, 'repo')
