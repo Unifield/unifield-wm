@@ -37,7 +37,7 @@ default: allinone
 server:
 	$(PY_DIRECTORY)python.exe -m pip install -U pip
 	$(PY_DIRECTORY)python.exe -m pip install wheel
-    ifdef $(BSDIFF)
+    ifdef BSDIFF
 	$(PY_DIRECTORY)python.exe -m pip install $(BSDIFF)
     endif
 	#$(PY_DIRECTORY)python.exe -m pip install $(PYyaml)
@@ -45,7 +45,7 @@ server:
 	$(PY_DIRECTORY)python.exe -m pip install -r $(SERVER_DIRECTORY)/requirements.txt
 
 web:
-    ifdef $(BSDIFF)
+    ifdef BSDIFF
 	$(PY_DIRECTORY)python.exe -m pip install $(BSDIFF)
     endif
 	$(PY_DIRECTORY)python.exe -m pip install -r $(WEB_DIRECTORY)/requirements.txt
