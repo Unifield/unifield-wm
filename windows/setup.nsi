@@ -102,12 +102,12 @@ Unicode True
 !define DEFAULT_POSTGRESQL_HOSTNAME 'localhost'
 !define DEFAULT_POSTGRESQL_PORT 5432
 !define DEFAULT_POSTGRESQL_USERNAME 'openpg'
-!define DEFAULT_POSTGRESQL_PASSWORD '4Unifieldpg'
+!define DEFAULT_POSTGRESQL_PASSWORD ''
 
-!define DEFAULT_OPENERP_PASSWORD '4UnifieldAdmin'
-!define DEFAULT_OPENERP_DROP_PWD 'dropAdmin'
-!define DEFAULT_OPENERP_BKP_PWD 'bkAdmin'
-!define DEFAULT_OPENERP_RESTORE_PWD 'restoreAdmin'
+!define DEFAULT_OPENERP_PASSWORD ''
+!define DEFAULT_OPENERP_DROP_PWD ''
+!define DEFAULT_OPENERP_BKP_PWD ''
+!define DEFAULT_OPENERP_RESTORE_PWD ''
 !define DEFAULT_POSTGRESQL_INSTPATH_D 'D:\MSF data\Unifield\PostgreSQL'
 !define DEFAULT_POSTGRESQL_INSTPATH_C 'C:\MSF data\Unifield\PostgreSQL'
 
@@ -220,7 +220,7 @@ LangString WARNING_PasswordIsEmpty ${LANG_ENGLISH} "The password for the connect
 LangString WARNING_PortIsWrong ${LANG_ENGLISH} "The port for the connexion to the PostgreSQL Server is wrong (default: 5432)"
 LangString WARNING_PsqlDrive ${LANG_ENGLISH} "The PostgreSQL installation drive does not exist"
 LangString DESC_PostgreSQLNewInstall ${LANG_ENGLISH} "New installation"
-LangString DESC_PostgreSQLPage ${LANG_ENGLISH} "Configure the information for the PostgreSQL connection"
+LangString DESC_PostgreSQLPage ${LANG_ENGLISH} "Configure the information for the PostgreSQL connection,$\npassword must have a minimum of 8 characters with at least one digit,$\none upper, one lower and one special character."
 LangString DESC_PostgreSQL_Hostname ${LANG_ENGLISH} "Hostname"
 LangString DESC_PostgreSQL_Port ${LANG_ENGLISH} "Port"
 LangString DESC_PostgreSQL_Username ${LANG_ENGLISH} "Username"
@@ -232,15 +232,17 @@ LangString Profile_Web_Client ${LANG_ENGLISH} "Web environment"
 LangString TITLE_OpenERP_Server ${LANG_ENGLISH} "OpenERP Server"
 LangString TITLE_OpenERP_Web_Client ${LANG_ENGLISH} "OpenERP Web Client"
 LangString DESC_FinishPageText ${LANG_ENGLISH} "Connect to OpenERP Web"
-LangString DESC_OPENERPPage ${LANG_ENGLISH} "Configure the passwords for DB drop, backup and create from openerp"
+LangString DESC_OPENERPPage ${LANG_ENGLISH} "Configure the passwords for DB drop, backup and create from openerp$\nminimun 8 characters with at least one digit,$\none upper, one lower and one special character."
 LangString DESC_OPENERP_PWD ${LANG_ENGLISH} "Password to create DB"
 LangString DESC_OPENERP_DROP_PWD ${LANG_ENGLISH} "Password to drop DB"
 LangString DESC_OPENERP_BKP_PWD ${LANG_ENGLISH} "Password to backup DB"
 LangString DESC_OPENERP_RESTORE_PWD ${LANG_ENGLISH} "Password to restore DB"
-LangString WARNING_OPENERP_PasswordIsEmpty ${LANG_ENGLISH} "Password to create DB is empty"
-LangString WARNING_OPENERP_DROP_PasswordIsEmpty ${LANG_ENGLISH} "Password to drop DB is empty"
-LangString WARNING_OPENERP_BKP_PasswordIsEmpty ${LANG_ENGLISH} "Password to backup DB is empty"
-LangString WARNING_OPENERP_RESTORE_PasswordIsEmpty ${LANG_ENGLISH} "Password to restore DB is empty"
+LangString MIN_LENGTH ${LANG_ENGLISH} "must have at least 8 characters"
+LangString ONE_DIGIT ${LANG_ENGLISH} "must contain at least one digit"
+LangString ONE_LOWER ${LANG_ENGLISH} "must contain at least one lower case character"
+LangString ONE_UPPER ${LANG_ENGLISH} "must contain at least one upper case character"
+LangString ONE_SPECIAL ${LANG_ENGLISH} "must contain at least one special character"
+
 
 ; French
 LangString MSG_ConnectionOK ${LANG_FRENCH} "Connection réussie!"
@@ -259,7 +261,7 @@ LangString WARNING_PasswordIsEmpty ${LANG_FRENCH} "Le mot de passe pour la conne
 LangString WARNING_PsqlDrive ${LANG_FRENCH} "Le lecteur du chemin d'installation du serveur PostgreSQL n'existe pas"
 LangString WARNING_PortIsWrong ${LANG_FRENCH} "Le port pour la connection au serveur PostgreSQL est erroné (défaut: 5432)"
 LangString DESC_PostgreSQLNewInstall ${LANG_FRENCH} "Nouvelle installation"
-LangString DESC_PostgreSQLPage ${LANG_FRENCH} "Configurez les informations de connection pour le serveur PostgreSQL"
+LangString DESC_PostgreSQLPage ${LANG_FRENCH} "Configurez les informations de connection pour le serveur PostgreSQL$\nle mot de passe doit avoir au moins 8 caractères avec au moins un chiffre,$\nune minuscule, une majuscule et un caractère spécial"
 LangString DESC_PostgreSQL_Hostname ${LANG_FRENCH} "Hôte"
 LangString DESC_PostgreSQL_Port ${LANG_FRENCH} "Port"
 LangString DESC_PostgreSQL_Username ${LANG_FRENCH} "Utilisateur"
@@ -271,17 +273,97 @@ LangString Profile_Web_Client ${LANG_FRENCH} "Environement Web"
 LangString TITLE_OpenERP_Server ${LANG_FRENCH} "Serveur OpenERP"
 LangString TITLE_OpenERP_Web_Client ${LANG_FRENCH} "OpenERP Client Web"
 LangString DESC_FinishPageText ${LANG_FRENCH} "Se connecter à OpenERP Web"
-LangString DESC_OPENERPPage ${LANG_FRENCH} "Definissez les mots de passe pour la manipulation des bdd depuis OpenERP"
+LangString DESC_OPENERPPage ${LANG_FRENCH} "Definissez les mots de passe pour la manipulation des bdd depuis OpenERP,$\nminimum 8 caractères avec au moins un chiffre,$\nune minuscule, une majuscule et un caractère spécial"
 LangString DESC_OPENERP_PWD ${LANG_FRENCH} "MdP pour créer un bdd"
 LangString DESC_OPENERP_DROP_PWD ${LANG_FRENCH} "MdP pour supprimer une bdd"
 LangString DESC_OPENERP_BKP_PWD ${LANG_FRENCH} "MdP pour sauvegarder une bdd"
 LangString DESC_OPENERP_RESTORE_PWD ${LANG_FRENCH} "MdP pour restaurer une bdd"
-LangString WARNING_OPENERP_PasswordIsEmpty ${LANG_FRENCH} "MdP pour créer un bdd est vide"
-LangString WARNING_OPENERP_DROP_PasswordIsEmpty ${LANG_FRENCH} "MdP pour supprimer une bdd est vide"
-LangString WARNING_OPENERP_BKP_PasswordIsEmpty ${LANG_FRENCH} "MdP pour sauvegarder une bdd est vide"
-LangString WARNING_OPENERP_RESTORE_PasswordIsEmpty ${LANG_FRENCH} "MdP pour restaurer une bdd est vide"
+LangString MIN_LENGTH ${LANG_FRENCH} "doit avoir au moins 8 caractères"
+LangString ONE_DIGIT ${LANG_FRENCH} "doit contenir au moins un chiffre"
+LangString ONE_LOWER ${LANG_FRENCH} "doit contenir au moins une minuscule"
+LangString ONE_UPPER ${LANG_FRENCH} "doit contenir au moins une majuscule"
+LangString ONE_SPECIAL ${LANG_FRENCH} "doit contenir au moins un caractère spécial"
 
 InstType $(Profile_Server)
+
+
+Function StrCSpn
+ Exch $R0 ; string to check
+ Exch
+ Exch $R1 ; string of chars
+ Push $R2 ; current char
+ Push $R3 ; current char
+ Push $R4 ; char loop
+ Push $R5 ; char loop
+
+  StrCpy $R4 -1
+
+  NextChar:
+  StrCpy $R2 $R1 1 $R4
+  IntOp $R4 $R4 - 1
+   StrCmpS $R2 "" StrOK
+
+   StrCpy $R5 -1
+
+   NextCharCheck:
+   StrCpy $R3 $R0 1 $R5
+   IntOp $R5 $R5 - 1
+    StrCmpS $R3 "" NextChar
+    StrCmpS $R3 $R2 0 NextCharCheck
+     StrCpy $R0 $R2
+     Goto Done
+
+ StrOK:
+ StrCpy $R0 ""
+
+ Done:
+
+ Pop $R5
+ Pop $R4
+ Pop $R3
+ Pop $R2
+ Pop $R1
+ Exch $R0
+FunctionEnd
+
+Function StrCSpnReverse
+ Exch $R0 ; string to check
+ Exch
+ Exch $R1 ; string of chars
+ Push $R2 ; current char
+ Push $R3 ; current char
+ Push $R4 ; char loop
+ Push $R5 ; char loop
+
+  StrCpy $R4 -1
+
+  NextCharCheck:
+  StrCpy $R2 $R0 1 $R4
+  IntOp $R4 $R4 - 1
+   StrCmpS $R2 "" StrOK
+
+   StrCpy $R5 -1
+
+   NextChar:
+   StrCpy $R3 $R1 1 $R5
+   IntOp $R5 $R5 - 1
+    StrCmpS $R3 "" +2
+    StrCmpS $R3 $R2 NextCharCheck NextChar
+     StrCpy $R0 $R2
+     Goto Done
+
+ StrOK:
+ StrCpy $R0 ""
+
+ Done:
+
+ Pop $R5
+ Pop $R4
+ Pop $R3
+ Pop $R2
+ Pop $R1
+ Exch $R0
+FunctionEnd
 
 Section $(TITLE_OpenERP_Server) SectionOpenERP_Server
     SectionIn 1 2
@@ -488,17 +570,17 @@ Function .onInit
     StrCpy $TextPostgreSQLHostname ${DEFAULT_POSTGRESQL_HOSTNAME}
     StrCpy $TextPostgreSQLPort ${DEFAULT_POSTGRESQL_PORT}
     StrCpy $TextPostgreSQLUsername ${DEFAULT_POSTGRESQL_USERNAME}
-    StrCpy $TextPostgreSQLPassword ${DEFAULT_POSTGRESQL_PASSWORD}
+    StrCpy $TextPostgreSQLPassword "${DEFAULT_POSTGRESQL_PASSWORD}"
     ${If} ${FileExists} "D:\*.*"
         StrCpy $TextPostgreSQLInstPath "${DEFAULT_POSTGRESQL_INSTPATH_D}"
     ${Else}
         StrCpy $TextPostgreSQLInstPath "${DEFAULT_POSTGRESQL_INSTPATH_C}"
     ${Endif}
 
-    StrCpy $TextOPENERPPWD ${DEFAULT_OPENERP_PASSWORD}
-    StrCpy $TextOPENERPDROPPWD ${DEFAULT_OPENERP_DROP_PWD}
-    StrCpy $TextOPENERPBKPPWD ${DEFAULT_OPENERP_BKP_PWD}
-    StrCpy $TextOPENERPRESTOREPWD ${DEFAULT_OPENERP_RESTORE_PWD}
+    StrCpy $TextOPENERPPWD "${DEFAULT_OPENERP_PASSWORD}"
+    StrCpy $TextOPENERPDROPPWD "${DEFAULT_OPENERP_DROP_PWD}"
+    StrCpy $TextOPENERPBKPPWD "${DEFAULT_OPENERP_BKP_PWD}"
+    StrCpy $TextOPENERPRESTOREPWD "${DEFAULT_OPENERP_RESTORE_PWD}"
 
     !insertmacro MUI_LANGDLL_DISPLAY
 
@@ -511,7 +593,94 @@ Function .onInit
     StrCpy $TextPostgreSQLInstPath $R0
     Pop $R0
 
+    Push $R0
+    ${GetOptions} $cmdLineParams '/PWDPSQL=' $R0
+    IfErrors +3 0
+    StrCpy $TextPostgreSQLPassword $R0
+    Pop $R0
+
+    Push $R0
+    ${GetOptions} $cmdLineParams '/PWDCREATE=' $R0
+    IfErrors +3 0
+    StrCpy $TextOPENERPPWD $R0
+    Pop $R0
+
+    Push $R0
+    ${GetOptions} $cmdLineParams '/PWDDROP=' $R0
+    IfErrors +3 0
+    StrCpy $TextOPENERPDROPPWD $R0
+    Pop $R0
+
+    Push $R0
+    ${GetOptions} $cmdLineParams '/PWDDUMP=' $R0
+    IfErrors +3 0
+    StrCpy $TextOPENERPBKPPWD $R0
+    Pop $R0
+
+    Push $R0
+    ${GetOptions} $cmdLineParams '/PWDRESTORE=' $R0
+    IfErrors +3 0
+    StrCpy $TextOPENERPRESTOREPWD $R0
+    Pop $R0
+
 FunctionEnd
+
+Function verifyPassword
+    ; Récupérer le mot de passe saisi
+    Pop $0
+    Pop $1
+    ;${NSD_GetText} $PasswordInput $0
+
+    ; Vérification de la longueur minimale (8 caractères)
+    StrLen $R1 $0
+    IntCmp $R1 8 0 invalidPassword
+
+    ; Vérification des conditions via des expressions régulières
+
+    Push "0123456789"
+    Push $0
+    Call StrCSpn
+    Pop $R0
+    StrCmp $R0 "" 0 +3
+     MessageBox MB_OK|MB_ICONEXCLAMATION '$1 $(ONE_DIGIT)'
+     Abort
+
+    Push "abcdefghijklmnopqrstuvwxyz"
+    Push $0
+    Call StrCSpn
+    Pop $R0
+    StrCmp $R0 "" 0 +3
+        MessageBox MB_ICONEXCLAMATION "$1 $(ONE_LOWER)"
+        Abort
+
+
+    Push "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    Push $0
+    Call StrCSpn
+    Pop $R0
+    StrCmp $R0 "" 0 +3
+        MessageBox MB_ICONEXCLAMATION "$1 $(ONE_UPPER)"
+        Abort
+
+
+    Push "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+    Push $0
+    Call StrCSpnReverse
+    Pop $R0
+    StrCmp $R0 "" 0 +3
+        MessageBox MB_ICONEXCLAMATION "$1 $(ONE_SPECIAL)"
+        Abort
+
+    ; Si tout est bon
+
+    Return
+
+    invalidPassword:
+        MessageBox MB_ICONEXCLAMATION "$1 $(MIN_LENGTH)"
+        Abort
+
+FunctionEnd
+
 
 Function ShowPostgreSQL
     SectionGetFlags ${SectionOpenERP_Server} $0
@@ -527,7 +696,7 @@ Function ShowPostgreSQL
         Abort
     ${EndIf}
 
-    ${NSD_CreateLabel} 0 0 100% 10u $(DESC_PostgreSQLPage)
+    ${NSD_CreateLabel} 0 0 100% 30u $(DESC_PostgreSQLPage)
     Pop $0
 
     ; setup and update default postgresql install path
@@ -572,16 +741,16 @@ Function LeavePostgreSQL
     Push $2
     Strlen $1 $TextPostgreSQLInstPath
     ${If} $1 == 0
-	MessageBox MB_ICONEXCLAMATION|MB_OK $(WARNING_InstallPathEmpty)
-	Abort
+    MessageBox MB_ICONEXCLAMATION|MB_OK $(WARNING_InstallPathEmpty)
+    Abort
     ${EndIf}
     StrCpy $2 "$INSTDIR" $1 # cut INSTDIR as choosen PG install path
     StrCmp $2 "$TextPostgreSQLInstPath" pginstpatherror
     StrCpy $2 "$INSTDIR\Server\" $1 # cust INSTDIR\Server as choosen PG install path
     StrCmp $2 "$TextPostgreSQLInstPath" pginstpatherror pginstpathok
     pginstpatherror:
-	MessageBox MB_ICONEXCLAMATION|MB_OK $(WARNING_InstallUnderServerDirectory)
-	Abort
+    MessageBox MB_ICONEXCLAMATION|MB_OK $(WARNING_InstallUnderServerDirectory)
+    Abort
     pginstpathok:
 
     ${If} ${FileExists} "$TextPostgreSQLInstPath\*"
@@ -617,11 +786,9 @@ Function LeavePostgreSQL
         Abort
     ${EndIf}
 
-    StrLen $1 $TextPostgreSQLPassword
-    ${If} $1 == 0
-        MessageBox MB_ICONEXCLAMATION|MB_OK $(WARNING_PasswordIsEmpty)
-        Abort
-    ${EndIf}
+    push $(DESC_PostgreSQL_Password)
+    push $TextPostgreSQLPassword
+    Call verifyPassword
 FunctionEnd
 
 
@@ -639,24 +806,24 @@ Function DBPasswordPage
       Abort
   ${EndIf}
 
-  ${NSD_CreateLabel} 0 0 100% 10u $(DESC_OPENERPPage)
+  ${NSD_CreateLabel} 0 0 100% 30u $(DESC_OPENERPPage)
   Pop $0
 
-  ${NSD_CreateLabel} 0 85 90u 12u $(DESC_OPENERP_PWD)
+  ${NSD_CreateLabel} 0 85 115u 12u $(DESC_OPENERP_PWD)
   Pop $0
-  ${NSD_CreateText} 150 85 150u 12u $TextOPENERPPWD
+  ${NSD_CreateText} 175 85 150u 12u $TextOPENERPPWD
   Pop $HWNDOpenERPPwd
-  ${NSD_CreateLabel} 0 115 90u 12u $(DESC_OPENERP_DROP_PWD)
+  ${NSD_CreateLabel} 0 115 115u 12u $(DESC_OPENERP_DROP_PWD)
   Pop $0
-  ${NSD_CreateText} 150 115 150u 12u $TextOPENERPDROPPWD
+  ${NSD_CreateText} 175 115 150u 12u $TextOPENERPDROPPWD
   Pop $HWNDOpenERPDropPwd
-  ${NSD_CreateLabel} 0 145 90u 12u $(DESC_OPENERP_BKP_PWD)
+  ${NSD_CreateLabel} 0 145 115u 12u $(DESC_OPENERP_BKP_PWD)
   Pop $0
-  ${NSD_CreateText} 150 145 150u 12u $TextOPENERPBKPPWD
+  ${NSD_CreateText} 175 145 150u 12u $TextOPENERPBKPPWD
   Pop $HWNDOpenERPBkpPwd
-  ${NSD_CreateLabel} 0 175 90u 12u $(DESC_OPENERP_RESTORE_PWD)
+  ${NSD_CreateLabel} 0 175 115u 12u $(DESC_OPENERP_RESTORE_PWD)
   Pop $0
-  ${NSD_CreateText} 150 175 150u 12u $TextOPENERPRESTOREPWD
+  ${NSD_CreateText} 175 175 150u 12u $TextOPENERPRESTOREPWD
   Pop $HWNDOpenERPRestorePwd
 
   nsDialogs::Show
@@ -670,30 +837,24 @@ Function LeaveDBPasswordPage
     ${NSD_GetText} $HWNDOpenERPBkpPwd $TextOPENERPBKPPWD
     ${NSD_GetText} $HWNDOpenERPRestorePwd $TextOPENERPRESTOREPWD
 
-    StrLen $1 $TextOPENERPPWD
-    ${If} $1 == 0
-        MessageBox MB_ICONEXCLAMATION|MB_OK $(WARNING_OPENERP_PasswordIsEmpty)
-        Abort
-    ${EndIf}
+    push $(DESC_OPENERP_PWD)
+    push $TextOPENERPPWD
+    Call verifyPassword
 
-    StrLen $1 $TextOPENERPDROPPWD
-    ${If} $1 == 0
-        MessageBox MB_ICONEXCLAMATION|MB_OK $(WARNING_OPENERP_DROP_PasswordIsEmpty)
-        Abort
-    ${EndIf}
+    push $(DESC_OPENERP_DROP_PWD)
+    push $TextOPENERPDROPPWD
+    Call verifyPassword
 
-    StrLen $1 $TextOPENERPBKPPWD
-    ${If} $1 == 0
-        MessageBox MB_ICONEXCLAMATION|MB_OK $(WARNING_OPENERP_BKP_PasswordIsEmpty)
-        Abort
-    ${EndIf}
+    push $(DESC_OPENERP_BKP_PWD)
+    push $TextOPENERPBKPPWD
+    Call verifyPassword
 
-    StrLen $1 $TextOPENERPRESTOREPWD
-    ${If} $1 == 0
-        MessageBox MB_ICONEXCLAMATION|MB_OK $(WARNING_OPENERP_RESTORE_PasswordIsEmpty)
-        Abort
-    ${EndIf}
+    push $(DESC_OPENERP_RESTORE_PWD)
+    push $TextOPENERPRESTOREPWD
+    Call verifyPassword
+
 FunctionEnd
+
 
 Function func_PostgreSQL_InstPath_Choose_Click
     Pop $R0
