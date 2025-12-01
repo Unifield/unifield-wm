@@ -552,20 +552,6 @@ class dump_all(unittest.TestCase):
             if issubclass(tc, db_creation):
                 tc.dump_db(dir_to_dump)
 
-    @unittest.skipIf(skipDumpDbs, "DBs dump deactivated")
-    def test_20_dump_branch_info(self):
-        info = {}
-        for ad in config.addons:
-            src_path = os.path.join(config.source_path, ad)
-            if not os.path.exists(src_path):
-                raise self.fail('%s does not exist ! Did you set source_path in config.py ?' % src_path)
-            info[ad] = get_revno_from_path(src_path)
-        f = open(os.path.join(dir_to_dump, 'info.txt'), 'w')
-        for mod, data in list(info.items()):
-            f.write("%s_url=%s\n" % (mod, data['lpurl']))
-            f.write("%s_revno=%s\n" % (mod, data['revno']))
-        f.close()
-
 
 # Specific Sync Server creation
 class server_creation(db_creation, unittest.TestCase):
