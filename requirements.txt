@@ -1,1 +1,1 @@
-import breezy
+GitPython
