@@ -4,7 +4,8 @@ from dateutil.relativedelta import relativedelta
 
 date_now = datetime.now() + relativedelta(day=1)
 #for base in ['eur', 'chf']:
-date_from = datetime.strptime('2024-01-01', '%Y-%m-%d')
+date_from = date_now - relativedelta(months=18)
+#date_from = datetime.strptime('2024-01-01', '%Y-%m-%d')
 feur = open('eur.txt', 'w')
 fchf = open('chf.txt', 'w')
 
